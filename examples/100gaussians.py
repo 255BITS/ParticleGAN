@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
-33.100gaussians.py
+100gaussians.py
 
-100 Gaussians 2D toy problem with a ParticlePrior + Epps–Pulley regularizer.
+100 Gaussians 2D toy problem with a ParticlePrior + regularizer.
 
 This is deliberately nastier than the 25-Gaussian grid:
   - Data: 100-Gaussian mixture on a 10x10 grid in R^2 with small variance.
@@ -10,7 +10,6 @@ This is deliberately nastier than the 25-Gaussian grid:
   - G: simple MLP mapping z -> x in R^2.
   - D: simple MLP mapping x -> scalar score.
   - Loss: lib.gan_loss.GANLoss (default: hinge).
-  - Regularizer: lib.lerae.EppsPulley on the active particles.
 
 Visualization:
   - At fixed intervals, we sample the SAME latent particles (fixed_first_n=True)
@@ -31,7 +30,6 @@ import matplotlib.pyplot as plt
 from lib.particle_prior import ParticlePrior
 from lib.gan_loss import GANLoss
 from lib.vicreg_loss import VICRegLikeLoss
-
 
 # =========================
 #  Simple MLP G / D
@@ -196,7 +194,7 @@ def save_fake_scatter(
 # =========================
 
 def train(
-    epochs: int = 300,
+    epochs: int = 100,
     steps_per_epoch: int = 1000,
     batch_size: int = 256,
     z_dim: int = 2,
@@ -377,7 +375,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="100 Gaussians toy problem with ParticlePrior + EP regularizer.",
     )
-    parser.add_argument("--epochs", type=int, default=300)
+    parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--steps_per_epoch", type=int, default=1000)
     parser.add_argument("--batch_size", type=int, default=256)
     parser.add_argument("--z_dim", type=int, default=2)

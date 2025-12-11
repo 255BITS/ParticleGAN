@@ -33,6 +33,10 @@ cd ParticleGAN
 python examples/five_modes.py
 ```
 
+## Note
+
+The text experiments use R1 gradient penalty for stability. 
+The 100-Gaussian experiments work without it.
 
 # Citation
 ```

@@ -1,23 +1,6 @@
 #!/usr/bin/env python
 """
-33.100gaussians.py
-
-100 Gaussians 2D toy problem with a ParticlePrior + Epps–Pulley regularizer.
-
-This is deliberately nastier than the 25-Gaussian grid:
-  - Data: 100-Gaussian mixture on a 10x10 grid in R^2 with small variance.
-  - Prior: lib.particle_prior.ParticlePrior (learnable particles in latent space).
-  - G: simple MLP mapping z -> x in R^2.
-  - D: simple MLP mapping x -> scalar score.
-  - Loss: lib.gan_loss.GANLoss (default: hinge).
-  - Regularizer: lib.lerae.EppsPulley on the active particles.
-
-Visualization:
-  - At fixed intervals, we sample the SAME latent particles (fixed_first_n=True)
-    and render a scatter plot of:
-        * real samples from the 100-Gaussian mixture (fixed across training),
-        * fake samples from the current generator.
-  - This makes it easy to turn the sequence of PNGs into a video.
+100 gaussians with no particle prior. Unstable.
 """
 
 import argparse
@@ -196,7 +179,7 @@ def save_fake_scatter(
 # =========================
 
 def train(
-    epochs: int = 300,
+    epochs: int = 100,
     steps_per_epoch: int = 1000,
     batch_size: int = 256,
     z_dim: int = 2,
@@ -300,7 +283,7 @@ def train(
             with torch.no_grad():
                 z_fake, _ = prior.sample(batch_size)
                 z_fake = z_fake.to(device)
-                z_fake = torch.rand_like(z_fake)
+                z_fake = torch.randn_like(z_fake)
                 x_fake = G(z_fake)
 
             real_logits = D(x_real)
@@ -404,7 +387,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="100 Gaussians toy problem with ParticlePrior + EP regularizer.",
     )
-    parser.add_argument("--epochs", type=int, default=300)
+    parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--steps_per_epoch", type=int, default=1000)
     parser.add_argument("--batch_size", type=int, default=256)
     parser.add_argument("--z_dim", type=int, default=2)
