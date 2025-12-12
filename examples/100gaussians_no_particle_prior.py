@@ -149,6 +149,7 @@ def save_fake_scatter(
     with torch.no_grad():
         z_fake, _ = prior.sample(n_fake, fixed_first_n=True)
         z_fake = z_fake.to(device)
+        z_fake = torch.randn_like(z_fake)
         fake = generator(z_fake).cpu()
 
     real = real_samples.cpu()
@@ -303,6 +304,7 @@ def train(
 
             z_fake, idx = prior.sample(batch_size)
             z_fake = z_fake.to(device)
+            z_fake = torch.randn_like(z_fake)
             x_fake = G(z_fake)
             fake_logits = D(x_fake)
 
@@ -325,11 +327,6 @@ def train(
             opt_G.zero_grad()
             opt_prior.zero_grad()
             loss_g.backward()
-
-            # Add Langevin noise to particle gradients to prevent stagnation
-            with torch.no_grad():
-                noise_scale = 1e-3
-                prior.z.grad[unique_idx] += torch.randn_like(prior.z.grad[unique_idx]) * noise_scale
 
             opt_G.step()
             opt_prior.step()
