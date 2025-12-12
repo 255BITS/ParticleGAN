@@ -9,7 +9,7 @@ class GANLoss:
     
     Args:
         loss_type (str): 'hinge', 'logistic', 'wasserstein', 'lsgan'.
-        gan_mode (str):
+        mode (str):
             - 'vanilla': Standard GAN (Goodfellow et al).
             - 'rp': Relativistic Pairing (Jolicoeur-Martineau).
                     D(real, fake) = D(real) - D(fake).
@@ -20,12 +20,12 @@ class GANLoss:
     def __init__(
         self,
         loss_type: str = "hinge",
-        gan_mode: str = "vanilla",
+        mode: str = "vanilla",
         label_smoothing: float = 0.0,
         label_flip_prob: float = 0.0,
     ) -> None:
         self.loss_type = loss_type.lower()
-        self.gan_mode = gan_mode.lower()
+        self.mode = mode.lower()
         self.label_smoothing = float(label_smoothing)
         self.label_flip_prob = float(label_flip_prob)
 
@@ -48,30 +48,30 @@ class GANLoss:
         fake_logits: torch.Tensor,
     ) -> torch.Tensor:
         """Discriminator loss (minimization objective)."""
-        if self.gan_mode == "vanilla":
+        if self.mode == "vanilla":
             return self._kernel_d(real_logits, fake_logits)
-        elif self.gan_mode == "rp":
+        elif self.mode == "rp":
             # RpGAN: D input is (real - fake)
             return self._kernel_d(real_logits - fake_logits, None)
-        elif self.gan_mode == "ra":
+        elif self.mode == "ra":
             # RaGAN: D(real - mean(fake)) and D(fake - mean(real))
             return (
                 self._kernel_d(real_logits - torch.mean(fake_logits, dim=0, keepdim=True), None)
                 + self._kernel_d(None, fake_logits - torch.mean(real_logits, dim=0, keepdim=True))
             ) * 0.5
         else:
-            raise ValueError(f"Unknown gan_mode: {self.gan_mode}")
+            raise ValueError(f"Unknown gan mode: {self.mode}")
 
     def g_loss(self, fake_logits: torch.Tensor, real_logits: torch.Tensor = None) -> torch.Tensor:
         """Generator loss (minimization objective)."""
-        if self.gan_mode == "vanilla":
+        if self.mode == "vanilla":
             return self._kernel_g(fake_logits)
-        elif self.gan_mode == "rp":
+        elif self.mode == "rp":
             if real_logits is None:
                 raise ValueError("RpGAN requires real_logits in g_loss")
             # RpGAN G: Symmetric to D. G wants (fake - real) to be 'real'.
             return self._kernel_g(fake_logits - real_logits)
-        elif self.gan_mode == "ra":
+        elif self.mode == "ra":
             if real_logits is None:
                 raise ValueError("RaGAN requires real_logits in g_loss")
             return (
@@ -79,7 +79,7 @@ class GANLoss:
                 + self._kernel_g(real_logits - torch.mean(fake_logits, dim=0, keepdim=True), invert=True)
             ) * 0.5
         else:
-            raise ValueError(f"Unknown gan_mode: {self.gan_mode}")
+            raise ValueError(f"Unknown gan mode: {self.mode}")
 
     # -------------------------
     #  Loss Kernels
@@ -160,18 +160,18 @@ class GANLoss:
 
 def get_gan_loss(
     loss_type: str = "hinge",
-    gan_mode: str = "vanilla",
+    mode: str = "vanilla",
     label_smoothing: float = 0.0,
     label_flip_prob: float = 0.0,
 ) -> GANLoss:
     """
     Convenience factory that mirrors pytorch-style helpers.
 
-    gan_mode: 'vanilla' (Standard), 'rp' (Pairing), 'ra' (Average)
+    mode: 'vanilla' (Standard), 'rp' (Pairing), 'ra' (Average)
     """
     return GANLoss(
         loss_type=loss_type,
-        gan_mode=gan_mode,
+        mode=mode,
         label_smoothing=label_smoothing,
         label_flip_prob=label_flip_prob,
     )

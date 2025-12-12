@@ -277,7 +277,6 @@ def train(
         real_samples=real_viz,
     )
 
-    warmup_steps = 5000
     global_step = 0
     step = 0
     for epoch in range(epochs):
