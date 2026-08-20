@@ -91,6 +91,8 @@ class GANLoss:
     def _d_hinge(self, real_logits, fake_logits):
         if fake_logits is None: # Relativistic case: E[max(0, 1 - (r-f))]
             return F.relu(1.0 - real_logits).mean()
+        if real_logits is None: # RaGAN fake-side term: E[max(0, 1 + (f - mean_r))]
+            return F.relu(1.0 + fake_logits).mean()
         # Vanilla case
         loss_real = F.relu(1.0 - real_logits).mean()
         loss_fake = F.relu(1.0 + fake_logits).mean()
@@ -106,6 +108,8 @@ class GANLoss:
     def _d_wasserstein(self, real_logits, fake_logits):
         if fake_logits is None: # Relativistic: E[fake - real] (minimized) -> E[-(real-fake)]
             return -real_logits.mean()
+        if real_logits is None: # RaGAN fake-side term
+            return fake_logits.mean()
         # Vanilla: E[fake] - E[real]
         return fake_logits.mean() - real_logits.mean()
 
@@ -115,6 +119,8 @@ class GANLoss:
     def _d_lsgan(self, real_logits, fake_logits):
         if fake_logits is None: # Relativistic: E[(real - fake - 1)^2]
             return 0.5 * ((real_logits - 1.0) ** 2).mean()
+        if real_logits is None: # RaGAN fake-side term
+            return 0.5 * (fake_logits ** 2).mean()
         # Vanilla
         return 0.5 * (((real_logits - 1.0) ** 2).mean() + (fake_logits ** 2).mean())
 
@@ -129,6 +135,8 @@ class GANLoss:
             # Relativistic: E[softplus(-(real - fake))].
             # Minimizing this maximizes (real - fake).
             return F.softplus(-real_logits).mean()
+        if real_logits is None: # RaGAN fake-side term: E[softplus(f - mean_r)]
+            return F.softplus(fake_logits).mean()
 
         # Vanilla with smoothing
         if self.label_smoothing > 0.0:
