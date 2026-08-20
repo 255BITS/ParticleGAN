@@ -44,7 +44,11 @@ the cause. Three fixes, in increasing order of principle:
    on it. This alone took a never-converging config to converged. It is
    near-free — always do it. If your metric plateaus noisily, check the EMA
    copy before concluding the model can't do better. Average *all* learnable
-   state (in our case the latent particles too, not just G).
+   state (in our case the latent particles too, not just G). Direct evidence
+   that EMA is a *read-out*, not a training accelerator: at the exact step an
+   EMA copy first passed the bar (hq 0.90), the live generator it was
+   tracking measured hq 0.54 — the orbit's mean is good long before any point
+   on the orbit is.
 2. **LR anneal with a floor.** Cosine-anneal all players' LRs late in
    training. Two sharp empirical edges: annealing to exactly **zero destroys
    the run** (the system needs a small residual LR to keep tracking the
@@ -59,6 +63,14 @@ the cause. Three fixes, in increasing order of principle:
 These compose: our final recipe uses all three. Note that R1/R2 alone (with a
 standard low-capacity D) did **not** converge in this setting — theory
 guarantees local convergence, not fast global convergence.
+
+A fourth lever if you can't use R1/R2: **multiple D steps per G step**. In the
+EMA+decay family (no gradient penalty), going from 1 → 6 D steps cut
+steps-to-converge from 18.5k to 6.8k — a better D estimate per G update damps
+the same oscillation. Two costs: each step gets proportionally more expensive
+(the R1/R2 route reached the same speed at 1 D step), and past ~6 D steps the
+failure mode flips — D over-sharpens before the prior finishes spreading and
+you lose modes instead of sharpness.
 
 ## 3. Discriminator resolution: spectral bias is a real bottleneck
 
