@@ -67,6 +67,10 @@ def arm_label(cfg: dict) -> str:
     bits = [str(cfg["arm"]), str(cfg["loss_type"]), f"coeff={cfg['coeff']:g}"]
     if float(cfg["lr_mult"]) != 1.0:
         bits.append(f"lr x{float(cfg['lr_mult']):g}")
+    # Only the non-default prior is called out, so the titles of videos rendered
+    # before this existed stay exactly as they were.
+    if str(cfg.get("prior", "particles")).lower() != "particles":
+        bits.append("FIXED GAUSSIAN PRIOR (no particles)")
     return "  |  ".join(bits)
 
 

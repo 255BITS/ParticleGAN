@@ -1,0 +1,19 @@
+# Control arm for the champion recipe: identical to
+# b_cap_c1p0_lr2p0_s1.yaml in every respect except the prior, which is
+# frozen at its N(0, I) draw. G has to warp a rigid Gaussian onto all 100
+# modes on its own -- the "without particles" condition from the README.
+arm: b_cap
+coeff: 1.0
+kappa: 1.0
+lazy_k: 1
+seed: 1
+total_steps: 7000
+eval_interval: 100
+lr: 0.0003
+d_lr_mult: 1.5
+lr_mult: 2.0
+prior: gaussian
+# The update-spectrum analysis differentiates through the prior, which a frozen
+# cloud has no gradients for; it has nothing to say about this arm.
+spectral: false
+out_dir: results/runs/nopart_b_cap_c1p0_lr2p0_s1

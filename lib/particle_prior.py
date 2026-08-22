@@ -25,6 +25,10 @@ class ParticlePrior(nn.Module):
       * data-parallel / multi-GPU friendly (z is just a regular Parameter),
       * easy to plug into EP-style regularizers that operate on the full cloud.
 
+    Pass `learnable=False` for the frozen-Gaussian control: identical interface,
+    identical sampling, but the cloud is a buffer rather than a Parameter, so it
+    never moves and `parameters()` comes back empty.
+
     Typical usage (with Accelerate):
 
         prior = ParticlePrior(num_particles=100_000, z_dim=256)
@@ -41,6 +45,7 @@ class ParticlePrior(nn.Module):
         init_std: float = 1.0,
         device: Optional[torch.device] = None,
         dtype: Optional[torch.dtype] = None,
+        learnable: bool = True,
     ) -> None:
         super().__init__()
 
@@ -51,11 +56,22 @@ class ParticlePrior(nn.Module):
 
         factory_kwargs = {"device": device, "dtype": dtype}
 
-        # Big-ass tensor of learnable particles.
-        # Kept as a single Parameter so DDP / Accelerate treat it like any
-        # other weight matrix.
+        # Big-ass tensor of particles.
+        # When learnable (the default) it is a single Parameter, so DDP /
+        # Accelerate treat it like any other weight matrix.
+        #
+        # `learnable=False` registers the same tensor as a *buffer* instead: the
+        # cloud is then a frozen draw from N(0, init_std^2) that no optimizer can
+        # move. That is the control condition for the whole premise of this repo
+        # -- a fixed Gaussian prior, with G left to do all the warping on its own
+        # -- while every call site below (`sample`, `forward`, `z[idx]`) keeps
+        # working unchanged. Sampling still consumes exactly the same randomness
+        # either way, so flipping this flag does not shift any other RNG stream.
         z = torch.empty(num_particles, z_dim, **factory_kwargs)
-        self.z = nn.Parameter(z)
+        if learnable:
+            self.z = nn.Parameter(z)
+        else:
+            self.register_buffer("z", z)
         with torch.no_grad():
             self.z.normal_(mean=0.0, std=init_std)
 

@@ -113,6 +113,11 @@ DEFAULTS: Dict = {
     "curriculum_arm2": "none",     # second arm, or 'none' for no curriculum
     "curriculum_coeff2": 0.0,      # its coefficient
     "curriculum_switch_frac": 0.6, # switch at this fraction of total_steps
+    # The repo's control condition: 'particles' is the learnable cloud every
+    # existing config trains; 'gaussian' freezes it into a fixed N(0, I) draw,
+    # which drops the prior optimizer and the VICReg term and leaves G alone to
+    # warp a rigid prior onto the data (examples/100gaussians_no_particle_prior.py).
+    "prior": "particles",          # 'particles' or 'gaussian'
 }
 
 # Held fixed across every arm: the winning recipe from docs/convergence-tips.md.
@@ -308,7 +313,13 @@ def train(
     # -------------------------
     #  Models / optimizers
     # -------------------------
-    prior = ParticlePrior(num_particles=NUM_PARTICLES, z_dim=Z_DIM).to(device)
+    prior_kind = str(cfg["prior"]).lower()
+    if prior_kind not in ("particles", "gaussian"):
+        raise ValueError(f"Unknown prior: {cfg['prior']} (expected 'particles' or 'gaussian')")
+    learnable_prior = prior_kind == "particles"
+    prior = ParticlePrior(
+        num_particles=NUM_PARTICLES, z_dim=Z_DIM, learnable=learnable_prior
+    ).to(device)
     G = SimpleMLPGenerator(z_dim=Z_DIM).to(device)
     D = SimpleMLPDiscriminator(in_dim=2, fourier=FOURIER).to(device)
 
@@ -390,21 +401,26 @@ def train(
 
     optimizer_name = str(cfg["optimizer"]).lower()
     if optimizer_name == "adam":
-        opt_G = torch.optim.Adam(G.parameters(), lr=base_lr_g, betas=(BETA1, 0.999))
-        opt_prior = torch.optim.Adam(prior.parameters(), lr=base_lr_prior, betas=(BETA1, 0.999))
-        opt_D = torch.optim.Adam(D.parameters(), lr=base_lr_d, betas=(BETA1, 0.999))
+        opt_cls = torch.optim.Adam
     elif optimizer_name == "oadam":
         # Same LRs and betas as the Adam arm, so the only thing that changes is
         # the update rule. OptimisticAdam takes no weight_decay; there is none
         # to carry over.
-        opt_G = OptimisticAdam(G.parameters(), lr=base_lr_g, betas=(BETA1, 0.999))
-        opt_prior = OptimisticAdam(prior.parameters(), lr=base_lr_prior, betas=(BETA1, 0.999))
-        opt_D = OptimisticAdam(D.parameters(), lr=base_lr_d, betas=(BETA1, 0.999))
+        opt_cls = OptimisticAdam
     else:
         raise ValueError(f"Unknown optimizer: {cfg['optimizer']} (expected 'adam' or 'oadam')")
+    opt_G = opt_cls(G.parameters(), lr=base_lr_g, betas=(BETA1, 0.999))
+    opt_D = opt_cls(D.parameters(), lr=base_lr_d, betas=(BETA1, 0.999))
+    # A frozen prior has no parameters to hand an optimizer, so it gets none.
+    opt_prior = (
+        opt_cls(prior.parameters(), lr=base_lr_prior, betas=(BETA1, 0.999))
+        if learnable_prior
+        else None
+    )
+    all_opts = tuple(o for o in (opt_G, opt_D, opt_prior) if o is not None)
     base_lrs = {
         id(opt): [g["lr"] for g in opt.param_groups]
-        for opt in (opt_G, opt_D, opt_prior)
+        for opt in all_opts
     }
 
     real_viz = sample_100gaussians(batch_size=8192, device=device, generator=viz_gen)
@@ -505,7 +521,7 @@ def train(
         else:
             frac = (global_step - anneal_from) / max(1.0, total_steps - anneal_from)
             scale = LR_FLOOR + (1.0 - LR_FLOOR) * 0.5 * (1.0 + math.cos(math.pi * frac))
-        for opt in (opt_G, opt_D, opt_prior):
+        for opt in all_opts:
             for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
                 group["lr"] = base * scale
 
@@ -552,16 +568,23 @@ def train(
             )
         loss_gan = gan_loss.g_loss(fake_logits, D(x_real_g))
 
-        with torch.no_grad():
-            unique_idx = torch.unique(idx)
-        ep_z = vic_reg(prior.z[unique_idx])
-        loss_g = loss_gan + LAMBDA_EP * ep_z
+        if learnable_prior:
+            with torch.no_grad():
+                unique_idx = torch.unique(idx)
+            ep_z = vic_reg(prior.z[unique_idx])
+            loss_g = loss_gan + LAMBDA_EP * ep_z
+        else:
+            # Nothing to spread out: a frozen cloud is already an exact N(0, I)
+            # draw, and VICReg on it would be a constant with no gradient.
+            loss_g = loss_gan
 
         opt_G.zero_grad()
-        opt_prior.zero_grad()
+        if opt_prior is not None:
+            opt_prior.zero_grad()
         loss_g.backward()
         opt_G.step()
-        opt_prior.step()
+        if opt_prior is not None:
+            opt_prior.step()
 
         last_g = float(loss_gan.detach())
 
