@@ -256,3 +256,81 @@ def mode_recall_and_hists(
         "hist_kl": hist_kl,
         "hist_js": hist_js,
     }
+
+
+# =========================
+#  Per-mode shape audit
+# =========================
+
+def per_mode_moments(
+    x: torch.Tensor,
+    min_count: int = 50,
+    std: float = 0.03,
+    grid_scale: float = 1.0,
+) -> Dict[str, float]:
+    """
+    Within-mode spread and placement, from a nearest-center assignment.
+
+    `mode_recall_and_hists` asks whether the mass is spread evenly over the 100
+    modes; this asks whether each individual blob has the right *shape*. Every
+    sample is assigned to its nearest grid center, and each mode holding at
+    least `min_count` samples contributes:
+
+      - its std, sqrt(mean over the 2 dims of the within-mode population
+        variance), which the data generator sets to `std` (0.03),
+      - its center bias, ||sample mean - true center||.
+
+    Modes with fewer than `min_count` samples are dropped: a handful of points
+    gives a variance estimate that is mostly noise, and a mode the generator
+    has barely found says more about coverage (already measured) than shape.
+
+    Returns:
+        {
+          'per_mode_std':       mean per-mode std over qualifying modes,
+          'per_mode_std_ratio': that std divided by the true `std`
+                                (1.0 is correct; > 1 is over-dispersed,
+                                < 1 is a too-sharp / partially collapsed blob),
+          'center_bias':        mean ||sample mean - true center||,
+          'audited_modes':      how many modes qualified,
+        }
+        The three floats are nan when no mode qualifies.
+    """
+    with torch.no_grad():
+        xf = x.detach().to(torch.float64)
+        centers = _grid_centers(xf.device, torch.float64, grid_scale)
+        k, d = centers.shape
+
+        nearest = torch.cdist(xf, centers).argmin(dim=1)
+        counts = torch.bincount(nearest, minlength=k).to(torch.float64)
+
+        sums = torch.zeros(k, d, dtype=torch.float64, device=xf.device)
+        sums.index_add_(0, nearest, xf)
+        sq_sums = torch.zeros(k, d, dtype=torch.float64, device=xf.device)
+        sq_sums.index_add_(0, nearest, xf.pow(2))
+
+        qualifies = counts >= float(min_count)
+        audited = int(qualifies.sum())
+        if audited == 0:
+            nan = float("nan")
+            return {
+                "per_mode_std": nan,
+                "per_mode_std_ratio": nan,
+                "center_bias": nan,
+                "audited_modes": 0,
+            }
+
+        n = counts[qualifies].unsqueeze(1)
+        means = sums[qualifies] / n
+        # E[x^2] - E[x]^2, clamped: it is exact in float64 here, but the
+        # subtraction is the one place a pathological batch could go negative.
+        var = (sq_sums[qualifies] / n - means.pow(2)).clamp_min(0.0)
+
+        per_mode_std = float(var.mean(dim=1).sqrt().mean())
+        center_bias = float((means - centers[qualifies]).norm(dim=1).mean())
+
+    return {
+        "per_mode_std": per_mode_std,
+        "per_mode_std_ratio": per_mode_std / float(std),
+        "center_bias": center_bias,
+        "audited_modes": audited,
+    }

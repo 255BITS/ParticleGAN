@@ -280,6 +280,217 @@ def test_bad_arm():
         raise AssertionError("expected ValueError for an unknown arm")
 
 
+# -------------------------
+#  8) Dual-norm variants differentiate correctly
+# -------------------------
+
+def test_finite_differences_dual_norms():
+    print("\n[8] finite-difference check for the dual norms (h=1e-6, float64)")
+    h = 1e-6
+
+    # linf's max() is only differentiable where the argmax is unique. A random
+    # D on random inputs makes ties a measure-zero event, but the FD probe also
+    # has to stay clear of them, so we assert the margin is comfortably wider
+    # than h before trusting the comparison.
+    # kappa is chosen per norm so the cap is actually active: ||g||_inf on this
+    # fixture is ~0.3, well under the 0.5 the L2/L1 cases use.
+    for arm, norm, kappa, tol in (
+        ("b_cap", "l1", 0.5, 1e-4),
+        ("b_cap", "linf", 0.1, 1e-3),
+        ("c_eikonal", "l1", 0.5, 1e-4),
+    ):
+        D, x_real, x_fake = make_setup()
+        reg = GradRegularizer(arm=arm, coeff=0.02, kappa=kappa, norm=norm)
+
+        if norm == "linf":
+            gaps = []
+            for x in (x_real, x_fake):
+                xd = x.detach().clone().requires_grad_(True)
+                g = torch.autograd.grad(D(xd).sum(), xd)[0].abs()
+                top2 = g.flatten(1).sort(dim=1, descending=True).values
+                gaps.append(float((top2[:, 0] - top2[:, 1]).min()))
+            print(f"    linf argmax margin: {min(gaps):.3e} (>> h={h:.0e})")
+            assert min(gaps) > 1e-3, "argmax too close to a tie for a clean FD check"
+
+        pen, _ = penalty_value(reg, D, x_real, x_fake)
+        assert pen.item() > 0.0, f"{arm}/{norm}: need an active penalty to test"
+        D.zero_grad(set_to_none=True)
+        pen.backward()
+        analytic = {
+            name: (torch.zeros_like(p) if p.grad is None else p.grad.detach().clone())
+            for name, p in D.named_parameters()
+        }
+
+        worst = 0.0
+        for name, p in D.named_parameters():
+            flat = p.data.view(-1)
+            for i in range(flat.numel()):
+                orig = flat[i].item()
+
+                flat[i] = orig + h
+                p_plus, _ = penalty_value(reg, D, x_real, x_fake)
+                flat[i] = orig - h
+                p_minus, _ = penalty_value(reg, D, x_real, x_fake)
+                flat[i] = orig
+
+                fd = (p_plus.item() - p_minus.item()) / (2.0 * h)
+                ana = analytic[name].view(-1)[i].item()
+                denom = max(abs(ana), abs(fd), 1e-8)
+                worst = max(worst, abs(fd - ana) / denom)
+
+        print(f"    {arm:10s} norm={norm:5s} pen={pen.item():.8e}  max rel err = {worst:.3e}")
+        assert worst < tol, f"{arm}/{norm}: finite-difference mismatch, max rel err {worst}"
+
+    # The three norms genuinely differ: ||g||_inf <= ||g||_2 <= ||g||_1 in 2D.
+    D, x_real, x_fake = make_setup()
+    norms = {}
+    for norm in GradRegularizer.NORMS:
+        reg = GradRegularizer(arm="c_eikonal", coeff=0.02, norm=norm)
+        norms[norm] = float(reg._grad_norm(D, x_real).mean())
+    print("    mean ||g||: " + "  ".join(f"{k}={v:.4f}" for k, v in norms.items()))
+    assert norms["linf"] <= norms["l2"] <= norms["l1"] + 1e-12
+    print("    OK: l1 and linf gradients are exact and properly ordered")
+
+
+# -------------------------
+#  9) Annealed penalty center
+# -------------------------
+
+def test_target_anneal_schedule():
+    print("\n[9] target_anneal schedules the penalty center")
+    total = 1000
+    coeff = 0.02
+    kappa = 0.5
+
+    lin = GradRegularizer("c_eikonal", coeff, target_anneal="linear", total_steps=total)
+    assert lin.center(0) == 1.0
+    assert abs(lin.center(500) - 0.5) < 1e-12
+    assert lin.center(total) == 0.0
+    print(f"    linear c_eikonal: c(0)={lin.center(0)} c(500)={lin.center(500)} "
+          f"c(1000)={lin.center(total)}")
+
+    # c0 = kappa for b_cap, not 1.0.
+    lin_cap = GradRegularizer(
+        "b_cap", coeff, kappa=kappa, target_anneal="linear", total_steps=total
+    )
+    assert lin_cap.center(0) == kappa
+    assert abs(lin_cap.center(500) - kappa / 2.0) < 1e-12
+    assert lin_cap.center(total) == 0.0
+    print(f"    linear b_cap:     c(0)={lin_cap.center(0)} c(500)={lin_cap.center(500)} "
+          f"c(1000)={lin_cap.center(total)}")
+
+    # At the end of the anneal the eikonal penalty *is* the zero-centered one.
+    D, x_real, x_fake = make_setup()
+    pen_end, stats_end = penalty_value(lin, D, x_real, x_fake, step=total)
+    assert stats_end["center"] == 0.0
+    plain = GradRegularizer("c_eikonal", coeff)
+    n_r = plain._grad_norm(D, x_real)
+    n_f = plain._grad_norm(D, x_fake)
+    ref_zero = (coeff / 2.0) * (n_r.pow(2).mean() + n_f.pow(2).mean())
+    print(f"    c_eikonal @ step=1000: {pen_end.item():.12e}  "
+          f"mean((n-0)^2) form: {ref_zero.item():.12e}")
+    assert abs(pen_end.item() - ref_zero.item()) < 1e-14
+    # ...and therefore agrees with a_r1r2 up to the 1e-12 inside the sqrt.
+    pen_r1r2, _ = penalty_value(GradRegularizer("a_r1r2", coeff), D, x_real, x_fake)
+    assert abs(pen_end.item() - pen_r1r2.item()) < 1e-10
+    print(f"    a_r1r2 on the same D:  {pen_r1r2.item():.12e}  -> the arms have merged")
+
+    # 'delayed' holds, then ramps.
+    dly = GradRegularizer("c_eikonal", coeff, target_anneal="delayed", total_steps=total)
+    assert dly.center(0) == 1.0
+    assert dly.center(599) == 1.0, "delayed must hold c0 right up to 0.6 * total_steps"
+    assert dly.center(600) == 1.0
+    prev = dly.center(600)
+    for step in range(601, total + 1):
+        c = dly.center(step)
+        assert c < prev, f"delayed center not decreasing at step {step}"
+        prev = c
+    assert dly.center(total) == 0.0
+    assert abs(dly.center(800) - 0.5) < 1e-12
+    print(f"    delayed: c(599)={dly.center(599)} c(600)={dly.center(600)} "
+          f"c(800)={dly.center(800)} c(1000)={dly.center(total)}")
+
+    # A schedule is a no-op for a_r1r2, which has no center to move.
+    r1 = GradRegularizer("a_r1r2", coeff, target_anneal="linear", total_steps=total)
+    assert r1.center(0) == 0.0 and r1.center(total) == 0.0
+    p0, _ = penalty_value(r1, D, x_real, x_fake, step=0)
+    p1, _ = penalty_value(r1, D, x_real, x_fake, step=total)
+    assert p0.item() == p1.item()
+    print("    OK: centers follow the schedule; a_r1r2 is unaffected")
+
+
+# -------------------------
+#  10) Defaults are bit-identical to the pre-change module
+# -------------------------
+
+# Penalties from the committed (pre-dual-norm, pre-anneal) module, on
+# make_setup()'s fixture with coeff=0.02, kappa=0.5, step=0, seed=0.
+LEGACY_PENALTIES = {
+    "a_r1r2": 0.0021669679779030312,
+    "b_cap": 6.346602607057905e-09,
+    "c_eikonal": 0.009918168926157385,
+    "d_asym": 0.0024795422315393462,
+    "e_interp": 0.00847055087350632,
+    "f_none": 0.0,
+}
+
+
+def test_defaults_match_legacy():
+    print("\n[10] default kwargs reproduce the pre-change module exactly")
+    for arm, expected in LEGACY_PENALTIES.items():
+        D, x_real, x_fake = make_setup()
+        reg = GradRegularizer(arm=arm, coeff=0.02, kappa=0.5)
+        assert reg.norm == "l2" and reg.target_anneal == "none"
+        pen, stats = penalty_value(reg, D, x_real, x_fake)
+        print(f"    {arm:10s} legacy={expected!r:26s} now={pen.item()!r}")
+        assert pen.item() == expected, f"{arm}: {pen.item()!r} != legacy {expected!r}"
+        if arm != "f_none":
+            # The centers the legacy code hardcoded.
+            assert stats["center"] == (0.0 if arm == "a_r1r2" else (0.5 if arm == "b_cap" else 1.0))
+    print("    OK: every arm is bit-identical under the new defaults")
+
+
+# -------------------------
+#  11) New argument validation
+# -------------------------
+
+def test_new_arg_validation():
+    print("\n[11] norm / target_anneal validation")
+    for norm in ("l1", "linf"):
+        try:
+            GradRegularizer(arm="a_r1r2", coeff=0.02, norm=norm)
+        except ValueError as e:
+            print(f"    OK: a_r1r2 + norm={norm} -> ValueError({e})")
+        else:
+            raise AssertionError(f"expected ValueError for a_r1r2 with norm={norm}")
+
+    try:
+        GradRegularizer(arm="b_cap", coeff=0.02, norm="l3")
+    except ValueError as e:
+        print(f"    OK: unknown norm -> ValueError({e})")
+    else:
+        raise AssertionError("expected ValueError for an unknown norm")
+
+    for anneal in ("linear", "delayed"):
+        try:
+            GradRegularizer(arm="c_eikonal", coeff=0.02, target_anneal=anneal)
+        except ValueError as e:
+            print(f"    OK: target_anneal={anneal} without total_steps -> ValueError({e})")
+        else:
+            raise AssertionError(f"expected ValueError for {anneal} without total_steps")
+
+    try:
+        GradRegularizer(arm="c_eikonal", coeff=0.02, target_anneal="cosine", total_steps=10)
+    except ValueError as e:
+        print(f"    OK: unknown target_anneal -> ValueError({e})")
+    else:
+        raise AssertionError("expected ValueError for an unknown target_anneal")
+
+    # a_r1r2 with the (default) l2 norm stays legal.
+    GradRegularizer(arm="a_r1r2", coeff=0.02, norm="l2")
+    print("    OK: a_r1r2 + norm='l2' still constructs")
+
+
 if __name__ == "__main__":
     test_finite_differences()
     test_r1r2_equivalence()
@@ -288,4 +499,8 @@ if __name__ == "__main__":
     test_lazy()
     test_grad_norm_stats()
     test_bad_arm()
+    test_finite_differences_dual_norms()
+    test_target_anneal_schedule()
+    test_defaults_match_legacy()
+    test_new_arg_validation()
     print("\nAll grad-regularizer tests passed.")

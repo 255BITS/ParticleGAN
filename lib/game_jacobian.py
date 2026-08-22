@@ -77,6 +77,7 @@ def estimate_update_spectrum(
     lambda_ep: float = 1.0,
     seed: int = 0,
     power_iters: int = 3,
+    penalty_step: int = 0,
 ) -> Dict:
     """
     Estimate the dominant eigenvalues of the alternating-update map's Jacobian.
@@ -87,8 +88,7 @@ def estimate_update_spectrum(
         gan_loss: a lib.gan_loss.GANLoss configured exactly as in training.
         vic_reg: the VICReg-like module applied to the batch's particles.
         regularizer: a lib.grad_regularizers.GradRegularizer. Pass a clone with
-            lazy_k=1 so the penalty applies on every step of the map; `step=0`
-            is used for every call.
+            lazy_k=1 so the penalty applies on every step of the map.
         x_real_fixed: (B, 2) fixed real batch. Both half-steps use it (the D
             step as the reals, the G step as the RpGAN reference batch).
         idx_fixed: (B,) fixed particle indices. Only the *unique* rows they
@@ -111,6 +111,13 @@ def estimate_update_spectrum(
             deterministic function of theta.
         power_iters: extra power iterations run from the dominant Ritz vector
             as an independent check on the dominant modulus.
+        penalty_step: the step index handed to `regularizer.penalty`, held
+            fixed across every evaluation of F. It only matters for a
+            regularizer whose penalty center is annealed, where the analysis
+            should see the center in force at the point of the run being
+            analysed; pass the end-of-training step for an end-of-training
+            spectrum. With a lazy_k=1 clone and no anneal (the historical
+            case) the value is irrelevant and 0 reproduces it exactly.
 
     Returns:
         {
@@ -191,7 +198,7 @@ def estimate_update_spectrum(
             x_fake = G(z_param[idx_fixed])
 
         loss_d = gan_loss.d_loss(D(x_real), D(x_fake))
-        pen, _ = regularizer.penalty(D, x_real, x_fake, 0)
+        pen, _ = regularizer.penalty(D, x_real, x_fake, penalty_step)
         loss_d = loss_d + pen
 
         grads_d = torch.autograd.grad(loss_d, d_params, allow_unused=True)

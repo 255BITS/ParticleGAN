@@ -1,0 +1,12 @@
+arm: c_eikonal
+coeff: 0.1
+kappa: 1.0
+lazy_k: 1
+seed: 4
+total_steps: 7000
+eval_interval: 100
+lr: 0.0003
+d_lr_mult: 1.5
+lr_mult: 2.0
+spectral: false
+out_dir: results/runs_audit/c_eikonal_c0p1_lr2p0_s4

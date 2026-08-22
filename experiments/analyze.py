@@ -56,12 +56,24 @@ BOOTSTRAP_SEED = 20250821
 #   a_r1r2_c0p02_s3
 #   c_eikonal_c0p1_lr2p0_s1
 #   d_asym_c0p1_lazy16_s5   /   d_asym_c0p1_c16th_s5
+#   b_cap_c1p0_annlin_s2    /   c_eikonal_c0p1_anndel_s2
+#   b_cap_c1p0_nl1_s1       /   b_cap_c1p0_nlinf_lr2p0_s5
+#   a_r1r2_c1p0_oadam_s4
+#   wgan_b_cap_c1p0_s3
+#
+# An optional ``wgan_`` prefix marks the objective; zero or more variant
+# tokens may follow the coefficient (``_nlinf_lr2p0`` is a real combination).
+VARIANT_TOKEN = r"lr[0-9p]+|lazy16|c16th|ann(?:lin|del)|n(?:linf|l1)|oadam"
 RUN_NAME_RE = re.compile(
-    r"^(?P<arm>[a-f]_[a-z0-9]+)"
+    r"^(?P<objective>wgan)?_?"
+    r"(?P<arm>[a-f]_[a-z0-9]+)"
     r"_c(?P<coeff>[0-9p]+)"
-    r"(?:_(?P<variant>lr[0-9p]+|lazy16|c16th))?"
+    r"(?P<variants>(?:_(?:" + VARIANT_TOKEN + r"))*)"
     r"_s(?P<seed>\d+)$"
 )
+
+DEFAULT_OBJECTIVE = "logistic"
+WGAN_OBJECTIVE = "wgan"
 
 # ---------------------------------------------------------------------------
 #  Plot styling (validated categorical palette; baseline is always black)
@@ -118,6 +130,7 @@ class Run:
     seed: int
     summary: Dict
     series: Dict[str, np.ndarray] = field(default_factory=dict)
+    objective: str = "logistic"
 
     # --- convenience accessors, all None-tolerant -------------------------
 
@@ -184,12 +197,21 @@ def _num(x) -> Optional[float]:
 
 def parse_run_name(name: str) -> Optional[Dict]:
     """
-    Decompose a run directory name into (arm, coeff, variant, seed).
+    Decompose a run directory name into (objective, arm, coeff, variant, seed).
 
     The directory name is authoritative rather than summary["config"]: the
     ``c16th`` lazy variant deliberately carries the *nominal* coefficient in
     its name while its config holds coeff/16, and grouping the pair together
     is the whole point of that stage.
+
+    A run may carry several variant tokens (``_nlinf_lr2p0``); they are joined
+    back together in name order into a single variant string, so each distinct
+    combination is its own group and its own table section. The ``wgan_``
+    prefix is folded into the *front* of the variant string as well as being
+    reported separately: that is what guarantees a Wasserstein group can never
+    share a group key -- and therefore never be pooled or ranked -- with a
+    logistic-objective group, since they optimize different objectives and
+    their W1 numbers are not comparable.
     """
     m = RUN_NAME_RE.match(name)
     if not m:
@@ -199,11 +221,16 @@ def parse_run_name(name: str) -> Optional[Dict]:
         coeff = float(coeff_label.replace("p", ".").replace("m", "-"))
     except ValueError:
         return None
+    objective = WGAN_OBJECTIVE if m.group("objective") else DEFAULT_OBJECTIVE
+    tokens = [t for t in m.group("variants").split("_") if t]
+    if objective != DEFAULT_OBJECTIVE:
+        tokens.insert(0, objective)
     return {
+        "objective": objective,
         "arm": m.group("arm"),
         "coeff": coeff,
         "coeff_label": coeff_label,
-        "variant": m.group("variant") or "main",
+        "variant": "_".join(tokens) if tokens else "main",
         "seed": int(m.group("seed")),
     }
 
@@ -282,6 +309,7 @@ def load_runs(runs_dir: Path) -> Tuple[List[Run], Dict[str, int]]:
                 skips["unparsed_name"] += 1
                 continue
             ident = {
+                "objective": DEFAULT_OBJECTIVE,
                 "arm": str(arm),
                 "coeff": coeff,
                 "coeff_label": f"{coeff:g}".replace(".", "p"),
@@ -302,6 +330,7 @@ def load_runs(runs_dir: Path) -> Tuple[List[Run], Dict[str, int]]:
                 seed=ident["seed"],
                 summary=summary,
                 series=series,
+                objective=ident.get("objective", DEFAULT_OBJECTIVE),
             )
         )
     return runs, skips
@@ -326,7 +355,90 @@ def med(vals: Sequence[Optional[float]]) -> float:
 
 
 def group_key(run: Run) -> Tuple[str, str, str]:
+    # The variant string carries the ``wgan`` prefix for Wasserstein runs, so
+    # a wgan group can never collide with (or be pooled into) the logistic
+    # group of the same arm and coefficient.
     return (run.variant, run.arm, run.coeff_label)
+
+
+# ---------------------------------------------------------------------------
+#  Variant vocabulary: ordering and human titles
+# ---------------------------------------------------------------------------
+
+# Explicit titles for the variants that predate the multi-token scheme; kept
+# verbatim so their TABLE.md sections are unchanged.
+VARIANT_TITLES = {
+    "main": "Main grid (lr_mult 1.0, every-step penalty)",
+    "lazy16": (
+        "Lazy variant: penalty every 16 steps at the nominal coeff "
+        "(16x internal rescale)"
+    ),
+    "c16th": (
+        "Lazy control: penalty every step at coeff/16 "
+        "(same nominal coeff in the label)"
+    ),
+}
+
+TOKEN_LABELS = {
+    "lazy16": "penalty every 16 steps at the nominal coeff",
+    "c16th": "penalty every step at coeff/16",
+    "annlin": "target_anneal = linear",
+    "anndel": "target_anneal = delayed",
+    "nl1": "penalty norm = l1",
+    "nlinf": "penalty norm = linf",
+    "oadam": "optimizer = oadam (optimistic Adam)",
+}
+
+# Family rank -> section order in TABLE.md. Everything unknown sorts last.
+_FAMILY_RANK = [
+    ("main", 0),
+    ("lazy16", 1),
+    ("c16th", 2),
+    ("lr", 3),
+    ("ann", 4),
+    ("n", 5),
+    ("oadam", 6),
+    ("wgan", 7),
+]
+
+
+def variant_rank(variant: str) -> int:
+    """Section/sort rank for a variant string (wgan always sorts last)."""
+    head = variant.split("_")[0]
+    for prefix, rank in _FAMILY_RANK:
+        if head == prefix or (prefix in ("lr", "ann", "n") and head.startswith(prefix)):
+            return rank
+    return 8
+
+
+def token_label(token: str) -> str:
+    if token in TOKEN_LABELS:
+        return TOKEN_LABELS[token]
+    if token.startswith("lr"):
+        return f"lr_mult = {token[2:].replace('p', '.')}"
+    return token
+
+
+def variant_title(variant: str) -> str:
+    """A human section heading for a (possibly multi-token) variant string."""
+    if variant in VARIANT_TITLES:
+        return VARIANT_TITLES[variant]
+    tokens = variant.split("_")
+    if len(tokens) == 1 and tokens[0].startswith("lr"):
+        return f"LR sensitivity: lr_mult = {tokens[0][2:].replace('p', '.')}"
+    is_wgan = tokens[0] == WGAN_OBJECTIVE
+    rest = tokens[1:] if is_wgan else tokens
+    body = ", ".join(token_label(t) for t in rest)
+    if is_wgan:
+        head = "Wasserstein objective (`loss_type: wasserstein`)"
+        if body:
+            head += f" -- {body}"
+        return (
+            head
+            + " -- NOT comparable with the logistic-objective sections; "
+            "never pooled or ranked against them"
+        )
+    return f"Variant: {body}" if body else f"Variant: {variant}"
 
 
 def group_runs(runs: Sequence[Run]) -> Dict[Tuple[str, str, str], List[Run]]:
@@ -420,6 +532,8 @@ CSV_COLUMNS = [
     "mode_recall_std",
     "modes_mean",
     "hq_mean",
+    "per_mode_std_ratio_mean",
+    "per_mode_std_ratio_std",
     "hist_kl_mean",
     "hist_js_mean",
     "nll_mean",
@@ -451,6 +565,11 @@ def build_rows(
         w2_mean, w2_std, _ = agg([r.final("w2_exact") for r in runs])
         rec_mean, rec_std, _ = agg([r.final("mode_recall") for r in runs])
         nll_mean, nll_std, _ = agg([r.final("nll") for r in runs])
+        # per_mode_std_ratio only exists on summaries written by the newer
+        # trainer; older runs contribute nothing and the cell renders blank.
+        pmsr_mean, pmsr_std, pmsr_n = agg(
+            [r.final("per_mode_std_ratio") for r in runs]
+        )
         dm_vals = [r.dominant_modulus() for r in runs]
         dm_mean, dm_std, dm_n = agg(dm_vals)
         dm_finite = [v for v in dm_vals if v is not None]
@@ -477,6 +596,9 @@ def build_rows(
                 "mode_recall_std": rec_std,
                 "modes_mean": agg([r.final("modes") for r in runs])[0],
                 "hq_mean": agg([r.final("hq") for r in runs])[0],
+                "per_mode_std_ratio_mean": pmsr_mean,
+                "per_mode_std_ratio_std": pmsr_std,
+                "per_mode_std_ratio_n": pmsr_n,
                 "hist_kl_mean": agg([r.final("hist_kl") for r in runs])[0],
                 "hist_js_mean": agg([r.final("hist_js") for r in runs])[0],
                 "nll_mean": nll_mean,
@@ -503,10 +625,9 @@ def build_rows(
         )
 
     # Sort by median final exact W1 *within* each variant group.
-    variant_order = {"main": 0, "lazy16": 1, "c16th": 2}
     rows.sort(
         key=lambda r: (
-            variant_order.get(r["variant"], 3),
+            variant_rank(r["variant"]),
             r["variant"],
             _nan_last(r["w1_exact_median"]),
         )
@@ -530,6 +651,18 @@ def fmt_pm(mean: float, std: float, nd: int = 4) -> str:
     if not math.isfinite(std):
         return fmt(mean, nd)
     return f"{fmt(mean, nd)} ± {fmt(std, nd)}"
+
+
+def fmt_pm_or_blank(mean: float, std: float, n: int, nd: int = 3) -> str:
+    """
+    Like ``fmt_pm``, but renders an empty cell when *no* seed carried the
+    metric at all -- the honest rendering for a column that simply did not
+    exist when a run's summary was written, as opposed to 'n/a' which reads
+    as a failed measurement.
+    """
+    if not n:
+        return ""
+    return fmt_pm(mean, std, nd)
 
 
 def write_table(
@@ -559,10 +692,11 @@ def write_table(
 
     header = (
         "| arm | coeff | n | final W1 (exact) | W2 (exact) | mode recall | modes | hq | "
+        "per-mode σ ratio | "
         "NLL | collapse rate (mean ev) | steps→thresh | dom. modulus (max) | "
         "W1 win-std | dloss FFT pk | med_nr / med_nf @mid | wall (s) |"
     )
-    sep = "|" + "---|" * 16
+    sep = "|" + "---|" * 17
 
     lines: List[str] = []
     lines.append("# Regularizer study -- aggregate results\n")
@@ -579,15 +713,8 @@ def write_table(
     for row in rows:
         by_variant[row["variant"]].append(row)
 
-    variant_titles = {
-        "main": "Main grid (lr_mult 1.0, every-step penalty)",
-        "lazy16": "Lazy variant: penalty every 16 steps at the nominal coeff (16x internal rescale)",
-        "c16th": "Lazy control: penalty every step at coeff/16 (same nominal coeff in the label)",
-    }
-    section_order = {"main": 0, "lazy16": 1, "c16th": 2}
-    for variant in sorted(by_variant, key=lambda v: (section_order.get(v, 3), v)):
-        title = variant_titles.get(variant, f"LR sensitivity: lr_mult = {variant[2:].replace('p', '.')}")
-        lines.append(f"\n## {title}\n")
+    for variant in sorted(by_variant, key=lambda v: (variant_rank(v), v)):
+        lines.append(f"\n## {variant_title(variant)}\n")
         lines.append(header)
         lines.append(sep)
         for row in by_variant[variant]:
@@ -612,6 +739,11 @@ def write_table(
                         fmt_pm(row["mode_recall_mean"], row["mode_recall_std"], 3),
                         fmt(row["modes_mean"], 1),
                         fmt(row["hq_mean"], 3),
+                        fmt_pm_or_blank(
+                            row["per_mode_std_ratio_mean"],
+                            row["per_mode_std_ratio_std"],
+                            row.get("per_mode_std_ratio_n", 0),
+                        ),
                         fmt_pm(row["nll_mean"], row["nll_std"], 3),
                         f"{fmt(row['collapse_rate'], 2)} ({fmt(row['collapse_events_mean'], 2)})",
                         s2t,
@@ -662,6 +794,20 @@ def write_table(
         "6. `med_nr / med_nf @mid` are the median discriminator gradient norms at real "
         "and fake samples, taken at the mid-training checkpoint recorded in "
         "`summary.mid`.\n"
+    )
+    lines.append(
+        "7. `per-mode σ ratio` is `final.per_mode_std_ratio`: the per-mode spread of "
+        "the generated samples divided by the spread of the corresponding real mode. "
+        "Values below 1 mean the generator is producing tighter-than-real clusters -- "
+        "which flatters W1 and hq without actually matching the target. The cell is "
+        "**blank** for groups whose summaries predate the metric; it is not a failed "
+        "measurement, the field simply did not exist yet.\n"
+    )
+    lines.append(
+        "8. Sections are per (objective, variant) combination. Wasserstein "
+        "(`wgan_*`) runs optimize a different objective, so they get their own "
+        "sections and are never pooled with, ranked against, or bootstrapped "
+        "against the logistic-objective groups.\n"
     )
 
     with open(out_dir / "TABLE.md", "w") as f:
@@ -1182,9 +1328,23 @@ def main() -> None:
         help="Where to write table.csv / TABLE.md / bootstrap.md / plots (default: results).",
     )
     parser.add_argument(
+        "--audit_dir",
+        type=str,
+        default=None,
+        help=(
+            "Audit run tree for the leaderboard's per_mode_std_ratio column "
+            "(default: <runs_dir>_audit). Absent is fine."
+        ),
+    )
+    parser.add_argument(
         "--no_plots",
         action="store_true",
         help="Skip figure generation.",
+    )
+    parser.add_argument(
+        "--no_leaderboard",
+        action="store_true",
+        help="Skip results/LEADERBOARD.md.",
     )
     args = parser.parse_args()
 
@@ -1232,6 +1392,25 @@ def main() -> None:
                 continue
             if path is not None:
                 print(f"[analyze] wrote {path}")
+
+    if not args.no_leaderboard:
+        # Imported here rather than at module scope: leaderboard.py imports
+        # this module for its loaders, and a top-level import either way would
+        # be circular.
+        try:
+            import sys
+
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            from leaderboard import write_leaderboard
+
+            path, _ = write_leaderboard(
+                runs_dir,
+                out_dir,
+                Path(args.audit_dir) if args.audit_dir else None,
+            )
+            print(f"[analyze] wrote {path}")
+        except Exception as exc:  # noqa: BLE001 - never kill the analysis
+            print(f"[analyze] WARN leaderboard failed: {exc}")
 
 
 if __name__ == "__main__":

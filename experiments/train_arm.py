@@ -19,6 +19,8 @@ On top of the example it adds the instrumentation an arm comparison needs:
     statistics at reals / fakes / interpolates,
   * a collapse-episode counter,
   * end-of-run exact OT distances, mixture NLL and mode-balance divergences,
+  * a per-mode shape audit (within-mode std against the data's 0.03, and how
+    far each blob's mean sits from its true center),
   * oscillation diagnostics (windowed W1 std, and the dominant non-DC frequency
     of the per-step D loss),
   * the dominant eigenvalue modulus of the game's local update map
@@ -59,6 +61,7 @@ from lib.gan_loss import GANLoss
 from lib.vicreg_loss import VICRegLikeLoss
 from lib.grad_regularizers import GradRegularizer, grad_norm_stats
 from lib.game_jacobian import estimate_update_spectrum
+from lib.oadam import OptimisticAdam
 from lib.toy_models import (
     SimpleMLPGenerator,
     SimpleMLPDiscriminator,
@@ -70,6 +73,7 @@ from lib.toy_metrics import (
     exact_w1_w2,
     mixture_nll,
     mode_recall_and_hists,
+    per_mode_moments,
 )
 
 
@@ -90,6 +94,12 @@ DEFAULTS: Dict = {
     "lr_mult": 1.0,
     "spectral": True,
     "out_dir": "runs/arm",
+    # Follow-up knobs. Every default reproduces the original recipe exactly, so
+    # a config written before they existed trains an identical trajectory.
+    "loss_type": "logistic",   # any lib.gan_loss kernel, e.g. 'wasserstein'
+    "optimizer": "adam",       # 'adam' or 'oadam' (lib.oadam.OptimisticAdam)
+    "norm": "l2",              # gradient norm the penalty sees: l2 / l1 / linf
+    "target_anneal": "none",   # penalty-center schedule: none / linear / delayed
 }
 
 # Held fixed across every arm: the winning recipe from docs/convergence-tips.md.
@@ -102,8 +112,12 @@ LAMBDA_EP = 1.0
 EMA_DECAY = 0.995
 LR_FLOOR = 0.05
 LR_ANNEAL_START = 0.6
-LOSS_TYPE = "logistic"
 GAN_MODE = "rp"
+
+# Modes with fewer than this many of the 100k final samples are skipped by the
+# per-mode shape audit (see lib.toy_metrics.per_mode_moments).
+AUDIT_MIN_COUNT = 50
+DATA_STD = 0.03
 
 # Instrumentation sizes.
 EVAL_N = 4096
@@ -276,21 +290,40 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         p.requires_grad_(False)
 
     vic_reg = VICRegLikeLoss()
-    gan_loss = GANLoss(loss_type=LOSS_TYPE, mode=GAN_MODE)
-    regularizer = GradRegularizer(
+    gan_loss = GANLoss(loss_type=str(cfg["loss_type"]), mode=GAN_MODE)
+
+    # The anneal is expressed against the run length, so the schedule only has
+    # to be handed `total_steps` when there is one.
+    target_anneal = str(cfg["target_anneal"])
+    anneal_steps = total_steps if target_anneal != "none" else 0
+    reg_kwargs = dict(
         arm=str(cfg["arm"]),
         coeff=float(cfg["coeff"]),
         kappa=float(cfg["kappa"]),
-        lazy_k=int(cfg["lazy_k"]),
+        norm=str(cfg["norm"]),
+        target_anneal=target_anneal,
+        total_steps=anneal_steps,
     )
+    regularizer = GradRegularizer(lazy_k=int(cfg["lazy_k"]), **reg_kwargs)
 
     base_lr_g = float(cfg["lr"]) * lr_mult
     base_lr_prior = base_lr_g * 10.0
     base_lr_d = base_lr_g * float(cfg["d_lr_mult"])
 
-    opt_G = torch.optim.Adam(G.parameters(), lr=base_lr_g, betas=(BETA1, 0.999))
-    opt_prior = torch.optim.Adam(prior.parameters(), lr=base_lr_prior, betas=(BETA1, 0.999))
-    opt_D = torch.optim.Adam(D.parameters(), lr=base_lr_d, betas=(BETA1, 0.999))
+    optimizer_name = str(cfg["optimizer"]).lower()
+    if optimizer_name == "adam":
+        opt_G = torch.optim.Adam(G.parameters(), lr=base_lr_g, betas=(BETA1, 0.999))
+        opt_prior = torch.optim.Adam(prior.parameters(), lr=base_lr_prior, betas=(BETA1, 0.999))
+        opt_D = torch.optim.Adam(D.parameters(), lr=base_lr_d, betas=(BETA1, 0.999))
+    elif optimizer_name == "oadam":
+        # Same LRs and betas as the Adam arm, so the only thing that changes is
+        # the update rule. OptimisticAdam takes no weight_decay; there is none
+        # to carry over.
+        opt_G = OptimisticAdam(G.parameters(), lr=base_lr_g, betas=(BETA1, 0.999))
+        opt_prior = OptimisticAdam(prior.parameters(), lr=base_lr_prior, betas=(BETA1, 0.999))
+        opt_D = OptimisticAdam(D.parameters(), lr=base_lr_d, betas=(BETA1, 0.999))
+    else:
+        raise ValueError(f"Unknown optimizer: {cfg['optimizer']} (expected 'adam' or 'oadam')")
     base_lrs = {
         id(opt): [g["lr"] for g in opt.param_groups]
         for opt in (opt_G, opt_D, opt_prior)
@@ -473,6 +506,11 @@ def train(cfg: Dict, device: torch.device) -> Dict:
     w1_exact, w2_exact = exact_w1_w2(fake_final, real_final, max_points=4096, seed=seed)
     modes_final, hq_final = mode_coverage(ema_G, ema_prior, device)
 
+    # Per-mode shape audit, on the *same* 100k EMA samples the metrics above
+    # used: coverage says the modes were found, this says whether each blob has
+    # the data's 0.03 spread and sits where it should.
+    audit = per_mode_moments(fake_final, min_count=AUDIT_MIN_COUNT, std=DATA_STD)
+
     w1_hist = [r["sliced_w1"] for r in eval_rows[-W1_WINDOW:]]
     w1_windowed_std = float(np.std(np.asarray(w1_hist, dtype=np.float64))) if w1_hist else float("nan")
     fft_peak, fft_freq = dloss_fft(d_losses)
@@ -504,19 +542,18 @@ def train(cfg: Dict, device: torch.device) -> Dict:
                 gan_loss,
                 vic_reg,
                 # Every-step clone: the map must include the penalty at every
-                # application, not on a lazy schedule.
-                GradRegularizer(
-                    arm=str(cfg["arm"]),
-                    coeff=float(cfg["coeff"]),
-                    kappa=float(cfg["kappa"]),
-                    lazy_k=1,
-                ),
+                # application, not on a lazy schedule. It keeps the run's norm
+                # and anneal, and `penalty_step=total_steps` makes the analysis
+                # see the penalty center actually in force at the point of the
+                # run being analysed (the end of it).
+                GradRegularizer(lazy_k=1, **reg_kwargs),
                 x_real_spec,
                 idx_spec,
                 lrs={"D": base_lr_d, "G": base_lr_g, "prior": base_lr_prior},
                 krylov_dim=24,
                 lambda_ep=LAMBDA_EP,
                 seed=seed,
+                penalty_step=total_steps,
             )
         except Exception as exc:  # noqa: BLE001 - diagnostics must not kill a run
             spectral = {"error": f"{type(exc).__name__}: {exc}"}
@@ -527,6 +564,24 @@ def train(cfg: Dict, device: torch.device) -> Dict:
     save_fake_scatter(
         ema_G, ema_prior, device, str(out_path / "final_scatter.png"),
         real_samples=real_viz,
+    )
+
+    # The exact cloud every "final" number above was computed from, so a
+    # follow-up analysis never has to re-sample (and never has to reproduce the
+    # RNG stream that produced it).
+    np.save(
+        out_path / "final_samples.npy",
+        fake_final.detach().to("cpu", torch.float32).numpy(),
+    )
+    torch.save(
+        {
+            "G": G.state_dict(),
+            "D": D.state_dict(),
+            "prior": prior.state_dict(),
+            "ema_G": ema_G.state_dict(),
+            "ema_prior": ema_prior.state_dict(),
+        },
+        out_path / "ckpt.pt",
     )
 
     summary = {
@@ -541,6 +596,10 @@ def train(cfg: Dict, device: torch.device) -> Dict:
             "hist_kl": float(balance["hist_kl"]),
             "hist_js": float(balance["hist_js"]),
             "nll": float(nll),
+            "per_mode_std": float(audit["per_mode_std"]),
+            "per_mode_std_ratio": float(audit["per_mode_std_ratio"]),
+            "center_bias": float(audit["center_bias"]),
+            "audited_modes": int(audit["audited_modes"]),
         },
         "mid": {
             "step": int(mid_row["step"]),
@@ -564,6 +623,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
     print(
         f"[done] {cfg['arm']} coeff={cfg['coeff']} "
         f"w1_exact {w1_exact:.4f} modes {modes_final}/100 hq {hq_final:.3f} "
+        f"std_ratio {audit['per_mode_std_ratio']:.2f} ({audit['audited_modes']} modes) "
         f"collapse {collapse_state['events']} "
         f"{total_steps / max(wall_clock, 1e-9):.2f} steps/s",
         flush=True,
