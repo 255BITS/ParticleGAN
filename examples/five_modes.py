@@ -6,9 +6,17 @@ import random
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import numpy as np
+import sys
 from collections import deque
-from lib.particle_prior import ParticlePrior
-from lib.vicreg_loss import VICRegLikeLoss
+from pathlib import Path
+
+# Allow `python examples/five_modes.py` from anywhere.
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from lib.particle_prior import ParticlePrior  # noqa: E402 - after the sys.path shim
+from lib.vicreg_loss import VICRegLikeLoss  # noqa: E402
 
 # ==========================================
 # 1. Setup & Data

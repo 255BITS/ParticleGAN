@@ -60,7 +60,9 @@ The main benchmark. 100 Gaussian modes arranged on a 10×10 grid. This is a stre
 python examples/100gaussians.py
 ```
 
-**With particle prior**: All 100 modes are captured.
+**With particle prior**: All 100 modes are captured — 100/100 modes with ~99% of samples within 3σ of a center after 7k steps.
+
+The default recipe is RpGAN (relativistic, logistic) + a one-sided cap gradient penalty on D (`relu(‖∇ₓD‖ − 1)²` on reals and fakes, coeff 1.0), Fourier-feature D, EMA evaluation, Adam β1=0, base LR 6e-4 with a delayed cosine anneal. The cap won a 420-run bake-off against the zero-centered R1/R2 penalty, which is still available with `--reg_arm a_r1r2 --reg_coeff 0.02`. See [FINDINGS.md](FINDINGS.md) for the study and [docs/convergence-tips.md](docs/convergence-tips.md) for the transferable reasoning behind each ingredient.
 
 **Without particle prior** (baseline):
 ```bash
@@ -84,6 +86,7 @@ ParticleGAN/
 ├── lib/
 │   ├── particle_prior.py   # Learnable particle cloud (nn.Module)
 │   ├── gan_loss.py         # Flexible GAN losses (hinge, logistic, Wasserstein, LSGAN)
+│   ├── grad_regularizers.py # D gradient penalties (cap, R1/R2, eikonal, ...)
 │   └── vicreg_loss.py      # Variance-covariance regularization
 ├── examples/
 │   ├── five_modes.py                    # Text generation toy problem
@@ -91,6 +94,8 @@ ParticleGAN/
 │   └── 100gaussians_no_particle_prior.py # Baseline (without particles)
 └── README.md
 ```
+
+The grid-search infrastructure behind the study — config generation, the per-arm trainer, grid runner, and the analysis/leaderboard scripts — lives in `experiments/`, with the generated per-run configs in `configs/`.
 
 ## Key Components
 
@@ -131,8 +136,28 @@ loss = reg(particle_positions)  # Encourages spread + decorrelation
 ## Notes
 
 - The text experiments (`five_modes.py`) use R1 gradient penalty for stability
-- The 100-Gaussian experiments work without gradient penalty
+- The 100-Gaussian experiments use the one-sided cap penalty (`--reg_arm`, default `b_cap`); a gradient penalty is what lets the sharp Fourier discriminator keep full mode coverage
 - Particles use a higher learning rate (10×) than G/D for faster adaptation
+
+## Changelog
+
+Versions track the default recipe of `examples/100gaussians.py`.
+
+### 0.1.2 — 2026-08-22
+
+- Default gradient penalty switched to the one-sided cap (`b_cap`, `relu(‖∇ₓD‖ − 1)²`, coeff 1.0) via `lib/grad_regularizers.py`; base LR 3e-4 → 6e-4; run length 5k → 7k steps.
+- Chosen by a 420-run controlled study ([FINDINGS.md](FINDINGS.md)): same game-damping as R1/R2, sharper modes (hq 0.986 vs a ~0.94 ceiling), honest per-mode core width (0.87), zero collapses. R1/R2 stays available via `--reg_arm a_r1r2`.
+- Adds the `experiments/` study infrastructure and the deterministic video renderer.
+
+### 0.1.1
+
+- R3GAN-style defaults (previously undocumented; commit `b5529cb`): RpGAN logistic objective + zero-centered R1+R2 (γ=0.02) + Fourier-2 features on D + EMA(0.995) on G and prior + Adam β1=0 + delayed cosine LR anneal + z_dim 4.
+- Full coverage with ≥90% hq in ~3.5k steps.
+
+### 0.1.0
+
+- Original example: vanilla/hinge GAN, no gradient regularizer, plain MLP D, z_dim 2, Adam β1=0.5, no EMA, no LR anneal.
+- Never converged on the 100-Gaussians benchmark: ~86–92/100 modes, ~30% hq at 12k steps (baseline row in [docs/convergence-tips.md](docs/convergence-tips.md)).
 
 ## Citation
 

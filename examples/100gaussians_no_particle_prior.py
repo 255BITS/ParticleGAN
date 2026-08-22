@@ -4,6 +4,7 @@
 """
 
 import argparse
+import sys
 from pathlib import Path
 from typing import Tuple
 
@@ -11,9 +12,14 @@ import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
 
-from lib.particle_prior import ParticlePrior
-from lib.gan_loss import GANLoss
-from lib.vicreg_loss import VICRegLikeLoss
+# Allow `python examples/100gaussians_no_particle_prior.py` from anywhere.
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from lib.particle_prior import ParticlePrior  # noqa: E402 - after the sys.path shim
+from lib.gan_loss import GANLoss  # noqa: E402
+from lib.vicreg_loss import VICRegLikeLoss  # noqa: E402
 
 
 # =========================

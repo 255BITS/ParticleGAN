@@ -186,18 +186,27 @@ All measured in this setting; several contradict common defaults:
 
 ## Reference: the winning configuration (this repo)
 
-`examples/100gaussians.py` defaults. Converges (100/100 modes, ≥90% hq) in
-~3.3–3.7k steps across seeds in the early-stopping harness; the shipped
-example trains 5k steps with a delayed cosine anneal for a stable endpoint.
+`examples/100gaussians.py` defaults. A later 420-run study of the penalty's
+*centering* (`FINDINGS.md`) replaced the R1/R2 penalty here with a one-sided
+cap, `relu(‖∇ₓD‖ − 1)²` on reals and fakes at coeff 1.0, and doubled the base
+LR: the cap damps the game just as well (any sample-point penalty does) but
+leaves D usable slope below the cap, which buys sharper modes at an honest
+core width — 100/100 modes and hq 0.986 at 7k steps, core σ ratio 0.866,
+zero collapses over 5 seeds, bar (100 modes & hq ≥ 0.9) crossed by ~5.5k.
+The R1/R2 penalty of the original campaign is still one flag away
+(`--reg_arm a_r1r2 --reg_coeff 0.02`) and remains the choice when you want
+standing curvature at the endpoint (see the provenance caveat in
+`FINDINGS.md`). The shipped example trains 7k steps with a delayed cosine
+anneal for a stable endpoint.
 
 | Ingredient | Value | Why |
 |---|---|---|
 | Objective | RpGAN (relativistic pairing, logistic) | LR headroom, mode balance (§6) |
-| R1 + R2 penalty | γ = 0.02, every step | damps oscillation; enables sharp D (§2, §3) |
+| Gradient penalty | one-sided cap `b_cap`, coeff 1.0, every step | damps oscillation; enables sharp D without flattening it (§2, §3; FINDINGS.md) |
 | D input | Fourier features, K = 2 | resolve σ=0.03 structure from step 1 (§3) |
 | z_dim | 4 (data is 2-D) | transport room (§5) |
 | Optimizers | Adam, β1 = 0 everywhere | sparse particle table (§4) |
-| LRs | G/prior-base 3e-4, prior ×10, D ×1.5 | mild TTUR only (§7) |
+| LRs | G/prior-base 6e-4, prior ×10, D ×1.5 | mild TTUR only (§7) |
 | EMA | 0.995 on G *and* prior, eval-only | sits on the equilibrium (§2) |
 | LR schedule | full LR for 60% of run, cosine to 5% floor | stable endpoint (§2) |
 | Particles | 20,000 for 100 modes | fewer decisively hurts (§7) |

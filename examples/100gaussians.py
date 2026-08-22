@@ -10,16 +10,27 @@ This is deliberately nastier than the 25-Gaussian grid:
   - G: simple MLP mapping z -> x in R^2.
   - D: simple MLP with Fourier input features, x -> scalar score.
   - Loss: R3GAN-style objective — relativistic pairing (RpGAN) logistic loss
-    with R1 + R2 zero-centered gradient penalties.
+    with a one-sided cap gradient penalty on reals + fakes.
 
-Fast-convergence recipe (found via large-scale sweep; all 100 modes covered
-with >=90% of samples within 3 sigma of a center by ~3.5k steps, vs. never
-converging with the old hinge/Adam(0.5) defaults):
+Fast-convergence recipe (found via large-scale sweep, then a 420-run
+regularizer study; all 100 modes covered with >=90% of samples within 3 sigma
+of a center by ~5.5k steps and hq 0.986 at 7k, vs. never converging with the
+old hinge/Adam(0.5) defaults):
   - z_dim 4 (overcomplete latent eases transport; 2 is much worse)
   - Fourier features on D's input so it can resolve the sigma=0.03 modes
     from step 1 (a plain MLP D learns low frequencies first and plateaus)
-  - RpGAN + R1/R2 (gamma=0.02): the penalty caps D's steepness at the
-    samples, which is what stops the sharp Fourier D from stranding modes
+  - RpGAN + one-sided cap penalty (`b_cap`, relu(||grad_x D|| - 1)^2 on
+    reals and fakes, L2 norm, coeff 1.0): like R1/R2 it caps D's steepness
+    at the samples — that is what stops the sharp Fourier D from stranding
+    modes, and per the study *any* sample-point penalty damps the game
+    equally well — but because it is free below the cap it leaves D usable
+    slope, and that buys sharper modes: hq 0.986 with an honest core width
+    (per-mode core sigma ratio 0.866) vs. a ~0.94 hq ceiling for R1/R2 on
+    this benchmark. See FINDINGS.md for the full study, including the
+    provenance caveat that the cap's damping is supplied by the training
+    trajectory rather than standing curvature at the endpoint (R1/R2, still
+    available via `--reg_arm a_r1r2`, is the safer choice in a game that
+    keeps injecting rotation)
   - Adam beta1=0: each particle only gets a real gradient every ~78 steps,
     so momentum drifts the unsampled rows of the particle table
   - EMA (0.995) copies of G and the prior for snapshots/eval: the live
@@ -41,6 +52,7 @@ Visualization:
 import argparse
 import copy
 import math
+import sys
 from pathlib import Path
 from typing import Tuple
 
@@ -48,9 +60,15 @@ import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
 
-from lib.particle_prior import ParticlePrior
-from lib.gan_loss import GANLoss
-from lib.vicreg_loss import VICRegLikeLoss
+# Allow `python examples/100gaussians.py` from anywhere.
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from lib.particle_prior import ParticlePrior  # noqa: E402 - after the sys.path shim
+from lib.gan_loss import GANLoss  # noqa: E402
+from lib.grad_regularizers import GradRegularizer  # noqa: E402
+from lib.vicreg_loss import VICRegLikeLoss  # noqa: E402
 
 # =========================
 #  Simple MLP G / D
@@ -262,16 +280,17 @@ def save_fake_scatter(
 # =========================
 
 def train(
-    epochs: int = 5,
+    epochs: int = 7,
     steps_per_epoch: int = 1000,
     batch_size: int = 256,
     z_dim: int = 4,
     num_particles: int = 20_000,
-    lr: float = 3e-4,
+    lr: float = 6e-4,
     d_lr_mult: float = 1.5,
     beta1: float = 0.0,
     lambda_ep: float = 1.0,
-    r1_gamma: float = 0.02,
+    reg_arm: str = "b_cap",
+    reg_coeff: float = 1.0,
     fourier: int = 2,
     ema_decay: float = 0.995,
     lr_floor: float = 0.05,
@@ -323,6 +342,7 @@ def train(
 
     vic_reg = VICRegLikeLoss()
     gan_loss = GANLoss(loss_type=loss_type, mode=gan_mode)
+    regularizer = GradRegularizer(arm=reg_arm, coeff=reg_coeff)
 
     opt_G = torch.optim.Adam(
         G.parameters(),
@@ -396,28 +416,17 @@ def train(
                 z_fake, _ = prior.sample(batch_size)
                 x_fake = G(z_fake)
 
-            if r1_gamma > 0:
-                x_real = x_real.detach().requires_grad_(True)
-                x_fake = x_fake.detach().requires_grad_(True)
-
             real_logits = D(x_real)
             fake_logits = D(x_fake)
 
             loss_d = gan_loss.d_loss(real_logits, fake_logits)
 
-            if r1_gamma > 0:
-                # R1 + R2 zero-centered gradient penalties (R3GAN). This is
-                # what lets the sharp Fourier D coexist with full mode
-                # coverage: it caps D's steepness at the samples.
-                grad_real = torch.autograd.grad(
-                    real_logits.sum(), x_real, create_graph=True
-                )[0]
-                grad_fake = torch.autograd.grad(
-                    fake_logits.sum(), x_fake, create_graph=True
-                )[0]
-                r1 = grad_real.pow(2).sum(dim=1).mean()
-                r2 = grad_fake.pow(2).sum(dim=1).mean()
-                loss_d = loss_d + (r1_gamma / 2.0) * (r1 + r2)
+            # Gradient penalty at the samples. This is what lets the sharp
+            # Fourier D coexist with full mode coverage: it caps D's
+            # steepness where the data is. The regularizer recomputes its own
+            # graph internally, so neither batch needs requires_grad here.
+            pen, _ = regularizer.penalty(D, x_real, x_fake, global_step)
+            loss_d = loss_d + pen
 
             opt_D.zero_grad()
             loss_d.backward()
@@ -508,16 +517,36 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="100 Gaussians toy problem with ParticlePrior + EP regularizer.",
     )
-    parser.add_argument("--epochs", type=int, default=5)
+    parser.add_argument("--epochs", type=int, default=7)
     parser.add_argument("--steps_per_epoch", type=int, default=1000)
     parser.add_argument("--batch_size", type=int, default=256)
     parser.add_argument("--z_dim", type=int, default=4)
     parser.add_argument("--num_particles", type=int, default=20_000)
-    parser.add_argument("--lr", type=float, default=3e-4)
+    parser.add_argument("--lr", type=float, default=6e-4)
     parser.add_argument("--d_lr_mult", type=float, default=1.5)
     parser.add_argument("--beta1", type=float, default=0.0)
     parser.add_argument("--lambda_ep", type=float, default=1.0)
-    parser.add_argument("--r1_gamma", type=float, default=0.02)
+    parser.add_argument(
+        "--reg_arm",
+        type=str,
+        default="b_cap",
+        choices=list(GradRegularizer.ARMS),
+        help="Discriminator gradient penalty (lib.grad_regularizers). Default "
+        "'b_cap' is the one-sided cap that won the regularizer study; "
+        "'a_r1r2' is the older zero-centered R1+R2 penalty.",
+    )
+    parser.add_argument(
+        "--reg_coeff",
+        type=float,
+        default=1.0,
+        help="Gradient penalty strength (0.02 was the tuned value for a_r1r2).",
+    )
+    parser.add_argument(
+        "--r1_gamma",
+        type=float,
+        default=None,
+        help="Deprecated alias: sets --reg_arm a_r1r2 --reg_coeff <value>.",
+    )
     parser.add_argument("--fourier", type=int, default=2)
     parser.add_argument("--ema_decay", type=float, default=0.995)
     parser.add_argument(
@@ -556,6 +585,16 @@ def main() -> None:
     )
     args = parser.parse_args()
 
+    reg_arm, reg_coeff = args.reg_arm, args.reg_coeff
+    if args.r1_gamma is not None:
+        # r1_gamma <= 0 used to mean "no penalty at all"; keep that meaning.
+        reg_arm = "a_r1r2" if args.r1_gamma > 0 else "f_none"
+        reg_coeff = args.r1_gamma
+        print(
+            f"[deprecated] --r1_gamma {args.r1_gamma} -> "
+            f"--reg_arm {reg_arm} --reg_coeff {reg_coeff}"
+        )
+
     train(
         epochs=args.epochs,
         steps_per_epoch=args.steps_per_epoch,
@@ -566,7 +605,8 @@ def main() -> None:
         d_lr_mult=args.d_lr_mult,
         beta1=args.beta1,
         lambda_ep=args.lambda_ep,
-        r1_gamma=args.r1_gamma,
+        reg_arm=reg_arm,
+        reg_coeff=reg_coeff,
         fourier=args.fourier,
         ema_decay=args.ema_decay,
         lr_floor=args.lr_floor,
