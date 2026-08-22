@@ -46,7 +46,7 @@ import math
 import sys
 import time
 from pathlib import Path
-from typing import Dict, Optional, Tuple
+from typing import Callable, Dict, Optional, Tuple
 
 import numpy as np
 import torch
@@ -261,8 +261,29 @@ def dloss_fft(d_losses, window: int = FFT_WINDOW) -> Tuple[float, float]:
 #  Training
 # =========================
 
-def train(cfg: Dict, device: torch.device) -> Dict:
-    """Run one arm end to end; writes metrics.jsonl, summary.json, final_scatter.png."""
+def train(
+    cfg: Dict,
+    device: torch.device,
+    frame_callback: Optional[Callable[[int, nn.Module, ParticlePrior], None]] = None,
+    frame_interval: int = 1,
+) -> Dict:
+    """
+    Run one arm end to end; writes metrics.jsonl, summary.json, final_scatter.png.
+
+    `frame_callback` is an *observer* hook for tooling that wants to watch the
+    EMA read-out evolve (experiments/make_video.py). It is a plain function
+    argument, not a config key, so no config's trajectory depends on it. When it
+    is None nothing below runs and the trajectory is byte-identical to the
+    pre-hook script.
+
+    It is called as `frame_callback(step, ema_G, ema_prior)` at step 0, at every
+    step that is a multiple of `frame_interval`, and at the final step. Because
+    plotting code (in particular `lib.toy_models.mode_coverage`) draws on the
+    *default* RNG -- the same stream the training loop's `prior.sample()` draws
+    from -- the global CPU and CUDA RNG states are snapshotted before the call
+    and restored after it. A callback therefore cannot shift the trajectory no
+    matter how much randomness it consumes.
+    """
     seed = int(cfg["seed"])
     total_steps = int(cfg["total_steps"])
     eval_interval = int(cfg["eval_interval"])
@@ -450,11 +471,28 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         return row
 
     # -------------------------
+    #  Frame hook (RNG-neutral)
+    # -------------------------
+    def emit_frame(step: int) -> None:
+        """Hand the EMA read-out to `frame_callback` without disturbing the RNG."""
+        if frame_callback is None:
+            return
+        cpu_state = torch.get_rng_state()
+        cuda_states = torch.cuda.get_rng_state_all() if device.type == "cuda" else None
+        try:
+            frame_callback(step, ema_G, ema_prior)
+        finally:
+            torch.set_rng_state(cpu_state)
+            if cuda_states is not None:
+                torch.cuda.set_rng_state_all(cuda_states)
+
+    # -------------------------
     #  Loop
     # -------------------------
     d_losses = []
     t0 = time.time()
     run_eval(0, float("nan"), float("nan"), 0.0)
+    emit_frame(0)
 
     last_d = last_g = float("nan")
     last_pen = 0.0
@@ -544,6 +582,11 @@ def train(cfg: Dict, device: torch.device) -> Dict:
                 f"|gr| {row['med_nr']:.3f} |gf| {row['med_nf']:.3f}",
                 flush=True,
             )
+
+        if frame_callback is not None and (
+            step_done % max(1, int(frame_interval)) == 0 or step_done == total_steps
+        ):
+            emit_frame(step_done)
 
     wall_clock = time.time() - t0
 
