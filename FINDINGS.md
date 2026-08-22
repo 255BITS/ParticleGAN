@@ -1,80 +1,104 @@
-# Eikonal vs. zero-centered gradient penalties in RpGAN — findings
+# Gradient-penalty centering in RpGAN — findings (round 2, incl. crossover & audit)
 
-**Benchmark:** `examples/100gaussians.py` recipe (RpGAN-logistic, ParticlePrior, Fourier-2 D,
-EMA eval, Adam β1=0, delayed cosine anneal), 7 000 steps. **Grid:** arms A–F × coeff
-{0.005, 0.02, 0.1, 1.0} × 5 seeds, plus A@0.3, LR-sensitivity (×0.5/×2) and lazy-vs-every-step
-stages — 185 runs, 0 failures, 0 collapse events in any penalized arm. Quality = exact W1/W2
-(POT `emd2`, 4 096 pts; finite-sample floor for this mixture: **W1 ≈ 0.14**) plus sliced-W1
-(100 k pts / 512 proj), mode recall, hist-KL/JS, NLL; sharpness = the repo's `hq` (fraction
-within 3σ of a center). Spectral radius of the local game Jacobian via float64 Arnoldi on
-finite-difference JVPs of the alternating GD update map (Adam state excluded by design; the
-FD smoothing bias is identical across arms). Full numbers: `results/TABLE.md`,
-`results/bootstrap.md`, plots in `results/plots/`.
+**Benchmark:** `examples/100gaussians.py` recipe (RpGAN, ParticlePrior, Fourier-2 D, EMA eval,
+Adam β1=0, delayed cosine anneal), 7 000 steps, 5 seeds per cell. **351 runs total, 0 failures**:
+main grid (arms A–F × coeff {0.005…1.0}), A@0.3 control, LR ×{0.5,2}, lazy-vs-every-step,
+per-mode variance audit (60 deterministic reruns — all 48 checked reproduce the original
+summaries bit-identically), κ-anneal, dual-norm (L1/L∞) caps, OptimisticAdam, and a
+Wasserstein-objective crossover. Exact W1/W2 via POT (n=4096; sampling floor W1 ≈ 0.14);
+sharpness = `hq` (mass within 3σ of a center) + per-mode σ ratio (audited); stability = Arnoldi
+spectral radius of the alternating-GD game Jacobian (comparative only; Adam/OAdam state
+excluded). Tables: `results/TABLE.md`, `results/bootstrap.md`, `results/LEADERBOARD.md`.
 
-## Verdicts
+## The organizing result: compatibility vs. curvature
 
-**H1 (quality) — FALSIFIED on transport metrics, CONFIRMED on sharpness.** On final exact W1
-every eikonal (arm, coeff) loses to R1/R2 at γ=1.0 with bootstrap CI95 excluding zero
-(A@1.0: **0.183 ± 0.022**, recall 1.000, best NLL; best eikonal: B@1.0 0.368 ± 0.028). But
-A@1.0 is *blurry* — hq 0.598, never passes the repo bar (100 modes + hq ≥ 0.9). The two
-families sit on different ends of a W1-vs-sharpness frontier that neither can cross: sweeping
-A's γ over {0.005 … 1.0} its sharpness peaks at hq 0.943 (γ=0.1) and the A@0.3 control
-confirms the frontier is smooth (W1 0.229, hq 0.868), while the slope-preserving arms reach
-hq 0.962–0.986 (study best: B@1.0 at 2×LR — W1 0.290, **hq 0.986**, recall 0.998) — a
-sharpness regime no tested γ of A reaches. Zero-centering buys transport accuracy by blurring;
-slope-saturation buys sharpness at a ~2× W1 cost.
+Two independent properties of a gradient penalty, previously conflated, separate cleanly here:
 
-**H2 (mechanism) — CONFIRMED, textbook.** Mid-training median ‖∇D‖ at samples: 0.045/0.078
-(real/fake) under A@1.0 vs 1.04/1.20 under C@0.1 (`plots/gradnorm_evolution.png`). Bonus
-consistent with theory: after step ~5 000 (near distribution match) C's norms sag below 1 —
-the data term overpowers the eikonal target exactly when the ideal critic wants to flatten.
+- **Curvature (whether you converge) is center-agnostic.** Unregularized game: spectral radius
+  1.055 ± 0.052, rotational content |Im λ| ≈ 0.037, 47/100 modes. *Any* sample-point penalty,
+  any centering: radius ≤ 1.002, |Im λ| ≤ 0.0015, zero collapses in all 285 penalized logistic
+  runs. This is Mescheder et al.'s Lemma 3.3 algebra made empirical — the damping comes from
+  the penalty's PSD curvature block, not the center (their own footnote notes WGAN-GP/DRAGAN
+  are not zero-centered). New measurement on top of the known theory: centering *modulates*
+  the damping — zero-centering suppresses rotation ~4× harder at matched coeff (|Im λ|
+  2.8e-4 vs 1.25e-3 at 0.1) via the cross-term curvature that survives at a flat critic.
+- **Compatibility (where you can converge) is loss-family-relative.** The logistic-RpGAN
+  optimal critic is density-ratio-shaped: flat at distribution match. A center-at-1 penalty
+  forbids that, and the pathology Mescheder proved divergent on the Dirac-GAN shows up here in
+  its soft, finite-training form: a **residual W1 floor** (~0.18–0.25 sliced vs 0.08 for
+  R1/R2@γ=1.0; coeff-1.0 panel of `plots/w1_curves.png`), masked by anneal+EMA, with the
+  mid-training ‖∇D‖≈1 target visibly sagging after step ~5 000 as the data term fights the
+  constraint (`plots/gradnorm_evolution.png`). Under the logistic objective every strict-eikonal
+  cell loses W1 to tuned R1/R2 with bootstrap CI excluding 0.
 
-**H3 (stability) — zero-centering is NOT load-bearing for damping.** Unregularized game:
-dominant modulus 1.055 ± 0.052 (max 1.151), rotational content |Im λ| ≈ 0.037, 47/100 modes.
-*Every* penalty arm, any centering, any coeff ≥ 0.02: modulus ≤ 1.002, |Im λ| ≤ 0.0015, zero
-collapses across all 175 penalized runs. Damping comes from penalizing the gradient-norm
-*curvature* at the samples, not from the zero center (zero-centering does damp rotation ~4×
-harder at matched coeff: |Im| 2.8e-4 vs 1.25e-3 at 0.1 — a gradient, not a cliff). The
-predicted eikonal failure mode ("no stationary point with p_g = p_data and ‖∇D‖ = 1") is real
-but shows up as a **residual W1 floor** (~0.18–0.25 sliced vs 0.08 for A@1.0, coeff-1.0 panel
-of `plots/w1_curves.png`), not as oscillation or divergence — the LR anneal + EMA read-out
-absorb the residual drift.
+**The crossover is the kill test, and it convicts the mismatch, not the geometry.** Rerunning
+the grid under `loss_type: wasserstein` (IPM — where the unit-slope critic is the *correct*
+optimum): every centering variant now **matches** zero-centering on W1 (all CI95 include 0;
+A@1.0 0.154, B@1.0 0.164, C@0.1 0.177, E@1.0 0.199), the one-centered arms take the better
+hq/σ cells (E@1.0 hq 0.978, B@0.1 σ-ratio 1.49 — the best distributional fidelity in the whole
+study, near the 0.14 W1 sampling floor), and no-penalty WGAN detonates (collapse rate 0.8,
+spectral radius ~1e9). Same penalties, same coefficients: a 2× W1 penalty under f-div, a wash
+under IPM. **Centering must match the loss family's optimal critic: margin device for f-div
+losses, transport device for IPM losses.**
 
-**H4 (speed / LR headroom) — PARTIALLY CONFIRMED.** At base LR the eikonal arms reach the
-repo convergence bar fastest of the whole study: C@0.1 3 840 ± 242 and B@1.0 3 860 ± 233 steps
-vs 4 500 ± 200 for the best bar-reaching baseline A@0.1 (bootstrap CI95 of the difference
-[−940, −400], significant). At 2× LR eikonal arms don't collapse and their *endpoints improve*
-to the study's best (B/D hq 0.986), whereas A stays on its own frontier — but everyone crosses
-the bar *later* at 2×LR (wider orbit until the anneal engages), so "higher LR tolerance" holds
-and "fewer steps at higher LR" does not. The directive's steps-to-2×-best-A-W1 metric is
-degenerate here: no eikonal arm ever reaches it (see H1).
+## Hypothesis verdicts (updated)
 
-**Pitfall checks.** Lazy-every-16 with 16× rescale ≡ every-step at the same coeff
-(C@0.1: 0.446 vs 0.452) — centering does *not* interact with lazy application; only the
-time-averaged weight matters (every-step at λ/16 is simply weaker and worse, 1.013).
-Arm E (interpolates) ≈ arm C (data points) at matched coeff (0.465 vs 0.452 at 0.1) —
-evaluation location is a second-order effect here; centering is the live variable.
+- **H1** — falsified as stated for f-div RpGAN (transport metrics, CI-backed), with the
+  sharpness half now audit-hardened: the per-mode variance audit found **no variance collapse
+  anywhere** (σ ratios 2.1–5.4, all over-dispersed, center bias ≤ 0.08 = 2.7σ); B's hq 0.986
+  is genuine concentration, so the W1-vs-sharpness frontier dissociation stands as the novel
+  empirical content.
+- **H2** — confirmed (0.045 vs 1.04 med ‖∇D‖ at mid-training), plus the late-training sag.
+- **H3** — the interesting inversion: zero-centering is *not* load-bearing for damping
+  (curvature is center-agnostic), but it *is* load-bearing for the equilibrium class under
+  f-div losses (compatibility). Neither half of the original directive's framing survives intact.
+- **H4** — partial: at base LR the cap arms are fastest to the repo bar (B@1.0 3 860 ± 233 vs
+  A@0.1 4 500 ± 200; CI95 of the difference [−900, −380]); at 2× LR they don't collapse and
+  their endpoints improve to study-best, but bar-crossing happens later (wider orbit until the
+  anneal), so LR *tolerance* holds, LR *speed* does not.
 
-## Bottom line
+## Round-2 arms
 
-The directive's premise imports Kantorovich duality into a non-Wasserstein objective, and the
-data falsify its strong form: re-centering the penalty at 1 does not improve distributional
-distance — it strictly loses W1/W2/NLL to a well-tuned zero-centered penalty, because the
-eikonal constraint is incompatible with the flat-critic equilibrium and leaves a residual
-transport floor. What survives, and is worth keeping: (1) the damping that stabilizes RpGAN
-comes from *any* gradient penalty at the samples, not from zero-centering — H3's negative
-prediction failed; (2) the one-sided cap (B, ‖∇D‖ ≤ 1, penalty-free for a flat critic — so it
-keeps the correct equilibrium while still bounding steepness) is the best variant tested:
-sharpest samples in the study, mild LR-robustness gains, and ~15 % faster to this repo's
-convergence bar. If your quality metric rewards sharpness (this repo's does), cap the critic's
-slope instead of zeroing it; if it rewards transport (FID-like), keep R1/R2 and crank γ higher
-than you think (γ=1.0 here, 50× the tuned default).
+- **Dual-norm caps (arXiv:1910.06922 replication):** the L1-gradient cap (L∞ margin — their
+  best CIFAR cell) replicates directionally here: `b_cap` L1@1.0 beats L2 at both LRs on hq
+  and σ ratio (hq 0.992, σ 2.14 at 2×LR — study-best fidelity numbers) and is within noise of
+  the L2 champion on W1. Our B-beats-C result is an independent replication of their
+  inequality-vs-equality finding in a new objective family.
+- **κ-anneal (target 1→0):** prediction half-wrong. Annealing the center slides B *along* the
+  frontier toward A (linear: W1 0.368→0.345, hq 0.967→0.929) instead of capturing both ends;
+  delayed ≈ no-op. The margin pressure that buys sharpness leaves with the constraint.
+- **OptimisticAdam** (correct preconditioned-step variant, vendored from
+  ParticleGAN-WorldModel): no help. On top of penalties it's neutral-to-harmful (b_cap: same
+  W1, hq −0.03, σ ratio 2.9→5.3); alone it does *not* rescue the unregularized game (radius
+  1.036 vs 1.055, 64/100 modes) — this game's instability isn't the pure rotation optimism
+  cancels, and the penalties already remove what rotation there is.
+
+## Leaderboard (promotion track — see `results/LEADERBOARD.md`)
+
+**CHAMPION: `b_cap` L2, coeff 1.0, 2×LR** (W1 0.290, hq 0.986, recall 0.998, bar 5/5,
+audit-clean). Runner-up within noise: the L1-norm variant (hq 0.992, best σ ratio).
+Off-board note for a bigger decision: the WGAN-objective cells dominate the global fidelity
+frontier (B@1.0: W1 0.164 *and* hq 0.951 *and* σ 1.74) — promoting a penalty inside the
+logistic recipe is the conservative move; switching the toy benchmark's objective to
+Wasserstein+cap is the aggressive one and needs its own bake-off (different objective, not
+ranked on the boards).
+
+## Caveats (unchanged ones flagged before, plus scope)
+
+The "crank γ" observation applies to the **symmetric R1+R2** tested here — R3GAN's ablations
+show R1-alone diverging even at γ=100; γ remains the frontier dial, not an escape (γ=1.0 fails
+the repo bar at hq 0.60). ~30 CI cells invite multiplicity inflation; the headline claims rest
+on the largest, replicated effects. Spectral radii are comparative (GD map, no optimizer
+state). All of this is one 2-D toy with small MLPs — scale smoke test required before any
+external writeup. Repo-bar speed claims embed the bar's own hq threshold (circularity noted;
+the W1 and σ audits are the independent checks).
 
 ## Reproduce
 
-`lib/grad_regularizers.py` (arms; unit/FD tests in `tests/test_regularizers.py`),
-`lib/game_jacobian.py` (spectral), `experiments/train_arm.py` (single run),
-`experiments/gen_configs.py` + `configs/` (185 YAMLs), `experiments/run_grid.py` (parallel
-runner, resume-safe), `experiments/analyze.py` (tables/bootstrap/plots). Every figure and
-table regenerates from `results/runs/*/{summary.json,metrics.jsonl}` via
-`.venv/bin/python experiments/analyze.py`.
+Arms/norm/anneal: `lib/grad_regularizers.py` (FD-gradchecked incl. L1/L∞ in
+`tests/test_regularizers.py`); optimizer: `lib/oadam.py` (vendored verbatim — do not replace
+with third-party copies); trainer `experiments/train_arm.py` (writes `final_samples.npy` +
+`ckpt.pt` per run now); stages via `experiments/gen_configs.py --stage
+{main,lr_sens,lazy,audit,anneal,wgan,dualnorm,oadam}`; `experiments/run_grid.py` (resume-safe);
+`experiments/analyze.py` regenerates every table/plot; `experiments/leaderboard.py` the boards.
+Raw runs in `results/runs*/` (gitignored, on disk).

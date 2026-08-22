@@ -1,5 +1,6 @@
 .venv/
 results/runs/
+results/runs_audit/
 __pycache__/
 *.pyc
 100gaussians_samples/
