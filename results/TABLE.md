@@ -1,6 +1,6 @@
 # Regularizer study -- aggregate results
 
-290 runs loaded from disk. Skipped: 0 without summary.json, 0 with unreadable/incomplete summary.json, 0 with unparseable run names, 0 loaded but missing/empty metrics.jsonl (final-only; their convergence-speed entries are censored).
+355 runs loaded from disk. Skipped: 0 without summary.json, 0 with unreadable/incomplete summary.json, 0 with unparseable run names, 0 loaded but missing/empty metrics.jsonl (final-only; their convergence-speed entries are censored).
 
 
 ## Main grid (lr_mult 1.0, every-step penalty)
@@ -112,11 +112,37 @@
 | b_cap | 1 | 5 | 0.3665 ± 0.0322 | 0.6818 ± 0.0419 | 0.986 ± 0.008 | 100.0 | 0.935 | 5.298 ± 0.868 | 79.553 ± 26.206 | 0.00 (0.00) | >7000 ± 0 (5 censored) | 1.001 ± 0.000 (max 1.001) | 0.0007 | 346.569 | 0.779 / 0.986 | 127 |
 | f_none | 0 | 5 | 1.7428 ± 0.6166 | 2.1663 ± 0.6862 | 0.474 ± 0.272 | 63.6 | 0.881 | 7.280 ± 1.956 | 240.315 ± 153.948 | 0.00 (0.00) | >7000 ± 0 (5 censored) | 1.036 ± 0.020 (max 1.057) | 0.0003 | 1880.860 | 27.954 / 72.772 | 86 |
 
+## Penalty curriculum (curriculum b_cap->a_r1r2): b_cap for the first 60% of the run, then a hard switch -- switches to a_r1r2 @ coeff 0.1
+
+| arm | coeff | n | final W1 (exact) | W2 (exact) | mode recall | modes | hq | per-mode σ ratio | NLL | collapse rate (mean ev) | steps→thresh | dom. modulus (max) | W1 win-std | dloss FFT pk | med_nr / med_nf @mid | wall (s) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| b2a | 1 | 5 | 0.3592 ± 0.0269 | 0.6425 ± 0.0245 | 0.984 ± 0.005 | 100.0 | 0.929 | 3.085 ± 0.398 | 24.212 ± 5.923 | 0.00 (0.00) | >7000 ± 0 (5 censored) | 1.000 ± 0.000 (max 1.000) | 0.0002 | 2.157 | 0.675 / 0.822 | 116 |
+
+## Penalty curriculum (curriculum b_cap->a_r1r2): b_cap for the first 60% of the run, then a hard switch -- switches to a_r1r2 @ coeff 0.1, lr_mult = 2.0
+
+| arm | coeff | n | final W1 (exact) | W2 (exact) | mode recall | modes | hq | per-mode σ ratio | NLL | collapse rate (mean ev) | steps→thresh | dom. modulus (max) | W1 win-std | dloss FFT pk | med_nr / med_nf @mid | wall (s) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| b2a | 1 | 5 | 0.2835 ± 0.0267 | 0.5612 ± 0.0239 | 0.998 ± 0.004 | 100.0 | 0.938 | 3.024 ± 0.366 | 18.174 ± 3.653 | 0.00 (0.00) | >7000 ± 0 (5 censored) | 1.001 ± 0.000 (max 1.001) | 0.0001 | 1.610 | 0.807 / 0.953 | 115 |
+
+## Penalty curriculum (curriculum b_cap->a_r1r2): b_cap for the first 60% of the run, then a hard switch -- switches to a_r1r2 @ coeff 1.0
+
+| arm | coeff | n | final W1 (exact) | W2 (exact) | mode recall | modes | hq | per-mode σ ratio | NLL | collapse rate (mean ev) | steps→thresh | dom. modulus (max) | W1 win-std | dloss FFT pk | med_nr / med_nf @mid | wall (s) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| b2a | 1 | 5 | 0.3473 ± 0.0270 | 0.5886 ± 0.0358 | 0.992 ± 0.007 | 100.0 | 0.653 | 4.542 ± 0.474 | 32.320 ± 6.267 | 0.00 (0.00) | >7000 ± 0 (5 censored) | 1.000 ± 0.000 (max 1.000) | 0.0011 | 2.050 | 0.675 / 0.822 | 109 |
+
+## Penalty curriculum (curriculum b_cap->a_r1r2): b_cap for the first 60% of the run, then a hard switch -- switches to a_r1r2 @ coeff 1.0, lr_mult = 2.0
+
+| arm | coeff | n | final W1 (exact) | W2 (exact) | mode recall | modes | hq | per-mode σ ratio | NLL | collapse rate (mean ev) | steps→thresh | dom. modulus (max) | W1 win-std | dloss FFT pk | med_nr / med_nf @mid | wall (s) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| b2a | 1 | 5 | 0.2460 ± 0.0241 | 0.4669 ± 0.0295 | 1.000 ± 0.000 | 100.0 | 0.643 | 4.261 ± 0.359 | 23.555 ± 4.787 | 0.00 (0.00) | >7000 ± 0 (5 censored) | 1.001 ± 0.000 (max 1.001) | 0.0011 | 1.397 | 0.807 / 0.953 | 114 |
+
 ## Wasserstein objective (`loss_type: wasserstein`) -- NOT comparable with the logistic-objective sections; never pooled or ranked against them
 
 | arm | coeff | n | final W1 (exact) | W2 (exact) | mode recall | modes | hq | per-mode σ ratio | NLL | collapse rate (mean ev) | steps→thresh | dom. modulus (max) | W1 win-std | dloss FFT pk | med_nr / med_nf @mid | wall (s) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | a_r1r2 | 1 | 5 | 0.1540 ± 0.0181 | 0.3600 ± 0.0285 | 1.000 ± 0.000 | 100.0 | 0.876 | 2.374 ± 0.083 | 7.164 ± 0.866 | 0.00 (0.00) | >4740 ± 1734 (1 censored) | 1.000 ± 0.000 (max 1.001) | 0.0004 | 11.613 | 0.092 / 0.185 | 100 |
+| b_cap | 0.3 | 5 | 0.1589 ± 0.0130 | 0.3731 ± 0.0230 | 1.000 ± 0.000 | 100.0 | 0.955 | 1.569 ± 0.116 | 4.393 ± 0.530 | 0.00 (0.00) | >5100 ± 1610 (2 censored) | 1.005 ± 0.002 (max 1.009) | 0.0006 | 1896.135 | 0.813 / 1.240 | 102 |
+| b_cap | 3 | 5 | 0.1614 ± 0.0156 | 0.3778 ± 0.0225 | 0.998 ± 0.004 | 100.0 | 0.940 | 1.790 ± 0.195 | 6.073 ± 1.325 | 0.00 (0.00) | >5720 ± 1647 (3 censored) | 1.003 ± 0.002 (max 1.006) | 0.0004 | 320.833 | 0.630 / 0.735 | 109 |
 | a_r1r2 | 0.1 | 5 | 0.1653 ± 0.0197 | 0.3723 ± 0.0306 | 1.000 ± 0.000 | 100.0 | 0.898 | 2.163 ± 0.225 | 6.663 ± 1.398 | 0.00 (0.00) | >5180 ± 1526 (2 censored) | 1.004 ± 0.002 (max 1.008) | 0.0030 | 1752.371 | 0.785 / 1.577 | 106 |
 | b_cap | 0.1 | 5 | 0.1643 ± 0.0163 | 0.3779 ± 0.0265 | 0.998 ± 0.004 | 100.0 | 0.944 | 1.493 ± 0.165 | 4.116 ± 0.900 | 0.00 (0.00) | >6000 ± 1226 (3 censored) | 1.008 ± 0.003 (max 1.012) | 0.0004 | 3697.260 | 1.231 / 1.660 | 101 |
 | b_cap | 1 | 5 | 0.1635 ± 0.0092 | 0.3817 ± 0.0169 | 0.998 ± 0.004 | 100.0 | 0.951 | 1.735 ± 0.242 | 5.625 ± 1.760 | 0.00 (0.00) | >5780 ± 1550 (3 censored) | 1.003 ± 0.001 (max 1.004) | 0.0004 | 620.629 | 0.690 / 0.860 | 101 |
@@ -125,6 +151,28 @@
 | e_interp | 1 | 5 | 0.1991 ± 0.0407 | 0.4419 ± 0.0521 | 0.994 ± 0.008 | 100.0 | 0.978 | 1.682 ± 0.334 | 9.427 ± 2.239 | 0.00 (0.00) | >6500 ± 1000 (4 censored) | 1.002 ± 0.001 (max 1.003) | 0.0008 | 734.222 | 1.088 / 1.099 | 83 |
 | e_interp | 0.1 | 5 | 0.1925 ± 0.0122 | 0.4156 ± 0.0163 | 0.994 ± 0.008 | 100.0 | 0.895 | 3.158 ± 0.477 | 16.797 ± 5.316 | 0.00 (0.00) | >6880 ± 240 (4 censored) | 1.005 ± 0.001 (max 1.007) | 0.0006 | 9079.772 | 3.816 / 3.155 | 83 |
 | f_none | 0 | 5 | 2.7324 ± 1.2829 | 3.1065 ± 1.2606 | 0.380 ± 0.266 | 38.6 | 0.247 | 11.389 ± 3.091 | 522.763 ± 416.018 | 0.80 (1.20) | >7000 ± 0 (5 censored) | 919138629.586 ± 1637958732.894 (max 4182557961.527) | 0.1597 | 3051845600050454528.000 | 1462537.828 / 4686944.877 | 56 |
+
+## Wasserstein objective (`loss_type: wasserstein`) -- lr_mult = 2.0 -- NOT comparable with the logistic-objective sections; never pooled or ranked against them
+
+| arm | coeff | n | final W1 (exact) | W2 (exact) | mode recall | modes | hq | per-mode σ ratio | NLL | collapse rate (mean ev) | steps→thresh | dom. modulus (max) | W1 win-std | dloss FFT pk | med_nr / med_nf @mid | wall (s) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| b_cap | 1 | 5 | 0.1668 ± 0.0153 | 0.3936 ± 0.0235 | 1.000 ± 0.000 | 100.0 | 0.967 | 1.564 ± 0.184 | 4.745 ± 1.540 | 0.00 (0.00) | >5780 ± 1550 (3 censored) | 1.004 ± 0.003 (max 1.010) | 0.0005 | 1119.856 | 0.834 / 1.063 | 106 |
+| a_r1r2 | 1 | 5 | 0.1653 ± 0.0173 | 0.3845 ± 0.0238 | 1.000 ± 0.000 | 100.0 | 0.871 | 2.541 ± 0.258 | 9.546 ± 2.451 | 0.00 (0.00) | >5420 ± 1942 (3 censored) | 1.001 ± 0.000 (max 1.001) | 0.0006 | 6.672 | 0.097 / 0.200 | 98 |
+| b_cap | 3 | 5 | 0.1683 ± 0.0176 | 0.3976 ± 0.0248 | 1.000 ± 0.000 | 100.0 | 0.975 | 1.453 ± 0.141 | 3.734 ± 0.996 | 0.00 (0.00) | >5460 ± 1497 (2 censored) | 1.009 ± 0.006 (max 1.020) | 0.0005 | 844.745 | 0.804 / 0.998 | 117 |
+| b_cap | 0.3 | 5 | 0.1691 ± 0.0180 | 0.3920 ± 0.0284 | 1.000 ± 0.000 | 100.0 | 0.949 | 1.671 ± 0.171 | 4.741 ± 0.907 | 0.00 (0.00) | >5720 ± 1647 (3 censored) | 1.005 ± 0.002 (max 1.007) | 0.0027 | 2185.002 | 1.039 / 1.399 | 101 |
+| a_r1r2 | 0.1 | 5 | 0.1702 ± 0.0123 | 0.3915 ± 0.0255 | 0.996 ± 0.005 | 100.0 | 0.924 | 1.966 ± 0.292 | 5.867 ± 1.461 | 0.00 (0.00) | >4940 ± 1226 (1 censored) | 1.004 ± 0.003 (max 1.009) | 0.0029 | 1170.314 | 0.898 / 2.082 | 99 |
+
+## Wasserstein objective (`loss_type: wasserstein`) -- penalty norm = l1 -- NOT comparable with the logistic-objective sections; never pooled or ranked against them
+
+| arm | coeff | n | final W1 (exact) | W2 (exact) | mode recall | modes | hq | per-mode σ ratio | NLL | collapse rate (mean ev) | steps→thresh | dom. modulus (max) | W1 win-std | dloss FFT pk | med_nr / med_nf @mid | wall (s) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| b_cap | 1 | 5 | 0.1696 ± 0.0211 | 0.3923 ± 0.0325 | 1.000 ± 0.000 | 100.0 | 0.958 | 1.684 ± 0.185 | 5.905 ± 2.138 | 0.00 (0.00) | >6040 ± 1191 (3 censored) | 1.003 ± 0.001 (max 1.004) | 0.0002 | 389.886 | 0.507 / 0.639 | 115 |
+
+## Wasserstein objective (`loss_type: wasserstein`) -- penalty norm = l1, lr_mult = 2.0 -- NOT comparable with the logistic-objective sections; never pooled or ranked against them
+
+| arm | coeff | n | final W1 (exact) | W2 (exact) | mode recall | modes | hq | per-mode σ ratio | NLL | collapse rate (mean ev) | steps→thresh | dom. modulus (max) | W1 win-std | dloss FFT pk | med_nr / med_nf @mid | wall (s) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| b_cap | 1 | 5 | 0.1718 ± 0.0155 | 0.3994 ± 0.0259 | 1.000 ± 0.000 | 100.0 | 0.973 | 1.519 ± 0.081 | 3.768 ± 0.693 | 0.00 (0.00) | >5080 ± 1003 (1 censored) | 1.004 ± 0.002 (max 1.006) | 0.0006 | 916.734 | 0.651 / 0.906 | 112 |
 
 ## Footnotes
 
@@ -143,4 +191,6 @@
 7. `per-mode σ ratio` is `final.per_mode_std_ratio`: the per-mode spread of the generated samples divided by the spread of the corresponding real mode. Values below 1 mean the generator is producing tighter-than-real clusters -- which flatters W1 and hq without actually matching the target. The cell is **blank** for groups whose summaries predate the metric; it is not a failed measurement, the field simply did not exist yet.
 
 8. Sections are per (objective, variant) combination. Wasserstein (`wgan_*`) runs optimize a different objective, so they get their own sections and are never pooled with, ranked against, or bootstrapped against the logistic-objective groups.
+
+9. `b2a` rows are the **penalty curriculum** (curriculum b_cap->a_r1r2): a hard switch from b_cap at the `coeff` shown to a_r1r2 at the coefficient in the section heading, at 60% of the run. The `arm` column reads `b2a` because no single arm describes the run. These are logistic-objective runs, so unlike the Wasserstein sections they *are* commensurable with the rest of the study.
 

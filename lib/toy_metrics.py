@@ -334,3 +334,106 @@ def per_mode_moments(
         "center_bias": center_bias,
         "audited_modes": audited,
     }
+
+
+# The far-tail cut, as a multiple of the data's within-mode sigma. 10 sigma_true
+# is 0.30 in absolute coordinates: a third of the way to the neighbouring mode,
+# so far outside its own blob that no Gaussian tail reaches it (1e-22 of the
+# mass), yet still short of the Voronoi boundary at 0.5.
+TAIL_SIGMAS = 10.0
+
+# median ||x - mu|| / sigma for a 2-D isotropic Gaussian: sqrt(2 ln 2) = 1.17741.
+RAYLEIGH_MEDIAN_FACTOR = math.sqrt(2.0 * math.log(2.0))
+
+
+def per_mode_core_ratio(
+    x: torch.Tensor,
+    min_count: int = 50,
+    std: float = 0.03,
+    grid_scale: float = 1.0,
+    center: str = "median",
+) -> Dict[str, float]:
+    """
+    Within-mode *core* width, measured so the far tail cannot inflate it.
+
+    `per_mode_moments` reports a second moment about each mode's sample mean.
+    On these models that is not a width: a small population stranded whole grid
+    cells away dominates the variance *and* drags the mean the variance is taken
+    about, so a blob whose core is tighter than the data's can still report a
+    std ratio of 5 (see results/metric_recon.md, which established this and from
+    which this estimator is taken verbatim). Two changes make the estimate read
+    the core instead:
+
+      * **center** -- the coordinate-wise *median* of the mode's samples, not
+        their mean. A 3% tail at distance 2.5 moves the mean by 2.5 sigma_true
+        and every distance measured from it; it moves the median by nothing.
+      * **spread** -- the *median* radial distance, inverted through the 2-D
+        isotropic Gaussian relation median ||x - mu|| = sigma * sqrt(2 ln 2).
+        Everything past the median is ignored by construction, so the estimate
+        depends only on the half of the mass nearest the center.
+
+    On a genuine Gaussian this and `per_mode_std` agree, so their ratio reads
+    directly as a tail-inflation factor. `tail_frac_10sigma` is the mass that
+    buys that inflation: the fraction of *all* samples whose nearest-center
+    distance exceeds 10 * `std`.
+
+    Modes are assigned and filtered exactly as in `per_mode_moments`: nearest
+    center, and only modes holding at least `min_count` samples contribute.
+
+    Args:
+        x: (N, 2) samples; a numpy array is accepted too.
+        min_count: qualifying threshold per mode, as in `per_mode_moments`.
+        std: the data's true within-mode sigma, the ratio's denominator.
+        grid_scale: spacing between neighbouring mode centers.
+        center: which center to measure the radial distances from --
+            "median" (the default and the robust choice), "mean" (the audit's
+            center, kept so the contamination can be quantified), or "true"
+            (the grid center, which is what `mode_coverage`'s `hq` measures
+            from).
+
+    Returns:
+        {
+          'per_mode_core_std':   mean per-mode core sigma over qualifying modes,
+          'per_mode_core_ratio': that sigma divided by the true `std`
+                                 (1.0 is correct; < 1 is a compressed core,
+                                 which the raw std ratio can hide entirely),
+          'tail_frac_10sigma':   fraction of samples further than 10 * `std`
+                                 from their nearest center,
+        }
+        The two core floats are nan when no mode qualifies.
+    """
+    if center not in ("median", "mean", "true"):
+        raise ValueError(f"center must be median/mean/true, got {center!r}")
+
+    with torch.no_grad():
+        xf = torch.as_tensor(x).detach().to(torch.float64)
+        centers = _grid_centers(xf.device, torch.float64, grid_scale)
+        k = centers.shape[0]
+
+        d = torch.cdist(xf, centers)  # (N, 100)
+        nearest = d.argmin(dim=1)
+        dist = d.gather(1, nearest.unsqueeze(1)).squeeze(1)
+        counts = torch.bincount(nearest, minlength=k)
+
+        tail_frac = float(
+            (dist > TAIL_SIGMAS * float(std)).to(torch.float64).mean()
+        )
+
+        sigmas: list = []
+        for m in torch.nonzero(counts >= int(min_count), as_tuple=False).flatten():
+            pts = xf[nearest == m]
+            if center == "median":
+                ctr = pts.quantile(0.5, dim=0)
+            elif center == "mean":
+                ctr = pts.mean(dim=0)
+            else:
+                ctr = centers[m]
+            r = (pts - ctr).norm(dim=1)
+            sigmas.append(float(r.quantile(0.5)) / RAYLEIGH_MEDIAN_FACTOR)
+
+    core_std = float(np.mean(sigmas)) if sigmas else float("nan")
+    return {
+        "per_mode_core_std": core_std,
+        "per_mode_core_ratio": core_std / float(std),
+        "tail_frac_10sigma": tail_frac,
+    }

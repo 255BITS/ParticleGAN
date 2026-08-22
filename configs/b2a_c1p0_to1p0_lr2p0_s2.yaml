@@ -1,0 +1,15 @@
+arm: b_cap
+coeff: 1.0
+kappa: 1.0
+lazy_k: 1
+seed: 2
+total_steps: 7000
+eval_interval: 100
+lr: 0.0003
+d_lr_mult: 1.5
+lr_mult: 2.0
+spectral: true
+curriculum_arm2: a_r1r2
+curriculum_coeff2: 1.0
+curriculum_switch_frac: 0.6
+out_dir: results/runs/b2a_c1p0_to1p0_lr2p0_s2

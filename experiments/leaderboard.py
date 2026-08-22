@@ -32,12 +32,28 @@ Boards:
      W1 numbers are not commensurable with the logistic runs and it is never
      promotable.
 
+Penalty-curriculum runs (``b2a_c1p0_to0p1_s*``) train under b_cap and then
+hard-switch to a_r1r2 at 60% of the run. They are logistic-objective runs, so
+they compete on both promotion boards on exactly the same terms as any other
+logistic group -- the only difference is that their ``arm`` cell reads ``b2a``,
+because two arms trained the model and neither one alone names it.
+
 The variance-compression guard exists because the sharp board's own metrics
 can be gamed: a generator that emits tight, under-dispersed blobs at every
 mode centre scores excellent W1 and hq while not actually matching the target's
-per-mode spread. ``per_mode_std_ratio`` (generated spread / real spread) below
-0.8 flags exactly that failure, and a flagged row is barred from CHAMPION even
-if it ranks first. Groups whose summaries predate the metric are unflagged --
+per-mode spread. A spread ratio (generated / real) below 0.8 flags exactly that
+failure, and a flagged row is barred from CHAMPION even if it ranks first.
+
+**Which spread ratio.** Not ``per_mode_std_ratio``: results/metric_recon.md
+showed that number is a second moment about a mean the far tail has itself
+dragged, so a few per cent of the mass stranded whole grid cells away inflates
+it several-fold -- ``c_eikonal_c0p1`` reports 4.80 while its cores sit at 0.55
+of the true width, i.e. exactly the compression this guard exists to catch,
+invisible to it. The guard therefore reads ``per_mode_core_ratio``
+(lib.toy_metrics), the median-centered core width, recomputed here from each
+seed's saved ``final_samples.npy``. The raw ratio keeps its column for
+context, and the far-tail mass that separates the two is reported next to it.
+Groups with no saved samples in either tree are unmeasured and so unflagged --
 absence of evidence, not evidence of absence -- and the board says so.
 
 Usage:
@@ -49,19 +65,42 @@ Usage:
 
 import argparse
 import math
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
-try:  # pragma: no cover - import-path shim for direct execution
-    from analyze import DEFAULT_OBJECTIVE, Run, agg, fmt, group_runs, load_runs
-except ImportError:  # pragma: no cover
-    import sys
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
+from lib.toy_metrics import TAIL_SIGMAS, per_mode_core_ratio  # noqa: E402
+
+try:  # pragma: no cover - import-path shim for direct execution
+    from analyze import (
+        CURRICULUM_STEM,
+        CURRICULUM_TITLE,
+        DEFAULT_OBJECTIVE,
+        Run,
+        agg,
+        fmt,
+        group_runs,
+        load_runs,
+    )
+except ImportError:  # pragma: no cover
     sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from analyze import DEFAULT_OBJECTIVE, Run, agg, fmt, group_runs, load_runs
+    from analyze import (
+        CURRICULUM_STEM,
+        CURRICULUM_TITLE,
+        DEFAULT_OBJECTIVE,
+        Run,
+        agg,
+        fmt,
+        group_runs,
+        load_runs,
+    )
 
 # --- the repo bar ----------------------------------------------------------
 BAR_MODES = 100.0
@@ -76,7 +115,7 @@ VARIANCE_COMPRESSED_BELOW = 0.8
 HEADER_NOTE = (
     "Champion = promotion candidate for the repo's default recipe. Sharp board "
     "requires: all seeds pass the repo bar (100 modes & hq>=0.9), mean hq>=0.95, "
-    "zero collapses. If per_mode_std_ratio < 0.8, the row is flagged "
+    "zero collapses. If the **core** σ ratio < 0.8, the row is flagged "
     "'variance-compressed' and cannot hold CHAMPION."
 )
 
@@ -134,6 +173,13 @@ class GroupStat:
     bar_steps_mean: float
     bar_reached: int
     bar_pass: float
+    # Core-width columns, recomputed from the seeds' saved sample clouds. Left
+    # at "unmeasured" for groups with no final_samples.npy in either tree.
+    core_mean: float = float("nan")
+    core_std: float = float("nan")
+    core_n: int = 0
+    core_source: str = ""  # "" | "runs" | "audit" | "runs+audit"
+    tail_mean: float = float("nan")
 
     @property
     def coeff(self) -> str:
@@ -141,11 +187,17 @@ class GroupStat:
 
     @property
     def variance_compressed(self) -> bool:
-        """True only when the metric exists *and* falls below the guard."""
+        """
+        True only when the core width exists *and* falls below the guard.
+
+        Read from `core_mean`, never from `pmsr_mean`: the raw second moment is
+        tail-inflated (see the module docstring), so a compressed core routinely
+        hides behind a raw ratio of 4-5.
+        """
         return bool(
-            self.pmsr_n
-            and math.isfinite(self.pmsr_mean)
-            and self.pmsr_mean < VARIANCE_COMPRESSED_BELOW
+            self.core_n
+            and math.isfinite(self.core_mean)
+            and self.core_mean < VARIANCE_COMPRESSED_BELOW
         )
 
     def sharp_eligible(self) -> bool:
@@ -210,15 +262,67 @@ def reduce_group(runs: Sequence[Run]) -> GroupStat:
     )
 
 
+def samples_path(
+    name: str, runs_dir: Path, audit_dir: Optional[Path]
+) -> Tuple[Optional[Path], str]:
+    """
+    Where this run's saved 100k sample cloud lives: its own directory first,
+    the audit re-run second (training is deterministic, so the audit tree's
+    cloud is the same model's), or nowhere.
+    """
+    own = runs_dir / name / "final_samples.npy"
+    if own.is_file():
+        return own, "runs"
+    if audit_dir is not None:
+        alt = audit_dir / name / "final_samples.npy"
+        if alt.is_file():
+            return alt, "audit"
+    return None, ""
+
+
+def annotate_core(
+    stat: GroupStat, runs: Sequence[Run], runs_dir: Path, audit_dir: Optional[Path]
+) -> int:
+    """
+    Fill a group's core-width and far-tail columns from its seeds' sample
+    clouds. Returns how many seeds contributed (0 leaves the columns blank).
+
+    This is the only column recomputed from raw samples rather than read out of
+    ``summary.json``: the core estimator postdates most of these runs, and it is
+    the quantity the promotion guard depends on, so re-deriving it is cheaper
+    and far less error-prone than retraining.
+    """
+    ratios: List[Optional[float]] = []
+    tails: List[Optional[float]] = []
+    sources: List[str] = []
+    for run in runs:
+        path, source = samples_path(run.name, runs_dir, audit_dir)
+        if path is None:
+            continue
+        core = per_mode_core_ratio(np.load(path))
+        ratios.append(core["per_mode_core_ratio"])
+        tails.append(core["tail_frac_10sigma"])
+        sources.append(source)
+    if not ratios:
+        return 0
+
+    stat.core_mean, stat.core_std, stat.core_n = agg(ratios)
+    stat.tail_mean, _, _ = agg(tails)
+    stat.core_source = "+".join(sorted(set(sources)))
+    return len(ratios)
+
+
 def collect_stats(
     runs_dir: Path, audit_dir: Optional[Path]
 ) -> Tuple[List[GroupStat], Dict[str, int]]:
     """
-    Build the group table from the main tree, then annotate it from the audit
-    tree with ``per_mode_std_ratio`` only.
+    Build the group table from the main tree, annotate it from the audit tree
+    with ``per_mode_std_ratio``, and recompute the core width from whichever
+    tree holds each seed's sample cloud.
     """
     runs, skips = load_runs(runs_dir)
-    stats = {key: reduce_group(rs) for key, rs in group_runs(runs).items()}
+    grouped = group_runs(runs)
+    stats = {key: reduce_group(rs) for key, rs in grouped.items()}
 
     info = {
         "runs": len(runs),
@@ -226,8 +330,15 @@ def collect_stats(
         "audit_runs": 0,
         "audit_annotated": 0,
         "audit_orphans": 0,
+        "core_seeds": 0,
+        "core_groups": 0,
     }
     info.update({f"skip_{k}": v for k, v in skips.items()})
+
+    for key, rs in grouped.items():
+        n = annotate_core(stats[key], rs, runs_dir, audit_dir)
+        info["core_seeds"] += n
+        info["core_groups"] += 1 if n else 0
 
     if audit_dir is None or not audit_dir.is_dir():
         return list(stats.values()), info
@@ -257,9 +368,10 @@ def collect_stats(
 
 BOARD_HEADER = (
     "| # | group | arm | coeff | n | W1 (exact) | hq | mode recall | "
-    "per-mode σ ratio | collapse | steps→bar (n reached) | bar pass | notes |"
+    "per-mode σ ratio (raw) | **core σ ratio** | tail > 10σ | collapse | "
+    "steps→bar (n reached) | bar pass | notes |"
 )
-BOARD_SEP = "|" + "---|" * 13
+BOARD_SEP = "|" + "---|" * 15
 
 
 def _rank(stats: Sequence[GroupStat]) -> List[GroupStat]:
@@ -279,6 +391,26 @@ def _pmsr_cell(s: GroupStat) -> str:
     if s.pmsr_source == "audit":
         cell += " ᴬ"
     return cell
+
+
+def _core_cell(s: GroupStat) -> str:
+    """The guarded column: blank when no seed of the group has a sample cloud."""
+    if not s.core_n:
+        return ""
+    cell = f"**{fmt(s.core_mean, 3)}**"
+    if math.isfinite(s.core_std):
+        cell += f" ± {fmt(s.core_std, 3)}"
+    if s.core_n != s.n_seeds:
+        cell += f" ({s.core_n}/{s.n_seeds})"
+    if "audit" in s.core_source:
+        cell += " ᴬ"
+    return cell
+
+
+def _tail_cell(s: GroupStat) -> str:
+    if not s.core_n or not math.isfinite(s.tail_mean):
+        return ""
+    return fmt(s.tail_mean, 4)
 
 
 def board_rows(
@@ -304,6 +436,8 @@ def board_rows(
                     fmt(s.hq_mean, 3),
                     fmt(s.recall_mean, 3),
                     _pmsr_cell(s),
+                    _core_cell(s),
+                    _tail_cell(s),
                     fmt(s.collapse_rate, 2),
                     f"{fmt(s.bar_steps_mean, 0)} ({s.bar_reached}/{s.n_seeds})",
                     fmt(s.bar_pass, 2),
@@ -336,6 +470,7 @@ def champion_line(champion: Optional[GroupStat]) -> str:
         f"[leaderboard] CHAMPION: {champion.label} "
         f"(W1 {fmt(champion.w1_mean, 4)}, hq {fmt(champion.hq_mean, 3)}, "
         f"recall {fmt(champion.recall_mean, 3)}, "
+        f"core σ ratio {fmt(champion.core_mean, 3) if champion.core_n else 'n/a'}, "
         f"bar {champion.bar_reached}/{champion.n_seeds} "
         f"@ mean {fmt(champion.bar_steps_mean, 0)} steps)"
     )
@@ -366,6 +501,14 @@ def render(stats: Sequence[GroupStat], info: Dict[str, int]) -> Tuple[str, Optio
             "counterpart and were ignored"
             if info["audit_orphans"]
             else ""
+        )
+        + (
+            f"; the core σ ratio was recomputed from {info['core_seeds']} saved "
+            f"sample cloud(s) covering {info['core_groups']}/{info['groups']} "
+            "group(s)"
+            if info.get("core_seeds")
+            else "; no saved sample clouds were found, so the core σ ratio is "
+            "blank everywhere and nothing is flagged"
         )
         + ".\n"
     )
@@ -413,24 +556,50 @@ def render(stats: Sequence[GroupStat], info: Dict[str, int]) -> Tuple[str, Optio
         "bound on speed. **bar pass** is the fraction of seeds that did reach it.\n"
     )
     lines.append(
-        "2. **per-mode σ ratio** is `final.per_mode_std_ratio` -- generated "
-        "per-mode spread over the real per-mode spread. Blank means the metric "
-        "predates the group's summaries, which is *not* treated as a failure: an "
-        "unmeasured group is never flagged. Cells marked ᴬ come from the "
+        "2. **per-mode σ ratio (raw)** is `final.per_mode_std_ratio` -- the "
+        "second moment about each mode's sample mean, over the real per-mode "
+        "spread. It is shown for context only and **nothing is judged on it**: "
+        "`results/metric_recon.md` showed it is inflated several-fold by a far "
+        "tail that also drags the mean it is taken about. Blank means the metric "
+        "predates the group's summaries. Cells marked ᴬ come from the "
         "deterministic re-run in the audit tree; every other column on that row "
         "still comes from the original run.\n"
     )
     lines.append(
-        "3. A row flagged **variance-compressed** (`per_mode_std_ratio` < "
+        "3. **core σ ratio** is `lib.toy_metrics.per_mode_core_ratio`: the "
+        "median radial distance about each mode's coordinate-wise *median*, "
+        "inverted through `median = σ·sqrt(2 ln 2)` and divided by the data's "
+        "0.03. It ignores everything past the median, so no tail can reach it, "
+        "and it is what `hq` actually reflects. It is recomputed here from each "
+        "seed's saved `final_samples.npy` (the run's own directory first, then "
+        "the audit tree), so it is blank for groups that predate the trainer "
+        "saving that file -- an unmeasured group is never flagged. "
+        f"**tail > 10σ** is the share of samples further than {TAIL_SIGMAS:.0f}× "
+        "the true σ (0.30) from their nearest mode centre: the mass that buys "
+        "the gap between the two ratio columns.\n"
+    )
+    lines.append(
+        "4. A row flagged **variance-compressed** (core σ ratio < "
         f"{VARIANCE_COMPRESSED_BELOW}) keeps its rank but cannot hold CHAMPION: "
         "tight, under-dispersed clusters flatter W1 and hq precisely by failing "
         "to reproduce the target's spread, so the title passes to the next "
         "unflagged row.\n"
     )
     lines.append(
-        "4. `collapse` is the fraction of seeds with `collapse_events > 0`. Both "
+        "5. `collapse` is the fraction of seeds with `collapse_events > 0`. Both "
         "promotion boards require it to be exactly 0.\n"
     )
+    curriculum = [s for s in stats if s.arm == CURRICULUM_STEM]
+    if curriculum:
+        lines.append(
+            f"6. Rows whose arm reads `{CURRICULUM_STEM}` are the **penalty "
+            f"curriculum** ({CURRICULUM_TITLE}): they train under b_cap at the "
+            "coeff shown and hard-switch to a_r1r2 at 60% of the run, so no "
+            "single arm names them. They optimize the same logistic objective "
+            "as every other row here and are eligible for both boards, and for "
+            f"CHAMPION, on identical terms ({len(curriculum)} such group(s) on "
+            "disk).\n"
+        )
 
     return "\n".join(lines) + "\n", champion
 

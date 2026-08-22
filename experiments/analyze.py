@@ -59,14 +59,26 @@ BOOTSTRAP_SEED = 20250821
 #   b_cap_c1p0_annlin_s2    /   c_eikonal_c0p1_anndel_s2
 #   b_cap_c1p0_nl1_s1       /   b_cap_c1p0_nlinf_lr2p0_s5
 #   a_r1r2_c1p0_oadam_s4
-#   wgan_b_cap_c1p0_s3
+#   wgan_b_cap_c1p0_s3      /   wgan_b_cap_c1p0_nl1_lr2p0_s4
+#   b2a_c1p0_to0p1_s2       /   b2a_c1p0_to1p0_lr2p0_s5
 #
 # An optional ``wgan_`` prefix marks the objective; zero or more variant
 # tokens may follow the coefficient (``_nlinf_lr2p0`` is a real combination).
-VARIANT_TOKEN = r"lr[0-9p]+|lazy16|c16th|ann(?:lin|del)|n(?:linf|l1)|oadam"
+#
+# The arm slot takes either a regular ``{letter}_{name}`` arm or the
+# curriculum stem ``b2a`` -- a run that trains under b_cap and then hard-
+# switches to a_r1r2 partway through, so it has no single arm to name. Its
+# ``_to{coeff2}`` token carries the arm it switches *to*, at the coefficient it
+# switches to; the ``_c{coeff}`` before it is the primary (b_cap) coefficient,
+# exactly as for every other run.
+CURRICULUM_STEM = "b2a"
+CURRICULUM_TITLE = "curriculum b_cap->a_r1r2"
+VARIANT_TOKEN = (
+    r"lr[0-9p]+|lazy16|c16th|ann(?:lin|del)|n(?:linf|l1)|oadam|to[0-9p]+"
+)
 RUN_NAME_RE = re.compile(
     r"^(?P<objective>wgan)?_?"
-    r"(?P<arm>[a-f]_[a-z0-9]+)"
+    r"(?P<arm>[a-f]_[a-z0-9]+|" + CURRICULUM_STEM + r")"
     r"_c(?P<coeff>[0-9p]+)"
     r"(?P<variants>(?:_(?:" + VARIANT_TOKEN + r"))*)"
     r"_s(?P<seed>\d+)$"
@@ -212,6 +224,13 @@ def parse_run_name(name: str) -> Optional[Dict]:
     share a group key -- and therefore never be pooled or ranked -- with a
     logistic-objective group, since they optimize different objectives and
     their W1 numbers are not comparable.
+
+    Curriculum runs (``b2a_c1p0_to0p1_lr2p0_s3``) parse with ``arm='b2a'``:
+    they train under two arms in sequence, so no single arm name is truthful.
+    The objective is the default (logistic), which is deliberate -- a
+    curriculum group is a normal logistic group and is pooled, ranked and
+    promoted like any other. Only the ``_to{coeff2}`` variant token separates
+    it from a plain b_cap run, which is what earns it its own section.
     """
     m = RUN_NAME_RE.match(name)
     if not m:
@@ -389,7 +408,10 @@ TOKEN_LABELS = {
     "oadam": "optimizer = oadam (optimistic Adam)",
 }
 
-# Family rank -> section order in TABLE.md. Everything unknown sorts last.
+# Family rank -> section order in TABLE.md. Everything unknown sorts last, and
+# ``wgan`` stays immediately before it: the Wasserstein sections are the ones
+# that must never be mistaken for a logistic comparison, so they sit at the
+# bottom, after every logistic family including the curriculum.
 _FAMILY_RANK = [
     ("main", 0),
     ("lazy16", 1),
@@ -398,17 +420,22 @@ _FAMILY_RANK = [
     ("ann", 4),
     ("n", 5),
     ("oadam", 6),
-    ("wgan", 7),
+    ("to", 7),
+    ("wgan", 8),
 ]
+
+# Variant-head prefixes matched by ``startswith`` rather than equality, because
+# the token carries a value (lr2p0, anndel, nl1, to0p1).
+_FAMILY_PREFIXES = ("lr", "ann", "n", "to")
 
 
 def variant_rank(variant: str) -> int:
     """Section/sort rank for a variant string (wgan always sorts last)."""
     head = variant.split("_")[0]
     for prefix, rank in _FAMILY_RANK:
-        if head == prefix or (prefix in ("lr", "ann", "n") and head.startswith(prefix)):
+        if head == prefix or (prefix in _FAMILY_PREFIXES and head.startswith(prefix)):
             return rank
-    return 8
+    return 9
 
 
 def token_label(token: str) -> str:
@@ -416,6 +443,8 @@ def token_label(token: str) -> str:
         return TOKEN_LABELS[token]
     if token.startswith("lr"):
         return f"lr_mult = {token[2:].replace('p', '.')}"
+    if token.startswith("to"):
+        return f"switches to a_r1r2 @ coeff {token[2:].replace('p', '.')}"
     return token
 
 
@@ -426,6 +455,16 @@ def variant_title(variant: str) -> str:
     tokens = variant.split("_")
     if len(tokens) == 1 and tokens[0].startswith("lr"):
         return f"LR sensitivity: lr_mult = {tokens[0][2:].replace('p', '.')}"
+    if tokens[0].startswith("to"):
+        # The curriculum family. Logistic objective throughout, so unlike the
+        # wgan sections these rows *are* comparable with the rest of the study
+        # -- the heading says which arm the run ends on, since the `arm` column
+        # can only name the one it starts on.
+        body = ", ".join(token_label(t) for t in tokens)
+        return (
+            f"Penalty curriculum ({CURRICULUM_TITLE}): b_cap for the first 60% "
+            f"of the run, then a hard switch -- {body}"
+        )
     is_wgan = tokens[0] == WGAN_OBJECTIVE
     rest = tokens[1:] if is_wgan else tokens
     body = ", ".join(token_label(t) for t in rest)
@@ -808,6 +847,14 @@ def write_table(
         "(`wgan_*`) runs optimize a different objective, so they get their own "
         "sections and are never pooled with, ranked against, or bootstrapped "
         "against the logistic-objective groups.\n"
+    )
+    lines.append(
+        f"9. `{CURRICULUM_STEM}` rows are the **penalty curriculum** "
+        f"({CURRICULUM_TITLE}): a hard switch from b_cap at the `coeff` shown "
+        "to a_r1r2 at the coefficient in the section heading, at 60% of the "
+        "run. The `arm` column reads `b2a` because no single arm describes the "
+        "run. These are logistic-objective runs, so unlike the Wasserstein "
+        "sections they *are* commensurable with the rest of the study.\n"
     )
 
     with open(out_dir / "TABLE.md", "w") as f:

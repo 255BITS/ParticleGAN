@@ -34,6 +34,16 @@ YAML files for the stages of the study:
                    these are never pooled with the logistic runs.
   * ``dualnorm``-- ``norm`` in {l1, linf} for b_cap, at lr_mult 1.0 and 2.0.
   * ``oadam``   -- ``optimizer: oadam`` (optimistic Adam) for a few groups.
+  * ``bakeoff`` -- the promotion bake-off *under the Wasserstein objective*:
+                   a_r1r2 and b_cap (l2 and l1) across their live coefficient
+                   ranges, each at lr_mult 1.0 and 2.0, 5 seeds (60 cells).
+                   The 15 cells the ``wgan`` stage already ran are regenerated
+                   with byte-identical names, so ``run_grid.py``'s resume logic
+                   skips them and only the ~45 new cells are trained.
+  * ``curriculum``-- the preregistered penalty-curriculum experiment: b_cap @
+                   1.0 for the first 60% of the run, then a *hard* switch to
+                   a_r1r2 at coeff2 in {0.1, 1.0}, at lr_mult 1.0 and 2.0,
+                   5 seeds (20 cells). Logistic objective throughout.
 
 Run names (and therefore config filenames and out_dirs) follow
 
@@ -61,6 +71,8 @@ Usage:
     python experiments/gen_configs.py --stage wgan
     python experiments/gen_configs.py --stage dualnorm
     python experiments/gen_configs.py --stage oadam
+    python experiments/gen_configs.py --stage bakeoff
+    python experiments/gen_configs.py --stage curriculum
 
 Writing is idempotent: existing config files are silently overwritten.
 """
@@ -89,7 +101,15 @@ NEW_KEY_DEFAULTS = {
     "optimizer": "adam",
     "norm": "l2",
     "target_anneal": "none",
+    "curriculum_arm2": "none",
+    "curriculum_coeff2": 0.0,
 }
+
+# ``curriculum_switch_frac`` is deliberately *not* in NEW_KEY_DEFAULTS: the
+# curriculum stage is a preregistered experiment and its switch point belongs
+# on the face of every one of its YAMLs, even though 0.6 happens to be the
+# trainer's default. No other stage passes the key, so no pre-existing config
+# gains it.
 
 # --- audit stage -----------------------------------------------------------
 # (arm, coeff, lr_mult) of the groups worth re-running under the new per-mode
@@ -129,6 +149,32 @@ OADAM_ARM_COEFFS: List[Tuple[str, float]] = [
     ("a_r1r2", 1.0),
     ("b_cap", 1.0),
 ]
+
+# --- bakeoff stage ---------------------------------------------------------
+# The two arms still in contention, under the Wasserstein objective, over the
+# coefficient range each of them is live in, plus b_cap's l1 dual-norm form.
+# (arm, coeff, norm); every cell is crossed with BAKEOFF_LR_MULTS x SEEDS.
+BAKEOFF_CELLS: List[Tuple[str, float, str]] = [
+    ("a_r1r2", 0.1, "l2"),
+    ("a_r1r2", 1.0, "l2"),
+    ("b_cap", 0.3, "l2"),
+    ("b_cap", 1.0, "l2"),
+    ("b_cap", 3.0, "l2"),
+    ("b_cap", 1.0, "l1"),
+]
+BAKEOFF_LR_MULTS = [1.0, 2.0]
+
+# --- curriculum stage ------------------------------------------------------
+# Primary arm for the first CURRICULUM_SWITCH_FRAC of the run, then a hard
+# switch to CURRICULUM_ARM2 at each coefficient in CURRICULUM_COEFFS2.
+CURRICULUM_PRIMARY: Tuple[str, float] = ("b_cap", 1.0)
+CURRICULUM_ARM2 = "a_r1r2"
+CURRICULUM_COEFFS2 = [0.1, 1.0]
+CURRICULUM_SWITCH_FRAC = 0.6
+CURRICULUM_LR_MULTS = [1.0, 2.0]
+# Run-name stem. 'b2a' reads as b_cap -> a_r1r2 and is what analyze.py keys on
+# to give the family its own TABLE.md section.
+CURRICULUM_STEM = "b2a"
 
 # Shared defaults; every stage overrides only what it needs to.
 BASE_CONFIG = {
@@ -418,6 +464,80 @@ def stage_oadam(config_dir: Path) -> List[Path]:
     return written
 
 
+def stage_bakeoff(config_dir: Path) -> List[Path]:
+    """
+    The promotion bake-off under the Wasserstein objective.
+
+    Every cell is ``loss_type: wasserstein``, 7000 steps, spectral on, seeds
+    1..5, and the names extend the existing convention *exactly*:
+
+        wgan_{arm}_c{coeff}[_nl1][_lr2p0]_s{seed}
+
+    -- the same ``_n{norm}``-then-``_lr{mult}`` token order the ``dualnorm``
+    stage uses, with each token omitted at its default (l2, lr_mult 1.0). That
+    is load-bearing: the 15 cells the ``wgan`` stage already completed
+    (``wgan_a_r1r2_c0p1_s*``, ``wgan_a_r1r2_c1p0_s*``, ``wgan_b_cap_c1p0_s*``)
+    regenerate to byte-identical directory names, so ``run_grid.py`` sees a
+    valid summary.json in their out_dirs and skips them instead of retraining.
+    """
+    written: List[Path] = []
+    extra_base = {"loss_type": "wasserstein"}
+    for arm, coeff, norm in BAKEOFF_CELLS:
+        norm_suffix = "" if norm == "l2" else f"_n{norm}"
+        for lr_mult in BAKEOFF_LR_MULTS:
+            lr_suffix = "" if lr_mult == 1.0 else f"_lr{fmt_float(lr_mult)}"
+            for seed in SEEDS:
+                run_name = (
+                    f"wgan_{arm}_c{fmt_float(coeff)}{norm_suffix}{lr_suffix}_s{seed}"
+                )
+                cfg = make_config(
+                    arm,
+                    coeff,
+                    seed,
+                    run_name,
+                    lr_mult=lr_mult,
+                    extra={**extra_base, "norm": norm},
+                )
+                written.append(write_config(cfg, run_name, config_dir))
+    return written
+
+
+def stage_curriculum(config_dir: Path) -> List[Path]:
+    """
+    The preregistered penalty curriculum: b_cap for the first 60% of the run,
+    then a hard switch to a_r1r2.
+
+    Names are ``b2a_c{primary coeff}_to{coeff2}[_lr2p0]_s{seed}``. The primary
+    coefficient sits where every other stage puts it (right after the arm
+    stem), so the ``_to...`` token reads as one more variant on top of it and
+    the family groups cleanly in the analysis.
+    """
+    arm, coeff = CURRICULUM_PRIMARY
+    written: List[Path] = []
+    for coeff2 in CURRICULUM_COEFFS2:
+        for lr_mult in CURRICULUM_LR_MULTS:
+            lr_suffix = "" if lr_mult == 1.0 else f"_lr{fmt_float(lr_mult)}"
+            for seed in SEEDS:
+                run_name = (
+                    f"{CURRICULUM_STEM}_c{fmt_float(coeff)}"
+                    f"_to{fmt_float(coeff2)}{lr_suffix}_s{seed}"
+                )
+                cfg = make_config(
+                    arm,
+                    coeff,
+                    seed,
+                    run_name,
+                    lr_mult=lr_mult,
+                    extra={
+                        "curriculum_arm2": CURRICULUM_ARM2,
+                        "curriculum_coeff2": coeff2,
+                        "curriculum_switch_frac": CURRICULUM_SWITCH_FRAC,
+                    },
+                )
+                written.append(write_config(cfg, run_name, config_dir))
+    return written
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Generate YAML configs for the regularizer study."
@@ -435,6 +555,8 @@ def main() -> None:
             "wgan",
             "dualnorm",
             "oadam",
+            "bakeoff",
+            "curriculum",
         ],
         help="Which block of configs to generate.",
     )
@@ -472,6 +594,8 @@ def main() -> None:
         "wgan": lambda: stage_wgan(config_dir),
         "dualnorm": lambda: stage_dualnorm(config_dir),
         "oadam": lambda: stage_oadam(config_dir),
+        "bakeoff": lambda: stage_bakeoff(config_dir),
+        "curriculum": lambda: stage_curriculum(config_dir),
     }
 
     if args.stage in fixed_stages:

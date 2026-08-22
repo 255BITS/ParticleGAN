@@ -27,6 +27,12 @@ On top of the example it adds the instrumentation an arm comparison needs:
     (lib.game_jacobian), which is the theory-side prediction of whether the
     dynamics contract or orbit.
 
+It also supports a *penalty curriculum*: `curriculum_arm2` swaps the penalty
+outright for a second arm at `curriculum_switch_frac` of the run -- a hard
+switch, not a blend, so the run trains under one penalty and then the other.
+It is off by default (`curriculum_arm2: none`), and a config that does not set
+it trains exactly the trajectory it always did.
+
 Usage:
 
     python experiments/train_arm.py --config configs/c_eikonal.yaml
@@ -74,6 +80,7 @@ from lib.toy_metrics import (
     mixture_nll,
     mode_recall_and_hists,
     per_mode_moments,
+    per_mode_core_ratio,
 )
 
 
@@ -100,6 +107,12 @@ DEFAULTS: Dict = {
     "optimizer": "adam",       # 'adam' or 'oadam' (lib.oadam.OptimisticAdam)
     "norm": "l2",              # gradient norm the penalty sees: l2 / l1 / linf
     "target_anneal": "none",   # penalty-center schedule: none / linear / delayed
+    # Penalty curriculum: a *hard* switch from the primary arm above to a second
+    # arm partway through the run. 'none' disables it, which is what every
+    # pre-existing config gets, so their trajectories are untouched.
+    "curriculum_arm2": "none",     # second arm, or 'none' for no curriculum
+    "curriculum_coeff2": 0.0,      # its coefficient
+    "curriculum_switch_frac": 0.6, # switch at this fraction of total_steps
 }
 
 # Held fixed across every arm: the winning recipe from docs/convergence-tips.md.
@@ -306,6 +319,50 @@ def train(cfg: Dict, device: torch.device) -> Dict:
     )
     regularizer = GradRegularizer(lazy_k=int(cfg["lazy_k"]), **reg_kwargs)
 
+    # -------------------------
+    #  Penalty curriculum
+    # -------------------------
+    # A hard switch, not a blend: the primary arm runs with its own settings
+    # (norm, anneal, coeff) up to `switch_at`, and from that step on it is
+    # replaced outright by a second regularizer. The second arm deliberately
+    # takes no anneal and the plain l2 norm -- it is the *destination* of the
+    # curriculum, so it should be the arm in its canonical form rather than
+    # inheriting the primary's dual-norm or annealing experiment. It does share
+    # the run's `lazy_k` and `kappa`, which describe the run rather than the
+    # arm.
+    #
+    # With curriculum_arm2 == 'none' (the default) nothing below constructs,
+    # nothing consumes RNG, and `active_regularizer` is the primary at every
+    # step, so an existing config trains bit-for-bit the trajectory it always
+    # did.
+    curriculum_arm2 = str(cfg["curriculum_arm2"])
+    reg2_kwargs: Optional[Dict] = None
+    regularizer2: Optional[GradRegularizer] = None
+    switch_at = float("inf")
+    if curriculum_arm2 != "none":
+        reg2_kwargs = dict(
+            arm=curriculum_arm2,
+            coeff=float(cfg["curriculum_coeff2"]),
+            kappa=float(cfg["kappa"]),
+            norm="l2",
+            target_anneal="none",
+            total_steps=0,
+        )
+        regularizer2 = GradRegularizer(lazy_k=int(cfg["lazy_k"]), **reg2_kwargs)
+        switch_at = float(cfg["curriculum_switch_frac"]) * total_steps
+        print(
+            f"[curriculum] {cfg['arm']} @ {cfg['coeff']} -> {curriculum_arm2} @ "
+            f"{cfg['curriculum_coeff2']} at step >= {switch_at:.0f} "
+            f"({cfg['curriculum_switch_frac']} of {total_steps})",
+            flush=True,
+        )
+
+    def active_regularizer(step: int) -> GradRegularizer:
+        """The regularizer in force at `step` (see the curriculum block above)."""
+        if regularizer2 is not None and step >= switch_at:
+            return regularizer2
+        return regularizer
+
     base_lr_g = float(cfg["lr"]) * lr_mult
     base_lr_prior = base_lr_g * 10.0
     base_lr_d = base_lr_g * float(cfg["d_lr_mult"])
@@ -428,7 +485,12 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         # The regularizer recomputes its own graph internally, so neither batch
         # needs requires_grad here.
         loss_d_gan = gan_loss.d_loss(D(x_real), D(x_fake))
-        pen, pstats = regularizer.penalty(D, x_real, x_fake, global_step)
+        # `pen` in metrics.jsonl is whichever arm is active at this step; across
+        # the switch the series is two different penalties end to end, not one
+        # comparable quantity.
+        pen, pstats = active_regularizer(global_step).penalty(
+            D, x_real, x_fake, global_step
+        )
         loss_d = loss_d_gan + pen
 
         opt_D.zero_grad()
@@ -545,8 +607,13 @@ def train(cfg: Dict, device: torch.device) -> Dict:
                 # application, not on a lazy schedule. It keeps the run's norm
                 # and anneal, and `penalty_step=total_steps` makes the analysis
                 # see the penalty center actually in force at the point of the
-                # run being analysed (the end of it).
-                GradRegularizer(lazy_k=1, **reg_kwargs),
+                # run being analysed (the end of it). Under a curriculum that
+                # point is past the switch, so the clone is built from the
+                # *second* arm -- analysing the primary here would describe a
+                # game that stopped being played long before the end.
+                GradRegularizer(
+                    lazy_k=1, **(reg2_kwargs if reg2_kwargs is not None else reg_kwargs)
+                ),
                 x_real_spec,
                 idx_spec,
                 lrs={"D": base_lr_d, "G": base_lr_g, "prior": base_lr_prior},
@@ -600,6 +667,10 @@ def train(cfg: Dict, device: torch.device) -> Dict:
             "per_mode_std_ratio": float(audit["per_mode_std_ratio"]),
             "center_bias": float(audit["center_bias"]),
             "audited_modes": int(audit["audited_modes"]),
+            # Tail-free counterpart of per_mode_std_ratio, plus the far-tail mass
+            # that separates the two (results/metric_recon.md; it is the core
+            # ratio the leaderboard's variance-compression guard reads).
+            **per_mode_core_ratio(fake_final, min_count=AUDIT_MIN_COUNT, std=DATA_STD),
         },
         "mid": {
             "step": int(mid_row["step"]),
