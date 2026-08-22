@@ -135,7 +135,7 @@ loss = reg(particle_positions)  # Encourages spread + decorrelation
 
 ## Notes
 
-- The text experiments (`five_modes.py`) use R1 gradient penalty for stability
+- The text experiments (`five_modes.py`) use the same recipe (RpGAN + one-sided cap penalty on the joint critic ∇₍ₓ,𝓏₎D, EMA, β1=0, cosine anneal)
 - The 100-Gaussian experiments use the one-sided cap penalty (`--reg_arm`, default `b_cap`); a gradient penalty is what lets the sharp Fourier discriminator keep full mode coverage
 - Particles use a higher learning rate (10×) than G/D for faster adaptation
 
