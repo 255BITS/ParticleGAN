@@ -1,0 +1,5 @@
+.venv/
+results/runs/
+__pycache__/
+*.pyc
+100gaussians_samples/

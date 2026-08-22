@@ -1,0 +1,12 @@
+arm: b_cap
+coeff: 0.005
+kappa: 1.0
+lazy_k: 1
+seed: 3
+total_steps: 7000
+eval_interval: 100
+lr: 0.0003
+d_lr_mult: 1.5
+lr_mult: 1.0
+spectral: true
+out_dir: results/runs/b_cap_c0p005_s3
