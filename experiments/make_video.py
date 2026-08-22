@@ -21,6 +21,7 @@ Usage:
 
     python experiments/make_video.py --config configs/b_cap_c1p0_lr2p0_s1.yaml
     python experiments/make_video.py --config cfg.yaml --frame_interval 50 --fps 30
+    python experiments/make_video.py --config cfg.yaml --gif --size 750 --fps 10
 """
 
 import argparse
@@ -78,6 +79,7 @@ def render_frame(
     step: int,
     total_steps: int,
     label: str,
+    dpi: int = DPI,
 ) -> Tuple[int, float]:
     """
     Draw one frame and return the (modes, hq) it reports.
@@ -110,13 +112,57 @@ def render_frame(
         fontsize=10,
     )
     fig.tight_layout()
-    fig.savefig(path, dpi=DPI)
+    fig.savefig(path, dpi=dpi)
     plt.close(fig)
 
     if was_training:
         ema_G.train()
         ema_prior.train()
     return int(modes), float(hq)
+
+
+def encode_gif(frame_dir: Path, out_path: Path, fps: int) -> Tuple[Path, str]:
+    """
+    Encode the PNG sequence as a GIF. Preferred path is ffmpeg's two-pass
+    palettegen/paletteuse (one optimal 256-colour palette for the whole clip,
+    Bayer-dithered so flat matplotlib backgrounds stay flat and the file stays
+    small); pillow's adaptive per-frame palette is the fallback when ffmpeg is
+    absent or the filter graph fails. Returns (written_path, encoder_used).
+    """
+    gif_path = out_path.with_suffix(".gif")
+    gif_path.parent.mkdir(parents=True, exist_ok=True)
+    ffmpeg = shutil.which("ffmpeg")
+    if ffmpeg:
+        vf = (
+            "[0:v]split[a][b];"
+            "[a]palettegen=stats_mode=diff[p];"
+            "[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle"
+        )
+        cmd = [
+            ffmpeg, "-y", "-loglevel", "error",
+            "-framerate", str(fps),
+            "-i", str(frame_dir / "frame_%05d.png"),
+            "-filter_complex", vf,
+            "-loop", "0",
+            str(gif_path),
+        ]
+        if subprocess.run(cmd).returncode == 0:
+            return gif_path, "ffmpeg/palettegen+paletteuse"
+        print("[warn] ffmpeg gif encode failed; falling back to pillow", flush=True)
+
+    from PIL import Image
+
+    frames = sorted(frame_dir.glob("frame_*.png"))
+    imgs = [Image.open(p).convert("P", palette=Image.ADAPTIVE) for p in frames]
+    imgs[0].save(
+        gif_path,
+        save_all=True,
+        append_images=imgs[1:],
+        duration=int(1000 / max(1, fps)),
+        loop=0,
+        optimize=True,
+    )
+    return gif_path, "pillow/gif (adaptive palette)"
 
 
 def encode(frame_dir: Path, out_path: Path, fps: int, n_frames: int) -> Tuple[Path, str]:
@@ -175,7 +221,7 @@ def encode(frame_dir: Path, out_path: Path, fps: int, n_frames: int) -> Tuple[Pa
 def probe(path: Path) -> dict:
     """ffprobe summary of the encoded file, or {} when ffprobe is unavailable."""
     ffprobe = shutil.which("ffprobe")
-    if not ffprobe or path.suffix != ".mp4":
+    if not ffprobe or path.suffix not in (".mp4", ".gif"):
         return {}
     cmd = [
         ffprobe, "-v", "error",
@@ -207,6 +253,15 @@ def main() -> None:
     parser.add_argument("--frame_interval", type=int, default=25,
                         help="Render a frame every N steps (plus step 0 and the last step).")
     parser.add_argument("--fps", type=int, default=20, help="Playback frame rate.")
+    parser.add_argument("--gif", action="store_true",
+                        help="Write an animated GIF (ffmpeg palettegen/paletteuse, "
+                             "pillow adaptive palette as fallback) instead of an mp4.")
+    parser.add_argument("--size", type=int, default=int(FIGSIZE[0] * DPI),
+                        help="Frame size in pixels (square). Default 600.")
+    parser.add_argument("--max_frames", type=int, default=None,
+                        help="Cap on rendered frames: frame boundaries are strided so "
+                             "at most this many are drawn (step 0 and the last step "
+                             "are always kept).")
     parser.add_argument("--device", type=str, default=None, help="e.g. 'cpu' or 'cuda:0'.")
     parser.add_argument("--run_dir", type=str, default=None,
                         help="Where the run's own artifacts go. Defaults to a scratch "
@@ -245,12 +300,25 @@ def main() -> None:
     real_bg = sample_100gaussians(batch_size=N_REAL_BG, device=device, generator=bg_gen)
 
     label = arm_label(cfg)
-    state = {"n": 0, "last": (0, 0.0)}
+    dpi = max(1, round(args.size / FIGSIZE[0]))
+    state = {"n": 0, "seen": 0, "last": (0, 0.0)}
+
+    # `--max_frames` strides the frame boundaries rather than the training loop:
+    # every `stride`-th boundary is drawn, so the trajectory is unchanged and
+    # only the rendering (the expensive part) is skipped.
+    stride = 1
+    if args.max_frames is not None and args.max_frames > 0:
+        boundaries = total_steps // max(1, args.frame_interval) + 1
+        stride = max(1, -(-boundaries // args.max_frames))
 
     def frame_callback(step: int, ema_G: nn.Module, ema_prior: ParticlePrior) -> None:
+        seen = state["seen"]
+        state["seen"] = seen + 1
+        if stride > 1 and seen % stride != 0 and step != total_steps:
+            return
         path = frame_dir / f"frame_{state['n']:05d}.png"
         modes, hq = render_frame(
-            path, ema_G, ema_prior, device, real_bg, step, total_steps, label
+            path, ema_G, ema_prior, device, real_bg, step, total_steps, label, dpi=dpi
         )
         state["n"] += 1
         state["last"] = (modes, hq)
@@ -262,8 +330,15 @@ def main() -> None:
           f"{args.frame_interval} -> frames in {frame_dir}", flush=True)
     train(cfg, device, frame_callback=frame_callback, frame_interval=args.frame_interval)
 
-    out_path = Path(args.out) if args.out else _REPO_ROOT / "results" / "videos" / f"{run_name}.mp4"
-    written, encoder = encode(frame_dir, out_path, args.fps, state["n"])
+    suffix = ".gif" if args.gif else ".mp4"
+    out_path = (
+        Path(args.out) if args.out
+        else _REPO_ROOT / "results" / "videos" / f"{run_name}{suffix}"
+    )
+    if args.gif:
+        written, encoder = encode_gif(frame_dir, out_path, args.fps)
+    else:
+        written, encoder = encode(frame_dir, out_path, args.fps, state["n"])
     info = probe(written)
 
     parity: Optional[str] = None
