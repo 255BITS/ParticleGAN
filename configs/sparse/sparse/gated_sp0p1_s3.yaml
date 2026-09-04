@@ -1,0 +1,13 @@
+arm: g_interp_cap
+coeff: 1.0
+emb_dim: 0
+fourier_ramp_end: 0.7
+fourier_ramp_start: 0.3
+hidden: 256
+lambda_sp: 0.1
+out_dir: results/sparse/runs/sparse/gated_sp0p1_s3
+prior_partition: class
+real_head: gated
+seed: 3
+total_steps: 5000
+z_dim: 16
