@@ -99,6 +99,7 @@ DEFAULTS: Dict = {
     "tau_end": 1.0,               # linear anneal over the run; equal = constant
     "lambda_sym": 0.0,            # supervised CE anchor on G's symbol logits (0 = pure adversarial)
     "lambda_sp": 0.0,             # gate sparsity penalty mean(sigmoid(g)) (gated/topk heads)
+    "gate_start_frac": 0.0,       # gated/topk heads emit ungated values before this fraction of the run
     "lambda_ep": 1.0,             # VICReg on the particle table
     # discriminator
     "d_mode": "ucd",              # scalar / concat / proj / ucd
@@ -361,6 +362,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         frac = step / max(1, total_steps)
         tau = tau0 + (tau1 - tau0) * frac
         D.fourier.scale = fourier_scale(frac)
+        G.gate_on = ema_G.gate_on = frac >= float(cfg["gate_start_frac"])
         anneal_from = float(cfg["lr_anneal_start"]) * total_steps
         if step <= anneal_from:
             scale = 1.0

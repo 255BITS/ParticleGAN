@@ -2,7 +2,11 @@ arm: g_interp_cap
 coeff: 1.0
 d_mode: proj
 emb_dim: 0
+fourier_ramp_end: 0.7
+fourier_ramp_start: 0.3
+hidden: 256
 out_dir: results/sparse/runs/ucd/d_proj_s3
 prior_partition: class
 seed: 3
 total_steps: 5000
+z_dim: 16

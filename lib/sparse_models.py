@@ -115,6 +115,10 @@ class SparseCondGenerator(nn.Module):
         self.emb = nn.Embedding(n_classes, emb_dim) if emb_dim > 0 else None
         self.trunk = mlp(z_dim + emb_dim, hidden, n_hidden)
         self.real = nn.Linear(hidden, d if real_head == "linear" else 2 * d)
+        # Trainer-controlled switch for a gate warm-up: while False, the gated
+        # / topk heads emit the ungated values (mask == 1, no STE), so the run
+        # can find the modes first and only then start pruning dims.
+        self.gate_on = True
         self.cat = nn.Linear(hidden, n_symbols)
         init_linear(self)
 
@@ -126,6 +130,9 @@ class SparseCondGenerator(nn.Module):
         gate_prob: Optional[torch.Tensor] = None
         if self.real_head == "linear":
             x = r
+        elif not self.gate_on:
+            x = r[:, : self.d]
+            gate_prob = torch.sigmoid(r[:, self.d :])
         else:
             v, g = r[:, : self.d], r[:, self.d :]
             p = torch.sigmoid(g)

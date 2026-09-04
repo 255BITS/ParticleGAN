@@ -55,7 +55,15 @@ BASE: Dict = {
     "prior_partition": "class",
     "arm": "g_interp_cap",
     "coeff": 1.0,
+    # probe round 4/5: wider nets and a wider latent each bought ~5 modes; the
+    # Fourier ramp keeps the core width honest (0.8-0.9 vs 0.5-0.6 without it)
+    "hidden": 256,
+    "z_dim": 16,
+    "fourier_ramp_start": 0.3,
+    "fourier_ramp_end": 0.7,
 }
+# BASE minus the capacity/schedule additions: the two structural changes alone.
+BASE_MIN: Dict = {"emb_dim": 0, "prior_partition": "class", "arm": "g_interp_cap", "coeff": 1.0}
 
 CHAMPION: Dict = {"emb_dim": 8, "prior_partition": "none", "arm": "b_cap", "coeff": 1.0}
 
@@ -85,9 +93,14 @@ def stage_groups(stage: str) -> List[Tuple[str, Dict]]:
         g.append(("emb_icap", {**ch, "arm": "g_interp_cap"}))                       # change penalty only
         g.append(("emb_icap_ramp", {**ch, "arm": "g_interp_cap", "fourier_ramp_start": 0.3, "fourier_ramp_end": 0.7}))
         g.append(("pp_bcap", {**ch, "emb_dim": 0, "prior_partition": "class"}))     # change conditioning only
-        g.append(("pp_icap", dict(BASE)))                                           # both = BASE
-        g.append(("pp_icap_ramp", {**BASE, "fourier_ramp_start": 0.3, "fourier_ramp_end": 0.7}))
-        g.append(("pp_icap_f0", {**BASE, "fourier": 0}))
+        g.append(("pp_icap", dict(BASE_MIN)))                                       # both structural changes
+        g.append(("pp_icap_ramp", {**BASE_MIN, "fourier_ramp_start": 0.3, "fourier_ramp_end": 0.7}))
+        g.append(("pp_icap_f0", {**BASE_MIN, "fourier": 0}))
+        g.append(("pp_icap_h256", {**BASE_MIN, "hidden": 256}))
+        g.append(("pp_icap_z16", {**BASE_MIN, "z_dim": 16}))
+        g.append(("base", dict(BASE)))                                              # = every other stage's base
+        g.append(("base_f0", {**BASE, "fourier": 0, "fourier_ramp_start": 0.0, "fourier_ramp_end": 0.0}))
+        g.append(("base_8k", {**BASE, "total_steps": 8000}))
         g.append(("uncond_floor", {**ch, "emb_dim": 0, "d_mode": "scalar"}))        # no class anywhere
         g.append(("uncond_ceiling", {**ch, "emb_dim": 0, "arm": "g_interp_cap"}))   # G unconditional, D ucd
         return g
@@ -110,6 +123,10 @@ def stage_groups(stage: str) -> List[Tuple[str, Dict]]:
         for sp, tag in ((0.0, "0"), (0.01, "0p01"), (0.1, "0p1"), (1.0, "1p0")):
             g.append((f"gated_sp{tag}", {"real_head": "gated", "lambda_sp": sp}))
         g.append(("topk", {"real_head": "topk"}))
+        # gate warm-up: linear head for the first 40% of the run, then the gate engages
+        g.append(("gated_sp0p01_warm", {"real_head": "gated", "lambda_sp": 0.01, "gate_start_frac": 0.4}))
+        g.append(("gated_sp0_warm", {"real_head": "gated", "lambda_sp": 0.0, "gate_start_frac": 0.4}))
+        g.append(("topk_warm", {"real_head": "topk", "gate_start_frac": 0.4}))
         return g
 
     if stage == "discrete":

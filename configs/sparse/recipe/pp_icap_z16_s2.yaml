@@ -1,0 +1,8 @@
+arm: g_interp_cap
+coeff: 1.0
+emb_dim: 0
+out_dir: results/sparse/runs/recipe/pp_icap_z16_s2
+prior_partition: class
+seed: 2
+total_steps: 5000
+z_dim: 16
