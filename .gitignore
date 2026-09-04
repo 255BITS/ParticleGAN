@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 100gaussians_samples/
 results/sparse/
+.venv

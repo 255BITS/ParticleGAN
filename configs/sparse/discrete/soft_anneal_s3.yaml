@@ -1,0 +1,9 @@
+arm: g_interp_cap
+cat_mode: soft
+coeff: 1.0
+emb_dim: 0
+out_dir: results/sparse/runs/discrete/soft_anneal_s3
+prior_partition: class
+seed: 3
+tau_end: 0.1
+total_steps: 5000

@@ -1,0 +1,9 @@
+arm: g_interp_cap
+cat_mode: gumbel_st
+coeff: 1.0
+emb_dim: 0
+out_dir: results/sparse/runs/discrete/gst_anneal_s1
+prior_partition: class
+seed: 1
+tau_end: 0.1
+total_steps: 5000

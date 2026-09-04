@@ -1,0 +1,9 @@
+arm: g_interp_cap
+coeff: 1.0
+emb_dim: 0
+lambda_sp: 0.01
+out_dir: results/sparse/runs/sparse/gated_sp0p01_s3
+prior_partition: class
+real_head: gated
+seed: 3
+total_steps: 5000

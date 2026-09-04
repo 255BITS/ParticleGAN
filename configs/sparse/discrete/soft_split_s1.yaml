@@ -1,0 +1,10 @@
+arm: g_interp_cap
+cat_mode: soft
+coeff: 1.0
+emb_dim: 0
+n_symbols: 16
+out_dir: results/sparse/runs/discrete/soft_split_s1
+prior_partition: class
+seed: 1
+symbol_map: split
+total_steps: 5000

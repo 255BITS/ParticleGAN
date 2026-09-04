@@ -1,0 +1,9 @@
+arm: g_interp_cap
+coeff: 1.0
+d_mode: ucd
+emb_dim: 0
+out_dir: results/sparse/runs/ucd/ucd_l0p5_s2
+prior_partition: class
+seed: 2
+total_steps: 5000
+ucd_lambda: 0.5

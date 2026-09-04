@@ -1,0 +1,10 @@
+arm: g_interp_cap
+cat_mode: gumbel_st
+coeff: 1.0
+emb_dim: 0
+n_symbols: 16
+out_dir: results/sparse/runs/discrete/gst_split_s2
+prior_partition: class
+seed: 2
+symbol_map: split
+total_steps: 5000

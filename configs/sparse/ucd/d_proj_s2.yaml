@@ -1,0 +1,8 @@
+arm: g_interp_cap
+coeff: 1.0
+d_mode: proj
+emb_dim: 0
+out_dir: results/sparse/runs/ucd/d_proj_s2
+prior_partition: class
+seed: 2
+total_steps: 5000

@@ -1,0 +1,8 @@
+arm: g_interp_cap
+coeff: 1.0
+emb_dim: 0
+gp_on_y: false
+out_dir: results/sparse/runs/ucd/ucd_gpx_s3
+prior_partition: class
+seed: 3
+total_steps: 5000

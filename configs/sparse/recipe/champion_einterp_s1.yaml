@@ -1,0 +1,7 @@
+arm: e_interp
+coeff: 1.0
+emb_dim: 8
+out_dir: results/sparse/runs/recipe/champion_einterp_s1
+prior_partition: none
+seed: 1
+total_steps: 5000
