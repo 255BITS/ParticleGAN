@@ -30,6 +30,8 @@ Stages (each answers one question, 3 seeds per cell):
   sparse    THE SPARSITY QUESTION. real_head in {linear, gated x lambda_sp, topk}.
   discrete  THE DISCRETE-OUTPUT QUESTION. cat_mode x tau schedule x
             lambda_sym, plus the 'split' symbol map (K = 2C).
+  champion  everything stacked: lambda_1 0.02 + warm-started gated head
+            (+ 8k steps, + the injection D modes with the same head).
   fewshot   THE DATA-SPARSITY QUESTION. n_train in {128, 512, 2048, 8192}
             (2 .. 128 samples per mode), and the frozen prior at 512.
 
@@ -141,6 +143,20 @@ def stage_groups(stage: str) -> List[Tuple[str, Dict]]:
         g.append(("soft_split", {"cat_mode": "soft", "symbol_map": "split", "n_symbols": 16}))
         return g
 
+    if stage == "champion":
+        # Everything the earlier stages found stacked: lambda_1 0.02 (ucd stage)
+        # and the warm-started gated head (sparse stage), on the base; plus the
+        # same head under the injection D modes and a longer run.
+        gw = {"real_head": "gated", "lambda_sp": 0.01, "gate_start_frac": 0.4}
+        g.append(("l0p02", {"ucd_lambda": 0.02}))
+        g.append(("l0p02_gw", {"ucd_lambda": 0.02, **gw}))
+        g.append(("l0p02_gw_8k", {"ucd_lambda": 0.02, **gw, "total_steps": 8000}))
+        g.append(("l0p02_gw_sp0p003", {"ucd_lambda": 0.02, **gw, "lambda_sp": 0.003}))
+        g.append(("l0p02_gw_gs0p6", {"ucd_lambda": 0.02, **gw, "gate_start_frac": 0.6}))
+        g.append(("concat_gw", {"d_mode": "concat", **gw}))
+        g.append(("proj_gw", {"d_mode": "proj", **gw}))
+        return g
+
     if stage == "fewshot":
         for n in (128, 512, 2048, 8192):
             g.append((f"n{n}", {"n_train": n}))
@@ -152,7 +168,7 @@ def stage_groups(stage: str) -> List[Tuple[str, Dict]]:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", required=True, choices=["smoke", "recipe", "ucd", "sparse", "discrete", "fewshot"])
+    ap.add_argument("--stage", required=True, choices=["smoke", "recipe", "ucd", "sparse", "discrete", "fewshot", "champion"])
     ap.add_argument("--base", type=str, default="", help="comma-separated key=value merged over BASE for every config")
     ap.add_argument("--seeds", type=str, default=",".join(str(s) for s in SEEDS))
     ap.add_argument("--total_steps", type=int, default=TOTAL_STEPS)

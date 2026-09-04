@@ -94,4 +94,21 @@ be read as "coverage yes, sparsity no".
 ## Stages
 
 See `experiments/gen_sparse_configs.py`; each stage is one question, 3 seeds
-per cell, 5 000 steps (≈ 1 min per run on an A6000, ~6 in parallel).
+per cell, 5 000 steps (≈ 2 min per run on an A6000 with 10 in parallel).
+
+| stage | question | cells |
+|---|---|---|
+| `recipe` | does the champion converge; which changes are load-bearing | 17 |
+| `ucd` | scalar / concat / proj / ucd(λ₁) D; prior ablations; symbol anchor | 12 |
+| `sparse` | linear / gated(λ_sp, warm-start) / top-k real head | 9 |
+| `discrete` | gumbel_st / gumbel_soft / st_argmax / soft, τ anneal, λ_sym, split map | 9 |
+| `fewshot` | n_train ∈ {128, 512, 2048, 8192}, frozen prior | 5 |
+| `champion` | everything stacked; injection D under the gated head | 7 |
+
+Results: `FINDINGS.md`. Tables: `results/sparse/TABLE_<stage>.md` (gitignored,
+on disk); per-run artefacts under `results/sparse/runs/<stage>/<cell>_s<seed>/`.
+
+**Winning cell** (`champion/l0p02_gw_sp0p003`): base + `ucd_lambda 0.02` +
+`real_head gated, lambda_sp 0.003, gate_start_frac 0.4` — 64/64 modes,
+hq 0.98, cond 0.99, sym 0.99, 95 % exact zeros, bar crossed at ~2 900 steps
+on 2/3 seeds (the third: 63/64, everything else holding).
