@@ -7,7 +7,8 @@ comparison of gradient penalties needs:
 
   * how far is the model distribution from the data distribution
     (`sliced_w1`, cheap and GPU-resident; `exact_w1_w2`, exact but O(n^2 log n)),
-  * how well-calibrated is the density it puts on each mode (`mixture_nll`),
+  * how plausible generated samples are under the target (`mixture_nll`,
+    which rewards concentration and is not a calibration metric),
   * how balanced is its mass across the 100 modes
     (`mode_recall_and_hists`).
 
@@ -172,8 +173,10 @@ def mixture_nll(
         log p(x) = logsumexp_k [ -||x - mu_k||^2 / (2 std^2) ] - log 100
                    - (d/2) log(2 pi std^2)
 
-    Lower is better; the entropy floor for perfect samples is roughly
-    d/2 * (1 + log(2 pi std^2)) + log 100 nats.
+    This measures sample plausibility, not distributional calibration. Samples
+    concentrated at mode centers score lower than samples from the true target.
+    Target samples have expected NLL approximately
+    d/2 * (1 + log(2 pi std^2)) + log 100 nats; this is not a lower bound.
 
     Returns:
         The mean NLL in nats, as a python float.
@@ -372,6 +375,10 @@ def per_mode_core_ratio(
         Everything past the median is ignored by construction, so the estimate
         depends only on the half of the mass nearest the center.
 
+    This scalar assumes an isotropic Gaussian core. A matching radial median
+    alone cannot establish Gaussian shape or exclude collapse along one axis;
+    inspect `per_mode_covariance_ratios` and radial/angular structure as well.
+
     On a genuine Gaussian this and `per_mode_std` agree, so their ratio reads
     directly as a tail-inflation factor. `tail_frac_10sigma` is the mass that
     buys that inflation: the fraction of *all* samples whose nearest-center
@@ -436,4 +443,44 @@ def per_mode_core_ratio(
         "per_mode_core_std": core_std,
         "per_mode_core_ratio": core_std / float(std),
         "tail_frac_10sigma": tail_frac,
+    }
+
+
+def per_mode_covariance_ratios(
+    x: torch.Tensor,
+    data_std: float = 0.03,
+    grid_scale: float = 1.0,
+    min_count: int = 50,
+) -> Dict[str, float]:
+    """Mean smallest/largest within-mode covariance eigenvalues / true variance.
+
+    These complement the robust radial median: a line or two-point cloud can
+    have the correct median radius while its smallest eigenvalue is zero.
+    Covariances use population normalization and are tail-sensitive; report
+    both these ratios and the core/tail metrics. Values near one are necessary
+    second-moment checks, not proof of Gaussian shape. Modes below min_count
+    are omitted and the audited count must accompany the ratios.
+    """
+    if not math.isfinite(data_std) or data_std <= 0:
+        raise ValueError("data_std must be positive and finite")
+    if min_count < 2:
+        raise ValueError("min_count must be at least 2")
+    with torch.no_grad():
+        xf = torch.as_tensor(x).detach().to(torch.float64)
+        if xf.ndim != 2 or xf.shape[1] != 2:
+            raise ValueError("expected samples with shape (N, 2)")
+        centers = _grid_centers(xf.device, torch.float64, grid_scale)
+        nearest = torch.cdist(xf, centers).argmin(dim=1)
+        counts = torch.bincount(nearest, minlength=centers.shape[0])
+        eigenvalues = []
+        for mode in torch.nonzero(counts >= min_count).flatten():
+            points = xf[nearest == mode]
+            residuals = points - points.mean(dim=0)
+            cov = residuals.T @ residuals / points.shape[0]
+            eigenvalues.append(torch.linalg.eigvalsh(cov).clamp_min(0) / data_std**2)
+        means = torch.stack(eigenvalues).mean(dim=0) if eigenvalues else None
+    return {
+        "per_mode_cov_eig_min_ratio": float(means[0]) if means is not None else float("nan"),
+        "per_mode_cov_eig_max_ratio": float(means[1]) if means is not None else float("nan"),
+        "per_mode_cov_audited_modes": len(eigenvalues),
     }
