@@ -9,9 +9,10 @@ This is `examples/100gaussians.py`'s recipe held fixed — RpGAN (relativistic
 pairing, logistic), Fourier-2 discriminator, ParticlePrior + VICReg, Adam with
 beta1=0, prior LR x10, D LR x1.5, delayed cosine anneal, EMA(0.995) on G *and*
 the prior — with exactly one thing swapped out: the inline R1+R2 block becomes a
-`lib.grad_regularizers.GradRegularizer`, selected by config. Everything else is
-byte-identical so that any difference between runs is attributable to the
-penalty.
+`lib.grad_regularizers.GradRegularizer`, selected by config. The recipe is held
+fixed within a comparison. Training now uses independent
+data, latent, penalty, and evaluation RNG streams; historical runs using the
+shared global RNG are not expected to reproduce bit for bit.
 
 On top of the example it adds the instrumentation an arm comparison needs:
 
@@ -62,7 +63,7 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from lib.particle_prior import ParticlePrior
+from lib.particle_prior import ParticlePrior, canonical_prior_kind, make_prior
 from lib.gan_loss import GANLoss
 from lib.vicreg_loss import VICRegLikeLoss
 from lib.grad_regularizers import GradRegularizer, grad_norm_stats
@@ -81,6 +82,7 @@ from lib.toy_metrics import (
     mode_recall_and_hists,
     per_mode_moments,
     per_mode_core_ratio,
+    per_mode_covariance_ratios,
 )
 
 
@@ -101,8 +103,8 @@ DEFAULTS: Dict = {
     "lr_mult": 1.0,
     "spectral": True,
     "out_dir": "runs/arm",
-    # Follow-up knobs. Every default reproduces the original recipe exactly, so
-    # a config written before they existed trains an identical trajectory.
+    # Follow-up knobs retain the historical hyperparameter defaults. RNG
+    # isolation is versioned in the summary and changes historical trajectories.
     "loss_type": "logistic",   # any lib.gan_loss kernel, e.g. 'wasserstein'
     "optimizer": "adam",       # 'adam' or 'oadam' (lib.oadam.OptimisticAdam)
     "norm": "l2",              # gradient norm the penalty sees: l2 / l1 / linf
@@ -113,11 +115,9 @@ DEFAULTS: Dict = {
     "curriculum_arm2": "none",     # second arm, or 'none' for no curriculum
     "curriculum_coeff2": 0.0,      # its coefficient
     "curriculum_switch_frac": 0.6, # switch at this fraction of total_steps
-    # The repo's control condition: 'particles' is the learnable cloud every
-    # existing config trains; 'gaussian' freezes it into a fixed N(0, I) draw,
-    # which drops the prior optimizer and the VICReg term and leaves G alone to
-    # warp a rigid prior onto the data (examples/100gaussians_no_particle_prior.py).
-    "prior": "particles",          # 'particles' or 'gaussian'
+    # 'gaussian' remains a compatibility alias for the frozen finite table.
+    # 'fresh_gaussian' draws new N(0, I) noise for training and evaluation.
+    "prior": "particles",          # particles / frozen_gaussian / fresh_gaussian
 }
 
 # Held fixed across every arm: the winning recipe from docs/convergence-tips.md.
@@ -282,12 +282,10 @@ def train(
     pre-hook script.
 
     It is called as `frame_callback(step, ema_G, ema_prior)` at step 0, at every
-    step that is a multiple of `frame_interval`, and at the final step. Because
-    plotting code (in particular `lib.toy_models.mode_coverage`) draws on the
-    *default* RNG -- the same stream the training loop's `prior.sample()` draws
-    from -- the global CPU and CUDA RNG states are snapshotted before the call
-    and restored after it. A callback therefore cannot shift the trajectory no
-    matter how much randomness it consumes.
+    step that is a multiple of `frame_interval`, and at the final step. Global
+    CPU and CUDA RNG states are preserved around the callback. Training owns
+    separate generators for data, latent samples and penalty interpolation;
+    diagnostics and frame rendering therefore cannot shift those streams.
     """
     seed = int(cfg["seed"])
     total_steps = int(cfg["total_steps"])
@@ -302,8 +300,13 @@ def train(
     train_gen = torch.Generator(device=device) if gen_device else torch.Generator()
     viz_gen = torch.Generator(device=device) if gen_device else torch.Generator()
     eval_gen = torch.Generator(device=device) if gen_device else torch.Generator()
+    eval_data_gen = torch.Generator(device=device) if gen_device else torch.Generator()
+    latent_gen = torch.Generator(device=device) if gen_device else torch.Generator()
+    penalty_gen = torch.Generator(device=device) if gen_device else torch.Generator()
     train_gen.manual_seed(seed)
     viz_gen.manual_seed(seed + 1)
+    latent_gen.manual_seed(seed + 2)
+    penalty_gen.manual_seed(seed + 3)
 
     out_path = Path(cfg["out_dir"])
     out_path.mkdir(parents=True, exist_ok=True)
@@ -313,12 +316,10 @@ def train(
     # -------------------------
     #  Models / optimizers
     # -------------------------
-    prior_kind = str(cfg["prior"]).lower()
-    if prior_kind not in ("particles", "gaussian"):
-        raise ValueError(f"Unknown prior: {cfg['prior']} (expected 'particles' or 'gaussian')")
+    prior_kind = canonical_prior_kind(cfg["prior"])
     learnable_prior = prior_kind == "particles"
-    prior = ParticlePrior(
-        num_particles=NUM_PARTICLES, z_dim=Z_DIM, learnable=learnable_prior
+    prior = make_prior(
+        prior_kind, num_particles=NUM_PARTICLES, z_dim=Z_DIM,
     ).to(device)
     G = SimpleMLPGenerator(z_dim=Z_DIM).to(device)
     D = SimpleMLPDiscriminator(in_dim=2, fourier=FOURIER).to(device)
@@ -433,32 +434,31 @@ def train(
 
     def run_eval(step: int, d_val: float, g_val: float, pen_val: float) -> Dict:
         """One eval row: sliced W1 + coverage on the EMA model, grad norms on live D."""
-        # Re-seeded every time so the same particles and the same reals are used
+        # Re-seeded every time so the same latent samples and reals are used
         # at every eval: sampling noise would otherwise swamp the oscillation
         # signal we are trying to measure.
         eval_gen.manual_seed(seed + 999)
+        eval_data_gen.manual_seed(seed + 1999)
 
         ema_G.eval()
         with torch.no_grad():
-            idx = torch.randint(
-                0, ema_prior.num_particles, (EVAL_N,), device=device, generator=eval_gen
-            )
-            fake = ema_G(ema_prior.z[idx])
+            z_eval, _ = ema_prior.sample(EVAL_N, generator=eval_gen)
+            fake = ema_G(z_eval)
             real = sample_100gaussians(
-                batch_size=EVAL_N, device=device, generator=eval_gen
+                batch_size=EVAL_N, device=device, generator=eval_data_gen
             )
         ema_G.train()
 
         w1 = sliced_w1(fake, real, n_proj=128, seed=seed + 7)
-        modes, hq = mode_coverage(ema_G, ema_prior, device)
+        modes, hq = mode_coverage(ema_G, ema_prior, device, sample_generator=eval_gen)
 
         with torch.no_grad():
             real_small = sample_100gaussians(
-                batch_size=GRAD_STATS_N, device=device, generator=eval_gen
+                batch_size=GRAD_STATS_N, device=device, generator=eval_data_gen
             )
             z_small, _ = prior.sample(GRAD_STATS_N, generator=eval_gen)
             fake_small = G(z_small)
-        gstats = grad_norm_stats(D, real_small, fake_small.detach())
+        gstats = grad_norm_stats(D, real_small, fake_small.detach(), generator=eval_data_gen)
 
         events = update_collapse(collapse_state, modes)
 
@@ -533,7 +533,7 @@ def train(
             batch_size=BATCH_SIZE, device=device, generator=train_gen
         )
         with torch.no_grad():
-            z_fake, _ = prior.sample(BATCH_SIZE)
+            z_fake, _ = prior.sample(BATCH_SIZE, generator=latent_gen)
             x_fake = G(z_fake)
 
         # The regularizer recomputes its own graph internally, so neither batch
@@ -543,7 +543,7 @@ def train(
         # the switch the series is two different penalties end to end, not one
         # comparable quantity.
         pen, pstats = active_regularizer(global_step).penalty(
-            D, x_real, x_fake, global_step
+            D, x_real, x_fake, global_step, generator=penalty_gen,
         )
         loss_d = loss_d_gan + pen
 
@@ -559,7 +559,7 @@ def train(
         D.eval()
         G.train()
 
-        z_fake, idx = prior.sample(BATCH_SIZE)
+        z_fake, idx = prior.sample(BATCH_SIZE, generator=latent_gen)
         fake_logits = D(G(z_fake))
 
         with torch.no_grad():
@@ -574,8 +574,7 @@ def train(
             ep_z = vic_reg(prior.z[unique_idx])
             loss_g = loss_gan + LAMBDA_EP * ep_z
         else:
-            # Nothing to spread out: a frozen cloud is already an exact N(0, I)
-            # draw, and VICReg on it would be a constant with no gradient.
+            # Gaussian controls have no learned prior parameters to regularize.
             loss_g = loss_gan
 
         opt_G.zero_grad()
@@ -617,14 +616,13 @@ def train(
     #  Final metrics
     # -------------------------
     eval_gen.manual_seed(seed + 4242)
+    eval_data_gen.manual_seed(seed + 5242)
     ema_G.eval()
     with torch.no_grad():
-        idx = torch.randint(
-            0, ema_prior.num_particles, (FINAL_N,), device=device, generator=eval_gen
-        )
-        fake_final = ema_G(ema_prior.z[idx])
+        z_final, _ = ema_prior.sample(FINAL_N, generator=eval_gen)
+        fake_final = ema_G(z_final)
         real_final = sample_100gaussians(
-            batch_size=FINAL_N, device=device, generator=eval_gen
+            batch_size=FINAL_N, device=device, generator=eval_data_gen
         )
     ema_G.train()
 
@@ -632,7 +630,9 @@ def train(
     balance = mode_recall_and_hists(fake_final)
     nll = mixture_nll(fake_final)
     w1_exact, w2_exact = exact_w1_w2(fake_final, real_final, max_points=4096, seed=seed)
-    modes_final, hq_final = mode_coverage(ema_G, ema_prior, device)
+    modes_final, hq_final = mode_coverage(
+        ema_G, ema_prior, device, sample_generator=eval_gen,
+    )
 
     # Per-mode shape audit, on the *same* 100k EMA samples the metrics above
     # used: coverage says the modes were found, this says whether each blob has
@@ -652,7 +652,13 @@ def train(
     #  Spectral analysis
     # -------------------------
     spectral: Dict = {}
-    if bool(cfg["spectral"]):
+    if bool(cfg["spectral"]) and not learnable_prior:
+        spectral = {
+            "status": "unsupported",
+            "reason": "The local-game probe differentiates the learned particle table; "
+                      "Gaussian controls require a D/G-only diagnostic.",
+        }
+    elif bool(cfg["spectral"]):
         try:
             spec_gen = torch.Generator(device=device) if gen_device else torch.Generator()
             spec_gen.manual_seed(seed + 31337)
@@ -708,6 +714,7 @@ def train(
     )
     torch.save(
         {
+            "prior_kind": prior_kind,
             "G": G.state_dict(),
             "D": D.state_dict(),
             "prior": prior.state_dict(),
@@ -719,12 +726,18 @@ def train(
 
     summary = {
         "config": dict(cfg),
+        "sampling": {
+            "prior": prior_kind,
+            "reference_particles": NUM_PARTICLES,
+            "rng_scheme": "separate_data_latent_penalty_v1",
+        },
         "final": {
             "w1_exact": float(w1_exact),
             "w2_exact": float(w2_exact),
             "w1_sliced": float(w1_sliced),
             "modes": int(modes_final),
             "hq": float(hq_final),
+            "unique_samples": int(torch.unique(fake_final, dim=0).shape[0]),
             "mode_recall": float(balance["mode_recall"]),
             "hist_kl": float(balance["hist_kl"]),
             "hist_js": float(balance["hist_js"]),
@@ -737,6 +750,9 @@ def train(
             # that separates the two (results/metric_recon.md; it is the core
             # ratio the leaderboard's variance-compression guard reads).
             **per_mode_core_ratio(fake_final, min_count=AUDIT_MIN_COUNT, std=DATA_STD),
+            **per_mode_covariance_ratios(
+                fake_final, min_count=AUDIT_MIN_COUNT, data_std=DATA_STD,
+            ),
         },
         "mid": {
             "step": int(mid_row["step"]),

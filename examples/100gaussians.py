@@ -65,162 +65,16 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from lib.particle_prior import ParticlePrior  # noqa: E402 - after the sys.path shim
+from lib.particle_prior import (  # noqa: E402
+    PRIOR_KINDS, ParticlePrior, canonical_prior_kind, make_prior,
+)
 from lib.gan_loss import GANLoss  # noqa: E402
 from lib.grad_regularizers import GradRegularizer  # noqa: E402
 from lib.vicreg_loss import VICRegLikeLoss  # noqa: E402
 
-# =========================
-#  Simple MLP G / D
-# =========================
-
-class SimpleMLPGenerator(nn.Module):
-    """
-    Very small MLP generator: z -> x in R^2.
-
-    Strong enough for the toy problem but still minimal and CPU-friendly.
-    """
-
-    def __init__(
-        self,
-        z_dim: int = 4,
-        hidden_dim: int = 128,
-        n_hidden: int = 3,
-        out_dim: int = 2,
-    ) -> None:
-        super().__init__()
-        layers = []
-        in_dim = z_dim
-        for _ in range(n_hidden):
-            layers.append(nn.Linear(in_dim, hidden_dim))
-            layers.append(nn.LeakyReLU(0.2, inplace=True))
-            in_dim = hidden_dim
-        layers.append(nn.Linear(in_dim, out_dim))
-        self.net = nn.Sequential(*layers)
-
-    def forward(self, z: torch.Tensor) -> torch.Tensor:
-        return self.net(z)
-
-
-class SimpleMLPDiscriminator(nn.Module):
-    """
-    Simple MLP discriminator: x in R^2 -> scalar score.
-
-    fourier=K appends sin/cos features at frequencies pi * 2^i (i < K) per
-    input dimension. MLPs are spectrally biased toward low frequencies, so
-    without this D cannot resolve the sigma=0.03 mode structure until very
-    late in training and sample sharpness stalls.
-    """
-
-    def __init__(
-        self,
-        in_dim: int = 2,
-        hidden_dim: int = 128,
-        n_hidden: int = 3,
-        fourier: int = 2,
-    ) -> None:
-        super().__init__()
-        self.fourier = fourier
-        dim = in_dim + (2 * fourier * in_dim if fourier > 0 else 0)
-        if fourier > 0:
-            freqs = torch.pi * (2.0 ** torch.arange(fourier, dtype=torch.float32))
-            self.register_buffer("freqs", freqs)
-        layers = []
-        for _ in range(n_hidden):
-            layers.append(nn.Linear(dim, hidden_dim))
-            layers.append(nn.LeakyReLU(0.2, inplace=True))
-            dim = hidden_dim
-        layers.append(nn.Linear(dim, 1))
-        self.net = nn.Sequential(*layers)
-
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        h = x
-        if self.fourier > 0:
-            xf = x.unsqueeze(-1) * self.freqs  # (B, in_dim, K)
-            h = torch.cat([h, torch.sin(xf).flatten(1), torch.cos(xf).flatten(1)], dim=1)
-        # Return shape (B,) for convenience.
-        return self.net(h).squeeze(-1)
-
-
-# =========================
-#  100 Gaussians dataset
-# =========================
-
-def sample_100gaussians(
-    batch_size: int,
-    device: torch.device,
-    *,
-    generator: torch.Generator = None,
-    grid_scale: float = 1.0,
-    std: float = 0.03,
-) -> torch.Tensor:
-    """
-    Sample from a 100-Gaussian mixture:
-      - Centers on a 10x10 grid at coordinates:
-            { -4.5, -3.5, ..., 4.5 } * grid_scale
-      - Isotropic Gaussian noise with `std`.
-
-    This is intentionally dense and low-variance to stress-test mode coverage.
-    """
-    if batch_size <= 0:
-        raise ValueError(f"batch_size must be positive, got {batch_size}")
-
-    if generator is None:
-        idx_x = torch.randint(0, 10, (batch_size,), device=device)
-        idx_y = torch.randint(0, 10, (batch_size,), device=device)
-    else:
-        idx_x = torch.randint(0, 10, (batch_size,), device=device, generator=generator)
-        idx_y = torch.randint(0, 10, (batch_size,), device=device, generator=generator)
-
-    # Map indices 0..9 to coordinates -4.5..4.5
-    centers_x = (idx_x - 4.5) * grid_scale
-    centers_y = (idx_y - 4.5) * grid_scale
-
-    centers = torch.stack(
-        (centers_x, centers_y),
-        dim=1,
-    ).to(device=device, dtype=torch.float32)
-
-    if generator is None:
-        noise = torch.randn(batch_size, 2, device=device) * std
-    else:
-        noise = torch.randn(batch_size, 2, device=device, generator=generator) * std
-
-    return centers + noise
-
-
-# =========================
-#  Metrics
-# =========================
-
-@torch.no_grad()
-def mode_coverage(
-    generator: nn.Module,
-    prior: ParticlePrior,
-    device: torch.device,
-    n_eval: int = 20000,
-    std: float = 0.03,
-    min_count: int = 10,
-) -> Tuple[int, float]:
-    """
-    Coverage metrics over the full particle cloud:
-      - modes: number of grid centers with >= min_count "high quality" samples
-        (within 3 sigma of the center),
-      - hq_frac: fraction of samples that are high quality.
-    """
-    generator.eval()
-    idx = torch.randint(0, prior.num_particles, (n_eval,), device=device)
-    fake = generator(prior.z[idx])
-    coords = torch.arange(10, device=device, dtype=torch.float32) - 4.5
-    cx, cy = torch.meshgrid(coords, coords, indexing="ij")
-    centers = torch.stack([cx.flatten(), cy.flatten()], dim=1)
-    dists = torch.cdist(fake, centers)
-    mind, nearest = dists.min(dim=1)
-    hq = mind <= 3 * std
-    counts = torch.bincount(nearest[hq], minlength=100)
-    generator.train()
-    return int((counts >= min_count).sum().item()), hq.float().mean().item()
-
+from lib.toy_models import (  # noqa: E402
+    SimpleMLPGenerator, SimpleMLPDiscriminator, sample_100gaussians, mode_coverage,
+)
 
 # =========================
 #  Visualization
@@ -302,6 +156,7 @@ def train(
     snapshot_interval: int = 500,
     seed: int = 1234,
     device_str: str = None,
+    prior_kind: str = "particles",
 ):
     # Device / seeds
     if device_str is not None:
@@ -321,9 +176,14 @@ def train(
         viz_gen = torch.Generator()
     train_gen.manual_seed(seed)
     viz_gen.manual_seed(seed + 1)
+    latent_gen = torch.Generator(device=device).manual_seed(seed + 2)
+    penalty_gen = torch.Generator(device=device).manual_seed(seed + 3)
+    eval_gen = torch.Generator(device=device).manual_seed(seed + 999)
 
     # Models
-    prior = ParticlePrior(num_particles=num_particles, z_dim=z_dim).to(device)
+    prior_kind = canonical_prior_kind(prior_kind)
+    learnable_prior = prior_kind == "particles"
+    prior = make_prior(prior_kind, num_particles=num_particles, z_dim=z_dim).to(device)
     G = SimpleMLPGenerator(z_dim=z_dim).to(device)
     D = SimpleMLPDiscriminator(in_dim=2, fourier=fourier).to(device)
 
@@ -349,10 +209,9 @@ def train(
         lr=lr,
         betas=(beta1, 0.999),
     )
-    opt_prior = torch.optim.Adam(
-        prior.parameters(),
-        lr=lr * 10.0,  # Particles need higher mobility
-        betas=(beta1, 0.999),
+    opt_prior = (
+        torch.optim.Adam(prior.parameters(), lr=lr * 10.0, betas=(beta1, 0.999))
+        if learnable_prior else None
     )
     opt_D = torch.optim.Adam(
         D.parameters(),
@@ -380,9 +239,10 @@ def train(
     )
 
     total_steps = epochs * steps_per_epoch
+    all_opts = tuple(opt for opt in (opt_G, opt_D, opt_prior) if opt is not None)
     base_lrs = {
         id(opt): [g["lr"] for g in opt.param_groups]
-        for opt in (opt_G, opt_D, opt_prior)
+        for opt in all_opts
     }
 
     global_step = 0
@@ -397,7 +257,7 @@ def train(
                 scale = lr_floor + (1.0 - lr_floor) * 0.5 * (
                     1.0 + math.cos(math.pi * frac)
                 )
-            for opt in (opt_G, opt_D, opt_prior):
+            for opt in all_opts:
                 for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
                     group["lr"] = base * scale
 
@@ -413,7 +273,7 @@ def train(
                 generator=train_gen,
             )
             with torch.no_grad():
-                z_fake, _ = prior.sample(batch_size)
+                z_fake, _ = prior.sample(batch_size, generator=latent_gen)
                 x_fake = G(z_fake)
 
             real_logits = D(x_real)
@@ -425,7 +285,9 @@ def train(
             # Fourier D coexist with full mode coverage: it caps D's
             # steepness where the data is. The regularizer recomputes its own
             # graph internally, so neither batch needs requires_grad here.
-            pen, _ = regularizer.penalty(D, x_real, x_fake, global_step)
+            pen, _ = regularizer.penalty(
+                D, x_real, x_fake, global_step, generator=penalty_gen,
+            )
             loss_d = loss_d + pen
 
             opt_D.zero_grad()
@@ -438,7 +300,7 @@ def train(
             D.eval()
             G.train()
 
-            z_fake, idx = prior.sample(batch_size)
+            z_fake, idx = prior.sample(batch_size, generator=latent_gen)
             x_fake = G(z_fake)
             fake_logits = D(x_fake)
 
@@ -454,20 +316,20 @@ def train(
             else:
                 loss_gan = gan_loss.g_loss(fake_logits)
 
-            with torch.no_grad():
+            ep_z = loss_gan.new_zeros(())
+            if learnable_prior:
                 unique_idx = torch.unique(idx)
-
-            # VICReg-like regularization on the current batch
-            ep_z = vic_reg(prior.z[unique_idx])
-
+                ep_z = vic_reg(prior.z[unique_idx])
             loss_g = loss_gan + lambda_ep * ep_z
 
             opt_G.zero_grad()
-            opt_prior.zero_grad()
+            if opt_prior is not None:
+                opt_prior.zero_grad()
             loss_g.backward()
 
             opt_G.step()
-            opt_prior.step()
+            if opt_prior is not None:
+                opt_prior.step()
 
             # EMA update
             with torch.no_grad():
@@ -480,7 +342,10 @@ def train(
             # Logging / snapshots
             # -------------------------
             if global_step % log_interval == 0:
-                modes, hq_frac = mode_coverage(ema_G, ema_prior, device)
+                eval_gen.manual_seed(seed + 999)
+                modes, hq_frac = mode_coverage(
+                    ema_G, ema_prior, device, sample_generator=eval_gen,
+                )
                 print(
                     f"[epoch {epoch:04d} step {global_step:06d}] "
                     f"D: {loss_d.item():.4f} "
@@ -513,10 +378,11 @@ def train(
     return prior, G, D
 
 
-def main() -> None:
+def main(default_prior="particles", default_out_dir="100gaussians_samples") -> None:
     parser = argparse.ArgumentParser(
-        description="100 Gaussians toy problem with ParticlePrior + EP regularizer.",
+        description="100 Gaussians: matched learned-table and Gaussian prior controls.",
     )
+    parser.add_argument("--prior", choices=PRIOR_KINDS, default=default_prior)
     parser.add_argument("--epochs", type=int, default=7)
     parser.add_argument("--steps_per_epoch", type=int, default=1000)
     parser.add_argument("--batch_size", type=int, default=256)
@@ -573,7 +439,7 @@ def main() -> None:
         default="rp",
         choices=["vanilla", "rp", "ra"],
     )
-    parser.add_argument("--out_dir", type=str, default="100gaussians_samples")
+    parser.add_argument("--out_dir", type=str, default=default_out_dir)
     parser.add_argument("--log_interval", type=int, default=100)
     parser.add_argument("--snapshot_interval", type=int, default=500)
     parser.add_argument("--seed", type=int, default=1234)
@@ -618,6 +484,7 @@ def main() -> None:
         snapshot_interval=args.snapshot_interval,
         seed=args.seed,
         device_str=args.device,
+        prior_kind=args.prior,
     )
 
 

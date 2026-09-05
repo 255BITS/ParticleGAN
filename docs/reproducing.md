@@ -62,11 +62,13 @@ further ablations are needed to distinguish their individual effects.
 
 ```bash
 python experiments/compare_priors.py --help
-python experiments/compare_priors.py
+python experiments/compare_priors.py --study-dir runs/prior_comparison --run --device cuda:0
 ```
 
-The generator emits a matched set of configurations and a protocol manifest;
-use the printed run instructions for full training. Treat the old GIFs and
+Omit `--run` to emit configurations and a protocol manifest for an external
+scheduler. Use a new study directory for each generation. See
+[the prior-control protocol](prior-controls.md) for outputs and collection.
+Treat the old GIFs and
 regularizer tables as historical recipe results, not as this controlled
 three-way comparison. Use fresh seeds for confirmation after selecting a
 recipe, and retain individual seed scores rather than only an aggregate.
