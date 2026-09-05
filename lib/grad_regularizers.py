@@ -152,6 +152,7 @@ class GradRegularizer:
         x_real: torch.Tensor,
         x_fake: torch.Tensor,
         step: int,
+        generator: torch.Generator = None,
     ) -> Tuple[torch.Tensor, Dict]:
         """
         Compute the penalty term to add to the discriminator loss.
@@ -176,7 +177,7 @@ class GradRegularizer:
         center = self.center(step)
 
         if self.arm in ("e_interp", "g_interp_cap"):
-            pen = coeff_eff * self._interp_term(D, x_real, x_fake, center)
+            pen = coeff_eff * self._interp_term(D, x_real, x_fake, center, generator)
         else:
             n_r = self._grad_norm(D, x_real, squared=(self.arm == "a_r1r2"))
             n_f = self._grad_norm(D, x_fake, squared=(self.arm == "a_r1r2"))
@@ -234,10 +235,12 @@ class GradRegularizer:
         x_real: torch.Tensor,
         x_fake: torch.Tensor,
         center: float,
+        generator: torch.Generator = None,
     ) -> torch.Tensor:
         """E[(||grad D(x_i)|| - c)^2] on per-sample real/fake interpolates."""
         eps = torch.rand(
-            x_real.shape[0], 1, device=x_real.device, dtype=x_real.dtype
+            (x_real.shape[0],) + (1,) * (x_real.ndim - 1),
+            device=x_real.device, dtype=x_real.dtype, generator=generator,
         )
         x_i = eps * x_real.detach() + (1.0 - eps) * x_fake.detach()
         n_i = self._grad_norm(D, x_i, squared=False)
@@ -279,6 +282,7 @@ def grad_norm_stats(
     D: torch.nn.Module,
     x_real: torch.Tensor,
     x_fake: torch.Tensor,
+    generator: torch.Generator = None,
 ) -> Dict[str, float]:
     """
     Measurement-only summary of D's gradient-norm field (no create_graph, so
@@ -293,7 +297,8 @@ def grad_norm_stats(
     """
     with torch.enable_grad():
         eps = torch.rand(
-            x_real.shape[0], 1, device=x_real.device, dtype=x_real.dtype
+            (x_real.shape[0],) + (1,) * (x_real.ndim - 1),
+            device=x_real.device, dtype=x_real.dtype, generator=generator,
         )
         x_interp = eps * x_real.detach() + (1.0 - eps) * x_fake.detach()
 

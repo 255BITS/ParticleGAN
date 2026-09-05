@@ -14,7 +14,7 @@ import torch.nn as nn
 
 
 class ParticlePrior(nn.Module):
-    """
+    r"""
     Learnable latent particle cloud.
 
     This module holds a parameter matrix z \in R^{M x D} where each row is a
@@ -35,7 +35,8 @@ class ParticlePrior(nn.Module):
         prior, ... = accelerator.prepare(prior, ...)
 
         # later in the training loop
-        z, idx = accelerator.unwrap_model(prior).sample(batch_size)
+        idx = accelerator.unwrap_model(prior).sample_indices(batch_size)
+        z = prior(idx)  # Keep the DDP forward path so gradients synchronize.
     """
 
     def __init__(
@@ -170,3 +171,46 @@ class ParticlePrior(nn.Module):
                 idx = self.sample_indices(batch_size, generator=generator)
         z_batch = self.z[idx]
         return z_batch, idx
+
+
+class FreshGaussianPrior(ParticlePrior):
+    """Fresh Gaussian noise, with a fixed reference batch for snapshots only.
+
+    Ordinary ``sample`` calls draw from N(0, init_std**2), independently of the
+    reference buffer ``z``. ``fixed_first_n=True`` instead selects that buffer
+    for reproducible plots. The buffer also keeps initialization RNG consumption
+    identical across prior controls. This prior has no trainable parameters;
+    ordinary samples return ``None`` for indices because they are not table rows.
+    """
+
+    def __init__(self, num_particles=100_000, z_dim=256, init_std=1.0,
+                 device=None, dtype=None):
+        super().__init__(num_particles, z_dim, init_std, device, dtype, learnable=False)
+        self.init_std = float(init_std)
+
+    def sample(self, batch_size, generator=None, *, fixed_first_n=False, offset=0):
+        if fixed_first_n:
+            return super().sample(batch_size, generator, fixed_first_n=True, offset=offset)
+        if batch_size <= 0:
+            raise ValueError(f"batch_size must be positive, got {batch_size}")
+        z = torch.randn(batch_size, self.z_dim, device=self.z.device,
+                        dtype=self.z.dtype, generator=generator) * self.init_std
+        return z, None
+
+
+PRIOR_KINDS = ("particles", "frozen_gaussian", "fresh_gaussian", "gaussian")
+
+
+def canonical_prior_kind(kind: str) -> str:
+    """Keep historical ``gaussian`` configs as frozen finite-table controls."""
+    kind = str(kind).lower()
+    if kind not in PRIOR_KINDS:
+        raise ValueError(f"Unknown prior: {kind!r} (expected one of {PRIOR_KINDS})")
+    return "frozen_gaussian" if kind == "gaussian" else kind
+
+
+def make_prior(kind: str, **kwargs) -> ParticlePrior:
+    kind = canonical_prior_kind(kind)
+    if kind == "fresh_gaussian":
+        return FreshGaussianPrior(**kwargs)
+    return ParticlePrior(**kwargs, learnable=(kind == "particles"))

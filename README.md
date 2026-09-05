@@ -1,37 +1,44 @@
 # ParticleGAN
 
-**GANs don't collapse when z can move too.**
+**Learnable latent particles for studying GAN mode coverage and stability.**
 
 ![100 Gaussians with Particle Prior](100gaussians.gif)
 
 ## The Problem
 
-Traditional GANs suffer from **mode collapse**: the generator learns to produce only a subset of the data distribution, ignoring other valid modes. This happens because G must warp a *fixed* prior (usually a Gaussian) to match the data. All geometric stress concentrates in G, causing the learned manifold to fold and tear.
+GANs can suffer from **mode collapse**: the generator produces only a subset of the data distribution. This project explores whether optimizing a finite latent particle cloud alongside the generator improves coverage on small, highly multimodal benchmarks.
 
 ## The Insight
 
 **What if the prior could move too?**
 
-Instead of forcing G to do all the work, we introduce learnable "particles" in latent space. These particles move during training to match the structure of the data, absorbing geometric stress alongside G. The result: stable convergence even on highly multimodal distributions.
+We introduce learnable "particles" in latent space. Both the generator and these latent vectors are optimized during training. The experiments examine how that extra flexibility interacts with discriminator regularization, optimizer dynamics, and sample quality. The results are empirical observations on these benchmarks, not a guarantee against collapse.
 
-### Without Particles: Mode Collapse
+### Historical Gaussian example
 
 ![100 Gaussians without Particle Prior](100gaussians_no_particles.gif)
 
-*Same architecture, same hyperparameters, but with a fixed Gaussian prior — the generator collapses to a subset of modes.*
+*Historical visualization from the older Gaussian example. Its architecture and training recipe differ from the particle example above, so these GIFs are not a matched prior comparison.*
 
-## Results
+## Evidence and controls
 
-| Problem | Fixed Gaussian Prior | Particle Prior |
-|---------|---------------------|----------------|
-| 5 modes (text) | collapse | **converges** |
-| 100 modes (2D grid) | collapse | **converges** |
+The historical [regularizer study](FINDINGS.md) compares discriminator penalties within the particle model. It does not establish that a fixed Gaussian prior necessarily collapses. The current examples share one training loop and matched defaults; the only training change for the Gaussian controls is removing the learned prior and its regularizer.
+
+For a reproducible three-way comparison, run:
+
+```bash
+python experiments/compare_priors.py --study-dir runs/prior_comparison --run --device cuda:0
+```
+
+This runs learned particles, a frozen Gaussian table, and fresh Gaussian noise on paired seeds 23001–23003. It records configs, source revision, final samples, coverage, transport distances, and per-mode radial and covariance shape diagnostics. See [prior controls and interpretation](docs/prior-controls.md) and [reproducing the project](docs/reproducing.md).
+
+The completed [nine-run matched comparison](reports/prior-comparison/README.md) reached 100/100 high-quality modes on every learned-prior seed, with a mean high-quality fraction of 98.6%, versus 8.1% for the frozen table and 6.4% for fresh Gaussian noise. This establishes a concentration advantage under this recipe. The report also shows remaining tail and covariance distortion, finite output support, and transport-metric tradeoffs; it does not establish complete Gaussian calibration or a general guarantee against collapse.
 
 ## How It Works
 
 1. **Particle Prior**: Instead of sampling z ~ N(0, I), we maintain a set of learnable latent vectors (particles). During training, we sample from this discrete set.
 
-2. **Joint Optimization**: Particles are optimized alongside G and D. They naturally spread out to cover the data modes.
+2. **Joint Optimization**: Particles are optimized alongside G and D. Their positions can adapt to the data modes.
 
 3. **VICReg Regularization**: We apply variance-covariance regularization to prevent particles from collapsing to a single point, while allowing arbitrary topology (clusters, gaps, etc.).
 
@@ -60,7 +67,7 @@ The main benchmark. 100 Gaussian modes arranged on a 10×10 grid. This is a stre
 python examples/100gaussians.py
 ```
 
-**With particle prior**: All 100 modes are captured — 100/100 modes with ~99% of samples within 3σ of a center after 7k steps.
+The historical particle study reports runs with 100/100 modes and approximately 99% of samples within 3σ of a center after 7k steps. Coverage alone does not establish that the within-mode distribution is correct; the trainer also records shape and transport metrics.
 
 The default recipe is RpGAN (relativistic, logistic) + a one-sided cap gradient penalty on D (`relu(‖∇ₓD‖ − 1)²` on reals and fakes, coeff 1.0), Fourier-feature D, EMA evaluation, Adam β1=0, base LR 6e-4 with a delayed cosine anneal. The cap won a 420-run bake-off against the zero-centered R1/R2 penalty, which is still available with `--reg_arm a_r1r2 --reg_coeff 0.02`. See [FINDINGS.md](FINDINGS.md) for the study and [docs/convergence-tips.md](docs/convergence-tips.md) for the transferable reasoning behind each ingredient.
 
@@ -69,14 +76,14 @@ The default recipe is RpGAN (relativistic, logistic) + a one-sided cap gradient 
 python examples/100gaussians_no_particle_prior.py
 ```
 
-The baseline demonstrates classic mode collapse — the generator covers only a fraction of the modes.
+This entrypoint uses the same architecture, losses, learning rates, schedule, and EMA as the particle example, with fresh Gaussian noise. Use `--prior frozen_gaussian` for a finite frozen-table control. The outcome depends on the recipe and seed; the baseline does not assume collapse.
 
 ## Installation
 
 ```bash
 git clone https://github.com/255BITS/ParticleGAN.git
 cd ParticleGAN
-pip install torch matplotlib numpy
+python -m pip install -e '.[dev]'
 ```
 
 ## Project Structure
@@ -119,12 +126,12 @@ from lib.gan_loss import GANLoss
 
 loss_fn = GANLoss(loss_type='hinge', mode='vanilla')
 d_loss = loss_fn.d_loss(d_real, d_fake)
-g_loss = loss_fn.g_loss(d_real, d_fake)
+g_loss = loss_fn.g_loss(d_fake)
 ```
 
 ### VICRegLikeLoss (`lib/vicreg_loss.py`)
 
-Prevents particle collapse while allowing flexible topology:
+Penalizes low marginal variance and cross-dimension covariance while allowing flexible topology:
 
 ```python
 from lib.vicreg_loss import VICRegLikeLoss

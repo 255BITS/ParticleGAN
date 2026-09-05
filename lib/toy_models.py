@@ -1,9 +1,8 @@
 """
 Toy models and data for the 2D Gaussian-grid benchmark.
 
-These are lifted verbatim from `examples/100gaussians.py` so that experiment
-scripts can import the exact same generator, discriminator, dataset sampler and
-coverage metric without depending on (or perturbing) the example itself.
+The example and experiment trainer import the same generator, discriminator,
+dataset sampler and coverage metric from this module.
 """
 
 from typing import Tuple
@@ -145,16 +144,18 @@ def mode_coverage(
     n_eval: int = 20000,
     std: float = 0.03,
     min_count: int = 10,
+    sample_generator: torch.Generator = None,
 ) -> Tuple[int, float]:
     """
-    Coverage metrics over the full particle cloud:
+    Coverage metrics on samples from the selected prior:
       - modes: number of grid centers with >= min_count "high quality" samples
         (within 3 sigma of the center),
       - hq_frac: fraction of samples that are high quality.
     """
+    was_training = generator.training
     generator.eval()
-    idx = torch.randint(0, prior.num_particles, (n_eval,), device=device)
-    fake = generator(prior.z[idx])
+    z, _ = prior.sample(n_eval, generator=sample_generator)
+    fake = generator(z)
     coords = torch.arange(10, device=device, dtype=torch.float32) - 4.5
     cx, cy = torch.meshgrid(coords, coords, indexing="ij")
     centers = torch.stack([cx.flatten(), cy.flatten()], dim=1)
@@ -162,5 +163,5 @@ def mode_coverage(
     mind, nearest = dists.min(dim=1)
     hq = mind <= 3 * std
     counts = torch.bincount(nearest[hq], minlength=100)
-    generator.train()
+    generator.train(was_training)
     return int((counts >= min_count).sum().item()), hq.float().mean().item()
