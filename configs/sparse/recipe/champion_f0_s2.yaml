@@ -1,0 +1,8 @@
+arm: b_cap
+coeff: 1.0
+emb_dim: 8
+fourier: 0
+out_dir: results/sparse/runs/recipe/champion_f0_s2
+prior_partition: none
+seed: 2
+total_steps: 5000

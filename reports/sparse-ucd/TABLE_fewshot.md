@@ -1,0 +1,15 @@
+# fewshot: 15 runs, 5 groups, 0 incomplete
+
+Historical results, not corrected reruns. Numerical `ppur` values are invalid; see [corrections](CORRECTIONS.md).
+
+| group | n | bar | bar_step | modes | hq | cond | sep | sym | joint | symKL | sp@1e-2 | sp@1e-3 | rec | zero | smear | core | w1 | ucdF | ppur (invalid historical) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| n8192 | 3 | 0/3 | - | 63±1 | 0.992±0.001 | 1.000±0.000 | 1.06±0.01 | 1.000±0.000 | 1.000±0.000 | 0.00±0.00 | 0.723±0.023 | 0.090±0.005 | 1.000±0.000 | 0.00±0.00 | 0.008±0.001 | 0.77±0.03 | 0.046±0.007 | 1.00±0.00 | - |
+| n2048 | 3 | 0/3 | - | 63±0 | 0.990±0.001 | 1.000±0.000 | 1.06±0.01 | 1.000±0.000 | 1.000±0.000 | 0.00±0.00 | 0.724±0.006 | 0.091±0.002 | 0.999±0.000 | 0.00±0.00 | 0.008±0.000 | 0.71±0.04 | 0.049±0.004 | 1.00±0.00 | - |
+| n512 | 3 | 0/3 | - | 62±2 | 0.992±0.001 | 1.000±0.001 | 1.09±0.01 | 0.999±0.000 | 0.999±0.000 | 0.00±0.00 | 0.733±0.003 | 0.094±0.001 | 0.999±0.000 | 0.00±0.00 | 0.008±0.000 | 0.63±0.01 | 0.056±0.004 | 1.00±0.00 | - |
+| n128 | 3 | 0/3 | - | 50±2 | 0.990±0.003 | 1.000±0.001 | 1.20±0.02 | 0.999±0.001 | 0.999±0.001 | 0.00±0.00 | 0.767±0.007 | 0.099±0.002 | 0.999±0.000 | 0.00±0.00 | 0.008±0.001 | 0.42±0.04 | 0.089±0.008 | 1.00±0.00 | - |
+| n512_gauss | 3 | 0/3 | - | 26±1 | 0.072±0.007 | 0.943±0.003 | 0.89±0.00 | 0.912±0.001 | 0.910±0.001 | 0.04±0.00 | 0.081±0.001 | 0.008±0.000 | 0.904±0.003 | 0.00±0.00 | 0.114±0.001 | 5.43±0.03 | 0.093±0.002 | 1.00±0.00 | - |
+
+bar = all seeds must hold: modes full & hq>=0.9 & cond>=0.95 & sym>=0.95 & sp@1e-2>=0.95 at the end; bar_step = median first crossing.
+cond = P(nearest mode has requested class); sep = per-class cloud separation vs real; sym = symbol matches the mode the real part landed in;
+joint = both; symKL = KL(true p(s|c) || emitted); sp@eps = P(|x|<eps on inactive dims); zero = exact 0.0 fraction; core = active-dim width ratio; ppur = particle class purity.

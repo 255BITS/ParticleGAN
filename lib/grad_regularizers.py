@@ -54,6 +54,13 @@ class GradRegularizer:
             - 'e_interp':  (n_i - 1)^2 on real/fake interpolates (WGAN-GP geometry,
                            centered at 1 rather than at 0)
             - 'f_none':    no penalty at all.
+            - 'g_interp_cap': relu(n_i - kappa)^2 on real/fake interpolates: the
+                           one-sided cap of 'b_cap', but enforced along the
+                           path between the samples rather than at them. In
+                           high-dimensional data the sample-point cap leaves
+                           D free to be arbitrarily steep *between* reals and
+                           fakes (which is where the fakes have to travel), so
+                           this is the cap's natural high-dim form.
         coeff (float): penalty strength (`r1_gamma` in the example script).
         kappa (float): the cap for 'b_cap'; ignored by the other arms.
         lazy_k (int): apply the penalty only every k-th step and multiply the
@@ -87,7 +94,7 @@ class GradRegularizer:
             Required (> 0) whenever `target_anneal` is not 'none'.
     """
 
-    ARMS = ("a_r1r2", "b_cap", "c_eikonal", "d_asym", "e_interp", "f_none")
+    ARMS = ("a_r1r2", "b_cap", "c_eikonal", "d_asym", "e_interp", "f_none", "g_interp_cap")
     NORMS = ("l2", "l1", "linf")
     ANNEALS = ("none", "linear", "delayed")
 
@@ -168,7 +175,7 @@ class GradRegularizer:
 
         center = self.center(step)
 
-        if self.arm == "e_interp":
+        if self.arm in ("e_interp", "g_interp_cap"):
             pen = coeff_eff * self._interp_term(D, x_real, x_fake, center)
         else:
             n_r = self._grad_norm(D, x_real, squared=(self.arm == "a_r1r2"))
@@ -187,7 +194,7 @@ class GradRegularizer:
         """
         if self.arm == "a_r1r2":
             return 0.0
-        c0 = self.kappa if self.arm == "b_cap" else 1.0
+        c0 = self.kappa if self.arm in ("b_cap", "g_interp_cap") else 1.0
 
         if self.target_anneal == "none":
             return c0
@@ -234,6 +241,8 @@ class GradRegularizer:
         )
         x_i = eps * x_real.detach() + (1.0 - eps) * x_fake.detach()
         n_i = self._grad_norm(D, x_i, squared=False)
+        if self.arm == "g_interp_cap":
+            return F.relu(n_i - center).pow(2).mean()
         return (n_i - center).pow(2).mean()
 
     def _grad_norm(

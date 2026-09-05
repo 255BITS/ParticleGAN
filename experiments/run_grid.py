@@ -97,6 +97,7 @@ def run_one(
     gpu: str,
     python_bin: str,
     trainer: str,
+    echo_last_line: bool = False,
 ) -> Tuple[int, float]:
     """
     Execute a single training run, streaming its output to out_dir/log.txt.
@@ -129,6 +130,15 @@ def run_one(
         except FileNotFoundError as exc:
             log.write(f"\n[run_grid] launch failed: {exc}\n")
             returncode = 127
+    if echo_last_line:
+        # Surface the run's own final line (its [done] summary, or the
+        # traceback tail) in the grid's stdout so one log tells the story.
+        try:
+            lines = [ln.rstrip() for ln in log_path.read_text().splitlines() if ln.strip()]
+            if lines:
+                print(f"[run_grid]   {Path(out_dir).name}: {lines[-1][:400]}", flush=True)
+        except OSError:
+            pass
     return returncode, time.time() - t0
 
 
@@ -170,6 +180,11 @@ def main() -> None:
         "--force",
         action="store_true",
         help="Re-run configs even if a valid summary.json already exists.",
+    )
+    parser.add_argument(
+        "--echo_last_line",
+        action="store_true",
+        help="After each run, print the last line of its log.txt (its [done] summary or error).",
     )
     parser.add_argument(
         "--dry_run",
@@ -239,7 +254,8 @@ def main() -> None:
             gpu = slots.get()
             try:
                 returncode, elapsed = run_one(
-                    config_path, out_dir, gpu, args.python, args.trainer
+                    config_path, out_dir, gpu, args.python, args.trainer,
+                    echo_last_line=args.echo_last_line,
                 )
             except Exception as exc:  # noqa: BLE001 - never lose a worker
                 returncode, elapsed = -1, 0.0

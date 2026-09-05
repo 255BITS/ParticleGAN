@@ -1,0 +1,8 @@
+arm: g_interp_cap
+coeff: 1.0
+emb_dim: 0
+fourier: 0
+out_dir: results/sparse/runs/recipe/pp_icap_f0_s3
+prior_partition: class
+seed: 3
+total_steps: 5000

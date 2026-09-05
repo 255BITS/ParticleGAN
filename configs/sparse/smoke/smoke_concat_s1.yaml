@@ -1,0 +1,5 @@
+d_mode: concat
+eval_interval: 100
+out_dir: results/sparse/runs/smoke/smoke_concat_s1
+seed: 1
+total_steps: 300

@@ -1,0 +1,11 @@
+arm: g_interp_cap
+coeff: 1.0
+emb_dim: 0
+fourier_ramp_end: 0.7
+fourier_ramp_start: 0.3
+hidden: 256
+out_dir: results/sparse/runs/recipe/base_8k_s2
+prior_partition: class
+seed: 2
+total_steps: 8000
+z_dim: 16
