@@ -62,9 +62,8 @@ from lib.sparse_models import (  # noqa: E402
     SparseCondGenerator,
     SparseJointDiscriminator,
     JointCritic,
-    XOnlyCritic,
 )
-from lib.sparse_metrics import evaluate_samples, convergence_bar  # noqa: E402
+from lib.sparse_metrics import evaluate_samples, convergence_bar, particle_class_purity  # noqa: E402
 
 
 DEFAULTS: Dict = {
@@ -311,14 +310,14 @@ def train(cfg: Dict, device: torch.device) -> Dict:
     @torch.no_grad()
     def draw_fakes(Gm: nn.Module, pr: ParticlePrior, c: torch.Tensor, gen: torch.Generator):
         Gm.eval()
-        z, _ = sample_z(pr, c, gen)
+        z, idx = sample_z(pr, c, gen)
         out = Gm(z, c)
         Gm.train()
-        return out
+        return out, idx
 
     def run_eval(step: int, extra: Dict[str, float]) -> Dict:
         eval_gen.manual_seed(seed + 4242 + step)
-        out = draw_fakes(ema_G, ema_prior, c_eval, eval_gen)
+        out, _ = draw_fakes(ema_G, ema_prior, c_eval, eval_gen)
         row = {"step": int(step)}
         row.update(evaluate_samples(toy, out["x"], out["y"], out["logits"], c_eval, x_real_eval, c_real_eval, seed=seed, with_shape=False))
         if ucd:
@@ -391,15 +390,10 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         if ucd and ucd_lambda > 0:
             ucd_ce = F.cross_entropy(dr["class_logits"], c_r) + F.cross_entropy(df["class_logits"], c_r)
             loss_d = loss_d + ucd_lambda * ucd_ce
-        if gp_on_y:
-            critic = JointCritic(D, c_r)
-            pen, pst = regularizer.penalty(critic, torch.cat([x_r, y_r], 1), torch.cat([x_f, y_f], 1), step)
-        else:
-            # y differs between the two batches, so each side gets its own fixed y.
-            pen_r, _ = regularizer.penalty(XOnlyCritic(D, y_r, c_r), x_r, x_r, step)
-            pen_f, pst = regularizer.penalty(XOnlyCritic(D, y_f, c_r), x_f, x_f, step)
-            pen = 0.5 * (pen_r + pen_f)
-            pst = {"pen": float(pen.detach())}
+        # Keep joint interpolation locations identical in both ablations; the
+        # critic can exclude the y derivative without changing the sampled y.
+        critic = JointCritic(D, c_r, grad_on_y=gp_on_y)
+        pen, pst = regularizer.penalty(critic, torch.cat([x_r, y_r], 1), torch.cat([x_f, y_f], 1), step)
         loss_d = loss_d + pen
         opt_D.zero_grad()
         loss_d.backward()
@@ -450,7 +444,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
     n_final = int(cfg["final_n"])
     c_fin = torch.arange(n_final, device=device) % C
     x_real_fin, c_real_fin, _, _ = toy.sample(n_final, generator=eval_gen)
-    out = draw_fakes(ema_G, ema_prior, c_fin, eval_gen)
+    out, final_idx = draw_fakes(ema_G, ema_prior, c_fin, eval_gen)
     final = evaluate_samples(toy, out["x"], out["y"], out["logits"], c_fin, x_real_fin, c_real_fin, seed=seed, with_shape=True)
     if ucd:
         with torch.no_grad():
@@ -460,29 +454,26 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         final["ucd_acc_fake"] = float((cl_f.argmax(1) == c_fin[:4096]).float().mean())
     final.update({k: bool(v) for k, v in convergence_bar(final, toy.n_modes).items()})
 
-    # particle-class specialisation: how concentrated is each particle's class usage
-    # (only meaningful for the shared table; a partitioned table is pure by construction)
+    # Specialization among correctly conditioned draws, using the particles that
+    # actually generated out. A shared particle can correctly serve many classes
+    # when G has a class embedding; low purity is then expected, not a failure.
     spec = float("nan")
     if learnable and partition == "none":
         with torch.no_grad():
-            zz, ii = sample_z(ema_prior, c_fin, eval_gen)
             m_hat, _ = toy.assign(out["x"])
-            ok = toy.class_of_mode[m_hat] == c_fin
-            tab = torch.zeros(P, C, device=device).index_put_((ii[ok], c_fin[ok]), torch.ones(int(ok.sum()), device=device), accumulate=True)
-            used = tab.sum(1) >= 4
-            if bool(used.any()):
-                spec = float((tab[used].max(1).values / tab[used].sum(1)).mean())
+            spec = particle_class_purity(final_idx, c_fin, toy.class_of_mode[m_hat], P, C)
     final["particle_class_purity"] = spec
 
     save_plots(toy, out["x"], out["logits"].argmax(1), c_fin, x_real_fin, c_real_fin, out_path, title=Path(cfg["out_dir"]).name)
     np.savez_compressed(out_path / "final_samples.npz", x=out["x"].cpu().numpy(), y=out["y"].cpu().numpy(),
-                        logits=out["logits"].cpu().numpy(), c=c_fin.cpu().numpy())
+                        logits=out["logits"].cpu().numpy(), c=c_fin.cpu().numpy(), particle_idx=final_idx.cpu().numpy())
     torch.save({"G": G.state_dict(), "D": D.state_dict(), "prior": prior.state_dict(),
                 "ema_G": ema_G.state_dict(), "ema_prior": ema_prior.state_dict()}, out_path / "ckpt.pt")
 
     # steps-to-bar and a "held" flag: crossed the bar and still on it at the end
     summary = {
         "config": dict(cfg),
+        "implementation_versions": {"x_only_gp": 2, "particle_class_purity": 2},
         "final": final,
         "first_cross": first_cross,
         "bar_step": first_cross.get("bar_all"),

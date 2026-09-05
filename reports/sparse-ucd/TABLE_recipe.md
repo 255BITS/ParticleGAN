@@ -1,6 +1,8 @@
 # recipe: 51 runs, 17 groups, 0 incomplete
 
-| group | n | bar | bar_step | modes | hq | cond | sep | sym | joint | symKL | sp@1e-2 | sp@1e-3 | rec | zero | smear | core | w1 | ucdF | ppur |
+Historical results, not corrected reruns. Numerical `ppur` values are invalid; see [corrections](CORRECTIONS.md).
+
+| group | n | bar | bar_step | modes | hq | cond | sep | sym | joint | symKL | sp@1e-2 | sp@1e-3 | rec | zero | smear | core | w1 | ucdF | ppur (invalid historical) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | base_f0 | 3 | 0/3 | - | 63±0 | 0.994±0.002 | 1.000±0.000 | 1.08±0.01 | 1.000±0.000 | 1.000±0.000 | 0.00±0.00 | 0.701±0.008 | 0.086±0.002 | 1.000±0.000 | 0.00±0.00 | 0.008±0.000 | 0.52±0.06 | 0.040±0.003 | 1.00±0.00 | - |
 | base_8k | 3 | 0/3 | - | 63±1 | 0.990±0.003 | 1.000±0.000 | 1.07±0.01 | 1.000±0.000 | 1.000±0.000 | 0.00±0.00 | 0.704±0.081 | 0.090±0.017 | 0.999±0.000 | 0.00±0.00 | 0.009±0.002 | 0.65±0.13 | 0.042±0.003 | 1.00±0.00 | - |

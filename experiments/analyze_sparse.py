@@ -59,6 +59,13 @@ def group_name(run_dir: str) -> str:
     return re.sub(r"_s\d+$", "", run_dir)
 
 
+def legacy_x_only_gp(summary: Dict) -> bool:
+    cfg = summary.get("config", {})
+    return (cfg.get("gp_on_y") is False
+            and cfg.get("arm") in ("e_interp", "g_interp_cap")
+            and summary.get("implementation_versions", {}).get("x_only_gp", 1) < 2)
+
+
 def load_stage(stage: str):
     runs: Dict[str, List[Dict]] = defaultdict(list)
     curves: Dict[str, List[List[Dict]]] = defaultdict(list)
@@ -74,7 +81,10 @@ def load_stage(stage: str):
         except Exception:  # noqa: BLE001
             missing += 1
             continue
-        runs[group_name(d.name)].append(s)
+        group = group_name(d.name)
+        if legacy_x_only_gp(s):
+            group += " [legacy x-only GP]"
+        runs[group].append(s)
         rows = []
         try:
             with open(d / "metrics.jsonl") as f:
@@ -85,7 +95,7 @@ def load_stage(stage: str):
                         pass
         except FileNotFoundError:
             pass
-        curves[group_name(d.name)].append(rows)
+        curves[group].append(rows)
     return runs, curves, missing
 
 
@@ -111,12 +121,21 @@ def table(stage: str, runs: Dict[str, List[Dict]], missing: int) -> str:
         bar_step = f"{int(np.median(steps))}" + (f" ({len(steps)}/{n})" if len(steps) < n else "") if steps else "-"
         row = [g, str(n), f"{passed}/{n}", bar_step]
         for key, _, fmt in COLS:
-            row.append(fmt_cell([s["final"].get(key) for s in ss], fmt))
+            vals = [s["final"].get(key) for s in ss
+                    if key != "particle_class_purity"
+                    or s.get("implementation_versions", {}).get("particle_class_purity", 1) >= 2]
+            row.append(fmt_cell(vals, fmt))
         lines.append("| " + " | ".join(row) + " |")
     lines += ["",
               "bar = all seeds must hold: modes full & hq>=0.9 & cond>=0.95 & sym>=0.95 & sp@1e-2>=0.95 at the end; bar_step = median first crossing.",
               "cond = P(nearest mode has requested class); sep = per-class cloud separation vs real; sym = symbol matches the mode the real part landed in;",
-              "joint = both; symKL = KL(true p(s|c) || emitted); sp@eps = P(|x|<eps on inactive dims); zero = exact 0.0 fraction; core = active-dim width ratio; ppur = particle class purity."]
+              "joint = both; symKL = KL(true p(s|c) || emitted); sp@eps = P(|x|<eps on inactive dims); zero = exact 0.0 fraction; core = active-dim width ratio;",
+              "ppur = mean dominant-class share per particle among correctly conditioned draws (>=4 draws per particle). Low purity can be healthy when G has a class embedding."]
+    all_runs = [s for ss in runs.values() for s in ss]
+    if any(s.get("implementation_versions", {}).get("particle_class_purity", 1) < 2 for s in all_runs):
+        lines.append("Historical ppur values are omitted: older code paired samples with unrelated particle IDs; ppur uses only corrected runs, so its count may be smaller than n.")
+    if any(legacy_x_only_gp(s) for s in all_runs):
+        lines.append("Legacy x-only GP runs used endpoint penalties instead of interpolates. They are grouped separately and cannot establish the effect of excluding the y derivative; these results have not been recomputed.")
     return "\n".join(lines)
 
 

@@ -4,6 +4,11 @@ Companion to the design note
 [`../sparse-conditional-with-categorical-and-real-output.md`](../sparse-conditional-with-categorical-and-real-output.md).
 This file is the *how*; `FINDINGS.md` next to it is the *what happened*.
 
+**Review correction:** the checked-in results have not been rerun. Historical
+`ppur` numbers are invalid, and the `ucd_gpx` comparison changed penalty
+locations as well as the differentiated inputs. See [CORRECTIONS.md](CORRECTIONS.md)
+for the corrected implementation and the limits of the original evidence.
+
 ## The problem in one paragraph
 
 64 modes in R^24, each exactly 3-sparse (active dims take values in
@@ -84,7 +89,12 @@ data's top-2 PCs), `final_samples.npz`, `ckpt.pt`.
 | `core` (`core_ratio`) | median-centred core width on active dims ÷ σ (chi-median inverted) | 0.8–1.2 | < 0.8 compressed, > 2 blurry |
 | `w1` | sliced W1, fake vs real, all dims | small | — |
 | `ucd r/f` | D's argmax class == true class on reals / requested class on fakes (UCD's Nash probe) | high | low on fakes → G's samples are not class-typical |
-| `ppur` | particle class purity (shared table only) | — | 1.0 = particles specialised per class |
+| `ppur` | mean dominant-class share among each particle's correctly conditioned draws, requiring ≥4 draws (shared table only) | — | specialization diagnostic; low is expected if a shared particle serves many classes through G's embedding |
+
+New final sample archives include `particle_idx` so purity can be audited
+against the exact generated samples. Evaluation hardens every categorical
+head to argmax one-hot; `y_hardness = 1` therefore says nothing about
+training-time saturation. `sym_conf` measures the softmax confidence.
 
 **Convergence bar** (per run, all must hold at the end): `modes == 64`,
 `hq ≥ 0.9`, `cond ≥ 0.95`, `sym ≥ 0.95`, `sp@1e-2 ≥ 0.95`. `bar_step` is the

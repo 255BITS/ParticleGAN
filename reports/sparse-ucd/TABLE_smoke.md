@@ -1,6 +1,8 @@
 # smoke: 4 runs, 4 groups, 0 incomplete
 
-| group | n | bar | bar_step | modes | hq | cond | sep | sym | joint | symKL | sp@1e-2 | sp@1e-3 | rec | zero | smear | core | w1 | ucdF | ppur |
+Historical results, not corrected reruns. Numerical `ppur` values are invalid; see [corrections](CORRECTIONS.md).
+
+| group | n | bar | bar_step | modes | hq | cond | sep | sym | joint | symKL | sp@1e-2 | sp@1e-3 | rec | zero | smear | core | w1 | ucdF | ppur (invalid historical) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | smoke_ucd | 1 | 0/1 | - | 0 | 0.000 | 0.329 | 0.75 | 0.372 | 0.329 | 0.06 | 0.084 | 0.009 | 0.231 | 0.00 | 0.107 | 1.68 | 0.306 | 0.83 | 0.57 |
 | smoke_concat | 1 | 0/1 | - | 0 | 0.000 | 0.216 | 0.55 | 0.277 | 0.125 | 2.15 | 0.108 | 0.011 | 0.053 | 0.00 | 0.107 | 1.86 | 0.345 | - | 0.68 |

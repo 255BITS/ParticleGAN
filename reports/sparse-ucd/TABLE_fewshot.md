@@ -1,6 +1,8 @@
 # fewshot: 15 runs, 5 groups, 0 incomplete
 
-| group | n | bar | bar_step | modes | hq | cond | sep | sym | joint | symKL | sp@1e-2 | sp@1e-3 | rec | zero | smear | core | w1 | ucdF | ppur |
+Historical results, not corrected reruns. Numerical `ppur` values are invalid; see [corrections](CORRECTIONS.md).
+
+| group | n | bar | bar_step | modes | hq | cond | sep | sym | joint | symKL | sp@1e-2 | sp@1e-3 | rec | zero | smear | core | w1 | ucdF | ppur (invalid historical) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | n8192 | 3 | 0/3 | - | 63±1 | 0.992±0.001 | 1.000±0.000 | 1.06±0.01 | 1.000±0.000 | 1.000±0.000 | 0.00±0.00 | 0.723±0.023 | 0.090±0.005 | 1.000±0.000 | 0.00±0.00 | 0.008±0.001 | 0.77±0.03 | 0.046±0.007 | 1.00±0.00 | - |
 | n2048 | 3 | 0/3 | - | 63±0 | 0.990±0.001 | 1.000±0.000 | 1.06±0.01 | 1.000±0.000 | 1.000±0.000 | 0.00±0.00 | 0.724±0.006 | 0.091±0.002 | 0.999±0.000 | 0.00±0.00 | 0.008±0.000 | 0.71±0.04 | 0.049±0.004 | 1.00±0.00 | - |

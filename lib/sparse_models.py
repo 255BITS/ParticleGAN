@@ -227,15 +227,23 @@ class SparseJointDiscriminator(nn.Module):
 
 
 class JointCritic(nn.Module):
-    """D restricted to one class vector, on the joint input [x | y] -- what GradRegularizer penalizes."""
+    """D on [x | y], optionally excluding y from the penalized derivative.
 
-    def __init__(self, D: SparseJointDiscriminator, c: torch.Tensor) -> None:
+    The regularizer still receives the full joint input, so interpolating arms
+    evaluate at the same (x, y) locations whether or not y contributes to the
+    gradient norm. Detaching y here changes only the derivative, not its value.
+    """
+
+    def __init__(self, D: SparseJointDiscriminator, c: torch.Tensor, grad_on_y: bool = True) -> None:
         super().__init__()
         self.D = D
         self.c = c
+        self.grad_on_y = grad_on_y
 
     def forward(self, xy: torch.Tensor) -> torch.Tensor:
         x, y = xy[:, : self.D.d], xy[:, self.D.d :]
+        if not self.grad_on_y:
+            y = y.detach()
         return self.D(x, y, self.c)["adv"]
 
 
