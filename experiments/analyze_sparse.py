@@ -10,8 +10,10 @@ curves), groups runs by name minus the `_s<seed>` suffix, and writes
     results/sparse/TABLE_<stage>.md      seed-aggregated table, one row per group
     results/sparse/plots/<stage>_curves.png   per-axis metric vs step, one line per group
 
-and prints the table so the pipeline log carries it. Robust to missing /
-half-written runs (they are counted, not raised).
+and prints the table so the pipeline log carries it. With --config_manifest,
+only the listed requests are aggregated, their recorded full configs must match,
+and missing/mismatched runs produce a nonzero exit. Without a manifest, historical
+directory scanning remains available and counts missing / half-written runs.
 
 Usage:
     python experiments/analyze_sparse.py --stage baseline
@@ -20,9 +22,10 @@ Usage:
 import argparse
 import json
 import re
+import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import numpy as np
 import matplotlib
@@ -59,6 +62,36 @@ def group_name(run_dir: str) -> str:
     return re.sub(r"_s\d+$", "", run_dir)
 
 
+def requested_runs(stage: str, config_manifest: Optional[Path] = None):
+    """Return (output path, expected full config), or historical directory entries."""
+    stage_root = (RUNS_ROOT / stage).resolve()
+    if config_manifest is None:
+        return [(d, None) for d in sorted(stage_root.glob("*"))
+                if d.is_dir() and not d.name.startswith(".")]
+
+    # Share the runner's literal-default resolution without importing the trainer.
+    if __package__:
+        from .run_grid import load_config, trainer_defaults
+    else:
+        from run_grid import load_config, trainer_defaults
+    paths = json.loads(Path(config_manifest).read_text())
+    if not isinstance(paths, list) or not paths or not all(isinstance(p, str) for p in paths):
+        raise ValueError("config manifest must be a nonempty JSON list of config paths")
+    defaults = trainer_defaults(str(Path(__file__).with_name("train_sparse.py")))
+    requests = []
+    seen = set()
+    for path in paths:
+        cfg = load_config(path, defaults)
+        out_dir = Path(cfg["out_dir"]).resolve()
+        if out_dir.parent != stage_root or out_dir.name.startswith("."):
+            raise ValueError(f"manifest output is not a run in stage {stage!r}: {out_dir}")
+        if out_dir in seen:
+            raise ValueError(f"duplicate output in config manifest: {out_dir}")
+        seen.add(out_dir)
+        requests.append((out_dir, cfg))
+    return requests
+
+
 def legacy_x_only_gp(summary: Dict) -> bool:
     cfg = summary.get("config", {})
     return (cfg.get("gp_on_y") is False
@@ -66,18 +99,21 @@ def legacy_x_only_gp(summary: Dict) -> bool:
             and summary.get("implementation_versions", {}).get("x_only_gp", 1) < 2)
 
 
-def load_stage(stage: str):
+def load_stage(stage: str, config_manifest: Optional[Path] = None):
     runs: Dict[str, List[Dict]] = defaultdict(list)
     curves: Dict[str, List[List[Dict]]] = defaultdict(list)
     missing = 0
-    for d in sorted((RUNS_ROOT / stage).glob("*")):
-        if not d.is_dir():
-            continue
+    for d, expected in requested_runs(stage, config_manifest):
         p = d / "summary.json"
         try:
             with open(p) as f:
                 s = json.load(f)
             assert isinstance(s.get("final"), dict)
+            if expected is not None:
+                recorded = json.dumps(s.get("config"), sort_keys=True, allow_nan=False)
+                requested = json.dumps(expected, sort_keys=True, allow_nan=False)
+                if not s["final"] or recorded != requested:
+                    raise ValueError("summary does not match the current requested config")
         except Exception:  # noqa: BLE001
             missing += 1
             continue
@@ -162,14 +198,18 @@ def plot_curves(stage: str, curves: Dict[str, List[List[Dict]]]) -> Path:
     return out
 
 
-def main() -> None:
+def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", required=True)
+    ap.add_argument("--config_manifest", type=Path, help="Analyze only this JSON list of config paths; fail on missing/mismatched runs.")
     args = ap.parse_args()
-    runs, curves, missing = load_stage(args.stage)
+    try:
+        runs, curves, missing = load_stage(args.stage, args.config_manifest)
+    except (OSError, ValueError, TypeError) as exc:
+        ap.error(str(exc))
     if not runs:
         print(f"[analyze_sparse] no complete runs for stage {args.stage} ({missing} incomplete)")
-        return
+        return int(args.config_manifest is not None)
     md = table(args.stage, runs, missing)
     OUT_ROOT.mkdir(parents=True, exist_ok=True)
     with open(OUT_ROOT / f"TABLE_{args.stage}.md", "w") as f:
@@ -177,7 +217,8 @@ def main() -> None:
     print(md)
     p = plot_curves(args.stage, curves)
     print(f"[analyze_sparse] wrote {OUT_ROOT / f'TABLE_{args.stage}.md'} and {p}")
+    return int(args.config_manifest is not None and missing > 0)
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
