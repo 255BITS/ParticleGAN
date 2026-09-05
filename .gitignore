@@ -6,3 +6,7 @@ __pycache__/
 100gaussians_samples/
 results/sparse/
 .venv
+.pytest_cache/
+*.egg-info/
+build/
+dist/

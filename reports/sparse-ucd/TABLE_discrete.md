@@ -1,6 +1,8 @@
 # discrete: 27 runs, 9 groups, 0 incomplete
 
-| group | n | bar | bar_step | modes | hq | cond | sep | sym | joint | symKL | sp@1e-2 | sp@1e-3 | rec | zero | smear | core | w1 | ucdF | ppur |
+Historical results, not corrected reruns. Numerical `ppur` values are invalid; see [corrections](CORRECTIONS.md).
+
+| group | n | bar | bar_step | modes | hq | cond | sep | sym | joint | symKL | sp@1e-2 | sp@1e-3 | rec | zero | smear | core | w1 | ucdF | ppur (invalid historical) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | gst_tau1 | 3 | 0/3 | - | 63±0 | 0.990±0.003 | 1.000±0.000 | 1.07±0.01 | 1.000±0.000 | 1.000±0.000 | 0.00±0.00 | 0.710±0.013 | 0.089±0.002 | 0.999±0.000 | 0.00±0.00 | 0.009±0.000 | 0.78±0.08 | 0.041±0.005 | 1.00±0.00 | - |
 | starg | 3 | 0/3 | - | 64±0 | 0.991±0.003 | 1.000±0.000 | 1.05±0.01 | 1.000±0.001 | 1.000±0.001 | 0.00±0.00 | 0.662±0.058 | 0.080±0.009 | 1.000±0.000 | 0.00±0.00 | 0.009±0.001 | 0.71±0.06 | 0.045±0.009 | 1.00±0.00 | - |

@@ -8,6 +8,11 @@ delayed cosine anneal, particle prior) with a UCD discriminator
 (arXiv:2510.00624) for the class. All runs on one A6000 (`cuda:1`), 4–5k
 steps, ~1–3 min each.
 
+**Review correction:** these are the original results, not corrected reruns.
+All historical `ppur` values are invalid, and the x-only gradient-penalty
+ablation is confounded. Its causal interpretation and the claim of soft-head
+saturation from `y_hardness` are withdrawn below. See [CORRECTIONS.md](CORRECTIONS.md).
+
 Two phases: **probes** (single-seed ad-hoc runs, `~/tmp/sparse_probe*`, five
 rounds, 79 runs) to find *a* recipe that converges at all, then the **staged
 grid** (3 seeds per cell, `results/sparse/`) on that recipe. Section 1 is the
@@ -155,7 +160,7 @@ All on the base (partitioned prior, no embedding, interp cap, h256, z16, ramp).
 | ucd + class embedding in G (no partition) | 45±1 | 0.965 | 0.997 | 0.997 | 0.71 | 0.45 | 0.076 |
 | ucd + embedding *and* partition | 52±1 | 0.984 | 0.999 | 0.999 | 0.69 | 0.53 | 0.073 |
 | ucd + supervised symbol (λ_sym 1) | 62±1 | 0.990 | 1.000 | 1.000 | 0.69 | 0.75 | 0.054 |
-| ucd, penalty on x only | 63±1 | 0.949 | 0.992 | 0.966 | 0.69 | 1.15 | 0.054 |
+| ucd, historical x-only penalty (confounded) | 63±1 | 0.949 | 0.992 | 0.966 | 0.69 | 1.15 | 0.054 |
 
 Readings:
 
@@ -180,9 +185,11 @@ Readings:
 * Re-adding the class embedding to G costs 11–18 modes (45 / 52) with the
   same D: the shortcut is a G-side pathology, independent of D.
 * The supervised symbol anchor is unnecessary (62 vs 63, identical
-  cond/sym); the penalty on x only (not the joint [x | y]) loses sharpness
-  and symbol coherence (hq 0.95, sym 0.97, core 1.15) — the cap should see
-  the symbol input.
+  cond/sym). The historical x-only penalty run had hq 0.95, sym 0.97,
+  and core 1.15, but it also moved the penalty from interpolates to
+  endpoints. It does not isolate the effect of the y derivative; the
+  earlier conclusion that the cap should see the symbol input is withdrawn
+  pending a corrected ablation.
 
 ## 4. Stage `sparse` — exact zeros (`TABLE_sparse.md`)
 
@@ -241,8 +248,10 @@ Readings:
   Gumbel, soft Gumbel, straight-through argmax, plain softmax probabilities
   — learns the symbol to ≥ 0.996 accuracy *purely adversarially* (λ_sym 0),
   with D seeing the relaxed vector at train time and the hard one-hot at
-  eval. Even the softmax head, which hands D an obvious real/fake tell
-  (one-hot vs. soft), saturates on its own (`y_hardness` ≈ 1).
+  eval. The softmax head hands D an obvious real/fake tell (one-hot vs.
+  soft). Its successful hard evaluation output does not establish that its
+  training output saturated: `y_hardness` is always one after eval's
+  argmax read-out. The earlier saturation claim is withdrawn.
 * A supervised anchor buys nothing (62±1 vs 63±0). τ-annealing buys
   nothing. Straight-through argmax and plain softmax are marginally the
   best on coverage (64/64), inside seed noise.

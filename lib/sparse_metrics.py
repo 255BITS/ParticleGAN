@@ -174,6 +174,31 @@ def conditioning(toy: SparseMixedToy, x: torch.Tensor, m_hat: torch.Tensor, c_in
     return out
 
 
+@torch.no_grad()
+def particle_class_purity(particle_idx: torch.Tensor, c_in: torch.Tensor,
+                          c_out: torch.Tensor, num_particles: int,
+                          n_classes: int, min_count: int = 4) -> float:
+    """Mean dominant-class share of each particle's correctly conditioned draws.
+
+    Indices and classes must describe the same generated samples. Only particles
+    with at least min_count correct draws enter the mean; no eligible particles
+    gives NaN. This measures specialization, not generation quality: with a class
+    embedding, one shared particle can correctly serve every requested class,
+    yielding purity near 1 / n_classes under balanced sampling. Without class
+    input, a particle that always generates one class can instead have purity 1.
+    Finite sample counts bias the dominant-class share upward.
+    """
+    correct = c_out == c_in
+    counts = torch.zeros(num_particles, n_classes, device=particle_idx.device)
+    counts.index_put_((particle_idx[correct], c_in[correct]),
+                      torch.ones_like(c_in[correct], dtype=counts.dtype), accumulate=True)
+    totals = counts.sum(1)
+    used = totals >= min_count
+    if not bool(used.any()):
+        return float("nan")
+    return float((counts[used].max(1).values / totals[used]).mean())
+
+
 # =========================
 #  Symbols
 # =========================
@@ -192,7 +217,8 @@ def symbols(toy: SparseMixedToy, logits: torch.Tensor, y: torch.Tensor, m_hat: t
     joint_acc:    class(m_hat) == c_in AND emitted symbol == symbol(m_hat),
     sym_hist_kl:  marginal symbol histogram vs the true marginal (uniform),
     sym_conf:     mean max softmax(logits): how decided the head is,
-    y_hardness:   mean max(y) of the vector D actually saw at eval (1.0 = one-hot).
+    y_hardness:   mean max(y) at eval (always 1.0 after the generator's hard
+                  argmax read-out; this does not measure training saturation).
     """
     K, C = toy.n_symbols, toy.n_classes
     s_out = logits.argmax(dim=1)
