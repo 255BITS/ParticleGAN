@@ -302,7 +302,8 @@ def load_runs(runs_dir: Path) -> Tuple[List[Run], Dict[str, int]]:
     if not runs_dir.is_dir():
         return runs, skips
 
-    for d in sorted(p for p in runs_dir.iterdir() if p.is_dir()):
+    # Runner archives live under .run_grid_history; they are not current runs.
+    for d in sorted(p for p in runs_dir.iterdir() if p.is_dir() and not p.name.startswith(".")):
         ident = parse_run_name(d.name)
         summary_path = d / "summary.json"
         if not summary_path.is_file():

@@ -7,14 +7,18 @@ Config generator for the sparse conditional mixed-output study
 
     configs/sparse/<stage>/<group>_s<seed>.yaml   ->   results/sparse/runs/<stage>/<group>_s<seed>
 
-Only non-default keys are written (plus seed / total_steps / out_dir), so a
-config keeps meaning the same thing as trainer defaults acquire new knobs.
+Only overridden keys are written (plus seed / total_steps / out_dir). The runner
+records the effective trainer defaults and invalidates reuse when they change.
 
 Every stage except `recipe` is generated on top of BASE, the recipe the probe
 rounds found (reports/sparse-ucd/FINDINGS.md): the class reaches G *only*
 through a class-partitioned particle table (no class embedding), and the
 gradient penalty is the one-sided cap on real/fake interpolates. `--base`
-overrides / extends it.
+overrides / extends it LAST, after each group's overrides, for every stage.
+Changing --base, --seeds or --total_steps selects a separate, deterministic
+stage namespace so results from different invocations cannot be aggregated
+together. Default invocations retain their historical stage paths. A manifest
+lists only the current invocation's configs, excluding stale YAML files.
 
 Stages (each answers one question, 3 seeds per cell):
 
@@ -41,6 +45,8 @@ Usage:
 """
 
 import argparse
+import hashlib
+import json
 from pathlib import Path
 from typing import Dict, List, Tuple
 
@@ -73,8 +79,15 @@ CHAMPION: Dict = {"emb_dim": 8, "prior_partition": "none", "arm": "b_cap", "coef
 def parse_kv(s: str) -> Dict:
     out: Dict = {}
     for kv in [p for p in s.split(",") if p.strip()]:
+        if "=" not in kv:
+            raise ValueError(f"expected key=value, got {kv!r}")
         k, v = kv.split("=", 1)
-        out[k.strip()] = yaml.safe_load(v.strip())
+        k = k.strip()
+        if not k or k in out:
+            raise ValueError(f"empty or repeated override key: {k!r}")
+        if k in ("seed", "out_dir"):
+            raise ValueError(f"{k} is managed by the generator; use --seeds for seeds")
+        out[k] = yaml.safe_load(v.strip())
     return out
 
 
@@ -166,33 +179,60 @@ def stage_groups(stage: str) -> List[Tuple[str, Dict]]:
     raise ValueError(f"unknown stage {stage!r}")
 
 
+def stage_namespace(stage: str, extra: Dict, seeds: List[int], total_steps: int) -> str:
+    if not extra and seeds == list(SEEDS) and total_steps == TOTAL_STEPS:
+        return stage
+    variant = json.dumps({"base": extra, "seeds": seeds, "total_steps": total_steps},
+                         sort_keys=True, separators=(",", ":"), allow_nan=False)
+    return f"{stage}__{hashlib.sha256(variant.encode()).hexdigest()[:12]}"
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", required=True, choices=["smoke", "recipe", "ucd", "sparse", "discrete", "fewshot", "champion"])
-    ap.add_argument("--base", type=str, default="", help="comma-separated key=value merged over BASE for every config")
+    ap.add_argument("--base", type=str, default="", help="comma-separated key=value applied LAST, overriding BASE and group values in every config")
     ap.add_argument("--seeds", type=str, default=",".join(str(s) for s in SEEDS))
     ap.add_argument("--total_steps", type=int, default=TOTAL_STEPS)
+    ap.add_argument("--print_stage", action="store_true", help="Print the resolved stage namespace without writing files (for pipelines).")
     args = ap.parse_args()
 
-    extra = parse_kv(args.base)
-    seeds = [int(s) for s in args.seeds.split(",") if s.strip()]
+    try:
+        extra = parse_kv(args.base)
+        seeds = [int(s) for s in args.seeds.split(",") if s.strip()]
+        if not seeds or len(seeds) != len(set(seeds)):
+            raise ValueError("--seeds needs at least one distinct integer seed")
+        if args.total_steps <= 0:
+            raise ValueError("--total_steps must be positive")
+        namespace = stage_namespace(args.stage, extra, seeds, args.total_steps)
+    except (ValueError, TypeError, yaml.YAMLError) as exc:
+        ap.error(str(exc))
+    if args.print_stage:
+        print(namespace)
+        return
     if args.stage == "smoke":
         seeds = seeds[:1]
-    cfg_dir = CONFIG_ROOT / args.stage
+    cfg_dir = CONFIG_ROOT / namespace
     cfg_dir.mkdir(parents=True, exist_ok=True)
     n = 0
+    config_paths = []
     for name, over in stage_groups(args.stage):
         for seed in seeds:
             cfg: Dict = {} if args.stage in ("smoke", "recipe") else dict(BASE)
-            cfg.update(extra)
             cfg.update(over)
             cfg.setdefault("total_steps", args.total_steps)
+            cfg.update(extra)
             cfg["seed"] = seed
-            cfg["out_dir"] = str(RUNS_ROOT / args.stage / f"{name}_s{seed}")
-            with open(cfg_dir / f"{name}_s{seed}.yaml", "w") as f:
+            cfg["out_dir"] = str(RUNS_ROOT / namespace / f"{name}_s{seed}")
+            path = cfg_dir / f"{name}_s{seed}.yaml"
+            with path.open("w") as f:
                 yaml.safe_dump(cfg, f, sort_keys=True)
+            config_paths.append(str(path))
             n += 1
-    print(f"[gen_sparse_configs] stage={args.stage} base={ {**BASE, **extra} if args.stage not in ('smoke', 'recipe') else extra or '{}'} -> {n} configs in {cfg_dir}/")
+    manifest = cfg_dir / "manifest.json"
+    temporary = manifest.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(config_paths, indent=2) + "\n")
+    temporary.replace(manifest)
+    print(f"[gen_sparse_configs] stage={namespace} overrides={extra} -> {n} configs in {cfg_dir}/; manifest={manifest}")
 
 
 if __name__ == "__main__":

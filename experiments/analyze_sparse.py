@@ -64,6 +64,9 @@ def load_stage(stage: str):
     curves: Dict[str, List[List[Dict]]] = defaultdict(list)
     missing = 0
     for d in sorted((RUNS_ROOT / stage).glob("*")):
+        # Preserved runner attempts must not count as runs or incomplete seeds.
+        if d.name.startswith("."):
+            continue
         if not d.is_dir():
             continue
         p = d / "summary.json"
