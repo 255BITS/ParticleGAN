@@ -1,6 +1,8 @@
 # sparse: 27 runs, 9 groups, 0 incomplete
 
-| group | n | bar | bar_step | modes | hq | cond | sep | sym | joint | symKL | sp@1e-2 | sp@1e-3 | rec | zero | smear | core | w1 | ucdF | ppur |
+Historical results, not corrected reruns. Numerical `ppur` values are invalid; see [corrections](CORRECTIONS.md).
+
+| group | n | bar | bar_step | modes | hq | cond | sep | sym | joint | symKL | sp@1e-2 | sp@1e-3 | rec | zero | smear | core | w1 | ucdF | ppur (invalid historical) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | lin | 3 | 0/3 | - | 63±0 | 0.990±0.003 | 1.000±0.000 | 1.07±0.01 | 1.000±0.000 | 1.000±0.000 | 0.00±0.00 | 0.710±0.013 | 0.089±0.002 | 0.999±0.000 | 0.00±0.00 | 0.009±0.000 | 0.78±0.08 | 0.041±0.005 | 1.00±0.00 | - |
 | gated_sp0p01_warm | 3 | 0/3 | - | 63±0 | 0.962±0.012 | 0.991±0.011 | 1.06±0.01 | 0.991±0.010 | 0.991±0.010 | 0.00±0.00 | 0.968±0.008 | 0.947±0.009 | 0.983±0.011 | 0.94±0.01 | 0.001±0.000 | 0.83±0.07 | 0.041±0.003 | 1.00±0.00 | - |
