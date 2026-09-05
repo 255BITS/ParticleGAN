@@ -65,4 +65,9 @@ Default invocations keep the historical stage names. Use the generator's
 pass that name to `analyze_sparse.py --stage` when analyzing manually. The
 pipeline does this automatically. A generated `manifest.json` lists the exact
 config paths for the invocation; `run_grid.py --config_manifest <path>` excludes
-stale YAML files that may also be present in the config directory.
+stale YAML files that may also be present in the config directory. The pipeline
+passes the same manifest to `analyze_sparse.py --config_manifest <path>`, so
+obsolete result groups are excluded too. Manifest analysis checks each summary's
+full config against the current request/defaults and exits nonzero when any
+listed run is missing or mismatched. Omit the manifest for historical directory
+scanning when analyzing earlier studies manually.

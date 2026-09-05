@@ -45,6 +45,7 @@ for stage in "${STAGES[@]}"; do
   if [ "${FORCE:-0}" = "1" ]; then FORCE_FLAGS=(--force); fi
   "$PY" experiments/run_grid.py --config_manifest "configs/sparse/$RUN_STAGE/manifest.json" --gpus "$GPUS" --workers_per_gpu "$WORKERS" \
       --python "$PY" --trainer experiments/train_sparse.py --echo_last_line "${FORCE_FLAGS[@]}" 2>&1 | tee -a "$LOG"
-  "$PY" experiments/analyze_sparse.py --stage "$RUN_STAGE" 2>&1 | tee -a "$LOG"
+  "$PY" experiments/analyze_sparse.py --stage "$RUN_STAGE" \
+      --config_manifest "configs/sparse/$RUN_STAGE/manifest.json" 2>&1 | tee -a "$LOG"
 done
 log "pipeline finished"

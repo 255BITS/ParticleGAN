@@ -274,10 +274,12 @@ if os.environ.get("FAIL_AT") and args[0].endswith(os.environ["FAIL_AT"]):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         calls = [json.loads(line) for line in (self.root / "calls.jsonl").read_text().splitlines()]
         analysis = [call for call in calls if call[0].endswith("analyze_sparse.py")]
-        self.assertEqual([call[-1] for call in analysis],
+        self.assertEqual([call[call.index("--stage") + 1] for call in analysis],
                          [f"{stage}__variant" for stage in ("recipe", "ucd", "sparse", "discrete", "champion", "fewshot")])
         grids = [call for call in calls if call[0].endswith("run_grid.py")]
         self.assertTrue(all("--config_manifest" in call for call in grids))
+        self.assertEqual([call[call.index("--config_manifest") + 1] for call in grids],
+                         [call[call.index("--config_manifest") + 1] for call in analysis])
 
     def test_real_shell_pipeline_stops_on_a_failed_stage(self):
         script, env = self.pipeline_fixture()
@@ -291,6 +293,57 @@ if os.environ.get("FAIL_AT") and args[0].endswith(os.environ["FAIL_AT"]):
 
 
 class ArchiveAnalysisTests(unittest.TestCase):
+    def test_manifest_excludes_obsolete_groups_and_counts_missing_or_mismatched_requests(self):
+        sys.path.insert(0, str(ROOT))
+        try:
+            from experiments import analyze_sparse, run_grid
+        finally:
+            sys.path.pop(0)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            stage = root / "runs/stage"
+            defaults = run_grid.trainer_defaults(str(ROOT / "experiments/train_sparse.py"))
+            configs = []
+            for name in ("active_s1", "removed_s1", "missing_s1", "mismatch_s1"):
+                raw = {"out_dir": str(stage / name), "seed": 1}
+                path = root / f"{name}.yaml"
+                path.write_text(yaml.safe_dump(raw))
+                if name != "removed_s1":
+                    configs.append(str(path))
+                if name != "missing_s1":
+                    out_dir = stage / name
+                    out_dir.mkdir(parents=True)
+                    cfg = {**defaults, **raw}
+                    if name == "mismatch_s1":
+                        cfg["coeff"] = 999
+                    (out_dir / "summary.json").write_text(json.dumps({"config": cfg, "final": {"joint_acc": 1}}))
+            manifest = root / "manifest.json"
+            manifest.write_text(json.dumps(configs))
+            with mock.patch.object(analyze_sparse, "RUNS_ROOT", stage.parent):
+                runs, _, missing = analyze_sparse.load_stage("stage", manifest)
+                self.assertEqual(set(runs), {"active"})
+                self.assertEqual(missing, 2)
+                historical, _, _ = analyze_sparse.load_stage("stage")
+                self.assertIn("removed", historical)
+                manifest.write_text(json.dumps(configs + [configs[0]]))
+                with self.assertRaisesRegex(ValueError, "duplicate"):
+                    analyze_sparse.load_stage("stage", manifest)
+                with self.assertRaisesRegex(ValueError, "not a run in stage"):
+                    analyze_sparse.load_stage("another_stage", manifest)
+
+    def test_manifest_cli_returns_failure_for_a_missing_listed_run(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            cfg = root / "missing.yaml"
+            cfg.write_text(yaml.safe_dump({"out_dir": "results/sparse/runs/stage/missing_s1", "seed": 1}))
+            manifest = root / "manifest.json"
+            manifest.write_text(json.dumps([str(cfg)]))
+            result = subprocess.run([sys.executable, str(ROOT / "experiments/analyze_sparse.py"),
+                                     "--stage", "stage", "--config_manifest", str(manifest)],
+                                    cwd=root, capture_output=True, text=True, timeout=15)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("1 incomplete", result.stdout)
+
     def test_archives_are_excluded_from_both_current_run_loaders(self):
         sys.path.insert(0, str(ROOT))
         try:
