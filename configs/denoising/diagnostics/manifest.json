@@ -1,0 +1,11 @@
+[
+  "configs/denoising/diagnostics/ddgan_concat_28k_s24002.yaml",
+  "configs/denoising/diagnostics/ddgan_ucd_28k_s24002.yaml",
+  "configs/denoising/diagnostics/ddgan_gaussian_28k_s24002.yaml",
+  "configs/denoising/diagnostics/ddgan_one_step_7k_s24002.yaml",
+  "configs/denoising/diagnostics/ddgan_two_steps_14k_s24002.yaml",
+  "configs/denoising/diagnostics/ddgan_class_free_28k_s24002.yaml",
+  "configs/denoising/diagnostics/gan_class_free_7k_s24002.yaml",
+  "configs/denoising/diagnostics/gan_fixed_7k_s24002.yaml",
+  "configs/denoising/diagnostics/gan_learned_28k_s24002.yaml"
+]

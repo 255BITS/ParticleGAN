@@ -1,0 +1,8 @@
+[
+  "configs/denoising/budget56k/ddgan_concat_gaussian_56k_s24002.yaml",
+  "configs/denoising/budget56k/ddgan_concat_learned_56k_s24002.yaml",
+  "configs/denoising/budget56k/ddgan_ucd_learned_56k_s24002.yaml",
+  "configs/denoising/budget56k/ddgan_ucd_learned_noise_56k_s24002.yaml",
+  "configs/denoising/budget56k/ddgan_ucd_fixed_noise_56k_s24002.yaml",
+  "configs/denoising/budget56k/gan_learned_56k_s24002.yaml"
+]

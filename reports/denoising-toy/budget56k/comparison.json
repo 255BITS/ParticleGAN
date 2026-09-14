@@ -1,0 +1,1104 @@
+{
+  "manifest": "configs/denoising/budget56k/manifest.json",
+  "completed": 6,
+  "missing": [],
+  "cells": [
+    {
+      "config": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "concat",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "noise": "gaussian",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "seeds": [
+        24002
+      ],
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": 0.8886999487876892,
+          "sd": null
+        },
+        "modes": {
+          "n": 1,
+          "mean": 100.0,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": 0.9523999691009521,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": 0.08248218055814505,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": 0.07204999774694443,
+          "sd": null
+        },
+        "per_mode_core_ratio": {
+          "n": 1,
+          "mean": 0.6932316051416251,
+          "sd": null
+        },
+        "per_mode_cov_eig_min_ratio": {
+          "n": 1,
+          "mean": 3.8027908931336203,
+          "sd": null
+        },
+        "per_mode_cov_eig_max_ratio": {
+          "n": 1,
+          "mean": 7.546461405521654,
+          "sd": null
+        },
+        "tail_10sigma": {
+          "n": 1,
+          "mean": 0.043449997901916504,
+          "sd": null
+        },
+        "posterior_sw1": {
+          "n": 1,
+          "mean": 0.19754686897795182,
+          "sd": null
+        }
+      },
+      "train_seconds": {
+        "n": 1,
+        "mean": 543.7095416829688,
+        "sd": null
+      },
+      "sampling_ms_per_1000": {
+        "n": 1,
+        "mean": 0.11227229842916131,
+        "sd": null
+      }
+    },
+    {
+      "config": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "ucd",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "noise": "gaussian",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "seeds": [
+        24002
+      ],
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": 0.9124999642372131,
+          "sd": null
+        },
+        "modes": {
+          "n": 1,
+          "mean": 100.0,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": 0.9618499875068665,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": 0.10398565419018269,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": 0.05899999290704727,
+          "sd": null
+        },
+        "per_mode_core_ratio": {
+          "n": 1,
+          "mean": 0.5119495743244256,
+          "sd": null
+        },
+        "per_mode_cov_eig_min_ratio": {
+          "n": 1,
+          "mean": 2.681744211670565,
+          "sd": null
+        },
+        "per_mode_cov_eig_max_ratio": {
+          "n": 1,
+          "mean": 6.004195908454826,
+          "sd": null
+        },
+        "tail_10sigma": {
+          "n": 1,
+          "mean": 0.033900000154972076,
+          "sd": null
+        },
+        "posterior_sw1": {
+          "n": 1,
+          "mean": 0.1897720488050254,
+          "sd": null
+        }
+      },
+      "train_seconds": {
+        "n": 1,
+        "mean": 550.2803180509363,
+        "sd": null
+      },
+      "sampling_ms_per_1000": {
+        "n": 1,
+        "mean": 0.11758585169445723,
+        "sd": null
+      }
+    },
+    {
+      "config": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "concat",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "noise": "gaussian",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "gaussian",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "seeds": [
+        24002
+      ],
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": 0.8908499479293823,
+          "sd": null
+        },
+        "modes": {
+          "n": 1,
+          "mean": 100.0,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": 0.9558500051498413,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": 0.11425566300749779,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": 0.0648999959230423,
+          "sd": null
+        },
+        "per_mode_core_ratio": {
+          "n": 1,
+          "mean": 0.6407171305205122,
+          "sd": null
+        },
+        "per_mode_cov_eig_min_ratio": {
+          "n": 1,
+          "mean": 3.6442535197646886,
+          "sd": null
+        },
+        "per_mode_cov_eig_max_ratio": {
+          "n": 1,
+          "mean": 7.598861162732592,
+          "sd": null
+        },
+        "tail_10sigma": {
+          "n": 1,
+          "mean": 0.043800000101327896,
+          "sd": null
+        },
+        "posterior_sw1": {
+          "n": 1,
+          "mean": 0.1871892257768195,
+          "sd": null
+        }
+      },
+      "train_seconds": {
+        "n": 1,
+        "mean": 472.54430476599373,
+        "sd": null
+      },
+      "sampling_ms_per_1000": {
+        "n": 1,
+        "mean": 0.11782689834944904,
+        "sd": null
+      }
+    },
+    {
+      "config": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "ucd",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "noise": "fixed",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "seeds": [
+        24002
+      ],
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": 0.9091500043869019,
+          "sd": null
+        },
+        "modes": {
+          "n": 1,
+          "mean": 100.0,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": 0.9608500003814697,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": 0.13625168055295944,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": 0.0645499974489212,
+          "sd": null
+        },
+        "per_mode_core_ratio": {
+          "n": 1,
+          "mean": 0.5071154357812857,
+          "sd": null
+        },
+        "per_mode_cov_eig_min_ratio": {
+          "n": 1,
+          "mean": 3.0077731985957303,
+          "sd": null
+        },
+        "per_mode_cov_eig_max_ratio": {
+          "n": 1,
+          "mean": 6.014464296181927,
+          "sd": null
+        },
+        "tail_10sigma": {
+          "n": 1,
+          "mean": 0.03504999727010727,
+          "sd": null
+        },
+        "posterior_sw1": {
+          "n": 1,
+          "mean": 0.19829966650286224,
+          "sd": null
+        }
+      },
+      "train_seconds": {
+        "n": 1,
+        "mean": 558.2123094509589,
+        "sd": null
+      },
+      "sampling_ms_per_1000": {
+        "n": 1,
+        "mean": 0.11447985016275197,
+        "sd": null
+      }
+    },
+    {
+      "config": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "ucd",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "noise": "learned",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "seeds": [
+        24002
+      ],
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": 0.9343499541282654,
+          "sd": null
+        },
+        "modes": {
+          "n": 1,
+          "mean": 100.0,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": 0.9676499962806702,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": 0.13951127976179123,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": 0.06964999437332153,
+          "sd": null
+        },
+        "per_mode_core_ratio": {
+          "n": 1,
+          "mean": 0.43928844542289924,
+          "sd": null
+        },
+        "per_mode_cov_eig_min_ratio": {
+          "n": 1,
+          "mean": 2.160076993814974,
+          "sd": null
+        },
+        "per_mode_cov_eig_max_ratio": {
+          "n": 1,
+          "mean": 4.785752182354184,
+          "sd": null
+        },
+        "tail_10sigma": {
+          "n": 1,
+          "mean": 0.02694999985396862,
+          "sd": null
+        },
+        "posterior_sw1": {
+          "n": 1,
+          "mean": 0.19931253483809996,
+          "sd": null
+        }
+      },
+      "train_seconds": {
+        "n": 1,
+        "mean": 562.334291346895,
+        "sd": null
+      },
+      "sampling_ms_per_1000": {
+        "n": 1,
+        "mean": 0.10815679852385074,
+        "sd": null
+      }
+    },
+    {
+      "config": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "concat",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "gan",
+        "noise": "gaussian",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "seeds": [
+        24002
+      ],
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": 0.9983499646186829,
+          "sd": null
+        },
+        "modes": {
+          "n": 1,
+          "mean": 100.0,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": 1.0,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": 0.22022368013858795,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": 0.10259999334812164,
+          "sd": null
+        },
+        "per_mode_core_ratio": {
+          "n": 1,
+          "mean": 0.6400111912071569,
+          "sd": null
+        },
+        "per_mode_cov_eig_min_ratio": {
+          "n": 1,
+          "mean": 0.28385794791892316,
+          "sd": null
+        },
+        "per_mode_cov_eig_max_ratio": {
+          "n": 1,
+          "mean": 0.663130783572429,
+          "sd": null
+        },
+        "tail_10sigma": {
+          "n": 1,
+          "mean": 0.0,
+          "sd": null
+        },
+        "posterior_sw1": {
+          "n": 0,
+          "mean": null,
+          "sd": null
+        }
+      },
+      "train_seconds": {
+        "n": 1,
+        "mean": 496.2408550227992,
+        "sd": null
+      },
+      "sampling_ms_per_1000": {
+        "n": 1,
+        "mean": 0.031157699413597584,
+        "sd": null
+      }
+    }
+  ],
+  "paired_effects": [
+    {
+      "factor": "model",
+      "difference": "ddgan minus gan",
+      "context": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "concat",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "noise": "gaussian",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": -0.10965001583099365,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": -0.1377414995804429,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": -0.030549995601177216,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": -0.04760003089904785,
+          "sd": null
+        }
+      }
+    },
+    {
+      "factor": "d_mode",
+      "difference": "ucd minus concat",
+      "context": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "noise": "gaussian",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": 0.023800015449523926,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": 0.02150347363203764,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": -0.013050004839897156,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": 0.009450018405914307,
+          "sd": null
+        }
+      }
+    },
+    {
+      "factor": "prior",
+      "difference": "learned minus gaussian",
+      "context": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "concat",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "noise": "gaussian",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "prior_lr_mult": 10.0,
+        "prior_particle_counts": {
+          "gaussian": 20000,
+          "learned": 20000
+        },
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": -0.0021499991416931152,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": -0.03177348244935274,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": 0.00715000182390213,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": -0.00345003604888916,
+          "sd": null
+        }
+      }
+    },
+    {
+      "factor": "noise",
+      "difference": "fixed minus gaussian",
+      "context": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "ucd",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": -0.0033499598503112793,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": 0.032266026362776756,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": 0.005550004541873932,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": -0.0009999871253967285,
+          "sd": null
+        }
+      }
+    },
+    {
+      "factor": "noise",
+      "difference": "learned minus fixed",
+      "context": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "ucd",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": 0.025199949741363525,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": 0.003259599208831787,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": 0.00509999692440033,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": 0.0067999958992004395,
+          "sd": null
+        }
+      }
+    },
+    {
+      "factor": "noise",
+      "difference": "learned minus gaussian",
+      "context": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "ucd",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 56000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "metrics": {
+        "joint_hq": {
+          "n": 1,
+          "mean": 0.021849989891052246,
+          "sd": null
+        },
+        "conditional_sw1": {
+          "n": 1,
+          "mean": 0.03552562557160854,
+          "sd": null
+        },
+        "conditional_mode_tv": {
+          "n": 1,
+          "mean": 0.010650001466274261,
+          "sd": null
+        },
+        "cond_acc": {
+          "n": 1,
+          "mean": 0.005800008773803711,
+          "sd": null
+        }
+      }
+    }
+  ]
+}

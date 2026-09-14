@@ -1,0 +1,122 @@
+{
+  "manifest": "configs/denoising/confirm28k/comparison_manifest.json",
+  "completed": 3,
+  "missing": [],
+  "cells": [
+    {
+      "config": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "beta1": 0.0,
+        "classes": 4,
+        "d_lr_mult": 1.5,
+        "d_mode": "ucd",
+        "depth": 3,
+        "drop_xt": false,
+        "ema": 0.995,
+        "eval_interval": 1000,
+        "eval_samples": 8192,
+        "final_samples": 20000,
+        "fourier": 2,
+        "gan_mode": "rp",
+        "hidden": 128,
+        "loss_type": "logistic",
+        "lr": 0.0006,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "model": "ddgan",
+        "noise": "gaussian",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "noise_reg": 0.0,
+        "num_particles": 20000,
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "probe_samples": 256,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "std": 0.03,
+        "steps": 28000,
+        "ucd_lambda": 0.02,
+        "z_dim": 4
+      },
+      "seeds": [
+        24001,
+        24003,
+        24002
+      ],
+      "metrics": {
+        "joint_hq": {
+          "n": 3,
+          "mean": 0.7779999772707621,
+          "sd": 0.01581115208623238
+        },
+        "modes": {
+          "n": 3,
+          "mean": 100.0,
+          "sd": 0.0
+        },
+        "cond_acc": {
+          "n": 3,
+          "mean": 0.897766649723053,
+          "sd": 0.006516395855265192
+        },
+        "conditional_sw1": {
+          "n": 3,
+          "mean": 0.10651302461822827,
+          "sd": 0.014168480405201637
+        },
+        "conditional_mode_tv": {
+          "n": 3,
+          "mean": 0.12338333576917648,
+          "sd": 0.011342215746689515
+        },
+        "per_mode_core_ratio": {
+          "n": 3,
+          "mean": 0.8647709081424909,
+          "sd": 0.042078950603290276
+        },
+        "per_mode_cov_eig_min_ratio": {
+          "n": 3,
+          "mean": 7.399062164592874,
+          "sd": 0.4731889964880678
+        },
+        "per_mode_cov_eig_max_ratio": {
+          "n": 3,
+          "mean": 15.554461362237113,
+          "sd": 1.306255660342308
+        },
+        "tail_10sigma": {
+          "n": 3,
+          "mean": 0.08968333154916763,
+          "sd": 0.006800248451580212
+        },
+        "posterior_sw1": {
+          "n": 3,
+          "mean": 0.20537683509852891,
+          "sd": 0.002741079992105578
+        }
+      },
+      "train_seconds": {
+        "n": 3,
+        "mean": 278.46852723910706,
+        "sd": 8.445723353473486
+      },
+      "sampling_ms_per_1000": {
+        "n": 3,
+        "mean": 0.1198890502564609,
+        "sd": 0.013604882685033468
+      }
+    }
+  ],
+  "paired_effects": []
+}
