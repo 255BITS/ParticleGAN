@@ -28,15 +28,16 @@ from lib.vicreg_loss import VICRegLikeLoss
 
 DEFAULTS = {
     'model': 'ddgan', 'architecture': 'unet', 'd_mode': 'ucd', 'prior': 'learned', 'noise': 'gaussian',
+    'ucd_target': 'time_class',
     'seed': 24002, 'classes': 10, 'alpha_bar': [1.0, 0.9, 0.5, 0.05, 0.0001],
     'g_width': 32, 'd_width': 32, 'd_norm': 'group', 'z_dim': 128, 'num_particles': 20000,
-    'steps': 10000, 'batch_size': 64, 'lr': 0.0006, 'd_lr_mult': 1.5,
+    'steps': 30000, 'batch_size': 64, 'lr': 0.0006, 'd_lr_mult': 1.5,
     'prior_lr_mult': 10.0, 'beta1': 0.0, 'prior_reg': 1.0,
     'reg_arm': 'b_cap', 'reg_coeff': 1.0, 'reg_kappa': 1.0,
     'gan_mode': 'rp', 'loss_type': 'logistic', 'ucd_lambda': 0.02,
-    'ema': 0.995, 'lr_anneal_start': 0.6, 'lr_floor': 0.05,
+    'ema': 0.995, 'lr_anneal_start': 0.6, 'lr_floor': 1.0,
     'horizontal_flip': True, 'tf32': True, 'log_interval': 100,
-    'eval_interval': 2000, 'eval_samples': 5000, 'final_samples': 50000,
+    'eval_interval': 10000, 'eval_samples': 5000, 'final_samples': 50000,
     'eval_batch_size': 128, 'save_checkpoint': True,
     'data_dir': 'data', 'fid_cache': 'results/cifar_ddgan/fid_cache',
     'out_dir': 'results/cifar_ddgan/default',
@@ -45,6 +46,9 @@ DEFAULT_CONFIG = ROOT / 'configs/cifar_ddgan/default.yaml'
 
 
 def validate(cfg):
+    target = cfg.get('ucd_target', 'class')
+    if target not in ('class', 'time_class') or (target == 'time_class' and cfg['d_mode'] != 'ucd'):
+        raise ValueError('time_class requires a UCD discriminator')
     if cfg['model'] != 'ddgan' or cfg['architecture'] != 'unet' or cfg['noise'] != 'gaussian':
         raise ValueError('Initial image baseline supports U-Net DDGAN with Gaussian step noise')
     if cfg['d_norm'] not in ('none', 'group'):
@@ -215,7 +219,8 @@ def train(cfg, resume=None):
             df, cf = d(xf, c, xt, t)
             ld = gan.d_loss(dr, df)
             if cfg['d_mode'] == 'ucd':
-                ld = ld + cfg['ucd_lambda'] * (F.cross_entropy(cr, c) + F.cross_entropy(cf, c))
+                targets = d.ucd_labels(c, t)
+                ld = ld + cfg['ucd_lambda'] * (F.cross_entropy(cr, targets) + F.cross_entropy(cf, targets))
             penalty, _ = reg.penalty(FixedConditionCritic(d, c, xt, t), real, xf, step, rngs['penalty'])
             ld = ld + penalty
             od.zero_grad(set_to_none=True)

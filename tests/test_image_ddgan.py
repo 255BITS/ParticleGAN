@@ -24,16 +24,22 @@ def test_image_schedule_and_clean_last_step():
 
 
 @pytest.mark.parametrize('d_norm', ['none', 'group'])
-def test_ucd_particle_and_cap_image_gradients(d_norm):
+@pytest.mark.parametrize('ucd_target', ['class', 'time_class'])
+def test_ucd_particle_and_cap_image_gradients(d_norm, ucd_target):
     torch.set_num_threads(1)
-    cfg={**DEFAULTS,'g_width':8,'d_width':8,'z_dim':8,'num_particles':20,'d_norm':d_norm}
+    cfg={**DEFAULTS,'g_width':8,'d_width':8,'z_dim':8,'num_particles':20,'d_norm':d_norm,'ucd_target':ucd_target}
     g,d=ImageGenerator(cfg),ImageDiscriminator(cfg)
     prior=DrawSource('learned',20,8,1,'cpu')
     rng=torch.Generator().manual_seed(2)
     c=torch.tensor([0,1]);t=torch.tensor([1,4]);xt=torch.randn(2,3,32,32)
     z,ids=prior.sample(2,rng);fake=g(z,c,xt,t)
     score,logits=d(fake,c,xt,t)
-    torch.testing.assert_close(score,logits[torch.arange(2),c])
+    torch.testing.assert_close(score,logits[torch.arange(2),d.ucd_labels(c,t)])
+    assert logits.shape == (2, 40 if ucd_target == 'time_class' else 10)
+    if ucd_target == 'time_class':
+        torch.testing.assert_close(d.ucd_labels(c,t),torch.tensor([0,31]))
+        torch.testing.assert_close(d(fake,c.flip(0),xt,t.flip(0))[1],logits)
+        assert d.time is None
     score.sum().backward()
     assert prior.table.grad[ids].abs().sum()>0
     assert torch.isfinite(prior.table.grad).all()

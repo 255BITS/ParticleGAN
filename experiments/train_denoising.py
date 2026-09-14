@@ -36,6 +36,7 @@ from lib.vicreg_loss import VICRegLikeLoss
 
 DEFAULTS = {
     "model": "ddgan", "d_mode": "ucd", "prior": "learned", "noise": "gaussian",
+    "ucd_target": "class",
     "seed": 24002, "classes": 4, "std": 0.03,
     "alpha_bar": [1.0, 0.9, 0.5, 0.05, 0.0001],
     "z_dim": 4, "num_particles": 20000, "noise_particles": 1024,
@@ -55,6 +56,9 @@ DEFAULT_CONFIG = ROOT / "configs" / "denoising" / "ddgan_ucd.yaml"
 
 
 def validate(cfg):
+    target = cfg.get("ucd_target", "class")
+    if target not in ("class", "time_class") or (target == "time_class" and (cfg["model"] != "ddgan" or cfg["d_mode"] != "ucd")):
+        raise ValueError("time_class UCD requires DDGAN with a UCD discriminator")
     for key, choices in {"model": ("gan", "ddgan"), "d_mode": ("concat", "ucd", "scalar"),
                          "prior": ("gaussian", "fixed", "learned", "zero"),
                          "noise": ("gaussian", "fixed", "learned", "zero")}.items():
@@ -226,7 +230,8 @@ def train(cfg):
             df, cf = d(xf, c, xt, t)
             loss_d = gan.d_loss(dr, df)
             if cfg["d_mode"] == "ucd" and cfg["ucd_lambda"]:
-                loss_d = loss_d + cfg["ucd_lambda"] * (F.cross_entropy(cr, c) + F.cross_entropy(cf, c))
+                targets = d.ucd_labels(c, t)
+                loss_d = loss_d + cfg["ucd_lambda"] * (F.cross_entropy(cr, targets) + F.cross_entropy(cf, targets))
             penalty, _ = reg.penalty(FixedConditionCritic(d, c, xt, t), real, xf, step, rngs["penalty"])
             loss_d = loss_d + penalty
             opt_d.zero_grad(set_to_none=True)

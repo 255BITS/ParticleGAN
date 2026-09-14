@@ -130,16 +130,25 @@ class ToyDiscriminator(nn.Module):
         super().__init__()
         self.diffusion = cfg["model"] == "ddgan"
         self.mode, self.classes = cfg["d_mode"], cfg["classes"]
+        self.ucd_target = cfg.get("ucd_target", "class")
+        self.joint_ucd = self.ucd_target == "time_class"
+        if self.ucd_target not in ("class", "time_class") or (self.joint_ucd and (not self.diffusion or self.mode != "ucd")):
+            raise ValueError("time_class UCD requires DDGAN with a UCD discriminator")
         self.drop_xt = cfg["drop_xt"]
         self.steps = len(cfg["alpha_bar"]) - 1
         self.register_buffer("freqs", math.pi * 2 ** torch.arange(cfg["fourier"], dtype=torch.float32))
         inp = 2 + 4 * cfg["fourier"]
         if self.diffusion:
-            inp += self.steps + (0 if self.drop_xt else 2)
+            inp += (0 if self.joint_ucd else self.steps) + (0 if self.drop_xt else 2)
         if self.mode == "concat":
             inp += self.classes
-        self.net = mlp(inp, cfg["hidden"], cfg["depth"], self.classes if self.mode == "ucd" else 1)
+        heads = self.classes * (self.steps if self.joint_ucd else 1)
+        self.net = mlp(inp, cfg["hidden"], cfg["depth"], heads if self.mode == "ucd" else 1)
         init_weights(self)
+
+    def ucd_labels(self, c, t):
+        """Shared head index for adversarial selection and UCD classification."""
+        return (t - 1) * self.classes + c if self.joint_ucd else c
 
     def forward(self, x, c, xt=None, t=None):
         xf = x[:, :, None] * self.freqs
@@ -147,11 +156,12 @@ class ToyDiscriminator(nn.Module):
         if self.diffusion:
             if not self.drop_xt:
                 pieces.append(xt)
-            pieces.append(F.one_hot(t - 1, self.steps).to(x))
+            if not self.joint_ucd:
+                pieces.append(F.one_hot(t - 1, self.steps).to(x))
         if self.mode == "concat":
             pieces.append(F.one_hot(c, self.classes).to(x))
         logits = self.net(torch.cat(pieces, -1))
-        score = logits.gather(1, c[:, None]).squeeze(1) if self.mode == "ucd" else logits.squeeze(1)
+        score = logits.gather(1, self.ucd_labels(c, t)[:, None]).squeeze(1) if self.mode == "ucd" else logits.squeeze(1)
         return score, logits
 
 

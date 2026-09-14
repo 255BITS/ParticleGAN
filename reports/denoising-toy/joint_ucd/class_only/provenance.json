@@ -1,0 +1,22 @@
+{
+  "trainer": "/home/martyn/dev/ParticleGAN/experiments/train_denoising.py",
+  "python": "/home/martyn/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/python3.12",
+  "sources": {
+    "experiments/run_grid.py": "7b384e138c6f0b4325c65d88b408310d09fd8f99f69756a1817427122261ca26",
+    "experiments/train_denoising.py": "153314f44055d15aeb2bddfe95584aca79b31cd029deac37ba055ea3f7a5aa68",
+    "lib/cifar_metrics.py": "7593a15822cb8cd99b48ed75127f99f1f856ebc1000d0acf9d7e369d9b2d44a3",
+    "lib/denoising_toy.py": "b6a31c234abbe6450deb0900e75b483778d1ec1938193daec5de547ade585e59",
+    "lib/game_jacobian.py": "503de369c7ae236cf3d3fd1fb961636577f4c10dee92dd274a7d510d07a23faf",
+    "lib/gan_loss.py": "4d6db2bde462264bdc298ff1302f83870712b3c2b7ab81a6b5d827b07ddbea93",
+    "lib/grad_regularizers.py": "51aa103527ecd8724536eab479dcfb8e16500edc247b4f90b013274aa25b2881",
+    "lib/image_ddgan.py": "f4e910df4640302d346d3f35162c4791dd73bae0e78b2e6893a2fec79b66c876",
+    "lib/oadam.py": "bb00feeca65675a90beb28886ed0fef420963798e53d900d920cb3c531275de3",
+    "lib/particle_prior.py": "a5a762f675e1a81022000861bd557fcb0eb95babe54ef49f8b5f57a58a469833",
+    "lib/sparse_metrics.py": "e359fbddf67f00d4ab5b18b1a9feacd223649b2409d90f439418619918f98ef2",
+    "lib/sparse_models.py": "0c27b3e5279fe98b2f210bc0f482523cedef23e161d9e47d31feb3fbf0d3a406",
+    "lib/sparse_toy.py": "c356bc07a3510efc12eda6ea78ab02196cd5b6dfa2d5540c1602c8649551c979",
+    "lib/toy_metrics.py": "12e8975fe31ed4d9973d53649ce940171da78739a3d7b80544ba5f4d2313367c",
+    "lib/toy_models.py": "503652c5a1245fada9e3fb26ead8bb73ecdcf1ec4f4eeecac270baf93fef52ee",
+    "lib/vicreg_loss.py": "d2563bcab93d443cbf2cf2260946a3ba470f1fc584c231b704ec5ac154f668c4"
+  }
+}

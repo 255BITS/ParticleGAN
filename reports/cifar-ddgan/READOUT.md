@@ -1,138 +1,82 @@
-# CIFAR-10 particle DDGAN: normalization round
+# CIFAR-10 particle DDGAN: training schedule round
 
-**Best final FID50k: 62.819**, down from the previous best UCD 186.564.
-The winning model trained for 10.40 minutes. Both new runs completed on the two
-RTX A6000 GPUs in 14 minutes wall time, including evaluations. This is a much
-better starting baseline, but images remain rough and class fidelity is uneven.
+**Best final FID50k: 43.678**, using 30k updates at constant learning rates.
+Both runs finished on the two A6000 GPUs in 39.2 minutes with zero failures.
+The initial baseline, image experiments and prepared configs were committed as
+`62843b9` before launch. No push was requested this turn.
 
-## Leaderboard
+| Configuration | Updates | Final FID50k ↓ | Train min | Total min |
+|---|---:|---:|---:|---:|
+| Constant LR | 30,000 | **43.678** | 33.95 | 39.08 |
+| Cosine LR | 30,000 | 49.390 | 31.29 | 36.18 |
+| Previous selected cosine baseline | 10,000 | 62.819 | 10.40 | 12.92 |
 
-Every row uses 10k updates, batch64, seed24002, learned latent particles,
-Gaussian step noise and the same final 50k-generated / 50k-real FID protocol.
-No seed repetitions were run. Training times exclude evaluation.
-
-| Rank | D | Width G/D | D norm | LR recipe | FID50k ↓ | Train min |
-|---|---|---:|---|---|---:|---:|
-| 1 | UCD | 32 | GroupNorm | toy | **62.819** | 10.40 |
-| 2 | UCD | 32 | GroupNorm | image | **76.863** | 11.26 |
-| 3 | concat | 32 | none | image | 180.069 | 8.76 |
-| 4 | UCD | 32 | none | image | 186.564 | 8.18 |
-| 5 | UCD | 32 | none | toy | 191.516 | 8.23 |
-| 6 | concat | 32 | none | toy | 198.464 | 8.18 |
-| 7 | UCD | 64 | none | toy | 220.189 | 17.98 |
-
-Toy rates: G .0006, D .0009, particles .006. Image rates: G .00016,
-D .000125, particles .0016. Comparing rates changes the G/D ratio as well as
-absolute rates. Each new normalized run differs from its historical matched
-UCD control only by D normalization and output directory. The code also includes
-the previously described logging detach fix; the old unnormalized architecture
-was checked against its archived source for exactly equal initial state/output.
-
-## What changed, and what stayed the same
-
-Added configurable per-image GroupNorm inside D residual blocks, retaining
-additive time conditioning. G was already a GroupNorm residual U-Net. GroupNorm
-has no batch statistics, preserving independent-sample bcap gradients.
-
-The formulation remains the one in `experiments/train_denoising.py`:
-
-```
-clean = G(xt, latent_particle, t, class)
-xt-1 = A[t]*clean + B[t]*xt + sqrt(posterior_var[t])*GaussianNoise
-```
-
-T=4, alpha_bar=[1,.9,.5,.05,.0001]; learned20k x128 prior; independent Gaussian
-initial image and step noise; continuous xt/time conditioning in D; UCD ten
-heads and CE .02; shared Rp logistic GAN loss; candidate-only bcap1/kappa1;
-unique-row VICReg1; Adam(0,.999); EMA .995; cosine decay after60% to floor.05.
-No reconstruction loss, epsilon-regression objective or pure diffusion training.
-The change is to D architecture, not the adversarial diffusion formulation.
-
-No arguments now selects the winning configuration in
-[default.yaml](../../configs/cifar_ddgan/default.yaml). Exact round configs:
-[toy rates](../../configs/cifar_ddgan/normalized_d/toy_lr.yaml),
-[image rates](../../configs/cifar_ddgan/normalized_d/image_lr.yaml).
+Both new runs retain the convolutional U-Net / GroupNorm D, class-only UCD,
+learned20k x128 latent particles, Gaussian step noise and T=4. Same shared
+train_denoising.py posterior, Rp logistic loss, candidate-only bcap1/kappa1,
+UCD CE .02, unique-row VICReg1, batch64, Adam(0,.999), EMA .995, and toy rates
+G .0006 / D .0009 / particles .006. The two full configs differ only in
+`lr_floor` (.05 versus1) and output directory. No architecture/objective change.
 
 ## Interpretation
 
-Normalization improved final FID from 191.516 to62.819 with toy rates and from
-186.564 to76.863 with image rates. It costs about26% more training time in the
-matched toy-rate comparison. GPU assignment differs across some historical
-controls and GPU1 also drives a desktop, so timing differences are approximate.
-The toy-rate recipe wins after normalization; the earlier preference for image
-rates did not transfer across architectures.
+Extending training improved final FID with both schedules. Constant rates beat
+cosine at the final endpoint by5.71 FID (11.6%). Relative to the previous10k
+baseline, its score is19.14 lower (30.5%), for about3x the training updates.
+The old10k run had an earlier decay horizon, so that comparison is not a pure
+training-duration intervention. GPU1 drives a desktop; timing is approximate.
 
-![Real images and matched controls](normalized_d/comparison.png)
+The pair uses the same seed24002; no seed sweep. Production kernels are not
+bitwise deterministic: trajectories differ even before the rates diverge at18k.
+At18k their diagnostic FIDs were55.248/56.343 (cosine/constant); at20k50.865/52.523;
+at24k48.062/50.593; at26k42.904/49.079; at28k48.718/47.969; at30k53.850/48.004.
+Cosine briefly led but regressed late; do not select the26k checkpoint based on
+its minimum or treat a single pair as a universal schedule result. The practical
+choice for the next CIFAR comparison is constant LR at the tested30k budget.
 
-Rows: airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.
-Cars/trucks/planes and some animal silhouettes are more recognizable. Animal
-anatomy, diversity and requested-class consistency still need improvement.
-Global FID alone cannot establish class fidelity. This round holds UCD,
-particles and Gaussian noise fixed; it does not show that any of them beats
-its alternatives on CIFAR.
+![Diagnostic FID against updates and training time](schedule_30k/fid_curves.png)
 
-![Matched diagnostic learning curves](normalized_d/controlled_curves.png)
+Diagnostic FID uses5k generated samples; the leaderboard uses final50k.
+Global FID does not measure requested-class accuracy. UCD is only over class c;
+D retains explicit xt and timestep inputs. G receives class and timestep.
 
-The toy-rate progress FIDs at2k/4k/6k/8k/10k were109.5/81.1/69.3/60.5/67.1
-(5k samples). Use the **final50k score62.819** for the leaderboard; do not select
-the lowest intermediate FID or compare sample counts as equivalent.
+![Real images, old baseline, cosine and constant](schedule_30k/comparison.png)
 
-## Checkpoint diagnostics
+Rows are airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck.
+Columns are distinct samples, not timesteps or fixed particle IDs. The fixed
+sampling seed aids checkpoint comparison. Vehicles and silhouettes are more
+recognizable after longer training; animal anatomy and fine detail remain rough.
+There is no evidence here isolating the benefit of UCD or particles on CIFAR.
 
-Read-only probes used the same256 real images, RNG seed and raw G/D weights.
-These are diagnostic batches, not independent held-out estimates. The old
-model loads through the verified unchanged `d_norm:none` architecture.
+## Next experiment and defaults
 
-| t | Old toy-rate D candidate gradient norm | GroupNorm toy-rate norm |
-|---|---:|---:|
-| 1 | .0112 | 1.0241 |
-| 2 | .0112 | 1.0222 |
-| 3 | .0088 | .6522 |
-| 4 | .0022 | .0620 |
+The toy joint-UCD scout is complete: [readout](../denoising-toy/joint_ucd/READOUT.md).
+Joint(t,c) is competitive with class-only, with small metric tradeoffs. User
+prefers the simpler conditioning rule when competitive and authorized promotion.
 
-D now has a stronger candidate gradient, with the cleaner steps near the
-existing soft bcap threshold1. Small exceedances are expected from a penalty,
-not a hard constraint. This supports the weak-gradient hypothesis; it does not
-prove which feature statistics caused the original failure. The noisiest step
-still has a weaker signal. Changing the latent particle changes outputs, most
-strongly at noisier steps, but that is not evidence that particles improve FID.
-Full probes are saved under [normalized_d](normalized_d/).
+**No-argument CIFAR default is now30k updates, constant LR, joint timestep/class
+UCD, and FID every10k**. This is a candidate configuration, not the model that
+achieved43.678. That measured winner uses class-only UCD. Joint UCD has40 heads,
+no D timestep embedding, and retains xt input. Both real-CIFAR100-update smoke
+runs passed; full CIFAR joint-UCD quality is unmeasured.
 
-## Recommended next experiments
-
-**Updated after discussion:** the agreed next pair is 30k width32 cosine versus
-constant LR, followed by spatial particle injection and pretrained D features.
-See [the prepared plan](NEXT_ROUND.md). The original recommendations below are
-retained as historical context.
-
-1. Extend the winning width32 recipe to30k updates, retaining the objective,
-   particles and four-step schedule. Its improvement slowed around8k and the
-   final diagnostic ticked upward, so longer training is a test, not a promise.
-2. In parallel, train width64 with GroupNorm for the same30k updates. Earlier
-   width64 failed with unnormalized D; that does not settle capacity after this
-   fix. Compare FID versus both updates and elapsed training time.
-3. After a useful baseline, isolate prior/batch scaling and prior/noise controls.
-   VICReg off-diagonal covariance pressure scales roughly with
-   (latent_dim-1)/(unique_batch_rows-1): ~2 here versus~.012 in the toy. Preserve
-   the current formula for the next capacity/duration pair and change it only
-   as a separate ablation. Add an independent class metric before claiming UCD
-   class fidelity. No transformer change is needed yet.
-
-A30k run should start fresh with a full config and planned schedule. Current
-strict resume cannot extend the10k horizon. Nothing else is queued.
+Ready after compact: a matched30k constant-LR class-only versus joint comparison
+in [configs/cifar_ddgan/joint_ucd](../../configs/cifar_ddgan/joint_ucd/).
+Both use the lower FID cadence. [default.yaml](../../configs/cifar_ddgan/default.yaml)
+matches its joint candidate except output directory. Historical repository
+configs now explicitly select class-only so they retain their prior behavior.
+Archived configs/source certificates remain unchanged. Spatial particles and
+pretrained D are later priorities.
 
 ## Validation and artifacts
 
-Before launch: 6 image/resume tests and19 toy/regularizer tests passed; both
-real-CIFAR GPU smoke runs passed; exact old-source G/D compatibility checked.
-After default promotion, the6 image/resume tests passed again, including CUDA
-checkpoint replay with normalized D. The pinned FID SciPy deprecation remains
-benign. All completed runs have verified saved-source completion certificates.
+25 focused image/CUDA-resume/toy/regularizer tests passed before CIFAR launch.
+Both full runs have verified saved-source certificates and archived configs,
+metrics, grids, environment, protocol and source digests. Exported records are
+in [schedule_30k/TABLE.md](schedule_30k/TABLE.md). Checkpoints and source.zip stay
+under ignored results/cifar_ddgan/schedule_30k. After certification, the optional
+toy UCD implementation and default FID cadence changed source hashes: strict
+historical resume needs the matching archived source, not current files.
 
-The default promotion happened after both runs were certified, changing the
-trainer hash. Historical checkpoints must use their matching `source.zip` and
-saved `config.yaml` for strict resume. Saved artifacts/provenance were not
-rewritten. Full configs, scores, histories and certificates:
-[round table](normalized_d/TABLE.md). Raw checkpoints and source archives remain
-in `results/cifar_ddgan/normalized_d/`. Prior findings: [round1](ROUND1.md).
-No commit or push performed. All experiments have finished.
+Combined log: `tail -F results/cifar_ddgan/live.log` (also follows the toy scout).
+Normalization results: [ROUND2.md](ROUND2.md); earlier image runs: [ROUND1.md](ROUND1.md).

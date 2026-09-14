@@ -111,7 +111,8 @@ def main():
              "|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|"]
     for cell in cells:
         c, m = cell["config"], cell["metrics"]
-        vals = [c["model"], c["d_mode"], c["prior"], c["noise"] if c["model"] == "ddgan" else "N/A",
+        d_label = c["d_mode"] + ("/" + c.get("ucd_target", "class") if c["d_mode"] == "ucd" else "")
+        vals = [c["model"], d_label, c["prior"], c["noise"] if c["model"] == "ddgan" else "N/A",
                 str(c["steps"]), str(len(c["alpha_bar"]) - 1) if c["model"] == "ddgan" else "0",
                 str(c["classes"]), str(len(cell["seeds"]))]
         vals.extend(formatted(m[k]) for k in ("joint_hq", "modes", "cond_acc", "conditional_sw1", "conditional_mode_tv", "per_mode_core_ratio"))
@@ -130,7 +131,7 @@ def main():
         palette = plt.get_cmap("tab20")
         for i, (key, rows) in enumerate(groups.items()):
             cfg = json.loads(key)
-            label = (f"{cfg['model']} {cfg['d_mode']} z:{cfg['prior']} "
+            label = (f"{cfg['model']} {cfg['d_mode']}/{cfg.get('ucd_target', 'class')} z:{cfg['prior']} "
                      f"noise:{cfg['noise'] if cfg['model'] == 'ddgan' else 'N/A'} "
                      f"T:{len(cfg['alpha_bar']) - 1 if cfg['model'] == 'ddgan' else 0} "
                      f"c:{cfg['classes']} updates:{cfg['steps']}")

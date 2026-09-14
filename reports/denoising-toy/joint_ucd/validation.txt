@@ -1,0 +1,12 @@
+Certified: results/cifar_ddgan/schedule_30k/constant
+Certified: results/cifar_ddgan/schedule_30k/cosine
+Certified: results/denoising/joint_ucd/class_only
+Certified: results/denoising/joint_ucd/time_class
+Certified: results/denoising/joint_ucd_smoke/class_only
+Certified: results/denoising/joint_ucd_smoke/time_class
+Certified: results/cifar_ddgan/joint_ucd_smoke/class_only
+Certified: results/cifar_ddgan/joint_ucd_smoke/time_class
+31 focused tests passed, including CUDA joint image checkpoint replay.
+Exact baseline compatibility verified for toy and image G/D.
+Next CIFAR configs validated; only ucd_target/out_dir differ.
+Full next CIFAR pair NOT launched.

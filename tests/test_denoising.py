@@ -87,6 +87,39 @@ def test_invalid_schedule_and_meaningless_one_shot_noise_are_rejected():
         validate({**DEFAULTS, "model": "gan", "noise": "learned"})
 
 
+def test_joint_ucd_hides_time_and_class_and_preserves_candidate_cap_gradients():
+    from lib.denoising_toy import FixedConditionCritic
+    from lib.grad_regularizers import GradRegularizer
+    from torch.nn import functional as F
+    cfg = {**DEFAULTS, "ucd_target": "time_class"}
+    d = ToyDiscriminator(cfg)
+    c = torch.arange(4).repeat(4)
+    t = torch.arange(1, 5).repeat_interleave(4)
+    x, xt = torch.randn(16, 2), torch.randn(16, 2)
+    score, logits = d(x, c, xt, t)
+    assert logits.shape == (16, 16)
+    torch.testing.assert_close(d.ucd_labels(c, t), torch.arange(16))
+    torch.testing.assert_close(score, logits.diag())
+    # Changing either label only selects a head; neither enters the backbone.
+    torch.testing.assert_close(logits, d(x, c.flip(0), xt, t.flip(0))[1])
+    assert not torch.equal(logits, d(x, c, xt + 2, t)[1])
+    penalty, _ = GradRegularizer('b_cap', 1, kappa=0).penalty(
+        FixedConditionCritic(d, c, xt, t), x, torch.randn_like(x), 1)
+    assert penalty > 0 and torch.isfinite(penalty)
+    (penalty + F.cross_entropy(logits, d.ucd_labels(c, t))).backward()
+    assert all(p.grad is not None and torch.isfinite(p.grad).all() for p in d.parameters())
+    assert xt.grad is None
+
+
+@pytest.mark.parametrize('model,mode,target', [('gan','ucd','time_class'), ('ddgan','concat','time_class'), ('ddgan','ucd','bad')])
+def test_invalid_joint_ucd_configs_are_rejected(model, mode, target):
+    cfg = {**DEFAULTS, 'model':model, 'd_mode':mode, 'ucd_target':target}
+    with pytest.raises(ValueError):
+        validate(cfg)
+    with pytest.raises(ValueError):
+        ToyDiscriminator(cfg)
+
+
 def test_metrics_detect_wrong_classes_and_center_collapse():
     toy = GaussianGrid()
     nearest = torch.arange(100).repeat_interleave(25)

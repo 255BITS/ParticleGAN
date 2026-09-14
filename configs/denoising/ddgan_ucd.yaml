@@ -12,6 +12,7 @@ beta1: 0.0
 classes: 4
 d_lr_mult: 1.5
 d_mode: ucd
+ucd_target: class
 depth: 3
 drop_xt: false
 ema: 0.995

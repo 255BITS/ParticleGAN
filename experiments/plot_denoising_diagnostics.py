@@ -31,7 +31,7 @@ def main():
         data = np.load(root / "final_samples.npz")
         m = json.loads((root / "summary.json").read_text())["final"]
         select = rng.choice(len(data["x"]), 4000, replace=False)
-        title = (f"{cfg['model'].upper()} / {cfg['d_mode']} / latent {cfg['prior']}\n"
+        title = (f"{cfg['model'].upper()} / {cfg['d_mode']} ({cfg.get('ucd_target', 'class')}) / latent {cfg['prior']}\n"
                  f"{cfg['steps']} updates; {len(cfg['alpha_bar']) - 1 if cfg['model'] == 'ddgan' else 0} "
                  f"transitions; {cfg['classes']} classes\n"
                  f"step noise: {cfg['noise'] if cfg['model'] == 'ddgan' else 'N/A'}")

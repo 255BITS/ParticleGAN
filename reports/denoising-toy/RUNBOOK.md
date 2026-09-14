@@ -1,5 +1,15 @@
 # Resume here after compact
 
+## Latest: joint timestep/class UCD scout completed
+
+Read [joint_ucd/READOUT.md](joint_ucd/READOUT.md). Both56k runs and both GPU
+smokes finished successfully. Joint UCD is competitive, not a clear winner.
+User prefers it as a tie-break and it is now the CIFAR candidate default.
+The next prepared experiment is the full CIFAR class-only versus joint pair;
+see [CIFAR handoff](../cifar-ddgan/RUNBOOK.md). Nothing is active or queued.
+The historical statements below about deferring toy work are superseded.
+
+
 ## Next task switched to CIFAR-10
 
 The user switched the next experiment to an image baseline and confirmed
