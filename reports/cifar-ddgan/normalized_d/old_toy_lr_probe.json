@@ -1,0 +1,89 @@
+{
+  "step": 10000,
+  "config": {
+    "model": "ddgan",
+    "architecture": "unet",
+    "d_mode": "ucd",
+    "prior": "learned",
+    "noise": "gaussian",
+    "seed": 24002,
+    "classes": 10,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "g_width": 32,
+    "d_width": 32,
+    "z_dim": 128,
+    "num_particles": 20000,
+    "steps": 10000,
+    "batch_size": 64,
+    "lr": 0.0006,
+    "d_lr_mult": 1.5,
+    "prior_lr_mult": 10.0,
+    "beta1": 0.0,
+    "prior_reg": 1.0,
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "gan_mode": "rp",
+    "loss_type": "logistic",
+    "ucd_lambda": 0.02,
+    "ema": 0.995,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "horizontal_flip": true,
+    "tf32": true,
+    "log_interval": 100,
+    "eval_interval": 2000,
+    "eval_samples": 5000,
+    "final_samples": 50000,
+    "eval_batch_size": 128,
+    "save_checkpoint": true,
+    "data_dir": "data",
+    "fid_cache": "results/cifar_ddgan/fid_cache",
+    "out_dir": "results/cifar_ddgan/baseline/width32"
+  },
+  "prior_std": 0.5089734196662903,
+  "timesteps": [
+    {
+      "t": 1,
+      "clean_mse_to_real": 0.032044559717178345,
+      "clean_mse_when_changing_z": 0.0005792134325020015,
+      "D_real_minus_fake": -0.0019888137467205524,
+      "D_real_candidate_grad_norm": 0.011154106818139553,
+      "D_real_class_acc_training_head": 0.54296875,
+      "D_fake_class_acc_training_head": 0.54296875
+    },
+    {
+      "t": 2,
+      "clean_mse_to_real": 0.08627587556838989,
+      "clean_mse_when_changing_z": 0.0011732152197510004,
+      "D_real_minus_fake": -0.002867132890969515,
+      "D_real_candidate_grad_norm": 0.0111908670514822,
+      "D_real_class_acc_training_head": 0.54296875,
+      "D_fake_class_acc_training_head": 0.54296875
+    },
+    {
+      "t": 3,
+      "clean_mse_to_real": 0.2464940994977951,
+      "clean_mse_when_changing_z": 0.0036334542091935873,
+      "D_real_minus_fake": -0.0023471941240131855,
+      "D_real_candidate_grad_norm": 0.008775712922215462,
+      "D_real_class_acc_training_head": 0.28515625,
+      "D_fake_class_acc_training_head": 0.2890625
+    },
+    {
+      "t": 4,
+      "clean_mse_to_real": 0.6153461933135986,
+      "clean_mse_when_changing_z": 0.017895329743623734,
+      "D_real_minus_fake": -0.0005774763994850218,
+      "D_real_candidate_grad_norm": 0.0021602537017315626,
+      "D_real_class_acc_training_head": 0.09765625,
+      "D_fake_class_acc_training_head": 0.09765625
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+Normalization round verification
+- 11 historical/new completion certificates verified against saved source provenance.
+- New pair: GPU0 toy_lr and GPU1 image_lr; both finished, runner exit0.
+- Default YAML equals trainer DEFAULTS and winning config except output directory.
+- Old no-normalization D and unchanged G matched archived source state/outputs exactly.
+- Before launch:6 image/resume tests +19 toy/regularizer tests passed.
+- Both real-CIFAR 100-step GPU smoke runs certified.
+- After promotion:6 image/resume tests passed, including normalized D CUDA replay.
+- git diff --check passed.
+- Known warnings: pinned FID SciPy deprecation; existing toy regularizer-test scalar conversion.
+- Source promotion after certification preserved all archived metadata.

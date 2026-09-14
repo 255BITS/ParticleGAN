@@ -1,0 +1,22 @@
+{
+  "step": 8000,
+  "blocks": [
+    {
+      "image_feature_std": 0.5214377641677856,
+      "time_shift_std": 0.5865918397903442,
+      "channels_almost_one_sign": 0.375
+    },
+    {
+      "image_feature_std": 0.3119288682937622,
+      "time_shift_std": 0.5552141666412354,
+      "channels_almost_one_sign": 0.71875
+    },
+    {
+      "image_feature_std": 0.5542987585067749,
+      "time_shift_std": 0.6919689774513245,
+      "channels_almost_one_sign": 0.7109375
+    }
+  ],
+  "score_gap_rms": 0.002950279973447323,
+  "jensen_gap_rms": 0.0063246386125683784
+}

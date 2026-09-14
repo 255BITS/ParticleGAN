@@ -58,13 +58,15 @@ class DiffusionSchedule(nn.Module):
         self.register_buffer("posterior_var", torch.cat([torch.zeros(1), beta * (1 - ab[:-1]) / (1 - ab[1:])]))
 
     def forward_pair(self, x0, t, rng):
-        prev_a = self.ab[t - 1, None]
+        shape = (-1,) + (1,) * (x0.ndim - 1)
+        prev_a = self.ab[t - 1].reshape(shape)
         prev = prev_a.sqrt() * x0 + (1 - prev_a).sqrt() * torch.randn(x0.shape, device=x0.device, generator=rng)
-        xt = self.alpha[t, None].sqrt() * prev + self.beta[t, None].sqrt() * torch.randn(x0.shape, device=x0.device, generator=rng)
+        xt = self.alpha[t].reshape(shape).sqrt() * prev + self.beta[t].reshape(shape).sqrt() * torch.randn(x0.shape, device=x0.device, generator=rng)
         return prev, xt
 
     def reverse(self, x0, xt, t, eta):
-        return self.A[t, None] * x0 + self.B[t, None] * xt + self.posterior_var[t, None].sqrt() * eta
+        shape = (-1,) + (1,) * (x0.ndim - 1)
+        return self.A[t].reshape(shape) * x0 + self.B[t].reshape(shape) * xt + self.posterior_var[t].reshape(shape).sqrt() * eta
 
 
 class DrawSource(nn.Module):

@@ -1,5 +1,19 @@
 # Resume here after compact
 
+## Next task switched to CIFAR-10
+
+The user switched the next experiment to an image baseline and confirmed
+**DCGAN-style convolutional networks inside the four-step DDGAN**, with UCD,
+learned latent particles, and Gaussian step noise. Establish that baseline,
+then transition to a transformer. The longer-term target is approximately
+3.8 CIFAR FID. Further toy sweeps are deferred.
+
+**Resume from [the CIFAR handoff](../cifar-ddgan/RUNBOOK.md).** It records the
+confirmed formulation, planned YAML/no-argument entry point, repo/dependency
+inspection, evaluation protocol needs, GPU workflow, and implementation order.
+CIFAR implementation and baseline rounds are complete; the CIFAR handoff records current results.
+The toy work was committed and pushed as `9a4aff0` on `master`.
+
 ## Current status: selected default ready for the next round
 
 The user explicitly selected **DDGAN + UCD, learned latent prior, Gaussian
