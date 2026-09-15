@@ -1,0 +1,27 @@
+{
+  "torch": "2.14.0+cu130",
+  "torchvision": "0.29.0+cu130",
+  "cuda": "13.0",
+  "python": "3.12.13",
+  "packages": {
+    "numpy": "2.5.2",
+    "scipy": "1.17.1",
+    "torch-fidelity": "0.3.0",
+    "PyYAML": "6.0.3"
+  },
+  "gpu": "NVIDIA RTX A6000",
+  "visible_devices": "0",
+  "tf32": true,
+  "precision": "float32",
+  "data_sampling": "iid with replacement; horizontal flip as configured",
+  "pretrained_D": {
+    "weights": "ResNet34_Weights.IMAGENET1K_V1",
+    "feature_state_sha256": "26dd3237ca6d150674d2a3c48445aeb5407cfa5f161d1ff99f8892167d51f9a3",
+    "input_size": 64,
+    "stages": [
+      "layer1",
+      "layer2",
+      "layer3"
+    ]
+  }
+}

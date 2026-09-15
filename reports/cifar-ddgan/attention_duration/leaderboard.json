@@ -1,0 +1,42 @@
+[
+  {
+    "run": "attention_1k",
+    "steps": 1000,
+    "fid": 69.31054013917003,
+    "fid_samples": 5000,
+    "train_seconds": 64.20789462899847,
+    "total_seconds": 85.16191089499989,
+    "source": "results/cifar_ddgan/attention_1k/attention",
+    "gpu": "1"
+  },
+  {
+    "run": "attention_10k",
+    "steps": 10000,
+    "fid": 29.32740726319821,
+    "fid_samples": 50000,
+    "train_seconds": 643.6304497310011,
+    "total_seconds": 746.1627582909969,
+    "source": "results/cifar_ddgan/attention_10k/attention",
+    "gpu": "1"
+  },
+  {
+    "run": "duration_50k",
+    "steps": 50000,
+    "fid": 25.3965855617256,
+    "fid_samples": 50000,
+    "train_seconds": 2743.6350613989634,
+    "total_seconds": 2896.3754112160022,
+    "source": "results/cifar_ddgan/duration_50k/baseline",
+    "gpu": "0"
+  },
+  {
+    "run": "attention_50k",
+    "steps": 50000,
+    "fid": 26.334406436819336,
+    "fid_samples": 50000,
+    "train_seconds": 3185.387046985954,
+    "total_seconds": 3347.4721926849998,
+    "source": "results/cifar_ddgan/attention_50k/attention",
+    "gpu": "1"
+  }
+]

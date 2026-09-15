@@ -32,6 +32,7 @@ DEFAULTS = {
     'model': 'ddgan', 'architecture': 'unet', 'd_mode': 'ucd', 'prior': 'learned', 'noise': 'gaussian',
     'ucd_target': 'time_class',
     'd_backbone': 'pretrained_resnet18', 'g_depth': 6, 'g_heads': 4, 'spatial_channels': 16,
+    'g_attn_resolutions': [],
     'ncsnpp_ch_mult': [1, 2, 2, 2], 'ncsnpp_res_blocks': 2,
     'ncsnpp_attn_resolutions': [16], 'ncsnpp_z_emb_dim': 256, 'ncsnpp_n_mlp': 4,
     'cache_condition': True, 'channels_last': False, 'fused_adam': True,
@@ -54,6 +55,14 @@ DEFAULT_CONFIG = ROOT / 'configs/cifar_ddgan/default.yaml'
 
 
 def validate(cfg):
+    resolutions = cfg.get('g_attn_resolutions', [])
+    if (not isinstance(resolutions, list) or
+            any(type(r) is not int or r not in (8, 16, 32) for r in resolutions) or
+            len(set(resolutions)) != len(resolutions)):
+        raise ValueError('invalid U-Net attention resolutions')
+    if resolutions and (cfg['architecture'] != 'unet' or type(cfg['g_heads']) is not int or
+                        cfg['g_heads'] < 1 or cfg['g_width'] % cfg['g_heads']):
+        raise ValueError('U-Net attention requires compatible width and head count')
     if cfg.get('reg_method', 'autograd') not in ('autograd', 'finite_difference'):
         raise ValueError('invalid regularizer method')
     if type(cfg.get('reg_every', 1)) is not int or cfg.get('reg_every', 1) < 1 or cfg.get('reg_fd_eps', .05) <= 0:
@@ -62,16 +71,16 @@ def validate(cfg):
         raise ValueError('speed regularizer implementation requires b_cap')
     if cfg.get('profile_steps', 0) < 0 or cfg.get('profile_start', 100) < 0:
         raise ValueError('invalid profiling window')
-    if cfg.get('cache_condition', False) and cfg.get('d_backbone') != 'pretrained_resnet18':
+    if cfg.get('cache_condition', False) and cfg.get('d_backbone') not in ('pretrained_resnet18', 'pretrained_resnet34'):
         raise ValueError('condition cache requires frozen pretrained D')
     target = cfg.get('ucd_target', 'class')
     if target not in ('class', 'time_class') or (target == 'time_class' and cfg['d_mode'] != 'ucd'):
         raise ValueError('time_class requires a UCD discriminator')
     if cfg['model'] != 'ddgan' or cfg['architecture'] not in ('unet', 'flat_hybrid', 'ncsnpp') or cfg['noise'] != 'gaussian':
         raise ValueError('Image trainer requires DDGAN with Gaussian step noise and a supported architecture')
-    if cfg.get('d_backbone', 'pixel') not in ('pixel', 'pretrained_resnet18'):
+    if cfg.get('d_backbone', 'pixel') not in ('pixel', 'pretrained_resnet18', 'pretrained_resnet34'):
         raise ValueError('invalid D backbone')
-    if cfg.get('d_backbone') == 'pretrained_resnet18' and (target != 'time_class' or cfg['d_mode'] != 'ucd'):
+    if cfg.get('d_backbone') in ('pretrained_resnet18', 'pretrained_resnet34') and (target != 'time_class' or cfg['d_mode'] != 'ucd'):
         raise ValueError('pretrained D requires joint UCD')
     if cfg['architecture'] == 'flat_hybrid':
         if cfg['g_width'] < 16 or cfg['g_heads'] < 1 or cfg['g_width'] % cfg['g_heads'] or cfg['g_depth'] < 1 or cfg['spatial_channels'] < 1:

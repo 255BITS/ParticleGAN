@@ -1,29 +1,39 @@
-# Next round: validate the faster baseline over a longer budget
+# Next round: preserve the best point before another architecture jump
 
-The speed round is complete: [readout](speed/READOUT.md).
-Use the promoted U-Net recipe in configs/cifar_ddgan/default.yaml:
-exact bcap every fourth update ×4, frozen-condition feature caching, fused
-Adam, NCHW, batch64. Same DDGAN/ParticleGAN/joint-UCD formulation and rates.
-No training jobs are running or queued.
+The [attention and duration round](attention_duration/READOUT.md) is complete.
+Plain U-Net: final FID50k25.397 at50k,45.73 training minutes.
+Attention U-Net: final FID50k26.334 at50k,53.09 training minutes.
+Attention improved the10k scout (29.327 versus historical31.555), and its best
+5k-sample diagnostic was27.799 at30k, before worsening to30.792 at50k.
+Plain U-Net's best diagnostic was29.379 at50k. Do not compare diagnostic
+5k-sample FID numerically with final50k-sample FID as equal estimators.
 
-The useful next experiment is50k updates with these settings, preserving the
-constant learning rate. At10k it reaches finalFID50k31.555 in9.22 training
-minutes. Extrapolated50k training cost is46min plus evaluation/I/O. Compare
-against the completed prior every-step50k result,FID26.680 in99.34min.
-Use final50k-sample FID and diagnostic5k-sample FID only every10k updates.
-Use a fresh output directory and full YAML; do not treat an altered horizon
-as exact resume. No seed-only repeats.
+Keep the plain U-Net no-argument default, exact lazy-4 bcap, cached frozen
+ResNet18 conditioning features, fused Adam, batch64 and constant LR. The longer
+baseline config is configs/cifar_ddgan/duration_50k/baseline.yaml. It has already
+completed; use a fresh output path for a new experiment. Attention remains
+optional via g_attn_resolutions:[8,16], with g_heads:4. Core ParticleGAN/DDGAN,
+joint UCD, particles, Gaussian step noise and regularizer formulation are intact.
 
-FD is not the default: the tested FDlazy4 givesFID37.003 in8.56min and causes
-one-shot toy shape failures. On the56k denoising toy it recovers100 modes,
-but exactlazy4 is faster and higher quality. No broad FD hyperparameter hunt
-or alternate bcap objectives this session.
+The useful next proposal is:
+1. Save periodic/best checkpoints so a promising intermediate point can be
+   evaluated at50k generated samples. Current checkpoint.pt holds only the last
+   evaluation; attention30k weights were overwritten, although grids remain.
+2. Validate attention around30k and test a gentler learning-rate tail against
+   constant LR. The trajectory motivates this test, but does not prove that
+   annealing helps or that the late regression is overfitting.
+3. Rank final50k-sample FID, training time and trajectories. Do not promote from
+   a selected diagnostic minimum or an attractive1k result alone.
 
-The NCSN++ optimization bundle failed10k validation,FID161.587 with substantial
-oscillation. Its attractive1k number was insufficient evidence. Do not resume
-the old interrupted NCSN++50k job automatically. Future architecture questions
-remain separate from this speed task and are not queued.
+These are proposals, not queued work. Both GPUs are free. All four experiments
+from this round completed successfully. No seed-only repeats; maintain fresh
+YAMLs, source provenance and tail-friendly logs. The user wants experiment
+updates only after completion. Avoid extra runtime check-ins.
 
-Retain repeatable YAMLs, source provenance, combined tail logs, and both-GPU
-utilization for independent experiments when useful. If increasing batch,
-match total sample exposure and report fewer optimizer updates explicitly.
+Historical logs:
+tail -F results/cifar_ddgan/duration.live.log results/cifar_ddgan/attention.live.log
+
+The earlier capacity round did not support G-width doubling or ResNet34.
+FD remains experimental and is not promoted; retain the existing bcap objective.
+NCSN++ optimization failed10k validation; do not automatically resume its old
+restart-interrupted run. No1200-epoch training is proposed.

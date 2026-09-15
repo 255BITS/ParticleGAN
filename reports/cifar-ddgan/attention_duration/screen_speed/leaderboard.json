@@ -1,0 +1,23 @@
+[
+  {
+    "run": "attention",
+    "root": "results/cifar_ddgan/attention_1k/attention",
+    "gpu": "1",
+    "architecture": "unet",
+    "steps": 1000,
+    "batch": 64,
+    "samples_per_optimizer": 64000,
+    "steady_samples_s": 1044.2305405123752,
+    "all_train_samples_s": 996.7621640578668,
+    "train_s": 64.20789462899847,
+    "total_s": 85.16191089499989,
+    "peak_train_gb": 1.7562789916992188,
+    "fid": 69.31054013917003,
+    "fid_samples": 5000,
+    "cache": true,
+    "channels_last": false,
+    "fused_adam": true,
+    "reg_method": "autograd",
+    "reg_every": 4
+  }
+]

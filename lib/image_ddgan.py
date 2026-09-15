@@ -30,6 +30,27 @@ class ResBlock(nn.Module):
         return (self.skip(x) + h) / math.sqrt(2)
 
 
+class SpatialAttention(nn.Module):
+    """Residual spatial self-attention, initially an identity mapping."""
+    def __init__(self, channels, heads):
+        super().__init__()
+        self.heads = heads
+        self.norm = nn.GroupNorm(min(8, channels), channels)
+        self.qkv = nn.Conv2d(channels, 3 * channels, 1)
+        self.project = nn.Conv2d(channels, channels, 1)
+        nn.init.zeros_(self.project.weight)
+        nn.init.zeros_(self.project.bias)
+
+    def forward(self, x):
+        b, c, h, w = x.shape
+        q, k, v = self.qkv(self.norm(x)).reshape(
+            b, 3, self.heads, c // self.heads, h * w).unbind(1)
+        y = F.scaled_dot_product_attention(
+            q.transpose(-1, -2), k.transpose(-1, -2), v.transpose(-1, -2))
+        y = y.transpose(-1, -2).reshape(b, c, h, w)
+        return x + self.project(y)
+
+
 class ImageGenerator(nn.Module):
     def __init__(self, cfg):
         super().__init__()
@@ -42,18 +63,28 @@ class ImageGenerator(nn.Module):
         self.mid = ResBlock(w*4, w*4, e)
         self.dec = nn.ModuleList([ResBlock(w*8, w*2, e), ResBlock(w*4, w, e), ResBlock(w*2, w, e)])
         self.output = nn.Conv2d(w, 3, 3, padding=1)
+        resolutions = cfg.get('g_attn_resolutions', [])
+        # Optional modules do not change existing convolution or D initialization.
+        # Models are constructed on CPU before the trainer moves them to CUDA.
+        with torch.random.fork_rng(devices=[]):
+            self.enc_attention = nn.ModuleList([
+                SpatialAttention(ch, cfg['g_heads']) if res in resolutions else nn.Identity()
+                for ch, res in [(w, 32), (w*2, 16), (w*4, 8)]])
+            self.dec_attention = nn.ModuleList([
+                SpatialAttention(ch, cfg['g_heads']) if res in resolutions else nn.Identity()
+                for ch, res in [(w*2, 8), (w, 16), (w, 32)]])
 
     def forward(self, z, c, xt, t):
         e = self.embed(z) + self.cls(c) + self.time(t)
         h, skips = self.input(xt), []
-        for block in self.enc:
-            h = block(h, e)
+        for block, attention in zip(self.enc, self.enc_attention):
+            h = attention(block(h, e))
             skips.append(h)
             h = F.avg_pool2d(h, 2)
         h = self.mid(h, e)
-        for block, skip in zip(self.dec, reversed(skips)):
+        for block, attention, skip in zip(self.dec, self.dec_attention, reversed(skips)):
             h = F.interpolate(h, scale_factor=2, mode='nearest')
-            h = block(torch.cat([h, skip], 1), e)
+            h = attention(block(torch.cat([h, skip], 1), e))
         return self.output(F.leaky_relu(h, .2)).tanh()
 
 

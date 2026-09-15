@@ -68,15 +68,20 @@ class FlatParticleGenerator(nn.Module):
 
 
 class PretrainedFeatureDiscriminator(nn.Module):
-    """Pixel critic plus a frozen ResNet18 feature branch, one combined UCD score.
+    """Pixel critic plus a frozen ResNet feature branch, one combined UCD score.
 
     No auxiliary loss. Candidate gradients pass through the frozen extractor,
     including the double backward needed for candidate-only bcap.
     """
     def __init__(self, cfg):
         super().__init__()
-        from torchvision.models import resnet18, ResNet18_Weights
-        net = resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)
+        from torchvision.models import resnet18, resnet34, ResNet18_Weights, ResNet34_Weights
+        if cfg.get('d_backbone', 'pretrained_resnet18') == 'pretrained_resnet34':
+            weights = ResNet34_Weights.IMAGENET1K_V1
+            net = resnet34(weights=weights)
+        else:
+            weights = ResNet18_Weights.IMAGENET1K_V1
+            net = resnet18(weights=weights)
         self.features = nn.ModuleList([
             nn.Sequential(net.conv1, net.bn1, net.relu, net.maxpool, net.layer1),
             net.layer2, net.layer3])
@@ -98,7 +103,7 @@ class PretrainedFeatureDiscriminator(nn.Module):
         for name, value in self.features.state_dict().items():
             digest.update(name.encode())
             digest.update(value.detach().cpu().contiguous().numpy().tobytes())
-        self.pretrained_metadata = {'weights': 'ResNet18_Weights.IMAGENET1K_V1',
+        self.pretrained_metadata = {'weights': str(weights),
                                     'feature_state_sha256': digest.hexdigest(),
                                     'input_size': 64, 'stages': ['layer1', 'layer2', 'layer3']}
 
@@ -144,5 +149,5 @@ def build_models(cfg):
         g = NCSNppParticleGenerator(cfg)
     else:
         g = FlatParticleGenerator(cfg) if cfg['architecture'] == 'flat_hybrid' else ImageGenerator(cfg)
-    d = PretrainedFeatureDiscriminator(cfg) if cfg.get('d_backbone', 'pixel') == 'pretrained_resnet18' else ImageDiscriminator(cfg)
+    d = PretrainedFeatureDiscriminator(cfg) if cfg.get('d_backbone', 'pixel') in ('pretrained_resnet18', 'pretrained_resnet34') else ImageDiscriminator(cfg)
     return g, d

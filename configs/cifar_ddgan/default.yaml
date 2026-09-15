@@ -7,6 +7,7 @@ ucd_target: time_class
 d_backbone: pretrained_resnet18
 g_depth: 6
 g_heads: 4
+g_attn_resolutions: []
 spatial_channels: 16
 ncsnpp_ch_mult:
 - 1

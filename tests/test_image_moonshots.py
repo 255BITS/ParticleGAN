@@ -1,4 +1,5 @@
 import copy
+import pytest
 import torch
 from torch.nn import functional as F
 from experiments.train_cifar_ddgan import DEFAULTS, validate
@@ -7,9 +8,64 @@ from lib.denoising_toy import DrawSource, DiffusionSchedule, FixedConditionCriti
 from lib.grad_regularizers import GradRegularizer
 
 
+def test_unet_attention_identity_initialization_and_particle_learning():
+    from lib.image_ddgan import SpatialAttention
+    torch.set_num_threads(1)
+    cfg = {**DEFAULTS, 'g_width': 8, 'd_width': 8, 'z_dim': 8,
+           'num_particles': 20, 'd_backbone': 'pixel', 'cache_condition': False}
+    torch.manual_seed(24)
+    baseline, baseline_d = build_models(cfg)
+    baseline_rng = torch.random.get_rng_state()
+    torch.manual_seed(24)
+    cfg = {**cfg, 'g_attn_resolutions': [8, 16]}
+    validate(cfg)
+    g, d = build_models(cfg)
+    assert torch.equal(torch.random.get_rng_state(), baseline_rng)
+    for k, v in baseline_d.state_dict().items():
+        torch.testing.assert_close(d.state_dict()[k], v, rtol=0, atol=0)
+    for k, v in baseline.state_dict().items():
+        torch.testing.assert_close(g.state_dict()[k], v, rtol=0, atol=0)
+    blocks = [m for m in g.modules() if isinstance(m, SpatialAttention)]
+    assert len(blocks) == 4
+    prior = DrawSource('learned', 20, 8, 1, 'cpu')
+    c, t = torch.tensor([0, 1]), torch.tensor([1, 4])
+    xt = torch.randn(2, 3, 32, 32, requires_grad=True)
+    z, ids = prior.sample(2, torch.Generator().manual_seed(1))
+    clean = g(z, c, xt, t)
+    torch.testing.assert_close(clean, baseline(z, c, xt, t), rtol=0, atol=0)
+    opt = torch.optim.Adam(g.parameters(), lr=.001)
+    schedule = DiffusionSchedule(cfg['alpha_bar'])
+    for step in range(2):
+        opt.zero_grad(set_to_none=True)
+        z = prior.table[ids]
+        clean = g(z, c, xt, t)
+        fake = schedule.reverse(clean, xt, t, torch.randn_like(xt))
+        d(fake, c, xt.detach(), t)[0].sum().backward()
+        for v in (xt.grad, prior.table.grad[ids]):
+            assert torch.isfinite(v).all() and v.abs().sum() > 0
+        for block in blocks:
+            assert block.project.weight.grad.abs().sum() > 0
+            if step:
+                assert torch.isfinite(block.qkv.weight.grad).all()
+                assert block.qkv.weight.grad.abs().sum() > 0
+        opt.step()
+    torch.testing.assert_close(g(z[:1], c[:1], xt[:1], t[:1]),
+                               g(z, c, xt, t)[:1], atol=1e-6, rtol=1e-5)
+
+
+@pytest.mark.parametrize('updates', [
+    {'g_attn_resolutions': [4]}, {'g_attn_resolutions': [8, 8]},
+    {'g_attn_resolutions': [16], 'g_heads': 3},
+    {'g_attn_resolutions': [16], 'architecture': 'flat_hybrid'},
+])
+def test_unet_attention_invalid_configs(updates):
+    with pytest.raises(ValueError):
+        validate({**DEFAULTS, **updates})
+
+
 def test_flat_generator_preserves_grid_and_particle_gradients():
     torch.set_num_threads(1)
-    cfg = {**DEFAULTS, 'architecture': 'flat_hybrid', 'd_backbone': 'pixel', 'g_width': 32, 'g_depth': 2,
+    cfg = {**DEFAULTS, 'architecture': 'flat_hybrid', 'd_backbone': 'pixel', 'cache_condition': False, 'g_width': 32, 'g_depth': 2,
            'z_dim': 8, 'num_particles': 20, 'd_width': 8, 'spatial_channels': 4}
     validate(cfg)
     g, d = build_models(cfg)
