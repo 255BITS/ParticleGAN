@@ -1,52 +1,37 @@
-# Next experiment after compact: CIFAR joint UCD confirmation
+# Next round: speed before longer quality runs
 
-The30k schedule round and56k toy joint-UCD scout are complete. User requested
-constantLR as the CIFAR default and prefers joint(t,c) if competitive. The scout
-was competitive with small metric tradeoffs, so the port is implemented and
-smoke-tested. **No full CIFAR joint-UCD run has been launched.**
+User selected training throughput as the next target after the host restart.
+Do not automatically resume NCSN++ or launch the earlier architecture ideas.
+The large G averaged2.932 updates/s; U-Net32 averaged8.389. NCSN++ last checkpoint
+is20k (5k-sample FID65.209), last logged step27,200. U-Net finished50k at final
+50k-sample FID26.680. See scale_50k/READOUT.md.
 
-## Prepared matched pair, both GPUs
+1. Establish reproducible short CUDA benchmarks for both architectures with
+   full batch64, pretrained D, bcap and particle updates. Separate warmup,
+   steady-state training, evaluation, checkpoint I/O and peak GPU memory.
+2. Profile G forward/backward, D ordinary passes, bcap double backward, frozen
+   feature extraction, FIR resampling, attention and particle optimizer work.
+   No hotspot is established yet; the native FIR fallback is only a candidate.
+3. Test changes independently on the two GPUs with matching device baselines.
+   Candidates: reuse frozen xt features within a batch; equivalent faster FIR;
+   channels-last; compilation of supported regions; validated mixed precision.
+   Do not silently reduce batch, regularizer frequency, D feature resolution,
+   model capacity, or diffusion steps and call it an implementation speedup.
+4. Check output/gradient agreement for equivalent transformations, including
+   candidate gradients through frozen D and bcap double backward. For numerical
+   changes, validate stability and a quality scout as well as throughput.
+5. Promote measured speedups through YAML config options, report updates/s,
+   memory, estimated50k time, and quality per GPU-hour. Then revisit longer runs.
 
-Full configs: `configs/cifar_ddgan/joint_ucd/class_only.yaml` and
-`time_class.yaml`; manifest in the same directory. The pair differs only in
-ucd_target and out_dir. Both30k updates,constantLR,seed24002,one run perGPU,
-FID every10k (5k generated),final50k FID. No seed sweep.
+Keep the established DDGAN/ParticleGAN/joint-UCD equations and hyperparameters.
+Do not disable candidate derivatives through frozen features. Reuse existing
+hyperparameters; do not launch seed-only repeats. Save config and provenance,
+use fresh output directories, retain checkpoints, and provide a combined tail log.
 
-Keep the width32 U-Net/GroupNorm D, learned20k x128 latent prior,Gaussian step
-noise,T4,shared posterior,Rp logistic,candidate-only bcap,CE.02,VICReg and toy
-optimizer rates. Class-only:10 heads with D timestep input. Joint:40 heads,
-no D timestep input,select `(t-1)*10+c` for adversarial score and CE. Both keep
-xt conditioning and the same G. D head parameter counts differ; don't attribute
-results exclusively to removal of conditioning. Joint does not change G loss.
+Later quality ideas, not queued: stronger/different pretrained D; pretrained
+encoder features alongside G's existing multiscale image path; longer training
+once affordable. Clean-image encoder features may help low-noise inputs more
+than near-Gaussian terminal states. Changing either architecture can retain the
+formulation, but neither is the current speed task.
 
-```sh
-OPENBLAS_NUM_THREADS=4 OMP_NUM_THREADS=4 .venv/bin/python -u experiments/follow_grid.py \
-  --root results/cifar_ddgan/joint_ucd \
-  --log results/cifar_ddgan/live.log \
-  --runner-log results/cifar_ddgan/joint_ucd.runner.log -- \
-  --config_manifest configs/cifar_ddgan/joint_ucd/manifest.json \
-  --trainer experiments/train_cifar_ddgan.py --gpus 0,1 --workers_per_gpu 1
-```
-
-Tail: `tail -F results/cifar_ddgan/live.log`. Estimate35–37min pair wall time.
-Compare finalFID50k, matched-budget curves and class-row samples. No independent
-class classifier yet. The43.678 best measured CIFAR score belongs to class-only.
-The no-argument default selects the joint candidate; don't describe its quality
-as measured. Future CIFAR configs should retain the10k FID cadence.
-
-## Then: spatial particle injection
-
-Currently z enters G through global scale/shift modulation. Test an added
-z->Linear->[channels,4,4] map concatenated at the U-Net bottleneck, retaining
-encoder skips and existing modulation. Keep128D first to isolate injection.
-Then test smaller particles separately; dimension also changes VICReg covariance
-pressure. xt and Gaussian noise provide stochasticity. Try the simple map before
-StyleGAN3 Fourier spatial coordinates. Keep the posterior and adversarial recipe.
-
-## Later: pretrained D features
-
-Consider frozen candidate-image features with trainable xt conditioning and
-appropriate UCD heads. Preserve input gradients through the frozen extractor
-for bcap. Noisy transitions may mismatch clean-image features. No pretrained
-backbone or spatial injection has been implemented. Width scaling/transformers
-remain later options. Full prior findings in READOUT.md and ROUND2.md.
+No recoverable optimization-subagent deliverable was located after restart.

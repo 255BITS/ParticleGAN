@@ -44,3 +44,4 @@ fid_cache: results/cifar_ddgan/fid_cache
 out_dir: results/cifar_ddgan/normalized_d/image_lr
 d_norm: group
 ucd_target: class
+d_backbone: pixel

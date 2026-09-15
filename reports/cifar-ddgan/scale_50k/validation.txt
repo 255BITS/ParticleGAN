@@ -1,0 +1,11 @@
+Preflight, 2026-09-14:
+- 34 focused tests passed (NCSN++ gradients, class/particle/image paths,
+  FIR reference equivalence, image DDGAN, moonshots, toy, regularizers).
+- 4 real-CIFAR CUDA checkpoint replay tests passed, including
+  NCSN++ + pretrained D. Deterministic test-only pooling substitution remains
+  documented in tests/test_cifar_resume.py; no production replay guarantee.
+- All CIFAR YAMLs validate; no-argument YAML equals literal DEFAULTS.
+- 100-update full-size GPU preflights: both completed, zero failed.
+- Tiny20-sample preflight FIDs are not quality measurements.
+- Existing SciPy deprecation and regularizer-test scalar warning only.
+- git diff --check passed for tracked changes before launch.

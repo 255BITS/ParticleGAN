@@ -44,3 +44,4 @@ fid_cache: results/cifar_ddgan/fid_cache
 out_dir: results/cifar_ddgan/image_lr/concat32
 d_norm: none
 ucd_target: class
+d_backbone: pixel

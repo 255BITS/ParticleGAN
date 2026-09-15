@@ -1,0 +1,9 @@
+{
+  "dataset": "CIFAR-10",
+  "split": "train",
+  "real_samples": 50000,
+  "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+  "weights": "weights-inception-2015-12-05-6726825d.pth",
+  "precision": "float32 extractor (TF32 disabled), float64 statistics",
+  "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor"
+}

@@ -13,12 +13,12 @@ from experiments.run_grid import has_valid_summary
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--root',default='results/cifar_ddgan/baseline')
+    p.add_argument('--root',nargs='+',default=['results/cifar_ddgan/baseline'])
     p.add_argument('--out',default='reports/cifar-ddgan/baseline')
     args=p.parse_args()
     out=Path(args.out);out.mkdir(parents=True,exist_ok=True)
     rows=[]
-    for path in sorted(Path(args.root).glob('*/summary.json')):
+    for path in sorted(p for root in args.root for p in Path(root).glob('*/summary.json')):
         s=json.loads(path.read_text());run=path.parent
         if not has_valid_summary(str(run),s['config'],s['provenance']):
             raise ValueError(f'Uncertified run: {run}')
@@ -31,11 +31,12 @@ def main():
     sources=[s['provenance'] for _,s in rows]
     if any(s!=sources[0] for s in sources):
         raise ValueError('Source provenance differs between runs')
-    text=['# CIFAR-10 U-Net DDGAN comparison','',
-          '| Run | Updates | Final samples | Final FID | Training min | Total min | G params | D params |',
-          '|---|---:|---:|---:|---:|---:|---:|---:|']
+    rows.sort(key=lambda item: item[1]['final']['fid'])
+    text=['# CIFAR-10 particle DDGAN comparison','',
+          '| Run | Updates | Final samples | Final FID | Training min | Total min | G params | D trainable | D total |',
+          '|---|---:|---:|---:|---:|---:|---:|---:|---:|']
     for name,s in rows:
-        text.append(f"| {name} | {s['config']['steps']:,} | {s['final']['samples']:,} | {s['final']['fid']:.3f} | {s['train_seconds']/60:.2f} | {s['total_seconds']/60:.2f} | {s['parameters']['G']:,} | {s['parameters']['D']:,} |")
+        text.append(f"| {name} | {s['config']['steps']:,} | {s['final']['samples']:,} | {s['final']['fid']:.3f} | {s['train_seconds']/60:.2f} | {s['total_seconds']/60:.2f} | {s['parameters']['G']:,} | {s.get('trainable_parameters',s['parameters'])['D']:,} | {s['parameters']['D']:,} |")
     seeds=', '.join(str(v) for v in sorted({s['config']['seed'] for _,s in rows}))
     text+=['',f'Seeds: {seeds}. See each full config for the controlled differences.',
            'Progress and final FIDs with different sample counts have different sample-count bias.',

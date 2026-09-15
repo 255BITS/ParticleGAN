@@ -8,8 +8,17 @@ from pathlib import Path
 import pytest
 import torch
 
+@pytest.fixture
+def deterministic_algorithms():
+    previous = torch.are_deterministic_algorithms_enabled()
+    torch.use_deterministic_algorithms(True)
+    yield
+    torch.use_deterministic_algorithms(previous)
+
+
 @pytest.mark.skipif(os.environ.get('RUN_CUDA_IMAGE_TESTS') != '1', reason='opt-in real-data CUDA integration test')
-def test_checkpoint_resume_matches_uninterrupted(tmp_path, monkeypatch):
+@pytest.mark.parametrize('architecture,d_backbone', [('unet','pixel'), ('flat_hybrid','pixel'), ('unet','pretrained_resnet18'), ('ncsnpp','pretrained_resnet18')])
+def test_checkpoint_resume_matches_uninterrupted(tmp_path, monkeypatch, architecture, d_backbone, deterministic_algorithms):
     from experiments import train_cifar_ddgan as trainer
     from lib import cifar_metrics
 
@@ -23,14 +32,22 @@ def test_checkpoint_resume_matches_uninterrupted(tmp_path, monkeypatch):
     monkeypatch.setattr(cifar_metrics, 'save_grid', lambda *args: None)
     # Production uses CUDNN benchmarking for speed. Force fixed kernels here so
     # numerical kernel-selection differences cannot masquerade as lost state.
-    generator_class = trainer.ImageGenerator
+    # Deterministic algorithms also cover pretrained D bilinear-resize gradients.
+    model_factory = trainer.build_models
     monkeypatch.setattr(torch.backends.cudnn, 'deterministic', True)
     monkeypatch.setattr(torch.backends.cudnn, 'benchmark', False)
-    def deterministic_generator(cfg):
+    def deterministic_models(cfg):
         torch.backends.cudnn.benchmark = False
-        return generator_class(cfg)
-    monkeypatch.setattr(trainer, 'ImageGenerator', deterministic_generator)
-    cfg={**trainer.DEFAULTS, 'g_width':8, 'd_width':8, 'z_dim':8,
+        g, d = model_factory(cfg)
+        if cfg['d_backbone'] == 'pretrained_resnet18':
+            # CUDA adaptive pooling has no deterministic backward. At these
+            # fixed16/8/4 feature sizes, ordinary4/2/1 pooling is the same
+            # non-overlapping reduction; use it only for exact replay testing.
+            for head, kernel in zip(d.project, (4, 2, 1)):
+                head[5] = torch.nn.AvgPool2d(kernel)
+        return g, d
+    monkeypatch.setattr(trainer, 'build_models', deterministic_models)
+    cfg={**trainer.DEFAULTS, 'architecture':architecture, 'd_backbone':d_backbone, 'g_width':16, 'g_depth':1, 'd_width':8, 'z_dim':8,
          'num_particles':100, 'steps':20, 'batch_size':8,
          'log_interval':10, 'eval_interval':10, 'eval_samples':10,
          'final_samples':10, 'eval_batch_size':10, 'tf32':False,

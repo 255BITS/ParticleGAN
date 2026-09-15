@@ -21,7 +21,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from lib.denoising_toy import DiffusionSchedule, DrawSource, FixedConditionCritic
-from lib.image_ddgan import ImageGenerator, ImageDiscriminator, sample_images, update_ema
+from lib.image_ddgan import sample_images, update_ema
+from lib.image_moonshots import build_models
 from lib.gan_loss import GANLoss
 from lib.grad_regularizers import GradRegularizer
 from lib.vicreg_loss import VICRegLikeLoss
@@ -29,9 +30,12 @@ from lib.vicreg_loss import VICRegLikeLoss
 DEFAULTS = {
     'model': 'ddgan', 'architecture': 'unet', 'd_mode': 'ucd', 'prior': 'learned', 'noise': 'gaussian',
     'ucd_target': 'time_class',
+    'd_backbone': 'pretrained_resnet18', 'g_depth': 6, 'g_heads': 4, 'spatial_channels': 16,
+    'ncsnpp_ch_mult': [1, 2, 2, 2], 'ncsnpp_res_blocks': 2,
+    'ncsnpp_attn_resolutions': [16], 'ncsnpp_z_emb_dim': 256, 'ncsnpp_n_mlp': 4,
     'seed': 24002, 'classes': 10, 'alpha_bar': [1.0, 0.9, 0.5, 0.05, 0.0001],
     'g_width': 32, 'd_width': 32, 'd_norm': 'group', 'z_dim': 128, 'num_particles': 20000,
-    'steps': 30000, 'batch_size': 64, 'lr': 0.0006, 'd_lr_mult': 1.5,
+    'steps': 10000, 'batch_size': 64, 'lr': 0.0006, 'd_lr_mult': 1.5,
     'prior_lr_mult': 10.0, 'beta1': 0.0, 'prior_reg': 1.0,
     'reg_arm': 'b_cap', 'reg_coeff': 1.0, 'reg_kappa': 1.0,
     'gan_mode': 'rp', 'loss_type': 'logistic', 'ucd_lambda': 0.02,
@@ -49,8 +53,22 @@ def validate(cfg):
     target = cfg.get('ucd_target', 'class')
     if target not in ('class', 'time_class') or (target == 'time_class' and cfg['d_mode'] != 'ucd'):
         raise ValueError('time_class requires a UCD discriminator')
-    if cfg['model'] != 'ddgan' or cfg['architecture'] != 'unet' or cfg['noise'] != 'gaussian':
-        raise ValueError('Initial image baseline supports U-Net DDGAN with Gaussian step noise')
+    if cfg['model'] != 'ddgan' or cfg['architecture'] not in ('unet', 'flat_hybrid', 'ncsnpp') or cfg['noise'] != 'gaussian':
+        raise ValueError('Image trainer requires DDGAN with Gaussian step noise and a supported architecture')
+    if cfg.get('d_backbone', 'pixel') not in ('pixel', 'pretrained_resnet18'):
+        raise ValueError('invalid D backbone')
+    if cfg.get('d_backbone') == 'pretrained_resnet18' and (target != 'time_class' or cfg['d_mode'] != 'ucd'):
+        raise ValueError('pretrained D requires joint UCD')
+    if cfg['architecture'] == 'flat_hybrid':
+        if cfg['g_width'] < 16 or cfg['g_heads'] < 1 or cfg['g_width'] % cfg['g_heads'] or cfg['g_depth'] < 1 or cfg['spatial_channels'] < 1:
+            raise ValueError('invalid flat generator dimensions')
+    if cfg['architecture'] == 'ncsnpp':
+        if (len(cfg['ncsnpp_ch_mult']) != 4 or
+                any(type(x) is not int or x < 1 for x in cfg['ncsnpp_ch_mult']) or
+                cfg['ncsnpp_res_blocks'] < 1 or cfg['ncsnpp_z_emb_dim'] < 1 or
+                cfg['ncsnpp_n_mlp'] < 0 or
+                any(x not in (4, 8, 16, 32) for x in cfg['ncsnpp_attn_resolutions'])):
+            raise ValueError('invalid NCSN++ dimensions')
     if cfg['d_norm'] not in ('none', 'group'):
         raise ValueError('d_norm must be none or group')
     if cfg['d_mode'] not in ('ucd', 'concat') or cfg['prior'] not in ('learned', 'fixed', 'gaussian'):
@@ -126,7 +144,11 @@ def train(cfg, resume=None):
     images, labels = images.to(device), labels.to(device)
     rngs = {k: torch.Generator(device=device).manual_seed(cfg['seed'] + i) for i, k in enumerate(('data', 'time', 'corruption', 'latent', 'noise', 'penalty'), 11)}
     schedule = DiffusionSchedule(cfg['alpha_bar']).to(device)
-    g, d = ImageGenerator(cfg).to(device), ImageDiscriminator(cfg).to(device)
+    g, d = build_models(cfg)
+    g, d = g.to(device), d.to(device)
+    if hasattr(d, 'pretrained_metadata'):
+        env['pretrained_D'] = d.pretrained_metadata
+        write_json(out / 'environment.json', env)
     prior = DrawSource(cfg['prior'], cfg['num_particles'], cfg['z_dim'], cfg['seed'] + 101, device)
     initial_prior = prior.table.detach().clone()
     eg, ep = copy.deepcopy(g).eval().requires_grad_(False), copy.deepcopy(prior).requires_grad_(False)
@@ -134,7 +156,7 @@ def train(cfg, resume=None):
     if cfg['prior'] == 'learned':
         groups.append({'params': list(prior.parameters()), 'lr': cfg['lr'] * cfg['prior_lr_mult']})
     og = torch.optim.Adam(groups, betas=(cfg['beta1'], .999))
-    od = torch.optim.Adam(d.parameters(), lr=cfg['lr'] * cfg['d_lr_mult'], betas=(cfg['beta1'], .999))
+    od = torch.optim.Adam((p for p in d.parameters() if p.requires_grad), lr=cfg['lr'] * cfg['d_lr_mult'], betas=(cfg['beta1'], .999))
     bases = [[v['lr'] for v in o.param_groups] for o in (og, od)]
     gan, vic = GANLoss(cfg['loss_type'], cfg['gan_mode']), VICRegLikeLoss()
     reg = GradRegularizer(cfg['reg_arm'], cfg['reg_coeff'], kappa=cfg['reg_kappa'])
@@ -154,6 +176,8 @@ def train(cfg, resume=None):
                      if json.loads(line)['step'] <= start_step]
             metric_path.write_text('\n'.join(lines) + ('\n' if lines else ''))
     parameters = {k: sum(p.numel() for p in obj.parameters()) for k, obj in [('G', g), ('D', d), ('prior', prior)]}
+    trainable_parameters = {k: sum(p.numel() for p in obj.parameters() if p.requires_grad) for k, obj in [('G', g), ('D', d), ('prior', prior)]}
+    print(f"ARCH G={cfg['architecture']} D={cfg.get('d_backbone', 'pixel')} UCD={cfg['ucd_target']} trainable={trainable_parameters}", flush=True)
     print(f"START seed={cfg['seed']} G_width={cfg['g_width']} D_width={cfg['d_width']} T={schedule.steps} steps={cfg['steps']} params={parameters}", flush=True)
 
     def batch():
@@ -265,7 +289,7 @@ def train(cfg, resume=None):
     final = evaluate(cfg['final_samples'], cfg['steps'])
     summary = {'config': cfg, 'final': final, 'train_seconds': train_seconds,
                'total_seconds': time.perf_counter() - total_start, 'environment': env,
-               'provenance': provenance, 'parameters': parameters, 'fid_protocol': PROTOCOL}
+               'provenance': provenance, 'parameters': parameters, 'trainable_parameters': trainable_parameters, 'fid_protocol': PROTOCOL}
     write_json(out / 'summary.json', summary)
     print(f"COMPLETE fid={final['fid']:.3f} n={final['samples']} train_s={train_seconds:.1f}", flush=True)
     return summary

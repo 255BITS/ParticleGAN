@@ -1,0 +1,39 @@
+2026-09-14 prelaunch validation
+
+32 focused CPU tests passed (image_moonshots, image_ddgan, denoising, regularizers).
+2 real-CIFAR CUDA checkpoint interruption/resume tests passed (U-Net and flat G).
+Both 100-update real-CIFAR GPU smokes completed and run_grid-certified.
+Smoke final FID uses only20 samples and is not a quality measurement.
+
+Verified by tests:
+- lossless pixel unshuffle/shuffle; all flat blocks retain256 tokens
+- gradients to xt, learned particle table, spatial and global particle paths
+- sample independence; 40-way joint logits independent of c/t inputs
+- pretrained features remain eval/frozen under trainer requires_grad toggles
+- frozen feature state unchanged by an optimizer step
+- feature branch sends candidate gradients; bcap double backward remains finite
+- shared diffusion image/flattened equations and clean final step
+- existing no-argument config equals trainer defaults
+
+Warnings: existing SciPy disp deprecation; existing regularizer-test tensor to
+scalar warning; 20-sample smoke covariance singularity. None is a training failure.
+
+Full pretrained-D checkpoint: frozen feature parameters and BN buffers hash
+exactly matches startup after10k updates: 5de287ab28d569dfc53a5bca4a646d4416621da29e71e80859e6117c7f90b0ac
+
+Post-promotion validation:
+- 32 focused image/toy/regularizer tests passed.
+- 3 real-CIFAR CUDA interruption/resume tests passed: U-Net/pixel D,
+  flat G/pixel D, and U-Net/pretrained D.
+- All repository CIFAR configs validate after historical configs explicitly
+  retain pixel D. Default YAML equals DEFAULTS and the measured winner config,
+  excluding only out_dir.
+- Four full runs and two GPU smokes certified; analyzer exports validated all
+  four full saved configs/provenance/certificates.
+
+Replay test detail: production CUDA resize/adaptive-pooling gradients introduce
+numerical nondeterminism. Exact replay tests enable deterministic algorithms;
+pretrained D's fixed16/8/4 ->4 pooling uses equivalent ordinary4/2/1 average
+pooling in the test because CUDA adaptive_avg_pool2d backward has no deterministic
+implementation. This test-only substitution does not alter production code or
+completed results. Production runs are not claimed bitwise deterministic.
