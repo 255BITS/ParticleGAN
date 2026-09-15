@@ -1,3 +1,18 @@
+# Latest result: frozen Turbo did not help
+
+The user requested testing the frozen pretrained Anima transplant with Turbo.
+The matched 10k comparison completed on both GPUs: Base31.306 FID50k in20.29
+training minutes versus Turbo v1.1 37.330 in20.88 minutes. Both kept the entire
+existing ParticleGAN DDGAN formulation and constant LR. Full source/checkpoint
+verification passed. See [readout](anima_turbo/READOUT.md).
+
+No defaults changed. Recommend parking this donor setting. No next experiment
+is selected or queued; both GPUs are free. Work remains on the Anima feature
+branch. The user requested committing/pushing it and returning to master for
+future experiments, without merging. Preserve unrelated .claude/ and sparse-ucd.log.
+
+The earlier suggestions below remain untested ideas, not an automatic queue.
+
 # Next round after unfreezing Anima
 
 The [trainable Anima round](anima_trainable/READOUT.md) completed six processes

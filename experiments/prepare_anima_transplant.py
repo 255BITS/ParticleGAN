@@ -19,6 +19,19 @@ REVISION = 'f973fc41ec7545364ac9776c2440285f43ff2a30'
 FILENAME = 'split_files/diffusion_models/anima-base-v1.0.safetensors'
 
 
+def select_tensors(header, blocks):
+    """Normalize Base and Turbo export namespaces without changing tensors."""
+    groups = [f'blocks.{i}.' for i in blocks] + ['t_embedder.', 't_embedding_norm.']
+    roots = [root for root in ('net.', 'model.diffusion_model.')
+             if all(any(k.startswith(root + group) for k in header) for group in groups)]
+    if len(roots) != 1:
+        raise ValueError('Missing or ambiguous selected tensor groups')
+    root = roots[0]
+    selected = {k: v for k, v in header.items()
+                if any(k.startswith(root + group) for group in groups)}
+    return root, selected
+
+
 def read_range(url, start, length):
     request = urllib.request.Request(url + f'?range={start}-{length}',
                                     headers={'Range': f'bytes={start}-{start+length-1}'})
@@ -38,21 +51,21 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--blocks', type=int, nargs='+', default=[0, 1])
     parser.add_argument('--out', default='data/anima/blocks_0_1.pt')
+    parser.add_argument('--revision', default=REVISION, help='Pinned Hugging Face commit')
+    parser.add_argument('--filename', default=FILENAME, help='Safetensors path within the repository')
     args = parser.parse_args()
     out = Path(args.out)
     if out.exists():
         raise FileExistsError(out)
-    url = f'https://huggingface.co/{REPO}/resolve/{REVISION}/{FILENAME}'
+    if len(args.revision) != 40 or any(c not in '0123456789abcdef' for c in args.revision):
+        raise ValueError('Revision must be a full lowercase commit SHA')
+    url = f'https://huggingface.co/{REPO}/resolve/{args.revision}/{args.filename}'
     size = struct.unpack('<Q', read_range(url, 0, 8))[0]
     if size > 10_000_000:
         raise ValueError('Unexpected header size')
     raw = read_range(url, 8, size)
     header = json.loads(raw)
-    prefixes = [f'net.blocks.{i}.' for i in args.blocks]
-    prefixes += ['net.t_embedder.', 'net.t_embedding_norm.']
-    selected = {k: v for k, v in header.items() if any(k.startswith(p) for p in prefixes)}
-    if not all(any(k.startswith(p) for k in selected) for p in prefixes):
-        raise ValueError('Missing selected tensor group')
+    root, selected = select_tensors(header, args.blocks)
     # Merge adjacent selected tensors; do not transfer the text adapter or other blocks.
     spans = []
     for k, v in sorted(selected.items(), key=lambda item: item[1]['data_offsets'][0]):
@@ -75,9 +88,10 @@ def main():
             tensor = torch.frombuffer(data, dtype=dtypes[spec['dtype']]).clone()
             if tensor.numel() != math.prod(spec['shape']):
                 raise ValueError(f'Invalid shape for {k}')
-            tensors[k.removeprefix('net.')] = tensor.reshape(spec['shape'])
-    metadata = {'repository': REPO, 'revision': REVISION, 'filename': FILENAME,
-                'blocks': args.blocks, 'header_sha256': hashlib.sha256(raw).hexdigest(),
+            tensors[k.removeprefix(root)] = tensor.reshape(spec['shape'])
+    metadata = {'repository': REPO, 'revision': args.revision, 'filename': args.filename,
+                'blocks': args.blocks, 'source_prefix': root,
+                'header_sha256': hashlib.sha256(raw).hexdigest(),
                 'tensor_sha256': hashes}
     out.parent.mkdir(parents=True, exist_ok=True)
     torch.save({'tensors': tensors, 'metadata': metadata}, out.with_suffix('.tmp'))

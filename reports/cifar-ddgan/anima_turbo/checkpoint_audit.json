@@ -1,0 +1,46 @@
+{
+  "source_comparison": {
+    "same_keys_shapes": true,
+    "tensor_count": 43,
+    "changed_tensors": 32,
+    "unchanged_tensors": [
+      "blocks.0.cross_attn.k_norm.weight",
+      "blocks.0.cross_attn.q_norm.weight",
+      "blocks.0.self_attn.k_norm.weight",
+      "blocks.0.self_attn.q_norm.weight",
+      "blocks.1.cross_attn.k_norm.weight",
+      "blocks.1.cross_attn.q_norm.weight",
+      "blocks.1.self_attn.k_norm.weight",
+      "blocks.1.self_attn.q_norm.weight",
+      "t_embedder.1.linear_1.weight",
+      "t_embedder.1.linear_2.weight",
+      "t_embedding_norm.weight"
+    ]
+  },
+  "base": {
+    "step": 10000,
+    "G": {
+      "all_donor_tensors_equal_source": true,
+      "all_tensors_finite": true,
+      "output_adapter_weight_norm": 20.477603912353516
+    },
+    "ema_G": {
+      "all_donor_tensors_equal_source": true,
+      "all_tensors_finite": true,
+      "output_adapter_weight_norm": 19.99088478088379
+    }
+  },
+  "turbo": {
+    "step": 10000,
+    "G": {
+      "all_donor_tensors_equal_source": true,
+      "all_tensors_finite": true,
+      "output_adapter_weight_norm": 16.56580924987793
+    },
+    "ema_G": {
+      "all_donor_tensors_equal_source": true,
+      "all_tensors_finite": true,
+      "output_adapter_weight_norm": 16.073732376098633
+    }
+  }
+}

@@ -1,3 +1,14 @@
+# Latest: frozen Anima Turbo comparison completed
+
+[Turbo readout](anima_turbo/READOUT.md): matched frozen Base FID50k31.306 versus
+frozen Turbo v1.1 37.330, each at10k updates, batch64. Training took20.29/20.88
+minutes on GPU0/1. Both certified; all donor tensors stayed frozen in G/EMA.
+No default promotion. Both GPUs free; no active or queued jobs. Work remains
+on experiment/anima-transplant. The user requested committing/pushing this
+branch and returning to master for future experiments, without merging.
+Configs: configs/cifar_ddgan/anima_turbo_10k/{base,turbo}.yaml.
+Historical tail: tail -F results/cifar_ddgan/anima_turbo.live.log
+
 # CIFAR handoff: trainable Anima experiment completed
 
 Read [latest results](anima_trainable/READOUT.md),
