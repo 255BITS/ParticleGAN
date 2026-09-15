@@ -1,6 +1,12 @@
 # CIFAR-10 U-Net DDGAN baseline
 
-Latest completed round: the [Anima transplant](anima/READOUT.md) reaches
+Latest completed round: [unfreezing Anima](anima_trainable/READOUT.md) reached
+FID50k 36.558 at 10k in 24.89 training minutes; the trainable random control
+collapsed to yellow outputs (FID 496.351). Frozen pretrained was 30.263 in
+19.98 minutes. Unfreezing at the inherited constant G rate did not earn
+promotion. Both GPUs are free; no additional training is queued.
+
+Preceding completed round: the [Anima transplant](anima/READOUT.md) reaches
 FID50k 30.263 at 10k, versus32.550 for its matched frozen random control. It
 takes19.98 training minutes and does not beat the faster attention U-Net29.327.
 The experiment lives on `experiment/anima-transplant`; no defaults promoted.
@@ -31,8 +37,8 @@ required by torch-fidelity 0.3.0's matrix-square-root call.
 ```
 
 No arguments loads `configs/cifar_ddgan/default.yaml`: the measured 10k-update
-U-Net32 / pretrained-feature-D recipe, FID50k31.555 in9.22 training minutes.
-It uses exact bcap every fourth D update at4×weight, batch-local frozen xt
+U-Net32 / pretrained-feature-D recipe, FID50k 31.555 in 9.22 training minutes.
+It uses exact bcap every fourth D update at 4×weight, batch-local frozen xt
 feature caching and fused Adam. FD remains an optional experimental method. Joint timestep/class UCD, learned particles, Gaussian step noise,
 constant LR and toy optimizer rates remain. See [moonshot/READOUT.md](moonshot/READOUT.md)
 for the four-way architecture comparison, timing and limitations. Each run needs

@@ -89,6 +89,53 @@ def test_rotary_preserves_norm_and_uses_both_spatial_axes():
     assert not torch.equal(cos[:, :, 1], cos[:, :, 8])
 
 
+@pytest.mark.parametrize('initialization', ['pretrained', 'random'])
+@pytest.mark.parametrize('dtype', ['float32', 'bfloat16'])
+def test_trainable_donor_all_weights_learn_with_live_modulation_and_ema(donor_cfg, initialization, dtype):
+    cfg = {**donor_cfg, 'anima_init': initialization, 'anima_dtype': dtype, 'anima_trainable': True}
+    validate(cfg)
+    g = image_anima.AnimaTransplantGenerator(cfg)
+    g.train().requires_grad_(False).requires_grad_(True)
+    assert all(p.requires_grad and p.dtype == torch.float32 for p in g.donor.parameters())
+    assert all(m.training for m in g.donor.modules())
+    assert not hasattr(g.donor, 'modulation_table')
+    initial = copy.deepcopy(g.donor.state_dict())
+    ema = copy.deepcopy(g).eval().requires_grad_(False)
+    assert ema.donor.trainable  # Evaluation must still use current EMA weights.
+    z = torch.randn(2, 8, requires_grad=True)
+    x = torch.randn(2, 3, 32, 32, requires_grad=True)
+    c, t = torch.tensor([2, 3]), torch.tensor([1, 4])
+    optimizer = torch.optim.Adam(g.parameters(), lr=.001)
+    target = torch.randn_like(x)
+    before_table = g.donor.modulations().detach().clone()
+    for step in range(2):
+        optimizer.zero_grad(set_to_none=True)
+        (g(z, c, x, t) - target).square().mean().backward()
+        if step:
+            # Every donated parameter, including time/AdaLN and Q/K norms,
+            # must receive a finite nonzero gradient after the zero-start step.
+            for name, p in g.donor.named_parameters():
+                assert p.grad is not None and p.grad.isfinite().all(), name
+                assert p.grad.abs().sum() > 0, name
+        optimizer.step()
+        update_ema(ema, g, .9)
+    for k, v in g.donor.state_dict().items():
+        assert not torch.equal(v, initial[k]), k
+    assert not torch.equal(before_table, g.donor.modulations())
+    for state in optimizer.state.values():
+        assert state['exp_avg'].dtype == state['exp_avg_sq'].dtype == torch.float32
+    name = 'blocks.0.mlp.layer1.weight'
+    # First donor update is zero; the second must also update the EMA donor.
+    torch.testing.assert_close(ema.donor.state_dict()[name], initial[name].lerp(g.donor.state_dict()[name], .1))
+    restored = image_anima.AnimaTransplantGenerator(cfg)
+    restored.load_state_dict(ema.state_dict())
+    with torch.no_grad():
+        torch.testing.assert_close(ema(z, c, x, t), restored(z, c, x, t), rtol=0, atol=0)
+        torch.testing.assert_close(ema.donor.modulations(), restored.donor.modulations(), rtol=0, atol=0)
+    assert x.grad.isfinite().all() and x.grad.abs().sum() > 0
+    assert z.grad.isfinite().all() and z.grad.abs().sum() > 0
+
+
 def test_rejects_wrong_hash(donor_cfg):
     with pytest.raises(ValueError, match='hash mismatch'):
         image_anima.AnimaTransplantGenerator({**donor_cfg, 'anima_weights_sha256': '0' * 64})
@@ -98,6 +145,7 @@ def test_rejects_wrong_hash(donor_cfg):
     {'anima_blocks': []}, {'anima_blocks': [1, 0]}, {'anima_blocks': [0, 0]},
     {'anima_blocks': [28]}, {'anima_init': 'finetune'}, {'anima_context_tokens': 1},
     {'anima_weights_sha256': 'wrong'}, {'channels_last': True},
+    {'anima_trainable': 'true'},
 ])
 def test_invalid_config(donor_cfg, updates):
     with pytest.raises(ValueError):

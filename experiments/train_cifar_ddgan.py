@@ -35,6 +35,7 @@ DEFAULTS = {
     'g_attn_resolutions': [],
     'anima_weights': '', 'anima_weights_sha256': '', 'anima_blocks': [0, 1],
     'anima_init': 'pretrained', 'anima_dtype': 'bfloat16', 'anima_context_tokens': 4,
+    'anima_trainable': False,
     'ncsnpp_ch_mult': [1, 2, 2, 2], 'ncsnpp_res_blocks': 2,
     'ncsnpp_attn_resolutions': [16], 'ncsnpp_z_emb_dim': 256, 'ncsnpp_n_mlp': 4,
     'cache_condition': True, 'channels_last': False, 'fused_adam': True,
@@ -181,7 +182,7 @@ def train(cfg, resume=None):
         write_json(out / 'environment.json', env)
     if hasattr(g, 'pretrained_metadata'):
         env['pretrained_G'] = g.pretrained_metadata
-        env['precision'] = 'float32 with ' + cfg['anima_dtype'] + ' frozen G donor matrix operations'
+        env['precision'] = 'float32 with ' + cfg['anima_dtype'] + ' G donor matrix operations'
         write_json(out / 'environment.json', env)
     prior = DrawSource(cfg['prior'], cfg['num_particles'], cfg['z_dim'], cfg['seed'] + 101, device)
     initial_prior = prior.table.detach().clone()
