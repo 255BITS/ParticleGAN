@@ -1,5 +1,9 @@
 # Conditional trajectories with Particle DDGAN
 
+**Hybrid discriminator round complete:** [results and interpretation](hybrid/READOUT.md),
+[interactive comparison](hybrid/confirm_10k/index.html),
+[next-session motion handoff](hybrid/MOTION_HANDOFF.md).
+
 **Geometry × discriminator round complete:** [results and interpretation](diversity/READOUT.md),
 [interactive comparison](diversity/confirm_10k/index.html).
 

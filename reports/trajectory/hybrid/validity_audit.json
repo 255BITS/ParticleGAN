@@ -1,0 +1,42 @@
+{
+  "hybrid_continuous": {
+    "all": {
+      "collision": 0.02001953125,
+      "boundary_failure": 0.0,
+      "support_failure": 0.006103515625,
+      "valid": 0.978271484375
+    },
+    "interpolation": {
+      "collision": 0.0006510416860692203,
+      "boundary_failure": 0.0,
+      "support_failure": 0.001953125,
+      "valid": 0.998046875
+    },
+    "extrapolation": {
+      "collision": 0.078125,
+      "boundary_failure": 0.0,
+      "support_failure": 0.0185546875,
+      "valid": 0.9189453125
+    }
+  },
+  "mlp_continuous": {
+    "all": {
+      "collision": 0.00244140625,
+      "boundary_failure": 0.0,
+      "support_failure": 0.0615234375,
+      "valid": 0.9384765625
+    },
+    "interpolation": {
+      "collision": 0.001953125,
+      "boundary_failure": 0.0,
+      "support_failure": 0.0042317709885537624,
+      "valid": 0.9957682490348816
+    },
+    "extrapolation": {
+      "collision": 0.00390625,
+      "boundary_failure": 0.0,
+      "support_failure": 0.2333984375,
+      "valid": 0.7666015625
+    }
+  }
+}

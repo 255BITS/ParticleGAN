@@ -41,7 +41,7 @@ DEFAULTS = {
 def validate(cfg):
     for key, values in dict(model=("ddgan", "gan"), d_mode=("ucd", "concat"),
                             prior=("learned", "fixed", "gaussian"), noise=("learned", "fixed", "gaussian"),
-                            geometry_mode=("discrete", "continuous"), d_architecture=("mlp", "temporal")).items():
+                            geometry_mode=("discrete", "continuous"), d_architecture=("mlp", "temporal", "hybrid")).items():
         if cfg[key] not in values:
             raise ValueError(f"invalid {key}")
     for key in ("length", "z_dim", "num_particles", "noise_particles", "width", "d_width", "d_temporal_width", "steps", "batch_size", "reg_every", "log_interval", "eval_per_context"):
@@ -51,8 +51,8 @@ def validate(cfg):
         raise ValueError("length must be a multiple of four >=16; batches/tables >=2")
     if not 0 <= cfg["ema"] < 1 or not 0 <= cfg["beta1"] < 1:
         raise ValueError("invalid EMA/beta1")
-    if cfg["d_architecture"] == "temporal" and cfg["d_width"] < 4:
-        raise ValueError("temporal D requires d_width >= 4")
+    if cfg["d_architecture"] in ("temporal", "hybrid") and cfg["d_width"] < 4:
+        raise ValueError("temporal/hybrid D requires d_width >= 4")
     for key in ("lr", "d_lr_mult", "prior_lr_mult", "noise_lr_mult"):
         if cfg[key] <= 0:
             raise ValueError(key)

@@ -49,7 +49,13 @@ class TrajectoryTests(unittest.TestCase):
         self.assertEqual(set(c.tolist()), {0, 1})
 
     def test_temporal_discriminator_ucd_and_double_backward(self):
-        cfg = {**DEFAULTS, "d_architecture": "temporal"}
+        self.check_feature_discriminator({**DEFAULTS, "d_architecture": "temporal"})
+
+    def test_hybrid_discriminator_ucd_and_double_backward(self):
+        self.check_feature_discriminator({**DEFAULTS, "d_architecture": "hybrid",
+                                          "d_width": 192, "d_temporal_width": 32})
+
+    def check_feature_discriminator(self, cfg):
         d = TrajectoryDiscriminator(cfg)
         baseline = TrajectoryDiscriminator(DEFAULTS)
         self.assertLess(abs(sum(p.numel() for p in d.parameters()) /
@@ -70,6 +76,8 @@ class TrajectoryTests(unittest.TestCase):
         penalty.backward()
         self.assertTrue(all(p.grad is None or bool(torch.isfinite(p.grad).all()) for p in d.parameters()))
         self.assertGreater(float(d.stages[0][0].weight.grad.norm()), 0)
+        if cfg["d_architecture"] == "hybrid":
+            self.assertGreater(float(d.global_net[0].weight.grad.norm()), 0)
 
     def test_metrics_detect_collapse_and_invalid_paths(self):
         c = torch.zeros(512, dtype=torch.long)
@@ -134,7 +142,9 @@ class TrajectoryTests(unittest.TestCase):
     def test_alternative_arms_and_noise_gradients(self):
         c, geom, x = self.toy.batch(8, self.rng)
         ctx = self.toy.condition(geom)
-        for override in ({"model": "gan"}, {"d_mode": "concat"}, {"noise": "learned"}, {"noise": "fixed"}):
+        for override in ({"model": "gan"}, {"d_mode": "concat"}, {"noise": "learned"}, {"noise": "fixed"},
+                         {"d_architecture": "hybrid", "d_mode": "concat", "d_temporal_width": 8},
+                         {"d_architecture": "hybrid", "model": "gan", "d_temporal_width": 8}):
             cfg = {**DEFAULTS, "width": 8, "d_width": 32, **override}
             validate(cfg)
             g, d = TrajectoryGenerator(cfg), TrajectoryDiscriminator(cfg)

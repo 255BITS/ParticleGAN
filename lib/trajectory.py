@@ -156,7 +156,7 @@ class TrajectoryDiscriminator(nn.Module):
         inp = 2 * cfg["length"] * (2 if self.diffusion else 1) + 18 + extra
         w = cfg["d_width"]
         self.architecture = cfg.get("d_architecture", "mlp")
-        if self.architecture == "temporal":
+        if self.architecture in ("temporal", "hybrid"):
             tw = cfg.get("d_temporal_width", 64)
             channels = 2 * (2 if self.diffusion else 1) + 1
             self.stages = nn.ModuleList([
@@ -165,8 +165,16 @@ class TrajectoryDiscriminator(nn.Module):
                 nn.Sequential(nn.Conv1d(2*tw, 2*tw, 5, stride=2, padding=2), nn.LeakyReLU(.2)),
             ])
             self.register_buffer("position", torch.linspace(-1, 1, cfg["length"])[None, None])
-            self.net = nn.Sequential(nn.Linear(20*tw + 18 + extra, w//4), nn.LeakyReLU(.2),
-                                     nn.Linear(w//4, self.heads if self.mode == "ucd" else 1))
+            if self.architecture == "hybrid":
+                # Preserve a direct full-path view alongside local features.
+                # c/t still enter only through UCD head selection (or concat).
+                self.global_net = nn.Sequential(nn.Linear(inp-extra, w), nn.LeakyReLU(.2),
+                                                nn.Linear(w, w), nn.LeakyReLU(.2))
+                fused, hidden = 20*tw + w + extra, w//2
+            else:
+                fused, hidden = 20*tw + 18 + extra, w//4
+            self.net = nn.Sequential(nn.Linear(fused, hidden), nn.LeakyReLU(.2),
+                                     nn.Linear(hidden, self.heads if self.mode == "ucd" else 1))
         elif self.architecture == "mlp":
             self.net = nn.Sequential(nn.Linear(inp, w), nn.LeakyReLU(.2),
                                  nn.Linear(w, w), nn.LeakyReLU(.2),
@@ -179,7 +187,7 @@ class TrajectoryDiscriminator(nn.Module):
         return (t - 1) * 2 + c if self.diffusion else c
 
     def forward(self, x, c, context, xt=None, t=None):
-        if self.architecture == "temporal":
+        if self.architecture in ("temporal", "hybrid"):
             inputs = [x, self.position.expand(len(x), -1, -1)]
             if self.diffusion:
                 inputs.append(xt)
@@ -188,7 +196,13 @@ class TrajectoryDiscriminator(nn.Module):
             for stage in self.stages:
                 h = stage(h)
                 pieces.append(F.adaptive_avg_pool1d(h, 4).flatten(1))
-            pieces.append(context)
+            if self.architecture == "hybrid":
+                global_inputs = [x.flatten(1), context]
+                if self.diffusion:
+                    global_inputs.append(xt.flatten(1))
+                pieces.append(self.global_net(torch.cat(global_inputs, 1)))
+            else:
+                pieces.append(context)
         else:
             pieces = [x.flatten(1), context]
             if self.diffusion:
