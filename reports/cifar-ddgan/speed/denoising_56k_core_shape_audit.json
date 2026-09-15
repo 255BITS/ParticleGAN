@@ -1,0 +1,4838 @@
+{
+  "exact": {
+    "definition": "nearest-center assignment; radius10sigma core; at least20samples/mode; eigenvalues divided by true variance",
+    "audited_modes": 100,
+    "median_min_eigenvalue_ratio": 0.5281385425189902,
+    "median_max_eigenvalue_ratio": 1.4590498079377512,
+    "modes_with_core_min_eigenvalue_below_0_1": 3,
+    "per_mode": [
+      {
+        "mode": 0,
+        "center": [
+          -4.5,
+          -4.5
+        ],
+        "core_samples": 207,
+        "eigenvalue_ratios": [
+          0.1191816201042625,
+          0.4595628812683678
+        ]
+      },
+      {
+        "mode": 1,
+        "center": [
+          -4.5,
+          -3.5
+        ],
+        "core_samples": 194,
+        "eigenvalue_ratios": [
+          0.33404297675352096,
+          1.3946750458345016
+        ]
+      },
+      {
+        "mode": 2,
+        "center": [
+          -4.5,
+          -2.5
+        ],
+        "core_samples": 195,
+        "eigenvalue_ratios": [
+          0.07674197590962273,
+          0.5423561708211573
+        ]
+      },
+      {
+        "mode": 3,
+        "center": [
+          -4.5,
+          -1.5
+        ],
+        "core_samples": 200,
+        "eigenvalue_ratios": [
+          0.1271177467874271,
+          2.0344262484571316
+        ]
+      },
+      {
+        "mode": 4,
+        "center": [
+          -4.5,
+          -0.5
+        ],
+        "core_samples": 222,
+        "eigenvalue_ratios": [
+          0.7442405844123474,
+          1.232266860772083
+        ]
+      },
+      {
+        "mode": 5,
+        "center": [
+          -4.5,
+          0.5
+        ],
+        "core_samples": 239,
+        "eigenvalue_ratios": [
+          0.3743712930888894,
+          1.7997964546931202
+        ]
+      },
+      {
+        "mode": 6,
+        "center": [
+          -4.5,
+          1.5
+        ],
+        "core_samples": 189,
+        "eigenvalue_ratios": [
+          0.23118606531113858,
+          2.0609693511488545
+        ]
+      },
+      {
+        "mode": 7,
+        "center": [
+          -4.5,
+          2.5
+        ],
+        "core_samples": 188,
+        "eigenvalue_ratios": [
+          0.5848809409562994,
+          2.0557389440891756
+        ]
+      },
+      {
+        "mode": 8,
+        "center": [
+          -4.5,
+          3.5
+        ],
+        "core_samples": 169,
+        "eigenvalue_ratios": [
+          0.5061845693371472,
+          0.6852985089154071
+        ]
+      },
+      {
+        "mode": 9,
+        "center": [
+          -4.5,
+          4.5
+        ],
+        "core_samples": 207,
+        "eigenvalue_ratios": [
+          0.27711426030498115,
+          1.2111340781138877
+        ]
+      },
+      {
+        "mode": 10,
+        "center": [
+          -3.5,
+          -4.5
+        ],
+        "core_samples": 190,
+        "eigenvalue_ratios": [
+          0.0777455202161785,
+          0.8148016964423607
+        ]
+      },
+      {
+        "mode": 11,
+        "center": [
+          -3.5,
+          -3.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          0.18883432335914727,
+          0.6181098024373313
+        ]
+      },
+      {
+        "mode": 12,
+        "center": [
+          -3.5,
+          -2.5
+        ],
+        "core_samples": 205,
+        "eigenvalue_ratios": [
+          0.9564773347696837,
+          2.1276587236506486
+        ]
+      },
+      {
+        "mode": 13,
+        "center": [
+          -3.5,
+          -1.5
+        ],
+        "core_samples": 213,
+        "eigenvalue_ratios": [
+          1.1369461281775155,
+          2.8164315754966673
+        ]
+      },
+      {
+        "mode": 14,
+        "center": [
+          -3.5,
+          -0.5
+        ],
+        "core_samples": 229,
+        "eigenvalue_ratios": [
+          0.9146464519863939,
+          1.790706042875364
+        ]
+      },
+      {
+        "mode": 15,
+        "center": [
+          -3.5,
+          0.5
+        ],
+        "core_samples": 226,
+        "eigenvalue_ratios": [
+          0.23444237999733372,
+          0.4514914549064822
+        ]
+      },
+      {
+        "mode": 16,
+        "center": [
+          -3.5,
+          1.5
+        ],
+        "core_samples": 198,
+        "eigenvalue_ratios": [
+          0.9343560490211671,
+          1.3677182079194625
+        ]
+      },
+      {
+        "mode": 17,
+        "center": [
+          -3.5,
+          2.5
+        ],
+        "core_samples": 226,
+        "eigenvalue_ratios": [
+          0.42428430523919086,
+          0.7715742552548498
+        ]
+      },
+      {
+        "mode": 18,
+        "center": [
+          -3.5,
+          3.5
+        ],
+        "core_samples": 190,
+        "eigenvalue_ratios": [
+          0.36385353788926683,
+          0.39318528878701986
+        ]
+      },
+      {
+        "mode": 19,
+        "center": [
+          -3.5,
+          4.5
+        ],
+        "core_samples": 216,
+        "eigenvalue_ratios": [
+          0.10067636288776971,
+          0.29946337179676524
+        ]
+      },
+      {
+        "mode": 20,
+        "center": [
+          -2.5,
+          -4.5
+        ],
+        "core_samples": 197,
+        "eigenvalue_ratios": [
+          0.5908211354870252,
+          2.7096636574683783
+        ]
+      },
+      {
+        "mode": 21,
+        "center": [
+          -2.5,
+          -3.5
+        ],
+        "core_samples": 194,
+        "eigenvalue_ratios": [
+          0.6492494060737941,
+          2.0501749809650835
+        ]
+      },
+      {
+        "mode": 22,
+        "center": [
+          -2.5,
+          -2.5
+        ],
+        "core_samples": 200,
+        "eigenvalue_ratios": [
+          1.3530797190530597,
+          1.3761371627294745
+        ]
+      },
+      {
+        "mode": 23,
+        "center": [
+          -2.5,
+          -1.5
+        ],
+        "core_samples": 207,
+        "eigenvalue_ratios": [
+          1.2900335064970274,
+          1.651793880912829
+        ]
+      },
+      {
+        "mode": 24,
+        "center": [
+          -2.5,
+          -0.5
+        ],
+        "core_samples": 206,
+        "eigenvalue_ratios": [
+          1.7537812803977326,
+          2.1804286277199623
+        ]
+      },
+      {
+        "mode": 25,
+        "center": [
+          -2.5,
+          0.5
+        ],
+        "core_samples": 192,
+        "eigenvalue_ratios": [
+          0.8968513679574294,
+          1.459942222384302
+        ]
+      },
+      {
+        "mode": 26,
+        "center": [
+          -2.5,
+          1.5
+        ],
+        "core_samples": 206,
+        "eigenvalue_ratios": [
+          0.8778627343221316,
+          1.201452349334446
+        ]
+      },
+      {
+        "mode": 27,
+        "center": [
+          -2.5,
+          2.5
+        ],
+        "core_samples": 189,
+        "eigenvalue_ratios": [
+          1.150935529845281,
+          1.571127888009051
+        ]
+      },
+      {
+        "mode": 28,
+        "center": [
+          -2.5,
+          3.5
+        ],
+        "core_samples": 206,
+        "eigenvalue_ratios": [
+          0.5314831162518316,
+          1.3861275752487177
+        ]
+      },
+      {
+        "mode": 29,
+        "center": [
+          -2.5,
+          4.5
+        ],
+        "core_samples": 173,
+        "eigenvalue_ratios": [
+          0.4854237017645693,
+          1.0547855645647588
+        ]
+      },
+      {
+        "mode": 30,
+        "center": [
+          -1.5,
+          -4.5
+        ],
+        "core_samples": 186,
+        "eigenvalue_ratios": [
+          0.13030320777881574,
+          0.25587643224862977
+        ]
+      },
+      {
+        "mode": 31,
+        "center": [
+          -1.5,
+          -3.5
+        ],
+        "core_samples": 171,
+        "eigenvalue_ratios": [
+          0.3669555566950145,
+          1.7298540598039862
+        ]
+      },
+      {
+        "mode": 32,
+        "center": [
+          -1.5,
+          -2.5
+        ],
+        "core_samples": 166,
+        "eigenvalue_ratios": [
+          1.2228738131380816,
+          2.6504183433348705
+        ]
+      },
+      {
+        "mode": 33,
+        "center": [
+          -1.5,
+          -1.5
+        ],
+        "core_samples": 215,
+        "eigenvalue_ratios": [
+          1.2372290622875395,
+          2.593520636703439
+        ]
+      },
+      {
+        "mode": 34,
+        "center": [
+          -1.5,
+          -0.5
+        ],
+        "core_samples": 219,
+        "eigenvalue_ratios": [
+          1.299065084152237,
+          2.375908008042351
+        ]
+      },
+      {
+        "mode": 35,
+        "center": [
+          -1.5,
+          0.5
+        ],
+        "core_samples": 177,
+        "eigenvalue_ratios": [
+          1.6098731267446749,
+          2.1789633173239396
+        ]
+      },
+      {
+        "mode": 36,
+        "center": [
+          -1.5,
+          1.5
+        ],
+        "core_samples": 195,
+        "eigenvalue_ratios": [
+          1.7692621845865546,
+          2.00321353541631
+        ]
+      },
+      {
+        "mode": 37,
+        "center": [
+          -1.5,
+          2.5
+        ],
+        "core_samples": 191,
+        "eigenvalue_ratios": [
+          1.6274982895156611,
+          2.7147692576320535
+        ]
+      },
+      {
+        "mode": 38,
+        "center": [
+          -1.5,
+          3.5
+        ],
+        "core_samples": 165,
+        "eigenvalue_ratios": [
+          0.1791818234535131,
+          2.291024356812868
+        ]
+      },
+      {
+        "mode": 39,
+        "center": [
+          -1.5,
+          4.5
+        ],
+        "core_samples": 191,
+        "eigenvalue_ratios": [
+          0.2119048129355239,
+          1.3005294003750838
+        ]
+      },
+      {
+        "mode": 40,
+        "center": [
+          -0.5,
+          -4.5
+        ],
+        "core_samples": 206,
+        "eigenvalue_ratios": [
+          0.11520920833310005,
+          1.3905403340348523
+        ]
+      },
+      {
+        "mode": 41,
+        "center": [
+          -0.5,
+          -3.5
+        ],
+        "core_samples": 181,
+        "eigenvalue_ratios": [
+          0.5248047764452688,
+          1.8774845781950886
+        ]
+      },
+      {
+        "mode": 42,
+        "center": [
+          -0.5,
+          -2.5
+        ],
+        "core_samples": 181,
+        "eigenvalue_ratios": [
+          0.2939208070802102,
+          2.026007171089844
+        ]
+      },
+      {
+        "mode": 43,
+        "center": [
+          -0.5,
+          -1.5
+        ],
+        "core_samples": 178,
+        "eigenvalue_ratios": [
+          1.24020509808225,
+          2.523095833742259
+        ]
+      },
+      {
+        "mode": 44,
+        "center": [
+          -0.5,
+          -0.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          1.5313276043469168,
+          1.5371030062741227
+        ]
+      },
+      {
+        "mode": 45,
+        "center": [
+          -0.5,
+          0.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          0.9180277835877548,
+          1.5376313386382516
+        ]
+      },
+      {
+        "mode": 46,
+        "center": [
+          -0.5,
+          1.5
+        ],
+        "core_samples": 164,
+        "eigenvalue_ratios": [
+          2.0049342798594143,
+          2.247167393297309
+        ]
+      },
+      {
+        "mode": 47,
+        "center": [
+          -0.5,
+          2.5
+        ],
+        "core_samples": 185,
+        "eigenvalue_ratios": [
+          1.2019141476117474,
+          1.426164037785088
+        ]
+      },
+      {
+        "mode": 48,
+        "center": [
+          -0.5,
+          3.5
+        ],
+        "core_samples": 189,
+        "eigenvalue_ratios": [
+          0.2983387315788907,
+          1.4548594907483683
+        ]
+      },
+      {
+        "mode": 49,
+        "center": [
+          -0.5,
+          4.5
+        ],
+        "core_samples": 241,
+        "eigenvalue_ratios": [
+          0.4588024438137298,
+          1.3251236447311856
+        ]
+      },
+      {
+        "mode": 50,
+        "center": [
+          0.5,
+          -4.5
+        ],
+        "core_samples": 211,
+        "eigenvalue_ratios": [
+          0.0913494694378124,
+          1.4917947466962345
+        ]
+      },
+      {
+        "mode": 51,
+        "center": [
+          0.5,
+          -3.5
+        ],
+        "core_samples": 182,
+        "eigenvalue_ratios": [
+          0.24671852852562048,
+          1.7771847393767435
+        ]
+      },
+      {
+        "mode": 52,
+        "center": [
+          0.5,
+          -2.5
+        ],
+        "core_samples": 184,
+        "eigenvalue_ratios": [
+          0.9844235523457404,
+          1.7940430262072493
+        ]
+      },
+      {
+        "mode": 53,
+        "center": [
+          0.5,
+          -1.5
+        ],
+        "core_samples": 181,
+        "eigenvalue_ratios": [
+          1.719637257954057,
+          2.537150102231822
+        ]
+      },
+      {
+        "mode": 54,
+        "center": [
+          0.5,
+          -0.5
+        ],
+        "core_samples": 166,
+        "eigenvalue_ratios": [
+          0.7485839594374513,
+          0.9857092670474844
+        ]
+      },
+      {
+        "mode": 55,
+        "center": [
+          0.5,
+          0.5
+        ],
+        "core_samples": 186,
+        "eigenvalue_ratios": [
+          0.7708546496347721,
+          1.2019556743418882
+        ]
+      },
+      {
+        "mode": 56,
+        "center": [
+          0.5,
+          1.5
+        ],
+        "core_samples": 192,
+        "eigenvalue_ratios": [
+          0.9525964697706859,
+          1.793867740628921
+        ]
+      },
+      {
+        "mode": 57,
+        "center": [
+          0.5,
+          2.5
+        ],
+        "core_samples": 213,
+        "eigenvalue_ratios": [
+          1.503429771348331,
+          2.1352324672536174
+        ]
+      },
+      {
+        "mode": 58,
+        "center": [
+          0.5,
+          3.5
+        ],
+        "core_samples": 163,
+        "eigenvalue_ratios": [
+          0.15356075104324018,
+          2.919636187110061
+        ]
+      },
+      {
+        "mode": 59,
+        "center": [
+          0.5,
+          4.5
+        ],
+        "core_samples": 194,
+        "eigenvalue_ratios": [
+          0.2595897187220655,
+          1.4581573934912002
+        ]
+      },
+      {
+        "mode": 60,
+        "center": [
+          1.5,
+          -4.5
+        ],
+        "core_samples": 214,
+        "eigenvalue_ratios": [
+          0.22564405331090145,
+          2.155120698366622
+        ]
+      },
+      {
+        "mode": 61,
+        "center": [
+          1.5,
+          -3.5
+        ],
+        "core_samples": 178,
+        "eigenvalue_ratios": [
+          0.8466339932195588,
+          1.6779858806550936
+        ]
+      },
+      {
+        "mode": 62,
+        "center": [
+          1.5,
+          -2.5
+        ],
+        "core_samples": 192,
+        "eigenvalue_ratios": [
+          2.3276975276075738,
+          2.7180671458776313
+        ]
+      },
+      {
+        "mode": 63,
+        "center": [
+          1.5,
+          -1.5
+        ],
+        "core_samples": 178,
+        "eigenvalue_ratios": [
+          0.5314723085927117,
+          3.3771041238279467
+        ]
+      },
+      {
+        "mode": 64,
+        "center": [
+          1.5,
+          -0.5
+        ],
+        "core_samples": 182,
+        "eigenvalue_ratios": [
+          1.3400293073002016,
+          1.3882687935077522
+        ]
+      },
+      {
+        "mode": 65,
+        "center": [
+          1.5,
+          0.5
+        ],
+        "core_samples": 188,
+        "eigenvalue_ratios": [
+          0.9946431899291381,
+          1.374011470412915
+        ]
+      },
+      {
+        "mode": 66,
+        "center": [
+          1.5,
+          1.5
+        ],
+        "core_samples": 171,
+        "eigenvalue_ratios": [
+          1.3070395799184023,
+          1.7035667416707172
+        ]
+      },
+      {
+        "mode": 67,
+        "center": [
+          1.5,
+          2.5
+        ],
+        "core_samples": 174,
+        "eigenvalue_ratios": [
+          1.0400333303696292,
+          3.5210928447737637
+        ]
+      },
+      {
+        "mode": 68,
+        "center": [
+          1.5,
+          3.5
+        ],
+        "core_samples": 165,
+        "eigenvalue_ratios": [
+          0.8222844585233768,
+          1.8886186745356903
+        ]
+      },
+      {
+        "mode": 69,
+        "center": [
+          1.5,
+          4.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          0.4009361393082292,
+          2.1178692936482686
+        ]
+      },
+      {
+        "mode": 70,
+        "center": [
+          2.5,
+          -4.5
+        ],
+        "core_samples": 197,
+        "eigenvalue_ratios": [
+          0.14364918408425395,
+          1.516936993679473
+        ]
+      },
+      {
+        "mode": 71,
+        "center": [
+          2.5,
+          -3.5
+        ],
+        "core_samples": 180,
+        "eigenvalue_ratios": [
+          0.5194064946435235,
+          0.8988709646126599
+        ]
+      },
+      {
+        "mode": 72,
+        "center": [
+          2.5,
+          -2.5
+        ],
+        "core_samples": 225,
+        "eigenvalue_ratios": [
+          0.6119541788386562,
+          0.832966437141762
+        ]
+      },
+      {
+        "mode": 73,
+        "center": [
+          2.5,
+          -1.5
+        ],
+        "core_samples": 198,
+        "eigenvalue_ratios": [
+          1.7942077464962012,
+          2.6239710269380154
+        ]
+      },
+      {
+        "mode": 74,
+        "center": [
+          2.5,
+          -0.5
+        ],
+        "core_samples": 187,
+        "eigenvalue_ratios": [
+          0.41795343219874215,
+          0.8882008862330243
+        ]
+      },
+      {
+        "mode": 75,
+        "center": [
+          2.5,
+          0.5
+        ],
+        "core_samples": 194,
+        "eigenvalue_ratios": [
+          0.502030489651181,
+          3.0493990732302305
+        ]
+      },
+      {
+        "mode": 76,
+        "center": [
+          2.5,
+          1.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          1.099770336149269,
+          1.2955196011225039
+        ]
+      },
+      {
+        "mode": 77,
+        "center": [
+          2.5,
+          2.5
+        ],
+        "core_samples": 164,
+        "eigenvalue_ratios": [
+          0.582197543657153,
+          0.8379812595044225
+        ]
+      },
+      {
+        "mode": 78,
+        "center": [
+          2.5,
+          3.5
+        ],
+        "core_samples": 197,
+        "eigenvalue_ratios": [
+          0.2318165103608411,
+          1.0395983440694663
+        ]
+      },
+      {
+        "mode": 79,
+        "center": [
+          2.5,
+          4.5
+        ],
+        "core_samples": 172,
+        "eigenvalue_ratios": [
+          0.2961639511929895,
+          1.0603404137248613
+        ]
+      },
+      {
+        "mode": 80,
+        "center": [
+          3.5,
+          -4.5
+        ],
+        "core_samples": 175,
+        "eigenvalue_ratios": [
+          0.5065432268386374,
+          0.8666183115783765
+        ]
+      },
+      {
+        "mode": 81,
+        "center": [
+          3.5,
+          -3.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          0.3049920199400291,
+          0.9647597540051897
+        ]
+      },
+      {
+        "mode": 82,
+        "center": [
+          3.5,
+          -2.5
+        ],
+        "core_samples": 199,
+        "eigenvalue_ratios": [
+          0.5390254408747288,
+          0.5895061647722344
+        ]
+      },
+      {
+        "mode": 83,
+        "center": [
+          3.5,
+          -1.5
+        ],
+        "core_samples": 221,
+        "eigenvalue_ratios": [
+          1.194003174772969,
+          1.6574741854747999
+        ]
+      },
+      {
+        "mode": 84,
+        "center": [
+          3.5,
+          -0.5
+        ],
+        "core_samples": 224,
+        "eigenvalue_ratios": [
+          0.721837668409311,
+          0.8478155084083401
+        ]
+      },
+      {
+        "mode": 85,
+        "center": [
+          3.5,
+          0.5
+        ],
+        "core_samples": 193,
+        "eigenvalue_ratios": [
+          1.0869410428511548,
+          1.893273604576515
+        ]
+      },
+      {
+        "mode": 86,
+        "center": [
+          3.5,
+          1.5
+        ],
+        "core_samples": 205,
+        "eigenvalue_ratios": [
+          0.8606975354402491,
+          1.8909396442773108
+        ]
+      },
+      {
+        "mode": 87,
+        "center": [
+          3.5,
+          2.5
+        ],
+        "core_samples": 200,
+        "eigenvalue_ratios": [
+          0.16909533756716963,
+          0.8033533614409181
+        ]
+      },
+      {
+        "mode": 88,
+        "center": [
+          3.5,
+          3.5
+        ],
+        "core_samples": 170,
+        "eigenvalue_ratios": [
+          0.3742177250054685,
+          0.8022639957474065
+        ]
+      },
+      {
+        "mode": 89,
+        "center": [
+          3.5,
+          4.5
+        ],
+        "core_samples": 200,
+        "eigenvalue_ratios": [
+          0.5912153194506083,
+          0.7852592133720078
+        ]
+      },
+      {
+        "mode": 90,
+        "center": [
+          4.5,
+          -4.5
+        ],
+        "core_samples": 219,
+        "eigenvalue_ratios": [
+          0.2382500616741403,
+          0.3808129252930533
+        ]
+      },
+      {
+        "mode": 91,
+        "center": [
+          4.5,
+          -3.5
+        ],
+        "core_samples": 192,
+        "eigenvalue_ratios": [
+          0.25657375849177416,
+          1.1116221081613207
+        ]
+      },
+      {
+        "mode": 92,
+        "center": [
+          4.5,
+          -2.5
+        ],
+        "core_samples": 221,
+        "eigenvalue_ratios": [
+          0.3378873553645211,
+          0.9175634606723947
+        ]
+      },
+      {
+        "mode": 93,
+        "center": [
+          4.5,
+          -1.5
+        ],
+        "core_samples": 214,
+        "eigenvalue_ratios": [
+          0.24754963801628785,
+          1.3090692145776421
+        ]
+      },
+      {
+        "mode": 94,
+        "center": [
+          4.5,
+          -0.5
+        ],
+        "core_samples": 216,
+        "eigenvalue_ratios": [
+          0.2597095631317179,
+          1.0920496736995136
+        ]
+      },
+      {
+        "mode": 95,
+        "center": [
+          4.5,
+          0.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          0.2589236229259762,
+          2.1988570854933847
+        ]
+      },
+      {
+        "mode": 96,
+        "center": [
+          4.5,
+          1.5
+        ],
+        "core_samples": 195,
+        "eigenvalue_ratios": [
+          0.3975545444756516,
+          2.1017291217568133
+        ]
+      },
+      {
+        "mode": 97,
+        "center": [
+          4.5,
+          2.5
+        ],
+        "core_samples": 204,
+        "eigenvalue_ratios": [
+          0.21480030662596145,
+          0.7492171952746249
+        ]
+      },
+      {
+        "mode": 98,
+        "center": [
+          4.5,
+          3.5
+        ],
+        "core_samples": 179,
+        "eigenvalue_ratios": [
+          0.3719636315399512,
+          1.117747883649954
+        ]
+      },
+      {
+        "mode": 99,
+        "center": [
+          4.5,
+          4.5
+        ],
+        "core_samples": 167,
+        "eigenvalue_ratios": [
+          0.24777852009322046,
+          0.7292120713275916
+        ]
+      }
+    ]
+  },
+  "fd_lazy4": {
+    "definition": "nearest-center assignment; radius10sigma core; at least20samples/mode; eigenvalues divided by true variance",
+    "audited_modes": 100,
+    "median_min_eigenvalue_ratio": 0.9454719111698544,
+    "median_max_eigenvalue_ratio": 2.0010673542306487,
+    "modes_with_core_min_eigenvalue_below_0_1": 0,
+    "per_mode": [
+      {
+        "mode": 0,
+        "center": [
+          -4.5,
+          -4.5
+        ],
+        "core_samples": 219,
+        "eigenvalue_ratios": [
+          0.8185860425567774,
+          0.9266336626352015
+        ]
+      },
+      {
+        "mode": 1,
+        "center": [
+          -4.5,
+          -3.5
+        ],
+        "core_samples": 160,
+        "eigenvalue_ratios": [
+          1.258240690887646,
+          1.6586189737462869
+        ]
+      },
+      {
+        "mode": 2,
+        "center": [
+          -4.5,
+          -2.5
+        ],
+        "core_samples": 218,
+        "eigenvalue_ratios": [
+          0.14047828288542677,
+          0.5973479996749662
+        ]
+      },
+      {
+        "mode": 3,
+        "center": [
+          -4.5,
+          -1.5
+        ],
+        "core_samples": 205,
+        "eigenvalue_ratios": [
+          0.18569623535351415,
+          2.1875858088287874
+        ]
+      },
+      {
+        "mode": 4,
+        "center": [
+          -4.5,
+          -0.5
+        ],
+        "core_samples": 194,
+        "eigenvalue_ratios": [
+          0.12232213864990255,
+          0.8985187314944253
+        ]
+      },
+      {
+        "mode": 5,
+        "center": [
+          -4.5,
+          0.5
+        ],
+        "core_samples": 224,
+        "eigenvalue_ratios": [
+          0.35743711309758075,
+          2.012690327004476
+        ]
+      },
+      {
+        "mode": 6,
+        "center": [
+          -4.5,
+          1.5
+        ],
+        "core_samples": 227,
+        "eigenvalue_ratios": [
+          0.13685114258446543,
+          3.0747171406359484
+        ]
+      },
+      {
+        "mode": 7,
+        "center": [
+          -4.5,
+          2.5
+        ],
+        "core_samples": 210,
+        "eigenvalue_ratios": [
+          0.2789572850761933,
+          1.9711315343293376
+        ]
+      },
+      {
+        "mode": 8,
+        "center": [
+          -4.5,
+          3.5
+        ],
+        "core_samples": 181,
+        "eigenvalue_ratios": [
+          0.6044769838484878,
+          2.282539659123802
+        ]
+      },
+      {
+        "mode": 9,
+        "center": [
+          -4.5,
+          4.5
+        ],
+        "core_samples": 228,
+        "eigenvalue_ratios": [
+          0.27377369579800187,
+          0.6992264685988157
+        ]
+      },
+      {
+        "mode": 10,
+        "center": [
+          -3.5,
+          -4.5
+        ],
+        "core_samples": 238,
+        "eigenvalue_ratios": [
+          0.3811408499540943,
+          1.3997227061584443
+        ]
+      },
+      {
+        "mode": 11,
+        "center": [
+          -3.5,
+          -3.5
+        ],
+        "core_samples": 172,
+        "eigenvalue_ratios": [
+          0.7979618821867388,
+          2.3390809553701346
+        ]
+      },
+      {
+        "mode": 12,
+        "center": [
+          -3.5,
+          -2.5
+        ],
+        "core_samples": 168,
+        "eigenvalue_ratios": [
+          1.7890281440880984,
+          1.9926110780722122
+        ]
+      },
+      {
+        "mode": 13,
+        "center": [
+          -3.5,
+          -1.5
+        ],
+        "core_samples": 217,
+        "eigenvalue_ratios": [
+          1.3847982205224016,
+          1.8368612317706927
+        ]
+      },
+      {
+        "mode": 14,
+        "center": [
+          -3.5,
+          -0.5
+        ],
+        "core_samples": 209,
+        "eigenvalue_ratios": [
+          0.8601321358457995,
+          2.512483863803573
+        ]
+      },
+      {
+        "mode": 15,
+        "center": [
+          -3.5,
+          0.5
+        ],
+        "core_samples": 203,
+        "eigenvalue_ratios": [
+          1.2205072656218259,
+          1.6575192613213805
+        ]
+      },
+      {
+        "mode": 16,
+        "center": [
+          -3.5,
+          1.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          0.507514020129191,
+          2.335915015862605
+        ]
+      },
+      {
+        "mode": 17,
+        "center": [
+          -3.5,
+          2.5
+        ],
+        "core_samples": 219,
+        "eigenvalue_ratios": [
+          0.5200393328402864,
+          2.167992768189365
+        ]
+      },
+      {
+        "mode": 18,
+        "center": [
+          -3.5,
+          3.5
+        ],
+        "core_samples": 172,
+        "eigenvalue_ratios": [
+          0.5850609569345392,
+          1.2030311387716575
+        ]
+      },
+      {
+        "mode": 19,
+        "center": [
+          -3.5,
+          4.5
+        ],
+        "core_samples": 182,
+        "eigenvalue_ratios": [
+          0.517598903349733,
+          0.8191768483217398
+        ]
+      },
+      {
+        "mode": 20,
+        "center": [
+          -2.5,
+          -4.5
+        ],
+        "core_samples": 208,
+        "eigenvalue_ratios": [
+          1.3290312318803603,
+          2.1810654563657987
+        ]
+      },
+      {
+        "mode": 21,
+        "center": [
+          -2.5,
+          -3.5
+        ],
+        "core_samples": 219,
+        "eigenvalue_ratios": [
+          0.9154295532818686,
+          1.6268142863652992
+        ]
+      },
+      {
+        "mode": 22,
+        "center": [
+          -2.5,
+          -2.5
+        ],
+        "core_samples": 197,
+        "eigenvalue_ratios": [
+          1.0725035242691803,
+          2.2373730085605366
+        ]
+      },
+      {
+        "mode": 23,
+        "center": [
+          -2.5,
+          -1.5
+        ],
+        "core_samples": 227,
+        "eigenvalue_ratios": [
+          1.1791784197684998,
+          1.8306121237190414
+        ]
+      },
+      {
+        "mode": 24,
+        "center": [
+          -2.5,
+          -0.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          1.4928604436010375,
+          1.7396171391811037
+        ]
+      },
+      {
+        "mode": 25,
+        "center": [
+          -2.5,
+          0.5
+        ],
+        "core_samples": 211,
+        "eigenvalue_ratios": [
+          1.1953308302666505,
+          2.0309364153625644
+        ]
+      },
+      {
+        "mode": 26,
+        "center": [
+          -2.5,
+          1.5
+        ],
+        "core_samples": 186,
+        "eigenvalue_ratios": [
+          0.9959979967229703,
+          1.64550919139132
+        ]
+      },
+      {
+        "mode": 27,
+        "center": [
+          -2.5,
+          2.5
+        ],
+        "core_samples": 220,
+        "eigenvalue_ratios": [
+          1.4495219374317572,
+          2.3079210995580692
+        ]
+      },
+      {
+        "mode": 28,
+        "center": [
+          -2.5,
+          3.5
+        ],
+        "core_samples": 206,
+        "eigenvalue_ratios": [
+          1.2150550444767603,
+          2.2610962184663577
+        ]
+      },
+      {
+        "mode": 29,
+        "center": [
+          -2.5,
+          4.5
+        ],
+        "core_samples": 198,
+        "eigenvalue_ratios": [
+          0.9943193724427737,
+          1.887581466870966
+        ]
+      },
+      {
+        "mode": 30,
+        "center": [
+          -1.5,
+          -4.5
+        ],
+        "core_samples": 235,
+        "eigenvalue_ratios": [
+          0.6435632759097687,
+          1.2773539813962453
+        ]
+      },
+      {
+        "mode": 31,
+        "center": [
+          -1.5,
+          -3.5
+        ],
+        "core_samples": 247,
+        "eigenvalue_ratios": [
+          0.7222106098512517,
+          1.1569487311316675
+        ]
+      },
+      {
+        "mode": 32,
+        "center": [
+          -1.5,
+          -2.5
+        ],
+        "core_samples": 228,
+        "eigenvalue_ratios": [
+          0.9524074937656937,
+          2.0733065601299088
+        ]
+      },
+      {
+        "mode": 33,
+        "center": [
+          -1.5,
+          -1.5
+        ],
+        "core_samples": 224,
+        "eigenvalue_ratios": [
+          1.00024260009594,
+          2.2239199927818833
+        ]
+      },
+      {
+        "mode": 34,
+        "center": [
+          -1.5,
+          -0.5
+        ],
+        "core_samples": 169,
+        "eigenvalue_ratios": [
+          0.9904235714834904,
+          1.158208960941497
+        ]
+      },
+      {
+        "mode": 35,
+        "center": [
+          -1.5,
+          0.5
+        ],
+        "core_samples": 188,
+        "eigenvalue_ratios": [
+          0.841412816100896,
+          1.6472256843241793
+        ]
+      },
+      {
+        "mode": 36,
+        "center": [
+          -1.5,
+          1.5
+        ],
+        "core_samples": 218,
+        "eigenvalue_ratios": [
+          2.04448880345642,
+          2.606597605071855
+        ]
+      },
+      {
+        "mode": 37,
+        "center": [
+          -1.5,
+          2.5
+        ],
+        "core_samples": 210,
+        "eigenvalue_ratios": [
+          0.9714898012240365,
+          1.6201913203924052
+        ]
+      },
+      {
+        "mode": 38,
+        "center": [
+          -1.5,
+          3.5
+        ],
+        "core_samples": 171,
+        "eigenvalue_ratios": [
+          1.4247192914758076,
+          4.707100113854198
+        ]
+      },
+      {
+        "mode": 39,
+        "center": [
+          -1.5,
+          4.5
+        ],
+        "core_samples": 179,
+        "eigenvalue_ratios": [
+          1.0113735946610558,
+          2.6774204858299733
+        ]
+      },
+      {
+        "mode": 40,
+        "center": [
+          -0.5,
+          -4.5
+        ],
+        "core_samples": 194,
+        "eigenvalue_ratios": [
+          0.7372612011176098,
+          2.966990777663079
+        ]
+      },
+      {
+        "mode": 41,
+        "center": [
+          -0.5,
+          -3.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          0.7553194951314854,
+          1.1629509926502393
+        ]
+      },
+      {
+        "mode": 42,
+        "center": [
+          -0.5,
+          -2.5
+        ],
+        "core_samples": 194,
+        "eigenvalue_ratios": [
+          1.1356490907274919,
+          1.883641752817159
+        ]
+      },
+      {
+        "mode": 43,
+        "center": [
+          -0.5,
+          -1.5
+        ],
+        "core_samples": 165,
+        "eigenvalue_ratios": [
+          0.5374365810060265,
+          2.1775617190202334
+        ]
+      },
+      {
+        "mode": 44,
+        "center": [
+          -0.5,
+          -0.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          1.0468936906625503,
+          1.1829093387524905
+        ]
+      },
+      {
+        "mode": 45,
+        "center": [
+          -0.5,
+          0.5
+        ],
+        "core_samples": 129,
+        "eigenvalue_ratios": [
+          1.660363752529528,
+          2.026557850706808
+        ]
+      },
+      {
+        "mode": 46,
+        "center": [
+          -0.5,
+          1.5
+        ],
+        "core_samples": 202,
+        "eigenvalue_ratios": [
+          1.0225535768228078,
+          2.7700998768601663
+        ]
+      },
+      {
+        "mode": 47,
+        "center": [
+          -0.5,
+          2.5
+        ],
+        "core_samples": 166,
+        "eigenvalue_ratios": [
+          2.72680720246017,
+          3.006293603179186
+        ]
+      },
+      {
+        "mode": 48,
+        "center": [
+          -0.5,
+          3.5
+        ],
+        "core_samples": 193,
+        "eigenvalue_ratios": [
+          0.9057086893628724,
+          1.6051710917273567
+        ]
+      },
+      {
+        "mode": 49,
+        "center": [
+          -0.5,
+          4.5
+        ],
+        "core_samples": 160,
+        "eigenvalue_ratios": [
+          0.7532490414189406,
+          1.6041627256474347
+        ]
+      },
+      {
+        "mode": 50,
+        "center": [
+          0.5,
+          -4.5
+        ],
+        "core_samples": 193,
+        "eigenvalue_ratios": [
+          0.4091091540161675,
+          1.619399127969678
+        ]
+      },
+      {
+        "mode": 51,
+        "center": [
+          0.5,
+          -3.5
+        ],
+        "core_samples": 166,
+        "eigenvalue_ratios": [
+          2.0673045372733556,
+          2.49140551676838
+        ]
+      },
+      {
+        "mode": 52,
+        "center": [
+          0.5,
+          -2.5
+        ],
+        "core_samples": 178,
+        "eigenvalue_ratios": [
+          0.9493378386325668,
+          1.488901290322697
+        ]
+      },
+      {
+        "mode": 53,
+        "center": [
+          0.5,
+          -1.5
+        ],
+        "core_samples": 159,
+        "eigenvalue_ratios": [
+          1.1384877005413665,
+          2.547869545577937
+        ]
+      },
+      {
+        "mode": 54,
+        "center": [
+          0.5,
+          -0.5
+        ],
+        "core_samples": 160,
+        "eigenvalue_ratios": [
+          1.882382433620637,
+          2.5842431392563183
+        ]
+      },
+      {
+        "mode": 55,
+        "center": [
+          0.5,
+          0.5
+        ],
+        "core_samples": 147,
+        "eigenvalue_ratios": [
+          1.0798531108207936,
+          2.0782719832711813
+        ]
+      },
+      {
+        "mode": 56,
+        "center": [
+          0.5,
+          1.5
+        ],
+        "core_samples": 185,
+        "eigenvalue_ratios": [
+          0.5266421348776641,
+          1.6060126341797645
+        ]
+      },
+      {
+        "mode": 57,
+        "center": [
+          0.5,
+          2.5
+        ],
+        "core_samples": 164,
+        "eigenvalue_ratios": [
+          1.2096979692628749,
+          1.4320998889315362
+        ]
+      },
+      {
+        "mode": 58,
+        "center": [
+          0.5,
+          3.5
+        ],
+        "core_samples": 186,
+        "eigenvalue_ratios": [
+          0.8490865217020894,
+          1.3077217061527038
+        ]
+      },
+      {
+        "mode": 59,
+        "center": [
+          0.5,
+          4.5
+        ],
+        "core_samples": 170,
+        "eigenvalue_ratios": [
+          0.29910289797957534,
+          1.2286410355343698
+        ]
+      },
+      {
+        "mode": 60,
+        "center": [
+          1.5,
+          -4.5
+        ],
+        "core_samples": 199,
+        "eigenvalue_ratios": [
+          1.3132015916216024,
+          2.3006214970460936
+        ]
+      },
+      {
+        "mode": 61,
+        "center": [
+          1.5,
+          -3.5
+        ],
+        "core_samples": 184,
+        "eigenvalue_ratios": [
+          0.7708677330625969,
+          1.2859948261164889
+        ]
+      },
+      {
+        "mode": 62,
+        "center": [
+          1.5,
+          -2.5
+        ],
+        "core_samples": 183,
+        "eigenvalue_ratios": [
+          1.162784769257905,
+          2.2936002354280065
+        ]
+      },
+      {
+        "mode": 63,
+        "center": [
+          1.5,
+          -1.5
+        ],
+        "core_samples": 195,
+        "eigenvalue_ratios": [
+          1.6208156931464373,
+          2.8451390626338293
+        ]
+      },
+      {
+        "mode": 64,
+        "center": [
+          1.5,
+          -0.5
+        ],
+        "core_samples": 153,
+        "eigenvalue_ratios": [
+          1.4858888108589803,
+          1.768293004619617
+        ]
+      },
+      {
+        "mode": 65,
+        "center": [
+          1.5,
+          0.5
+        ],
+        "core_samples": 163,
+        "eigenvalue_ratios": [
+          1.9975412741648595,
+          4.623334704942345
+        ]
+      },
+      {
+        "mode": 66,
+        "center": [
+          1.5,
+          1.5
+        ],
+        "core_samples": 219,
+        "eigenvalue_ratios": [
+          0.8086980913612263,
+          2.3925980266088445
+        ]
+      },
+      {
+        "mode": 67,
+        "center": [
+          1.5,
+          2.5
+        ],
+        "core_samples": 202,
+        "eigenvalue_ratios": [
+          0.8613881702441273,
+          1.861948070216393
+        ]
+      },
+      {
+        "mode": 68,
+        "center": [
+          1.5,
+          3.5
+        ],
+        "core_samples": 165,
+        "eigenvalue_ratios": [
+          0.9897377778461974,
+          3.2552324657202147
+        ]
+      },
+      {
+        "mode": 69,
+        "center": [
+          1.5,
+          4.5
+        ],
+        "core_samples": 185,
+        "eigenvalue_ratios": [
+          0.430565371584984,
+          2.8145544698739733
+        ]
+      },
+      {
+        "mode": 70,
+        "center": [
+          2.5,
+          -4.5
+        ],
+        "core_samples": 186,
+        "eigenvalue_ratios": [
+          1.2050053429716896,
+          2.6446749978578348
+        ]
+      },
+      {
+        "mode": 71,
+        "center": [
+          2.5,
+          -3.5
+        ],
+        "core_samples": 164,
+        "eigenvalue_ratios": [
+          0.5296827566445708,
+          2.376094681527051
+        ]
+      },
+      {
+        "mode": 72,
+        "center": [
+          2.5,
+          -2.5
+        ],
+        "core_samples": 185,
+        "eigenvalue_ratios": [
+          1.654068469463733,
+          2.198129499571201
+        ]
+      },
+      {
+        "mode": 73,
+        "center": [
+          2.5,
+          -1.5
+        ],
+        "core_samples": 194,
+        "eigenvalue_ratios": [
+          1.5700205262372917,
+          2.4717171259741373
+        ]
+      },
+      {
+        "mode": 74,
+        "center": [
+          2.5,
+          -0.5
+        ],
+        "core_samples": 148,
+        "eigenvalue_ratios": [
+          1.4328972548331156,
+          2.7989237162019
+        ]
+      },
+      {
+        "mode": 75,
+        "center": [
+          2.5,
+          0.5
+        ],
+        "core_samples": 184,
+        "eigenvalue_ratios": [
+          1.9160203519289623,
+          2.631448909897607
+        ]
+      },
+      {
+        "mode": 76,
+        "center": [
+          2.5,
+          1.5
+        ],
+        "core_samples": 183,
+        "eigenvalue_ratios": [
+          1.3033723485634818,
+          4.248592819229771
+        ]
+      },
+      {
+        "mode": 77,
+        "center": [
+          2.5,
+          2.5
+        ],
+        "core_samples": 180,
+        "eigenvalue_ratios": [
+          1.4361969062853601,
+          2.1882603330633392
+        ]
+      },
+      {
+        "mode": 78,
+        "center": [
+          2.5,
+          3.5
+        ],
+        "core_samples": 182,
+        "eigenvalue_ratios": [
+          0.6991229092478026,
+          2.163100931766704
+        ]
+      },
+      {
+        "mode": 79,
+        "center": [
+          2.5,
+          4.5
+        ],
+        "core_samples": 206,
+        "eigenvalue_ratios": [
+          0.4786807007480601,
+          3.2883404969336834
+        ]
+      },
+      {
+        "mode": 80,
+        "center": [
+          3.5,
+          -4.5
+        ],
+        "core_samples": 185,
+        "eigenvalue_ratios": [
+          0.44440737702043226,
+          0.7493279098487003
+        ]
+      },
+      {
+        "mode": 81,
+        "center": [
+          3.5,
+          -3.5
+        ],
+        "core_samples": 162,
+        "eigenvalue_ratios": [
+          1.0635982687050993,
+          1.5727987800958925
+        ]
+      },
+      {
+        "mode": 82,
+        "center": [
+          3.5,
+          -2.5
+        ],
+        "core_samples": 214,
+        "eigenvalue_ratios": [
+          1.191255834091005,
+          1.4275293290953743
+        ]
+      },
+      {
+        "mode": 83,
+        "center": [
+          3.5,
+          -1.5
+        ],
+        "core_samples": 188,
+        "eigenvalue_ratios": [
+          0.6535466320350872,
+          1.2512583861201207
+        ]
+      },
+      {
+        "mode": 84,
+        "center": [
+          3.5,
+          -0.5
+        ],
+        "core_samples": 185,
+        "eigenvalue_ratios": [
+          1.0793777113349246,
+          3.85167432312504
+        ]
+      },
+      {
+        "mode": 85,
+        "center": [
+          3.5,
+          0.5
+        ],
+        "core_samples": 205,
+        "eigenvalue_ratios": [
+          1.20914705564694,
+          2.2679436056001103
+        ]
+      },
+      {
+        "mode": 86,
+        "center": [
+          3.5,
+          1.5
+        ],
+        "core_samples": 186,
+        "eigenvalue_ratios": [
+          0.8376332646215936,
+          1.7329947193025617
+        ]
+      },
+      {
+        "mode": 87,
+        "center": [
+          3.5,
+          2.5
+        ],
+        "core_samples": 190,
+        "eigenvalue_ratios": [
+          1.1062029085980996,
+          2.591701343044786
+        ]
+      },
+      {
+        "mode": 88,
+        "center": [
+          3.5,
+          3.5
+        ],
+        "core_samples": 162,
+        "eigenvalue_ratios": [
+          0.9878219656141636,
+          2.206999176586485
+        ]
+      },
+      {
+        "mode": 89,
+        "center": [
+          3.5,
+          4.5
+        ],
+        "core_samples": 219,
+        "eigenvalue_ratios": [
+          0.22736400076858124,
+          2.0095236303890855
+        ]
+      },
+      {
+        "mode": 90,
+        "center": [
+          4.5,
+          -4.5
+        ],
+        "core_samples": 210,
+        "eigenvalue_ratios": [
+          0.3023922782196132,
+          0.32868030090048195
+        ]
+      },
+      {
+        "mode": 91,
+        "center": [
+          4.5,
+          -3.5
+        ],
+        "core_samples": 177,
+        "eigenvalue_ratios": [
+          0.2887895368296007,
+          0.7754222202503142
+        ]
+      },
+      {
+        "mode": 92,
+        "center": [
+          4.5,
+          -2.5
+        ],
+        "core_samples": 221,
+        "eigenvalue_ratios": [
+          0.5440867655425962,
+          1.3203432909841009
+        ]
+      },
+      {
+        "mode": 93,
+        "center": [
+          4.5,
+          -1.5
+        ],
+        "core_samples": 215,
+        "eigenvalue_ratios": [
+          0.3294606738499625,
+          1.98447880845842
+        ]
+      },
+      {
+        "mode": 94,
+        "center": [
+          4.5,
+          -0.5
+        ],
+        "core_samples": 189,
+        "eigenvalue_ratios": [
+          0.5165632148123851,
+          1.8509147427397772
+        ]
+      },
+      {
+        "mode": 95,
+        "center": [
+          4.5,
+          0.5
+        ],
+        "core_samples": 209,
+        "eigenvalue_ratios": [
+          0.4025837629824438,
+          1.4673946462081962
+        ]
+      },
+      {
+        "mode": 96,
+        "center": [
+          4.5,
+          1.5
+        ],
+        "core_samples": 222,
+        "eigenvalue_ratios": [
+          0.3556603907548332,
+          1.1843388429720239
+        ]
+      },
+      {
+        "mode": 97,
+        "center": [
+          4.5,
+          2.5
+        ],
+        "core_samples": 188,
+        "eigenvalue_ratios": [
+          0.782704712559466,
+          2.0951493627262754
+        ]
+      },
+      {
+        "mode": 98,
+        "center": [
+          4.5,
+          3.5
+        ],
+        "core_samples": 178,
+        "eigenvalue_ratios": [
+          0.9416059837071421,
+          1.1254512040984166
+        ]
+      },
+      {
+        "mode": 99,
+        "center": [
+          4.5,
+          4.5
+        ],
+        "core_samples": 212,
+        "eigenvalue_ratios": [
+          0.5598491637771178,
+          1.0754903019258155
+        ]
+      }
+    ]
+  },
+  "fused": {
+    "definition": "nearest-center assignment; radius10sigma core; at least20samples/mode; eigenvalues divided by true variance",
+    "audited_modes": 100,
+    "median_min_eigenvalue_ratio": 0.6354106231994268,
+    "median_max_eigenvalue_ratio": 1.774681684194689,
+    "modes_with_core_min_eigenvalue_below_0_1": 1,
+    "per_mode": [
+      {
+        "mode": 0,
+        "center": [
+          -4.5,
+          -4.5
+        ],
+        "core_samples": 174,
+        "eigenvalue_ratios": [
+          0.4146465780133057,
+          0.522588802590037
+        ]
+      },
+      {
+        "mode": 1,
+        "center": [
+          -4.5,
+          -3.5
+        ],
+        "core_samples": 202,
+        "eigenvalue_ratios": [
+          0.11425665601729607,
+          1.3068544727431595
+        ]
+      },
+      {
+        "mode": 2,
+        "center": [
+          -4.5,
+          -2.5
+        ],
+        "core_samples": 206,
+        "eigenvalue_ratios": [
+          0.272455674916484,
+          2.0176827521624676
+        ]
+      },
+      {
+        "mode": 3,
+        "center": [
+          -4.5,
+          -1.5
+        ],
+        "core_samples": 208,
+        "eigenvalue_ratios": [
+          0.4557925908221294,
+          2.5143772194988925
+        ]
+      },
+      {
+        "mode": 4,
+        "center": [
+          -4.5,
+          -0.5
+        ],
+        "core_samples": 199,
+        "eigenvalue_ratios": [
+          1.0549701366197486,
+          3.067870206373612
+        ]
+      },
+      {
+        "mode": 5,
+        "center": [
+          -4.5,
+          0.5
+        ],
+        "core_samples": 171,
+        "eigenvalue_ratios": [
+          0.30803612296921523,
+          1.6643878287199547
+        ]
+      },
+      {
+        "mode": 6,
+        "center": [
+          -4.5,
+          1.5
+        ],
+        "core_samples": 222,
+        "eigenvalue_ratios": [
+          0.3080432968636053,
+          2.025941561805924
+        ]
+      },
+      {
+        "mode": 7,
+        "center": [
+          -4.5,
+          2.5
+        ],
+        "core_samples": 246,
+        "eigenvalue_ratios": [
+          0.18012813103235836,
+          1.5616320756924484
+        ]
+      },
+      {
+        "mode": 8,
+        "center": [
+          -4.5,
+          3.5
+        ],
+        "core_samples": 199,
+        "eigenvalue_ratios": [
+          0.2725234330109859,
+          1.757044920847178
+        ]
+      },
+      {
+        "mode": 9,
+        "center": [
+          -4.5,
+          4.5
+        ],
+        "core_samples": 211,
+        "eigenvalue_ratios": [
+          0.1425511383296167,
+          0.8178653948752075
+        ]
+      },
+      {
+        "mode": 10,
+        "center": [
+          -3.5,
+          -4.5
+        ],
+        "core_samples": 201,
+        "eigenvalue_ratios": [
+          0.4500459225390052,
+          0.4891669720460982
+        ]
+      },
+      {
+        "mode": 11,
+        "center": [
+          -3.5,
+          -3.5
+        ],
+        "core_samples": 165,
+        "eigenvalue_ratios": [
+          0.6082554215986478,
+          1.0156720702867608
+        ]
+      },
+      {
+        "mode": 12,
+        "center": [
+          -3.5,
+          -2.5
+        ],
+        "core_samples": 219,
+        "eigenvalue_ratios": [
+          0.6065533218025029,
+          1.8379262970861707
+        ]
+      },
+      {
+        "mode": 13,
+        "center": [
+          -3.5,
+          -1.5
+        ],
+        "core_samples": 190,
+        "eigenvalue_ratios": [
+          1.4050922579178815,
+          2.060635041781848
+        ]
+      },
+      {
+        "mode": 14,
+        "center": [
+          -3.5,
+          -0.5
+        ],
+        "core_samples": 225,
+        "eigenvalue_ratios": [
+          1.4408193150459847,
+          2.874886154287696
+        ]
+      },
+      {
+        "mode": 15,
+        "center": [
+          -3.5,
+          0.5
+        ],
+        "core_samples": 212,
+        "eigenvalue_ratios": [
+          0.3543829254044336,
+          1.0481332954487468
+        ]
+      },
+      {
+        "mode": 16,
+        "center": [
+          -3.5,
+          1.5
+        ],
+        "core_samples": 218,
+        "eigenvalue_ratios": [
+          1.081154067371051,
+          1.5447065500773856
+        ]
+      },
+      {
+        "mode": 17,
+        "center": [
+          -3.5,
+          2.5
+        ],
+        "core_samples": 224,
+        "eigenvalue_ratios": [
+          0.6966298986907069,
+          0.9279078223019016
+        ]
+      },
+      {
+        "mode": 18,
+        "center": [
+          -3.5,
+          3.5
+        ],
+        "core_samples": 199,
+        "eigenvalue_ratios": [
+          0.394552237532779,
+          0.667516622130715
+        ]
+      },
+      {
+        "mode": 19,
+        "center": [
+          -3.5,
+          4.5
+        ],
+        "core_samples": 225,
+        "eigenvalue_ratios": [
+          0.13273518767066614,
+          1.6434486625625944
+        ]
+      },
+      {
+        "mode": 20,
+        "center": [
+          -2.5,
+          -4.5
+        ],
+        "core_samples": 203,
+        "eigenvalue_ratios": [
+          0.20107308668606577,
+          0.9222639840028365
+        ]
+      },
+      {
+        "mode": 21,
+        "center": [
+          -2.5,
+          -3.5
+        ],
+        "core_samples": 178,
+        "eigenvalue_ratios": [
+          0.7297158645898109,
+          1.5846797252251035
+        ]
+      },
+      {
+        "mode": 22,
+        "center": [
+          -2.5,
+          -2.5
+        ],
+        "core_samples": 209,
+        "eigenvalue_ratios": [
+          1.182048562138893,
+          1.838554903618758
+        ]
+      },
+      {
+        "mode": 23,
+        "center": [
+          -2.5,
+          -1.5
+        ],
+        "core_samples": 186,
+        "eigenvalue_ratios": [
+          1.5248999521460282,
+          2.688088482167528
+        ]
+      },
+      {
+        "mode": 24,
+        "center": [
+          -2.5,
+          -0.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          0.7694811772926273,
+          2.671159512244185
+        ]
+      },
+      {
+        "mode": 25,
+        "center": [
+          -2.5,
+          0.5
+        ],
+        "core_samples": 186,
+        "eigenvalue_ratios": [
+          1.2960769004665094,
+          1.5418912926450434
+        ]
+      },
+      {
+        "mode": 26,
+        "center": [
+          -2.5,
+          1.5
+        ],
+        "core_samples": 193,
+        "eigenvalue_ratios": [
+          2.374335597523267,
+          2.7229654091974873
+        ]
+      },
+      {
+        "mode": 27,
+        "center": [
+          -2.5,
+          2.5
+        ],
+        "core_samples": 203,
+        "eigenvalue_ratios": [
+          1.5714968854265323,
+          1.6962599337387105
+        ]
+      },
+      {
+        "mode": 28,
+        "center": [
+          -2.5,
+          3.5
+        ],
+        "core_samples": 189,
+        "eigenvalue_ratios": [
+          0.3907250563148288,
+          1.7899379520616754
+        ]
+      },
+      {
+        "mode": 29,
+        "center": [
+          -2.5,
+          4.5
+        ],
+        "core_samples": 236,
+        "eigenvalue_ratios": [
+          0.39853922506582706,
+          1.3732635823260357
+        ]
+      },
+      {
+        "mode": 30,
+        "center": [
+          -1.5,
+          -4.5
+        ],
+        "core_samples": 197,
+        "eigenvalue_ratios": [
+          0.5940520369367085,
+          1.70278743840214
+        ]
+      },
+      {
+        "mode": 31,
+        "center": [
+          -1.5,
+          -3.5
+        ],
+        "core_samples": 204,
+        "eigenvalue_ratios": [
+          0.3321060175417494,
+          1.5426600562953972
+        ]
+      },
+      {
+        "mode": 32,
+        "center": [
+          -1.5,
+          -2.5
+        ],
+        "core_samples": 243,
+        "eigenvalue_ratios": [
+          1.148293911184145,
+          1.7774802223134472
+        ]
+      },
+      {
+        "mode": 33,
+        "center": [
+          -1.5,
+          -1.5
+        ],
+        "core_samples": 230,
+        "eigenvalue_ratios": [
+          1.3442575926888563,
+          1.806555959930953
+        ]
+      },
+      {
+        "mode": 34,
+        "center": [
+          -1.5,
+          -0.5
+        ],
+        "core_samples": 197,
+        "eigenvalue_ratios": [
+          0.9687279056406334,
+          2.349096846922209
+        ]
+      },
+      {
+        "mode": 35,
+        "center": [
+          -1.5,
+          0.5
+        ],
+        "core_samples": 194,
+        "eigenvalue_ratios": [
+          0.9723314492137329,
+          2.6368050184904743
+        ]
+      },
+      {
+        "mode": 36,
+        "center": [
+          -1.5,
+          1.5
+        ],
+        "core_samples": 169,
+        "eigenvalue_ratios": [
+          1.4886281830244248,
+          2.3241777383187605
+        ]
+      },
+      {
+        "mode": 37,
+        "center": [
+          -1.5,
+          2.5
+        ],
+        "core_samples": 221,
+        "eigenvalue_ratios": [
+          1.395075848356656,
+          1.8436312863313271
+        ]
+      },
+      {
+        "mode": 38,
+        "center": [
+          -1.5,
+          3.5
+        ],
+        "core_samples": 207,
+        "eigenvalue_ratios": [
+          0.5902396933073858,
+          1.0917435901912298
+        ]
+      },
+      {
+        "mode": 39,
+        "center": [
+          -1.5,
+          4.5
+        ],
+        "core_samples": 209,
+        "eigenvalue_ratios": [
+          0.2109805949287692,
+          1.1824815300651246
+        ]
+      },
+      {
+        "mode": 40,
+        "center": [
+          -0.5,
+          -4.5
+        ],
+        "core_samples": 195,
+        "eigenvalue_ratios": [
+          0.341083505711579,
+          1.3567536296845248
+        ]
+      },
+      {
+        "mode": 41,
+        "center": [
+          -0.5,
+          -3.5
+        ],
+        "core_samples": 182,
+        "eigenvalue_ratios": [
+          0.1674623455779034,
+          1.7186652587852655
+        ]
+      },
+      {
+        "mode": 42,
+        "center": [
+          -0.5,
+          -2.5
+        ],
+        "core_samples": 199,
+        "eigenvalue_ratios": [
+          0.9108620523582482,
+          1.9913805226226622
+        ]
+      },
+      {
+        "mode": 43,
+        "center": [
+          -0.5,
+          -1.5
+        ],
+        "core_samples": 185,
+        "eigenvalue_ratios": [
+          0.8701304783161412,
+          2.629713393101413
+        ]
+      },
+      {
+        "mode": 44,
+        "center": [
+          -0.5,
+          -0.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          1.005772802798403,
+          2.5936608722572814
+        ]
+      },
+      {
+        "mode": 45,
+        "center": [
+          -0.5,
+          0.5
+        ],
+        "core_samples": 146,
+        "eigenvalue_ratios": [
+          0.5736044937108913,
+          3.1785010031926686
+        ]
+      },
+      {
+        "mode": 46,
+        "center": [
+          -0.5,
+          1.5
+        ],
+        "core_samples": 153,
+        "eigenvalue_ratios": [
+          1.2944383717108103,
+          1.6550293130149123
+        ]
+      },
+      {
+        "mode": 47,
+        "center": [
+          -0.5,
+          2.5
+        ],
+        "core_samples": 180,
+        "eigenvalue_ratios": [
+          0.6421326662176102,
+          2.565741054354399
+        ]
+      },
+      {
+        "mode": 48,
+        "center": [
+          -0.5,
+          3.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          0.6538784395372136,
+          1.8950722476042774
+        ]
+      },
+      {
+        "mode": 49,
+        "center": [
+          -0.5,
+          4.5
+        ],
+        "core_samples": 231,
+        "eigenvalue_ratios": [
+          0.702084876810665,
+          1.759280877953522
+        ]
+      },
+      {
+        "mode": 50,
+        "center": [
+          0.5,
+          -4.5
+        ],
+        "core_samples": 197,
+        "eigenvalue_ratios": [
+          0.5222550673334321,
+          2.1258802491693642
+        ]
+      },
+      {
+        "mode": 51,
+        "center": [
+          0.5,
+          -3.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          0.1842849544595485,
+          1.9905959046361967
+        ]
+      },
+      {
+        "mode": 52,
+        "center": [
+          0.5,
+          -2.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          2.080488906575205,
+          2.2139511791598903
+        ]
+      },
+      {
+        "mode": 53,
+        "center": [
+          0.5,
+          -1.5
+        ],
+        "core_samples": 161,
+        "eigenvalue_ratios": [
+          1.604409369408422,
+          2.2740210758495483
+        ]
+      },
+      {
+        "mode": 54,
+        "center": [
+          0.5,
+          -0.5
+        ],
+        "core_samples": 171,
+        "eigenvalue_ratios": [
+          1.3015645555471806,
+          2.5683078335491154
+        ]
+      },
+      {
+        "mode": 55,
+        "center": [
+          0.5,
+          0.5
+        ],
+        "core_samples": 145,
+        "eigenvalue_ratios": [
+          1.6232402628006026,
+          2.5439826583256746
+        ]
+      },
+      {
+        "mode": 56,
+        "center": [
+          0.5,
+          1.5
+        ],
+        "core_samples": 150,
+        "eigenvalue_ratios": [
+          2.4985016534985665,
+          2.755646436798725
+        ]
+      },
+      {
+        "mode": 57,
+        "center": [
+          0.5,
+          2.5
+        ],
+        "core_samples": 174,
+        "eigenvalue_ratios": [
+          0.8466452987470033,
+          2.365185127733603
+        ]
+      },
+      {
+        "mode": 58,
+        "center": [
+          0.5,
+          3.5
+        ],
+        "core_samples": 175,
+        "eigenvalue_ratios": [
+          0.7790027893078261,
+          2.835998473665545
+        ]
+      },
+      {
+        "mode": 59,
+        "center": [
+          0.5,
+          4.5
+        ],
+        "core_samples": 192,
+        "eigenvalue_ratios": [
+          1.0302667793943554,
+          2.453476381692593
+        ]
+      },
+      {
+        "mode": 60,
+        "center": [
+          1.5,
+          -4.5
+        ],
+        "core_samples": 227,
+        "eigenvalue_ratios": [
+          0.32526023476759003,
+          1.3852275630895587
+        ]
+      },
+      {
+        "mode": 61,
+        "center": [
+          1.5,
+          -3.5
+        ],
+        "core_samples": 165,
+        "eigenvalue_ratios": [
+          0.5309070836515017,
+          1.121869167718099
+        ]
+      },
+      {
+        "mode": 62,
+        "center": [
+          1.5,
+          -2.5
+        ],
+        "core_samples": 187,
+        "eigenvalue_ratios": [
+          1.1619289770912027,
+          1.9492149120377544
+        ]
+      },
+      {
+        "mode": 63,
+        "center": [
+          1.5,
+          -1.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          1.5375022978919592,
+          1.7671104802127817
+        ]
+      },
+      {
+        "mode": 64,
+        "center": [
+          1.5,
+          -0.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          0.8565483311494995,
+          1.3233001190253897
+        ]
+      },
+      {
+        "mode": 65,
+        "center": [
+          1.5,
+          0.5
+        ],
+        "core_samples": 183,
+        "eigenvalue_ratios": [
+          0.9527754720375363,
+          2.45308768882511
+        ]
+      },
+      {
+        "mode": 66,
+        "center": [
+          1.5,
+          1.5
+        ],
+        "core_samples": 207,
+        "eigenvalue_ratios": [
+          0.7358603626688194,
+          2.3564561627156277
+        ]
+      },
+      {
+        "mode": 67,
+        "center": [
+          1.5,
+          2.5
+        ],
+        "core_samples": 199,
+        "eigenvalue_ratios": [
+          0.9620549305336847,
+          2.625817670009436
+        ]
+      },
+      {
+        "mode": 68,
+        "center": [
+          1.5,
+          3.5
+        ],
+        "core_samples": 165,
+        "eigenvalue_ratios": [
+          0.25260589776037645,
+          1.3783645353967027
+        ]
+      },
+      {
+        "mode": 69,
+        "center": [
+          1.5,
+          4.5
+        ],
+        "core_samples": 209,
+        "eigenvalue_ratios": [
+          0.6286885801812433,
+          1.0101642742860164
+        ]
+      },
+      {
+        "mode": 70,
+        "center": [
+          2.5,
+          -4.5
+        ],
+        "core_samples": 212,
+        "eigenvalue_ratios": [
+          0.7534790169576622,
+          1.2207759321170233
+        ]
+      },
+      {
+        "mode": 71,
+        "center": [
+          2.5,
+          -3.5
+        ],
+        "core_samples": 210,
+        "eigenvalue_ratios": [
+          0.6852600131774776,
+          0.9040425976400298
+        ]
+      },
+      {
+        "mode": 72,
+        "center": [
+          2.5,
+          -2.5
+        ],
+        "core_samples": 197,
+        "eigenvalue_ratios": [
+          0.8618835232472695,
+          1.409137804954625
+        ]
+      },
+      {
+        "mode": 73,
+        "center": [
+          2.5,
+          -1.5
+        ],
+        "core_samples": 184,
+        "eigenvalue_ratios": [
+          1.1578983622639818,
+          1.8210236682963978
+        ]
+      },
+      {
+        "mode": 74,
+        "center": [
+          2.5,
+          -0.5
+        ],
+        "core_samples": 184,
+        "eigenvalue_ratios": [
+          1.4015378045423188,
+          2.378982416147501
+        ]
+      },
+      {
+        "mode": 75,
+        "center": [
+          2.5,
+          0.5
+        ],
+        "core_samples": 181,
+        "eigenvalue_ratios": [
+          0.9685399596493904,
+          1.771883146075931
+        ]
+      },
+      {
+        "mode": 76,
+        "center": [
+          2.5,
+          1.5
+        ],
+        "core_samples": 195,
+        "eigenvalue_ratios": [
+          1.1007592680971259,
+          2.9994061195952915
+        ]
+      },
+      {
+        "mode": 77,
+        "center": [
+          2.5,
+          2.5
+        ],
+        "core_samples": 212,
+        "eigenvalue_ratios": [
+          1.570051524122661,
+          2.143449793933201
+        ]
+      },
+      {
+        "mode": 78,
+        "center": [
+          2.5,
+          3.5
+        ],
+        "core_samples": 190,
+        "eigenvalue_ratios": [
+          0.955793911615611,
+          1.8560057311774938
+        ]
+      },
+      {
+        "mode": 79,
+        "center": [
+          2.5,
+          4.5
+        ],
+        "core_samples": 207,
+        "eigenvalue_ratios": [
+          0.2895584666504798,
+          1.435028079363177
+        ]
+      },
+      {
+        "mode": 80,
+        "center": [
+          3.5,
+          -4.5
+        ],
+        "core_samples": 209,
+        "eigenvalue_ratios": [
+          0.2785953035153807,
+          0.3359812936916779
+        ]
+      },
+      {
+        "mode": 81,
+        "center": [
+          3.5,
+          -3.5
+        ],
+        "core_samples": 168,
+        "eigenvalue_ratios": [
+          0.24278898888040137,
+          0.638021121619019
+        ]
+      },
+      {
+        "mode": 82,
+        "center": [
+          3.5,
+          -2.5
+        ],
+        "core_samples": 174,
+        "eigenvalue_ratios": [
+          0.3886445664444361,
+          1.3652861520502932
+        ]
+      },
+      {
+        "mode": 83,
+        "center": [
+          3.5,
+          -1.5
+        ],
+        "core_samples": 194,
+        "eigenvalue_ratios": [
+          0.3237978381326751,
+          2.578810525418366
+        ]
+      },
+      {
+        "mode": 84,
+        "center": [
+          3.5,
+          -0.5
+        ],
+        "core_samples": 213,
+        "eigenvalue_ratios": [
+          0.9765865028420068,
+          1.195607294994324
+        ]
+      },
+      {
+        "mode": 85,
+        "center": [
+          3.5,
+          0.5
+        ],
+        "core_samples": 167,
+        "eigenvalue_ratios": [
+          0.9897852464754786,
+          3.0223457796640543
+        ]
+      },
+      {
+        "mode": 86,
+        "center": [
+          3.5,
+          1.5
+        ],
+        "core_samples": 173,
+        "eigenvalue_ratios": [
+          0.5247710703782636,
+          2.09483752751763
+        ]
+      },
+      {
+        "mode": 87,
+        "center": [
+          3.5,
+          2.5
+        ],
+        "core_samples": 216,
+        "eigenvalue_ratios": [
+          0.5287984395823099,
+          1.1620098781266766
+        ]
+      },
+      {
+        "mode": 88,
+        "center": [
+          3.5,
+          3.5
+        ],
+        "core_samples": 173,
+        "eigenvalue_ratios": [
+          0.31577704451199,
+          1.4978632429973047
+        ]
+      },
+      {
+        "mode": 89,
+        "center": [
+          3.5,
+          4.5
+        ],
+        "core_samples": 185,
+        "eigenvalue_ratios": [
+          0.2514500362834053,
+          0.6558522852491165
+        ]
+      },
+      {
+        "mode": 90,
+        "center": [
+          4.5,
+          -4.5
+        ],
+        "core_samples": 214,
+        "eigenvalue_ratios": [
+          0.07905146227227772,
+          0.19308314239536625
+        ]
+      },
+      {
+        "mode": 91,
+        "center": [
+          4.5,
+          -3.5
+        ],
+        "core_samples": 195,
+        "eigenvalue_ratios": [
+          0.152584060729358,
+          0.40684254565922545
+        ]
+      },
+      {
+        "mode": 92,
+        "center": [
+          4.5,
+          -2.5
+        ],
+        "core_samples": 190,
+        "eigenvalue_ratios": [
+          0.15797076036899707,
+          1.5083311618936968
+        ]
+      },
+      {
+        "mode": 93,
+        "center": [
+          4.5,
+          -1.5
+        ],
+        "core_samples": 227,
+        "eigenvalue_ratios": [
+          0.27863425994114843,
+          3.3548531104919315
+        ]
+      },
+      {
+        "mode": 94,
+        "center": [
+          4.5,
+          -0.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          0.20231995140134276,
+          2.6146040624601787
+        ]
+      },
+      {
+        "mode": 95,
+        "center": [
+          4.5,
+          0.5
+        ],
+        "core_samples": 190,
+        "eigenvalue_ratios": [
+          0.21428781605526032,
+          2.7144606862716296
+        ]
+      },
+      {
+        "mode": 96,
+        "center": [
+          4.5,
+          1.5
+        ],
+        "core_samples": 177,
+        "eigenvalue_ratios": [
+          0.1915087552543844,
+          2.324861581362384
+        ]
+      },
+      {
+        "mode": 97,
+        "center": [
+          4.5,
+          2.5
+        ],
+        "core_samples": 171,
+        "eigenvalue_ratios": [
+          0.48393009140042664,
+          0.7447378544642955
+        ]
+      },
+      {
+        "mode": 98,
+        "center": [
+          4.5,
+          3.5
+        ],
+        "core_samples": 169,
+        "eigenvalue_ratios": [
+          0.46804666503263886,
+          0.7883996294584267
+        ]
+      },
+      {
+        "mode": 99,
+        "center": [
+          4.5,
+          4.5
+        ],
+        "core_samples": 172,
+        "eigenvalue_ratios": [
+          0.21643806976638194,
+          0.7766719715721905
+        ]
+      }
+    ]
+  },
+  "lazy4": {
+    "definition": "nearest-center assignment; radius10sigma core; at least20samples/mode; eigenvalues divided by true variance",
+    "audited_modes": 100,
+    "median_min_eigenvalue_ratio": 0.678681029511462,
+    "median_max_eigenvalue_ratio": 1.7735886066044881,
+    "modes_with_core_min_eigenvalue_below_0_1": 1,
+    "per_mode": [
+      {
+        "mode": 0,
+        "center": [
+          -4.5,
+          -4.5
+        ],
+        "core_samples": 213,
+        "eigenvalue_ratios": [
+          0.6126597434105149,
+          0.8609594033910871
+        ]
+      },
+      {
+        "mode": 1,
+        "center": [
+          -4.5,
+          -3.5
+        ],
+        "core_samples": 212,
+        "eigenvalue_ratios": [
+          0.1528098321379048,
+          1.7393062972723887
+        ]
+      },
+      {
+        "mode": 2,
+        "center": [
+          -4.5,
+          -2.5
+        ],
+        "core_samples": 202,
+        "eigenvalue_ratios": [
+          0.33899323339305876,
+          2.0794563607944885
+        ]
+      },
+      {
+        "mode": 3,
+        "center": [
+          -4.5,
+          -1.5
+        ],
+        "core_samples": 227,
+        "eigenvalue_ratios": [
+          0.4616303948962605,
+          1.8935811946464112
+        ]
+      },
+      {
+        "mode": 4,
+        "center": [
+          -4.5,
+          -0.5
+        ],
+        "core_samples": 213,
+        "eigenvalue_ratios": [
+          0.3649068976197426,
+          1.5093098118064623
+        ]
+      },
+      {
+        "mode": 5,
+        "center": [
+          -4.5,
+          0.5
+        ],
+        "core_samples": 206,
+        "eigenvalue_ratios": [
+          0.7209109423856728,
+          1.9250761322377556
+        ]
+      },
+      {
+        "mode": 6,
+        "center": [
+          -4.5,
+          1.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          0.6675528827688098,
+          2.219618062321844
+        ]
+      },
+      {
+        "mode": 7,
+        "center": [
+          -4.5,
+          2.5
+        ],
+        "core_samples": 180,
+        "eigenvalue_ratios": [
+          0.2373884506020081,
+          1.292627229105863
+        ]
+      },
+      {
+        "mode": 8,
+        "center": [
+          -4.5,
+          3.5
+        ],
+        "core_samples": 190,
+        "eigenvalue_ratios": [
+          0.24089287616411564,
+          2.0114693356341418
+        ]
+      },
+      {
+        "mode": 9,
+        "center": [
+          -4.5,
+          4.5
+        ],
+        "core_samples": 177,
+        "eigenvalue_ratios": [
+          0.2912026313156444,
+          0.7472133091761103
+        ]
+      },
+      {
+        "mode": 10,
+        "center": [
+          -3.5,
+          -4.5
+        ],
+        "core_samples": 194,
+        "eigenvalue_ratios": [
+          0.27558277410921467,
+          0.6641741687354061
+        ]
+      },
+      {
+        "mode": 11,
+        "center": [
+          -3.5,
+          -3.5
+        ],
+        "core_samples": 169,
+        "eigenvalue_ratios": [
+          0.5853299179038923,
+          0.9233184345781158
+        ]
+      },
+      {
+        "mode": 12,
+        "center": [
+          -3.5,
+          -2.5
+        ],
+        "core_samples": 184,
+        "eigenvalue_ratios": [
+          0.5089588701077479,
+          1.3837688454251678
+        ]
+      },
+      {
+        "mode": 13,
+        "center": [
+          -3.5,
+          -1.5
+        ],
+        "core_samples": 184,
+        "eigenvalue_ratios": [
+          0.2889675619216143,
+          1.044543962622036
+        ]
+      },
+      {
+        "mode": 14,
+        "center": [
+          -3.5,
+          -0.5
+        ],
+        "core_samples": 180,
+        "eigenvalue_ratios": [
+          0.46262110556026936,
+          1.6739658301896372
+        ]
+      },
+      {
+        "mode": 15,
+        "center": [
+          -3.5,
+          0.5
+        ],
+        "core_samples": 183,
+        "eigenvalue_ratios": [
+          0.9616861744652906,
+          1.0716300612397858
+        ]
+      },
+      {
+        "mode": 16,
+        "center": [
+          -3.5,
+          1.5
+        ],
+        "core_samples": 198,
+        "eigenvalue_ratios": [
+          0.7756055484436998,
+          2.980533974494291
+        ]
+      },
+      {
+        "mode": 17,
+        "center": [
+          -3.5,
+          2.5
+        ],
+        "core_samples": 215,
+        "eigenvalue_ratios": [
+          0.5050070778049235,
+          1.1249539814912592
+        ]
+      },
+      {
+        "mode": 18,
+        "center": [
+          -3.5,
+          3.5
+        ],
+        "core_samples": 184,
+        "eigenvalue_ratios": [
+          0.38743905605279194,
+          1.5798288324460772
+        ]
+      },
+      {
+        "mode": 19,
+        "center": [
+          -3.5,
+          4.5
+        ],
+        "core_samples": 208,
+        "eigenvalue_ratios": [
+          0.6575427267357286,
+          0.8273127131811284
+        ]
+      },
+      {
+        "mode": 20,
+        "center": [
+          -2.5,
+          -4.5
+        ],
+        "core_samples": 200,
+        "eigenvalue_ratios": [
+          0.0607030863137827,
+          2.7532164774080172
+        ]
+      },
+      {
+        "mode": 21,
+        "center": [
+          -2.5,
+          -3.5
+        ],
+        "core_samples": 187,
+        "eigenvalue_ratios": [
+          1.3858684607912348,
+          2.748507943318598
+        ]
+      },
+      {
+        "mode": 22,
+        "center": [
+          -2.5,
+          -2.5
+        ],
+        "core_samples": 203,
+        "eigenvalue_ratios": [
+          1.8524331022813727,
+          1.9702255080527997
+        ]
+      },
+      {
+        "mode": 23,
+        "center": [
+          -2.5,
+          -1.5
+        ],
+        "core_samples": 158,
+        "eigenvalue_ratios": [
+          1.0016504738809247,
+          2.185026503299161
+        ]
+      },
+      {
+        "mode": 24,
+        "center": [
+          -2.5,
+          -0.5
+        ],
+        "core_samples": 173,
+        "eigenvalue_ratios": [
+          1.5096389228232505,
+          1.8294623241325647
+        ]
+      },
+      {
+        "mode": 25,
+        "center": [
+          -2.5,
+          0.5
+        ],
+        "core_samples": 192,
+        "eigenvalue_ratios": [
+          1.3024297304109707,
+          2.129684616146539
+        ]
+      },
+      {
+        "mode": 26,
+        "center": [
+          -2.5,
+          1.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          1.126639181871085,
+          1.380736278363653
+        ]
+      },
+      {
+        "mode": 27,
+        "center": [
+          -2.5,
+          2.5
+        ],
+        "core_samples": 193,
+        "eigenvalue_ratios": [
+          1.6687909754782742,
+          2.213183159705874
+        ]
+      },
+      {
+        "mode": 28,
+        "center": [
+          -2.5,
+          3.5
+        ],
+        "core_samples": 184,
+        "eigenvalue_ratios": [
+          0.4850102268150135,
+          1.45251615615514
+        ]
+      },
+      {
+        "mode": 29,
+        "center": [
+          -2.5,
+          4.5
+        ],
+        "core_samples": 179,
+        "eigenvalue_ratios": [
+          0.32363825806519186,
+          1.755370971133348
+        ]
+      },
+      {
+        "mode": 30,
+        "center": [
+          -1.5,
+          -4.5
+        ],
+        "core_samples": 171,
+        "eigenvalue_ratios": [
+          0.1827889827363391,
+          0.6711523347922648
+        ]
+      },
+      {
+        "mode": 31,
+        "center": [
+          -1.5,
+          -3.5
+        ],
+        "core_samples": 187,
+        "eigenvalue_ratios": [
+          1.0769757349517144,
+          1.9591153415678737
+        ]
+      },
+      {
+        "mode": 32,
+        "center": [
+          -1.5,
+          -2.5
+        ],
+        "core_samples": 192,
+        "eigenvalue_ratios": [
+          1.2328695140001176,
+          1.6328702918173983
+        ]
+      },
+      {
+        "mode": 33,
+        "center": [
+          -1.5,
+          -1.5
+        ],
+        "core_samples": 226,
+        "eigenvalue_ratios": [
+          1.7602612010185419,
+          2.106182550714133
+        ]
+      },
+      {
+        "mode": 34,
+        "center": [
+          -1.5,
+          -0.5
+        ],
+        "core_samples": 177,
+        "eigenvalue_ratios": [
+          1.0179056286268633,
+          2.081680925535304
+        ]
+      },
+      {
+        "mode": 35,
+        "center": [
+          -1.5,
+          0.5
+        ],
+        "core_samples": 159,
+        "eigenvalue_ratios": [
+          1.7152463968383365,
+          3.4837787254384103
+        ]
+      },
+      {
+        "mode": 36,
+        "center": [
+          -1.5,
+          1.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          0.9444045922806918,
+          1.7151917031879953
+        ]
+      },
+      {
+        "mode": 37,
+        "center": [
+          -1.5,
+          2.5
+        ],
+        "core_samples": 166,
+        "eigenvalue_ratios": [
+          1.4179462190221532,
+          1.863467453353012
+        ]
+      },
+      {
+        "mode": 38,
+        "center": [
+          -1.5,
+          3.5
+        ],
+        "core_samples": 202,
+        "eigenvalue_ratios": [
+          0.9846252941908041,
+          2.1908024281423946
+        ]
+      },
+      {
+        "mode": 39,
+        "center": [
+          -1.5,
+          4.5
+        ],
+        "core_samples": 178,
+        "eigenvalue_ratios": [
+          0.46688809279542315,
+          1.4399343736561705
+        ]
+      },
+      {
+        "mode": 40,
+        "center": [
+          -0.5,
+          -4.5
+        ],
+        "core_samples": 213,
+        "eigenvalue_ratios": [
+          0.278623156053929,
+          2.535314163899931
+        ]
+      },
+      {
+        "mode": 41,
+        "center": [
+          -0.5,
+          -3.5
+        ],
+        "core_samples": 204,
+        "eigenvalue_ratios": [
+          1.09030163779814,
+          3.4681824941815202
+        ]
+      },
+      {
+        "mode": 42,
+        "center": [
+          -0.5,
+          -2.5
+        ],
+        "core_samples": 191,
+        "eigenvalue_ratios": [
+          0.7549027152044675,
+          1.5347998549444088
+        ]
+      },
+      {
+        "mode": 43,
+        "center": [
+          -0.5,
+          -1.5
+        ],
+        "core_samples": 199,
+        "eigenvalue_ratios": [
+          0.9497489504615984,
+          1.1917705077561198
+        ]
+      },
+      {
+        "mode": 44,
+        "center": [
+          -0.5,
+          -0.5
+        ],
+        "core_samples": 149,
+        "eigenvalue_ratios": [
+          1.9049617789481519,
+          2.3218428426257858
+        ]
+      },
+      {
+        "mode": 45,
+        "center": [
+          -0.5,
+          0.5
+        ],
+        "core_samples": 162,
+        "eigenvalue_ratios": [
+          1.2694506038902227,
+          2.0125515014937534
+        ]
+      },
+      {
+        "mode": 46,
+        "center": [
+          -0.5,
+          1.5
+        ],
+        "core_samples": 187,
+        "eigenvalue_ratios": [
+          0.5479302353728605,
+          2.5618480075818177
+        ]
+      },
+      {
+        "mode": 47,
+        "center": [
+          -0.5,
+          2.5
+        ],
+        "core_samples": 177,
+        "eigenvalue_ratios": [
+          1.1470863981781991,
+          3.295717023337827
+        ]
+      },
+      {
+        "mode": 48,
+        "center": [
+          -0.5,
+          3.5
+        ],
+        "core_samples": 201,
+        "eigenvalue_ratios": [
+          1.3853111023943214,
+          2.622389443672997
+        ]
+      },
+      {
+        "mode": 49,
+        "center": [
+          -0.5,
+          4.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          0.6499159177456696,
+          2.9790738665372802
+        ]
+      },
+      {
+        "mode": 50,
+        "center": [
+          0.5,
+          -4.5
+        ],
+        "core_samples": 191,
+        "eigenvalue_ratios": [
+          0.12600748153236252,
+          1.9861370501505369
+        ]
+      },
+      {
+        "mode": 51,
+        "center": [
+          0.5,
+          -3.5
+        ],
+        "core_samples": 193,
+        "eigenvalue_ratios": [
+          0.28008051413957125,
+          0.4714760879845521
+        ]
+      },
+      {
+        "mode": 52,
+        "center": [
+          0.5,
+          -2.5
+        ],
+        "core_samples": 190,
+        "eigenvalue_ratios": [
+          1.5377074662059242,
+          1.8903425238484692
+        ]
+      },
+      {
+        "mode": 53,
+        "center": [
+          0.5,
+          -1.5
+        ],
+        "core_samples": 181,
+        "eigenvalue_ratios": [
+          2.3892959523083626,
+          2.7491065665906946
+        ]
+      },
+      {
+        "mode": 54,
+        "center": [
+          0.5,
+          -0.5
+        ],
+        "core_samples": 173,
+        "eigenvalue_ratios": [
+          1.7919104759953892,
+          2.175208349051047
+        ]
+      },
+      {
+        "mode": 55,
+        "center": [
+          0.5,
+          0.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          1.971757485415887,
+          3.582266120106321
+        ]
+      },
+      {
+        "mode": 56,
+        "center": [
+          0.5,
+          1.5
+        ],
+        "core_samples": 191,
+        "eigenvalue_ratios": [
+          1.9504454177374257,
+          2.6927946480887472
+        ]
+      },
+      {
+        "mode": 57,
+        "center": [
+          0.5,
+          2.5
+        ],
+        "core_samples": 193,
+        "eigenvalue_ratios": [
+          1.1285769157266297,
+          1.5423973676711278
+        ]
+      },
+      {
+        "mode": 58,
+        "center": [
+          0.5,
+          3.5
+        ],
+        "core_samples": 176,
+        "eigenvalue_ratios": [
+          0.50942765678139,
+          1.1343143025926092
+        ]
+      },
+      {
+        "mode": 59,
+        "center": [
+          0.5,
+          4.5
+        ],
+        "core_samples": 208,
+        "eigenvalue_ratios": [
+          0.776709602641416,
+          1.7528353592506831
+        ]
+      },
+      {
+        "mode": 60,
+        "center": [
+          1.5,
+          -4.5
+        ],
+        "core_samples": 179,
+        "eigenvalue_ratios": [
+          0.6062363664765964,
+          2.4497507676363357
+        ]
+      },
+      {
+        "mode": 61,
+        "center": [
+          1.5,
+          -3.5
+        ],
+        "core_samples": 198,
+        "eigenvalue_ratios": [
+          0.26240563845039416,
+          2.1216112023463998
+        ]
+      },
+      {
+        "mode": 62,
+        "center": [
+          1.5,
+          -2.5
+        ],
+        "core_samples": 174,
+        "eigenvalue_ratios": [
+          1.5530224997162845,
+          1.6972226802048405
+        ]
+      },
+      {
+        "mode": 63,
+        "center": [
+          1.5,
+          -1.5
+        ],
+        "core_samples": 197,
+        "eigenvalue_ratios": [
+          1.2308165539980416,
+          2.1038364156300497
+        ]
+      },
+      {
+        "mode": 64,
+        "center": [
+          1.5,
+          -0.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          1.0965206643063052,
+          1.5415322195773788
+        ]
+      },
+      {
+        "mode": 65,
+        "center": [
+          1.5,
+          0.5
+        ],
+        "core_samples": 171,
+        "eigenvalue_ratios": [
+          1.7156552854820049,
+          1.9511332787350029
+        ]
+      },
+      {
+        "mode": 66,
+        "center": [
+          1.5,
+          1.5
+        ],
+        "core_samples": 234,
+        "eigenvalue_ratios": [
+          1.3158234950541032,
+          2.040038130738051
+        ]
+      },
+      {
+        "mode": 67,
+        "center": [
+          1.5,
+          2.5
+        ],
+        "core_samples": 200,
+        "eigenvalue_ratios": [
+          1.2586948866917624,
+          2.2096747931957386
+        ]
+      },
+      {
+        "mode": 68,
+        "center": [
+          1.5,
+          3.5
+        ],
+        "core_samples": 205,
+        "eigenvalue_ratios": [
+          0.9069214255231597,
+          1.5689281066222418
+        ]
+      },
+      {
+        "mode": 69,
+        "center": [
+          1.5,
+          4.5
+        ],
+        "core_samples": 175,
+        "eigenvalue_ratios": [
+          1.1836213140464364,
+          2.510946331918255
+        ]
+      },
+      {
+        "mode": 70,
+        "center": [
+          2.5,
+          -4.5
+        ],
+        "core_samples": 220,
+        "eigenvalue_ratios": [
+          0.16418334456367678,
+          1.5416206321814794
+        ]
+      },
+      {
+        "mode": 71,
+        "center": [
+          2.5,
+          -3.5
+        ],
+        "core_samples": 174,
+        "eigenvalue_ratios": [
+          0.5214636844420905,
+          1.7227725646423475
+        ]
+      },
+      {
+        "mode": 72,
+        "center": [
+          2.5,
+          -2.5
+        ],
+        "core_samples": 203,
+        "eigenvalue_ratios": [
+          0.26301382153955477,
+          0.6963451056507342
+        ]
+      },
+      {
+        "mode": 73,
+        "center": [
+          2.5,
+          -1.5
+        ],
+        "core_samples": 205,
+        "eigenvalue_ratios": [
+          0.7895725419140257,
+          1.5159117974332224
+        ]
+      },
+      {
+        "mode": 74,
+        "center": [
+          2.5,
+          -0.5
+        ],
+        "core_samples": 185,
+        "eigenvalue_ratios": [
+          0.7263658339892122,
+          1.1801313748757598
+        ]
+      },
+      {
+        "mode": 75,
+        "center": [
+          2.5,
+          0.5
+        ],
+        "core_samples": 178,
+        "eigenvalue_ratios": [
+          2.2330033404180627,
+          2.639252040056964
+        ]
+      },
+      {
+        "mode": 76,
+        "center": [
+          2.5,
+          1.5
+        ],
+        "core_samples": 203,
+        "eigenvalue_ratios": [
+          1.4079437371648387,
+          2.0592065302397606
+        ]
+      },
+      {
+        "mode": 77,
+        "center": [
+          2.5,
+          2.5
+        ],
+        "core_samples": 186,
+        "eigenvalue_ratios": [
+          1.3689241874782057,
+          1.437860555967186
+        ]
+      },
+      {
+        "mode": 78,
+        "center": [
+          2.5,
+          3.5
+        ],
+        "core_samples": 158,
+        "eigenvalue_ratios": [
+          0.8981302578971986,
+          0.9558855646129775
+        ]
+      },
+      {
+        "mode": 79,
+        "center": [
+          2.5,
+          4.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          0.6898091762541142,
+          1.6892988504262412
+        ]
+      },
+      {
+        "mode": 80,
+        "center": [
+          3.5,
+          -4.5
+        ],
+        "core_samples": 180,
+        "eigenvalue_ratios": [
+          0.4235306690288417,
+          0.9047357627210263
+        ]
+      },
+      {
+        "mode": 81,
+        "center": [
+          3.5,
+          -3.5
+        ],
+        "core_samples": 196,
+        "eigenvalue_ratios": [
+          1.123638325784727,
+          1.8370344195040642
+        ]
+      },
+      {
+        "mode": 82,
+        "center": [
+          3.5,
+          -2.5
+        ],
+        "core_samples": 184,
+        "eigenvalue_ratios": [
+          0.44802413865235624,
+          0.7905159289525043
+        ]
+      },
+      {
+        "mode": 83,
+        "center": [
+          3.5,
+          -1.5
+        ],
+        "core_samples": 224,
+        "eigenvalue_ratios": [
+          0.9928535909446957,
+          2.2569714490283275
+        ]
+      },
+      {
+        "mode": 84,
+        "center": [
+          3.5,
+          -0.5
+        ],
+        "core_samples": 192,
+        "eigenvalue_ratios": [
+          0.28057137522008896,
+          1.2091350247699881
+        ]
+      },
+      {
+        "mode": 85,
+        "center": [
+          3.5,
+          0.5
+        ],
+        "core_samples": 188,
+        "eigenvalue_ratios": [
+          0.2132621589510843,
+          2.315672925506861
+        ]
+      },
+      {
+        "mode": 86,
+        "center": [
+          3.5,
+          1.5
+        ],
+        "core_samples": 199,
+        "eigenvalue_ratios": [
+          0.8652677843494727,
+          1.8483193934743207
+        ]
+      },
+      {
+        "mode": 87,
+        "center": [
+          3.5,
+          2.5
+        ],
+        "core_samples": 193,
+        "eigenvalue_ratios": [
+          0.630897826647126,
+          1.3915694694278915
+        ]
+      },
+      {
+        "mode": 88,
+        "center": [
+          3.5,
+          3.5
+        ],
+        "core_samples": 215,
+        "eigenvalue_ratios": [
+          0.3155161672620979,
+          1.2692799693870285
+        ]
+      },
+      {
+        "mode": 89,
+        "center": [
+          3.5,
+          4.5
+        ],
+        "core_samples": 230,
+        "eigenvalue_ratios": [
+          0.4233877408585615,
+          0.9027958793124837
+        ]
+      },
+      {
+        "mode": 90,
+        "center": [
+          4.5,
+          -4.5
+        ],
+        "core_samples": 215,
+        "eigenvalue_ratios": [
+          0.2838037771780231,
+          0.42451372136318444
+        ]
+      },
+      {
+        "mode": 91,
+        "center": [
+          4.5,
+          -3.5
+        ],
+        "core_samples": 187,
+        "eigenvalue_ratios": [
+          0.2193710414804353,
+          0.901856640435207
+        ]
+      },
+      {
+        "mode": 92,
+        "center": [
+          4.5,
+          -2.5
+        ],
+        "core_samples": 214,
+        "eigenvalue_ratios": [
+          0.34172704923712915,
+          1.7918062420756282
+        ]
+      },
+      {
+        "mode": 93,
+        "center": [
+          4.5,
+          -1.5
+        ],
+        "core_samples": 202,
+        "eigenvalue_ratios": [
+          0.2407994203356276,
+          2.2198957076563794
+        ]
+      },
+      {
+        "mode": 94,
+        "center": [
+          4.5,
+          -0.5
+        ],
+        "core_samples": 211,
+        "eigenvalue_ratios": [
+          0.353291353607019,
+          1.7339290095602808
+        ]
+      },
+      {
+        "mode": 95,
+        "center": [
+          4.5,
+          0.5
+        ],
+        "core_samples": 191,
+        "eigenvalue_ratios": [
+          0.17582066215831396,
+          1.9183012552816632
+        ]
+      },
+      {
+        "mode": 96,
+        "center": [
+          4.5,
+          1.5
+        ],
+        "core_samples": 218,
+        "eigenvalue_ratios": [
+          0.25003761551909975,
+          1.3517882533862646
+        ]
+      },
+      {
+        "mode": 97,
+        "center": [
+          4.5,
+          2.5
+        ],
+        "core_samples": 236,
+        "eigenvalue_ratios": [
+          0.18644408639898366,
+          1.8551688770952492
+        ]
+      },
+      {
+        "mode": 98,
+        "center": [
+          4.5,
+          3.5
+        ],
+        "core_samples": 226,
+        "eigenvalue_ratios": [
+          0.13079771463767068,
+          1.0755939072831404
+        ]
+      },
+      {
+        "mode": 99,
+        "center": [
+          4.5,
+          4.5
+        ],
+        "core_samples": 227,
+        "eigenvalue_ratios": [
+          0.1588232254803496,
+          0.3884058431417254
+        ]
+      }
+    ]
+  }
+}

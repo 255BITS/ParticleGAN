@@ -1,0 +1,6 @@
+[
+  "configs/cifar_ddgan/speed_regularizer/fused_exact.yaml",
+  "configs/cifar_ddgan/speed_regularizer/lazy4.yaml",
+  "configs/cifar_ddgan/speed_regularizer/fd.yaml",
+  "configs/cifar_ddgan/speed_regularizer/fd_lazy4.yaml"
+]

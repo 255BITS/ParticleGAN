@@ -1,46 +1,42 @@
-# Handoff after restart: optimize CIFAR DDGAN training speed
+# CIFAR speed round handoff
 
-Read scale_50k/READOUT.md, NEXT_ROUND.md and moonshot/READOUT.md first.
+All 40 speed and transfer experiments completed with no failures. No jobs are
+running or queued. Read [results](speed/READOUT.md),
+[CIFAR finals](speed/promotions/TABLE.md), and [toy confirmations](speed/toys_56k/TABLE.md).
 
-Current state: no active training or queued experiment. Host restart interrupted
-NCSN++128 after last logged step27,200; last checkpoint/evaluation20k, diagnostic
-FID65.209 (5k samples), versus240.594 at10k. This is not a completed50k run.
-U-Net32 completed50k: final FID26.680 (50k samples),99.34 training minutes.
-The no-argument default remains the fast10k U-Net32/pretrained-D recipe31.741.
-All task code/config/reports are being committed as the fresh-session baseline.
+The no-argument CIFAR recipe now uses exact bcap every fourth D update at4×
+weight, cached frozen conditioning features, fused Adam, NCHW and no unused
+regularizer scalar synchronization. It reaches FID31.555 after10k updates in
+9.22 training minutes, versus32.821 in16.59 for cached/fused every-step exact.
+Batch64, four-step DDGAN, joint UCD, learned particles, Gaussian step noise,
+Rp logistic, VICReg and optimizer rates remain unchanged.
 
-Next user priority: speed up training while preserving the train_denoising.py
-formulation. Profile first; no automatic continuation or new quality trial.
-Both RTX A6000 GPUs authorized; GPU1 also drives the desktop. No seed-only runs.
-Use full YAMLs, fresh output directories, one tail-friendly log, and report
-throughput, memory, quality, and time spent evaluating separately. User prefers
-waiting for scheduled runs to complete over repeated progress inspection.
+FD is shared in lib/grad_regularizers.py and available by config in CIFAR,
+train_denoising.py and the actual100gaussians.py loop. It is not promoted:
+CIFAR FID37.003 saves only40 additional seconds; one-shot toy cores fail.
+Denoising56k FD recovers100 modes, but exactlazy4 is faster and higher quality.
+Toy no-argument defaults remain unchanged. The user excludes alternate cap
+objectives or reinventing bcap this session; keep that scope.
 
-Binding formulation: four-step DDGAN clean prediction and existing posterior,
-joint timestep/class UCD, learned20k x128 latent particles, Gaussian step noise,
-Rp logistic, candidate-only bcap, unique-row VICReg, existing optimizer recipe.
-Pretrained D is pixel critic plus frozen eval-mode ResNet18 stages1/2/3 at64px;
-input derivatives must still flow through the feature network for G and bcap.
-Do not detach candidate features to obtain a misleading speedup.
+NCSN++ full-bundle10k ended atFID161.587 after58.48 training minutes. Its early
+1k gain did not validate as a reliable fix. Do not automatically resume the
+older restart-interrupted NCSN++50k job or queue architecture changes.
 
-Architecture options: unet, flat_hybrid, ncsnpp. Factory lib/image_moonshots.py;
-NCSN++ wrapper lib/image_ncsnpp.py, vendored source lib/ddgan_ncsnpp/.
-Official source commit/adaptations/licenses recorded in UPSTREAM.md. Native
-PyTorch FIR fallback replaces compiled upstream CUDA; optional class embedding
-is added to the processed timestep embedding. No upstream training loss imported.
+Run from the repo root with a fresh out_dir. Default config:
+configs/cifar_ddgan/default.yaml. For pixel-only D set cache_condition:false.
+Full tested configs/manifests live under configs/cifar_ddgan/speed_* and
+configs/speed_{100gaussians,denoising}_*. All completed outputs are protected
+against accidental overwrite. Default promotion changed source hashes, so
+restore matching source.zip before exact resume/reproduction of saved runs.
 
-Configs: configs/cifar_ddgan/scale_50k and scale_50k_smoke, plus earlier moonshots.
-Completed/interrupted reports: reports/cifar-ddgan/scale_50k. Results/checkpoints
-and source.zip remain in ignored results/cifar_ddgan/scale_50k. Strict resume
-requires saved config/source; do not overwrite interrupted run with a benchmark.
-Tail: tail -F results/cifar_ddgan/live.log. Cached CIFAR, FID and ResNet18 weights.
+Historical combined log: tail -F results/cifar_ddgan/speed.live.log.
+Use experiments/follow_grid.py for tagged combined logs in the next round.
+Both GPUs are authorized; no seed-only repeats. If batch changes, preserve
+sample exposure. Distinguish training time from evaluation and FID5k screens
+from finalFID50k. Report mode mass and within-mode shape alongside coverage.
 
-Pre-launch validation:34 focused tests +4 CUDA replay tests +2 GPU100-step smokes.
-Replay tests use deterministic test-only pooling substitutions; production is
-not bitwise deterministic. See scale_50k/validation.txt and tests/test_cifar_resume.py.
-User mentioned optimization subagent work, but no agent/profile/patch was located
-after restart. Treat that as missing context, not completed optimization.
-
-Unrelated .claude/ worktrees and sparse-ucd.log must be preserved and excluded
-from task commits. Existing review worktrees are unrelated. Never clean/reset
-these to make git status appear empty. No push requested in this handoff.
+Final validation:53 tests+13 subtests, and4 CUDA resume tests with promoted
+settings passed. See speed/STATUS.md for artifact and provenance details.
+User requested a local commit before compaction; no push requested. Preserve unrelated .claude/ and
+sparse-ucd.log. Next suggested validation is a50k promoted U-Net run; it is
+not queued. Expected training~46min is an extrapolation, not a measurement.

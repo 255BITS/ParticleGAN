@@ -90,6 +90,9 @@ def code_provenance(trainer: str, python_bin: str) -> Dict:
     repo_root = Path(__file__).resolve().parents[1]
     paths = {trainer_path, Path(__file__).resolve()}
     paths.update((repo_root / "lib").rglob("*.py"))
+    if trainer_path.name == "train_100gaussians.py":
+        paths.add(repo_root / "examples" / "100gaussians.py")
+        paths.add(repo_root / "experiments" / "train_denoising.py")
     sources = {}
     for path in sorted(paths):
         try:

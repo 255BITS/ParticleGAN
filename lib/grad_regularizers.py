@@ -35,9 +35,27 @@ Two orthogonal knobs sit on top of that family, both off by default:
 """
 
 from typing import Dict, Tuple
+import math
 
 import torch
 import torch.nn.functional as F
+
+
+def finite_difference_norm(critic, x, eps):
+    """Central derivative along detached normalized grad_x D.
+
+    Uses one ordinary input backward to choose the steepest direction, then
+    two forwards/ordinary parameter backwards instead of double backward.
+    As eps tends to zero this estimates both ||grad_x D|| and its parameter
+    derivative away from activation kinks. eps is an L2 image displacement,
+    not per-pixel noise. No random-direction surrogate and no pixel clamping.
+    """
+    x = x.detach().requires_grad_(True)
+    grad = torch.autograd.grad(critic(x).sum(), x, create_graph=False)[0]
+    norm = (grad.square().flatten(1).sum(1) + 1e-12).sqrt()
+    direction = (grad / norm.reshape((-1,) + (1,) * (x.ndim - 1))).detach()
+    center = x.detach()
+    return (critic(center + eps * direction) - critic(center - eps * direction)) / (2 * eps)
 
 
 class GradRegularizer:
@@ -90,6 +108,9 @@ class GradRegularizer:
             (n - 0)^2 for c_eikonal), so an anneal is a smooth handover from
             "D may not be flat" to "D should be flat". `a_r1r2` has no center
             and is unaffected.
+        method (str): autograd (exact double backward) or finite_difference
+            (gradient-aligned central difference, L2 b_cap only).
+        fd_eps (float): L2 input displacement for central differences.
         total_steps (int): run length the schedule is expressed against.
             Required (> 0) whenever `target_anneal` is not 'none'.
     """
@@ -110,10 +131,19 @@ class GradRegularizer:
         norm: str = "l2",
         target_anneal: str = "none",
         total_steps: int = 0,
+        method: str = "autograd",
+        fd_eps: float = 0.05,
     ) -> None:
         if arm not in self.ARMS:
             raise ValueError(f"Unknown grad regularizer arm: {arm} (expected one of {self.ARMS})")
 
+        if method not in ("autograd", "finite_difference"):
+            raise ValueError(f"Unknown gradient method: {method}")
+        if not math.isfinite(fd_eps) or fd_eps <= 0:
+            raise ValueError("fd_eps must be finite and positive")
+        if method == "finite_difference" and (arm != "b_cap" or norm != "l2"):
+            raise ValueError("finite differences currently support L2 b_cap only")
+        self.method, self.fd_eps = method, float(fd_eps)
         self.arm = arm
         self.coeff = float(coeff)
         self.kappa = float(kappa)
@@ -153,9 +183,12 @@ class GradRegularizer:
         x_fake: torch.Tensor,
         step: int,
         generator: torch.Generator = None,
+        collect_stats: bool = True,
     ) -> Tuple[torch.Tensor, Dict]:
         """
         Compute the penalty term to add to the discriminator loss.
+
+        collect_stats=False returns empty stats and avoids a GPU scalar sync.
 
         Returns:
             (penalty_loss, stats)
@@ -168,7 +201,7 @@ class GradRegularizer:
         skip = self.arm == "f_none" or (self.lazy_k > 1 and step % self.lazy_k != 0)
         if skip:
             zero = torch.zeros((), device=x_real.device, dtype=x_real.dtype)
-            return zero, {"applied": False, "pen": 0.0}
+            return zero, ({"applied": False, "pen": 0.0} if collect_stats else {})
 
         # Lazy regularization: fewer applications, proportionally bigger hits,
         # so the time-averaged pressure on D is unchanged.
@@ -184,7 +217,7 @@ class GradRegularizer:
             phi = self._phi
             pen = (coeff_eff / 2.0) * (phi(n_r, center).mean() + phi(n_f, center).mean())
 
-        return pen, {"applied": True, "pen": float(pen.detach()), "center": float(center)}
+        return pen, ({"applied": True, "pen": float(pen.detach()), "center": float(center)} if collect_stats else {})
 
     def center(self, step: int) -> float:
         """
@@ -262,6 +295,8 @@ class GradRegularizer:
         (the R1/R2 form) and ignores `self.norm`, which the constructor has
         already pinned to 'l2' for the one arm that asks for it.
         """
+        if self.method == "finite_difference":
+            return finite_difference_norm(D, x, self.fd_eps)
         x = x.detach().clone().requires_grad_(True)
         logits = D(x)
         g = torch.autograd.grad(logits.sum(), x, create_graph=True)[0]

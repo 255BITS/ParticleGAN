@@ -26,6 +26,7 @@ from lib.image_moonshots import build_models
 from lib.gan_loss import GANLoss
 from lib.grad_regularizers import GradRegularizer
 from lib.vicreg_loss import VICRegLikeLoss
+from lib.cifar_speed import SpeedProfiler, cifar_penalty
 
 DEFAULTS = {
     'model': 'ddgan', 'architecture': 'unet', 'd_mode': 'ucd', 'prior': 'learned', 'noise': 'gaussian',
@@ -33,6 +34,9 @@ DEFAULTS = {
     'd_backbone': 'pretrained_resnet18', 'g_depth': 6, 'g_heads': 4, 'spatial_channels': 16,
     'ncsnpp_ch_mult': [1, 2, 2, 2], 'ncsnpp_res_blocks': 2,
     'ncsnpp_attn_resolutions': [16], 'ncsnpp_z_emb_dim': 256, 'ncsnpp_n_mlp': 4,
+    'cache_condition': True, 'channels_last': False, 'fused_adam': True,
+    'reg_method': 'autograd', 'reg_every': 4, 'reg_fd_eps': 0.05, 'reg_sync_stats': False,
+    'profile_start': 100, 'profile_steps': 0,
     'seed': 24002, 'classes': 10, 'alpha_bar': [1.0, 0.9, 0.5, 0.05, 0.0001],
     'g_width': 32, 'd_width': 32, 'd_norm': 'group', 'z_dim': 128, 'num_particles': 20000,
     'steps': 10000, 'batch_size': 64, 'lr': 0.0006, 'd_lr_mult': 1.5,
@@ -50,6 +54,16 @@ DEFAULT_CONFIG = ROOT / 'configs/cifar_ddgan/default.yaml'
 
 
 def validate(cfg):
+    if cfg.get('reg_method', 'autograd') not in ('autograd', 'finite_difference'):
+        raise ValueError('invalid regularizer method')
+    if type(cfg.get('reg_every', 1)) is not int or cfg.get('reg_every', 1) < 1 or cfg.get('reg_fd_eps', .05) <= 0:
+        raise ValueError('invalid regularizer interval/epsilon')
+    if (cfg.get('reg_method', 'autograd') != 'autograd' or not cfg.get('reg_sync_stats', True)) and cfg['reg_arm'] != 'b_cap':
+        raise ValueError('speed regularizer implementation requires b_cap')
+    if cfg.get('profile_steps', 0) < 0 or cfg.get('profile_start', 100) < 0:
+        raise ValueError('invalid profiling window')
+    if cfg.get('cache_condition', False) and cfg.get('d_backbone') != 'pretrained_resnet18':
+        raise ValueError('condition cache requires frozen pretrained D')
     target = cfg.get('ucd_target', 'class')
     if target not in ('class', 'time_class') or (target == 'time_class' and cfg['d_mode'] != 'ucd'):
         raise ValueError('time_class requires a UCD discriminator')
@@ -146,6 +160,8 @@ def train(cfg, resume=None):
     schedule = DiffusionSchedule(cfg['alpha_bar']).to(device)
     g, d = build_models(cfg)
     g, d = g.to(device), d.to(device)
+    if cfg.get('channels_last', False):
+        g, d = g.to(memory_format=torch.channels_last), d.to(memory_format=torch.channels_last)
     if hasattr(d, 'pretrained_metadata'):
         env['pretrained_D'] = d.pretrained_metadata
         write_json(out / 'environment.json', env)
@@ -155,11 +171,12 @@ def train(cfg, resume=None):
     groups = [{'params': list(g.parameters()), 'lr': cfg['lr']}]
     if cfg['prior'] == 'learned':
         groups.append({'params': list(prior.parameters()), 'lr': cfg['lr'] * cfg['prior_lr_mult']})
-    og = torch.optim.Adam(groups, betas=(cfg['beta1'], .999))
-    od = torch.optim.Adam((p for p in d.parameters() if p.requires_grad), lr=cfg['lr'] * cfg['d_lr_mult'], betas=(cfg['beta1'], .999))
+    og = torch.optim.Adam(groups, betas=(cfg['beta1'], .999), fused=cfg.get('fused_adam', False))
+    od = torch.optim.Adam((p for p in d.parameters() if p.requires_grad), lr=cfg['lr'] * cfg['d_lr_mult'], betas=(cfg['beta1'], .999), fused=cfg.get('fused_adam', False))
     bases = [[v['lr'] for v in o.param_groups] for o in (og, od)]
     gan, vic = GANLoss(cfg['loss_type'], cfg['gan_mode']), VICRegLikeLoss()
-    reg = GradRegularizer(cfg['reg_arm'], cfg['reg_coeff'], kappa=cfg['reg_kappa'])
+    reg = GradRegularizer(cfg['reg_arm'], cfg['reg_coeff'], kappa=cfg['reg_kappa'], lazy_k=cfg.get('reg_every', 1),
+                          method=cfg.get('reg_method', 'autograd'), fd_eps=cfg.get('reg_fd_eps', .05))
     start_step, train_seconds = 0, 0.
     if resume:
         for name, obj in [('G', g), ('D', d), ('prior', prior), ('ema_G', eg), ('ema_prior', ep), ('opt_G', og), ('opt_D', od)]:
@@ -188,6 +205,8 @@ def train(cfg, resume=None):
             x0 = torch.where(flip, x0.flip(-1), x0)
         t = torch.randint(1, schedule.steps + 1, (len(c),), device=device, generator=rngs['time'])
         real, xt = schedule.forward_pair(x0, t, rngs['corruption'])
+        if cfg.get('channels_last', False):
+            real, xt = real.contiguous(memory_format=torch.channels_last), xt.contiguous(memory_format=torch.channels_last)
         return c, real, xt, t
 
     def fake(c, xt, t):
@@ -195,6 +214,12 @@ def train(cfg, resume=None):
         clean = g(z, c, xt, t)
         eta = torch.randn(xt.shape, device=device, generator=rngs['noise'])
         return schedule.reverse(clean, xt, t, eta), ids
+
+    def conditioned(c, xt, t):
+        if cfg.get('cache_condition', False):
+            features = d.condition_features(xt)
+            return lambda x: d(x, c, xt, t, condition_features=features)
+        return lambda x: d(x, c, xt, t)
 
     @torch.no_grad()
     def evaluate(n, step):
@@ -225,57 +250,72 @@ def train(cfg, resume=None):
         torch.save(ck, out / 'checkpoint.tmp')
         (out / 'checkpoint.tmp').replace(out / 'checkpoint.pt')
 
+    profiler = SpeedProfiler(out, cfg.get('profile_start', 100), cfg.get('profile_steps', 0))
+    torch.cuda.reset_peak_memory_stats()
     total_start = time.perf_counter()
     torch.cuda.synchronize()
     block_start = time.perf_counter()
     with (out / 'metrics.jsonl').open('a' if resume else 'w') as log:
         for step in range(start_step + 1, cfg['steps'] + 1):
+            profiler.begin(step)
             frac = max(0, (step - 1 - cfg['lr_anneal_start'] * cfg['steps']) / ((1 - cfg['lr_anneal_start']) * cfg['steps']))
             scale = cfg['lr_floor'] + (1 - cfg['lr_floor']) * .5 * (1 + math.cos(math.pi * frac))
             for opt, base in zip((og, od), bases):
                 for group, lr in zip(opt.param_groups, base):
                     group['lr'] = lr * scale
-            d.requires_grad_(True)
-            c, real, xt, t = batch()
-            with torch.no_grad():
-                xf, _ = fake(c, xt, t)
-            dr, cr = d(real, c, xt, t)
-            df, cf = d(xf, c, xt, t)
-            ld = gan.d_loss(dr, df)
-            if cfg['d_mode'] == 'ucd':
-                targets = d.ucd_labels(c, t)
-                ld = ld + cfg['ucd_lambda'] * (F.cross_entropy(cr, targets) + F.cross_entropy(cf, targets))
-            penalty, _ = reg.penalty(FixedConditionCritic(d, c, xt, t), real, xf, step, rngs['penalty'])
-            ld = ld + penalty
-            od.zero_grad(set_to_none=True)
-            ld.backward()
-            od.step()
-            d.requires_grad_(False)
-            c, real, xt, t = batch()
-            xf, ids = fake(c, xt, t)
-            df = d(xf, c, xt, t)[0]
-            with torch.no_grad():
-                dr = d(real, c, xt, t)[0]
-            lg = gan.g_loss(df, dr)
-            if cfg['prior'] == 'learned' and cfg['prior_reg']:
-                selected = prior.table[ids.unique()]
-                if len(selected) > 1:
-                    lg = lg + cfg['prior_reg'] * vic(selected)
-            og.zero_grad(set_to_none=True)
-            lg.backward()
-            og.step()
-            update_ema(eg, g, cfg['ema'])
-            update_ema(ep, prior, cfg['ema'])
+            with profiler.region('D_data_fake_condition'):
+                d.requires_grad_(True)
+                c, real, xt, t = batch()
+                with torch.no_grad():
+                    xf, _ = fake(c, xt, t)
+                critic = conditioned(c, xt, t)
+            with profiler.region('D_adversarial_forward'):
+                dr, cr = critic(real)
+                df, cf = critic(xf)
+                ld = gan.d_loss(dr, df)
+                if cfg['d_mode'] == 'ucd':
+                    targets = d.ucd_labels(c, t)
+                    ld = ld + cfg['ucd_lambda'] * (F.cross_entropy(cr, targets) + F.cross_entropy(cf, targets))
+            with profiler.region('D_penalty_forward_input_grad'):
+                penalty = cifar_penalty(reg, lambda x: critic(x)[0], real, xf, step, rngs['penalty'], cfg)
+                ld = ld + penalty
+            with profiler.region('D_backward_optimizer'):
+                od.zero_grad(set_to_none=True)
+                ld.backward()
+                od.step()
+            with profiler.region('G_data_forward_condition'):
+                d.requires_grad_(False)
+                c, real, xt, t = batch()
+                xf, ids = fake(c, xt, t)
+                critic = conditioned(c, xt, t)
+            with profiler.region('G_critic_loss'):
+                df = critic(xf)[0]
+                with torch.no_grad():
+                    dr = critic(real)[0]
+                lg = gan.g_loss(df, dr)
+                if cfg['prior'] == 'learned' and cfg['prior_reg']:
+                    selected = prior.table[ids.unique()]
+                    if len(selected) > 1:
+                        lg = lg + cfg['prior_reg'] * vic(selected)
+            with profiler.region('G_backward_optimizer'):
+                og.zero_grad(set_to_none=True)
+                lg.backward()
+                og.step()
+            with profiler.region('EMA'):
+                update_ema(eg, g, cfg['ema'])
+                update_ema(ep, prior, cfg['ema'])
+            profiler.end(step)
             report = step % cfg['log_interval'] == 0 or step == cfg['steps']
             evaluate_now = step % cfg['eval_interval'] == 0 or step == cfg['steps']
             if report or evaluate_now:
                 torch.cuda.synchronize()
                 train_seconds += time.perf_counter() - block_start
                 metrics = {'step': step, 'd_loss': float(ld.detach()), 'g_loss': float(lg.detach()), 'penalty': float(penalty.detach()), 'train_seconds': train_seconds,
-                           'steps_per_second': step / train_seconds, 'prior_rms_movement': float((prior.table.detach() - initial_prior).square().mean().sqrt())}
+                           'steps_per_second': step / train_seconds, 'samples_per_second': step * cfg['batch_size'] / train_seconds,
+                           'real_draws': 2 * step * cfg['batch_size'], 'peak_memory_gb': torch.cuda.max_memory_allocated() / 2**30, 'prior_rms_movement': float((prior.table.detach() - initial_prior).square().mean().sqrt())}
                 if not all(math.isfinite(v) for v in metrics.values()):
                     raise FloatingPointError(str(metrics))
-                print(f"step={step}/{cfg['steps']} D={metrics['d_loss']:.3f} G={metrics['g_loss']:.3f} cap={metrics['penalty']:.3f} particle_move={metrics['prior_rms_movement']:.4f} train_s={train_seconds:.1f} steps/s={metrics['steps_per_second']:.2f}", flush=True)
+                print(f"step={step}/{cfg['steps']} D={metrics['d_loss']:.3f} G={metrics['g_loss']:.3f} cap={metrics['penalty']:.3f} particle_move={metrics['prior_rms_movement']:.4f} train_s={train_seconds:.1f} steps/s={metrics['steps_per_second']:.2f} samples/s={metrics['samples_per_second']:.1f} peak_GB={metrics['peak_memory_gb']:.2f}", flush=True)
                 if evaluate_now:
                     print(f"EVAL step={step} samples={cfg['eval_samples']} (diagnostic FID)", flush=True)
                     metrics.update(evaluate(cfg['eval_samples'], step))
@@ -286,9 +326,13 @@ def train(cfg, resume=None):
                 torch.cuda.synchronize()
                 block_start = time.perf_counter()
     print(f"FINAL EVAL samples={cfg['final_samples']}", flush=True)
-    final = evaluate(cfg['final_samples'], cfg['steps'])
+    final = ({k: metrics[k] for k in ('fid', 'samples', 'sampling_seconds')}
+             if cfg['final_samples'] == cfg['eval_samples'] else evaluate(cfg['final_samples'], cfg['steps']))
     summary = {'config': cfg, 'final': final, 'train_seconds': train_seconds,
-               'total_seconds': time.perf_counter() - total_start, 'environment': env,
+               'total_seconds': time.perf_counter() - total_start,
+               'samples_per_second': cfg['steps'] * cfg['batch_size'] / train_seconds,
+               'real_draws': 2 * cfg['steps'] * cfg['batch_size'],
+               'peak_memory_gb': torch.cuda.max_memory_allocated() / 2**30, 'environment': env,
                'provenance': provenance, 'parameters': parameters, 'trainable_parameters': trainable_parameters, 'fid_protocol': PROTOCOL}
     write_json(out / 'summary.json', summary)
     print(f"COMPLETE fid={final['fid']:.3f} n={final['samples']} train_s={train_seconds:.1f}", flush=True)

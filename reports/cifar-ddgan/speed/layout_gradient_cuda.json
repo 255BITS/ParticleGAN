@@ -1,0 +1,145 @@
+{
+  "checkpoint": "results/cifar_ddgan/speed_ncsn_ablation/cache_only_ncsnpp/checkpoint.pt",
+  "comparisons_by_tf32": {
+    "False": {
+      "nchw_cacheFalse": {
+        "score": {
+          "relative_error": 0.0,
+          "cosine": 0.9999999999999999,
+          "max_abs_error": 0.0
+        },
+        "candidate_grad": {
+          "relative_error": 0.0,
+          "cosine": 0.9999999999999931,
+          "max_abs_error": 0.0
+        },
+        "bcap_parameter_grad": {
+          "relative_error": 0.0,
+          "cosine": 0.9999999999999747,
+          "max_abs_error": 0.0
+        }
+      },
+      "nchw_cacheTrue": {
+        "score": {
+          "relative_error": 0.0,
+          "cosine": 0.9999999999999999,
+          "max_abs_error": 0.0
+        },
+        "candidate_grad": {
+          "relative_error": 2.884425988270729e-07,
+          "cosine": 0.999999999999952,
+          "max_abs_error": 4.0978193283081055e-08
+        },
+        "bcap_parameter_grad": {
+          "relative_error": 2.9172914119843884e-07,
+          "cosine": 0.9999999999999285,
+          "max_abs_error": 2.9802322387695312e-08
+        }
+      },
+      "nhwc_cacheFalse": {
+        "score": {
+          "relative_error": 2.713070882704551e-07,
+          "cosine": 0.9999999999999742,
+          "max_abs_error": 2.384185791015625e-06
+        },
+        "candidate_grad": {
+          "relative_error": 4.5063598255898934e-07,
+          "cosine": 0.9999999999998925,
+          "max_abs_error": 6.332993507385254e-08
+        },
+        "bcap_parameter_grad": {
+          "relative_error": 4.33447620218903e-07,
+          "cosine": 0.9999999999998805,
+          "max_abs_error": 4.0978193283081055e-08
+        }
+      },
+      "nhwc_cacheTrue": {
+        "score": {
+          "relative_error": 1.8302972641380485e-07,
+          "cosine": 0.9999999999999903,
+          "max_abs_error": 1.430511474609375e-06
+        },
+        "candidate_grad": {
+          "relative_error": 4.0587652403096993e-07,
+          "cosine": 0.9999999999999107,
+          "max_abs_error": 5.21540641784668e-08
+        },
+        "bcap_parameter_grad": {
+          "relative_error": 3.7140135425617134e-07,
+          "cosine": 0.9999999999999041,
+          "max_abs_error": 3.725290298461914e-08
+        }
+      }
+    },
+    "True": {
+      "nchw_cacheFalse": {
+        "score": {
+          "relative_error": 0.0,
+          "cosine": 1.0,
+          "max_abs_error": 0.0
+        },
+        "candidate_grad": {
+          "relative_error": 0.0,
+          "cosine": 0.9999999999999937,
+          "max_abs_error": 0.0
+        },
+        "bcap_parameter_grad": {
+          "relative_error": 0.0,
+          "cosine": 0.9999999999999726,
+          "max_abs_error": 0.0
+        }
+      },
+      "nchw_cacheTrue": {
+        "score": {
+          "relative_error": 1.295302709374679e-05,
+          "cosine": 0.9999999999185631,
+          "max_abs_error": 9.381771087646484e-05
+        },
+        "candidate_grad": {
+          "relative_error": 0.00024549682453950085,
+          "cosine": 0.9999999700393077,
+          "max_abs_error": 3.2953452318906784e-05
+        },
+        "bcap_parameter_grad": {
+          "relative_error": 0.0002009357474737143,
+          "cosine": 0.9999999801808769,
+          "max_abs_error": 1.5895813703536987e-05
+        }
+      },
+      "nhwc_cacheFalse": {
+        "score": {
+          "relative_error": 6.405350533645556e-05,
+          "cosine": 0.999999998071878,
+          "max_abs_error": 0.0004181861877441406
+        },
+        "candidate_grad": {
+          "relative_error": 0.03848029313934833,
+          "cosine": 0.999259544207131,
+          "max_abs_error": 0.01255592331290245
+        },
+        "bcap_parameter_grad": {
+          "relative_error": 0.02026651634607894,
+          "cosine": 0.9998015600548777,
+          "max_abs_error": 0.0017859004437923431
+        }
+      },
+      "nhwc_cacheTrue": {
+        "score": {
+          "relative_error": 5.802264076917551e-05,
+          "cosine": 0.9999999983332516,
+          "max_abs_error": 0.0002779960632324219
+        },
+        "candidate_grad": {
+          "relative_error": 0.03951457953208888,
+          "cosine": 0.9992195376445303,
+          "max_abs_error": 0.01244749128818512
+        },
+        "bcap_parameter_grad": {
+          "relative_error": 0.022293842499867086,
+          "cosine": 0.9997615726673641,
+          "max_abs_error": 0.0018897652626037598
+        }
+      }
+    }
+  }
+}

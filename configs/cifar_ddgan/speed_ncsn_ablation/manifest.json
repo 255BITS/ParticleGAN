@@ -1,0 +1,6 @@
+[
+  "configs/cifar_ddgan/speed_ncsn_ablation/cache_only_ncsnpp.yaml",
+  "configs/cifar_ddgan/speed_ncsn_ablation/channels_last_only_ncsnpp.yaml",
+  "configs/cifar_ddgan/speed_ncsn_ablation/fused_only_ncsnpp.yaml",
+  "configs/cifar_ddgan/speed_ncsn_ablation/bundle_lazy4_ncsnpp.yaml"
+]

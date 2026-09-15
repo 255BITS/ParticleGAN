@@ -11,17 +11,22 @@ from lib.denoising_toy import DrawSource,DiffusionSchedule
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('checkpoint');p.add_argument('--out',required=True);args=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('checkpoint');p.add_argument('--out',required=True);p.add_argument('--samples',type=int,default=256);p.add_argument('--ema',action='store_true');args=p.parse_args()
+    if args.samples < 2: p.error('--samples must be >= 2')
     torch.set_num_threads(2)
     ck=torch.load(args.checkpoint,map_location='cuda',weights_only=False);cfg=ck['config']
     g,d=build_models(cfg)
     g,d=g.cuda().eval(),d.cuda().eval()
-    g.load_state_dict(ck['G']);d.load_state_dict(ck['D'])
-    prior=DrawSource(cfg['prior'],cfg['num_particles'],cfg['z_dim'],cfg['seed']+101,'cuda');prior.load_state_dict(ck['prior'])
+    torch.backends.cuda.matmul.allow_tf32=cfg['tf32']
+    torch.backends.cudnn.allow_tf32=cfg['tf32']
+    if cfg.get('channels_last',False):
+        g.to(memory_format=torch.channels_last);d.to(memory_format=torch.channels_last)
+    g.load_state_dict(ck['ema_G' if args.ema else 'G']);d.load_state_dict(ck['D'])
+    prior=DrawSource(cfg['prior'],cfg['num_particles'],cfg['z_dim'],cfg['seed']+101,'cuda');prior.load_state_dict(ck['ema_prior' if args.ema else 'prior'])
     schedule=DiffusionSchedule(cfg['alpha_bar']).cuda()
-    x,c=load_cifar(cfg);x,c=x[:256].cuda().float()/127.5-1,c[:256].cuda()
+    x,c=load_cifar(cfg);x,c=x[:args.samples].cuda().float()/127.5-1,c[:args.samples].cuda()
     rng=torch.Generator('cuda').manual_seed(876)
-    result={'step':ck['step'],'config':cfg,'weights':'non_ema','prior_std':float(prior.table.detach().std(0).mean()),'timesteps':[]}
+    result={'step':ck['step'],'config':cfg,'weights':'ema' if args.ema else 'non_ema','samples':args.samples,'tf32':cfg['tf32'],'prior_std':float(prior.table.detach().std(0).mean()),'timesteps':[]}
     for k in range(1,schedule.steps+1):
         t=torch.full_like(c,k)
         with torch.no_grad():

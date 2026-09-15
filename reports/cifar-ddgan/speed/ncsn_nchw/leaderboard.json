@@ -1,0 +1,23 @@
+[
+  {
+    "run": "cache_fused_ncsnpp",
+    "root": "results/cifar_ddgan/speed_ncsn_nchw/cache_fused_ncsnpp",
+    "gpu": "1",
+    "architecture": "ncsnpp",
+    "steps": 1000,
+    "batch": 64,
+    "samples_per_optimizer": 64000,
+    "steady_samples_s": 208.43636050028056,
+    "all_train_samples_s": 205.75798234946296,
+    "train_s": 311.0450407280009,
+    "total_s": 349.8050627810003,
+    "peak_train_gb": 14.056520462036133,
+    "fid": 162.14325224369935,
+    "fid_samples": 5000,
+    "cache": true,
+    "channels_last": false,
+    "fused_adam": true,
+    "reg_method": "autograd",
+    "reg_every": 1
+  }
+]

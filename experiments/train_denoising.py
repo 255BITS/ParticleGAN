@@ -45,6 +45,8 @@ DEFAULTS = {
     "prior_lr_mult": 10.0, "noise_lr_mult": 1.0, "beta1": 0.0,
     "prior_reg": 1.0, "noise_reg": 0.0,
     "reg_arm": "b_cap", "reg_coeff": 1.0, "reg_kappa": 1.0,
+    "reg_method": "autograd", "reg_every": 1, "reg_fd_eps": 0.05,
+    "reg_sync_stats": True, "fused_adam": False,
     "gan_mode": "rp", "loss_type": "logistic", "ucd_lambda": 0.02,
     "drop_xt": False, "ema": 0.995, "lr_anneal_start": 0.6, "lr_floor": 0.05,
     "eval_interval": 1000, "eval_samples": 8192, "final_samples": 20000,
@@ -56,6 +58,9 @@ DEFAULT_CONFIG = ROOT / "configs" / "denoising" / "ddgan_ucd.yaml"
 
 
 def validate(cfg):
+    GradRegularizer(cfg["reg_arm"], cfg["reg_coeff"], kappa=cfg["reg_kappa"],
+                    lazy_k=cfg.get("reg_every", 1), method=cfg.get("reg_method", "autograd"),
+                    fd_eps=cfg.get("reg_fd_eps", .05))
     target = cfg.get("ucd_target", "class")
     if target not in ("class", "time_class") or (target == "time_class" and (cfg["model"] != "ddgan" or cfg["d_mode"] != "ucd")):
         raise ValueError("time_class UCD requires DDGAN with a UCD discriminator")
@@ -169,11 +174,13 @@ def train(cfg):
         groups.append({"params": list(prior.parameters()), "lr": cfg["lr"] * cfg["prior_lr_mult"]})
     if cfg["noise"] == "learned":
         groups.append({"params": list(noise.parameters()), "lr": cfg["lr"] * cfg["noise_lr_mult"]})
-    opt_g = torch.optim.Adam(groups, betas=(cfg["beta1"], .999))
-    opt_d = torch.optim.Adam(d.parameters(), lr=cfg["lr"] * cfg["d_lr_mult"], betas=(cfg["beta1"], .999))
+    opt_g = torch.optim.Adam(groups, betas=(cfg["beta1"], .999), fused=cfg.get("fused_adam", False))
+    opt_d = torch.optim.Adam(d.parameters(), lr=cfg["lr"] * cfg["d_lr_mult"], betas=(cfg["beta1"], .999), fused=cfg.get("fused_adam", False))
     bases = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     gan = GANLoss(cfg["loss_type"], cfg["gan_mode"])
-    reg = GradRegularizer(cfg["reg_arm"], cfg["reg_coeff"], kappa=cfg["reg_kappa"])
+    reg = GradRegularizer(cfg["reg_arm"], cfg["reg_coeff"], kappa=cfg["reg_kappa"],
+                          lazy_k=cfg.get("reg_every", 1), method=cfg.get("reg_method", "autograd"),
+                          fd_eps=cfg.get("reg_fd_eps", .05))
     vic = VICRegLikeLoss()
 
     def batch():
@@ -232,7 +239,7 @@ def train(cfg):
             if cfg["d_mode"] == "ucd" and cfg["ucd_lambda"]:
                 targets = d.ucd_labels(c, t)
                 loss_d = loss_d + cfg["ucd_lambda"] * (F.cross_entropy(cr, targets) + F.cross_entropy(cf, targets))
-            penalty, _ = reg.penalty(FixedConditionCritic(d, c, xt, t), real, xf, step, rngs["penalty"])
+            penalty, _ = reg.penalty(FixedConditionCritic(d, c, xt, t), real, xf, step, rngs["penalty"], collect_stats=cfg.get("reg_sync_stats", True))
             loss_d = loss_d + penalty
             opt_d.zero_grad(set_to_none=True)
             loss_d.backward()
@@ -294,7 +301,8 @@ def train(cfg):
         torch.save({"config": cfg, "G": ema_g.state_dict(), "prior": ema_prior.state_dict(),
                     "noise": ema_noise.state_dict()}, out / "final.pt")
     summary = {"config": cfg, "final": final, "reference_floor": floor,
-               "train_seconds": elapsed_train, "total_seconds": time.perf_counter() - total_start,
+               "train_seconds": elapsed_train, "samples_per_second": cfg["steps"] * cfg["batch_size"] / elapsed_train,
+               "real_draws": 2 * cfg["steps"] * cfg["batch_size"], "total_seconds": time.perf_counter() - total_start,
                "environment": env, "provenance": provenance,
                "parameters": {name: sum(p.numel() for p in model.parameters())
                               for name, model in (("G", g), ("D", d), ("prior", prior), ("noise", noise))}}

@@ -1,0 +1,19 @@
+{
+  "step": 1000,
+  "hq": 0.5340999960899353,
+  "cond_acc": 1.0,
+  "joint_hq": 0.5340999960899353,
+  "modes": 100,
+  "mode_tv": 0.13929998874664307,
+  "conditional_mode_tv": 0.13929998874664307,
+  "tail_10sigma": 0.1595499962568283,
+  "sw1": 0.24346910417079926,
+  "conditional_sw1": 0.24346910417079926,
+  "per_mode_core_std": 0.11717652830098543,
+  "per_mode_core_ratio": 3.9058842766995148,
+  "tail_frac_10sigma": 0.15955,
+  "per_mode_cov_eig_min_ratio": 41.78233733169514,
+  "per_mode_cov_eig_max_ratio": 365.2814463024296,
+  "per_mode_cov_audited_modes": 100,
+  "unique_outputs": 12662
+}

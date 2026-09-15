@@ -1,0 +1,5 @@
+[
+  "configs/cifar_ddgan/speed_promote_unet/exact_10k.yaml",
+  "configs/cifar_ddgan/speed_promote_unet/lazy4_10k.yaml",
+  "configs/cifar_ddgan/speed_promote_unet/fd_lazy4_10k.yaml"
+]

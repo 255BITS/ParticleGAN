@@ -1,0 +1,40 @@
+{
+  "checkpoint": "results/cifar_ddgan/scale_50k/unet32/checkpoint.pt",
+  "step": 50000,
+  "device": "cpu",
+  "tf32": true,
+  "samples": 16,
+  "exact_penalty": 0.005250200163573027,
+  "norm_mean": 0.6484460830688477,
+  "active_fraction": 0.125,
+  "comparisons": [
+    {
+      "eps": 0.005,
+      "penalty": 0.005216586869210005,
+      "norm_relative_error": 0.0026601613499224186,
+      "gradient_relative_error": 4.34241247177124,
+      "gradient_cosine": 0.3615604341030121
+    },
+    {
+      "eps": 0.01,
+      "penalty": 0.0051625436171889305,
+      "norm_relative_error": 0.004886661656200886,
+      "gradient_relative_error": 5.054576396942139,
+      "gradient_cosine": 0.30653825402259827
+    },
+    {
+      "eps": 0.05,
+      "penalty": 0.004889787640422583,
+      "norm_relative_error": 0.023079531267285347,
+      "gradient_relative_error": 2.350839376449585,
+      "gradient_cosine": 0.5369610786437988
+    },
+    {
+      "eps": 0.1,
+      "penalty": 0.004502928350120783,
+      "norm_relative_error": 0.04380848631262779,
+      "gradient_relative_error": 2.0968644618988037,
+      "gradient_cosine": 0.5882683992385864
+    }
+  ]
+}

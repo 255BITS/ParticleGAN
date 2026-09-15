@@ -115,14 +115,24 @@ class PretrainedFeatureDiscriminator(nn.Module):
     def ucd_labels(self, c, t):
         return self.pixel.ucd_labels(c, t)
 
-    def forward(self, x, c, xt, t):
+    @torch.no_grad()
+    def condition_features(self, xt):
+        """Batch-local frozen conditioning features; never cache candidate features."""
+        h = (F.interpolate(xt, size=64, mode='bilinear', align_corners=False) * .5 + .5 - self.mean) / self.std
+        result = []
+        for block in self.features:
+            h = block(h)
+            result.append(h)
+        return result
+
+    def forward(self, x, c, xt, t, condition_features=None):
         logits = self.pixel(x, c, xt, t)[1]
         # No clamping: diffusion states can exceed the image range.
-        h = (F.interpolate(torch.cat([x, xt]), size=64, mode='bilinear', align_corners=False) * .5 + .5 - self.mean) / self.std
+        h = (F.interpolate(torch.cat([x, xt]) if condition_features is None else x, size=64, mode='bilinear', align_corners=False) * .5 + .5 - self.mean) / self.std
         feature_logits = []
-        for block, head in zip(self.features, self.project):
+        for i, (block, head) in enumerate(zip(self.features, self.project)):
             h = block(h)
-            a, b = h.chunk(2)
+            a, b = h.chunk(2) if condition_features is None else (h, condition_features[i])
             feature_logits.append(head(torch.cat([a, b], 1)))
         logits = (logits + sum(feature_logits) / math.sqrt(3)) / math.sqrt(2)
         return logits.gather(1, self.ucd_labels(c, t)[:, None]).squeeze(1), logits

@@ -1,10 +1,11 @@
 # CIFAR-10 U-Net DDGAN baseline
 
-Latest round: U-Net32 completed 50k updates at **26.680 final FID**, while the
-NCSN++ run was interrupted by a host restart (20k checkpoint, diagnostic FID
-65.209). The fast 10k default is retained. Next priority is profiling and training
-speed; nothing is running or queued. See [handoff](RUNBOOK.md) and
-[scaling results](scale_50k/READOUT.md).
+Latest round: exact lazy-4 bcap plus cached frozen conditioning features and
+fused Adam reaches **31.555 final FID in 9.22 training minutes** at10k updates.
+These are now the no-argument defaults. All40 speed/transfer runs are complete;
+no jobs are queued. See [speed results](speed/READOUT.md) and [handoff](RUNBOOK.md).
+The prior every-step50k baseline reached26.680; the faster recipe has not yet
+been validated at that budget.
 
 Run from the repository root. Install the `images` extra with a torchvision build
 compatible with your CUDA torch. This machine uses torch 2.14.0+cu130,
@@ -17,20 +18,22 @@ required by torch-fidelity 0.3.0's matrix-square-root call.
 ```
 
 No arguments loads `configs/cifar_ddgan/default.yaml`: the measured 10k-update
-U-Net 32 / pretrained-feature-D winner, FID 50k31.741 versus 54.931 for the matched
-pixel-D control. Joint timestep/class UCD, learned particles, Gaussian step noise,
+U-Net32 / pretrained-feature-D recipe, FID50k31.555 in9.22 training minutes.
+It uses exact bcap every fourth D update at4×weight, batch-local frozen xt
+feature caching and fused Adam. FD remains an optional experimental method. Joint timestep/class UCD, learned particles, Gaussian step noise,
 constant LR and toy optimizer rates remain. See [moonshot/READOUT.md](moonshot/READOUT.md)
 for the four-way architecture comparison, timing and limitations. Each run needs
 a fresh out_dir; existing training is protected against accidental overwrite.
 
 Full configs/manifests are in configs/cifar_ddgan/moonshot and moonshot_followup.
-Both rounds are completed; reruns require fresh output directories. Tail:
+Both architecture rounds are completed; reruns require fresh output directories.
+Speed-round configs are under configs/cifar_ddgan/speed_*. Historical combined log:
 
 ```sh
-tail -F results/cifar_ddgan/live.log
+tail -F results/cifar_ddgan/speed.live.log
 ```
 
-All scouts used10,000 updates, batch 64 and seed 24002; no seed sweep. D and G use
+The architecture scouts used10,000 updates, batch 64 and seed 24002; no seed sweep. D and G use
 independent real batches sampled with replacement. Training images receive
 horizontal flips; the FID reference is unaugmented.
 
@@ -58,7 +61,7 @@ The promoted `d_backbone: pretrained_resnet18` adds frozen ImageNet ResNet18
 features (layers 1/2/3 at 64px input) and trainable joint-UCD heads to this pixel
 branch. Combined logits receive the same losses and bcap. Features use frozen
 batch-normalization statistics and preserve candidate derivatives. Select
-`d_backbone: pixel` for the original critic; class-only/concat require that mode.
+`d_backbone: pixel` with `cache_condition: false` for the original critic; class-only/concat require that mode.
 `architecture: flat_hybrid` enables the tested constant-token generator; its
 width/depth/head count/spatial particle channels are config controlled.
 `architecture: ncsnpp` selects the official DDGAN generator architecture with our

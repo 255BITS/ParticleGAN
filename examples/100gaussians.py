@@ -53,6 +53,7 @@ import argparse
 import copy
 import math
 import sys
+import time
 from pathlib import Path
 from typing import Tuple
 
@@ -157,6 +158,12 @@ def train(
     seed: int = 1234,
     device_str: str = None,
     prior_kind: str = "particles",
+    reg_method: str = "autograd",
+    reg_every: int = 1,
+    reg_fd_eps: float = 0.05,
+    reg_sync_stats: bool = True,
+    fused_adam: bool = False,
+    return_details: bool = False,
 ):
     # Device / seeds
     if device_str is not None:
@@ -202,21 +209,22 @@ def train(
 
     vic_reg = VICRegLikeLoss()
     gan_loss = GANLoss(loss_type=loss_type, mode=gan_mode)
-    regularizer = GradRegularizer(arm=reg_arm, coeff=reg_coeff)
+    regularizer = GradRegularizer(arm=reg_arm, coeff=reg_coeff, lazy_k=reg_every,
+                                  method=reg_method, fd_eps=reg_fd_eps)
 
     opt_G = torch.optim.Adam(
         G.parameters(),
         lr=lr,
-        betas=(beta1, 0.999),
+        betas=(beta1, 0.999), fused=fused_adam,
     )
     opt_prior = (
-        torch.optim.Adam(prior.parameters(), lr=lr * 10.0, betas=(beta1, 0.999))
+        torch.optim.Adam(prior.parameters(), lr=lr * 10.0, betas=(beta1, 0.999), fused=fused_adam)
         if learnable_prior else None
     )
     opt_D = torch.optim.Adam(
         D.parameters(),
         lr=lr * d_lr_mult,
-        betas=(beta1, 0.999),
+        betas=(beta1, 0.999), fused=fused_adam,
     )
 
     out_path = Path(out_dir)
@@ -245,6 +253,13 @@ def train(
         for opt in all_opts
     }
 
+    def synchronize():
+        if device.type == "cuda":
+            torch.cuda.synchronize(device)
+
+    synchronize()
+    train_seconds = 0.0
+    total_start = block_start = time.perf_counter()
     global_step = 0
     for epoch in range(epochs):
         for _ in range(steps_per_epoch):
@@ -286,7 +301,8 @@ def train(
             # steepness where the data is. The regularizer recomputes its own
             # graph internally, so neither batch needs requires_grad here.
             pen, _ = regularizer.penalty(
-                D, x_real, x_fake, global_step, generator=penalty_gen,
+                D, x_real, x_fake, global_step + 1, generator=penalty_gen,
+                collect_stats=reg_sync_stats,
             )
             loss_d = loss_d + pen
 
@@ -341,6 +357,11 @@ def train(
             # -------------------------
             # Logging / snapshots
             # -------------------------
+            maintenance = (global_step % log_interval == 0 or
+                           (global_step % snapshot_interval == 0 and global_step > 0))
+            if maintenance:
+                synchronize()
+                train_seconds += time.perf_counter() - block_start
             if global_step % log_interval == 0:
                 eval_gen.manual_seed(seed + 999)
                 modes, hq_frac = mode_coverage(
@@ -364,9 +385,14 @@ def train(
                     real_samples=real_viz,
                 )
 
+            if maintenance:
+                synchronize()
+                block_start = time.perf_counter()
             global_step += 1
 
-        # End-of-epoch snapshot + checkpoint
+        synchronize()
+        train_seconds += time.perf_counter() - block_start
+        # End-of-epoch snapshot
         save_fake_scatter(
             ema_G,
             ema_prior,
@@ -375,6 +401,12 @@ def train(
             real_samples=real_viz,
         )
 
+        synchronize()
+        block_start = time.perf_counter()
+
+    if return_details:
+        return {"prior": prior, "G": G, "D": D, "ema_prior": ema_prior, "ema_G": ema_G,
+                "train_seconds": train_seconds, "total_seconds": time.perf_counter() - total_start}
     return prior, G, D
 
 
@@ -413,6 +445,11 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         default=None,
         help="Deprecated alias: sets --reg_arm a_r1r2 --reg_coeff <value>.",
     )
+    parser.add_argument("--reg_method", choices=("autograd", "finite_difference"), default="autograd")
+    parser.add_argument("--reg_every", type=int, default=1)
+    parser.add_argument("--reg_fd_eps", type=float, default=.05)
+    parser.add_argument("--reg_sync_stats", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--fused_adam", action="store_true")
     parser.add_argument("--fourier", type=int, default=2)
     parser.add_argument("--ema_decay", type=float, default=0.995)
     parser.add_argument(
@@ -473,6 +510,8 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         lambda_ep=args.lambda_ep,
         reg_arm=reg_arm,
         reg_coeff=reg_coeff,
+        reg_method=args.reg_method, reg_every=args.reg_every, reg_fd_eps=args.reg_fd_eps,
+        reg_sync_stats=args.reg_sync_stats, fused_adam=args.fused_adam,
         fourier=args.fourier,
         ema_decay=args.ema_decay,
         lr_floor=args.lr_floor,

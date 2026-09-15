@@ -1,0 +1,6 @@
+[
+  "configs/speed_100gaussians_10k/exact.yaml",
+  "configs/speed_100gaussians_10k/fd_lazy4.yaml",
+  "configs/speed_100gaussians_10k/fused.yaml",
+  "configs/speed_100gaussians_10k/lazy4.yaml"
+]

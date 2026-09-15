@@ -8,6 +8,25 @@ d_backbone: pretrained_resnet18
 g_depth: 6
 g_heads: 4
 spatial_channels: 16
+ncsnpp_ch_mult:
+- 1
+- 2
+- 2
+- 2
+ncsnpp_res_blocks: 2
+ncsnpp_attn_resolutions:
+- 16
+ncsnpp_z_emb_dim: 256
+ncsnpp_n_mlp: 4
+cache_condition: true
+channels_last: false
+fused_adam: true
+reg_method: autograd
+reg_every: 4
+reg_fd_eps: 0.05
+reg_sync_stats: false
+profile_start: 100
+profile_steps: 0
 seed: 24002
 classes: 10
 alpha_bar:
@@ -48,13 +67,3 @@ save_checkpoint: true
 data_dir: data
 fid_cache: results/cifar_ddgan/fid_cache
 out_dir: results/cifar_ddgan/default
-ncsnpp_ch_mult:
-- 1
-- 2
-- 2
-- 2
-ncsnpp_res_blocks: 2
-ncsnpp_attn_resolutions:
-- 16
-ncsnpp_z_emb_dim: 256
-ncsnpp_n_mlp: 4

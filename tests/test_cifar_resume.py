@@ -49,6 +49,7 @@ def test_checkpoint_resume_matches_uninterrupted(tmp_path, monkeypatch, architec
     monkeypatch.setattr(trainer, 'build_models', deterministic_models)
     cfg={**trainer.DEFAULTS, 'architecture':architecture, 'd_backbone':d_backbone, 'g_width':16, 'g_depth':1, 'd_width':8, 'z_dim':8,
          'num_particles':100, 'steps':20, 'batch_size':8,
+         'cache_condition':d_backbone == 'pretrained_resnet18',
          'log_interval':10, 'eval_interval':10, 'eval_samples':10,
          'final_samples':10, 'eval_batch_size':10, 'tf32':False,
          'out_dir':str(tmp_path/'resumed')}

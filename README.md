@@ -104,6 +104,11 @@ ParticleGAN/
 
 The grid-search infrastructure behind the study — config generation, the per-arm trainer, grid runner, and the analysis/leaderboard scripts — lives in `experiments/`, with the generated per-run configs in `configs/`.
 
+The [CIFAR DDGAN experiment](reports/cifar-ddgan/README.md) scales the particle
+recipe to images. Its [speed study](reports/cifar-ddgan/speed/READOUT.md) compares
+exact/lazy/finite-difference bcap and backports the shared implementation to both
+toy trainers. The faster CIFAR default retains exact derivatives; FD is optional.
+
 ## Key Components
 
 ### ParticlePrior (`lib/particle_prior.py`)

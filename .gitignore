@@ -7,6 +7,9 @@ __pycache__/
 results/sparse/
 results/denoising/
 results/cifar_ddgan/
+results/speed_100gaussians_*/
+results/speed_denoising_*/
+results/speed_*.runner.log
 data/
 .venv
 .pytest_cache/
