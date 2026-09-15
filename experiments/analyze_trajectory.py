@@ -45,10 +45,20 @@ def main():
         test, train = s["final"]["test"], s["final"]["train"]
         contexts = test["contexts"]
         variances = [v for r in contexts[:6] for v in r["coefficient_variance_ratio"] if v is not None]
+        train_variances = [v for r in train["contexts"] for v in r["coefficient_variance_ratio"] if v is not None]
         rows.append(dict(name=name, test_sw1=test["conditional_sw1"], route_tv=test["route_tv"],
+                         interpolation_sw1=statistics.mean(r["sw1"] for r in contexts[:6]),
+                         extrapolation_sw1=statistics.mean(r["sw1"] for r in contexts[6:]),
+                         interpolation_route_tv=statistics.mean(r["route_tv"] for r in contexts[:6]),
+                         extrapolation_route_tv=statistics.mean(r["route_tv"] for r in contexts[6:]),
                          test_valid=test["valid"], interpolation_valid=statistics.mean(r["valid"] for r in contexts[:6]),
                          extrapolation_valid=statistics.mean(r["valid"] for r in contexts[6:]),
                          collision=test["collision"], interpolation_variance_ratio=statistics.median(variances) if variances else None,
+                         interpolation_variance_groups=len(variances),
+                         train_variance_ratio=statistics.median(train_variances) if train_variances else None,
+                         train_variance_groups=len(train_variances),
+                         test_support_rmse=test["support_rmse"], test_boundary_error=test["boundary_error"],
+                         test_routes_covered=test["routes_covered"], test_routes_total=test["routes_total"],
                          train_valid=train["valid"], train_sw1=train["conditional_sw1"],
                          train_seconds=s["train_seconds"], real_draws=s["real_draws"]))
         dest = out / name
@@ -57,7 +67,7 @@ def main():
             if (path / file).exists():
                 shutil.copyfile(path / file, dest / file)
         # One animation suffices for the report; all raw runs retain their own.
-        if name == "learned":
+        if name == runs[0][0]:
             shutil.copyfile(path / "futures.gif", dest / "futures.gif")
     (out / "leaderboard.json").write_text(json.dumps(rows, indent=2)+"\n")
     lines = ["# Trajectory comparison", "", "Sorted by held-out conditional SW1; this is not a universal ranking. Interpolation and extrapolation are reported separately. Variance ratios use valid paths only; target 1.", "",

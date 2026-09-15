@@ -26,6 +26,7 @@ from lib.trajectory_visuals import render
 
 DEFAULTS = {
     "model": "ddgan", "d_mode": "ucd", "prior": "learned", "noise": "gaussian",
+    "geometry_mode": "discrete", "d_architecture": "mlp", "d_temporal_width": 64,
     "seed": 24002, "length": 64, "alpha_bar": [1.0, .9, .5, .05, .0001],
     "z_dim": 32, "num_particles": 20000, "noise_particles": 1024,
     "width": 32, "d_width": 256, "steps": 10000, "batch_size": 128,
@@ -39,16 +40,19 @@ DEFAULTS = {
 
 def validate(cfg):
     for key, values in dict(model=("ddgan", "gan"), d_mode=("ucd", "concat"),
-                            prior=("learned", "fixed", "gaussian"), noise=("learned", "fixed", "gaussian")).items():
+                            prior=("learned", "fixed", "gaussian"), noise=("learned", "fixed", "gaussian"),
+                            geometry_mode=("discrete", "continuous"), d_architecture=("mlp", "temporal")).items():
         if cfg[key] not in values:
             raise ValueError(f"invalid {key}")
-    for key in ("length", "z_dim", "num_particles", "noise_particles", "width", "d_width", "steps", "batch_size", "reg_every", "log_interval", "eval_per_context"):
+    for key in ("length", "z_dim", "num_particles", "noise_particles", "width", "d_width", "d_temporal_width", "steps", "batch_size", "reg_every", "log_interval", "eval_per_context"):
         if type(cfg[key]) is not int or cfg[key] < 1:
             raise ValueError(f"{key} must be a positive integer")
     if cfg["length"] < 16 or cfg["length"] % 4 or min(cfg["batch_size"], cfg["num_particles"], cfg["noise_particles"]) < 2:
         raise ValueError("length must be a multiple of four >=16; batches/tables >=2")
     if not 0 <= cfg["ema"] < 1 or not 0 <= cfg["beta1"] < 1:
         raise ValueError("invalid EMA/beta1")
+    if cfg["d_architecture"] == "temporal" and cfg["d_width"] < 4:
+        raise ValueError("temporal D requires d_width >= 4")
     for key in ("lr", "d_lr_mult", "prior_lr_mult", "noise_lr_mult"):
         if cfg[key] <= 0:
             raise ValueError(key)
@@ -92,7 +96,7 @@ def train(cfg):
                torch=torch.__version__, cuda=torch.version.cuda)
     write_json(out / "environment.json", env)
     rngs = [torch.Generator(device=device).manual_seed(cfg["seed"] + i) for i in range(11, 17)]
-    toy = Routes(cfg["length"], device)
+    toy = Routes(cfg["length"], device, cfg["geometry_mode"])
     schedule = DiffusionSchedule(cfg["alpha_bar"]).to(device)
     prior = DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"]+101, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2*cfg["length"], cfg["seed"]+102, device)
@@ -127,6 +131,7 @@ def train(cfg):
         return schedule.reverse(clean, xt, t, eta), ids
 
     print(f"START device={env['gpu']} visible={env['visible_devices']} model={cfg['model']} prior={cfg['prior']} noise={cfg['noise']} steps={cfg['steps']}", flush=True)
+    print(f"D={cfg['d_architecture']} geometry={cfg['geometry_mode']}", flush=True)
     print("Constant LR; shared DDGAN posterior, Rp logistic, joint time/class UCD, exact lazy bcap; endpoint evaluation only", flush=True)
     torch.cuda.synchronize()
     total_start = time.perf_counter()

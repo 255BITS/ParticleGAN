@@ -1,0 +1,2450 @@
+[
+  {
+    "stage": "confirm_10k",
+    "name": "mlp_continuous",
+    "train_seconds": 98.96959490500012,
+    "gpu": "0",
+    "final": {
+      "train": {
+        "valid": 0.99462890625,
+        "collision": 0.003173828125,
+        "boundary_error": 0.04003101587295532,
+        "support_rmse": 0.02067737653851509,
+        "residual_rmse": 0.019236650317907333,
+        "route_tv": 0.05449218749999998,
+        "conditional_sw1": 0.03832783200778067,
+        "routes_covered": 16,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.900390625,
+            "route_tv": 0.10039062499999996,
+            "valid_route_mass": [
+              0.099609375,
+              0.896484375
+            ],
+            "valid": 0.99609375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.473591685295105,
+              0.2132813036441803
+            ],
+            "sw1": 0.06282860040664673
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.28125,
+            "route_tv": 0.01874999999999999,
+            "valid_route_mass": [
+              0.708984375,
+              0.27734375
+            ],
+            "valid": 0.986328125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.42886489629745483,
+              0.23487424850463867
+            ],
+            "sw1": 0.029093321412801743
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.884765625,
+            "route_tv": 0.08476562499999996,
+            "valid_route_mass": [
+              0.11328125,
+              0.8828125
+            ],
+            "valid": 0.99609375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.24255254864692688,
+              0.4301954507827759
+            ],
+            "sw1": 0.039543889462947845
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.28515625,
+            "route_tv": 0.014843749999999989,
+            "valid_route_mass": [
+              0.71484375,
+              0.283203125
+            ],
+            "valid": 0.998046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.21363788843154907,
+              0.39172402024269104
+            ],
+            "sw1": 0.028967758640646935
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.822265625,
+            "route_tv": 0.022265624999999956,
+            "valid_route_mass": [
+              0.169921875,
+              0.8203125
+            ],
+            "valid": 0.990234375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.4917306900024414,
+              0.2939690053462982
+            ],
+            "sw1": 0.024560756981372833
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.21484375,
+            "route_tv": 0.08515624999999999,
+            "valid_route_mass": [
+              0.779296875,
+              0.212890625
+            ],
+            "valid": 0.9921875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.3987154960632324,
+              0.31353580951690674
+            ],
+            "sw1": 0.04796191304922104
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.794921875,
+            "route_tv": 0.005078125000000044,
+            "valid_route_mass": [
+              0.203125,
+              0.794921875
+            ],
+            "valid": 0.998046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.3097928762435913,
+              0.4494742453098297
+            ],
+            "sw1": 0.016581162810325623
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.1953125,
+            "route_tv": 0.10468749999999999,
+            "valid_route_mass": [
+              0.8046875,
+              0.1953125
+            ],
+            "valid": 1.0,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.28858354687690735,
+              0.4534221887588501
+            ],
+            "sw1": 0.05708525329828262
+          }
+        ]
+      },
+      "test": {
+        "valid": 0.949462890625,
+        "collision": 0.013671875,
+        "boundary_error": 0.043563198298215866,
+        "support_rmse": 0.021512310951948166,
+        "residual_rmse": 0.019093800336122513,
+        "route_tv": 0.06547851562499998,
+        "conditional_sw1": 0.03897392516955733,
+        "routes_covered": 16,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.875,
+            "route_tv": 0.07499999999999996,
+            "valid_route_mass": [
+              0.125,
+              0.875
+            ],
+            "valid": 1.0,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.46706345677375793,
+              0.32037681341171265
+            ],
+            "sw1": 0.0397668182849884
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.25,
+            "route_tv": 0.04999999999999999,
+            "valid_route_mass": [
+              0.75,
+              0.248046875
+            ],
+            "valid": 0.998046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.34247496724128723,
+              0.38040146231651306
+            ],
+            "sw1": 0.02715284191071987
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.87890625,
+            "route_tv": 0.07890624999999996,
+            "valid_route_mass": [
+              0.12109375,
+              0.87890625
+            ],
+            "valid": 1.0,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.27248987555503845,
+              0.4036233425140381
+            ],
+            "sw1": 0.028357362374663353
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.263671875,
+            "route_tv": 0.03632812499999999,
+            "valid_route_mass": [
+              0.734375,
+              0.26171875
+            ],
+            "valid": 0.99609375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.26884377002716064,
+              0.35642051696777344
+            ],
+            "sw1": 0.027398455888032913
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.833984375,
+            "route_tv": 0.033984374999999956,
+            "valid_route_mass": [
+              0.1640625,
+              0.833984375
+            ],
+            "valid": 0.998046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.41281166672706604,
+              0.3069492280483246
+            ],
+            "sw1": 0.020331770181655884
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.228515625,
+            "route_tv": 0.07148437499999999,
+            "valid_route_mass": [
+              0.76953125,
+              0.228515625
+            ],
+            "valid": 0.998046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.3712722361087799,
+              0.3315639793872833
+            ],
+            "sw1": 0.03328533470630646
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.7578125,
+            "route_tv": 0.042187500000000044,
+            "valid_route_mass": [
+              0.21484375,
+              0.55859375
+            ],
+            "valid": 0.7734375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.4719342589378357,
+              0.4030490815639496
+            ],
+            "sw1": 0.0566733218729496
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.1640625,
+            "route_tv": 0.1359375,
+            "valid_route_mass": [
+              0.716796875,
+              0.115234375
+            ],
+            "valid": 0.83203125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.3990592062473297,
+              0.44101348519325256
+            ],
+            "sw1": 0.07882549613714218
+          }
+        ]
+      }
+    }
+  },
+  {
+    "stage": "confirm_10k",
+    "name": "mlp_discrete",
+    "train_seconds": 100.91096819099766,
+    "gpu": "1",
+    "final": {
+      "train": {
+        "valid": 0.9833984375,
+        "collision": 0.009765625,
+        "boundary_error": 0.03158178552985191,
+        "support_rmse": 0.018903035670518875,
+        "residual_rmse": 0.015440763905644417,
+        "route_tv": 0.04355468749999998,
+        "conditional_sw1": 0.03450305969454348,
+        "routes_covered": 16,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.865234375,
+            "route_tv": 0.06523437499999996,
+            "valid_route_mass": [
+              0.130859375,
+              0.861328125
+            ],
+            "valid": 0.9921875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.26457691192626953,
+              0.2737647294998169
+            ],
+            "sw1": 0.03920873627066612
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.3203125,
+            "route_tv": 0.02031250000000001,
+            "valid_route_mass": [
+              0.662109375,
+              0.302734375
+            ],
+            "valid": 0.96484375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.177400603890419,
+              0.4443155527114868
+            ],
+            "sw1": 0.029393933713436127
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.892578125,
+            "route_tv": 0.09257812499999996,
+            "valid_route_mass": [
+              0.107421875,
+              0.884765625
+            ],
+            "valid": 0.9921875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.1476621925830841,
+              0.4566715359687805
+            ],
+            "sw1": 0.04154837131500244
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.291015625,
+            "route_tv": 0.008984374999999989,
+            "valid_route_mass": [
+              0.701171875,
+              0.2734375
+            ],
+            "valid": 0.974609375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.12306897342205048,
+              0.5662857890129089
+            ],
+            "sw1": 0.03626411408185959
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.83984375,
+            "route_tv": 0.039843749999999956,
+            "valid_route_mass": [
+              0.14453125,
+              0.8359375
+            ],
+            "valid": 0.98046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.322195440530777,
+              0.1836410015821457
+            ],
+            "sw1": 0.028588715940713882
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.3046875,
+            "route_tv": 0.004687500000000011,
+            "valid_route_mass": [
+              0.671875,
+              0.30078125
+            ],
+            "valid": 0.97265625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.3419128358364105,
+              0.28146296739578247
+            ],
+            "sw1": 0.0325363390147686
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.8984375,
+            "route_tv": 0.09843749999999996,
+            "valid_route_mass": [
+              0.1015625,
+              0.8984375
+            ],
+            "valid": 1.0,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.30573806166648865,
+              0.36343878507614136
+            ],
+            "sw1": 0.042830802500247955
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.318359375,
+            "route_tv": 0.01835937500000001,
+            "valid_route_mass": [
+              0.681640625,
+              0.30859375
+            ],
+            "valid": 0.990234375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.26204583048820496,
+              0.4202711582183838
+            ],
+            "sw1": 0.02565346471965313
+          }
+        ]
+      },
+      "test": {
+        "valid": 0.74755859375,
+        "collision": 0.1015625,
+        "boundary_error": 0.032182611525058746,
+        "support_rmse": 0.031192362308502197,
+        "residual_rmse": 0.017960604280233383,
+        "route_tv": 0.04575195312499998,
+        "conditional_sw1": 0.046755145536735654,
+        "routes_covered": 12,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.884765625,
+            "route_tv": 0.08476562499999996,
+            "valid_route_mass": [
+              0.11328125,
+              0.884765625
+            ],
+            "valid": 0.998046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.320403128862381,
+              0.2914952039718628
+            ],
+            "sw1": 0.05242007225751877
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.3125,
+            "route_tv": 0.012500000000000011,
+            "valid_route_mass": [
+              0.677734375,
+              0.3046875
+            ],
+            "valid": 0.982421875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.3037521243095398,
+              0.560221254825592
+            ],
+            "sw1": 0.02230376936495304
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.88671875,
+            "route_tv": 0.08671874999999996,
+            "valid_route_mass": [
+              0.11328125,
+              0.884765625
+            ],
+            "valid": 0.998046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.21685084700584412,
+              0.4047704041004181
+            ],
+            "sw1": 0.03954731673002243
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.26953125,
+            "route_tv": 0.03046874999999999,
+            "valid_route_mass": [
+              0.7265625,
+              0.265625
+            ],
+            "valid": 0.9921875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.20096813142299652,
+              0.5332978367805481
+            ],
+            "sw1": 0.02722795680165291
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.833984375,
+            "route_tv": 0.033984374999999956,
+            "valid_route_mass": [
+              0.15625,
+              0.828125
+            ],
+            "valid": 0.984375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.27962541580200195,
+              0.24053049087524414
+            ],
+            "sw1": 0.024340149015188217
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.310546875,
+            "route_tv": 0.010546875000000011,
+            "valid_route_mass": [
+              0.681640625,
+              0.30859375
+            ],
+            "valid": 0.990234375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.34812140464782715,
+              0.3703751266002655
+            ],
+            "sw1": 0.03146648406982422
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.896484375,
+            "route_tv": 0.09648437499999996,
+            "valid_route_mass": [
+              0.0,
+              0.03125
+            ],
+            "valid": 0.03125,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              0.2214411199092865
+            ],
+            "sw1": 0.10015343129634857
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.310546875,
+            "route_tv": 0.010546875000000011,
+            "valid_route_mass": [
+              0.00390625,
+              0.0
+            ],
+            "valid": 0.00390625,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.07658198475837708
+          }
+        ]
+      }
+    }
+  },
+  {
+    "stage": "confirm_10k",
+    "name": "temporal_continuous",
+    "train_seconds": 119.8781674599959,
+    "gpu": "0",
+    "final": {
+      "train": {
+        "valid": 0.86328125,
+        "collision": 0.053955078125,
+        "boundary_error": 0.03797788918018341,
+        "support_rmse": 0.02932048961520195,
+        "residual_rmse": 0.014937525615096092,
+        "route_tv": 0.06201171874999997,
+        "conditional_sw1": 0.0515101533383131,
+        "routes_covered": 16,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.85546875,
+            "route_tv": 0.055468749999999956,
+            "valid_route_mass": [
+              0.140625,
+              0.607421875
+            ],
+            "valid": 0.748046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.7655304074287415,
+              0.5878710150718689
+            ],
+            "sw1": 0.07145588099956512
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.1640625,
+            "route_tv": 0.1359375,
+            "valid_route_mass": [
+              0.828125,
+              0.126953125
+            ],
+            "valid": 0.955078125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.6642082333564758,
+              1.2348531484603882
+            ],
+            "sw1": 0.0561656691133976
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.87109375,
+            "route_tv": 0.07109374999999996,
+            "valid_route_mass": [
+              0.126953125,
+              0.6875
+            ],
+            "valid": 0.814453125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.9745287895202637,
+              0.49972444772720337
+            ],
+            "sw1": 0.05623472481966019
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.244140625,
+            "route_tv": 0.05585937499999999,
+            "valid_route_mass": [
+              0.751953125,
+              0.169921875
+            ],
+            "valid": 0.921875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.733830988407135,
+              0.43226704001426697
+            ],
+            "sw1": 0.056803978979587555
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.8203125,
+            "route_tv": 0.020312499999999956,
+            "valid_route_mass": [
+              0.125,
+              0.8125
+            ],
+            "valid": 0.9375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.45416226983070374,
+              0.7230666279792786
+            ],
+            "sw1": 0.028469689190387726
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.236328125,
+            "route_tv": 0.06367187499999999,
+            "valid_route_mass": [
+              0.552734375,
+              0.23046875
+            ],
+            "valid": 0.783203125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.48802998661994934,
+              0.8448176383972168
+            ],
+            "sw1": 0.05472009256482124
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.8671875,
+            "route_tv": 0.06718749999999996,
+            "valid_route_mass": [
+              0.09765625,
+              0.861328125
+            ],
+            "valid": 0.958984375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.0781840085983276,
+              0.6674227714538574
+            ],
+            "sw1": 0.0378284826874733
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.2734375,
+            "route_tv": 0.02656249999999999,
+            "valid_route_mass": [
+              0.53125,
+              0.255859375
+            ],
+            "valid": 0.787109375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.7258979082107544,
+              0.8144888281822205
+            ],
+            "sw1": 0.05040270835161209
+          }
+        ]
+      },
+      "test": {
+        "valid": 0.876220703125,
+        "collision": 0.00537109375,
+        "boundary_error": 0.02705243229866028,
+        "support_rmse": 0.02232985571026802,
+        "residual_rmse": 0.012560357339680195,
+        "route_tv": 0.05883789062499997,
+        "conditional_sw1": 0.041836843360215425,
+        "routes_covered": 16,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.890625,
+            "route_tv": 0.09062499999999996,
+            "valid_route_mass": [
+              0.103515625,
+              0.88671875
+            ],
+            "valid": 0.990234375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.7224571108818054,
+              0.6580971479415894
+            ],
+            "sw1": 0.04432235285639763
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.22265625,
+            "route_tv": 0.07734374999999999,
+            "valid_route_mass": [
+              0.767578125,
+              0.21875
+            ],
+            "valid": 0.986328125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.7270073294639587,
+              0.7678665518760681
+            ],
+            "sw1": 0.03634043410420418
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.86328125,
+            "route_tv": 0.06328124999999996,
+            "valid_route_mass": [
+              0.13671875,
+              0.861328125
+            ],
+            "valid": 0.998046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.931602954864502,
+              0.6301156878471375
+            ],
+            "sw1": 0.024555590003728867
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.24609375,
+            "route_tv": 0.05390624999999999,
+            "valid_route_mass": [
+              0.751953125,
+              0.2421875
+            ],
+            "valid": 0.994140625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.7277658581733704,
+              0.7624276876449585
+            ],
+            "sw1": 0.04531462863087654
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.8359375,
+            "route_tv": 0.035937499999999956,
+            "valid_route_mass": [
+              0.158203125,
+              0.833984375
+            ],
+            "valid": 0.9921875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.660889208316803,
+              0.6448943614959717
+            ],
+            "sw1": 0.02334325760602951
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.2578125,
+            "route_tv": 0.04218749999999999,
+            "valid_route_mass": [
+              0.724609375,
+              0.25390625
+            ],
+            "valid": 0.978515625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.696600615978241,
+              0.7932814359664917
+            ],
+            "sw1": 0.03017401322722435
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.86328125,
+            "route_tv": 0.06328124999999996,
+            "valid_route_mass": [
+              0.130859375,
+              0.16796875
+            ],
+            "valid": 0.298828125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.1241949796676636,
+              0.3843545913696289
+            ],
+            "sw1": 0.07979324460029602
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.255859375,
+            "route_tv": 0.04414062499999999,
+            "valid_route_mass": [
+              0.736328125,
+              0.03515625
+            ],
+            "valid": 0.771484375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.823401153087616,
+              0.5012398362159729
+            ],
+            "sw1": 0.05085122585296631
+          }
+        ]
+      }
+    }
+  },
+  {
+    "stage": "confirm_10k",
+    "name": "temporal_discrete",
+    "train_seconds": 124.7141174060016,
+    "gpu": "1",
+    "final": {
+      "train": {
+        "valid": 0.014404296875,
+        "collision": 0.25439453125,
+        "boundary_error": 0.13501250743865967,
+        "support_rmse": 0.08991281688213348,
+        "residual_rmse": 0.037302445620298386,
+        "route_tv": 0.06220703124999999,
+        "conditional_sw1": 0.09843484219163656,
+        "routes_covered": 1,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.890625,
+            "route_tv": 0.09062499999999996,
+            "valid_route_mass": [
+              0.0,
+              0.0
+            ],
+            "valid": 0.0,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.08672577887773514
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.298828125,
+            "route_tv": 0.001171874999999989,
+            "valid_route_mass": [
+              0.0,
+              0.0
+            ],
+            "valid": 0.0,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.11955137550830841
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.7890625,
+            "route_tv": 0.010937500000000044,
+            "valid_route_mass": [
+              0.0,
+              0.0
+            ],
+            "valid": 0.0,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.07758817076683044
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.193359375,
+            "route_tv": 0.10664062499999999,
+            "valid_route_mass": [
+              0.0,
+              0.0
+            ],
+            "valid": 0.0,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.12370085716247559
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.8984375,
+            "route_tv": 0.09843749999999996,
+            "valid_route_mass": [
+              0.0,
+              0.11328125
+            ],
+            "valid": 0.11328125,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              null,
+              0.9125218391418457
+            ],
+            "sw1": 0.07575517147779465
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.380859375,
+            "route_tv": 0.08085937500000001,
+            "valid_route_mass": [
+              0.0,
+              0.001953125
+            ],
+            "valid": 0.001953125,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.12821906805038452
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.87890625,
+            "route_tv": 0.07890624999999996,
+            "valid_route_mass": [
+              0.0,
+              0.0
+            ],
+            "valid": 0.0,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.08978760242462158
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.330078125,
+            "route_tv": 0.03007812500000001,
+            "valid_route_mass": [
+              0.0,
+              0.0
+            ],
+            "valid": 0.0,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.08615071326494217
+          }
+        ]
+      },
+      "test": {
+        "valid": 0.134765625,
+        "collision": 0.36474609375,
+        "boundary_error": 0.11461199820041656,
+        "support_rmse": 0.09427400678396225,
+        "residual_rmse": 0.03506649285554886,
+        "route_tv": 0.04946289062499998,
+        "conditional_sw1": 0.09628362022340298,
+        "routes_covered": 6,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.869140625,
+            "route_tv": 0.06914062499999996,
+            "valid_route_mass": [
+              0.0,
+              0.505859375
+            ],
+            "valid": 0.505859375,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              null,
+              1.0804803371429443
+            ],
+            "sw1": 0.06683889031410217
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.259765625,
+            "route_tv": 0.04023437499999999,
+            "valid_route_mass": [
+              0.0,
+              0.056640625
+            ],
+            "valid": 0.056640625,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              null,
+              1.0532968044281006
+            ],
+            "sw1": 0.09409304708242416
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.826171875,
+            "route_tv": 0.026171874999999956,
+            "valid_route_mass": [
+              0.0,
+              0.125
+            ],
+            "valid": 0.125,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              null,
+              1.4538253545761108
+            ],
+            "sw1": 0.050472091883420944
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.2265625,
+            "route_tv": 0.07343749999999999,
+            "valid_route_mass": [
+              0.0,
+              0.015625
+            ],
+            "valid": 0.015625,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.0948103740811348
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.876953125,
+            "route_tv": 0.07695312499999996,
+            "valid_route_mass": [
+              0.0,
+              0.33984375
+            ],
+            "valid": 0.33984375,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              null,
+              1.0465627908706665
+            ],
+            "sw1": 0.061856258660554886
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.306640625,
+            "route_tv": 0.006640625000000011,
+            "valid_route_mass": [
+              0.0,
+              0.03515625
+            ],
+            "valid": 0.03515625,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              null,
+              1.3543883562088013
+            ],
+            "sw1": 0.09966903924942017
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.87890625,
+            "route_tv": 0.07890624999999996,
+            "valid_route_mass": [
+              0.0,
+              0.0
+            ],
+            "valid": 0.0,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.1656593680381775
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.32421875,
+            "route_tv": 0.02421875000000001,
+            "valid_route_mass": [
+              0.0,
+              0.0
+            ],
+            "valid": 0.0,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.1368698924779892
+          }
+        ]
+      }
+    }
+  },
+  {
+    "stage": "scout_1k",
+    "name": "mlp_continuous",
+    "train_seconds": 10.55184336900129,
+    "gpu": "0",
+    "final": {
+      "train": {
+        "valid": 0.6943359375,
+        "collision": 0.16357421875,
+        "boundary_error": 0.04667817801237106,
+        "support_rmse": 0.043757736682891846,
+        "residual_rmse": 0.023921839892864227,
+        "route_tv": 0.09345703124999999,
+        "conditional_sw1": 0.06901635671965778,
+        "routes_covered": 16,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.943359375,
+            "route_tv": 0.14335937499999996,
+            "valid_route_mass": [
+              0.048828125,
+              0.69921875
+            ],
+            "valid": 0.748046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.7183078527450562,
+              0.49157145619392395
+            ],
+            "sw1": 0.10512169450521469
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.40625,
+            "route_tv": 0.10625000000000001,
+            "valid_route_mass": [
+              0.544921875,
+              0.267578125
+            ],
+            "valid": 0.8125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.635805606842041,
+              0.6430142521858215
+            ],
+            "sw1": 0.07170643657445908
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.9140625,
+            "route_tv": 0.11406249999999996,
+            "valid_route_mass": [
+              0.080078125,
+              0.37109375
+            ],
+            "valid": 0.451171875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.6345731019973755,
+              0.5160713791847229
+            ],
+            "sw1": 0.07318896800279617
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.3046875,
+            "route_tv": 0.004687500000000011,
+            "valid_route_mass": [
+              0.671875,
+              0.1171875
+            ],
+            "valid": 0.7890625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.0394054651260376,
+              0.2769230008125305
+            ],
+            "sw1": 0.033839236944913864
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.8046875,
+            "route_tv": 0.004687499999999956,
+            "valid_route_mass": [
+              0.064453125,
+              0.759765625
+            ],
+            "valid": 0.82421875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.3866308629512787,
+              1.1035295724868774
+            ],
+            "sw1": 0.026462869718670845
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.17578125,
+            "route_tv": 0.12421874999999999,
+            "valid_route_mass": [
+              0.396484375,
+              0.150390625
+            ],
+            "valid": 0.546875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.4370358884334564,
+              0.9986277222633362
+            ],
+            "sw1": 0.07589507102966309
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.744140625,
+            "route_tv": 0.055859375000000044,
+            "valid_route_mass": [
+              0.150390625,
+              0.67578125
+            ],
+            "valid": 0.826171875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.0411245822906494,
+              0.9690858125686646
+            ],
+            "sw1": 0.05053630471229553
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.10546875,
+            "route_tv": 0.19453125,
+            "valid_route_mass": [
+              0.474609375,
+              0.08203125
+            ],
+            "valid": 0.556640625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.6401157975196838,
+              0.8816758394241333
+            ],
+            "sw1": 0.11538027226924896
+          }
+        ]
+      },
+      "test": {
+        "valid": 0.860107421875,
+        "collision": 0.03076171875,
+        "boundary_error": 0.03894895687699318,
+        "support_rmse": 0.03662017732858658,
+        "residual_rmse": 0.023309919983148575,
+        "route_tv": 0.09770507812499998,
+        "conditional_sw1": 0.060207066126167774,
+        "routes_covered": 14,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.8359375,
+            "route_tv": 0.035937499999999956,
+            "valid_route_mass": [
+              0.15234375,
+              0.810546875
+            ],
+            "valid": 0.962890625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.709804654121399,
+              0.8198615312576294
+            ],
+            "sw1": 0.025868330150842667
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.201171875,
+            "route_tv": 0.09882812499999999,
+            "valid_route_mass": [
+              0.7734375,
+              0.171875
+            ],
+            "valid": 0.9453125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.7835142612457275,
+              1.159740924835205
+            ],
+            "sw1": 0.0448334738612175
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.8984375,
+            "route_tv": 0.09843749999999996,
+            "valid_route_mass": [
+              0.08984375,
+              0.875
+            ],
+            "valid": 0.96484375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.0372493267059326,
+              0.766114354133606
+            ],
+            "sw1": 0.03636762872338295
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.263671875,
+            "route_tv": 0.03632812499999999,
+            "valid_route_mass": [
+              0.708984375,
+              0.234375
+            ],
+            "valid": 0.943359375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.8342465162277222,
+              0.7420390248298645
+            ],
+            "sw1": 0.03715532273054123
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.837890625,
+            "route_tv": 0.037890624999999956,
+            "valid_route_mass": [
+              0.12890625,
+              0.80859375
+            ],
+            "valid": 0.9375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.7157899141311646,
+              0.9056216478347778
+            ],
+            "sw1": 0.02459593117237091
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.197265625,
+            "route_tv": 0.10273437499999999,
+            "valid_route_mass": [
+              0.755859375,
+              0.17578125
+            ],
+            "valid": 0.931640625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.6948466897010803,
+              0.9808390736579895
+            ],
+            "sw1": 0.05107983946800232
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.65234375,
+            "route_tv": 0.14765625000000004,
+            "valid_route_mass": [
+              0.30078125,
+              0.0
+            ],
+            "valid": 0.30078125,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              1.349152684211731,
+              null
+            ],
+            "sw1": 0.1310422420501709
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.076171875,
+            "route_tv": 0.223828125,
+            "valid_route_mass": [
+              0.89453125,
+              0.0
+            ],
+            "valid": 0.89453125,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              0.6846051216125488,
+              null
+            ],
+            "sw1": 0.13071376085281372
+          }
+        ]
+      }
+    }
+  },
+  {
+    "stage": "scout_1k",
+    "name": "mlp_discrete",
+    "train_seconds": 10.639125636000244,
+    "gpu": "1",
+    "final": {
+      "train": {
+        "valid": 0.697021484375,
+        "collision": 0.129638671875,
+        "boundary_error": 0.04425058141350746,
+        "support_rmse": 0.046675361692905426,
+        "residual_rmse": 0.02578757330775261,
+        "route_tv": 0.05253906249999998,
+        "conditional_sw1": 0.056608724407851696,
+        "routes_covered": 16,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.861328125,
+            "route_tv": 0.061328124999999956,
+            "valid_route_mass": [
+              0.08984375,
+              0.4140625
+            ],
+            "valid": 0.50390625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.294940233230591,
+              1.551005482673645
+            ],
+            "sw1": 0.07835331559181213
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.28515625,
+            "route_tv": 0.014843749999999989,
+            "valid_route_mass": [
+              0.51171875,
+              0.119140625
+            ],
+            "valid": 0.630859375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.2577029466629028,
+              2.5849251747131348
+            ],
+            "sw1": 0.04762016981840134
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.796875,
+            "route_tv": 0.0031250000000000444,
+            "valid_route_mass": [
+              0.154296875,
+              0.55859375
+            ],
+            "valid": 0.712890625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.671686887741089,
+              1.9007569551467896
+            ],
+            "sw1": 0.042609743773937225
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.169921875,
+            "route_tv": 0.130078125,
+            "valid_route_mass": [
+              0.740234375,
+              0.109375
+            ],
+            "valid": 0.849609375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.5869933366775513,
+              1.7320324182510376
+            ],
+            "sw1": 0.07178992033004761
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.849609375,
+            "route_tv": 0.049609374999999956,
+            "valid_route_mass": [
+              0.033203125,
+              0.81640625
+            ],
+            "valid": 0.849609375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.2350717782974243,
+              1.645185947418213
+            ],
+            "sw1": 0.04186655580997467
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.291015625,
+            "route_tv": 0.008984374999999989,
+            "valid_route_mass": [
+              0.26171875,
+              0.26171875
+            ],
+            "valid": 0.5234375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.161779761314392,
+              2.0677297115325928
+            ],
+            "sw1": 0.05757554620504379
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.8203125,
+            "route_tv": 0.020312499999999956,
+            "valid_route_mass": [
+              0.09375,
+              0.763671875
+            ],
+            "valid": 0.857421875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              3.042848587036133,
+              1.4555332660675049
+            ],
+            "sw1": 0.031386733055114746
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.16796875,
+            "route_tv": 0.13203125,
+            "valid_route_mass": [
+              0.517578125,
+              0.130859375
+            ],
+            "valid": 0.6484375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.9241089820861816,
+              1.3228847980499268
+            ],
+            "sw1": 0.08166781067848206
+          }
+        ]
+      },
+      "test": {
+        "valid": 0.724609375,
+        "collision": 0.07421875,
+        "boundary_error": 0.046814024448394775,
+        "support_rmse": 0.04666716605424881,
+        "residual_rmse": 0.026381846517324448,
+        "route_tv": 0.05981445312499997,
+        "conditional_sw1": 0.053137396927922964,
+        "routes_covered": 14,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.828125,
+            "route_tv": 0.028124999999999956,
+            "valid_route_mass": [
+              0.1328125,
+              0.740234375
+            ],
+            "valid": 0.873046875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.432480573654175,
+              1.815158486366272
+            ],
+            "sw1": 0.0383785143494606
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.19921875,
+            "route_tv": 0.10078124999999999,
+            "valid_route_mass": [
+              0.666015625,
+              0.162109375
+            ],
+            "valid": 0.828125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.7266744375228882,
+              2.1456730365753174
+            ],
+            "sw1": 0.04906424880027771
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.806640625,
+            "route_tv": 0.006640624999999956,
+            "valid_route_mass": [
+              0.14453125,
+              0.751953125
+            ],
+            "valid": 0.896484375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.66312575340271,
+              2.2226645946502686
+            ],
+            "sw1": 0.02654639258980751
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.171875,
+            "route_tv": 0.128125,
+            "valid_route_mass": [
+              0.712890625,
+              0.13671875
+            ],
+            "valid": 0.849609375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.669538140296936,
+              1.9258419275283813
+            ],
+            "sw1": 0.06498852372169495
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.822265625,
+            "route_tv": 0.022265624999999956,
+            "valid_route_mass": [
+              0.091796875,
+              0.775390625
+            ],
+            "valid": 0.8671875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.5988636016845703,
+              1.8565737009048462
+            ],
+            "sw1": 0.03283192962408066
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.26171875,
+            "route_tv": 0.03828124999999999,
+            "valid_route_mass": [
+              0.525390625,
+              0.21875
+            ],
+            "valid": 0.744140625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.5798799991607666,
+              2.202495574951172
+            ],
+            "sw1": 0.04233486205339432
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.82421875,
+            "route_tv": 0.024218749999999956,
+            "valid_route_mass": [
+              0.087890625,
+              0.0078125
+            ],
+            "valid": 0.095703125,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              2.774939775466919,
+              null
+            ],
+            "sw1": 0.09167632460594177
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.169921875,
+            "route_tv": 0.130078125,
+            "valid_route_mass": [
+              0.640625,
+              0.001953125
+            ],
+            "valid": 0.642578125,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              1.9891221523284912,
+              null
+            ],
+            "sw1": 0.0792783796787262
+          }
+        ]
+      }
+    }
+  },
+  {
+    "stage": "scout_1k",
+    "name": "temporal_continuous",
+    "train_seconds": 12.528267337002035,
+    "gpu": "0",
+    "final": {
+      "train": {
+        "valid": 0.203857421875,
+        "collision": 0.072509765625,
+        "boundary_error": 0.11065330356359482,
+        "support_rmse": 0.04913187026977539,
+        "residual_rmse": 0.026706546545028687,
+        "route_tv": 0.059765624999999975,
+        "conditional_sw1": 0.06623212527483702,
+        "routes_covered": 14,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.90625,
+            "route_tv": 0.10624999999999996,
+            "valid_route_mass": [
+              0.044921875,
+              0.11328125
+            ],
+            "valid": 0.158203125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.166867971420288,
+              1.639993667602539
+            ],
+            "sw1": 0.11350245028734207
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.357421875,
+            "route_tv": 0.05742187500000001,
+            "valid_route_mass": [
+              0.328125,
+              0.03125
+            ],
+            "valid": 0.359375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.0162070989608765,
+              2.914390802383423
+            ],
+            "sw1": 0.06673033535480499
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.896484375,
+            "route_tv": 0.09648437499999996,
+            "valid_route_mass": [
+              0.068359375,
+              0.17578125
+            ],
+            "valid": 0.244140625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.0431745052337646,
+              0.9503557682037354
+            ],
+            "sw1": 0.06139231473207474
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.287109375,
+            "route_tv": 0.012890624999999989,
+            "valid_route_mass": [
+              0.318359375,
+              0.029296875
+            ],
+            "valid": 0.34765625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.4302273988723755,
+              1.0847703218460083
+            ],
+            "sw1": 0.03798668086528778
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.810546875,
+            "route_tv": 0.010546874999999956,
+            "valid_route_mass": [
+              0.005859375,
+              0.158203125
+            ],
+            "valid": 0.1640625,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              null,
+              0.8882680535316467
+            ],
+            "sw1": 0.029202088713645935
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.2421875,
+            "route_tv": 0.05781249999999999,
+            "valid_route_mass": [
+              0.041015625,
+              0.05859375
+            ],
+            "valid": 0.099609375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              0.6395027041435242,
+              1.8213366270065308
+            ],
+            "sw1": 0.056037627160549164
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.806640625,
+            "route_tv": 0.006640624999999956,
+            "valid_route_mass": [
+              0.005859375,
+              0.1875
+            ],
+            "valid": 0.193359375,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              null,
+              0.7684371471405029
+            ],
+            "sw1": 0.0550604909658432
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.169921875,
+            "route_tv": 0.130078125,
+            "valid_route_mass": [
+              0.044921875,
+              0.01953125
+            ],
+            "valid": 0.064453125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.39609956741333,
+              0.40472984313964844
+            ],
+            "sw1": 0.10994501411914825
+          }
+        ]
+      },
+      "test": {
+        "valid": 0.69775390625,
+        "collision": 0.025634765625,
+        "boundary_error": 0.08368117362260818,
+        "support_rmse": 0.04241356998682022,
+        "residual_rmse": 0.02500508725643158,
+        "route_tv": 0.06157226562499998,
+        "conditional_sw1": 0.05520818964578211,
+        "routes_covered": 12,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.837890625,
+            "route_tv": 0.037890624999999956,
+            "valid_route_mass": [
+              0.14453125,
+              0.8203125
+            ],
+            "valid": 0.96484375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.8673934936523438,
+              1.0857805013656616
+            ],
+            "sw1": 0.028628354892134666
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.24609375,
+            "route_tv": 0.05390624999999999,
+            "valid_route_mass": [
+              0.724609375,
+              0.22265625
+            ],
+            "valid": 0.947265625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.1874830722808838,
+              1.9380207061767578
+            ],
+            "sw1": 0.03045159950852394
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.88671875,
+            "route_tv": 0.08671874999999996,
+            "valid_route_mass": [
+              0.091796875,
+              0.84765625
+            ],
+            "valid": 0.939453125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.9676141738891602,
+              1.2849435806274414
+            ],
+            "sw1": 0.033433787524700165
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.27734375,
+            "route_tv": 0.02265624999999999,
+            "valid_route_mass": [
+              0.697265625,
+              0.21875
+            ],
+            "valid": 0.916015625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.2632431983947754,
+              1.8618273735046387
+            ],
+            "sw1": 0.03294611722230911
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.8359375,
+            "route_tv": 0.035937499999999956,
+            "valid_route_mass": [
+              0.119140625,
+              0.802734375
+            ],
+            "valid": 0.921875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.0885344743728638,
+              1.1267359256744385
+            ],
+            "sw1": 0.02485014870762825
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.255859375,
+            "route_tv": 0.04414062499999999,
+            "valid_route_mass": [
+              0.666015625,
+              0.2265625
+            ],
+            "valid": 0.892578125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.143226981163025,
+              2.0941154956817627
+            ],
+            "sw1": 0.03431128337979317
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.767578125,
+            "route_tv": 0.032421875000000044,
+            "valid_route_mass": [
+              0.0,
+              0.0
+            ],
+            "valid": 0.0,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.11953645944595337
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.12109375,
+            "route_tv": 0.17890625,
+            "valid_route_mass": [
+              0.0,
+              0.0
+            ],
+            "valid": 0.0,
+            "routes_covered": 0,
+            "coefficient_variance_ratio": [
+              null,
+              null
+            ],
+            "sw1": 0.13750776648521423
+          }
+        ]
+      }
+    }
+  },
+  {
+    "stage": "scout_1k",
+    "name": "temporal_discrete",
+    "train_seconds": 13.00348123400181,
+    "gpu": "1",
+    "final": {
+      "train": {
+        "valid": 0.720458984375,
+        "collision": 0.131103515625,
+        "boundary_error": 0.03926049917936325,
+        "support_rmse": 0.04265498369932175,
+        "residual_rmse": 0.018957719206809998,
+        "route_tv": 0.062451171874999975,
+        "conditional_sw1": 0.056627837009727955,
+        "routes_covered": 16,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.8203125,
+            "route_tv": 0.020312499999999956,
+            "valid_route_mass": [
+              0.103515625,
+              0.53125
+            ],
+            "valid": 0.634765625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.8869988918304443,
+              2.0269880294799805
+            ],
+            "sw1": 0.05749326944351196
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.22265625,
+            "route_tv": 0.07734374999999999,
+            "valid_route_mass": [
+              0.65625,
+              0.138671875
+            ],
+            "valid": 0.794921875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.028839588165283,
+              4.112350940704346
+            ],
+            "sw1": 0.045715898275375366
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.822265625,
+            "route_tv": 0.022265624999999956,
+            "valid_route_mass": [
+              0.130859375,
+              0.412109375
+            ],
+            "valid": 0.54296875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              4.616866588592529,
+              1.4545365571975708
+            ],
+            "sw1": 0.055394478142261505
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.193359375,
+            "route_tv": 0.10664062499999999,
+            "valid_route_mass": [
+              0.732421875,
+              0.09375
+            ],
+            "valid": 0.826171875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.531212091445923,
+              1.0496340990066528
+            ],
+            "sw1": 0.0757104903459549
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.900390625,
+            "route_tv": 0.10039062499999996,
+            "valid_route_mass": [
+              0.03515625,
+              0.84375
+            ],
+            "valid": 0.87890625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.162822961807251,
+              1.8467172384262085
+            ],
+            "sw1": 0.06304358690977097
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.314453125,
+            "route_tv": 0.014453125000000011,
+            "valid_route_mass": [
+              0.296875,
+              0.26171875
+            ],
+            "valid": 0.55859375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              1.4132763147354126,
+              3.183028221130371
+            ],
+            "sw1": 0.054661259055137634
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.912109375,
+            "route_tv": 0.11210937499999996,
+            "valid_route_mass": [
+              0.04296875,
+              0.84375
+            ],
+            "valid": 0.88671875,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              3.2807846069335938,
+              1.6605737209320068
+            ],
+            "sw1": 0.04802027344703674
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.25390625,
+            "route_tv": 0.04609374999999999,
+            "valid_route_mass": [
+              0.44921875,
+              0.19140625
+            ],
+            "valid": 0.640625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.7711098194122314,
+              1.9990686178207397
+            ],
+            "sw1": 0.05298344045877457
+          }
+        ]
+      },
+      "test": {
+        "valid": 0.748046875,
+        "collision": 0.061279296875,
+        "boundary_error": 0.04220254346728325,
+        "support_rmse": 0.04252356290817261,
+        "residual_rmse": 0.019116176292300224,
+        "route_tv": 0.06372070312499997,
+        "conditional_sw1": 0.05058340495452285,
+        "routes_covered": 14,
+        "routes_total": 16,
+        "contexts": [
+          {
+            "context": 0,
+            "upper_target": 0.8,
+            "upper_observed": 0.859375,
+            "route_tv": 0.059374999999999956,
+            "valid_route_mass": [
+              0.095703125,
+              0.8125
+            ],
+            "valid": 0.908203125,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              3.510737895965576,
+              1.9867117404937744
+            ],
+            "sw1": 0.041434288024902344
+          },
+          {
+            "context": 1,
+            "upper_target": 0.3,
+            "upper_observed": 0.220703125,
+            "route_tv": 0.07929687499999999,
+            "valid_route_mass": [
+              0.7109375,
+              0.169921875
+            ],
+            "valid": 0.880859375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.3775665760040283,
+              2.912649631500244
+            ],
+            "sw1": 0.03998887538909912
+          },
+          {
+            "context": 2,
+            "upper_target": 0.8,
+            "upper_observed": 0.8359375,
+            "route_tv": 0.035937499999999956,
+            "valid_route_mass": [
+              0.111328125,
+              0.7890625
+            ],
+            "valid": 0.900390625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              4.252596855163574,
+              2.0660691261291504
+            ],
+            "sw1": 0.021252620965242386
+          },
+          {
+            "context": 3,
+            "upper_target": 0.3,
+            "upper_observed": 0.201171875,
+            "route_tv": 0.09882812499999999,
+            "valid_route_mass": [
+              0.681640625,
+              0.162109375
+            ],
+            "valid": 0.84375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.4032628536224365,
+              2.4032516479492188
+            ],
+            "sw1": 0.06528136879205704
+          },
+          {
+            "context": 4,
+            "upper_target": 0.8,
+            "upper_observed": 0.876953125,
+            "route_tv": 0.07695312499999996,
+            "valid_route_mass": [
+              0.08203125,
+              0.830078125
+            ],
+            "valid": 0.912109375,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.136256456375122,
+              2.0108673572540283
+            ],
+            "sw1": 0.04702138900756836
+          },
+          {
+            "context": 5,
+            "upper_target": 0.3,
+            "upper_observed": 0.27734375,
+            "route_tv": 0.02265624999999999,
+            "valid_route_mass": [
+              0.6171875,
+              0.236328125
+            ],
+            "valid": 0.853515625,
+            "routes_covered": 2,
+            "coefficient_variance_ratio": [
+              2.1192116737365723,
+              3.245319366455078
+            ],
+            "sw1": 0.03200947865843773
+          },
+          {
+            "context": 6,
+            "upper_target": 0.8,
+            "upper_observed": 0.919921875,
+            "route_tv": 0.11992187499999996,
+            "valid_route_mass": [
+              0.0546875,
+              0.03515625
+            ],
+            "valid": 0.08984375,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              2.7169392108917236,
+              1.5335663557052612
+            ],
+            "sw1": 0.10749602317810059
+          },
+          {
+            "context": 7,
+            "upper_target": 0.3,
+            "upper_observed": 0.283203125,
+            "route_tv": 0.01679687499999999,
+            "valid_route_mass": [
+              0.587890625,
+              0.0078125
+            ],
+            "valid": 0.595703125,
+            "routes_covered": 1,
+            "coefficient_variance_ratio": [
+              2.523329257965088,
+              null
+            ],
+            "sw1": 0.05018319562077522
+          }
+        ]
+      }
+    }
+  }
+]

@@ -1,5 +1,8 @@
 # Conditional trajectories with Particle DDGAN
 
+**Geometry × discriminator round complete:** [results and interpretation](diversity/READOUT.md),
+[interactive comparison](diversity/confirm_10k/index.html).
+
 **First round complete:** [results and interpretation](READOUT.md),
 [interactive gallery](round1/index.html), [leaderboard](round1/TABLE.md).
 

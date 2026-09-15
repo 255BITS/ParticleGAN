@@ -33,6 +33,44 @@ class TrajectoryTests(unittest.TestCase):
         geom = torch.tensor([[0., 0., .27]])
         self.assertLess(float(self.toy.diagnose(x, geom)["clearance"]), 0)
 
+    def test_continuous_geometry_support_and_holdout(self):
+        toy = Routes(geometry_mode="continuous")
+        c, geom, x = toy.batch(8192, self.rng)
+        self.assertTrue(bool(toy.diagnose(x, geom)["valid"].all()))
+        self.assertTrue(bool((geom >= torch.tensor([-.2, -.12, .22])).all()))
+        self.assertTrue(bool((geom <= torch.tensor([.2, .12, .32])).all()))
+        self.assertEqual(len(geom.unique(dim=0)), len(geom))
+        cc, gg = toy.contexts("test")
+        dc, dg = self.toy.contexts("test")
+        torch.testing.assert_close(cc, dc)
+        torch.testing.assert_close(gg, dg)
+        self.assertTrue(bool((gg[-1] > geom.max(0).values).all()))
+        self.assertFalse(bool((geom[:, None] == gg[None]).all(2).any()))
+        self.assertEqual(set(c.tolist()), {0, 1})
+
+    def test_temporal_discriminator_ucd_and_double_backward(self):
+        cfg = {**DEFAULTS, "d_architecture": "temporal"}
+        d = TrajectoryDiscriminator(cfg)
+        baseline = TrajectoryDiscriminator(DEFAULTS)
+        self.assertLess(abs(sum(p.numel() for p in d.parameters()) /
+                            sum(p.numel() for p in baseline.parameters()) - 1), .05)
+        c, geom, x = self.toy.batch(8, self.rng)
+        context = self.toy.condition(geom)
+        t = torch.arange(8) % 4 + 1
+        real, xt = DiffusionSchedule(cfg["alpha_bar"]).forward_pair(x, t, self.rng)
+        torch.testing.assert_close(d(real, c, context, xt, t)[1],
+                                   d(real, 1-c, context, xt, 5-t)[1])
+        candidate = real.detach().requires_grad_()
+        grad = torch.autograd.grad(d(candidate, c, context, xt, t)[0].sum(), candidate)[0]
+        self.assertTrue(bool(torch.isfinite(grad).all()))
+        self.assertGreater(float(grad.norm()), 0)
+        reg = GradRegularizer("b_cap", 1., kappa=0., lazy_k=4)
+        penalty, _ = reg.penalty(TrajectoryCritic(d, c, context, xt, t), real, real+.1,
+                                 4, self.rng, collect_stats=False)
+        penalty.backward()
+        self.assertTrue(all(p.grad is None or bool(torch.isfinite(p.grad).all()) for p in d.parameters()))
+        self.assertGreater(float(d.stages[0][0].weight.grad.norm()), 0)
+
     def test_metrics_detect_collapse_and_invalid_paths(self):
         c = torch.zeros(512, dtype=torch.long)
         geom = torch.tensor([[0., 0., .27]]).expand(512, -1)
@@ -88,7 +126,8 @@ class TrajectoryTests(unittest.TestCase):
 
     def test_validation(self):
         validate(DEFAULTS)
-        for override in ({"length": 63}, {"model": "diffusion"}, {"prior": "bad"}, {"steps": 0}):
+        for override in ({"length": 63}, {"model": "diffusion"}, {"prior": "bad"}, {"steps": 0},
+                         {"geometry_mode": "bad"}, {"d_architecture": "bad"}, {"d_temporal_width": 0}):
             with self.assertRaises(ValueError):
                 validate({**DEFAULTS, **override})
 

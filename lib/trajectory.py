@@ -20,7 +20,10 @@ class Routes:
                      (.1, -.06, .29), (.3, .18, .35)]
     upper_probability = (.8, .3)
 
-    def __init__(self, length=64, device="cpu"):
+    def __init__(self, length=64, device="cpu", geometry_mode="discrete"):
+        if geometry_mode not in ("discrete", "continuous"):
+            raise ValueError(geometry_mode)
+        self.geometry_mode = geometry_mode
         self.length, self.device = length, device
         self.s = torch.linspace(0, 1, length, device=device)
         s = self.s
@@ -63,6 +66,13 @@ class Routes:
         return x + torch.einsum("nk,kct->nct", coeff, self.basis), route
 
     def batch(self, n, rng):
+        if self.geometry_mode == "continuous":
+            # Same coordinate bounds as the original four geometries. Fixed
+            # evaluation contexts stay unchanged; scene 4 remains outside.
+            c = torch.randint(2, (n,), device=self.device, generator=rng)
+            geom = torch.rand(n, 3, device=self.device, generator=rng)
+            geom = geom * geom.new_tensor([.4, .24, .10]) + geom.new_tensor([-.2, -.12, .22])
+            return c, geom, self.sample(c, geom, rng)[0]
         c, geom = self.contexts("train")
         i = torch.randint(len(c), (n,), device=geom.device, generator=rng)
         x, _ = self.sample(c[i], geom[i], rng)
@@ -145,18 +155,44 @@ class TrajectoryDiscriminator(nn.Module):
         extra = (2 + self.steps) if self.mode == "concat" else 0
         inp = 2 * cfg["length"] * (2 if self.diffusion else 1) + 18 + extra
         w = cfg["d_width"]
-        self.net = nn.Sequential(nn.Linear(inp, w), nn.LeakyReLU(.2),
+        self.architecture = cfg.get("d_architecture", "mlp")
+        if self.architecture == "temporal":
+            tw = cfg.get("d_temporal_width", 64)
+            channels = 2 * (2 if self.diffusion else 1) + 1
+            self.stages = nn.ModuleList([
+                nn.Sequential(nn.Conv1d(channels, tw, 5, padding=2), nn.LeakyReLU(.2)),
+                nn.Sequential(nn.Conv1d(tw, 2*tw, 5, stride=2, padding=2), nn.LeakyReLU(.2)),
+                nn.Sequential(nn.Conv1d(2*tw, 2*tw, 5, stride=2, padding=2), nn.LeakyReLU(.2)),
+            ])
+            self.register_buffer("position", torch.linspace(-1, 1, cfg["length"])[None, None])
+            self.net = nn.Sequential(nn.Linear(20*tw + 18 + extra, w//4), nn.LeakyReLU(.2),
+                                     nn.Linear(w//4, self.heads if self.mode == "ucd" else 1))
+        elif self.architecture == "mlp":
+            self.net = nn.Sequential(nn.Linear(inp, w), nn.LeakyReLU(.2),
                                  nn.Linear(w, w), nn.LeakyReLU(.2),
                                  nn.Linear(w, w), nn.LeakyReLU(.2),
                                  nn.Linear(w, self.heads if self.mode == "ucd" else 1))
+        else:
+            raise ValueError(self.architecture)
 
     def ucd_labels(self, c, t):
         return (t - 1) * 2 + c if self.diffusion else c
 
     def forward(self, x, c, context, xt=None, t=None):
-        pieces = [x.flatten(1), context]
-        if self.diffusion:
-            pieces.append(xt.flatten(1))
+        if self.architecture == "temporal":
+            inputs = [x, self.position.expand(len(x), -1, -1)]
+            if self.diffusion:
+                inputs.append(xt)
+            h = torch.cat(inputs, 1)
+            pieces = []
+            for stage in self.stages:
+                h = stage(h)
+                pieces.append(F.adaptive_avg_pool1d(h, 4).flatten(1))
+            pieces.append(context)
+        else:
+            pieces = [x.flatten(1), context]
+            if self.diffusion:
+                pieces.append(xt.flatten(1))
         if self.mode == "concat":
             pieces.extend([F.one_hot(c, 2).to(x), F.one_hot(t - 1, self.steps).to(x) if self.diffusion else x.new_zeros(len(x), self.steps)])
         logits = self.net(torch.cat(pieces, 1))
