@@ -77,8 +77,10 @@ class ImageGenerator(nn.Module):
     def forward(self, z, c, xt, t):
         e = self.embed(z) + self.cls(c) + self.time(t)
         h, skips = self.input(xt), []
-        for block, attention in zip(self.enc, self.enc_attention):
+        for i, (block, attention) in enumerate(zip(self.enc, self.enc_attention)):
             h = attention(block(h, e))
+            if i == len(self.enc) - 1:
+                h = self.transform_encoded(h, z, c, t)
             skips.append(h)
             h = F.avg_pool2d(h, 2)
         h = self.mid(h, e)
@@ -86,6 +88,9 @@ class ImageGenerator(nn.Module):
             h = F.interpolate(h, scale_factor=2, mode='nearest')
             h = attention(block(torch.cat([h, skip], 1), e))
         return self.output(F.leaky_relu(h, .2)).tanh()
+
+    def transform_encoded(self, h, z, c, t):
+        return h
 
 
 class ImageDiscriminator(nn.Module):
@@ -137,6 +142,7 @@ def sample_images(g, prior, schedule, c, rng):
 @torch.no_grad()
 def update_ema(target, source, decay):
     for a, b in zip(target.parameters(), source.parameters()):
-        a.lerp_(b, 1 - decay)
+        if b.requires_grad:
+            a.lerp_(b, 1 - decay)
     for a, b in zip(target.buffers(), source.buffers()):
         a.copy_(b)

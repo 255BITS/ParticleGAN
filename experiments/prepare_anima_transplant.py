@@ -1,0 +1,91 @@
+#!/usr/bin/env python
+"""Fetch only selected Anima tensors, with a pinned revision and byte hashes.
+
+No pickle is downloaded or executed. The remote file is safetensors; the local
+torch bundle contains tensors and primitive metadata and loads weights_only.
+"""
+import argparse
+import hashlib
+import json
+import math
+from pathlib import Path
+import struct
+import urllib.request
+
+import torch
+
+REPO = 'circlestone-labs/Anima'
+REVISION = 'f973fc41ec7545364ac9776c2440285f43ff2a30'
+FILENAME = 'split_files/diffusion_models/anima-base-v1.0.safetensors'
+
+
+def read_range(url, start, length):
+    request = urllib.request.Request(url + f'?range={start}-{length}',
+                                    headers={'Range': f'bytes={start}-{start+length-1}'})
+    with urllib.request.urlopen(request, timeout=120) as response:
+        if response.status != 206:
+            raise RuntimeError('Server must support byte ranges; refusing full download')
+        expected = f'bytes {start}-{start+length-1}/'
+        if not response.headers.get('Content-Range', '').startswith(expected):
+            raise RuntimeError('Unexpected HTTP byte range')
+        data = response.read(length + 1)
+    if len(data) != length:
+        raise RuntimeError('Incomplete HTTP byte range')
+    return data
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--blocks', type=int, nargs='+', default=[0, 1])
+    parser.add_argument('--out', default='data/anima/blocks_0_1.pt')
+    args = parser.parse_args()
+    out = Path(args.out)
+    if out.exists():
+        raise FileExistsError(out)
+    url = f'https://huggingface.co/{REPO}/resolve/{REVISION}/{FILENAME}'
+    size = struct.unpack('<Q', read_range(url, 0, 8))[0]
+    if size > 10_000_000:
+        raise ValueError('Unexpected header size')
+    raw = read_range(url, 8, size)
+    header = json.loads(raw)
+    prefixes = [f'net.blocks.{i}.' for i in args.blocks]
+    prefixes += ['net.t_embedder.', 'net.t_embedding_norm.']
+    selected = {k: v for k, v in header.items() if any(k.startswith(p) for p in prefixes)}
+    if not all(any(k.startswith(p) for k in selected) for p in prefixes):
+        raise ValueError('Missing selected tensor group')
+    # Merge adjacent selected tensors; do not transfer the text adapter or other blocks.
+    spans = []
+    for k, v in sorted(selected.items(), key=lambda item: item[1]['data_offsets'][0]):
+        a, b = v['data_offsets']
+        if spans and a == spans[-1][1]:
+            spans[-1][1] = b
+            spans[-1][2].append(k)
+        else:
+            spans.append([a, b, [k]])
+    tensors, hashes = {}, {}
+    dtypes = {'BF16': torch.bfloat16, 'F16': torch.float16, 'F32': torch.float32}
+    for lo, hi, names in spans:
+        print(f'FETCH {len(names)} tensors, {(hi-lo)/1e6:.1f} MB', flush=True)
+        payload = read_range(url, 8 + size + lo, hi - lo)
+        for k in names:
+            spec = selected[k]
+            a, b = spec['data_offsets']
+            data = bytearray(payload[a-lo:b-lo])
+            hashes[k] = hashlib.sha256(data).hexdigest()
+            tensor = torch.frombuffer(data, dtype=dtypes[spec['dtype']]).clone()
+            if tensor.numel() != math.prod(spec['shape']):
+                raise ValueError(f'Invalid shape for {k}')
+            tensors[k.removeprefix('net.')] = tensor.reshape(spec['shape'])
+    metadata = {'repository': REPO, 'revision': REVISION, 'filename': FILENAME,
+                'blocks': args.blocks, 'header_sha256': hashlib.sha256(raw).hexdigest(),
+                'tensor_sha256': hashes}
+    out.parent.mkdir(parents=True, exist_ok=True)
+    torch.save({'tensors': tensors, 'metadata': metadata}, out.with_suffix('.tmp'))
+    out.with_suffix('.tmp').replace(out)
+    digest = hashlib.file_digest(out.open('rb'), 'sha256').hexdigest()
+    out.with_suffix('.json').write_text(json.dumps({**metadata, 'bundle_sha256': digest}, indent=2) + '\n')
+    print(f'COMPLETE {out} sha256={digest}', flush=True)
+
+
+if __name__ == '__main__':
+    main()

@@ -144,7 +144,10 @@ class PretrainedFeatureDiscriminator(nn.Module):
 
 
 def build_models(cfg):
-    if cfg['architecture'] == 'ncsnpp':
+    if cfg['architecture'] == 'anima_transplant':
+        from lib.image_anima import AnimaTransplantGenerator
+        g = AnimaTransplantGenerator(cfg)
+    elif cfg['architecture'] == 'ncsnpp':
         from lib.image_ncsnpp import NCSNppParticleGenerator
         g = NCSNppParticleGenerator(cfg)
     else:

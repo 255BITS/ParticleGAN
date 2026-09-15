@@ -1,39 +1,29 @@
-# Next round: preserve the best point before another architecture jump
+# Next round after the Anima transplant
 
-The [attention and duration round](attention_duration/READOUT.md) is complete.
-Plain U-Net: final FID50k25.397 at50k,45.73 training minutes.
-Attention U-Net: final FID50k26.334 at50k,53.09 training minutes.
-Attention improved the10k scout (29.327 versus historical31.555), and its best
-5k-sample diagnostic was27.799 at30k, before worsening to30.792 at50k.
-Plain U-Net's best diagnostic was29.379 at50k. Do not compare diagnostic
-5k-sample FID numerically with final50k-sample FID as equal estimators.
+The [Anima round](anima/READOUT.md) completed all six runs on both GPUs.
+Pretrained two-block transplant: FID50k 30.263 at 10k,19.98 training minutes.
+Matched frozen random control:32.550,20.82 minutes.
+Historical attention U-Net:29.327,10.73 minutes; plain U-Net:31.555,9.22 minutes.
+The weights help this transplant, but the architecture has not earned promotion.
 
-Keep the plain U-Net no-argument default, exact lazy-4 bcap, cached frozen
-ResNet18 conditioning features, fused Adam, batch64 and constant LR. The longer
-baseline config is configs/cifar_ddgan/duration_50k/baseline.yaml. It has already
-completed; use a fresh output path for a new experiment. Attention remains
-optional via g_attn_resolutions:[8,16], with g_heads:4. Core ParticleGAN/DDGAN,
-joint UCD, particles, Gaussian step noise and regularizer formulation are intact.
+The user rejected learning-rate decay because of its tuning burden. Keep
+constant rates; the previous decay proposal is withdrawn. Preserve the current
+four-step ParticleGAN DDGAN, joint time/class UCD, Gaussian step noise, exact
+lazy-4 bcap, VICReg and optimizer recipe. No seed-only repeats.
 
-The useful next proposal is:
-1. Save periodic/best checkpoints so a promising intermediate point can be
-   evaluated at50k generated samples. Current checkpoint.pt holds only the last
-   evaluation; attention30k weights were overwritten, although grids remain.
-2. Validate attention around30k and test a gentler learning-rate tail against
-   constant LR. The trajectory motivates this test, but does not prove that
-   annealing helps or that the late regression is overfitting.
-3. Rank final50k-sample FID, training time and trajectories. Do not promote from
-   a selected diagnostic minimum or an attractive1k result alone.
+If continuing the transplant direction, test one frozen donor block against
+its matched frozen random control to see whether the gain survives at lower
+cost. Do not infer that the whole 2B model should be trained or loaded into G.
+This is only a proposal: no further runs are active or queued.
 
-These are proposals, not queued work. Both GPUs are free. All four experiments
-from this round completed successfully. No seed-only repeats; maintain fresh
-YAMLs, source provenance and tail-friendly logs. The user wants experiment
-updates only after completion. Avoid extra runtime check-ins.
+The established cheap baseline remains plain U-Net; optional attention is still
+our best10k scout. Plain50k FID 25.397 is the best certified longer-budget score.
+The overwritten attention30k checkpoint is still unavailable; no checkpoint
+retention change was made in this round.
 
-Historical logs:
-tail -F results/cifar_ddgan/duration.live.log results/cifar_ddgan/attention.live.log
+Current work is on experiment/anima-transplant, based on edcdb14. See
+[runbook](RUNBOOK.md), [transplant design](anima/PLAN.md), and the full configs
+in configs/cifar_ddgan/anima_{profile,1k,10k}. Use fresh out_dirs and explicitly
+pass --workers_per_gpu 1. The user wants run updates only after completion.
 
-The earlier capacity round did not support G-width doubling or ResNet34.
-FD remains experimental and is not promoted; retain the existing bcap objective.
-NCSN++ optimization failed10k validation; do not automatically resume its old
-restart-interrupted run. No1200-epoch training is proposed.
+Historical tail: tail -F results/cifar_ddgan/anima.live.log

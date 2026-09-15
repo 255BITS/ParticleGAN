@@ -1,19 +1,30 @@
-# CIFAR handoff: attention and longer baseline completed
+# CIFAR handoff: frozen Anima transplant completed
 
-Read [latest results](attention_duration/READOUT.md) and
-[50k leaderboard](attention_duration/finals/TABLE.md).
-All four new runs completed and are certified; no jobs are running or queued.
-Both GPUs are free. The user wants experiment updates only after completion.
+Read [latest results](anima/READOUT.md), [10k leaderboard](anima/promotions/TABLE.md),
+and [design](anima/PLAN.md). Branch: experiment/anima-transplant, based on edcdb14.
+Six new runs completed and certified: two 128-update profiles, two 1k scouts,
+two 10k validations. No active or queued jobs; both GPUs are free.
+
+At 10k, pretrained donor FID50k 30.263 versus frozen random 32.550. Training time
+19.98/20.82min. This supports transfer within the matched pair, but historical
+attention remains better/faster (29.327,10.73min). No default promotion.
+Two frozen Anima-Base blocks attach to the existing U-Net 8x8 grid; only U-Net
+and new image/particle/class adapters train. No VAE/text pipeline or new loss.
+Donor weights are pinned/hashed in data/anima/blocks_0_1.pt, not committed.
+
+The user explicitly rejected learning-rate decay. Keep constant rates; the
+previous decay experiment proposal is withdrawn. Run updates only after
+completion, no seed repeats, one worker per GPU.
 
 ## Current result and defaults
 
-Plain U-Net32 + frozen ResNet18 D reaches FID25.397 at50k in45.73 training
-minutes (48.27 total). The older every-step50k baseline was26.680 in99.34
+Plain U-Net32 + frozen ResNet18 D reaches FID 25.397 at 50k in 45.73 training
+minutes (48.27 total). The older every-step50k baseline was26.680 in 99.34
 training minutes. The fast recipe is now validated at the longer budget.
 
 Attention improves the10k scout to29.327 (historical plain baseline31.555),
-but its50k endpoint is26.334 in53.09 training minutes. Attention's best5k-sample
-diagnostic is27.799 at30k, followed by regression. Plain U-Net recovers from
+but its50k endpoint is26.334 in 53.09 training minutes. Attention's best5k-sample
+diagnostic is27.799 at 30k, followed by regression. Plain U-Net recovers from
 a30k setback and finishes with its best diagnostic29.379. These are5k-sample
 diagnostics, not interchangeable with final50k-sample scores.
 
@@ -39,16 +50,14 @@ All sources were held fixed while training. Saved source/config are authoritativ
 for strict reproduction; do not overwrite completed outputs or alter checkpoints
 and claim an exact resume.
 
-Next proposal is in [NEXT_ROUND.md](NEXT_ROUND.md): retain periodic/best
-checkpoints, validate attention near30k with final FID50k, then compare a gentler
-LR tail with constant LR. Not queued. The current trainer overwrites checkpoint.pt;
-attention30k weights are gone, so we cannot retrospectively certify that point.
+The next optional proposal is a one-block transplant with a matched random
+control to test whether the modest transfer gain can be retained more cheaply.
+See [NEXT_ROUND.md](NEXT_ROUND.md). Nothing is queued. The trainer still
+overwrites checkpoint.pt; the old attention30k weights remain unavailable.
 
-Tail historical logs:
-tail -F results/cifar_ddgan/duration.live.log results/cifar_ddgan/attention.live.log
-
-Always pass --workers_per_gpu1 for independent CIFAR jobs. Use both GPUs when
-useful, preserve sample exposure if batch changes, and do not run seed sweeps.
+Full Anima configs: configs/cifar_ddgan/anima_{profile,1k,10k}/*.yaml.
+Historical tail: tail -F results/cifar_ddgan/anima.live.log
+Always pass --workers_per_gpu 1. Preserve exposure if changing batch size.
 
 ## Earlier evidence and validation
 
@@ -60,10 +69,11 @@ No alternate bcap objectives or broad FD search is planned.
 NCSN++ full-bundle10k failed with FID161.587; do not resume the old interrupted
 50k run automatically. Its early1k benefit did not validate.
 
-This round:38 tests plus13 subtests passed before launch, then all four actual
-GPU runs completed. No architecture default promotion. The optional empty
-attention field is now included in DEFAULTS and default.yaml.
+This round: 51 CPU tests plus 13 subtests passed, with both full-size GPU
+adapter/gradient/frozen-weight checks passing before scouts. All six actual
+runs certified. Final checkpoint audits confirmed every pretrained donor
+parameter in G and EMA unchanged from the source. No generator default
+promotion. Optional Anima keys are included in DEFAULTS/default.yaml.
 
-The preceding speed-round commit is d42abb2. This commit records the completed
-capacity and attention rounds. Preserve unrelated .claude/ and sparse-ucd.log.
-The user requested a local commit before compaction; no push requested.
+The implementation and reports live on the experimental branch. Do not merge
+or push automatically. Preserve unrelated .claude/ and sparse-ucd.log.

@@ -1,5 +1,5 @@
 model: ddgan
-architecture: unet
+architecture: anima_transplant
 d_mode: ucd
 prior: learned
 noise: gaussian
@@ -9,8 +9,8 @@ g_depth: 6
 g_heads: 4
 spatial_channels: 16
 g_attn_resolutions: []
-anima_weights: ''
-anima_weights_sha256: ''
+anima_weights: data/anima/blocks_0_1.pt
+anima_weights_sha256: 012531080b7181c4134e5d5611ac2473529d42e8ecec9c2541146442a53dc063
 anima_blocks:
 - 0
 - 1
@@ -34,7 +34,7 @@ reg_method: autograd
 reg_every: 4
 reg_fd_eps: 0.05
 reg_sync_stats: false
-profile_start: 100
+profile_start: 32
 profile_steps: 0
 seed: 24002
 classes: 10
@@ -75,4 +75,4 @@ eval_batch_size: 128
 save_checkpoint: true
 data_dir: data
 fid_cache: results/cifar_ddgan/fid_cache
-out_dir: results/cifar_ddgan/default
+out_dir: results/cifar_ddgan/anima_10k/pretrained

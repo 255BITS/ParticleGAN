@@ -1,6 +1,13 @@
 # CIFAR-10 U-Net DDGAN baseline
 
-Latest completed round: the fast plain U-Net reaches **FID 25.397 at 50k
+Latest completed round: the [Anima transplant](anima/READOUT.md) reaches
+FID50k 30.263 at 10k, versus32.550 for its matched frozen random control. It
+takes19.98 training minutes and does not beat the faster attention U-Net29.327.
+The experiment lives on `experiment/anima-transplant`; no defaults promoted.
+The user explicitly wants constant learning rates; the decay proposal is withdrawn.
+All six new runs completed; both GPUs are free.
+
+The preceding round: the fast plain U-Net reaches **FID 25.397 at 50k
 updates in 45.73 training minutes**. Attention improves the 10k scout to
 29.327, but finishes 50k at 26.334 in 53.09 minutes. Its diagnostic FID is best
 at 30k and then worsens. See [attention and duration results](attention_duration/READOUT.md).
@@ -88,7 +95,7 @@ Real/fake cross-entropies have coefficient .02. The bcap
 penalty differentiates only the candidate image, with class/time/xt fixed.
 Shared repo loss/regularizer implementations preserve the toy Rp logistic,
 bcap coefficient/kappa 1, unique-row latent VICReg 1, Adam (0,.999), LR .0006,
-D multiplier1.5, prior multiplier10 and EMA.995. `lr_floor: 1` keeps all rates
+D multiplier1.5, prior multiplier10 and EMA .995. `lr_floor: 1` keeps all rates
 constant; setting it below1 enables delayed cosine decay. No reconstruction/diffusion MSE was
 added. Training uses float32 with TF32 enabled for throughput.
 

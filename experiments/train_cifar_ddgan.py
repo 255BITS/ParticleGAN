@@ -33,6 +33,8 @@ DEFAULTS = {
     'ucd_target': 'time_class',
     'd_backbone': 'pretrained_resnet18', 'g_depth': 6, 'g_heads': 4, 'spatial_channels': 16,
     'g_attn_resolutions': [],
+    'anima_weights': '', 'anima_weights_sha256': '', 'anima_blocks': [0, 1],
+    'anima_init': 'pretrained', 'anima_dtype': 'bfloat16', 'anima_context_tokens': 4,
     'ncsnpp_ch_mult': [1, 2, 2, 2], 'ncsnpp_res_blocks': 2,
     'ncsnpp_attn_resolutions': [16], 'ncsnpp_z_emb_dim': 256, 'ncsnpp_n_mlp': 4,
     'cache_condition': True, 'channels_last': False, 'fused_adam': True,
@@ -76,8 +78,11 @@ def validate(cfg):
     target = cfg.get('ucd_target', 'class')
     if target not in ('class', 'time_class') or (target == 'time_class' and cfg['d_mode'] != 'ucd'):
         raise ValueError('time_class requires a UCD discriminator')
-    if cfg['model'] != 'ddgan' or cfg['architecture'] not in ('unet', 'flat_hybrid', 'ncsnpp') or cfg['noise'] != 'gaussian':
+    if cfg['model'] != 'ddgan' or cfg['architecture'] not in ('unet', 'flat_hybrid', 'ncsnpp', 'anima_transplant') or cfg['noise'] != 'gaussian':
         raise ValueError('Image trainer requires DDGAN with Gaussian step noise and a supported architecture')
+    if cfg['architecture'] == 'anima_transplant':
+        from lib.image_anima import validate_anima
+        validate_anima(cfg)
     if cfg.get('d_backbone', 'pixel') not in ('pixel', 'pretrained_resnet18', 'pretrained_resnet34'):
         raise ValueError('invalid D backbone')
     if cfg.get('d_backbone') in ('pretrained_resnet18', 'pretrained_resnet34') and (target != 'time_class' or cfg['d_mode'] != 'ucd'):
@@ -174,10 +179,14 @@ def train(cfg, resume=None):
     if hasattr(d, 'pretrained_metadata'):
         env['pretrained_D'] = d.pretrained_metadata
         write_json(out / 'environment.json', env)
+    if hasattr(g, 'pretrained_metadata'):
+        env['pretrained_G'] = g.pretrained_metadata
+        env['precision'] = 'float32 with ' + cfg['anima_dtype'] + ' frozen G donor matrix operations'
+        write_json(out / 'environment.json', env)
     prior = DrawSource(cfg['prior'], cfg['num_particles'], cfg['z_dim'], cfg['seed'] + 101, device)
     initial_prior = prior.table.detach().clone()
     eg, ep = copy.deepcopy(g).eval().requires_grad_(False), copy.deepcopy(prior).requires_grad_(False)
-    groups = [{'params': list(g.parameters()), 'lr': cfg['lr']}]
+    groups = [{'params': [p for p in g.parameters() if p.requires_grad], 'lr': cfg['lr']}]
     if cfg['prior'] == 'learned':
         groups.append({'params': list(prior.parameters()), 'lr': cfg['lr'] * cfg['prior_lr_mult']})
     og = torch.optim.Adam(groups, betas=(cfg['beta1'], .999), fused=cfg.get('fused_adam', False))

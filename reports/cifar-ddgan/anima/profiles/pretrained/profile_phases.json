@@ -1,0 +1,10 @@
+{
+  "D_data_fake_condition": 23.18947172164917,
+  "D_adversarial_forward": 6.7128719091415405,
+  "D_penalty_forward_input_grad": 3.9135760774370283,
+  "D_backward_optimizer": 18.207712054252625,
+  "G_data_forward_condition": 22.513240337371826,
+  "G_critic_loss": 7.192247986793518,
+  "G_backward_optimizer": 33.02803993225098,
+  "EMA": 0.32766400277614594
+}
