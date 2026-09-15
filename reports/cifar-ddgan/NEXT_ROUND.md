@@ -1,39 +1,30 @@
-# Next round: preserve the best point before another architecture jump
+# Next session: return to the baseline after Anima experiments
 
-The [attention and duration round](attention_duration/READOUT.md) is complete.
-Plain U-Net: final FID50k25.397 at50k,45.73 training minutes.
-Attention U-Net: final FID50k26.334 at50k,53.09 training minutes.
-Attention improved the10k scout (29.327 versus historical31.555), and its best
-5k-sample diagnostic was27.799 at30k, before worsening to30.792 at50k.
-Plain U-Net's best diagnostic was29.379 at50k. Do not compare diagnostic
-5k-sample FID numerically with final50k-sample FID as equal estimators.
+Start with [ANIMA_HANDOFF.md](ANIMA_HANDOFF.md). The Anima feature branch is
+committed through 5102d8c, and work has returned to master without merging its
+experimental code. All twelve processes across the frozen/trainable rounds
+completed; both GPUs are free. No next experiment is queued or selected.
 
-Keep the plain U-Net no-argument default, exact lazy-4 bcap, cached frozen
-ResNet18 conditioning features, fused Adam, batch64 and constant LR. The longer
-baseline config is configs/cifar_ddgan/duration_50k/baseline.yaml. It has already
-completed; use a fresh output path for a new experiment. Attention remains
-optional via g_attn_resolutions:[8,16], with g_heads:4. Core ParticleGAN/DDGAN,
-joint UCD, particles, Gaussian step noise and regularizer formulation are intact.
+At 10k updates, the from-scratch attention U-Net remains better and faster:
+FID50k 29.327 in 10.73 training minutes, versus frozen pretrained Anima 30.263
+in 19.98 minutes and trainable pretrained 36.558 in 24.89 minutes. The trainable
+random control collapsed. These results do not justify promoting Anima.
 
-The useful next proposal is:
-1. Save periodic/best checkpoints so a promising intermediate point can be
-   evaluated at50k generated samples. Current checkpoint.pt holds only the last
-   evaluation; attention30k weights were overwritten, although grids remain.
-2. Validate attention around30k and test a gentler learning-rate tail against
-   constant LR. The trajectory motivates this test, but does not prove that
-   annealing helps or that the late regression is overfitting.
-3. Rank final50k-sample FID, training time and trajectories. Do not promote from
-   a selected diagnostic minimum or an attractive1k result alone.
+The user rejected LR decay because of its tuning burden. Keep constant rates;
+the previous gentler-tail proposal is withdrawn. Preserve the same four-step
+ParticleGAN DDGAN, joint UCD, Gaussian step noise, exact lazy-4 bcap, VICReg
+and optimizer recipe. No seed-only repeats.
 
-These are proposals, not queued work. Both GPUs are free. All four experiments
-from this round completed successfully. No seed-only repeats; maintain fresh
-YAMLs, source provenance and tail-friendly logs. The user wants experiment
-updates only after completion. Avoid extra runtime check-ins.
+Plain U-Net remains the no-argument baseline and has the best certified longer
+result, FID 25.397 at 50k in 45.73 training minutes. Optional attention remains
+available. See [attention results](attention_duration/READOUT.md). The old
+attention 30k checkpoint is gone; intermediate-checkpoint retention is still
+unimplemented. Do not infer FID50k from diagnostic FID5k.
 
-Historical logs:
-tail -F results/cifar_ddgan/duration.live.log results/cifar_ddgan/attention.live.log
+Use config files, fresh output directories, both GPUs when useful, and
+`--workers_per_gpu 1`. Preserve sample exposure if changing batch size. Make
+logs easy to tail and report results only after experiments complete.
 
-The earlier capacity round did not support G-width doubling or ResNet34.
-FD remains experimental and is not promoted; retain the existing bcap objective.
-NCSN++ optimization failed10k validation; do not automatically resume its old
-restart-interrupted run. No1200-epoch training is proposed.
+The feature branch retains the complete transplant code/configs/reports.
+Revisiting a smaller donor or a smaller constant donor LR are optional ideas,
+not instructions to restart that work automatically.

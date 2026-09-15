@@ -1,4 +1,11 @@
-# CIFAR handoff: attention and longer baseline completed
+# CIFAR handoff: back on master after Anima experiments
+
+Start with [the compaction handoff](ANIMA_HANDOFF.md). The feature branch is
+fully committed through 5102d8c; its experimental code remains separate.
+Attention from scratch still beats both pretrained transplants at 10k.
+The user rejected learning-rate decay. All experiments are finished, both
+GPUs are free, and no next experiment is queued. The following sections
+describe the established baseline on master.
 
 Read [latest results](attention_duration/READOUT.md) and
 [50k leaderboard](attention_duration/finals/TABLE.md).
@@ -39,9 +46,9 @@ All sources were held fixed while training. Saved source/config are authoritativ
 for strict reproduction; do not overwrite completed outputs or alter checkpoints
 and claim an exact resume.
 
-Next proposal is in [NEXT_ROUND.md](NEXT_ROUND.md): retain periodic/best
-checkpoints, validate attention near30k with final FID50k, then compare a gentler
-LR tail with constant LR. Not queued. The current trainer overwrites checkpoint.pt;
+Current planning context is in [NEXT_ROUND.md](NEXT_ROUND.md). The earlier LR
+tail proposal is withdrawn; keep constant learning rates. Periodic/best
+checkpoint retention remains unimplemented. The trainer overwrites checkpoint.pt;
 attention30k weights are gone, so we cannot retrospectively certify that point.
 
 Tail historical logs:
