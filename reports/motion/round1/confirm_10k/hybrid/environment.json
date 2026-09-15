@@ -1,0 +1,6 @@
+{
+  "gpu": "NVIDIA RTX A6000",
+  "visible_devices": "0",
+  "torch": "2.14.0+cu130",
+  "cuda": "13.0"
+}

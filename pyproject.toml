@@ -17,6 +17,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+motion = ["gdown>=6.2,<7"]
 dev = ["pytest>=8,<10"]
 images = ["torchvision>=0.21,<1", "torch-fidelity==0.3.0", "scipy>=1.10,<1.18", "tqdm>=4.60,<5"]
 

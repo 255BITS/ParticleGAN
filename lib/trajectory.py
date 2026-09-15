@@ -123,21 +123,23 @@ class TrajectoryGenerator(nn.Module):
         super().__init__()
         self.diffusion = cfg["model"] == "ddgan"
         self.length, self.steps = cfg["length"], len(cfg["alpha_bar"]) - 1
+        self.channels, self.classes = cfg.get("channels", 2), cfg.get("classes", 2)
+        context_dim = cfg.get("context_dim", 18)
         w = cfg["width"]
-        self.embed = nn.Sequential(nn.Linear(cfg["z_dim"] + 18 + 2 + self.steps, 2*w), nn.LeakyReLU(.2), nn.Linear(2*w, 2*w))
-        self.enc0 = Block(3, w, 2*w)
+        self.embed = nn.Sequential(nn.Linear(cfg["z_dim"] + context_dim + self.classes + self.steps, 2*w), nn.LeakyReLU(.2), nn.Linear(2*w, 2*w))
+        self.enc0 = Block(self.channels + 1, w, 2*w)
         self.enc1 = Block(w, 2*w, 2*w)
         self.mid = Block(2*w, 2*w, 2*w)
         self.dec1 = Block(4*w, w, 2*w)
         self.dec0 = Block(2*w, w, 2*w)
-        self.out = nn.Conv1d(w, 2, 3, padding=1)
+        self.out = nn.Conv1d(w, self.channels, 3, padding=1)
         self.register_buffer("position", torch.linspace(-1, 1, self.length)[None, None])
 
     def forward(self, z, c, context, xt=None, t=None):
         time = F.one_hot(t - 1, self.steps).to(z) if self.diffusion else z.new_zeros(len(z), self.steps)
-        h = self.embed(torch.cat([z, context, F.one_hot(c, 2).to(z), time], 1))
+        h = self.embed(torch.cat([z, context, F.one_hot(c, self.classes).to(z), time], 1))
         if xt is None:
-            xt = z.new_zeros(len(z), 2, self.length)
+            xt = z.new_zeros(len(z), self.channels, self.length)
         a = self.enc0(torch.cat([xt, self.position.expand(len(z), -1, -1)], 1), h)
         b = self.enc1(F.avg_pool1d(a, 2), h)
         m = self.mid(F.avg_pool1d(b, 2), h)
@@ -151,14 +153,16 @@ class TrajectoryDiscriminator(nn.Module):
         super().__init__()
         self.diffusion, self.mode = cfg["model"] == "ddgan", cfg["d_mode"]
         self.steps = len(cfg["alpha_bar"]) - 1
-        self.heads = 2 * (self.steps if self.diffusion else 1)
-        extra = (2 + self.steps) if self.mode == "concat" else 0
-        inp = 2 * cfg["length"] * (2 if self.diffusion else 1) + 18 + extra
+        self.classes = cfg.get("classes", 2)
+        channels, context_dim = cfg.get("channels", 2), cfg.get("context_dim", 18)
+        self.heads = self.classes * (self.steps if self.diffusion else 1)
+        extra = (self.classes + self.steps) if self.mode == "concat" else 0
+        inp = channels * cfg["length"] * (2 if self.diffusion else 1) + context_dim + extra
         w = cfg["d_width"]
         self.architecture = cfg.get("d_architecture", "mlp")
         if self.architecture in ("temporal", "hybrid"):
             tw = cfg.get("d_temporal_width", 64)
-            channels = 2 * (2 if self.diffusion else 1) + 1
+            channels = channels * (2 if self.diffusion else 1) + 1
             self.stages = nn.ModuleList([
                 nn.Sequential(nn.Conv1d(channels, tw, 5, padding=2), nn.LeakyReLU(.2)),
                 nn.Sequential(nn.Conv1d(tw, 2*tw, 5, stride=2, padding=2), nn.LeakyReLU(.2)),
@@ -172,7 +176,7 @@ class TrajectoryDiscriminator(nn.Module):
                                                 nn.Linear(w, w), nn.LeakyReLU(.2))
                 fused, hidden = 20*tw + w + extra, w//2
             else:
-                fused, hidden = 20*tw + 18 + extra, w//4
+                fused, hidden = 20*tw + context_dim + extra, w//4
             self.net = nn.Sequential(nn.Linear(fused, hidden), nn.LeakyReLU(.2),
                                      nn.Linear(hidden, self.heads if self.mode == "ucd" else 1))
         elif self.architecture == "mlp":
@@ -184,7 +188,7 @@ class TrajectoryDiscriminator(nn.Module):
             raise ValueError(self.architecture)
 
     def ucd_labels(self, c, t):
-        return (t - 1) * 2 + c if self.diffusion else c
+        return (t - 1) * self.classes + c if self.diffusion else c
 
     def forward(self, x, c, context, xt=None, t=None):
         if self.architecture in ("temporal", "hybrid"):
@@ -208,7 +212,7 @@ class TrajectoryDiscriminator(nn.Module):
             if self.diffusion:
                 pieces.append(xt.flatten(1))
         if self.mode == "concat":
-            pieces.extend([F.one_hot(c, 2).to(x), F.one_hot(t - 1, self.steps).to(x) if self.diffusion else x.new_zeros(len(x), self.steps)])
+            pieces.extend([F.one_hot(c, self.classes).to(x), F.one_hot(t - 1, self.steps).to(x) if self.diffusion else x.new_zeros(len(x), self.steps)])
         logits = self.net(torch.cat(pieces, 1))
         score = logits.gather(1, self.ucd_labels(c, t)[:, None]).squeeze(1) if self.mode == "ucd" else logits.squeeze(1)
         return score, logits
@@ -229,7 +233,7 @@ def generate(g, prior, noise, schedule, c, context, rngs, fixed_ids=None, fixed_
     def latent(step):
         return prior.table[fixed_ids[step]] if fixed_ids is not None else prior.sample(n, rngs[0])[0]
     def random_start():
-        x = torch.randn((1 if fixed_random else n, 2, g.length), device=c.device, generator=rngs[2])
+        x = torch.randn((1 if fixed_random else n, g.channels, g.length), device=c.device, generator=rngs[2])
         return x.expand(n, -1, -1)
     if not g.diffusion:
         return g(latent(0), c, context)
@@ -237,7 +241,7 @@ def generate(g, prior, noise, schedule, c, context, rngs, fixed_ids=None, fixed_
     for step in range(schedule.steps, 0, -1):
         t = torch.full_like(c, step)
         clean = g(latent(step-1), c, context, xt, t)
-        eta = noise.sample(1 if fixed_random else n, rngs[1])[0].reshape(-1, 2, g.length).expand(n, -1, -1)
+        eta = noise.sample(1 if fixed_random else n, rngs[1])[0].reshape(-1, g.channels, g.length).expand(n, -1, -1)
         xt = schedule.reverse(clean, xt, t, eta)
     return xt
 

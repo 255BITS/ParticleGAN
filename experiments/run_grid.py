@@ -93,6 +93,9 @@ def code_provenance(trainer: str, python_bin: str) -> Dict:
     if trainer_path.name == "train_100gaussians.py":
         paths.add(repo_root / "examples" / "100gaussians.py")
         paths.add(repo_root / "experiments" / "train_denoising.py")
+    if trainer_path.name == "train_motion.py":
+        paths.add(repo_root / "experiments" / "train_trajectory.py")
+        paths.add(repo_root / "experiments" / "prepare_motion.py")
     sources = {}
     for path in sorted(paths):
         try:

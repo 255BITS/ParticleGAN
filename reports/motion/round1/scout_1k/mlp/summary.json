@@ -1,0 +1,1371 @@
+{
+  "config": {
+    "model": "ddgan",
+    "d_mode": "ucd",
+    "prior": "learned",
+    "noise": "gaussian",
+    "d_architecture": "mlp",
+    "d_temporal_width": 32,
+    "channels": 72,
+    "classes": 12,
+    "context_dim": 576,
+    "past_length": 8,
+    "data_dir": "data/humanact12/raw/HumanAct12",
+    "expected_clips": 1191,
+    "data_sha256": "e8c166350f2704ebdd7e615ff432ac0b1e805c76b2730acacd35633ff2f81903",
+    "train_subjects": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "validation_subjects": [
+      10
+    ],
+    "test_subjects": [
+      11,
+      12
+    ],
+    "display_fps": 15,
+    "eval_per_class": 16,
+    "eval_samples": 8,
+    "seed": 24002,
+    "length": 16,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "z_dim": 32,
+    "num_particles": 20000,
+    "noise_particles": 1024,
+    "width": 32,
+    "d_width": 256,
+    "steps": 1000,
+    "batch_size": 128,
+    "lr": 0.0006,
+    "d_lr_mult": 1.5,
+    "prior_lr_mult": 10.0,
+    "noise_lr_mult": 1.0,
+    "beta1": 0.0,
+    "prior_reg": 1.0,
+    "ucd_lambda": 0.02,
+    "ema": 0.995,
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "reg_every": 4,
+    "log_interval": 250,
+    "save_checkpoint": true,
+    "out_dir": "results/motion/scout_1k/mlp"
+  },
+  "final": {
+    "train": {
+      "contexts": 192,
+      "samples_per_context": 8,
+      "single_ade": 0.5416088104248047,
+      "mean_ade": 0.5444890856742859,
+      "best_of_k_ade": 0.48090600967407227,
+      "single_fde": 0.6527518630027771,
+      "best_of_k_fde": 0.5556374788284302,
+      "diversity": 0.2985798716545105,
+      "bone_relative_error": 0.20780110359191895,
+      "bone_bad_fraction": 0.39256221055984497,
+      "speed": 0.13704673945903778,
+      "acceleration": 0.17219983041286469,
+      "boundary_displacement": 0.3714703321456909,
+      "boundary_acceleration": 0.3899935185909271,
+      "class_sw1": 0.15994096795717874,
+      "actions": [
+        {
+          "action": "warm up",
+          "contexts": 16,
+          "sw1": 0.16463646292686462,
+          "ade": 0.6062829494476318,
+          "diversity": 0.3318142890930176
+        },
+        {
+          "action": "walk",
+          "contexts": 16,
+          "sw1": 0.19605562090873718,
+          "ade": 0.7712081670761108,
+          "diversity": 0.3808073103427887
+        },
+        {
+          "action": "run",
+          "contexts": 16,
+          "sw1": 0.21538451313972473,
+          "ade": 0.7946091890335083,
+          "diversity": 0.34934675693511963
+        },
+        {
+          "action": "jump",
+          "contexts": 16,
+          "sw1": 0.24609151482582092,
+          "ade": 0.8161137104034424,
+          "diversity": 0.35605499148368835
+        },
+        {
+          "action": "drink",
+          "contexts": 16,
+          "sw1": 0.16432854533195496,
+          "ade": 0.41565269231796265,
+          "diversity": 0.3206559717655182
+        },
+        {
+          "action": "lift dumbbell",
+          "contexts": 16,
+          "sw1": 0.1051516905426979,
+          "ade": 0.40335845947265625,
+          "diversity": 0.3032143712043762
+        },
+        {
+          "action": "sit",
+          "contexts": 16,
+          "sw1": 0.1350664347410202,
+          "ade": 0.438764363527298,
+          "diversity": 0.21706299483776093
+        },
+        {
+          "action": "eat",
+          "contexts": 16,
+          "sw1": 0.08084030449390411,
+          "ade": 0.30302950739860535,
+          "diversity": 0.20853836834430695
+        },
+        {
+          "action": "steering wheel",
+          "contexts": 16,
+          "sw1": 0.10849753767251968,
+          "ade": 0.32324063777923584,
+          "diversity": 0.18419450521469116
+        },
+        {
+          "action": "phone",
+          "contexts": 16,
+          "sw1": 0.10610215365886688,
+          "ade": 0.378815233707428,
+          "diversity": 0.2004614621400833
+        },
+        {
+          "action": "boxing",
+          "contexts": 16,
+          "sw1": 0.18528270721435547,
+          "ade": 0.600018322467804,
+          "diversity": 0.3273445665836334
+        },
+        {
+          "action": "throw",
+          "contexts": 16,
+          "sw1": 0.21185413002967834,
+          "ade": 0.6827757358551025,
+          "diversity": 0.4034627676010132
+        }
+      ]
+    },
+    "validation": {
+      "contexts": 77,
+      "samples_per_context": 8,
+      "single_ade": 0.5013042092323303,
+      "mean_ade": 0.513062059879303,
+      "best_of_k_ade": 0.4450157880783081,
+      "single_fde": 0.5767587423324585,
+      "best_of_k_fde": 0.49575647711753845,
+      "diversity": 0.3076741397380829,
+      "bone_relative_error": 0.20789197087287903,
+      "bone_bad_fraction": 0.40718960762023926,
+      "speed": 0.1302841603755951,
+      "acceleration": 0.16164320707321167,
+      "boundary_displacement": 0.34691813588142395,
+      "boundary_acceleration": 0.36214178800582886,
+      "class_sw1": 0.20667006509999433,
+      "actions": [
+        {
+          "action": "warm up",
+          "contexts": 12,
+          "sw1": 0.1854448765516281,
+          "ade": 0.537675142288208,
+          "diversity": 0.30898818373680115
+        },
+        {
+          "action": "walk",
+          "contexts": 4,
+          "sw1": 0.24546918272972107,
+          "ade": 0.6151204705238342,
+          "diversity": 0.3566492199897766
+        },
+        {
+          "action": "run",
+          "contexts": 4,
+          "sw1": 0.22466698288917542,
+          "ade": 0.5611393451690674,
+          "diversity": 0.3037797510623932
+        },
+        {
+          "action": "jump",
+          "contexts": 7,
+          "sw1": 0.3298572301864624,
+          "ade": 0.8438841104507446,
+          "diversity": 0.38128069043159485
+        },
+        {
+          "action": "drink",
+          "contexts": 4,
+          "sw1": 0.22400084137916565,
+          "ade": 0.5901738405227661,
+          "diversity": 0.3433871567249298
+        },
+        {
+          "action": "lift dumbbell",
+          "contexts": 16,
+          "sw1": 0.10961782187223434,
+          "ade": 0.3662979006767273,
+          "diversity": 0.276407927274704
+        },
+        {
+          "action": "sit",
+          "contexts": 4,
+          "sw1": 0.21486085653305054,
+          "ade": 0.4658312499523163,
+          "diversity": 0.19701384007930756
+        },
+        {
+          "action": "eat",
+          "contexts": 4,
+          "sw1": 0.13546395301818848,
+          "ade": 0.29828310012817383,
+          "diversity": 0.21699731051921844
+        },
+        {
+          "action": "steering wheel",
+          "contexts": 4,
+          "sw1": 0.17115691304206848,
+          "ade": 0.3711482882499695,
+          "diversity": 0.2169463038444519
+        },
+        {
+          "action": "phone",
+          "contexts": 4,
+          "sw1": 0.18655943870544434,
+          "ade": 0.40196147561073303,
+          "diversity": 0.1945062130689621
+        },
+        {
+          "action": "boxing",
+          "contexts": 8,
+          "sw1": 0.17990829050540924,
+          "ade": 0.5536335110664368,
+          "diversity": 0.3637174963951111
+        },
+        {
+          "action": "throw",
+          "contexts": 6,
+          "sw1": 0.27303439378738403,
+          "ade": 0.6070035099983215,
+          "diversity": 0.44411686062812805
+        }
+      ]
+    },
+    "test": {
+      "contexts": 174,
+      "samples_per_context": 8,
+      "single_ade": 0.5490559339523315,
+      "mean_ade": 0.5551521182060242,
+      "best_of_k_ade": 0.48611506819725037,
+      "single_fde": 0.647005021572113,
+      "best_of_k_fde": 0.5434041619300842,
+      "diversity": 0.3009246587753296,
+      "bone_relative_error": 0.204447403550148,
+      "bone_bad_fraction": 0.3862248659133911,
+      "speed": 0.13795070350170135,
+      "acceleration": 0.17335018515586853,
+      "boundary_displacement": 0.3844309449195862,
+      "boundary_acceleration": 0.39845559000968933,
+      "class_sw1": 0.17928053252398968,
+      "actions": [
+        {
+          "action": "warm up",
+          "contexts": 16,
+          "sw1": 0.20216499269008636,
+          "ade": 0.6389304399490356,
+          "diversity": 0.3184627294540405
+        },
+        {
+          "action": "walk",
+          "contexts": 8,
+          "sw1": 0.24120843410491943,
+          "ade": 0.67957603931427,
+          "diversity": 0.3234570622444153
+        },
+        {
+          "action": "run",
+          "contexts": 10,
+          "sw1": 0.2202354222536087,
+          "ade": 0.6910213828086853,
+          "diversity": 0.3976159691810608
+        },
+        {
+          "action": "jump",
+          "contexts": 16,
+          "sw1": 0.2567636966705322,
+          "ade": 0.8560657501220703,
+          "diversity": 0.3190934658050537
+        },
+        {
+          "action": "drink",
+          "contexts": 16,
+          "sw1": 0.13893350958824158,
+          "ade": 0.4597731828689575,
+          "diversity": 0.28650036454200745
+        },
+        {
+          "action": "lift dumbbell",
+          "contexts": 16,
+          "sw1": 0.14369089901447296,
+          "ade": 0.4946329593658447,
+          "diversity": 0.32369500398635864
+        },
+        {
+          "action": "sit",
+          "contexts": 12,
+          "sw1": 0.17612324655056,
+          "ade": 0.5677403807640076,
+          "diversity": 0.2794092893600464
+        },
+        {
+          "action": "eat",
+          "contexts": 16,
+          "sw1": 0.0881008431315422,
+          "ade": 0.27997803688049316,
+          "diversity": 0.19481512904167175
+        },
+        {
+          "action": "steering wheel",
+          "contexts": 16,
+          "sw1": 0.09990040957927704,
+          "ade": 0.33325618505477905,
+          "diversity": 0.17940708994865417
+        },
+        {
+          "action": "phone",
+          "contexts": 16,
+          "sw1": 0.1271725445985794,
+          "ade": 0.40406179428100586,
+          "diversity": 0.2094348967075348
+        },
+        {
+          "action": "boxing",
+          "contexts": 16,
+          "sw1": 0.2259541004896164,
+          "ade": 0.7167893648147583,
+          "diversity": 0.3946678936481476
+        },
+        {
+          "action": "throw",
+          "contexts": 16,
+          "sw1": 0.23111829161643982,
+          "ade": 0.6563098430633545,
+          "diversity": 0.4266837239265442
+        }
+      ]
+    }
+  },
+  "references": {
+    "train": {
+      "held_pose": {
+        "contexts": 192,
+        "samples_per_context": 1,
+        "single_ade": 0.38769930601119995,
+        "mean_ade": 0.38769930601119995,
+        "best_of_k_ade": 0.38769930601119995,
+        "single_fde": 0.5888539552688599,
+        "best_of_k_fde": 0.5888539552688599,
+        "diversity": 0.0,
+        "bone_relative_error": 0.0,
+        "bone_bad_fraction": 0.0,
+        "speed": 0.0,
+        "acceleration": 0.005037597846239805,
+        "boundary_displacement": 0.0,
+        "boundary_acceleration": 0.08060157299041748,
+        "class_sw1": 0.1536022713407874,
+        "actions": [
+          {
+            "action": "warm up",
+            "contexts": 16,
+            "sw1": 0.11102360486984253,
+            "ade": 0.2646409571170807,
+            "diversity": 0.0
+          },
+          {
+            "action": "walk",
+            "contexts": 16,
+            "sw1": 0.2688014507293701,
+            "ade": 0.8355956077575684,
+            "diversity": 0.0
+          },
+          {
+            "action": "run",
+            "contexts": 16,
+            "sw1": 0.23413975536823273,
+            "ade": 0.7571685314178467,
+            "diversity": 0.0
+          },
+          {
+            "action": "jump",
+            "contexts": 16,
+            "sw1": 0.22929176688194275,
+            "ade": 0.6730141639709473,
+            "diversity": 0.0
+          },
+          {
+            "action": "drink",
+            "contexts": 16,
+            "sw1": 0.09232515841722488,
+            "ade": 0.16713854670524597,
+            "diversity": 0.0
+          },
+          {
+            "action": "lift dumbbell",
+            "contexts": 16,
+            "sw1": 0.07476356625556946,
+            "ade": 0.14689646661281586,
+            "diversity": 0.0
+          },
+          {
+            "action": "sit",
+            "contexts": 16,
+            "sw1": 0.23821552097797394,
+            "ade": 0.45636385679244995,
+            "diversity": 0.0
+          },
+          {
+            "action": "eat",
+            "contexts": 16,
+            "sw1": 0.04428299888968468,
+            "ade": 0.07939008623361588,
+            "diversity": 0.0
+          },
+          {
+            "action": "steering wheel",
+            "contexts": 16,
+            "sw1": 0.06693770736455917,
+            "ade": 0.12008680403232574,
+            "diversity": 0.0
+          },
+          {
+            "action": "phone",
+            "contexts": 16,
+            "sw1": 0.07185890525579453,
+            "ade": 0.1419866532087326,
+            "diversity": 0.0
+          },
+          {
+            "action": "boxing",
+            "contexts": 16,
+            "sw1": 0.14385753870010376,
+            "ade": 0.44064801931381226,
+            "diversity": 0.0
+          },
+          {
+            "action": "throw",
+            "contexts": 16,
+            "sw1": 0.2677292823791504,
+            "ade": 0.5694619417190552,
+            "diversity": 0.0
+          }
+        ]
+      },
+      "constant_velocity": {
+        "contexts": 192,
+        "samples_per_context": 1,
+        "single_ade": 0.6939854621887207,
+        "mean_ade": 0.6939854621887207,
+        "best_of_k_ade": 0.6939854621887207,
+        "single_fde": 1.3419454097747803,
+        "best_of_k_fde": 1.3419454097747803,
+        "diversity": 0.0,
+        "bone_relative_error": 0.29610148072242737,
+        "bone_bad_fraction": 0.24030514061450958,
+        "speed": 0.08060157299041748,
+        "acceleration": 3.9128142503841445e-08,
+        "boundary_displacement": 0.08060156553983688,
+        "boundary_acceleration": 3.793634295590209e-09,
+        "class_sw1": 0.3112696359554927,
+        "actions": [
+          {
+            "action": "warm up",
+            "contexts": 16,
+            "sw1": 0.20824380218982697,
+            "ade": 0.4543231129646301,
+            "diversity": 0.0
+          },
+          {
+            "action": "walk",
+            "contexts": 16,
+            "sw1": 0.4140318036079407,
+            "ade": 1.099268913269043,
+            "diversity": 0.0
+          },
+          {
+            "action": "run",
+            "contexts": 16,
+            "sw1": 1.00115966796875,
+            "ade": 2.2421603202819824,
+            "diversity": 0.0
+          },
+          {
+            "action": "jump",
+            "contexts": 16,
+            "sw1": 0.41768163442611694,
+            "ade": 1.119176983833313,
+            "diversity": 0.0
+          },
+          {
+            "action": "drink",
+            "contexts": 16,
+            "sw1": 0.1970079392194748,
+            "ade": 0.32523292303085327,
+            "diversity": 0.0
+          },
+          {
+            "action": "lift dumbbell",
+            "contexts": 16,
+            "sw1": 0.2250598669052124,
+            "ade": 0.3769754469394684,
+            "diversity": 0.0
+          },
+          {
+            "action": "sit",
+            "contexts": 16,
+            "sw1": 0.22195760905742645,
+            "ade": 0.5116316676139832,
+            "diversity": 0.0
+          },
+          {
+            "action": "eat",
+            "contexts": 16,
+            "sw1": 0.09164781868457794,
+            "ade": 0.2061133086681366,
+            "diversity": 0.0
+          },
+          {
+            "action": "steering wheel",
+            "contexts": 16,
+            "sw1": 0.14581573009490967,
+            "ade": 0.2820438742637634,
+            "diversity": 0.0
+          },
+          {
+            "action": "phone",
+            "contexts": 16,
+            "sw1": 0.1282424032688141,
+            "ade": 0.26061615347862244,
+            "diversity": 0.0
+          },
+          {
+            "action": "boxing",
+            "contexts": 16,
+            "sw1": 0.3318430781364441,
+            "ade": 0.6376082897186279,
+            "diversity": 0.0
+          },
+          {
+            "action": "throw",
+            "contexts": 16,
+            "sw1": 0.35254427790641785,
+            "ade": 0.8126741647720337,
+            "diversity": 0.0
+          }
+        ]
+      },
+      "recorded": {
+        "contexts": 192,
+        "samples_per_context": 1,
+        "single_ade": 0.0,
+        "mean_ade": 0.0,
+        "best_of_k_ade": 0.0,
+        "single_fde": 0.0,
+        "best_of_k_fde": 0.0,
+        "diversity": 0.0,
+        "bone_relative_error": 3.3369499305990757e-06,
+        "bone_bad_fraction": 0.0,
+        "speed": 0.07380562275648117,
+        "acceleration": 0.05891846865415573,
+        "boundary_displacement": 0.07627762854099274,
+        "boundary_acceleration": 0.06532865762710571,
+        "class_sw1": 0.0,
+        "actions": [
+          {
+            "action": "warm up",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "walk",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "run",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "jump",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "drink",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "lift dumbbell",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "sit",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "eat",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "steering wheel",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "phone",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "boxing",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "throw",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          }
+        ]
+      }
+    },
+    "validation": {
+      "held_pose": {
+        "contexts": 77,
+        "samples_per_context": 1,
+        "single_ade": 0.38089534640312195,
+        "mean_ade": 0.38089534640312195,
+        "best_of_k_ade": 0.38089534640312195,
+        "single_fde": 0.5657809376716614,
+        "best_of_k_fde": 0.5657809376716614,
+        "diversity": 0.0,
+        "bone_relative_error": 0.0,
+        "bone_bad_fraction": 0.0,
+        "speed": 0.0,
+        "acceleration": 0.004247475415468216,
+        "boundary_displacement": 0.0,
+        "boundary_acceleration": 0.06795960664749146,
+        "class_sw1": 0.19361042541762194,
+        "actions": [
+          {
+            "action": "warm up",
+            "contexts": 12,
+            "sw1": 0.17269837856292725,
+            "ade": 0.4100179076194763,
+            "diversity": 0.0
+          },
+          {
+            "action": "walk",
+            "contexts": 4,
+            "sw1": 0.35627731680870056,
+            "ade": 0.7567369937896729,
+            "diversity": 0.0
+          },
+          {
+            "action": "run",
+            "contexts": 4,
+            "sw1": 0.20882508158683777,
+            "ade": 0.5366291403770447,
+            "diversity": 0.0
+          },
+          {
+            "action": "jump",
+            "contexts": 7,
+            "sw1": 0.39214107394218445,
+            "ade": 0.8518510460853577,
+            "diversity": 0.0
+          },
+          {
+            "action": "drink",
+            "contexts": 4,
+            "sw1": 0.1560766100883484,
+            "ade": 0.29098960757255554,
+            "diversity": 0.0
+          },
+          {
+            "action": "lift dumbbell",
+            "contexts": 16,
+            "sw1": 0.09944140166044235,
+            "ade": 0.1775737702846527,
+            "diversity": 0.0
+          },
+          {
+            "action": "sit",
+            "contexts": 4,
+            "sw1": 0.25448983907699585,
+            "ade": 0.44015398621559143,
+            "diversity": 0.0
+          },
+          {
+            "action": "eat",
+            "contexts": 4,
+            "sw1": 0.04436288774013519,
+            "ade": 0.07826162874698639,
+            "diversity": 0.0
+          },
+          {
+            "action": "steering wheel",
+            "contexts": 4,
+            "sw1": 0.1242026686668396,
+            "ade": 0.19830673933029175,
+            "diversity": 0.0
+          },
+          {
+            "action": "phone",
+            "contexts": 4,
+            "sw1": 0.12193584442138672,
+            "ade": 0.22911544144153595,
+            "diversity": 0.0
+          },
+          {
+            "action": "boxing",
+            "contexts": 8,
+            "sw1": 0.14445331692695618,
+            "ade": 0.37329554557800293,
+            "diversity": 0.0
+          },
+          {
+            "action": "throw",
+            "contexts": 6,
+            "sw1": 0.24842068552970886,
+            "ade": 0.41624194383621216,
+            "diversity": 0.0
+          }
+        ]
+      },
+      "constant_velocity": {
+        "contexts": 77,
+        "samples_per_context": 1,
+        "single_ade": 0.6188467144966125,
+        "mean_ade": 0.6188467144966125,
+        "best_of_k_ade": 0.6188467144966125,
+        "single_fde": 1.1684399843215942,
+        "best_of_k_fde": 1.1684399843215942,
+        "diversity": 0.0,
+        "bone_relative_error": 0.3763697147369385,
+        "bone_bad_fraction": 0.2863142192363739,
+        "speed": 0.06795960664749146,
+        "acceleration": 3.2714510211917514e-08,
+        "boundary_displacement": 0.06795960664749146,
+        "boundary_acceleration": 3.2441540565031346e-09,
+        "class_sw1": 0.3385005046923955,
+        "actions": [
+          {
+            "action": "warm up",
+            "contexts": 12,
+            "sw1": 0.3209187388420105,
+            "ade": 0.6892160773277283,
+            "diversity": 0.0
+          },
+          {
+            "action": "walk",
+            "contexts": 4,
+            "sw1": 0.4420798420906067,
+            "ade": 0.7677992582321167,
+            "diversity": 0.0
+          },
+          {
+            "action": "run",
+            "contexts": 4,
+            "sw1": 0.5878008604049683,
+            "ade": 1.1600298881530762,
+            "diversity": 0.0
+          },
+          {
+            "action": "jump",
+            "contexts": 7,
+            "sw1": 0.6786147952079773,
+            "ade": 1.4061650037765503,
+            "diversity": 0.0
+          },
+          {
+            "action": "drink",
+            "contexts": 4,
+            "sw1": 0.3219758868217468,
+            "ade": 0.49203041195869446,
+            "diversity": 0.0
+          },
+          {
+            "action": "lift dumbbell",
+            "contexts": 16,
+            "sw1": 0.2744845449924469,
+            "ade": 0.466427206993103,
+            "diversity": 0.0
+          },
+          {
+            "action": "sit",
+            "contexts": 4,
+            "sw1": 0.2342528998851776,
+            "ade": 0.4321897625923157,
+            "diversity": 0.0
+          },
+          {
+            "action": "eat",
+            "contexts": 4,
+            "sw1": 0.2253257930278778,
+            "ade": 0.3017122149467468,
+            "diversity": 0.0
+          },
+          {
+            "action": "steering wheel",
+            "contexts": 4,
+            "sw1": 0.29752764105796814,
+            "ade": 0.4152606725692749,
+            "diversity": 0.0
+          },
+          {
+            "action": "phone",
+            "contexts": 4,
+            "sw1": 0.12830717861652374,
+            "ade": 0.20959007740020752,
+            "diversity": 0.0
+          },
+          {
+            "action": "boxing",
+            "contexts": 8,
+            "sw1": 0.3155941963195801,
+            "ade": 0.5185277462005615,
+            "diversity": 0.0
+          },
+          {
+            "action": "throw",
+            "contexts": 6,
+            "sw1": 0.2351236790418625,
+            "ade": 0.4686570167541504,
+            "diversity": 0.0
+          }
+        ]
+      },
+      "recorded": {
+        "contexts": 77,
+        "samples_per_context": 1,
+        "single_ade": 0.0,
+        "mean_ade": 0.0,
+        "best_of_k_ade": 0.0,
+        "single_fde": 0.0,
+        "best_of_k_fde": 0.0,
+        "diversity": 0.0,
+        "bone_relative_error": 3.7048380363557953e-06,
+        "bone_bad_fraction": 0.0,
+        "speed": 0.07733999937772751,
+        "acceleration": 0.0636715516448021,
+        "boundary_displacement": 0.07297968119382858,
+        "boundary_acceleration": 0.06076960265636444,
+        "class_sw1": 0.0,
+        "actions": [
+          {
+            "action": "warm up",
+            "contexts": 12,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "walk",
+            "contexts": 4,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "run",
+            "contexts": 4,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "jump",
+            "contexts": 7,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "drink",
+            "contexts": 4,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "lift dumbbell",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "sit",
+            "contexts": 4,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "eat",
+            "contexts": 4,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "steering wheel",
+            "contexts": 4,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "phone",
+            "contexts": 4,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "boxing",
+            "contexts": 8,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "throw",
+            "contexts": 6,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          }
+        ]
+      }
+    },
+    "test": {
+      "held_pose": {
+        "contexts": 174,
+        "samples_per_context": 1,
+        "single_ade": 0.378391295671463,
+        "mean_ade": 0.378391295671463,
+        "best_of_k_ade": 0.378391295671463,
+        "single_fde": 0.5547702312469482,
+        "best_of_k_fde": 0.5547702312469482,
+        "diversity": 0.0,
+        "bone_relative_error": 0.0,
+        "bone_bad_fraction": 0.0,
+        "speed": 0.0,
+        "acceleration": 0.004412585869431496,
+        "boundary_displacement": 0.0,
+        "boundary_acceleration": 0.07060137391090393,
+        "class_sw1": 0.1572202273334066,
+        "actions": [
+          {
+            "action": "warm up",
+            "contexts": 16,
+            "sw1": 0.15991656482219696,
+            "ade": 0.38860833644866943,
+            "diversity": 0.0
+          },
+          {
+            "action": "walk",
+            "contexts": 8,
+            "sw1": 0.20633099973201752,
+            "ade": 0.5852493047714233,
+            "diversity": 0.0
+          },
+          {
+            "action": "run",
+            "contexts": 10,
+            "sw1": 0.18678061664104462,
+            "ade": 0.5632725954055786,
+            "diversity": 0.0
+          },
+          {
+            "action": "jump",
+            "contexts": 16,
+            "sw1": 0.23986640572547913,
+            "ade": 0.7498136758804321,
+            "diversity": 0.0
+          },
+          {
+            "action": "drink",
+            "contexts": 16,
+            "sw1": 0.09210267663002014,
+            "ade": 0.23500017821788788,
+            "diversity": 0.0
+          },
+          {
+            "action": "lift dumbbell",
+            "contexts": 16,
+            "sw1": 0.11154378205537796,
+            "ade": 0.26665955781936646,
+            "diversity": 0.0
+          },
+          {
+            "action": "sit",
+            "contexts": 12,
+            "sw1": 0.27637356519699097,
+            "ade": 0.5603867769241333,
+            "diversity": 0.0
+          },
+          {
+            "action": "eat",
+            "contexts": 16,
+            "sw1": 0.04759477078914642,
+            "ade": 0.09156674891710281,
+            "diversity": 0.0
+          },
+          {
+            "action": "steering wheel",
+            "contexts": 16,
+            "sw1": 0.061376120895147324,
+            "ade": 0.13977232575416565,
+            "diversity": 0.0
+          },
+          {
+            "action": "phone",
+            "contexts": 16,
+            "sw1": 0.09196922183036804,
+            "ade": 0.21226710081100464,
+            "diversity": 0.0
+          },
+          {
+            "action": "boxing",
+            "contexts": 16,
+            "sw1": 0.13472118973731995,
+            "ade": 0.44115597009658813,
+            "diversity": 0.0
+          },
+          {
+            "action": "throw",
+            "contexts": 16,
+            "sw1": 0.27806681394577026,
+            "ade": 0.5252013206481934,
+            "diversity": 0.0
+          }
+        ]
+      },
+      "constant_velocity": {
+        "contexts": 174,
+        "samples_per_context": 1,
+        "single_ade": 0.5917346477508545,
+        "mean_ade": 0.5917346477508545,
+        "best_of_k_ade": 0.5917345881462097,
+        "single_fde": 1.158874273300171,
+        "best_of_k_fde": 1.158874273300171,
+        "diversity": 0.0,
+        "bone_relative_error": 0.23120847344398499,
+        "bone_bad_fraction": 0.20972326397895813,
+        "speed": 0.07060137391090393,
+        "acceleration": 3.629922318282297e-08,
+        "boundary_displacement": 0.07060137391090393,
+        "boundary_acceleration": 3.905497703016181e-09,
+        "class_sw1": 0.28673558309674263,
+        "actions": [
+          {
+            "action": "warm up",
+            "contexts": 16,
+            "sw1": 0.31725651025772095,
+            "ade": 0.7289012670516968,
+            "diversity": 0.0
+          },
+          {
+            "action": "walk",
+            "contexts": 8,
+            "sw1": 0.4767606556415558,
+            "ade": 0.8819712400436401,
+            "diversity": 0.0
+          },
+          {
+            "action": "run",
+            "contexts": 10,
+            "sw1": 0.3950408399105072,
+            "ade": 0.8278741240501404,
+            "diversity": 0.0
+          },
+          {
+            "action": "jump",
+            "contexts": 16,
+            "sw1": 0.7321416735649109,
+            "ade": 1.6548020839691162,
+            "diversity": 0.0
+          },
+          {
+            "action": "drink",
+            "contexts": 16,
+            "sw1": 0.17018510401248932,
+            "ade": 0.3221966624259949,
+            "diversity": 0.0
+          },
+          {
+            "action": "lift dumbbell",
+            "contexts": 16,
+            "sw1": 0.1441224068403244,
+            "ade": 0.336990088224411,
+            "diversity": 0.0
+          },
+          {
+            "action": "sit",
+            "contexts": 12,
+            "sw1": 0.328754186630249,
+            "ade": 0.7611615061759949,
+            "diversity": 0.0
+          },
+          {
+            "action": "eat",
+            "contexts": 16,
+            "sw1": 0.08097831904888153,
+            "ade": 0.1933959275484085,
+            "diversity": 0.0
+          },
+          {
+            "action": "steering wheel",
+            "contexts": 16,
+            "sw1": 0.1494152545928955,
+            "ade": 0.25872379541397095,
+            "diversity": 0.0
+          },
+          {
+            "action": "phone",
+            "contexts": 16,
+            "sw1": 0.0982711911201477,
+            "ade": 0.2205418348312378,
+            "diversity": 0.0
+          },
+          {
+            "action": "boxing",
+            "contexts": 16,
+            "sw1": 0.27278298139572144,
+            "ade": 0.5885326266288757,
+            "diversity": 0.0
+          },
+          {
+            "action": "throw",
+            "contexts": 16,
+            "sw1": 0.2751178741455078,
+            "ade": 0.6017518639564514,
+            "diversity": 0.0
+          }
+        ]
+      },
+      "recorded": {
+        "contexts": 174,
+        "samples_per_context": 1,
+        "single_ade": 0.0,
+        "mean_ade": 0.0,
+        "best_of_k_ade": 0.0,
+        "single_fde": 0.0,
+        "best_of_k_fde": 0.0,
+        "diversity": 0.0,
+        "bone_relative_error": 3.2553880373598076e-06,
+        "bone_bad_fraction": 0.0,
+        "speed": 0.06755825877189636,
+        "acceleration": 0.0522693395614624,
+        "boundary_displacement": 0.0759500190615654,
+        "boundary_acceleration": 0.05500558763742447,
+        "class_sw1": 0.0,
+        "actions": [
+          {
+            "action": "warm up",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "walk",
+            "contexts": 8,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "run",
+            "contexts": 10,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "jump",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "drink",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "lift dumbbell",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "sit",
+            "contexts": 12,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "eat",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "steering wheel",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "phone",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "boxing",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          },
+          {
+            "action": "throw",
+            "contexts": 16,
+            "sw1": 0.0,
+            "ade": 0.0,
+            "diversity": 0.0
+          }
+        ]
+      }
+    }
+  },
+  "prefix_sensitivity": 0.6003801226615906,
+  "data_fingerprint": "913caaa6a416e7584bd227bb0db92f366aac5c8fe4bb825b22cb163a01d9fa4f",
+  "train_seconds": 9.836860041999898,
+  "samples_per_second": 13012.282319102384,
+  "real_draws": 256000,
+  "total_seconds": 13.849274224005057,
+  "environment": {
+    "gpu": "NVIDIA RTX A6000",
+    "visible_devices": "1",
+    "torch": "2.14.0+cu130",
+    "cuda": "13.0"
+  },
+  "provenance": {
+    "trainer": "/home/martyn/dev/ParticleGAN/experiments/train_motion.py",
+    "python": "/home/martyn/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/python3.12",
+    "sources": {
+      "experiments/prepare_motion.py": "74da4a87364b969054f0a32b84fdc5f456ac93e7e8e7019e2a1302b124f842f0",
+      "experiments/run_grid.py": "b960b5218e903a66f1d038315d668f5e7c1d88572e9f085c45619d182064402b",
+      "experiments/train_motion.py": "02d6b9de9172a4ffc943f9e744fcd75e96987653b6ae7d3be52f3d31e73dc583",
+      "experiments/train_trajectory.py": "69744d79c632ea75f1b8e0f8d766fc250beeb81bee54eb0573a15b651b89e22e",
+      "lib/cifar_metrics.py": "7593a15822cb8cd99b48ed75127f99f1f856ebc1000d0acf9d7e369d9b2d44a3",
+      "lib/cifar_speed.py": "32800a6e077e3c7fd46fe3814c900b391c276208ea22cae8579ead5793a691c5",
+      "lib/conditional_training.py": "9f572521448b45ebfb3cc03db81a0c1c0d4feb62bc323520d69cc9b00369a954",
+      "lib/ddgan_ncsnpp/__init__.py": "60a5d144f89ad8c2c39c2a57f5f3d4202970022133edfd372f2db4d497ce7a18",
+      "lib/ddgan_ncsnpp/dense_layer.py": "d98df1532c1b7900bb08eda7af0c5f9aa9a710fbbeeda7b97ef5d56736510cda",
+      "lib/ddgan_ncsnpp/layers.py": "152abf198a0bdf0fb6520de21ff139167471961f7299be9e1c8ea46d93f49b83",
+      "lib/ddgan_ncsnpp/layerspp.py": "291cb4d45729b99832d6da7959dcba9c3605179db8deb1486b7fb8844caf6211",
+      "lib/ddgan_ncsnpp/ncsnpp_generator_adagn.py": "a50b6609f174dbe46e1011c83fb713e39e38f169f396651853b3b0bff88d0e7b",
+      "lib/ddgan_ncsnpp/up_or_down_sampling.py": "ca1f71d780cebf20faaf2162e18c16d2564b2a9bca0b3e606794d52da1e636b4",
+      "lib/ddgan_ncsnpp/upfirdn2d.py": "22f1993059536a7828d912ccd81f0d135524d712b62a09ccbdf1649b366c6d8f",
+      "lib/ddgan_ncsnpp/utils.py": "5a78caca1d5550859bdb844d7c3ee9ccb76a05c54515f1a65cd1dbcabbe647e9",
+      "lib/denoising_toy.py": "b6a31c234abbe6450deb0900e75b483778d1ec1938193daec5de547ade585e59",
+      "lib/game_jacobian.py": "503de369c7ae236cf3d3fd1fb961636577f4c10dee92dd274a7d510d07a23faf",
+      "lib/gan_loss.py": "4d6db2bde462264bdc298ff1302f83870712b3c2b7ab81a6b5d827b07ddbea93",
+      "lib/grad_regularizers.py": "b31696c01ca5695e8558b831ee11f7903f84f5485243a375d0fae42687957aa1",
+      "lib/image_ddgan.py": "800625fed3e72194fdf8e263654b66365bfc9094a98aa781b700467771038f64",
+      "lib/image_moonshots.py": "3f97e3db519abc816b7923e2ebfd46f339faf70e6b01b416094c6ac4504c3973",
+      "lib/image_ncsnpp.py": "4c85dafcbe71dbd9cb2d0f0a0e4c75cc77b067f4b437bcdac88808be926f1c9c",
+      "lib/motion.py": "ab282deebf438ed5bbd88b9663d6197123cac6a993ed93b09e93e3147110a25d",
+      "lib/motion_visuals.py": "3ccd991390cf2765f0ec1a3acf5ed4fe4342838909f58dcda37d0cc06b917ddf",
+      "lib/oadam.py": "bb00feeca65675a90beb28886ed0fef420963798e53d900d920cb3c531275de3",
+      "lib/particle_prior.py": "a5a762f675e1a81022000861bd557fcb0eb95babe54ef49f8b5f57a58a469833",
+      "lib/sparse_metrics.py": "e359fbddf67f00d4ab5b18b1a9feacd223649b2409d90f439418619918f98ef2",
+      "lib/sparse_models.py": "0c27b3e5279fe98b2f210bc0f482523cedef23e161d9e47d31feb3fbf0d3a406",
+      "lib/sparse_toy.py": "c356bc07a3510efc12eda6ea78ab02196cd5b6dfa2d5540c1602c8649551c979",
+      "lib/toy_metrics.py": "12e8975fe31ed4d9973d53649ce940171da78739a3d7b80544ba5f4d2313367c",
+      "lib/toy_models.py": "503652c5a1245fada9e3fb26ead8bb73ecdcf1ec4f4eeecac270baf93fef52ee",
+      "lib/trajectory.py": "51b9a88cd2e1cfb7853fbd64f3aeb2ad044a35492a6c489c6bf059dc466365ff",
+      "lib/trajectory_visuals.py": "5e7e2534d6af396f6c0fcc0e32663f982769f5007abdfc7d21ae05d5873612bf",
+      "lib/vicreg_loss.py": "d2563bcab93d443cbf2cf2260946a3ba470f1fc584c231b704ec5ac154f668c4"
+    }
+  },
+  "parameters": {
+    "G": 154504,
+    "D": 881456,
+    "prior": 640000
+  }
+}
