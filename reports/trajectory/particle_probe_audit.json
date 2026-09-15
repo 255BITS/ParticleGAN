@@ -1,0 +1,30 @@
+[
+  {
+    "particle_id_at_every_step": 0,
+    "draws": 24,
+    "upper": 24,
+    "valid": 24,
+    "distinct_outputs": 24
+  },
+  {
+    "particle_id_at_every_step": 1,
+    "draws": 24,
+    "upper": 6,
+    "valid": 24,
+    "distinct_outputs": 24
+  },
+  {
+    "particle_id_at_every_step": 2,
+    "draws": 24,
+    "upper": 19,
+    "valid": 24,
+    "distinct_outputs": 24
+  },
+  {
+    "particle_id_at_every_step": 3,
+    "draws": 24,
+    "upper": 17,
+    "valid": 23,
+    "distinct_outputs": 24
+  }
+]
