@@ -1,6 +1,7 @@
 """Gaussian DDGAN transitions and independent noise sources."""
 import torch
 from torch import nn
+from .particle_prior import ParticlePrior
 
 
 class DiffusionSchedule(nn.Module):
@@ -64,10 +65,16 @@ class DiffusionSchedule(nn.Module):
 DDGAN = DiffusionSchedule
 
 
-class DrawSource(nn.Module):
-    """Fresh Gaussian or uniform draws from a fixed/learned independent table."""
+class DrawSource(ParticlePrior):
+    """Research checkpoint adapter around public particle sampling.
+
+    Historical experiments store ``table`` rather than ``z`` and initialize
+    every control with the same seeded ``randn`` call. Keep that layout and
+    RNG consumption while sharing ParticlePrior's sampling and forward path.
+    New pipelines can use ParticlePrior or GaussianPrior directly.
+    """
     def __init__(self, kind, count, dim, seed, device):
-        super().__init__()
+        nn.Module.__init__(self)
         if kind not in ("gaussian", "fixed", "learned", "zero"):
             raise ValueError(f"unknown source {kind}")
         self.kind, self.dim = kind, dim
@@ -78,10 +85,13 @@ class DrawSource(nn.Module):
         else:
             self.register_buffer("table", table)
 
+    @property
+    def z(self):
+        return self.table
+
     def sample(self, n, rng):
         if self.kind == "gaussian":
             return torch.randn((n, self.dim), device=self.table.device, dtype=self.table.dtype, generator=rng), None
         if self.kind == "zero":
             return self.table.new_zeros(n, self.dim), None
-        ids = torch.randint(len(self.table), (n,), device=self.table.device, generator=rng)
-        return self.table[ids], ids
+        return super().sample(n, generator=rng)

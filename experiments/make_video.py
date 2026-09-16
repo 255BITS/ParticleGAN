@@ -44,7 +44,7 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 from experiments.train_arm import load_config, train
-from particlegan.particle_prior import ParticlePrior
+from particlegan import ParticlePrior
 from lib.toy_models import sample_100gaussians, mode_coverage
 
 # Frame geometry / style, held to the repo's scatter conventions.

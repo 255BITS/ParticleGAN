@@ -2,7 +2,7 @@
 
 Networks, training loops, devices, and optimizer steps belong to the caller.
 """
-from .conditioning import UCD, ucd_labels, ucd_loss
+from .conditioning import UCD, ucd_labels, ucd_loss, ucd_scores
 from .diffusion import DDGAN
 from .gan_loss import GANLoss
 from .grad_regularizers import GradientPenalty
@@ -12,6 +12,6 @@ from .vicreg_loss import ParticleRegularizer
 
 __all__ = [
     "ParticlePrior", "GaussianPrior", "GANLoss", "GradientPenalty",
-    "ParticleRegularizer", "DDGAN", "UCD", "ucd_labels", "ucd_loss",
+    "ParticleRegularizer", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
     "Recipe", "get_recipe", "learning_rate_scale",
 ]

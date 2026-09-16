@@ -50,3 +50,19 @@ def recipe_defaults(name):
                         prior_reg=recipe.prior_reg, reg_kappa=recipe.reg_kappa,
                         ema=recipe.ema_decay)
     return defaults
+
+
+def merge_config(defaults, user):
+    """Resolve experiment defaults consistently for direct and grid launches.
+
+    CIFAR condition caching defaults to enabled only for pretrained critics.
+    Infer this before the runner writes its fully resolved config, otherwise
+    historical pixel-critic files inherit an unsupported optimization. Explicit
+    values remain untouched and are checked by the trainer's validation.
+    """
+    config = {**defaults, **user}
+    if ("d_backbone" in defaults and "cache_condition" in defaults
+            and "cache_condition" not in user):
+        config["cache_condition"] = config["d_backbone"] in (
+            "pretrained_resnet18", "pretrained_resnet34")
+    return config

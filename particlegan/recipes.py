@@ -95,11 +95,13 @@ class Recipe:
         from .vicreg_loss import ParticleRegularizer
         return ParticleRegularizer(**{"weight": self.prior_reg, **overrides})
 
-    def make_optimizers(self, generator, discriminator, prior=None):
+    def make_optimizers(self, generator, discriminator, prior=None, **adam_kwargs):
         """Return ordinary ``(Adam(G + prior), Adam(D))`` optimizers.
 
         Move modules to their desired device before calling. Frozen parameters
         are excluded, and a Gaussian/frozen prior adds no optimizer group.
+        Additional Adam options, such as ``fused`` or ``eps``, apply to both
+        optimizers. Set learning rates and betas on the recipe.
         """
         from torch.optim import Adam
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
@@ -111,8 +113,8 @@ class Recipe:
             groups.append({"params": g_params, "lr": self.lr})
         if prior_params:
             groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult})
-        return (Adam(groups, lr=self.lr, betas=self.betas),
-                Adam(d_params, lr=self.lr * self.d_lr_mult, betas=self.betas))
+        return (Adam(groups, lr=self.lr, betas=self.betas, **adam_kwargs),
+                Adam(d_params, lr=self.lr * self.d_lr_mult, betas=self.betas, **adam_kwargs))
 
 
 def get_recipe(name="gan", **overrides):

@@ -27,6 +27,10 @@ See the [minimal GAN loop](docs/api.md#a-minimal-training-loop),
 [minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop), and
 [API reference](docs/api.md#reference-index) for complete examples and contracts.
 
+Our examples and experiment trainers consume these same public primitives and
+recipe factories. See the [migration and compatibility checks](reports/api-dogfood.md)
+for existing-config GPU smoke tests and checkpoint comparisons.
+
 ```python
 from particlegan import ParticlePrior, GANLoss, GradientPenalty, ParticleRegularizer
 

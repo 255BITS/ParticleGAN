@@ -6,7 +6,11 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from particlegan import ucd_labels
+from particlegan import DDGAN, ucd_labels, ucd_scores
+from particlegan.diffusion import DrawSource
+
+# Historical imports remain valid for existing analysis scripts/checkpoints.
+DiffusionSchedule = DDGAN
 
 
 class GaussianGrid:
@@ -41,9 +45,6 @@ class GaussianGrid:
         k = torch.multinomial(weights, 1, generator=rng).squeeze(1)
         picked = means[torch.arange(len(xt), device=xt.device), k]
         return picked + var.reshape(-1, 1).sqrt() * torch.randn(xt.shape, device=xt.device, generator=rng)
-
-
-from particlegan.diffusion import DiffusionSchedule, DrawSource
 
 
 def mlp(in_dim, width, depth, out_dim):
@@ -116,7 +117,8 @@ class ToyDiscriminator(nn.Module):
         if self.mode == "concat":
             pieces.append(F.one_hot(c, self.classes).to(x))
         logits = self.net(torch.cat(pieces, -1))
-        score = logits.gather(1, self.ucd_labels(c, t)[:, None]).squeeze(1) if self.mode == "ucd" else logits.squeeze(1)
+        score = ucd_scores(logits, c, t, num_classes=self.classes, target=self.ucd_target,
+                           num_steps=self.steps, validate_args=False) if self.mode == "ucd" else logits.squeeze(1)
         return score, logits
 
 

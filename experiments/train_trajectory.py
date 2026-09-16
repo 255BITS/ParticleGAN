@@ -17,12 +17,9 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from experiments.config import read_config
-from particlegan import ucd_loss
-from particlegan.diffusion import DiffusionSchedule, DrawSource
-from particlegan.gan_loss import GANLoss
-from particlegan.grad_regularizers import GradRegularizer
-from particlegan.vicreg_loss import VICRegLikeLoss
-from lib.trajectory import Routes, TrajectoryGenerator, TrajectoryDiscriminator, TrajectoryCritic, generate, metrics
+from particlegan import DDGAN, get_recipe, ucd_loss
+from particlegan.diffusion import DrawSource
+from lib.trajectory import Routes, TrajectoryGenerator, TrajectoryDiscriminator, generate, metrics
 from lib.trajectory_visuals import render
 
 DEFAULTS = {
@@ -37,6 +34,22 @@ DEFAULTS = {
     "log_interval": 250, "eval_per_context": 512, "save_checkpoint": True,
     "out_dir": "results/trajectory/default",
 }
+
+
+def training_recipe(cfg):
+    """Use the public primitives with this study's explicit numerical choices."""
+    return get_recipe(
+        cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"], num_classes=2,
+        conditioning="conditional" if cfg["d_mode"] == "concat" else "ucd",
+        ucd_target="time_class" if cfg["model"] == "ddgan" and cfg["d_mode"] == "ucd" else "class",
+        ucd_weight=cfg["ucd_lambda"], alpha_bar=cfg["alpha_bar"],
+        batch_size=cfg["batch_size"], total_steps=cfg["steps"], lr=cfg["lr"],
+        d_lr_mult=cfg["d_lr_mult"], prior_lr_mult=cfg["prior_lr_mult"],
+        betas=(cfg["beta1"], .999), loss_type="logistic", gan_mode="rp",
+        reg_arm="b_cap", reg_coeff=cfg["reg_coeff"], reg_kappa=cfg["reg_kappa"],
+        reg_every=cfg["reg_every"], prior_reg=cfg["prior_reg"], ema_decay=cfg["ema"],
+        lr_floor=1.0,  # This experiment intentionally keeps a constant learning rate.
+    )
 
 
 def validate(cfg):
@@ -62,7 +75,7 @@ def validate(cfg):
             raise ValueError(key)
     if cfg["model"] == "gan" and cfg["noise"] != "gaussian":
         raise ValueError("step noise does not apply to a one-shot GAN")
-    DiffusionSchedule(cfg["alpha_bar"], validate_args=False)
+    DDGAN(cfg["alpha_bar"], validate_args=False)
 
 
 def write_json(path, data):
@@ -71,6 +84,7 @@ def write_json(path, data):
 
 def train(cfg):
     validate(cfg)
+    recipe = training_recipe(cfg)
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA is required")
     torch.set_num_threads(1)
@@ -98,21 +112,20 @@ def train(cfg):
     write_json(out / "environment.json", env)
     rngs = [torch.Generator(device=device).manual_seed(cfg["seed"] + i) for i in range(11, 17)]
     toy = Routes(cfg["length"], device, cfg["geometry_mode"])
-    schedule = DiffusionSchedule(cfg["alpha_bar"], validate_args=False).to(device)
+    schedule = DDGAN(cfg["alpha_bar"], validate_args=False).to(device)
     prior = DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"]+101, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2*cfg["length"], cfg["seed"]+102, device)
     g, d = TrajectoryGenerator(cfg).to(device), TrajectoryDiscriminator(cfg).to(device)
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for m in (ema_g, ema_prior, ema_noise):
         m.requires_grad_(False)
-    groups = [{"params": list(g.parameters()), "lr": cfg["lr"]}]
-    for source, mult in ((prior, "prior_lr_mult"), (noise, "noise_lr_mult")):
-        if source.kind == "learned":
-            groups.append({"params": list(source.parameters()), "lr": cfg["lr"] * cfg[mult]})
-    opt_g = torch.optim.Adam(groups, betas=(cfg["beta1"], .999), fused=True)
-    opt_d = torch.optim.Adam(d.parameters(), lr=cfg["lr"]*cfg["d_lr_mult"], betas=(cfg["beta1"], .999), fused=True)
-    gan, vic = GANLoss("logistic", "rp"), VICRegLikeLoss()
-    reg = GradRegularizer("b_cap", cfg["reg_coeff"], kappa=cfg["reg_kappa"], lazy_k=cfg["reg_every"])
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, fused=True)
+    if noise.kind == "learned":
+        opt_g.add_param_group({"params": list(noise.parameters()),
+                               "lr": recipe.lr * cfg["noise_lr_mult"]})
+    gan = recipe.make_loss()
+    spread = recipe.make_prior_regularizer()
+    reg = recipe.make_gradient_penalty()
 
     def batch():
         c, geom, x0 = toy.batch(cfg["batch_size"], rngs[0])
@@ -148,7 +161,7 @@ def train(cfg):
             if cfg["d_mode"] == "ucd" and cfg["ucd_lambda"]:
                 target = d.ucd_labels(c, t)
                 ld = ld + ucd_loss(cr, cf, target, weight=cfg["ucd_lambda"])
-            penalty, _ = reg.penalty(TrajectoryCritic(d, c, context, xt, t), real, xf, step, rngs[5], collect_stats=False)
+            penalty, _ = reg.penalty(lambda x: d(x, c, context, xt, t)[0], real, xf, step, rngs[5], collect_stats=False)
             ld = ld + penalty
             opt_d.zero_grad(set_to_none=True)
             ld.backward()
@@ -161,9 +174,9 @@ def train(cfg):
                 dr = d(real, c, context, xt, t)[0]
             lg = gan.g_loss(df, dr)
             if prior.kind == "learned" and cfg["prior_reg"]:
-                selected = prior.table[ids.unique()]
+                selected = prior(ids.unique())
                 if len(selected) > 1:
-                    lg = lg + cfg["prior_reg"] * vic(selected)
+                    lg = lg + spread(selected)
             opt_g.zero_grad(set_to_none=True)
             lg.backward()
             opt_g.step()

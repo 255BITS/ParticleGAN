@@ -51,7 +51,6 @@ Visualization:
 
 import argparse
 import copy
-import math
 import sys
 import time
 from pathlib import Path
@@ -67,12 +66,11 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 from particlegan.particle_prior import (  # noqa: E402
-    PRIOR_KINDS, ParticlePrior, canonical_prior_kind, make_prior,
+    PRIOR_KINDS, canonical_prior_kind, make_prior,
 )
-from particlegan import get_recipe
-from particlegan.gan_loss import GANLoss  # noqa: E402
-from particlegan.grad_regularizers import GradRegularizer  # noqa: E402
-from particlegan.vicreg_loss import VICRegLikeLoss  # noqa: E402
+from particlegan import (  # noqa: E402
+    GradientPenalty, ParticlePrior, get_recipe, learning_rate_scale,
+)
 
 from lib.toy_models import (  # noqa: E402
     SimpleMLPGenerator, SimpleMLPDiscriminator, sample_100gaussians, mode_coverage,
@@ -193,7 +191,19 @@ def train(
     # Models
     prior_kind = canonical_prior_kind(prior_kind)
     learnable_prior = prior_kind == "particles"
-    prior = make_prior(prior_kind, num_particles=num_particles, z_dim=z_dim).to(device)
+    recipe = get_recipe(
+        z_dim=z_dim, num_particles=num_particles, batch_size=batch_size,
+        total_steps=epochs * steps_per_epoch, lr=lr, d_lr_mult=d_lr_mult,
+        betas=(beta1, _RECIPE.betas[1]), loss_type=loss_type, gan_mode=gan_mode,
+        reg_arm=reg_arm, reg_coeff=reg_coeff, reg_every=reg_every, reg_method=reg_method,
+        prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
+        lr_floor=lr_floor,
+    )
+    # The fresh-Gaussian research control retains a fixed visualization table
+    # and its historical initialization RNG consumption.
+    prior = (make_prior(prior_kind, num_particles=num_particles, z_dim=z_dim)
+             if prior_kind == "fresh_gaussian"
+             else recipe.make_prior(learnable=learnable_prior)).to(device)
     G = SimpleMLPGenerator(z_dim=z_dim).to(device)
     D = SimpleMLPDiscriminator(in_dim=2, fourier=fourier).to(device)
 
@@ -210,24 +220,17 @@ def train(
     for p in list(ema_G.parameters()) + list(ema_prior.parameters()):
         p.requires_grad_(False)
 
-    vic_reg = VICRegLikeLoss()
-    gan_loss = GANLoss(loss_type=loss_type, mode=gan_mode)
-    regularizer = GradRegularizer(arm=reg_arm, coeff=reg_coeff, lazy_k=reg_every,
-                                  method=reg_method, fd_eps=reg_fd_eps)
+    # Keep the raw spread value for diagnostics; apply lambda_ep in the loop.
+    vic_reg = recipe.make_prior_regularizer(weight=1.0)
+    gan_loss = recipe.make_loss()
+    regularizer = recipe.make_gradient_penalty(fd_eps=reg_fd_eps)
 
-    opt_G = torch.optim.Adam(
-        G.parameters(),
-        lr=lr,
-        betas=(beta1, _RECIPE.betas[1]), fused=fused_adam,
-    )
+    opt_G, opt_D = recipe.make_optimizers(G, D, fused=fused_adam)
+    # Keep a separate prior optimizer for the existing update/checkpoint layout.
     opt_prior = (
-        torch.optim.Adam(prior.parameters(), lr=lr * _RECIPE.prior_lr_mult, betas=(beta1, _RECIPE.betas[1]), fused=fused_adam)
+        torch.optim.Adam(prior.parameters(), lr=recipe.lr * recipe.prior_lr_mult,
+                         betas=recipe.betas, fused=fused_adam)
         if learnable_prior else None
-    )
-    opt_D = torch.optim.Adam(
-        D.parameters(),
-        lr=lr * d_lr_mult,
-        betas=(beta1, _RECIPE.betas[1]), fused=fused_adam,
     )
 
     out_path = Path(out_dir)
@@ -267,14 +270,10 @@ def train(
     for epoch in range(epochs):
         for _ in range(steps_per_epoch):
             # Full LR until lr_anneal_start, then cosine down to lr_floor.
+            # Retain the historical minimum one-update decay duration.
             anneal_from = lr_anneal_start * total_steps
-            if global_step <= anneal_from:
-                scale = 1.0
-            else:
-                frac = (global_step - anneal_from) / max(1.0, total_steps - anneal_from)
-                scale = lr_floor + (1.0 - lr_floor) * 0.5 * (
-                    1.0 + math.cos(math.pi * frac)
-                )
+            scale = learning_rate_scale(global_step - anneal_from,
+                                        max(1.0, total_steps - anneal_from), 0.0, lr_floor)
             for opt in all_opts:
                 for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
                     group["lr"] = base * scale
@@ -338,7 +337,7 @@ def train(
             ep_z = loss_gan.new_zeros(())
             if learnable_prior:
                 unique_idx = torch.unique(idx)
-                ep_z = vic_reg(prior.z[unique_idx])
+                ep_z = vic_reg(prior(unique_idx))
             loss_g = loss_gan + lambda_ep * ep_z
 
             opt_G.zero_grad()
@@ -431,7 +430,7 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         "--reg_arm",
         type=str,
         default=_RECIPE.reg_arm,
-        choices=list(GradRegularizer.ARMS),
+        choices=list(GradientPenalty.ARMS),
         help="Discriminator gradient penalty (particlegan.grad_regularizers). Default "
         "'b_cap' is the one-sided cap that won the regularizer study; "
         "'a_r1r2' is the older zero-centered R1+R2 penalty.",

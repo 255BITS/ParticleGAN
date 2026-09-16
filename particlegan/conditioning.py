@@ -28,6 +28,25 @@ def ucd_labels(labels, timestep=None, *, num_classes, target="class", num_steps=
     return (timestep - 1) * num_classes + labels
 
 
+def ucd_scores(logits, labels, timestep=None, *, num_classes, target="class",
+               num_steps=None, validate_args=True):
+    """Select class scores from existing logits without wrapping the network.
+
+    This is the same selection used by :class:`UCD`. It preserves gradients
+    and the caller's model/checkpoint layout. Joint heads require ``num_steps``.
+    """
+    if target == "time_class" and (type(num_steps) is not int or num_steps < 1):
+        raise ValueError("time_class requires num_steps")
+    targets = ucd_labels(labels, timestep, num_classes=num_classes, target=target,
+                         num_steps=num_steps, validate_args=validate_args)
+    heads = num_classes * (num_steps if target == "time_class" else 1)
+    if logits.shape != (len(labels), heads):
+        raise ValueError(f"UCD network must return [batch, {heads}] logits")
+    if logits.device != labels.device:
+        raise ValueError("class labels and logits must share a device")
+    return logits.gather(1, targets[:, None]).squeeze(1)
+
+
 def ucd_loss(real_logits, fake_logits, targets, weight=0.02):
     """CE(real) + CE(fake), applied only in the discriminator update."""
     import math
@@ -65,12 +84,11 @@ class UCD(nn.Module):
             raise ValueError("UCD requires LongTensor class labels of shape [batch]")
         if c.device != x.device:
             raise ValueError("class labels and inputs must share a device")
-        targets = self.ucd_labels(c, t)
         kwargs = {} if xt is None else {"xt": xt}
         if t is not None and self.target == "class":
             kwargs["t"] = t
         logits = self.network(x, **kwargs)
-        heads = self.num_classes * (self.num_steps if self.target == "time_class" else 1)
-        if logits.shape != (len(x), heads):
-            raise ValueError(f"UCD network must return [batch, {heads}] logits")
-        return logits.gather(1, targets[:, None]).squeeze(1), logits
+        scores = ucd_scores(logits, c, t, num_classes=self.num_classes,
+                            target=self.target, num_steps=self.num_steps,
+                            validate_args=self.validate_args)
+        return scores, logits

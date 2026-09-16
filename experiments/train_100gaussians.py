@@ -17,7 +17,7 @@ from experiments.config import read_config, recipe_defaults
 from experiments.train_denoising import json_safe, render, write_json
 from experiments.run_grid import code_provenance
 from lib.denoising_toy import GaussianGrid, grid_metrics
-from particlegan.grad_regularizers import GradRegularizer
+from particlegan import GradientPenalty
 
 DEFAULTS = {
     **recipe_defaults('100gaussians'),
@@ -41,7 +41,7 @@ def train(cfg):
     for key in ('epochs','steps_per_epoch','batch_size','num_particles','log_interval','snapshot_interval','final_samples'):
         if type(cfg[key]) is not int or cfg[key] < 1:
             raise ValueError(f'{key} must be a positive integer')
-    GradRegularizer(cfg['reg_arm'],cfg['reg_coeff'],lazy_k=cfg['reg_every'],method=cfg['reg_method'],fd_eps=cfg['reg_fd_eps'])
+    GradientPenalty(cfg['reg_arm'],cfg['reg_coeff'],lazy_k=cfg['reg_every'],method=cfg['reg_method'],fd_eps=cfg['reg_fd_eps'])
     torch.set_num_threads(1)
     torch.backends.cuda.matmul.allow_tf32=False
     out=ROOT/cfg['out_dir'];out.mkdir(parents=True,exist_ok=True)

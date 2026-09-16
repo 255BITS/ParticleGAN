@@ -25,15 +25,12 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from experiments.config import read_config, recipe_defaults
-from particlegan import get_recipe, ucd_loss
-from particlegan.diffusion import DiffusionSchedule, DrawSource
+from particlegan import DDGAN, GradientPenalty, get_recipe, learning_rate_scale, ucd_loss
+from particlegan.diffusion import DrawSource
 from lib.denoising_toy import (
-    GaussianGrid, ToyGenerator, ToyDiscriminator, FixedConditionCritic,
+    GaussianGrid, ToyGenerator, ToyDiscriminator,
     generate, grid_metrics, conditional_probe,
 )
-from particlegan.gan_loss import GANLoss
-from particlegan.grad_regularizers import GradRegularizer
-from particlegan.vicreg_loss import VICRegLikeLoss
 
 
 DEFAULTS = {
@@ -63,8 +60,24 @@ DEFAULTS = {
 DEFAULT_CONFIG = ROOT / "configs" / "denoising" / "default.toml"
 
 
+def training_recipe(cfg):
+    """Resolve legacy experiment fields into the public, caller-owned recipe."""
+    return get_recipe(
+        cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
+        num_classes=cfg["classes"],
+        conditioning="conditional" if cfg["d_mode"] == "concat" else cfg["d_mode"],
+        ucd_target=cfg["ucd_target"], ucd_weight=cfg["ucd_lambda"],
+        alpha_bar=cfg["alpha_bar"], batch_size=cfg["batch_size"], total_steps=cfg["steps"],
+        lr=cfg["lr"], d_lr_mult=cfg["d_lr_mult"], prior_lr_mult=cfg["prior_lr_mult"],
+        betas=(cfg["beta1"], .999), loss_type=cfg["loss_type"], gan_mode=cfg["gan_mode"],
+        reg_arm=cfg["reg_arm"], reg_coeff=cfg["reg_coeff"], reg_kappa=cfg["reg_kappa"],
+        reg_every=cfg["reg_every"], reg_method=cfg["reg_method"], prior_reg=cfg["prior_reg"],
+        ema_decay=cfg["ema"], lr_anneal_start=cfg["lr_anneal_start"], lr_floor=cfg["lr_floor"],
+    )
+
+
 def validate(cfg):
-    GradRegularizer(cfg["reg_arm"], cfg["reg_coeff"], kappa=cfg["reg_kappa"],
+    GradientPenalty(cfg["reg_arm"], cfg["reg_coeff"], kappa=cfg["reg_kappa"],
                     lazy_k=cfg.get("reg_every", 1), method=cfg.get("reg_method", "autograd"),
                     fd_eps=cfg.get("reg_fd_eps", .05))
     target = cfg.get("ucd_target", "class")
@@ -140,6 +153,7 @@ def render(out, x, c, toy, panels):
 
 def train(cfg):
     validate(cfg)
+    recipe = training_recipe(cfg)
     if not torch.cuda.is_available():
         raise RuntimeError("This experiment requires a GPU; CUDA is unavailable")
     device = torch.device("cuda:0")
@@ -168,7 +182,7 @@ def train(cfg):
             for name, offset in (("data", 11), ("time", 12), ("corruption", 13), ("latent", 14), ("noise", 15), ("penalty", 16))}
     toy = GaussianGrid(device, cfg["std"], cfg["classes"])
     # Training creates bounded integer times; retain the original sync-free hot path.
-    schedule = DiffusionSchedule(cfg["alpha_bar"], validate_args=False).to(device)
+    schedule = DDGAN(cfg["alpha_bar"], validate_args=False).to(device)
     # Independent initialization preserves identical tables across architecture changes.
     prior = DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"] + 101, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2, cfg["seed"] + 102, device)
@@ -176,20 +190,15 @@ def train(cfg):
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
     for model in (ema_g, ema_prior, ema_noise):
         model.requires_grad_(False)
-    groups = [{"params": list(g.parameters()), "lr": cfg["lr"]}]
-    if cfg["prior"] == "learned":
-        groups.append({"params": list(prior.parameters()), "lr": cfg["lr"] * cfg["prior_lr_mult"]})
+    opt_g, opt_d = recipe.make_optimizers(g, d, prior, fused=cfg["fused_adam"])
     if cfg["noise"] == "learned":
-        groups.append({"params": list(noise.parameters()), "lr": cfg["lr"] * cfg["noise_lr_mult"]})
-    betas = (cfg["beta1"], get_recipe("denoising").betas[1])
-    opt_g = torch.optim.Adam(groups, betas=betas, fused=cfg.get("fused_adam", False))
-    opt_d = torch.optim.Adam(d.parameters(), lr=cfg["lr"] * cfg["d_lr_mult"], betas=betas, fused=cfg.get("fused_adam", False))
+        # A research-only source with its own rate; ordinary optimizers stay extensible.
+        opt_g.add_param_group({"params": list(noise.parameters()),
+                               "lr": recipe.lr * cfg["noise_lr_mult"]})
     bases = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-    gan = GANLoss(cfg["loss_type"], cfg["gan_mode"])
-    reg = GradRegularizer(cfg["reg_arm"], cfg["reg_coeff"], kappa=cfg["reg_kappa"],
-                          lazy_k=cfg.get("reg_every", 1), method=cfg.get("reg_method", "autograd"),
-                          fd_eps=cfg.get("reg_fd_eps", .05))
-    vic = VICRegLikeLoss()
+    gan = recipe.make_loss()
+    reg = recipe.make_gradient_penalty(fd_eps=cfg["reg_fd_eps"])
+    spread = recipe.make_prior_regularizer()
 
     def batch():
         c = torch.randint(cfg["classes"], (cfg["batch_size"],), device=device, generator=rngs["data"])
@@ -232,8 +241,8 @@ def train(cfg):
             if step == 1 or (step - 1) % cfg["eval_interval"] == 0:
                 torch.cuda.synchronize()
                 block_start = time.perf_counter()
-            frac = max(0, (step - 1 - cfg["lr_anneal_start"] * cfg["steps"]) / ((1 - cfg["lr_anneal_start"]) * cfg["steps"]))
-            scale = cfg["lr_floor"] + (1 - cfg["lr_floor"]) * .5 * (1 + math.cos(math.pi * frac))
+            scale = learning_rate_scale(step - 1, recipe.total_steps,
+                                        recipe.lr_anneal_start, recipe.lr_floor)
             for opt, base in zip((opt_g, opt_d), bases):
                 for group, lr in zip(opt.param_groups, base):
                     group["lr"] = lr * scale
@@ -247,7 +256,7 @@ def train(cfg):
             if cfg["d_mode"] == "ucd" and cfg["ucd_lambda"]:
                 targets = d.ucd_labels(c, t)
                 loss_d = loss_d + ucd_loss(cr, cf, targets, weight=cfg["ucd_lambda"])
-            penalty, _ = reg.penalty(FixedConditionCritic(d, c, xt, t), real, xf, step, rngs["penalty"], collect_stats=cfg.get("reg_sync_stats", True))
+            penalty, _ = reg.penalty(lambda x: d(x, c, xt, t)[0], real, xf, step, rngs["penalty"], collect_stats=cfg.get("reg_sync_stats", True))
             loss_d = loss_d + penalty
             opt_d.zero_grad(set_to_none=True)
             loss_d.backward()
@@ -261,9 +270,9 @@ def train(cfg):
                 dr = d(real, c, xt, t)[0]
             loss_g = gan.g_loss(df, dr)
             if cfg["prior"] == "learned" and cfg["prior_reg"]:
-                selected = prior.table[ids.unique()]
+                selected = prior(ids.unique())
                 if len(selected) > 1:
-                    loss_g = loss_g + cfg["prior_reg"] * vic(selected)
+                    loss_g = loss_g + spread(selected)
             if cfg["noise"] == "learned" and cfg["noise_reg"]:
                 # Explicit moment penalty, off in the unconstrained learned-noise arm.
                 nt = noise.table - noise.table.mean(0)

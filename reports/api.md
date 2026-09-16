@@ -5,6 +5,10 @@ Status: implemented on branch `api`; validation results below.
 For usage and constructor contracts, see the
 [API reference and minimal training loop](../docs/api.md).
 
+The follow-up [repository dogfooding report](api-dogfood.md) covers the
+experiment/example migration, 797 existing configs, GPU smoke cases, and
+before/after checkpoint comparisons.
+
 Public defaults now use `get_recipe()` / `"gan"` and `get_recipe("ddgan")`.
 The historical names below remain accepted for existing experiment configs;
 their numerical settings are unchanged. The reference opens with standalone

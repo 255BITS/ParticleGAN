@@ -35,7 +35,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-from experiments.config import read_config, recipe_defaults
+from experiments.config import merge_config, read_config, recipe_defaults
 
 DEFAULT_PYTHON = ".venv/bin/python"
 DEFAULT_TRAINER = "experiments/train_arm.py"
@@ -95,7 +95,7 @@ def load_config(config_path: str, defaults: Dict) -> Dict:
         raise ValueError("config must be a mapping with string keys")
     if defaults and (unknown := set(user) - set(defaults)):
         raise ValueError(f"unknown config keys: {sorted(unknown)}")
-    cfg = {**defaults, **user}
+    cfg = merge_config(defaults, user)
     if not isinstance(cfg.get("out_dir"), str) or not cfg["out_dir"].strip():
         raise ValueError("config needs a nonempty string out_dir")
     canonical(cfg)

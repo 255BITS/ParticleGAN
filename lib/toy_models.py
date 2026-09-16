@@ -10,7 +10,7 @@ from typing import Tuple
 import torch
 import torch.nn as nn
 
-from particlegan.particle_prior import ParticlePrior
+from particlegan import ParticlePrior
 
 
 # =========================

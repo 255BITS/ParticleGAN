@@ -38,7 +38,6 @@ See FINDINGS.md and docs/convergence-tips.md for where the recipe comes from.
 """
 
 import copy
-import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -56,10 +55,7 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from particlegan.particle_prior import ParticlePrior  # noqa: E402 - after the sys.path shim
-from particlegan.gan_loss import GANLoss  # noqa: E402
-from particlegan.grad_regularizers import GradRegularizer  # noqa: E402
-from particlegan.vicreg_loss import VICRegLikeLoss  # noqa: E402
+from particlegan import get_recipe, learning_rate_scale  # noqa: E402
 
 # ==========================================
 # 1. Setup & Data
@@ -212,8 +208,14 @@ def train(
             if m.bias is not None:
                 nn.init.zeros_(m.bias)
 
-    # NEW: The Particle Prior
-    prior = ParticlePrior(num_particles=NUM_PARTICLES, z_dim=Z_DIM).to(device)
+    recipe = get_recipe(
+        num_particles=NUM_PARTICLES, z_dim=Z_DIM, batch_size=batch_size,
+        total_steps=total_steps, lr=lr, d_lr_mult=d_lr_mult, betas=(beta1, 0.999),
+        loss_type=loss_type, gan_mode=gan_mode, reg_arm=reg_arm, reg_coeff=reg_coeff,
+        prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
+        lr_floor=lr_floor,
+    )
+    prior = recipe.make_prior().to(device)
 
     # EMA copies of E / G / prior. Every dashboard frame is read off these:
     # the live weights orbit the equilibrium, the averaged ones sit on it.
@@ -223,19 +225,16 @@ def train(
     for p in list(ema_E.parameters()) + list(ema_G.parameters()) + list(ema_prior.parameters()):
         p.requires_grad_(False)
 
-    vic_loss_fn = VICRegLikeLoss()
-    gan_loss = GANLoss(loss_type=loss_type, mode=gan_mode)
-    regularizer = GradRegularizer(arm=reg_arm, coeff=reg_coeff)
+    vic_loss_fn = recipe.make_prior_regularizer(weight=1.0)
+    gan_loss = recipe.make_loss()
+    regularizer = recipe.make_gradient_penalty()
 
     # Optimizers
     # The particles get their own optimizer at 10x LR: they are an
     # embedding-like table and want far more mobility than the dense nets.
-    opt_GE = torch.optim.Adam(list(E.parameters()) + list(G.parameters()),
-                              lr=lr, betas=(beta1, 0.999))
+    opt_GE, opt_D = recipe.make_optimizers(nn.ModuleList([E, G]), D)
     opt_prior = torch.optim.Adam(prior.parameters(),
-                                 lr=lr * 10.0, betas=(beta1, 0.999))
-    opt_D = torch.optim.Adam(D.parameters(),
-                             lr=lr * d_lr_mult, betas=(beta1, 0.999))
+                                 lr=recipe.lr * recipe.prior_lr_mult, betas=recipe.betas)
 
     base_lrs = {
         id(opt): [g["lr"] for g in opt.param_groups]
@@ -259,14 +258,10 @@ def train(
 
     for step in range(total_steps + 1):
         # Full LR until lr_anneal_start, then cosine down to lr_floor.
+        # Retain the historical minimum one-update decay duration.
         anneal_from = lr_anneal_start * total_steps
-        if step <= anneal_from:
-            scale = 1.0
-        else:
-            frac = (step - anneal_from) / max(1.0, total_steps - anneal_from)
-            scale = lr_floor + (1.0 - lr_floor) * 0.5 * (
-                1.0 + math.cos(math.pi * frac)
-            )
+        scale = learning_rate_scale(step - anneal_from,
+                                    max(1.0, total_steps - anneal_from), 0.0, lr_floor)
         for opt in (opt_GE, opt_prior, opt_D):
             for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
                 group["lr"] = base * scale

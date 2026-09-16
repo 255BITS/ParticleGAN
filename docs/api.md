@@ -393,12 +393,20 @@ returns the head indices. The same operation is available without a wrapper:
 ```text
 ucd_labels(labels, timestep=None, *, num_classes, target="class",
            num_steps=None, validate_args=True)
+ucd_scores(logits, labels, timestep=None, *, num_classes, target="class",
+           num_steps=None, validate_args=True)
 ucd_loss(real_logits, fake_logits, targets, weight=0.02)
 ```
 
 `ucd_loss` is `weight * (CE(real_logits, targets) + CE(fake_logits, targets))`.
 The selected recipe adds it to D's loss. The function does not detach either
 logit tensor, so detach fake samples before computing D's logits.
+
+`ucd_scores` selects the adversarial scores directly from your model's existing
+`[B, heads]` logits and returns `[B]`, preserving gradients. Use it when your
+pipeline already computes logits or needs to keep its existing model and
+checkpoint structure. `UCD` uses this same function internally. Joint time/class
+selection requires `num_steps=T`.
 
 DDGAN and UCD numeric bounds checks can synchronize CUDA. Set
 `validate_args=False` only for already validated times/labels; shape, dtype,
@@ -445,12 +453,16 @@ budgets remain application choices.
 | `recipe.make_loss(**kwargs)` | `GANLoss` using recipe loss and mode |
 | `recipe.make_gradient_penalty(**kwargs)` | `GradientPenalty` using recipe penalty settings |
 | `recipe.make_prior_regularizer(**kwargs)` | `ParticleRegularizer` with `weight=recipe.prior_reg` already applied |
-| `recipe.make_optimizers(G, D, prior=None)` | `(opt_g, opt_d)`, ordinary Adam optimizers |
+| `recipe.make_optimizers(G, D, prior=None, **adam_kwargs)` | `(opt_g, opt_d)`, ordinary Adam optimizers |
 
 Factory keyword arguments override constructor values for that call, without
 changing the recipe. Optimizers exclude frozen parameters; G and prior have
 separate groups at `lr` and `lr * prior_lr_mult`, while D uses `lr * d_lr_mult`.
 If G contains the supplied prior, its parameters are included only once.
+Additional Adam options such as `fused=True` or `eps=1e-8` are passed to both
+optimizers; configure learning rates and betas through the recipe. You can
+still construct optimizers yourself, including separate prior optimizers or
+additional parameter groups for learned noise.
 
 `learning_rate_scale(step, total_steps, start=.6, floor=.05)` returns a Python
 float: hold 1, then cosine decay to `floor`. `step` counts completed updates
