@@ -68,7 +68,7 @@ def diagnose(path, device, bypass_rollouts=False, jacobians=False):
         memory = core.context(d.writer, observed[:, :n])
         point, _ = handoff.local_point(g, z, memory, n)
         np.testing.assert_allclose(point.cpu().numpy(), saved_first[n], atol=1e-5, rtol=1e-5)
-        translated = g.translate_memory(memory)
+        translated = g.readable_memory(z, memory, time_index=n)
         row = {'normal_target_mse': float((point-clean[:, n]).square().mean()),
                'raw_memory_rms': float(memory.square().mean().sqrt()),
                'adapter_correction_rms': float((translated-memory).square().mean().sqrt()),
@@ -100,7 +100,7 @@ def diagnose(path, device, bypass_rollouts=False, jacobians=False):
             corrupted = memory+delta
             altered, _ = handoff.local_point(g, z, corrupted, n)
             altered_next = d.writer.write(corrupted, altered)
-            repaired = g.translate_memory(corrupted)
+            repaired = g.readable_memory(z, corrupted, time_index=n)
             with bypass_adapter(g):
                 bypass, _ = handoff.local_point(g, z, corrupted, n)
             perturbations[str(amount)] = {

@@ -68,34 +68,57 @@ class LocalReader(base.Reader):
         self.residual_output = cfg.residual_output
         self.output_bound = cfg.output_bound
         self.memory_adapter = None
-        if getattr(cfg, 'g_memory_adapter', 'none') == 'residual':
+        self.proposal_adapter = getattr(cfg, 'g_memory_adapter', 'none') == 'proposal'
+        if getattr(cfg, 'g_memory_adapter', 'none') in ('residual', 'proposal'):
             # Identity initialization keeps the initial GAN identical to its
             # control. Adapter initialization does not consume the main RNG.
             with torch.random.fork_rng(devices=[]):
                 torch.manual_seed(50)
                 self.memory_adapter = nn.Sequential(
-                    nn.Linear(cfg.memory_dim, cfg.adapter_width), nn.SiLU(),
+                    nn.Linear(cfg.memory_dim+2*int(self.proposal_adapter), cfg.adapter_width), nn.SiLU(),
                     nn.Linear(cfg.adapter_width, cfg.adapter_bottleneck), nn.SiLU(),
                     nn.Linear(cfg.adapter_bottleneck, cfg.memory_dim))
                 nn.init.zeros_(self.memory_adapter[-1].weight)
                 nn.init.zeros_(self.memory_adapter[-1].bias)
 
-    def translate_memory(self, memory):
+    def translate_memory(self, memory, proposal=None):
         if self.memory_adapter is None:
             return memory
         flat = memory.flatten(1)
-        return (flat+self.memory_adapter(flat)).reshape_as(memory)
+        inputs = flat
+        if self.proposal_adapter:
+            if proposal is None:
+                raise ValueError('Proposal adapter requires the unrefined point; use readable_memory for diagnostics')
+            inputs = torch.cat((flat, proposal), -1)
+        return (flat+self.memory_adapter(inputs)).reshape_as(memory)
 
-    def forward(self, z, memory, hidden=None, *, time_index=None):
+    def _with_clock(self, z, time_index):
         if self.clock_bands:
             clock = clock_features(time_index, z, self.clock_bands, self.clock_frequency, self.clock_rate)
             z = torch.cat((z, clock), -1)
-        # Translation affects G's read only; raw D-owned memory is not mutated.
-        point, hidden = super().forward(z, self.translate_memory(memory), hidden)
+        return z
+
+    def _read(self, z, memory, hidden, raw_memory):
+        point, hidden = super().forward(z, memory, hidden)
         if self.output_bound:
             # Smooth output parameterization; no gradient clipping. For residual
             # output this bounds each increment, including the first from M=0.
             point = self.output_bound*torch.tanh(point/self.output_bound)
         if self.residual_output:
-            point = point+memory.flatten(1)[:, self.recent_start:self.recent_start+2]
+            point = point+raw_memory.flatten(1)[:, self.recent_start:self.recent_start+2]
         return point, hidden
+
+    def _readable(self, z, memory, hidden=None):
+        proposal = None
+        if self.proposal_adapter and self.memory_adapter is not None:
+            proposal, _ = self._read(z, memory, hidden, memory)
+        return self.translate_memory(memory, proposal)
+
+    def readable_memory(self, z, memory, *, time_index=None):
+        """Actual translated read, including proposal conditioning when enabled."""
+        return self._readable(self._with_clock(z, time_index), memory)
+
+    def forward(self, z, memory, hidden=None, *, time_index=None):
+        z = self._with_clock(z, time_index)
+        # Both passes use the same raw D state, particle and clock. No writeback.
+        return self._read(z, self._readable(z, memory, hidden), hidden, memory)

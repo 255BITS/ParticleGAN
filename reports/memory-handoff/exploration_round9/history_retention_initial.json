@@ -1,0 +1,54 @@
+{
+  "evaluation_only": true,
+  "definition": "Last256 overlapping absolute-clock times, warm compared to cold trajectory of same particle; squared difference normalized by centered cold-path variance. Small error means the different histories lead to similar late outputs, not proof of no memory use.",
+  "results": [
+    {
+      "name": "clean_s25",
+      "prefix": 8,
+      "normalized_same_particle_cold_warm_error_median": 1.7143418207597978e-12,
+      "fraction_below_1e_3": 0.9765625
+    },
+    {
+      "name": "clean_s25",
+      "prefix": 32,
+      "normalized_same_particle_cold_warm_error_median": 2.120819628329892e-12,
+      "fraction_below_1e_3": 0.96875
+    },
+    {
+      "name": "clean_s25_detach",
+      "prefix": 8,
+      "normalized_same_particle_cold_warm_error_median": 8.559935933120926e-13,
+      "fraction_below_1e_3": 0.9921875
+    },
+    {
+      "name": "clean_s25_detach",
+      "prefix": 32,
+      "normalized_same_particle_cold_warm_error_median": 8.464455705011829e-13,
+      "fraction_below_1e_3": 1.0
+    },
+    {
+      "name": "clock_control",
+      "prefix": 8,
+      "normalized_same_particle_cold_warm_error_median": 3.9588624094504987e-13,
+      "fraction_below_1e_3": 0.9765625
+    },
+    {
+      "name": "clock_control",
+      "prefix": 32,
+      "normalized_same_particle_cold_warm_error_median": 4.938423125500113e-13,
+      "fraction_below_1e_3": 0.9765625
+    },
+    {
+      "name": "shared_s25",
+      "prefix": 8,
+      "normalized_same_particle_cold_warm_error_median": 1.0090469123853256e-11,
+      "fraction_below_1e_3": 0.9375
+    },
+    {
+      "name": "shared_s25",
+      "prefix": 32,
+      "normalized_same_particle_cold_warm_error_median": 1.0870759073544425e-11,
+      "fraction_below_1e_3": 0.9453125
+    }
+  ]
+}

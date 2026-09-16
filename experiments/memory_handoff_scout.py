@@ -39,6 +39,8 @@ class Config(base.Config):
     feedback_min_prefix: int = 1
     feedback_ramp_steps: int = 0
     feedback_backprop: bool = False
+    feedback_judge_memory: str = 'shared'
+    adversarial_only: bool = False
     recent_points: int = 0
     residual_output: bool = False
     output_bound: float = 0.
@@ -83,12 +85,17 @@ class Config(base.Config):
         assert self.clock_origin_max >= 0
         assert self.clock_bands or (not self.clock_to_d and self.clock_origin_max == 0)
         assert 0 <= self.slow_dim <= self.memory_dim-2*self.recent_points and 0 < self.slow_rate <= 1
-        assert self.g_memory_adapter in ('none', 'residual')
+        assert self.g_memory_adapter in ('none', 'residual', 'proposal')
         assert min(self.adapter_width, self.adapter_bottleneck) > 0
         assert min(self.repair_weight, self.stability_g_weight, self.stability_d_weight) >= 0
         assert self.repair_noise > 0 and self.stability_noise > 0 and self.stability_max_gain > 0
         assert self.repair_target in ('raw', 'translated')
         assert not self.repair_weight or self.g_memory_adapter != 'none'
+        assert not self.repair_weight or self.g_memory_adapter != 'proposal'
+        assert self.feedback_judge_memory in ('shared', 'clean')
+        assert self.feedback_judge_memory == 'shared' or self.feedback_probability > 0
+        assert not self.adversarial_only or not any((self.predict_weight, self.temporal_weight,
+            self.repair_weight, self.stability_g_weight, self.stability_d_weight))
         assert self.dynamics_min_prefix >= 1
         assert not (self.repair_weight or self.stability_g_weight or self.stability_d_weight) or self.dynamics_min_prefix <= self.max_prefix
 
@@ -183,14 +190,16 @@ def batch_inputs(cfg, real, rngs):
 
 
 def training_memory(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
-                    proposal_grad=False, clock_origin=None):
+                    proposal_grad=False, clock_origin=None, return_reference=False):
     """Replace at most the last observation before each target by a G point.
 
-    The writer retains its D gradient through both the prefix and replacement
-    write. Real/fake candidate scores share the returned memory; neither writes.
+    Both returned states retain writer gradients. The caller chooses which state
+    D uses for scoring; G's fake is detached during D training. Neither candidate
+    score writes. return_reference preserves the unmodified real-history state.
     """
     if not cfg.feedback_probability:
-        return selected_memories(critic.writer, observed, positions, cfg.max_prefix)+jitter
+        memory = selected_memories(critic.writer, observed, positions, cfg.max_prefix)+jitter
+        return (memory, memory) if return_reference else memory
     previous_positions = (positions-1).clamp_min(0)
     snapshots = selected_memories(critic.writer, observed,
         torch.cat((positions, previous_positions), 1), cfg.max_prefix)
@@ -208,7 +217,20 @@ def training_memory(cfg, generator, critic, observed, positions, z, jitter, feed
         replacement = replacement.detach()
     updated = critic.writer.write(previous, replacement)
     eligible = feedback_mask.flatten() & (positions.flatten() >= cfg.feedback_min_prefix)
-    return torch.where(eligible[:, None, None], updated, ordinary)+jitter
+    memory = torch.where(eligible[:, None, None], updated, ordinary)+jitter
+    return (memory, ordinary+jitter) if return_reference else memory
+
+
+def training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask,
+                      step, proposal_grad=False, clock_origin=None):
+    """G may explore a generated write while D judges against real history.
+
+    The clean reference is strictly before the target and is shared by both D
+    candidate scores and B-cap. No clean reference is supplied to G's final read.
+    """
+    memory, reference = training_memory(cfg, generator, critic, observed, positions, z,
+        jitter, feedback_mask, step, proposal_grad, clock_origin, return_reference=True)
+    return memory, reference if cfg.feedback_judge_memory == 'clean' else memory
 
 
 def local_auxiliary(cfg, critic, memory, real, positions, target):
@@ -351,22 +373,32 @@ def train(cfg, out, device, log):
                 'training_generator_unroll': 2 if cfg.feedback_probability else 1,
                 'generator_calls_d_phase': 1+int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_d_weight)),
                 'generator_calls_g_phase': 1+int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_g_weight)),
+                'reader_calls_per_generator': 2 if cfg.g_memory_adapter == 'proposal' else 1,
+                'reader_calls_d_phase': (1+int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_d_weight)))*(2 if cfg.g_memory_adapter == 'proposal' else 1),
+                'reader_calls_g_phase': (1+int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_g_weight)))*(2 if cfg.g_memory_adapter == 'proposal' else 1),
+                'scoring_memory': cfg.feedback_judge_memory,
+                'proposal_adapter': {'input': 'raw D memory and unrefined point from the same particle and clock',
+                                     'clock': 'enters through the point reader; no extra adapter clock input',
+                                     'training': 'GAN gradients only; both reader passes connected',
+                                     'write': 'only final point; repaired memory is never stored'},
                 'local_dynamics': {'branches': 'two parallel one-step D.write(G(M)) evaluations; same z/time',
                                    'memory_and_particles': 'detached anchors, prefix >= dynamics_min_prefix',
                                    'gradient_ownership': 'D phase freezes G; G phase freezes D; no writer gradient from G loss',
                                    'scope': 'sampled local perturbations, not worst-case or global stability guarantee'},
                 'g_memory_repair': {'persistent_state': False, 'write_back': False,
-                                    'target': 'stop-gradient raw or translated current clean D memory',
-                                    'ownership': 'G adapter only; memory inputs detached'},
+                                    'auxiliary_active': bool(cfg.repair_weight),
+                                    'target': 'stop-gradient raw or translated current clean D memory' if cfg.repair_weight else None,
+                                    'ownership': 'G adapter only; memory inputs detached' if cfg.repair_weight else 'GAN gradients only'},
                 'fake_writes_in_training': int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_d_weight or cfg.stability_g_weight)),
                 'fake_writes_d_phase': int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_d_weight)),
                 'fake_writes_g_phase': int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_g_weight)),
                 'fake_write_counting': 'maximum writes per phase, including parallel local stability branches; not sequential unroll depth',
                 'feedback_gradient': ('two G evaluations connected through frozen D writer in G phase; detached proposal in D phase'
-                                      if cfg.feedback_backprop else 'generated replacement detached; D writer retains gradients'),
+                                      if cfg.feedback_backprop else 'generated replacement detached'),
+                'feedback_writer_d_gradient': 'real-history judging branch only' if cfg.feedback_judge_memory == 'clean' else 'shared judging branch, including eligible replacement writes',
                 'feedback_gradient_version': 2,
                 'feedback_target': 'original next real point as recovery target',
-                'memory_timing': 'strictly before target, optional replacement of last observation; same M for real/fake scoring',
+                'memory_timing': 'strictly before target; G optionally reads replaced last observation; D uses configured shared or clean memory, identical for both scores',
                 'penalty_domain': 'candidate coordinates only; same cached memory; exact default B-cap',
                 'context_rebuilds_per_update': 2,
                 'point_examples_per_update': cfg.batch_size*cfg.samples_per_episode,
@@ -393,9 +425,9 @@ def train(cfg, out, device, log):
         repair_noise = (torch.randn(jitter.shape, device=device, generator=rngs['repair'])
                         if cfg.repair_weight else None)
         opt_d.zero_grad(set_to_none=True)
-        memory = training_memory(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
-                                 clock_origin=clock_origin)
-        view = CandidateView(critic, memory, times)
+        memory, judging_memory = training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
+                                                   clock_origin=clock_origin)
+        view = CandidateView(critic, judging_memory, times)
         with torch.no_grad():
             fake, _ = local_point(generator, z, memory, times)
         d_adv = gan.d_loss(view(target), view(fake))
@@ -412,9 +444,9 @@ def train(cfg, out, device, log):
         with frozen(critic):
             opt_g.zero_grad(set_to_none=True)
             # Rebuild with updated D weights; reuse the same observations/jitter.
-            memory = training_memory(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
-                                     proposal_grad=cfg.feedback_backprop, clock_origin=clock_origin)
-            view = CandidateView(critic, memory, times)
+            memory, judging_memory = training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
+                proposal_grad=cfg.feedback_backprop, clock_origin=clock_origin)
+            view = CandidateView(critic, judging_memory, times)
             fake, _ = local_point(generator, z, memory, times)
             g_adv = generator_loss(gan, view, target, fake)
             repair = memory_repair(cfg, generator, memory, positions, repair_noise) if cfg.repair_weight else memory.new_zeros(())
@@ -429,6 +461,8 @@ def train(cfg, out, device, log):
             losses.update(repair_mse=repair.item(), d_stability_loss=d_stability.item(), g_stability_loss=g_stability.item())
             losses.update({key: value.item() for key, value in diagnostics.items()})
             losses['feedback_fraction'] = (feedback_mask & (positions >= cfg.feedback_min_prefix)).float().mean().item()
+            if cfg.feedback_probability:
+                losses['feedback_judge_gap_rms'] = (memory.detach()-judging_memory.detach()).square().mean().sqrt().item()
             if not all(np.isfinite(v) for v in losses.values()):
                 raise RuntimeError(f'Nonfinite losses: {losses}')
             log(event='train', step=step, seconds=round(time.monotonic()-started, 2), **losses)

@@ -1,0 +1,22 @@
+{
+  "candidate": "shared_s25",
+  "control": "clock_control",
+  "type": "diagnostic continuation; all primary pass rates zero",
+  "checks": {
+    "prefix8": {
+      "radial_improvement_fraction": 0.3326553631686383,
+      "early_position_improved": true,
+      "direction_not_worse": true,
+      "one_write_improved": true
+    },
+    "prefix32": {
+      "radial_improvement_fraction": 0.3352810172165964,
+      "early_position_improved": true,
+      "direction_not_worse": true,
+      "one_write_improved": true
+    }
+  },
+  "stopping_not_worse": true,
+  "reason": "All primary metrics tie at zero. Select shared_s25 for lower one-write prediction error at both prefixes and one runtime reader call versus two for proposal_control, accepting slightly higher radial error. Proposal clean mild fails the radial/early-error gates against its proposal-only control.",
+  "other_qualifying_control": "proposal_control also meets the continuous-metric gates versus clock_control"
+}

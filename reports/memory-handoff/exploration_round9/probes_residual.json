@@ -1,0 +1,229 @@
+[
+  {
+    "name": "residual_clean_s25",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/residual_clean_s25",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.004620783496648073,
+        "raw_memory_rms": 0.4646555483341217,
+        "adapter_correction_rms": 0.1270514577627182,
+        "raw_across_episode_std": 0.3470141887664795,
+        "translated_across_episode_std": 0.39481979608535767,
+        "memory_zero": {
+          "target_mse": 0.6980150938034058,
+          "output_change_mse": 0.6797188520431519
+        },
+        "memory_shuffle": {
+          "target_mse": 1.3920397758483887,
+          "output_change_mse": 1.3841209411621094
+        },
+        "clock_zero": {
+          "target_mse": 0.030964629724621773,
+          "output_change_mse": 0.024691486731171608
+        },
+        "adapter_bypass_target_mse": 0.08049431443214417,
+        "next_prediction_after_generated_write_mse": 0.01665746420621872,
+        "next_prediction_after_clean_real_write_mse": 0.002539744134992361,
+        "generated_vs_clean_real_write_mse": 0.0005280490731820464,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.006311599165201187,
+            "output_change_mse": 0.001617981237359345,
+            "adapter_bypass_target_mse": 0.08213511854410172,
+            "translated_consistency_mse": 0.0010378069709986448,
+            "raw_repair_mse": 0.01714211329817772,
+            "feedback_gain": {
+              "rms": 0.7100933790206909,
+              "median": 0.6526626348495483,
+              "p95": 0.9935794472694397,
+              "max": 1.2057485580444336,
+              "fraction_above_one": 0.046875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5402933955192566,
+              "median": 0.5322483777999878,
+              "p95": 0.6382328867912292,
+              "max": 0.7130188345909119,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.009200925007462502,
+            "output_change_mse": 0.0044807447120547295,
+            "adapter_bypass_target_mse": 0.08400982618331909,
+            "translated_consistency_mse": 0.002883317181840539,
+            "raw_repair_mse": 0.018965736031532288,
+            "feedback_gain": {
+              "rms": 0.7090893983840942,
+              "median": 0.6544609665870667,
+              "p95": 1.0066285133361816,
+              "max": 1.1671202182769775,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5402234196662903,
+              "median": 0.5321581363677979,
+              "p95": 0.6385716795921326,
+              "max": 0.7128311991691589,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.04450615495443344,
+            "output_change_mse": 0.03985758125782013,
+            "adapter_bypass_target_mse": 0.10328304022550583,
+            "translated_consistency_mse": 0.025975866243243217,
+            "raw_repair_mse": 0.04198799282312393,
+            "feedback_gain": {
+              "rms": 0.7040719389915466,
+              "median": 0.6590210795402527,
+              "p95": 0.9953343272209167,
+              "max": 1.0694401264190674,
+              "fraction_above_one": 0.046875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5399401187896729,
+              "median": 0.5349109172821045,
+              "p95": 0.6393510103225708,
+              "max": 0.7116546034812927,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.004419032484292984,
+        "raw_memory_rms": 0.4744148254394531,
+        "adapter_correction_rms": 0.13284587860107422,
+        "raw_across_episode_std": 0.3561243414878845,
+        "translated_across_episode_std": 0.4079859256744385,
+        "memory_zero": {
+          "target_mse": 0.7673730850219727,
+          "output_change_mse": 0.7652572989463806
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4633915424346924,
+          "output_change_mse": 1.4621191024780273
+        },
+        "clock_zero": {
+          "target_mse": 0.03055379167199135,
+          "output_change_mse": 0.026529155671596527
+        },
+        "adapter_bypass_target_mse": 0.08003737032413483,
+        "next_prediction_after_generated_write_mse": 0.016568468883633614,
+        "next_prediction_after_clean_real_write_mse": 0.0024711370933800936,
+        "generated_vs_clean_real_write_mse": 0.0005225561326369643,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.005562460049986839,
+            "output_change_mse": 0.0018052479717880487,
+            "adapter_bypass_target_mse": 0.08093570172786713,
+            "translated_consistency_mse": 0.0010202322155237198,
+            "raw_repair_mse": 0.01880839467048645,
+            "feedback_gain": {
+              "rms": 0.7179432511329651,
+              "median": 0.6739269495010376,
+              "p95": 0.9470825791358948,
+              "max": 1.3149718046188354,
+              "fraction_above_one": 0.03125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5456714034080505,
+              "median": 0.5393034219741821,
+              "p95": 0.655224621295929,
+              "max": 0.756626307964325,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.008318692445755005,
+            "output_change_mse": 0.005001104436814785,
+            "adapter_bypass_target_mse": 0.08246740698814392,
+            "translated_consistency_mse": 0.0028335503302514553,
+            "raw_repair_mse": 0.020718101412057877,
+            "feedback_gain": {
+              "rms": 0.7176042199134827,
+              "median": 0.6738521456718445,
+              "p95": 0.9409066438674927,
+              "max": 1.3311679363250732,
+              "fraction_above_one": 0.03125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5456100106239319,
+              "median": 0.5405738949775696,
+              "p95": 0.6552300453186035,
+              "max": 0.7578716278076172,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.04540912061929703,
+            "output_change_mse": 0.044501058757305145,
+            "adapter_bypass_target_mse": 0.10120724141597748,
+            "translated_consistency_mse": 0.025484386831521988,
+            "raw_repair_mse": 0.04388562589883804,
+            "feedback_gain": {
+              "rms": 0.715087890625,
+              "median": 0.6677847504615784,
+              "p95": 0.9420126676559448,
+              "max": 1.3262165784835815,
+              "fraction_above_one": 0.03125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5454402565956116,
+              "median": 0.5379523038864136,
+              "p95": 0.6624157428741455,
+              "max": 0.7630729675292969,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    },
+    "adapter_bypass_cold_long": {
+      "radius": 0.8389839082524388,
+      "relative_radial_rmse": 0.7237565502168627,
+      "late_radius_drift": 0.4711817271012803,
+      "angular_speed": 0.06959994498080536,
+      "direction_consistency": 0.14662756598240467,
+      "signed_angular_speed": 0.013192403212378235,
+      "circle_like_fraction": 0.0,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0,
+      "mean_step_length": 0.07422753622181207,
+      "initial_position_spread": 1.1868469328007853,
+      "radius_std": 0.3907693048042011,
+      "late_circle_fraction": 0.0,
+      "late_stopped_fraction": 0.0,
+      "passing_cw": 0,
+      "passing_ccw": 0
+    },
+    "adapter_bypass_warm_long": {
+      "prefix8": {
+        "reference_orbit_fraction": 0.0,
+        "relative_radial_rmse": 0.6987574954162421,
+        "signed_speed_mae": 0.27370247749916327,
+        "reference_direction_consistency": 0.49431610107421875,
+        "startup_error_relative": 0.36668457388939074,
+        "position_error_first32": 1.4918585857593112,
+        "position_error_last128": 1.5685688411096097,
+        "passing_cw": 0,
+        "passing_ccw": 0
+      },
+      "prefix32": {
+        "reference_orbit_fraction": 0.0,
+        "relative_radial_rmse": 0.6996806658570878,
+        "signed_speed_mae": 0.27413055791218854,
+        "reference_direction_consistency": 0.49346923828125,
+        "startup_error_relative": 0.37749918089480516,
+        "position_error_first32": 1.5126952991101223,
+        "position_error_last128": 1.683730795071606,
+        "passing_cw": 0,
+        "passing_ccw": 0
+      }
+    }
+  }
+]

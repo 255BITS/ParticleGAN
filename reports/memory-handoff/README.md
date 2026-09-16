@@ -1,12 +1,15 @@
 # Handoff-only scouts: no generated trajectories during training
 
-Latest result: [Memory dynamics, G translation, and repair](dynamics_round8/assessment.md).
-Sixteen scouts and one 5k continuation finished. Repair learns some denoising and
-local stability reduces sensitivity, but full circles remain unsolved. The
+Latest result: [Adversarial memory exploration](exploration_round9/assessment.md).
+Ten scouts and one exact 5k continuation finished, with no MSE training objective.
+Clean versus explored judging memory gives mixed results; proposal-conditioned
+repair improves radial error but full circles remain unsolved. The extension
+regressed. All queues are finished. The
 [clock's sustained-motion milestone](clock_round7/assessment.md) remains intact.
 A [saved rollout video](dynamics_round8/slow16_r10_rollout.mp4) shows the strongest
 new scout by radial error, including cold and real-prefix starts.
-Next discussion: sample-conditioned repair and predictive usefulness. Current handoff:
+Next discussion: combining clean-reference and explored-memory adversarial judging.
+Current handoff:
 [NEXT.md](../memory-path/NEXT.md). The sections below describe the original round.
 
 The user requested a round without cold loss to avoid generated-trajectory training

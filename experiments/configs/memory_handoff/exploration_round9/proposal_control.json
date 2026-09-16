@@ -1,0 +1,6 @@
+{
+  "name": "proposal_control",
+  "clock_bands": 6,
+  "adversarial_only": true,
+  "g_memory_adapter": "proposal"
+}

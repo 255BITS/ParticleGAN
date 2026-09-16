@@ -1,0 +1,12 @@
+{
+  "name": "proposal_clean_full",
+  "clock_bands": 6,
+  "adversarial_only": true,
+  "feedback_probability": 0.5,
+  "feedback_strength": 1.0,
+  "feedback_min_prefix": 4,
+  "feedback_ramp_steps": 500,
+  "feedback_backprop": true,
+  "feedback_judge_memory": "clean",
+  "g_memory_adapter": "proposal"
+}

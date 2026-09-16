@@ -94,6 +94,20 @@ def analyze(source, out, baselines=(), handoff_only=False):
                          f"{cfg.get('generator_calls_d_phase', cfg.get('training_generator_unroll', 1))} / "
                          f"{cfg.get('generator_calls_g_phase', cfg.get('training_generator_unroll', 1))} | "
                          f"{cfg.get('feedback_probability', 0):g} / {cfg.get('feedback_strength', 1):g} | {row['seconds_per_update']:.4f} |")
+        if any(r['config'].get('feedback_judge_memory') == 'clean' for r in scouts):
+            lines += ['', '## Adversarial memory exploration', '',
+                      '| Run | D judging memory | G adapter | Proposal gradient | Reader calls D / G phase | Auxiliaries disabled |',
+                      '|---|---|---|---|---:|---|']
+            for row in scouts:
+                c = row['config']
+                lines.append(f"| {row['name']} | {c.get('feedback_judge_memory', 'shared')} | "
+                             f"{c.get('g_memory_adapter', 'none')} | {c.get('feedback_backprop', False)} | "
+                             f"{c.get('reader_calls_d_phase', '?')} / {c.get('reader_calls_g_phase', '?')} | "
+                             f"{c.get('adversarial_only', False)} |")
+            lines += ['', 'Clean judging: G reads the generated-write state, while both candidate scores',
+                      'and B-cap use the same real-history memory, strictly before the target.',
+                      'The proposal adapter uses two point-reader passes and stores no private state.',
+                      'Reader calls include those internal passes; G calls count complete G evaluations.']
         if any(r['config'].get('slow_dim') or r['config'].get('g_memory_adapter', 'none') != 'none'
                or r['config'].get('stability_g_weight') or r['config'].get('stability_d_weight') for r in scouts):
             lines += ['', '## Local memory dynamics settings', '',

@@ -1,0 +1,2020 @@
+[
+  {
+    "name": "clock_control",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/clock_control",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.00640744948759675,
+        "raw_memory_rms": 0.46927887201309204,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.34883594512939453,
+        "translated_across_episode_std": 0.34883594512939453,
+        "memory_zero": {
+          "target_mse": 0.7133975625038147,
+          "output_change_mse": 0.7065441608428955
+        },
+        "memory_shuffle": {
+          "target_mse": 1.414445161819458,
+          "output_change_mse": 1.4131278991699219
+        },
+        "clock_zero": {
+          "target_mse": 0.03886156529188156,
+          "output_change_mse": 0.03252550959587097
+        },
+        "adapter_bypass_target_mse": 0.00640744948759675,
+        "next_prediction_after_generated_write_mse": 0.029334286227822304,
+        "next_prediction_after_clean_real_write_mse": 0.004892377182841301,
+        "generated_vs_clean_real_write_mse": 0.0006937573780305684,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.008109713904559612,
+            "output_change_mse": 0.0022052826825529337,
+            "adapter_bypass_target_mse": 0.008109713904559612,
+            "translated_consistency_mse": 0.0009000000427477062,
+            "raw_repair_mse": 0.0009000000427477062,
+            "feedback_gain": {
+              "rms": 0.7499575018882751,
+              "median": 0.7078364491462708,
+              "p95": 1.0316894054412842,
+              "max": 1.3110849857330322,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5504394173622131,
+              "median": 0.5465445518493652,
+              "p95": 0.6470356583595276,
+              "max": 0.6891257166862488,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.011685410514473915,
+            "output_change_mse": 0.006122209597378969,
+            "adapter_bypass_target_mse": 0.011685410514473915,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7495473027229309,
+              "median": 0.7089020013809204,
+              "p95": 1.0222785472869873,
+              "max": 1.3377026319503784,
+              "fraction_above_one": 0.0703125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5504764914512634,
+              "median": 0.5460366606712341,
+              "p95": 0.6484895944595337,
+              "max": 0.6907318830490112,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.05843508616089821,
+            "output_change_mse": 0.05467819795012474,
+            "adapter_bypass_target_mse": 0.05843508616089821,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.7437711954116821,
+              "median": 0.7081642746925354,
+              "p95": 0.9702608585357666,
+              "max": 1.4380719661712646,
+              "fraction_above_one": 0.03125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5507222414016724,
+              "median": 0.5422645807266235,
+              "p95": 0.6469146013259888,
+              "max": 0.6984401345252991,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.006643898785114288,
+        "raw_memory_rms": 0.4796687960624695,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.3616626560688019,
+        "translated_across_episode_std": 0.3616626560688019,
+        "memory_zero": {
+          "target_mse": 0.7340432405471802,
+          "output_change_mse": 0.7309055328369141
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4598207473754883,
+          "output_change_mse": 1.4577029943466187
+        },
+        "clock_zero": {
+          "target_mse": 0.03600744158029556,
+          "output_change_mse": 0.03384188562631607
+        },
+        "adapter_bypass_target_mse": 0.006643898785114288,
+        "next_prediction_after_generated_write_mse": 0.02716927044093609,
+        "next_prediction_after_clean_real_write_mse": 0.003876355243846774,
+        "generated_vs_clean_real_write_mse": 0.0007340370211750269,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.008101717568933964,
+            "output_change_mse": 0.002244600560516119,
+            "adapter_bypass_target_mse": 0.008101717568933964,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.7716130614280701,
+              "median": 0.6988346576690674,
+              "p95": 1.0511088371276855,
+              "max": 1.3607287406921387,
+              "fraction_above_one": 0.1015625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5647556781768799,
+              "median": 0.5627122521400452,
+              "p95": 0.6457774639129639,
+              "max": 0.7814809679985046,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.011538615450263023,
+            "output_change_mse": 0.006225257646292448,
+            "adapter_bypass_target_mse": 0.011538615450263023,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.771152675151825,
+              "median": 0.6996053457260132,
+              "p95": 1.057661771774292,
+              "max": 1.3578680753707886,
+              "fraction_above_one": 0.1015625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5647673010826111,
+              "median": 0.5632365942001343,
+              "p95": 0.6465756297111511,
+              "max": 0.7831364274024963,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.05713663995265961,
+            "output_change_mse": 0.05490470677614212,
+            "adapter_bypass_target_mse": 0.05713663995265961,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.7649292349815369,
+              "median": 0.7015159130096436,
+              "p95": 1.0995187759399414,
+              "max": 1.317148208618164,
+              "fraction_above_one": 0.0859375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5647730827331543,
+              "median": 0.5638262629508972,
+              "p95": 0.646741509437561,
+              "max": 0.7900538444519043,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "shared_s25",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/shared_s25",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.006295749451965094,
+        "raw_memory_rms": 0.46136170625686646,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.36107611656188965,
+        "translated_across_episode_std": 0.36107611656188965,
+        "memory_zero": {
+          "target_mse": 0.7131543159484863,
+          "output_change_mse": 0.6928878426551819
+        },
+        "memory_shuffle": {
+          "target_mse": 1.3972442150115967,
+          "output_change_mse": 1.3880383968353271
+        },
+        "clock_zero": {
+          "target_mse": 0.045841969549655914,
+          "output_change_mse": 0.03452698141336441
+        },
+        "adapter_bypass_target_mse": 0.006295749451965094,
+        "next_prediction_after_generated_write_mse": 0.025566594675183296,
+        "next_prediction_after_clean_real_write_mse": 0.004572869278490543,
+        "generated_vs_clean_real_write_mse": 0.000570007658097893,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.008475610986351967,
+            "output_change_mse": 0.0025480168405920267,
+            "adapter_bypass_target_mse": 0.008475610986351967,
+            "translated_consistency_mse": 0.0009000000427477062,
+            "raw_repair_mse": 0.0009000000427477062,
+            "feedback_gain": {
+              "rms": 0.7614585757255554,
+              "median": 0.7082493305206299,
+              "p95": 1.0084623098373413,
+              "max": 1.3894298076629639,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5510115623474121,
+              "median": 0.5508531928062439,
+              "p95": 0.6480836272239685,
+              "max": 0.710696280002594,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.01269434206187725,
+            "output_change_mse": 0.0070475316606462,
+            "adapter_bypass_target_mse": 0.01269434206187725,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7597804069519043,
+              "median": 0.7104297280311584,
+              "p95": 0.9952535629272461,
+              "max": 1.3829331398010254,
+              "fraction_above_one": 0.046875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5511027574539185,
+              "median": 0.5509607791900635,
+              "p95": 0.648277759552002,
+              "max": 0.7117990255355835,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.06768015027046204,
+            "output_change_mse": 0.06373704224824905,
+            "adapter_bypass_target_mse": 0.06768015027046204,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.7553513646125793,
+              "median": 0.7200376391410828,
+              "p95": 0.9920968413352966,
+              "max": 1.4623678922653198,
+              "fraction_above_one": 0.046875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5516846776008606,
+              "median": 0.5473408699035645,
+              "p95": 0.6493294835090637,
+              "max": 0.716992974281311,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.005788713693618774,
+        "raw_memory_rms": 0.47178149223327637,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.3710654377937317,
+        "translated_across_episode_std": 0.3710654377937317,
+        "memory_zero": {
+          "target_mse": 0.7377465963363647,
+          "output_change_mse": 0.7242141962051392
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4499088525772095,
+          "output_change_mse": 1.4340429306030273
+        },
+        "clock_zero": {
+          "target_mse": 0.043538931757211685,
+          "output_change_mse": 0.03713970631361008
+        },
+        "adapter_bypass_target_mse": 0.005788713693618774,
+        "next_prediction_after_generated_write_mse": 0.020379412919282913,
+        "next_prediction_after_clean_real_write_mse": 0.002800972666591406,
+        "generated_vs_clean_real_write_mse": 0.0005706287920475006,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.00809550005942583,
+            "output_change_mse": 0.0026022924575954676,
+            "adapter_bypass_target_mse": 0.00809550005942583,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.7851489782333374,
+              "median": 0.7059445977210999,
+              "p95": 1.1378400325775146,
+              "max": 1.4953216314315796,
+              "fraction_above_one": 0.1640625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.565592348575592,
+              "median": 0.5593857169151306,
+              "p95": 0.6431366801261902,
+              "max": 0.7596182227134705,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.012508081272244453,
+            "output_change_mse": 0.007215813267976046,
+            "adapter_bypass_target_mse": 0.012508081272244453,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7845033407211304,
+              "median": 0.7037582397460938,
+              "p95": 1.1328246593475342,
+              "max": 1.5049660205841064,
+              "fraction_above_one": 0.1640625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5655577778816223,
+              "median": 0.5574756860733032,
+              "p95": 0.6422658562660217,
+              "max": 0.7573291659355164,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.06748983263969421,
+            "output_change_mse": 0.06326264888048172,
+            "adapter_bypass_target_mse": 0.06748983263969421,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.775149941444397,
+              "median": 0.696942925453186,
+              "p95": 1.1090703010559082,
+              "max": 1.437551736831665,
+              "fraction_above_one": 0.1328125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5653523802757263,
+              "median": 0.5545868873596191,
+              "p95": 0.6413790583610535,
+              "max": 0.7562466263771057,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "clean_s25",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/clean_s25",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.00583946518599987,
+        "raw_memory_rms": 0.4543948471546173,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.34402018785476685,
+        "translated_across_episode_std": 0.34402018785476685,
+        "memory_zero": {
+          "target_mse": 0.6991984844207764,
+          "output_change_mse": 0.6935600638389587
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4079753160476685,
+          "output_change_mse": 1.4059576988220215
+        },
+        "clock_zero": {
+          "target_mse": 0.032942332327365875,
+          "output_change_mse": 0.02391018345952034
+        },
+        "adapter_bypass_target_mse": 0.00583946518599987,
+        "next_prediction_after_generated_write_mse": 0.02567620947957039,
+        "next_prediction_after_clean_real_write_mse": 0.0037290602922439575,
+        "generated_vs_clean_real_write_mse": 0.0006467761122621596,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.0075654154643416405,
+            "output_change_mse": 0.0022466403897851706,
+            "adapter_bypass_target_mse": 0.0075654154643416405,
+            "translated_consistency_mse": 0.0009000000427477062,
+            "raw_repair_mse": 0.0009000000427477062,
+            "feedback_gain": {
+              "rms": 0.7542158961296082,
+              "median": 0.6970561742782593,
+              "p95": 1.0382081270217896,
+              "max": 1.4870152473449707,
+              "fraction_above_one": 0.0703125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5495206117630005,
+              "median": 0.5507808327674866,
+              "p95": 0.6499412655830383,
+              "max": 0.6940606236457825,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.011170377023518085,
+            "output_change_mse": 0.006212085485458374,
+            "adapter_bypass_target_mse": 0.011170377023518085,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7526208758354187,
+              "median": 0.6991174221038818,
+              "p95": 1.0227408409118652,
+              "max": 1.5138622522354126,
+              "fraction_above_one": 0.078125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5495827198028564,
+              "median": 0.5495947003364563,
+              "p95": 0.6513303518295288,
+              "max": 0.6949016451835632,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.05760407820343971,
+            "output_change_mse": 0.054528433829545975,
+            "adapter_bypass_target_mse": 0.05760407820343971,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.7440833449363708,
+              "median": 0.7015047073364258,
+              "p95": 0.9978859424591064,
+              "max": 1.5518826246261597,
+              "fraction_above_one": 0.046875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5499544739723206,
+              "median": 0.5474117398262024,
+              "p95": 0.6456941366195679,
+              "max": 0.6990019679069519,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.006056764628738165,
+        "raw_memory_rms": 0.46618327498435974,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.35517171025276184,
+        "translated_across_episode_std": 0.35517171025276184,
+        "memory_zero": {
+          "target_mse": 0.7300164699554443,
+          "output_change_mse": 0.7234132289886475
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4555665254592896,
+          "output_change_mse": 1.4493259191513062
+        },
+        "clock_zero": {
+          "target_mse": 0.03224446251988411,
+          "output_change_mse": 0.025035711005330086
+        },
+        "adapter_bypass_target_mse": 0.006056764628738165,
+        "next_prediction_after_generated_write_mse": 0.02322801761329174,
+        "next_prediction_after_clean_real_write_mse": 0.0031611784361302853,
+        "generated_vs_clean_real_write_mse": 0.000697650364600122,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.007601513992995024,
+            "output_change_mse": 0.0022326114121824503,
+            "adapter_bypass_target_mse": 0.007601513992995024,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.7745121121406555,
+              "median": 0.7260594367980957,
+              "p95": 1.1003897190093994,
+              "max": 1.3224854469299316,
+              "fraction_above_one": 0.09375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5655317902565002,
+              "median": 0.5666093826293945,
+              "p95": 0.6487381458282471,
+              "max": 0.7689637541770935,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.011060735210776329,
+            "output_change_mse": 0.006166048347949982,
+            "adapter_bypass_target_mse": 0.011060735210776329,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7733819484710693,
+              "median": 0.7298250794410706,
+              "p95": 1.0918176174163818,
+              "max": 1.3433269262313843,
+              "fraction_above_one": 0.09375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5654715299606323,
+              "median": 0.5662656426429749,
+              "p95": 0.6486085057258606,
+              "max": 0.7693623900413513,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.056896936148405075,
+            "output_change_mse": 0.0544486939907074,
+            "adapter_bypass_target_mse": 0.056896936148405075,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.7657201290130615,
+              "median": 0.7213717699050903,
+              "p95": 1.0927046537399292,
+              "max": 1.3304067850112915,
+              "fraction_above_one": 0.09375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5651335716247559,
+              "median": 0.5643930435180664,
+              "p95": 0.6490822434425354,
+              "max": 0.7709914445877075,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "clean_s25_detach",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/clean_s25_detach",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.0055039189755916595,
+        "raw_memory_rms": 0.4554833769798279,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.343315452337265,
+        "translated_across_episode_std": 0.343315452337265,
+        "memory_zero": {
+          "target_mse": 0.7042667269706726,
+          "output_change_mse": 0.7068423628807068
+        },
+        "memory_shuffle": {
+          "target_mse": 1.420276403427124,
+          "output_change_mse": 1.4271126985549927
+        },
+        "clock_zero": {
+          "target_mse": 0.026568574830889702,
+          "output_change_mse": 0.01993642747402191
+        },
+        "adapter_bypass_target_mse": 0.0055039189755916595,
+        "next_prediction_after_generated_write_mse": 0.023769564926624298,
+        "next_prediction_after_clean_real_write_mse": 0.003602204844355583,
+        "generated_vs_clean_real_write_mse": 0.0006171769928187132,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.007094301283359528,
+            "output_change_mse": 0.0020331693813204765,
+            "adapter_bypass_target_mse": 0.007094301283359528,
+            "translated_consistency_mse": 0.0009000000427477062,
+            "raw_repair_mse": 0.0009000000427477062,
+            "feedback_gain": {
+              "rms": 0.7443343997001648,
+              "median": 0.6898986101150513,
+              "p95": 1.0192053318023682,
+              "max": 1.4183846712112427,
+              "fraction_above_one": 0.0546875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5617284774780273,
+              "median": 0.5532311797142029,
+              "p95": 0.6550417542457581,
+              "max": 0.7039169073104858,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.010325388982892036,
+            "output_change_mse": 0.005573157221078873,
+            "adapter_bypass_target_mse": 0.010325388982892036,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7412699460983276,
+              "median": 0.6899755001068115,
+              "p95": 0.9868343472480774,
+              "max": 1.3268296718597412,
+              "fraction_above_one": 0.046875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5617882013320923,
+              "median": 0.5529305338859558,
+              "p95": 0.6562274694442749,
+              "max": 0.7054583430290222,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.05222988873720169,
+            "output_change_mse": 0.04914788156747818,
+            "adapter_bypass_target_mse": 0.05222988873720169,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.733353853225708,
+              "median": 0.6913053393363953,
+              "p95": 0.9886299967765808,
+              "max": 1.3087161779403687,
+              "fraction_above_one": 0.0546875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5621100068092346,
+              "median": 0.5554791688919067,
+              "p95": 0.6633551716804504,
+              "max": 0.7127113342285156,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.005396889988332987,
+        "raw_memory_rms": 0.46692442893981934,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.3553023040294647,
+        "translated_across_episode_std": 0.3553023040294647,
+        "memory_zero": {
+          "target_mse": 0.7348002195358276,
+          "output_change_mse": 0.7203726768493652
+        },
+        "memory_shuffle": {
+          "target_mse": 1.446061611175537,
+          "output_change_mse": 1.4306522607803345
+        },
+        "clock_zero": {
+          "target_mse": 0.028140783309936523,
+          "output_change_mse": 0.024199871346354485
+        },
+        "adapter_bypass_target_mse": 0.005396889988332987,
+        "next_prediction_after_generated_write_mse": 0.019439760595560074,
+        "next_prediction_after_clean_real_write_mse": 0.002731566783040762,
+        "generated_vs_clean_real_write_mse": 0.0006142410566098988,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.006709904409945011,
+            "output_change_mse": 0.0020443154498934746,
+            "adapter_bypass_target_mse": 0.006709904409945011,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.7666367292404175,
+              "median": 0.7168214917182922,
+              "p95": 1.0641000270843506,
+              "max": 1.3880906105041504,
+              "fraction_above_one": 0.078125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5760389566421509,
+              "median": 0.571928083896637,
+              "p95": 0.6644508838653564,
+              "max": 0.7907999753952026,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.009837662801146507,
+            "output_change_mse": 0.005683838855475187,
+            "adapter_bypass_target_mse": 0.009837662801146507,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7667189836502075,
+              "median": 0.7175077795982361,
+              "p95": 1.0721099376678467,
+              "max": 1.3802176713943481,
+              "fraction_above_one": 0.0859375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5760047435760498,
+              "median": 0.5713250041007996,
+              "p95": 0.6648432016372681,
+              "max": 0.7914924621582031,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.0525665245950222,
+            "output_change_mse": 0.05117616057395935,
+            "adapter_bypass_target_mse": 0.0525665245950222,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.7631828784942627,
+              "median": 0.7127323150634766,
+              "p95": 1.097652554512024,
+              "max": 1.3486988544464111,
+              "fraction_above_one": 0.09375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5757331848144531,
+              "median": 0.5728117227554321,
+              "p95": 0.6656419634819031,
+              "max": 0.7947101593017578,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "shared_full",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/shared_full",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.02129395864903927,
+        "raw_memory_rms": 0.475715696811676,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.3798775374889374,
+        "translated_across_episode_std": 0.3798775374889374,
+        "memory_zero": {
+          "target_mse": 0.8042466640472412,
+          "output_change_mse": 0.6845561265945435
+        },
+        "memory_shuffle": {
+          "target_mse": 1.3412318229675293,
+          "output_change_mse": 1.2785048484802246
+        },
+        "clock_zero": {
+          "target_mse": 0.13205686211585999,
+          "output_change_mse": 0.09163635969161987
+        },
+        "adapter_bypass_target_mse": 0.02129395864903927,
+        "next_prediction_after_generated_write_mse": 0.056126341223716736,
+        "next_prediction_after_clean_real_write_mse": 0.01642565242946148,
+        "generated_vs_clean_real_write_mse": 0.0015416662208735943,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.022194191813468933,
+            "output_change_mse": 0.0030863340944051743,
+            "adapter_bypass_target_mse": 0.022194191813468933,
+            "translated_consistency_mse": 0.0009000000427477062,
+            "raw_repair_mse": 0.0009000000427477062,
+            "feedback_gain": {
+              "rms": 0.8477898240089417,
+              "median": 0.8274379372596741,
+              "p95": 1.1038886308670044,
+              "max": 1.2902580499649048,
+              "fraction_above_one": 0.09375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.6913291215896606,
+              "median": 0.6958785057067871,
+              "p95": 0.8012896776199341,
+              "max": 0.8437789082527161,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.026125838980078697,
+            "output_change_mse": 0.008547810837626457,
+            "adapter_bypass_target_mse": 0.026125838980078697,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.8461788892745972,
+              "median": 0.8287317752838135,
+              "p95": 1.0998597145080566,
+              "max": 1.2722158432006836,
+              "fraction_above_one": 0.1015625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.6915551424026489,
+              "median": 0.6946418285369873,
+              "p95": 0.8023314476013184,
+              "max": 0.8447086811065674,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.0858459398150444,
+            "output_change_mse": 0.07539089024066925,
+            "adapter_bypass_target_mse": 0.0858459398150444,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.8370895385742188,
+              "median": 0.8159551620483398,
+              "p95": 1.0348849296569824,
+              "max": 1.2472065687179565,
+              "fraction_above_one": 0.078125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.6921567916870117,
+              "median": 0.6933298110961914,
+              "p95": 0.7895482778549194,
+              "max": 0.843275785446167,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.010052314959466457,
+        "raw_memory_rms": 0.4941960573196411,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.3920723497867584,
+        "translated_across_episode_std": 0.3920723497867584,
+        "memory_zero": {
+          "target_mse": 0.7318233251571655,
+          "output_change_mse": 0.7158240675926208
+        },
+        "memory_shuffle": {
+          "target_mse": 1.456878662109375,
+          "output_change_mse": 1.4303303956985474
+        },
+        "clock_zero": {
+          "target_mse": 0.11395320296287537,
+          "output_change_mse": 0.11070376634597778
+        },
+        "adapter_bypass_target_mse": 0.010052314959466457,
+        "next_prediction_after_generated_write_mse": 0.026361217722296715,
+        "next_prediction_after_clean_real_write_mse": 0.00834887009114027,
+        "generated_vs_clean_real_write_mse": 0.0007015496958047152,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.012167149223387241,
+            "output_change_mse": 0.002354755997657776,
+            "adapter_bypass_target_mse": 0.012167149223387241,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.8296289443969727,
+              "median": 0.7889252305030823,
+              "p95": 1.0874698162078857,
+              "max": 1.171661615371704,
+              "fraction_above_one": 0.125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.710419774055481,
+              "median": 0.7079260945320129,
+              "p95": 0.8163570761680603,
+              "max": 0.8774714469909668,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.016093041747808456,
+            "output_change_mse": 0.006497847381979227,
+            "adapter_bypass_target_mse": 0.016093041747808456,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.8276898264884949,
+              "median": 0.7922898530960083,
+              "p95": 1.086695671081543,
+              "max": 1.1803086996078491,
+              "fraction_above_one": 0.1171875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.7102554440498352,
+              "median": 0.7089655995368958,
+              "p95": 0.816108226776123,
+              "max": 0.876723051071167,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.0663192868232727,
+            "output_change_mse": 0.05745461955666542,
+            "adapter_bypass_target_mse": 0.0663192868232727,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.8190457820892334,
+              "median": 0.789131760597229,
+              "p95": 1.0766732692718506,
+              "max": 1.1927213668823242,
+              "fraction_above_one": 0.0859375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.7088196277618408,
+              "median": 0.7110837697982788,
+              "p95": 0.8103410005569458,
+              "max": 0.8721615672111511,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "clean_full",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/clean_full",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.00527446111664176,
+        "raw_memory_rms": 0.3983215391635895,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.27911654114723206,
+        "translated_across_episode_std": 0.27911654114723206,
+        "memory_zero": {
+          "target_mse": 0.7025895714759827,
+          "output_change_mse": 0.6869102120399475
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4097868204116821,
+          "output_change_mse": 1.4005212783813477
+        },
+        "clock_zero": {
+          "target_mse": 0.03351050615310669,
+          "output_change_mse": 0.02606482245028019
+        },
+        "adapter_bypass_target_mse": 0.00527446111664176,
+        "next_prediction_after_generated_write_mse": 0.017750155180692673,
+        "next_prediction_after_clean_real_write_mse": 0.0020241800229996443,
+        "generated_vs_clean_real_write_mse": 0.0009006613399833441,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.006412199232727289,
+            "output_change_mse": 0.0014309597900137305,
+            "adapter_bypass_target_mse": 0.006412199232727289,
+            "translated_consistency_mse": 0.0009000000427477062,
+            "raw_repair_mse": 0.0009000000427477062,
+            "feedback_gain": {
+              "rms": 0.6785182952880859,
+              "median": 0.6345267295837402,
+              "p95": 0.9557007551193237,
+              "max": 1.3572200536727905,
+              "fraction_above_one": 0.0390625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5362998247146606,
+              "median": 0.524889349937439,
+              "p95": 0.6430073380470276,
+              "max": 0.7644250392913818,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.008752496913075447,
+            "output_change_mse": 0.003957781009376049,
+            "adapter_bypass_target_mse": 0.008752496913075447,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.6771172881126404,
+              "median": 0.6410529613494873,
+              "p95": 0.9348989725112915,
+              "max": 1.2888035774230957,
+              "fraction_above_one": 0.0390625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5362566113471985,
+              "median": 0.5262568593025208,
+              "p95": 0.6417295336723328,
+              "max": 0.7675835490226746,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.039516646414995193,
+            "output_change_mse": 0.035696715116500854,
+            "adapter_bypass_target_mse": 0.039516646414995193,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.6727773547172546,
+              "median": 0.6369422078132629,
+              "p95": 0.927068829536438,
+              "max": 1.1996046304702759,
+              "fraction_above_one": 0.03125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.53572678565979,
+              "median": 0.5256475210189819,
+              "p95": 0.6429960131645203,
+              "max": 0.7781265377998352,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.005045135505497456,
+        "raw_memory_rms": 0.4086751937866211,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.28925788402557373,
+        "translated_across_episode_std": 0.28925788402557373,
+        "memory_zero": {
+          "target_mse": 0.7263882160186768,
+          "output_change_mse": 0.7259787321090698
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4688814878463745,
+          "output_change_mse": 1.4664890766143799
+        },
+        "clock_zero": {
+          "target_mse": 0.03377753496170044,
+          "output_change_mse": 0.02838735654950142
+        },
+        "adapter_bypass_target_mse": 0.005045135505497456,
+        "next_prediction_after_generated_write_mse": 0.016148975118994713,
+        "next_prediction_after_clean_real_write_mse": 0.0021255272440612316,
+        "generated_vs_clean_real_write_mse": 0.0008570499485358596,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.006518322043120861,
+            "output_change_mse": 0.0016031680861487985,
+            "adapter_bypass_target_mse": 0.006518322043120861,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.7148588299751282,
+              "median": 0.6584217548370361,
+              "p95": 1.0146372318267822,
+              "max": 1.227784276008606,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5488470792770386,
+              "median": 0.5435378551483154,
+              "p95": 0.6680470108985901,
+              "max": 0.7844380140304565,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.00924066361039877,
+            "output_change_mse": 0.004442608915269375,
+            "adapter_bypass_target_mse": 0.00924066361039877,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7140240669250488,
+              "median": 0.6528993844985962,
+              "p95": 1.015236258506775,
+              "max": 1.221937894821167,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5487928986549377,
+              "median": 0.5442265272140503,
+              "p95": 0.6669027805328369,
+              "max": 0.7850534915924072,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.04380764439702034,
+            "output_change_mse": 0.039660241454839706,
+            "adapter_bypass_target_mse": 0.04380764439702034,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.7068862915039062,
+              "median": 0.639870822429657,
+              "p95": 0.9990745186805725,
+              "max": 1.18670654296875,
+              "fraction_above_one": 0.0546875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5480054616928101,
+              "median": 0.5437548756599426,
+              "p95": 0.6630367040634155,
+              "max": 0.7873469591140747,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "proposal_control",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/proposal_control",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.006845822557806969,
+        "raw_memory_rms": 0.49592718482017517,
+        "adapter_correction_rms": 0.1054476872086525,
+        "raw_across_episode_std": 0.3610525131225586,
+        "translated_across_episode_std": 0.39176616072654724,
+        "memory_zero": {
+          "target_mse": 0.6741816401481628,
+          "output_change_mse": 0.6510022878646851
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4016331434249878,
+          "output_change_mse": 1.384021520614624
+        },
+        "clock_zero": {
+          "target_mse": 0.026099393144249916,
+          "output_change_mse": 0.022194325923919678
+        },
+        "adapter_bypass_target_mse": 0.06729382276535034,
+        "next_prediction_after_generated_write_mse": 0.027742628008127213,
+        "next_prediction_after_clean_real_write_mse": 0.0041444613598287106,
+        "generated_vs_clean_real_write_mse": 0.0007395481807179749,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.009170323610305786,
+            "output_change_mse": 0.0025428435765206814,
+            "adapter_bypass_target_mse": 0.06651562452316284,
+            "translated_consistency_mse": 0.001013631117530167,
+            "raw_repair_mse": 0.012185720726847649,
+            "feedback_gain": {
+              "rms": 0.7618857622146606,
+              "median": 0.6931903958320618,
+              "p95": 1.0846869945526123,
+              "max": 1.366207242012024,
+              "fraction_above_one": 0.0859375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5252128839492798,
+              "median": 0.5198950171470642,
+              "p95": 0.6452573537826538,
+              "max": 0.6823825240135193,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.013515744358301163,
+            "output_change_mse": 0.007045920006930828,
+            "adapter_bypass_target_mse": 0.06707610189914703,
+            "translated_consistency_mse": 0.0028156519401818514,
+            "raw_repair_mse": 0.014018980786204338,
+            "feedback_gain": {
+              "rms": 0.7614672780036926,
+              "median": 0.6935781836509705,
+              "p95": 1.0702838897705078,
+              "max": 1.4165143966674805,
+              "fraction_above_one": 0.0859375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5253627896308899,
+              "median": 0.5205466151237488,
+              "p95": 0.6453485488891602,
+              "max": 0.6831948161125183,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.06849619001150131,
+            "output_change_mse": 0.06300950050354004,
+            "adapter_bypass_target_mse": 0.08437731862068176,
+            "translated_consistency_mse": 0.025317296385765076,
+            "raw_repair_mse": 0.036680661141872406,
+            "feedback_gain": {
+              "rms": 0.7578869462013245,
+              "median": 0.6938095092773438,
+              "p95": 1.011041283607483,
+              "max": 1.6471742391586304,
+              "fraction_above_one": 0.078125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5262362360954285,
+              "median": 0.5224182605743408,
+              "p95": 0.647391140460968,
+              "max": 0.6933206915855408,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.006086218636482954,
+        "raw_memory_rms": 0.5015751719474792,
+        "adapter_correction_rms": 0.11212895810604095,
+        "raw_across_episode_std": 0.3702479898929596,
+        "translated_across_episode_std": 0.4090714454650879,
+        "memory_zero": {
+          "target_mse": 0.7501970529556274,
+          "output_change_mse": 0.7593817114830017
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4688060283660889,
+          "output_change_mse": 1.490740418434143
+        },
+        "clock_zero": {
+          "target_mse": 0.026885593309998512,
+          "output_change_mse": 0.025131307542324066
+        },
+        "adapter_bypass_target_mse": 0.05759146064519882,
+        "next_prediction_after_generated_write_mse": 0.02351599745452404,
+        "next_prediction_after_clean_real_write_mse": 0.003384273499250412,
+        "generated_vs_clean_real_write_mse": 0.0006583310896530747,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.008735637180507183,
+            "output_change_mse": 0.0026689604856073856,
+            "adapter_bypass_target_mse": 0.057823825627565384,
+            "translated_consistency_mse": 0.0010616250801831484,
+            "raw_repair_mse": 0.013843570835888386,
+            "feedback_gain": {
+              "rms": 0.774051308631897,
+              "median": 0.6983814835548401,
+              "p95": 1.078842043876648,
+              "max": 1.4784997701644897,
+              "fraction_above_one": 0.1171875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5378305912017822,
+              "median": 0.5394957065582275,
+              "p95": 0.6178489923477173,
+              "max": 0.7150754928588867,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.013403240591287613,
+            "output_change_mse": 0.007413695566356182,
+            "adapter_bypass_target_mse": 0.0592845194041729,
+            "translated_consistency_mse": 0.0029477016068995,
+            "raw_repair_mse": 0.01587579771876335,
+            "feedback_gain": {
+              "rms": 0.7736745476722717,
+              "median": 0.6986395120620728,
+              "p95": 1.1032770872116089,
+              "max": 1.437360405921936,
+              "fraction_above_one": 0.109375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5379102826118469,
+              "median": 0.5385051965713501,
+              "p95": 0.6156278252601624,
+              "max": 0.7179219722747803,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.07142971456050873,
+            "output_change_mse": 0.06564964354038239,
+            "adapter_bypass_target_mse": 0.08135151863098145,
+            "translated_consistency_mse": 0.026468772441148758,
+            "raw_repair_mse": 0.040090154856443405,
+            "feedback_gain": {
+              "rms": 0.7659754157066345,
+              "median": 0.6929441690444946,
+              "p95": 1.0659823417663574,
+              "max": 1.3900734186172485,
+              "fraction_above_one": 0.0859375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5383292436599731,
+              "median": 0.5404261946678162,
+              "p95": 0.6153746247291565,
+              "max": 0.7308682799339294,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    },
+    "adapter_bypass_cold_long": {
+      "radius": 1.7299150134336512,
+      "relative_radial_rmse": 0.43743600694441576,
+      "late_radius_drift": 0.258868781950775,
+      "angular_speed": 0.08828559256351579,
+      "direction_consistency": 0.05388563049853372,
+      "signed_angular_speed": -0.0003274505100441759,
+      "circle_like_fraction": 0.0,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0,
+      "mean_step_length": 0.1357871269281751,
+      "initial_position_spread": 1.0585652785811213,
+      "radius_std": 1.1075279502138329,
+      "late_circle_fraction": 0.0,
+      "late_stopped_fraction": 0.0,
+      "passing_cw": 0,
+      "passing_ccw": 0
+    },
+    "adapter_bypass_warm_long": {
+      "prefix8": {
+        "reference_orbit_fraction": 0.0,
+        "relative_radial_rmse": 1.9080319504235048,
+        "signed_speed_mae": 0.27283823589827183,
+        "reference_direction_consistency": 0.49868011474609375,
+        "startup_error_relative": 0.3418985382370373,
+        "position_error_first32": 2.098391664278031,
+        "position_error_last128": 3.0433203390082517,
+        "passing_cw": 0,
+        "passing_ccw": 0
+      },
+      "prefix32": {
+        "reference_orbit_fraction": 0.0,
+        "relative_radial_rmse": 1.9054857994145338,
+        "signed_speed_mae": 0.2729063003656937,
+        "reference_direction_consistency": 0.497039794921875,
+        "startup_error_relative": 0.31173285179477306,
+        "position_error_first32": 1.8128193271187623,
+        "position_error_last128": 3.1655545145120225,
+        "passing_cw": 0,
+        "passing_ccw": 0
+      }
+    }
+  },
+  {
+    "name": "proposal_clean_s25",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/proposal_clean_s25",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.00518733961507678,
+        "raw_memory_rms": 0.475139856338501,
+        "adapter_correction_rms": 0.09855757653713226,
+        "raw_across_episode_std": 0.3513757586479187,
+        "translated_across_episode_std": 0.37885957956314087,
+        "memory_zero": {
+          "target_mse": 0.6757360696792603,
+          "output_change_mse": 0.6687458753585815
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4109735488891602,
+          "output_change_mse": 1.4118560552597046
+        },
+        "clock_zero": {
+          "target_mse": 0.033366672694683075,
+          "output_change_mse": 0.030649978667497635
+        },
+        "adapter_bypass_target_mse": 0.07113108038902283,
+        "next_prediction_after_generated_write_mse": 0.02196674793958664,
+        "next_prediction_after_clean_real_write_mse": 0.0033736436162143946,
+        "generated_vs_clean_real_write_mse": 0.00063696427969262,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.0077833207324147224,
+            "output_change_mse": 0.0021630707196891308,
+            "adapter_bypass_target_mse": 0.07093233615159988,
+            "translated_consistency_mse": 0.0009896544506773353,
+            "raw_repair_mse": 0.010803388431668282,
+            "feedback_gain": {
+              "rms": 0.7515561580657959,
+              "median": 0.7237884998321533,
+              "p95": 1.0190825462341309,
+              "max": 1.3743127584457397,
+              "fraction_above_one": 0.0703125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5231262445449829,
+              "median": 0.519263744354248,
+              "p95": 0.6478843092918396,
+              "max": 0.7210733890533447,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.011910667642951012,
+            "output_change_mse": 0.0060106366872787476,
+            "adapter_bypass_target_mse": 0.0719575434923172,
+            "translated_consistency_mse": 0.002749381121248007,
+            "raw_repair_mse": 0.012629013508558273,
+            "feedback_gain": {
+              "rms": 0.7513254284858704,
+              "median": 0.7145748734474182,
+              "p95": 1.0181852579116821,
+              "max": 1.412835955619812,
+              "fraction_above_one": 0.0703125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5231462121009827,
+              "median": 0.5190514922142029,
+              "p95": 0.6478590369224548,
+              "max": 0.7253715395927429,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.060029566287994385,
+            "output_change_mse": 0.05306273326277733,
+            "adapter_bypass_target_mse": 0.09123104065656662,
+            "translated_consistency_mse": 0.024736549705266953,
+            "raw_repair_mse": 0.03487036004662514,
+            "feedback_gain": {
+              "rms": 0.7440930604934692,
+              "median": 0.6966573596000671,
+              "p95": 1.0178905725479126,
+              "max": 1.405496597290039,
+              "fraction_above_one": 0.0703125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5233941674232483,
+              "median": 0.5181332230567932,
+              "p95": 0.6436402201652527,
+              "max": 0.7453990578651428,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.004974863491952419,
+        "raw_memory_rms": 0.4858209490776062,
+        "adapter_correction_rms": 0.10583095997571945,
+        "raw_across_episode_std": 0.36478671431541443,
+        "translated_across_episode_std": 0.4014289975166321,
+        "memory_zero": {
+          "target_mse": 0.7447496652603149,
+          "output_change_mse": 0.7598790526390076
+        },
+        "memory_shuffle": {
+          "target_mse": 1.482337474822998,
+          "output_change_mse": 1.4995315074920654
+        },
+        "clock_zero": {
+          "target_mse": 0.03171427175402641,
+          "output_change_mse": 0.03174050152301788
+        },
+        "adapter_bypass_target_mse": 0.06765858083963394,
+        "next_prediction_after_generated_write_mse": 0.018603121861815453,
+        "next_prediction_after_clean_real_write_mse": 0.0024500826839357615,
+        "generated_vs_clean_real_write_mse": 0.000605712877586484,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.007474067620933056,
+            "output_change_mse": 0.0025606979615986347,
+            "adapter_bypass_target_mse": 0.06771615147590637,
+            "translated_consistency_mse": 0.001026504673063755,
+            "raw_repair_mse": 0.012371225282549858,
+            "feedback_gain": {
+              "rms": 0.7913198471069336,
+              "median": 0.7133024334907532,
+              "p95": 1.1297602653503418,
+              "max": 1.3495330810546875,
+              "fraction_above_one": 0.1328125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5417984127998352,
+              "median": 0.536925196647644,
+              "p95": 0.6290621161460876,
+              "max": 0.7517365217208862,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.011871675960719585,
+            "output_change_mse": 0.007032747380435467,
+            "adapter_bypass_target_mse": 0.06907036900520325,
+            "translated_consistency_mse": 0.002851026365533471,
+            "raw_repair_mse": 0.014291438274085522,
+            "feedback_gain": {
+              "rms": 0.7883360385894775,
+              "median": 0.7143884301185608,
+              "p95": 1.1254591941833496,
+              "max": 1.3258720636367798,
+              "fraction_above_one": 0.1328125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5418089628219604,
+              "median": 0.5387295484542847,
+              "p95": 0.6291059851646423,
+              "max": 0.7539273500442505,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.06651045382022858,
+            "output_change_mse": 0.061992380768060684,
+            "adapter_bypass_target_mse": 0.09060802310705185,
+            "translated_consistency_mse": 0.02565797045826912,
+            "raw_repair_mse": 0.03751690313220024,
+            "feedback_gain": {
+              "rms": 0.7786512970924377,
+              "median": 0.7112918496131897,
+              "p95": 1.0810333490371704,
+              "max": 1.3473833799362183,
+              "fraction_above_one": 0.109375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5418804287910461,
+              "median": 0.540420413017273,
+              "p95": 0.6265764832496643,
+              "max": 0.7640412449836731,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    },
+    "adapter_bypass_cold_long": {
+      "radius": 3.957845009947803,
+      "relative_radial_rmse": 0.35073931674844633,
+      "late_radius_drift": 0.3476768248851233,
+      "angular_speed": 0.026176785528217346,
+      "direction_consistency": 0.04119318181818181,
+      "signed_angular_speed": 0.00026728664994728126,
+      "circle_like_fraction": 0.0,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0,
+      "mean_step_length": 0.12492416186022094,
+      "initial_position_spread": 1.0798682380907003,
+      "radius_std": 1.923925867767196,
+      "late_circle_fraction": 0.0,
+      "late_stopped_fraction": 0.0,
+      "passing_cw": 0,
+      "passing_ccw": 0
+    },
+    "adapter_bypass_warm_long": {
+      "prefix8": {
+        "reference_orbit_fraction": 0.0,
+        "relative_radial_rmse": 4.161413958424253,
+        "signed_speed_mae": 0.27134765004145855,
+        "reference_direction_consistency": 0.5007705688476562,
+        "startup_error_relative": 0.3394618019164619,
+        "position_error_first32": 3.653974527971207,
+        "position_error_last128": 5.356694988515398,
+        "passing_cw": 0,
+        "passing_ccw": 0
+      },
+      "prefix32": {
+        "reference_orbit_fraction": 0.0,
+        "relative_radial_rmse": 4.1582082637736955,
+        "signed_speed_mae": 0.27139451444758356,
+        "reference_direction_consistency": 0.5015411376953125,
+        "startup_error_relative": 0.33981522761590355,
+        "position_error_first32": 3.4019305500693244,
+        "position_error_last128": 5.4294922186089565,
+        "passing_cw": 0,
+        "passing_ccw": 0
+      }
+    }
+  },
+  {
+    "name": "proposal_clean_full",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/proposal_clean_full",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.006178291514515877,
+        "raw_memory_rms": 0.40897539258003235,
+        "adapter_correction_rms": 0.051647454500198364,
+        "raw_across_episode_std": 0.28530746698379517,
+        "translated_across_episode_std": 0.2971905767917633,
+        "memory_zero": {
+          "target_mse": 0.7706056237220764,
+          "output_change_mse": 0.7733768224716187
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4368208646774292,
+          "output_change_mse": 1.452012300491333
+        },
+        "clock_zero": {
+          "target_mse": 0.028356488794088364,
+          "output_change_mse": 0.020849423483014107
+        },
+        "adapter_bypass_target_mse": 0.021444570273160934,
+        "next_prediction_after_generated_write_mse": 0.022508159279823303,
+        "next_prediction_after_clean_real_write_mse": 0.002793167717754841,
+        "generated_vs_clean_real_write_mse": 0.0011231937678530812,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.007494615390896797,
+            "output_change_mse": 0.0015742153627797961,
+            "adapter_bypass_target_mse": 0.02185588702559471,
+            "translated_consistency_mse": 0.000933291157707572,
+            "raw_repair_mse": 0.0036689809057861567,
+            "feedback_gain": {
+              "rms": 0.6967698931694031,
+              "median": 0.6779966950416565,
+              "p95": 0.9656964540481567,
+              "max": 1.1596654653549194,
+              "fraction_above_one": 0.0390625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5262681245803833,
+              "median": 0.5185415744781494,
+              "p95": 0.6522163152694702,
+              "max": 0.7877146005630493,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.010138342157006264,
+            "output_change_mse": 0.004366004839539528,
+            "adapter_bypass_target_mse": 0.023307127878069878,
+            "translated_consistency_mse": 0.002591551747173071,
+            "raw_repair_mse": 0.005376014392822981,
+            "feedback_gain": {
+              "rms": 0.6963341236114502,
+              "median": 0.6782429814338684,
+              "p95": 0.9495837688446045,
+              "max": 1.169161319732666,
+              "fraction_above_one": 0.0390625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.526275098323822,
+              "median": 0.5176786780357361,
+              "p95": 0.6474746465682983,
+              "max": 0.7918784618377686,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.044321976602077484,
+            "output_change_mse": 0.039016202092170715,
+            "adapter_bypass_target_mse": 0.043903883546590805,
+            "translated_consistency_mse": 0.02334458753466606,
+            "raw_repair_mse": 0.02637057937681675,
+            "feedback_gain": {
+              "rms": 0.691500723361969,
+              "median": 0.6710832715034485,
+              "p95": 0.9296054840087891,
+              "max": 1.1315103769302368,
+              "fraction_above_one": 0.0234375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5260017514228821,
+              "median": 0.5133668780326843,
+              "p95": 0.6301358938217163,
+              "max": 0.8070654273033142,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.006333297584205866,
+        "raw_memory_rms": 0.4193788170814514,
+        "adapter_correction_rms": 0.04949495568871498,
+        "raw_across_episode_std": 0.2969399392604828,
+        "translated_across_episode_std": 0.31054919958114624,
+        "memory_zero": {
+          "target_mse": 0.7568767666816711,
+          "output_change_mse": 0.7740200757980347
+        },
+        "memory_shuffle": {
+          "target_mse": 1.488606572151184,
+          "output_change_mse": 1.50250244140625
+        },
+        "clock_zero": {
+          "target_mse": 0.022325320169329643,
+          "output_change_mse": 0.019867300987243652
+        },
+        "adapter_bypass_target_mse": 0.01841139607131481,
+        "next_prediction_after_generated_write_mse": 0.022474877536296844,
+        "next_prediction_after_clean_real_write_mse": 0.0029691453091800213,
+        "generated_vs_clean_real_write_mse": 0.0011195812840014696,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.008273891173303127,
+            "output_change_mse": 0.0020394017919898033,
+            "adapter_bypass_target_mse": 0.018638508394360542,
+            "translated_consistency_mse": 0.0009569055400788784,
+            "raw_repair_mse": 0.0035144092980772257,
+            "feedback_gain": {
+              "rms": 0.7570360898971558,
+              "median": 0.7048357129096985,
+              "p95": 1.0744496583938599,
+              "max": 1.3268531560897827,
+              "fraction_above_one": 0.1171875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5366347432136536,
+              "median": 0.5295652747154236,
+              "p95": 0.6493034958839417,
+              "max": 0.7729675769805908,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.011817405931651592,
+            "output_change_mse": 0.005621295887976885,
+            "adapter_bypass_target_mse": 0.019934797659516335,
+            "translated_consistency_mse": 0.0026581864804029465,
+            "raw_repair_mse": 0.005287081468850374,
+            "feedback_gain": {
+              "rms": 0.7544742822647095,
+              "median": 0.7027684450149536,
+              "p95": 1.064261794090271,
+              "max": 1.3396658897399902,
+              "fraction_above_one": 0.109375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5366435647010803,
+              "median": 0.5279836058616638,
+              "p95": 0.6508198976516724,
+              "max": 0.7743079662322998,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.055692560970783234,
+            "output_change_mse": 0.04969162866473198,
+            "adapter_bypass_target_mse": 0.040636252611875534,
+            "translated_consistency_mse": 0.02390693873167038,
+            "raw_repair_mse": 0.026912426576018333,
+            "feedback_gain": {
+              "rms": 0.7436627149581909,
+              "median": 0.6873531341552734,
+              "p95": 1.0344122648239136,
+              "max": 1.225651741027832,
+              "fraction_above_one": 0.078125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5363432765007019,
+              "median": 0.52654629945755,
+              "p95": 0.6535646319389343,
+              "max": 0.7800537943840027,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    },
+    "adapter_bypass_cold_long": {
+      "radius": 0.9370114372568221,
+      "relative_radial_rmse": 2.7738531768383634,
+      "late_radius_drift": 2.7136769537032017,
+      "angular_speed": 0.06404481076605288,
+      "direction_consistency": 0.11473607038123165,
+      "signed_angular_speed": 0.005619160958134772,
+      "circle_like_fraction": 0.0,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0,
+      "mean_step_length": 0.15062341972518645,
+      "initial_position_spread": 1.8615306197035721,
+      "radius_std": 0.3769451924721943,
+      "late_circle_fraction": 0.0,
+      "late_stopped_fraction": 0.0,
+      "passing_cw": 0,
+      "passing_ccw": 0
+    },
+    "adapter_bypass_warm_long": {
+      "prefix8": {
+        "reference_orbit_fraction": 0.0,
+        "relative_radial_rmse": 3.3894666314511737,
+        "signed_speed_mae": 0.2706603561067287,
+        "reference_direction_consistency": 0.5062332153320312,
+        "startup_error_relative": 0.1806735217804014,
+        "position_error_first32": 1.2113974128221587,
+        "position_error_last128": 4.746879309928972,
+        "passing_cw": 0,
+        "passing_ccw": 0
+      },
+      "prefix32": {
+        "reference_orbit_fraction": 0.0,
+        "relative_radial_rmse": 3.420976259412348,
+        "signed_speed_mae": 0.27126276592216736,
+        "reference_direction_consistency": 0.5045928955078125,
+        "startup_error_relative": 0.1744649718389571,
+        "position_error_first32": 1.1842772363041285,
+        "position_error_last128": 4.83531261646176,
+        "passing_cw": 0,
+        "passing_ccw": 0
+      }
+    }
+  },
+  {
+    "name": "residual_clean_s25",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/residual_clean_s25",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.004620783496648073,
+        "raw_memory_rms": 0.4646555483341217,
+        "adapter_correction_rms": 0.1270514577627182,
+        "raw_across_episode_std": 0.3470141887664795,
+        "translated_across_episode_std": 0.39481979608535767,
+        "memory_zero": {
+          "target_mse": 0.6980150938034058,
+          "output_change_mse": 0.6797188520431519
+        },
+        "memory_shuffle": {
+          "target_mse": 1.3920397758483887,
+          "output_change_mse": 1.3841209411621094
+        },
+        "clock_zero": {
+          "target_mse": 0.030964629724621773,
+          "output_change_mse": 0.024691486731171608
+        },
+        "adapter_bypass_target_mse": 0.08049431443214417,
+        "next_prediction_after_generated_write_mse": 0.01665746420621872,
+        "next_prediction_after_clean_real_write_mse": 0.002539744134992361,
+        "generated_vs_clean_real_write_mse": 0.0005280490731820464,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.006311599165201187,
+            "output_change_mse": 0.001617981237359345,
+            "adapter_bypass_target_mse": 0.08213511854410172,
+            "translated_consistency_mse": 0.0010378069709986448,
+            "raw_repair_mse": 0.01714211329817772,
+            "feedback_gain": {
+              "rms": 0.7100933790206909,
+              "median": 0.6526626348495483,
+              "p95": 0.9935794472694397,
+              "max": 1.2057485580444336,
+              "fraction_above_one": 0.046875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5402933955192566,
+              "median": 0.5322483777999878,
+              "p95": 0.6382328867912292,
+              "max": 0.7130188345909119,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.009200925007462502,
+            "output_change_mse": 0.0044807447120547295,
+            "adapter_bypass_target_mse": 0.08400982618331909,
+            "translated_consistency_mse": 0.002883317181840539,
+            "raw_repair_mse": 0.018965736031532288,
+            "feedback_gain": {
+              "rms": 0.7090893983840942,
+              "median": 0.6544609665870667,
+              "p95": 1.0066285133361816,
+              "max": 1.1671202182769775,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5402234196662903,
+              "median": 0.5321581363677979,
+              "p95": 0.6385716795921326,
+              "max": 0.7128311991691589,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.04450615495443344,
+            "output_change_mse": 0.03985758125782013,
+            "adapter_bypass_target_mse": 0.10328304022550583,
+            "translated_consistency_mse": 0.025975866243243217,
+            "raw_repair_mse": 0.04198799282312393,
+            "feedback_gain": {
+              "rms": 0.7040719389915466,
+              "median": 0.6590210795402527,
+              "p95": 0.9953343272209167,
+              "max": 1.0694401264190674,
+              "fraction_above_one": 0.046875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5399401187896729,
+              "median": 0.5349109172821045,
+              "p95": 0.6393510103225708,
+              "max": 0.7116546034812927,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.004419032484292984,
+        "raw_memory_rms": 0.4744148254394531,
+        "adapter_correction_rms": 0.13284587860107422,
+        "raw_across_episode_std": 0.3561243414878845,
+        "translated_across_episode_std": 0.4079859256744385,
+        "memory_zero": {
+          "target_mse": 0.7673730850219727,
+          "output_change_mse": 0.7652572989463806
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4633915424346924,
+          "output_change_mse": 1.4621191024780273
+        },
+        "clock_zero": {
+          "target_mse": 0.03055379167199135,
+          "output_change_mse": 0.026529155671596527
+        },
+        "adapter_bypass_target_mse": 0.08003737032413483,
+        "next_prediction_after_generated_write_mse": 0.016568468883633614,
+        "next_prediction_after_clean_real_write_mse": 0.0024711370933800936,
+        "generated_vs_clean_real_write_mse": 0.0005225561326369643,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.005562460049986839,
+            "output_change_mse": 0.0018052479717880487,
+            "adapter_bypass_target_mse": 0.08093570172786713,
+            "translated_consistency_mse": 0.0010202322155237198,
+            "raw_repair_mse": 0.01880839467048645,
+            "feedback_gain": {
+              "rms": 0.7179432511329651,
+              "median": 0.6739269495010376,
+              "p95": 0.9470825791358948,
+              "max": 1.3149718046188354,
+              "fraction_above_one": 0.03125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5456714034080505,
+              "median": 0.5393034219741821,
+              "p95": 0.655224621295929,
+              "max": 0.756626307964325,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.008318692445755005,
+            "output_change_mse": 0.005001104436814785,
+            "adapter_bypass_target_mse": 0.08246740698814392,
+            "translated_consistency_mse": 0.0028335503302514553,
+            "raw_repair_mse": 0.020718101412057877,
+            "feedback_gain": {
+              "rms": 0.7176042199134827,
+              "median": 0.6738521456718445,
+              "p95": 0.9409066438674927,
+              "max": 1.3311679363250732,
+              "fraction_above_one": 0.03125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5456100106239319,
+              "median": 0.5405738949775696,
+              "p95": 0.6552300453186035,
+              "max": 0.7578716278076172,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.04540912061929703,
+            "output_change_mse": 0.044501058757305145,
+            "adapter_bypass_target_mse": 0.10120724141597748,
+            "translated_consistency_mse": 0.025484386831521988,
+            "raw_repair_mse": 0.04388562589883804,
+            "feedback_gain": {
+              "rms": 0.715087890625,
+              "median": 0.6677847504615784,
+              "p95": 0.9420126676559448,
+              "max": 1.3262165784835815,
+              "fraction_above_one": 0.03125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5454402565956116,
+              "median": 0.5379523038864136,
+              "p95": 0.6624157428741455,
+              "max": 0.7630729675292969,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    },
+    "adapter_bypass_cold_long": {
+      "radius": 0.8389839082524388,
+      "relative_radial_rmse": 0.7237565502168627,
+      "late_radius_drift": 0.4711817271012803,
+      "angular_speed": 0.06959994498080536,
+      "direction_consistency": 0.14662756598240467,
+      "signed_angular_speed": 0.013192403212378235,
+      "circle_like_fraction": 0.0,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0,
+      "mean_step_length": 0.07422753622181207,
+      "initial_position_spread": 1.1868469328007853,
+      "radius_std": 0.3907693048042011,
+      "late_circle_fraction": 0.0,
+      "late_stopped_fraction": 0.0,
+      "passing_cw": 0,
+      "passing_ccw": 0
+    },
+    "adapter_bypass_warm_long": {
+      "prefix8": {
+        "reference_orbit_fraction": 0.0,
+        "relative_radial_rmse": 0.6987574954162421,
+        "signed_speed_mae": 0.27370247749916327,
+        "reference_direction_consistency": 0.49431610107421875,
+        "startup_error_relative": 0.36668457388939074,
+        "position_error_first32": 1.4918585857593112,
+        "position_error_last128": 1.5685688411096097,
+        "passing_cw": 0,
+        "passing_ccw": 0
+      },
+      "prefix32": {
+        "reference_orbit_fraction": 0.0,
+        "relative_radial_rmse": 0.6996806658570878,
+        "signed_speed_mae": 0.27413055791218854,
+        "reference_direction_consistency": 0.49346923828125,
+        "startup_error_relative": 0.37749918089480516,
+        "position_error_first32": 1.5126952991101223,
+        "position_error_last128": 1.683730795071606,
+        "passing_cw": 0,
+        "passing_ccw": 0
+      }
+    }
+  }
+]

@@ -1,4 +1,94 @@
-# Latest discussion before compact: organize directed memory repair
+# Latest: adversarial memory exploration round9 completed
+
+Latest user direction: commit and compact. The next experiment remains open;
+the user sees proposal repair as promising. Resume with discussion of what its
+benefit means before choosing another sweep. Mixed clean/explored judging below
+is one candidate, not an agreed next step. The strongest evidence to build on is
+proposal_clean_s25's autonomous adapter benefit (radial1.487 vs4.158 on bypass)
+and greater persistence of initial-history effects. Neither demonstrates correct
+process preservation yet. No automatic experiments on resume.
+
+User rejected MSE training objectives: repair must learn through particle GAN.
+MSE remains allowed as an evaluation metric. Earlier proposed output-consistency
+MSE in dynamics_round8/next-experiments.md is explicitly SUPERSEDED.
+
+Completed ten2k scouts plus one exact2k->5k continuation, both GPUs through the
+existing pipeline. Queues exploration_round9 and exploration_round9_long are
+sealed/empty,10/1done,0failed/pending/running. All diagnostics finished. No new
+experiments selected. This handoff is included with the user-requested commit on
+feat/sequential-memory-path. Preserve unrelated .claude/, results/motion/,
+sparse-ucd.log.
+
+Read ../memory-handoff/exploration_round9/assessment.md, plan.md, leaderboard.md,
+mechanisms.md, extension_decision.json, and long/leaderboard.md. Full raw metrics
+and saved-panel diagnostics are in the same directory. Stable central log:
+tail -F runs/memory_path/core_round1/train.log
+
+New formulation: G reads a real-prefix state after one generated replacement;
+D can score both the next real/fake candidates using undisturbed real-history
+memory. Both candidate scores and B-cap always share the same causal judging
+state. No future/target leak. Shared controls score both using explored memory.
+G optionally backpropagates through its earlier proposal and frozen D writer.
+Only D trains writer parameters; only G/particles receive G gradients. Clean
+judging trains D's writer only via real history; shared judging also trains it
+through explored writes. This distinction matters for interpreting the results.
+
+New stateless proposal adapter: proposal=H(z,M,clock), readable=M+R(M,proposal),
+final=H(z,readable,clock). Only final is written to D memory. Clock enters R via
+proposal, not a separate clock input. Two internal point-reader calls per G
+evaluation, up to4 per training phase with the single-write branch. No full
+rollouts, private G state, MSE/other auxiliary, clipping, EMA or seed sweep.
+Default public API exact B-cap and prior regularization unchanged.
+
+All10 scouts and the5k continuation: full cold circles and original-orbit warm
+passes0/128 at256/1024, prefixes8/32; late stopping0. Still unsolved.
+Selected prefix32 long radial errors (2k): clock2.597, shared_s25 1.726,
+clean_s25 2.056, clean_s25_detach2.467, shared_full2.318, clean_full2.063,
+proposal_control1.675, proposal_clean_s25 1.487, proposal_clean_full1.803,
+residual_clean_s25 2.547. Shared mild beats clean mild; clean full improves some
+errors vs shared full but not original-orbit success. Proposal mild has lowest
+radial error at BOTH prefixes. Its adapter bypass worsens radial1.487->4.158,
+still zero full passes. Memory-only residual has best local prediction but
+bypass improves radial2.547->.700, also no full passes.
+
+One diagnostic extension selected: shared_s25 meets >=25% radial improvement,
+better early position/one-write prediction, no worse direction/stopping at BOTH
+prefixes versus clock_control. Proposal_control also qualifies, but shared_s25
+has lower one-write error at both prefixes and half the runtime reader calls.
+Best proposal+exploration does not meet gates versus its proposal-only control.
+Exact shared_s25 extension2k->5k REGRESSES: prefix32 radial1.726->2.272,
+early position1.365->2.131, direction50.5%->48.3%, localMSE.00579->.00963.
+No further extensions selected.
+
+New recurrence evidence: old clock and video slow16_r10 have best late recurrence
+near201 steps for ALL128 particles, all prefixes. Clock-rate0.9/1.1 interventions
+move median period to223/183, matching clock period scaling. Current clock and
+shared mild also largely converge to the same late outputs from cold/warm starts
+when aligned at absolute clock time (97.7%/94.5% below normalized error.001).
+Proposal clean mild differs: only51.6% recur best within199..203, lag201 median
+normalized error.828 vs clock.000057; only7% have similar cold/warm late outputs.
+This suggests persistent history effects but could be wrong attractors/chaotic
+sensitivity, not correct process memory. Its clock interventions still shift
+median recurrence221.5/200/182 with0.9/1/1.1 rates. Toy success remains zero.
+
+Possible next targeted test (not implemented/queued): mix clean and explored
+judging contexts for the same generated continuation, ordinary GAN losses in
+both views. Combine an anchored reference with D writer exposure to explored
+states, without additional generated writes or full rollouts. Retain a proposal
+adapter arm to distinguish its autonomous effect from local prediction quality.
+
+Implementation: feedback_judge_memory='shared'|'clean'; adversarial_only guard;
+g_memory_adapter='proposal'. Defaults preserve legacy behavior/configs. New
+diagnose_memory_recurrence.py measures saved-path recurrence, aligned history
+retention and optional clock-rate interventions. Existing dynamics diagnostics
+now obtain the actual proposal-conditioned read. Reports distinguish complete
+G calls from internal reader calls. 80 focused tests passed; two full-batch GPU
+smokes and CPU proposal diagnostic passed. All10 trainer source hashes match;
+fresh clock control exactly reproduces historical G/D/particle tensors.
+
+---
+
+# Previous discussion before compact: organize directed memory repair
 
 User watched the saved video and noticed that trajectories appear to retrace a
 repeating irregular path. This is a visual observation, not a measured recurrence

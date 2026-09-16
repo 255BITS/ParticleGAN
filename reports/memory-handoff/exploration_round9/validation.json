@@ -1,0 +1,23 @@
+{
+  "focused_tests_passed": 80,
+  "gpu_smoke_runs": [
+    "clean_s25",
+    "proposal_clean_full"
+  ],
+  "proposal_diagnostic_cpu_smoke": true,
+  "exact_historical_baseline_state_dicts": {
+    "generator": true,
+    "critic": true,
+    "prior": true
+  },
+  "all_ten_same_trainer_sources": true,
+  "all_ten_auxiliary_weights_zero": true,
+  "done": 10,
+  "failed": 0,
+  "extension_done": 1,
+  "extension_failed": 0,
+  "all_queues_empty": true,
+  "final_diagnostics_complete": true,
+  "all_full_pass_rates_zero": true,
+  "all_late_stopping_zero": true
+}

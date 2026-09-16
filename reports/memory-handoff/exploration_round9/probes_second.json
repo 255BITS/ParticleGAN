@@ -1,0 +1,557 @@
+[
+  {
+    "name": "clean_s25_detach",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/clean_s25_detach",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.0055039189755916595,
+        "raw_memory_rms": 0.4554833769798279,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.343315452337265,
+        "translated_across_episode_std": 0.343315452337265,
+        "memory_zero": {
+          "target_mse": 0.7042667269706726,
+          "output_change_mse": 0.7068423628807068
+        },
+        "memory_shuffle": {
+          "target_mse": 1.420276403427124,
+          "output_change_mse": 1.4271126985549927
+        },
+        "clock_zero": {
+          "target_mse": 0.026568574830889702,
+          "output_change_mse": 0.01993642747402191
+        },
+        "adapter_bypass_target_mse": 0.0055039189755916595,
+        "next_prediction_after_generated_write_mse": 0.023769564926624298,
+        "next_prediction_after_clean_real_write_mse": 0.003602204844355583,
+        "generated_vs_clean_real_write_mse": 0.0006171769928187132,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.007094301283359528,
+            "output_change_mse": 0.0020331693813204765,
+            "adapter_bypass_target_mse": 0.007094301283359528,
+            "translated_consistency_mse": 0.0009000000427477062,
+            "raw_repair_mse": 0.0009000000427477062,
+            "feedback_gain": {
+              "rms": 0.7443343997001648,
+              "median": 0.6898986101150513,
+              "p95": 1.0192053318023682,
+              "max": 1.4183846712112427,
+              "fraction_above_one": 0.0546875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5617284774780273,
+              "median": 0.5532311797142029,
+              "p95": 0.6550417542457581,
+              "max": 0.7039169073104858,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.010325388982892036,
+            "output_change_mse": 0.005573157221078873,
+            "adapter_bypass_target_mse": 0.010325388982892036,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7412699460983276,
+              "median": 0.6899755001068115,
+              "p95": 0.9868343472480774,
+              "max": 1.3268296718597412,
+              "fraction_above_one": 0.046875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5617882013320923,
+              "median": 0.5529305338859558,
+              "p95": 0.6562274694442749,
+              "max": 0.7054583430290222,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.05222988873720169,
+            "output_change_mse": 0.04914788156747818,
+            "adapter_bypass_target_mse": 0.05222988873720169,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.733353853225708,
+              "median": 0.6913053393363953,
+              "p95": 0.9886299967765808,
+              "max": 1.3087161779403687,
+              "fraction_above_one": 0.0546875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5621100068092346,
+              "median": 0.5554791688919067,
+              "p95": 0.6633551716804504,
+              "max": 0.7127113342285156,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.005396889988332987,
+        "raw_memory_rms": 0.46692442893981934,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.3553023040294647,
+        "translated_across_episode_std": 0.3553023040294647,
+        "memory_zero": {
+          "target_mse": 0.7348002195358276,
+          "output_change_mse": 0.7203726768493652
+        },
+        "memory_shuffle": {
+          "target_mse": 1.446061611175537,
+          "output_change_mse": 1.4306522607803345
+        },
+        "clock_zero": {
+          "target_mse": 0.028140783309936523,
+          "output_change_mse": 0.024199871346354485
+        },
+        "adapter_bypass_target_mse": 0.005396889988332987,
+        "next_prediction_after_generated_write_mse": 0.019439760595560074,
+        "next_prediction_after_clean_real_write_mse": 0.002731566783040762,
+        "generated_vs_clean_real_write_mse": 0.0006142410566098988,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.006709904409945011,
+            "output_change_mse": 0.0020443154498934746,
+            "adapter_bypass_target_mse": 0.006709904409945011,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.7666367292404175,
+              "median": 0.7168214917182922,
+              "p95": 1.0641000270843506,
+              "max": 1.3880906105041504,
+              "fraction_above_one": 0.078125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5760389566421509,
+              "median": 0.571928083896637,
+              "p95": 0.6644508838653564,
+              "max": 0.7907999753952026,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.009837662801146507,
+            "output_change_mse": 0.005683838855475187,
+            "adapter_bypass_target_mse": 0.009837662801146507,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7667189836502075,
+              "median": 0.7175077795982361,
+              "p95": 1.0721099376678467,
+              "max": 1.3802176713943481,
+              "fraction_above_one": 0.0859375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5760047435760498,
+              "median": 0.5713250041007996,
+              "p95": 0.6648432016372681,
+              "max": 0.7914924621582031,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.0525665245950222,
+            "output_change_mse": 0.05117616057395935,
+            "adapter_bypass_target_mse": 0.0525665245950222,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.7631828784942627,
+              "median": 0.7127323150634766,
+              "p95": 1.097652554512024,
+              "max": 1.3486988544464111,
+              "fraction_above_one": 0.09375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5757331848144531,
+              "median": 0.5728117227554321,
+              "p95": 0.6656419634819031,
+              "max": 0.7947101593017578,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "shared_full",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/shared_full",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.02129395864903927,
+        "raw_memory_rms": 0.475715696811676,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.3798775374889374,
+        "translated_across_episode_std": 0.3798775374889374,
+        "memory_zero": {
+          "target_mse": 0.8042466640472412,
+          "output_change_mse": 0.6845561265945435
+        },
+        "memory_shuffle": {
+          "target_mse": 1.3412318229675293,
+          "output_change_mse": 1.2785048484802246
+        },
+        "clock_zero": {
+          "target_mse": 0.13205686211585999,
+          "output_change_mse": 0.09163635969161987
+        },
+        "adapter_bypass_target_mse": 0.02129395864903927,
+        "next_prediction_after_generated_write_mse": 0.056126341223716736,
+        "next_prediction_after_clean_real_write_mse": 0.01642565242946148,
+        "generated_vs_clean_real_write_mse": 0.0015416662208735943,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.022194191813468933,
+            "output_change_mse": 0.0030863340944051743,
+            "adapter_bypass_target_mse": 0.022194191813468933,
+            "translated_consistency_mse": 0.0009000000427477062,
+            "raw_repair_mse": 0.0009000000427477062,
+            "feedback_gain": {
+              "rms": 0.8477898240089417,
+              "median": 0.8274379372596741,
+              "p95": 1.1038886308670044,
+              "max": 1.2902580499649048,
+              "fraction_above_one": 0.09375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.6913291215896606,
+              "median": 0.6958785057067871,
+              "p95": 0.8012896776199341,
+              "max": 0.8437789082527161,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.026125838980078697,
+            "output_change_mse": 0.008547810837626457,
+            "adapter_bypass_target_mse": 0.026125838980078697,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.8461788892745972,
+              "median": 0.8287317752838135,
+              "p95": 1.0998597145080566,
+              "max": 1.2722158432006836,
+              "fraction_above_one": 0.1015625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.6915551424026489,
+              "median": 0.6946418285369873,
+              "p95": 0.8023314476013184,
+              "max": 0.8447086811065674,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.0858459398150444,
+            "output_change_mse": 0.07539089024066925,
+            "adapter_bypass_target_mse": 0.0858459398150444,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.8370895385742188,
+              "median": 0.8159551620483398,
+              "p95": 1.0348849296569824,
+              "max": 1.2472065687179565,
+              "fraction_above_one": 0.078125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.6921567916870117,
+              "median": 0.6933298110961914,
+              "p95": 0.7895482778549194,
+              "max": 0.843275785446167,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.010052314959466457,
+        "raw_memory_rms": 0.4941960573196411,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.3920723497867584,
+        "translated_across_episode_std": 0.3920723497867584,
+        "memory_zero": {
+          "target_mse": 0.7318233251571655,
+          "output_change_mse": 0.7158240675926208
+        },
+        "memory_shuffle": {
+          "target_mse": 1.456878662109375,
+          "output_change_mse": 1.4303303956985474
+        },
+        "clock_zero": {
+          "target_mse": 0.11395320296287537,
+          "output_change_mse": 0.11070376634597778
+        },
+        "adapter_bypass_target_mse": 0.010052314959466457,
+        "next_prediction_after_generated_write_mse": 0.026361217722296715,
+        "next_prediction_after_clean_real_write_mse": 0.00834887009114027,
+        "generated_vs_clean_real_write_mse": 0.0007015496958047152,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.012167149223387241,
+            "output_change_mse": 0.002354755997657776,
+            "adapter_bypass_target_mse": 0.012167149223387241,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.8296289443969727,
+              "median": 0.7889252305030823,
+              "p95": 1.0874698162078857,
+              "max": 1.171661615371704,
+              "fraction_above_one": 0.125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.710419774055481,
+              "median": 0.7079260945320129,
+              "p95": 0.8163570761680603,
+              "max": 0.8774714469909668,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.016093041747808456,
+            "output_change_mse": 0.006497847381979227,
+            "adapter_bypass_target_mse": 0.016093041747808456,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.8276898264884949,
+              "median": 0.7922898530960083,
+              "p95": 1.086695671081543,
+              "max": 1.1803086996078491,
+              "fraction_above_one": 0.1171875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.7102554440498352,
+              "median": 0.7089655995368958,
+              "p95": 0.816108226776123,
+              "max": 0.876723051071167,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.0663192868232727,
+            "output_change_mse": 0.05745461955666542,
+            "adapter_bypass_target_mse": 0.0663192868232727,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.8190457820892334,
+              "median": 0.789131760597229,
+              "p95": 1.0766732692718506,
+              "max": 1.1927213668823242,
+              "fraction_above_one": 0.0859375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.7088196277618408,
+              "median": 0.7110837697982788,
+              "p95": 0.8103410005569458,
+              "max": 0.8721615672111511,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "clean_full",
+    "steps": 2000,
+    "source": "runs/memory_path/exploration_round9/runs/clean_full",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.00527446111664176,
+        "raw_memory_rms": 0.3983215391635895,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.27911654114723206,
+        "translated_across_episode_std": 0.27911654114723206,
+        "memory_zero": {
+          "target_mse": 0.7025895714759827,
+          "output_change_mse": 0.6869102120399475
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4097868204116821,
+          "output_change_mse": 1.4005212783813477
+        },
+        "clock_zero": {
+          "target_mse": 0.03351050615310669,
+          "output_change_mse": 0.02606482245028019
+        },
+        "adapter_bypass_target_mse": 0.00527446111664176,
+        "next_prediction_after_generated_write_mse": 0.017750155180692673,
+        "next_prediction_after_clean_real_write_mse": 0.0020241800229996443,
+        "generated_vs_clean_real_write_mse": 0.0009006613399833441,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.006412199232727289,
+            "output_change_mse": 0.0014309597900137305,
+            "adapter_bypass_target_mse": 0.006412199232727289,
+            "translated_consistency_mse": 0.0009000000427477062,
+            "raw_repair_mse": 0.0009000000427477062,
+            "feedback_gain": {
+              "rms": 0.6785182952880859,
+              "median": 0.6345267295837402,
+              "p95": 0.9557007551193237,
+              "max": 1.3572200536727905,
+              "fraction_above_one": 0.0390625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5362998247146606,
+              "median": 0.524889349937439,
+              "p95": 0.6430073380470276,
+              "max": 0.7644250392913818,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.008752496913075447,
+            "output_change_mse": 0.003957781009376049,
+            "adapter_bypass_target_mse": 0.008752496913075447,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.6771172881126404,
+              "median": 0.6410529613494873,
+              "p95": 0.9348989725112915,
+              "max": 1.2888035774230957,
+              "fraction_above_one": 0.0390625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5362566113471985,
+              "median": 0.5262568593025208,
+              "p95": 0.6417295336723328,
+              "max": 0.7675835490226746,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.039516646414995193,
+            "output_change_mse": 0.035696715116500854,
+            "adapter_bypass_target_mse": 0.039516646414995193,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.6727773547172546,
+              "median": 0.6369422078132629,
+              "p95": 0.927068829536438,
+              "max": 1.1996046304702759,
+              "fraction_above_one": 0.03125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.53572678565979,
+              "median": 0.5256475210189819,
+              "p95": 0.6429960131645203,
+              "max": 0.7781265377998352,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.005045135505497456,
+        "raw_memory_rms": 0.4086751937866211,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.28925788402557373,
+        "translated_across_episode_std": 0.28925788402557373,
+        "memory_zero": {
+          "target_mse": 0.7263882160186768,
+          "output_change_mse": 0.7259787321090698
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4688814878463745,
+          "output_change_mse": 1.4664890766143799
+        },
+        "clock_zero": {
+          "target_mse": 0.03377753496170044,
+          "output_change_mse": 0.02838735654950142
+        },
+        "adapter_bypass_target_mse": 0.005045135505497456,
+        "next_prediction_after_generated_write_mse": 0.016148975118994713,
+        "next_prediction_after_clean_real_write_mse": 0.0021255272440612316,
+        "generated_vs_clean_real_write_mse": 0.0008570499485358596,
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.006518322043120861,
+            "output_change_mse": 0.0016031680861487985,
+            "adapter_bypass_target_mse": 0.006518322043120861,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.7148588299751282,
+              "median": 0.6584217548370361,
+              "p95": 1.0146372318267822,
+              "max": 1.227784276008606,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5488470792770386,
+              "median": 0.5435378551483154,
+              "p95": 0.6680470108985901,
+              "max": 0.7844380140304565,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.00924066361039877,
+            "output_change_mse": 0.004442608915269375,
+            "adapter_bypass_target_mse": 0.00924066361039877,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7140240669250488,
+              "median": 0.6528993844985962,
+              "p95": 1.015236258506775,
+              "max": 1.221937894821167,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5487928986549377,
+              "median": 0.5442265272140503,
+              "p95": 0.6669027805328369,
+              "max": 0.7850534915924072,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.04380764439702034,
+            "output_change_mse": 0.039660241454839706,
+            "adapter_bypass_target_mse": 0.04380764439702034,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.7068862915039062,
+              "median": 0.639870822429657,
+              "p95": 0.9990745186805725,
+              "max": 1.18670654296875,
+              "fraction_above_one": 0.0546875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5480054616928101,
+              "median": 0.5437548756599426,
+              "p95": 0.6630367040634155,
+              "max": 0.7873469591140747,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  }
+]
