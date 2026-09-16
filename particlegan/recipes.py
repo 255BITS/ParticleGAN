@@ -5,7 +5,7 @@ import math
 
 @dataclass(frozen=True)
 class Recipe:
-    name: str = "100gaussians"
+    name: str = "gan"
     model: str = "gan"
     z_dim: int = 4
     num_particles: int = 20_000
@@ -115,14 +115,15 @@ class Recipe:
                 Adam(d_params, lr=self.lr * self.d_lr_mult, betas=self.betas))
 
 
-def get_recipe(name="100gaussians", **overrides):
-    if name == "100gaussians":
-        recipe = Recipe()
-    elif name == "denoising":
+def get_recipe(name="gan", **overrides):
+    """Recommended GAN/DDGAN defaults; historical preset names remain accepted."""
+    if name in ("gan", "100gaussians"):
+        recipe = Recipe(name=name)
+    elif name in ("ddgan", "denoising"):
         recipe = Recipe(name=name, model="ddgan", num_classes=4,
                         conditioning="ucd", total_steps=56_000)
     else:
-        raise ValueError(f"Unknown recipe {name!r}; choose '100gaussians' or 'denoising'")
+        raise ValueError(f"Unknown recipe {name!r}; choose 'gan' or 'ddgan'")
     return recipe.replace(**overrides)
 
 

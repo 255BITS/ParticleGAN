@@ -23,8 +23,9 @@ Use individual components in your existing loop. You own the networks, data,
 optimizers, backward calls, devices, logging, and checkpoints. No trainer is
 required, and the loss helpers never call backward or step an optimizer.
 
-See the [API reference and minimal training loop](docs/api.md) for constructor
-signatures, tensor shapes, defaults, and inference examples.
+See the [minimal GAN loop](docs/api.md#a-minimal-training-loop),
+[minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop), and
+[API reference](docs/api.md#reference-index) for complete examples and contracts.
 
 ```python
 from particlegan import ParticlePrior, GANLoss, GradientPenalty, ParticleRegularizer
@@ -68,7 +69,7 @@ for the G update while retaining gradients through `D(fake)`.
 ```python
 from particlegan import get_recipe
 
-recipe = get_recipe()  # "100gaussians"
+recipe = get_recipe()  # Recommended GAN defaults.
 recipe = recipe.replace(z_dim=16, num_particles=4096, lr=3e-4)
 prior = recipe.make_prior().to(device)
 adversarial = recipe.make_loss()
@@ -83,7 +84,7 @@ has separate generator and particle groups. You can build your own optimizers
 using the recipe's fields instead. Recipes are immutable; `.replace(...)`
 returns a new one. Unknown options raise errors.
 
-| Default | `100gaussians` | `denoising` |
+| Default | `get_recipe()` / `gan` | `ddgan` |
 | --- | --- | --- |
 | Generation | One-shot GAN | Four-step DDGAN |
 | Prior | 20,000 learned particles, dimension 4 | Same |
@@ -120,7 +121,7 @@ The library does not require a parser or configuration framework:
 
 ```toml
 [particlegan]
-name = "100gaussians"
+# Omit name for GAN defaults; use name = "ddgan" for DDGAN + UCD.
 z_dim = 16
 num_particles = 4096
 lr = 0.0003
@@ -185,7 +186,7 @@ labels, and device:
 import torch
 from particlegan import DDGAN, UCD, ucd_loss
 
-recipe = get_recipe("denoising", num_classes=4)
+recipe = get_recipe("ddgan", num_classes=4)
 prior = recipe.make_prior().to(device)
 adversarial = recipe.make_loss()
 penalty = recipe.make_gradient_penalty()

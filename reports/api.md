@@ -5,6 +5,11 @@ Status: implemented on branch `api`; validation results below.
 For usage and constructor contracts, see the
 [API reference and minimal training loop](../docs/api.md).
 
+Public defaults now use `get_recipe()` / `"gan"` and `get_recipe("ddgan")`.
+The historical names below remain accepted for existing experiment configs;
+their numerical settings are unchanged. The reference opens with standalone
+GAN and DDGAN + UCD training loops.
+
 ## Goal and boundary
 
 Install with pip, import from `particlegan`, and use the same primitives in this

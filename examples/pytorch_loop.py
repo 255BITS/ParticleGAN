@@ -3,8 +3,8 @@
 CPU smoke: python -u examples/pytorch_loop.py --steps 5 --batch-size 16
 TOML:     python -u examples/pytorch_loop.py --config examples/api.toml
 
-This intentionally small MLP demonstrates integration. The benchmark's Fourier
-critic, evaluation, and visualizations live in examples/100gaussians.py.
+This small MLP demonstrates integration using the recommended defaults.
+Replace its networks and synthetic batches with your own pipeline.
 """
 
 import argparse

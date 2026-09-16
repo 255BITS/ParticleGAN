@@ -7,10 +7,9 @@ with `python -m pip install .`; the core dependency is PyTorch.
 ## A minimal training loop
 
 This complete example learns a synthetic 2D distribution. Replace `real` with a
-batch from your pipeline and replace the two MLPs with your networks. It uses
-the selected optimizer, regularizer, schedule, and EMA defaults. The small
-networks and synthetic data here demonstrate integration; see the
-[100-Gaussians example](../examples/100gaussians.py) for the benchmark architecture.
+batch from your pipeline and replace the two MLPs with your networks. The
+recommended defaults cover the optimizer, regularizers, schedule, and EMA;
+override only what your application needs.
 
 ```python
 import copy
@@ -19,7 +18,7 @@ from torch import nn
 from particlegan import get_recipe, learning_rate_scale
 
 device = torch.device("cpu")  # Change to your device.
-recipe = get_recipe("100gaussians")  # Use total_steps=5 for a quick smoke check.
+recipe = get_recipe()  # Use total_steps=5 for a quick smoke check.
 
 G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(0.2),
                   nn.Linear(64, 2)).to(device)
@@ -84,6 +83,115 @@ than enabling every parameter after the G step.
 For command-line arguments, TOML input, and flushed JSON logs, see
 [the runnable loop](../examples/pytorch_loop.py). The example-first presentation
 is inspired by [LeJEPA's minimal guide](https://github.com/galilai-group/lejepa/blob/main/MINIMAL.md).
+
+## A minimal DDGAN + UCD loop
+
+This standalone example learns two conditional 2D distributions. G predicts
+clean data; DDGAN constructs a reverse transition; UCD selects the requested
+class score without feeding the class label into D's network. Replace the
+synthetic `real` and `labels` with batches from your pipeline.
+
+```python
+import copy
+import torch
+from torch import nn
+from torch.nn import functional as F
+from particlegan import DDGAN, UCD, get_recipe, learning_rate_scale, ucd_loss
+
+device = torch.device("cpu")
+recipe = get_recipe("ddgan", num_classes=2)  # Add total_steps=5 for a smoke check.
+process = DDGAN(recipe.alpha_bar).to(device)
+
+class Generator(nn.Module):
+    def __init__(self, z_dim, classes, steps):
+        super().__init__()
+        self.classes, self.steps = classes, steps
+        self.net = nn.Sequential(nn.Linear(z_dim + classes + 3, 64),
+                                 nn.LeakyReLU(0.2), nn.Linear(64, 2))
+
+    def forward(self, z, labels, *, xt, t):
+        c = F.one_hot(labels, self.classes).to(z)
+        time = t[:, None].to(z) / self.steps
+        return self.net(torch.cat((z, c, xt, time), dim=1))
+
+class LogitNetwork(nn.Module):
+    def __init__(self, classes, steps):
+        super().__init__()
+        self.steps = steps
+        self.net = nn.Sequential(nn.Linear(5, 64), nn.LeakyReLU(0.2),
+                                 nn.Linear(64, classes))
+
+    def forward(self, x, *, xt, t):
+        return self.net(torch.cat((x, xt, t[:, None].to(x) / self.steps), dim=1))
+
+G = Generator(recipe.z_dim, recipe.num_classes, process.steps).to(device)
+D = UCD(LogitNetwork(recipe.num_classes, process.steps), recipe.num_classes).to(device)
+prior = recipe.make_prior().to(device)
+gan = recipe.make_loss()
+penalty = recipe.make_gradient_penalty()
+spread = recipe.make_prior_regularizer()
+opt_g, opt_d = recipe.make_optimizers(G, D, prior)
+base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
+ema_g = copy.deepcopy(G).eval().requires_grad_(False)
+ema_prior = copy.deepcopy(prior).eval().requires_grad_(False)
+
+for step in range(recipe.total_steps):
+    scale = learning_rate_scale(step, recipe.total_steps,
+                               recipe.lr_anneal_start, recipe.lr_floor)
+    for opt, rates in zip((opt_g, opt_d), base_lrs):
+        for group, rate in zip(opt.param_groups, rates):
+            group["lr"] = rate * scale
+
+    labels = torch.randint(recipe.num_classes, (recipe.batch_size,), device=device)
+    real = 0.2 * torch.randn(len(labels), 2, device=device) + (2 * labels[:, None] - 1)
+    t = torch.randint(1, process.steps + 1, (len(real),), device=device)
+    x_prev, xt = process.forward_pair(real, t)
+    z, indices = prior.sample(len(real))
+    clean = G(z, labels, xt=xt, t=t)
+    fake = process.reverse(clean, xt, t, torch.randn_like(xt))
+
+    opt_d.zero_grad(set_to_none=True)
+    real_score, real_logits = D(x_prev, labels, xt=xt, t=t)
+    fake_score, fake_logits = D(fake.detach(), labels, xt=xt, t=t)
+    d_loss = gan.d_loss(real_score, fake_score)
+    d_loss += ucd_loss(real_logits, fake_logits, labels, weight=recipe.ucd_weight)
+    d_loss += penalty(lambda x: D(x, labels, xt=xt, t=t)[0],
+                      x_prev, fake.detach(), step=step + 1)
+    d_loss.backward()
+    opt_d.step()
+
+    D.requires_grad_(False)
+    opt_g.zero_grad(set_to_none=True)
+    fake_score = D(fake, labels, xt=xt, t=t)[0]
+    real_score = D(x_prev, labels, xt=xt, t=t)[0].detach()
+    g_loss = gan.g_loss(fake_score, real_score) + spread(prior(indices.unique()))
+    g_loss.backward()
+    opt_g.step()
+    D.requires_grad_(True)
+
+    with torch.no_grad():
+        for average, current in ((ema_g, G), (ema_prior, prior)):
+            for target, source in zip(average.parameters(), current.parameters()):
+                target.lerp_(source, 1 - recipe.ema_decay)
+    if step % 100 == 0 or step + 1 == recipe.total_steps:
+        print(f"step={step + 1} d={d_loss.item():.4f} g={g_loss.item():.4f}", flush=True)
+
+# Conditional inference: fresh latent particles and Gaussian noise at each step.
+with torch.inference_mode():
+    labels = torch.arange(64, device=device) % recipe.num_classes
+    samples = torch.randn(len(labels), 2, device=device)
+    for step in range(process.steps, 0, -1):
+        t = torch.full_like(labels, step)
+        z, _ = ema_prior.sample(len(labels))
+        clean = ema_g(z, labels, xt=samples, t=t)
+        samples = process.reverse(clean, samples, t, torch.randn_like(samples))
+```
+
+The D update combines adversarial loss, class cross-entropy, and the candidate
+gradient penalty. The G/prior update combines adversarial loss and particle
+regularization. One random transition per example is used during training;
+inference walks through every reverse step. Class-only UCD is the default;
+[joint time/class heads](#ucd) are an independent option.
 
 ## Reference index
 
@@ -299,18 +407,19 @@ and applicable device checks still run.
 ## Recipes and defaults
 
 ```python
-get_recipe(name="100gaussians", **overrides)  # Returns a frozen Recipe.
+get_recipe(name="gan", **overrides)          # Returns a frozen Recipe.
 recipe.replace(**overrides)                  # Returns a new Recipe.
 recipe.to_dict()                             # All resolved fields.
 Recipe(**resolved_dict)                      # Restore resolved fields.
 ```
 
-`get_recipe("denoising", num_classes=8)` starts with the denoising preset and
+`get_recipe("ddgan", num_classes=8)` starts with the DDGAN defaults and
 overrides its class count. `Recipe` is the resolved data object: setting only
-`Recipe(name="denoising")` does **not** select that preset. Use `get_recipe` to
-resolve named presets. Unknown fields are rejected.
+`Recipe(name="ddgan")` does **not** select those defaults. Use `get_recipe` to
+resolve named presets. Unknown fields are rejected. Historical names
+`100gaussians` and `denoising` remain accepted aliases for GAN and DDGAN.
 
-| Field | `100gaussians` | `denoising` |
+| Field | `get_recipe()` / `gan` | `ddgan` |
 | --- | --- | --- |
 | `model` | `gan` | `ddgan` |
 | `conditioning`, `num_classes` | `scalar`, `None` | `ucd`, `4` |
@@ -326,9 +435,9 @@ resolve named presets. Unknown fields are rejected.
 | `ucd_target`, `ucd_weight` | `class`, `.02` (unused) | `class`, `.02` |
 | `alpha_bar` | `(1, .9, .5, .05, .0001)` (unused) | `(1, .9, .5, .05, .0001)` |
 
-Recipes describe defaults; they do not construct architectures or execute a
-training procedure. The benchmark MLPs and Fourier discriminator features remain
-application choices in the reference experiments.
+Recipes describe recommended starting defaults; they do not construct
+architectures or execute a training procedure. Networks, data, and training
+budgets remain application choices.
 
 | Optional factory | Result |
 | --- | --- |
@@ -355,7 +464,7 @@ any other parser. The library does not read configuration files.
 
 ```toml
 [particlegan]
-name = "denoising"
+name = "ddgan"
 z_dim = 16
 num_particles = 4096
 num_classes = 8
@@ -420,7 +529,8 @@ teacher interface, or fixed training loop.
 
 ## Inference and checkpoints
 
-For one-shot inference, save the matched EMA generator and prior from the loop:
+For one-shot inference, save the matched EMA generator and prior from the
+one-shot loop:
 
 ```python
 torch.save({"generator": ema_g.state_dict(), "prior": ema_prior.state_dict(),

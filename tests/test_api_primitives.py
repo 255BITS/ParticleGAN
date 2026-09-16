@@ -200,6 +200,20 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
         get_recipe(gan_mode="typo")
 
 
+def test_generic_recipes_preserve_existing_config_values():
+    assert get_recipe() == get_recipe("gan") == Recipe()
+    for name, legacy in (("gan", "100gaussians"), ("ddgan", "denoising")):
+        current = get_recipe(name, z_dim=8, num_particles=32)
+        historical = get_recipe(legacy, z_dim=8, num_particles=32)
+        current_values, legacy_values = current.to_dict(), historical.to_dict()
+        assert current_values.pop("name") == name
+        assert legacy_values.pop("name") == legacy
+        assert current_values == legacy_values
+        assert Recipe(**historical.to_dict()) == historical
+    ddgan = get_recipe("ddgan", num_classes=2)
+    assert (ddgan.model, ddgan.conditioning, ddgan.num_classes) == ("ddgan", "ucd", 2)
+
+
 def test_delayed_cosine_endpoints():
     assert learning_rate_scale(1, 100) == 1
     assert learning_rate_scale(60, 100) == 1
