@@ -1,0 +1,22 @@
+{
+  "completed": 5,
+  "failed": 0,
+  "pending": 0,
+  "running": 0,
+  "sealed": true,
+  "wall_seconds": 734.0873870849609,
+  "total_training_seconds": 1189.3069955249957,
+  "selected_extensions": [],
+  "same_training_source_hashes": true,
+  "source_hashes": {
+    "memory_handoff_scout.py": "36aabb34e2b3efc6c949b1c1307e78eb8706cf1dae9ba3f49a14c86cb751ee0d",
+    "memory_g_recurrent.py": "e522c478ce536f40bf8029d1127ba7039276610d25b9ac9657684d40094f64e3",
+    "memory_recent.py": "5a1aaa2c869dcca40682f4230c06bbcbcf0e7640c4970d1c924ef5664b9f64f6",
+    "memory_core_scout.py": "71e1206048bab1bb4e4b8f089ba1041f001726e4d3bf6a4b83ad98768001a2a0",
+    "memory_scout.py": "59008372a273543a3bcc163f85e808abbf5a7c152929e38c047c60c340b00d0e",
+    "autonomous_memory.py": "a8b697c1c4ef5b2516f2c0445a3a6f8eeceb73b3a9a03a3127efd5dfdf75c3d5",
+    "memory_path.py": "18178fa48c8b109ee71d3f679bdcfc1b0775b22f1f879fd877dafdf859a40e0f"
+  },
+  "all_cold_warm_256_1024_passes_zero": true,
+  "late_stopping_zero": true
+}

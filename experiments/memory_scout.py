@@ -160,6 +160,10 @@ class Reader(nn.Module):
 
 
 def rollout(generator, writer, z, steps, intervention=None, states=False):
+    if getattr(generator, 'g_state_dim', 0):
+        from experiments.memory_g_recurrent import continuation
+        with frozen(writer):
+            return continuation(generator, writer, z, z.new_empty(len(z), 0, 2), steps, intervention, states)
     memory, hidden = writer.initial(z), None
     path, history = [], []
     with frozen(writer):
@@ -266,7 +270,7 @@ def evaluate(generator, critic, prior, cfg, device):
     metrics = {"generated_256": diagnostics(paths["generated"][:, :256]),
                "generated_long": diagnostics(paths["generated"]),
                "real_noisy": diagnostics(paths["real_noisy"])}
-    for intervention in ("zero", "shuffle"):
+    for intervention in (("zero", "shuffle", "g_zero", "g_shuffle") if getattr(generator, "g_state_dim", 0) else ("zero", "shuffle")):
         altered, _ = rollout(generator, critic.writer, z, 256, intervention=intervention)
         metrics[intervention] = diagnostics(altered.cpu().numpy())
     norm = states.norm(dim=-1)

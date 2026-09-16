@@ -1,3 +1,5 @@
+Latest completed round: [G recurrence round11 assessment](gru_round11/assessment.md). Five scouts, no improvement over the round10 winner; no longer runs selected.
+
 # Local memory GAN scouts: no full-rollout training
 
 Latest: [Local adversarial recovery](recovery_round10/assessment.md).

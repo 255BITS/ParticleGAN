@@ -95,6 +95,10 @@ class PrefixView(nn.Module):
 
 def continuation(generator, writer, z, prefix, steps, intervention=None, states=False):
     """X is disconnected after prefix. Only generated points are written next."""
+    if getattr(generator, 'g_state_dim', 0):
+        from experiments.memory_g_recurrent import continuation as recurrent_continuation
+        with frozen(writer):
+            return recurrent_continuation(generator, writer, z, prefix, steps, intervention, states)
     path, history = [], []
     with frozen(writer):
         memory = context(writer, prefix)
@@ -193,7 +197,7 @@ def evaluate(generator, critic, prior, cfg, device):
                "real_prefix_state": state_metrics(torch.stack(prefix_states, 1)),
                "early_generated_state": state_metrics(states[:, :64]),
                "late_generated_state": state_metrics(states[:, -256:])}
-        for intervention in ("zero", "shuffle"):
+        for intervention in (("zero", "shuffle", "g_zero", "g_shuffle") if getattr(generator, "g_state_dim", 0) else ("zero", "shuffle")):
             altered, _ = continuation(generator, critic.writer, z, prefix, 256, intervention)
             row[intervention] = fidelity(altered.cpu().numpy(), paths["continuation_reference"], n)
         metrics[f"prefix{n}"] = row

@@ -19,6 +19,7 @@ from experiments.memory_path import circles, mlp
 from experiments import memory_scout as base
 from experiments.memory_recent import RecentWriter, SlowFastWriter, LocalReader, clock_features
 from experiments.memory_core_scout import evaluate
+from experiments import memory_g_recurrent as recurrent
 from particlegan import get_recipe, learning_rate_scale
 
 
@@ -56,6 +57,9 @@ class Config(base.Config):
     slow_dim: int = 0
     slow_rate: float = .1
     g_memory_adapter: str = 'none'
+    g_state_dim: int = 0
+    g_state_reads_d: bool = False
+    g_use_d_memory: bool = True
     adapter_width: int = 64
     adapter_bottleneck: int = 16
     repair_weight: float = 0.
@@ -107,6 +111,14 @@ class Config(base.Config):
             self.repair_weight, self.stability_g_weight, self.stability_d_weight))
         assert self.dynamics_min_prefix >= 1
         assert not (self.repair_weight or self.stability_g_weight or self.stability_d_weight) or self.dynamics_min_prefix <= self.max_prefix
+        assert self.g_state_dim >= 0
+        assert not self.g_state_reads_d or (self.g_state_dim and self.g_use_d_memory)
+        assert self.g_use_d_memory or self.g_state_dim
+        # New recurrence scouts use GAN objectives; legacy auxiliary paths require
+        # additional state semantics and must not silently reset recurrent state.
+        assert not self.g_state_dim or (self.adversarial_only and not any((
+            self.predict_weight, self.temporal_weight, self.repair_weight,
+            self.stability_g_weight, self.stability_d_weight)))
 
 
 class Critic(nn.Module):
@@ -204,20 +216,29 @@ def local_pair_examples(cfg, generator, critic, observed, real, positions, z, ti
     No explored point-loss history feeds this branch; no third point is generated.
     """
     starts = (positions-1).clamp_min(0)
-    memory = selected_memories(critic.writer, observed, starts, cfg.max_prefix)
+    state = None
+    if cfg.g_state_dim:
+        memory, state = recurrent.selected_states(generator, critic.writer, observed, starts,
+                                                  cfg.max_prefix, proposal_grad)
+    else:
+        memory = selected_memories(critic.writer, observed, starts, cfg.max_prefix)
     latent, clock = z, times-(positions.flatten() > 0).to(times.dtype)
     with torch.set_grad_enabled(proposal_grad):
-        first, _ = local_point(generator, latent, memory, clock)
+        first, _ = local_point(generator, latent, memory, clock, state)
         updated = critic.writer.write(memory, first)
-        second, _ = local_point(generator, latent, updated, clock+1)
+        if cfg.g_state_dim:
+            state = generator.write_state(state, first, memory)
+        second, _ = local_point(generator, latent, updated, clock+1, state)
         fake = torch.stack((first, second), 1)
     rows = torch.arange(len(real), device=real.device)[:, None]
     actual = torch.stack((real[rows, starts], real[rows, starts+1]), 2).flatten(0, 1)
     return PairView(critic, memory, clock), actual, fake
 
 
-def local_point(generator, z, memory, time_index):
+def local_point(generator, z, memory, time_index, state=None):
     args = {'time_index': time_index} if getattr(generator, 'clock_bands', 0) else {}
+    if state is not None:
+        args['hidden'] = state
     return generator(z, memory, **args)
 
 
@@ -286,16 +307,23 @@ def training_memory(cfg, generator, critic, observed, positions, z, jitter, feed
 
 
 def training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask,
-                      step, proposal_grad=False, clock_origin=None, feedback_strength=None):
+                      step, proposal_grad=False, clock_origin=None, feedback_strength=None,
+                      return_state=False, state_grad=False):
     """G may explore a generated write while D judges against real history.
 
     The clean reference is strictly before the target and is shared by both D
     candidate scores and B-cap. No clean reference is supplied to G's final read.
     """
+    if cfg.g_state_dim:
+        if not return_state:
+            raise ValueError('Recurrent contexts require return_state=True')
+        return recurrent.training_contexts(cfg, generator, critic, observed, positions, z, jitter,
+            feedback_mask, step, proposal_grad, clock_origin, feedback_strength, state_grad)
     memory, reference = training_memory(cfg, generator, critic, observed, positions, z,
         jitter, feedback_mask, step, proposal_grad, clock_origin, return_reference=True,
         feedback_strength=feedback_strength)
-    return memory, reference if cfg.feedback_judge_memory in ('clean', 'mixed') else memory
+    result = (memory, reference if cfg.feedback_judge_memory in ('clean', 'mixed') else memory)
+    return (*result, None) if return_state else result
 
 
 def local_auxiliary(cfg, critic, memory, real, positions, target):
@@ -372,7 +400,7 @@ def local_stability(cfg, generator, critic, z, memory, positions, times, noise):
 
 def build(cfg, device):
     torch.manual_seed(42)
-    generator = LocalReader(cfg).to(device)
+    generator = (recurrent.RecurrentReader(cfg) if cfg.g_state_dim else LocalReader(cfg)).to(device)
     torch.manual_seed(44)
     critic = Critic(cfg).to(device)
     recipe = get_recipe(total_steps=cfg.schedule_steps, batch_size=cfg.batch_size,
@@ -435,7 +463,7 @@ def train(cfg, out, device, log):
                           'frequencies': [cfg.clock_frequency*2**i for i in range(cfg.clock_bands)],
                           'training': 'target index plus optional independent per-episode origin; shared by all sampled positions',
                           'evaluation': 'cold starts at t=0; real-prefix continuation starts at t=prefix_length',
-                          'state': 'external integer counter only; no learned private G state'},
+                          'state': 'external integer counter; G recurrence configured separately'},
                 'writer_training': 'D only', 'particle_policy': 'one fixed z per real episode, shared across sampled positions',
                 'training_generator_unroll': 2 if cfg.feedback_probability else 1,
                 'generator_calls_d_phase': 1+int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_d_weight)),
@@ -494,6 +522,16 @@ def train(cfg, out, device, log):
         resolved['penalty_domain'] = 'point coordinates and independent local pair coordinates; weighted default exact B-cap'
     resolved['max_sequential_generated_writes'] = int(bool(cfg.feedback_probability or cfg.local_pair_weight
         or cfg.stability_g_weight or cfg.stability_d_weight))
+    resolved['g_recurrence'] = {
+        'dimension': cfg.g_state_dim, 'update_reads_d': cfg.g_state_reads_d,
+        'generator_reads_d': cfg.g_use_d_memory, 'owner': 'G',
+        'update': 'GRU(observation, S), optionally with pre-write D memory',
+        'prefix': 'real observations; full real-prefix BPTT in G phase; no G graph in D phase',
+        'local_branch': 'same replacement observation updates M and S; one generated write maximum',
+        'runtime': 'zero initial state; update once per emitted observation, never during proposal refinement',
+        'prefix_state_updates_per_phase': cfg.max_prefix*(1+int(bool(cfg.local_pair_weight))) if cfg.g_state_dim else 0,
+        'loss': 'existing GAN objectives only',
+    }
     (out/'config.json').write_text(json.dumps(resolved, indent=2))
     log(event='start', start_step=start, config=resolved)
     started = time.monotonic()
@@ -516,11 +554,11 @@ def train(cfg, out, device, log):
         repair_noise = (torch.randn(jitter.shape, device=device, generator=rngs['repair'])
                         if cfg.repair_weight else None)
         opt_d.zero_grad(set_to_none=True)
-        memory, judging_memory = training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
-                                                   clock_origin=clock_origin, feedback_strength=feedback_strength)
+        memory, judging_memory, state = training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
+            clock_origin=clock_origin, feedback_strength=feedback_strength, return_state=True)
         views = candidate_views(cfg, critic, memory, judging_memory, times)
         with torch.no_grad():
-            fake, _ = local_point(generator, z, memory, times)
+            fake, _ = local_point(generator, z, memory, times, state)
         d_adv = sum(weight*gan.d_loss(view(target), view(fake)) for weight, view in views)
         d_reg = sum(weight*penalty(view, target, fake, step=step) for weight, view in views)
         d_pair = memory.new_zeros(())
@@ -544,10 +582,11 @@ def train(cfg, out, device, log):
         with frozen(critic):
             opt_g.zero_grad(set_to_none=True)
             # Rebuild with updated D weights; reuse the same observations/jitter.
-            memory, judging_memory = training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
-                proposal_grad=cfg.feedback_backprop, clock_origin=clock_origin, feedback_strength=feedback_strength)
+            memory, judging_memory, state = training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
+                proposal_grad=cfg.feedback_backprop, clock_origin=clock_origin, feedback_strength=feedback_strength,
+                return_state=True, state_grad=True)
             views = candidate_views(cfg, critic, memory, judging_memory, times)
-            fake, _ = local_point(generator, z, memory, times)
+            fake, _ = local_point(generator, z, memory, times, state)
             g_adv = sum(weight*generator_loss(gan, view, target, fake) for weight, view in views)
             g_pair = memory.new_zeros(())
             if cfg.local_pair_weight:
@@ -610,7 +649,7 @@ def main():
     torch.set_num_threads(1)
     provenance = {'git_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
                   'torch': torch.__version__, 'argv': sys.argv, 'sources': {}}
-    for name in ('memory_handoff_scout.py', 'memory_recent.py', 'memory_core_scout.py', 'memory_scout.py', 'autonomous_memory.py', 'memory_path.py'):
+    for name in ('memory_handoff_scout.py', 'memory_g_recurrent.py', 'memory_recent.py', 'memory_core_scout.py', 'memory_scout.py', 'autonomous_memory.py', 'memory_path.py'):
         source = Path(__file__).with_name(name).read_bytes()
         (args.out/name).write_bytes(source)
         provenance['sources'][name] = hashlib.sha256(source).hexdigest()

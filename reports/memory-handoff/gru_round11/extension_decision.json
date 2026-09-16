@@ -1,0 +1,133 @@
+{
+  "all_five_completed": true,
+  "baseline": "proposal_mixed_pair25",
+  "criteria": "plan.md, fixed before training",
+  "comparisons": [
+    {
+      "name": "gru16",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.3588259769542643,
+          "late_quality_gain": -0.5978550242101064,
+          "radial_change": 1.0607430129961153,
+          "direction_change": 0.021484375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.366809191696184,
+          "late_quality_gain": -0.5223362873252384,
+          "radial_change": 1.0247476974409286,
+          "direction_change": 0.01357269287109375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "gru16_no_d",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.24325527853148654,
+          "late_quality_gain": -0.11783056085708543,
+          "radial_change": 0.6302527326652101,
+          "direction_change": 0.0087738037109375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.24729313182237445,
+          "late_quality_gain": -0.16224800147107687,
+          "radial_change": 0.6238641842533705,
+          "direction_change": 0.00186920166015625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "gru16_no_repair",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.8187529223839547,
+          "late_quality_gain": -0.9879828218802318,
+          "radial_change": 1.719939788722047,
+          "direction_change": 0.01043701171875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.7993447310852662,
+          "late_quality_gain": -0.9880815097826037,
+          "radial_change": 1.6591125933648363,
+          "direction_change": 0.00214385986328125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "gru16_read_d",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.4613819052106092,
+          "late_quality_gain": -0.6539728078907473,
+          "radial_change": 1.2553693512750148,
+          "direction_change": 0.01647186279296875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.4392839145890015,
+          "late_quality_gain": -0.6270167197770491,
+          "radial_change": 1.2167052390936721,
+          "direction_change": 0.01105499267578125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "gru8",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.14655714205217552,
+          "late_quality_gain": -0.3436918802829545,
+          "radial_change": 0.516162960600224,
+          "direction_change": 0.01169586181640625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.1306340830857975,
+          "late_quality_gain": -0.29987065170652205,
+          "radial_change": 0.4841921133973699,
+          "direction_change": 0.00658416748046875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    }
+  ],
+  "selected": []
+}

@@ -154,6 +154,18 @@ def analyze(source, out, baselines=(), handoff_only=False):
                              f"{c.get('adapter_bottleneck', 16) if c.get('g_memory_adapter', 'none') != 'none' else 'off'} | "
                              f"{c.get('repair_target', 'raw')} / {c.get('repair_weight', 0):g} / {c.get('repair_noise', .05):g} | "
                              f"{c.get('stability_d_weight', 0):g} / {c.get('stability_g_weight', 0):g} / {c.get('stability_max_gain', 1.1):g} |")
+        if any(r['config'].get('g_state_dim', 0) for r in scouts):
+            lines += ['', '## G-owned observation recurrence', '',
+                      '| Run | G state size | State update reads D | G reads D | Prefix GRU updates / phase |',
+                      '|---|---:|---|---|---:|']
+            for row in scouts:
+                c = row['config']
+                lines.append(f"| {row['name']} | {c.get('g_state_dim', 0)} | {c.get('g_state_reads_d', False)} | "
+                             f"{c.get('g_use_d_memory', True)} | {c.get('g_recurrence', {}).get('prefix_state_updates_per_phase', 0)} |")
+            lines += ['', 'G state encodes real observations with full real-prefix BPTT, then at most one generated write.',
+                      'State advances once per observation; proposal/final reads share the same state.',
+                      'D owns M, G owns S. Both start at zero for cold evaluation. G has no MSE objective.',
+                      'Memory access controls are separately trained; interventions alone do not establish comparative benefit.']
         lines += ['', 'Scouts use local point GAN losses and optionally a two-point transition GAN. There is no full generated training',
                   'rollout or cold/warm path loss. Configured feedback adds at most one',
                   'generated write before each target; configs control G gradients through that write.',

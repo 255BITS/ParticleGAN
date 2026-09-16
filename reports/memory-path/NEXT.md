@@ -1,3 +1,71 @@
+# Latest: G observation recurrence round11 completed
+
+User selected small G GRU scouts building on proposal_mixed_pair25, explicitly
+rejecting a moving cursor in favor of cross-domain transferable mechanisms.
+All five fresh2k configs finished on both GPUs through memory_dispatch. Zero
+failures; gru_round11 is sealed and empty. All diagnostics complete. Nothing
+running. None qualified for an exact5k extension under predeclared gates.
+No seed sweeps, MSE training, full generated training rollouts, clipping, EMA,
+geometry labels or B-cap overrides. This round is included in the requested commit.
+Latest direction: compact, then return to first principles and theorize about
+why full-circle success remains0/128. Read
+../memory-handoff/gru_round11/first-principles-next.md. No next experiment selected;
+do not automatically queue state-recovery scouts. Push was not requested.
+
+Read ../memory-handoff/gru_round11/assessment.md first, then plan.md, leaderboard.md,
+results.json, extension_decision.json, process.json, state.json, execution.json,
+validation.json and legacy_equivalence.json. Keep the round10 2k winner.
+Central tail unchanged: tail -F runs/memory_path/core_round1/train.log
+
+New optional config fields: g_state_dim (0 default), g_state_reads_d,
+g_use_d_memory. D owns M; G owns observation-updated S. G reads z,M,S,clock via
+existing proposal repair; both proposal/final reads share S and never advance
+it. Real prefixes build both memories; S has full real-prefix BPTT in G phase,
+no graph in D phase. At runtime S consumes generated points; optional updater
+also reads pre-write M. M/S start at zero cold. Local pair has two G outputs
+with one intervening M/S write; point feedback writes identical blended sample
+to both. No third generated point. Fixed z per sequence. Dedicated module:
+experiments/memory_g_recurrent.py; main handoff trainer dispatches optional state.
+Cold/warm eval and memory interventions support S. Old local-only diagnostics
+that call G without S reject missing state; use diagnose_memory_g_state.py for
+new models. Existing legacy experiments remain unchanged with g_state_dim=0.
+
+All five cold/warm full-circle passes0/128 at256/1024, prefixes8/32. Stopping0%.
+Warm1024 prefix32 Q / radial / first32 position error:
+- saved proposal_mixed_pair25: .008274 /1.159 /1.528
+- gru8: .007193 /1.719 /1.316 (best new scout; Q down13-15% both prefixes)
+- gru16_no_d: .006228 /1.881 /1.774
+- gru16: .005239 /2.346 /1.611
+- gru16_read_d: .004639 /2.568 /1.259
+- gru16_no_repair: .001660 /3.081 /1.883
+GRU8/D-informed GRU improve startup/first32 errors but worsen long fidelity.
+No-D GRU16 outperforms with-D GRU16 on long Q/radial but loses short accuracy.
+No matched no-D GRU8 scout. Keep repair; adding capacity alone did not help.
+
+Matched radius/speed/direction probes again show near-zero median late process
+response. D shuffling strongly disrupts M-reading models. G-state interventions
+also alter outputs, but zeroing states sometimes improves Q; dependence does
+not prove usefulness. No intervention gives warm full-orbit passes. The no-D
+model is bitwise unchanged by D zero/shuffle through1024 steps at both prefixes.
+Probe normal/altered paths all regenerated on CPU consistently; process tool
+now supports --recompute-original. This changes the baseline's descriptive
+both-direction number relative to prior mixed-device probes (8.59% here).
+Behavioral results do not prove whether information is lost or unused internally.
+
+90 focused tests pass; two fullbatch4-update GPU smokes with1024 eval; exact
+resume and no-MSE/ownership/call-count tests. Archived round10/current legacy
+four-update G/D/prior/RNG tensors bitwise equal on CPU including active B-cap.
+All five archived training source hash dictionaries match. Queue wall734s;
+1189 training GPU-seconds total. Scouts cost~1.32-1.39x saved baseline.
+
+Recommendation: retain existing2k baseline; no more GRU size/length sweep based
+on these results. Next discuss adversarial local recovery from G-state
+perturbations and/or evaluation-only late restoration of real-history M/S to
+separate drift from reader/clock failures. Neither implemented or queued.
+Preserve unrelated .claude/, results/motion/, sparse-ucd.log.
+
+---
+
 # Latest: local adversarial recovery round10 completed
 
 User authorized code/config changes and scouts on both GPUs to get autonomous

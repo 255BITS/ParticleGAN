@@ -1,0 +1,11 @@
+{
+  "archived_source": "runs/memory_path/recovery_round10/runs/proposal_mixed_pair25/memory_handoff_scout.py",
+  "updates": 4,
+  "bitwise_equal": [
+    "generator",
+    "critic",
+    "prior",
+    "rngs"
+  ],
+  "active_bcap_included": true
+}

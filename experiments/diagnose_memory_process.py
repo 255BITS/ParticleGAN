@@ -47,7 +47,7 @@ def measured_process(path, center, omega):
 
 
 @torch.no_grad()
-def diagnose(path, device):
+def diagnose(path, device, recompute_original=False):
     json.loads((path/'summary.json').read_text())
     saved = torch.load(path/'model.pt', map_location=device, weights_only=False)
     cfg = handoff.Config(**saved['config'])
@@ -62,7 +62,7 @@ def diagnose(path, device):
         original_path = arrays['prefix32'].copy()
     results, measured = {}, {}
     for name, (reference, history, center, radius, omega) in counterfactuals(clean, observed).items():
-        if name == 'original':
+        if name == 'original' and not recompute_original:
             generated = original_path
         else:
             generated, _ = core.continuation(g, d.writer, z,
@@ -81,6 +81,7 @@ def diagnose(path, device):
     flipped = measured['direction_flipped']['signed_speed']
     original = measured['original']['signed_speed']
     return {'name': cfg.name, 'source': str(path), 'steps': cfg.steps,
+            'device': device, 'recompute_original': recompute_original,
             'variants': results,
             'response': {
                 'radius_response_mean_ideal1': float(radius_response.mean()),
@@ -98,11 +99,13 @@ if __name__ == '__main__':
     parser.add_argument('--runs', nargs='+', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--device', default='cpu')
+    parser.add_argument('--recompute-original', action='store_true',
+                        help='Generate original and counterfactuals on the same device')
     args = parser.parse_args()
     torch.set_num_threads(1)
     results = []
     for path in args.runs:
-        row = diagnose(path, args.device)
+        row = diagnose(path, args.device, args.recompute_original)
         results.append(row)
         print(row['name'], row['response'], flush=True)
     args.out.parent.mkdir(parents=True, exist_ok=True)

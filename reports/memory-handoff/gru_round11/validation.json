@@ -1,0 +1,16 @@
+{
+  "focused_tests_passed": 90,
+  "gpu_fullbatch_smokes": [
+    "read_d",
+    "no_d"
+  ],
+  "smoke_steps": 4,
+  "smoke_eval_steps": 1024,
+  "legacy_equivalence": "legacy_equivalence.json",
+  "exact_resume_cpu_test": true,
+  "no_mse_training_test": true,
+  "causal_prefix_and_gradient_ownership_tests": true,
+  "additional_tests": "Cold-start second-point gradient reaches first point through G state alone; D access disabled.",
+  "no_d_full1024_intervention_bitwise_check": true,
+  "post_diagnostic_change_checks": 9
+}
