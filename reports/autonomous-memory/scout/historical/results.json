@@ -1,0 +1,128 @@
+[
+  {
+    "name": "frozen_writer",
+    "steps": 2000,
+    "source": "runs/memory_path/autonomous_h64_2k/frozen_writer_run/frozen_writer",
+    "metrics_256": {
+      "radius": 1.0748652661299705,
+      "relative_radial_rmse": 0.2982999690683729,
+      "late_radius_drift": 0.2468203692157839,
+      "angular_speed": 0.23253541992753585,
+      "direction_consistency": 0.8154718137254902,
+      "signed_angular_speed": 0.21090778006787142,
+      "circle_like_fraction": 0.078125,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0078125,
+      "mean_step_length": 0.2297620244925285,
+      "initial_position_spread": 0.6748912617327775,
+      "radius_std": 0.40662005032266596,
+      "late_circle_fraction": 0.34375,
+      "late_stopped_fraction": 0.0859375,
+      "passing_cw": 0,
+      "passing_ccw": 10
+    },
+    "metrics_long": null,
+    "coverage": {
+      "valid_parameters": 128,
+      "cw_fraction_all_fits": 0.09375,
+      "center_spread": 0.766201440203294,
+      "center_mean": [
+        -0.06451065895136854,
+        -0.08867975410737859
+      ],
+      "radius_std": 0.40662005032266596,
+      "speed_std": 0.10605587252532499,
+      "angular_jitter": 0.14427105873199803,
+      "marginal_w1": {
+        "center_x": 0.13627394616182836,
+        "center_y": 0.12504522555878866,
+        "radius": 0.11569573838191144,
+        "signed_speed": 0.21717401868770417,
+        "absolute_speed": 0.02817592225248401,
+        "angular_jitter": 0.14477548512540203
+      }
+    },
+    "reference": {
+      "radius": 1.044069980680499,
+      "relative_radial_rmse": 0.0315619089502717,
+      "late_radius_drift": 0.004823866095384679,
+      "angular_speed": 0.26063808294612567,
+      "direction_consistency": 0.9988357843137254,
+      "signed_angular_speed": -0.0056897599875547315,
+      "circle_like_fraction": 0.9921875,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0,
+      "mean_step_length": 0.2716097133991474,
+      "initial_position_spread": 1.1802413930148004,
+      "radius_std": 0.23280653968838744,
+      "late_circle_fraction": 0.9921875,
+      "late_stopped_fraction": 0.0,
+      "passing_cw": 65,
+      "passing_ccw": 62
+    },
+    "seconds": 324.35
+  },
+  {
+    "name": "shared",
+    "steps": 2000,
+    "source": "runs/memory_path/autonomous_h64_2k/shared_run/shared",
+    "metrics_256": {
+      "radius": 0.9440837820772245,
+      "relative_radial_rmse": 0.2945740044847314,
+      "late_radius_drift": 0.19651942561612543,
+      "angular_speed": 0.24921579365107815,
+      "direction_consistency": 0.8337622549019609,
+      "signed_angular_speed": 0.027924037026146147,
+      "circle_like_fraction": 0.0625,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0,
+      "mean_step_length": 0.2319578898131943,
+      "initial_position_spread": 0.6224413776724896,
+      "radius_std": 0.20020111460270817,
+      "late_circle_fraction": 0.265625,
+      "late_stopped_fraction": 0.0390625,
+      "passing_cw": 4,
+      "passing_ccw": 4
+    },
+    "metrics_long": null,
+    "coverage": {
+      "valid_parameters": 128,
+      "cw_fraction_all_fits": 0.453125,
+      "center_spread": 0.5348382353997452,
+      "center_mean": [
+        -0.05700992396673631,
+        -0.02153564284411096
+      ],
+      "radius_std": 0.20020111460270817,
+      "speed_std": 0.09287974465964001,
+      "angular_jitter": 0.16454604803260642,
+      "marginal_w1": {
+        "center_x": 0.09966663094971027,
+        "center_y": 0.0748576380776845,
+        "radius": 0.10714566253991928,
+        "signed_speed": 0.04617684474853794,
+        "absolute_speed": 0.015603831025240008,
+        "angular_jitter": 0.16520979412111012
+      }
+    },
+    "reference": {
+      "radius": 1.044069980680499,
+      "relative_radial_rmse": 0.0315619089502717,
+      "late_radius_drift": 0.004823866095384679,
+      "angular_speed": 0.26063808294612567,
+      "direction_consistency": 0.9988357843137254,
+      "signed_angular_speed": -0.0056897599875547315,
+      "circle_like_fraction": 0.9921875,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0,
+      "mean_step_length": 0.2716097133991474,
+      "initial_position_spread": 1.1802413930148004,
+      "radius_std": 0.23280653968838744,
+      "late_circle_fraction": 0.9921875,
+      "late_stopped_fraction": 0.0,
+      "passing_cw": 65,
+      "passing_ccw": 62
+    },
+    "seconds": 400.58
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "name": "gru_ddgan4",
+  "writer": "gru",
+  "steps": 2000,
+  "schedule_steps": 10000,
+  "train_length": 64,
+  "batch_size": 128,
+  "eval_batch": 128,
+  "eval_steps": 1024,
+  "path_weight": 1.0,
+  "transition_weight": 1.0,
+  "alpha_bar": [1.0, 0.9, 0.5, 0.05, 0.0001]
+}

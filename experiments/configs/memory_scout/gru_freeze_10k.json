@@ -1,0 +1,7 @@
+{
+  "name": "gru_freeze_10k",
+  "writer": "gru",
+  "steps": 10000,
+  "resume": "runs/memory_path/scout_round2/gru_track/gru_flat_5k/model.pt",
+  "freeze_writer_at": 5000
+}

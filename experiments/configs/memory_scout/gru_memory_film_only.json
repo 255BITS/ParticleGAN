@@ -1,0 +1,7 @@
+{
+  "name": "gru_memory_film_only",
+  "writer": "gru",
+  "g_film": true,
+  "g_film_source": "memory",
+  "g_memory_concat": false
+}

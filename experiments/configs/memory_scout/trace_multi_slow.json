@@ -1,0 +1,5 @@
+{
+  "name": "trace_multi_slow",
+  "critic": "multiscale",
+  "writer_lr_mult": 0.1
+}

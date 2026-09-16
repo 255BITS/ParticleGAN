@@ -1,0 +1,42 @@
+{
+  "time": 1789567010.5067832,
+  "event": "queue_cancelled",
+  "reason": "User superseded DDGAN/FiLM/size scouts to test core real-data -> D memory -> G handoff; commit checkpoint.",
+  "cancelled": [
+    {
+      "name": "gru_ddgan4",
+      "previous_state": "running"
+    },
+    {
+      "name": "gru_m64",
+      "previous_state": "running"
+    },
+    {
+      "name": "gru_memory_film",
+      "previous_state": "pending"
+    },
+    {
+      "name": "gru_memory_film_only",
+      "previous_state": "pending"
+    },
+    {
+      "name": "gru_private_film",
+      "previous_state": "pending"
+    },
+    {
+      "name": "gru_memory_w_film",
+      "previous_state": "pending"
+    },
+    {
+      "name": "gru_memory_fourier_film",
+      "previous_state": "pending"
+    },
+    {
+      "name": "gru_memory_w_fourier_film",
+      "previous_state": "pending"
+    }
+  ],
+  "completed": [
+    "gru_m8"
+  ]
+}

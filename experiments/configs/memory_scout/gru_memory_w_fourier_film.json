@@ -1,0 +1,8 @@
+{
+  "name": "gru_memory_w_fourier_film",
+  "writer": "gru",
+  "g_film": true,
+  "g_film_source": "memory",
+  "g_film_mapping": true,
+  "g_film_fourier": 2
+}

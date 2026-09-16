@@ -1,0 +1,9 @@
+{
+  "name": "gru_ddgan4_smoke",
+  "steps": 2,
+  "schedule_steps": 10000,
+  "batch_size": 4,
+  "eval_batch": 4,
+  "eval_steps": 256,
+  "log_every": 1
+}

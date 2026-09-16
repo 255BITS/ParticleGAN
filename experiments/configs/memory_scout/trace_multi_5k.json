@@ -1,0 +1,6 @@
+{
+  "name": "trace_multi_5k",
+  "critic": "multiscale",
+  "steps": 5000,
+  "resume": "runs/memory_path/scout_round1/trace_multi/model.pt"
+}

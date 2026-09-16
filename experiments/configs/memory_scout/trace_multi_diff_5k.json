@@ -1,0 +1,7 @@
+{
+  "name": "trace_multi_diff_5k",
+  "critic": "multiscale",
+  "differences": true,
+  "steps": 5000,
+  "resume": "runs/memory_path/scout_round1/trace_multi_diff/model.pt"
+}

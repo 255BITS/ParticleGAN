@@ -1,0 +1,8 @@
+{
+  "name": "trace_diff_freeze_5k",
+  "critic": "multiscale",
+  "differences": true,
+  "steps": 5000,
+  "resume": "runs/memory_path/scout_round1/trace_multi_diff/model.pt",
+  "freeze_writer_at": 2000
+}

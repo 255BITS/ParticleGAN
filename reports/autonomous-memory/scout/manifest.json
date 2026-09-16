@@ -1,0 +1,153 @@
+{
+  "training_jobs": 18,
+  "scouts": 12,
+  "continuations": 6,
+  "new_updates": 46000,
+  "summed_job_seconds": 11359.92196297599,
+  "runs": [
+    {
+      "name": "gru_freeze_10k",
+      "steps": 10000,
+      "start_step": 5000,
+      "new_updates": 5000,
+      "seconds": 1104.6049875530007,
+      "source": "runs/memory_path/scout_freeze/gru_freeze_10k"
+    },
+    {
+      "name": "gru_geometry_5k",
+      "steps": 5000,
+      "start_step": 2000,
+      "new_updates": 3000,
+      "seconds": 836.3757886169915,
+      "source": "runs/memory_path/scout_geometry_long/gru_geometry_5k"
+    },
+    {
+      "name": "gru_flat_10k",
+      "steps": 10000,
+      "start_step": 5000,
+      "new_updates": 5000,
+      "seconds": 1383.006413444993,
+      "source": "runs/memory_path/scout_long/gru_flat_10k"
+    },
+    {
+      "name": "gru_private",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 574.2001271390036,
+      "source": "runs/memory_path/scout_recurrent/gru_private"
+    },
+    {
+      "name": "gru_private_no_memory",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 569.3955628650001,
+      "source": "runs/memory_path/scout_recurrent_control/gru_private_no_memory"
+    },
+    {
+      "name": "gru_private_5k",
+      "steps": 5000,
+      "start_step": 2000,
+      "new_updates": 3000,
+      "seconds": 858.7202132040111,
+      "source": "runs/memory_path/scout_recurrent_long/gru_private_5k"
+    },
+    {
+      "name": "delay_multi",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 361.7189568079921,
+      "source": "runs/memory_path/scout_round1/delay_multi"
+    },
+    {
+      "name": "gru_flat",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 558.3181757470011,
+      "source": "runs/memory_path/scout_round1/gru_flat"
+    },
+    {
+      "name": "gru_frozen",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 445.5517336949997,
+      "source": "runs/memory_path/scout_round1/gru_frozen"
+    },
+    {
+      "name": "trace_flat",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 367.65985414099123,
+      "source": "runs/memory_path/scout_round1/trace_flat"
+    },
+    {
+      "name": "trace_multi",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 392.81907467699784,
+      "source": "runs/memory_path/scout_round1/trace_multi"
+    },
+    {
+      "name": "trace_multi_diff",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 382.78292010999576,
+      "source": "runs/memory_path/scout_round1/trace_multi_diff"
+    },
+    {
+      "name": "gru_flat_5k",
+      "steps": 5000,
+      "start_step": 2000,
+      "new_updates": 3000,
+      "seconds": 834.2294843599957,
+      "source": "runs/memory_path/scout_round2/gru_track/gru_flat_5k"
+    },
+    {
+      "name": "gru_multi",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 568.973527330003,
+      "source": "runs/memory_path/scout_round2/gru_track/gru_multi"
+    },
+    {
+      "name": "gru_silu",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 545.2129108310037,
+      "source": "runs/memory_path/scout_round2/trace_track/gru_silu"
+    },
+    {
+      "name": "trace_multi_diff_5k",
+      "steps": 5000,
+      "start_step": 2000,
+      "new_updates": 3000,
+      "seconds": 584.0250311889977,
+      "source": "runs/memory_path/scout_round2/trace_track/trace_multi_diff_5k"
+    },
+    {
+      "name": "trace_multi_film",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 437.6700919450086,
+      "source": "runs/memory_path/scout_round2/trace_track/trace_multi_film"
+    },
+    {
+      "name": "gru_geometry",
+      "steps": 2000,
+      "start_step": 0,
+      "new_updates": 2000,
+      "seconds": 554.6571093200037,
+      "source": "runs/memory_path/scout_round3/gru_geometry"
+    }
+  ]
+}

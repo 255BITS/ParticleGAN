@@ -1,0 +1,8 @@
+{
+  "name": "gru_private_5k",
+  "writer": "gru",
+  "g_private": true,
+  "read_memory": true,
+  "steps": 5000,
+  "resume": "runs/memory_path/scout_recurrent/gru_private/model.pt"
+}

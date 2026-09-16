@@ -1,0 +1,6 @@
+{
+  "name": "trace_diff_geometry",
+  "critic": "multiscale",
+  "differences": true,
+  "geometry": "oriented"
+}

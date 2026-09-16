@@ -1,0 +1,6 @@
+{
+  "name": "gru_flat_10k",
+  "writer": "gru",
+  "steps": 10000,
+  "resume": "runs/memory_path/scout_round2/gru_track/gru_flat_5k/model.pt"
+}

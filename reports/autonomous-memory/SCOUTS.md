@@ -1,7 +1,9 @@
 # Next-pass scouts: memory, recurrence, and training feedback
 
-Planning only: nothing below is implemented or running. The user wants a set
-of scout experiments next pass, after compaction. Use both GPUs. Main objective:
+Historical plan: this was the proposal before the completed config-driven round.
+See [the completed round and next recommendations](scout/README.md) and
+[the updated handoff](../memory-path/NEXT.md). No experiment is currently running.
+The plan below is retained as context, not current execution status. Main objective:
 improve autonomous circle quality from zero memory while preserving diversity.
 Learned writer is the primary development model; frozen remains a control.
 Neither has won overall. Latest committed experiment baseline: `8ec5dee`.

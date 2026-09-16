@@ -1,0 +1,5 @@
+{
+  "name": "gru_silu",
+  "writer": "gru",
+  "g_activation": "silu"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "gru_geometry_5k",
+  "writer": "gru",
+  "geometry": "oriented",
+  "steps": 5000,
+  "resume": "runs/memory_path/scout_round3/gru_geometry/model.pt"
+}

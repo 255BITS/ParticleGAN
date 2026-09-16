@@ -1,163 +1,166 @@
-# Continuation: solve autonomous circle quality and coverage
+# Next: test the original D-memory-to-G handoff
 
-Branch: `feat/sequential-memory-path`. Code, reports, and this handoff are included
-in the preparation-for-compaction commit. No experiment process is running.
-Preserve unrelated `.claude/`, `results/motion/`, and `sparse-ucd.log` files.
+Branch: `feat/sequential-memory-path`. All experiment jobs are stopped. The user
+requested a commit and explicitly superseded the queued DDGAN/FiLM exploration
+with a core-formulation experiment. Do not restart that queue automatically.
+Preserve unrelated `.claude/`, `results/motion/`, and `sparse-ucd.log`.
 
-## Current objective and working choice
+## User intent and current implementation
 
-The user wants to plan and run a set of scout experiments next pass, after
-compaction. Read the [staged scout plan](../autonomous-memory/SCOUTS.md) before
-implementing. Nothing from that plan has been launched. The latest discussion
-added GRU writers, private G recurrence, memory-state drift diagnostics, and
-NTM/persistent-memory ideas; it did not select a final architecture.
-
-Important: current training already feeds generated points into memory and
-backpropagates G through that recurrence. Generated writes are not inference-only.
-The remaining concerns are late-state drift, recurrent attractors, and training
-quality; D differentiating through G into its writer is a separate proposal.
-
-**Use the learned writer as the primary development model; retain frozen writer
-as a comparison.** This is our recommended working choice, not an established
-scientific winner or a user decision to discard either mechanism. Frozen leads
-on circle passes, but its successful late circles at horizon 64 all rotate
-counterclockwise. Learned stops less often and retains both directions. We have
-not demonstrated an overall advantage for learning the writer.
-
-The earlier recommended next experiment was to add short-window adversarial scores and an explicit
-cold-prefix score alongside the full 64-step trajectory score. Keep 64-step
-rollouts, fixed particles, zero memory, and 256-step cold evaluation. The
-hypothesis is clearer feedback for local motion and startup alongside whole-orbit
-consistency. This is not implemented yet. A short-to-long curriculum is another
-candidate if optimization remains difficult. Preserve direction coverage and
-initial-position spread in the leaderboard; improving circle geometry alone is
-not enough. Do not claim success from late-only refitted circles. Following the
-architecture discussion, the proposed first scout pair is a D-owned GRU writer
-versus its frozen counterpart; window/prefix scoring is a separate scout wave.
-
-## User constraints
-
-- No realtime expert and no real initialization prefix at runtime.
-- One trajectory per batch entry, independent memory, shared network weights.
-- One particle z per trajectory, held fixed throughout. Memory belongs to the
-  rollout, not permanently to a particle-table row.
-- Runtime needs G, writer, and prior only. D's scoring head is training-only.
-- Use the public ParticleGAN API; **no gradient clipping**. Keep default B-cap:
-  exact autograd, L2 cap 1, coefficient 1, every update (`reg_every=1`).
-- Parameter-gradient norm logs were experiment-specific and removed along with
-  clipping; `penalty` still logs the B-cap input-gradient penalty.
-- No seed sweeps. Make logs easy to tail. Explain completed experiments with
-  a leaderboard and recommendations. Both RTX A6000 cards are authorized.
-- No subagents/delegation requested. Do not touch unrelated files.
-
-## Completed autonomous studies
-
-Read [latest full report](../autonomous-memory/horizon64/README.md) first.
-All rows: 2,000 updates, batch 128, 128 evaluation particles, 256-point generation.
-
-| Writer / setup | Full circles | Late-only circles | Stopped late | Full radial RMSE |
-|---|---:|---:|---:|---:|
-| Learned / clipped 16 | 0% | 17.2% | 20.3% | 0.466 |
-| Frozen / clipped 16 | 0% | 14.1% | 8.6% | 0.410 |
-| Learned / unclipped 16 | 0.8% | 23.4% | 16.4% | 0.396 |
-| Frozen / unclipped 16 | 0% | 11.7% | 12.5% | 0.406 |
-| Learned / unclipped 64 | 6.3% | 26.6% | 3.9% | 0.295 |
-| Frozen / unclipped 64 | 7.8% | 34.4% | 8.6% | 0.298 |
-| Real noisy reference | 99.2% | 99.2% | 0% | 0.032 |
-
-No-memory fixed-z control is structurally static: 100% stopped, zero circle
-passes. It was run only in the first study and smoke checks.
-
-Full circles fit the first 32 points and score all 256 against that fixed fit.
-Late-only refits points 129–256. Stopped late is mean displacement <0.01 over the
-last 64 transitions. Geometry metrics are heuristic, not distribution distances.
-
-At horizon 64, late passing circles are learned 24 CCW/10 CW versus frozen
-44 CCW/0 CW; real 62 CCW/65 CW. Initial-position spread narrows to learned
-0.622/frozen 0.675 (real 1.180; 16-step baseline 1.094/1.147). Distorted loops,
-spirals, startup transients, and partial mode collapse remain.
-
-The horizon comparison changes the full configuration: D grows from 86,761 to
-295,657 parameters, points per update quadruple, and initial prior values differ
-because the larger D consumes more initialization RNG. G/writer initialization
-is unchanged. Training-data RNG consumption also changes with sequence length.
-Do not describe this as a pure horizon ablation at equal compute or identical
-initial particle values. Both writer mechanisms at a given horizon match their
-initialization/data schedules. No seed experiments were performed.
-
-## Outputs and logs
-
-- `runs/memory_path/autonomous_2k/`: original clipped 16-step study.
-- `runs/memory_path/autonomous_unclipped_2k/`: unclipped 16-step baseline.
-- `runs/memory_path/autonomous_h64_2k/shared_run/`: learned writer on GPU0,
-  400.6 seconds training/evaluation.
-- `runs/memory_path/autonomous_h64_2k/frozen_writer_run/`: frozen writer on GPU1,
-  324.4 seconds, run concurrently with learned.
-- Each run has flushed `experiment.log`, per-variant `metrics.jsonl`, config,
-  summary, source snapshots, inference checkpoint, and full evaluation arrays.
-- Durable reports: `reports/autonomous-memory/`, its `unclipped/` and `horizon64/`
-  subdirectories. The latter includes direction counts and learning curves.
-- Raw runs are gitignored. Reports include results, source hashes, and a patch
-  identifying trainer changes that were uncommitted when the runs started.
-
-Example two-card log tail, after launching future runs in fresh directories:
-
-```bash
-tail -F runs/memory_path/autonomous_h64_2k/{shared_run,frozen_writer_run}/experiment.log
-```
-
-These completed logs end in `suite_complete`; nothing currently needs monitoring.
-Use `.venv/bin/python`; Torch 2.14.0+cu130. Training checkpoints are inference-only
-(no optimizer/RNG state for exact resume). Do not overwrite completed run dirs.
-
-## Implementation
-
-`experiments/autonomous_memory.py` reuses `FastMemory`, `Generator`, and `circles`
-from `experiments/memory_path.py`. Public API: `get_recipe`, factories for prior,
-loss, gradient penalty, prior regularizer and optimizers, plus LR scheduling.
-GAN recipe: relativistic logistic, lr 0.0006, D multiplier 1.5, prior multiplier
-10, Adam betas (0,.999), particle spread weight 1, decay after 60%, floor .05.
-No EMA. Prior has 512 learned four-dimensional particles.
-
-Runtime recurrence, with independent zero memory Bx8x4 and fixed z:
+The core idea is **real data updates D's M, and G reads that updated M**. Fake
+candidate scoring should read that context without overwriting it. D alone trains
+the memory writer; G trains its reader and particles. One fixed particle belongs
+to each trajectory. Expert-free runtime remains a requirement:
 
 ```python
-x = G(z, M.flatten(1))
-M = writer.write(M, x)
+M = zeros()
+for each runtime step:
+    x = G(z, M)
+    emit(x)
+    M = D.write(x, M)
 ```
 
-Writer maps x through 2->32->8 tanh features; four temporal traces decay at
-[0, .5, .8, .95]. It is a feature-trace memory, not general content-addressed
-fast weights. G is a width-64 MLP. Sequence D is a width-128 MLP over the flattened
-sequence of (point, memory BEFORE that point's write) features.
+The observed-prefix prototype in `experiments/memory_path.py` implements the
+real-context handoff. The newer autonomous trainers instead construct M from
+fully generated prefixes; D separately replays the writer to score full paths.
+Replaying the same deterministic writer on the same prefix produces equal state
+values, so buffer identity alone is not a scientific difference. The substantive
+change was removing the real-context memory handoff from G's training.
 
-D trains its writer from both real and detached fake sequence scoring. During
-G updates writer weights are frozen, but state stays differentiable through
-all generated steps. No teacher forcing, timestamps, or reconstruction loss.
-`frozen_writer` freezes the random writer throughout. New configs explicitly
-record `gradient_clipping: null`. Training circles retain observation noise .03;
-centers uniform [-.75,.75]^2, radii [.6,1.4], speed magnitude [.12,.40], both signs.
+The user explicitly asked to compare different core formulations using the
+established metrics, without assuming the original or autonomous version wins.
+**OOD continuation with no external X is a primary evaluation axis.** No better
+alternative has been established. The comparison is **not yet implemented or run**;
+this commit preserves a reviewable stopping point before changing training.
 
-## Validation and analysis
+## Prioritized next experiment
 
-- Original implementation/API validation: 38 tests passed.
-- Clipping removal: five autonomous tests and all three five-update CUDA smoke
-  runs passed. No training code changes occurred in the substantive followups.
-- Reloaded unclipped learned G/writer/prior reproduced all 128 saved 256-step
-  trajectories without constructing D's scorer or supplying real inputs.
-- Both horizon-64 runs completed with finite outputs; real evaluation arrays
-  match across cards and against the 16-step baseline.
-- Analysis accepts multiple run directories and plots the actual train horizon.
-  Reanalysis reproduces the earlier baseline JSON exactly. Plots inspected.
+Use config files and retain simple single-GRU and double-GRU directions. Start
+with a simple GRU32 writer and feedforward G to isolate the handoff, then use
+metrics to decide whether private G recurrence is useful.
+
+1. **Real-memory handoff only:** D builds M from a real prefix; G consumes that
+   actual context. Real next-point and fake candidate are scored against the
+   same M without candidate writes. D trains the writer; G cannot change it.
+2. **Handoff plus generated feedback:** retain that interaction and add an
+   explicitly configured autonomous rollout objective, teaching the runtime
+   feedback loop. Keep this separate from the handoff-only result.
+3. **Controls:** reuse completed autonomous single-/double-GRU baselines where
+   training settings match. If adding a conditional head or changing objective
+   scale, state that confound and isolate it where feasible.
+4. **Optional curriculum:** config-driven switching from real writes to generated
+   writes during a training trajectory. Compare this separately from merely
+   adding independent real-handoff and autonomous losses; do not conflate them.
+
+First compare the core write/read/training rules with a common GRU32/feedforward-G
+architecture. Then use completed results to choose whether to try private G
+recurrence. DDGAN, FiLM, Fourier mappings, and size sweeps remain deferred until
+the core-formulation comparison is understood. Do not assume any formulation
+wins because it matches the original wording or had the highest old circle rate.
+
+## Primary evaluation: continuing without external X
+
+Every tested formulation must expose an expert-free D/G loop. Keep state/particle
+initialization and the point-to-memory write ordering explicit. Evaluate two
+different deployment conditions and report them separately:
+
+- **Cold start:** M=0 (and private h=0 if present), fixed z, then generated points
+  only. Retain full 256- and 1,024-point metrics; no burn-in exclusion.
+- **Real-prefix handoff:** D consumes a declared real prefix, then disconnect X
+  completely. G reads the resulting M; only generated points enter subsequent
+  D updates. Use fixed prefix lengths (for example 8 and 32) across formulations,
+  then measure 256 and 1,024 generated steps after the cutoff. Clearly specify how
+  private G state is initialized during the prefix if that variant is used.
+
+For the prefix condition, report continuation fidelity to the original circle
+(center/radius, speed and direction), error growth with time, and stopping or
+collapse, as well as the existing generated-circle diagnostics. Otherwise a
+model could jump to a different valid circle and appear successful. Reference
+future points/known toy geometry may be used offline for evaluation only; they
+must never enter the rollout after cutoff. Count startup discontinuities.
+
+Track memory norms/saturation and zero/shuffle interventions as diagnostics for
+state distribution shift. Label the test as continuation after removal of real
+input; do not claim actual state-distribution OOD merely from the label. Report
+direction coverage and particle diversity alongside success, and avoid promoting
+a one-direction oscillator solely on its circle rate. Match evaluation conditions,
+updates, and architecture where possible; disclose compute/parameter differences.
+Longer horizons can stress finalists after the common 256/1,024 evaluation.
+
+The user requested compact preparation before working through these experiments.
+Do not launch new training during this handoff/commit turn.
+
+Important design details before launching:
+
+- Define the temporal target precisely. Build M from real points strictly before
+  the candidate being predicted; do not give G a memory already containing its
+  target and call reconstruction next-point prediction.
+- Real and fake candidate scores must see the same context. D's real write and
+  G's read should be explicit in code and ownership tests.
+- In the handoff-only branch, scoring a fake must not mutate the real memory.
+  Generated-feedback writes in the autonomous branch are a deliberate separate
+  training condition, not an implicit replacement for real writes.
+- Include zero-prefix starts in training or explicitly report their absence.
+  Evaluate from zero M, with no real prefix and no runtime expert. Conditional
+  observed-prefix quality is a diagnostic, not autonomous success.
+- Preserve full generated-state BPTT where feedback is trained, while freezing
+  writer parameters in G updates. D should score detached fake candidates.
+- Keep default API B-cap, no clipping, no EMA, fixed z per trajectory, no analytic
+  circle projection/loss, and no seed experiments. Use numerical metrics only.
+
+## Completed evidence
+
+The earlier optimization round completed 12 scouts + 6 continuations (46,000
+updates, no training failures). Full-table evaluations enumerate 512 learned
+particles; this is not a held-out training split.
+
+| Model | Updates | Full 256 | Full 1,024 | Passing CW / CCW |
+|---|---:|---:|---:|---:|
+| GRU32 writer + private G GRU64 | 5,000 | 85.2% | 84.0% | 0 / 436 |
+| GRU32 writer + feedforward G | 10,000 | 52.5% | 50.4% | 134 / 135 |
+
+Both lose all passing circles under zero/shuffled memory. However, matched
+recurrent G without memory reading reaches 52.3% at 2k versus 55.5% with memory;
+shared-memory superiority is not established. Keep the writer learned: freezing
+it at 5k worsened the 10k result. The toy remains unsolved.
+
+Round 4 completed only `gru_m8`: 22.7% full256 and full1024 on 128 particles,
+all 29 passes CCW, 10.2% late stopping. This improves raw success over the prior
+GRU32 2k control (14.1%) but worsens direction coverage and stopping. No promotion.
+DDGAN and GRU64 were cancelled mid-training; six FiLM configs never launched.
+
+Read:
+- [Earlier report](../autonomous-memory/scout/README.md)
+- [All 18 earlier checkpoints](../autonomous-memory/scout/completed/leaderboard.md)
+- [All-particle validation](../autonomous-memory/scout/validation/leaderboard.md)
+- [Stopped round 4 outcome](../autonomous-memory/scout/round4/README.md)
+- [Historical DDGAN implementation](../autonomous-memory/ddgan/README.md)
+
+## Infrastructure and checkpoints
+
+`experiments/memory_dispatch.py` provides an appendable shared two-GPU queue.
+Jobs specify a config and trainer; both GPUs claim from the same queue. Training
+output from all jobs is labelled in one `train.log`; `queue.log` tracks lifecycle.
+Drain stdout emits only completion/failure events. Workers block on process/FIFO
+notifications rather than polling logs. The completed queue is sealed and its
+cancelled jobs are recorded; use a fresh directory next time.
 
 ```bash
-.venv/bin/python reports/autonomous-memory/analyze.py \
-  runs/memory_path/autonomous_h64_2k/shared_run \
-  runs/memory_path/autonomous_h64_2k/frozen_writer_run \
-  --out reports/autonomous-memory/horizon64
-.venv/bin/python reports/autonomous-memory/horizon64/learning_curves.py
+# Preserved log, no longer live:
+tail -F runs/memory_path/scout_round4/train.log
+
+# Future usage, once actual handoff configs exist:
+# .venv/bin/python experiments/memory_dispatch.py add --queue FRESH \
+#   --trainer TRAINER --configs CONFIG...
+# .venv/bin/python -u experiments/memory_dispatch.py drain --queue FRESH
+# .venv/bin/python experiments/memory_dispatch.py seal --queue FRESH
 ```
 
-Historical observation-conditioned study remains at `reports/memory-path/README.md`:
-shared next-point RMSE .098, recent-point buffer .088, but real observations
-arrived each step. Do not conflate it with autonomous success.
+- Balanced checkpoint: `runs/memory_path/scout_long/gru_flat_10k/model.pt`
+- Geometry checkpoint: `runs/memory_path/scout_recurrent_long/gru_private_5k/model.pt`
+- Single-GRU 2k: `runs/memory_path/scout_round1/gru_flat/model.pt`
+- Double-GRU 2k: `runs/memory_path/scout_recurrent/gru_private/model.pt`
+- New GRU8: `runs/memory_path/scout_round4/runs/gru_m8/model.pt`
+
+Raw runs are gitignored; source, configs, tests, and numerical reports are durable.
+Use `.venv/bin/python`. No production API source was changed in this scout round.
