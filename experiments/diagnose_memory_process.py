@@ -46,6 +46,22 @@ def measured_process(path, center, omega):
             'direction': (angular*np.sign(omega[:, None]) > 0).mean(1)}
 
 
+def process_response(measured, original_omega):
+    radius = (measured['radius_high']['radius']-measured['radius_low']['radius'])/.7
+    speed = (measured['speed_high']['signed_speed']-measured['speed_low']['signed_speed'])*np.sign(original_omega)/.22
+    flipped = measured['direction_flipped']['signed_speed']
+    original = measured['original']['signed_speed']
+    return {
+        'radius_response_mean_ideal1': float(radius.mean()),
+        'radius_response_median_ideal1': float(np.median(radius)),
+        'radius_correct_change_fraction': float((radius > 0).mean()),
+        'speed_response_mean_ideal1': float(speed.mean()),
+        'speed_response_median_ideal1': float(np.median(speed)),
+        'speed_correct_change_fraction': float((speed > 0).mean()),
+        'direction_correct_in_both_fraction': float(((original*original_omega > 0) & (flipped*original_omega < 0)).mean()),
+    }
+
+
 @torch.no_grad()
 def diagnose(path, device, recompute_original=False):
     json.loads((path/'summary.json').read_text())
@@ -61,6 +77,7 @@ def diagnose(path, device, recompute_original=False):
         observed = arrays['observed_prefix32'].copy()
         original_path = arrays['prefix32'].copy()
     results, measured = {}, {}
+    response_windows = {n: {} for n in (0, 1, 8, 32, 128, 512) if n+32 <= cfg.eval_steps}
     for name, (reference, history, center, radius, omega) in counterfactuals(clean, observed).items():
         if name == 'original' and not recompute_original:
             generated = original_path
@@ -70,28 +87,21 @@ def diagnose(path, device, recompute_original=False):
             generated = generated.cpu().numpy()
         m = measured_process(generated, center, omega)
         measured[name] = m
+        for n, window in response_windows.items():
+            window[name] = measured_process(generated[:, n:n+32], center, omega)
         results[name] = {'progress': orbit_progress(generated, reference, 32),
                          'fidelity': core.fidelity(generated, reference, 32),
                          'late_radius_mae': float(np.abs(m['radius']-radius).mean()),
                          'late_signed_speed_mae': float(np.abs(m['signed_speed']-omega).mean()),
                          'late_direction_agreement': float(m['direction'].mean())}
     original_omega = counterfactuals(clean, observed)['original'][-1]
-    radius_response = (measured['radius_high']['radius']-measured['radius_low']['radius'])/.7
-    speed_response = (measured['speed_high']['signed_speed']-measured['speed_low']['signed_speed'])*np.sign(original_omega)/.22
-    flipped = measured['direction_flipped']['signed_speed']
-    original = measured['original']['signed_speed']
     return {'name': cfg.name, 'source': str(path), 'steps': cfg.steps,
             'device': device, 'recompute_original': recompute_original,
             'variants': results,
-            'response': {
-                'radius_response_mean_ideal1': float(radius_response.mean()),
-                'radius_response_median_ideal1': float(np.median(radius_response)),
-                'radius_correct_change_fraction': float((radius_response > 0).mean()),
-                'speed_response_mean_ideal1': float(speed_response.mean()),
-                'speed_response_median_ideal1': float(np.median(speed_response)),
-                'speed_correct_change_fraction': float((speed_response > 0).mean()),
-                'direction_correct_in_both_fraction': float(((original*original_omega > 0) & (flipped*original_omega < 0)).mean()),
-            }}
+            'response': process_response(measured, original_omega),
+            'response_over_time': {str(n): process_response(m, original_omega)
+                                   for n, m in response_windows.items()},
+            'response_window_definition': '32 generated points starting after n generated writes; 31 angular increments. This is a local window, not instantaneous response. Same matched histories, z, clock and device.'}
 
 
 if __name__ == '__main__':

@@ -1,0 +1,6 @@
+{
+  "penalty": 0.00010381830361438915,
+  "writer_gradient_max_abs": 0.0,
+  "domain": "point candidate coordinates, clean prefix32; clean target, generated fake; frozen checkpoint CPU",
+  "note": "Point head is piecewise affine in concatenated candidate and M, so input-gradient penalty has zero memory derivative almost everywhere. GAN loss still trains writer."
+}

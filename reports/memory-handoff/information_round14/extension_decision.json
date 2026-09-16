@@ -1,0 +1,133 @@
+{
+  "all_selected_completed": true,
+  "baseline": "match_shuffle25",
+  "criteria": "plan.md, fixed before training",
+  "comparisons": [
+    {
+      "name": "future_clean10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.40309962339899175,
+          "late_quality_gain": -0.4482075794151553,
+          "radial_change": 0.37703448194779154,
+          "direction_change": -0.0031585693359375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.41072259547962364,
+          "late_quality_gain": -0.47018855767288004,
+          "radial_change": 0.4110375282146448,
+          "direction_change": -0.00640106201171875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "future_full10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.08543458137014792,
+          "late_quality_gain": -0.13002856155801212,
+          "radial_change": -0.047370609757671045,
+          "direction_change": -0.00878143310546875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.10042590313814359,
+          "late_quality_gain": -0.18850345880043662,
+          "radial_change": -0.037300866226421925,
+          "direction_change": -0.01604461669921875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "future_mixed10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.3070299390829897,
+          "late_quality_gain": -0.3482868126437273,
+          "radial_change": 0.10485330683503413,
+          "direction_change": -0.011077880859375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.3366982713476573,
+          "late_quality_gain": -0.40061498144498775,
+          "radial_change": 0.13362231539472003,
+          "direction_change": -0.01006317138671875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "future_mixed10_detachwrite",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.37775768172129787,
+          "late_quality_gain": -0.466190774804476,
+          "radial_change": 0.153445730953913,
+          "direction_change": -0.0168914794921875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.4063246746903074,
+          "late_quality_gain": -0.5225111041807454,
+          "radial_change": 0.155917790940572,
+          "direction_change": -0.01506805419921875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "future_mixed25",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.2318702723865823,
+          "late_quality_gain": -0.3823213645635968,
+          "radial_change": 0.12259911486833208,
+          "direction_change": -0.02307891845703125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.2735822910422181,
+          "late_quality_gain": -0.3918932399495271,
+          "radial_change": 0.12570828630604347,
+          "direction_change": -0.014129638671875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    }
+  ],
+  "selected": []
+}

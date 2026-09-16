@@ -1,0 +1,49 @@
+{
+  "done": 5,
+  "failed": 0,
+  "devices": [
+    "cuda:0",
+    "cuda:1"
+  ],
+  "queue_wall_seconds": 709.8469867706299,
+  "training_gpu_seconds": 1183.8486649120168,
+  "identical_training_sources": true,
+  "sources": {
+    "memory_handoff_scout.py": "9a852d976970e6b31c78b11d63ceea05e0d25fada012dd3c49562d2e8cdb4cad",
+    "memory_local_objectives.py": "77d1f05158ad77210eb502a09f2bbf6dbc3342506d9e8e531b2bfd7e08d1b402",
+    "memory_g_recurrent.py": "e522c478ce536f40bf8029d1127ba7039276610d25b9ac9657684d40094f64e3",
+    "memory_recent.py": "5a1aaa2c869dcca40682f4230c06bbcbcf0e7640c4970d1c924ef5664b9f64f6",
+    "memory_core_scout.py": "71e1206048bab1bb4e4b8f089ba1041f001726e4d3bf6a4b83ad98768001a2a0",
+    "memory_scout.py": "59008372a273543a3bcc163f85e808abbf5a7c152929e38c047c60c340b00d0e",
+    "autonomous_memory.py": "a8b697c1c4ef5b2516f2c0445a3a6f8eeceb73b3a9a03a3127efd5dfdf75c3d5",
+    "memory_path.py": "18178fa48c8b109ee71d3f679bdcfc1b0775b22f1f879fd877dafdf859a40e0f"
+  },
+  "reference_and_observed_prefixes_bitwise_equal_baseline": true,
+  "runs": [
+    {
+      "name": "explored_mild",
+      "train_seconds": 243.76525189800304,
+      "seconds_per_update": 0.12188262594900152
+    },
+    {
+      "name": "mixed_mild",
+      "train_seconds": 246.29967295602546,
+      "seconds_per_update": 0.12314983647801273
+    },
+    {
+      "name": "explored_full",
+      "train_seconds": 239.76543892698828,
+      "seconds_per_update": 0.11988271946349414
+    },
+    {
+      "name": "mixed_full",
+      "train_seconds": 250.33244007499889,
+      "seconds_per_update": 0.12516622003749944
+    },
+    {
+      "name": "mixed_mild_headonly",
+      "train_seconds": 203.68586105600116,
+      "seconds_per_update": 0.10184293052800059
+    }
+  ]
+}

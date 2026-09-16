@@ -168,19 +168,38 @@ def analyze(source, out, baselines=(), handoff_only=False):
                       'Memory access controls are separately trained; interventions alone do not establish comparative benefit.']
         if any(r['config'].get('local_objectives') for r in scouts):
             lines += ['', '## Local history and future objectives', '',
-                      '| Run | Mismatch weight / donors | Recovery noise / probability | Future weight / offsets | Query bands |',
-                      '|---|---|---|---|---:|']
+                      '| Run | Mismatch weight / donors | Mismatch context / strength / writer gradient | Recovery noise / probability | Future weight / offsets | Query bands |',
+                      '|---|---|---|---|---|---:|']
             for row in scouts:
                 c = row['config']
                 lines.append(f"| {row['name']} | {c.get('mismatch_weight', 0):g} / {c.get('mismatch_kind', 'nearest')} | "
+                             f"{c.get('mismatch_context', 'clean')} / {c.get('mismatch_write_strength', .25):g} / {c.get('mismatch_writer_grad', True)} | "
                              f"{c.get('recovery_noise', 0):g} / {c.get('recovery_probability', .5):g} | "
                              f"{c.get('future_weight', 0):g} / {c.get('future_offsets', [])} | {c.get('future_query_bands', 0)} |")
             lines += ['', 'Mismatch training ranks real continuations from other histories with the existing point head;',
                       'its D loss and default B-cap are normalized by 1+weight. G point loss stays unchanged.',
+                      'Mismatch context can be clean, one generated replacement write, or an equal loss mixture.',
+                      'The writer-gradient control detaches only mismatch context; existing writer losses remain active.',
                       'Recovery perturbs prefix observations read by G; the pair judge retains the clean reference.',
                       'Future queries read identical prefix memory independently, with fixed z and explicit offsets.',
                       'Their joint GAN uses real future targets, no generated writes, and default exact B-cap.',
                       'Future weight convexly mixes this branch with the existing GAN; prior regularization stays once.']
+        if any(r['config'].get('future_rank_weight', 0) for r in scouts):
+            lines += ['', '## Future history ranking through the point head', '',
+                      '| Run | Added D weight | Offsets | Context / write strength | Explored writer gradient |',
+                      '|---|---:|---|---|---|']
+            for row in scouts:
+                c = row['config']
+                lines.append(f"| {row['name']} | {c.get('future_rank_weight', 0):g} | "
+                             f"{c.get('future_rank_offsets', [])} | {c.get('future_rank_context', 'clean')} / "
+                             f"{c.get('future_rank_strength', .25):g} | {c.get('future_rank_explored_grad', True)} |")
+            lines += ['', 'D ranks same-episode future observations against other histories at explicit offsets.',
+                      'The horizon projection enters the shared point head; G always uses offset zero.',
+                      'Future losses and default B-cap average across offsets and contexts, then normalize',
+                      'with the existing D objective by 1+weight. G loss is unchanged.',
+                      'Mixed contexts average clean and one-generated-write losses. The gradient control',
+                      'detaches only the explored future context, retaining clean-future writer gradients.',
+                      'This is distinct from direct future G queries; no extra generated trajectory is trained.']
         lines += ['', 'Scouts use local point GAN losses and optionally a two-point transition GAN. There is no full generated training',
                   'rollout or cold/warm path loss. Configured feedback adds at most one',
                   'generated write before each target; configs control G gradients through that write.',

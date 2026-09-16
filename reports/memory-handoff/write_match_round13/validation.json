@@ -1,0 +1,42 @@
+{
+  "focused_tests": 75,
+  "passed": true,
+  "tests": [
+    "test_memory_local_objectives.py",
+    "test_memory_process.py",
+    "test_memory_reports.py",
+    "test_memory_local_recovery.py",
+    "test_memory_handoff_scout.py",
+    "test_memory_g_recurrent.py",
+    "test_memory_dispatch.py",
+    "test_memory_exploration.py",
+    "test_memory_dynamics.py",
+    "test_memory_clock.py",
+    "test_memory_core_scout.py"
+  ],
+  "coverage": [
+    "causal generated proposal at target clock minus one",
+    "fixed particle across positions",
+    "mixed context weights",
+    "no G/prior gradients from D mismatch",
+    "writer-gradient disable only for mismatch",
+    "active public default exact B-cap",
+    "exact four-step resume with all optional objectives",
+    "MSE training rejects",
+    "perfect-reference process-response window calibration",
+    "legacy clean mismatch bitwise equality",
+    "zero-strength diagnostic replacement exactly equals clean ranking"
+  ],
+  "gpu_smokes": {
+    "queue": "runs/memory_path/write_match_smoke13",
+    "done": 2,
+    "failed": 0,
+    "steps": 4,
+    "batch_size": 128,
+    "eval_steps": 1024,
+    "devices": [
+      "cuda:0",
+      "cuda:1"
+    ]
+  }
+}

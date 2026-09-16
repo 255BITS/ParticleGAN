@@ -48,6 +48,17 @@ class Config(base.Config):
     local_pair_weight: float = 0.
     mismatch_weight: float = 0.
     mismatch_kind: str = 'nearest'
+    mismatch_context: str = 'clean'
+    mismatch_write_strength: float = .25
+    mismatch_ramp_steps: int = 0
+    mismatch_writer_grad: bool = True
+    future_rank_weight: float = 0.
+    future_rank_offsets: tuple = (4, 12)
+    future_rank_bands: int = 0
+    future_rank_context: str = 'clean'
+    future_rank_strength: float = .25
+    future_rank_ramp_steps: int = 500
+    future_rank_explored_grad: bool = True
     recovery_noise: float = 0.
     recovery_probability: float = .5
     future_weight: float = 0.
@@ -83,7 +94,19 @@ class Config(base.Config):
     def __post_init__(self):
         super().__post_init__()
         self.future_offsets = tuple(self.future_offsets)
+        self.future_rank_offsets = tuple(self.future_rank_offsets)
+        assert self.future_rank_weight >= 0 and 0 <= self.future_rank_bands <= 8
+        assert not self.future_rank_weight or self.future_rank_bands > 0
+        assert self.future_rank_offsets and tuple(sorted(set(self.future_rank_offsets))) == self.future_rank_offsets
+        assert all(isinstance(offset, int) and offset > 0 for offset in self.future_rank_offsets)
+        assert self.future_rank_offsets[-1] < self.train_length-4
+        assert self.future_rank_context in ('clean', 'mixed', 'explored')
+        assert 0 <= self.future_rank_strength <= 1 and self.future_rank_ramp_steps >= 0
+        assert not self.future_rank_weight or not self.g_state_dim
         assert self.mismatch_weight >= 0 and self.mismatch_kind in ('nearest', 'shuffle')
+        assert self.mismatch_context in ('clean', 'explored', 'mixed')
+        assert 0 <= self.mismatch_write_strength <= 1 and self.mismatch_ramp_steps >= 0
+        assert self.mismatch_context == 'clean' or (self.mismatch_weight > 0 and not self.g_state_dim)
         assert self.recovery_noise >= 0 and 0 < self.recovery_probability <= 1
         assert not self.recovery_noise or self.local_pair_weight > 0
         assert 0 <= self.future_weight < 1 and 0 <= self.future_query_bands <= 8
@@ -154,6 +177,12 @@ class Critic(nn.Module):
         with torch.random.fork_rng(devices=[]):
             torch.manual_seed(46)
             self.handoff_head = mlp(cfg.memory_dim+2+2*self.clock_bands, 1, cfg.d_width)
+        self.future_rank_bands = cfg.future_rank_bands
+        if self.future_rank_bands:
+            with torch.random.fork_rng(devices=[]):
+                torch.manual_seed(54)
+                self.horizon_projection = nn.Linear(2*self.future_rank_bands, cfg.d_width, bias=False)
+                nn.init.zeros_(self.horizon_projection.weight)
         if cfg.local_pair_weight:
             with torch.random.fork_rng(devices=[]):
                 torch.manual_seed(51)
@@ -177,13 +206,23 @@ class Critic(nn.Module):
                 self.future_head = mlp(cfg.memory_dim+2*len(cfg.future_offsets)+2*self.clock_bands,
                                        1, cfg.d_width)
 
-    def score_candidate(self, candidate, memory, time_index=None):
+    def score_candidate(self, candidate, memory, time_index=None, *, horizon=0):
         flat = memory.flatten(1)
         inputs = [candidate, flat]
         if self.clock_bands:
             inputs.append(clock_features(time_index, candidate, self.clock_bands,
                                          self.clock_frequency, self.clock_rate))
-        score = self.handoff_head(torch.cat(inputs, -1)).squeeze(-1)
+        inputs = torch.cat(inputs, -1)
+        if self.future_rank_bands and horizon != 0:
+            frequency = 2.**torch.arange(self.future_rank_bands, device=candidate.device,
+                                         dtype=candidate.dtype)/16
+            angle = horizon*frequency
+            features = torch.cat((angle.sin(), angle.cos()-1)).expand(len(candidate), -1)
+            hidden = self.handoff_head[0](inputs)+self.horizon_projection(features)
+            score = self.handoff_head[1:](hidden).squeeze(-1)
+        else:
+            # Keep the exact original point/G path and checkpoint parameters at h=0.
+            score = self.handoff_head(inputs).squeeze(-1)
         if self.interaction:
             score = score+(self.point_embedding(candidate)*self.memory_embedding(flat)).sum(-1)/(flat.shape[-1]**.5)
         return score
@@ -559,7 +598,19 @@ def train(cfg, out, device, log):
         resolved['training_generator_unroll'] = 2
         resolved['fake_writes_in_training'] += 1
         resolved['penalty_domain'] = 'point coordinates and independent local pair coordinates; weighted default exact B-cap'
+    if cfg.mismatch_weight and cfg.mismatch_context != 'clean':
+        resolved['generator_calls_d_phase'] += 1
+        resolved['reader_calls_d_phase'] += resolved['reader_calls_per_generator']
+        resolved['fake_writes_d_phase'] += 1
+        resolved['fake_writes_in_training'] += 1
+    if cfg.future_rank_weight and cfg.future_rank_context != 'clean':
+        resolved['generator_calls_d_phase'] += 1
+        resolved['reader_calls_d_phase'] += resolved['reader_calls_per_generator']
+        resolved['fake_writes_d_phase'] += 1
+        resolved['fake_writes_in_training'] += 1
     resolved['max_sequential_generated_writes'] = int(bool(cfg.feedback_probability or cfg.local_pair_weight
+        or (cfg.mismatch_weight and cfg.mismatch_context != 'clean')
+        or (cfg.future_rank_weight and cfg.future_rank_context != 'clean')
         or cfg.stability_g_weight or cfg.stability_d_weight))
     resolved['g_recurrence'] = {
         'dimension': cfg.g_state_dim, 'update_reads_d': cfg.g_state_reads_d,
@@ -619,9 +670,16 @@ def train(cfg, out, device, log):
         d_aux, diagnostics = local_auxiliary(cfg, critic, memory, real, positions, target)
         if cfg.mismatch_weight:
             mismatch, mismatch_reg, stats = objectives.mismatch_objective(
-                cfg, critic, observed, real, positions, times, gan, penalty, step)
+                cfg, critic, observed, real, positions, times, gan, penalty, step,
+                generator=generator, z=z)
             d_adv = (d_adv+cfg.mismatch_weight*mismatch)/(1+cfg.mismatch_weight)
             d_reg = (d_reg+cfg.mismatch_weight*mismatch_reg)/(1+cfg.mismatch_weight)
+            diagnostics.update(stats)
+        if cfg.future_rank_weight:
+            future_rank, future_rank_reg, stats = objectives.future_rank_objective(
+                cfg, generator, critic, observed, real, positions, times, z, gan, penalty, step)
+            d_adv = (d_adv+cfg.future_rank_weight*future_rank)/(1+cfg.future_rank_weight)
+            d_reg = (d_reg+cfg.future_rank_weight*future_rank_reg)/(1+cfg.future_rank_weight)
             diagnostics.update(stats)
         if cfg.future_weight:
             view, actual, proposed = objectives.future_examples(

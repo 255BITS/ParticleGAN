@@ -1,4 +1,63 @@
-# Latest: first-principles local objectives round12 completed
+# Latest: information diagnosis and future ranking round14 completed
+
+Read ../memory-handoff/information_round14/{assessment,diagnosis,scout_information,next}.md.
+Five2k scouts complete on both GPUs, zero failures, no qualifying extensions.
+All full cold/warm passes remain0/128. All diagnostics complete, nothing running
+or queued. Included in the requested commit with round13 and winner audit;
+push not requested. No next experiment selected.
+
+USER'S NEXT DIRECTION: investigate whether sequential training needs special
+treatment, starting from the actual loop and first principles. Examine state
+carry/reset/detach, temporal credit assignment, representation drift as D's writer
+changes, D/G update timescales, and the joint (z,M) distribution during feedback.
+Keep existing constraints; do not assume full generated rollouts are now allowed.
+Discuss these questions before committing to the earlier persistent/fast-state
+proposal. Detailed handoff: ../memory-handoff/information_round14/next.md.
+
+Saved round12 match_shuffle25 remains winner (5k nominal,2k late-Q control).
+Best new future_full10 minQ .009970 vs saved2k .010901; radial slightly better,
+combined/late quality worse. Detaching only new generated-future writer gradients
+worsens matched scout, but neither wins. No5k followups.
+
+Frozen-M probes now support declining accessible process information as well as
+early representation shift. Saved5k speed R² .954->.436->approximately0 after
+0/32/128 generated writes; real128 remains .946. M+z does not rescue128.
+New strongest future loss improves CLEAN radius/speed R² to .685/.965 but loses
+it during feedback. All five new scouts near chance at128. Probe limits remain;
+this is not proof of information-theoretic erasure or impossibility of local training.
+
+Optional future_rank_* support shares the G-facing point head via explicit
+horizon projection, scores real observations4/12 steps ahead after at most one
+generated write, retains winning immediate mismatch and unchanged G objectives.
+No MSE GAN training, geometry targets or additional generated trajectory depth.
+77 tests/two smokes; old h0 training bitwise equivalent, exact resume preserved.
+16.1min queue wall/26.8 GPU-min training. Stable tail unchanged.
+
+Next discussion should target preservation through repeated writes. Prior fixed
+slow/fast memories and private G-GRU already failed; any new mechanism needs a
+new incentive/control. No next experiment selected or queued.
+
+# Previous: generated-write mismatch round13 completed
+
+Read ../memory-handoff/write_match_round13/assessment.md, diagnostics.md and next.md.
+Five2k scouts complete on both GPUs; zero failures, no qualifying extensions.
+Nothing running/queued. All full cold/warm256/1024 passes remain0/128.
+No next experiment selected. Included in the subsequent round14 commit.
+
+Existing match_shuffle25 remains the leading recipe (saved5k nominal,2k late-Q
+control). Generated-write mismatch contexts at mild/full strength regress warmQ;
+head-only control regresses further. Slight radial gains do not outweigh angular
+quality loss. Current explicit mismatch winner still uses real-prefix memory.
+
+New process-response windows show original speed/radius influence fading over
+repeated writes. Saved5k median speed response .859/.192/.00066 in32-point windows
+starting after0/32/128 generated writes. This does not distinguish information
+loss in M from G readout failure. That is a useful next diagnostic question.
+
+75 tests, two GPU smokes, bitwise legacy equality; five shared-source/shared-panel
+scouts. ~11.8min queue wall,1183.8 training GPU-seconds. Stable tail unchanged.
+
+# Previous: first-principles local objectives round12 completed
 
 Read ../memory-handoff/principles_round12/assessment.md and followup/assessment.md,
 then next.md. Twelve2k scouts plus two exact2k→5k extensions completed on both

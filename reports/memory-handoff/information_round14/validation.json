@@ -1,0 +1,18 @@
+{
+  "distinct_tests_passed": 77,
+  "existing_and_information_tests": 64,
+  "new_future_rank_and_diagnostic_tests": 13,
+  "smoke_completed": 2,
+  "smoke_failed": 0,
+  "smoke_devices": [
+    "cuda:0",
+    "cuda:1"
+  ],
+  "smoke_steps": 4,
+  "smoke_batch": 128,
+  "smoke_eval_steps": 1024,
+  "offset0_architecture_bitwise_training_equivalence_steps": 4,
+  "default_bcap_active_test": true,
+  "exact_resume_steps": 4,
+  "no_mse_training_test": true
+}

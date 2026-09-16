@@ -1,0 +1,9 @@
+{
+  "reference_commit": "13d8476",
+  "steps": 4,
+  "device": "cpu",
+  "config": "match_shuffle25 with batch4/max_prefix8",
+  "equal_tensors": 39,
+  "bitwise_equal": true,
+  "scope": "G/D/prior and all named RNG states; clean mismatch objective enabled; evaluation stubbed"
+}

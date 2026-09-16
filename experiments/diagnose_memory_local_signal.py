@@ -44,9 +44,15 @@ def candidate_gradient(d, memory, times, candidate, target):
         mean_gradient_norm=float(norm.mean()))
 
 
-def ranking(d, g, z, observed, prefix):
-    memory = encode(d.writer, observed[:, :prefix])
+def ranking(d, g, z, observed, prefix, write_strength=None):
     times = torch.full((len(z),), prefix, device=z.device)
+    if write_strength is None:
+        memory = encode(d.writer, observed[:, :prefix])
+    else:
+        previous = encode(d.writer, observed[:, :prefix-1])
+        proposal, _ = h.local_point(g, z, previous, times-1)
+        memory = d.writer.write(previous,
+            (1-write_strength)*observed[:, prefix-1]+write_strength*proposal)
     actual = observed[:, prefix]
     real_score = d.score_candidate(actual, memory, times)
     positions = times[:, None]
@@ -95,6 +101,9 @@ def diagnose(path, device='cpu', restore=True):
     z = prior(torch.arange(len(clean), device=device))
     result = dict(name=cfg.name, source=str(path), device=device, steps=cfg.steps,
         ranking={f'prefix{n}': ranking(d, g, z, observed, n) for n in (8, 32, 48)})
+    result['ranking_after_write'] = {str(strength): {
+        f'prefix{n}': ranking(d, g, z, observed, n, strength) for n in (8, 32, 48)}
+        for strength in (.25, 1.)}
     if restore:
         start, duration = 288, 128
         initial_memory = encode(d.writer, observed[:, :32])
@@ -136,6 +145,8 @@ if __name__ == '__main__':
         'Point head ranks actual noisy next point against nearest/shuffled other-episode continuations, '
         'earlier/later real points and generated next point. Nearest donors chosen by prior observation only. '
         'These are relative rankings, not calibrated probabilities or guaranteed impossible negatives. '
+        'Ranking-after-write replaces only the last prefix observation with a blend of observed and '
+        'generated point at strength .25 or1; same original targets and causal donors. '
         'Late restoration: after256 autonomous updates from prefix32, clock288, compare autonomous state '
         'with true observed prefix288 state or true most-recent32 observations encoded from zero. '
         'Recent32 clock32 is a clock control. Same particle/device and reference position; generate128 '

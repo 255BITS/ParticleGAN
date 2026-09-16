@@ -1,0 +1,152 @@
+[
+  {
+    "name": "match_shuffle25",
+    "step": 2000,
+    "device": "cuda:0",
+    "recipe_matches_saved": true,
+    "replay_max_abs_error": {
+      "generated": 0.0,
+      "prefix8": 0.0,
+      "prefix32": 0.0
+    },
+    "warm_prefix32": {
+      "1": {
+        "mean_radial_rmse": 0.051971174864972915,
+        "mean_position_error_relative": 0.08768916344375562,
+        "radial_pass_count": 106,
+        "direction_pass_count": 126,
+        "speed_pass_count": 35,
+        "startup_pass_count": 126,
+        "joint_threshold_count": 33
+      },
+      "8": {
+        "mean_radial_rmse": 0.2978216737383598,
+        "mean_position_error_relative": 0.45428170603365714,
+        "radial_pass_count": 23,
+        "direction_pass_count": 103,
+        "speed_pass_count": 27,
+        "startup_pass_count": 126,
+        "joint_threshold_count": 8
+      },
+      "32": {
+        "mean_radial_rmse": 0.5786143153711278,
+        "mean_position_error_relative": 1.2369639935512549,
+        "radial_pass_count": 0,
+        "direction_pass_count": 17,
+        "speed_pass_count": 8,
+        "startup_pass_count": 126,
+        "joint_threshold_count": 0
+      },
+      "64": {
+        "mean_radial_rmse": 0.6078167190573555,
+        "mean_position_error_relative": 1.37487806244867,
+        "radial_pass_count": 0,
+        "direction_pass_count": 1,
+        "speed_pass_count": 2,
+        "startup_pass_count": 126,
+        "joint_threshold_count": 0
+      },
+      "256": {
+        "mean_radial_rmse": 0.8647926699204296,
+        "mean_position_error_relative": 1.6404379179993835,
+        "radial_pass_count": 0,
+        "direction_pass_count": 0,
+        "speed_pass_count": 1,
+        "startup_pass_count": 126,
+        "joint_threshold_count": 0
+      },
+      "1024": {
+        "mean_radial_rmse": 0.9446613434530298,
+        "mean_position_error_relative": 1.732987160813132,
+        "radial_pass_count": 0,
+        "direction_pass_count": 0,
+        "speed_pass_count": 2,
+        "startup_pass_count": 126,
+        "joint_threshold_count": 0
+      }
+    },
+    "pair_matches_runtime_max_abs_error": 0.0,
+    "point_matches_runtime_max_abs_error": 0.0,
+    "clean_point_bcap": {
+      "value": 0.0001225967425853014,
+      "writer_gradient_max_abs": 0.0,
+      "note": "Clean prefix32, clean next target, generated fake. GAN losses still train writer."
+    },
+    "short_window_note": "Threshold diagnostics only; short windows are not full-circle success."
+  },
+  {
+    "name": "match_shuffle25_5k",
+    "step": 5000,
+    "device": "cuda:0",
+    "recipe_matches_saved": true,
+    "replay_max_abs_error": {
+      "generated": 0.0,
+      "prefix8": 0.0,
+      "prefix32": 0.0
+    },
+    "warm_prefix32": {
+      "1": {
+        "mean_radial_rmse": 0.051900082543942655,
+        "mean_position_error_relative": 0.08158739475116558,
+        "radial_pass_count": 113,
+        "direction_pass_count": 127,
+        "speed_pass_count": 44,
+        "startup_pass_count": 128,
+        "joint_threshold_count": 40
+      },
+      "8": {
+        "mean_radial_rmse": 0.26410807050886836,
+        "mean_position_error_relative": 0.3718241099809923,
+        "radial_pass_count": 17,
+        "direction_pass_count": 117,
+        "speed_pass_count": 31,
+        "startup_pass_count": 128,
+        "joint_threshold_count": 7
+      },
+      "32": {
+        "mean_radial_rmse": 0.45043113870221185,
+        "mean_position_error_relative": 0.9858689473661393,
+        "radial_pass_count": 1,
+        "direction_pass_count": 53,
+        "speed_pass_count": 26,
+        "startup_pass_count": 128,
+        "joint_threshold_count": 0
+      },
+      "64": {
+        "mean_radial_rmse": 0.5447659020548884,
+        "mean_position_error_relative": 1.2393047626540188,
+        "radial_pass_count": 0,
+        "direction_pass_count": 22,
+        "speed_pass_count": 8,
+        "startup_pass_count": 128,
+        "joint_threshold_count": 0
+      },
+      "256": {
+        "mean_radial_rmse": 0.8639680878878164,
+        "mean_position_error_relative": 1.6177241291863755,
+        "radial_pass_count": 0,
+        "direction_pass_count": 0,
+        "speed_pass_count": 1,
+        "startup_pass_count": 128,
+        "joint_threshold_count": 0
+      },
+      "1024": {
+        "mean_radial_rmse": 0.9119996917251841,
+        "mean_position_error_relative": 1.6845177745759625,
+        "radial_pass_count": 0,
+        "direction_pass_count": 0,
+        "speed_pass_count": 0,
+        "startup_pass_count": 128,
+        "joint_threshold_count": 0
+      }
+    },
+    "pair_matches_runtime_max_abs_error": 0.0,
+    "point_matches_runtime_max_abs_error": 0.0,
+    "clean_point_bcap": {
+      "value": 0.00010381839820183814,
+      "writer_gradient_max_abs": 0.0,
+      "note": "Clean prefix32, clean next target, generated fake. GAN losses still train writer."
+    },
+    "short_window_note": "Threshold diagnostics only; short windows are not full-circle success."
+  }
+]

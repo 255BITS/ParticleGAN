@@ -1,0 +1,49 @@
+{
+  "done": 5,
+  "failed": 0,
+  "devices": [
+    "cuda:0",
+    "cuda:1"
+  ],
+  "queue_wall_seconds": 967.8901925086975,
+  "training_gpu_seconds": 1609.1867558849626,
+  "identical_training_sources": true,
+  "sources": {
+    "memory_handoff_scout.py": "69fee78098eb074c21fe30192d41fc67a3fdb022ea116b1c1ae0d1c51f8ba7a4",
+    "memory_local_objectives.py": "5d2fada9b08b8ef9b3886c7c91fa9ab5f2a681e260fce2eb19cbd92505b00dc6",
+    "memory_g_recurrent.py": "e522c478ce536f40bf8029d1127ba7039276610d25b9ac9657684d40094f64e3",
+    "memory_recent.py": "5a1aaa2c869dcca40682f4230c06bbcbcf0e7640c4970d1c924ef5664b9f64f6",
+    "memory_core_scout.py": "71e1206048bab1bb4e4b8f089ba1041f001726e4d3bf6a4b83ad98768001a2a0",
+    "memory_scout.py": "59008372a273543a3bcc163f85e808abbf5a7c152929e38c047c60c340b00d0e",
+    "autonomous_memory.py": "a8b697c1c4ef5b2516f2c0445a3a6f8eeceb73b3a9a03a3127efd5dfdf75c3d5",
+    "memory_path.py": "18178fa48c8b109ee71d3f679bdcfc1b0775b22f1f879fd877dafdf859a40e0f"
+  },
+  "reference_and_observed_prefixes_bitwise_equal_baseline": true,
+  "runs": [
+    {
+      "name": "future_clean10",
+      "train_seconds": 302.7636791499972,
+      "seconds_per_update": 0.1513818395749986
+    },
+    {
+      "name": "future_mixed10",
+      "train_seconds": 327.59910916298395,
+      "seconds_per_update": 0.16379955458149198
+    },
+    {
+      "name": "future_full10",
+      "train_seconds": 325.43476828499115,
+      "seconds_per_update": 0.16271738414249556
+    },
+    {
+      "name": "future_mixed25",
+      "train_seconds": 333.6183935859881,
+      "seconds_per_update": 0.16680919679299405
+    },
+    {
+      "name": "future_mixed10_detachwrite",
+      "train_seconds": 319.77080570100225,
+      "seconds_per_update": 0.15988540285050112
+    }
+  ]
+}

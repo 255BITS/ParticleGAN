@@ -1,0 +1,2008 @@
+{
+  "evaluation_only": true,
+  "definition": "Completed models only. Saved original continuation-reference panel and observed prefix32; fixed NumPy noise seed12012 elsewhere, matching local-signal diagnostic. At prefixes8/32 rank actual x[t+h] against nearest/shuffled other-episode x[t+h], h=0/4/12. Donors are selected once by original last-prefix observations, never targets or generated proposals. All horizons and donors share each cached memory: either clean real prefix, or replace only its last observation with a full model-generated sample made at t-1 using the same fixed particle. The scorer receives current t and explicit horizon h. Models without horizon conditioning ignore h. Each model supplies its own generated corruption, so after-write results are not a comparison of discriminators on identical corrupted memories. Rankings are relative, not calibrated probabilities; mismatched futures may be plausible. No optimizer, loss, or generated trajectory training is used. Absolute score offsets across models are not comparable.",
+  "results": [
+    {
+      "name": "match_shuffle25",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/match_shuffle25",
+      "steps": 2000,
+      "device": "cpu",
+      "horizon_conditioned": false,
+      "horizon_bands": 0,
+      "prefixes": {
+        "8": {
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 6.657659530639648,
+                "actual_score_std": 0.29316824674606323,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.9296875,
+                    "mean_margin": 0.2707671821117401,
+                    "median_margin": 0.21918725967407227,
+                    "negative_score_mean": 6.386891841888428,
+                    "negative_score_std": 0.39756298065185547
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 1.0,
+                    "mean_margin": 1.6389409303665161,
+                    "median_margin": 1.535355567932129,
+                    "negative_score_mean": 5.018718719482422,
+                    "negative_score_std": 0.973207414150238
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 5.6051530838012695,
+                "actual_score_std": 0.644223690032959,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.640625,
+                    "mean_margin": 0.22043505311012268,
+                    "median_margin": 0.2288503646850586,
+                    "negative_score_mean": 5.384716987609863,
+                    "negative_score_std": 0.6968270540237427
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.71875,
+                    "mean_margin": 0.5293871760368347,
+                    "median_margin": 0.5432634353637695,
+                    "negative_score_mean": 5.075765132904053,
+                    "negative_score_std": 0.9900568127632141
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 4.754916667938232,
+                "actual_score_std": 0.7281771898269653,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.4609375,
+                    "mean_margin": -0.10861019790172577,
+                    "median_margin": -0.1024017333984375,
+                    "negative_score_mean": 4.863526344299316,
+                    "negative_score_std": 0.736478328704834
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.375,
+                    "mean_margin": -0.3392840623855591,
+                    "median_margin": -0.38781166076660156,
+                    "negative_score_mean": 5.09420108795166,
+                    "negative_score_std": 1.054986596107483
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 6.621516227722168,
+                "actual_score_std": 0.32136374711990356,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.9140625,
+                    "mean_margin": 0.26667773723602295,
+                    "median_margin": 0.2670574188232422,
+                    "negative_score_mean": 6.3548383712768555,
+                    "negative_score_std": 0.41260701417922974
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 1.0,
+                    "mean_margin": 1.608020305633545,
+                    "median_margin": 1.5175557136535645,
+                    "negative_score_mean": 5.013496398925781,
+                    "negative_score_std": 0.9973866939544678
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 5.5720953941345215,
+                "actual_score_std": 0.6951202154159546,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.6015625,
+                    "mean_margin": 0.2123304009437561,
+                    "median_margin": 0.1618328094482422,
+                    "negative_score_mean": 5.359764575958252,
+                    "negative_score_std": 0.7033848166465759
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.7109375,
+                    "mean_margin": 0.4999901354312897,
+                    "median_margin": 0.4903140068054199,
+                    "negative_score_mean": 5.072104454040527,
+                    "negative_score_std": 1.004822015762329
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 4.7301836013793945,
+                "actual_score_std": 0.7345696091651917,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.453125,
+                    "mean_margin": -0.11607468873262405,
+                    "median_margin": -0.11699056625366211,
+                    "negative_score_mean": 4.846258163452148,
+                    "negative_score_std": 0.7442424893379211
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.3828125,
+                    "mean_margin": -0.33378103375434875,
+                    "median_margin": -0.3719463348388672,
+                    "negative_score_mean": 5.063964366912842,
+                    "negative_score_std": 1.055324912071228
+                  }
+                }
+              }
+            }
+          }
+        },
+        "32": {
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 6.6302032470703125,
+                "actual_score_std": 0.2636854350566864,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8828125,
+                    "mean_margin": 0.23062492907047272,
+                    "median_margin": 0.1827077865600586,
+                    "negative_score_mean": 6.399578094482422,
+                    "negative_score_std": 0.32562610507011414
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 1.0,
+                    "mean_margin": 1.6711715459823608,
+                    "median_margin": 1.7252392768859863,
+                    "negative_score_mean": 4.959031581878662,
+                    "negative_score_std": 0.9347533583641052
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 5.589967250823975,
+                "actual_score_std": 0.5819645524024963,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.578125,
+                    "mean_margin": 0.1601070761680603,
+                    "median_margin": 0.10658836364746094,
+                    "negative_score_mean": 5.429859638214111,
+                    "negative_score_std": 0.6071475148200989
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.71875,
+                    "mean_margin": 0.6724767088890076,
+                    "median_margin": 0.7028422355651855,
+                    "negative_score_mean": 4.917490005493164,
+                    "negative_score_std": 0.9233613610267639
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 4.715351104736328,
+                "actual_score_std": 0.6716500520706177,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.484375,
+                    "mean_margin": -0.06801941990852356,
+                    "median_margin": -0.03678417205810547,
+                    "negative_score_mean": 4.783370494842529,
+                    "negative_score_std": 0.6757486462593079
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.3984375,
+                    "mean_margin": -0.21457983553409576,
+                    "median_margin": -0.2663083076477051,
+                    "negative_score_mean": 4.929930686950684,
+                    "negative_score_std": 0.9176799058914185
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 6.608769416809082,
+                "actual_score_std": 0.2638983726501465,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.859375,
+                    "mean_margin": 0.2175966203212738,
+                    "median_margin": 0.18169450759887695,
+                    "negative_score_mean": 6.391172409057617,
+                    "negative_score_std": 0.33287158608436584
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.984375,
+                    "mean_margin": 1.6437093019485474,
+                    "median_margin": 1.695328712463379,
+                    "negative_score_mean": 4.965059757232666,
+                    "negative_score_std": 0.9275261759757996
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 5.539697170257568,
+                "actual_score_std": 0.603602945804596,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.5859375,
+                    "mean_margin": 0.12331529706716537,
+                    "median_margin": 0.11914396286010742,
+                    "negative_score_mean": 5.4163818359375,
+                    "negative_score_std": 0.5917407870292664
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.703125,
+                    "mean_margin": 0.6045296788215637,
+                    "median_margin": 0.6469936370849609,
+                    "negative_score_mean": 4.9351677894592285,
+                    "negative_score_std": 0.9075438380241394
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 4.705881118774414,
+                "actual_score_std": 0.6625987887382507,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.4921875,
+                    "mean_margin": -0.07631571590900421,
+                    "median_margin": -0.04742717742919922,
+                    "negative_score_mean": 4.782196521759033,
+                    "negative_score_std": 0.6683182716369629
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.4140625,
+                    "mean_margin": -0.2285529226064682,
+                    "median_margin": -0.2642354965209961,
+                    "negative_score_mean": 4.934433937072754,
+                    "negative_score_std": 0.9161531329154968
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "match_shuffle25_5k",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12_followup/runs/match_shuffle25_5k",
+      "steps": 5000,
+      "device": "cpu",
+      "horizon_conditioned": false,
+      "horizon_bands": 0,
+      "prefixes": {
+        "8": {
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 5.354949474334717,
+                "actual_score_std": 0.24336715042591095,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.953125,
+                    "mean_margin": 0.2956996560096741,
+                    "median_margin": 0.2692909240722656,
+                    "negative_score_mean": 5.059249401092529,
+                    "negative_score_std": 0.33187195658683777
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 1.0,
+                    "mean_margin": 1.6459898948669434,
+                    "median_margin": 1.535689353942871,
+                    "negative_score_mean": 3.7089598178863525,
+                    "negative_score_std": 0.9253384470939636
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 4.310380935668945,
+                "actual_score_std": 0.6139591336250305,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.640625,
+                    "mean_margin": 0.23711539804935455,
+                    "median_margin": 0.2264571189880371,
+                    "negative_score_mean": 4.073265552520752,
+                    "negative_score_std": 0.6529868841171265
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.71875,
+                    "mean_margin": 0.5488165616989136,
+                    "median_margin": 0.5485124588012695,
+                    "negative_score_mean": 3.761564254760742,
+                    "negative_score_std": 0.9438357353210449
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 3.439701795578003,
+                "actual_score_std": 0.6580555438995361,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.4453125,
+                    "mean_margin": -0.12200042605400085,
+                    "median_margin": -0.10648918151855469,
+                    "negative_score_mean": 3.561702013015747,
+                    "negative_score_std": 0.6594252586364746
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.3671875,
+                    "mean_margin": -0.34240812063217163,
+                    "median_margin": -0.39732885360717773,
+                    "negative_score_mean": 3.7821099758148193,
+                    "negative_score_std": 0.9964057207107544
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 5.334321975708008,
+                "actual_score_std": 0.2543668746948242,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8828125,
+                    "mean_margin": 0.27999240159988403,
+                    "median_margin": 0.260406494140625,
+                    "negative_score_mean": 5.0543293952941895,
+                    "negative_score_std": 0.33013349771499634
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 1.0,
+                    "mean_margin": 1.6063807010650635,
+                    "median_margin": 1.4839146137237549,
+                    "negative_score_mean": 3.7279410362243652,
+                    "negative_score_std": 0.9183263778686523
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 4.301590442657471,
+                "actual_score_std": 0.6326087117195129,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.625,
+                    "mean_margin": 0.22651158273220062,
+                    "median_margin": 0.21786069869995117,
+                    "negative_score_mean": 4.075078964233398,
+                    "negative_score_std": 0.6481088995933533
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.6953125,
+                    "mean_margin": 0.5171500444412231,
+                    "median_margin": 0.48319339752197266,
+                    "negative_score_mean": 3.784440517425537,
+                    "negative_score_std": 0.9404388070106506
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 3.4477057456970215,
+                "actual_score_std": 0.6431208252906799,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.453125,
+                    "mean_margin": -0.11308326572179794,
+                    "median_margin": -0.12608861923217773,
+                    "negative_score_mean": 3.560788631439209,
+                    "negative_score_std": 0.6521419882774353
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.375,
+                    "mean_margin": -0.32501739263534546,
+                    "median_margin": -0.37612318992614746,
+                    "negative_score_mean": 3.7727227210998535,
+                    "negative_score_std": 0.9941393136978149
+                  }
+                }
+              }
+            }
+          }
+        },
+        "32": {
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 5.372838020324707,
+                "actual_score_std": 0.19996903836727142,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.890625,
+                    "mean_margin": 0.24963074922561646,
+                    "median_margin": 0.20260000228881836,
+                    "negative_score_mean": 5.123206615447998,
+                    "negative_score_std": 0.29106059670448303
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 1.0,
+                    "mean_margin": 1.6806237697601318,
+                    "median_margin": 1.7315900325775146,
+                    "negative_score_mean": 3.692214012145996,
+                    "negative_score_std": 0.9005624651908875
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 4.326637268066406,
+                "actual_score_std": 0.5167259573936462,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.609375,
+                    "mean_margin": 0.168593168258667,
+                    "median_margin": 0.11277008056640625,
+                    "negative_score_mean": 4.15804386138916,
+                    "negative_score_std": 0.5547303557395935
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.71875,
+                    "mean_margin": 0.6726840138435364,
+                    "median_margin": 0.6998069286346436,
+                    "negative_score_mean": 3.6539530754089355,
+                    "negative_score_std": 0.8870808482170105
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 3.4484105110168457,
+                "actual_score_std": 0.5989344716072083,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.5078125,
+                    "mean_margin": -0.06723429262638092,
+                    "median_margin": 0.012939691543579102,
+                    "negative_score_mean": 3.5156450271606445,
+                    "negative_score_std": 0.5997745990753174
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.4140625,
+                    "mean_margin": -0.21249966323375702,
+                    "median_margin": -0.2827036380767822,
+                    "negative_score_mean": 3.660910129547119,
+                    "negative_score_std": 0.8481303453445435
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 5.355813026428223,
+                "actual_score_std": 0.19908657670021057,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8984375,
+                    "mean_margin": 0.23283939063549042,
+                    "median_margin": 0.1928415298461914,
+                    "negative_score_mean": 5.122973442077637,
+                    "negative_score_std": 0.2925466299057007
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.984375,
+                    "mean_margin": 1.651806354522705,
+                    "median_margin": 1.6636457443237305,
+                    "negative_score_mean": 3.704007148742676,
+                    "negative_score_std": 0.8919918537139893
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 4.294746398925781,
+                "actual_score_std": 0.5083345770835876,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.609375,
+                    "mean_margin": 0.1349184215068817,
+                    "median_margin": 0.1598963737487793,
+                    "negative_score_mean": 4.159828186035156,
+                    "negative_score_std": 0.5434616208076477
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.7109375,
+                    "mean_margin": 0.6255499720573425,
+                    "median_margin": 0.6497118473052979,
+                    "negative_score_mean": 3.669196605682373,
+                    "negative_score_std": 0.881087064743042
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 3.441007614135742,
+                "actual_score_std": 0.5803804993629456,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.5,
+                    "mean_margin": -0.0793156623840332,
+                    "median_margin": -0.05271339416503906,
+                    "negative_score_mean": 3.5203232765197754,
+                    "negative_score_std": 0.5918374061584473
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.4140625,
+                    "mean_margin": -0.22231143712997437,
+                    "median_margin": -0.24842119216918945,
+                    "negative_score_mean": 3.6633191108703613,
+                    "negative_score_std": 0.8514891266822815
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "future_clean10",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/information_round14/runs/future_clean10",
+      "steps": 2000,
+      "device": "cpu",
+      "horizon_conditioned": true,
+      "horizon_bands": 4,
+      "prefixes": {
+        "8": {
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 10.365691184997559,
+                "actual_score_std": 0.8127442002296448,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.9140625,
+                    "mean_margin": 0.2927280068397522,
+                    "median_margin": 0.2543802261352539,
+                    "negative_score_mean": 10.072962760925293,
+                    "negative_score_std": 0.9037522673606873
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 1.0,
+                    "mean_margin": 1.6191809177398682,
+                    "median_margin": 1.4898605346679688,
+                    "negative_score_mean": 8.74651050567627,
+                    "negative_score_std": 1.2166690826416016
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 9.539108276367188,
+                "actual_score_std": 0.7018514275550842,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.7890625,
+                    "mean_margin": 0.598172128200531,
+                    "median_margin": 0.5876388549804688,
+                    "negative_score_mean": 8.940936088562012,
+                    "negative_score_std": 1.0263526439666748
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.875,
+                    "mean_margin": 0.9014719128608704,
+                    "median_margin": 0.841090202331543,
+                    "negative_score_mean": 8.637636184692383,
+                    "negative_score_std": 1.1054233312606812
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 3.4504218101501465,
+                "actual_score_std": 0.6481451988220215,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.6171875,
+                    "mean_margin": 0.17328916490077972,
+                    "median_margin": 0.07712602615356445,
+                    "negative_score_mean": 3.277132749557495,
+                    "negative_score_std": 0.6182128190994263
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.6640625,
+                    "mean_margin": 0.27415013313293457,
+                    "median_margin": 0.17026114463806152,
+                    "negative_score_mean": 3.176271677017212,
+                    "negative_score_std": 0.7121244668960571
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 10.260846138000488,
+                "actual_score_std": 0.8826479911804199,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8828125,
+                    "mean_margin": 0.2855512201786041,
+                    "median_margin": 0.2542152404785156,
+                    "negative_score_mean": 9.975295066833496,
+                    "negative_score_std": 0.9658714532852173
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.984375,
+                    "mean_margin": 1.5804566144943237,
+                    "median_margin": 1.459085464477539,
+                    "negative_score_mean": 8.680389404296875,
+                    "negative_score_std": 1.258670449256897
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 9.44064712524414,
+                "actual_score_std": 0.7835925221443176,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.765625,
+                    "mean_margin": 0.5543662309646606,
+                    "median_margin": 0.5557346343994141,
+                    "negative_score_mean": 8.88628101348877,
+                    "negative_score_std": 1.0791950225830078
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.8515625,
+                    "mean_margin": 0.8383412957191467,
+                    "median_margin": 0.8160829544067383,
+                    "negative_score_mean": 8.60230541229248,
+                    "negative_score_std": 1.159953236579895
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 3.4380486011505127,
+                "actual_score_std": 0.6674210429191589,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.6015625,
+                    "mean_margin": 0.1709926277399063,
+                    "median_margin": 0.0873250961303711,
+                    "negative_score_mean": 3.2670559883117676,
+                    "negative_score_std": 0.6301120519638062
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.671875,
+                    "mean_margin": 0.26339226961135864,
+                    "median_margin": 0.1572740077972412,
+                    "negative_score_mean": 3.174656391143799,
+                    "negative_score_std": 0.716732382774353
+                  }
+                }
+              }
+            }
+          }
+        },
+        "32": {
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 10.256138801574707,
+                "actual_score_std": 0.9137424826622009,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8828125,
+                    "mean_margin": 0.23766587674617767,
+                    "median_margin": 0.20598983764648438,
+                    "negative_score_mean": 10.018472671508789,
+                    "negative_score_std": 0.9315811395645142
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.9921875,
+                    "mean_margin": 1.6518354415893555,
+                    "median_margin": 1.694265365600586,
+                    "negative_score_mean": 8.604303359985352,
+                    "negative_score_std": 1.201110601425171
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 9.485776901245117,
+                "actual_score_std": 0.8099330067634583,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.7265625,
+                    "mean_margin": 0.49894601106643677,
+                    "median_margin": 0.5377845764160156,
+                    "negative_score_mean": 8.986831665039062,
+                    "negative_score_std": 0.9962661266326904
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.8046875,
+                    "mean_margin": 0.9491467475891113,
+                    "median_margin": 0.9751129150390625,
+                    "negative_score_mean": 8.536630630493164,
+                    "negative_score_std": 1.0615421533584595
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 3.437725782394409,
+                "actual_score_std": 0.7157155871391296,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.5390625,
+                    "mean_margin": 0.08824950456619263,
+                    "median_margin": 0.03130292892456055,
+                    "negative_score_mean": 3.3494763374328613,
+                    "negative_score_std": 0.7194485664367676
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.609375,
+                    "mean_margin": 0.22234590351581573,
+                    "median_margin": 0.09747958183288574,
+                    "negative_score_mean": 3.2153799533843994,
+                    "negative_score_std": 0.7567572593688965
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 10.116693496704102,
+                "actual_score_std": 0.9351076483726501,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.84375,
+                    "mean_margin": 0.21442706882953644,
+                    "median_margin": 0.21358203887939453,
+                    "negative_score_mean": 9.902265548706055,
+                    "negative_score_std": 0.9737654328346252
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.984375,
+                    "mean_margin": 1.615495204925537,
+                    "median_margin": 1.634735107421875,
+                    "negative_score_mean": 8.501198768615723,
+                    "negative_score_std": 1.2310302257537842
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 9.33343505859375,
+                "actual_score_std": 0.8036583065986633,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.71875,
+                    "mean_margin": 0.4340420067310333,
+                    "median_margin": 0.45398807525634766,
+                    "negative_score_mean": 8.899393081665039,
+                    "negative_score_std": 1.0067055225372314
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.7734375,
+                    "mean_margin": 0.8642842769622803,
+                    "median_margin": 0.946965217590332,
+                    "negative_score_mean": 8.469148635864258,
+                    "negative_score_std": 1.0719822645187378
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 3.4218294620513916,
+                "actual_score_std": 0.6853055357933044,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.546875,
+                    "mean_margin": 0.08599715679883957,
+                    "median_margin": 0.04568195343017578,
+                    "negative_score_mean": 3.335832357406616,
+                    "negative_score_std": 0.6829841732978821
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.625,
+                    "mean_margin": 0.22429074347019196,
+                    "median_margin": 0.1067967414855957,
+                    "negative_score_mean": 3.1975388526916504,
+                    "negative_score_std": 0.7218176126480103
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "future_mixed10",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/information_round14/runs/future_mixed10",
+      "steps": 2000,
+      "device": "cpu",
+      "horizon_conditioned": true,
+      "horizon_bands": 4,
+      "prefixes": {
+        "8": {
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 10.866294860839844,
+                "actual_score_std": 0.8738459348678589,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8828125,
+                    "mean_margin": 0.2897545099258423,
+                    "median_margin": 0.2728300094604492,
+                    "negative_score_mean": 10.57654094696045,
+                    "negative_score_std": 0.9498956203460693
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 1.0,
+                    "mean_margin": 1.6149723529815674,
+                    "median_margin": 1.5701923370361328,
+                    "negative_score_mean": 9.251323699951172,
+                    "negative_score_std": 1.2314057350158691
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 10.432938575744629,
+                "actual_score_std": 0.7448790669441223,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.765625,
+                    "mean_margin": 0.6243041753768921,
+                    "median_margin": 0.6008749008178711,
+                    "negative_score_mean": 9.808633804321289,
+                    "negative_score_std": 1.0656040906906128
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.8515625,
+                    "mean_margin": 0.917267918586731,
+                    "median_margin": 0.8573732376098633,
+                    "negative_score_mean": 9.515670776367188,
+                    "negative_score_std": 1.1114786863327026
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 5.086097240447998,
+                "actual_score_std": 0.7065495252609253,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.625,
+                    "mean_margin": 0.1850595623254776,
+                    "median_margin": 0.10534858703613281,
+                    "negative_score_mean": 4.901037693023682,
+                    "negative_score_std": 0.7080692648887634
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.65625,
+                    "mean_margin": 0.2804810404777527,
+                    "median_margin": 0.23885440826416016,
+                    "negative_score_mean": 4.80561637878418,
+                    "negative_score_std": 0.7670966386795044
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 10.830970764160156,
+                "actual_score_std": 0.9103992581367493,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.859375,
+                    "mean_margin": 0.2813953757286072,
+                    "median_margin": 0.2741107940673828,
+                    "negative_score_mean": 10.549575805664062,
+                    "negative_score_std": 0.9722791910171509
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 1.0,
+                    "mean_margin": 1.5663901567459106,
+                    "median_margin": 1.510793685913086,
+                    "negative_score_mean": 9.264581680297852,
+                    "negative_score_std": 1.2697055339813232
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 10.410149574279785,
+                "actual_score_std": 0.803843080997467,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.78125,
+                    "mean_margin": 0.5834013223648071,
+                    "median_margin": 0.6018095016479492,
+                    "negative_score_mean": 9.826749801635742,
+                    "negative_score_std": 1.0779953002929688
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.859375,
+                    "mean_margin": 0.8639244437217712,
+                    "median_margin": 0.8321189880371094,
+                    "negative_score_mean": 9.546225547790527,
+                    "negative_score_std": 1.1519492864608765
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 5.106770038604736,
+                "actual_score_std": 0.7353499531745911,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.609375,
+                    "mean_margin": 0.18175773322582245,
+                    "median_margin": 0.10618019104003906,
+                    "negative_score_mean": 4.925012111663818,
+                    "negative_score_std": 0.729806661605835
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.65625,
+                    "mean_margin": 0.268682599067688,
+                    "median_margin": 0.22258472442626953,
+                    "negative_score_mean": 4.838087558746338,
+                    "negative_score_std": 0.7966514229774475
+                  }
+                }
+              }
+            }
+          }
+        },
+        "32": {
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 10.713788986206055,
+                "actual_score_std": 0.9850621223449707,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.890625,
+                    "mean_margin": 0.2388901710510254,
+                    "median_margin": 0.20562171936035156,
+                    "negative_score_mean": 10.474899291992188,
+                    "negative_score_std": 0.9776831269264221
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.9921875,
+                    "mean_margin": 1.645606279373169,
+                    "median_margin": 1.7153387069702148,
+                    "negative_score_mean": 9.068183898925781,
+                    "negative_score_std": 1.1867666244506836
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 10.340739250183105,
+                "actual_score_std": 0.8630131483078003,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.7265625,
+                    "mean_margin": 0.5094448328018188,
+                    "median_margin": 0.4753894805908203,
+                    "negative_score_mean": 9.831295013427734,
+                    "negative_score_std": 1.0240432024002075
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.8125,
+                    "mean_margin": 0.9731519818305969,
+                    "median_margin": 1.015578269958496,
+                    "negative_score_mean": 9.367587089538574,
+                    "negative_score_std": 1.0542105436325073
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 4.982147216796875,
+                "actual_score_std": 0.8033972382545471,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.5390625,
+                    "mean_margin": 0.07119384407997131,
+                    "median_margin": 0.01827716827392578,
+                    "negative_score_mean": 4.910953998565674,
+                    "negative_score_std": 0.82522052526474
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.6171875,
+                    "mean_margin": 0.21374623477458954,
+                    "median_margin": 0.13341331481933594,
+                    "negative_score_mean": 4.768402099609375,
+                    "negative_score_std": 0.8781469464302063
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 10.63037109375,
+                "actual_score_std": 0.9789993166923523,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.859375,
+                    "mean_margin": 0.21602904796600342,
+                    "median_margin": 0.18479442596435547,
+                    "negative_score_mean": 10.414341926574707,
+                    "negative_score_std": 0.991662859916687
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.984375,
+                    "mean_margin": 1.6150339841842651,
+                    "median_margin": 1.659804344177246,
+                    "negative_score_mean": 9.015336036682129,
+                    "negative_score_std": 1.194549798965454
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 10.222424507141113,
+                "actual_score_std": 0.8435528874397278,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.7109375,
+                    "mean_margin": 0.44941776990890503,
+                    "median_margin": 0.34478759765625,
+                    "negative_score_mean": 9.773008346557617,
+                    "negative_score_std": 1.0204728841781616
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.765625,
+                    "mean_margin": 0.8920148015022278,
+                    "median_margin": 0.9299488067626953,
+                    "negative_score_mean": 9.33041000366211,
+                    "negative_score_std": 1.0486235618591309
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 4.977813243865967,
+                "actual_score_std": 0.7559971213340759,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.5078125,
+                    "mean_margin": 0.06965384632349014,
+                    "median_margin": 0.007324695587158203,
+                    "negative_score_mean": 4.908160209655762,
+                    "negative_score_std": 0.774446964263916
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.6328125,
+                    "mean_margin": 0.22086843848228455,
+                    "median_margin": 0.13962268829345703,
+                    "negative_score_mean": 4.75694465637207,
+                    "negative_score_std": 0.8442962169647217
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "future_full10",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/information_round14/runs/future_full10",
+      "steps": 2000,
+      "device": "cpu",
+      "horizon_conditioned": true,
+      "horizon_bands": 4,
+      "prefixes": {
+        "8": {
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 10.884639739990234,
+                "actual_score_std": 0.8362159729003906,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.9140625,
+                    "mean_margin": 0.29403775930404663,
+                    "median_margin": 0.2546195983886719,
+                    "negative_score_mean": 10.590601921081543,
+                    "negative_score_std": 0.9078052639961243
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 1.0,
+                    "mean_margin": 1.6212519407272339,
+                    "median_margin": 1.5337810516357422,
+                    "negative_score_mean": 9.263387680053711,
+                    "negative_score_std": 1.2145682573318481
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 9.990763664245605,
+                "actual_score_std": 0.9273194074630737,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.7578125,
+                    "mean_margin": 0.5459870100021362,
+                    "median_margin": 0.5410251617431641,
+                    "negative_score_mean": 9.444777488708496,
+                    "negative_score_std": 1.1585551500320435
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.859375,
+                    "mean_margin": 0.8543416261672974,
+                    "median_margin": 0.8535900115966797,
+                    "negative_score_mean": 9.136423110961914,
+                    "negative_score_std": 1.2110860347747803
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 4.26287317276001,
+                "actual_score_std": 0.5854557156562805,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.5859375,
+                    "mean_margin": 0.18568897247314453,
+                    "median_margin": 0.09453868865966797,
+                    "negative_score_mean": 4.077184677124023,
+                    "negative_score_std": 0.6131519079208374
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.6640625,
+                    "mean_margin": 0.28843581676483154,
+                    "median_margin": 0.1964550018310547,
+                    "negative_score_mean": 3.9744374752044678,
+                    "negative_score_std": 0.6908831000328064
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 10.854917526245117,
+                "actual_score_std": 0.8666952848434448,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8828125,
+                    "mean_margin": 0.2897464334964752,
+                    "median_margin": 0.27404308319091797,
+                    "negative_score_mean": 10.565170288085938,
+                    "negative_score_std": 0.9174128770828247
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.9921875,
+                    "mean_margin": 1.5819979906082153,
+                    "median_margin": 1.5438041687011719,
+                    "negative_score_mean": 9.272917747497559,
+                    "negative_score_std": 1.2343473434448242
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 9.973065376281738,
+                "actual_score_std": 0.9783032536506653,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.75,
+                    "mean_margin": 0.514849066734314,
+                    "median_margin": 0.5767002105712891,
+                    "negative_score_mean": 9.458215713500977,
+                    "negative_score_std": 1.1795741319656372
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.8515625,
+                    "mean_margin": 0.808080792427063,
+                    "median_margin": 0.7892961502075195,
+                    "negative_score_mean": 9.164984703063965,
+                    "negative_score_std": 1.2470587491989136
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 4.278700828552246,
+                "actual_score_std": 0.6020345687866211,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.6015625,
+                    "mean_margin": 0.18445774912834167,
+                    "median_margin": 0.11099624633789062,
+                    "negative_score_mean": 4.094243049621582,
+                    "negative_score_std": 0.6181039214134216
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.671875,
+                    "mean_margin": 0.2783200144767761,
+                    "median_margin": 0.1726546287536621,
+                    "negative_score_mean": 4.000380992889404,
+                    "negative_score_std": 0.6928983330726624
+                  }
+                }
+              }
+            }
+          }
+        },
+        "32": {
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 10.7337007522583,
+                "actual_score_std": 0.9366493225097656,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8828125,
+                    "mean_margin": 0.23874402046203613,
+                    "median_margin": 0.20123863220214844,
+                    "negative_score_mean": 10.494956016540527,
+                    "negative_score_std": 0.9328882098197937
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.9921875,
+                    "mean_margin": 1.6543221473693848,
+                    "median_margin": 1.6810979843139648,
+                    "negative_score_mean": 9.079378128051758,
+                    "negative_score_std": 1.1803102493286133
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 9.855395317077637,
+                "actual_score_std": 1.0360171794891357,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.7265625,
+                    "mean_margin": 0.45241037011146545,
+                    "median_margin": 0.46356201171875,
+                    "negative_score_mean": 9.402986526489258,
+                    "negative_score_std": 1.1473973989486694
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.8046875,
+                    "mean_margin": 0.9094871282577515,
+                    "median_margin": 0.9494681358337402,
+                    "negative_score_mean": 8.945908546447754,
+                    "negative_score_std": 1.1594090461730957
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 4.222792625427246,
+                "actual_score_std": 0.6968560814857483,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.546875,
+                    "mean_margin": 0.08268006891012192,
+                    "median_margin": 0.032802581787109375,
+                    "negative_score_mean": 4.140112400054932,
+                    "negative_score_std": 0.7233136296272278
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.640625,
+                    "mean_margin": 0.23941127955913544,
+                    "median_margin": 0.11142158508300781,
+                    "negative_score_mean": 3.9833810329437256,
+                    "negative_score_std": 0.763982892036438
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 10.678874015808105,
+                "actual_score_std": 0.918553352355957,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8359375,
+                    "mean_margin": 0.2142190933227539,
+                    "median_margin": 0.17083168029785156,
+                    "negative_score_mean": 10.464654922485352,
+                    "negative_score_std": 0.9329053163528442
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.984375,
+                    "mean_margin": 1.6308319568634033,
+                    "median_margin": 1.613560676574707,
+                    "negative_score_mean": 9.048041343688965,
+                    "negative_score_std": 1.1787903308868408
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 9.755290031433105,
+                "actual_score_std": 1.000714898109436,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.6953125,
+                    "mean_margin": 0.3929343521595001,
+                    "median_margin": 0.3466682434082031,
+                    "negative_score_mean": 9.362356185913086,
+                    "negative_score_std": 1.1281275749206543
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.7734375,
+                    "mean_margin": 0.8333895802497864,
+                    "median_margin": 0.8327655792236328,
+                    "negative_score_mean": 8.921899795532227,
+                    "negative_score_std": 1.1281487941741943
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 4.2316131591796875,
+                "actual_score_std": 0.6756836771965027,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.5234375,
+                    "mean_margin": 0.08161718398332596,
+                    "median_margin": 0.01975536346435547,
+                    "negative_score_mean": 4.149996280670166,
+                    "negative_score_std": 0.6909552812576294
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.65625,
+                    "mean_margin": 0.24383360147476196,
+                    "median_margin": 0.12513017654418945,
+                    "negative_score_mean": 3.987779378890991,
+                    "negative_score_std": 0.7383381128311157
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "future_mixed25",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/information_round14/runs/future_mixed25",
+      "steps": 2000,
+      "device": "cpu",
+      "horizon_conditioned": true,
+      "horizon_bands": 4,
+      "prefixes": {
+        "8": {
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 9.449346542358398,
+                "actual_score_std": 1.064937710762024,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8671875,
+                    "mean_margin": 0.2692728042602539,
+                    "median_margin": 0.21866703033447266,
+                    "negative_score_mean": 9.180074691772461,
+                    "negative_score_std": 1.1303216218948364
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.9921875,
+                    "mean_margin": 1.5762046575546265,
+                    "median_margin": 1.506439208984375,
+                    "negative_score_mean": 7.873142242431641,
+                    "negative_score_std": 1.3310401439666748
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 10.31391716003418,
+                "actual_score_std": 1.0702016353607178,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8515625,
+                    "mean_margin": 0.9095855355262756,
+                    "median_margin": 0.8468971252441406,
+                    "negative_score_mean": 9.404332160949707,
+                    "negative_score_std": 1.3253264427185059
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.9453125,
+                    "mean_margin": 1.2136764526367188,
+                    "median_margin": 1.2347164154052734,
+                    "negative_score_mean": 9.100241661071777,
+                    "negative_score_std": 1.3053319454193115
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 1.0463541746139526,
+                "actual_score_std": 0.7840096950531006,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.6484375,
+                    "mean_margin": 0.27767881751060486,
+                    "median_margin": 0.16444694995880127,
+                    "negative_score_mean": 0.7686754465103149,
+                    "negative_score_std": 0.8973950147628784
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.65625,
+                    "mean_margin": 0.37629181146621704,
+                    "median_margin": 0.2353087067604065,
+                    "negative_score_mean": 0.6700624823570251,
+                    "negative_score_std": 0.9367917776107788
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 9.356937408447266,
+                "actual_score_std": 1.1205772161483765,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8515625,
+                    "mean_margin": 0.2679961323738098,
+                    "median_margin": 0.2557516098022461,
+                    "negative_score_mean": 9.08894157409668,
+                    "negative_score_std": 1.1821421384811401
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.984375,
+                    "mean_margin": 1.5317555665969849,
+                    "median_margin": 1.5095539093017578,
+                    "negative_score_mean": 7.82518196105957,
+                    "negative_score_std": 1.3377119302749634
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 10.153658866882324,
+                "actual_score_std": 1.1031354665756226,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.7890625,
+                    "mean_margin": 0.7871059775352478,
+                    "median_margin": 0.7635383605957031,
+                    "negative_score_mean": 9.36655330657959,
+                    "negative_score_std": 1.3782583475112915
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.90625,
+                    "mean_margin": 1.067861795425415,
+                    "median_margin": 1.0866613388061523,
+                    "negative_score_mean": 9.085797309875488,
+                    "negative_score_std": 1.3500871658325195
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 1.0849403142929077,
+                "actual_score_std": 0.7898283004760742,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.640625,
+                    "mean_margin": 0.2803557813167572,
+                    "median_margin": 0.12640082836151123,
+                    "negative_score_mean": 0.8045845031738281,
+                    "negative_score_std": 0.8887341618537903
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.703125,
+                    "mean_margin": 0.37626081705093384,
+                    "median_margin": 0.23920166492462158,
+                    "negative_score_mean": 0.7086794972419739,
+                    "negative_score_std": 0.9308834075927734
+                  }
+                }
+              }
+            }
+          }
+        },
+        "32": {
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 9.294692039489746,
+                "actual_score_std": 1.1430180072784424,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.828125,
+                    "mean_margin": 0.22901858389377594,
+                    "median_margin": 0.19757461547851562,
+                    "negative_score_mean": 9.065673828125,
+                    "negative_score_std": 1.172166347503662
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.984375,
+                    "mean_margin": 1.631339430809021,
+                    "median_margin": 1.6797127723693848,
+                    "negative_score_mean": 7.6633524894714355,
+                    "negative_score_std": 1.3586314916610718
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 10.286728858947754,
+                "actual_score_std": 1.0617165565490723,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8046875,
+                    "mean_margin": 0.8470856547355652,
+                    "median_margin": 0.8380832672119141,
+                    "negative_score_mean": 9.439643859863281,
+                    "negative_score_std": 1.2911553382873535
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.8984375,
+                    "mean_margin": 1.300154685974121,
+                    "median_margin": 1.3114118576049805,
+                    "negative_score_mean": 8.98657512664795,
+                    "negative_score_std": 1.2030433416366577
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 0.9888784885406494,
+                "actual_score_std": 0.6114420294761658,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.59375,
+                    "mean_margin": 0.15443545579910278,
+                    "median_margin": 0.06548884510993958,
+                    "negative_score_mean": 0.8344429731369019,
+                    "negative_score_std": 0.6965683102607727
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.6640625,
+                    "mean_margin": 0.3310565948486328,
+                    "median_margin": 0.23290324211120605,
+                    "negative_score_mean": 0.6578218936920166,
+                    "negative_score_std": 0.7981213331222534
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 9.239455223083496,
+                "actual_score_std": 1.115012526512146,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8125,
+                    "mean_margin": 0.20722967386245728,
+                    "median_margin": 0.18440628051757812,
+                    "negative_score_mean": 9.0322265625,
+                    "negative_score_std": 1.1593178510665894
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.984375,
+                    "mean_margin": 1.6014704704284668,
+                    "median_margin": 1.6465682983398438,
+                    "negative_score_mean": 7.6379852294921875,
+                    "negative_score_std": 1.3335227966308594
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 10.166145324707031,
+                "actual_score_std": 1.0604133605957031,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8125,
+                    "mean_margin": 0.7459702491760254,
+                    "median_margin": 0.593623161315918,
+                    "negative_score_mean": 9.42017650604248,
+                    "negative_score_std": 1.2701573371887207
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.90625,
+                    "mean_margin": 1.1768451929092407,
+                    "median_margin": 1.1162347793579102,
+                    "negative_score_mean": 8.989300727844238,
+                    "negative_score_std": 1.1965185403823853
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 1.0070134401321411,
+                "actual_score_std": 0.5675148963928223,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.5859375,
+                    "mean_margin": 0.16248291730880737,
+                    "median_margin": 0.07899942994117737,
+                    "negative_score_mean": 0.8445306420326233,
+                    "negative_score_std": 0.6440661549568176
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.6796875,
+                    "mean_margin": 0.35236647725105286,
+                    "median_margin": 0.23583871126174927,
+                    "negative_score_mean": 0.6546470522880554,
+                    "negative_score_std": 0.7651650309562683
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "future_mixed10_detachwrite",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/information_round14/runs/future_mixed10_detachwrite",
+      "steps": 2000,
+      "device": "cpu",
+      "horizon_conditioned": true,
+      "horizon_bands": 4,
+      "prefixes": {
+        "8": {
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 10.233363151550293,
+                "actual_score_std": 0.9025700688362122,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.890625,
+                    "mean_margin": 0.28854697942733765,
+                    "median_margin": 0.25661468505859375,
+                    "negative_score_mean": 9.944815635681152,
+                    "negative_score_std": 0.9836859703063965
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 1.0,
+                    "mean_margin": 1.62565016746521,
+                    "median_margin": 1.489518165588379,
+                    "negative_score_mean": 8.607712745666504,
+                    "negative_score_std": 1.2690517902374268
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 10.797013282775879,
+                "actual_score_std": 0.7181538343429565,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.734375,
+                    "mean_margin": 0.5074099898338318,
+                    "median_margin": 0.502840518951416,
+                    "negative_score_mean": 10.289603233337402,
+                    "negative_score_std": 0.9857903718948364
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.8359375,
+                    "mean_margin": 0.7878783941268921,
+                    "median_margin": 0.769740104675293,
+                    "negative_score_mean": 10.009134292602539,
+                    "negative_score_std": 1.0559978485107422
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 3.6618258953094482,
+                "actual_score_std": 0.5489351749420166,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.6015625,
+                    "mean_margin": 0.13058240711688995,
+                    "median_margin": 0.07167935371398926,
+                    "negative_score_mean": 3.531243085861206,
+                    "negative_score_std": 0.5361235737800598
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.6796875,
+                    "mean_margin": 0.2545272707939148,
+                    "median_margin": 0.20473217964172363,
+                    "negative_score_mean": 3.4072985649108887,
+                    "negative_score_std": 0.628450334072113
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 8,
+                "actual_score_mean": 10.154318809509277,
+                "actual_score_std": 0.9420917630195618,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8671875,
+                    "mean_margin": 0.270236998796463,
+                    "median_margin": 0.26409149169921875,
+                    "negative_score_mean": 9.884082794189453,
+                    "negative_score_std": 1.0036264657974243
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.9921875,
+                    "mean_margin": 1.5901740789413452,
+                    "median_margin": 1.4995403289794922,
+                    "negative_score_mean": 8.5641450881958,
+                    "negative_score_std": 1.2931910753250122
+                  }
+                }
+              },
+              "4": {
+                "target_index": 12,
+                "actual_score_mean": 10.70709228515625,
+                "actual_score_std": 0.7968194484710693,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.7421875,
+                    "mean_margin": 0.45024004578590393,
+                    "median_margin": 0.39813995361328125,
+                    "negative_score_mean": 10.256853103637695,
+                    "negative_score_std": 1.0136749744415283
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.8046875,
+                    "mean_margin": 0.7215070724487305,
+                    "median_margin": 0.6691169738769531,
+                    "negative_score_mean": 9.98558521270752,
+                    "negative_score_std": 1.08076012134552
+                  }
+                }
+              },
+              "12": {
+                "target_index": 20,
+                "actual_score_mean": 3.657651424407959,
+                "actual_score_std": 0.5602105855941772,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.5859375,
+                    "mean_margin": 0.12323970347642899,
+                    "median_margin": 0.0444178581237793,
+                    "negative_score_mean": 3.534411668777466,
+                    "negative_score_std": 0.5464329719543457
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.671875,
+                    "mean_margin": 0.24420124292373657,
+                    "median_margin": 0.1563122272491455,
+                    "negative_score_mean": 3.413450241088867,
+                    "negative_score_std": 0.637612521648407
+                  }
+                }
+              }
+            }
+          }
+        },
+        "32": {
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "contexts": {
+            "clean": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 10.063240051269531,
+                "actual_score_std": 0.9902795553207397,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.875,
+                    "mean_margin": 0.23484772443771362,
+                    "median_margin": 0.20150089263916016,
+                    "negative_score_mean": 9.828392028808594,
+                    "negative_score_std": 0.9903372526168823
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.9921875,
+                    "mean_margin": 1.6522555351257324,
+                    "median_margin": 1.6952180862426758,
+                    "negative_score_mean": 8.410984992980957,
+                    "negative_score_std": 1.2376697063446045
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 10.708634376525879,
+                "actual_score_std": 0.8181259036064148,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.71875,
+                    "mean_margin": 0.4271864891052246,
+                    "median_margin": 0.4222841262817383,
+                    "negative_score_mean": 10.281449317932129,
+                    "negative_score_std": 0.9438318014144897
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.8046875,
+                    "mean_margin": 0.8595848083496094,
+                    "median_margin": 0.8763952255249023,
+                    "negative_score_mean": 9.849050521850586,
+                    "negative_score_std": 1.0054291486740112
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 3.6100261211395264,
+                "actual_score_std": 0.6411269307136536,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.546875,
+                    "mean_margin": 0.05754193291068077,
+                    "median_margin": 0.029306411743164062,
+                    "negative_score_mean": 3.5524845123291016,
+                    "negative_score_std": 0.6514365077018738
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.640625,
+                    "mean_margin": 0.19465069472789764,
+                    "median_margin": 0.1316373348236084,
+                    "negative_score_mean": 3.4153757095336914,
+                    "negative_score_std": 0.6961250305175781
+                  }
+                }
+              }
+            },
+            "generated_write": {
+              "0": {
+                "target_index": 32,
+                "actual_score_mean": 9.9158296585083,
+                "actual_score_std": 0.9862418174743652,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.8359375,
+                    "mean_margin": 0.20924535393714905,
+                    "median_margin": 0.19329357147216797,
+                    "negative_score_mean": 9.706584930419922,
+                    "negative_score_std": 1.0079184770584106
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.984375,
+                    "mean_margin": 1.6220747232437134,
+                    "median_margin": 1.6096735000610352,
+                    "negative_score_mean": 8.293754577636719,
+                    "negative_score_std": 1.24270761013031
+                  }
+                }
+              },
+              "4": {
+                "target_index": 36,
+                "actual_score_mean": 10.547659873962402,
+                "actual_score_std": 0.8283270597457886,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.7109375,
+                    "mean_margin": 0.3509216904640198,
+                    "median_margin": 0.3256378173828125,
+                    "negative_score_mean": 10.196737289428711,
+                    "negative_score_std": 0.9600787162780762
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.7890625,
+                    "mean_margin": 0.7760971784591675,
+                    "median_margin": 0.7928457260131836,
+                    "negative_score_mean": 9.771562576293945,
+                    "negative_score_std": 1.0161263942718506
+                  }
+                }
+              },
+              "12": {
+                "target_index": 44,
+                "actual_score_mean": 3.579455852508545,
+                "actual_score_std": 0.609803318977356,
+                "donors": {
+                  "nearest": {
+                    "correct_rank_fraction": 0.5390625,
+                    "mean_margin": 0.05705718696117401,
+                    "median_margin": 0.018403053283691406,
+                    "negative_score_mean": 3.5223987102508545,
+                    "negative_score_std": 0.6144114136695862
+                  },
+                  "shuffle": {
+                    "correct_rank_fraction": 0.640625,
+                    "mean_margin": 0.19439727067947388,
+                    "median_margin": 0.11856842041015625,
+                    "negative_score_mean": 3.385058879852295,
+                    "negative_score_std": 0.6689457893371582
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

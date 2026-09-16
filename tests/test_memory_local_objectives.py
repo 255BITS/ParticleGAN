@@ -147,11 +147,13 @@ def test_all_objectives_exact_resume_no_mse(tmp_path, monkeypatch):
         out.mkdir()
         cfg = config(name=name, steps=steps, schedule_steps=10, batch_size=4,
             eval_batch=4, eval_steps=256, resume=resume, mismatch_weight=.25,
+            mismatch_context='mixed', mismatch_write_strength=1., mismatch_ramp_steps=3,
             recovery_noise=.1, future_weight=.1, future_query_bands=4)
         h.train(cfg, out, 'cpu', lambda **kw: None)
         meta = json.loads((out/'config.json').read_text())
         assert meta['max_sequential_generated_writes'] == 1
         assert meta['reader_calls_g_phase'] == 14
+        assert meta['reader_calls_d_phase'] == 16
         return torch.load(out/'model.pt', weights_only=False)
     full = run('full', 4)
     run('first', 2)
@@ -159,3 +161,75 @@ def test_all_objectives_exact_resume_no_mse(tmp_path, monkeypatch):
     for key in ('generator', 'critic', 'prior', 'rngs'):
         for name, value in full[key].items():
             torch.testing.assert_close(value, resumed[key][name], rtol=0, atol=0)
+
+
+@pytest.mark.parametrize('context', ['mixed', 'explored'])
+@pytest.mark.parametrize('writer_grad', [True, False])
+def test_mismatch_generated_context_causal_timing_and_gradient_ownership(context, writer_grad):
+    cfg = config(mismatch_weight=.25, mismatch_kind='shuffle', mismatch_context=context,
+                 mismatch_write_strength=.8, mismatch_ramp_steps=4, mismatch_writer_grad=writer_grad)
+    g, d, p, recipe = h.build(cfg, 'cpu')
+    real, pos, z = inputs(g, p)
+    pos.fill_(8)
+    times = pos.flatten()+19
+    valid, _ = o.mismatch_indices(real, pos, cfg.mismatch_kind)
+    calls = []
+    def capture(module, args, kwargs, output):
+        calls.append((args[0].clone(), args[1].clone(), kwargs['time_index'].clone(), output[0]))
+    hook = g.register_forward_hook(capture, with_kwargs=True)
+    contexts = o.mismatch_contexts(cfg, g, d, real, pos, times, z, valid, 2)
+    hook.remove()
+    assert len(calls) == 1 and not calls[0][3].requires_grad
+    torch.testing.assert_close(calls[0][0], z[valid])
+    torch.testing.assert_close(calls[0][2], times[valid]-1)
+    previous = h.selected_memories(d.writer, real, pos-1, 8)[valid]
+    torch.testing.assert_close(calls[0][1], previous)
+    expected = d.writer.write(previous, .6*real[:, 7:8].expand(-1, 4, -1).flatten(0, 1)+.4*calls[0][3])
+    torch.testing.assert_close(contexts[-1][1], expected)
+    assert sum(w for w, _ in contexts) == 1
+    assert len(contexts) == (2 if context == 'mixed' else 1)
+    altered = real.clone()
+    altered[:, 8:] += 100
+    changed = o.mismatch_contexts(cfg, g, d, altered, pos, times, z, valid, 2)
+    for (_, a), (_, b) in zip(contexts, changed):
+        torch.testing.assert_close(a, b, rtol=0, atol=0)
+    with torch.no_grad():
+        d.handoff_head[-1].weight.mul_(1000)
+    loss, reg, _ = o.mismatch_objective(cfg, d, real, real, pos, times,
+        recipe.make_loss(), recipe.make_gradient_penalty(), 1, generator=g, z=z)
+    assert reg.item() > 0
+    (loss+reg).backward()
+    assert any(v.grad is not None and v.grad.abs().sum() > 0 for v in d.handoff_head.parameters())
+    assert any(v.grad is not None and v.grad.abs().sum() > 0 for v in d.writer.parameters()) == writer_grad
+    assert all(v.grad is None for v in g.parameters())
+    assert all(v.grad is None for v in p.parameters())
+
+
+def test_clean_mismatch_matches_original_objective_exactly():
+    cfg = config(mismatch_weight=.25, mismatch_kind='shuffle')
+    g, d, p, recipe = h.build(cfg, 'cpu')
+    real, pos, _ = inputs(g, p)
+    valid, donor = o.mismatch_indices(real, pos, cfg.mismatch_kind)
+    memory = h.selected_memories(d.writer, real, pos, cfg.max_prefix)[valid]
+    targets = real[torch.arange(len(real))[:, None], pos].flatten(0, 1)
+    view = h.CandidateView(d, memory, pos.flatten()[valid])
+    with torch.no_grad():
+        d.handoff_head[-1].weight.mul_(1000)
+    expected = recipe.make_loss().d_loss(view(targets[valid]), view(targets[donor]))
+    expected_reg = recipe.make_gradient_penalty()(view, targets[valid], targets[donor], step=1)
+    loss, reg, _ = o.mismatch_objective(cfg, d, real, real, pos, pos.flatten(),
+        recipe.make_loss(), recipe.make_gradient_penalty(), 1)
+    torch.testing.assert_close(loss, expected, rtol=0, atol=0)
+    torch.testing.assert_close(reg, expected_reg, rtol=0, atol=0)
+
+
+def test_diagnostic_zero_strength_write_matches_clean_ranking():
+    from experiments.diagnose_memory_local_signal import ranking
+    cfg = config()
+    g, d, p, _ = h.build(cfg, 'cpu')
+    real, _, _ = inputs(g, p)
+    with torch.no_grad():
+        z = p(torch.arange(3))
+        clean = ranking(d, g, z, real, 8)
+        replaced = ranking(d, g, z, real, 8, write_strength=0.)
+    assert clean == replaced
