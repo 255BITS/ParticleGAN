@@ -6,7 +6,17 @@ Preserve unrelated `.claude/`, `results/motion/`, and `sparse-ucd.log` files.
 
 ## Current objective and working choice
 
-The user wants to improve the autonomous results next, after compaction.
+The user wants to plan and run a set of scout experiments next pass, after
+compaction. Read the [staged scout plan](../autonomous-memory/SCOUTS.md) before
+implementing. Nothing from that plan has been launched. The latest discussion
+added GRU writers, private G recurrence, memory-state drift diagnostics, and
+NTM/persistent-memory ideas; it did not select a final architecture.
+
+Important: current training already feeds generated points into memory and
+backpropagates G through that recurrence. Generated writes are not inference-only.
+The remaining concerns are late-state drift, recurrent attractors, and training
+quality; D differentiating through G into its writer is a separate proposal.
+
 **Use the learned writer as the primary development model; retain frozen writer
 as a comparison.** This is our recommended working choice, not an established
 scientific winner or a user decision to discard either mechanism. Frozen leads
@@ -14,14 +24,16 @@ on circle passes, but its successful late circles at horizon 64 all rotate
 counterclockwise. Learned stops less often and retains both directions. We have
 not demonstrated an overall advantage for learning the writer.
 
-Recommended next experiment: add short-window adversarial scores and an explicit
+The earlier recommended next experiment was to add short-window adversarial scores and an explicit
 cold-prefix score alongside the full 64-step trajectory score. Keep 64-step
 rollouts, fixed particles, zero memory, and 256-step cold evaluation. The
 hypothesis is clearer feedback for local motion and startup alongside whole-orbit
 consistency. This is not implemented yet. A short-to-long curriculum is another
 candidate if optimization remains difficult. Preserve direction coverage and
 initial-position spread in the leaderboard; improving circle geometry alone is
-not enough. Do not claim success from late-only refitted circles.
+not enough. Do not claim success from late-only refitted circles. Following the
+architecture discussion, the proposed first scout pair is a D-owned GRU writer
+versus its frozen counterpart; window/prefix scoring is a separate scout wave.
 
 ## User constraints
 
