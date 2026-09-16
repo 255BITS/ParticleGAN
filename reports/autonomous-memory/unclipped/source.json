@@ -1,0 +1,8 @@
+{
+  "base_commit": "4c336da7c967f729c3c5cadabc94fe2d58d0b630",
+  "training_source_patch": "clipping-removal.patch",
+  "sha256": {
+    "autonomous_memory.py": "a8b697c1c4ef5b2516f2c0445a3a6f8eeceb73b3a9a03a3127efd5dfdf75c3d5",
+    "memory_path.py": "18178fa48c8b109ee71d3f679bdcfc1b0775b22f1f879fd877dafdf859a40e0f"
+  }
+}

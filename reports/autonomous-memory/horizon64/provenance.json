@@ -1,0 +1,58 @@
+{
+  "runs/memory_path/autonomous_h64_2k/shared_run": {
+    "torch": "2.14.0+cu130",
+    "python": "3.12.13 (main, Jul 18 2026, 17:02:19) [Clang 22.1.3 ]",
+    "argv": [
+      "experiments/autonomous_memory.py",
+      "--out",
+      "runs/memory_path/autonomous_h64_2k/shared_run",
+      "--device",
+      "cuda:0",
+      "--steps",
+      "2000",
+      "--batch-size",
+      "128",
+      "--train-length",
+      "64",
+      "--eval-steps",
+      "256",
+      "--eval-batch",
+      "128",
+      "--log-every",
+      "100",
+      "--variants",
+      "shared"
+    ],
+    "git_head": "4c336da7c967f729c3c5cadabc94fe2d58d0b630",
+    "device": "cuda:0",
+    "gpu": "NVIDIA RTX A6000"
+  },
+  "runs/memory_path/autonomous_h64_2k/frozen_writer_run": {
+    "torch": "2.14.0+cu130",
+    "python": "3.12.13 (main, Jul 18 2026, 17:02:19) [Clang 22.1.3 ]",
+    "argv": [
+      "experiments/autonomous_memory.py",
+      "--out",
+      "runs/memory_path/autonomous_h64_2k/frozen_writer_run",
+      "--device",
+      "cuda:1",
+      "--steps",
+      "2000",
+      "--batch-size",
+      "128",
+      "--train-length",
+      "64",
+      "--eval-steps",
+      "256",
+      "--eval-batch",
+      "128",
+      "--log-every",
+      "100",
+      "--variants",
+      "frozen_writer"
+    ],
+    "git_head": "4c336da7c967f729c3c5cadabc94fe2d58d0b630",
+    "device": "cuda:1",
+    "gpu": "NVIDIA RTX A6000"
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "shared": {
+    "full": {
+      "radius": 1.1069793361588713,
+      "relative_radial_rmse": 0.3955658574339992,
+      "late_radius_drift": 0.2818568992900361,
+      "angular_speed": 0.21988802324963386,
+      "direction_consistency": 0.7722732843137254,
+      "signed_angular_speed": 0.053691008494900855,
+      "circle_like_fraction": 0.0078125,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0,
+      "mean_step_length": 0.29697697183649496,
+      "initial_position_spread": 1.0940528861945937,
+      "radius_std": 0.21593432980108662
+    },
+    "last_128_refit": {
+      "radius": 1.3787349055853484,
+      "relative_radial_rmse": 0.1678332313637456,
+      "late_radius_drift": 0.027324445090835106,
+      "angular_speed": 0.26015216817494635,
+      "direction_consistency": 0.9019795422768415,
+      "signed_angular_speed": 0.08335796535624035,
+      "circle_like_fraction": 0.234375,
+      "valid_fit_fraction": 0.8359375,
+      "stationary_fraction": 0.1640625,
+      "mean_step_length": 0.30258546516522516,
+      "initial_position_spread": 1.403425255917687,
+      "radius_std": 0.23302779216161695
+    },
+    "first_16_mean_step": 0.25164341926574707,
+    "last_64_mean_step": 0.3026873469352722,
+    "last_64_stationary_fraction": 0.1640625,
+    "prefix_circle_like": {
+      "16": 0.1484375,
+      "32": 0.0,
+      "64": 0.015625,
+      "128": 0.0078125,
+      "256": 0.0078125
+    },
+    "training": {
+      "variant": "shared",
+      "config": {
+        "out": "runs/memory_path/autonomous_unclipped_2k",
+        "steps": 2000,
+        "device": "cuda:0",
+        "batch_size": 128,
+        "train_length": 16,
+        "eval_steps": 256,
+        "eval_batch": 128,
+        "log_every": 100,
+        "variants": [
+          "shared",
+          "frozen_writer"
+        ],
+        "variant": "shared",
+        "recipe": {
+          "name": "gan",
+          "model": "gan",
+          "z_dim": 4,
+          "num_particles": 512,
+          "num_classes": null,
+          "conditioning": "scalar",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 128,
+          "total_steps": 2000,
+          "lr": 0.0006,
+          "d_lr_mult": 1.5,
+          "prior_lr_mult": 10.0,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "loss_type": "logistic",
+          "gan_mode": "rp",
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "reg_every": 1,
+          "reg_method": "autograd",
+          "prior_reg": 1.0,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05
+        },
+        "seed": 42,
+        "particle_policy": "fixed_per_trajectory",
+        "initial_state": "zeros",
+        "real_prefix": false,
+        "writer_training": "D only; both real and detached fake sequence scoring",
+        "g_state_gradient": "full rollout; writer weights frozen",
+        "ema": false,
+        "gradient_clipping": null
+      },
+      "metrics": {
+        "generated": {
+          "radius": 1.1069793361588713,
+          "relative_radial_rmse": 0.3955658574339992,
+          "late_radius_drift": 0.2818568992900361,
+          "angular_speed": 0.21988802324963386,
+          "direction_consistency": 0.7722732843137254,
+          "signed_angular_speed": 0.053691008494900855,
+          "circle_like_fraction": 0.0078125,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.0,
+          "mean_step_length": 0.29697697183649496,
+          "initial_position_spread": 1.0940528861945937,
+          "radius_std": 0.21593432980108662
+        },
+        "real_noisy": {
+          "radius": 1.044069980680499,
+          "relative_radial_rmse": 0.0315619089502717,
+          "late_radius_drift": 0.004823866095384679,
+          "angular_speed": 0.26063808294612567,
+          "direction_consistency": 0.9988357843137254,
+          "signed_angular_speed": -0.0056897599875547315,
+          "circle_like_fraction": 0.9921875,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.0,
+          "mean_step_length": 0.2716097133991474,
+          "initial_position_spread": 1.1802413930148004,
+          "radius_std": 0.23280653968838744
+        },
+        "real_clean": {
+          "radius": 1.0442119731797264,
+          "relative_radial_rmse": 4.001100333100868e-08,
+          "late_radius_drift": 6.562904528856217e-09,
+          "angular_speed": 0.2606352832485096,
+          "direction_consistency": 1.0,
+          "signed_angular_speed": -0.00568155077431467,
+          "circle_like_fraction": 1.0,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.0,
+          "mean_step_length": 0.26778835803357076,
+          "initial_position_spread": 1.1784997094874166,
+          "radius_std": 0.23322086484416507
+        }
+      },
+      "seconds": 104.22
+    }
+  },
+  "frozen_writer": {
+    "full": {
+      "radius": 1.116199070652094,
+      "relative_radial_rmse": 0.4059189292293279,
+      "late_radius_drift": 0.2564674645984045,
+      "angular_speed": 0.20969904840768744,
+      "direction_consistency": 0.6716299019607843,
+      "signed_angular_speed": -0.0124406811716117,
+      "circle_like_fraction": 0.0,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.03125,
+      "mean_step_length": 0.2845875343943899,
+      "initial_position_spread": 1.146516722835052,
+      "radius_std": 0.34396264620899697
+    },
+    "last_128_refit": {
+      "radius": 1.3511980828291623,
+      "relative_radial_rmse": 0.22971254782727826,
+      "late_radius_drift": 0.10150325285129788,
+      "angular_speed": 0.23213168865123343,
+      "direction_consistency": 0.7684113015284852,
+      "signed_angular_speed": 0.004252432177337208,
+      "circle_like_fraction": 0.1171875,
+      "valid_fit_fraction": 0.9296875,
+      "stationary_fraction": 0.125,
+      "mean_step_length": 0.2912953792667685,
+      "initial_position_spread": 1.3618146438888559,
+      "radius_std": 0.6914347525629018
+    },
+    "first_16_mean_step": 0.24067071080207825,
+    "last_64_mean_step": 0.29127317667007446,
+    "last_64_stationary_fraction": 0.125,
+    "prefix_circle_like": {
+      "16": 0.1171875,
+      "32": 0.015625,
+      "64": 0.0078125,
+      "128": 0.0,
+      "256": 0.0
+    },
+    "training": {
+      "variant": "frozen_writer",
+      "config": {
+        "out": "runs/memory_path/autonomous_unclipped_2k",
+        "steps": 2000,
+        "device": "cuda:0",
+        "batch_size": 128,
+        "train_length": 16,
+        "eval_steps": 256,
+        "eval_batch": 128,
+        "log_every": 100,
+        "variants": [
+          "shared",
+          "frozen_writer"
+        ],
+        "variant": "frozen_writer",
+        "recipe": {
+          "name": "gan",
+          "model": "gan",
+          "z_dim": 4,
+          "num_particles": 512,
+          "num_classes": null,
+          "conditioning": "scalar",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 128,
+          "total_steps": 2000,
+          "lr": 0.0006,
+          "d_lr_mult": 1.5,
+          "prior_lr_mult": 10.0,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "loss_type": "logistic",
+          "gan_mode": "rp",
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "reg_every": 1,
+          "reg_method": "autograd",
+          "prior_reg": 1.0,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05
+        },
+        "seed": 42,
+        "particle_policy": "fixed_per_trajectory",
+        "initial_state": "zeros",
+        "real_prefix": false,
+        "writer_training": "D only; both real and detached fake sequence scoring",
+        "g_state_gradient": "full rollout; writer weights frozen",
+        "ema": false,
+        "gradient_clipping": null
+      },
+      "metrics": {
+        "generated": {
+          "radius": 1.116199070652094,
+          "relative_radial_rmse": 0.4059189292293279,
+          "late_radius_drift": 0.2564674645984045,
+          "angular_speed": 0.20969904840768744,
+          "direction_consistency": 0.6716299019607843,
+          "signed_angular_speed": -0.0124406811716117,
+          "circle_like_fraction": 0.0,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.03125,
+          "mean_step_length": 0.2845875343943899,
+          "initial_position_spread": 1.146516722835052,
+          "radius_std": 0.34396264620899697
+        },
+        "real_noisy": {
+          "radius": 1.044069980680499,
+          "relative_radial_rmse": 0.0315619089502717,
+          "late_radius_drift": 0.004823866095384679,
+          "angular_speed": 0.26063808294612567,
+          "direction_consistency": 0.9988357843137254,
+          "signed_angular_speed": -0.0056897599875547315,
+          "circle_like_fraction": 0.9921875,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.0,
+          "mean_step_length": 0.2716097133991474,
+          "initial_position_spread": 1.1802413930148004,
+          "radius_std": 0.23280653968838744
+        },
+        "real_clean": {
+          "radius": 1.0442119731797264,
+          "relative_radial_rmse": 4.001100333100868e-08,
+          "late_radius_drift": 6.562904528856217e-09,
+          "angular_speed": 0.2606352832485096,
+          "direction_consistency": 1.0,
+          "signed_angular_speed": -0.00568155077431467,
+          "circle_like_fraction": 1.0,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.0,
+          "mean_step_length": 0.26778835803357076,
+          "initial_position_spread": 1.1784997094874166,
+          "radius_std": 0.23322086484416507
+        }
+      },
+      "seconds": 85.93
+    }
+  },
+  "real_noisy": {
+    "full": {
+      "radius": 1.044069980680499,
+      "relative_radial_rmse": 0.0315619089502717,
+      "late_radius_drift": 0.004823866095384679,
+      "angular_speed": 0.26063808294612567,
+      "direction_consistency": 0.9988357843137254,
+      "signed_angular_speed": -0.0056897599875547315,
+      "circle_like_fraction": 0.9921875,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0,
+      "mean_step_length": 0.2716097133991474,
+      "initial_position_spread": 1.1802413930148004,
+      "radius_std": 0.23280653968838744
+    },
+    "last_128_refit": {
+      "radius": 1.0450222997068825,
+      "relative_radial_rmse": 0.03144641473347207,
+      "late_radius_drift": 0.00681156004720475,
+      "angular_speed": 0.26067393378771675,
+      "direction_consistency": 0.9987696850393701,
+      "signed_angular_speed": -0.005693016161730954,
+      "circle_like_fraction": 0.9921875,
+      "valid_fit_fraction": 1.0,
+      "stationary_fraction": 0.0,
+      "mean_step_length": 0.27168523778480413,
+      "initial_position_spread": 1.2358690960688115,
+      "radius_std": 0.23281598210458926
+    },
+    "first_16_mean_step": 0.2716236710548401,
+    "last_64_mean_step": 0.2716481685638428,
+    "last_64_stationary_fraction": 0.0,
+    "prefix_circle_like": {
+      "16": 0.7421875,
+      "32": 0.984375,
+      "64": 0.9921875,
+      "128": 0.9921875,
+      "256": 0.9921875
+    }
+  }
+}

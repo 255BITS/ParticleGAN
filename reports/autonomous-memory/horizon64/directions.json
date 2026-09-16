@@ -1,0 +1,27 @@
+{
+  "shared_h16": {
+    "late_circle_count": 30,
+    "late_circle_ccw": 26,
+    "late_circle_cw": 4
+  },
+  "real_noisy": {
+    "late_circle_count": 127,
+    "late_circle_ccw": 62,
+    "late_circle_cw": 65
+  },
+  "shared_h64": {
+    "late_circle_count": 34,
+    "late_circle_ccw": 24,
+    "late_circle_cw": 10
+  },
+  "frozen_writer_h16": {
+    "late_circle_count": 15,
+    "late_circle_ccw": 8,
+    "late_circle_cw": 7
+  },
+  "frozen_writer_h64": {
+    "late_circle_count": 44,
+    "late_circle_ccw": 44,
+    "late_circle_cw": 0
+  }
+}

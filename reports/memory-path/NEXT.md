@@ -1,151 +1,151 @@
-# Continuation: autonomous generation is now the target
+# Continuation: solve autonomous circle quality and coverage
 
-Read this first after compaction. Branch: `feat/sequential-memory-path`.
-Experiment code, tests, reports and these notes are committed on this branch.
-Preserve the user's unrelated `.claude/`,
-`results/motion/`, and `sparse-ucd.log` files.
+Branch: `feat/sequential-memory-path`. Code, reports, and this handoff are included
+in the preparation-for-compaction commit. No experiment process is running.
+Preserve unrelated `.claude/`, `results/motion/`, and `sparse-ucd.log` files.
 
-## User decisions
+## Current objective and working choice
 
-- Focus entirely on dropping the realtime expert from runtime.
-- No real prefix at initialization either: start with zero memory and a particle.
-- One trajectory per batch entry, with independent memory per entry.
-- Sample a particle once and keep it fixed throughout its trajectory initially.
-  Memory belongs to the rollout, not permanently to a row of the particle table.
-- Shared network weights across trajectories. Feed each generated point back to
-  that trajectory's memory. D's scoring head is not required at runtime.
-- Use the new public ParticleGAN API and GPUs for the next experiments.
-- No seed sweeps. Keep logs easy to tail. Summarize results, leaderboard,
-  explanations, and next recommendations after experiments finish.
-- The latest request was to make these changes **before compaction**. Code and
-  GPU smoke validation are complete; the substantive autonomous study has NOT
-  been launched yet.
+The user wants to improve the autonomous results next, after compaction.
+**Use the learned writer as the primary development model; retain frozen writer
+as a comparison.** This is our recommended working choice, not an established
+scientific winner or a user decision to discard either mechanism. Frozen leads
+on circle passes, but its successful late circles at horizon 64 all rotate
+counterclockwise. Learned stops less often and retains both directions. We have
+not demonstrated an overall advantage for learning the writer.
 
-## Implemented
+Recommended next experiment: add short-window adversarial scores and an explicit
+cold-prefix score alongside the full 64-step trajectory score. Keep 64-step
+rollouts, fixed particles, zero memory, and 256-step cold evaluation. The
+hypothesis is clearer feedback for local motion and startup alongside whole-orbit
+consistency. This is not implemented yet. A short-to-long curriculum is another
+candidate if optimization remains difficult. Preserve direction coverage and
+initial-position spread in the leaderboard; improving circle geometry alone is
+not enough. Do not claim success from late-only refitted circles.
 
-New entry point: `experiments/autonomous_memory.py` (default `--device cuda:0`).
-It reuses `FastMemory`, `Generator`, `circles`, and `mlp` from the earlier
-`experiments/memory_path.py`; that earlier trainer remains the historical
-observation-conditioned experiment, not the current objective.
+## User constraints
 
-Runtime `rollout(generator, writer, z, steps)` has no real-data argument and
-needs no sequence critic. Its exact loop is:
+- No realtime expert and no real initialization prefix at runtime.
+- One trajectory per batch entry, independent memory, shared network weights.
+- One particle z per trajectory, held fixed throughout. Memory belongs to the
+  rollout, not permanently to a particle-table row.
+- Runtime needs G, writer, and prior only. D's scoring head is training-only.
+- Use the public ParticleGAN API; **no gradient clipping**. Keep default B-cap:
+  exact autograd, L2 cap 1, coefficient 1, every update (`reg_every=1`).
+- Parameter-gradient norm logs were experiment-specific and removed along with
+  clipping; `penalty` still logs the B-cap input-gradient penalty.
+- No seed sweeps. Make logs easy to tail. Explain completed experiments with
+  a leaderboard and recommendations. Both RTX A6000 cards are authorized.
+- No subagents/delegation requested. Do not touch unrelated files.
+
+## Completed autonomous studies
+
+Read [latest full report](../autonomous-memory/horizon64/README.md) first.
+All rows: 2,000 updates, batch 128, 128 evaluation particles, 256-point generation.
+
+| Writer / setup | Full circles | Late-only circles | Stopped late | Full radial RMSE |
+|---|---:|---:|---:|---:|
+| Learned / clipped 16 | 0% | 17.2% | 20.3% | 0.466 |
+| Frozen / clipped 16 | 0% | 14.1% | 8.6% | 0.410 |
+| Learned / unclipped 16 | 0.8% | 23.4% | 16.4% | 0.396 |
+| Frozen / unclipped 16 | 0% | 11.7% | 12.5% | 0.406 |
+| Learned / unclipped 64 | 6.3% | 26.6% | 3.9% | 0.295 |
+| Frozen / unclipped 64 | 7.8% | 34.4% | 8.6% | 0.298 |
+| Real noisy reference | 99.2% | 99.2% | 0% | 0.032 |
+
+No-memory fixed-z control is structurally static: 100% stopped, zero circle
+passes. It was run only in the first study and smoke checks.
+
+Full circles fit the first 32 points and score all 256 against that fixed fit.
+Late-only refits points 129–256. Stopped late is mean displacement <0.01 over the
+last 64 transitions. Geometry metrics are heuristic, not distribution distances.
+
+At horizon 64, late passing circles are learned 24 CCW/10 CW versus frozen
+44 CCW/0 CW; real 62 CCW/65 CW. Initial-position spread narrows to learned
+0.622/frozen 0.675 (real 1.180; 16-step baseline 1.094/1.147). Distorted loops,
+spirals, startup transients, and partial mode collapse remain.
+
+The horizon comparison changes the full configuration: D grows from 86,761 to
+295,657 parameters, points per update quadruple, and initial prior values differ
+because the larger D consumes more initialization RNG. G/writer initialization
+is unchanged. Training-data RNG consumption also changes with sequence length.
+Do not describe this as a pure horizon ablation at equal compute or identical
+initial particle values. Both writer mechanisms at a given horizon match their
+initialization/data schedules. No seed experiments were performed.
+
+## Outputs and logs
+
+- `runs/memory_path/autonomous_2k/`: original clipped 16-step study.
+- `runs/memory_path/autonomous_unclipped_2k/`: unclipped 16-step baseline.
+- `runs/memory_path/autonomous_h64_2k/shared_run/`: learned writer on GPU0,
+  400.6 seconds training/evaluation.
+- `runs/memory_path/autonomous_h64_2k/frozen_writer_run/`: frozen writer on GPU1,
+  324.4 seconds, run concurrently with learned.
+- Each run has flushed `experiment.log`, per-variant `metrics.jsonl`, config,
+  summary, source snapshots, inference checkpoint, and full evaluation arrays.
+- Durable reports: `reports/autonomous-memory/`, its `unclipped/` and `horizon64/`
+  subdirectories. The latter includes direction counts and learning curves.
+- Raw runs are gitignored. Reports include results, source hashes, and a patch
+  identifying trainer changes that were uncommitted when the runs started.
+
+Example two-card log tail, after launching future runs in fresh directories:
+
+```bash
+tail -F runs/memory_path/autonomous_h64_2k/{shared_run,frozen_writer_run}/experiment.log
+```
+
+These completed logs end in `suite_complete`; nothing currently needs monitoring.
+Use `.venv/bin/python`; Torch 2.14.0+cu130. Training checkpoints are inference-only
+(no optimizer/RNG state for exact resume). Do not overwrite completed run dirs.
+
+## Implementation
+
+`experiments/autonomous_memory.py` reuses `FastMemory`, `Generator`, and `circles`
+from `experiments/memory_path.py`. Public API: `get_recipe`, factories for prior,
+loss, gradient penalty, prior regularizer and optimizers, plus LR scheduling.
+GAN recipe: relativistic logistic, lr 0.0006, D multiplier 1.5, prior multiplier
+10, Adam betas (0,.999), particle spread weight 1, decay after 60%, floor .05.
+No EMA. Prior has 512 learned four-dimensional particles.
+
+Runtime recurrence, with independent zero memory Bx8x4 and fixed z:
 
 ```python
-M = zeros(batch, 8, 4)
-for t in range(steps):
-    x = G(z, M.flatten(1))
-    M = writer.write(M, x)
+x = G(z, M.flatten(1))
+M = writer.write(M, x)
 ```
 
-It returns `[batch, time, 2]` and final memory. `z` is fixed across time. All
-states reset at the beginning of a call. Calls do not retain hidden global state.
+Writer maps x through 2->32->8 tanh features; four temporal traces decay at
+[0, .5, .8, .95]. It is a feature-trace memory, not general content-addressed
+fast weights. G is a width-64 MLP. Sequence D is a width-128 MLP over the flattened
+sequence of (point, memory BEFORE that point's write) features.
 
-Training is now a sequence GAN: a temporal MLP reads the ordered 16-step sequence
-of `(candidate point, memory before its write)` features. Real and generated
-sequences use identical scoring code and separate zero-initialized memories.
-Generated trajectories always start cold; there is no teacher forcing, real
-prefix, timestamp input, or supervised reconstruction loss.
+D trains its writer from both real and detached fake sequence scoring. During
+G updates writer weights are frozen, but state stays differentiable through
+all generated steps. No teacher forcing, timestamps, or reconstruction loss.
+`frozen_writer` freezes the random writer throughout. New configs explicitly
+record `gradient_clipping: null`. Training circles retain observation noise .03;
+centers uniform [-.75,.75]^2, radii [.6,1.4], speed magnitude [.12,.40], both signs.
 
-Important differences from the old experiment:
+## Validation and analysis
 
-- Writes now include generated points. During D scoring, the writer receives
-  gradients from **both** real sequences and detached generated sequences. This
-  is deliberate, symmetric sequence scoring; the old real-only write protocol
-  is not the new runtime protocol.
-- During the G update, writer **parameters** are frozen, but gradients propagate
-  through memory state and earlier generated points across the full rollout.
-  This is full backpropagation through time, not detached-state training. G
-  cannot update the writer's weights, but it learns how its outputs affect M.
-- During D's update, generated trajectories are detached. No D gradient runs
-  through G's generation process.
-
-Variants ready to run:
-
-| Variant | Meaning |
-|---|---|
-| `shared` | D trains writer; G reads the same writer's state |
-| `frozen_writer` | Random writer stays frozen; G and sequence scoring head train |
-| `no_memory` | Both networks' memory features are zero; fixed-z G is necessarily static |
-
-The last variant is a structural negative control, not a competitive recurrent
-baseline. All variants use the same initialization and data/latent schedules.
-Recipe GAN loss, gradient penalty, prior regularizer, optimizers and LR schedule
-come from the public API. Global gradient norms are clipped to 10 and the
-pre-clipping norms are logged. No EMA. Offline real training trajectories retain
-the earlier circle distribution and observation noise std 0.03 per coordinate.
-
-## Validation completed
-
-- 38 tests passed: `tests/test_autonomous_memory.py`, `tests/test_memory_path.py`,
-  `tests/test_api_primitives.py`, and `tests/test_api_integration.py`.
-- New tests cover fixed latent identity, independent batch states, cold starts,
-  repeatable resets, G backpropagation across time without writer parameter
-  gradients, D writer gradients, preservation of frozen flags, and diagnostics
-  rejecting static/spiraling paths while accepting real clean circles.
-- All three variants completed five CUDA updates and 256-step autonomous
-  evaluation on GPU 0 (RTX A6000).
-- Reloaded the CUDA checkpoint and reproduced the saved 256-step trajectories
-  using only G, the writer and particle prior, without constructing D's scorer.
-- Smoke directory: `runs/memory_path/autonomous_gpu_smoke/`. Its README includes
-  a diagnostic leaderboard and trajectory plot. All variants are stationary
-  after five steps; this is execution validation, not a learning result.
-- No background experiment remains running.
-
-## First substantive study to run after compaction
+- Original implementation/API validation: 38 tests passed.
+- Clipping removal: five autonomous tests and all three five-update CUDA smoke
+  runs passed. No training code changes occurred in the substantive followups.
+- Reloaded unclipped learned G/writer/prior reproduced all 128 saved 256-step
+  trajectories without constructing D's scorer or supplying real inputs.
+- Both horizon-64 runs completed with finite outputs; real evaluation arrays
+  match across cards and against the 16-step baseline.
+- Analysis accepts multiple run directories and plots the actual train horizon.
+  Reanalysis reproduces the earlier baseline JSON exactly. Plots inspected.
 
 ```bash
-.venv/bin/python -u experiments/autonomous_memory.py \
-  --out runs/memory_path/autonomous_2k \
-  --device cuda:0 --steps 2000 --batch-size 128 \
-  --train-length 16 --eval-steps 256 --eval-batch 128 --log-every 100
+.venv/bin/python reports/autonomous-memory/analyze.py \
+  runs/memory_path/autonomous_h64_2k/shared_run \
+  runs/memory_path/autonomous_h64_2k/frozen_writer_run \
+  --out reports/autonomous-memory/horizon64
+.venv/bin/python reports/autonomous-memory/horizon64/learning_curves.py
 ```
 
-```bash
-tail -f runs/memory_path/autonomous_2k/experiment.log
-```
-
-The output directory must be fresh. Three variants run sequentially by default;
-`--variants shared frozen_writer` selects a subset. Do not launch seed variants.
-GPU 1 was also available; use separate output directories if scheduling manual
-parallel processes. No delegation is authorized by the local instructions.
-
-Each run saves config, flushed metrics, inference checkpoint, summary and full
-evaluation trajectories. The suite saves both source files and provenance, plus
-a trajectory figure and diagnostic leaderboard. Checkpoints save separate
-`generator`, `writer`, and `prior` states so runtime does not require the scoring
-head; full critic state is also included. They do not save optimizer/RNG states
-for exact resume.
-
-## What to measure and decide
-
-There is no paired expert future for a generated trajectory, so the old
-next-point RMSE leaderboard is inappropriate. The new metrics fit a circle to
-the first 32 points, hold that reference fixed, and measure long-horizon radial
-error, late radius drift, angular speed, direction consistency, stationary
-fraction, initial-position spread and radius diversity. Real clean/noisy
-reference trajectories are scored only after generation, never fed to G.
-
-`circle_like_fraction` is a heuristic conjunction: fitted radius in [0.5, 1.6],
-relative radial RMSE < 0.1, late radius drift < 0.2, mean absolute angular speed
-in [0.08, 0.45], direction consistency > 0.95, and nondegenerate early geometry.
-Other geometry metrics average over valid fits only; always inspect
-`valid_fit_fraction` and the stationary fraction to avoid selection bias.
-These diagnostics are not a full measure of trajectory-distribution matching.
-
-First inspect whether any model sustains motion rather than converging to a
-point. Then compare learned vs frozen writers and the gap between 16-step
-training and 256-step generation. Change rollout horizon, writer mechanism, or
-training objective as separate experiments if needed. A length curriculum and
-clean (noise-free) training circles are reasonable follow-ups, not implemented
-options yet. Defer fresh per-step particles/noise and figure-eights until the
-fixed-particle autonomous circle works. Report both failures and successes.
-
-## Historical result (do not confuse with autonomous generation)
-
-`reports/memory-path/README.md` documents the earlier four 7k-update CPU runs.
-Shared memory achieved 0.098 next-point RMSE with real observations arriving
-every step; raw recent-point buffer achieved 0.088, linear extrapolation 0.128.
-Shuffling M ruined prediction. This established useful memory reading, not
-self-sustaining generation. The old checkpoints and logs remain in
-`runs/memory_path/circle_7k/`.
+Historical observation-conditioned study remains at `reports/memory-path/README.md`:
+shared next-point RMSE .098, recent-point buffer .088, but real observations
+arrived each step. Do not conflate it with autonomous success.

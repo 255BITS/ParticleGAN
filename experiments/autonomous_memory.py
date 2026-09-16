@@ -164,7 +164,8 @@ def train(variant, args, log):
     config = {**vars(args), "out": str(args.out), "variant": variant, "recipe": recipe.to_dict(),
               "seed": 42, "particle_policy": "fixed_per_trajectory", "initial_state": "zeros",
               "real_prefix": False, "writer_training": "D only; both real and detached fake sequence scoring",
-              "g_state_gradient": "full rollout; writer weights frozen", "ema": False}
+              "g_state_gradient": "full rollout; writer weights frozen", "ema": False,
+              "gradient_clipping": None}
     (directory / "config.json").write_text(json.dumps(config, indent=2))
     log(event="start", variant=variant, config=config)
     started = time.monotonic()
@@ -182,7 +183,6 @@ def train(variant, args, log):
             d_adv = gan.d_loss(critic(real), critic(fake))
             d_reg = penalty(critic, real, fake, step=step)
             (d_adv + d_reg).backward()
-            d_norm = nn.utils.clip_grad_norm_(critic.parameters(), 10., error_if_nonfinite=True)
             opt_d.step()
             opt_d.zero_grad(set_to_none=True)
             with frozen(critic):
@@ -192,13 +192,12 @@ def train(variant, args, log):
                     real_scores = critic(real)
                 g_adv = gan.g_loss(critic(fake), real_scores)
                 (g_adv + spread(prior(indices.unique()))).backward()
-                g_norm = nn.utils.clip_grad_norm_([*generator.parameters(), *prior.parameters()], 10., error_if_nonfinite=True)
                 opt_g.step()
             if step == 1 or step % args.log_every == 0 or step == args.steps:
                 row = dict(event="train", variant=variant, step=step, d=d_adv.item(), g=g_adv.item(),
-                           penalty=d_reg.item(), d_grad_norm=d_norm.item(), g_grad_norm=g_norm.item(),
+                           penalty=d_reg.item(),
                            seconds=round(time.monotonic() - started, 2))
-                if not all(math.isfinite(row[key]) for key in ("d", "g", "penalty", "g_grad_norm", "d_grad_norm")):
+                if not all(math.isfinite(row[key]) for key in ("d", "g", "penalty")):
                     raise RuntimeError(f"non-finite training: {row}")
                 stream.write(json.dumps(row) + "\n")
                 log(**row)
