@@ -1,0 +1,7 @@
+{
+  "name": "stable_dg10_cap09",
+  "clock_bands": 6,
+  "stability_g_weight": 0.1,
+  "stability_d_weight": 0.1,
+  "stability_max_gain": 0.9
+}

@@ -1,0 +1,7 @@
+{
+  "name": "repair_translated10",
+  "clock_bands": 6,
+  "g_memory_adapter": "residual",
+  "repair_weight": 10.0,
+  "repair_target": "translated"
+}

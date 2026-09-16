@@ -1,0 +1,24 @@
+{
+  "model": "slow16_r10",
+  "steps": 1024,
+  "fps": 24,
+  "particles": [
+    2,
+    0
+  ],
+  "selection": "first clockwise and first counterclockwise reference episodes; not selected by generated quality",
+  "source": "runs/memory_path/dynamics_round8/runs/slow16_r10/trajectories.npz",
+  "source_sha256": "844677e98a79a54342e48e828e2331ca117c35087829e42eac1828b5520e8c1e",
+  "reference_use": "display only; saved autonomous trajectories are unchanged",
+  "axis_limits": [
+    [
+      -3.289832592010498,
+      3.3272576332092285
+    ],
+    [
+      -4.379957675933838,
+      2.2371325492858887
+    ]
+  ],
+  "encoder": "libopenh264"
+}

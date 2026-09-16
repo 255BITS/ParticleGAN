@@ -85,13 +85,26 @@ def analyze(source, out, baselines=(), handoff_only=False):
     if handoff_only:
         lines[0] = '# Single-point handoff scouts (no trajectory loss)'
         lines += ['', '## Training cost', '',
-                  '| Run | Point examples / update | Max real prefix | Memory size | D prediction / temporal weights | G calls per phase | Feedback probability / strength | Seconds / update |',
+                  '| Run | Point examples / update | Max real prefix | Memory size | D prediction / temporal weights | G calls D / G phase | Feedback probability / strength | Seconds / update |',
                   '|---|---:|---:|---:|---:|---:|---:|---:|']
         for row in scouts:
             cfg = row['config']
             lines.append(f"| {row['name']} | {cfg['point_examples_per_update']} | {cfg['max_prefix']} | "
                          f"{cfg['memory_dim']} | {cfg.get('predict_weight', 0):g} / {cfg.get('temporal_weight', 0):g} | "
-                         f"{cfg.get('training_generator_unroll', 1)} | {cfg.get('feedback_probability', 0):g} / {cfg.get('feedback_strength', 1):g} | {row['seconds_per_update']:.4f} |")
+                         f"{cfg.get('generator_calls_d_phase', cfg.get('training_generator_unroll', 1))} / "
+                         f"{cfg.get('generator_calls_g_phase', cfg.get('training_generator_unroll', 1))} | "
+                         f"{cfg.get('feedback_probability', 0):g} / {cfg.get('feedback_strength', 1):g} | {row['seconds_per_update']:.4f} |")
+        if any(r['config'].get('slow_dim') or r['config'].get('g_memory_adapter', 'none') != 'none'
+               or r['config'].get('stability_g_weight') or r['config'].get('stability_d_weight') for r in scouts):
+            lines += ['', '## Local memory dynamics settings', '',
+                      '| Run | Slow coordinates / rate | G adapter bottleneck | Repair target / weight / noise | Stability D / G weight / max gain |',
+                      '|---|---:|---:|---|---|']
+            for row in scouts:
+                c = row['config']
+                lines.append(f"| {row['name']} | {c.get('slow_dim', 0)} / {c.get('slow_rate', 1):g} | "
+                             f"{c.get('adapter_bottleneck', 16) if c.get('g_memory_adapter', 'none') != 'none' else 'off'} | "
+                             f"{c.get('repair_target', 'raw')} / {c.get('repair_weight', 0):g} / {c.get('repair_noise', .05):g} | "
+                             f"{c.get('stability_d_weight', 0):g} / {c.get('stability_g_weight', 0):g} / {c.get('stability_max_gain', 1.1):g} |")
         lines += ['', 'All new scouts use local next-point GAN losses. There is no full generated training',
                   'rollout, trajectory critic, or cold/warm path loss. Configured feedback adds at most one',
                   'generated write before each target; configs control G gradients through that write.',
@@ -99,6 +112,9 @@ def analyze(source, out, baselines=(), handoff_only=False):
                   'Dense scouts use four points per episode; the older handoff_only trainer used one.',
                   'Architecture, context, corruption and optional D-only local auxiliary losses are explicit',
                   'config changes. Auxiliary heads do not change the GAN negative class. Compare measured cost too.',
+                  'Optional G repair trains a stateless read adapter. Local stability adds two parallel',
+                  'one-step feedback branches per enabled phase, with detached prefix anchors and particles.',
+                  'These local branches do not feed into another generated prediction; writer updates remain D-only.',
                   'No seed sweeps. B-cap defaults unchanged. Prior regularization applied once per update.']
     else:
         lines += ['', 'The 10k control has more training than the 2k scouts. Conditional-head capacity and penalty domains',

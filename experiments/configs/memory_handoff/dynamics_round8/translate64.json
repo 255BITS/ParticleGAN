@@ -1,0 +1,6 @@
+{
+  "name": "translate64",
+  "clock_bands": 6,
+  "g_memory_adapter": "residual",
+  "adapter_bottleneck": 64
+}

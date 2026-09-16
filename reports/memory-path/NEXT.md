@@ -1,3 +1,82 @@
+# Latest: memory dynamics and G repair scouts completed
+
+User authorized slow/fast D memory, local feedback stability, and a G-side memory
+repair/translator, with config-controlled changes and backward compatibility.
+Then suggested that repair could use the generated sample to preserve useful
+continuation. We acknowledged that as a next hypothesis, not an implemented
+sample-conditioned adapter. The current adapter reads M only.
+
+All work finished: 16 fresh 2k scouts and one exact 2k -> 5k continuation.
+Queues dynamics_round8 and dynamics_round8_long have 16/1 done, zero failed,
+pending, or running. Both GPUs were used; all diagnostic sessions are closed.
+User requested commit and compact; this handoff is included in the commit on
+feat/sequential-memory-path. Resume with discussion, not an automatic sweep.
+Preserve unrelated .claude/, results/motion/, sparse-ucd.log.
+
+Video: ../memory-handoff/dynamics_round8/slow16_r10_rollout.mp4 (24fps, 1024
+saved steps, about43s). It shows cold starts and prefix32 continuations from
+slow16_r10, lowest long radial error at BOTH prefixes among new scouts. Examples
+are the first CW and first CCW reference episodes, selected without looking at
+generated quality. Fixed axes, full faint history, bright last32 steps, and a
+moving offline reference point. Script: experiments/render_memory_rollout.py.
+Rendering is explanatory only; no experiment selection was based on images.
+
+Read ../memory-handoff/dynamics_round8/assessment.md, leaderboard.md,
+mechanism-table.md, long/leaderboard.md, and the local/adapter probe JSON files.
+
+Every new checkpoint: 0/128 cold circles at256/1024 and original-orbit continuation
+at prefixes8/32 and256/1024. All retain 0% late stopping; the clock milestone
+survives. All late-only cold circles also0. No primary-metric winner.
+
+Useful distinctions:
+- translate16 improves prefix32 real-context next-point MSE .00664 -> .00541,
+  but long radial error2.545; bypass worsens local prediction yet reduces radial
+  error to.856, still0 original-orbit passes.
+- repair_raw100 reduces synthetic memory reconstruction error~29% at noise.05;
+  local prediction MSE.00474. Bypassing repair barely changes noisy G prediction.
+- repair_raw10_n15 at2k has radial1.834 (baseline2.597); bypass worsens to1.981.
+  It alone met predeclared continuous-metric extension criteria at BOTH prefixes,
+  so received a diagnostic5k continuation. At5k radial worsens to2.456, local MSE
+  .00561 -> .00787, all full passes still0. No further extensions selected.
+- stable_dg10_cap09 reduces mean worst-direction local feedback gain2.415 ->1.894,
+  but radial2.344 and full passes0. Random gain is already below1 on average in
+  the baseline; this does not constrain its most sensitive directions.
+- Baseline prediction after one generated write MSE.02717 vs.00388 after a clean
+  real write atprefix32. This is evaluation-only evidence of short feedback error,
+  not proof that memory alone is responsible.
+
+Implementation:
+- memory_recent.py: SlowFastWriter damps selected GRU coordinates; same parameters
+  as baseline. LocalReader has optional identity-initialized residual adapter.
+  No private persistent G state; adapter never writes back into D-owned M.
+- memory_handoff_scout.py: slow_dim/rate; g_memory_adapter, adapter_width/bottleneck;
+  repair_weight/noise/target; stability_g_weight/d_weight/noise/max_gain;
+  dynamics_min_prefix. All default off. Repair trains G adapter only. Stability
+  compares two parallel one-step D.write(G(M)) branches, same z/time, detached
+  prefix/particle anchors, opposite module frozen. No full generated rollouts.
+- Dedicated RNG streams preserve exact resume. Actual old clock checkpoint loads
+  strictly; legacy checkpoint resume without new inactive fields/streams tested.
+- diagnose_memory_dynamics.py probes completed checkpoints, preserves saved eval
+  panel, checks baseline first predictions, tests read/clock/adapter use, noisy
+  reads, generated-vs-real write prediction, and optional feedback Jacobians and
+  adapter-bypassed autonomous rollouts. Largest singular gain is not a global
+  instability certificate; meaningful directions may legitimately be sensitive.
+- 74 focused tests passed plus combined full-batch GPU smoke and CPU/GPU probes.
+  Metadata-only write counts were clarified after all experiments: archived
+  fake_writes_in_training counted feedback replacements only, while stability
+  branches are described by local_dynamics and G-call counts. Current code adds
+  explicit D/G write counts. No training semantics or results changed.
+
+Next: discuss sample-conditioned repair or preservation of predictive usefulness.
+Previous single-write feedback already failed; do not merely rename it repair.
+Isolate the new adapter objective/conditioning and bound its local G-call cost.
+No new sweep is automatically selected. No extrapolation to unseen radii was
+established. Keep fixed particles, D-only writer, default B-cap, no clipping/EMA,
+no seed sweeps, metrics-based completed-only decisions, and no unsolicited agents.
+Central tail: tail -F runs/memory_path/core_round1/train.log
+
+---
+
 # Compact handoff: clock milestone accepted; first principles next
 
 User explicitly considers sustained motion from the clock a success, even though

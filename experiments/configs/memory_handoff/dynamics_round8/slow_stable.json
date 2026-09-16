@@ -1,0 +1,8 @@
+{
+  "name": "slow_stable",
+  "clock_bands": 6,
+  "slow_dim": 16,
+  "slow_rate": 0.1,
+  "stability_g_weight": 0.1,
+  "stability_d_weight": 0.1
+}

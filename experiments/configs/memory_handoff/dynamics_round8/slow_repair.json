@@ -1,0 +1,8 @@
+{
+  "name": "slow_repair",
+  "clock_bands": 6,
+  "slow_dim": 16,
+  "slow_rate": 0.1,
+  "g_memory_adapter": "residual",
+  "repair_weight": 10.0
+}

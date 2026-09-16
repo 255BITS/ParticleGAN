@@ -5,14 +5,32 @@ from torch import nn
 from experiments import memory_scout as base
 
 
+class SlowFastWriter(base.Writer):
+    """One D-owned GRU; selected coordinates receive damped updates.
+
+    Both groups read the complete previous state. The rate is per observation,
+    not a training learning-rate multiplier, and adds no learned parameters.
+    """
+    def __init__(self, memory_dim, slow_dim, slow_rate):
+        super().__init__('gru', memory_dim)
+        self.slow_dim, self.slow_rate = slow_dim, slow_rate
+
+    def write(self, memory, point):
+        proposed = super().write(memory, point).flatten(1)
+        old = memory.flatten(1)
+        slow = old[:, :self.slow_dim]+self.slow_rate*(proposed[:, :self.slow_dim]-old[:, :self.slow_dim])
+        return torch.cat((slow, proposed[:, self.slow_dim:]), -1).reshape_as(memory)
+
+
 class RecentWriter(nn.Module):
-    def __init__(self, memory_dim, recent_points):
+    def __init__(self, memory_dim, recent_points, slow_dim=0, slow_rate=1.):
         super().__init__()
         self.memory_dim = memory_dim
         self.recent_points = recent_points
         self.learned_dim = memory_dim-2*recent_points
         assert self.learned_dim > 0 and self.learned_dim % 4 == 0
-        self.core = base.Writer('gru', self.learned_dim)
+        self.core = (SlowFastWriter(self.learned_dim, slow_dim, slow_rate) if slow_dim
+                     else base.Writer('gru', self.learned_dim))
 
     def initial(self, batch_like):
         return batch_like.new_zeros(len(batch_like), self.memory_dim//4, 4)
@@ -49,12 +67,31 @@ class LocalReader(base.Reader):
         self.recent_start = cfg.memory_dim-2*cfg.recent_points
         self.residual_output = cfg.residual_output
         self.output_bound = cfg.output_bound
+        self.memory_adapter = None
+        if getattr(cfg, 'g_memory_adapter', 'none') == 'residual':
+            # Identity initialization keeps the initial GAN identical to its
+            # control. Adapter initialization does not consume the main RNG.
+            with torch.random.fork_rng(devices=[]):
+                torch.manual_seed(50)
+                self.memory_adapter = nn.Sequential(
+                    nn.Linear(cfg.memory_dim, cfg.adapter_width), nn.SiLU(),
+                    nn.Linear(cfg.adapter_width, cfg.adapter_bottleneck), nn.SiLU(),
+                    nn.Linear(cfg.adapter_bottleneck, cfg.memory_dim))
+                nn.init.zeros_(self.memory_adapter[-1].weight)
+                nn.init.zeros_(self.memory_adapter[-1].bias)
+
+    def translate_memory(self, memory):
+        if self.memory_adapter is None:
+            return memory
+        flat = memory.flatten(1)
+        return (flat+self.memory_adapter(flat)).reshape_as(memory)
 
     def forward(self, z, memory, hidden=None, *, time_index=None):
         if self.clock_bands:
             clock = clock_features(time_index, z, self.clock_bands, self.clock_frequency, self.clock_rate)
             z = torch.cat((z, clock), -1)
-        point, hidden = super().forward(z, memory, hidden)
+        # Translation affects G's read only; raw D-owned memory is not mutated.
+        point, hidden = super().forward(z, self.translate_memory(memory), hidden)
         if self.output_bound:
             # Smooth output parameterization; no gradient clipping. For residual
             # output this bounds each increment, including the first from M=0.

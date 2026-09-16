@@ -1,0 +1,9 @@
+{
+  "name": "repair_raw10_n15_5k",
+  "clock_bands": 6,
+  "g_memory_adapter": "residual",
+  "repair_weight": 10.0,
+  "repair_noise": 0.15,
+  "steps": 5000,
+  "resume": "/home/martyn/dev/ParticleGAN/runs/memory_path/dynamics_round8/runs/repair_raw10_n15/model.pt"
+}

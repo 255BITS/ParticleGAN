@@ -1,9 +1,12 @@
 # Handoff-only scouts: no generated trajectories during training
 
-Latest result: [Fourier clock scouts and interventions](clock_round7/assessment.md).
-The clock sustains motion while G still uses memory; the user accepts this as a
-milestone. Full-circle preservation remains unsolved. Next: first-principles
-discussion after compact, before choosing another experiment. Current handoff:
+Latest result: [Memory dynamics, G translation, and repair](dynamics_round8/assessment.md).
+Sixteen scouts and one 5k continuation finished. Repair learns some denoising and
+local stability reduces sensitivity, but full circles remain unsolved. The
+[clock's sustained-motion milestone](clock_round7/assessment.md) remains intact.
+A [saved rollout video](dynamics_round8/slow16_r10_rollout.mp4) shows the strongest
+new scout by radial error, including cold and real-prefix starts.
+Next discussion: sample-conditioned repair and predictive usefulness. Current handoff:
 [NEXT.md](../memory-path/NEXT.md). The sections below describe the original round.
 
 The user requested a round without cold loss to avoid generated-trajectory training

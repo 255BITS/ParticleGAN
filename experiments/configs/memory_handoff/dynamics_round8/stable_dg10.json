@@ -1,0 +1,6 @@
+{
+  "name": "stable_dg10",
+  "clock_bands": 6,
+  "stability_g_weight": 0.1,
+  "stability_d_weight": 0.1
+}

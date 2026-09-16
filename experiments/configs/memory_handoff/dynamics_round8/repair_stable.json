@@ -1,0 +1,8 @@
+{
+  "name": "repair_stable",
+  "clock_bands": 6,
+  "g_memory_adapter": "residual",
+  "repair_weight": 10.0,
+  "stability_g_weight": 0.1,
+  "stability_d_weight": 0.1
+}

@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from experiments.autonomous_memory import frozen
 from experiments.memory_path import circles, mlp
 from experiments import memory_scout as base
-from experiments.memory_recent import RecentWriter, LocalReader, clock_features
+from experiments.memory_recent import RecentWriter, SlowFastWriter, LocalReader, clock_features
 from experiments.memory_core_scout import evaluate
 from particlegan import get_recipe, learning_rate_scale
 
@@ -47,6 +47,19 @@ class Config(base.Config):
     clock_rate: float = 1.
     clock_to_d: bool = False
     clock_origin_max: int = 0
+    slow_dim: int = 0
+    slow_rate: float = .1
+    g_memory_adapter: str = 'none'
+    adapter_width: int = 64
+    adapter_bottleneck: int = 16
+    repair_weight: float = 0.
+    repair_noise: float = .05
+    repair_target: str = 'raw'
+    stability_g_weight: float = 0.
+    stability_d_weight: float = 0.
+    stability_noise: float = .03
+    stability_max_gain: float = 1.1
+    dynamics_min_prefix: int = 4
     eval_prefixes: tuple = (8, 32)
 
     def __post_init__(self):
@@ -69,6 +82,15 @@ class Config(base.Config):
         assert 0 <= self.clock_bands <= 16 and self.clock_frequency > 0 and self.clock_rate >= 0
         assert self.clock_origin_max >= 0
         assert self.clock_bands or (not self.clock_to_d and self.clock_origin_max == 0)
+        assert 0 <= self.slow_dim <= self.memory_dim-2*self.recent_points and 0 < self.slow_rate <= 1
+        assert self.g_memory_adapter in ('none', 'residual')
+        assert min(self.adapter_width, self.adapter_bottleneck) > 0
+        assert min(self.repair_weight, self.stability_g_weight, self.stability_d_weight) >= 0
+        assert self.repair_noise > 0 and self.stability_noise > 0 and self.stability_max_gain > 0
+        assert self.repair_target in ('raw', 'translated')
+        assert not self.repair_weight or self.g_memory_adapter != 'none'
+        assert self.dynamics_min_prefix >= 1
+        assert not (self.repair_weight or self.stability_g_weight or self.stability_d_weight) or self.dynamics_min_prefix <= self.max_prefix
 
 
 class Critic(nn.Module):
@@ -79,7 +101,9 @@ class Critic(nn.Module):
         self.clock_frequency, self.clock_rate = cfg.clock_frequency, cfg.clock_rate
         with torch.random.fork_rng(devices=[]):
             torch.manual_seed(43)
-            self.writer = (RecentWriter(cfg.memory_dim, cfg.recent_points) if cfg.recent_points
+            self.writer = (RecentWriter(cfg.memory_dim, cfg.recent_points, cfg.slow_dim, cfg.slow_rate)
+                           if cfg.recent_points else
+                           SlowFastWriter(cfg.memory_dim, cfg.slow_dim, cfg.slow_rate) if cfg.slow_dim
                            else base.Writer(cfg.writer, cfg.memory_dim))
         with torch.random.fork_rng(devices=[]):
             torch.manual_seed(46)
@@ -220,6 +244,45 @@ def local_auxiliary(cfg, critic, memory, real, positions, target):
         'temporal_accuracy': accuracy}
 
 
+def memory_repair(cfg, generator, memory, positions, noise):
+    """G-only read repair. Clean branch is detached; D state is never rewritten."""
+    valid = positions.flatten() >= cfg.dynamics_min_prefix
+    if not valid.any():
+        return memory.new_zeros(())
+    clean = memory.detach()[valid]
+    with torch.no_grad():
+        target = clean if cfg.repair_target == 'raw' else generator.translate_memory(clean)
+    repaired = generator.translate_memory(clean+cfg.repair_noise*noise[valid])
+    return F.mse_loss(repaired, target)
+
+
+def local_stability(cfg, generator, critic, z, memory, positions, times, noise):
+    """Two parallel one-step feedback branches; no generated continuation.
+
+    Penalize mean-square finite-perturbation gain above a configured bound.
+    Prefix states and particles are detached. The caller freezes the opposite
+    module, retaining gradients through its operations when needed.
+    """
+    valid = positions.flatten() >= cfg.dynamics_min_prefix
+    zero = memory.new_zeros(())
+    if not valid.any():
+        return zero, {'gain_rms': zero, 'active_fraction': zero}
+    clean, latent, clock = memory.detach()[valid], z.detach()[valid], times[valid]
+    perturbation = noise[valid]
+    perturbation = cfg.stability_noise*perturbation/perturbation.square().mean((1, 2), keepdim=True).sqrt().clamp_min(1e-8)
+    altered = clean+perturbation
+    point, _ = local_point(generator, latent, clean, clock)
+    altered_point, _ = local_point(generator, latent, altered, clock)
+    next_clean = critic.writer.write(clean, point)
+    next_altered = critic.writer.write(altered, altered_point)
+    input_mse = perturbation.square().mean((1, 2))
+    output_mse = (next_altered-next_clean).square().mean((1, 2))
+    gain_squared = output_mse/input_mse.clamp_min(1e-12)
+    loss = (gain_squared-cfg.stability_max_gain**2).relu().mean()
+    return loss, {'gain_rms': gain_squared.mean().sqrt().detach(),
+                  'active_fraction': (gain_squared > cfg.stability_max_gain**2).float().mean().detach()}
+
+
 def build(cfg, device):
     torch.manual_seed(42)
     generator = LocalReader(cfg).to(device)
@@ -243,7 +306,9 @@ def train(cfg, out, device, log):
             'input_noise': torch.Generator(device=device).manual_seed(16181),
             'state_noise': torch.Generator(device=device).manual_seed(16182),
             'feedback': torch.Generator(device=device).manual_seed(16183),
-            'clock': torch.Generator(device=device).manual_seed(16184)}
+            'clock': torch.Generator(device=device).manual_seed(16184),
+            'stability': torch.Generator(device=device).manual_seed(16185),
+            'repair': torch.Generator(device=device).manual_seed(16186)}
     start = 0
     if cfg.resume:
         saved = torch.load(cfg.resume, map_location=device, weights_only=False)
@@ -260,7 +325,10 @@ def train(cfg, out, device, log):
             if name in saved['rngs']:
                 rng.set_state(saved['rngs'][name].cpu())
             else:
-                assert (name == 'feedback' and not cfg.feedback_probability) or (name == 'clock' and not cfg.clock_bands)
+                assert ((name == 'feedback' and not cfg.feedback_probability)
+                        or (name == 'clock' and not cfg.clock_bands)
+                        or (name == 'stability' and not (cfg.stability_g_weight or cfg.stability_d_weight))
+                        or (name == 'repair' and not cfg.repair_weight))
         torch.set_rng_state(saved['torch_rng'].cpu())
         if device.startswith('cuda'):
             torch.cuda.set_rng_state(saved['cuda_rng'].cpu(), device)
@@ -268,9 +336,10 @@ def train(cfg, out, device, log):
         assert cfg.steps > start
     resolved = {**asdict(cfg), 'resolved_recipe': recipe.to_dict(), 'device': device,
                 'cold_weight': 0., 'warm_weight': 0., 'gradient_clipping': None, 'ema': False,
-                'training_objective': 'local adversarial handoff with optional single-write feedback and D auxiliaries',
+                'training_objective': 'local adversarial handoff with optional feedback, D auxiliaries, G read repair, and local feedback stability',
                 'auxiliary_min_prefix': 3,
                 'memory_layout': {'learned_gru': cfg.memory_dim-2*cfg.recent_points,
+                                  'slow_gru_coordinates': cfg.slow_dim,
                                   'recent_observation_coordinates': 2*cfg.recent_points},
                 'state_diagnostic_note': 'whole-memory norms/saturation include raw coordinates when recent_points > 0',
                 'clock': {'features': 'sin/cos dyadic frequencies in radians per step; no raw time',
@@ -280,7 +349,19 @@ def train(cfg, out, device, log):
                           'state': 'external integer counter only; no learned private G state'},
                 'writer_training': 'D only', 'particle_policy': 'one fixed z per real episode, shared across sampled positions',
                 'training_generator_unroll': 2 if cfg.feedback_probability else 1,
-                'fake_writes_in_training': 1 if cfg.feedback_probability else 0,
+                'generator_calls_d_phase': 1+int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_d_weight)),
+                'generator_calls_g_phase': 1+int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_g_weight)),
+                'local_dynamics': {'branches': 'two parallel one-step D.write(G(M)) evaluations; same z/time',
+                                   'memory_and_particles': 'detached anchors, prefix >= dynamics_min_prefix',
+                                   'gradient_ownership': 'D phase freezes G; G phase freezes D; no writer gradient from G loss',
+                                   'scope': 'sampled local perturbations, not worst-case or global stability guarantee'},
+                'g_memory_repair': {'persistent_state': False, 'write_back': False,
+                                    'target': 'stop-gradient raw or translated current clean D memory',
+                                    'ownership': 'G adapter only; memory inputs detached'},
+                'fake_writes_in_training': int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_d_weight or cfg.stability_g_weight)),
+                'fake_writes_d_phase': int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_d_weight)),
+                'fake_writes_g_phase': int(bool(cfg.feedback_probability))+2*int(bool(cfg.stability_g_weight)),
+                'fake_write_counting': 'maximum writes per phase, including parallel local stability branches; not sequential unroll depth',
                 'feedback_gradient': ('two G evaluations connected through frozen D writer in G phase; detached proposal in D phase'
                                       if cfg.feedback_backprop else 'generated replacement detached; D writer retains gradients'),
                 'feedback_gradient_version': 2,
@@ -307,6 +388,10 @@ def train(cfg, out, device, log):
                                      device=device, generator=rngs['clock'])
         times = (positions+clock_origin).flatten()
         feedback_mask = torch.rand(positions.shape, device=device, generator=rngs['feedback']) < cfg.feedback_probability
+        stability_noise = (torch.randn(jitter.shape, device=device, generator=rngs['stability'])
+                           if cfg.stability_g_weight or cfg.stability_d_weight else None)
+        repair_noise = (torch.randn(jitter.shape, device=device, generator=rngs['repair'])
+                        if cfg.repair_weight else None)
         opt_d.zero_grad(set_to_none=True)
         memory = training_memory(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
                                  clock_origin=clock_origin)
@@ -316,7 +401,12 @@ def train(cfg, out, device, log):
         d_adv = gan.d_loss(view(target), view(fake))
         d_reg = penalty(view, target, fake, step=step)
         d_aux, diagnostics = local_auxiliary(cfg, critic, memory, real, positions, target)
-        (d_adv+d_reg+d_aux).backward()
+        d_stability = memory.new_zeros(())
+        if cfg.stability_d_weight:
+            with frozen(generator):
+                d_stability, stats = local_stability(cfg, generator, critic, z, memory, positions, times, stability_noise)
+            diagnostics.update({f'd_stability_{key}': value for key, value in stats.items()})
+        (d_adv+d_reg+d_aux+cfg.stability_d_weight*d_stability).backward()
         opt_d.step()
         opt_d.zero_grad(set_to_none=True)
         with frozen(critic):
@@ -327,10 +417,16 @@ def train(cfg, out, device, log):
             view = CandidateView(critic, memory, times)
             fake, _ = local_point(generator, z, memory, times)
             g_adv = generator_loss(gan, view, target, fake)
-            (g_adv+spread(prior(indices.unique()))).backward()
+            repair = memory_repair(cfg, generator, memory, positions, repair_noise) if cfg.repair_weight else memory.new_zeros(())
+            g_stability = memory.new_zeros(())
+            if cfg.stability_g_weight:
+                g_stability, stats = local_stability(cfg, generator, critic, z, memory, positions, times, stability_noise)
+                diagnostics.update({f'g_stability_{key}': value for key, value in stats.items()})
+            (g_adv+spread(prior(indices.unique()))+cfg.repair_weight*repair+cfg.stability_g_weight*g_stability).backward()
             opt_g.step()
         if step == start+1 or step % cfg.log_every == 0 or step == cfg.steps:
             losses = {'d': d_adv.item(), 'g': g_adv.item(), 'penalty': d_reg.item()}
+            losses.update(repair_mse=repair.item(), d_stability_loss=d_stability.item(), g_stability_loss=g_stability.item())
             losses.update({key: value.item() for key, value in diagnostics.items()})
             losses['feedback_fraction'] = (feedback_mask & (positions >= cfg.feedback_min_prefix)).float().mean().item()
             if not all(np.isfinite(v) for v in losses.values()):

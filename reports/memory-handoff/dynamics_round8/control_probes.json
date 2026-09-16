@@ -1,0 +1,587 @@
+[
+  {
+    "name": "clock_fourier6",
+    "steps": 2000,
+    "source": "runs/memory_path/clock_round7/runs/clock_fourier6",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.00640744948759675,
+        "raw_memory_rms": 0.46927887201309204,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.34883594512939453,
+        "translated_across_episode_std": 0.34883594512939453,
+        "memory_zero": {
+          "target_mse": 0.7133975625038147,
+          "output_change_mse": 0.7065441608428955
+        },
+        "memory_shuffle": {
+          "target_mse": 1.414445161819458,
+          "output_change_mse": 1.4131278991699219
+        },
+        "clock_zero": {
+          "target_mse": 0.03886156529188156,
+          "output_change_mse": 0.03252550959587097
+        },
+        "adapter_bypass_target_mse": 0.00640744948759675,
+        "next_prediction_after_generated_write_mse": 0.029334286227822304,
+        "next_prediction_after_clean_real_write_mse": 0.004892377182841301,
+        "generated_vs_clean_real_write_mse": 0.0006937573780305684,
+        "feedback_jacobian": {
+          "largest_singular_value_mean": 2.3646955490112305,
+          "largest_singular_value_p95": 2.80328369140625,
+          "fraction_above_one": 1.0
+        },
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.008109713904559612,
+            "output_change_mse": 0.0022052826825529337,
+            "adapter_bypass_target_mse": 0.008109713904559612,
+            "translated_consistency_mse": 0.0009000000427477062,
+            "raw_repair_mse": 0.0009000000427477062,
+            "feedback_gain": {
+              "rms": 0.7499575018882751,
+              "median": 0.7078364491462708,
+              "p95": 1.0316894054412842,
+              "max": 1.3110849857330322,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5504394173622131,
+              "median": 0.5465445518493652,
+              "p95": 0.6470356583595276,
+              "max": 0.6891257166862488,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.011685410514473915,
+            "output_change_mse": 0.006122209597378969,
+            "adapter_bypass_target_mse": 0.011685410514473915,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7495473027229309,
+              "median": 0.7089020013809204,
+              "p95": 1.0222785472869873,
+              "max": 1.3377026319503784,
+              "fraction_above_one": 0.0703125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5504764914512634,
+              "median": 0.5460366606712341,
+              "p95": 0.6484895944595337,
+              "max": 0.6907318830490112,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.05843508616089821,
+            "output_change_mse": 0.05467819795012474,
+            "adapter_bypass_target_mse": 0.05843508616089821,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.7437711954116821,
+              "median": 0.7081642746925354,
+              "p95": 0.9702608585357666,
+              "max": 1.4380719661712646,
+              "fraction_above_one": 0.03125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5507222414016724,
+              "median": 0.5422645807266235,
+              "p95": 0.6469146013259888,
+              "max": 0.6984401345252991,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.006643898785114288,
+        "raw_memory_rms": 0.4796687960624695,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.3616626560688019,
+        "translated_across_episode_std": 0.3616626560688019,
+        "memory_zero": {
+          "target_mse": 0.7340432405471802,
+          "output_change_mse": 0.7309055328369141
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4598207473754883,
+          "output_change_mse": 1.4577029943466187
+        },
+        "clock_zero": {
+          "target_mse": 0.03600744158029556,
+          "output_change_mse": 0.03384188562631607
+        },
+        "adapter_bypass_target_mse": 0.006643898785114288,
+        "next_prediction_after_generated_write_mse": 0.02716927044093609,
+        "next_prediction_after_clean_real_write_mse": 0.003876355243846774,
+        "generated_vs_clean_real_write_mse": 0.0007340370211750269,
+        "feedback_jacobian": {
+          "largest_singular_value_mean": 2.4149091243743896,
+          "largest_singular_value_p95": 2.8306081295013428,
+          "fraction_above_one": 1.0
+        },
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.008101717568933964,
+            "output_change_mse": 0.002244600560516119,
+            "adapter_bypass_target_mse": 0.008101717568933964,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.7716130614280701,
+              "median": 0.6988346576690674,
+              "p95": 1.0511088371276855,
+              "max": 1.3607287406921387,
+              "fraction_above_one": 0.1015625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5647556781768799,
+              "median": 0.5627122521400452,
+              "p95": 0.6457774639129639,
+              "max": 0.7814809679985046,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.011538615450263023,
+            "output_change_mse": 0.006225257646292448,
+            "adapter_bypass_target_mse": 0.011538615450263023,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.771152675151825,
+              "median": 0.6996053457260132,
+              "p95": 1.057661771774292,
+              "max": 1.3578680753707886,
+              "fraction_above_one": 0.1015625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5647673010826111,
+              "median": 0.5632365942001343,
+              "p95": 0.6465756297111511,
+              "max": 0.7831364274024963,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.05713663995265961,
+            "output_change_mse": 0.05490470677614212,
+            "adapter_bypass_target_mse": 0.05713663995265961,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.7649292349815369,
+              "median": 0.7015159130096436,
+              "p95": 1.0995187759399414,
+              "max": 1.317148208618164,
+              "fraction_above_one": 0.0859375
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5647730827331543,
+              "median": 0.5638262629508972,
+              "p95": 0.646741509437561,
+              "max": 0.7900538444519043,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "clock_static6",
+    "steps": 2000,
+    "source": "runs/memory_path/clock_round7/runs/clock_static6",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.008243288844823837,
+        "raw_memory_rms": 0.461405873298645,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.3468899428844452,
+        "translated_across_episode_std": 0.3468899428844452,
+        "memory_zero": {
+          "target_mse": 1.297789454460144,
+          "output_change_mse": 1.3048672676086426
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4262932538986206,
+          "output_change_mse": 1.4223816394805908
+        },
+        "clock_zero": {
+          "target_mse": 0.008243288844823837,
+          "output_change_mse": 0.0
+        },
+        "adapter_bypass_target_mse": 0.008243288844823837,
+        "next_prediction_after_generated_write_mse": 0.041229914873838425,
+        "next_prediction_after_clean_real_write_mse": 0.007113327272236347,
+        "generated_vs_clean_real_write_mse": 0.0008297976455651224,
+        "feedback_jacobian": {
+          "largest_singular_value_mean": 2.907776355743408,
+          "largest_singular_value_p95": 3.419680118560791,
+          "fraction_above_one": 1.0
+        },
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.011229009367525578,
+            "output_change_mse": 0.0029047559946775436,
+            "adapter_bypass_target_mse": 0.011229009367525578,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.796986997127533,
+              "median": 0.7262376546859741,
+              "p95": 1.147354006767273,
+              "max": 1.501469373703003,
+              "fraction_above_one": 0.1171875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5282713770866394,
+              "median": 0.524197518825531,
+              "p95": 0.6179738640785217,
+              "max": 0.6814519166946411,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.016411609947681427,
+            "output_change_mse": 0.00803777202963829,
+            "adapter_bypass_target_mse": 0.016411609947681427,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7955966591835022,
+              "median": 0.7326231002807617,
+              "p95": 1.1469138860702515,
+              "max": 1.5001834630966187,
+              "fraction_above_one": 0.1171875
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5283298492431641,
+              "median": 0.5233736038208008,
+              "p95": 0.617986261844635,
+              "max": 0.6837348341941833,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.08001142740249634,
+            "output_change_mse": 0.0714007318019867,
+            "adapter_bypass_target_mse": 0.08001142740249634,
+            "translated_consistency_mse": 0.02250000275671482,
+            "raw_repair_mse": 0.02250000275671482,
+            "feedback_gain": {
+              "rms": 0.7879670858383179,
+              "median": 0.7198951244354248,
+              "p95": 1.1779654026031494,
+              "max": 1.5202020406723022,
+              "fraction_above_one": 0.1015625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5288473963737488,
+              "median": 0.5249710083007812,
+              "p95": 0.6212285161018372,
+              "max": 0.6945318579673767,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.009766969829797745,
+        "raw_memory_rms": 0.47201111912727356,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.36006733775138855,
+        "translated_across_episode_std": 0.36006733775138855,
+        "memory_zero": {
+          "target_mse": 1.414347529411316,
+          "output_change_mse": 1.4099185466766357
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4844266176223755,
+          "output_change_mse": 1.4875245094299316
+        },
+        "clock_zero": {
+          "target_mse": 0.009766969829797745,
+          "output_change_mse": 0.0
+        },
+        "adapter_bypass_target_mse": 0.009766969829797745,
+        "next_prediction_after_generated_write_mse": 0.04374365881085396,
+        "next_prediction_after_clean_real_write_mse": 0.0063722627237439156,
+        "generated_vs_clean_real_write_mse": 0.0010043727234005928,
+        "feedback_jacobian": {
+          "largest_singular_value_mean": 2.8698084354400635,
+          "largest_singular_value_p95": 3.3463730812072754,
+          "fraction_above_one": 1.0
+        },
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.012185818515717983,
+            "output_change_mse": 0.00308539648540318,
+            "adapter_bypass_target_mse": 0.012185818515717983,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.8171859979629517,
+              "median": 0.7258811593055725,
+              "p95": 1.2496286630630493,
+              "max": 1.5565348863601685,
+              "fraction_above_one": 0.125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.554681122303009,
+              "median": 0.5442891716957092,
+              "p95": 0.6401373147964478,
+              "max": 0.7675660848617554,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.017165087163448334,
+            "output_change_mse": 0.008512190543115139,
+            "adapter_bypass_target_mse": 0.017165087163448334,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.8158587217330933,
+              "median": 0.7229981422424316,
+              "p95": 1.254118800163269,
+              "max": 1.5546904802322388,
+              "fraction_above_one": 0.1328125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5547090768814087,
+              "median": 0.5448772311210632,
+              "p95": 0.6418242454528809,
+              "max": 0.767774760723114,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.0812346488237381,
+            "output_change_mse": 0.07499077916145325,
+            "adapter_bypass_target_mse": 0.0812346488237381,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.8081278204917908,
+              "median": 0.7247664332389832,
+              "p95": 1.2327343225479126,
+              "max": 1.5224530696868896,
+              "fraction_above_one": 0.125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5549148321151733,
+              "median": 0.5463371872901917,
+              "p95": 0.6443458199501038,
+              "max": 0.7689995765686035,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "clock_fourier6_shared",
+    "steps": 2000,
+    "source": "runs/memory_path/clock_round7/runs/clock_fourier6_shared",
+    "evaluation_only": true,
+    "note": "Saved evaluation panel, local probes on real-prefix memories. Dependence and local robustness do not imply stable autonomous continuation.",
+    "local": {
+      "prefix8": {
+        "normal_target_mse": 0.0083064716309309,
+        "raw_memory_rms": 0.48039519786834717,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.35884419083595276,
+        "translated_across_episode_std": 0.35884419083595276,
+        "memory_zero": {
+          "target_mse": 0.7138009667396545,
+          "output_change_mse": 0.7031311988830566
+        },
+        "memory_shuffle": {
+          "target_mse": 1.4133548736572266,
+          "output_change_mse": 1.4040436744689941
+        },
+        "clock_zero": {
+          "target_mse": 0.04754243046045303,
+          "output_change_mse": 0.03905849903821945
+        },
+        "adapter_bypass_target_mse": 0.0083064716309309,
+        "next_prediction_after_generated_write_mse": 0.035634465515613556,
+        "next_prediction_after_clean_real_write_mse": 0.004781836178153753,
+        "generated_vs_clean_real_write_mse": 0.0009114769054576755,
+        "feedback_jacobian": {
+          "largest_singular_value_mean": 2.4043939113616943,
+          "largest_singular_value_p95": 2.743075132369995,
+          "fraction_above_one": 1.0
+        },
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.010052075609564781,
+            "output_change_mse": 0.0021436840761452913,
+            "adapter_bypass_target_mse": 0.010052075609564781,
+            "translated_consistency_mse": 0.0009000000427477062,
+            "raw_repair_mse": 0.0009000000427477062,
+            "feedback_gain": {
+              "rms": 0.7385824918746948,
+              "median": 0.6831517815589905,
+              "p95": 1.0109976530075073,
+              "max": 1.1748485565185547,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5165570974349976,
+              "median": 0.5069044828414917,
+              "p95": 0.6434396505355835,
+              "max": 0.7248870134353638,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.013580291531980038,
+            "output_change_mse": 0.005927198100835085,
+            "adapter_bypass_target_mse": 0.013580291531980038,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.737592339515686,
+              "median": 0.6824672222137451,
+              "p95": 1.0120621919631958,
+              "max": 1.1871509552001953,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5165164470672607,
+              "median": 0.5064634084701538,
+              "p95": 0.6431357860565186,
+              "max": 0.7268969416618347,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.058116279542446136,
+            "output_change_mse": 0.05203371122479439,
+            "adapter_bypass_target_mse": 0.058116279542446136,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.729997456073761,
+              "median": 0.6939603686332703,
+              "p95": 1.0234190225601196,
+              "max": 1.1743128299713135,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.516301691532135,
+              "median": 0.5069212317466736,
+              "p95": 0.6419228315353394,
+              "max": 0.7358934879302979,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      },
+      "prefix32": {
+        "normal_target_mse": 0.009844555519521236,
+        "raw_memory_rms": 0.49330803751945496,
+        "adapter_correction_rms": 0.0,
+        "raw_across_episode_std": 0.3722100853919983,
+        "translated_across_episode_std": 0.3722100853919983,
+        "memory_zero": {
+          "target_mse": 0.7470400929450989,
+          "output_change_mse": 0.7661459445953369
+        },
+        "memory_shuffle": {
+          "target_mse": 1.474570870399475,
+          "output_change_mse": 1.4778796434402466
+        },
+        "clock_zero": {
+          "target_mse": 0.05153539031744003,
+          "output_change_mse": 0.04873465374112129
+        },
+        "adapter_bypass_target_mse": 0.009844555519521236,
+        "next_prediction_after_generated_write_mse": 0.046793848276138306,
+        "next_prediction_after_clean_real_write_mse": 0.006198155228048563,
+        "generated_vs_clean_real_write_mse": 0.0011627002386376262,
+        "feedback_jacobian": {
+          "largest_singular_value_mean": 2.445566177368164,
+          "largest_singular_value_p95": 2.7766356468200684,
+          "fraction_above_one": 1.0
+        },
+        "perturbations": {
+          "0.03": {
+            "target_mse": 0.011035528033971786,
+            "output_change_mse": 0.0018402118002995849,
+            "adapter_bypass_target_mse": 0.011035528033971786,
+            "translated_consistency_mse": 0.0008999999845400453,
+            "raw_repair_mse": 0.0008999999845400453,
+            "feedback_gain": {
+              "rms": 0.720628023147583,
+              "median": 0.657264769077301,
+              "p95": 1.0217022895812988,
+              "max": 1.3043183088302612,
+              "fraction_above_one": 0.0703125
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5245063900947571,
+              "median": 0.521173894405365,
+              "p95": 0.6277957558631897,
+              "max": 0.7352734804153442,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.05": {
+            "target_mse": 0.013877911493182182,
+            "output_change_mse": 0.00512139406055212,
+            "adapter_bypass_target_mse": 0.013877911493182182,
+            "translated_consistency_mse": 0.0024999999441206455,
+            "raw_repair_mse": 0.0024999999441206455,
+            "feedback_gain": {
+              "rms": 0.7205197215080261,
+              "median": 0.6562469601631165,
+              "p95": 1.0276141166687012,
+              "max": 1.3166403770446777,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5246053338050842,
+              "median": 0.520352840423584,
+              "p95": 0.6276695728302002,
+              "max": 0.7388013005256653,
+              "fraction_above_one": 0.0
+            }
+          },
+          "0.15": {
+            "target_mse": 0.05212099850177765,
+            "output_change_mse": 0.045574259012937546,
+            "adapter_bypass_target_mse": 0.05212099850177765,
+            "translated_consistency_mse": 0.02250000089406967,
+            "raw_repair_mse": 0.02250000089406967,
+            "feedback_gain": {
+              "rms": 0.7153486013412476,
+              "median": 0.6657254695892334,
+              "p95": 1.0131372213363647,
+              "max": 1.3179337978363037,
+              "fraction_above_one": 0.0625
+            },
+            "same_real_input_writer_gain": {
+              "rms": 0.5250710844993591,
+              "median": 0.520185112953186,
+              "p95": 0.6266718506813049,
+              "max": 0.7552555203437805,
+              "fraction_above_one": 0.0
+            }
+          }
+        }
+      }
+    }
+  }
+]
