@@ -5,6 +5,8 @@
 [API reference](docs/api.md) · [Minimal GAN loop](docs/api.md#a-minimal-training-loop) ·
 [Minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
 
+[![Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml/badge.svg)](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml)
+
 ![100 Gaussians with Particle Prior](100gaussians.gif)
 
 ## Installation
@@ -31,6 +33,9 @@ python -m pip install -e '.[experiments,dev]'
 # Image experiments also need the images extra:
 # python -m pip install -e '.[experiments,images,dev]'
 ```
+
+CI tests Python 3.10–3.12 and builds installable distributions. See
+[CI and PyPI releases](docs/releasing.md) for the automated publishing setup.
 
 ## Use in your PyTorch project
 

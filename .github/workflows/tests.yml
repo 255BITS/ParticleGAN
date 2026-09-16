@@ -3,7 +3,9 @@ name: Tests
 on:
   pull_request:
   push:
-    branches: [master]
+    branches: [master, api]
+  workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
@@ -43,3 +45,26 @@ jobs:
           python -m pip install --no-deps --target /tmp/particlegan-installed /tmp/particlegan-wheel/*.whl
           cd /tmp
           PYTHONPATH=/tmp/particlegan-installed python -c "import particlegan; from particlegan import ParticlePrior, DDGAN, get_recipe; assert particlegan.__file__.startswith('/tmp/particlegan-installed/'); assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4); assert DDGAN().steps == 4; assert get_recipe().lr == 0.0006"
+
+  distributions:
+    name: Build release distributions
+    needs: cpu-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install packaging tools
+        run: python -m pip install build twine
+      - name: Build source archive and wheel
+        run: python -m build
+      - name: Validate package metadata and README
+        run: python -m twine check --strict dist/*
+      - name: Save tested release distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/*
+          if-no-files-found: error
