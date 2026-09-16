@@ -1,0 +1,311 @@
+{
+  "all_twelve_completed": true,
+  "baseline": "proposal_mixed_pair25",
+  "criteria": "plan.md, fixed before training",
+  "comparisons": [
+    {
+      "name": "future10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.4996940402723633,
+          "late_quality_gain": -0.7412795098039866,
+          "radial_change": 1.2137497478226331,
+          "direction_change": -0.00848388671875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.4398606265587216,
+          "late_quality_gain": -0.6964890528831849,
+          "radial_change": 1.0893398129108522,
+          "direction_change": 0.01556396484375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "future25",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.1333450602470736,
+          "late_quality_gain": -0.039018489355829966,
+          "radial_change": 0.313212679332614,
+          "direction_change": 0.0071258544921875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.04059304459009205,
+          "late_quality_gain": -0.0779922415463179,
+          "radial_change": 0.274505318328363,
+          "direction_change": 0.0003509521484375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "future_arch_control",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": 0.05983653041974568,
+          "late_quality_gain": 0.09672880571139442,
+          "radial_change": 0.0047134118255254265,
+          "direction_change": 0.006317138671875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": 0.06997013980687838,
+          "late_quality_gain": 0.052367972591029543,
+          "radial_change": -0.04923223939491317,
+          "direction_change": 0.00830841064453125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "match25_future10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": 0.09873064750661809,
+          "late_quality_gain": -8.910616079071954e-05,
+          "radial_change": 0.4249025849089165,
+          "direction_change": 0.0293731689453125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": 0.012223296173901721,
+          "late_quality_gain": -0.06927307157473916,
+          "radial_change": 0.4016193742995595,
+          "direction_change": 0.02764129638671875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "match25_recover10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.4088458001286871,
+          "late_quality_gain": -0.3309624892163753,
+          "radial_change": 0.1408251517480983,
+          "direction_change": 0.00473785400390625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.42701585739500036,
+          "late_quality_gain": -0.4199289084893888,
+          "radial_change": 0.1091723363659094,
+          "direction_change": -0.00786590576171875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "match25_recover10_future10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.1001630565125371,
+          "late_quality_gain": -0.18974007599686382,
+          "radial_change": 0.5988634165809323,
+          "direction_change": 0.03456878662109375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.11883888821757216,
+          "late_quality_gain": -0.15707315126167531,
+          "radial_change": 0.5609530164963332,
+          "direction_change": 0.0261077880859375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "match_nearest10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.13027316302220804,
+          "late_quality_gain": -0.2371127166087963,
+          "radial_change": 0.662664153091534,
+          "direction_change": 0.017059326171875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.1832536533296758,
+          "late_quality_gain": -0.29610407705420416,
+          "radial_change": 0.6006630371629016,
+          "direction_change": 0.00440216064453125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "match_nearest25",
+      "qualifies": true,
+      "primary_route": false,
+      "secondary_route": true,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": 0.22026401515198724,
+          "late_quality_gain": 0.23104984589171473,
+          "radial_change": -0.1289660198890481,
+          "direction_change": 0.02396392822265625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": true
+        },
+        "prefix32": {
+          "quality_gain": 0.2004563682905367,
+          "late_quality_gain": 0.12499199987222398,
+          "radial_change": -0.14213987302122355,
+          "direction_change": 0.01540374755859375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": true
+        }
+      }
+    },
+    {
+      "name": "match_nearest50",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.07942027353920345,
+          "late_quality_gain": -0.2584205873960742,
+          "radial_change": 0.059641048643718886,
+          "direction_change": 0.04218292236328125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.10028195081984392,
+          "late_quality_gain": -0.254473069760741,
+          "radial_change": 0.06441287378650662,
+          "direction_change": 0.031097412109375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "match_shuffle25",
+      "qualifies": true,
+      "primary_route": false,
+      "secondary_route": true,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": 0.33268541836201426,
+          "late_quality_gain": 0.5803786236148625,
+          "radial_change": -0.15495589560494627,
+          "direction_change": 0.0187225341796875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": true
+        },
+        "prefix32": {
+          "quality_gain": 0.3489229322242098,
+          "late_quality_gain": 0.6046902939269367,
+          "radial_change": -0.1845870274245811,
+          "direction_change": 0.010894775390625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": true
+        }
+      }
+    },
+    {
+      "name": "recover_noise10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.40323931009706804,
+          "late_quality_gain": -0.41794152327287304,
+          "radial_change": 0.2281075977692828,
+          "direction_change": -0.00746917724609375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.35731282059692826,
+          "late_quality_gain": -0.5150668627354498,
+          "radial_change": 0.1965364246531136,
+          "direction_change": -0.0122833251953125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "recover_noise30",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.33853033259166376,
+          "late_quality_gain": -0.24139822423893553,
+          "radial_change": 0.19577289251999108,
+          "direction_change": -0.0129852294921875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.2992821782736006,
+          "late_quality_gain": -0.2887333448947307,
+          "radial_change": 0.16256471846005605,
+          "direction_change": -0.0141143798828125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    }
+  ],
+  "selected": [
+    "match_shuffle25",
+    "match_nearest25"
+  ]
+}

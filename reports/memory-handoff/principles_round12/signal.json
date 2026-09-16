@@ -1,0 +1,3090 @@
+{
+  "evaluation_only": true,
+  "definition": "Fixed saved real-reference panel, fresh fixed observation noise after saved prefix32. Point head ranks actual noisy next point against nearest/shuffled other-episode continuations, earlier/later real points and generated next point. Nearest donors chosen by prior observation only. These are relative rankings, not calibrated probabilities or guaranteed impossible negatives. Late restoration: after256 autonomous updates from prefix32, clock288, compare autonomous state with true observed prefix288 state or true most-recent32 observations encoded from zero. Recent32 clock32 is a clock control. Same particle/device and reference position; generate128 points after intervention. Full-real versus recent-real distinguishes history length. State restoration jumps position and state; improvement does not by itself prove information erasure or a unique mechanism. Sample-gradient probes report alignment of ascending D score with the target-minus-generated direction; this is an evaluation-only local Euclidean probe, not a training objective or proof of correct recovery. Ranking uses noisy targets; restoration uses clean targets. These short diagnostic continuations are not1024 pass metrics.",
+  "results": [
+    {
+      "name": "future10",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/future10",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.703125,
+            "mean_margin": 0.08796985447406769,
+            "median_margin": 0.04934573173522949
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.90625,
+            "mean_margin": 0.44609543681144714,
+            "median_margin": 0.3987075984477997
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.7734375,
+            "mean_margin": 0.1284162700176239,
+            "median_margin": 0.09486675262451172
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.8125,
+            "mean_margin": 0.20577523112297058,
+            "median_margin": 0.21573537588119507
+          },
+          "generated": {
+            "correct_rank_fraction": 0.6640625,
+            "mean_margin": 0.020174916833639145,
+            "median_margin": 0.010462850332260132
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.0074915229342877865,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.3297649919986725,
+            "positive_alignment_fraction": 0.7265625,
+            "mean_gradient_norm": 0.4605967104434967
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.7421875,
+            "mean_margin": 0.07983789592981339,
+            "median_margin": 0.06191033124923706
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.9140625,
+            "mean_margin": 0.5419653654098511,
+            "median_margin": 0.5058643221855164
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.84375,
+            "mean_margin": 0.15810906887054443,
+            "median_margin": 0.14904534816741943
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.7890625,
+            "mean_margin": 0.20696291327476501,
+            "median_margin": 0.22928112745285034
+          },
+          "generated": {
+            "correct_rank_fraction": 0.5625,
+            "mean_margin": 0.010065596550703049,
+            "median_margin": 0.004615068435668945
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.006354969926178455,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.1877066195011139,
+            "positive_alignment_fraction": 0.6015625,
+            "mean_gradient_norm": 0.46350327134132385
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.7734375,
+            "mean_margin": 0.08460652083158493,
+            "median_margin": 0.055012673139572144
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.90625,
+            "mean_margin": 0.5127386450767517,
+            "median_margin": 0.46941328048706055
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.8671875,
+            "mean_margin": 0.16242878139019012,
+            "median_margin": 0.15688078105449677
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.859375,
+            "mean_margin": 0.22578458487987518,
+            "median_margin": 0.2464982569217682
+          },
+          "generated": {
+            "correct_rank_fraction": 0.4921875,
+            "mean_margin": -0.0018145082285627723,
+            "median_margin": -0.0007434487342834473
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.006945725996047258,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.07997384667396545,
+            "positive_alignment_fraction": 0.5625,
+            "mean_gradient_norm": 0.4167526960372925
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.0030464938790437527,
+            "quality_median": 7.983771045068984e-05,
+            "quality_first32": 0.0032321373097155583,
+            "quality_last256": 0.0030464938790437527,
+            "good_step_fraction": 0.00177001953125,
+            "good_step_fraction_last256": 0.00177001953125,
+            "initial_good_steps_mean": 0.0,
+            "longest_good_arc_turns_mean": 0.0075126585151170195,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0078125,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 2.46465347517689,
+            "signed_speed_mae": 0.327264051113317,
+            "reference_direction_consistency": 0.5028076171875,
+            "startup_error_relative": 3.3172323728128554,
+            "position_error_first32": 3.3419266145733424,
+            "position_error_last128": 3.4406142959419053,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 5.922560214996338,
+          "memory_rms": 0.6529338955879211,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.4093679189682007,
+            "positive_alignment_fraction": 0.2890625,
+            "mean_gradient_norm": 0.6027609705924988
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.0072386792873208134,
+            "quality_median": 0.0040746299815231785,
+            "quality_first32": 0.01938472199909031,
+            "quality_last256": 0.0072386792873208134,
+            "good_step_fraction": 0.0037841796875,
+            "good_step_fraction_last256": 0.0037841796875,
+            "initial_good_steps_mean": 0.140625,
+            "longest_good_arc_turns_mean": 0.017467800731919704,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 2.5696519982974655,
+            "signed_speed_mae": 0.24384698933561938,
+            "reference_direction_consistency": 0.573486328125,
+            "startup_error_relative": 0.14891792652060432,
+            "position_error_first32": 2.421815037682646,
+            "position_error_last128": 3.362569716583427,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.012922362424433231,
+          "memory_rms": 0.4622671604156494,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.3459182679653168,
+            "positive_alignment_fraction": 0.7265625,
+            "mean_gradient_norm": 0.43767842650413513
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.007336678352253233,
+            "quality_median": 0.003975875744919601,
+            "quality_first32": 0.019675607286306122,
+            "quality_last256": 0.007336678352253234,
+            "good_step_fraction": 0.0037841796875,
+            "good_step_fraction_last256": 0.0037841796875,
+            "initial_good_steps_mean": 0.125,
+            "longest_good_arc_turns_mean": 0.016080918105657503,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 2.574957662881122,
+            "signed_speed_mae": 0.24313098647725628,
+            "reference_direction_consistency": 0.57635498046875,
+            "startup_error_relative": 0.14912771694038895,
+            "position_error_first32": 2.4223588652992682,
+            "position_error_last128": 3.3692753740050296,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.012911246158182621,
+          "memory_rms": 0.4620315432548523,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.3316739499568939,
+            "positive_alignment_fraction": 0.7109375,
+            "mean_gradient_norm": 0.431359201669693
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.017806933535952113,
+            "quality_median": 0.012558060630813286,
+            "quality_first32": 0.0460834786159381,
+            "quality_last256": 0.017806933535952113,
+            "good_step_fraction": 0.01080322265625,
+            "good_step_fraction_last256": 0.01080322265625,
+            "initial_good_steps_mean": 0.421875,
+            "longest_good_arc_turns_mean": 0.03720673721443113,
+            "longest_good_arc_turns_median": 0.033214271429215576,
+            "quarter_turn_fraction": 0.0078125,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.6743547879757652,
+            "signed_speed_mae": 0.23467074439115326,
+            "reference_direction_consistency": 0.60552978515625,
+            "startup_error_relative": 0.08978290188056978,
+            "position_error_first32": 1.5139940322417718,
+            "position_error_last128": 2.3618191295688598,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.004498095717281103,
+          "memory_rms": 0.4620315432548523,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.13421642780303955,
+            "positive_alignment_fraction": 0.5546875,
+            "mean_gradient_norm": 0.4280349612236023
+          }
+        }
+      }
+    },
+    {
+      "name": "future25",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/future25",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.65625,
+            "mean_margin": 0.07217651605606079,
+            "median_margin": 0.03775322437286377
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.796875,
+            "mean_margin": 0.3104694187641144,
+            "median_margin": 0.29946041107177734
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.6796875,
+            "mean_margin": 0.09854565560817719,
+            "median_margin": 0.07751008868217468
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.7578125,
+            "mean_margin": 0.15347251296043396,
+            "median_margin": 0.13837486505508423
+          },
+          "generated": {
+            "correct_rank_fraction": 0.59375,
+            "mean_margin": 0.014479454606771469,
+            "median_margin": 0.004419088363647461
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.007504250388592482,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.24650344252586365,
+            "positive_alignment_fraction": 0.6484375,
+            "mean_gradient_norm": 0.4326744079589844
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.6796875,
+            "mean_margin": 0.07802611589431763,
+            "median_margin": 0.04260137677192688
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.8515625,
+            "mean_margin": 0.4326004683971405,
+            "median_margin": 0.45168745517730713
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.8671875,
+            "mean_margin": 0.1570076048374176,
+            "median_margin": 0.12129157781600952
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.6875,
+            "mean_margin": 0.143600732088089,
+            "median_margin": 0.13353514671325684
+          },
+          "generated": {
+            "correct_rank_fraction": 0.53125,
+            "mean_margin": 0.0028429243247956038,
+            "median_margin": 0.0010989904403686523
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.004493435844779015,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.1089458018541336,
+            "positive_alignment_fraction": 0.5390625,
+            "mean_gradient_norm": 0.40704354643821716
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.6953125,
+            "mean_margin": 0.08935227245092392,
+            "median_margin": 0.04562938213348389
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.828125,
+            "mean_margin": 0.4350931644439697,
+            "median_margin": 0.40206825733184814
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.8203125,
+            "mean_margin": 0.16198280453681946,
+            "median_margin": 0.12703967094421387
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.734375,
+            "mean_margin": 0.16383349895477295,
+            "median_margin": 0.16604948043823242
+          },
+          "generated": {
+            "correct_rank_fraction": 0.5234375,
+            "mean_margin": 0.00609323475509882,
+            "median_margin": 0.004532188177108765
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.0065054516308009624,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.21746215224266052,
+            "positive_alignment_fraction": 0.640625,
+            "mean_gradient_norm": 0.4369331896305084
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.006045035617121155,
+            "quality_median": 0.0037461701717557117,
+            "quality_first32": 0.006461678738771787,
+            "quality_last256": 0.006045035617121155,
+            "good_step_fraction": 0.00238037109375,
+            "good_step_fraction_last256": 0.00238037109375,
+            "initial_good_steps_mean": 0.0,
+            "longest_good_arc_turns_mean": 0.010224901954517836,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.5206728576719952,
+            "signed_speed_mae": 0.2753664490926035,
+            "reference_direction_consistency": 0.5020751953125,
+            "startup_error_relative": 1.984025362634617,
+            "position_error_first32": 2.1296080978496628,
+            "position_error_last128": 2.369566293472221,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 2.1134519577026367,
+          "memory_rms": 0.5178521871566772,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.24116507172584534,
+            "positive_alignment_fraction": 0.3203125,
+            "mean_gradient_norm": 0.48937979340553284
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.007878705880029122,
+            "quality_median": 0.0053464118551260105,
+            "quality_first32": 0.01572687949143065,
+            "quality_last256": 0.007878705880029126,
+            "good_step_fraction": 0.00390625,
+            "good_step_fraction_last256": 0.00390625,
+            "initial_good_steps_mean": 0.109375,
+            "longest_good_arc_turns_mean": 0.015273378729157933,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.4677092339916027,
+            "signed_speed_mae": 0.2583167088907251,
+            "reference_direction_consistency": 0.51434326171875,
+            "startup_error_relative": 0.19836706220025746,
+            "position_error_first32": 1.7758309038072753,
+            "position_error_last128": 2.270359145836537,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.02643647789955139,
+          "memory_rms": 0.446494996547699,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.3392171859741211,
+            "positive_alignment_fraction": 0.6953125,
+            "mean_gradient_norm": 0.4054810106754303
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.008280604830881482,
+            "quality_median": 0.005469871227630452,
+            "quality_first32": 0.015912436371572726,
+            "quality_last256": 0.008280604830881482,
+            "good_step_fraction": 0.00390625,
+            "good_step_fraction_last256": 0.00390625,
+            "initial_good_steps_mean": 0.1015625,
+            "longest_good_arc_turns_mean": 0.015886571165118983,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.4515145422381095,
+            "signed_speed_mae": 0.26129034934447637,
+            "reference_direction_consistency": 0.51116943359375,
+            "startup_error_relative": 0.19768393007006552,
+            "position_error_first32": 1.7705876461840375,
+            "position_error_last128": 2.2529476249326925,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.026606813073158264,
+          "memory_rms": 0.445074200630188,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.30850571393966675,
+            "positive_alignment_fraction": 0.6953125,
+            "mean_gradient_norm": 0.4006255567073822
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.019852222136890654,
+            "quality_median": 0.015318310840493518,
+            "quality_first32": 0.057874273251597136,
+            "quality_last256": 0.019852222136890654,
+            "good_step_fraction": 0.01373291015625,
+            "good_step_fraction_last256": 0.01373291015625,
+            "initial_good_steps_mean": 0.5703125,
+            "longest_good_arc_turns_mean": 0.047132230827233404,
+            "longest_good_arc_turns_median": 0.03838558738491006,
+            "quarter_turn_fraction": 0.0078125,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.3495616360682292,
+            "signed_speed_mae": 0.23717299535378172,
+            "reference_direction_consistency": 0.57745361328125,
+            "startup_error_relative": 0.08630068671014665,
+            "position_error_first32": 1.231470639095797,
+            "position_error_last128": 2.0386738693616717,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.003913364838808775,
+          "memory_rms": 0.445074200630188,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.21998286247253418,
+            "positive_alignment_fraction": 0.640625,
+            "mean_gradient_norm": 0.39738571643829346
+          }
+        }
+      }
+    },
+    {
+      "name": "future_arch_control",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/future_arch_control",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.6875,
+            "mean_margin": 0.0727166160941124,
+            "median_margin": 0.05603592097759247
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.7890625,
+            "mean_margin": 0.26690375804901123,
+            "median_margin": 0.2659234404563904
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.75,
+            "mean_margin": 0.11685608327388763,
+            "median_margin": 0.12276855111122131
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.7109375,
+            "mean_margin": 0.1344481259584427,
+            "median_margin": 0.1503429412841797
+          },
+          "generated": {
+            "correct_rank_fraction": 0.609375,
+            "mean_margin": 0.012834691442549229,
+            "median_margin": 0.009615123271942139
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.005326840560883284,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.22216731309890747,
+            "positive_alignment_fraction": 0.6484375,
+            "mean_gradient_norm": 0.4907054305076599
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.7109375,
+            "mean_margin": 0.06978398561477661,
+            "median_margin": 0.047564566135406494
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.78125,
+            "mean_margin": 0.2846130430698395,
+            "median_margin": 0.23834402859210968
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.8515625,
+            "mean_margin": 0.14656677842140198,
+            "median_margin": 0.14005815982818604
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.6171875,
+            "mean_margin": 0.0852646455168724,
+            "median_margin": 0.06404584646224976
+          },
+          "generated": {
+            "correct_rank_fraction": 0.59375,
+            "mean_margin": 0.009869779460132122,
+            "median_margin": 0.005721747875213623
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.006534414831548929,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.1944863647222519,
+            "positive_alignment_fraction": 0.640625,
+            "mean_gradient_norm": 0.5371516346931458
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.703125,
+            "mean_margin": 0.07673541456460953,
+            "median_margin": 0.05478307604789734
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.75,
+            "mean_margin": 0.2181151658296585,
+            "median_margin": 0.19937241077423096
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.8203125,
+            "mean_margin": 0.15322571992874146,
+            "median_margin": 0.14998725056648254
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.671875,
+            "mean_margin": 0.09825070202350616,
+            "median_margin": 0.09101174771785736
+          },
+          "generated": {
+            "correct_rank_fraction": 0.59375,
+            "mean_margin": 0.008346188813447952,
+            "median_margin": 0.006814241409301758
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.005351164378225803,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.1569594442844391,
+            "positive_alignment_fraction": 0.59375,
+            "mean_gradient_norm": 0.5368109941482544
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.009248193806645107,
+            "quality_median": 0.0047817093836958575,
+            "quality_first32": 0.01276917799615271,
+            "quality_last256": 0.009248193806645107,
+            "good_step_fraction": 0.0050048828125,
+            "good_step_fraction_last256": 0.0050048828125,
+            "initial_good_steps_mean": 0.0,
+            "longest_good_arc_turns_mean": 0.01669364362222952,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.1147014274595914,
+            "signed_speed_mae": 0.3000659438328396,
+            "reference_direction_consistency": 0.51654052734375,
+            "startup_error_relative": 1.476154687251333,
+            "position_error_first32": 1.613455257486243,
+            "position_error_last128": 1.9714414271885983,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 1.184814453125,
+          "memory_rms": 0.40676623582839966,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.2700268626213074,
+            "positive_alignment_fraction": 0.65625,
+            "mean_gradient_norm": 0.6599379777908325
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.011248365374208624,
+            "quality_median": 0.008586222646424065,
+            "quality_first32": 0.028495935326718277,
+            "quality_last256": 0.011248365374208624,
+            "good_step_fraction": 0.00616455078125,
+            "good_step_fraction_last256": 0.00616455078125,
+            "initial_good_steps_mean": 0.140625,
+            "longest_good_arc_turns_mean": 0.02209065556623529,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.2534215594653504,
+            "signed_speed_mae": 0.26345350904975307,
+            "reference_direction_consistency": 0.5247802734375,
+            "startup_error_relative": 0.15479800910320135,
+            "position_error_first32": 1.4745139553582045,
+            "position_error_last128": 2.0479978832180032,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.014043823815882206,
+          "memory_rms": 0.4491789937019348,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.352255642414093,
+            "positive_alignment_fraction": 0.7265625,
+            "mean_gradient_norm": 0.5140385031700134
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.011263956469493339,
+            "quality_median": 0.008543232904838782,
+            "quality_first32": 0.02839321667005671,
+            "quality_last256": 0.011263956469493339,
+            "good_step_fraction": 0.006103515625,
+            "good_step_fraction_last256": 0.006103515625,
+            "initial_good_steps_mean": 0.140625,
+            "longest_good_arc_turns_mean": 0.02201806124209191,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.2556030440870747,
+            "signed_speed_mae": 0.2641064490471213,
+            "reference_direction_consistency": 0.52471923828125,
+            "startup_error_relative": 0.1548462069686161,
+            "position_error_first32": 1.475021599152428,
+            "position_error_last128": 2.050531533392217,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.014060664921998978,
+          "memory_rms": 0.44913530349731445,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.34708020091056824,
+            "positive_alignment_fraction": 0.7109375,
+            "mean_gradient_norm": 0.5143235325813293
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.018157899796662564,
+            "quality_median": 0.01447770521976412,
+            "quality_first32": 0.03857918170671672,
+            "quality_last256": 0.018157899796662564,
+            "good_step_fraction": 0.01080322265625,
+            "good_step_fraction_last256": 0.01080322265625,
+            "initial_good_steps_mean": 0.4921875,
+            "longest_good_arc_turns_mean": 0.037639463378142314,
+            "longest_good_arc_turns_median": 0.029309621288228643,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.0021730417172705,
+            "signed_speed_mae": 0.2421386557411142,
+            "reference_direction_consistency": 0.5810546875,
+            "startup_error_relative": 0.08356436479654542,
+            "position_error_first32": 1.5967606175499252,
+            "position_error_last128": 1.7866611252408426,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.003972156438976526,
+          "memory_rms": 0.44913530349731445,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.2587081491947174,
+            "positive_alignment_fraction": 0.65625,
+            "mean_gradient_norm": 0.5097134113311768
+          }
+        }
+      }
+    },
+    {
+      "name": "match25_future10",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/match25_future10",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.90625,
+            "mean_margin": 0.32167112827301025,
+            "median_margin": 0.2859019637107849
+          },
+          "shuffle": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.9354128241539001,
+            "median_margin": 0.9209874272346497
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5152314901351929,
+            "median_margin": 0.5077455639839172
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.42767098546028137,
+            "median_margin": 0.3761441111564636
+          },
+          "generated": {
+            "correct_rank_fraction": 0.3203125,
+            "mean_margin": -0.014112178236246109,
+            "median_margin": -0.011540651321411133
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.0061110323294997215,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.009585832245647907,
+            "positive_alignment_fraction": 0.5234375,
+            "mean_gradient_norm": 0.5824815034866333
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.8671875,
+            "mean_margin": 0.2725451588630676,
+            "median_margin": 0.24051105976104736
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.96875,
+            "mean_margin": 0.9473075866699219,
+            "median_margin": 0.9833390116691589
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.533196210861206,
+            "median_margin": 0.5194954872131348
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.4372178018093109,
+            "median_margin": 0.4067726731300354
+          },
+          "generated": {
+            "correct_rank_fraction": 0.3828125,
+            "mean_margin": -0.012100842781364918,
+            "median_margin": -0.013349294662475586
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.0045381044037640095,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.04589289426803589,
+            "positive_alignment_fraction": 0.546875,
+            "mean_gradient_norm": 0.5967416763305664
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.8671875,
+            "mean_margin": 0.28065282106399536,
+            "median_margin": 0.27495700120925903
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.9765625,
+            "mean_margin": 0.9519203305244446,
+            "median_margin": 0.9946419596672058
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5278401374816895,
+            "median_margin": 0.5052779912948608
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.42332905530929565,
+            "median_margin": 0.392564058303833
+          },
+          "generated": {
+            "correct_rank_fraction": 0.3359375,
+            "mean_margin": -0.01523925457149744,
+            "median_margin": -0.012901067733764648
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.005529864691197872,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.02340105175971985,
+            "positive_alignment_fraction": 0.46875,
+            "mean_gradient_norm": 0.6015440225601196
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.004349346890111587,
+            "quality_median": 0.0009182809464495457,
+            "quality_first32": 0.006016356533599949,
+            "quality_last256": 0.004349346890111587,
+            "good_step_fraction": 0.0015869140625,
+            "good_step_fraction_last256": 0.0015869140625,
+            "initial_good_steps_mean": 0.0,
+            "longest_good_arc_turns_mean": 0.006111889412349655,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.7493597018018394,
+            "signed_speed_mae": 0.31103142728795574,
+            "reference_direction_consistency": 0.51385498046875,
+            "startup_error_relative": 2.4770471203997406,
+            "position_error_first32": 2.5447216473452547,
+            "position_error_last128": 2.6706471825299096,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 3.2905101776123047,
+          "memory_rms": 0.5661611557006836,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.4521663188934326,
+            "positive_alignment_fraction": 0.2421875,
+            "mean_gradient_norm": 0.5068330764770508
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.009108537555845193,
+            "quality_median": 0.003989150301375274,
+            "quality_first32": 0.020594206389314685,
+            "quality_last256": 0.009108537555845194,
+            "good_step_fraction": 0.00518798828125,
+            "good_step_fraction_last256": 0.00518798828125,
+            "initial_good_steps_mean": 0.1640625,
+            "longest_good_arc_turns_mean": 0.023037544740072746,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.8701541050293249,
+            "signed_speed_mae": 0.2357810821986581,
+            "reference_direction_consistency": 0.60308837890625,
+            "startup_error_relative": 0.1501251108564831,
+            "position_error_first32": 2.1825560969318247,
+            "position_error_last128": 2.7229553614065085,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.012695099227130413,
+          "memory_rms": 0.4372272789478302,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.2912389039993286,
+            "positive_alignment_fraction": 0.6953125,
+            "mean_gradient_norm": 0.6465679407119751
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.009142994204053841,
+            "quality_median": 0.004360509983328091,
+            "quality_first32": 0.02209378805992839,
+            "quality_last256": 0.009142994204053841,
+            "good_step_fraction": 0.00543212890625,
+            "good_step_fraction_last256": 0.00543212890625,
+            "initial_good_steps_mean": 0.171875,
+            "longest_good_arc_turns_mean": 0.023331047075651434,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.8923079464584447,
+            "signed_speed_mae": 0.23630889154200835,
+            "reference_direction_consistency": 0.59771728515625,
+            "startup_error_relative": 0.14872913723013031,
+            "position_error_first32": 2.162607257474825,
+            "position_error_last128": 2.739315963669818,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.012437987141311169,
+          "memory_rms": 0.4352511763572693,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.2951659560203552,
+            "positive_alignment_fraction": 0.703125,
+            "mean_gradient_norm": 0.6688964366912842
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.022578182477976848,
+            "quality_median": 0.01579605295692267,
+            "quality_first32": 0.06049404130137066,
+            "quality_last256": 0.022578182477976848,
+            "good_step_fraction": 0.015625,
+            "good_step_fraction_last256": 0.015625,
+            "initial_good_steps_mean": 0.65625,
+            "longest_good_arc_turns_mean": 0.05524239548925966,
+            "longest_good_arc_turns_median": 0.038603426835202265,
+            "quarter_turn_fraction": 0.03125,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.5456858603963044,
+            "signed_speed_mae": 0.19459604112679785,
+            "reference_direction_consistency": 0.65130615234375,
+            "startup_error_relative": 0.09038893314859708,
+            "position_error_first32": 1.4704533500536758,
+            "position_error_last128": 2.287789005516188,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.004126918502151966,
+          "memory_rms": 0.4352511763572693,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.040385399013757706,
+            "positive_alignment_fraction": 0.4921875,
+            "mean_gradient_norm": 0.6107039451599121
+          }
+        }
+      }
+    },
+    {
+      "name": "match25_recover10",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/match25_recover10",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.8984375,
+            "mean_margin": 0.3057557940483093,
+            "median_margin": 0.26455581188201904
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.9921875,
+            "mean_margin": 0.9284461736679077,
+            "median_margin": 0.8255178928375244
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.49042922258377075,
+            "median_margin": 0.46605879068374634
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.984375,
+            "mean_margin": 0.4059516191482544,
+            "median_margin": 0.31458914279937744
+          },
+          "generated": {
+            "correct_rank_fraction": 0.3671875,
+            "mean_margin": -0.015526911243796349,
+            "median_margin": -0.013517260551452637
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.006680634338408709,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.04521337151527405,
+            "positive_alignment_fraction": 0.4609375,
+            "mean_gradient_norm": 0.5885420441627502
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.8515625,
+            "mean_margin": 0.25618526339530945,
+            "median_margin": 0.19460606575012207
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.984375,
+            "mean_margin": 0.9056606888771057,
+            "median_margin": 0.7674271464347839
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.4958171248435974,
+            "median_margin": 0.4811594486236572
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.984375,
+            "mean_margin": 0.3813990652561188,
+            "median_margin": 0.31576085090637207
+          },
+          "generated": {
+            "correct_rank_fraction": 0.375,
+            "mean_margin": -0.015607068315148354,
+            "median_margin": -0.010563373565673828
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.00635294895619154,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.017136242240667343,
+            "positive_alignment_fraction": 0.453125,
+            "mean_gradient_norm": 0.6157339811325073
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.8359375,
+            "mean_margin": 0.2620187997817993,
+            "median_margin": 0.26182830333709717
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.984375,
+            "mean_margin": 0.909725546836853,
+            "median_margin": 0.8288910388946533
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.48438236117362976,
+            "median_margin": 0.47263437509536743
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.9765625,
+            "mean_margin": 0.38682180643081665,
+            "median_margin": 0.3310534954071045
+          },
+          "generated": {
+            "correct_rank_fraction": 0.3359375,
+            "mean_margin": -0.01772145740687847,
+            "median_margin": -0.014980077743530273
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.00523921474814415,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.12615785002708435,
+            "positive_alignment_fraction": 0.421875,
+            "mean_gradient_norm": 0.6126213073730469
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.004839296614395652,
+            "quality_median": 0.0020325956875701387,
+            "quality_first32": 0.008000084113418455,
+            "quality_last256": 0.004839296614395652,
+            "good_step_fraction": 0.001953125,
+            "good_step_fraction_last256": 0.001953125,
+            "initial_good_steps_mean": 0.0,
+            "longest_good_arc_turns_mean": 0.008744109829293675,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.3444834551422105,
+            "signed_speed_mae": 0.3185875173350302,
+            "reference_direction_consistency": 0.49224853515625,
+            "startup_error_relative": 1.9120729028463592,
+            "position_error_first32": 1.8931456930838588,
+            "position_error_last128": 2.270233754779979,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 1.8994334936141968,
+          "memory_rms": 0.49552789330482483,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.01652255654335022,
+            "positive_alignment_fraction": 0.5234375,
+            "mean_gradient_norm": 0.609950065612793
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.01006145440482517,
+            "quality_median": 0.006766490235472779,
+            "quality_first32": 0.030280935734006628,
+            "quality_last256": 0.01006145440482517,
+            "good_step_fraction": 0.005859375,
+            "good_step_fraction_last256": 0.005859375,
+            "initial_good_steps_mean": 0.2109375,
+            "longest_good_arc_turns_mean": 0.025765814674306612,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.342470313802651,
+            "signed_speed_mae": 0.2705613946750932,
+            "reference_direction_consistency": 0.5244140625,
+            "startup_error_relative": 0.14502545500250408,
+            "position_error_first32": 1.5067151719663483,
+            "position_error_last128": 2.1915982314329465,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.013765783049166203,
+          "memory_rms": 0.425821453332901,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.2638671100139618,
+            "positive_alignment_fraction": 0.6640625,
+            "mean_gradient_norm": 0.6802657842636108
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.010046076290361354,
+            "quality_median": 0.0067667779113578,
+            "quality_first32": 0.030280895431093146,
+            "quality_last256": 0.010046076290361354,
+            "good_step_fraction": 0.00592041015625,
+            "good_step_fraction_last256": 0.00592041015625,
+            "initial_good_steps_mean": 0.2109375,
+            "longest_good_arc_turns_mean": 0.026039379679985097,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.3424716182812024,
+            "signed_speed_mae": 0.2705546273584902,
+            "reference_direction_consistency": 0.5244140625,
+            "startup_error_relative": 0.1450282169832987,
+            "position_error_first32": 1.5067146825705935,
+            "position_error_last128": 2.191603944979952,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.013766204938292503,
+          "memory_rms": 0.42582112550735474,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.2638610899448395,
+            "positive_alignment_fraction": 0.6640625,
+            "mean_gradient_norm": 0.6802657842636108
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.010804107321588981,
+            "quality_median": 0.009146174473297852,
+            "quality_first32": 0.028984365433094635,
+            "quality_last256": 0.010804107321588981,
+            "good_step_fraction": 0.00592041015625,
+            "good_step_fraction_last256": 0.00592041015625,
+            "initial_good_steps_mean": 0.3671875,
+            "longest_good_arc_turns_mean": 0.028305769174241387,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.311225253464218,
+            "signed_speed_mae": 0.26738610889939896,
+            "reference_direction_consistency": 0.5538330078125,
+            "startup_error_relative": 0.09223754298789114,
+            "position_error_first32": 1.7380183006809835,
+            "position_error_last128": 2.1592439071785154,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.0043890648521482944,
+          "memory_rms": 0.42582112550735474,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.10443207621574402,
+            "positive_alignment_fraction": 0.453125,
+            "mean_gradient_norm": 0.6131198406219482
+          }
+        }
+      }
+    },
+    {
+      "name": "match25_recover10_future10",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/match25_recover10_future10",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.8984375,
+            "mean_margin": 0.3151700496673584,
+            "median_margin": 0.28463566303253174
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.9921875,
+            "mean_margin": 0.8877526521682739,
+            "median_margin": 0.9096060395240784
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5031237602233887,
+            "median_margin": 0.5027183294296265
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.4084945023059845,
+            "median_margin": 0.3549264073371887
+          },
+          "generated": {
+            "correct_rank_fraction": 0.421875,
+            "mean_margin": -0.0071242935955524445,
+            "median_margin": -0.006142377853393555
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.005360566545277834,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.06476186960935593,
+            "positive_alignment_fraction": 0.53125,
+            "mean_gradient_norm": 0.5512798428535461
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.875,
+            "mean_margin": 0.2765297293663025,
+            "median_margin": 0.22974306344985962
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.9765625,
+            "mean_margin": 0.9260711669921875,
+            "median_margin": 0.9701974391937256
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5302896499633789,
+            "median_margin": 0.4955275356769562
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.41827961802482605,
+            "median_margin": 0.38942933082580566
+          },
+          "generated": {
+            "correct_rank_fraction": 0.4296875,
+            "mean_margin": -0.00901329331099987,
+            "median_margin": -0.005554556846618652
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.004857085179537535,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.10577989369630814,
+            "positive_alignment_fraction": 0.59375,
+            "mean_gradient_norm": 0.6197574138641357
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.8828125,
+            "mean_margin": 0.2811930477619171,
+            "median_margin": 0.2792551815509796
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.96875,
+            "mean_margin": 0.9342246651649475,
+            "median_margin": 0.9885095357894897
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5231862664222717,
+            "median_margin": 0.5061540007591248
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.41830432415008545,
+            "median_margin": 0.3766534924507141
+          },
+          "generated": {
+            "correct_rank_fraction": 0.3515625,
+            "mean_margin": -0.014109952375292778,
+            "median_margin": -0.014100790023803711
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.004803938325494528,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.009734934195876122,
+            "positive_alignment_fraction": 0.484375,
+            "mean_gradient_norm": 0.620446503162384
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.0029389006809649194,
+            "quality_median": 0.0006461659259911522,
+            "quality_first32": 0.004406784322905743,
+            "quality_last256": 0.0029389006809649194,
+            "good_step_fraction": 0.0013427734375,
+            "good_step_fraction_last256": 0.0013427734375,
+            "initial_good_steps_mean": 0.0,
+            "longest_good_arc_turns_mean": 0.006574459013482068,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 2.0658287213816706,
+            "signed_speed_mae": 0.27587083016623315,
+            "reference_direction_consistency": 0.508544921875,
+            "startup_error_relative": 2.002792158103379,
+            "position_error_first32": 2.5450371837934087,
+            "position_error_last128": 2.995363786556284,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 2.217390537261963,
+          "memory_rms": 0.5138415694236755,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.30150413513183594,
+            "positive_alignment_fraction": 0.3203125,
+            "mean_gradient_norm": 0.6778439879417419
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.005953952242697249,
+            "quality_median": 0.0031106416480972147,
+            "quality_first32": 0.017504100563190926,
+            "quality_last256": 0.005953952242697249,
+            "good_step_fraction": 0.003662109375,
+            "good_step_fraction_last256": 0.003662109375,
+            "initial_good_steps_mean": 0.21875,
+            "longest_good_arc_turns_mean": 0.017495319779719257,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 2.1927708314861825,
+            "signed_speed_mae": 0.24447541087618713,
+            "reference_direction_consistency": 0.55419921875,
+            "startup_error_relative": 0.13245705525302748,
+            "position_error_first32": 2.377232407610947,
+            "position_error_last128": 3.0670625451942923,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.010436741635203362,
+          "memory_rms": 0.43428751826286316,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.2999890446662903,
+            "positive_alignment_fraction": 0.6875,
+            "mean_gradient_norm": 0.6648600101470947
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.005904031203282374,
+            "quality_median": 0.003156346160214352,
+            "quality_first32": 0.017453588921247813,
+            "quality_last256": 0.005904031203282374,
+            "good_step_fraction": 0.00390625,
+            "good_step_fraction_last256": 0.00390625,
+            "initial_good_steps_mean": 0.2421875,
+            "longest_good_arc_turns_mean": 0.018841358810960225,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 2.191883592831605,
+            "signed_speed_mae": 0.24404275856097135,
+            "reference_direction_consistency": 0.55401611328125,
+            "startup_error_relative": 0.13168977075289617,
+            "position_error_first32": 2.3736025885637377,
+            "position_error_last128": 3.066409862944006,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.010337251238524914,
+          "memory_rms": 0.4336300492286682,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.2996285557746887,
+            "positive_alignment_fraction": 0.6875,
+            "mean_gradient_norm": 0.6620544195175171
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.020829653649413256,
+            "quality_median": 0.015159508816343646,
+            "quality_first32": 0.058587972807539926,
+            "quality_last256": 0.020829653649413256,
+            "good_step_fraction": 0.01361083984375,
+            "good_step_fraction_last256": 0.01361083984375,
+            "initial_good_steps_mean": 0.6171875,
+            "longest_good_arc_turns_mean": 0.05005648600986212,
+            "longest_good_arc_turns_median": 0.042979934071830435,
+            "quarter_turn_fraction": 0.0078125,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.8404888055185316,
+            "signed_speed_mae": 0.18727704986691834,
+            "reference_direction_consistency": 0.63812255859375,
+            "startup_error_relative": 0.08308607086556724,
+            "position_error_first32": 1.4463697793367984,
+            "position_error_last128": 2.545181174068774,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.003610680578276515,
+          "memory_rms": 0.4336300492286682,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.0037949364632368088,
+            "positive_alignment_fraction": 0.4609375,
+            "mean_gradient_norm": 0.6076463460922241
+          }
+        }
+      }
+    },
+    {
+      "name": "match_nearest10",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/match_nearest10",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.8828125,
+            "mean_margin": 0.2686934769153595,
+            "median_margin": 0.22052240371704102
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.9609375,
+            "mean_margin": 0.723246693611145,
+            "median_margin": 0.6620006561279297
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.44159048795700073,
+            "median_margin": 0.4428968131542206
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.9140625,
+            "mean_margin": 0.2886018455028534,
+            "median_margin": 0.21172896027565002
+          },
+          "generated": {
+            "correct_rank_fraction": 0.5390625,
+            "mean_margin": 0.00392832700163126,
+            "median_margin": 0.0018551349639892578
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.005635532084852457,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.18269062042236328,
+            "positive_alignment_fraction": 0.6328125,
+            "mean_gradient_norm": 0.5554108023643494
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.8046875,
+            "mean_margin": 0.2255183458328247,
+            "median_margin": 0.2064010500907898
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.953125,
+            "mean_margin": 0.7799986600875854,
+            "median_margin": 0.7362744808197021
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.4855569899082184,
+            "median_margin": 0.47494280338287354
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.9296875,
+            "mean_margin": 0.27216416597366333,
+            "median_margin": 0.20190954208374023
+          },
+          "generated": {
+            "correct_rank_fraction": 0.4453125,
+            "mean_margin": -0.0026477519422769547,
+            "median_margin": -0.006779193878173828
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.005122617352753878,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.04277172312140465,
+            "positive_alignment_fraction": 0.515625,
+            "mean_gradient_norm": 0.6286008358001709
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.8359375,
+            "mean_margin": 0.24284133315086365,
+            "median_margin": 0.2419123649597168
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.953125,
+            "mean_margin": 0.7766233682632446,
+            "median_margin": 0.6910049915313721
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.4751025140285492,
+            "median_margin": 0.4450792670249939
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.875,
+            "mean_margin": 0.24591943621635437,
+            "median_margin": 0.18629398941993713
+          },
+          "generated": {
+            "correct_rank_fraction": 0.484375,
+            "mean_margin": 0.0009801979176700115,
+            "median_margin": -0.0022259950637817383
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.006293207406997681,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.09721460938453674,
+            "positive_alignment_fraction": 0.5625,
+            "mean_gradient_norm": 0.6334952116012573
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.005872460866418387,
+            "quality_median": 0.0005573900303384974,
+            "quality_first32": 0.007100141844459074,
+            "quality_last256": 0.005872460866418387,
+            "good_step_fraction": 0.0029296875,
+            "good_step_fraction_last256": 0.0029296875,
+            "initial_good_steps_mean": 0.0,
+            "longest_good_arc_turns_mean": 0.009040145300360309,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.722002101334906,
+            "signed_speed_mae": 0.28751721591764584,
+            "reference_direction_consistency": 0.50213623046875,
+            "startup_error_relative": 2.5294706429185663,
+            "position_error_first32": 2.5545903046770424,
+            "position_error_last128": 2.700740639286182,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 3.9052391052246094,
+          "memory_rms": 0.6204929947853088,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.427599161863327,
+            "positive_alignment_fraction": 0.1875,
+            "mean_gradient_norm": 0.46191996335983276
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.013050299566476277,
+            "quality_median": 0.00885564095926299,
+            "quality_first32": 0.026674331546610044,
+            "quality_last256": 0.013050299566476277,
+            "good_step_fraction": 0.006591796875,
+            "good_step_fraction_last256": 0.006591796875,
+            "initial_good_steps_mean": 0.1875,
+            "longest_good_arc_turns_mean": 0.02338897481730443,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 0.9849365595927609,
+            "signed_speed_mae": 0.24720284190696665,
+            "reference_direction_consistency": 0.556640625,
+            "startup_error_relative": 0.1751361075325966,
+            "position_error_first32": 1.291777366643528,
+            "position_error_last128": 1.8316634012358173,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.026674889028072357,
+          "memory_rms": 0.4467724859714508,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.32736748456954956,
+            "positive_alignment_fraction": 0.71875,
+            "mean_gradient_norm": 0.6858187317848206
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.012979381791038927,
+            "quality_median": 0.008857499359112952,
+            "quality_first32": 0.026604929188516376,
+            "quality_last256": 0.012979381791038927,
+            "good_step_fraction": 0.0064697265625,
+            "good_step_fraction_last256": 0.0064697265625,
+            "initial_good_steps_mean": 0.1875,
+            "longest_good_arc_turns_mean": 0.023007120025705333,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 0.9867042686970329,
+            "signed_speed_mae": 0.24762079115737812,
+            "reference_direction_consistency": 0.5584716796875,
+            "startup_error_relative": 0.17516538839598145,
+            "position_error_first32": 1.2917272296040878,
+            "position_error_last128": 1.8323823424109267,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.02667998895049095,
+          "memory_rms": 0.4467635154724121,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.3271982967853546,
+            "positive_alignment_fraction": 0.71875,
+            "mean_gradient_norm": 0.6858187317848206
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.016435919018472148,
+            "quality_median": 0.011908945739096476,
+            "quality_first32": 0.04318579462724194,
+            "quality_last256": 0.01643591901847215,
+            "good_step_fraction": 0.00958251953125,
+            "good_step_fraction_last256": 0.00958251953125,
+            "initial_good_steps_mean": 0.3359375,
+            "longest_good_arc_turns_mean": 0.03351339328395256,
+            "longest_good_arc_turns_median": 0.02917184594855779,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.237266592376312,
+            "signed_speed_mae": 0.2295051900617681,
+            "reference_direction_consistency": 0.56683349609375,
+            "startup_error_relative": 0.09086789289705362,
+            "position_error_first32": 1.5171916597839779,
+            "position_error_last128": 2.0596373629475058,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.004522455856204033,
+          "memory_rms": 0.4467635154724121,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.021100105717778206,
+            "positive_alignment_fraction": 0.5234375,
+            "mean_gradient_norm": 0.6097744703292847
+          }
+        }
+      }
+    },
+    {
+      "name": "match_nearest25",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/match_nearest25",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.890625,
+            "mean_margin": 0.31898945569992065,
+            "median_margin": 0.29131078720092773
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.984375,
+            "mean_margin": 0.9672108292579651,
+            "median_margin": 0.8953530788421631
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5085555911064148,
+            "median_margin": 0.4960785210132599
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.9921875,
+            "mean_margin": 0.43636980652809143,
+            "median_margin": 0.3684454560279846
+          },
+          "generated": {
+            "correct_rank_fraction": 0.40625,
+            "mean_margin": -0.00942477397620678,
+            "median_margin": -0.007536649703979492
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.00486312760040164,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.011653000488877296,
+            "positive_alignment_fraction": 0.484375,
+            "mean_gradient_norm": 0.6896954774856567
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.828125,
+            "mean_margin": 0.25836023688316345,
+            "median_margin": 0.23087146878242493
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.953125,
+            "mean_margin": 0.9687614440917969,
+            "median_margin": 1.0260111093521118
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5262991189956665,
+            "median_margin": 0.514492928981781
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.984375,
+            "mean_margin": 0.43191054463386536,
+            "median_margin": 0.40896469354629517
+          },
+          "generated": {
+            "correct_rank_fraction": 0.3984375,
+            "mean_margin": -0.012473363429307938,
+            "median_margin": -0.011552691459655762
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.004296175669878721,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.057004932314157486,
+            "positive_alignment_fraction": 0.484375,
+            "mean_gradient_norm": 0.7190591096878052
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.8515625,
+            "mean_margin": 0.27505192160606384,
+            "median_margin": 0.28836607933044434
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.9765625,
+            "mean_margin": 0.964870810508728,
+            "median_margin": 0.9844485521316528
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5190783739089966,
+            "median_margin": 0.5056700706481934
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.9921875,
+            "mean_margin": 0.4177335202693939,
+            "median_margin": 0.38329100608825684
+          },
+          "generated": {
+            "correct_rank_fraction": 0.359375,
+            "mean_margin": -0.018493568524718285,
+            "median_margin": -0.014567553997039795
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.004853521008044481,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.08025875687599182,
+            "positive_alignment_fraction": 0.4375,
+            "mean_gradient_norm": 0.7094993591308594
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.00916783548795287,
+            "quality_median": 0.003536656414879766,
+            "quality_first32": 0.007295743091806596,
+            "quality_last256": 0.009167835487952872,
+            "good_step_fraction": 0.00390625,
+            "good_step_fraction_last256": 0.00390625,
+            "initial_good_steps_mean": 0.0,
+            "longest_good_arc_turns_mean": 0.014834602779177756,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 0.9731177824197654,
+            "signed_speed_mae": 0.29812097118423286,
+            "reference_direction_consistency": 0.511474609375,
+            "startup_error_relative": 1.7633349511901715,
+            "position_error_first32": 1.8472735806216316,
+            "position_error_last128": 1.930117957613195,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 1.658371090888977,
+          "memory_rms": 0.5046908259391785,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.38898929953575134,
+            "positive_alignment_fraction": 0.2109375,
+            "mean_gradient_norm": 0.6064492464065552
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.014480712989659729,
+            "quality_median": 0.009694747050555287,
+            "quality_first32": 0.03088125534705186,
+            "quality_last256": 0.014480712989659729,
+            "good_step_fraction": 0.0078125,
+            "good_step_fraction_last256": 0.0078125,
+            "initial_good_steps_mean": 0.2265625,
+            "longest_good_arc_turns_mean": 0.02820107618647241,
+            "longest_good_arc_turns_median": 0.02027356229692358,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.0697370144985776,
+            "signed_speed_mae": 0.24483153521225642,
+            "reference_direction_consistency": 0.5570068359375,
+            "startup_error_relative": 0.1346357384004301,
+            "position_error_first32": 1.3626662162978875,
+            "position_error_last128": 1.9217323771357608,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.012464488856494427,
+          "memory_rms": 0.4282577931880951,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.22877132892608643,
+            "positive_alignment_fraction": 0.625,
+            "mean_gradient_norm": 0.7162609696388245
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.014454616630694854,
+            "quality_median": 0.009778016999555536,
+            "quality_first32": 0.03087974149049462,
+            "quality_last256": 0.014454616630694854,
+            "good_step_fraction": 0.00787353515625,
+            "good_step_fraction_last256": 0.00787353515625,
+            "initial_good_steps_mean": 0.2265625,
+            "longest_good_arc_turns_mean": 0.029033475222106225,
+            "longest_good_arc_turns_median": 0.024534906710506926,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.070417108063133,
+            "signed_speed_mae": 0.2448050545387092,
+            "reference_direction_consistency": 0.556884765625,
+            "startup_error_relative": 0.13463777091681634,
+            "position_error_first32": 1.3627116029154274,
+            "position_error_last128": 1.9226798168650636,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.012464717961847782,
+          "memory_rms": 0.4282568097114563,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.22877633571624756,
+            "positive_alignment_fraction": 0.625,
+            "mean_gradient_norm": 0.7163327932357788
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.023627504921342392,
+            "quality_median": 0.0174253221086189,
+            "quality_first32": 0.05427949385989833,
+            "quality_last256": 0.023627504921342392,
+            "good_step_fraction": 0.01446533203125,
+            "good_step_fraction_last256": 0.01446533203125,
+            "initial_good_steps_mean": 0.4453125,
+            "longest_good_arc_turns_mean": 0.0452339994511077,
+            "longest_good_arc_turns_median": 0.039994766291207406,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 0.9906187515610201,
+            "signed_speed_mae": 0.20404573292956185,
+            "reference_direction_consistency": 0.62542724609375,
+            "startup_error_relative": 0.08402657590606646,
+            "position_error_first32": 1.2910207629283699,
+            "position_error_last128": 1.8205976145745455,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.0035098548978567123,
+          "memory_rms": 0.4282568097114563,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.09341884404420853,
+            "positive_alignment_fraction": 0.4375,
+            "mean_gradient_norm": 0.6973508596420288
+          }
+        }
+      }
+    },
+    {
+      "name": "match_nearest50",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/match_nearest50",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.9140625,
+            "mean_margin": 0.3381001353263855,
+            "median_margin": 0.309209942817688
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.9921875,
+            "mean_margin": 1.1073887348175049,
+            "median_margin": 1.0519652366638184
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5213066339492798,
+            "median_margin": 0.5065730810165405
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5617732405662537,
+            "median_margin": 0.5423654913902283
+          },
+          "generated": {
+            "correct_rank_fraction": 0.296875,
+            "mean_margin": -0.02400725893676281,
+            "median_margin": -0.016422390937805176
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.004629002884030342,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.13725252449512482,
+            "positive_alignment_fraction": 0.421875,
+            "mean_gradient_norm": 0.7812108397483826
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.859375,
+            "mean_margin": 0.2800850570201874,
+            "median_margin": 0.25556647777557373
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.984375,
+            "mean_margin": 1.103594183921814,
+            "median_margin": 1.1760632991790771
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5310947299003601,
+            "median_margin": 0.5043740272521973
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5685368180274963,
+            "median_margin": 0.562810480594635
+          },
+          "generated": {
+            "correct_rank_fraction": 0.328125,
+            "mean_margin": -0.026853099465370178,
+            "median_margin": -0.025336146354675293
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.004226956050843,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.15893340110778809,
+            "positive_alignment_fraction": 0.4140625,
+            "mean_gradient_norm": 0.7846017479896545
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.8828125,
+            "mean_margin": 0.2909276485443115,
+            "median_margin": 0.2941097617149353
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.9765625,
+            "mean_margin": 1.1081879138946533,
+            "median_margin": 1.1056019067764282
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.9921875,
+            "mean_margin": 0.5240882039070129,
+            "median_margin": 0.5052189826965332
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.5531079769134521,
+            "median_margin": 0.5351673364639282
+          },
+          "generated": {
+            "correct_rank_fraction": 0.28125,
+            "mean_margin": -0.0353923961520195,
+            "median_margin": -0.031924664974212646
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.005113292019814253,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.17218896746635437,
+            "positive_alignment_fraction": 0.3828125,
+            "mean_gradient_norm": 0.7552956342697144
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.007593639744899169,
+            "quality_median": 0.0018747279764109344,
+            "quality_first32": 0.00712138947583468,
+            "quality_last256": 0.00759363974489917,
+            "good_step_fraction": 0.00372314453125,
+            "good_step_fraction_last256": 0.00372314453125,
+            "initial_good_steps_mean": 0.0,
+            "longest_good_arc_turns_mean": 0.012503362503969336,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.1349646014969768,
+            "signed_speed_mae": 0.33133208211150644,
+            "reference_direction_consistency": 0.5509033203125,
+            "startup_error_relative": 2.2163775026829367,
+            "position_error_first32": 2.0592049161122468,
+            "position_error_last128": 2.08420658280046,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 2.4774582386016846,
+          "memory_rms": 0.5428248643875122,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.5636290311813354,
+            "positive_alignment_fraction": 0.171875,
+            "mean_gradient_norm": 0.6183204650878906
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.014698991206522148,
+            "quality_median": 0.011015947336680725,
+            "quality_first32": 0.0313022765714383,
+            "quality_last256": 0.014698991206522146,
+            "good_step_fraction": 0.00799560546875,
+            "good_step_fraction_last256": 0.00799560546875,
+            "initial_good_steps_mean": 0.2890625,
+            "longest_good_arc_turns_mean": 0.03114818945995522,
+            "longest_good_arc_turns_median": 0.028823709963682005,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.0482190098596347,
+            "signed_speed_mae": 0.2536286161820843,
+            "reference_direction_consistency": 0.5377197265625,
+            "startup_error_relative": 0.10837337801900705,
+            "position_error_first32": 1.3639911577686694,
+            "position_error_last128": 1.903634772270624,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.006569668184965849,
+          "memory_rms": 0.412837415933609,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.0820467546582222,
+            "positive_alignment_fraction": 0.53125,
+            "mean_gradient_norm": 0.8536626100540161
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.01467440348978424,
+            "quality_median": 0.011034360741887232,
+            "quality_first32": 0.0313015551216454,
+            "quality_last256": 0.01467440348978424,
+            "good_step_fraction": 0.00799560546875,
+            "good_step_fraction_last256": 0.00799560546875,
+            "initial_good_steps_mean": 0.2890625,
+            "longest_good_arc_turns_mean": 0.031155530169009037,
+            "longest_good_arc_turns_median": 0.028824452025933475,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.0486236880847957,
+            "signed_speed_mae": 0.2535131887913029,
+            "reference_direction_consistency": 0.53826904296875,
+            "startup_error_relative": 0.10836943680387698,
+            "position_error_first32": 1.3639731869089604,
+            "position_error_last128": 1.90409222767244,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.006569291930645704,
+          "memory_rms": 0.41283610463142395,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.08155271410942078,
+            "positive_alignment_fraction": 0.53125,
+            "mean_gradient_norm": 0.8536773324012756
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.017439747833067117,
+            "quality_median": 0.01427148105114824,
+            "quality_first32": 0.03645131281775421,
+            "quality_last256": 0.01743974783306712,
+            "good_step_fraction": 0.00982666015625,
+            "good_step_fraction_last256": 0.00982666015625,
+            "initial_good_steps_mean": 0.4609375,
+            "longest_good_arc_turns_mean": 0.03737161049372638,
+            "longest_good_arc_turns_median": 0.03433758290722215,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.1185844945950607,
+            "signed_speed_mae": 0.21215268824974734,
+            "reference_direction_consistency": 0.6510009765625,
+            "startup_error_relative": 0.09106204562744499,
+            "position_error_first32": 1.5469500703524344,
+            "position_error_last128": 1.9409940852826368,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.004329031333327293,
+          "memory_rms": 0.41283610463142395,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.22571386396884918,
+            "positive_alignment_fraction": 0.3671875,
+            "mean_gradient_norm": 0.778424084186554
+          }
+        }
+      }
+    },
+    {
+      "name": "match_shuffle25",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/match_shuffle25",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.9296875,
+            "mean_margin": 0.2707671821117401,
+            "median_margin": 0.21918725967407227
+          },
+          "shuffle": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 1.6389409303665161,
+            "median_margin": 1.535355567932129
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.984375,
+            "mean_margin": 0.35672470927238464,
+            "median_margin": 0.3448147773742676
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 1.052506685256958,
+            "median_margin": 0.9888114929199219
+          },
+          "generated": {
+            "correct_rank_fraction": 0.46875,
+            "mean_margin": -0.0069882832467556,
+            "median_margin": -0.002506732940673828
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.0050283255986869335,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.11368779093027115,
+            "positive_alignment_fraction": 0.5703125,
+            "mean_gradient_norm": 0.602440595626831
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.8828125,
+            "mean_margin": 0.23062492907047272,
+            "median_margin": 0.1827077865600586
+          },
+          "shuffle": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 1.6711715459823608,
+            "median_margin": 1.7252392768859863
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 0.3883352279663086,
+            "median_margin": 0.35381412506103516
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 1.040236473083496,
+            "median_margin": 0.9955058097839355
+          },
+          "generated": {
+            "correct_rank_fraction": 0.5390625,
+            "mean_margin": -0.003160722553730011,
+            "median_margin": 0.0021657943725585938
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.004690550267696381,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.283607542514801,
+            "positive_alignment_fraction": 0.703125,
+            "mean_gradient_norm": 0.6168655157089233
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.859375,
+            "mean_margin": 0.22021134197711945,
+            "median_margin": 0.18764972686767578
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.984375,
+            "mean_margin": 1.6677451133728027,
+            "median_margin": 1.6403532028198242
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.9765625,
+            "mean_margin": 0.3811476528644562,
+            "median_margin": 0.39355039596557617
+          },
+          "later_real": {
+            "correct_rank_fraction": 1.0,
+            "mean_margin": 1.03244149684906,
+            "median_margin": 0.9503097534179688
+          },
+          "generated": {
+            "correct_rank_fraction": 0.3515625,
+            "mean_margin": -0.017739269882440567,
+            "median_margin": -0.01567983627319336
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.005643048789352179,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.04929795488715172,
+            "positive_alignment_fraction": 0.4921875,
+            "mean_gradient_norm": 0.5526796579360962
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.00964548353563726,
+            "quality_median": 0.00391231084459852,
+            "quality_first32": 0.010745393366375373,
+            "quality_last256": 0.00964548353563726,
+            "good_step_fraction": 0.00421142578125,
+            "good_step_fraction_last256": 0.00421142578125,
+            "initial_good_steps_mean": 0.0078125,
+            "longest_good_arc_turns_mean": 0.0124321693602969,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.0141755847958018,
+            "signed_speed_mae": 0.26921013536118343,
+            "reference_direction_consistency": 0.51226806640625,
+            "startup_error_relative": 1.4437926373693226,
+            "position_error_first32": 1.4835162795602332,
+            "position_error_last128": 1.843298414812315,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 1.1393226385116577,
+          "memory_rms": 0.36269816756248474,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.30819833278656006,
+            "positive_alignment_fraction": 0.328125,
+            "mean_gradient_norm": 0.6272785067558289
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.017420088880745796,
+            "quality_median": 0.014480597598062302,
+            "quality_first32": 0.0375694409168648,
+            "quality_last256": 0.017420088880745796,
+            "good_step_fraction": 0.0101318359375,
+            "good_step_fraction_last256": 0.0101318359375,
+            "initial_good_steps_mean": 0.421875,
+            "longest_good_arc_turns_mean": 0.03745086446259123,
+            "longest_good_arc_turns_median": 0.03665426152018435,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.0121692706839889,
+            "signed_speed_mae": 0.2291391792616297,
+            "reference_direction_consistency": 0.58770751953125,
+            "startup_error_relative": 0.10109254089468456,
+            "position_error_first32": 1.2067124230368242,
+            "position_error_last128": 1.771048488270992,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.0060460735112428665,
+          "memory_rms": 0.41655242443084717,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.26083093881607056,
+            "positive_alignment_fraction": 0.671875,
+            "mean_gradient_norm": 0.6666977405548096
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.01741917651022723,
+            "quality_median": 0.014480429144765855,
+            "quality_first32": 0.03756939830379322,
+            "quality_last256": 0.01741917651022723,
+            "good_step_fraction": 0.0101318359375,
+            "good_step_fraction_last256": 0.0101318359375,
+            "initial_good_steps_mean": 0.421875,
+            "longest_good_arc_turns_mean": 0.03745109224405423,
+            "longest_good_arc_turns_median": 0.0366543609536385,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.0121768827479873,
+            "signed_speed_mae": 0.2291407562640286,
+            "reference_direction_consistency": 0.587646484375,
+            "startup_error_relative": 0.10109253531307485,
+            "position_error_first32": 1.206712334251106,
+            "position_error_last128": 1.7710398686235425,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.006046071648597717,
+          "memory_rms": 0.41655245423316956,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.2608304023742676,
+            "positive_alignment_fraction": 0.671875,
+            "mean_gradient_norm": 0.6666977405548096
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.018363147648862422,
+            "quality_median": 0.015015802407940952,
+            "quality_first32": 0.0403517758394811,
+            "quality_last256": 0.018363147648862425,
+            "good_step_fraction": 0.0108642578125,
+            "good_step_fraction_last256": 0.0108642578125,
+            "initial_good_steps_mean": 0.4765625,
+            "longest_good_arc_turns_mean": 0.04380183349398333,
+            "longest_good_arc_turns_median": 0.03638793245916074,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 0.7240409276686541,
+            "signed_speed_mae": 0.24716943086794674,
+            "reference_direction_consistency": 0.56427001953125,
+            "startup_error_relative": 0.08087872530519508,
+            "position_error_first32": 1.27885866724167,
+            "position_error_last128": 1.529085059949604,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.0033874190412461758,
+          "memory_rms": 0.41655245423316956,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.049020715057849884,
+            "positive_alignment_fraction": 0.5625,
+            "mean_gradient_norm": 0.5983911752700806
+          }
+        }
+      }
+    },
+    {
+      "name": "recover_noise10",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/recover_noise10",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.3984375,
+            "mean_margin": -0.02644546702504158,
+            "median_margin": -0.015182927250862122
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.4296875,
+            "mean_margin": -0.08697491139173508,
+            "median_margin": -0.051078200340270996
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.4140625,
+            "mean_margin": -0.02628508396446705,
+            "median_margin": -0.027952373027801514
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.390625,
+            "mean_margin": -0.12006574869155884,
+            "median_margin": -0.10666888952255249
+          },
+          "generated": {
+            "correct_rank_fraction": 0.6015625,
+            "mean_margin": 0.008741560392081738,
+            "median_margin": 0.003578886389732361
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.004372190218418837,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.157322496175766,
+            "positive_alignment_fraction": 0.59375,
+            "mean_gradient_norm": 0.46718940138816833
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.4921875,
+            "mean_margin": 0.00040994409937411547,
+            "median_margin": -0.0008296072483062744
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.421875,
+            "mean_margin": -0.0576050840318203,
+            "median_margin": -0.06304740905761719
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.671875,
+            "mean_margin": 0.03490511327981949,
+            "median_margin": 0.06783300638198853
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.28125,
+            "mean_margin": -0.17360860109329224,
+            "median_margin": -0.14239367842674255
+          },
+          "generated": {
+            "correct_rank_fraction": 0.609375,
+            "mean_margin": 0.009578125551342964,
+            "median_margin": 0.005092114210128784
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.00396093400195241,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.14539091289043427,
+            "positive_alignment_fraction": 0.609375,
+            "mean_gradient_norm": 0.5068029761314392
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.5625,
+            "mean_margin": 0.01825680397450924,
+            "median_margin": 0.016496077179908752
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.40625,
+            "mean_margin": -0.10547636449337006,
+            "median_margin": -0.06780856847763062
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.6328125,
+            "mean_margin": 0.031914301216602325,
+            "median_margin": 0.03965190052986145
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.3125,
+            "mean_margin": -0.16096392273902893,
+            "median_margin": -0.1417710781097412
+          },
+          "generated": {
+            "correct_rank_fraction": 0.5,
+            "mean_margin": 0.004662788938730955,
+            "median_margin": -0.00021952390670776367
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.004642621148377657,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.03578804433345795,
+            "positive_alignment_fraction": 0.5078125,
+            "mean_gradient_norm": 0.49359533190727234
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.003903456257553569,
+            "quality_median": 0.0009569008177720889,
+            "quality_first32": 0.003552991459888585,
+            "quality_last256": 0.0039034562575535683,
+            "good_step_fraction": 0.0010986328125,
+            "good_step_fraction_last256": 0.0010986328125,
+            "initial_good_steps_mean": 0.0,
+            "longest_good_arc_turns_mean": 0.004506243878391342,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.522866732998314,
+            "signed_speed_mae": 0.2758726869635183,
+            "reference_direction_consistency": 0.48504638671875,
+            "startup_error_relative": 2.3437226814083125,
+            "position_error_first32": 2.2664199326909005,
+            "position_error_last128": 2.432815189485142,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 2.7979462146759033,
+          "memory_rms": 0.5931664705276489,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.819231390953064,
+            "positive_alignment_fraction": 0.0078125,
+            "mean_gradient_norm": 0.7957438826560974
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.009971407966761058,
+            "quality_median": 0.005935800535537586,
+            "quality_first32": 0.02364248293864462,
+            "quality_last256": 0.009971407966761058,
+            "good_step_fraction": 0.0059814453125,
+            "good_step_fraction_last256": 0.0059814453125,
+            "initial_good_steps_mean": 0.3046875,
+            "longest_good_arc_turns_mean": 0.024919163150895547,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.015625,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.406769248353847,
+            "signed_speed_mae": 0.27059417275230646,
+            "reference_direction_consistency": 0.5096435546875,
+            "startup_error_relative": 0.10602187465371299,
+            "position_error_first32": 1.6896498771796007,
+            "position_error_last128": 2.245319931300954,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.006214577704668045,
+          "memory_rms": 0.4499689042568207,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.10799132287502289,
+            "positive_alignment_fraction": 0.4296875,
+            "mean_gradient_norm": 0.5100210309028625
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.009994109423197887,
+            "quality_median": 0.005981485739550282,
+            "quality_first32": 0.023570249023114925,
+            "quality_last256": 0.009994109423197887,
+            "good_step_fraction": 0.005859375,
+            "good_step_fraction_last256": 0.005859375,
+            "initial_good_steps_mean": 0.3046875,
+            "longest_good_arc_turns_mean": 0.02531794428628662,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0078125,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.4078727547808456,
+            "signed_speed_mae": 0.2707235765982264,
+            "reference_direction_consistency": 0.5087890625,
+            "startup_error_relative": 0.10603465004161,
+            "position_error_first32": 1.6896946651672626,
+            "position_error_last128": 2.2460559413346735,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.0062132952734827995,
+          "memory_rms": 0.4499373733997345,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.10862787067890167,
+            "positive_alignment_fraction": 0.4296875,
+            "mean_gradient_norm": 0.509516179561615
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.017340546842786,
+            "quality_median": 0.012126891452770308,
+            "quality_first32": 0.05390348331959198,
+            "quality_last256": 0.017340546842786,
+            "good_step_fraction": 0.01141357421875,
+            "good_step_fraction_last256": 0.01141357421875,
+            "initial_good_steps_mean": 0.75,
+            "longest_good_arc_turns_mean": 0.04575682683368361,
+            "longest_good_arc_turns_median": 0.035488764946341664,
+            "quarter_turn_fraction": 0.015625,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.2587480938216533,
+            "signed_speed_mae": 0.23570414737444265,
+            "reference_direction_consistency": 0.5648193359375,
+            "startup_error_relative": 0.07244101667461399,
+            "position_error_first32": 1.347720442521401,
+            "position_error_last128": 2.086342019055241,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.002822847105562687,
+          "memory_rms": 0.4499373733997345,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.16338258981704712,
+            "positive_alignment_fraction": 0.6015625,
+            "mean_gradient_norm": 0.5110316276550293
+          }
+        }
+      }
+    },
+    {
+      "name": "recover_noise30",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/recover_noise30",
+      "device": "cpu",
+      "steps": 2000,
+      "ranking": {
+        "prefix8": {
+          "nearest": {
+            "correct_rank_fraction": 0.6328125,
+            "mean_margin": 0.06674561649560928,
+            "median_margin": 0.04049259424209595
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.6015625,
+            "mean_margin": 0.08744003623723984,
+            "median_margin": 0.05476784706115723
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.671875,
+            "mean_margin": 0.11311456561088562,
+            "median_margin": 0.05772511661052704
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.3671875,
+            "mean_margin": -0.09236688911914825,
+            "median_margin": -0.05740208923816681
+          },
+          "generated": {
+            "correct_rank_fraction": 0.5078125,
+            "mean_margin": 0.0063996645621955395,
+            "median_margin": 0.0009374953806400299
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.1554986983537674,
+            "shuffle": 1.5479304790496826
+          },
+          "generated_next_point_mse": 0.00748467817902565,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.009393591433763504,
+            "positive_alignment_fraction": 0.5078125,
+            "mean_gradient_norm": 0.5031938552856445
+          }
+        },
+        "prefix32": {
+          "nearest": {
+            "correct_rank_fraction": 0.671875,
+            "mean_margin": 0.07338084280490875,
+            "median_margin": 0.03702378273010254
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.5546875,
+            "mean_margin": 0.10055499523878098,
+            "median_margin": 0.044427454471588135
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.78125,
+            "mean_margin": 0.15449635684490204,
+            "median_margin": 0.1174481213092804
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.28125,
+            "mean_margin": -0.1457272469997406,
+            "median_margin": -0.13105642795562744
+          },
+          "generated": {
+            "correct_rank_fraction": 0.4765625,
+            "mean_margin": 0.0016273190267384052,
+            "median_margin": -0.001309126615524292
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.15762880444526672,
+            "shuffle": 1.5417582988739014
+          },
+          "generated_next_point_mse": 0.0065153068862855434,
+          "generated_gradient": {
+            "mean_cosine_toward_target": 0.021494198590517044,
+            "positive_alignment_fraction": 0.46875,
+            "mean_gradient_norm": 0.5244953632354736
+          }
+        },
+        "prefix48": {
+          "nearest": {
+            "correct_rank_fraction": 0.671875,
+            "mean_margin": 0.06644634902477264,
+            "median_margin": 0.03712800145149231
+          },
+          "shuffle": {
+            "correct_rank_fraction": 0.640625,
+            "mean_margin": 0.08938324451446533,
+            "median_margin": 0.07368552684783936
+          },
+          "earlier_real": {
+            "correct_rank_fraction": 0.7734375,
+            "mean_margin": 0.1593368649482727,
+            "median_margin": 0.10929727554321289
+          },
+          "later_real": {
+            "correct_rank_fraction": 0.2421875,
+            "mean_margin": -0.1508416086435318,
+            "median_margin": -0.1463865041732788
+          },
+          "generated": {
+            "correct_rank_fraction": 0.515625,
+            "mean_margin": 0.0018691252917051315,
+            "median_margin": 0.0006029903888702393
+          },
+          "donor_endpoint_distance": {
+            "nearest": 0.13927069306373596,
+            "shuffle": 1.5500073432922363
+          },
+          "generated_next_point_mse": 0.0054183718748390675,
+          "generated_gradient": {
+            "mean_cosine_toward_target": -0.004363207146525383,
+            "positive_alignment_fraction": 0.53125,
+            "mean_gradient_norm": 0.5311033725738525
+          }
+        }
+      },
+      "restoration": {
+        "autonomous": {
+          "quality": {
+            "quality": 0.0047168216150135145,
+            "quality_median": 0.0021322656898992553,
+            "quality_first32": 0.009108694305665566,
+            "quality_last256": 0.004716821615013514,
+            "good_step_fraction": 0.00250244140625,
+            "good_step_fraction_last256": 0.00250244140625,
+            "initial_good_steps_mean": 0.0,
+            "longest_good_arc_turns_mean": 0.010423403362124306,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.4132073666781226,
+            "signed_speed_mae": 0.2802671916803716,
+            "reference_direction_consistency": 0.47918701171875,
+            "startup_error_relative": 1.7700304321432383,
+            "position_error_first32": 1.8723923435437522,
+            "position_error_last128": 2.3232562568639707,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 1.7182183265686035,
+          "memory_rms": 0.45020896196365356,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.1298588663339615,
+            "positive_alignment_fraction": 0.4296875,
+            "mean_gradient_norm": 0.7368141412734985
+          }
+        },
+        "real_full": {
+          "quality": {
+            "quality": 0.010444195493768307,
+            "quality_median": 0.007244458229983304,
+            "quality_first32": 0.030099380961456947,
+            "quality_last256": 0.010444195493768307,
+            "good_step_fraction": 0.00628662109375,
+            "good_step_fraction_last256": 0.00628662109375,
+            "initial_good_steps_mean": 0.3046875,
+            "longest_good_arc_turns_mean": 0.026034091902608185,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.4256766489141555,
+            "signed_speed_mae": 0.2562397565296745,
+            "reference_direction_consistency": 0.52630615234375,
+            "startup_error_relative": 0.14517236149138033,
+            "position_error_first32": 1.5954953888460766,
+            "position_error_last128": 2.2703597296169047,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.015629751607775688,
+          "memory_rms": 0.4159214198589325,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.14174816012382507,
+            "positive_alignment_fraction": 0.59375,
+            "mean_gradient_norm": 0.5125987529754639
+          }
+        },
+        "real_recent32": {
+          "quality": {
+            "quality": 0.010445908441592884,
+            "quality_median": 0.00724445086521851,
+            "quality_first32": 0.030100466989111643,
+            "quality_last256": 0.010445908441592884,
+            "good_step_fraction": 0.00628662109375,
+            "good_step_fraction_last256": 0.00628662109375,
+            "initial_good_steps_mean": 0.3046875,
+            "longest_good_arc_turns_mean": 0.026034179660298036,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.4256750805657126,
+            "signed_speed_mae": 0.2562396427354022,
+            "reference_direction_consistency": 0.52630615234375,
+            "startup_error_relative": 0.14517234840426246,
+            "position_error_first32": 1.5954995110780188,
+            "position_error_last128": 2.2703644866089716,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.015629665926098824,
+          "memory_rms": 0.41592127084732056,
+          "clock": 288,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": 0.14176109433174133,
+            "positive_alignment_fraction": 0.59375,
+            "mean_gradient_norm": 0.5125987529754639
+          }
+        },
+        "real_recent32_clock32": {
+          "quality": {
+            "quality": 0.012761832961434245,
+            "quality_median": 0.009201765110371338,
+            "quality_first32": 0.03577032439997883,
+            "quality_last256": 0.012761832961434245,
+            "good_step_fraction": 0.00738525390625,
+            "good_step_fraction_last256": 0.00738525390625,
+            "initial_good_steps_mean": 0.2734375,
+            "longest_good_arc_turns_mean": 0.029952809555914863,
+            "longest_good_arc_turns_median": 0.0,
+            "quarter_turn_fraction": 0.0,
+            "full_turn_fraction": 0.0
+          },
+          "fidelity": {
+            "reference_orbit_fraction": 0.0,
+            "relative_radial_rmse": 1.3339276141960648,
+            "signed_speed_mae": 0.23853124128678097,
+            "reference_direction_consistency": 0.558837890625,
+            "startup_error_relative": 0.10246926058835562,
+            "position_error_first32": 1.5828295707557891,
+            "position_error_last128": 2.144140463221614,
+            "passing_cw": 0,
+            "passing_ccw": 0
+          },
+          "next_point_mse": 0.005139480344951153,
+          "memory_rms": 0.41592127084732056,
+          "clock": 32,
+          "next_point_gradient": {
+            "mean_cosine_toward_target": -0.03756760060787201,
+            "positive_alignment_fraction": 0.4921875,
+            "mean_gradient_norm": 0.5133614540100098
+          }
+        }
+      }
+    }
+  ]
+}

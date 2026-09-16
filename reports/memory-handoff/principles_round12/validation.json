@@ -1,0 +1,17 @@
+{
+  "focused_tests": 70,
+  "status": "passed",
+  "gpu_smokes": {
+    "queue": "runs/memory_path/principles_smoke12",
+    "done": 2,
+    "failed": 0,
+    "steps": 4,
+    "batch_size": 128,
+    "eval_steps": 1024
+  },
+  "legacy_equivalence": "legacy_equivalence.json",
+  "report_validation": "existing report guard test passed after optional objective table change",
+  "additional_validation": "Future target changes cannot affect any queried prediction; causal regression passed.",
+  "gradient_diagnostic_validation": "Analytic ascent direction test passed; no accumulated parameter gradients",
+  "evaluation_panels": "All12 scout clean references and observed prefixes8/32 bitwise equal to saved baseline"
+}

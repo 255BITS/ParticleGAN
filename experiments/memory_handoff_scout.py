@@ -20,6 +20,7 @@ from experiments import memory_scout as base
 from experiments.memory_recent import RecentWriter, SlowFastWriter, LocalReader, clock_features
 from experiments.memory_core_scout import evaluate
 from experiments import memory_g_recurrent as recurrent
+from experiments import memory_local_objectives as objectives
 from particlegan import get_recipe, learning_rate_scale
 
 
@@ -45,6 +46,13 @@ class Config(base.Config):
     feedback_strength_distribution: str = 'fixed'
     feedback_full_probability: float = .25
     local_pair_weight: float = 0.
+    mismatch_weight: float = 0.
+    mismatch_kind: str = 'nearest'
+    recovery_noise: float = 0.
+    recovery_probability: float = .5
+    future_weight: float = 0.
+    future_offsets: tuple = (0, 4, 12)
+    future_query_bands: int = 0
     adversarial_only: bool = False
     recent_points: int = 0
     residual_output: bool = False
@@ -74,6 +82,16 @@ class Config(base.Config):
 
     def __post_init__(self):
         super().__post_init__()
+        self.future_offsets = tuple(self.future_offsets)
+        assert self.mismatch_weight >= 0 and self.mismatch_kind in ('nearest', 'shuffle')
+        assert self.recovery_noise >= 0 and 0 < self.recovery_probability <= 1
+        assert not self.recovery_noise or self.local_pair_weight > 0
+        assert 0 <= self.future_weight < 1 and 0 <= self.future_query_bands <= 8
+        assert not self.future_weight or self.future_query_bands > 0
+        assert len(self.future_offsets) >= 2 and self.future_offsets[0] == 0
+        assert tuple(sorted(set(self.future_offsets))) == self.future_offsets
+        assert self.future_offsets[-1] < self.train_length-4
+        assert not (self.future_query_bands or self.recovery_noise) or not self.g_state_dim
         self.eval_prefixes = tuple(self.eval_prefixes)
         assert self.writer == "gru" and not self.g_private and not self.g_film and self.read_memory
         assert self.critic == "flat" and not self.differences and self.geometry == "none"
@@ -153,6 +171,11 @@ class Critic(nn.Module):
             torch.manual_seed(49)
             if cfg.temporal_weight:
                 self.temporal_head = mlp(cfg.memory_dim+2, 1, cfg.d_width)
+        if cfg.future_weight:
+            with torch.random.fork_rng(devices=[]):
+                torch.manual_seed(53)
+                self.future_head = mlp(cfg.memory_dim+2*len(cfg.future_offsets)+2*self.clock_bands,
+                                       1, cfg.d_width)
 
     def score_candidate(self, candidate, memory, time_index=None):
         flat = memory.flatten(1)
@@ -171,6 +194,13 @@ class Critic(nn.Module):
             inputs.append(clock_features(time_index, pair[:, 0], self.clock_bands,
                                          self.clock_frequency, self.clock_rate))
         return self.pair_head(torch.cat(inputs, -1)).squeeze(-1)
+
+    def score_future(self, points, memory, time_index=None):
+        inputs = [points.flatten(1), memory.flatten(1)]
+        if self.clock_bands:
+            inputs.append(clock_features(time_index, points[:, 0], self.clock_bands,
+                                         self.clock_frequency, self.clock_rate))
+        return self.future_head(torch.cat(inputs, -1)).squeeze(-1)
 
 
 class CandidateView(nn.Module):
@@ -208,7 +238,7 @@ def sample_feedback_strength(cfg, positions, rng):
 
 
 def local_pair_examples(cfg, generator, critic, observed, real, positions, z, times,
-                        proposal_grad=False):
+                        proposal_grad=False, recovery_noise=None):
     """Independent local branch: real prefix -> G -> one write -> G.
 
     Start one point before the target, or at zero for empty-prefix targets.
@@ -222,6 +252,12 @@ def local_pair_examples(cfg, generator, critic, observed, real, positions, z, ti
                                                   cfg.max_prefix, proposal_grad)
     else:
         memory = selected_memories(critic.writer, observed, starts, cfg.max_prefix)
+    judging_memory = memory
+    if cfg.recovery_noise:
+        if recovery_noise is None:
+            raise ValueError('Recovery needs the shared per-update observation disturbance')
+        with torch.set_grad_enabled(proposal_grad):
+            memory = selected_memories(critic.writer, observed+recovery_noise, starts, cfg.max_prefix)
     latent, clock = z, times-(positions.flatten() > 0).to(times.dtype)
     with torch.set_grad_enabled(proposal_grad):
         first, _ = local_point(generator, latent, memory, clock, state)
@@ -232,7 +268,7 @@ def local_pair_examples(cfg, generator, critic, observed, real, positions, z, ti
         fake = torch.stack((first, second), 1)
     rows = torch.arange(len(real), device=real.device)[:, None]
     actual = torch.stack((real[rows, starts], real[rows, starts+1]), 2).flatten(0, 1)
-    return PairView(critic, memory, clock), actual, fake
+    return PairView(critic, judging_memory, clock), actual, fake
 
 
 def local_point(generator, z, memory, time_index, state=None):
@@ -400,7 +436,8 @@ def local_stability(cfg, generator, critic, z, memory, positions, times, noise):
 
 def build(cfg, device):
     torch.manual_seed(42)
-    generator = (recurrent.RecurrentReader(cfg) if cfg.g_state_dim else LocalReader(cfg)).to(device)
+    generator = (recurrent.RecurrentReader(cfg) if cfg.g_state_dim else
+                 objectives.QueryReader(cfg) if cfg.future_query_bands else LocalReader(cfg)).to(device)
     torch.manual_seed(44)
     critic = Critic(cfg).to(device)
     recipe = get_recipe(total_steps=cfg.schedule_steps, batch_size=cfg.batch_size,
@@ -425,6 +462,8 @@ def train(cfg, out, device, log):
             'stability': torch.Generator(device=device).manual_seed(16185),
             'repair': torch.Generator(device=device).manual_seed(16186),
             'feedback_strength': torch.Generator(device=device).manual_seed(16187)}
+    if cfg.recovery_noise:
+        rngs['recovery'] = torch.Generator(device=device).manual_seed(16188)
     start = 0
     if cfg.resume:
         saved = torch.load(cfg.resume, map_location=device, weights_only=False)
@@ -532,6 +571,11 @@ def train(cfg, out, device, log):
         'prefix_state_updates_per_phase': cfg.max_prefix*(1+int(bool(cfg.local_pair_weight))) if cfg.g_state_dim else 0,
         'loss': 'existing GAN objectives only',
     }
+    resolved['local_objectives'] = objectives.metadata(cfg)
+    if cfg.future_weight:
+        for phase in ('d', 'g'):
+            resolved[f'generator_calls_{phase}_phase'] += len(cfg.future_offsets)
+            resolved[f'reader_calls_{phase}_phase'] += len(cfg.future_offsets)*resolved['reader_calls_per_generator']
     (out/'config.json').write_text(json.dumps(resolved, indent=2))
     log(event='start', start_step=start, config=resolved)
     started = time.monotonic()
@@ -553,6 +597,7 @@ def train(cfg, out, device, log):
                            if cfg.stability_g_weight or cfg.stability_d_weight else None)
         repair_noise = (torch.randn(jitter.shape, device=device, generator=rngs['repair'])
                         if cfg.repair_weight else None)
+        recovery_noise = objectives.observation_disturbance(cfg, observed, rngs.get('recovery'))
         opt_d.zero_grad(set_to_none=True)
         memory, judging_memory, state = training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
             clock_origin=clock_origin, feedback_strength=feedback_strength, return_state=True)
@@ -563,7 +608,8 @@ def train(cfg, out, device, log):
         d_reg = sum(weight*penalty(view, target, fake, step=step) for weight, view in views)
         d_pair = memory.new_zeros(())
         if cfg.local_pair_weight:
-            pair = local_pair_examples(cfg, generator, critic, observed, real, positions, z, times)
+            pair = local_pair_examples(cfg, generator, critic, observed, real, positions, z, times,
+                                       recovery_noise=recovery_noise)
             if pair is not None:
                 pair_view, pair_real, pair_fake = pair
                 d_pair = gan.d_loss(pair_view(pair_real), pair_view(pair_fake))
@@ -571,6 +617,19 @@ def train(cfg, out, device, log):
                 d_adv = (1-cfg.local_pair_weight)*d_adv+cfg.local_pair_weight*d_pair
                 d_reg = (1-cfg.local_pair_weight)*d_reg+cfg.local_pair_weight*pair_reg
         d_aux, diagnostics = local_auxiliary(cfg, critic, memory, real, positions, target)
+        if cfg.mismatch_weight:
+            mismatch, mismatch_reg, stats = objectives.mismatch_objective(
+                cfg, critic, observed, real, positions, times, gan, penalty, step)
+            d_adv = (d_adv+cfg.mismatch_weight*mismatch)/(1+cfg.mismatch_weight)
+            d_reg = (d_reg+cfg.mismatch_weight*mismatch_reg)/(1+cfg.mismatch_weight)
+            diagnostics.update(stats)
+        if cfg.future_weight:
+            view, actual, proposed = objectives.future_examples(
+                cfg, generator, critic, observed, real, positions, z, times)
+            d_future = gan.d_loss(view(actual), view(proposed))
+            d_adv = (1-cfg.future_weight)*d_adv+cfg.future_weight*d_future
+            d_reg = (1-cfg.future_weight)*d_reg+cfg.future_weight*penalty(view, actual, proposed, step=step)
+            diagnostics['d_future'] = d_future.detach()
         d_stability = memory.new_zeros(())
         if cfg.stability_d_weight:
             with frozen(generator):
@@ -591,11 +650,17 @@ def train(cfg, out, device, log):
             g_pair = memory.new_zeros(())
             if cfg.local_pair_weight:
                 pair = local_pair_examples(cfg, generator, critic, observed, real, positions, z, times,
-                                           proposal_grad=True)
+                                           proposal_grad=True, recovery_noise=recovery_noise)
                 if pair is not None:
                     pair_view, pair_real, pair_fake = pair
                     g_pair = generator_loss(gan, pair_view, pair_real, pair_fake)
                     g_adv = (1-cfg.local_pair_weight)*g_adv+cfg.local_pair_weight*g_pair
+            if cfg.future_weight:
+                view, actual, proposed = objectives.future_examples(
+                    cfg, generator, critic, observed, real, positions, z, times, proposal_grad=True)
+                g_future = generator_loss(gan, view, actual, proposed)
+                g_adv = (1-cfg.future_weight)*g_adv+cfg.future_weight*g_future
+                diagnostics['g_future'] = g_future.detach()
             repair = memory_repair(cfg, generator, memory, positions, repair_noise) if cfg.repair_weight else memory.new_zeros(())
             g_stability = memory.new_zeros(())
             if cfg.stability_g_weight:
@@ -649,7 +714,7 @@ def main():
     torch.set_num_threads(1)
     provenance = {'git_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
                   'torch': torch.__version__, 'argv': sys.argv, 'sources': {}}
-    for name in ('memory_handoff_scout.py', 'memory_g_recurrent.py', 'memory_recent.py', 'memory_core_scout.py', 'memory_scout.py', 'autonomous_memory.py', 'memory_path.py'):
+    for name in ('memory_handoff_scout.py', 'memory_local_objectives.py', 'memory_g_recurrent.py', 'memory_recent.py', 'memory_core_scout.py', 'memory_scout.py', 'autonomous_memory.py', 'memory_path.py'):
         source = Path(__file__).with_name(name).read_bytes()
         (args.out/name).write_bytes(source)
         provenance['sources'][name] = hashlib.sha256(source).hexdigest()

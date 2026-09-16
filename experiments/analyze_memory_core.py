@@ -114,7 +114,7 @@ def analyze(source, out, baselines=(), handoff_only=False):
                          f"{cfg.get('feedback_probability', 0):g} / {cfg.get('feedback_strength', 1):g} | {row['seconds_per_update']:.4f} |")
         if any(r['config'].get('feedback_judge_memory') in ('clean', 'mixed') for r in scouts):
             lines += ['', '## Adversarial memory exploration', '',
-                      '| Run | D judging memory | G adapter | Proposal gradient | Reader calls D / G phase | Auxiliaries disabled |',
+                      '| Run | D judging memory | G adapter | Proposal gradient | Reader calls D / G phase | Legacy auxiliaries disabled |',
                       '|---|---|---|---|---:|---|']
             for row in scouts:
                 c = row['config']
@@ -166,13 +166,28 @@ def analyze(source, out, baselines=(), handoff_only=False):
                       'State advances once per observation; proposal/final reads share the same state.',
                       'D owns M, G owns S. Both start at zero for cold evaluation. G has no MSE objective.',
                       'Memory access controls are separately trained; interventions alone do not establish comparative benefit.']
+        if any(r['config'].get('local_objectives') for r in scouts):
+            lines += ['', '## Local history and future objectives', '',
+                      '| Run | Mismatch weight / donors | Recovery noise / probability | Future weight / offsets | Query bands |',
+                      '|---|---|---|---|---:|']
+            for row in scouts:
+                c = row['config']
+                lines.append(f"| {row['name']} | {c.get('mismatch_weight', 0):g} / {c.get('mismatch_kind', 'nearest')} | "
+                             f"{c.get('recovery_noise', 0):g} / {c.get('recovery_probability', .5):g} | "
+                             f"{c.get('future_weight', 0):g} / {c.get('future_offsets', [])} | {c.get('future_query_bands', 0)} |")
+            lines += ['', 'Mismatch training ranks real continuations from other histories with the existing point head;',
+                      'its D loss and default B-cap are normalized by 1+weight. G point loss stays unchanged.',
+                      'Recovery perturbs prefix observations read by G; the pair judge retains the clean reference.',
+                      'Future queries read identical prefix memory independently, with fixed z and explicit offsets.',
+                      'Their joint GAN uses real future targets, no generated writes, and default exact B-cap.',
+                      'Future weight convexly mixes this branch with the existing GAN; prior regularization stays once.']
         lines += ['', 'Scouts use local point GAN losses and optionally a two-point transition GAN. There is no full generated training',
                   'rollout or cold/warm path loss. Configured feedback adds at most one',
                   'generated write before each target; configs control G gradients through that write.',
                   'Longer rollouts are evaluation only.',
                   'Dense scouts use four points per episode; the older handoff_only trainer used one.',
                   'Architecture, context, corruption and optional D-only local auxiliary losses are explicit',
-                  'config changes. Auxiliary heads do not change the GAN negative class. Compare measured cost too.',
+                  'config changes. Mismatched-history ranking changes the point head negative examples when enabled. Compare measured cost too.',
                   'Optional G repair trains a stateless read adapter. Local stability adds two parallel',
                   'one-step feedback branches per enabled phase, with detached prefix anchors and particles.',
                   'These local branches do not feed into another generated prediction; writer updates remain D-only.',

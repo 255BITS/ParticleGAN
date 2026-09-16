@@ -1,3 +1,58 @@
+# Latest: first-principles local objectives round12 completed
+
+Read ../memory-handoff/principles_round12/assessment.md and followup/assessment.md,
+then next.md. Twelve2k scouts plus two exact2k→5k extensions completed on both
+GPUs, zero failures. Both queues sealed/empty. All diagnostics complete.
+Nothing running. This round is included in the user-requested commit; push was
+not requested. After compaction, discuss before selecting the next experiments.
+
+New leading recipe: match_shuffle25. Existing proposal_mixed_pair25 plus D-only
+GAN ranking of true next sample against a real next sample from another history,
+using the SAME point head G learns from. Shuffled donor order, weight.25;
+D loss/default exact B-cap normalized by1+weight. Only real-prefix M currently
+receives this explicit mismatch objective. No new persistent state or runtime
+expert. Fixed particle, existing clock/proposal repair/mixed point judging/pair25.
+No MSE training, full generated rollouts, geometry labels/cursor, clipping, EMA,
+B-cap override or seed sweep. Query/recovery alternatives remain config-controlled.
+
+Warm1024 Q prefix8 / prefix32 / radial32:
+- old proposal_mixed_pair25 2k: .008180 / .008274 /1.159
+- match_shuffle25 2k: .010901 / .011161 /.945
+- match_shuffle25_5k: .011008 / .011099 /.912
+- match_nearest25 2k: .009982 / .009932 /.994
+- match_nearest25_5k: .007605 / .008121 /1.579
+All cold/warm full256/1024 passes still0/128, stopping0%. Nominal new reference
+is shuffled5k by the fixed minimum-warm-Q ranking, but its Q gain over2k is only
+~1%; retain2k because lateQ is better.5k improves radial/early errors. No further
+extensions. The finding is the shuffled mismatch recipe, not a solved circle.
+
+Nearest.1/.5 regress; both prefix-noise recovery scales and their combination
+with nearest.25 regress. Future query GAN at offsets0/4/12 loses to baseline and
+its matched architecture control; combinations do not qualify. Twelve configs,
+predeclared gates, exact optimizer/prior/RNG resumes. Main pipeline wall26.6min,
+followups6.1min,3728 training GPU-seconds combined. Sources identical across all
+runs; evaluation reference/prefix panels bitwise equal to old baseline.
+
+D nearest-history ranking at prefix32 improves67%→88–89% in shuffled models.
+Late radius/speed response still near zero; better D recognition does not ensure
+process retention. Restoring real-history M at clock288 fixes the next point
+much more than sustained continuation. Full-real vs recent32 M similar. Added
+local D-gradient alignment probe, evaluation only; late alignment to a timed
+reference is confounded by phase drift. Do not claim erased information or a
+single proven cause.70 focused tests, two GPU smokes, default-off four-update
+legacy equivalence including active B-cap, no-MSE and exact-resume checks pass.
+
+Potential next hypothesis (not selected/queued): apply the winning mismatch
+signal to memories AFTER one generated write, retaining real-continuation identity
+reference. Compare clean/explored/mixed mismatch contexts; distinguish this from
+existing mixed point-GAN judging. Goal is writer/state maintenance, keeping the
+same bounded generated-write budget. Discuss before selecting the next round.
+
+Stable tail: tail -F runs/memory_path/core_round1/train.log
+Preserve unrelated .claude/, results/motion/, sparse-ucd.log.
+
+---
+
 # Latest: G observation recurrence round11 completed
 
 User selected small G GRU scouts building on proposal_mixed_pair25, explicitly
