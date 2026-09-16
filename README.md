@@ -2,23 +2,16 @@
 
 **Learnable particle priors and GAN building blocks for PyTorch.**
 
-[API reference](docs/api.md) · [Minimal GAN loop](docs/api.md#a-minimal-training-loop) ·
-[Minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
+[API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md) · [Minimal GAN loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-training-loop) ·
+[Minimal DDGAN + UCD loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-ddgan--ucd-loop)
 
 [![Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml/badge.svg)](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml)
 
-![100 Gaussians with Particle Prior](100gaussians.gif)
+![100 Gaussians with Particle Prior](https://raw.githubusercontent.com/255BITS/ParticleGAN/master/100gaussians.gif)
 
 ## Installation
 
-Requires Python 3.10+ and PyTorch. Install the current API directly with pip:
-
-```bash
-python -m pip install "particlegan @ git+https://github.com/255BITS/ParticleGAN.git@api"
-```
-
-Version 0.2.0 is being prepared for its first PyPI release. Once published,
-installation will be:
+Requires Python 3.10+ and PyTorch. Install from PyPI:
 
 ```bash
 python -m pip install particlegan
@@ -27,7 +20,7 @@ python -m pip install particlegan
 For development and the repository's research experiments:
 
 ```bash
-git clone --branch api https://github.com/255BITS/ParticleGAN.git
+git clone https://github.com/255BITS/ParticleGAN.git
 cd ParticleGAN
 python -m pip install -e '.[experiments,dev]'
 # Image experiments also need the images extra:
@@ -35,7 +28,7 @@ python -m pip install -e '.[experiments,dev]'
 ```
 
 CI tests Python 3.10–3.12 and builds installable distributions. See
-[CI and PyPI releases](docs/releasing.md) for the automated publishing setup.
+[CI and PyPI releases](https://github.com/255BITS/ParticleGAN/blob/master/docs/releasing.md) for the automated publishing setup.
 
 ## Use in your PyTorch project
 
@@ -43,12 +36,12 @@ Use individual components in your existing loop. You own the networks, data,
 optimizers, backward calls, devices, logging, and checkpoints. No trainer is
 required, and the loss helpers never call backward or step an optimizer.
 
-See the [minimal GAN loop](docs/api.md#a-minimal-training-loop),
-[minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop), and
-[API reference](docs/api.md#reference-index) for complete examples and contracts.
+See the [minimal GAN loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-training-loop),
+[minimal DDGAN + UCD loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-ddgan--ucd-loop), and
+[API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#reference-index) for complete examples and contracts.
 
 Our examples and experiment trainers consume these same public primitives and
-recipe factories. See the [migration and compatibility checks](reports/api-dogfood.md)
+recipe factories. See the [migration and compatibility checks](https://github.com/255BITS/ParticleGAN/blob/master/reports/api-dogfood.md)
 for existing-config GPU smoke tests and checkpoint comparisons.
 
 ```python
@@ -125,7 +118,7 @@ Networks remain application choices: the reference toy benchmarks use MLPs and
 two Fourier frequencies in D. Changing the architecture or dataset changes the
 experiment; the recipe alone does not establish convergence on a new problem.
 
-[The executable PyTorch loop](examples/pytorch_loop.py) shows optimizer setup,
+[The executable PyTorch loop](https://github.com/255BITS/ParticleGAN/blob/master/examples/pytorch_loop.py) shows optimizer setup,
 D freezing/restoration, unique-particle regularization, the learning-rate
 schedule, and EMA for G and the prior. It uses small MLPs and synthetic data,
 requires no research dependencies, and writes one flushed JSON record per log
@@ -195,7 +188,7 @@ python experiments/train_denoising.py --config configs/denoising/default.toml
 Running `python experiments/train_denoising.py` with no arguments loads
 `configs/denoising/default.toml`. Install the `experiments` extra for these
 trainers; the denoising trainer requires CUDA. See the
-[experiment runner guide](docs/experiment-runner.md) for grids and recorded
+[experiment runner guide](https://github.com/255BITS/ParticleGAN/blob/master/docs/experiment-runner.md) for grids and recorded
 effective configurations.
 
 ### DDGAN and UCD compose independently
@@ -243,7 +236,7 @@ Recompute critic scores after its update, freeze critic parameters, and keep
 `fake_prev` attached for the G/prior adversarial loss. Class CE belongs to D.
 The default schedule is `(1, .9, .5, .05, .0001)`; corruption and reverse noise
 are Gaussian and separate from learned latent particles. See
-[the API reference](docs/api.md#ddgan) for the full composition rules.
+[the API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#ddgan) for the full composition rules.
 
 ### Teacher/student pipelines
 
@@ -311,13 +304,13 @@ We introduce learnable "particles" in latent space. Both the generator and these
 
 ### Historical Gaussian example
 
-![100 Gaussians without Particle Prior](100gaussians_no_particles.gif)
+![100 Gaussians without Particle Prior](https://raw.githubusercontent.com/255BITS/ParticleGAN/master/100gaussians_no_particles.gif)
 
 *Historical visualization from the older Gaussian example. Its architecture and training recipe differ from the particle example above, so these GIFs are not a matched prior comparison.*
 
 ## Evidence and controls
 
-The historical [regularizer study](FINDINGS.md) compares discriminator penalties within the particle model. It does not establish that a fixed Gaussian prior necessarily collapses. The current examples share one training loop and matched defaults; the only training change for the Gaussian controls is removing the learned prior and its regularizer.
+The historical [regularizer study](https://github.com/255BITS/ParticleGAN/blob/master/FINDINGS.md) compares discriminator penalties within the particle model. It does not establish that a fixed Gaussian prior necessarily collapses. The current examples share one training loop and matched defaults; the only training change for the Gaussian controls is removing the learned prior and its regularizer.
 
 For a reproducible three-way comparison, run:
 
@@ -325,9 +318,9 @@ For a reproducible three-way comparison, run:
 python experiments/compare_priors.py --study-dir runs/prior_comparison --run --device cuda:0
 ```
 
-This runs learned particles, a frozen Gaussian table, and fresh Gaussian noise on paired seeds 23001–23003. It records configs, source revision, final samples, coverage, transport distances, and per-mode radial and covariance shape diagnostics. See [prior controls and interpretation](docs/prior-controls.md) and [reproducing the project](docs/reproducing.md).
+This runs learned particles, a frozen Gaussian table, and fresh Gaussian noise on paired seeds 23001–23003. It records configs, source revision, final samples, coverage, transport distances, and per-mode radial and covariance shape diagnostics. See [prior controls and interpretation](https://github.com/255BITS/ParticleGAN/blob/master/docs/prior-controls.md) and [reproducing the project](https://github.com/255BITS/ParticleGAN/blob/master/docs/reproducing.md).
 
-The completed [nine-run matched comparison](reports/prior-comparison/README.md) reached 100/100 high-quality modes on every learned-prior seed, with a mean high-quality fraction of 98.6%, versus 8.1% for the frozen table and 6.4% for fresh Gaussian noise. This establishes a concentration advantage under this recipe. The report also shows remaining tail and covariance distortion, finite output support, and transport-metric tradeoffs; it does not establish complete Gaussian calibration or a general guarantee against collapse.
+The completed [nine-run matched comparison](https://github.com/255BITS/ParticleGAN/blob/master/reports/prior-comparison/README.md) reached 100/100 high-quality modes on every learned-prior seed, with a mean high-quality fraction of 98.6%, versus 8.1% for the frozen table and 6.4% for fresh Gaussian noise. This establishes a concentration advantage under this recipe. The report also shows remaining tail and covariance distortion, finite output support, and transport-metric tradeoffs; it does not establish complete Gaussian calibration or a general guarantee against collapse.
 
 ## How It Works
 
@@ -343,7 +336,7 @@ The completed [nine-run matched comparison](reports/prior-comparison/README.md) 
 
 A minimal example demonstrating the core idea. Five words ("apple", "grape", "lemon", "melon", "berry") are encoded into a 2D latent space. Each word gets one particle.
 
-![Five Modes Training](five_modes.gif)
+![Five Modes Training](https://raw.githubusercontent.com/255BITS/ParticleGAN/master/five_modes.gif)
 
 ```bash
 python examples/five_modes.py
@@ -364,7 +357,7 @@ python examples/100gaussians.py
 
 The historical particle study reports runs with 100/100 modes and approximately 99% of samples within 3σ of a center after 7k steps. Coverage alone does not establish that the within-mode distribution is correct; the trainer also records shape and transport metrics.
 
-The default recipe is RpGAN (relativistic, logistic) + a one-sided cap gradient penalty on D (`relu(‖∇ₓD‖ − 1)²` on reals and fakes, coeff 1.0), Fourier-feature D, EMA evaluation, Adam β1=0, base LR 6e-4 with a delayed cosine anneal. The cap won a 420-run bake-off against the zero-centered R1/R2 penalty, which is still available with `--reg_arm a_r1r2 --reg_coeff 0.02`. See [FINDINGS.md](FINDINGS.md) for the study and [docs/convergence-tips.md](docs/convergence-tips.md) for the transferable reasoning behind each ingredient.
+The default recipe is RpGAN (relativistic, logistic) + a one-sided cap gradient penalty on D (`relu(‖∇ₓD‖ − 1)²` on reals and fakes, coeff 1.0), Fourier-feature D, EMA evaluation, Adam β1=0, base LR 6e-4 with a delayed cosine anneal. The cap won a 420-run bake-off against the zero-centered R1/R2 penalty, which is still available with `--reg_arm a_r1r2 --reg_coeff 0.02`. See [FINDINGS.md](https://github.com/255BITS/ParticleGAN/blob/master/FINDINGS.md) for the study and [docs/convergence-tips.md](https://github.com/255BITS/ParticleGAN/blob/master/docs/convergence-tips.md) for the transferable reasoning behind each ingredient.
 
 **Without particle prior** (baseline):
 ```bash
@@ -397,8 +390,8 @@ ParticleGAN/
 
 The grid-search infrastructure behind the study — config generation, the per-arm trainer, grid runner, and the analysis/leaderboard scripts — lives in `experiments/`, with the generated per-run configs in `configs/`.
 
-The [CIFAR DDGAN experiment](reports/cifar-ddgan/README.md) scales the particle
-recipe to images. Its [speed study](reports/cifar-ddgan/speed/READOUT.md) compares
+The [CIFAR DDGAN experiment](https://github.com/255BITS/ParticleGAN/blob/master/reports/cifar-ddgan/README.md) scales the particle
+recipe to images. Its [speed study](https://github.com/255BITS/ParticleGAN/blob/master/reports/cifar-ddgan/speed/READOUT.md) compares
 exact/lazy/finite-difference bcap and backports the shared implementation to both
 toy trainers. The faster CIFAR default retains exact derivatives; FD is optional.
 
@@ -422,7 +415,7 @@ Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
 ### 0.1.2 — 2026-08-22
 
 - Default gradient penalty switched to the one-sided cap (`b_cap`, `relu(‖∇ₓD‖ − 1)²`, coeff 1.0) via `lib/grad_regularizers.py`; base LR 3e-4 → 6e-4; run length 5k → 7k steps.
-- Chosen by a 420-run controlled study ([FINDINGS.md](FINDINGS.md)): same game-damping as R1/R2, sharper modes (hq 0.986 vs a ~0.94 ceiling), honest per-mode core width (0.87), zero collapses. R1/R2 stays available via `--reg_arm a_r1r2`.
+- Chosen by a 420-run controlled study ([FINDINGS.md](https://github.com/255BITS/ParticleGAN/blob/master/FINDINGS.md)): same game-damping as R1/R2, sharper modes (hq 0.986 vs a ~0.94 ceiling), honest per-mode core width (0.87), zero collapses. R1/R2 stays available via `--reg_arm a_r1r2`.
 - Adds the `experiments/` study infrastructure and the deterministic video renderer.
 
 ### 0.1.1
@@ -433,7 +426,7 @@ Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
 ### 0.1.0
 
 - Original example: vanilla/hinge GAN, no gradient regularizer, plain MLP D, z_dim 2, Adam β1=0.5, no EMA, no LR anneal.
-- Never converged on the 100-Gaussians benchmark: ~86–92/100 modes, ~30% hq at 12k steps (baseline row in [docs/convergence-tips.md](docs/convergence-tips.md)).
+- Never converged on the 100-Gaussians benchmark: ~86–92/100 modes, ~30% hq at 12k steps (baseline row in [docs/convergence-tips.md](https://github.com/255BITS/ParticleGAN/blob/master/docs/convergence-tips.md)).
 
 ## Citation
 

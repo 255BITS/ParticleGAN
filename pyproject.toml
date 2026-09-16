@@ -14,7 +14,7 @@ dependencies = [
 
 [project.urls]
 Repository = "https://github.com/255BITS/ParticleGAN"
-Documentation = "https://github.com/255BITS/ParticleGAN#readme"
+Documentation = "https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md"
 
 [project.optional-dependencies]
 experiments = [

@@ -1,8 +1,8 @@
 # ParticleGAN API reference
 
 ParticleGAN provides independent PyTorch priors, losses, and diffusion helpers.
-You own the models, data, training loop, and checkpoints. Install this checkout
-with `python -m pip install .`; the core dependency is PyTorch.
+You own the models, data, training loop, and checkpoints. Install the package
+with `python -m pip install particlegan`; the core dependency is PyTorch.
 
 ## A minimal training loop
 
