@@ -1,3 +1,36 @@
+# Latest discussion before compact: organize directed memory repair
+
+User watched the saved video and noticed that trajectories appear to retrace a
+repeating irregular path. This is a visual observation, not a measured recurrence
+or a new basis for ranking experiments. User wants to compact, then work toward
+solving the task with more organized memory repair. No new experiments launched.
+
+Hypothesis: the loop may settle into a stable clock-driven response rather than
+accumulate noise indefinitely. Clock base frequency .03125 radians/step implies
+an underlying continuous period 2*pi/.03125 ~=201.06 steps; all bands are integer
+multiples. Integer-step sampling only nearly repeats around201 steps. Measure
+recurrence and clock-phase dependence before claiming this explains the paths.
+A repeating incorrect orbit does not by itself prove memory corruption.
+
+Repair may need to distinguish progress, persistent process information, and
+error. Current repair is memory-only synthetic denoising, with no explicit
+before/after transition relationship. Candidate next direction: use previous
+memory, G's proposed sample, and time to repair the next G read toward a coherent
+continuation. Learn from paired clean and corrupted/generated LOCAL transitions;
+retain D-only ownership/writes of stored M and a stateless G-side adapter. This
+is a hypothesis, not an implemented architecture or selected loss/config. Exact
+runtime timing, training targets, bounded G-call cost, and gradient ownership
+still need defining. Previous single-write feedback already failed: isolate what
+sample-conditioned repair or predictive supervision adds beyond that exposure.
+
+Do not force every meaningful state difference to contract, or every process to
+follow the clock's fixed period. Unseen speeds/radii remain a generalization
+objective. First discriminate process preservation from clock-phase replay with
+metrics, then select the next experiments. User remains positive about sustained
+motion as a milestone. Main work/video committed as e77ca0a. Nothing running.
+
+---
+
 # Latest: memory dynamics and G repair scouts completed
 
 User authorized slow/fast D memory, local feedback stability, and a G-side memory
