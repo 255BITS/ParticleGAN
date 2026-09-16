@@ -8,6 +8,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from experiments.analyze_memory_scout import coverage
+from experiments.memory_orbit_metrics import panels, DEFINITION
 
 
 def analyze(source, out, baselines=(), handoff_only=False):
@@ -29,6 +30,8 @@ def analyze(source, out, baselines=(), handoff_only=False):
         row['source'] = str(path.parent)
         with np.load(path.parent/'trajectories.npz') as arrays:
             row['coverage'] = coverage(arrays['generated'][:, :256], arrays['real_clean'])
+            if all(k in arrays for k in ('prefix8', 'prefix32', 'continuation_reference')):
+                row['orbit_progress'] = panels(arrays)
         rows.append(row)
     # Warm fidelity is primary for handoff; cold performance remains a separate axis.
     rows.sort(key=lambda r: (-min(r['metrics'][f'prefix{n}']['fidelity_long']['reference_orbit_fraction']
@@ -52,6 +55,21 @@ def analyze(source, out, baselines=(), handoff_only=False):
                      m[f'prefix{n}']['fidelity_long']['reference_orbit_fraction']) for n in (8,32)]
         lines.append(f"| {row['name']} | {row['steps']} | {pair(short['circle_like_fraction'], long['circle_like_fraction'])} | "
                      f"{short['passing_cw']} / {short['passing_ccw']} | {pct(long['late_stopped_fraction'])} | {' | '.join(warm)} |")
+    progress_rows = [r for r in rows if 'orbit_progress' in r]
+    if progress_rows:
+        progress_rows.sort(key=lambda r: -min(r['orbit_progress'][f'prefix{n}']['quality'] for n in (8, 32)))
+        lines += ['', '## Continuous orbit progress (evaluation only)', '', DEFINITION, '',
+                  'Sorted by worst-prefix warm quality; full-circle/original-orbit passes remain primary.', '',
+                  '| Run | Cold self-fit quality | Warm quality 8 / 32 | Late quality 8 / 32 | Good steps 8 / 32 | Longest good arc (turns) 8 / 32 |',
+                  '|---|---:|---:|---:|---:|---:|']
+        for row in progress_rows:
+            p = row['orbit_progress']
+            a, b = p['prefix8'], p['prefix32']
+            lines.append(f"| {row['name']} | {p['cold']['quality']:.4f} | "
+                         f"{a['quality']:.4f} / {b['quality']:.4f} | "
+                         f"{a['quality_last256']:.4f} / {b['quality_last256']:.4f} | "
+                         f"{pair(a['good_step_fraction'], b['good_step_fraction'])} | "
+                         f"{a['longest_good_arc_turns_mean']:.3f} / {b['longest_good_arc_turns_mean']:.3f} |")
     lines += ['', '## Continuation errors (1,024 generated points)', '',
               '| Run | Prefix | Radial RMSE | Speed MAE | Direction agreement | Startup error | Position error first32 / last128 |',
               '|---|---:|---:|---:|---:|---:|---:|']
@@ -83,7 +101,7 @@ def analyze(source, out, baselines=(), handoff_only=False):
     else:
         lines.append('Only historical/control results are available; new training comparisons are pending.')
     if handoff_only:
-        lines[0] = '# Single-point handoff scouts (no trajectory loss)'
+        lines[0] = '# Local memory handoff scouts (no full-rollout training)'
         lines += ['', '## Training cost', '',
                   '| Run | Point examples / update | Max real prefix | Memory size | D prediction / temporal weights | G calls D / G phase | Feedback probability / strength | Seconds / update |',
                   '|---|---:|---:|---:|---:|---:|---:|---:|']
@@ -94,7 +112,7 @@ def analyze(source, out, baselines=(), handoff_only=False):
                          f"{cfg.get('generator_calls_d_phase', cfg.get('training_generator_unroll', 1))} / "
                          f"{cfg.get('generator_calls_g_phase', cfg.get('training_generator_unroll', 1))} | "
                          f"{cfg.get('feedback_probability', 0):g} / {cfg.get('feedback_strength', 1):g} | {row['seconds_per_update']:.4f} |")
-        if any(r['config'].get('feedback_judge_memory') == 'clean' for r in scouts):
+        if any(r['config'].get('feedback_judge_memory') in ('clean', 'mixed') for r in scouts):
             lines += ['', '## Adversarial memory exploration', '',
                       '| Run | D judging memory | G adapter | Proposal gradient | Reader calls D / G phase | Auxiliaries disabled |',
                       '|---|---|---|---|---:|---|']
@@ -108,6 +126,23 @@ def analyze(source, out, baselines=(), handoff_only=False):
                       'and B-cap use the same real-history memory, strictly before the target.',
                       'The proposal adapter uses two point-reader passes and stores no private state.',
                       'Reader calls include those internal passes; G calls count complete G evaluations.']
+        if any(r['config'].get('local_pair_weight') or r['config'].get('feedback_judge_memory') == 'mixed'
+               or r['config'].get('feedback_strength_distribution', 'fixed') != 'fixed' for r in scouts):
+            lines += ['', '## Local transition and recovery scouts', '',
+                      '| Run | Shared judging weight | Replacement distribution / max or mild | Local pair GAN weight |',
+                      '|---|---:|---|---:|']
+            for row in scouts:
+                c = row['config']
+                weight = c.get('feedback_shared_weight', .5) if c.get('feedback_judge_memory') == 'mixed' else float(c.get('feedback_judge_memory') == 'shared')
+                lines.append(f"| {row['name']} | {weight:g} | {c.get('feedback_strength_distribution', 'fixed')} / "
+                             f"{c.get('feedback_strength', 1):g} | {c.get('local_pair_weight', 0):g} |")
+            lines += ['', 'Mixed judging averages separate clean/shared GAN losses and their default B-cap penalties.',
+                      'The optional pair head judges two consecutive generated points against a real pair,',
+                      'conditioned on real memory before both points. Its branch has one generated write',
+                      'and is independent of point-loss exploration. Point/pair losses and penalties are',
+                      'convexly weighted; the prior regularizer is applied once. No third generated point.',
+                      'Uniform replacements range from zero to the configured maximum; mild_full selects',
+                      'the mild value or one (default 25% full). Each update reuses its strengths in D and G.']
         if any(r['config'].get('slow_dim') or r['config'].get('g_memory_adapter', 'none') != 'none'
                or r['config'].get('stability_g_weight') or r['config'].get('stability_d_weight') for r in scouts):
             lines += ['', '## Local memory dynamics settings', '',
@@ -119,8 +154,8 @@ def analyze(source, out, baselines=(), handoff_only=False):
                              f"{c.get('adapter_bottleneck', 16) if c.get('g_memory_adapter', 'none') != 'none' else 'off'} | "
                              f"{c.get('repair_target', 'raw')} / {c.get('repair_weight', 0):g} / {c.get('repair_noise', .05):g} | "
                              f"{c.get('stability_d_weight', 0):g} / {c.get('stability_g_weight', 0):g} / {c.get('stability_max_gain', 1.1):g} |")
-        lines += ['', 'All new scouts use local next-point GAN losses. There is no full generated training',
-                  'rollout, trajectory critic, or cold/warm path loss. Configured feedback adds at most one',
+        lines += ['', 'Scouts use local point GAN losses and optionally a two-point transition GAN. There is no full generated training',
+                  'rollout or cold/warm path loss. Configured feedback adds at most one',
                   'generated write before each target; configs control G gradients through that write.',
                   'Longer rollouts are evaluation only.',
                   'Dense scouts use four points per episode; the older handoff_only trainer used one.',

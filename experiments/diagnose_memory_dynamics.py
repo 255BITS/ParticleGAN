@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from experiments import memory_handoff_scout as handoff
 from experiments import memory_core_scout as core
 from experiments.memory_scout import rollout, diagnostics
+from experiments.memory_orbit_metrics import orbit_progress
 
 
 @contextmanager
@@ -120,10 +121,12 @@ def diagnose(path, device, bypass_rollouts=False, jacobians=False):
         with bypass_adapter(g):
             generated, _ = rollout(g, d.writer, z, cfg.eval_steps)
             results['adapter_bypass_cold_long'] = diagnostics(generated.cpu().numpy())
+            results['adapter_bypass_orbit_progress'] = {'cold': orbit_progress(generated.cpu().numpy())}
             results['adapter_bypass_warm_long'] = {}
             for n in cfg.eval_prefixes:
                 generated, _ = core.continuation(g, d.writer, z, observed[:, :n], cfg.eval_steps)
                 results['adapter_bypass_warm_long'][f'prefix{n}'] = core.fidelity(generated.cpu().numpy(), clean_np, n)
+                results['adapter_bypass_orbit_progress'][f'prefix{n}'] = orbit_progress(generated.cpu().numpy(), clean_np, n)
     return results
 
 

@@ -1,0 +1,19 @@
+{
+  "matched_plain_control_qualifies": false,
+  "comparisons": {
+    "prefix8": {
+      "quality_gain": -0.07886804042872542,
+      "late_quality_gain": -0.22977576393970311,
+      "radial_change": 0.14107070408086297,
+      "direction_change": 0.009429931640625
+    },
+    "prefix32": {
+      "quality_gain": -0.11626689585269145,
+      "late_quality_gain": -0.18912431640825444,
+      "radial_change": 0.1474895831327956,
+      "direction_change": 0.00969696044921875
+    }
+  },
+  "further_extensions": [],
+  "reason": "Plain control loses warm Q and radial fidelity versus the old candidate. Extended proposal model regresses versus its own2k checkpoint. Stop extensions; retain2k checkpoint."
+}

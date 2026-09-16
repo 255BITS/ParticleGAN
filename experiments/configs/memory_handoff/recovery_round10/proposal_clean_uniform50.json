@@ -1,0 +1,13 @@
+{
+  "name": "proposal_clean_uniform50",
+  "clock_bands": 6,
+  "adversarial_only": true,
+  "g_memory_adapter": "proposal",
+  "feedback_probability": 0.5,
+  "feedback_strength": 0.5,
+  "feedback_min_prefix": 4,
+  "feedback_ramp_steps": 500,
+  "feedback_backprop": true,
+  "feedback_judge_memory": "clean",
+  "feedback_strength_distribution": "uniform"
+}

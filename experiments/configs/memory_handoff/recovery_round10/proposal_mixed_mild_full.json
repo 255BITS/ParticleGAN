@@ -1,0 +1,13 @@
+{
+  "name": "proposal_mixed_mild_full",
+  "clock_bands": 6,
+  "adversarial_only": true,
+  "g_memory_adapter": "proposal",
+  "feedback_probability": 0.5,
+  "feedback_strength": 0.25,
+  "feedback_min_prefix": 4,
+  "feedback_ramp_steps": 500,
+  "feedback_backprop": true,
+  "feedback_judge_memory": "mixed",
+  "feedback_strength_distribution": "mild_full"
+}

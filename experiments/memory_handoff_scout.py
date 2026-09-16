@@ -40,6 +40,10 @@ class Config(base.Config):
     feedback_ramp_steps: int = 0
     feedback_backprop: bool = False
     feedback_judge_memory: str = 'shared'
+    feedback_shared_weight: float = .5
+    feedback_strength_distribution: str = 'fixed'
+    feedback_full_probability: float = .25
+    local_pair_weight: float = 0.
     adversarial_only: bool = False
     recent_points: int = 0
     residual_output: bool = False
@@ -92,8 +96,13 @@ class Config(base.Config):
         assert self.repair_target in ('raw', 'translated')
         assert not self.repair_weight or self.g_memory_adapter != 'none'
         assert not self.repair_weight or self.g_memory_adapter != 'proposal'
-        assert self.feedback_judge_memory in ('shared', 'clean')
+        assert self.feedback_judge_memory in ('shared', 'clean', 'mixed')
         assert self.feedback_judge_memory == 'shared' or self.feedback_probability > 0
+        assert 0 < self.feedback_shared_weight < 1
+        assert self.feedback_strength_distribution in ('fixed', 'uniform', 'mild_full')
+        assert self.feedback_strength_distribution == 'fixed' or self.feedback_probability > 0
+        assert 0 <= self.feedback_full_probability <= 1
+        assert 0 <= self.local_pair_weight < 1
         assert not self.adversarial_only or not any((self.predict_weight, self.temporal_weight,
             self.repair_weight, self.stability_g_weight, self.stability_d_weight))
         assert self.dynamics_min_prefix >= 1
@@ -101,7 +110,7 @@ class Config(base.Config):
 
 
 class Critic(nn.Module):
-    """D owns the writer and a point head; there is no trajectory head."""
+    """D owns the writer, point head, and optional two-point transition head."""
     def __init__(self, cfg):
         super().__init__()
         self.clock_bands = cfg.clock_bands if cfg.clock_to_d else 0
@@ -115,6 +124,10 @@ class Critic(nn.Module):
         with torch.random.fork_rng(devices=[]):
             torch.manual_seed(46)
             self.handoff_head = mlp(cfg.memory_dim+2+2*self.clock_bands, 1, cfg.d_width)
+        if cfg.local_pair_weight:
+            with torch.random.fork_rng(devices=[]):
+                torch.manual_seed(51)
+                self.pair_head = mlp(cfg.memory_dim+4+2*self.clock_bands, 1, cfg.d_width)
         self.interaction = cfg.point_head == "interaction"
         if self.interaction:
             with torch.random.fork_rng(devices=[]):
@@ -140,6 +153,13 @@ class Critic(nn.Module):
             score = score+(self.point_embedding(candidate)*self.memory_embedding(flat)).sum(-1)/(flat.shape[-1]**.5)
         return score
 
+    def score_pair(self, pair, memory, time_index=None):
+        inputs = [pair.flatten(1), memory.flatten(1)]
+        if self.clock_bands:
+            inputs.append(clock_features(time_index, pair[:, 0], self.clock_bands,
+                                         self.clock_frequency, self.clock_rate))
+        return self.pair_head(torch.cat(inputs, -1)).squeeze(-1)
+
 
 class CandidateView(nn.Module):
     def __init__(self, critic, memory, time_index=None):
@@ -150,6 +170,50 @@ class CandidateView(nn.Module):
     def forward(self, candidate):
         # Real, fake, and penalty all use the exact same cached memory tensor.
         return self.critic.score_candidate(candidate, self.memory, self.time_index)
+
+
+class PairView(CandidateView):
+    def forward(self, pair):
+        return self.critic.score_pair(pair, self.memory, self.time_index)
+
+
+def candidate_views(cfg, critic, memory, judging_memory, times):
+    if cfg.feedback_judge_memory == 'mixed':
+        return [(1-cfg.feedback_shared_weight, CandidateView(critic, judging_memory, times)),
+                (cfg.feedback_shared_weight, CandidateView(critic, memory, times))]
+    return [(1., CandidateView(critic, judging_memory, times))]
+
+
+def sample_feedback_strength(cfg, positions, rng):
+    """Draw once per update; reuse the same strengths after D's update."""
+    if cfg.feedback_strength_distribution == 'fixed':
+        return None
+    uniform = torch.rand(positions.shape, device=positions.device, generator=rng)
+    if cfg.feedback_strength_distribution == 'uniform':
+        return cfg.feedback_strength*uniform.flatten()[:, None]
+    return torch.where(uniform < cfg.feedback_full_probability, 1.,
+                       cfg.feedback_strength).flatten()[:, None]
+
+
+def local_pair_examples(cfg, generator, critic, observed, real, positions, z, times,
+                        proposal_grad=False):
+    """Independent local branch: real prefix -> G -> one write -> G.
+
+    Start one point before the target, or at zero for empty-prefix targets.
+    Zero targets judge the pair real[0:2], providing a local cold-start task.
+    No explored point-loss history feeds this branch; no third point is generated.
+    """
+    starts = (positions-1).clamp_min(0)
+    memory = selected_memories(critic.writer, observed, starts, cfg.max_prefix)
+    latent, clock = z, times-(positions.flatten() > 0).to(times.dtype)
+    with torch.set_grad_enabled(proposal_grad):
+        first, _ = local_point(generator, latent, memory, clock)
+        updated = critic.writer.write(memory, first)
+        second, _ = local_point(generator, latent, updated, clock+1)
+        fake = torch.stack((first, second), 1)
+    rows = torch.arange(len(real), device=real.device)[:, None]
+    actual = torch.stack((real[rows, starts], real[rows, starts+1]), 2).flatten(0, 1)
+    return PairView(critic, memory, clock), actual, fake
 
 
 def local_point(generator, z, memory, time_index):
@@ -190,7 +254,7 @@ def batch_inputs(cfg, real, rngs):
 
 
 def training_memory(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
-                    proposal_grad=False, clock_origin=None, return_reference=False):
+                    proposal_grad=False, clock_origin=None, return_reference=False, feedback_strength=None):
     """Replace at most the last observation before each target by a G point.
 
     Both returned states retain writer gradients. The caller chooses which state
@@ -211,7 +275,7 @@ def training_memory(cfg, generator, critic, observed, positions, z, jitter, feed
         proposed, _ = local_point(generator, z, previous, times.flatten())
     rows = torch.arange(len(observed), device=observed.device)[:, None]
     actual = observed[rows, previous_positions].flatten(0, 1)
-    strength = cfg.feedback_strength*min(1., step/max(1, cfg.feedback_ramp_steps))
+    strength = (cfg.feedback_strength if feedback_strength is None else feedback_strength)*min(1., step/max(1, cfg.feedback_ramp_steps))
     replacement = (1-strength)*actual+strength*proposed
     if not proposal_grad:
         replacement = replacement.detach()
@@ -222,15 +286,16 @@ def training_memory(cfg, generator, critic, observed, positions, z, jitter, feed
 
 
 def training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask,
-                      step, proposal_grad=False, clock_origin=None):
+                      step, proposal_grad=False, clock_origin=None, feedback_strength=None):
     """G may explore a generated write while D judges against real history.
 
     The clean reference is strictly before the target and is shared by both D
     candidate scores and B-cap. No clean reference is supplied to G's final read.
     """
     memory, reference = training_memory(cfg, generator, critic, observed, positions, z,
-        jitter, feedback_mask, step, proposal_grad, clock_origin, return_reference=True)
-    return memory, reference if cfg.feedback_judge_memory == 'clean' else memory
+        jitter, feedback_mask, step, proposal_grad, clock_origin, return_reference=True,
+        feedback_strength=feedback_strength)
+    return memory, reference if cfg.feedback_judge_memory in ('clean', 'mixed') else memory
 
 
 def local_auxiliary(cfg, critic, memory, real, positions, target):
@@ -330,7 +395,8 @@ def train(cfg, out, device, log):
             'feedback': torch.Generator(device=device).manual_seed(16183),
             'clock': torch.Generator(device=device).manual_seed(16184),
             'stability': torch.Generator(device=device).manual_seed(16185),
-            'repair': torch.Generator(device=device).manual_seed(16186)}
+            'repair': torch.Generator(device=device).manual_seed(16186),
+            'feedback_strength': torch.Generator(device=device).manual_seed(16187)}
     start = 0
     if cfg.resume:
         saved = torch.load(cfg.resume, map_location=device, weights_only=False)
@@ -350,7 +416,8 @@ def train(cfg, out, device, log):
                 assert ((name == 'feedback' and not cfg.feedback_probability)
                         or (name == 'clock' and not cfg.clock_bands)
                         or (name == 'stability' and not (cfg.stability_g_weight or cfg.stability_d_weight))
-                        or (name == 'repair' and not cfg.repair_weight))
+                        or (name == 'repair' and not cfg.repair_weight)
+                        or (name == 'feedback_strength' and cfg.feedback_strength_distribution == 'fixed'))
         torch.set_rng_state(saved['torch_rng'].cpu())
         if device.startswith('cuda'):
             torch.cuda.set_rng_state(saved['cuda_rng'].cpu(), device)
@@ -404,6 +471,29 @@ def train(cfg, out, device, log):
                 'point_examples_per_update': cfg.batch_size*cfg.samples_per_episode,
                 'parameters': {'g': sum(p.numel() for p in generator.parameters()),
                                'd': sum(p.numel() for p in critic.parameters())}}
+    resolved['local_pair'] = {
+        'weight': cfg.local_pair_weight,
+        'context': 'real prefix before both candidates; no future observations',
+        'fake': 'two consecutive G outputs with one intervening D write; same particle',
+        'branch': 'independent of point-loss exploration; never chained to that branch',
+        'penalty': 'default exact B-cap in four candidate coordinates, cached prefix memory',
+        'writer_gradients': 'D trains real prefix through pair score; G differentiates frozen generated write',
+        'empty_prefix_targets': 'pair starts from M=0, compares generated first two points to real[0:2]',
+    }
+    resolved['judging_view_weights'] = ([1-cfg.feedback_shared_weight, cfg.feedback_shared_weight]
+                                       if cfg.feedback_judge_memory == 'mixed' else [1.])
+    if cfg.feedback_judge_memory == 'mixed':
+        resolved['feedback_writer_d_gradient'] = 'weighted clean and explored judging histories'
+    if cfg.local_pair_weight:
+        for phase in ('d', 'g'):
+            resolved[f'generator_calls_{phase}_phase'] += 2
+            resolved[f'reader_calls_{phase}_phase'] += 2*resolved['reader_calls_per_generator']
+            resolved[f'fake_writes_{phase}_phase'] += 1
+        resolved['training_generator_unroll'] = 2
+        resolved['fake_writes_in_training'] += 1
+        resolved['penalty_domain'] = 'point coordinates and independent local pair coordinates; weighted default exact B-cap'
+    resolved['max_sequential_generated_writes'] = int(bool(cfg.feedback_probability or cfg.local_pair_weight
+        or cfg.stability_g_weight or cfg.stability_d_weight))
     (out/'config.json').write_text(json.dumps(resolved, indent=2))
     log(event='start', start_step=start, config=resolved)
     started = time.monotonic()
@@ -420,18 +510,28 @@ def train(cfg, out, device, log):
                                      device=device, generator=rngs['clock'])
         times = (positions+clock_origin).flatten()
         feedback_mask = torch.rand(positions.shape, device=device, generator=rngs['feedback']) < cfg.feedback_probability
+        feedback_strength = sample_feedback_strength(cfg, positions, rngs['feedback_strength'])
         stability_noise = (torch.randn(jitter.shape, device=device, generator=rngs['stability'])
                            if cfg.stability_g_weight or cfg.stability_d_weight else None)
         repair_noise = (torch.randn(jitter.shape, device=device, generator=rngs['repair'])
                         if cfg.repair_weight else None)
         opt_d.zero_grad(set_to_none=True)
         memory, judging_memory = training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
-                                                   clock_origin=clock_origin)
-        view = CandidateView(critic, judging_memory, times)
+                                                   clock_origin=clock_origin, feedback_strength=feedback_strength)
+        views = candidate_views(cfg, critic, memory, judging_memory, times)
         with torch.no_grad():
             fake, _ = local_point(generator, z, memory, times)
-        d_adv = gan.d_loss(view(target), view(fake))
-        d_reg = penalty(view, target, fake, step=step)
+        d_adv = sum(weight*gan.d_loss(view(target), view(fake)) for weight, view in views)
+        d_reg = sum(weight*penalty(view, target, fake, step=step) for weight, view in views)
+        d_pair = memory.new_zeros(())
+        if cfg.local_pair_weight:
+            pair = local_pair_examples(cfg, generator, critic, observed, real, positions, z, times)
+            if pair is not None:
+                pair_view, pair_real, pair_fake = pair
+                d_pair = gan.d_loss(pair_view(pair_real), pair_view(pair_fake))
+                pair_reg = penalty(pair_view, pair_real, pair_fake, step=step)
+                d_adv = (1-cfg.local_pair_weight)*d_adv+cfg.local_pair_weight*d_pair
+                d_reg = (1-cfg.local_pair_weight)*d_reg+cfg.local_pair_weight*pair_reg
         d_aux, diagnostics = local_auxiliary(cfg, critic, memory, real, positions, target)
         d_stability = memory.new_zeros(())
         if cfg.stability_d_weight:
@@ -445,10 +545,18 @@ def train(cfg, out, device, log):
             opt_g.zero_grad(set_to_none=True)
             # Rebuild with updated D weights; reuse the same observations/jitter.
             memory, judging_memory = training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
-                proposal_grad=cfg.feedback_backprop, clock_origin=clock_origin)
-            view = CandidateView(critic, judging_memory, times)
+                proposal_grad=cfg.feedback_backprop, clock_origin=clock_origin, feedback_strength=feedback_strength)
+            views = candidate_views(cfg, critic, memory, judging_memory, times)
             fake, _ = local_point(generator, z, memory, times)
-            g_adv = generator_loss(gan, view, target, fake)
+            g_adv = sum(weight*generator_loss(gan, view, target, fake) for weight, view in views)
+            g_pair = memory.new_zeros(())
+            if cfg.local_pair_weight:
+                pair = local_pair_examples(cfg, generator, critic, observed, real, positions, z, times,
+                                           proposal_grad=True)
+                if pair is not None:
+                    pair_view, pair_real, pair_fake = pair
+                    g_pair = generator_loss(gan, pair_view, pair_real, pair_fake)
+                    g_adv = (1-cfg.local_pair_weight)*g_adv+cfg.local_pair_weight*g_pair
             repair = memory_repair(cfg, generator, memory, positions, repair_noise) if cfg.repair_weight else memory.new_zeros(())
             g_stability = memory.new_zeros(())
             if cfg.stability_g_weight:
@@ -459,6 +567,12 @@ def train(cfg, out, device, log):
         if step == start+1 or step % cfg.log_every == 0 or step == cfg.steps:
             losses = {'d': d_adv.item(), 'g': g_adv.item(), 'penalty': d_reg.item()}
             losses.update(repair_mse=repair.item(), d_stability_loss=d_stability.item(), g_stability_loss=g_stability.item())
+            if cfg.local_pair_weight:
+                losses.update(d_pair=d_pair.item(), g_pair=g_pair.item())
+            if feedback_strength is not None:
+                eligible = (feedback_mask & (positions >= cfg.feedback_min_prefix)).flatten()
+                strengths = feedback_strength.flatten()[eligible]*min(1., step/max(1, cfg.feedback_ramp_steps))
+                losses['feedback_strength_mean'] = strengths.mean().item() if len(strengths) else 0.
             losses.update({key: value.item() for key, value in diagnostics.items()})
             losses['feedback_fraction'] = (feedback_mask & (positions >= cfg.feedback_min_prefix)).float().mean().item()
             if cfg.feedback_probability:

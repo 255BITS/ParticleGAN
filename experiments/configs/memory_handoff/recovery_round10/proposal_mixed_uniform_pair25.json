@@ -1,0 +1,14 @@
+{
+  "name": "proposal_mixed_uniform_pair25",
+  "clock_bands": 6,
+  "adversarial_only": true,
+  "g_memory_adapter": "proposal",
+  "feedback_probability": 0.5,
+  "feedback_strength": 0.5,
+  "feedback_min_prefix": 4,
+  "feedback_ramp_steps": 500,
+  "feedback_backprop": true,
+  "feedback_judge_memory": "mixed",
+  "feedback_strength_distribution": "uniform",
+  "local_pair_weight": 0.25
+}

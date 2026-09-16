@@ -1,0 +1,7 @@
+{
+  "name": "proposal_pair25",
+  "clock_bands": 6,
+  "adversarial_only": true,
+  "g_memory_adapter": "proposal",
+  "local_pair_weight": 0.25
+}

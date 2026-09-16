@@ -1,3 +1,82 @@
+# Latest: local adversarial recovery round10 completed
+
+User authorized code/config changes and scouts on both GPUs to get autonomous
+circles or measurable progress without full-rollout training. Completed17 fresh
+2k scouts (16 planned plus one adaptive matched control) and one exact2k->5k
+continuation. Zero failures; both recovery_round10 and recovery_round10_followup
+queues are sealed and empty. All diagnostics finished. Nothing is running.
+Latest user request: commit and push this round, then compact. The user is
+considering G-owned memory and other ways to reach full circles. No next
+experiment is selected. See ../memory-handoff/recovery_round10/next-brainstorm.md
+for candidates and the important distinction from earlier rollout-trained GRUs.
+
+Read ../memory-handoff/recovery_round10/assessment.md and followup/assessment.md,
+plus plan.md, leaderboard.md, extension_decision.json, validation.json,
+baseline_probes.md, process_*.json, followup/process.json and followup/probes.json.
+Central log remains: tail -F runs/memory_path/core_round1/train.log
+
+Best2k candidate: proposal_mixed_pair25. Same stateless proposal-conditioned G
+repair as round9, but point GAN averages clean/shared judging50:50 and a separate
+local pair GAN gets25% objective weight. Point exploration is still probability.5,
+strength.25, min prefix4, ramp500, connected G gradients through frozen writer.
+Pair branch independently starts from real-prefix M, generates first, writes it
+with D, then generates second. D compares the candidate pair to a real pair using
+memory strictly before both. Zero-prefix examples judge real[0:2]. There is no
+third generated point and no chain from the point-feedback branch into the pair
+branch. D owns/trains the only persistent memory; G adapter never writes back.
+Combined recipe costs4 full G calls/8 internal reader calls per D/G phase.
+Point/pair GAN losses and default exact B-cap penalties are convexly weighted;
+prior regularizer once. No MSE training objectives, clipping, EMA, seed sweep,
+private G memory or full generated training rollout. Existing configs still work.
+
+New evaluation-only Q averages radial AND per-step signed-angular fidelity:
+1/((1+(radial/.1)^2)*(1+(angular_error/.03)^2)). Q in[0,1], not a success
+probability and not an absolute-phase metric. Perfect clean circles Q1; saved
+noisy expert panel ~.515. Also good-step fraction, initial good streak and longest
+consecutive correct arc in turns. Cold self-fit Q is separate from reference
+fidelity. Metrics use saved arrays; no generated evaluation path enters training.
+
+All18 runs: cold and warm complete passes0/128 at256/1024, prefixes8/32;
+late stopping0. Circle task remains unsolved. Prefix32 results:
+- prior proposal_clean_s25: Q.006426, radial1.487
+- new proposal_mixed_pair25 at2k: Q.008274, radial1.159
+- matched plain_mixed_pair25 at2k: Q.005679, radial1.707
+- new proposal_mixed_pair25 at5k: Q.006976, radial1.565
+New2k improves Q~29–32% and radial~22–24% at both prefixes, but first32 position
+error is slightly worse. Only it met predeclared extension gates. Exact5k run
+regresses on autonomous Q/radial, despite local one-write MSE improving.017637
+->.012765 and early position improving. Keep2k checkpoint; no further extensions.
+Shared/mixed judging alone fails; pair50 is worse than25; replacement variability
+has context-dependent effects and hurts the best combined recipe. Matched plain
+control supports keeping proposal repair in training, despite a small post-training
+bypass effect on the new checkpoint (Q32 .008274->.007862). Old candidate bypass
+Q32 collapses.006426->.000166. Capacity/compute differ in adapter comparisons.
+
+Matched-prefix history probes hold z/clock/center/handoff phase/noise fixed, vary
+radius.65/1.35 or signed speed magnitude.14/.36, or flip direction. Near-zero median
+late radius/speed response persists in old2k, new2k and new5k. Correct mean direction
+for BOTH original and flipped histories:5.5%,10.9%,6.25%. These diagnostics show
+weak control of late behavior by process parameters; they do not distinguish
+D memory losing information from G failing to use information still present.
+Recurrence/history data are also saved; no visual ranking was used.
+
+Recommended next discussion: distinguish writer information loss from reader
+failure at late autonomous states. Longer training/local prediction gains do not
+solve it. Keep new2k as baseline. Do not automatically launch another sweep.
+
+Validation:86 focused tests passed, two full-batch4-update GPU smokes with1024
+step evaluation, exact fresh round9 control reproduction (G/D/prior), exact resume
+and no-MSE/gradient-ownership/call-budget tests. All18 experiments used identical
+archived source hashes. After completion, a reporting-only fix corrected counts
+for optional legacy stability+pair combinations;13 affected focused tests pass.
+No training computation changed. Both queues completed with zero failures.
+
+Branch feat/sequential-memory-path; this handoff is included in the user-requested
+round10 commit/push. Base before this round:1ef40f6.
+Preserve unrelated .claude/, results/motion/, sparse-ucd.log.
+
+---
+
 # Latest: adversarial memory exploration round9 completed
 
 Latest user direction: commit and compact. The next experiment remains open;

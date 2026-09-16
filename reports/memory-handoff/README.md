@@ -1,16 +1,21 @@
-# Handoff-only scouts: no generated trajectories during training
+# Local memory GAN scouts: no full-rollout training
 
-Latest result: [Adversarial memory exploration](exploration_round9/assessment.md).
-Ten scouts and one exact 5k continuation finished, with no MSE training objective.
-Clean versus explored judging memory gives mixed results; proposal-conditioned
-repair improves radial error but full circles remain unsolved. The extension
-regressed. All queues are finished. The
-[clock's sustained-motion milestone](clock_round7/assessment.md) remains intact.
-A [saved rollout video](dynamics_round8/slow16_r10_rollout.mp4) shows the strongest
-new scout by radial error, including cold and real-prefix starts.
-Next discussion: combining clean-reference and explored-memory adversarial judging.
-Current handoff:
-[NEXT.md](../memory-path/NEXT.md). The sections below describe the original round.
+Latest: [Local adversarial recovery](recovery_round10/assessment.md).
+Seventeen2k scouts and one exact5k continuation completed without failures. Proposal repair with mixed judging
+and a25% local-pair GAN has the best continuous orbit progress; complete-circle
+passes remain0. Its exact5k extension regressed; a matched no-adapter control was
+worse. Keep the2k checkpoint. [Follow-up results](recovery_round10/followup/assessment.md).
+All training and diagnostics are finished.
+[Continuous metrics and full leaderboard](recovery_round10/leaderboard.md) now
+separate radial/signed-motion quality, partial good arcs, and full success.
+[Matched history probes](recovery_round10/baseline_probes.md) test whether radius,
+speed, and direction actually survive autonomous continuation.
+
+Previous: [Adversarial exploration](exploration_round9/assessment.md),
+[clock motion milestone](clock_round7/assessment.md), and
+[older rollout video](dynamics_round8/slow16_r10_rollout.mp4).
+Current handoff: [NEXT.md](../memory-path/NEXT.md).
+The sections below describe the original round, before local feedback/pair losses.
 
 The user requested a round without cold loss to avoid generated-trajectory training
 cost. This round removes **both** cold and warm trajectory losses. There is no

@@ -1,0 +1,28 @@
+{
+  "focused_tests_passed": 86,
+  "gpu_smokes": [
+    "runs/memory_path/recovery_smoke10/pair",
+    "runs/memory_path/recovery_smoke10/mild_full"
+  ],
+  "smoke_updates": 4,
+  "all_configs_validated": 16,
+  "diff_check": "passed",
+  "metric_definition_sha256": "67793d8b630c0d50f51bd70de77ea0a3171e13b366fb303374d5468ef26fa6d0",
+  "process_probe_test": "matched handoff phase, noise, ideal radius/speed response",
+  "fresh_control_exact_match": [
+    "generator",
+    "critic",
+    "prior"
+  ],
+  "all_16_sources_identical": true,
+  "all_16_done_zero_failures": true,
+  "all_18_sources_identical": true,
+  "scouts_completed": 17,
+  "exact_extensions_completed": 1,
+  "all_primary_passes_zero": true,
+  "all_stopping_zero": true,
+  "all_constraints_checked": true,
+  "extension_config_and_steps_checked": true,
+  "post_run_metadata_fix": "Accumulate optional pair write counts with legacy stability counts; include stability branches in max-sequential-write metadata. No training computation changed.",
+  "post_metadata_fix_focused_tests_passed": 13
+}
