@@ -1,0 +1,358 @@
+[
+  {
+    "source": "configs/b_cap_c1p0_lazy16_s1.yaml",
+    "overrides": {
+      "total_steps": 20,
+      "eval_interval": 10,
+      "spectral": false,
+      "out_dir": "runs/api/dogfood/toy/arm_lazy"
+    },
+    "finite_checkpoint": true,
+    "status": "passed",
+    "family": "toy",
+    "name": "arm_lazy"
+  },
+  {
+    "source": "configs/b_cap_c1p0_nlinf_s1.yaml",
+    "overrides": {
+      "total_steps": 20,
+      "eval_interval": 10,
+      "spectral": false,
+      "out_dir": "runs/api/dogfood/toy/arm_linf"
+    },
+    "finite_checkpoint": true,
+    "status": "passed",
+    "family": "toy",
+    "name": "arm_linf"
+  },
+  {
+    "source": "configs/a_r1r2_c0p1_oadam_s1.yaml",
+    "overrides": {
+      "total_steps": 20,
+      "eval_interval": 10,
+      "spectral": false,
+      "out_dir": "runs/api/dogfood/toy/arm_oadam"
+    },
+    "finite_checkpoint": true,
+    "status": "passed",
+    "family": "toy",
+    "name": "arm_oadam"
+  },
+  {
+    "source": "examples/five_modes.py",
+    "overrides": {
+      "total_steps": 4,
+      "batch_size": 32,
+      "viz_interval": 100,
+      "log_interval": 1,
+      "out_dir": "runs/api/dogfood/toy/five_modes"
+    },
+    "finite_checkpoint": false,
+    "status": "passed",
+    "family": "toy",
+    "name": "five_modes"
+  },
+  {
+    "source": "configs/100gaussians/default.toml",
+    "overrides": {
+      "epochs": 1,
+      "steps_per_epoch": 8,
+      "log_interval": 2,
+      "final_samples": 256,
+      "out_dir": "runs/api/dogfood/toy/gan"
+    },
+    "finite_checkpoint": true,
+    "status": "passed",
+    "family": "toy",
+    "name": "gan"
+  },
+  {
+    "source": "configs/sparse/ucd/ucd_l0p1_s1.yaml",
+    "overrides": {
+      "total_steps": 8,
+      "eval_interval": 4,
+      "eval_n": 256,
+      "final_n": 512,
+      "out_dir": "runs/api/dogfood/toy/sparse"
+    },
+    "finite_checkpoint": true,
+    "status": "passed",
+    "family": "toy",
+    "name": "sparse"
+  },
+  {
+    "source": "configs/denoising/default.toml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/00-denoising",
+      "eval_interval": 4,
+      "eval_samples": 256,
+      "final_samples": 256,
+      "probe_samples": 16
+    },
+    "family": "denoising",
+    "name": "00",
+    "status": "passed"
+  },
+  {
+    "source": "configs/denoising/joint_ucd_smoke/time_class.yaml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/01-denoising",
+      "eval_interval": 4,
+      "eval_samples": 256,
+      "final_samples": 256,
+      "probe_samples": 16
+    },
+    "family": "denoising",
+    "name": "01",
+    "status": "passed"
+  },
+  {
+    "source": "configs/denoising/budget56k/ddgan_ucd_learned_noise_56k_s24002.yaml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/02-denoising",
+      "eval_interval": 4,
+      "eval_samples": 256,
+      "final_samples": 256,
+      "probe_samples": 16
+    },
+    "family": "denoising",
+    "name": "02",
+    "status": "passed"
+  },
+  {
+    "source": "configs/denoising/budget56k/ddgan_concat_gaussian_56k_s24002.yaml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/03-denoising",
+      "eval_interval": 4,
+      "eval_samples": 256,
+      "final_samples": 256,
+      "probe_samples": 16
+    },
+    "family": "denoising",
+    "name": "03",
+    "status": "passed"
+  },
+  {
+    "source": "configs/denoising/budget56k/gan_learned_56k_s24002.yaml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/04-denoising",
+      "eval_interval": 4,
+      "eval_samples": 256,
+      "final_samples": 256,
+      "probe_samples": 16
+    },
+    "family": "denoising",
+    "name": "04",
+    "status": "passed"
+  },
+  {
+    "source": "configs/denoising/diagnostics/gan_class_free_7k_s24002.yaml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/05-denoising",
+      "eval_interval": 4,
+      "eval_samples": 256,
+      "final_samples": 256,
+      "probe_samples": 16
+    },
+    "family": "denoising",
+    "name": "05",
+    "status": "passed"
+  },
+  {
+    "source": "configs/trajectory/default.yaml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/06-trajectory",
+      "log_interval": 4,
+      "eval_per_context": 16
+    },
+    "family": "trajectory",
+    "name": "06",
+    "status": "passed"
+  },
+  {
+    "source": "configs/trajectory/diversity/scout_1k/temporal_continuous.yaml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/07-trajectory",
+      "log_interval": 4,
+      "eval_per_context": 16
+    },
+    "family": "trajectory",
+    "name": "07",
+    "status": "passed"
+  },
+  {
+    "source": "configs/trajectory/hybrid/scout_1k/hybrid_continuous.yaml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/08-trajectory",
+      "log_interval": 4,
+      "eval_per_context": 16
+    },
+    "family": "trajectory",
+    "name": "08",
+    "status": "passed"
+  },
+  {
+    "source": "configs/trajectory/ablations_1k/learned_noise.yaml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/09-trajectory",
+      "log_interval": 4,
+      "eval_per_context": 16
+    },
+    "family": "trajectory",
+    "name": "09",
+    "status": "passed"
+  },
+  {
+    "source": "configs/trajectory/ablations_1k/one_shot.yaml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/10-trajectory",
+      "log_interval": 4,
+      "eval_per_context": 16
+    },
+    "family": "trajectory",
+    "name": "10",
+    "status": "passed"
+  },
+  {
+    "source": "configs/trajectory/ablations_1k/concat.yaml",
+    "overrides": {
+      "steps": 8,
+      "out_dir": "runs/api/dogfood/denoising/11-trajectory",
+      "log_interval": 4,
+      "eval_per_context": 16
+    },
+    "family": "trajectory",
+    "name": "11",
+    "status": "passed"
+  },
+  {
+    "name": "class_unet",
+    "source": "configs/cifar_ddgan/smoke/width32.yaml",
+    "overrides": {
+      "steps": 4,
+      "log_interval": 1,
+      "eval_interval": 4,
+      "eval_samples": 10,
+      "final_samples": 10,
+      "eval_batch_size": 10,
+      "save_checkpoint": true,
+      "out_dir": "runs/api/dogfood/cifar/class_unet",
+      "profile_steps": 0
+    },
+    "family": "cifar",
+    "status": "passed"
+  },
+  {
+    "name": "concat_unet",
+    "source": "configs/cifar_ddgan/image_lr/concat32.yaml",
+    "overrides": {
+      "steps": 4,
+      "log_interval": 1,
+      "eval_interval": 4,
+      "eval_samples": 10,
+      "final_samples": 10,
+      "eval_batch_size": 10,
+      "save_checkpoint": true,
+      "out_dir": "runs/api/dogfood/cifar/concat_unet",
+      "profile_steps": 0
+    },
+    "family": "cifar",
+    "status": "passed"
+  },
+  {
+    "name": "joint_fd_lazy4",
+    "source": "configs/cifar_ddgan/speed_regularizer/fd_lazy4.yaml",
+    "overrides": {
+      "steps": 4,
+      "log_interval": 1,
+      "eval_interval": 4,
+      "eval_samples": 10,
+      "final_samples": 10,
+      "eval_batch_size": 10,
+      "save_checkpoint": true,
+      "out_dir": "runs/api/dogfood/cifar/joint_fd_lazy4",
+      "profile_steps": 0
+    },
+    "family": "cifar",
+    "status": "passed"
+  },
+  {
+    "name": "joint_channels_last",
+    "source": "configs/cifar_ddgan/speed_layout/cache_channels_last.yaml",
+    "overrides": {
+      "steps": 4,
+      "log_interval": 1,
+      "eval_interval": 4,
+      "eval_samples": 10,
+      "final_samples": 10,
+      "eval_batch_size": 10,
+      "save_checkpoint": true,
+      "out_dir": "runs/api/dogfood/cifar/joint_channels_last",
+      "profile_steps": 0
+    },
+    "family": "cifar",
+    "status": "passed"
+  },
+  {
+    "name": "joint_ncsnpp",
+    "source": "configs/cifar_ddgan/scale_50k_smoke/ncsnpp128.yaml",
+    "overrides": {
+      "steps": 4,
+      "log_interval": 1,
+      "eval_interval": 4,
+      "eval_samples": 10,
+      "final_samples": 10,
+      "eval_batch_size": 10,
+      "save_checkpoint": true,
+      "out_dir": "runs/api/dogfood/cifar/joint_ncsnpp",
+      "profile_steps": 0
+    },
+    "family": "cifar",
+    "status": "passed"
+  },
+  {
+    "name": "joint_flat",
+    "source": "configs/cifar_ddgan/moonshot_smoke/flat_particle_g.yaml",
+    "overrides": {
+      "steps": 4,
+      "log_interval": 1,
+      "eval_interval": 4,
+      "eval_samples": 10,
+      "final_samples": 10,
+      "eval_batch_size": 10,
+      "save_checkpoint": true,
+      "out_dir": "runs/api/dogfood/cifar/joint_flat",
+      "profile_steps": 0
+    },
+    "family": "cifar",
+    "status": "passed"
+  },
+  {
+    "name": "joint_attention",
+    "source": "configs/cifar_ddgan/attention_1k/attention.yaml",
+    "overrides": {
+      "steps": 4,
+      "log_interval": 1,
+      "eval_interval": 4,
+      "eval_samples": 10,
+      "final_samples": 10,
+      "eval_batch_size": 10,
+      "save_checkpoint": true,
+      "out_dir": "runs/api/dogfood/cifar/joint_attention",
+      "profile_steps": 0
+    },
+    "family": "cifar",
+    "status": "passed"
+  }
+]

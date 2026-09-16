@@ -5,6 +5,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 from lib.image_ddgan import ImageGenerator, ImageDiscriminator
+from particlegan import ucd_scores
 
 
 class FlatBlock(nn.Module):
@@ -140,7 +141,10 @@ class PretrainedFeatureDiscriminator(nn.Module):
             a, b = h.chunk(2) if condition_features is None else (h, condition_features[i])
             feature_logits.append(head(torch.cat([a, b], 1)))
         logits = (logits + sum(feature_logits) / math.sqrt(3)) / math.sqrt(2)
-        return logits.gather(1, self.ucd_labels(c, t)[:, None]).squeeze(1), logits
+        score = ucd_scores(logits, c, t, num_classes=self.pixel.classes,
+                           target=self.pixel.ucd_target, num_steps=self.pixel.steps,
+                           validate_args=False)
+        return score, logits
 
 
 def build_models(cfg):

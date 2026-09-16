@@ -34,7 +34,7 @@ always sees it; whether D sees the *condition* c is the UCD question:
               adversarial logit for a sample of class c is out[:, c]; the
               trainer adds lambda_1 * CE(out, c) on reals and fakes.
 
-`JointCritic` adapts D to `lib.grad_regularizers.GradRegularizer`, which
+`JointCritic` adapts D to `particlegan.GradientPenalty`, which
 expects a module mapping one tensor to one scalar per sample: it takes the
 concatenation [x | y] and a fixed class vector.
 """
@@ -44,6 +44,8 @@ from typing import Dict, Optional
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
+from particlegan import ucd_scores
 
 
 def mlp(in_dim: int, hidden: int, n_hidden: int) -> nn.Sequential:
@@ -211,7 +213,7 @@ class SparseJointDiscriminator(nn.Module):
         if self.d_mode == "ucd":
             if c is None:
                 raise ValueError("d_mode='ucd' needs c to select the adversarial component")
-            return {"adv": out.gather(1, c.unsqueeze(1)).squeeze(1), "class_logits": out}
+            return {"adv": ucd_scores(out, c, num_classes=self.n_classes, validate_args=False), "class_logits": out}
         if self.d_mode == "proj":
             if c is None:
                 raise ValueError("d_mode='proj' needs c")

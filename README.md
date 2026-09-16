@@ -1,8 +1,296 @@
 # ParticleGAN
 
-**Learnable latent particles for studying GAN mode coverage and stability.**
+**Learnable particle priors and GAN building blocks for PyTorch.**
 
-![100 Gaussians with Particle Prior](100gaussians.gif)
+[API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md) · [Minimal GAN loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-training-loop) ·
+[Minimal DDGAN + UCD loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-ddgan--ucd-loop)
+
+[![Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml/badge.svg)](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml)
+
+![100 Gaussians with Particle Prior](https://raw.githubusercontent.com/255BITS/ParticleGAN/master/100gaussians.gif)
+
+## Installation
+
+Requires Python 3.10+ and PyTorch. Install from PyPI:
+
+```bash
+python -m pip install particlegan
+```
+
+For development and the repository's research experiments:
+
+```bash
+git clone https://github.com/255BITS/ParticleGAN.git
+cd ParticleGAN
+python -m pip install -e '.[experiments,dev]'
+# Image experiments also need the images extra:
+# python -m pip install -e '.[experiments,images,dev]'
+```
+
+CI tests Python 3.10–3.12 and builds installable distributions. See
+[CI and PyPI releases](https://github.com/255BITS/ParticleGAN/blob/master/docs/releasing.md) for the automated publishing setup.
+
+## Use in your PyTorch project
+
+Use individual components in your existing loop. You own the networks, data,
+optimizers, backward calls, devices, logging, and checkpoints. No trainer is
+required, and the loss helpers never call backward or step an optimizer.
+
+See the [minimal GAN loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-training-loop),
+[minimal DDGAN + UCD loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-ddgan--ucd-loop), and
+[API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#reference-index) for complete examples and contracts.
+
+Our examples and experiment trainers consume these same public primitives and
+recipe factories. See the [migration and compatibility checks](https://github.com/255BITS/ParticleGAN/blob/master/reports/api-dogfood.md)
+for existing-config GPU smoke tests and checkpoint comparisons.
+
+```python
+from particlegan import ParticlePrior, GANLoss, GradientPenalty, ParticleRegularizer
+
+prior = ParticlePrior().to(device)  # 20,000 learnable particles, z_dim=4
+adversarial = GANLoss()            # relativistic-paired logistic loss
+penalty = GradientPenalty()       # exact L2 cap penalty, weight=1, cap=1
+spread = ParticleRegularizer()    # variance/covariance regularization, weight=1
+
+# Customize with ordinary keyword arguments:
+prior = ParticlePrior(num_particles=4096, z_dim=16).to(device)
+adversarial = GANLoss(loss_type="hinge", mode="vanilla")
+```
+
+`prior.sample(batch_size)` returns `(z, indices)`, with `z` shaped `[B, z_dim]`.
+Include `prior.parameters()` in your generator optimizer to learn the particles.
+Use `GaussianPrior(z_dim=16)` for fresh Gaussian samples with the same sampling
+interface; its indices are `None` and it needs no particle regularization.
+
+### Add a loss to an existing pipeline
+
+Components are independent. For example, add a critic penalty or a particle
+spread term to losses your pipeline already computes:
+
+```python
+# In your discriminator update:
+d_loss = existing_d_loss + penalty(D, real, fake.detach(), step=step)
+
+# In your generator/prior update, when sampled particle indices are available:
+g_loss = existing_g_loss + spread(prior(indices.unique()))
+# Your code calls backward() and optimizer.step().
+```
+
+To use the adversarial objective itself, call
+`adversarial.d_loss(D(real), D(fake.detach()))` for D and
+`adversarial.g_loss(D(fake), D(real).detach())` for G. Freeze D's parameters
+for the G update while retaining gradients through `D(fake)`.
+
+### Selected defaults, with easy overrides
+
+```python
+from particlegan import get_recipe
+
+recipe = get_recipe()  # Recommended GAN defaults.
+recipe = recipe.replace(z_dim=16, num_particles=4096, lr=3e-4)
+prior = recipe.make_prior().to(device)
+adversarial = recipe.make_loss()
+penalty = recipe.make_gradient_penalty()
+spread = recipe.make_prior_regularizer()
+opt_g, opt_d = recipe.make_optimizers(G, D, prior)  # after moving modules to device
+print(recipe.to_dict())  # inspect every resolved value
+```
+
+The optional optimizer helper returns ordinary Adam optimizers. The G optimizer
+has separate generator and particle groups. You can build your own optimizers
+using the recipe's fields instead. Recipes are immutable; `.replace(...)`
+returns a new one. Unknown options raise errors.
+
+| Default | `get_recipe()` / `gan` | `ddgan` |
+| --- | --- | --- |
+| Generation | One-shot GAN | Four-step DDGAN |
+| Prior | 20,000 learned particles, dimension 4 | Same |
+| GAN loss / critic penalty | Rp logistic / exact L2 cap, weight 1 | Same |
+| Particle regularizer | VICReg, weight 1, unique sampled rows | Same |
+| Adam learning rates: G / D / prior | 0.0006 / 0.0009 / 0.006 | Same |
+| Adam betas / EMA decay | (0, 0.999) / 0.995 | Same |
+| Schedule | Hold 60%, cosine to 5% | Same |
+| Batch size / training updates | 256 / 7,000 | 256 / 56,000 |
+| Conditioning | Unconditional | Class-only UCD, 4 classes, CE weight 0.02 |
+
+These defaults come from the selected 100-Gaussians and denoising experiments.
+Networks remain application choices: the reference toy benchmarks use MLPs and
+two Fourier frequencies in D. Changing the architecture or dataset changes the
+experiment; the recipe alone does not establish convergence on a new problem.
+
+[The executable PyTorch loop](https://github.com/255BITS/ParticleGAN/blob/master/examples/pytorch_loop.py) shows optimizer setup,
+D freezing/restoration, unique-particle regularization, the learning-rate
+schedule, and EMA for G and the prior. It uses small MLPs and synthetic data,
+requires no research dependencies, and writes one flushed JSON record per log
+line:
+
+```bash
+mkdir -p runs/api
+python -u examples/pytorch_loop.py --steps 5 --batch-size 16 > runs/api/smoke.log 2>&1
+# In another terminal while a longer run is active:
+tail -f runs/api/smoke.log
+```
+
+### TOML is just constructor arguments
+
+Load TOML with your preferred parser and unpack a section into a constructor.
+The library does not require a parser or configuration framework:
+
+```toml
+[particlegan]
+# Omit name for GAN defaults; use name = "ddgan" for DDGAN + UCD.
+z_dim = 16
+num_particles = 4096
+lr = 0.0003
+
+# Alternatively, configure independent primitives:
+[prior]
+z_dim = 16
+num_particles = 4096
+
+[loss]
+loss_type = "logistic"
+mode = "rp"
+```
+
+```python
+try:
+    import tomllib  # Python 3.11+
+except ModuleNotFoundError:
+    import tomli as tomllib  # Python 3.10: pip install tomli
+
+with open("model.toml", "rb") as f:
+    config = tomllib.load(f)
+
+recipe = get_recipe(**config["particlegan"])
+# Or construct components directly:
+prior = ParticlePrior(**config["prior"])
+adversarial = GANLoss(**config["loss"])
+# Explicit code overrides are ordinary dictionary merges:
+recipe = get_recipe(**{**config["particlegan"], "lr": 1e-4})
+```
+
+`toml.load(...)` dictionaries work too. Choose either recipe-owned values or
+per-component sections for your application. Try the supplied configuration:
+
+```bash
+python -u examples/pytorch_loop.py --config examples/api.toml --steps 5
+```
+
+The primary research trainers also accept TOML or YAML using their existing flat
+experiment schema (separate from the constructor sections above):
+
+```bash
+python experiments/train_100gaussians.py --config configs/100gaussians/default.toml
+python experiments/train_denoising.py --config configs/denoising/default.toml
+```
+
+Running `python experiments/train_denoising.py` with no arguments loads
+`configs/denoising/default.toml`. Install the `experiments` extra for these
+trainers; the denoising trainer requires CUDA. See the
+[experiment runner guide](https://github.com/255BITS/ParticleGAN/blob/master/docs/experiment-runner.md) for grids and recorded
+effective configurations.
+
+### DDGAN and UCD compose independently
+
+`DDGAN` supplies Gaussian forward pairs and reverse transitions. `UCD` selects
+class scores from a logit network; it does not inject class labels into that
+network. Neither owns your training loop. Here is the D-loss portion of a
+conditional denoising pipeline, with caller-defined `G`, `logit_network`, data,
+labels, and device:
+
+```python
+import torch
+from particlegan import DDGAN, UCD, ucd_loss
+
+recipe = get_recipe("ddgan", num_classes=4)
+prior = recipe.make_prior().to(device)
+adversarial = recipe.make_loss()
+penalty = recipe.make_gradient_penalty()
+process = DDGAN(alpha_bar=recipe.alpha_bar).to(device)
+critic = UCD(logit_network, num_classes=recipe.num_classes).to(device)
+
+t = torch.randint(1, process.steps + 1, (len(real),), device=device)
+rng = torch.Generator(device=device).manual_seed(123)
+x_prev, xt = process.forward_pair(real, t, rng)
+z, indices = prior.sample(len(real), generator=rng)
+x0_hat = G(z, labels, xt=xt, t=t)  # G predicts clean data
+fake_prev = process.reverse(x0_hat, xt, t, torch.randn_like(xt))
+real_score, real_logits = critic(x_prev, labels, xt=xt, t=t)
+fake_score, fake_logits = critic(fake_prev.detach(), labels, xt=xt, t=t)
+d_loss = adversarial.d_loss(real_score, fake_score)
+d_loss += ucd_loss(real_logits, fake_logits, critic.ucd_labels(labels, t),
+                   weight=recipe.ucd_weight)
+d_loss += penalty(lambda x: critic(x, labels, xt=xt, t=t)[0],
+                  x_prev, fake_prev.detach())
+```
+
+For class-only UCD, the network receives `network(x, xt=xt, t=t)` and returns
+`[B, C]` logits. Labels and times are `[B]` long tensors; times run from 1 to T.
+For joint time/class heads, use `UCD(network, num_classes=C,
+target="time_class", num_steps=T)`; the network receives `network(x, xt=xt)`
+and returns `[B, T*C]` logits. UCD also works without diffusion as
+`critic(x, labels)` over a network that accepts only `x`.
+
+Recompute critic scores after its update, freeze critic parameters, and keep
+`fake_prev` attached for the G/prior adversarial loss. Class CE belongs to D.
+The default schedule is `(1, .9, .5, .05, .0001)`; corruption and reverse noise
+are Gaussian and separate from learned latent particles. See
+[the API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#ddgan) for the full composition rules.
+
+### Teacher/student pipelines
+
+A teacher can produce the target batch in your existing training pipeline.
+Use matching conditioning for a paired supervised loss:
+
+```python
+teacher.eval()
+with torch.no_grad():
+    targets = teacher(inputs)
+z, indices = prior.sample(len(inputs))
+fake = student(z, inputs)
+# Update your critic using targets as reals and fake.detach() as fakes.
+# Then freeze the updated critic's parameters for this student/prior loss:
+student_loss = supervised_weight * supervised_loss(fake, targets)
+student_loss += adversarial_weight * adversarial.g_loss(
+    D(fake), D(targets).detach(),
+)
+student_loss += spread(prior(indices.unique()))
+# Your student/prior optimizer performs backward and step; restore D afterward.
+```
+
+The teacher, supervised objective, loss weights, and update order belong to your
+application. You can also use only the prior or regularizers without an
+adversarial objective.
+
+### Inference without a critic or optimizer
+
+Save G and the learned prior, ideally their EMA states. Keep the architecture
+configuration needed to reconstruct G alongside the checkpoint:
+
+```python
+torch.save({"generator": G.state_dict(), "prior": prior.state_dict()}, "model.pt")
+
+# In another application, reconstruct your generator architecture and prior:
+G = build_generator(z_dim=16).to(device)
+prior = ParticlePrior(num_particles=4096, z_dim=16).to(device)
+state = torch.load("model.pt", map_location=device, weights_only=True)
+G.load_state_dict(state["generator"])
+prior.load_state_dict(state["prior"])
+G.eval()
+prior.eval()
+with torch.inference_mode():
+    z, _ = prior.sample(64)
+    samples = G(z)
+```
+
+Use the same particle count and latent dimension as training. Conditional G
+also receives labels or inputs. DDGAN inference additionally reconstructs its
+schedule (or loads its `state_dict`) and starts from Gaussian `x_T`; loop over
+`T, ..., 1`, drawing fresh latent samples and reverse noise at each step:
+`x = process.reverse(G(z, labels, xt=x, t=t), x, t, noise)`. There is no critic
+or optimizer in inference.
+
 
 ## The Problem
 
@@ -16,13 +304,13 @@ We introduce learnable "particles" in latent space. Both the generator and these
 
 ### Historical Gaussian example
 
-![100 Gaussians without Particle Prior](100gaussians_no_particles.gif)
+![100 Gaussians without Particle Prior](https://raw.githubusercontent.com/255BITS/ParticleGAN/master/100gaussians_no_particles.gif)
 
 *Historical visualization from the older Gaussian example. Its architecture and training recipe differ from the particle example above, so these GIFs are not a matched prior comparison.*
 
 ## Evidence and controls
 
-The historical [regularizer study](FINDINGS.md) compares discriminator penalties within the particle model. It does not establish that a fixed Gaussian prior necessarily collapses. The current examples share one training loop and matched defaults; the only training change for the Gaussian controls is removing the learned prior and its regularizer.
+The historical [regularizer study](https://github.com/255BITS/ParticleGAN/blob/master/FINDINGS.md) compares discriminator penalties within the particle model. It does not establish that a fixed Gaussian prior necessarily collapses. The current examples share one training loop and matched defaults; the only training change for the Gaussian controls is removing the learned prior and its regularizer.
 
 For a reproducible three-way comparison, run:
 
@@ -30,9 +318,9 @@ For a reproducible three-way comparison, run:
 python experiments/compare_priors.py --study-dir runs/prior_comparison --run --device cuda:0
 ```
 
-This runs learned particles, a frozen Gaussian table, and fresh Gaussian noise on paired seeds 23001–23003. It records configs, source revision, final samples, coverage, transport distances, and per-mode radial and covariance shape diagnostics. See [prior controls and interpretation](docs/prior-controls.md) and [reproducing the project](docs/reproducing.md).
+This runs learned particles, a frozen Gaussian table, and fresh Gaussian noise on paired seeds 23001–23003. It records configs, source revision, final samples, coverage, transport distances, and per-mode radial and covariance shape diagnostics. See [prior controls and interpretation](https://github.com/255BITS/ParticleGAN/blob/master/docs/prior-controls.md) and [reproducing the project](https://github.com/255BITS/ParticleGAN/blob/master/docs/reproducing.md).
 
-The completed [nine-run matched comparison](reports/prior-comparison/README.md) reached 100/100 high-quality modes on every learned-prior seed, with a mean high-quality fraction of 98.6%, versus 8.1% for the frozen table and 6.4% for fresh Gaussian noise. This establishes a concentration advantage under this recipe. The report also shows remaining tail and covariance distortion, finite output support, and transport-metric tradeoffs; it does not establish complete Gaussian calibration or a general guarantee against collapse.
+The completed [nine-run matched comparison](https://github.com/255BITS/ParticleGAN/blob/master/reports/prior-comparison/README.md) reached 100/100 high-quality modes on every learned-prior seed, with a mean high-quality fraction of 98.6%, versus 8.1% for the frozen table and 6.4% for fresh Gaussian noise. This establishes a concentration advantage under this recipe. The report also shows remaining tail and covariance distortion, finite output support, and transport-metric tradeoffs; it does not establish complete Gaussian calibration or a general guarantee against collapse.
 
 ## How It Works
 
@@ -48,7 +336,7 @@ The completed [nine-run matched comparison](reports/prior-comparison/README.md) 
 
 A minimal example demonstrating the core idea. Five words ("apple", "grape", "lemon", "melon", "berry") are encoded into a 2D latent space. Each word gets one particle.
 
-![Five Modes Training](five_modes.gif)
+![Five Modes Training](https://raw.githubusercontent.com/255BITS/ParticleGAN/master/five_modes.gif)
 
 ```bash
 python examples/five_modes.py
@@ -69,7 +357,7 @@ python examples/100gaussians.py
 
 The historical particle study reports runs with 100/100 modes and approximately 99% of samples within 3σ of a center after 7k steps. Coverage alone does not establish that the within-mode distribution is correct; the trainer also records shape and transport metrics.
 
-The default recipe is RpGAN (relativistic, logistic) + a one-sided cap gradient penalty on D (`relu(‖∇ₓD‖ − 1)²` on reals and fakes, coeff 1.0), Fourier-feature D, EMA evaluation, Adam β1=0, base LR 6e-4 with a delayed cosine anneal. The cap won a 420-run bake-off against the zero-centered R1/R2 penalty, which is still available with `--reg_arm a_r1r2 --reg_coeff 0.02`. See [FINDINGS.md](FINDINGS.md) for the study and [docs/convergence-tips.md](docs/convergence-tips.md) for the transferable reasoning behind each ingredient.
+The default recipe is RpGAN (relativistic, logistic) + a one-sided cap gradient penalty on D (`relu(‖∇ₓD‖ − 1)²` on reals and fakes, coeff 1.0), Fourier-feature D, EMA evaluation, Adam β1=0, base LR 6e-4 with a delayed cosine anneal. The cap won a 420-run bake-off against the zero-centered R1/R2 penalty, which is still available with `--reg_arm a_r1r2 --reg_coeff 0.02`. See [FINDINGS.md](https://github.com/255BITS/ParticleGAN/blob/master/FINDINGS.md) for the study and [docs/convergence-tips.md](https://github.com/255BITS/ParticleGAN/blob/master/docs/convergence-tips.md) for the transferable reasoning behind each ingredient.
 
 **Without particle prior** (baseline):
 ```bash
@@ -78,24 +366,22 @@ python examples/100gaussians_no_particle_prior.py
 
 This entrypoint uses the same architecture, losses, learning rates, schedule, and EMA as the particle example, with fresh Gaussian noise. Use `--prior frozen_gaussian` for a finite frozen-table control. The outcome depends on the recipe and seed; the baseline does not assume collapse.
 
-## Installation
-
-```bash
-git clone https://github.com/255BITS/ParticleGAN.git
-cd ParticleGAN
-python -m pip install -e '.[dev]'
-```
-
 ## Project Structure
 
 ```
 ParticleGAN/
-├── lib/
+├── particlegan/            # Installable PyTorch primitives and recipe helpers
 │   ├── particle_prior.py   # Learnable particle cloud (nn.Module)
 │   ├── gan_loss.py         # Flexible GAN losses (hinge, logistic, Wasserstein, LSGAN)
 │   ├── grad_regularizers.py # D gradient penalties (cap, R1/R2, eikonal, ...)
-│   └── vicreg_loss.py      # Variance-covariance regularization
+│   ├── vicreg_loss.py      # Variance-covariance regularization
+│   ├── diffusion.py        # DDGAN forward/reverse transitions
+│   ├── conditioning.py     # UCD scores and class supervision
+│   └── recipes.py          # Inspectable defaults and optional factories
+├── lib/                    # Repository compatibility imports and research helpers
 ├── examples/
+│   ├── pytorch_loop.py                  # Minimal caller-owned loop (Torch only)
+│   ├── api.toml                         # Constructor/recipe configuration
 │   ├── five_modes.py                    # Text generation toy problem
 │   ├── 100gaussians.py                  # 100-mode benchmark (with particles)
 │   └── 100gaussians_no_particle_prior.py # Baseline (without particles)
@@ -104,46 +390,10 @@ ParticleGAN/
 
 The grid-search infrastructure behind the study — config generation, the per-arm trainer, grid runner, and the analysis/leaderboard scripts — lives in `experiments/`, with the generated per-run configs in `configs/`.
 
-The [CIFAR DDGAN experiment](reports/cifar-ddgan/README.md) scales the particle
-recipe to images. Its [speed study](reports/cifar-ddgan/speed/READOUT.md) compares
+The [CIFAR DDGAN experiment](https://github.com/255BITS/ParticleGAN/blob/master/reports/cifar-ddgan/README.md) scales the particle
+recipe to images. Its [speed study](https://github.com/255BITS/ParticleGAN/blob/master/reports/cifar-ddgan/speed/READOUT.md) compares
 exact/lazy/finite-difference bcap and backports the shared implementation to both
 toy trainers. The faster CIFAR default retains exact derivatives; FD is optional.
-
-## Key Components
-
-### ParticlePrior (`lib/particle_prior.py`)
-
-A simple nn.Module holding M learnable latent vectors of dimension D:
-
-```python
-from lib.particle_prior import ParticlePrior
-
-prior = ParticlePrior(num_particles=1000, z_dim=2)
-z, indices = prior.sample(batch_size=64)  # Sample 64 particles
-```
-
-### GANLoss (`lib/gan_loss.py`)
-
-Supports multiple loss types and relativistic variants:
-
-```python
-from lib.gan_loss import GANLoss
-
-loss_fn = GANLoss(loss_type='hinge', mode='vanilla')
-d_loss = loss_fn.d_loss(d_real, d_fake)
-g_loss = loss_fn.g_loss(d_fake)
-```
-
-### VICRegLikeLoss (`lib/vicreg_loss.py`)
-
-Penalizes low marginal variance and cross-dimension covariance while allowing flexible topology:
-
-```python
-from lib.vicreg_loss import VICRegLikeLoss
-
-reg = VICRegLikeLoss()
-loss = reg(particle_positions)  # Encourages spread + decorrelation
-```
 
 ## Notes
 
@@ -153,12 +403,19 @@ loss = reg(particle_positions)  # Encourages spread + decorrelation
 
 ## Changelog
 
-Versions track the default recipe of `examples/100gaussians.py`.
+Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
+
+### 0.2.0 — unreleased
+
+- Adds the installable `particlegan` namespace, independent PyTorch primitives,
+  immutable recipes, and direct use of loaded TOML dictionaries.
+- Core runtime requires only Torch; research dependencies use the `experiments` extra.
+- Repository trainers use the shared package while retaining their own loops.
 
 ### 0.1.2 — 2026-08-22
 
 - Default gradient penalty switched to the one-sided cap (`b_cap`, `relu(‖∇ₓD‖ − 1)²`, coeff 1.0) via `lib/grad_regularizers.py`; base LR 3e-4 → 6e-4; run length 5k → 7k steps.
-- Chosen by a 420-run controlled study ([FINDINGS.md](FINDINGS.md)): same game-damping as R1/R2, sharper modes (hq 0.986 vs a ~0.94 ceiling), honest per-mode core width (0.87), zero collapses. R1/R2 stays available via `--reg_arm a_r1r2`.
+- Chosen by a 420-run controlled study ([FINDINGS.md](https://github.com/255BITS/ParticleGAN/blob/master/FINDINGS.md)): same game-damping as R1/R2, sharper modes (hq 0.986 vs a ~0.94 ceiling), honest per-mode core width (0.87), zero collapses. R1/R2 stays available via `--reg_arm a_r1r2`.
 - Adds the `experiments/` study infrastructure and the deterministic video renderer.
 
 ### 0.1.1
@@ -169,7 +426,7 @@ Versions track the default recipe of `examples/100gaussians.py`.
 ### 0.1.0
 
 - Original example: vanilla/hinge GAN, no gradient regularizer, plain MLP D, z_dim 2, Adam β1=0.5, no EMA, no LR anneal.
-- Never converged on the 100-Gaussians benchmark: ~86–92/100 modes, ~30% hq at 12k steps (baseline row in [docs/convergence-tips.md](docs/convergence-tips.md)).
+- Never converged on the 100-Gaussians benchmark: ~86–92/100 modes, ~30% hq at 12k steps (baseline row in [docs/convergence-tips.md](https://github.com/255BITS/ParticleGAN/blob/master/docs/convergence-tips.md)).
 
 ## Citation
 

@@ -7,10 +7,10 @@ from pathlib import Path
 import sys
 
 import numpy as np
-import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+from experiments.config import read_config
 from experiments.run_grid import has_valid_summary
 
 
@@ -44,7 +44,7 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     runs, missing = [], []
     for path in json.loads(Path(args.manifest).read_text()):
-        cfg = yaml.safe_load(Path(path).read_text())
+        cfg = read_config(path)
         run_dir = Path(cfg["out_dir"])
         summary_path = run_dir / "summary.json"
         summary = json.loads(summary_path.read_text()) if summary_path.exists() else None

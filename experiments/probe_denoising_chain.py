@@ -14,8 +14,9 @@ import torch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from lib.denoising_toy import (GaussianGrid, DiffusionSchedule, DrawSource,
-                               ToyGenerator, grid_metrics)
+from particlegan import DDGAN
+from particlegan.diffusion import DrawSource
+from lib.denoising_toy import GaussianGrid, ToyGenerator, grid_metrics
 
 
 @torch.no_grad()
@@ -32,7 +33,7 @@ def main():
     assert cfg["model"] == "ddgan"
     assert args.samples % cfg["classes"] == 0
     toy = GaussianGrid(device, cfg["std"], cfg["classes"])
-    schedule = DiffusionSchedule(cfg["alpha_bar"]).to(device)
+    schedule = DDGAN(cfg["alpha_bar"], validate_args=False).to(device)
     g = ToyGenerator(cfg).to(device)
     prior = DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"] + 101, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2, cfg["seed"] + 102, device)

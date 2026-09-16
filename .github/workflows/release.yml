@@ -1,0 +1,63 @@
+name: Publish to PyPI
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pypi-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
+
+jobs:
+  validate-release:
+    name: Check release version
+    if: github.repository == '255BITS/ParticleGAN'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Require a tag matching the package version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          python - <<'PY'
+          import os
+          import tomllib
+          from pathlib import Path
+
+          project = tomllib.loads(Path("pyproject.toml").read_text())["project"]
+          expected = f"v{project['version']}"
+          tag = os.environ["RELEASE_TAG"]
+          if project["name"] != "particlegan" or tag != expected:
+              raise SystemExit(f"Expected particlegan release {expected}, got {tag!r}")
+          print(f"Validated {project['name']} {project['version']}")
+          PY
+
+  checks:
+    name: Test and build release
+    needs: validate-release
+    uses: ./.github/workflows/tests.yml
+
+  publish:
+    name: Publish tested distributions
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: pypi
+      url: https://pypi.org/project/particlegan/
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+      - name: Publish to PyPI with Trusted Publishing
+        uses: pypa/gh-action-pypi-publish@release/v1

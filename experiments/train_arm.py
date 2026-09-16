@@ -9,7 +9,7 @@ This is `examples/100gaussians.py`'s recipe held fixed — RpGAN (relativistic
 pairing, logistic), Fourier-2 discriminator, ParticlePrior + VICReg, Adam with
 beta1=0, prior LR x10, D LR x1.5, delayed cosine anneal, EMA(0.995) on G *and*
 the prior — with exactly one thing swapped out: the inline R1+R2 block becomes a
-`lib.grad_regularizers.GradRegularizer`, selected by config. The recipe is held
+`particlegan.GradientPenalty`, selected by config. The recipe is held
 fixed within a comparison. Training now uses independent
 data, latent, penalty, and evaluation RNG streams; historical runs using the
 shared global RNG are not expected to reproduce bit for bit.
@@ -43,7 +43,6 @@ Usage:
 import argparse
 import copy
 import json
-import math
 import sys
 import time
 from pathlib import Path
@@ -63,10 +62,12 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from lib.particle_prior import ParticlePrior, canonical_prior_kind, make_prior
-from lib.gan_loss import GANLoss
-from lib.vicreg_loss import VICRegLikeLoss
-from lib.grad_regularizers import GradRegularizer, grad_norm_stats
+from experiments.config import read_config
+from particlegan import (
+    GANLoss, GradientPenalty, ParticlePrior, ParticleRegularizer, learning_rate_scale,
+)
+from particlegan.particle_prior import canonical_prior_kind, make_prior
+from particlegan.grad_regularizers import grad_norm_stats
 from lib.game_jacobian import estimate_update_spectrum
 from lib.oadam import OptimisticAdam
 from lib.toy_models import (
@@ -105,7 +106,7 @@ DEFAULTS: Dict = {
     "out_dir": "runs/arm",
     # Follow-up knobs retain the historical hyperparameter defaults. RNG
     # isolation is versioned in the summary and changes historical trajectories.
-    "loss_type": "logistic",   # any lib.gan_loss kernel, e.g. 'wasserstein'
+    "loss_type": "logistic",   # any particlegan.GANLoss kernel, e.g. 'wasserstein'
     "optimizer": "adam",       # 'adam' or 'oadam' (lib.oadam.OptimisticAdam)
     "norm": "l2",              # gradient norm the penalty sees: l2 / l1 / linf
     "target_anneal": "none",   # penalty-center schedule: none / linear / delayed
@@ -147,11 +148,10 @@ W1_WINDOW = 10
 
 
 def load_config(path: Optional[str]) -> Dict:
-    """Read a YAML config and fill in any missing key from DEFAULTS."""
+    """Read a TOML or YAML config and fill in any missing key from DEFAULTS."""
     cfg = dict(DEFAULTS)
     if path is not None:
-        with open(path, "r") as f:
-            user = yaml.safe_load(f) or {}
+        user = read_config(path)
         unknown = set(user) - set(DEFAULTS)
         if unknown:
             raise ValueError(f"Unknown config keys: {sorted(unknown)}")
@@ -318,9 +318,11 @@ def train(
     # -------------------------
     prior_kind = canonical_prior_kind(cfg["prior"])
     learnable_prior = prior_kind == "particles"
-    prior = make_prior(
-        prior_kind, num_particles=NUM_PARTICLES, z_dim=Z_DIM,
-    ).to(device)
+    # Fresh-Gaussian controls retain the reference table used by diagnostics.
+    prior = (make_prior(prior_kind, num_particles=NUM_PARTICLES, z_dim=Z_DIM)
+             if prior_kind == "fresh_gaussian"
+             else ParticlePrior(num_particles=NUM_PARTICLES, z_dim=Z_DIM,
+                                learnable=learnable_prior)).to(device)
     G = SimpleMLPGenerator(z_dim=Z_DIM).to(device)
     D = SimpleMLPDiscriminator(in_dim=2, fourier=FOURIER).to(device)
 
@@ -335,7 +337,7 @@ def train(
     for p in list(ema_G.parameters()) + list(ema_prior.parameters()):
         p.requires_grad_(False)
 
-    vic_reg = VICRegLikeLoss()
+    vic_reg = ParticleRegularizer()
     gan_loss = GANLoss(loss_type=str(cfg["loss_type"]), mode=GAN_MODE)
 
     # The anneal is expressed against the run length, so the schedule only has
@@ -350,7 +352,7 @@ def train(
         target_anneal=target_anneal,
         total_steps=anneal_steps,
     )
-    regularizer = GradRegularizer(lazy_k=int(cfg["lazy_k"]), **reg_kwargs)
+    regularizer = GradientPenalty(lazy_k=int(cfg["lazy_k"]), **reg_kwargs)
 
     # -------------------------
     #  Penalty curriculum
@@ -370,7 +372,7 @@ def train(
     # did.
     curriculum_arm2 = str(cfg["curriculum_arm2"])
     reg2_kwargs: Optional[Dict] = None
-    regularizer2: Optional[GradRegularizer] = None
+    regularizer2: Optional[GradientPenalty] = None
     switch_at = float("inf")
     if curriculum_arm2 != "none":
         reg2_kwargs = dict(
@@ -381,7 +383,7 @@ def train(
             target_anneal="none",
             total_steps=0,
         )
-        regularizer2 = GradRegularizer(lazy_k=int(cfg["lazy_k"]), **reg2_kwargs)
+        regularizer2 = GradientPenalty(lazy_k=int(cfg["lazy_k"]), **reg2_kwargs)
         switch_at = float(cfg["curriculum_switch_frac"]) * total_steps
         print(
             f"[curriculum] {cfg['arm']} @ {cfg['coeff']} -> {curriculum_arm2} @ "
@@ -390,7 +392,7 @@ def train(
             flush=True,
         )
 
-    def active_regularizer(step: int) -> GradRegularizer:
+    def active_regularizer(step: int) -> GradientPenalty:
         """The regularizer in force at `step` (see the curriculum block above)."""
         if regularizer2 is not None and step >= switch_at:
             return regularizer2
@@ -515,12 +517,10 @@ def train(
 
     for global_step in range(total_steps):
         # Full LR until LR_ANNEAL_START, then cosine down to LR_FLOOR.
+        # Retain the historical minimum one-update decay duration.
         anneal_from = LR_ANNEAL_START * total_steps
-        if global_step <= anneal_from:
-            scale = 1.0
-        else:
-            frac = (global_step - anneal_from) / max(1.0, total_steps - anneal_from)
-            scale = LR_FLOOR + (1.0 - LR_FLOOR) * 0.5 * (1.0 + math.cos(math.pi * frac))
+        scale = learning_rate_scale(global_step - anneal_from,
+                                    max(1.0, total_steps - anneal_from), 0.0, LR_FLOOR)
         for opt in all_opts:
             for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
                 group["lr"] = base * scale
@@ -571,7 +571,7 @@ def train(
         if learnable_prior:
             with torch.no_grad():
                 unique_idx = torch.unique(idx)
-            ep_z = vic_reg(prior.z[unique_idx])
+            ep_z = vic_reg(prior(unique_idx))
             loss_g = loss_gan + LAMBDA_EP * ep_z
         else:
             # Gaussian controls have no learned prior parameters to regularize.
@@ -683,7 +683,7 @@ def train(
                 # point is past the switch, so the clone is built from the
                 # *second* arm -- analysing the primary here would describe a
                 # game that stopped being played long before the end.
-                GradRegularizer(
+                GradientPenalty(
                     lazy_k=1, **(reg2_kwargs if reg2_kwargs is not None else reg_kwargs)
                 ),
                 x_real_spec,
@@ -788,7 +788,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Train one gradient-penalty arm on the 100-Gaussian benchmark.",
     )
-    parser.add_argument("--config", type=str, default=None, help="Path to config.yaml.")
+    parser.add_argument("--config", type=str, default=None, help="Path to config.toml or config.yaml.")
     parser.add_argument("--out_dir", type=str, default=None, help="Override config out_dir.")
     parser.add_argument("--device", type=str, default=None, help="e.g. 'cpu' or 'cuda:0'.")
     parser.add_argument("--seed", type=int, default=None, help="Override config seed.")

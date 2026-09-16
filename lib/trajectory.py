@@ -9,6 +9,8 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+from particlegan import ucd_labels, ucd_scores
+
 
 class Routes:
     classes = 2
@@ -184,7 +186,7 @@ class TrajectoryDiscriminator(nn.Module):
             raise ValueError(self.architecture)
 
     def ucd_labels(self, c, t):
-        return (t - 1) * 2 + c if self.diffusion else c
+        return ucd_labels(c, t, num_classes=2, target="time_class" if self.diffusion else "class", validate_args=False)
 
     def forward(self, x, c, context, xt=None, t=None):
         if self.architecture in ("temporal", "hybrid"):
@@ -210,7 +212,9 @@ class TrajectoryDiscriminator(nn.Module):
         if self.mode == "concat":
             pieces.extend([F.one_hot(c, 2).to(x), F.one_hot(t - 1, self.steps).to(x) if self.diffusion else x.new_zeros(len(x), self.steps)])
         logits = self.net(torch.cat(pieces, 1))
-        score = logits.gather(1, self.ucd_labels(c, t)[:, None]).squeeze(1) if self.mode == "ucd" else logits.squeeze(1)
+        score = ucd_scores(logits, c, t, num_classes=2,
+                           target="time_class" if self.diffusion else "class",
+                           num_steps=self.steps, validate_args=False) if self.mode == "ucd" else logits.squeeze(1)
         return score, logits
 
 

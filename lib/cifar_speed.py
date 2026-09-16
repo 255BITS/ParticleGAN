@@ -6,7 +6,7 @@ import torch
 
 # Compatibility export for the numerical probe; the algorithm lives in the
 # shared regularizer used by CIFAR, the one-shot example and the denoising toy.
-from lib.grad_regularizers import finite_difference_norm
+from particlegan.grad_regularizers import finite_difference_norm
 
 
 def cifar_penalty(reg, critic, real, fake, step, rng, cfg):

@@ -4,6 +4,8 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+from particlegan import ucd_labels, ucd_scores
+
 
 class ResBlock(nn.Module):
     def __init__(self, cin, cout, emb, normalize=True, affine_condition=True):
@@ -94,6 +96,7 @@ class ImageDiscriminator(nn.Module):
         w, e = cfg['d_width'], cfg['d_width'] * 4
         self.mode = cfg['d_mode']
         self.classes = cfg['classes']
+        self.steps = len(cfg['alpha_bar']) - 1
         self.ucd_target = cfg.get('ucd_target', 'class')
         self.joint_ucd = self.ucd_target == 'time_class'
         if self.ucd_target not in ('class', 'time_class') or (self.joint_ucd and self.mode != 'ucd'):
@@ -109,7 +112,7 @@ class ImageDiscriminator(nn.Module):
         self.output = nn.Linear(w*4*4*4, heads if self.mode == 'ucd' else 1)
 
     def ucd_labels(self, c, t):
-        return (t - 1) * self.classes + c if self.joint_ucd else c
+        return ucd_labels(c, t, num_classes=self.classes, target=self.ucd_target, num_steps=self.steps, validate_args=False)
 
     def forward(self, x, c, xt, t):
         e = x.new_zeros(len(x), self.emb_dim) if self.joint_ucd else self.time(t)
@@ -119,7 +122,9 @@ class ImageDiscriminator(nn.Module):
         for block in self.blocks:
             h = F.avg_pool2d(block(h, e), 2)
         logits = self.output(F.leaky_relu(h, .2).flatten(1))
-        score = logits.gather(1, self.ucd_labels(c, t)[:, None]).squeeze(1) if self.mode == 'ucd' else logits[:, 0]
+        score = (ucd_scores(logits, c, t, num_classes=self.classes, target=self.ucd_target,
+                            num_steps=self.steps, validate_args=False)
+                 if self.mode == 'ucd' else logits[:, 0])
         return score, logits
 
 

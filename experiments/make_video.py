@@ -44,7 +44,7 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 from experiments.train_arm import load_config, train
-from lib.particle_prior import ParticlePrior
+from particlegan import ParticlePrior
 from lib.toy_models import sample_100gaussians, mode_coverage
 
 # Frame geometry / style, held to the repo's scatter conventions.
@@ -251,7 +251,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Render a training-evolution video for one arm config.",
     )
-    parser.add_argument("--config", type=str, required=True, help="Path to config.yaml.")
+    parser.add_argument("--config", type=str, required=True, help="Path to config.toml or config.yaml.")
     parser.add_argument("--out", type=str, default=None,
                         help="Output video path (default results/videos/{run_name}.mp4).")
     parser.add_argument("--frame_interval", type=int, default=25,

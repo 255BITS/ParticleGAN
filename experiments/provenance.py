@@ -62,17 +62,14 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from lib.gan_loss import GANLoss
+from particlegan import GANLoss, GradientPenalty, ParticlePrior, ParticleRegularizer
 from lib.game_jacobian import estimate_update_spectrum
-from lib.grad_regularizers import GradRegularizer
-from lib.particle_prior import ParticlePrior
 from lib.toy_models import (
     SimpleMLPDiscriminator,
     SimpleMLPGenerator,
     mode_coverage,
     sample_100gaussians,
 )
-from lib.vicreg_loss import VICRegLikeLoss
 
 # --- the groups under audit -------------------------------------------------
 GROUPS: Sequence[str] = (
@@ -137,7 +134,7 @@ def lrs_for(lr_mult: float) -> Dict[str, float]:
 
 
 def reg_kwargs_from_cfg(cfg: Dict) -> Dict:
-    """The GradRegularizer kwargs a run was trained with (minus lazy_k)."""
+    """The GradientPenalty kwargs a run was trained with (minus lazy_k)."""
     anneal = str(cfg.get("target_anneal", "none"))
     return dict(
         arm=str(cfg["arm"]),
@@ -295,7 +292,7 @@ def spectrum(
         G,
         prior,
         GANLoss(loss_type=LOSS_TYPE, mode=GAN_MODE),
-        VICRegLikeLoss(),
+        ParticleRegularizer(),
         regularizer,
         x_real,
         idx,
@@ -365,11 +362,11 @@ def analyze_run(run_dir: Path, orig_dir: Path, device: torch.device) -> Optional
     # --- 3) spectra ---------------------------------------------------------
     x_real, idx = fixed_spectral_batch(device)
     conditions = {
-        "actual": GradRegularizer(lazy_k=1, **rk),
-        "masked": GradRegularizer("f_none", 0.0),
+        "actual": GradientPenalty(lazy_k=1, **rk),
+        "masked": GradientPenalty("f_none", 0.0),
     }
     if rk["arm"] == "b_cap":
-        conditions["r1r2_probe"] = GradRegularizer(
+        conditions["r1r2_probe"] = GradientPenalty(
             PROBE_ARM, PROBE_COEFF, lazy_k=1
         )
 

@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from experiments.config import read_config
 from experiments.train_arm import DEFAULTS  # noqa: E402
 
 PRIORS = ("particles", "frozen_gaussian", "fresh_gaussian")
@@ -73,7 +74,7 @@ def collect(manifest):
         config_bytes = Path(run["config"]).read_bytes()
         if hashlib.sha256(config_bytes).hexdigest() != run["config_sha256"]:
             raise ValueError(f"Config changed since generation: {run['config']}")
-        expected = yaml.safe_load(config_bytes)
+        expected = read_config(run["config"])
         summary = json.loads((Path(run["out_dir"]) / "summary.json").read_text())
         if (summary["config"] != expected or expected["prior"] != run["prior"]
                 or expected["seed"] != run["seed"] or expected["out_dir"] != run["out_dir"]):

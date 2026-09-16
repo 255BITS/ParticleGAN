@@ -4,26 +4,33 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "particlegan"
-version = "0.1.2"
-description = "Learnable particle priors and controlled toy GAN experiments"
+version = "0.2.0"
+description = "Composable PyTorch primitives for learnable particle priors, GANs, and DDGAN"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "torch>=2.6,<3",
+]
+
+[project.urls]
+Repository = "https://github.com/255BITS/ParticleGAN"
+Documentation = "https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md"
+
+[project.optional-dependencies]
+experiments = [
     "numpy>=1.26,<3",
     "matplotlib>=3.8,<4",
     "PyYAML>=6,<7",
     "POT>=0.9.5,<0.10",
+    "tomli>=2,<3; python_version < '3.11'",
 ]
-
-[project.optional-dependencies]
 dev = ["pytest>=8,<10"]
 images = ["torchvision>=0.21,<1", "torch-fidelity==0.3.0", "scipy>=1.10,<1.18", "tqdm>=4.60,<5"]
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["lib", "lib.*", "experiments", "experiments.*"]
-namespaces = true
+include = ["particlegan", "particlegan.*"]
+namespaces = false
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

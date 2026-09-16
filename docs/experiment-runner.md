@@ -5,9 +5,13 @@ Run from the repository root with the environment used for training:
 ```bash
 python experiments/run_grid.py --configs 'configs/*.yaml' \
   --python .venv/bin/python --gpus 0,1 --workers_per_gpu 2
+# TOML uses the same flat experiment configuration schema:
+python experiments/run_grid.py --configs 'configs/100gaussians/*.toml' \
+  --trainer experiments/train_100gaussians.py --python .venv/bin/python --gpus 0
 ```
 
-The runner checks every config before launching children. Invalid YAML, unknown
+Both TOML and YAML inputs are supported. The runner checks every config before
+launching children. Invalid TOML/YAML, unknown
 keys (for trainers declaring `DEFAULTS`), nonpositive worker counts, and duplicate
 or nested output directories fail the grid. Independent runner processes use a
 POSIX file lock to prevent simultaneous writes to the same output directory.
@@ -17,7 +21,8 @@ cannot be archived as run outputs.
 Completed results are reused only when `run_grid_complete.json` matches all of:
 
 - The full requested configuration, including the trainer's current defaults.
-- The trainer, runner, and all local `lib/*.py` source contents.
+- The trainer, runner, shared config reader, and local Python sources under
+  `lib/` and `particlegan/` (plus primary-trainer dependencies).
 - The resolved Python executable path and the saved summary's SHA-256 digest.
 
 The manifest is written atomically after a successful child exit, a nonempty
@@ -35,10 +40,18 @@ Failed attempts retain their logs; a summary written by a failed child is rename
 are logged in `results/failures.txt`, and the overall command exits nonzero.
 
 Custom trainers must accept `--config`, report the complete effective config in
-their summary, and declare a literal `DEFAULTS` mapping or receive every config
-value explicitly in their YAML. The runner passes an immutable copy named
-`requested_config.yaml` to the child; changing the original YAML during a queued
-run does not change that run's request.
+their summary, and declare a `DEFAULTS` mapping or receive every config value
+explicitly in their input. Defaults can be literal values or unpack the shared
+`recipe_defaults("100gaussians")` / `recipe_defaults("denoising")` helper into
+a dictionary with literal overrides. The runner reads this narrow syntax using
+Python's AST parser; it never imports the trainer or evaluates arbitrary trainer
+expressions. This lets the primary trainers inherit package recipe defaults
+without executing their training code during validation.
+
+Regardless of input format, the runner passes an immutable, fully resolved copy
+named `requested_config.yaml` to the child. This YAML file remains the canonical
+runner request artifact; changing the original TOML or YAML while a run is queued
+does not change that run's request.
 
 ## Sparse pipeline
 

@@ -14,18 +14,16 @@ import time
 import zipfile
 import numpy as np
 import torch
-from torch.nn import functional as F
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-from lib.denoising_toy import DiffusionSchedule, DrawSource, FixedConditionCritic
+from experiments.config import merge_config, read_config
+from particlegan import DDGAN, get_recipe, learning_rate_scale, ucd_loss
+from particlegan.diffusion import DrawSource
 from lib.image_ddgan import sample_images, update_ema
 from lib.image_moonshots import build_models
-from lib.gan_loss import GANLoss
-from lib.grad_regularizers import GradRegularizer
-from lib.vicreg_loss import VICRegLikeLoss
 from lib.cifar_speed import SpeedProfiler, cifar_penalty
 
 DEFAULTS = {
@@ -52,6 +50,13 @@ DEFAULTS = {
     'out_dir': 'results/cifar_ddgan/default',
 }
 DEFAULT_CONFIG = ROOT / 'configs/cifar_ddgan/default.yaml'
+
+
+def resolve_config(user):
+    """Merge an experiment config, enabling implicit feature caching only when supported."""
+    if not isinstance(user, dict) or set(user) - set(DEFAULTS):
+        raise ValueError('config must be a mapping with known keys')
+    return merge_config(DEFAULTS, user)
 
 
 def validate(cfg):
@@ -109,7 +114,28 @@ def validate(cfg):
             raise ValueError('evaluation counts must be positive multiples of ten')
     if not 0 <= cfg['ema'] < 1 or not 0 <= cfg['lr_anneal_start'] < 1 or not 0 <= cfg['lr_floor'] <= 1:
         raise ValueError('invalid EMA/LR schedule')
-    DiffusionSchedule(cfg['alpha_bar'])
+    DDGAN(cfg['alpha_bar'], validate_args=False)
+
+
+def training_recipe(cfg):
+    """Translate the existing image experiment fields into public API settings.
+
+    Architectures, data, checkpoints, and training remain owned by this file.
+    Every experiment override is retained, including historical image defaults.
+    """
+    return get_recipe(
+        'ddgan', z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
+        num_classes=cfg['classes'],
+        conditioning='ucd' if cfg['d_mode'] == 'ucd' else 'conditional',
+        ucd_target=cfg.get('ucd_target', 'class'), ucd_weight=cfg['ucd_lambda'],
+        alpha_bar=cfg['alpha_bar'], batch_size=cfg['batch_size'], total_steps=cfg['steps'],
+        lr=cfg['lr'], d_lr_mult=cfg['d_lr_mult'], prior_lr_mult=cfg['prior_lr_mult'],
+        betas=(cfg['beta1'], .999), loss_type=cfg['loss_type'], gan_mode=cfg['gan_mode'],
+        reg_arm=cfg['reg_arm'], reg_coeff=cfg['reg_coeff'], reg_kappa=cfg['reg_kappa'],
+        reg_every=cfg.get('reg_every', 1), reg_method=cfg.get('reg_method', 'autograd'),
+        prior_reg=cfg['prior_reg'], ema_decay=cfg['ema'],
+        lr_anneal_start=cfg['lr_anneal_start'], lr_floor=cfg['lr_floor'],
+    )
 
 
 def write_json(path, obj):
@@ -166,7 +192,7 @@ def train(cfg, resume=None):
     evaluator = FIDEvaluator(images, ROOT / cfg['fid_cache'], cfg['eval_batch_size'])
     images, labels = images.to(device), labels.to(device)
     rngs = {k: torch.Generator(device=device).manual_seed(cfg['seed'] + i) for i, k in enumerate(('data', 'time', 'corruption', 'latent', 'noise', 'penalty'), 11)}
-    schedule = DiffusionSchedule(cfg['alpha_bar']).to(device)
+    schedule = DDGAN(cfg['alpha_bar'], validate_args=False).to(device)
     g, d = build_models(cfg)
     g, d = g.to(device), d.to(device)
     if cfg.get('channels_last', False):
@@ -177,15 +203,12 @@ def train(cfg, resume=None):
     prior = DrawSource(cfg['prior'], cfg['num_particles'], cfg['z_dim'], cfg['seed'] + 101, device)
     initial_prior = prior.table.detach().clone()
     eg, ep = copy.deepcopy(g).eval().requires_grad_(False), copy.deepcopy(prior).requires_grad_(False)
-    groups = [{'params': list(g.parameters()), 'lr': cfg['lr']}]
-    if cfg['prior'] == 'learned':
-        groups.append({'params': list(prior.parameters()), 'lr': cfg['lr'] * cfg['prior_lr_mult']})
-    og = torch.optim.Adam(groups, betas=(cfg['beta1'], .999), fused=cfg.get('fused_adam', False))
-    od = torch.optim.Adam((p for p in d.parameters() if p.requires_grad), lr=cfg['lr'] * cfg['d_lr_mult'], betas=(cfg['beta1'], .999), fused=cfg.get('fused_adam', False))
+    recipe = training_recipe(cfg)
+    og, od = recipe.make_optimizers(g, d, prior, fused=cfg.get('fused_adam', False))
     bases = [[v['lr'] for v in o.param_groups] for o in (og, od)]
-    gan, vic = GANLoss(cfg['loss_type'], cfg['gan_mode']), VICRegLikeLoss()
-    reg = GradRegularizer(cfg['reg_arm'], cfg['reg_coeff'], kappa=cfg['reg_kappa'], lazy_k=cfg.get('reg_every', 1),
-                          method=cfg.get('reg_method', 'autograd'), fd_eps=cfg.get('reg_fd_eps', .05))
+    gan = recipe.make_loss()
+    spread = recipe.make_prior_regularizer()
+    reg = recipe.make_gradient_penalty(fd_eps=cfg.get('reg_fd_eps', .05))
     start_step, train_seconds = 0, 0.
     if resume:
         for name, obj in [('G', g), ('D', d), ('prior', prior), ('ema_G', eg), ('ema_prior', ep), ('opt_G', og), ('opt_D', od)]:
@@ -267,8 +290,8 @@ def train(cfg, resume=None):
     with (out / 'metrics.jsonl').open('a' if resume else 'w') as log:
         for step in range(start_step + 1, cfg['steps'] + 1):
             profiler.begin(step)
-            frac = max(0, (step - 1 - cfg['lr_anneal_start'] * cfg['steps']) / ((1 - cfg['lr_anneal_start']) * cfg['steps']))
-            scale = cfg['lr_floor'] + (1 - cfg['lr_floor']) * .5 * (1 + math.cos(math.pi * frac))
+            scale = learning_rate_scale(step - 1, recipe.total_steps,
+                                        recipe.lr_anneal_start, recipe.lr_floor)
             for opt, base in zip((og, od), bases):
                 for group, lr in zip(opt.param_groups, base):
                     group['lr'] = lr * scale
@@ -284,7 +307,7 @@ def train(cfg, resume=None):
                 ld = gan.d_loss(dr, df)
                 if cfg['d_mode'] == 'ucd':
                     targets = d.ucd_labels(c, t)
-                    ld = ld + cfg['ucd_lambda'] * (F.cross_entropy(cr, targets) + F.cross_entropy(cf, targets))
+                    ld = ld + ucd_loss(cr, cf, targets, weight=cfg['ucd_lambda'])
             with profiler.region('D_penalty_forward_input_grad'):
                 penalty = cifar_penalty(reg, lambda x: critic(x)[0], real, xf, step, rngs['penalty'], cfg)
                 ld = ld + penalty
@@ -304,8 +327,7 @@ def train(cfg, resume=None):
                 lg = gan.g_loss(df, dr)
                 if cfg['prior'] == 'learned' and cfg['prior_reg']:
                     selected = prior.table[ids.unique()]
-                    if len(selected) > 1:
-                        lg = lg + cfg['prior_reg'] * vic(selected)
+                    lg = lg + spread(selected)
             with profiler.region('G_backward_optimizer'):
                 og.zero_grad(set_to_none=True)
                 lg.backward()
@@ -354,10 +376,7 @@ def main():
     parser.add_argument('--resume', help='Restore complete training state; config and source must match')
     parser.add_argument('--prepare-data', action='store_true', help='Download verified CIFAR and build FID cache, then exit')
     args = parser.parse_args()
-    user = yaml.safe_load(Path(args.config).read_text())
-    if not isinstance(user, dict) or set(user) - set(DEFAULTS):
-        raise ValueError('config must be a mapping with known keys')
-    cfg = {**DEFAULTS, **user}
+    cfg = resolve_config(read_config(args.config))
     validate(cfg)
     if args.prepare_data:
         torch.set_num_threads(4)

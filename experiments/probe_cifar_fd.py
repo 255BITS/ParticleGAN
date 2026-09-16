@@ -9,8 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from experiments.train_cifar_ddgan import DEFAULTS, load_cifar
 from lib.image_moonshots import build_models
-from lib.denoising_toy import DiffusionSchedule
-from lib.grad_regularizers import GradRegularizer
+from particlegan import DDGAN
+from particlegan import GradientPenalty
 from lib.cifar_speed import cifar_penalty, finite_difference_norm
 
 
@@ -34,14 +34,14 @@ def main():
     x0 = images[:16].to(device).float() / 127.5 - 1
     t = (torch.arange(16, device=device) % 4) + 1
     rng = torch.Generator(device=device).manual_seed(542)
-    real, xt = DiffusionSchedule(cfg['alpha_bar']).to(device).forward_pair(x0, t, rng)
+    real, xt = DDGAN(cfg['alpha_bar'], validate_args=False).to(device).forward_pair(x0, t, rng)
     features = d.condition_features(xt)
     critic = lambda x: d(x, c, xt, t, condition_features=features)[0]
     params = [p for p in d.parameters() if p.requires_grad]
     def flattened(loss):
         values = torch.autograd.grad(loss, params, allow_unused=True)
         return torch.cat([(torch.zeros_like(p) if v is None else v).flatten() for p, v in zip(params, values)])
-    reg = GradRegularizer('b_cap', 1)
+    reg = GradientPenalty('b_cap', 1)
     norm = reg._grad_norm(critic, real)
     exact = torch.relu(norm - 1).square().mean()
     reference = flattened(exact)

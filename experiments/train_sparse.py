@@ -33,7 +33,6 @@ Usage:
 import argparse
 import copy
 import json
-import math
 import sys
 import time
 from pathlib import Path
@@ -53,10 +52,10 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from lib.particle_prior import ParticlePrior  # noqa: E402
-from lib.gan_loss import GANLoss  # noqa: E402
-from lib.vicreg_loss import VICRegLikeLoss  # noqa: E402
-from lib.grad_regularizers import GradRegularizer  # noqa: E402
+from experiments.config import read_config
+from particlegan import (  # noqa: E402
+    GANLoss, GradientPenalty, ParticlePrior, ParticleRegularizer, learning_rate_scale, ucd_loss,
+)
 from lib.sparse_toy import SparseMixedToy  # noqa: E402
 from lib.sparse_models import (  # noqa: E402
     SparseCondGenerator,
@@ -127,8 +126,7 @@ DEFAULTS: Dict = {
 def load_config(path: Optional[str]) -> Dict:
     cfg = dict(DEFAULTS)
     if path is not None:
-        with open(path) as f:
-            user = yaml.safe_load(f) or {}
+        user = read_config(path)
         unknown = set(user) - set(DEFAULTS)
         if unknown:
             raise ValueError(f"Unknown config keys: {sorted(unknown)}")
@@ -271,13 +269,13 @@ def train(cfg: Dict, device: torch.device) -> Dict:
             local = torch.randint(0, block, (n,), device=device, generator=gen)
             idx = c * block + local
         else:
-            idx = torch.randint(0, pr.num_particles, (n,), device=device, generator=gen)
-        return pr.z[idx], idx
+            idx = pr.sample_indices(n, generator=gen)
+        return pr(idx), idx
 
     # ---- losses / optimizers ----
     gan_loss = GANLoss(loss_type=str(cfg["loss_type"]), mode="rp")
-    regularizer = GradRegularizer(arm=str(cfg["arm"]), coeff=float(cfg["coeff"]), kappa=float(cfg["kappa"]), norm=str(cfg["norm"]))
-    vic = VICRegLikeLoss()
+    regularizer = GradientPenalty(arm=str(cfg["arm"]), coeff=float(cfg["coeff"]), kappa=float(cfg["kappa"]), norm=str(cfg["norm"]))
+    vic = ParticleRegularizer()
     lr = float(cfg["lr"])
     beta1 = float(cfg["beta1"])
     opt_G = torch.optim.Adam(G.parameters(), lr=lr, betas=(beta1, 0.999))
@@ -362,12 +360,11 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         tau = tau0 + (tau1 - tau0) * frac
         D.fourier.scale = fourier_scale(frac)
         G.gate_on = ema_G.gate_on = frac >= float(cfg["gate_start_frac"])
+        # Retain the historical minimum one-update decay duration.
         anneal_from = float(cfg["lr_anneal_start"]) * total_steps
-        if step <= anneal_from:
-            scale = 1.0
-        else:
-            f_ = (step - anneal_from) / max(1.0, total_steps - anneal_from)
-            scale = float(cfg["lr_floor"]) + (1.0 - float(cfg["lr_floor"])) * 0.5 * (1.0 + math.cos(math.pi * f_))
+        scale = learning_rate_scale(step - anneal_from,
+                                    max(1.0, total_steps - anneal_from),
+                                    0.0, float(cfg["lr_floor"]))
         for o in opts:
             for g, b in zip(o.param_groups, base_lrs[id(o)]):
                 g["lr"] = b * scale
@@ -388,7 +385,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         loss_d = loss_d_gan
         ucd_ce = torch.zeros((), device=device)
         if ucd and ucd_lambda > 0:
-            ucd_ce = F.cross_entropy(dr["class_logits"], c_r) + F.cross_entropy(df["class_logits"], c_r)
+            ucd_ce = ucd_loss(dr["class_logits"], df["class_logits"], c_r, weight=1.0)
             loss_d = loss_d + ucd_lambda * ucd_ce
         # Keep joint interpolation locations identical in both ablations; the
         # critic can exclude the y derivative without changing the sampled y.
@@ -416,7 +413,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         if learnable and lambda_ep > 0:
             with torch.no_grad():
                 uniq = torch.unique(idx)
-            loss_g = loss_g + lambda_ep * vic(prior.z[uniq])
+            loss_g = loss_g + lambda_ep * vic(prior(uniq))
         opt_G.zero_grad()
         if opt_P is not None:
             opt_P.zero_grad()

@@ -85,9 +85,9 @@ def estimate_update_spectrum(
     Args:
         D, G, prior: the live models. They are deep-copied and cast to float64
             internally, so the caller's models are untouched (and stay float32).
-        gan_loss: a lib.gan_loss.GANLoss configured exactly as in training.
+        gan_loss: a particlegan.GANLoss configured exactly as in training.
         vic_reg: the VICReg-like module applied to the batch's particles.
-        regularizer: a lib.grad_regularizers.GradRegularizer. Pass a clone with
+        regularizer: a particlegan.GradientPenalty. Pass a clone with
             lazy_k=1 so the penalty applies on every step of the map.
         x_real_fixed: (B, 2) fixed real batch. Both half-steps use it (the D
             step as the reals, the G step as the RpGAN reference batch).

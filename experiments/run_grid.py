@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Run YAML experiment configs concurrently, with verified completed-run reuse.
+"""Run TOML/YAML experiment configs concurrently, with verified completed-run reuse.
 
 A successful child must write a nonempty ``summary.json`` final block and its
 complete config. The runner records that summary's digest, the effective config
@@ -32,6 +32,11 @@ import uuid
 
 import yaml
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from experiments.config import merge_config, read_config, recipe_defaults
+
 DEFAULT_PYTHON = ".venv/bin/python"
 DEFAULT_TRAINER = "experiments/train_arm.py"
 FAILURES_PATH = Path("results/failures.txt")
@@ -44,11 +49,29 @@ def canonical(value) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 
 
-def trainer_defaults(trainer: str) -> Dict:
-    """Read a literal DEFAULTS mapping without importing Torch or running code.
+def _defaults_value(node):
+    # A deliberately small grammar: literals, dictionaries, and this one known
+    # recipe helper. Never evaluate trainer expressions or import a trainer.
+    if isinstance(node, ast.Dict):
+        result = {}
+        for key, value in zip(node.keys, node.values):
+            if key is None:
+                result.update(_defaults_value(value))
+            else:
+                result[ast.literal_eval(key)] = ast.literal_eval(value)
+        return result
+    if (isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+            and node.func.id == "recipe_defaults" and len(node.args) == 1
+            and not node.keywords):
+        return recipe_defaults(ast.literal_eval(node.args[0]))
+    return ast.literal_eval(node)
 
-    Custom trainers without DEFAULTS must receive and report their complete
-    configuration in the YAML. Dynamic DEFAULTS are rejected rather than guessed.
+
+def trainer_defaults(trainer: str) -> Dict:
+    """Read literal defaults or the trusted shared recipe_defaults() helper.
+
+    Custom trainers are never imported. Arbitrary dynamic defaults remain an
+    error. Only trainers using package recipes need the package installed.
     """
     tree = ast.parse(Path(trainer).read_text(), filename=trainer)
     for node in tree.body:
@@ -57,9 +80,9 @@ def trainer_defaults(trainer: str) -> Dict:
         )
         if any(isinstance(t, ast.Name) and t.id == "DEFAULTS" for t in targets):
             try:
-                value = ast.literal_eval(node.value)
+                value = _defaults_value(node.value)
             except (ValueError, TypeError) as exc:
-                raise ValueError(f"{trainer}: DEFAULTS must be a literal mapping") from exc
+                raise ValueError(f"{trainer}: DEFAULTS must be a literal mapping (optionally unpacking recipe_defaults)") from exc
             if not isinstance(value, dict):
                 raise ValueError(f"{trainer}: DEFAULTS must be a mapping")
             return value
@@ -67,13 +90,12 @@ def trainer_defaults(trainer: str) -> Dict:
 
 
 def load_config(config_path: str, defaults: Dict) -> Dict:
-    with open(config_path) as f:
-        user = yaml.safe_load(f)
+    user = read_config(config_path)
     if not isinstance(user, dict) or not all(isinstance(k, str) for k in user):
         raise ValueError("config must be a mapping with string keys")
     if defaults and (unknown := set(user) - set(defaults)):
         raise ValueError(f"unknown config keys: {sorted(unknown)}")
-    cfg = {**defaults, **user}
+    cfg = merge_config(defaults, user)
     if not isinstance(cfg.get("out_dir"), str) or not cfg["out_dir"].strip():
         raise ValueError("config needs a nonempty string out_dir")
     canonical(cfg)
@@ -83,13 +105,15 @@ def load_config(config_path: str, defaults: Dict) -> Dict:
 def code_provenance(trainer: str, python_bin: str) -> Dict:
     """Content hashes catch dirty code and default changes without a Git dependency.
 
-    All local lib Python files are included conservatively, plus the trainer and
-    runner. This is a source fingerprint, not a package/environment lockfile.
+    All local lib/package Python files are included conservatively, plus the
+    trainer, runner and config reader. This is a source fingerprint, not a package/environment lockfile.
     """
     trainer_path = Path(trainer).resolve()
     repo_root = Path(__file__).resolve().parents[1]
     paths = {trainer_path, Path(__file__).resolve()}
     paths.update((repo_root / "lib").rglob("*.py"))
+    paths.update((repo_root / "particlegan").rglob("*.py"))
+    paths.add(repo_root / "experiments" / "config.py")
     if trainer_path.name == "train_100gaussians.py":
         paths.add(repo_root / "examples" / "100gaussians.py")
         paths.add(repo_root / "experiments" / "train_denoising.py")
@@ -247,7 +271,7 @@ def run_one(config_path: str, cfg: Dict, gpu: str, python_bin: str, trainer: str
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run experiment configs across GPUs with verified reuse.")
     inputs = parser.add_mutually_exclusive_group(required=True)
-    inputs.add_argument("--configs", help="Glob of config YAMLs, e.g. 'configs/*.yaml' (quote it).")
+    inputs.add_argument("--configs", help="Glob of TOML/YAML configs, e.g. 'configs/*.toml' (quote it).")
     inputs.add_argument("--config_manifest", help="JSON list of config paths, as emitted by gen_sparse_configs.py.")
     parser.add_argument("--workers_per_gpu", type=int, default=5)
     parser.add_argument("--gpus", default="0,1")

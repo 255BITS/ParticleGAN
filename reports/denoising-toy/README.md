@@ -24,7 +24,7 @@ reverse-step noise, uses the tested 56k-update settings and established bcap rec
 .venv/bin/python experiments/train_denoising.py
 ```
 
-Review/edit [the full default config](../../configs/denoising/ddgan_ucd.yaml).
+Review/edit [the full default config](../../configs/denoising/default.toml).
 The script loads it automatically; pass `--config PATH` for another configuration.
 Outputs go to `results/denoising/ddgan_ucd`. No new training was launched when
 selecting these defaults. The trainer source fingerprint changes for future runs;
