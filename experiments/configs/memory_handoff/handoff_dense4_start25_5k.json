@@ -1,0 +1,6 @@
+{
+  "name": "handoff_dense4_start25_5k",
+  "zero_fraction": 0.25,
+  "steps": 5000,
+  "resume": "runs/memory_path/handoff_round1/runs/handoff_dense4_start25/model.pt"
+}

@@ -1,0 +1,209 @@
+[
+  {
+    "name": "handoff_dense4",
+    "source": "runs/memory_path/handoff_round1/runs/handoff_dense4",
+    "panel_size": 512,
+    "metrics": {
+      "prefix8": {
+        "real_minus_fake_score": 0.0029485253617167473,
+        "previous_point": {
+          "correct_preferred_fraction": 0.623046875,
+          "mean_score_margin": 0.020295020192861557
+        },
+        "future3_point": {
+          "correct_preferred_fraction": 0.7890625,
+          "mean_score_margin": 0.15329663455486298
+        },
+        "shuffled_memory": {
+          "correct_preferred_fraction": 0.66796875,
+          "mean_score_margin": 0.37029722332954407
+        },
+        "zero_memory": {
+          "correct_preferred_fraction": 1.0,
+          "mean_score_margin": 2.3208909034729004
+        },
+        "g_clean_target_mse": 0.005500477273017168,
+        "opposite_direction_histories": {
+          "forward_preferred_fraction": 0.76171875,
+          "reverse_preferred_fraction": 0.767578125,
+          "both_preferred_fraction": 0.55078125,
+          "g_reverse_clean_target_mse": 0.005720694549381733,
+          "g_reverse_uses_forward_target_mse": 0.1551859825849533
+        },
+        "g_shuffled_target_mse": 1.433565378189087,
+        "g_shuffled_output_mse_change": 1.4210588932037354,
+        "g_zero_target_mse": 1.491363286972046,
+        "g_zero_output_mse_change": 1.468210220336914
+      },
+      "prefix32": {
+        "real_minus_fake_score": 0.0055961268953979015,
+        "previous_point": {
+          "correct_preferred_fraction": 0.771484375,
+          "mean_score_margin": 0.04686497151851654
+        },
+        "future3_point": {
+          "correct_preferred_fraction": 0.76171875,
+          "mean_score_margin": 0.1407066285610199
+        },
+        "shuffled_memory": {
+          "correct_preferred_fraction": 0.681640625,
+          "mean_score_margin": 0.381500244140625
+        },
+        "zero_memory": {
+          "correct_preferred_fraction": 1.0,
+          "mean_score_margin": 2.339033603668213
+        },
+        "g_clean_target_mse": 0.005602001678198576,
+        "opposite_direction_histories": {
+          "forward_preferred_fraction": 0.884765625,
+          "reverse_preferred_fraction": 0.890625,
+          "both_preferred_fraction": 0.78125,
+          "g_reverse_clean_target_mse": 0.005573953036218882,
+          "g_reverse_uses_forward_target_mse": 0.15274116396903992
+        },
+        "g_shuffled_target_mse": 1.40496826171875,
+        "g_shuffled_output_mse_change": 1.4163228273391724,
+        "g_zero_target_mse": 1.4478769302368164,
+        "g_zero_output_mse_change": 1.4571285247802734
+      }
+    }
+  },
+  {
+    "name": "handoff_dense4_input10_5k",
+    "source": "runs/memory_path/handoff_round1_long/runs/handoff_dense4_input10_5k",
+    "panel_size": 512,
+    "metrics": {
+      "prefix8": {
+        "real_minus_fake_score": -0.011183241382241249,
+        "previous_point": {
+          "correct_preferred_fraction": 0.583984375,
+          "mean_score_margin": 0.019225355237722397
+        },
+        "future3_point": {
+          "correct_preferred_fraction": 0.5234375,
+          "mean_score_margin": 0.026024164631962776
+        },
+        "shuffled_memory": {
+          "correct_preferred_fraction": 0.517578125,
+          "mean_score_margin": 0.1475280374288559
+        },
+        "zero_memory": {
+          "correct_preferred_fraction": 0.71484375,
+          "mean_score_margin": 0.5678333044052124
+        },
+        "g_clean_target_mse": 0.03326541930437088,
+        "opposite_direction_histories": {
+          "forward_preferred_fraction": 0.607421875,
+          "reverse_preferred_fraction": 0.595703125,
+          "both_preferred_fraction": 0.328125,
+          "g_reverse_clean_target_mse": 0.03227613866329193,
+          "g_reverse_uses_forward_target_mse": 0.1634434163570404
+        },
+        "g_shuffled_target_mse": 1.385861873626709,
+        "g_shuffled_output_mse_change": 1.337390422821045,
+        "g_zero_target_mse": 1.5110764503479004,
+        "g_zero_output_mse_change": 1.3961611986160278
+      },
+      "prefix32": {
+        "real_minus_fake_score": -0.020109038800001144,
+        "previous_point": {
+          "correct_preferred_fraction": 0.58984375,
+          "mean_score_margin": 0.0190044566988945
+        },
+        "future3_point": {
+          "correct_preferred_fraction": 0.693359375,
+          "mean_score_margin": 0.13537806272506714
+        },
+        "shuffled_memory": {
+          "correct_preferred_fraction": 0.55859375,
+          "mean_score_margin": 0.3186004161834717
+        },
+        "zero_memory": {
+          "correct_preferred_fraction": 0.826171875,
+          "mean_score_margin": 1.182569146156311
+        },
+        "g_clean_target_mse": 0.020194508135318756,
+        "opposite_direction_histories": {
+          "forward_preferred_fraction": 0.685546875,
+          "reverse_preferred_fraction": 0.703125,
+          "both_preferred_fraction": 0.435546875,
+          "g_reverse_clean_target_mse": 0.019892577081918716,
+          "g_reverse_uses_forward_target_mse": 0.16594569385051727
+        },
+        "g_shuffled_target_mse": 1.3874897956848145,
+        "g_shuffled_output_mse_change": 1.3611549139022827,
+        "g_zero_target_mse": 1.4934552907943726,
+        "g_zero_output_mse_change": 1.447559118270874
+      }
+    }
+  },
+  {
+    "name": "handoff_dense4_start25_5k",
+    "source": "runs/memory_path/handoff_round1_long/runs/handoff_dense4_start25_5k",
+    "panel_size": 512,
+    "metrics": {
+      "prefix8": {
+        "real_minus_fake_score": -0.000262697518337518,
+        "previous_point": {
+          "correct_preferred_fraction": 0.669921875,
+          "mean_score_margin": 0.024420807138085365
+        },
+        "future3_point": {
+          "correct_preferred_fraction": 0.751953125,
+          "mean_score_margin": 0.10295747220516205
+        },
+        "shuffled_memory": {
+          "correct_preferred_fraction": 0.640625,
+          "mean_score_margin": 0.3002570867538452
+        },
+        "zero_memory": {
+          "correct_preferred_fraction": 1.0,
+          "mean_score_margin": 1.8243404626846313
+        },
+        "g_clean_target_mse": 0.009727493859827518,
+        "opposite_direction_histories": {
+          "forward_preferred_fraction": 0.771484375,
+          "reverse_preferred_fraction": 0.73046875,
+          "both_preferred_fraction": 0.5546875,
+          "g_reverse_clean_target_mse": 0.009846465662121773,
+          "g_reverse_uses_forward_target_mse": 0.14952439069747925
+        },
+        "g_shuffled_target_mse": 1.4429795742034912,
+        "g_shuffled_output_mse_change": 1.4249441623687744,
+        "g_zero_target_mse": 1.4161933660507202,
+        "g_zero_output_mse_change": 1.3983681201934814
+      },
+      "prefix32": {
+        "real_minus_fake_score": -0.0018818468088284135,
+        "previous_point": {
+          "correct_preferred_fraction": 0.6953125,
+          "mean_score_margin": 0.02916525863111019
+        },
+        "future3_point": {
+          "correct_preferred_fraction": 0.771484375,
+          "mean_score_margin": 0.11307376623153687
+        },
+        "shuffled_memory": {
+          "correct_preferred_fraction": 0.642578125,
+          "mean_score_margin": 0.3262566030025482
+        },
+        "zero_memory": {
+          "correct_preferred_fraction": 1.0,
+          "mean_score_margin": 1.7416218519210815
+        },
+        "g_clean_target_mse": 0.00852889008820057,
+        "opposite_direction_histories": {
+          "forward_preferred_fraction": 0.826171875,
+          "reverse_preferred_fraction": 0.857421875,
+          "both_preferred_fraction": 0.6953125,
+          "g_reverse_clean_target_mse": 0.008998343721032143,
+          "g_reverse_uses_forward_target_mse": 0.15713658928871155
+        },
+        "g_shuffled_target_mse": 1.4181143045425415,
+        "g_shuffled_output_mse_change": 1.4317125082015991,
+        "g_zero_target_mse": 1.3728046417236328,
+        "g_zero_output_mse_change": 1.3903777599334717
+      }
+    }
+  }
+]

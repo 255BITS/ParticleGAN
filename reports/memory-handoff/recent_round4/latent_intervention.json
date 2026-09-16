@@ -1,0 +1,123 @@
+[
+  {
+    "name": "recent4_delta",
+    "evaluation_only": true,
+    "note": "Swapped variants violate fixed-particle policy; diagnostic only, excluded from leaderboard.",
+    "metrics": {
+      "fixed": {
+        "full256": {
+          "radius": 1.0183012729246101,
+          "relative_radial_rmse": 0.7979167175688937,
+          "late_radius_drift": 0.7100590021284713,
+          "angular_speed": 0.26072608781516093,
+          "direction_consistency": 0.7809436274509804,
+          "signed_angular_speed": 0.22950188736175922,
+          "circle_like_fraction": 0.0,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.0,
+          "mean_step_length": 0.3685973012359437,
+          "initial_position_spread": 1.2039322522427456,
+          "radius_std": 0.4022036861875291,
+          "late_circle_fraction": 0.5390625,
+          "late_stopped_fraction": 0.1484375,
+          "passing_cw": 0,
+          "passing_ccw": 0
+        },
+        "full1024": {
+          "radius": 1.0183012729246101,
+          "relative_radial_rmse": 0.8626280965196425,
+          "late_radius_drift": 0.7046944779343198,
+          "angular_speed": 0.2777945219267356,
+          "direction_consistency": 0.8381827346041055,
+          "signed_angular_speed": 0.2526239253096762,
+          "circle_like_fraction": 0.0,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.1015625,
+          "mean_step_length": 0.40809215965798035,
+          "initial_position_spread": 1.2039322522427456,
+          "radius_std": 0.4022036861875291,
+          "late_circle_fraction": 0.6015625,
+          "late_stopped_fraction": 0.1484375,
+          "passing_cw": 0,
+          "passing_ccw": 0
+        }
+      },
+      "swap_after_1": {
+        "full256": {
+          "radius": 1.0241859976584804,
+          "relative_radial_rmse": 0.9247210408695203,
+          "late_radius_drift": 0.8697480529937001,
+          "angular_speed": 0.27612170872257374,
+          "direction_consistency": 0.7871629901960785,
+          "signed_angular_speed": 0.24948933119268069,
+          "circle_like_fraction": 0.0,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.0,
+          "mean_step_length": 0.38568824513582606,
+          "initial_position_spread": 1.2039322522427456,
+          "radius_std": 0.35483634739561437,
+          "late_circle_fraction": 0.5234375,
+          "late_stopped_fraction": 0.109375,
+          "passing_cw": 0,
+          "passing_ccw": 0
+        },
+        "full1024": {
+          "radius": 1.0241859976584804,
+          "relative_radial_rmse": 1.034689834356115,
+          "late_radius_drift": 0.8979232775509626,
+          "angular_speed": 0.2873622532822018,
+          "direction_consistency": 0.8278577101661779,
+          "signed_angular_speed": 0.2666340813291321,
+          "circle_like_fraction": 0.0078125,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.03125,
+          "mean_step_length": 0.4149638639701393,
+          "initial_position_spread": 1.2039322522427456,
+          "radius_std": 0.35483634739561437,
+          "late_circle_fraction": 0.6015625,
+          "late_stopped_fraction": 0.1484375,
+          "passing_cw": 0,
+          "passing_ccw": 1
+        }
+      },
+      "swap_after_4": {
+        "full256": {
+          "radius": 1.105861570330713,
+          "relative_radial_rmse": 0.8320247596435335,
+          "late_radius_drift": 0.7557770431265238,
+          "angular_speed": 0.2782092781845874,
+          "direction_consistency": 0.8007352941176471,
+          "signed_angular_speed": 0.25271362582088763,
+          "circle_like_fraction": 0.0,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.0,
+          "mean_step_length": 0.3925823585349539,
+          "initial_position_spread": 1.2039322522427456,
+          "radius_std": 0.3570814840738876,
+          "late_circle_fraction": 0.5234375,
+          "late_stopped_fraction": 0.0859375,
+          "passing_cw": 0,
+          "passing_ccw": 0
+        },
+        "full1024": {
+          "radius": 1.105861570330713,
+          "relative_radial_rmse": 0.9613674116816853,
+          "late_radius_drift": 0.8166722979003327,
+          "angular_speed": 0.2916380468010275,
+          "direction_consistency": 0.8396566471163246,
+          "signed_angular_speed": 0.27359729997529414,
+          "circle_like_fraction": 0.0,
+          "valid_fit_fraction": 1.0,
+          "stationary_fraction": 0.015625,
+          "mean_step_length": 0.42192663889474696,
+          "initial_position_spread": 1.2039322522427456,
+          "radius_std": 0.3570814840738876,
+          "late_circle_fraction": 0.609375,
+          "late_stopped_fraction": 0.1328125,
+          "passing_cw": 0,
+          "passing_ccw": 0
+        }
+      }
+    }
+  }
+]

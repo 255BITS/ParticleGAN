@@ -1,0 +1,6 @@
+{
+  "name": "handoff_dense4_input10_5k",
+  "context_noise": 0.1,
+  "steps": 5000,
+  "resume": "runs/memory_path/handoff_round1/runs/handoff_dense4_input10/model.pt"
+}

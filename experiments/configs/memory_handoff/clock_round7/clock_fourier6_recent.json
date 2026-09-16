@@ -1,0 +1,7 @@
+{
+  "name": "clock_fourier6_recent",
+  "clock_bands": 6,
+  "recent_points": 4,
+  "residual_output": true,
+  "output_bound": 3.0
+}

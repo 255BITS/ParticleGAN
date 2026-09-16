@@ -75,7 +75,7 @@ def add(queue, configs, trainer):
     wake(queue, len(entries))
 
 
-def drain(queue, devices):
+def drain(queue, devices, reporter=None, report_out=None):
     if not devices or len(set(devices)) != len(devices):
         raise ValueError("Each device may have only one worker")
     guard = (queue/"drain.lock").open("a")
@@ -84,6 +84,7 @@ def drain(queue, devices):
         guard.close()
         raise RuntimeError("Unresolved running jobs: inspect before restarting drain")
     event_lock = threading.Lock()
+    report_lock = threading.Lock()
     failures = []
     fd = os.open(queue/"wake", os.O_RDWR | os.O_NONBLOCK)
     with (queue/"queue.log").open("a", buffering=1) as log, \
@@ -148,6 +149,17 @@ def drain(queue, devices):
                 with locked(queue/"queue.lock"):
                     path.write_text(json.dumps(job, allow_nan=False)+"\n")
                     path.rename(queue/state/path.name)
+                if not error and reporter is not None:
+                    # Only completed jobs enter reports. Serialize report writes,
+                    # while the other GPU and its log reader continue working.
+                    with report_lock:
+                        report = subprocess.run([sys.executable, str(reporter),
+                            "--source", str(queue/"runs"), "--out", str(report_out)],
+                            capture_output=True, text=True)
+                        if report.returncode:
+                            failures.append(f"report:{name}")
+                            event(True, event="report_failed", name=name,
+                                  error=report.stderr[-4000:])
                 event(True, event="failed" if error else "completed", name=name, device=device,
                       out=str(out), error=error, metrics=metrics)
 
@@ -172,6 +184,8 @@ def main():
             part.add_argument("--trainer", type=Path, default=Path("experiments/memory_scout.py"))
         elif command == "drain":
             part.add_argument("--devices", nargs="+", default=["cuda:0", "cuda:1"])
+            part.add_argument("--reporter", type=Path)
+            part.add_argument("--report-out", type=Path)
     args = parser.parse_args()
     queue = args.queue.resolve()
     initialize(queue)
@@ -182,7 +196,11 @@ def main():
             (queue/"SEALED").touch()
         wake(queue, 256)
     else:
-        sys.exit(drain(queue, args.devices))
+        if bool(args.reporter) != bool(args.report_out):
+            parser.error("--reporter and --report-out must be provided together")
+        sys.exit(drain(queue, args.devices,
+                       args.reporter.resolve(strict=True) if args.reporter else None,
+                       args.report_out.resolve() if args.report_out else None))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,8 @@
+{
+  "name": "recent4_delta_5k",
+  "output_bound": 3.0,
+  "recent_points": 4,
+  "residual_output": true,
+  "steps": 5000,
+  "resume": "/home/martyn/dev/ParticleGAN/runs/memory_path/recent_round4/runs/recent4_delta/model.pt"
+}

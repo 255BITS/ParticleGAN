@@ -129,3 +129,26 @@ def test_dynamic_add_wakes_empty_drain_and_duplicate_is_rejected(tmp_path, setup
     assert "[late cpu:" in (queue/"train.log").read_text()
     with pytest.raises(ValueError, match="sealed"):
         add(queue, [config(tmp_path, "too_late")], trainer)
+
+
+def test_reporter_runs_after_success_before_notification(tmp_path, setup):
+    queue, trainer = setup
+    reporter = tmp_path/'reporter.py'
+    reporter.write_text('''import argparse, json, pathlib
+p = argparse.ArgumentParser()
+p.add_argument('--source', type=pathlib.Path)
+p.add_argument('--out', type=pathlib.Path)
+a = p.parse_args()
+assert len(list((a.source.parent/'done').glob('*.json'))) == 1
+a.out.mkdir(exist_ok=True)
+(a.out/'ready').write_text('complete')
+''')
+    report = tmp_path/'report'
+    add(queue, [config(tmp_path, 'success')], trainer)
+    seal(queue)
+    process = subprocess.run(command(queue, 'drain', '--devices', 'cpu:0',
+                                    '--reporter', str(reporter), '--report-out', str(report)),
+                             capture_output=True, text=True, timeout=15)
+    assert process.returncode == 0, process.stderr
+    assert (report/'ready').read_text() == 'complete'
+    assert [json.loads(line)['event'] for line in process.stdout.splitlines()] == ['completed', 'queue_complete']

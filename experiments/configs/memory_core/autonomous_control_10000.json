@@ -1,0 +1,8 @@
+{
+  "name": "autonomous_control_10000",
+  "handoff_weight": 0,
+  "cold_weight": 1,
+  "warm_weight": 0,
+  "steps": 10000,
+  "evaluate_checkpoint": "runs/memory_path/scout_long/gru_flat_10k/model.pt"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "warm_only",
+  "handoff_weight": 0,
+  "cold_weight": 0,
+  "warm_weight": 1
+}

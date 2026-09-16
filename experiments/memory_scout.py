@@ -163,13 +163,14 @@ def rollout(generator, writer, z, steps, intervention=None, states=False):
     memory, hidden = writer.initial(z), None
     path, history = [], []
     with frozen(writer):
-        for _ in range(steps):
+        for t in range(steps):
             read = memory
             if intervention == "zero":
                 read = torch.zeros_like(memory)
             elif intervention == "shuffle":
                 read = memory.roll(1, 0)
-            point, hidden = generator(z, read, hidden)
+            time_args = {'time_index': t} if getattr(generator, 'clock_bands', 0) else {}
+            point, hidden = generator(z, read, hidden, **time_args)
             path.append(point)
             memory = writer.write(memory, point)
             if states:
