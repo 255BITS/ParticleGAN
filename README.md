@@ -2,22 +2,37 @@
 
 **Learnable particle priors and GAN building blocks for PyTorch.**
 
+[API reference](docs/api.md) · [Minimal GAN loop](docs/api.md#a-minimal-training-loop) ·
+[Minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
+
 ![100 Gaussians with Particle Prior](100gaussians.gif)
 
-## Install and use in your PyTorch project
+## Installation
 
-The `particlegan` package requires only PyTorch. Install from this checkout while
-version 0.2.0 is being prepared for release:
+Requires Python 3.10+ and PyTorch. Install the current API directly with pip:
 
 ```bash
-git clone https://github.com/255BITS/ParticleGAN.git
+python -m pip install "particlegan @ git+https://github.com/255BITS/ParticleGAN.git@api"
+```
+
+Version 0.2.0 is being prepared for its first PyPI release. Once published,
+installation will be:
+
+```bash
+python -m pip install particlegan
+```
+
+For development and the repository's research experiments:
+
+```bash
+git clone --branch api https://github.com/255BITS/ParticleGAN.git
 cd ParticleGAN
-python -m pip install .
-# To develop here and run research examples/tests:
 python -m pip install -e '.[experiments,dev]'
 # Image experiments also need the images extra:
 # python -m pip install -e '.[experiments,images,dev]'
 ```
+
+## Use in your PyTorch project
 
 Use individual components in your existing loop. You own the networks, data,
 optimizers, backward calls, devices, logging, and checkpoints. No trainer is
