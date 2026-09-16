@@ -14,18 +14,20 @@ import time
 import zipfile
 import numpy as np
 import torch
-from torch.nn import functional as F
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-from lib.denoising_toy import DiffusionSchedule, DrawSource, FixedConditionCritic
+from experiments.config import read_config
+from particlegan import ucd_loss
+from particlegan.diffusion import DiffusionSchedule, DrawSource
+from lib.denoising_toy import FixedConditionCritic
 from lib.image_ddgan import sample_images, update_ema
 from lib.image_moonshots import build_models
-from lib.gan_loss import GANLoss
-from lib.grad_regularizers import GradRegularizer
-from lib.vicreg_loss import VICRegLikeLoss
+from particlegan.gan_loss import GANLoss
+from particlegan.grad_regularizers import GradRegularizer
+from particlegan.vicreg_loss import VICRegLikeLoss
 from lib.cifar_speed import SpeedProfiler, cifar_penalty
 
 DEFAULTS = {
@@ -109,7 +111,7 @@ def validate(cfg):
             raise ValueError('evaluation counts must be positive multiples of ten')
     if not 0 <= cfg['ema'] < 1 or not 0 <= cfg['lr_anneal_start'] < 1 or not 0 <= cfg['lr_floor'] <= 1:
         raise ValueError('invalid EMA/LR schedule')
-    DiffusionSchedule(cfg['alpha_bar'])
+    DiffusionSchedule(cfg['alpha_bar'], validate_args=False)
 
 
 def write_json(path, obj):
@@ -166,7 +168,7 @@ def train(cfg, resume=None):
     evaluator = FIDEvaluator(images, ROOT / cfg['fid_cache'], cfg['eval_batch_size'])
     images, labels = images.to(device), labels.to(device)
     rngs = {k: torch.Generator(device=device).manual_seed(cfg['seed'] + i) for i, k in enumerate(('data', 'time', 'corruption', 'latent', 'noise', 'penalty'), 11)}
-    schedule = DiffusionSchedule(cfg['alpha_bar']).to(device)
+    schedule = DiffusionSchedule(cfg['alpha_bar'], validate_args=False).to(device)
     g, d = build_models(cfg)
     g, d = g.to(device), d.to(device)
     if cfg.get('channels_last', False):
@@ -284,7 +286,7 @@ def train(cfg, resume=None):
                 ld = gan.d_loss(dr, df)
                 if cfg['d_mode'] == 'ucd':
                     targets = d.ucd_labels(c, t)
-                    ld = ld + cfg['ucd_lambda'] * (F.cross_entropy(cr, targets) + F.cross_entropy(cf, targets))
+                    ld = ld + ucd_loss(cr, cf, targets, weight=cfg['ucd_lambda'])
             with profiler.region('D_penalty_forward_input_grad'):
                 penalty = cifar_penalty(reg, lambda x: critic(x)[0], real, xf, step, rngs['penalty'], cfg)
                 ld = ld + penalty
@@ -354,7 +356,7 @@ def main():
     parser.add_argument('--resume', help='Restore complete training state; config and source must match')
     parser.add_argument('--prepare-data', action='store_true', help='Download verified CIFAR and build FID cache, then exit')
     args = parser.parse_args()
-    user = yaml.safe_load(Path(args.config).read_text())
+    user = read_config(args.config)
     if not isinstance(user, dict) or set(user) - set(DEFAULTS):
         raise ValueError('config must be a mapping with known keys')
     cfg = {**DEFAULTS, **user}

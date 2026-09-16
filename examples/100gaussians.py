@@ -6,7 +6,7 @@
 
 This is deliberately nastier than the 25-Gaussian grid:
   - Data: 100-Gaussian mixture on a 10x10 grid in R^2 with small variance.
-  - Prior: lib.particle_prior.ParticlePrior (learnable particles in latent space).
+  - Prior: particlegan.ParticlePrior (learnable particles in latent space).
   - G: simple MLP mapping z -> x in R^2.
   - D: simple MLP with Fourier input features, x -> scalar score.
   - Loss: R3GAN-style objective — relativistic pairing (RpGAN) logistic loss
@@ -66,16 +66,19 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from lib.particle_prior import (  # noqa: E402
+from particlegan.particle_prior import (  # noqa: E402
     PRIOR_KINDS, ParticlePrior, canonical_prior_kind, make_prior,
 )
-from lib.gan_loss import GANLoss  # noqa: E402
-from lib.grad_regularizers import GradRegularizer  # noqa: E402
-from lib.vicreg_loss import VICRegLikeLoss  # noqa: E402
+from particlegan import get_recipe
+from particlegan.gan_loss import GANLoss  # noqa: E402
+from particlegan.grad_regularizers import GradRegularizer  # noqa: E402
+from particlegan.vicreg_loss import VICRegLikeLoss  # noqa: E402
 
 from lib.toy_models import (  # noqa: E402
     SimpleMLPGenerator, SimpleMLPDiscriminator, sample_100gaussians, mode_coverage,
 )
+
+_RECIPE = get_recipe("100gaussians")
 
 # =========================
 #  Visualization
@@ -135,31 +138,31 @@ def save_fake_scatter(
 # =========================
 
 def train(
-    epochs: int = 7,
+    epochs: int = _RECIPE.total_steps // 1000,
     steps_per_epoch: int = 1000,
-    batch_size: int = 256,
-    z_dim: int = 4,
-    num_particles: int = 20_000,
-    lr: float = 6e-4,
-    d_lr_mult: float = 1.5,
-    beta1: float = 0.0,
-    lambda_ep: float = 1.0,
-    reg_arm: str = "b_cap",
-    reg_coeff: float = 1.0,
+    batch_size: int = _RECIPE.batch_size,
+    z_dim: int = _RECIPE.z_dim,
+    num_particles: int = _RECIPE.num_particles,
+    lr: float = _RECIPE.lr,
+    d_lr_mult: float = _RECIPE.d_lr_mult,
+    beta1: float = _RECIPE.betas[0],
+    lambda_ep: float = _RECIPE.prior_reg,
+    reg_arm: str = _RECIPE.reg_arm,
+    reg_coeff: float = _RECIPE.reg_coeff,
     fourier: int = 2,
-    ema_decay: float = 0.995,
-    lr_floor: float = 0.05,
-    lr_anneal_start: float = 0.6,
-    loss_type: str = "logistic",
-    gan_mode: str = "rp",
+    ema_decay: float = _RECIPE.ema_decay,
+    lr_floor: float = _RECIPE.lr_floor,
+    lr_anneal_start: float = _RECIPE.lr_anneal_start,
+    loss_type: str = _RECIPE.loss_type,
+    gan_mode: str = _RECIPE.gan_mode,
     out_dir: str = "100gaussians_samples",
     log_interval: int = 100,
     snapshot_interval: int = 500,
     seed: int = 1234,
     device_str: str = None,
     prior_kind: str = "particles",
-    reg_method: str = "autograd",
-    reg_every: int = 1,
+    reg_method: str = _RECIPE.reg_method,
+    reg_every: int = _RECIPE.reg_every,
     reg_fd_eps: float = 0.05,
     reg_sync_stats: bool = True,
     fused_adam: bool = False,
@@ -215,16 +218,16 @@ def train(
     opt_G = torch.optim.Adam(
         G.parameters(),
         lr=lr,
-        betas=(beta1, 0.999), fused=fused_adam,
+        betas=(beta1, _RECIPE.betas[1]), fused=fused_adam,
     )
     opt_prior = (
-        torch.optim.Adam(prior.parameters(), lr=lr * 10.0, betas=(beta1, 0.999), fused=fused_adam)
+        torch.optim.Adam(prior.parameters(), lr=lr * _RECIPE.prior_lr_mult, betas=(beta1, _RECIPE.betas[1]), fused=fused_adam)
         if learnable_prior else None
     )
     opt_D = torch.optim.Adam(
         D.parameters(),
         lr=lr * d_lr_mult,
-        betas=(beta1, 0.999), fused=fused_adam,
+        betas=(beta1, _RECIPE.betas[1]), fused=fused_adam,
     )
 
     out_path = Path(out_dir)
@@ -415,28 +418,28 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         description="100 Gaussians: matched learned-table and Gaussian prior controls.",
     )
     parser.add_argument("--prior", choices=PRIOR_KINDS, default=default_prior)
-    parser.add_argument("--epochs", type=int, default=7)
+    parser.add_argument("--epochs", type=int, default=_RECIPE.total_steps // 1000)
     parser.add_argument("--steps_per_epoch", type=int, default=1000)
-    parser.add_argument("--batch_size", type=int, default=256)
-    parser.add_argument("--z_dim", type=int, default=4)
-    parser.add_argument("--num_particles", type=int, default=20_000)
-    parser.add_argument("--lr", type=float, default=6e-4)
-    parser.add_argument("--d_lr_mult", type=float, default=1.5)
-    parser.add_argument("--beta1", type=float, default=0.0)
-    parser.add_argument("--lambda_ep", type=float, default=1.0)
+    parser.add_argument("--batch_size", type=int, default=_RECIPE.batch_size)
+    parser.add_argument("--z_dim", type=int, default=_RECIPE.z_dim)
+    parser.add_argument("--num_particles", type=int, default=_RECIPE.num_particles)
+    parser.add_argument("--lr", type=float, default=_RECIPE.lr)
+    parser.add_argument("--d_lr_mult", type=float, default=_RECIPE.d_lr_mult)
+    parser.add_argument("--beta1", type=float, default=_RECIPE.betas[0])
+    parser.add_argument("--lambda_ep", type=float, default=_RECIPE.prior_reg)
     parser.add_argument(
         "--reg_arm",
         type=str,
-        default="b_cap",
+        default=_RECIPE.reg_arm,
         choices=list(GradRegularizer.ARMS),
-        help="Discriminator gradient penalty (lib.grad_regularizers). Default "
+        help="Discriminator gradient penalty (particlegan.grad_regularizers). Default "
         "'b_cap' is the one-sided cap that won the regularizer study; "
         "'a_r1r2' is the older zero-centered R1+R2 penalty.",
     )
     parser.add_argument(
         "--reg_coeff",
         type=float,
-        default=1.0,
+        default=_RECIPE.reg_coeff,
         help="Gradient penalty strength (0.02 was the tuned value for a_r1r2).",
     )
     parser.add_argument(
@@ -445,35 +448,35 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         default=None,
         help="Deprecated alias: sets --reg_arm a_r1r2 --reg_coeff <value>.",
     )
-    parser.add_argument("--reg_method", choices=("autograd", "finite_difference"), default="autograd")
-    parser.add_argument("--reg_every", type=int, default=1)
+    parser.add_argument("--reg_method", choices=("autograd", "finite_difference"), default=_RECIPE.reg_method)
+    parser.add_argument("--reg_every", type=int, default=_RECIPE.reg_every)
     parser.add_argument("--reg_fd_eps", type=float, default=.05)
     parser.add_argument("--reg_sync_stats", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--fused_adam", action="store_true")
     parser.add_argument("--fourier", type=int, default=2)
-    parser.add_argument("--ema_decay", type=float, default=0.995)
+    parser.add_argument("--ema_decay", type=float, default=_RECIPE.ema_decay)
     parser.add_argument(
         "--lr_floor",
         type=float,
-        default=0.05,
+        default=_RECIPE.lr_floor,
         help="Cosine LR anneal floor as a fraction of the base LRs.",
     )
     parser.add_argument(
         "--lr_anneal_start",
         type=float,
-        default=0.6,
+        default=_RECIPE.lr_anneal_start,
         help="Fraction of the run at full LR before the cosine anneal begins.",
     )
     parser.add_argument(
         "--loss_type",
         type=str,
-        default="logistic",
+        default=_RECIPE.loss_type,
         choices=["hinge", "wasserstein", "logistic", "lsgan"],
     )
     parser.add_argument(
         "--gan_mode",
         type=str,
-        default="rp",
+        default=_RECIPE.gan_mode,
         choices=["vanilla", "rp", "ra"],
     )
     parser.add_argument("--out_dir", type=str, default=default_out_dir)

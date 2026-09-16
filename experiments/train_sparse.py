@@ -53,10 +53,12 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from lib.particle_prior import ParticlePrior  # noqa: E402
-from lib.gan_loss import GANLoss  # noqa: E402
-from lib.vicreg_loss import VICRegLikeLoss  # noqa: E402
-from lib.grad_regularizers import GradRegularizer  # noqa: E402
+from experiments.config import read_config
+from particlegan import ucd_loss
+from particlegan.particle_prior import ParticlePrior  # noqa: E402
+from particlegan.gan_loss import GANLoss  # noqa: E402
+from particlegan.vicreg_loss import VICRegLikeLoss  # noqa: E402
+from particlegan.grad_regularizers import GradRegularizer  # noqa: E402
 from lib.sparse_toy import SparseMixedToy  # noqa: E402
 from lib.sparse_models import (  # noqa: E402
     SparseCondGenerator,
@@ -127,8 +129,7 @@ DEFAULTS: Dict = {
 def load_config(path: Optional[str]) -> Dict:
     cfg = dict(DEFAULTS)
     if path is not None:
-        with open(path) as f:
-            user = yaml.safe_load(f) or {}
+        user = read_config(path)
         unknown = set(user) - set(DEFAULTS)
         if unknown:
             raise ValueError(f"Unknown config keys: {sorted(unknown)}")
@@ -388,7 +389,7 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         loss_d = loss_d_gan
         ucd_ce = torch.zeros((), device=device)
         if ucd and ucd_lambda > 0:
-            ucd_ce = F.cross_entropy(dr["class_logits"], c_r) + F.cross_entropy(df["class_logits"], c_r)
+            ucd_ce = ucd_loss(dr["class_logits"], df["class_logits"], c_r, weight=1.0)
             loss_d = loss_d + ucd_lambda * ucd_ce
         # Keep joint interpolation locations identical in both ablations; the
         # critic can exclude the y derivative without changing the sampled y.

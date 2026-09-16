@@ -6,19 +6,19 @@ Run these commands from the repository root:
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev]'
+python -m pip install -e '.[experiments,dev]'
 python -m pip check
 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest -q
 ```
 
-`pyproject.toml` includes the dependencies needed by the experiment scripts,
+The `experiments` extra includes the dependencies needed by the experiment scripts,
 including PyYAML and POT (`import ot`) for exact transport evaluation. A CUDA
 installation of PyTorch is useful for full studies. For CPU-only work, install
 PyTorch from its CPU wheel index before installing the project:
 
 ```bash
 python -m pip install 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
-python -m pip install -e '.[dev]'
+python -m pip install -e '.[experiments,dev]'
 ```
 
 The tests exercise numerical gradient correctness, evaluation isolation, sparse

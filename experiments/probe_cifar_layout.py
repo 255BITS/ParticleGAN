@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from experiments.train_cifar_ddgan import DEFAULTS, load_cifar
 from lib.image_moonshots import build_models
-from lib.denoising_toy import DiffusionSchedule
+from particlegan.diffusion import DiffusionSchedule
 
 
 def relative(a, b):
@@ -32,7 +32,7 @@ def main():
     images, labels=load_cifar(cfg)
     c=labels[:8].cuda(); t=torch.arange(8,device='cuda')%4+1
     rng=torch.Generator(device='cuda').manual_seed(542)
-    real,xt=DiffusionSchedule(cfg['alpha_bar']).cuda().forward_pair(images[:8].cuda().float()/127.5-1,t,rng)
+    real,xt=DiffusionSchedule(cfg['alpha_bar'], validate_args=False).cuda().forward_pair(images[:8].cuda().float()/127.5-1,t,rng)
     results={}
     for tf32 in (False,True):
         torch.backends.cuda.matmul.allow_tf32=tf32

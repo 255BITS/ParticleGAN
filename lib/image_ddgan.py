@@ -4,6 +4,8 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+from particlegan import ucd_labels
+
 
 class ResBlock(nn.Module):
     def __init__(self, cin, cout, emb, normalize=True, affine_condition=True):
@@ -109,7 +111,7 @@ class ImageDiscriminator(nn.Module):
         self.output = nn.Linear(w*4*4*4, heads if self.mode == 'ucd' else 1)
 
     def ucd_labels(self, c, t):
-        return (t - 1) * self.classes + c if self.joint_ucd else c
+        return ucd_labels(c, t, num_classes=self.classes, target=self.ucd_target, validate_args=False)
 
     def forward(self, x, c, xt, t):
         e = x.new_zeros(len(x), self.emb_dim) if self.joint_ucd else self.time(t)

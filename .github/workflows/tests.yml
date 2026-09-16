@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python: ["3.11", "3.12"]
+        python: ["3.10", "3.11", "3.12"]
     env:
       CUDA_VISIBLE_DEVICES: ""
       MPLBACKEND: Agg
@@ -30,10 +30,16 @@ jobs:
           cache: pip
           cache-dependency-path: pyproject.toml
       - name: Install CPU PyTorch
-        run: python -m pip install 'torch>=2.6,<3' --index-url https://download.pytorch.org/whl/cpu
+        run: python -m pip install 'torch>=2.6,<3' 'torchvision>=0.21,<1' --index-url https://download.pytorch.org/whl/cpu
       - name: Install project and test dependencies
-        run: python -m pip install -e '.[dev]'
+        run: python -m pip install -e '.[dev,experiments,images]'
       - name: Validate dependency installation
         run: python -m pip check
       - name: Test numerical kernels and experiment workflows
         run: python -m pytest -q
+      - name: Build and smoke-test installed wheel outside checkout
+        run: |
+          python -m pip wheel --no-deps . --wheel-dir /tmp/particlegan-wheel
+          python -m pip install --no-deps --target /tmp/particlegan-installed /tmp/particlegan-wheel/*.whl
+          cd /tmp
+          PYTHONPATH=/tmp/particlegan-installed python -c "import particlegan; from particlegan import ParticlePrior, DDGAN, get_recipe; assert particlegan.__file__.startswith('/tmp/particlegan-installed/'); assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4); assert DDGAN().steps == 4; assert get_recipe().lr == 0.0006"

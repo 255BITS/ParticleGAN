@@ -63,10 +63,11 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from lib.particle_prior import ParticlePrior, canonical_prior_kind, make_prior
-from lib.gan_loss import GANLoss
-from lib.vicreg_loss import VICRegLikeLoss
-from lib.grad_regularizers import GradRegularizer, grad_norm_stats
+from experiments.config import read_config
+from particlegan.particle_prior import ParticlePrior, canonical_prior_kind, make_prior
+from particlegan.gan_loss import GANLoss
+from particlegan.vicreg_loss import VICRegLikeLoss
+from particlegan.grad_regularizers import GradRegularizer, grad_norm_stats
 from lib.game_jacobian import estimate_update_spectrum
 from lib.oadam import OptimisticAdam
 from lib.toy_models import (
@@ -147,11 +148,10 @@ W1_WINDOW = 10
 
 
 def load_config(path: Optional[str]) -> Dict:
-    """Read a YAML config and fill in any missing key from DEFAULTS."""
+    """Read a TOML or YAML config and fill in any missing key from DEFAULTS."""
     cfg = dict(DEFAULTS)
     if path is not None:
-        with open(path, "r") as f:
-            user = yaml.safe_load(f) or {}
+        user = read_config(path)
         unknown = set(user) - set(DEFAULTS)
         if unknown:
             raise ValueError(f"Unknown config keys: {sorted(unknown)}")
@@ -788,7 +788,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(
         description="Train one gradient-penalty arm on the 100-Gaussian benchmark.",
     )
-    parser.add_argument("--config", type=str, default=None, help="Path to config.yaml.")
+    parser.add_argument("--config", type=str, default=None, help="Path to config.toml or config.yaml.")
     parser.add_argument("--out_dir", type=str, default=None, help="Override config out_dir.")
     parser.add_argument("--device", type=str, default=None, help="e.g. 'cpu' or 'cuda:0'.")
     parser.add_argument("--seed", type=int, default=None, help="Override config seed.")

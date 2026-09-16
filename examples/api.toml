@@ -1,0 +1,9 @@
+# Passed directly to get_recipe(**config["particlegan"]).
+# Omitted fields keep the selected recipe's defaults.
+[particlegan]
+name = "100gaussians"
+z_dim = 4
+num_particles = 20000
+batch_size = 256
+lr = 0.0006
+betas = [0.0, 0.999]

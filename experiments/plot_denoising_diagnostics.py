@@ -4,12 +4,17 @@ import argparse
 import json
 import math
 from pathlib import Path
+import sys
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-import yaml
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from experiments.config import read_config
 
 
 def main():
@@ -18,7 +23,7 @@ def main():
     p.add_argument("--out", required=True)
     p.add_argument("--seed", type=int, default=24002)
     args = p.parse_args()
-    configs = [yaml.safe_load(Path(p).read_text()) for p in json.loads(Path(args.manifest).read_text())]
+    configs = [read_config(p) for p in json.loads(Path(args.manifest).read_text())]
     configs = [c for c in configs if c["seed"] == args.seed]
     rng = np.random.default_rng(723)
     ij = np.stack(np.meshgrid(np.arange(10), np.arange(10), indexing="ij"), -1).reshape(-1, 2)

@@ -12,15 +12,16 @@ import zipfile
 
 import numpy as np
 import torch
-from torch.nn import functional as F
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from lib.denoising_toy import DiffusionSchedule, DrawSource
-from lib.gan_loss import GANLoss
-from lib.grad_regularizers import GradRegularizer
-from lib.vicreg_loss import VICRegLikeLoss
+from experiments.config import read_config
+from particlegan import ucd_loss
+from particlegan.diffusion import DiffusionSchedule, DrawSource
+from particlegan.gan_loss import GANLoss
+from particlegan.grad_regularizers import GradRegularizer
+from particlegan.vicreg_loss import VICRegLikeLoss
 from lib.trajectory import Routes, TrajectoryGenerator, TrajectoryDiscriminator, TrajectoryCritic, generate, metrics
 from lib.trajectory_visuals import render
 
@@ -61,7 +62,7 @@ def validate(cfg):
             raise ValueError(key)
     if cfg["model"] == "gan" and cfg["noise"] != "gaussian":
         raise ValueError("step noise does not apply to a one-shot GAN")
-    DiffusionSchedule(cfg["alpha_bar"])
+    DiffusionSchedule(cfg["alpha_bar"], validate_args=False)
 
 
 def write_json(path, data):
@@ -97,7 +98,7 @@ def train(cfg):
     write_json(out / "environment.json", env)
     rngs = [torch.Generator(device=device).manual_seed(cfg["seed"] + i) for i in range(11, 17)]
     toy = Routes(cfg["length"], device, cfg["geometry_mode"])
-    schedule = DiffusionSchedule(cfg["alpha_bar"]).to(device)
+    schedule = DiffusionSchedule(cfg["alpha_bar"], validate_args=False).to(device)
     prior = DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"]+101, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2*cfg["length"], cfg["seed"]+102, device)
     g, d = TrajectoryGenerator(cfg).to(device), TrajectoryDiscriminator(cfg).to(device)
@@ -146,7 +147,7 @@ def train(cfg):
             ld = gan.d_loss(dr, df)
             if cfg["d_mode"] == "ucd" and cfg["ucd_lambda"]:
                 target = d.ucd_labels(c, t)
-                ld = ld + cfg["ucd_lambda"] * (F.cross_entropy(cr, target) + F.cross_entropy(cf, target))
+                ld = ld + ucd_loss(cr, cf, target, weight=cfg["ucd_lambda"])
             penalty, _ = reg.penalty(TrajectoryCritic(d, c, context, xt, t), real, xf, step, rngs[5], collect_stats=False)
             ld = ld + penalty
             opt_d.zero_grad(set_to_none=True)
@@ -229,7 +230,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default=str(ROOT / "configs/trajectory/default.yaml"))
     args = parser.parse_args()
-    user = yaml.safe_load(Path(args.config).read_text())
+    user = read_config(args.config)
     if not isinstance(user, dict) or set(user)-set(DEFAULTS):
         raise ValueError("Config must contain only known keys")
     train({**DEFAULTS, **user})

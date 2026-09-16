@@ -9,6 +9,8 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+from particlegan import ucd_labels
+
 
 class Routes:
     classes = 2
@@ -184,7 +186,7 @@ class TrajectoryDiscriminator(nn.Module):
             raise ValueError(self.architecture)
 
     def ucd_labels(self, c, t):
-        return (t - 1) * 2 + c if self.diffusion else c
+        return ucd_labels(c, t, num_classes=2, target="time_class" if self.diffusion else "class", validate_args=False)
 
     def forward(self, x, c, context, xt=None, t=None):
         if self.architecture in ("temporal", "hybrid"):

@@ -62,17 +62,17 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from lib.gan_loss import GANLoss
+from particlegan.gan_loss import GANLoss
 from lib.game_jacobian import estimate_update_spectrum
-from lib.grad_regularizers import GradRegularizer
-from lib.particle_prior import ParticlePrior
+from particlegan.grad_regularizers import GradRegularizer
+from particlegan.particle_prior import ParticlePrior
 from lib.toy_models import (
     SimpleMLPDiscriminator,
     SimpleMLPGenerator,
     mode_coverage,
     sample_100gaussians,
 )
-from lib.vicreg_loss import VICRegLikeLoss
+from particlegan.vicreg_loss import VICRegLikeLoss
 
 # --- the groups under audit -------------------------------------------------
 GROUPS: Sequence[str] = (

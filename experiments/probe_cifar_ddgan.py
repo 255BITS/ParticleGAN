@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from experiments.train_cifar_ddgan import load_cifar
 from lib.image_moonshots import build_models
-from lib.denoising_toy import DrawSource,DiffusionSchedule
+from particlegan.diffusion import DrawSource, DiffusionSchedule
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
         g.to(memory_format=torch.channels_last);d.to(memory_format=torch.channels_last)
     g.load_state_dict(ck['ema_G' if args.ema else 'G']);d.load_state_dict(ck['D'])
     prior=DrawSource(cfg['prior'],cfg['num_particles'],cfg['z_dim'],cfg['seed']+101,'cuda');prior.load_state_dict(ck['ema_prior' if args.ema else 'prior'])
-    schedule=DiffusionSchedule(cfg['alpha_bar']).cuda()
+    schedule=DiffusionSchedule(cfg['alpha_bar'], validate_args=False).cuda()
     x,c=load_cifar(cfg);x,c=x[:args.samples].cuda().float()/127.5-1,c[:args.samples].cuda()
     rng=torch.Generator('cuda').manual_seed(876)
     result={'step':ck['step'],'config':cfg,'weights':'ema' if args.ema else 'non_ema','samples':args.samples,'tf32':cfg['tf32'],'prior_std':float(prior.table.detach().std(0).mean()),'timesteps':[]}

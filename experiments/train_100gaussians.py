@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""YAML runner for the actual examples/100gaussians.py training loop."""
+"""TOML/YAML runner for the actual examples/100gaussians.py training loop."""
 import argparse
 import importlib.util
 import json
@@ -13,21 +13,24 @@ import torch
 import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+from experiments.config import read_config, recipe_defaults
 from experiments.train_denoising import json_safe, render, write_json
 from experiments.run_grid import code_provenance
 from lib.denoising_toy import GaussianGrid, grid_metrics
-from lib.grad_regularizers import GradRegularizer
+from particlegan.grad_regularizers import GradRegularizer
 
 DEFAULTS = {
-    'epochs': 7, 'steps_per_epoch': 1000, 'batch_size': 256, 'z_dim': 4,
-    'num_particles': 20000, 'lr': .0006, 'd_lr_mult': 1.5, 'beta1': 0.,
-    'lambda_ep': 1., 'reg_arm': 'b_cap', 'reg_coeff': 1., 'fourier': 2,
-    'ema_decay': .995, 'lr_floor': .05, 'lr_anneal_start': .6,
-    'loss_type': 'logistic', 'gan_mode': 'rp', 'log_interval': 1000,
-    'snapshot_interval': 1000000, 'seed': 1234, 'prior_kind': 'particles',
-    'reg_method': 'autograd', 'reg_every': 1, 'reg_fd_eps': .05,
-    'reg_sync_stats': True, 'fused_adam': False,
-    'final_samples': 20000, 'save_checkpoint': True,
+    **recipe_defaults('100gaussians'),
+    'fourier': 2,
+    'log_interval': 1000,
+    'snapshot_interval': 1000000,
+    'seed': 1234,
+    'prior_kind': 'particles',
+    'reg_fd_eps': 0.05,
+    'reg_sync_stats': True,
+    'fused_adam': False,
+    'final_samples': 20000,
+    'save_checkpoint': True,
     'out_dir': 'results/100gaussians/default',
 }
 
@@ -84,8 +87,8 @@ def train(cfg):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--config',required=True)
-    args=parser.parse_args();user=yaml.safe_load(Path(args.config).read_text())
+    parser.add_argument('--config', default=str(ROOT / 'configs/100gaussians/default.toml'))
+    args=parser.parse_args();user=read_config(args.config)
     if not isinstance(user,dict) or set(user)-set(DEFAULTS):
         raise ValueError('config must be a mapping with known keys')
     train({**DEFAULTS,**user})

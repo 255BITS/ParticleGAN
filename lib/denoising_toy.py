@@ -6,6 +6,8 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
+from particlegan import ucd_labels
+
 
 class GaussianGrid:
     def __init__(self, device="cpu", std=0.03, classes=4):
@@ -41,55 +43,7 @@ class GaussianGrid:
         return picked + var.reshape(-1, 1).sqrt() * torch.randn(xt.shape, device=xt.device, generator=rng)
 
 
-class DiffusionSchedule(nn.Module):
-    def __init__(self, alpha_bar):
-        super().__init__()
-        ab = torch.tensor(alpha_bar, dtype=torch.float32)
-        if len(ab) < 2 or ab[0] != 1 or not bool(((ab[1:] > 0) & (ab[1:] < ab[:-1])).all()):
-            raise ValueError("alpha_bar must start at 1 and decrease strictly, remaining positive")
-        al = ab[1:] / ab[:-1]
-        beta = 1 - al
-        self.steps = len(ab) - 1
-        self.register_buffer("ab", ab)
-        self.register_buffer("alpha", torch.cat([torch.ones(1), al]))
-        self.register_buffer("beta", torch.cat([torch.zeros(1), beta]))
-        self.register_buffer("A", torch.cat([torch.zeros(1), ab[:-1].sqrt() * beta / (1 - ab[1:])]))
-        self.register_buffer("B", torch.cat([torch.zeros(1), al.sqrt() * (1 - ab[:-1]) / (1 - ab[1:])]))
-        self.register_buffer("posterior_var", torch.cat([torch.zeros(1), beta * (1 - ab[:-1]) / (1 - ab[1:])]))
-
-    def forward_pair(self, x0, t, rng):
-        shape = (-1,) + (1,) * (x0.ndim - 1)
-        prev_a = self.ab[t - 1].reshape(shape)
-        prev = prev_a.sqrt() * x0 + (1 - prev_a).sqrt() * torch.randn(x0.shape, device=x0.device, generator=rng)
-        xt = self.alpha[t].reshape(shape).sqrt() * prev + self.beta[t].reshape(shape).sqrt() * torch.randn(x0.shape, device=x0.device, generator=rng)
-        return prev, xt
-
-    def reverse(self, x0, xt, t, eta):
-        shape = (-1,) + (1,) * (x0.ndim - 1)
-        return self.A[t].reshape(shape) * x0 + self.B[t].reshape(shape) * xt + self.posterior_var[t].reshape(shape).sqrt() * eta
-
-
-class DrawSource(nn.Module):
-    """Fresh Gaussian or uniform draws from a fixed/learned independent table."""
-    def __init__(self, kind, count, dim, seed, device):
-        super().__init__()
-        if kind not in ("gaussian", "fixed", "learned", "zero"):
-            raise ValueError(f"unknown source {kind}")
-        self.kind, self.dim = kind, dim
-        init_rng = torch.Generator(device=device).manual_seed(seed)
-        table = torch.randn((count, dim), generator=init_rng, device=device)
-        if kind == "learned":
-            self.table = nn.Parameter(table)
-        else:
-            self.register_buffer("table", table)
-
-    def sample(self, n, rng):
-        if self.kind == "gaussian":
-            return torch.randn((n, self.dim), device=self.table.device, generator=rng), None
-        if self.kind == "zero":
-            return self.table.new_zeros(n, self.dim), None
-        ids = torch.randint(len(self.table), (n,), device=self.table.device, generator=rng)
-        return self.table[ids], ids
+from particlegan.diffusion import DiffusionSchedule, DrawSource
 
 
 def mlp(in_dim, width, depth, out_dim):
@@ -148,7 +102,8 @@ class ToyDiscriminator(nn.Module):
 
     def ucd_labels(self, c, t):
         """Shared head index for adversarial selection and UCD classification."""
-        return (t - 1) * self.classes + c if self.joint_ucd else c
+        # Trainers generate valid labels/times; avoid a GPU range-check sync per forward.
+        return ucd_labels(c, t, num_classes=self.classes, target=self.ucd_target, validate_args=False)
 
     def forward(self, x, c, xt=None, t=None):
         xf = x[:, :, None] * self.freqs

@@ -18,43 +18,49 @@ import zipfile
 
 import numpy as np
 import torch
-from torch.nn import functional as F
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from experiments.config import read_config, recipe_defaults
+from particlegan import get_recipe, ucd_loss
+from particlegan.diffusion import DiffusionSchedule, DrawSource
 from lib.denoising_toy import (
-    GaussianGrid, DiffusionSchedule, DrawSource, ToyGenerator, ToyDiscriminator,
-    FixedConditionCritic, generate, grid_metrics, conditional_probe,
+    GaussianGrid, ToyGenerator, ToyDiscriminator, FixedConditionCritic,
+    generate, grid_metrics, conditional_probe,
 )
-from lib.gan_loss import GANLoss
-from lib.grad_regularizers import GradRegularizer
-from lib.vicreg_loss import VICRegLikeLoss
+from particlegan.gan_loss import GANLoss
+from particlegan.grad_regularizers import GradRegularizer
+from particlegan.vicreg_loss import VICRegLikeLoss
 
 
 DEFAULTS = {
-    "model": "ddgan", "d_mode": "ucd", "prior": "learned", "noise": "gaussian",
-    "ucd_target": "class",
-    "seed": 24002, "classes": 4, "std": 0.03,
-    "alpha_bar": [1.0, 0.9, 0.5, 0.05, 0.0001],
-    "z_dim": 4, "num_particles": 20000, "noise_particles": 1024,
-    "hidden": 128, "depth": 3, "fourier": 2,
-    "steps": 56000, "batch_size": 256, "lr": 0.0006, "d_lr_mult": 1.5,
-    "prior_lr_mult": 10.0, "noise_lr_mult": 1.0, "beta1": 0.0,
-    "prior_reg": 1.0, "noise_reg": 0.0,
-    "reg_arm": "b_cap", "reg_coeff": 1.0, "reg_kappa": 1.0,
-    "reg_method": "autograd", "reg_every": 1, "reg_fd_eps": 0.05,
-    "reg_sync_stats": True, "fused_adam": False,
-    "gan_mode": "rp", "loss_type": "logistic", "ucd_lambda": 0.02,
-    "drop_xt": False, "ema": 0.995, "lr_anneal_start": 0.6, "lr_floor": 0.05,
-    "eval_interval": 1000, "eval_samples": 8192, "final_samples": 20000,
-    "probe_samples": 256, "save_checkpoint": True,
-    "out_dir": "results/denoising/ddgan_ucd",
+    **recipe_defaults('denoising'),
+    'prior': 'learned',
+    'noise': 'gaussian',
+    'seed': 24002,
+    'std': 0.03,
+    'noise_particles': 1024,
+    'hidden': 128,
+    'depth': 3,
+    'fourier': 2,
+    'noise_lr_mult': 1.0,
+    'noise_reg': 0.0,
+    'reg_fd_eps': 0.05,
+    'reg_sync_stats': True,
+    'fused_adam': False,
+    'drop_xt': False,
+    'eval_interval': 1000,
+    'eval_samples': 8192,
+    'final_samples': 20000,
+    'probe_samples': 256,
+    'save_checkpoint': True,
+    'out_dir': 'results/denoising/ddgan_ucd',
 }
 
-DEFAULT_CONFIG = ROOT / "configs" / "denoising" / "ddgan_ucd.yaml"
+DEFAULT_CONFIG = ROOT / "configs" / "denoising" / "default.toml"
 
 
 def validate(cfg):
@@ -161,7 +167,8 @@ def train(cfg):
     rngs = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
             for name, offset in (("data", 11), ("time", 12), ("corruption", 13), ("latent", 14), ("noise", 15), ("penalty", 16))}
     toy = GaussianGrid(device, cfg["std"], cfg["classes"])
-    schedule = DiffusionSchedule(cfg["alpha_bar"]).to(device)
+    # Training creates bounded integer times; retain the original sync-free hot path.
+    schedule = DiffusionSchedule(cfg["alpha_bar"], validate_args=False).to(device)
     # Independent initialization preserves identical tables across architecture changes.
     prior = DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"] + 101, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2, cfg["seed"] + 102, device)
@@ -174,8 +181,9 @@ def train(cfg):
         groups.append({"params": list(prior.parameters()), "lr": cfg["lr"] * cfg["prior_lr_mult"]})
     if cfg["noise"] == "learned":
         groups.append({"params": list(noise.parameters()), "lr": cfg["lr"] * cfg["noise_lr_mult"]})
-    opt_g = torch.optim.Adam(groups, betas=(cfg["beta1"], .999), fused=cfg.get("fused_adam", False))
-    opt_d = torch.optim.Adam(d.parameters(), lr=cfg["lr"] * cfg["d_lr_mult"], betas=(cfg["beta1"], .999), fused=cfg.get("fused_adam", False))
+    betas = (cfg["beta1"], get_recipe("denoising").betas[1])
+    opt_g = torch.optim.Adam(groups, betas=betas, fused=cfg.get("fused_adam", False))
+    opt_d = torch.optim.Adam(d.parameters(), lr=cfg["lr"] * cfg["d_lr_mult"], betas=betas, fused=cfg.get("fused_adam", False))
     bases = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     gan = GANLoss(cfg["loss_type"], cfg["gan_mode"])
     reg = GradRegularizer(cfg["reg_arm"], cfg["reg_coeff"], kappa=cfg["reg_kappa"],
@@ -238,7 +246,7 @@ def train(cfg):
             loss_d = gan.d_loss(dr, df)
             if cfg["d_mode"] == "ucd" and cfg["ucd_lambda"]:
                 targets = d.ucd_labels(c, t)
-                loss_d = loss_d + cfg["ucd_lambda"] * (F.cross_entropy(cr, targets) + F.cross_entropy(cf, targets))
+                loss_d = loss_d + ucd_loss(cr, cf, targets, weight=cfg["ucd_lambda"])
             penalty, _ = reg.penalty(FixedConditionCritic(d, c, xt, t), real, xf, step, rngs["penalty"], collect_stats=cfg.get("reg_sync_stats", True))
             loss_d = loss_d + penalty
             opt_d.zero_grad(set_to_none=True)
@@ -314,9 +322,9 @@ def train(cfg):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", default=str(DEFAULT_CONFIG),
-                        help="YAML overrides (default: configs/denoising/ddgan_ucd.yaml)")
+                        help="TOML/YAML overrides (default: configs/denoising/default.toml)")
     args = parser.parse_args()
-    user = yaml.safe_load(Path(args.config).read_text())
+    user = read_config(args.config)
     if not isinstance(user, dict) or (set(user) - set(DEFAULTS)):
         raise ValueError("config must be a mapping with only known keys")
     train({**DEFAULTS, **user})

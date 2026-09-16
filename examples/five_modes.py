@@ -56,10 +56,10 @@ _REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
-from lib.particle_prior import ParticlePrior  # noqa: E402 - after the sys.path shim
-from lib.gan_loss import GANLoss  # noqa: E402
-from lib.grad_regularizers import GradRegularizer  # noqa: E402
-from lib.vicreg_loss import VICRegLikeLoss  # noqa: E402
+from particlegan.particle_prior import ParticlePrior  # noqa: E402 - after the sys.path shim
+from particlegan.gan_loss import GANLoss  # noqa: E402
+from particlegan.grad_regularizers import GradRegularizer  # noqa: E402
+from particlegan.vicreg_loss import VICRegLikeLoss  # noqa: E402
 
 # ==========================================
 # 1. Setup & Data
