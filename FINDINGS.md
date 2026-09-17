@@ -114,3 +114,41 @@ core-ratio estimator), `experiments/train_arm.py` (per-run `ckpt.pt` + `final_sa
 bakeoff,curriculum}`, `experiments/run_grid.py`, `experiments/analyze.py`,
 `experiments/leaderboard.py`, `experiments/provenance.py`, `experiments/metric_recon.py`.
 Raw runs in `results/runs*/` (gitignored, on disk).
+
+## Draft: fixed-sigma MoG prior — Stage 0 gate (2026-09-16)
+
+Stage 0 only, three seeds (1–3), 7k steps, 200k final EMA samples per run and
+matched real references. Full [report and deviations](results/mog/STAGE0.md),
+[results CSV](results/mog/results.csv), and [traces plot](results/mog/stage0_traces.png).
+No small-N sweep has run; predictions 1–7 are **inconclusive** pending their
+specified comparisons.
+
+C0 regression passes **3/3**: all 70 original log entries per seed and every final
+EMA generator tensor plus the particle table are bit-identical to pre-change
+`af1843a`. The measured code is `5db6d3a`; the new prior uses sigma=0 and no
+standardization for this control.
+
+| Reference | Pass rate | HQ / real | Core width / real | HQ-only KL |
+|---|---:|---:|---:|---:|
+| C0: 20k learned atoms | 0/3 | 0.99978 ± 0.00107 | 0.84343 ± 0.04312 | 0.03478 ± 0.00195 |
+| C1: fresh Gaussian | 0/3 | 0.06069 ± 0.00310 | 10.18916 ± 0.04109 | 0.39484 ± 0.02837 |
+
+C0 covers all 100 modes and crosses the old coverage bar at step 5500 in every
+seed, but fails the stricter width and balance criteria. Evaluating each of its
+20k atoms exactly once gives KL **0.03684 / 0.03361 / 0.03303**: the imbalance
+is in the learned distribution, not eval sampling noise. Fair-share-normalized
+mode shares range from **0.465–0.526** at the minimum to **1.650–1.798** at the maximum.
+Historical `hist_kl` includes bridge samples; applying that estimator directly
+to the reproduced pre-change 20k-sample outputs gives **0.03498 / 0.03221 / 0.03240**.
+These are current-recipe reproductions, not recovered historical study scores.
+
+The simulated allocation-null KL means are **0.56891 / 0.28368 / 0.13208** for
+N=100/200/400 (1,000 draws each); mean empty-mode counts are 36.557/13.526/1.829.
+The historical core-width estimator is reused exactly (median radius around
+per-mode coordinate medians, no HQ truncation), with same-size real normalization.
+
+Recommendation: **go to the Stage 1 optimizer pilot**, retaining the stricter
+pass criterion; do not equate matching C0's HQ with passing. Its balance and width
+leave room for a useful result. This is a recommendation only: later stages are
+paused for the owner's decision. The six Stage 0 runs took 3.4 minutes on two
+A6000s; C0 averaged 70.2 seconds/run including the new metric suite.
