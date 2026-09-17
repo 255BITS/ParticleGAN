@@ -1,0 +1,4353 @@
+{
+  "evaluation_only": true,
+  "protocol": {
+    "split_sizes": {
+      "train": 2048,
+      "validation": 512,
+      "test": 1024
+    },
+    "prefix": 32,
+    "depths": [
+      0,
+      1,
+      8,
+      32,
+      128
+    ],
+    "memory": "Mg",
+    "targets": [
+      "radius",
+      "signed_angular_speed"
+    ],
+    "distribution": "Independent center uniform[-.75,.75]^2, radius uniform[.6,1.4], phase uniform[0,2pi], signed speed magnitude uniform[.12,.40], observation noise std .03.",
+    "episodes": "Successive fresh independent episodes from one diagnostic RNG seed 9174301, disjoint across train/validation/test; same panels across checkpoints. No training histories reused. Not a GAN seed experiment.",
+    "particles": "Uniform independent draws from saved learned 512-particle table; fixed z per episode. Probe episodes are held out, particles are not.",
+    "normalization": "Probe train only. Ridge regularization and nonlinear checkpoint selected using validation standardized MSE. Test used only for final reporting.",
+    "nonlinear": "64-SiLU-64-SiLU-2, AdamW lr .003 decay .001, full batch, 250 epochs, validation every10.",
+    "teacher_control": "Real observations continue through matching depths; all process parameters remain in training support, but histories after63 exceed training length.",
+    "interpretation": "Depth n is after n generated writes. Separate per-depth/domain probes assess decodability; real-trained transfer assesses representation compatibility. Probe failure does not prove information absence. M+z tests simple entanglement. Probe capacity is not exhaustive; compare clean baseline calibration. Regression losses belong only to evaluation probes, never GAN training."
+  },
+  "source_sha256": "92b5995613f89ffb7b12556fbded2877cbd11d909d9af7bea92afbc474d88b2c",
+  "split_hashes": {
+    "train": "0108878b26825732fc253b53390060d40444c9c1091abc7a76dd25c8e31d4e2a",
+    "validation": "84d7237382dd55a447966cff175cb1e148cacee060a6d51f49813f4ae2878d65",
+    "test": "08958d018dc4cbfeb12da7f9f8cfb1dd246e29010d8dc6649a11585920668484"
+  },
+  "results": [
+    {
+      "name": "embedded8",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/state_round18/runs/embedded8",
+      "checkpoint_sha256": "dce897dc60d36bdfe91fb1de4cba9b9498e3c20c0d892729f96bc1b960b986a1",
+      "rows": [
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8748351500470655
+          },
+          "test": {
+            "radius_r2": 0.18963310567238179,
+            "radius_mae": 0.1791642995955213,
+            "signed_speed_r2": 0.05625624578724853,
+            "signed_speed_mae": 0.24533383177004314,
+            "direction_accuracy": 0.5693359375,
+            "speed_magnitude_mae": 0.2179044264232256
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.18963310567238179,
+            "radius_mae": 0.1791642995955213,
+            "signed_speed_r2": 0.05625624578724853,
+            "signed_speed_mae": 0.24533383177004314,
+            "direction_accuracy": 0.5693359375,
+            "speed_magnitude_mae": 0.2179044264232256
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3752344846725464
+          },
+          "test": {
+            "radius_r2": 0.4409160422735581,
+            "radius_mae": 0.14222135744057596,
+            "signed_speed_r2": 0.8788529920618832,
+            "signed_speed_mae": 0.06876726978543957,
+            "direction_accuracy": 0.9873046875,
+            "speed_magnitude_mae": 0.06768941544987683
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.4409160422735581,
+            "radius_mae": 0.14222135744057596,
+            "signed_speed_r2": 0.8788529920618832,
+            "signed_speed_mae": 0.06876726978543957,
+            "direction_accuracy": 0.9873046875,
+            "speed_magnitude_mae": 0.06768941544987683
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 170,
+            "validation_standardized_mse": 0.409621000289917
+          },
+          "test": {
+            "radius_r2": 0.40728926565280454,
+            "radius_mae": 0.1466030435403809,
+            "signed_speed_r2": 0.8566024390881508,
+            "signed_speed_mae": 0.07648756606249663,
+            "direction_accuracy": 0.9892578125,
+            "speed_magnitude_mae": 0.0758251829774963
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.40728926565280454,
+            "radius_mae": 0.1466030435403809,
+            "signed_speed_r2": 0.8566024390881508,
+            "signed_speed_mae": 0.07648756606249663,
+            "direction_accuracy": 0.9892578125,
+            "speed_magnitude_mae": 0.0758251829774963
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8748351500470655
+          },
+          "test": {
+            "radius_r2": 0.18963310567238179,
+            "radius_mae": 0.1791642995955213,
+            "signed_speed_r2": 0.05625624578724853,
+            "signed_speed_mae": 0.24533383177004314,
+            "direction_accuracy": 0.5693359375,
+            "speed_magnitude_mae": 0.2179044264232256
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3752344846725464
+          },
+          "test": {
+            "radius_r2": 0.4409160422735581,
+            "radius_mae": 0.14222135744057596,
+            "signed_speed_r2": 0.8788529920618832,
+            "signed_speed_mae": 0.06876726978543957,
+            "direction_accuracy": 0.9873046875,
+            "speed_magnitude_mae": 0.06768941544987683
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 170,
+            "validation_standardized_mse": 0.409621000289917
+          },
+          "test": {
+            "radius_r2": 0.40728926565280454,
+            "radius_mae": 0.1466030435403809,
+            "signed_speed_r2": 0.8566024390881508,
+            "signed_speed_mae": 0.07648756606249663,
+            "direction_accuracy": 0.9892578125,
+            "speed_magnitude_mae": 0.0758251829774963
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8613564513374957
+          },
+          "test": {
+            "radius_r2": 0.19107061321822982,
+            "radius_mae": 0.17868210931911263,
+            "signed_speed_r2": 0.05878785211164683,
+            "signed_speed_mae": 0.24507797325216238,
+            "direction_accuracy": 0.58984375,
+            "speed_magnitude_mae": 0.21578671659170665
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.2143304664549185,
+            "radius_mae": 0.17615311086541652,
+            "signed_speed_r2": 0.059079584222333614,
+            "signed_speed_mae": 0.24497705314290374,
+            "direction_accuracy": 0.59375,
+            "speed_magnitude_mae": 0.21566607500892226
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3754420280456543
+          },
+          "test": {
+            "radius_r2": 0.4250339086012822,
+            "radius_mae": 0.1444423645734787,
+            "signed_speed_r2": 0.88187310054,
+            "signed_speed_mae": 0.06708799072885085,
+            "direction_accuracy": 0.9853515625,
+            "speed_magnitude_mae": 0.06596600434340871
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.39441288818474407,
+            "radius_mae": 0.1486866754712537,
+            "signed_speed_r2": 0.8547321741448122,
+            "signed_speed_mae": 0.07546394242922361,
+            "direction_accuracy": 0.9794921875,
+            "speed_magnitude_mae": 0.07396253284719023
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 160,
+            "validation_standardized_mse": 0.4104090929031372
+          },
+          "test": {
+            "radius_r2": 0.3976128845215767,
+            "radius_mae": 0.14759291033260524,
+            "signed_speed_r2": 0.8566433010157938,
+            "signed_speed_mae": 0.07690781225937826,
+            "direction_accuracy": 0.9833984375,
+            "speed_magnitude_mae": 0.07621308525267523
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.3667886217079066,
+            "radius_mae": 0.15204203821485862,
+            "signed_speed_r2": 0.830381533769729,
+            "signed_speed_mae": 0.084143015950076,
+            "direction_accuracy": 0.9755859375,
+            "speed_magnitude_mae": 0.08304042688791924
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.0001,
+            "validation_standardized_mse": 0.8591812112912304
+          },
+          "test": {
+            "radius_r2": 0.2202652356028253,
+            "radius_mae": 0.17492474121730534,
+            "signed_speed_r2": 0.07936892943883611,
+            "signed_speed_mae": 0.23751447817997712,
+            "direction_accuracy": 0.580078125,
+            "speed_magnitude_mae": 0.19948446428550937
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.4045599102973938
+          },
+          "test": {
+            "radius_r2": 0.40226228429452426,
+            "radius_mae": 0.14825668890262023,
+            "signed_speed_r2": 0.8566710033096953,
+            "signed_speed_mae": 0.0753442386212555,
+            "direction_accuracy": 0.9814453125,
+            "speed_magnitude_mae": 0.07417389373586047
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 210,
+            "validation_standardized_mse": 0.43145930767059326
+          },
+          "test": {
+            "radius_r2": 0.35966166191339,
+            "radius_mae": 0.15182280878070742,
+            "signed_speed_r2": 0.8424459468463088,
+            "signed_speed_mae": 0.08066524304331324,
+            "direction_accuracy": 0.9794921875,
+            "speed_magnitude_mae": 0.07954971649587605
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8052790147904054
+          },
+          "test": {
+            "radius_r2": 0.171642303099371,
+            "radius_mae": 0.17893012847632314,
+            "signed_speed_r2": 0.02678757682559907,
+            "signed_speed_mae": 0.24734665053646102,
+            "direction_accuracy": 0.51953125,
+            "speed_magnitude_mae": 0.20355314463021618
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.12358950757100184,
+            "radius_mae": 0.18535166360717215,
+            "signed_speed_r2": 0.073107631619447,
+            "signed_speed_mae": 0.2396179787549428,
+            "direction_accuracy": 0.5703125,
+            "speed_magnitude_mae": 0.20375335898427832
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 220,
+            "validation_standardized_mse": 0.3557601273059845
+          },
+          "test": {
+            "radius_r2": 0.3931793055247911,
+            "radius_mae": 0.14758597506443039,
+            "signed_speed_r2": 0.8820878127068207,
+            "signed_speed_mae": 0.06860971745390998,
+            "direction_accuracy": 0.98046875,
+            "speed_magnitude_mae": 0.06628462872595264
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.03321139656141503,
+            "radius_mae": 0.18682516540866345,
+            "signed_speed_r2": 0.31746174088890855,
+            "signed_speed_mae": 0.1729180885272399,
+            "direction_accuracy": 0.767578125,
+            "speed_magnitude_mae": 0.12237997800730227
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 120,
+            "validation_standardized_mse": 0.3855043649673462
+          },
+          "test": {
+            "radius_r2": 0.32519650589113913,
+            "radius_mae": 0.1581513023120351,
+            "signed_speed_r2": 0.8516150113983482,
+            "signed_speed_mae": 0.07981786620393905,
+            "direction_accuracy": 0.9794921875,
+            "speed_magnitude_mae": 0.07798045282606836
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.036698793195532264,
+            "radius_mae": 0.1876797141158022,
+            "signed_speed_r2": 0.338376469974344,
+            "signed_speed_mae": 0.1741893739117586,
+            "direction_accuracy": 0.7578125,
+            "speed_magnitude_mae": 0.12853841242304043
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8900790129849439
+          },
+          "test": {
+            "radius_r2": 0.1548078283144233,
+            "radius_mae": 0.18308213852967353,
+            "signed_speed_r2": 0.08900374198745353,
+            "signed_speed_mae": 0.2354853115613298,
+            "direction_accuracy": 0.5791015625,
+            "speed_magnitude_mae": 0.19839124522540919
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.6416001915931702
+          },
+          "test": {
+            "radius_r2": 0.2629779767109466,
+            "radius_mae": 0.16797227220376953,
+            "signed_speed_r2": 0.5193005129647492,
+            "signed_speed_mae": 0.1496668095505811,
+            "direction_accuracy": 0.8359375,
+            "speed_magnitude_mae": 0.12725087738590446
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 200,
+            "validation_standardized_mse": 0.6234593391418457
+          },
+          "test": {
+            "radius_r2": 0.24929251530352303,
+            "radius_mae": 0.16618940624175593,
+            "signed_speed_r2": 0.5800618920181924,
+            "signed_speed_mae": 0.1375365297344615,
+            "direction_accuracy": 0.8603515625,
+            "speed_magnitude_mae": 0.11927088936499786
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8170291239623864
+          },
+          "test": {
+            "radius_r2": 0.2107898696661188,
+            "radius_mae": 0.17705909040322235,
+            "signed_speed_r2": 0.02536554567276017,
+            "signed_speed_mae": 0.24601293854856066,
+            "direction_accuracy": 0.5458984375,
+            "speed_magnitude_mae": 0.20648756596849854
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.11334700887610727,
+            "radius_mae": 0.20539167820095305,
+            "signed_speed_r2": -0.06452435054739225,
+            "signed_speed_mae": 0.25743962682002464,
+            "direction_accuracy": 0.5283203125,
+            "speed_magnitude_mae": 0.21111661180821012
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.36194735765457153
+          },
+          "test": {
+            "radius_r2": 0.43289632099716235,
+            "radius_mae": 0.14347864681622013,
+            "signed_speed_r2": 0.8768902127607199,
+            "signed_speed_mae": 0.06970200554997064,
+            "direction_accuracy": 0.978515625,
+            "speed_magnitude_mae": 0.06821330075263177
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.2807568950814572,
+            "radius_mae": 0.21339654794428498,
+            "signed_speed_r2": -0.3585444727975051,
+            "signed_speed_mae": 0.2558136873933563,
+            "direction_accuracy": 0.55859375,
+            "speed_magnitude_mae": 0.12874701983105297
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 200,
+            "validation_standardized_mse": 0.3843896985054016
+          },
+          "test": {
+            "radius_r2": 0.4013335387181104,
+            "radius_mae": 0.14701910741860047,
+            "signed_speed_r2": 0.8518034927035409,
+            "signed_speed_mae": 0.07844869664472753,
+            "direction_accuracy": 0.9814453125,
+            "speed_magnitude_mae": 0.076545884352754
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.2336422225856456,
+            "radius_mae": 0.2107060236739926,
+            "signed_speed_r2": -0.3715349441210136,
+            "signed_speed_mae": 0.2571507242610096,
+            "direction_accuracy": 0.564453125,
+            "speed_magnitude_mae": 0.13131026125483913
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.9383508362498307
+          },
+          "test": {
+            "radius_r2": 0.03203001104958603,
+            "radius_mae": 0.19732016918382705,
+            "signed_speed_r2": -0.008973549549962545,
+            "signed_speed_mae": 0.25708826823649344,
+            "direction_accuracy": 0.498046875,
+            "speed_magnitude_mae": 0.23495644751286354
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 130,
+            "validation_standardized_mse": 0.9202771186828613
+          },
+          "test": {
+            "radius_r2": 0.06488178598105898,
+            "radius_mae": 0.1918799842824228,
+            "signed_speed_r2": 0.0008809956040864986,
+            "signed_speed_mae": 0.24892357647422614,
+            "direction_accuracy": 0.5478515625,
+            "speed_magnitude_mae": 0.20513056203662927
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 20,
+            "validation_standardized_mse": 0.9265122413635254
+          },
+          "test": {
+            "radius_r2": 0.04403650714950391,
+            "radius_mae": 0.19543502223677933,
+            "signed_speed_r2": -0.008386810934420286,
+            "signed_speed_mae": 0.2553756645950216,
+            "direction_accuracy": 0.5263671875,
+            "speed_magnitude_mae": 0.22752997734164637
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.851225370474182
+          },
+          "test": {
+            "radius_r2": 0.19359624901146044,
+            "radius_mae": 0.1785829600467203,
+            "signed_speed_r2": 0.042236848248918824,
+            "signed_speed_mae": 0.24562433772960743,
+            "direction_accuracy": 0.5400390625,
+            "speed_magnitude_mae": 0.20940511331500372
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.3590855847842984,
+            "radius_mae": 0.23114420216435771,
+            "signed_speed_r2": -0.23752333654578317,
+            "signed_speed_mae": 0.26520492676942986,
+            "direction_accuracy": 0.4736328125,
+            "speed_magnitude_mae": 0.1499020215388142
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3710249066352844
+          },
+          "test": {
+            "radius_r2": 0.43246053451478816,
+            "radius_mae": 0.14376012491993606,
+            "signed_speed_r2": 0.8827165248895472,
+            "signed_speed_mae": 0.06841116149871596,
+            "direction_accuracy": 0.98046875,
+            "speed_magnitude_mae": 0.06679792336990431
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.8086527557047298,
+            "radius_mae": 0.2611406129435636,
+            "signed_speed_r2": -0.632478318960529,
+            "signed_speed_mae": 0.28708566165414595,
+            "direction_accuracy": 0.4931640625,
+            "speed_magnitude_mae": 0.13511933916242924
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 180,
+            "validation_standardized_mse": 0.4005253314971924
+          },
+          "test": {
+            "radius_r2": 0.38930977394692856,
+            "radius_mae": 0.1492127256351523,
+            "signed_speed_r2": 0.8545799302185928,
+            "signed_speed_mae": 0.07747235086799265,
+            "direction_accuracy": 0.9794921875,
+            "speed_magnitude_mae": 0.0760638189835845
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.6740709376490119,
+            "radius_mae": 0.2521638179314323,
+            "signed_speed_r2": -0.5121342649527882,
+            "signed_speed_mae": 0.28312845789491803,
+            "direction_accuracy": 0.4833984375,
+            "speed_magnitude_mae": 0.15342461296791043
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 10.0,
+            "validation_standardized_mse": 0.9509047245096032
+          },
+          "test": {
+            "radius_r2": -0.0044494927172253895,
+            "radius_mae": 0.2026382364289392,
+            "signed_speed_r2": -0.002638313256385638,
+            "signed_speed_mae": 0.25764164522646715,
+            "direction_accuracy": 0.4775390625,
+            "speed_magnitude_mae": 0.2534192181753929
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9546838402748108
+          },
+          "test": {
+            "radius_r2": -0.014267093156366872,
+            "radius_mae": 0.20360996219096705,
+            "signed_speed_r2": -0.007352721578489874,
+            "signed_speed_mae": 0.2576110503698601,
+            "direction_accuracy": 0.505859375,
+            "speed_magnitude_mae": 0.2478055223903084
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9538419246673584
+          },
+          "test": {
+            "radius_r2": -0.009845773965163396,
+            "radius_mae": 0.20329112792387605,
+            "signed_speed_r2": -0.0069319777926162285,
+            "signed_speed_mae": 0.25758253445428636,
+            "direction_accuracy": 0.4892578125,
+            "speed_magnitude_mae": 0.24154307676826647
+          }
+        }
+      ],
+      "controls": {
+        "z": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9513025283813477
+          },
+          "test": {
+            "radius_r2": -0.006303861191237603,
+            "radius_mae": 0.20257992763072252,
+            "signed_speed_r2": -0.0035360301131555083,
+            "signed_speed_mae": 0.257723138569645,
+            "direction_accuracy": 0.486328125,
+            "speed_magnitude_mae": 0.249583633451266
+          }
+        },
+        "shuffled_M": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9531422853469849
+          },
+          "test": {
+            "radius_r2": -0.010649395764846137,
+            "radius_mae": 0.20328198262723163,
+            "signed_speed_r2": 0.0004602334838427202,
+            "signed_speed_mae": 0.2566485547488355,
+            "direction_accuracy": 0.5341796875,
+            "speed_magnitude_mae": 0.24203811442953338
+          }
+        },
+        "oracle_labels": {
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 9.51057144345307e-13
+          },
+          "test": {
+            "radius_r2": 0.999999999998994,
+            "radius_mae": 2.0272370154013775e-07,
+            "signed_speed_r2": 0.9999999999989957,
+            "signed_speed_mae": 2.5780226234498407e-07,
+            "direction_accuracy": 1.0,
+            "speed_magnitude_mae": 2.5780226234498407e-07
+          }
+        },
+        "train_mean": {
+          "radius_r2": -0.004840322815056641,
+          "radius_mae": 0.2026771673699841,
+          "signed_speed_r2": -0.002308575979730332,
+          "signed_speed_mae": 0.25768050268834486,
+          "direction_accuracy": 0.4775390625,
+          "speed_magnitude_mae": 0.25324712986912346
+        }
+      }
+    },
+    {
+      "name": "embedded8_dclock",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/state_round18/runs/embedded8_dclock",
+      "checkpoint_sha256": "ea646d1f00d25e97805c15b7d9aff4385c88630ffcfd3d4ecff893f5e4ec213f",
+      "rows": [
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8673935916741324
+          },
+          "test": {
+            "radius_r2": 0.192692522401128,
+            "radius_mae": 0.17899400754911338,
+            "signed_speed_r2": 0.0742889381881906,
+            "signed_speed_mae": 0.24265789700799079,
+            "direction_accuracy": 0.6416015625,
+            "speed_magnitude_mae": 0.21546899400286215
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.192692522401128,
+            "radius_mae": 0.17899400754911338,
+            "signed_speed_r2": 0.0742889381881906,
+            "signed_speed_mae": 0.24265789700799079,
+            "direction_accuracy": 0.6416015625,
+            "speed_magnitude_mae": 0.21546899400286215
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3786706030368805
+          },
+          "test": {
+            "radius_r2": 0.4268693740459717,
+            "radius_mae": 0.14413892512675375,
+            "signed_speed_r2": 0.8745814056066903,
+            "signed_speed_mae": 0.07056774930924803,
+            "direction_accuracy": 0.9853515625,
+            "speed_magnitude_mae": 0.06948514437181075
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.4268693740459717,
+            "radius_mae": 0.14413892512675375,
+            "signed_speed_r2": 0.8745814056066903,
+            "signed_speed_mae": 0.07056774930924803,
+            "direction_accuracy": 0.9853515625,
+            "speed_magnitude_mae": 0.06948514437181075
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 160,
+            "validation_standardized_mse": 0.4084506630897522
+          },
+          "test": {
+            "radius_r2": 0.392276473783441,
+            "radius_mae": 0.1487401388003491,
+            "signed_speed_r2": 0.8504814365221395,
+            "signed_speed_mae": 0.07904666466174604,
+            "direction_accuracy": 0.9833984375,
+            "speed_magnitude_mae": 0.0783448923261858
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.392276473783441,
+            "radius_mae": 0.1487401388003491,
+            "signed_speed_r2": 0.8504814365221395,
+            "signed_speed_mae": 0.07904666466174604,
+            "direction_accuracy": 0.9833984375,
+            "speed_magnitude_mae": 0.0783448923261858
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8673935916741324
+          },
+          "test": {
+            "radius_r2": 0.192692522401128,
+            "radius_mae": 0.17899400754911338,
+            "signed_speed_r2": 0.0742889381881906,
+            "signed_speed_mae": 0.24265789700799079,
+            "direction_accuracy": 0.6416015625,
+            "speed_magnitude_mae": 0.21546899400286215
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3786706030368805
+          },
+          "test": {
+            "radius_r2": 0.4268693740459717,
+            "radius_mae": 0.14413892512675375,
+            "signed_speed_r2": 0.8745814056066903,
+            "signed_speed_mae": 0.07056774930924803,
+            "direction_accuracy": 0.9853515625,
+            "speed_magnitude_mae": 0.06948514437181075
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 160,
+            "validation_standardized_mse": 0.4084506630897522
+          },
+          "test": {
+            "radius_r2": 0.392276473783441,
+            "radius_mae": 0.1487401388003491,
+            "signed_speed_r2": 0.8504814365221395,
+            "signed_speed_mae": 0.07904666466174604,
+            "direction_accuracy": 0.9833984375,
+            "speed_magnitude_mae": 0.0783448923261858
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.001,
+            "validation_standardized_mse": 0.8519287526563689
+          },
+          "test": {
+            "radius_r2": 0.1976812679183283,
+            "radius_mae": 0.1777117657957616,
+            "signed_speed_r2": 0.095649391319098,
+            "signed_speed_mae": 0.23598000929123947,
+            "direction_accuracy": 0.6474609375,
+            "speed_magnitude_mae": 0.19923783142495521
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.2183163386492979,
+            "radius_mae": 0.1756632301849761,
+            "signed_speed_r2": 0.09191375573731098,
+            "signed_speed_mae": 0.23661929079508034,
+            "direction_accuracy": 0.62890625,
+            "speed_magnitude_mae": 0.2004303845227889
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3809654116630554
+          },
+          "test": {
+            "radius_r2": 0.410885326887128,
+            "radius_mae": 0.1466306492802687,
+            "signed_speed_r2": 0.8760463774597773,
+            "signed_speed_mae": 0.06923428334039272,
+            "direction_accuracy": 0.9833984375,
+            "speed_magnitude_mae": 0.0680547856350131
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.376542525632069,
+            "radius_mae": 0.15080025582574308,
+            "signed_speed_r2": 0.8497921806226133,
+            "signed_speed_mae": 0.07755610263870949,
+            "direction_accuracy": 0.9716796875,
+            "speed_magnitude_mae": 0.07586218027586256
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 160,
+            "validation_standardized_mse": 0.41258704662323
+          },
+          "test": {
+            "radius_r2": 0.39154623961470614,
+            "radius_mae": 0.1483163327211514,
+            "signed_speed_r2": 0.8522045526306938,
+            "signed_speed_mae": 0.07876024368079015,
+            "direction_accuracy": 0.9833984375,
+            "speed_magnitude_mae": 0.07798170204523558
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.35994840323969524,
+            "radius_mae": 0.15157957567134872,
+            "signed_speed_r2": 0.8293440491643946,
+            "signed_speed_mae": 0.08501233038941791,
+            "direction_accuracy": 0.9716796875,
+            "speed_magnitude_mae": 0.08343283387148404
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.001,
+            "validation_standardized_mse": 0.8486310550487972
+          },
+          "test": {
+            "radius_r2": 0.2222345662592451,
+            "radius_mae": 0.17474573144486313,
+            "signed_speed_r2": 0.09944604419742875,
+            "signed_speed_mae": 0.23494494638932803,
+            "direction_accuracy": 0.6279296875,
+            "speed_magnitude_mae": 0.19836921465417262
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.40053799748420715
+          },
+          "test": {
+            "radius_r2": 0.3911531042688543,
+            "radius_mae": 0.14882400125497952,
+            "signed_speed_r2": 0.8533585658290572,
+            "signed_speed_mae": 0.0772208118423805,
+            "direction_accuracy": 0.9736328125,
+            "speed_magnitude_mae": 0.07600353538782656
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 180,
+            "validation_standardized_mse": 0.4306435286998749
+          },
+          "test": {
+            "radius_r2": 0.35832574523141625,
+            "radius_mae": 0.15231902879895642,
+            "signed_speed_r2": 0.8344659665680065,
+            "signed_speed_mae": 0.0842204681655403,
+            "direction_accuracy": 0.9716796875,
+            "speed_magnitude_mae": 0.08280112279612695
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.7970188851383888
+          },
+          "test": {
+            "radius_r2": 0.17217273256494325,
+            "radius_mae": 0.17861963430551092,
+            "signed_speed_r2": 0.033444632491557824,
+            "signed_speed_mae": 0.24481078345020588,
+            "direction_accuracy": 0.5859375,
+            "speed_magnitude_mae": 0.20005108440290728
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.1245109011596991,
+            "radius_mae": 0.18279436578039437,
+            "signed_speed_r2": 0.08507815436962807,
+            "signed_speed_mae": 0.23779074612257553,
+            "direction_accuracy": 0.5810546875,
+            "speed_magnitude_mae": 0.20252770020124905
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.36163651943206787
+          },
+          "test": {
+            "radius_r2": 0.3912716545308603,
+            "radius_mae": 0.14720235526328906,
+            "signed_speed_r2": 0.8787311662275448,
+            "signed_speed_mae": 0.06890564069681204,
+            "direction_accuracy": 0.978515625,
+            "speed_magnitude_mae": 0.0659901591493508
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.06180495744279835,
+            "radius_mae": 0.1832305143470876,
+            "signed_speed_r2": 0.28250637544777746,
+            "signed_speed_mae": 0.1724532863731838,
+            "direction_accuracy": 0.7734375,
+            "speed_magnitude_mae": 0.11766239843700532
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 120,
+            "validation_standardized_mse": 0.38993796706199646
+          },
+          "test": {
+            "radius_r2": 0.32312383775801756,
+            "radius_mae": 0.1575449999072589,
+            "signed_speed_r2": 0.8501033099575204,
+            "signed_speed_mae": 0.07963592664668795,
+            "direction_accuracy": 0.9775390625,
+            "speed_magnitude_mae": 0.07758893822506252
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.06361591483061946,
+            "radius_mae": 0.1852444929536432,
+            "signed_speed_r2": 0.29219156343690544,
+            "signed_speed_mae": 0.1758766465793542,
+            "direction_accuracy": 0.7666015625,
+            "speed_magnitude_mae": 0.12562365471308112
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8442790964107099
+          },
+          "test": {
+            "radius_r2": 0.17570713229306356,
+            "radius_mae": 0.17869332183755937,
+            "signed_speed_r2": 0.08096397575031689,
+            "signed_speed_mae": 0.23128075546627697,
+            "direction_accuracy": 0.6044921875,
+            "speed_magnitude_mae": 0.18579282432531227
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 190,
+            "validation_standardized_mse": 0.6004493832588196
+          },
+          "test": {
+            "radius_r2": 0.26300643382747746,
+            "radius_mae": 0.16716130636632442,
+            "signed_speed_r2": 0.5599328525183287,
+            "signed_speed_mae": 0.14145954113382686,
+            "direction_accuracy": 0.853515625,
+            "speed_magnitude_mae": 0.12018422519849992
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 160,
+            "validation_standardized_mse": 0.5580912232398987
+          },
+          "test": {
+            "radius_r2": 0.2695581397016107,
+            "radius_mae": 0.16538424452301115,
+            "signed_speed_r2": 0.642757809786875,
+            "signed_speed_mae": 0.12607074999777979,
+            "direction_accuracy": 0.8857421875,
+            "speed_magnitude_mae": 0.11251498850469943
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.807225695597388
+          },
+          "test": {
+            "radius_r2": 0.2144609365604675,
+            "radius_mae": 0.17655645608394355,
+            "signed_speed_r2": 0.04491816590037645,
+            "signed_speed_mae": 0.24185836116984316,
+            "direction_accuracy": 0.6123046875,
+            "speed_magnitude_mae": 0.20058617539009377
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.03333451808390819,
+            "radius_mae": 0.19991848059458606,
+            "signed_speed_r2": -0.03707018686695274,
+            "signed_speed_mae": 0.2530714855973719,
+            "direction_accuracy": 0.521484375,
+            "speed_magnitude_mae": 0.21075567015662722
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.36742788553237915
+          },
+          "test": {
+            "radius_r2": 0.42977580016221684,
+            "radius_mae": 0.14413645741296932,
+            "signed_speed_r2": 0.8738174762734344,
+            "signed_speed_mae": 0.07088500199097325,
+            "direction_accuracy": 0.98046875,
+            "speed_magnitude_mae": 0.06922997716355894
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.4098556555460344,
+            "radius_mae": 0.22252625541295856,
+            "signed_speed_r2": -0.2798146313561747,
+            "signed_speed_mae": 0.25247904486082007,
+            "direction_accuracy": 0.54296875,
+            "speed_magnitude_mae": 0.14133855138948093
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 170,
+            "validation_standardized_mse": 0.3934148848056793
+          },
+          "test": {
+            "radius_r2": 0.39805090839799984,
+            "radius_mae": 0.14778706047218293,
+            "signed_speed_r2": 0.8451196296653096,
+            "signed_speed_mae": 0.08108982661474329,
+            "direction_accuracy": 0.9814453125,
+            "speed_magnitude_mae": 0.0792360687139535
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.37007827979542873,
+            "radius_mae": 0.22075216262601316,
+            "signed_speed_r2": -0.23234254067988824,
+            "signed_speed_mae": 0.25001203600754707,
+            "direction_accuracy": 0.548828125,
+            "speed_magnitude_mae": 0.14965514565960802
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.925131360067295
+          },
+          "test": {
+            "radius_r2": 0.027081900988844554,
+            "radius_mae": 0.19970732617249853,
+            "signed_speed_r2": 0.02972573263674161,
+            "signed_speed_mae": 0.24674436093659013,
+            "direction_accuracy": 0.548828125,
+            "speed_magnitude_mae": 0.2107108289810219
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 120,
+            "validation_standardized_mse": 0.8976465463638306
+          },
+          "test": {
+            "radius_r2": 0.03097431716861998,
+            "radius_mae": 0.19863696373067796,
+            "signed_speed_r2": 0.08851707732299774,
+            "signed_speed_mae": 0.23146276732768456,
+            "direction_accuracy": 0.591796875,
+            "speed_magnitude_mae": 0.18781687243836132
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 60,
+            "validation_standardized_mse": 0.9050782918930054
+          },
+          "test": {
+            "radius_r2": 0.04107217467906943,
+            "radius_mae": 0.19729421677766368,
+            "signed_speed_r2": 0.10468691783309592,
+            "signed_speed_mae": 0.228840397959857,
+            "direction_accuracy": 0.6181640625,
+            "speed_magnitude_mae": 0.18557971618315605
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.001,
+            "validation_standardized_mse": 0.8501726264999863
+          },
+          "test": {
+            "radius_r2": 0.1936742386828766,
+            "radius_mae": 0.17837943520227678,
+            "signed_speed_r2": 0.05599076696943606,
+            "signed_speed_mae": 0.2429357537190278,
+            "direction_accuracy": 0.5869140625,
+            "speed_magnitude_mae": 0.2069548240944971
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.36137935748829664,
+            "radius_mae": 0.23010381208013586,
+            "signed_speed_r2": -0.2590072494072464,
+            "signed_speed_mae": 0.2647756202862674,
+            "direction_accuracy": 0.490234375,
+            "speed_magnitude_mae": 0.14212114410234378
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 240,
+            "validation_standardized_mse": 0.3793547451496124
+          },
+          "test": {
+            "radius_r2": 0.42254857972244797,
+            "radius_mae": 0.14520272728987038,
+            "signed_speed_r2": 0.8733174351640516,
+            "signed_speed_mae": 0.07188615195173043,
+            "direction_accuracy": 0.978515625,
+            "speed_magnitude_mae": 0.07021066021115985
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.8827795454923109,
+            "radius_mae": 0.26116178900701925,
+            "signed_speed_r2": -1.1181605162950308,
+            "signed_speed_mae": 0.3125042569290599,
+            "direction_accuracy": 0.5234375,
+            "speed_magnitude_mae": 0.10802347162461956
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 160,
+            "validation_standardized_mse": 0.4021207094192505
+          },
+          "test": {
+            "radius_r2": 0.3827960745580302,
+            "radius_mae": 0.1503972604405135,
+            "signed_speed_r2": 0.8499421975778735,
+            "signed_speed_mae": 0.07920888354578892,
+            "direction_accuracy": 0.9765625,
+            "speed_magnitude_mae": 0.07769621727516096
+          },
+          "transfer_generated_test": {
+            "radius_r2": -1.3021077920731083,
+            "radius_mae": 0.2821013633511029,
+            "signed_speed_r2": -1.1206272795422767,
+            "signed_speed_mae": 0.3133425469679878,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.11155387991516363
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.9510706677199288
+          },
+          "test": {
+            "radius_r2": -0.005888784562030569,
+            "radius_mae": 0.20259419689955296,
+            "signed_speed_r2": -0.0026953926198520772,
+            "signed_speed_mae": 0.2572108938890382,
+            "direction_accuracy": 0.5107421875,
+            "speed_magnitude_mae": 0.2457126721866963
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9509497284889221
+          },
+          "test": {
+            "radius_r2": -0.0025073699608164635,
+            "radius_mae": 0.2021875531063415,
+            "signed_speed_r2": 0.0004894954886676128,
+            "signed_speed_mae": 0.25690136406728925,
+            "direction_accuracy": 0.5322265625,
+            "speed_magnitude_mae": 0.2486058263830273
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9527140259742737
+          },
+          "test": {
+            "radius_r2": -0.009341537227200991,
+            "radius_mae": 0.20280551473842934,
+            "signed_speed_r2": -0.001455244981360293,
+            "signed_speed_mae": 0.2569327839264588,
+            "direction_accuracy": 0.505859375,
+            "speed_magnitude_mae": 0.2430844147620519
+          }
+        }
+      ],
+      "controls": {
+        "z": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9519041776657104
+          },
+          "test": {
+            "radius_r2": -0.005688565728816597,
+            "radius_mae": 0.20253354852320626,
+            "signed_speed_r2": -0.0036612967196190116,
+            "signed_speed_mae": 0.2576414974328145,
+            "direction_accuracy": 0.49609375,
+            "speed_magnitude_mae": 0.24879468068729693
+          }
+        },
+        "shuffled_M": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9527716040611267
+          },
+          "test": {
+            "radius_r2": -0.01278601847064964,
+            "radius_mae": 0.20346404571319,
+            "signed_speed_r2": 2.2439544098307174e-05,
+            "signed_speed_mae": 0.25672487179781456,
+            "direction_accuracy": 0.5205078125,
+            "speed_magnitude_mae": 0.24203350635798415
+          }
+        },
+        "oracle_labels": {
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 9.51057144345307e-13
+          },
+          "test": {
+            "radius_r2": 0.999999999998994,
+            "radius_mae": 2.0272370154013775e-07,
+            "signed_speed_r2": 0.9999999999989957,
+            "signed_speed_mae": 2.5780226234498407e-07,
+            "direction_accuracy": 1.0,
+            "speed_magnitude_mae": 2.5780226234498407e-07
+          }
+        },
+        "train_mean": {
+          "radius_r2": -0.004840322815056641,
+          "radius_mae": 0.2026771673699841,
+          "signed_speed_r2": -0.002308575979730332,
+          "signed_speed_mae": 0.25768050268834486,
+          "direction_accuracy": 0.4775390625,
+          "speed_magnitude_mae": 0.25324712986912346
+        }
+      }
+    },
+    {
+      "name": "intent8",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/state_round18/runs/intent8",
+      "checkpoint_sha256": "6a07e239bf0c2f03592c62b07e01e0f02b27c83c7970c91a348c0948a5055cbc",
+      "rows": [
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8595767227220735
+          },
+          "test": {
+            "radius_r2": 0.2017240368483545,
+            "radius_mae": 0.17722156464082955,
+            "signed_speed_r2": 0.043376479623416064,
+            "signed_speed_mae": 0.24540623895470143,
+            "direction_accuracy": 0.60546875,
+            "speed_magnitude_mae": 0.2112953173958637
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.2017240368483545,
+            "radius_mae": 0.17722156464082955,
+            "signed_speed_r2": 0.043376479623416064,
+            "signed_speed_mae": 0.24540623895470143,
+            "direction_accuracy": 0.60546875,
+            "speed_magnitude_mae": 0.2112953173958637
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.37712764739990234
+          },
+          "test": {
+            "radius_r2": 0.4296673463642493,
+            "radius_mae": 0.1436348439892754,
+            "signed_speed_r2": 0.8735448811650495,
+            "signed_speed_mae": 0.07140031227550026,
+            "direction_accuracy": 0.982421875,
+            "speed_magnitude_mae": 0.07017696592151879
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.4296673463642493,
+            "radius_mae": 0.1436348439892754,
+            "signed_speed_r2": 0.8735448811650495,
+            "signed_speed_mae": 0.07140031227550026,
+            "direction_accuracy": 0.982421875,
+            "speed_magnitude_mae": 0.07017696592151879
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 130,
+            "validation_standardized_mse": 0.41592198610305786
+          },
+          "test": {
+            "radius_r2": 0.38158473522458425,
+            "radius_mae": 0.1510369330062531,
+            "signed_speed_r2": 0.8446549183709018,
+            "signed_speed_mae": 0.08080443751191524,
+            "direction_accuracy": 0.984375,
+            "speed_magnitude_mae": 0.0797968968765872
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.38158473522458425,
+            "radius_mae": 0.1510369330062531,
+            "signed_speed_r2": 0.8446549183709018,
+            "signed_speed_mae": 0.08080443751191524,
+            "direction_accuracy": 0.984375,
+            "speed_magnitude_mae": 0.0797968968765872
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8595767227220735
+          },
+          "test": {
+            "radius_r2": 0.2017240368483545,
+            "radius_mae": 0.17722156464082955,
+            "signed_speed_r2": 0.043376479623416064,
+            "signed_speed_mae": 0.24540623895470143,
+            "direction_accuracy": 0.60546875,
+            "speed_magnitude_mae": 0.2112953173958637
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.37712764739990234
+          },
+          "test": {
+            "radius_r2": 0.4296673463642493,
+            "radius_mae": 0.1436348439892754,
+            "signed_speed_r2": 0.8735448811650495,
+            "signed_speed_mae": 0.07140031227550026,
+            "direction_accuracy": 0.982421875,
+            "speed_magnitude_mae": 0.07017696592151879
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 130,
+            "validation_standardized_mse": 0.41592198610305786
+          },
+          "test": {
+            "radius_r2": 0.38158473522458425,
+            "radius_mae": 0.1510369330062531,
+            "signed_speed_r2": 0.8446549183709018,
+            "signed_speed_mae": 0.08080443751191524,
+            "direction_accuracy": 0.984375,
+            "speed_magnitude_mae": 0.0797968968765872
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.0001,
+            "validation_standardized_mse": 0.8592770261150459
+          },
+          "test": {
+            "radius_r2": 0.19804301641326438,
+            "radius_mae": 0.1773252362543301,
+            "signed_speed_r2": 0.041980762651671166,
+            "signed_speed_mae": 0.2456093541105427,
+            "direction_accuracy": 0.603515625,
+            "speed_magnitude_mae": 0.2109634623236752
+          },
+          "transfer_generated_test": {
+            "radius_r2": -1.0576770583592396,
+            "radius_mae": 0.28156581568665673,
+            "signed_speed_r2": -3.466453575183807,
+            "signed_speed_mae": 0.4803273117227699,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.24594663370420028
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.37925150990486145
+          },
+          "test": {
+            "radius_r2": 0.4176137446125867,
+            "radius_mae": 0.14627257804386318,
+            "signed_speed_r2": 0.8787046723144492,
+            "signed_speed_mae": 0.0681516079002904,
+            "direction_accuracy": 0.986328125,
+            "speed_magnitude_mae": 0.06707587287291972
+          },
+          "transfer_generated_test": {
+            "radius_r2": -1.602237536942888,
+            "radius_mae": 0.3182488695019856,
+            "signed_speed_r2": 0.1151152315781423,
+            "signed_speed_mae": 0.2208241814455505,
+            "direction_accuracy": 0.5966796875,
+            "speed_magnitude_mae": 0.16535234776756624
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 120,
+            "validation_standardized_mse": 0.40767595171928406
+          },
+          "test": {
+            "radius_r2": 0.37116252778146674,
+            "radius_mae": 0.15334272582549602,
+            "signed_speed_r2": 0.8450490456650344,
+            "signed_speed_mae": 0.08110386563407701,
+            "direction_accuracy": 0.9853515625,
+            "speed_magnitude_mae": 0.08011480369600577
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.9374325691029859,
+            "radius_mae": 0.2756754422443919,
+            "signed_speed_r2": -0.720862980375969,
+            "signed_speed_mae": 0.2822939890475027,
+            "direction_accuracy": 0.5908203125,
+            "speed_magnitude_mae": 0.12177995536694652
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.001,
+            "validation_standardized_mse": 0.8605454836165858
+          },
+          "test": {
+            "radius_r2": 0.2012446933841382,
+            "radius_mae": 0.17734464670273903,
+            "signed_speed_r2": 0.03740034326558184,
+            "signed_speed_mae": 0.24646220264867652,
+            "direction_accuracy": 0.537109375,
+            "speed_magnitude_mae": 0.21390946169776273
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.4012446403503418
+          },
+          "test": {
+            "radius_r2": 0.404801201629688,
+            "radius_mae": 0.14692051755264401,
+            "signed_speed_r2": 0.8396402493344994,
+            "signed_speed_mae": 0.08190125888540933,
+            "direction_accuracy": 0.966796875,
+            "speed_magnitude_mae": 0.07992922230459953
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 130,
+            "validation_standardized_mse": 0.42881113290786743
+          },
+          "test": {
+            "radius_r2": 0.3689469192524588,
+            "radius_mae": 0.15268103452399373,
+            "signed_speed_r2": 0.8186930661454171,
+            "signed_speed_mae": 0.08793001800563616,
+            "direction_accuracy": 0.974609375,
+            "speed_magnitude_mae": 0.08588035789193782
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.844843768388827
+          },
+          "test": {
+            "radius_r2": 0.1892796247568499,
+            "radius_mae": 0.17702749963198972,
+            "signed_speed_r2": 0.01967842657935337,
+            "signed_speed_mae": 0.25156843008080887,
+            "direction_accuracy": 0.5517578125,
+            "speed_magnitude_mae": 0.22022738087752675
+          },
+          "transfer_generated_test": {
+            "radius_r2": -12.304567390367547,
+            "radius_mae": 0.7494879181667968,
+            "signed_speed_r2": -4.011728287437187,
+            "signed_speed_mae": 0.5296996150300557,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.2829927168242603
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.35907360911369324
+          },
+          "test": {
+            "radius_r2": 0.3841830324539741,
+            "radius_mae": 0.14885885588591918,
+            "signed_speed_r2": 0.8806963631528308,
+            "signed_speed_mae": 0.06779232261010293,
+            "direction_accuracy": 0.9794921875,
+            "speed_magnitude_mae": 0.0650832214125785
+          },
+          "transfer_generated_test": {
+            "radius_r2": -28.991361160194213,
+            "radius_mae": 1.2000873328652233,
+            "signed_speed_r2": -1.7823355304555912,
+            "signed_speed_mae": 0.3688142166392936,
+            "direction_accuracy": 0.486328125,
+            "speed_magnitude_mae": 0.15835008556496177
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 120,
+            "validation_standardized_mse": 0.3858531415462494
+          },
+          "test": {
+            "radius_r2": 0.32001974259647814,
+            "radius_mae": 0.15846330829663202,
+            "signed_speed_r2": 0.8527577351392625,
+            "signed_speed_mae": 0.07786700883889353,
+            "direction_accuracy": 0.9775390625,
+            "speed_magnitude_mae": 0.07568310621581986
+          },
+          "transfer_generated_test": {
+            "radius_r2": -28.67366245624388,
+            "radius_mae": 1.1376898994203657,
+            "signed_speed_r2": -0.8525773870866973,
+            "signed_speed_mae": 0.2950567184234387,
+            "direction_accuracy": 0.5166015625,
+            "speed_magnitude_mae": 0.1079769479101742
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.001,
+            "validation_standardized_mse": 0.8864748344231144
+          },
+          "test": {
+            "radius_r2": 0.09268595443890315,
+            "radius_mae": 0.19099918366789403,
+            "signed_speed_r2": 0.08356796583453097,
+            "signed_speed_mae": 0.23847720742097997,
+            "direction_accuracy": 0.6123046875,
+            "speed_magnitude_mae": 0.20325468277767914
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 240,
+            "validation_standardized_mse": 0.7002354264259338
+          },
+          "test": {
+            "radius_r2": 0.26397009435665897,
+            "radius_mae": 0.16723866679240018,
+            "signed_speed_r2": 0.33677264704247856,
+            "signed_speed_mae": 0.18738134391833228,
+            "direction_accuracy": 0.7587890625,
+            "speed_magnitude_mae": 0.16202509661889053
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 220,
+            "validation_standardized_mse": 0.7128320336341858
+          },
+          "test": {
+            "radius_r2": 0.245213339756703,
+            "radius_mae": 0.16947756812442094,
+            "signed_speed_r2": 0.33132262463962303,
+            "signed_speed_mae": 0.18444679396611718,
+            "direction_accuracy": 0.7490234375,
+            "speed_magnitude_mae": 0.15235482566072278
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.7970575532232225
+          },
+          "test": {
+            "radius_r2": 0.22250817529267486,
+            "radius_mae": 0.1749972839352742,
+            "signed_speed_r2": 0.05534554958112703,
+            "signed_speed_mae": 0.24363199227383708,
+            "direction_accuracy": 0.6103515625,
+            "speed_magnitude_mae": 0.20916804819350304
+          },
+          "transfer_generated_test": {
+            "radius_r2": -15.144519566011674,
+            "radius_mae": 0.7829268392079488,
+            "signed_speed_r2": -6.068148444980859,
+            "signed_speed_mae": 0.6295930143411372,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.3832599402109184
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3573695421218872
+          },
+          "test": {
+            "radius_r2": 0.43610512094017595,
+            "radius_mae": 0.14377220737515017,
+            "signed_speed_r2": 0.8730893202351756,
+            "signed_speed_mae": 0.07106724311370272,
+            "direction_accuracy": 0.9765625,
+            "speed_magnitude_mae": 0.06895952958757334
+          },
+          "transfer_generated_test": {
+            "radius_r2": -71.08655945873963,
+            "radius_mae": 1.871222612913698,
+            "signed_speed_r2": -0.8769078933228494,
+            "signed_speed_mae": 0.29873327444943243,
+            "direction_accuracy": 0.4833984375,
+            "speed_magnitude_mae": 0.09725635365043672
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 160,
+            "validation_standardized_mse": 0.3935491740703583
+          },
+          "test": {
+            "radius_r2": 0.40492625747603794,
+            "radius_mae": 0.14801187871489674,
+            "signed_speed_r2": 0.8423268964242262,
+            "signed_speed_mae": 0.0818610596693361,
+            "direction_accuracy": 0.9794921875,
+            "speed_magnitude_mae": 0.07972845437916476
+          },
+          "transfer_generated_test": {
+            "radius_r2": -64.31145025984094,
+            "radius_mae": 1.8041997912805527,
+            "signed_speed_r2": -1.8270222979818262,
+            "signed_speed_mae": 0.36747063424263615,
+            "direction_accuracy": 0.494140625,
+            "speed_magnitude_mae": 0.1446619094185735
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.001,
+            "validation_standardized_mse": 0.9373348555460528
+          },
+          "test": {
+            "radius_r2": 0.00851693055325009,
+            "radius_mae": 0.20160227222732424,
+            "signed_speed_r2": 0.03403016202894926,
+            "signed_speed_mae": 0.2503187253942728,
+            "direction_accuracy": 0.5390625,
+            "speed_magnitude_mae": 0.22568113830467504
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.8904455900192261
+          },
+          "test": {
+            "radius_r2": 0.050343464173446484,
+            "radius_mae": 0.1944205189938657,
+            "signed_speed_r2": 0.05179386396109831,
+            "signed_speed_mae": 0.24495152518738905,
+            "direction_accuracy": 0.5751953125,
+            "speed_magnitude_mae": 0.2152950494100878
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 100,
+            "validation_standardized_mse": 0.9231024384498596
+          },
+          "test": {
+            "radius_r2": 0.009295248040206094,
+            "radius_mae": 0.19905578799080104,
+            "signed_speed_r2": 0.021414551661214976,
+            "signed_speed_mae": 0.24795511711909057,
+            "direction_accuracy": 0.5517578125,
+            "speed_magnitude_mae": 0.20743188126834866
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8602806310773141
+          },
+          "test": {
+            "radius_r2": 0.21044908039066945,
+            "radius_mae": 0.17648500978356294,
+            "signed_speed_r2": 0.027334815504342247,
+            "signed_speed_mae": 0.2489693123446099,
+            "direction_accuracy": 0.599609375,
+            "speed_magnitude_mae": 0.21665119057788323
+          },
+          "transfer_generated_test": {
+            "radius_r2": -24.092341184395032,
+            "radius_mae": 1.144884778924666,
+            "signed_speed_r2": -5.026839671646324,
+            "signed_speed_mae": 0.6038625277837792,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.3551774016266083
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3728104829788208
+          },
+          "test": {
+            "radius_r2": 0.4356920985924444,
+            "radius_mae": 0.14345055999001488,
+            "signed_speed_r2": 0.8735250133621584,
+            "signed_speed_mae": 0.07187787485986519,
+            "direction_accuracy": 0.97265625,
+            "speed_magnitude_mae": 0.07019931655418077
+          },
+          "transfer_generated_test": {
+            "radius_r2": -46.722755280344465,
+            "radius_mae": 1.467498495359905,
+            "signed_speed_r2": -1.0318699103676954,
+            "signed_speed_mae": 0.30415741370120486,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.10394734259421057
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 180,
+            "validation_standardized_mse": 0.3989313542842865
+          },
+          "test": {
+            "radius_r2": 0.3827491069011604,
+            "radius_mae": 0.15120602602837607,
+            "signed_speed_r2": 0.8485213909151372,
+            "signed_speed_mae": 0.07932852477529195,
+            "direction_accuracy": 0.974609375,
+            "speed_magnitude_mae": 0.0770258830250441
+          },
+          "transfer_generated_test": {
+            "radius_r2": -40.212383130035526,
+            "radius_mae": 1.4050703778630123,
+            "signed_speed_r2": -0.643655285644704,
+            "signed_speed_mae": 0.27524916317179304,
+            "direction_accuracy": 0.5234375,
+            "speed_magnitude_mae": 0.09634852562066953
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 10.0,
+            "validation_standardized_mse": 0.9519375866902975
+          },
+          "test": {
+            "radius_r2": -0.005057980807611218,
+            "radius_mae": 0.2026968666510045,
+            "signed_speed_r2": -0.0028857777825601616,
+            "signed_speed_mae": 0.2576924666652627,
+            "direction_accuracy": 0.4736328125,
+            "speed_magnitude_mae": 0.2532950555790002
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 90,
+            "validation_standardized_mse": 0.9557843208312988
+          },
+          "test": {
+            "radius_r2": -0.004769305997976536,
+            "radius_mae": 0.2025312043260783,
+            "signed_speed_r2": -0.0037566388196186296,
+            "signed_speed_mae": 0.2571852320020298,
+            "direction_accuracy": 0.486328125,
+            "speed_magnitude_mae": 0.24637242914013768
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.954857349395752
+          },
+          "test": {
+            "radius_r2": -0.005930664827726195,
+            "radius_mae": 0.20275052089709789,
+            "signed_speed_r2": -0.002250575408598854,
+            "signed_speed_mae": 0.2572145555895986,
+            "direction_accuracy": 0.4970703125,
+            "speed_magnitude_mae": 0.2450298756484699
+          }
+        }
+      ],
+      "controls": {
+        "z": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9518174529075623
+          },
+          "test": {
+            "radius_r2": -0.006109888059095514,
+            "radius_mae": 0.20251457567792386,
+            "signed_speed_r2": -0.003588790663704211,
+            "signed_speed_mae": 0.2576590949952333,
+            "direction_accuracy": 0.49609375,
+            "speed_magnitude_mae": 0.24892324687243672
+          }
+        },
+        "shuffled_M": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9519478678703308
+          },
+          "test": {
+            "radius_r2": -0.012400439683689646,
+            "radius_mae": 0.20351994450902566,
+            "signed_speed_r2": -0.00019971655934836186,
+            "signed_speed_mae": 0.25657513042665414,
+            "direction_accuracy": 0.5244140625,
+            "speed_magnitude_mae": 0.24127294050754244
+          }
+        },
+        "oracle_labels": {
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 9.51057144345307e-13
+          },
+          "test": {
+            "radius_r2": 0.999999999998994,
+            "radius_mae": 2.0272370154013775e-07,
+            "signed_speed_r2": 0.9999999999989957,
+            "signed_speed_mae": 2.5780226234498407e-07,
+            "direction_accuracy": 1.0,
+            "speed_magnitude_mae": 2.5780226234498407e-07
+          }
+        },
+        "train_mean": {
+          "radius_r2": -0.004840322815056641,
+          "radius_mae": 0.2026771673699841,
+          "signed_speed_r2": -0.002308575979730332,
+          "signed_speed_mae": 0.25768050268834486,
+          "direction_accuracy": 0.4775390625,
+          "speed_magnitude_mae": 0.25324712986912346
+        }
+      }
+    },
+    {
+      "name": "intent8_dclock",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/state_round18/runs/intent8_dclock",
+      "checkpoint_sha256": "067969469141b909b73d181355febf9edcdcd29cb08c92939ed5b5cc2c88107f",
+      "rows": [
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8464472331367182
+          },
+          "test": {
+            "radius_r2": 0.19605192819449957,
+            "radius_mae": 0.17798849019303972,
+            "signed_speed_r2": 0.07661881058877673,
+            "signed_speed_mae": 0.238405282474155,
+            "direction_accuracy": 0.6337890625,
+            "speed_magnitude_mae": 0.19991204773465399
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.19605192819449957,
+            "radius_mae": 0.17798849019303972,
+            "signed_speed_r2": 0.07661881058877673,
+            "signed_speed_mae": 0.238405282474155,
+            "direction_accuracy": 0.6337890625,
+            "speed_magnitude_mae": 0.19991204773465399
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.38482826948165894
+          },
+          "test": {
+            "radius_r2": 0.41402013834940365,
+            "radius_mae": 0.1467639310285449,
+            "signed_speed_r2": 0.8621017904228224,
+            "signed_speed_mae": 0.07489239070037002,
+            "direction_accuracy": 0.98046875,
+            "speed_magnitude_mae": 0.07353063025493611
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.41402013834940365,
+            "radius_mae": 0.1467639310285449,
+            "signed_speed_r2": 0.8621017904228224,
+            "signed_speed_mae": 0.07489239070037002,
+            "direction_accuracy": 0.98046875,
+            "speed_magnitude_mae": 0.07353063025493611
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 170,
+            "validation_standardized_mse": 0.4231373071670532
+          },
+          "test": {
+            "radius_r2": 0.3695977224802287,
+            "radius_mae": 0.15108677360694855,
+            "signed_speed_r2": 0.8368069544876213,
+            "signed_speed_mae": 0.08317591266063573,
+            "direction_accuracy": 0.97265625,
+            "speed_magnitude_mae": 0.08178383194695016
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.3695977224802287,
+            "radius_mae": 0.15108677360694855,
+            "signed_speed_r2": 0.8368069544876213,
+            "signed_speed_mae": 0.08317591266063573,
+            "direction_accuracy": 0.97265625,
+            "speed_magnitude_mae": 0.08178383194695016
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8464472331367182
+          },
+          "test": {
+            "radius_r2": 0.19605192819449957,
+            "radius_mae": 0.17798849019303972,
+            "signed_speed_r2": 0.07661881058877673,
+            "signed_speed_mae": 0.238405282474155,
+            "direction_accuracy": 0.6337890625,
+            "speed_magnitude_mae": 0.19991204773465399
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.38482826948165894
+          },
+          "test": {
+            "radius_r2": 0.41402013834940365,
+            "radius_mae": 0.1467639310285449,
+            "signed_speed_r2": 0.8621017904228224,
+            "signed_speed_mae": 0.07489239070037002,
+            "direction_accuracy": 0.98046875,
+            "speed_magnitude_mae": 0.07353063025493611
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 170,
+            "validation_standardized_mse": 0.4231373071670532
+          },
+          "test": {
+            "radius_r2": 0.3695977224802287,
+            "radius_mae": 0.15108677360694855,
+            "signed_speed_r2": 0.8368069544876213,
+            "signed_speed_mae": 0.08317591266063573,
+            "direction_accuracy": 0.97265625,
+            "speed_magnitude_mae": 0.08178383194695016
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.001,
+            "validation_standardized_mse": 0.8436478912462888
+          },
+          "test": {
+            "radius_r2": 0.18887792158592231,
+            "radius_mae": 0.17836187678154578,
+            "signed_speed_r2": 0.045534358164075917,
+            "signed_speed_mae": 0.24259494935089448,
+            "direction_accuracy": 0.6123046875,
+            "speed_magnitude_mae": 0.20069069370820763
+          },
+          "transfer_generated_test": {
+            "radius_r2": -1.7630136133058203,
+            "radius_mae": 0.33194726360611915,
+            "signed_speed_r2": -9.350850016759232,
+            "signed_speed_mae": 0.8129468785271099,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.5644383683214553
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 240,
+            "validation_standardized_mse": 0.38962870836257935
+          },
+          "test": {
+            "radius_r2": 0.39908412000392945,
+            "radius_mae": 0.14914694661274552,
+            "signed_speed_r2": 0.866129629247176,
+            "signed_speed_mae": 0.07259797349433939,
+            "direction_accuracy": 0.98828125,
+            "speed_magnitude_mae": 0.071418636895487
+          },
+          "transfer_generated_test": {
+            "radius_r2": -9.112795318855804,
+            "radius_mae": 0.6081428367760964,
+            "signed_speed_r2": -0.7141477114289205,
+            "signed_speed_mae": 0.29154539615296926,
+            "direction_accuracy": 0.517578125,
+            "speed_magnitude_mae": 0.14705495005568991
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 130,
+            "validation_standardized_mse": 0.4275420308113098
+          },
+          "test": {
+            "radius_r2": 0.3561890962326677,
+            "radius_mae": 0.15439198404783383,
+            "signed_speed_r2": 0.8314221631015224,
+            "signed_speed_mae": 0.08473364953442797,
+            "direction_accuracy": 0.9814453125,
+            "speed_magnitude_mae": 0.0835632270327551
+          },
+          "transfer_generated_test": {
+            "radius_r2": -3.880187979102545,
+            "radius_mae": 0.4279000204987824,
+            "signed_speed_r2": -1.7191720694077235,
+            "signed_speed_mae": 0.3739837856574013,
+            "direction_accuracy": 0.5634765625,
+            "speed_magnitude_mae": 0.19941553967692016
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.0001,
+            "validation_standardized_mse": 0.8311287873490855
+          },
+          "test": {
+            "radius_r2": 0.19445677233598235,
+            "radius_mae": 0.17828480455908555,
+            "signed_speed_r2": 0.11448352930648642,
+            "signed_speed_mae": 0.2285436669600947,
+            "direction_accuracy": 0.6328125,
+            "speed_magnitude_mae": 0.18624646780920842
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 240,
+            "validation_standardized_mse": 0.42820754647254944
+          },
+          "test": {
+            "radius_r2": 0.36394450113287113,
+            "radius_mae": 0.1526830712100491,
+            "signed_speed_r2": 0.8148104729589503,
+            "signed_speed_mae": 0.08928931275386276,
+            "direction_accuracy": 0.966796875,
+            "speed_magnitude_mae": 0.08739981811004327
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 140,
+            "validation_standardized_mse": 0.44238704442977905
+          },
+          "test": {
+            "radius_r2": 0.33119550851772395,
+            "radius_mae": 0.15699252934427932,
+            "signed_speed_r2": 0.805693222142982,
+            "signed_speed_mae": 0.09296831517599458,
+            "direction_accuracy": 0.9658203125,
+            "speed_magnitude_mae": 0.09087928864960304
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8351571979319407
+          },
+          "test": {
+            "radius_r2": 0.17563724862951047,
+            "radius_mae": 0.17961367834279418,
+            "signed_speed_r2": 0.046155293637885064,
+            "signed_speed_mae": 0.24732961471125237,
+            "direction_accuracy": 0.6123046875,
+            "speed_magnitude_mae": 0.2144561844985474
+          },
+          "transfer_generated_test": {
+            "radius_r2": -6.951896491414075,
+            "radius_mae": 0.4868184076308377,
+            "signed_speed_r2": -4.4337601732518435,
+            "signed_speed_mae": 0.48774496963580405,
+            "direction_accuracy": 0.5390625,
+            "speed_magnitude_mae": 0.361592293399053
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.36847978830337524
+          },
+          "test": {
+            "radius_r2": 0.37898842272860567,
+            "radius_mae": 0.1498868113849312,
+            "signed_speed_r2": 0.8699589167163128,
+            "signed_speed_mae": 0.07162622599480528,
+            "direction_accuracy": 0.9755859375,
+            "speed_magnitude_mae": 0.0685812956025984
+          },
+          "transfer_generated_test": {
+            "radius_r2": -103.89092101137545,
+            "radius_mae": 2.3066524115856737,
+            "signed_speed_r2": -0.6687981895706911,
+            "signed_speed_mae": 0.28704291692065453,
+            "direction_accuracy": 0.505859375,
+            "speed_magnitude_mae": 0.15799127440914162
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 170,
+            "validation_standardized_mse": 0.4062983989715576
+          },
+          "test": {
+            "radius_r2": 0.3247461915612406,
+            "radius_mae": 0.15637127996888012,
+            "signed_speed_r2": 0.8439021313310926,
+            "signed_speed_mae": 0.08038040231599552,
+            "direction_accuracy": 0.9716796875,
+            "speed_magnitude_mae": 0.07722867713459891
+          },
+          "transfer_generated_test": {
+            "radius_r2": -189.98660616172992,
+            "radius_mae": 3.066054654074833,
+            "signed_speed_r2": -1.2293259429957413,
+            "signed_speed_mae": 0.32470145048159793,
+            "direction_accuracy": 0.48828125,
+            "speed_magnitude_mae": 0.17054179726233087
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.9224369379256903
+          },
+          "test": {
+            "radius_r2": 0.053080654093353496,
+            "radius_mae": 0.19597224865167967,
+            "signed_speed_r2": 0.006583775453653962,
+            "signed_speed_mae": 0.25291354081979794,
+            "direction_accuracy": 0.5556640625,
+            "speed_magnitude_mae": 0.22611568683879302
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 210,
+            "validation_standardized_mse": 0.8847993612289429
+          },
+          "test": {
+            "radius_r2": 0.15869795849423562,
+            "radius_mae": 0.1811536187888123,
+            "signed_speed_r2": 0.021523279865519496,
+            "signed_speed_mae": 0.24766290471916363,
+            "direction_accuracy": 0.5478515625,
+            "speed_magnitude_mae": 0.2093676194103864
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 210,
+            "validation_standardized_mse": 0.8604342937469482
+          },
+          "test": {
+            "radius_r2": 0.17973047112382978,
+            "radius_mae": 0.17744895321084186,
+            "signed_speed_r2": 0.09334370550232418,
+            "signed_speed_mae": 0.2289640427793529,
+            "direction_accuracy": 0.626953125,
+            "speed_magnitude_mae": 0.18182669161024023
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.7800469755038111
+          },
+          "test": {
+            "radius_r2": 0.21838194764692742,
+            "radius_mae": 0.17584844928738894,
+            "signed_speed_r2": 0.07938335702427879,
+            "signed_speed_mae": 0.23653925713927418,
+            "direction_accuracy": 0.6513671875,
+            "speed_magnitude_mae": 0.1966139906860146
+          },
+          "transfer_generated_test": {
+            "radius_r2": -9.70246596491564,
+            "radius_mae": 0.6082810921750031,
+            "signed_speed_r2": -8.414465697159041,
+            "signed_speed_mae": 0.5990841910900263,
+            "direction_accuracy": 0.4677734375,
+            "speed_magnitude_mae": 0.43302825864484873
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 240,
+            "validation_standardized_mse": 0.37363243103027344
+          },
+          "test": {
+            "radius_r2": 0.4222080629250333,
+            "radius_mae": 0.145755349250976,
+            "signed_speed_r2": 0.858413948887536,
+            "signed_speed_mae": 0.07643766152477838,
+            "direction_accuracy": 0.9794921875,
+            "speed_magnitude_mae": 0.07429274039850498
+          },
+          "transfer_generated_test": {
+            "radius_r2": -140.03575273402944,
+            "radius_mae": 2.683753883233294,
+            "signed_speed_r2": -4.195614233656553,
+            "signed_speed_mae": 0.5404094983321102,
+            "direction_accuracy": 0.46484375,
+            "speed_magnitude_mae": 0.2875755343486617
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 160,
+            "validation_standardized_mse": 0.4052351713180542
+          },
+          "test": {
+            "radius_r2": 0.3918320256403729,
+            "radius_mae": 0.14999929250916466,
+            "signed_speed_r2": 0.832214512860392,
+            "signed_speed_mae": 0.08494405708711383,
+            "direction_accuracy": 0.9736328125,
+            "speed_magnitude_mae": 0.08278240900040146
+          },
+          "transfer_generated_test": {
+            "radius_r2": -176.2216575112321,
+            "radius_mae": 3.055978305521421,
+            "signed_speed_r2": -6.237392541466947,
+            "signed_speed_mae": 0.642539973314797,
+            "direction_accuracy": 0.462890625,
+            "speed_magnitude_mae": 0.42045991991744813
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 10.0,
+            "validation_standardized_mse": 0.9485241784332914
+          },
+          "test": {
+            "radius_r2": 0.0033235588624780377,
+            "radius_mae": 0.20171175440448155,
+            "signed_speed_r2": 0.0004012982307226576,
+            "signed_speed_mae": 0.25709386628768216,
+            "direction_accuracy": 0.53125,
+            "speed_magnitude_mae": 0.24997830570979063
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 40,
+            "validation_standardized_mse": 0.9503815174102783
+          },
+          "test": {
+            "radius_r2": 0.006457097761328856,
+            "radius_mae": 0.20110071636736393,
+            "signed_speed_r2": 0.0018487685741847004,
+            "signed_speed_mae": 0.2560894860494045,
+            "direction_accuracy": 0.537109375,
+            "speed_magnitude_mae": 0.23916812873403615
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9531461596488953
+          },
+          "test": {
+            "radius_r2": 0.004169068869717352,
+            "radius_mae": 0.2013702605618164,
+            "signed_speed_r2": -0.0008696043965017441,
+            "signed_speed_mae": 0.25599296452423914,
+            "direction_accuracy": 0.52734375,
+            "speed_magnitude_mae": 0.23652567816611736
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.855195654506473
+          },
+          "test": {
+            "radius_r2": 0.19670382270092102,
+            "radius_mae": 0.1783262266857543,
+            "signed_speed_r2": 0.052947020795556354,
+            "signed_speed_mae": 0.24491294979815237,
+            "direction_accuracy": 0.6201171875,
+            "speed_magnitude_mae": 0.21369929114688654
+          },
+          "transfer_generated_test": {
+            "radius_r2": -14.35530449526598,
+            "radius_mae": 0.7612698295989601,
+            "signed_speed_r2": -6.134695205135073,
+            "signed_speed_mae": 0.5968593444826185,
+            "direction_accuracy": 0.494140625,
+            "speed_magnitude_mae": 0.4381198848539155
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.38169434666633606
+          },
+          "test": {
+            "radius_r2": 0.4215796723637125,
+            "radius_mae": 0.14474991819588467,
+            "signed_speed_r2": 0.8604614222042226,
+            "signed_speed_mae": 0.07515829136218599,
+            "direction_accuracy": 0.97265625,
+            "speed_magnitude_mae": 0.07285387876390814
+          },
+          "transfer_generated_test": {
+            "radius_r2": -121.79221184631523,
+            "radius_mae": 2.5267444198252633,
+            "signed_speed_r2": -1.8798752762045443,
+            "signed_speed_mae": 0.37507976602501003,
+            "direction_accuracy": 0.494140625,
+            "speed_magnitude_mae": 0.12635494238202227
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 200,
+            "validation_standardized_mse": 0.4076153635978699
+          },
+          "test": {
+            "radius_r2": 0.36957236131446025,
+            "radius_mae": 0.15124360722256824,
+            "signed_speed_r2": 0.8376829566231965,
+            "signed_speed_mae": 0.08240074571040168,
+            "direction_accuracy": 0.9716796875,
+            "speed_magnitude_mae": 0.0799598403773416
+          },
+          "transfer_generated_test": {
+            "radius_r2": -135.72674212884326,
+            "radius_mae": 2.6952300776029006,
+            "signed_speed_r2": -1.4238785327004222,
+            "signed_speed_mae": 0.34868795036163647,
+            "direction_accuracy": 0.494140625,
+            "speed_magnitude_mae": 0.16217709910688427
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1.0,
+            "validation_standardized_mse": 0.9493477451251177
+          },
+          "test": {
+            "radius_r2": -0.0012560585847174455,
+            "radius_mae": 0.2022434531198736,
+            "signed_speed_r2": -0.0030269361883072943,
+            "signed_speed_mae": 0.2575433131006453,
+            "direction_accuracy": 0.505859375,
+            "speed_magnitude_mae": 0.24704477647863665
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9505605697631836
+          },
+          "test": {
+            "radius_r2": -0.0002602564160061327,
+            "radius_mae": 0.2021219219896011,
+            "signed_speed_r2": -0.003425890270149612,
+            "signed_speed_mae": 0.25757019816546745,
+            "direction_accuracy": 0.505859375,
+            "speed_magnitude_mae": 0.24662673228931453
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9599031209945679
+          },
+          "test": {
+            "radius_r2": -0.0025835416605635153,
+            "radius_mae": 0.20198153675301,
+            "signed_speed_r2": -0.0027968962537714415,
+            "signed_speed_mae": 0.25678237353895383,
+            "direction_accuracy": 0.490234375,
+            "speed_magnitude_mae": 0.23662395616156573
+          }
+        }
+      ],
+      "controls": {
+        "z": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9520342946052551
+          },
+          "test": {
+            "radius_r2": -0.006534543415923855,
+            "radius_mae": 0.2025849300553091,
+            "signed_speed_r2": -0.0037209524947705575,
+            "signed_speed_mae": 0.25767005294528644,
+            "direction_accuracy": 0.498046875,
+            "speed_magnitude_mae": 0.249085704188019
+          }
+        },
+        "shuffled_M": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9542332887649536
+          },
+          "test": {
+            "radius_r2": -0.009618711173616568,
+            "radius_mae": 0.20316790766082704,
+            "signed_speed_r2": -0.001326823483317252,
+            "signed_speed_mae": 0.2566572317386999,
+            "direction_accuracy": 0.5244140625,
+            "speed_magnitude_mae": 0.24103858424541613
+          }
+        },
+        "oracle_labels": {
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 9.51057144345307e-13
+          },
+          "test": {
+            "radius_r2": 0.999999999998994,
+            "radius_mae": 2.0272370154013775e-07,
+            "signed_speed_r2": 0.9999999999989957,
+            "signed_speed_mae": 2.5780226234498407e-07,
+            "direction_accuracy": 1.0,
+            "speed_magnitude_mae": 2.5780226234498407e-07
+          }
+        },
+        "train_mean": {
+          "radius_r2": -0.004840322815056641,
+          "radius_mae": 0.2026771673699841,
+          "signed_speed_r2": -0.002308575979730332,
+          "signed_speed_mae": 0.25768050268834486,
+          "direction_accuracy": 0.4775390625,
+          "speed_magnitude_mae": 0.25324712986912346
+        }
+      }
+    },
+    {
+      "name": "hybrid8",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/state_round18/runs/hybrid8",
+      "checkpoint_sha256": "db0484792d0570df87442b491936eac3e62dd3bc5eff46956b8baab2e56eb974",
+      "rows": [
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.001,
+            "validation_standardized_mse": 0.8719068127786483
+          },
+          "test": {
+            "radius_r2": 0.19324538579166284,
+            "radius_mae": 0.17868687151985063,
+            "signed_speed_r2": 0.03258362259476688,
+            "signed_speed_mae": 0.24793049329717193,
+            "direction_accuracy": 0.5947265625,
+            "speed_magnitude_mae": 0.21651896489976125
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.19324538579166284,
+            "radius_mae": 0.17868687151985063,
+            "signed_speed_r2": 0.03258362259476688,
+            "signed_speed_mae": 0.24793049329717193,
+            "direction_accuracy": 0.5947265625,
+            "speed_magnitude_mae": 0.21651896489976125
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.379664808511734
+          },
+          "test": {
+            "radius_r2": 0.4253239928534991,
+            "radius_mae": 0.14455118123441935,
+            "signed_speed_r2": 0.8741484712692228,
+            "signed_speed_mae": 0.07088203041030283,
+            "direction_accuracy": 0.986328125,
+            "speed_magnitude_mae": 0.06988114146452062
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.4253239928534991,
+            "radius_mae": 0.14455118123441935,
+            "signed_speed_r2": 0.8741484712692228,
+            "signed_speed_mae": 0.07088203041030283,
+            "direction_accuracy": 0.986328125,
+            "speed_magnitude_mae": 0.06988114146452062
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 140,
+            "validation_standardized_mse": 0.41085684299468994
+          },
+          "test": {
+            "radius_r2": 0.37933421502580567,
+            "radius_mae": 0.15127352927811444,
+            "signed_speed_r2": 0.8483488772804886,
+            "signed_speed_mae": 0.07904618369752825,
+            "direction_accuracy": 0.9814453125,
+            "speed_magnitude_mae": 0.07816447251366299
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.37933421502580567,
+            "radius_mae": 0.15127352927811444,
+            "signed_speed_r2": 0.8483488772804886,
+            "signed_speed_mae": 0.07904618369752825,
+            "direction_accuracy": 0.9814453125,
+            "speed_magnitude_mae": 0.07816447251366299
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.001,
+            "validation_standardized_mse": 0.8719068127786483
+          },
+          "test": {
+            "radius_r2": 0.19324538579166284,
+            "radius_mae": 0.17868687151985063,
+            "signed_speed_r2": 0.03258362259476688,
+            "signed_speed_mae": 0.24793049329717193,
+            "direction_accuracy": 0.5947265625,
+            "speed_magnitude_mae": 0.21651896489976125
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.379664808511734
+          },
+          "test": {
+            "radius_r2": 0.4253239928534991,
+            "radius_mae": 0.14455118123441935,
+            "signed_speed_r2": 0.8741484712692228,
+            "signed_speed_mae": 0.07088203041030283,
+            "direction_accuracy": 0.986328125,
+            "speed_magnitude_mae": 0.06988114146452062
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 140,
+            "validation_standardized_mse": 0.41085684299468994
+          },
+          "test": {
+            "radius_r2": 0.37933421502580567,
+            "radius_mae": 0.15127352927811444,
+            "signed_speed_r2": 0.8483488772804886,
+            "signed_speed_mae": 0.07904618369752825,
+            "direction_accuracy": 0.9814453125,
+            "speed_magnitude_mae": 0.07816447251366299
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8661316214431893
+          },
+          "test": {
+            "radius_r2": 0.18633562049325914,
+            "radius_mae": 0.17933284510218458,
+            "signed_speed_r2": 0.03136551522447206,
+            "signed_speed_mae": 0.2494032311232034,
+            "direction_accuracy": 0.59375,
+            "speed_magnitude_mae": 0.2205935915096428
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.46730797363024035,
+            "radius_mae": 0.23574261374712496,
+            "signed_speed_r2": -0.26610856709904906,
+            "signed_speed_mae": 0.25511137236944675,
+            "direction_accuracy": 0.5009765625,
+            "speed_magnitude_mae": 0.1327321758557027
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 200,
+            "validation_standardized_mse": 0.380398154258728
+          },
+          "test": {
+            "radius_r2": 0.41595770962683776,
+            "radius_mae": 0.14647190016694367,
+            "signed_speed_r2": 0.8688663921341427,
+            "signed_speed_mae": 0.07243665793566834,
+            "direction_accuracy": 0.98828125,
+            "speed_magnitude_mae": 0.0715025189415428
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.4554369296922436,
+            "radius_mae": 0.23666362842777744,
+            "signed_speed_r2": 0.5099736399357344,
+            "signed_speed_mae": 0.15748323164734757,
+            "direction_accuracy": 0.81640625,
+            "speed_magnitude_mae": 0.1393065567440317
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 120,
+            "validation_standardized_mse": 0.4065939784049988
+          },
+          "test": {
+            "radius_r2": 0.3656673696417002,
+            "radius_mae": 0.1545675391680561,
+            "signed_speed_r2": 0.8432683934199732,
+            "signed_speed_mae": 0.08128367252675162,
+            "direction_accuracy": 0.982421875,
+            "speed_magnitude_mae": 0.08011523514642249
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.6874645072319228,
+            "radius_mae": 0.253253752598539,
+            "signed_speed_r2": -0.2493672315231299,
+            "signed_speed_mae": 0.2394436143783878,
+            "direction_accuracy": 0.693359375,
+            "speed_magnitude_mae": 0.1373833566437952
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8579235646880107
+          },
+          "test": {
+            "radius_r2": 0.19162430963273902,
+            "radius_mae": 0.17898123069947858,
+            "signed_speed_r2": 0.05786439937214771,
+            "signed_speed_mae": 0.2429430243930846,
+            "direction_accuracy": 0.5595703125,
+            "speed_magnitude_mae": 0.20954580096828854
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3995325267314911
+          },
+          "test": {
+            "radius_r2": 0.3919319053864596,
+            "radius_mae": 0.14860204700380564,
+            "signed_speed_r2": 0.8500610656817441,
+            "signed_speed_mae": 0.07894809761478427,
+            "direction_accuracy": 0.98046875,
+            "speed_magnitude_mae": 0.0780232418471769
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 160,
+            "validation_standardized_mse": 0.43099045753479004
+          },
+          "test": {
+            "radius_r2": 0.3593761651071823,
+            "radius_mae": 0.15290420659584925,
+            "signed_speed_r2": 0.8399653579796402,
+            "signed_speed_mae": 0.08251675697852079,
+            "direction_accuracy": 0.9814453125,
+            "speed_magnitude_mae": 0.08160957802306257
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8463386566137057
+          },
+          "test": {
+            "radius_r2": 0.17784758577814086,
+            "radius_mae": 0.17894492288873926,
+            "signed_speed_r2": 0.010256209104944847,
+            "signed_speed_mae": 0.2531799000808428,
+            "direction_accuracy": 0.5517578125,
+            "speed_magnitude_mae": 0.21953589008975954
+          },
+          "transfer_generated_test": {
+            "radius_r2": -2.5667013442728805,
+            "radius_mae": 0.37075152605663303,
+            "signed_speed_r2": -0.49828289790957747,
+            "signed_speed_mae": 0.2643929277802225,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.09071022730214257
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3627704381942749
+          },
+          "test": {
+            "radius_r2": 0.39062286652886524,
+            "radius_mae": 0.14787522581173107,
+            "signed_speed_r2": 0.8813698731802361,
+            "signed_speed_mae": 0.0673044739710349,
+            "direction_accuracy": 0.98046875,
+            "speed_magnitude_mae": 0.06441544077506478
+          },
+          "transfer_generated_test": {
+            "radius_r2": -17.91233042905243,
+            "radius_mae": 0.8891233853064477,
+            "signed_speed_r2": -1.4323160648019266,
+            "signed_speed_mae": 0.35709982859793854,
+            "direction_accuracy": 0.361328125,
+            "speed_magnitude_mae": 0.13957625055331846
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 130,
+            "validation_standardized_mse": 0.3892790377140045
+          },
+          "test": {
+            "radius_r2": 0.32344750781904874,
+            "radius_mae": 0.15793403662974015,
+            "signed_speed_r2": 0.854328252473739,
+            "signed_speed_mae": 0.07777408635365646,
+            "direction_accuracy": 0.9765625,
+            "speed_magnitude_mae": 0.07552964869364587
+          },
+          "transfer_generated_test": {
+            "radius_r2": -17.281760766307368,
+            "radius_mae": 0.8053284515626729,
+            "signed_speed_r2": -0.9444780177450858,
+            "signed_speed_mae": 0.3221299867113885,
+            "direction_accuracy": 0.390625,
+            "speed_magnitude_mae": 0.13955703911869932
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.001,
+            "validation_standardized_mse": 0.8527993628796621
+          },
+          "test": {
+            "radius_r2": 0.04125989682217568,
+            "radius_mae": 0.19736441401683483,
+            "signed_speed_r2": 0.22178090957316376,
+            "signed_speed_mae": 0.20446402048726392,
+            "direction_accuracy": 0.69140625,
+            "speed_magnitude_mae": 0.1623851269248561
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.6413727402687073
+          },
+          "test": {
+            "radius_r2": 0.24829420122262724,
+            "radius_mae": 0.16821397905005142,
+            "signed_speed_r2": 0.47771269597138855,
+            "signed_speed_mae": 0.15215756647103262,
+            "direction_accuracy": 0.7958984375,
+            "speed_magnitude_mae": 0.12275995942991358
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 240,
+            "validation_standardized_mse": 0.6644682884216309
+          },
+          "test": {
+            "radius_r2": 0.20705848459498877,
+            "radius_mae": 0.171267508296296,
+            "signed_speed_r2": 0.47542179731110623,
+            "signed_speed_mae": 0.15270576015450388,
+            "direction_accuracy": 0.82421875,
+            "speed_magnitude_mae": 0.12420042455619296
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8157879817898559
+          },
+          "test": {
+            "radius_r2": 0.22049753326943122,
+            "radius_mae": 0.17576053514341372,
+            "signed_speed_r2": 0.044339690907418294,
+            "signed_speed_mae": 0.2460002818565839,
+            "direction_accuracy": 0.6171875,
+            "speed_magnitude_mae": 0.21388942525089996
+          },
+          "transfer_generated_test": {
+            "radius_r2": -4.84663300010669,
+            "radius_mae": 0.4844522248946798,
+            "signed_speed_r2": -1.0223177779062254,
+            "signed_speed_mae": 0.3161915953178903,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.15930996388820703
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.36205464601516724
+          },
+          "test": {
+            "radius_r2": 0.4292586342648329,
+            "radius_mae": 0.1445135012618266,
+            "signed_speed_r2": 0.8713411583516056,
+            "signed_speed_mae": 0.07177709227084961,
+            "direction_accuracy": 0.9814453125,
+            "speed_magnitude_mae": 0.06979455985788263
+          },
+          "transfer_generated_test": {
+            "radius_r2": -46.1765901583521,
+            "radius_mae": 1.463515177485533,
+            "signed_speed_r2": -0.14223395883433754,
+            "signed_speed_mae": 0.2625229700770433,
+            "direction_accuracy": 0.4775390625,
+            "speed_magnitude_mae": 0.17531871836581558
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 160,
+            "validation_standardized_mse": 0.3932504653930664
+          },
+          "test": {
+            "radius_r2": 0.39052729230207517,
+            "radius_mae": 0.14962754031876102,
+            "signed_speed_r2": 0.8441011935600408,
+            "signed_speed_mae": 0.08073456918623378,
+            "direction_accuracy": 0.9765625,
+            "speed_magnitude_mae": 0.07846027744176354
+          },
+          "transfer_generated_test": {
+            "radius_r2": -62.549417685918556,
+            "radius_mae": 1.6418514465913177,
+            "signed_speed_r2": -0.05444820984309229,
+            "signed_speed_mae": 0.25984700966751006,
+            "direction_accuracy": 0.4892578125,
+            "speed_magnitude_mae": 0.21532747662581642
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.9453133308241336
+          },
+          "test": {
+            "radius_r2": -0.01414147184842518,
+            "radius_mae": 0.2028781186973811,
+            "signed_speed_r2": -0.01630748939609572,
+            "signed_speed_mae": 0.2567811084331511,
+            "direction_accuracy": 0.529296875,
+            "speed_magnitude_mae": 0.23460068090976788
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.9385669231414795
+          },
+          "test": {
+            "radius_r2": -0.024510553585749273,
+            "radius_mae": 0.20231506606796756,
+            "signed_speed_r2": -0.01504989971081816,
+            "signed_speed_mae": 0.2568089977901309,
+            "direction_accuracy": 0.5107421875,
+            "speed_magnitude_mae": 0.23623636281377003
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 20,
+            "validation_standardized_mse": 0.9474789500236511
+          },
+          "test": {
+            "radius_r2": -0.0062406000024834984,
+            "radius_mae": 0.20263196004088968,
+            "signed_speed_r2": -0.005912296286900043,
+            "signed_speed_mae": 0.256825310080103,
+            "direction_accuracy": 0.5146484375,
+            "speed_magnitude_mae": 0.23976372200036167
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8681894278701849
+          },
+          "test": {
+            "radius_r2": 0.19854706546285095,
+            "radius_mae": 0.17804601139975965,
+            "signed_speed_r2": 0.027653435182821928,
+            "signed_speed_mae": 0.24896816955862092,
+            "direction_accuracy": 0.5908203125,
+            "speed_magnitude_mae": 0.21749511497399845
+          },
+          "transfer_generated_test": {
+            "radius_r2": -11.130026496936583,
+            "radius_mae": 0.7797686726408626,
+            "signed_speed_r2": -1.0478846363216952,
+            "signed_speed_mae": 0.2992408394884034,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.07693212364105807
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.37432295083999634
+          },
+          "test": {
+            "radius_r2": 0.4310516653855191,
+            "radius_mae": 0.1439701992785558,
+            "signed_speed_r2": 0.874293164369472,
+            "signed_speed_mae": 0.07095709356781299,
+            "direction_accuracy": 0.97265625,
+            "speed_magnitude_mae": 0.06933061254312634
+          },
+          "transfer_generated_test": {
+            "radius_r2": -102.51795113169163,
+            "radius_mae": 2.3184270865749568,
+            "signed_speed_r2": -1.0808043399057672,
+            "signed_speed_mae": 0.30615672370186076,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.08906583445786964
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 190,
+            "validation_standardized_mse": 0.40206947922706604
+          },
+          "test": {
+            "radius_r2": 0.3834840212186723,
+            "radius_mae": 0.14998787408694625,
+            "signed_speed_r2": 0.8565579901359758,
+            "signed_speed_mae": 0.07616959453071104,
+            "direction_accuracy": 0.9736328125,
+            "speed_magnitude_mae": 0.07414965867747014
+          },
+          "transfer_generated_test": {
+            "radius_r2": -98.78490939774946,
+            "radius_mae": 2.2843118918826804,
+            "signed_speed_r2": -0.7118776683707599,
+            "signed_speed_mae": 0.27915506660019673,
+            "direction_accuracy": 0.5205078125,
+            "speed_magnitude_mae": 0.09458870017306253
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 10.0,
+            "validation_standardized_mse": 0.9518812317153531
+          },
+          "test": {
+            "radius_r2": -0.004804189670668313,
+            "radius_mae": 0.20264142397130455,
+            "signed_speed_r2": -0.002817734981157116,
+            "signed_speed_mae": 0.2576822995302377,
+            "direction_accuracy": 0.482421875,
+            "speed_magnitude_mae": 0.25291294416407206
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 20,
+            "validation_standardized_mse": 0.9505876302719116
+          },
+          "test": {
+            "radius_r2": -0.0025297546906226653,
+            "radius_mae": 0.20223941071890295,
+            "signed_speed_r2": -0.0035409880070089716,
+            "signed_speed_mae": 0.2573374054384203,
+            "direction_accuracy": 0.490234375,
+            "speed_magnitude_mae": 0.24601822880435975
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9492862224578857
+          },
+          "test": {
+            "radius_r2": -0.0011393918836632988,
+            "radius_mae": 0.202212180767674,
+            "signed_speed_r2": -0.0013309833553019068,
+            "signed_speed_mae": 0.2569028937527946,
+            "direction_accuracy": 0.5068359375,
+            "speed_magnitude_mae": 0.24373116066271905
+          }
+        }
+      ],
+      "controls": {
+        "z": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9516623616218567
+          },
+          "test": {
+            "radius_r2": -0.005869710240988146,
+            "radius_mae": 0.20249211142072454,
+            "signed_speed_r2": -0.0036698626905296017,
+            "signed_speed_mae": 0.25767221460773726,
+            "direction_accuracy": 0.494140625,
+            "speed_magnitude_mae": 0.24903849364500275
+          }
+        },
+        "shuffled_M": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9514263868331909
+          },
+          "test": {
+            "radius_r2": -0.010626477929678302,
+            "radius_mae": 0.20334922592155635,
+            "signed_speed_r2": 0.0005168918995278604,
+            "signed_speed_mae": 0.25666974365526585,
+            "direction_accuracy": 0.53125,
+            "speed_magnitude_mae": 0.24250914323033612
+          }
+        },
+        "oracle_labels": {
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 9.51057144345307e-13
+          },
+          "test": {
+            "radius_r2": 0.999999999998994,
+            "radius_mae": 2.0272370154013775e-07,
+            "signed_speed_r2": 0.9999999999989957,
+            "signed_speed_mae": 2.5780226234498407e-07,
+            "direction_accuracy": 1.0,
+            "speed_magnitude_mae": 2.5780226234498407e-07
+          }
+        },
+        "train_mean": {
+          "radius_r2": -0.004840322815056641,
+          "radius_mae": 0.2026771673699841,
+          "signed_speed_r2": -0.002308575979730332,
+          "signed_speed_mae": 0.25768050268834486,
+          "direction_accuracy": 0.4775390625,
+          "speed_magnitude_mae": 0.25324712986912346
+        }
+      }
+    },
+    {
+      "name": "hybrid8_dclock",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/state_round18/runs/hybrid8_dclock",
+      "checkpoint_sha256": "a22f89315080eda370e8d156d40ecd6dbb2163a1866bc33f42ea0123a4aa0fa3",
+      "rows": [
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8329322047551981
+          },
+          "test": {
+            "radius_r2": 0.19055652347511343,
+            "radius_mae": 0.17878253638488883,
+            "signed_speed_r2": 0.1051000341178856,
+            "signed_speed_mae": 0.23180866600102676,
+            "direction_accuracy": 0.673828125,
+            "speed_magnitude_mae": 0.19428283575055946
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.19055652347511343,
+            "radius_mae": 0.17878253638488883,
+            "signed_speed_r2": 0.1051000341178856,
+            "signed_speed_mae": 0.23180866600102676,
+            "direction_accuracy": 0.673828125,
+            "speed_magnitude_mae": 0.19428283575055946
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.37996724247932434
+          },
+          "test": {
+            "radius_r2": 0.4181107523123455,
+            "radius_mae": 0.14611962833441794,
+            "signed_speed_r2": 0.8663964473062816,
+            "signed_speed_mae": 0.07320090542179969,
+            "direction_accuracy": 0.982421875,
+            "speed_magnitude_mae": 0.07189591487622238
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.4181107523123455,
+            "radius_mae": 0.14611962833441794,
+            "signed_speed_r2": 0.8663964473062816,
+            "signed_speed_mae": 0.07320090542179969,
+            "direction_accuracy": 0.982421875,
+            "speed_magnitude_mae": 0.07189591487622238
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 150,
+            "validation_standardized_mse": 0.4183431565761566
+          },
+          "test": {
+            "radius_r2": 0.3785219656746638,
+            "radius_mae": 0.15141526563093066,
+            "signed_speed_r2": 0.8419556260237285,
+            "signed_speed_mae": 0.08118529874150227,
+            "direction_accuracy": 0.9775390625,
+            "speed_magnitude_mae": 0.08024939095980699
+          },
+          "transfer_generated_test": {
+            "radius_r2": 0.3785219656746638,
+            "radius_mae": 0.15141526563093066,
+            "signed_speed_r2": 0.8419556260237285,
+            "signed_speed_mae": 0.08118529874150227,
+            "direction_accuracy": 0.9775390625,
+            "speed_magnitude_mae": 0.08024939095980699
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.8329322047551981
+          },
+          "test": {
+            "radius_r2": 0.19055652347511343,
+            "radius_mae": 0.17878253638488883,
+            "signed_speed_r2": 0.1051000341178856,
+            "signed_speed_mae": 0.23180866600102676,
+            "direction_accuracy": 0.673828125,
+            "speed_magnitude_mae": 0.19428283575055946
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.37996724247932434
+          },
+          "test": {
+            "radius_r2": 0.4181107523123455,
+            "radius_mae": 0.14611962833441794,
+            "signed_speed_r2": 0.8663964473062816,
+            "signed_speed_mae": 0.07320090542179969,
+            "direction_accuracy": 0.982421875,
+            "speed_magnitude_mae": 0.07189591487622238
+          }
+        },
+        {
+          "depth": 0,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 150,
+            "validation_standardized_mse": 0.4183431565761566
+          },
+          "test": {
+            "radius_r2": 0.3785219656746638,
+            "radius_mae": 0.15141526563093066,
+            "signed_speed_r2": 0.8419556260237285,
+            "signed_speed_mae": 0.08118529874150227,
+            "direction_accuracy": 0.9775390625,
+            "speed_magnitude_mae": 0.08024939095980699
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.0001,
+            "validation_standardized_mse": 0.8278950394581157
+          },
+          "test": {
+            "radius_r2": 0.189166638112082,
+            "radius_mae": 0.1784178524460972,
+            "signed_speed_r2": 0.0755080358294048,
+            "signed_speed_mae": 0.23502322205046539,
+            "direction_accuracy": 0.6494140625,
+            "speed_magnitude_mae": 0.19366594006910534
+          },
+          "transfer_generated_test": {
+            "radius_r2": -0.4082433658889042,
+            "radius_mae": 0.23114756590512148,
+            "signed_speed_r2": -3.772359205654454,
+            "signed_speed_mae": 0.525190601297363,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.2807664302107852
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.38768529891967773
+          },
+          "test": {
+            "radius_r2": 0.40617706469559567,
+            "radius_mae": 0.14771309588104486,
+            "signed_speed_r2": 0.8700226749241393,
+            "signed_speed_mae": 0.07171577314693423,
+            "direction_accuracy": 0.9873046875,
+            "speed_magnitude_mae": 0.07055643723924732
+          },
+          "transfer_generated_test": {
+            "radius_r2": -1.9496803984963167,
+            "radius_mae": 0.3249418344348669,
+            "signed_speed_r2": -0.29663901076345955,
+            "signed_speed_mae": 0.25272664533827083,
+            "direction_accuracy": 0.5986328125,
+            "speed_magnitude_mae": 0.14284639195898308
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 150,
+            "validation_standardized_mse": 0.42358332872390747
+          },
+          "test": {
+            "radius_r2": 0.37112091908219724,
+            "radius_mae": 0.15190035931300372,
+            "signed_speed_r2": 0.8409049640353217,
+            "signed_speed_mae": 0.08170816721303709,
+            "direction_accuracy": 0.9833984375,
+            "speed_magnitude_mae": 0.0807681430201228
+          },
+          "transfer_generated_test": {
+            "radius_r2": -1.0349830195058134,
+            "radius_mae": 0.2752440418698825,
+            "signed_speed_r2": -0.42629279554335775,
+            "signed_speed_mae": 0.2646472037909007,
+            "direction_accuracy": 0.6630859375,
+            "speed_magnitude_mae": 0.1591929939277179
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.7936428998278825
+          },
+          "test": {
+            "radius_r2": 0.18353368975876394,
+            "radius_mae": 0.17916187373272383,
+            "signed_speed_r2": 0.14961482793626157,
+            "signed_speed_mae": 0.22385505108657228,
+            "direction_accuracy": 0.6357421875,
+            "speed_magnitude_mae": 0.18234460126237403
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.41298121213912964
+          },
+          "test": {
+            "radius_r2": 0.37274123622378275,
+            "radius_mae": 0.15159397310344502,
+            "signed_speed_r2": 0.8337099627425407,
+            "signed_speed_mae": 0.083195350578535,
+            "direction_accuracy": 0.96875,
+            "speed_magnitude_mae": 0.08132448145624949
+          }
+        },
+        {
+          "depth": 1,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 140,
+            "validation_standardized_mse": 0.43957436084747314
+          },
+          "test": {
+            "radius_r2": 0.3516875483501398,
+            "radius_mae": 0.15403828921262175,
+            "signed_speed_r2": 0.8146988026556987,
+            "signed_speed_mae": 0.09043964937131932,
+            "direction_accuracy": 0.97265625,
+            "speed_magnitude_mae": 0.08855569382899375
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8284029601856495
+          },
+          "test": {
+            "radius_r2": 0.16628915722143967,
+            "radius_mae": 0.18056249732329624,
+            "signed_speed_r2": 0.06756805294283674,
+            "signed_speed_mae": 0.244248330472526,
+            "direction_accuracy": 0.6484375,
+            "speed_magnitude_mae": 0.21369525774671616
+          },
+          "transfer_generated_test": {
+            "radius_r2": -3.043084183764126,
+            "radius_mae": 0.3898398991136681,
+            "signed_speed_r2": -1.6565674457041148,
+            "signed_speed_mae": 0.35532287654161804,
+            "direction_accuracy": 0.5224609375,
+            "speed_magnitude_mae": 0.18146392914853932
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.36300942301750183
+          },
+          "test": {
+            "radius_r2": 0.3855802228855134,
+            "radius_mae": 0.14911907573696226,
+            "signed_speed_r2": 0.8722296669389569,
+            "signed_speed_mae": 0.07111414312976194,
+            "direction_accuracy": 0.9755859375,
+            "speed_magnitude_mae": 0.06815785396747742
+          },
+          "transfer_generated_test": {
+            "radius_r2": -14.12042164709844,
+            "radius_mae": 0.8442586555611342,
+            "signed_speed_r2": -2.15177728612093,
+            "signed_speed_mae": 0.4011781286033056,
+            "direction_accuracy": 0.4736328125,
+            "speed_magnitude_mae": 0.20369904099584346
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 120,
+            "validation_standardized_mse": 0.3975597620010376
+          },
+          "test": {
+            "radius_r2": 0.3059589297956611,
+            "radius_mae": 0.16079691710183397,
+            "signed_speed_r2": 0.840393998423634,
+            "signed_speed_mae": 0.08201528867812158,
+            "direction_accuracy": 0.9775390625,
+            "speed_magnitude_mae": 0.0801030012580668
+          },
+          "transfer_generated_test": {
+            "radius_r2": -20.161635728724132,
+            "radius_mae": 0.9513538092724048,
+            "signed_speed_r2": -0.6558821714325063,
+            "signed_speed_mae": 0.293969588125492,
+            "direction_accuracy": 0.4775390625,
+            "speed_magnitude_mae": 0.14758611899424068
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.0001,
+            "validation_standardized_mse": 0.9356487851907885
+          },
+          "test": {
+            "radius_r2": 0.0402959404472899,
+            "radius_mae": 0.1970608008826097,
+            "signed_speed_r2": 0.04005393680951863,
+            "signed_speed_mae": 0.24476615954336303,
+            "direction_accuracy": 0.5615234375,
+            "speed_magnitude_mae": 0.20627740124623897
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 240,
+            "validation_standardized_mse": 0.7754919528961182
+          },
+          "test": {
+            "radius_r2": 0.15764608483018794,
+            "radius_mae": 0.18343378481222317,
+            "signed_speed_r2": 0.25264623764372207,
+            "signed_speed_mae": 0.1946607654356285,
+            "direction_accuracy": 0.708984375,
+            "speed_magnitude_mae": 0.15193759924363803
+          }
+        },
+        {
+          "depth": 8,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.7614470720291138
+          },
+          "test": {
+            "radius_r2": 0.16749949117779683,
+            "radius_mae": 0.1772505256230943,
+            "signed_speed_r2": 0.30828398230831633,
+            "signed_speed_mae": 0.1824121451522842,
+            "direction_accuracy": 0.7509765625,
+            "speed_magnitude_mae": 0.13952725253875542
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 0.7684837134639375
+          },
+          "test": {
+            "radius_r2": 0.2116412354826266,
+            "radius_mae": 0.17682166914166142,
+            "signed_speed_r2": 0.1102323321912484,
+            "signed_speed_mae": 0.23095467956873156,
+            "direction_accuracy": 0.68359375,
+            "speed_magnitude_mae": 0.19208750045766734
+          },
+          "transfer_generated_test": {
+            "radius_r2": -3.324781623954724,
+            "radius_mae": 0.39959833740688144,
+            "signed_speed_r2": -4.0877076037772015,
+            "signed_speed_mae": 0.4567192851098971,
+            "direction_accuracy": 0.4677734375,
+            "speed_magnitude_mae": 0.3286131559745288
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.3700249195098877
+          },
+          "test": {
+            "radius_r2": 0.42605061192202287,
+            "radius_mae": 0.14480175101198256,
+            "signed_speed_r2": 0.86581822550396,
+            "signed_speed_mae": 0.073849673924542,
+            "direction_accuracy": 0.9794921875,
+            "speed_magnitude_mae": 0.07201793987360361
+          },
+          "transfer_generated_test": {
+            "radius_r2": -18.563179943532745,
+            "radius_mae": 1.0006152128335088,
+            "signed_speed_r2": -2.788978041958833,
+            "signed_speed_mae": 0.4552706356566887,
+            "direction_accuracy": 0.4658203125,
+            "speed_magnitude_mae": 0.2303899952289612
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 160,
+            "validation_standardized_mse": 0.4014124572277069
+          },
+          "test": {
+            "radius_r2": 0.3881740514414975,
+            "radius_mae": 0.1504066030611284,
+            "signed_speed_r2": 0.8371620946216128,
+            "signed_speed_mae": 0.08389642899032879,
+            "direction_accuracy": 0.98046875,
+            "speed_magnitude_mae": 0.08200309985090826
+          },
+          "transfer_generated_test": {
+            "radius_r2": -54.37538206027533,
+            "radius_mae": 1.5716155532281846,
+            "signed_speed_r2": -1.1805117032761352,
+            "signed_speed_mae": 0.32056063420532155,
+            "direction_accuracy": 0.4755859375,
+            "speed_magnitude_mae": 0.0851955726648157
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 1.0,
+            "validation_standardized_mse": 0.943738793494448
+          },
+          "test": {
+            "radius_r2": 0.009562618648200516,
+            "radius_mae": 0.20102790786345653,
+            "signed_speed_r2": 8.864138634412377e-05,
+            "signed_speed_mae": 0.25611535224301996,
+            "direction_accuracy": 0.5390625,
+            "speed_magnitude_mae": 0.23945045895357803
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 20,
+            "validation_standardized_mse": 0.9447944760322571
+          },
+          "test": {
+            "radius_r2": 0.010361918137679171,
+            "radius_mae": 0.2009560909937136,
+            "signed_speed_r2": 0.002061583576064563,
+            "signed_speed_mae": 0.25551455724553307,
+            "direction_accuracy": 0.5390625,
+            "speed_magnitude_mae": 0.23257726998281214
+          }
+        },
+        {
+          "depth": 32,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 20,
+            "validation_standardized_mse": 0.9464813470840454
+          },
+          "test": {
+            "radius_r2": 0.008744258547712436,
+            "radius_mae": 0.20130900980439037,
+            "signed_speed_r2": -0.0023820563424366004,
+            "signed_speed_mae": 0.25541591344267545,
+            "direction_accuracy": 0.533203125,
+            "speed_magnitude_mae": 0.23407084640734865
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 0.01,
+            "validation_standardized_mse": 0.8497129545981713
+          },
+          "test": {
+            "radius_r2": 0.1848715394283924,
+            "radius_mae": 0.17971969319349496,
+            "signed_speed_r2": 0.08750628910638214,
+            "signed_speed_mae": 0.24006119982831137,
+            "direction_accuracy": 0.640625,
+            "speed_magnitude_mae": 0.2129606624864694
+          },
+          "transfer_generated_test": {
+            "radius_r2": -6.770942323894283,
+            "radius_mae": 0.5717571550218146,
+            "signed_speed_r2": -3.4545950222957567,
+            "signed_speed_mae": 0.4962436269317781,
+            "direction_accuracy": 0.521484375,
+            "speed_magnitude_mae": 0.2846720594718606
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 250,
+            "validation_standardized_mse": 0.38061466813087463
+          },
+          "test": {
+            "radius_r2": 0.41923880588797013,
+            "radius_mae": 0.14529282302828506,
+            "signed_speed_r2": 0.8668166890960094,
+            "signed_speed_mae": 0.07341597819163326,
+            "direction_accuracy": 0.9755859375,
+            "speed_magnitude_mae": 0.0714533610282615
+          },
+          "transfer_generated_test": {
+            "radius_r2": -16.59087292772291,
+            "radius_mae": 0.861778809921816,
+            "signed_speed_r2": -1.9112694778784367,
+            "signed_speed_mae": 0.37852286446241123,
+            "direction_accuracy": 0.4833984375,
+            "speed_magnitude_mae": 0.26206692980349544
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "real",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 180,
+            "validation_standardized_mse": 0.4067785143852234
+          },
+          "test": {
+            "radius_r2": 0.3679088205552392,
+            "radius_mae": 0.15255701408023015,
+            "signed_speed_r2": 0.8408806984340487,
+            "signed_speed_mae": 0.08153889434197481,
+            "direction_accuracy": 0.9755859375,
+            "speed_magnitude_mae": 0.0794663373444564
+          },
+          "transfer_generated_test": {
+            "radius_r2": -39.1104926631351,
+            "radius_mae": 1.2950994081329554,
+            "signed_speed_r2": -1.1212702433554025,
+            "signed_speed_mae": 0.32962937771503675,
+            "direction_accuracy": 0.5068359375,
+            "speed_magnitude_mae": 0.20823749428541305
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "ridge",
+          "features": "Mg",
+          "selection": {
+            "ridge_alpha": 10.0,
+            "validation_standardized_mse": 0.9519631169922638
+          },
+          "test": {
+            "radius_r2": -0.004907982307126746,
+            "radius_mae": 0.2026881080569827,
+            "signed_speed_r2": -0.002807832064007254,
+            "signed_speed_mae": 0.25765099212406745,
+            "direction_accuracy": 0.484375,
+            "speed_magnitude_mae": 0.25318880115716347
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg",
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9565060138702393
+          },
+          "test": {
+            "radius_r2": -0.008977146759486798,
+            "radius_mae": 0.20321507641347125,
+            "signed_speed_r2": -0.006023523511516249,
+            "signed_speed_mae": 0.2575262571699568,
+            "direction_accuracy": 0.5078125,
+            "speed_magnitude_mae": 0.24863435803399625
+          }
+        },
+        {
+          "depth": 128,
+          "training_domain": "generated",
+          "probe": "mlp",
+          "features": "Mg+z",
+          "selection": {
+            "epoch": 20,
+            "validation_standardized_mse": 0.9578062295913696
+          },
+          "test": {
+            "radius_r2": -0.007547108533081381,
+            "radius_mae": 0.20262224250473082,
+            "signed_speed_r2": -0.008381409343526602,
+            "signed_speed_mae": 0.2575461224657829,
+            "direction_accuracy": 0.4892578125,
+            "speed_magnitude_mae": 0.24327786564413145
+          }
+        }
+      ],
+      "controls": {
+        "z": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9519209861755371
+          },
+          "test": {
+            "radius_r2": -0.005737493343491051,
+            "radius_mae": 0.20252108591375872,
+            "signed_speed_r2": -0.0035410441594641018,
+            "signed_speed_mae": 0.257653554948547,
+            "direction_accuracy": 0.49609375,
+            "speed_magnitude_mae": 0.24908054446200367
+          }
+        },
+        "shuffled_M": {
+          "selection": {
+            "epoch": 10,
+            "validation_standardized_mse": 0.9531168341636658
+          },
+          "test": {
+            "radius_r2": -0.010018977039004895,
+            "radius_mae": 0.20324561826419085,
+            "signed_speed_r2": 3.874554568406019e-05,
+            "signed_speed_mae": 0.25666346295815856,
+            "direction_accuracy": 0.5244140625,
+            "speed_magnitude_mae": 0.2421527137787507
+          }
+        },
+        "oracle_labels": {
+          "selection": {
+            "ridge_alpha": 1e-06,
+            "validation_standardized_mse": 9.51057144345307e-13
+          },
+          "test": {
+            "radius_r2": 0.999999999998994,
+            "radius_mae": 2.0272370154013775e-07,
+            "signed_speed_r2": 0.9999999999989957,
+            "signed_speed_mae": 2.5780226234498407e-07,
+            "direction_accuracy": 1.0,
+            "speed_magnitude_mae": 2.5780226234498407e-07
+          }
+        },
+        "train_mean": {
+          "radius_r2": -0.004840322815056641,
+          "radius_mae": 0.2026771673699841,
+          "signed_speed_r2": -0.002308575979730332,
+          "signed_speed_mae": 0.25768050268834486,
+          "direction_accuracy": 0.4775390625,
+          "speed_magnitude_mae": 0.25324712986912346
+        }
+      }
+    }
+  ],
+  "wall_seconds": 30.273015022277832
+}

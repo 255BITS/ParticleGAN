@@ -1,0 +1,37 @@
+{
+  "distinct_focused_tests": 91,
+  "test_batches": [
+    "80 existing/future/diagnostic tests passed",
+    "10 new transition tests passed"
+  ],
+  "checks": [
+    "pre-change default-off four-update exact equivalence reported by tests agent",
+    "critic-only four-update exact equivalence",
+    "exact resume includes transition critic optimizer",
+    "active default B-cap ownership",
+    "one-write causal fixed-particle branches",
+    "CPU and all-CUDA RNG isolation"
+  ],
+  "gpu_smokes": {
+    "done": 2,
+    "failed": 0,
+    "devices": [
+      "cuda:0",
+      "cuda:1"
+    ],
+    "queue_wall_seconds": 7.2813169956207275,
+    "train_gpu_seconds": 2.2728156040247995,
+    "sources": {
+      "memory_handoff_scout.py": "bdb8370a37bcaadb0c1fe36ed1e06ef219a132ff77b44b4d64efa21302844a02",
+      "memory_transition.py": "f97d882f646cf63bb69317e23109ec39d7c1671bbdfaff144e13ff2da7ab21ae",
+      "memory_local_objectives.py": "5d2fada9b08b8ef9b3886c7c91fa9ab5f2a681e260fce2eb19cbd92505b00dc6",
+      "memory_g_recurrent.py": "e522c478ce536f40bf8029d1127ba7039276610d25b9ac9657684d40094f64e3",
+      "memory_recent.py": "5a1aaa2c869dcca40682f4230c06bbcbcf0e7640c4970d1c924ef5664b9f64f6",
+      "memory_core_scout.py": "71e1206048bab1bb4e4b8f089ba1041f001726e4d3bf6a4b83ad98768001a2a0",
+      "memory_scout.py": "59008372a273543a3bcc163f85e808abbf5a7c152929e38c047c60c340b00d0e",
+      "autonomous_memory.py": "a8b697c1c4ef5b2516f2c0445a3a6f8eeceb73b3a9a03a3127efd5dfdf75c3d5",
+      "memory_path.py": "18178fa48c8b109ee71d3f679bdcfc1b0775b22f1f879fd877dafdf859a40e0f"
+    }
+  },
+  "additional_check": "Offset-invariant paired K margin diagnostic test passed"
+}

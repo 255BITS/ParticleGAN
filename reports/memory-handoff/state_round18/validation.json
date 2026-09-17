@@ -1,0 +1,24 @@
+{
+  "focused_tests": 130,
+  "focused_seconds": 8.36,
+  "final_transition_recheck": 18,
+  "recheck_seconds": 3.17,
+  "gpu_full_panel_smokes": [
+    "state_smoke18",
+    "state_smoke18_final"
+  ],
+  "diagnostic_smoke": "reports/memory-handoff/state_smoke18/g_information.json",
+  "matched_initialization": true,
+  "no_mse_training_test": true,
+  "exact_resume_test": true,
+  "final_decoder_feature_gradient_test": true,
+  "complete_d_memory_separation_test": true,
+  "legacy_observation_recurrence_tests": true,
+  "default_exact_bcap_gradient_test": true,
+  "deployment_and_probe_recheck_tests": 9,
+  "deployment_and_probe_recheck_seconds": 2.63,
+  "bitwise_d_free_runtime": true,
+  "probe_future_observation_leakage_test": true,
+  "common_panel_audit": "panel_audit.json",
+  "source_audit_passed": true
+}

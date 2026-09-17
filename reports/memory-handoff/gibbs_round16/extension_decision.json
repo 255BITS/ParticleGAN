@@ -1,0 +1,156 @@
+{
+  "baseline": "match_shuffle25",
+  "comparisons": [
+    {
+      "name": "joint_match_g10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.1700334474278613,
+          "late_quality_gain": -0.2104942902981396,
+          "radial_change": -0.10996398126491425,
+          "direction_change": -0.02783966064453125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.19068399571058847,
+          "late_quality_gain": -0.1946644580201119,
+          "radial_change": -0.10696955198038449,
+          "direction_change": -0.023590087890625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "read_g10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.3531646340572264,
+          "late_quality_gain": -0.38110511091944055,
+          "radial_change": 0.017172846171334077,
+          "direction_change": -0.01422882080078125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.3781406160318146,
+          "late_quality_gain": -0.430158629836209,
+          "radial_change": 0.028810244791733552,
+          "direction_change": -0.01757049560546875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "read_w01",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.11631317548217823,
+          "late_quality_gain": -0.18508181207579066,
+          "radial_change": -0.178107633241387,
+          "direction_change": -0.01143646240234375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.17463110336096033,
+          "late_quality_gain": -0.2204787136358255,
+          "radial_change": -0.15159831659616807,
+          "direction_change": -0.0135955810546875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "read_w10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.5415504746856377,
+          "late_quality_gain": -0.5643036539368187,
+          "radial_change": 0.4715739857113177,
+          "direction_change": -0.01329803466796875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.5570192436011452,
+          "late_quality_gain": -0.6025525577527058,
+          "radial_change": 0.49281482541359756,
+          "direction_change": -0.01294708251953125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "state_g10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.31827396835043487,
+          "late_quality_gain": -0.38913505978028673,
+          "radial_change": 0.23038450401600752,
+          "direction_change": -0.01706695556640625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.3276933467220743,
+          "late_quality_gain": -0.3577206047350149,
+          "radial_change": 0.24222669198498203,
+          "direction_change": -0.01639556884765625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "state_match_g10",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.19250324315049794,
+          "late_quality_gain": -0.18387564787597777,
+          "radial_change": -0.052058073448673636,
+          "direction_change": -0.01462554931640625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.25270969989667535,
+          "late_quality_gain": -0.27386749772968855,
+          "radial_change": -0.03733997751554263,
+          "direction_change": -0.018157958984375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    }
+  ],
+  "selected": []
+}

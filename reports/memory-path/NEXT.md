@@ -1,3 +1,101 @@
+# Status: paused after round18
+
+User requested a commit and is considering shelving this experiment. No further
+scouts are queued; resume experiments only when requested. The tested local
+adversarial formulations have not solved autonomous circle continuation under
+the no-full-rollout constraint. This is a negative result for the tested methods,
+not a proof that the broader memory-GAN idea is impossible.
+
+Implementation, configs, diagnostics, research notes and results for rounds15–18
+are preserved together in the checkpoint commit. Earlier entries below describe
+historical working-tree status. Nothing was pushed as part of this checkpoint.
+
+---
+
+# Latest: separate G dynamics round18 completed
+
+Seven2k scouts on both GPUs and all diagnostics completed, zero failures.
+All full circles0/128; no extension qualifies. Nothing running or queued.
+Read ../memory-handoff/state_round18/{assessment,state_comparison,next,formulation}.md.
+Winner remains original round12. Best new embedded8_dclock minQ.007584 vs.010901.
+D clock helps separated observation control49% but worsens shared baseline46%.
+Intent/hybrid internal-state updates lose80–86% versus matched observation controls.
+Mg/Md generated-state probes near chance128; real observations retain process info.
+One internal transition breaks real-trained probe transfer while separately fitted
+probes still recover info: representation shift precedes long-horizon forgetting.
+No D memory leaks into separated G. No UCD clock classification added.
+Config g_state_update defaults observation; new modes embedded/intent/hybrid are
+fully config-driven, same architecture/initialization, real-prefix BPTT, at most
+one generated temporal transition. No MSE training or full generated rollout.
+130 focused tests plus18/9 targeted rechecks, four GPU smokes, Mg diagnostic smoke,
+source/panel audits passed. No next experiment selected/queued. Possible diagnostic:
+saved-model next-read compatibility after one state transition; consider one common
+internal transition with observation corrections only if evidence warrants it.
+21.38min queue wall,37.71GPU-min. Rounds15/16/17/18 included in the checkpoint commit; push not requested.
+Stable tail unchanged; do not rerun sealed queues.
+
+---
+
+# Latest: opposing-joint Gibbs round17 completed
+
+Read ../memory-handoff/gibbs_round17/{assessment,comparison,gibbs_comparison,diagnostic_assessment,design_review,next}.md.
+Six 2k scouts completed on both GPUs, zero failures. All diagnostics complete.
+No extension qualifiers; all full cold/warm circle passes remain 0/128.
+Nothing running or queued. Changes from rounds15/16/17 remain uncommitted/unpushed.
+
+Saved round12 winner unchanged. Best new gibbs1_joint25 min warm Q .007228:
++21.7% versus matched architecture control, -33.7% versus original2k .010901.
+Three-decode models settle locally by3 decodes (including architecture control),
+but7 decodes do not improve point error and outer continuation is worse.
+Every scout loses tested radius/speed information by128 generated writes.
+M still strongly affects reads; h is weakly sample-dependent in one-decode
+joint models and clearly used by three-decode models. Avoid claims of universal
+latent collapse, stationary sampling, or information-theoretic erasure.
+
+Figure1 correction implemented: real(E(M,x_real),x_real) against fake(h_producer,x_fake),
+with a separate ephemeral latent, no intermediate memory writes or time advances.
+E's real branch cooperates with P. K sees detached M/clock, not particle.
+Existing persistent D-memory training and maximum one generated write retained.
+Default-off configs, no MSE training, no clipping/EMA, default exact B-cap.
+112 focused tests, two GPU smokes, checkpoint diagnostics and source/panel audits pass.
+
+Recommendation: diagnose this same local refinement after one generated write,
+paired with a real write; inspect E's candidate sensitivity at fixed M. Depending
+on that result, expose the joint objective to bounded explored contexts. Another
+possible mechanism test removes the direct particle-to-decoder bypass (particle
+initializes h), because current inner chain state is(z,h), while K sees(h,x).
+No next experiment selected or queued. Do not just increase inner iterations.
+Stable tail: runs/memory_path/core_round1/train.log.
+
+---
+
+# Latest: two Gibbs-inspired rounds completed (rounds15/16)
+
+Read ../memory-handoff/gibbs_round16/{assessment,two_rounds,next}.md and the
+round15 assessment. Twelve 2k scouts completed on both GPUs, with round16
+selected from completed round15 results. Zero failures, no extension qualifiers,
+all full cold/warm passes remain 0/128. No jobs running or queued.
+
+Saved round12 match_shuffle25 remains the winner (5k nominal; 2k late-Q control).
+Best new minimum warm Q: uncond_w10 .009286 and read_w01 .009212, versus saved
+2k .010901. History-negative K classifiers reach 100% on that task but do not
+solve continuation. Strong writer alignment improves clean decoding while
+hurting reads and Q; weak read-space writer alignment helps its matched variant.
+All new models lose tested process decodability by 128 generated writes.
+
+Added optional training-only transition critic, explicit G/writer alignment,
+history negatives and frozen-G read-space matching. Maximum one generated write
+per branch, no full generated training rollout or MSE objective. Existing configs
+and checkpoints work; default-off and previous memory-space training remain
+bitwise equivalent. 99 focused tests and four GPU smokes passed.
+
+Recommendation: measure representation drift across one actual D update on
+fixed histories/particles/G, then G's recovery, before another sweep. Drift is
+not yet an established cause. No next experiment selected. Current changes are
+uncommitted/unpushed. Stable tail: runs/memory_path/core_round1/train.log.
+
+---
+
 # Latest: information diagnosis and future ranking round14 completed
 
 Read ../memory-handoff/information_round14/{assessment,diagnosis,scout_information,next}.md.

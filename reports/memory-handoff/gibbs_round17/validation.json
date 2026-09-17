@@ -1,0 +1,9 @@
+{
+  "focused_tests": 112,
+  "passed": 112,
+  "gpu_smokes": "gibbs_smoke17, both devices, 4 updates each",
+  "diagnostic_checkpoint_smoke": "both completed smoke checkpoints,64 fresh histories",
+  "default_bcap": true,
+  "training_mse": false,
+  "panel_audit": "../gibbs_smoke17/panel_audit.json"
+}

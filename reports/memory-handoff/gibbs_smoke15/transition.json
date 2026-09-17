@@ -1,0 +1,233 @@
+{
+  "evaluation_only": true,
+  "count": 1024,
+  "definition": "Fresh held-out noisy circle histories from the training process distribution, shared exactly across models. Learned particles are sampled from the existing 512 table and are not held out. A fixed particle generates at t, then one writer update gives the generated successor. Compare with the observed successor and independently read both at t+1 using the same particle and clock; also shuffle observed successor across episodes. All MSE quantities are evaluation only, never GAN objectives. Memory distance is in model-specific coordinates; normalized distance is descriptive, not a universal quality score. Next-read errors use noisy observed targets and do not establish long-run success. K scores compare joint real/generated transitions and shuffled anchors; optional hybrids deliberately violate sample/write consistency to probe score dependence. Their margins do not establish causal feature importance. K scores across independently trained critics are not calibrated/comparable. No K values are reported for the original baseline. Use existing information diagnostics separately for retention over autonomous execution. Completed runs only; no optimization or trajectory training.",
+  "results": [
+    {
+      "name": "joint_w10_smoke",
+      "source": "runs/memory_path/gibbs_smoke15/runs/joint_w10_smoke",
+      "steps": 4,
+      "checkpoint_sha256": "85dfc43ac85facddf925a7a827c9e941a9e812303eb98290775f4b46b7007dc8",
+      "transition_critic_enabled": true,
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.7056806087493896,
+          "successor_memory_mse": 0.03154439479112625,
+          "real_successor_memory_variance": 0.11667840927839279,
+          "normalized_successor_memory_mse": 0.2703533172607422,
+          "next_read_mse": {
+            "real": 0.7060111165046692,
+            "generated": 0.7197181582450867,
+            "shuffled_real": 0.7429454326629639
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.00046593562001362443,
+            "shuffled_vs_real": 0.004188873339444399
+          },
+          "transition_critic": {
+            "real_vs_generated": {
+              "positive_mean": 0.05373308062553406,
+              "negative_mean": -0.011676733382046223,
+              "mean_margin": 0.06540980190038681,
+              "median_margin": 0.05411414057016373,
+              "positive_rank_fraction": 0.935546875
+            },
+            "real_anchor_vs_shuffled_anchor": {
+              "positive_mean": 0.05373308062553406,
+              "negative_mean": 0.030360814183950424,
+              "mean_margin": 0.023372258991003036,
+              "median_margin": 0.01599503681063652,
+              "positive_rank_fraction": 0.6962890625
+            },
+            "generated_anchor_vs_shuffled_anchor": {
+              "positive_mean": -0.011676733382046223,
+              "negative_mean": -0.014691022224724293,
+              "mean_margin": 0.003014286980032921,
+              "median_margin": 0.0038724616169929504,
+              "positive_rank_fraction": 0.5478515625
+            },
+            "real_vs_real_x_generated_memory": {
+              "positive_mean": 0.05373308062553406,
+              "negative_mean": 0.021060040220618248,
+              "mean_margin": 0.03267303481698036,
+              "median_margin": 0.03163022920489311,
+              "positive_rank_fraction": 0.9423828125
+            },
+            "real_vs_generated_x_real_memory": {
+              "positive_mean": 0.05373308062553406,
+              "negative_mean": 0.01815125159919262,
+              "mean_margin": 0.03558182343840599,
+              "median_margin": 0.02731170505285263,
+              "positive_rank_fraction": 0.9248046875
+            },
+            "generated_vs_real_x_generated_memory": {
+              "positive_mean": -0.011676733382046223,
+              "negative_mean": 0.021060040220618248,
+              "mean_margin": -0.032736774533987045,
+              "median_margin": -0.02283766120672226,
+              "positive_rank_fraction": 0.083984375
+            },
+            "generated_vs_generated_x_real_memory": {
+              "positive_mean": -0.011676733382046223,
+              "negative_mean": 0.01815125159919262,
+              "mean_margin": -0.029827982187271118,
+              "median_margin": -0.027635734528303146,
+              "positive_rank_fraction": 0.0712890625
+            }
+          }
+        },
+        "32": {
+          "generated_point_mse": 0.6858871579170227,
+          "successor_memory_mse": 0.03066551871597767,
+          "real_successor_memory_variance": 0.11638287454843521,
+          "normalized_successor_memory_mse": 0.263488233089447,
+          "next_read_mse": {
+            "real": 0.682285487651825,
+            "generated": 0.7049732208251953,
+            "shuffled_real": 0.7303764820098877
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.0004796830180566758,
+            "shuffled_vs_real": 0.005096536595374346
+          },
+          "transition_critic": {
+            "real_vs_generated": {
+              "positive_mean": 0.053551021963357925,
+              "negative_mean": -0.011898225173354149,
+              "mean_margin": 0.06544925272464752,
+              "median_margin": 0.05620867758989334,
+              "positive_rank_fraction": 0.931640625
+            },
+            "real_anchor_vs_shuffled_anchor": {
+              "positive_mean": 0.053551021963357925,
+              "negative_mean": 0.029577642679214478,
+              "mean_margin": 0.023973381146788597,
+              "median_margin": 0.015495982021093369,
+              "positive_rank_fraction": 0.6845703125
+            },
+            "generated_anchor_vs_shuffled_anchor": {
+              "positive_mean": -0.011898225173354149,
+              "negative_mean": -0.01526610367000103,
+              "mean_margin": 0.003367879195138812,
+              "median_margin": 0.003206193447113037,
+              "positive_rank_fraction": 0.54296875
+            },
+            "real_vs_real_x_generated_memory": {
+              "positive_mean": 0.053551021963357925,
+              "negative_mean": 0.021030284464359283,
+              "mean_margin": 0.03252073749899864,
+              "median_margin": 0.03206411749124527,
+              "positive_rank_fraction": 0.935546875
+            },
+            "real_vs_generated_x_real_memory": {
+              "positive_mean": 0.053551021963357925,
+              "negative_mean": 0.017934206873178482,
+              "mean_margin": 0.03561681509017944,
+              "median_margin": 0.026482686400413513,
+              "positive_rank_fraction": 0.9208984375
+            },
+            "generated_vs_real_x_generated_memory": {
+              "positive_mean": -0.011898225173354149,
+              "negative_mean": 0.021030284464359283,
+              "mean_margin": -0.03292850777506828,
+              "median_margin": -0.023034624755382538,
+              "positive_rank_fraction": 0.09765625
+            },
+            "generated_vs_generated_x_real_memory": {
+              "positive_mean": -0.011898225173354149,
+              "negative_mean": 0.017934206873178482,
+              "mean_margin": -0.02983243204653263,
+              "median_margin": -0.028384670615196228,
+              "positive_rank_fraction": 0.076171875
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "state_w10_smoke",
+      "source": "runs/memory_path/gibbs_smoke15/runs/state_w10_smoke",
+      "steps": 4,
+      "checkpoint_sha256": "025545d6f8bb3bf8ea61fdf5db19b7e674e0c7f4d635bfe433063b8867f1fb21",
+      "transition_critic_enabled": true,
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.7056970596313477,
+          "successor_memory_mse": 0.031544946134090424,
+          "real_successor_memory_variance": 0.11668622493743896,
+          "normalized_successor_memory_mse": 0.2703399360179901,
+          "next_read_mse": {
+            "real": 0.7060324549674988,
+            "generated": 0.7197266221046448,
+            "shuffled_real": 0.7429516315460205
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.00046578902401961386,
+            "shuffled_vs_real": 0.004187405109405518
+          },
+          "transition_critic": {
+            "real_vs_generated": {
+              "positive_mean": 0.05867970734834671,
+              "negative_mean": 0.022506315261125565,
+              "mean_margin": 0.03617338463664055,
+              "median_margin": 0.03803490474820137,
+              "positive_rank_fraction": 0.97265625
+            },
+            "real_anchor_vs_shuffled_anchor": {
+              "positive_mean": 0.05867970734834671,
+              "negative_mean": 0.03360364958643913,
+              "mean_margin": 0.02507605031132698,
+              "median_margin": 0.02041994221508503,
+              "positive_rank_fraction": 0.7919921875
+            },
+            "generated_anchor_vs_shuffled_anchor": {
+              "positive_mean": 0.022506315261125565,
+              "negative_mean": 0.008182775229215622,
+              "mean_margin": 0.014323540031909943,
+              "median_margin": 0.011106211692094803,
+              "positive_rank_fraction": 0.6953125
+            }
+          }
+        },
+        "32": {
+          "generated_point_mse": 0.6859115362167358,
+          "successor_memory_mse": 0.030666394159197807,
+          "real_successor_memory_variance": 0.11639057844877243,
+          "normalized_successor_memory_mse": 0.2634783089160919,
+          "next_read_mse": {
+            "real": 0.6823105812072754,
+            "generated": 0.7049886584281921,
+            "shuffled_real": 0.7303866147994995
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.0004793464613612741,
+            "shuffled_vs_real": 0.0050942013040184975
+          },
+          "transition_critic": {
+            "real_vs_generated": {
+              "positive_mean": 0.05681715905666351,
+              "negative_mean": 0.02138316072523594,
+              "mean_margin": 0.03543400019407272,
+              "median_margin": 0.03727477788925171,
+              "positive_rank_fraction": 0.97265625
+            },
+            "real_anchor_vs_shuffled_anchor": {
+              "positive_mean": 0.05681715905666351,
+              "negative_mean": 0.031087039038538933,
+              "mean_margin": 0.02573011815547943,
+              "median_margin": 0.02080845832824707,
+              "positive_rank_fraction": 0.7861328125
+            },
+            "generated_anchor_vs_shuffled_anchor": {
+              "positive_mean": 0.02138316072523594,
+              "negative_mean": 0.006485398858785629,
+              "mean_margin": 0.01489776186645031,
+              "median_margin": 0.012088539078831673,
+              "positive_rank_fraction": 0.703125
+            }
+          }
+        }
+      }
+    }
+  ]
+}

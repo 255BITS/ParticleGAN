@@ -1,0 +1,439 @@
+{
+  "evaluation_only": true,
+  "count": 1024,
+  "definition": "Fresh held-out noisy circle histories from the training process distribution, shared exactly across models. Learned particles are sampled from the existing 512 table and are not held out. A fixed particle generates at t, then one writer update gives the generated successor. Compare with the observed successor and independently read both at t+1 using the same particle and clock; also shuffle observed successor across episodes. All MSE quantities are evaluation only, never GAN objectives. Memory distance is in model-specific coordinates; normalized distance is descriptive, not a universal quality score. Next-read errors use noisy observed targets and do not establish long-run success. The transition candidate space is reported per model. Memory-space K sees successor M; read-space K sees current G(z, successor M, t+1), with optional first-point x in either space. In read space the real candidate is a model read after an observed write, not ground-truth next observation. The same fixed particle and next clock are used on both sides, and none of these reads are written back. K scores compare joint real/generated transitions and shuffled anchors; optional hybrids deliberately violate sample/write consistency to probe score dependence. Their margins do not establish causal feature importance. Absolute correct-versus-shuffled anchor scores can change through arbitrary anchor-only offsets unconstrained by paired GAN losses. The paired-margin correct-versus-shuffled comparison cancels such offsets and measures how conditioning changes real/fake separation, not process retention. The real-versus-other-episode-successor task compares complete real candidates from different episodes at the same anchor; this mirrors the history-negative critic objective and also cancels arbitrary anchor-only offsets. K scores across independently trained critics are not calibrated/comparable. No K values are reported for the original baseline. Use existing information diagnostics separately for retention over autonomous execution. Completed runs only; no optimization or trajectory training.",
+  "results": [
+    {
+      "name": "match_shuffle25",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12/runs/match_shuffle25",
+      "steps": 2000,
+      "checkpoint_sha256": "73f56120177fd80e955c840e476287e5bf53b7fd0937043a7558d4345e49df2d",
+      "transition_critic_enabled": false,
+      "transition_config": {
+        "transition_weight": 0.0,
+        "transition_writer_weight": 0.0,
+        "transition_condition": true,
+        "transition_include_x": true,
+        "transition_width": 128,
+        "transition_ramp_steps": 0,
+        "transition_critic_only": false,
+        "transition_space": "memory",
+        "transition_mismatch_weight": 0.0
+      },
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.0047643184661865234,
+          "successor_memory_mse": 0.0005382754607126117,
+          "real_successor_memory_variance": 0.08007503300905228,
+          "normalized_successor_memory_mse": 0.00672213826328516,
+          "next_read_mse": {
+            "real": 0.004892200697213411,
+            "generated": 0.015068670734763145,
+            "shuffled_real": 1.4424419403076172
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.012064335867762566,
+            "shuffled_vs_real": 1.4307116270065308
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        },
+        "32": {
+          "generated_point_mse": 0.004668750800192356,
+          "successor_memory_mse": 0.0005281411577016115,
+          "real_successor_memory_variance": 0.07937097549438477,
+          "normalized_successor_memory_mse": 0.0066540841944515705,
+          "next_read_mse": {
+            "real": 0.005061160307377577,
+            "generated": 0.014956267550587654,
+            "shuffled_real": 1.4167683124542236
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.011907126754522324,
+            "shuffled_vs_real": 1.4067561626434326
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        }
+      }
+    },
+    {
+      "name": "match_shuffle25_5k",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/principles_round12_followup/runs/match_shuffle25_5k",
+      "steps": 5000,
+      "checkpoint_sha256": "7f46d8ef41877e5bb61be9d4d18a7964574efb83fbae1b38221f35f40aa156a9",
+      "transition_critic_enabled": false,
+      "transition_config": {
+        "transition_weight": 0.0,
+        "transition_writer_weight": 0.0,
+        "transition_condition": true,
+        "transition_include_x": true,
+        "transition_width": 128,
+        "transition_ramp_steps": 0,
+        "transition_critic_only": false,
+        "transition_space": "memory",
+        "transition_mismatch_weight": 0.0
+      },
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.004441266879439354,
+          "successor_memory_mse": 0.0005105732707306743,
+          "real_successor_memory_variance": 0.07441253215074539,
+          "normalized_successor_memory_mse": 0.0068613882176578045,
+          "next_read_mse": {
+            "real": 0.004421978257596493,
+            "generated": 0.01279628649353981,
+            "shuffled_real": 1.4331018924713135
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.010924890637397766,
+            "shuffled_vs_real": 1.4148695468902588
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        },
+        "32": {
+          "generated_point_mse": 0.004030690062791109,
+          "successor_memory_mse": 0.00046562065836042166,
+          "real_successor_memory_variance": 0.07330071926116943,
+          "normalized_successor_memory_mse": 0.006352197844535112,
+          "next_read_mse": {
+            "real": 0.004380686674267054,
+            "generated": 0.011447792872786522,
+            "shuffled_real": 1.4210011959075928
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.010027876123785973,
+            "shuffled_vs_real": 1.4170522689819336
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        }
+      }
+    },
+    {
+      "name": "gibbs1_arch",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/gibbs_round17/runs/gibbs1_arch",
+      "steps": 2000,
+      "checkpoint_sha256": "c4b8208fc191af88f3e930218f3196f12074c70530e9dbcf7f79166dc26c3aaa",
+      "transition_critic_enabled": false,
+      "transition_config": {
+        "transition_weight": 0.0,
+        "transition_writer_weight": 0.0,
+        "transition_condition": true,
+        "transition_include_x": true,
+        "transition_width": 128,
+        "transition_ramp_steps": 0,
+        "transition_critic_only": false,
+        "transition_space": "memory",
+        "transition_mismatch_weight": 0.0
+      },
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.00486814696341753,
+          "successor_memory_mse": 0.0005303584039211273,
+          "real_successor_memory_variance": 0.08204291760921478,
+          "normalized_successor_memory_mse": 0.006464402191340923,
+          "next_read_mse": {
+            "real": 0.004832091741263866,
+            "generated": 0.015530573204159737,
+            "shuffled_real": 1.4466350078582764
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.01265183836221695,
+            "shuffled_vs_real": 1.4406441450119019
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        },
+        "32": {
+          "generated_point_mse": 0.00455729104578495,
+          "successor_memory_mse": 0.000501353177241981,
+          "real_successor_memory_variance": 0.0813547670841217,
+          "normalized_successor_memory_mse": 0.006162554491311312,
+          "next_read_mse": {
+            "real": 0.004995101131498814,
+            "generated": 0.014614073559641838,
+            "shuffled_real": 1.4314472675323486
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.0123025793582201,
+            "shuffled_vs_real": 1.4389139413833618
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        }
+      }
+    },
+    {
+      "name": "gibbs1_joint10",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/gibbs_round17/runs/gibbs1_joint10",
+      "steps": 2000,
+      "checkpoint_sha256": "4200c677990db05bb6073e1058420b133facfa7a6113f8571f7d22020e90928e",
+      "transition_critic_enabled": false,
+      "transition_config": {
+        "transition_weight": 0.0,
+        "transition_writer_weight": 0.0,
+        "transition_condition": true,
+        "transition_include_x": true,
+        "transition_width": 128,
+        "transition_ramp_steps": 0,
+        "transition_critic_only": false,
+        "transition_space": "memory",
+        "transition_mismatch_weight": 0.0
+      },
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.005365430843085051,
+          "successor_memory_mse": 0.0006228062557056546,
+          "real_successor_memory_variance": 0.08190752565860748,
+          "normalized_successor_memory_mse": 0.007603773381561041,
+          "next_read_mse": {
+            "real": 0.005210276693105698,
+            "generated": 0.017836377024650574,
+            "shuffled_real": 1.4494328498840332
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.014117138460278511,
+            "shuffled_vs_real": 1.4459582567214966
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        },
+        "32": {
+          "generated_point_mse": 0.00473183486610651,
+          "successor_memory_mse": 0.000558689993340522,
+          "real_successor_memory_variance": 0.08131856471300125,
+          "normalized_successor_memory_mse": 0.006870386656373739,
+          "next_read_mse": {
+            "real": 0.005185680463910103,
+            "generated": 0.0156888198107481,
+            "shuffled_real": 1.4303112030029297
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.012819685973227024,
+            "shuffled_vs_real": 1.4351741075515747
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        }
+      }
+    },
+    {
+      "name": "gibbs1_joint25",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/gibbs_round17/runs/gibbs1_joint25",
+      "steps": 2000,
+      "checkpoint_sha256": "eaffad51d009dceac84973b0ff0ef80f37dddcb40ad8ad33d25a7dbf2b99dfc9",
+      "transition_critic_enabled": false,
+      "transition_config": {
+        "transition_weight": 0.0,
+        "transition_writer_weight": 0.0,
+        "transition_condition": true,
+        "transition_include_x": true,
+        "transition_width": 128,
+        "transition_ramp_steps": 0,
+        "transition_critic_only": false,
+        "transition_space": "memory",
+        "transition_mismatch_weight": 0.0
+      },
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.004965966567397118,
+          "successor_memory_mse": 0.0005500530824065208,
+          "real_successor_memory_variance": 0.07977411150932312,
+          "normalized_successor_memory_mse": 0.006895132828503847,
+          "next_read_mse": {
+            "real": 0.004763732198625803,
+            "generated": 0.015454163774847984,
+            "shuffled_real": 1.450881838798523
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.013144830241799355,
+            "shuffled_vs_real": 1.4493178129196167
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        },
+        "32": {
+          "generated_point_mse": 0.004734869115054607,
+          "successor_memory_mse": 0.0005275961011648178,
+          "real_successor_memory_variance": 0.07909239828586578,
+          "normalized_successor_memory_mse": 0.006670629605650902,
+          "next_read_mse": {
+            "real": 0.005295128561556339,
+            "generated": 0.01595810428261757,
+            "shuffled_real": 1.4355125427246094
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.013094516471028328,
+            "shuffled_vs_real": 1.4464232921600342
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        }
+      }
+    },
+    {
+      "name": "gibbs3_arch",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/gibbs_round17/runs/gibbs3_arch",
+      "steps": 2000,
+      "checkpoint_sha256": "a16daf737771c8e5f5dbac29c8bf8c459123ac25b71e9f54063a6d1125b86645",
+      "transition_critic_enabled": false,
+      "transition_config": {
+        "transition_weight": 0.0,
+        "transition_writer_weight": 0.0,
+        "transition_condition": true,
+        "transition_include_x": true,
+        "transition_width": 128,
+        "transition_ramp_steps": 0,
+        "transition_critic_only": false,
+        "transition_space": "memory",
+        "transition_mismatch_weight": 0.0
+      },
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.006085713393986225,
+          "successor_memory_mse": 0.0006918092840351164,
+          "real_successor_memory_variance": 0.0856495201587677,
+          "normalized_successor_memory_mse": 0.008077211678028107,
+          "next_read_mse": {
+            "real": 0.005791912786662579,
+            "generated": 0.022113898769021034,
+            "shuffled_real": 1.4438782930374146
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.014609191566705704,
+            "shuffled_vs_real": 1.4325954914093018
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        },
+        "32": {
+          "generated_point_mse": 0.005499883554875851,
+          "successor_memory_mse": 0.0006301202811300755,
+          "real_successor_memory_variance": 0.08481842279434204,
+          "normalized_successor_memory_mse": 0.00742904981598258,
+          "next_read_mse": {
+            "real": 0.00604651216417551,
+            "generated": 0.021251758560538292,
+            "shuffled_real": 1.437347650527954
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.013938212767243385,
+            "shuffled_vs_real": 1.4495183229446411
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        }
+      }
+    },
+    {
+      "name": "gibbs3_joint10",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/gibbs_round17/runs/gibbs3_joint10",
+      "steps": 2000,
+      "checkpoint_sha256": "ecbe3f623ec96d85aa0cb54f79ed022b8fe422394c962c2d8f36ca827fe5c788",
+      "transition_critic_enabled": false,
+      "transition_config": {
+        "transition_weight": 0.0,
+        "transition_writer_weight": 0.0,
+        "transition_condition": true,
+        "transition_include_x": true,
+        "transition_width": 128,
+        "transition_ramp_steps": 0,
+        "transition_critic_only": false,
+        "transition_space": "memory",
+        "transition_mismatch_weight": 0.0
+      },
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.005787074565887451,
+          "successor_memory_mse": 0.0006753812194801867,
+          "real_successor_memory_variance": 0.08595411479473114,
+          "normalized_successor_memory_mse": 0.007857462391257286,
+          "next_read_mse": {
+            "real": 0.005735087674111128,
+            "generated": 0.021306052803993225,
+            "shuffled_real": 1.4462178945541382
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.014605714939534664,
+            "shuffled_vs_real": 1.437474012374878
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        },
+        "32": {
+          "generated_point_mse": 0.005208592861890793,
+          "successor_memory_mse": 0.0006129005341790617,
+          "real_successor_memory_variance": 0.08513759076595306,
+          "normalized_successor_memory_mse": 0.007198941428214312,
+          "next_read_mse": {
+            "real": 0.005683828145265579,
+            "generated": 0.019231587648391724,
+            "shuffled_real": 1.432464599609375
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.013545804657042027,
+            "shuffled_vs_real": 1.4387211799621582
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        }
+      }
+    },
+    {
+      "name": "gibbs3_joint25",
+      "source": "/home/martyn/dev/ParticleGAN/runs/memory_path/gibbs_round17/runs/gibbs3_joint25",
+      "steps": 2000,
+      "checkpoint_sha256": "ee2bf610de183c84c4eeeb8566c7ed497e2dcf9fd5f5b26038e54d2565cf87bd",
+      "transition_critic_enabled": false,
+      "transition_config": {
+        "transition_weight": 0.0,
+        "transition_writer_weight": 0.0,
+        "transition_condition": true,
+        "transition_include_x": true,
+        "transition_width": 128,
+        "transition_ramp_steps": 0,
+        "transition_critic_only": false,
+        "transition_space": "memory",
+        "transition_mismatch_weight": 0.0
+      },
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.0062899161130189896,
+          "successor_memory_mse": 0.0007296121912077069,
+          "real_successor_memory_variance": 0.08604295551776886,
+          "normalized_successor_memory_mse": 0.008479626849293709,
+          "next_read_mse": {
+            "real": 0.0059021394699811935,
+            "generated": 0.023423966020345688,
+            "shuffled_real": 1.431721568107605
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.01506077405065298,
+            "shuffled_vs_real": 1.4117400646209717
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        },
+        "32": {
+          "generated_point_mse": 0.005439933389425278,
+          "successor_memory_mse": 0.0006341992411762476,
+          "real_successor_memory_variance": 0.08519737422466278,
+          "normalized_successor_memory_mse": 0.007443882524967194,
+          "next_read_mse": {
+            "real": 0.005655353423207998,
+            "generated": 0.01971219852566719,
+            "shuffled_real": 1.4133102893829346
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.013174960389733315,
+            "shuffled_vs_real": 1.4016468524932861
+          },
+          "transition_candidate_space": null,
+          "transition_critic": null
+        }
+      }
+    }
+  ]
+}

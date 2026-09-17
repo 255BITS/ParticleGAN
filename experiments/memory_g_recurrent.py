@@ -25,6 +25,10 @@ class RecurrentReader(LocalReader):
         inputs = torch.cat((point, memory.flatten(1)), -1) if self.g_state_reads_d else point
         return self.state_cell(inputs, state)
 
+    def generated_state(self, state, point, memory, features=None, *, actual=None, strength=1.):
+        observation = point if actual is None else (1-strength)*actual+strength*point
+        return self.write_state(state, observation, memory)
+
     def forward(self, z, memory, hidden=None, *, time_index=None):
         if hidden is None:
             raise ValueError('Recurrent reader requires explicit observation history state')
@@ -39,6 +43,59 @@ class RecurrentReader(LocalReader):
         if not self.g_use_d_memory:
             memory = torch.zeros_like(memory)
         return super().readable_memory(torch.cat((z, hidden), -1), memory, time_index=time_index)
+
+
+class InternalStateReader(RecurrentReader):
+    """Separate G state, advanced from final decoder features or a matched control.
+
+    Real observations enter through a learned encoder into the shared GRU input
+    space. Generated transitions use those encoded outputs (embedded), internal
+    decoder features (intent), or their equal mixture (hybrid). Reads are pure;
+    only generated_state advances state, once per final emitted point.
+    """
+    def __init__(self, cfg):
+        super().__init__(cfg)
+        self.state_update = cfg.g_state_update
+        with torch.random.fork_rng(devices=[]):
+            torch.random.default_generator.manual_seed(55)
+            self.observation_encoder = nn.Sequential(nn.Linear(2, cfg.g_width), nn.SiLU())
+            self.state_cell = nn.GRUCell(cfg.g_width, cfg.g_state_dim)
+
+    def write_state(self, state, point, memory):
+        return self.state_cell(self.observation_encoder(point), state)
+
+    def _read(self, z, memory, hidden, raw_memory):
+        # Config validation excludes FiLM/private state/residual outputs. Expose
+        # the features of the FINAL decoder read, before its 2D output bottleneck.
+        inputs = torch.cat((z, memory.flatten(1)), -1) if self.memory_concat else z
+        features = self.net[:-1](inputs)
+        point = self.net[-1](features)
+        if self.output_bound:
+            point = self.output_bound*torch.tanh(point/self.output_bound)
+        return point, features
+
+    def forward(self, z, memory, hidden=None, *, time_index=None):
+        if hidden is None:
+            raise ValueError('Internal state reader requires explicit G state')
+        # Complete separation: neither observation encoder, decoder nor state
+        # transition can access D memory, including through proposal repair.
+        return LocalReader.forward(self, torch.cat((z, hidden), -1),
+                                   torch.zeros_like(memory), time_index=time_index)
+
+    def generated_state(self, state, point, memory, features=None, *, actual=None, strength=1.):
+        if self.state_update == 'embedded':
+            inputs = self.observation_encoder(point)
+        else:
+            if features is None:
+                raise ValueError('Internal transition requires final decoder features')
+            inputs = features
+            if self.state_update == 'hybrid':
+                inputs = .5*(inputs+self.observation_encoder(point))
+        if actual is not None:
+            # Bounded local handoff in the common GRU input space. At strength
+            # zero this is exactly teacher forcing; at one exactly runtime.
+            inputs = (1-strength)*self.observation_encoder(actual)+strength*inputs
+        return self.state_cell(inputs, state)
 
 
 def selected_states(generator, writer, observed, positions, max_prefix, state_grad):
@@ -77,7 +134,7 @@ def training_contexts(cfg, generator, critic, observed, positions, z, jitter,
     ordinary_s, previous_s = state[:, :count].flatten(0, 1), state[:, count:].flatten(0, 1)
     times = previous_positions if clock_origin is None else previous_positions+clock_origin
     with torch.set_grad_enabled(proposal_grad):
-        proposed, _ = generator(z, previous, previous_s, time_index=times.flatten())
+        proposed, features = generator(z, previous, previous_s, time_index=times.flatten())
     rows = torch.arange(len(observed), device=observed.device)[:, None]
     actual = observed[rows, previous_positions].flatten(0, 1)
     strength = (cfg.feedback_strength if feedback_strength is None else feedback_strength)*min(1., step/max(1, cfg.feedback_ramp_steps))
@@ -86,7 +143,8 @@ def training_contexts(cfg, generator, critic, observed, positions, z, jitter,
         replacement = replacement.detach()
     updated = critic.writer.write(previous, replacement)
     with torch.set_grad_enabled(state_grad):
-        updated_s = generator.write_state(previous_s, replacement, previous)
+        updated_s = generator.generated_state(previous_s, proposed, previous, features,
+                                              actual=actual, strength=strength)
     eligible = feedback_mask.flatten() & (positions.flatten() >= cfg.feedback_min_prefix)
     memory = torch.where(eligible[:, None, None], updated, ordinary)+jitter
     state = torch.where(eligible[:, None], updated_s, ordinary_s)
@@ -104,8 +162,8 @@ def continuation(generator, writer, z, prefix, steps, intervention=None, states=
     for t in range(steps):
         read = torch.zeros_like(memory) if intervention == 'zero' else memory.roll(1, 0) if intervention == 'shuffle' else memory
         read_s = torch.zeros_like(state) if intervention == 'g_zero' else state.roll(1, 0) if intervention == 'g_shuffle' else state
-        point, _ = generator(z, read, read_s, time_index=prefix.shape[1]+t)
-        state = generator.write_state(read_s, point, read)
+        point, features = generator(z, read, read_s, time_index=prefix.shape[1]+t)
+        state = generator.generated_state(read_s, point, read, features)
         memory = writer.write(memory, point)
         path.append(point)
         if states:

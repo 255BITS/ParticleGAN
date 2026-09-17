@@ -1,0 +1,111 @@
+{
+  "completed": 6,
+  "reference_fields_bitwise_equal": [
+    "real_noisy",
+    "real_clean",
+    "continuation_reference",
+    "observed_prefix8",
+    "observed_prefix32"
+  ],
+  "archived_sources_match_hashes": true,
+  "identical_sources_within_round": true,
+  "one_generated_write_per_branch": true,
+  "passes": {
+    "state_g10": {
+      "cold": {
+        "generated_256": 0.0,
+        "generated_long": 0.0
+      },
+      "warm": {
+        "prefix8": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        },
+        "prefix32": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        }
+      }
+    },
+    "joint_match_g10": {
+      "cold": {
+        "generated_256": 0.0,
+        "generated_long": 0.0
+      },
+      "warm": {
+        "prefix8": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        },
+        "prefix32": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        }
+      }
+    },
+    "state_match_g10": {
+      "cold": {
+        "generated_256": 0.0,
+        "generated_long": 0.0
+      },
+      "warm": {
+        "prefix8": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        },
+        "prefix32": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        }
+      }
+    },
+    "read_g10": {
+      "cold": {
+        "generated_256": 0.0,
+        "generated_long": 0.0
+      },
+      "warm": {
+        "prefix8": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        },
+        "prefix32": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        }
+      }
+    },
+    "read_w01": {
+      "cold": {
+        "generated_256": 0.0,
+        "generated_long": 0.0
+      },
+      "warm": {
+        "prefix8": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        },
+        "prefix32": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        }
+      }
+    },
+    "read_w10": {
+      "cold": {
+        "generated_256": 0.0,
+        "generated_long": 0.0
+      },
+      "warm": {
+        "prefix8": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        },
+        "prefix32": {
+          "fidelity_256": 0.0,
+          "fidelity_long": 0.0
+        }
+      }
+    }
+  }
+}

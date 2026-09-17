@@ -1,0 +1,181 @@
+{
+  "baseline": "match_shuffle25",
+  "comparisons": [
+    {
+      "name": "baseline_dclock",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.429136627426843,
+          "late_quality_gain": -0.46150173523452354,
+          "radial_change": 0.7062870993190307,
+          "direction_change": -0.01332855224609375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.4759144967247274,
+          "late_quality_gain": -0.5297545893074311,
+          "radial_change": 0.7345603666914833,
+          "direction_change": -0.0150909423828125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "embedded8",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.5089864949382792,
+          "late_quality_gain": -0.6197847220918722,
+          "radial_change": 0.6366586255831386,
+          "direction_change": -0.01091766357421875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.5441680456484346,
+          "late_quality_gain": -0.5973101076648414,
+          "radial_change": 0.6691241579195393,
+          "direction_change": -0.01248931884765625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "embedded8_dclock",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.30013141357313045,
+          "late_quality_gain": -0.34324973473081155,
+          "radial_change": 0.48758661905674816,
+          "direction_change": 0.0034942626953125,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.3204734009779642,
+          "late_quality_gain": -0.32256152741787025,
+          "radial_change": 0.5126501190542332,
+          "direction_change": 0.005615234375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "hybrid8",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.9107252872918596,
+          "late_quality_gain": -0.9436952950592297,
+          "radial_change": 1.7200190286736383,
+          "direction_change": -0.02352142333984375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.9035532138779259,
+          "late_quality_gain": -0.9580383535417153,
+          "radial_change": 1.7654964807793805,
+          "direction_change": -0.021331787109375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "hybrid8_dclock",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.8601543797537186,
+          "late_quality_gain": -0.8867473960039097,
+          "radial_change": 1.3313853334041799,
+          "direction_change": -0.0222625732421875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.8655533596902261,
+          "late_quality_gain": -0.9150432245594299,
+          "radial_change": 1.376988242540076,
+          "direction_change": -0.02030181884765625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "intent8",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.9043235588141086,
+          "late_quality_gain": -0.9507060460417553,
+          "radial_change": 1.1632263534773926,
+          "direction_change": -0.01290130615234375,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.91144690755421,
+          "late_quality_gain": -0.9527938254855092,
+          "radial_change": 1.213851474107666,
+          "direction_change": -0.01371002197265625,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    },
+    {
+      "name": "intent8_dclock",
+      "qualifies": false,
+      "primary_route": false,
+      "secondary_route": false,
+      "stopping_ok": true,
+      "comparisons": {
+        "prefix8": {
+          "quality_gain": -0.900892543260791,
+          "late_quality_gain": -0.9526483947777676,
+          "radial_change": 1.342430764885516,
+          "direction_change": -0.00945281982421875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        },
+        "prefix32": {
+          "quality_gain": -0.9059435623729075,
+          "late_quality_gain": -0.9559792285839177,
+          "radial_change": 1.3818680144736102,
+          "direction_change": -0.00768280029296875,
+          "warm_pass_gain": 0.0,
+          "secondary_pass": false
+        }
+      }
+    }
+  ],
+  "selected": []
+}

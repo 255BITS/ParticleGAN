@@ -36,7 +36,7 @@ def make_splits(sizes, length):
 
 
 @torch.no_grad()
-def collect(g, d, prior, observed, ids, depths, prefix=32, batch=512):
+def collect(g, d, prior, observed, ids, depths, prefix=32, batch=512, memory_kind='M'):
     device = next(g.parameters()).device
     out = {kind: {depth: [] for depth in depths} for kind in ('generated', 'real')}
     particles = []
@@ -46,12 +46,27 @@ def collect(g, d, prior, observed, ids, depths, prefix=32, batch=512):
         particles.append(z.cpu())
         real = context(d.writer, x[:, :prefix])
         generated = real.clone()
+        recurrent = bool(getattr(g, 'g_state_dim', 0))
+        if memory_kind == 'Mg' and not recurrent:
+            raise ValueError('Mg probes require a recurrent generator')
+        if recurrent:
+            state = g.initial_state(z)
+            prefix_memory = d.writer.initial(z)
+            for point in x[:, :prefix].unbind(1):
+                state = g.write_state(state, point, prefix_memory)
+                prefix_memory = d.writer.write(prefix_memory, point)
+            real_state = state.clone()
         for depth in range(max(depths)+1):
             if depth in depths:
-                out['generated'][depth].append(generated.flatten(1).cpu())
-                out['real'][depth].append(real.flatten(1).cpu())
+                out['generated'][depth].append((state if memory_kind == 'Mg' else generated).flatten(1).cpu())
+                out['real'][depth].append((real_state if memory_kind == 'Mg' else real).flatten(1).cpu())
             if depth < max(depths):
-                point, _ = g(z, generated, time_index=prefix+depth)
+                if recurrent:
+                    point, features = g(z, generated, state, time_index=prefix+depth)
+                    state = g.generated_state(state, point, generated, features)
+                    real_state = g.write_state(real_state, x[:, prefix+depth], real)
+                else:
+                    point, _ = g(z, generated, time_index=prefix+depth)
                 generated = d.writer.write(generated, point)
                 real = d.writer.write(real, x[:, prefix+depth])
     return {kind: {n: torch.cat(rows) for n, rows in by_depth.items()}
@@ -124,17 +139,18 @@ def fit_probe(features, targets, kind, device, epochs=250):
     return predict, selection
 
 
-def diagnose(path, splits, depths, device, epochs):
+def diagnose(path, splits, depths, device, epochs, memory_kind='M'):
+    json.loads((path/'summary.json').read_text())  # completed models only
     saved = torch.load(path/'model.pt', map_location=device, weights_only=False)
     cfg = handoff.Config(**saved['config'])
     g, d, prior, _ = handoff.build(cfg, device)
-    assert not cfg.g_state_dim, 'Diagnostic currently audits stateless winners'
+    assert memory_kind != 'Mg' or cfg.g_state_dim
     for key, module in [('generator', g), ('critic', d), ('prior', prior)]:
         module.load_state_dict(saved[key])
         module.eval().requires_grad_(False)
     states, zs = {}, {}
     for split, (observed, _, ids) in splits.items():
-        states[split], zs[split] = collect(g, d, prior, observed, ids, depths)
+        states[split], zs[split] = collect(g, d, prior, observed, ids, depths, memory_kind=memory_kind)
     targets = {k: row[1] for k, row in splits.items()}
     rows = []
     for depth in depths:
@@ -144,7 +160,7 @@ def diagnose(path, splits, depths, device, epochs):
                             for k, s in states.items()}
                 predictor, selection = fit_probe(features, targets, kind, device, epochs)
                 row = {'depth': depth, 'training_domain': domain, 'probe': kind,
-                       'features': 'M+z' if add_z else 'M', 'selection': selection,
+                       'features': memory_kind+'+z' if add_z else memory_kind, 'selection': selection,
                        'test': metrics(predictor(features['test']), targets['test'])}
                 if domain == 'real':
                     test = states['test']['generated'][depth]
@@ -178,12 +194,13 @@ def main():
     parser.add_argument('--sizes', nargs=3, type=int, default=[2048, 512, 1024])
     parser.add_argument('--depths', nargs='+', type=int, default=[0, 1, 8, 32, 128])
     parser.add_argument('--epochs', type=int, default=250)
+    parser.add_argument('--memory', choices=['M', 'Mg'], default='M')
     args = parser.parse_args()
     torch.set_num_threads(1)
     started = time.time()
     splits = make_splits(args.sizes, 32+max(args.depths))
     report = {'evaluation_only': True, 'protocol': {
-        'split_sizes': dict(zip(splits, args.sizes)), 'prefix': 32, 'depths': args.depths,
+        'split_sizes': dict(zip(splits, args.sizes)), 'prefix': 32, 'depths': args.depths, 'memory': args.memory,
         'targets': ['radius', 'signed_angular_speed'], 'distribution': 'Independent center uniform[-.75,.75]^2, radius uniform[.6,1.4], phase uniform[0,2pi], signed speed magnitude uniform[.12,.40], observation noise std .03.',
         'episodes': 'Successive fresh independent episodes from one diagnostic RNG seed 9174301, disjoint across train/validation/test; same panels across checkpoints. No training histories reused. Not a GAN seed experiment.',
         'particles': 'Uniform independent draws from saved learned 512-particle table; fixed z per episode. Probe episodes are held out, particles are not.',
@@ -195,7 +212,7 @@ def main():
         'split_hashes': {k: hashlib.sha256(row[0].numpy().tobytes()).hexdigest() for k, row in splits.items()}, 'results': []}
     args.out.parent.mkdir(parents=True, exist_ok=True)
     for path in args.runs:
-        report['results'].append(diagnose(path, splits, args.depths, args.device, args.epochs))
+        report['results'].append(diagnose(path, splits, args.depths, args.device, args.epochs, args.memory))
         report['wall_seconds'] = time.time()-started
         args.out.write_text(json.dumps(report, indent=2, allow_nan=False)+'\n')
         print(json.dumps({'event': 'model_completed', 'name': report['results'][-1]['name']}), flush=True)

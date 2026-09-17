@@ -21,6 +21,8 @@ from experiments.memory_recent import RecentWriter, SlowFastWriter, LocalReader,
 from experiments.memory_core_scout import evaluate
 from experiments import memory_g_recurrent as recurrent
 from experiments import memory_local_objectives as objectives
+from experiments import memory_transition as transitions
+from experiments import memory_gibbs as gibbs
 from particlegan import get_recipe, learning_rate_scale
 
 
@@ -59,6 +61,21 @@ class Config(base.Config):
     future_rank_strength: float = .25
     future_rank_ramp_steps: int = 500
     future_rank_explored_grad: bool = True
+    transition_weight: float = 0.
+    transition_writer_weight: float = 0.
+    transition_condition: bool = True
+    transition_include_x: bool = True
+    transition_width: int = 128
+    transition_ramp_steps: int = 0
+    transition_critic_only: bool = False
+    transition_space: str = 'memory'
+    transition_mismatch_weight: float = 0.
+    gibbs_latent_dim: int = 0
+    gibbs_steps: int = 1
+    gibbs_weight: float = 0.
+    gibbs_width: int = 64
+    gibbs_condition: bool = True
+    gibbs_ramp_steps: int = 500
     recovery_noise: float = 0.
     recovery_probability: float = .5
     future_weight: float = 0.
@@ -77,6 +94,7 @@ class Config(base.Config):
     slow_rate: float = .1
     g_memory_adapter: str = 'none'
     g_state_dim: int = 0
+    g_state_update: str = 'observation'
     g_state_reads_d: bool = False
     g_use_d_memory: bool = True
     adapter_width: int = 64
@@ -93,6 +111,17 @@ class Config(base.Config):
 
     def __post_init__(self):
         super().__post_init__()
+        assert self.gibbs_latent_dim >= 0 and isinstance(self.gibbs_steps, int) and self.gibbs_steps >= 1
+        assert self.gibbs_weight >= 0 and self.gibbs_width > 0 and self.gibbs_ramp_steps >= 0
+        assert not self.gibbs_weight or self.gibbs_latent_dim > 0
+        assert not self.gibbs_latent_dim or (not self.g_state_dim and not self.future_query_bands
+            and not transitions.enabled(self) and self.max_prefix >= 4 and self.adversarial_only)
+        assert min(self.transition_weight, self.transition_writer_weight, self.transition_mismatch_weight) >= 0
+        assert self.transition_space in ('memory', 'read')
+        assert not self.transition_mismatch_weight or (transitions.enabled(self) and self.transition_condition)
+        assert self.transition_width > 0 and self.transition_ramp_steps >= 0
+        assert not transitions.enabled(self) or (not self.g_state_dim and self.max_prefix >= 4)
+        assert not self.transition_critic_only or not (self.transition_weight or self.transition_writer_weight)
         self.future_offsets = tuple(self.future_offsets)
         self.future_rank_offsets = tuple(self.future_rank_offsets)
         assert self.future_rank_weight >= 0 and 0 <= self.future_rank_bands <= 8
@@ -153,6 +182,9 @@ class Config(base.Config):
         assert self.dynamics_min_prefix >= 1
         assert not (self.repair_weight or self.stability_g_weight or self.stability_d_weight) or self.dynamics_min_prefix <= self.max_prefix
         assert self.g_state_dim >= 0
+        assert self.g_state_update in ('observation', 'embedded', 'intent', 'hybrid')
+        assert self.g_state_update == 'observation' or (self.g_state_dim > 0
+            and not self.g_use_d_memory and not self.g_state_reads_d and not self.residual_output)
         assert not self.g_state_reads_d or (self.g_state_dim and self.g_use_d_memory)
         assert self.g_use_d_memory or self.g_state_dim
         # New recurrence scouts use GAN objectives; legacy auxiliary paths require
@@ -299,10 +331,10 @@ def local_pair_examples(cfg, generator, critic, observed, real, positions, z, ti
             memory = selected_memories(critic.writer, observed+recovery_noise, starts, cfg.max_prefix)
     latent, clock = z, times-(positions.flatten() > 0).to(times.dtype)
     with torch.set_grad_enabled(proposal_grad):
-        first, _ = local_point(generator, latent, memory, clock, state)
+        first, features = local_point(generator, latent, memory, clock, state)
         updated = critic.writer.write(memory, first)
         if cfg.g_state_dim:
-            state = generator.write_state(state, first, memory)
+            state = generator.generated_state(state, first, memory, features)
         second, _ = local_point(generator, latent, updated, clock+1, state)
         fake = torch.stack((first, second), 1)
     rows = torch.arange(len(real), device=real.device)[:, None]
@@ -475,7 +507,9 @@ def local_stability(cfg, generator, critic, z, memory, positions, times, noise):
 
 def build(cfg, device):
     torch.manual_seed(42)
-    generator = (recurrent.RecurrentReader(cfg) if cfg.g_state_dim else
+    generator = (gibbs.GibbsReader(cfg) if cfg.gibbs_latent_dim else
+                 recurrent.InternalStateReader(cfg) if cfg.g_state_update != 'observation' else
+                 recurrent.RecurrentReader(cfg) if cfg.g_state_dim else
                  objectives.QueryReader(cfg) if cfg.future_query_bands else LocalReader(cfg)).to(device)
     torch.manual_seed(44)
     critic = Critic(cfg).to(device)
@@ -490,6 +524,13 @@ def train(cfg, out, device, log):
     generator, critic, prior, recipe = build(cfg, device)
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior)
     gan, penalty, spread = recipe.make_loss(), recipe.make_gradient_penalty(), recipe.make_prior_regularizer()
+    transition = transitions.TransitionCritic(cfg).to(device) if transitions.enabled(cfg) else None
+    opt_transition = (torch.optim.Adam(transition.parameters(), lr=recipe.lr*recipe.d_lr_mult,
+                                      betas=recipe.betas) if transition is not None else None)
+    transition_rate = recipe.lr*recipe.d_lr_mult
+    joint_critic = gibbs.GibbsCritic(cfg).to(device) if cfg.gibbs_weight else None
+    opt_joint = (torch.optim.Adam(joint_critic.parameters(), lr=transition_rate,
+                                 betas=recipe.betas) if joint_critic is not None else None)
     rates = [[group['lr'] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     rngs = {'data': torch.Generator(device=device).manual_seed(31415),
             'latent': torch.Generator(device=device).manual_seed(27182),
@@ -515,6 +556,14 @@ def train(cfg, out, device, log):
             module.load_state_dict(saved[name])
         opt_g.load_state_dict(saved['opt_g'])
         opt_d.load_state_dict(saved['opt_d'])
+        if transition is not None:
+            assert saved.get('transition_version') == transitions.VERSION, 'incompatible transition checkpoint'
+            transition.load_state_dict(saved['transition_critic'])
+            opt_transition.load_state_dict(saved['opt_transition'])
+        if joint_critic is not None:
+            assert saved.get('gibbs_version') == gibbs.VERSION, 'incompatible Gibbs checkpoint'
+            joint_critic.load_state_dict(saved['gibbs_critic'])
+            opt_joint.load_state_dict(saved['opt_gibbs'])
         for name, rng in rngs.items():
             if name in saved['rngs']:
                 rng.set_state(saved['rngs'][name].cpu())
@@ -577,6 +626,26 @@ def train(cfg, out, device, log):
                 'point_examples_per_update': cfg.batch_size*cfg.samples_per_episode,
                 'parameters': {'g': sum(p.numel() for p in generator.parameters()),
                                'd': sum(p.numel() for p in critic.parameters())}}
+    resolved['transition'] = transitions.metadata(cfg)
+    if transition is not None:
+        resolved['parameters']['transition'] = sum(p.numel() for p in transition.parameters())
+        transition_calls = 3 if cfg.transition_space == 'read' else 1
+        resolved['generator_calls_k_phase'] = transition_calls
+        resolved['reader_calls_k_phase'] = transition_calls*resolved['reader_calls_per_generator']
+        resolved['fake_writes_k_phase'] = 1
+        # K has an independent branch and never contributes to sequential depth.
+        for phase, weight in (('d', cfg.transition_writer_weight), ('g', cfg.transition_weight)):
+            if weight:
+                resolved[f'generator_calls_{phase}_phase'] += transition_calls
+                resolved[f'reader_calls_{phase}_phase'] += transition_calls*resolved['reader_calls_per_generator']
+                resolved[f'fake_writes_{phase}_phase'] += 1
+        resolved['fake_writes_in_training'] += int(bool(cfg.transition_writer_weight or cfg.transition_weight))
+        resolved['fake_write_counting'] = ('maximum writes in D/G phases including independent branches; '
+                                           'K phase counted separately; not sequential unroll depth')
+        if cfg.transition_space == 'read':
+            resolved['training_generator_unroll'] = 2
+        if cfg.transition_writer_weight:
+            resolved['writer_training'] = 'main D objectives plus local successor alignment through fake write'
     resolved['local_pair'] = {
         'weight': cfg.local_pair_weight,
         'context': 'real prefix before both candidates; no future observations',
@@ -611,7 +680,7 @@ def train(cfg, out, device, log):
     resolved['max_sequential_generated_writes'] = int(bool(cfg.feedback_probability or cfg.local_pair_weight
         or (cfg.mismatch_weight and cfg.mismatch_context != 'clean')
         or (cfg.future_rank_weight and cfg.future_rank_context != 'clean')
-        or cfg.stability_g_weight or cfg.stability_d_weight))
+        or cfg.stability_g_weight or cfg.stability_d_weight or transition is not None))
     resolved['g_recurrence'] = {
         'dimension': cfg.g_state_dim, 'update_reads_d': cfg.g_state_reads_d,
         'generator_reads_d': cfg.g_use_d_memory, 'owner': 'G',
@@ -622,11 +691,40 @@ def train(cfg, out, device, log):
         'prefix_state_updates_per_phase': cfg.max_prefix*(1+int(bool(cfg.local_pair_weight))) if cfg.g_state_dim else 0,
         'loss': 'existing GAN objectives only',
     }
+    if cfg.g_state_update != 'observation':
+        resolved['g_recurrence'].update(
+            update=cfg.g_state_update,
+            prefix='shared GRU consumes learned observation features; real-prefix BPTT only',
+            local_branch='one generated G transition; feedback mixes real-encoded and generated features in all three modes',
+            runtime='shared GRU consumes final decoder features (intent), encoded output (embedded), or equal mixture (hybrid)',
+            generated_state_transitions_per_phase=int(bool(cfg.feedback_probability))+int(bool(cfg.local_pair_weight)),
+            d_memory_access=False, state_feature_dimension=cfg.g_width)
     resolved['local_objectives'] = objectives.metadata(cfg)
     if cfg.future_weight:
         for phase in ('d', 'g'):
             resolved[f'generator_calls_{phase}_phase'] += len(cfg.future_offsets)
             resolved[f'reader_calls_{phase}_phase'] += len(cfg.future_offsets)*resolved['reader_calls_per_generator']
+    resolved['gibbs'] = gibbs.metadata(cfg)
+    if cfg.gibbs_latent_dim:
+        # Existing counts above describe full G calls. Every new G call executes
+        # gibbs_steps decoders, each with the configured one/two proposal reads.
+        base_reads = resolved['reader_calls_per_generator']
+        resolved['decoder_calls_per_generator'] = cfg.gibbs_steps
+        resolved['reader_calls_per_generator'] = base_reads*cfg.gibbs_steps
+        for phase in ('d', 'g'):
+            resolved[f'decoder_calls_{phase}_phase'] = resolved[f'generator_calls_{phase}_phase']*cfg.gibbs_steps
+            resolved[f'reader_calls_{phase}_phase'] *= cfg.gibbs_steps
+        if joint_critic is not None:
+            resolved['parameters']['gibbs_critic'] = sum(p.numel() for p in joint_critic.parameters())
+            resolved['generator_calls_k_phase'] = 1
+            resolved['decoder_calls_k_phase'] = cfg.gibbs_steps
+            resolved['reader_calls_k_phase'] = base_reads*cfg.gibbs_steps
+            resolved['fake_writes_k_phase'] = 0
+            resolved['generator_calls_g_phase'] += 1
+            resolved['decoder_calls_g_phase'] += cfg.gibbs_steps
+            resolved['reader_calls_g_phase'] += base_reads*cfg.gibbs_steps
+        resolved['gibbs_inference_calls_per_generator'] = cfg.gibbs_steps-1
+        resolved['gibbs_real_inference_calls_per_joint_phase'] = int(joint_critic is not None)
     (out/'config.json').write_text(json.dumps(resolved, indent=2))
     log(event='start', start_step=start, config=resolved)
     started = time.monotonic()
@@ -635,6 +733,12 @@ def train(cfg, out, device, log):
         for opt, rates_ in zip((opt_g, opt_d), rates):
             for group, rate in zip(opt.param_groups, rates_):
                 group['lr'] = rate*scale
+        if opt_transition is not None:
+            for group in opt_transition.param_groups:
+                group['lr'] = transition_rate*scale
+        if opt_joint is not None:
+            for group in opt_joint.param_groups:
+                group['lr'] = transition_rate*scale
         real, _ = circles(cfg.batch_size, cfg.train_length, rngs['data'], device, noise=cfg.noise)
         z, indices = prior.sample(cfg.batch_size, generator=rngs['latent'])
         z = z[:, None].expand(-1, cfg.samples_per_episode, -1).flatten(0, 1)
@@ -649,6 +753,30 @@ def train(cfg, out, device, log):
         repair_noise = (torch.randn(jitter.shape, device=device, generator=rngs['repair'])
                         if cfg.repair_weight else None)
         recovery_noise = objectives.observation_disturbance(cfg, observed, rngs.get('recovery'))
+        transition_stats = {}
+        gibbs_stats = {}
+        if joint_critic is not None:
+            opt_joint.zero_grad(set_to_none=True)
+            joint_batch = gibbs.examples(cfg, generator, critic, joint_critic, observed, positions,
+                                         z, times, target, 'critic')
+            if joint_batch is not None:
+                joint_adv, joint_reg, gibbs_stats = gibbs.critic_objective(
+                    gan, penalty, joint_critic, joint_batch, step)
+                (joint_adv+joint_reg).backward()
+                opt_joint.step()
+                gibbs_stats.update(gibbs_d=joint_adv.detach(), gibbs_penalty=joint_reg.detach())
+            opt_joint.zero_grad(set_to_none=True)
+        if transition is not None:
+            opt_transition.zero_grad(set_to_none=True)
+            local = transitions.examples(cfg, generator, critic, transition, observed, positions,
+                                         z, times, target, 'critic')
+            if local is not None:
+                k_adv, k_reg, transition_stats = transitions.critic_objective(
+                    gan, penalty, transition, local, step)
+                (k_adv+k_reg).backward()
+                opt_transition.step()
+                transition_stats.update(transition_d=k_adv.detach(), transition_penalty=k_reg.detach())
+            opt_transition.zero_grad(set_to_none=True)
         opt_d.zero_grad(set_to_none=True)
         memory, judging_memory, state = training_contexts(cfg, generator, critic, observed, positions, z, jitter, feedback_mask, step,
             clock_origin=clock_origin, feedback_strength=feedback_strength, return_state=True)
@@ -693,7 +821,16 @@ def train(cfg, out, device, log):
             with frozen(generator):
                 d_stability, stats = local_stability(cfg, generator, critic, z, memory, positions, times, stability_noise)
             diagnostics.update({f'd_stability_{key}': value for key, value in stats.items()})
-        (d_adv+d_reg+d_aux+cfg.stability_d_weight*d_stability).backward()
+        writer_transition = memory.new_zeros(())
+        if cfg.transition_writer_weight:
+            with frozen(transition):
+                local = transitions.examples(cfg, generator, critic, transition, observed, positions,
+                                             z, times, target, 'writer')
+                if local is not None:
+                    writer_transition = transitions.generator_objective(gan, transition, local)
+            transition_stats['transition_writer'] = writer_transition.detach()
+        (d_adv+d_reg+d_aux+cfg.stability_d_weight*d_stability
+         +cfg.transition_writer_weight*transitions.ramp(cfg, step)*writer_transition).backward()
         opt_d.step()
         opt_d.zero_grad(set_to_none=True)
         with frozen(critic):
@@ -724,7 +861,25 @@ def train(cfg, out, device, log):
             if cfg.stability_g_weight:
                 g_stability, stats = local_stability(cfg, generator, critic, z, memory, positions, times, stability_noise)
                 diagnostics.update({f'g_stability_{key}': value for key, value in stats.items()})
-            (g_adv+spread(prior(indices.unique()))+cfg.repair_weight*repair+cfg.stability_g_weight*g_stability).backward()
+            g_transition = memory.new_zeros(())
+            if cfg.transition_weight:
+                with frozen(transition):
+                    local = transitions.examples(cfg, generator, critic, transition, observed, positions,
+                                                 z, times, target, 'generator')
+                    if local is not None:
+                        g_transition = transitions.generator_objective(gan, transition, local)
+                transition_stats['transition_g'] = g_transition.detach()
+            g_joint = memory.new_zeros(())
+            if joint_critic is not None:
+                with frozen(joint_critic):
+                    joint_batch = gibbs.examples(cfg, generator, critic, joint_critic, observed, positions,
+                                                 z, times, target, 'generator')
+                    if joint_batch is not None:
+                        g_joint = gibbs.generator_objective(gan, joint_critic, joint_batch)
+                gibbs_stats['gibbs_g'] = g_joint.detach()
+            (g_adv+spread(prior(indices.unique()))+cfg.repair_weight*repair+cfg.stability_g_weight*g_stability
+             +cfg.transition_weight*transitions.ramp(cfg, step)*g_transition
+             +cfg.gibbs_weight*gibbs.ramp(cfg, step)*g_joint).backward()
             opt_g.step()
         if step == start+1 or step % cfg.log_every == 0 or step == cfg.steps:
             losses = {'d': d_adv.item(), 'g': g_adv.item(), 'penalty': d_reg.item()}
@@ -736,6 +891,8 @@ def train(cfg, out, device, log):
                 strengths = feedback_strength.flatten()[eligible]*min(1., step/max(1, cfg.feedback_ramp_steps))
                 losses['feedback_strength_mean'] = strengths.mean().item() if len(strengths) else 0.
             losses.update({key: value.item() for key, value in diagnostics.items()})
+            losses.update({key: value.item() for key, value in transition_stats.items()})
+            losses.update({key: value.item() for key, value in gibbs_stats.items()})
             losses['feedback_fraction'] = (feedback_mask & (positions >= cfg.feedback_min_prefix)).float().mean().item()
             if cfg.feedback_probability:
                 losses['feedback_judge_gap_rms'] = (memory.detach()-judging_memory.detach()).square().mean().sqrt().item()
@@ -743,13 +900,20 @@ def train(cfg, out, device, log):
                 raise RuntimeError(f'Nonfinite losses: {losses}')
             log(event='train', step=step, seconds=round(time.monotonic()-started, 2), **losses)
     train_seconds = time.monotonic()-started
-    torch.save({'generator': generator.state_dict(), 'critic': critic.state_dict(),
+    checkpoint = {'generator': generator.state_dict(), 'critic': critic.state_dict(),
                 'writer': critic.writer.state_dict(), 'prior': prior.state_dict(),
                 'opt_g': opt_g.state_dict(), 'opt_d': opt_d.state_dict(),
                 'rngs': {key: rng.get_state() for key, rng in rngs.items()},
                 'torch_rng': torch.get_rng_state(),
                 'cuda_rng': torch.cuda.get_rng_state(device) if device.startswith('cuda') else None,
-                'step': cfg.steps, 'config': asdict(cfg), 'feedback_gradient_version': 2}, out/'model.pt')
+                'step': cfg.steps, 'config': asdict(cfg), 'feedback_gradient_version': 2}
+    if transition is not None:
+        checkpoint.update(transition_critic=transition.state_dict(),
+                          opt_transition=opt_transition.state_dict(), transition_version=transitions.VERSION)
+    if joint_critic is not None:
+        checkpoint.update(gibbs_critic=joint_critic.state_dict(), opt_gibbs=opt_joint.state_dict(),
+                          gibbs_version=gibbs.VERSION)
+    torch.save(checkpoint, out/'model.pt')
     generator.eval(), critic.eval(), prior.eval()
     metrics, paths = evaluate(generator, critic, prior, cfg, device)
     np.savez_compressed(out/'trajectories.npz', **paths)
@@ -772,7 +936,7 @@ def main():
     torch.set_num_threads(1)
     provenance = {'git_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
                   'torch': torch.__version__, 'argv': sys.argv, 'sources': {}}
-    for name in ('memory_handoff_scout.py', 'memory_local_objectives.py', 'memory_g_recurrent.py', 'memory_recent.py', 'memory_core_scout.py', 'memory_scout.py', 'autonomous_memory.py', 'memory_path.py'):
+    for name in ('memory_handoff_scout.py', 'memory_gibbs.py', 'memory_transition.py', 'memory_local_objectives.py', 'memory_g_recurrent.py', 'memory_recent.py', 'memory_core_scout.py', 'memory_scout.py', 'autonomous_memory.py', 'memory_path.py'):
         source = Path(__file__).with_name(name).read_bytes()
         (args.out/name).write_bytes(source)
         provenance['sources'][name] = hashlib.sha256(source).hexdigest()

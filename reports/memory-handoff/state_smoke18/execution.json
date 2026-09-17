@@ -1,0 +1,22 @@
+{
+  "done": 2,
+  "failed": 0,
+  "devices": [
+    "cuda:0",
+    "cuda:1"
+  ],
+  "queue_wall_seconds": 9.323404312133789,
+  "train_gpu_seconds": 2.414118002023315,
+  "sources": {
+    "memory_handoff_scout.py": "bfff94544dfb05480828abcf6739caf72fb1c78dcff01ce00a48203302c9171b",
+    "memory_gibbs.py": "b6ca695fb4fbecb27c92c7d97f7d8b38d614c1263ffa52e3b337cb09a44ea84d",
+    "memory_transition.py": "393638f913aee967674c2fb98bf0424825f31c7daa313beabf32770295d4b78d",
+    "memory_local_objectives.py": "5d2fada9b08b8ef9b3886c7c91fa9ab5f2a681e260fce2eb19cbd92505b00dc6",
+    "memory_g_recurrent.py": "e346566c6e88dfaf46234373df0d3c2c33abe3a79da008a0e28a4beef3794d7d",
+    "memory_recent.py": "5a1aaa2c869dcca40682f4230c06bbcbcf0e7640c4970d1c924ef5664b9f64f6",
+    "memory_core_scout.py": "71e1206048bab1bb4e4b8f089ba1041f001726e4d3bf6a4b83ad98768001a2a0",
+    "memory_scout.py": "59008372a273543a3bcc163f85e808abbf5a7c152929e38c047c60c340b00d0e",
+    "autonomous_memory.py": "a8b697c1c4ef5b2516f2c0445a3a6f8eeceb73b3a9a03a3127efd5dfdf75c3d5",
+    "memory_path.py": "18178fa48c8b109ee71d3f679bdcfc1b0775b22f1f879fd877dafdf859a40e0f"
+  }
+}

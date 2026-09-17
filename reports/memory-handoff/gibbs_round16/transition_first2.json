@@ -1,0 +1,315 @@
+{
+  "evaluation_only": true,
+  "count": 1024,
+  "definition": "Fresh held-out noisy circle histories from the training process distribution, shared exactly across models. Learned particles are sampled from the existing 512 table and are not held out. A fixed particle generates at t, then one writer update gives the generated successor. Compare with the observed successor and independently read both at t+1 using the same particle and clock; also shuffle observed successor across episodes. All MSE quantities are evaluation only, never GAN objectives. Memory distance is in model-specific coordinates; normalized distance is descriptive, not a universal quality score. Next-read errors use noisy observed targets and do not establish long-run success. The transition candidate space is reported per model. Memory-space K sees successor M; read-space K sees current G(z, successor M, t+1), with optional first-point x in either space. In read space the real candidate is a model read after an observed write, not ground-truth next observation. The same fixed particle and next clock are used on both sides, and none of these reads are written back. K scores compare joint real/generated transitions and shuffled anchors; optional hybrids deliberately violate sample/write consistency to probe score dependence. Their margins do not establish causal feature importance. Absolute correct-versus-shuffled anchor scores can change through arbitrary anchor-only offsets unconstrained by paired GAN losses. The paired-margin correct-versus-shuffled comparison cancels such offsets and measures how conditioning changes real/fake separation, not process retention. K scores across independently trained critics are not calibrated/comparable. No K values are reported for the original baseline. Use existing information diagnostics separately for retention over autonomous execution. Completed runs only; no optimization or trajectory training.",
+  "results": [
+    {
+      "name": "state_g10",
+      "source": "runs/memory_path/gibbs_round16/runs/state_g10",
+      "steps": 2000,
+      "checkpoint_sha256": "0481752d3bd29076e3da0313ac1093ba4dfab90fc1498e3834497a2595008a46",
+      "transition_critic_enabled": true,
+      "transition_config": {
+        "transition_weight": 0.1,
+        "transition_writer_weight": 0,
+        "transition_condition": true,
+        "transition_include_x": false,
+        "transition_width": 128,
+        "transition_ramp_steps": 500,
+        "transition_critic_only": false,
+        "transition_space": "memory",
+        "transition_mismatch_weight": 0
+      },
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.004556297790259123,
+          "successor_memory_mse": 0.0004885903908871114,
+          "real_successor_memory_variance": 0.08211551606655121,
+          "normalized_successor_memory_mse": 0.005950037389993668,
+          "next_read_mse": {
+            "real": 0.004590971395373344,
+            "generated": 0.013418801128864288,
+            "shuffled_real": 1.4500190019607544
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.012009291909635067,
+            "shuffled_vs_real": 1.4483870267868042
+          },
+          "transition_candidate_space": "memory",
+          "transition_critic": {
+            "real_vs_generated": {
+              "positive_mean": -0.08394747972488403,
+              "negative_mean": -0.09818987548351288,
+              "mean_margin": 0.014242409728467464,
+              "median_margin": 0.007536008954048157,
+              "positive_rank_fraction": 0.5673828125
+            },
+            "real_vs_generated_shuffled_anchor": {
+              "positive_mean": 0.9520920515060425,
+              "negative_mean": 0.9500764608383179,
+              "mean_margin": 0.0020155380479991436,
+              "median_margin": 0.0027467012405395508,
+              "positive_rank_fraction": 0.521484375
+            },
+            "paired_margin_correct_vs_shuffled_anchor": {
+              "positive_mean": 0.014242409728467464,
+              "negative_mean": 0.0020155380479991436,
+              "mean_margin": 0.012226872146129608,
+              "median_margin": 0.0033787935972213745,
+              "positive_rank_fraction": 0.5185546875
+            },
+            "real_anchor_vs_shuffled_anchor": {
+              "positive_mean": -0.08394747972488403,
+              "negative_mean": 0.9520920515060425,
+              "mean_margin": -1.0360395908355713,
+              "median_margin": -0.895515501499176,
+              "positive_rank_fraction": 0.0615234375
+            },
+            "generated_anchor_vs_shuffled_anchor": {
+              "positive_mean": -0.09818987548351288,
+              "negative_mean": 0.9500764608383179,
+              "mean_margin": -1.0482664108276367,
+              "median_margin": -0.9103203415870667,
+              "positive_rank_fraction": 0.0546875
+            }
+          }
+        },
+        "32": {
+          "generated_point_mse": 0.004419699776917696,
+          "successor_memory_mse": 0.0004793806583620608,
+          "real_successor_memory_variance": 0.08136378228664398,
+          "normalized_successor_memory_mse": 0.005891818553209305,
+          "next_read_mse": {
+            "real": 0.00502868602052331,
+            "generated": 0.01394593995064497,
+            "shuffled_real": 1.431288480758667
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.012134569697082043,
+            "shuffled_vs_real": 1.4379417896270752
+          },
+          "transition_candidate_space": "memory",
+          "transition_critic": {
+            "real_vs_generated": {
+              "positive_mean": -0.04471870884299278,
+              "negative_mean": -0.06107556074857712,
+              "mean_margin": 0.016356857493519783,
+              "median_margin": 0.00949186086654663,
+              "positive_rank_fraction": 0.5830078125
+            },
+            "real_vs_generated_shuffled_anchor": {
+              "positive_mean": 0.9733476042747498,
+              "negative_mean": 0.9740010499954224,
+              "mean_margin": -0.0006534577114507556,
+              "median_margin": -0.00011205673217773438,
+              "positive_rank_fraction": 0.5
+            },
+            "paired_margin_correct_vs_shuffled_anchor": {
+              "positive_mean": 0.016356857493519783,
+              "negative_mean": -0.0006534577114507556,
+              "mean_margin": 0.017010312527418137,
+              "median_margin": 0.011181682348251343,
+              "positive_rank_fraction": 0.564453125
+            },
+            "real_anchor_vs_shuffled_anchor": {
+              "positive_mean": -0.04471870884299278,
+              "negative_mean": 0.9733476042747498,
+              "mean_margin": -1.0180662870407104,
+              "median_margin": -0.8494446873664856,
+              "positive_rank_fraction": 0.0556640625
+            },
+            "generated_anchor_vs_shuffled_anchor": {
+              "positive_mean": -0.06107556074857712,
+              "negative_mean": 0.9740010499954224,
+              "mean_margin": -1.03507661819458,
+              "median_margin": -0.8627682328224182,
+              "positive_rank_fraction": 0.056640625
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "joint_match_g10",
+      "source": "runs/memory_path/gibbs_round16/runs/joint_match_g10",
+      "steps": 2000,
+      "checkpoint_sha256": "75c777e4fe69a0c6693e14bcf5f5f2d2374b236bf254891caa44b191589d47c2",
+      "transition_critic_enabled": true,
+      "transition_config": {
+        "transition_weight": 0.1,
+        "transition_writer_weight": 0,
+        "transition_condition": true,
+        "transition_include_x": true,
+        "transition_width": 128,
+        "transition_ramp_steps": 500,
+        "transition_critic_only": false,
+        "transition_space": "memory",
+        "transition_mismatch_weight": 0.25
+      },
+      "prefixes": {
+        "8": {
+          "generated_point_mse": 0.005357823800295591,
+          "successor_memory_mse": 0.0005969464546069503,
+          "real_successor_memory_variance": 0.07870747894048691,
+          "normalized_successor_memory_mse": 0.007584367413073778,
+          "next_read_mse": {
+            "real": 0.005457917228341103,
+            "generated": 0.018325265496969223,
+            "shuffled_real": 1.4398858547210693
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.013515152037143707,
+            "shuffled_vs_real": 1.4264742136001587
+          },
+          "transition_candidate_space": "memory",
+          "transition_critic": {
+            "real_vs_generated": {
+              "positive_mean": 1.1975340843200684,
+              "negative_mean": 1.1930224895477295,
+              "mean_margin": 0.0045116376131772995,
+              "median_margin": 0.004127621650695801,
+              "positive_rank_fraction": 0.55859375
+            },
+            "real_vs_generated_shuffled_anchor": {
+              "positive_mean": -1.300147533416748,
+              "negative_mean": -1.2946795225143433,
+              "mean_margin": -0.005468066316097975,
+              "median_margin": -0.005990743637084961,
+              "positive_rank_fraction": 0.4755859375
+            },
+            "paired_margin_correct_vs_shuffled_anchor": {
+              "positive_mean": 0.0045116376131772995,
+              "negative_mean": -0.005468066316097975,
+              "mean_margin": 0.009979704394936562,
+              "median_margin": 0.00984981656074524,
+              "positive_rank_fraction": 0.537109375
+            },
+            "real_anchor_vs_shuffled_anchor": {
+              "positive_mean": 1.1975340843200684,
+              "negative_mean": -1.300147533416748,
+              "mean_margin": 2.4976816177368164,
+              "median_margin": 2.30743408203125,
+              "positive_rank_fraction": 0.984375
+            },
+            "generated_anchor_vs_shuffled_anchor": {
+              "positive_mean": 1.1930224895477295,
+              "negative_mean": -1.2946795225143433,
+              "mean_margin": 2.4877021312713623,
+              "median_margin": 2.2977354526519775,
+              "positive_rank_fraction": 0.986328125
+            },
+            "real_vs_real_x_generated_memory": {
+              "positive_mean": 1.1975340843200684,
+              "negative_mean": 1.1981792449951172,
+              "mean_margin": -0.0006451196386478841,
+              "median_margin": 0.0004930496215820312,
+              "positive_rank_fraction": 0.5087890625
+            },
+            "real_vs_generated_x_real_memory": {
+              "positive_mean": 1.1975340843200684,
+              "negative_mean": 1.1993077993392944,
+              "mean_margin": -0.0017735653091222048,
+              "median_margin": -0.0012282133102416992,
+              "positive_rank_fraction": 0.462890625
+            },
+            "generated_vs_real_x_generated_memory": {
+              "positive_mean": 1.1930224895477295,
+              "negative_mean": 1.1981792449951172,
+              "mean_margin": -0.0051567573100328445,
+              "median_margin": -0.0026235580444335938,
+              "positive_rank_fraction": 0.40234375
+            },
+            "generated_vs_generated_x_real_memory": {
+              "positive_mean": 1.1930224895477295,
+              "negative_mean": 1.1993077993392944,
+              "mean_margin": -0.006285203155130148,
+              "median_margin": -0.004370152950286865,
+              "positive_rank_fraction": 0.4072265625
+            }
+          }
+        },
+        "32": {
+          "generated_point_mse": 0.004874812439084053,
+          "successor_memory_mse": 0.0005481201224029064,
+          "real_successor_memory_variance": 0.07799772173166275,
+          "normalized_successor_memory_mse": 0.007027386222034693,
+          "next_read_mse": {
+            "real": 0.005282295867800713,
+            "generated": 0.01641051284968853,
+            "shuffled_real": 1.428323745727539
+          },
+          "next_read_change_mse": {
+            "generated_vs_real": 0.012837003916501999,
+            "shuffled_vs_real": 1.4315013885498047
+          },
+          "transition_candidate_space": "memory",
+          "transition_critic": {
+            "real_vs_generated": {
+              "positive_mean": 1.2141437530517578,
+              "negative_mean": 1.2166537046432495,
+              "mean_margin": -0.0025098661426454782,
+              "median_margin": -0.0005764961242675781,
+              "positive_rank_fraction": 0.4892578125
+            },
+            "real_vs_generated_shuffled_anchor": {
+              "positive_mean": -1.2926887273788452,
+              "negative_mean": -1.2966017723083496,
+              "mean_margin": 0.003912969026714563,
+              "median_margin": 0.0020501017570495605,
+              "positive_rank_fraction": 0.513671875
+            },
+            "paired_margin_correct_vs_shuffled_anchor": {
+              "positive_mean": -0.0025098661426454782,
+              "negative_mean": 0.003912969026714563,
+              "mean_margin": -0.006422835402190685,
+              "median_margin": -0.0018042325973510742,
+              "positive_rank_fraction": 0.490234375
+            },
+            "real_anchor_vs_shuffled_anchor": {
+              "positive_mean": 1.2141437530517578,
+              "negative_mean": -1.2926887273788452,
+              "mean_margin": 2.5068328380584717,
+              "median_margin": 2.2285218238830566,
+              "positive_rank_fraction": 0.98046875
+            },
+            "generated_anchor_vs_shuffled_anchor": {
+              "positive_mean": 1.2166537046432495,
+              "negative_mean": -1.2966017723083496,
+              "mean_margin": 2.5132555961608887,
+              "median_margin": 2.2220096588134766,
+              "positive_rank_fraction": 0.982421875
+            },
+            "real_vs_real_x_generated_memory": {
+              "positive_mean": 1.2141437530517578,
+              "negative_mean": 1.2172927856445312,
+              "mean_margin": -0.003149067983031273,
+              "median_margin": -0.0017247796058654785,
+              "positive_rank_fraction": 0.458984375
+            },
+            "real_vs_generated_x_real_memory": {
+              "positive_mean": 1.2141437530517578,
+              "negative_mean": 1.2195240259170532,
+              "mean_margin": -0.005380106158554554,
+              "median_margin": -0.002822279930114746,
+              "positive_rank_fraction": 0.4140625
+            },
+            "generated_vs_real_x_generated_memory": {
+              "positive_mean": 1.2166537046432495,
+              "negative_mean": 1.2172927856445312,
+              "mean_margin": -0.0006392019568011165,
+              "median_margin": -0.0006552934646606445,
+              "positive_rank_fraction": 0.4677734375
+            },
+            "generated_vs_generated_x_real_memory": {
+              "positive_mean": 1.2166537046432495,
+              "negative_mean": 1.2195240259170532,
+              "mean_margin": -0.002870240481570363,
+              "median_margin": -0.0019047260284423828,
+              "positive_rank_fraction": 0.4482421875
+            }
+          }
+        }
+      }
+    }
+  ]
+}

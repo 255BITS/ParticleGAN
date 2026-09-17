@@ -1,0 +1,20 @@
+{
+  "name": "intent_smoke",
+  "clock_bands": 6,
+  "adversarial_only": true,
+  "g_memory_adapter": "proposal",
+  "feedback_probability": 0.5,
+  "feedback_strength": 0.25,
+  "feedback_min_prefix": 4,
+  "feedback_ramp_steps": 500,
+  "feedback_backprop": true,
+  "feedback_judge_memory": "mixed",
+  "local_pair_weight": 0.25,
+  "mismatch_weight": 0.25,
+  "mismatch_kind": "shuffle",
+  "g_state_dim": 8,
+  "g_state_update": "intent",
+  "g_use_d_memory": false,
+  "clock_to_d": false,
+  "steps": 4
+}

@@ -1,0 +1,447 @@
+{
+  "evaluation_only": true,
+  "count": 64,
+  "definition": "Fresh noisy circle histories from the training process distribution; identical histories and learned particle IDs across models. Histories are held out, particles are not. Each panel fixes real-prefix memory, particle and clock. Refinement counts are inference interventions inside one event, counted as total decoder calls (one means no refinement), without memory writes or time advances. Extra refinement counts can be out of training support. All MSE values are evaluation diagnostics, never training objectives. Point errors use noisy observations. Real-decode error uses the actual target inside its encoder and is a reconstruction probe, not a forecast. Latent distances and variances are model-specific and cannot establish quality across representations. Zero/shuffle interventions measure output sensitivity and local error, not long-run memory benefit. K compares (E(M,x_real),x_real) with (h_producer,x_fake), never a post-write memory against a pre-write memory. Shuffling latent breaks pair compatibility; this is descriptive score dependence, not a causal attribution. Critic scores are uncalibrated across models. Comparisons hold anchor fixed; paired-margin conditioning differences cancel anchor-only offsets. A baseline without Gibbs machinery reports ordinary G errors and memory interventions. Completed runs only; no optimization or generated trajectory training.",
+  "results": [
+    {
+      "name": "gibbs1_joint10_smoke",
+      "source": "runs/memory_path/gibbs_smoke17/runs/gibbs1_joint10_smoke",
+      "steps": 4,
+      "checkpoint_sha256": "77ad0c544043d7c2572446c279cfec82f3a577f815bd4b5e0f313ff1376cf4f3",
+      "gibbs_config": {
+        "gibbs_latent_dim": 8,
+        "gibbs_steps": 1,
+        "gibbs_weight": 0.1,
+        "gibbs_width": 64,
+        "gibbs_condition": true,
+        "gibbs_ramp_steps": 500
+      },
+      "prefixes": {
+        "8": {
+          "point_mse": 0.6799786686897278,
+          "memory_interventions": {
+            "zero": {
+              "point_mse": 0.710273027420044,
+              "output_change_mse": 0.0038942918181419373
+            },
+            "shuffle": {
+              "point_mse": 0.7070555686950684,
+              "output_change_mse": 0.0035323649644851685
+            }
+          },
+          "refinement": {
+            "1": {
+              "point_mse": 0.6799786686897278,
+              "output_change_from_configured_mse": 0.0,
+              "producer_vs_inferred_generated_mse": 0.18699203431606293
+            },
+            "2": {
+              "point_mse": 0.6813551187515259,
+              "output_change_from_configured_mse": 8.511693522450514e-06,
+              "producer_vs_inferred_generated_mse": 3.9644865168497745e-09
+            },
+            "3": {
+              "point_mse": 0.6813549399375916,
+              "output_change_from_configured_mse": 8.511761734553147e-06,
+              "producer_vs_inferred_generated_mse": 2.23758999610274e-16
+            },
+            "7": {
+              "point_mse": 0.6813549399375916,
+              "output_change_from_configured_mse": 8.51176355354255e-06,
+              "producer_vs_inferred_generated_mse": 3.3949080525952358e-18
+            }
+          },
+          "latent": {
+            "real_inferred_variance": 0.0019301152788102627,
+            "producer_variance": 0.11251480877399445,
+            "producer_vs_inferred_generated_mse": 0.18699203431606293,
+            "real_decode_mse": 0.6814142465591431,
+            "interventions": {
+              "zero": {
+                "point_mse": 0.6811341643333435,
+                "output_change_mse": 7.164920134528074e-06
+              },
+              "shuffle": {
+                "point_mse": 0.68044114112854,
+                "output_change_mse": 7.851004738768097e-06
+              }
+            }
+          },
+          "joint_critic": {
+            "real_vs_generated": {
+              "positive_mean": -0.0029452394228428602,
+              "negative_mean": -0.02923084795475006,
+              "mean_margin": 0.026285609230399132,
+              "median_margin": 0.017173083499073982,
+              "positive_rank_fraction": 0.6875
+            },
+            "real_vs_shuffled_latent": {
+              "positive_mean": -0.0029452394228428602,
+              "negative_mean": -0.0027434928342700005,
+              "mean_margin": -0.00020174657402094454,
+              "median_margin": -0.0004710610955953598,
+              "positive_rank_fraction": 0.484375
+            },
+            "generated_vs_shuffled_latent": {
+              "positive_mean": -0.02923084795475006,
+              "negative_mean": -0.028466636314988136,
+              "mean_margin": -0.0007642125710844994,
+              "median_margin": -0.00039784424006938934,
+              "positive_rank_fraction": 0.453125
+            },
+            "generated_producer_vs_reencoded_latent": {
+              "positive_mean": -0.02923084795475006,
+              "negative_mean": -0.0032949952874332666,
+              "mean_margin": -0.025935852900147438,
+              "median_margin": -0.026118749752640724,
+              "positive_rank_fraction": 0.0
+            },
+            "real_vs_other_episode_pair": {
+              "positive_mean": -0.0029452394228428602,
+              "negative_mean": -0.010242984630167484,
+              "mean_margin": 0.007297744508832693,
+              "median_margin": -0.007233446463942528,
+              "positive_rank_fraction": 0.46875
+            },
+            "real_vs_generated_shuffled_anchor": {
+              "positive_mean": -0.011868104338645935,
+              "negative_mean": -0.02807777002453804,
+              "mean_margin": 0.016209663823246956,
+              "median_margin": 0.013397831469774246,
+              "positive_rank_fraction": 0.59375
+            },
+            "paired_margin_correct_vs_shuffled_anchor": {
+              "positive_mean": 0.026285609230399132,
+              "negative_mean": 0.016209663823246956,
+              "mean_margin": 0.010075947269797325,
+              "median_margin": 0.009464167058467865,
+              "positive_rank_fraction": 0.796875
+            }
+          }
+        },
+        "32": {
+          "point_mse": 0.5823174715042114,
+          "memory_interventions": {
+            "zero": {
+              "point_mse": 0.6193490624427795,
+              "output_change_mse": 0.004768894053995609
+            },
+            "shuffle": {
+              "point_mse": 0.6258624792098999,
+              "output_change_mse": 0.003927269484847784
+            }
+          },
+          "refinement": {
+            "1": {
+              "point_mse": 0.5823174715042114,
+              "output_change_from_configured_mse": 0.0,
+              "producer_vs_inferred_generated_mse": 0.18715909123420715
+            },
+            "2": {
+              "point_mse": 0.5833215713500977,
+              "output_change_from_configured_mse": 1.143106692325091e-05,
+              "producer_vs_inferred_generated_mse": 4.895085670142407e-09
+            },
+            "3": {
+              "point_mse": 0.5833213329315186,
+              "output_change_from_configured_mse": 1.1429845471866429e-05,
+              "producer_vs_inferred_generated_mse": 2.0773991251180068e-16
+            },
+            "7": {
+              "point_mse": 0.5833213329315186,
+              "output_change_from_configured_mse": 1.1429842743382324e-05,
+              "producer_vs_inferred_generated_mse": 8.456776945386935e-18
+            }
+          },
+          "latent": {
+            "real_inferred_variance": 0.001846955274231732,
+            "producer_variance": 0.11251480877399445,
+            "producer_vs_inferred_generated_mse": 0.18715909123420715,
+            "real_decode_mse": 0.5833731889724731,
+            "interventions": {
+              "zero": {
+                "point_mse": 0.5832777619361877,
+                "output_change_mse": 8.904543392418418e-06
+              },
+              "shuffle": {
+                "point_mse": 0.5828493237495422,
+                "output_change_mse": 5.596287337539252e-06
+              }
+            }
+          },
+          "joint_critic": {
+            "real_vs_generated": {
+              "positive_mean": -0.006912277080118656,
+              "negative_mean": -0.03533107042312622,
+              "mean_margin": 0.028418786823749542,
+              "median_margin": 0.022894052788615227,
+              "positive_rank_fraction": 0.796875
+            },
+            "real_vs_shuffled_latent": {
+              "positive_mean": -0.006912277080118656,
+              "negative_mean": -0.0058744498528540134,
+              "mean_margin": -0.0010378273436799645,
+              "median_margin": -0.0006102202460169792,
+              "positive_rank_fraction": 0.453125
+            },
+            "generated_vs_shuffled_latent": {
+              "positive_mean": -0.03533107042312622,
+              "negative_mean": -0.035445306450128555,
+              "mean_margin": 0.00011423404794186354,
+              "median_margin": -0.0001645982265472412,
+              "positive_rank_fraction": 0.5
+            },
+            "generated_producer_vs_reencoded_latent": {
+              "positive_mean": -0.03533107042312622,
+              "negative_mean": -0.012281200848519802,
+              "mean_margin": -0.023049868643283844,
+              "median_margin": -0.022668108344078064,
+              "positive_rank_fraction": 0.0
+            },
+            "real_vs_other_episode_pair": {
+              "positive_mean": -0.006912277080118656,
+              "negative_mean": -0.013401377946138382,
+              "mean_margin": 0.0064891004003584385,
+              "median_margin": -0.0019801929593086243,
+              "positive_rank_fraction": 0.5
+            },
+            "real_vs_generated_shuffled_anchor": {
+              "positive_mean": -0.013288911432027817,
+              "negative_mean": -0.03686334192752838,
+              "mean_margin": 0.023574430495500565,
+              "median_margin": 0.023729169741272926,
+              "positive_rank_fraction": 0.78125
+            },
+            "paired_margin_correct_vs_shuffled_anchor": {
+              "positive_mean": 0.028418786823749542,
+              "negative_mean": 0.023574430495500565,
+              "mean_margin": 0.004844358656555414,
+              "median_margin": 0.003850504755973816,
+              "positive_rank_fraction": 0.640625
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "gibbs3_joint25_smoke",
+      "source": "runs/memory_path/gibbs_smoke17/runs/gibbs3_joint25_smoke",
+      "steps": 4,
+      "checkpoint_sha256": "39ddd4a0cbacdc9e77ae4db51bb93572748de48d09e30098354f4ddb804040b8",
+      "gibbs_config": {
+        "gibbs_latent_dim": 8,
+        "gibbs_steps": 3,
+        "gibbs_weight": 0.25,
+        "gibbs_width": 64,
+        "gibbs_condition": true,
+        "gibbs_ramp_steps": 500
+      },
+      "prefixes": {
+        "8": {
+          "point_mse": 0.6810669302940369,
+          "memory_interventions": {
+            "zero": {
+              "point_mse": 0.7107589244842529,
+              "output_change_mse": 0.0038547751028090715
+            },
+            "shuffle": {
+              "point_mse": 0.7081603407859802,
+              "output_change_mse": 0.003482253523543477
+            }
+          },
+          "refinement": {
+            "1": {
+              "point_mse": 0.6801896691322327,
+              "output_change_from_configured_mse": 9.371402484248392e-06,
+              "producer_vs_inferred_generated_mse": 0.1947716325521469
+            },
+            "2": {
+              "point_mse": 0.6810669898986816,
+              "output_change_from_configured_mse": 7.485732953643742e-14,
+              "producer_vs_inferred_generated_mse": 3.8362659715573955e-09
+            },
+            "3": {
+              "point_mse": 0.6810669302940369,
+              "output_change_from_configured_mse": 0.0,
+              "producer_vs_inferred_generated_mse": 1.3655526362454928e-16
+            },
+            "7": {
+              "point_mse": 0.6810669302940369,
+              "output_change_from_configured_mse": 3.892285799222961e-17,
+              "producer_vs_inferred_generated_mse": 2.7647155398380363e-18
+            }
+          },
+          "latent": {
+            "real_inferred_variance": 0.001548283384181559,
+            "producer_variance": 0.0006739111850038171,
+            "producer_vs_inferred_generated_mse": 1.3655526362454928e-16,
+            "real_decode_mse": 0.6811310052871704,
+            "interventions": {
+              "zero": {
+                "point_mse": 0.6810076236724854,
+                "output_change_mse": 4.1765136415961024e-07
+              },
+              "shuffle": {
+                "point_mse": 0.6810754537582397,
+                "output_change_mse": 2.2238216601522254e-08
+              }
+            }
+          },
+          "joint_critic": {
+            "real_vs_generated": {
+              "positive_mean": 0.0011361746583133936,
+              "negative_mean": -0.008311938494443893,
+              "mean_margin": 0.009448112919926643,
+              "median_margin": -0.004196867346763611,
+              "positive_rank_fraction": 0.453125
+            },
+            "real_vs_shuffled_latent": {
+              "positive_mean": 0.0011361746583133936,
+              "negative_mean": 0.0015715486370027065,
+              "mean_margin": -0.0004353739495854825,
+              "median_margin": -0.0006198883056640625,
+              "positive_rank_fraction": 0.375
+            },
+            "generated_vs_shuffled_latent": {
+              "positive_mean": -0.008311938494443893,
+              "negative_mean": -0.008220469579100609,
+              "mean_margin": -9.146815864369273e-05,
+              "median_margin": -0.00020364578813314438,
+              "positive_rank_fraction": 0.484375
+            },
+            "generated_producer_vs_reencoded_latent": {
+              "positive_mean": -0.008311938494443893,
+              "negative_mean": -0.008311937563121319,
+              "mean_margin": -5.857145879417658e-10,
+              "median_margin": 0.0,
+              "positive_rank_fraction": 0.328125
+            },
+            "real_vs_other_episode_pair": {
+              "positive_mean": 0.0011361746583133936,
+              "negative_mean": -0.012501778081059456,
+              "mean_margin": 0.013637952506542206,
+              "median_margin": 0.0014073364436626434,
+              "positive_rank_fraction": 0.515625
+            },
+            "real_vs_generated_shuffled_anchor": {
+              "positive_mean": -0.013053863309323788,
+              "negative_mean": -0.00857868418097496,
+              "mean_margin": -0.0044751777313649654,
+              "median_margin": -0.006931062787771225,
+              "positive_rank_fraction": 0.390625
+            },
+            "paired_margin_correct_vs_shuffled_anchor": {
+              "positive_mean": 0.009448112919926643,
+              "negative_mean": -0.0044751777313649654,
+              "mean_margin": 0.013923290185630322,
+              "median_margin": 0.008559048175811768,
+              "positive_rank_fraction": 0.78125
+            }
+          }
+        },
+        "32": {
+          "point_mse": 0.5831987857818604,
+          "memory_interventions": {
+            "zero": {
+              "point_mse": 0.6193411946296692,
+              "output_change_mse": 0.004756797105073929
+            },
+            "shuffle": {
+              "point_mse": 0.625815212726593,
+              "output_change_mse": 0.00387996481731534
+            }
+          },
+          "refinement": {
+            "1": {
+              "point_mse": 0.5827805995941162,
+              "output_change_from_configured_mse": 1.2179626537545118e-05,
+              "producer_vs_inferred_generated_mse": 0.1965702772140503
+            },
+            "2": {
+              "point_mse": 0.5831989049911499,
+              "output_change_from_configured_mse": 9.87376413269514e-14,
+              "producer_vs_inferred_generated_mse": 4.180678025988982e-09
+            },
+            "3": {
+              "point_mse": 0.5831987857818604,
+              "output_change_from_configured_mse": 0.0,
+              "producer_vs_inferred_generated_mse": 1.881632870348593e-16
+            },
+            "7": {
+              "point_mse": 0.5831987857818604,
+              "output_change_from_configured_mse": 4.2392304944183223e-17,
+              "producer_vs_inferred_generated_mse": 1.3552527156068805e-18
+            }
+          },
+          "latent": {
+            "real_inferred_variance": 0.001491333357989788,
+            "producer_variance": 0.0009294059709645808,
+            "producer_vs_inferred_generated_mse": 1.881632870348593e-16,
+            "real_decode_mse": 0.5832470655441284,
+            "interventions": {
+              "zero": {
+                "point_mse": 0.5833664536476135,
+                "output_change_mse": 8.457762987745809e-07
+              },
+              "shuffle": {
+                "point_mse": 0.5833330154418945,
+                "output_change_mse": 7.755892283967114e-08
+              }
+            }
+          },
+          "joint_critic": {
+            "real_vs_generated": {
+              "positive_mean": -0.007856898941099644,
+              "negative_mean": -0.01959800533950329,
+              "mean_margin": 0.011741109192371368,
+              "median_margin": 0.011975382454693317,
+              "positive_rank_fraction": 0.625
+            },
+            "real_vs_shuffled_latent": {
+              "positive_mean": -0.007856898941099644,
+              "negative_mean": -0.0067652566358447075,
+              "mean_margin": -0.001091643120162189,
+              "median_margin": -0.0009571537375450134,
+              "positive_rank_fraction": 0.359375
+            },
+            "generated_vs_shuffled_latent": {
+              "positive_mean": -0.01959800533950329,
+              "negative_mean": -0.018933719024062157,
+              "mean_margin": -0.0006642882362939417,
+              "median_margin": -0.000595584511756897,
+              "positive_rank_fraction": 0.328125
+            },
+            "generated_producer_vs_reencoded_latent": {
+              "positive_mean": -0.01959800533950329,
+              "negative_mean": -0.019598007202148438,
+              "mean_margin": -1.0913936421275139e-10,
+              "median_margin": 0.0,
+              "positive_rank_fraction": 0.3125
+            },
+            "real_vs_other_episode_pair": {
+              "positive_mean": -0.007856898941099644,
+              "negative_mean": -0.019941195845603943,
+              "mean_margin": 0.012084295973181725,
+              "median_margin": 0.008274941705167294,
+              "positive_rank_fraction": 0.578125
+            },
+            "real_vs_generated_shuffled_anchor": {
+              "positive_mean": -0.021096937358379364,
+              "negative_mean": -0.019843779504299164,
+              "mean_margin": -0.0012531569227576256,
+              "median_margin": 0.0010066330432891846,
+              "positive_rank_fraction": 0.53125
+            },
+            "paired_margin_correct_vs_shuffled_anchor": {
+              "positive_mean": 0.011741109192371368,
+              "negative_mean": -0.0012531569227576256,
+              "mean_margin": 0.012994266115128994,
+              "median_margin": 0.008850250393152237,
+              "positive_rank_fraction": 0.84375
+            }
+          }
+        }
+      }
+    }
+  ]
+}

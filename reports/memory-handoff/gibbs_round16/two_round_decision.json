@@ -1,0 +1,65 @@
+{
+  "rounds_completed": 2,
+  "scouts_completed": 12,
+  "selected_extensions": [],
+  "extension_queue_created": false,
+  "all_full_pass_counts_zero": true,
+  "round16_late_M_plus_z": [
+    {
+      "name": "state_g10",
+      "radius_r2": -0.01606159587078415,
+      "radius_mae": 0.20353882346535102,
+      "signed_speed_r2": 0.0007495327956723585,
+      "signed_speed_mae": 0.25650447116277064,
+      "direction_accuracy": 0.5244140625,
+      "speed_magnitude_mae": 0.24223460266966867
+    },
+    {
+      "name": "joint_match_g10",
+      "radius_r2": -0.012799200403671662,
+      "radius_mae": 0.20324494340457022,
+      "signed_speed_r2": -0.008974704720699833,
+      "signed_speed_mae": 0.2579425304436427,
+      "direction_accuracy": 0.48828125,
+      "speed_magnitude_mae": 0.23994344218112929
+    },
+    {
+      "name": "state_match_g10",
+      "radius_r2": -0.008048530524538355,
+      "radius_mae": 0.2028698206995614,
+      "signed_speed_r2": 0.0018138052802197935,
+      "signed_speed_mae": 0.2562311336305356,
+      "direction_accuracy": 0.533203125,
+      "speed_magnitude_mae": 0.2408937469213015
+    },
+    {
+      "name": "read_g10",
+      "radius_r2": -0.008519526744209527,
+      "radius_mae": 0.20285148173570633,
+      "signed_speed_r2": -0.0036804469564251097,
+      "signed_speed_mae": 0.25725523863707167,
+      "direction_accuracy": 0.48828125,
+      "speed_magnitude_mae": 0.2446020746576778
+    },
+    {
+      "name": "read_w01",
+      "radius_r2": -0.005486417143193645,
+      "radius_mae": 0.20248537935549393,
+      "signed_speed_r2": -0.01872114156057214,
+      "signed_speed_mae": 0.257838393546308,
+      "direction_accuracy": 0.4921875,
+      "speed_magnitude_mae": 0.23338211921577567
+    },
+    {
+      "name": "read_w10",
+      "radius_r2": -0.008447507376994512,
+      "radius_mae": 0.20303186977980658,
+      "signed_speed_r2": -0.0016595041094240592,
+      "signed_speed_mae": 0.25712707934849277,
+      "direction_accuracy": 0.5009765625,
+      "speed_magnitude_mae": 0.24610801806761629
+    }
+  ],
+  "queue_wall_seconds": 1806.9438073635101,
+  "train_gpu_seconds": 3489.329980148963
+}
