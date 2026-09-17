@@ -21,6 +21,11 @@ log_interval = 1000
 snapshot_interval = 1000000
 seed = 1234
 prior_kind = "particles"
+sigma_rel = 0.0
+standardize = false
+particle_lr_multiplier = 1.0
+mog_metrics = false
+# particle_beta1 and mog_pass_criteria default to None (TOML has no null value).
 reg_method = "autograd"
 reg_every = 1
 reg_fd_eps = 0.05

@@ -44,7 +44,7 @@ jobs:
           python -m pip wheel --no-deps . --wheel-dir /tmp/particlegan-wheel
           python -m pip install --no-deps --target /tmp/particlegan-installed /tmp/particlegan-wheel/*.whl
           cd /tmp
-          PYTHONPATH=/tmp/particlegan-installed python -c "import particlegan; from particlegan import ParticlePrior, DDGAN, get_recipe; assert particlegan.__file__.startswith('/tmp/particlegan-installed/'); assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4); assert DDGAN().steps == 4; assert get_recipe().lr == 0.0006"
+          PYTHONPATH=/tmp/particlegan-installed python -c "import particlegan; from particlegan import ParticlePrior, MoGParticlePrior, DDGAN, get_recipe; assert particlegan.__file__.startswith('/tmp/particlegan-installed/'); assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4); assert MoGParticlePrior().sample(2)[0].shape == (2, 4); assert get_recipe('mog').total_steps == 28000; assert DDGAN().steps == 4; assert get_recipe().lr == 0.0006"
 
   distributions:
     name: Build release distributions

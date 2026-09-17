@@ -1,0 +1,29 @@
+# Default MoG experiment: selected 400-component, 28k-step 100-Gaussian recipe.
+# Reuses the existing trainer; overrides are resolved against its shipped defaults.
+# python -u experiments/train_100gaussians.py --config configs/mog/default.toml
+prior_kind = "mog"
+num_particles = 400
+z_dim = 4
+sigma_rel = 0.025
+standardize = true
+epochs = 28
+steps_per_epoch = 1000
+batch_size = 256
+lr = 0.0006
+# Experiment multiplier is relative to the shipped prior LR (0.006).
+# Public Recipe.prior_lr_mult is relative to G's LR and is therefore 100.
+particle_lr_multiplier = 10.0
+particle_beta1 = 0.5
+mog_metrics = true
+log_interval = 100
+final_samples = 200000
+save_checkpoint = true
+seed = 1
+out_dir = "results/mog/default"
+
+# Frozen C0-relative envelope; see results/mog/COMPONENT_SCALE.md.
+[mog_pass_criteria]
+hq_ratio_min = 0.9988322835680561
+width_ratio_min = 0.7909158604586308
+width_ratio_max = 1.2090841395413692
+kl_balance_max = 0.03750414025263102

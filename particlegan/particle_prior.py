@@ -180,56 +180,134 @@ class ParticlePrior(nn.Module):
 class MoGParticlePrior(ParticlePrior):
     """Uniform Gaussian mixture with learned means and fixed calibrated noise.
 
-    Read standardization is differentiable. Regularize ``z`` explicitly when
-    raw-table VICReg is desired; ``forward`` returns component means.
+    Each draw is ``means()[idx] + sigma * eps``. ``sigma_rel`` multiplies the
+    initial median nearest-neighbor distance; sigma stays fixed while training.
+    Optional per-dimension read standardization is differentiable. Regularize
+    raw ``z``, not noisy draws or standardized means. ``forward`` samples noise
+    for supplied indices, so it can be used through a DDP wrapper.
+
+    Calibration uses SciPy when installed (``pip install particlegan[mog]``),
+    otherwise exact, memory-bounded Torch distances. The Torch fallback is
+    quadratic in table size; SciPy is recommended for large low-dimensional tables.
     """
 
-    def __init__(self, *args, sigma_rel=0.0, standardize=True, **kwargs):
+    def __init__(
+        self,
+        num_particles: int = 400,
+        z_dim: int = 4,
+        init_std: float = 1.0,
+        device: Optional[torch.device] = None,
+        dtype: Optional[torch.dtype] = None,
+        learnable: bool = True,
+        generator: Optional[torch.Generator] = None,
+        *,
+        sigma_rel: float = 1 / 40,
+        standardize: bool = True,
+    ) -> None:
         if not math.isfinite(sigma_rel) or sigma_rel < 0:
             raise ValueError("sigma_rel must be finite and nonnegative")
-        super().__init__(*args, **kwargs)
+        if type(standardize) is not bool:
+            raise ValueError("standardize must be a boolean")
+        super().__init__(num_particles, z_dim, init_std, device, dtype, learnable, generator)
         if self.num_particles < 2:
             raise ValueError("MoG calibration requires at least two particles")
         self.sigma_rel = float(sigma_rel)
-        self.standardize = bool(standardize)
+        self.standardize = standardize
         self.register_buffer("sigma", self.z.new_zeros(()))
         self.register_buffer("d0", self.z.new_zeros(()))
         self.calibrate()
 
     def means(self):
+        """Return all differentiable component centers, without sampling noise."""
         if not self.standardize:
             return self.z
         return (self.z - self.z.mean(0)) / (self.z.std(0) + 1e-6)
 
     @torch.no_grad()
     def calibrate(self):
-        # CPU tree avoids an N x N distance matrix at the 20k reference size.
-        from scipy.spatial import cKDTree
-        import numpy as np
-        points = self.means().detach().cpu().double().numpy()
-        distance = cKDTree(points).query(points, k=2)[0][:, 1]
-        self.d0.fill_(float(np.median(distance)))
-        if self.d0 <= 0:
-            raise ValueError("median nearest-neighbor distance must be positive")
+        """Reset d0 and sigma from current means; called once during construction.
+
+        Calling this again explicitly changes the fixed noise scale. Training,
+        EMA copies and checkpoint loading do not recalibrate.
+        """
+        points = self.means().detach().cpu().double()
+        if not torch.isfinite(points).all():
+            raise ValueError("component means must be finite for calibration")
+        try:
+            from scipy.spatial import cKDTree
+        except ImportError:
+            # At most ~32 MiB of distances; no full N x N matrix is retained.
+            chunk_size = max(1, min(1024, 4_000_000 // self.num_particles))
+            nearest = []
+            for start in range(0, self.num_particles, chunk_size):
+                chunk = points[start:start + chunk_size]
+                distances = torch.cdist(chunk, points, compute_mode="donot_use_mm_for_euclid_dist")
+                rows = torch.arange(len(chunk))
+                distances[rows, rows + start] = float("inf")
+                nearest.append(distances.min(dim=1).values)
+            # quantile averages the two middle distances for an even table.
+            distance = torch.cat(nearest).quantile(.5).item()
+        else:
+            # Preserve the experimental calibration, including even-N median.
+            import numpy as np
+            distance = float(np.median(cKDTree(points.numpy()).query(points.numpy(), k=2)[0][:, 1]))
+        self.d0.fill_(distance)
+        if not torch.isfinite(self.d0) or self.d0 <= 0:
+            raise ValueError("median nearest-neighbor distance must be finite and positive")
         self.sigma.copy_(self.d0 * self.sigma_rel)
+        if not torch.isfinite(self.sigma):
+            raise ValueError("calibrated sigma must be finite")
+        self._noise_enabled = bool(self.sigma > 0)
 
-    def forward(self, idx):
-        return self.means()[idx.to(self.z.device)]
+    def forward(self, idx, generator=None, *, eps=None):
+        """Draw from the indexed components; use means()[idx] for centers only.
 
-    def sample(self, batch_size, generator=None, *, fixed_first_n=False,
-               offset=0, eps=None):
-        # Reuse index validation and RNG consumption exactly, including r=0.
-        raw, idx = super().sample(batch_size, generator,
-                                  fixed_first_n=fixed_first_n, offset=offset)
-        z = self.means()[idx] if self.standardize else raw
-        if self.sigma_rel > 0:
+        Explicit eps must match the output shape/device/dtype and replaces the
+        Gaussian RNG draw. At sigma=0 no noise RNG is consumed.
+        """
+        z = self.means()[idx.to(self.z.device)]
+        if self._noise_enabled:
             if eps is None:
-                eps = torch.randn(z.shape, device=z.device, dtype=z.dtype,
-                                  generator=generator)
+                eps = torch.randn(z.shape, device=z.device, dtype=z.dtype, generator=generator)
             elif eps.shape != z.shape or eps.device != z.device or eps.dtype != z.dtype:
                 raise ValueError("eps must match sampled codes' shape, device and dtype")
             z = z + self.sigma * eps
-        return z, idx
+        return z
+
+    def sample(self, batch_size, generator=None, *, fixed_first_n=False,
+               offset=0, eps=None):
+        """Return noisy codes and component indices, uniformly with replacement.
+
+        fixed_first_n fixes indices only; also supply fixed eps for reproducible
+        positive-noise snapshots. A generator controls both indices and noise.
+        """
+        # Reuse index validation and RNG consumption exactly, including r=0.
+        _, idx = super().sample(batch_size, generator,
+                                fixed_first_n=fixed_first_n, offset=offset)
+        return self(idx, generator=generator, eps=eps), idx
+
+    def get_extra_state(self):
+        return {"sigma_rel": self.sigma_rel, "standardize": self.standardize}
+
+    def set_extra_state(self, state):
+        sigma_rel, standardize = state["sigma_rel"], state["standardize"]
+        if not math.isfinite(sigma_rel) or sigma_rel < 0 or type(standardize) is not bool:
+            raise ValueError("invalid MoG checkpoint configuration")
+        self.sigma_rel, self.standardize = float(sigma_rel), standardize
+
+    def _load_from_state_dict(self, state_dict, prefix, local_metadata, strict,
+                              missing_keys, unexpected_keys, error_msgs):
+        # Pre-public experiment checkpoints saved just z/sigma/d0. Their read
+        # standardization must still be supplied by the constructor/config.
+        key = prefix + "_extra_state"
+        if key not in state_dict:
+            state = self.get_extra_state()
+            if prefix + "sigma" in state_dict and prefix + "d0" in state_dict:
+                state["sigma_rel"] = float(state_dict[prefix + "sigma"] / state_dict[prefix + "d0"])
+            state_dict[key] = state
+        super()._load_from_state_dict(state_dict, prefix, local_metadata, strict,
+                                     missing_keys, unexpected_keys, error_msgs)
+        self._noise_enabled = bool(self.sigma > 0)
 
 
 class GaussianPrior(nn.Module):
