@@ -1,0 +1,26 @@
+[
+  {
+    "name": "gan_atoms",
+    "matching_checkpoints": 14,
+    "matching_through_step": 14000,
+    "exact_non_timing_match": true
+  },
+  {
+    "name": "gan_mog",
+    "matching_checkpoints": 14,
+    "matching_through_step": 14000,
+    "exact_non_timing_match": true
+  },
+  {
+    "name": "ddgan_atoms",
+    "matching_checkpoints": 14,
+    "matching_through_step": 14000,
+    "exact_non_timing_match": true
+  },
+  {
+    "name": "ddgan_mog",
+    "matching_checkpoints": 14,
+    "matching_through_step": 14000,
+    "exact_non_timing_match": true
+  }
+]

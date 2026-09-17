@@ -1,0 +1,178 @@
+[
+  {
+    "name": "gan_atoms",
+    "training_sigma_rel": 0.0,
+    "sampling_sigma_rel": 0.0,
+    "metrics": {
+      "hq": 0.9364999532699585,
+      "cond_acc": 0.9825499653816223,
+      "joint_hq": 0.9345999956130981,
+      "modes": 77,
+      "mode_tv": 0.40639999508857727,
+      "conditional_mode_tv": 0.42124998569488525,
+      "tail_10sigma": 0.029899999499320984,
+      "sw1": 0.7224569916725159,
+      "conditional_sw1": 0.7594733834266663,
+      "per_mode_core_std": 0.02563325528704078,
+      "per_mode_core_ratio": 0.8544418429013594,
+      "tail_frac_10sigma": 0.029900000000000003,
+      "per_mode_cov_eig_min_ratio": 1.4220122942709954,
+      "per_mode_cov_eig_max_ratio": 16.482121269620503,
+      "per_mode_cov_audited_modes": 81
+    }
+  },
+  {
+    "name": "gan_atoms",
+    "training_sigma_rel": 0.0,
+    "sampling_sigma_rel": 0.025,
+    "metrics": {
+      "hq": 0.932949960231781,
+      "cond_acc": 0.9809999465942383,
+      "joint_hq": 0.930899977684021,
+      "modes": 78,
+      "mode_tv": 0.40644997358322144,
+      "conditional_mode_tv": 0.4225999712944031,
+      "tail_10sigma": 0.03019999898970127,
+      "sw1": 0.7221394181251526,
+      "conditional_sw1": 0.7585494816303253,
+      "per_mode_core_std": 0.03788781593150193,
+      "per_mode_core_ratio": 1.2629271977167311,
+      "tail_frac_10sigma": 0.0302,
+      "per_mode_cov_eig_min_ratio": 2.3522224197819663,
+      "per_mode_cov_eig_max_ratio": 17.34643721566262,
+      "per_mode_cov_audited_modes": 81
+    }
+  },
+  {
+    "name": "gan_mog",
+    "training_sigma_rel": 0.025,
+    "sampling_sigma_rel": 0.0,
+    "metrics": {
+      "hq": 0.9544000029563904,
+      "cond_acc": 0.9761499762535095,
+      "joint_hq": 0.9519000053405762,
+      "modes": 77,
+      "mode_tv": 0.48319998383522034,
+      "conditional_mode_tv": 0.49734997749328613,
+      "tail_10sigma": 0.016049999743700027,
+      "sw1": 0.8654442429542542,
+      "conditional_sw1": 0.903195708990097,
+      "per_mode_core_std": 0.013521697053697115,
+      "per_mode_core_ratio": 0.4507232351232372,
+      "tail_frac_10sigma": 0.016050000000000002,
+      "per_mode_cov_eig_min_ratio": 0.22944196337918826,
+      "per_mode_cov_eig_max_ratio": 5.467690817902863,
+      "per_mode_cov_audited_modes": 78
+    }
+  },
+  {
+    "name": "gan_mog",
+    "training_sigma_rel": 0.025,
+    "sampling_sigma_rel": 0.025,
+    "metrics": {
+      "hq": 0.9539499878883362,
+      "cond_acc": 0.9765499830245972,
+      "joint_hq": 0.951949954032898,
+      "modes": 77,
+      "mode_tv": 0.482699990272522,
+      "conditional_mode_tv": 0.4969499707221985,
+      "tail_10sigma": 0.016999999061226845,
+      "sw1": 0.8652244806289673,
+      "conditional_sw1": 0.9024739563465118,
+      "per_mode_core_std": 0.02103510908175709,
+      "per_mode_core_ratio": 0.7011703027252364,
+      "tail_frac_10sigma": 0.017,
+      "per_mode_cov_eig_min_ratio": 0.44101983705362374,
+      "per_mode_cov_eig_max_ratio": 7.355937212151853,
+      "per_mode_cov_audited_modes": 78
+    }
+  },
+  {
+    "name": "ddgan_atoms",
+    "training_sigma_rel": 0.0,
+    "sampling_sigma_rel": 0.0,
+    "metrics": {
+      "hq": 0.7911499738693237,
+      "cond_acc": 0.9110999703407288,
+      "joint_hq": 0.7786499857902527,
+      "modes": 100,
+      "mode_tv": 0.04659999907016754,
+      "conditional_mode_tv": 0.10164999961853027,
+      "tail_10sigma": 0.08254999667406082,
+      "sw1": 0.061541326344013214,
+      "conditional_sw1": 0.11722943000495434,
+      "per_mode_core_std": 0.02967639186854133,
+      "per_mode_core_ratio": 0.989213062284711,
+      "tail_frac_10sigma": 0.08255,
+      "per_mode_cov_eig_min_ratio": 7.342858225892721,
+      "per_mode_cov_eig_max_ratio": 13.765869456904307,
+      "per_mode_cov_audited_modes": 100
+    }
+  },
+  {
+    "name": "ddgan_atoms",
+    "training_sigma_rel": 0.0,
+    "sampling_sigma_rel": 0.025,
+    "metrics": {
+      "hq": 0.7912999987602234,
+      "cond_acc": 0.9123499989509583,
+      "joint_hq": 0.7787999510765076,
+      "modes": 100,
+      "mode_tv": 0.046449996531009674,
+      "conditional_mode_tv": 0.10319999605417252,
+      "tail_10sigma": 0.08365000039339066,
+      "sw1": 0.07437551021575928,
+      "conditional_sw1": 0.11146767064929008,
+      "per_mode_core_std": 0.029328975693896316,
+      "per_mode_core_ratio": 0.9776325231298773,
+      "tail_frac_10sigma": 0.08365,
+      "per_mode_cov_eig_min_ratio": 7.514525707362643,
+      "per_mode_cov_eig_max_ratio": 13.72895623590103,
+      "per_mode_cov_audited_modes": 100
+    }
+  },
+  {
+    "name": "ddgan_mog",
+    "training_sigma_rel": 0.025,
+    "sampling_sigma_rel": 0.0,
+    "metrics": {
+      "hq": 0.8112999796867371,
+      "cond_acc": 0.914199948310852,
+      "joint_hq": 0.79749995470047,
+      "modes": 100,
+      "mode_tv": 0.04594999551773071,
+      "conditional_mode_tv": 0.09849999845027924,
+      "tail_10sigma": 0.07599999755620956,
+      "sw1": 0.06748253852128983,
+      "conditional_sw1": 0.10802862606942654,
+      "per_mode_core_std": 0.0270136826467297,
+      "per_mode_core_ratio": 0.9004560882243234,
+      "tail_frac_10sigma": 0.076,
+      "per_mode_cov_eig_min_ratio": 7.091222211339216,
+      "per_mode_cov_eig_max_ratio": 12.125736347797531,
+      "per_mode_cov_audited_modes": 100
+    }
+  },
+  {
+    "name": "ddgan_mog",
+    "training_sigma_rel": 0.025,
+    "sampling_sigma_rel": 0.025,
+    "metrics": {
+      "hq": 0.8084999918937683,
+      "cond_acc": 0.9126499891281128,
+      "joint_hq": 0.7957499623298645,
+      "modes": 100,
+      "mode_tv": 0.05194999650120735,
+      "conditional_mode_tv": 0.10719999670982361,
+      "tail_10sigma": 0.0794999971985817,
+      "sw1": 0.07362287491559982,
+      "conditional_sw1": 0.11901514418423176,
+      "per_mode_core_std": 0.026679662965550566,
+      "per_mode_core_ratio": 0.8893220988516856,
+      "tail_frac_10sigma": 0.0795,
+      "per_mode_cov_eig_min_ratio": 7.157252004640557,
+      "per_mode_cov_eig_max_ratio": 12.932544466892168,
+      "per_mode_cov_audited_modes": 100
+    }
+  }
+]

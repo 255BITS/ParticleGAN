@@ -1,0 +1,6 @@
+[
+  "configs/denoising/mog_capacity_100k/ddgan_atoms.yaml",
+  "configs/denoising/mog_capacity_100k/ddgan_mog.yaml",
+  "configs/denoising/mog_capacity_100k/gan_atoms.yaml",
+  "configs/denoising/mog_capacity_100k/gan_mog.yaml"
+]

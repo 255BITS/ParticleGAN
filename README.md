@@ -235,6 +235,28 @@ trainers; the denoising trainer requires CUDA. See the
 [experiment runner guide](https://github.com/255BITS/ParticleGAN/blob/master/docs/experiment-runner.md) for grids and recorded
 effective configurations.
 
+To use MoG latents with the DDGAN trainer:
+
+```bash
+mkdir -p results/denoising/mog
+python -u experiments/train_denoising.py --config configs/denoising/mog.toml > results/denoising/mog/log.txt 2>&1
+# From another terminal:
+tail -F results/denoising/mog/log.txt
+```
+
+Set `prior = "mog"`; `sigma_rel` and `standardize` control its fixed noise and
+read standardization. Optional `prior_betas` sets separate Adam betas for the
+component means. The supplied config uses the one-shot MoG recipe's 400 components
+and prior optimizer settings. The matched small-generator studies at
+[14k updates](reports/denoising-toy/mog_capacity/READOUT.md) and
+[100k updates](reports/denoising-toy/mog_capacity_100k/READOUT.md) report the
+quality tradeoffs; the supplied full-width 56k configuration is not a selected
+DDGAN benchmark winner. Set `generator_hidden` to vary generator width while
+keeping discriminator width controlled by `hidden`.
+The trainer regularizes raw means and preserves the calibrated noise in EMA and
+checkpoints. Forward diffusion and the separately configured reverse `noise`
+source retain their existing behavior.
+
 ### DDGAN and UCD compose independently
 
 `DDGAN` supplies Gaussian forward pairs and reverse transitions. `UCD` selects
