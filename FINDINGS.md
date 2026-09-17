@@ -152,3 +152,62 @@ pass criterion; do not equate matching C0's HQ with passing. Its balance and wid
 leave room for a useful result. This is a recommendation only: later stages are
 paused for the owner's decision. The six Stage 0 runs took 3.4 minutes on two
 A6000s; C0 averaged 70.2 seconds/run including the new metric suite.
+
+## Fixed-sigma MoG prior — Stage 1 optimizer pilot (2026-09-16)
+
+The owner authorized Stage 1 and revised the criterion to **original or better**.
+Before pilot results, we froze the observed three-seed C0 envelope: modes=100,
+HQ/real ≥ **0.99883228**, width/real **0.79091586–1.20908414**, and HQ-only
+KL ≤ **0.03750414**. All C0 references pass this rule. The old design criterion
+remains recorded separately; Stage 0 history is unchanged.
+
+**No match at nominal r=1/8 within 7k steps:** 36 unique runs, **0/36 passes**.
+All 36 fail HQ, width, and balance individually; this is not a marginal threshold
+failure. We completed the 30-run LR sweep and six new momentum runs, reusing the
+six identical beta=0 comparisons. Tests: 35 passed plus 13 subtests. All 36 runs
+are certified complete; all 2,520 metric-trace rows and frozen configs validated.
+Training sources: `33b3144`.
+
+Selected by pass rate, then HQ, then width distance from real:
+
+| N | Particle LR multiplier | Particle β1 | Passes | HQ/real | Width/real | KL |
+|---|---:|---:|---:|---:|---:|---:|
+| 100 | 10× (initial LR 0.06) | 0 | 0/3 | 0.29137 | 4.400 | 0.37679 |
+| 400 | 10× (initial LR 0.06) | 0.5 | 0/3 | 0.38016 | 3.373 | 0.15626 |
+
+Higher LR improves HQ but does not approach C0. The momentum preference is small:
+N=100 beta=0.5 has HQ/real 0.28825; N=400 beta=0 has 0.37668. The selected N=400
+momentum setting has worse balance than beta=0 (0.15626 vs 0.13829); it wins only
+through the preregistered HQ tie-break after both pass rates are zero. Neither is
+an established optimum; both LR winners are at the tested upper boundary.
+
+**The Gaussian centers fit much better than their noisy neighborhoods.** In the
+selected N=400 cell, **99.4%** of component centers map within a data mode's 3σ
+radius, but **37.6%** of noisy samples do. HQ-conditioned purity is effectively
+1.0, with no empty majority allocations. N=100 has 91.0% HQ component centers,
+28.8% HQ noisy samples, purity 0.9803, and 13.3 empty majority allocations. These
+center-only measurements are explicit diagnostics; all primary evaluation keeps
+noise on. Excessive output spread, plus N=100 allocation failures, explains the
+poor quality better than an evaluation-only pass-rule issue.
+
+**Clumping complicates the proposed noise/separation ratio.** Selected N=400
+r_eff averages **4.63**, despite nominal r=0.125; 91.2% of evaluable components'
+nearest neighbors have the same majority output mode. This is not the nominal
+r=2 Gaussian-collapse control. All three selected runs at each N also exceed the
+2× raw-scale drift threshold. The report retains those flags and separately
+records distances to neighbors with different majority modes; the prescribed
+r_eff and ranking are unchanged.
+
+Recommendation: before the full Stage 2 grid, test N=400 with the selected
+optimizer at **r=0, 1/32, and 1/16**. The atoms control isolates the small-table
+limitation; smaller noise tests whether width can recover. r=1/32 would be an
+explicit addition to the original design. **No follow-up runs launched.** The
+seven original predictions remain inconclusive for their full stated comparisons;
+the pilot's supporting and contrary observations are enumerated in the report.
+
+[Full report](results/mog/STAGE1.md) · [per-run results](results/mog/stage1_results.csv)
+· [leaderboard](results/mog/stage1_leaderboard.csv)
+· [optimizer plots](results/mog/stage1_optimizer.png)
+· [runbook](results/mog/STAGE1_RUNBOOK.md).
+The timed first run took 68 seconds; the remaining LR batch took 10.2 minutes
+and the momentum round 2.5 minutes with two workers per A6000.
