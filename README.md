@@ -497,7 +497,7 @@ toy trainers. The faster CIFAR default retains exact derivatives; FD is optional
 
 Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
 
-### 0.4.0 — Unreleased
+### 0.4.0 — 2026-09-17
 
 - Adds `get_recipe("ddgan_mog")`: four-step DDGAN with class-only UCD, 400 MoG
   components, z_dim 4, sigma_rel 0.025, standardized reads, 100k updates,

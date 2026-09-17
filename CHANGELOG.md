@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.4.0 — Unreleased
+## 0.4.0 — 2026-09-17
 
 - Add `get_recipe("ddgan_mog")`: DDGAN with class-only UCD, 400 MoG components,
   z_dim=4, sigma_rel=1/40, standardized reads, 100,000 updates, a constant learning
