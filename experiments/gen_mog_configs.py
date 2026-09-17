@@ -47,7 +47,7 @@ def save(cfg, name, folder):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--stage', choices=['stage0','stage1_lr','stage1_beta','noise_check','longer'], default='stage0')
+    parser.add_argument('--stage', choices=['stage0','stage1_lr','stage1_beta','noise_check','longer','refine_noise'], default='stage0')
     args=parser.parse_args()
     folder=ROOT/'configs/mog'/args.stage
     if args.stage == 'stage0':
@@ -60,6 +60,16 @@ def main():
                 save(cfg,name,folder)
         return
     criteria=frozen_criteria()['thresholds']
+    if args.stage == 'refine_noise':
+        for seed in (1,2,3):
+            name=f'n400_r1over40_14k_s{seed}'
+            cfg={**DEFAULTS,'epochs':14,'prior_kind':'mog','num_particles':400,
+                 'sigma_rel':1/40,'standardize':True,'seed':seed,
+                 'particle_lr_multiplier':10.,'particle_beta1':.5,
+                 'mog_metrics':True,'mog_pass_criteria':criteria,'log_interval':100,
+                 'final_samples':200000,'out_dir':f'results/mog/refine_noise/{name}'}
+            save(cfg,name,folder)
+        return
     if args.stage == 'longer':
         selected=json.loads((ROOT/'results/mog/noise_check_winner.json').read_text())
         for seed in (1,2,3):
