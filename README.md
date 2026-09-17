@@ -449,7 +449,27 @@ toy trainers. The faster CIFAR default retains exact derivatives; FD is optional
 
 Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
 
-### 0.2.0 — unreleased
+### 0.3.0 — 2026-09-17
+
+- Adds the public `MoGParticlePrior`: a uniform mixture with learned means and a
+  shared, fixed Gaussian sigma calibrated from initial nearest-neighbor spacing
+  (defaults: 400 components, z_dim 4, sigma_rel 1/40, standardized reads).
+- Adds `get_recipe("mog")`, the selected 400-component, 28k-step recipe (prior LR
+  0.06, prior Adam betas (0.5, 0.999), existing GAN defaults), plus
+  `configs/mog/default.toml` for the 100-Gaussian trainer. Recipe factories can
+  select the prior and set prior betas separately.
+- MoG supports explicit sampling generators, fixed epsilon snapshots, noisy module
+  forward calls for DDP, raw-center regularization, EMA, and state-dict restoration
+  of read configuration and calibrated noise. Legacy experimental checkpoints remain
+  loadable.
+- Core dependency stays PyTorch only; the optional `mog` extra installs SciPy for
+  faster calibration of large tables, with an exact Torch fallback without it.
+- Passed the frozen C0 envelope on 100 Gaussians at 28k steps (HQ/real 0.99953,
+  width/real 0.92636, KL 0.02888) with 50× fewer components and 4× the steps of
+  the original baseline. Single-seed result; see
+  [results/mog/COMPONENT_SCALE.md](results/mog/COMPONENT_SCALE.md).
+
+### 0.2.0 — 2026-09-16
 
 - Adds the installable `particlegan` namespace, independent PyTorch primitives,
   immutable recipes, and direct use of loaded TOML dictionaries.
