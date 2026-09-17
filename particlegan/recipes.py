@@ -157,8 +157,14 @@ def get_recipe(name="gan", **overrides):
     elif name in ("ddgan", "denoising"):
         recipe = Recipe(name=name, model="ddgan", num_classes=4,
                         conditioning="ucd", total_steps=56_000)
+    elif name == "ddgan_mog":
+        recipe = get_recipe("ddgan").replace(
+            name=name, prior_kind="mog", num_particles=400, sigma_rel=1/40,
+            standardize=True, total_steps=100_000, prior_lr_mult=100.,
+            prior_betas=(.5, .999), lr_floor=1.,
+        )
     else:
-        raise ValueError(f"Unknown recipe {name!r}; choose 'gan', 'mog' or 'ddgan'")
+        raise ValueError(f"Unknown recipe {name!r}; choose 'gan', 'mog', 'ddgan' or 'ddgan_mog'")
     return recipe.replace(**overrides)
 
 

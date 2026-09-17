@@ -106,7 +106,7 @@ def main():
         try:
             opt_g.zero_grad(set_to_none=True)
             g_loss = gan.g_loss(critic(fake), critic(real).detach())
-            prior_loss = spread(prior(particle_ids.unique()))
+            prior_loss = spread(prior.z[particle_ids.unique()])
             total_g = g_loss + prior_loss
             total_g.backward()
             opt_g.step()
