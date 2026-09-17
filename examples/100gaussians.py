@@ -51,6 +51,7 @@ Visualization:
 
 import argparse
 import copy
+import json
 import sys
 import time
 from pathlib import Path
@@ -89,6 +90,7 @@ def save_fake_scatter(
     filename: str,
     real_samples: torch.Tensor,
     n_fake: int = 4096,
+    fixed_eps=None,
     xlim: Tuple[float, float] = (-6.0, 6.0),
     ylim: Tuple[float, float] = (-6.0, 6.0),
 ) -> None:
@@ -104,7 +106,9 @@ def save_fake_scatter(
     prior.eval()
 
     with torch.no_grad():
-        z_fake, _ = prior.sample(n_fake, fixed_first_n=True)
+        n_fake = min(n_fake, prior.num_particles)
+        kwargs = {"eps": fixed_eps[:n_fake]} if fixed_eps is not None else {}
+        z_fake, _ = prior.sample(n_fake, fixed_first_n=True, **kwargs)
         z_fake = z_fake.to(device)
         fake = generator(z_fake).cpu()
 
@@ -165,6 +169,12 @@ def train(
     reg_sync_stats: bool = True,
     fused_adam: bool = False,
     return_details: bool = False,
+    sigma_rel: float = 0.0,
+    standardize: bool = False,
+    particle_lr_multiplier: float = 1.0,
+    particle_beta1: float = None,
+    mog_metrics: bool = False,
+
 ):
     # Device / seeds
     if device_str is not None:
@@ -190,7 +200,7 @@ def train(
 
     # Models
     prior_kind = canonical_prior_kind(prior_kind)
-    learnable_prior = prior_kind == "particles"
+    learnable_prior = prior_kind in ("particles", "mog")
     recipe = get_recipe(
         z_dim=z_dim, num_particles=num_particles, batch_size=batch_size,
         total_steps=epochs * steps_per_epoch, lr=lr, d_lr_mult=d_lr_mult,
@@ -201,9 +211,13 @@ def train(
     )
     # The fresh-Gaussian research control retains a fixed visualization table
     # and its historical initialization RNG consumption.
-    prior = (make_prior(prior_kind, num_particles=num_particles, z_dim=z_dim)
-             if prior_kind == "fresh_gaussian"
-             else recipe.make_prior(learnable=learnable_prior)).to(device)
+    if prior_kind == "mog":
+        prior = make_prior("mog", num_particles=num_particles, z_dim=z_dim,
+                           sigma_rel=sigma_rel, standardize=standardize).to(device)
+    else:
+        prior = (make_prior(prior_kind, num_particles=num_particles, z_dim=z_dim)
+                 if prior_kind == "fresh_gaussian"
+                 else recipe.make_prior(learnable=learnable_prior)).to(device)
     G = SimpleMLPGenerator(z_dim=z_dim).to(device)
     D = SimpleMLPDiscriminator(in_dim=2, fourier=fourier).to(device)
 
@@ -228,8 +242,8 @@ def train(
     opt_G, opt_D = recipe.make_optimizers(G, D, fused=fused_adam)
     # Keep a separate prior optimizer for the existing update/checkpoint layout.
     opt_prior = (
-        torch.optim.Adam(prior.parameters(), lr=recipe.lr * recipe.prior_lr_mult,
-                         betas=recipe.betas, fused=fused_adam)
+        torch.optim.Adam(prior.parameters(), lr=recipe.lr * recipe.prior_lr_mult * particle_lr_multiplier,
+                         betas=(beta1 if particle_beta1 is None else particle_beta1, recipe.betas[1]), fused=fused_adam)
         if learnable_prior else None
     )
 
@@ -243,13 +257,25 @@ def train(
         generator=viz_gen,
     )
 
+    fixed_eps = None
+    if prior_kind == "mog" and sigma_rel > 0:
+        fixed_eps = torch.randn(min(4096, num_particles), z_dim, device=device,
+                                generator=torch.Generator(device=device).manual_seed(seed + 4))
+    initial_raw_std = float(prior.z.detach().std()) if learnable_prior else None
+    t_cover = None
+    last_d_gap = None
+    if mog_metrics:
+        from lib.mog_metrics import evaluate
+        metric_path = out_path / "metrics.jsonl"
+        metric_path.write_text("")
+
     # Initial snapshot (untrained model).
     save_fake_scatter(
         ema_G,
         ema_prior,
         device,
         str(out_path / f"samples_step_{0:06d}.png"),
-        real_samples=real_viz,
+        real_samples=real_viz, fixed_eps=fixed_eps,
     )
 
     total_steps = epochs * steps_per_epoch
@@ -296,6 +322,8 @@ def train(
             real_logits = D(x_real)
             fake_logits = D(x_fake)
 
+            if mog_metrics:
+                last_d_gap = (real_logits.detach().mean() - fake_logits.detach().mean())
             loss_d = gan_loss.d_loss(real_logits, fake_logits)
 
             # Gradient penalty at the samples. This is what lets the sharp
@@ -337,7 +365,8 @@ def train(
             ep_z = loss_gan.new_zeros(())
             if learnable_prior:
                 unique_idx = torch.unique(idx)
-                ep_z = vic_reg(prior(unique_idx))
+                raw = prior.z if num_particles <= 1024 else prior.z[unique_idx]
+                ep_z = vic_reg(raw)
             loss_g = loss_gan + lambda_ep * ep_z
 
             opt_G.zero_grad()
@@ -359,7 +388,8 @@ def train(
             # -------------------------
             # Logging / snapshots
             # -------------------------
-            maintenance = (global_step % log_interval == 0 or
+            metric_due = mog_metrics and ((global_step + 1) % log_interval == 0 or global_step + 1 == total_steps)
+            maintenance = (global_step % log_interval == 0 or metric_due or
                            (global_step % snapshot_interval == 0 and global_step > 0))
             if maintenance:
                 synchronize()
@@ -378,13 +408,24 @@ def train(
                     f"hq: {hq_frac:.3f}"
                 )
 
+            if metric_due:
+                row, _, _, _ = evaluate(ema_G, ema_prior, 20000, seed, initial_raw_std)
+                if t_cover is None and row['modes'] == 100 and row['hq'] >= .9:
+                    t_cover = global_step + 1
+                row.update(step=global_step + 1, d_gap=float(last_d_gap), t_cover=t_cover,
+                           raw_std_live=float(prior.z.detach().std()) if learnable_prior else None)
+                from experiments.train_denoising import json_safe
+                with metric_path.open('a') as stream:
+                    stream.write(json.dumps(json_safe(row), allow_nan=False) + '\n')
+                print(f"[mog step {global_step+1:06d}] hq={row['hq']:.6f} width_ratio={row['width_ratio']:.4f} kl={row['kl_balance']} pass={row['passed']}", flush=True)
+
             if global_step % snapshot_interval == 0 and global_step > 0:
                 save_fake_scatter(
                     ema_G,
                     ema_prior,
                     device,
                     str(out_path / f"samples_step_{global_step:06d}.png"),
-                    real_samples=real_viz,
+                    real_samples=real_viz, fixed_eps=fixed_eps,
                 )
 
             if maintenance:
@@ -400,14 +441,16 @@ def train(
             ema_prior,
             device,
             str(out_path / f"samples_epoch_{epoch:04d}.png"),
-            real_samples=real_viz,
+            real_samples=real_viz, fixed_eps=fixed_eps,
         )
 
         synchronize()
         block_start = time.perf_counter()
 
     if return_details:
-        return {"prior": prior, "G": G, "D": D, "ema_prior": ema_prior, "ema_G": ema_G,
+        return {"initial_raw_std": initial_raw_std, "t_cover": t_cover,
+                "d_gap": float(last_d_gap) if last_d_gap is not None else None,
+                "prior": prior, "G": G, "D": D, "ema_prior": ema_prior, "ema_G": ema_G,
                 "train_seconds": train_seconds, "total_seconds": time.perf_counter() - total_start}
     return prior, G, D
 

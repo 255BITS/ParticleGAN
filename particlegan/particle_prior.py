@@ -177,6 +177,61 @@ class ParticlePrior(nn.Module):
         return z_batch, idx
 
 
+class MoGParticlePrior(ParticlePrior):
+    """Uniform Gaussian mixture with learned means and fixed calibrated noise.
+
+    Read standardization is differentiable. Regularize ``z`` explicitly when
+    raw-table VICReg is desired; ``forward`` returns component means.
+    """
+
+    def __init__(self, *args, sigma_rel=0.0, standardize=True, **kwargs):
+        if not math.isfinite(sigma_rel) or sigma_rel < 0:
+            raise ValueError("sigma_rel must be finite and nonnegative")
+        super().__init__(*args, **kwargs)
+        if self.num_particles < 2:
+            raise ValueError("MoG calibration requires at least two particles")
+        self.sigma_rel = float(sigma_rel)
+        self.standardize = bool(standardize)
+        self.register_buffer("sigma", self.z.new_zeros(()))
+        self.register_buffer("d0", self.z.new_zeros(()))
+        self.calibrate()
+
+    def means(self):
+        if not self.standardize:
+            return self.z
+        return (self.z - self.z.mean(0)) / (self.z.std(0) + 1e-6)
+
+    @torch.no_grad()
+    def calibrate(self):
+        # CPU tree avoids an N x N distance matrix at the 20k reference size.
+        from scipy.spatial import cKDTree
+        import numpy as np
+        points = self.means().detach().cpu().double().numpy()
+        distance = cKDTree(points).query(points, k=2)[0][:, 1]
+        self.d0.fill_(float(np.median(distance)))
+        if self.d0 <= 0:
+            raise ValueError("median nearest-neighbor distance must be positive")
+        self.sigma.copy_(self.d0 * self.sigma_rel)
+
+    def forward(self, idx):
+        return self.means()[idx.to(self.z.device)]
+
+    def sample(self, batch_size, generator=None, *, fixed_first_n=False,
+               offset=0, eps=None):
+        # Reuse index validation and RNG consumption exactly, including r=0.
+        raw, idx = super().sample(batch_size, generator,
+                                  fixed_first_n=fixed_first_n, offset=offset)
+        z = self.means()[idx] if self.standardize else raw
+        if self.sigma_rel > 0:
+            if eps is None:
+                eps = torch.randn(z.shape, device=z.device, dtype=z.dtype,
+                                  generator=generator)
+            elif eps.shape != z.shape or eps.device != z.device or eps.dtype != z.dtype:
+                raise ValueError("eps must match sampled codes' shape, device and dtype")
+            z = z + self.sigma * eps
+        return z, idx
+
+
 class GaussianPrior(nn.Module):
     """Fresh Gaussian latent draws, with no table or trainable parameters.
 
@@ -228,7 +283,7 @@ class FreshGaussianPrior(ParticlePrior):
         return z, None
 
 
-PRIOR_KINDS = ("particles", "frozen_gaussian", "fresh_gaussian", "gaussian")
+PRIOR_KINDS = ("mog", "particles", "frozen_gaussian", "fresh_gaussian", "gaussian")
 
 
 def canonical_prior_kind(kind: str) -> str:
@@ -241,6 +296,8 @@ def canonical_prior_kind(kind: str) -> str:
 
 def make_prior(kind: str, **kwargs) -> ParticlePrior:
     kind = canonical_prior_kind(kind)
+    if kind == "mog":
+        return MoGParticlePrior(**kwargs)
     if kind == "fresh_gaussian":
         return FreshGaussianPrior(**kwargs)
     return ParticlePrior(**kwargs, learnable=(kind == "particles"))

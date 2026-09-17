@@ -26,6 +26,11 @@ DEFAULTS = {
     'snapshot_interval': 1000000,
     'seed': 1234,
     'prior_kind': 'particles',
+    'sigma_rel': 0.0,
+    'standardize': False,
+    'particle_lr_multiplier': 1.0,
+    'particle_beta1': None,
+    'mog_metrics': False,
     'reg_fd_eps': 0.05,
     'reg_sync_stats': True,
     'fused_adam': False,
@@ -65,18 +70,32 @@ def train(cfg):
     toy=GaussianGrid('cuda',.03,1)
     n=cfg['final_samples'];c=torch.zeros(n,device='cuda',dtype=torch.long)
     rng=torch.Generator('cuda').manual_seed(cfg['seed']+999)
-    with torch.no_grad():
-        x=g(prior.sample(n,generator=rng)[0])
-        real=toy.sample(c,rng)
-        final=grid_metrics(x,c,toy,real)
-        floor=grid_metrics(toy.sample(c,rng),c,toy,toy.sample(c,rng))
-        final['unique_outputs']=len(torch.unique(x,dim=0))
-    np.savez_compressed(out/'final_samples.npz',x=x.cpu().numpy(),c=c.cpu().numpy())
+    if cfg['mog_metrics']:
+        from lib.mog_metrics import evaluate, geometry
+        final, components, x, real = evaluate(g, prior, n, cfg['seed'], result['initial_raw_std'], component_detail=True)
+        final.update(t_cover=result['t_cover'], d_gap=result['d_gap'])
+        live = geometry(result['prior'])
+        final['raw_std_live'] = live['raw_std']
+        final['raw_std_live_ratio'] = live['raw_std']/result['initial_raw_std'] if live['raw_std'] is not None else None
+        final['raw_std_drift_flag'] = bool(final['raw_std_drift_flag'] or (final['raw_std_live_ratio'] is not None and not .5 <= final['raw_std_live_ratio'] <= 2))
+        write_json(out/'components.json', components)
+        np.savez_compressed(out/'final_samples.npz', x=x.cpu().numpy(), real=real.cpu().numpy())
+        floor = {key[:-5]: value for key, value in final.items() if key.endswith('_real')}
+    else:
+        with torch.no_grad():
+            x=g(prior.sample(n,generator=rng)[0])
+            real=toy.sample(c,rng)
+            final=grid_metrics(x,c,toy,real)
+            floor=grid_metrics(toy.sample(c,rng),c,toy,toy.sample(c,rng))
+            final['unique_outputs']=len(torch.unique(x,dim=0))
+        np.savez_compressed(out/'final_samples.npz',x=x.cpu().numpy(),c=c.cpu().numpy())
     render(out,x.cpu().numpy(),c.cpu().numpy(),toy,None)
     if cfg['save_checkpoint']:
         torch.save({'config':cfg,'G':g.state_dict(),'prior':prior.state_dict()},out/'final.pt')
+    import subprocess
+    git_sha = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     steps=cfg['epochs']*cfg['steps_per_epoch']
-    summary={'config':cfg,'final':final,'reference_floor':floor,'train_seconds':result['train_seconds'],
+    summary={'git_sha':git_sha,'config':cfg,'final':final,'reference_floor':floor,'train_seconds':result['train_seconds'],
              'samples_per_second':steps*cfg['batch_size']/result['train_seconds'],
              'total_seconds':time.perf_counter()-start,'environment':env,'provenance':provenance}
     write_json(out/'summary.json',summary)
