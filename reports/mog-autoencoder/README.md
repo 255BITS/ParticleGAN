@@ -14,6 +14,11 @@ original bounded arm as the reference for HQ and reconstruction. All final
 models generate overly narrow mode cores; neither tested surrogate makes
 the usage-balancing loss achieve its hard-routing target.
 
+**Frozen-checkpoint follow-up:** exhaustive selection among decoded particle
+centers removes 33.1% of the bounded model's zero-offset reconstruction error,
+50.3% for local routing, and 60.1% for local balancing. The original bounded
+model also has the best available decoded centers. See the [oracle audit](ORACLE.md).
+
 | Rank | Reconstruction path | Modes /100 | HQ % | Width /real | SW1 ↓ | Reconstruction MSE ↓ |
 |---|---|---:|---:|---:|---:|---:|
 | 1 | Bounded offset + local routing gradient | 93 | 72.41 | 0.651 | 0.4560 | 0.005028 |
@@ -129,18 +134,42 @@ routed arm on an RTX A6000 (41.15 seconds for local balancing); evaluations and 
     their variation is still dominated by conditional means. This does not show
     successful encoding of within-mode detail or matching to Gaussian noise.
 
+11. **An exhaustive center oracle finds avoidable selection error.** The audit
+    freezes all nine final checkpoints and evaluates the same 100k real examples.
+    Both the encoder and oracle paths use zero offsets:
+    `E(X) -> k -> G(p[k])` versus `argmin_k ||G(p[k])-X||^2` over all 400 centers.
+    The bounded arm improves from MSE 0.002808 to 0.001880, a 33.05% reduction;
+    local routing improves from 0.004900 to 0.002433 (50.34%); local balancing
+    from 0.008344 to 0.003327 (60.13%). These 100k means differ slightly from
+    the original 8,192-example metrics; the audit reproduces those smaller-set
+    zero-offset errors and hard counts before reporting the full set.
+    Bounded routing has both the lowest encoder center error and lowest oracle
+    error. Its oracle error remains 2.08× the true-grid-center reference MSE
+    0.000902, so improving selection alone cannot close that gap with these
+    frozen centers. This reference uses 100 known grid centers and is not a
+    theoretical lower bound for a learned 400-center model.
+    Encoder/oracle ID agreement is only 48.21% for bounded routing, but its
+    median error gap is just 0.000034 versus a 90th-percentile gap of 0.003144;
+    many disagreements are inexpensive. Oracle choices also do not automatically
+    balance usage: bounded effective usage falls from 227.7 to 217.7 and TV
+    rises from 0.4413 to 0.4601. The audit identifies a zero-offset selection
+    opportunity, not the cause of the gap or an unconditional generation gain.
+    The trained encoder normally sees offsets, which can affect its preferred
+    particle; the oracle is not a bound on reconstruction with learned offsets.
+
 Recommended next mechanism comparisons, using the same seed:
 
-- **Audit the best available discrete reconstruction first:** freeze each
-  checkpoint, decode all 400 particle centers, and compare `E(X) -> k` against
-  `k_best = argmin_k ||G(p[k]) - X||^2` on held-out data. Compare both at zero
-  offset to isolate selection. This gives an exact center-only selection bound
-  for the frozen decoder and separates avoidable routing error from inadequate
-  decoded centers. It requires no training or temperature tuning.
-- **If there is a substantial selection gap:** test reconstruction-based hard
-  assignments as detached encoder targets against a matched control. This
-  changes how the discrete choice is trained; another softness adjustment is
-  not yet justified by the failed hard-usage results.
+- **Fit the encoder to the oracle with G and particles frozen (first choice):**
+  use fresh training examples, compute their best decoded-center assignments,
+  and teach the encoder those choices. Compare with matched encoder-only
+  reconstruction fine-tuning from the same checkpoint and for the same budget.
+  Keep both paths at zero offset for this diagnostic. Evaluate actual hard-choice
+  MSE on held-out data, rather than ID accuracy alone. This tests whether the
+  existing encoder can learn the available improvement without changing G.
+- **Then consider joint training:** if oracle supervision closes the held-out
+  selection gap, test it alongside the GAN objective with a matched control.
+  Better inference does not by itself improve unconditional sampling; require
+  generation metrics before promoting the new recipe.
 - **Separate offset optimization:** if pursuing detail, isolate the offset branch
   from shared routing features and compare matched normal versus increased
   offset learning rates. This can distinguish Adam's gradient normalization
@@ -257,6 +286,8 @@ scout control, not a reproduction of the published 28k-step MoG recipe.
 
 [Hard/soft routing audit](ROUTING.md) · [routing counts and probabilities](routing_audit.json)
 
+[Frozen-center oracle leaderboard](ORACLE.md) · [oracle metrics and checkpoint hashes](oracle_audit.json)
+
 ![Learning curves](learning_curves.png)
 
 Sample/reconstruction/latent plots:
@@ -297,7 +328,7 @@ the full table also reports balance, width, and reconstruction tradeoffs.
 From the feature worktree, with the repository dependencies installed:
 
 ```bash
-python -m pytest -q tests/test_mog_autoencoder.py tests/test_mog.py tests/test_mog_api.py
+python -m pytest -q tests/test_mog_autoencoder.py tests/test_mog_oracle.py tests/test_mog.py tests/test_mog_api.py
 mkdir -p runs/mog_autoencoder
 python -u experiments/train_mog_autoencoder.py --steps 6000 \
   --out runs/mog_autoencoder/scout > runs/mog_autoencoder/scout.console.log 2>&1
@@ -350,6 +381,23 @@ python experiments/analyze_mog_routing.py runs/mog_autoencoder/scout
 The default trainer now runs all nine arms, so a fresh run uses a single source
 version and does not need that analyzer flag.
 
+To audit exhaustive center selection without training:
+
+```bash
+python -u experiments/analyze_mog_oracle.py runs/mog_autoencoder/scout \
+  > runs/mog_autoencoder/oracle_audit.log 2>&1
+tail -F runs/mog_autoencoder/oracle_audit.log
+```
+
+The audit evaluates all saved final checkpoints, including the GAN control's
+center-only oracle (it has no trained encoder). It decodes each center once,
+computes coordinate MSE to every center in double precision in chunks, and
+asserts the oracle never loses to the selected center. It records checkpoint
+and source hashes, checks matching data/initialization/budget settings, and
+verifies each checkpoint file is unchanged. It does not alter the generation
+leaderboard. Known-answer tests cover global selection, coordinate averaging,
+and distinct IDs with identical decoded outputs.
+
 Use a new output directory for a rerun: the trainer refuses to overwrite existing
 metric files. Each arm writes line-buffered `log.txt`, `history.jsonl`,
 `metrics.json`, resolved config, a copy of its training source, `samples.png`, and
@@ -368,4 +416,5 @@ the direction of the balancing gradient, unchanged bounded forward values, and
 the direct query-only gradient path. Local routing tests additionally verify
 identical hard forward values, bounded offsets, routing and particle gradients,
 eight-neighbor support, zero gradients to excluded distances, and finite
-derivatives for tied distances. All 33 routing and MoG tests pass.
+derivatives for tied distances. Including the two oracle tests, all 35 routing,
+oracle, and MoG tests pass (`tests/test_mog_oracle.py` plus the files above).

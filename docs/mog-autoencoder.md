@@ -181,6 +181,10 @@ Two matched follow-ups restrict the backward routing surrogate to eight nearest
 particles with a detached local bandwidth, with and without the same usage loss.
 The hard forward path and fixed sigma are unchanged; the prespecified comparison
 is recorded in `reports/mog-autoencoder/local_protocol.md`.
+A frozen-checkpoint audit then searches all 400 decoded centers to isolate the
+zero-offset reconstruction error from encoder selection. It finds substantial
+selection gaps while the original bounded arm retains the best center set;
+see `reports/mog-autoencoder/ORACLE.md` for the diagnostic leaderboard.
 
 ## Prior art and novelty boundary
 
