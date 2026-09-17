@@ -159,6 +159,41 @@ def main():
              '- noise_check_results.csv, noise_check_leaderboard.csv, noise_check_winner.json.',
              '- noise_check_metrics.png, noise_check_width_hq.png, noise_check_component_centers.csv.',
              '- noise_check/<run>/ and longer/<run>/: complete run configs, source archives, final checkpoints/samples, component diagnostics, JSONL traces, and logs.', '']
+    refinement=next(c for c in cells if c['sigma_rel']==1/40 and c['steps']==14000)
+    report += ['## Completed outcome', '',
+               f"The r=1/40 refinement passes {refinement['passes']}/3: HQ/real {refinement['hq_ratio']:.6f}, "
+               f"width/real {refinement['width_ratio']:.4f}, KL {refinement['kl_balance']:.5f}. "
+               'All three runs meet coverage, width and balance; only HQ fails the frozen envelope. '
+               'It uses 50 times fewer components and twice the training steps of C0. '
+               'Width is closer to real, but this is not an equal-budget match or a full pass.', '',
+               'The saved longer_prefix_check.json verifies that the first 42 original log entries '
+               '(through step 4100) agree exactly between the 7k and 14k r=1/32 runs for all three seeds.', '',
+               '## Overlap audit', '']
+    overlap_path=OUT/'noise_check_overlap.csv'
+    if overlap_path.exists():
+        with overlap_path.open() as stream:
+            overlap=list(csv.DictReader(stream))
+        report += ['Independent post-training CPU diagnostic: 20k latent samples per run. '
+                   'Compute the exact equal-weight shared-Gaussian posterior, then estimate '
+                   'E[1-max posterior] for component identity and for components grouped by '
+                   'their observed HQ-majority destination. These learned labels are not external ground truth.', '',
+                   '| r | Steps | Component ambiguity | Destination ambiguity | Generated non-HQ |',
+                   '|---:|---:|---:|---:|---:|']
+        for c in cells:
+            group=[a for a in overlap if float(a['sigma_rel'])==c['sigma_rel'] and int(a['steps'])==c['steps']]
+            if group:
+                mean=lambda k: np.mean([float(a[k]) for a in group])
+                report.append(f"| {c['sigma_rel']:g} | {c['steps']} | {mean('component_bayes_ambiguity'):.6g} | "
+                              f"{mean('output_mode_bayes_ambiguity'):.6g} | {mean('generated_bridge'):.6g} |")
+        report += ['', 'Different-destination ambiguity is much smaller than generated non-HQ mass. '
+                   'Overlap between components serving the same mode can be harmless. '
+                   'The results point toward difficulty shaping the noisy neighborhoods, rather than '
+                   'destination ambiguity explaining most failures. This is a diagnostic interpretation, '
+                   'not a causal isolation; near-zero Monte Carlo estimates do not prove zero overlap. '
+                   'The bridge metric includes over-wide within-mode tails, not only samples in inter-mode walls.', '']
+    report += ['Recommendation at this checkpoint: test a slightly smaller radius, more training, '
+               'or more components with matched atoms controls. Keep the acceptance thresholds fixed '
+               'and distinguish small-table parameter savings from training cost.', '']
     (OUT/'NOISE_CHECK.md').write_text('\n'.join(report))
 
 

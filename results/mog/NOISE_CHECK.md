@@ -51,3 +51,25 @@ The center-only diagnostic is explicit and supplementary; it never replaces nois
 - noise_check_results.csv, noise_check_leaderboard.csv, noise_check_winner.json.
 - noise_check_metrics.png, noise_check_width_hq.png, noise_check_component_centers.csv.
 - noise_check/<run>/ and longer/<run>/: complete run configs, source archives, final checkpoints/samples, component diagnostics, JSONL traces, and logs.
+
+## Completed outcome
+
+The r=1/40 refinement passes 0/3: HQ/real 0.996408, width/real 0.9263, KL 0.03588. All three runs meet coverage, width and balance; only HQ fails the frozen envelope. It uses 50 times fewer components and twice the training steps of C0. Width is closer to real, but this is not an equal-budget match or a full pass.
+
+The saved longer_prefix_check.json verifies that the first 42 original log entries (through step 4100) agree exactly between the 7k and 14k r=1/32 runs for all three seeds.
+
+## Overlap audit
+
+Independent post-training CPU diagnostic: 20k latent samples per run. Compute the exact equal-weight shared-Gaussian posterior, then estimate E[1-max posterior] for component identity and for components grouped by their observed HQ-majority destination. These learned labels are not external ground truth.
+
+| r | Steps | Component ambiguity | Destination ambiguity | Generated non-HQ |
+|---:|---:|---:|---:|---:|
+| 0.03125 | 7000 | 0.129824 | 7.57542e-18 | 0.048465 |
+| 0.0625 | 7000 | 0.2738 | 2.25567e-11 | 0.353177 |
+| 0.125 | 7000 | 0.522684 | 0.000198769 | 0.624052 |
+| 0.025 | 14000 | 0.13036 | 7.61428e-18 | 0.0146367 |
+| 0.03125 | 14000 | 0.199106 | 1.01715e-17 | 0.0323367 |
+
+Different-destination ambiguity is much smaller than generated non-HQ mass. Overlap between components serving the same mode can be harmless. The results point toward difficulty shaping the noisy neighborhoods, rather than destination ambiguity explaining most failures. This is a diagnostic interpretation, not a causal isolation; near-zero Monte Carlo estimates do not prove zero overlap. The bridge metric includes over-wide within-mode tails, not only samples in inter-mode walls.
+
+Recommendation at this checkpoint: test a slightly smaller radius, more training, or more components with matched atoms controls. Keep the acceptance thresholds fixed and distinguish small-table parameter savings from training cost.

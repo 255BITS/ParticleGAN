@@ -1,5 +1,60 @@
 # MoG particle-prior study — compaction handoff
 
+## Latest continuation: component-count and budget experiments COMPLETE
+
+This section supersedes the older checkpoint below. The user authorized more
+MoG experiments, larger component tables, and longer training to match/beat C0.
+The latest AGENTS instruction says no seed-only experiments. **All 21 new runs
+used seed 1; do not infer a need to repeat seeds from the historical study.**
+No training is running. Current branch remains `feature/mog-particle-prior`.
+
+Read `results/mog/COMPONENT_SCALE.md` and its CSV/plots for the complete results.
+17 screened 7k configurations plus four 28k runs; five historical references reused.
+All 2,310 new JSONL rows/configs/certificates/digests validated. The baseline
+`results/mog/results.csv` and all training code remain unchanged. Four positive-noise
+MoGs pass the frozen C0 envelope; none dominates original seed-1 C0 in every measured
+quality metric. No pass-rate claims: this is a single-seed configuration screen.
+
+| Run | HQ/real | Width/real | KL | Pass |
+|---|---:|---:|---:|---|
+| Original 20k C0, 7k, seed 1 | 1.001274 | .7909 | .03750 | yes |
+| 20k MoG r=1/40, unstandardized, 7k | 1.000066 | .8258 | .03570 | yes |
+| 20k C0, 28k | .999110 | .9438 | .02655 | yes |
+| 20k MoG r=1/16, unstandardized, 28k | 1.000046 | .9543 | .02657 | yes |
+| 20k MoG r=1/40, unstandardized, 28k | .999778 | .9567 | .02742 | yes |
+| 400 MoG r=1/40, standardized, 28k | .999535 | .9264 | .02888 | yes |
+
+The compact MoG uses 50x fewer components and 4x the original training steps;
+raw scale drift is 4.11x (flagged), with standardized read scale controlled.
+No matched 400-atom 28k control has been run. The 20k r=1/16 at 28k also clears
+all historical C0-mean thresholds (.99978 / .84343 / .03478); it is the only new
+MoG to do so. Matched 28k atoms are nearly as good: MoG slightly improves HQ and
+width, KL differs by only +.000012. Unstandardized 20k raw scale grows only
+11–13%; effective sigma/spacing increases, so no inflation escape here.
+
+At 7k, fast optimizer LR multiplier 10/beta .5 fails as N increases. Shipped
+LR multiplier 1/beta 0 restores width for N=1,600/6,400, but balance still fails.
+More components do not produce a monotonic gain. Both priors remain useful.
+
+User asked what unstandardized means; answered: learned means are read directly,
+without per-read centering/std normalization, as in C0, then fixed noise is added.
+
+New scripts: `gen_mog_scale_configs.py` (screen/optimizer/longer stages) and
+`analyze_mog_scale.py --final`. Configs: `configs/mog/component_scale/` (17) and
+`configs/mog/scale_longer/` (4). Raw outputs in same-named results folders are
+gitignored but preserved. Logs: `component_scale.runner.log`,
+`component_scale.optimizer.runner.log`, `scale_longer.runner.log`.
+Timing: 77s timed run; 4.1min remaining screen; 1.3min optimizer check; 5.2min longer.
+Longer runs start fresh and scale cosine to 28k; exact prefixes match parents
+(42 logs for each 20k run, 84 for N=400). See `component_scale_prefix_check.json`.
+
+Completed the previously pending NOISE_CHECK narrative and FINDINGS follow-ups.
+Recommendation for a future user-authorized continuation: matched 400-atom 28k
+control, then improve the compact MoG schedule to reduce training cost; retain
+20k MoG and atoms at matched budget as quality references. No more runs launched.
+
+## Historical checkpoint (before this continuation)
+
 ## User intent and authority
 
 User requested the fixed-sigma MoG study on a feature branch, with a Stage 0 gate.

@@ -211,3 +211,108 @@ the pilot's supporting and contrary observations are enumerated in the report.
 · [runbook](results/mog/STAGE1_RUNBOOK.md).
 The timed first run took 68 seconds; the remaining LR batch took 10.2 minutes
 and the momentum round 2.5 minutes with two workers per A6000.
+
+## Fixed-sigma MoG — smaller noise and longer training (2026-09-16)
+
+The authorized follow-up completed 15 runs across five settings, retaining the
+selected N=400 optimizer and all three original seeds. Lower fixed noise and a
+longer training budget improve MoG substantially, but do not yet match the frozen
+C0 envelope. The adaptive r=1/32 and r=1/40 points extend the original grid.
+
+| Setting | Steps | HQ/real | Width/real | KL | Pass |
+|---|---:|---:|---:|---:|---:|
+| C0, 20k atoms | 7k | 0.99978 | 0.84343 | 0.03478 | 3/3 |
+| 400 atoms, selected optimizer | 7k | 0.99171 | 0.393 | 0.02754 | 0/3 |
+| 400 MoG, r=1/32 | 7k | 0.96220 | 1.154 | 0.04966 | 0/3 |
+| 400 MoG, r=1/32 | 14k | 0.97851 | 1.066 | 0.03591 | 0/3 |
+| 400 MoG, r=1/40 | 14k | 0.99641 | 0.926 | 0.03588 | 0/3 |
+
+Numbers are three-seed means. At r=1/40, all three runs meet coverage, width and
+balance; only HQ fails. This uses **50× fewer components and 2× the training
+steps** of C0, with width closer to the real data. It is not an equal-budget win.
+The 14k runs restart from the same initialization with their cosine schedule
+scaled to the longer budget. Their first 42 original log entries match the
+corresponding 7k r=1/32 runs exactly for all three seeds.
+
+**Overlap needs a destination-aware interpretation.** At r=1/8, the independent
+latent posterior audit estimates component-identity ambiguity at 52.3%, but
+ambiguity between components grouped by their learned output-mode labels at only
+0.020%, versus 62.4% generated non-HQ mass. Same-mode clouds may overlap without
+hurting mode identity. Lower-noise settings also have negligible sampled
+destination ambiguity despite non-HQ tails. This suggests neighborhood shaping
+is the larger remaining problem in these trained models; it does not establish
+a causal mechanism or prove Gaussian supports are disjoint. The quantity
+`bridge=1-hq` includes excessively wide within-mode tails.
+
+Next: investigate component count and training budget while retaining matched
+zero-noise controls. [Full follow-up report](results/mog/NOISE_CHECK.md),
+[results](results/mog/noise_check_results.csv), and
+[overlap diagnostics](results/mog/noise_check_overlap.csv).
+
+## Fixed-sigma MoG — component count and 28k budget (2026-09-16)
+
+The owner requested larger tables and more training, with no seed-only experiments.
+Completed **21 new configurations at seed 1**: a 13-setting count/noise/optimizer
+screen, four additional shipped-optimizer controls, and four 28k runs. Reused
+existing seed-1 references; no new seed repetitions. These are exploratory
+configuration results, not pass-rate estimates. All use the unchanged shared
+trainer, 200k final EMA samples with matched reals, and the frozen C0 envelope.
+
+**MoG now passes at 400 components with sufficient training.** It also passes at
+20k components with the shipped optimizer. Selected comparisons:
+
+| Prior | N | r | Steps | HQ/real | Width/real | KL | Envelope |
+|---|---:|---:|---:|---:|---:|---:|---|
+| Original C0, seed 1 | 20,000 | 0 | 7k | 1.001274 | 0.7909 | 0.03750 | pass |
+| MoG, unstandardized | 20,000 | 1/40 | 7k | 1.000066 | 0.8258 | 0.03570 | pass |
+| C0, longer | 20,000 | 0 | 28k | 0.999110 | 0.9438 | 0.02655 | pass |
+| MoG, unstandardized | 20,000 | 1/16 | 28k | 1.000046 | 0.9543 | 0.02657 | pass |
+| MoG, unstandardized | 20,000 | 1/40 | 28k | 0.999778 | 0.9567 | 0.02742 | pass |
+| MoG, standardized | 400 | 1/40 | 28k | 0.999535 | 0.9264 | 0.02888 | pass |
+
+Every row covers 100 modes. Ratios above 1 can occur because a model is narrower
+than the real distribution and/or because of evaluation sampling variation.
+Historical C0 means over three seeds are HQ/real 0.99978, width/real 0.84343,
+KL 0.03478. Only the new 20k r=1/16, 28k MoG clears all three C0-mean thresholds.
+It still does not dominate the matching seed-1 original C0 on HQ, and costs four
+times the updates. No positive-noise run dominates original seed-1 C0 on all
+coverage/HQ/width-error/KL dimensions.
+
+The strongest compact result has **50× fewer components and 4× the training
+steps**, with better width and balance than original C0. Its raw-table scale grows
+4.11×, a gauge/optimizer drift flag; standardized reads keep the read-space scale
+controlled. There is not yet a matched 400-atom 28k control, so this establishes a
+small MoG achieving the envelope, not that noise is necessary at that budget.
+
+At matched 28k budget, 20k r=1/16 MoG slightly improves HQ and width over atoms,
+while KL is effectively tied (0.026566 versus 0.026554). Thus much of the gain over
+original 7k C0 comes from longer training, not necessarily MoG. The unstandardized
+20k priors do not exhibit the hypothesized inflation escape here: raw scale grows
+about 11–13%, and effective sigma/spacing increases. This low-noise finding does
+not substitute for the original high-noise C3 control.
+
+Increasing count is not a monotonic win. The fast optimizer selected at N=400
+(particle LR 0.06, beta1=0.5) transfers poorly to 6,400 and 20k. With shipped
+particle LR 0.006 and beta1=0, standardized 1,600/6,400 MoGs recover width to
+0.918/0.893 at 7k, but KL remains 0.0542/0.0466. Standardized 20k r=1/40 also
+misses balance (0.0520); its unstandardized counterpart passes. Cross-N changes
+also alter calibrated absolute sigma, and N>1,024 uses sampled-row VICReg.
+
+The 28k schedules are fresh runs with annealing starting at 16,800, not resumed
+checkpoints. All original log entries before each shorter parent's annealing
+onset match exactly (42 per 20k comparison, 84 for N=400). All **2,310** new trace
+rows, configs, certificates and summary digests validated. The baseline CSV and
+training implementation remain unchanged. Timings: 77s initial run, 4.1-minute
+screen remainder, 1.3-minute optimizer follow-up, 5.2-minute longer batch.
+
+Recommendation: retain both priors. The compact MoG is now a viable measured
+tradeoff. Next compare a matched 400-atom 28k run, then optimize the compact MoG's
+schedule to reduce its training cost. For a large-table quality baseline, keep
+20k r=1/16 MoG and 20k atoms at matched budget. No new seed repetitions are needed
+to answer those configuration questions.
+
+[Full report and all failures](results/mog/COMPONENT_SCALE.md) ·
+[per-run metrics](results/mog/component_scale_results.csv) ·
+[leaderboard](results/mog/component_scale_leaderboard.csv) ·
+[component-count plot](results/mog/component_scale_count.png) ·
+[training curves](results/mog/component_scale_training.png).
