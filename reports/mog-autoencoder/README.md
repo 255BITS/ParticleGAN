@@ -4,33 +4,37 @@ This scout tests whether reconstruction through a selected MoG particle helps
 generation, and whether predicting an offset helps beyond choosing a particle.
 Sigma is a fixed buffer throughout every arm. No VAE KL term is used.
 
-**Result:** bounded offsets still lead on coverage/HQ and reconstruction.
-Adding particle-usage balancing gives 85 versus 92 modes, 64.29% versus 82.23%
-HQ, and MSE 0.005167 versus 0.002775. The targeted hard usage actually worsens:
-effective particle usage falls from 228 to 156 on 100k held-out examples, despite
-slightly more uniform soft probabilities. This suggests a limitation of the
-soft routing gradient used to optimize hard counts. Neither this intervention
-nor 100× offset gradients improves the main targets. All arms generate overly
-narrow modes, and the GAN control retains the best global SW1.
+**Result:** local routing reaches 93 modes versus 92 for the original bounded
+arm, taking first place under the coverage-first ranking. It loses on HQ
+(72.41% versus 82.23%), reconstruction, width, balance, and SW1. Adding usage
+balancing to local routing reduces coverage to 79 and effective hard particle
+usage from 151 to 119, despite more uniform soft probabilities. Its SW1 of
+0.1929 is the best of all arms, so there is no across-metric winner. Keep the
+original bounded arm as the reference for HQ and reconstruction. All final
+models generate overly narrow mode cores; neither tested surrogate makes
+the usage-balancing loss achieve its hard-routing target.
 
 | Rank | Reconstruction path | Modes /100 | HQ % | Width /real | SW1 ↓ | Reconstruction MSE ↓ |
 |---|---|---:|---:|---:|---:|---:|
-| 1 | Chosen particle + bounded predicted offset | 92 | 82.23 | 0.694 | 0.3911 | 0.002775 |
-| 2 | Chosen particle + unrestricted predicted offset | 91 | 76.66 | 0.722 | 0.4830 | 0.005378 |
-| 3 | Chosen particle + random offset | 89 | 76.63 | 0.780 | 0.5109 | 0.004865 |
-| 4 | Bounded offset + usage balancing | 85 | 64.29 | 0.752 | 0.4327 | 0.005167 |
-| 5 | GAN control, no encoder | 80 | 59.09 | 0.747 | 0.2426 | — |
-| 6 | Chosen particle + predicted offset, 100× gradient | 77 | 65.55 | 0.752 | 0.4437 | 0.008043 |
-| 7 | Chosen particle, zero offset | 71 | 46.21 | 0.748 | 0.3834 | 0.008368 |
+| 1 | Bounded offset + local routing gradient | 93 | 72.41 | 0.651 | 0.4560 | 0.005028 |
+| 2 | Chosen particle + bounded predicted offset | 92 | 82.23 | 0.694 | 0.3911 | 0.002775 |
+| 3 | Chosen particle + unrestricted predicted offset | 91 | 76.66 | 0.722 | 0.4830 | 0.005378 |
+| 4 | Chosen particle + random offset | 89 | 76.63 | 0.780 | 0.5109 | 0.004865 |
+| 5 | Bounded offset + usage balancing | 85 | 64.29 | 0.752 | 0.4327 | 0.005167 |
+| 6 | GAN control, no encoder | 80 | 59.09 | 0.747 | 0.2426 | — |
+| 7 | Bounded offset + local routing + balancing | 79 | 56.68 | 0.747 | 0.1929 | 0.007645 |
+| 8 | Chosen particle + predicted offset, 100× gradient | 77 | 65.55 | 0.752 | 0.4437 | 0.008043 |
+| 9 | Chosen particle, zero offset | 71 | 46.21 | 0.748 | 0.3834 | 0.008368 |
 
 Every row is the final 6,000-update model, evaluated on 100,000 unconditional
 samples. Training took about 29 seconds for the control and 38–41 seconds per
-routed arm on an RTX A6000; evaluations and setup are excluded.
+routed arm on an RTX A6000 (41.15 seconds for local balancing); evaluations and setup are excluded.
 
 ## Interpretation and next experiments
 
-1. **Routing works as an inference path.** All routed arms reconstruct the
-   correct nearest grid mode for 100% of the 8,192 held-out examples. This is
+1. **Routing works as an inference path.** Routed arms reconstruct the
+   correct nearest grid mode for 100% of the 8,192 held-out examples, except
+   local balancing, which misses one (99.988%). This is
    coarse classification success, not exact recovery of within-mode detail.
    The bounded model selects 347/400 particles, with entropy-effective usage
    about 225. Sampling remains uniform over all 400 particles.
@@ -43,12 +47,12 @@ routed arm on an RTX A6000; evaluations and setup are excluded.
    RMS, suggesting offsets mainly provide particle-specific biases rather than
    within-particle detail at this checkpoint. Tiny fixed sigma also attenuates
    gradients to the offset head; this does not demonstrate that offsets cannot help.
-3. **Do not attribute the winner to preventing huge offsets.** The unrestricted
+3. **Do not attribute the bounded arm's advantage to preventing huge offsets.** The unrestricted
    model has zero evaluated offset coordinates outside ±3. The smooth bounded
    parameterization changes optimization, but this run did not expose the feared
    unbounded-offset bypass. The nearest-query straight-through estimator is
    approximate, and the initialization includes a spatial query skip connection.
-4. **Generation remains incomplete.** The leading arm misses 8 modes under the
+4. **Generation remains incomplete.** The original bounded arm misses 8 modes under the
    HQ coverage criterion, places 17.77% of samples outside the HQ radius, and
    has core width only 69.4% of the real reference. It improves HQ-mode balance
    TV from 0.360 to 0.263, but the GAN control's lower global SW1 prevents a claim
@@ -101,15 +105,42 @@ routed arm on an RTX A6000; evaluations and setup are excluded.
    through balancing gradient, finite-batch noise, shared encoder features, and
    single trajectory limit causal attribution; the result rejects this tested
    recipe, not particle balancing in general.
+9. **Locality does not repair the balancing mechanism.** Compared with original
+   bounded routing, the local arm gains one HQ-covered mode but loses 9.82
+   percentage points of HQ and has 81.2% higher reconstruction MSE. On the 100k
+   routing audit, its hard-usage TV worsens from 0.4413 to 0.6044 and effective
+   usage falls from 227.7 to 150.7. The direct TV between hard and soft aggregate
+   frequencies increases from 0.4082 to 0.5569. Although each query's surrogate
+   covers only eight particles, those weights remain diffuse within that set;
+   locality does not imply agreement with hard decisions.
+   Adding balancing makes soft usage more uniform (TV 0.1860 to 0.1015) but hard
+   usage less uniform (TV 0.6044 to 0.6872; effective count 150.7 to 119.3).
+   Hard/soft TV grows further to 0.6740. Coverage falls from 93 to 79 and HQ from
+   72.41% to 56.68%; reconstruction MSE rises 52.1%. Width improves from 0.651
+   to 0.747, and global SW1 improves from 0.4560 to 0.1929, beating even the GAN
+   control's 0.2426. This is a distributional tradeoff, not evidence that hard
+   usage balancing succeeded. At 4k the balanced arm had 68.50% HQ and width
+   0.990, then regressed by 6k; intermediate values do not select the final model.
+10. **Local offsets still look like particle-specific corrections.** Local offset
+    RMS is 0.40730 and conditional-mean RMS 0.40728. Zeroing offsets slightly
+    improves MSE (0.005028 to 0.004951); replacing them with noise gives 0.004993.
+    With local balancing these RMS values rise to 1.53567 and 1.53562. Zeroing
+    offsets now increases MSE 7.8%, to 0.008241 (random offsets: 0.008284), but
+    their variation is still dominated by conditional means. This does not show
+    successful encoding of within-mode detail or matching to Gaussian noise.
 
 Recommended next mechanism comparisons, using the same seed:
 
-- **Routing-gradient control (first choice):** compare a more local routing
-  surrogate with and without balancing, keeping bounded offsets and the same
-  forward hard selection. Fix its temperature or neighborhood rule before
-  running; do not tune to the leaderboard. Current temperature 0.25 is large
-  relative to final squared particle spacing, and soft/hard usage disagree.
-  Require improved hard usage before attributing generation changes to balancing.
+- **Audit the best available discrete reconstruction first:** freeze each
+  checkpoint, decode all 400 particle centers, and compare `E(X) -> k` against
+  `k_best = argmin_k ||G(p[k]) - X||^2` on held-out data. Compare both at zero
+  offset to isolate selection. This gives an exact center-only selection bound
+  for the frozen decoder and separates avoidable routing error from inadequate
+  decoded centers. It requires no training or temperature tuning.
+- **If there is a substantial selection gap:** test reconstruction-based hard
+  assignments as detached encoder targets against a matched control. This
+  changes how the discrete choice is trained; another softness adjustment is
+  not yet justified by the failed hard-usage results.
 - **Separate offset optimization:** if pursuing detail, isolate the offset branch
   from shared routing features and compare matched normal versus increased
   offset learning rates. This can distinguish Adam's gradient normalization
@@ -118,7 +149,7 @@ Recommended next mechanism comparisons, using the same seed:
   bounded offsets together. Both coverage and HQ fluctuate, so the 6k result
   does not distinguish slow optimization from a persistent disadvantage.
 
-This seven-arm result is not a statistical ranking across seeds, and no
+This nine-arm result is not a statistical ranking across seeds, and no
 seed-only experiments were performed. The final table uses the predetermined
 budget rather than cherry-picking the best intermediate checkpoint.
 
@@ -130,6 +161,8 @@ route_zero:    E(X) -> k       -> p[k]                      -> G -> X_hat
 route_grad100: E(X) -> (k, u)  -> p[k] + sigma * u           -> G -> X_hat
               same forward as route_offset; 100x gradient into u
 route_balanced: same forward as route_bounded; add aggregate hard-usage loss
+route_local: same forward as route_bounded; use eight-neighbor routing gradient
+route_local_balanced: same local gradient; add aggregate hard-usage loss
 
 Every arm generates unconditionally with:
 uniform k + fresh Gaussian noise -> p[k] + sigma * noise -> G -> new X
@@ -154,12 +187,13 @@ scout control, not a reproduction of the published 28k-step MoG recipe.
   correction. No mode labels or component assignments supervise E.
 - Choice: nearest particle to the query. The forward pass uses exactly one
   particle. A softmax of negative squared distances, temperature 0.25, supplies
-  an approximate query gradient. That surrogate detaches particle means; actual
+  an approximate query gradient in the original arms. The two local arms use
+  the rule below. Both surrogates detach particle means; actual
   reconstruction gradients reach selected means through the hard path and the
   prior's normal differentiable standardization.
 - Loss: relativistic-paired logistic GAN + raw-particle spread regularizer,
   adding coordinate-averaged reconstruction MSE with weight 1 for routed arms.
-  Only route_balanced adds component-usage balancing, as described below.
+  The two balanced arms add component-usage balancing, as described below.
   There is no continuous latent matching, commitment, or offset penalty.
   The bounded arm constrains each offset coordinate to (-3, 3); this is not a
   guarantee that its offset distribution matches Gaussian generation noise.
@@ -205,6 +239,16 @@ scout control, not a reproduction of the published 28k-step MoG recipe.
   100k real examples per routed arm using the original evaluation seed. It
   reproduces the original 8,192-example used/effective counts before reporting
   the larger-set results. It changes neither checkpoints nor original metrics.
+- The local pair uses eight nearest particles in the routing surrogate, with
+  `temperature = stop_gradient(max(d8 - d1, 1e-6))` for sorted squared query
+  distances. The fixed global temperature in the shared config is unused in
+  these arms. Forward selection remains the global nearest particle, offsets
+  remain bounded, and local balancing uses the same 0.01 loss weight. Support
+  and bandwidth both change, so their effects are not separately identified.
+  See the [prespecified protocol](local_protocol.md) and [source diff](route_local_source.diff).
+  Both runs started after commit `40a55a7`; the older runs record base revision
+  `47e504c`. The analyzer's explicit source-difference flag permits these reviewed
+  revision differences while retaining all hashes and checking shared settings.
 
 ## Metrics and ranking
 
@@ -219,6 +263,7 @@ Sample/reconstruction/latent plots:
 [bounded offset](route_bounded.png), [unrestricted offset](route_offset.png),
 [random offset](route_noise.png), [zero offset](route_zero.png),
 [100× offset gradient](route_grad100.png), [usage balancing](route_balanced.png),
+[local routing](route_local.png), [local routing + balancing](route_local_balanced.png),
 [GAN control](gan.png).
 
 Rank is lexicographic: most modes covered, highest high-quality fraction, then
@@ -291,7 +336,18 @@ python experiments/analyze_mog_autoencoder.py runs/mog_autoencoder/scout \
 python experiments/analyze_mog_routing.py runs/mog_autoencoder/scout
 ```
 
-The default trainer now runs all seven arms, so a fresh run uses a single source
+To append the local routing pair:
+
+```bash
+python -u experiments/train_mog_autoencoder.py --arms route_local route_local_balanced \
+  --steps 6000 --out runs/mog_autoencoder/scout > runs/mog_autoencoder/route_local.console.log 2>&1
+tail -F runs/mog_autoencoder/route_local.console.log
+python experiments/analyze_mog_autoencoder.py runs/mog_autoencoder/scout \
+  --allow-source-differences
+python experiments/analyze_mog_routing.py runs/mog_autoencoder/scout
+```
+
+The default trainer now runs all nine arms, so a fresh run uses a single source
 version and does not need that analyzer flag.
 
 Use a new output directory for a rerun: the trainer refuses to overwrite existing
@@ -309,4 +365,7 @@ gradients. The gradient-control test checks identical forward values, 100×
 offset-output gradients, and unchanged direct query, particle, and decoder
 gradients. Balancing tests check hard collapse despite uniform soft probabilities,
 the direction of the balancing gradient, unchanged bounded forward values, and
-the direct query-only gradient path. All 31 routing and MoG tests pass.
+the direct query-only gradient path. Local routing tests additionally verify
+identical hard forward values, bounded offsets, routing and particle gradients,
+eight-neighbor support, zero gradients to excluded distances, and finite
+derivatives for tied distances. All 33 routing and MoG tests pass.

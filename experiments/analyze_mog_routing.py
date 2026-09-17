@@ -45,6 +45,7 @@ def audit(run, device):
                 effective_particles=float((-(p * p.clamp_min(1e-30).log()).sum()).exp()),
                 hard_usage_tv=float((p - 1/400).abs().sum()/2),
                 soft_usage_tv=float((soft_p - 1/400).abs().sum()/2),
+                hard_soft_tv=float((p - soft_p).abs().sum()/2),
                 hard_usage_chi2=float(400 * (p - 1/400).square().sum()),
                 hard_counts=counts.long().cpu().tolist(), soft_frequencies=soft_p.cpu().tolist())
 
@@ -61,10 +62,11 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
     json_write(args.out / "routing_audit.json", rows)
     lines = ["# Held-out particle usage", "", "100,000 real examples per arm; hard selections audited against original reconstruction metrics. Lower TV is better; higher effective usage is more uniform.", "",
-             "| Arm | Used /400 | Effective /400 | Hard usage TV | Soft usage TV | Hard chi-square |",
-             "|---|---:|---:|---:|---:|---:|"]
+             "| Arm | Used /400 | Effective /400 | Hard usage TV | Soft usage TV | Hard/soft TV gap | Hard chi-square |",
+             "|---|---:|---:|---:|---:|---:|---:|"]
     for m in rows:
-        lines.append(f"| {m['arm']} | {m['used_particles']} | {m['effective_particles']:.1f} | {m['hard_usage_tv']:.4f} | {m['soft_usage_tv']:.4f} | {m['hard_usage_chi2']:.4f} |")
+        lines.append(f"| {m['arm']} | {m['used_particles']} | {m['effective_particles']:.1f} | {m['hard_usage_tv']:.4f} | {m['soft_usage_tv']:.4f} | {m['hard_soft_tv']:.4f} | {m['hard_usage_chi2']:.4f} |")
+    lines += ["", "Hard/soft TV gap is TV between the two aggregate routing distributions, not the difference of their distances to uniform. It does not measure gradient accuracy."]
     (args.out / "ROUTING.md").write_text("\n".join(lines) + "\n")
     print("\n".join(lines))
 

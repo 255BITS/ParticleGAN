@@ -177,6 +177,10 @@ preserving its forward values and fixed sigma; the report records its results.
 A further bounded-offset control penalizes aggregate hard particle-usage
 imbalance with a soft routing gradient. A saved-checkpoint audit compares hard
 and soft usage on 100,000 examples; see the report for the observed mismatch.
+Two matched follow-ups restrict the backward routing surrogate to eight nearest
+particles with a detached local bandwidth, with and without the same usage loss.
+The hard forward path and fixed sigma are unchanged; the prespecified comparison
+is recorded in `reports/mog-autoencoder/local_protocol.md`.
 
 ## Prior art and novelty boundary
 

@@ -1,7 +1,7 @@
 """Protect the hard routing and fixed-sigma contracts used by the scout."""
 import torch
 
-from experiments.train_mog_autoencoder import RoutingEncoder, usage_balance
+from experiments.train_mog_autoencoder import RoutingEncoder, routing_probabilities, usage_balance
 from particlegan import MoGParticlePrior
 
 
@@ -114,3 +114,46 @@ def test_balancing_preserves_bounded_forward_and_only_directly_trains_query():
     grad = encoder.net.net[-1].weight.grad
     assert grad[:2].abs().sum() > 0
     assert torch.count_nonzero(grad[2:]) == 0
+
+
+def test_local_surrogate_preserves_hard_forward_bounds_and_gradient_paths():
+    torch.manual_seed(19)
+    encoder = RoutingEncoder(width=16)
+    with torch.no_grad():
+        encoder.net.net[-1].weight.normal_(std=.1)
+        encoder.net.net[-1].bias[2:] = 10.
+    means = torch.randn(16, 2, requires_grad=True)
+    x, noise, sigma = torch.randn(32, 2), torch.randn(32, 2), torch.tensor(.02)
+    original = encoder(x, means, sigma, "route_bounded", noise)
+    for arm in ("route_local", "route_local_balanced"):
+        z, ids, u, soft = encoder(x, means, sigma, arm, noise, return_routing=True)
+        for a, b in zip(original, (z, ids, u)):
+            assert torch.equal(a, b)
+        assert u.abs().max() <= 3
+        assert ((soft > 0).sum(1) == 8).all()
+        torch.testing.assert_close(soft.sum(1), torch.ones(x.shape[0]))
+        gradients = torch.autograd.grad((z - x).square().mean(),
+                                        (encoder.net.net[-1].weight, means), retain_graph=True)
+        assert gradients[0][:2].abs().sum() > 0
+        assert gradients[0][2:].abs().sum() > 0
+        assert gradients[1].abs().sum() > 0
+        balance_grads = torch.autograd.grad(usage_balance(ids, soft),
+                                            (encoder.net.net[-1].weight, means), allow_unused=True)
+        assert balance_grads[0][:2].abs().sum() > 0
+        assert torch.count_nonzero(balance_grads[0][2:]) == 0
+        assert balance_grads[1] is None
+
+
+def test_local_surrogate_excludes_distant_particles_and_handles_ties():
+    distances = torch.arange(12, dtype=torch.float32)[None].requires_grad_()
+    soft = routing_probabilities(distances, .25, local=True)
+    assert torch.count_nonzero(soft[:, 8:]) == 0
+    grad, = torch.autograd.grad(soft[:, 0].sum(), (distances,))
+    assert torch.count_nonzero(grad[:, 8:]) == 0
+    assert grad[:, :8].abs().sum() > 0
+    # The detached bandwidth preserves invariance to a common distance shift.
+    torch.testing.assert_close(routing_probabilities(distances + 100, .25, local=True), soft)
+    tied = torch.zeros(2, 12, requires_grad=True)
+    weights = routing_probabilities(tied, .25, local=True)
+    gradients, = torch.autograd.grad((weights * torch.arange(12)).sum(), (tied,))
+    assert torch.isfinite(weights).all() and torch.isfinite(gradients).all()

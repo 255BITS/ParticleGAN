@@ -1,4 +1,35 @@
 {
+  "route_local": {
+    "arms": [
+      "route_local",
+      "route_local_balanced"
+    ],
+    "steps": 6000,
+    "seed": 24002,
+    "device": "cuda:0",
+    "width": 128,
+    "batch_size": 256,
+    "recon_weight": 1.0,
+    "temperature": 0.25,
+    "log_every": 250,
+    "eval_every": 2000,
+    "eval_samples": 100000,
+    "out": "/home/martyn/dev/ParticleGAN-mog-autoencoder/runs/mog_autoencoder/scout",
+    "arm": "route_local",
+    "sigma": 0.002356612589210272,
+    "num_particles": 400,
+    "z_dim": 2,
+    "lr_g": 0.0006,
+    "lr_e": 0.0006,
+    "lr_d": 0.0009,
+    "lr_prior": 0.006,
+    "gradient_penalty_every": 4,
+    "sigma_rel": 0.025,
+    "torch": "2.14.0+cu130",
+    "git_head": "40a55a706b062dc4dfbb9842d0ad25df6aad2f68",
+    "source_sha256": "3eb6d5f70c7ecfcb88bde8af6b7cf83f7e7d0f094b4bc877a52440e06d4d8c3c",
+    "initialization_sha256": "57594e9c844123b10101a1446b37e08b36fd75f11122000861b25060b60e33e5"
+  },
   "route_bounded": {
     "arms": [
       "gan",
@@ -159,6 +190,37 @@
     "torch": "2.14.0+cu130",
     "git_head": "47e504c8d847124d884e298ee84901044f96d370",
     "source_sha256": "a60256bcbe884db03ef88441ce74c5cd5ac64f0db723ad203fa3897f96ba8c58",
+    "initialization_sha256": "57594e9c844123b10101a1446b37e08b36fd75f11122000861b25060b60e33e5"
+  },
+  "route_local_balanced": {
+    "arms": [
+      "route_local",
+      "route_local_balanced"
+    ],
+    "steps": 6000,
+    "seed": 24002,
+    "device": "cuda:0",
+    "width": 128,
+    "batch_size": 256,
+    "recon_weight": 1.0,
+    "temperature": 0.25,
+    "log_every": 250,
+    "eval_every": 2000,
+    "eval_samples": 100000,
+    "out": "/home/martyn/dev/ParticleGAN-mog-autoencoder/runs/mog_autoencoder/scout",
+    "arm": "route_local_balanced",
+    "sigma": 0.002356612589210272,
+    "num_particles": 400,
+    "z_dim": 2,
+    "lr_g": 0.0006,
+    "lr_e": 0.0006,
+    "lr_d": 0.0009,
+    "lr_prior": 0.006,
+    "gradient_penalty_every": 4,
+    "sigma_rel": 0.025,
+    "torch": "2.14.0+cu130",
+    "git_head": "40a55a706b062dc4dfbb9842d0ad25df6aad2f68",
+    "source_sha256": "3eb6d5f70c7ecfcb88bde8af6b7cf83f7e7d0f094b4bc877a52440e06d4d8c3c",
     "initialization_sha256": "57594e9c844123b10101a1446b37e08b36fd75f11122000861b25060b60e33e5"
   },
   "route_grad100": {
