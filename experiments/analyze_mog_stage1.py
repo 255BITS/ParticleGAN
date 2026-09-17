@@ -142,7 +142,7 @@ def plot(rows, criteria):
 
 
 
-def audit_component_centers(rows):
+def audit_component_centers(rows, output_path=None):
     """Explicit means-only diagnostic; primary metrics always keep noise on."""
     import torch
     from scipy.spatial.distance import cdist
@@ -181,7 +181,7 @@ def audit_component_centers(rows):
                                noisy_sample_hq=row['hq'], nearest_neighbor_same_majority_fraction=same,
                                nearest_different_majority_d_med=cross_d,
                                sigma_over_different_majority_d=float(prior.sigma)/cross_d if cross_d else None))
-    save_csv(OUT/'stage1_component_centers.csv',audits)
+    save_csv(output_path or OUT/'stage1_component_centers.csv',audits)
     return audits
 
 def main():
