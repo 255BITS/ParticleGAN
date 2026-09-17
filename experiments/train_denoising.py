@@ -36,11 +36,15 @@ from lib.denoising_toy import (
 DEFAULTS = {
     **recipe_defaults('denoising'),
     'prior': 'learned',
+    'sigma_rel': 0.025,
+    'standardize': True,
+    'prior_betas': None,
     'noise': 'gaussian',
     'seed': 24002,
     'std': 0.03,
     'noise_particles': 1024,
     'hidden': 128,
+    'generator_hidden': None,
     'depth': 3,
     'fourier': 2,
     'noise_lr_mult': 1.0,
@@ -65,6 +69,9 @@ def training_recipe(cfg):
     return get_recipe(
         cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
         num_classes=cfg["classes"],
+        prior_kind="mog" if cfg["prior"] == "mog" else "particles",
+        sigma_rel=cfg.get("sigma_rel", 1 / 40) if cfg["prior"] == "mog" else 0.0,
+        standardize=cfg.get("standardize", True), prior_betas=cfg.get("prior_betas"),
         conditioning="conditional" if cfg["d_mode"] == "concat" else cfg["d_mode"],
         ucd_target=cfg["ucd_target"], ucd_weight=cfg["ucd_lambda"],
         alpha_bar=cfg["alpha_bar"], batch_size=cfg["batch_size"], total_steps=cfg["steps"],
@@ -76,6 +83,14 @@ def training_recipe(cfg):
     )
 
 
+def make_prior(cfg, device):
+    """Build latent sources consistently for training and checkpoint probes."""
+    if cfg["prior"] == "mog":
+        rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 101)
+        return training_recipe(cfg).make_prior(device=device, generator=rng)
+    return DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"] + 101, device)
+
+
 def validate(cfg):
     GradientPenalty(cfg["reg_arm"], cfg["reg_coeff"], kappa=cfg["reg_kappa"],
                     lazy_k=cfg.get("reg_every", 1), method=cfg.get("reg_method", "autograd"),
@@ -84,7 +99,7 @@ def validate(cfg):
     if target not in ("class", "time_class") or (target == "time_class" and (cfg["model"] != "ddgan" or cfg["d_mode"] != "ucd")):
         raise ValueError("time_class UCD requires DDGAN with a UCD discriminator")
     for key, choices in {"model": ("gan", "ddgan"), "d_mode": ("concat", "ucd", "scalar"),
-                         "prior": ("gaussian", "fixed", "learned", "zero"),
+                         "prior": ("gaussian", "fixed", "learned", "mog", "zero"),
                          "noise": ("gaussian", "fixed", "learned", "zero")}.items():
         if cfg[key] not in choices:
             raise ValueError(f"{key} must be in {choices}")
@@ -93,6 +108,9 @@ def validate(cfg):
             raise ValueError(f"{key} must be a positive integer")
     if cfg["batch_size"] < 2 or cfg["num_particles"] < 2 or cfg["noise_particles"] < 2:
         raise ValueError("variance regularization requires at least two samples/particles")
+    width = cfg.get("generator_hidden")
+    if width is not None and (type(width) is not int or width < 1):
+        raise ValueError("generator_hidden must be a positive integer or None")
     if cfg["classes"] not in (1, 4):
         raise ValueError("classes must be 1 or 4")
     for key in ("eval_samples", "final_samples"):
@@ -104,6 +122,7 @@ def validate(cfg):
         raise ValueError("invalid EMA/annealing parameters")
     if cfg["lr"] <= 0 or cfg["std"] <= 0:
         raise ValueError("lr and std must be positive")
+    training_recipe(cfg)
 
 
 def json_safe(value):
@@ -184,7 +203,7 @@ def train(cfg):
     # Training creates bounded integer times; retain the original sync-free hot path.
     schedule = DDGAN(cfg["alpha_bar"], validate_args=False).to(device)
     # Independent initialization preserves identical tables across architecture changes.
-    prior = DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"] + 101, device)
+    prior = make_prior(cfg, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2, cfg["seed"] + 102, device)
     g, d = ToyGenerator(cfg).to(device), ToyDiscriminator(cfg).to(device)
     ema_g, ema_prior, ema_noise = copy.deepcopy(g), copy.deepcopy(prior), copy.deepcopy(noise)
@@ -269,8 +288,8 @@ def train(cfg):
             with torch.no_grad():
                 dr = d(real, c, xt, t)[0]
             loss_g = gan.g_loss(df, dr)
-            if cfg["prior"] == "learned" and cfg["prior_reg"]:
-                selected = prior(ids.unique())
+            if cfg["prior"] in ("learned", "mog") and cfg["prior_reg"]:
+                selected = prior.z[ids.unique()]
                 if len(selected) > 1:
                     loss_g = loss_g + spread(selected)
             if cfg["noise"] == "learned" and cfg["noise_reg"]:

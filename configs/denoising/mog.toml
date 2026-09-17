@@ -1,0 +1,8 @@
+# MoG latent prior with the existing DDGAN defaults. Quality is not benchmarked.
+prior = "mog"
+num_particles = 400
+sigma_rel = 0.025
+standardize = true
+prior_lr_mult = 100.0
+prior_betas = [0.5, 0.999]
+out_dir = "results/denoising/mog"

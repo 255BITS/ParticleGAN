@@ -82,7 +82,7 @@ prior_loss = recipe.make_prior_regularizer()(prior.z)
 ```
 
 Use `ParticlePrior` for atoms. Existing GAN/DDGAN presets and examples keep their
-defaults; `mog` is a dedicated opt-in recipe. The MoG recipe's `prior_lr_mult=100`
+defaults; `mog` and `ddgan_mog` are dedicated opt-in recipes. The MoG recipe's `prior_lr_mult=100`
 is relative to G's LR, giving 0.06. It is equivalent to the experiment's 10×
 multiplier on the original prior LR of 0.006.
 
@@ -106,6 +106,32 @@ of large low-dimensional tables, install the optional extra with
 `python -m pip install 'particlegan[mog]'` (or `python -m pip install -e '.[mog]'`
 from this checkout).
 
+### DDGAN with MoG particles (0.4.0)
+
+Select the combined recipe with one name:
+
+```python
+from particlegan import DDGAN, get_recipe
+
+recipe = get_recipe("ddgan_mog")
+prior = recipe.make_prior().to(device)
+process = DDGAN(recipe.alpha_bar).to(device)
+opt_g, opt_d = recipe.make_optimizers(G, D, prior)
+
+z, indices = prior.sample(batch_size)
+prior_loss = recipe.make_prior_regularizer()(prior.z[indices.unique()])
+```
+
+Defaults: **400 components, z_dim=4, sigma_rel=0.025, standardized reads,
+100k updates, constant LR, prior LR 0.06, prior betas (0.5, 0.999)**, and the
+existing four-step DDGAN/class-only UCD settings. Override any recipe field with
+keywords, for example `get_recipe("ddgan_mog", num_classes=8, z_dim=16)`.
+
+These are the package hyperparameters from the
+[100k study](reports/denoising-toy/mog_capacity_100k/READOUT.md), which used a
+32-wide generator and 128-wide discriminator. You supply the networks, data,
+training/sampling loop and EMA; the recipe does not select architectures.
+
 ### Add a loss to an existing pipeline
 
 Components are independent. For example, add a critic penalty or a particle
@@ -116,7 +142,7 @@ spread term to losses your pipeline already computes:
 d_loss = existing_d_loss + penalty(D, real, fake.detach(), step=step)
 
 # In your generator/prior update, when sampled particle indices are available:
-g_loss = existing_g_loss + spread(prior(indices.unique()))
+g_loss = existing_g_loss + spread(prior.z[indices.unique()])
 # Your code calls backward() and optimizer.step().
 ```
 
@@ -235,6 +261,28 @@ trainers; the denoising trainer requires CUDA. See the
 [experiment runner guide](https://github.com/255BITS/ParticleGAN/blob/master/docs/experiment-runner.md) for grids and recorded
 effective configurations.
 
+To use MoG latents with the DDGAN trainer:
+
+```bash
+mkdir -p results/denoising/mog
+python -u experiments/train_denoising.py --config configs/denoising/mog.toml > results/denoising/mog/log.txt 2>&1
+# From another terminal:
+tail -F results/denoising/mog/log.txt
+```
+
+Set `prior = "mog"`; `sigma_rel` and `standardize` control its fixed noise and
+read standardization. Optional `prior_betas` sets separate Adam betas for the
+component means. The supplied config uses the one-shot MoG recipe's 400 components
+and prior optimizer settings. The matched small-generator studies at
+[14k updates](reports/denoising-toy/mog_capacity/READOUT.md) and
+[100k updates](reports/denoising-toy/mog_capacity_100k/READOUT.md) report the
+quality tradeoffs; the supplied full-width 56k configuration is not a selected
+DDGAN benchmark winner. Set `generator_hidden` to vary generator width while
+keeping discriminator width controlled by `hidden`.
+The trainer regularizes raw means and preserves the calibrated noise in EMA and
+checkpoints. Forward diffusion and the separately configured reverse `noise`
+source retain their existing behavior.
+
 ### DDGAN and UCD compose independently
 
 `DDGAN` supplies Gaussian forward pairs and reverse transitions. `UCD` selects
@@ -299,7 +347,7 @@ student_loss = supervised_weight * supervised_loss(fake, targets)
 student_loss += adversarial_weight * adversarial.g_loss(
     D(fake), D(targets).detach(),
 )
-student_loss += spread(prior(indices.unique()))
+student_loss += spread(prior.z[indices.unique()])
 # Your student/prior optimizer performs backward and step; restore D afterward.
 ```
 
@@ -448,6 +496,20 @@ toy trainers. The faster CIFAR default retains exact derivatives; FD is optional
 ## Changelog
 
 Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
+
+### 0.4.0 — 2026-09-17
+
+- Adds `get_recipe("ddgan_mog")`: four-step DDGAN with class-only UCD, 400 MoG
+  components, z_dim 4, sigma_rel 0.025, standardized reads, 100k updates,
+  constant LR, prior LR 0.06 and prior Adam betas (0.5, 0.999).
+- Adds MoG support to `train_denoising` and checkpoint probes, raw-mean
+  regularization, separate prior optimizer settings, and independent generator
+  width through `generator_hidden`. Existing recipe defaults remain unchanged.
+- Includes the matched 14k/100k capacity studies and frozen-noise interventions.
+  At 100k, DDGAN+MoG reaches 79.57% joint HQ and all 100 modes; one-shot models
+  retain higher HQ but cover 77 modes. These single-seed results use a small
+  generator and do not isolate representational capacity. See the
+  [100k readout](reports/denoising-toy/mog_capacity_100k/READOUT.md).
 
 ### 0.3.0 — 2026-09-17
 

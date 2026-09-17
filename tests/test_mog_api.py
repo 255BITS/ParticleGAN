@@ -34,6 +34,29 @@ def test_default_mog_and_recipe_match_the_selected_compact_experiment():
     assert cfg['particle_beta1'] == recipe.prior_betas[0]
 
 
+def test_ddgan_mog_recipe_matches_the_100k_study_and_supports_overrides():
+    from experiments.config import read_config
+    from experiments.train_denoising import training_recipe
+
+    recipe = get_recipe("ddgan_mog")
+    root = Path(__file__).resolve().parents[1]
+    cfg = read_config(root / "configs/denoising/mog_capacity_100k/ddgan_mog.yaml")
+    assert recipe.replace(name="ddgan") == training_recipe(cfg)
+    assert recipe.model == "ddgan" and recipe.conditioning == "ucd"
+    assert recipe.total_steps == 100_000 and recipe.lr_floor == 1.
+    prior = recipe.make_prior()
+    assert isinstance(prior, MoGParticlePrior)
+    assert prior.z.shape == (400, 4) and prior.sigma > 0
+    assert Recipe(**json.loads(json.dumps(recipe.to_dict()))) == recipe
+    changed = get_recipe("ddgan_mog", num_classes=8, z_dim=6, num_particles=32,
+                         total_steps=2000, lr_floor=.05)
+    assert changed.num_classes == 8 and changed.make_prior().z.shape == (32, 6)
+    assert changed.total_steps == 2000 and changed.lr_floor == .05
+    assert get_recipe("ddgan_mog") == recipe
+    assert get_recipe("ddgan").total_steps == 56_000
+    assert get_recipe("ddgan").prior_kind == "particles"
+
+
 def test_forward_matches_sampling_rng_and_flows_through_module_hooks():
     global_rng = torch.get_rng_state().clone()
     prior = MoGParticlePrior(12, 3, generator=torch.Generator().manual_seed(7)).double()
@@ -128,8 +151,9 @@ def test_calibration_exact_even_median_and_torch_only_fallback(monkeypatch, use_
     assert torch.equal(before, torch.get_rng_state())
 
 
-def test_mog_recipe_optimizer_updates_raw_means_and_preserves_fixed_buffers():
-    recipe = get_recipe('mog', num_particles=12, z_dim=2, prior_betas=[.5, .999])
+@pytest.mark.parametrize('recipe_name', ['mog', 'ddgan_mog'])
+def test_mog_recipe_optimizer_updates_raw_means_and_preserves_fixed_buffers(recipe_name):
+    recipe = get_recipe(recipe_name, num_particles=12, z_dim=2, prior_betas=[.5, .999])
     prior = recipe.make_prior()
     generator, critic = nn.Linear(2, 2), nn.Linear(2, 1)
     opt_g, opt_d = recipe.make_optimizers(generator, critic, prior, foreach=False)

@@ -70,7 +70,8 @@ class ToyGenerator(nn.Module):
         self.classes = cfg["classes"]
         self.steps = len(cfg["alpha_bar"]) - 1
         inp = cfg["z_dim"] + self.classes + (2 + self.steps if self.diffusion else 0)
-        self.net = mlp(inp, cfg["hidden"], cfg["depth"], 2)
+        width = cfg.get("generator_hidden")
+        self.net = mlp(inp, cfg["hidden"] if width is None else width, cfg["depth"], 2)
         init_weights(self)
 
     def forward(self, z, c, xt=None, t=None):

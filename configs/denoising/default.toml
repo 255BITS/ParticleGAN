@@ -3,6 +3,8 @@
 model = "ddgan"
 d_mode = "ucd"
 prior = "learned"
+sigma_rel = 0.025
+standardize = true
 noise = "gaussian"
 ucd_target = "class"
 seed = 24002

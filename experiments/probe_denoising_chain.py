@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from particlegan import DDGAN
 from particlegan.diffusion import DrawSource
+from experiments.train_denoising import make_prior
 from lib.denoising_toy import GaussianGrid, ToyGenerator, grid_metrics
 
 
@@ -35,7 +36,7 @@ def main():
     toy = GaussianGrid(device, cfg["std"], cfg["classes"])
     schedule = DDGAN(cfg["alpha_bar"], validate_args=False).to(device)
     g = ToyGenerator(cfg).to(device)
-    prior = DrawSource(cfg["prior"], cfg["num_particles"], cfg["z_dim"], cfg["seed"] + 101, device)
+    prior = make_prior(cfg, device)
     noise = DrawSource(cfg["noise"], cfg["noise_particles"], 2, cfg["seed"] + 102, device)
     for module, key in ((g, "G"), (prior, "prior"), (noise, "noise")):
         module.load_state_dict(ckpt[key])

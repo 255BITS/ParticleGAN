@@ -55,7 +55,7 @@ for step in range(recipe.total_steps):
     D.requires_grad_(False)
     opt_g.zero_grad(set_to_none=True)
     g_loss = gan.g_loss(D(fake), D(real).detach())
-    g_loss = g_loss + spread(prior(indices.unique()))
+    g_loss = g_loss + spread(prior.z[indices.unique()])
     g_loss.backward()
     opt_g.step()
     D.requires_grad_(True)
@@ -164,7 +164,7 @@ for step in range(recipe.total_steps):
     opt_g.zero_grad(set_to_none=True)
     fake_score = D(fake, labels, xt=xt, t=t)[0]
     real_score = D(x_prev, labels, xt=xt, t=t)[0].detach()
-    g_loss = gan.g_loss(fake_score, real_score) + spread(prior(indices.unique()))
+    g_loss = gan.g_loss(fake_score, real_score) + spread(prior.z[indices.unique()])
     g_loss.backward()
     opt_g.step()
     D.requires_grad_(True)
@@ -285,9 +285,9 @@ RNG consumption; zero sigma never draws noise. `eval()` keeps Gaussian noise on.
 
 For DDP, sample indices from the unwrapped prior, then call the wrapped module:
 `z = wrapped_prior(indices, generator=rng)`. Use `prior.z` for VICReg rather than
-`prior(indices)` or sampled codes. The selected recipe regularizes the full raw
-table at N ≤ 1024, otherwise `prior.z[indices.unique()]`. In particular, the atoms
-loops above must use this raw-table regularizer input when adapted for MoG.
+`prior(indices)` or sampled codes. The one-shot MoG benchmark regularizes the
+full raw table at N ≤ 1024, otherwise `prior.z[indices.unique()]`. The denoising
+trainer and loops above regularize sampled unique raw rows for either prior.
 
 For EMA, deepcopy the prior and average its learned `z`; the fixed buffers retain
 their calibrated values. Standardization is computed from the EMA table itself.
@@ -396,7 +396,7 @@ penalty on off-diagonal covariance. It does not force a Gaussian distribution.
 Fewer than two rows produce a differentiable zero. It accepts arbitrary latent
 rows and does not require a `ParticlePrior` object.
 
-For the selected recipe, use `spread(prior(indices.unique()))`. Deduplication
+For selected sampled rows, use `spread(prior.z[indices.unique()])`. Deduplication
 belongs to the caller; repeated row values are otherwise counted repeatedly.
 
 ## DDGAN
@@ -503,6 +503,28 @@ sigma_rel=1/40, standardized reads, 28,000 steps, prior LR multiplier 100
 (relative to G, giving 0.06), and prior betas `(0.5, 0.999)`. G and D retain
 betas `(0, 0.999)`. Other GAN recipe settings are unchanged. `get_recipe()`
 and `get_recipe("gan")` still select the existing atoms recipe.
+
+`get_recipe("ddgan_mog")` combines DDGAN/class-only UCD with the MoG settings
+from the 100k study: 400 components, z_dim=4, sigma_rel=1/40, standardized reads,
+100,000 updates, prior LR multiplier 100, prior betas `(0.5, 0.999)`, and
+`lr_floor=1.0` for a constant learning rate. Other fields use DDGAN defaults.
+The Gaussian diffusion schedule is unchanged; MoG supplies G's latent codes.
+
+```python
+recipe = get_recipe("ddgan_mog", num_classes=4)
+prior = recipe.make_prior().to(device)
+process = DDGAN(recipe.alpha_bar).to(device)
+opt_g, opt_d = recipe.make_optimizers(G, D, prior)
+z, indices = prior.sample(batch_size)
+prior_loss = recipe.make_prior_regularizer()(prior.z[indices.unique()])
+```
+
+All fields can be overridden, including `total_steps` and `lr_floor`. The recipe
+supplies the package hyperparameters from the
+[100k study](../reports/denoising-toy/mog_capacity_100k/READOUT.md), not its
+architecture: that study used G width 32, D width 128 and depth 3. Callers own
+the networks, loops and EMA. `get_recipe("mog")` continues to select one-shot
+GAN settings; `get_recipe("ddgan")` continues to use atoms and 56,000 updates.
 
 | Field | `get_recipe()` / `gan` | `ddgan` |
 | --- | --- | --- |
@@ -614,7 +636,7 @@ fake = student(z, inputs)
 # After your D update, with D parameters frozen:
 loss = supervised_loss(fake, targets)
 loss = loss + adversarial_weight * gan.g_loss(D(fake), D(targets).detach())
-loss = loss + spread(prior(indices.unique()))
+loss = loss + spread(prior.z[indices.unique()])
 ```
 
 Your pipeline controls teacher mode, conditioning, weights, gradient paths,

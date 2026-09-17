@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.4.0 — 2026-09-17
+
+- Add `get_recipe("ddgan_mog")`: DDGAN with class-only UCD, 400 MoG components,
+  z_dim=4, sigma_rel=1/40, standardized reads, 100,000 updates, a constant learning
+  rate, prior LR multiplier 100 (0.06), and prior Adam betas (0.5, 0.999).
+  Existing GAN, MoG and DDGAN presets retain their defaults; keyword overrides
+  remain supported.
+- Support MoG latent priors in `train_denoising` and checkpoint probes, including
+  raw-mean regularization and separate prior optimizer settings. Add
+  `generator_hidden` to vary generator width independently of the discriminator.
+- Include matched 14k/100k GAN/DDGAN × atoms/MoG studies, frozen-noise probes,
+  configs, metrics and readouts. At 100k, DDGAN+MoG reaches 79.57% joint HQ and
+  100 modes with core width ratio .889; the one-shot models retain higher HQ
+  but cover 77 modes. These are single-seed findings with a small generator,
+  not a universal quality guarantee or an isolated capacity result.
+
+The new recipe supplies package hyperparameters from the 100k study. Networks,
+data, training/sampling loops and EMA remain caller-owned; the study used G
+width 32 and D width 128. See the
+[100k readout](reports/denoising-toy/mog_capacity_100k/READOUT.md).
+
 ## 0.3.0
 
 - Add public `MoGParticlePrior`: a uniform mixture with learned means and a
