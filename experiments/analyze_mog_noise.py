@@ -21,6 +21,7 @@ def load_rows():
     criteria=json.loads((ROOT/'configs/mog/stage1_criteria.json').read_text())
     paths=[('noise_check',p) for p in (OUT/'noise_check').glob('*/summary.json')]
     paths += [('longer',p) for p in (OUT/'longer').glob('*/summary.json')]
+    paths += [('refine_noise',p) for p in (OUT/'refine_noise').glob('*/summary.json')]
     paths += [('stage1_reference',OUT/f'stage1/beta05_n400_m10p0_s{s}/summary.json') for s in (1,2,3)]
     rows=[]
     for phase,path in sorted(paths):
@@ -70,7 +71,7 @@ def plot(rows,criteria):
     refs=list(csv.DictReader((OUT/'results.csv').open()))
     keys=['hq_ratio','width_ratio','kl_balance','purity_mean','passed','raw_std_live_ratio']
     fig,axes=plt.subplots(2,3,figsize=(15,8))
-    colors={.03125:'#347bb0',.0625:'#43a07c',.125:'#d49d29'}
+    colors={.025:'#8c564b',.03125:'#347bb0',.0625:'#43a07c',.125:'#d49d29'}
     for ax,key in zip(axes.flat,keys):
         for r_nominal,color in colors.items():
             for steps,marker in [(7000,'o'),(14000,'s')]:
@@ -124,21 +125,25 @@ def main():
     winner=min([c for c in cells if c['sigma_rel']>0 and c['steps']==7000],key=rank)
     (OUT/'noise_check_winner.json').write_text(json.dumps(winner,indent=2)+'\n')
     if args.phase=='select':return
-    longer=[c for c in cells if c['steps']==14000]
+    longer=[c for c in cells if c['steps']==14000 and c['sigma_rel']==winner['sigma_rel']]
     if len(longer)!=1 or longer[0]['n_runs']!=3 or longer[0]['sigma_rel']!=winner['sigma_rel']:
         raise RuntimeError('Need the three selected 14k runs')
+    if sum(r['phase']=='refine_noise' for r in rows)!=3:
+        raise RuntimeError('Need the three targeted refinement runs')
     plot(rows,criteria)
     audits=audit_component_centers(rows,OUT/'noise_check_component_centers.csv')
     long=longer[0];atoms=next(c for c in cells if c['sigma_rel']==0)
     report=['# N=400 MoG: smaller noise and longer training','',
             'Three seeds per cell, the Stage 1 selected particle LR multiplier 10 (initial LR 0.06), particle beta1=0.5, standardized reads, fixed sigma calibrated at initialization. The C0-relative acceptance thresholds remain unchanged. All new runs use the existing trainer and grid runner.', '',
             '## Results','',table(cells),'',
-            'The r=1/8, 7k row reuses the three selected Stage 1 runs. The other rows comprise nine new 7k runs and three new 14k runs. All final metrics use 200k noisy EMA samples with matched reals; traces use 20k samples every 100 updates. Per-seed results and population standard deviations are saved in the CSV artifacts.', '',
+            'The r=1/8, 7k row reuses the three selected Stage 1 runs. The other rows comprise nine new 7k runs, three selected 14k runs, and three targeted r=1/40 refinement runs at 14k. All final metrics use 200k noisy EMA samples with matched reals; traces use 20k samples every 100 updates. Per-seed results and population standard deviations are saved in the CSV artifacts.', '',
             'The r=0 control is not C0: it has 400 particles, standardized reads, and the selected particle optimizer. Its comparison to positive-r cells isolates the addition of noise at those settings.', '',
             '## Budget comparison','',
             f"The selected positive-noise setting was nominal r={winner['sigma_rel']:g}, selected across all three seeds by pass rate, then HQ, then width closeness to real. The atoms control was excluded from this selection because the requested longer run tests the MoG's continuous neighborhoods.",
             f"At 7k: {winner['passes']}/3 pass, HQ/real {winner['hq_ratio']:.5f}, width/real {winner['width_ratio']:.4f}, KL {winner['kl_balance']:.5f}. At 14k: {long['passes']}/3 pass, HQ/real {long['hq_ratio']:.5f}, width/real {long['width_ratio']:.4f}, KL {long['kl_balance']:.5f}.",
             'The 14k runs start from the same seeds and initialization. They are fresh training runs, not continuation from EMA checkpoints. The delayed cosine schedule scales with total budget (annealing starts at 8,400 instead of 4,200 updates), so this tests the longer-budget recipe, not extra updates at an unchanged LR schedule.', '',
+            '## Targeted refinement','',
+            'After inspecting the r=1/32 longer-budget result, we tested r=1/40 at 14k with the same optimizer and seeds. This is an exploratory follow-up chosen to reduce remaining spread; it was not part of the original grid. The fixed acceptance thresholds were not changed.', '',
             '## Geometry and component diagnostics','']
     for c in cells:
         group=[a for a in audits if any(r['run']==a['run'] and r['sigma_rel']==c['sigma_rel'] and r['steps']==c['steps'] for r in rows)]
@@ -146,7 +151,7 @@ def main():
     report+=['','The center-only diagnostic is explicit and supplementary; it never replaces noise-on evaluation. Large median-NN ratios can reflect neighboring components that map to the same output mode. Component-center CSV records that diagnostic separately. The r=0 deterministic all-table audit has only 400 points: its >=10 coverage and >=50 width thresholds are not suitable for judging that control; use its primary 200k-sample metrics.', '',
              '## Changes and validation','',
              '- r=1/32 was the explicitly proposed addition to the original noise grid. r=0 and r=1/16 were already planned values. Only N=400 is tested here.',
-             '- The owner authorized a longer-budget experiment. Budget doubled to 14k for the most promising positive-noise cell; no other model, optimizer, regularizer, or sampling parameter was tuned.',
+             '- The owner authorized further experiments and a longer-budget experiment. Budget doubled to 14k for the most promising positive-noise cell. A subsequent r=1/40 refinement changed only the fixed noise radius; model, optimizer, regularizer and evaluation settings remain fixed.',
              '- Pass thresholds are frozen from Stage 0, with the old design criterion retained in passed_strict. Stage 0 and Stage 1 reports are preserved as historical results.',
              '- Stage 1 references are reused rather than retrained. No seed-only search or best-seed selection.',
              '- For r=0, sigma consumes no noise RNG. Thus r=0 and r>0 training streams differ after sampling, as required by the zero-noise regression contract.', '',
