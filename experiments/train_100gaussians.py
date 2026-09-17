@@ -31,6 +31,7 @@ DEFAULTS = {
     'particle_lr_multiplier': 1.0,
     'particle_beta1': None,
     'mog_metrics': False,
+    'mog_pass_criteria': None,
     'reg_fd_eps': 0.05,
     'reg_sync_stats': True,
     'fused_adam': False,
@@ -72,7 +73,7 @@ def train(cfg):
     rng=torch.Generator('cuda').manual_seed(cfg['seed']+999)
     if cfg['mog_metrics']:
         from lib.mog_metrics import evaluate, geometry
-        final, components, x, real = evaluate(g, prior, n, cfg['seed'], result['initial_raw_std'], component_detail=True)
+        final, components, x, real = evaluate(g, prior, n, cfg['seed'], result['initial_raw_std'], component_detail=True, pass_criteria=cfg['mog_pass_criteria'])
         final.update(t_cover=result['t_cover'], d_gap=result['d_gap'])
         live = geometry(result['prior'])
         final['raw_std_live'] = live['raw_std']

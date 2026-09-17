@@ -57,3 +57,13 @@ def test_real_width_and_atom_width():
     assert details['alloc'] == [1]*100
     null = allocation_null(100)
     assert abs(null['empty_modes'] - 100*.99**100) < 1
+
+
+def test_baseline_pass_keeps_coverage_width_and_balance_guards():
+    from lib.mog_metrics import pass_metrics
+    criteria = dict(hq_ratio_min=.998, width_ratio_min=.79, width_ratio_max=1.21, kl_balance_max=.038)
+    baseline = dict(modes=100, hq_ratio=1., width_ratio=.85, kl_balance=.035)
+    assert pass_metrics(baseline, criteria) == dict(passed=True, passed_strict=False, passed_baseline=True)
+    for changes in ({'modes':99}, {'hq_ratio':.99}, {'width_ratio':.78}, {'width_ratio':1.22}, {'kl_balance':.04}, {'kl_balance':None}):
+        assert not pass_metrics({**baseline, **changes}, criteria)['passed']
+    assert not pass_metrics(baseline)['passed']

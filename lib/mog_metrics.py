@@ -65,7 +65,7 @@ def component_metrics(idx, nearest, hq, n_components, detail=False):
 
 
 @torch.no_grad()
-def evaluate(g, prior, n, seed, initial_raw_std=None, component_detail=False):
+def evaluate(g, prior, n, seed, initial_raw_std=None, component_detail=False, pass_criteria=None):
     device = next(g.parameters()).device
     rng = torch.Generator(device=device).manual_seed(seed+999)
     real_rng = torch.Generator(device=device).manual_seed(seed+1999)
@@ -96,8 +96,7 @@ def evaluate(g, prior, n, seed, initial_raw_std=None, component_detail=False):
             _, detail = component_metrics(torch.arange(prior.num_particles, device=device), assignment, good, prior.num_particles, detail=True)
     else:
         out.update({key: None for key in ('purity_mean','purity_below_09','components_no_hq','components_unsampled','alloc_empty','bridge_i_mean')})
-    out['passed'] = bool(out['modes'] == 100 and out['hq_ratio'] >= .98 and
-                         .9 <= out['width_ratio'] <= 1.1 and out['kl_balance'] is not None and out['kl_balance'] <= .01)
+    out.update(pass_metrics(out, pass_criteria))
     return out, detail, x, real
 
 
@@ -108,3 +107,26 @@ def allocation_null(n, draws=1000):
     kl = np.sum(p * np.log(np.maximum(p, 1e-300)*100), axis=1)
     return dict(n=n, draws=draws, kl_balance=float(kl.mean()),
                 empty_modes=float((counts == 0).sum(1).mean()), kl_std=float(kl.std()))
+
+
+def pass_metrics(metrics, criteria=None):
+    """Score against frozen thresholds; never derive thresholds from pilot runs."""
+    def qualifies(hq_min, width_min, width_max, kl_max):
+        values = [metrics.get(k) for k in ('hq_ratio', 'width_ratio', 'kl_balance')]
+        return bool(metrics.get('modes') == 100 and all(
+            v is not None and math.isfinite(v) for v in values) and
+            values[0] >= hq_min and width_min <= values[1] <= width_max and
+            values[2] <= kl_max)
+    strict = qualifies(.98, .9, 1.1, .01)
+    out = {'passed_strict': strict, 'passed': strict}
+    if criteria is not None:
+        required = {'hq_ratio_min', 'width_ratio_min', 'width_ratio_max', 'kl_balance_max'}
+        if set(criteria) != required or not all(math.isfinite(v) for v in criteria.values()):
+            raise ValueError('pass criteria must contain four finite thresholds')
+        if not (0 <= criteria['hq_ratio_min'] and 0 <= criteria['width_ratio_min'] <= criteria['width_ratio_max']
+                and criteria['kl_balance_max'] >= 0):
+            raise ValueError('invalid pass thresholds')
+        passed = qualifies(criteria['hq_ratio_min'], criteria['width_ratio_min'],
+                           criteria['width_ratio_max'], criteria['kl_balance_max'])
+        out.update(passed=passed, passed_baseline=passed)
+    return out

@@ -1,0 +1,39 @@
+batch_size: 256
+z_dim: 4
+num_particles: 400
+lr: 0.0006
+d_lr_mult: 1.5
+loss_type: logistic
+gan_mode: rp
+reg_arm: b_cap
+reg_coeff: 1.0
+reg_every: 1
+reg_method: autograd
+lr_anneal_start: 0.6
+lr_floor: 0.05
+beta1: 0.0
+epochs: 7
+steps_per_epoch: 1000
+lambda_ep: 1.0
+ema_decay: 0.995
+fourier: 2
+log_interval: 100
+snapshot_interval: 1000000
+seed: 3
+prior_kind: mog
+sigma_rel: 0.125
+standardize: true
+particle_lr_multiplier: 0.1
+particle_beta1: 0.0
+mog_metrics: true
+mog_pass_criteria:
+  hq_ratio_min: 0.9988322835680561
+  width_ratio_min: 0.7909158604586308
+  width_ratio_max: 1.2090841395413692
+  kl_balance_max: 0.03750414025263102
+reg_fd_eps: 0.05
+reg_sync_stats: true
+fused_adam: false
+final_samples: 200000
+save_checkpoint: true
+out_dir: results/mog/stage1/lr_n400_m0p1_s3

@@ -174,6 +174,7 @@ def train(
     particle_lr_multiplier: float = 1.0,
     particle_beta1: float = None,
     mog_metrics: bool = False,
+    mog_pass_criteria=None,
 
 ):
     # Device / seeds
@@ -409,7 +410,7 @@ def train(
                 )
 
             if metric_due:
-                row, _, _, _ = evaluate(ema_G, ema_prior, 20000, seed, initial_raw_std)
+                row, _, _, _ = evaluate(ema_G, ema_prior, 20000, seed, initial_raw_std, pass_criteria=mog_pass_criteria)
                 if t_cover is None and row['modes'] == 100 and row['hq'] >= .9:
                     t_cover = global_step + 1
                 row.update(step=global_step + 1, d_gap=float(last_d_gap), t_cover=t_cover,
