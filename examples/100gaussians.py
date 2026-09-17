@@ -51,6 +51,7 @@ Visualization:
 
 import argparse
 import copy
+import json
 import sys
 import time
 from pathlib import Path
@@ -58,6 +59,7 @@ from typing import Tuple
 
 import torch
 import torch.nn as nn
+import numpy as np
 import matplotlib.pyplot as plt
 
 # Allow `python examples/100gaussians.py` from anywhere.
@@ -74,6 +76,11 @@ from particlegan import (  # noqa: E402
 
 from lib.toy_models import (  # noqa: E402
     SimpleMLPGenerator, SimpleMLPDiscriminator, sample_100gaussians, mode_coverage,
+    make_100gaussian_weights,
+)
+from lib.particle_prior import HopfieldRead  # noqa: E402
+from lib.hopfield_metrics import (  # noqa: E402
+    evaluate_read, measure_sampling_floor, steps_to_tv,
 )
 
 _RECIPE = get_recipe("100gaussians")
@@ -91,6 +98,8 @@ def save_fake_scatter(
     n_fake: int = 4096,
     xlim: Tuple[float, float] = (-6.0, 6.0),
     ylim: Tuple[float, float] = (-6.0, 6.0),
+    read=None,
+    fixed_queries=None,
 ) -> None:
     """
     Save a scatter plot comparing:
@@ -104,7 +113,11 @@ def save_fake_scatter(
     prior.eval()
 
     with torch.no_grad():
-        z_fake, _ = prior.sample(n_fake, fixed_first_n=True)
+        if read is not None:
+            z_fake, _ = read.retrieve(fixed_queries)
+        else:
+            # Small tables cannot provide 4096 distinct visualization rows.
+            z_fake, _ = prior.sample(min(n_fake, prior.z.shape[0]), fixed_first_n=True)
         z_fake = z_fake.to(device)
         fake = generator(z_fake).cpu()
 
@@ -165,7 +178,22 @@ def train(
     reg_sync_stats: bool = True,
     fused_adam: bool = False,
     return_details: bool = False,
+    read: str = "uniform",
+    dataset: str = "uniform",
+    beta: float = 16.0,
+    learn_beta: bool = False,
+    study_metrics: bool = False,
+    n_eval: int = 100000,
+    eval_batch_size: int = 1024,
 ):
+    if read not in ("uniform", "hopfield"):
+        raise ValueError("read must be uniform or hopfield")
+    if dataset not in ("uniform", "imbalanced"):
+        raise ValueError("dataset must be uniform or imbalanced")
+    if learn_beta and read != "hopfield":
+        raise ValueError("learn_beta requires a Hopfield read")
+    if min(log_interval, snapshot_interval, n_eval, eval_batch_size) <= 0:
+        raise ValueError("Logging/snapshot intervals and evaluation sizes must be positive")
     # Device / seeds
     if device_str is not None:
         device = torch.device(device_str)
@@ -191,6 +219,8 @@ def train(
     # Models
     prior_kind = canonical_prior_kind(prior_kind)
     learnable_prior = prior_kind == "particles"
+    if read == "hopfield" and not learnable_prior:
+        raise ValueError("Hopfield study requires the learnable particle prior")
     recipe = get_recipe(
         z_dim=z_dim, num_particles=num_particles, batch_size=batch_size,
         total_steps=epochs * steps_per_epoch, lr=lr, d_lr_mult=d_lr_mult,
@@ -206,6 +236,7 @@ def train(
              else recipe.make_prior(learnable=learnable_prior)).to(device)
     G = SimpleMLPGenerator(z_dim=z_dim).to(device)
     D = SimpleMLPDiscriminator(in_dim=2, fourier=fourier).to(device)
+    read_op = HopfieldRead(prior, beta=beta, learn_beta=learn_beta).to(device) if read == "hopfield" else None
 
     for m in list(G.modules()) + list(D.modules()):
         if isinstance(m, nn.Linear):
@@ -217,6 +248,7 @@ def train(
     # equilibrium, the averaged ones sit on it.
     ema_G = copy.deepcopy(G)
     ema_prior = copy.deepcopy(prior)
+    ema_read = HopfieldRead(ema_prior, beta=beta, learn_beta=False).to(device) if read_op is not None else None
     for p in list(ema_G.parameters()) + list(ema_prior.parameters()):
         p.requires_grad_(False)
 
@@ -228,19 +260,42 @@ def train(
     opt_G, opt_D = recipe.make_optimizers(G, D, fused=fused_adam)
     # Keep a separate prior optimizer for the existing update/checkpoint layout.
     opt_prior = (
-        torch.optim.Adam(prior.parameters(), lr=recipe.lr * recipe.prior_lr_mult,
+        torch.optim.Adam((read_op if read_op is not None else prior).parameters(), lr=recipe.lr * recipe.prior_lr_mult,
                          betas=recipe.betas, fused=fused_adam)
         if learnable_prior else None
     )
 
     out_path = Path(out_dir)
     out_path.mkdir(parents=True, exist_ok=True)
+    target_weights = make_100gaussian_weights(dataset, device=device)
+    sample_weights = target_weights if dataset == "imbalanced" else None
+    history = []
+    noise_floor = None
+    final_samples = None
+    if study_metrics or dataset == "imbalanced":
+        torch.save(target_weights.cpu(), out_path / "target_weights.pt")
+        np.save(out_path / "target_weights.npy", target_weights.cpu().numpy())
+        (out_path / "target_weights.json").write_text(json.dumps(target_weights.cpu().tolist(), indent=2) + "\n")
+    if study_metrics:
+        floor_gen = torch.Generator(device=device).manual_seed(seed + 1000)
+        noise_floor = measure_sampling_floor(target_weights, n_eval=n_eval, repeats=20, generator=floor_gen)
+        (out_path / "sampling_floor.json").write_text(json.dumps(noise_floor, indent=2) + "\n")
+        (out_path / "metrics.jsonl").write_text("")
+        print(f"[study] dataset={dataset} read={read} M={num_particles} seed={seed} "
+              f"VICReg={'full table (dense Hopfield gradients)' if read_op is not None else 'unique sampled rows'} "
+              f"sampling_floor={noise_floor['mean']:.5f} +/- {noise_floor['sd']:.5f} "
+              f"({noise_floor['repeats']} draws of {noise_floor['n_eval']})", flush=True)
+    fixed_queries = None
+    if read_op is not None:
+        query_gen = torch.Generator(device=device).manual_seed(seed + 1001)
+        fixed_queries = torch.randn(4096, z_dim, device=device, generator=query_gen)
 
     # Fixed real samples for visualization (same throughout training).
     real_viz = sample_100gaussians(
         batch_size=8192,
         device=device,
         generator=viz_gen,
+        weights=sample_weights,
     )
 
     # Initial snapshot (untrained model).
@@ -250,6 +305,7 @@ def train(
         device,
         str(out_path / f"samples_step_{0:06d}.png"),
         real_samples=real_viz,
+        read=ema_read, fixed_queries=fixed_queries,
     )
 
     total_steps = epochs * steps_per_epoch
@@ -262,6 +318,24 @@ def train(
     def synchronize():
         if device.type == "cuda":
             torch.cuda.synchronize(device)
+
+    def record_evaluation(step):
+        nonlocal final_samples
+        # A dedicated advancing RNG gives fresh queries at every evaluation
+        # without changing the training or visualization RNG streams.
+        metrics, final_samples = evaluate_read(
+            ema_G, ema_prior, target_weights, read=ema_read, n_eval=n_eval,
+            batch_size=eval_batch_size, sample_generator=eval_gen,
+        )
+        metrics["step"] = step
+        history.append(metrics)
+        with (out_path / "metrics.jsonl").open("a") as handle:
+            handle.write(json.dumps(metrics) + "\n")
+        print(f"[eval step {step:06d}] modes={metrics['modes']}/100 "
+              f"hq={metrics['hq']:.4f} sigma_ratio={metrics['sigma_ratio']} "
+              f"TV={metrics['tv']:.5f} KL={metrics['kl']:.5f} "
+              f"eff_n={metrics.get('eff_n')} interp_hq={metrics.get('interp_hq')}", flush=True)
+        return metrics
 
     synchronize()
     train_seconds = 0.0
@@ -288,9 +362,11 @@ def train(
                 batch_size=batch_size,
                 device=device,
                 generator=train_gen,
+                weights=sample_weights,
             )
             with torch.no_grad():
-                z_fake, _ = prior.sample(batch_size, generator=latent_gen)
+                z_fake, _ = (read_op(batch_size, generator=latent_gen) if read_op is not None
+                             else prior.sample(batch_size, generator=latent_gen))
                 x_fake = G(z_fake)
 
             real_logits = D(x_real)
@@ -318,7 +394,8 @@ def train(
             D.eval()
             G.train()
 
-            z_fake, idx = prior.sample(batch_size, generator=latent_gen)
+            z_fake, idx = (read_op(batch_size, generator=latent_gen) if read_op is not None
+                           else prior.sample(batch_size, generator=latent_gen))
             x_fake = G(z_fake)
             fake_logits = D(x_fake)
 
@@ -328,6 +405,7 @@ def train(
                         batch_size=batch_size,
                         device=device,
                         generator=train_gen,
+                        weights=sample_weights,
                     )
                 real_logits_g = D(x_real_g)
                 loss_gan = gan_loss.g_loss(fake_logits, real_logits_g)
@@ -336,8 +414,12 @@ def train(
 
             ep_z = loss_gan.new_zeros(())
             if learnable_prior:
-                unique_idx = torch.unique(idx)
-                ep_z = vic_reg(prior(unique_idx))
+                if read_op is not None:
+                    # Every particle receives read gradients in the dense arm.
+                    ep_z = vic_reg(prior.z)
+                else:
+                    unique_idx = torch.unique(idx)
+                    ep_z = vic_reg(prior(unique_idx))
             loss_g = loss_gan + lambda_ep * ep_z
 
             opt_G.zero_grad()
@@ -348,6 +430,8 @@ def train(
             opt_G.step()
             if opt_prior is not None:
                 opt_prior.step()
+                if read_op is not None:
+                    read_op.clamp_beta_()
 
             # EMA update
             with torch.no_grad():
@@ -355,36 +439,47 @@ def train(
                     pe.mul_(ema_decay).add_(p, alpha=1 - ema_decay)
                 for pe, p in zip(ema_prior.parameters(), prior.parameters()):
                     pe.mul_(ema_decay).add_(p, alpha=1 - ema_decay)
+                if ema_read is not None:
+                    # Its prior is ema_prior, already updated above exactly once.
+                    ema_read.log_beta.mul_(ema_decay).add_(read_op.log_beta, alpha=1 - ema_decay)
 
             # -------------------------
             # Logging / snapshots
             # -------------------------
-            maintenance = (global_step % log_interval == 0 or
-                           (global_step % snapshot_interval == 0 and global_step > 0))
+            report_step = global_step + 1 if study_metrics else global_step
+            log_now = report_step % log_interval == 0
+            snapshot_now = report_step % snapshot_interval == 0 and report_step > 0
+            maintenance = log_now or snapshot_now
             if maintenance:
                 synchronize()
                 train_seconds += time.perf_counter() - block_start
-            if global_step % log_interval == 0:
-                eval_gen.manual_seed(seed + 999)
-                modes, hq_frac = mode_coverage(
-                    ema_G, ema_prior, device, sample_generator=eval_gen,
-                )
+            if log_now:
+                if study_metrics:
+                    measured = record_evaluation(report_step)
+                    modes, hq_frac = measured["modes"], measured["hq"]
+                else:
+                    eval_gen.manual_seed(seed + 999)
+                    modes, hq_frac = mode_coverage(
+                        ema_G, ema_prior, device, sample_generator=eval_gen,
+                        **({"read": ema_read, "n_eval": n_eval} if ema_read is not None else {}),
+                    )
                 print(
-                    f"[epoch {epoch:04d} step {global_step:06d}] "
+                    f"[epoch {epoch:04d} step {report_step:06d}] "
                     f"D: {loss_d.item():.4f} "
                     f"G_gan: {loss_gan.item():.4f} "
                     f"EP(z): {ep_z.item():.4f} "
                     f"modes: {modes}/100 "
-                    f"hq: {hq_frac:.3f}"
+                    f"hq: {hq_frac:.3f}", flush=True,
                 )
 
-            if global_step % snapshot_interval == 0 and global_step > 0:
+            if snapshot_now:
                 save_fake_scatter(
                     ema_G,
                     ema_prior,
                     device,
-                    str(out_path / f"samples_step_{global_step:06d}.png"),
+                    str(out_path / f"samples_step_{report_step:06d}.png"),
                     real_samples=real_viz,
+                    read=ema_read, fixed_queries=fixed_queries,
                 )
 
             if maintenance:
@@ -401,13 +496,23 @@ def train(
             device,
             str(out_path / f"samples_epoch_{epoch:04d}.png"),
             real_samples=real_viz,
+            read=ema_read, fixed_queries=fixed_queries,
         )
 
         synchronize()
         block_start = time.perf_counter()
 
+    if study_metrics:
+        if not history or history[-1]["step"] != global_step:
+            record_evaluation(global_step)
+        history[-1]["steps_to_tv"] = steps_to_tv(history)
+        (out_path / "final_metrics.json").write_text(json.dumps(history[-1], indent=2) + "\n")
+
     if return_details:
         return {"prior": prior, "G": G, "D": D, "ema_prior": ema_prior, "ema_G": ema_G,
+                "read": read_op, "ema_read": ema_read, "history": history,
+                "final": history[-1] if history else None, "noise_floor": noise_floor,
+                "final_samples": final_samples, "target_weights": target_weights,
                 "train_seconds": train_seconds, "total_seconds": time.perf_counter() - total_start}
     return prior, G, D
 
@@ -417,6 +522,14 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         description="100 Gaussians: matched learned-table and Gaussian prior controls.",
     )
     parser.add_argument("--prior", choices=PRIOR_KINDS, default=default_prior)
+    parser.add_argument("--read", choices=("uniform", "hopfield"), default="uniform")
+    parser.add_argument("--dataset", choices=("uniform", "imbalanced"), default="uniform")
+    parser.add_argument("--beta", type=float, default=16.0)
+    parser.add_argument("--learn_beta", action="store_true")
+    parser.add_argument("--study_metrics", action="store_true",
+                        help="Measure TV, width, read health, and empirical noise floor; save metrics.jsonl.")
+    parser.add_argument("--n_eval", type=int, default=100000)
+    parser.add_argument("--eval_batch_size", type=int, default=1024)
     parser.add_argument("--epochs", type=int, default=_RECIPE.total_steps // 1000)
     parser.add_argument("--steps_per_epoch", type=int, default=1000)
     parser.add_argument("--batch_size", type=int, default=_RECIPE.batch_size)
@@ -526,6 +639,8 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         seed=args.seed,
         device_str=args.device,
         prior_kind=args.prior,
+        read=args.read, dataset=args.dataset, beta=args.beta, learn_beta=args.learn_beta,
+        study_metrics=args.study_metrics, n_eval=args.n_eval, eval_batch_size=args.eval_batch_size,
     )
 
 

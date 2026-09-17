@@ -89,6 +89,21 @@ class SimpleMLPDiscriminator(nn.Module):
 #  100 Gaussians dataset
 # =========================
 
+def make_100gaussian_weights(dataset="imbalanced", device=None) -> torch.Tensor:
+    """Weights in x-major/y-minor grid order, independent of the run RNG.
+
+    The imbalanced vector is log-spaced 1..100, then permuted with CPU seed 0.
+    Its top ten modes carry about 37.5% of mass (not 50%).
+    """
+    if dataset == "uniform":
+        return torch.full((100,), 0.01, device=device, dtype=torch.float64)
+    if dataset != "imbalanced":
+        raise ValueError("dataset must be uniform or imbalanced")
+    weights = torch.logspace(0, 2, 100, dtype=torch.float64)
+    weights = weights[torch.randperm(100, generator=torch.Generator().manual_seed(0))]
+    return (weights / weights.sum()).to(device=device)
+
+
 def sample_100gaussians(
     batch_size: int,
     device: torch.device,
@@ -96,6 +111,7 @@ def sample_100gaussians(
     generator: torch.Generator = None,
     grid_scale: float = 1.0,
     std: float = 0.03,
+    weights: torch.Tensor = None,
 ) -> torch.Tensor:
     """
     Sample from a 100-Gaussian mixture:
@@ -108,7 +124,13 @@ def sample_100gaussians(
     if batch_size <= 0:
         raise ValueError(f"batch_size must be positive, got {batch_size}")
 
-    if generator is None:
+    if weights is not None:
+        if weights.shape != (100,):
+            raise ValueError("weights must have shape (100,)")
+        idx = torch.multinomial(weights.to(device=device), batch_size,
+                                replacement=True, generator=generator)
+        idx_x, idx_y = idx // 10, idx % 10
+    elif generator is None:
         idx_x = torch.randint(0, 10, (batch_size,), device=device)
         idx_y = torch.randint(0, 10, (batch_size,), device=device)
     else:
@@ -145,6 +167,7 @@ def mode_coverage(
     std: float = 0.03,
     min_count: int = 10,
     sample_generator: torch.Generator = None,
+    read: nn.Module = None,
 ) -> Tuple[int, float]:
     """
     Coverage metrics on samples from the selected prior:
@@ -154,8 +177,13 @@ def mode_coverage(
     """
     was_training = generator.training
     generator.eval()
-    z, _ = prior.sample(n_eval, generator=sample_generator)
-    fake = generator(z)
+    if read is None:
+        z, _ = prior.sample(n_eval, generator=sample_generator)
+        fake = generator(z)
+    else:
+        fake = torch.cat([generator(read(min(1024, n_eval - start),
+                                        generator=sample_generator)[0])
+                          for start in range(0, n_eval, 1024)])
     coords = torch.arange(10, device=device, dtype=torch.float32) - 4.5
     cx, cy = torch.meshgrid(coords, coords, indexing="ij")
     centers = torch.stack([cx.flatten(), cy.flatten()], dim=1)

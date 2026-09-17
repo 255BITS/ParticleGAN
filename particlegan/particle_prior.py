@@ -177,6 +177,48 @@ class ParticlePrior(nn.Module):
         return z_batch, idx
 
 
+class HopfieldRead(nn.Module):
+    """Dense content-addressed read with shared query/particle coordinates.
+
+    Its parameters include the particle table: register the whole read with the
+    prior optimizer and EMA the entire module, including ``log_beta``.
+    """
+
+    def __init__(self, prior: ParticlePrior, beta: float = 16.0,
+                 learn_beta: bool = False):
+        super().__init__()
+        if not math.isfinite(beta) or beta <= 0:
+            raise ValueError("beta must be finite and positive")
+        if learn_beta and not 1 <= beta <= 256:
+            raise ValueError("learnable beta must initialize within [1, 256]")
+        self.prior = prior
+        self.log_beta = nn.Parameter(prior.z.new_tensor(math.log(beta)),
+                                     requires_grad=learn_beta)
+
+    def retrieve(self, q: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+        """Read explicit queries, including interpolated query trajectories."""
+        p = (self.log_beta.exp() * (q @ self.prior.z.T)).softmax(dim=-1)
+        return p @ self.prior.z, p
+
+    def forward(self, batch_size: int, generator=None):
+        if type(batch_size) is not int or batch_size <= 0:
+            raise ValueError("batch_size must be a positive integer")
+        z = self.prior.z
+        q = torch.randn(batch_size, z.shape[1], device=z.device, dtype=z.dtype,
+                        generator=generator)
+        return self.retrieve(q)
+
+    def sample(self, batch_size: int, generator=None):
+        return self(batch_size, generator=generator)
+
+    @torch.no_grad()
+    def clamp_beta_(self):
+        """Apply after prior optimizer steps; fixed beta is left unchanged."""
+        if self.log_beta.requires_grad:
+            self.log_beta.clamp_(math.log(1.0), math.log(256.0))
+        return self
+
+
 class GaussianPrior(nn.Module):
     """Fresh Gaussian latent draws, with no table or trainable parameters.
 

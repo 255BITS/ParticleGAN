@@ -1,0 +1,3 @@
+run,dataset,read,num_particles,seed,beta,learn_beta,steps,modes,hq,sigma_ratio,tv,kl,steps_to_tv,max_w,eff_n,dead_frac,interp_hq,log_beta,quality_pass,fidelity_pass
+imbalanced_m100_uniform_s1234,imbalanced,uniform,100,1234,16.0,False,7000,45,0.8316199779510498,0.05800027098555344,0.21205617326416948,1.2230817512262668,,,,,,,False,False
+imbalanced_m100_hopfield_b16_s1234,imbalanced,hopfield,100,1234,16.0,False,7000,38,0.635200023651123,6.193789569011322,0.42294380409249116,2.4480505495519402,,0.9406924396753311,1.2011857628822327,0.699999988079071,0.5908203125,2.7725887298583984,False,False

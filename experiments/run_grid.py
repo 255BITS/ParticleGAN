@@ -114,8 +114,9 @@ def code_provenance(trainer: str, python_bin: str) -> Dict:
     paths.update((repo_root / "lib").rglob("*.py"))
     paths.update((repo_root / "particlegan").rglob("*.py"))
     paths.add(repo_root / "experiments" / "config.py")
-    if trainer_path.name == "train_100gaussians.py":
+    if trainer_path.name in ("train_100gaussians.py", "train_hopfield.py"):
         paths.add(repo_root / "examples" / "100gaussians.py")
+    if trainer_path.name == "train_100gaussians.py":
         paths.add(repo_root / "experiments" / "train_denoising.py")
     sources = {}
     for path in sorted(paths):

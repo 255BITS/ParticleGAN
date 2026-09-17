@@ -1,0 +1,9 @@
+{
+  "status": "stop",
+  "tv_improvement": -0.21088763082832168,
+  "uniform_run": "imbalanced_m100_uniform_s1234",
+  "hopfield_run": "imbalanced_m100_hopfield_b16_s1234",
+  "uniform_tv": 0.21205617326416948,
+  "hopfield_tv": 0.42294380409249116,
+  "required_improvement": 0.2
+}

@@ -388,6 +388,8 @@ ParticleGAN/
 └── README.md
 ```
 
+The [Hopfield read study](docs/hopfield-study.md) tests content-addressed particle retrieval on imbalanced 100-Gaussian mixtures, with one seed per arm and a predeclared two-arm kill gate. The [completed kill-test report](results/hopfield/REPORT.md) records the failed gate and stops the grid.
+
 The grid-search infrastructure behind the study — config generation, the per-arm trainer, grid runner, and the analysis/leaderboard scripts — lives in `experiments/`, with the generated per-run configs in `configs/`.
 
 The [CIFAR DDGAN experiment](https://github.com/255BITS/ParticleGAN/blob/master/reports/cifar-ddgan/README.md) scales the particle
