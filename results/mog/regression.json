@@ -1,0 +1,53 @@
+[
+  {
+    "seed": 1,
+    "log_entries": 70,
+    "logs_identical": true,
+    "ema_tensors_identical": true,
+    "tensors": {
+      "G.net.0.weight": true,
+      "G.net.0.bias": true,
+      "G.net.2.weight": true,
+      "G.net.2.bias": true,
+      "G.net.4.weight": true,
+      "G.net.4.bias": true,
+      "G.net.6.weight": true,
+      "G.net.6.bias": true,
+      "prior.z": true
+    }
+  },
+  {
+    "seed": 2,
+    "log_entries": 70,
+    "logs_identical": true,
+    "ema_tensors_identical": true,
+    "tensors": {
+      "G.net.0.weight": true,
+      "G.net.0.bias": true,
+      "G.net.2.weight": true,
+      "G.net.2.bias": true,
+      "G.net.4.weight": true,
+      "G.net.4.bias": true,
+      "G.net.6.weight": true,
+      "G.net.6.bias": true,
+      "prior.z": true
+    }
+  },
+  {
+    "seed": 3,
+    "log_entries": 70,
+    "logs_identical": true,
+    "ema_tensors_identical": true,
+    "tensors": {
+      "G.net.0.weight": true,
+      "G.net.0.bias": true,
+      "G.net.2.weight": true,
+      "G.net.2.bias": true,
+      "G.net.4.weight": true,
+      "G.net.4.bias": true,
+      "G.net.6.weight": true,
+      "G.net.6.bias": true,
+      "prior.z": true
+    }
+  }
+]

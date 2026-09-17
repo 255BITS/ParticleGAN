@@ -9,6 +9,9 @@ class Recipe:
     model: str = "gan"
     z_dim: int = 4
     num_particles: int = 20_000
+    prior_kind: str = "particles"
+    sigma_rel: float = 0.0
+    standardize: bool = True
     num_classes: int | None = None
     conditioning: str = "scalar"
     ucd_target: str = "class"
@@ -20,6 +23,7 @@ class Recipe:
     d_lr_mult: float = 1.5
     prior_lr_mult: float = 10.0
     betas: tuple[float, float] = (0.0, 0.999)
+    prior_betas: tuple[float, float] | None = None
     loss_type: str = "logistic"
     gan_mode: str = "rp"
     reg_arm: str = "b_cap"
@@ -34,6 +38,8 @@ class Recipe:
 
     def __post_init__(self):
         object.__setattr__(self, "betas", tuple(self.betas))
+        if self.prior_betas is not None:
+            object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
         object.__setattr__(self, "alpha_bar", tuple(self.alpha_bar))
         for key in ("z_dim", "num_particles", "batch_size", "total_steps", "reg_every"):
             value = getattr(self, key)
@@ -41,6 +47,16 @@ class Recipe:
                 raise ValueError(f"{key} must be a positive integer")
         if self.model not in ("gan", "ddgan"):
             raise ValueError("model must be 'gan' or 'ddgan'")
+        if self.prior_kind not in ("particles", "mog"):
+            raise ValueError("prior_kind must be 'particles' or 'mog'")
+        if not math.isfinite(self.sigma_rel) or self.sigma_rel < 0:
+            raise ValueError("sigma_rel must be finite and nonnegative")
+        if type(self.standardize) is not bool:
+            raise ValueError("standardize must be a boolean")
+        if self.prior_kind == "particles" and self.sigma_rel != 0:
+            raise ValueError("nonzero sigma_rel requires prior_kind='mog'")
+        if self.prior_kind == "mog" and self.num_particles < 2:
+            raise ValueError("MoG calibration requires at least two particles")
         if self.conditioning not in ("scalar", "conditional", "ucd"):
             raise ValueError("conditioning must be scalar, conditional, or ucd")
         if self.num_classes is not None and (type(self.num_classes) is not int or self.num_classes < 1):
@@ -61,6 +77,8 @@ class Recipe:
                 raise ValueError(f"{key} must be finite and nonnegative")
         if len(self.betas) != 2 or any(not 0 <= b < 1 for b in self.betas):
             raise ValueError("betas must contain two values in [0, 1)")
+        if self.prior_betas is not None and (len(self.prior_betas) != 2 or any(not 0 <= b < 1 for b in self.prior_betas)):
+            raise ValueError("prior_betas must contain two values in [0, 1) or be None")
         # Validate resolved component settings at construction, not later in training.
         self.make_loss()
         self.make_gradient_penalty()
@@ -78,8 +96,18 @@ class Recipe:
 
     def make_prior(self, **overrides):
         """Construct the learned prior; explicit keyword overrides are local to this call."""
-        from .particle_prior import ParticlePrior
-        return ParticlePrior(**{"num_particles": self.num_particles, "z_dim": self.z_dim, **overrides})
+        from .particle_prior import MoGParticlePrior, ParticlePrior
+        options = {"num_particles": self.num_particles, "z_dim": self.z_dim,
+                   "sigma_rel": self.sigma_rel, "standardize": self.standardize, **overrides}
+        kind = options.pop("prior_kind", self.prior_kind)
+        if kind == "mog":
+            return MoGParticlePrior(**options)
+        if kind != "particles":
+            raise ValueError("prior_kind must be 'particles' or 'mog'")
+        if options.pop("sigma_rel") != 0:
+            raise ValueError("nonzero sigma_rel requires prior_kind='mog'")
+        options.pop("standardize")
+        return ParticlePrior(**options)
 
     def make_loss(self, **overrides):
         from .gan_loss import GANLoss
@@ -112,7 +140,8 @@ class Recipe:
         if g_params:
             groups.append({"params": g_params, "lr": self.lr})
         if prior_params:
-            groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult})
+            groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult,
+                           "betas": self.prior_betas if self.prior_betas is not None else self.betas})
         return (Adam(groups, lr=self.lr, betas=self.betas, **adam_kwargs),
                 Adam(d_params, lr=self.lr * self.d_lr_mult, betas=self.betas, **adam_kwargs))
 
@@ -121,11 +150,15 @@ def get_recipe(name="gan", **overrides):
     """Recommended GAN/DDGAN defaults; historical preset names remain accepted."""
     if name in ("gan", "100gaussians"):
         recipe = Recipe(name=name)
+    elif name == "mog":
+        recipe = Recipe(name=name, prior_kind="mog", num_particles=400,
+                        sigma_rel=1/40, standardize=True, total_steps=28_000,
+                        prior_lr_mult=100., prior_betas=(.5, .999))
     elif name in ("ddgan", "denoising"):
         recipe = Recipe(name=name, model="ddgan", num_classes=4,
                         conditioning="ucd", total_steps=56_000)
     else:
-        raise ValueError(f"Unknown recipe {name!r}; choose 'gan' or 'ddgan'")
+        raise ValueError(f"Unknown recipe {name!r}; choose 'gan', 'mog' or 'ddgan'")
     return recipe.replace(**overrides)
 
 

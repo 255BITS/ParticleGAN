@@ -1,0 +1,9 @@
+stage0/
+*.log
+stage1/
+noise_check/
+longer/
+refine_noise/
+component_scale/
+scale_longer/
+default/

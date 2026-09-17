@@ -62,6 +62,50 @@ Include `prior.parameters()` in your generator optimizer to learn the particles.
 Use `GaussianPrior(z_dim=16)` for fresh Gaussian samples with the same sampling
 interface; its indices are `None` and it needs no particle regularization.
 
+### Mixture-of-Gaussians particles (0.3.0)
+
+`MoGParticlePrior` gives each learned particle a continuous Gaussian neighborhood.
+Its defaults use the selected compact configuration: **400 components, z_dim=4,
+sigma_rel=1/40, standardized means**. Sigma is shared and fixed after calibration.
+
+```python
+from particlegan import MoGParticlePrior, get_recipe
+
+prior = MoGParticlePrior().to(device)
+z, component_ids = prior.sample(256)
+
+recipe = get_recipe("mog")  # 400 components, 28k steps, prior LR 0.06, beta1=0.5
+prior = recipe.make_prior().to(device)
+opt_g, opt_d = recipe.make_optimizers(G, D, prior)
+# Regularize raw means, not noisy draws. Use the full table at N <= 1024.
+prior_loss = recipe.make_prior_regularizer()(prior.z)
+```
+
+Use `ParticlePrior` for atoms. Existing GAN/DDGAN presets and examples keep their
+defaults; `mog` is a dedicated opt-in recipe. The MoG recipe's `prior_lr_mult=100`
+is relative to G's LR, giving 0.06. It is equivalent to the experiment's 10×
+multiplier on the original prior LR of 0.006.
+
+Run the default MoG benchmark with the existing experiment trainer:
+
+```bash
+python -u experiments/train_100gaussians.py --config configs/mog/default.toml
+# During training:
+tail -F results/mog/default/log.txt
+```
+
+The 400-component model passed the C0 acceptance envelope at 28k steps on the
+100-Gaussian benchmark, using 50× fewer components and 4× the original updates.
+This is a single-seed result; both MoG and atoms remain useful.
+[Results and tradeoffs](results/mog/COMPONENT_SCALE.md) ·
+[MoG API and checkpoint details](docs/api.md#mogparticleprior) ·
+[Changelog](CHANGELOG.md).
+
+Core MoG sampling and calibration work with PyTorch alone. For faster calibration
+of large low-dimensional tables, install the optional extra with
+`python -m pip install 'particlegan[mog]'` (or `python -m pip install -e '.[mog]'`
+from this checkout).
+
 ### Add a loss to an existing pipeline
 
 Components are independent. For example, add a critic penalty or a particle

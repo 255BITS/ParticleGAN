@@ -197,7 +197,7 @@ inference walks through every reverse step. Class-only UCD is the default;
 
 | Component | Purpose |
 | --- | --- |
-| [Priors](#priors) | Learnable particles or fresh Gaussian latent samples |
+| [Priors](#priors) | Learnable particles, fixed-sigma Gaussian mixtures, or fresh Gaussian samples |
 | [Losses](#losses-and-regularizers) | Adversarial objectives and additive regularizers |
 | [DDGAN](#ddgan) | Forward corruption and reverse transitions |
 | [UCD](#ucd) | Class-score selection and class supervision |
@@ -236,6 +236,77 @@ Sampling does not detach latent codes. Include the prior parameters in your
 optimizer to learn them. Use `prior(indices)` through your distributed wrapper's
 forward path when applicable. An explicit `torch.Generator` controls initialization
 or sampling without consuming the global RNG; use a generator for the same device.
+
+### `MoGParticlePrior`
+
+```python
+MoGParticlePrior(num_particles=400, z_dim=4, init_std=1.0,
+                 device=None, dtype=None, learnable=True, generator=None,
+                 *, sigma_rel=1/40, standardize=True)
+```
+
+An equal-weight mixture: choose component `i` uniformly, then draw
+`z = means()[i] + sigma * eps`, with standard-normal epsilon. The raw component
+centers are the parameter `prior.z`. Sigma is a **shared fixed buffer**, calibrated
+once as `sigma_rel * d0`, where `d0` is the median nearest-neighbor distance of
+the initial read-space means. At least two components and positive initial
+median spacing are required. `learnable=False` freezes the table as a buffer.
+
+With `standardize=True`, each read centers and divides the table by its
+per-dimension sample standard deviation plus `1e-6`. This is differentiable;
+all rows can receive gradients. With `standardize=False`, means are the raw
+table, as in `ParticlePrior`. Learning and EMA updates do not recalibrate sigma.
+
+| Method / attribute | Result |
+| --- | --- |
+| `sample(batch_size, generator=None, *, fixed_first_n=False, offset=0, eps=None)` | Noisy codes and selected component indices |
+| `prior(indices, generator=None, *, eps=None)` | Noisy draws for supplied indices; use this forward path through DDP |
+| `means()` | Differentiable read-space centers, with no noise |
+| `z` | Raw learned table; the input to particle regularization |
+| `sigma`, `d0` | Saved scalar buffers, moving with `.to(...)` |
+| `calibrate()` | Explicitly reset d0 and sigma from current means; not a training-step operation |
+
+`fixed_first_n=True` fixes component indices, **not epsilon**. For a stable scatter,
+save a fixed epsilon tensor too:
+
+```python
+from particlegan import MoGParticlePrior
+
+prior = MoGParticlePrior()
+eps = torch.randn(64, prior.z_dim, device=prior.z.device, dtype=prior.z.dtype)
+z, indices = prior.sample(64, fixed_first_n=True, eps=eps)
+# Reuse eps at every snapshot; use prior.means()[indices] only for a centers-only audit.
+```
+
+Explicit epsilon must match the sampled codes' shape, device and dtype. An explicit
+generator controls both component selection and Gaussian draws without touching
+global RNG. `sigma_rel=0, standardize=False` preserves `ParticlePrior` outputs and
+RNG consumption; zero sigma never draws noise. `eval()` keeps Gaussian noise on.
+
+For DDP, sample indices from the unwrapped prior, then call the wrapped module:
+`z = wrapped_prior(indices, generator=rng)`. Use `prior.z` for VICReg rather than
+`prior(indices)` or sampled codes. The selected recipe regularizes the full raw
+table at N ≤ 1024, otherwise `prior.z[indices.unique()]`. In particular, the atoms
+loops above must use this raw-table regularizer input when adapted for MoG.
+
+For EMA, deepcopy the prior and average its learned `z`; the fixed buffers retain
+their calibrated values. Standardization is computed from the EMA table itself.
+State dicts include `z`, `sigma`, `d0`, and `_extra_state` containing `sigma_rel`
+and `standardize`. Reconstruct with matching dimensions, then `load_state_dict`:
+read settings and noise are restored even if constructor defaults differ.
+Legacy experimental checkpoints containing only z/sigma/d0 are accepted; supply
+their original `standardize` setting when constructing the prior.
+
+Calibration uses SciPy's CPU tree when available. Install `particlegan[mog]` for
+that optional acceleration. Without SciPy, exact Torch distances use bounded
+temporary memory but quadratic work; large low-dimensional tables benefit from
+the tree. No SciPy or NumPy is needed for sampling, gradients or the fallback.
+
+The default experiment is [configs/mog/default.toml](../configs/mog/default.toml),
+run via `python -u experiments/train_100gaussians.py --config configs/mog/default.toml`.
+It retains the benchmark's networks, Fourier discriminator and full metric suite.
+The corresponding API preset is `get_recipe("mog")`; a recipe alone does not
+reproduce benchmark quality with arbitrary networks or data.
 
 ### `GaussianPrior`
 
@@ -427,14 +498,22 @@ overrides its class count. `Recipe` is the resolved data object: setting only
 resolve named presets. Unknown fields are rejected. Historical names
 `100gaussians` and `denoising` remain accepted aliases for GAN and DDGAN.
 
+`get_recipe("mog")` selects the compact MoG leader: 400 components, z_dim=4,
+sigma_rel=1/40, standardized reads, 28,000 steps, prior LR multiplier 100
+(relative to G, giving 0.06), and prior betas `(0.5, 0.999)`. G and D retain
+betas `(0, 0.999)`. Other GAN recipe settings are unchanged. `get_recipe()`
+and `get_recipe("gan")` still select the existing atoms recipe.
+
 | Field | `get_recipe()` / `gan` | `ddgan` |
 | --- | --- | --- |
 | `model` | `gan` | `ddgan` |
 | `conditioning`, `num_classes` | `scalar`, `None` | `ucd`, `4` |
 | `z_dim`, `num_particles` | `4`, `20_000` | Same |
+| `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) | Same |
 | `loss_type`, `gan_mode` | `logistic`, `rp` | Same |
 | `lr`, `d_lr_mult`, `prior_lr_mult` | `.0006`, `1.5`, `10` | Same |
 | `betas` | `(0, .999)` | Same |
+| `prior_betas` | `None` (inherit `betas`) | Same |
 | `reg_arm`, `reg_coeff`, `reg_kappa` | `b_cap`, `1`, `1` | Same |
 | `reg_every`, `reg_method` | `1`, `autograd` | Same |
 | `prior_reg`, `ema_decay` | `1`, `.995` | Same |
@@ -449,7 +528,7 @@ budgets remain application choices.
 
 | Optional factory | Result |
 | --- | --- |
-| `recipe.make_prior(**kwargs)` | `ParticlePrior` using recipe dimensions |
+| `recipe.make_prior(**kwargs)` | `ParticlePrior` or `MoGParticlePrior` selected by `prior_kind` |
 | `recipe.make_loss(**kwargs)` | `GANLoss` using recipe loss and mode |
 | `recipe.make_gradient_penalty(**kwargs)` | `GradientPenalty` using recipe penalty settings |
 | `recipe.make_prior_regularizer(**kwargs)` | `ParticleRegularizer` with `weight=recipe.prior_reg` already applied |
@@ -458,6 +537,9 @@ budgets remain application choices.
 Factory keyword arguments override constructor values for that call, without
 changing the recipe. Optimizers exclude frozen parameters; G and prior have
 separate groups at `lr` and `lr * prior_lr_mult`, while D uses `lr * d_lr_mult`.
+`prior_betas` optionally overrides Adam betas for the prior group only.
+Set `prior_kind="mog"`, `sigma_rel` and `standardize` through the recipe, or
+override them locally in `make_prior`. Nonzero sigma with the atoms kind is rejected.
 If G contains the supplied prior, its parameters are included only once.
 Additional Adam options such as `fused=True` or `eps=1e-8` are passed to both
 optimizers; configure learning rates and betas through the recipe. You can

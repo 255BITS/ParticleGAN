@@ -1,0 +1,20 @@
+[
+  {
+    "seed": 1,
+    "n": 20000,
+    "hist_kl_all_samples": 0.03497745629908976,
+    "kl_balance_hq_only": 0.03627027748833994
+  },
+  {
+    "seed": 2,
+    "n": 20000,
+    "hist_kl_all_samples": 0.03221495118738755,
+    "kl_balance_hq_only": 0.03329104479701296
+  },
+  {
+    "seed": 3,
+    "n": 20000,
+    "hist_kl_all_samples": 0.032404098493953974,
+    "kl_balance_hq_only": 0.03293659211867244
+  }
+]

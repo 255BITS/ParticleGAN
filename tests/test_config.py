@@ -53,7 +53,10 @@ class ConfigTests(unittest.TestCase):
                               ("train_denoising", "denoising")):
             defaults = trainer_defaults(str(ROOT / "experiments" / f"{trainer}.py"))
             supplied = read_config(ROOT / "configs" / name / "default.toml")
-            self.assertEqual(defaults, supplied)
+            # TOML has no null literal; optional None defaults stay omitted.
+            self.assertEqual(set(defaults) - set(supplied),
+                             {key for key, value in defaults.items() if value is None})
+            self.assertEqual(defaults, load_config(ROOT / "configs" / name / "default.toml", defaults))
             recipe = get_recipe(name)
             self.assertEqual(defaults["lr"], recipe.lr)
             self.assertEqual(defaults["batch_size"], recipe.batch_size)
