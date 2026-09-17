@@ -38,11 +38,11 @@ Oracle supervision also raises entropy-effective particle usage from 227.7 to
 and the exhaustive oracle itself has effective usage only 217.7. Thus more
 uniform use is not proof of more accurate oracle assignments.
 
-**Next recommendation:** add detached oracle-query supervision to joint
-bounded-offset training, with a matched continuation control and a fixed loss
-weight chosen before running. Retain the actual hard forward choice and fixed
-sigma. Test whether the inference benefit survives moving particle centers and
-whether generation improves. Generation is unchanged in this frozen experiment:
+**Agreed next direction:** test the basic bounded particle autoencoder + GAN on
+simple images against a matched GAN control. Keep exhaustive oracle selection
+as a diagnostic; scaling the basic method takes priority over joint oracle
+supervision. Its latent-space routing comparisons are cheaper than comparing
+every input with all decoded images. Generation is unchanged in this frozen experiment:
 G and the prior are exactly the same, so its 92 modes / 82.23% HQ are inherited,
 not a newly measured gain. The two losses differ in target, gradient, and scale;
 this result does not isolate the routing-gradient estimator as the sole cause

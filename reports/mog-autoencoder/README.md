@@ -165,13 +165,15 @@ routed arm on an RTX A6000 (41.15 seconds for local balancing); evaluations and 
 
 Recommended next mechanism comparisons, using the same seed:
 
-- **Joint oracle supervision (first choice):** the completed frozen-encoder
-  comparison closes 76.94% of the held-out selection gap using regression to
-  oracle-selected particle positions. Test that supervision alongside the GAN
-  and bounded-offset reconstruction objectives, against a matched continuation
-  control. Choose its weight before running. Better inference does not by itself
-  improve unconditional sampling; require generation metrics before promoting
-  the new recipe. The targets will move once G and particles learn again.
+- **Simple-image baseline (agreed next step):** compare the bounded particle
+  autoencoder + GAN against a matched MoG GAN with reconstruction disabled.
+  Retain fixed sigma and hard routing in latent space. Measure reconstruction,
+  image generation quality/diversity, particle usage, offset contribution,
+  runtime, and memory. Fix architecture, loss weights, training budget, and
+  evaluation protocol before running. Keep exhaustive decoded-center search
+  as a diagnostic rather than the default training method. The frozen-encoder
+  result establishes a learnable selection gap on the toy; it does not establish
+  scalability or improved generation on images. See the [continuation handoff](../../docs/mog-autoencoder-handoff.md).
 - **Separate offset optimization:** if pursuing detail, isolate the offset branch
   from shared routing features and compare matched normal versus increased
   offset learning rates. This can distinguish Adam's gradient normalization

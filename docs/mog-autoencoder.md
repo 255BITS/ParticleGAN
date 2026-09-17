@@ -190,6 +190,9 @@ oracle query regression with reconstruction fine-tuning. Direct targets close
 76.94% of the available selection gap; the control develops wrong-grid errors.
 See `reports/mog-autoencoder/encoder-fit/README.md`. Generation is unchanged in
 this diagnostic; joint training with moving targets remains untested.
+After discussing exhaustive-search cost, the agreed next step is to test the
+basic bounded particle autoencoder + GAN on simple images with a matched GAN
+control. Oracle selection remains a diagnostic. See [continuation handoff](mog-autoencoder-handoff.md).
 
 ## Prior art and novelty boundary
 
