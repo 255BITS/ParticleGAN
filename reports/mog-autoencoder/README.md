@@ -19,6 +19,12 @@ centers removes 33.1% of the bounded model's zero-offset reconstruction error,
 50.3% for local routing, and 60.1% for local balancing. The original bounded
 model also has the best available decoded centers. See the [oracle audit](ORACLE.md).
 
+**Encoder fitting follow-up:** with that bounded decoder and prior frozen,
+oracle-query supervision reduces zero-offset MSE by 25.42%, closing 76.94% of
+the available selection gap. Matched reconstruction-only fine-tuning regresses,
+with 6.247% wrong-grid reconstructions driving most of its error. Unconditional
+generation stays unchanged. See the [two-arm fitting experiment](encoder-fit/README.md).
+
 | Rank | Reconstruction path | Modes /100 | HQ % | Width /real | SW1 ↓ | Reconstruction MSE ↓ |
 |---|---|---:|---:|---:|---:|---:|
 | 1 | Bounded offset + local routing gradient | 93 | 72.41 | 0.651 | 0.4560 | 0.005028 |
@@ -159,17 +165,13 @@ routed arm on an RTX A6000 (41.15 seconds for local balancing); evaluations and 
 
 Recommended next mechanism comparisons, using the same seed:
 
-- **Fit the encoder to the oracle with G and particles frozen (first choice):**
-  use fresh training examples, compute their best decoded-center assignments,
-  and teach the encoder those choices. Compare with matched encoder-only
-  reconstruction fine-tuning from the same checkpoint and for the same budget.
-  Keep both paths at zero offset for this diagnostic. Evaluate actual hard-choice
-  MSE on held-out data, rather than ID accuracy alone. This tests whether the
-  existing encoder can learn the available improvement without changing G.
-- **Then consider joint training:** if oracle supervision closes the held-out
-  selection gap, test it alongside the GAN objective with a matched control.
-  Better inference does not by itself improve unconditional sampling; require
-  generation metrics before promoting the new recipe.
+- **Joint oracle supervision (first choice):** the completed frozen-encoder
+  comparison closes 76.94% of the held-out selection gap using regression to
+  oracle-selected particle positions. Test that supervision alongside the GAN
+  and bounded-offset reconstruction objectives, against a matched continuation
+  control. Choose its weight before running. Better inference does not by itself
+  improve unconditional sampling; require generation metrics before promoting
+  the new recipe. The targets will move once G and particles learn again.
 - **Separate offset optimization:** if pursuing detail, isolate the offset branch
   from shared routing features and compare matched normal versus increased
   offset learning rates. This can distinguish Adam's gradient normalization
@@ -287,6 +289,8 @@ scout control, not a reproduction of the published 28k-step MoG recipe.
 [Hard/soft routing audit](ROUTING.md) · [routing counts and probabilities](routing_audit.json)
 
 [Frozen-center oracle leaderboard](ORACLE.md) · [oracle metrics and checkpoint hashes](oracle_audit.json)
+
+[Frozen encoder fitting experiment](encoder-fit/README.md) · [fitting leaderboard](encoder-fit/LEADERBOARD.md)
 
 ![Learning curves](learning_curves.png)
 
@@ -418,3 +422,5 @@ identical hard forward values, bounded offsets, routing and particle gradients,
 eight-neighbor support, zero gradients to excluded distances, and finite
 derivatives for tied distances. Including the two oracle tests, all 35 routing,
 oracle, and MoG tests pass (`tests/test_mog_oracle.py` plus the files above).
+The subsequent encoder-fitting experiment adds three tests, bringing the total
+to 38 when `tests/test_mog_encoder_fit.py` is included.

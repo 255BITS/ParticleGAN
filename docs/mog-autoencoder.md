@@ -185,6 +185,11 @@ A frozen-checkpoint audit then searches all 400 decoded centers to isolate the
 zero-offset reconstruction error from encoder selection. It finds substantial
 selection gaps while the original bounded arm retains the best center set;
 see `reports/mog-autoencoder/ORACLE.md` for the diagnostic leaderboard.
+A matched encoder-only follow-up freezes the bounded decoder/prior and compares
+oracle query regression with reconstruction fine-tuning. Direct targets close
+76.94% of the available selection gap; the control develops wrong-grid errors.
+See `reports/mog-autoencoder/encoder-fit/README.md`. Generation is unchanged in
+this diagnostic; joint training with moving targets remains untested.
 
 ## Prior art and novelty boundary
 
