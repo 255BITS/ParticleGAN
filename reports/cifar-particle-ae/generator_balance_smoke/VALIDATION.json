@@ -1,0 +1,23 @@
+{
+  "certified": 2,
+  "optimizer_counters": {
+    "control": {
+      "optimizer_g": [
+        10008.0
+      ],
+      "optimizer_d": [
+        10008.0
+      ]
+    },
+    "half_g": {
+      "optimizer_g": [
+        10008.0
+      ],
+      "optimizer_d": [
+        10008.0
+      ]
+    }
+  },
+  "rates_correct": true,
+  "matched_rng": true
+}

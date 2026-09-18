@@ -1,0 +1,20 @@
+{
+  "cnn_10k": {
+    "sigma": 0.212616428732872,
+    "median_nearest_center_distance": 8.552831742484468,
+    "noise_rms_norm": 1.700931429862976,
+    "covariance_effective_rank": 63.9991537233733,
+    "latent_dimension": 64,
+    "smallest_eigenvalue": 0.9919509272628649,
+    "largest_eigenvalue": 1.020058241416226
+  },
+  "cnn_50k": {
+    "sigma": 0.212616428732872,
+    "median_nearest_center_distance": 8.360116574986654,
+    "noise_rms_norm": 1.700931429862976,
+    "covariance_effective_rank": 63.99998357821941,
+    "latent_dimension": 64,
+    "smallest_eigenvalue": 0.9983924205023058,
+    "largest_eigenvalue": 1.0015196137660929
+  }
+}

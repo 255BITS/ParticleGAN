@@ -1,0 +1,6 @@
+{
+  "pid": 264755,
+  "started_utc": "2026-09-18T21:13:30.061921+00:00",
+  "command": "bash experiments/cifar_ae_generator_balance_pipeline.sh generator_balance 0,1",
+  "log": "runs/cifar_particle_ae/generator_balance/PIPELINE.log"
+}
