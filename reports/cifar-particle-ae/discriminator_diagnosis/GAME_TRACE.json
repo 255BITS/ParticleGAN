@@ -1,0 +1,406 @@
+[
+  {
+    "name": "control",
+    "phase_means": {
+      "before_D": {
+        "auc": 0.4569575786590576,
+        "real_minus_fake": -0.006056890124455094,
+        "fake_input_grad_norm": 0.5032572001218796
+      },
+      "after_D": {
+        "auc": 0.5525782108306885,
+        "real_minus_fake": 0.010318672750145197,
+        "fake_input_grad_norm": 0.5155325122177601
+      },
+      "after_G_prior": {
+        "auc": 0.4613680839538574,
+        "real_minus_fake": -0.0053225180599838495,
+        "fake_input_grad_norm": 0.5171306133270264
+      }
+    },
+    "mean_D_auc_change": 0.09562063217163086,
+    "mean_G_prior_auc_change": -0.09121012687683105,
+    "D_increases": 8,
+    "G_prior_decreases": 8,
+    "trace": {
+      "parent": "runs/cifar_particle_ae/discriminator_joint/control/checkpoint_020000.pt",
+      "parent_sha256": "8435351847257fed8c73fb7dfa6f0b587e06fc22e5221d89f7fc6edf8b00503b",
+      "script_sha256": "29870994ca573c93b45c24432d8dc148f88b95c75e115dff3c97510b1e191cbc",
+      "trainer_sha256": "56a400ab1dc0d42bf2fd25e0fc75ec0dc80223aef496db2595eb8a8f611f39a4",
+      "rows": [
+        {
+          "step": 20001,
+          "phase": "before_D",
+          "auc": 0.4107685089111328,
+          "real_minus_fake": -0.013323739171028137,
+          "fake_input_grad_norm": 0.4638625979423523
+        },
+        {
+          "step": 20001,
+          "phase": "after_D",
+          "auc": 0.5868110656738281,
+          "real_minus_fake": 0.014434412121772766,
+          "fake_input_grad_norm": 0.4714701175689697
+        },
+        {
+          "step": 20001,
+          "phase": "after_G_prior",
+          "auc": 0.4425926208496094,
+          "real_minus_fake": -0.005789279937744141,
+          "fake_input_grad_norm": 0.5048047304153442
+        },
+        {
+          "step": 20002,
+          "phase": "before_D",
+          "auc": 0.4425926208496094,
+          "real_minus_fake": -0.005789279937744141,
+          "fake_input_grad_norm": 0.5048047304153442
+        },
+        {
+          "step": 20002,
+          "phase": "after_D",
+          "auc": 0.5424118041992188,
+          "real_minus_fake": 0.007648684084415436,
+          "fake_input_grad_norm": 0.46247488260269165
+        },
+        {
+          "step": 20002,
+          "phase": "after_G_prior",
+          "auc": 0.46002960205078125,
+          "real_minus_fake": -0.0029897764325141907,
+          "fake_input_grad_norm": 0.4685119390487671
+        },
+        {
+          "step": 20003,
+          "phase": "before_D",
+          "auc": 0.46002960205078125,
+          "real_minus_fake": -0.0029897764325141907,
+          "fake_input_grad_norm": 0.4685119390487671
+        },
+        {
+          "step": 20003,
+          "phase": "after_D",
+          "auc": 0.5621910095214844,
+          "real_minus_fake": 0.013566959649324417,
+          "fake_input_grad_norm": 0.5372540950775146
+        },
+        {
+          "step": 20003,
+          "phase": "after_G_prior",
+          "auc": 0.4632606506347656,
+          "real_minus_fake": -0.004146082326769829,
+          "fake_input_grad_norm": 0.5148173570632935
+        },
+        {
+          "step": 20004,
+          "phase": "before_D",
+          "auc": 0.4632606506347656,
+          "real_minus_fake": -0.004146082326769829,
+          "fake_input_grad_norm": 0.5148173570632935
+        },
+        {
+          "step": 20004,
+          "phase": "after_D",
+          "auc": 0.5240631103515625,
+          "real_minus_fake": 0.005694404244422913,
+          "fake_input_grad_norm": 0.4846518933773041
+        },
+        {
+          "step": 20004,
+          "phase": "after_G_prior",
+          "auc": 0.4678459167480469,
+          "real_minus_fake": -0.0031688474118709564,
+          "fake_input_grad_norm": 0.4831903576850891
+        },
+        {
+          "step": 20005,
+          "phase": "before_D",
+          "auc": 0.4678459167480469,
+          "real_minus_fake": -0.0031688474118709564,
+          "fake_input_grad_norm": 0.4831903576850891
+        },
+        {
+          "step": 20005,
+          "phase": "after_D",
+          "auc": 0.5010299682617188,
+          "real_minus_fake": 0.0028478875756263733,
+          "fake_input_grad_norm": 0.5988075733184814
+        },
+        {
+          "step": 20005,
+          "phase": "after_G_prior",
+          "auc": 0.4404716491699219,
+          "real_minus_fake": -0.013190001249313354,
+          "fake_input_grad_norm": 0.5939542651176453
+        },
+        {
+          "step": 20006,
+          "phase": "before_D",
+          "auc": 0.4404716491699219,
+          "real_minus_fake": -0.013190001249313354,
+          "fake_input_grad_norm": 0.5939542651176453
+        },
+        {
+          "step": 20006,
+          "phase": "after_D",
+          "auc": 0.6032505035400391,
+          "real_minus_fake": 0.01538589596748352,
+          "fake_input_grad_norm": 0.5037115216255188
+        },
+        {
+          "step": 20006,
+          "phase": "after_G_prior",
+          "auc": 0.5160026550292969,
+          "real_minus_fake": 0.003169924020767212,
+          "fake_input_grad_norm": 0.49414581060409546
+        },
+        {
+          "step": 20007,
+          "phase": "before_D",
+          "auc": 0.5160026550292969,
+          "real_minus_fake": 0.003169924020767212,
+          "fake_input_grad_norm": 0.49414581060409546
+        },
+        {
+          "step": 20007,
+          "phase": "after_D",
+          "auc": 0.5639839172363281,
+          "real_minus_fake": 0.015015318989753723,
+          "fake_input_grad_norm": 0.5282612442970276
+        },
+        {
+          "step": 20007,
+          "phase": "after_G_prior",
+          "auc": 0.45468902587890625,
+          "real_minus_fake": -0.009017318487167358,
+          "fake_input_grad_norm": 0.5027705430984497
+        },
+        {
+          "step": 20008,
+          "phase": "before_D",
+          "auc": 0.45468902587890625,
+          "real_minus_fake": -0.009017318487167358,
+          "fake_input_grad_norm": 0.5027705430984497
+        },
+        {
+          "step": 20008,
+          "phase": "after_D",
+          "auc": 0.5368843078613281,
+          "real_minus_fake": 0.007955819368362427,
+          "fake_input_grad_norm": 0.5376287698745728
+        },
+        {
+          "step": 20008,
+          "phase": "after_G_prior",
+          "auc": 0.44605255126953125,
+          "real_minus_fake": -0.007448762655258179,
+          "fake_input_grad_norm": 0.5748499035835266
+        }
+      ],
+      "heldout_panel_samples": 512,
+      "note": "Live weights, production precision. Same held-out real images and same prior ID/noise draws at each phase. Probe preserves weights, flags and global RNG. Trace has no comparable FID or training-speed measurement."
+    }
+  },
+  {
+    "name": "weaker",
+    "phase_means": {
+      "before_D": {
+        "auc": 0.5353851318359375,
+        "real_minus_fake": 0.008438856108114123,
+        "fake_input_grad_norm": 0.6946167275309563
+      },
+      "after_D": {
+        "auc": 0.576228141784668,
+        "real_minus_fake": 0.017085978761315346,
+        "fake_input_grad_norm": 0.6885579898953438
+      },
+      "after_G_prior": {
+        "auc": 0.5253496170043945,
+        "real_minus_fake": 0.007157329702749848,
+        "fake_input_grad_norm": 0.6903674975037575
+      }
+    },
+    "mean_D_auc_change": 0.04084300994873047,
+    "mean_G_prior_auc_change": -0.05087852478027344,
+    "D_increases": 8,
+    "G_prior_decreases": 8,
+    "trace": {
+      "parent": "runs/cifar_particle_ae/discriminator_joint/weaker/checkpoint_020000.pt",
+      "parent_sha256": "06c4444d53a94b712fedb4126f6414db41b62b1aa4e7503c4ff7ee25648d12e2",
+      "script_sha256": "29870994ca573c93b45c24432d8dc148f88b95c75e115dff3c97510b1e191cbc",
+      "trainer_sha256": "56a400ab1dc0d42bf2fd25e0fc75ec0dc80223aef496db2595eb8a8f611f39a4",
+      "rows": [
+        {
+          "step": 20001,
+          "phase": "before_D",
+          "auc": 0.5780143737792969,
+          "real_minus_fake": 0.012843329459428787,
+          "fake_input_grad_norm": 0.6434413194656372
+        },
+        {
+          "step": 20001,
+          "phase": "after_D",
+          "auc": 0.6169624328613281,
+          "real_minus_fake": 0.025741800665855408,
+          "fake_input_grad_norm": 0.7160646319389343
+        },
+        {
+          "step": 20001,
+          "phase": "after_G_prior",
+          "auc": 0.554595947265625,
+          "real_minus_fake": 0.01251617819070816,
+          "fake_input_grad_norm": 0.7409837245941162
+        },
+        {
+          "step": 20002,
+          "phase": "before_D",
+          "auc": 0.554595947265625,
+          "real_minus_fake": 0.01251617819070816,
+          "fake_input_grad_norm": 0.7409837245941162
+        },
+        {
+          "step": 20002,
+          "phase": "after_D",
+          "auc": 0.570098876953125,
+          "real_minus_fake": 0.01663137972354889,
+          "fake_input_grad_norm": 0.7248510122299194
+        },
+        {
+          "step": 20002,
+          "phase": "after_G_prior",
+          "auc": 0.5227317810058594,
+          "real_minus_fake": 0.0062033385038375854,
+          "fake_input_grad_norm": 0.7310895323753357
+        },
+        {
+          "step": 20003,
+          "phase": "before_D",
+          "auc": 0.5227317810058594,
+          "real_minus_fake": 0.0062033385038375854,
+          "fake_input_grad_norm": 0.7310895323753357
+        },
+        {
+          "step": 20003,
+          "phase": "after_D",
+          "auc": 0.54345703125,
+          "real_minus_fake": 0.012009404599666595,
+          "fake_input_grad_norm": 0.7217978239059448
+        },
+        {
+          "step": 20003,
+          "phase": "after_G_prior",
+          "auc": 0.4847412109375,
+          "real_minus_fake": -0.0016200020909309387,
+          "fake_input_grad_norm": 0.6798785328865051
+        },
+        {
+          "step": 20004,
+          "phase": "before_D",
+          "auc": 0.4847412109375,
+          "real_minus_fake": -0.0016200020909309387,
+          "fake_input_grad_norm": 0.6798785328865051
+        },
+        {
+          "step": 20004,
+          "phase": "after_D",
+          "auc": 0.5606880187988281,
+          "real_minus_fake": 0.012218009680509567,
+          "fake_input_grad_norm": 0.6581732630729675
+        },
+        {
+          "step": 20004,
+          "phase": "after_G_prior",
+          "auc": 0.5386428833007812,
+          "real_minus_fake": 0.009027253836393356,
+          "fake_input_grad_norm": 0.6715850830078125
+        },
+        {
+          "step": 20005,
+          "phase": "before_D",
+          "auc": 0.5386428833007812,
+          "real_minus_fake": 0.009027253836393356,
+          "fake_input_grad_norm": 0.6715850830078125
+        },
+        {
+          "step": 20005,
+          "phase": "after_D",
+          "auc": 0.5518531799316406,
+          "real_minus_fake": 0.014883862808346748,
+          "fake_input_grad_norm": 0.725257933139801
+        },
+        {
+          "step": 20005,
+          "phase": "after_G_prior",
+          "auc": 0.5282211303710938,
+          "real_minus_fake": 0.009472455829381943,
+          "fake_input_grad_norm": 0.723970890045166
+        },
+        {
+          "step": 20006,
+          "phase": "before_D",
+          "auc": 0.5282211303710938,
+          "real_minus_fake": 0.009472455829381943,
+          "fake_input_grad_norm": 0.723970890045166
+        },
+        {
+          "step": 20006,
+          "phase": "after_D",
+          "auc": 0.5994911193847656,
+          "real_minus_fake": 0.02172277681529522,
+          "fake_input_grad_norm": 0.686963677406311
+        },
+        {
+          "step": 20006,
+          "phase": "after_G_prior",
+          "auc": 0.5255355834960938,
+          "real_minus_fake": 0.00753135047852993,
+          "fake_input_grad_norm": 0.6752647757530212
+        },
+        {
+          "step": 20007,
+          "phase": "before_D",
+          "auc": 0.5255355834960938,
+          "real_minus_fake": 0.00753135047852993,
+          "fake_input_grad_norm": 0.6752647757530212
+        },
+        {
+          "step": 20007,
+          "phase": "after_D",
+          "auc": 0.6046142578125,
+          "real_minus_fake": 0.020151492208242416,
+          "fake_input_grad_norm": 0.680467963218689
+        },
+        {
+          "step": 20007,
+          "phase": "after_G_prior",
+          "auc": 0.55059814453125,
+          "real_minus_fake": 0.011536944657564163,
+          "fake_input_grad_norm": 0.6907199621200562
+        },
+        {
+          "step": 20008,
+          "phase": "before_D",
+          "auc": 0.55059814453125,
+          "real_minus_fake": 0.011536944657564163,
+          "fake_input_grad_norm": 0.6907199621200562
+        },
+        {
+          "step": 20008,
+          "phase": "after_D",
+          "auc": 0.5626602172851562,
+          "real_minus_fake": 0.013329103589057922,
+          "fake_input_grad_norm": 0.5948876142501831
+        },
+        {
+          "step": 20008,
+          "phase": "after_G_prior",
+          "auc": 0.4977302551269531,
+          "real_minus_fake": 0.0025911182165145874,
+          "fake_input_grad_norm": 0.6094474792480469
+        }
+      ],
+      "heldout_panel_samples": 512,
+      "note": "Live weights, production precision. Same held-out real images and same prior ID/noise draws at each phase. Probe preserves weights, flags and global RNG. Trace has no comparable FID or training-speed measurement."
+    }
+  }
+]

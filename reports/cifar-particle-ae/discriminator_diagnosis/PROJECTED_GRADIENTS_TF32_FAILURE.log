@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/martyn/dev/ParticleGAN/experiments/probe_cifar_ae_discriminator_projection.py", line 66, in <module>
+    r=probe(path,a.batches);result.append(r);print(path,r['mean'],flush=True)
+      ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/martyn/dev/ParticleGAN/experiments/probe_cifar_ae_discriminator_projection.py", line 48, in probe
+    assert error<1e-4, float(error)
+           ^^^^^^^^^^
+AssertionError: 0.0003674767795018852

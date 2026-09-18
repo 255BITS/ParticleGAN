@@ -1,0 +1,17 @@
+{
+  "control": {
+    "path": "runs/cifar_particle_ae/discriminator_joint/control/checkpoint_020000.pt",
+    "sha256": "8435351847257fed8c73fb7dfa6f0b587e06fc22e5221d89f7fc6edf8b00503b",
+    "fid50k": 20.011880346343673
+  },
+  "weaker": {
+    "path": "runs/cifar_particle_ae/discriminator_joint/weaker/checkpoint_020000.pt",
+    "sha256": "06c4444d53a94b712fedb4126f6414db41b62b1aa4e7503c4ff7ee25648d12e2",
+    "fid50k": 19.784798882961184
+  },
+  "warmstart": {
+    "path": "runs/cifar_particle_ae/discriminator_joint/warmstart/checkpoint_020000.pt",
+    "sha256": "b83fd0b016059c94e447cfaf2b6135afced99e76496839f656b6eea91186bff9",
+    "fid50k": 25.25976201251524
+  }
+}

@@ -1,0 +1,5 @@
+checkpoint: runs/cifar_particle_ae/discriminator_joint_smoke/control/checkpoint.pt
+checkpoint_sha256: 7e2f56ec650cc886eef10e44e1ffc26657db6cd2a8742397b3f6eccdbf6f51b5
+out_dir: runs/cifar_particle_ae/discriminator_joint_probes_early/control_8
+samples: 2048
+steps: 0

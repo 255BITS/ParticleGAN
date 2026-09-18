@@ -1,0 +1,5 @@
+checkpoint: runs/cifar_particle_ae/discriminator_joint/control/checkpoint_020000.pt
+checkpoint_sha256: 8435351847257fed8c73fb7dfa6f0b587e06fc22e5221d89f7fc6edf8b00503b
+out_dir: runs/cifar_particle_ae/discriminator_joint_probes_early/control_20k
+samples: 2048
+steps: 0

@@ -25,8 +25,9 @@ def analyze(track):
         rows.append({'name': run.name, **summary,
                      'curve': [json.loads(line) for line in (run / 'metrics.jsonl').read_text().splitlines()]})
     matched = [r for r in rows if r['config']['steps']]
-    assert len({r['initial_D_sha256'] for r in matched}) == 1
-    assert len({r['config']['checkpoint_sha256'] for r in matched}) == 1
+    if matched:
+        assert len({r['initial_D_sha256'] for r in matched}) == 1
+        assert len({r['config']['checkpoint_sha256'] for r in matched}) == 1
     report = ROOT / f'reports/cifar-particle-ae/{track}'
     report.mkdir(parents=True, exist_ok=True)
     (report / 'results.json').write_text(json.dumps(rows, indent=2) + '\n')
@@ -37,7 +38,7 @@ def analyze(track):
         for point in [r['baseline'], r['final']] if r['config']['steps'] else [r['final']]:
             t=point['test']; b=t['branches']['total']
             lines.append(f"| {r['name']} | {point['step']} | {b['auc']:.4f} | {point['train']['branches']['total']['auc']:.4f} | {b['fake_grad_mean']:.4f} | {t['adv_G_norm']:.4f} | {t['pixel_features_cosine']:.4f} | {t['total_over_sum_branch_grad_norm']:.4f} | {point['train_seconds']:.1f} |")
-    lines += ['', 'Frozen G/E/prior/features, original checkpoints and D optimizer step counts verified. Fixed diagnostic draws are independent of training; CIFAR test split is never trained on. All D-only arms start with identical D state and the same parent training RNG. Production CUDA allows small floating-point differences. No seed replicates.', '',
+    lines += ['', 'Frozen G/E/prior/features, original checkpoints and D optimizer step counts verified. Fixed diagnostic draws are independent of training; CIFAR test split is never trained on. Within the matched D-only experiment, all arms start with identical D state and the same parent training RNG. Production CUDA allows small floating-point differences. No seed replicates.', '',
               'AUC/gradient changes require a joint FID continuation to establish value. D-only warmup does not change the frozen generator FID. Detailed branch scores, cap activation and all evaluation points are in results.json.']
     (report / 'LEADERBOARD.md').write_text('\n'.join(lines)+'\n')
     print('\n'.join(lines))

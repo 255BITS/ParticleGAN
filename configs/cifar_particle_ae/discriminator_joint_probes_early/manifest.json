@@ -1,0 +1,6 @@
+[
+  "configs/cifar_particle_ae/discriminator_joint_probes_early/control_8.yaml",
+  "configs/cifar_particle_ae/discriminator_joint_probes_early/warmstart_8.yaml",
+  "configs/cifar_particle_ae/discriminator_joint_probes_early/control_20k.yaml",
+  "configs/cifar_particle_ae/discriminator_joint_probes_early/weaker_20k.yaml"
+]

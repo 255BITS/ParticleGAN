@@ -1,0 +1,5 @@
+checkpoint: runs/cifar_particle_ae/discriminator_joint/weaker/checkpoint_020000.pt
+checkpoint_sha256: 06c4444d53a94b712fedb4126f6414db41b62b1aa4e7503c4ff7ee25648d12e2
+out_dir: runs/cifar_particle_ae/discriminator_joint_probes_early/weaker_20k
+samples: 2048
+steps: 0

@@ -1,0 +1,319 @@
+{
+  "phase_means": {
+    "before_D": {
+      "auc": 0.4565742015838623,
+      "real_minus_fake": -0.006156857591122389,
+      "fake_input_grad_norm": 0.5023743584752083
+    },
+    "after_D": {
+      "auc": 0.5523767471313477,
+      "real_minus_fake": 0.010303471819497645,
+      "fake_input_grad_norm": 0.511256642639637
+    },
+    "after_G_prior": {
+      "auc": 0.4612855911254883,
+      "real_minus_fake": -0.005327676888555288,
+      "fake_input_grad_norm": 0.5123154520988464
+    },
+    "prior_only_counterfactual": {
+      "auc": 0.5519304275512695,
+      "real_minus_fake": 0.010227932245470583,
+      "fake_input_grad_norm": 0.5113168098032475
+    },
+    "G_only_counterfactual": {
+      "auc": 0.46162843704223633,
+      "real_minus_fake": -0.005269152112305164,
+      "fake_input_grad_norm": 0.5123277641832829
+    }
+  },
+  "trace": {
+    "parent": "runs/cifar_particle_ae/discriminator_joint/control/checkpoint_020000.pt",
+    "parent_sha256": "8435351847257fed8c73fb7dfa6f0b587e06fc22e5221d89f7fc6edf8b00503b",
+    "script_sha256": "e2f431afbf08fde2904a0dd0f3e2997fc91e40750a8662ddbdf895b27b9af44e",
+    "trainer_sha256": "56a400ab1dc0d42bf2fd25e0fc75ec0dc80223aef496db2595eb8a8f611f39a4",
+    "rows": [
+      {
+        "step": 20001,
+        "phase": "before_D",
+        "auc": 0.4107685089111328,
+        "real_minus_fake": -0.013323739171028137,
+        "fake_input_grad_norm": 0.46385878324508667
+      },
+      {
+        "step": 20001,
+        "phase": "after_D",
+        "auc": 0.5868377685546875,
+        "real_minus_fake": 0.01443396508693695,
+        "fake_input_grad_norm": 0.4714311957359314
+      },
+      {
+        "step": 20001,
+        "phase": "after_G_prior",
+        "auc": 0.4426078796386719,
+        "real_minus_fake": -0.005788430571556091,
+        "fake_input_grad_norm": 0.5049344897270203
+      },
+      {
+        "step": 20001,
+        "phase": "prior_only_counterfactual",
+        "auc": 0.5861015319824219,
+        "real_minus_fake": 0.014339536428451538,
+        "fake_input_grad_norm": 0.47168684005737305
+      },
+      {
+        "step": 20001,
+        "phase": "G_only_counterfactual",
+        "auc": 0.44297027587890625,
+        "real_minus_fake": -0.005723342299461365,
+        "fake_input_grad_norm": 0.5045776963233948
+      },
+      {
+        "step": 20002,
+        "phase": "before_D",
+        "auc": 0.4426078796386719,
+        "real_minus_fake": -0.005788430571556091,
+        "fake_input_grad_norm": 0.5049344897270203
+      },
+      {
+        "step": 20002,
+        "phase": "after_D",
+        "auc": 0.5423698425292969,
+        "real_minus_fake": 0.007646530866622925,
+        "fake_input_grad_norm": 0.4624645709991455
+      },
+      {
+        "step": 20002,
+        "phase": "after_G_prior",
+        "auc": 0.4602165222167969,
+        "real_minus_fake": -0.002967141568660736,
+        "fake_input_grad_norm": 0.46840035915374756
+      },
+      {
+        "step": 20002,
+        "phase": "prior_only_counterfactual",
+        "auc": 0.5418510437011719,
+        "real_minus_fake": 0.007570058107376099,
+        "fake_input_grad_norm": 0.46259403228759766
+      },
+      {
+        "step": 20002,
+        "phase": "G_only_counterfactual",
+        "auc": 0.46065521240234375,
+        "real_minus_fake": -0.0028999745845794678,
+        "fake_input_grad_norm": 0.46854543685913086
+      },
+      {
+        "step": 20003,
+        "phase": "before_D",
+        "auc": 0.4602165222167969,
+        "real_minus_fake": -0.002967141568660736,
+        "fake_input_grad_norm": 0.46840035915374756
+      },
+      {
+        "step": 20003,
+        "phase": "after_D",
+        "auc": 0.5620613098144531,
+        "real_minus_fake": 0.013557001017034054,
+        "fake_input_grad_norm": 0.5374128818511963
+      },
+      {
+        "step": 20003,
+        "phase": "after_G_prior",
+        "auc": 0.4635047912597656,
+        "real_minus_fake": -0.004085112363100052,
+        "fake_input_grad_norm": 0.5150474309921265
+      },
+      {
+        "step": 20003,
+        "phase": "prior_only_counterfactual",
+        "auc": 0.5615921020507812,
+        "real_minus_fake": 0.013470836915075779,
+        "fake_input_grad_norm": 0.5372037291526794
+      },
+      {
+        "step": 20003,
+        "phase": "G_only_counterfactual",
+        "auc": 0.4638710021972656,
+        "real_minus_fake": -0.004017282277345657,
+        "fake_input_grad_norm": 0.515209436416626
+      },
+      {
+        "step": 20004,
+        "phase": "before_D",
+        "auc": 0.4635047912597656,
+        "real_minus_fake": -0.004085112363100052,
+        "fake_input_grad_norm": 0.5150474309921265
+      },
+      {
+        "step": 20004,
+        "phase": "after_D",
+        "auc": 0.5237579345703125,
+        "real_minus_fake": 0.005630450323224068,
+        "fake_input_grad_norm": 0.4858217239379883
+      },
+      {
+        "step": 20004,
+        "phase": "after_G_prior",
+        "auc": 0.46791839599609375,
+        "real_minus_fake": -0.0030536390841007233,
+        "fake_input_grad_norm": 0.4854028820991516
+      },
+      {
+        "step": 20004,
+        "phase": "prior_only_counterfactual",
+        "auc": 0.5235023498535156,
+        "real_minus_fake": 0.005584079772233963,
+        "fake_input_grad_norm": 0.4860753118991852
+      },
+      {
+        "step": 20004,
+        "phase": "G_only_counterfactual",
+        "auc": 0.4681968688964844,
+        "real_minus_fake": -0.0030137859284877777,
+        "fake_input_grad_norm": 0.485412061214447
+      },
+      {
+        "step": 20005,
+        "phase": "before_D",
+        "auc": 0.46791839599609375,
+        "real_minus_fake": -0.0030536390841007233,
+        "fake_input_grad_norm": 0.4854028820991516
+      },
+      {
+        "step": 20005,
+        "phase": "after_D",
+        "auc": 0.5002365112304688,
+        "real_minus_fake": 0.002680886536836624,
+        "fake_input_grad_norm": 0.6004394292831421
+      },
+      {
+        "step": 20005,
+        "phase": "after_G_prior",
+        "auc": 0.4396324157714844,
+        "real_minus_fake": -0.013562630861997604,
+        "fake_input_grad_norm": 0.5953120589256287
+      },
+      {
+        "step": 20005,
+        "phase": "prior_only_counterfactual",
+        "auc": 0.4999885559082031,
+        "real_minus_fake": 0.002593018114566803,
+        "fake_input_grad_norm": 0.6006708741188049
+      },
+      {
+        "step": 20005,
+        "phase": "G_only_counterfactual",
+        "auc": 0.43978118896484375,
+        "real_minus_fake": -0.013490773737430573,
+        "fake_input_grad_norm": 0.5955432057380676
+      },
+      {
+        "step": 20006,
+        "phase": "before_D",
+        "auc": 0.4396324157714844,
+        "real_minus_fake": -0.013562630861997604,
+        "fake_input_grad_norm": 0.5953120589256287
+      },
+      {
+        "step": 20006,
+        "phase": "after_D",
+        "auc": 0.6028823852539062,
+        "real_minus_fake": 0.015306025743484497,
+        "fake_input_grad_norm": 0.5035765171051025
+      },
+      {
+        "step": 20006,
+        "phase": "after_G_prior",
+        "auc": 0.5155181884765625,
+        "real_minus_fake": 0.0031495988368988037,
+        "fake_input_grad_norm": 0.49127405881881714
+      },
+      {
+        "step": 20006,
+        "phase": "prior_only_counterfactual",
+        "auc": 0.6024398803710938,
+        "real_minus_fake": 0.015261277556419373,
+        "fake_input_grad_norm": 0.5035800933837891
+      },
+      {
+        "step": 20006,
+        "phase": "G_only_counterfactual",
+        "auc": 0.5157623291015625,
+        "real_minus_fake": 0.003175586462020874,
+        "fake_input_grad_norm": 0.4911109209060669
+      },
+      {
+        "step": 20007,
+        "phase": "before_D",
+        "auc": 0.5155181884765625,
+        "real_minus_fake": 0.0031495988368988037,
+        "fake_input_grad_norm": 0.49127405881881714
+      },
+      {
+        "step": 20007,
+        "phase": "after_D",
+        "auc": 0.5624427795410156,
+        "real_minus_fake": 0.015104502439498901,
+        "fake_input_grad_norm": 0.5227921009063721
+      },
+      {
+        "step": 20007,
+        "phase": "after_G_prior",
+        "auc": 0.4524269104003906,
+        "real_minus_fake": -0.00962376594543457,
+        "fake_input_grad_norm": 0.4947648048400879
+      },
+      {
+        "step": 20007,
+        "phase": "prior_only_counterfactual",
+        "auc": 0.562042236328125,
+        "real_minus_fake": 0.015011996030807495,
+        "fake_input_grad_norm": 0.5226301550865173
+      },
+      {
+        "step": 20007,
+        "phase": "G_only_counterfactual",
+        "auc": 0.45288848876953125,
+        "real_minus_fake": -0.009553611278533936,
+        "fake_input_grad_norm": 0.49480101466178894
+      },
+      {
+        "step": 20008,
+        "phase": "before_D",
+        "auc": 0.4524269104003906,
+        "real_minus_fake": -0.00962376594543457,
+        "fake_input_grad_norm": 0.4947648048400879
+      },
+      {
+        "step": 20008,
+        "phase": "after_D",
+        "auc": 0.5384254455566406,
+        "real_minus_fake": 0.00806841254234314,
+        "fake_input_grad_norm": 0.5061147212982178
+      },
+      {
+        "step": 20008,
+        "phase": "after_G_prior",
+        "auc": 0.4484596252441406,
+        "real_minus_fake": -0.006690293550491333,
+        "fake_input_grad_norm": 0.5433875322341919
+      },
+      {
+        "step": 20008,
+        "phase": "prior_only_counterfactual",
+        "auc": 0.5379257202148438,
+        "real_minus_fake": 0.007992655038833618,
+        "fake_input_grad_norm": 0.506093442440033
+      },
+      {
+        "step": 20008,
+        "phase": "G_only_counterfactual",
+        "auc": 0.4489021301269531,
+        "real_minus_fake": -0.006630033254623413,
+        "fake_input_grad_norm": 0.5434223413467407
+      }
+    ],
+    "heldout_panel_samples": 512,
+    "note": "G-only/prior-only counterfactuals use actual joint Adam updates computed at the same pre-update state, then temporarily roll back the other component. All states restored before next update. Live weights, production precision. Same held-out real images and same prior ID/noise draws at each phase. Probe preserves weights, flags and global RNG. Trace has no comparable FID or training-speed measurement."
+  }
+}
