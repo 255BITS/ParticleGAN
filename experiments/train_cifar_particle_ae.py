@@ -34,7 +34,7 @@ DEFAULTS = {
     'data_dir': '/home/martyn/dev/ParticleGAN/data',
     'fid_cache': '/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache',
     'out_dir': 'runs/cifar_particle_ae/default',
-    'encoder_backbone': 'scratch', 'keep_checkpoints': False,
+    'encoder_backbone': 'scratch', 'keep_checkpoints': False, 'reg_every': 4,
 }
 
 
@@ -62,7 +62,7 @@ def validate(cfg):
     if set(cfg) != set(DEFAULTS) or cfg['arm'] not in ('gan', 'bounded'):
         raise ValueError('unknown configuration or arm')
     for key in ('steps', 'batch_size', 'z_dim', 'num_particles', 'width', 'log_interval',
-                'eval_interval', 'recon_samples', 'eval_batch_size'):
+                'eval_interval', 'recon_samples', 'eval_batch_size', 'reg_every'):
         if type(cfg[key]) is not int or cfg[key] <= 0:
             raise ValueError(f'{key} must be a positive integer')
     if cfg['width'] % 8 or cfg['z_dim'] < 2 or cfg['num_particles'] < 2 or cfg['recon_samples'] > 10000:
@@ -207,7 +207,7 @@ def train(cfg):
         {'params': prior.parameters(), 'lr': cfg['prior_lr'], 'betas': (.5, .999)},
     ], betas=(0., .999), fused=True)
     od = torch.optim.Adam([p for p in d.parameters() if p.requires_grad], lr=cfg['d_lr'], betas=(0., .999), fused=True)
-    adversarial, penalty, spread = GANLoss(), GradientPenalty(lazy_k=4), ParticleRegularizer()
+    adversarial, penalty, spread = GANLoss(), GradientPenalty(lazy_k=cfg['reg_every']), ParticleRegularizer()
     streams = {name: rng(cfg['seed'] + offset) for name, offset in [('data', 2), ('prior', 3)]}
     metadata = {'initialization_sha256': initial_hash, 'sigma': float(prior.sigma),
                 'initial_nearest_neighbor_median': float(prior.d0), 'torch': torch.__version__,
@@ -220,8 +220,11 @@ def train(cfg):
                            'pretrained': getattr(e, 'pretrained_metadata', None),
                            'initial_feature_sha256': initial_encoder_features,
                            'trainable_parameters': sum(p.numel() for p in e.parameters() if p.requires_grad)}
+    metadata['regularizer'] = {'arm': penalty.arm, 'method': penalty.method,
+                              'coeff': penalty.coeff, 'kappa': penalty.kappa,
+                              'every': penalty.lazy_k, 'applied_coeff': penalty.coeff * penalty.lazy_k}
     write_json(out / 'metadata.json', metadata)
-    print(f"START arm={cfg['arm']} encoder={cfg['encoder_backbone']} steps={cfg['steps']} sigma={float(prior.sigma):.6f} init={initial_hash}", flush=True)
+    print(f"START arm={cfg['arm']} encoder={cfg['encoder_backbone']} reg_every={cfg['reg_every']} steps={cfg['steps']} sigma={float(prior.sigma):.6f} init={initial_hash}", flush=True)
 
     def batch():
         ids = torch.randint(len(images), (cfg['batch_size'],), device='cuda', generator=streams['data'])
@@ -278,9 +281,15 @@ def train(cfg):
                     assert torch.equal(prior.sigma, initial_sigma)
                     n = cfg['final_samples'] if step == cfg['steps'] else cfg['eval_samples']
                     print(f'EVAL step={step} generated_samples={n}', flush=True)
+                    eval_started = time.perf_counter()
                     row['generation'] = generation(eg, ep, evaluator, cfg, n, out, step)
+                    torch.cuda.synchronize()
+                    row['generation_seconds'] = time.perf_counter() - eval_started
+                    recon_started = time.perf_counter()
                     row['reconstruction'] = (reconstruction(eg, ee, ep, test_images, cfg, out, step)
                                              if cfg['arm'] == 'bounded' else None)
+                    torch.cuda.synchronize()
+                    row['reconstruction_seconds'] = time.perf_counter() - recon_started
                     print(json.dumps({'evaluation': row}, allow_nan=False), flush=True)
                     torch.save({'config': cfg, 'sources': provenance['sources'], 'step': step,
                                 'G': g.state_dict(), 'D': d.state_dict(), 'E': e.state_dict(),

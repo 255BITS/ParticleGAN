@@ -40,7 +40,8 @@ def test_explicit_generators_leave_global_rng_untouched():
     assert not list(gaussian.parameters())
 
 
-def test_bcap_value_derivative_and_callable_match():
+@pytest.mark.parametrize('every', [4, 8, 16])
+def test_bcap_value_derivative_and_callable_match(every):
     discriminator = nn.Linear(2, 1, bias=False).double()
     with torch.no_grad():
         discriminator.weight.copy_(torch.tensor([[3., 4.]]))
@@ -54,9 +55,16 @@ def test_bcap_value_derivative_and_callable_match():
     penalty.backward()
     torch.testing.assert_close(discriminator.weight.grad, torch.tensor([[4.8, 6.4]], dtype=torch.float64))
     assert fake.grad is None
-    lazy = GradientPenalty(lazy_k=2)
-    assert lazy(discriminator, real, fake, step=1).item() == 0
-    torch.testing.assert_close(lazy(discriminator, real, fake, step=2), 2 * penalty)
+    lazy = GradientPenalty(lazy_k=every)
+    for step in range(1, every):
+        skipped = lazy(discriminator, real, fake, step=step)
+        assert skipped.item() == 0 and not skipped.requires_grad
+    discriminator.zero_grad()
+    applied = lazy(discriminator, real, fake, step=every)
+    torch.testing.assert_close(applied, every * penalty)
+    applied.backward()
+    torch.testing.assert_close(discriminator.weight.grad,
+                               every * torch.tensor([[4.8, 6.4]], dtype=torch.float64))
 
 
 @pytest.mark.parametrize("rows", [0, 1])

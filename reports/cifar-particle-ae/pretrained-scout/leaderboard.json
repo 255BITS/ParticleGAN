@@ -1,0 +1,713 @@
+{
+  "complete": true,
+  "missing": [],
+  "rows": [
+    {
+      "name": "01_scratch_control",
+      "config": {
+        "arm": "bounded",
+        "seed": 24002,
+        "steps": 5000,
+        "batch_size": 64,
+        "z_dim": 64,
+        "num_particles": 1024,
+        "width": 32,
+        "sigma_rel": 0.025,
+        "temperature": 0.125,
+        "recon_weight": 1.0,
+        "lr": 0.0003,
+        "prior_lr": 0.003,
+        "d_lr": 0.00045,
+        "ema": 0.995,
+        "log_interval": 100,
+        "eval_interval": 2500,
+        "eval_samples": 5000,
+        "final_samples": 5000,
+        "recon_samples": 1000,
+        "eval_batch_size": 128,
+        "max_train_seconds": 1800.0,
+        "data_dir": "/home/martyn/dev/ParticleGAN/data",
+        "fid_cache": "/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache",
+        "out_dir": "runs/cifar_particle_ae/pretrained_scout/01_scratch_control",
+        "encoder_backbone": "scratch",
+        "keep_checkpoints": true
+      },
+      "final": {
+        "step": 5000,
+        "samples": 5000,
+        "fid": 26.523335487680356,
+        "feature_variance_ratio": 1.0736228558480216,
+        "reconstruction": {
+          "recon_mse": 0.08674300462007523,
+          "zero_offset_mse": 0.2643101215362549,
+          "random_offset_mse": 0.2652340531349182,
+          "shuffled_particle_mse": 0.14051179587841034,
+          "recon_psnr": 16.63825530082903,
+          "recon_p90": 0.1384919285774231,
+          "recon_p99": 0.2143816351890564,
+          "used_particles": 338,
+          "effective_particles": 236.54983520507812,
+          "hard_usage_tv": 0.669921875,
+          "hard_soft_usage_tv": 0.3718916177749634,
+          "offset_rms": 2.4686434268951416,
+          "offset_saturation": 0.37521877884864807,
+          "samples": 1000,
+          "conditional_offset_mean_rms": 2.0086820125579834
+        }
+      },
+      "train_seconds": 256.9178474780929,
+      "total_seconds": 292.21431845001644,
+      "peak_memory_gb": 5.32025671005249,
+      "prior_rms_movement": 0.3249957859516144,
+      "rng_sha256": {
+        "data": "b7813f4bb8607dbf2712b38c8ec85a5828a3422a4bbb93ca93474068d166e895",
+        "prior": "34fbaa6c75159529582ec1141a0c9255c0a315677709bfaf66ed47d4dc4588ea"
+      },
+      "metadata": {
+        "initialization_sha256": "76e3fe984275380a6a29f9e8c424665c35d5bcfae870a0c5c9bcf7dc18bee722",
+        "sigma": 0.212616428732872,
+        "initial_nearest_neighbor_median": 8.504656791687012,
+        "torch": "2.14.0+cu130",
+        "cuda": "13.0",
+        "python": "3.12.13",
+        "gpu": "NVIDIA RTX A6000",
+        "pretrained": {
+          "weights": "ResNet18_Weights.IMAGENET1K_V1",
+          "feature_state_sha256": "5de287ab28d569dfc53a5bca4a646d4416621da29e71e80859e6117c7f90b0ac",
+          "input_size": 64,
+          "stages": [
+            "layer1",
+            "layer2",
+            "layer3"
+          ]
+        },
+        "parameters": {
+          "G": 645123,
+          "D": 3583204,
+          "E": 428320,
+          "prior": 65536
+        },
+        "fid_protocol": {
+          "dataset": "CIFAR-10",
+          "split": "train",
+          "real_samples": 50000,
+          "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+          "weights": "weights-inception-2015-12-05-6726825d.pth",
+          "precision": "float32 extractor (TF32 disabled), float64 statistics",
+          "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor"
+        },
+        "reconstruction_split": "CIFAR-10 test, unaugmented",
+        "evaluation_weights": "EMA G/E/prior; final checkpoint, no best selection",
+        "encoder": {
+          "backbone": "scratch",
+          "pretrained": null,
+          "initial_feature_sha256": "58c5b8e2871915e70b539ab387faa58d9f29ca212828a576c51f96086073cfab",
+          "trainable_parameters": 428320
+        }
+      },
+      "frozen_features_unchanged": true,
+      "sigma_unchanged": true,
+      "frozen_encoder_features_unchanged": null,
+      "evaluations": [
+        {
+          "step": 2500,
+          "d_loss": 0.70734703540802,
+          "g_loss": 0.7812808752059937,
+          "recon_train_mse": 0.09172384440898895,
+          "penalty": 6.143719656392932e-05,
+          "train_seconds": 129.16785301204072,
+          "steps_per_second": 19.354660944677587,
+          "peak_memory_gb": 1.6446466445922852,
+          "generation": {
+            "samples": 5000,
+            "fid": 32.2219485687998,
+            "feature_variance_ratio": 1.0877463695096967
+          },
+          "reconstruction": {
+            "recon_mse": 0.09230285882949829,
+            "zero_offset_mse": 0.24802938103675842,
+            "random_offset_mse": 0.25150996446609497,
+            "shuffled_particle_mse": 0.13963082432746887,
+            "recon_psnr": 16.36844839005751,
+            "recon_p90": 0.14721696078777313,
+            "recon_p99": 0.22502055764198303,
+            "used_particles": 225,
+            "effective_particles": 137.73402404785156,
+            "hard_usage_tv": 0.7802734375,
+            "hard_soft_usage_tv": 0.3569676876068115,
+            "offset_rms": 2.412835121154785,
+            "offset_saturation": 0.32417190074920654,
+            "samples": 1000,
+            "conditional_offset_mean_rms": 1.9250465631484985
+          }
+        },
+        {
+          "step": 5000,
+          "d_loss": 0.7250192761421204,
+          "g_loss": 0.7159907817840576,
+          "recon_train_mse": 0.08770801872015,
+          "penalty": 0.0,
+          "train_seconds": 256.9178474780929,
+          "steps_per_second": 19.46147396562765,
+          "peak_memory_gb": 5.32025671005249,
+          "generation": {
+            "samples": 5000,
+            "fid": 26.523335487680356,
+            "feature_variance_ratio": 1.0736228558480216
+          },
+          "reconstruction": {
+            "recon_mse": 0.08674300462007523,
+            "zero_offset_mse": 0.2643101215362549,
+            "random_offset_mse": 0.2652340531349182,
+            "shuffled_particle_mse": 0.14051179587841034,
+            "recon_psnr": 16.63825530082903,
+            "recon_p90": 0.1384919285774231,
+            "recon_p99": 0.2143816351890564,
+            "used_particles": 338,
+            "effective_particles": 236.54983520507812,
+            "hard_usage_tv": 0.669921875,
+            "hard_soft_usage_tv": 0.3718916177749634,
+            "offset_rms": 2.4686434268951416,
+            "offset_saturation": 0.37521877884864807,
+            "samples": 1000,
+            "conditional_offset_mean_rms": 2.0086820125579834
+          }
+        }
+      ]
+    },
+    {
+      "name": "03_pretrained_recon03",
+      "config": {
+        "arm": "bounded",
+        "seed": 24002,
+        "steps": 5000,
+        "batch_size": 64,
+        "z_dim": 64,
+        "num_particles": 1024,
+        "width": 32,
+        "sigma_rel": 0.025,
+        "temperature": 0.125,
+        "recon_weight": 0.3,
+        "lr": 0.0003,
+        "prior_lr": 0.003,
+        "d_lr": 0.00045,
+        "ema": 0.995,
+        "log_interval": 100,
+        "eval_interval": 2500,
+        "eval_samples": 5000,
+        "final_samples": 5000,
+        "recon_samples": 1000,
+        "eval_batch_size": 128,
+        "max_train_seconds": 1800.0,
+        "data_dir": "/home/martyn/dev/ParticleGAN/data",
+        "fid_cache": "/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache",
+        "out_dir": "runs/cifar_particle_ae/pretrained_scout/03_pretrained_recon03",
+        "encoder_backbone": "pretrained_resnet18",
+        "keep_checkpoints": true
+      },
+      "final": {
+        "step": 5000,
+        "samples": 5000,
+        "fid": 28.134163098891975,
+        "feature_variance_ratio": 1.0797504100677882,
+        "reconstruction": {
+          "recon_mse": 0.1123487800359726,
+          "zero_offset_mse": 0.3308866620063782,
+          "random_offset_mse": 0.34392935037612915,
+          "shuffled_particle_mse": 0.15969032049179077,
+          "recon_psnr": 15.514916304297067,
+          "recon_p90": 0.18146197497844696,
+          "recon_p99": 0.27248409390449524,
+          "used_particles": 147,
+          "effective_particles": 61.2717170715332,
+          "hard_usage_tv": 0.8564453125,
+          "hard_soft_usage_tv": 0.3782466650009155,
+          "offset_rms": 1.9628643989562988,
+          "offset_saturation": 0.0885312557220459,
+          "samples": 1000,
+          "conditional_offset_mean_rms": 1.7153934240341187
+        }
+      },
+      "train_seconds": 259.1207014680549,
+      "total_seconds": 295.4285064279975,
+      "peak_memory_gb": 5.342824935913086,
+      "prior_rms_movement": 0.29802197217941284,
+      "rng_sha256": {
+        "data": "b7813f4bb8607dbf2712b38c8ec85a5828a3422a4bbb93ca93474068d166e895",
+        "prior": "34fbaa6c75159529582ec1141a0c9255c0a315677709bfaf66ed47d4dc4588ea"
+      },
+      "metadata": {
+        "initialization_sha256": "2289f7c3832f3def50cf04fd3d87e9f8ba3c1faa8b14e9e46c612572d2a08e32",
+        "sigma": 0.212616428732872,
+        "initial_nearest_neighbor_median": 8.504656791687012,
+        "torch": "2.14.0+cu130",
+        "cuda": "13.0",
+        "python": "3.12.13",
+        "gpu": "NVIDIA RTX A6000",
+        "pretrained": {
+          "weights": "ResNet18_Weights.IMAGENET1K_V1",
+          "feature_state_sha256": "5de287ab28d569dfc53a5bca4a646d4416621da29e71e80859e6117c7f90b0ac",
+          "input_size": 64,
+          "stages": [
+            "layer1",
+            "layer2",
+            "layer3"
+          ]
+        },
+        "parameters": {
+          "G": 645123,
+          "D": 3583204,
+          "E": 3307200,
+          "prior": 65536
+        },
+        "fid_protocol": {
+          "dataset": "CIFAR-10",
+          "split": "train",
+          "real_samples": 50000,
+          "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+          "weights": "weights-inception-2015-12-05-6726825d.pth",
+          "precision": "float32 extractor (TF32 disabled), float64 statistics",
+          "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor"
+        },
+        "reconstruction_split": "CIFAR-10 test, unaugmented",
+        "evaluation_weights": "EMA G/E/prior; final checkpoint, no best selection",
+        "encoder": {
+          "backbone": "pretrained_resnet18",
+          "pretrained": {
+            "weights": "ResNet18_Weights.IMAGENET1K_V1",
+            "input_size": 64,
+            "output": "layer3 spatial 256x4x4",
+            "frozen": true
+          },
+          "initial_feature_sha256": "35c3375bc7a242f2d2f1bc5e6b534ae3224cad1b90f891ae9b26c6e7be61b08a",
+          "trainable_parameters": 524416
+        }
+      },
+      "frozen_features_unchanged": true,
+      "sigma_unchanged": true,
+      "frozen_encoder_features_unchanged": true,
+      "evaluations": [
+        {
+          "step": 2500,
+          "d_loss": 0.6760630011558533,
+          "g_loss": 0.7576188445091248,
+          "recon_train_mse": 0.1210300549864769,
+          "penalty": 0.0067215426824986935,
+          "train_seconds": 130.98254925207584,
+          "steps_per_second": 19.086512014579526,
+          "peak_memory_gb": 1.6668486595153809,
+          "generation": {
+            "samples": 5000,
+            "fid": 36.09714420153148,
+            "feature_variance_ratio": 1.07636280474454
+          },
+          "reconstruction": {
+            "recon_mse": 0.10954954475164413,
+            "zero_offset_mse": 0.45360541343688965,
+            "random_offset_mse": 0.4538258910179138,
+            "shuffled_particle_mse": 0.12144938111305237,
+            "recon_psnr": 15.624494141985561,
+            "recon_p90": 0.17606422305107117,
+            "recon_p99": 0.27166199684143066,
+            "used_particles": 19,
+            "effective_particles": 6.742035865783691,
+            "hard_usage_tv": 0.9814453125,
+            "hard_soft_usage_tv": 0.3464600741863251,
+            "offset_rms": 1.8142306804656982,
+            "offset_saturation": 0.04332812875509262,
+            "samples": 1000,
+            "conditional_offset_mean_rms": 1.5084387063980103
+          }
+        },
+        {
+          "step": 5000,
+          "d_loss": 0.6864584684371948,
+          "g_loss": 0.7009780406951904,
+          "recon_train_mse": 0.12247245013713837,
+          "penalty": 0.0,
+          "train_seconds": 259.1207014680549,
+          "steps_per_second": 19.296026800145157,
+          "peak_memory_gb": 5.342824935913086,
+          "generation": {
+            "samples": 5000,
+            "fid": 28.134163098891975,
+            "feature_variance_ratio": 1.0797504100677882
+          },
+          "reconstruction": {
+            "recon_mse": 0.1123487800359726,
+            "zero_offset_mse": 0.3308866620063782,
+            "random_offset_mse": 0.34392935037612915,
+            "shuffled_particle_mse": 0.15969032049179077,
+            "recon_psnr": 15.514916304297067,
+            "recon_p90": 0.18146197497844696,
+            "recon_p99": 0.27248409390449524,
+            "used_particles": 147,
+            "effective_particles": 61.2717170715332,
+            "hard_usage_tv": 0.8564453125,
+            "hard_soft_usage_tv": 0.3782466650009155,
+            "offset_rms": 1.9628643989562988,
+            "offset_saturation": 0.0885312557220459,
+            "samples": 1000,
+            "conditional_offset_mean_rms": 1.7153934240341187
+          }
+        }
+      ]
+    },
+    {
+      "name": "02_pretrained",
+      "config": {
+        "arm": "bounded",
+        "seed": 24002,
+        "steps": 5000,
+        "batch_size": 64,
+        "z_dim": 64,
+        "num_particles": 1024,
+        "width": 32,
+        "sigma_rel": 0.025,
+        "temperature": 0.125,
+        "recon_weight": 1.0,
+        "lr": 0.0003,
+        "prior_lr": 0.003,
+        "d_lr": 0.00045,
+        "ema": 0.995,
+        "log_interval": 100,
+        "eval_interval": 2500,
+        "eval_samples": 5000,
+        "final_samples": 5000,
+        "recon_samples": 1000,
+        "eval_batch_size": 128,
+        "max_train_seconds": 1800.0,
+        "data_dir": "/home/martyn/dev/ParticleGAN/data",
+        "fid_cache": "/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache",
+        "out_dir": "runs/cifar_particle_ae/pretrained_scout/02_pretrained",
+        "encoder_backbone": "pretrained_resnet18",
+        "keep_checkpoints": true
+      },
+      "final": {
+        "step": 5000,
+        "samples": 5000,
+        "fid": 28.324864551913265,
+        "feature_variance_ratio": 1.0915011923515987,
+        "reconstruction": {
+          "recon_mse": 0.10082638263702393,
+          "zero_offset_mse": 0.27037352323532104,
+          "random_offset_mse": 0.2998736500740051,
+          "shuffled_particle_mse": 0.1435333490371704,
+          "recon_psnr": 15.984858051063988,
+          "recon_p90": 0.15834225714206696,
+          "recon_p99": 0.25305917859077454,
+          "used_particles": 100,
+          "effective_particles": 45.93043518066406,
+          "hard_usage_tv": 0.90234375,
+          "hard_soft_usage_tv": 0.35588324069976807,
+          "offset_rms": 1.5753206014633179,
+          "offset_saturation": 0.0037343751173466444,
+          "samples": 1000,
+          "conditional_offset_mean_rms": 1.268778920173645
+        }
+      },
+      "train_seconds": 266.3379958301084,
+      "total_seconds": 302.7335176960041,
+      "peak_memory_gb": 5.342824935913086,
+      "prior_rms_movement": 0.31603530049324036,
+      "rng_sha256": {
+        "data": "b7813f4bb8607dbf2712b38c8ec85a5828a3422a4bbb93ca93474068d166e895",
+        "prior": "34fbaa6c75159529582ec1141a0c9255c0a315677709bfaf66ed47d4dc4588ea"
+      },
+      "metadata": {
+        "initialization_sha256": "2289f7c3832f3def50cf04fd3d87e9f8ba3c1faa8b14e9e46c612572d2a08e32",
+        "sigma": 0.212616428732872,
+        "initial_nearest_neighbor_median": 8.504656791687012,
+        "torch": "2.14.0+cu130",
+        "cuda": "13.0",
+        "python": "3.12.13",
+        "gpu": "NVIDIA RTX A6000",
+        "pretrained": {
+          "weights": "ResNet18_Weights.IMAGENET1K_V1",
+          "feature_state_sha256": "5de287ab28d569dfc53a5bca4a646d4416621da29e71e80859e6117c7f90b0ac",
+          "input_size": 64,
+          "stages": [
+            "layer1",
+            "layer2",
+            "layer3"
+          ]
+        },
+        "parameters": {
+          "G": 645123,
+          "D": 3583204,
+          "E": 3307200,
+          "prior": 65536
+        },
+        "fid_protocol": {
+          "dataset": "CIFAR-10",
+          "split": "train",
+          "real_samples": 50000,
+          "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+          "weights": "weights-inception-2015-12-05-6726825d.pth",
+          "precision": "float32 extractor (TF32 disabled), float64 statistics",
+          "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor"
+        },
+        "reconstruction_split": "CIFAR-10 test, unaugmented",
+        "evaluation_weights": "EMA G/E/prior; final checkpoint, no best selection",
+        "encoder": {
+          "backbone": "pretrained_resnet18",
+          "pretrained": {
+            "weights": "ResNet18_Weights.IMAGENET1K_V1",
+            "input_size": 64,
+            "output": "layer3 spatial 256x4x4",
+            "frozen": true
+          },
+          "initial_feature_sha256": "35c3375bc7a242f2d2f1bc5e6b534ae3224cad1b90f891ae9b26c6e7be61b08a",
+          "trainable_parameters": 524416
+        }
+      },
+      "frozen_features_unchanged": true,
+      "sigma_unchanged": true,
+      "frozen_encoder_features_unchanged": true,
+      "evaluations": [
+        {
+          "step": 2500,
+          "d_loss": 0.6893399357795715,
+          "g_loss": 0.7855193614959717,
+          "recon_train_mse": 0.10172028839588165,
+          "penalty": 0.001825762097723782,
+          "train_seconds": 133.3864541380608,
+          "steps_per_second": 18.74253286178813,
+          "peak_memory_gb": 1.6668486595153809,
+          "generation": {
+            "samples": 5000,
+            "fid": 33.21144063604413,
+            "feature_variance_ratio": 1.0825979628849094
+          },
+          "reconstruction": {
+            "recon_mse": 0.09490953385829926,
+            "zero_offset_mse": 0.2995205521583557,
+            "random_offset_mse": 0.32159918546676636,
+            "shuffled_particle_mse": 0.09927475452423096,
+            "recon_psnr": 16.247501509335184,
+            "recon_p90": 0.15425394475460052,
+            "recon_p99": 0.22737763822078705,
+            "used_particles": 7,
+            "effective_particles": 4.321784496307373,
+            "hard_usage_tv": 0.9931640625,
+            "hard_soft_usage_tv": 0.3561280369758606,
+            "offset_rms": 1.2941349744796753,
+            "offset_saturation": 0.00042187501094304025,
+            "samples": 1000,
+            "conditional_offset_mean_rms": 0.7952070832252502
+          }
+        },
+        {
+          "step": 5000,
+          "d_loss": 0.6904007196426392,
+          "g_loss": 0.7428634166717529,
+          "recon_train_mse": 0.1096954345703125,
+          "penalty": 0.0014112942153587937,
+          "train_seconds": 266.3379958301084,
+          "steps_per_second": 18.77313818637202,
+          "peak_memory_gb": 5.342824935913086,
+          "generation": {
+            "samples": 5000,
+            "fid": 28.324864551913265,
+            "feature_variance_ratio": 1.0915011923515987
+          },
+          "reconstruction": {
+            "recon_mse": 0.10082638263702393,
+            "zero_offset_mse": 0.27037352323532104,
+            "random_offset_mse": 0.2998736500740051,
+            "shuffled_particle_mse": 0.1435333490371704,
+            "recon_psnr": 15.984858051063988,
+            "recon_p90": 0.15834225714206696,
+            "recon_p99": 0.25305917859077454,
+            "used_particles": 100,
+            "effective_particles": 45.93043518066406,
+            "hard_usage_tv": 0.90234375,
+            "hard_soft_usage_tv": 0.35588324069976807,
+            "offset_rms": 1.5753206014633179,
+            "offset_saturation": 0.0037343751173466444,
+            "samples": 1000,
+            "conditional_offset_mean_rms": 1.268778920173645
+          }
+        }
+      ]
+    },
+    {
+      "name": "04_pretrained_half_lr",
+      "config": {
+        "arm": "bounded",
+        "seed": 24002,
+        "steps": 5000,
+        "batch_size": 64,
+        "z_dim": 64,
+        "num_particles": 1024,
+        "width": 32,
+        "sigma_rel": 0.025,
+        "temperature": 0.125,
+        "recon_weight": 1.0,
+        "lr": 0.00015,
+        "prior_lr": 0.0015,
+        "d_lr": 0.000225,
+        "ema": 0.995,
+        "log_interval": 100,
+        "eval_interval": 2500,
+        "eval_samples": 5000,
+        "final_samples": 5000,
+        "recon_samples": 1000,
+        "eval_batch_size": 128,
+        "max_train_seconds": 1800.0,
+        "data_dir": "/home/martyn/dev/ParticleGAN/data",
+        "fid_cache": "/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache",
+        "out_dir": "runs/cifar_particle_ae/pretrained_scout/04_pretrained_half_lr",
+        "encoder_backbone": "pretrained_resnet18",
+        "keep_checkpoints": true
+      },
+      "final": {
+        "step": 5000,
+        "samples": 5000,
+        "fid": 31.785332174969312,
+        "feature_variance_ratio": 1.0867723995154237,
+        "reconstruction": {
+          "recon_mse": 0.12134097516536713,
+          "zero_offset_mse": 0.23113200068473816,
+          "random_offset_mse": 0.23439903557300568,
+          "shuffled_particle_mse": 0.1930098980665207,
+          "recon_psnr": 15.180525104674514,
+          "recon_p90": 0.1965589076280594,
+          "recon_p99": 0.2997952401638031,
+          "used_particles": 261,
+          "effective_particles": 180.67091369628906,
+          "hard_usage_tv": 0.7451172471046448,
+          "hard_soft_usage_tv": 0.36776888370513916,
+          "offset_rms": 2.1004974842071533,
+          "offset_saturation": 0.14528125524520874,
+          "samples": 1000,
+          "conditional_offset_mean_rms": 1.9399772882461548
+        }
+      },
+      "train_seconds": 269.07761912894784,
+      "total_seconds": 305.36006583299604,
+      "peak_memory_gb": 5.342824935913086,
+      "prior_rms_movement": 0.23608526587486267,
+      "rng_sha256": {
+        "data": "b7813f4bb8607dbf2712b38c8ec85a5828a3422a4bbb93ca93474068d166e895",
+        "prior": "34fbaa6c75159529582ec1141a0c9255c0a315677709bfaf66ed47d4dc4588ea"
+      },
+      "metadata": {
+        "initialization_sha256": "2289f7c3832f3def50cf04fd3d87e9f8ba3c1faa8b14e9e46c612572d2a08e32",
+        "sigma": 0.212616428732872,
+        "initial_nearest_neighbor_median": 8.504656791687012,
+        "torch": "2.14.0+cu130",
+        "cuda": "13.0",
+        "python": "3.12.13",
+        "gpu": "NVIDIA RTX A6000",
+        "pretrained": {
+          "weights": "ResNet18_Weights.IMAGENET1K_V1",
+          "feature_state_sha256": "5de287ab28d569dfc53a5bca4a646d4416621da29e71e80859e6117c7f90b0ac",
+          "input_size": 64,
+          "stages": [
+            "layer1",
+            "layer2",
+            "layer3"
+          ]
+        },
+        "parameters": {
+          "G": 645123,
+          "D": 3583204,
+          "E": 3307200,
+          "prior": 65536
+        },
+        "fid_protocol": {
+          "dataset": "CIFAR-10",
+          "split": "train",
+          "real_samples": 50000,
+          "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+          "weights": "weights-inception-2015-12-05-6726825d.pth",
+          "precision": "float32 extractor (TF32 disabled), float64 statistics",
+          "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor"
+        },
+        "reconstruction_split": "CIFAR-10 test, unaugmented",
+        "evaluation_weights": "EMA G/E/prior; final checkpoint, no best selection",
+        "encoder": {
+          "backbone": "pretrained_resnet18",
+          "pretrained": {
+            "weights": "ResNet18_Weights.IMAGENET1K_V1",
+            "input_size": 64,
+            "output": "layer3 spatial 256x4x4",
+            "frozen": true
+          },
+          "initial_feature_sha256": "35c3375bc7a242f2d2f1bc5e6b534ae3224cad1b90f891ae9b26c6e7be61b08a",
+          "trainable_parameters": 524416
+        }
+      },
+      "frozen_features_unchanged": true,
+      "sigma_unchanged": true,
+      "frozen_encoder_features_unchanged": true,
+      "evaluations": [
+        {
+          "step": 2500,
+          "d_loss": 0.5899255871772766,
+          "g_loss": 0.981964111328125,
+          "recon_train_mse": 0.13201192021369934,
+          "penalty": 0.013929564505815506,
+          "train_seconds": 136.20961661401088,
+          "steps_per_second": 18.35406384766847,
+          "peak_memory_gb": 1.6668486595153809,
+          "generation": {
+            "samples": 5000,
+            "fid": 43.32786504600864,
+            "feature_variance_ratio": 1.083996916140588
+          },
+          "reconstruction": {
+            "recon_mse": 0.13442200422286987,
+            "zero_offset_mse": 0.2123042494058609,
+            "random_offset_mse": 0.21764647960662842,
+            "shuffled_particle_mse": 0.2130868136882782,
+            "recon_psnr": 14.73589624913969,
+            "recon_p90": 0.21874158084392548,
+            "recon_p99": 0.33485183119773865,
+            "used_particles": 181,
+            "effective_particles": 93.01818084716797,
+            "hard_usage_tv": 0.8232421875,
+            "hard_soft_usage_tv": 0.42892614006996155,
+            "offset_rms": 1.911460518836975,
+            "offset_saturation": 0.04610937833786011,
+            "samples": 1000,
+            "conditional_offset_mean_rms": 1.7963463068008423
+          }
+        },
+        {
+          "step": 5000,
+          "d_loss": 0.6503279209136963,
+          "g_loss": 0.8110355734825134,
+          "recon_train_mse": 0.13244132697582245,
+          "penalty": 0.01735101267695427,
+          "train_seconds": 269.07761912894784,
+          "steps_per_second": 18.581998815753945,
+          "peak_memory_gb": 5.342824935913086,
+          "generation": {
+            "samples": 5000,
+            "fid": 31.785332174969312,
+            "feature_variance_ratio": 1.0867723995154237
+          },
+          "reconstruction": {
+            "recon_mse": 0.12134097516536713,
+            "zero_offset_mse": 0.23113200068473816,
+            "random_offset_mse": 0.23439903557300568,
+            "shuffled_particle_mse": 0.1930098980665207,
+            "recon_psnr": 15.180525104674514,
+            "recon_p90": 0.1965589076280594,
+            "recon_p99": 0.2997952401638031,
+            "used_particles": 261,
+            "effective_particles": 180.67091369628906,
+            "hard_usage_tv": 0.7451172471046448,
+            "hard_soft_usage_tv": 0.36776888370513916,
+            "offset_rms": 2.1004974842071533,
+            "offset_saturation": 0.14528125524520874,
+            "samples": 1000,
+            "conditional_offset_mean_rms": 1.9399772882461548
+          }
+        }
+      ]
+    }
+  ]
+}

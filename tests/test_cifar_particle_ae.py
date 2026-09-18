@@ -95,7 +95,8 @@ def test_pretrained_encoder_freezes_backbone_but_learns_routing_and_restores_che
     assert not any(p.requires_grad for p in e.features.parameters())
 
 
-@pytest.mark.parametrize('update', [{'encoder_backbone': 'unknown'}, {'keep_checkpoints': 1}])
+@pytest.mark.parametrize('update', [{'encoder_backbone': 'unknown'}, {'keep_checkpoints': 1},
+                                  {'reg_every': 0}, {'reg_every': True}, {'reg_every': 1.5}])
 def test_reject_invalid_encoder_options(update):
     with pytest.raises(ValueError):
         validate({**DEFAULTS, **update})
