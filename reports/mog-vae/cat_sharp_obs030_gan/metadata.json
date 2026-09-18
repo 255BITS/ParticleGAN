@@ -1,0 +1,13 @@
+{
+  "initialization_sha256": "f7f319e012544b436a5bdee2ac89de408596ee8b1943c57ce0c307e2e4ffee17",
+  "sigma": 0.002356612589210272,
+  "gpu": "NVIDIA RTX A6000",
+  "torch": "2.14.0+cu130",
+  "evaluation_weights": "final online weights; no checkpoint selection",
+  "parameters": {
+    "G": 33666,
+    "D": 34561,
+    "E": 17670,
+    "prior": 800
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "inputs": 512,
+  "draws": 8,
+  "pairs_per_input": 28,
+  "model": "ddgan",
+  "arm": "gan",
+  "test_indices": "first512 CIFAR10 test images",
+  "checkpoint_sha256": "fd1dcad2b6983802383083cf7a7f1ed1ce7746e9987e8fc52fc6cc07205719b9",
+  "checkpoint_step": 10000,
+  "script_hashes": {
+    "measure_cifar_ddgan_variation.py": "320e191152c0661c9ed4dec3e3f01057057b614193e56935549e37af13febf5a",
+    "measure_cifar_particle_variation.py": "18690d4daf3ec51d3c0c3e7b3e99d6b1b74e4c3766490dae3d4db3a8dff7f6c3"
+  },
+  "fixed_context": "one forward-corrupted X_t per input/t, held fixed across every draw/condition",
+  "prediction": "clean image, before reverse transition noise",
+  "noise_seeds": [
+    54002,
+    54003,
+    54004
+  ],
+  "latent_noise": "unclipped z_X + a*sigma*epsilon; injected noise, not learned posterior",
+  "feature_metric": "cosine distance of normalized Inception pool2048 from uint8 RGB",
+  "retention": "nearest of512 deterministic reconstructions; not semantic identity accuracy",
+  "weights": "EMA G/E/prior; all frozen",
+  "sigma": 0.212616428732872
+}

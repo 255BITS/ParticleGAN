@@ -20,3 +20,5 @@ dist/
 /runs/api/
 /runs/mog_autoencoder/
 /runs/cifar_particle_ae/
+/runs/cifar_particle_ddgan/
+/runs/mog_vae/

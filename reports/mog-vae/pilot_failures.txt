@@ -1,0 +1,5 @@
+2026-09-17 19:25:50	config=configs/mog_vae/pilot/00_gan.yaml	out_dir=runs/mog_vae/pilot/00_gan	returncode=1
+2026-09-17 19:25:50	config=configs/mog_vae/pilot/01_ae_gan.yaml	out_dir=runs/mog_vae/pilot/01_ae_gan	returncode=1
+2026-09-17 19:25:54	config=configs/mog_vae/pilot/cat_sharp_obs010_no_gan.yaml	out_dir=runs/mog_vae/pilot/cat_sharp_obs010_no_gan	returncode=1
+2026-09-17 19:25:54	config=configs/mog_vae/pilot/cat_sharp_obs010_gan.yaml	out_dir=runs/mog_vae/pilot/cat_sharp_obs010_gan	returncode=1
+2026-09-17 19:25:58	config=configs/mog_vae/pilot/local_sharp_obs010_gan.yaml	out_dir=runs/mog_vae/pilot/local_sharp_obs010_gan	returncode=1

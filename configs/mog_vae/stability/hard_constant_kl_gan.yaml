@@ -1,0 +1,3 @@
+out_dir: runs/mog_vae/stability/hard_constant_kl_gan
+posterior: hard
+temperature: 0.25
