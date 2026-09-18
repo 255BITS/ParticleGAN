@@ -1,6 +1,6 @@
 # CIFAR AE-GAN: completed scaling scouts and information diagnostics
 
-Branch `feat/cifar-ae-gan-pretrained-encoder`. Latest user authorized "ok lets extend them".8192/16384 are now continuing20k→40k on GPUs0/1, followed automatically by read-only endpoint information/quality probes. Prior scout/diagnostic queues completed and certified. User prioritizes particle-count scaling, informed by previous smaller experiments, toward FID50k<13; do not divert to a Gaussian-prior comparison. See the running extension section below for active work.
+Branch `feat/cifar-ae-gan-pretrained-encoder`. Latest user: "hey it finished".8192/16384 extensions to40k and their endpoint information/quality probes all completed and certified. Both GPUs idle; nothing queued. User prioritizes particle-count scaling, informed by previous smaller experiments, toward FID50k<13; do not divert to a Gaussian-prior comparison. See the running extension section below for active work.
 
 Read `particle_information/FINDINGS.md`, `LEADERBOARD.md`, `scaling_metrics.png`; `particle_scaling_scout/FINDINGS.md`, `LEADERBOARD.md`, `CHECKPOINTS.json`; `particle_expansion_40k/FINDINGS.md`. Full prior history archived in `HANDOFF_INFORMATION_PENDING.md` (contains stale running/queued statuses; this file supersedes them). Earlier research archives: `HANDOFF_BALANCE.md`, `HANDOFF_DISCRIMINATOR.md`, `HANDOFF_TRANSGAN.md`.
 
@@ -28,9 +28,9 @@ Best observed is16.5033 at35k (3.5033 above target13); final4096 checkpoint17.23
 
 4096 from35k→40k: density0.6303→0.6148, coverage62.58%→61.39%, decodablebits1.4938→1.4854, decoderaccuracy90.63%→90.44%. FID rebound coincides with declining real-distribution proxies while sibling identity remains distinguishable. The0.0084bitdifference is not meaningful versus parentSE0.062/0.098; one40k parent has98%accuracy but−1.253bits due to overconfident validation-selected decoder and rare testmistakes. Retainnegative scores, do not tune ontest.20kscalingarms have no negative per-parent observedestimates.1024 at40k density0.4662,coverage45.14% despite featurevariance/real1.096: totalvariance alone is insufficient.
 
-## Authorized continuation, now running
+## Previous continuation plan (completed; latest results below)
 
-Continue8192 and16384 from respective20k checkpoints to40k on the twoGPUs; compare with the existing4096 duration trajectory. Difference between8k/16k at20k is too small to pick a clearwinner, and eachcenter receives fewer direct samples atlarger counts. Reuse4096 benchmark, no unnecessaryretrain. Do not automatically escalatecount or promote200k solely onbits. User subsequently authorized this continuation; both GPUs are now active.
+Continue8192 and16384 from respective20k checkpoints to40k on the twoGPUs; compare with the existing4096 duration trajectory. Difference between8k/16k at20k is too small to pick a clearwinner, and eachcenter receives fewer direct samples atlarger counts. Reuse4096 benchmark, no unnecessaryretrain. Do not automatically escalatecount or promote200k solely onbits. User subsequently authorized this continuation; it has now completed.
 
 Endpointpaths/hashes: `particle_scaling_scout/CHECKPOINTS.json`;4096/1024 duration35k/40k in `particle_expansion_40k/CHECKPOINTS.json`. Original10kparent `runs/cifar_particle_ae/transgan_scout/cnn_e_only/checkpoint_010000.pt`, SHA256 `d75fca4bc42ec09f1423ce1a671b4cbd10caefe0abccae3ac2bdb05d5d93237c`.
 
@@ -49,7 +49,7 @@ Completedlogs: `runs/cifar_particle_ae/particle_scaling_scout/PIPELINE.log` (que
 Userpreferences: no seedexperiments; efficientcommunication; tail-ablelogs; completedleaderboard/explanations/recommendations. Branchonly. Unrelateduntracked `.claude/`, `results/failures.txt`, `results/hopfield*`, `results/motion/`, `runs/`, `sparse-ucd.log` preserved. Sources remainpinned: usenewstandalonetrainers forfurtherchanges toavoidinvalidating certificates. Expansionsnum_particlesconfig remainsreference1024; expansion_factor4/8/16 determinesliverows. Only freshfactor1expansion orunchangedsamefactorresume is implemented; do not naivelyrecalibratecoincidentclones.
 
 
-## Active8192/16384 extension (latest user instruction)
+## Completed8192/16384 extension (launch details retained)
 
 PID269541, launched17:26MDT2026-09-18, `experiments/cifar_ae_scaling_extend.py`. Track `particle_scaling_40k`; GPU0split_8192,GPU1split_16384. Actual restoration step20000 and first update20001 confirmed; original source/checkpointcertificatesverified; expansion_audit.intervention=false forunchangedsamefactors. Parent hashes in `particle_scaling_scout/CHECKPOINTS.json` and launch in `particle_scaling_40k/LAUNCH.json`.
 
@@ -58,3 +58,20 @@ PID269541, launched17:26MDT2026-09-18, `experiments/cifar_ae_scaling_extend.py`.
 20kadditionalupdates to40ktotal, FID50kevery5k at25/30/35/40k, numberedfullcheckpoints. Unchangedrates/noise/EMA/oneD/E-onlyrecipe. Existing4096 durationcurve reused, no retrain. Trainer `train_cifar_ae_scaling.py` unchanged; existing7CUDApreflighttests included exactresume for8/16, so no redundanttesttraining.
 
 Pipeline automaticallycertifies/results/leaderboard/plot, then probesboth40kendpoints using existinginformationtrainer withfullbudgets. Diagnostictrack/report `particle_scaling_40k_information` includescomparisonwith cached4096 at40k andsameexactrealfeaturetensor. Estimated20–25min training+diagnostics. Followoverall `runs/cifar_particle_ae/particle_scaling_40k/launcher.log` forstagefailures; diagnosticprogresslog appearsinitsowntrackaftertraining. No furtherpromotionafter40kisqueued. OncompletioninspectFIDcurve/samplegrids and newinformation/qualitytable, thenupdatehandoff/reportto user.
+
+
+## Latest completion review:8k/16k at40k
+
+Alltraining and endpointprobes passedcertification. PipelinePID269541 exited successfully. GPUs0/1idle. No follow-upjob launched. Fullreports: `particle_scaling_40k/{LEADERBOARD.md,FINDINGS.md,results.json,CHECKPOINTS.json,curves.png}` and `particle_scaling_40k_information/{LEADERBOARD.md,FINDINGS.md,results.json}`.
+
+| Particles | FID25k | FID30k | FID35k | FID40k | Additionaltrainmin |
+|---|---:|---:|---:|---:|---:|
+|4096reused|17.8876|17.4796|16.5033|17.2350|14.66|
+|8192|17.5680|17.6849|17.7297|17.7683|14.43|
+|16384|17.3601|17.5677|17.4324|17.0982|14.77|
+
+16kbest40kendpoint, butonly0.1368betterthan4k anddoesnotbeatbestobserved16.5033at4k35k.8k stopsimprovingafter25k;16kimproveslasttwoobservations.16kendpoint4.0982above13target. Bothfinalgridsinspected,variedobjectswithshape/detailerrors,no totalcollapseclaim. Identicalrates,fulloptimizer/EMA/RNG,frozenfeatures/sigma/sourcecertchecks passed. Canonicalendpointpaths/hashes inCHECKPOINTS.json.
+
+Endpointinformation:8k1.9164/3bits,density0.5956,coverage59.15%;16k2.6886/4bits,density0.6160,coverage62.17%.4kreference1.4854/2bits,density0.6148,coverage61.39%.16kbeats8konallthreequalitycomparisonmeasures(FID,density,coverage), butitsadvantageover4k40kis small.4k35kstillhasbetterFID16.5033,density0.6303,coverage62.58%. Newdecoder parentSE0.0913/0.0971,allobservedper-parentbitspositive;shufflecontrols−0.00077/−0.00149,clones~0. SamecachedrealfeatureSHAverified. Conditionalbits rise from20k inbotharms, whilequalitydoesnotimproveproportionally.8kdensity/coveragedecline;16kcoverageimprovesbutdensitydeclines. Do notinterpretbitsasexactentropy,semanticcoverage,oraguaranteedscalinglaw.
+
+Recommendednext,NOTlaunched:16k40k→80k bounded durationtest,FID50kevery10k,endpointmetrics. Thisfollowsitsrecenttrend;8khaslittlemomentumatthissetting. Do notautomaticallyescalatecountor200k. Userlatestaskedcompletionstatus,notyetapprovedthenexttest. Preserveprevioussourcecerts;existingtrainerunchangedcanresumesamefactor16.

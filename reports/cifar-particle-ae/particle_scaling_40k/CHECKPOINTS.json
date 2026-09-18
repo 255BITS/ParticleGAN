@@ -1,0 +1,12 @@
+{
+  "split_8192": {
+    "path": "runs/cifar_particle_ae/particle_scaling_40k/split_8192/checkpoint_040000.pt",
+    "sha256": "dff535f8ec0c83ef5165d02e6036332df7e46766111aa35957287858f66d13fd",
+    "fid50k": 17.76834551802358
+  },
+  "split_16384": {
+    "path": "runs/cifar_particle_ae/particle_scaling_40k/split_16384/checkpoint_040000.pt",
+    "sha256": "507f0795cbb9d6ad10612c6f6cde1eb2a94c6c65a4f3ec25bde8f1b47efc4867",
+    "fid50k": 17.098215435106624
+  }
+}
