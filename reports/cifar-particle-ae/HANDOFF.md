@@ -1,109 +1,52 @@
-# AE-GAN investigation handoff — 2026-09-17
+# AE-GAN current handoff — plateau investigation and active 200k run
 
-All capacity/duration pipelines completed successfully. Both GPUs are idle.
-User requested compaction after completion, then investigation of AE-GAN's
-generation/reconstruction disconnect. No additional training is queued.
+The investigation requested after compaction is complete. **The selected 200k job is running on GPU 0; do not launch duplicate work or stop it.** GPU 1 is idle. Branch: `feat/cifar-ae-gan-pretrained-encoder`.
 
-## Objective and constraints
+## Active job
 
-Target CIFAR-10 FID50k below 13. Work on branch
-`feat/cifar-ae-gan-pretrained-encoder`. Use the experiment pipeline, keep logs
-easy to tail, summarize completed experiments with leaderboards and recommendations.
-No seed sweeps. Do not launch further training before investigating the current
-failure mode. User accepted investigating encoder/prior mismatch after compaction.
+- Pipeline PID: 242245. Trainer: `experiments/train_cifar_ae_plateau.py`.
+- Config: `configs/cifar_particle_ae/plateau_200k/d2.yaml`.
+- Run: `runs/cifar_particle_ae/plateau_200k/d2/`.
+- Tail: `tail -F runs/cifar_particle_ae/plateau_200k/PIPELINE.log`.
+- Restored final two-D scout checkpoint at 60k; verified running beyond 60,100 with finite losses, correct init/hash and GPU 0 utilization. Goal: global step 200,000 (140k more G updates, 280k more D updates).
+- Parent SHA256: `c31c0f703de54ef0fc6d281cbf7a92c14e8e9a3553fc2f4d5460558263d2a56a`.
+- Two D updates per G, all previous loss/optimizer/EMA settings unchanged. Reconstruction updates E/G/prior. No learning-rate decay; the quarter-rate scouts were worse. N=8 exact bcap scaled by eight, indexed by D updates.
+- FID50k and saved checkpoints every 10k, including final 200k; 10k held-out reconstruction diagnostics. Automatic report: `reports/cifar-particle-ae/plateau_200k/LEADERBOARD.md`.
+- Expected runtime roughly three hours; six-hour training cap. Final result is PENDING. Launch evidence: `reports/cifar-particle-ae/plateau/LAUNCH.json`.
 
-## Completed results
+## Completed investigation
 
-| Model | Updates | FID50k | Test reconstruction MSE |
-|---|---:|---:|---:|
-| Original width32 | 20k | 20.1046 | 0.05816 |
-| Original width32 | 30k | 19.4391 | 0.04819 |
-| Original width32, intermediate checkpoint | 50k | **18.9012** | 0.04022 |
-| Original width32, final | 100k | 20.8058 | **0.03371** |
-| Width64 | 20k | 35.4405 | 0.04964 |
-| Width64, depth2 | 20k | 25.7782 | 0.04244 |
+Main report: [plateau/FINDINGS.md](plateau/FINDINGS.md). Frozen diagnostics and image grids: [plateau/DIAGNOSIS.md](plateau/DIAGNOSIS.md).
 
-50k is the best observed checkpoint of the duration run, not its final result.
-30k→100k reduced reconstruction MSE by about 30%, but worsened final FID by 1.367.
-Continuation took 52.17 training minutes / 60.21 wall minutes. It restored model,
-EMA, optimizer and RNG state from 30k; it was not a restart. Six tests passed,
-including deterministic continuation replay; all three real configuration smokes
-passed. Source/configuration certificates passed on completion.
+All six scouts resumed the same historical 50k checkpoint for 10k G updates; all have source/config certificates. FID50k at 60k:
 
-Duration FID50k at 40/50/60/70/80/90/100k:
-19.424 / 18.901 / 19.977 / 20.355 / 20.340 / 21.720 / 20.806.
-Capacity width64 FID10k→20k: 21.020→35.440; depth2: 37.000→25.778.
-Capacity improved reconstruction but did not beat width32 at the same budget.
+| Recipe | FID50k | Test MSE |
+|---|---:|---:|
+| Two D updates | **19.0289** | .04120 |
+| Historical unchanged control | 19.9770 | .03861 |
+| Reconstruction detached from prior | 20.2151 | .05266 |
+| Reconstruction only updates E | 20.2712 | .07487 |
+| Reconstruction weight .1 | 20.5006 | .04231 |
+| All LRs ×.25 | 20.7400 | .03926 |
+| Weight .1 and LRs ×.25 | 20.8273 | .04371 |
 
-## Investigation hypothesis, not an established cause
+Best observed intermediate: two-D at 55k, FID18.7229. Final-endpoint winner selected for long continuation, not the intermediate checkpoint. Below-13 target remains unmet.
 
-Reconstruction uses `G(mu[encoder_selected_id] + sigma * bounded_offset(x))`.
-Generation uses `G(mu[uniform_id] + sigma * normal_noise)`.
-Offsets are bounded coordinatewise via `3*tanh(offset/3)`; bounding does not
-match their distribution to Gaussian noise. Training has adversarial generation,
-pixel reconstruction and particle spread losses, without an explicit aggregate
-encoder-distribution matching term.
+The user asked whether reconstruction moves particles and suggested it should not, then suggested reconstruction only on E. We confirmed the existing gradient path, implemented and tested both alternatives in standalone `experiments/train_cifar_ae_routing.py`, and ran both scouts. We explicitly explained that neither improved this continuation and selected the stronger-critic winner with existing reconstruction routing. These are changes after 50k of coadaptation; they do not settle from-scratch routing choices. No detached long run is queued.
 
-Final 100k diagnostics on 10k held-out test images:
+Evidence: live critic gradients weaken drastically at 100k; the adversarial G gradient is ~4× smaller than at 50k. Reconstruction becomes comparable and locally opposed on G. At 100k reconstruction's prior-gradient norm is 1.83× adversarial and reaches all 1024 rows via mean/std normalization, but their directions are mostly orthogonal. Stronger D training helped the matched FID endpoint; lowering reconstruction or LR did not. Thus conflict/mismatch is not proven the sole cause. Two-D at 60k gave ~2.4× the G adversarial-gradient norm of the unchanged 60k control.
 
-- Reconstruction MSE 0.03371; retaining encoded offsets but shuffling selected
-  particle centers gives 0.03870. Image information appears concentrated in offsets.
-- Encoder selects 405/1024 particles; entropy-effective count 359.9; usage TV
-  distance from uniform 0.6147. Generation samples all particles uniformly.
-- Offset RMS 1.1956 versus approximately 1 for standard Gaussian noise;
-  conditional offset-mean RMS 0.7749, saturation 1.60%.
-- Zero/random-offset reconstruction MSE 0.41183/0.41580. These destroy the
-  input-specific encoding, so high paired MSE alone does NOT prove poor sample
-  quality or explain FID.
-- Feature variance ratio 1.0837 checks only total feature variance, not feature
-  means/full covariance. GAN losses near 0.693 are not evidence of good FID.
+Frozen checkpoint original prior FIDs reproduce within 0.00003. Encoder-frequency sampling worsens FID; Gaussian fits to train offsets worsen it dramatically. Actual train-code replay has diagnostic FID148.35/136.50 at 50k/100k despite low reconstruction MSE. This demonstrates poor perceptual reconstruction quality; replay and held-out reconstruction FID are NOT unconditional benchmarks. All fit data came from the train split.
 
-Proposed next work: frozen-checkpoint diagnostics before another training sweep.
-Compare ordinary prior sampling, sampling particles by encoder frequencies, and
-sampling offsets fitted from TRAIN encodings. Separate frequency and offset
-changes to identify which matters. Avoid fitting distributions on held-out test
-images. Any FID of reconstructions/empirically replayed encodings must be labeled
-as a diagnostic, not an unconditional generation benchmark. Inspect sample grids,
-verify evaluation protocol, and distinguish distribution mismatch from insufficient
-generator/discriminator quality. Do not assume lower reconstruction weight is
-the right fix until these diagnostics inform that choice.
+Ten tests passed (plateau six, routing four), including full-state deterministic replay and gradient-recipient tests. Six real-checkpoint 16-update smokes passed. Live source/config checks and frozen-feature/sigma checks passed on all six completed scouts. No seed sweeps.
 
-## Files and reproducibility
+## Files and operational notes
 
-- Trainer: `experiments/train_cifar_ae_capacity.py`; isolated copy preserves old
-  checkpoint source hashes. Original trainer and lib files remain intact.
-- Prior: `particlegan/particle_prior.py:MoGParticlePrior`.
-- Encoder routing/G: `lib/image_particle_autoencoder.py`.
-- Configs: `configs/cifar_particle_ae/{duration_100k,capacity_scout}/`.
-- Pipeline: `experiments/cifar_ae_capacity_pipeline.sh`.
-- Reports: [duration](duration_100k/LEADERBOARD.md),
-  [capacity](capacity_scout/LEADERBOARD.md), [prior curve](lazy-long/README.md).
-- Runs: `runs/cifar_particle_ae/duration_100k/n08/` and
-  `runs/cifar_particle_ae/capacity_scout/{g64,g64_deep}/`.
-- Final100k `checkpoint.pt` SHA256:
-  `c1e29cf45f69528d09fcfd2849cbbe863ecb76fb7c71e50db53129b00f7f9478`.
-- Best observed50k `checkpoint_050000.pt` SHA256:
-  `10fe8bbc22afb29ff6838ad1ede86e142320e5d7bce43c745b97de24e23ee8d6`.
-- Parent30k: `runs/cifar_particle_ae/lazy_long/n08/checkpoint.pt`, SHA256
-  `b7e5e974be8053514cb04fcff1d9baa11e43a3e2d6c6dcf3649289b9c3a007af`.
-- Numbered checkpoints, sample/reconstruction PNGs and `metrics.jsonl` retained.
-- Historical audit script `experiments/audit_cifar_particle_ae.py` builds the
-  original G only; capacity diagnostics need the new trainer's model builder.
-
-Shared settings: seed24002, batch64, latent64, 1024 particles, D/E width32,
-scratch encoder, frozen pretrained ResNet18 discriminator features, recon_weight1,
-G/E lr0.0003, prior lr0.003, D lr0.00045, EMA0.995, sigma_rel0.025,
-temperature0.125. N=8 exact double-backprop bcap, applied coefficient multiplied
-by8. G widths32/64; depth2 adds one residual block at each output resolution.
-All new evaluations use FID50k against CIFAR train50k with TF-compatible Inception.
-
-Earlier scouts: pretrained E lost to scratch; N8 selected over N4/N16.
-GPU1 performance bundle was ~7.7% faster but worsened 5k FID (23.203 vs22.799),
-so it was not adopted. BigGAN comparison is not exact protocol parity: ours is
-unconditional with pretrained D; user target remains below13.
-
-Environment: `.venv/bin/python`, two A6000 GPUs, data and weights cached.
-Do not alter unrelated untracked `.claude/`, results/hopfield*, results/motion,
-`sparse-ucd.log` or untracked run artifacts. New diagnostic files can preserve
-existing source certificates; changing lib/trainer files invalidates live-source
-checks for historical artifacts. No need to repeat successful training tests.
+- Control pipeline: `experiments/cifar_ae_plateau_pipeline.sh`; routing pipeline: `experiments/cifar_ae_routing_pipeline.sh`.
+- Per-GPU routing coordinator: `experiments/queue_cifar_ae_routing.py`; completed. It uses the existing grid runner and central log.
+- Analyzer for both trainers: `experiments/analyze_cifar_ae_plateau.py` with optional `--trainer` for routing. Reports final ranking, best observed checkpoint and curves.
+- Diagnostics: `experiments/diagnose_cifar_ae_plateau.py`, `experiments/probe_cifar_ae_gradients.py`. Probe reconstruction gradients are hypothetical before routing; `applied_recon_g_norm` and `gradient_routing` distinguish actual recipients. In particular, do not misread hypothetical large prior gradients for detached runs as applied training gradients.
+- Reports: `reports/cifar-particle-ae/{plateau_scout,routing_scout}/LEADERBOARD.md`; aggregate JSON, gradient probes and narrative under `plateau/`.
+- Do not modify active trainer or shared lib/particlegan files: certificates hash them. Isolated files preserved all old sources.
+- Earlier history (100k baseline, capacity scouts, hashes) is archived in [HANDOFF_100k.md](HANDOFF_100k.md).
+- Unrelated `.claude/`, `results/hopfield*`, `results/motion/`, `sparse-ucd.log` and run artifacts remain untouched/untracked.

@@ -66,3 +66,5 @@ Values are snapshots across 16 batches. Potential reconstruction gradients are d
 | recon01 | 0.0296 | 0.0141 | 0.0434 | 0.426 |
 | lr025 | 0.1363 | 0.0302 | 0.6744 | 0.615 |
 | recon01_lr025 | 0.1168 | 0.0037 | 0.6424 | 0.602 |
+
+Launch verified: pipeline PID 242245, GPU 0, global step 61,300, finite losses. The 200k result remains pending. See [LAUNCH.json](LAUNCH.json).
