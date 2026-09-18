@@ -1,0 +1,21 @@
+--- route_zero/source.py
++++ route_grad100/source.py
+@@ -20,7 +20,7 @@
+ from lib.toy_metrics import sliced_w1
+ from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator, sample_100gaussians
+ 
+-ARMS = ("gan", "route_noise", "route_offset", "route_bounded", "route_zero")
++ARMS = ("gan", "route_noise", "route_offset", "route_bounded", "route_zero", "route_grad100")
+ 
+ 
+ class RoutingEncoder(nn.Module):
+@@ -51,6 +51,9 @@
+             u = torch.zeros_like(noise)
+         if arm == "route_bounded":
+             u = 3 * torch.tanh(u / 3)
++        if arm == "route_grad100":
++            # Exact identity forward; amplify only the offset branch backward.
++            u = u.detach() + 100 * (u - u.detach())
+         return center + sigma * u, ids, u
+ 
+ 

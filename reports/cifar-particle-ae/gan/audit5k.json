@@ -1,0 +1,13 @@
+{
+  "arm": "gan",
+  "step": 10000,
+  "final": {
+    "samples": 5000,
+    "fid": 85.3610748147504,
+    "feature_variance_ratio": 1.0173701273596303
+  },
+  "checkpoint_sha256": "181fba8152e77930825ffca44ef46704992d7514007a7ed314292ecec5f0d6ce",
+  "checkpoint_unchanged": true,
+  "grid_max_uint8_difference": 1.0,
+  "total_seconds": 60.197806579002645
+}

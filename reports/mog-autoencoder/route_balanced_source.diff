@@ -1,0 +1,80 @@
+--- route_grad100/source.py
++++ route_balanced/source.py
+@@ -20,7 +20,16 @@
+ from lib.toy_metrics import sliced_w1
+ from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator, sample_100gaussians
+ 
+-ARMS = ("gan", "route_noise", "route_offset", "route_bounded", "route_zero", "route_grad100")
++ARMS = ("gan", "route_noise", "route_offset", "route_bounded", "route_zero", "route_grad100", "route_balanced")
++
++
++def usage_balance(ids, soft):
++    """Hard batch frequencies forward, soft aggregate surrogate backward."""
++    k = soft.shape[1]
++    hard = torch.bincount(ids, minlength=k).to(soft.dtype) / ids.numel()
++    mean_soft = soft.mean(0)
++    frequencies = hard + (mean_soft - mean_soft.detach())
++    return k * (frequencies - 1 / k).square().sum()
+ 
+ 
+ class RoutingEncoder(nn.Module):
+@@ -37,7 +46,7 @@
+         nn.init.zeros_(self.net.net[-1].weight)
+         nn.init.zeros_(self.net.net[-1].bias)
+ 
+-    def forward(self, x, means, sigma, arm, noise, temperature=.25):
++    def forward(self, x, means, sigma, arm, noise, temperature=.25, return_routing=False):
+         scaled = x / math.sqrt(8.25 + .03**2)
+         h = self.net(scaled)
+         query = scaled + h[:, :2]
+@@ -49,12 +58,13 @@
+         u = noise if arm == "route_noise" else h[:, 2:]
+         if arm == "route_zero":
+             u = torch.zeros_like(noise)
+-        if arm == "route_bounded":
++        if arm in ("route_bounded", "route_balanced"):
+             u = 3 * torch.tanh(u / 3)
+         if arm == "route_grad100":
+             # Exact identity forward; amplify only the offset branch backward.
+             u = u.detach() + 100 * (u - u.detach())
+-        return center + sigma * u, ids, u
++        result = (center + sigma * u, ids, u)
++        return (*result, soft) if return_routing else result
+ 
+ 
+ def json_write(path, value):
+@@ -150,7 +160,7 @@
+         lines.append("| " + " | ".join(map(str, values)) + " |")
+     lines += ["", "Width is the existing per-mode core-radius metric divided by a fresh real-data reference; near 1 is desirable. Inspect it alongside HQ and balance, not rank alone.",
+               "Reconstruction MSE averages both coordinates. HQ means within 0.09 of a true center; coverage requires ≥10 HQ samples per mode. TV measures imbalance among HQ samples.",
+-              "One shared seed, distinct mechanisms. This is a scout, not a statistical superiority claim. Sigma is fixed; offsets and means may learn. No KL or latent distribution-matching loss is used.", ""]
++              "One shared seed, distinct mechanisms. This is a scout, not a statistical superiority claim. Sigma is fixed; offsets and means may learn. No KL is used. Only route_balanced adds an aggregate particle-usage loss; no arm matches offset distributions.", ""]
+     (out / "LEADERBOARD.md").write_text("\n".join(lines))
+     json_write(out / "leaderboard.json", rows)
+ 
+@@ -214,15 +224,23 @@
+                 real_logits = d(real)
+             gl = adversarial.g_loss(d(fake), real_logits)
+             reconstruction = gl.new_zeros(())
++            balance = gl.new_zeros(())
+             if arm != "gan":
+                 noise = torch.randn(real.shape, generator=offset_rng, device=device)
+-                encoded, _, _ = e(real, prior.means(), prior.sigma, arm, noise, cfg.temperature)
++                if arm == "route_balanced":
++                    encoded, chosen, _, soft = e(real, prior.means(), prior.sigma, arm, noise,
++                                                 cfg.temperature, return_routing=True)
++                    balance = usage_balance(chosen, soft)
++                else:
++                    encoded, _, _ = e(real, prior.means(), prior.sigma, arm, noise, cfg.temperature)
+                 reconstruction = (g(encoded) - real).square().mean()
+             loss = gl + cfg.recon_weight * reconstruction + spread(prior.z)
++            if arm == "route_balanced":
++                loss = loss + .01 * balance
+             loss.backward()
+             opt_g.step()
+             if step % cfg.log_every == 0 or step == 1:
+-                emit(f"{arm} step={step}/{cfg.steps} d={float(dl.detach()):.4f} g={float(gl.detach()):.4f} recon={float(reconstruction.detach()):.6f}")
++                emit(f"{arm} step={step}/{cfg.steps} d={float(dl.detach()):.4f} g={float(gl.detach()):.4f} recon={float(reconstruction.detach()):.6f} usage_loss={float(balance.detach()):.4f}")
+             if step % cfg.eval_every == 0 or step == cfg.steps:
+                 if device.type == "cuda":
+                     torch.cuda.synchronize(device)

@@ -1,0 +1,13 @@
+{
+  "arm": "bounded",
+  "step": 10000,
+  "final": {
+    "samples": 5000,
+    "fid": 37.91813785537204,
+    "feature_variance_ratio": 1.0828272477632588
+  },
+  "checkpoint_sha256": "c808b5abfc70a6e2b643bc48ccf0bfa6f49b16bd014edd233feaadbe23beb753",
+  "checkpoint_unchanged": true,
+  "grid_max_uint8_difference": 0.0,
+  "total_seconds": 16.082833771011792
+}

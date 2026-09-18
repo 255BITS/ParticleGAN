@@ -1,0 +1,3 @@
+kl_weight: 0.0
+out_dir: runs/mog_vae/stability/02_categorical_no_kl_gan
+posterior: categorical

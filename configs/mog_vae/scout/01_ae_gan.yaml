@@ -1,0 +1,3 @@
+out_dir: runs/mog_vae/scout/01_ae_gan
+posterior: ae
+temperature: 0.25

@@ -1,0 +1,8 @@
+model: direct
+arm: gan
+out_dir: runs/cifar_particle_ddgan/pilot/direct_gan
+steps: 200
+eval_interval: 200
+eval_samples: 0
+final_samples: 0
+recon_samples: 128

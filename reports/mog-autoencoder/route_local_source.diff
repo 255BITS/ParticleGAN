@@ -1,0 +1,71 @@
+diff --git a/experiments/train_mog_autoencoder.py b/experiments/train_mog_autoencoder.py
+index f92532c..db5f0f2 100644
+--- a/experiments/train_mog_autoencoder.py
++++ b/experiments/train_mog_autoencoder.py
+@@ -20,7 +20,22 @@ from lib.mog_metrics import component_metrics, geometry, sample_metrics
+ from lib.toy_metrics import sliced_w1
+ from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator, sample_100gaussians
+ 
+-ARMS = ("gan", "route_noise", "route_offset", "route_bounded", "route_zero", "route_grad100", "route_balanced")
++ARMS = ("gan", "route_noise", "route_offset", "route_bounded", "route_zero", "route_grad100",
++        "route_balanced", "route_local", "route_local_balanced")
++LOCAL_ARMS = ("route_local", "route_local_balanced")
++BALANCED_ARMS = ("route_balanced", "route_local_balanced")
++
++
++def routing_probabilities(distances, temperature, local=False):
++    if not local:
++        return (-distances / temperature).softmax(1)
++    # Prespecified eight-neighbor surrogate. Freeze membership and bandwidth
++    # in backward; the forward selection remains the global nearest particle.
++    values, neighbors = distances.topk(min(8, distances.shape[1]), largest=False)
++    gaps = values - values[:, :1]
++    bandwidth = gaps[:, -1:].detach().clamp_min(1e-6)
++    weights = (-gaps / bandwidth).softmax(1)
++    return torch.zeros_like(distances).scatter(1, neighbors, weights)
+ 
+ 
+ def usage_balance(ids, soft):
+@@ -52,13 +67,13 @@ class RoutingEncoder(nn.Module):
+         query = scaled + h[:, :2]
+         distances = (query[:, None] - means.detach()[None]).square().sum(-1)
+         ids = distances.argmin(1)
+-        soft = (-distances / temperature).softmax(1)
++        soft = routing_probabilities(distances, temperature, arm in LOCAL_ARMS)
+         proxy = soft @ means.detach()
+         center = means[ids] + (proxy - proxy.detach())
+         u = noise if arm == "route_noise" else h[:, 2:]
+         if arm == "route_zero":
+             u = torch.zeros_like(noise)
+-        if arm in ("route_bounded", "route_balanced"):
++        if arm in ("route_bounded", "route_balanced", *LOCAL_ARMS):
+             u = 3 * torch.tanh(u / 3)
+         if arm == "route_grad100":
+             # Exact identity forward; amplify only the offset branch backward.
+@@ -160,7 +175,7 @@ def leaderboard(out):
+         lines.append("| " + " | ".join(map(str, values)) + " |")
+     lines += ["", "Width is the existing per-mode core-radius metric divided by a fresh real-data reference; near 1 is desirable. Inspect it alongside HQ and balance, not rank alone.",
+               "Reconstruction MSE averages both coordinates. HQ means within 0.09 of a true center; coverage requires ≥10 HQ samples per mode. TV measures imbalance among HQ samples.",
+-              "One shared seed, distinct mechanisms. This is a scout, not a statistical superiority claim. Sigma is fixed; offsets and means may learn. No KL is used. Only route_balanced adds an aggregate particle-usage loss; no arm matches offset distributions.", ""]
++              "One shared seed, distinct mechanisms. This is a scout, not a statistical superiority claim. Sigma is fixed; offsets and means may learn. No KL is used. The two balanced arms add an aggregate particle-usage loss; no arm matches offset distributions.", ""]
+     (out / "LEADERBOARD.md").write_text("\n".join(lines))
+     json_write(out / "leaderboard.json", rows)
+ 
+@@ -227,7 +242,7 @@ def train(arm, cfg):
+             balance = gl.new_zeros(())
+             if arm != "gan":
+                 noise = torch.randn(real.shape, generator=offset_rng, device=device)
+-                if arm == "route_balanced":
++                if arm in BALANCED_ARMS:
+                     encoded, chosen, _, soft = e(real, prior.means(), prior.sigma, arm, noise,
+                                                  cfg.temperature, return_routing=True)
+                     balance = usage_balance(chosen, soft)
+@@ -235,7 +250,7 @@ def train(arm, cfg):
+                     encoded, _, _ = e(real, prior.means(), prior.sigma, arm, noise, cfg.temperature)
+                 reconstruction = (g(encoded) - real).square().mean()
+             loss = gl + cfg.recon_weight * reconstruction + spread(prior.z)
+-            if arm == "route_balanced":
++            if arm in BALANCED_ARMS:
+                 loss = loss + .01 * balance
+             loss.backward()
+             opt_g.step()

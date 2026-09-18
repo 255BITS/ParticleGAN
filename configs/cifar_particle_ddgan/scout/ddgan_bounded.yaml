@@ -1,0 +1,3 @@
+model: ddgan
+arm: bounded
+out_dir: runs/cifar_particle_ddgan/scout/ddgan_bounded

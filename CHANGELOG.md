@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.5.0 — 2026-09-17
+
+- Add public `particle_ae`, `particle_vae` and `ParticleEncoding`, plus
+  `get_recipe("ae_gan")`, `get_recipe("vae_gan")` and `get_recipe("ae_ddgan")`.
+  Caller-owned encoders select learned MoG particles for reconstruction.
+- Default VAE uses one selected particle with prior-matching fixed-sigma noise:
+  its joint KL is constant, so no KL penalty is needed in training.
+  Reconstruction helpers never add KL. Gaussian negative ELBO reporting and
+  the soft categorical posterior are explicit opt-ins; hard routing has a
+  biased straight-through gradient. The genuine VAE evidence is toy-only.
+- Add `recipe.encode(...)` and optional `encoder=E` to `make_optimizers` with
+  shared-parameter deduplication. Existing recipes retain their defaults;
+  networks, loops, loss composition, EMA and optimizers remain caller-owned.
+- Document AE-DDGAN one-step reconstruction, inference and numerical variation
+  audits. Matched CIFAR32 at 10k updates: FID50k 19.483 direct GAN, 20.054
+  AE-GAN, 43.233 AE-DDGAN and 49.475 DDGAN. These single-trajectory results
+  do not establish universal superiority or image VAE performance.
+- Include queued toy/image experiments, configs, portable leaderboards,
+  provenance and tests. Document narrower-than-real modes and late instability.
+
+See the [particle autoencoder guide](docs/particle-autoencoders.md) for objectives,
+examples, public contracts and evidence. No additional core dependencies.
+
 ## 0.4.0 — 2026-09-17
 
 - Add `get_recipe("ddgan_mog")`: DDGAN with class-only UCD, 400 MoG components,

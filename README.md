@@ -106,6 +106,28 @@ of large low-dimensional tables, install the optional extra with
 `python -m pip install 'particlegan[mog]'` (or `python -m pip install -e '.[mog]'`
 from this checkout).
 
+### Particle AE-GAN, VAE-GAN and AE-DDGAN (0.5.0)
+
+```python
+from particlegan import get_recipe
+
+recipe = get_recipe("vae_gan")  # also: ae_gan, ae_ddgan
+prior = recipe.make_prior()
+# query = E(x): [batch, recipe.z_dim], produced by your encoder
+# encoded = recipe.encode(query, prior)
+# x_hat = G(encoded.codes)  # [batch, draws, observed dimensions]
+# loss = encoded.reconstruction_loss(x_hat, x)
+```
+
+`vae_gan` selects one particle and adds fixed-sigma Gaussian noise. Its joint
+KL is constant, so it needs no KL regularizer in training. AE uses a deterministic
+bounded offset instead. You own the networks, loop and loss composition;
+reconstruction never silently adds KL. See the
+[guide and runnable example](https://github.com/255BITS/ParticleGAN/blob/master/docs/particle-autoencoders.md)
+for explicit ELBO reporting, optional categorical inference, AE-DDGAN integration
+and measured limits. Genuine VAE results are toy-only; AE-GAN and AE-DDGAN have
+matched CIFAR32 evidence.
+
 ### DDGAN with MoG particles (0.4.0)
 
 Select the combined recipe with one name:
@@ -496,6 +518,15 @@ toy trainers. The faster CIFAR default retains exact derivatives; FD is optional
 ## Changelog
 
 Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
+
+### 0.5.0 — 2026-09-17
+
+- Add particle AE-GAN, constant-KL VAE-GAN and AE-DDGAN recipes and public
+  encoding/reconstruction helpers with caller-owned training loops.
+- Add optional encoder optimizer integration, explicit ELBO reporting and
+  categorical inference, numerical tests and installed-wheel coverage.
+- Preserve queued toy/CIFAR studies and publish their leaderboards and limits.
+  See the [full changelog](https://github.com/255BITS/ParticleGAN/blob/master/CHANGELOG.md).
 
 ### 0.4.0 — 2026-09-17
 
