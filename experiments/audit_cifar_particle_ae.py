@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Read-only final-checkpoint FID5k audit to compare with earlier diagnostics."""
+"""Read-only checkpoint FID audit; defaults to the final checkpoint at FID5k."""
 import argparse
 import hashlib
 import json
@@ -14,19 +14,21 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from experiments.train_cifar_particle_ae import generation, rng, write_json
-from lib.cifar_metrics import FIDEvaluator
+from lib.cifar_metrics import FIDEvaluator, PROTOCOL
 from lib.image_particle_autoencoder import DirectGenerator
 from particlegan import MoGParticlePrior
 
 
-def main(run):
+def main(run, checkpoint='checkpoint.pt', samples=5000, out=None):
     from torchvision.datasets import CIFAR10
     torch.set_num_threads(4)
     torch.backends.cuda.matmul.allow_tf32 = True
     torch.backends.cudnn.allow_tf32 = True
     torch.backends.cudnn.benchmark = True
     start = time.perf_counter()
-    path = run / 'checkpoint.pt'
+    if samples < 2:
+        raise ValueError('samples must be at least two')
+    path = run / checkpoint
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
     ck = torch.load(path, map_location='cpu', weights_only=False)
     cfg = ck['config']
@@ -41,16 +43,19 @@ def main(run):
     prior.cuda().eval().requires_grad_(False)
     images = torch.from_numpy(CIFAR10(cfg['data_dir'], train=True).data).permute(0, 3, 1, 2).contiguous()
     evaluator = FIDEvaluator(images, cfg['fid_cache'], cfg['eval_batch_size'])
-    out = run / 'audit5k'
+    if out is None:
+        out = run / ('audit5k' if checkpoint == 'checkpoint.pt' and samples == 5000
+                     else f"audit{samples}_step{ck['step']:06d}")
     out.mkdir(exist_ok=False)
-    print(f"AUDIT arm={cfg['arm']} step={ck['step']} final checkpoint, FID5k, no training", flush=True)
-    final = generation(g, prior, evaluator, cfg, 5000, out, ck['step'])
+    print(f"AUDIT arm={cfg['arm']} step={ck['step']} checkpoint={path.name} samples={samples}, no training", flush=True)
+    final = generation(g, prior, evaluator, cfg, samples, out, ck['step'])
     old = np.asarray(Image.open(run / f"samples_{ck['step']:06d}.png")).astype(float)
     new = np.asarray(Image.open(out / f"samples_{ck['step']:06d}.png")).astype(float)
     # Same first 100 draws. Permit at most one quantization level for CUDA numerics.
     assert np.max(np.abs(old - new)) <= 1
     assert hashlib.sha256(path.read_bytes()).hexdigest() == digest
     result = {'arm': cfg['arm'], 'step': ck['step'], 'final': final,
+              'checkpoint': str(path), 'config': cfg, 'fid_protocol': PROTOCOL,
               'checkpoint_sha256': digest, 'checkpoint_unchanged': True,
               'grid_max_uint8_difference': float(np.max(np.abs(old - new))),
               'total_seconds': time.perf_counter() - start}
@@ -61,4 +66,8 @@ def main(run):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('run', type=Path)
-    main(parser.parse_args().run)
+    parser.add_argument('--checkpoint', default='checkpoint.pt')
+    parser.add_argument('--samples', type=int, default=5000)
+    parser.add_argument('--out', type=Path)
+    args = parser.parse_args()
+    main(args.run, args.checkpoint, args.samples, args.out)
