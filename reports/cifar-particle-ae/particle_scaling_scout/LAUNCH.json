@@ -1,0 +1,15 @@
+{
+  "pid": 267443,
+  "command": ".venv/bin/python -u experiments/queue_cifar_ae_scaling.py",
+  "log": "runs/cifar_particle_ae/particle_scaling_scout/PIPELINE.log",
+  "depends_on": "particle_expansion_40k completed and certified",
+  "stages": [
+    "CUDA tests",
+    "two eight-update smokes",
+    "8192 and 16384 scouts"
+  ],
+  "gpus": [
+    0,
+    1
+  ]
+}

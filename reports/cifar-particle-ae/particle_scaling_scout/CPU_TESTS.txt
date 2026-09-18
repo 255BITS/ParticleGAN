@@ -1,0 +1,11 @@
+CPU_MAPPING 8 {'factor': 8, 'reference_count': 1024, 'intervention': True, 'noise_recalibrated': False, 'adam_lr_compensation': False, 'prior': {'max_center_error': 4.76837158203125e-07, 'regularizer_original': 6.750106695108116e-05, 'regularizer_expanded': 6.7501088778954e-05, 'regularizer_gradient_max_error': 5.645262035613996e-11, 'sigma': 0.212616428732872, 'd0': 8.504656791687012}, 'ema_prior': {'max_center_error': 9.5367431640625e-07, 'regularizer_original': 2.8957900212844834e-05, 'regularizer_expanded': 2.895782563427929e-05, 'regularizer_gradient_max_error': 4.979483492206782e-11, 'sigma': 0.212616428732872, 'd0': 8.504656791687012}, 'prior_adam_step': 10000.0}
+.CPU_MAPPING 16 {'factor': 16, 'reference_count': 1024, 'intervention': True, 'noise_recalibrated': False, 'adam_lr_compensation': False, 'prior': {'max_center_error': 4.76837158203125e-07, 'regularizer_original': 6.750106695108116e-05, 'regularizer_expanded': 6.75010378472507e-05, 'regularizer_gradient_max_error': 6.571099220309407e-11, 'sigma': 0.212616428732872, 'd0': 8.504656791687012}, 'ema_prior': {'max_center_error': 7.152557373046875e-07, 'regularizer_original': 2.8957900212844834e-05, 'regularizer_expanded': 2.895788747991901e-05, 'regularizer_gradient_max_error': 7.453238026755571e-11, 'sigma': 0.212616428732872, 'd0': 8.504656791687012}, 'prior_adam_step': 10000.0}
+.
+=============================== warnings summary ===============================
+tests/test_cifar_ae_scaling.py::test_cpu_actual_parent_mapping[8]
+  /home/martyn/dev/ParticleGAN/experiments/train_cifar_ae_scaling.py:114: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+  Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+    error = float((module.means() - original.means().repeat_interleave(factor, 0)).abs().max())
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2 passed, 5 deselected, 1 warning in 1.79s

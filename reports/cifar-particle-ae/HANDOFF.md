@@ -1,6 +1,6 @@
 # CIFAR AE-GAN plateau: particle expansion improves FID
 
-Branch: `feat/cifar-ae-gan-pretrained-encoder`. Latest user: "lets continue to find the reason why we are plateauing". Completed the planned 1024 versus 4096 particle scout; 4096 wins at both evaluations. Both respective endpoints are now continuing to40k on the two GPUs. No jobs beyond40k are queued. Root cause remains non-unique; target FID50k<13 is still unmet.
+Branch: `feat/cifar-ae-gan-pretrained-encoder`. Latest user steering: continue scaling ParticleGAN based on prior smaller experiments; current17.48 is best observed and target is~13. No Gaussian-prior comparison requested. Completed the planned 1024 versus 4096 particle scout; 4096 wins at both evaluations. Both respective endpoints are now continuing to40k on the two GPUs. The next8192/16384 scouts are queued behind these runs; see the new scaling section below. Root cause remains non-unique; target FID50k<13 is still unmet.
 
 Read `particle_expansion_scout/FINDINGS.md`, `LEADERBOARD.md`, `CHECKPOINTS.json`. Implementation commit `4a370de`. Earlier detailed state archived in `HANDOFF_BALANCE.md`; prior D and architecture work in `HANDOFF_DISCRIMINATOR.md`, `HANDOFF_TRANSGAN.md`.
 
@@ -25,7 +25,7 @@ PID **266873**, launched with detached Popen; orchestration `experiments/cifar_a
 
 GPU0 control1024, GPU1 split4096. Full optimizer/EMA/RNG continuation from respective20k checkpoints. Steps20k→40k, FID50k25k/30k/35k/40k, numbered full checkpoints. Unchanged rates G/E.0003, prior.003, D.00045, oneD update, bcapcoeff1 every8×8, E-only reconstruction. Both confirmed training past21k, GPUs100%. Expected total~20minutes from launch around16:10MDT on2026-09-18.
 
-Config paths: `configs/cifar_particle_ae/particle_expansion_40k/`. Upon completion pipeline certifies both, audits rates/RNG pairing, and writes `reports/cifar-particle-ae/particle_expansion_40k/{results.json,LEADERBOARD.md,FINDINGS.md}`. Inspect curve and sibling grids, then update this handoff. No automatic200k promotion. Sustained4096 benefit could justify further matched training or8192; fading benefit would return priority to discriminator feedback robustness. Do not repeat same-seed experiments as a proxy for seed uncertainty.
+Config paths: `configs/cifar_particle_ae/particle_expansion_40k/`. Upon completion pipeline certifies both, audits rates/RNG pairing, and writes `reports/cifar-particle-ae/particle_expansion_40k/{results.json,LEADERBOARD.md,FINDINGS.md}`. Inspect curve and sibling grids, then update this handoff. No automatic200k promotion. Sustained4096 benefit could justify further matched training or8192; User now explicitly prioritizes further particle-count scaling; do not divert into a Gaussian-prior comparison. Do not repeat same-seed experiments as a proxy for seed uncertainty.
 
 ## Implementation/preflight
 
@@ -40,3 +40,14 @@ Three CUDA tests in `tests/test_cifar_ae_expansion.py` passed11.90s: exact origi
 `experiments/cifar_ae_expansion_pipeline.py` creates/certifies scout and smoke tracks. `experiments/cifar_ae_expansion_extend.py` requires >0.5FID gain at both scout evaluations plus endpoint beating parent before creating40k configs, then certifies/reports. Detailed validation: `particle_expansion/PREFLIGHT.md`, `TESTS.txt`, historical center movement and hypotheses there.
 
 Completed scout PID266496, exit0; logs in `runs/cifar_particle_ae/particle_expansion_scout/PIPELINE.log`. Keep all parent/checkpoint/source hashes intact. All operations remain on the feature branch; no subagents used. User preferences: no seed experiments, token efficient, tail-able logs, completed leaderboard/explanations/recommendations. Unrelated untracked `.claude/`, `results/failures.txt`, `results/hopfield*`, `results/motion/`, `runs/`, `sparse-ucd.log` preserved.
+
+
+## Next particle-count scaling queued (latest steering)
+
+Read `particle_scaling_scout/PLAN.md` and `LAUNCH.json`. Queue PID267443 waits for both40k continuations and their certification, then runs CUDA tests, two8-update smokes, and8192/16384 scouts on GPUs0/1. Log: `tail -F runs/cifar_particle_ae/particle_scaling_scout/PIPELINE.log`. Persistent stage status: `particle_scaling_scout/QUEUE_STATUS.json`.
+
+New counts start from the same original1024-center10k checkpoint used by the completed4096 scout; continue10k→20k with initial/15k/20kFID50k. Existing1024/4096 benchmarks reused, no seed repeats. No further promotion is queued. CPU actual-parent mapping tests passed2/2; CUDA tests and smokes are queued and must pass before full training.
+
+Current intermediate40k measurements:4096 FID25k17.8876,30k17.4796;1024 FID25k21.8973,30k21.0193. Best known17.4796 is4.4796 above target13. Current run still in progress; check live reports for later points before responding.
+
+Standalone `experiments/train_cifar_ae_scaling.py` preserves previous certified trainer, generalizes expansion factors to1/4/8/16 and descendant-panel dimensions. Config num_particles remains reference1024. `experiments/cifar_ae_scaling_pipeline.py` generates/certifies new count scouts and reports a combined scaling curve with old benchmarks. `experiments/queue_cifar_ae_scaling.py` handles dependency, preflight and launches; failure stops later stages. `tests/test_cifar_ae_scaling.py` adds8/16 actual-parent mapping/output and full-state resume checks. No historical/shared sources were edited.
