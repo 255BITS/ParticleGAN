@@ -1,0 +1,75 @@
+{
+  "pipeline_pid": 245618,
+  "started_utc": "2026-09-18T08:22:31.202551+00:00",
+  "command": [
+    "bash",
+    "experiments/cifar_ae_growth_pipeline.sh",
+    "growth_scout",
+    "0,1"
+  ],
+  "source_checkpoint": "runs/cifar_particle_ae/duration_100k/n08/checkpoint_050000.pt",
+  "parent_sha256": "10fe8bbc22afb29ff6838ad1ede86e142320e5d7bce43c745b97de24e23ee8d6",
+  "steps": [
+    50000,
+    70000
+  ],
+  "gpus": [
+    0,
+    1
+  ],
+  "validation": "5 CUDA tests passed, 4/4 pipeline smokes certified",
+  "log": "runs/cifar_particle_ae/growth_scout/PIPELINE.log",
+  "verified_utc": "2026-09-18T08:23:42.595907+00:00",
+  "running": {
+    "control": {
+      "step": 51400,
+      "steps_per_second": 22.127572580721868,
+      "growth_audit": {
+        "added_parameters": {
+          "G": 0,
+          "D": 0
+        },
+        "maximum_absolute_error": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 7.450580596923828e-09
+        },
+        "double_backward_finite": true,
+        "frozen_D_input_gradient_preserved": true,
+        "new_G_EMA_equal": null
+      }
+    },
+    "grow_g": {
+      "step": 51200,
+      "steps_per_second": 19.053298049395632,
+      "growth_audit": {
+        "added_parameters": {
+          "G": 446208,
+          "D": 0
+        },
+        "maximum_absolute_error": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 7.450580596923828e-09
+        },
+        "double_backward_finite": true,
+        "frozen_D_input_gradient_preserved": true,
+        "new_G_EMA_equal": true
+      }
+    }
+  },
+  "queued": [
+    "grow_d",
+    "grow_both"
+  ],
+  "gpu_utilization_at_verification": {
+    "0": 100,
+    "1": 100
+  }
+}

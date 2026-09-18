@@ -1,0 +1,167 @@
+{
+  "CUDA_tests": "5 passed",
+  "smokes": [
+    {
+      "name": "control",
+      "certified": true,
+      "parameters": {
+        "G": 645123,
+        "D": 3583204,
+        "E": 428320,
+        "prior": 65536
+      },
+      "audit": {
+        "added_parameters": {
+          "G": 0,
+          "D": 0
+        },
+        "maximum_absolute_error": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 7.450580596923828e-09
+        },
+        "double_backward_finite": true,
+        "frozen_D_input_gradient_preserved": true,
+        "new_G_EMA_equal": null
+      },
+      "Adam_step_counts": {
+        "optimizer_g": [
+          50016
+        ],
+        "optimizer_d": [
+          50016
+        ]
+      },
+      "training_rng": {
+        "data": "f29daa9389684464a6bf511bd5b35558eea698991ed3785f4683df87c89a7972",
+        "prior": "ab51a38642a5c5d718b2b4fddfdacb904a274df40f03ef7570ea11bab31c688a"
+      }
+    },
+    {
+      "name": "grow_g",
+      "certified": true,
+      "parameters": {
+        "G": 1091331,
+        "D": 3583204,
+        "E": 428320,
+        "prior": 65536
+      },
+      "audit": {
+        "added_parameters": {
+          "G": 446208,
+          "D": 0
+        },
+        "maximum_absolute_error": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 7.450580596923828e-09
+        },
+        "double_backward_finite": true,
+        "frozen_D_input_gradient_preserved": true,
+        "new_G_EMA_equal": true
+      },
+      "Adam_step_counts": {
+        "optimizer_g": [
+          16,
+          50016
+        ],
+        "optimizer_d": [
+          50016
+        ]
+      },
+      "training_rng": {
+        "data": "f29daa9389684464a6bf511bd5b35558eea698991ed3785f4683df87c89a7972",
+        "prior": "ab51a38642a5c5d718b2b4fddfdacb904a274df40f03ef7570ea11bab31c688a"
+      }
+    },
+    {
+      "name": "grow_d",
+      "certified": true,
+      "parameters": {
+        "G": 645123,
+        "D": 3805540,
+        "E": 428320,
+        "prior": 65536
+      },
+      "audit": {
+        "added_parameters": {
+          "G": 0,
+          "D": 222336
+        },
+        "maximum_absolute_error": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 7.450580596923828e-09
+        },
+        "double_backward_finite": true,
+        "frozen_D_input_gradient_preserved": true,
+        "new_G_EMA_equal": null
+      },
+      "Adam_step_counts": {
+        "optimizer_g": [
+          50016
+        ],
+        "optimizer_d": [
+          16,
+          50016
+        ]
+      },
+      "training_rng": {
+        "data": "f29daa9389684464a6bf511bd5b35558eea698991ed3785f4683df87c89a7972",
+        "prior": "ab51a38642a5c5d718b2b4fddfdacb904a274df40f03ef7570ea11bab31c688a"
+      }
+    },
+    {
+      "name": "grow_both",
+      "certified": true,
+      "parameters": {
+        "G": 1091331,
+        "D": 3805540,
+        "E": 428320,
+        "prior": 65536
+      },
+      "audit": {
+        "added_parameters": {
+          "G": 446208,
+          "D": 222336
+        },
+        "maximum_absolute_error": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 7.450580596923828e-09
+        },
+        "double_backward_finite": true,
+        "frozen_D_input_gradient_preserved": true,
+        "new_G_EMA_equal": true
+      },
+      "Adam_step_counts": {
+        "optimizer_g": [
+          16,
+          50016
+        ],
+        "optimizer_d": [
+          16,
+          50016
+        ]
+      },
+      "training_rng": {
+        "data": "f29daa9389684464a6bf511bd5b35558eea698991ed3785f4683df87c89a7972",
+        "prior": "ab51a38642a5c5d718b2b4fddfdacb904a274df40f03ef7570ea11bab31c688a"
+      }
+    }
+  ],
+  "parent_unchanged": true,
+  "shared_training_rng_at_50016": true
+}

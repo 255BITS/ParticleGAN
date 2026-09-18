@@ -1,0 +1,6 @@
+[
+  "configs/cifar_particle_ae/growth_scout/control.yaml",
+  "configs/cifar_particle_ae/growth_scout/grow_g.yaml",
+  "configs/cifar_particle_ae/growth_scout/grow_d.yaml",
+  "configs/cifar_particle_ae/growth_scout/grow_both.yaml"
+]

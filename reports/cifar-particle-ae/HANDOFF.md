@@ -1,73 +1,53 @@
-# AE-GAN current handoff — plateau investigation and active 200k run
+# AE-GAN handoff — checkpoint capacity scouts
 
-The investigation requested after compaction is complete. **The selected 200k job is running on GPU 0; do not launch duplicate work or stop it.** GPU 1 is idle. Branch: `feat/cifar-ae-gan-pretrained-encoder`.
+Branch: `feat/cifar-ae-gan-pretrained-encoder`. User target remains CIFAR-10 generation FID50k below 13. User authorized stopping the two-D continuation and running capacity scouts on both GPUs through the pipeline. They explicitly requested a subagent to implement the change; `/root/capacity_trainer` implemented the standalone trainer, primary agent integrated and tested it.
 
-## Latest user direction — 2026-09-18, before compaction
+## Current work
 
-The user likes starting from saved checkpoints and testing controlled interventions and wants to use that approach again. They judge two D updates not worth roughly one FID point. **Do not assume two D updates should be retained for the next experiment round.** They asked to prepare compaction, then they will provide ideas to discuss. Wait for those ideas before queuing new experiments; do not automatically extend the current recipe or launch another sweep. The current run was not canceled.
+Four scouts run from the **original one-D 50k checkpoint to 70k**, using one D update throughout:
 
-At this snapshot the active run is at **159,000 / 200k**, with final result still pending. Latest evaluated FID50k is **18.7748 at 150k**, test reconstruction MSE **0.037819**. Best observed is **18.3879 at 130k**. The trajectory is a slight drift within roughly 18.5–19, not a sustained approach to 13. Recheck current logs after compaction: the process may have advanced or finished.
+| Arm | G expansion | D head expansion |
+|---|---|---|
+| control | no | no |
+| grow_g | yes | no |
+| grow_d | no | yes |
+| grow_both | yes | yes |
 
-FID50k at 70/80/90/100/110/120/130/140/150k:
-19.151 / 18.893 / 19.134 / 19.142 / 18.852 / 19.260 / 18.388 / 19.033 / 18.775.
+Pipeline PID at launch: **245618**, GPUs `0,1`, one worker each. Check current logs/processes before action; do not duplicate or restart completed jobs.
 
-Checkpoint candidates (do not select until the next ideas are discussed):
+- Tail: `tail -F runs/cifar_particle_ae/growth_scout/PIPELINE.log`
+- Command: `bash experiments/cifar_ae_growth_pipeline.sh growth_scout 0,1`
+- Configs: `configs/cifar_particle_ae/growth_scout/manifest.json`
+- Trainer: `experiments/train_cifar_ae_growth.py`
+- Automatic final report: `reports/cifar-particle-ae/growth_scout/LEADERBOARD.md`
+- Plan, validation and launch records: `growth_scout/{PLAN.md,VALIDATION.json,TESTS.txt,LAUNCH.json}` under this report directory.
 
-- **original_single_d_50k**: FID50k 18.9012, `runs/cifar_particle_ae/duration_100k/n08/checkpoint_050000.pt`; SHA256 `10fe8bbc22afb29ff6838ad1ede86e142320e5d7bce43c745b97de24e23ee8d6`.
-- **best_two_d_130k**: FID50k 18.3879, `runs/cifar_particle_ae/plateau_200k/d2/checkpoint_130000.pt`; SHA256 `610f02784fb0f17e2678b09a950040413ac95e43462f7757b74f163d561b241f`.
-- **latest_evaluated_two_d_150k**: FID50k 18.7748, `runs/cifar_particle_ae/plateau_200k/d2/checkpoint_150000.pt`; SHA256 `7aa9df6be3c543373b943c209b42a51723fb7cc677e81cb977ea150a6245c37f`.
+FID50k plus held-out reconstruction10k and full checkpoints every 5k (55/60/65/70k). Rank final endpoints and report best intermediate separately. Analyzer reports FID against training time, deltas to contemporaneous control, and factorial interaction. No automatic long promotion. User dislikes paying substantial compute for approximately one FID point.
 
-The original 50k checkpoint has the one-D recipe and was the common parent of the completed scouts. The 130k/150k checkpoints inherit two-D model/Adam state; changing the D ratio is an explicit intervention, not a fresh baseline. Full model/EMA/Adam/RNG continuation and the existing source/config certificates must be preserved. No seed sweeps. Keep centralized, tail-friendly logs and publish leaderboards and interpretations.
+Parent: `runs/cifar_particle_ae/duration_100k/n08/checkpoint_050000.pt`, SHA256 `10fe8bbc22afb29ff6838ad1ede86e142320e5d7bce43c745b97de24e23ee8d6`, FID50k **18.9012**. All variants retain full old model/EMA/Adam/RNG state and shared seed. Growth initialization uses separate fixed CPU RNG streams without changing training RNG. Reconstruction still updates E/G/prior; exact bcap every8 D updates, coefficient times8. Frozen ResNet18 discriminator backbone unchanged.
 
-The comparison was ~0.95 FID improvement at matched 60k G updates (19.03 versus 19.98). Two-D throughput is ~14.6 G updates/s versus ~22 for one D, so the extra compute is material. Ten-k scouts from coadapted checkpoints do not settle from-scratch choices.
+## Architecture and validation
 
-The detailed live snapshot is [plateau/COMPACTION_SNAPSHOT.json](plateau/COMPACTION_SNAPSHOT.json). Prior launch evidence remains historical, not current status.
+G already had GroupNorm, latent affine conditioning and normalized residual sums. Its lack of normalization was not the issue. The new G adds one same-channel residual refinement after each 8/16/32 resolution block. Its final conv starts at zero, and the sum is `x + residual` without dividing by sqrt(2), so initial outputs are unchanged. G parameters increase **645123 → 1091331**.
 
-## Active job
+D adds one 64-channel residual refinement before pooling in each of its three trainable feature heads, also zero-final-conv identity initialized. Adds **222336** trainable parameters. Total D parameters (including frozen features) increase 3583204 → 3805540. This tests feature-head capacity, not a larger pretrained backbone. E and prior are unchanged.
 
-- Pipeline PID: 242245. Trainer: `experiments/train_cifar_ae_plateau.py`.
-- Config: `configs/cifar_particle_ae/plateau_200k/d2.yaml`.
-- Run: `runs/cifar_particle_ae/plateau_200k/d2/`.
-- Tail: `tail -F runs/cifar_particle_ae/plateau_200k/PIPELINE.log`.
-- Restored final two-D scout checkpoint at 60k; verified running beyond 60,100 with finite losses, correct init/hash and GPU 0 utilization. Goal: global step 200,000 (140k more G updates, 280k more D updates).
-- Parent SHA256: `c31c0f703de54ef0fc6d281cbf7a92c14e8e9a3553fc2f4d5460558263d2a56a`.
-- Two D updates per G, all previous loss/optimizer/EMA settings unchanged. Reconstruction updates E/G/prior. No learning-rate decay; the quarter-rate scouts were worse. N=8 exact bcap scaled by eight, indexed by D updates.
-- FID50k and saved checkpoints every 10k, including final 200k; 10k held-out reconstruction diagnostics. Automatic report: `reports/cifar-particle-ae/plateau_200k/LEADERBOARD.md`.
-- Expected runtime roughly three hours; six-hour training cap. Final result is PENDING. Launch evidence: `reports/cifar-particle-ae/plateau/LAUNCH.json`.
+Standalone trainer preserves old state keys. `install_growth` appends parameters to existing optimizer groups after parent restore. Grown-parent resume installs its architecture before strict restoration; removing growth is rejected. EMA new G branches copy live initialization and stay frozen. Audit verifies G/EMA/D outputs and input gradients, finite D double backward, frozen backbone, and identity initialization. Audit locally disables TF32 and selects deterministic cuDNN, restoring backend settings and D context cache afterward. Production training settings are unchanged.
 
-## Completed investigation
+**Five CUDA tests passed**, covering all four real-parent growth states, old tensor/Adam/RNG preservation, fresh new-parameter Adam state, new-layer learning, idempotence, and deterministic8vs4+4 expanded-model full-state replay. Four16-update real50k pipeline smokes certified. Old Adam steps correctly reach50016; new parameter steps16; all four finish with identical training RNG states. Parent hash unchanged. Audit outputs matched exactly, D input derivatives differed at most about7.5e-9 in smokes.
 
-Main report: [plateau/FINDINGS.md](plateau/FINDINGS.md). Frozen diagnostics and image grids: [plateau/DIAGNOSIS.md](plateau/DIAGNOSIS.md).
+Do not change the active trainer or `lib/`, `particlegan/`, `experiments/run_grid.py`, or `experiments/config.py` while runs depend on their source certificates. Historical and active checkpoints archive source files. New work should preserve these certificates, normally through isolated trainers.
 
-All six scouts resumed the same historical 50k checkpoint for 10k G updates; all have source/config certificates. FID50k at 60k:
+## Stopped two-D result
 
-| Recipe | FID50k | Test MSE |
-|---|---:|---:|
-| Two D updates | **19.0289** | .04120 |
-| Historical unchanged control | 19.9770 | .03861 |
-| Reconstruction detached from prior | 20.2151 | .05266 |
-| Reconstruction only updates E | 20.2712 | .07487 |
-| Reconstruction weight .1 | 20.5006 | .04231 |
-| All LRs ×.25 | 20.7400 | .03926 |
-| Weight .1 and LRs ×.25 | 20.8273 | .04371 |
+User explicitly stopped the previous 200k job. Last logged update **172100**; latest and best completed evaluation **FID18.3010 at170k**. It did not complete200k. All saved checkpoints retained, including `runs/cifar_particle_ae/plateau_200k/d2/checkpoint_170000.pt`. Curve and stop record: `plateau_200k/{LEADERBOARD.md,STOPPED.json}`. No two-D process remains active.
 
-Best intermediate in the completed short scouts: two-D at 55k, FID18.7229 (superseded by the active long run’s 130k result above). Final-endpoint winner selected for long continuation, not the intermediate checkpoint. Below-13 target remains unmet.
+The trajectory improved modestly within18–19 but did not approach13. Two D updates gave roughly0.95FID atmatched60k while reducing throughput from~22 to~14.6Gupdates/s. User judged that cost unattractive and wanted checkpoint-based architectural interventions.
 
-The user asked whether reconstruction moves particles and suggested it should not, then suggested reconstruction only on E. We confirmed the existing gradient path, implemented and tested both alternatives in standalone `experiments/train_cifar_ae_routing.py`, and ran both scouts. We explicitly explained that neither improved this continuation and selected the stronger-critic winner with existing reconstruction routing. These are changes after 50k of coadaptation; they do not settle from-scratch routing choices. No detached long run is queued.
+## Prior evidence and preferences
 
-Evidence: live critic gradients weaken drastically at 100k; the adversarial G gradient is ~4× smaller than at 50k. Reconstruction becomes comparable and locally opposed on G. At 100k reconstruction's prior-gradient norm is 1.83× adversarial and reaches all 1024 rows via mean/std normalization, but their directions are mostly orthogonal. Stronger D training helped the matched FID endpoint; lowering reconstruction or LR did not. Thus conflict/mismatch is not proven the sole cause. Two-D at 60k gave ~2.4× the G adversarial-gradient norm of the unchanged 60k control.
+Prior six50k→60k scouts: d2 19.0289, unchanged historical19.9770, no-reconstruction-to-prior20.2151, reconstruction-only-E20.2712, reconstructionweight.1 20.5006, LR×.25 20.7400, combined20.8273. Lowering reconstruction or detaching it did not improve short continuations. Critic gradients weakened with training, but objective conflict is not proven as sole cause. Earlier fresh larger-G20k runs lost to small G; this round asks whether growth of a trained G behaves differently.
 
-Frozen checkpoint original prior FIDs reproduce within 0.00003. Encoder-frequency sampling worsens FID; Gaussian fits to train offsets worsen it dramatically. Actual train-code replay has diagnostic FID148.35/136.50 at 50k/100k despite low reconstruction MSE. This demonstrates poor perceptual reconstruction quality; replay and held-out reconstruction FID are NOT unconditional benchmarks. All fit data came from the train split.
+Previous detailed handoff: `HANDOFF_PLATEAU.md`. Investigation: `plateau/{FINDINGS.md,DIAGNOSIS.md}`. Earlier architecture/lazy-bcap/pretrained-E history: `HANDOFF_100k.md`.
 
-Ten tests passed (plateau six, routing four), including full-state deterministic replay and gradient-recipient tests. Six real-checkpoint 16-update smokes passed. Live source/config checks and frozen-feature/sigma checks passed on all six completed scouts. No seed sweeps.
-
-## Files and operational notes
-
-- Control pipeline: `experiments/cifar_ae_plateau_pipeline.sh`; routing pipeline: `experiments/cifar_ae_routing_pipeline.sh`.
-- Per-GPU routing coordinator: `experiments/queue_cifar_ae_routing.py`; completed. It uses the existing grid runner and central log.
-- Analyzer for both trainers: `experiments/analyze_cifar_ae_plateau.py` with optional `--trainer` for routing. Reports final ranking, best observed checkpoint and curves.
-- Diagnostics: `experiments/diagnose_cifar_ae_plateau.py`, `experiments/probe_cifar_ae_gradients.py`. Probe reconstruction gradients are hypothetical before routing; `applied_recon_g_norm` and `gradient_routing` distinguish actual recipients. In particular, do not misread hypothetical large prior gradients for detached runs as applied training gradients.
-- Reports: `reports/cifar-particle-ae/{plateau_scout,routing_scout}/LEADERBOARD.md`; aggregate JSON, gradient probes and narrative under `plateau/`.
-- Do not modify active trainer or shared lib/particlegan files: certificates hash them. Isolated files preserved all old sources.
-- Earlier history (100k baseline, capacity scouts, hashes) is archived in [HANDOFF_100k.md](HANDOFF_100k.md).
-- Unrelated `.claude/`, `results/hopfield*`, `results/motion/`, `sparse-ucd.log` and run artifacts remain untouched/untracked.
+User instructions: no seed experiments, be token efficient, easy-to-tail logs, summarize completed experiments with explanations, leaderboards and recommendations. Keep unrelated `.claude/`, `results/hopfield*`, `results/motion/`, `sparse-ucd.log` and run artifacts untouched. Launch persistent background jobs via `subprocess.Popen(start_new_session=True, stdin=DEVNULL, stdout=log, stderr=STDOUT)`.

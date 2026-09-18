@@ -1,0 +1,6 @@
+[
+  "configs/cifar_particle_ae/growth_smoke/control.yaml",
+  "configs/cifar_particle_ae/growth_smoke/grow_g.yaml",
+  "configs/cifar_particle_ae/growth_smoke/grow_d.yaml",
+  "configs/cifar_particle_ae/growth_smoke/grow_both.yaml"
+]

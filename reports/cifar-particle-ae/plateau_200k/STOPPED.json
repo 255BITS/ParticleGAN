@@ -1,0 +1,88 @@
+{
+  "stopped_at_utc": "2026-09-18T08:16:35.401044+00:00",
+  "reason": "User requested stopping d2 to run checkpoint capacity scouts on both GPUs.",
+  "last_logged_step": 172100,
+  "last_evaluated": {
+    "step": 170000,
+    "lr_scale": 1.0,
+    "d_updates": 2,
+    "d_loss": 0.6816451549530029,
+    "g_loss": 0.7235020399093628,
+    "recon_train_mse": 0.03632071614265442,
+    "penalty": 0.0012095816200599074,
+    "train_seconds": 7525.311578474066,
+    "steps_per_second": 14.617334957219818,
+    "start_step": 60000,
+    "cumulative_train_seconds": 10460.285568230756,
+    "peak_memory_gb": 5.320274353027344,
+    "generation": {
+      "samples": 50000,
+      "fid": 18.301035720814298,
+      "feature_variance_ratio": 1.0737532129966576
+    },
+    "generation_seconds": 66.52000845299335,
+    "reconstruction": {
+      "recon_mse": 0.037814661860466,
+      "zero_offset_mse": 0.417999267578125,
+      "random_offset_mse": 0.41632241010665894,
+      "shuffled_particle_mse": 0.04478401318192482,
+      "recon_psnr": 20.24399770049235,
+      "recon_p90": 0.06312022358179092,
+      "recon_p99": 0.09918711334466934,
+      "used_particles": 378,
+      "effective_particles": 294.0470275878906,
+      "hard_usage_tv": 0.6634718179702759,
+      "hard_soft_usage_tv": 0.1591712385416031,
+      "offset_rms": 1.434518575668335,
+      "offset_saturation": 0.05360781028866768,
+      "samples": 10000,
+      "conditional_offset_mean_rms": 1.0085279941558838
+    },
+    "reconstruction_seconds": 0.9420114280073904
+  },
+  "best_evaluated": {
+    "step": 170000,
+    "lr_scale": 1.0,
+    "d_updates": 2,
+    "d_loss": 0.6816451549530029,
+    "g_loss": 0.7235020399093628,
+    "recon_train_mse": 0.03632071614265442,
+    "penalty": 0.0012095816200599074,
+    "train_seconds": 7525.311578474066,
+    "steps_per_second": 14.617334957219818,
+    "start_step": 60000,
+    "cumulative_train_seconds": 10460.285568230756,
+    "peak_memory_gb": 5.320274353027344,
+    "generation": {
+      "samples": 50000,
+      "fid": 18.301035720814298,
+      "feature_variance_ratio": 1.0737532129966576
+    },
+    "generation_seconds": 66.52000845299335,
+    "reconstruction": {
+      "recon_mse": 0.037814661860466,
+      "zero_offset_mse": 0.417999267578125,
+      "random_offset_mse": 0.41632241010665894,
+      "shuffled_particle_mse": 0.04478401318192482,
+      "recon_psnr": 20.24399770049235,
+      "recon_p90": 0.06312022358179092,
+      "recon_p99": 0.09918711334466934,
+      "used_particles": 378,
+      "effective_particles": 294.0470275878906,
+      "hard_usage_tv": 0.6634718179702759,
+      "hard_soft_usage_tv": 0.1591712385416031,
+      "offset_rms": 1.434518575668335,
+      "offset_saturation": 0.05360781028866768,
+      "samples": 10000,
+      "conditional_offset_mean_rms": 1.0085279941558838
+    },
+    "reconstruction_seconds": 0.9420114280073904
+  },
+  "completed_200k": false,
+  "pids_signaled": [
+    242245,
+    242249,
+    242250,
+    242252
+  ]
+}
