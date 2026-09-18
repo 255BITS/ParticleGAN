@@ -1,0 +1,75 @@
+{
+  "status": "running",
+  "latest_logged_step": 159000,
+  "curve": [
+    {
+      "step": 70000,
+      "fid50k": 19.15104638638371,
+      "recon_mse": 0.04069409519433975
+    },
+    {
+      "step": 80000,
+      "fid50k": 18.893197719512216,
+      "recon_mse": 0.04077085480093956
+    },
+    {
+      "step": 90000,
+      "fid50k": 19.13434576361317,
+      "recon_mse": 0.03991992026567459
+    },
+    {
+      "step": 100000,
+      "fid50k": 19.142040367021025,
+      "recon_mse": 0.039518095552921295
+    },
+    {
+      "step": 110000,
+      "fid50k": 18.851536202568923,
+      "recon_mse": 0.04120519757270813
+    },
+    {
+      "step": 120000,
+      "fid50k": 19.26002512517931,
+      "recon_mse": 0.03900548815727234
+    },
+    {
+      "step": 130000,
+      "fid50k": 18.387915097521955,
+      "recon_mse": 0.0386839285492897
+    },
+    {
+      "step": 140000,
+      "fid50k": 19.032907769608414,
+      "recon_mse": 0.03828570619225502
+    },
+    {
+      "step": 150000,
+      "fid50k": 18.774766278890922,
+      "recon_mse": 0.03781916946172714
+    }
+  ],
+  "checkpoints": [
+    {
+      "name": "original_single_d_50k",
+      "path": "runs/cifar_particle_ae/duration_100k/n08/checkpoint_050000.pt",
+      "step": 50000,
+      "fid50k": 18.901233842,
+      "sha256": "10fe8bbc22afb29ff6838ad1ede86e142320e5d7bce43c745b97de24e23ee8d6"
+    },
+    {
+      "name": "best_two_d_130k",
+      "path": "runs/cifar_particle_ae/plateau_200k/d2/checkpoint_130000.pt",
+      "step": 130000,
+      "fid50k": 18.387915097521955,
+      "sha256": "610f02784fb0f17e2678b09a950040413ac95e43462f7757b74f163d561b241f"
+    },
+    {
+      "name": "latest_evaluated_two_d_150k",
+      "path": "runs/cifar_particle_ae/plateau_200k/d2/checkpoint_150000.pt",
+      "step": 150000,
+      "fid50k": 18.774766278890922,
+      "sha256": "7aa9df6be3c543373b943c209b42a51723fb7cc677e81cb977ea150a6245c37f"
+    }
+  ],
+  "user_direction": "Prepare compaction, then discuss user ideas before another checkpoint-based intervention round. User likes checkpoint branching and considers two D updates insufficient value for about one FID point. Do not assume it is the preferred next recipe."
+}

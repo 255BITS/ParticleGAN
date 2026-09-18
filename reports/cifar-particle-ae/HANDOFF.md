@@ -2,6 +2,27 @@
 
 The investigation requested after compaction is complete. **The selected 200k job is running on GPU 0; do not launch duplicate work or stop it.** GPU 1 is idle. Branch: `feat/cifar-ae-gan-pretrained-encoder`.
 
+## Latest user direction — 2026-09-18, before compaction
+
+The user likes starting from saved checkpoints and testing controlled interventions and wants to use that approach again. They judge two D updates not worth roughly one FID point. **Do not assume two D updates should be retained for the next experiment round.** They asked to prepare compaction, then they will provide ideas to discuss. Wait for those ideas before queuing new experiments; do not automatically extend the current recipe or launch another sweep. The current run was not canceled.
+
+At this snapshot the active run is at **159,000 / 200k**, with final result still pending. Latest evaluated FID50k is **18.7748 at 150k**, test reconstruction MSE **0.037819**. Best observed is **18.3879 at 130k**. The trajectory is a slight drift within roughly 18.5–19, not a sustained approach to 13. Recheck current logs after compaction: the process may have advanced or finished.
+
+FID50k at 70/80/90/100/110/120/130/140/150k:
+19.151 / 18.893 / 19.134 / 19.142 / 18.852 / 19.260 / 18.388 / 19.033 / 18.775.
+
+Checkpoint candidates (do not select until the next ideas are discussed):
+
+- **original_single_d_50k**: FID50k 18.9012, `runs/cifar_particle_ae/duration_100k/n08/checkpoint_050000.pt`; SHA256 `10fe8bbc22afb29ff6838ad1ede86e142320e5d7bce43c745b97de24e23ee8d6`.
+- **best_two_d_130k**: FID50k 18.3879, `runs/cifar_particle_ae/plateau_200k/d2/checkpoint_130000.pt`; SHA256 `610f02784fb0f17e2678b09a950040413ac95e43462f7757b74f163d561b241f`.
+- **latest_evaluated_two_d_150k**: FID50k 18.7748, `runs/cifar_particle_ae/plateau_200k/d2/checkpoint_150000.pt`; SHA256 `7aa9df6be3c543373b943c209b42a51723fb7cc677e81cb977ea150a6245c37f`.
+
+The original 50k checkpoint has the one-D recipe and was the common parent of the completed scouts. The 130k/150k checkpoints inherit two-D model/Adam state; changing the D ratio is an explicit intervention, not a fresh baseline. Full model/EMA/Adam/RNG continuation and the existing source/config certificates must be preserved. No seed sweeps. Keep centralized, tail-friendly logs and publish leaderboards and interpretations.
+
+The comparison was ~0.95 FID improvement at matched 60k G updates (19.03 versus 19.98). Two-D throughput is ~14.6 G updates/s versus ~22 for one D, so the extra compute is material. Ten-k scouts from coadapted checkpoints do not settle from-scratch choices.
+
+The detailed live snapshot is [plateau/COMPACTION_SNAPSHOT.json](plateau/COMPACTION_SNAPSHOT.json). Prior launch evidence remains historical, not current status.
+
 ## Active job
 
 - Pipeline PID: 242245. Trainer: `experiments/train_cifar_ae_plateau.py`.
@@ -30,7 +51,7 @@ All six scouts resumed the same historical 50k checkpoint for 10k G updates; all
 | All LRs ×.25 | 20.7400 | .03926 |
 | Weight .1 and LRs ×.25 | 20.8273 | .04371 |
 
-Best observed intermediate: two-D at 55k, FID18.7229. Final-endpoint winner selected for long continuation, not the intermediate checkpoint. Below-13 target remains unmet.
+Best intermediate in the completed short scouts: two-D at 55k, FID18.7229 (superseded by the active long run’s 130k result above). Final-endpoint winner selected for long continuation, not the intermediate checkpoint. Below-13 target remains unmet.
 
 The user asked whether reconstruction moves particles and suggested it should not, then suggested reconstruction only on E. We confirmed the existing gradient path, implemented and tested both alternatives in standalone `experiments/train_cifar_ae_routing.py`, and ran both scouts. We explicitly explained that neither improved this continuation and selected the stronger-critic winner with existing reconstruction routing. These are changes after 50k of coadaptation; they do not settle from-scratch routing choices. No detached long run is queued.
 
