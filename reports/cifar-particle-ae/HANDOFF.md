@@ -4,6 +4,8 @@ Branch `feat/cifar-ae-gan-pretrained-encoder`. User requested TransGAN-style G w
 
 ## Results and recommendation
 
+Latest user request: prepare to compact; user suspects pretrained discriminator robustness. No new experiment is authorized by this compaction request. Current task is to preserve the state and discuss hypotheses; do not launch training before the next instruction. Results analysis committed as8e02224; implementation/launch as27e52a1.
+
 Final FID50k: CNN E-only23.1749, transformer full reconstruction24.4911, transformer E-only24.6440, versus historical full-reconstruction CNN18.9012. Transformer full reconstruction improves test MSE16.5% (.03357 versus.04022) for29.2× G parameters and7.6× training time, without improving FID. Training hours: CNN E-only0.61, transformer full4.72, transformer E-only4.54.
 
 E-only CNN curve10/20/30/40/50k:19.4482/20.3610/19.7293/20.0023/23.1749. Transformer full:25.7557/27.2631/24.4107/26.3416/24.4911. Transformer E-only:20.3919/22.9247/25.4700/71.8706/24.6440;40k visibly repeats a few appearances, with diversity recovering by50k. Similar final transformer scores conceal much worse E-only instability. No new observed minimum beats historical50k CNN.
@@ -11,6 +13,20 @@ E-only CNN curve10/20/30/40/50k:19.4482/20.3610/19.7293/20.0023/23.1749. Transfo
 Main inference: direct reconstruction gradients on G/prior are not necessary for the plateau, so L2 competition alone cannot explain it. More G capacity is usable for reconstruction but does not resolve unconditional generation under this recipe. Shared discriminator feedback/regularization and prior/sampling remain suspects; current losses near.693 do not by themselves prove weak gradients. No new gradient probes in this review.
 
 Recommend against long promotion of these endpoints. Proposed next diagnostic (NOT launched): freeze G/prior at an inexpensive CNN10k checkpoint and test whether D can learn real/fake separation under current regularization, using held-out draws and input gradients to assess useful feedback. Await user direction; bothGPUs idle. See `transgan_scout/FINDINGS.md` for caveats, curves and recommendation.
+
+## Discriminator hypothesis for the next session
+
+Distinguish three possibilities: (1) frozen pretrained feature representations have blind spots that G exploits; (2) the trainable heads/pixel branch fail to extract or maintain useful separation; (3) regularization/optimization suppresses useful D feedback even when information is available. These are hypotheses, not established causes. The entire discriminator is NOT frozen: ImageNet ResNet18 features are frozen, but feature heads and a pixel branch train. Therefore a feature blind spot alone need not explain failure of the whole critic.
+
+Evidence: plateau persists across generator families and when reconstruction updates onlyE; previous read-only probes found weak D input and G adversarial gradients in some plateau checkpoints; larger frozen ResNet34 did not help. Caveat: that replacement retained heads trained on different feature coordinates and resumed joint training immediately, so it did not isolate pretrained feature quality. Current D/G loss values nearln2 alone do not prove an ineffective critic or useful GAN equilibrium. The particle prior remains an alternative shared cause.
+
+Proposed staged diagnostic after user resumes work:
+1. Restore `runs/cifar_particle_ae/transgan_scout/cnn_e_only/checkpoint_010000.pt` (FID50k19.4482; SHA256 `d75fca4bc42ec09f1423ce1a671b4cbd10caefe0abccae3ac2bdb05d5d93237c`), freezing G/E/prior/EMA. This removes moving-generator and reconstruction-update confounds. Record parent hash and preserve all original states; use standalone diagnostic/trainer to preserve source certificates.
+2. First measure held-out real/fake separation and image-gradient norms, attributing score/gradient contributions to pixel versus pretrained-feature branches. Use fresh fake draws and held-out real images, not only D training batches. Keep the FID reference protocol separate from diagnostic validation.
+3. Short matched D-only continuations: current bcap versus a weaker setting, changing only regularization. If D learns useful separation when G stops moving, investigate adaptation speed; if weaker regularization is required, investigate overregularization. Separation alone is insufficient: inspect gradients and held-out generalization. Do not silently combine head resets, feature replacement and regularization changes.
+4. If separation remains poor, assess what is recoverable from fixed pretrained features versus the pixel branch before choosing a feature/backbone change. Only a promising diagnostic should lead to a short joint checkpoint continuation, then a longer run if FID warrants it.
+
+No seed sweeps, no automatic long promotion, no rerun of the historical full-reconstruction CNN. Do not claim these planned tests have happened. Both GPUs idle; all checkpoints preserved.
 
 ## Completed pipeline
 
