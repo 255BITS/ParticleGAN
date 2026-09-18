@@ -30,14 +30,16 @@ def analyze(manifest, report, trainer_name='experiments/train_cifar_ae_plateau.p
                 assert m['generation']['samples'] == 50000
                 curve.append({'step':m['step'],'fid':m['generation']['fid'],
                               'recon_mse':m['reconstruction']['recon_mse']})
-        rows.append({'name':run.name,'curve':curve,**s})
+        best=min(curve,key=lambda c:c['fid'])
+        rows.append({'name':run.name,'curve':curve,'best_observed':{**best,
+                     'checkpoint':str(run / f"checkpoint_{best['step']:06d}.pt")},**s})
     rows.sort(key=lambda r:r['final']['fid'])
     lines=['# CIFAR AE-GAN plateau experiments','',f'{len(rows)}/{len(rows)+len(missing)} certified runs complete.', '',
            '| Rank | Run | Start → end | Final FID50k ↓ | Test MSE ↓ | Train min |',
            '|---:|---|---:|---:|---:|---:|']
     for i,r in enumerate(rows,1):
         lines.append(f"| {i} | {r['name']} | {r['start_step']} → {r['final']['step']} | {r['final']['fid']:.4f} | {r['final']['reconstruction']['recon_mse']:.5f} | {r['train_seconds']/60:.2f} |")
-    lines+=['','All generation FIDs use 50,000 independent prior draws and EMA G/prior; CIFAR train50k reference, TF-compatible Inception. No fitted encoder sampling is used in training benchmarks. Reconstructions use the 10k test split. All scouts share the same 50k checkpoint and seed; these are configuration interventions, not seed experiments.', '',
+    lines+=['','All generation FIDs use 50,000 independent prior draws and EMA G/prior; CIFAR train50k reference, TF-compatible Inception. No fitted encoder sampling is used in training benchmarks. Reconstructions use the 10k test split. Each run restores its recorded parent checkpoint and preserves the model seed; these are configuration interventions, not seed experiments.', '',
             'Historical unchanged continuation: 50k **18.9012**, 60k **19.9770**, 100k **20.8058**. The historical 60k result is the matched endpoint control for the 60k scouts. It is not an independent replication.','',
             '| Run | Step | FID50k ↓ | Test MSE ↓ |','|---|---:|---:|---:|']
     for r in rows:
@@ -49,6 +51,8 @@ def analyze(manifest, report, trainer_name='experiments/train_cifar_ae_plateau.p
         r=rows[0]
         lines.append(f"Lowest final FID: **{r['name']} ({r['final']['fid']:.4f})**. "+
                      ('Target below 13 reached.' if r['final']['fid']<13 else 'Target below 13 remains unmet.'))
+        best=min((x['best_observed'] for x in rows),key=lambda c:c['fid'])
+        lines.append(f"Best observed intermediate/final measurement: **{best['fid']:.4f} at {best['step']:,}**. Checkpoint: `{best['checkpoint']}`. This is selected from the evaluated curve, separate from the final-endpoint ranking.")
         if r['final']['step']==60000:
             lines.append(f"Compared with unchanged continuation at 60k: {r['final']['fid']-19.97701107479669:+.4f} FID. Use the final endpoint ranking and the 55k→60k trend to select a continuation; short scouts do not establish its 200k outcome.")
     report.mkdir(parents=True,exist_ok=True)
