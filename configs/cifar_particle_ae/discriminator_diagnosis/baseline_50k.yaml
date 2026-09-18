@@ -1,0 +1,9 @@
+checkpoint: runs/cifar_particle_ae/transgan_scout/cnn_e_only/checkpoint_050000.pt
+checkpoint_sha256: f114f92e841f83b3c6a01ff27d7863a9191d0108f5b405a40befc1651def1195
+eval_every: 512
+log_every: 128
+out_dir: runs/cifar_particle_ae/discriminator_diagnosis/baseline_50k
+penalty_coeff: 1.0
+reg_every: 1
+samples: 2048
+steps: 0

@@ -1,0 +1,5 @@
+[
+  "configs/cifar_particle_ae/discriminator_smoke/current.yaml",
+  "configs/cifar_particle_ae/discriminator_smoke/weaker.yaml",
+  "configs/cifar_particle_ae/discriminator_smoke/every_step.yaml"
+]

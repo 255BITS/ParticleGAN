@@ -1,0 +1,29 @@
+{
+  "certified": 3,
+  "optimizer_counters": {
+    "control": {
+      "optimizer_g": [
+        10008.0
+      ],
+      "optimizer_d": [
+        10008.0
+      ]
+    },
+    "weaker": {
+      "optimizer_g": [
+        10008.0
+      ],
+      "optimizer_d": [
+        10008.0
+      ]
+    },
+    "warmstart": {
+      "optimizer_g": [
+        10008.0
+      ],
+      "optimizer_d": [
+        12056.0
+      ]
+    }
+  }
+}

@@ -1,0 +1,5 @@
+[
+  "configs/cifar_particle_ae/discriminator_joint/control.yaml",
+  "configs/cifar_particle_ae/discriminator_joint/weaker.yaml",
+  "configs/cifar_particle_ae/discriminator_joint/warmstart.yaml"
+]
