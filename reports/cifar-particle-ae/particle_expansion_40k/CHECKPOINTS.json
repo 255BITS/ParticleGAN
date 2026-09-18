@@ -1,0 +1,18 @@
+{
+  "control_1024_35000": {
+    "path": "runs/cifar_particle_ae/particle_expansion_40k/control_1024/checkpoint_035000.pt",
+    "sha256": "db4c44c8d26caeed293955ef82d09eaad8326204894edf24de5f905227413e76"
+  },
+  "control_1024_40000": {
+    "path": "runs/cifar_particle_ae/particle_expansion_40k/control_1024/checkpoint_040000.pt",
+    "sha256": "29b8dbaba52048a5438c3074f739cd41628a2f1ccf6035c42d597427595840e9"
+  },
+  "split_4096_35000": {
+    "path": "runs/cifar_particle_ae/particle_expansion_40k/split_4096/checkpoint_035000.pt",
+    "sha256": "196cdb33e2534b95bac3e8c48bb896514795ca7a812ca1e21b71578231ac3325"
+  },
+  "split_4096_40000": {
+    "path": "runs/cifar_particle_ae/particle_expansion_40k/split_4096/checkpoint_040000.pt",
+    "sha256": "76313ea01baca42a9f9ba0274cb6f2180e67dd85eefbca5d43d10dce9dfe44f2"
+  }
+}

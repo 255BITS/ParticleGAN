@@ -1,6 +1,6 @@
 # CIFAR AE-GAN plateau: particle expansion improves FID
 
-Branch: `feat/cifar-ae-gan-pretrained-encoder`. Latest user steering: continue scaling ParticleGAN based on prior smaller experiments; current17.48 is best observed and target is~13. No Gaussian-prior comparison requested. Completed the planned 1024 versus 4096 particle scout; 4096 wins at both evaluations. Both respective endpoints are now continuing to40k on the two GPUs. The next8192/16384 scouts are queued behind these runs; see the new scaling section below. Root cause remains non-unique; target FID50k<13 is still unmet.
+Branch: `feat/cifar-ae-gan-pretrained-encoder`. Latest user request: add the discussed feature-information/quality metrics in a subagent. Particle scaling remains the priority, target~13; best observed now16.5033 at35k. Completed the planned 1024 versus 4096 particle scout; 4096 wins at both evaluations. Both respective endpoints completed40k;4096 best16.5033 at35k, final17.2350, versus1024 final26.0216. 8192/16384 scouts are now running; read-only information/quality probes are queued after them. Root cause remains non-unique; target FID50k<13 is still unmet.
 
 Read `particle_expansion_scout/FINDINGS.md`, `LEADERBOARD.md`, `CHECKPOINTS.json`. Implementation commit `4a370de`. Earlier detailed state archived in `HANDOFF_BALANCE.md`; prior D and architecture work in `HANDOFF_DISCRIMINATOR.md`, `HANDOFF_TRANSGAN.md`.
 
@@ -17,7 +17,7 @@ Both certified. Expansion gains0.9342/1.3724FID for1.71% extra training time, an
 
 Sibling RMS per coordinate reaches0.09140/0.11283 at15k/20k, or0.43/0.53 times sigma. All4096 rows sampled250–397 times by20k. Coupled-noise image/feature differences grow, while inspected sibling grids still largely preserve parent object/pose/layout. This supports an effective prior-flexibility/learning-dynamics intervention, not proof of4096 semantic modes or a unique support ceiling. Skip small sibling jitter for now. D feedback quality remains an additional candidate; dense bcap is not yet joint-FID tested.
 
-## Running persistence check
+## Completed persistence check (launch details retained)
 
 PID **266873**, launched with detached Popen; orchestration `experiments/cifar_ae_expansion_extend.py`.
 
@@ -51,3 +51,16 @@ New counts start from the same original1024-center10k checkpoint used by the com
 Current intermediate40k measurements:4096 FID25k17.8876,30k17.4796;1024 FID25k21.8973,30k21.0193. Best known17.4796 is4.4796 above target13. Current run still in progress; check live reports for later points before responding.
 
 Standalone `experiments/train_cifar_ae_scaling.py` preserves previous certified trainer, generalizes expansion factors to1/4/8/16 and descendant-panel dimensions. Config num_particles remains reference1024. `experiments/cifar_ae_scaling_pipeline.py` generates/certifies new count scouts and reports a combined scaling curve with old benchmarks. `experiments/queue_cifar_ae_scaling.py` handles dependency, preflight and launches; failure stops later stages. `tests/test_cifar_ae_scaling.py` adds8/16 actual-parent mapping/output and full-state resume checks. No historical/shared sources were edited.
+
+
+## Information metrics implemented via requested subagent
+
+`/root/particle_information_metrics` implemented standalone `experiments/probe_cifar_ae_information.py` and5passingCPUtests in `tests/test_cifar_ae_information.py`. Root reviewed the definitions, split separation, null controls and cache/source handling, and added `experiments/cifar_ae_information_pipeline.py` plus `experiments/queue_cifar_ae_information.py`.
+
+QueuePID268218 waits for8192/16384 scout queue to finish, then rerunsCPUtests, runs a4096checkpoint GPU smoke, and seven full read-only probes. Log: `tail -F runs/cifar_particle_ae/particle_information/PIPELINE.log`. Current actual stage is `reports/cifar-particle-ae/particle_information/QUEUE_STATUS.json`; do not assume GPUvalidation has run until checked. Read `particle_information/PLAN.md`.
+
+Checkpoints:1024/4096/8192/16384 at20k;1024/4096 at40k;4096 at35k for comparison with finalFIDrise. Fixed10000real/fake images,k5; same32originalparents with64train/32validation/64test examples per child and16additional variance draws. Density/coverage use cached, locked, SHA-validated realInception features; exact chunkedFP32distances. Read-only decoder uses train-only centroids/diagonalvariance, validation shrinkage/temperature selection including uniform, fresh test noise. Bits=log2K−testCEbits, negative estimates retained. Controls: independently shuffled balanced labels per split and exact synthetic feature clones. NestedANOVA separates parent/sibling/noise variation; fractions descriptive with sampling-noise caveat. Full moments include generated/realtrace ratio and squaredfeaturemean distance. NoFIDrecomputed: attach existing50kscore for exact checkpointstep.
+
+Summary `final={information,variance,density_coverage}`; these also top-level. `information.observed/shuffled_labels/identical_clones` eachcontain decodable_bits,test_ce_bits,test_accuracy,parent_standard_error. `available_sibling_bits`,per_parent rows andbudgets retained. `variance` has within_child/between_siblings/between_parents fractions. `density_coverage` includesdensity,coverage,k,samples,feature_variance_trace_ratio_to_real,feature_mean_distance_squared. Parent/frozenstatechecks and pinned scalingtrainer sourceSHA keep historicalsources intact. Savedfeaturepanels support laterCPUanalysis. Conditionalinformation is a restricted-decoder lower-bound estimate, not exactentropy orsemanticcoverage. Information alone can rewardartifacts; interpret jointlywithquality/FID.
+
+Completed40k reports now in `particle_expansion_40k/`: leaderboard/findings/results/checkpoint hashes/plot. Both finalsamplegrids inspected; variedoutputs withshape/detailerrors, no totalcollapseclaim.8192/16384GPUpreflight7tests passed19.51s;both8-update smokespassed;at15kFID18.6479/18.3401 versusprior4096 at15k18.9357. These newscouts are notcomplete yet. No furthertrainingpromotions queued; focuscurrentworkonadding/validatingmetrics asuserrequested.

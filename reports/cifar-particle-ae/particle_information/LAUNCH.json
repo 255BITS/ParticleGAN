@@ -1,0 +1,15 @@
+{
+  "pid": 268218,
+  "command": ".venv/bin/python -u experiments/queue_cifar_ae_information.py",
+  "log": "runs/cifar_particle_ae/particle_information/PIPELINE.log",
+  "depends_on": "particle_scaling_scout queue complete",
+  "stages": [
+    "CPU tests",
+    "4096 checkpoint GPU smoke",
+    "seven read-only checkpoint probes"
+  ],
+  "gpus": [
+    0,
+    1
+  ]
+}

@@ -1,0 +1,12 @@
+batch_size: 64
+checkpoint: runs/cifar_particle_ae/particle_expansion_scout/split_4096/checkpoint_020000.pt
+checkpoint_sha256: 6fbe0630d45f3048f6a9f4686790b54a2fe0272537a507bd903a6d1169b4168b
+distance_chunk: 64
+k: 3
+out_dir: runs/cifar_particle_ae/particle_information_smoke/p4096_20k
+parents: 2
+samples: 128
+test_draws: 4
+train_draws: 4
+val_draws: 4
+variance_draws: 4

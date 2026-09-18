@@ -1,0 +1,10 @@
+{
+  "time": "2026-09-18T16:35:44",
+  "stage": "waiting for8192/16384 scouts to finish; no diagnostic GPU work yet",
+  "pid": 268218,
+  "sources": {
+    "experiments/probe_cifar_ae_information.py": "564623d386035348a0ad0325f73a97b028e1d32eb1c895f0743bb5486f8c442f",
+    "tests/test_cifar_ae_information.py": "175666372ad730f402d6c2d9008c4cae26c236c1f74b50dbc9ae232b185b3c9a",
+    "experiments/cifar_ae_information_pipeline.py": "bbf0b8d2cceb75b9db8cf02460b430de6fc81e3f72ca253714ba027d1f48e3d9"
+  }
+}
