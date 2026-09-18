@@ -59,6 +59,9 @@ if __name__=='__main__':
         m.load_state_dict(ck[name]);m.requires_grad_(False)
     x=torch.from_numpy(CIFAR10(cfg['data_dir'],train=True).data).permute(0,3,1,2).contiguous().cuda()
     result=gradient_probe(g,d,e,prior,x,cfg)
+    result['gradient_routing']={k:cfg.get(k,True) for k in ('recon_prior_grad','recon_generator_grad')}
+    result['applied_recon_g_norm']=result['mean']['recon_g_norm'] if cfg.get('recon_generator_grad',True) else 0.
+    result['mean_note']='Generator reconstruction gradients above are potential gradients before routing; applied_recon_g_norm respects the configuration.'
     result['prior_probe']=prior_probe(g,d,e,prior,x,cfg)
     assert hashlib.sha256(a.checkpoint.read_bytes()).hexdigest()==digest
     result.update(checkpoint=str(a.checkpoint),sha256=digest,step=ck['step'])

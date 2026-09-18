@@ -26,3 +26,13 @@ Two additional 50k→60k scouts isolate gradient recipients at the original lear
 ```
 tail -F runs/cifar_particle_ae/routing_scout/PIPELINE.log
 ```
+
+Routing scouts are scheduled by `experiments/queue_cifar_ae_routing.py`, which calls the existing grid runner independently when each GPU's preceding scout is certified complete. It streams both runs into one `routing_scout/PIPELINE.log` and runs the common certified analyzer after both finish. GPU 0 does not wait for GPU 1's longer two-D-update scout.
+
+| Reconstruction gradient recipient | Historical | `no_recon_prior` | `encoder_only_recon` |
+|---|---|---|---|
+| Encoder E | yes | yes | yes |
+| Generator G | yes | yes | no |
+| Particle prior | yes | no | no |
+
+G and the prior continue to receive adversarial gradients in every variant; the prior retains spread regularization. The original N=8 bcap penalty remains on D. These changes freeze parameters only with respect to one loss, not globally.

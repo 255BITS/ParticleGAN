@@ -55,3 +55,9 @@ Gaussian offset covariance differs markedly from identity, but this difference b
 ![Reconstruction replay](reconstruction_replay_100k.png)
 
 Raw checkpoint hashes, protocol and results: [50k](diagnostics_50k.json), [100k](diagnostics_100k.json). Both checkpoints were verified unchanged. Source and configuration checks passed.
+
+## Reconstruction's force on the particles
+
+The follow-up prior-gradient probe confirms that reconstruction is not an incidental influence. At 50k its prior-gradient norm is 0.00330 versus 0.00536 adversarial (mean batch ratio 0.619); at 100k it is 0.00253 versus 0.00140 (ratio 1.833). Spread-gradient norms are 0.000091 and 0.000070. Reconstruction reaches all 1,024 raw particle rows because `means()` standardizes across the table. The reconstruction/adversarial cosine on the prior is approximately zero (−0.0017 / −0.0047): this is a separate force rather than strong direct opposition. G-gradient opposition and prior-gradient competition should not be conflated.
+
+[50k detailed probe](gradient_detail_50k.json), [100k detailed probe](gradient_detail_100k.json). The proposed fix detaches `prior.means()` only in the reconstruction forward, retaining adversarial and spread updates to the particles. Both gradient-routing scouts start from the same 50k checkpoint.
