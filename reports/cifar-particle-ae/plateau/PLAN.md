@@ -16,3 +16,13 @@ tail -F runs/cifar_particle_ae/plateau_diagnostics/gpu{0,1}.log
 tail -F runs/cifar_particle_ae/plateau_scout/PIPELINE.log
 tail -F runs/cifar_particle_ae/plateau_200k/PIPELINE.log
 ```
+
+## Follow-up: reconstruction should not move particles
+
+The user identified the reconstruction-to-prior gradient as an unwanted coupling. Existing routing uses `means[ids]` with gradients; differentiable mean/std normalization couples selected-center gradients to every raw particle row. The follow-up trainer `train_cifar_ae_routing.py` detaches means only for reconstruction. Adversarial and spread losses continue to train the prior.
+
+Two additional 50k→60k scouts isolate gradient recipients at the original learning rates and reconstruction weight: `no_recon_prior` updates G/E from reconstruction, and `encoder_only_recon` updates only E from reconstruction. The latter temporarily freezes G parameters for the reconstruction forward while preserving input gradients and the separately built adversarial G graph. Three tests verify identical forward values, the exact intended gradient recipients, restored parameter flags, and unchanged adversarial G/prior gradients. Both real-checkpoint 16-update smokes passed. Historical checkpoints record both routing flags as true in the intervention journal.
+
+```
+tail -F runs/cifar_particle_ae/routing_scout/PIPELINE.log
+```

@@ -10,8 +10,8 @@ sys.path.insert(0, str(ROOT))
 from experiments.run_grid import code_provenance, has_valid_summary, load_config, trainer_defaults
 
 
-def analyze(manifest, report):
-    trainer = str(ROOT / 'experiments/train_cifar_ae_plateau.py')
+def analyze(manifest, report, trainer_name='experiments/train_cifar_ae_plateau.py'):
+    trainer = str(ROOT / trainer_name)
     provenance = code_provenance(trainer, sys.executable)
     defaults = trainer_defaults(trainer)
     rows, missing = [], []
@@ -52,6 +52,29 @@ def analyze(manifest, report):
         if r['final']['step']==60000:
             lines.append(f"Compared with unchanged continuation at 60k: {r['final']['fid']-19.97701107479669:+.4f} FID. Use the final endpoint ranking and the 55k→60k trend to select a continuation; short scouts do not establish its 200k outcome.")
     report.mkdir(parents=True,exist_ok=True)
+    if rows:
+        import matplotlib
+        matplotlib.use('Agg')
+        import matplotlib.pyplot as plt
+        fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+        historical = ROOT / 'runs/cifar_particle_ae/duration_100k/n08/metrics.jsonl'
+        if historical.exists():
+            old = [json.loads(v) for v in historical.read_text().splitlines()]
+            old = [v for v in old if 'generation' in v]
+            axes[0].plot([v['step']/1000 for v in old], [v['generation']['fid'] for v in old],
+                         '--o', color='gray', label='unchanged historical')
+            axes[1].plot([v['step']/1000 for v in old], [v['reconstruction']['recon_mse'] for v in old],
+                         '--o', color='gray', label='unchanged historical')
+        for r in rows:
+            c = r['curve']
+            axes[0].plot([v['step']/1000 for v in c], [v['fid'] for v in c], '-o', label=r['name'])
+            axes[1].plot([v['step']/1000 for v in c], [v['recon_mse'] for v in c], '-o', label=r['name'])
+        axes[0].axhline(13, color='black', linestyle=':', label='target 13')
+        for ax, title in zip(axes, ('Generation FID50k (lower is better)', 'Test reconstruction MSE')):
+            ax.set_title(title); ax.set_xlabel('Global updates (thousands)'); ax.grid(alpha=.2)
+        axes[0].legend(fontsize=8)
+        fig.tight_layout(); fig.savefig(report/'curves.png', dpi=180); plt.close(fig)
+        lines += ['', '![Learning curves](curves.png)']
     (report/'LEADERBOARD.md').write_text('\n'.join(lines)+'\n')
     (report/'leaderboard.json').write_text(json.dumps({'complete':not missing,'missing':missing,'rows':rows},indent=2,allow_nan=False)+'\n')
     print('\n'.join(lines),flush=True)
@@ -61,4 +84,5 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--config_manifest',type=Path,required=True)
     p.add_argument('--report',type=Path,required=True)
-    a=p.parse_args();sys.exit(analyze(a.config_manifest,a.report))
+    p.add_argument('--trainer',default='experiments/train_cifar_ae_plateau.py')
+    a=p.parse_args();sys.exit(analyze(a.config_manifest,a.report,a.trainer))
