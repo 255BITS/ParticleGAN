@@ -1,0 +1,19 @@
+{
+  "pid": 269541,
+  "command": ".venv/bin/python -u experiments/cifar_ae_scaling_extend.py",
+  "log": "runs/cifar_particle_ae/particle_scaling_40k/PIPELINE.log",
+  "gpus": [
+    0,
+    1
+  ],
+  "from_step": 20000,
+  "to_step": 40000,
+  "eval_steps": [
+    25000,
+    30000,
+    35000,
+    40000
+  ],
+  "endpoint_diagnostics": true,
+  "estimated_total_wall_minutes": "20-25"
+}
