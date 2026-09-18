@@ -1,55 +1,42 @@
-# CIFAR AE-GAN plateau: current handoff
+# CIFAR AE-GAN plateau: particle expansion improves FID
 
-Branch: `feat/cifar-ae-gan-pretrained-encoder`. Latest user: "ok cool lets plan some experiments for that next, compacting". Detailed planning-only next-round specification is saved in `particle_expansion/PLAN.md`; read it before implementation. No new experiment was launched for this compaction request. This round completed the proposed G-only LR scout, endpoint D probes, and an additional read-only sampling/support investigation. All jobs finished; both GPUs idle. No long job or further scout is queued. Root cause remains unproven and FID below 13 remains unmet.
+Branch: `feat/cifar-ae-gan-pretrained-encoder`. Latest user: "lets continue to find the reason why we are plateauing". Completed the planned 1024 versus 4096 particle scout; 4096 wins at both evaluations. Both respective endpoints are now continuing to40k on the two GPUs. No jobs beyond40k are queued. Root cause remains non-unique; target FID50k<13 is still unmet.
 
-Read `generator_balance/FINDINGS.md` and `particle_support/FINDINGS.md`. Previous detailed discriminator investigation is archived in `HANDOFF_DISCRIMINATOR.md`; earlier architecture history in `HANDOFF_TRANSGAN.md`. Implementation commit for G LR scout: `b0cbfce`.
+Read `particle_expansion_scout/FINDINGS.md`, `LEADERBOARD.md`, `CHECKPOINTS.json`. Implementation commit `4a370de`. Earlier detailed state archived in `HANDOFF_BALANCE.md`; prior D and architecture work in `HANDOFF_DISCRIMINATOR.md`, `HANDOFF_TRANSGAN.md`.
 
-## Completed matched training
+## Completed scout
 
-Both restore the identical CNN E-only 10k parent (FID50k 19.4482), full model/Adam/EMA/RNG. Only G LR changes: 0.0003 -> 0.00015. E 0.0003, prior 0.003, D 0.00045; original bcap coefficient 1 lazy8 x8, one D update. No seed experiments.
+Same CNN E-only10k parent: `runs/cifar_particle_ae/transgan_scout/cnn_e_only/checkpoint_010000.pt`, SHA256 `d75fca4bc42ec09f1423ce1a671b4cbd10caefe0abccae3ac2bdb05d5d93237c`.
 
-| Arm | FID50k 15k | FID50k 20k | Test MSE | Training minutes |
+| Arm | Initial FID50k | FID15k | FID20k | Training minutes |
 |---|---:|---:|---:|---:|
-| Control | 19.5589 | 20.3044 | 0.14846 | 7.20 |
-| Half G LR | 20.7412 | 20.6996 | 0.14310 | 7.34 |
+| control1024 |19.44808|19.86990|19.89316|7.25|
+| split4096 |19.44812|18.93574|18.52071|7.37|
 
-Half-G loses at both evaluations; neither beats parent. Final 0.3952 gap is small, so claim absence of demonstrated gain, not that all lower G rates are harmful. No promotion.
+Both certified. Expansion gains0.9342/1.3724FID for1.71% extra training time, and improves versus parent. Wall10.82/10.94min includes three FID50k passes. No seed repeats. Production CUDA nondeterminism explains modest variation among historical contemporary controls; exact deterministic unchanged-control test passes.
 
-Read-only 2048-image endpoint D probes: control/half-G test AUC 0.4743/0.5575, fake image gradient 0.1558/0.4921, G adversarial gradient 0.1435/0.5724. Half-G increases measured feedback ~4x without improving FID. This joins negative D-warmup/weaker-bcap results: feedback strength alone has not fixed the plateau. Post-G endpoint AUC is phase dependent; do not treat it as a unique diagnosis. Sources/results in `generator_balance_probes/`.
+Sibling RMS per coordinate reaches0.09140/0.11283 at15k/20k, or0.43/0.53 times sigma. All4096 rows sampled250–397 times by20k. Coupled-noise image/feature differences grow, while inspected sibling grids still largely preserve parent object/pose/layout. This supports an effective prior-flexibility/learning-dynamics intervention, not proof of4096 semantic modes or a unique support ceiling. Skip small sibling jitter for now. D feedback quality remains an additional candidate; dense bcap is not yet joint-FID tested.
 
-## Read-only support investigation
+## Running persistence check
 
-EMA G/prior remain fixed. At each noise multiplier use original particle IDs and underlying Gaussian draws, 50k FID protocol unchanged. Baseline x1 reproduces original FID within 0.001 for all three checkpoints. All three certified.
+PID **266873**, launched with detached Popen; orchestration `experiments/cifar_ae_expansion_extend.py`.
 
-| Checkpoint | Centers only | Original noise | Double noise |
-|---|---:|---:|---:|
-| Original 10k | 41.8580 | 19.4481 | 21.7837 |
-| Control 20k | 42.4706 | 20.3039 | 21.7199 |
-| Half-G 20k | 43.4404 | 20.7005 | 23.5012 |
+`tail -F runs/cifar_particle_ae/particle_expansion_40k/PIPELINE.log`
 
-Noise is used and contributes to image variation; broader inference noise is not a fix. Center-only FID describes a finite 1024-output generator, so its high score is not itself proof of poor prototypes or collapse. In inspected grouped samples, draws within each particle retain object/pose/layout and vary mostly locally. Balanced ANOVA (128 particles x16 draws) assigns 32–33% Inception-feature variation but about 5% pixel variation within particles. These are descriptive fractions, not semantic coverage metrics. Latent covariance effective rank stays ~64/64 at 10k and 50k, ruling against global latent dimension collapse in these snapshots.
+GPU0 control1024, GPU1 split4096. Full optimizer/EMA/RNG continuation from respective20k checkpoints. Steps20k→40k, FID50k25k/30k/35k/40k, numbered full checkpoints. Unchanged rates G/E.0003, prior.003, D.00045, oneD update, bcapcoeff1 every8×8, E-only reconstruction. Both confirmed training past21k, GPUs100%. Expected total~20minutes from launch around16:10MDT on2026-09-18.
 
-Grouped grid: `runs/cifar_particle_ae/particle_support/control_20k/within_particle.png`. Other checkpoints have corresponding grids. Midpoint/final joint sample grids and control grouped grid inspected; no total collapse claim.
+Config paths: `configs/cifar_particle_ae/particle_expansion_40k/`. Upon completion pipeline certifies both, audits rates/RNG pairing, and writes `reports/cifar-particle-ae/particle_expansion_40k/{results.json,LEADERBOARD.md,FINDINGS.md}`. Inspect curve and sibling grids, then update this handoff. No automatic200k promotion. Sustained4096 benefit could justify further matched training or8192; fading benefit would return priority to discriminator feedback robustness. Do not repeat same-seed experiments as a proxy for seed uncertainty.
 
-## Recommended next test — NOT launched
+## Implementation/preflight
 
-Concrete two-wave plan: `particle_expansion/PLAN.md`. First compare 1024 unchanged versus 4096 cloned/trainable centers on the two GPUs, 10k ->20k with FID50k at15k/20k. Mandatory preflight covers normalization, fixed sigma, per-row Adam/EMA mapping, regularizer differences, paired RNG and initial image/FID equivalence. Conditional follow-ups distinguish useful expansion from slow symmetry breaking; no automatic long promotion.
+Standalone `experiments/train_cifar_ae_expansion.py` copies balance trainer, leaving every historical/shared certified source untouched. Config `num_particles=1024` is reference initialization count; `expansion_factor=4` means4096 live rows. Build/calibrate original prior first; clone only after restoring/mapping saved state, preserving sigma0.2126164287 and d08.50465679. Do not construct/recalibrate on coincident clones.
 
-Test expanding trainable particles 1024 -> 4096 from the same checkpoint, alongside a matched 1024 control. This tests whether more centers can learn distinct image configurations; wider inference noise did not. Preserve G/D/E and their Adam/EMA, saved sigma, and explicitly map expanded prior/EMA/Adam state. Audit initial generated distribution/FID before training to distinguish expansion initialization from training effects. **Simply repeating raw particle rows does not exactly preserve standardized means because `prior.means()` uses unbiased std**; account for this rather than claiming exact identity. Preserve historical source certificates via a new standalone trainer.
+ExpandedPrior corrects unbiased std by sqrt(N*(M−1)/(M*(N−1))); ReferenceRegularizer corrects variance and covariance similarly. Live/EMA initial center error<1e-6, coupled image max error2.44e-6, summed regularizer-gradient error<2.13e-11. Full initialFID difference only0.0000458. Prior Adam row moments copied, steps retained, noLR compensation. Expansion necessarily changes exposure/optimizer dynamics, so it is not a pure abstract capacity isolation.
 
-Discriminator feedback quality/robustness remains the competing hypothesis, not a ruled-out explanation. Existing D can classify fixed-target data but useful joint gradients are unproven. Every-step bcap has only been tested D-only, not in matched joint FID. Do not freeze E/prior or grow G solely on these observations. No automatic long promotion on small or reversing differences.
+Separate persisted clone-choice RNG preserves original parent-ID/noise/data streams. Evaluation resets/restores child RNG; exact full-state resume tested. Extra state records reference count, clone RNG, exposure. Expanded exposure accumulates since expansion; control exposure covers current continuation. Direct selection does not enumerate gradients through shared standardization/regularization. Read expanded checkpoints with this trainer's helpers, not an unmodified MoG constructor of4096 rows.
 
-## Files and validation
+Three CUDA tests in `tests/test_cifar_ae_expansion.py` passed11.90s: exact original full-state control replay; real-parent mapping/sampling/image equivalence; exact expanded save/resume and E-only reconstruction gradients (E only, G/prior none). Two8-update pipeline smokes passed, allAdam counters10008. Small smoke128-image FID~143 is not a benchmark. Early unit-test-only panel-size assumption fixed before benchmark runs. Harmless scalar-conversion warning in preflight logs documented.
 
-Parent: `runs/cifar_particle_ae/transgan_scout/cnn_e_only/checkpoint_010000.pt`, SHA256 `d75fca4bc42ec09f1423ce1a671b4cbd10caefe0abccae3ac2bdb05d5d93237c`.
-Endpoint checkpoint paths/hashes: `generator_balance/CHECKPOINTS.json` (canonical saved 20k copies also exist in each run directory).
+`experiments/cifar_ae_expansion_pipeline.py` creates/certifies scout and smoke tracks. `experiments/cifar_ae_expansion_extend.py` requires >0.5FID gain at both scout evaluations plus endpoint beating parent before creating40k configs, then certifies/reports. Detailed validation: `particle_expansion/PREFLIGHT.md`, `TESTS.txt`, historical center movement and hypotheses there.
 
-Standalone trainer `experiments/train_cifar_ae_balance.py` adds `g_lr_scale`, defaults 1, applied only to G optimizer group after restoration on every step. Existing global `lr_scale` affects all groups and is not equivalent. Actual group LRs recorded and audited. `cifar_ae_generator_balance_pipeline.sh`, `analyze_cifar_ae_balance.py` implement grid/reporting. `tests/test_cifar_ae_balance.py`: 2 deterministic CUDA tests passed, exact original full-state continuation and isolated actual first half-G update (unchanged D/E/prior and all Adam moments). Two actual-parent eight-step smokes and both full scouts certified; matched RNG use, intervention metadata and optimizer counts checked.
-
-Read-only `probe_cifar_ae_support.py`, `cifar_ae_support_pipeline.py` implement sampling/ANOVA probes with pinned historical architecture dependency, full source archives and parent/frozen state checks. Initial small smoke computed correctly but was rejected by grid because summary lacked required `final` block. Added block and reran in fresh `particle_support_smoke_v2`; passed. Original failed attempt/source archive retained, documented in `particle_support/PREFLIGHT.md`. Small-smoke FIDs are not benchmarks. All 3 full probes then certified. Two endpoint D probes reuse unchanged original diagnostic trainer and are certified.
-
-Completed logs:
-- `tail -F runs/cifar_particle_ae/generator_balance/PIPELINE.log` (PID 264755, exit0, 9.8min)
-- `tail -F runs/cifar_particle_ae/particle_support/PIPELINE.log` (PID 265248, exit0, about7min)
-
-No subagents used. User preferences: no seed experiments, token efficient, easy-to-tail logs, completed experiment leaderboard/explanations/recommendations. They prefer checkpoint interventions and consider two D updates too expensive for ~1 FID point. Historical full-reconstruction CNN should not be retrained without reason. Persistent jobs use detached Popen with redirected logs. Historical/shared code unchanged. Unrelated `.claude/`, `results/hopfield*`, `results/motion/`, `runs/`, `sparse-ucd.log` preserved; generated `results/failures.txt` records the support preflight formatting failure.
+Completed scout PID266496, exit0; logs in `runs/cifar_particle_ae/particle_expansion_scout/PIPELINE.log`. Keep all parent/checkpoint/source hashes intact. All operations remain on the feature branch; no subagents used. User preferences: no seed experiments, token efficient, tail-able logs, completed leaderboard/explanations/recommendations. Unrelated untracked `.claude/`, `results/failures.txt`, `results/hopfield*`, `results/motion/`, `runs/`, `sparse-ucd.log` preserved.

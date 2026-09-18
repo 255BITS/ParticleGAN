@@ -1,0 +1,12 @@
+{
+  "control_1024": {
+    "path": "runs/cifar_particle_ae/particle_expansion_scout/control_1024/checkpoint_020000.pt",
+    "sha256": "444fa1ab418b15c871583249f8b8ff8902140716e9b1cd04667d970dd2e98b06",
+    "fid50k": 19.893159899973057
+  },
+  "split_4096": {
+    "path": "runs/cifar_particle_ae/particle_expansion_scout/split_4096/checkpoint_020000.pt",
+    "sha256": "6fbe0630d45f3048f6a9f4686790b54a2fe0272537a507bd903a6d1169b4168b",
+    "fid50k": 18.52071120346102
+  }
+}

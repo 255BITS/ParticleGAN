@@ -1,0 +1,11 @@
+{
+  "pid": 266873,
+  "log": "runs/cifar_particle_ae/particle_expansion_40k/PIPELINE.log",
+  "command": ".venv/bin/python -u experiments/cifar_ae_expansion_extend.py",
+  "gpus": [
+    0,
+    1
+  ],
+  "expected_wall_minutes": 20,
+  "status_at_launch": "running"
+}
