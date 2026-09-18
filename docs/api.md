@@ -483,6 +483,28 @@ DDGAN and UCD numeric bounds checks can synchronize CUDA. Set
 `validate_args=False` only for already validated times/labels; shape, dtype,
 and applicable device checks still run.
 
+## Particle autoencoders
+
+`get_recipe("ae_gan")`, `get_recipe("vae_gan")` and `get_recipe("ae_ddgan")`
+add reconstruction encodings to caller-owned networks and loops. The default
+VAE selects one particle with prior-matching Gaussian noise and constant joint
+KL. No KL penalty is added by `reconstruction_loss`.
+
+| API | Contract |
+| --- | --- |
+| `recipe.encode(query, prior, offset=None, draws=2, generator=None)` | `ParticleEncoding`; AE requires offset and returns one draw; VAE rejects offset |
+| `particle_ae(query, offset, prior, temperature=.25, distance_reduction="sum", offset_bound=3)` | Deterministic bounded-offset encoding |
+| `particle_vae(query, prior, temperature=.25, distance_reduction="sum", draws=2, hard=True, generator=None)` | Default constant-KL posterior; `hard=False` opts into categorical sampling |
+| `encoding.reconstruction_loss(prediction, target)` | MSE only, with score-gradient correction for categorical mode |
+| `encoding.negative_elbo(prediction, target, observation_sigma=.03)` | Explicit Gaussian negative ELBO in nats, including joint KL; rejects AE |
+| `recipe.make_optimizers(G, D, prior, encoder=E)` | Adds E at G's LR; deduplicates shared parameters |
+
+Codes are `[B,S,latent_dim]`, predictions `[B,S,...]`, targets `[B,...]`.
+`encoding.kl` is per-input joint KL; `log_probs` exposes the true posterior
+(or None for AE). Optional categorical training needs at least two independent
+draws. See the [full guide](particle-autoencoders.md) for defaults, runnable
+examples, gradient caveats, DDGAN integration and measured evidence.
+
 ## Recipes and defaults
 
 ```python
@@ -554,7 +576,7 @@ budgets remain application choices.
 | `recipe.make_loss(**kwargs)` | `GANLoss` using recipe loss and mode |
 | `recipe.make_gradient_penalty(**kwargs)` | `GradientPenalty` using recipe penalty settings |
 | `recipe.make_prior_regularizer(**kwargs)` | `ParticleRegularizer` with `weight=recipe.prior_reg` already applied |
-| `recipe.make_optimizers(G, D, prior=None, **adam_kwargs)` | `(opt_g, opt_d)`, ordinary Adam optimizers |
+| `recipe.make_optimizers(G, D, prior=None, encoder=None, **adam_kwargs)` | `(opt_g, opt_d)`, ordinary Adam optimizers |
 
 Factory keyword arguments override constructor values for that call, without
 changing the recipe. Optimizers exclude frozen parameters; G and prior have

@@ -35,6 +35,11 @@ class Recipe:
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
+    encoder_mode: str = "none"
+    routing_temperature: float = 0.25
+    distance_reduction: str = "sum"
+    observation_sigma: float = 0.03
+    reconstruction_weight: float = 1.0
 
     def __post_init__(self):
         object.__setattr__(self, "betas", tuple(self.betas))
@@ -45,6 +50,12 @@ class Recipe:
             value = getattr(self, key)
             if type(value) is not int or value <= 0:
                 raise ValueError(f"{key} must be a positive integer")
+        if self.encoder_mode not in ("none", "ae", "categorical", "hard"):
+            raise ValueError("encoder_mode must be none, ae, categorical, or hard")
+        if self.encoder_mode != "none" and self.prior_kind != "mog":
+            raise ValueError("particle encoders require prior_kind='mog'")
+        if self.distance_reduction not in ("sum", "mean"):
+            raise ValueError("distance_reduction must be sum or mean")
         if self.model not in ("gan", "ddgan"):
             raise ValueError("model must be 'gan' or 'ddgan'")
         if self.prior_kind not in ("particles", "mog"):
@@ -69,10 +80,10 @@ class Recipe:
             raise ValueError("time_class requires DDGAN + UCD")
         if not 0 <= self.ema_decay < 1 or not 0 <= self.lr_anneal_start < 1 or not 0 <= self.lr_floor <= 1:
             raise ValueError("invalid EMA decay or LR schedule")
-        for key in ("lr", "d_lr_mult", "prior_lr_mult"):
+        for key in ("lr", "d_lr_mult", "prior_lr_mult", "routing_temperature", "observation_sigma"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) <= 0:
                 raise ValueError(f"{key} must be finite and positive")
-        for key in ("reg_coeff", "reg_kappa", "prior_reg", "ucd_weight"):
+        for key in ("reg_coeff", "reg_kappa", "prior_reg", "ucd_weight", "reconstruction_weight"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) < 0:
                 raise ValueError(f"{key} must be finite and nonnegative")
         if len(self.betas) != 2 or any(not 0 <= b < 1 for b in self.betas):
@@ -109,6 +120,26 @@ class Recipe:
         options.pop("standardize")
         return ParticlePrior(**options)
 
+    def encode(self, query, prior, *, offset=None, draws=2, generator=None):
+        """Route caller-produced queries; returns a ParticleEncoding.
+
+        AE requires raw offsets and returns one deterministic draw. VAE rejects
+        offsets because local posterior and prior must match for this recipe.
+        """
+        from .autoencoder import particle_ae, particle_vae
+        options = dict(temperature=self.routing_temperature,
+                       distance_reduction=self.distance_reduction)
+        if self.encoder_mode == "ae":
+            if offset is None:
+                raise ValueError("AE encoding requires offset")
+            return particle_ae(query, offset, prior, **options)
+        if self.encoder_mode in ("categorical", "hard"):
+            if offset is not None:
+                raise ValueError("prior-matching VAE does not accept an offset")
+            return particle_vae(query, prior, draws=draws, generator=generator,
+                                hard=self.encoder_mode == "hard", **options)
+        raise ValueError("this recipe has no encoder")
+
     def make_loss(self, **overrides):
         from .gan_loss import GANLoss
         return GANLoss(**{"loss_type": self.loss_type, "mode": self.gan_mode, **overrides})
@@ -123,8 +154,8 @@ class Recipe:
         from .vicreg_loss import ParticleRegularizer
         return ParticleRegularizer(**{"weight": self.prior_reg, **overrides})
 
-    def make_optimizers(self, generator, discriminator, prior=None, **adam_kwargs):
-        """Return ordinary ``(Adam(G + prior), Adam(D))`` optimizers.
+    def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, **adam_kwargs):
+        """Return ordinary ``(Adam(G + optional E + prior), Adam(D))`` optimizers.
 
         Move modules to their desired device before calling. Frozen parameters
         are excluded, and a Gaussian/frozen prior adds no optimizer group.
@@ -134,7 +165,14 @@ class Recipe:
         from torch.optim import Adam
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
         prior_ids = {id(p) for p in prior_params}
-        g_params = [p for p in generator.parameters() if p.requires_grad and id(p) not in prior_ids]
+        g_params = []
+        seen = set(prior_ids)
+        for module in (generator, encoder):
+            if module is not None:
+                for p in module.parameters():
+                    if p.requires_grad and id(p) not in seen:
+                        g_params.append(p)
+                        seen.add(id(p))
         d_params = [p for p in discriminator.parameters() if p.requires_grad]
         groups = []
         if g_params:
@@ -147,7 +185,7 @@ class Recipe:
 
 
 def get_recipe(name="gan", **overrides):
-    """Recommended GAN/DDGAN defaults; historical preset names remain accepted."""
+    """Inspectable GAN/DDGAN and particle autoencoder defaults; historical aliases remain accepted."""
     if name in ("gan", "100gaussians"):
         recipe = Recipe(name=name)
     elif name == "mog":
@@ -163,8 +201,18 @@ def get_recipe(name="gan", **overrides):
             standardize=True, total_steps=100_000, prior_lr_mult=100.,
             prior_betas=(.5, .999), lr_floor=1.,
         )
+    elif name in ("ae_gan", "vae_gan", "ae_ddgan"):
+        image = name == "ae_ddgan"
+        mode = {"ae_gan": "ae", "vae_gan": "hard", "ae_ddgan": "ae"}[name]
+        recipe = Recipe(name=name, model="ddgan" if image else "gan",
+                        encoder_mode=mode, prior_kind="mog", num_particles=1024 if image else 400,
+                        z_dim=64 if image else 2, sigma_rel=.025, total_steps=10000 if image else 6000,
+                        batch_size=64 if image else 256, lr=.0003, prior_lr_mult=10.,
+                        prior_betas=(.5, .999), reg_every=4, lr_floor=1.,
+                        routing_temperature=.125 if image else .25,
+                        distance_reduction="mean" if image else "sum")
     else:
-        raise ValueError(f"Unknown recipe {name!r}; choose 'gan', 'mog', 'ddgan' or 'ddgan_mog'")
+        raise ValueError(f"Unknown recipe {name!r}; choose gan, mog, ddgan, ddgan_mog, ae_gan, vae_gan, or ae_ddgan")
     return recipe.replace(**overrides)
 
 

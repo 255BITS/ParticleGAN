@@ -17,7 +17,7 @@ Real-data CUDA tests stay opt-in because GitHub's standard runners have no GPU.
 For local coverage, run `RUN_CUDA_IMAGE_TESTS=1 python -m pytest -q` on a CUDA
 machine with the image dependencies and CIFAR data installed.
 
-## One-time PyPI setup
+## Trusted publisher setup (already used for published releases)
 
 While logged into the existing account, open
 [PyPI Publishing](https://pypi.org/manage/account/publishing/) and add a new
@@ -45,10 +45,10 @@ it does not reserve the name beforehand. See
 1. Merge the reviewed API and release workflows into `master` and wait for CI.
 2. Set the version in `pyproject.toml` and make the README's installation section
    current for the release, and update both `CHANGELOG.md` and the README changelog.
-   The prepared version is `0.4.0`; replace their `Unreleased` labels with the
+   The prepared version is `0.5.0`; replace any `Unreleased` labels with the
    release date when publishing.
 3. Create a GitHub release from that commit with a matching tag, for example
-   `v0.4.0`. Publishing the GitHub release triggers `release.yml`; creating a
+   `v0.5.0`. Publishing the GitHub release triggers `release.yml`; creating a
    draft or pushing a tag alone does not publish to PyPI.
 4. The workflow verifies the tag, reruns the same test matrix, builds and checks
    the distributions, then publishes those artifacts. A failed check prevents
@@ -56,8 +56,11 @@ it does not reserve the name beforehand. See
    identity credentials through
    [Trusted Publishing](https://docs.pypi.org/trusted-publishers/using-a-publisher/).
 5. Verify the release in a fresh environment with
-   `python -m pip install particlegan==0.4.0` (substitute the released version).
+   `python -m pip install particlegan==0.5.0` (substitute the released version).
 
 Downloadable distributions and job logs are attached to the Actions run. The
 publish job only downloads the checked artifacts; it does not rebuild them.
-PyPI publishing has not been exercised until the first real release succeeds.
+The repository has published releases through this workflow. Confirm the new
+version on PyPI and smoke-test a fresh installation after each publication.
+A pushed tag alone does not complete publication; publish the GitHub release
+and monitor its Actions run.

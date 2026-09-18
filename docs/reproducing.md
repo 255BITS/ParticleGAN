@@ -99,3 +99,24 @@ claiming two recipes perform the same.
 For future scaling studies, vary the particle count and separately test noise
 around particles. Adding noise changes the model distribution and requires a
 fresh comparison; the finite-support limitation is not silently removed here.
+
+## Particle autoencoder studies (0.5.0)
+
+The [API guide](particle-autoencoders.md) maps public primitives to the tested
+encodings. Original trainers remain intact to preserve archived source hashes.
+Public API additions change the runner's source fingerprint: use a fresh output
+directory for a new run, rather than replacing successful historical artifacts.
+
+- [Matched CIFAR direct/DDGAN round](../reports/cifar-particle-ddgan/README.md):
+  configs under `configs/cifar_particle_ddgan/`.
+- [Toy VAE scout](../reports/mog-vae/README.md) and
+  [lower-LR/constant-KL comparison](../reports/mog-vae/stability/README.md):
+  configs under `configs/mog_vae/`.
+- [Earlier AE studies](../reports/mog-autoencoder/README.md) and
+  [CIFAR AE baseline](../reports/cifar-particle-ae/README.md).
+
+Use the [queue runner](experiment-runner.md) with one worker per GPU for image
+jobs and the reports' commands for tailing combined logs. Reports include
+configs, completion certificates, metrics and numerical audits; raw checkpoints
+and source archives stay under ignored `runs/`. No new training was required
+for the API release. A recipe alone does not specify the study's architecture.
