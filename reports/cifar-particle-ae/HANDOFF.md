@@ -1,10 +1,16 @@
-# AE-GAN handoff — checkpoint capacity scouts
+# AE-GAN handoff — completed checkpoint capacity scouts
 
 Branch: `feat/cifar-ae-gan-pretrained-encoder`. User target remains CIFAR-10 generation FID50k below 13. User authorized stopping the two-D continuation and running capacity scouts on both GPUs through the pipeline. They explicitly requested a subagent to implement the change; `/root/capacity_trainer` implemented the standalone trainer, primary agent integrated and tested it.
 
-## Current work
+## Latest completion status
 
-Four scouts run from the **original one-D 50k checkpoint to 70k**, using one D update throughout:
+**All four growth scouts completed and were re-certified. Both GPUs are idle. No new jobs are queued.** Final70k FID: control19.2033, grow_d19.2402, grow_both20.1437, grow_g22.8981. Training costs versus control: D1.11×, both1.28×, G1.14×. G-only reconstruction MSE improved5.4% while generation FID worsened3.69. D-only best intermediate18.5407 at65k rebounded by70k. Recommendation: do not promote these expansions into longer training. Read `growth_scout/FINDINGS.md` and `growth_scout/LEADERBOARD.md` for interpretation. The remaining content below describes the completed launch and implementation, not active work.
+
+Possible next discussion: a different pretrained discriminator backbone (not tested in this head-growth round), or blocking reconstruction gradients specifically on newly added G branches while retaining old routing. These are proposals only; await the user's direction before launching.
+
+## Completed protocol
+
+Four scouts ran from the **original one-D 50k checkpoint to 70k**, using one D update throughout:
 
 | Arm | G expansion | D head expansion |
 |---|---|---|
