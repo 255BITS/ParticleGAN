@@ -1,0 +1,8 @@
+# What this round can distinguish
+
+1. **Too few independently adaptable centers.** Prediction: 4096 descendants differentiate and improve FID at both evaluations. Strong evidence requires persistent distribution-level improvement, not just a lower selected minimum or larger latent distances.
+2. **Slow differentiation after exact cloning.** Prediction: descendants remain close relative to saved component sigma, and between-sibling image differences remain small compared with within-child noise variation. A negative short scout would not distinguish adequate support from an ineffective expansion intervention. A small balanced sibling perturbation is the planned follow-up.
+3. **Discriminator feedback quality.** Prediction: extra support differentiates without helping FID. Existing D can classify a fixed generator, but D warmup, weaker bcap and half-G LR did not fix joint FID. Feedback magnitude/AUC alone are not direction-quality measurements. Dense bcap remains untested in matched joint FID.
+4. **Architecture/reconstruction pressure.** Prior larger-generator and E-only studies weaken the simplest versions of these explanations. They do not rule out all architecture or objective improvements. Current experiment holds G/D/E, noise, reconstruction routing and rates fixed.
+
+Expansion retains identical initial mixture weights and component positions to floating-point tolerance. It necessarily changes per-row sampling frequency, copied-moment adaptation, and gradient allocation. Therefore even a positive result demonstrates an effective expansion intervention, not a uniquely isolated abstract capacity limit. No seed repeats; no automatic promotion of a small or reversing gain.

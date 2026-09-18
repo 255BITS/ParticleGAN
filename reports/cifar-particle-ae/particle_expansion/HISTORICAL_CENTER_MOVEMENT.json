@@ -1,0 +1,37 @@
+[
+  {
+    "step": 10000,
+    "ema_center_coordinate_rms_from_10k": 0.0,
+    "median_center_l2_from_10k": 0.0,
+    "sigma": 0.212616428732872,
+    "coordinate_movement_over_sigma": 0.0
+  },
+  {
+    "step": 20000,
+    "ema_center_coordinate_rms_from_10k": 0.31102055311203003,
+    "median_center_l2_from_10k": 2.4596333503723145,
+    "sigma": 0.212616428732872,
+    "coordinate_movement_over_sigma": 1.4628247022628784
+  },
+  {
+    "step": 30000,
+    "ema_center_coordinate_rms_from_10k": 0.4196154773235321,
+    "median_center_l2_from_10k": 3.331941604614258,
+    "sigma": 0.212616428732872,
+    "coordinate_movement_over_sigma": 1.97357976436615
+  },
+  {
+    "step": 40000,
+    "ema_center_coordinate_rms_from_10k": 0.4976145327091217,
+    "median_center_l2_from_10k": 3.921677589416504,
+    "sigma": 0.212616428732872,
+    "coordinate_movement_over_sigma": 2.340433120727539
+  },
+  {
+    "step": 50000,
+    "ema_center_coordinate_rms_from_10k": 0.5687727928161621,
+    "median_center_l2_from_10k": 4.513146877288818,
+    "sigma": 0.212616428732872,
+    "coordinate_movement_over_sigma": 2.675112247467041
+  }
+]

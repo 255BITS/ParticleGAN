@@ -1,0 +1,9 @@
+{
+  "pid": 266496,
+  "log": "runs/cifar_particle_ae/particle_expansion_scout/PIPELINE.log",
+  "command": ".venv/bin/python -u experiments/cifar_ae_expansion_pipeline.py",
+  "gpus": [
+    0,
+    1
+  ]
+}

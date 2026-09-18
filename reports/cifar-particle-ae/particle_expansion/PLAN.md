@@ -1,6 +1,6 @@
 # Planned particle-expansion experiments
 
-Status: planning only; no implementation or training launched. User asked to plan the next experiments before compacting. Target remains sustained CIFAR FID50k improvement toward <13. The particle-support explanation is a hypothesis, not an established cause.
+Status: resumed and implemented on 2026-09-18. Preflight passed; matched full scout launched on both GPUs. See PREFLIGHT.md, LAUNCH.json and the particle_expansion_scout report. Original plan below retained for interpretation. Target remains sustained CIFAR FID50k improvement toward <13. The particle-support explanation is a hypothesis, not an established cause.
 
 ## Question and predictions
 
