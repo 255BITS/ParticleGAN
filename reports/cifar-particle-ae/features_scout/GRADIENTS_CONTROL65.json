@@ -1,0 +1,184 @@
+[
+  {
+    "checkpoint": "runs/cifar_particle_ae/features_scout/control/checkpoint_065000.pt",
+    "sha256": "b676af5aecbcdfa57c14f6f187f58d94dc03dbcbd894304a23410e123c6fb54d",
+    "step": 65000,
+    "weights": "live G/D/E/prior, not EMA",
+    "batches": [
+      {
+        "adv_G_norm": 0.17614352703094482,
+        "applied_rec_G_norm": 0.14559055864810944,
+        "rec_over_adv": 0.8265450596809387,
+        "rec_adv_cosine": 0.042522989213466644,
+        "D_fake_input_grad_norm": 0.673270583152771,
+        "paired_real_above_fake": 0.640625,
+        "real_minus_fake_mean": 0.015668749809265137,
+        "g_loss": 0.7014140486717224
+      },
+      {
+        "adv_G_norm": 0.14522188901901245,
+        "applied_rec_G_norm": 0.14749018847942352,
+        "rec_over_adv": 1.0156195163726807,
+        "rec_adv_cosine": 0.03263958916068077,
+        "D_fake_input_grad_norm": 0.6297210454940796,
+        "paired_real_above_fake": 0.515625,
+        "real_minus_fake_mean": 0.004323482513427734,
+        "g_loss": 0.69575035572052
+      },
+      {
+        "adv_G_norm": 0.21398232877254486,
+        "applied_rec_G_norm": 0.15350979566574097,
+        "rec_over_adv": 0.7173947095870972,
+        "rec_adv_cosine": 0.011720065958797932,
+        "D_fake_input_grad_norm": 0.6497341394424438,
+        "paired_real_above_fake": 0.5625,
+        "real_minus_fake_mean": 0.014690399169921875,
+        "g_loss": 0.7010282278060913
+      },
+      {
+        "adv_G_norm": 0.19079960882663727,
+        "applied_rec_G_norm": 0.14914430677890778,
+        "rec_over_adv": 0.7816803455352783,
+        "rec_adv_cosine": -0.03137502819299698,
+        "D_fake_input_grad_norm": 0.6505336761474609,
+        "paired_real_above_fake": 0.609375,
+        "real_minus_fake_mean": 0.016749143600463867,
+        "g_loss": 0.7018706202507019
+      },
+      {
+        "adv_G_norm": 0.20389948785305023,
+        "applied_rec_G_norm": 0.15000183880329132,
+        "rec_over_adv": 0.7356656193733215,
+        "rec_adv_cosine": 0.06608802080154419,
+        "D_fake_input_grad_norm": 0.6908639669418335,
+        "paired_real_above_fake": 0.625,
+        "real_minus_fake_mean": 0.018992185592651367,
+        "g_loss": 0.703236997127533
+      },
+      {
+        "adv_G_norm": 0.20530475676059723,
+        "applied_rec_G_norm": 0.1317521333694458,
+        "rec_over_adv": 0.6417393088340759,
+        "rec_adv_cosine": 0.054244231432676315,
+        "D_fake_input_grad_norm": 0.6529483795166016,
+        "paired_real_above_fake": 0.734375,
+        "real_minus_fake_mean": 0.0212099552154541,
+        "g_loss": 0.7042502164840698
+      },
+      {
+        "adv_G_norm": 0.14471469819545746,
+        "applied_rec_G_norm": 0.15225918591022491,
+        "rec_over_adv": 1.052133560180664,
+        "rec_adv_cosine": 0.02046241983771324,
+        "D_fake_input_grad_norm": 0.6642488241195679,
+        "paired_real_above_fake": 0.609375,
+        "real_minus_fake_mean": 0.014353275299072266,
+        "g_loss": 0.7009775638580322
+      },
+      {
+        "adv_G_norm": 0.17028866708278656,
+        "applied_rec_G_norm": 0.1355287730693817,
+        "rec_over_adv": 0.7958766222000122,
+        "rec_adv_cosine": 0.024482103064656258,
+        "D_fake_input_grad_norm": 0.6284427642822266,
+        "paired_real_above_fake": 0.546875,
+        "real_minus_fake_mean": 0.005622982978820801,
+        "g_loss": 0.6966415643692017
+      },
+      {
+        "adv_G_norm": 0.1594148874282837,
+        "applied_rec_G_norm": 0.1573280692100525,
+        "rec_over_adv": 0.9869095087051392,
+        "rec_adv_cosine": -0.0048964619636535645,
+        "D_fake_input_grad_norm": 0.6298373937606812,
+        "paired_real_above_fake": 0.59375,
+        "real_minus_fake_mean": 0.011678814888000488,
+        "g_loss": 0.6994920969009399
+      },
+      {
+        "adv_G_norm": 0.1722688525915146,
+        "applied_rec_G_norm": 0.15536493062973022,
+        "rec_over_adv": 0.9018747806549072,
+        "rec_adv_cosine": 0.04728105664253235,
+        "D_fake_input_grad_norm": 0.6253553628921509,
+        "paired_real_above_fake": 0.546875,
+        "real_minus_fake_mean": 0.0075571537017822266,
+        "g_loss": 0.6973585486412048
+      },
+      {
+        "adv_G_norm": 0.168217271566391,
+        "applied_rec_G_norm": 0.13494841754436493,
+        "rec_over_adv": 0.8022269010543823,
+        "rec_adv_cosine": 0.012256685644388199,
+        "D_fake_input_grad_norm": 0.6876137852668762,
+        "paired_real_above_fake": 0.625,
+        "real_minus_fake_mean": 0.01737368106842041,
+        "g_loss": 0.7022354602813721
+      },
+      {
+        "adv_G_norm": 0.15213032066822052,
+        "applied_rec_G_norm": 0.13810046017169952,
+        "rec_over_adv": 0.9077773690223694,
+        "rec_adv_cosine": 0.053717050701379776,
+        "D_fake_input_grad_norm": 0.6522842645645142,
+        "paired_real_above_fake": 0.515625,
+        "real_minus_fake_mean": 0.002391815185546875,
+        "g_loss": 0.6947107315063477
+      },
+      {
+        "adv_G_norm": 0.1782897412776947,
+        "applied_rec_G_norm": 0.15803144872188568,
+        "rec_over_adv": 0.886374294757843,
+        "rec_adv_cosine": 0.059676483273506165,
+        "D_fake_input_grad_norm": 0.6811389327049255,
+        "paired_real_above_fake": 0.671875,
+        "real_minus_fake_mean": 0.019399642944335938,
+        "g_loss": 0.7033974528312683
+      },
+      {
+        "adv_G_norm": 0.19123318791389465,
+        "applied_rec_G_norm": 0.1547255963087082,
+        "rec_over_adv": 0.8090938329696655,
+        "rec_adv_cosine": 0.0620652511715889,
+        "D_fake_input_grad_norm": 0.6887391209602356,
+        "paired_real_above_fake": 0.640625,
+        "real_minus_fake_mean": 0.018904924392700195,
+        "g_loss": 0.7029159665107727
+      },
+      {
+        "adv_G_norm": 0.1819756180047989,
+        "applied_rec_G_norm": 0.1513771265745163,
+        "rec_over_adv": 0.8318538665771484,
+        "rec_adv_cosine": 0.06912784278392792,
+        "D_fake_input_grad_norm": 0.6777713298797607,
+        "paired_real_above_fake": 0.5625,
+        "real_minus_fake_mean": 0.008446693420410156,
+        "g_loss": 0.6980015635490417
+      },
+      {
+        "adv_G_norm": 0.20537815988063812,
+        "applied_rec_G_norm": 0.1607898473739624,
+        "rec_over_adv": 0.7828965187072754,
+        "rec_adv_cosine": 0.030795637518167496,
+        "D_fake_input_grad_norm": 0.6395373344421387,
+        "paired_real_above_fake": 0.578125,
+        "real_minus_fake_mean": 0.013387918472290039,
+        "g_loss": 0.700421929359436
+      }
+    ],
+    "mean": {
+      "adv_G_norm": 0.1787039376795292,
+      "applied_rec_G_norm": 0.14849641732871532,
+      "rec_over_adv": 0.8422288633882999,
+      "rec_adv_cosine": 0.034425496065523475,
+      "D_fake_input_grad_norm": 0.6576275564730167,
+      "paired_real_above_fake": 0.5986328125,
+      "real_minus_fake_mean": 0.013171926140785217,
+      "g_loss": 0.700231458991766
+    },
+    "routing": {
+      "new_G_reconstruction": true
+    },
+    "note": "Applied G gradients respect routing. Reconstructions and prior gradients are not FID measurements."
+  }
+]

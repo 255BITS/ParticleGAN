@@ -1,0 +1,912 @@
+[
+  {
+    "checkpoint": "runs/cifar_particle_ae/features_scout/control/checkpoint.pt",
+    "sha256": "54b1808fd6d345eb0e949b58a013594c356bd8a157062df956f77bfbb09530f6",
+    "step": 70000,
+    "weights": "live G/D/E/prior, not EMA",
+    "batches": [
+      {
+        "adv_G_norm": 0.20468689501285553,
+        "applied_rec_G_norm": 0.10050429403781891,
+        "rec_over_adv": 0.4910148084163666,
+        "rec_adv_cosine": -0.004538907669484615,
+        "D_fake_input_grad_norm": 0.7272084951400757,
+        "paired_real_above_fake": 0.703125,
+        "real_minus_fake_mean": 0.029826879501342773,
+        "g_loss": 0.7084596157073975
+      },
+      {
+        "adv_G_norm": 0.16339629888534546,
+        "applied_rec_G_norm": 0.09606292098760605,
+        "rec_over_adv": 0.5879136919975281,
+        "rec_adv_cosine": 0.011304355226457119,
+        "D_fake_input_grad_norm": 0.6997051239013672,
+        "paired_real_above_fake": 0.640625,
+        "real_minus_fake_mean": 0.016109943389892578,
+        "g_loss": 0.7014575004577637
+      },
+      {
+        "adv_G_norm": 0.23020793497562408,
+        "applied_rec_G_norm": 0.091738760471344,
+        "rec_over_adv": 0.3985038995742798,
+        "rec_adv_cosine": 0.0179724283516407,
+        "D_fake_input_grad_norm": 0.7260231971740723,
+        "paired_real_above_fake": 0.703125,
+        "real_minus_fake_mean": 0.02884221076965332,
+        "g_loss": 0.7079102993011475
+      },
+      {
+        "adv_G_norm": 0.19991785287857056,
+        "applied_rec_G_norm": 0.1034107506275177,
+        "rec_over_adv": 0.5172662138938904,
+        "rec_adv_cosine": 0.021077996119856834,
+        "D_fake_input_grad_norm": 0.7236624956130981,
+        "paired_real_above_fake": 0.671875,
+        "real_minus_fake_mean": 0.020807504653930664,
+        "g_loss": 0.7038729786872864
+      },
+      {
+        "adv_G_norm": 0.23794527351856232,
+        "applied_rec_G_norm": 0.08779263496398926,
+        "rec_over_adv": 0.3689614534378052,
+        "rec_adv_cosine": 0.04367606341838837,
+        "D_fake_input_grad_norm": 0.7628074884414673,
+        "paired_real_above_fake": 0.703125,
+        "real_minus_fake_mean": 0.02779221534729004,
+        "g_loss": 0.7077028751373291
+      },
+      {
+        "adv_G_norm": 0.2215600609779358,
+        "applied_rec_G_norm": 0.09708563983440399,
+        "rec_over_adv": 0.4381910562515259,
+        "rec_adv_cosine": 0.009691442362964153,
+        "D_fake_input_grad_norm": 0.7299526929855347,
+        "paired_real_above_fake": 0.640625,
+        "real_minus_fake_mean": 0.022842884063720703,
+        "g_loss": 0.7049628496170044
+      },
+      {
+        "adv_G_norm": 0.1833343505859375,
+        "applied_rec_G_norm": 0.08873029053211212,
+        "rec_over_adv": 0.4839807152748108,
+        "rec_adv_cosine": 0.03419683501124382,
+        "D_fake_input_grad_norm": 0.7151934504508972,
+        "paired_real_above_fake": 0.53125,
+        "real_minus_fake_mean": 0.008612632751464844,
+        "g_loss": 0.69782555103302
+      },
+      {
+        "adv_G_norm": 0.17760717868804932,
+        "applied_rec_G_norm": 0.08000104874372482,
+        "rec_over_adv": 0.45043814182281494,
+        "rec_adv_cosine": -0.06499330699443817,
+        "D_fake_input_grad_norm": 0.698134183883667,
+        "paired_real_above_fake": 0.75,
+        "real_minus_fake_mean": 0.0306396484375,
+        "g_loss": 0.7088984251022339
+      },
+      {
+        "adv_G_norm": 0.1905575394630432,
+        "applied_rec_G_norm": 0.08927978575229645,
+        "rec_over_adv": 0.46851879358291626,
+        "rec_adv_cosine": -0.044759608805179596,
+        "D_fake_input_grad_norm": 0.6956424117088318,
+        "paired_real_above_fake": 0.59375,
+        "real_minus_fake_mean": 0.010632991790771484,
+        "g_loss": 0.698800802230835
+      },
+      {
+        "adv_G_norm": 0.20684649050235748,
+        "applied_rec_G_norm": 0.0869988277554512,
+        "rec_over_adv": 0.42059609293937683,
+        "rec_adv_cosine": 0.033980485051870346,
+        "D_fake_input_grad_norm": 0.7128512859344482,
+        "paired_real_above_fake": 0.59375,
+        "real_minus_fake_mean": 0.015767335891723633,
+        "g_loss": 0.7013405561447144
+      },
+      {
+        "adv_G_norm": 0.18655996024608612,
+        "applied_rec_G_norm": 0.09208610653877258,
+        "rec_over_adv": 0.4936005771160126,
+        "rec_adv_cosine": -0.060268182307481766,
+        "D_fake_input_grad_norm": 0.7480913400650024,
+        "paired_real_above_fake": 0.703125,
+        "real_minus_fake_mean": 0.026082754135131836,
+        "g_loss": 0.706538736820221
+      },
+      {
+        "adv_G_norm": 0.17534536123275757,
+        "applied_rec_G_norm": 0.08981107920408249,
+        "rec_over_adv": 0.512195348739624,
+        "rec_adv_cosine": -0.019916322082281113,
+        "D_fake_input_grad_norm": 0.7195245027542114,
+        "paired_real_above_fake": 0.609375,
+        "real_minus_fake_mean": 0.017253398895263672,
+        "g_loss": 0.7021656036376953
+      },
+      {
+        "adv_G_norm": 0.18922318518161774,
+        "applied_rec_G_norm": 0.10092968493700027,
+        "rec_over_adv": 0.5333896279335022,
+        "rec_adv_cosine": 0.003277510404586792,
+        "D_fake_input_grad_norm": 0.7454313039779663,
+        "paired_real_above_fake": 0.546875,
+        "real_minus_fake_mean": 0.009845256805419922,
+        "g_loss": 0.6984668970108032
+      },
+      {
+        "adv_G_norm": 0.20729276537895203,
+        "applied_rec_G_norm": 0.09029852598905563,
+        "rec_over_adv": 0.4356086850166321,
+        "rec_adv_cosine": -0.02025371789932251,
+        "D_fake_input_grad_norm": 0.7434525489807129,
+        "paired_real_above_fake": 0.65625,
+        "real_minus_fake_mean": 0.024476289749145508,
+        "g_loss": 0.7057590484619141
+      },
+      {
+        "adv_G_norm": 0.1953362077474594,
+        "applied_rec_G_norm": 0.09269173443317413,
+        "rec_over_adv": 0.4745240807533264,
+        "rec_adv_cosine": -0.013293725438416004,
+        "D_fake_input_grad_norm": 0.7346025705337524,
+        "paired_real_above_fake": 0.53125,
+        "real_minus_fake_mean": 0.010068655014038086,
+        "g_loss": 0.6986287236213684
+      },
+      {
+        "adv_G_norm": 0.18733452260494232,
+        "applied_rec_G_norm": 0.10262150317430496,
+        "rec_over_adv": 0.5477981567382812,
+        "rec_adv_cosine": 0.023708347231149673,
+        "D_fake_input_grad_norm": 0.7092093229293823,
+        "paired_real_above_fake": 0.609375,
+        "real_minus_fake_mean": 0.022778034210205078,
+        "g_loss": 0.7049384117126465
+      }
+    ],
+    "mean": {
+      "adv_G_norm": 0.19732199236750603,
+      "applied_rec_G_norm": 0.09312772424891591,
+      "rec_over_adv": 0.4764063339680433,
+      "rec_adv_cosine": -0.001821144251152873,
+      "D_fake_input_grad_norm": 0.7244682759046555,
+      "paired_real_above_fake": 0.63671875,
+      "real_minus_fake_mean": 0.020148664712905884,
+      "g_loss": 0.7036080546677113
+    },
+    "routing": {
+      "new_G_reconstruction": true
+    },
+    "note": "Applied G gradients respect routing. Reconstructions and prior gradients are not FID measurements."
+  },
+  {
+    "checkpoint": "runs/cifar_particle_ae/features_scout/grow_g_adv/checkpoint.pt",
+    "sha256": "a5ffcf260e960c5fba874ae3a7bdcfca5651738da9e2c815cb85d0ca21552a37",
+    "step": 70000,
+    "weights": "live G/D/E/prior, not EMA",
+    "batches": [
+      {
+        "adv_G_norm": 0.09420623630285263,
+        "applied_rec_G_norm": 0.06424182653427124,
+        "rec_over_adv": 0.6819275617599487,
+        "rec_adv_cosine": -0.03860113024711609,
+        "D_fake_input_grad_norm": 0.2664929926395416,
+        "paired_real_above_fake": 0.640625,
+        "real_minus_fake_mean": 0.006176948547363281,
+        "g_loss": 0.6962796449661255
+      },
+      {
+        "adv_G_norm": 0.0953778475522995,
+        "applied_rec_G_norm": 0.04649488627910614,
+        "rec_over_adv": 0.4874809682369232,
+        "rec_adv_cosine": -0.09460534155368805,
+        "D_fake_input_grad_norm": 0.27123433351516724,
+        "paired_real_above_fake": 0.5625,
+        "real_minus_fake_mean": 0.0018482208251953125,
+        "g_loss": 0.694115936756134
+      },
+      {
+        "adv_G_norm": 0.10280907154083252,
+        "applied_rec_G_norm": 0.055515747517347336,
+        "rec_over_adv": 0.5399888157844543,
+        "rec_adv_cosine": 0.10345567017793655,
+        "D_fake_input_grad_norm": 0.2618944048881531,
+        "paired_real_above_fake": 0.5625,
+        "real_minus_fake_mean": 0.002801179885864258,
+        "g_loss": 0.6945849657058716
+      },
+      {
+        "adv_G_norm": 0.09962349385023117,
+        "applied_rec_G_norm": 0.051656242460012436,
+        "rec_over_adv": 0.5185146927833557,
+        "rec_adv_cosine": -0.11593606323003769,
+        "D_fake_input_grad_norm": 0.2648349702358246,
+        "paired_real_above_fake": 0.671875,
+        "real_minus_fake_mean": 0.00447535514831543,
+        "g_loss": 0.6954360604286194
+      },
+      {
+        "adv_G_norm": 0.09006065130233765,
+        "applied_rec_G_norm": 0.05716434493660927,
+        "rec_over_adv": 0.634731650352478,
+        "rec_adv_cosine": -0.0361795574426651,
+        "D_fake_input_grad_norm": 0.26624348759651184,
+        "paired_real_above_fake": 0.53125,
+        "real_minus_fake_mean": 0.004377603530883789,
+        "g_loss": 0.6953762769699097
+      },
+      {
+        "adv_G_norm": 0.0978805348277092,
+        "applied_rec_G_norm": 0.04559740424156189,
+        "rec_over_adv": 0.46584752202033997,
+        "rec_adv_cosine": -0.1608918309211731,
+        "D_fake_input_grad_norm": 0.26480430364608765,
+        "paired_real_above_fake": 0.5625,
+        "real_minus_fake_mean": 0.0010004043579101562,
+        "g_loss": 0.6936999559402466
+      },
+      {
+        "adv_G_norm": 0.1032683402299881,
+        "applied_rec_G_norm": 0.060080308467149734,
+        "rec_over_adv": 0.5817882418632507,
+        "rec_adv_cosine": -0.1365741491317749,
+        "D_fake_input_grad_norm": 0.27453142404556274,
+        "paired_real_above_fake": 0.640625,
+        "real_minus_fake_mean": 0.0044078826904296875,
+        "g_loss": 0.6953835487365723
+      },
+      {
+        "adv_G_norm": 0.08367814123630524,
+        "applied_rec_G_norm": 0.06646804511547089,
+        "rec_over_adv": 0.794329822063446,
+        "rec_adv_cosine": -0.01888490468263626,
+        "D_fake_input_grad_norm": 0.2615886330604553,
+        "paired_real_above_fake": 0.5,
+        "real_minus_fake_mean": -1.7881393432617188e-05,
+        "g_loss": 0.6931875944137573
+      },
+      {
+        "adv_G_norm": 0.10992145538330078,
+        "applied_rec_G_norm": 0.05173058807849884,
+        "rec_over_adv": 0.47061410546302795,
+        "rec_adv_cosine": -0.04290962591767311,
+        "D_fake_input_grad_norm": 0.258453369140625,
+        "paired_real_above_fake": 0.625,
+        "real_minus_fake_mean": 0.006720542907714844,
+        "g_loss": 0.6965603828430176
+      },
+      {
+        "adv_G_norm": 0.1002054512500763,
+        "applied_rec_G_norm": 0.05461214482784271,
+        "rec_over_adv": 0.545001745223999,
+        "rec_adv_cosine": -0.08410288393497467,
+        "D_fake_input_grad_norm": 0.26041102409362793,
+        "paired_real_above_fake": 0.640625,
+        "real_minus_fake_mean": 0.005307674407958984,
+        "g_loss": 0.6958340406417847
+      },
+      {
+        "adv_G_norm": 0.10306257009506226,
+        "applied_rec_G_norm": 0.05936755612492561,
+        "rec_over_adv": 0.5760341286659241,
+        "rec_adv_cosine": 0.02414863370358944,
+        "D_fake_input_grad_norm": 0.26681607961654663,
+        "paired_real_above_fake": 0.765625,
+        "real_minus_fake_mean": 0.009408712387084961,
+        "g_loss": 0.697905421257019
+      },
+      {
+        "adv_G_norm": 0.09785789996385574,
+        "applied_rec_G_norm": 0.05114692449569702,
+        "rec_over_adv": 0.52266526222229,
+        "rec_adv_cosine": -0.0815652459859848,
+        "D_fake_input_grad_norm": 0.2638298273086548,
+        "paired_real_above_fake": 0.640625,
+        "real_minus_fake_mean": 0.0044100284576416016,
+        "g_loss": 0.6954038143157959
+      },
+      {
+        "adv_G_norm": 0.09069754928350449,
+        "applied_rec_G_norm": 0.057517312467098236,
+        "rec_over_adv": 0.6341661214828491,
+        "rec_adv_cosine": 0.019189555197954178,
+        "D_fake_input_grad_norm": 0.25470054149627686,
+        "paired_real_above_fake": 0.53125,
+        "real_minus_fake_mean": -0.00033545494079589844,
+        "g_loss": 0.6930195093154907
+      },
+      {
+        "adv_G_norm": 0.09755978733301163,
+        "applied_rec_G_norm": 0.05622652918100357,
+        "rec_over_adv": 0.5763289332389832,
+        "rec_adv_cosine": -0.06847018003463745,
+        "D_fake_input_grad_norm": 0.26895660161972046,
+        "paired_real_above_fake": 0.59375,
+        "real_minus_fake_mean": 0.003761768341064453,
+        "g_loss": 0.6950749158859253
+      },
+      {
+        "adv_G_norm": 0.09014349430799484,
+        "applied_rec_G_norm": 0.05972025543451309,
+        "rec_over_adv": 0.662502110004425,
+        "rec_adv_cosine": -0.10185509920120239,
+        "D_fake_input_grad_norm": 0.2699018716812134,
+        "paired_real_above_fake": 0.46875,
+        "real_minus_fake_mean": -0.0007033348083496094,
+        "g_loss": 0.692839503288269
+      },
+      {
+        "adv_G_norm": 0.09262002259492874,
+        "applied_rec_G_norm": 0.05546135827898979,
+        "rec_over_adv": 0.5988052487373352,
+        "rec_adv_cosine": -0.08850790560245514,
+        "D_fake_input_grad_norm": 0.26104405522346497,
+        "paired_real_above_fake": 0.546875,
+        "real_minus_fake_mean": 0.0016548633575439453,
+        "g_loss": 0.6940284967422485
+      }
+    ],
+    "mean": {
+      "adv_G_norm": 0.09681078419089317,
+      "applied_rec_G_norm": 0.05581259215250611,
+      "rec_over_adv": 0.5806704331189394,
+      "rec_adv_cosine": -0.05764312867540866,
+      "D_fake_input_grad_norm": 0.26473361998796463,
+      "paired_real_above_fake": 0.5927734375,
+      "real_minus_fake_mean": 0.003455907106399536,
+      "g_loss": 0.6949206292629242
+    },
+    "routing": {
+      "new_G_reconstruction": false
+    },
+    "note": "Applied G gradients respect routing. Reconstructions and prior gradients are not FID measurements."
+  },
+  {
+    "checkpoint": "runs/cifar_particle_ae/features_scout/resnet34/checkpoint_065000.pt",
+    "sha256": "bdf29abfdf60e1b72a4e368405ec3ada4a45c92be27c8d7e0c3a8ad157b738e3",
+    "step": 65000,
+    "weights": "live G/D/E/prior, not EMA",
+    "batches": [
+      {
+        "adv_G_norm": 0.010622135363519192,
+        "applied_rec_G_norm": 0.05839404836297035,
+        "rec_over_adv": 5.497392654418945,
+        "rec_adv_cosine": -0.2537619173526764,
+        "D_fake_input_grad_norm": 0.015030130743980408,
+        "paired_real_above_fake": 0.53125,
+        "real_minus_fake_mean": 0.00032901763916015625,
+        "g_loss": 0.693313479423523
+      },
+      {
+        "adv_G_norm": 0.010021098889410496,
+        "applied_rec_G_norm": 0.051480941474437714,
+        "rec_over_adv": 5.1372551918029785,
+        "rec_adv_cosine": -0.255601704120636,
+        "D_fake_input_grad_norm": 0.01484720129519701,
+        "paired_real_above_fake": 0.421875,
+        "real_minus_fake_mean": -0.0005255937576293945,
+        "g_loss": 0.6928858160972595
+      },
+      {
+        "adv_G_norm": 0.010342610999941826,
+        "applied_rec_G_norm": 0.04895498603582382,
+        "rec_over_adv": 4.7333292961120605,
+        "rec_adv_cosine": -0.22276875376701355,
+        "D_fake_input_grad_norm": 0.015397331677377224,
+        "paired_real_above_fake": 0.515625,
+        "real_minus_fake_mean": -3.218650817871094e-05,
+        "g_loss": 0.6931331157684326
+      },
+      {
+        "adv_G_norm": 0.01038174144923687,
+        "applied_rec_G_norm": 0.055812444537878036,
+        "rec_over_adv": 5.376019477844238,
+        "rec_adv_cosine": -0.2648656964302063,
+        "D_fake_input_grad_norm": 0.014682866632938385,
+        "paired_real_above_fake": 0.484375,
+        "real_minus_fake_mean": 0.00011146068572998047,
+        "g_loss": 0.6932051181793213
+      },
+      {
+        "adv_G_norm": 0.010247617028653622,
+        "applied_rec_G_norm": 0.05101250484585762,
+        "rec_over_adv": 4.977986812591553,
+        "rec_adv_cosine": -0.22597721219062805,
+        "D_fake_input_grad_norm": 0.015141241252422333,
+        "paired_real_above_fake": 0.53125,
+        "real_minus_fake_mean": 0.0005136728286743164,
+        "g_loss": 0.6934056282043457
+      },
+      {
+        "adv_G_norm": 0.00983910821378231,
+        "applied_rec_G_norm": 0.051189061254262924,
+        "rec_over_adv": 5.202611923217773,
+        "rec_adv_cosine": -0.218589186668396,
+        "D_fake_input_grad_norm": 0.014993734657764435,
+        "paired_real_above_fake": 0.40625,
+        "real_minus_fake_mean": -0.0009260177612304688,
+        "g_loss": 0.6926863193511963
+      },
+      {
+        "adv_G_norm": 0.010389945469796658,
+        "applied_rec_G_norm": 0.05025820434093475,
+        "rec_over_adv": 4.837196350097656,
+        "rec_adv_cosine": -0.26632845401763916,
+        "D_fake_input_grad_norm": 0.013950113207101822,
+        "paired_real_above_fake": 0.40625,
+        "real_minus_fake_mean": -0.00048732757568359375,
+        "g_loss": 0.6929054260253906
+      },
+      {
+        "adv_G_norm": 0.010105754248797894,
+        "applied_rec_G_norm": 0.05647534877061844,
+        "rec_over_adv": 5.58843469619751,
+        "rec_adv_cosine": -0.24279725551605225,
+        "D_fake_input_grad_norm": 0.014901071786880493,
+        "paired_real_above_fake": 0.421875,
+        "real_minus_fake_mean": -0.000583648681640625,
+        "g_loss": 0.6928573846817017
+      },
+      {
+        "adv_G_norm": 0.010483519174158573,
+        "applied_rec_G_norm": 0.05369444936513901,
+        "rec_over_adv": 5.121796131134033,
+        "rec_adv_cosine": -0.252682089805603,
+        "D_fake_input_grad_norm": 0.01469330582767725,
+        "paired_real_above_fake": 0.5625,
+        "real_minus_fake_mean": -0.0002821683883666992,
+        "g_loss": 0.693008542060852
+      },
+      {
+        "adv_G_norm": 0.010912183672189713,
+        "applied_rec_G_norm": 0.05451541766524315,
+        "rec_over_adv": 4.995830059051514,
+        "rec_adv_cosine": -0.2738930881023407,
+        "D_fake_input_grad_norm": 0.014812255278229713,
+        "paired_real_above_fake": 0.40625,
+        "real_minus_fake_mean": -0.0008357763290405273,
+        "g_loss": 0.6927309036254883
+      },
+      {
+        "adv_G_norm": 0.0105906892567873,
+        "applied_rec_G_norm": 0.051173191517591476,
+        "rec_over_adv": 4.83190393447876,
+        "rec_adv_cosine": -0.2580536901950836,
+        "D_fake_input_grad_norm": 0.015084687620401382,
+        "paired_real_above_fake": 0.453125,
+        "real_minus_fake_mean": -0.00016748905181884766,
+        "g_loss": 0.6930647492408752
+      },
+      {
+        "adv_G_norm": 0.009677983820438385,
+        "applied_rec_G_norm": 0.05486014857888222,
+        "rec_over_adv": 5.668551445007324,
+        "rec_adv_cosine": -0.2863548696041107,
+        "D_fake_input_grad_norm": 0.014907555654644966,
+        "paired_real_above_fake": 0.421875,
+        "real_minus_fake_mean": -0.00045013427734375,
+        "g_loss": 0.6929234266281128
+      },
+      {
+        "adv_G_norm": 0.010098622180521488,
+        "applied_rec_G_norm": 0.06780226528644562,
+        "rec_over_adv": 6.7140116691589355,
+        "rec_adv_cosine": -0.2311006486415863,
+        "D_fake_input_grad_norm": 0.015931319445371628,
+        "paired_real_above_fake": 0.515625,
+        "real_minus_fake_mean": 0.0001239776611328125,
+        "g_loss": 0.6932119131088257
+      },
+      {
+        "adv_G_norm": 0.010189338587224483,
+        "applied_rec_G_norm": 0.047895874828100204,
+        "rec_over_adv": 4.700587272644043,
+        "rec_adv_cosine": -0.2519136667251587,
+        "D_fake_input_grad_norm": 0.015278719365596771,
+        "paired_real_above_fake": 0.515625,
+        "real_minus_fake_mean": -0.0001647472381591797,
+        "g_loss": 0.6930660605430603
+      },
+      {
+        "adv_G_norm": 0.009330973029136658,
+        "applied_rec_G_norm": 0.05655641108751297,
+        "rec_over_adv": 6.061148166656494,
+        "rec_adv_cosine": -0.2803800404071808,
+        "D_fake_input_grad_norm": 0.014819158241152763,
+        "paired_real_above_fake": 0.5,
+        "real_minus_fake_mean": -0.0004845857620239258,
+        "g_loss": 0.6929066181182861
+      },
+      {
+        "adv_G_norm": 0.010393284261226654,
+        "applied_rec_G_norm": 0.06153174117207527,
+        "rec_over_adv": 5.920336723327637,
+        "rec_adv_cosine": -0.2243613600730896,
+        "D_fake_input_grad_norm": 0.014822252094745636,
+        "paired_real_above_fake": 0.40625,
+        "real_minus_fake_mean": -0.0008565187454223633,
+        "g_loss": 0.692720890045166
+      }
+    ],
+    "mean": {
+      "adv_G_norm": 0.010226662852801383,
+      "applied_rec_G_norm": 0.05447543994523585,
+      "rec_over_adv": 5.335274487733841,
+      "rec_adv_cosine": -0.25058935210108757,
+      "D_fake_input_grad_norm": 0.014955809048842639,
+      "paired_real_above_fake": 0.46875,
+      "real_minus_fake_mean": -0.00029487907886505127,
+      "g_loss": 0.6930015869438648
+    },
+    "routing": {
+      "new_G_reconstruction": true
+    },
+    "note": "Applied G gradients respect routing. Reconstructions and prior gradients are not FID measurements."
+  },
+  {
+    "checkpoint": "runs/cifar_particle_ae/features_scout/resnet34/checkpoint.pt",
+    "sha256": "64b6e2426ee3386211ad6fabac02b10cbd012f4046bea6749eaa018132682d42",
+    "step": 70000,
+    "weights": "live G/D/E/prior, not EMA",
+    "batches": [
+      {
+        "adv_G_norm": 0.35330021381378174,
+        "applied_rec_G_norm": 0.08044862002134323,
+        "rec_over_adv": 0.22770611941814423,
+        "rec_adv_cosine": -0.285532683134079,
+        "D_fake_input_grad_norm": 0.24291206896305084,
+        "paired_real_above_fake": 0.34375,
+        "real_minus_fake_mean": -0.044779300689697266,
+        "g_loss": 0.6733877062797546
+      },
+      {
+        "adv_G_norm": 0.34343743324279785,
+        "applied_rec_G_norm": 0.06239430978894234,
+        "rec_over_adv": 0.18167591094970703,
+        "rec_adv_cosine": -0.27586549520492554,
+        "D_fake_input_grad_norm": 0.253554105758667,
+        "paired_real_above_fake": 0.359375,
+        "real_minus_fake_mean": -0.03196239471435547,
+        "g_loss": 0.679478645324707
+      },
+      {
+        "adv_G_norm": 0.4006366729736328,
+        "applied_rec_G_norm": 0.07100168615579605,
+        "rec_over_adv": 0.1772221326828003,
+        "rec_adv_cosine": -0.227050319314003,
+        "D_fake_input_grad_norm": 0.25311756134033203,
+        "paired_real_above_fake": 0.453125,
+        "real_minus_fake_mean": -0.004836082458496094,
+        "g_loss": 0.6928369998931885
+      },
+      {
+        "adv_G_norm": 0.35458096861839294,
+        "applied_rec_G_norm": 0.08607244491577148,
+        "rec_over_adv": 0.24274411797523499,
+        "rec_adv_cosine": -0.2543027400970459,
+        "D_fake_input_grad_norm": 0.23676031827926636,
+        "paired_real_above_fake": 0.359375,
+        "real_minus_fake_mean": -0.029911041259765625,
+        "g_loss": 0.6796293258666992
+      },
+      {
+        "adv_G_norm": 0.34697502851486206,
+        "applied_rec_G_norm": 0.07132873684167862,
+        "rec_over_adv": 0.20557311177253723,
+        "rec_adv_cosine": -0.24652041494846344,
+        "D_fake_input_grad_norm": 0.23034483194351196,
+        "paired_real_above_fake": 0.296875,
+        "real_minus_fake_mean": -0.03520536422729492,
+        "g_loss": 0.6771843433380127
+      },
+      {
+        "adv_G_norm": 0.37833312153816223,
+        "applied_rec_G_norm": 0.08497127145528793,
+        "rec_over_adv": 0.22459378838539124,
+        "rec_adv_cosine": -0.3119351267814636,
+        "D_fake_input_grad_norm": 0.25082486867904663,
+        "paired_real_above_fake": 0.4375,
+        "real_minus_fake_mean": -0.016458511352539062,
+        "g_loss": 0.6870988607406616
+      },
+      {
+        "adv_G_norm": 0.3387897312641144,
+        "applied_rec_G_norm": 0.06658695638179779,
+        "rec_over_adv": 0.1965436041355133,
+        "rec_adv_cosine": -0.27119898796081543,
+        "D_fake_input_grad_norm": 0.24171005189418793,
+        "paired_real_above_fake": 0.28125,
+        "real_minus_fake_mean": -0.05497407913208008,
+        "g_loss": 0.6673822402954102
+      },
+      {
+        "adv_G_norm": 0.333550363779068,
+        "applied_rec_G_norm": 0.07041328400373459,
+        "rec_over_adv": 0.2111024111509323,
+        "rec_adv_cosine": -0.2987978756427765,
+        "D_fake_input_grad_norm": 0.25235289335250854,
+        "paired_real_above_fake": 0.40625,
+        "real_minus_fake_mean": -0.020703792572021484,
+        "g_loss": 0.6846427321434021
+      },
+      {
+        "adv_G_norm": 0.3791796565055847,
+        "applied_rec_G_norm": 0.08321579545736313,
+        "rec_over_adv": 0.21946270763874054,
+        "rec_adv_cosine": -0.2770712375640869,
+        "D_fake_input_grad_norm": 0.2357109785079956,
+        "paired_real_above_fake": 0.40625,
+        "real_minus_fake_mean": -0.03293275833129883,
+        "g_loss": 0.6784976720809937
+      },
+      {
+        "adv_G_norm": 0.3980966806411743,
+        "applied_rec_G_norm": 0.060203246772289276,
+        "rec_over_adv": 0.1512276977300644,
+        "rec_adv_cosine": -0.33384859561920166,
+        "D_fake_input_grad_norm": 0.2440946102142334,
+        "paired_real_above_fake": 0.40625,
+        "real_minus_fake_mean": -0.01087188720703125,
+        "g_loss": 0.6895670890808105
+      },
+      {
+        "adv_G_norm": 0.35007697343826294,
+        "applied_rec_G_norm": 0.0737982764840126,
+        "rec_over_adv": 0.21080586314201355,
+        "rec_adv_cosine": -0.2098282277584076,
+        "D_fake_input_grad_norm": 0.22384923696517944,
+        "paired_real_above_fake": 0.296875,
+        "real_minus_fake_mean": -0.06266975402832031,
+        "g_loss": 0.6638721227645874
+      },
+      {
+        "adv_G_norm": 0.3922721743583679,
+        "applied_rec_G_norm": 0.0750827044248581,
+        "rec_over_adv": 0.19140461087226868,
+        "rec_adv_cosine": -0.3239355683326721,
+        "D_fake_input_grad_norm": 0.2482079267501831,
+        "paired_real_above_fake": 0.375,
+        "real_minus_fake_mean": -0.02439594268798828,
+        "g_loss": 0.6828988790512085
+      },
+      {
+        "adv_G_norm": 0.36811554431915283,
+        "applied_rec_G_norm": 0.07449819892644882,
+        "rec_over_adv": 0.20237721502780914,
+        "rec_adv_cosine": -0.21751610934734344,
+        "D_fake_input_grad_norm": 0.2238614857196808,
+        "paired_real_above_fake": 0.375,
+        "real_minus_fake_mean": -0.03882122039794922,
+        "g_loss": 0.6752832531929016
+      },
+      {
+        "adv_G_norm": 0.37938034534454346,
+        "applied_rec_G_norm": 0.07182752341032028,
+        "rec_over_adv": 0.18932853639125824,
+        "rec_adv_cosine": -0.2469545304775238,
+        "D_fake_input_grad_norm": 0.23743507266044617,
+        "paired_real_above_fake": 0.3125,
+        "real_minus_fake_mean": -0.050705909729003906,
+        "g_loss": 0.6701292991638184
+      },
+      {
+        "adv_G_norm": 0.37290555238723755,
+        "applied_rec_G_norm": 0.07859233021736145,
+        "rec_over_adv": 0.21075665950775146,
+        "rec_adv_cosine": -0.18549396097660065,
+        "D_fake_input_grad_norm": 0.22916176915168762,
+        "paired_real_above_fake": 0.359375,
+        "real_minus_fake_mean": -0.030102252960205078,
+        "g_loss": 0.6795972585678101
+      },
+      {
+        "adv_G_norm": 0.41090646386146545,
+        "applied_rec_G_norm": 0.08120910823345184,
+        "rec_over_adv": 0.19763405621051788,
+        "rec_adv_cosine": -0.33269697427749634,
+        "D_fake_input_grad_norm": 0.23461183905601501,
+        "paired_real_above_fake": 0.390625,
+        "real_minus_fake_mean": -0.03084421157836914,
+        "g_loss": 0.6796555519104004
+      }
+    ],
+    "mean": {
+      "adv_G_norm": 0.3687835577875376,
+      "applied_rec_G_norm": 0.0744777808431536,
+      "rec_over_adv": 0.20250990893691778,
+      "rec_adv_cosine": -0.26865930296480656,
+      "D_fake_input_grad_norm": 0.23990685120224953,
+      "paired_real_above_fake": 0.3662109375,
+      "real_minus_fake_mean": -0.032510906457901,
+      "g_loss": 0.6788213737308979
+    },
+    "routing": {
+      "new_G_reconstruction": true
+    },
+    "note": "Applied G gradients respect routing. Reconstructions and prior gradients are not FID measurements."
+  },
+  {
+    "checkpoint": "runs/cifar_particle_ae/features_scout/both/checkpoint.pt",
+    "sha256": "1be0da38a386f301d91ffc7602e87393835bec9d3de55528fa23e40d3c0d212d",
+    "step": 70000,
+    "weights": "live G/D/E/prior, not EMA",
+    "batches": [
+      {
+        "adv_G_norm": 0.05888771265745163,
+        "applied_rec_G_norm": 0.1878376305103302,
+        "rec_over_adv": 3.1897592544555664,
+        "rec_adv_cosine": -0.061677008867263794,
+        "D_fake_input_grad_norm": 0.04286152869462967,
+        "paired_real_above_fake": 0.453125,
+        "real_minus_fake_mean": -0.0005602836608886719,
+        "g_loss": 0.6928871870040894
+      },
+      {
+        "adv_G_norm": 0.060745902359485626,
+        "applied_rec_G_norm": 0.20790891349315643,
+        "rec_over_adv": 3.4225997924804688,
+        "rec_adv_cosine": -0.04883325472474098,
+        "D_fake_input_grad_norm": 0.041840165853500366,
+        "paired_real_above_fake": 0.46875,
+        "real_minus_fake_mean": -0.0014824867248535156,
+        "g_loss": 0.6924245357513428
+      },
+      {
+        "adv_G_norm": 0.06204049289226532,
+        "applied_rec_G_norm": 0.19189678132534027,
+        "rec_over_adv": 3.0930893421173096,
+        "rec_adv_cosine": -0.031370751559734344,
+        "D_fake_input_grad_norm": 0.04303925111889839,
+        "paired_real_above_fake": 0.390625,
+        "real_minus_fake_mean": -0.003673076629638672,
+        "g_loss": 0.6913278698921204
+      },
+      {
+        "adv_G_norm": 0.06145186722278595,
+        "applied_rec_G_norm": 0.17911584675312042,
+        "rec_over_adv": 2.91473388671875,
+        "rec_adv_cosine": -0.03259359672665596,
+        "D_fake_input_grad_norm": 0.04144081473350525,
+        "paired_real_above_fake": 0.375,
+        "real_minus_fake_mean": -0.0026192665100097656,
+        "g_loss": 0.6918512582778931
+      },
+      {
+        "adv_G_norm": 0.062383443117141724,
+        "applied_rec_G_norm": 0.17953816056251526,
+        "rec_over_adv": 2.8779778480529785,
+        "rec_adv_cosine": -0.03930344060063362,
+        "D_fake_input_grad_norm": 0.040772631764411926,
+        "paired_real_above_fake": 0.515625,
+        "real_minus_fake_mean": -0.000736236572265625,
+        "g_loss": 0.6927940845489502
+      },
+      {
+        "adv_G_norm": 0.06246894598007202,
+        "applied_rec_G_norm": 0.1974291205406189,
+        "rec_over_adv": 3.1604361534118652,
+        "rec_adv_cosine": -0.07115202397108078,
+        "D_fake_input_grad_norm": 0.04186520725488663,
+        "paired_real_above_fake": 0.546875,
+        "real_minus_fake_mean": 0.0006985664367675781,
+        "g_loss": 0.6935136318206787
+      },
+      {
+        "adv_G_norm": 0.061167024075984955,
+        "applied_rec_G_norm": 0.18449923396110535,
+        "rec_over_adv": 3.0163185596466064,
+        "rec_adv_cosine": -0.15439680218696594,
+        "D_fake_input_grad_norm": 0.042147643864154816,
+        "paired_real_above_fake": 0.359375,
+        "real_minus_fake_mean": -0.004628658294677734,
+        "g_loss": 0.6908519864082336
+      },
+      {
+        "adv_G_norm": 0.05542993173003197,
+        "applied_rec_G_norm": 0.19655568897724152,
+        "rec_over_adv": 3.546020746231079,
+        "rec_adv_cosine": -0.021446941420435905,
+        "D_fake_input_grad_norm": 0.042775627225637436,
+        "paired_real_above_fake": 0.40625,
+        "real_minus_fake_mean": -0.0035238265991210938,
+        "g_loss": 0.6914016604423523
+      },
+      {
+        "adv_G_norm": 0.07414393872022629,
+        "applied_rec_G_norm": 0.17856347560882568,
+        "rec_over_adv": 2.4083354473114014,
+        "rec_adv_cosine": -0.1886361986398697,
+        "D_fake_input_grad_norm": 0.041727110743522644,
+        "paired_real_above_fake": 0.5,
+        "real_minus_fake_mean": -0.0019421577453613281,
+        "g_loss": 0.69219571352005
+      },
+      {
+        "adv_G_norm": 0.05961482971906662,
+        "applied_rec_G_norm": 0.2036123424768448,
+        "rec_over_adv": 3.4154646396636963,
+        "rec_adv_cosine": -0.07870029658079147,
+        "D_fake_input_grad_norm": 0.04147134721279144,
+        "paired_real_above_fake": 0.40625,
+        "real_minus_fake_mean": -0.0010190010070800781,
+        "g_loss": 0.6926537752151489
+      },
+      {
+        "adv_G_norm": 0.05553026497364044,
+        "applied_rec_G_norm": 0.205585315823555,
+        "rec_over_adv": 3.702221155166626,
+        "rec_adv_cosine": 0.029129039496183395,
+        "D_fake_input_grad_norm": 0.0435025617480278,
+        "paired_real_above_fake": 0.46875,
+        "real_minus_fake_mean": -0.001739501953125,
+        "g_loss": 0.69230055809021
+      },
+      {
+        "adv_G_norm": 0.0570499561727047,
+        "applied_rec_G_norm": 0.18785716593265533,
+        "rec_over_adv": 3.292853832244873,
+        "rec_adv_cosine": 0.026551341637969017,
+        "D_fake_input_grad_norm": 0.0425904281437397,
+        "paired_real_above_fake": 0.359375,
+        "real_minus_fake_mean": -0.004511833190917969,
+        "g_loss": 0.6909146308898926
+      },
+      {
+        "adv_G_norm": 0.06625314801931381,
+        "applied_rec_G_norm": 0.1699417680501938,
+        "rec_over_adv": 2.5650367736816406,
+        "rec_adv_cosine": 0.008924007415771484,
+        "D_fake_input_grad_norm": 0.04400201886892319,
+        "paired_real_above_fake": 0.40625,
+        "real_minus_fake_mean": -0.0025649070739746094,
+        "g_loss": 0.6918840408325195
+      },
+      {
+        "adv_G_norm": 0.05954030156135559,
+        "applied_rec_G_norm": 0.1912437230348587,
+        "rec_over_adv": 3.2120046615600586,
+        "rec_adv_cosine": -0.009956061840057373,
+        "D_fake_input_grad_norm": 0.044155433773994446,
+        "paired_real_above_fake": 0.453125,
+        "real_minus_fake_mean": -9.298324584960938e-05,
+        "g_loss": 0.6931130886077881
+      },
+      {
+        "adv_G_norm": 0.0664728581905365,
+        "applied_rec_G_norm": 0.19751283526420593,
+        "rec_over_adv": 2.9713306427001953,
+        "rec_adv_cosine": -0.09615122526884079,
+        "D_fake_input_grad_norm": 0.042347945272922516,
+        "paired_real_above_fake": 0.359375,
+        "real_minus_fake_mean": -0.0042133331298828125,
+        "g_loss": 0.6910540461540222
+      },
+      {
+        "adv_G_norm": 0.05535842105746269,
+        "applied_rec_G_norm": 0.18787109851837158,
+        "rec_over_adv": 3.3937220573425293,
+        "rec_adv_cosine": -0.02399563603103161,
+        "D_fake_input_grad_norm": 0.03918379172682762,
+        "paired_real_above_fake": 0.46875,
+        "real_minus_fake_mean": -0.001598358154296875,
+        "g_loss": 0.6923686265945435
+      }
+    ],
+    "mean": {
+      "adv_G_norm": 0.061158689903095365,
+      "applied_rec_G_norm": 0.1904355688020587,
+      "rec_over_adv": 3.136369049549103,
+      "rec_adv_cosine": -0.04960055311676115,
+      "D_fake_input_grad_norm": 0.042232719250023365,
+      "paired_real_above_fake": 0.43359375,
+      "real_minus_fake_mean": -0.0021379590034484863,
+      "g_loss": 0.6920960433781147
+    },
+    "routing": {
+      "new_G_reconstruction": false
+    },
+    "note": "Applied G gradients respect routing. Reconstructions and prior gradients are not FID measurements."
+  }
+]

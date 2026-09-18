@@ -1,8 +1,18 @@
-# AE-GAN handoff — pretrained features and selective reconstruction scouts
+# AE-GAN handoff — completed feature and selective reconstruction scouts
 
-Branch `feat/cifar-ae-gan-pretrained-encoder`. User accepted the next experiments after capacity growth failed to improve final FID. Both GPUs are now assigned to the **features_scout** pipeline. Target remains CIFAR-10 generation FID50k below13. No seed experiments; easy-to-tail logs; summarize completed runs with leaderboard, interpretation, cost and recommendation. No automatic long promotion.
+Branch `feat/cifar-ae-gan-pretrained-encoder`. User accepted the next experiments after capacity growth failed to improve final FID. The **features_scout** pipeline is complete; both GPUs are idle. Target remains CIFAR-10 generation FID50k below13. No seed experiments; easy-to-tail logs; summarize completed runs with leaderboard, interpretation, cost and recommendation. No automatic long promotion.
 
-## Active scouts
+## Latest completed results and diagnosis
+
+**All four feature scouts completed and re-certified; no training queued.** Final70k FID: control20.3672, grow_g_adv22.6733, both27.8205, resnet34 86.5698. Neither intervention improved the endpoint. Selective-G best18.9398at55k later degraded; both had55.81at60k and partly recovered. ResNet34 deteriorated from23.06at65k to86.57at70k, with many noisy texture patches in its final sample grid.
+
+Read `features_scout/FINDINGS.md` for interpretation. Read-only live-checkpoint16×64 probes found ResNet34 D input gradients~44× weaker than the same-step control at65k; G adversarial gradients~17.5× weaker, reconstruction/adv~5.3. Paired real>fake46.9%at65k,36.6%at70k. Endpoint G gradients recovered in magnitude, so the failure is not uniformly vanishing gradients. Both70k also has weak critic gradients and43.4%real>fake. Selective reconstruction on new G branches alone did not rescue training. Probe script `experiments/probe_cifar_ae_features.py`; raw reports `features_scout/{GRADIENTS.json,GRADIENTS_CONTROL65.json}`. All source/parent hashes verified.
+
+Control20.3672 differs from previous round19.2033 despite same nominal recipe. Production nondeterministic CUDA settings are a reproducibility limitation; exact cause not isolated. Use contemporaneous controls and do not overinterpret small cross-round gains. No seed experiments.
+
+Recommendation discussed: test a short D-only adaptation period after swapping the pretrained backbone while G/E/prior remain fixed, with a matched adaptation control, then resume joint training. This is only a proposal: await user direction before launching. ResNet34 replacement changed feature coordinates for inherited trained heads/Adam; these results do not prove ResNet34 is inherently unsuitable. No endpoint should be promoted into long training.
+
+## Completed scout protocol
 
 - Pipeline PID at launch: 247178. Recheck processes/logs before action; do not duplicate work.
 - Tail: `tail -F runs/cifar_particle_ae/features_scout/PIPELINE.log`
