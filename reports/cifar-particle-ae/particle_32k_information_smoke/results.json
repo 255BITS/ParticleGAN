@@ -1,0 +1,302 @@
+[
+  {
+    "final": {
+      "information": {
+        "parents": 2,
+        "children_per_parent": 32,
+        "available_sibling_bits": 5.0,
+        "decoder": "train-only diagonal nearest-centroid softmax; validation shrinkage/temperature including uniform",
+        "train_draws_per_child": 4,
+        "validation_draws_per_child": 4,
+        "test_draws_per_child": 4,
+        "per_parent": {
+          "observed": [
+            {
+              "decodable_bits": 8.881784197001252e-16,
+              "test_ce_bits": 4.999999999999999,
+              "test_accuracy": 0.03125,
+              "validation_ce_bits": 5.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": 0.003529877432794315,
+              "test_ce_bits": 4.996470122567206,
+              "test_accuracy": 0.0546875,
+              "validation_ce_bits": 4.992113704069242,
+              "shrinkage": 1.0,
+              "temperature": 3.0
+            }
+          ],
+          "shuffled_labels": [
+            {
+              "decodable_bits": 8.881784197001252e-16,
+              "test_ce_bits": 4.999999999999999,
+              "test_accuracy": 0.03125,
+              "validation_ce_bits": 5.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": 8.881784197001252e-16,
+              "test_ce_bits": 4.999999999999999,
+              "test_accuracy": 0.03125,
+              "validation_ce_bits": 5.0,
+              "shrinkage": null,
+              "temperature": null
+            }
+          ],
+          "identical_clones": [
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 5.0,
+              "test_accuracy": 0.03125,
+              "validation_ce_bits": 4.999999999999999,
+              "shrinkage": 0.5,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 8.881784197001252e-16,
+              "test_ce_bits": 4.999999999999999,
+              "test_accuracy": 0.03125,
+              "validation_ce_bits": 4.999999999999999,
+              "shrinkage": 1.0,
+              "temperature": 0.1
+            }
+          ]
+        },
+        "total_panel_images": 768,
+        "controls": {
+          "shuffled_labels": "Independently permuted balanced feature-to-label assignments in train, validation and test.",
+          "identical_clones": "Feature-level exact null: repeat child0 features under every label, retaining independent noise splits. This is a decoder check, not another generator evaluation."
+        },
+        "observed": {
+          "decodable_bits": 0.0017649387163976016,
+          "parent_standard_error": 0.0017649387163967134,
+          "test_ce_bits": 4.998235061283602,
+          "test_accuracy": 0.04296875
+        },
+        "shuffled_labels": {
+          "decodable_bits": 8.881784197001252e-16,
+          "parent_standard_error": 0.0,
+          "test_ce_bits": 4.999999999999999,
+          "test_accuracy": 0.03125
+        },
+        "identical_clones": {
+          "decodable_bits": 4.440892098500626e-16,
+          "parent_standard_error": 4.440892098500626e-16,
+          "test_ce_bits": 5.0,
+          "test_accuracy": 0.03125
+        },
+        "interpretation": "Held-out estimate of a decoder-dependent conditional MI lower bound, not exact entropy. Negative estimates retained. Parent SE is descriptive, not uncertainty across training runs."
+      },
+      "variance": {
+        "within_child_fraction": 0.33459598007336533,
+        "between_siblings_fraction": 0.11096106402405564,
+        "between_parents_fraction": 0.5544429559025791,
+        "between_children_fraction": 0.6654040199266347,
+        "total_variance_trace": 161.81019992026478,
+        "total_sum_squares": 41261.60097966752,
+        "within_child_sum_squares": 13805.965819187986,
+        "between_siblings_sum_squares": 4578.431148039925,
+        "between_parents_sum_squares": 22877.20401243961,
+        "note": "Finite-sample balanced ANOVA fractions; between-mean terms contain estimation noise. Descriptive feature dispersion, not semantic mode count."
+      },
+      "density_coverage": {
+        "density": 0.625,
+        "coverage": 0.65625,
+        "real_samples": 128,
+        "fake_samples": 128,
+        "k": 3,
+        "radius_squared_mean": 249.55499267578125,
+        "distance_dtype": "torch.float32",
+        "radius_boundary": "strict <, kth other real neighbor",
+        "feature_variance_trace_ratio_to_real": 1.0904654475654876,
+        "feature_mean_distance_squared": 6.73486274727226
+      }
+    },
+    "config": {
+      "checkpoint": "runs/cifar_particle_ae/particle_32k_40k_smoke/32k_40k/checkpoint_010008.pt",
+      "checkpoint_sha256": "9ffd1cac5e93c96010e04308a4664f413378b80f58716ec0aa453516283aeca1",
+      "out_dir": "runs/cifar_particle_ae/particle_32k_information_smoke/32k_information_smoke",
+      "samples": 128,
+      "batch_size": 64,
+      "parents": 2,
+      "train_draws": 4,
+      "val_draws": 4,
+      "test_draws": 4,
+      "variance_draws": 4,
+      "k": 3,
+      "distance_chunk": 64,
+      "feature_cache": "results/cifar_ddgan/information_cache"
+    },
+    "parent_step": 10008,
+    "num_particles": 32768,
+    "expansion_factor": 32,
+    "parent_unchanged": true,
+    "frozen_state_unchanged": true,
+    "protocol": {
+      "dataset": "CIFAR-10",
+      "split": "train",
+      "real_samples": 128,
+      "fake_samples": 128,
+      "real_subset_seed": 71337,
+      "feature_extraction": {
+        "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+        "weights": "weights-inception-2015-12-05-6726825d.pth",
+        "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor",
+        "precision": "float32 extractor with TF32 disabled"
+      },
+      "generation_precision": "FP32 with TF32 disabled",
+      "distance_precision": "FP32 exact chunked squared Euclidean distances",
+      "statistics_precision": "float64 classifier and variance",
+      "density_coverage_k": 3,
+      "fid_recomputed": false,
+      "density_definition": "Mean real-neighborhood memberships per fake, divided by k",
+      "coverage_definition": "Fraction of real kNN balls containing at least one fake; strict radius comparisons"
+    },
+    "feature_extraction_protocol": {
+      "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+      "weights": "weights-inception-2015-12-05-6726825d.pth",
+      "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor",
+      "precision": "float32 extractor with TF32 disabled"
+    },
+    "information": {
+      "parents": 2,
+      "children_per_parent": 32,
+      "available_sibling_bits": 5.0,
+      "decoder": "train-only diagonal nearest-centroid softmax; validation shrinkage/temperature including uniform",
+      "train_draws_per_child": 4,
+      "validation_draws_per_child": 4,
+      "test_draws_per_child": 4,
+      "per_parent": {
+        "observed": [
+          {
+            "decodable_bits": 8.881784197001252e-16,
+            "test_ce_bits": 4.999999999999999,
+            "test_accuracy": 0.03125,
+            "validation_ce_bits": 5.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": 0.003529877432794315,
+            "test_ce_bits": 4.996470122567206,
+            "test_accuracy": 0.0546875,
+            "validation_ce_bits": 4.992113704069242,
+            "shrinkage": 1.0,
+            "temperature": 3.0
+          }
+        ],
+        "shuffled_labels": [
+          {
+            "decodable_bits": 8.881784197001252e-16,
+            "test_ce_bits": 4.999999999999999,
+            "test_accuracy": 0.03125,
+            "validation_ce_bits": 5.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": 8.881784197001252e-16,
+            "test_ce_bits": 4.999999999999999,
+            "test_accuracy": 0.03125,
+            "validation_ce_bits": 5.0,
+            "shrinkage": null,
+            "temperature": null
+          }
+        ],
+        "identical_clones": [
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 5.0,
+            "test_accuracy": 0.03125,
+            "validation_ce_bits": 4.999999999999999,
+            "shrinkage": 0.5,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 8.881784197001252e-16,
+            "test_ce_bits": 4.999999999999999,
+            "test_accuracy": 0.03125,
+            "validation_ce_bits": 4.999999999999999,
+            "shrinkage": 1.0,
+            "temperature": 0.1
+          }
+        ]
+      },
+      "total_panel_images": 768,
+      "controls": {
+        "shuffled_labels": "Independently permuted balanced feature-to-label assignments in train, validation and test.",
+        "identical_clones": "Feature-level exact null: repeat child0 features under every label, retaining independent noise splits. This is a decoder check, not another generator evaluation."
+      },
+      "observed": {
+        "decodable_bits": 0.0017649387163976016,
+        "parent_standard_error": 0.0017649387163967134,
+        "test_ce_bits": 4.998235061283602,
+        "test_accuracy": 0.04296875
+      },
+      "shuffled_labels": {
+        "decodable_bits": 8.881784197001252e-16,
+        "parent_standard_error": 0.0,
+        "test_ce_bits": 4.999999999999999,
+        "test_accuracy": 0.03125
+      },
+      "identical_clones": {
+        "decodable_bits": 4.440892098500626e-16,
+        "parent_standard_error": 4.440892098500626e-16,
+        "test_ce_bits": 5.0,
+        "test_accuracy": 0.03125
+      },
+      "interpretation": "Held-out estimate of a decoder-dependent conditional MI lower bound, not exact entropy. Negative estimates retained. Parent SE is descriptive, not uncertainty across training runs."
+    },
+    "variance": {
+      "within_child_fraction": 0.33459598007336533,
+      "between_siblings_fraction": 0.11096106402405564,
+      "between_parents_fraction": 0.5544429559025791,
+      "between_children_fraction": 0.6654040199266347,
+      "total_variance_trace": 161.81019992026478,
+      "total_sum_squares": 41261.60097966752,
+      "within_child_sum_squares": 13805.965819187986,
+      "between_siblings_sum_squares": 4578.431148039925,
+      "between_parents_sum_squares": 22877.20401243961,
+      "note": "Finite-sample balanced ANOVA fractions; between-mean terms contain estimation noise. Descriptive feature dispersion, not semantic mode count."
+    },
+    "density_coverage": {
+      "density": 0.625,
+      "coverage": 0.65625,
+      "real_samples": 128,
+      "fake_samples": 128,
+      "k": 3,
+      "radius_squared_mean": 249.55499267578125,
+      "distance_dtype": "torch.float32",
+      "radius_boundary": "strict <, kth other real neighbor",
+      "feature_variance_trace_ratio_to_real": 1.0904654475654876,
+      "feature_mean_distance_squared": 6.73486274727226
+    },
+    "real_feature_cache": "/home/martyn/dev/ParticleGAN/results/cifar_ddgan/information_cache/real-c8c636796cbc1b0c33a6db6bbbfc9dab024840bba85e8137e1c4298a24ba01e9.pt",
+    "real_reference": {
+      "feature_extraction_protocol": {
+        "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+        "weights": "weights-inception-2015-12-05-6726825d.pth",
+        "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor",
+        "precision": "float32 extractor with TF32 disabled"
+      },
+      "dataset": "CIFAR-10",
+      "split": "train",
+      "indices_sha256": "e63e813b602d67393d80e931909515790f83438d9d859c28ecc40cdcf34ba1b1",
+      "images_sha256": "b43b93ae8f5c7504997397af5a96654b845cae19b0cfb33a9d58e750b37f910a",
+      "extractor_state_sha256": "9a2309ea54c0e5b910fb2c644ccf35a9226a956c73beb87f0a5a4148ed60a663",
+      "samples": 128
+    },
+    "sources": {
+      "information": "https://arxiv.org/abs/1606.03657",
+      "density_coverage": "https://proceedings.mlr.press/v119/naeem20a.html",
+      "radius_convention": "https://github.com/clovaai/generative-evaluation-prdc/blob/master/prdc/prdc.py"
+    },
+    "real_features_sha256": "4a3e278e762d189af1b46207a0635d126b2b0a935abc42e5e32f34f70a80bf2b",
+    "diagnostic_precision": "FP32 generator and extractor with TF32 disabled; float64 classifier/variance. Matches extractor protocol, but generator TF32 differs from historical training/FID generation.",
+    "total_seconds": 5.492427151999436,
+    "note": "Read-only EMA diagnostics. Information/variance are conditional on sampled original parents; feature distinguishability can reflect artifacts. Density and coverage depend on extractor, k and sample count, and do not establish semantic quality or recall. No FID50k is recomputed."
+  }
+]

@@ -1,0 +1,12 @@
+batch_size: 64
+checkpoint: runs/cifar_particle_ae/particle_32k_40k_smoke/32k_40k/checkpoint_010008.pt
+checkpoint_sha256: 9ffd1cac5e93c96010e04308a4664f413378b80f58716ec0aa453516283aeca1
+distance_chunk: 64
+k: 3
+out_dir: runs/cifar_particle_ae/particle_32k_information_smoke/32k_information_smoke
+parents: 2
+samples: 128
+test_draws: 4
+train_draws: 4
+val_draws: 4
+variance_draws: 4

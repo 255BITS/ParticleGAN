@@ -1,0 +1,33 @@
+{
+  "16k_80k": {
+    "pid": 270329,
+    "command": [
+      ".venv/bin/python",
+      "-u",
+      "experiments/cifar_ae_particle_next.py",
+      "--arm",
+      "16k_80k"
+    ]
+  },
+  "32k_40k_smoke": {
+    "pid": 270330,
+    "command": [
+      ".venv/bin/python",
+      "-u",
+      "experiments/cifar_ae_particle_next.py",
+      "--arm",
+      "32k_40k",
+      "--smoke"
+    ]
+  },
+  "32k_40k": {
+    "pid": 270732,
+    "command": [
+      ".venv/bin/python",
+      "-u",
+      "experiments/cifar_ae_particle_next.py",
+      "--arm",
+      "32k_40k"
+    ]
+  }
+}
