@@ -1,6 +1,6 @@
 # CIFAR AE-GAN plateau: current handoff
 
-Branch: `feat/cifar-ae-gan-pretrained-encoder`. Latest user: "lets continue to figure out why we're plateuaing". This round completed the proposed G-only LR scout, endpoint D probes, and an additional read-only sampling/support investigation. All jobs finished; both GPUs idle. No long job or further scout is queued. Root cause remains unproven and FID below 13 remains unmet.
+Branch: `feat/cifar-ae-gan-pretrained-encoder`. Latest user: "ok cool lets plan some experiments for that next, compacting". Detailed planning-only next-round specification is saved in `particle_expansion/PLAN.md`; read it before implementation. No new experiment was launched for this compaction request. This round completed the proposed G-only LR scout, endpoint D probes, and an additional read-only sampling/support investigation. All jobs finished; both GPUs idle. No long job or further scout is queued. Root cause remains unproven and FID below 13 remains unmet.
 
 Read `generator_balance/FINDINGS.md` and `particle_support/FINDINGS.md`. Previous detailed discriminator investigation is archived in `HANDOFF_DISCRIMINATOR.md`; earlier architecture history in `HANDOFF_TRANSGAN.md`. Implementation commit for G LR scout: `b0cbfce`.
 
@@ -32,6 +32,8 @@ Noise is used and contributes to image variation; broader inference noise is not
 Grouped grid: `runs/cifar_particle_ae/particle_support/control_20k/within_particle.png`. Other checkpoints have corresponding grids. Midpoint/final joint sample grids and control grouped grid inspected; no total collapse claim.
 
 ## Recommended next test — NOT launched
+
+Concrete two-wave plan: `particle_expansion/PLAN.md`. First compare 1024 unchanged versus 4096 cloned/trainable centers on the two GPUs, 10k ->20k with FID50k at15k/20k. Mandatory preflight covers normalization, fixed sigma, per-row Adam/EMA mapping, regularizer differences, paired RNG and initial image/FID equivalence. Conditional follow-ups distinguish useful expansion from slow symmetry breaking; no automatic long promotion.
 
 Test expanding trainable particles 1024 -> 4096 from the same checkpoint, alongside a matched 1024 control. This tests whether more centers can learn distinct image configurations; wider inference noise did not. Preserve G/D/E and their Adam/EMA, saved sigma, and explicitly map expanded prior/EMA/Adam state. Audit initial generated distribution/FID before training to distinguish expansion initialization from training effects. **Simply repeating raw particle rows does not exactly preserve standardized means because `prior.means()` uses unbiased std**; account for this rather than claiming exact identity. Preserve historical source certificates via a new standalone trainer.
 
