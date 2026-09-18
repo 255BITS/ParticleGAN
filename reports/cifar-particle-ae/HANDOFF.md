@@ -1,8 +1,18 @@
-# AE-GAN handoff — scratch transformer and E-only CNN scouts running
+# AE-GAN handoff — scratch transformer and E-only CNN scouts complete
 
-Branch `feat/cifar-ae-gan-pretrained-encoder`. User requested TransGAN-style G with a subagent implementing it, reusing the historical full-reconstruction CNN benchmark. User explicitly added a fresh E-only CNN because the earlier E-only result was a checkpoint intervention. Three scratch50k runs are launched; no automatic long promotion. Goal remains FID50k below13. No seed experiments. Keep logs easy to tail and summarize results, leaderboard, explanations and recommendations when complete.
+Branch `feat/cifar-ae-gan-pretrained-encoder`. User requested TransGAN-style G with a subagent implementing it, reusing the historical full-reconstruction CNN benchmark. User explicitly added a fresh E-only CNN because the earlier E-only result was a checkpoint intervention. All three scratch50k runs completed and were re-certified; no continuation is queued. Goal remains FID50k below13. No seed experiments. Keep logs easy to tail and summarize results, leaderboard, explanations and recommendations when complete.
 
-## Active pipeline
+## Results and recommendation
+
+Final FID50k: CNN E-only23.1749, transformer full reconstruction24.4911, transformer E-only24.6440, versus historical full-reconstruction CNN18.9012. Transformer full reconstruction improves test MSE16.5% (.03357 versus.04022) for29.2× G parameters and7.6× training time, without improving FID. Training hours: CNN E-only0.61, transformer full4.72, transformer E-only4.54.
+
+E-only CNN curve10/20/30/40/50k:19.4482/20.3610/19.7293/20.0023/23.1749. Transformer full:25.7557/27.2631/24.4107/26.3416/24.4911. Transformer E-only:20.3919/22.9247/25.4700/71.8706/24.6440;40k visibly repeats a few appearances, with diversity recovering by50k. Similar final transformer scores conceal much worse E-only instability. No new observed minimum beats historical50k CNN.
+
+Main inference: direct reconstruction gradients on G/prior are not necessary for the plateau, so L2 competition alone cannot explain it. More G capacity is usable for reconstruction but does not resolve unconditional generation under this recipe. Shared discriminator feedback/regularization and prior/sampling remain suspects; current losses near.693 do not by themselves prove weak gradients. No new gradient probes in this review.
+
+Recommend against long promotion of these endpoints. Proposed next diagnostic (NOT launched): freeze G/prior at an inexpensive CNN10k checkpoint and test whether D can learn real/fake separation under current regularization, using held-out draws and input gradients to assess useful feedback. Await user direction; bothGPUs idle. See `transgan_scout/FINDINGS.md` for caveats, curves and recommendation.
+
+## Completed pipeline
 
 - Launched UTC: 2026-09-18T11:52:16.922473+00:00. Pipeline PID **254269**; recheck status rather than assuming active or relaunching.
 - Command: `bash experiments/cifar_ae_transgan_pipeline.sh transgan_scout 0,1`.
@@ -13,7 +23,7 @@ Branch `feat/cifar-ae-gan-pretrained-encoder`. User requested TransGAN-style G w
 - Runs: `runs/cifar_particle_ae/transgan_scout/{transgan_all,transgan_e_only,cnn_e_only}/`.
 - All start from scratch,50k steps, FID50k/test10k reconstruction every10k, checkpoint saved each evaluation.
 - Automatic analyzer: `experiments/analyze_cifar_ae_transgan.py`; report `reports/cifar-particle-ae/transgan_scout/LEADERBOARD.md`.
-- BothGPUs available to this task, but currently occupied. No other long jobs remain active.
+- Both GPUs are idle. Pipeline exited0 and its PID no longer exists. No other long jobs remain active.
 
 ## Design and implementation
 
@@ -35,7 +45,7 @@ Steady preflight speed: transformer all2.92updates/s, E-only3.03, CNN23.53. Esti
 
 Historical full-reconstruction CNN scratch trajectory: FID50k19.6110at10k,20.1046at20k,19.4391at30k,19.4241at40k,18.9012at50k. Resumed at30k with full state and unchanged recipe; source certificates and early audit hashes verified. Reference `HISTORICAL_CNN.json`. Do not retrain full-reconstruction CNN (user preference). New CNN E-only provides the fresh architecture comparison; historical CNN all-gradient contrasts are less controlled. Transformer is much larger, so gains cannot be assigned to attention alone. E-only blocks bothG andprior rec updates, so it cannot distinguish their individual effects.
 
-On completion, re-certify all3 runs, inspect final curves and samples, report finalFID ranking/cost and historical contrasts. Analyzer runs automatically after pipeline; partial reports deliberately refuse winner selection. Preserve checkpoint options; no automatic200k promotion.
+Results review complete: all3 runs re-certified, final sample grids and transformer E-only40k grid inspected. Analyzer report and detailed `transgan_scout/FINDINGS.md` saved. All checkpoint options preserved; no automatic200k promotion.
 
 ## Prior work and source safety
 
