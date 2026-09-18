@@ -1,0 +1,6 @@
+[
+  "configs/cifar_particle_ae/features_smoke/control.yaml",
+  "configs/cifar_particle_ae/features_smoke/resnet34.yaml",
+  "configs/cifar_particle_ae/features_smoke/grow_g_adv.yaml",
+  "configs/cifar_particle_ae/features_smoke/both.yaml"
+]

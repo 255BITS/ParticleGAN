@@ -1,0 +1,253 @@
+{
+  "tests": "4 passed",
+  "smokes": [
+    {
+      "name": "control",
+      "certified": true,
+      "parameters": {
+        "G": 645123,
+        "D": 3583204,
+        "E": 428320,
+        "prior": 65536
+      },
+      "backbone_audit": {
+        "changed": false,
+        "before": "ResNet18_Weights.IMAGENET1K_V1",
+        "after": "ResNet18_Weights.IMAGENET1K_V1",
+        "maximum_absolute_change": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 7.450580596923828e-09
+        },
+        "trainable_D_unchanged_at_swap": true,
+        "D_function_preservation_expected": true,
+        "adaptation": "joint training; no extra D warmup or optimizer reset"
+      },
+      "growth_audit": {
+        "added_parameters": {
+          "G": 0,
+          "D": 0
+        },
+        "maximum_absolute_error": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 1.1175870895385742e-08
+        },
+        "double_backward_finite": true,
+        "frozen_D_input_gradient_preserved": true,
+        "new_G_EMA_equal": null
+      },
+      "reconstruction_routing": {
+        "old_G": true,
+        "new_G": true,
+        "E": true,
+        "prior": true
+      },
+      "Adam_steps": {
+        "optimizer_g": [
+          50016
+        ],
+        "optimizer_d": [
+          50016
+        ]
+      },
+      "training_rng": {
+        "data": "f29daa9389684464a6bf511bd5b35558eea698991ed3785f4683df87c89a7972",
+        "prior": "ab51a38642a5c5d718b2b4fddfdacb904a274df40f03ef7570ea11bab31c688a"
+      }
+    },
+    {
+      "name": "resnet34",
+      "certified": true,
+      "parameters": {
+        "G": 645123,
+        "D": 8970724,
+        "E": 428320,
+        "prior": 65536
+      },
+      "backbone_audit": {
+        "changed": true,
+        "before": "ResNet18_Weights.IMAGENET1K_V1",
+        "after": "ResNet34_Weights.IMAGENET1K_V1",
+        "maximum_absolute_change": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.22476565837860107,
+          "D_input_gradient": 0.10091764479875565
+        },
+        "trainable_D_unchanged_at_swap": true,
+        "D_function_preservation_expected": false,
+        "adaptation": "joint training; no extra D warmup or optimizer reset"
+      },
+      "growth_audit": {
+        "added_parameters": {
+          "G": 0,
+          "D": 0
+        },
+        "maximum_absolute_error": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 3.725290298461914e-09
+        },
+        "double_backward_finite": true,
+        "frozen_D_input_gradient_preserved": true,
+        "new_G_EMA_equal": null
+      },
+      "reconstruction_routing": {
+        "old_G": true,
+        "new_G": true,
+        "E": true,
+        "prior": true
+      },
+      "Adam_steps": {
+        "optimizer_g": [
+          50016
+        ],
+        "optimizer_d": [
+          50016
+        ]
+      },
+      "training_rng": {
+        "data": "f29daa9389684464a6bf511bd5b35558eea698991ed3785f4683df87c89a7972",
+        "prior": "ab51a38642a5c5d718b2b4fddfdacb904a274df40f03ef7570ea11bab31c688a"
+      }
+    },
+    {
+      "name": "grow_g_adv",
+      "certified": true,
+      "parameters": {
+        "G": 1091331,
+        "D": 3583204,
+        "E": 428320,
+        "prior": 65536
+      },
+      "backbone_audit": {
+        "changed": false,
+        "before": "ResNet18_Weights.IMAGENET1K_V1",
+        "after": "ResNet18_Weights.IMAGENET1K_V1",
+        "maximum_absolute_change": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 7.450580596923828e-09
+        },
+        "trainable_D_unchanged_at_swap": true,
+        "D_function_preservation_expected": true,
+        "adaptation": "joint training; no extra D warmup or optimizer reset"
+      },
+      "growth_audit": {
+        "added_parameters": {
+          "G": 446208,
+          "D": 0
+        },
+        "maximum_absolute_error": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 1.4901161193847656e-08
+        },
+        "double_backward_finite": true,
+        "frozen_D_input_gradient_preserved": true,
+        "new_G_EMA_equal": true
+      },
+      "reconstruction_routing": {
+        "old_G": true,
+        "new_G": false,
+        "E": true,
+        "prior": true
+      },
+      "Adam_steps": {
+        "optimizer_g": [
+          16,
+          50016
+        ],
+        "optimizer_d": [
+          50016
+        ]
+      },
+      "training_rng": {
+        "data": "f29daa9389684464a6bf511bd5b35558eea698991ed3785f4683df87c89a7972",
+        "prior": "ab51a38642a5c5d718b2b4fddfdacb904a274df40f03ef7570ea11bab31c688a"
+      }
+    },
+    {
+      "name": "both",
+      "certified": true,
+      "parameters": {
+        "G": 1091331,
+        "D": 8970724,
+        "E": 428320,
+        "prior": 65536
+      },
+      "backbone_audit": {
+        "changed": true,
+        "before": "ResNet18_Weights.IMAGENET1K_V1",
+        "after": "ResNet34_Weights.IMAGENET1K_V1",
+        "maximum_absolute_change": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.22476565837860107,
+          "D_input_gradient": 0.10091764479875565
+        },
+        "trainable_D_unchanged_at_swap": true,
+        "D_function_preservation_expected": false,
+        "adaptation": "joint training; no extra D warmup or optimizer reset"
+      },
+      "growth_audit": {
+        "added_parameters": {
+          "G": 446208,
+          "D": 0
+        },
+        "maximum_absolute_error": {
+          "G": 0.0,
+          "G_input_gradient": 0.0,
+          "ema_G": 0.0,
+          "ema_G_input_gradient": 0.0,
+          "D": 0.0,
+          "D_input_gradient": 3.725290298461914e-09
+        },
+        "double_backward_finite": true,
+        "frozen_D_input_gradient_preserved": true,
+        "new_G_EMA_equal": true
+      },
+      "reconstruction_routing": {
+        "old_G": true,
+        "new_G": false,
+        "E": true,
+        "prior": true
+      },
+      "Adam_steps": {
+        "optimizer_g": [
+          16,
+          50016
+        ],
+        "optimizer_d": [
+          50016
+        ]
+      },
+      "training_rng": {
+        "data": "f29daa9389684464a6bf511bd5b35558eea698991ed3785f4683df87c89a7972",
+        "prior": "ab51a38642a5c5d718b2b4fddfdacb904a274df40f03ef7570ea11bab31c688a"
+      }
+    }
+  ],
+  "parent_unchanged": true,
+  "shared_training_rng_at_50016": true
+}

@@ -1,0 +1,6 @@
+[
+  "configs/cifar_particle_ae/features_scout/control.yaml",
+  "configs/cifar_particle_ae/features_scout/resnet34.yaml",
+  "configs/cifar_particle_ae/features_scout/grow_g_adv.yaml",
+  "configs/cifar_particle_ae/features_scout/both.yaml"
+]

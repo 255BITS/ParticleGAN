@@ -1,0 +1,44 @@
+{
+  "pipeline_pid": 247178,
+  "started_utc": "2026-09-18T09:17:43.695887+00:00",
+  "command": [
+    "bash",
+    "experiments/cifar_ae_features_pipeline.sh",
+    "features_scout",
+    "0,1"
+  ],
+  "parent_sha256": "10fe8bbc22afb29ff6838ad1ede86e142320e5d7bce43c745b97de24e23ee8d6",
+  "steps": [
+    50000,
+    70000
+  ],
+  "gpus": [
+    0,
+    1
+  ],
+  "validation": "4 tests passed; 4/4 real-parent pipeline smokes certified",
+  "log": "runs/cifar_particle_ae/features_scout/PIPELINE.log",
+  "verified_utc": "2026-09-18T09:18:05.820481+00:00",
+  "running": {
+    "control": {
+      "step": 50300,
+      "steps_per_second": 19.466680855953026,
+      "d_loss": 0.6832234859466553,
+      "g_loss": 0.701409101486206
+    },
+    "resnet34": {
+      "step": 50300,
+      "steps_per_second": 17.467554756722706,
+      "d_loss": 0.6941913366317749,
+      "g_loss": 0.6937549114227295
+    }
+  },
+  "queued": [
+    "grow_g_adv",
+    "both"
+  ],
+  "gpu_utilization_at_verification": {
+    "0": 100,
+    "1": 100
+  }
+}

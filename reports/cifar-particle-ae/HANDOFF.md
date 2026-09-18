@@ -1,59 +1,46 @@
-# AE-GAN handoff — completed checkpoint capacity scouts
+# AE-GAN handoff — pretrained features and selective reconstruction scouts
 
-Branch: `feat/cifar-ae-gan-pretrained-encoder`. User target remains CIFAR-10 generation FID50k below 13. User authorized stopping the two-D continuation and running capacity scouts on both GPUs through the pipeline. They explicitly requested a subagent to implement the change; `/root/capacity_trainer` implemented the standalone trainer, primary agent integrated and tested it.
+Branch `feat/cifar-ae-gan-pretrained-encoder`. User accepted the next experiments after capacity growth failed to improve final FID. Both GPUs are now assigned to the **features_scout** pipeline. Target remains CIFAR-10 generation FID50k below13. No seed experiments; easy-to-tail logs; summarize completed runs with leaderboard, interpretation, cost and recommendation. No automatic long promotion.
 
-## Latest completion status
+## Active scouts
 
-**All four growth scouts completed and were re-certified. Both GPUs are idle. No new jobs are queued.** Final70k FID: control19.2033, grow_d19.2402, grow_both20.1437, grow_g22.8981. Training costs versus control: D1.11×, both1.28×, G1.14×. G-only reconstruction MSE improved5.4% while generation FID worsened3.69. D-only best intermediate18.5407 at65k rebounded by70k. Recommendation: do not promote these expansions into longer training. Read `growth_scout/FINDINGS.md` and `growth_scout/LEADERBOARD.md` for interpretation. The remaining content below describes the completed launch and implementation, not active work.
+- Pipeline PID at launch: 247178. Recheck processes/logs before action; do not duplicate work.
+- Tail: `tail -F runs/cifar_particle_ae/features_scout/PIPELINE.log`
+- Command: `bash experiments/cifar_ae_features_pipeline.sh features_scout 0,1`
+- Manifest: `configs/cifar_particle_ae/features_scout/manifest.json`
+- Trainer: `experiments/train_cifar_ae_features.py`
+- Automatic completion report: `reports/cifar-particle-ae/features_scout/LEADERBOARD.md`
+- Detailed plan and evidence: `features_scout/{PLAN.md,VALIDATION.json,TESTS.txt,LAUNCH.json}`.
 
-Possible next discussion: a different pretrained discriminator backbone (not tested in this head-growth round), or blocking reconstruction gradients specifically on newly added G branches while retaining old routing. These are proposals only; await the user's direction before launching.
+All four run from original one-D50k to70k, with FID50k/reconstruction10k/checkpoints every5k. Same full original parent state and seed, one D update throughout, lazy bcapN8×8, same rates and reconstruction weight.
 
-## Completed protocol
-
-Four scouts ran from the **original one-D 50k checkpoint to 70k**, using one D update throughout:
-
-| Arm | G expansion | D head expansion |
+| Arm | Pretrained D | Added G branches |
 |---|---|---|
-| control | no | no |
-| grow_g | yes | no |
-| grow_d | no | yes |
-| grow_both | yes | yes |
+| control | original ResNet18 | none |
+| resnet34 | frozen ResNet34 replacement | none |
+| grow_g_adv | original ResNet18 | reconstruction gradients blocked only on new parameters |
+| both | frozen ResNet34 replacement | same selective new-G routing |
 
-Pipeline PID at launch: **245618**, GPUs `0,1`, one worker each. Check current logs/processes before action; do not duplicate or restart completed jobs.
+Parent: `runs/cifar_particle_ae/duration_100k/n08/checkpoint_050000.pt`, SHA256 `10fe8bbc22afb29ff6838ad1ede86e142320e5d7bce43c745b97de24e23ee8d6`, FID18.9012.
 
-- Tail: `tail -F runs/cifar_particle_ae/growth_scout/PIPELINE.log`
-- Command: `bash experiments/cifar_ae_growth_pipeline.sh growth_scout 0,1`
-- Configs: `configs/cifar_particle_ae/growth_scout/manifest.json`
-- Trainer: `experiments/train_cifar_ae_growth.py`
-- Automatic final report: `reports/cifar-particle-ae/growth_scout/LEADERBOARD.md`
-- Plan, validation and launch records: `growth_scout/{PLAN.md,VALIDATION.json,TESTS.txt,LAUNCH.json}` under this report directory.
+ResNet34 replacement preserves trained D pixel branch, heads and Adam state, but changes pretrained feature coordinates and thus D scores immediately. Fixed initial probe maximum score change~0.22477. No head reset, extra D warmup or G freezing: this tests replacement plus joint adaptation, not an isolated function-preserving capacity increase. Only frozen backbone parameters change; D total parameters3583204→8970724. Feature channels and spatial shapes remain compatible, pretrained weights cached. Runtime backbone audit logs before/after weights and G/EMA preservation.
 
-FID50k plus held-out reconstruction10k and full checkpoints every 5k (55/60/65/70k). Rank final endpoints and report best intermediate separately. Analyzer reports FID against training time, deltas to contemporaneous control, and factorial interaction. No automatic long promotion. User dislikes paying substantial compute for approximately one FID point.
+G uses the previously tested identity refinements, increasing645123→1091331 parameters. Temporarily freezing only `g.growth` parameters during the reconstruction forward removes their reconstruction gradients; branch activations remain differentiable into old G, E and prior. The already-built adversarial graph still updates new parameters. Reconstruction evaluation uses the same full generator. No other gradient routing changed. New G parameters alone get fresh Adam state; full old model/EMA/Adam/RNG state restored.
 
-Parent: `runs/cifar_particle_ae/duration_100k/n08/checkpoint_050000.pt`, SHA256 `10fe8bbc22afb29ff6838ad1ede86e142320e5d7bce43c745b97de24e23ee8d6`, FID50k **18.9012**. All variants retain full old model/EMA/Adam/RNG state and shared seed. Growth initialization uses separate fixed CPU RNG streams without changing training RNG. Reconstruction still updates E/G/prior; exact bcap every8 D updates, coefficient times8. Frozen ResNet18 discriminator backbone unchanged.
+## Validation and implementation
 
-## Architecture and validation
+Four tests passed: two selective-gradient cases (allowed/blocked), real-parent CUDA pretrained swap preserving G/EMA, learned D/Adam state and RNG, and deterministic8vs4+4 combined-model full-state resume. ResNet34 passes double backward and stays frozen through train/requires_grad toggles. Four real-parent16-step pipeline smokes certified, old Adam50016/new G Adam16, all end with identical training RNG states; parent SHA unchanged. All tests done before scout launch.
 
-G already had GroupNorm, latent affine conditioning and normalized residual sums. Its lack of normalization was not the issue. The new G adds one same-channel residual refinement after each 8/16/32 resolution block. Its final conv starts at zero, and the sum is `x + residual` without dividing by sqrt(2), so initial outputs are unchanged. G parameters increase **645123 → 1091331**.
+Standalone trainer copied growth trainer to preserve historical source certificates; adds `d_backbone` and `recon_growth_grad` flags. Parent backbone is installed before strict restore; requested replacement follows restoration. Metadata and end-of-run frozen-feature checks use the installed backbone. Selective routing flags are journaled interventions. Grown and replaced-backbone checkpoints support future full-state continuation.
 
-D adds one 64-channel residual refinement before pooling in each of its three trainable feature heads, also zero-final-conv identity initialized. Adds **222336** trainable parameters. Total D parameters (including frozen features) increase 3583204 → 3805540. This tests feature-head capacity, not a larger pretrained backbone. E and prior are unchanged.
+Do not modify active/historical trainers, `lib/`, `particlegan/`, `experiments/run_grid.py` or `experiments/config.py` while their source certificates are needed. New isolated trainers preserve them. New pipeline/analyzer produce final rankings, intermediate curves, compute costs, control deltas and factorial interaction; no automatic long continuation.
 
-Standalone trainer preserves old state keys. `install_growth` appends parameters to existing optimizer groups after parent restore. Grown-parent resume installs its architecture before strict restoration; removing growth is rejected. EMA new G branches copy live initialization and stay frozen. Audit verifies G/EMA/D outputs and input gradients, finite D double backward, frozen backbone, and identity initialization. Audit locally disables TF32 and selects deterministic cuDNN, restoring backend settings and D context cache afterward. Production training settings are unchanged.
+## Prior completed results
 
-**Five CUDA tests passed**, covering all four real-parent growth states, old tensor/Adam/RNG preservation, fresh new-parameter Adam state, new-layer learning, idempotence, and deterministic8vs4+4 expanded-model full-state replay. Four16-update real50k pipeline smokes certified. Old Adam steps correctly reach50016; new parameter steps16; all four finish with identical training RNG states. Parent hash unchanged. Audit outputs matched exactly, D input derivatives differed at most about7.5e-9 in smokes.
+Growth scouts50k→70k: control19.2033, expanded D heads19.2402 (+11%train time), both20.1437 (+28%), larger G22.8981 (+14%). G reconstruction improved5.4% while FID worsened3.69. D-only best intermediate18.5407at65k rebounded by70k. None promoted. Detailed results: `growth_scout/{LEADERBOARD.md,FINDINGS.md}`. Current selective-G arm comparison to old all-gradient G is historical context, not a contemporaneous paired control.
 
-Do not change the active trainer or `lib/`, `particlegan/`, `experiments/run_grid.py`, or `experiments/config.py` while runs depend on their source certificates. Historical and active checkpoints archive source files. New work should preserve these certificates, normally through isolated trainers.
+Two-D continuation explicitly stopped by user at logged172100; best/latest completed FID18.3010at170k. It did not complete200k. Checkpoints retained. `plateau_200k/{LEADERBOARD.md,STOPPED.json}`.
 
-## Stopped two-D result
+Prior reconstruction-only-E/no-prior/low-weight/LR scouts failed to improve short continuations. Weak D gradients implicated feedback quality, but reconstruction conflict is not a proven sole cause. Earlier fresh larger-G/pretrained-E scouts also lost to baseline. BigGAN target comparison has protocol caveats; ours unconditional with pretrained D.
 
-User explicitly stopped the previous 200k job. Last logged update **172100**; latest and best completed evaluation **FID18.3010 at170k**. It did not complete200k. All saved checkpoints retained, including `runs/cifar_particle_ae/plateau_200k/d2/checkpoint_170000.pt`. Curve and stop record: `plateau_200k/{LEADERBOARD.md,STOPPED.json}`. No two-D process remains active.
-
-The trajectory improved modestly within18–19 but did not approach13. Two D updates gave roughly0.95FID atmatched60k while reducing throughput from~22 to~14.6Gupdates/s. User judged that cost unattractive and wanted checkpoint-based architectural interventions.
-
-## Prior evidence and preferences
-
-Prior six50k→60k scouts: d2 19.0289, unchanged historical19.9770, no-reconstruction-to-prior20.2151, reconstruction-only-E20.2712, reconstructionweight.1 20.5006, LR×.25 20.7400, combined20.8273. Lowering reconstruction or detaching it did not improve short continuations. Critic gradients weakened with training, but objective conflict is not proven as sole cause. Earlier fresh larger-G20k runs lost to small G; this round asks whether growth of a trained G behaves differently.
-
-Previous detailed handoff: `HANDOFF_PLATEAU.md`. Investigation: `plateau/{FINDINGS.md,DIAGNOSIS.md}`. Earlier architecture/lazy-bcap/pretrained-E history: `HANDOFF_100k.md`.
-
-User instructions: no seed experiments, be token efficient, easy-to-tail logs, summarize completed experiments with explanations, leaderboards and recommendations. Keep unrelated `.claude/`, `results/hopfield*`, `results/motion/`, `sparse-ucd.log` and run artifacts untouched. Launch persistent background jobs via `subprocess.Popen(start_new_session=True, stdin=DEVNULL, stdout=log, stderr=STDOUT)`.
+History: `HANDOFF_GROWTH.md`, `HANDOFF_PLATEAU.md`, `HANDOFF_100k.md`; investigation `plateau/{FINDINGS.md,DIAGNOSIS.md}`. Unrelated `.claude/`, `results/hopfield*`, `results/motion/`, `sparse-ucd.log` and runs untouched. Use persistent subprocess.Popen with start_new_session=True and redirected streams for background jobs.
