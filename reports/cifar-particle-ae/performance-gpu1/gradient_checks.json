@@ -1,0 +1,90 @@
+{
+  "cap=1.0/baseline": {
+    "loss": 0.6947709321975708,
+    "penalty": 0.0,
+    "gradient_relative_l2": 0.0,
+    "gradient_max_abs": 0.0,
+    "finite": true
+  },
+  "cap=1.0/baseline_repeat": {
+    "loss": 0.6947709321975708,
+    "penalty": 0.0,
+    "gradient_relative_l2": 0.0,
+    "gradient_max_abs": 0.0,
+    "finite": true
+  },
+  "cap=1.0/reuse_bcap": {
+    "loss": 0.6947709321975708,
+    "penalty": 0.0,
+    "gradient_relative_l2": 0.0,
+    "gradient_max_abs": 0.0,
+    "finite": true
+  },
+  "cap=1.0/batched_d": {
+    "loss": 0.6947709918022156,
+    "penalty": 0.0,
+    "gradient_relative_l2": 1.1292438102827873e-05,
+    "gradient_max_abs": 9.685754776000977e-08,
+    "finite": true
+  },
+  "cap=1.0/pruned_d": {
+    "loss": 0.6947709321975708,
+    "penalty": 0.0,
+    "gradient_relative_l2": 0.0,
+    "gradient_max_abs": 0.0,
+    "finite": true
+  },
+  "cap=1.0/reuse_pruned_d": {
+    "loss": 0.6947709321975708,
+    "penalty": 0.0,
+    "gradient_relative_l2": 0.0,
+    "gradient_max_abs": 0.0,
+    "finite": true
+  },
+  "cap=0.0/baseline": {
+    "loss": 0.7579202055931091,
+    "penalty": 0.06314928084611893,
+    "gradient_relative_l2": 0.0,
+    "gradient_max_abs": 0.0,
+    "finite": true
+  },
+  "cap=0.0/baseline_repeat": {
+    "loss": 0.7579202055931091,
+    "penalty": 0.06314928084611893,
+    "gradient_relative_l2": 1.0892402713125193e-07,
+    "gradient_max_abs": 3.725290298461914e-09,
+    "finite": true
+  },
+  "cap=0.0/reuse_bcap": {
+    "loss": 0.7579202055931091,
+    "penalty": 0.06314928084611893,
+    "gradient_relative_l2": 6.139751349110156e-06,
+    "gradient_max_abs": 1.0582152754068375e-07,
+    "finite": true
+  },
+  "cap=0.0/batched_d": {
+    "loss": 0.7579202651977539,
+    "penalty": 0.06314930319786072,
+    "gradient_relative_l2": 7.612072295160033e-06,
+    "gradient_max_abs": 2.086162567138672e-07,
+    "finite": true
+  },
+  "cap=0.0/pruned_d": {
+    "loss": 0.7579202055931091,
+    "penalty": 0.06314928084611893,
+    "gradient_relative_l2": 1.0944546602331684e-07,
+    "gradient_max_abs": 3.725290298461914e-09,
+    "finite": true
+  },
+  "cap=0.0/reuse_pruned_d": {
+    "loss": 0.7579202055931091,
+    "penalty": 0.06314928084611893,
+    "gradient_relative_l2": 6.133452643553028e-06,
+    "gradient_max_abs": 1.1408701539039612e-07,
+    "finite": true
+  },
+  "foreach_ema": {
+    "max_abs": 0.0,
+    "bitwise_equal": true
+  }
+}

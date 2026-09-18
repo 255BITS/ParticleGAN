@@ -1,0 +1,349 @@
+{
+  "gpu": "NVIDIA RTX A6000",
+  "torch": "2.14.0+cu130",
+  "config": {
+    "arm": "bounded",
+    "seed": 24002,
+    "steps": 30000,
+    "batch_size": 64,
+    "z_dim": 64,
+    "num_particles": 1024,
+    "width": 32,
+    "sigma_rel": 0.025,
+    "temperature": 0.125,
+    "recon_weight": 1.0,
+    "lr": 0.0003,
+    "prior_lr": 0.003,
+    "d_lr": 0.00045,
+    "ema": 0.995,
+    "log_interval": 100,
+    "eval_interval": 5000,
+    "eval_samples": 5000,
+    "final_samples": 50000,
+    "recon_samples": 10000,
+    "eval_batch_size": 128,
+    "max_train_seconds": 7200.0,
+    "data_dir": "/home/martyn/dev/ParticleGAN/data",
+    "fid_cache": "/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache",
+    "out_dir": "runs/cifar_particle_ae/lazy_long/n08",
+    "encoder_backbone": "scratch",
+    "keep_checkpoints": true,
+    "reg_every": 8
+  },
+  "threads": 2,
+  "warmup_steps": 40,
+  "measured_steps": 160,
+  "benchmarks": [
+    {
+      "variant": "baseline",
+      "seconds": 6.737388309004018,
+      "steps_per_second": 23.748074574560576,
+      "ms_per_step": 42.10867693127511,
+      "last_losses": [
+        0.5790197849273682,
+        1.2970218658447266,
+        0.12788647413253784,
+        0.15062609314918518
+      ]
+    },
+    {
+      "variant": "reuse_bcap",
+      "seconds": 6.8894716569921,
+      "steps_per_second": 23.223841822125298,
+      "ms_per_step": 43.059197856200626,
+      "last_losses": [
+        0.588886022567749,
+        1.1513466835021973,
+        0.1428385227918625,
+        0.1008136123418808
+      ]
+    },
+    {
+      "variant": "foreach_ema",
+      "seconds": 7.089808142016409,
+      "steps_per_second": 22.567606456342624,
+      "ms_per_step": 44.311300887602556,
+      "last_losses": [
+        0.4297560155391693,
+        1.5707107782363892,
+        0.15782299637794495,
+        0.053061969578266144
+      ]
+    },
+    {
+      "variant": "combined",
+      "seconds": 6.907817854982568,
+      "steps_per_second": 23.162162546685124,
+      "ms_per_step": 43.17386159364105,
+      "last_losses": [
+        0.5232768654823303,
+        1.4405251741409302,
+        0.12895074486732483,
+        0.14691035449504852
+      ]
+    },
+    {
+      "variant": "batched_d",
+      "seconds": 6.669091640011175,
+      "steps_per_second": 23.991273270272817,
+      "ms_per_step": 41.68182275006984,
+      "last_losses": [
+        0.6874773502349854,
+        1.1956126689910889,
+        0.1386050134897232,
+        0.30919110774993896
+      ]
+    },
+    {
+      "variant": "baseline",
+      "seconds": 7.318327076005517,
+      "steps_per_second": 21.86292008245839,
+      "ms_per_step": 45.73954422503448,
+      "last_losses": [
+        0.4733993709087372,
+        1.1240088939666748,
+        0.13355210423469543,
+        0.040468841791152954
+      ]
+    }
+  ],
+  "correctness": {
+    "baseline": {
+      "losses": [
+        [
+          0.7140823602676392,
+          0.9834107160568237,
+          0.28003889322280884,
+          0.0
+        ],
+        [
+          0.553214430809021,
+          1.6714105606079102,
+          0.26418304443359375,
+          0.0
+        ]
+      ],
+      "loss_max_abs": 0.0,
+      "parameter_max_abs": 0.0,
+      "worst_parameter": "0:input.weight",
+      "gradients_finite": true
+    },
+    "reuse_bcap": {
+      "losses": [
+        [
+          0.7140823602676392,
+          0.9834110736846924,
+          0.28003889322280884,
+          0.0
+        ],
+        [
+          0.5532035827636719,
+          1.671379566192627,
+          0.26417872309684753,
+          0.0
+        ]
+      ],
+      "loss_max_abs": 3.0994415283203125e-05,
+      "parameter_max_abs": 0.0057544708251953125,
+      "worst_parameter": "3:z",
+      "gradients_finite": true
+    },
+    "foreach_ema": {
+      "losses": [
+        [
+          0.7140823602676392,
+          0.9834113121032715,
+          0.28003889322280884,
+          0.0
+        ],
+        [
+          0.5532078146934509,
+          1.671423316001892,
+          0.2641773521900177,
+          0.0
+        ]
+      ],
+      "loss_max_abs": 1.2755393981933594e-05,
+      "parameter_max_abs": 0.0058390796184539795,
+      "worst_parameter": "3:z",
+      "gradients_finite": true
+    },
+    "combined": {
+      "losses": [
+        [
+          0.7140823602676392,
+          0.9834116697311401,
+          0.28003889322280884,
+          0.0
+        ],
+        [
+          0.5532023906707764,
+          1.671663522720337,
+          0.26418018341064453,
+          0.0
+        ]
+      ],
+      "loss_max_abs": 0.0002529621124267578,
+      "parameter_max_abs": 0.005709514021873474,
+      "worst_parameter": "3:z",
+      "gradients_finite": true
+    },
+    "batched_d": {
+      "losses": [
+        [
+          0.7140827178955078,
+          0.9833619594573975,
+          0.28003889322280884,
+          0.0
+        ],
+        [
+          0.5532165765762329,
+          1.6722781658172607,
+          0.2642139196395874,
+          0.0
+        ]
+      ],
+      "loss_max_abs": 0.0008676052093505859,
+      "parameter_max_abs": 0.008556067943572998,
+      "worst_parameter": "3:z",
+      "gradients_finite": true
+    }
+  },
+  "stages": {
+    "ordinary/D_prepare_data": {
+      "cuda_span_ms": 0.03888685688642519,
+      "host_enqueue_ms": 0.31471689310689854
+    },
+    "ordinary/D_prior_and_G_forward": {
+      "cuda_span_ms": 1.4176594274384635,
+      "host_enqueue_ms": 1.1636611057578452
+    },
+    "ordinary/D_bcap_forward_input_grad": {
+      "cuda_span_ms": 0.0034011429275519083,
+      "host_enqueue_ms": 0.019244503554156318
+    },
+    "ordinary/D_adversarial_forward": {
+      "cuda_span_ms": 6.532827462468829,
+      "host_enqueue_ms": 5.73181378422305
+    },
+    "ordinary/D_backward_including_bcap": {
+      "cuda_span_ms": 7.375835418701172,
+      "host_enqueue_ms": 5.458391965865823
+    },
+    "ordinary/D_optimizer": {
+      "cuda_span_ms": 0.04933485814503261,
+      "host_enqueue_ms": 0.20283564247490307
+    },
+    "ordinary/G_prepare_data_prior": {
+      "cuda_span_ms": 0.1022617117102657,
+      "host_enqueue_ms": 0.5545702900105555
+    },
+    "ordinary/G_real_D_forward": {
+      "cuda_span_ms": 3.2678445833069936,
+      "host_enqueue_ms": 2.7218534970805712
+    },
+    "ordinary/G_sample_forward": {
+      "cuda_span_ms": 1.3379383002008711,
+      "host_enqueue_ms": 1.1626484265434556
+    },
+    "ordinary/G_fake_D_forward": {
+      "cuda_span_ms": 3.2730331420898438,
+      "host_enqueue_ms": 3.284486180096532
+    },
+    "ordinary/E_routing_forward": {
+      "cuda_span_ms": 0.2728594254170145,
+      "host_enqueue_ms": 0.6645318894048354
+    },
+    "ordinary/G_reconstruction_forward": {
+      "cuda_span_ms": 1.3541302936417716,
+      "host_enqueue_ms": 1.119734357676602
+    },
+    "ordinary/prior_regularizer": {
+      "cuda_span_ms": 0.1027291403817279,
+      "host_enqueue_ms": 0.2437326412681224
+    },
+    "ordinary/G_E_prior_backward": {
+      "cuda_span_ms": 9.874614783695765,
+      "host_enqueue_ms": 10.481977464223746
+    },
+    "ordinary/G_E_prior_optimizer": {
+      "cuda_span_ms": 0.13119656911918096,
+      "host_enqueue_ms": 0.2597001054839763
+    },
+    "ordinary/EMA": {
+      "cuda_span_ms": 0.1413542851805687,
+      "host_enqueue_ms": 0.4729765309353492
+    },
+    "regularized/D_prepare_data": {
+      "cuda_span_ms": 0.027367999777197838,
+      "host_enqueue_ms": 0.3090247482759878
+    },
+    "regularized/D_prior_and_G_forward": {
+      "cuda_span_ms": 1.4103040099143982,
+      "host_enqueue_ms": 1.155882993771229
+    },
+    "regularized/D_bcap_forward_input_grad": {
+      "cuda_span_ms": 15.09606409072876,
+      "host_enqueue_ms": 15.30259250284871
+    },
+    "regularized/D_adversarial_forward": {
+      "cuda_span_ms": 6.53926408290863,
+      "host_enqueue_ms": 5.605609258054756
+    },
+    "regularized/D_backward_including_bcap": {
+      "cuda_span_ms": 48.51302528381348,
+      "host_enqueue_ms": 49.53451050823787
+    },
+    "regularized/D_optimizer": {
+      "cuda_span_ms": 0.05196799896657467,
+      "host_enqueue_ms": 0.2729820043896325
+    },
+    "regularized/G_prepare_data_prior": {
+      "cuda_span_ms": 0.09935999661684036,
+      "host_enqueue_ms": 0.6600749984499998
+    },
+    "regularized/G_real_D_forward": {
+      "cuda_span_ms": 3.2225279808044434,
+      "host_enqueue_ms": 4.891067001153715
+    },
+    "regularized/G_sample_forward": {
+      "cuda_span_ms": 1.3253119587898254,
+      "host_enqueue_ms": 1.2179184923297726
+    },
+    "regularized/G_fake_D_forward": {
+      "cuda_span_ms": 3.231488049030304,
+      "host_enqueue_ms": 3.0144237534841523
+    },
+    "regularized/E_routing_forward": {
+      "cuda_span_ms": 0.26495999842882156,
+      "host_enqueue_ms": 0.6731020112056285
+    },
+    "regularized/G_reconstruction_forward": {
+      "cuda_span_ms": 1.338880032300949,
+      "host_enqueue_ms": 1.1096279995399527
+    },
+    "regularized/prior_regularizer": {
+      "cuda_span_ms": 0.10060799680650234,
+      "host_enqueue_ms": 0.24630150437587872
+    },
+    "regularized/G_E_prior_backward": {
+      "cuda_span_ms": 9.686784029006958,
+      "host_enqueue_ms": 7.579425495350733
+    },
+    "regularized/G_E_prior_optimizer": {
+      "cuda_span_ms": 0.12825600057840347,
+      "host_enqueue_ms": 0.2805895055644214
+    },
+    "regularized/EMA": {
+      "cuda_span_ms": 0.1374719999730587,
+      "host_enqueue_ms": 0.47038074990268797
+    }
+  },
+  "sync_ops": [
+    {
+      "name": "cudaDeviceSynchronize",
+      "count": 1,
+      "cpu_total_us": 12.419999999983702
+    }
+  ]
+}
