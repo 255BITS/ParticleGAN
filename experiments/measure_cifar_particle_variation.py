@@ -14,7 +14,7 @@ from torch.nn import functional as F
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from experiments.train_cifar_particle_ae import rng, state_hash, write_json
-from lib.image_particle_autoencoder import DirectGenerator, ImageRoutingEncoder
+from lib.image_particle_autoencoder import DirectGenerator, build_encoder
 from particlegan import MoGParticlePrior
 
 
@@ -68,7 +68,7 @@ def audit(run, out):
     for name, expected in ck['sources'].items():
         assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == expected
     g = DirectGenerator(cfg['z_dim'], cfg['width'])
-    e = ImageRoutingEncoder(cfg['z_dim'], cfg['width'])
+    e = build_encoder(cfg)
     prior = MoGParticlePrior(num_particles=cfg['num_particles'], z_dim=cfg['z_dim'],
                              sigma_rel=cfg['sigma_rel'], generator=rng(cfg['seed'] + 1, 'cpu'))
     for module, key in ((g, 'ema_G'), (e, 'ema_E'), (prior, 'ema_prior')):

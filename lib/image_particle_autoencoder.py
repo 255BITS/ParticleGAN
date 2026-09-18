@@ -64,6 +64,53 @@ class ImageRoutingEncoder(nn.Module):
         return route(q, means, sigma, self.offset(h), temperature)
 
 
+class PretrainedImageRoutingEncoder(nn.Module):
+    """Frozen ImageNet ResNet18 spatial features with learned AE routing heads."""
+    def __init__(self, z_dim=64):
+        super().__init__()
+        from torchvision.models import resnet18, ResNet18_Weights
+        weights = ResNet18_Weights.IMAGENET1K_V1
+        net = resnet18(weights=weights)
+        self.features = nn.Sequential(net.conv1, net.bn1, net.relu, net.maxpool,
+                                      net.layer1, net.layer2, net.layer3)
+        self.query = nn.Linear(256 * 4 * 4, z_dim)
+        self.offset = nn.Linear(256 * 4 * 4, z_dim)
+        nn.init.zeros_(self.offset.weight)
+        nn.init.zeros_(self.offset.bias)
+        self.register_buffer('mean', torch.tensor([.485, .456, .406])[None, :, None, None])
+        self.register_buffer('std', torch.tensor([.229, .224, .225])[None, :, None, None])
+        self.pretrained_metadata = {'weights': str(weights), 'input_size': 64,
+                                    'output': 'layer3 spatial 256x4x4', 'frozen': True}
+        self.features.eval().requires_grad_(False)
+
+    def train(self, mode=True):
+        super().train(mode)
+        self.features.eval()
+        return self
+
+    def requires_grad_(self, requires_grad=True):
+        super().requires_grad_(requires_grad)
+        self.features.requires_grad_(False)
+        return self
+
+    def forward(self, x, means, sigma, temperature):
+        with torch.no_grad():
+            x = F.interpolate(x, size=64, mode='bilinear', align_corners=False)
+            h = self.features((x * .5 + .5 - self.mean) / self.std).flatten(1)
+        q = self.query(h)
+        q = F.layer_norm(q, (q.shape[1],))
+        return route(q, means, sigma, self.offset(h), temperature)
+
+
+def build_encoder(cfg):
+    kind = cfg.get('encoder_backbone', 'scratch')
+    if kind == 'scratch':
+        return ImageRoutingEncoder(cfg['z_dim'], cfg['width'])
+    if kind == 'pretrained_resnet18':
+        return PretrainedImageRoutingEncoder(cfg['z_dim'])
+    raise ValueError(f'unknown encoder_backbone: {kind}')
+
+
 class DirectDiscriminator(nn.Module):
     """Reuse the CIFAR feature critic with one scalar head and constant context.
 

@@ -21,7 +21,7 @@ if str(ROOT) not in sys.path:
 from experiments.config import merge_config, read_config
 from experiments.run_grid import code_provenance
 from lib.image_ddgan import update_ema
-from lib.image_particle_autoencoder import DirectGenerator, DirectDiscriminator, ImageRoutingEncoder
+from lib.image_particle_autoencoder import DirectGenerator, DirectDiscriminator, build_encoder
 from particlegan import GANLoss, GradientPenalty, MoGParticlePrior, ParticleRegularizer
 
 DEFAULTS = {
@@ -34,6 +34,7 @@ DEFAULTS = {
     'data_dir': '/home/martyn/dev/ParticleGAN/data',
     'fid_cache': '/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache',
     'out_dir': 'runs/cifar_particle_ae/default',
+    'encoder_backbone': 'scratch', 'keep_checkpoints': False,
 }
 
 
@@ -74,6 +75,10 @@ def validate(cfg):
             raise ValueError(f'{key} must be finite and positive')
     if not 0 <= cfg['ema'] < 1:
         raise ValueError('invalid EMA decay')
+    if cfg['encoder_backbone'] not in ('scratch', 'pretrained_resnet18'):
+        raise ValueError('invalid encoder_backbone')
+    if type(cfg['keep_checkpoints']) is not bool:
+        raise ValueError('keep_checkpoints must be boolean')
 
 
 @torch.no_grad()
@@ -187,17 +192,18 @@ def train(cfg):
     torch.cuda.manual_seed_all(cfg['seed'])
     g = DirectGenerator(cfg['z_dim'], cfg['width']).cuda()
     d = DirectDiscriminator(cfg['width']).cuda()
-    e = ImageRoutingEncoder(cfg['z_dim'], cfg['width']).cuda()
+    e = build_encoder(cfg).cuda()
     prior = MoGParticlePrior(num_particles=cfg['num_particles'], z_dim=cfg['z_dim'],
                              sigma_rel=cfg['sigma_rel'], generator=rng(cfg['seed'] + 1, 'cpu')).cuda()
     initial_hash = state_hash([g, d, e, prior])
     initial_sigma = prior.sigma.clone()
     initial_prior = prior.z.detach().clone()
     initial_features = state_hash([d.critic.features])
+    initial_encoder_features = state_hash([e.features])
     eg, ee, ep = [copy.deepcopy(m).eval().requires_grad_(False) for m in (g, e, prior)]
     og = torch.optim.Adam([
         {'params': g.parameters(), 'lr': cfg['lr']},
-        {'params': e.parameters(), 'lr': cfg['lr']},
+        {'params': [p for p in e.parameters() if p.requires_grad], 'lr': cfg['lr']},
         {'params': prior.parameters(), 'lr': cfg['prior_lr'], 'betas': (.5, .999)},
     ], betas=(0., .999), fused=True)
     od = torch.optim.Adam([p for p in d.parameters() if p.requires_grad], lr=cfg['d_lr'], betas=(0., .999), fused=True)
@@ -210,8 +216,12 @@ def train(cfg):
                 'parameters': {name: sum(p.numel() for p in m.parameters()) for name, m in [('G', g), ('D', d), ('E', e), ('prior', prior)]},
                 'fid_protocol': PROTOCOL, 'reconstruction_split': 'CIFAR-10 test, unaugmented',
                 'evaluation_weights': 'EMA G/E/prior; final checkpoint, no best selection'}
+    metadata['encoder'] = {'backbone': cfg['encoder_backbone'],
+                           'pretrained': getattr(e, 'pretrained_metadata', None),
+                           'initial_feature_sha256': initial_encoder_features,
+                           'trainable_parameters': sum(p.numel() for p in e.parameters() if p.requires_grad)}
     write_json(out / 'metadata.json', metadata)
-    print(f"START arm={cfg['arm']} steps={cfg['steps']} sigma={float(prior.sigma):.6f} init={initial_hash}", flush=True)
+    print(f"START arm={cfg['arm']} encoder={cfg['encoder_backbone']} steps={cfg['steps']} sigma={float(prior.sigma):.6f} init={initial_hash}", flush=True)
 
     def batch():
         ids = torch.randint(len(images), (cfg['batch_size'],), device='cuda', generator=streams['data'])
@@ -279,17 +289,25 @@ def train(cfg):
                                 'rng': {k: v.get_state() for k, v in streams.items()},
                                 'torch_rng': torch.get_rng_state(), 'cuda_rng': torch.cuda.get_rng_state_all(),
                                 'initialization_sha256': initial_hash, 'train_seconds': train_seconds}, out / 'checkpoint.pt')
+                    if cfg['keep_checkpoints']:
+                        import shutil
+                        shutil.copy2(out / 'checkpoint.pt', out / f'checkpoint_{step:06d}.pt')
                 log.write(json.dumps(row, allow_nan=False) + '\n')
                 torch.cuda.synchronize()
                 block_start = time.perf_counter()
     assert initial_features == state_hash([d.critic.features]), 'frozen feature extractor changed'
+    encoder_frozen_unchanged = None
+    if cfg['encoder_backbone'] == 'pretrained_resnet18':
+        encoder_frozen_unchanged = initial_encoder_features == state_hash([e.features]) == state_hash([ee.features])
+        assert encoder_frozen_unchanged, 'frozen encoder feature extractor changed'
     assert torch.equal(prior.sigma, initial_sigma) and torch.equal(ep.sigma, initial_sigma)
     summary = {'config': cfg, 'final': {'step': step, **row['generation'], 'reconstruction': row['reconstruction']},
                'train_seconds': train_seconds, 'total_seconds': time.perf_counter() - started_all,
                'peak_memory_gb': torch.cuda.max_memory_allocated() / 2**30,
                'prior_rms_movement': float((prior.z.detach() - initial_prior).square().mean().sqrt()),
                'rng_sha256': {k: hashlib.sha256(v.get_state().cpu().numpy().tobytes()).hexdigest() for k, v in streams.items()},
-               'metadata': metadata, 'frozen_features_unchanged': True, 'sigma_unchanged': True}
+               'metadata': metadata, 'frozen_features_unchanged': True, 'sigma_unchanged': True,
+               'frozen_encoder_features_unchanged': encoder_frozen_unchanged}
     write_json(out / 'summary.json', summary)
     print(f"COMPLETE arm={cfg['arm']} fid={summary['final']['fid']} train_s={train_seconds:.1f} total_s={summary['total_seconds']:.1f}", flush=True)
 

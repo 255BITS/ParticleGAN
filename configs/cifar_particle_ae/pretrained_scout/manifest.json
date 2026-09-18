@@ -1,0 +1,6 @@
+[
+  "configs/cifar_particle_ae/pretrained_scout/01_scratch_control.yaml",
+  "configs/cifar_particle_ae/pretrained_scout/02_pretrained.yaml",
+  "configs/cifar_particle_ae/pretrained_scout/03_pretrained_recon03.yaml",
+  "configs/cifar_particle_ae/pretrained_scout/04_pretrained_half_lr.yaml"
+]

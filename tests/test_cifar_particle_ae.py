@@ -1,8 +1,9 @@
 """Scientific invariants of the direct particle image experiment."""
 import torch
+import pytest
 
 from experiments.train_cifar_particle_ae import DEFAULTS, state_hash, validate
-from lib.image_particle_autoencoder import route, DirectGenerator, DirectDiscriminator, ImageRoutingEncoder
+from lib.image_particle_autoencoder import route, DirectGenerator, DirectDiscriminator, ImageRoutingEncoder, build_encoder
 
 
 def test_hard_forward_and_separate_query_particle_gradients():
@@ -65,3 +66,36 @@ def test_feature_critic_freezes_weights_and_bn_but_keeps_input_gradient():
 def test_full_and_pilot_configs_validate():
     validate(DEFAULTS)
     validate({**DEFAULTS, 'arm': 'bounded', 'steps': 200, 'final_samples': 0, 'eval_samples': 0})
+
+
+def test_pretrained_encoder_freezes_backbone_but_learns_routing_and_restores_checkpoint():
+    torch.set_num_threads(2)
+    cfg = {**DEFAULTS, 'encoder_backbone': 'pretrained_resnet18', 'z_dim': 16}
+    validate(cfg)
+    e = build_encoder(cfg).train().requires_grad_(True)
+    before = state_hash([e.features])
+    assert not any(p.requires_grad for p in e.features.parameters())
+    assert not any(m.training for m in e.features.modules())
+    x, means = torch.randn(3, 3, 32, 32), torch.randn(32, 16, requires_grad=True)
+    code, ids, offsets, _ = e(x, means, .1, .125)
+    torch.testing.assert_close(code, means[ids])
+    assert torch.equal(offsets, torch.zeros_like(offsets))
+    torch.testing.assert_close(code[:1], e(x[:1], means, .1, .125)[0])
+    optimizer = torch.optim.Adam([p for p in e.parameters() if p.requires_grad], lr=.001)
+    code.square().mean().backward()
+    assert e.query.weight.grad.abs().sum() > 0
+    assert e.offset.weight.grad.abs().sum() > 0
+    assert all(p.grad is None for p in e.features.parameters())
+    optimizer.step()
+    assert state_hash([e.features]) == before
+    restored = build_encoder(cfg)
+    restored.load_state_dict(e.state_dict())
+    torch.testing.assert_close(e(x, means, .1, .125)[0], restored(x, means, .1, .125)[0])
+    e.requires_grad_(False).requires_grad_(True)
+    assert not any(p.requires_grad for p in e.features.parameters())
+
+
+@pytest.mark.parametrize('update', [{'encoder_backbone': 'unknown'}, {'keep_checkpoints': 1}])
+def test_reject_invalid_encoder_options(update):
+    with pytest.raises(ValueError):
+        validate({**DEFAULTS, **update})
