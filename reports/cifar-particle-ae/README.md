@@ -17,6 +17,11 @@ ResNet18 feature critic with a scalar head and constant context. Both models
 generate directly from a code, without noisy-image conditioning or diffusion.
 See the [prespecified protocol](PROTOCOL.md) and [full leaderboard](LEADERBOARD.md).
 
+A later [numerical conditional-variation audit](variation/README.md) finds that
+adding noise at 0.5x sigma around the encoded point produces eight distinct
+outputs per input, with +5.8% reconstruction MSE and 99.34% own-reconstruction
+retrieval. This is inference-time perturbation, not a trained stochastic encoder.
+
 The main pair ran concurrently on GPUs 0 and 1 in 10.9 wall minutes; summed
 per-run time including evaluation was 21.2 minutes. Peak allocated memory was
 5.32 GiB per process, including Inception evaluation (about 1.6 GiB before the

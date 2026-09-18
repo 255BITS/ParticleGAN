@@ -5,6 +5,19 @@
 The user authorized a basic matched CIFAR image experiment and a config queue
 using both GPUs. Implemented and completed; no more training is queued.
 
+Latest follow-up: the user requested numerical image-variation metrics without
+visual inspection. Completed a 29.8-second read-only audit of the bounded EMA
+checkpoint: 512 test inputs, eight draws, noise multipliers 0/.25/.5/1/2 around
+`z_X`, plus sampling directly around the selected particle center. At .5sigma:
+all8 outputs distinct, feature pair distance23.1% of unrelated reconstructions,
+MSE+5.8%, own-reconstruction nearest99.34%. At2sigma MSE+80.7%, retention28.27%.
+Center-only sampling loses the input (MSE+484.3%). Recommend .5sigma as a
+starting inference setting, .25 for conservative variation; no semantic/VAE
+posterior guarantee. See [variation report](../reports/cifar-particle-ae/variation/README.md).
+No images were saved/viewed in this audit. Checkpoint/model hashes unchanged;
+two known-answer tests pass; scripts are `measure_cifar_particle_variation.py`
+and `analyze_cifar_particle_variation.py`. Log `runs/cifar_particle_ae/variation.log`.
+
 - Read [CIFAR report](../reports/cifar-particle-ae/README.md) and its protocol.
 - Direct unconditional CIFAR32, K1024, latent64, fixed sigma0.212616; same
   initialization/data/prior draws. GAN versus bounded particle autoencoder+GAN,
