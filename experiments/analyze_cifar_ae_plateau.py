@@ -1,0 +1,64 @@
+#!/usr/bin/env python
+"""Certify plateau interventions and publish final and intermediate FID50k."""
+import argparse
+import json
+import math
+from pathlib import Path
+import sys
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from experiments.run_grid import code_provenance, has_valid_summary, load_config, trainer_defaults
+
+
+def analyze(manifest, report):
+    trainer = str(ROOT / 'experiments/train_cifar_ae_plateau.py')
+    provenance = code_provenance(trainer, sys.executable)
+    defaults = trainer_defaults(trainer)
+    rows, missing = [], []
+    for path in json.loads(manifest.read_text()):
+        cfg = load_config(path, defaults)
+        run = ROOT / cfg['out_dir']
+        if not has_valid_summary(str(run), cfg, provenance):
+            missing.append(run.name); continue
+        s = json.loads((run / 'summary.json').read_text())
+        assert s['final']['step'] == cfg['steps'] and s['final']['samples'] == 50000
+        assert math.isfinite(s['final']['fid']) and s['frozen_features_unchanged'] and s['sigma_unchanged']
+        curve = []
+        for line in (run/'metrics.jsonl').read_text().splitlines():
+            m=json.loads(line)
+            if 'generation' in m:
+                assert m['generation']['samples'] == 50000
+                curve.append({'step':m['step'],'fid':m['generation']['fid'],
+                              'recon_mse':m['reconstruction']['recon_mse']})
+        rows.append({'name':run.name,'curve':curve,**s})
+    rows.sort(key=lambda r:r['final']['fid'])
+    lines=['# CIFAR AE-GAN plateau experiments','',f'{len(rows)}/{len(rows)+len(missing)} certified runs complete.', '',
+           '| Rank | Run | Start → end | Final FID50k ↓ | Test MSE ↓ | Train min |',
+           '|---:|---|---:|---:|---:|---:|']
+    for i,r in enumerate(rows,1):
+        lines.append(f"| {i} | {r['name']} | {r['start_step']} → {r['final']['step']} | {r['final']['fid']:.4f} | {r['final']['reconstruction']['recon_mse']:.5f} | {r['train_seconds']/60:.2f} |")
+    lines+=['','All generation FIDs use 50,000 independent prior draws and EMA G/prior; CIFAR train50k reference, TF-compatible Inception. No fitted encoder sampling is used in training benchmarks. Reconstructions use the 10k test split. All scouts share the same 50k checkpoint and seed; these are configuration interventions, not seed experiments.', '',
+            'Historical unchanged continuation: 50k **18.9012**, 60k **19.9770**, 100k **20.8058**. The historical 60k result is the matched endpoint control for the 60k scouts. It is not an independent replication.','',
+            '| Run | Step | FID50k ↓ | Test MSE ↓ |','|---|---:|---:|---:|']
+    for r in rows:
+        for c in r['curve']:
+            lines.append(f"| {r['name']} | {c['step']} | {c['fid']:.4f} | {c['recon_mse']:.5f} |")
+    lines+=['','## Recommendation','']
+    if missing: lines.append('Pending or uncertified: '+', '.join(missing)+'.')
+    elif rows:
+        r=rows[0]
+        lines.append(f"Lowest final FID: **{r['name']} ({r['final']['fid']:.4f})**. "+
+                     ('Target below 13 reached.' if r['final']['fid']<13 else 'Target below 13 remains unmet.'))
+        if r['final']['step']==60000:
+            lines.append(f"Compared with unchanged continuation at 60k: {r['final']['fid']-19.97701107479669:+.4f} FID. Use the final endpoint ranking and the 55k→60k trend to select a continuation; short scouts do not establish its 200k outcome.")
+    report.mkdir(parents=True,exist_ok=True)
+    (report/'LEADERBOARD.md').write_text('\n'.join(lines)+'\n')
+    (report/'leaderboard.json').write_text(json.dumps({'complete':not missing,'missing':missing,'rows':rows},indent=2,allow_nan=False)+'\n')
+    print('\n'.join(lines),flush=True)
+    return int(bool(missing))
+
+if __name__=='__main__':
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--config_manifest',type=Path,required=True)
+    p.add_argument('--report',type=Path,required=True)
+    a=p.parse_args();sys.exit(analyze(a.config_manifest,a.report))
