@@ -1,0 +1,18 @@
+{
+  "all": {
+    "saturated_099": 0.0,
+    "raw_rms": 0.5764927268028259,
+    "output_std": 0.46225690841674805,
+    "batch_std": 0.4532070755958557,
+    "latent_gradient_norm": 0.019882051274180412,
+    "checkpoint": "/tmp/transgan_bounded_pilot_all/checkpoint.pt"
+  },
+  "encoder_only": {
+    "saturated_099": 0.0,
+    "raw_rms": 0.5110761523246765,
+    "output_std": 0.4483659565448761,
+    "batch_std": 0.42139023542404175,
+    "latent_gradient_norm": 0.04307872802019119,
+    "checkpoint": "/tmp/transgan_bounded_pilot_encoder_only/checkpoint.pt"
+  }
+}

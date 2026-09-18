@@ -1,0 +1,18 @@
+START architecture=transgan recon_grad=all arm=bounded encoder=scratch reg_every=8 g_width=32 g_depth=1 steps=64 sigma=0.212616 init=c0661784a2bf56fc98a7cd8c617bbc01ba49ad573e7be4578b85d3984f302a36
+step=1/64 D=0.7313 G=0.9318 recon=0.28711 train_s=2.4 steps/s=0.42 lr_scale=1.0000 peak_GB=10.90
+step=16/64 D=0.0563 G=5.2447 recon=0.31437 train_s=8.9 steps/s=1.80 lr_scale=1.0000 peak_GB=11.06
+step=32/64 D=0.1621 G=2.4107 recon=0.28596 train_s=14.3 steps/s=2.24 lr_scale=1.0000 peak_GB=11.06
+step=48/64 D=0.6186 G=1.4671 recon=0.26573 train_s=19.6 steps/s=2.45 lr_scale=1.0000 peak_GB=11.06
+step=64/64 D=0.8559 G=2.2077 recon=0.26833 train_s=25.0 steps/s=2.56 lr_scale=1.0000 peak_GB=11.06
+EVAL step=64 generated_samples=0
+{"evaluation": {"step": 64, "lr_scale": 1.0, "d_updates": 1, "d_loss": 0.8558582663536072, "g_loss": 2.207659959793091, "recon_train_mse": 0.2683301568031311, "penalty": 0.7635539770126343, "train_seconds": 24.999058234039694, "steps_per_second": 2.5600964404673094, "start_step": 0, "cumulative_train_seconds": 24.999058234039694, "peak_memory_gb": 11.055387020111084, "generation": {"samples": 0, "fid": null, "feature_variance_ratio": null}, "generation_seconds": 0.11549238400766626, "reconstruction": {"recon_mse": 0.2450932115316391, "zero_offset_mse": 0.24824650585651398, "random_offset_mse": 0.24917958676815033, "shuffled_particle_mse": 0.27291685342788696, "recon_psnr": 12.127287087791816, "recon_p90": 0.37864309549331665, "recon_p99": 0.665790319442749, "used_particles": 13, "effective_particles": 5.16865348815918, "hard_usage_tv": 0.9873046875, "hard_soft_usage_tv": 0.44459736347198486, "offset_rms": 0.3275245130062103, "offset_saturation": 0.0, "samples": 64, "conditional_offset_mean_rms": 0.3032568097114563}, "reconstruction_seconds": 0.27716875897021964}}
+COMPLETE arm=bounded fid=None train_s=25.0 total_s=27.0
+START architecture=transgan recon_grad=encoder_only arm=bounded encoder=scratch reg_every=8 g_width=32 g_depth=1 steps=64 sigma=0.212616 init=c0661784a2bf56fc98a7cd8c617bbc01ba49ad573e7be4578b85d3984f302a36
+step=1/64 D=0.7313 G=0.9318 recon=0.28711 train_s=0.3 steps/s=3.17 lr_scale=1.0000 peak_GB=10.35
+step=16/64 D=0.0279 G=5.7209 recon=0.39176 train_s=5.2 steps/s=3.10 lr_scale=1.0000 peak_GB=10.50
+step=32/64 D=2.0949 G=1.3894 recon=0.39882 train_s=10.3 steps/s=3.09 lr_scale=1.0000 peak_GB=10.50
+step=48/64 D=0.2091 G=2.7062 recon=0.39583 train_s=15.5 steps/s=3.09 lr_scale=1.0000 peak_GB=10.50
+step=64/64 D=0.2989 G=1.7162 recon=0.41275 train_s=20.8 steps/s=3.08 lr_scale=1.0000 peak_GB=10.50
+EVAL step=64 generated_samples=0
+{"evaluation": {"step": 64, "lr_scale": 1.0, "d_updates": 1, "d_loss": 0.29892536997795105, "g_loss": 1.7161751985549927, "recon_train_mse": 0.4127529263496399, "penalty": 0.2608463764190674, "train_seconds": 20.76713746599853, "steps_per_second": 3.0817920912203456, "start_step": 0, "cumulative_train_seconds": 20.76713746599853, "peak_memory_gb": 10.496371746063232, "generation": {"samples": 0, "fid": null, "feature_variance_ratio": null}, "generation_seconds": 0.10437273600837216, "reconstruction": {"recon_mse": 0.2768392562866211, "zero_offset_mse": 0.2812597155570984, "random_offset_mse": 0.2809900939464569, "shuffled_particle_mse": 0.27746784687042236, "recon_psnr": 11.598323174658272, "recon_p90": 0.4472901225090027, "recon_p99": 0.6880466341972351, "used_particles": 3, "effective_particles": 1.1743580102920532, "hard_usage_tv": 0.9970703125, "hard_soft_usage_tv": 0.5542424917221069, "offset_rms": 0.5876781344413757, "offset_saturation": 0.0, "samples": 64, "conditional_offset_mean_rms": 0.5832981467247009}, "reconstruction_seconds": 0.24677124398294836}}
+COMPLETE arm=bounded fid=None train_s=20.8 total_s=22.4

@@ -1,0 +1,351 @@
+{
+  "sources": {
+    "trainer": "/home/martyn/dev/ParticleGAN/experiments/train_cifar_ae_transgan.py",
+    "python": "/home/martyn/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/python3.12",
+    "sources": {
+      "experiments/config.py": "e4b5261994560b4350883240ec28f44816b5d3f6b23d57885f5f2f1ae68af5e9",
+      "experiments/run_grid.py": "2915b849d7a702f8ab23f422dd3906c864b2aa3feed74cff1dea2a38ca0aa02f",
+      "experiments/train_cifar_ae_transgan.py": "76a481fe19b79450f89dd6ec2c592ddeb3f8a3095d6cddc35c8f26bc4609248e",
+      "lib/cifar_metrics.py": "7593a15822cb8cd99b48ed75127f99f1f856ebc1000d0acf9d7e369d9b2d44a3",
+      "lib/cifar_speed.py": "c9caa8b2000c256c46e427f295f91c633b5bef4db94331b97ed2ad1272860af2",
+      "lib/ddgan_ncsnpp/__init__.py": "60a5d144f89ad8c2c39c2a57f5f3d4202970022133edfd372f2db4d497ce7a18",
+      "lib/ddgan_ncsnpp/dense_layer.py": "d98df1532c1b7900bb08eda7af0c5f9aa9a710fbbeeda7b97ef5d56736510cda",
+      "lib/ddgan_ncsnpp/layers.py": "152abf198a0bdf0fb6520de21ff139167471961f7299be9e1c8ea46d93f49b83",
+      "lib/ddgan_ncsnpp/layerspp.py": "291cb4d45729b99832d6da7959dcba9c3605179db8deb1486b7fb8844caf6211",
+      "lib/ddgan_ncsnpp/ncsnpp_generator_adagn.py": "a50b6609f174dbe46e1011c83fb713e39e38f169f396651853b3b0bff88d0e7b",
+      "lib/ddgan_ncsnpp/up_or_down_sampling.py": "ca1f71d780cebf20faaf2162e18c16d2564b2a9bca0b3e606794d52da1e636b4",
+      "lib/ddgan_ncsnpp/upfirdn2d.py": "22f1993059536a7828d912ccd81f0d135524d712b62a09ccbdf1649b366c6d8f",
+      "lib/ddgan_ncsnpp/utils.py": "5a78caca1d5550859bdb844d7c3ee9ccb76a05c54515f1a65cd1dbcabbe647e9",
+      "lib/denoising_toy.py": "b16eefa77a131b7c819ed15d92e2b31d3bf3fb13bbaf51aa915e5032265ddc29",
+      "lib/game_jacobian.py": "a792d24cb82ec14fe1c602772d976b98f477e184213ea329fb46bac61407bbd5",
+      "lib/gan_loss.py": "be3f9874c565b4e190bc5e6e7cd702f47da1e7bf4f3d480352e4cfa9728328ad",
+      "lib/grad_regularizers.py": "70d44380309f527669db53eb235c5a02584c189fbe34f7693ff5b565ef5c732d",
+      "lib/image_ddgan.py": "b49dd3ac6f43d55c9445d6813dc3c51203542bd54e81613a13f48e8b3268af2e",
+      "lib/image_moonshots.py": "32609ae5ac95d017416ad8a9154dcf8d3a00483b78770bf606213cff41088bb8",
+      "lib/image_ncsnpp.py": "4c85dafcbe71dbd9cb2d0f0a0e4c75cc77b067f4b437bcdac88808be926f1c9c",
+      "lib/image_particle_autoencoder.py": "746b96c687b1cfe9407d2d9484349fc1448203c0664e570f2d23bdb1a9154d99",
+      "lib/image_particle_ddgan.py": "c0106fef92ac25d0f9acc5ca91c48b5b037f0e05ab5a517ca7f149fc676c7fe9",
+      "lib/mog_metrics.py": "70389fe190357d9aa49b8dfe43c822c0eb167be3a2f3e39102c2a32fa8ff5f21",
+      "lib/oadam.py": "bb00feeca65675a90beb28886ed0fef420963798e53d900d920cb3c531275de3",
+      "lib/particle_prior.py": "8a7ecf9b49c58a2d78b30f0237e586079a8353afd3ac1ea9029c53c837f63989",
+      "lib/sparse_metrics.py": "e359fbddf67f00d4ab5b18b1a9feacd223649b2409d90f439418619918f98ef2",
+      "lib/sparse_models.py": "7632a35e53118e8b98cc8e53fabed180a55ef5fef25241442fea5746a5656cf5",
+      "lib/sparse_toy.py": "c356bc07a3510efc12eda6ea78ab02196cd5b6dfa2d5540c1602c8649551c979",
+      "lib/toy_metrics.py": "12e8975fe31ed4d9973d53649ce940171da78739a3d7b80544ba5f4d2313367c",
+      "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+      "lib/trajectory.py": "7af4817005b35144ea19cb156c475d8a654584a0913f773028e674916bd4fcf7",
+      "lib/trajectory_visuals.py": "5e7e2534d6af396f6c0fcc0e32663f982769f5007abdfc7d21ae05d5873612bf",
+      "lib/vicreg_loss.py": "16eaf1f57450d8b81de801fe3c1d9e0f28b8842c8669a23bfa4a5f20db5b6cf8",
+      "particlegan/__init__.py": "3b1241444e97cb2a79ffb82ee9d99b7a7ee3a5085425d99418e0dffa115a5d56",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+      "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "particlegan/grad_regularizers.py": "45fb38532b4d0e6fa3b8483fdf18b3c822055363e68dbee4fc8e6222dabb19c6",
+      "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+      "particlegan/recipes.py": "33ea97c94f4dd79ee2c5451cdf9e9ce98272921d71a300918258e8df3e6a88bc",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    }
+  },
+  "all_certified": true,
+  "shared_D_E_initialization_equal": true,
+  "training_rng_equal": true,
+  "historical_CNN_initialization_preserved": true,
+  "checkpoint_hashes_unchanged": true,
+  "rows": [
+    {
+      "name": "transgan_all",
+      "config": {
+        "arm": "bounded",
+        "seed": 24002,
+        "steps": 512,
+        "batch_size": 64,
+        "z_dim": 64,
+        "num_particles": 1024,
+        "width": 32,
+        "sigma_rel": 0.025,
+        "temperature": 0.125,
+        "recon_weight": 1.0,
+        "lr": 0.0003,
+        "prior_lr": 0.003,
+        "d_lr": 0.00045,
+        "ema": 0.995,
+        "log_interval": 128,
+        "eval_interval": 512,
+        "eval_samples": 0,
+        "final_samples": 0,
+        "recon_samples": 64,
+        "eval_batch_size": 128,
+        "max_train_seconds": 600.0,
+        "data_dir": "/home/martyn/dev/ParticleGAN/data",
+        "fid_cache": "/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache",
+        "out_dir": "runs/cifar_particle_ae/transgan_smoke/transgan_all",
+        "encoder_backbone": "scratch",
+        "keep_checkpoints": false,
+        "reg_every": 8,
+        "g_width": 0,
+        "g_depth": 1,
+        "resume_checkpoint": "",
+        "resume_sha256": "",
+        "lr_scale": 1.0,
+        "lr_final_ratio": 1.0,
+        "lr_decay_start": 0,
+        "lr_decay_end": 200000,
+        "d_updates": 1,
+        "generator_arch": "transgan",
+        "recon_grad": "all",
+        "transgan_dim": 512,
+        "transgan_depths": [
+          5,
+          4,
+          2
+        ],
+        "transgan_heads": 4,
+        "transgan_mlp_ratio": 4.0,
+        "transgan_rgb_gain": 0.1
+      },
+      "checkpoint_sha256": "cdbea61884a3949756815ff68c2d177323fb552eadf6a8fe23b65be208d7721d",
+      "initialization_sha256": "c0661784a2bf56fc98a7cd8c617bbc01ba49ad573e7be4578b85d3984f302a36",
+      "D_E_initialization_sha256": "5d3bb64627521ffd0ecc5cff7d77800c1cbabaea87a1f09c767223fa3db895c3",
+      "rng_sha256": {
+        "data": "8fcb6fee2e766876c05faf0551d16c45328a755906ac74c529afc248d6500891",
+        "prior": "d98735a4acb22091ed08319ab33ab6841792dd1856d3df1cb86364993fbe08f0"
+      },
+      "parameters": {
+        "G": 18851023,
+        "D": 3583204,
+        "E": 428320,
+        "prior": 65536
+      },
+      "regularizer": {
+        "arm": "b_cap",
+        "method": "autograd",
+        "coeff": 1.0,
+        "kappa": 1.0,
+        "every": 8,
+        "applied_coeff": 8.0
+      },
+      "train_seconds": 178.1127027059556,
+      "total_seconds": 180.24397170502925,
+      "peak_memory_gb": 11.055387020111084,
+      "steady_updates_per_second": 2.9220299015953675,
+      "estimated_50k_training_hours": 4.753164531720174,
+      "final_losses": {
+        "d_loss": 0.5830633640289307,
+        "g_loss": 1.2685974836349487,
+        "recon_train_mse": 0.1411408632993698
+      },
+      "output_probe": {
+        "live": {
+          "saturated_abs_gt_099": 0.0,
+          "pixel_mean": -0.10525085777044296,
+          "pixel_std": 0.5333344340324402,
+          "mean_std_across_samples": 0.5264781713485718
+        },
+        "ema": {
+          "saturated_abs_gt_099": 0.0,
+          "pixel_mean": -0.09010818600654602,
+          "pixel_std": 0.4488619565963745,
+          "mean_std_across_samples": 0.44135844707489014
+        }
+      },
+      "certified": true
+    },
+    {
+      "name": "transgan_e_only",
+      "config": {
+        "arm": "bounded",
+        "seed": 24002,
+        "steps": 512,
+        "batch_size": 64,
+        "z_dim": 64,
+        "num_particles": 1024,
+        "width": 32,
+        "sigma_rel": 0.025,
+        "temperature": 0.125,
+        "recon_weight": 1.0,
+        "lr": 0.0003,
+        "prior_lr": 0.003,
+        "d_lr": 0.00045,
+        "ema": 0.995,
+        "log_interval": 128,
+        "eval_interval": 512,
+        "eval_samples": 0,
+        "final_samples": 0,
+        "recon_samples": 64,
+        "eval_batch_size": 128,
+        "max_train_seconds": 600.0,
+        "data_dir": "/home/martyn/dev/ParticleGAN/data",
+        "fid_cache": "/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache",
+        "out_dir": "runs/cifar_particle_ae/transgan_smoke/transgan_e_only",
+        "encoder_backbone": "scratch",
+        "keep_checkpoints": false,
+        "reg_every": 8,
+        "g_width": 0,
+        "g_depth": 1,
+        "resume_checkpoint": "",
+        "resume_sha256": "",
+        "lr_scale": 1.0,
+        "lr_final_ratio": 1.0,
+        "lr_decay_start": 0,
+        "lr_decay_end": 200000,
+        "d_updates": 1,
+        "generator_arch": "transgan",
+        "recon_grad": "encoder_only",
+        "transgan_dim": 512,
+        "transgan_depths": [
+          5,
+          4,
+          2
+        ],
+        "transgan_heads": 4,
+        "transgan_mlp_ratio": 4.0,
+        "transgan_rgb_gain": 0.1
+      },
+      "checkpoint_sha256": "b761d6cc546a3ea8eb985b3ad36300eba8afdccfa67b853c580e5501a9f98399",
+      "initialization_sha256": "c0661784a2bf56fc98a7cd8c617bbc01ba49ad573e7be4578b85d3984f302a36",
+      "D_E_initialization_sha256": "5d3bb64627521ffd0ecc5cff7d77800c1cbabaea87a1f09c767223fa3db895c3",
+      "rng_sha256": {
+        "data": "8fcb6fee2e766876c05faf0551d16c45328a755906ac74c529afc248d6500891",
+        "prior": "d98735a4acb22091ed08319ab33ab6841792dd1856d3df1cb86364993fbe08f0"
+      },
+      "parameters": {
+        "G": 18851023,
+        "D": 3583204,
+        "E": 428320,
+        "prior": 65536
+      },
+      "regularizer": {
+        "arm": "b_cap",
+        "method": "autograd",
+        "coeff": 1.0,
+        "kappa": 1.0,
+        "every": 8,
+        "applied_coeff": 8.0
+      },
+      "train_seconds": 171.3178792630206,
+      "total_seconds": 173.25775383302243,
+      "peak_memory_gb": 10.498446941375732,
+      "steady_updates_per_second": 3.0345949991790033,
+      "estimated_50k_training_hours": 4.576850911784429,
+      "final_losses": {
+        "d_loss": 0.3048948645591736,
+        "g_loss": 2.0281996726989746,
+        "recon_train_mse": 0.26077181100845337
+      },
+      "output_probe": {
+        "live": {
+          "saturated_abs_gt_099": 0.0,
+          "pixel_mean": -0.1339087039232254,
+          "pixel_std": 0.48406124114990234,
+          "mean_std_across_samples": 0.47377875447273254
+        },
+        "ema": {
+          "saturated_abs_gt_099": 0.0,
+          "pixel_mean": -0.09166914224624634,
+          "pixel_std": 0.37832358479499817,
+          "mean_std_across_samples": 0.36867058277130127
+        }
+      },
+      "certified": true
+    },
+    {
+      "name": "cnn_e_only",
+      "config": {
+        "arm": "bounded",
+        "seed": 24002,
+        "steps": 512,
+        "batch_size": 64,
+        "z_dim": 64,
+        "num_particles": 1024,
+        "width": 32,
+        "sigma_rel": 0.025,
+        "temperature": 0.125,
+        "recon_weight": 1.0,
+        "lr": 0.0003,
+        "prior_lr": 0.003,
+        "d_lr": 0.00045,
+        "ema": 0.995,
+        "log_interval": 128,
+        "eval_interval": 512,
+        "eval_samples": 0,
+        "final_samples": 0,
+        "recon_samples": 64,
+        "eval_batch_size": 128,
+        "max_train_seconds": 600.0,
+        "data_dir": "/home/martyn/dev/ParticleGAN/data",
+        "fid_cache": "/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache",
+        "out_dir": "runs/cifar_particle_ae/transgan_smoke/cnn_e_only",
+        "encoder_backbone": "scratch",
+        "keep_checkpoints": false,
+        "reg_every": 8,
+        "g_width": 0,
+        "g_depth": 1,
+        "resume_checkpoint": "",
+        "resume_sha256": "",
+        "lr_scale": 1.0,
+        "lr_final_ratio": 1.0,
+        "lr_decay_start": 0,
+        "lr_decay_end": 200000,
+        "d_updates": 1,
+        "generator_arch": "cnn",
+        "recon_grad": "encoder_only",
+        "transgan_dim": 512,
+        "transgan_depths": [
+          5,
+          4,
+          2
+        ],
+        "transgan_heads": 4,
+        "transgan_mlp_ratio": 4.0,
+        "transgan_rgb_gain": 0.1
+      },
+      "checkpoint_sha256": "8f64acff52cfee8da69803b14e850d9a03c403d8f7ead0774b8ae59fc348afa2",
+      "initialization_sha256": "76e3fe984275380a6a29f9e8c424665c35d5bcfae870a0c5c9bcf7dc18bee722",
+      "D_E_initialization_sha256": "5d3bb64627521ffd0ecc5cff7d77800c1cbabaea87a1f09c767223fa3db895c3",
+      "rng_sha256": {
+        "data": "8fcb6fee2e766876c05faf0551d16c45328a755906ac74c529afc248d6500891",
+        "prior": "d98735a4acb22091ed08319ab33ab6841792dd1856d3df1cb86364993fbe08f0"
+      },
+      "parameters": {
+        "G": 645123,
+        "D": 3583204,
+        "E": 428320,
+        "prior": 65536
+      },
+      "regularizer": {
+        "arm": "b_cap",
+        "method": "autograd",
+        "coeff": 1.0,
+        "kappa": 1.0,
+        "every": 8,
+        "applied_coeff": 8.0
+      },
+      "train_seconds": 24.779882330971304,
+      "total_seconds": 26.19543011597125,
+      "peak_memory_gb": 1.5534405708312988,
+      "steady_updates_per_second": 23.531650488310035,
+      "estimated_50k_training_hours": 0.5902216206971355,
+      "final_losses": {
+        "d_loss": 0.7131815552711487,
+        "g_loss": 0.9416266679763794,
+        "recon_train_mse": 0.2702561020851135
+      },
+      "output_probe": {
+        "live": {
+          "saturated_abs_gt_099": 7.62939453125e-06,
+          "pixel_mean": -0.04199822619557381,
+          "pixel_std": 0.44274041056632996,
+          "mean_std_across_samples": 0.3904038369655609
+        },
+        "ema": {
+          "saturated_abs_gt_099": 1.2715657248918433e-05,
+          "pixel_mean": -0.09299585968255997,
+          "pixel_std": 0.40893176198005676,
+          "mean_std_across_samples": 0.3908708393573761
+        }
+      },
+      "certified": true
+    }
+  ]
+}

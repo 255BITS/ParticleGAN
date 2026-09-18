@@ -1,0 +1,5 @@
+[
+  "configs/cifar_particle_ae/transgan_scout/transgan_all.yaml",
+  "configs/cifar_particle_ae/transgan_scout/transgan_e_only.yaml",
+  "configs/cifar_particle_ae/transgan_scout/cnn_e_only.yaml"
+]

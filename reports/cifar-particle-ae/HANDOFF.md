@@ -1,56 +1,44 @@
-# AE-GAN handoff — completed feature and selective reconstruction scouts
+# AE-GAN handoff — scratch transformer and E-only CNN scouts running
 
-Branch `feat/cifar-ae-gan-pretrained-encoder`. User accepted the next experiments after capacity growth failed to improve final FID. The **features_scout** pipeline is complete; both GPUs are idle. Target remains CIFAR-10 generation FID50k below13. No seed experiments; easy-to-tail logs; summarize completed runs with leaderboard, interpretation, cost and recommendation. No automatic long promotion.
+Branch `feat/cifar-ae-gan-pretrained-encoder`. User requested TransGAN-style G with a subagent implementing it, reusing the historical full-reconstruction CNN benchmark. User explicitly added a fresh E-only CNN because the earlier E-only result was a checkpoint intervention. Three scratch50k runs are launched; no automatic long promotion. Goal remains FID50k below13. No seed experiments. Keep logs easy to tail and summarize results, leaderboard, explanations and recommendations when complete.
 
-## Latest completed results and diagnosis
+## Active pipeline
 
-**All four feature scouts completed and re-certified; no training queued.** Final70k FID: control20.3672, grow_g_adv22.6733, both27.8205, resnet34 86.5698. Neither intervention improved the endpoint. Selective-G best18.9398at55k later degraded; both had55.81at60k and partly recovered. ResNet34 deteriorated from23.06at65k to86.57at70k, with many noisy texture patches in its final sample grid.
+- Launched UTC: 2026-09-18T11:52:16.922473+00:00. Pipeline PID **254269**; recheck status rather than assuming active or relaunching.
+- Command: `bash experiments/cifar_ae_transgan_pipeline.sh transgan_scout 0,1`.
+- TwoGPU workers: transformer all-gradient and transformer E-only start together; CNN E-only queued next.
+- Tail: `tail -F runs/cifar_particle_ae/transgan_scout/PIPELINE.log`.
+- Manifest: `configs/cifar_particle_ae/transgan_scout/manifest.json`.
+- Trainer: `experiments/train_cifar_ae_transgan.py`.
+- Runs: `runs/cifar_particle_ae/transgan_scout/{transgan_all,transgan_e_only,cnn_e_only}/`.
+- All start from scratch,50k steps, FID50k/test10k reconstruction every10k, checkpoint saved each evaluation.
+- Automatic analyzer: `experiments/analyze_cifar_ae_transgan.py`; report `reports/cifar-particle-ae/transgan_scout/LEADERBOARD.md`.
+- BothGPUs available to this task, but currently occupied. No other long jobs remain active.
 
-Read `features_scout/FINDINGS.md` for interpretation. Read-only live-checkpoint16×64 probes found ResNet34 D input gradients~44× weaker than the same-step control at65k; G adversarial gradients~17.5× weaker, reconstruction/adv~5.3. Paired real>fake46.9%at65k,36.6%at70k. Endpoint G gradients recovered in magnitude, so the failure is not uniformly vanishing gradients. Both70k also has weak critic gradients and43.4%real>fake. Selective reconstruction on new G branches alone did not rescue training. Probe script `experiments/probe_cifar_ae_features.py`; raw reports `features_scout/{GRADIENTS.json,GRADIENTS_CONTROL65.json}`. All source/parent hashes verified.
+## Design and implementation
 
-Control20.3672 differs from previous round19.2033 despite same nominal recipe. Production nondeterministic CUDA settings are a reproducibility limitation; exact cause not isolated. Use contemporaneous controls and do not overinterpret small cross-round gains. No seed experiments.
+TransGAN-style G: width512→128→32,8/16/32 token grids, depths5/4/2, four-head global SDPA, MLP ratio4, pre-LayerNorm, learned absolute and relative2D positions, pixel shuffle. Final token LayerNorm and a low-gain tanh RGB head (gain0.1) adapt the unbounded official head. G18,851,023params versus CNN645,123. Official architecture reference is VITA-Group/TransGAN commit6b85440ca56716fd7a60bac964466cc0296ce663. This is a generator-family/capacity comparison inside AE-GAN, not a full TransGAN reproduction.
 
-Recommendation discussed: test a short D-only adaptation period after swapping the pretrained backbone while G/E/prior remain fixed, with a matched adaptation control, then resume joint training. This is only a proposal: await user direction before launching. ResNet34 replacement changed feature coordinates for inherited trained heads/Adam; these results do not prove ResNet34 is inherently unsuitable. No endpoint should be promoted into long training.
+Config API: `generator_arch` cnn/transgan, `recon_grad` all/encoder_only, `transgan_dim`, `transgan_depths`, `transgan_heads`, `transgan_mlp_ratio`, `transgan_rgb_gain`. CNN stays exactly the original architecture. Alternative G creation preserves shared D/E initialization using a forked RNG stream after advancing the historical G constructor. Both transformer routes share identical initialization. E-only detaches prior means and temporarily freezes G parameters during reconstruction forward; gradients pass through G into E. GAN loss still updates G/prior. G/E/prior/D/EMA/optimizers and all RNG streams checkpoint/resume fully.
 
-## Completed scout protocol
+Shared recipe: seed24002, batch64, latent64, particles1024, width32 scratchE, frozen ImageNetResNet18 D features and original trainable heads/pixel branch, sigma_rel0.025, temperature0.125, recweight1, LR G/E0.0003, prior0.003, D0.00045, oneD update, EMA0.995, lazy double-backprop bcap every8 with coefficient×8, constantLR. LR and shared objectives were not altered to stabilize the transformer.
 
-- Pipeline PID at launch: 247178. Recheck processes/logs before action; do not duplicate work.
-- Tail: `tail -F runs/cifar_particle_ae/features_scout/PIPELINE.log`
-- Command: `bash experiments/cifar_ae_features_pipeline.sh features_scout 0,1`
-- Manifest: `configs/cifar_particle_ae/features_scout/manifest.json`
-- Trainer: `experiments/train_cifar_ae_features.py`
-- Automatic completion report: `reports/cifar-particle-ae/features_scout/LEADERBOARD.md`
-- Detailed plan and evidence: `features_scout/{PLAN.md,VALIDATION.json,TESTS.txt,LAUNCH.json}`.
+## Preflight evidence
 
-All four run from original one-D50k to70k, with FID50k/reconstruction10k/checkpoints every5k. Same full original parent state and seed, one D update throughout, lazy bcapN8×8, same rates and reconstruction weight.
+Subagent `/root/transgan_impl` implemented trainer/tests and is finished. Primary owns configs/pipeline/analyzer/validation/reports/launch. Ten tests pass (`TESTS.txt`), including both real-CIFAR CUDA full-state8vs4+4 replays, selective routing, unchanged CNN/sharedD/E initialization, upstream Linear initialization and output stability under100× residual activation scaling. Three512step real-size pipeline smokes certified; read-only audit `experiments/validate_cifar_ae_transgan.py` verifies initialization/RNG/optimizer counters/source/checkpoint hashes.
 
-| Arm | Pretrained D | Added G branches |
-|---|---|---|
-| control | original ResNet18 | none |
-| resnet34 | frozen ResNet34 replacement | none |
-| grow_g_adv | original ResNet18 | reconstruction gradients blocked only on new parameters |
-| both | frozen ResNet34 replacement | same selective new-G routing |
+Initial port applied blanket Linear Xavier and saturated100% of live output pixels by128steps. Correcting Linear initialization to official defaults improved initial output but still failed in training; documented preflight failures retained. Final output normalization+gain0.1 resolves immediate saturation in both64step and512step pilots. At512, transformer live/EMA probes have0% pixels|x|>.99 and nontrivial variation. NoFID measured in smokes. This does not guarantee longer-term stability.
 
-Parent: `runs/cifar_particle_ae/duration_100k/n08/checkpoint_050000.pt`, SHA256 `10fe8bbc22afb29ff6838ad1ede86e142320e5d7bce43c745b97de24e23ee8d6`, FID18.9012.
+Steady preflight speed: transformer all2.92updates/s, E-only3.03, CNN23.53. Estimated50k training time4.75h/4.58h/0.59h, plus evaluations. Peak allocation11.06/10.50/1.55GiB. Whole queue roughly5–6h. First transformer FID aroundonehour afterlaunch. `PREFLIGHT.md`, `VALIDATION.json`, `LAUNCH.json`, `PLAN.md` contain evidence and interpretation.
 
-ResNet34 replacement preserves trained D pixel branch, heads and Adam state, but changes pretrained feature coordinates and thus D scores immediately. Fixed initial probe maximum score change~0.22477. No head reset, extra D warmup or G freezing: this tests replacement plus joint adaptation, not an isolated function-preserving capacity increase. Only frozen backbone parameters change; D total parameters3583204→8970724. Feature channels and spatial shapes remain compatible, pretrained weights cached. Runtime backbone audit logs before/after weights and G/EMA preservation.
+## Historical comparison and next decision
 
-G uses the previously tested identity refinements, increasing645123→1091331 parameters. Temporarily freezing only `g.growth` parameters during the reconstruction forward removes their reconstruction gradients; branch activations remain differentiable into old G, E and prior. The already-built adversarial graph still updates new parameters. Reconstruction evaluation uses the same full generator. No other gradient routing changed. New G parameters alone get fresh Adam state; full old model/EMA/Adam/RNG state restored.
+Historical full-reconstruction CNN scratch trajectory: FID50k19.6110at10k,20.1046at20k,19.4391at30k,19.4241at40k,18.9012at50k. Resumed at30k with full state and unchanged recipe; source certificates and early audit hashes verified. Reference `HISTORICAL_CNN.json`. Do not retrain full-reconstruction CNN (user preference). New CNN E-only provides the fresh architecture comparison; historical CNN all-gradient contrasts are less controlled. Transformer is much larger, so gains cannot be assigned to attention alone. E-only blocks bothG andprior rec updates, so it cannot distinguish their individual effects.
 
-## Validation and implementation
+On completion, re-certify all3 runs, inspect final curves and samples, report finalFID ranking/cost and historical contrasts. Analyzer runs automatically after pipeline; partial reports deliberately refuse winner selection. Preserve checkpoint options; no automatic200k promotion.
 
-Four tests passed: two selective-gradient cases (allowed/blocked), real-parent CUDA pretrained swap preserving G/EMA, learned D/Adam state and RNG, and deterministic8vs4+4 combined-model full-state resume. ResNet34 passes double backward and stays frozen through train/requires_grad toggles. Four real-parent16-step pipeline smokes certified, old Adam50016/new G Adam16, all end with identical training RNG states; parent SHA unchanged. All tests done before scout launch.
+## Prior work and source safety
 
-Standalone trainer copied growth trainer to preserve historical source certificates; adds `d_backbone` and `recon_growth_grad` flags. Parent backbone is installed before strict restore; requested replacement follows restoration. Metadata and end-of-run frozen-feature checks use the installed backbone. Selective routing flags are journaled interventions. Grown and replaced-backbone checkpoints support future full-state continuation.
+Feature/selective-growth scout completed: final70k control20.3672, Gselective22.6733, ResNet34+G27.8205, ResNet3486.5698. Gradient probes suggested unreliable D feedback, with feature coordinate replacement a confound. No previous endpoint promoted. Prior detailed handoff `HANDOFF_FEATURES.md`; earlier history `HANDOFF_GROWTH.md`, `HANDOFF_PLATEAU.md`, `HANDOFF_100k.md`. TwoD longrun stopped by user at172100; best/latest completedFID18.3010at170k. Its200k target was not reached.
 
-Do not modify active/historical trainers, `lib/`, `particlegan/`, `experiments/run_grid.py` or `experiments/config.py` while their source certificates are needed. New isolated trainers preserve them. New pipeline/analyzer produce final rankings, intermediate curves, compute costs, control deltas and factorial interaction; no automatic long continuation.
-
-## Prior completed results
-
-Growth scouts50k→70k: control19.2033, expanded D heads19.2402 (+11%train time), both20.1437 (+28%), larger G22.8981 (+14%). G reconstruction improved5.4% while FID worsened3.69. D-only best intermediate18.5407at65k rebounded by70k. None promoted. Detailed results: `growth_scout/{LEADERBOARD.md,FINDINGS.md}`. Current selective-G arm comparison to old all-gradient G is historical context, not a contemporaneous paired control.
-
-Two-D continuation explicitly stopped by user at logged172100; best/latest completed FID18.3010at170k. It did not complete200k. Checkpoints retained. `plateau_200k/{LEADERBOARD.md,STOPPED.json}`.
-
-Prior reconstruction-only-E/no-prior/low-weight/LR scouts failed to improve short continuations. Weak D gradients implicated feedback quality, but reconstruction conflict is not a proven sole cause. Earlier fresh larger-G/pretrained-E scouts also lost to baseline. BigGAN target comparison has protocol caveats; ours unconditional with pretrained D.
-
-History: `HANDOFF_GROWTH.md`, `HANDOFF_PLATEAU.md`, `HANDOFF_100k.md`; investigation `plateau/{FINDINGS.md,DIAGNOSIS.md}`. Unrelated `.claude/`, `results/hopfield*`, `results/motion/`, `sparse-ucd.log` and runs untouched. Use persistent subprocess.Popen with start_new_session=True and redirected streams for background jobs.
+Do not edit active trainer or historical/shared `lib/`, `particlegan/`, run_grid.py/config.py: source certificates hash them. New standalone trainer preserves historical certificates. Unrelated `.claude/`, `results/hopfield*`, `results/motion/`, `runs/`, `sparse-ucd.log` are untouched. Use persistent subprocess.Popen(start_new_session=True, stdin=DEVNULL, stdout=log, stderr=STDOUT) for background jobs. Generic follow_grid replays stale log offsets on rerunning existing output directories; this affected superseded smoke logs only. The new scout starts with fresh directories and logs correctly.
