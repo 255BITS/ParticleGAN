@@ -1,6 +1,6 @@
 {
-  "time": "2026-09-18T16:35:44",
-  "stage": "waiting for8192/16384 scouts to finish; no diagnostic GPU work yet",
+  "time": "2026-09-18T16:46:09",
+  "stage": "complete: seven probes certified; feature-information and quality leaderboards written",
   "pid": 268218,
   "sources": {
     "experiments/probe_cifar_ae_information.py": "564623d386035348a0ad0325f73a97b028e1d32eb1c895f0743bb5486f8c442f",

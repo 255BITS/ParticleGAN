@@ -1,0 +1,3 @@
+checkpoint: runs/cifar_particle_ae/particle_expansion_scout/split_4096/checkpoint_020000.pt
+checkpoint_sha256: 6fbe0630d45f3048f6a9f4686790b54a2fe0272537a507bd903a6d1169b4168b
+out_dir: runs/cifar_particle_ae/particle_information/p4096_20k

@@ -1,0 +1,9 @@
+[
+  "configs/cifar_particle_ae/particle_information/p1024_20k.yaml",
+  "configs/cifar_particle_ae/particle_information/p4096_20k.yaml",
+  "configs/cifar_particle_ae/particle_information/p8192_20k.yaml",
+  "configs/cifar_particle_ae/particle_information/p16384_20k.yaml",
+  "configs/cifar_particle_ae/particle_information/p1024_40k.yaml",
+  "configs/cifar_particle_ae/particle_information/p4096_35k.yaml",
+  "configs/cifar_particle_ae/particle_information/p4096_40k.yaml"
+]
