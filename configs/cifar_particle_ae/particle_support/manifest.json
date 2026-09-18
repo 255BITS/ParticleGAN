@@ -1,0 +1,5 @@
+[
+  "configs/cifar_particle_ae/particle_support/parent_10k.yaml",
+  "configs/cifar_particle_ae/particle_support/control_20k.yaml",
+  "configs/cifar_particle_ae/particle_support/half_g_20k.yaml"
+]

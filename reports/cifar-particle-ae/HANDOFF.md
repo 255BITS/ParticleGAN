@@ -1,65 +1,53 @@
-# Compaction handoff: fix the AE-GAN FID plateau
+# CIFAR AE-GAN plateau: current handoff
 
-## Latest user direction
+Branch: `feat/cifar-ae-gan-pretrained-encoder`. Latest user: "lets continue to figure out why we're plateuaing". This round completed the proposed G-only LR scout, endpoint D probes, and an additional read-only sampling/support investigation. All jobs finished; both GPUs idle. No long job or further scout is queued. Root cause remains unproven and FID below 13 remains unmet.
 
-User: "ok i'm going to compact then we'll set the north star to fixing this and continue".
+Read `generator_balance/FINDINGS.md` and `particle_support/FINDINGS.md`. Previous detailed discriminator investigation is archived in `HANDOFF_DISCRIMINATOR.md`; earlier architecture history in `HANDOFF_TRANSGAN.md`. Implementation commit for G LR scout: `b0cbfce`.
 
-Prepare for compaction now; do not launch another experiment in this turn. Next session's intended north star is to identify and fix the AE-GAN FID plateau, with sustained improvement toward the existing FID50k target below13. Judge interventions by matched FID trajectories and compute cost, not discriminator AUC, raw gradient magnitude, reconstruction MSE, or a selected intermediate minimum alone. The root cause is not established; update balance is a hypothesis to test, not an assumed diagnosis.
+## Completed matched training
 
-Branch: `feat/cifar-ae-gan-pretrained-encoder`. Implementation commit `38d9ef8`; completed analysis commit `32b96df`. All experiments finished; no training queued. Both GPUs were idle after final probes. Recheck actual status before launching. Prior architecture history is in `HANDOFF_TRANSGAN.md`, which links older rounds.
+Both restore the identical CNN E-only 10k parent (FID50k 19.4482), full model/Adam/EMA/RNG. Only G LR changes: 0.0003 -> 0.00015. E 0.0003, prior 0.003, D 0.00045; original bcap coefficient 1 lazy8 x8, one D update. No seed experiments.
 
-## Read first
+| Arm | FID50k 15k | FID50k 20k | Test MSE | Training minutes |
+|---|---:|---:|---:|---:|
+| Control | 19.5589 | 20.3044 | 0.14846 | 7.20 |
+| Half G LR | 20.7412 | 20.6996 | 0.14310 | 7.34 |
 
-`discriminator_joint/FINDINGS.md` contains the conclusions and recommendation. `discriminator_joint/LEADERBOARD.md` and `curves.png` contain the matched FID results. Detailed diagnostics are in `discriminator_diagnosis/FINDINGS.md`.
+Half-G loses at both evaluations; neither beats parent. Final 0.3952 gap is small, so claim absence of demonstrated gain, not that all lower G rates are harmful. No promotion.
 
-All three joint runs restored the same CNN E-only10k checkpoint (FID50k19.4482), then added10k joint updates:
+Read-only 2048-image endpoint D probes: control/half-G test AUC 0.4743/0.5575, fake image gradient 0.1558/0.4921, G adversarial gradient 0.1435/0.5724. Half-G increases measured feedback ~4x without improving FID. This joins negative D-warmup/weaker-bcap results: feedback strength alone has not fixed the plateau. Post-G endpoint AUC is phase dependent; do not treat it as a unique diagnosis. Sources/results in `generator_balance_probes/`.
 
-| Arm | FID50k at15k | FID50k at20k |
-|---|---:|---:|
-| Control | 19.7875 | 20.0119 |
-| Weaker bcap | 20.1344 | 19.7848 |
-| D-only warmup | 27.4657 | 25.2598 |
+## Read-only support investigation
 
-Weaker changes only bcap coefficient1→0.1, retaining lazy8. Warmup installs D and its Adam state after2048 D-only updates with original regularization, then restores the original joint recipe. One D update per G update throughout joint training. Test reconstruction MSE stays near0.148 in all arms. Weaker/control ranking reverses; the final0.23-point gap is unconvincing. Warmup recovers somewhat but remains much worse. No endpoint promoted. All three scouts certified; queue took19.3 minutes.
+EMA G/prior remain fixed. At each noise multiplier use original particle IDs and underlying Gaussian draws, 50k FID protocol unchanged. Baseline x1 reproduces original FID within 0.001 for all three checkpoints. All three certified.
 
-## What the diagnosis established
+| Checkpoint | Centers only | Original noise | Double noise |
+|---|---:|---:|---:|
+| Original 10k | 41.8580 | 19.4481 | 21.7837 |
+| Control 20k | 42.4706 | 20.3039 | 21.7199 |
+| Half-G 20k | 43.4404 | 20.7005 | 23.5012 |
 
-- Holding G/prior fixed, existing D learns held-out real/fake AUC0.5255→0.9194 in2048 updates with original bcap. Weaker coefficient0.1 lazy8 reaches0.9552; original coefficient1 every step reaches0.9471. Training times48.6/47.7/159.5 seconds. Train/test ranking agrees. Both pixel and pretrained feature heads learn, weakening a simple feature-information failure explanation.
-- Every-step regularization was NOT tested in joint FID; deferred because of cost. Do not claim it was ruled out. Original10k/50k image gradients are below cap1 at the probe, but sparse logs show the penalty can activate elsewhere in training.
-- Warmup initially retains strong feedback after8 joint updates (AUC0.9389, G gradient4.7574). By20k that advantage disappears (AUC0.4322, G gradient0.0589). Better D-only classification did not yield better joint FID.
-- No strong pixel/feature cancellation in image, G-parameter or prior-parameter gradients. Parameter decomposition uses the actual combined GAN loss derivative, in FP32, with additive errors around1e-6. Production settings unchanged.
-- Eight-step traces at20k show D improves held-out ranking and G/prior then reduces it on8/8 observed updates. Counterfactual mean AUC: afterD0.5524, only prior update0.5519, only G update0.4616, both0.4613. Immediate ranking change is mostly from G. This is expected adversarial behavior, NOT itself proof of a bad learning-rate ratio. Joint game dynamics and usefulness of feedback are stronger suspects; the sole cause remains open.
+Noise is used and contributes to image variation; broader inference noise is not a fix. Center-only FID describes a finite 1024-output generator, so its high score is not itself proof of poor prototypes or collapse. In inspected grouped samples, draws within each particle retain object/pose/layout and vary mostly locally. Balanced ANOVA (128 particles x16 draws) assigns 32–33% Inception-feature variation but about 5% pixel variation within particles. These are descriptive fractions, not semantic coverage metrics. Latent covariance effective rank stays ~64/64 at 10k and 50k, ruling against global latent dimension collapse in these snapshots.
 
-## Proposed next controlled test — NOT launched
+Grouped grid: `runs/cifar_particle_ae/particle_support/control_20k/within_particle.png`. Other checkpoints have corresponding grids. Midpoint/final joint sample grids and control grouped grid inspected; no total collapse claim.
 
-Resume the same10k parent and halve **G-only** learning rate0.0003→0.00015. Keep D/E/prior rates fixed, one D update, lazy8, original bcap coefficient1, and compare against an unchanged control. Existing `lr_scale` changes all optimizer groups and cannot isolate this: add an explicit G-only setting in a new standalone trainer to preserve source certificates. This tests update balance without the extra cost of two D updates.
+## Recommended next test — NOT launched
 
-Do not automatically freeze or replace the backbone, restart the historical full-reconstruction CNN, or promote another endpoint for a small isolated gain. User dislikes paying for D2 for about one FID point and prefers controlled checkpoint interventions. No seed experiments.
+Test expanding trainable particles 1024 -> 4096 from the same checkpoint, alongside a matched 1024 control. This tests whether more centers can learn distinct image configurations; wider inference noise did not. Preserve G/D/E and their Adam/EMA, saved sigma, and explicitly map expanded prior/EMA/Adam state. Audit initial generated distribution/FID before training to distinguish expansion initialization from training effects. **Simply repeating raw particle rows does not exactly preserve standardized means because `prior.means()` uses unbiased std**; account for this rather than claiming exact identity. Preserve historical source certificates via a new standalone trainer.
 
-## Checkpoints and implementation
+Discriminator feedback quality/robustness remains the competing hypothesis, not a ruled-out explanation. Existing D can classify fixed-target data but useful joint gradients are unproven. Every-step bcap has only been tested D-only, not in matched joint FID. Do not freeze E/prior or grow G solely on these observations. No automatic long promotion on small or reversing differences.
 
-Parent: `runs/cifar_particle_ae/transgan_scout/cnn_e_only/checkpoint_010000.pt`.
-SHA256: `d75fca4bc42ec09f1423ce1a671b4cbd10caefe0abccae3ac2bdb05d5d93237c`.
+## Files and validation
 
-New joint20k checkpoints and hashes: `discriminator_joint/CHECKPOINTS.json`.
-D-only delta: `runs/cifar_particle_ae/discriminator_diagnosis/current/D_delta.pt`; contains D/Adam only, not a joint checkpoint. When continuing a warmstart joint checkpoint, clear `d_warmstart` and `d_warmstart_sha256` to avoid reapplying the old warmup.
+Parent: `runs/cifar_particle_ae/transgan_scout/cnn_e_only/checkpoint_010000.pt`, SHA256 `d75fca4bc42ec09f1423ce1a671b4cbd10caefe0abccae3ac2bdb05d5d93237c`.
+Endpoint checkpoint paths/hashes: `generator_balance/CHECKPOINTS.json` (canonical saved 20k copies also exist in each run directory).
 
-Standalone trainers:
-- `experiments/diagnose_cifar_ae_discriminator.py`: D-only/probes; pins historical TransGAN trainer hash.
-- `experiments/train_cifar_ae_discriminator.py`: copy of original trainer plus explicit coefficient and D warmstart.
-- Pipelines: `cifar_ae_discriminator_pipeline.sh`, `cifar_ae_discriminator_joint_pipeline.sh`; matching `analyze_cifar_ae_discriminator*.py` analyzers.
-- Read-only checkpoint pipeline: `probe_cifar_ae_discriminator_joint.py` (early/final stages).
-- Gradient decomposition: `probe_cifar_ae_discriminator_projection.py`.
-- Eight-step instrumented diagnostics: `trace_cifar_ae_discriminator_game.py`, `probe_cifar_ae_update_components.py`. These temporary update traces are not FID/runtime benchmarks.
+Standalone trainer `experiments/train_cifar_ae_balance.py` adds `g_lr_scale`, defaults 1, applied only to G optimizer group after restoration on every step. Existing global `lr_scale` affects all groups and is not equivalent. Actual group LRs recorded and audited. `cifar_ae_generator_balance_pipeline.sh`, `analyze_cifar_ae_balance.py` implement grid/reporting. `tests/test_cifar_ae_balance.py`: 2 deterministic CUDA tests passed, exact original full-state continuation and isolated actual first half-G update (unchanged D/E/prior and all Adam moments). Two actual-parent eight-step smokes and both full scouts certified; matched RNG use, intervention metadata and optimizer counts checked.
 
-Historical/shared source files were not changed. Source certificates cover trainers and shared code: use standalone entry points for further interventions. Persistent jobs use detached `subprocess.Popen` with redirected logs. Completed pipeline log: `tail -F runs/cifar_particle_ae/discriminator_joint/PIPELINE.log`; PID262835 exited0.
+Read-only `probe_cifar_ae_support.py`, `cifar_ae_support_pipeline.py` implement sampling/ANOVA probes with pinned historical architecture dependency, full source archives and parent/frozen state checks. Initial small smoke computed correctly but was rejected by grid because summary lacked required `final` block. Added block and reran in fresh `particle_support_smoke_v2`; passed. Original failed attempt/source archive retained, documented in `particle_support/PREFLIGHT.md`. Small-smoke FIDs are not benchmarks. All 3 full probes then certified. Two endpoint D probes reuse unchanged original diagnostic trainer and are certified.
 
-## Validation and detailed evidence
+Completed logs:
+- `tail -F runs/cifar_particle_ae/generator_balance/PIPELINE.log` (PID 264755, exit0, 9.8min)
+- `tail -F runs/cifar_particle_ae/particle_support/PIPELINE.log` (PID 265248, exit0, about7min)
 
-Three D-only smokes and three actual-parent joint smokes passed. Four initial diagnostics, three joint scouts, and five endpoint probes certified. Exact unchanged old/new full-state continuation passed (one test,6.07 seconds) under deterministic CUDA in the test only. Parent/source hashes, frozen state, D Adam counts and nonmutating probes verified.
-
-Initial exact replay test lacked full deterministic enforcement and failed tiny floating-point equality; fixed test setup only. An initial TF32 gradient decomposition failed its strict additive check (0.000367 error); the read-only calculation passed with TF32 disabled. Production training unchanged. No seed replicates, so small run-to-run uncertainty is not quantified.
-
-Evidence: `discriminator_diagnosis/{results.json,GAME_TRACE.json,UPDATE_COMPONENTS.json,PROJECTED_GRADIENTS*.json,LOGGED_PENALTIES.json}`; joint endpoint probes in `discriminator_joint_probes_early/` and `discriminator_joint_probes_final/`. Final grids inspected; varied samples, no claim of total mode collapse.
-
-No subagents spawned in this round. Applicable AGENTS.md: no seed experiments, be token efficient, make logs easy to tail, summarize findings/leaderboard/recommendations after completion. Unrelated untracked `.claude/`, `results/hopfield*`, `results/motion/`, `runs/`, `sparse-ucd.log` untouched.
+No subagents used. User preferences: no seed experiments, token efficient, easy-to-tail logs, completed experiment leaderboard/explanations/recommendations. They prefer checkpoint interventions and consider two D updates too expensive for ~1 FID point. Historical full-reconstruction CNN should not be retrained without reason. Persistent jobs use detached Popen with redirected logs. Historical/shared code unchanged. Unrelated `.claude/`, `results/hopfield*`, `results/motion/`, `runs/`, `sparse-ucd.log` preserved; generated `results/failures.txt` records the support preflight formatting failure.

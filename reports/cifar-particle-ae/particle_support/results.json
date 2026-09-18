@@ -1,0 +1,326 @@
+[
+  {
+    "name": "parent_10k",
+    "final": {
+      "sampling": [
+        {
+          "noise_scale": 0.0,
+          "samples": 50000,
+          "fid": 41.857983937678796,
+          "feature_mean_distance_squared": 3.3741100350924045,
+          "feature_variance_ratio": 1.0600557852406707
+        },
+        {
+          "noise_scale": 1.0,
+          "samples": 50000,
+          "fid": 19.448055327593863,
+          "feature_mean_distance_squared": 3.871185532602084,
+          "feature_variance_ratio": 1.0604047172674491
+        },
+        {
+          "noise_scale": 2.0,
+          "samples": 50000,
+          "fid": 21.7837209803763,
+          "feature_mean_distance_squared": 6.049557111436114,
+          "feature_variance_ratio": 1.067134125713018
+        }
+      ],
+      "diversity": {
+        "particles": 128,
+        "draws_per_particle": 16,
+        "pixel": {
+          "within_fraction": 0.055930433654315194,
+          "between_fraction": 0.9440695663456848,
+          "total_variance_trace": 193.21644713371168
+        },
+        "inception": {
+          "within_fraction": 0.33059305301294295,
+          "between_fraction": 0.6694069469870572,
+          "total_variance_trace": 210.04513597990987
+        }
+      }
+    },
+    "config": {
+      "checkpoint": "runs/cifar_particle_ae/transgan_scout/cnn_e_only/checkpoint_010000.pt",
+      "checkpoint_sha256": "d75fca4bc42ec09f1423ce1a671b4cbd10caefe0abccae3ac2bdb05d5d93237c",
+      "out_dir": "runs/cifar_particle_ae/particle_support/parent_10k",
+      "samples": 50000,
+      "noise_scales": [
+        0.0,
+        1.0,
+        2.0
+      ],
+      "batch_size": 128,
+      "particles": 128,
+      "draws_per_particle": 16
+    },
+    "parent_step": 10000,
+    "parent_unchanged": true,
+    "frozen_state_unchanged": true,
+    "protocol": {
+      "dataset": "CIFAR-10",
+      "split": "train",
+      "real_samples": 50000,
+      "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+      "weights": "weights-inception-2015-12-05-6726825d.pth",
+      "precision": "float32 extractor (TF32 disabled), float64 statistics",
+      "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor"
+    },
+    "sampling": [
+      {
+        "noise_scale": 0.0,
+        "samples": 50000,
+        "fid": 41.857983937678796,
+        "feature_mean_distance_squared": 3.3741100350924045,
+        "feature_variance_ratio": 1.0600557852406707
+      },
+      {
+        "noise_scale": 1.0,
+        "samples": 50000,
+        "fid": 19.448055327593863,
+        "feature_mean_distance_squared": 3.871185532602084,
+        "feature_variance_ratio": 1.0604047172674491
+      },
+      {
+        "noise_scale": 2.0,
+        "samples": 50000,
+        "fid": 21.7837209803763,
+        "feature_mean_distance_squared": 6.049557111436114,
+        "feature_variance_ratio": 1.067134125713018
+      }
+    ],
+    "diversity": {
+      "particles": 128,
+      "draws_per_particle": 16,
+      "pixel": {
+        "within_fraction": 0.055930433654315194,
+        "between_fraction": 0.9440695663456848,
+        "total_variance_trace": 193.21644713371168
+      },
+      "inception": {
+        "within_fraction": 0.33059305301294295,
+        "between_fraction": 0.6694069469870572,
+        "total_variance_trace": 210.04513597990987
+      }
+    },
+    "total_seconds": 209.1714605379966,
+    "note": "Read-only EMA sampler intervention, not a trained model improvement. Scale 1 reproduces original sampler; other scales retain the same particle IDs and underlying noise. Within-particle ANOVA is descriptive, not a class-coverage metric.",
+    "baseline_reproduction_error": -0.00011714082774005874
+  },
+  {
+    "name": "control_20k",
+    "final": {
+      "sampling": [
+        {
+          "noise_scale": 0.0,
+          "samples": 50000,
+          "fid": 42.470612010058915,
+          "feature_mean_distance_squared": 4.238074850602873,
+          "feature_variance_ratio": 1.0683393084092585
+        },
+        {
+          "noise_scale": 1.0,
+          "samples": 50000,
+          "fid": 20.303870355388028,
+          "feature_mean_distance_squared": 4.597139713949924,
+          "feature_variance_ratio": 1.0735965768352504
+        },
+        {
+          "noise_scale": 2.0,
+          "samples": 50000,
+          "fid": 21.71990911345057,
+          "feature_mean_distance_squared": 6.567389043951902,
+          "feature_variance_ratio": 1.0783546311312038
+        }
+      ],
+      "diversity": {
+        "particles": 128,
+        "draws_per_particle": 16,
+        "pixel": {
+          "within_fraction": 0.04762789772947647,
+          "between_fraction": 0.9523721022705237,
+          "total_variance_trace": 197.56062970446553
+        },
+        "inception": {
+          "within_fraction": 0.3210670243912188,
+          "between_fraction": 0.6789329756087811,
+          "total_variance_trace": 203.07429210649317
+        }
+      }
+    },
+    "config": {
+      "checkpoint": "runs/cifar_particle_ae/generator_balance/control/checkpoint_020000.pt",
+      "checkpoint_sha256": "d4db5d7c2d52b5133eaf8c80d9eade5301112a47f85f915f6be7ef9598959a4d",
+      "out_dir": "runs/cifar_particle_ae/particle_support/control_20k",
+      "samples": 50000,
+      "noise_scales": [
+        0.0,
+        1.0,
+        2.0
+      ],
+      "batch_size": 128,
+      "particles": 128,
+      "draws_per_particle": 16
+    },
+    "parent_step": 20000,
+    "parent_unchanged": true,
+    "frozen_state_unchanged": true,
+    "protocol": {
+      "dataset": "CIFAR-10",
+      "split": "train",
+      "real_samples": 50000,
+      "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+      "weights": "weights-inception-2015-12-05-6726825d.pth",
+      "precision": "float32 extractor (TF32 disabled), float64 statistics",
+      "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor"
+    },
+    "sampling": [
+      {
+        "noise_scale": 0.0,
+        "samples": 50000,
+        "fid": 42.470612010058915,
+        "feature_mean_distance_squared": 4.238074850602873,
+        "feature_variance_ratio": 1.0683393084092585
+      },
+      {
+        "noise_scale": 1.0,
+        "samples": 50000,
+        "fid": 20.303870355388028,
+        "feature_mean_distance_squared": 4.597139713949924,
+        "feature_variance_ratio": 1.0735965768352504
+      },
+      {
+        "noise_scale": 2.0,
+        "samples": 50000,
+        "fid": 21.71990911345057,
+        "feature_mean_distance_squared": 6.567389043951902,
+        "feature_variance_ratio": 1.0783546311312038
+      }
+    ],
+    "diversity": {
+      "particles": 128,
+      "draws_per_particle": 16,
+      "pixel": {
+        "within_fraction": 0.04762789772947647,
+        "between_fraction": 0.9523721022705237,
+        "total_variance_trace": 197.56062970446553
+      },
+      "inception": {
+        "within_fraction": 0.3210670243912188,
+        "between_fraction": 0.6789329756087811,
+        "total_variance_trace": 203.07429210649317
+      }
+    },
+    "total_seconds": 210.83617262303596,
+    "note": "Read-only EMA sampler intervention, not a trained model improvement. Scale 1 reproduces original sampler; other scales retain the same particle IDs and underlying noise. Within-particle ANOVA is descriptive, not a class-coverage metric.",
+    "baseline_reproduction_error": -0.0005524343907836737
+  },
+  {
+    "name": "half_g_20k",
+    "final": {
+      "sampling": [
+        {
+          "noise_scale": 0.0,
+          "samples": 50000,
+          "fid": 43.44041459859284,
+          "feature_mean_distance_squared": 4.366108813682711,
+          "feature_variance_ratio": 1.0726459828126451
+        },
+        {
+          "noise_scale": 1.0,
+          "samples": 50000,
+          "fid": 20.70049554638092,
+          "feature_mean_distance_squared": 4.909122176717108,
+          "feature_variance_ratio": 1.0716037026698824
+        },
+        {
+          "noise_scale": 2.0,
+          "samples": 50000,
+          "fid": 23.501199971142967,
+          "feature_mean_distance_squared": 7.39871967803846,
+          "feature_variance_ratio": 1.0731038797706274
+        }
+      ],
+      "diversity": {
+        "particles": 128,
+        "draws_per_particle": 16,
+        "pixel": {
+          "within_fraction": 0.05565081757229046,
+          "between_fraction": 0.9443491824277096,
+          "total_variance_trace": 189.8551215959265
+        },
+        "inception": {
+          "within_fraction": 0.3325620980990167,
+          "between_fraction": 0.6674379019009833,
+          "total_variance_trace": 210.01468913669495
+        }
+      }
+    },
+    "config": {
+      "checkpoint": "runs/cifar_particle_ae/generator_balance/half_g/checkpoint_020000.pt",
+      "checkpoint_sha256": "df00a0c8ee8a17814624527c1ec4b5968fce99bf943e81dad305e3c85c39e4a3",
+      "out_dir": "runs/cifar_particle_ae/particle_support/half_g_20k",
+      "samples": 50000,
+      "noise_scales": [
+        0.0,
+        1.0,
+        2.0
+      ],
+      "batch_size": 128,
+      "particles": 128,
+      "draws_per_particle": 16
+    },
+    "parent_step": 20000,
+    "parent_unchanged": true,
+    "frozen_state_unchanged": true,
+    "protocol": {
+      "dataset": "CIFAR-10",
+      "split": "train",
+      "real_samples": 50000,
+      "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+      "weights": "weights-inception-2015-12-05-6726825d.pth",
+      "precision": "float32 extractor (TF32 disabled), float64 statistics",
+      "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor"
+    },
+    "sampling": [
+      {
+        "noise_scale": 0.0,
+        "samples": 50000,
+        "fid": 43.44041459859284,
+        "feature_mean_distance_squared": 4.366108813682711,
+        "feature_variance_ratio": 1.0726459828126451
+      },
+      {
+        "noise_scale": 1.0,
+        "samples": 50000,
+        "fid": 20.70049554638092,
+        "feature_mean_distance_squared": 4.909122176717108,
+        "feature_variance_ratio": 1.0716037026698824
+      },
+      {
+        "noise_scale": 2.0,
+        "samples": 50000,
+        "fid": 23.501199971142967,
+        "feature_mean_distance_squared": 7.39871967803846,
+        "feature_variance_ratio": 1.0731038797706274
+      }
+    ],
+    "diversity": {
+      "particles": 128,
+      "draws_per_particle": 16,
+      "pixel": {
+        "within_fraction": 0.05565081757229046,
+        "between_fraction": 0.9443491824277096,
+        "total_variance_trace": 189.8551215959265
+      },
+      "inception": {
+        "within_fraction": 0.3325620980990167,
+        "between_fraction": 0.6674379019009833,
+        "total_variance_trace": 210.01468913669495
+      }
+    },
+    "total_seconds": 206.83123419602634,
+    "note": "Read-only EMA sampler intervention, not a trained model improvement. Scale 1 reproduces original sampler; other scales retain the same particle IDs and underlying noise. Within-particle ANOVA is descriptive, not a class-coverage metric.",
+    "baseline_reproduction_error": 0.0008472427869605781
+  }
+]

@@ -1,0 +1,6 @@
+checkpoint: runs/cifar_particle_ae/transgan_scout/cnn_e_only/checkpoint_010000.pt
+checkpoint_sha256: d75fca4bc42ec09f1423ce1a671b4cbd10caefe0abccae3ac2bdb05d5d93237c
+draws_per_particle: 2
+out_dir: runs/cifar_particle_ae/particle_support_smoke_v2/parent_10k
+particles: 4
+samples: 128

@@ -1,0 +1,5 @@
+checkpoint: runs/cifar_particle_ae/generator_balance/control/checkpoint_020000.pt
+checkpoint_sha256: d4db5d7c2d52b5133eaf8c80d9eade5301112a47f85f915f6be7ef9598959a4d
+out_dir: runs/cifar_particle_ae/generator_balance_probes/control
+samples: 2048
+steps: 0

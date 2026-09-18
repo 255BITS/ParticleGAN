@@ -1,0 +1,3 @@
+The initial 128-sample smoke completed all calculations and frozen-state assertions, but grid certification rejected its summary because the required nonempty final block was absent. Added that block and reran in a fresh particle_support_smoke_v2 directory. Original failed attempt and source.zip remain in runs/cifar_particle_ae/particle_support_smoke. Smoke FIDs are not benchmark results.
+
+The corrected smoke passed grid certification and frozen-state/original-sampler assertions. All three full diagnostics then passed certification and reproduced original FID within 0.001. No historical/shared source files or checkpoints changed.

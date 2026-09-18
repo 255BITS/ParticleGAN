@@ -1,0 +1,10 @@
+{
+  "control": {
+    "path": "runs/cifar_particle_ae/generator_balance/control/checkpoint.pt",
+    "sha256": "d4db5d7c2d52b5133eaf8c80d9eade5301112a47f85f915f6be7ef9598959a4d"
+  },
+  "half_g": {
+    "path": "runs/cifar_particle_ae/generator_balance/half_g/checkpoint.pt",
+    "sha256": "df00a0c8ee8a17814624527c1ec4b5968fce99bf943e81dad305e3c85c39e4a3"
+  }
+}
