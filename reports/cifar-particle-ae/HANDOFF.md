@@ -1,5 +1,13 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
+## Latest active jobs: long small deconv and wider GroupNorm deconv
+
+User authorized much longer plain-deconv training and selected "try wider with normalization" for the other GPU. **GPU1:** original299k-parameter unnormalized deconv full-state resume40k->200k, pipelinePID274862, `experiments/cifar_ae_deconv_long.py`, FID50k every10k, initialFID26.2232, no optimizer/rate/objective changes. Verified actual restore and finite updates beyond42k. Plan/config/launch/validation under `deconv_16k_200k`. Estimated110–125 minutes total wall time from20:05MDT. No further promotion queued.
+
+**GPU0:** wider925,763-parameter deconv, channels256/128/64, GroupNorm8 at all three hidden resolutions, RGB deconv->tanh with no output norm. Scratch0->40k scout,16k independent particles, FID50k every5k. Subagent `/root/wide_norm_deconv` implemented new standalone trainer,11 tests passed including exactresume/E-only isolation/D-E RNG; actual16k16-update pipeline smoke passed. Same D/E initialization hashes and prior calibration/sigma as original small deconv. Source `experiments/train_cifar_ae_deconv_wide_norm.py`; orchestrator `experiments/cifar_ae_deconv_wide_norm_scout.py`; records under `deconv_wide_norm_16k_scout`. User approved width+normalization jointly; do not claim isolated normalization/capacity causality. Compare to existing small-deconv40k curve without retraining a baseline.
+
+Follow both: `tail -F runs/cifar_particle_ae/{deconv_16k_200k,deconv_wide_norm_16k_scout}/PIPELINE.log`. Historical idle/completed descriptions below are superseded by this section. No automatic continuation of the wider scout is queued.
+
 ## Latest completed results review
 
 **Both GPUs idle; all jobs completed.** Deconv16k40k endedFID50k26.2232, improving every5k evaluation (35k27.0096). Sample grid has varied subjects with softer/less coherent detail thanCNN; no obvious wholesale collapse, but no deconv density/coverage probe yet. ReconMSE0.12820 versusCNN16k40k0.14578 despite worseFID; encoder usage is not sampling coverage. G299k plus prior1.05m parameters. Full review `deconv_16k_scout/FINDINGS.md`; recommend checkpoint continuation40k->80k and coverage measurement, **not launched**. Architecture and scratch prior initialization differ from historicalCNN, so no isolated capacity/normalization causal claim.
