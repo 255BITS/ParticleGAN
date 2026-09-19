@@ -1,0 +1,6 @@
+checkpoint: runs/cifar_particle_ae/particle_overlap_training_freeze_centers/freeze_centers/checkpoint_100000.pt
+checkpoint_sha256: 56985e7c567ece8a82a73456cb02edaa1ba5e334faa2c8dcc6f92fffaa336bf9
+expected_fid: 16.584633723547938
+noise_scales:
+- 1.0
+out_dir: runs/cifar_particle_ae/particle_overlap_training_quality_freeze_centers/freeze_centers

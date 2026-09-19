@@ -1,11 +1,4 @@
 {
-  "stage": "training_80k_to_100k_forks",
-  "noise_scale": 0.75,
-  "command": [
-    "/home/martyn/dev/ParticleGAN/.venv/bin/python",
-    "-u",
-    "experiments/cifar_ae_overlap_training.py",
-    "--noise-scale",
-    "0.75"
-  ]
+  "stage": "complete",
+  "noise_scale": 0.75
 }

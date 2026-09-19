@@ -1,6 +1,17 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
 
+## Latest completed review: overlap interventions do not break the FID plateau
+
+**Both training forks and endpoint probes completed/certified; GPU1 idle, no further jobs queued.** GPU0 has unrelated activity; do not describe both cards as idle. Source hashes and final/best checkpoint digests verified. Additional read-only unchanged100k probe completed under `particle_overlap_control_100k`, reproducingFID16.4609 and filling matched coverage/geometry control.
+
+At100k: unchangedFID**16.4609**, coverage**63.36%**, density**0.59324**, confusion**0.0244%**; frozen centersFID**16.5846**, coverage**65.09%**, density**0.63840**, confusion**0.0092%**; sigma75%FID**19.1835**, coverage**58.90%**, density**0.6020**, confusion**0.0824%**. Freeze geometry stays exactly equal to80k; FID still regresses, so increasing overlap is not necessary for80k->100k deterioration. Freezing helps coverage but does not improve FID. Unchanged100k nearest distance2.3309 exceeds80k2.1637: regression precedes the later160k clumping. Reduced sigma fails both as inference fix and training intervention.
+
+Frozen85/90/95/100k FID15.7695/15.7493/16.6345/16.5846. Best90k15.7493 practically ties original80k15.7527, not a meaningful breakthrough. Reduced-noise85/90/95/100k16.4907/16.7851/18.3403/19.1835; initial80k sampling-only15.9090. Full ranking, interpretation, and plot: `particle_overlap_training/{FINDINGS.md,LEADERBOARD.md,curves.png,results.json,CHECKPOINTS.json}`. Best and final checkpoints separately preserved. Final frozenSHA56985e7c567ece8a82a73456cb02edaa1ba5e334faa2c8dcc6f92fffaa336bf9; frozen90kSHA6097a3af827002acf7d27d4966dcd20d3ed0de9ce5b04adb9fb13ea2554d3a29; reduced finalSHAe96254ce195394d73a5652372f94e32cc63a1856d9b03077e7c4cf185f1c4b09.
+
+Recommendation only (not launched): original80k full-state fork with all learning rates halved, original sigma/prior/architecture/objective, testing adversarial-update drift against existing control. Prior lower-rate failures on older1k formulations remain relevant. Current E-only reconstruction cannot directly move G; with prior fixed, remaining G evolution is adversarial. Does not establish D specifically as the cause or rule out capacity. Defer particle repulsion and blind long extensions. Earlier active statuses below superseded.
+
+
 ## Latest: overlap sampling sweep completed; training interventions active on GPU 1
 
 User authorized exploring Gaussian intersection/short-circuit hypothesis using GPU 1. Branch unchanged. **Controller PID 457428** (`experiments/cifar_ae_overlap_followup.py`), currently training frozen-center CNN16k **80k->100k**, then queued sigma x0.75 **80k->100k**, each followed by read-only endpoint FID/coverage/geometry. No GPU 0 work launched. Logs: `tail -F runs/cifar_particle_ae/particle_overlap_training/{launcher,PIPELINE}.log`. Status/launch/selection/validation under `particle_overlap_training/`. Two actual 16-update full-state resume smokes passed; source archives/certificates preserve all historical trainers. New trainer `experiments/train_cifar_ae_overlap.py`, orchestration `cifar_ae_overlap_training.py`. No automatic extension beyond 100k.

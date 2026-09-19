@@ -1,0 +1,6 @@
+checkpoint: runs/cifar_particle_ae/particle_16k_160k/16k_160k/checkpoint_100000.pt
+checkpoint_sha256: 9bb155bcb6a8e701fbc89450a7bdf8f5149176b59502d30e0f04736c4e174da5
+expected_fid: 16.46092569998359
+noise_scales:
+- 1.0
+out_dir: runs/cifar_particle_ae/particle_overlap_control_100k/control_100k

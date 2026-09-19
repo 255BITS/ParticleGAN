@@ -1,0 +1,6 @@
+checkpoint: runs/cifar_particle_ae/particle_overlap_training_reduced_noise/reduced_noise/checkpoint_100000.pt
+checkpoint_sha256: e96254ce195394d73a5652372f94e32cc63a1856d9b03077e7c4cf185f1c4b09
+expected_fid: 19.183537308596556
+noise_scales:
+- 1.0
+out_dir: runs/cifar_particle_ae/particle_overlap_training_quality_reduced_noise/reduced_noise

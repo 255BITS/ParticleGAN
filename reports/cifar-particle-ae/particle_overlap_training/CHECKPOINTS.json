@@ -1,0 +1,26 @@
+{
+  "freeze_centers": {
+    "path": "runs/cifar_particle_ae/particle_overlap_training_freeze_centers/freeze_centers/checkpoint_100000.pt",
+    "sha256": "56985e7c567ece8a82a73456cb02edaa1ba5e334faa2c8dcc6f92fffaa336bf9",
+    "fid50k": 16.584633723547938,
+    "best_sampled": {
+      "path": "runs/cifar_particle_ae/particle_overlap_training_freeze_centers/freeze_centers/checkpoint_090000.pt",
+      "sha256": "6097a3af827002acf7d27d4966dcd20d3ed0de9ce5b04adb9fb13ea2554d3a29",
+      "step": 90000,
+      "fid50k": 15.749260737656869,
+      "scope": "best resumed evaluation; starting checkpoint excluded"
+    }
+  },
+  "reduced_noise": {
+    "path": "runs/cifar_particle_ae/particle_overlap_training_reduced_noise/reduced_noise/checkpoint_100000.pt",
+    "sha256": "e96254ce195394d73a5652372f94e32cc63a1856d9b03077e7c4cf185f1c4b09",
+    "fid50k": 19.183537308596556,
+    "best_sampled": {
+      "path": "runs/cifar_particle_ae/particle_overlap_training_reduced_noise/reduced_noise/checkpoint_085000.pt",
+      "sha256": "d430726b6baac7f22437e22b49b5fcf251572a488a3b994a320af0c69285c400",
+      "step": 85000,
+      "fid50k": 16.490690406596627,
+      "scope": "best resumed evaluation; starting checkpoint excluded"
+    }
+  }
+}
