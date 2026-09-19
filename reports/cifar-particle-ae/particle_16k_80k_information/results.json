@@ -1,0 +1,1744 @@
+[
+  {
+    "name": "16k_80k",
+    "checkpoint_fid50k": 15.75268214899046,
+    "final": {
+      "information": {
+        "parents": 32,
+        "children_per_parent": 16,
+        "available_sibling_bits": 4.0,
+        "decoder": "train-only diagonal nearest-centroid softmax; validation shrinkage/temperature including uniform",
+        "train_draws_per_child": 64,
+        "validation_draws_per_child": 32,
+        "test_draws_per_child": 64,
+        "per_parent": {
+          "observed": [
+            {
+              "decodable_bits": 3.263987368539124,
+              "test_ce_bits": 0.736012631460876,
+              "test_accuracy": 0.8720703125,
+              "validation_ce_bits": 0.6930525279311044,
+              "shrinkage": 0.1,
+              "temperature": 0.03
+            },
+            {
+              "decodable_bits": 2.6060947477841365,
+              "test_ce_bits": 1.3939052522158635,
+              "test_accuracy": 0.7666015625,
+              "validation_ce_bits": 1.357689531294846,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.161958549847385,
+              "test_ce_bits": 0.8380414501526152,
+              "test_accuracy": 0.83984375,
+              "validation_ce_bits": 0.8645231323993549,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 2.8322622219979747,
+              "test_ce_bits": 1.1677377780020253,
+              "test_accuracy": 0.7958984375,
+              "validation_ce_bits": 1.1419571440275667,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.8812409798908734,
+              "test_ce_bits": 0.11875902010912649,
+              "test_accuracy": 0.97265625,
+              "validation_ce_bits": 0.11449486711750781,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.2737636819565545,
+              "test_ce_bits": 0.7262363180434456,
+              "test_accuracy": 0.8818359375,
+              "validation_ce_bits": 0.5730065025443383,
+              "shrinkage": 0.1,
+              "temperature": 0.03
+            },
+            {
+              "decodable_bits": 3.12557644360458,
+              "test_ce_bits": 0.8744235563954202,
+              "test_accuracy": 0.8466796875,
+              "validation_ce_bits": 0.8757986740057966,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.1941489637920903,
+              "test_ce_bits": 0.8058510362079097,
+              "test_accuracy": 0.857421875,
+              "validation_ce_bits": 0.7936083334000492,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.001227963267951,
+              "test_ce_bits": 0.9987720367320493,
+              "test_accuracy": 0.8369140625,
+              "validation_ce_bits": 0.8156565805122346,
+              "shrinkage": 0.1,
+              "temperature": 0.03
+            },
+            {
+              "decodable_bits": 3.448353187847281,
+              "test_ce_bits": 0.5516468121527193,
+              "test_accuracy": 0.9033203125,
+              "validation_ce_bits": 0.6028756258508012,
+              "shrinkage": 0.1,
+              "temperature": 0.03
+            },
+            {
+              "decodable_bits": 3.853845530513144,
+              "test_ce_bits": 0.14615446948685615,
+              "test_accuracy": 0.9765625,
+              "validation_ce_bits": 0.07163948579923968,
+              "shrinkage": 0.1,
+              "temperature": 0.03
+            },
+            {
+              "decodable_bits": 2.215382598220865,
+              "test_ce_bits": 1.784617401779135,
+              "test_accuracy": 0.666015625,
+              "validation_ce_bits": 1.67920698395833,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 2.292741906015991,
+              "test_ce_bits": 1.707258093984009,
+              "test_accuracy": 0.6884765625,
+              "validation_ce_bits": 1.7152155237677091,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.043348167497875,
+              "test_ce_bits": 0.9566518325021248,
+              "test_accuracy": 0.8251953125,
+              "validation_ce_bits": 0.9718886575376179,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.154646432242368,
+              "test_ce_bits": 0.8453535677576318,
+              "test_accuracy": 0.837890625,
+              "validation_ce_bits": 0.9001434982428301,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.358619486864925,
+              "test_ce_bits": 0.6413805131350753,
+              "test_accuracy": 0.8798828125,
+              "validation_ce_bits": 0.673963248591048,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.022238313231934,
+              "test_ce_bits": 0.977761686768066,
+              "test_accuracy": 0.830078125,
+              "validation_ce_bits": 1.0399811685735072,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.5333743632262755,
+              "test_ce_bits": 0.46662563677372454,
+              "test_accuracy": 0.923828125,
+              "validation_ce_bits": 0.43043128981253637,
+              "shrinkage": 0.1,
+              "temperature": 0.03
+            },
+            {
+              "decodable_bits": 3.642614717319665,
+              "test_ce_bits": 0.3573852826803351,
+              "test_accuracy": 0.9287109375,
+              "validation_ce_bits": 0.3668151761215814,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.7419194955635757,
+              "test_ce_bits": 0.2580805044364243,
+              "test_accuracy": 0.9521484375,
+              "validation_ce_bits": 0.26303707153015243,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.05094501728049,
+              "test_ce_bits": 0.9490549827195099,
+              "test_accuracy": 0.8466796875,
+              "validation_ce_bits": 0.9149779023242564,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.494574740586585,
+              "test_ce_bits": 0.5054252594134149,
+              "test_accuracy": 0.935546875,
+              "validation_ce_bits": 0.5901286761168489,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.652988157897304,
+              "test_ce_bits": 0.347011842102696,
+              "test_accuracy": 0.9443359375,
+              "validation_ce_bits": 0.38658470606921863,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.1008042229550483,
+              "test_ce_bits": 0.8991957770449519,
+              "test_accuracy": 0.8359375,
+              "validation_ce_bits": 0.9874946196632066,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.137789422838264,
+              "test_ce_bits": 0.862210577161736,
+              "test_accuracy": 0.859375,
+              "validation_ce_bits": 1.0087780059454792,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.0357040506931448,
+              "test_ce_bits": 0.9642959493068552,
+              "test_accuracy": 0.841796875,
+              "validation_ce_bits": 1.0298776084850092,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 2.948138945606935,
+              "test_ce_bits": 1.0518610543930649,
+              "test_accuracy": 0.798828125,
+              "validation_ce_bits": 1.0265192758084485,
+              "shrinkage": 1.0,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 2.7526458660166773,
+              "test_ce_bits": 1.2473541339833225,
+              "test_accuracy": 0.7646484375,
+              "validation_ce_bits": 1.1997730693836939,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.169433138551049,
+              "test_ce_bits": 0.830566861448951,
+              "test_accuracy": 0.837890625,
+              "validation_ce_bits": 0.8215201065295126,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 3.09582448999653,
+              "test_ce_bits": 0.9041755100034702,
+              "test_accuracy": 0.8330078125,
+              "validation_ce_bits": 0.8687283667972694,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 2.1105395667286566,
+              "test_ce_bits": 1.8894604332713434,
+              "test_accuracy": 0.6416015625,
+              "validation_ce_bits": 1.8669984913485689,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 2.4814819971582005,
+              "test_ce_bits": 1.5185180028417995,
+              "test_accuracy": 0.6943359375,
+              "validation_ce_bits": 1.4446343266432073,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            }
+          ],
+          "shuffled_labels": [
+            {
+              "decodable_bits": 0.00013590601656732204,
+              "test_ce_bits": 3.9998640939834327,
+              "test_accuracy": 0.0703125,
+              "validation_ce_bits": 3.9999097847783465,
+              "shrinkage": 0.1,
+              "temperature": 3.0
+            },
+            {
+              "decodable_bits": -0.0016706637632921684,
+              "test_ce_bits": 4.001670663763292,
+              "test_accuracy": 0.0595703125,
+              "validation_ce_bits": 3.9997905862942016,
+              "shrinkage": 0.5,
+              "temperature": 1.0
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": 0.0007775091727983963,
+              "test_ce_bits": 3.9992224908272016,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9993363267310147,
+              "shrinkage": 0.1,
+              "temperature": 1.0
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": -0.003094406944267547,
+              "test_ce_bits": 4.0030944069442675,
+              "test_accuracy": 0.06640625,
+              "validation_ce_bits": 3.9961777191633425,
+              "shrinkage": 1.0,
+              "temperature": 1.0
+            },
+            {
+              "decodable_bits": -0.002140915688266354,
+              "test_ce_bits": 4.002140915688266,
+              "test_accuracy": 0.0693359375,
+              "validation_ce_bits": 3.997529975651382,
+              "shrinkage": 1.0,
+              "temperature": 1.0
+            },
+            {
+              "decodable_bits": -1.2925718487544202e-05,
+              "test_ce_bits": 4.0000129257184875,
+              "test_accuracy": 0.0615234375,
+              "validation_ce_bits": 3.999918414525659,
+              "shrinkage": 1.0,
+              "temperature": 3.0
+            },
+            {
+              "decodable_bits": 0.002110897585732463,
+              "test_ce_bits": 3.9978891024142675,
+              "test_accuracy": 0.076171875,
+              "validation_ce_bits": 3.998811297270513,
+              "shrinkage": 0.5,
+              "temperature": 1.0
+            },
+            {
+              "decodable_bits": -0.003748548615029712,
+              "test_ce_bits": 4.00374854861503,
+              "test_accuracy": 0.0634765625,
+              "validation_ce_bits": 3.999088442792362,
+              "shrinkage": 1.0,
+              "temperature": 1.0
+            },
+            {
+              "decodable_bits": -0.001005631888048697,
+              "test_ce_bits": 4.001005631888049,
+              "test_accuracy": 0.0634765625,
+              "validation_ce_bits": 3.9995660261502706,
+              "shrinkage": 1.0,
+              "temperature": 3.0
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": -0.002563761032120304,
+              "test_ce_bits": 4.00256376103212,
+              "test_accuracy": 0.05859375,
+              "validation_ce_bits": 3.9981183344824576,
+              "shrinkage": 0.1,
+              "temperature": 1.0
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": -0.0009830830553134717,
+              "test_ce_bits": 4.0009830830553135,
+              "test_accuracy": 0.0595703125,
+              "validation_ce_bits": 3.9996818580944025,
+              "shrinkage": 1.0,
+              "temperature": 3.0
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": -0.00012869737240972512,
+              "test_ce_bits": 4.00012869737241,
+              "test_accuracy": 0.0693359375,
+              "validation_ce_bits": 3.9999335019221602,
+              "shrinkage": 0.1,
+              "temperature": 3.0
+            },
+            {
+              "decodable_bits": -0.0008766032773239729,
+              "test_ce_bits": 4.000876603277324,
+              "test_accuracy": 0.0703125,
+              "validation_ce_bits": 3.999585173003116,
+              "shrinkage": 1.0,
+              "temperature": 3.0
+            },
+            {
+              "decodable_bits": 0.0010770532583728176,
+              "test_ce_bits": 3.998922946741627,
+              "test_accuracy": 0.080078125,
+              "validation_ce_bits": 3.998352164718333,
+              "shrinkage": 1.0,
+              "temperature": 1.0
+            },
+            {
+              "decodable_bits": -0.0001962756697793111,
+              "test_ce_bits": 4.000196275669779,
+              "test_accuracy": 0.0703125,
+              "validation_ce_bits": 3.9994033900721258,
+              "shrinkage": 0.1,
+              "temperature": 1.0
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            },
+            {
+              "decodable_bits": -0.00428253434082837,
+              "test_ce_bits": 4.004282534340828,
+              "test_accuracy": 0.052734375,
+              "validation_ce_bits": 3.9994893107285083,
+              "shrinkage": 0.1,
+              "temperature": 1.0
+            },
+            {
+              "decodable_bits": -0.001794011671067075,
+              "test_ce_bits": 4.001794011671067,
+              "test_accuracy": 0.05078125,
+              "validation_ce_bits": 3.999554420956337,
+              "shrinkage": 0.1,
+              "temperature": 1.0
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 4.0,
+              "shrinkage": null,
+              "temperature": null
+            }
+          ],
+          "identical_clones": [
+            {
+              "decodable_bits": 4.440892098500626e-16,
+              "test_ce_bits": 3.9999999999999996,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.5,
+              "temperature": 0.01
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999982,
+              "shrinkage": 1.0,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 1.3322676295501878e-15,
+              "test_ce_bits": 3.9999999999999987,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.03
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999996,
+              "shrinkage": 0.1,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 1.0,
+              "temperature": 0.03
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.5,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": -8.881784197001252e-16,
+              "test_ce_bits": 4.000000000000001,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 1.0,
+              "temperature": 0.3
+            },
+            {
+              "decodable_bits": 4.440892098500626e-16,
+              "test_ce_bits": 3.9999999999999996,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.3
+            },
+            {
+              "decodable_bits": 4.440892098500626e-16,
+              "test_ce_bits": 3.9999999999999996,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.5,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999982,
+              "shrinkage": 0.5,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 4.440892098500626e-16,
+              "test_ce_bits": 3.9999999999999996,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 1.0,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 4.440892098500626e-16,
+              "test_ce_bits": 3.9999999999999996,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.5,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999982,
+              "shrinkage": 1.0,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 4.440892098500626e-16,
+              "test_ce_bits": 3.9999999999999996,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999996,
+              "shrinkage": 0.1,
+              "temperature": 0.03
+            },
+            {
+              "decodable_bits": 4.440892098500626e-16,
+              "test_ce_bits": 3.9999999999999996,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.5,
+              "temperature": 0.03
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.01
+            },
+            {
+              "decodable_bits": 4.440892098500626e-16,
+              "test_ce_bits": 3.9999999999999996,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 4.440892098500626e-16,
+              "test_ce_bits": 3.9999999999999996,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.03
+            },
+            {
+              "decodable_bits": 4.440892098500626e-16,
+              "test_ce_bits": 3.9999999999999996,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999996,
+              "shrinkage": 0.1,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 4.440892098500626e-16,
+              "test_ce_bits": 3.9999999999999996,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.1
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999982,
+              "shrinkage": 0.5,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.5,
+              "temperature": 0.003
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999987,
+              "shrinkage": 0.1,
+              "temperature": 0.001
+            },
+            {
+              "decodable_bits": 0.0,
+              "test_ce_bits": 4.0,
+              "test_accuracy": 0.0625,
+              "validation_ce_bits": 3.9999999999999996,
+              "shrinkage": 0.5,
+              "temperature": 0.003
+            }
+          ]
+        },
+        "total_panel_images": 81920,
+        "controls": {
+          "shuffled_labels": "Independently permuted balanced feature-to-label assignments in train, validation and test.",
+          "identical_clones": "Feature-level exact null: repeat child0 features under every label, retaining independent noise splits. This is a decoder check, not another generator evaluation."
+        },
+        "observed": {
+          "decodable_bits": 3.1149442104854206,
+          "parent_standard_error": 0.078261729300491,
+          "test_ce_bits": 0.8850557895145796,
+          "test_accuracy": 0.84112548828125
+        },
+        "shuffled_labels": {
+          "decodable_bits": -0.0005748966563363517,
+          "parent_standard_error": 0.00024095998082325376,
+          "test_ce_bits": 4.000574896656336,
+          "test_accuracy": 0.063812255859375
+        },
+        "identical_clones": {
+          "decodable_bits": 1.6653345369377348e-16,
+          "parent_standard_error": 6.226323632557423e-17,
+          "test_ce_bits": 4.0,
+          "test_accuracy": 0.0625
+        },
+        "interpretation": "Held-out estimate of a decoder-dependent conditional MI lower bound, not exact entropy. Negative estimates retained. Parent SE is descriptive, not uncertainty across training runs."
+      },
+      "variance": {
+        "within_child_fraction": 0.31001260732883656,
+        "between_siblings_fraction": 0.14794012059117975,
+        "between_parents_fraction": 0.5420472720799837,
+        "between_children_fraction": 0.6899873926711635,
+        "total_variance_trace": 201.02271575745502,
+        "total_sum_squares": 1646577.0647693141,
+        "within_child_sum_squares": 510459.6490169977,
+        "between_siblings_sum_squares": 243594.80952464315,
+        "between_parents_sum_squares": 892522.6062276734,
+        "note": "Finite-sample balanced ANOVA fractions; between-mean terms contain estimation noise. Descriptive feature dispersion, not semantic mode count."
+      },
+      "density_coverage": {
+        "density": 0.64686,
+        "coverage": 0.6426,
+        "real_samples": 10000,
+        "fake_samples": 10000,
+        "k": 5,
+        "radius_squared_mean": 188.20098876953125,
+        "distance_dtype": "torch.float32",
+        "radius_boundary": "strict <, kth other real neighbor",
+        "feature_variance_trace_ratio_to_real": 1.07090229731238,
+        "feature_mean_distance_squared": 3.3639533947214852
+      }
+    },
+    "config": {
+      "checkpoint": "runs/cifar_particle_ae/particle_16k_80k/16k_80k/checkpoint_080000.pt",
+      "checkpoint_sha256": "9ddcef1fb0bf82c47a581fa1b2d58872315d5d67b302eadc533c0abc41b7d5c7",
+      "out_dir": "runs/cifar_particle_ae/particle_16k_80k_information/16k_80k",
+      "samples": 10000,
+      "batch_size": 128,
+      "parents": 32,
+      "train_draws": 64,
+      "val_draws": 32,
+      "test_draws": 64,
+      "variance_draws": 16,
+      "k": 5,
+      "distance_chunk": 512,
+      "feature_cache": "results/cifar_ddgan/information_cache"
+    },
+    "parent_step": 80000,
+    "num_particles": 16384,
+    "expansion_factor": 16,
+    "parent_unchanged": true,
+    "frozen_state_unchanged": true,
+    "protocol": {
+      "dataset": "CIFAR-10",
+      "split": "train",
+      "real_samples": 10000,
+      "fake_samples": 10000,
+      "real_subset_seed": 71337,
+      "feature_extraction": {
+        "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+        "weights": "weights-inception-2015-12-05-6726825d.pth",
+        "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor",
+        "precision": "float32 extractor with TF32 disabled"
+      },
+      "generation_precision": "FP32 with TF32 disabled",
+      "distance_precision": "FP32 exact chunked squared Euclidean distances",
+      "statistics_precision": "float64 classifier and variance",
+      "density_coverage_k": 5,
+      "fid_recomputed": false,
+      "density_definition": "Mean real-neighborhood memberships per fake, divided by k",
+      "coverage_definition": "Fraction of real kNN balls containing at least one fake; strict radius comparisons"
+    },
+    "feature_extraction_protocol": {
+      "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+      "weights": "weights-inception-2015-12-05-6726825d.pth",
+      "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor",
+      "precision": "float32 extractor with TF32 disabled"
+    },
+    "information": {
+      "parents": 32,
+      "children_per_parent": 16,
+      "available_sibling_bits": 4.0,
+      "decoder": "train-only diagonal nearest-centroid softmax; validation shrinkage/temperature including uniform",
+      "train_draws_per_child": 64,
+      "validation_draws_per_child": 32,
+      "test_draws_per_child": 64,
+      "per_parent": {
+        "observed": [
+          {
+            "decodable_bits": 3.263987368539124,
+            "test_ce_bits": 0.736012631460876,
+            "test_accuracy": 0.8720703125,
+            "validation_ce_bits": 0.6930525279311044,
+            "shrinkage": 0.1,
+            "temperature": 0.03
+          },
+          {
+            "decodable_bits": 2.6060947477841365,
+            "test_ce_bits": 1.3939052522158635,
+            "test_accuracy": 0.7666015625,
+            "validation_ce_bits": 1.357689531294846,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.161958549847385,
+            "test_ce_bits": 0.8380414501526152,
+            "test_accuracy": 0.83984375,
+            "validation_ce_bits": 0.8645231323993549,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 2.8322622219979747,
+            "test_ce_bits": 1.1677377780020253,
+            "test_accuracy": 0.7958984375,
+            "validation_ce_bits": 1.1419571440275667,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.8812409798908734,
+            "test_ce_bits": 0.11875902010912649,
+            "test_accuracy": 0.97265625,
+            "validation_ce_bits": 0.11449486711750781,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.2737636819565545,
+            "test_ce_bits": 0.7262363180434456,
+            "test_accuracy": 0.8818359375,
+            "validation_ce_bits": 0.5730065025443383,
+            "shrinkage": 0.1,
+            "temperature": 0.03
+          },
+          {
+            "decodable_bits": 3.12557644360458,
+            "test_ce_bits": 0.8744235563954202,
+            "test_accuracy": 0.8466796875,
+            "validation_ce_bits": 0.8757986740057966,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.1941489637920903,
+            "test_ce_bits": 0.8058510362079097,
+            "test_accuracy": 0.857421875,
+            "validation_ce_bits": 0.7936083334000492,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.001227963267951,
+            "test_ce_bits": 0.9987720367320493,
+            "test_accuracy": 0.8369140625,
+            "validation_ce_bits": 0.8156565805122346,
+            "shrinkage": 0.1,
+            "temperature": 0.03
+          },
+          {
+            "decodable_bits": 3.448353187847281,
+            "test_ce_bits": 0.5516468121527193,
+            "test_accuracy": 0.9033203125,
+            "validation_ce_bits": 0.6028756258508012,
+            "shrinkage": 0.1,
+            "temperature": 0.03
+          },
+          {
+            "decodable_bits": 3.853845530513144,
+            "test_ce_bits": 0.14615446948685615,
+            "test_accuracy": 0.9765625,
+            "validation_ce_bits": 0.07163948579923968,
+            "shrinkage": 0.1,
+            "temperature": 0.03
+          },
+          {
+            "decodable_bits": 2.215382598220865,
+            "test_ce_bits": 1.784617401779135,
+            "test_accuracy": 0.666015625,
+            "validation_ce_bits": 1.67920698395833,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 2.292741906015991,
+            "test_ce_bits": 1.707258093984009,
+            "test_accuracy": 0.6884765625,
+            "validation_ce_bits": 1.7152155237677091,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.043348167497875,
+            "test_ce_bits": 0.9566518325021248,
+            "test_accuracy": 0.8251953125,
+            "validation_ce_bits": 0.9718886575376179,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.154646432242368,
+            "test_ce_bits": 0.8453535677576318,
+            "test_accuracy": 0.837890625,
+            "validation_ce_bits": 0.9001434982428301,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.358619486864925,
+            "test_ce_bits": 0.6413805131350753,
+            "test_accuracy": 0.8798828125,
+            "validation_ce_bits": 0.673963248591048,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.022238313231934,
+            "test_ce_bits": 0.977761686768066,
+            "test_accuracy": 0.830078125,
+            "validation_ce_bits": 1.0399811685735072,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.5333743632262755,
+            "test_ce_bits": 0.46662563677372454,
+            "test_accuracy": 0.923828125,
+            "validation_ce_bits": 0.43043128981253637,
+            "shrinkage": 0.1,
+            "temperature": 0.03
+          },
+          {
+            "decodable_bits": 3.642614717319665,
+            "test_ce_bits": 0.3573852826803351,
+            "test_accuracy": 0.9287109375,
+            "validation_ce_bits": 0.3668151761215814,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.7419194955635757,
+            "test_ce_bits": 0.2580805044364243,
+            "test_accuracy": 0.9521484375,
+            "validation_ce_bits": 0.26303707153015243,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.05094501728049,
+            "test_ce_bits": 0.9490549827195099,
+            "test_accuracy": 0.8466796875,
+            "validation_ce_bits": 0.9149779023242564,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.494574740586585,
+            "test_ce_bits": 0.5054252594134149,
+            "test_accuracy": 0.935546875,
+            "validation_ce_bits": 0.5901286761168489,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.652988157897304,
+            "test_ce_bits": 0.347011842102696,
+            "test_accuracy": 0.9443359375,
+            "validation_ce_bits": 0.38658470606921863,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.1008042229550483,
+            "test_ce_bits": 0.8991957770449519,
+            "test_accuracy": 0.8359375,
+            "validation_ce_bits": 0.9874946196632066,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.137789422838264,
+            "test_ce_bits": 0.862210577161736,
+            "test_accuracy": 0.859375,
+            "validation_ce_bits": 1.0087780059454792,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.0357040506931448,
+            "test_ce_bits": 0.9642959493068552,
+            "test_accuracy": 0.841796875,
+            "validation_ce_bits": 1.0298776084850092,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 2.948138945606935,
+            "test_ce_bits": 1.0518610543930649,
+            "test_accuracy": 0.798828125,
+            "validation_ce_bits": 1.0265192758084485,
+            "shrinkage": 1.0,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 2.7526458660166773,
+            "test_ce_bits": 1.2473541339833225,
+            "test_accuracy": 0.7646484375,
+            "validation_ce_bits": 1.1997730693836939,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.169433138551049,
+            "test_ce_bits": 0.830566861448951,
+            "test_accuracy": 0.837890625,
+            "validation_ce_bits": 0.8215201065295126,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 3.09582448999653,
+            "test_ce_bits": 0.9041755100034702,
+            "test_accuracy": 0.8330078125,
+            "validation_ce_bits": 0.8687283667972694,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 2.1105395667286566,
+            "test_ce_bits": 1.8894604332713434,
+            "test_accuracy": 0.6416015625,
+            "validation_ce_bits": 1.8669984913485689,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 2.4814819971582005,
+            "test_ce_bits": 1.5185180028417995,
+            "test_accuracy": 0.6943359375,
+            "validation_ce_bits": 1.4446343266432073,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          }
+        ],
+        "shuffled_labels": [
+          {
+            "decodable_bits": 0.00013590601656732204,
+            "test_ce_bits": 3.9998640939834327,
+            "test_accuracy": 0.0703125,
+            "validation_ce_bits": 3.9999097847783465,
+            "shrinkage": 0.1,
+            "temperature": 3.0
+          },
+          {
+            "decodable_bits": -0.0016706637632921684,
+            "test_ce_bits": 4.001670663763292,
+            "test_accuracy": 0.0595703125,
+            "validation_ce_bits": 3.9997905862942016,
+            "shrinkage": 0.5,
+            "temperature": 1.0
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": 0.0007775091727983963,
+            "test_ce_bits": 3.9992224908272016,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9993363267310147,
+            "shrinkage": 0.1,
+            "temperature": 1.0
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": -0.003094406944267547,
+            "test_ce_bits": 4.0030944069442675,
+            "test_accuracy": 0.06640625,
+            "validation_ce_bits": 3.9961777191633425,
+            "shrinkage": 1.0,
+            "temperature": 1.0
+          },
+          {
+            "decodable_bits": -0.002140915688266354,
+            "test_ce_bits": 4.002140915688266,
+            "test_accuracy": 0.0693359375,
+            "validation_ce_bits": 3.997529975651382,
+            "shrinkage": 1.0,
+            "temperature": 1.0
+          },
+          {
+            "decodable_bits": -1.2925718487544202e-05,
+            "test_ce_bits": 4.0000129257184875,
+            "test_accuracy": 0.0615234375,
+            "validation_ce_bits": 3.999918414525659,
+            "shrinkage": 1.0,
+            "temperature": 3.0
+          },
+          {
+            "decodable_bits": 0.002110897585732463,
+            "test_ce_bits": 3.9978891024142675,
+            "test_accuracy": 0.076171875,
+            "validation_ce_bits": 3.998811297270513,
+            "shrinkage": 0.5,
+            "temperature": 1.0
+          },
+          {
+            "decodable_bits": -0.003748548615029712,
+            "test_ce_bits": 4.00374854861503,
+            "test_accuracy": 0.0634765625,
+            "validation_ce_bits": 3.999088442792362,
+            "shrinkage": 1.0,
+            "temperature": 1.0
+          },
+          {
+            "decodable_bits": -0.001005631888048697,
+            "test_ce_bits": 4.001005631888049,
+            "test_accuracy": 0.0634765625,
+            "validation_ce_bits": 3.9995660261502706,
+            "shrinkage": 1.0,
+            "temperature": 3.0
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": -0.002563761032120304,
+            "test_ce_bits": 4.00256376103212,
+            "test_accuracy": 0.05859375,
+            "validation_ce_bits": 3.9981183344824576,
+            "shrinkage": 0.1,
+            "temperature": 1.0
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": -0.0009830830553134717,
+            "test_ce_bits": 4.0009830830553135,
+            "test_accuracy": 0.0595703125,
+            "validation_ce_bits": 3.9996818580944025,
+            "shrinkage": 1.0,
+            "temperature": 3.0
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": -0.00012869737240972512,
+            "test_ce_bits": 4.00012869737241,
+            "test_accuracy": 0.0693359375,
+            "validation_ce_bits": 3.9999335019221602,
+            "shrinkage": 0.1,
+            "temperature": 3.0
+          },
+          {
+            "decodable_bits": -0.0008766032773239729,
+            "test_ce_bits": 4.000876603277324,
+            "test_accuracy": 0.0703125,
+            "validation_ce_bits": 3.999585173003116,
+            "shrinkage": 1.0,
+            "temperature": 3.0
+          },
+          {
+            "decodable_bits": 0.0010770532583728176,
+            "test_ce_bits": 3.998922946741627,
+            "test_accuracy": 0.080078125,
+            "validation_ce_bits": 3.998352164718333,
+            "shrinkage": 1.0,
+            "temperature": 1.0
+          },
+          {
+            "decodable_bits": -0.0001962756697793111,
+            "test_ce_bits": 4.000196275669779,
+            "test_accuracy": 0.0703125,
+            "validation_ce_bits": 3.9994033900721258,
+            "shrinkage": 0.1,
+            "temperature": 1.0
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          },
+          {
+            "decodable_bits": -0.00428253434082837,
+            "test_ce_bits": 4.004282534340828,
+            "test_accuracy": 0.052734375,
+            "validation_ce_bits": 3.9994893107285083,
+            "shrinkage": 0.1,
+            "temperature": 1.0
+          },
+          {
+            "decodable_bits": -0.001794011671067075,
+            "test_ce_bits": 4.001794011671067,
+            "test_accuracy": 0.05078125,
+            "validation_ce_bits": 3.999554420956337,
+            "shrinkage": 0.1,
+            "temperature": 1.0
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 4.0,
+            "shrinkage": null,
+            "temperature": null
+          }
+        ],
+        "identical_clones": [
+          {
+            "decodable_bits": 4.440892098500626e-16,
+            "test_ce_bits": 3.9999999999999996,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.5,
+            "temperature": 0.01
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999982,
+            "shrinkage": 1.0,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 1.3322676295501878e-15,
+            "test_ce_bits": 3.9999999999999987,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.03
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999996,
+            "shrinkage": 0.1,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 1.0,
+            "temperature": 0.03
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.5,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": -8.881784197001252e-16,
+            "test_ce_bits": 4.000000000000001,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 1.0,
+            "temperature": 0.3
+          },
+          {
+            "decodable_bits": 4.440892098500626e-16,
+            "test_ce_bits": 3.9999999999999996,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.3
+          },
+          {
+            "decodable_bits": 4.440892098500626e-16,
+            "test_ce_bits": 3.9999999999999996,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.5,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999982,
+            "shrinkage": 0.5,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 4.440892098500626e-16,
+            "test_ce_bits": 3.9999999999999996,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 1.0,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 4.440892098500626e-16,
+            "test_ce_bits": 3.9999999999999996,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.5,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999982,
+            "shrinkage": 1.0,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 4.440892098500626e-16,
+            "test_ce_bits": 3.9999999999999996,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999996,
+            "shrinkage": 0.1,
+            "temperature": 0.03
+          },
+          {
+            "decodable_bits": 4.440892098500626e-16,
+            "test_ce_bits": 3.9999999999999996,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.5,
+            "temperature": 0.03
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.01
+          },
+          {
+            "decodable_bits": 4.440892098500626e-16,
+            "test_ce_bits": 3.9999999999999996,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 4.440892098500626e-16,
+            "test_ce_bits": 3.9999999999999996,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.03
+          },
+          {
+            "decodable_bits": 4.440892098500626e-16,
+            "test_ce_bits": 3.9999999999999996,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999996,
+            "shrinkage": 0.1,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 4.440892098500626e-16,
+            "test_ce_bits": 3.9999999999999996,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.1
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999982,
+            "shrinkage": 0.5,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.5,
+            "temperature": 0.003
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999987,
+            "shrinkage": 0.1,
+            "temperature": 0.001
+          },
+          {
+            "decodable_bits": 0.0,
+            "test_ce_bits": 4.0,
+            "test_accuracy": 0.0625,
+            "validation_ce_bits": 3.9999999999999996,
+            "shrinkage": 0.5,
+            "temperature": 0.003
+          }
+        ]
+      },
+      "total_panel_images": 81920,
+      "controls": {
+        "shuffled_labels": "Independently permuted balanced feature-to-label assignments in train, validation and test.",
+        "identical_clones": "Feature-level exact null: repeat child0 features under every label, retaining independent noise splits. This is a decoder check, not another generator evaluation."
+      },
+      "observed": {
+        "decodable_bits": 3.1149442104854206,
+        "parent_standard_error": 0.078261729300491,
+        "test_ce_bits": 0.8850557895145796,
+        "test_accuracy": 0.84112548828125
+      },
+      "shuffled_labels": {
+        "decodable_bits": -0.0005748966563363517,
+        "parent_standard_error": 0.00024095998082325376,
+        "test_ce_bits": 4.000574896656336,
+        "test_accuracy": 0.063812255859375
+      },
+      "identical_clones": {
+        "decodable_bits": 1.6653345369377348e-16,
+        "parent_standard_error": 6.226323632557423e-17,
+        "test_ce_bits": 4.0,
+        "test_accuracy": 0.0625
+      },
+      "interpretation": "Held-out estimate of a decoder-dependent conditional MI lower bound, not exact entropy. Negative estimates retained. Parent SE is descriptive, not uncertainty across training runs."
+    },
+    "variance": {
+      "within_child_fraction": 0.31001260732883656,
+      "between_siblings_fraction": 0.14794012059117975,
+      "between_parents_fraction": 0.5420472720799837,
+      "between_children_fraction": 0.6899873926711635,
+      "total_variance_trace": 201.02271575745502,
+      "total_sum_squares": 1646577.0647693141,
+      "within_child_sum_squares": 510459.6490169977,
+      "between_siblings_sum_squares": 243594.80952464315,
+      "between_parents_sum_squares": 892522.6062276734,
+      "note": "Finite-sample balanced ANOVA fractions; between-mean terms contain estimation noise. Descriptive feature dispersion, not semantic mode count."
+    },
+    "density_coverage": {
+      "density": 0.64686,
+      "coverage": 0.6426,
+      "real_samples": 10000,
+      "fake_samples": 10000,
+      "k": 5,
+      "radius_squared_mean": 188.20098876953125,
+      "distance_dtype": "torch.float32",
+      "radius_boundary": "strict <, kth other real neighbor",
+      "feature_variance_trace_ratio_to_real": 1.07090229731238,
+      "feature_mean_distance_squared": 3.3639533947214852
+    },
+    "real_feature_cache": "/home/martyn/dev/ParticleGAN/results/cifar_ddgan/information_cache/real-4eef7a439a192b550544e798f6002218604fbf2e7ab903d094f2c77448fbf07d.pt",
+    "real_reference": {
+      "feature_extraction_protocol": {
+        "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+        "weights": "weights-inception-2015-12-05-6726825d.pth",
+        "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor",
+        "precision": "float32 extractor with TF32 disabled"
+      },
+      "dataset": "CIFAR-10",
+      "split": "train",
+      "indices_sha256": "24d4be3eb7526a3ec06c2aa72499a13d7fcabb0c45db594bc148ab20a48dd986",
+      "images_sha256": "b2591def248cd75530677c2795052194c33dd0dff09dacd75ad1eaae635bba26",
+      "extractor_state_sha256": "9a2309ea54c0e5b910fb2c644ccf35a9226a956c73beb87f0a5a4148ed60a663",
+      "samples": 10000
+    },
+    "sources": {
+      "information": "https://arxiv.org/abs/1606.03657",
+      "density_coverage": "https://proceedings.mlr.press/v119/naeem20a.html",
+      "radius_convention": "https://github.com/clovaai/generative-evaluation-prdc/blob/master/prdc/prdc.py"
+    },
+    "real_features_sha256": "fe089b56afca1897c928bcb682e5e0cc380ab23c4fce0492521122d87a62da46",
+    "diagnostic_precision": "FP32 generator and extractor with TF32 disabled; float64 classifier/variance. Matches extractor protocol, but generator TF32 differs from historical training/FID generation.",
+    "total_seconds": 123.55023949901806,
+    "note": "Read-only EMA diagnostics. Information/variance are conditional on sampled original parents; feature distinguishability can reflect artifacts. Density and coverage depend on extractor, k and sample count, and do not establish semantic quality or recall. No FID50k is recomputed."
+  }
+]

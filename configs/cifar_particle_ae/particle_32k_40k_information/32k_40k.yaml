@@ -1,0 +1,3 @@
+checkpoint: runs/cifar_particle_ae/particle_32k_40k/32k_40k/checkpoint_040000.pt
+checkpoint_sha256: 533ff24ebb99cab375c46b19af58a4bff25a21848ed0c93c829a2dc3a25a6473
+out_dir: runs/cifar_particle_ae/particle_32k_40k_information/32k_40k

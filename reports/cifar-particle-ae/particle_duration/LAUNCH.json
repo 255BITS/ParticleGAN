@@ -1,0 +1,22 @@
+{
+  "16k_160k": {
+    "pid": 271619,
+    "command": [
+      ".venv/bin/python",
+      "-u",
+      "experiments/cifar_ae_particle_duration.py",
+      "--arm",
+      "16k_160k"
+    ]
+  },
+  "32k_80k": {
+    "pid": 271620,
+    "command": [
+      ".venv/bin/python",
+      "-u",
+      "experiments/cifar_ae_particle_duration.py",
+      "--arm",
+      "32k_80k"
+    ]
+  }
+}
