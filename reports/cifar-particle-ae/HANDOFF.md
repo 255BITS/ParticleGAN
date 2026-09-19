@@ -1,5 +1,11 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
+## Active: SAGAN 200k to 300k on GPU 1 (2026-09-19)
+
+User authorized continuing SAGAN. Controller PID 591501: `experiments/cifar_ae_sagan_300k.py`. Certified 200k checkpoint FID50k 12.53445669 resumes to 300k total (100k additional updates), with full model/Adam/EMA/RNG state and unchanged recipe. FID50k every 5k; preserve all checkpoints and the 200k parent. Preflight passed: parent summary/source certificate, checkpoint SHA and empty intervention audit. Historical trainer unchanged. No automatic extension beyond 300k; no other job launched. Estimated 90–100 minutes including evaluation.
+
+Tail: `tail -F runs/cifar_particle_ae/sagan_gd_16k_300k/PIPELINE.log`. Reports under `sagan_gd_16k_300k/`: PLAN, VALIDATION, LAUNCH, STATUS, then results, CHECKPOINTS, LEADERBOARD and FINDINGS upon completion. Review the full curve and samples after completion. Previous no-job statements below are superseded. Endpoint coverage and long wide-deconv control remain recommendations only.
+
 ## Latest completed: SAGAN reaches FID12.5345 at200k
 
 SAGAN40k->200k continuation finished and certified; final and best checkpoint SHA verified. FinalFID50k12.53445669 crosses numeric<13 target. Last190/195/200k13.3829/12.9593/12.5345; final20k improvement1.1995. First<14 at120k, temporary rebound through140k, then improvement resumed. At80k SAGAN15.7728 vswideGN17.6565; short40k architecture ranking reversed with duration. No new job queued. Earlier active status below superseded.
