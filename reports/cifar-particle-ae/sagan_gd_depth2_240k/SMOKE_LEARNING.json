@@ -1,0 +1,14 @@
+{
+  "G": {
+    "projection_rms": 0.000912221148610115,
+    "nonzero": 2048
+  },
+  "D": {
+    "projection_rms": 0.0013990233419463038,
+    "nonzero": 2048
+  },
+  "ema_G": {
+    "projection_rms": 4.548746801447123e-05,
+    "nonzero": 2048
+  }
+}

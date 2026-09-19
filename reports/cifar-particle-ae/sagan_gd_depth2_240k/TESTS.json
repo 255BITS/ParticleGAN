@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "count": 6,
+  "command": "CUDA_VISIBLE_DEVICES=1 RUN_CUDA_IMAGE_TESTS=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=2 .venv/bin/python -m pytest -q tests/test_cifar_ae_sagan_depth.py",
+  "trainer_sha256": "c4035888864fbf5dcf6eec9dddf963544fff36ef3ba5c4c7b16622bb05b894d5",
+  "checks": [
+    "Historical initialization and RNG preserved",
+    "Real 200k live/EMA G outputs and input gradients identical before training",
+    "Real D outputs and input gradients identical before training",
+    "Existing G/E/prior Adam slots and next common-gradient updates identical",
+    "Existing D Adam slots retained by parameter name; frozen D features unchanged",
+    "No attention removal or unrelated immutable recipe changes",
+    "Added G block starts learning; learned D block supports active CUDA bcap double backward"
+  ]
+}

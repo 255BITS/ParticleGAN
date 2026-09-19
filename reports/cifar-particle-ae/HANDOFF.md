@@ -1,5 +1,13 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
+## Active: grow both SAGAN G/D attention, 200k to 240k (2026-09-19)
+
+User authorized stopping the plateaued 300k continuation and expanding attention, then explicitly requested increasing discriminator attention too. Stopped controller591501 and its SAGAN workers after saved260k. Unchanged205k–260k did not beat parent200k FID12.5345; best continuation250k12.6204, last260k13.0597. Retained checkpoints, source hashes verified. Partial results/STOPPED/leaderboard/findings under `sagan_gd_16k_300k/`; no completion certificate for interrupted run. A permanent ceiling is not established.
+
+GPU1 controllerPID628415: `experiments/cifar_ae_sagan_depth_scout.py`, standalone trainer `train_cifar_ae_sagan_depth.py`, track`sagan_gd_depth2_240k`, arm`gd_depth2`. Certified best200k ->240k. Add second sequential16x16 attention block to both G and D trainable pixel branch (+5120params each; G936003). Frozen ResNet D features unchanged. New blocks start as identities using zero output projection and nonzero Q/K/V; fixed unit residual coefficient, no schedule. Existing weights/EMA/Adam/RNG preserved; only new params have fresh Adam state. All other recipe settings unchanged. FID50k before updates and every5k; retain all checkpoints. Compare with existing unchanged240k13.1283 and matched205k–240k curve. Joint G/D experiment does not isolate sides or test scratch-training potential.
+
+Six tests passed including real parent output/input-gradient identity, inherited Adam migration, RNG/init preservation and active CUDA double backward. Certified16-update full-size growth smoke +8-update expanded resume passed; added projections and EMA became nonzero. Historical trainers/lib/pipeline source hashes unchanged. Reports `sagan_gd_depth2_240k/` contain PLAN, TESTS, SMOKE_LEARNING, VALIDATION, LAUNCH/STATUS and eventual leaderboard/findings/checkpoints. Tail: `tail -F runs/cifar_particle_ae/sagan_gd_depth2_240k/PIPELINE.log`. Estimated40–50minutes. No further stage queued. Older active statuses below superseded.
+
 ## Active: SAGAN 200k to 300k on GPU 1 (2026-09-19)
 
 User authorized continuing SAGAN. Controller PID 591501: `experiments/cifar_ae_sagan_300k.py`. Certified 200k checkpoint FID50k 12.53445669 resumes to 300k total (100k additional updates), with full model/Adam/EMA/RNG state and unchanged recipe. FID50k every 5k; preserve all checkpoints and the 200k parent. Preflight passed: parent summary/source certificate, checkpoint SHA and empty intervention audit. Historical trainer unchanged. No automatic extension beyond 300k; no other job launched. Estimated 90–100 minutes including evaluation.

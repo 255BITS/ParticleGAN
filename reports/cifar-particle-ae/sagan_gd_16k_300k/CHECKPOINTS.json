@@ -1,0 +1,20 @@
+{
+  "best_overall": {
+    "path": "runs/cifar_particle_ae/sagan_gd_16k_200k/sagan_gd_16k/checkpoint_200000.pt",
+    "step": 200000,
+    "fid50k": 12.53445668863742,
+    "sha256": "b45e411a8d3d0d0d3b7d45b877e719a7d3ed416edd223e513e07f6e05b3300f5"
+  },
+  "best_continuation": {
+    "path": "runs/cifar_particle_ae/sagan_gd_16k_300k/sagan_gd_16k/checkpoint_250000.pt",
+    "step": 250000,
+    "fid50k": 12.620353510571022,
+    "sha256": "09ba7a0e65e4fc4c3b36d4e9589d08115bfeea483e29d100f715014848b12946"
+  },
+  "last_saved": {
+    "path": "runs/cifar_particle_ae/sagan_gd_16k_300k/sagan_gd_16k/checkpoint_260000.pt",
+    "step": 260000,
+    "fid50k": 13.059701337574836,
+    "sha256": "c91417a595a6730a404f002159e973cf2f2ed386220b15773e203967f360f2d8"
+  }
+}

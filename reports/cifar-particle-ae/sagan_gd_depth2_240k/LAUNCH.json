@@ -1,0 +1,13 @@
+{
+  "pid": 628415,
+  "started_at": "2026-09-19T09:39:00.360018-06:00",
+  "command": [
+    "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "-u",
+    "experiments/cifar_ae_sagan_depth_scout.py"
+  ],
+  "gpu": 1,
+  "start_step": 200000,
+  "target_step": 240000,
+  "tail": "tail -F runs/cifar_particle_ae/sagan_gd_depth2_240k/PIPELINE.log"
+}
