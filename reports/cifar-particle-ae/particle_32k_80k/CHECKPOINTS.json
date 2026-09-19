@@ -1,0 +1,7 @@
+{
+  "32k_80k": {
+    "path": "runs/cifar_particle_ae/particle_32k_80k/32k_80k/checkpoint_080000.pt",
+    "sha256": "8602ae5dab6272ffb2e5760c17e2c3e80674004a31cad2d7775f2998e388e8ce",
+    "fid50k": 16.246099541808235
+  }
+}
