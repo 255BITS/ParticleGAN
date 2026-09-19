@@ -1,0 +1,844 @@
+[
+  {
+    "name": "sagan_gd_16k",
+    "curve": [
+      {
+        "step": 5000,
+        "gradient_norms": {
+          "G": 3.005706548690796,
+          "E": 0.08102186769247055,
+          "prior": 0.08849699795246124,
+          "G_attention": 0.7818709015846252,
+          "D_attention": 0.5476783514022827
+        },
+        "prior_update_rms": 0.0015210424317047,
+        "learning_rates": {
+          "G": 0.0003,
+          "E": 0.0003,
+          "prior": 0.003,
+          "D": 0.00045
+        },
+        "lr_scale": 1.0,
+        "d_updates": 1,
+        "d_loss": 0.4929659366607666,
+        "g_loss": 1.1920253038406372,
+        "recon_train_mse": 0.1455535590648651,
+        "penalty": 0.11657170951366425,
+        "train_seconds": 213.05021582404152,
+        "steps_per_second": 23.468645552227496,
+        "start_step": 0,
+        "cumulative_train_seconds": 213.05021582404152,
+        "peak_memory_gb": 5.2985663414001465,
+        "descendants": {
+          "parent_count": 32,
+          "children": 4,
+          "draws_per_child": 4,
+          "sibling_latent_rms": 0.0,
+          "sigma": 0.212616428732872,
+          "note": "Coupled noise across siblings; differences are not semantic coverage.",
+          "pixel": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.004850273581415216
+          },
+          "inception": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.03337575308042856
+          }
+        },
+        "exposure": {
+          "tracked": true,
+          "scope": "since expansion for split; this continuation for control",
+          "total": 640000,
+          "min": 16,
+          "max": 66,
+          "mean": 39.0625,
+          "zero": 0
+        },
+        "generation": {
+          "samples": 50000,
+          "fid": 48.75827450925499,
+          "feature_variance_ratio": 1.04628421934402
+        },
+        "generation_seconds": 70.41650926601142,
+        "reconstruction": {
+          "recon_mse": 0.13398344814777374,
+          "zero_offset_mse": 0.1935303658246994,
+          "random_offset_mse": 0.19701659679412842,
+          "shuffled_particle_mse": 0.2135898619890213,
+          "recon_psnr": 14.75008840889144,
+          "recon_p90": 0.21549470722675323,
+          "recon_p99": 0.3239137828350067,
+          "used_particles": 747,
+          "effective_particles": 223.41029357910156,
+          "hard_usage_tv": 0.95440673828125,
+          "hard_soft_usage_tv": 0.669631838798523,
+          "offset_rms": 2.620677947998047,
+          "offset_saturation": 0.5289984345436096,
+          "samples": 10000,
+          "conditional_offset_mean_rms": 2.0356357097625732
+        },
+        "reconstruction_seconds": 0.6368453680188395
+      },
+      {
+        "step": 10000,
+        "gradient_norms": {
+          "G": 2.3739120960235596,
+          "E": 0.08127658069133759,
+          "prior": 0.06463956087827682,
+          "G_attention": 0.40933260321617126,
+          "D_attention": 0.8540962338447571
+        },
+        "prior_update_rms": 0.001395361963659525,
+        "learning_rates": {
+          "G": 0.0003,
+          "E": 0.0003,
+          "prior": 0.003,
+          "D": 0.00045
+        },
+        "lr_scale": 1.0,
+        "d_updates": 1,
+        "d_loss": 0.5509963035583496,
+        "g_loss": 1.1696524620056152,
+        "recon_train_mse": 0.13585379719734192,
+        "penalty": 0.2315133810043335,
+        "train_seconds": 428.3562904607388,
+        "steps_per_second": 23.345052291035643,
+        "start_step": 0,
+        "cumulative_train_seconds": 428.3562904607388,
+        "peak_memory_gb": 5.2985663414001465,
+        "descendants": {
+          "parent_count": 32,
+          "children": 4,
+          "draws_per_child": 4,
+          "sibling_latent_rms": 0.0,
+          "sigma": 0.212616428732872,
+          "note": "Coupled noise across siblings; differences are not semantic coverage.",
+          "pixel": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.004918632208350677
+          },
+          "inception": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.03283563976941487
+          }
+        },
+        "exposure": {
+          "tracked": true,
+          "scope": "since expansion for split; this continuation for control",
+          "total": 1280000,
+          "min": 47,
+          "max": 113,
+          "mean": 78.125,
+          "zero": 0
+        },
+        "generation": {
+          "samples": 50000,
+          "fid": 35.74160517601058,
+          "feature_variance_ratio": 1.087607082479019
+        },
+        "generation_seconds": 70.61694774898933,
+        "reconstruction": {
+          "recon_mse": 0.13155969977378845,
+          "zero_offset_mse": 0.1927081048488617,
+          "random_offset_mse": 0.19635768234729767,
+          "shuffled_particle_mse": 0.21496796607971191,
+          "recon_psnr": 14.829371175992529,
+          "recon_p90": 0.21452516317367554,
+          "recon_p99": 0.31940802931785583,
+          "used_particles": 901,
+          "effective_particles": 285.21044921875,
+          "hard_usage_tv": 0.94500732421875,
+          "hard_soft_usage_tv": 0.6517460346221924,
+          "offset_rms": 2.670103073120117,
+          "offset_saturation": 0.5836812257766724,
+          "samples": 10000,
+          "conditional_offset_mean_rms": 2.034086227416992
+        },
+        "reconstruction_seconds": 0.40575764200184494
+      },
+      {
+        "step": 15000,
+        "gradient_norms": {
+          "G": 1.8806025981903076,
+          "E": 0.061505526304244995,
+          "prior": 0.09009858220815659,
+          "G_attention": 0.5263776779174805,
+          "D_attention": 0.2868936061859131
+        },
+        "prior_update_rms": 0.0014318331377580762,
+        "learning_rates": {
+          "G": 0.0003,
+          "E": 0.0003,
+          "prior": 0.003,
+          "D": 0.00045
+        },
+        "lr_scale": 1.0,
+        "d_updates": 1,
+        "d_loss": 0.47095566987991333,
+        "g_loss": 1.1758863925933838,
+        "recon_train_mse": 0.13038572669029236,
+        "penalty": 0.045496582984924316,
+        "train_seconds": 645.8178636886878,
+        "steps_per_second": 23.22636279263816,
+        "start_step": 0,
+        "cumulative_train_seconds": 645.8178636886878,
+        "peak_memory_gb": 5.2985663414001465,
+        "descendants": {
+          "parent_count": 32,
+          "children": 4,
+          "draws_per_child": 4,
+          "sibling_latent_rms": 0.0,
+          "sigma": 0.212616428732872,
+          "note": "Coupled noise across siblings; differences are not semantic coverage.",
+          "pixel": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.00460812539701291
+          },
+          "inception": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.030910697570997174
+          }
+        },
+        "exposure": {
+          "tracked": true,
+          "scope": "since expansion for split; this continuation for control",
+          "total": 1920000,
+          "min": 78,
+          "max": 161,
+          "mean": 117.1875,
+          "zero": 0
+        },
+        "generation": {
+          "samples": 50000,
+          "fid": 29.709695986195243,
+          "feature_variance_ratio": 1.0921033455521738
+        },
+        "generation_seconds": 68.1782067049644,
+        "reconstruction": {
+          "recon_mse": 0.13016560673713684,
+          "zero_offset_mse": 0.19464704394340515,
+          "random_offset_mse": 0.19782745838165283,
+          "shuffled_particle_mse": 0.2219705581665039,
+          "recon_psnr": 14.875637442498258,
+          "recon_p90": 0.21372732520103455,
+          "recon_p99": 0.32485559582710266,
+          "used_particles": 960,
+          "effective_particles": 308.9699401855469,
+          "hard_usage_tv": 0.94140625,
+          "hard_soft_usage_tv": 0.6505919098854065,
+          "offset_rms": 2.6921005249023438,
+          "offset_saturation": 0.6095530986785889,
+          "samples": 10000,
+          "conditional_offset_mean_rms": 2.055781364440918
+        },
+        "reconstruction_seconds": 0.38957141496939585
+      },
+      {
+        "step": 20000,
+        "gradient_norms": {
+          "G": 1.5438411235809326,
+          "E": 0.05324963107705116,
+          "prior": 0.07680054008960724,
+          "G_attention": 0.42468351125717163,
+          "D_attention": 0.25535374879837036
+        },
+        "prior_update_rms": 0.0013253712095320225,
+        "learning_rates": {
+          "G": 0.0003,
+          "E": 0.0003,
+          "prior": 0.003,
+          "D": 0.00045
+        },
+        "lr_scale": 1.0,
+        "d_updates": 1,
+        "d_loss": 0.5094448328018188,
+        "g_loss": 1.0907241106033325,
+        "recon_train_mse": 0.13700908422470093,
+        "penalty": 0.030187908560037613,
+        "train_seconds": 863.4843012777274,
+        "steps_per_second": 23.161972916479563,
+        "start_step": 0,
+        "cumulative_train_seconds": 863.4843012777274,
+        "peak_memory_gb": 5.2985663414001465,
+        "descendants": {
+          "parent_count": 32,
+          "children": 4,
+          "draws_per_child": 4,
+          "sibling_latent_rms": 0.0,
+          "sigma": 0.212616428732872,
+          "note": "Coupled noise across siblings; differences are not semantic coverage.",
+          "pixel": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.004443386908802586
+          },
+          "inception": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.03298200793474605
+          }
+        },
+        "exposure": {
+          "tracked": true,
+          "scope": "since expansion for split; this continuation for control",
+          "total": 2560000,
+          "min": 114,
+          "max": 205,
+          "mean": 156.25,
+          "zero": 0
+        },
+        "generation": {
+          "samples": 50000,
+          "fid": 26.05413536131408,
+          "feature_variance_ratio": 1.0889461720750369
+        },
+        "generation_seconds": 68.14750726195052,
+        "reconstruction": {
+          "recon_mse": 0.13030406832695007,
+          "zero_offset_mse": 0.19806064665317535,
+          "random_offset_mse": 0.2005283534526825,
+          "shuffled_particle_mse": 0.22515341639518738,
+          "recon_psnr": 14.871020159502775,
+          "recon_p90": 0.21198882162570953,
+          "recon_p99": 0.31587281823158264,
+          "used_particles": 1041,
+          "effective_particles": 315.7321472167969,
+          "hard_usage_tv": 0.93646240234375,
+          "hard_soft_usage_tv": 0.650934100151062,
+          "offset_rms": 2.7025225162506104,
+          "offset_saturation": 0.6207156181335449,
+          "samples": 10000,
+          "conditional_offset_mean_rms": 2.0566442012786865
+        },
+        "reconstruction_seconds": 0.39170318003743887
+      },
+      {
+        "step": 25000,
+        "gradient_norms": {
+          "G": 1.3343614339828491,
+          "E": 0.036514803767204285,
+          "prior": 0.06163216754794121,
+          "G_attention": 0.4400448799133301,
+          "D_attention": 0.23715592920780182
+        },
+        "prior_update_rms": 0.0014939903048798442,
+        "learning_rates": {
+          "G": 0.0003,
+          "E": 0.0003,
+          "prior": 0.003,
+          "D": 0.00045
+        },
+        "lr_scale": 1.0,
+        "d_updates": 1,
+        "d_loss": 0.5242043733596802,
+        "g_loss": 0.9785265922546387,
+        "recon_train_mse": 0.12473404407501221,
+        "penalty": 0.017171885818243027,
+        "train_seconds": 1075.0531297237612,
+        "steps_per_second": 23.254664638224753,
+        "start_step": 0,
+        "cumulative_train_seconds": 1075.0531297237612,
+        "peak_memory_gb": 5.2985663414001465,
+        "descendants": {
+          "parent_count": 32,
+          "children": 4,
+          "draws_per_child": 4,
+          "sibling_latent_rms": 0.0,
+          "sigma": 0.212616428732872,
+          "note": "Coupled noise across siblings; differences are not semantic coverage.",
+          "pixel": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.0046130816205775865
+          },
+          "inception": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.03438457256858143
+          }
+        },
+        "exposure": {
+          "tracked": true,
+          "scope": "since expansion for split; this continuation for control",
+          "total": 3200000,
+          "min": 145,
+          "max": 248,
+          "mean": 195.3125,
+          "zero": 0
+        },
+        "generation": {
+          "samples": 50000,
+          "fid": 21.00657368075406,
+          "feature_variance_ratio": 1.0889980120323755
+        },
+        "generation_seconds": 67.88515854999423,
+        "reconstruction": {
+          "recon_mse": 0.13141275942325592,
+          "zero_offset_mse": 0.20095524191856384,
+          "random_offset_mse": 0.20315876603126526,
+          "shuffled_particle_mse": 0.22905942797660828,
+          "recon_psnr": 14.834224565601584,
+          "recon_p90": 0.21458415687084198,
+          "recon_p99": 0.320357084274292,
+          "used_particles": 1206,
+          "effective_particles": 389.24688720703125,
+          "hard_usage_tv": 0.9263916015625,
+          "hard_soft_usage_tv": 0.645357608795166,
+          "offset_rms": 2.7091519832611084,
+          "offset_saturation": 0.6294499635696411,
+          "samples": 10000,
+          "conditional_offset_mean_rms": 2.0946414470672607
+        },
+        "reconstruction_seconds": 0.38885402999585494
+      },
+      {
+        "step": 30000,
+        "gradient_norms": {
+          "G": 1.2414665222167969,
+          "E": 0.036430444568395615,
+          "prior": 0.06493789702653885,
+          "G_attention": 0.33298203349113464,
+          "D_attention": 0.33676570653915405
+        },
+        "prior_update_rms": 0.0013614869676530361,
+        "learning_rates": {
+          "G": 0.0003,
+          "E": 0.0003,
+          "prior": 0.003,
+          "D": 0.00045
+        },
+        "lr_scale": 1.0,
+        "d_updates": 1,
+        "d_loss": 0.5624976754188538,
+        "g_loss": 0.958663821220398,
+        "recon_train_mse": 0.1297478824853897,
+        "penalty": 0.07797402143478394,
+        "train_seconds": 1282.1253269028966,
+        "steps_per_second": 23.398648611417755,
+        "start_step": 0,
+        "cumulative_train_seconds": 1282.1253269028966,
+        "peak_memory_gb": 5.2985663414001465,
+        "descendants": {
+          "parent_count": 32,
+          "children": 4,
+          "draws_per_child": 4,
+          "sibling_latent_rms": 0.0,
+          "sigma": 0.212616428732872,
+          "note": "Coupled noise across siblings; differences are not semantic coverage.",
+          "pixel": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.004841214704302057
+          },
+          "inception": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.032176353349772015
+          }
+        },
+        "exposure": {
+          "tracked": true,
+          "scope": "since expansion for split; this continuation for control",
+          "total": 3840000,
+          "min": 180,
+          "max": 297,
+          "mean": 234.375,
+          "zero": 0
+        },
+        "generation": {
+          "samples": 50000,
+          "fid": 22.236992568726976,
+          "feature_variance_ratio": 1.0847459530217594
+        },
+        "generation_seconds": 68.28599373198813,
+        "reconstruction": {
+          "recon_mse": 0.12831997871398926,
+          "zero_offset_mse": 0.19562919437885284,
+          "random_offset_mse": 0.19858472049236298,
+          "shuffled_particle_mse": 0.22004929184913635,
+          "recon_psnr": 14.937657124296273,
+          "recon_p90": 0.20851318538188934,
+          "recon_p99": 0.32000842690467834,
+          "used_particles": 1230,
+          "effective_particles": 408.4471435546875,
+          "hard_usage_tv": 0.9249267578125,
+          "hard_soft_usage_tv": 0.6354037523269653,
+          "offset_rms": 2.7170534133911133,
+          "offset_saturation": 0.6385593414306641,
+          "samples": 10000,
+          "conditional_offset_mean_rms": 2.0854098796844482
+        },
+        "reconstruction_seconds": 0.39406337100081146
+      },
+      {
+        "step": 35000,
+        "gradient_norms": {
+          "G": 1.0787307024002075,
+          "E": 0.089265838265419,
+          "prior": 0.06091032177209854,
+          "G_attention": 0.2901343107223511,
+          "D_attention": 0.23044319450855255
+        },
+        "prior_update_rms": 0.001453624339774251,
+        "learning_rates": {
+          "G": 0.0003,
+          "E": 0.0003,
+          "prior": 0.003,
+          "D": 0.00045
+        },
+        "lr_scale": 1.0,
+        "d_updates": 1,
+        "d_loss": 0.5122197866439819,
+        "g_loss": 0.9441244602203369,
+        "recon_train_mse": 0.13921412825584412,
+        "penalty": 0.02247377298772335,
+        "train_seconds": 1493.0595968798152,
+        "steps_per_second": 23.4417970140929,
+        "start_step": 0,
+        "cumulative_train_seconds": 1493.0595968798152,
+        "peak_memory_gb": 5.2985663414001465,
+        "descendants": {
+          "parent_count": 32,
+          "children": 4,
+          "draws_per_child": 4,
+          "sibling_latent_rms": 0.0,
+          "sigma": 0.212616428732872,
+          "note": "Coupled noise across siblings; differences are not semantic coverage.",
+          "pixel": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.004544902644901779
+          },
+          "inception": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.031133331100065203
+          }
+        },
+        "exposure": {
+          "tracked": true,
+          "scope": "since expansion for split; this continuation for control",
+          "total": 4480000,
+          "min": 218,
+          "max": 347,
+          "mean": 273.4375,
+          "zero": 0
+        },
+        "generation": {
+          "samples": 50000,
+          "fid": 20.456118056324954,
+          "feature_variance_ratio": 1.083353345944814
+        },
+        "generation_seconds": 68.17417228099657,
+        "reconstruction": {
+          "recon_mse": 0.1283273696899414,
+          "zero_offset_mse": 0.1955651342868805,
+          "random_offset_mse": 0.19795116782188416,
+          "shuffled_particle_mse": 0.2253589630126953,
+          "recon_psnr": 14.937406986502701,
+          "recon_p90": 0.20926319062709808,
+          "recon_p99": 0.3181058168411255,
+          "used_particles": 1278,
+          "effective_particles": 431.5738220214844,
+          "hard_usage_tv": 0.9219970703125,
+          "hard_soft_usage_tv": 0.6265714168548584,
+          "offset_rms": 2.717729330062866,
+          "offset_saturation": 0.6399233937263489,
+          "samples": 10000,
+          "conditional_offset_mean_rms": 2.080462694168091
+        },
+        "reconstruction_seconds": 0.3921416460070759
+      },
+      {
+        "step": 40000,
+        "gradient_norms": {
+          "G": 1.235560417175293,
+          "E": 0.05647290498018265,
+          "prior": 0.060147691518068314,
+          "G_attention": 0.3318836987018585,
+          "D_attention": 0.41897815465927124
+        },
+        "prior_update_rms": 0.0014347924152389169,
+        "learning_rates": {
+          "G": 0.0003,
+          "E": 0.0003,
+          "prior": 0.003,
+          "D": 0.00045
+        },
+        "lr_scale": 1.0,
+        "d_updates": 1,
+        "d_loss": 0.6155278086662292,
+        "g_loss": 0.894288182258606,
+        "recon_train_mse": 0.12655386328697205,
+        "penalty": 0.07879499346017838,
+        "train_seconds": 1705.265691931767,
+        "steps_per_second": 23.456755266498686,
+        "start_step": 0,
+        "cumulative_train_seconds": 1705.265691931767,
+        "peak_memory_gb": 5.2985663414001465,
+        "descendants": {
+          "parent_count": 32,
+          "children": 4,
+          "draws_per_child": 4,
+          "sibling_latent_rms": 0.0,
+          "sigma": 0.212616428732872,
+          "note": "Coupled noise across siblings; differences are not semantic coverage.",
+          "pixel": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.003909707616744821
+          },
+          "inception": {
+            "between_sibling_mse_coupled_noise": 0.0,
+            "within_child_noise_mse": 0.02951081035321633
+          }
+        },
+        "exposure": {
+          "tracked": true,
+          "scope": "since expansion for split; this continuation for control",
+          "total": 5120000,
+          "min": 247,
+          "max": 392,
+          "mean": 312.5,
+          "zero": 0
+        },
+        "generation": {
+          "samples": 50000,
+          "fid": 19.64250178290041,
+          "feature_variance_ratio": 1.0812829618020947
+        },
+        "generation_seconds": 67.88978588400641,
+        "reconstruction": {
+          "recon_mse": 0.12711770832538605,
+          "zero_offset_mse": 0.1965666115283966,
+          "random_offset_mse": 0.19883447885513306,
+          "shuffled_particle_mse": 0.22145366668701172,
+          "recon_psnr": 14.97853936507261,
+          "recon_p90": 0.20854076743125916,
+          "recon_p99": 0.31529372930526733,
+          "used_particles": 1306,
+          "effective_particles": 495.706787109375,
+          "hard_usage_tv": 0.9202880859375,
+          "hard_soft_usage_tv": 0.615497350692749,
+          "offset_rms": 2.7289140224456787,
+          "offset_saturation": 0.6534437537193298,
+          "samples": 10000,
+          "conditional_offset_mean_rms": 2.0960206985473633
+        },
+        "reconstruction_seconds": 0.3854550399701111
+      }
+    ],
+    "config": {
+      "arm": "bounded",
+      "seed": 24002,
+      "steps": 40000,
+      "batch_size": 64,
+      "z_dim": 64,
+      "num_particles": 16384,
+      "width": 32,
+      "sigma_rel": 0.025,
+      "fixed_sigma": 0.212616428732872,
+      "temperature": 0.125,
+      "recon_weight": 1.0,
+      "lr": 0.0003,
+      "prior_lr": 0.003,
+      "d_lr": 0.00045,
+      "ema": 0.995,
+      "log_interval": 100,
+      "eval_interval": 5000,
+      "eval_samples": 50000,
+      "final_samples": 50000,
+      "recon_samples": 10000,
+      "eval_batch_size": 128,
+      "max_train_seconds": 10800.0,
+      "data_dir": "/home/martyn/dev/ParticleGAN/data",
+      "fid_cache": "/home/martyn/dev/ParticleGAN/results/cifar_ddgan/fid_cache",
+      "out_dir": "runs/cifar_particle_ae/sagan_gd_16k_scout/sagan_gd_16k",
+      "encoder_backbone": "scratch",
+      "keep_checkpoints": true,
+      "reg_every": 8,
+      "g_width": 0,
+      "g_depth": 1,
+      "resume_checkpoint": "",
+      "resume_sha256": "",
+      "expansion_factor": 1,
+      "initial_eval_samples": 0,
+      "g_lr_scale": 1.0,
+      "lr_scale": 1.0,
+      "lr_final_ratio": 1.0,
+      "lr_decay_start": 0,
+      "lr_decay_end": 200000,
+      "d_updates": 1,
+      "generator_arch": "sagan_gd",
+      "recon_grad": "encoder_only",
+      "transgan_dim": 512,
+      "transgan_depths": [
+        5,
+        4,
+        2
+      ],
+      "transgan_heads": 4,
+      "transgan_mlp_ratio": 4.0,
+      "transgan_rgb_gain": 0.1,
+      "penalty_coeff": 1.0,
+      "d_warmstart": "",
+      "d_warmstart_sha256": ""
+    },
+    "final": {
+      "step": 40000,
+      "samples": 50000,
+      "fid": 19.64250178290041,
+      "feature_variance_ratio": 1.0812829618020947,
+      "reconstruction": {
+        "recon_mse": 0.12711770832538605,
+        "zero_offset_mse": 0.1965666115283966,
+        "random_offset_mse": 0.19883447885513306,
+        "shuffled_particle_mse": 0.22145366668701172,
+        "recon_psnr": 14.97853936507261,
+        "recon_p90": 0.20854076743125916,
+        "recon_p99": 0.31529372930526733,
+        "used_particles": 1306,
+        "effective_particles": 495.706787109375,
+        "hard_usage_tv": 0.9202880859375,
+        "hard_soft_usage_tv": 0.615497350692749,
+        "offset_rms": 2.7289140224456787,
+        "offset_saturation": 0.6534437537193298,
+        "samples": 10000,
+        "conditional_offset_mean_rms": 2.0960206985473633
+      }
+    },
+    "train_seconds": 1705.265691931767,
+    "start_step": 0,
+    "cumulative_train_seconds": 1705.265691931767,
+    "total_seconds": 2271.465321591997,
+    "peak_memory_gb": 5.2985663414001465,
+    "prior_rms_movement": 0.5808885097503662,
+    "rng_sha256": {
+      "data": "2a722f48f2d539c49e110b37e9d7a112931bcdd01202650a023dd4f1cc160144",
+      "prior": "60a4c0e146f12233aad6115dca7c0767e5a6602a780333f2a885eb1f8c778120"
+    },
+    "metadata": {
+      "initialization_sha256": "43c1f7f949931f654d289cd5ffbc10457bdc30dc11f3cfcaa46e64ea1b36216d",
+      "sigma": 0.212616428732872,
+      "sigma_configuration": {
+        "calibrated_sigma": 0.19845496118068695,
+        "fixed_sigma_requested": 0.212616428732872,
+        "actual_sigma": 0.212616428732872,
+        "mode": "fixed_override"
+      },
+      "initial_nearest_neighbor_median": 7.938198089599609,
+      "torch": "2.14.0+cu130",
+      "cuda": "13.0",
+      "python": "3.12.13",
+      "gpu": "NVIDIA RTX A6000",
+      "pretrained": {
+        "weights": "ResNet18_Weights.IMAGENET1K_V1",
+        "feature_state_sha256": "5de287ab28d569dfc53a5bca4a646d4416621da29e71e80859e6117c7f90b0ac",
+        "input_size": 64,
+        "stages": [
+          "layer1",
+          "layer2",
+          "layer3"
+        ]
+      },
+      "parameters": {
+        "G": 930883,
+        "D": 3588324,
+        "E": 428320,
+        "prior": 1048576
+      },
+      "fid_protocol": {
+        "dataset": "CIFAR-10",
+        "split": "train",
+        "real_samples": 50000,
+        "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+        "weights": "weights-inception-2015-12-05-6726825d.pth",
+        "precision": "float32 extractor (TF32 disabled), float64 statistics",
+        "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor"
+      },
+      "reconstruction_split": "CIFAR-10 test, unaugmented",
+      "evaluation_weights": "EMA G/E/prior; final checkpoint, no best selection",
+      "encoder": {
+        "backbone": "scratch",
+        "pretrained": null,
+        "initial_feature_sha256": "58c5b8e2871915e70b539ab387faa58d9f29ca212828a576c51f96086073cfab",
+        "trainable_parameters": 428320
+      },
+      "generator": {
+        "architecture": "sagan_gd",
+        "latent_dim": 64,
+        "projection_shape": [
+          256,
+          4,
+          4
+        ],
+        "deconv_channels": [
+          128,
+          64,
+          3
+        ],
+        "kernel_size": 4,
+        "stride": 2,
+        "padding": 1,
+        "hidden_activation": "ReLU",
+        "output_activation": "Tanh",
+        "normalization": "GroupNorm",
+        "normalization_groups": 8,
+        "normalized_channels": [
+          256,
+          128,
+          64
+        ],
+        "output_normalization": null,
+        "latent_conditioning": "input_projection_only",
+        "initialization": "PyTorch Linear, ConvTranspose2d and GroupNorm defaults",
+        "implementation": "SAGAN-style G/D attention adaptation of AE-GAN; not full SAGAN",
+        "attention": {
+          "kind": "SAGAN-style single-head spatial nonlocal attention",
+          "resolution": 16,
+          "channels": 64,
+          "query_key_channels": 8,
+          "value_channels": 32,
+          "dot_product_scaling": null,
+          "projection_bias": false,
+          "residual_coefficient": 1.0,
+          "learnable_gate": false,
+          "phase_in": false,
+          "initialization": "PyTorch nonzero Conv2d defaults",
+          "construction_seed": 124003,
+          "implementation": "manual bmm and softmax",
+          "spectral_normalization": false
+        }
+      },
+      "discriminator_attention": {
+        "kind": "SAGAN-style single-head spatial nonlocal attention",
+        "resolution": 16,
+        "channels": 64,
+        "query_key_channels": 8,
+        "value_channels": 32,
+        "dot_product_scaling": null,
+        "projection_bias": false,
+        "residual_coefficient": 1.0,
+        "learnable_gate": false,
+        "phase_in": false,
+        "initialization": "PyTorch nonzero Conv2d defaults",
+        "construction_seed": 124003,
+        "implementation": "manual bmm and softmax",
+        "spectral_normalization": false,
+        "placement": "trainable pixel branch, after first residual block and pooling",
+        "pretrained_branch": "unchanged frozen ResNet18 features",
+        "score_mixing": "unchanged pixel plus pretrained feature heads"
+      },
+      "reconstruction_routing": {
+        "mode": "encoder_only",
+        "E": true,
+        "G": false,
+        "prior": false
+      },
+      "resume": null,
+      "D_E_initialization_sha256": "f4fc27957dad20b0ff8a2691588ef94e5446ab6d601ae0cba176322fa310a402",
+      "regularizer": {
+        "arm": "b_cap",
+        "method": "autograd",
+        "coeff": 1.0,
+        "kappa": 1.0,
+        "every": 8,
+        "applied_coeff": 8.0
+      }
+    },
+    "frozen_features_unchanged": true,
+    "sigma_unchanged": true,
+    "frozen_encoder_features_unchanged": null
+  }
+]

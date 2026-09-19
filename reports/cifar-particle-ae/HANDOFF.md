@@ -1,5 +1,13 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
+## Latest completed review: SAGAN40k and wider deconv80k
+
+**Both GPUs idle; both jobs completed and source/config certificates plus checkpoint hashes verified.** SAGAN40k best/finalFID50k19.6425 versus matched wide no-attention40k18.2285. Full-strength attention trained with finite losses and finite/nonzero G/D attention gradients at every logged point; ~14.4% training-time overhead. Varied sample grid, remaining shape/detail artifacts. No consistent FID advantage established, no deconv density/coverage probe yet. Last10k22.2370->19.6425 still improves. Preserve40k checkpointSHA125ce80f6db2cf3707f866a80c94c90f5bb6a6aa1c4064510f7f9bd0b978df31.
+
+WideGroupNorm80k endpoint17.6565, best45k17.4961, original40k18.2285. Slow improvement with50k rebound19.3232; no later point beats45k. Best45kSHA d0499b12f2dd814add32f7deb22aa904fa6d981ea7c68800b681f68970120dae; final80kSHA fc3dbe363e193d376bf38f6924975738f51fa3e49139c2165be2719b53c0667d. Small unnormalized deconv remains user-stopped, latest80k22.0022 preserved. Overall historical bestCNN16k80k15.7527; different initialization history from scratch deconvs.
+
+Full comparison, interpretation and recommendations: `deconv_attention_review/FINDINGS.md`, `curves.png`, `curves.json`; per-run findings updated. Recommend SAGAN40k->80k unchanged and a separate wide45k->80k fork with all learning rates halved, using the existing constant-rate run as control. **Recommendations only; no new jobs queued or authorized by this review.** User latest: "oh hey it all finished". Prior active statuses below are superseded here.
+
 ## Latest steering: wide deconv continues to80k alongside SAGAN
 
 User additionally requested continuing the wide deconv to80k. **GPU0 active pipelinePID299365**, `experiments/cifar_ae_deconv_wide_norm_long.py`, exact40k->80k resume fromFID18.2285, FID50k every5k, unchanged trainer/rates/recipe, estimated30–35min. Parent certificate/SHA and strict resume validated, interventions empty. Plan/config/launch under `deconv_wide_norm_16k_80k`. **GPU1 remains activeSAGAN40k pipelinePID292013**, verified beyond1300updates with finite losses. Small-deconv200k remains user-stopped with80k checkpoint preserved. Follow both: `tail -F runs/cifar_particle_ae/{sagan_gd_16k_scout,deconv_wide_norm_16k_80k}/PIPELINE.log`. No automatic promotion of either run.
