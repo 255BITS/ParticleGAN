@@ -1,5 +1,11 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
+## Latest completed: two G/D attention blocks reach best FID12.2464
+
+`sagan_gd_depth2_240k` completed200k->240k; source/config completion certificate and parent/best/final checkpoint hashes verified. Best210kFID50k12.24638568 improves parent200k12.53445669 by0.2881; final240k12.93299481 vsunchanged240k13.1283. Midrun scores returned to13.2–13.4, so improvement was not sustained and a new lower plateau is not established. Training32.20min, wall43.27min. Joint G/D attention growth cannot isolate which side helps. No further jobs queued by this experiment.
+
+Best checkpoint `runs/cifar_particle_ae/sagan_gd_depth2_240k/gd_depth2/checkpoint_210000.pt`, SHA7a283dee244e9f2cabbd051d2400f1446c3fa8459335cd589351e940b2b7950e. Final240k SHAeb882cc7309fca7ccee00da66ec2d6d87fca669a9af9f85b2706b5b1f8517c42. Full curve, leaderboard, findings and verification under `sagan_gd_depth2_240k/`. Recommend preserving210k and checking samples/coverage before another extension; recommendation only. Prior active status below superseded. User requested committing and pushing the feature branch; generated results included, unrelated local artifacts excluded.
+
 ## Active: grow both SAGAN G/D attention, 200k to 240k (2026-09-19)
 
 User authorized stopping the plateaued 300k continuation and expanding attention, then explicitly requested increasing discriminator attention too. Stopped controller591501 and its SAGAN workers after saved260k. Unchanged205k–260k did not beat parent200k FID12.5345; best continuation250k12.6204, last260k13.0597. Retained checkpoints, source hashes verified. Partial results/STOPPED/leaderboard/findings under `sagan_gd_16k_300k/`; no completion certificate for interrupted run. A permanent ceiling is not established.

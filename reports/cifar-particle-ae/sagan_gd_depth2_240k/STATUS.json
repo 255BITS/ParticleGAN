@@ -1,6 +1,31 @@
 {
-  "status": "running",
-  "gpu": 1,
-  "start_step": 200000,
-  "target_step": 240000
+  "status": "complete",
+  "final_step": 240000,
+  "final_fid": 12.932994807141029,
+  "checkpoints": {
+    "parent": {
+      "path": "runs/cifar_particle_ae/sagan_gd_16k_200k/sagan_gd_16k/checkpoint_200000.pt",
+      "step": 200000,
+      "fid50k": 12.53445668863742,
+      "sha256": "b45e411a8d3d0d0d3b7d45b877e719a7d3ed416edd223e513e07f6e05b3300f5"
+    },
+    "final": {
+      "path": "runs/cifar_particle_ae/sagan_gd_depth2_240k/gd_depth2/checkpoint_240000.pt",
+      "step": 240000,
+      "fid50k": 12.932994807141029,
+      "sha256": "eb882cc7309fca7ccee00da66ec2d6d87fca669a9af9f85b2706b5b1f8517c42"
+    },
+    "best_expanded": {
+      "path": "runs/cifar_particle_ae/sagan_gd_depth2_240k/gd_depth2/checkpoint_210000.pt",
+      "step": 210000,
+      "fid50k": 12.246385682358266,
+      "sha256": "7a283dee244e9f2cabbd051d2400f1446c3fa8459335cd589351e940b2b7950e"
+    },
+    "best_overall": {
+      "path": "runs/cifar_particle_ae/sagan_gd_depth2_240k/gd_depth2/checkpoint_210000.pt",
+      "step": 210000,
+      "fid50k": 12.246385682358266,
+      "sha256": "7a283dee244e9f2cabbd051d2400f1446c3fa8459335cd589351e940b2b7950e"
+    }
+  }
 }
