@@ -1,0 +1,17 @@
+{
+  "pid": 273670,
+  "launched_at": "2026-09-18T19:22:30.306106-06:00",
+  "gpu": 1,
+  "command": [
+    "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "-u",
+    "experiments/cifar_ae_deconv_scout.py"
+  ],
+  "trainer": "experiments/train_cifar_ae_deconv.py",
+  "arm": "deconv_16k_no_norm",
+  "config": "configs/cifar_particle_ae/deconv_16k_scout/deconv_16k_no_norm.yaml",
+  "launcher_log": "runs/cifar_particle_ae/deconv_16k_scout/launcher.log",
+  "tail": "tail -F runs/cifar_particle_ae/deconv_16k_scout/PIPELINE.log",
+  "stop_step": 40000,
+  "automatic_promotion": false
+}
