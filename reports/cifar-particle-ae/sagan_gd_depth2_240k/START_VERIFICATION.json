@@ -1,0 +1,11 @@
+{
+  "initial_evaluation": {
+    "samples": 50000,
+    "fid": 12.534456866026062,
+    "feature_variance_ratio": 1.0657009091533645
+  },
+  "parent_fid50k": 12.53445668863742,
+  "absolute_difference": 1.7738864244165597e-07,
+  "resumed_from": 200000,
+  "first_update_finite": true
+}
