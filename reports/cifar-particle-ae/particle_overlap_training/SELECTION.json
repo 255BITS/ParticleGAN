@@ -1,0 +1,39 @@
+{
+  "noise_scale": 0.75,
+  "selected_sampling_result": {
+    "step": 80000,
+    "noise_scale": 0.75,
+    "fid": 15.908953481773835,
+    "quality": {
+      "density": 0.64718,
+      "coverage": 0.6403,
+      "real_samples": 10000,
+      "fake_samples": 10000,
+      "k": 5,
+      "radius_squared_mean": 188.20098876953125,
+      "distance_dtype": "torch.float32",
+      "radius_boundary": "strict <, kth other real neighbor"
+    },
+    "geometry": {
+      "samples": 32768,
+      "wrong_nearest_count": 0,
+      "wrong_nearest_fraction": 0.0,
+      "same_parent_wrong_count": 0,
+      "different_parent_wrong_count": 0,
+      "posterior_entropy_bits": 9.685004063389183e-08,
+      "parent_posterior_entropy_bits": 6.117065799150341e-196,
+      "median_nearest_distance": 2.1636834144592285,
+      "nearest_distance_quantiles": [
+        1.1360406875610352,
+        1.6521084308624268,
+        2.1636834144592285,
+        3.4195642471313477,
+        6.714047431945801
+      ],
+      "nearest_is_sibling_fraction": 1.0,
+      "sigma": 0.1594623178243637,
+      "rms_noise_radius": 1.2756985425949097
+    }
+  },
+  "reason": "Lowest FID among reduced-noise choices at the 80k training parent. This tests training prevention even if the sampling-only change is worse than baseline."
+}

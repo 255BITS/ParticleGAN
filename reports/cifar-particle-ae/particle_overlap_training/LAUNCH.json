@@ -1,0 +1,21 @@
+{
+  "pid": 457428,
+  "started_at": "2026-09-18T23:03:26.617284-06:00",
+  "command": [
+    ".venv/bin/python",
+    "-u",
+    "experiments/cifar_ae_overlap_followup.py"
+  ],
+  "gpu": 1,
+  "order": [
+    "wait for sampling sweep",
+    "verify two 16-update forks",
+    "freeze centers 80k to 100k and endpoint quality",
+    "reduced noise 80k to 100k and endpoint quality"
+  ],
+  "tail": "tail -F runs/cifar_particle_ae/particle_overlap_training/{launcher,PIPELINE}.log",
+  "previous_attempt": {
+    "pid": 456490,
+    "outcome": "First smoke was invalidated by concurrent final source/log-path edits; discarded as uncertified. Restart with frozen source."
+  }
+}

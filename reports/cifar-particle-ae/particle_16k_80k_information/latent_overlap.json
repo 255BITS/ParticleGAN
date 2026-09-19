@@ -1,0 +1,25 @@
+{
+  "checkpoint": "runs/cifar_particle_ae/particle_16k_80k/16k_80k/checkpoint_080000.pt",
+  "step": 80000,
+  "prior": "EMA used for generation",
+  "particles": 16384,
+  "dimensions": 64,
+  "sigma": 0.212616428732872,
+  "rms_noise_radius": 1.700931429862976,
+  "nearest_center_distance_quantiles": {
+    "0": 1.1360406875610352,
+    "0.1": 1.6521084308624268,
+    "0.5": 2.1636834144592285,
+    "0.9": 3.4195642471313477,
+    "1": 6.714047431945801
+  },
+  "median_nearest_distance_in_sigma": 10.176463913697125,
+  "fraction_centers_with_nearest_within_2_rms_radii": 0.89697265625,
+  "nearest_pair_binary_error_at_median_distance": 1.8070857519606446e-07,
+  "sample_count": 32768,
+  "wrong_nearest_center_count": 3,
+  "wrong_nearest_center_fraction": 9.1552734375e-05,
+  "mean_posterior_entropy_bits": 0.00037854222534265864,
+  "mean_posterior_probability_of_true_component": 0.9998727077618241,
+  "diagnostic_rng_seed": 79301
+}

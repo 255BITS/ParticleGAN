@@ -1,0 +1,11 @@
+{
+  "checkpoint": "runs/cifar_particle_ae/particle_16k_160k/16k_160k/checkpoint_160000.pt",
+  "prior": "EMA used for generation",
+  "sigma": 0.212616428732872,
+  "median_nearest_center_distance": 1.136527419090271,
+  "sample_count": 32768,
+  "wrong_nearest_center_count": 875,
+  "wrong_nearest_center_fraction": 0.026702880859375,
+  "mean_posterior_entropy_bits": 0.11418986690253351,
+  "diagnostic_rng_seed": 79301
+}

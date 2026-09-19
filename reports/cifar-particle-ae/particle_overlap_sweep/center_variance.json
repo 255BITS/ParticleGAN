@@ -1,0 +1,28 @@
+[
+  {
+    "step": 80000,
+    "within_family_fraction_of_center_variance": 0.06708585548760071,
+    "rms_sibling_displacement_from_family_center": 2.071061254452906,
+    "sigma": 0.212616428732872,
+    "raw_particle_std_mean": 1.1246368885040283,
+    "within_family_pair_distance_quantiles_10_50_90": [
+      1.9108284711837769,
+      2.5727152824401855,
+      4.280599117279053
+    ],
+    "fraction_centers_with_sibling_within_4_sigma": 0.0
+  },
+  {
+    "step": 160000,
+    "within_family_fraction_of_center_variance": 0.08778022594976792,
+    "rms_sibling_displacement_from_family_center": 2.3690587066551587,
+    "sigma": 0.212616428732872,
+    "raw_particle_std_mean": 1.188194751739502,
+    "within_family_pair_distance_quantiles_10_50_90": [
+      1.0299879312515259,
+      1.3438055515289307,
+      6.52744197845459
+    ],
+    "fraction_centers_with_sibling_within_4_sigma": 0.0465087890625
+  }
+]

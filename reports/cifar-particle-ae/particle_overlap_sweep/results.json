@@ -1,0 +1,354 @@
+[
+  {
+    "config": {
+      "checkpoint": "runs/cifar_particle_ae/particle_16k_80k/16k_80k/checkpoint_080000.pt",
+      "checkpoint_sha256": "9ddcef1fb0bf82c47a581fa1b2d58872315d5d67b302eadc533c0abc41b7d5c7",
+      "out_dir": "runs/cifar_particle_ae/particle_overlap_sweep/80k",
+      "samples": 50000,
+      "quality_samples": 10000,
+      "latent_samples": 32768,
+      "batch_size": 128,
+      "noise_scales": [
+        1.0,
+        0.75,
+        0.5
+      ],
+      "expected_fid": 15.752682149,
+      "real_feature_cache": "results/cifar_ddgan/information_cache/real-4eef7a439a192b550544e798f6002218604fbf2e7ab903d094f2c77448fbf07d.pt",
+      "real_features_sha256": "fe089b56afca1897c928bcb682e5e0cc380ab23c4fce0492521122d87a62da46"
+    },
+    "final": {
+      "step": 80000,
+      "noise_scale": 0.5,
+      "fid": 16.2897711664138,
+      "quality": {
+        "density": 0.64182,
+        "coverage": 0.6319,
+        "real_samples": 10000,
+        "fake_samples": 10000,
+        "k": 5,
+        "radius_squared_mean": 188.20098876953125,
+        "distance_dtype": "torch.float32",
+        "radius_boundary": "strict <, kth other real neighbor"
+      },
+      "geometry": {
+        "samples": 32768,
+        "wrong_nearest_count": 0,
+        "wrong_nearest_fraction": 0.0,
+        "same_parent_wrong_count": 0,
+        "different_parent_wrong_count": 0,
+        "posterior_entropy_bits": 7.261923158864416e-19,
+        "parent_posterior_entropy_bits": 0.0,
+        "median_nearest_distance": 2.1636834144592285,
+        "nearest_distance_quantiles": [
+          1.1360406875610352,
+          1.6521084308624268,
+          2.1636834144592285,
+          3.4195642471313477,
+          6.714047431945801
+        ],
+        "nearest_is_sibling_fraction": 1.0,
+        "sigma": 0.106308214366436,
+        "rms_noise_radius": 0.850465714931488
+      }
+    },
+    "results": [
+      {
+        "step": 80000,
+        "noise_scale": 1.0,
+        "fid": 15.752698483378879,
+        "quality": {
+          "density": 0.64686,
+          "coverage": 0.6426,
+          "real_samples": 10000,
+          "fake_samples": 10000,
+          "k": 5,
+          "radius_squared_mean": 188.20098876953125,
+          "distance_dtype": "torch.float32",
+          "radius_boundary": "strict <, kth other real neighbor"
+        },
+        "geometry": {
+          "samples": 32768,
+          "wrong_nearest_count": 3,
+          "wrong_nearest_fraction": 9.1552734375e-05,
+          "same_parent_wrong_count": 3,
+          "different_parent_wrong_count": 0,
+          "posterior_entropy_bits": 0.00037854215498259907,
+          "parent_posterior_entropy_bits": 9.621747965493116e-108,
+          "median_nearest_distance": 2.1636834144592285,
+          "nearest_distance_quantiles": [
+            1.1360406875610352,
+            1.6521084308624268,
+            2.1636834144592285,
+            3.4195642471313477,
+            6.714047431945801
+          ],
+          "nearest_is_sibling_fraction": 1.0,
+          "sigma": 0.212616428732872,
+          "rms_noise_radius": 1.700931429862976
+        }
+      },
+      {
+        "step": 80000,
+        "noise_scale": 0.75,
+        "fid": 15.908953481773835,
+        "quality": {
+          "density": 0.64718,
+          "coverage": 0.6403,
+          "real_samples": 10000,
+          "fake_samples": 10000,
+          "k": 5,
+          "radius_squared_mean": 188.20098876953125,
+          "distance_dtype": "torch.float32",
+          "radius_boundary": "strict <, kth other real neighbor"
+        },
+        "geometry": {
+          "samples": 32768,
+          "wrong_nearest_count": 0,
+          "wrong_nearest_fraction": 0.0,
+          "same_parent_wrong_count": 0,
+          "different_parent_wrong_count": 0,
+          "posterior_entropy_bits": 9.685004063389183e-08,
+          "parent_posterior_entropy_bits": 6.117065799150341e-196,
+          "median_nearest_distance": 2.1636834144592285,
+          "nearest_distance_quantiles": [
+            1.1360406875610352,
+            1.6521084308624268,
+            2.1636834144592285,
+            3.4195642471313477,
+            6.714047431945801
+          ],
+          "nearest_is_sibling_fraction": 1.0,
+          "sigma": 0.1594623178243637,
+          "rms_noise_radius": 1.2756985425949097
+        }
+      },
+      {
+        "step": 80000,
+        "noise_scale": 0.5,
+        "fid": 16.2897711664138,
+        "quality": {
+          "density": 0.64182,
+          "coverage": 0.6319,
+          "real_samples": 10000,
+          "fake_samples": 10000,
+          "k": 5,
+          "radius_squared_mean": 188.20098876953125,
+          "distance_dtype": "torch.float32",
+          "radius_boundary": "strict <, kth other real neighbor"
+        },
+        "geometry": {
+          "samples": 32768,
+          "wrong_nearest_count": 0,
+          "wrong_nearest_fraction": 0.0,
+          "same_parent_wrong_count": 0,
+          "different_parent_wrong_count": 0,
+          "posterior_entropy_bits": 7.261923158864416e-19,
+          "parent_posterior_entropy_bits": 0.0,
+          "median_nearest_distance": 2.1636834144592285,
+          "nearest_distance_quantiles": [
+            1.1360406875610352,
+            1.6521084308624268,
+            2.1636834144592285,
+            3.4195642471313477,
+            6.714047431945801
+          ],
+          "nearest_is_sibling_fraction": 1.0,
+          "sigma": 0.106308214366436,
+          "rms_noise_radius": 0.850465714931488
+        }
+      }
+    ],
+    "parent_unchanged": true,
+    "frozen_state_unchanged": true,
+    "fid_protocol": {
+      "dataset": "CIFAR-10",
+      "split": "train",
+      "real_samples": 50000,
+      "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+      "weights": "weights-inception-2015-12-05-6726825d.pth",
+      "precision": "float32 extractor (TF32 disabled), float64 statistics",
+      "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor"
+    },
+    "quality_protocol": "Historical information probe: 10000 real/fake, k5, FP32 TF32 disabled; identical draws across scales.",
+    "real_features_sha256": "fe089b56afca1897c928bcb682e5e0cc380ab23c4fce0492521122d87a62da46",
+    "total_seconds": 246.23865546000889,
+    "note": "Inference-only distribution changes. Component confusion is not semantic collapse. Same RNG draws across noise scales; no training seed repeats."
+  },
+  {
+    "config": {
+      "checkpoint": "runs/cifar_particle_ae/particle_16k_160k/16k_160k/checkpoint_160000.pt",
+      "checkpoint_sha256": "d6351238ab4b8be1bfbda36e26c17396814a305db32b49179f1be3c581ff69e3",
+      "out_dir": "runs/cifar_particle_ae/particle_overlap_sweep/160k",
+      "samples": 50000,
+      "quality_samples": 10000,
+      "latent_samples": 32768,
+      "batch_size": 128,
+      "noise_scales": [
+        1.0,
+        0.75,
+        0.5
+      ],
+      "expected_fid": 19.0584392557,
+      "real_feature_cache": "results/cifar_ddgan/information_cache/real-4eef7a439a192b550544e798f6002218604fbf2e7ab903d094f2c77448fbf07d.pt",
+      "real_features_sha256": "fe089b56afca1897c928bcb682e5e0cc380ab23c4fce0492521122d87a62da46"
+    },
+    "final": {
+      "step": 160000,
+      "noise_scale": 0.5,
+      "fid": 20.9044209780684,
+      "quality": {
+        "density": 0.58356,
+        "coverage": 0.5462,
+        "real_samples": 10000,
+        "fake_samples": 10000,
+        "k": 5,
+        "radius_squared_mean": 188.20098876953125,
+        "distance_dtype": "torch.float32",
+        "radius_boundary": "strict <, kth other real neighbor"
+      },
+      "geometry": {
+        "samples": 32768,
+        "wrong_nearest_count": 0,
+        "wrong_nearest_fraction": 0.0,
+        "same_parent_wrong_count": 0,
+        "different_parent_wrong_count": 0,
+        "posterior_entropy_bits": 0.00014011274105034537,
+        "parent_posterior_entropy_bits": 6.291512286380466e-15,
+        "median_nearest_distance": 1.136527419090271,
+        "nearest_distance_quantiles": [
+          0.670317530632019,
+          0.89689701795578,
+          1.136527419090271,
+          5.189783573150635,
+          9.491909980773926
+        ],
+        "nearest_is_sibling_fraction": 0.98699951171875,
+        "sigma": 0.106308214366436,
+        "rms_noise_radius": 0.850465714931488
+      }
+    },
+    "results": [
+      {
+        "step": 160000,
+        "noise_scale": 1.0,
+        "fid": 19.058438479525705,
+        "quality": {
+          "density": 0.59038,
+          "coverage": 0.5803,
+          "real_samples": 10000,
+          "fake_samples": 10000,
+          "k": 5,
+          "radius_squared_mean": 188.20098876953125,
+          "distance_dtype": "torch.float32",
+          "radius_boundary": "strict <, kth other real neighbor"
+        },
+        "geometry": {
+          "samples": 32768,
+          "wrong_nearest_count": 875,
+          "wrong_nearest_fraction": 0.026702880859375,
+          "same_parent_wrong_count": 875,
+          "different_parent_wrong_count": 0,
+          "posterior_entropy_bits": 0.11418987177313594,
+          "parent_posterior_entropy_bits": 3.661677978883115e-05,
+          "median_nearest_distance": 1.136527419090271,
+          "nearest_distance_quantiles": [
+            0.670317530632019,
+            0.89689701795578,
+            1.136527419090271,
+            5.189783573150635,
+            9.491909980773926
+          ],
+          "nearest_is_sibling_fraction": 0.98699951171875,
+          "sigma": 0.212616428732872,
+          "rms_noise_radius": 1.700931429862976
+        }
+      },
+      {
+        "step": 160000,
+        "noise_scale": 0.75,
+        "fid": 19.78383198980015,
+        "quality": {
+          "density": 0.5824,
+          "coverage": 0.5697,
+          "real_samples": 10000,
+          "fake_samples": 10000,
+          "k": 5,
+          "radius_squared_mean": 188.20098876953125,
+          "distance_dtype": "torch.float32",
+          "radius_boundary": "strict <, kth other real neighbor"
+        },
+        "geometry": {
+          "samples": 32768,
+          "wrong_nearest_count": 95,
+          "wrong_nearest_fraction": 0.002899169921875,
+          "same_parent_wrong_count": 95,
+          "different_parent_wrong_count": 0,
+          "posterior_entropy_bits": 0.012253902911829243,
+          "parent_posterior_entropy_bits": 4.036217281172583e-07,
+          "median_nearest_distance": 1.136527419090271,
+          "nearest_distance_quantiles": [
+            0.670317530632019,
+            0.89689701795578,
+            1.136527419090271,
+            5.189783573150635,
+            9.491909980773926
+          ],
+          "nearest_is_sibling_fraction": 0.98699951171875,
+          "sigma": 0.1594623178243637,
+          "rms_noise_radius": 1.2756985425949097
+        }
+      },
+      {
+        "step": 160000,
+        "noise_scale": 0.5,
+        "fid": 20.9044209780684,
+        "quality": {
+          "density": 0.58356,
+          "coverage": 0.5462,
+          "real_samples": 10000,
+          "fake_samples": 10000,
+          "k": 5,
+          "radius_squared_mean": 188.20098876953125,
+          "distance_dtype": "torch.float32",
+          "radius_boundary": "strict <, kth other real neighbor"
+        },
+        "geometry": {
+          "samples": 32768,
+          "wrong_nearest_count": 0,
+          "wrong_nearest_fraction": 0.0,
+          "same_parent_wrong_count": 0,
+          "different_parent_wrong_count": 0,
+          "posterior_entropy_bits": 0.00014011274105034537,
+          "parent_posterior_entropy_bits": 6.291512286380466e-15,
+          "median_nearest_distance": 1.136527419090271,
+          "nearest_distance_quantiles": [
+            0.670317530632019,
+            0.89689701795578,
+            1.136527419090271,
+            5.189783573150635,
+            9.491909980773926
+          ],
+          "nearest_is_sibling_fraction": 0.98699951171875,
+          "sigma": 0.106308214366436,
+          "rms_noise_radius": 0.850465714931488
+        }
+      }
+    ],
+    "parent_unchanged": true,
+    "frozen_state_unchanged": true,
+    "fid_protocol": {
+      "dataset": "CIFAR-10",
+      "split": "train",
+      "real_samples": 50000,
+      "extractor": "torch-fidelity-0.3.0-inception-v3-compat-2048",
+      "weights": "weights-inception-2015-12-05-6726825d.pth",
+      "precision": "float32 extractor (TF32 disabled), float64 statistics",
+      "preprocess": "RGB uint8; generated clamp[-1,1], round((x+1)*127.5); TF-compatible bilinear resize inside extractor"
+    },
+    "quality_protocol": "Historical information probe: 10000 real/fake, k5, FP32 TF32 disabled; identical draws across scales.",
+    "real_features_sha256": "fe089b56afca1897c928bcb682e5e0cc380ab23c4fce0492521122d87a62da46",
+    "total_seconds": 242.2204161210102,
+    "note": "Inference-only distribution changes. Component confusion is not semantic collapse. Same RNG draws across noise scales; no training seed repeats."
+  }
+]

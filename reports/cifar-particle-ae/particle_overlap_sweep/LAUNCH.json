@@ -1,0 +1,11 @@
+{
+  "pid": 452998,
+  "started_at": "2026-09-18T22:54:03.578470-06:00",
+  "command": [
+    ".venv/bin/python",
+    "-u",
+    "experiments/cifar_ae_overlap_pipeline.py"
+  ],
+  "gpu": 1,
+  "tail": "tail -F runs/cifar_particle_ae/particle_overlap_sweep/PIPELINE.log"
+}
