@@ -1,0 +1,17 @@
+{
+  "pid": 299365,
+  "launched_at": "2026-09-18T20:46:08.514671-06:00",
+  "gpu": 0,
+  "command": [
+    "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "-u",
+    "experiments/cifar_ae_deconv_wide_norm_long.py"
+  ],
+  "trainer": "experiments/train_cifar_ae_deconv_wide_norm.py",
+  "arm": "deconv_wide_norm_16k",
+  "start_step": 40000,
+  "stop_step": 80000,
+  "starting_fid50k": 18.22851292930784,
+  "launcher_log": "runs/cifar_particle_ae/deconv_wide_norm_16k_80k/launcher.log",
+  "tail": "tail -F runs/cifar_particle_ae/deconv_wide_norm_16k_80k/PIPELINE.log"
+}

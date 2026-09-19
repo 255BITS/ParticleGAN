@@ -1,0 +1,18 @@
+{
+  "pid": 292013,
+  "launched_at": "2026-09-18T20:44:04.136991-06:00",
+  "gpu": 1,
+  "command": [
+    "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "-u",
+    "experiments/cifar_ae_sagan_scout.py"
+  ],
+  "trainer": "experiments/train_cifar_ae_sagan.py",
+  "arm": "sagan_gd_16k",
+  "start_step": 0,
+  "stop_step": 40000,
+  "launcher_log": "runs/cifar_particle_ae/sagan_gd_16k_scout/launcher.log",
+  "tail": "tail -F runs/cifar_particle_ae/sagan_gd_16k_scout/PIPELINE.log",
+  "attention_phase_in": false,
+  "attention_residual_coefficient": 1
+}

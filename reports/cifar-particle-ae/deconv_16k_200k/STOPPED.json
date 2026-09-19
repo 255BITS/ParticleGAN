@@ -1,0 +1,29 @@
+{
+  "status": "stopped_by_user",
+  "stopped_at": "2026-09-18T20:39:20.183387-06:00",
+  "reason": "User requested stop 200k continuation early to run SAGAN-style attention in G and D",
+  "last_logged_step": 86600,
+  "latest_numbered_checkpoint": "runs/cifar_particle_ae/deconv_16k_200k/deconv_16k_no_norm/checkpoint_080000.pt",
+  "checkpoint_sha256": "575be95c8bdb2cbe085464f650fa5dce9c25876a856c2877633a50ef63f3e0ee",
+  "curve": [
+    {
+      "step": 50000,
+      "fid50k": 24.56805164449537
+    },
+    {
+      "step": 60000,
+      "fid50k": 23.584362761857847
+    },
+    {
+      "step": 70000,
+      "fid50k": 22.760408241560867
+    },
+    {
+      "step": 80000,
+      "fid50k": 22.002189908612706
+    }
+  ],
+  "original_target_step": 200000,
+  "pipeline_process_group": 274862,
+  "completed_200k": false
+}

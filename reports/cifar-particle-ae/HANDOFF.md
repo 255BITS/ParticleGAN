@@ -1,5 +1,17 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
+## Latest steering: wide deconv continues to80k alongside SAGAN
+
+User additionally requested continuing the wide deconv to80k. **GPU0 active pipelinePID299365**, `experiments/cifar_ae_deconv_wide_norm_long.py`, exact40k->80k resume fromFID18.2285, FID50k every5k, unchanged trainer/rates/recipe, estimated30–35min. Parent certificate/SHA and strict resume validated, interventions empty. Plan/config/launch under `deconv_wide_norm_16k_80k`. **GPU1 remains activeSAGAN40k pipelinePID292013**, verified beyond1300updates with finite losses. Small-deconv200k remains user-stopped with80k checkpoint preserved. Follow both: `tail -F runs/cifar_particle_ae/{sagan_gd_16k_scout,deconv_wide_norm_16k_80k}/PIPELINE.log`. No automatic promotion of either run.
+
+## Latest: SAGAN G/D attention replaces the stopped small-deconv continuation
+
+User requested stopping200k early and a40k SAGAN G/D experiment, explicitly **no attention phase-in**, then explicitly requested a subagent. **Stopped** small-deconv GPU1 pipeline274862 at logged86,600; latest complete checkpoint80kFID22.00219, SHA575be95c8bdb2cbe085464f650fa5dce9c25876a856c2877633a50ef63f3e0ee. Preserve all checkpoints; no200k completion summary. `deconv_16k_200k/STOPPED.json` and `LEADERBOARD.md` document the interruption. No final capacity ceiling established.
+
+**GPU1 active:** pipelinePID292013, `experiments/cifar_ae_sagan_scout.py`, scratch0->40k with16k particles, FID50k every5k. Standalone `experiments/train_cifar_ae_sagan.py`, implemented by `/root/sagan_gd_impl`. Baseline wider GroupNorm deconv with one16x16 attention block inG and one16x16 block inD's trainable pixel branch; keep frozen pretrained ResNet features. Each adds5,120 parameters (G930,883 total). Manual bmm/softmax; `h+attention(h)` at fixed unit coefficient, nonzero initialization, no gate/ramp/spectralnorm changes. Rest of recipe and original baseline tensors/initialization RNG preserved. Adaptation of SAGAN attention within our recipe, not full paper reproduction. Nine tests passed including active nonzero bcap doublebackward and exactresume; actual16k16-update pipeline smoke certified, attention gradients nonzero on both sides. Plan/config/launch/validation under `sagan_gd_16k_scout`. Tail `runs/cifar_particle_ae/sagan_gd_16k_scout/PIPELINE.log`. No automatic promotion.
+
+**GPU0 now idle:** wider no-attention GroupNorm scout completed40k **FID18.2285**, best sampled, versus small26.2232 at40k. Last35k was20.9987; sizable final improvement. Training24.84min,total34.20min; sourcecert verified. Updated `deconv_wide_norm_16k_scout/FINDINGS.md`. This is the matched no-attention baseline for new scout; joint G/D change will not isolate which side helps. Overall historical best remainsCNN16k80k15.7527. Prior active/completed statuses below superseded here.
+
 ## Latest active jobs: long small deconv and wider GroupNorm deconv
 
 User authorized much longer plain-deconv training and selected "try wider with normalization" for the other GPU. **GPU1:** original299k-parameter unnormalized deconv full-state resume40k->200k, pipelinePID274862, `experiments/cifar_ae_deconv_long.py`, FID50k every10k, initialFID26.2232, no optimizer/rate/objective changes. Verified actual restore and finite updates beyond42k. Plan/config/launch/validation under `deconv_16k_200k`. Estimated110–125 minutes total wall time from20:05MDT. No further promotion queued.

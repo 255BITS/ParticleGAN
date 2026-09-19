@@ -1,0 +1,14 @@
+{
+  "final": {
+    "path": "runs/cifar_particle_ae/deconv_wide_norm_16k_scout/deconv_wide_norm_16k/checkpoint_040000.pt",
+    "sha256": "129f905658fa71a0c69c7deeeec3860bf62ee52c07a30abdcdbeb1cceac96bd2",
+    "step": 40000,
+    "fid50k": 18.22851292930784
+  },
+  "best_sampled": {
+    "path": "runs/cifar_particle_ae/deconv_wide_norm_16k_scout/deconv_wide_norm_16k/checkpoint_040000.pt",
+    "sha256": "129f905658fa71a0c69c7deeeec3860bf62ee52c07a30abdcdbeb1cceac96bd2",
+    "step": 40000,
+    "fid50k": 18.22851292930784
+  }
+}
