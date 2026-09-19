@@ -1,0 +1,230 @@
+[
+  {
+    "step": 80000,
+    "checkpoint_sha256": "9ddcef1fb0bf82c47a581fa1b2d58872315d5d67b302eadc533c0abc41b7d5c7",
+    "diagnostics": {
+      "live": {
+        "layers": {
+          "blocks.0.cond": {
+            "scale_rms": 0.950925886631012,
+            "gain_rms": 1.5517629384994507,
+            "gain_abs_max": 5.639851093292236,
+            "shift_rms": 0.9482208490371704
+          },
+          "blocks.0": {
+            "activation_rms": 2.1046195030212402
+          },
+          "blocks.1.cond": {
+            "scale_rms": 1.3279281854629517,
+            "gain_rms": 1.980475664138794,
+            "gain_abs_max": 7.6299591064453125,
+            "shift_rms": 1.021664023399353
+          },
+          "blocks.1": {
+            "activation_rms": 2.129028558731079
+          },
+          "blocks.2.cond": {
+            "scale_rms": 0.9065660834312439,
+            "gain_rms": 1.5379438400268555,
+            "gain_abs_max": 5.827692985534668,
+            "shift_rms": 0.7527885437011719
+          },
+          "blocks.2": {
+            "activation_rms": 1.1112430095672607
+          }
+        },
+        "output_rms": 0.48200780153274536,
+        "saturated_fraction": 0.014556884765625,
+        "parent_drift_rms": 0.0,
+        "previous_probe_drift_rms": 0.0
+      },
+      "ema": {
+        "layers": {
+          "blocks.0.cond": {
+            "scale_rms": 0.9498569369316101,
+            "gain_rms": 1.5497395992279053,
+            "gain_abs_max": 5.603166103363037,
+            "shift_rms": 0.9484747052192688
+          },
+          "blocks.0": {
+            "activation_rms": 2.089733123779297
+          },
+          "blocks.1.cond": {
+            "scale_rms": 1.3287287950515747,
+            "gain_rms": 1.979994297027588,
+            "gain_abs_max": 7.717236518859863,
+            "shift_rms": 1.024296760559082
+          },
+          "blocks.1": {
+            "activation_rms": 2.130150556564331
+          },
+          "blocks.2.cond": {
+            "scale_rms": 0.905461311340332,
+            "gain_rms": 1.536910057067871,
+            "gain_abs_max": 5.859759330749512,
+            "shift_rms": 0.7588731646537781
+          },
+          "blocks.2": {
+            "activation_rms": 1.0995103120803833
+          }
+        },
+        "output_rms": 0.5097293853759766,
+        "saturated_fraction": 0.016096752136945724,
+        "parent_drift_rms": 0.0,
+        "previous_probe_drift_rms": 0.0
+      }
+    }
+  },
+  {
+    "step": 90000,
+    "checkpoint_sha256": "155c519e381c0db0a26a12db6db9230d390e938a7731a0faae889afafa0e38a2",
+    "diagnostics": {
+      "live": {
+        "layers": {
+          "blocks.0.cond": {
+            "scale_rms": 0.944632887840271,
+            "gain_rms": 1.5299533605575562,
+            "gain_abs_max": 4.96417236328125,
+            "shift_rms": 0.9183818697929382
+          },
+          "blocks.0": {
+            "activation_rms": 2.1904256343841553
+          },
+          "blocks.1.cond": {
+            "scale_rms": 1.3108375072479248,
+            "gain_rms": 1.9551379680633545,
+            "gain_abs_max": 7.310333728790283,
+            "shift_rms": 1.0016320943832397
+          },
+          "blocks.1": {
+            "activation_rms": 2.2477381229400635
+          },
+          "blocks.2.cond": {
+            "scale_rms": 0.8893295526504517,
+            "gain_rms": 1.5170865058898926,
+            "gain_abs_max": 5.326054573059082,
+            "shift_rms": 0.7658692002296448
+          },
+          "blocks.2": {
+            "activation_rms": 1.1597959995269775
+          }
+        },
+        "output_rms": 0.5070620775222778,
+        "saturated_fraction": 0.01299921702593565,
+        "parent_drift_rms": 0.3352484703063965,
+        "previous_probe_drift_rms": 0.3352484703063965
+      },
+      "ema": {
+        "layers": {
+          "blocks.0.cond": {
+            "scale_rms": 0.941927969455719,
+            "gain_rms": 1.5271692276000977,
+            "gain_abs_max": 4.9849653244018555,
+            "shift_rms": 0.9209872484207153
+          },
+          "blocks.0": {
+            "activation_rms": 2.184551954269409
+          },
+          "blocks.1.cond": {
+            "scale_rms": 1.3070539236068726,
+            "gain_rms": 1.9517748355865479,
+            "gain_abs_max": 7.191680431365967,
+            "shift_rms": 1.0055310726165771
+          },
+          "blocks.1": {
+            "activation_rms": 2.250929355621338
+          },
+          "blocks.2.cond": {
+            "scale_rms": 0.889542281627655,
+            "gain_rms": 1.521776795387268,
+            "gain_abs_max": 5.368358612060547,
+            "shift_rms": 0.7663208842277527
+          },
+          "blocks.2": {
+            "activation_rms": 1.1478159427642822
+          }
+        },
+        "output_rms": 0.5049261450767517,
+        "saturated_fraction": 0.011812846176326275,
+        "parent_drift_rms": 0.33525338768959045,
+        "previous_probe_drift_rms": 0.33525338768959045
+      }
+    }
+  },
+  {
+    "step": 100000,
+    "checkpoint_sha256": "9bb155bcb6a8e701fbc89450a7bdf8f5149176b59502d30e0f04736c4e174da5",
+    "diagnostics": {
+      "live": {
+        "layers": {
+          "blocks.0.cond": {
+            "scale_rms": 0.899909496307373,
+            "gain_rms": 1.4680509567260742,
+            "gain_abs_max": 5.453137397766113,
+            "shift_rms": 0.8833692073822021
+          },
+          "blocks.0": {
+            "activation_rms": 2.2107529640197754
+          },
+          "blocks.1.cond": {
+            "scale_rms": 1.257311224937439,
+            "gain_rms": 1.885504126548767,
+            "gain_abs_max": 7.649393558502197,
+            "shift_rms": 0.9794142246246338
+          },
+          "blocks.1": {
+            "activation_rms": 2.1419811248779297
+          },
+          "blocks.2.cond": {
+            "scale_rms": 0.8208913207054138,
+            "gain_rms": 1.4707189798355103,
+            "gain_abs_max": 6.031522750854492,
+            "shift_rms": 0.6917431950569153
+          },
+          "blocks.2": {
+            "activation_rms": 1.0413988828659058
+          }
+        },
+        "output_rms": 0.5090228319168091,
+        "saturated_fraction": 0.008350372314453125,
+        "parent_drift_rms": 0.38444435596466064,
+        "previous_probe_drift_rms": 0.3540322780609131
+      },
+      "ema": {
+        "layers": {
+          "blocks.0.cond": {
+            "scale_rms": 0.9011636972427368,
+            "gain_rms": 1.4691332578659058,
+            "gain_abs_max": 5.390891075134277,
+            "shift_rms": 0.884490430355072
+          },
+          "blocks.0": {
+            "activation_rms": 2.199423313140869
+          },
+          "blocks.1.cond": {
+            "scale_rms": 1.256991982460022,
+            "gain_rms": 1.8858883380889893,
+            "gain_abs_max": 7.6243577003479,
+            "shift_rms": 0.9801626205444336
+          },
+          "blocks.1": {
+            "activation_rms": 2.1458964347839355
+          },
+          "blocks.2.cond": {
+            "scale_rms": 0.8204697370529175,
+            "gain_rms": 1.4687730073928833,
+            "gain_abs_max": 5.917464733123779,
+            "shift_rms": 0.6966512799263
+          },
+          "blocks.2": {
+            "activation_rms": 1.0001566410064697
+          }
+        },
+        "output_rms": 0.504046618938446,
+        "saturated_fraction": 0.011211395263671875,
+        "parent_drift_rms": 0.3842743933200836,
+        "previous_probe_drift_rms": 0.342298299074173
+      }
+    }
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "stage": "training",
+  "arm": "half_g",
+  "gpu": 1,
+  "start": 80000,
+  "stop": 100000
+}

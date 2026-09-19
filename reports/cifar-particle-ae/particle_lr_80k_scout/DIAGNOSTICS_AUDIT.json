@@ -1,0 +1,7 @@
+{
+  "state_gradient_optimizer_rng_preserved_bitwise": true,
+  "identical_Adam_update_on_common_gradients": true,
+  "parent_sha256": "9ddcef1fb0bf82c47a581fa1b2d58872315d5d67b302eadc533c0abc41b7d5c7",
+  "trainer_sha256": "2140dfb22060932aa7df6136ca98b704da04efac28c6b2e8d149e1fdacd2d794",
+  "limitation": "Cross-run training is not bitwise deterministic: CUDA adaptive_avg_pool2d backward has no deterministic implementation. This audit isolates observer side effects and a common-gradient Adam update; it does not claim bitwise-identical production trajectories."
+}

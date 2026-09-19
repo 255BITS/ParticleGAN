@@ -1,5 +1,15 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
+## Active: residual CNN learning-rate scout on GPU1 (2026-09-19)
+
+User authorized half-G and half-all LR forks on GPU1. ControllerPID491124: `experiments/cifar_ae_lr_scout.py`. Both start from the original16k80k checkpoint, continue to100k, FID50k every5k, original sigma and moving centers, unchanged architecture/objective. Half-G: G.00015, E.0003, prior.003, D.00045. Half-all: G/E.00015, prior.0015, D.000225. Existing unchanged continuation supplies controlFID90k15.7901/100k16.4609. These are constant LR drops, not gradual decay schedules.
+
+New standalone trainer `experiments/train_cifar_ae_lr_diagnostics.py` preserves historical trainers/library hashes. Adds per-parameter actual Adam update/weight RMS, conditioning scales/shifts, block activation RMS, output saturation and fixed-parent-latent live/EMA pixel drift. Diagnostics must pass a direct state/gradient/RNG/Adam observer audit before production; both rates checked with16-update certified smokes. Cross-run bitwise training comparison failed, and strict PyTorch determinism identified unsupported CUDA adaptive_avg_pool2d backward. This is recorded as a validation limitation, not hidden by tolerance relaxation. Then read-only matched90k/100k control snapshot diagnostics, half-G20k plus endpoint coverage/overlap probe, half-all20k plus endpoint probe. No automatic extension beyond100k. Smokes are validation, not benchmark/seed experiments.
+
+Status/results: `reports/cifar-particle-ae/particle_lr_80k_scout/{STATUS.json,LAUNCH.json,PLAN.md,VALIDATION.json,CONTROL_DIAGNOSTICS.json,results.json,CHECKPOINTS.json,LEADERBOARD.md,FINDINGS.md}` (some created on completion). Tail: `tail -f runs/cifar_particle_ae/particle_lr_80k_scout/PIPELINE.log`. Controller errors in sibling`launcher.log`. Do not edit any source-hashed training files while jobs run. Source/config certificates and queue halt on failure. Earlier idle status/recommendations below are superseded.
+
+Research context: StyleGAN2 generally favored output-skip G over residual G, with LSUN Car FID exception; EqualLinear is fixed per-layer parameter scaling, not temporal LR decay. Our residuals already useGN and1/sqrt(2) residual addition, but ordinary Linear/Conv and post-normalization latent scale/shift. Small plain deconv continued improving26.22->22.00 at40k->80k; wideGNdeconv also bounced17.50->19.32->17.66 at45k->80k. Prior histories differ across architectures. Thus residual-specific causality is not established. Older1k half-G and low-global-LR trials failed; this is a targeted late16k retest. No new architecture or EqualLinear conversion authorized.
+
 
 ## Latest completed review: overlap interventions do not break the FID plateau
 

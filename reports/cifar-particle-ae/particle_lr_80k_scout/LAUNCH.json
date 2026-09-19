@@ -1,0 +1,12 @@
+{
+  "pid": 491124,
+  "launched_at": "2026-09-19T00:08:36.289995-06:00",
+  "command": [
+    "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+    "-u",
+    "experiments/cifar_ae_lr_scout.py"
+  ],
+  "gpu": 1,
+  "previous_preflight_pid": 488400,
+  "tail": "tail -f runs/cifar_particle_ae/particle_lr_80k_scout/PIPELINE.log"
+}
