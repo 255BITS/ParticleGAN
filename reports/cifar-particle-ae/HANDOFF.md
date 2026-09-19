@@ -1,5 +1,11 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
+## Latest completed results review
+
+**Both GPUs idle; all jobs completed.** Deconv16k40k endedFID50k26.2232, improving every5k evaluation (35k27.0096). Sample grid has varied subjects with softer/less coherent detail thanCNN; no obvious wholesale collapse, but no deconv density/coverage probe yet. ReconMSE0.12820 versusCNN16k40k0.14578 despite worseFID; encoder usage is not sampling coverage. G299k plus prior1.05m parameters. Full review `deconv_16k_scout/FINDINGS.md`; recommend checkpoint continuation40k->80k and coverage measurement, **not launched**. Architecture and scratch prior initialization differ from historicalCNN, so no isolated capacity/normalization causal claim.
+
+CNN16k160k endedFID19.0584 versus80k15.7527, density0.64686->0.59038, coverage64.26%->58.03%, siblingbits3.11494->1.75446/4. CNN32k80k ended16.2461, best50k16.1271; coverage62.23%, bits3.74238/5. Full review `particle_duration/FINDINGS.md`. Do not auto-promote unchangedCNN to200k. Historical running statuses below are superseded here. User's latest message was "interesting results!"; only review/reporting performed, no new experiment authorized or launched in response.
+
 ## Latest: plain deconvolution scout, September 18 at 19:22 MDT
 
 User requested `linear -> deconv -> deconv -> deconv -> tanh` with **no normalization**, 16k particles, GPU 1, and explicitly authorized a subagent to implement it. Implemented by `/root/plain_deconv_impl`: new standalone `experiments/train_cifar_ae_deconv.py`, 298,595 G parameters, preserved historical source files. Ten tests passed including E-only isolation, D/E initialization RNG equivalence and exact full-state split resume. Actual GPU 1 pipeline smoke passed with 16,384 particles, 16 updates, lazy double backprop, FID128/reconstruction and checkpoint writing; smoke scores are not benchmarks.

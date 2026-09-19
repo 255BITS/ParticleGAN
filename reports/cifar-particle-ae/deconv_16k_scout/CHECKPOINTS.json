@@ -1,0 +1,14 @@
+{
+  "final": {
+    "path": "runs/cifar_particle_ae/deconv_16k_scout/deconv_16k_no_norm/checkpoint_040000.pt",
+    "sha256": "549cf446d2d52a6560aa6afdf67e7e06b14f34f8d35303bcf74f9352f1ae6e1d",
+    "step": 40000,
+    "fid50k": 26.223162216209687
+  },
+  "best_sampled": {
+    "path": "runs/cifar_particle_ae/deconv_16k_scout/deconv_16k_no_norm/checkpoint_040000.pt",
+    "sha256": "549cf446d2d52a6560aa6afdf67e7e06b14f34f8d35303bcf74f9352f1ae6e1d",
+    "step": 40000,
+    "fid50k": 26.223162216209687
+  }
+}

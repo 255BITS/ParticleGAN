@@ -1,0 +1,7 @@
+{
+  "16k_160k": {
+    "path": "runs/cifar_particle_ae/particle_16k_160k/16k_160k/checkpoint_160000.pt",
+    "sha256": "d6351238ab4b8be1bfbda36e26c17396814a305db32b49179f1be3c581ff69e3",
+    "fid50k": 19.058439255701273
+  }
+}
