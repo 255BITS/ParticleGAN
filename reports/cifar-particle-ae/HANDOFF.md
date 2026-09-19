@@ -1,5 +1,11 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
+## Active: SAGAN G/D continuation to 200k on GPU 1 (2026-09-19)
+
+User authorized unchanged SAGAN checkpoint continuation. Controller PID532893: `experiments/cifar_ae_sagan_long.py`. Resume certified40k checkpoint (FID50k19.6425) to200k total, 160k additional updates. Full optimizer/EMA/RNG state, constant learning rates,16k particles, fixed sigma, active G/D attention and E-only reconstruction unchanged. FID50k every5k; retain all checkpoints. Historical trainer/source certificates preserved. Preflight passed. No new seed or baseline run. GPU0 has unrelated work.
+
+Tail: `tail -f runs/cifar_particle_ae/sagan_gd_16k_200k/PIPELINE.log`. Plan, validation, launch/status and eventual results/leaderboard/findings under `reports/cifar-particle-ae/sagan_gd_16k_200k/`. Estimated~2.5 hours including evaluations, subject to observed throughput. No further stage queued. Prior idle statuses below are superseded.
+
 ## Latest completed: learning-rate forks do not beat the80k parent
 
 Both GPU1 jobs and endpoint probes completed/certified; final and best checkpoint hashes verified. No further jobs queued. `reports/cifar-particle-ae/particle_lr_80k_scout/FINDINGS.md` is the full review, withLEADERBOARD.md,curves.png,DIAGNOSTIC_REVIEW.json,REVIEW_VERIFICATION.json,CHECKPOINTS.json. Commit/source-frozen trainers unchanged.
