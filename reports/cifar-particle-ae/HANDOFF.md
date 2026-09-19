@@ -1,5 +1,15 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
+## Latest completed: learning-rate forks do not beat the80k parent
+
+Both GPU1 jobs and endpoint probes completed/certified; final and best checkpoint hashes verified. No further jobs queued. `reports/cifar-particle-ae/particle_lr_80k_scout/FINDINGS.md` is the full review, withLEADERBOARD.md,curves.png,DIAGNOSTIC_REVIEW.json,REVIEW_VERIFICATION.json,CHECKPOINTS.json. Commit/source-frozen trainers unchanged.
+
+At100k: half-GFID16.1118,coverage64.19%,density.63288; half-allFID19.2482,coverage61.01%,density.63452; existing unchangedFID16.4609,coverage63.36%. Parent80k15.7527 remains best among these. Half-Gcurve85/90/95/100k15.9338/16.3924/16.3796/16.1118; half-all17.2142/17.5723/18.6474/19.2482. Half-G mitigates deterioration modestly; half-all is consistently worse. No automatic extension.
+
+Diagnostics: fixed-input EMA drift at100k .3843unchanged/.3445half-G/.3434half-all; similar lower drift does not imply similar quality. No obvious aggregate activation/conditioning explosion. Last learned1x1skip projection has~1%weight-RMS change per logged Adam step versus~.16–.19%neighboring convs/conditioning, mainly because learned skip weights are smaller with similar absolute updates. Does not establish causal harm or benefit from EqualLinear.
+
+Half-all prior clumps strongly: median nearest distance1.2143,confusion3.5858% vs half-G2.3422/.0946% and unchanged100k2.3309/.0244%. All errors within clone families. Previous frozen-center experiment means overlap still is not necessary for regression. Next recommended (NOT launched): from original80k keep half-G, then separately halveD orprior LR to isolate the confounded changes in half-all. Architecture suspicion remains unresolved. Alternative targeted residual investigation: first inspect branch contributions, then lower only skip-projection LR. Earlier active status below is historical.
+
 ## Active: residual CNN learning-rate scout on GPU1 (2026-09-19)
 
 User authorized half-G and half-all LR forks on GPU1. ControllerPID491124: `experiments/cifar_ae_lr_scout.py`. Both start from the original16k80k checkpoint, continue to100k, FID50k every5k, original sigma and moving centers, unchanged architecture/objective. Half-G: G.00015, E.0003, prior.003, D.00045. Half-all: G/E.00015, prior.0015, D.000225. Existing unchanged continuation supplies controlFID90k15.7901/100k16.4609. These are constant LR drops, not gradual decay schedules.

@@ -1,0 +1,26 @@
+{
+  "half_g": {
+    "final": {
+      "path": "runs/cifar_particle_ae/particle_lr_80k_scout/half_g/checkpoint_100000.pt",
+      "sha256": "1655e41a1f8081e5f1b1c469056ecd96d00097cc6c9f5b866d684a58051327c2",
+      "fid50k": 16.11176296038144
+    },
+    "best_sampled": {
+      "path": "runs/cifar_particle_ae/particle_lr_80k_scout/half_g/checkpoint_085000.pt",
+      "sha256": "3d21658be01a430f947d5d827f702be0d291fec63756eab12c2f8211218922a4",
+      "fid50k": 15.933756312894275
+    }
+  },
+  "half_all": {
+    "final": {
+      "path": "runs/cifar_particle_ae/particle_lr_80k_scout/half_all/checkpoint_100000.pt",
+      "sha256": "b3f2b4bedd7c02f766e0879414f41e9a016177e0bc19d7375425435d72a21c9b",
+      "fid50k": 19.24822312705942
+    },
+    "best_sampled": {
+      "path": "runs/cifar_particle_ae/particle_lr_80k_scout/half_all/checkpoint_085000.pt",
+      "sha256": "75a89f30318dcee6401bda5f6eb86711c75e86b53f6e6f892ef8eb80652eb6d5",
+      "fid50k": 17.214165350202165
+    }
+  }
+}

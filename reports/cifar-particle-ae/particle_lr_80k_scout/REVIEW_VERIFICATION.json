@@ -1,0 +1,12 @@
+{
+  "half_g": {
+    "training": true,
+    "_quality": true,
+    "best_and_final_checkpoint_hashes": true
+  },
+  "half_all": {
+    "training": true,
+    "_quality": true,
+    "best_and_final_checkpoint_hashes": true
+  }
+}

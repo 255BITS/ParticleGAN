@@ -1,0 +1,6 @@
+checkpoint: runs/cifar_particle_ae/particle_lr_80k_scout/half_g/checkpoint_100000.pt
+checkpoint_sha256: 1655e41a1f8081e5f1b1c469056ecd96d00097cc6c9f5b866d684a58051327c2
+expected_fid: 16.11176296038144
+noise_scales:
+- 1.0
+out_dir: runs/cifar_particle_ae/particle_lr_80k_scout_quality/half_g
