@@ -1,5 +1,11 @@
 # CIFAR AE-GAN: duration experiments and particle-scaling research
 
+## Latest completed: SAGAN reaches FID12.5345 at200k
+
+SAGAN40k->200k continuation finished and certified; final and best checkpoint SHA verified. FinalFID50k12.53445669 crosses numeric<13 target. Last190/195/200k13.3829/12.9593/12.5345; final20k improvement1.1995. First<14 at120k, temporary rebound through140k, then improvement resumed. At80k SAGAN15.7728 vswideGN17.6565; short40k architecture ranking reversed with duration. No new job queued. Earlier active status below superseded.
+
+Review: `sagan_gd_16k_200k/FINDINGS.md`, leaderboard, curves.png, REVIEW_VERIFICATION.json and CHECKPOINTS.json. Final checkpoint `runs/cifar_particle_ae/sagan_gd_16k_200k/sagan_gd_16k/checkpoint_200000.pt`, SHAb45e411a8d3d0d0d3b7d45b877e719a7d3ed416edd223e513e07f6e05b3300f5. Same constant-rate recipe throughout. 146.73wall minutes for continuation. Reconfinal.123156; endpoint coverage not yet measured. Numeric BigGAN target crossed, protocol parity unverified. Recommend coverage evaluation and unchanged continuation to300k; matched long no-attention wideGN useful for causality. Recommendations NOT authorized/launched.
+
 ## Active: SAGAN G/D continuation to 200k on GPU 1 (2026-09-19)
 
 User authorized unchanged SAGAN checkpoint continuation. Controller PID532893: `experiments/cifar_ae_sagan_long.py`. Resume certified40k checkpoint (FID50k19.6425) to200k total, 160k additional updates. Full optimizer/EMA/RNG state, constant learning rates,16k particles, fixed sigma, active G/D attention and E-only reconstruction unchanged. FID50k every5k; retain all checkpoints. Historical trainer/source certificates preserved. Preflight passed. No new seed or baseline run. GPU0 has unrelated work.
