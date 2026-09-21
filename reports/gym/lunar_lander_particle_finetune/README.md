@@ -55,9 +55,21 @@ python -u experiments/train_gym_particle_finetune.py \
 `experiments/toy_particle_native_2d.py` remains a separate CPU example of the
 live `(record, z)` pair. It is not the gym controller step.
 
+## Safe-fast arm
+
+`particle.yaml` is unchanged. The safe-fast loss is
+`configs/gym/lunar_lander_particle_finetune/particle_safe_fast.yaml`
+(`adv_weight` 1 plus the toy weights). Its CPU gate passed. That is not a
+Lunar landing count. See [the note](../../../docs/gym-safe-fast.md).
+
+```bash
+python -u examples/safe_fast_2d.py
+```
+
 ## Recommendation
 
-Keep the imitation controller as the playable default until this paired-error
-arm has a real rollout. Do not ship `adv_weight=0` or put action MSE back in
-place of the GAN. Do not start a seed repeat. Score checkpoints 250, 1,000,
-and 2,500 on the existing control validation worlds before any test claim.
+Keep `particle.yaml` as the paired-error default. Do not ship `adv_weight=0`
+or put action MSE back in place of the GAN. Do not start a seed repeat.
+The safe-fast yaml is the candidate if a later rollout wants earlier
+landings; score it on the existing validation worlds before any test claim.
+This checkout did not run that rollout.

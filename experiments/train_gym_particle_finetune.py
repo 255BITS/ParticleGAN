@@ -24,17 +24,46 @@ from lib.gym_particle_finetune import (EDIT_CAP_EVERY, MODULE_KEYS, REMOVED_L2,
     build_edit_critic, configure_control_scope, controller_objective,
     discriminator_objective, edit_cap, initialize_particle_finetune, normalized_g2_action,
     require_live_adversary)
+from lib.safe_fast_landing import gym_shaping_cost
 from particlegan import learning_rate_scale
 
 DEFAULTS = dict(arm="particle", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1", marginal_weight=1.,
     imitation_weight=0., real_encoding_weight=0., synthetic_reconstruction_weight=0.,
     adv_weight=1., train_scope="control", error_tokens=8, error_width=48, error_heads=4,
+    safe_fast_weight=0., safe_fast_time_weight=0., safe_fast_crash_weight=0.,
+    safe_fast_success_bonus=0., safe_fast_speed_limit=0., safe_fast_pad_half=0.,
+    safe_fast_horizon=0,
     checkpoint="results/gym/lunar_lander/adversarial/best.pt",
     episodes="results/gym/lunar_lander/data/episodes.json",
     out_dir="results/gym/lunar_lander_particle_finetune/particle",
     live_log="results/gym/lunar_lander_particle_finetune/live.log")
 L2_KEYS = ("imitation_weight", "real_encoding_weight", "synthetic_reconstruction_weight")
+SAFE_FAST_NUMBERS = ("safe_fast_time_weight", "safe_fast_crash_weight", "safe_fast_success_bonus",
+                     "safe_fast_speed_limit", "safe_fast_pad_half")
+
+
+def _nonneg_number(cfg, key):
+    value = cfg[key]
+    if isinstance(value, bool) or type(value) not in (int, float) or value < 0:
+        raise ValueError(f"{key} must be a nonnegative number")
+
+
+def validate_safe_fast(cfg):
+    """Weight 0 leaves the paired-error graph unchanged. A live term needs the full knob set."""
+    _nonneg_number(cfg, "safe_fast_weight")
+    for key in SAFE_FAST_NUMBERS:
+        _nonneg_number(cfg, key)
+    horizon = cfg["safe_fast_horizon"]
+    if isinstance(horizon, bool) or type(horizon) is not int or horizon < 0:
+        raise ValueError("safe_fast_horizon must be a nonnegative integer")
+    if cfg["safe_fast_weight"] == 0:
+        return
+    if horizon < 1:
+        raise ValueError("safe_fast_weight>0 requires safe_fast_horizon>=1")
+    for key in SAFE_FAST_NUMBERS:
+        if cfg[key] <= 0:
+            raise ValueError(f"{key} must be positive when safe_fast_weight>0")
 
 
 def validate(cfg):
@@ -51,6 +80,7 @@ def validate(cfg):
         if cfg[key] != 0:
             raise ValueError(f"{key} is removed; Arm A does not keep an auxiliary L2 term")
     require_live_adversary(cfg["adv_weight"])
+    validate_safe_fast(cfg)
     if cfg["train_scope"] != "control":
         raise ValueError("train_scope stays control: E_control and G2, not the world")
     for key in ("error_tokens", "error_width", "error_heads"):
@@ -70,7 +100,8 @@ def validate(cfg):
 
 
 def capture_provenance(out, cfg, records, bundle):
-    paths = [Path(__file__), ROOT / "lib/gym_particle_finetune.py", ROOT / "lib/gym_control.py",
+    paths = [Path(__file__), ROOT / "lib/gym_particle_finetune.py", ROOT / "lib/safe_fast_landing.py",
+             ROOT / "lib/gym_control.py",
              ROOT / "lib/gym_previous_gan.py", ROOT / "lib/gym_transition.py",
              ROOT / "experiments/train_gym_transition.py", ROOT / "experiments/config.py"]
     paths += sorted((ROOT / "particlegan").glob("*.py"))
@@ -94,7 +125,10 @@ def capture_provenance(out, cfg, records, bundle):
         initial_provenance=bundle["provenance"],
         normalization="Unchanged scaler from initialization; fit originally on old training split",
         removed_l2=list(REMOVED_L2), l2_aux_weight=0., adv_weight=1.,
-        controller_objective="Rp logistic on the edit-normalized G2 residual; no action MSE",
+        safe_fast_weight=float(cfg["safe_fast_weight"]),
+        controller_objective=("Rp logistic on the edit-normalized G2 residual; no action MSE; "
+                              "safe_fast_weight=0" if cfg["safe_fast_weight"] == 0 else
+                              "Rp logistic adv_weight=1 plus safe-fast kinematic shaping"),
         gradient_penalty=f"sample-point b_cap on the edit critic, autograd L2, coeff 1, kappa 1, every {EDIT_CAP_EVERY} steps",
         train_scope="E_control and G2; G1, G3, E_pair, prior, and transition D frozen",
         control_input="Expert previous command in shuffled records; learner previous command at playback")
@@ -172,6 +206,13 @@ def train(cfg):
         frozen=["G1", "G3", "E", "prior", "D"])
     objective = dict(loss_type="logistic", gan_mode="rp", reg_arm="b_cap", reg_method="autograd",
         reg_every=EDIT_CAP_EVERY, adv_weight=1., train_scope="control", l2_aux_weight=0.,
+        safe_fast_weight=float(cfg["safe_fast_weight"]),
+        safe_fast_time_weight=float(cfg["safe_fast_time_weight"]),
+        safe_fast_crash_weight=float(cfg["safe_fast_crash_weight"]),
+        safe_fast_success_bonus=float(cfg["safe_fast_success_bonus"]),
+        safe_fast_speed_limit=float(cfg["safe_fast_speed_limit"]),
+        safe_fast_pad_half=float(cfg["safe_fast_pad_half"]),
+        safe_fast_horizon=int(cfg["safe_fast_horizon"]),
         critic="gmix_t8_w48_l1", normalization=critic.normalization,
         initialization_recipe=recipe.to_dict())
     write_json(out / "provenance.json", provenance)
@@ -208,13 +249,23 @@ def train(cfg):
             livefile.write(text + "\n")
 
         log(f"START arm=particle steps={cfg['steps']} expert_records={len(columns[0])} "
-            f"episodes={len(np.unique(records['episode_ids']))} device={device} adv_weight=1")
+            f"episodes={len(np.unique(records['episode_ids']))} device={device} adv_weight=1 "
+            f"safe_fast_weight={cfg['safe_fast_weight']} safe_fast_horizon={cfg['safe_fast_horizon']}")
         log("PLAYBACK E_control(st, previous at) -> z -> G2. TRAIN E_control and G2 only. "
             "FROZEN G1, G3, E_pair, prior, transition D.")
         log("REMOVED L2: imitation MSE; real reconstruction MSE/BCE; synthetic reconstruction MSE/BCE. "
             "AUX L2 weight=0.")
         log("CONTROLLER STEP: Rp logistic on noise versus noise plus the edit-normalized G2 residual. "
             "sample-point b_cap on that critic every 4 updates. adv_weight=1. Not supervised_only.")
+        if cfg["safe_fast_weight"] == 0:
+            log("SAFE-FAST off safe_fast_weight=0. Paired-error RpGAN only. "
+                "The safe-fast arm is configs/gym/lunar_lander_particle_finetune/particle_safe_fast.yaml.")
+        else:
+            log("SAFE-FAST on "
+                f"weight={cfg['safe_fast_weight']} time={cfg['safe_fast_time_weight']} "
+                f"crash={cfg['safe_fast_crash_weight']} success={cfg['safe_fast_success_bonus']} "
+                f"speed_limit={cfg['safe_fast_speed_limit']} pad_half={cfg['safe_fast_pad_half']} "
+                f"horizon={cfg['safe_fast_horizon']}. adv_weight=1. Not adv_weight=0.")
         log(f"LR controller={groups['controller']['lr']} edit_critic={groups['edit_critic']['lr']} "
             f"b_cap coeff={reg.coeff} kappa={reg.kappa} lazy_k={reg.lazy_k}")
         log(f"Trainable parameters={trainable_counts}; inference={inference_count}")
@@ -244,8 +295,17 @@ def train(cfg):
             g_rows = rows("data")
             predicted = normalized_g2_action(bundle, g_rows[0], g_rows[1], g_rows[4])
             target = bundle["scaler"].action(g_rows[2])
-            lg, g_terms = controller_objective(critic, predicted, target, step, rng["edit_g"], cfg["steps"],
-                                               cfg["adv_weight"])
+            safe_cost = None
+            if cfg["safe_fast_weight"] != 0:
+                def predict_physical(full, prev, terr):
+                    return bundle["scaler"].inverse_action(normalized_g2_action(bundle, full, prev, terr))
+                safe_cost = gym_shaping_cost(
+                    g_rows[0], g_rows[1], g_rows[4], predict_physical, cfg["safe_fast_horizon"],
+                    cfg["safe_fast_time_weight"], cfg["safe_fast_crash_weight"],
+                    cfg["safe_fast_success_bonus"], cfg["safe_fast_speed_limit"], cfg["safe_fast_pad_half"])
+            lg, g_terms = controller_objective(
+                critic, predicted, target, step, rng["edit_g"], cfg["steps"], cfg["adv_weight"],
+                safe_cost, cfg["safe_fast_weight"])
             if not torch.isfinite(lg):
                 raise FloatingPointError(f"Nonfinite controller loss at step {step}")
             opt_g.zero_grad(set_to_none=True)
@@ -266,7 +326,8 @@ def train(cfg):
                        if key not in ("b_cap_applied", "adv_weight")})
                 metrics.write(json.dumps(row, allow_nan=False) + "\n")
                 log(f"step={step}/{cfg['steps']} loss={row['loss']:.5f} D={row['d_loss']:.5f} "
-                    f"G={row['g_loss']:.5f} adv_weight=1 b_cap_applied={int(row['b_cap_applied'])} "
+                    f"G={row['g_loss']:.5f} adv_weight=1 safe_fast_weight={row['safe_fast_weight']} "
+                    f"safe_fast={row['safe_fast']:.5f} b_cap_applied={int(row['b_cap_applied'])} "
                     f"diag_action_mse={row['action_mse']:.5f} l2_aux=0 elapsed_s={row['elapsed_seconds']:.1f}")
             if step in checkpoints:
                 sync()
@@ -290,10 +351,12 @@ def train(cfg):
             train_seconds=optimization_seconds, total_seconds=time.perf_counter() - started,
             checkpoints={path.name: sha256(path) for path in sorted(out.glob("*.pt"))},
             removed_l2=list(REMOVED_L2), l2_aux_weight=0., adv_weight=1.,
+            safe_fast_weight=float(cfg["safe_fast_weight"]),
             b_cap_applications=b_cap_applications,
             selection="Deferred: no landing evaluation has been run for this arm",
             initialization="Same frozen adversarial checkpoint; E_control copied from paired E; scaler retained. "
-                           "Controller step is paired-error RpGAN plus sample-point b_cap.")
+                           "Controller step is paired-error RpGAN plus sample-point b_cap. "
+                           f"safe_fast_weight={cfg['safe_fast_weight']}.")
         write_json(out / "summary.json", summary)
         log(f"COMPLETE train_seconds={optimization_seconds:.1f}; awaiting rollout selection")
     return summary
