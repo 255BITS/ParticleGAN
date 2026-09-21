@@ -5,8 +5,9 @@ nearest start, terrain, and state. Neutral was the slow action at `s`. Target
 was the fast action at a nearby `s′`. There is no shared landing in that
 edit. Fitting it destroyed a working controller. Do not train
 `results/gym/lunar_lander_slow_fast/pairs.npz`. The trainer refuses
-`slow_seed != fast_seed`. Collect has to be reworked to connected pairs
-before the next cuda:1 run. This page does not claim a new Lunar landing number.
+`slow_seed != fast_seed`. Collect has to be reworked to two teachers, the same
+seed, a both-land gate, and progress alignment before the next cuda:1 run.
+This page does not claim a new Lunar landing number.
 
 ## What failed (pop-os cuda:1, `train_scope=control`)
 
@@ -28,19 +29,27 @@ onto a different state, and training `E_control` and G2 overwrote the lander.
 
 ## Toy gate
 
-`python -u examples/slow_fast_paired_2d.py` must print `GATE PASS`. Both arms
-use the same full lander, the same learning rate, and paired-error RpGAN at
-`adv_weight=1`. The only difference is the pairs.
+`python -u examples/slow_fast_paired_2d.py` must print `GATE PASS`. The pass
+arm is two teachers on the same start.
 
-- `stranger` pastes another episode's fast action onto the nearest state.
-  The rows are plentiful. Landings do not return at steps 100, 200, or 400.
-- `connected` keeps the start. The target is a 0.25 retime of the fast law
-  at that same state. Step 50 is off the pad. Steps 100, 200, and 400 are
-  back on it, and success steps fall.
+- Safe teacher: land-first, no speed term.
+- Fast teacher: the same spine, trained with an altitude speed bias. Speed
+  rises until landings break. There is no separate crash policy and no
+  hand-picked fraction of the fast action.
+- Connected pairs: same seed, both land, aligned by progress `t/T`. Neutral
+  is the safe action. Target is the fast action at that progress. On this
+  plant the held teacher is update 2 (lands in 23.41 steps). The student
+  keeps the pad and finishes in 28.31 steps.
+- `overspeed` is update 3. The teacher still lands (20.04 steps). The same
+  student ends at landings 0.762, crash 0.237.
+- `crash_fast` is update 6, where the teacher itself lands 0.442. Those
+  missed episodes stay out of the fast set. Training on them ends at
+  landings 0.455, crash 0.545.
+- `stranger` is cross-episode nearest state on the held teacher. The rows
+  are plentiful (2905). The student ends at landings 0.205, crash 0.795.
 
-The first 50 updates kick either arm off the pad. Do not keep a checkpoint
-from that window. `adv_weight` stays 1. `safe_fast_weight` stays 0. Diagnostic
-MSE stays outside the loss. The kinematic plant cost is not the speed mechanism.
+`adv_weight` stays 1. `safe_fast_weight` stays 0. Diagnostic MSE stays
+outside the loss. The kinematic plant cost is not the speed mechanism.
 
 ## Paths
 
@@ -62,10 +71,12 @@ python -u examples/slow_fast_paired_2d.py
 
 That is the only command to run. The existing `pairs.npz` is stranger matching
 (`slow_seed != fast_seed`). `train_gym_slow_fast.py` raises before it writes
-a checkpoint. The next collector has to emit connected pairs: one successful
-landing, re-timed, same seed, shared trajectory. A different episode's nearest
-state is not that pair. After that collector exists, train with
-`adv_weight=1` and `safe_fast_weight=0`, and stop if landings fall.
+a checkpoint. The next collector has to roll two teachers on the same seed,
+keep a pair only when both land, and align by progress. A different episode's
+nearest state is not that pair. Push the fast teacher's speed term until
+landings break, and leave crashed fast-teacher rows out of the file. After
+that collector exists, train with `adv_weight=1` and `safe_fast_weight=0`,
+and stop if landings fall.
 
 ## Eval rule
 
@@ -89,4 +100,4 @@ python -u experiments/collect_slow_fast_lunar.py \
 
 `tests/test_slow_fast_lunar.py` refuses a cross-seed pair file, then trains
 4 CPU steps on a same-seed copy. That copy is only a plumbing check. It is
-not a Lunar retime and it is not a landing number.
+not a two-teacher Lunar collect and it is not a landing number.

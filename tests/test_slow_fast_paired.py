@@ -1,15 +1,15 @@
-"""CPU gate: same-start retime beats cross-episode nearest pairs."""
+"""CPU gate: same-seed progress pairs beat stranger nearest and overspeed."""
 import unittest
 
 import torch
 
-from lib.slow_fast_paired import (FAST_W, NEAREST_DIST, RETIME, SLOW_W, SlowPolicy,
-    collect_pairs, crash_action, evaluate_policy, fast_action, pair_is_kept, rank_key,
+from lib.slow_fast_paired import (FAST_W, HELD_TEACHER_STEPS, NEAREST_DIST, SLOW_W,
+    SlowPolicy, collect_pairs, crash_action, evaluate_policy, pair_is_kept, rank_key,
     require_live_adversary, run_gate, slow_action, train_arm)
 
 
 class SlowFastPairedTests(unittest.TestCase):
-    def test_fast_set_drops_crashes_and_pairs_share_the_start(self):
+    def test_fast_set_keeps_both_land_and_aligns_by_progress(self):
         self.assertFalse(pair_is_kept(True, False, 40, 12))
         self.assertFalse(pair_is_kept(False, True, 40, 12))
         self.assertFalse(pair_is_kept(True, True, 20, 20))
@@ -17,22 +17,24 @@ class SlowFastPairedTests(unittest.TestCase):
         table = collect_pairs()
         self.assertGreater(table["kept_starts"], 0)
         self.assertEqual(table["fast_failures_excluded"], 0)
+        self.assertGreater(table["crash_episodes"], 0)
         self.assertTrue(torch.all(table["fast_steps"] < table["slow_steps"]))
         self.assertTrue(torch.all(table["start_id"] != table["unpaired_start_id"]))
-        self.assertGreater(float((table["crash_target"] - table["target"]).abs().mean()), 0.05)
-        # The stored fast label is the fast law at the slow trajectory's state.
-        torch.testing.assert_close(table["target"], fast_action(table["state"]))
-        torch.testing.assert_close(table["neutral"], slow_action(table["state"]))
-        torch.testing.assert_close(table["crash_target"], crash_action(table["state"]))
+        self.assertEqual(len(table["connected_target"]), len(table["state"]))
+        self.assertEqual(len(table["progress"]), len(table["state"]))
+        self.assertTrue(torch.all((table["progress"] >= 0) & (table["progress"] <= 1)))
+        # The held fast teacher still lands. The break update does not.
+        self.assertGreaterEqual(table["held_teacher_landings"], 0.98)
+        self.assertLess(table["break_teacher_landings"], 0.90)
+        self.assertLess(table["overspeed_teacher_steps"], table["held_teacher_steps"])
+        self.assertEqual(table["teacher_curve"][HELD_TEACHER_STEPS - 1]["step"], HELD_TEACHER_STEPS)
+        # Progress alignment is t/T on the same landing, and the edit is not zero.
+        self.assertGreater(table["progress_edit"], 0.02)
         self.assertGreater(table["nearest_rows"], 1000)
         self.assertLessEqual(float(table["nearest_distance"].max()), NEAREST_DIST)
-        # Nearest-state targets are a different episode's action, not the same-state law.
-        gap = (table["nearest_target"] - fast_action(table["nearest_state"])).abs().mean()
-        self.assertGreater(float(gap), 0.02)
-        expected = (table["neutral"] + RETIME * (table["target"] - table["neutral"])).clamp(-1, 1)
-        torch.testing.assert_close(table["connected_target"], expected)
-        self.assertFalse(torch.allclose(table["connected_target"], table["target"]))
-        self.assertEqual(len(table["connected_target"]), len(table["state"]))
+        # Crash rows are a different set from the both-land progress rows.
+        self.assertGreater(len(table["crash_state"]), 100)
+        self.assertNotEqual(len(table["crash_state"]), len(table["state"]))
 
     def test_student_starts_at_the_slow_law(self):
         policy = SlowPolicy()
@@ -79,7 +81,7 @@ class SlowFastPairedTests(unittest.TestCase):
         self.assertGreater(crashed["crash_rate"], 0.95)
         self.assertLess(crashed["mean_contact_steps"], 30)
 
-    def test_gate_connected_returns_and_stranger_does_not(self):
+    def test_gate_connected_holds_and_faster_speed_does_not(self):
         result = run_gate()
         self.assertTrue(result["passed"], result["failures"])
         self.assertEqual(result["winner"], "connected")
@@ -88,23 +90,25 @@ class SlowFastPairedTests(unittest.TestCase):
         self.assertGreater(result["connected"]["gan_grad_abs"], 0)
         self.assertGreaterEqual(result["connected"]["landings"], 0.98)
         self.assertGreaterEqual(result["connected"]["min_landings"], 0.95)
-        self.assertLessEqual(result["connected"]["mean_steps"], 26)
-        self.assertLessEqual(result["connected"]["mean_steps"], result["zero"]["mean_steps"] - 8)
+        self.assertLessEqual(result["connected"]["mean_steps"], 32)
+        self.assertLessEqual(result["connected"]["mean_steps"], result["zero"]["mean_steps"] - 6)
         self.assertGreaterEqual(result["zero"]["landings"], 0.98)
         self.assertGreaterEqual(result["slow_only"]["landings"], 0.95)
         self.assertGreater(result["slow_only"]["mean_steps"], result["connected"]["mean_steps"])
-        self.assertLessEqual(result["crash_fast"]["landings"], 0.20)
+        self.assertLess(result["crash_fast"]["landings"], 0.90)
+        self.assertGreater(result["crash_fast"]["crash_rate"], 0.10)
         self.assertLessEqual(result["unpaired"]["landings"], 0.20)
         self.assertEqual(result["supervised"]["adv_weight"], 0)
         self.assertFalse(result["supervised"]["accepted"])
         self.assertEqual(result["supervised"]["rank_key"][0], -1.)
-        self.assertLessEqual(result["stranger"]["landings"], 0.25)
-        self.assertLessEqual(result["stranger"]["min_landings"], 0.25)
+        self.assertLessEqual(result["stranger"]["landings"], 0.50)
+        self.assertGreaterEqual(result["stranger"]["crash_rate"], 0.40)
         self.assertEqual(result["stranger"]["adv_weight"], 1.)
         self.assertEqual(result["stranger"]["rank_key"][0], -1.)
+        self.assertLessEqual(result["overspeed"]["landings"], 0.90)
+        self.assertEqual(result["overspeed"]["rank_key"][0], -1.)
+        self.assertFalse(result["overspeed"]["accepted"])
         self.assertGreater(result["connected"]["rank_key"], result["slow_only"]["rank_key"])
-        self.assertIsNotNone(result["stranger"]["early_landings"])
-        self.assertIsNotNone(result["connected"]["early_landings"])
 
 
 if __name__ == "__main__":

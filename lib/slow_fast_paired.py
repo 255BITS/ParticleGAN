@@ -1,21 +1,21 @@
-"""CPU gate: stranger nearest-state pairs fail; a same-start retime does not.
+"""CPU gate: two teachers, same seed, both land, aligned by progress.
 
-The slow law is a competent controller. It already lands. `stranger` is the
-Lunar collector: plentiful pairs whose target is a fast action from a different
-episode at the nearest state. There is no shared landing. The same full-weight
-paired-error RpGAN step that fits those pairs leaves the pad and does not
-come back.
+The safe teacher is a land-first law. It already lands, and it has no speed
+term. The fast teacher is the same linear spine, trained with an explicit
+altitude speed bias. Speed keeps rising until the landing breaks. There is no
+hand-picked fraction of the fast action and no separate crash law.
 
-`connected` uses the same step, the same learning rate, and the same lander.
-Each row shares the start. The target is a partial retime of the fast law at
-that same state, not another episode's action. By step 100 it is back on the
-pad and faster, and it stays there. adv_weight stays 1. Diagnostic MSE stays
-outside the loss. There is no kinematic safe-fast cost.
+`connected` rolls the same start with both teachers and keeps the episode only
+when both land. Rows are aligned by progress ``t/T``. Neutral is the safe
+action. Target is the fast action at that progress. The held fast teacher is
+the last speed the student can take without losing the pad.
 
-The first 50 updates kick either arm off the pad. The return panel is steps
-100, 200, and 400. Rank is landings first, then fewer steps among successes.
-Crash targets, unpaired targets, and adv_weight 0 stay ineligible.
-This file does not run Lunar Lander.
+The next speed update is `overspeed`: the teacher still lands, and the same
+RpGAN step does not. Past that, the teacher itself crashes. Those failed
+rollouts are `crash_fast` and never enter the fast set. `stranger` is the
+other failure: a different episode's fast action at the nearest state.
+adv_weight stays 1. Diagnostic MSE stays outside the loss. There is no
+kinematic safe-fast cost. This file does not run Lunar Lander.
 """
 import torch
 from torch import nn
@@ -38,10 +38,16 @@ TIME_SCORE = 0.5
 STEPS = 400
 BATCH = 96
 POLICY_LR = 0.02
-# Fraction of the same-state fast law taken as the connected target.
-# The full fast action and the duration ratio (~0.32) are still off the pad
-# at step 100. A quarter-step is back on every return checkpoint.
-RETIME = 0.25
+# Explicit speed term on the fast teacher (cost of remaining altitude).
+# The safe teacher uses weight 0. One curriculum, one seed:
+#   update 2: teacher still lands (~23 steps); progress-aligned student holds
+#   update 3: teacher still lands and is faster; that student loses the pad
+#   update 6: the teacher itself drops below the landing floor
+SPEED_BIAS = 0.02
+TEACHER_LR = 0.02
+HELD_TEACHER_STEPS = 2
+OVERSPEED_TEACHER_STEPS = 3
+BREAK_TEACHER_STEPS = 6
 NEAREST_DIST = 0.75
 CRITIC_LR = 1e-3
 GRAD_CLIP = 1.0
@@ -61,13 +67,16 @@ FAST_B = torch.tensor([0., 0.02])
 CRASH_B = torch.tensor([0., -0.55])
 
 # Thresholds sit inside the gap measured for seed 0 on this plant.
-# Stranger nearest pairs do not return. The same-start retime does.
+# Progress pairs from teacher update 2 hold the pad and beat the safe law.
+# Update 3 and the teacher's own crash rows do not. Stranger nearest does not.
 CONNECTED_LAND_MIN = 0.98
-CONNECTED_STEPS_MAX = 26.0
+CONNECTED_STEPS_MAX = 32.0
 CONNECTED_CRASH_MAX = 0.02
 CONNECTED_MIN_LAND_MIN = 0.95
-STRANGER_LAND_MAX = 0.25
-STEP_GAP_MIN = 8.0
+STRANGER_LAND_MAX = 0.50
+STRANGER_CRASH_MIN = 0.40
+OVERSPEED_LAND_MAX = 0.90
+STEP_GAP_MIN = 6.0
 BASELINE_LAND_MIN = 0.98
 BASELINE_STEPS_MIN = 30.0
 SLOW_ONLY_LAND_MIN = 0.95
@@ -78,19 +87,24 @@ CRASH_CEILING = 0.10
 SUPERVISED_LAND_MIN = 0.90
 
 MAPPING = (
-    dict(toy="A competent slow law already lands. Fast and crash laws are labels.",
-         gym="The #18 controller already lands. Crashes stay out of the fast set."),
-    dict(toy="stranger pastes a different episode's fast action onto the nearest "
-             "state. The pairs are plentiful. The same RpGAN step does not return "
-             "to the pad.",
-         gym="Current Lunar collect matches different successful episodes by "
-             "start, terrain, and nearest state. slow_seed != fast_seed. "
-             "That run went 20/20 to 0/20. Do not train those pairs."),
-    dict(toy="connected keeps the start. The target is a 0.25 retime of the fast "
-             "law at that same state. The same RpGAN step, same learning rate, "
-             "and same lander weights are back on the pad from step 100 and faster.",
-         gym="Rework collect so each pair is one landing re-timed, same seed, "
-             "before the next cuda:1 run. adv_weight stays 1. safe_fast_weight stays 0."),
+    dict(toy="Safe teacher: land-first linear law, speed weight 0. "
+             "Fast teacher: the same spine, altitude speed bias 0.02.",
+         gym="Safe teacher is #18. Fast teacher is that architecture trained "
+             "with an explicit speed term. Do not invent a second crash policy."),
+    dict(toy="Connected pairs use the same start, keep the episode only if both "
+             "land, and align by progress t/T. Neutral is the safe action. "
+             "Target is the fast action at that progress. Held teacher update is 2.",
+         gym="Next Lunar collect uses two teachers, the same seed, and a both-land "
+             "gate. Align by progress (t/T or altitude), not nearest-stranger pools."),
+    dict(toy="One more speed update (3) still lands as a teacher and the student "
+             "loses the pad. By update 6 the teacher itself crashes. Those rows "
+             "stay out of the fast set.",
+         gym="Push the speed term until landings break. Do not shrink the fast "
+             "action by a hand-picked fraction. Crashed fast-teacher rows are not pairs."),
+    dict(toy="Stranger pastes a different episode's recorded fast action onto the "
+             "nearest state. The rows are plentiful. The same RpGAN step loses landings.",
+         gym="Current Lunar collect is that match. slow_seed != fast_seed. "
+             "cuda:1 went 20/20 to 0/20. Do not train those pairs."),
 )
 
 
@@ -159,125 +173,249 @@ def _episode(policy, state):
     return False, HORIZON, visited
 
 
-def _nearest_rows(episodes):
-    """Paste one other episode's fast action onto this slow state.
+def _teacher_loss(policy, starts, speed_weight):
+    """Land on the pad. speed_weight > 0 charges leftover altitude."""
+    state = starts
+    alive = torch.ones(len(starts))
+    total = state.new_zeros(())
+    for _ in range(HORIZON):
+        state = step_plant(state, policy(state))
+        x, y, vx, vy = state.unbind(-1)
+        total = total + (alive * y.clamp(min=0) * speed_weight).sum()
+        near = torch.sigmoid((0.2 - y) * 25)
+        pad_miss = (x.abs() - PAD).clamp(min=0).pow(2)
+        v_miss = ((vx.abs() - V_LIMIT).clamp(min=0).pow(2)
+                  + (vy.abs() - V_LIMIT).clamp(min=0).pow(2))
+        total = total + (alive * near * (4.0 * pad_miss + 4.0 * v_miss + 0.15 * x.pow(2))).sum()
+        done = (y <= 0) | (x.abs() > X_LIMIT) | (y > Y_LIMIT)
+        alive = alive * (~done).float()
+    x, y = state.unbind(-1)[:2]
+    total = total + (alive * (2.0 + y.clamp(min=0) + x.pow(2))).sum()
+    return total / len(starts)
 
-    The partner is the first kept episode with a different start whose fast
-    landing was strictly sooner. Each slow state takes the action at the
-    nearest state on that partner's fast trajectory, and only if the states
-    are within NEAREST_DIST. This is the transplant that left the pad.
-    A global nearest neighbor across every fast episode is not used: that
-    neighbor is often the same-state fast law, and a full finetune can recover.
+
+def _freeze_copy(policy):
+    frozen = SlowPolicy()
+    with torch.no_grad():
+        frozen.w.copy_(policy.w)
+        frozen.b.copy_(policy.b)
+    frozen.eval()
+    for param in frozen.parameters():
+        param.requires_grad_(False)
+    return frozen
+
+
+def train_speed_curriculum(speed_weight=SPEED_BIAS, steps=BREAK_TEACHER_STEPS):
+    """Same spine as the safe teacher. Each update is a faster attempt.
+
+    Returns one frozen policy per update, plus that update's closed-loop eval.
+    The safe teacher is the initialization (speed weight 0, no step taken).
     """
-    states, targets, neutrals, distances = [], [], [], []
-    for episode in episodes:
-        partner = None
-        for other in episodes:
-            if other["start"] == episode["start"]:
-                continue
-            if other["fast_n"] < episode["slow_n"]:
-                partner = other
-                break
-        if partner is None:
-            continue
-        slow_states = episode["slow"]
-        partner_states = partner["fast"]
-        distance = torch.cdist(slow_states, partner_states)
-        nearest = distance.argmin(dim=1)
-        chosen = distance[torch.arange(len(slow_states)), nearest]
-        keep = chosen <= NEAREST_DIST
-        if not bool(keep.any()):
-            continue
-        kept = slow_states[keep]
-        states.append(kept)
-        targets.append(fast_action(partner_states[nearest[keep]]))
-        neutrals.append(slow_action(kept))
-        distances.append(chosen[keep])
-    if not states:
-        raise RuntimeError("nearest-state collector kept no rows")
-    return (torch.cat(states), torch.cat(targets), torch.cat(neutrals), torch.cat(distances))
+    torch.manual_seed(SEED)
+    policy = SlowPolicy()
+    opt = torch.optim.Adam(policy.parameters(), lr=TEACHER_LR)
+    starts = initial_states(64, 11)
+    curve = []
+    for step in range(1, steps + 1):
+        loss = _teacher_loss(policy, starts, speed_weight)
+        opt.zero_grad(set_to_none=True)
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(policy.parameters(), GRAD_CLIP)
+        opt.step()
+        metrics = evaluate_policy(policy)
+        curve.append(dict(step=step, policy=_freeze_copy(policy), **metrics))
+        print(f"[slow-fast] teacher step={step}/{steps} speed_bias={speed_weight} "
+              f"landings={metrics['landings']:.3f} steps={metrics['mean_steps']:.2f} "
+              f"crash={metrics['crash_rate']:.3f}", flush=True)
+    return curve
 
 
-def collect_pairs(n_starts=COLLECT_STARTS, seed=4):
-    """Successful slow/fast pairs from shared starts. Crashes never join the fast set.
+def _rollout(policy, state):
+    """One rollout with the actions that were actually applied."""
+    visited_s, visited_a = [], []
+    current = state.reshape(1, -1)
+    for _ in range(HORIZON):
+        action = policy(current)
+        visited_s.append(current.squeeze(0).detach().clone())
+        visited_a.append(action.squeeze(0).detach().clone())
+        current = step_plant(current, action)
+        x, y, vx, vy = current[0].tolist()
+        if y <= 0 or abs(x) > X_LIMIT or y > Y_LIMIT:
+            success = y <= 0 and abs(x) <= PAD and abs(vx) <= V_LIMIT and abs(vy) <= V_LIMIT
+            return success, len(visited_s), visited_s, visited_a
+    return False, HORIZON, visited_s, visited_a
 
-    `state` / `target` is the fast law at the slow trajectory's own state.
-    `nearest_*` is a fast action taken on a different episode, matched by
-    nearest state. The Lunar finetune trained on the second kind.
-    """
+
+def _both_land_episodes(fast_policy, n_starts, seed):
+    """Same start for both teachers. A fast miss never enters the episode list."""
     starts = initial_states(n_starts, seed)
-    rows = []
-    start_ids = []
-    slow_steps = []
-    fast_steps = []
     episodes = []
     fast_failures = 0
     not_faster = 0
     for index in range(n_starts):
-        slow_ok, slow_n, slow_states = _episode(slow_action, starts[index])
-        fast_ok, fast_n, fast_states = _episode(fast_action, starts[index])
+        slow_ok, slow_n, slow_states, slow_actions = _rollout(slow_action, starts[index])
+        fast_ok, fast_n, fast_states, fast_actions = _rollout(fast_policy, starts[index])
         if not fast_ok:
             fast_failures += 1
             continue
         if not pair_is_kept(slow_ok, fast_ok, slow_n, fast_n):
             not_faster += 1
             continue
-        slow_steps.append(slow_n)
-        fast_steps.append(fast_n)
-        slow_path = torch.stack(slow_states)
-        fast_path = torch.stack(fast_states)
-        episodes.append(dict(start=index, slow=slow_path, fast=fast_path,
-                             slow_n=slow_n, fast_n=fast_n))
-        for state in slow_states:
-            rows.append(state)
-            start_ids.append(index)
-    if not rows:
-        raise RuntimeError("collector kept no slow/fast pairs")
-    state = torch.stack(rows)
-    start_id = torch.tensor(start_ids)
-    neutral = slow_action(state)
-    target = fast_action(state)
-    crashed = crash_action(state)
-    nearest_state, nearest_target, nearest_neutral, nearest_distance = _nearest_rows(episodes)
-    # Same trajectory identity: the slow state, moved partway toward the fast
-    # law at that state. Not a nearest state from another episode.
-    connected_target = (neutral + RETIME * (target - neutral)).clamp(-1, 1)
-    generator = torch.Generator().manual_seed(1)
-    perm = torch.randperm(len(state), generator=generator)
-    # A one-step nudge stays inside the same trajectory. Walk until the start differs.
-    for row in range(len(state)):
-        if start_id[perm[row]] != start_id[row]:
+        episodes.append(dict(
+            start=index,
+            slow=torch.stack(slow_states), fast=torch.stack(fast_states),
+            slow_a=torch.stack(slow_actions), fast_a=torch.stack(fast_actions),
+            slow_n=slow_n, fast_n=fast_n,
+        ))
+    return episodes, fast_failures, not_faster
+
+
+def _progress_rows(episodes):
+    """Align one landing by t/T. Target is the fast action at that progress.
+
+    The row state is the safe teacher's state. The partner index is
+    ``round(progress * (fast_len - 1))`` on the fast trajectory of the same
+    start. It is not a nearest state, and it is not another episode.
+    """
+    states, targets, neutrals, progress, partner = [], [], [], [], []
+    for episode in episodes:
+        slow_n = len(episode["slow"])
+        fast_n = len(episode["fast"])
+        for i in range(slow_n):
+            fraction = 0.0 if slow_n == 1 else i / (slow_n - 1)
+            j = int(round(fraction * (fast_n - 1)))
+            states.append(episode["slow"][i])
+            neutrals.append(episode["slow_a"][i])
+            targets.append(episode["fast_a"][j])
+            progress.append(fraction)
+            partner.append(j)
+    return (torch.stack(states), torch.stack(targets), torch.stack(neutrals),
+            torch.tensor(progress), torch.tensor(partner))
+
+
+def _stranger_rows(episodes):
+    """Fast action from a different episode at the nearest state."""
+    states, targets, neutrals, distances = [], [], [], []
+    for episode in episodes:
+        partner = next(other for other in episodes if other["start"] != episode["start"])
+        distance = torch.cdist(episode["slow"], partner["fast"])
+        nearest = distance.argmin(dim=1)
+        chosen = distance[torch.arange(len(episode["slow"])), nearest]
+        keep = chosen <= NEAREST_DIST
+        if not bool(keep.any()):
             continue
-        for shift in range(1, len(state)):
-            candidate = int((perm[row] + shift) % len(state))
-            if start_id[candidate] != start_id[row]:
-                perm[row] = candidate
-                break
-    unpaired_start = start_id[perm]
-    if torch.any(unpaired_start == start_id):
+        states.append(episode["slow"][keep])
+        targets.append(partner["fast_a"][nearest[keep]])
+        neutrals.append(episode["slow_a"][keep])
+        distances.append(chosen[keep])
+    if not states:
+        raise RuntimeError("nearest-state collector kept no rows")
+    return (torch.cat(states), torch.cat(targets), torch.cat(neutrals), torch.cat(distances))
+
+
+def _crash_rows(fast_policy, n_starts, seed):
+    """Actions from fast-teacher episodes that did not land."""
+    starts = initial_states(n_starts, seed)
+    states, targets, neutrals = [], [], []
+    failures = 0
+    for index in range(n_starts):
+        ok, _, visited_s, visited_a = _rollout(fast_policy, starts[index])
+        if ok:
+            continue
+        failures += 1
+        for state, action in zip(visited_s, visited_a):
+            states.append(state)
+            targets.append(action)
+            neutrals.append(slow_action(state.unsqueeze(0)).squeeze(0))
+    if not states:
+        raise RuntimeError("speed curriculum produced no crashed fast-teacher rows")
+    return torch.stack(states), torch.stack(targets), torch.stack(neutrals), failures
+
+
+def _unpaired_perm(start_id):
+    generator = torch.Generator().manual_seed(1)
+    perm = torch.randperm(len(start_id), generator=generator)
+    for row in range(len(start_id)):
+        if start_id[perm[row]] == start_id[row]:
+            for shift in range(1, len(start_id)):
+                candidate = int((perm[row] + shift) % len(start_id))
+                if start_id[candidate] != start_id[row]:
+                    perm[row] = candidate
+                    break
+    if torch.any(start_id[perm] == start_id):
         raise RuntimeError("unpaired rows must come from a different start")
-    same_state_gap = float((nearest_target - fast_action(nearest_state)).abs().mean())
-    retime_edit = float((connected_target - neutral).abs().mean())
-    print(f"[slow-fast] collect kept_starts={len(slow_steps)}/{n_starts} "
+    return perm
+
+
+def collect_pairs(n_starts=COLLECT_STARTS, seed=4):
+    """Two teachers. Connected rows are same-seed, both-land, progress-aligned.
+
+    The fast teacher is trained until it cannot land. Pairs for the pass arm
+    come from the last update the progress-aligned student can take. The next
+    update is the overspeed control. Crashed rollouts at the break are the
+    crash control and are not in the fast set.
+    """
+    curve = train_speed_curriculum()
+    by_step = {row["step"]: row for row in curve}
+    for step in (HELD_TEACHER_STEPS, OVERSPEED_TEACHER_STEPS, BREAK_TEACHER_STEPS):
+        if step not in by_step:
+            raise RuntimeError(f"speed curriculum did not record update {step}")
+    held = by_step[HELD_TEACHER_STEPS]
+    over = by_step[OVERSPEED_TEACHER_STEPS]
+    broken = by_step[BREAK_TEACHER_STEPS]
+    if held["landings"] < LANDING_FLOOR:
+        raise RuntimeError("held fast teacher already lost the pad")
+    if broken["landings"] >= LANDING_FLOOR:
+        raise RuntimeError("fast teacher never lost the pad; speed did not reach the break")
+    episodes, fast_failures, not_faster = _both_land_episodes(held["policy"], n_starts, seed)
+    if not episodes:
+        raise RuntimeError("collector kept no same-seed both-land pairs")
+    state, target, neutral, progress, partner_index = _progress_rows(episodes)
+    over_eps, _, _ = _both_land_episodes(over["policy"], n_starts, seed)
+    if not over_eps:
+        raise RuntimeError("overspeed teacher kept no both-land pairs")
+    over_state, over_target, over_neutral, _, _ = _progress_rows(over_eps)
+    nearest_state, nearest_target, nearest_neutral, nearest_distance = _stranger_rows(episodes)
+    crash_state, crash_target, crash_neutral, crash_episodes = _crash_rows(
+        broken["policy"], n_starts, seed)
+    start_id = torch.tensor([episode["start"] for episode in episodes for _ in episode["slow"]])
+    perm = _unpaired_perm(start_id)
+    slow_steps = [episode["slow_n"] for episode in episodes]
+    fast_steps = [episode["fast_n"] for episode in episodes]
+    progress_edit = float((target - neutral).abs().mean())
+    print(f"[slow-fast] collect kept_starts={len(episodes)}/{n_starts} "
           f"rows={len(state)} nearest_rows={len(nearest_state)} "
           f"nearest_dist={float(nearest_distance.mean()):.3f} "
-          f"nearest_vs_same_state={same_state_gap:.3f} "
-          f"retime={RETIME} retime_edit={retime_edit:.3f} "
-          f"fast_failures_excluded={fast_failures} not_faster={not_faster} "
+          f"progress_edit={progress_edit:.3f} "
+          f"held_steps={held['mean_steps']:.2f} overspeed_steps={over['mean_steps']:.2f} "
+          f"break_landings={broken['landings']:.3f} "
+          f"fast_failures_excluded={fast_failures} crash_episodes={crash_episodes} "
+          f"not_faster={not_faster} "
           f"slow_steps={sum(slow_steps)/len(slow_steps):.2f} "
           f"fast_steps={sum(fast_steps)/len(fast_steps):.2f}", flush=True)
-    return dict(state=state, neutral=neutral, target=target, crash_target=crashed,
+    return dict(state=state, neutral=neutral, target=target,
                 unpaired_target=target[perm], start_id=start_id,
-                unpaired_start_id=unpaired_start,
+                unpaired_start_id=start_id[perm],
                 nearest_state=nearest_state, nearest_target=nearest_target,
                 nearest_neutral=nearest_neutral, nearest_distance=nearest_distance,
-                connected_state=state, connected_target=connected_target,
-                connected_neutral=neutral, retime=RETIME, retime_edit=retime_edit,
+                connected_state=state, connected_target=target, connected_neutral=neutral,
+                progress=progress, partner_index=partner_index, progress_edit=progress_edit,
+                overspeed_state=over_state, overspeed_target=over_target,
+                overspeed_neutral=over_neutral,
+                crash_state=crash_state, crash_target=crash_target, crash_neutral=crash_neutral,
                 slow_steps=torch.tensor(slow_steps, dtype=torch.float32),
                 fast_steps=torch.tensor(fast_steps, dtype=torch.float32),
                 fast_failures_excluded=fast_failures, not_faster=not_faster,
-                kept_starts=len(slow_steps), rows=len(state),
-                nearest_rows=len(nearest_state))
+                crash_episodes=crash_episodes,
+                kept_starts=len(episodes), rows=len(state), nearest_rows=len(nearest_state),
+                held_teacher_steps=held["mean_steps"], held_teacher_landings=held["landings"],
+                overspeed_teacher_steps=over["mean_steps"],
+                overspeed_teacher_landings=over["landings"],
+                break_teacher_landings=broken["landings"],
+                break_teacher_steps=broken["mean_steps"],
+                teacher_curve=[dict(step=row["step"], landings=row["landings"],
+                                    mean_steps=row["mean_steps"], crash_rate=row["crash_rate"])
+                               for row in curve])
 
 
 class SlowPolicy(nn.Module):
@@ -367,13 +505,15 @@ def _targets_for(mode, table):
         return table["nearest_state"], table["nearest_target"], table["nearest_neutral"]
     if mode == "connected":
         return table["connected_state"], table["connected_target"], table["connected_neutral"]
+    if mode == "overspeed":
+        return table["overspeed_state"], table["overspeed_target"], table["overspeed_neutral"]
     if mode == "slow_only":
         # Same edit scale, target is the slow member. This must not get faster.
         return table["state"], table["neutral"], table["target"]
     if mode == "unpaired":
         return table["state"], table["unpaired_target"], table["neutral"]
     if mode == "crash_fast":
-        return table["state"], table["crash_target"], table["neutral"]
+        return table["crash_state"], table["crash_target"], table["crash_neutral"]
     raise ValueError(f"Unknown GAN arm {mode}")
 
 
@@ -411,11 +551,12 @@ def _gan_step(policy, critic, cap, opt, opt_d, norm, state, target, step, steps,
 
 
 _ARM_REASONS = {
-    "paired": "same-state full fast target; not the gate winner",
+    "paired": "same rows as connected; not a separate gate arm",
     "stranger": "full-weight cross-episode nearest RpGAN; the Lunar miss",
-    "connected": "full-weight same-start retime, same RpGAN step and learning rate",
+    "connected": "full-weight same-seed progress pairs at the held speed",
+    "overspeed": "same alignment one speed update later; the student loses the pad",
     "slow_only": "control arm slow_only",
-    "crash_fast": "control arm crash_fast",
+    "crash_fast": "fast-teacher rows that did not land after the speed break",
     "unpaired": "control arm unpaired",
 }
 
@@ -423,14 +564,13 @@ _ARM_REASONS = {
 def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, table=None, eval_states=None):
     """Train one arm from the competent slow lander.
 
-    `stranger` finetunes every weight on cross-episode nearest-state actions.
-    `connected` finetunes every weight on the same-start retime, at the same
-    learning rate. `crash_fast` and `unpaired` stay full-weight bad targets.
-    `supervised` is MSE only. `zero` is the slow initialization.
-    `paired` is the full same-state fast target and is not a gate arm.
+    `connected` finetunes every weight on same-seed progress pairs from the
+    held fast teacher. `overspeed` is the next speed update. `crash_fast` is
+    the fast teacher's own missed landings. `stranger` is cross-episode
+    nearest state. `supervised` is MSE only. `zero` is the safe initialization.
     """
     if mode not in ("paired", "slow_only", "crash_fast", "unpaired", "supervised",
-                    "zero", "stranger", "connected"):
+                    "zero", "stranger", "connected", "overspeed"):
         raise ValueError(f"Unknown arm {mode}")
     if mode == "supervised":
         if adv_weight != 0:
@@ -447,7 +587,7 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, table=None, eval_states=
     gan_grad_abs = 0.
     diagnostic = None
     min_landings = None
-    panel = mode in ("stranger", "connected")
+    panel = mode in ("stranger", "connected", "overspeed")
     early_landings = None
     return_landings = []
     if mode == "zero":
@@ -554,10 +694,12 @@ def _check(failures, name, ok):
 
 
 def run_gate():
-    """Pass the same-start retime. Stranger nearest pairs must not return."""
+    """Pass held-speed progress pairs. The next speed, crashes, and strangers lose."""
     torch.set_num_threads(1)
     print("[slow-fast] gate start seed=0 adv_weight=1 b_cap_every=4 "
-          f"lr={POLICY_LR} retime={RETIME} panel=stranger,connected", flush=True)
+          f"lr={POLICY_LR} speed_bias={SPEED_BIAS} "
+          f"held={HELD_TEACHER_STEPS} overspeed={OVERSPEED_TEACHER_STEPS} "
+          f"break={BREAK_TEACHER_STEPS}", flush=True)
     table = collect_pairs()
     eval_states = initial_states(EVAL_ROWS, 1000)
     zero = train_arm("zero", table=table, eval_states=eval_states)
@@ -566,8 +708,9 @@ def run_gate():
     unpaired = train_arm("unpaired", table=table, eval_states=eval_states)
     supervised = train_arm("supervised", adv_weight=0, table=table, eval_states=eval_states)
     stranger = train_arm("stranger", table=table, eval_states=eval_states)
+    overspeed = train_arm("overspeed", table=table, eval_states=eval_states)
     connected = train_arm("connected", table=table, eval_states=eval_states)
-    arms = (zero, slow_only, crash_fast, unpaired, supervised, stranger, connected)
+    arms = (zero, slow_only, crash_fast, unpaired, supervised, stranger, overspeed, connected)
     eligible = [row for row in arms if row["rank_key"][0] >= 0]
     winner = max(eligible, key=lambda row: row["rank_key"])["arm"] if eligible else None
     failures = []
@@ -593,9 +736,17 @@ def run_gate():
            and slow_only["adv_weight"] == 1.
            and connected["rank_key"] > slow_only["rank_key"])
     _check(failures, "crash_does_not_win",
-           crash_fast["landings"] <= CONTROL_LAND_MAX
+           crash_fast["landings"] < LANDING_FLOOR
+           and crash_fast["crash_rate"] > CRASH_CEILING
            and crash_fast["rank_key"][0] < 0
+           and crash_fast["adv_weight"] == 1.
            and crash_fast["mean_contact_steps"] < zero["mean_steps"])
+    _check(failures, "overspeed_does_not_win",
+           overspeed["landings"] <= OVERSPEED_LAND_MAX
+           and overspeed["rank_key"][0] < 0
+           and overspeed["adv_weight"] == 1.
+           and overspeed["accepted"] is False
+           and table["overspeed_teacher_steps"] < table["held_teacher_steps"])
     _check(failures, "unpaired_does_not_win",
            unpaired["landings"] <= CONTROL_LAND_MAX and unpaired["rank_key"][0] < 0)
     _check(failures, "mse_rejected",
@@ -605,39 +756,53 @@ def run_gate():
     _check(failures, "stranger_ran_the_gan",
            stranger["adv_weight"] == 1. and stranger["b_cap_applications"] == STEPS // 4
            and stranger["gan_grad_abs"] > 0. and stranger["accepted"] is False)
-    _check(failures, "stranger_does_not_return",
+    _check(failures, "stranger_loses_landings",
            stranger["landings"] <= STRANGER_LAND_MAX
-           and stranger["max_return_landings"] <= STRANGER_LAND_MAX
+           and stranger["crash_rate"] >= STRANGER_CRASH_MIN
            and stranger["rank_key"][0] < 0)
     _check(failures, "stranger_pairs_are_plentiful", table["nearest_rows"] >= 1000)
     _check(failures, "fast_set_excludes_crashes", table["fast_failures_excluded"] == 0
+           and table["crash_episodes"] > 0
            and bool(torch.all(table["fast_steps"] < table["slow_steps"])))
     passed = not failures
     print(f"[slow-fast] GATE {'PASS' if passed else 'FAIL'} winner={winner} "
           f"failures={failures or 'none'}", flush=True)
     return dict(passed=passed, winner=winner, failures=failures, zero=zero, slow_only=slow_only,
                 crash_fast=crash_fast, unpaired=unpaired, supervised=supervised,
-                stranger=stranger, connected=connected,
+                stranger=stranger, overspeed=overspeed, connected=connected,
                 table=dict(kept_starts=table["kept_starts"], rows=table["rows"],
                            nearest_rows=table["nearest_rows"],
                            nearest_dist=float(table["nearest_distance"].mean()),
-                           retime=table["retime"], retime_edit=table["retime_edit"],
+                           progress_edit=table["progress_edit"],
                            fast_failures_excluded=table["fast_failures_excluded"],
+                           crash_episodes=table["crash_episodes"],
                            slow_steps=float(table["slow_steps"].mean()),
-                           fast_steps=float(table["fast_steps"].mean())),
+                           fast_steps=float(table["fast_steps"].mean()),
+                           held_teacher_steps=table["held_teacher_steps"],
+                           held_teacher_landings=table["held_teacher_landings"],
+                           overspeed_teacher_steps=table["overspeed_teacher_steps"],
+                           overspeed_teacher_landings=table["overspeed_teacher_landings"],
+                           break_teacher_landings=table["break_teacher_landings"],
+                           break_teacher_steps=table["break_teacher_steps"],
+                           teacher_curve=table["teacher_curve"]),
                 mapping=MAPPING,
                 thresholds=dict(connected_land_min=CONNECTED_LAND_MIN,
                                 connected_steps_max=CONNECTED_STEPS_MAX,
                                 connected_crash_max=CONNECTED_CRASH_MAX,
                                 connected_min_land_min=CONNECTED_MIN_LAND_MIN,
                                 stranger_land_max=STRANGER_LAND_MAX,
+                                stranger_crash_min=STRANGER_CRASH_MIN,
+                                overspeed_land_max=OVERSPEED_LAND_MAX,
                                 step_gap_min=STEP_GAP_MIN,
                                 landing_floor=LANDING_FLOOR, crash_ceiling=CRASH_CEILING,
                                 baseline_land_min=BASELINE_LAND_MIN,
                                 baseline_steps_min=BASELINE_STEPS_MIN,
                                 slow_only_steps_min=SLOW_ONLY_STEPS_MIN,
                                 control_land_max=CONTROL_LAND_MAX, adv_weight=ADV_WEIGHT,
-                                retime=RETIME, policy_lr=POLICY_LR,
+                                speed_bias=SPEED_BIAS, policy_lr=POLICY_LR,
+                                held_teacher_updates=HELD_TEACHER_STEPS,
+                                overspeed_teacher_updates=OVERSPEED_TEACHER_STEPS,
+                                break_teacher_updates=BREAK_TEACHER_STEPS,
                                 horizon=HORIZON, steps=STEPS))
 
 
@@ -667,7 +832,8 @@ def format_report(result):
     lines = [f"[slow-fast] GATE {'PASS' if result['passed'] else 'FAIL'} winner={result['winner']}"]
     if result["failures"]:
         lines.append("[slow-fast] failed_checks=" + ",".join(result["failures"]))
-    for key in ("zero", "slow_only", "crash_fast", "unpaired", "supervised", "stranger", "connected"):
+    for key in ("zero", "slow_only", "crash_fast", "unpaired", "supervised",
+                "stranger", "overspeed", "connected"):
         lines.append(_fmt(result[key]))
     limits = result["thresholds"]
     collected = result["table"]
@@ -675,9 +841,13 @@ def format_report(result):
         "[slow-fast] collect "
         f"kept_starts={collected['kept_starts']} rows={collected['rows']} "
         f"nearest_rows={collected['nearest_rows']} nearest_dist={collected['nearest_dist']:.3f} "
-        f"retime={collected['retime']} retime_edit={collected['retime_edit']:.3f} "
+        f"progress_edit={collected['progress_edit']:.3f} "
         f"fast_failures_excluded={collected['fast_failures_excluded']} "
-        f"slow_steps={collected['slow_steps']:.2f} fast_steps={collected['fast_steps']:.2f}")
+        f"crash_episodes={collected['crash_episodes']} "
+        f"slow_steps={collected['slow_steps']:.2f} fast_steps={collected['fast_steps']:.2f} "
+        f"held_teacher_steps={collected['held_teacher_steps']:.2f} "
+        f"overspeed_teacher_steps={collected['overspeed_teacher_steps']:.2f} "
+        f"break_landings={collected['break_teacher_landings']:.3f}")
     lines.append(
         "[slow-fast] thresholds "
         f"connected_land>={limits['connected_land_min']} "
@@ -685,13 +855,16 @@ def format_report(result):
         f"connected_crash<={limits['connected_crash_max']} "
         f"connected_min_land>={limits['connected_min_land_min']} "
         f"stranger_land<={limits['stranger_land_max']} "
+        f"stranger_crash>={limits['stranger_crash_min']} "
+        f"overspeed_land<={limits['overspeed_land_max']} "
         f"landing_floor>={limits['landing_floor']} crash_ceiling<={limits['crash_ceiling']} "
-        f"step_gap>={limits['step_gap_min']} retime={limits['retime']} lr={limits['policy_lr']} "
+        f"step_gap>={limits['step_gap_min']} speed_bias={limits['speed_bias']} "
+        f"lr={limits['policy_lr']} "
         f"adv_weight={limits['adv_weight']} horizon={limits['horizon']} updates={limits['steps']}")
     lines.append("[slow-fast] GATE PASS is required before Lunar collect is reworked. "
-                 "The cuda:1 stranger-pair run went 20/20 to 0/20. "
-                 "Do not train the current pairs. Commands: docs/gym-slow-fast.md. "
-                 "No new Lunar landing is claimed here.")
+                 "Next collect: two teachers, same seed, both land, progress alignment. "
+                 "Not nearest-stranger pools. The cuda:1 stranger run went 20/20 to 0/20. "
+                 "Commands: docs/gym-slow-fast.md. No new Lunar landing is claimed here.")
     lines.append("[slow-fast] mapping")
     for row in result["mapping"]:
         lines.append(f"[slow-fast] toy: {row['toy']}")
@@ -715,7 +888,8 @@ def board_markdown(result):
               "Accepted |")
     split = "| --- | ---: | ---: | ---: | ---: | ---: | --- | ---: | --- |"
     body = []
-    for key in ("zero", "slow_only", "crash_fast", "unpaired", "supervised", "stranger", "connected"):
+    for key in ("zero", "slow_only", "crash_fast", "unpaired", "supervised",
+                "stranger", "overspeed", "connected"):
         row = result[key]
         body.append(
             "| {arm} | {landings} | {early} | {min_land} | {steps} | {crash} | {rank} | "
@@ -742,40 +916,52 @@ def board_markdown(result):
         "One seed (`0`), fixed eval starts, no seed sweep. Rank is landings first,",
         "then fewer steps among successes. An arm is ineligible when `adv_weight` is",
         "not 1, `b_cap` did not run, landings fall below 0.90, crashes exceed 0.10,",
-        "or the return panel (steps 100, 200, 400) lost the pad. `stranger` and",
-        "`connected` use the same full lander, the same learning rate, and the same",
-        "RpGAN step. The first 50 updates kick both off the pad. `Early` is that",
-        "step. `Return min` is the worst landing rate from step 100 on.",
+        "or the return panel (steps 100, 200, 400) lost the pad. `connected`,",
+        "`overspeed`, and `stranger` use the same full lander, the same learning rate,",
+        "and the same RpGAN step. The pairs are the difference. `Early` is step 50.",
+        "`Return min` is the worst landing rate from step 100 on.",
         "",
         header,
         split,
         *body,
         "",
-        f"Collector: {collected['kept_starts']} matched starts, {collected['rows']} same-state rows, "
+        f"Safe teacher mean steps {collected['slow_steps']:.2f}. "
+        f"Fast teacher speed bias {result['thresholds']['speed_bias']}: "
+        f"update {result['thresholds']['held_teacher_updates']} lands in "
+        f"{collected['held_teacher_steps']:.2f} steps "
+        f"(landings {collected['held_teacher_landings']:.3f}); "
+        f"update {result['thresholds']['overspeed_teacher_updates']} lands in "
+        f"{collected['overspeed_teacher_steps']:.2f} steps; "
+        f"update {result['thresholds']['break_teacher_updates']} landings "
+        f"{collected['break_teacher_landings']:.3f}.",
+        f"Collector: {collected['kept_starts']} same-seed both-land starts, "
+        f"{collected['rows']} progress-aligned rows (mean edit {collected['progress_edit']:.3f}), "
         f"{collected['nearest_rows']} stranger nearest-state rows "
         f"(mean distance {collected['nearest_dist']:.3f}), "
-        f"connected retime {collected['retime']} (mean edit {collected['retime_edit']:.3f}), "
-        f"fast failures excluded {collected['fast_failures_excluded']}. "
-        f"Mean slow steps {collected['slow_steps']:.2f}, mean fast steps {collected['fast_steps']:.2f}.",
+        f"fast failures excluded from the held set {collected['fast_failures_excluded']}, "
+        f"crash episodes at the break {collected['crash_episodes']}. "
+        f"Mean fast steps on kept pairs {collected['fast_steps']:.2f}.",
         "",
         "## Why the controls lose",
         "",
-        "- `zero` is the competent slow lander. No GAN step, so the rank key is ineligible. "
+        "- `zero` is the safe teacher. No GAN step, so the rank key is ineligible. "
         "It lands, and it is slower than `connected`.",
-        "- `slow_only` is the same RpGAN step with the slow member as the target. "
+        "- `slow_only` is the same RpGAN step with the safe action as the target. "
         "It stays a successful slow landing and loses on steps.",
-        "- `crash_fast` puts crash actions in the fast slot and trains every weight. "
-        "Contact can be sooner. Landings collapse, so the rank key drops it.",
+        "- `crash_fast` trains on actions from fast-teacher episodes that missed the pad "
+        "after the speed break. Contact can be sooner. Landings fall, so the rank key drops it.",
         "- `unpaired` uses fast actions from other starts and trains every weight. "
-        "The student leaves the pad. That is not the same world flown faster.",
-        "- `supervised` matches the fast member with MSE and `adv_weight=0`. "
-        "Landings may be excellent. The rank key rejects it because the #18 step did not run.",
+        "The student leaves the pad.",
+        "- `supervised` matches the progress-aligned fast action with MSE and `adv_weight=0`. "
+        "Landings may hold. The rank key rejects it because the #18 step did not run.",
         "- `stranger` is the Lunar collector: a different episode's fast action at the "
-        "nearest state, plentiful rows, full-weight RpGAN at `adv_weight=1`. It leaves "
-        "the pad and is still off at steps 100, 200, and 400.",
-        "- `connected` is the same update on a same-start retime (0.25 of the fast law "
-        "at that state). It is off the pad at step 50 and back from step 100 through 400, "
-        "with fewer success steps. Diagnostic MSE stays outside the loss.",
+        "nearest state, plentiful rows, full-weight RpGAN at `adv_weight=1`. "
+        "Landings fall and crashes rise.",
+        "- `overspeed` is the same progress alignment one speed update later. "
+        "The teacher still lands. The student does not keep the pad.",
+        "- `connected` is the held speed: same seed, both land, progress `t/T`, "
+        "full fast action, `adv_weight=1`. Landings hold on the return panel and "
+        "success steps fall. Diagnostic MSE stays outside the loss.",
         "",
         "## Lunar validation that this gate is built to catch",
         "",
@@ -793,8 +979,9 @@ def board_markdown(result):
         "",
         "Eval selected none. Longer training was worse. Those pairs are strangers: "
         "different episodes, matched by geometry, no shared landing. The trainer now "
-        "refuses `slow_seed != fast_seed`. Rework collect to connected pairs before "
-        "the next cuda:1 run. This board is not a new Lunar result.",
+        "refuses `slow_seed != fast_seed`. The next collect needs two teachers, the "
+        "same seed, a both-land gate, and progress alignment. Not nearest-stranger "
+        "pools. This board is not a new Lunar result.",
         "",
         "```bash",
         "python -u examples/slow_fast_paired_2d.py",

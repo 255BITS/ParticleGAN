@@ -72,8 +72,9 @@ Keep `particle.yaml` as the paired-error default. Do not ship `adv_weight=0`
 or put action MSE back in place of the GAN. Do not start a seed repeat.
 Earlier landings are not the safe-fast kinematic cost. A later cuda:1 finetune
 fit nearest-state pairs from different episodes and went from 20/20 validation
-landings to 0/20. The CPU gate now fails that stranger pairing and passes a
-same-start retime. Those Lunar pairs must not be trained again. See
+landings to 0/20. The CPU gate now fails that stranger pairing and passes
+same-seed progress pairs from a speed-biased teacher. The next faster update
+loses the pad. Those Lunar pairs must not be trained again. See
 [the Lunar note](../../../docs/gym-slow-fast.md).
 
 ```bash

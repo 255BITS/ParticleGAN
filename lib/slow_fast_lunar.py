@@ -5,8 +5,9 @@ Crashes, timeouts, and flyaways never enter either pool. The matcher below
 is stranger pairing: a slow landing and a different, faster landing whose
 start and terrain are close, with the fast action taken at the nearest state.
 Those pairs do not share a landing. `train_gym_slow_fast.py` refuses them
-(`slow_seed != fast_seed`). Collect has to be reworked to a same-episode
-retime before the next training run. There is no kinematic safe-fast cost
+(`slow_seed != fast_seed`). The next collector has to roll two teachers on
+the same seed, keep a pair only when both land, and align by progress.
+Nearest-stranger pools stay out. There is no kinematic safe-fast cost
 in this file.
 """
 import json

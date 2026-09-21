@@ -113,6 +113,7 @@ The short report is
 The slow→fast continuation of a selected `#18` checkpoint is a separate
 trainer. Nearest-state pairs from different episodes failed closed-loop
 validation (20/20 down to 0/20). The trainer refuses `slow_seed != fast_seed`.
-Collect has to be reworked to a same-episode retime before another run.
+Collect has to be reworked to two teachers, same seed, both-land, progress
+alignment before another run.
 `safe_fast_weight` stays 0. The CPU toy must GATE PASS first. The note is
 [gym-slow-fast.md](gym-slow-fast.md).

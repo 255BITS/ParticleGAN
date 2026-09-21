@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-"""CPU gate: stranger nearest pairs fail; a same-start retime returns.
+"""CPU gate: same-seed progress pairs pass; the next speed and strangers fail.
 
 Lunar Lander is not run. This process must exit 0 (GATE PASS) before Lunar
-collect is reworked. The gym note is docs/gym-slow-fast.md.
+collect is reworked to two teachers. The gym note is docs/gym-slow-fast.md.
 """
 import sys
 from pathlib import Path

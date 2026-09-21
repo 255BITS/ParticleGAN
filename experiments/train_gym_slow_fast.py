@@ -100,7 +100,8 @@ def train(cfg):
         raise ValueError(
             "stranger pairs: slow_seed and fast_seed differ. "
             "Nearest-episode matching has no shared landing. "
-            "Rework collect to connected pairs before training.")
+            "Rework collect to two teachers, same seed, both land, "
+            "progress alignment, before training.")
     out = Path(cfg["out_dir"])
     out.mkdir(parents=True, exist_ok=True)
     if any(out.iterdir()):
