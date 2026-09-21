@@ -19,6 +19,8 @@ normalization_samples: 8192
 eval_episodes: 128
 recovery_window: 64
 edit_frame: cartesian
+rho_low: 0.8
+rho_high: 1.2
 out_dir: results/circle_transition/paired_error
 live_log: results/circle_transition/live.log
 save_checkpoint: true

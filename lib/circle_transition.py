@@ -141,7 +141,7 @@ def assert_aligned(batch, atol=1e-5):
         raise AssertionError("next state does not match the analytic successor")
 
 
-def _sample_signed(count, rng, split, sign, rho_mode, device):
+def _sample_signed(count, rng, split, sign, rho_mode, device, rho_range):
     centers, radii, speeds, phases = [], [], [], []
     have = 0
     while have < count:
@@ -168,9 +168,11 @@ def _sample_signed(count, rng, split, sign, rho_mode, device):
     if rho_mode == "on":
         rho = torch.ones(count, device=device)
     elif rho_mode == "off":
-        rho = RHO_RANGE[0] + (RHO_RANGE[1] - RHO_RANGE[0]) * torch.rand(count, device=device, generator=rng)
+        low, high = rho_range
+        rho = low + (high - low) * torch.rand(count, device=device, generator=rng)
     elif rho_mode == "mixed":
-        rho = RHO_RANGE[0] + (RHO_RANGE[1] - RHO_RANGE[0]) * torch.rand(count, device=device, generator=rng)
+        low, high = rho_range
+        rho = low + (high - low) * torch.rand(count, device=device, generator=rng)
         on_circle = torch.rand(count, device=device, generator=rng) < 0.5
         rho = torch.where(on_circle, torch.ones_like(rho), rho)
     elif rho_mode == "recovery":
@@ -186,14 +188,24 @@ def _sample_signed(count, rng, split, sign, rho_mode, device):
     return CircleBatch(position, center, radius, omega, action, nxt, rho)
 
 
-def sample_rows(n, rng, split="train", rho_mode="mixed", device="cpu"):
-    """Independent local rows. Shuffled. Not a collected trajectory."""
+def sample_rows(n, rng, split="train", rho_mode="mixed", device="cpu", rho_range=None):
+    """Independent local rows. Shuffled. Not a collected trajectory.
+
+    ``rho_range`` changes only off-circle draws in ``off`` and ``mixed``.
+    Recovery panels stay on the protocol radii 0.8 and 1.2.
+    """
     if type(n) is not int or n < 2:
         raise ValueError("n must be an integer >= 2")
+    if rho_range is None:
+        rho_range = RHO_RANGE
+    low, high = float(rho_range[0]), float(rho_range[1])
+    if not math.isfinite(low) or not math.isfinite(high) or low <= 0 or low >= high:
+        raise ValueError("rho_range must be a positive finite interval")
+    rho_range = (low, high)
     device = torch.device(device)
     half = n // 2
-    positive = _sample_signed(half, rng, split, 1., rho_mode, device)
-    negative = _sample_signed(n - half, rng, split, -1., rho_mode, device)
+    positive = _sample_signed(half, rng, split, 1., rho_mode, device, rho_range)
+    negative = _sample_signed(n - half, rng, split, -1., rho_mode, device, rho_range)
     batch = CircleBatch(*(torch.cat([getattr(positive, name), getattr(negative, name)], 0) for name in _FIELDS))
     order = torch.randperm(n, device=device, generator=rng)
     shuffled = batch.index(order)
@@ -395,25 +407,26 @@ def paired_edit_actions(bundle, normalized_action, batch):
     raise ValueError(frame)
 
 
-def cap_radial_edit_scale(critic, targets, noise_hold):
-    """Keep radial critic noise under the restore the radius bar requires.
+def cap_radial_edit_scale(critic, targets, noise_hold=None):
+    """Keep the radial divisor from hiding the restore.
 
-    Paired-edit std is fit on target minus the frozen initial action. A large
-    isotropic init makes that std similar on tangent and radial, so the small
-    restore sits under the noise. The radial divisor is the minimum of the
-    expert radial spread and ``tolerance / (noise_hold * edit_rms)``, where
-    the tolerance is the one-step restore of half the radial RMSE bar. Tangent
-    scale, edit RMS, and noise start stay on the paired edit.
+    ``noise_hold=None`` caps at the expert radial spread. A positive hold also
+    caps at ``tolerance / (noise_hold * edit_rms)``. Tangent scale, edit RMS,
+    and noise start stay on the paired edit.
     """
-    if not math.isfinite(noise_hold) or noise_hold <= 0:
+    if noise_hold is not None and (not math.isfinite(noise_hold) or noise_hold <= 0):
         raise ValueError("noise_hold must be finite and positive")
     signal = float(targets[:, -1].detach().std(unbiased=False).clamp_min(1e-4))
-    hold_sigma = float(noise_hold) * float(critic.edit_rms)
     tolerance = RECOVERY_RATE * (SUCCESS_RADIAL_RMSE * RADIAL_NOISE_FRACTION)
-    if hold_sigma <= 1e-8:
+    if noise_hold is None:
+        hold_sigma = None
         noise_limited = signal
     else:
-        noise_limited = max(tolerance / hold_sigma, 1e-4)
+        hold_sigma = float(noise_hold) * float(critic.edit_rms)
+        if hold_sigma <= 1e-8:
+            noise_limited = signal
+        else:
+            noise_limited = max(tolerance / hold_sigma, 1e-4)
     cap = min(signal, noise_limited)
     before = float(critic.target_std[-1])
     info = dict(capped=False, radial_scale=before, signal_scale=signal, previous_scale=before,
@@ -424,19 +437,6 @@ def cap_radial_edit_scale(critic, targets, noise_hold):
         critic.target_std[-1].copy_(torch.tensor(cap, dtype=critic.target_std.dtype, device=critic.target_std.device))
     info.update(capped=True, radial_scale=cap)
     return info
-
-
-def axis_edit_critic(targets, neutrals, cfg):
-    """One-coordinate paired-error critic. Same card as the 2D edit critic."""
-    from lib.vendor.concept_slider_core.reference import GlobalMixErrorCritic
-    if targets.shape != neutrals.shape or targets.ndim != 2 or targets.shape[1] != 1:
-        raise ValueError("axis critic expects one edit coordinate")
-    critic = GlobalMixErrorCritic(targets.detach().cpu(), neutrals=neutrals.detach().cpu(),
-                                  tokens=cfg["error_tokens"], width=cfg["error_width"], layers=1,
-                                  heads=cfg["error_heads"], score_bound=8.)
-    if critic.normalization != "paired_edit_per_coordinate_std_median_rms_gain":
-        raise ValueError("axis critic must whiten target-minus-neutral")
-    return critic
 
 
 def radial_channel_diagnostics(physical_action, batch):

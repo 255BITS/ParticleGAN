@@ -22,13 +22,13 @@ sys.path.insert(0, str(ROOT))
 
 from experiments.config import read_config
 from lib.circle_transition import (HORIZONS, PANEL_SEEDS, CircleDiscriminator, CircleEncoder,
-    CircleGenerator, CircleScaler, assert_aligned, assert_feedforward, axis_edit_critic,
-    cap_radial_edit_scale, closed_loop_fidelity, compose_pair, encode_pair, evaluation_panel,
+    CircleGenerator, CircleScaler, assert_aligned, assert_feedforward, cap_radial_edit_scale,
+    closed_loop_fidelity, compose_pair, encode_pair, evaluation_panel,
     learned_policy, local_errors, normalized_control_action, paired_edit_actions, protocol,
     radial_channel_diagnostics, radius_hold_gate, sample_rows,
     zero_policy, reversed_policy, expert_policy, evaluate_panel)
-from lib.gym_particle_finetune import (EDIT_NOISE_HOLD, build_edit_critic, configure_control_scope,
-    controller_objective, discriminator_objective, edit_cap, require_live_adversary)
+from lib.gym_particle_finetune import (build_edit_critic, configure_control_scope, controller_objective,
+    discriminator_objective, edit_cap, require_live_adversary)
 from particlegan import get_recipe, learning_rate_scale
 
 
@@ -37,8 +37,8 @@ DEFAULTS = dict(
     num_particles=64, sigma_rel=0.5, pretrain_steps=300, finetune_steps=2000, batch_size=128,
     log_interval=25, adv_weight=1.0, error_tokens=8, error_width=48, error_heads=4,
     normalization_samples=8192, eval_episodes=128, recovery_window=64, edit_frame="radial_tangent",
-    out_dir="results/circle_transition/radial_hold", live_log="results/circle_transition/live.log",
-    save_checkpoint=True)
+    rho_low=0.8, rho_high=1.2, out_dir="results/circle_transition/radial_hold",
+    live_log="results/circle_transition/live.log", save_checkpoint=True)
 
 
 def validate(cfg):
@@ -65,6 +65,11 @@ def validate(cfg):
     require_live_adversary(cfg["adv_weight"])
     if cfg["edit_frame"] not in ("cartesian", "radial_tangent"):
         raise ValueError("edit_frame must be cartesian or radial_tangent")
+    for key in ("rho_low", "rho_high"):
+        if type(cfg[key]) is not float or not math.isfinite(cfg[key]):
+            raise ValueError(f"{key} must be a finite float")
+    if not 0.2 <= cfg["rho_low"] < 1 < cfg["rho_high"] <= 2.5:
+        raise ValueError("training rho range must sit inside (0.2, 2.5) and contain 1")
     if cfg["recovery_window"] >= min(HORIZONS):
         raise ValueError("recovery window must be shorter than every horizon")
 
@@ -257,22 +262,12 @@ def train(cfg):
                 neutrals.append(neutral)
                 targets.append(target)
             neutrals, targets = torch.cat(neutrals), torch.cat(targets)
-        # Cartesian keeps one 2D score, the #22 recipe. Radial hold uses a tangent
-        # score and a radial score so the tight radial divisor cannot drown the step rate.
-        if cfg["edit_frame"] == "cartesian":
-            heads = [(build_edit_critic(targets, neutrals, cfg).to(device), slice(None))]
-            cap_info = None
-        else:
-            tangent = axis_edit_critic(targets[:, :1], neutrals[:, :1], cfg).to(device)
-            radial = axis_edit_critic(targets[:, 1:], neutrals[:, 1:], cfg).to(device)
-            cap_info = cap_radial_edit_scale(radial, targets[:, 1:], EDIT_NOISE_HOLD)
-            heads = [(tangent, slice(0, 1)), (radial, slice(1, 2))]
-        critic = heads[0][0]
+        critic = build_edit_critic(targets, neutrals, cfg).to(device)
         trainable = [parameter for parameter in list(bundle["E_control"].parameters())
                      + list(bundle["G"].branches[1].parameters()) if parameter.requires_grad]
         opt_c = torch.optim.Adam(trainable, lr=finetune_recipe.lr, betas=finetune_recipe.betas)
-        opt_r = torch.optim.Adam([parameter for head, _ in heads for parameter in head.parameters()],
-                                 lr=finetune_recipe.lr * finetune_recipe.d_lr_mult, betas=finetune_recipe.betas)
+        opt_r = torch.optim.Adam(critic.parameters(), lr=finetune_recipe.lr * finetune_recipe.d_lr_mult,
+                                 betas=finetune_recipe.betas)
         fine_rates = [[group["lr"] for group in opt.param_groups] for opt in (opt_c, opt_r)]
         frozen = {name: _snapshot(module) for name, module in
                   (("G1", bundle["G"].branches[0]), ("G3", bundle["G"].branches[2]), ("E_pair", bundle["E"]),
@@ -288,36 +283,38 @@ def train(cfg):
         log("CONTROLLER STEP: real=noise, fake=noise+(pred-target)/scale. Rp logistic, adv_weight=1. "
             "sample-point b_cap every 4 updates, coeff times 4. TRAIN E_control+G2. "
             "FROZEN G1 G3 E_pair prior transition D. diag_action_mse is outside the loss. "
-            f"edit_frame={cfg['edit_frame']} scores={len(heads)}.")
-        if cap_info is not None:
-            log(f"RADIAL HOLD split scores tangent={float(heads[0][0].target_std[0]):.5f} "
-                f"radial={float(heads[1][0].target_std[0]):.5f} capped={cap_info['capped']} "
-                f"signal_radial={cap_info['signal_scale']:.5f} "
-                f"noise_limited={cap_info['noise_limited']:.5f} "
-                f"tolerance={cap_info['tolerance']:.5f} hold_sigma={cap_info['hold_sigma']:.3f}")
+            f"edit_frame={cfg['edit_frame']} train_rho={cfg['rho_low']:.2f},{cfg['rho_high']:.2f}.")
+        if cfg["edit_frame"] == "radial_tangent":
+            cap_info = cap_radial_edit_scale(critic, targets)
+            log(f"RADIAL HOLD scale tangent={float(critic.target_std[0]):.5f} "
+                f"radial={float(critic.target_std[1]):.5f} capped={cap_info['capped']} "
+                f"signal_radial={cap_info['signal_scale']:.5f}")
         else:
             log(f"CARTESIAN edit scale={float(critic.target_std[0]):.5f},{float(critic.target_std[1]):.5f}")
+        train_rho = (cfg["rho_low"], cfg["rho_high"])
         bundle["E_control"].train()
         bundle["G"].train()
         for step in range(1, cfg["finetune_steps"] + 1):
             scale = _apply_lr((opt_c, opt_r), fine_rates, step, cfg["finetune_steps"], finetune_recipe)
-            held = sample_rows(cfg["batch_size"], data_rng, "train", "mixed", device)
+            held = sample_rows(cfg["batch_size"], data_rng, "train", "mixed", device, rho_range=train_rho)
             with torch.no_grad():
                 predicted_d = normalized_control_action(bundle, held.position, held.context())
                 predicted_d, target_d = paired_edit_actions(bundle, predicted_d, held)
-            d_loss, d_terms = _averaged_discriminator(
-                heads, predicted_d, target_d, step, edit_rng["d"], reg, cfg["finetune_steps"])
+            d_loss, d_terms = discriminator_objective(
+                critic, predicted_d, target_d, step, edit_rng["d"], reg, cfg["finetune_steps"])
             opt_r.zero_grad(set_to_none=True)
             d_loss.backward()
             opt_r.step()
             if d_terms["b_cap_applied"]:
                 b_cap_applications += 1
-            batch = sample_rows(cfg["batch_size"], data_rng, "train", "mixed", device)
+            batch = sample_rows(cfg["batch_size"], data_rng, "train", "mixed", device, rho_range=train_rho)
             assert_aligned(batch)
             normalized = normalized_control_action(bundle, batch.position, batch.context())
             predicted, target = paired_edit_actions(bundle, normalized, batch)
-            g_loss, g_terms = _averaged_controller(
-                heads, predicted, target, step, edit_rng["g"], cfg["finetune_steps"], cfg["adv_weight"])
+            g_loss, g_terms = controller_objective(
+                critic, predicted, target, step, edit_rng["g"], cfg["finetune_steps"], cfg["adv_weight"])
+            if not torch.allclose(g_loss.detach(), g_terms["error_g"] * cfg["adv_weight"], rtol=1e-4, atol=1e-5):
+                raise RuntimeError("controller loss is not adv_weight times the paired-error RpGAN term")
             opt_c.zero_grad(set_to_none=True)
             g_loss.backward()
             gan_grad_abs += _grad_norm(trainable)
@@ -391,8 +388,7 @@ def train(cfg):
         counts = {name: sum(parameter.numel() for parameter in module.parameters())
                   for name, module in (("G", bundle["G"]), ("E_pair", bundle["E"]),
                                        ("E_control", bundle["E_control"]), ("D", bundle["D"]),
-                                       ("prior", bundle["prior"]))}
-        counts["R"] = sum(parameter.numel() for head, _ in heads for parameter in head.parameters())
+                                       ("prior", bundle["prior"]), ("R", critic))}
         summary = dict(
             config=cfg, protocol=protocol(), gate=gate, evaluation=evaluation,
             parameters=counts, trainable_controller=sum(parameter.numel() for parameter in trainable),
@@ -418,36 +414,6 @@ def train(cfg):
         log(f"GATE {'PASS' if passed else 'FAIL'} train_s={train_seconds:.1f} "
             f"finetune_examples={finetune_draws} b_cap_applications={b_cap_applications}")
     return summary
-
-
-def _averaged_discriminator(heads, predicted, target, step, rng, reg, total_steps):
-    """Mean of per-axis RpGAN discriminator losses. One shared b_cap schedule."""
-    losses, caps, errors = [], [], []
-    applied = 0.
-    for critic, cols in heads:
-        loss, terms = discriminator_objective(
-            critic, predicted[:, cols], target[:, cols], step, rng, reg, total_steps)
-        losses.append(loss)
-        caps.append(terms["b_cap"])
-        errors.append(terms["error_d"])
-        applied = terms["b_cap_applied"]
-    return torch.stack(losses).mean(), dict(
-        b_cap_applied=applied, b_cap=torch.stack(caps).mean(), error_d=torch.stack(errors).mean())
-
-
-def _averaged_controller(heads, predicted, target, step, rng, total_steps, adv_weight):
-    """Mean of per-axis paired-error controller losses, still adv_weight times RpGAN."""
-    losses, errors = [], []
-    for critic, cols in heads:
-        loss, terms = controller_objective(
-            critic, predicted[:, cols], target[:, cols], step, rng, total_steps, adv_weight)
-        losses.append(loss)
-        errors.append(terms["error_g"])
-    loss = torch.stack(losses).mean()
-    error_g = torch.stack(errors).mean()
-    if not torch.allclose(loss.detach(), error_g * adv_weight, rtol=1e-4, atol=1e-5):
-        raise RuntimeError("controller loss is not adv_weight times the paired-error RpGAN term")
-    return loss, dict(error_g=error_g, adv_weight=float(adv_weight))
 
 
 def _evaluate(bundle, cfg, device):
