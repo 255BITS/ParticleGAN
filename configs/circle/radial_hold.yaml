@@ -1,6 +1,7 @@
-# Same paired-error spine as paired_error.yaml. One tangent/radial critic, radial
-# divisor capped at the expert radial spread. The first half of finetune samples
-# off-circle radius from 0.5 to 1.5. The second half returns to 0.8 to 1.2.
+# Paired-error spine. Radial divisor capped at the expert radial spread.
+# First 75% of finetune uses off-circle radius 0.5 to 1.5 so the restore clears
+# the noise. The last 25% freezes E_control and G2 and trains a zero-init tangent
+# residual on the circle, with the tangent divisor tightened under the speed bar.
 # Critic fit and evaluation panels stay on the protocol radius range.
 seed: 24002
 device: cpu
@@ -25,7 +26,8 @@ edit_frame: radial_tangent
 rho_low: 0.8
 rho_high: 1.2
 on_circle_rate: 0.5
-rho_curriculum: true
-out_dir: results/circle_transition/radial_hold
+rho_curriculum: false
+tangent_refine: true
+out_dir: results/circle_transition/tangent_refine
 live_log: results/circle_transition/live.log
 save_checkpoint: true

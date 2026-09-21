@@ -23,6 +23,7 @@ rho_low: 0.8
 rho_high: 1.2
 on_circle_rate: 0.5
 rho_curriculum: false
+tangent_refine: false
 out_dir: results/circle_transition/paired_error
 live_log: results/circle_transition/live.log
 save_checkpoint: true

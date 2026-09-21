@@ -43,6 +43,12 @@ SHIPPED_CLEAR_MARGIN = 0.15
 # Radial critic noise must sit under the one-step restore of half the RMSE bar.
 # Capping only at the expert radial std still left that restore inside the hold.
 RADIAL_NOISE_FRACTION = 0.5
+# Last quarter of a tangent-refine run freezes the radius pathway and fits a
+# tangent residual. The tolerance is half the speed bar at the smallest radius,
+# so the paired-noise floor sits under the signed-step success line.
+TANGENT_REFINE_FRACTION = 0.75
+TANGENT_NOISE_FRACTION = 0.5
+WIDE_RHO_RANGE = (0.5, 1.5)
 CONTEXT_DIM = 4
 STATE_DIM = 2
 ACTION_DIM = 2
@@ -339,12 +345,47 @@ def compose_pair(encoder, generator, prior, fake, context):
     return torch.cat([fake[:, :4], decoded[:, 4:]], 1), decoded, encoding
 
 
+class TangentResidual(nn.Module):
+    """Zero-init correction added only along the requested tangent.
+
+    The base action is detached. Radius stays on the frozen paired-error policy.
+    """
+
+    def __init__(self, width, hidden=32):
+        super().__init__()
+        if type(width) is not int or width < 1 or type(hidden) is not int or hidden < 1:
+            raise ValueError("tangent residual widths must be positive integers")
+        self.net = nn.Sequential(nn.Linear(width, hidden), nn.Tanh(), nn.Linear(hidden, 1))
+        nn.init.zeros_(self.net[-1].weight)
+        nn.init.zeros_(self.net[-1].bias)
+
+    def forward(self, hidden):
+        return self.net(hidden)
+
+
 def normalized_control_action(bundle, position, context):
-    """E_control(position, context) -> z -> G2. No action, phase, or next state."""
+    """E_control(position, context) -> z -> G2. No action, phase, or next state.
+
+    When the tangent residual is active, its output is added in physical
+    tangent units and the base displacement is detached.
+    """
     scaler = bundle["scaler"]
     features = torch.cat([scaler.state(position), scaler.context(context)], 1)
     encoded = bundle["E_control"](features, bundle["prior"])
-    return bundle["G"].branches[1](torch.cat([encoded.codes[:, 0], scaler.context(context)], 1))
+    branch = bundle["G"].branches[1]
+    incoming = torch.cat([encoded.codes[:, 0], scaler.context(context)], 1)
+    head = bundle.get("tangent_head")
+    if head is None or not bundle.get("tangent_head_active", False):
+        return branch(incoming)
+    hidden = incoming
+    for layer in list(branch)[:-1]:
+        hidden = layer(hidden)
+    normalized = branch[-1](hidden)
+    center, angular_step = context[:, :2], context[:, 3]
+    physical = scaler.inverse_action(normalized).detach()
+    tangent, _ = _radial_axis(position, center, angular_step)
+    corrected = physical + head(hidden.detach()) * tangent
+    return scaler.action(corrected)
 
 
 def physical_control_action(bundle, position, center, radius, angular_step):
@@ -441,6 +482,48 @@ def cap_radial_edit_scale(critic, targets, noise_hold=None):
     return info
 
 
+def tangent_hold_tolerance():
+    """Physical tangent noise aimed under the signed-step bar on the smallest circle."""
+    return SUCCESS_SPEED_ERROR * RADIUS_RANGE[0] * TANGENT_NOISE_FRACTION
+
+
+def cap_tangent_edit_scale(critic, noise_hold, tolerance=None):
+    """Shrink the tangent divisor so a speed-bar residual clears the paired-noise hold.
+
+    Radial scale, edit RMS, and noise start stay put. The radius pathway is
+    frozen while this cap is in effect.
+    """
+    if not math.isfinite(noise_hold) or noise_hold <= 0:
+        raise ValueError("noise_hold must be finite and positive")
+    if tolerance is None:
+        tolerance = tangent_hold_tolerance()
+    if not math.isfinite(tolerance) or tolerance <= 0:
+        raise ValueError("tolerance must be finite and positive")
+    hold_sigma = float(noise_hold) * float(critic.edit_rms)
+    if hold_sigma <= 1e-8:
+        raise ValueError("edit RMS is too small to set a tangent noise cap")
+    cap = max(float(tolerance) / hold_sigma, 1e-4)
+    before = float(critic.target_std[0])
+    info = dict(capped=False, tangent_scale=before, previous_scale=before, noise_limited=cap,
+                tolerance=float(tolerance), hold_sigma=hold_sigma)
+    if before <= cap:
+        return info
+    with torch.no_grad():
+        critic.target_std[0].copy_(torch.tensor(cap, dtype=critic.target_std.dtype, device=critic.target_std.device))
+    info.update(capped=True, tangent_scale=cap)
+    return info
+
+
+def isolate_tangent_pair(predicted, target):
+    """Paired-error coordinates whose radial residual is identically zero.
+
+    The tangent column keeps its graph. Used after the radius pathway is frozen.
+    """
+    if predicted.shape != target.shape or predicted.ndim != 2 or predicted.shape[1] != 2:
+        raise ValueError("tangent isolation expects matching [rows, 2] actions")
+    return torch.cat([predicted[:, :1], target[:, 1:].detach()], 1), target
+
+
 def radial_channel_diagnostics(physical_action, batch):
     """Outward-radial absolute error and its correlation with (1 - rho).
 
@@ -450,11 +533,12 @@ def radial_channel_diagnostics(physical_action, batch):
     frame = radial_tangent(action, batch.position, batch.center, batch.angular_step)
     expert = radial_tangent(batch.action, batch.position, batch.center, batch.angular_step)
     radial_l1 = (frame[:, 1] - expert[:, 1]).abs().mean()
+    tangent_l1 = (frame[:, 0] - expert[:, 0]).abs().mean()
     restore = 1 - batch.rho
     centered_action = frame[:, 1] - frame[:, 1].mean()
     centered_restore = restore - restore.mean()
     corr = centered_action.dot(centered_restore) / (centered_action.norm() * centered_restore.norm()).clamp_min(1e-8)
-    return radial_l1, corr
+    return radial_l1, corr, tangent_l1
 
 
 def learned_policy(bundle):

@@ -9,10 +9,11 @@ import yaml
 
 from experiments.train_circle_transition import DEFAULTS, train, validate
 from lib.circle_transition import (CENTER_BINS, CENTER_LIMIT, RADIAL_NOISE_FRACTION, RADIUS_BINS, RADIUS_RANGE,
-    RECOVERY_RATE, SPEED_BINS, SPEED_RANGE, SUCCESS_RADIAL_RMSE, CircleEncoder, CircleScaler, assert_aligned,
-    cap_radial_edit_scale, closed_loop_fidelity, evaluate_panel, evaluation_panel, expert_policy,
-    expert_transition, in_split, missing_restore_policy, paired_edit_actions, parameter_cell, radial_tangent,
-    radius_hold_gate, reversed_policy, rollout, sample_rows, zero_policy)
+    RECOVERY_RATE, SPEED_BINS, SPEED_RANGE, SUCCESS_RADIAL_RMSE, CircleEncoder, CircleScaler, TangentResidual,
+    assert_aligned, cap_radial_edit_scale, cap_tangent_edit_scale, closed_loop_fidelity, evaluate_panel,
+    evaluation_panel, expert_policy, expert_transition, in_split, isolate_tangent_pair, missing_restore_policy,
+    paired_edit_actions, parameter_cell, radial_tangent, radius_hold_gate, reversed_policy, rollout, sample_rows,
+    tangent_hold_tolerance, zero_policy)
 from lib.gym_particle_finetune import (EDIT_NOISE_HOLD, build_edit_critic, configure_control_scope,
     controller_objective, discriminator_objective, edit_cap, paired_noise, require_live_adversary)
 from lib.vendor.concept_slider_core.reference import rp_g_loss
@@ -284,6 +285,37 @@ class RadiusHoldTests(unittest.TestCase):
         signal_only = cap_radial_edit_scale(build_edit_critic(targets, neutrals, cfg), targets)
         self.assertAlmostEqual(signal_only["radial_scale"], signal, places=4)
 
+    def test_tangent_cap_shrinks_only_the_tangent_divisor(self):
+        generator = torch.Generator().manual_seed(6)
+        targets = torch.zeros(256, 2)
+        targets[:, 0] = torch.randn(256, generator=generator) * 0.2
+        targets[:, 1] = torch.randn(256, generator=generator) * 0.02
+        neutrals = torch.randn(256, 2, generator=generator)
+        cfg = dict(error_tokens=8, error_width=48, error_heads=4)
+        critic = build_edit_critic(targets, neutrals, cfg)
+        radial = float(critic.target_std[1])
+        noise = float(critic.noise_start)
+        edit = float(critic.edit_rms)
+        info = cap_tangent_edit_scale(critic, EDIT_NOISE_HOLD, tangent_hold_tolerance())
+        expected = max(tangent_hold_tolerance() / (EDIT_NOISE_HOLD * edit), 1e-4)
+        self.assertTrue(info["capped"])
+        self.assertAlmostEqual(float(critic.target_std[0]), expected, places=5)
+        self.assertAlmostEqual(float(critic.target_std[1]), radial)
+        self.assertAlmostEqual(float(critic.noise_start), noise)
+        self.assertAlmostEqual(float(critic.edit_rms), edit)
+        self.assertLess(expected, 0.02)
+        head = TangentResidual(8)
+        hidden = torch.randn(16, 8)
+        self.assertTrue(torch.equal(head(hidden), torch.zeros(16, 1)))
+        predicted = torch.randn(16, 2, requires_grad=True)
+        target = torch.randn(16, 2)
+        isolated, scored_target = isolate_tangent_pair(predicted, target)
+        self.assertTrue(torch.equal(isolated[:, 1], target[:, 1]))
+        self.assertTrue(torch.equal(isolated[:, 0], predicted[:, 0]))
+        isolated[:, 0].sum().backward()
+        self.assertIsNotNone(predicted.grad)
+        self.assertTrue(torch.equal(predicted.grad[:, 1], torch.zeros(16)))
+
     def test_recipe_configs_name_the_edit_frame(self):
         paired = yaml.safe_load(Path("configs/circle/paired_error.yaml").read_text())
         hold = yaml.safe_load(Path("configs/circle/radial_hold.yaml").read_text())
@@ -302,7 +334,11 @@ class RadiusHoldTests(unittest.TestCase):
         self.assertEqual(paired["on_circle_rate"], 0.5)
         self.assertEqual(hold["on_circle_rate"], 0.5)
         self.assertIs(paired["rho_curriculum"], False)
-        self.assertIs(hold["rho_curriculum"], True)
+        self.assertIs(hold["rho_curriculum"], False)
+        self.assertIs(paired["tangent_refine"], False)
+        self.assertIs(hold["tangent_refine"], True)
+        with self.assertRaises(ValueError):
+            validate({**DEFAULTS, "rho_curriculum": True, "tangent_refine": True})
         on = sample_rows(64, torch.Generator().manual_seed(8), "train", "mixed", on_circle_rate=1.0)
         self.assertTrue(torch.equal(on.rho, torch.ones_like(on.rho)))
         wide = sample_rows(256, torch.Generator().manual_seed(2), "train", "off", rho_range=(0.5, 1.5))
