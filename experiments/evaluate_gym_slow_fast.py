@@ -17,8 +17,7 @@ import torch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from experiments.train_gym_transition import sha256, write_json
-from lib.gym_control import control_action_details
-from lib.gym_particle_finetune import load_paired_controller
+from lib.gym_particle_finetune import load_paired_controller, playback_action
 from lib.slow_fast_lunar import (EVAL_SEEDS, protocol_seeds, read_jsonl, speed_decision, speed_stats)
 
 DEFAULT_OUT = ROOT / "reports/gym/lunar_lander_slow_fast"
@@ -59,7 +58,7 @@ def _overlap_note(seeds, episodes_path, rollouts_path):
 
 def _score(checkpoint, seeds, device, trace_path, label):
     bundle = load_paired_controller(checkpoint, device)
-    action = lambda env, state, previous, terrain: control_action_details(bundle, state, previous, terrain)
+    action = lambda env, state, previous, terrain: playback_action(bundle, state, previous, terrain)
     from lib.gym_control_evaluation import evaluate_controller
     row = evaluate_controller(action, list(seeds), trace_path, label)
     row["speed"] = speed_stats(row["episodes"])
@@ -68,6 +67,9 @@ def _score(checkpoint, seeds, device, trace_path, label):
     row["step"] = int(bundle["step"])
     row["adv_weight"] = float(bundle["config"]["adv_weight"])
     row["safe_fast_weight"] = float(bundle["config"].get("safe_fast_weight", 0.) or 0.)
+    residual = bundle.get("residual")
+    row["playback"] = ("residual scale=0.15 added to frozen tanh(G2)" if residual is not None
+                       else "no residual; E_control -> G2 only")
     return row
 
 
@@ -83,6 +85,7 @@ def _load_or_score(checkpoint, split, role, out, seeds, device, log):
         raise RuntimeError(f"Existing score does not match this checkpoint: {destination}")
     log(f"SCORE {role} {split} checkpoint={checkpoint}")
     row = _score(checkpoint, seeds, device, out / "traces" / f"{role}_{split}.npz", f"slow-fast/{role}/{split}")
+    log(f"PLAYBACK {row['playback']}")
     row.update(role=role, split=split, seeds=list(seeds), device=str(device))
     kept = {key: value for key, value in row.items() if key != "episodes"}
     kept["episodes"] = row["episodes"]

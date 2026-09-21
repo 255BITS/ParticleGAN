@@ -111,6 +111,8 @@ The short report is
 [here](../reports/gym/lunar_lander_particle_finetune/README.md).
 
 The slow→fast continuation of a selected `#18` checkpoint is a separate
-trainer. It keeps this controller step and does not turn on the safe-fast
-cost. The CPU toy must GATE PASS first. Commands are in
+trainer. Unfreezing `E_control` and G2 on nearest-state pairs failed closed-loop
+validation (20/20 down to 0/20). The replacement freezes this controller and
+trains a bounded residual with the same RpGAN step. `safe_fast_weight` stays 0.
+The CPU toy must GATE PASS first. Commands are in
 [gym-slow-fast.md](gym-slow-fast.md).

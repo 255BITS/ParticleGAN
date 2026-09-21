@@ -1,90 +1,101 @@
 # Lunar slow→fast paired finetune
 
-This is the gym path that follows the CPU gate. The controller step is the
-same one as `#18` / `particle.yaml`: paired-error RpGAN, `adv_weight=1`,
-sample-point `b_cap` every fourth update. Diagnostic action MSE is logged
-and is not in the loss. `safe_fast_weight` stays 0. The kinematic plant cost
-is a different arm and is not used here.
+The cuda:1 run that unfroze `#18` and fit nearest-state fast actions
+**destroyed landings**. The next recipe freezes that controller and trains a
+bounded action residual. Do not start that retrain until the CPU gate
+PASSes. This page does not claim a new Lunar landing number.
 
-The CPU toy must **GATE PASS** before a Lunar speed claim:
+## What failed (pop-os cuda:1, `train_scope=control`)
 
-```bash
-python -u examples/slow_fast_paired_2d.py
+Collect from YuE2 `#18` `particle_yue18_143320/best.pt`: **200/200** successful
+landings, 63 fast / 62 slow, **60 pairs**, 13495 rows, `crashes_excluded=0`.
+Train was 2500 steps, `adv_weight=1`, `safe_fast_weight=0`, about 59s, no late
+diagnostic blow-up. Shared-seed validation versus the `#18` baseline:
+
+| Arm | Landings | Success steps | Crashes |
+| --- | ---: | ---: | ---: |
+| **#18 baseline** | **20/20** | **205.4** | 0 |
+| slow→fast @250 | 12/20 | 329.0 | 3 |
+| slow→fast @1000 | **0/20** | — | 19 |
+| slow→fast @2500 | **0/20** | — | 18 |
+
+Eval selected none. Longer training was worse. Pair data looked healthy. The
+failure was the update: nearest-state targets pasted a fast episode's action
+onto a different state, and training `E_control` and G2 overwrote the lander.
+
+## Fix, locked by the CPU gate
+
+`python -u examples/slow_fast_paired_2d.py` must print `GATE PASS` before the
+next gym train. On that plant the same nearest-state pairs do this:
+
+- `overwrite` trains every lander weight with paired-error RpGAN at
+  `adv_weight=1`. Landings go to 0. The rank key rejects it.
+- `anchored` freezes the lander and trains a residual of at most **0.15** per
+  channel, same rows, same RpGAN step, `b_cap` every fourth update. Every
+  recorded checkpoint stays on the pad, and success steps fall. Diagnostic
+  MSE stays outside the loss.
+
+Scale 0.20 dipped landings on the toy, so the gym config locks `residual_scale`
+at 0.15. `adv_weight` stays 1. `safe_fast_weight` stays 0. The kinematic plant
+cost is not the speed mechanism. `train_scope=control` is rejected.
+
+The gym residual is
+
+```text
+physical = clamp(tanh(G2).detach() + 0.15 * tanh(head(state, previous, terrain)), -1, 1)
+loss     = controller_objective on scaler.action(physical)
 ```
 
-Exit 0 prints `GATE PASS`. That board is a 2D pad. It is not a Lunar landing
-count. This checkout does not report Lunar landings.
-
-## What is paired
-
-Roll the frozen `#18` controller (`adv_weight=1`) on `LunarLander-v3`
-continuous. Keep `successful_landing` only. Crashes, timeouts, and
-out-of-bounds episodes are stored in the jsonl so they can be counted, and
-they never enter the fast set. Successes are split by steps-to-land (default: at
-or below the 30th percentile versus at or above the 70th). A pair is one slow
-landing and one strictly faster landing with a nearby start and nearby
-terrain. Rows use the slow trajectory: neutral is the slow action, target is
-the fast action at the nearest state. Playback is still
-`E_control(st, previous at) -> z -> G2`.
+`head` is zero-initialized, so step 0 is the loaded `#18` action. Learning
+rates stay constant: residual `0.01`, critic `1e-3`. The world-model rate is
+not used on the lander. Playback for eval adds the residual. A checkpoint
+without a residual key plays `E_control -> G2` alone, which is how the failed
+run should still be scored.
 
 ## Paths
 
 | Role | Path |
 | --- | --- |
-| `#18` checkpoint | `results/gym/lunar_lander_particle_finetune/particle/best.pt` |
-| Same weights if `best.pt` was not copied | `results/gym/lunar_lander_particle_finetune/particle/checkpoint_2500.pt` |
-| Source episodes, overlap check only | `results/gym/lunar_lander/data/episodes.json` |
-| Collected rollouts | `results/gym/lunar_lander_slow_fast/rollouts.jsonl` |
-| Pairs | `results/gym/lunar_lander_slow_fast/pairs.npz` and `pairs.json` |
-| Train log | `results/gym/lunar_lander_slow_fast/live.log` |
-| Train outputs | `results/gym/lunar_lander_slow_fast/particle/` |
+| `#18` checkpoint | the file the pairs were collected from |
+| Failed overwrite outputs | `results/gym/lunar_lander_slow_fast/particle/` (do not resume) |
+| Pairs, reusable | `results/gym/lunar_lander_slow_fast/pairs.npz` |
+| Next train outputs | `results/gym/lunar_lander_slow_fast/residual/` |
+| Next train log | `results/gym/lunar_lander_slow_fast/residual.log` |
 | Eval report | `reports/gym/lunar_lander_slow_fast/README.md` |
 
-`best.pt` is the selected step-2500 `#18` controller. The trainer reads that
-file; it does not read `particle_safe_fast.yaml`.
-
 Collection seeds start at `591000`. Validation stays `391000–391019` and test
-stays `491000–491049`, the same seeds as
-`lib.gym_control_evaluation.freeze_protocol`. Those eval seeds are refused
-as collection seeds.
+stays `491000–491049`. Those eval seeds are refused as collection seeds.
 
-## pop-os, GPU 1
+## Next cuda:1 command
+
+Reuse the pairs. Fresh output directory. Point `--checkpoint` at the same
+`#18` `best.pt` that collected the pairs (`particle_yue18_143320/best.pt` on
+the machine that ran the failed job). If landings fall, stop. Do not raise
+the residual scale and do not unfreeze `E_control` or G2.
 
 ```bash
 python -u examples/slow_fast_paired_2d.py
 
-python -u experiments/collect_slow_fast_lunar.py \
-  --config configs/gym/lunar_lander_slow_fast/collect.yaml
-tail -F results/gym/lunar_lander_slow_fast/live.log
-
 python -u experiments/train_gym_slow_fast.py \
-  --config configs/gym/lunar_lander_particle_finetune/particle_slow_fast.yaml
-tail -F results/gym/lunar_lander_slow_fast/live.log
+  --config configs/gym/lunar_lander_particle_finetune/particle_slow_fast.yaml \
+  --checkpoint results/gym/lunar_lander_particle_finetune/particle_yue18_143320/best.pt \
+  --pairs results/gym/lunar_lander_slow_fast/pairs.npz \
+  --out-dir results/gym/lunar_lander_slow_fast/residual \
+  --device cuda:1
+tail -F results/gym/lunar_lander_slow_fast/residual.log
 
 python -u experiments/evaluate_gym_slow_fast.py \
-  --baseline results/gym/lunar_lander_particle_finetune/particle/best.pt \
-  --checkpoint results/gym/lunar_lander_slow_fast/particle/checkpoint_250.pt \
-  --checkpoint results/gym/lunar_lander_slow_fast/particle/checkpoint_1000.pt \
-  --checkpoint results/gym/lunar_lander_slow_fast/particle/checkpoint_2500.pt \
+  --baseline results/gym/lunar_lander_particle_finetune/particle_yue18_143320/best.pt \
+  --checkpoint results/gym/lunar_lander_slow_fast/residual/checkpoint_250.pt \
+  --checkpoint results/gym/lunar_lander_slow_fast/residual/checkpoint_1000.pt \
+  --checkpoint results/gym/lunar_lander_slow_fast/residual/checkpoint_2500.pt \
   --device cuda:1 \
   --split validation
 ```
 
-If `best.pt` is absent and `checkpoint_2500.pt` is the selected `#18` file,
-pass that path as `--checkpoint` on the collector and as `--baseline` on the
-eval. Point `particle_slow_fast.yaml` at the same file.
-
-Pairing can be repeated without another rollout. The collector prints nearest
-start and terrain distances. Raise a cap only after looking at those lines:
-
-```bash
-python -u experiments/collect_slow_fast_lunar.py \
-  --from-jsonl \
-  --rollouts results/gym/lunar_lander_slow_fast/rollouts.jsonl \
-  --out results/gym/lunar_lander_slow_fast/pairs.npz \
-  --max-start-distance 0.5 \
-  --max-terrain-distance 0.5
-```
+The log line to look for is `RESIDUAL frozen=#18 scale=0.15`. `E_control and
+G2 are not updated` must stay true. A nonempty `residual/` directory is
+refused; pick another fresh directory instead of deleting a scored run.
 
 ## Eval rule
 
@@ -93,7 +104,7 @@ against the `#18` baseline. `mean_episode_steps` includes crashes and is not
 the speed metric. A candidate is ineligible when landings fall, crashes rise,
 or out-of-bounds rises. Validation selects an eligible checkpoint and writes
 `best.pt`. Test is a separate `--split test` command after that selection.
-Do not treat a toy `GATE PASS` as this table.
+A toy `GATE PASS` is not this table.
 
 ## CPU smoke
 
@@ -106,7 +117,6 @@ python -u experiments/collect_slow_fast_lunar.py \
   --live-log /tmp/slow_fast_collect.log
 ```
 
-Training still needs a real `#18` `best.pt` (or the unit test's tiny
-checkpoint). `tests/test_slow_fast_lunar.py` builds that tiny checkpoint,
-trains 4 steps on CPU, and checks `adv_weight=1`, one `b_cap` application,
-and diagnostic MSE outside the loss.
+`tests/test_slow_fast_lunar.py` trains 4 CPU steps on a tiny checkpoint and
+checks that `E_control` and G2 match the init file, the playback edit is at
+most 0.15, `adv_weight=1`, and one `b_cap` application ran.

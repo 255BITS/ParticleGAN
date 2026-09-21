@@ -9,7 +9,9 @@ import copy
 import json
 from pathlib import Path
 
+import numpy as np
 import torch
+from torch import nn
 from torch.nn import functional as F
 
 from lib.vendor.concept_slider_core.reference import (GlobalMixErrorCritic, noise_std,
@@ -43,6 +45,9 @@ def require_classic_particle_gan(gan, reg):
 
 # YuE2 FORMULATION.md: the cap is applied every fourth update and multiplied by 4.
 EDIT_CAP_EVERY = 4
+# Action residual bound. 0.20 dipped closed-loop landings on the 2D gate.
+RESIDUAL_SCALE = 0.15
+RESIDUAL_IN_DIM = 21  # state 8 + previous action 2 + terrain 11
 # FORMULATION.md: the other controls hold scheduled noise at 1.3 times edit RMS.
 EDIT_NOISE_HOLD = 1.3
 
@@ -67,6 +72,66 @@ def configure_control_scope(bundle):
     if any(p.requires_grad for module in frozen for p in module.parameters()):
         raise ValueError("G1, G3, E_pair, prior, and transition D stay frozen")
     return bundle
+
+
+class ActionResidual(nn.Module):
+    """Bounded edit on a frozen physical action. Last layer starts at zero.
+
+    `forward` returns the edit, at most `scale` on each channel. Step 0 matches
+    the frozen controller.
+    """
+
+    def __init__(self, scale=RESIDUAL_SCALE, width=32, in_dim=RESIDUAL_IN_DIM):
+        super().__init__()
+        if float(scale) != RESIDUAL_SCALE:
+            raise ValueError("residual_scale stays 0.15; 0.20 dipped landings on the toy")
+        if in_dim != RESIDUAL_IN_DIM:
+            raise ValueError(f"residual features are state, previous action, and terrain ({RESIDUAL_IN_DIM})")
+        self.scale = float(scale)
+        self.net = nn.Sequential(nn.Linear(in_dim, width), nn.Tanh(), nn.Linear(width, 2))
+        nn.init.zeros_(self.net[-1].weight)
+        nn.init.zeros_(self.net[-1].bias)
+
+    def forward(self, features):
+        return self.scale * self.net(features).tanh()
+
+
+def residual_physical_action(bundle, states, previous, terrain):
+    """Frozen tanh(G2) plus the residual, clipped to the physical action box.
+
+    E_control and G2 are evaluated without grad. Only the residual can train.
+    """
+    scaler = bundle["scaler"]
+    with torch.no_grad():
+        encoded = bundle["E_control"](torch.cat([scaler.state(states), scaler.action(previous)], 1),
+                                      terrain, bundle["prior"])
+        frozen = bundle["G"].branches[1](torch.cat([encoded.codes[:, 0], terrain], 1)).tanh()
+    residual = bundle.get("residual")
+    if residual is None:
+        return frozen
+    features = torch.cat([states, previous, terrain], 1)
+    if features.shape[1] != RESIDUAL_IN_DIM:
+        raise ValueError(f"residual features must be {RESIDUAL_IN_DIM}-D")
+    return (frozen + residual(features)).clamp(-1, 1)
+
+
+@torch.no_grad()
+def playback_action(bundle, state, previous_action, terrain):
+    """Physical action for a rollout. Applies the residual when the checkpoint has one."""
+    from lib.gym_control import control_action_details
+    action, metadata = control_action_details(bundle, state, previous_action, terrain)
+    residual = bundle.get("residual")
+    if residual is None:
+        return action, metadata
+    device = next(residual.parameters()).device
+    features = torch.cat([
+        torch.as_tensor(np.asarray(state), device=device, dtype=torch.float32).reshape(1, -1),
+        torch.as_tensor(np.asarray(previous_action), device=device, dtype=torch.float32).reshape(1, -1),
+        torch.as_tensor(np.asarray(terrain), device=device, dtype=torch.float32).reshape(1, -1),
+    ], 1)
+    edit = residual(features)[0].detach().cpu().numpy()
+    physical = np.clip(np.asarray(action, dtype=np.float32) + edit, -1., 1.).astype(np.float32)
+    return physical, metadata
 
 
 def normalized_g2_action(bundle, states, previous, terrain):
@@ -225,9 +290,29 @@ def load_particle_checkpoint(path, device="cpu", formats=("gym_particle_finetune
         bundle[key].eval().requires_grad_(False)
     bundle.update(config={**cfg, "context_dim": world["context_dim"]}, world_config=world,
                   step=saved["step"], provenance=saved["provenance"], validation=saved["validation"])
+    _attach_residual(bundle, saved, device)
     summary = Path(path).parent / "summary.json"
     if summary.exists():
         bundle["training_summary"] = json.loads(summary.read_text())
+    return bundle
+
+
+def _attach_residual(bundle, saved, device):
+    """#18 checkpoints have no residual. A slow→fast file must carry both keys."""
+    has_weights = "residual" in saved
+    has_spec = "residual_spec" in saved
+    if not has_weights and not has_spec:
+        bundle["residual"] = None
+        return bundle
+    if not has_weights or not has_spec:
+        raise ValueError("slow-fast checkpoint needs both residual and residual_spec")
+    spec = saved["residual_spec"]
+    residual = ActionResidual(scale=float(spec["scale"]), width=int(spec["width"]),
+                              in_dim=int(spec["in_dim"])).to(device)
+    residual.load_state_dict(saved["residual"])
+    residual.eval().requires_grad_(False)
+    bundle["residual"] = residual
+    bundle["residual_spec"] = dict(spec)
     return bundle
 
 

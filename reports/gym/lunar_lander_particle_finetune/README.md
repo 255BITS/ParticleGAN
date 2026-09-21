@@ -70,12 +70,12 @@ python -u examples/safe_fast_2d.py
 
 Keep `particle.yaml` as the paired-error default. Do not ship `adv_weight=0`
 or put action MSE back in place of the GAN. Do not start a seed repeat.
-Earlier landings are not the safe-fast kinematic cost. The CPU slow→fast toy
-must **GATE PASS** before a Lunar speed claim. The gym path collects
-successful `#18` rollouts, drops crashes from the fast set, pairs nearby
-starts, and calls the same `controller_objective` at `adv_weight=1`.
-
-This checkout did not run that Lunar job and does not claim Lunar landings.
+Earlier landings are not the safe-fast kinematic cost. A later cuda:1 finetune
+that unfroze this controller and fit nearest-state slow→fast pairs went from
+20/20 validation landings to 0/20. The CPU gate now rejects that overwrite.
+The next gym step freezes these weights and trains a residual of scale 0.15.
+It has not been scored on Lunar. See
+[the Lunar note](../../../docs/gym-slow-fast.md).
 
 ```bash
 python -u examples/slow_fast_paired_2d.py

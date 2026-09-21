@@ -81,11 +81,12 @@ prior, and the transition discriminators stay frozen. `particle.yaml` is that
 default. The [safe-fast term](docs/gym-safe-fast.md) is a separate config,
 `particle_safe_fast.yaml`, and does not replace it.
 The [slow→fast paired toy](docs/slow-fast-paired.md) must **GATE PASS**
-(`python -u examples/slow_fast_paired_2d.py`) before a Lunar speed claim.
-The [Lunar slow→fast path](docs/gym-slow-fast.md) collects successful `#18`
-rollouts, pairs slow and fast landings, and finetunes with that same
-paired-error RpGAN (`adv_weight=1`, not the safe-fast kinematic cost).
-A toy PASS is not a Lunar landing number.
+(`python -u examples/slow_fast_paired_2d.py`) before another Lunar retrain.
+The [Lunar slow→fast path](docs/gym-slow-fast.md) froze a working `#18`
+controller and, on cuda:1, lost every validation landing after fitting
+nearest-state pairs with `E_control` and G2 unfrozen. The replacement trains
+only a bounded action residual (`adv_weight=1`, scale 0.15). A toy PASS is
+not a Lunar landing number.
 The [slider-error fine-tune](docs/gym-slider-finetune.md) uses the imitation
 fine-tune's world-model initialization and replaces only action MSE with the
 paired-error critic. G1, G3, the paired encoder, the prior, and the transition

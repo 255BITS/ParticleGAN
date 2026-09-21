@@ -1,13 +1,14 @@
 #!/usr/bin/env python
-"""Finetune a #18 Lunar controller on matched slow/fast landings.
+"""Finetune a frozen #18 Lunar controller with a bounded action residual.
 
-The controller step is `controller_objective`: paired-error RpGAN, adv_weight 1,
-sample-point b_cap every fourth update. Neutral is the slow action. Target is
-the fast action. Diagnostic action MSE is logged under no_grad and is not in
-the loss. The safe-fast kinematic cost is not this trainer.
+E_control and G2 stay at the loaded lander. The only trained module is an
+action residual of at most 0.15 per channel. The controller step is still
+`controller_objective`: paired-error RpGAN, adv_weight 1, sample-point b_cap
+every fourth update. Neutral is the slow action. Target is the fast action.
+Diagnostic action MSE is logged under no_grad and is not in the loss. The
+safe-fast kinematic cost is not this trainer.
 """
 import argparse
-import copy
 import json
 import sys
 import time
@@ -21,16 +22,17 @@ sys.path.insert(0, str(ROOT))
 from experiments.config import read_config
 from experiments.train_gym_particle_finetune import link_live_log
 from experiments.train_gym_transition import parameter_count, sha256, training_recipe, write_json
-from lib.gym_particle_finetune import (EDIT_CAP_EVERY, MODULE_KEYS, build_edit_critic,
-    configure_control_scope, controller_objective, discriminator_objective, edit_cap,
-    load_paired_controller, normalized_g2_action, require_live_adversary)
-from particlegan import learning_rate_scale
+from lib.gym_particle_finetune import (EDIT_CAP_EVERY, MODULE_KEYS, RESIDUAL_IN_DIM,
+    RESIDUAL_SCALE, ActionResidual, build_edit_critic, controller_objective,
+    discriminator_objective, edit_cap, load_paired_controller, require_live_adversary,
+    residual_physical_action)
 
 DEFAULTS = dict(
     arm="slow_fast", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1",
     imitation_weight=0., real_encoding_weight=0., synthetic_reconstruction_weight=0.,
-    adv_weight=1., safe_fast_weight=0., train_scope="control",
+    adv_weight=1., safe_fast_weight=0., train_scope="residual",
+    residual_scale=RESIDUAL_SCALE, residual_lr=0.01, residual_width=32,
     error_tokens=8, error_width=48, error_heads=4,
     checkpoint="results/gym/lunar_lander_particle_finetune/particle/best.pt",
     pairs="results/gym/lunar_lander_slow_fast/pairs.npz",
@@ -38,6 +40,7 @@ DEFAULTS = dict(
     live_log="results/gym/lunar_lander_slow_fast/live.log")
 L2_KEYS = ("imitation_weight", "real_encoding_weight", "synthetic_reconstruction_weight")
 FORMAT = "gym_slow_fast_finetune_v1"
+CRITIC_LR = 1e-3
 
 
 def validate(cfg):
@@ -56,8 +59,14 @@ def validate(cfg):
     require_live_adversary(cfg["adv_weight"])
     if cfg["safe_fast_weight"] != 0:
         raise ValueError("safe_fast_weight stays 0; slow-fast does not use the kinematic plant cost")
-    if cfg["train_scope"] != "control":
-        raise ValueError("train_scope stays control: E_control and G2, not the world")
+    if cfg["train_scope"] != "residual":
+        raise ValueError("train_scope stays residual: freeze #18 and train the action residual")
+    if float(cfg["residual_scale"]) != RESIDUAL_SCALE:
+        raise ValueError("residual_scale stays 0.15; 0.20 dipped landings on the toy")
+    if float(cfg["residual_lr"]) != 0.01:
+        raise ValueError("residual_lr stays 0.01")
+    if type(cfg["residual_width"]) is not int or cfg["residual_width"] < 1:
+        raise ValueError("residual_width must be a positive integer")
     for key in ("error_tokens", "error_width", "error_heads"):
         if type(cfg[key]) is not int or cfg[key] < 1:
             raise ValueError(f"{key} must be a positive integer")
@@ -96,11 +105,16 @@ def train(cfg):
     if len(arrays["states"]) < cfg["batch_size"]:
         raise ValueError("batch_size is larger than the paired rows")
     bundle = load_paired_controller(cfg["checkpoint"], device)
+    if bundle.get("residual") is not None:
+        raise ValueError("start from a frozen #18 checkpoint, not a residual continuation")
     for key in MODULE_KEYS:
-        bundle[key].eval()
-    configure_control_scope(bundle)
-    bundle["E_control"].train()
-    bundle["G"].branches[1].train()
+        bundle[key].eval().requires_grad_(False)
+    residual = ActionResidual(scale=cfg["residual_scale"], width=cfg["residual_width"],
+                              in_dim=RESIDUAL_IN_DIM).to(device)
+    residual.train()
+    bundle["residual"] = residual
+    frozen_ec = [p.detach().clone() for p in bundle["E_control"].parameters()]
+    frozen_g2 = [p.detach().clone() for p in bundle["G"].branches[1].parameters()]
     world = bundle["world_config"]
     columns = _columns(arrays, device)
     with torch.no_grad():
@@ -113,25 +127,18 @@ def train(cfg):
         raise RuntimeError("Edit critic must whiten fast-minus-slow, not absolute actions")
     reg = edit_cap()
     recipe = training_recipe({**world, "steps": cfg["steps"], "batch_size": cfg["batch_size"]})
-    g, ec = bundle["G"], bundle["E_control"]
     adam_kwargs = dict(fused=True) if device.type == "cuda" else {}
-    opt_g = torch.optim.Adam([p for p in list(ec.parameters()) + list(g.branches[1].parameters())
-                              if p.requires_grad], lr=recipe.lr, betas=recipe.betas, **adam_kwargs)
-    opt_r = torch.optim.Adam([p for p in critic.parameters() if p.requires_grad],
-                             lr=recipe.lr * recipe.d_lr_mult, betas=recipe.betas, **adam_kwargs)
-    optimizers = (opt_g, opt_r)
-    base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
-    ema = {**bundle}
-    for key in ("G", "E", "prior", "E_control"):
-        ema[key] = copy.deepcopy(bundle[key]).eval().requires_grad_(False)
+    opt_g = torch.optim.Adam(residual.parameters(), lr=cfg["residual_lr"], **adam_kwargs)
+    opt_r = torch.optim.Adam(critic.parameters(), lr=CRITIC_LR, betas=(0., 0.999), **adam_kwargs)
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(data=11, d_data=21, edit_d=41, edit_g=42).items()}
     objective = dict(
         loss_type="logistic", gan_mode="rp", reg_arm="b_cap", reg_method="autograd",
-        reg_every=EDIT_CAP_EVERY, adv_weight=1., safe_fast_weight=0., train_scope="control",
+        reg_every=EDIT_CAP_EVERY, adv_weight=1., safe_fast_weight=0., train_scope="residual",
+        residual_scale=RESIDUAL_SCALE, residual_lr=cfg["residual_lr"], critic_lr=CRITIC_LR,
         l2_aux_weight=0., diagnostic_mse="logged under no_grad; not added to the controller loss",
         neutral="recorded slow action", target="recorded fast action at the nearest matched state",
-        speed_mechanism="paired successful actions; not the safe-fast kinematic cost",
+        speed_mechanism="bounded residual on a frozen lander; not the safe-fast kinematic cost",
         critic="gmix_t8_w48_l1", normalization=critic.normalization,
         initialization_recipe=recipe.to_dict())
     provenance = dict(
@@ -154,11 +161,23 @@ def train(cfg):
         ids = torch.randint(len(columns[0]), (cfg["batch_size"],), device=device, generator=rng[name])
         return [column[ids] for column in columns]
 
+    def frozen_still_matches():
+        for saved_p, live in zip(frozen_ec, bundle["E_control"].parameters()):
+            if not torch.equal(saved_p, live):
+                raise RuntimeError("E_control changed during residual training")
+        for saved_p, live in zip(frozen_g2, bundle["G"].branches[1].parameters()):
+            if not torch.equal(saved_p, live):
+                raise RuntimeError("G2 changed during residual training")
+
     def save(step):
+        frozen_still_matches()
         saved = dict(format=FORMAT, config=cfg, world_config=world, recipe=objective,
                      scaler=bundle["scaler"].state_dict(), step=step, provenance=provenance,
-                     validation=dict(status="Awaiting shared-seed slow-fast rollout evaluation"))
-        saved.update({key: ema[key].state_dict() for key in MODULE_KEYS})
+                     validation=dict(status="Awaiting shared-seed slow-fast rollout evaluation"),
+                     residual=residual.state_dict(),
+                     residual_spec=dict(scale=RESIDUAL_SCALE, width=cfg["residual_width"],
+                                        in_dim=RESIDUAL_IN_DIM))
+        saved.update({key: bundle[key].state_dict() for key in MODULE_KEYS})
         torch.save(saved, out / f"checkpoint_{step}.pt")
 
     with (out / "log.txt").open("w", buffering=1) as logfile, live.open("a", buffering=1) as livefile, \
@@ -171,25 +190,24 @@ def train(cfg):
 
         log(f"START rows={len(columns[0])} pairs={0 if manifest is None else manifest.get('pairs')} "
             f"steps={cfg['steps']} device={device} adv_weight=1 safe_fast_weight=0")
+        log(f"RESIDUAL frozen=#18 scale={RESIDUAL_SCALE} width={cfg['residual_width']} "
+            f"lr={cfg['residual_lr']} critic_lr={CRITIC_LR} "
+            "E_control and G2 are not updated.")
         log("CONTROLLER STEP paired-error RpGAN. neutral=slow action. target=fast action. "
             f"sample-point b_cap every {EDIT_CAP_EVERY} updates. diag_action_mse is outside the loss.")
         log("REFUSE adv_weight=0, action MSE in the loss, crash rows in the fast set, "
-            "and the safe-fast kinematic cost.")
-        log("PLAYBACK E_control(st, previous at) -> z -> G2. TRAIN E_control and G2. "
-            "FROZEN G1, G3, E_pair, prior, transition D.")
+            "train_scope=control, and the safe-fast kinematic cost.")
+        log("PLAYBACK clamp(tanh(G2) + residual, -1, 1). TRAIN the residual only.")
         started = time.perf_counter()
         sync()
         segment = time.perf_counter()
         optimization_seconds = 0.
         b_cap_applications = 0
         for step in range(1, cfg["steps"] + 1):
-            lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, rates in zip(optimizers, base_rates):
-                for group, rate in zip(opt.param_groups, rates):
-                    group["lr"] = rate * lr_scale
             d_rows = sample("d_data")
             with torch.no_grad():
-                predicted_d = normalized_g2_action(bundle, d_rows[0], d_rows[1], d_rows[4])
+                predicted_d = bundle["scaler"].action(
+                    residual_physical_action(bundle, d_rows[0], d_rows[1], d_rows[4]))
             ld, d_terms = discriminator_objective(
                 critic, predicted_d, bundle["scaler"].action(d_rows[3]), step, rng["edit_d"], reg, cfg["steps"])
             if not torch.isfinite(ld):
@@ -200,7 +218,8 @@ def train(cfg):
             if d_terms["b_cap_applied"]:
                 b_cap_applications += 1
             g_rows = sample("data")
-            predicted = normalized_g2_action(bundle, g_rows[0], g_rows[1], g_rows[4])
+            predicted = bundle["scaler"].action(
+                residual_physical_action(bundle, g_rows[0], g_rows[1], g_rows[4]))
             target = bundle["scaler"].action(g_rows[3])
             lg, g_terms = controller_objective(
                 critic, predicted, target, step, rng["edit_g"], cfg["steps"], cfg["adv_weight"])
@@ -212,15 +231,12 @@ def train(cfg):
             lg.backward()
             opt_g.step()
             with torch.no_grad():
-                for key in ("G", "E", "prior", "E_control"):
-                    for target_p, source in zip(ema[key].parameters(), bundle[key].parameters()):
-                        target_p.lerp_(source, 1 - recipe.ema_decay)
                 action_mse = torch.nn.functional.mse_loss(predicted.detach(), target.detach())
             if step == 1 or step % cfg["log_interval"] == 0 or step in checkpoints:
                 sync()
                 row = dict(step=step, loss=float(lg.detach()), d_loss=float(ld.detach()),
                            g_loss=float(lg.detach()), adv_weight=1., safe_fast_weight=0.,
-                           b_cap_applied=d_terms["b_cap_applied"], lr_scale=lr_scale,
+                           b_cap_applied=d_terms["b_cap_applied"], lr=cfg["residual_lr"],
                            elapsed_seconds=time.perf_counter() - started,
                            action_mse=float(action_mse), l2_aux_weight=0.,
                            **{key: float(value) for key, value in {**d_terms, **g_terms}.items()
@@ -253,7 +269,11 @@ def train(cfg):
             b_cap_applications=b_cap_applications,
             diagnostic_mse="outside the loss",
             selection="Deferred: shared-seed rollout has not been run",
-            initialization="Loaded the paired-error controller. Continued E_control and G2. "
+            train_scope="residual", residual_scale=RESIDUAL_SCALE, residual_lr=cfg["residual_lr"],
+            critic_lr=CRITIC_LR,
+            residual_parameters=parameter_count(residual),
+            initialization="Loaded the paired-error controller. Froze E_control and G2. "
+                           "Trained only the bounded action residual. "
                            "Neutral is the slow action and target is the fast action.")
         write_json(out / "summary.json", summary)
         log(f"COMPLETE train_seconds={optimization_seconds:.1f} b_cap_applications={b_cap_applications} "

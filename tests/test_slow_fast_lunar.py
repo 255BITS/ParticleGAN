@@ -14,7 +14,9 @@ from experiments.evaluate_gym_slow_fast import render_report, select_winner
 from experiments.train_gym_slow_fast import DEFAULTS as TRAIN_DEFAULTS, train, validate as validate_train
 from experiments.train_gym_transition import DEFAULTS as WORLD_DEFAULTS, build_models, sha256
 from lib.gym_control_evaluation import freeze_protocol
-from lib.gym_particle_finetune import MODULE_KEYS, initialize_particle_finetune, load_paired_controller
+from lib.gym_control import control_action_details
+from lib.gym_particle_finetune import (MODULE_KEYS, initialize_particle_finetune,
+    load_paired_controller, playback_action)
 from lib.slow_fast_lunar import (EVAL_SEEDS, TEST_SEEDS, VALIDATION_SEEDS, assert_collection_seeds,
     build_slow_fast_pairs, is_success, load_pairs, mean_success_steps, save_pairs, speed_decision,
     speed_stats, synthetic_episodes)
@@ -118,12 +120,21 @@ class SlowFastLunarTests(unittest.TestCase):
         self.assertEqual(train_cfg["adv_weight"], 1.)
         self.assertEqual(train_cfg["safe_fast_weight"], 0.)
         self.assertEqual(train_cfg["imitation_weight"], 0.)
+        self.assertEqual(train_cfg["train_scope"], "residual")
+        self.assertEqual(train_cfg["residual_scale"], 0.15)
+        self.assertEqual(train_cfg["residual_lr"], 0.01)
         with self.assertRaises(ValueError) as caught:
             validate_train({**train_cfg, "adv_weight": 0.})
         self.assertIn("adv_weight=0", str(caught.exception))
         with self.assertRaises(ValueError) as caught:
             validate_train({**train_cfg, "safe_fast_weight": 1.})
         self.assertIn("kinematic", str(caught.exception))
+        with self.assertRaises(ValueError) as caught:
+            validate_train({**train_cfg, "train_scope": "control"})
+        self.assertIn("residual", str(caught.exception))
+        with self.assertRaises(ValueError) as caught:
+            validate_train({**train_cfg, "residual_scale": 0.20})
+        self.assertIn("0.15", str(caught.exception))
         source = Path(train.__code__.co_filename).read_text()
         self.assertNotIn("gym_shaping_cost", source)
         self.assertNotIn("safe_fast_landing", source)
@@ -156,14 +167,32 @@ class SlowFastLunarTests(unittest.TestCase):
             self.assertIn("diag_action_mse", text)
             self.assertIn("outside the loss", text)
             self.assertIn("kinematic cost", text)
+            self.assertIn("RESIDUAL frozen=#18 scale=0.15", text)
+            self.assertIn("E_control and G2 are not updated", text)
             row = json.loads((root / "run" / "metrics.jsonl").read_text().splitlines()[-1])
             self.assertEqual(row["adv_weight"], 1.)
             self.assertEqual(row["safe_fast_weight"], 0.)
             self.assertEqual(row["l2_aux_weight"], 0.)
             self.assertNotAlmostEqual(row["loss"], row["action_mse"], places=4)
+            before = load_paired_controller(checkpoint)
             bundle = load_paired_controller(root / "run" / "final.pt")
+            self.assertIsNone(before["residual"])
             self.assertEqual(bundle["config"]["arm"], "slow_fast")
             self.assertEqual(float(bundle["config"]["adv_weight"]), 1.)
+            self.assertEqual(bundle["config"]["train_scope"], "residual")
+            self.assertIsNotNone(bundle["residual"])
+            self.assertEqual(bundle["residual"].scale, 0.15)
+            for left, right in zip(before["E_control"].parameters(), bundle["E_control"].parameters()):
+                self.assertTrue(torch.equal(left, right))
+            for left, right in zip(before["G"].branches[1].parameters(),
+                                   bundle["G"].branches[1].parameters()):
+                self.assertTrue(torch.equal(left, right))
+            state = np.zeros(8, dtype=np.float32)
+            previous = np.array([-1., 0.], dtype=np.float32)
+            terrain = np.zeros(11, dtype=np.float32)
+            played, _ = playback_action(bundle, state, previous, terrain)
+            frozen, _ = control_action_details(bundle, state, previous, terrain)
+            self.assertLessEqual(float(np.max(np.abs(played - frozen))), 0.15 + 1e-6)
             self.assertTrue((root / "run" / "live.log").is_symlink())
             replay = load_paired_controller(root / "run" / "checkpoint_4.pt")
             self.assertEqual(sha256(root / "run" / "final.pt"), sha256(root / "run" / "checkpoint_4.pt"))
