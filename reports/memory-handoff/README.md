@@ -1,4 +1,7 @@
-Latest completed round: [G recurrence round11 assessment](gru_round11/assessment.md). Five scouts, no improvement over the round10 winner; no longer runs selected.
+**Start here:** [circle-toy collaborator guide](../../docs/circle-toy.md).
+Latest completed round: [separate G state round18](state_round18/assessment.md).
+The round12 shuffled-mismatch reference remains ahead; autonomous circle tracing
+is unsolved. The round10/11 overview below is historical.
 
 # Local memory GAN scouts: no full-rollout training
 

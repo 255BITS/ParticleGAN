@@ -1,5 +1,9 @@
 # Sequential shared-memory circle experiment
 
+**Continuing this toy? Read [the current start guide](../../docs/circle-toy.md).**
+Shuffled local training is allowed; full generated trajectories are evaluation-only.
+The study below is the original observation-conditioned experiment.
+
 **Current target:** autonomous generation from noise and empty memory, with no
 realtime expert or real starting prefix. See [continuation notes](NEXT.md) and
 [the new GPU trainer](../../experiments/autonomous_memory.py). The results below

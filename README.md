@@ -2,6 +2,9 @@
 
 **Learnable particle priors and GAN building blocks for PyTorch.**
 
+**Circle-tracing experiments:** [start here](docs/circle-toy.md) for the local-training
+contract, runnable baseline, leaderboard and collaborator handoff on this branch.
+
 [API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md) · [Minimal GAN loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-training-loop) ·
 [Minimal DDGAN + UCD loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-ddgan--ucd-loop)
 

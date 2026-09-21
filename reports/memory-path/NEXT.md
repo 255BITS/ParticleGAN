@@ -1,4 +1,14 @@
-# Status: paused after round18
+# Current entry point (September 21, 2026)
+
+The toy is preserved for collaborator experiments. Start with
+[the circle-toy guide](../../docs/circle-toy.md) for commands, metrics and next steps.
+The clarified requirement allows shuffled local training, but forbids playing full
+generated trajectories during training. Full rollouts are evaluation-only. The
+current local trainer still encodes ordered real prefixes sequentially.
+No experiments were launched for this documentation handoff. The notes below
+are historical; their no-push and shelving instructions describe the old checkpoint.
+
+# Historical status: paused after round18
 
 User requested a commit and is considering shelving this experiment. No further
 scouts are queued; resume experiments only when requested. The tested local
