@@ -5,6 +5,10 @@ controller step is YuE2's paired-error relativistic logistic loss on the
 edit-normalized G2 residual, with sample-point `b_cap` on that critic.
 `adv_weight` is locked at 1. A configured GAN with weight 0 is rejected.
 Imitation and reconstruction L2 stay out of the graph.
+`configs/gym/lunar_lander_particle_finetune/particle.yaml` is this recipe:
+the safe-fast weights default to 0, so they are not in the graph.
+The optional safe-fast arm is a different file,
+[`particle_safe_fast.yaml`](gym-safe-fast.md).
 
 This is the continuation of the collapsed four-path particle finetune. On the
 shared-protocol board that arm scored **0/20 validation** and **2/50 test**

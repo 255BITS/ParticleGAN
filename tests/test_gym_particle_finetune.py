@@ -198,6 +198,8 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertIn("l2_aux=0", text)
             self.assertIn("adv_weight=1", text)
             self.assertIn("Not supervised_only", text)
+            self.assertIn("SAFE-FAST off", text)
+            self.assertEqual(summary["safe_fast_weight"], 0.)
             self.assertIn("edit-normalized", text)
             self.assertNotIn("latent-joint", text)
             self.assertTrue((root / "particle" / "live.log").is_symlink())
@@ -212,11 +214,15 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertEqual(recipe["critic"], "gmix_t8_w48_l1")
             self.assertEqual(recipe["train_scope"], "control")
             self.assertEqual(recipe["normalization"], "paired_edit_per_coordinate_std_median_rms_gain")
+            self.assertEqual(recipe["safe_fast_weight"], 0.)
+            self.assertEqual(recipe["safe_fast_horizon"], 0)
             self.assertIn("paired-error", summary["initialization"])
             self.assertEqual(summary["adv_weight"], 1.)
             self.assertEqual(summary["b_cap_applications"], 0)
             row = json.loads((root / "particle" / "metrics.jsonl").read_text().splitlines()[-1])
             self.assertEqual(row["l2_aux_weight"], 0.)
+            self.assertEqual(row["safe_fast_weight"], 0.)
+            self.assertEqual(row["safe_fast"], 0.)
             self.assertIn("action_mse", row)
             bundle = load_particle_checkpoint(root / "particle" / "final.pt")
             replay = load_particle_checkpoint(root / "particle" / "checkpoint_2.pt")
@@ -234,6 +240,96 @@ class ParticleFinetuneTests(unittest.TestCase):
                 torch.testing.assert_close(trained, started)
             with self.assertRaises(FileExistsError):
                 train(cfg)
+
+    def test_safe_fast_config_is_optional_and_adv_weight_stays_live(self):
+        from experiments.config import read_config
+        root = Path(__file__).resolve().parents[1]
+        proven = {**DEFAULTS, **read_config(root / "configs/gym/lunar_lander_particle_finetune/particle.yaml")}
+        from experiments.train_gym_particle_finetune import validate
+        validate(proven)
+        self.assertEqual(proven["adv_weight"], 1.)
+        self.assertEqual(proven["safe_fast_weight"], 0.)
+        self.assertEqual(proven["imitation_weight"], 0.)
+        armed = {**DEFAULTS, **read_config(
+            root / "configs/gym/lunar_lander_particle_finetune/particle_safe_fast.yaml")}
+        validate(armed)
+        self.assertEqual(armed["adv_weight"], 1.)
+        self.assertEqual(armed["safe_fast_weight"], 1.)
+        self.assertEqual(armed["safe_fast_horizon"], 48)
+        self.assertEqual(armed["safe_fast_time_weight"], 0.15)
+        self.assertNotEqual(armed["out_dir"], proven["out_dir"])
+        inactive = {**armed, "adv_weight": 0.}
+        with self.assertRaises(ValueError) as caught:
+            validate(inactive)
+        self.assertIn("adv_weight=0 leaves RpGAN and b_cap configured but not applied",
+                      str(caught.exception))
+        missing_horizon = {**armed, "safe_fast_horizon": 0}
+        with self.assertRaises(ValueError) as caught:
+            validate(missing_horizon)
+        self.assertIn("safe_fast_horizon", str(caught.exception))
+
+    def test_safe_fast_weight_zero_does_not_attach_and_positive_weight_trains(self):
+        def has_grad(module):
+            return any(p.grad is not None and float(p.grad.abs().sum()) > 0 for p in module.parameters())
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.fixture(root)
+            from lib.gym_particle_finetune import (build_edit_critic, configure_control_scope,
+                controller_objective, initialize_particle_finetune, normalized_g2_action)
+            from lib.safe_fast_landing import gym_shaping_cost
+            bundle = configure_control_scope(initialize_particle_finetune(root / "initial.pt", "cpu"))
+            records = build_expert_records(root / "episodes.json")
+            states = torch.from_numpy(records["states"])
+            previous = torch.from_numpy(records["previous_actions"])
+            actions = torch.from_numpy(records["actions"])
+            terrain = torch.from_numpy(records["terrain"])
+            with torch.no_grad():
+                neutrals = normalized_g2_action(bundle, states, previous, terrain)
+            critic = build_edit_critic(bundle["scaler"].action(actions), neutrals,
+                                       {**DEFAULTS, "error_tokens": 4, "error_width": 8, "error_heads": 2})
+            predicted = normalized_g2_action(bundle, states[:4], previous[:4], terrain[:4])
+            sentinel = torch.zeros((), requires_grad=True)
+            loss, terms = controller_objective(
+                critic, predicted, bundle["scaler"].action(actions[:4]), 1,
+                torch.Generator().manual_seed(9), 8, 1., sentinel, 0.)
+            self.assertEqual(terms["safe_fast_weight"], 0.)
+            loss.backward()
+            self.assertIsNone(sentinel.grad)
+            for module in (bundle["E_control"], bundle["G"], critic):
+                module.zero_grad(set_to_none=True)
+
+            def predict_physical(full, prev, terr):
+                return bundle["scaler"].inverse_action(normalized_g2_action(bundle, full, prev, terr))
+
+            cost = gym_shaping_cost(states[:4], previous[:4], terrain[:4], predict_physical, 2,
+                                    0.15, 4., 2., 0.62, 0.35)
+            self.assertTrue(cost.requires_grad)
+            cost.backward()
+            self.assertTrue(has_grad(bundle["E_control"]))
+            self.assertTrue(has_grad(bundle["G"].branches[1]))
+            self.assertFalse(has_grad(bundle["G"].branches[0]))
+            self.assertFalse(has_grad(bundle["E"]))
+
+            cfg = {**DEFAULTS, "steps": 1, "checkpoints": [1], "batch_size": 4, "log_interval": 1,
+                   "device": "cpu", "checkpoint": str(root / "initial.pt"),
+                   "episodes": str(root / "episodes.json"), "out_dir": str(root / "safe"),
+                   "live_log": str(root / "safe_live.log"), "safe_fast_weight": 1.,
+                   "safe_fast_time_weight": 0.15, "safe_fast_crash_weight": 4.,
+                   "safe_fast_success_bonus": 2., "safe_fast_speed_limit": 0.62,
+                   "safe_fast_pad_half": 0.35, "safe_fast_horizon": 2}
+            summary = train(cfg)
+            text = (root / "safe_live.log").read_text()
+            self.assertIn("SAFE-FAST on", text)
+            self.assertIn("adv_weight=1", text)
+            self.assertIn("Not adv_weight=0", text)
+            self.assertEqual(summary["adv_weight"], 1.)
+            self.assertEqual(summary["safe_fast_weight"], 1.)
+            self.assertEqual(summary["l2_aux_weight"], 0.)
+            row = json.loads((root / "safe" / "metrics.jsonl").read_text().splitlines()[-1])
+            self.assertEqual(row["adv_weight"], 1.)
+            self.assertEqual(row["safe_fast_weight"], 1.)
+            self.assertTrue(torch.isfinite(torch.tensor(row["safe_fast"])))
 
 
 def records_actions(records):

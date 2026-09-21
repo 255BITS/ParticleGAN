@@ -1,0 +1,25 @@
+# Safe-fast arm. Not the #18 paired-error default.
+# particle.yaml leaves safe_fast_weight at 0. This file keeps adv_weight at 1
+# and adds the toy's safe-fast weights. No Lunar landing score is claimed here.
+arm: particle
+steps: 2500
+batch_size: 256
+checkpoints: [250, 1000, 2500]
+device: cuda:1
+out_dir: results/gym/lunar_lander_particle_finetune/particle_safe_fast
+live_log: results/gym/lunar_lander_particle_finetune/safe_fast_live.log
+imitation_weight: 0.0
+real_encoding_weight: 0.0
+synthetic_reconstruction_weight: 0.0
+adv_weight: 1.0
+train_scope: control
+error_tokens: 8
+error_width: 48
+error_heads: 4
+safe_fast_weight: 1.0
+safe_fast_time_weight: 0.15
+safe_fast_crash_weight: 4.0
+safe_fast_success_bonus: 2.0
+safe_fast_speed_limit: 0.62
+safe_fast_pad_half: 0.35
+safe_fast_horizon: 48

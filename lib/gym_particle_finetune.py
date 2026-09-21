@@ -17,6 +17,7 @@ from lib.vendor.concept_slider_core.reference import (GlobalMixErrorCritic, nois
 from particlegan.grad_regularizers import GradientPenalty
 
 from experiments.train_gym_transition import build_models, load_checkpoint
+from lib.safe_fast_landing import require_live_adversary as _require_live_adversary
 from lib.gym_previous_gan import adversarial_loss
 from lib.gym_transition import (GymTransitionEncoder, GymTransitionScaler,
     composed_transition, contact_record, encoded_transition)
@@ -48,10 +49,7 @@ EDIT_NOISE_HOLD = 1.3
 
 def require_live_adversary(adv_weight):
     """Reject a configured GAN that the controller step does not apply."""
-    if adv_weight == 0:
-        raise ValueError("adv_weight=0 leaves RpGAN and b_cap configured but not applied")
-    if adv_weight != 1.:
-        raise ValueError("adv_weight stays 1 so the controller step is the adversarial loss")
+    _require_live_adversary(adv_weight)
 
 
 def configure_control_scope(bundle):
@@ -117,8 +115,13 @@ def discriminator_objective(critic, predicted, target, step, rng, reg, total_ste
                                        b_cap_applied=float(step % reg.lazy_k == 0))
 
 
-def controller_objective(critic, predicted, target, step, rng, total_steps, adv_weight):
-    """Adversarial controller loss. There is no action-MSE term in this graph."""
+def controller_objective(critic, predicted, target, step, rng, total_steps, adv_weight,
+                         safe_fast_cost=None, safe_fast_weight=0.):
+    """RpGAN controller loss, plus an optional safe-fast cost.
+
+    `safe_fast_weight=0` does not read `safe_fast_cost`, so the proven
+    paired-error graph stays the adversarial term alone. There is no action MSE.
+    """
     require_live_adversary(adv_weight)
     noise, fake = paired_noise(critic, predicted, target, step, rng, total_steps)
     with torch.no_grad():
@@ -126,7 +129,16 @@ def controller_objective(critic, predicted, target, step, rng, total_steps, adv_
     adversarial = rp_g_loss(real_score, critic(fake))
     if not adversarial.requires_grad:
         raise RuntimeError("Controller adversarial loss has no gradient")
-    return adv_weight * adversarial, dict(error_g=adversarial.detach(), adv_weight=float(adv_weight))
+    loss = adv_weight * adversarial
+    terms = dict(error_g=adversarial.detach(), adv_weight=float(adv_weight),
+                 safe_fast_weight=float(safe_fast_weight), safe_fast=predicted.new_zeros(()))
+    if safe_fast_weight == 0:
+        return loss, terms
+    if not torch.is_tensor(safe_fast_cost) or not safe_fast_cost.requires_grad:
+        raise ValueError("safe_fast_weight>0 requires a differentiable safe-fast cost")
+    loss = loss + float(safe_fast_weight) * safe_fast_cost
+    terms["safe_fast"] = safe_fast_cost.detach()
+    return loss, terms
 
 
 def initialize_particle_finetune(checkpoint, device="cpu"):
