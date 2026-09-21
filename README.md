@@ -2,6 +2,10 @@
 
 **Learnable particle priors and GAN building blocks for PyTorch.**
 
+**Circle transition toy:** [collaborator start guide](docs/circle-toy.md).
+Fresh local-training experiment, with no explicit-memory requirement or inherited
+circle runs; [new benchmark](reports/circle-transition/README.md).
+
 [API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md) · [Minimal GAN loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-training-loop) ·
 [Minimal DDGAN + UCD loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-ddgan--ucd-loop)
 
