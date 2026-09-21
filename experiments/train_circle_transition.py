@@ -37,7 +37,8 @@ DEFAULTS = dict(
     num_particles=64, sigma_rel=0.5, pretrain_steps=300, finetune_steps=2000, batch_size=128,
     log_interval=25, adv_weight=1.0, error_tokens=8, error_width=48, error_heads=4,
     normalization_samples=8192, eval_episodes=128, recovery_window=64, edit_frame="radial_tangent",
-    rho_low=0.8, rho_high=1.2, on_circle_rate=0.5, out_dir="results/circle_transition/radial_hold",
+    rho_low=0.8, rho_high=1.2, on_circle_rate=0.5, rho_curriculum=False,
+    out_dir="results/circle_transition/radial_hold",
     live_log="results/circle_transition/live.log", save_checkpoint=True)
 
 
@@ -72,6 +73,8 @@ def validate(cfg):
         raise ValueError("training rho range must sit inside (0.2, 2.5) and contain 1")
     if type(cfg["on_circle_rate"]) is not float or not 0 <= cfg["on_circle_rate"] <= 1:
         raise ValueError("on_circle_rate must be a float in [0, 1]")
+    if type(cfg["rho_curriculum"]) is not bool:
+        raise ValueError("rho_curriculum must be a bool")
     if cfg["recovery_window"] >= min(HORIZONS):
         raise ValueError("recovery window must be shorter than every horizon")
 
@@ -286,7 +289,7 @@ def train(cfg):
             "sample-point b_cap every 4 updates, coeff times 4. TRAIN E_control+G2. "
             "FROZEN G1 G3 E_pair prior transition D. diag_action_mse is outside the loss. "
             f"edit_frame={cfg['edit_frame']} train_rho={cfg['rho_low']:.2f},{cfg['rho_high']:.2f} "
-            f"on_circle_rate={cfg['on_circle_rate']:.2f}.")
+            f"on_circle_rate={cfg['on_circle_rate']:.2f} rho_curriculum={int(cfg['rho_curriculum'])}.")
         if cfg["edit_frame"] == "radial_tangent":
             cap_info = cap_radial_edit_scale(critic, targets)
             log(f"RADIAL HOLD scale tangent={float(critic.target_std[0]):.5f} "
@@ -294,12 +297,15 @@ def train(cfg):
                 f"signal_radial={cap_info['signal_scale']:.5f}")
         else:
             log(f"CARTESIAN edit scale={float(critic.target_std[0]):.5f},{float(critic.target_std[1]):.5f}")
-        train_rho = (cfg["rho_low"], cfg["rho_high"])
         on_circle_rate = cfg["on_circle_rate"]
+        curriculum_until = cfg["finetune_steps"] // 2 if cfg["rho_curriculum"] else 0
         bundle["E_control"].train()
         bundle["G"].train()
         for step in range(1, cfg["finetune_steps"] + 1):
             scale = _apply_lr((opt_c, opt_r), fine_rates, step, cfg["finetune_steps"], finetune_recipe)
+            train_rho = (0.5, 1.5) if step <= curriculum_until else (cfg["rho_low"], cfg["rho_high"])
+            if step == curriculum_until + 1 and curriculum_until:
+                log(f"RHO CURRICULUM switch at step {step}: train_rho={train_rho[0]:.2f},{train_rho[1]:.2f}")
             held = sample_rows(cfg["batch_size"], data_rng, "train", "mixed", device, rho_range=train_rho,
                                on_circle_rate=on_circle_rate)
             with torch.no_grad():
