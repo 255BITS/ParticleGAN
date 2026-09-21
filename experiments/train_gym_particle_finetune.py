@@ -20,9 +20,9 @@ sys.path.insert(0, str(ROOT))
 from experiments.config import read_config
 from experiments.train_gym_transition import parameter_count, sha256, training_recipe, write_json
 from lib.gym_control import build_expert_records
-from lib.gym_particle_finetune import (FAKE_PATHS, MODULE_KEYS, REMOVED_L2,
-    diagnostic_l2, initialize_particle_finetune, particle_game, require_classic_particle_gan,
-    transition_batch)
+from lib.gym_particle_finetune import (EMA_KEYS, FAKE_PATHS, MODULE_KEYS, REMOVED_L2,
+    assert_finetune_scope, diagnostic_l2, initialize_particle_finetune, particle_game,
+    require_classic_particle_gan, transition_batch)
 from particlegan import learning_rate_scale
 
 DEFAULTS = dict(arm="particle", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
@@ -85,8 +85,10 @@ def capture_provenance(out, cfg, records, bundle):
         normalization="Unchanged scaler from initialization; fit originally on old training split",
         removed_l2=list(REMOVED_L2), l2_aux_weight=0., fake_paths=list(FAKE_PATHS),
         critics=["joint", "action", "shared state for current and next"],
-        gan="Rp logistic GANLoss",
-        gradient_penalty="sample-point b_cap, autograd L2, coeff 1, kappa 1, every step",
+        gan="Rp logistic GANLoss on the latent joint (record, z)",
+        gradient_penalty="sample-point b_cap on (record, z), autograd L2, coeff 1, kappa 1, every step",
+        trainable=["E_control", "G2", "D_latent"],
+        frozen=["G1", "G3", "E_pair", "prior", "observation D"],
         control_input="Expert previous command in shuffled records; learner previous command at playback")
 
 
@@ -111,7 +113,8 @@ def train(cfg):
         raise FileExistsError(f"Use a fresh empty output directory: {out}")
     live = Path(cfg["live_log"])
     link_live_log(out, live)
-    bundle = initialize_particle_finetune(cfg["checkpoint"], device)
+    bundle = initialize_particle_finetune(cfg["checkpoint"], device, cfg["seed"] + 401)
+    assert_finetune_scope(bundle)
     world = bundle["world_config"]
     expected_episodes = bundle["provenance"].get("dataset", {}).get("episodes.json")
     if expected_episodes is not None and sha256(cfg["episodes"]) != expected_episodes:
@@ -121,31 +124,28 @@ def train(cfg):
     provenance = capture_provenance(out, cfg, records, bundle)
     columns = [torch.as_tensor(records[key], device=device) for key in
                ("states", "previous_actions", "actions", "next_states", "terrain")]
-    g, e, prior, d, ec = [bundle[key] for key in MODULE_KEYS]
+    g, prior, ec = (bundle[key] for key in ("G", "prior", "E_control"))
     recipe = training_recipe({**world, "steps": cfg["steps"], "batch_size": cfg["batch_size"]})
     gan, reg, spread = recipe.make_loss(), recipe.make_gradient_penalty(), recipe.make_prior_regularizer()
     require_classic_particle_gan(gan, reg)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=torch.nn.ModuleList([e, ec]),
+    opt_g, opt_d = recipe.make_optimizers(g, bundle["D_latent"], prior, encoder=ec,
                                           fused=device.type == "cuda")
     optimizers = (opt_g, opt_d)
     base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
     ema = {**bundle}
-    for key in ("G", "E", "prior", "E_control"):
+    for key in EMA_KEYS:
         ema[key] = copy.deepcopy(bundle[key]).eval().requires_grad_(False)
     rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
            for name, offset in dict(data=11, d_data=21, latent=12, contact=31, d_latent=22, d_contact=32).items()}
-    reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 40 + i)
-                for i, role in enumerate(d.roles())}
+    reg_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 40)
     parameter_counts = {key: parameter_count(bundle[key]) for key in MODULE_KEYS}
     trainable_counts = {key: sum(p.numel() for p in bundle[key].parameters() if p.requires_grad)
                         for key in MODULE_KEYS}
     inference_count = parameter_count(ec) + parameter_count(g.branches[1]) + parameter_count(prior)
-    groups = dict(g_encoder=dict(lr=recipe.lr, betas=list(recipe.betas), modules=["G", "E", "E_control"]),
-        prior=dict(lr=recipe.lr * recipe.prior_lr_mult,
-                   betas=list(recipe.prior_betas if recipe.prior_betas is not None else recipe.betas),
-                   modules=["prior"]),
+    groups = dict(control=dict(lr=recipe.lr, betas=list(recipe.betas), modules=["G2", "E_control"]),
         discriminator=dict(lr=recipe.lr * recipe.d_lr_mult, betas=list(recipe.betas),
-                           modules=["D.joint", "D.action", "D.state"]))
+                           modules=["D_latent"]),
+        frozen=dict(modules=["G1", "G3", "E_pair", "prior", "D.joint", "D.action", "D.state"]))
     write_json(out / "provenance.json", provenance)
     write_json(out / "recipe.json", recipe.to_dict())
     write_json(out / "optimizers.json", groups)
@@ -165,10 +165,12 @@ def train(cfg):
         return [column[ids] for column in columns]
 
     def save(step):
-        saved = dict(format="gym_particle_finetune_v1", config=cfg, world_config=world,
+        saved = dict(format="gym_particle_finetune_v2", config=cfg, world_config=world,
             recipe=recipe.to_dict(), scaler=bundle["scaler"].state_dict(), step=step,
             provenance=provenance, validation=dict(status="Awaiting independent control rollout evaluation"))
-        saved.update({key: ema[key].state_dict() for key in MODULE_KEYS})
+        saved.update({key: ema[key].state_dict() for key in EMA_KEYS})
+        saved["D"] = bundle["D"].state_dict()
+        saved["D_latent"] = bundle["D_latent"].state_dict()
         torch.save(saved, out / f"checkpoint_{step}.pt")
 
     with (out / "log.txt").open("w", buffering=1) as logfile, live.open("a", buffering=1) as livefile, \
@@ -181,14 +183,16 @@ def train(cfg):
 
         log(f"START arm=particle steps={cfg['steps']} expert_records={len(columns[0])} "
             f"episodes={len(np.unique(records['episode_ids']))} device={device}")
-        log("G1 -> st; G2 -> at; G3 -> st+1; E_control(st, previous at) -> z -> G; "
-            "E_pair(st, current at) -> z -> G; prior -> z -> G")
+        log("PLAYBACK E_control(st, previous at) -> z -> G2. G1 and G3 stay in the frozen world model.")
         log("REMOVED L2: imitation MSE; real reconstruction MSE/BCE; synthetic reconstruction MSE/BCE. "
             "AUX L2 weight=0.")
-        log("KEPT: Rp logistic GANLoss; sample-point b_cap on joint, action, and shared state D; "
-            "MoG prior variance/covariance regularizer. No slider critic.")
-        log(f"LR groups G+E+E_control={groups['g_encoder']['lr']} prior={groups['prior']['lr']} "
-            f"D={groups['discriminator']['lr']} b_cap coeff={reg.coeff} kappa={reg.kappa}")
+        log("CONTROLLER UPDATE adv_weight=1 l2_aux=0 supervised_only=false. "
+            "The generator step is RpGAN only and is what steps E_control and G2.")
+        log("OBJECTIVE latent-joint Rp logistic GANLoss. sample-point b_cap on D(record, z). "
+            "Live real pair (record, E_control code). Observation marginals are not in the loss.")
+        log("FROZEN G1, G3, E_pair, MoG table, observation D. The table is not stepped, so prior reg is a log only.")
+        log(f"LR groups G2+E_control={groups['control']['lr']} D_latent={groups['discriminator']['lr']} "
+            f"b_cap coeff={reg.coeff} kappa={reg.kappa}")
         log(f"Trainable parameters={trainable_counts}; inference={inference_count}")
         started = time.perf_counter()
         sync()
@@ -199,37 +203,40 @@ def train(cfg):
             for opt, rates in zip(optimizers, base_rates):
                 for group, rate in zip(opt.param_groups, rates):
                     group["lr"] = rate * lr_scale
-            d.requires_grad_(True)
+            critic = bundle["D_latent"]
+            critic.requires_grad_(True)
             d_rows = rows("d_data")
             with torch.no_grad():
                 real_d, fakes_d, _ = transition_batch(bundle, *d_rows, rng["d_latent"], rng["d_contact"])
-            ld, d_terms = particle_game(d, real_d, fakes_d, d_rows[-1], gan, reg=reg, step=step, rngs=reg_rngs)
+            ld, d_terms = particle_game(critic, real_d, fakes_d, d_rows[-1], gan, reg=reg, step=step, rng=reg_rng)
             if not torch.isfinite(ld):
                 raise FloatingPointError(f"Nonfinite discriminator loss at step {step}")
             opt_d.zero_grad(set_to_none=True)
             ld.backward()
             opt_d.step()
-            d.requires_grad_(False)
+            critic.requires_grad_(False)
             g_rows = rows("data")
             real, fakes, decoded_control = transition_batch(
                 bundle, *g_rows, rng["latent"], rng["contact"], straight_through=True)
-            lg, g_terms = particle_game(d, real, fakes, g_rows[-1], gan, marginal_weight=cfg["marginal_weight"])
-            lp = spread(prior.z)
+            lg, g_terms = particle_game(critic, real, fakes, g_rows[-1], gan)
+            with torch.no_grad():
+                lp = spread(prior.z)
             diag = diagnostic_l2(decoded_control, real)
-            loss = lg + lp
-            if not torch.isfinite(loss):
+            loss = lg
+            if not torch.isfinite(loss) or not torch.isfinite(lp):
                 raise FloatingPointError(f"Nonfinite generator loss at step {step}")
             opt_g.zero_grad(set_to_none=True)
             loss.backward()
             opt_g.step()
             with torch.no_grad():
-                for key in ("G", "E", "prior", "E_control"):
+                for key in EMA_KEYS:
                     for target, source in zip(ema[key].parameters(), bundle[key].parameters()):
                         target.lerp_(source, 1 - recipe.ema_decay)
             if step == 1 or step % cfg["log_interval"] == 0 or step in checkpoints:
                 sync()
                 row = dict(step=step, loss=float(loss.detach()), d_loss=float(ld.detach()),
                     g_loss=float(lg.detach()), prior_loss=float(lp.detach()), l2_aux_weight=0.,
+                    adversarial_weight=1., supervised_only=False,
                     lr_scale=lr_scale, elapsed_seconds=time.perf_counter() - started,
                     **{f"d_{key}": float(value.detach()) for key, value in d_terms.items()},
                     **{f"g_{key}": float(value.detach()) for key, value in g_terms.items()},
@@ -237,7 +244,8 @@ def train(cfg):
                 metrics.write(json.dumps(row, allow_nan=False) + "\n")
                 log(f"step={step}/{cfg['steps']} loss={row['loss']:.5f} D={row['d_loss']:.5f} "
                     f"G={row['g_loss']:.5f} prior={row['prior_loss']:.5f} "
-                    f"diag_action_mse={row['action_mse']:.5f} l2_aux=0 elapsed_s={row['elapsed_seconds']:.1f}")
+                    f"diag_action_mse={row['action_mse']:.5f} adv_weight=1 l2_aux=0 "
+                    f"elapsed_s={row['elapsed_seconds']:.1f}")
             if step in checkpoints:
                 sync()
                 optimization_seconds += time.perf_counter() - segment
@@ -257,9 +265,13 @@ def train(cfg):
             real_draws=2 * cfg["steps"] * cfg["batch_size"], simulator_calls=0,
             train_seconds=optimization_seconds, total_seconds=time.perf_counter() - started,
             checkpoints={path.name: sha256(path) for path in sorted(out.glob("*.pt"))},
-            removed_l2=list(REMOVED_L2), l2_aux_weight=0., fake_paths=list(FAKE_PATHS),
+            removed_l2=list(REMOVED_L2), l2_aux_weight=0., adversarial_weight=1.,
+            supervised_only=False, fake_paths=list(FAKE_PATHS),
+            objective="latent-joint RpGAN; live real pair; sample-point b_cap on (record, z)",
+            controller_update="E_control and G2 are stepped by the RpGAN generator loss only",
+            prior_regularizer="logged only; the MoG table is frozen",
             selection="Deferred: no landing evaluation has been run for this arm",
-            initialization="Same frozen adversarial checkpoint; E_control copied from paired E; scaler retained")
+            initialization="Same frozen adversarial checkpoint; E_control copied from paired E; scaler retained; fresh D(record, z)")
         write_json(out / "summary.json", summary)
         log(f"COMPLETE train_seconds={optimization_seconds:.1f}; awaiting rollout selection")
     return summary

@@ -10,8 +10,9 @@ import torch
 from experiments.train_gym_transition import DEFAULTS as WORLD_DEFAULTS, build_models, sha256
 from experiments.train_gym_particle_finetune import DEFAULTS, train
 from lib.gym_control import build_expert_records, control_action
-from lib.gym_particle_finetune import (FAKE_PATHS, control_decode, diagnostic_l2,
-    load_particle_checkpoint, particle_game, require_classic_particle_gan, transition_batch)
+from lib.gym_particle_finetune import (FAKE_PATHS, assert_finetune_scope, control_decode,
+    diagnostic_l2, load_particle_checkpoint, particle_game, require_classic_particle_gan,
+    transition_batch)
 from lib.gym_state_control import training_recipe
 
 
@@ -73,7 +74,7 @@ class ParticleFinetuneTests(unittest.TestCase):
             diag = diagnostic_l2(control, real)
             self.assertFalse(any(value.requires_grad for value in diag.values()))
 
-    def test_rpgan_bcap_reaches_encoders_generators_and_critics(self):
+    def test_latent_joint_reaches_control_path_and_not_the_world_model(self):
         def has_grad(module):
             return any(p.grad is not None and float(p.grad.abs().sum()) > 0 for p in module.parameters())
 
@@ -82,40 +83,40 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.fixture(root)
             from lib.gym_particle_finetune import initialize_particle_finetune
             bundle = initialize_particle_finetune(root / "initial.pt", "cpu")
+            assert_finetune_scope(bundle)
             records = build_expert_records(root / "episodes.json")
             columns = [torch.from_numpy(records[key][:4]) for key in
                        ("states", "previous_actions", "actions", "next_states", "terrain")]
             recipe = training_recipe({**bundle["world_config"], "steps": 2, "batch_size": 4})
             gan, reg = recipe.make_loss(), recipe.make_gradient_penalty()
             require_classic_particle_gan(gan, reg)
-            expectations = dict(control=("E_control",), prior=(), encoded=("E",), composed=("E",))
-            seen = set()
-            for path, encoders in expectations.items():
-                for key in ("G", "E", "prior", "D", "E_control"):
-                    bundle[key].zero_grad(set_to_none=True)
-                bundle["D"].requires_grad_(False)
-                real, fakes, _ = transition_batch(bundle, *columns, torch.Generator().manual_seed(3),
-                                                  torch.Generator().manual_seed(4), True)
-                seen.update(fakes)
-                loss, _ = particle_game(bundle["D"], real, {path: fakes[path]}, columns[-1], gan)
-                loss.backward()
-                self.assertTrue(all(has_grad(branch) for branch in bundle["G"].branches), path)
-                self.assertTrue(has_grad(bundle["prior"]), path)
-                self.assertFalse(has_grad(bundle["D"]), path)
-                for name in ("E", "E_control"):
-                    self.assertEqual(has_grad(bundle[name]), name in encoders, path + name)
-            self.assertEqual(seen, set(FAKE_PATHS))
-            for key in ("G", "E", "prior", "D", "E_control"):
+            for key in ("G", "E", "prior", "D", "E_control", "D_latent"):
                 bundle[key].zero_grad(set_to_none=True)
-            bundle["D"].requires_grad_(True)
+            bundle["D_latent"].requires_grad_(False)
             real, fakes, _ = transition_batch(bundle, *columns, torch.Generator().manual_seed(3),
                                               torch.Generator().manual_seed(4), True)
-            loss, terms = particle_game(bundle["D"], real, fakes, columns[-1], gan, reg=reg, step=1,
-                                        rngs={role: torch.Generator().manual_seed(5) for role in bundle["D"].roles()})
+            self.assertEqual(set(fakes), set(FAKE_PATHS))
+            loss, _ = particle_game(bundle["D_latent"], real, fakes, columns[-1], gan)
             loss.backward()
-            self.assertTrue(all(has_grad(critic) for critic in bundle["D"].critics.values()))
-            self.assertTrue(all(name + "_penalty" in terms for name in ("joint", "action", "state", "next_state")))
-            self.assertTrue(all(not has_grad(bundle[key]) for key in ("G", "E", "prior", "E_control")))
+            self.assertTrue(has_grad(bundle["E_control"]))
+            self.assertTrue(has_grad(bundle["G"].branches[1]))
+            self.assertFalse(has_grad(bundle["G"].branches[0]))
+            self.assertFalse(has_grad(bundle["G"].branches[2]))
+            self.assertFalse(any(has_grad(bundle[key]) for key in ("E", "prior", "D", "D_latent")))
+            detached = {name: (record.detach(), code.detach()) for name, (record, code) in fakes.items()}
+            with self.assertRaises(RuntimeError):
+                particle_game(bundle["D_latent"], real, detached, columns[-1], gan)
+            for key in ("G", "E", "prior", "D", "E_control", "D_latent"):
+                bundle[key].zero_grad(set_to_none=True)
+            bundle["D_latent"].requires_grad_(True)
+            real, fakes, _ = transition_batch(bundle, *columns, torch.Generator().manual_seed(3),
+                                              torch.Generator().manual_seed(4))
+            loss, terms = particle_game(bundle["D_latent"], real, fakes, columns[-1], gan, reg=reg, step=1,
+                                        rng=torch.Generator().manual_seed(5))
+            loss.backward()
+            self.assertTrue(has_grad(bundle["D_latent"]))
+            self.assertIn("joint_penalty", terms)
+            self.assertTrue(all(not has_grad(bundle[key]) for key in ("G", "E", "prior", "D", "E_control")))
 
     def test_cpu_smoke_writes_flushed_logs_and_replays(self):
         with tempfile.TemporaryDirectory() as td:
@@ -128,11 +129,22 @@ class ParticleFinetuneTests(unittest.TestCase):
             summary = train(cfg)
             self.assertEqual(summary["simulator_calls"], 0)
             self.assertEqual(summary["l2_aux_weight"], 0.)
+            self.assertEqual(summary["adversarial_weight"], 1.)
+            self.assertFalse(summary["supervised_only"])
             self.assertEqual(summary["real_draws"], 16)
             text = (root / "live.log").read_text()
             self.assertIn("REMOVED L2", text)
             self.assertIn("sample-point b_cap", text)
+            self.assertIn("latent-joint", text)
             self.assertIn("l2_aux=0", text)
+            self.assertIn("adv_weight=1", text)
+            self.assertIn("supervised_only=false", text)
+            fresh = initialize_again(root)
+            for key in ("E", "prior", "D"):
+                for trained, start in zip(bundle_params(root, key), fresh[key].parameters()):
+                    torch.testing.assert_close(trained, start, atol=0, rtol=0)
+            self.assertTrue(any(not torch.equal(a, b) for a, b in zip(
+                bundle_params(root, "G2"), fresh["G"].branches[1].parameters())))
             self.assertTrue((root / "particle" / "live.log").is_symlink())
             self.assertIn("REMOVED L2", (root / "particle" / "log.txt").read_text())
             recipe = json.loads((root / "particle" / "recipe.json").read_text())
@@ -142,6 +154,11 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertEqual(recipe["reg_method"], "autograd")
             row = json.loads((root / "particle" / "metrics.jsonl").read_text().splitlines()[-1])
             self.assertEqual(row["l2_aux_weight"], 0.)
+            self.assertEqual(row["adversarial_weight"], 1.)
+            self.assertFalse(row["supervised_only"])
+            self.assertEqual(row["loss"], row["g_loss"])
+            self.assertIn("d_joint_penalty", row)
+            self.assertEqual(recipe["reg_coeff"], 1.)
             self.assertIn("action_mse", row)
             bundle = load_particle_checkpoint(root / "particle" / "final.pt")
             replay = load_particle_checkpoint(root / "particle" / "checkpoint_2.pt")
@@ -164,6 +181,13 @@ def records_actions(records):
 def initialize_again(root):
     from lib.gym_particle_finetune import initialize_particle_finetune
     return initialize_particle_finetune(root / "initial.pt", "cpu")
+
+
+def bundle_params(root, key):
+    bundle = load_particle_checkpoint(root / "particle" / "final.pt")
+    if key == "G2":
+        return bundle["G"].branches[1].parameters()
+    return bundle[key].parameters()
 
 
 if __name__ == "__main__":

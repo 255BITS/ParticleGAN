@@ -1,14 +1,14 @@
 # ParticleGAN fine-tune vs L2 imitation
 
-Hypothesis: the imitation fine-tune lands because pointwise action MSE trains
-`E_control` and G2 directly. The joint fine-tune kept that MSE and added
-reconstruction MSE/BCE plus the RpGAN/b_cap game, and landings fell. This arm
-deletes every paired MSE/BCE term, including any tiny auxiliary, and fine-tunes
-the same checkpoint with only the relativistic paired game (sample-point
-`b_cap`, joint and marginal critics) and the MoG table regularizer. If action
-MSE was necessary, landings should stay well below imitation. If the joint
-arm's drop was L2/GAN interference, a pure adversarial fine-tune could do
-better. One unrun recipe cannot decide that.
+Hypothesis: deleting paired L2 is viable when the adversary is the one
+ParticleGAN already uses without reconstruction. An observation critic matches
+transition marginals and leaves the conditional action free, which is the
+collapse (diagnostic action MSE rising, 0/20 validation and 2/50 test landings
+on the shared protocol). `examples/five_modes.py` drops reconstruction and
+scores the joint pair `(x, z)` with Rp logistic loss and sample-point `b_cap`.
+This arm does that. Adversarial weight is 1. L2 weights stay 0. The generator
+step is what updates `E_control` and G2. G1, G3, `E_pair`, the MoG table, and
+the observation critics stay frozen.
 
 Playback is still `E_control(st, previous at) -> z -> G2`. G1 and G3 stay in
 the trained graph. Details, learning-rate groups, and the removed terms are in
@@ -66,20 +66,33 @@ After a full run, score checkpoints 250, 1,000, and 2,500 on the existing
 control validation worlds before any test claim. This repository's control
 evaluator currently accepts only the imitation and joint checkpoint format, so
 that rollout harness still has to grow a loader for
-`gym_particle_finetune_v1`. Until then the landing cell stays empty.
+`gym_particle_finetune_v2`. Until then the landing cell stays empty.
 
 This checkout has no GPU and no saved adversarial checkpoint, so the full
 command was not run. A CPU correctness smoke did run: two updates on a
 synthetic eight-record fixture, with flushed `live.log` lines, auxiliary L2
-weight 0, gradient reach into both encoders and all three generators, and
-identical actions from `final.pt` and `checkpoint_2.pt`. That smoke is not a
-Lunar Lander score.
+weight 0, adversarial weight 1, gradient from the RpGAN step into `E_control`
+and G2 only, and identical actions from `final.pt` and `checkpoint_2.pt`.
+That smoke is not a Lunar Lander score.
+
+## CPU 2D gate
+
+`python -u experiments/toy_particle_native_2d.py` (also
+`tests/test_particle_native_2d.py`). Rp logistic, `b_cap` coefficient 1,
+adversarial weight 1, L2 weight 0. EMA action MSE:
+
+| Arm | EMA action MSE | Result |
+| --- | ---: | --- |
+| Observation critics, detached reals, all modules trained | 2.1065 | collapse (≥ 1) |
+| Live `(record, z)` pair, `E_control` and G2 only | 0.1396 | pass (≤ 0.18) |
+
+Init error was 1.9997. About 6 seconds on CPU.
 
 ## Recommendation
 
-Keep the imitation controller as the playable default. Run one 2,500-update
-fine-tune on GPU 1, then evaluate landings. Do not start a seed repeat, a
-slider hybrid, or a claim that this arm beats 50/50. If the rollout is far
-below imitation, the next useful change is to put action MSE back on
-`E_control` only and leave the ParticleGAN terms on the prior and state paths,
-rather than tuning `b_cap`.
+Keep the imitation controller as the playable default until this arm has a
+landing rollout. The 2D gate says the controller update should stay the
+latent-joint RpGAN term, not an L2 anchor and not an observation-only critic.
+Do not set the adversarial weight to 0. Do not start a seed repeat. Run one
+2,500-update fine-tune on GPU 1, then score checkpoints 250, 1,000, and 2,500
+on the existing control validation worlds before any test claim.
