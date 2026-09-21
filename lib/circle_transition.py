@@ -43,10 +43,11 @@ SHIPPED_CLEAR_MARGIN = 0.15
 # Radial critic noise must sit under the one-step restore of half the RMSE bar.
 # Capping only at the expert radial std still left that restore inside the hold.
 RADIAL_NOISE_FRACTION = 0.5
-# Last quarter of a tangent-refine run freezes the radius pathway and fits a
-# tangent residual. The tolerance is half the speed bar at the smallest radius,
-# so the paired-noise floor sits under the signed-step success line.
-TANGENT_REFINE_FRACTION = 0.75
+# Second half of a tangent-refine run fits a tangent residual on detached
+# features while E_control and G2 keep training the wide-radius restore.
+# The tolerance is half the speed bar at the smallest radius, so the
+# paired-noise floor sits under the signed-step success line.
+TANGENT_REFINE_FRACTION = 0.5
 TANGENT_NOISE_FRACTION = 0.5
 WIDE_RHO_RANGE = (0.5, 1.5)
 CONTEXT_DIM = 4

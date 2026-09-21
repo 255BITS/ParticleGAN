@@ -308,67 +308,32 @@ def train(cfg):
                 raise RuntimeError("tangent refine requires the radial_tangent edit frame")
             bundle["tangent_head"] = TangentResidual(cfg["width"]).to(device)
             bundle["tangent_head_active"] = False
-            log(f"TANGENT REFINE scheduled after step {refine_at}: freeze E_control+G2, "
-                f"train zero-init tangent residual, wide_rho={WIDE_RHO_RANGE[0]:.2f},{WIDE_RHO_RANGE[1]:.2f}")
+            log(f"TANGENT REFINE scheduled after step {refine_at}: E_control+G2 stay on "
+                f"wide_rho={WIDE_RHO_RANGE[0]:.2f},{WIDE_RHO_RANGE[1]:.2f}; a detached tangent residual "
+                "trains on the circle under its own paired-error critic.")
         head_parameters = []
         opt_h = None
         head_rates = None
-        refine_base = None
+        head_critic = None
+        head_rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
+                    for name, offset in (("data", 16), ("d", 43), ("g", 44))}
         bundle["E_control"].train()
         bundle["G"].train()
         for step in range(1, cfg["finetune_steps"] + 1):
             refining = bool(refine_at) and step > refine_at
-            if refining and opt_h is None:
-                for parameter in trainable:
-                    parameter.requires_grad_(False)
-                bundle["tangent_head_active"] = True
-                refine_base = (_snapshot(bundle["E_control"]), _snapshot(bundle["G"]))
-                # Head is still zero, so this fit is the frozen policy's on-circle residual.
-                fit_rows = sample_rows(cfg["normalization_samples"], torch.Generator(device=device).manual_seed(
-                    cfg["seed"] + 15), "train", "on", device)
-                with torch.no_grad():
-                    fit_neutral, fit_target = [], []
-                    for start in range(0, len(fit_rows), 1024):
-                        chunk = fit_rows.index(slice(start, start + 1024))
-                        neutral, target = paired_edit_actions(
-                            bundle, normalized_control_action(bundle, chunk.position, chunk.context()), chunk)
-                        fit_neutral.append(neutral)
-                        fit_target.append(target)
-                    fit_neutral, fit_target = torch.cat(fit_neutral), torch.cat(fit_target)
-                critic = build_edit_critic(fit_target, fit_neutral, cfg).to(device)
-                cap_radial_edit_scale(critic, fit_target)
-                tangent_cap = cap_tangent_edit_scale(critic, EDIT_NOISE_HOLD, tangent_hold_tolerance())
-                head_parameters = [parameter for parameter in bundle["tangent_head"].parameters()
-                                   if parameter.requires_grad]
-                opt_h = torch.optim.Adam(head_parameters, lr=finetune_recipe.lr, betas=finetune_recipe.betas)
-                opt_r = torch.optim.Adam(critic.parameters(), lr=finetune_recipe.lr * finetune_recipe.d_lr_mult,
-                                         betas=finetune_recipe.betas)
-                head_rates = [[group["lr"] for group in opt.param_groups] for opt in (opt_h, opt_r)]
-                log(f"TANGENT REFINE start at step {step}: freeze radius pathway, "
-                    f"tangent_scale={tangent_cap['tangent_scale']:.5f} capped={tangent_cap['capped']} "
-                    f"noise_limited={tangent_cap['noise_limited']:.5f} "
-                    f"tolerance={tangent_cap['tolerance']:.5f}")
-            if refining:
-                phase_total = cfg["finetune_steps"] - refine_at
-                scale = _apply_lr((opt_h, opt_r), head_rates, step - refine_at, phase_total, finetune_recipe)
-                train_rho = (cfg["rho_low"], cfg["rho_high"])
-                step_on_circle = 1.0
+            scale = _apply_lr((opt_c, opt_r), fine_rates, step, cfg["finetune_steps"], finetune_recipe)
+            if cfg["tangent_refine"]:
+                train_rho = WIDE_RHO_RANGE
             else:
-                scale = _apply_lr((opt_c, opt_r), fine_rates, step, cfg["finetune_steps"], finetune_recipe)
-                if cfg["tangent_refine"]:
-                    train_rho = WIDE_RHO_RANGE
-                else:
-                    train_rho = WIDE_RHO_RANGE if step <= curriculum_until else (cfg["rho_low"], cfg["rho_high"])
-                step_on_circle = on_circle_rate
-                if step == curriculum_until + 1 and curriculum_until:
-                    log(f"RHO CURRICULUM switch at step {step}: train_rho={train_rho[0]:.2f},{train_rho[1]:.2f}")
+                train_rho = WIDE_RHO_RANGE if step <= curriculum_until else (cfg["rho_low"], cfg["rho_high"])
+            if step == curriculum_until + 1 and curriculum_until:
+                log(f"RHO CURRICULUM switch at step {step}: train_rho={train_rho[0]:.2f},{train_rho[1]:.2f}")
+            bundle["tangent_head_active"] = False
             held = sample_rows(cfg["batch_size"], data_rng, "train", "mixed", device, rho_range=train_rho,
-                               on_circle_rate=step_on_circle)
+                               on_circle_rate=on_circle_rate)
             with torch.no_grad():
                 predicted_d = normalized_control_action(bundle, held.position, held.context())
                 predicted_d, target_d = paired_edit_actions(bundle, predicted_d, held)
-                if refining:
-                    predicted_d, target_d = isolate_tangent_pair(predicted_d, target_d)
             d_loss, d_terms = discriminator_objective(
                 critic, predicted_d, target_d, step, edit_rng["d"], reg, cfg["finetune_steps"])
             opt_r.zero_grad(set_to_none=True)
@@ -377,25 +342,90 @@ def train(cfg):
             if d_terms["b_cap_applied"]:
                 b_cap_applications += 1
             batch = sample_rows(cfg["batch_size"], data_rng, "train", "mixed", device, rho_range=train_rho,
-                                on_circle_rate=step_on_circle)
+                                on_circle_rate=on_circle_rate)
             assert_aligned(batch)
             normalized = normalized_control_action(bundle, batch.position, batch.context())
             predicted, target = paired_edit_actions(bundle, normalized, batch)
-            scored_predicted, scored_target = isolate_tangent_pair(predicted, target) if refining else (predicted, target)
             g_loss, g_terms = controller_objective(
-                critic, scored_predicted, scored_target, step, edit_rng["g"], cfg["finetune_steps"], cfg["adv_weight"])
+                critic, predicted, target, step, edit_rng["g"], cfg["finetune_steps"], cfg["adv_weight"])
             if not torch.allclose(g_loss.detach(), g_terms["error_g"] * cfg["adv_weight"], rtol=1e-4, atol=1e-5):
                 raise RuntimeError("controller loss is not adv_weight times the paired-error RpGAN term")
-            step_parameters = head_parameters if refining else trainable
-            (opt_h if refining else opt_c).zero_grad(set_to_none=True)
+            opt_c.zero_grad(set_to_none=True)
             g_loss.backward()
-            gan_grad_abs += _grad_norm(step_parameters)
-            (opt_h if refining else opt_c).step()
+            gan_grad_abs += _grad_norm(trainable)
+            opt_c.step()
             with torch.no_grad():
                 diagnostic = torch.nn.functional.mse_loss(predicted.detach(), target.detach())
                 physical = bundle["scaler"].inverse_action(normalized.detach())
                 radial_l1, radial_corr, tangent_l1 = radial_channel_diagnostics(physical, batch)
             finetune_draws += 2 * cfg["batch_size"]
+            if refining and opt_h is None:
+                # Residual is still zero, so the fit is the base policy on the circle.
+                fit_rows = sample_rows(cfg["normalization_samples"], torch.Generator(device=device).manual_seed(
+                    cfg["seed"] + 15), "train", "on", device)
+                with torch.no_grad():
+                    fit_neutral, fit_target = [], []
+                    for start in range(0, len(fit_rows), 1024):
+                        chunk = fit_rows.index(slice(start, start + 1024))
+                        neutral, target_fit = paired_edit_actions(
+                            bundle, normalized_control_action(bundle, chunk.position, chunk.context()), chunk)
+                        fit_neutral.append(neutral)
+                        fit_target.append(target_fit)
+                    fit_neutral, fit_target = torch.cat(fit_neutral), torch.cat(fit_target)
+                head_critic = build_edit_critic(fit_target, fit_neutral, cfg).to(device)
+                cap_radial_edit_scale(head_critic, fit_target)
+                tangent_cap = cap_tangent_edit_scale(head_critic, EDIT_NOISE_HOLD, tangent_hold_tolerance())
+                head_parameters = [parameter for parameter in bundle["tangent_head"].parameters()
+                                   if parameter.requires_grad]
+                opt_h = torch.optim.Adam(head_parameters, lr=finetune_recipe.lr, betas=finetune_recipe.betas)
+                opt_hr = torch.optim.Adam(head_critic.parameters(), lr=finetune_recipe.lr * finetune_recipe.d_lr_mult,
+                                          betas=finetune_recipe.betas)
+                head_rates = [[group["lr"] for group in opt.param_groups] for opt in (opt_h, opt_hr)]
+                log(f"TANGENT REFINE start at step {step}: detached residual, base keeps training, "
+                    f"tangent_scale={tangent_cap['tangent_scale']:.5f} capped={tangent_cap['capped']} "
+                    f"noise_limited={tangent_cap['noise_limited']:.5f} "
+                    f"tolerance={tangent_cap['tolerance']:.5f}")
+            if refining:
+                phase_total = cfg["finetune_steps"] - refine_at
+                _apply_lr((opt_h, opt_hr), head_rates, step - refine_at, phase_total, finetune_recipe)
+                circle = sample_rows(cfg["batch_size"], head_rng["data"], "train", "on", device)
+                bundle["tangent_head_active"] = True
+                with torch.no_grad():
+                    head_d, head_target_d = paired_edit_actions(
+                        bundle, normalized_control_action(bundle, circle.position, circle.context()), circle)
+                    head_d, head_target_d = isolate_tangent_pair(head_d, head_target_d)
+                head_d_loss, head_d_terms = discriminator_objective(
+                    head_critic, head_d, head_target_d, step - refine_at, head_rng["d"], reg, phase_total)
+                opt_hr.zero_grad(set_to_none=True)
+                head_d_loss.backward()
+                opt_hr.step()
+                if head_d_terms["b_cap_applied"]:
+                    b_cap_applications += 1
+                circle = sample_rows(cfg["batch_size"], head_rng["data"], "train", "on", device)
+                head_predicted, head_target = paired_edit_actions(
+                    bundle, normalized_control_action(bundle, circle.position, circle.context()), circle)
+                scored_predicted, scored_target = isolate_tangent_pair(head_predicted, head_target)
+                head_loss, head_terms = controller_objective(
+                    head_critic, scored_predicted, scored_target, step - refine_at, head_rng["g"], phase_total,
+                    cfg["adv_weight"])
+                opt_h.zero_grad(set_to_none=True)
+                opt_c.zero_grad(set_to_none=True)
+                head_loss.backward()
+                leaked = [f"{label}.{name}" for label, module in (("E_control", bundle["E_control"]), ("G", bundle["G"]))
+                          for name, parameter in module.named_parameters()
+                          if parameter.requires_grad and parameter.grad is not None]
+                if leaked:
+                    raise RuntimeError(f"tangent residual leaked a gradient into {leaked}")
+                gan_grad_abs += _grad_norm(head_parameters)
+                opt_h.step()
+                with torch.no_grad():
+                    corrected = bundle["scaler"].inverse_action(
+                        normalized_control_action(bundle, circle.position, circle.context()).detach())
+                    tangent_l1 = radial_channel_diagnostics(corrected, circle)[2]
+                bundle["tangent_head_active"] = False
+                finetune_draws += 2 * cfg["batch_size"]
+                if not torch.isfinite(head_loss) or not torch.isfinite(head_d_loss):
+                    raise FloatingPointError(f"nonfinite tangent residual loss at step {step}")
             if not torch.isfinite(g_loss) or not torch.isfinite(d_loss):
                 raise FloatingPointError(f"nonfinite controller loss at step {step}")
             if step == 1 or step % cfg["log_interval"] == 0 or step == cfg["finetune_steps"]:
@@ -409,19 +439,21 @@ def train(cfg):
                            b_cap=float(d_terms["b_cap"]), gan_grad_abs=gan_grad_abs, lr_scale=scale,
                            elapsed_seconds=time.perf_counter() - started)
                 metrics.write(json.dumps(row, allow_nan=False) + "\n")
+                head_note = ""
+                if refining:
+                    head_note = f" head={float(head_loss.detach()):.5f}"
                 log(f"step={step}/{cfg['finetune_steps']} stage=finetune loss={row['loss']:.5f} "
                     f"D={row['d_loss']:.5f} G={row['g_loss']:.5f} adv_weight=1 "
                     f"b_cap_applied={int(row['b_cap_applied'])} diag_action_mse={row['diag_action_mse']:.5f} "
                     f"diag_radial_l1={row['diag_radial_l1']:.5f} diag_radial_rho_corr={row['diag_radial_rho_corr']:.3f} "
-                    f"diag_tangent_l1={row['diag_tangent_l1']:.5f} "
+                    f"diag_tangent_l1={row['diag_tangent_l1']:.5f}{head_note} "
                     f"l2_aux=0 elapsed_s={row['elapsed_seconds']:.1f}")
         for name, saved in frozen.items():
             module = {"G1": bundle["G"].branches[0], "G3": bundle["G"].branches[2], "E_pair": bundle["E"],
                       "prior": bundle["prior"], "D": bundle["D"]}[name]
             _unchanged(module, saved, name)
-        if refine_base is not None:
-            _unchanged(bundle["E_control"], refine_base[0], "E_control during tangent refine")
-            _unchanged(bundle["G"], refine_base[1], "G during tangent refine")
+        if opt_h is not None:
+            bundle["tangent_head_active"] = True
         if b_cap_applications < 1 or gan_grad_abs <= 0:
             raise RuntimeError("paired-error finetune did not apply b_cap or an adversarial gradient")
         modules = [bundle["G"], bundle["E"], bundle["E_control"], bundle["D"], bundle["prior"]]
