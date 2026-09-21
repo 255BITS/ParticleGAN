@@ -10,7 +10,7 @@ import yaml
 from experiments.train_circle_transition import DEFAULTS, train, validate
 from lib.circle_transition import (CENTER_BINS, CENTER_LIMIT, RADIAL_NOISE_FRACTION, RADIUS_BINS, RADIUS_RANGE,
     RECOVERY_RATE, SPEED_BINS, SPEED_RANGE, SUCCESS_RADIAL_RMSE, CircleEncoder, CircleScaler, assert_aligned,
-    cap_radial_edit_scale, closed_loop_fidelity, evaluate_panel, evaluation_panel, expert_policy,
+    axis_edit_critic, cap_radial_edit_scale, closed_loop_fidelity, evaluate_panel, evaluation_panel, expert_policy,
     expert_transition, in_split, missing_restore_policy, paired_edit_actions, parameter_cell, radial_tangent,
     radius_hold_gate, reversed_policy, rollout, sample_rows, zero_policy)
 from lib.gym_particle_finetune import (EDIT_NOISE_HOLD, build_edit_critic, configure_control_scope,
@@ -281,6 +281,11 @@ class RadiusHoldTests(unittest.TestCase):
         self.assertAlmostEqual(at_signal["radial_scale"], signal, places=4)
         tight = build_edit_critic(targets, targets, cfg)
         self.assertFalse(cap_radial_edit_scale(tight, targets, EDIT_NOISE_HOLD)["capped"])
+        tangent = axis_edit_critic(targets[:, :1], neutrals[:, :1], cfg)
+        radial = axis_edit_critic(targets[:, 1:], neutrals[:, 1:], cfg)
+        info = cap_radial_edit_scale(radial, targets[:, 1:], EDIT_NOISE_HOLD)
+        self.assertTrue(info["capped"])
+        self.assertGreater(float(tangent.target_std[0]), float(radial.target_std[0]) * 4)
 
     def test_recipe_configs_name_the_edit_frame(self):
         paired = yaml.safe_load(Path("configs/circle/paired_error.yaml").read_text())

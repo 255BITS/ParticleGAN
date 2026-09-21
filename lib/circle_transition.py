@@ -407,7 +407,7 @@ def cap_radial_edit_scale(critic, targets, noise_hold):
     """
     if not math.isfinite(noise_hold) or noise_hold <= 0:
         raise ValueError("noise_hold must be finite and positive")
-    signal = float(targets[:, 1].detach().std(unbiased=False).clamp_min(1e-4))
+    signal = float(targets[:, -1].detach().std(unbiased=False).clamp_min(1e-4))
     hold_sigma = float(noise_hold) * float(critic.edit_rms)
     tolerance = RECOVERY_RATE * (SUCCESS_RADIAL_RMSE * RADIAL_NOISE_FRACTION)
     if hold_sigma <= 1e-8:
@@ -415,15 +415,28 @@ def cap_radial_edit_scale(critic, targets, noise_hold):
     else:
         noise_limited = max(tolerance / hold_sigma, 1e-4)
     cap = min(signal, noise_limited)
-    before = float(critic.target_std[1])
+    before = float(critic.target_std[-1])
     info = dict(capped=False, radial_scale=before, signal_scale=signal, previous_scale=before,
                 noise_limited=noise_limited, tolerance=tolerance, hold_sigma=hold_sigma)
     if before <= cap:
         return info
     with torch.no_grad():
-        critic.target_std[1].copy_(torch.tensor(cap, dtype=critic.target_std.dtype, device=critic.target_std.device))
+        critic.target_std[-1].copy_(torch.tensor(cap, dtype=critic.target_std.dtype, device=critic.target_std.device))
     info.update(capped=True, radial_scale=cap)
     return info
+
+
+def axis_edit_critic(targets, neutrals, cfg):
+    """One-coordinate paired-error critic. Same card as the 2D edit critic."""
+    from lib.vendor.concept_slider_core.reference import GlobalMixErrorCritic
+    if targets.shape != neutrals.shape or targets.ndim != 2 or targets.shape[1] != 1:
+        raise ValueError("axis critic expects one edit coordinate")
+    critic = GlobalMixErrorCritic(targets.detach().cpu(), neutrals=neutrals.detach().cpu(),
+                                  tokens=cfg["error_tokens"], width=cfg["error_width"], layers=1,
+                                  heads=cfg["error_heads"], score_bound=8.)
+    if critic.normalization != "paired_edit_per_coordinate_std_median_rms_gain":
+        raise ValueError("axis critic must whiten target-minus-neutral")
+    return critic
 
 
 def radial_channel_diagnostics(physical_action, batch):
