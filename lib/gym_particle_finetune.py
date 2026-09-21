@@ -1,9 +1,10 @@
-"""Fine-tune the three-generator controller with a classic ParticleGAN game.
+"""Fine-tune G2 with the model-glue paired continuation.
 
-Arm A replaces paired action/state L2 with relativistic paired logistic losses
-and sample-point b_cap. It does not add an error-slider critic. Playback stays
-E_control(st, previous at) -> z -> G2. E_pair remains the current-action encoder
-used only as the reconstruction-path analogue inside the adversarial game.
+The collapsed arm trained the whole graph with RpGAN and sample-point b_cap
+after deleting paired L2. This continuation keeps those GAN objects configured
+and inactive. It freezes the stem, particle cloud, and non-action heads, and
+trains G2 with a 0.1 paired action anchor plus a functional kinematic match.
+Playback stays E_control(st, previous at) -> z -> G2. There is no slider critic.
 """
 import copy
 import json
@@ -16,6 +17,7 @@ from experiments.train_gym_transition import build_models, load_checkpoint
 from lib.gym_previous_gan import adversarial_loss
 from lib.gym_transition import (GymTransitionEncoder, GymTransitionScaler,
     composed_transition, contact_record, encoded_transition)
+from lib.model_glue_control import glue_objective, kinematic_response
 
 MODULE_KEYS = ("G", "E", "prior", "D", "E_control")
 FAKE_PATHS = ("control", "prior", "encoded", "composed")
@@ -37,15 +39,41 @@ def require_classic_particle_gan(gan, reg):
 
 
 def initialize_particle_finetune(checkpoint, device="cpu"):
-    """Copy the paired encoder into E_control and train the full adversarial graph."""
+    """Copy the paired encoder into E_control and train only the G2 action head."""
     bundle = load_checkpoint(checkpoint, device)
     if any(bundle[key] is None for key in ("G", "E", "prior", "D")):
         raise ValueError("Particle finetune requires the adversarial three-generator checkpoint")
     bundle["world_config"] = copy.deepcopy(bundle["config"])
     bundle["E_control"] = copy.deepcopy(bundle["E"])
     for key in MODULE_KEYS:
-        bundle[key].train().requires_grad_(True)
+        bundle[key].eval().requires_grad_(False)
+    action_head = bundle["G"].branches[1]
+    action_head.train().requires_grad_(True)
+    if not any(parameter.requires_grad for parameter in action_head.parameters()):
+        raise RuntimeError("G2 must be the trainable action head")
+    frozen = [name for name in ("E", "prior", "D", "E_control")
+              if any(parameter.requires_grad for parameter in bundle[name].parameters())]
+    frozen += [f"G{index + 1}" for index, branch in enumerate(bundle["G"].branches)
+               if index != 1 and any(parameter.requires_grad for parameter in branch.parameters())]
+    if frozen:
+        raise RuntimeError(f"Model-glue scope left parameters trainable: {frozen}")
     return bundle
+
+
+def glue_control_loss(bundle, states, previous, actions, next_states, terrain):
+    """Paired anchor plus kinematic response. Diagnostics stay out of the graph."""
+    scaler = bundle["scaler"]
+    real = scaler(torch.cat([states, actions, next_states], 1))
+    decoded, _ = control_decode(bundle, states, previous, terrain)
+    student = decoded[:, 8:10]
+    expert = real[:, 8:10]
+    empty = torch.zeros_like(actions)
+    loss, terms = glue_objective(
+        student, expert,
+        kinematic_response(states[:, :4], scaler.inverse_action(student)),
+        kinematic_response(states[:, :4], actions),
+        kinematic_response(states[:, :4], empty))
+    return loss, terms, diagnostic_l2(decoded, real)
 
 
 def control_decode(bundle, states, previous, terrain):

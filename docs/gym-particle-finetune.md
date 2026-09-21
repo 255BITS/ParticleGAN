@@ -1,10 +1,19 @@
 # ParticleGAN fine-tune (Arm A)
 
-This experiment takes the [L2 control fine-tune](gym-control.md) and replaces its
-paired reconstruction and imitation losses with the classic ParticleGAN game.
-The graph stays the three-generator MoG model. It does not become a flat
-`(st, at) -> st+1` network, and it does not use the
+Playback is still `E_control(st, previous at) -> z -> G2` on the three-generator
+MoG graph. It is not a flat `(st, at) -> st+1` network and it does not use the
 [Anima slider paired-error critic](gym-slider-gan.md).
+
+The first version of this arm deleted paired imitation and reconstruction and
+trained G, both encoders, the particle cloud, and the critics with Rp logistic
+loss plus sample-point `b_cap`. On the shared fresh protocol that run selected
+step 250 and landed 0/20 validation and 2/50 test (mean return about −113),
+while L2 on the same protocol was 50/50. `diag_action_mse` grew from about 0.06
+to above 1 during training. Those landing numbers were not remeasured here.
+
+The continuation below is the model-glue winning recipe, checked on a CPU 2D
+toy (`examples/particle_control_2d.py`) and wired into this trainer. It is not
+a new Lunar landing result. GAN objects stay configured and are not applied.
 
 ```text
 prior -> z -> G1 -> st
@@ -37,12 +46,17 @@ loss change, not a seed repeat.
 | Action imitation MSE, `E_control -> G2` vs expert `at` | weight 1 | **removed** |
 | Real reconstruction MSE + contact BCE, `E_pair(st, current at) -> G1/G2/G3` | weight 1 | **removed** |
 | Synthetic reconstruction MSE + contact BCE, composed target detached | weight 1 | **removed** |
-| Auxiliary / tiny paired L2 | none in the imitation arm; the joint arm uses the rows above | **none** (weights locked at 0) |
-| MoG variance/covariance regularizer on the raw particle table | kept | **kept** (not a state or action reconstruction) |
+| Auxiliary / tiny paired L2 | none in the imitation arm; the joint arm uses the rows above | **none** (those three weights stay 0) |
+| Model-glue action anchor | — | **0.1** normalized paired action error on G2 only |
+| Model-glue functional match | — | **1.0** kinematic response, linear in the action |
+| MoG variance/covariance regularizer on the raw particle table | kept | **configured, not applied** (cloud is frozen) |
 | Logged action/state/next MSE and contact BCE | optimization terms | **diagnostics only**, built under `no_grad` |
 
-The relativistic game is the fine-tune objective. Each discriminator step and
-each generator step scores four fake paths against the expert triple:
+The collapsed loop scored four fake paths with RpGAN. That loop is not the
+training step anymore. The paths remain in `particle_game` for the configured
+critic and are unused while `adv_weight` is 0:
+
+
 
 - **control** replaces action imitation. `E_control` sees state, previous
   command, and terrain. It does not see the expert current action or successor.
@@ -52,14 +66,34 @@ each generator step scores four fake paths against the expert triple:
 - **composed** replaces synthetic reconstruction: `E_pair` reads the sampled
   prior state and action and G3 emits the successor.
 
-Fake contacts shown to the critics are Bernoulli bits. Generator steps use the
-straight-through sigmoid. Conditional diagnostics use probabilities.
+`particle_game` still knows those paths. The continuation does not call it.
+Conditional diagnostics use probabilities and do not enter the loss.
+
+## What trains
+
+Only **G2** trains. G1, G3, `E_pair`, `E_control`, the MoG cloud, and the
+critics stay frozen. `E_control` is still the playback encoder; it is not
+updated. This matches model-glue `trainable_parts=heads` (output projection
+only; stem and cloud fixed).
+
+The step loss is `0.1 * paired action anchor + functional response`. The anchor
+is per-coordinate variance-normalized MSE between G2 and the expert command.
+The functional term is the model-glue response match through
+`kinematic_response` on `(x, y, vx, vy)` and the physical action, including the
+0.05 guided term at scale 4.5. That recipient is linear in the action, so the
+functional gradient is a scaled action error. It is not Box2D, and it is not a
+claim that the same weights will land.
+
+Rp logistic `GANLoss` and sample-point `b_cap` (coeff 1, kappa 1, autograd L2,
+every step) are still constructed and rejected if changed. `adv_weight` is 0,
+so neither the discriminator nor the prior regularizer steps. Model-glue's
+repaired `b_cap` screen used adversarial weight 0.001 and lost validation to
+this supervised head continuation.
 
 ## Critics, learning rates, and b_cap
 
-Critics that train: **joint**, **action**, and the **shared state** critic with
-a current/next role bit. Terrain is critic context. The gradient penalty is
-taken with respect to the observation, not the terrain or the role bit.
+The critics remain in the checkpoint: **joint**, **action**, and the **shared
+state** critic. They do not receive gradients in this continuation.
 
 The loss objects come from the MoG recipe primitives:
 
@@ -73,17 +107,18 @@ The loss objects come from the MoG recipe primitives:
 - `MoGParticlePrior` with 1,024 components, z 32, and `ParticleRegularizer`
   once per generator step on the full raw center table.
 
-Adam groups, before the shared cosine schedule (full rate for 60% of updates,
-then down to a 0.05 floor):
+Adam on G2 only, before the shared cosine schedule (full rate for 60% of
+updates, then down to a 0.05 floor):
 
 | Group | Modules | Learning rate | Betas |
 | --- | --- | ---: | --- |
-| Generator / encoders | G1, G2, G3, E_pair, E_control | 6e-4 | (0, 0.999) |
-| Prior | MoG means | 6e-2 | (0.5, 0.999) |
-| Discriminator | joint, action, shared state | 9e-4 | (0, 0.999) |
+| Action head | G2 | 1e-5 | (0, 0.999) |
+| Frozen | G1, G3, E_pair, E_control, prior, D | 0 | — |
 
-EMA decay is 0.995 on G, both encoders, and the prior. Discriminator weights
-are the live weights. Checkpoints do not store optimizer state.
+Gradient clipping is 1.0 on G2. EMA decay is 0.98 on G (only G2 moves).
+Checkpoints do not store optimizer state. Among checkpoints, the lowest proxy
+action MSE on the first 256 training records is copied to `selected.pt`. That
+proxy is not a landing rate.
 
 ## Logs and commands
 
@@ -104,8 +139,15 @@ python -u experiments/train_gym_particle_finetune.py \
   --config configs/gym/lunar_lander_particle_finetune/particle.yaml
 ```
 
-CPU smoke (no landing score). Point `--checkpoint` and `--episodes` at the
-frozen adversarial checkpoint and `episodes.json` when they are present:
+CPU toy gate (no Lunar weights). This is the formulation check:
+
+```bash
+python -u examples/particle_control_2d.py
+```
+
+CPU smoke of the gym wiring (no landing score). Point `--checkpoint` and
+`--episodes` at the frozen adversarial checkpoint and `episodes.json` when
+they are present:
 
 ```bash
 python -u experiments/train_gym_particle_finetune.py \

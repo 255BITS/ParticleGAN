@@ -10,8 +10,9 @@ import torch
 from experiments.train_gym_transition import DEFAULTS as WORLD_DEFAULTS, build_models, sha256
 from experiments.train_gym_particle_finetune import DEFAULTS, train
 from lib.gym_control import build_expert_records, control_action
-from lib.gym_particle_finetune import (FAKE_PATHS, control_decode, diagnostic_l2,
-    load_particle_checkpoint, particle_game, require_classic_particle_gan, transition_batch)
+from lib.gym_particle_finetune import (FAKE_PATHS, MODULE_KEYS, control_decode, diagnostic_l2,
+    glue_control_loss, load_particle_checkpoint, particle_game, require_classic_particle_gan,
+    transition_batch)
 from lib.gym_state_control import training_recipe
 
 
@@ -44,10 +45,11 @@ class ParticleFinetuneTests(unittest.TestCase):
         torch.save(checkpoint, root / "initial.pt")
         return states, actions
 
-    def test_rejects_auxiliary_l2(self):
-        cfg = {**DEFAULTS, "imitation_weight": 1.}
+    def test_rejects_auxiliary_l2_and_active_adversary(self):
         with self.assertRaises(ValueError):
-            train(cfg)
+            train({**DEFAULTS, "imitation_weight": 1.})
+        with self.assertRaises(ValueError):
+            train({**DEFAULTS, "adv_weight": 1.})
 
     def test_control_path_ignores_current_action_and_diagnostics_have_no_grad(self):
         with tempfile.TemporaryDirectory() as td:
@@ -73,6 +75,29 @@ class ParticleFinetuneTests(unittest.TestCase):
             diag = diagnostic_l2(control, real)
             self.assertFalse(any(value.requires_grad for value in diag.values()))
 
+    def test_glue_loss_trains_only_the_action_head(self):
+        def grad_sum(module):
+            return sum(float(p.grad.abs().sum()) for p in module.parameters() if p.grad is not None)
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.fixture(root)
+            from lib.gym_particle_finetune import initialize_particle_finetune
+            bundle = initialize_particle_finetune(root / "initial.pt", "cpu")
+            records = build_expert_records(root / "episodes.json")
+            columns = [torch.from_numpy(records[key][:4]) for key in
+                       ("states", "previous_actions", "actions", "next_states", "terrain")]
+            loss, terms, diag = glue_control_loss(bundle, *columns)
+            self.assertGreater(float(loss.detach()), 0.)
+            self.assertIn("action_anchor", terms)
+            self.assertFalse(any(value.requires_grad for value in diag.values()))
+            loss.backward()
+            self.assertGreater(grad_sum(bundle["G"].branches[1]), 0.)
+            self.assertEqual(grad_sum(bundle["G"].branches[0]), 0.)
+            self.assertEqual(grad_sum(bundle["G"].branches[2]), 0.)
+            for name in ("E", "prior", "D", "E_control"):
+                self.assertEqual(grad_sum(bundle[name]), 0., name)
+
     def test_rpgan_bcap_reaches_encoders_generators_and_critics(self):
         def has_grad(module):
             return any(p.grad is not None and float(p.grad.abs().sum()) > 0 for p in module.parameters())
@@ -82,6 +107,8 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.fixture(root)
             from lib.gym_particle_finetune import initialize_particle_finetune
             bundle = initialize_particle_finetune(root / "initial.pt", "cpu")
+            for key in MODULE_KEYS:
+                bundle[key].requires_grad_(True)
             records = build_expert_records(root / "episodes.json")
             columns = [torch.from_numpy(records[key][:4]) for key in
                        ("states", "previous_actions", "actions", "next_states", "terrain")]
@@ -128,10 +155,14 @@ class ParticleFinetuneTests(unittest.TestCase):
             summary = train(cfg)
             self.assertEqual(summary["simulator_calls"], 0)
             self.assertEqual(summary["l2_aux_weight"], 0.)
-            self.assertEqual(summary["real_draws"], 16)
+            self.assertEqual(summary["adversarial_updates"], 0)
+            self.assertEqual(summary["real_draws"], 8)
+            self.assertIn(summary["selected_step"], (1, 2))
+            self.assertTrue((root / "particle" / "selected.pt").is_file())
             text = (root / "live.log").read_text()
             self.assertIn("REMOVED L2", text)
             self.assertIn("sample-point b_cap", text)
+            self.assertIn("supervised_only=true", text)
             self.assertIn("l2_aux=0", text)
             self.assertTrue((root / "particle" / "live.log").is_symlink())
             self.assertIn("REMOVED L2", (root / "particle" / "log.txt").read_text())
@@ -142,7 +173,9 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertEqual(recipe["reg_method"], "autograd")
             row = json.loads((root / "particle" / "metrics.jsonl").read_text().splitlines()[-1])
             self.assertEqual(row["l2_aux_weight"], 0.)
+            self.assertEqual(row["adv_weight"], 0.)
             self.assertIn("action_mse", row)
+            self.assertIn("action_anchor", row)
             bundle = load_particle_checkpoint(root / "particle" / "final.pt")
             replay = load_particle_checkpoint(root / "particle" / "checkpoint_2.pt")
             action, route = control_action(bundle, states[0], [-1., 0.], [-.5] * 11)
@@ -150,9 +183,11 @@ class ParticleFinetuneTests(unittest.TestCase):
             np.testing.assert_array_equal(action, action2)
             self.assertEqual(route, route2)
             self.assertTrue(np.isfinite(action).all() and (np.abs(action) <= 1).all())
+            fresh = initialize_again(root)
+            self.assertTrue(all(torch.equal(a, b) for a, b in zip(
+                bundle["E_control"].parameters(), fresh["E_control"].parameters())))
             self.assertTrue(any(not torch.equal(a, b) for a, b in zip(
-                bundle["E_control"].parameters(),
-                initialize_again(root)["E_control"].parameters())))
+                bundle["G"].branches[1].parameters(), fresh["G"].branches[1].parameters())))
             with self.assertRaises(FileExistsError):
                 train(cfg)
 

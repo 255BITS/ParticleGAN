@@ -1,5 +1,10 @@
 #!/usr/bin/env python
-"""Fine-tune Lunar Lander control with ParticleGAN losses instead of paired L2."""
+"""Fine-tune Lunar Lander G2 with the model-glue paired continuation.
+
+RpGAN and sample-point b_cap stay configured and do not update the controller.
+Only the action head trains, with a reduced paired anchor and a kinematic
+functional match. This does not score landings.
+"""
 import argparse
 import copy
 import hashlib
@@ -21,13 +26,17 @@ from experiments.config import read_config
 from experiments.train_gym_transition import parameter_count, sha256, training_recipe, write_json
 from lib.gym_control import build_expert_records
 from lib.gym_particle_finetune import (FAKE_PATHS, MODULE_KEYS, REMOVED_L2,
-    diagnostic_l2, initialize_particle_finetune, particle_game, require_classic_particle_gan,
-    transition_batch)
+    glue_control_loss, initialize_particle_finetune, require_classic_particle_gan)
+from lib.model_glue_control import (ADV_WEIGHT, ANCHOR_WEIGHT, EMA_DECAY, FUNCTIONAL_WEIGHT,
+    HEAD_LR, MAX_GRAD_NORM, TRAINABLE_PARTS, BETAS)
 from particlegan import learning_rate_scale
 
 DEFAULTS = dict(arm="particle", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1", marginal_weight=1.,
     imitation_weight=0., real_encoding_weight=0., synthetic_reconstruction_weight=0.,
+    action_anchor_weight=ANCHOR_WEIGHT, functional_weight=FUNCTIONAL_WEIGHT,
+    adv_weight=ADV_WEIGHT, head_lr=HEAD_LR, ema_decay=EMA_DECAY,
+    trainable_parts=TRAINABLE_PARTS,
     checkpoint="results/gym/lunar_lander/adversarial/best.pt",
     episodes="results/gym/lunar_lander/data/episodes.json",
     out_dir="results/gym/lunar_lander_particle_finetune/particle",
@@ -50,6 +59,12 @@ def validate(cfg):
             raise ValueError(f"{key} is removed; Arm A does not keep an auxiliary L2 term")
     if cfg["marginal_weight"] != 1.:
         raise ValueError("marginal_weight stays 1")
+    locked = dict(action_anchor_weight=ANCHOR_WEIGHT, functional_weight=FUNCTIONAL_WEIGHT,
+                  adv_weight=ADV_WEIGHT, head_lr=HEAD_LR, ema_decay=EMA_DECAY,
+                  trainable_parts=TRAINABLE_PARTS)
+    for key, value in locked.items():
+        if cfg[key] != value:
+            raise ValueError(f"{key} must stay {value} for the model-glue continuation")
     if not isinstance(cfg["checkpoints"], list) or any(type(s) is not int or s <= 0 for s in cfg["checkpoints"]):
         raise ValueError("checkpoints must be positive integer steps")
     for key in ("device", "checkpoint", "episodes", "out_dir", "live_log"):
@@ -60,8 +75,8 @@ def validate(cfg):
 
 
 def capture_provenance(out, cfg, records, bundle):
-    paths = [Path(__file__), ROOT / "lib/gym_particle_finetune.py", ROOT / "lib/gym_control.py",
-             ROOT / "lib/gym_previous_gan.py", ROOT / "lib/gym_transition.py",
+    paths = [Path(__file__), ROOT / "lib/gym_particle_finetune.py", ROOT / "lib/model_glue_control.py",
+             ROOT / "lib/gym_control.py", ROOT / "lib/gym_previous_gan.py", ROOT / "lib/gym_transition.py",
              ROOT / "experiments/train_gym_transition.py", ROOT / "experiments/config.py"]
     paths += sorted((ROOT / "particlegan").glob("*.py"))
     paths += sorted((ROOT / "configs/gym/lunar_lander_particle_finetune").glob("*.yaml"))
@@ -85,8 +100,9 @@ def capture_provenance(out, cfg, records, bundle):
         normalization="Unchanged scaler from initialization; fit originally on old training split",
         removed_l2=list(REMOVED_L2), l2_aux_weight=0., fake_paths=list(FAKE_PATHS),
         critics=["joint", "action", "shared state for current and next"],
-        gan="Rp logistic GANLoss",
-        gradient_penalty="sample-point b_cap, autograd L2, coeff 1, kappa 1, every step",
+        gan="Rp logistic GANLoss configured, adv_weight 0, not applied",
+        gradient_penalty="sample-point b_cap configured, supervised_only, not applied",
+        continuation="model-glue head: G2 only, action anchor 0.1, functional kinematic match, EMA 0.98",
         control_input="Expert previous command in shuffled records; learner previous command at playback")
 
 
@@ -121,31 +137,28 @@ def train(cfg):
     provenance = capture_provenance(out, cfg, records, bundle)
     columns = [torch.as_tensor(records[key], device=device) for key in
                ("states", "previous_actions", "actions", "next_states", "terrain")]
-    g, e, prior, d, ec = [bundle[key] for key in MODULE_KEYS]
+    g, _, prior, _, ec = [bundle[key] for key in MODULE_KEYS]
     recipe = training_recipe({**world, "steps": cfg["steps"], "batch_size": cfg["batch_size"]})
-    gan, reg, spread = recipe.make_loss(), recipe.make_gradient_penalty(), recipe.make_prior_regularizer()
+    gan, reg = recipe.make_loss(), recipe.make_gradient_penalty()
     require_classic_particle_gan(gan, reg)
-    opt_g, opt_d = recipe.make_optimizers(g, d, prior, encoder=torch.nn.ModuleList([e, ec]),
-                                          fused=device.type == "cuda")
-    optimizers = (opt_g, opt_d)
-    base_rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
+    head = g.branches[1]
+    opt = torch.optim.Adam(head.parameters(), lr=cfg["head_lr"], betas=BETAS, fused=device.type == "cuda")
     ema = {**bundle}
     for key in ("G", "E", "prior", "E_control"):
         ema[key] = copy.deepcopy(bundle[key]).eval().requires_grad_(False)
-    rng = {name: torch.Generator(device=device).manual_seed(cfg["seed"] + offset)
-           for name, offset in dict(data=11, d_data=21, latent=12, contact=31, d_latent=22, d_contact=32).items()}
-    reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 40 + i)
-                for i, role in enumerate(d.roles())}
+    data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 11)
     parameter_counts = {key: parameter_count(bundle[key]) for key in MODULE_KEYS}
     trainable_counts = {key: sum(p.numel() for p in bundle[key].parameters() if p.requires_grad)
                         for key in MODULE_KEYS}
-    inference_count = parameter_count(ec) + parameter_count(g.branches[1]) + parameter_count(prior)
-    groups = dict(g_encoder=dict(lr=recipe.lr, betas=list(recipe.betas), modules=["G", "E", "E_control"]),
-        prior=dict(lr=recipe.lr * recipe.prior_lr_mult,
-                   betas=list(recipe.prior_betas if recipe.prior_betas is not None else recipe.betas),
-                   modules=["prior"]),
-        discriminator=dict(lr=recipe.lr * recipe.d_lr_mult, betas=list(recipe.betas),
-                           modules=["D.joint", "D.action", "D.state"]))
+    if set(trainable_counts) != set(MODULE_KEYS) or trainable_counts["G"] != parameter_count(head):
+        raise RuntimeError(f"Only G2 should train, got {trainable_counts}")
+    inference_count = parameter_count(ec) + parameter_count(head) + parameter_count(prior)
+    groups = dict(action_head=dict(lr=cfg["head_lr"], betas=list(BETAS), modules=["G2"],
+                                   max_grad_norm=MAX_GRAD_NORM, ema_decay=cfg["ema_decay"]),
+                  frozen=dict(lr=0., modules=["G1", "G3", "E", "E_control", "prior", "D"]),
+                  configured_inactive=dict(adv_weight=cfg["adv_weight"], gan=recipe.gan_mode,
+                                           reg_arm=recipe.reg_arm, reg_coeff=reg.coeff, reg_kappa=reg.kappa,
+                                           note="RpGAN and sample-point b_cap are not applied"))
     write_json(out / "provenance.json", provenance)
     write_json(out / "recipe.json", recipe.to_dict())
     write_json(out / "optimizers.json", groups)
@@ -160,9 +173,16 @@ def train(cfg):
         if device.type == "cuda":
             torch.cuda.synchronize(device)
 
-    def rows(name):
-        ids = torch.randint(len(columns[0]), (cfg["batch_size"],), device=device, generator=rng[name])
+    def rows():
+        ids = torch.randint(len(columns[0]), (cfg["batch_size"],), device=device, generator=data_rng)
         return [column[ids] for column in columns]
+
+    def proxy_action_mse():
+        view = {**bundle, **{key: ema[key] for key in ("G", "E", "prior", "E_control")}}
+        n = min(256, len(columns[0]))
+        with torch.no_grad():
+            _, _, diag = glue_control_loss(view, *[column[:n] for column in columns])
+        return float(diag["action_mse"])
 
     def save(step):
         saved = dict(format="gym_particle_finetune_v1", config=cfg, world_config=world,
@@ -181,87 +201,83 @@ def train(cfg):
 
         log(f"START arm=particle steps={cfg['steps']} expert_records={len(columns[0])} "
             f"episodes={len(np.unique(records['episode_ids']))} device={device}")
-        log("G1 -> st; G2 -> at; G3 -> st+1; E_control(st, previous at) -> z -> G; "
-            "E_pair(st, current at) -> z -> G; prior -> z -> G")
+        log("PLAYBACK E_control(st, previous at) -> z -> G2. Trainable=G2. "
+            "Frozen=G1, G3, E_pair, E_control, prior, D.")
         log("REMOVED L2: imitation MSE; real reconstruction MSE/BCE; synthetic reconstruction MSE/BCE. "
             "AUX L2 weight=0.")
-        log("KEPT: Rp logistic GANLoss; sample-point b_cap on joint, action, and shared state D; "
-            "MoG prior variance/covariance regularizer. No slider critic.")
-        log(f"LR groups G+E+E_control={groups['g_encoder']['lr']} prior={groups['prior']['lr']} "
-            f"D={groups['discriminator']['lr']} b_cap coeff={reg.coeff} kappa={reg.kappa}")
+        log("MODEL-GLUE continuation: action_anchor="
+            f"{cfg['action_anchor_weight']} functional={cfg['functional_weight']} "
+            f"adv_weight={cfg['adv_weight']} head_lr={cfg['head_lr']} ema={cfg['ema_decay']} "
+            "supervised_only=true. No slider critic.")
+        log("CONFIGURED inactive: Rp logistic GANLoss; sample-point b_cap "
+            f"coeff={reg.coeff} kappa={reg.kappa}; MoG prior regularizer. Not applied.")
         log(f"Trainable parameters={trainable_counts}; inference={inference_count}")
         started = time.perf_counter()
         sync()
         segment = time.perf_counter()
         optimization_seconds = 0.
+        best = None
         for step in range(1, cfg["steps"] + 1):
             lr_scale = learning_rate_scale(step - 1, recipe.total_steps, recipe.lr_anneal_start, recipe.lr_floor)
-            for opt, rates in zip(optimizers, base_rates):
-                for group, rate in zip(opt.param_groups, rates):
-                    group["lr"] = rate * lr_scale
-            d.requires_grad_(True)
-            d_rows = rows("d_data")
-            with torch.no_grad():
-                real_d, fakes_d, _ = transition_batch(bundle, *d_rows, rng["d_latent"], rng["d_contact"])
-            ld, d_terms = particle_game(d, real_d, fakes_d, d_rows[-1], gan, reg=reg, step=step, rngs=reg_rngs)
-            if not torch.isfinite(ld):
-                raise FloatingPointError(f"Nonfinite discriminator loss at step {step}")
-            opt_d.zero_grad(set_to_none=True)
-            ld.backward()
-            opt_d.step()
-            d.requires_grad_(False)
-            g_rows = rows("data")
-            real, fakes, decoded_control = transition_batch(
-                bundle, *g_rows, rng["latent"], rng["contact"], straight_through=True)
-            lg, g_terms = particle_game(d, real, fakes, g_rows[-1], gan, marginal_weight=cfg["marginal_weight"])
-            lp = spread(prior.z)
-            diag = diagnostic_l2(decoded_control, real)
-            loss = lg + lp
+            opt.param_groups[0]["lr"] = cfg["head_lr"] * lr_scale
+            batch = rows()
+            loss, terms, diag = glue_control_loss(bundle, *batch)
             if not torch.isfinite(loss):
-                raise FloatingPointError(f"Nonfinite generator loss at step {step}")
-            opt_g.zero_grad(set_to_none=True)
+                raise FloatingPointError(f"Nonfinite control loss at step {step}")
+            opt.zero_grad(set_to_none=True)
             loss.backward()
-            opt_g.step()
+            torch.nn.utils.clip_grad_norm_(head.parameters(), MAX_GRAD_NORM)
+            opt.step()
             with torch.no_grad():
                 for key in ("G", "E", "prior", "E_control"):
                     for target, source in zip(ema[key].parameters(), bundle[key].parameters()):
-                        target.lerp_(source, 1 - recipe.ema_decay)
+                        target.lerp_(source, 1 - cfg["ema_decay"])
             if step == 1 or step % cfg["log_interval"] == 0 or step in checkpoints:
                 sync()
-                row = dict(step=step, loss=float(loss.detach()), d_loss=float(ld.detach()),
-                    g_loss=float(lg.detach()), prior_loss=float(lp.detach()), l2_aux_weight=0.,
+                row = dict(step=step, loss=float(loss.detach()), l2_aux_weight=0.,
+                    adv_weight=cfg["adv_weight"], action_anchor=float(terms["action_anchor"].detach()),
+                    functional=float(terms["functional"].detach()),
                     lr_scale=lr_scale, elapsed_seconds=time.perf_counter() - started,
-                    **{f"d_{key}": float(value.detach()) for key, value in d_terms.items()},
-                    **{f"g_{key}": float(value.detach()) for key, value in g_terms.items()},
                     **{key: float(value.detach()) for key, value in diag.items()})
                 metrics.write(json.dumps(row, allow_nan=False) + "\n")
-                log(f"step={step}/{cfg['steps']} loss={row['loss']:.5f} D={row['d_loss']:.5f} "
-                    f"G={row['g_loss']:.5f} prior={row['prior_loss']:.5f} "
-                    f"diag_action_mse={row['action_mse']:.5f} l2_aux=0 elapsed_s={row['elapsed_seconds']:.1f}")
+                log(f"step={step}/{cfg['steps']} loss={row['loss']:.5f} "
+                    f"anchor={row['action_anchor']:.5f} functional={row['functional']:.5f} "
+                    f"diag_action_mse={row['action_mse']:.5f} l2_aux=0 adv_weight=0 "
+                    f"elapsed_s={row['elapsed_seconds']:.1f}")
             if step in checkpoints:
                 sync()
                 optimization_seconds += time.perf_counter() - segment
                 if any(not torch.isfinite(p).all() for key in MODULE_KEYS for p in bundle[key].parameters()):
                     raise FloatingPointError(f"Nonfinite parameters at checkpoint {step}")
                 save(step)
-                log(f"CHECKPOINT step={step}; selection deferred to control validation")
+                score = proxy_action_mse()
+                if best is None or score < best["proxy_action_mse"]:
+                    best = dict(step=step, proxy_action_mse=score)
+                log(f"CHECKPOINT step={step} proxy_action_mse={score:.5f} "
+                    "selection=min proxy action MSE on the record prefix; not a landing score")
                 sync()
                 segment = time.perf_counter()
         shutil.copyfile(out / f"checkpoint_{cfg['steps']}.pt", out / "final.pt")
+        shutil.copyfile(out / f"checkpoint_{best['step']}.pt", out / "selected.pt")
         summary = dict(config=cfg, recipe=recipe.to_dict(), optimizers=groups, provenance=provenance,
             parameters=parameter_counts, trainable_parameters=trainable_counts,
             total_trainable_parameters=sum(trainable_counts.values()),
             inference_parameters=inference_count, unique_training_records=len(columns[0]),
             generator_optimizer_record_draws=cfg["steps"] * cfg["batch_size"],
-            discriminator_optimizer_record_draws=cfg["steps"] * cfg["batch_size"],
-            real_draws=2 * cfg["steps"] * cfg["batch_size"], simulator_calls=0,
+            discriminator_optimizer_record_draws=0,
+            real_draws=cfg["steps"] * cfg["batch_size"], simulator_calls=0,
+            adversarial_updates=0, supervised_only=True,
             train_seconds=optimization_seconds, total_seconds=time.perf_counter() - started,
             checkpoints={path.name: sha256(path) for path in sorted(out.glob("*.pt"))},
-            removed_l2=list(REMOVED_L2), l2_aux_weight=0., fake_paths=list(FAKE_PATHS),
-            selection="Deferred: no landing evaluation has been run for this arm",
-            initialization="Same frozen adversarial checkpoint; E_control copied from paired E; scaler retained")
+            removed_l2=list(REMOVED_L2), l2_aux_weight=0., adv_weight=cfg["adv_weight"],
+            action_anchor_weight=cfg["action_anchor_weight"], functional_weight=cfg["functional_weight"],
+            fake_paths=list(FAKE_PATHS),
+            selected_step=best["step"], proxy_action_mse=best["proxy_action_mse"],
+            selection="Min EMA proxy action MSE on the first 256 training records. Not a landing rate.",
+            initialization="Adversarial checkpoint; E_control copied from paired E; only G2 trains")
         write_json(out / "summary.json", summary)
-        log(f"COMPLETE train_seconds={optimization_seconds:.1f}; awaiting rollout selection")
+        log(f"COMPLETE train_seconds={optimization_seconds:.1f} selected_step={best['step']} "
+            f"proxy_action_mse={best['proxy_action_mse']:.5f}; landings not run")
     return summary
 
 
