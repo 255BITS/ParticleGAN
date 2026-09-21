@@ -24,7 +24,8 @@ from lib.gym_particle_finetune import (EDIT_CAP_EVERY, MODULE_KEYS, REMOVED_L2,
     build_edit_critic, configure_control_scope, controller_objective,
     discriminator_objective, edit_cap, initialize_particle_finetune, normalized_g2_action,
     require_live_adversary)
-from lib.safe_fast_landing import ACTION_MAP, MAX_SPEED_LIMIT, V21_SPEED_LIMIT, gym_shaping_cost
+from lib.safe_fast_landing import (ACTION_MAP, MAX_SPEED_LIMIT, V21_SPEED_LIMIT, gym_shaping_cost,
+    select_shipped)
 from particlegan import learning_rate_scale
 
 DEFAULTS = dict(arm="particle", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
@@ -230,6 +231,7 @@ def train(cfg):
         gpu=torch.cuda.get_device_name(device) if device.type == "cuda" else None))
     (out / "config.yaml").write_text(yaml.safe_dump(cfg))
     checkpoints = sorted({step for step in cfg["checkpoints"] if step <= cfg["steps"]} | {cfg["steps"]})
+    history = []
 
     def sync():
         if device.type == "cuda":
@@ -332,6 +334,9 @@ def train(cfg):
                     **{key: float(value) for key, value in {**d_terms, **g_terms}.items()
                        if key not in ("b_cap_applied", "adv_weight")})
                 metrics.write(json.dumps(row, allow_nan=False) + "\n")
+                history.append(dict(step=step, loss=row["loss"], g_loss=row["g_loss"],
+                                    d_loss=row["d_loss"], safe_fast=row["safe_fast"],
+                                    action_mse=row["action_mse"]))
                 log(f"step={step}/{cfg['steps']} loss={row['loss']:.5f} D={row['d_loss']:.5f} "
                     f"G={row['g_loss']:.5f} adv_weight=1 safe_fast_weight={row['safe_fast_weight']} "
                     f"safe_fast={row['safe_fast']:.5f} b_cap_applied={int(row['b_cap_applied'])} "
@@ -344,10 +349,20 @@ def train(cfg):
                 if any(not torch.isfinite(p).all() for p in bundle["G"].branches[1].parameters()):
                     raise FloatingPointError(f"Nonfinite G2 at checkpoint {step}")
                 save(step)
-                log(f"CHECKPOINT step={step}; landing selection is not part of this train step")
+                if cfg["safe_fast_weight"] == 0:
+                    log(f"CHECKPOINT step={step}; landing selection is not part of this train step")
+                else:
+                    log(f"CHECKPOINT step={step}; late-collapse selection runs after the last step")
                 sync()
                 segment = time.perf_counter()
-        shutil.copyfile(out / f"checkpoint_{cfg['steps']}.pt", out / "final.pt")
+        if cfg["safe_fast_weight"] == 0:
+            chosen_step = cfg["steps"]
+            selection = "Deferred: no landing evaluation has been run for this arm"
+        else:
+            chosen, selection = select_shipped(history, checkpoints)
+            chosen_step = int(chosen["step"])
+            log(f"SELECTION shipped={chosen_step} final_step={cfg['steps']} {selection}")
+        shutil.copyfile(out / f"checkpoint_{chosen_step}.pt", out / "final.pt")
         summary = dict(config=cfg, recipe=objective, optimizers=groups, provenance=provenance,
             parameters=parameter_counts, trainable_parameters=trainable_counts,
             total_trainable_parameters=sum(trainable_counts.values()),
@@ -360,7 +375,7 @@ def train(cfg):
             removed_l2=list(REMOVED_L2), l2_aux_weight=0., adv_weight=1.,
             safe_fast_weight=float(cfg["safe_fast_weight"]),
             b_cap_applications=b_cap_applications,
-            selection="Deferred: no landing evaluation has been run for this arm",
+            selection=selection, selected_step=chosen_step,
             initialization="Same frozen adversarial checkpoint; E_control copied from paired E; scaler retained. "
                            "Controller step is paired-error RpGAN plus sample-point b_cap. "
                            f"safe_fast_weight={cfg['safe_fast_weight']}.")

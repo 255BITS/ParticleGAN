@@ -5,8 +5,9 @@ weight 0). That is the #18 controller. This note is the other file,
 `configs/gym/lunar_lander_particle_finetune/particle_safe_fast.yaml`.
 
 The first version of that file (PR #21) was trained on Lunar and did not
-transfer. The revision below is what the closed-loop toy now accepts. It has
-not been retrained on Lunar.
+transfer. The revision below is what the closed-loop toy accepts for the
+channel map. A Lunar train of that revision then collapsed after a healthy
+mid checkpoint. Export now refuses that corpse. It has not been retrained.
 
 ## What #21 did on Lunar
 
@@ -92,5 +93,54 @@ python -u experiments/train_gym_particle_finetune.py \
 tail -F results/gym/lunar_lander_particle_finetune/safe_fast_live.log
 ```
 
-The default path remains `particle.yaml`. Its log line is `SAFE-FAST off`.
-A Lunar retrain of the revised yaml has not been run.
+The default path remains `particle.yaml`. Its log line is `SAFE-FAST off`,
+and that arm still copies the last step to `final.pt` (`landing selection
+is not part of this train step`). The safe-fast arm logs `SELECTION
+shipped=...` and will not copy step=max after a diagnostic spike.
+
+## Late collapse on the revised yaml
+
+The throttle-up file was trained on Lunar (cuda:1, `adv_weight` 1,
+`safe_fast_speed_limit` 0.18). The shared 20-episode validation:
+
+| Checkpoint | Val landings | Mean return | Train |
+| --- | ---: | ---: | --- |
+| 250 | 0/20 | −253 | too early |
+| 1000 | 17/20 | +243 | loss ~0.44, diag MSE ~0.045, D ~0.60 |
+| 2500 (shipped) | 0/20 | −189 | loss ~13.7, diag MSE ~2.2, D ~0.01 |
+
+Between steps 1750 and 2000 the log went from loss ~0.65, diag MSE ~0.069,
+D ~0.63, safe-fast ~−0.46 to loss ~12.2, diag MSE ~2.28, D ~0.012,
+safe-fast ~+4.9, and stayed there. Those figures are from that run. This
+checkout does not rescore them. The trainer used to copy step 2500 onto
+`final.pt`, which ships the corpse.
+
+`python -u examples/safe_fast_2d.py` now prints a second gate,
+`[late-collapse]`. It reloads that trace and fails a blind export of step
+2500. The same rule ships step 1000. It also trains the up-only pad with
+RpGAN at `adv_weight` 1 plus the loose speed-limit aux (soft success still
+pays past 0.18), seed 0, 200 starts, learning rate 0.04:
+
+| Step | Success | diag MSE | D | safe-fast | Sink |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 75 | 1.000 | 0.00041 | 0.668 | 1.733 | 0.139 |
+| 100 (shipped) | 1.000 | 0.00157 | 0.644 | 0.992 | 0.195 |
+| 200 (final) | 0.000 | 0.01268 | 0.571 | 0.153 | 0.400 |
+
+Blind export of step 200 fails. Selection ships step 100, and rescoring
+that snapshot matches the log (1.000). The sigmoid-bounded 0.18 arm in the
+first gate is a different question: it stays landed, and it does not stand
+in for the Lunar blow-up.
+
+The export rule, used by the gym trainer whenever `safe_fast_weight` is
+positive, refuses a checkpoint when any of these hold against an earlier
+row:
+
+- `diag_action_mse` is at least 0.2 and more than 10× the earlier minimum
+- D-loss is at most 0.05 while loss is at least 2 or safe-fast is at least 1,
+  after an earlier D-loss of at least 0.30
+- closed-loop success falls from at least 0.7 to at most 0.1
+
+If success was logged, the highest rate among the rows that remain wins.
+Otherwise the last healthy checkpoint ships. `adv_weight` stays 1. A Lunar
+retrain with this export has not been run.

@@ -79,7 +79,8 @@ The [ParticleGAN fine-tune](docs/gym-particle-finetune.md) keeps L2 weights at
 plus sample-point b_cap on the edit critic. G1, G3, the paired encoder, the
 prior, and the transition discriminators stay frozen. `particle.yaml` is that
 default. The [safe-fast term](docs/gym-safe-fast.md) is a separate config,
-`particle_safe_fast.yaml`, and does not replace it.
+`particle_safe_fast.yaml`, and does not replace it. When that weight is on,
+export skips a late diag spike instead of copying the last step.
 The [slider-error fine-tune](docs/gym-slider-finetune.md) uses the imitation
 fine-tune's world-model initialization and replaces only action MSE with the
 paired-error critic. G1, G3, the paired encoder, the prior, and the transition

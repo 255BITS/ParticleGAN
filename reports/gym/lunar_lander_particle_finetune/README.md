@@ -59,10 +59,17 @@ live `(record, z)` pair. It is not the gym controller step.
 
 The first `particle_safe_fast.yaml` (#21) scored 0/20 validation and 0/50
 test on Lunar, mean return about −407, against YuE2 #18 at 20/20 and 50/50.
-That Lunar run is not remeasured here. The yaml is now the revised throttle-up
-term (`safe_fast_speed_limit` 0.18, `safe_fast_action_map: throttle_up`).
-The closed-loop toy fails the shipped #21 loss and passes the revision.
-A Lunar retrain of the revision has not been run.
+The throttle-up revision (`safe_fast_speed_limit` 0.18) was then trained on
+the same protocol: step 1000 scored 17/20 (mean return about +243) and step
+2500 scored 0/20 (about −189). Between steps 1750 and 2000, diag action MSE
+went from about 0.069 to 2.28, D-loss from about 0.63 to 0.012, and the
+safe-fast term from about −0.46 to +4.9. Those Lunar numbers are not
+remeasured here. The trainer used to copy step 2500 to `final.pt`. With
+`safe_fast_weight` positive it now ships the last checkpoint that passes
+the late-collapse rule (on that trace, step 1000). `particle.yaml` is
+unchanged and still copies the last step. The CPU gate fails a blind export
+of both the frozen trace and a live walk-off, and passes selection.
+`adv_weight` stays 1. A Lunar retrain of the export has not been run.
 See [the note](../../../docs/gym-safe-fast.md).
 
 ```bash
@@ -74,5 +81,7 @@ python -u examples/safe_fast_2d.py
 Keep `particle.yaml` as the paired-error default. Do not ship `adv_weight=0`
 or put action MSE back in place of the GAN. Do not start a seed repeat.
 The safe-fast yaml is the candidate if a later rollout wants earlier
-landings; score it on the existing validation worlds before any test claim.
-This checkout did not run that rollout.
+landings. Do not score its step-2500 weights from the collapsed run; the
+export rule would have kept step 1000. Score the shipped checkpoint on the
+existing validation worlds before any test claim. This checkout did not run
+that rollout.

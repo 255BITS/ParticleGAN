@@ -5,7 +5,10 @@
 # #21 fed [main, side] into a bipolar step as [lateral, vertical] and paid a
 # success bonus at speed 0.62. This file uses throttle_up (main engine off is
 # thrust 0, side engine stays lateral) and the closed-loop soft speed 0.18.
-# A Lunar retrain has not been run for this revision.
+# A Lunar retrain of that plant then collapsed after a healthy step-1000
+# checkpoint (17/20) by step 2500 (0/20). When this weight is on, export
+# keeps the last checkpoint the late-collapse rule still accepts instead of
+# copying step=max. adv_weight stays 1. That Lunar retrain has not been run.
 arm: particle
 steps: 2500
 batch_size: 256

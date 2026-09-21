@@ -18,6 +18,11 @@ The frozen #21 loss and the loose-limit ablation must both fail that score.
 The revised loss uses the throttle map and the soft limit, keeps
 ``adv_weight=1``, and must land more often and sooner than GAN-only.
 ``adv_weight=0`` is still rejected. This is not a Lunar landing result.
+
+The same module refuses a late corpse. The #23 Lunar train of the throttle-up
+yaml was healthy at step 1000 and dead at step 2500. ``select_shipped`` keeps
+the earlier checkpoint. A CPU walk-off with ``adv_weight=1`` fails the same
+way if the export is the last step, and passes if the export is the selection.
 """
 import torch
 from torch import nn
@@ -462,6 +467,253 @@ def _fmt_arm(row):
     return (f"[safe-fast-2d] {row['arm']} landings={row['landings']:.3f} "
             f"steps={row['mean_steps']:.2f} crash={row['crash_rate']:.3f} "
             f"score={row['score']:.3f}{extra}")
+
+
+# Reported Lunar run of the revised throttle-up yaml (PR #23), shared 20-ep
+# validation. Rounded figures from that board. Not remeasured in this checkout.
+# Checkpoints on disk were 250, 1000, and 2500. Steps 1750 and 2000 are log rows.
+PR23_CHECKPOINTS = (250, 1000, 2500)
+PR23_TRACE = (
+    dict(step=250, success=0.0, loss=None, g_loss=None, d_loss=None,
+         action_mse=None, safe_fast=None),
+    dict(step=1000, success=17 / 20, loss=0.44, g_loss=0.44, d_loss=0.60,
+         action_mse=0.045, safe_fast=None),
+    dict(step=1750, success=None, loss=0.65, g_loss=0.65, d_loss=0.63,
+         action_mse=0.069, safe_fast=-0.46),
+    dict(step=2000, success=None, loss=12.2, g_loss=12.2, d_loss=0.012,
+         action_mse=2.28, safe_fast=4.9),
+    dict(step=2500, success=0.0, loss=13.7, g_loss=13.7, d_loss=0.01,
+         action_mse=2.2, safe_fast=None),
+)
+MSE_JUMP = 10.0
+MSE_CORPSE_FLOOR = 0.2
+D_COLLAPSE_MAX = 0.05
+D_HEALTHY_MIN = 0.30
+LOSS_EXPLODE_MIN = 2.0
+SAFE_EXPLODE_MIN = 1.0
+SUCCESS_HIGH = 0.70
+SUCCESS_LOW = 0.10
+COLLAPSE_STEPS = 200
+COLLAPSE_BETA_LR = 0.04
+COLLAPSE_LOG_EVERY = 25
+
+
+def _metric(row, key):
+    value = row.get(key)
+    if value is None:
+        return None
+    return float(value)
+
+
+def collapse_reason(row, rows):
+    """Why this row is a corpse given earlier rows. None means it can still ship.
+
+    A row fails when an earlier row was healthy and this one matches the #23
+    signature: diagnostic MSE leaves the healthy window by an order of
+    magnitude, the critic loss falls apart while the generator or safe-fast
+    term blows up, or closed-loop success drops from a high bar to a low one.
+    """
+    earlier = [item for item in rows if item["step"] < row["step"]]
+    mse = _metric(row, "action_mse")
+    if mse is not None:
+        refs = [value for value in (_metric(item, "action_mse") for item in earlier) if value and value > 0]
+        if refs and mse >= MSE_CORPSE_FLOOR and mse > MSE_JUMP * min(refs):
+            return (f"diag_action_mse {mse:.4f} jumped >{MSE_JUMP:.0f}x "
+                    f"above the earlier minimum {min(refs):.4f}")
+    d_loss = _metric(row, "d_loss")
+    loss = _metric(row, "loss")
+    safe = _metric(row, "safe_fast")
+    if d_loss is not None and d_loss <= D_COLLAPSE_MAX:
+        earlier_d = any((_metric(item, "d_loss") or 0) >= D_HEALTHY_MIN for item in earlier)
+        exploded = ((loss is not None and loss >= LOSS_EXPLODE_MIN)
+                    or (safe is not None and safe >= SAFE_EXPLODE_MIN))
+        if earlier_d and exploded:
+            return (f"D-loss {d_loss:.4f} collapsed while loss/safe_fast exploded "
+                    f"(loss={loss}, safe_fast={safe})")
+    success = _metric(row, "success")
+    if success is not None and success <= SUCCESS_LOW:
+        if any((_metric(item, "success") or 0) >= SUCCESS_HIGH for item in earlier):
+            return (f"closed-loop success {success:.3f} fell to <={SUCCESS_LOW} "
+                    f"after an earlier row cleared {SUCCESS_HIGH}")
+    return None
+
+
+def select_shipped(rows, candidates=None):
+    """Pick the checkpoint to export. Never the final step after a diag spike.
+
+    Closed-loop success breaks ties toward the better landing rate. Without
+    that column, the last row that is still healthy is the one that ships.
+    """
+    if not rows:
+        raise ValueError("late-collapse selection has no rows")
+    allowed = None if candidates is None else {int(step) for step in candidates}
+    pool = [row for row in rows if allowed is None or int(row["step"]) in allowed]
+    if not pool:
+        raise ValueError("late-collapse selection has no checkpoint rows")
+    alive = [row for row in pool if collapse_reason(row, rows) is None]
+    final = max(pool, key=lambda row: row["step"])
+    if not alive:
+        chosen = min(pool, key=lambda row: row["step"])
+        return chosen, f"every checkpoint is a corpse; refused step {final['step']}"
+    ranked = [row for row in alive if _metric(row, "success") is not None]
+    if ranked:
+        chosen = max(ranked, key=lambda row: (_metric(row, "success"), row["step"]))
+    else:
+        chosen = max(alive, key=lambda row: row["step"])
+    if chosen["step"] != final["step"]:
+        return chosen, f"refused step {final['step']}: {collapse_reason(final, rows)}"
+    return chosen, "final step stayed inside the late-collapse gate"
+
+
+def judge_export(rows, shipped_step, candidates=None):
+    """PASS when the shipped row is healthy, or it is the selected healthy row.
+
+    Shipping the final corpse while an earlier row would pass is a FAIL.
+    """
+    chosen, selection_reason = select_shipped(rows, candidates)
+    shipped = next(row for row in rows if int(row["step"]) == int(shipped_step))
+    reason = collapse_reason(shipped, rows)
+    matches = int(shipped_step) == int(chosen["step"])
+    mid_ok = any(collapse_reason(row, rows) is None and row["step"] < shipped["step"] for row in rows)
+    passed = reason is None and (matches or mid_ok)
+    return dict(passed=passed, shipped_step=int(shipped_step), selected_step=int(chosen["step"]),
+                corpse_reason=reason, selection_reason=selection_reason, shipped=shipped, selected=chosen)
+
+
+def train_late_collapse(steps=COLLAPSE_STEPS, log_every=COLLAPSE_LOG_EVERY):
+    """Constant-aux walk-off on the up-only pad.
+
+    Same RpGAN at ``adv_weight=1`` as the other arms. The aux is the loose
+    speed limit: soft success still pays past the hard pad, so a slow step
+    size climbs through a healthy window and finishes crashed. Snapshots are
+    the export candidates. This is the CPU sample of shipping step=max.
+    """
+    require_live_adversary(ADV_WEIGHT)
+    torch.manual_seed(SEED)
+    beta = nn.Parameter(torch.tensor(-4.))
+    gamma = nn.Parameter(torch.tensor(0.))
+    norm = _edit_scale()
+    critic = _Critic()
+    cap = _cap()
+    opt = torch.optim.SGD((beta, gamma), lr=COLLAPSE_BETA_LR)
+    opt_d = torch.optim.Adam(critic.parameters(), lr=1e-3, betas=(0., 0.999))
+    generator = torch.Generator().manual_seed(SEED + 2)
+    hold = 1.3 * float(norm.edit_rms)
+    panel = initial_states(EVAL_ROWS, 1000)
+    rows = []
+    snapshots = {}
+    for step in range(1, steps + 1):
+        state = initial_states(64, 10000 + step)
+        target = expert_action(state)
+        sink_d, bias_d = _controls(beta.detach(), gamma.detach())
+        pred = expert_action(state, sink_d, bias_d)
+        residual = (pred - target) / norm.target_std
+        sigma = noise_std(step - 1, start=norm.noise_start, decay_steps=steps, hold=hold)
+        noise = torch.randn(residual.shape, generator=generator) * sigma
+        penalty = cap(critic, noise.detach(), (noise + residual).detach(), step=step)
+        loss_d = rp_d_loss(critic(noise), critic(noise + residual)) + penalty
+        opt_d.zero_grad(set_to_none=True)
+        loss_d.backward()
+        opt_d.step()
+        sink, bias = _controls(beta, gamma)
+        pred = expert_action(state, sink, bias)
+        residual = (pred - target) / norm.target_std
+        noise = torch.randn(residual.shape, generator=generator) * sigma
+        loss_g = ADV_WEIGHT * rp_g_loss(critic(noise).detach(), critic(noise + residual))
+        safe = shaping_cost("loose", beta, gamma, initial_states(24, 20000 + step))
+        loss = loss_g + safe
+        opt.zero_grad(set_to_none=True)
+        loss.backward()
+        opt.step()
+        if step == 1 or step % log_every == 0 or step == steps:
+            policy, sink_v, side_v = _frozen_policy(beta, gamma)
+            scored = evaluate_policy(policy, panel)
+            with torch.no_grad():
+                action_mse = float(((pred.detach() - target) ** 2).mean())
+            row = dict(step=step, loss=float(loss.detach()), g_loss=float(loss_g.detach()),
+                       d_loss=float(loss_d.detach()), safe_fast=float(safe.detach()),
+                       action_mse=action_mse, success=scored["landings"],
+                       mean_steps=scored["mean_steps"], crash_rate=scored["crash_rate"],
+                       sink=sink_v, side_bias=side_v, adv_weight=ADV_WEIGHT)
+            rows.append(row)
+            snapshots[step] = (sink_v, side_v)
+            print(f"[late-collapse] step={step}/{steps} loss={row['loss']:.4f} "
+                  f"D={row['d_loss']:.4f} safe_fast={row['safe_fast']:.4f} "
+                  f"diag_action_mse={row['action_mse']:.5f} success={row['success']:.3f} "
+                  f"sink={sink_v:.3f}", flush=True)
+    return dict(rows=rows, snapshots=snapshots, panel_seed=1000, adv_weight=ADV_WEIGHT)
+
+
+def run_collapse_gate():
+    """Fail a blind final export of #23 and of the live walk-off. Pass selection."""
+    torch.set_num_threads(1)
+    trace = [dict(row) for row in PR23_TRACE]
+    frozen_blind = judge_export(trace, PR23_CHECKPOINTS[-1], PR23_CHECKPOINTS)
+    frozen_selected = judge_export(trace, frozen_blind["selected_step"], PR23_CHECKPOINTS)
+    live = train_late_collapse()
+    rows = live["rows"]
+    steps = [row["step"] for row in rows]
+    live_blind = judge_export(rows, steps[-1], steps)
+    live_selected = judge_export(rows, live_blind["selected_step"], steps)
+    panel = initial_states(EVAL_ROWS, live["panel_seed"])
+
+    def rescore(step):
+        sink, side = live["snapshots"][step]
+        return evaluate_policy(lambda state, sink=sink, side=side: expert_action(state, sink, side), panel)
+
+    shipped_eval = rescore(live_selected["shipped_step"])
+    final_eval = rescore(live_blind["shipped_step"])
+    logged_shipped = next(row for row in rows if row["step"] == live_selected["shipped_step"])
+    artifact_matches = abs(shipped_eval["landings"] - logged_shipped["success"]) < 1e-6
+    frozen_ok = ((not frozen_blind["passed"]) and frozen_selected["passed"]
+                 and frozen_selected["selected_step"] == 1000
+                 and frozen_blind["shipped_step"] == 2500)
+    live_ok = ((not live_blind["passed"]) and live_selected["passed"]
+               and live_selected["selected_step"] != steps[-1]
+               and logged_shipped["success"] >= SUCCESS_HIGH
+               and final_eval["landings"] <= SUCCESS_LOW
+               and shipped_eval["landings"] >= SUCCESS_HIGH
+               and artifact_matches and logged_shipped["adv_weight"] == 1.)
+    return dict(passed=bool(frozen_ok and live_ok), frozen_blind=frozen_blind,
+                frozen_selected=frozen_selected, live_blind=live_blind,
+                live_selected=live_selected, live_rows=rows, shipped_eval=shipped_eval,
+                final_eval=final_eval, artifact_matches=artifact_matches)
+
+
+def format_collapse_report(result):
+    lines = [f"[late-collapse] GATE {'PASS' if result['passed'] else 'FAIL'}"]
+    frozen = result["frozen_blind"]
+    picked = result["frozen_selected"]
+    lines.append("[late-collapse] pr23_blind " + ("FAIL" if not frozen["passed"] else "PASS")
+                 + f" shipped={frozen['shipped_step']} selected_would_be={frozen['selected_step']} "
+                 + f"reason={frozen['corpse_reason']}")
+    lines.append("[late-collapse] pr23_selected " + ("PASS" if picked["passed"] else "FAIL")
+                 + f" shipped={picked['shipped_step']} {picked['selection_reason']}")
+    for row in PR23_TRACE:
+        lines.append("[late-collapse] pr23 "
+                     f"step={row['step']} success={row['success']} loss={row['loss']} "
+                     f"D={row['d_loss']} safe_fast={row['safe_fast']} "
+                     f"diag_action_mse={row['action_mse']}")
+    lines.append("[late-collapse] live_blind " + ("FAIL" if not result["live_blind"]["passed"] else "PASS")
+                 + f" shipped={result['live_blind']['shipped_step']} "
+                 + f"reason={result['live_blind']['corpse_reason']}")
+    lines.append("[late-collapse] live_selected " + ("PASS" if result["live_selected"]["passed"] else "FAIL")
+                 + f" shipped={result['live_selected']['shipped_step']} "
+                 + f"{result['live_selected']['selection_reason']} "
+                 + f"rescore={result['shipped_eval']['landings']:.3f} "
+                 + f"final_rescore={result['final_eval']['landings']:.3f} "
+                 + f"artifact_matches={result['artifact_matches']}")
+    for row in result["live_rows"]:
+        lines.append("[late-collapse] live "
+                     f"step={row['step']} success={row['success']:.3f} loss={row['loss']:.4f} "
+                     f"D={row['d_loss']:.4f} safe_fast={row['safe_fast']:.4f} "
+                     f"diag_action_mse={row['action_mse']:.5f} sink={row['sink']:.3f}")
+    lines.append("[late-collapse] rule ship the last healthy checkpoint; "
+                 "closed-loop success wins when it was logged; "
+                 "diag_action_mse >10x with floor 0.2, or D<=0.05 while loss/safe_fast explode, "
+                 "or success drops from >=0.7 to <=0.1, refuses step=max")
+    lines.append("[late-collapse] adv_weight=1. Lunar retrain of this export rule has not been run.")
+    return "\n".join(lines)
 
 
 def format_report(result):

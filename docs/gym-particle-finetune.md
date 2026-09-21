@@ -9,8 +9,11 @@ Imitation and reconstruction L2 stay out of the graph.
 the safe-fast weights default to 0, so they are not in the graph.
 The optional safe-fast arm is a different file,
 [`particle_safe_fast.yaml`](gym-safe-fast.md). The first version of that
-file scored 0/50 on Lunar. The file in this branch is the revised
-throttle-up term, and it still needs a Lunar retrain.
+file scored 0/50 on Lunar. The throttle-up revision was healthy at step
+1000 (17/20) and dead at step 2500 (0/20). With the safe-fast weight on,
+export keeps the last checkpoint that passes the late-collapse rule.
+`particle.yaml` still copies the last step. Neither result has been
+retrained in this checkout.
 
 This is the continuation of the collapsed four-path particle finetune. On the
 shared-protocol board that arm scored **0/20 validation** and **2/50 test**
