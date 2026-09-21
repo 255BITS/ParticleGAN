@@ -1,0 +1,8 @@
+arm: sliders
+slider_scope: all
+paired_error_weight: 1.0
+steps: 2500
+batch_size: 256
+checkpoints: [250, 1000, 2500]
+device: cuda:1
+out_dir: results/gym/lunar_lander_slider_gan/sliders_all

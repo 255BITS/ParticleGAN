@@ -10,6 +10,11 @@ not recover imitation performance. See the
 [readout](../reports/gym/lunar_lander_previous_gan/READOUT.md) for the comparison
 and fixed-input action diagnostics.
 
+The [sliders follow-up](gym-slider-gan.md) replaced all paired MSE/BCE with an
+adversarial error critic. On another set of fresh paired worlds it landed 6/50
+versus 11/50 for this L2 model; both checkpoints were reselected on the same new
+validation worlds. The full-label previous-action architecture was held fixed.
+
 ```text
 prior -> z -> G1 -> st
            -> G2 -> at

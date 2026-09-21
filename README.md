@@ -71,6 +71,9 @@ leaderboard comparing joint and marginal discriminators.
 The [previous-action GAN experiment](docs/gym-previous-gan.md) restores
 `E(st, at-1)` and trains the three-generator model from scratch with joint and
 marginal GAN losses plus expert action MSE, using all 47 labeled episodes.
+The [slider-error experiment](docs/gym-slider-gan.md) replaces paired MSE/BCE
+supervision with an Anima-style critic on noisy prediction errors, while keeping
+joint and marginal GAN training active.
 
 ```python
 from particlegan import ParticlePrior, GANLoss, GradientPenalty, ParticleRegularizer

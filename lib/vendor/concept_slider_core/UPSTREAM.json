@@ -1,0 +1,7 @@
+{
+  "repository": "https://github.com/mikkel/sliders-conceptmod",
+  "commit": "beaffeb3640c4554a7315998c04a5909f384b972",
+  "path": "packages/concept-slider-core/src/concept_slider_core/reference.py",
+  "sha256": "c5ef81e49826a8b9065f1b1ab11b03f3fccce7a93c9de8d31b897f668f48b833",
+  "usage": "Unmodified MIT reference: GlobalMixErrorCritic, paired losses, normalization and noise schedule. ParticleGAN keeps its existing MoG router and prior regularizer."
+}

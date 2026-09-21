@@ -1,0 +1,19 @@
+........................................................................ [ 20%]
+..............................................ssss...................... [ 40%]
+........................................................................ [ 60%]
+........................................................................ [ 80%]
+........................................................................                                              [100%]
+=============================== warnings summary ===============================
+tests/test_image_ddgan.py::test_fid_quantization_and_statistics_api
+  /home/martyn/dev/ParticleGAN/.venv/lib/python3.12/site-packages/torch_fidelity/metric_fid.py:47: DeprecationWarning: The `disp` argument is deprecated and will be removed in SciPy 1.18.0.
+    covmean, _ = scipy.linalg.sqrtm(sigma1.dot(sigma2), disp=False)
+
+tests/test_regularizers.py::test_finite_differences_dual_norms
+  /home/martyn/dev/ParticleGAN/tests/test_regularizers.py:349: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+  Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+    norms[norm] = float(reg._grad_norm(D, x_real).mean())
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [4] tests/test_cifar_resume.py:19: opt-in real-data CUDA integration test
+356 passed, 4 skipped, 2 warnings, 27 subtests passed in 24.55s
