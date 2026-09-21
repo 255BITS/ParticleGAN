@@ -1,0 +1,545 @@
+{
+  "name": "direct_final",
+  "conditional": {
+    "count": 8192,
+    "continuous_mse": 0.004819915629923344,
+    "continuous_mse_p95": 0.0070218248292803764,
+    "position_l2": 0.0066497656516730785,
+    "velocity_l2": 0.012210900895297527,
+    "angle_mae": 0.0024667722173035145,
+    "angular_velocity_mae": 0.010596949607133865,
+    "contact_brier": 0.004837511642725427,
+    "contact_bce": 0.027556449403669886,
+    "contact_precision": 0.9865334491746307,
+    "contact_recall": 0.9730077120822622,
+    "contact_positive_labels": 2334,
+    "nonfinite": 0,
+    "outside_horizontal_bounds": 0.0,
+    "phases": {
+      "flight": {
+        "count": 4096,
+        "continuous_mse": 0.0013302930165082216,
+        "continuous_mse_p95": 0.004128256347030401,
+        "position_l2": 0.007385502569377422,
+        "velocity_l2": 0.012728732079267502,
+        "angle_mae": 0.002495231106877327,
+        "angular_velocity_mae": 0.007703237235546112,
+        "contact_brier": 1.0201473655026365e-11,
+        "contact_bce": 7.326793064229257e-07,
+        "contact_precision": 0.0,
+        "contact_recall": 0.0,
+        "contact_positive_labels": 0,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      },
+      "approach": {
+        "count": 2858,
+        "continuous_mse": 0.001746207708492875,
+        "continuous_mse_p95": 0.005553427152335644,
+        "position_l2": 0.005842335522174835,
+        "velocity_l2": 0.011791722849011421,
+        "angle_mae": 0.0021309468429535627,
+        "angular_velocity_mae": 0.009136680513620377,
+        "contact_brier": 0.0020526111363187455,
+        "contact_bce": 0.007503513423886265,
+        "contact_precision": 0.0,
+        "contact_recall": 0.0,
+        "contact_positive_labels": 0,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      },
+      "contact": {
+        "count": 1238,
+        "continuous_mse": 0.023461395874619484,
+        "continuous_mse_p95": 0.09018731117248535,
+        "position_l2": 0.006079536862671375,
+        "velocity_l2": 0.011465320363640785,
+        "angle_mae": 0.0031478884629905224,
+        "angular_velocity_mae": 0.023542098701000214,
+        "contact_brier": 0.027271835789840458,
+        "contact_bce": 0.16501970201531316,
+        "contact_precision": 0.9947437582128777,
+        "contact_recall": 0.9730077120822622,
+        "contact_positive_labels": 2334,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      }
+    }
+  },
+  "action_response": {
+    "all": {
+      "pairs": 12288,
+      "effect_mse": 0.0023041965891237603,
+      "zero_response_mse": 0.012995335524202706
+    },
+    "threshold_crossing": {
+      "pairs": 11259,
+      "effect_mse": 0.00240962105292908,
+      "zero_response_mse": 0.01415626618638805
+    },
+    "same_active_regime": {
+      "pairs": 722,
+      "effect_mse": 0.001138520978834241,
+      "zero_response_mse": 0.00041728799011053297
+    },
+    "both_inactive": {
+      "pairs": 307,
+      "effect_mse": 0.0011792576726577593,
+      "zero_response_mse": 0.0
+    }
+  },
+  "inference_samples_per_second": 4407134.9875090225,
+  "rollout": {
+    "horizons": {
+      "1": {
+        "count": 24,
+        "continuous_mse": 0.11527790874242783,
+        "continuous_mse_p95": 0.9045125246047974,
+        "position_l2": 0.00738527299836278,
+        "velocity_l2": 0.013815109618008137,
+        "angle_mae": 0.004507582169026136,
+        "angular_velocity_mae": 0.05366295576095581,
+        "contact_brier": 0.08705549999040019,
+        "contact_bce": 0.6907052949068628,
+        "contact_precision": 1.0,
+        "contact_recall": 0.6363636363636364,
+        "contact_positive_labels": 11,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      },
+      "5": {
+        "count": 24,
+        "continuous_mse": 0.382361501455307,
+        "continuous_mse_p95": 1.4659112691879272,
+        "position_l2": 0.027767859399318695,
+        "velocity_l2": 0.051241327077150345,
+        "angle_mae": 0.023857703432440758,
+        "angular_velocity_mae": 0.09651490300893784,
+        "contact_brier": 0.1142487797854743,
+        "contact_bce": 0.7009435337647512,
+        "contact_precision": 0.6666666666666666,
+        "contact_recall": 0.6,
+        "contact_positive_labels": 10,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      },
+      "20": {
+        "count": 24,
+        "continuous_mse": 0.23199070990085602,
+        "continuous_mse_p95": 0.7227904796600342,
+        "position_l2": 0.09336566179990768,
+        "velocity_l2": 0.16985535621643066,
+        "angle_mae": 0.0594964437186718,
+        "angular_velocity_mae": 0.07441624253988266,
+        "contact_brier": 0.09749448268576381,
+        "contact_bce": 1.2792432836676995,
+        "contact_precision": 1.0,
+        "contact_recall": 0.6666666666666666,
+        "contact_positive_labels": 15,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      },
+      "50": {
+        "count": 22,
+        "continuous_mse": 0.7534139752388,
+        "continuous_mse_p95": 2.522064447402954,
+        "position_l2": 0.19939979910850525,
+        "velocity_l2": 0.28043872117996216,
+        "angle_mae": 0.10980537533760071,
+        "angular_velocity_mae": 0.13237255811691284,
+        "contact_brier": 0.0904740561204027,
+        "contact_bce": 1.1507253795334058,
+        "contact_precision": 1.0,
+        "contact_recall": 0.75,
+        "contact_positive_labels": 16,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      }
+    },
+    "anchors": [
+      {
+        "episode_id": 200000,
+        "anchor": 0,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200000,
+        "anchor": 75,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200000,
+        "anchor": 124,
+        "phase": "contact",
+        "length": 41
+      },
+      {
+        "episode_id": 200001,
+        "anchor": 1,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200001,
+        "anchor": 135,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200001,
+        "anchor": 207,
+        "phase": "contact",
+        "length": 50
+      },
+      {
+        "episode_id": 200002,
+        "anchor": 3,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200002,
+        "anchor": 78,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200002,
+        "anchor": 130,
+        "phase": "contact",
+        "length": 50
+      },
+      {
+        "episode_id": 200003,
+        "anchor": 0,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200003,
+        "anchor": 83,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200003,
+        "anchor": 129,
+        "phase": "contact",
+        "length": 50
+      },
+      {
+        "episode_id": 200004,
+        "anchor": 1,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200004,
+        "anchor": 79,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200004,
+        "anchor": 148,
+        "phase": "contact",
+        "length": 50
+      },
+      {
+        "episode_id": 200005,
+        "anchor": 2,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200005,
+        "anchor": 128,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200005,
+        "anchor": 207,
+        "phase": "contact",
+        "length": 43
+      },
+      {
+        "episode_id": 200006,
+        "anchor": 1,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200006,
+        "anchor": 64,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200006,
+        "anchor": 115,
+        "phase": "contact",
+        "length": 50
+      },
+      {
+        "episode_id": 200007,
+        "anchor": 0,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200007,
+        "anchor": 79,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200007,
+        "anchor": 133,
+        "phase": "contact",
+        "length": 50
+      }
+    ],
+    "termination": "stop at saved reference episode end"
+  },
+  "counterfactual_commands": {
+    "off": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.0,
+      "zero_response_mse": 0.0
+    },
+    "main_boundary": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.002810364507200718,
+      "zero_response_mse": 0.0
+    },
+    "main_above": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.002692454759473746,
+      "zero_response_mse": 0.0036420745465661868
+    },
+    "main_full": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.013443199850702178,
+      "zero_response_mse": 0.016476694254642994
+    },
+    "left_boundary": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.0021740535210459083,
+      "zero_response_mse": 0.0
+    },
+    "left_above": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.00030220132361597185,
+      "zero_response_mse": 0.003063615786352133
+    },
+    "left_full": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.00108531978126356,
+      "zero_response_mse": 0.012250733929139418
+    },
+    "right_boundary": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.002475672096438772,
+      "zero_response_mse": 0.0
+    },
+    "right_above": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.0003923238200583389,
+      "zero_response_mse": 0.003363347746238473
+    },
+    "right_full": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.0012317945973998729,
+      "zero_response_mse": 0.013453056611580283
+    },
+    "combined": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.013273373481359887,
+      "zero_response_mse": 0.026081854434091153
+    }
+  },
+  "checkpoint": "results/gym/lunar_lander/direct/final.pt",
+  "checkpoint_sha256": "16ae0c36fcaf17f7c5334a59fdd9aef6e6bf16bf0b5e30521784b927d625159a",
+  "training": {
+    "config": {
+      "arm": "direct",
+      "width": 128,
+      "encoder_width": 128,
+      "d_width": 256,
+      "marginal_width": 128,
+      "z_dim": 32,
+      "num_particles": 1024,
+      "context_dim": 11,
+      "continuous_weight": 1.0,
+      "contact_weight": 1.0,
+      "real_encoding_weight": 1.0,
+      "synthetic_reconstruction_weight": 1.0,
+      "marginal_weight": 1.0,
+      "seed": 24002,
+      "device": "cuda:1",
+      "steps": 10000,
+      "batch_size": 256,
+      "log_interval": 250,
+      "checkpoints": [
+        1000,
+        2500,
+        5000,
+        10000
+      ],
+      "data_dir": "results/gym/lunar_lander/data",
+      "out_dir": "results/gym/lunar_lander/direct",
+      "live_log": "results/gym/lunar_lander/live.log"
+    },
+    "recipe": {
+      "name": "mog",
+      "model": "gan",
+      "z_dim": 32,
+      "num_particles": 1024,
+      "prior_kind": "mog",
+      "sigma_rel": 0.025,
+      "standardize": true,
+      "num_classes": null,
+      "conditioning": "scalar",
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 256,
+      "total_steps": 10000,
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 100.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_betas": [
+        0.5,
+        0.999
+      ],
+      "loss_type": "logistic",
+      "gan_mode": "rp",
+      "reg_arm": "b_cap",
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "reg_every": 1,
+      "reg_method": "autograd",
+      "prior_reg": 1.0,
+      "ema_decay": 0.995,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "encoder_mode": "none",
+      "routing_temperature": 0.25,
+      "distance_reduction": "sum",
+      "observation_sigma": 0.03,
+      "reconstruction_weight": 1.0
+    },
+    "provenance": {
+      "sources": {
+        "experiments/train_gym_transition.py": "53b19a8f6829094d1eff99d9fd9e2adefc904e545f50f7b91227e80eec82a62b",
+        "lib/gym_transition.py": "0353acc41e4263b71f4c6c04c2918db0106d256938cea9e1c16a92fc58ebbcf0",
+        "lib/gym_data.py": "e32979f8da059466a7122bbdf30607e3f51b0a23f8b41f8ca5202947401d133f",
+        "examples/gym_world_model.py": "b03f6af4eb8ec24d1146998f2826af16520d0be65138d01ba276fc482ecd5c7b",
+        "experiments/collect_gym_transition.py": "9b3679ea1ee0aa69424d714574e310fe4e6a4bef83c8787e797920f0397ee875",
+        "particlegan/__init__.py": "3b1241444e97cb2a79ffb82ee9d99b7a7ee3a5085425d99418e0dffa115a5d56",
+        "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+        "particlegan/grad_regularizers.py": "45fb38532b4d0e6fa3b8483fdf18b3c822055363e68dbee4fc8e6222dabb19c6",
+        "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+        "particlegan/recipes.py": "33ea97c94f4dd79ee2c5451cdf9e9ce98272921d71a300918258e8df3e6a88bc",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+        "configs/gym/lunar_lander/adversarial.yaml": "65f4da235898cbc071a89b42d0f73c11ed2d9d084d08dd06b6ba454bdbbf2be0",
+        "configs/gym/lunar_lander/direct.yaml": "c9634d1bb95258d76e31b886e273dbce40f39ae8dc3af64ce0f479f713488d31",
+        "configs/gym/lunar_lander/reconstruction.yaml": "ee3e4d31cf53062f9f4fc4d0f0e57c8736221f3da51537e5f534e3e2451b147e"
+      },
+      "dataset": {
+        "train.npz": "92a6d347d7bcc5deef5ed52cd10c1f8d2d057030bc18212f03db37784bd1451c",
+        "validation.npz": "6d55889f46eda05cae1aa6935680e1a7f9325083ea5f831c8de1013b1756d0eb",
+        "test.npz": "0bceb7b7b4372961ac964597570f4f3b07e69eb536f1a6b066766282b5eb49d2",
+        "metadata.json": "45dc50ccf125a03d9a56791d1471d1e0e5beb6602c74f15d5a316da9e0674fab",
+        "episodes.json": "2e3e3aa539d4d4b5c71f8c41cba5777f860bd6bc2ba18ea6bd6344b66da15589"
+      },
+      "source_archive_sha256": "3e66eb43a4df7aa470e63ad463c790c26408b0c0a8b16b3d3d84682cf0a2c320"
+    },
+    "parameters": {
+      "G": 0,
+      "E": 0,
+      "prior": 0,
+      "D": 0,
+      "direct": 99940
+    },
+    "full_parameters": 99940,
+    "inference_parameters": 99940,
+    "inference_target": 100040,
+    "direct_width": 301,
+    "unique_training_triples": 32768,
+    "normalization_triples": 32768,
+    "generator_optimizer_record_draws": 2560000,
+    "discriminator_optimizer_record_draws": 0,
+    "real_draws": 2560000,
+    "validation_record_draws": 16384,
+    "train_seconds": 9.727293781063054,
+    "total_seconds": 9.875419782998506,
+    "validation_history": [
+      {
+        "step": 1000,
+        "next_standardized_mse": 0.010901419445872307,
+        "next_standardized_mse_p95": 0.029749421402812004,
+        "contact_brier": 0.006166758015751839,
+        "contact_bce": 0.028819456696510315
+      },
+      {
+        "step": 2500,
+        "next_standardized_mse": 0.01248995028436184,
+        "next_standardized_mse_p95": 0.0480833500623703,
+        "contact_brier": 0.005224099848419428,
+        "contact_bce": 0.02637433633208275
+      },
+      {
+        "step": 5000,
+        "next_standardized_mse": 0.01832578331232071,
+        "next_standardized_mse_p95": 0.05841461941599846,
+        "contact_brier": 0.006774425506591797,
+        "contact_bce": 0.03551016002893448
+      },
+      {
+        "step": 10000,
+        "next_standardized_mse": 0.016148589551448822,
+        "next_standardized_mse_p95": 0.05796896293759346,
+        "contact_brier": 0.011527259834110737,
+        "contact_bce": 0.06315881013870239
+      }
+    ],
+    "best_step": 1000,
+    "best_validation_mse": 0.010901419445872307,
+    "final_validation": {
+      "step": 10000,
+      "next_standardized_mse": 0.016148589551448822,
+      "next_standardized_mse_p95": 0.05796896293759346,
+      "contact_brier": 0.011527259834110737,
+      "contact_bce": 0.06315881013870239
+    },
+    "selection": "minimum validation six-coordinate standardized MSE",
+    "checkpoints": {
+      "best.pt": "eee69ecc310b52e02a090ade026f18df1bb01e740cae70537e6983b4ef77b87c",
+      "checkpoint_1000.pt": "eee69ecc310b52e02a090ade026f18df1bb01e740cae70537e6983b4ef77b87c",
+      "checkpoint_10000.pt": "16ae0c36fcaf17f7c5334a59fdd9aef6e6bf16bf0b5e30521784b927d625159a",
+      "checkpoint_2500.pt": "1dbdfa246e335a4b3460b9a2f3823a387ef81b743b81a365a0afbada95407193",
+      "checkpoint_5000.pt": "6cad4ac4252e55910fa08c1fbab65883924bf450c830bce2248f0f8419d8ee87",
+      "final.pt": "16ae0c36fcaf17f7c5334a59fdd9aef6e6bf16bf0b5e30521784b927d625159a"
+    },
+    "contact_training": "BCE logits; Bernoulli hard fake records with ST G gradient; detached synthetic contact bits",
+    "inference": "deterministic E->G3 continuous point prediction and contact probabilities; privileged terrain context"
+  },
+  "training_summary_sha256": "35b72820824d11833b205114cde7e0c85b59cc25e609babaa40248f1ac2de13b"
+}

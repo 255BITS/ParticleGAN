@@ -1,0 +1,161 @@
+{
+  "protocol_sha256": "f25d9002e35d28e6f85068822af4aed2ef0d1a93d1e9e3ac4c076fdab7f35288",
+  "provenance": {
+    "probes": {
+      "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_state_control/probes/best.pt",
+      "checkpoint_sha256": "07863a8e7b9ccaad2ce82a7751e4df10896babd89b45e6ff16ae44b83e823781",
+      "selection": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_state_control/selections/probes.json",
+      "selection_sha256": "abe6c229ce304a7410f81d5af77b7da0511f1ebbd1ded719bf3491d3398060a9",
+      "evaluation": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_state_control/evaluations/probes_selected_test.json",
+      "evaluation_sha256": "1727175948ae2764a9510253e53cf7ce6f6713faf1eeef0c11540512b093553a",
+      "traces": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_state_control/traces/probes_selected_test.npz",
+      "traces_sha256": "5957b581814cd6164f483c63cb62c9267fb0de324857817c44788099101f31d8"
+    },
+    "auxiliary": {
+      "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_state_control/auxiliary/best.pt",
+      "checkpoint_sha256": "07a691b8e182e87ebcd0fc5b07e95d752ab3f3a347b7290f0a58873b83b33fd8",
+      "selection": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_state_control/selections/auxiliary.json",
+      "selection_sha256": "21768797b5ed273274e79501f2e01e0d2b3eb37508fd9a8ec8b07227b2c1ff83",
+      "evaluation": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_state_control/evaluations/auxiliary_selected_test.json",
+      "evaluation_sha256": "cb9b26c41ce5a1401473a77d932a79075549d21c53479c43bc453b4fb8af3c95",
+      "traces": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_state_control/traces/auxiliary_selected_test.npz",
+      "traces_sha256": "e7eae81bf3bc729a9c8682114d1112dc122e90c56bb78e6438dcda818af428f5"
+    }
+  },
+  "sources": {
+    "experiments/diagnose_gym_state_cross.py": "9602be361c0fdc1e5fd76857555864b4087cdc948f1e034745aae803723b77b8",
+    "experiments/evaluate_gym_state_control.py": "447cdba82a9741ebb01a40140a6fe2977743852ed8a8f6dc6def5f135c5c0722",
+    "lib/gym_state_control.py": "583cc4f5b1678c6fc721f181446bcf33e5e50b4cb6af339ec43e1f5614f24466"
+  },
+  "device": "cpu",
+  "simulator_calls": 0,
+  "training_updates": 0,
+  "cells": [
+    {
+      "model": "probes",
+      "trace_controller": "probes",
+      "records": 10095,
+      "state": {
+        "standardized_continuous_mse": 0.2577698826789856,
+        "physical_continuous_mse": 0.018551168963313103,
+        "contact_bce": 0.04372014105319977,
+        "contact_brier": 0.010602248832583427,
+        "contact_accuracy": 0.988360583782196
+      },
+      "next_state": {
+        "standardized_continuous_mse": 0.267314612865448,
+        "physical_continuous_mse": 0.01818813569843769,
+        "contact_bce": 0.07212663441896439,
+        "contact_brier": 0.017016254365444183,
+        "contact_accuracy": 0.9786527752876282
+      },
+      "persistence_next_state": {
+        "standardized_continuous_mse": 0.01920655183494091,
+        "physical_continuous_mse": 0.0004454233858268708,
+        "contact_brier": 0.009608717635273933,
+        "contact_accuracy": 0.9903912544250488
+      },
+      "standardized_action_mse": 1.638635550220511e-14,
+      "physical_action_mse": 6.0697457734330655e-15,
+      "main_regime_agreement": 1.0,
+      "lateral_regime_agreement": 1.0,
+      "joint_regime_agreement": 1.0
+    },
+    {
+      "model": "auxiliary",
+      "trace_controller": "probes",
+      "records": 10095,
+      "state": {
+        "standardized_continuous_mse": 0.016088325530290604,
+        "physical_continuous_mse": 0.0011239009909331799,
+        "contact_bce": 0.0009673503809608519,
+        "contact_brier": 7.666198507649824e-05,
+        "contact_accuracy": 0.9999504685401917
+      },
+      "next_state": {
+        "standardized_continuous_mse": 0.028206786140799522,
+        "physical_continuous_mse": 0.0013762523885816336,
+        "contact_bce": 0.035344548523426056,
+        "contact_brier": 0.01016892958432436,
+        "contact_accuracy": 0.9864289164543152
+      },
+      "persistence_next_state": {
+        "standardized_continuous_mse": 0.01920655183494091,
+        "physical_continuous_mse": 0.0004454233858268708,
+        "contact_brier": 0.009608717635273933,
+        "contact_accuracy": 0.9903912544250488
+      },
+      "standardized_action_mse": 0.038827285170555115,
+      "physical_action_mse": 0.014191994443535805,
+      "main_regime_agreement": 0.9885091629519565,
+      "lateral_regime_agreement": 0.9034175334323923,
+      "joint_regime_agreement": 0.8921248142644874
+    },
+    {
+      "model": "probes",
+      "trace_controller": "auxiliary",
+      "records": 10692,
+      "state": {
+        "standardized_continuous_mse": 1.0266398191452026,
+        "physical_continuous_mse": 0.06376231461763382,
+        "contact_bce": 0.5331519842147827,
+        "contact_brier": 0.06858382374048233,
+        "contact_accuracy": 0.9240086078643799
+      },
+      "next_state": {
+        "standardized_continuous_mse": 1.0177158117294312,
+        "physical_continuous_mse": 0.05983210355043411,
+        "contact_bce": 0.40098118782043457,
+        "contact_brier": 0.07546305656433105,
+        "contact_accuracy": 0.9118967652320862
+      },
+      "persistence_next_state": {
+        "standardized_continuous_mse": 0.04797159880399704,
+        "physical_continuous_mse": 0.0010262024588882923,
+        "contact_brier": 0.013421249575912952,
+        "contact_accuracy": 0.9865787625312805
+      },
+      "standardized_action_mse": 0.34168925881385803,
+      "physical_action_mse": 0.1256592720746994,
+      "main_regime_agreement": 0.909652076318743,
+      "lateral_regime_agreement": 0.560231949120838,
+      "joint_regime_agreement": 0.5059857837635615
+    },
+    {
+      "model": "auxiliary",
+      "trace_controller": "auxiliary",
+      "records": 10692,
+      "state": {
+        "standardized_continuous_mse": 0.3382292091846466,
+        "physical_continuous_mse": 0.017844902351498604,
+        "contact_bce": 0.15713068842887878,
+        "contact_brier": 0.041388291865587234,
+        "contact_accuracy": 0.9486064314842224
+      },
+      "next_state": {
+        "standardized_continuous_mse": 0.37763217091560364,
+        "physical_continuous_mse": 0.018378248438239098,
+        "contact_bce": 0.2210753858089447,
+        "contact_brier": 0.05880846828222275,
+        "contact_accuracy": 0.9272353053092957
+      },
+      "persistence_next_state": {
+        "standardized_continuous_mse": 0.04797159880399704,
+        "physical_continuous_mse": 0.0010262024588882923,
+        "contact_brier": 0.013421249575912952,
+        "contact_accuracy": 0.9865787625312805
+      },
+      "standardized_action_mse": 1.0090229162190018e-14,
+      "physical_action_mse": 3.890020833122003e-15,
+      "main_regime_agreement": 1.0,
+      "lateral_regime_agreement": 1.0,
+      "joint_regime_agreement": 1.0
+    }
+  ],
+  "scope": "Posthoc comparison on previously evaluated test trajectories. Equal inputs within each trace dataset; transition-weighted metrics.",
+  "caveats": [
+    "G3 has no alternative-action input. On another controller trajectory its predicted action may differ from the recorded action that produced the successor.",
+    "Action MSE compares each model command against the recorded learner command, not expert commands.",
+    "This describes generalization on fixed states; it is not a causal test of control quality, an unrestricted counterfactual model test, or a new checkpoint selection."
+  ]
+}

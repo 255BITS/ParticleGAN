@@ -1,0 +1,15 @@
+arm: imitation
+batch_size: 256
+checkpoint: results/gym/lunar_lander/adversarial/best.pt
+checkpoints:
+- 250
+- 1000
+- 2500
+device: cuda:1
+episodes: results/gym/lunar_lander/data/episodes.json
+imitation_weight: 1.0
+live_log: results/gym/lunar_lander_control/live.log
+log_interval: 250
+out_dir: results/gym/lunar_lander_control/imitation
+seed: 24002
+steps: 2500

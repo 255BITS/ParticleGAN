@@ -1,0 +1,416 @@
+{
+  "sources": {
+    "experiments/train_gym_gan_control.py": "2c3fde430d08e96bfce772c162f4ff3d0ca881fc4e3b5eea1f21bc503d26ae93",
+    "lib/gym_gan_control.py": "81ac32d83aa11a7bad0fc78cedb4eea5d57a66255318e3ca9ab8abe9a6cc2441",
+    "lib/gym_sparse_action.py": "a56dca6275230a81f514d15fc6223e0bf955f35ceb835be266285aaf5b4408f6",
+    "lib/gym_state_control.py": "583cc4f5b1678c6fc721f181446bcf33e5e50b4cb6af339ec43e1f5614f24466",
+    "lib/gym_transition.py": "0353acc41e4263b71f4c6c04c2918db0106d256938cea9e1c16a92fc58ebbcf0",
+    "experiments/train_gym_transition.py": "53b19a8f6829094d1eff99d9fd9e2adefc904e545f50f7b91227e80eec82a62b",
+    "experiments/config.py": "e4b5261994560b4350883240ec28f44816b5d3f6b23d57885f5f2f1ae68af5e9",
+    "particlegan/__init__.py": "3b1241444e97cb2a79ffb82ee9d99b7a7ee3a5085425d99418e0dffa115a5d56",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "45fb38532b4d0e6fa3b8483fdf18b3c822055363e68dbee4fc8e6222dabb19c6",
+    "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+    "particlegan/recipes.py": "33ea97c94f4dd79ee2c5451cdf9e9ce98272921d71a300918258e8df3e6a88bc",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "configs/gym/lunar_lander_gan_control/joint.yaml": "d12f4ac71f92073acc70b7ed86ca4129d3fca84340e00de7549bf382c7e951fb",
+    "configs/gym/lunar_lander_gan_control/marginals.yaml": "5fa33d4ec64275cb74ca3cac4e1f7160a3e5e6577a5e91abd337269da7c2bcb8"
+  },
+  "source_archive_sha256": "09a8f97fd9cf73f8b27b9b5d3924678bdc2c40ea68dd31bf6968b57b2420310d",
+  "episodes": {
+    "path": "results/gym/lunar_lander/data/episodes.json",
+    "sha256": "2e3e3aa539d4d4b5c71f8c41cba5777f860bd6bc2ba18ea6bd6344b66da15589"
+  },
+  "expert_data": {
+    "split": "train",
+    "behavior": "heuristic",
+    "count": 9297,
+    "episode_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      70,
+      71,
+      72,
+      73,
+      74
+    ],
+    "arrays": {
+      "states": {
+        "shape": [
+          9297,
+          8
+        ],
+        "dtype": "float32",
+        "sha256": "c721666d1dcba8783a3763f9973e3a22012f347e19f41922fc849b01507c9fe0"
+      },
+      "next_states": {
+        "shape": [
+          9297,
+          8
+        ],
+        "dtype": "float32",
+        "sha256": "644d174f25a516f28b23c6d4f61e081a599309f43821c62ba5c5ddbdf132ddf4"
+      },
+      "terrain": {
+        "shape": [
+          9297,
+          11
+        ],
+        "dtype": "float32",
+        "sha256": "5add592439b0c67335529d02c2d1064369afe95b348f077438dc5985a3769324"
+      },
+      "episode_ids": {
+        "shape": [
+          9297
+        ],
+        "dtype": "int64",
+        "sha256": "8dc02310bd105d9ca222c278e8b831de313efdb6132f856747285bb95af7c544"
+      },
+      "steps": {
+        "shape": [
+          9297
+        ],
+        "dtype": "int64",
+        "sha256": "5884f551d5b2029530afb0b53dd61074b82b03dbb94270235e314d3a0fe2d8e8"
+      },
+      "label_mask": {
+        "shape": [
+          9297
+        ],
+        "dtype": "bool",
+        "sha256": "a26860e6ac3d66906384c80f16bfa25efcf00c23103e794a44a52573bfea2dd6"
+      },
+      "labeled_indices": {
+        "shape": [
+          1010
+        ],
+        "dtype": "int64",
+        "sha256": "72fb585d0b22766705fcaf9201cb432af8e50aa23b43ad8f9b721b2f72c8c69e"
+      },
+      "labeled_actions": {
+        "shape": [
+          1010,
+          2
+        ],
+        "dtype": "float32",
+        "sha256": "7bdb72897313c1b94934fa911ffc6673b3ded1ac23e59ee9f149f020f681ff71"
+      }
+    },
+    "npz_sha256": "0c94e01bd49fd6174454883d6bb44130ae2bab73860dc6d9c273c20e628e9db8"
+  },
+  "labeled_data": {
+    "count": 1010,
+    "episode_ids": [
+      3,
+      15,
+      53,
+      5,
+      22
+    ]
+  },
+  "selection": {
+    "salt": "lunar-sparse-actions-v1",
+    "rule": "SHA256(salt:episode_id), ascending digest, first five",
+    "labeled_episode_ids": [
+      3,
+      15,
+      53,
+      5,
+      22
+    ],
+    "candidate_episode_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      70,
+      71,
+      72,
+      73,
+      74
+    ],
+    "ordering": [
+      {
+        "episode_id": 3,
+        "sha256": "08dd1948d6c406761263dfb0b710de84584571c650266d42fca9dd26ccabae18"
+      },
+      {
+        "episode_id": 15,
+        "sha256": "0ff4f68cd38a7fc517b457cf6eeaa99c29b4a076651577f2aa8e9e7b789331a7"
+      },
+      {
+        "episode_id": 53,
+        "sha256": "1c98f5c44016d2cb05922a6ef31208d117ba18c31f9b1de39c58ffed1d00240b"
+      },
+      {
+        "episode_id": 5,
+        "sha256": "1d4dd3dfd9da00220d87c80dc93cfce88cb0bb06bfbe5d80e29b450175e6f3e0"
+      },
+      {
+        "episode_id": 22,
+        "sha256": "1ee44cb05e9721ec0935c77ff32975f7e374fb8092a5273d05d492c6fb1878f8"
+      },
+      {
+        "episode_id": 73,
+        "sha256": "233571c1f21f7835e1874c7724040e3656a0c5a43d027152134d5b9983956a3b"
+      },
+      {
+        "episode_id": 34,
+        "sha256": "2cc3bf7fe7aee9f6254b8411792bd87c4ffcda0e457369cf7fad560518c3698e"
+      },
+      {
+        "episode_id": 30,
+        "sha256": "3472c68f5b9aa407d24066c62b4de583d172c481442ce4fab921bb2009f928b5"
+      },
+      {
+        "episode_id": 45,
+        "sha256": "43b57ca1dbf9e1b9c45ff3d2913e86b472e16623f50ae45cfdd3de7dfde00226"
+      },
+      {
+        "episode_id": 65,
+        "sha256": "444aee778308b970d5934c5da0f5a3912b0bf771d8de7763f65b5eb13763d9b5"
+      },
+      {
+        "episode_id": 60,
+        "sha256": "4c04e99bd658891b8cd0c3049e90de89ffba38a26f1b34cc2be90d176dedf180"
+      },
+      {
+        "episode_id": 24,
+        "sha256": "4eab47fac2b28781daaabcf2eabae1dc3c6f960d13ad85a488ae86f672f6279c"
+      },
+      {
+        "episode_id": 44,
+        "sha256": "5ac0becbea256c02887f3b330cc3997577955598bd2eb158856f4ce93684edb1"
+      },
+      {
+        "episode_id": 43,
+        "sha256": "5bedbffc080174f504c4a158cdf9b387bfb34cc6d449d12772597d985ae99f80"
+      },
+      {
+        "episode_id": 51,
+        "sha256": "60d359a86287ca5864c423af65567a109b03945d966be226a1070f7ad9d4a43a"
+      },
+      {
+        "episode_id": 61,
+        "sha256": "7314f789163aa4e341c2cf7d622ba48b09f0bee2927253a4e65b8a67265071df"
+      },
+      {
+        "episode_id": 10,
+        "sha256": "7ba77a70ec47bf563f87d673deee2b1e56f0268d4fcd12795c5ca885c6a8f7d2"
+      },
+      {
+        "episode_id": 52,
+        "sha256": "86f4262be3b6bf697bbf9b12debbd433b43da58a573771ad4ae898d9ceff70a0"
+      },
+      {
+        "episode_id": 55,
+        "sha256": "877a80a388297fdace1bba02dfb9b592dc267c5530cbc860a31c55ea89c89eac"
+      },
+      {
+        "episode_id": 11,
+        "sha256": "8e8682e079ccaa33d859b2ceb717af2a2d1bc4fbf80e2b22ed989eb941b61600"
+      },
+      {
+        "episode_id": 72,
+        "sha256": "947e5b419d885b38f67933026df3eb7f84b3a955b102230029bcf0c4cbde2a23"
+      },
+      {
+        "episode_id": 50,
+        "sha256": "9723dc0793bb579df0144acd03e1b4f46f29df668a5418b99421774882736985"
+      },
+      {
+        "episode_id": 54,
+        "sha256": "9b09dbd50a8db6613af82a39e5aae4b0445a2d1e506897251643c7bd87ae97bf"
+      },
+      {
+        "episode_id": 40,
+        "sha256": "9cd65da2eca509debe3949aca2b7b3af012df83c77caf6cbbd75c3728a6f2d6a"
+      },
+      {
+        "episode_id": 21,
+        "sha256": "9dcacd162466276d880a1ef2463cfc89c2c57c65d19ac99fa7295a49d1ee0732"
+      },
+      {
+        "episode_id": 32,
+        "sha256": "9f2cd339901a4f6a13da04123c38466d94a55c946440a3010aafa87692e464f3"
+      },
+      {
+        "episode_id": 25,
+        "sha256": "a8ddc7f483afe7568d963ea080d5b016733ca7c8dbcf54e97deae9ce0f1f896a"
+      },
+      {
+        "episode_id": 63,
+        "sha256": "ac0394774d284671ea34ac734676dd145567da2d40ccddf4c333be6977e26cb7"
+      },
+      {
+        "episode_id": 42,
+        "sha256": "ada07f0b63402220e9e1ce109ac60ae57b477034b983720774e1f90f418476f8"
+      },
+      {
+        "episode_id": 70,
+        "sha256": "ae78b1ec325812bffa5875f2fa346c3aed0aaa25007729cbb8f69c925b0368bb"
+      },
+      {
+        "episode_id": 20,
+        "sha256": "b4158a38c4d6ed1f63f7df695082dbf47a7c20c8b3d0aedad51bc224aaac9f27"
+      },
+      {
+        "episode_id": 0,
+        "sha256": "bda6873c642cc24d0bddc1737b5fcfdb457e8d603561fd479cd88008e75f85d0"
+      },
+      {
+        "episode_id": 12,
+        "sha256": "be9e32f299a6d05730eef2352fbe4459ff7cc1c3ff0fc4ea19497fd342f9a465"
+      },
+      {
+        "episode_id": 71,
+        "sha256": "c6520728aead88cf4bf1d1bf73cb817873bed30ba7bc1e1a6e79e5991f086123"
+      },
+      {
+        "episode_id": 2,
+        "sha256": "c7016be5c88e9c188fcc84fd3803f4241780d08ab020f048f63ceb662d919be1"
+      },
+      {
+        "episode_id": 1,
+        "sha256": "cd1de2b7dcdbbfb777bd73eac2d5ea18f856eadcb8f600e8fa30fe18e0944445"
+      },
+      {
+        "episode_id": 13,
+        "sha256": "d067445e4ced2c822e50e0aafe85dd26544b98c0fa89a759872844471baf8db6"
+      },
+      {
+        "episode_id": 23,
+        "sha256": "df2a3ac7c5c4cc7cb4acd4520efce0f67ff6240af690fccbd8ba77c214ae0ea4"
+      },
+      {
+        "episode_id": 4,
+        "sha256": "e4e3005bdd36a570370c044233bed76270c4a186cab1e75109a68b1290548568"
+      },
+      {
+        "episode_id": 64,
+        "sha256": "e5ff10c21e7a0519f888aed221046925ee12b022f8e0a4f25619d2e6f34b6081"
+      },
+      {
+        "episode_id": 41,
+        "sha256": "e87c0851f11695a5d821ee57572aa49599ee0642c7188ca92372d9fc22dfcda2"
+      },
+      {
+        "episode_id": 62,
+        "sha256": "e9eb924a5db4de4d837c31ed5550c1636958cfb24c29cc09c7f7a5e8554500db"
+      },
+      {
+        "episode_id": 33,
+        "sha256": "ecb357c5be1e0b7305379adc0213ca40938c461d23b5e82c2152878be4defb8f"
+      },
+      {
+        "episode_id": 31,
+        "sha256": "f3ddb4e4f7c7fdf35dc23d237e748802fcebb12e8e3dcb3b29f4b7ed388da3ae"
+      },
+      {
+        "episode_id": 74,
+        "sha256": "f753f67bab21e66777abf8f5beaf2c19f773751c657dc42b82d20dbef2a77d02"
+      },
+      {
+        "episode_id": 35,
+        "sha256": "f8080c60f49cfb82e7c0e4ccffd1cb62a68b46ecc10b2de4a7b7fb1c42b17086"
+      },
+      {
+        "episode_id": 14,
+        "sha256": "fcddd8d1ef90fc76bfac225f3348992c42fa6f221ef3b17e78359038c91d1a0e"
+      }
+    ]
+  },
+  "initial_parameters": {
+    "G": "d153ca5c91807a399a55584ed6203c4589246b9b63c1d62f705152d0b17111b1",
+    "E": "f5d912b91b7b1e054acb8ebf0d4497bd7ab47aaf7b96de818eafa0d1c1dcc324",
+    "prior": "96b4bd8ed671d66a6e3879e3537431902fbd4658a4f55e63a2a40f08e67f88c2",
+    "D": "a469dc37ccf67d1ecbbd963d3b8e11848987c5d435a6ddcfe6673cbc1a811679",
+    "D.joint": "cfa8270bf292ff4b227a3faf7be20184b02dfac30ddb6344ec98da3ed398c38c"
+  },
+  "gan_training": true,
+  "adversarial_semantics": "Every update: prior and encoded-state fake paths averaged; labeled complete and all-record action-hidden joint views averaged; mask fixed context and structural input mask; no synthetic cycle",
+  "normalization": "Shared state scaler fit all available training states/successors; action scaler fit labeled actions only",
+  "initialization": "All E/G1/G2/G3/prior parameters freshly initialized; no pretrained model weights",
+  "loss_reductions": "action: mean squared standardized error over labeled batch x 2; each state: mean squared standardized error over batch x 6 + mean BCE logits over batch x 2; sum three weighted heads + default MoG prior regularizer once + adversarial_weight*(joint + marginal_weight*mean three marginals); D=sumroles; each role averages its views and fake paths"
+}

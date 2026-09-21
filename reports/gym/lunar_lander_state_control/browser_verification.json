@@ -1,0 +1,110 @@
+{
+  "base": "http://127.0.0.1:8787",
+  "observations": [
+    "Validation-selected default and all six controller options",
+    "Reset starts paused at step0 with seed591000 and actual600px simulator PNG",
+    "Single Step advanced exactly once",
+    "Play advanced to 7; Pause preserved exact step after settling",
+    "Reset reproduced initial frame exactly and remained paused",
+    "Terminal auto-stop at step195, return244.835",
+    {
+      "terminalReason": "successful_landing"
+    },
+    {
+      "switch": "joint",
+      "selected": {
+        "controller": "joint",
+        "component": 300,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_control/joint/best.pt",
+        "action": [
+          -0.9999949932098389,
+          -0.8719626665115356
+        ]
+      }
+    },
+    {
+      "switch": "original",
+      "selected": {
+        "controller": "original",
+        "component": 694,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander/adversarial/best.pt",
+        "action": [
+          -0.8466729521751404,
+          0.005375903565436602
+        ]
+      }
+    },
+    {
+      "switch": "expert",
+      "selected": {
+        "controller": "expert",
+        "component": null,
+        "checkpoint": null,
+        "action": [
+          -1,
+          -1
+        ]
+      }
+    },
+    {
+      "switch": "imitation",
+      "selected": {
+        "controller": "imitation",
+        "component": 89,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_control/imitation/best.pt",
+        "action": [
+          -0.9997087717056274,
+          -0.9551461935043335
+        ]
+      }
+    },
+    {
+      "switch": "state_probes",
+      "selected": {
+        "controller": "state_probes",
+        "component": 731,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_state_control/probes/best.pt",
+        "action": [
+          -0.9771910309791565,
+          -0.8431065678596497
+        ]
+      }
+    },
+    {
+      "switch": "state_auxiliary",
+      "selected": {
+        "controller": "state_auxiliary",
+        "component": 108,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_state_control/auxiliary/best.pt",
+        "action": [
+          -0.9994581937789917,
+          -0.8367174863815308
+        ]
+      }
+    },
+    "No browser JavaScript exceptions"
+  ],
+  "pause": {
+    "step": 7,
+    "playing": false,
+    "action": [
+      -0.9859844446182251,
+      -0.36239519715309143
+    ],
+    "previous_action": [
+      -0.9858795404434204,
+      -0.38083896040916443
+    ]
+  },
+  "ending": {
+    "step": 195,
+    "done": true,
+    "terminated": true,
+    "truncated": false,
+    "return": 244.8348308994776,
+    "playing": false,
+    "playDisabled": true,
+    "stepDisabled": true
+  },
+  "errors": []
+}

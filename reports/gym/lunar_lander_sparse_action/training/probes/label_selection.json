@@ -1,0 +1,250 @@
+{
+  "salt": "lunar-sparse-actions-v1",
+  "rule": "SHA256(salt:episode_id), ascending digest, first five",
+  "labeled_episode_ids": [
+    3,
+    15,
+    53,
+    5,
+    22
+  ],
+  "candidate_episode_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    70,
+    71,
+    72,
+    73,
+    74
+  ],
+  "ordering": [
+    {
+      "episode_id": 3,
+      "sha256": "08dd1948d6c406761263dfb0b710de84584571c650266d42fca9dd26ccabae18"
+    },
+    {
+      "episode_id": 15,
+      "sha256": "0ff4f68cd38a7fc517b457cf6eeaa99c29b4a076651577f2aa8e9e7b789331a7"
+    },
+    {
+      "episode_id": 53,
+      "sha256": "1c98f5c44016d2cb05922a6ef31208d117ba18c31f9b1de39c58ffed1d00240b"
+    },
+    {
+      "episode_id": 5,
+      "sha256": "1d4dd3dfd9da00220d87c80dc93cfce88cb0bb06bfbe5d80e29b450175e6f3e0"
+    },
+    {
+      "episode_id": 22,
+      "sha256": "1ee44cb05e9721ec0935c77ff32975f7e374fb8092a5273d05d492c6fb1878f8"
+    },
+    {
+      "episode_id": 73,
+      "sha256": "233571c1f21f7835e1874c7724040e3656a0c5a43d027152134d5b9983956a3b"
+    },
+    {
+      "episode_id": 34,
+      "sha256": "2cc3bf7fe7aee9f6254b8411792bd87c4ffcda0e457369cf7fad560518c3698e"
+    },
+    {
+      "episode_id": 30,
+      "sha256": "3472c68f5b9aa407d24066c62b4de583d172c481442ce4fab921bb2009f928b5"
+    },
+    {
+      "episode_id": 45,
+      "sha256": "43b57ca1dbf9e1b9c45ff3d2913e86b472e16623f50ae45cfdd3de7dfde00226"
+    },
+    {
+      "episode_id": 65,
+      "sha256": "444aee778308b970d5934c5da0f5a3912b0bf771d8de7763f65b5eb13763d9b5"
+    },
+    {
+      "episode_id": 60,
+      "sha256": "4c04e99bd658891b8cd0c3049e90de89ffba38a26f1b34cc2be90d176dedf180"
+    },
+    {
+      "episode_id": 24,
+      "sha256": "4eab47fac2b28781daaabcf2eabae1dc3c6f960d13ad85a488ae86f672f6279c"
+    },
+    {
+      "episode_id": 44,
+      "sha256": "5ac0becbea256c02887f3b330cc3997577955598bd2eb158856f4ce93684edb1"
+    },
+    {
+      "episode_id": 43,
+      "sha256": "5bedbffc080174f504c4a158cdf9b387bfb34cc6d449d12772597d985ae99f80"
+    },
+    {
+      "episode_id": 51,
+      "sha256": "60d359a86287ca5864c423af65567a109b03945d966be226a1070f7ad9d4a43a"
+    },
+    {
+      "episode_id": 61,
+      "sha256": "7314f789163aa4e341c2cf7d622ba48b09f0bee2927253a4e65b8a67265071df"
+    },
+    {
+      "episode_id": 10,
+      "sha256": "7ba77a70ec47bf563f87d673deee2b1e56f0268d4fcd12795c5ca885c6a8f7d2"
+    },
+    {
+      "episode_id": 52,
+      "sha256": "86f4262be3b6bf697bbf9b12debbd433b43da58a573771ad4ae898d9ceff70a0"
+    },
+    {
+      "episode_id": 55,
+      "sha256": "877a80a388297fdace1bba02dfb9b592dc267c5530cbc860a31c55ea89c89eac"
+    },
+    {
+      "episode_id": 11,
+      "sha256": "8e8682e079ccaa33d859b2ceb717af2a2d1bc4fbf80e2b22ed989eb941b61600"
+    },
+    {
+      "episode_id": 72,
+      "sha256": "947e5b419d885b38f67933026df3eb7f84b3a955b102230029bcf0c4cbde2a23"
+    },
+    {
+      "episode_id": 50,
+      "sha256": "9723dc0793bb579df0144acd03e1b4f46f29df668a5418b99421774882736985"
+    },
+    {
+      "episode_id": 54,
+      "sha256": "9b09dbd50a8db6613af82a39e5aae4b0445a2d1e506897251643c7bd87ae97bf"
+    },
+    {
+      "episode_id": 40,
+      "sha256": "9cd65da2eca509debe3949aca2b7b3af012df83c77caf6cbbd75c3728a6f2d6a"
+    },
+    {
+      "episode_id": 21,
+      "sha256": "9dcacd162466276d880a1ef2463cfc89c2c57c65d19ac99fa7295a49d1ee0732"
+    },
+    {
+      "episode_id": 32,
+      "sha256": "9f2cd339901a4f6a13da04123c38466d94a55c946440a3010aafa87692e464f3"
+    },
+    {
+      "episode_id": 25,
+      "sha256": "a8ddc7f483afe7568d963ea080d5b016733ca7c8dbcf54e97deae9ce0f1f896a"
+    },
+    {
+      "episode_id": 63,
+      "sha256": "ac0394774d284671ea34ac734676dd145567da2d40ccddf4c333be6977e26cb7"
+    },
+    {
+      "episode_id": 42,
+      "sha256": "ada07f0b63402220e9e1ce109ac60ae57b477034b983720774e1f90f418476f8"
+    },
+    {
+      "episode_id": 70,
+      "sha256": "ae78b1ec325812bffa5875f2fa346c3aed0aaa25007729cbb8f69c925b0368bb"
+    },
+    {
+      "episode_id": 20,
+      "sha256": "b4158a38c4d6ed1f63f7df695082dbf47a7c20c8b3d0aedad51bc224aaac9f27"
+    },
+    {
+      "episode_id": 0,
+      "sha256": "bda6873c642cc24d0bddc1737b5fcfdb457e8d603561fd479cd88008e75f85d0"
+    },
+    {
+      "episode_id": 12,
+      "sha256": "be9e32f299a6d05730eef2352fbe4459ff7cc1c3ff0fc4ea19497fd342f9a465"
+    },
+    {
+      "episode_id": 71,
+      "sha256": "c6520728aead88cf4bf1d1bf73cb817873bed30ba7bc1e1a6e79e5991f086123"
+    },
+    {
+      "episode_id": 2,
+      "sha256": "c7016be5c88e9c188fcc84fd3803f4241780d08ab020f048f63ceb662d919be1"
+    },
+    {
+      "episode_id": 1,
+      "sha256": "cd1de2b7dcdbbfb777bd73eac2d5ea18f856eadcb8f600e8fa30fe18e0944445"
+    },
+    {
+      "episode_id": 13,
+      "sha256": "d067445e4ced2c822e50e0aafe85dd26544b98c0fa89a759872844471baf8db6"
+    },
+    {
+      "episode_id": 23,
+      "sha256": "df2a3ac7c5c4cc7cb4acd4520efce0f67ff6240af690fccbd8ba77c214ae0ea4"
+    },
+    {
+      "episode_id": 4,
+      "sha256": "e4e3005bdd36a570370c044233bed76270c4a186cab1e75109a68b1290548568"
+    },
+    {
+      "episode_id": 64,
+      "sha256": "e5ff10c21e7a0519f888aed221046925ee12b022f8e0a4f25619d2e6f34b6081"
+    },
+    {
+      "episode_id": 41,
+      "sha256": "e87c0851f11695a5d821ee57572aa49599ee0642c7188ca92372d9fc22dfcda2"
+    },
+    {
+      "episode_id": 62,
+      "sha256": "e9eb924a5db4de4d837c31ed5550c1636958cfb24c29cc09c7f7a5e8554500db"
+    },
+    {
+      "episode_id": 33,
+      "sha256": "ecb357c5be1e0b7305379adc0213ca40938c461d23b5e82c2152878be4defb8f"
+    },
+    {
+      "episode_id": 31,
+      "sha256": "f3ddb4e4f7c7fdf35dc23d237e748802fcebb12e8e3dcb3b29f4b7ed388da3ae"
+    },
+    {
+      "episode_id": 74,
+      "sha256": "f753f67bab21e66777abf8f5beaf2c19f773751c657dc42b82d20dbef2a77d02"
+    },
+    {
+      "episode_id": 35,
+      "sha256": "f8080c60f49cfb82e7c0e4ccffd1cb62a68b46ecc10b2de4a7b7fb1c42b17086"
+    },
+    {
+      "episode_id": 14,
+      "sha256": "fcddd8d1ef90fc76bfac225f3348992c42fa6f221ef3b17e78359038c91d1a0e"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ results/denoising/
 results/cifar_ddgan/
 results/trajectory/
 results/transition/
+results/gym/
 results/speed_100gaussians_*/
 results/speed_denoising_*/
 results/speed_*.runner.log

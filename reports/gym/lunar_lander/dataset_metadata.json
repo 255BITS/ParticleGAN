@@ -1,0 +1,109 @@
+{
+  "protocol": "lunar_lander_replay_v1",
+  "simulator": {
+    "gymnasium": "1.2.3",
+    "box2d": "2.3.10",
+    "environment": "LunarLander-v3",
+    "continuous": true,
+    "enable_wind": false,
+    "source_sha256": "af2a7f8910b4ffc30cfe1ab0aa441092e374d5085918d0f1b99e0c0dffec2869",
+    "terrain_dim": 11,
+    "terrain_encoding": "11 observation-frame ground heights at x=linspace(-1,1,11)",
+    "privileged_terrain_context": true
+  },
+  "behavior_mixture": {
+    "heuristic": 0.6,
+    "perturbed": 0.3,
+    "exploratory": 0.1
+  },
+  "target_anchor_phase_mixture": {
+    "flight": 0.5,
+    "approach": 0.35,
+    "contact": 0.15
+  },
+  "phase_definition": "contact in current or next behavior state; otherwise approach y<.25, else flight",
+  "shortfall_policy": "Sample without replacement; redistribute phase shortfall uniformly among remaining anchors",
+  "actions_per_anchor": 4,
+  "behavior_action_included": true,
+  "replay": "Reset same episode seed and replay exact float32 prefix for each alternative",
+  "dataset_seed": 91000,
+  "splits": {
+    "train": {
+      "tuples": 32768,
+      "anchors": 8192,
+      "episodes": 75,
+      "natural_phase_counts": {
+        "flight": 6745,
+        "approach": 3905,
+        "contact": 5738
+      },
+      "selected_transition_phase_counts": {
+        "flight": 16384,
+        "approach": 11451,
+        "contact": 4933
+      },
+      "main_active": 17306,
+      "lateral_active": 18076,
+      "sha256": "92a6d347d7bcc5deef5ed52cd10c1f8d2d057030bc18212f03db37784bd1451c",
+      "behavior_episode_counts": {
+        "heuristic": 47,
+        "perturbed": 21,
+        "exploratory": 7
+      }
+    },
+    "validation": {
+      "tuples": 4096,
+      "anchors": 1024,
+      "episodes": 16,
+      "natural_phase_counts": {
+        "flight": 1418,
+        "approach": 1057,
+        "contact": 1252
+      },
+      "selected_transition_phase_counts": {
+        "flight": 2048,
+        "approach": 1432,
+        "contact": 616
+      },
+      "main_active": 2175,
+      "lateral_active": 2271,
+      "sha256": "6d55889f46eda05cae1aa6935680e1a7f9325083ea5f831c8de1013b1756d0eb",
+      "behavior_episode_counts": {
+        "heuristic": 12,
+        "perturbed": 3,
+        "exploratory": 1
+      }
+    },
+    "test": {
+      "tuples": 8192,
+      "anchors": 2048,
+      "episodes": 19,
+      "natural_phase_counts": {
+        "flight": 1698,
+        "approach": 1021,
+        "contact": 1439
+      },
+      "selected_transition_phase_counts": {
+        "flight": 4096,
+        "approach": 2858,
+        "contact": 1238
+      },
+      "main_active": 4336,
+      "lateral_active": 4517,
+      "sha256": "0bceb7b7b4372961ac964597570f4f3b07e69eb536f1a6b066766282b5eb49d2",
+      "behavior_episode_counts": {
+        "heuristic": 12,
+        "perturbed": 6,
+        "exploratory": 1
+      }
+    }
+  },
+  "pilot": false,
+  "simulator_step_calls": 3397947,
+  "simulator_reset_calls": 33902,
+  "episodes_sha256": "2e3e3aa539d4d4b5c71f8c41cba5777f860bd6bc2ba18ea6bd6344b66da15589",
+  "wall_seconds": 30.994791093980893,
+  "simulator_calls_including_reset_internal_step": 3431849,
+  "collector_source_sha256": "20ab4130216c04be1e5e7ade9986abd7de3e6921e04f19d7177d9e80199b9420",
+  "adapter_source_sha256": "e32979f8da059466a7122bbdf30607e3f51b0a23f8b41f8ca5202947401d133f"
+}

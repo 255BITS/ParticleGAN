@@ -1,0 +1,161 @@
+{
+  "protocol_sha256": "82b0f6a79f628e946f5818712fe0b4c9cd3fa3d15a1f4790a0c8808bb0c47649",
+  "provenance": {
+    "joint": {
+      "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_gan_control/joint/best.pt",
+      "checkpoint_sha256": "ab4412ee1e3a0acb205ebda894b11976b8f8e07d050cfaed632061f3fcbf3b5e",
+      "selection": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_gan_control/selections/joint.json",
+      "selection_sha256": "52beb0b65eb4976dcec5eaddd7f20ad9023f87c7d5a64cdf843094d8a25d6545",
+      "evaluation": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_gan_control/evaluations/joint_selected_test.json",
+      "evaluation_sha256": "69ebb856e688d8995d8e449d66424f976e65daa36929e592c3e28f4b31a24e22",
+      "traces": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_gan_control/traces/joint_selected_test.npz",
+      "traces_sha256": "8438a2cb79624bb7a120f04170d0eb431a137b747346026e23265976db2ed4da"
+    },
+    "marginals": {
+      "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_gan_control/marginals/best.pt",
+      "checkpoint_sha256": "d4b8190f36be0198cee94a7b46765a63dac1d53ed0692b0e4d2fb6d69f41791e",
+      "selection": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_gan_control/selections/marginals.json",
+      "selection_sha256": "b4b39a473100e7ffe56df9dc6a99a4707b101e4f052bb6b6384fc7e9a8c4e0ea",
+      "evaluation": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_gan_control/evaluations/marginals_selected_test.json",
+      "evaluation_sha256": "ed588790302a2ff53b0e23838e5e6dd3a344b9ea069e66275c21bbab420f60ef",
+      "traces": "/home/martyn/dev/ParticleGAN/reports/gym/lunar_lander_gan_control/traces/marginals_selected_test.npz",
+      "traces_sha256": "4869a4108e1357c6f91bc8dd94bc65d1daa9622d366487d938ad234443101fbc"
+    }
+  },
+  "sources": {
+    "experiments/diagnose_gym_gan_cross.py": "235c6c5b1a46bae55e4ad934dc9e70cc98e6428d50700439ba88f54e471ad0fc",
+    "experiments/evaluate_gym_gan_control.py": "a53739422dd08605bc92977c14a87d9f5c998f81aecac5858271df635ffba1ab",
+    "lib/gym_state_control.py": "583cc4f5b1678c6fc721f181446bcf33e5e50b4cb6af339ec43e1f5614f24466"
+  },
+  "device": "cpu",
+  "simulator_calls": 0,
+  "training_updates": 0,
+  "cells": [
+    {
+      "model": "joint",
+      "trace_controller": "joint",
+      "records": 12156,
+      "state": {
+        "standardized_continuous_mse": 0.8072782754898071,
+        "physical_continuous_mse": 0.02876983769237995,
+        "contact_bce": 0.4197032153606415,
+        "contact_brier": 0.07500580698251724,
+        "contact_accuracy": 0.9133760929107666
+      },
+      "next_state": {
+        "standardized_continuous_mse": 0.8567950129508972,
+        "physical_continuous_mse": 0.028543392196297646,
+        "contact_bce": 0.41792067885398865,
+        "contact_brier": 0.08209226280450821,
+        "contact_accuracy": 0.9057255387306213
+      },
+      "persistence_next_state": {
+        "standardized_continuous_mse": 0.04650696739554405,
+        "physical_continuous_mse": 0.0008017123909667134,
+        "contact_brier": 0.013285620138049126,
+        "contact_accuracy": 0.9867143630981445
+      },
+      "standardized_action_mse": 2.623542760804825e-14,
+      "physical_action_mse": 5.7958292943346545e-15,
+      "main_regime_agreement": 1.0,
+      "lateral_regime_agreement": 1.0,
+      "joint_regime_agreement": 1.0
+    },
+    {
+      "model": "marginals",
+      "trace_controller": "joint",
+      "records": 12156,
+      "state": {
+        "standardized_continuous_mse": 0.7855656147003174,
+        "physical_continuous_mse": 0.02595609612762928,
+        "contact_bce": 0.4041496217250824,
+        "contact_brier": 0.0611596517264843,
+        "contact_accuracy": 0.9353817105293274
+      },
+      "next_state": {
+        "standardized_continuous_mse": 0.8944711685180664,
+        "physical_continuous_mse": 0.027778666466474533,
+        "contact_bce": 0.4263727366924286,
+        "contact_brier": 0.07784248143434525,
+        "contact_accuracy": 0.9092217683792114
+      },
+      "persistence_next_state": {
+        "standardized_continuous_mse": 0.04650696739554405,
+        "physical_continuous_mse": 0.0008017123909667134,
+        "contact_brier": 0.013285620138049126,
+        "contact_accuracy": 0.9867143630981445
+      },
+      "standardized_action_mse": 0.29939115047454834,
+      "physical_action_mse": 0.09120119363069534,
+      "main_regime_agreement": 0.8931391905231985,
+      "lateral_regime_agreement": 0.7965613688713392,
+      "joint_regime_agreement": 0.7025337282000658
+    },
+    {
+      "model": "joint",
+      "trace_controller": "marginals",
+      "records": 11893,
+      "state": {
+        "standardized_continuous_mse": 1.3055791854858398,
+        "physical_continuous_mse": 0.04749532416462898,
+        "contact_bce": 0.20656602084636688,
+        "contact_brier": 0.03926040977239609,
+        "contact_accuracy": 0.9576221108436584
+      },
+      "next_state": {
+        "standardized_continuous_mse": 1.3728582859039307,
+        "physical_continuous_mse": 0.04790295287966728,
+        "contact_bce": 0.23615770041942596,
+        "contact_brier": 0.04954645037651062,
+        "contact_accuracy": 0.9419406652450562
+      },
+      "persistence_next_state": {
+        "standardized_continuous_mse": 0.069520965218544,
+        "physical_continuous_mse": 0.0011661294847726822,
+        "contact_brier": 0.009795677848160267,
+        "contact_accuracy": 0.9902043342590332
+      },
+      "standardized_action_mse": 0.4728080630302429,
+      "physical_action_mse": 0.16137275099754333,
+      "main_regime_agreement": 0.697216850248045,
+      "lateral_regime_agreement": 0.8352812578827882,
+      "joint_regime_agreement": 0.5767258050954343
+    },
+    {
+      "model": "marginals",
+      "trace_controller": "marginals",
+      "records": 11893,
+      "state": {
+        "standardized_continuous_mse": 1.2684378623962402,
+        "physical_continuous_mse": 0.04243864491581917,
+        "contact_bce": 0.372948557138443,
+        "contact_brier": 0.06642022728919983,
+        "contact_accuracy": 0.9271420240402222
+      },
+      "next_state": {
+        "standardized_continuous_mse": 1.4433214664459229,
+        "physical_continuous_mse": 0.046701423823833466,
+        "contact_bce": 0.39187079668045044,
+        "contact_brier": 0.07901210337877274,
+        "contact_accuracy": 0.9115446209907532
+      },
+      "persistence_next_state": {
+        "standardized_continuous_mse": 0.069520965218544,
+        "physical_continuous_mse": 0.0011661294847726822,
+        "contact_brier": 0.009795677848160267,
+        "contact_accuracy": 0.9902043342590332
+      },
+      "standardized_action_mse": 2.8370333494021245e-14,
+      "physical_action_mse": 5.8901239666383186e-15,
+      "main_regime_agreement": 1.0,
+      "lateral_regime_agreement": 1.0,
+      "joint_regime_agreement": 1.0
+    }
+  ],
+  "scope": "Posthoc comparison on previously evaluated test trajectories. Equal inputs within each trace dataset; transition-weighted metrics.",
+  "caveats": [
+    "G3 has no alternative-action input. On another controller trajectory its predicted action may differ from the recorded action that produced the successor.",
+    "Action MSE compares each model command against the recorded learner command, not expert commands.",
+    "This describes generalization on fixed states; it is not a causal test of control quality, an unrestricted counterfactual model test, or a new checkpoint selection."
+  ]
+}

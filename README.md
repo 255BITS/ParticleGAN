@@ -52,6 +52,23 @@ See the [toy demo](reports/transition/demo/index.html),
 [architecture and losses](docs/transition-gan-encoder.md), and
 [leaderboard](reports/transition/leaderboard/README.md).
 
+The [Lunar Lander world-model example](docs/gym-world-model.md) extends the three
+generators to individual simulator transitions, with MoG1024, encoder routing,
+terrain context, and joint/marginal critics. It includes replayed counterfactual
+actions and direct/persistence/reconstruction comparisons on a finite dataset.
+The [control experiment](docs/gym-control.md) compares expert action imitation
+with joint three-generator training. Run `python -u examples/gym_lander_live.py`
+to compare controllers in the live simulator with Play, Pause, and Reset.
+The [state-only encoder experiment](docs/gym-state-control.md) trains from scratch
+and tests whether G1/G3 auxiliary losses improve G2's control, compared with
+detached diagnostic heads under the same training budget.
+The [sparse-action experiment](docs/gym-sparse-action.md) keeps transitions from
+47 expert episodes while revealing actions from only five, testing whether
+auxiliary learning helps when explicit action supervision is scarce.
+The [GAN control experiment](docs/gym-gan-control.md) trains all three generators
+and the state encoder adversarially throughout, with a dedicated GAN-only
+leaderboard comparing joint and marginal discriminators.
+
 ```python
 from particlegan import ParticlePrior, GANLoss, GradientPenalty, ParticleRegularizer
 
