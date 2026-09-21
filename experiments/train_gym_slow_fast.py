@@ -95,13 +95,18 @@ def train(cfg):
     torch.set_num_threads(1)
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
+    arrays, manifest = load_pairs(cfg["pairs"])
+    if (arrays["slow_seed"] != arrays["fast_seed"]).any():
+        raise ValueError(
+            "stranger pairs: slow_seed and fast_seed differ. "
+            "Nearest-episode matching has no shared landing. "
+            "Rework collect to connected pairs before training.")
     out = Path(cfg["out_dir"])
     out.mkdir(parents=True, exist_ok=True)
     if any(out.iterdir()):
         raise FileExistsError(f"Use a fresh empty output directory: {out}")
     live = Path(cfg["live_log"])
     link_live_log(out, live)
-    arrays, manifest = load_pairs(cfg["pairs"])
     if len(arrays["states"]) < cfg["batch_size"]:
         raise ValueError("batch_size is larger than the paired rows")
     bundle = load_paired_controller(cfg["checkpoint"], device)

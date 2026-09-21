@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-"""CPU gate: freeze a working lander; reject the nearest-state overwrite.
+"""CPU gate: stranger nearest pairs fail; a same-start retime returns.
 
-Lunar Lander is not run. This process must exit 0 (GATE PASS) before the next
-Lunar retrain. The gym commands live in docs/gym-slow-fast.md.
+Lunar Lander is not run. This process must exit 0 (GATE PASS) before Lunar
+collect is reworked. The gym note is docs/gym-slow-fast.md.
 """
 import sys
 from pathlib import Path

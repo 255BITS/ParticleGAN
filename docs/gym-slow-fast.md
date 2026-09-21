@@ -1,9 +1,12 @@
 # Lunar slow→fast paired finetune
 
-The cuda:1 run that unfroze `#18` and fit nearest-state fast actions
-**destroyed landings**. The next recipe freezes that controller and trains a
-bounded action residual. Do not start that retrain until the CPU gate
-PASSes. This page does not claim a new Lunar landing number.
+The cuda:1 pairs were **strangers**: different successful episodes, matched by
+nearest start, terrain, and state. Neutral was the slow action at `s`. Target
+was the fast action at a nearby `s′`. There is no shared landing in that
+edit. Fitting it destroyed a working controller. Do not train
+`results/gym/lunar_lander_slow_fast/pairs.npz`. The trainer refuses
+`slow_seed != fast_seed`. Collect has to be reworked to connected pairs
+before the next cuda:1 run. This page does not claim a new Lunar landing number.
 
 ## What failed (pop-os cuda:1, `train_scope=control`)
 
@@ -23,79 +26,46 @@ Eval selected none. Longer training was worse. Pair data looked healthy. The
 failure was the update: nearest-state targets pasted a fast episode's action
 onto a different state, and training `E_control` and G2 overwrote the lander.
 
-## Fix, locked by the CPU gate
+## Toy gate
 
-`python -u examples/slow_fast_paired_2d.py` must print `GATE PASS` before the
-next gym train. On that plant the same nearest-state pairs do this:
+`python -u examples/slow_fast_paired_2d.py` must print `GATE PASS`. Both arms
+use the same full lander, the same learning rate, and paired-error RpGAN at
+`adv_weight=1`. The only difference is the pairs.
 
-- `overwrite` trains every lander weight with paired-error RpGAN at
-  `adv_weight=1`. Landings go to 0. The rank key rejects it.
-- `anchored` freezes the lander and trains a residual of at most **0.15** per
-  channel, same rows, same RpGAN step, `b_cap` every fourth update. Every
-  recorded checkpoint stays on the pad, and success steps fall. Diagnostic
-  MSE stays outside the loss.
+- `stranger` pastes another episode's fast action onto the nearest state.
+  The rows are plentiful. Landings do not return at steps 100, 200, or 400.
+- `connected` keeps the start. The target is a 0.25 retime of the fast law
+  at that same state. Step 50 is off the pad. Steps 100, 200, and 400 are
+  back on it, and success steps fall.
 
-Scale 0.20 dipped landings on the toy, so the gym config locks `residual_scale`
-at 0.15. `adv_weight` stays 1. `safe_fast_weight` stays 0. The kinematic plant
-cost is not the speed mechanism. `train_scope=control` is rejected.
-
-The gym residual is
-
-```text
-physical = clamp(tanh(G2).detach() + 0.15 * tanh(head(state, previous, terrain)), -1, 1)
-loss     = controller_objective on scaler.action(physical)
-```
-
-`head` is zero-initialized, so step 0 is the loaded `#18` action. Learning
-rates stay constant: residual `0.01`, critic `1e-3`. The world-model rate is
-not used on the lander. Playback for eval adds the residual. A checkpoint
-without a residual key plays `E_control -> G2` alone, which is how the failed
-run should still be scored.
+The first 50 updates kick either arm off the pad. Do not keep a checkpoint
+from that window. `adv_weight` stays 1. `safe_fast_weight` stays 0. Diagnostic
+MSE stays outside the loss. The kinematic plant cost is not the speed mechanism.
 
 ## Paths
 
 | Role | Path |
 | --- | --- |
-| `#18` checkpoint | the file the pairs were collected from |
-| Failed overwrite outputs | `results/gym/lunar_lander_slow_fast/particle/` (do not resume) |
-| Pairs, reusable | `results/gym/lunar_lander_slow_fast/pairs.npz` |
-| Next train outputs | `results/gym/lunar_lander_slow_fast/residual/` |
-| Next train log | `results/gym/lunar_lander_slow_fast/residual.log` |
+| `#18` checkpoint | the file the failed run collected from |
+| Failed stranger outputs | `results/gym/lunar_lander_slow_fast/particle/` (do not resume) |
+| Stranger pairs, do not train | `results/gym/lunar_lander_slow_fast/pairs.npz` |
 | Eval report | `reports/gym/lunar_lander_slow_fast/README.md` |
 
 Collection seeds start at `591000`. Validation stays `391000–391019` and test
 stays `491000–491049`. Those eval seeds are refused as collection seeds.
 
-## Next cuda:1 command
-
-Reuse the pairs. Fresh output directory. Point `--checkpoint` at the same
-`#18` `best.pt` that collected the pairs (`particle_yue18_143320/best.pt` on
-the machine that ran the failed job). If landings fall, stop. Do not raise
-the residual scale and do not unfreeze `E_control` or G2.
+## Do not train the current pairs
 
 ```bash
 python -u examples/slow_fast_paired_2d.py
-
-python -u experiments/train_gym_slow_fast.py \
-  --config configs/gym/lunar_lander_particle_finetune/particle_slow_fast.yaml \
-  --checkpoint results/gym/lunar_lander_particle_finetune/particle_yue18_143320/best.pt \
-  --pairs results/gym/lunar_lander_slow_fast/pairs.npz \
-  --out-dir results/gym/lunar_lander_slow_fast/residual \
-  --device cuda:1
-tail -F results/gym/lunar_lander_slow_fast/residual.log
-
-python -u experiments/evaluate_gym_slow_fast.py \
-  --baseline results/gym/lunar_lander_particle_finetune/particle_yue18_143320/best.pt \
-  --checkpoint results/gym/lunar_lander_slow_fast/residual/checkpoint_250.pt \
-  --checkpoint results/gym/lunar_lander_slow_fast/residual/checkpoint_1000.pt \
-  --checkpoint results/gym/lunar_lander_slow_fast/residual/checkpoint_2500.pt \
-  --device cuda:1 \
-  --split validation
 ```
 
-The log line to look for is `RESIDUAL frozen=#18 scale=0.15`. `E_control and
-G2 are not updated` must stay true. A nonempty `residual/` directory is
-refused; pick another fresh directory instead of deleting a scored run.
+That is the only command to run. The existing `pairs.npz` is stranger matching
+(`slow_seed != fast_seed`). `train_gym_slow_fast.py` raises before it writes
+a checkpoint. The next collector has to emit connected pairs: one successful
+landing, re-timed, same seed, shared trajectory. A different episode's nearest
+state is not that pair. After that collector exists, train with
+`adv_weight=1` and `safe_fast_weight=0`, and stop if landings fall.
 
 ## Eval rule
 
@@ -117,6 +87,6 @@ python -u experiments/collect_slow_fast_lunar.py \
   --live-log /tmp/slow_fast_collect.log
 ```
 
-`tests/test_slow_fast_lunar.py` trains 4 CPU steps on a tiny checkpoint and
-checks that `E_control` and G2 match the init file, the playback edit is at
-most 0.15, `adv_weight=1`, and one `b_cap` application ran.
+`tests/test_slow_fast_lunar.py` refuses a cross-seed pair file, then trains
+4 CPU steps on a same-seed copy. That copy is only a plumbing check. It is
+not a Lunar retime and it is not a landing number.

@@ -1,11 +1,13 @@
 """Slow→fast Lunar pairs and the speed score that refuses crash shortcuts.
 
 Successful landings from one frozen controller are split by steps-to-land.
-Crashes, timeouts, and flyaways never enter either pool. Each kept pair is a
-slow landing and a strictly faster landing whose start and terrain are close.
-Training rows sit on the slow trajectory: neutral is the slow action, target
-is the fast action at the nearest state. There is no second policy to query,
-and there is no kinematic safe-fast cost in this file.
+Crashes, timeouts, and flyaways never enter either pool. The matcher below
+is stranger pairing: a slow landing and a different, faster landing whose
+start and terrain are close, with the fast action taken at the nearest state.
+Those pairs do not share a landing. `train_gym_slow_fast.py` refuses them
+(`slow_seed != fast_seed`). Collect has to be reworked to a same-episode
+retime before the next training run. There is no kinematic safe-fast cost
+in this file.
 """
 import json
 from pathlib import Path
@@ -308,8 +310,6 @@ def _validate_pairs(arrays):
             raise ValueError(f"{name} must stay inside [-1, 1]")
     if np.any(arrays["fast_steps"] >= arrays["slow_steps"]):
         raise ValueError("refusing pairs whose fast member is not strictly sooner")
-    if np.any(arrays["slow_seed"] == arrays["fast_seed"]):
-        raise ValueError("a pair must come from two rollouts")
 
 
 def save_pairs(path, built):

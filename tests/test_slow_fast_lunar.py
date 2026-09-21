@@ -153,6 +153,12 @@ class SlowFastLunarTests(unittest.TestCase):
                    "device": "cpu", "checkpoint": str(checkpoint), "pairs": str(pairs),
                    "out_dir": str(root / "run"), "live_log": str(root / "live.log"),
                    "error_tokens": 4, "error_width": 8, "error_heads": 2}
+            with self.assertRaises(ValueError) as caught:
+                train(cfg)
+            self.assertIn("stranger pairs", str(caught.exception))
+            built["arrays"]["fast_seed"] = built["arrays"]["slow_seed"].copy()
+            pairs, _ = save_pairs(root / "connected.npz", built)
+            cfg = {**cfg, "pairs": str(pairs), "out_dir": str(root / "run")}
             summary = train(cfg)
             self.assertEqual(summary["adv_weight"], 1.)
             self.assertEqual(summary["safe_fast_weight"], 0.)

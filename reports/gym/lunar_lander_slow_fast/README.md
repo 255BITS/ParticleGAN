@@ -15,7 +15,8 @@ Train: 2500 steps, `adv_weight=1`, `safe_fast_weight=0`. Shared-seed validation:
 | slow→fast @1000 | 0/20 | — | 19 |
 | slow→fast @2500 | 0/20 | — | 18 |
 
-Eval selected none. Longer training was worse. The next train freezes `#18`
-and fits only the scale-0.15 residual, after `examples/slow_fast_paired_2d.py`
-prints GATE PASS. Commands are in
+Eval selected none. Longer training was worse. These pairs are strangers
+(different episodes, nearest state). Do not train them. The trainer refuses
+`slow_seed != fast_seed`. Collect has to be reworked to a same-episode retime
+after `examples/slow_fast_paired_2d.py` prints GATE PASS. Commands are in
 [the experiment note](../../../docs/gym-slow-fast.md).

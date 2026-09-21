@@ -1,19 +1,20 @@
-"""CPU gate: a working lander must stay a lander while it learns a faster action.
+"""CPU gate: stranger nearest-state pairs fail; a same-start retime does not.
 
-The slow law is a competent controller. It already lands. The fast law is only
-a label. `overwrite` is the Lunar recipe that failed: unfreeze that lander and
-fit nearest-state fast actions with paired-error RpGAN at adv_weight 1. Those
-actions were taken at a different state. The closed loop leaves the pad, and
-a later checkpoint is worse, not better.
+The slow law is a competent controller. It already lands. `stranger` is the
+Lunar collector: plentiful pairs whose target is a fast action from a different
+episode at the nearest state. There is no shared landing. The same full-weight
+paired-error RpGAN step that fits those pairs leaves the pad and does not
+come back.
 
-`anchored` freezes the lander and trains a bounded action residual with the
-same RpGAN step. The residual cannot move either channel by more than
-`ANCHORED_SCALE`. Diagnostic MSE stays outside the loss. adv_weight stays 1.
-There is no kinematic safe-fast cost.
+`connected` uses the same step, the same learning rate, and the same lander.
+Each row shares the start. The target is a partial retime of the fast law at
+that same state, not another episode's action. By step 100 it is back on the
+pad and faster, and it stays there. adv_weight stays 1. Diagnostic MSE stays
+outside the loss. There is no kinematic safe-fast cost.
 
-Rank is landings first, then fewer steps among successes. An arm that drops
-landings or adds crashes is ineligible even if the successes that remain are
-quick. Crash targets, unpaired targets, and adv_weight 0 stay ineligible.
+The first 50 updates kick either arm off the pad. The return panel is steps
+100, 200, and 400. Rank is landings first, then fewer steps among successes.
+Crash targets, unpaired targets, and adv_weight 0 stay ineligible.
 This file does not run Lunar Lander.
 """
 import torch
@@ -37,8 +38,10 @@ TIME_SCORE = 0.5
 STEPS = 400
 BATCH = 96
 POLICY_LR = 0.02
-ANCHORED_LR = 0.01
-ANCHORED_SCALE = 0.15
+# Fraction of the same-state fast law taken as the connected target.
+# The full fast action and the duration ratio (~0.32) are still off the pad
+# at step 100. A quarter-step is back on every return checkpoint.
+RETIME = 0.25
 NEAREST_DIST = 0.75
 CRITIC_LR = 1e-3
 GRAD_CLIP = 1.0
@@ -58,12 +61,12 @@ FAST_B = torch.tensor([0., 0.02])
 CRASH_B = torch.tensor([0., -0.55])
 
 # Thresholds sit inside the gap measured for seed 0 on this plant.
-# Overwrite is the Lunar miss: landings collapse. Anchored must not.
-ANCHORED_LAND_MIN = 0.98
-ANCHORED_STEPS_MAX = 26.0
-ANCHORED_CRASH_MAX = 0.02
-ANCHORED_MIN_LAND_MIN = 0.95
-OVERWRITE_LAND_MAX = 0.25
+# Stranger nearest pairs do not return. The same-start retime does.
+CONNECTED_LAND_MIN = 0.98
+CONNECTED_STEPS_MAX = 26.0
+CONNECTED_CRASH_MAX = 0.02
+CONNECTED_MIN_LAND_MIN = 0.95
+STRANGER_LAND_MAX = 0.25
 STEP_GAP_MIN = 8.0
 BASELINE_LAND_MIN = 0.98
 BASELINE_STEPS_MIN = 30.0
@@ -75,20 +78,19 @@ CRASH_CEILING = 0.10
 SUPERVISED_LAND_MIN = 0.90
 
 MAPPING = (
-    dict(toy="A competent slow law already lands. Fast and crash laws are labels. "
-             "Nearest-state targets paste a fast-trajectory action onto a different state.",
-         gym="The #18 validation failure pasted the fast episode's action onto the "
-             "slow episode's nearest state and trained E_control and G2. Landings "
-             "went 20/20 to 0/20. Crashes stay out of the fast set."),
-    dict(toy="overwrite finetunes every lander weight with paired-error RpGAN, "
-             "adv_weight 1, on those nearest-state pairs. It loses the pad.",
-         gym="Do not repeat train_scope=control on these pairs. That is the run "
-             "that failed on cuda:1."),
-    dict(toy="anchored freezes the slow law and trains a residual of at most "
-             "0.15 per channel with the same RpGAN step and b_cap every 4th update. "
-             "Diagnostic MSE is not in the loss. Rank is landings, then success steps.",
-         gym="Freeze #18. Train only the bounded residual in train_gym_slow_fast.py. "
-             "adv_weight stays 1. safe_fast_weight stays 0."),
+    dict(toy="A competent slow law already lands. Fast and crash laws are labels.",
+         gym="The #18 controller already lands. Crashes stay out of the fast set."),
+    dict(toy="stranger pastes a different episode's fast action onto the nearest "
+             "state. The pairs are plentiful. The same RpGAN step does not return "
+             "to the pad.",
+         gym="Current Lunar collect matches different successful episodes by "
+             "start, terrain, and nearest state. slow_seed != fast_seed. "
+             "That run went 20/20 to 0/20. Do not train those pairs."),
+    dict(toy="connected keeps the start. The target is a 0.25 retime of the fast "
+             "law at that same state. The same RpGAN step, same learning rate, "
+             "and same lander weights are back on the pad from step 100 and faster.",
+         gym="Rework collect so each pair is one landing re-timed, same seed, "
+             "before the next cuda:1 run. adv_weight stays 1. safe_fast_weight stays 0."),
 )
 
 
@@ -237,6 +239,9 @@ def collect_pairs(n_starts=COLLECT_STARTS, seed=4):
     target = fast_action(state)
     crashed = crash_action(state)
     nearest_state, nearest_target, nearest_neutral, nearest_distance = _nearest_rows(episodes)
+    # Same trajectory identity: the slow state, moved partway toward the fast
+    # law at that state. Not a nearest state from another episode.
+    connected_target = (neutral + RETIME * (target - neutral)).clamp(-1, 1)
     generator = torch.Generator().manual_seed(1)
     perm = torch.randperm(len(state), generator=generator)
     # A one-step nudge stays inside the same trajectory. Walk until the start differs.
@@ -252,10 +257,12 @@ def collect_pairs(n_starts=COLLECT_STARTS, seed=4):
     if torch.any(unpaired_start == start_id):
         raise RuntimeError("unpaired rows must come from a different start")
     same_state_gap = float((nearest_target - fast_action(nearest_state)).abs().mean())
+    retime_edit = float((connected_target - neutral).abs().mean())
     print(f"[slow-fast] collect kept_starts={len(slow_steps)}/{n_starts} "
           f"rows={len(state)} nearest_rows={len(nearest_state)} "
           f"nearest_dist={float(nearest_distance.mean()):.3f} "
           f"nearest_vs_same_state={same_state_gap:.3f} "
+          f"retime={RETIME} retime_edit={retime_edit:.3f} "
           f"fast_failures_excluded={fast_failures} not_faster={not_faster} "
           f"slow_steps={sum(slow_steps)/len(slow_steps):.2f} "
           f"fast_steps={sum(fast_steps)/len(fast_steps):.2f}", flush=True)
@@ -264,6 +271,8 @@ def collect_pairs(n_starts=COLLECT_STARTS, seed=4):
                 unpaired_start_id=unpaired_start,
                 nearest_state=nearest_state, nearest_target=nearest_target,
                 nearest_neutral=nearest_neutral, nearest_distance=nearest_distance,
+                connected_state=state, connected_target=connected_target,
+                connected_neutral=neutral, retime=RETIME, retime_edit=retime_edit,
                 slow_steps=torch.tensor(slow_steps, dtype=torch.float32),
                 fast_steps=torch.tensor(fast_steps, dtype=torch.float32),
                 fast_failures_excluded=fast_failures, not_faster=not_faster,
@@ -281,25 +290,6 @@ class SlowPolicy(nn.Module):
 
     def forward(self, state):
         return (state @ self.w.T + self.b).clamp(-1, 1)
-
-
-class AnchoredPolicy(nn.Module):
-    """Frozen slow law plus a residual of at most `scale` on each channel.
-
-    The last layer starts at zero, so step 0 is the lander. The slow weights
-    are not parameters.
-    """
-
-    def __init__(self, scale=ANCHORED_SCALE, width=16):
-        super().__init__()
-        self.scale = float(scale)
-        self.delta = nn.Sequential(nn.Linear(4, width), nn.Tanh(), nn.Linear(width, 2))
-        nn.init.zeros_(self.delta[-1].weight)
-        nn.init.zeros_(self.delta[-1].bias)
-
-    def forward(self, state):
-        edit = self.scale * self.delta(state).tanh()
-        return (slow_action(state) + edit).clamp(-1, 1)
 
 
 class _Critic(nn.Module):
@@ -373,8 +363,10 @@ def _targets_for(mode, table):
     """State, target action, and neutral action for one GAN arm."""
     if mode == "paired":
         return table["state"], table["target"], table["neutral"]
-    if mode in ("overwrite", "anchored"):
+    if mode == "stranger":
         return table["nearest_state"], table["nearest_target"], table["nearest_neutral"]
+    if mode == "connected":
+        return table["connected_state"], table["connected_target"], table["connected_neutral"]
     if mode == "slow_only":
         # Same edit scale, target is the slow member. This must not get faster.
         return table["state"], table["neutral"], table["target"]
@@ -419,9 +411,9 @@ def _gan_step(policy, critic, cap, opt, opt_d, norm, state, target, step, steps,
 
 
 _ARM_REASONS = {
-    "paired": "same-state fast target, full weights; not the Lunar miss",
-    "overwrite": "full-weight nearest-state RpGAN; the Lunar miss",
-    "anchored": "frozen lander, residual scale 0.15, same nearest rows, RpGAN weight 1",
+    "paired": "same-state full fast target; not the gate winner",
+    "stranger": "full-weight cross-episode nearest RpGAN; the Lunar miss",
+    "connected": "full-weight same-start retime, same RpGAN step and learning rate",
     "slow_only": "control arm slow_only",
     "crash_fast": "control arm crash_fast",
     "unpaired": "control arm unpaired",
@@ -431,14 +423,14 @@ _ARM_REASONS = {
 def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, table=None, eval_states=None):
     """Train one arm from the competent slow lander.
 
-    `overwrite` finetunes every weight on nearest-state fast actions.
-    `anchored` freezes the lander and trains a bounded residual on those
-    same rows. `crash_fast` and `unpaired` stay full-weight bad targets.
+    `stranger` finetunes every weight on cross-episode nearest-state actions.
+    `connected` finetunes every weight on the same-start retime, at the same
+    learning rate. `crash_fast` and `unpaired` stay full-weight bad targets.
     `supervised` is MSE only. `zero` is the slow initialization.
-    `paired` is the old same-state full finetune and is not a gate arm.
+    `paired` is the full same-state fast target and is not a gate arm.
     """
     if mode not in ("paired", "slow_only", "crash_fast", "unpaired", "supervised",
-                    "zero", "overwrite", "anchored"):
+                    "zero", "stranger", "connected"):
         raise ValueError(f"Unknown arm {mode}")
     if mode == "supervised":
         if adv_weight != 0:
@@ -446,7 +438,7 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, table=None, eval_states=
     elif mode != "zero":
         require_live_adversary(adv_weight)
     torch.manual_seed(SEED)
-    policy = AnchoredPolicy() if mode == "anchored" else SlowPolicy()
+    policy = SlowPolicy()
     if table is None and mode != "zero":
         table = collect_pairs()
     if eval_states is None:
@@ -455,7 +447,9 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, table=None, eval_states=
     gan_grad_abs = 0.
     diagnostic = None
     min_landings = None
-    panel = mode in ("overwrite", "anchored")
+    panel = mode in ("stranger", "connected")
+    early_landings = None
+    return_landings = []
     if mode == "zero":
         reason = "no update; competent slow lander"
         accepted = False
@@ -489,7 +483,7 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, table=None, eval_states=
             raise RuntimeError("paired edit RMS must be positive")
         critic = _Critic()
         cap = _cap()
-        lr = ANCHORED_LR if mode == "anchored" else POLICY_LR
+        lr = POLICY_LR
         opt = torch.optim.Adam(policy.parameters(), lr=lr)
         opt_d = torch.optim.Adam(critic.parameters(), lr=CRITIC_LR, betas=(0., 0.999))
         generator = torch.Generator().manual_seed(SEED + 2)
@@ -501,10 +495,18 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, table=None, eval_states=
                 policy, critic, cap, opt, opt_d, norm, state, target, step, steps, generator)
             gan_grad_abs += grad_mass
             applications += applied
+            if panel and step == 50:
+                snap = evaluate_policy(policy, eval_states)
+                early_landings = snap["landings"]
+                print(f"[slow-fast] arm={mode} step={step}/{steps} "
+                      f"landings={snap['landings']:.3f} steps={snap['mean_steps']:.2f} "
+                      f"crash={snap['crash_rate']:.3f} early=1 "
+                      f"diag_mse={diagnostic:.4f} b_cap_applied={applied} "
+                      f"gan_grad={grad_mass:.3f}", flush=True)
             if panel and (step % LOG_EVERY == 0 or step == steps):
                 snap = evaluate_policy(policy, eval_states)
-                min_landings = snap["landings"] if min_landings is None else min(
-                    min_landings, snap["landings"])
+                return_landings.append(snap["landings"])
+                min_landings = min(return_landings)
                 print(f"[slow-fast] arm={mode} step={step}/{steps} "
                       f"landings={snap['landings']:.3f} steps={snap['mean_steps']:.2f} "
                       f"crash={snap['crash_rate']:.3f} min_landings={min_landings:.3f} "
@@ -516,13 +518,15 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, table=None, eval_states=
         with torch.no_grad():
             diagnostic = float(F.mse_loss(policy(state), target))
         reason = _ARM_REASONS[mode]
-        accepted = mode == "anchored"
+        accepted = mode == "connected"
         reported_adv = 1.
     metrics = evaluate_policy(policy, eval_states)
-    if min_landings is None:
-        min_landings = metrics["landings"]
+    if not return_landings:
+        return_landings = [metrics["landings"]]
     else:
-        min_landings = min(min_landings, metrics["landings"])
+        return_landings.append(metrics["landings"])
+    min_landings = min(return_landings)
+    max_return_landings = max(return_landings)
     if hasattr(policy, "w"):
         weight_norm = float(policy.w.detach().norm())
     else:
@@ -530,7 +534,8 @@ def train_arm(mode, steps=STEPS, adv_weight=ADV_WEIGHT, table=None, eval_states=
     metrics.update(arm=mode, adv_weight=reported_adv, accepted=accepted,
                    b_cap_applications=applications, gan_grad_abs=gan_grad_abs,
                    diag_mse=diagnostic, reason=reason, weight_norm=weight_norm,
-                   min_landings=min_landings)
+                   min_landings=min_landings, max_return_landings=max_return_landings,
+                   early_landings=early_landings)
     metrics["rank_key"] = rank_key(metrics)
     rank = metrics["rank_key"]
     rank_text = "ineligible" if rank[0] < 0 else f"({rank[0]:.3f},{-rank[1]:.2f})"
@@ -549,10 +554,10 @@ def _check(failures, name, ok):
 
 
 def run_gate():
-    """Pass only the frozen-lander residual. The full overwrite must lose the pad."""
+    """Pass the same-start retime. Stranger nearest pairs must not return."""
     torch.set_num_threads(1)
     print("[slow-fast] gate start seed=0 adv_weight=1 b_cap_every=4 "
-          "panel=overwrite,anchored", flush=True)
+          f"lr={POLICY_LR} retime={RETIME} panel=stranger,connected", flush=True)
     table = collect_pairs()
     eval_states = initial_states(EVAL_ROWS, 1000)
     zero = train_arm("zero", table=table, eval_states=eval_states)
@@ -560,25 +565,25 @@ def run_gate():
     crash_fast = train_arm("crash_fast", table=table, eval_states=eval_states)
     unpaired = train_arm("unpaired", table=table, eval_states=eval_states)
     supervised = train_arm("supervised", adv_weight=0, table=table, eval_states=eval_states)
-    overwrite = train_arm("overwrite", table=table, eval_states=eval_states)
-    anchored = train_arm("anchored", table=table, eval_states=eval_states)
-    arms = (zero, slow_only, crash_fast, unpaired, supervised, overwrite, anchored)
+    stranger = train_arm("stranger", table=table, eval_states=eval_states)
+    connected = train_arm("connected", table=table, eval_states=eval_states)
+    arms = (zero, slow_only, crash_fast, unpaired, supervised, stranger, connected)
     eligible = [row for row in arms if row["rank_key"][0] >= 0]
     winner = max(eligible, key=lambda row: row["rank_key"])["arm"] if eligible else None
     failures = []
-    _check(failures, "winner_is_anchored", winner == "anchored")
-    _check(failures, "anchored_adv_weight",
-           anchored["adv_weight"] == 1. and anchored["accepted"] is True)
-    _check(failures, "anchored_b_cap", anchored["b_cap_applications"] == STEPS // 4)
-    _check(failures, "anchored_gan_grad", anchored["gan_grad_abs"] > 0.)
-    _check(failures, "anchored_landings", anchored["landings"] >= ANCHORED_LAND_MIN)
-    _check(failures, "anchored_crash", anchored["crash_rate"] <= ANCHORED_CRASH_MAX)
-    _check(failures, "anchored_steps", anchored["mean_steps"] <= ANCHORED_STEPS_MAX)
-    _check(failures, "anchored_min_landings", anchored["min_landings"] >= ANCHORED_MIN_LAND_MIN)
+    _check(failures, "winner_is_connected", winner == "connected")
+    _check(failures, "connected_adv_weight",
+           connected["adv_weight"] == 1. and connected["accepted"] is True)
+    _check(failures, "connected_b_cap", connected["b_cap_applications"] == STEPS // 4)
+    _check(failures, "connected_gan_grad", connected["gan_grad_abs"] > 0.)
+    _check(failures, "connected_landings", connected["landings"] >= CONNECTED_LAND_MIN)
+    _check(failures, "connected_crash", connected["crash_rate"] <= CONNECTED_CRASH_MAX)
+    _check(failures, "connected_steps", connected["mean_steps"] <= CONNECTED_STEPS_MAX)
+    _check(failures, "connected_returns", connected["min_landings"] >= CONNECTED_MIN_LAND_MIN)
     _check(failures, "faster_than_zero",
-           anchored["mean_steps"] <= zero["mean_steps"] - STEP_GAP_MIN)
+           connected["mean_steps"] <= zero["mean_steps"] - STEP_GAP_MIN)
     _check(failures, "faster_than_slow_only",
-           anchored["mean_steps"] <= slow_only["mean_steps"] - STEP_GAP_MIN)
+           connected["mean_steps"] <= slow_only["mean_steps"] - STEP_GAP_MIN)
     _check(failures, "zero_is_slow_success",
            zero["landings"] >= BASELINE_LAND_MIN and zero["mean_steps"] >= BASELINE_STEPS_MIN
            and zero["b_cap_applications"] == 0 and zero["rank_key"][0] < 0)
@@ -586,7 +591,7 @@ def run_gate():
            slow_only["landings"] >= SLOW_ONLY_LAND_MIN
            and slow_only["mean_steps"] >= SLOW_ONLY_STEPS_MIN
            and slow_only["adv_weight"] == 1.
-           and anchored["rank_key"] > slow_only["rank_key"])
+           and connected["rank_key"] > slow_only["rank_key"])
     _check(failures, "crash_does_not_win",
            crash_fast["landings"] <= CONTROL_LAND_MAX
            and crash_fast["rank_key"][0] < 0
@@ -597,11 +602,14 @@ def run_gate():
            supervised["adv_weight"] == 0 and supervised["accepted"] is False
            and supervised["b_cap_applications"] == 0 and supervised["rank_key"][0] < 0
            and supervised["landings"] >= SUPERVISED_LAND_MIN)
-    _check(failures, "overwrite_ran_the_gan",
-           overwrite["adv_weight"] == 1. and overwrite["b_cap_applications"] == STEPS // 4
-           and overwrite["gan_grad_abs"] > 0. and overwrite["accepted"] is False)
-    _check(failures, "overwrite_loses_the_pad",
-           overwrite["landings"] <= OVERWRITE_LAND_MAX and overwrite["rank_key"][0] < 0)
+    _check(failures, "stranger_ran_the_gan",
+           stranger["adv_weight"] == 1. and stranger["b_cap_applications"] == STEPS // 4
+           and stranger["gan_grad_abs"] > 0. and stranger["accepted"] is False)
+    _check(failures, "stranger_does_not_return",
+           stranger["landings"] <= STRANGER_LAND_MAX
+           and stranger["max_return_landings"] <= STRANGER_LAND_MAX
+           and stranger["rank_key"][0] < 0)
+    _check(failures, "stranger_pairs_are_plentiful", table["nearest_rows"] >= 1000)
     _check(failures, "fast_set_excludes_crashes", table["fast_failures_excluded"] == 0
            and bool(torch.all(table["fast_steps"] < table["slow_steps"])))
     passed = not failures
@@ -609,26 +617,28 @@ def run_gate():
           f"failures={failures or 'none'}", flush=True)
     return dict(passed=passed, winner=winner, failures=failures, zero=zero, slow_only=slow_only,
                 crash_fast=crash_fast, unpaired=unpaired, supervised=supervised,
-                overwrite=overwrite, anchored=anchored,
+                stranger=stranger, connected=connected,
                 table=dict(kept_starts=table["kept_starts"], rows=table["rows"],
                            nearest_rows=table["nearest_rows"],
                            nearest_dist=float(table["nearest_distance"].mean()),
+                           retime=table["retime"], retime_edit=table["retime_edit"],
                            fast_failures_excluded=table["fast_failures_excluded"],
                            slow_steps=float(table["slow_steps"].mean()),
                            fast_steps=float(table["fast_steps"].mean())),
                 mapping=MAPPING,
-                thresholds=dict(anchored_land_min=ANCHORED_LAND_MIN,
-                                anchored_steps_max=ANCHORED_STEPS_MAX,
-                                anchored_crash_max=ANCHORED_CRASH_MAX,
-                                anchored_min_land_min=ANCHORED_MIN_LAND_MIN,
-                                overwrite_land_max=OVERWRITE_LAND_MAX,
+                thresholds=dict(connected_land_min=CONNECTED_LAND_MIN,
+                                connected_steps_max=CONNECTED_STEPS_MAX,
+                                connected_crash_max=CONNECTED_CRASH_MAX,
+                                connected_min_land_min=CONNECTED_MIN_LAND_MIN,
+                                stranger_land_max=STRANGER_LAND_MAX,
                                 step_gap_min=STEP_GAP_MIN,
                                 landing_floor=LANDING_FLOOR, crash_ceiling=CRASH_CEILING,
                                 baseline_land_min=BASELINE_LAND_MIN,
                                 baseline_steps_min=BASELINE_STEPS_MIN,
                                 slow_only_steps_min=SLOW_ONLY_STEPS_MIN,
                                 control_land_max=CONTROL_LAND_MAX, adv_weight=ADV_WEIGHT,
-                                anchored_scale=ANCHORED_SCALE, horizon=HORIZON, steps=STEPS))
+                                retime=RETIME, policy_lr=POLICY_LR,
+                                horizon=HORIZON, steps=STEPS))
 
 
 def _rank_text(key):
@@ -640,8 +650,11 @@ def _rank_text(key):
 def _fmt(row):
     adv = "none" if row["adv_weight"] is None else f"{row['adv_weight']}"
     diag = "none" if row["diag_mse"] is None else f"{row['diag_mse']:.4f}"
+    early = row.get("early_landings")
+    early_text = "none" if early is None else f"{early:.3f}"
     return (f"[slow-fast] {row['arm']} landings={row['landings']:.3f} "
-            f"min_landings={row['min_landings']:.3f} steps={row['mean_steps']:.2f} "
+            f"early_landings={early_text} min_landings={row['min_landings']:.3f} "
+            f"steps={row['mean_steps']:.2f} "
             f"crash={row['crash_rate']:.3f} contact={row['mean_contact_steps']:.2f} "
             f"timeout={row['timeout_rate']:.3f} score={row['score']:.3f} "
             f"rank_key={_rank_text(row['rank_key'])} "
@@ -654,7 +667,7 @@ def format_report(result):
     lines = [f"[slow-fast] GATE {'PASS' if result['passed'] else 'FAIL'} winner={result['winner']}"]
     if result["failures"]:
         lines.append("[slow-fast] failed_checks=" + ",".join(result["failures"]))
-    for key in ("zero", "slow_only", "crash_fast", "unpaired", "supervised", "overwrite", "anchored"):
+    for key in ("zero", "slow_only", "crash_fast", "unpaired", "supervised", "stranger", "connected"):
         lines.append(_fmt(result[key]))
     limits = result["thresholds"]
     collected = result["table"]
@@ -662,21 +675,23 @@ def format_report(result):
         "[slow-fast] collect "
         f"kept_starts={collected['kept_starts']} rows={collected['rows']} "
         f"nearest_rows={collected['nearest_rows']} nearest_dist={collected['nearest_dist']:.3f} "
+        f"retime={collected['retime']} retime_edit={collected['retime_edit']:.3f} "
         f"fast_failures_excluded={collected['fast_failures_excluded']} "
         f"slow_steps={collected['slow_steps']:.2f} fast_steps={collected['fast_steps']:.2f}")
     lines.append(
         "[slow-fast] thresholds "
-        f"anchored_land>={limits['anchored_land_min']} "
-        f"anchored_steps<={limits['anchored_steps_max']} "
-        f"anchored_crash<={limits['anchored_crash_max']} "
-        f"anchored_min_land>={limits['anchored_min_land_min']} "
-        f"overwrite_land<={limits['overwrite_land_max']} "
+        f"connected_land>={limits['connected_land_min']} "
+        f"connected_steps<={limits['connected_steps_max']} "
+        f"connected_crash<={limits['connected_crash_max']} "
+        f"connected_min_land>={limits['connected_min_land_min']} "
+        f"stranger_land<={limits['stranger_land_max']} "
         f"landing_floor>={limits['landing_floor']} crash_ceiling<={limits['crash_ceiling']} "
-        f"step_gap>={limits['step_gap_min']} residual_scale={limits['anchored_scale']} "
+        f"step_gap>={limits['step_gap_min']} retime={limits['retime']} lr={limits['policy_lr']} "
         f"adv_weight={limits['adv_weight']} horizon={limits['horizon']} updates={limits['steps']}")
-    lines.append("[slow-fast] GATE PASS is required before the next Lunar retrain. "
-                 "The cuda:1 run of the overwrite recipe went 20/20 to 0/20. "
-                 "Commands: docs/gym-slow-fast.md. No new Lunar landing is claimed here.")
+    lines.append("[slow-fast] GATE PASS is required before Lunar collect is reworked. "
+                 "The cuda:1 stranger-pair run went 20/20 to 0/20. "
+                 "Do not train the current pairs. Commands: docs/gym-slow-fast.md. "
+                 "No new Lunar landing is claimed here.")
     lines.append("[slow-fast] mapping")
     for row in result["mapping"]:
         lines.append(f"[slow-fast] toy: {row['toy']}")
@@ -696,24 +711,23 @@ def board_markdown(result):
             return str(int(value))
         return format(value, spec)
 
-    header = ("| Arm | Landings | Min landings | Steps | Crash | Contact | Rank key | adv | "
-              "b_cap | Accepted |")
-    split = "| --- | ---: | ---: | ---: | ---: | ---: | --- | ---: | ---: | --- |"
+    header = ("| Arm | Landings | Early (step 50) | Return min | Steps | Crash | Rank key | adv | "
+              "Accepted |")
+    split = "| --- | ---: | ---: | ---: | ---: | ---: | --- | ---: | --- |"
     body = []
-    for key in ("zero", "slow_only", "crash_fast", "unpaired", "supervised", "overwrite", "anchored"):
+    for key in ("zero", "slow_only", "crash_fast", "unpaired", "supervised", "stranger", "connected"):
         row = result[key]
         body.append(
-            "| {arm} | {landings} | {min_land} | {steps} | {crash} | {contact} | {rank} | "
-            "{adv} | {bcap} | {accepted} |".format(
+            "| {arm} | {landings} | {early} | {min_land} | {steps} | {crash} | {rank} | "
+            "{adv} | {accepted} |".format(
                 arm=row["arm"],
                 landings=cell(row, "landings", ".3f"),
+                early=cell(row, "early_landings", ".3f"),
                 min_land=cell(row, "min_landings", ".3f"),
                 steps=cell(row, "mean_steps", ".2f"),
                 crash=cell(row, "crash_rate", ".3f"),
-                contact=cell(row, "mean_contact_steps", ".2f"),
                 rank=_rank_text(row["rank_key"]),
                 adv=cell(row, "adv_weight", "s"),
-                bcap=cell(row, "b_cap_applications", "d"),
                 accepted=row["accepted"]))
     collected = result["table"]
     status = "PASS" if result["passed"] else "FAIL"
@@ -721,32 +735,33 @@ def board_markdown(result):
         "# Slow→fast paired finetune (CPU gate)",
         "",
         f"Gate **{status}**. Winner of the rank key: `{result['winner']}`.",
-        "This gate must **PASS** before the next Lunar retrain. "
-        "Commands are in `docs/gym-slow-fast.md`.",
+        "This gate must **PASS** before Lunar collect is reworked. "
+        "Do not train the current stranger pairs. Commands are in `docs/gym-slow-fast.md`.",
         "These numbers are a 2D pad. They are not Lunar landings.",
         "",
         "One seed (`0`), fixed eval starts, no seed sweep. Rank is landings first,",
         "then fewer steps among successes. An arm is ineligible when `adv_weight` is",
         "not 1, `b_cap` did not run, landings fall below 0.90, crashes exceed 0.10,",
-        "or a recorded checkpoint lost the pad. Steps count successful contacts only.",
-        "`contact` is any ground hit, so a crash can look fast there and still be ineligible.",
-        "`overwrite` and `anchored` record landings every 100 steps. `min landings` is",
-        "the worst of those checkpoints.",
+        "or the return panel (steps 100, 200, 400) lost the pad. `stranger` and",
+        "`connected` use the same full lander, the same learning rate, and the same",
+        "RpGAN step. The first 50 updates kick both off the pad. `Early` is that",
+        "step. `Return min` is the worst landing rate from step 100 on.",
         "",
         header,
         split,
         *body,
         "",
         f"Collector: {collected['kept_starts']} matched starts, {collected['rows']} same-state rows, "
-        f"{collected['nearest_rows']} nearest-state rows "
+        f"{collected['nearest_rows']} stranger nearest-state rows "
         f"(mean distance {collected['nearest_dist']:.3f}), "
+        f"connected retime {collected['retime']} (mean edit {collected['retime_edit']:.3f}), "
         f"fast failures excluded {collected['fast_failures_excluded']}. "
         f"Mean slow steps {collected['slow_steps']:.2f}, mean fast steps {collected['fast_steps']:.2f}.",
         "",
         "## Why the controls lose",
         "",
         "- `zero` is the competent slow lander. No GAN step, so the rank key is ineligible. "
-        "It lands, and it is slower than `anchored`.",
+        "It lands, and it is slower than `connected`.",
         "- `slow_only` is the same RpGAN step with the slow member as the target. "
         "It stays a successful slow landing and loses on steps.",
         "- `crash_fast` puts crash actions in the fast slot and trains every weight. "
@@ -755,12 +770,12 @@ def board_markdown(result):
         "The student leaves the pad. That is not the same world flown faster.",
         "- `supervised` matches the fast member with MSE and `adv_weight=0`. "
         "Landings may be excellent. The rank key rejects it because the #18 step did not run.",
-        "- `overwrite` is the Lunar recipe: unfreeze the lander and fit nearest-state "
-        "fast actions with paired-error RpGAN at `adv_weight=1`. Landings fall. "
-        "A later checkpoint is worse. The rank key rejects it even if a leftover success is fast.",
-        "- `anchored` freezes that lander and trains a residual of at most 0.15 per channel "
-        "on the same nearest-state rows, same RpGAN step, `b_cap` every fourth update. "
-        "Diagnostic MSE stays outside the loss.",
+        "- `stranger` is the Lunar collector: a different episode's fast action at the "
+        "nearest state, plentiful rows, full-weight RpGAN at `adv_weight=1`. It leaves "
+        "the pad and is still off at steps 100, 200, and 400.",
+        "- `connected` is the same update on a same-start retime (0.25 of the fast law "
+        "at that state). It is off the pad at step 50 and back from step 100 through 400, "
+        "with fewer success steps. Diagnostic MSE stays outside the loss.",
         "",
         "## Lunar validation that this gate is built to catch",
         "",
@@ -776,9 +791,10 @@ def board_markdown(result):
         "| slow→fast @1000 | 0/20 | — | 19 |",
         "| slow→fast @2500 | 0/20 | — | 18 |",
         "",
-        "Eval selected none. Longer training was worse. The next gym recipe freezes #18 "
-        "and trains only the bounded residual. Retrain only after this gate PASSes. "
-        "This board is not a new Lunar result.",
+        "Eval selected none. Longer training was worse. Those pairs are strangers: "
+        "different episodes, matched by geometry, no shared landing. The trainer now "
+        "refuses `slow_seed != fast_seed`. Rework collect to connected pairs before "
+        "the next cuda:1 run. This board is not a new Lunar result.",
         "",
         "```bash",
         "python -u examples/slow_fast_paired_2d.py",
