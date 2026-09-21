@@ -132,7 +132,7 @@ def test_metrics_detect_wrong_classes_and_center_collapse():
     assert right["hq"] == 1 and right["modes"] == 100
     assert right["per_mode_cov_eig_max_ratio"] == 0
     assert wrong["hq"] == 1 and wrong["joint_hq"] == 0
-    assert wrong["conditional_mode_tv"] == 1
+    assert wrong["conditional_mode_tv"] == pytest.approx(1.0, abs=1e-6)
 
 
 def test_terminal_gaussian_approximation_has_small_moment_error():

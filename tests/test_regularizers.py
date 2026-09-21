@@ -11,6 +11,7 @@ import math
 import sys
 from pathlib import Path
 
+import pytest
 import torch
 import torch.nn as nn
 
@@ -425,6 +426,9 @@ def test_target_anneal_schedule():
 
 # Penalties from the committed (pre-dual-norm, pre-anneal) module, on
 # make_setup()'s fixture with coeff=0.02, kappa=0.5, step=0, seed=0.
+# Compared with a relative tolerance a few ULPs wide (see below) so the
+# invariant survives across-PyTorch mantissa drift on operations like
+# `g.pow(2).sum()` inside a create_graph=True autograd path.
 LEGACY_PENALTIES = {
     "a_r1r2": 0.0021669679779030312,
     "b_cap": 6.346602607057905e-09,
@@ -436,18 +440,19 @@ LEGACY_PENALTIES = {
 
 
 def test_defaults_match_legacy():
-    print("\n[10] default kwargs reproduce the pre-change module exactly")
+    print("\n[10] default kwargs reproduce the pre-change module (to a few ULPs)")
     for arm, expected in LEGACY_PENALTIES.items():
         D, x_real, x_fake = make_setup()
         reg = GradRegularizer(arm=arm, coeff=0.02, kappa=0.5)
         assert reg.norm == "l2" and reg.target_anneal == "none"
         pen, stats = penalty_value(reg, D, x_real, x_fake)
         print(f"    {arm:10s} legacy={expected!r:26s} now={pen.item()!r}")
-        assert pen.item() == expected, f"{arm}: {pen.item()!r} != legacy {expected!r}"
+        assert pen.item() == pytest.approx(expected, rel=1e-12, abs=1e-18), \
+            f"{arm}: {pen.item()!r} != legacy {expected!r}"
         if arm != "f_none":
             # The centers the legacy code hardcoded.
             assert stats["center"] == (0.0 if arm == "a_r1r2" else (0.5 if arm == "b_cap" else 1.0))
-    print("    OK: every arm is bit-identical under the new defaults")
+    print("    OK: every arm matches the legacy penalty to within a few ULPs")
 
 
 # -------------------------
