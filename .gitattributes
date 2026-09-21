@@ -1,0 +1,7 @@
+# Generated transition reports stay available without dominating code review.
+reports/transition/**/*.html linguist-generated=true
+reports/transition/**/*.json linguist-generated=true
+reports/transition/**/*.svg linguist-generated=true
+reports/transition/**/*.png linguist-generated=true
+reports/transition/**/*.pdf linguist-generated=true
+reports/transition/**/*.zip linguist-generated=true

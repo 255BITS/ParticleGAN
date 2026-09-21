@@ -1,0 +1,434 @@
+[
+  {
+    "id": "concat_class8_marginals",
+    "geometry_index": 0,
+    "geometry": [
+      0.0,
+      0.0,
+      0.27000001072883606
+    ],
+    "split": "interpolation",
+    "c": 0,
+    "joint_sw1": 0.10018305331468583,
+    "coverage": 0.09375,
+    "residual": 0.028232073411345482,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.869140625,
+    "real_upper": 0.814453125
+  },
+  {
+    "id": "concat_class8_marginals",
+    "geometry_index": 0,
+    "geometry": [
+      0.0,
+      0.0,
+      0.27000001072883606
+    ],
+    "split": "interpolation",
+    "c": 1,
+    "joint_sw1": 0.07314196154475212,
+    "coverage": 0.180078125,
+    "residual": 0.029391247779130936,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.337890625,
+    "real_upper": 0.310546875
+  },
+  {
+    "id": "concat_class8_marginals",
+    "geometry_index": 1,
+    "geometry": [
+      -0.10000000149011612,
+      0.05999999865889549,
+      0.25
+    ],
+    "split": "interpolation",
+    "c": 0,
+    "joint_sw1": 0.09878353178501129,
+    "coverage": 0.144921875,
+    "residual": 0.022233467549085617,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.88671875,
+    "real_upper": 0.82421875
+  },
+  {
+    "id": "concat_class8_marginals",
+    "geometry_index": 1,
+    "geometry": [
+      -0.10000000149011612,
+      0.05999999865889549,
+      0.25
+    ],
+    "split": "interpolation",
+    "c": 1,
+    "joint_sw1": 0.06908406428992749,
+    "coverage": 0.19453125,
+    "residual": 0.02006109617650509,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.3046875,
+    "real_upper": 0.265625
+  },
+  {
+    "id": "concat_class8_marginals",
+    "geometry_index": 2,
+    "geometry": [
+      0.10000000149011612,
+      -0.05999999865889549,
+      0.28999999165534973
+    ],
+    "split": "interpolation",
+    "c": 0,
+    "joint_sw1": 0.09023790434002876,
+    "coverage": 0.314453125,
+    "residual": 0.01806362345814705,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.880859375,
+    "real_upper": 0.814453125
+  },
+  {
+    "id": "concat_class8_marginals",
+    "geometry_index": 2,
+    "geometry": [
+      0.10000000149011612,
+      -0.05999999865889549,
+      0.28999999165534973
+    ],
+    "split": "interpolation",
+    "c": 1,
+    "joint_sw1": 0.04903347007930279,
+    "coverage": 0.33203125,
+    "residual": 0.019966818392276764,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.294921875,
+    "real_upper": 0.306640625
+  },
+  {
+    "id": "concat_class8_marginals",
+    "geometry_index": 3,
+    "geometry": [
+      0.30000001192092896,
+      0.18000000715255737,
+      0.3499999940395355
+    ],
+    "split": "extrapolation",
+    "c": 0,
+    "joint_sw1": 0.18194038271903992,
+    "coverage": 0.0,
+    "residual": 0.028698626905679703,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.890625,
+    "real_upper": 0.80859375
+  },
+  {
+    "id": "concat_class8_marginals",
+    "geometry_index": 3,
+    "geometry": [
+      0.30000001192092896,
+      0.18000000715255737,
+      0.3499999940395355
+    ],
+    "split": "extrapolation",
+    "c": 1,
+    "joint_sw1": 0.1397438608109951,
+    "coverage": 0.000390625,
+    "residual": 0.02479873038828373,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.296875,
+    "real_upper": 0.298828125
+  },
+  {
+    "id": "concat_class8_context2",
+    "geometry_index": 0,
+    "geometry": [
+      0.0,
+      0.0,
+      0.27000001072883606
+    ],
+    "split": "interpolation",
+    "c": 0,
+    "joint_sw1": 0.10304470732808113,
+    "coverage": 0.18203125,
+    "residual": 0.022928602993488312,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.904296875,
+    "real_upper": 0.814453125
+  },
+  {
+    "id": "concat_class8_context2",
+    "geometry_index": 0,
+    "geometry": [
+      0.0,
+      0.0,
+      0.27000001072883606
+    ],
+    "split": "interpolation",
+    "c": 1,
+    "joint_sw1": 0.06968560367822647,
+    "coverage": 0.221875,
+    "residual": 0.019405819475650787,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.271484375,
+    "real_upper": 0.310546875
+  },
+  {
+    "id": "concat_class8_context2",
+    "geometry_index": 1,
+    "geometry": [
+      -0.10000000149011612,
+      0.05999999865889549,
+      0.25
+    ],
+    "split": "interpolation",
+    "c": 0,
+    "joint_sw1": 0.11781283169984817,
+    "coverage": 0.276171875,
+    "residual": 0.014890017919242382,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.904296875,
+    "real_upper": 0.82421875
+  },
+  {
+    "id": "concat_class8_context2",
+    "geometry_index": 1,
+    "geometry": [
+      -0.10000000149011612,
+      0.05999999865889549,
+      0.25
+    ],
+    "split": "interpolation",
+    "c": 1,
+    "joint_sw1": 0.0697318971157074,
+    "coverage": 0.2328125,
+    "residual": 0.014533932320773602,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.263671875,
+    "real_upper": 0.265625
+  },
+  {
+    "id": "concat_class8_context2",
+    "geometry_index": 2,
+    "geometry": [
+      0.10000000149011612,
+      -0.05999999865889549,
+      0.28999999165534973
+    ],
+    "split": "interpolation",
+    "c": 0,
+    "joint_sw1": 0.10716639086604118,
+    "coverage": 0.3828125,
+    "residual": 0.014048936776816845,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.908203125,
+    "real_upper": 0.814453125
+  },
+  {
+    "id": "concat_class8_context2",
+    "geometry_index": 2,
+    "geometry": [
+      0.10000000149011612,
+      -0.05999999865889549,
+      0.28999999165534973
+    ],
+    "split": "interpolation",
+    "c": 1,
+    "joint_sw1": 0.05460627004504204,
+    "coverage": 0.371875,
+    "residual": 0.014783283695578575,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.322265625,
+    "real_upper": 0.306640625
+  },
+  {
+    "id": "concat_class8_context2",
+    "geometry_index": 3,
+    "geometry": [
+      0.30000001192092896,
+      0.18000000715255737,
+      0.3499999940395355
+    ],
+    "split": "extrapolation",
+    "c": 0,
+    "joint_sw1": 0.19318332076072692,
+    "coverage": 0.0296875,
+    "residual": 0.025233319029211998,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.88671875,
+    "real_upper": 0.80859375
+  },
+  {
+    "id": "concat_class8_context2",
+    "geometry_index": 3,
+    "geometry": [
+      0.30000001192092896,
+      0.18000000715255737,
+      0.3499999940395355
+    ],
+    "split": "extrapolation",
+    "c": 1,
+    "joint_sw1": 0.1371680811047554,
+    "coverage": 0.0015625,
+    "residual": 0.026886487379670143,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.302734375,
+    "real_upper": 0.298828125
+  },
+  {
+    "id": "concat_class6_context2",
+    "geometry_index": 0,
+    "geometry": [
+      0.0,
+      0.0,
+      0.27000001072883606
+    ],
+    "split": "interpolation",
+    "c": 0,
+    "joint_sw1": 0.1133064053952694,
+    "coverage": 0.28046875,
+    "residual": 0.019508307799696922,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.900390625,
+    "real_upper": 0.814453125
+  },
+  {
+    "id": "concat_class6_context2",
+    "geometry_index": 0,
+    "geometry": [
+      0.0,
+      0.0,
+      0.27000001072883606
+    ],
+    "split": "interpolation",
+    "c": 1,
+    "joint_sw1": 0.09940478205680847,
+    "coverage": 0.323046875,
+    "residual": 0.016384262591600418,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.369140625,
+    "real_upper": 0.310546875
+  },
+  {
+    "id": "concat_class6_context2",
+    "geometry_index": 1,
+    "geometry": [
+      -0.10000000149011612,
+      0.05999999865889549,
+      0.25
+    ],
+    "split": "interpolation",
+    "c": 0,
+    "joint_sw1": 0.11822562888264657,
+    "coverage": 0.310546875,
+    "residual": 0.011474383994936943,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.904296875,
+    "real_upper": 0.82421875
+  },
+  {
+    "id": "concat_class6_context2",
+    "geometry_index": 1,
+    "geometry": [
+      -0.10000000149011612,
+      0.05999999865889549,
+      0.25
+    ],
+    "split": "interpolation",
+    "c": 1,
+    "joint_sw1": 0.10138165876269341,
+    "coverage": 0.241796875,
+    "residual": 0.011321552097797394,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.3515625,
+    "real_upper": 0.265625
+  },
+  {
+    "id": "concat_class6_context2",
+    "geometry_index": 2,
+    "geometry": [
+      0.10000000149011612,
+      -0.05999999865889549,
+      0.28999999165534973
+    ],
+    "split": "interpolation",
+    "c": 0,
+    "joint_sw1": 0.09875148311257362,
+    "coverage": 0.33515625,
+    "residual": 0.015147930011153221,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.87890625,
+    "real_upper": 0.814453125
+  },
+  {
+    "id": "concat_class6_context2",
+    "geometry_index": 2,
+    "geometry": [
+      0.10000000149011612,
+      -0.05999999865889549,
+      0.28999999165534973
+    ],
+    "split": "interpolation",
+    "c": 1,
+    "joint_sw1": 0.08230546861886978,
+    "coverage": 0.39140625,
+    "residual": 0.011428974568843842,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.322265625,
+    "real_upper": 0.306640625
+  },
+  {
+    "id": "concat_class6_context2",
+    "geometry_index": 3,
+    "geometry": [
+      0.30000001192092896,
+      0.18000000715255737,
+      0.3499999940395355
+    ],
+    "split": "extrapolation",
+    "c": 0,
+    "joint_sw1": 0.18552591800689697,
+    "coverage": 0.01953125,
+    "residual": 0.019096825271844864,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.884765625,
+    "real_upper": 0.80859375
+  },
+  {
+    "id": "concat_class6_context2",
+    "geometry_index": 3,
+    "geometry": [
+      0.30000001192092896,
+      0.18000000715255737,
+      0.3499999940395355
+    ],
+    "split": "extrapolation",
+    "c": 1,
+    "joint_sw1": 0.16075610518455505,
+    "coverage": 0.003125,
+    "residual": 0.025379935279488564,
+    "midpoint_tick": 31,
+    "midpoint_count": 512,
+    "generated_upper": 0.337890625,
+    "real_upper": 0.298828125
+  }
+]

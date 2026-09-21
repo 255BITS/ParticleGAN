@@ -1,0 +1,12 @@
+# 65,526 generator parameters versus 65,286 for the three-branch generator.
+architecture: monolithic
+width: 234
+num_particles: 1024
+critic_mode: joint
+out_dir: results/transition/mog_1024/monolithic_joint
+
+# Explicit historical factors; independent of the current example defaults.
+d_conditioning: ucd
+encoder: false
+g_class_scale: 1.0
+shared_state_critic: false

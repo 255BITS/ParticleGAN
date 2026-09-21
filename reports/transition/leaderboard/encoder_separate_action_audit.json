@@ -1,0 +1,63 @@
+{
+  "run": "encoder_separate",
+  "delta": 0.0001,
+  "splits": {
+    "train": {
+      "count": 1280,
+      "mean_response_matrix": [
+        [
+          1.8575702905654907,
+          0.07902099937200546
+        ],
+        [
+          -0.22731833159923553,
+          0.7608957290649414
+        ]
+      ],
+      "mean_identity_error": 14.7513427734375,
+      "median_identity_error": 14.34647274017334,
+      "p95_identity_error": 32.26822280883789,
+      "stable_route_mean_identity_error": 13.661711692810059,
+      "mean_response_norm": 14.818110466003418,
+      "route_switch_fraction": 0.02695312537252903,
+      "offset_rms_in_sigma": 2.311439275741577,
+      "offset_saturation_fraction": 0.24790039658546448,
+      "component_counts": {
+        "258": 153,
+        "301": 228,
+        "334": 95,
+        "409": 317,
+        "861": 487
+      }
+    },
+    "test": {
+      "count": 1280,
+      "mean_response_matrix": [
+        [
+          2.022815704345703,
+          0.04604832082986832
+        ],
+        [
+          -0.3469179570674896,
+          0.7117400169372559
+        ]
+      ],
+      "mean_identity_error": 14.764144897460938,
+      "median_identity_error": 14.141596794128418,
+      "p95_identity_error": 31.92842674255371,
+      "stable_route_mean_identity_error": 13.66443157196045,
+      "mean_response_norm": 14.856782913208008,
+      "route_switch_fraction": 0.02421875111758709,
+      "offset_rms_in_sigma": 2.324496030807495,
+      "offset_saturation_fraction": 0.25178223848342896,
+      "component_counts": {
+        "258": 185,
+        "301": 208,
+        "334": 50,
+        "409": 382,
+        "861": 455
+      }
+    }
+  },
+  "description": "Probe a frozen transition encoder's response to physical action perturbations.\n\nThis leaves the training route manifold. It is a post-hoc response/stability\ncheck, not a causal-identification test or part of the generation leaderboard.\n"
+}

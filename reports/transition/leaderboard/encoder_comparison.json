@@ -1,0 +1,890 @@
+[
+  {
+    "id": "branches_concat_class8_marginals",
+    "parameters": {
+      "G": 65286,
+      "D": 238084,
+      "prior": 32768
+    },
+    "train_seconds": 565.0584335119929,
+    "real_draws": 14336000,
+    "mean_reference_step": 0.03656011074781418,
+    "class_metrics": {
+      "0": {
+        "joint_sw1": 0.11778621803969144,
+        "coverage": 0.13828125,
+        "precision": 0.14755859375
+      },
+      "1": {
+        "joint_sw1": 0.08275083918124437,
+        "coverage": 0.1767578125,
+        "precision": 0.16611328125
+      }
+    },
+    "final": {
+      "train": {
+        "joint_sw1": 0.06378479008562862,
+        "coverage": 0.68876953125,
+        "precision": 0.66259765625,
+        "spread_ratio": 0.9359536185860634,
+        "state_sw1": 0.04864867752185091,
+        "action_sw1": 0.08196681393310427,
+        "next_state_sw1": 0.04862316412618384,
+        "consistency_mean": 0.005781796295195818,
+        "consistency_p50": 0.005141765810549259,
+        "consistency_p95": 0.012377314269542694
+      },
+      "test": {
+        "joint_sw1": 0.10026852861046791,
+        "coverage": 0.15751953125,
+        "precision": 0.1568359375,
+        "spread_ratio": 0.9191548883914947,
+        "state_sw1": 0.08384556334931403,
+        "action_sw1": 0.11447435761801898,
+        "next_state_sw1": 0.0935090466402471,
+        "consistency_mean": 0.023930711671710014,
+        "consistency_p50": 0.02098637819290161,
+        "consistency_p95": 0.05278529226779938
+      },
+      "interpolation": {
+        "joint_sw1": 0.0800773308922847,
+        "coverage": 0.2099609375,
+        "precision": 0.20904947916666666,
+        "spread_ratio": 0.977946130434672,
+        "state_sw1": 0.06691667676592866,
+        "action_sw1": 0.09670876208692789,
+        "next_state_sw1": 0.07210448123514653,
+        "consistency_mean": 0.02299138903617859,
+        "consistency_p50": 0.019639616832137108,
+        "consistency_p95": 0.0532371811568737
+      },
+      "extrapolation": {
+        "joint_sw1": 0.1608421217650175,
+        "coverage": 0.0001953125,
+        "precision": 0.0001953125,
+        "spread_ratio": 0.7427811622619629,
+        "state_sw1": 0.13463222309947015,
+        "action_sw1": 0.16777114421129227,
+        "next_state_sw1": 0.15772274285554885,
+        "consistency_mean": 0.02674868144094944,
+        "consistency_p50": 0.024501971900463104,
+        "consistency_p95": 0.05152437463402748
+      }
+    },
+    "preference": {
+      "tick": 31,
+      "time": 0.49206349206349204,
+      "classes": [
+        {
+          "c": 0,
+          "count": 2048,
+          "real_upper": 0.8154296875,
+          "generated_upper": 0.8818359375
+        },
+        {
+          "c": 1,
+          "count": 2048,
+          "real_upper": 0.29541015625,
+          "generated_upper": 0.30859375
+        }
+      ]
+    },
+    "inference": {}
+  },
+  {
+    "id": "encoder_separate",
+    "parameters": {
+      "G": 65286,
+      "D": 238084,
+      "prior": 32768,
+      "E": 42688
+    },
+    "train_seconds": 826.9154642159701,
+    "real_draws": 14336000,
+    "mean_reference_step": 0.03656011074781418,
+    "class_metrics": {
+      "0": {
+        "joint_sw1": 0.11152422204613685,
+        "coverage": 0.259375,
+        "precision": 0.2373046875
+      },
+      "1": {
+        "joint_sw1": 0.0792386420071125,
+        "coverage": 0.29482421875,
+        "precision": 0.2736328125
+      }
+    },
+    "final": {
+      "train": {
+        "joint_sw1": 0.05875402675010264,
+        "coverage": 0.58701171875,
+        "precision": 0.53349609375,
+        "spread_ratio": 0.9599173635244369,
+        "state_sw1": 0.03990032181609422,
+        "action_sw1": 0.08137970981188118,
+        "next_state_sw1": 0.04304608528036624,
+        "consistency_mean": 0.012468311004340649,
+        "consistency_p50": 0.010834433138370514,
+        "consistency_p95": 0.02667625993490219
+      },
+      "test": {
+        "joint_sw1": 0.09538143202662468,
+        "coverage": 0.277099609375,
+        "precision": 0.25546875,
+        "spread_ratio": 0.9485126078128815,
+        "state_sw1": 0.08171450495719909,
+        "action_sw1": 0.10741417510434985,
+        "next_state_sw1": 0.08282286287285387,
+        "consistency_mean": 0.018028467893600464,
+        "consistency_p50": 0.016311464831233025,
+        "consistency_p95": 0.03723042458295822
+      },
+      "interpolation": {
+        "joint_sw1": 0.07449413513143857,
+        "coverage": 0.3634765625,
+        "precision": 0.3361328125,
+        "spread_ratio": 1.009431674083074,
+        "state_sw1": 0.05818739806612332,
+        "action_sw1": 0.09173957419892152,
+        "next_state_sw1": 0.06237571990738312,
+        "consistency_mean": 0.016548460349440575,
+        "consistency_p50": 0.01524384692311287,
+        "consistency_p95": 0.032968670129776
+      },
+      "extrapolation": {
+        "joint_sw1": 0.158043322712183,
+        "coverage": 0.01796875,
+        "precision": 0.0134765625,
+        "spread_ratio": 0.7657554090023041,
+        "state_sw1": 0.1522958256304264,
+        "action_sw1": 0.15443797782063484,
+        "next_state_sw1": 0.14416429176926612,
+        "consistency_mean": 0.02246849238872528,
+        "consistency_p50": 0.020283538848161697,
+        "consistency_p95": 0.045680224895477295
+      }
+    },
+    "preference": {
+      "tick": 31,
+      "time": 0.49206349206349204,
+      "classes": [
+        {
+          "c": 0,
+          "count": 2048,
+          "real_upper": 0.8154296875,
+          "generated_upper": 0.86474609375
+        },
+        {
+          "c": 1,
+          "count": 2048,
+          "real_upper": 0.29541015625,
+          "generated_upper": 0.2783203125
+        }
+      ]
+    },
+    "inference": {
+      "train": {
+        "paired": {
+          "next_l2": 0.00662268465384841,
+          "next_l2_p95": 0.019363008439540863,
+          "state_l2": 0.01096939854323864,
+          "action_l2": 0.0004261331632733345,
+          "real_routing": {
+            "used": 5,
+            "effective": 4.243656635284424,
+            "max_fraction": 0.392822265625
+          },
+          "synthetic_routing": {
+            "used": 5,
+            "effective": 4.282341480255127,
+            "max_fraction": 0.38896486163139343
+          }
+        },
+        "classes": {
+          "0": {
+            "next_l2": 0.007015668787062168,
+            "next_l2_p95": 0.020169267430901527,
+            "state_l2": 0.011545926332473755,
+            "action_l2": 0.0004210678453091532,
+            "real_routing": {
+              "used": 2,
+              "effective": 1.6814733743667603,
+              "max_fraction": 0.78564453125
+            },
+            "synthetic_routing": {
+              "used": 2,
+              "effective": 1.6981098651885986,
+              "max_fraction": 0.7779297232627869
+            }
+          },
+          "1": {
+            "next_l2": 0.006229700054973364,
+            "next_l2_p95": 0.018642505630850792,
+            "state_l2": 0.010392870754003525,
+            "action_l2": 0.0004311985394451767,
+            "real_routing": {
+              "used": 3,
+              "effective": 2.6775054931640625,
+              "max_fraction": 0.5152344107627869
+            },
+            "synthetic_routing": {
+              "used": 3,
+              "effective": 2.6998331546783447,
+              "max_fraction": 0.501269519329071
+            }
+          }
+        },
+        "conditional": {
+          "joint_sw1": 0.00342171035008505,
+          "coverage": 0.989208984375,
+          "precision": 0.99208984375,
+          "spread_ratio": 0.9995219931006432,
+          "state_sw1": 2.75266925919837e-10,
+          "action_sw1": 1.2553040273921568e-10,
+          "next_state_sw1": 0.006247649929719046,
+          "consistency_mean": 0.00662268465384841,
+          "consistency_p50": 0.0047094691544771194,
+          "consistency_p95": 0.019363008439540863
+        },
+        "synthetic": {
+          "joint_sw1": 0.05858012130483985,
+          "coverage": 0.70341796875,
+          "precision": 0.630810546875,
+          "spread_ratio": 0.9599296972155571,
+          "state_sw1": 0.03990032216534019,
+          "action_sw1": 0.08137971009127795,
+          "next_state_sw1": 0.03834967951988801,
+          "consistency_mean": 0.00757779274135828,
+          "consistency_p50": 0.0063622938469052315,
+          "consistency_p95": 0.017664572224020958
+        }
+      },
+      "test": {
+        "paired": {
+          "next_l2": 0.01793784089386463,
+          "next_l2_p95": 0.04958115145564079,
+          "state_l2": 0.02340789884328842,
+          "action_l2": 0.0008511252817697823,
+          "real_routing": {
+            "used": 5,
+            "effective": 4.123459815979004,
+            "max_fraction": 0.3648437559604645
+          },
+          "synthetic_routing": {
+            "used": 5,
+            "effective": 4.070564270019531,
+            "max_fraction": 0.39111328125
+          }
+        },
+        "classes": {
+          "0": {
+            "next_l2": 0.018013672903180122,
+            "next_l2_p95": 0.05814375355839729,
+            "state_l2": 0.025011971592903137,
+            "action_l2": 0.0008089029579423368,
+            "real_routing": {
+              "used": 2,
+              "effective": 1.7924249172210693,
+              "max_fraction": 0.729687511920929
+            },
+            "synthetic_routing": {
+              "used": 2,
+              "effective": 1.6888964176177979,
+              "max_fraction": 0.7822265625
+            }
+          },
+          "1": {
+            "next_l2": 0.01786200888454914,
+            "next_l2_p95": 0.04538850113749504,
+            "state_l2": 0.021803829818964005,
+            "action_l2": 0.0008933477220125496,
+            "real_routing": {
+              "used": 3,
+              "effective": 2.3714962005615234,
+              "max_fraction": 0.61279296875
+            },
+            "synthetic_routing": {
+              "used": 3,
+              "effective": 2.452709913253784,
+              "max_fraction": 0.592578113079071
+            }
+          }
+        },
+        "conditional": {
+          "joint_sw1": 0.012515549387899227,
+          "coverage": 0.8390625,
+          "precision": 0.8423828125,
+          "spread_ratio": 0.9940319061279297,
+          "state_sw1": 6.8004920861231e-10,
+          "action_sw1": 1.7472114310912444e-10,
+          "next_state_sw1": 0.023455710499547422,
+          "consistency_mean": 0.01793784089386463,
+          "consistency_p50": 0.013971712440252304,
+          "consistency_p95": 0.04958117753267288
+        },
+        "synthetic": {
+          "joint_sw1": 0.09595261760987342,
+          "coverage": 0.31796875,
+          "precision": 0.297265625,
+          "spread_ratio": 0.9459486268460751,
+          "state_sw1": 0.08171450472436845,
+          "action_sw1": 0.10741417552344501,
+          "next_state_sw1": 0.08157186765456573,
+          "consistency_mean": 0.013218715786933899,
+          "consistency_p50": 0.011817138642072678,
+          "consistency_p95": 0.027991298586130142
+        }
+      },
+      "interpolation": {
+        "paired": {
+          "next_l2": 0.012374123558402061,
+          "next_l2_p95": 0.02781670168042183,
+          "state_l2": 0.016780253499746323,
+          "action_l2": 0.0006185340462252498,
+          "real_routing": {
+            "used": 5,
+            "effective": 3.7265889644622803,
+            "max_fraction": 0.43541669845581055
+          },
+          "synthetic_routing": {
+            "used": 5,
+            "effective": 4.004823207855225,
+            "max_fraction": 0.4117838740348816
+          }
+        },
+        "classes": {
+          "0": {
+            "next_l2": 0.012420970015227795,
+            "next_l2_p95": 0.028953898698091507,
+            "state_l2": 0.019012412056326866,
+            "action_l2": 0.0006357199745252728,
+            "real_routing": {
+              "used": 2,
+              "effective": 1.4693195819854736,
+              "max_fraction": 0.8708333969116211
+            },
+            "synthetic_routing": {
+              "used": 2,
+              "effective": 1.593511700630188,
+              "max_fraction": 0.8235677480697632
+            }
+          },
+          "1": {
+            "next_l2": 0.012327278032898903,
+            "next_l2_p95": 0.026762083172798157,
+            "state_l2": 0.014548096805810928,
+            "action_l2": 0.0006013480597175658,
+            "real_routing": {
+              "used": 3,
+              "effective": 2.3629066944122314,
+              "max_fraction": 0.651562511920929
+            },
+            "synthetic_routing": {
+              "used": 3,
+              "effective": 2.5162360668182373,
+              "max_fraction": 0.6000000238418579
+            }
+          }
+        },
+        "conditional": {
+          "joint_sw1": 0.007836744037922472,
+          "coverage": 0.9204427083333333,
+          "precision": 0.9244140625,
+          "spread_ratio": 1.0026942451794942,
+          "state_sw1": 5.558454326444935e-10,
+          "action_sw1": 9.48479813208299e-12,
+          "next_state_sw1": 0.0147512956832846,
+          "consistency_mean": 0.012374124489724636,
+          "consistency_p50": 0.01149417832493782,
+          "consistency_p95": 0.02781670168042183
+        },
+        "synthetic": {
+          "joint_sw1": 0.07340239404390256,
+          "coverage": 0.42044270833333336,
+          "precision": 0.39361979166666666,
+          "spread_ratio": 1.0089030861854553,
+          "state_sw1": 0.0581873981282115,
+          "action_sw1": 0.09173957419892152,
+          "next_state_sw1": 0.056360110407695174,
+          "consistency_mean": 0.011430706828832626,
+          "consistency_p50": 0.010539015755057335,
+          "consistency_p95": 0.023156873881816864
+        }
+      },
+      "extrapolation": {
+        "paired": {
+          "next_l2": 0.03462899103760719,
+          "next_l2_p95": 0.10441692173480988,
+          "state_l2": 0.04329083487391472,
+          "action_l2": 0.0015488993376493454,
+          "real_routing": {
+            "used": 5,
+            "effective": 3.859968900680542,
+            "max_fraction": 0.34687501192092896
+          },
+          "synthetic_routing": {
+            "used": 4,
+            "effective": 3.8801374435424805,
+            "max_fraction": 0.3291015625
+          }
+        },
+        "classes": {
+          "0": {
+            "next_l2": 0.03479178249835968,
+            "next_l2_p95": 0.10913234204053879,
+            "state_l2": 0.0430106520652771,
+            "action_l2": 0.0013284521410241723,
+            "real_routing": {
+              "used": 2,
+              "effective": 1.851631760597229,
+              "max_fraction": 0.6937500238418579
+            },
+            "synthetic_routing": {
+              "used": 2,
+              "effective": 1.9006959199905396,
+              "max_fraction": 0.658203125
+            }
+          },
+          "1": {
+            "next_l2": 0.034466203302145004,
+            "next_l2_p95": 0.0925176739692688,
+            "state_l2": 0.043571025133132935,
+            "action_l2": 0.0017693465342745185,
+            "real_routing": {
+              "used": 3,
+              "effective": 2.011652946472168,
+              "max_fraction": 0.502734363079071
+            },
+            "synthetic_routing": {
+              "used": 2,
+              "effective": 1.9802569150924683,
+              "max_fraction": 0.5703125
+            }
+          }
+        },
+        "conditional": {
+          "joint_sw1": 0.026551965437829495,
+          "coverage": 0.594921875,
+          "precision": 0.5962890625,
+          "spread_ratio": 0.968044888973236,
+          "state_sw1": 1.0526605365157592e-09,
+          "action_sw1": 6.704301780402489e-10,
+          "next_state_sw1": 0.04956895494833589,
+          "consistency_mean": 0.03462899103760719,
+          "consistency_p50": 0.024552401155233383,
+          "consistency_p95": 0.10441692173480988
+        },
+        "synthetic": {
+          "joint_sw1": 0.16360328830778598,
+          "coverage": 0.010546875,
+          "precision": 0.008203125,
+          "spread_ratio": 0.7570852488279343,
+          "state_sw1": 0.15229582451283932,
+          "action_sw1": 0.1544379794970155,
+          "next_state_sw1": 0.15720713939517736,
+          "consistency_mean": 0.018582750111818314,
+          "consistency_p50": 0.01632840372622013,
+          "consistency_p95": 0.04214579239487648
+        }
+      }
+    }
+  },
+  {
+    "id": "encoder_shared_state",
+    "parameters": {
+      "G": 65286,
+      "D": 203779,
+      "prior": 32768,
+      "E": 42688
+    },
+    "train_seconds": 954.6939463480376,
+    "real_draws": 14336000,
+    "mean_reference_step": 0.03656011074781418,
+    "class_metrics": {
+      "0": {
+        "joint_sw1": 0.09258370827883482,
+        "coverage": 0.26640625,
+        "precision": 0.2583984375
+      },
+      "1": {
+        "joint_sw1": 0.07871012296527624,
+        "coverage": 0.22998046875,
+        "precision": 0.21806640625
+      }
+    },
+    "final": {
+      "train": {
+        "joint_sw1": 0.05322733111679554,
+        "coverage": 0.592041015625,
+        "precision": 0.534130859375,
+        "spread_ratio": 0.9841903448104858,
+        "state_sw1": 0.035088981362059714,
+        "action_sw1": 0.07812923481687903,
+        "next_state_sw1": 0.03852603011764586,
+        "consistency_mean": 0.01209985464811325,
+        "consistency_p50": 0.010410744696855545,
+        "consistency_p95": 0.026057863608002663
+      },
+      "test": {
+        "joint_sw1": 0.08564691562205554,
+        "coverage": 0.248193359375,
+        "precision": 0.238232421875,
+        "spread_ratio": 0.9648760423064232,
+        "state_sw1": 0.07631387019064277,
+        "action_sw1": 0.10090598319657147,
+        "next_state_sw1": 0.0698040070477873,
+        "consistency_mean": 0.017362253740429878,
+        "consistency_p50": 0.015356529504060745,
+        "consistency_p95": 0.03661331161856651
+      },
+      "interpolation": {
+        "joint_sw1": 0.06525923659404119,
+        "coverage": 0.328515625,
+        "precision": 0.3157552083333333,
+        "spread_ratio": 1.0262201031049092,
+        "state_sw1": 0.05505003963286678,
+        "action_sw1": 0.08393768953780333,
+        "next_state_sw1": 0.049335826312502225,
+        "consistency_mean": 0.016105735674500465,
+        "consistency_p50": 0.014421045780181885,
+        "consistency_p95": 0.033270351588726044
+      },
+      "extrapolation": {
+        "joint_sw1": 0.14680995270609856,
+        "coverage": 0.0072265625,
+        "precision": 0.0056640625,
+        "spread_ratio": 0.7808438599109649,
+        "state_sw1": 0.14010536186397077,
+        "action_sw1": 0.15181086417287587,
+        "next_state_sw1": 0.13120854925364256,
+        "consistency_mean": 0.021131811663508415,
+        "consistency_p50": 0.019086692482233047,
+        "consistency_p95": 0.0437982901930809
+      }
+    },
+    "preference": {
+      "tick": 31,
+      "time": 0.49206349206349204,
+      "classes": [
+        {
+          "c": 0,
+          "count": 2048,
+          "real_upper": 0.8154296875,
+          "generated_upper": 0.837890625
+        },
+        {
+          "c": 1,
+          "count": 2048,
+          "real_upper": 0.29541015625,
+          "generated_upper": 0.30322265625
+        }
+      ]
+    },
+    "inference": {
+      "train": {
+        "paired": {
+          "next_l2": 0.006543636322021484,
+          "next_l2_p95": 0.01910867914557457,
+          "state_l2": 0.011275353841483593,
+          "action_l2": 0.0004690411442425102,
+          "real_routing": {
+            "used": 6,
+            "effective": 4.755010604858398,
+            "max_fraction": 0.35493165254592896
+          },
+          "synthetic_routing": {
+            "used": 6,
+            "effective": 4.727954387664795,
+            "max_fraction": 0.36040040850639343
+          }
+        },
+        "classes": {
+          "0": {
+            "next_l2": 0.006390339229255915,
+            "next_l2_p95": 0.01842288114130497,
+            "state_l2": 0.010772123001515865,
+            "action_l2": 0.00043047041981481016,
+            "real_routing": {
+              "used": 4,
+              "effective": 2.9874706268310547,
+              "max_fraction": 0.4544921815395355
+            },
+            "synthetic_routing": {
+              "used": 4,
+              "effective": 2.9139297008514404,
+              "max_fraction": 0.4560546875
+            }
+          },
+          "1": {
+            "next_l2": 0.006696934346109629,
+            "next_l2_p95": 0.01982908509671688,
+            "state_l2": 0.01177858468145132,
+            "action_l2": 0.0005076118977740407,
+            "real_routing": {
+              "used": 6,
+              "effective": 5.248342990875244,
+              "max_fraction": 0.26123046875
+            },
+            "synthetic_routing": {
+              "used": 6,
+              "effective": 5.2244744300842285,
+              "max_fraction": 0.2647460997104645
+            }
+          }
+        },
+        "conditional": {
+          "joint_sw1": 0.0034363596379989756,
+          "coverage": 0.996044921875,
+          "precision": 0.99765625,
+          "spread_ratio": 0.9999585926532746,
+          "state_sw1": 2.75266925919837e-10,
+          "action_sw1": 1.2553040273921568e-10,
+          "next_state_sw1": 0.006008652207674459,
+          "consistency_mean": 0.006543636322021484,
+          "consistency_p50": 0.004788528196513653,
+          "consistency_p95": 0.01910867914557457
+        },
+        "synthetic": {
+          "joint_sw1": 0.05282073300331831,
+          "coverage": 0.692041015625,
+          "precision": 0.62705078125,
+          "spread_ratio": 0.9839841052889824,
+          "state_sw1": 0.03508898145519197,
+          "action_sw1": 0.07812923472374678,
+          "next_state_sw1": 0.032915330503601584,
+          "consistency_mean": 0.007821768522262573,
+          "consistency_p50": 0.006645433604717255,
+          "consistency_p95": 0.0176845733076334
+        }
+      },
+      "test": {
+        "paired": {
+          "next_l2": 0.016652550548315048,
+          "next_l2_p95": 0.04780055582523346,
+          "state_l2": 0.023701542988419533,
+          "action_l2": 0.000955141440499574,
+          "real_routing": {
+            "used": 7,
+            "effective": 4.947728157043457,
+            "max_fraction": 0.33173829317092896
+          },
+          "synthetic_routing": {
+            "used": 6,
+            "effective": 4.736945629119873,
+            "max_fraction": 0.371337890625
+          }
+        },
+        "classes": {
+          "0": {
+            "next_l2": 0.018127281218767166,
+            "next_l2_p95": 0.058986593037843704,
+            "state_l2": 0.023380329832434654,
+            "action_l2": 0.0010372040560469031,
+            "real_routing": {
+              "used": 5,
+              "effective": 2.8998863697052,
+              "max_fraction": 0.47578126192092896
+            },
+            "synthetic_routing": {
+              "used": 4,
+              "effective": 2.8585104942321777,
+              "max_fraction": 0.48945313692092896
+            }
+          },
+          "1": {
+            "next_l2": 0.015177818946540356,
+            "next_l2_p95": 0.04572146013379097,
+            "state_l2": 0.02402275800704956,
+            "action_l2": 0.0008730788831599057,
+            "real_routing": {
+              "used": 6,
+              "effective": 5.105680465698242,
+              "max_fraction": 0.3472656309604645
+            },
+            "synthetic_routing": {
+              "used": 6,
+              "effective": 5.137971878051758,
+              "max_fraction": 0.2964843809604645
+            }
+          }
+        },
+        "conditional": {
+          "joint_sw1": 0.012260432733455673,
+          "coverage": 0.84892578125,
+          "precision": 0.85439453125,
+          "spread_ratio": 0.991143824160099,
+          "state_sw1": 6.8004920861231e-10,
+          "action_sw1": 1.7472114310912444e-10,
+          "next_state_sw1": 0.022560062137199566,
+          "consistency_mean": 0.016652550548315048,
+          "consistency_p50": 0.011694392189383507,
+          "consistency_p95": 0.04780055582523346
+        },
+        "synthetic": {
+          "joint_sw1": 0.08671457679010927,
+          "coverage": 0.25244140625,
+          "precision": 0.242919921875,
+          "spread_ratio": 0.96351508051157,
+          "state_sw1": 0.0763138708891347,
+          "action_sw1": 0.10090598319657147,
+          "next_state_sw1": 0.07002517585642636,
+          "consistency_mean": 0.014711521565914154,
+          "consistency_p50": 0.012868436053395271,
+          "consistency_p95": 0.031140906736254692
+        }
+      },
+      "interpolation": {
+        "paired": {
+          "next_l2": 0.011454146355390549,
+          "next_l2_p95": 0.0256799403578043,
+          "state_l2": 0.01854936219751835,
+          "action_l2": 0.0006114346324466169,
+          "real_routing": {
+            "used": 6,
+            "effective": 4.5069379806518555,
+            "max_fraction": 0.41940104961395264
+          },
+          "synthetic_routing": {
+            "used": 6,
+            "effective": 4.246428966522217,
+            "max_fraction": 0.4567057490348816
+          }
+        },
+        "classes": {
+          "0": {
+            "next_l2": 0.012023975141346455,
+            "next_l2_p95": 0.025959085673093796,
+            "state_l2": 0.017075425013899803,
+            "action_l2": 0.000586609065067023,
+            "real_routing": {
+              "used": 4,
+              "effective": 2.6129848957061768,
+              "max_fraction": 0.5898438096046448
+            },
+            "synthetic_routing": {
+              "used": 4,
+              "effective": 2.6312546730041504,
+              "max_fraction": 0.5873697996139526
+            }
+          },
+          "1": {
+            "next_l2": 0.010884319432079792,
+            "next_l2_p95": 0.025375952944159508,
+            "state_l2": 0.020023299381136894,
+            "action_l2": 0.0006362604326568544,
+            "real_routing": {
+              "used": 6,
+              "effective": 4.801383018493652,
+              "max_fraction": 0.33320313692092896
+            },
+            "synthetic_routing": {
+              "used": 6,
+              "effective": 4.7585248947143555,
+              "max_fraction": 0.32604169845581055
+            }
+          }
+        },
+        "conditional": {
+          "joint_sw1": 0.008085485609869162,
+          "coverage": 0.9575520833333333,
+          "precision": 0.9630208333333333,
+          "spread_ratio": 0.99568945368131,
+          "state_sw1": 5.558454326444935e-10,
+          "action_sw1": 9.48479813208299e-12,
+          "next_state_sw1": 0.015034128593591352,
+          "consistency_mean": 0.011454147286713123,
+          "consistency_p50": 0.010194065049290657,
+          "consistency_p95": 0.0256799403578043
+        },
+        "synthetic": {
+          "joint_sw1": 0.06616355360796054,
+          "coverage": 0.33541666666666664,
+          "precision": 0.32272135416666664,
+          "spread_ratio": 1.0251867294311523,
+          "state_sw1": 0.05505004019166033,
+          "action_sw1": 0.08393768953780333,
+          "next_state_sw1": 0.0490203658118844,
+          "consistency_mean": 0.013114421628415585,
+          "consistency_p50": 0.01155206747353077,
+          "consistency_p95": 0.02779250033199787
+        }
+      },
+      "extrapolation": {
+        "paired": {
+          "next_l2": 0.03224775940179825,
+          "next_l2_p95": 0.09055040031671524,
+          "state_l2": 0.03915809094905853,
+          "action_l2": 0.001986261922866106,
+          "real_routing": {
+            "used": 7,
+            "effective": 4.9555840492248535,
+            "max_fraction": 0.3373046815395355
+          },
+          "synthetic_routing": {
+            "used": 6,
+            "effective": 5.111387729644775,
+            "max_fraction": 0.3265624940395355
+          }
+        },
+        "classes": {
+          "0": {
+            "next_l2": 0.03643719479441643,
+            "next_l2_p95": 0.1105552539229393,
+            "state_l2": 0.042295049875974655,
+            "action_l2": 0.002388989320024848,
+            "real_routing": {
+              "used": 5,
+              "effective": 2.784572124481201,
+              "max_fraction": 0.4957031309604645
+            },
+            "synthetic_routing": {
+              "used": 4,
+              "effective": 2.852477550506592,
+              "max_fraction": 0.4976562559604645
+            }
+          },
+          "1": {
+            "next_l2": 0.02805832400918007,
+            "next_l2_p95": 0.06222783774137497,
+            "state_l2": 0.03602113947272301,
+            "action_l2": 0.001583534525707364,
+            "real_routing": {
+              "used": 6,
+              "effective": 4.475790023803711,
+              "max_fraction": 0.38945314288139343
+            },
+            "synthetic_routing": {
+              "used": 6,
+              "effective": 4.627762317657471,
+              "max_fraction": 0.43632814288139343
+            }
+          }
+        },
+        "conditional": {
+          "joint_sw1": 0.024785274104215205,
+          "coverage": 0.523046875,
+          "precision": 0.528515625,
+          "spread_ratio": 0.9775069355964661,
+          "state_sw1": 1.0526605365157592e-09,
+          "action_sw1": 6.704301780402489e-10,
+          "next_state_sw1": 0.04513786276802421,
+          "consistency_mean": 0.03224775940179825,
+          "consistency_p50": 0.02599203959107399,
+          "consistency_p95": 0.09055040031671524
+        },
+        "synthetic": {
+          "joint_sw1": 0.14836764633655547,
+          "coverage": 0.003515625,
+          "precision": 0.003515625,
+          "spread_ratio": 0.7785001337528229,
+          "state_sw1": 0.14010536298155785,
+          "action_sw1": 0.15181086417287587,
+          "next_state_sw1": 0.1330396059900522,
+          "consistency_mean": 0.019502822309732437,
+          "consistency_p50": 0.018191685900092125,
+          "consistency_p95": 0.03579280897974968
+        }
+      }
+    }
+  }
+]

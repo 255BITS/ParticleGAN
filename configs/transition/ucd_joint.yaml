@@ -1,0 +1,12 @@
+# MoG + bcap recipe; all three MLPs share one noisy draw from 1024 components.
+architecture: branches
+width: 128
+num_particles: 1024
+critic_mode: joint
+out_dir: results/transition/mog_1024/branches_joint
+
+# Explicit historical factors; independent of the current example defaults.
+d_conditioning: ucd
+encoder: false
+g_class_scale: 1.0
+shared_state_critic: false
