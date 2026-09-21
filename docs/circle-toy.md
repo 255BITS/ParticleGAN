@@ -122,8 +122,11 @@ python3 -m venv .venv
 
 # Circle toy. Fresh directory, flushed log, paired-error controller at adv_weight 1.
 .venv/bin/python -u examples/circle_transition.py
-# equivalent:
+# equivalent cartesian baseline (fails the radius-hold gate):
 .venv/bin/python -u experiments/train_circle_transition.py --config configs/circle/paired_error.yaml
+# radial hold that passes the gate: wide-radius paired-error finetune plus a
+# detached on-circle tangent residual in the second half.
+.venv/bin/python -u experiments/train_circle_transition.py --config configs/circle/radial_hold.yaml
 ```
 
 Run artifacts go under `results/circle_transition/<run>/`. The stable log is
