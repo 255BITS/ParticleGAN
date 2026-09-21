@@ -74,6 +74,10 @@ marginal GAN losses plus expert action MSE, using all 47 labeled episodes.
 The [slider-error experiment](docs/gym-slider-gan.md) replaces paired MSE/BCE
 supervision with an Anima-style critic on noisy prediction errors, while keeping
 joint and marginal GAN training active.
+The [slider-error fine-tune](docs/gym-slider-finetune.md) uses the imitation
+fine-tune's world-model initialization and replaces only action MSE with the
+paired-error critic. G1, G3, the paired encoder, the prior, and the transition
+discriminators stay frozen.
 
 ```python
 from particlegan import ParticlePrior, GANLoss, GradientPenalty, ParticleRegularizer
