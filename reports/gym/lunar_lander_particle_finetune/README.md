@@ -1,5 +1,13 @@
 # ParticleGAN fine-tune vs L2 imitation
 
+Post-merge landings on the shared protocol were 1/20 validation (mean return
+about −84.6, selected step 2500) and 4/50 test (mean return about −66.8).
+Training `diag_action_mse` stayed about 0.07–0.18. That is the proxy the 2D
+gate treats as a pass. The comparison with the collapsed particle run (2/50)
+and the L2 run (50/50, mean about 286.8) is written up in
+[the native-16 autopsy](../../../docs/native16-autopsy.md). This directory's
+trainer is unchanged.
+
 Hypothesis: deleting paired L2 is viable when the adversary is the one
 ParticleGAN already uses without reconstruction. An observation critic matches
 transition marginals and leaves the conditional action free, which is the
@@ -28,7 +36,7 @@ intervals.
 | Imitation L2 | 2,500 | 20/20 | 50/50 | 92.9%–100.0% | 286.76 | 286.80 | 0 / 0 / 0 |
 | Joint L2 + GAN + reconstruction | 2,500 | 7/20 | 12/50 | 14.3%–37.4% | 74.87 | 26.48 | 37 / 1 / 0 |
 | Original prototype (no fine-tune) | 1,000 | 0/20 | 0/50 | 0.0%–7.1% | -374.53 | -430.87 | 33 / 17 / 0 |
-| ParticleGAN fine-tune (this arm) | — | not run | not run | — | — | — | — |
+| ParticleGAN fine-tune (post-merge, not remeasured here) | 2,500 | 1/20 | 4/50 | — | −66.8 | — | — |
 
 Imitation validation progress in that readout was 3/20, 9/20, 20/20 at updates
 250, 1,000, and 2,500. Joint was 0/20, 0/20, 7/20. The joint arm lost 38 test
@@ -62,11 +70,9 @@ python -u experiments/train_gym_particle_finetune.py \
   --out-dir results/gym/lunar_lander_particle_finetune/smoke
 ```
 
-After a full run, score checkpoints 250, 1,000, and 2,500 on the existing
-control validation worlds before any test claim. This repository's control
-evaluator currently accepts only the imitation and joint checkpoint format, so
-that rollout harness still has to grow a loader for
-`gym_particle_finetune_v2`. Until then the landing cell stays empty.
+The post-merge score of checkpoints 250, 1,000, and 2,500 on the shared
+protocol is the 1/20 and 4/50 result above. This checkout does not contain
+that run's traces. The 2D pass is not a substitute for it.
 
 This checkout has no GPU and no saved adversarial checkpoint, so the full
 command was not run. A CPU correctness smoke did run: two updates on a
@@ -90,9 +96,9 @@ Init error was 1.9997. About 6 seconds on CPU.
 
 ## Recommendation
 
-Keep the imitation controller as the playable default until this arm has a
-landing rollout. The 2D gate says the controller update should stay the
-latent-joint RpGAN term, not an L2 anchor and not an observation-only critic.
-Do not set the adversarial weight to 0. Do not start a seed repeat. Run one
-2,500-update fine-tune on GPU 1, then score checkpoints 250, 1,000, and 2,500
-on the existing control validation worlds before any test claim.
+Keep the imitation controller as the playable default. The 2D gate's pass is
+teacher-forced action MSE, and the post-merge landings show that proxy can
+sit in the pass band while the craft does not land. Keep adversarial weight 1.
+Do not set it to 0, and do not start a seed repeat. The next GAN change belongs
+on the state-pad gate in the autopsy, not on another Lunar run, until that
+gate fails a false pass and accepts a controller that actually holds the pad.

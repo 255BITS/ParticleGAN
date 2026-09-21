@@ -13,6 +13,11 @@ b_cap on that pair, and only E_control plus the action head trained.
 
 python -u experiments/toy_particle_native_2d.py
 tail -F results/gym/particle_native_2d/live.log
+
+EMA action MSE on this plant is not a landing score. The action is a function
+of the previous command only, so a low error does not mean closed-loop control.
+docs/native16-autopsy.md records the post-merge Lunar miss and the state-pad
+probe that fails this threshold's kind of confidence.
 """
 import argparse
 import copy

@@ -1,5 +1,11 @@
 # ParticleGAN fine-tune (Arm A)
 
+The CPU gate below passed, and the post-merge Lunar run still missed the pad.
+`diag_action_mse` in the 0.07–0.18 band is the same proxy as that gate.
+[The autopsy](native16-autopsy.md) separates teacher-forced action MSE from
+closed-loop landings. It does not change this trainer and it does not set
+`adv_weight=0`.
+
 This experiment takes the [L2 control fine-tune](gym-control.md) and replaces its
 paired reconstruction and imitation losses with the classic ParticleGAN game.
 The graph stays the three-generator MoG model. It does not become a flat
@@ -136,9 +142,8 @@ python -u experiments/train_gym_particle_finetune.py \
   --out-dir results/gym/lunar_lander_particle_finetune/smoke
 ```
 
-Checkpoints at 250, 1,000, and 2,500 are written for a later control rollout.
-That evaluation has not been run. Do not read diagnostic MSE in the training
-log as a landing rate, and do not treat this arm as better than the
-[50/50 imitation fine-tune](../reports/gym/lunar_lander_control/README.md)
-without that rollout. The short report is
+Checkpoints at 250, 1,000, and 2,500 are written for control rollout.
+Do not read diagnostic MSE in the training log as a landing rate. The
+post-merge rollout is the miss recorded in
+[the autopsy](native16-autopsy.md). The short report is
 [here](../reports/gym/lunar_lander_particle_finetune/README.md).
