@@ -1,4 +1,4 @@
-"""Arm A finetune: RpGAN and sample b_cap replace paired L2, without a slider critic."""
+"""Arm A finetune: paired-error RpGAN and sample b_cap, with adv_weight locked at 1."""
 import json
 from pathlib import Path
 import tempfile
@@ -48,6 +48,69 @@ class ParticleFinetuneTests(unittest.TestCase):
         cfg = {**DEFAULTS, "imitation_weight": 1.}
         with self.assertRaises(ValueError):
             train(cfg)
+
+    def test_rejects_inactive_adversary(self):
+        inactive = {**DEFAULTS, "adv_weight": 0.}
+        with self.assertRaises(ValueError) as caught:
+            train(inactive)
+        self.assertIn("adv_weight=0 leaves RpGAN and b_cap configured but not applied",
+                      str(caught.exception))
+        partial = {**DEFAULTS, "adv_weight": 0.1}
+        with self.assertRaises(ValueError) as caught:
+            train(partial)
+        self.assertIn("adv_weight stays 1", str(caught.exception))
+
+    def test_controller_step_is_live_rpgan_and_b_cap_hits_the_edit_critic(self):
+        def has_grad(module):
+            return any(p.grad is not None and float(p.grad.abs().sum()) > 0 for p in module.parameters())
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.fixture(root)
+            from lib.gym_particle_finetune import (build_edit_critic, configure_control_scope,
+                controller_objective, discriminator_objective, edit_cap,
+                initialize_particle_finetune, normalized_g2_action)
+            bundle = configure_control_scope(initialize_particle_finetune(root / "initial.pt", "cpu"))
+            records = build_expert_records(root / "episodes.json")
+            states = torch.from_numpy(records["states"])
+            previous = torch.from_numpy(records["previous_actions"])
+            actions = torch.from_numpy(records["actions"])
+            terrain = torch.from_numpy(records["terrain"])
+            with torch.no_grad():
+                neutrals = normalized_g2_action(bundle, states, previous, terrain)
+            targets = bundle["scaler"].action(actions)
+            critic = build_edit_critic(targets, neutrals,
+                                       {**DEFAULTS, "error_tokens": 4, "error_width": 8, "error_heads": 2})
+            self.assertEqual(critic.normalization, "paired_edit_per_coordinate_std_median_rms_gain")
+            predicted = normalized_g2_action(bundle, states[:4], previous[:4], terrain[:4])
+            target = targets[:4]
+            reg = edit_cap()
+            loss_d, terms = discriminator_objective(
+                critic, predicted, target, 4, torch.Generator().manual_seed(7), reg, 8)
+            self.assertEqual(terms["b_cap_applied"], 1.)
+            loss_d.backward()
+            self.assertTrue(has_grad(critic))
+            self.assertTrue(all(not has_grad(bundle[key]) for key in ("G", "E", "prior", "D", "E_control")))
+            _, skipped = discriminator_objective(
+                critic, predicted.detach(), target, 2, torch.Generator().manual_seed(8), reg, 8)
+            self.assertEqual(skipped["b_cap_applied"], 0.)
+            for module in (bundle["G"], bundle["E"], bundle["prior"], bundle["D"], bundle["E_control"], critic):
+                module.zero_grad(set_to_none=True)
+            loss_g, g_terms = controller_objective(
+                critic, predicted, target, 1, torch.Generator().manual_seed(9), 8, 1.)
+            self.assertEqual(g_terms["adv_weight"], 1.)
+            loss_g.backward()
+            self.assertTrue(has_grad(bundle["E_control"]))
+            self.assertTrue(has_grad(bundle["G"].branches[1]))
+            self.assertFalse(has_grad(bundle["G"].branches[0]))
+            self.assertFalse(has_grad(bundle["G"].branches[2]))
+            self.assertFalse(has_grad(bundle["E"]))
+            self.assertFalse(has_grad(bundle["prior"]))
+            self.assertFalse(has_grad(bundle["D"]))
+            with self.assertRaises(ValueError) as caught:
+                controller_objective(critic, predicted, target, 1, torch.Generator().manual_seed(9), 8, 0.)
+            self.assertIn("adv_weight=0 leaves RpGAN and b_cap configured but not applied",
+                          str(caught.exception))
 
     def test_control_path_ignores_current_action_and_diagnostics_have_no_grad(self):
         with tempfile.TemporaryDirectory() as td:
@@ -133,6 +196,8 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertIn("REMOVED L2", text)
             self.assertIn("sample-point b_cap", text)
             self.assertIn("l2_aux=0", text)
+            self.assertIn("adv_weight=1", text)
+            self.assertIn("Not supervised_only", text)
             self.assertTrue((root / "particle" / "live.log").is_symlink())
             self.assertIn("REMOVED L2", (root / "particle" / "log.txt").read_text())
             recipe = json.loads((root / "particle" / "recipe.json").read_text())
@@ -140,6 +205,10 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertEqual(recipe["loss_type"], "logistic")
             self.assertEqual(recipe["reg_arm"], "b_cap")
             self.assertEqual(recipe["reg_method"], "autograd")
+            self.assertEqual(recipe["adv_weight"], 1.)
+            self.assertEqual(recipe["l2_aux_weight"], 0.)
+            self.assertEqual(summary["adv_weight"], 1.)
+            self.assertEqual(summary["b_cap_applications"], 0)
             row = json.loads((root / "particle" / "metrics.jsonl").read_text().splitlines()[-1])
             self.assertEqual(row["l2_aux_weight"], 0.)
             self.assertIn("action_mse", row)
@@ -150,9 +219,13 @@ class ParticleFinetuneTests(unittest.TestCase):
             np.testing.assert_array_equal(action, action2)
             self.assertEqual(route, route2)
             self.assertTrue(np.isfinite(action).all() and (np.abs(action) <= 1).all())
+            fresh = initialize_again(root)
             self.assertTrue(any(not torch.equal(a, b) for a, b in zip(
-                bundle["E_control"].parameters(),
-                initialize_again(root)["E_control"].parameters())))
+                bundle["E_control"].parameters(), fresh["E_control"].parameters())))
+            for trained, started in zip(bundle["G"].branches[0].parameters(), fresh["G"].branches[0].parameters()):
+                torch.testing.assert_close(trained, started)
+            for trained, started in zip(bundle["G"].branches[2].parameters(), fresh["G"].branches[2].parameters()):
+                torch.testing.assert_close(trained, started)
             with self.assertRaises(FileExistsError):
                 train(cfg)
 

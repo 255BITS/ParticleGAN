@@ -1,47 +1,36 @@
 # ParticleGAN fine-tune vs L2 imitation
 
-Hypothesis: the imitation fine-tune lands because pointwise action MSE trains
-`E_control` and G2 directly. The joint fine-tune kept that MSE and added
-reconstruction MSE/BCE plus the RpGAN/b_cap game, and landings fell. This arm
-deletes every paired MSE/BCE term, including any tiny auxiliary, and fine-tunes
-the same checkpoint with only the relativistic paired game (sample-point
-`b_cap`, joint and marginal critics) and the MoG table regularizer. If action
-MSE was necessary, landings should stay well below imitation. If the joint
-arm's drop was L2/GAN interference, a pure adversarial fine-tune could do
-better. One unrun recipe cannot decide that.
+The previous particle recipe deleted imitation and reconstruction L2 and
+trained the full graph with four-path RpGAN plus sample-point `b_cap`. On the
+shared-protocol board that run scored **0/20 validation** and **2/50 test**
+landings, against L2 at 50/50 and the slider arm at 45/50. Diagnostic action
+MSE grew from about 0.06 to above 1. Those figures are cited from that board.
+They were not remeasured in this checkout, and they are not a score for the
+paired-error objective below.
 
-Playback is still `E_control(st, previous at) -> z -> G2`. G1 and G3 stay in
-the trained graph. Details, learning-rate groups, and the removed terms are in
+This arm keeps a nonzero adversarial controller step. `adv_weight` is 1.
+Setting it to 0 configures RpGAN and `b_cap` without applying them, which is
+the failure mode of the closed model-glue attempt. The CPU gate
+(`python -u examples/yue2_particle_2d.py`) rejects that supervised-only arm
+even when its landings pass, and it accepts paired-error RpGAN plus lazy
+`b_cap`. Playback is still `E_control(st, previous at) -> z -> G2`. G1, G3,
+`E_pair`, the prior, and the transition critic stay frozen. Details are in
 [the experiment note](../../../docs/gym-particle-finetune.md).
 
-## Cited L2 control leaderboard
+## Cited control leaderboard
 
-These rows are copied from the completed
-[control leaderboard](../lunar_lander_control/README.md) and
-[readout](../lunar_lander_control/READOUT.md). They are not remeasured here.
-Selection used validation landings, then mean return. Test worlds were the
-50 fresh episodes in that protocol. Intervals are the reported 95% Wilson
-intervals.
+Rows other than the collapsed particle line are copied from the completed
+[control leaderboard](../lunar_lander_control/README.md). They are not
+remeasured here. The collapsed particle line is the shared-protocol result
+for the previous four-path recipe. The paired-error recipe in this branch
+has no rollout yet.
 
-| Controller | Selected update | Validation landings | Test landings | Wilson 95% | Mean test return | Median | Crash / bounds / time limit |
-| --- | ---: | ---: | ---: | --- | ---: | ---: | --- |
-| Imitation L2 | 2,500 | 20/20 | 50/50 | 92.9%–100.0% | 286.76 | 286.80 | 0 / 0 / 0 |
-| Joint L2 + GAN + reconstruction | 2,500 | 7/20 | 12/50 | 14.3%–37.4% | 74.87 | 26.48 | 37 / 1 / 0 |
-| Original prototype (no fine-tune) | 1,000 | 0/20 | 0/50 | 0.0%–7.1% | -374.53 | -430.87 | 33 / 17 / 0 |
-| ParticleGAN fine-tune (this arm) | — | not run | not run | — | — | — | — |
-
-Imitation validation progress in that readout was 3/20, 9/20, 20/20 at updates
-250, 1,000, and 2,500. Joint was 0/20, 0/20, 7/20. The joint arm lost 38 test
-landings to imitation and won none.
-
-Other GAN reports use different worlds or training histories. They are not
-rows in the table above. For orientation only: the later joint GAN landed
-34/50 on its own worlds
-([GAN control readout](../lunar_lander_gan_control/README.md)); the
-previous-action L2 GAN landed 7/50 and the slider-error replacement landed
-6/50 on yet another paired set
-([slider readout](../lunar_lander_slider_gan/READOUT.md)). None of those
-numbers is a score for this fine-tune.
+| Controller | Selected update | Validation landings | Test landings | Notes |
+| --- | ---: | ---: | ---: | --- |
+| Imitation L2 | 2,500 | 20/20 | 50/50 | Playable default |
+| Slider paired-error | — | — | 45/50 | Separate arm, left intact |
+| Collapsed four-path particle | 2,500 | 0/20 | 2/50 | Previous recipe; action MSE exploded |
+| Paired-error particle (this branch) | — | not run | not run | `adv_weight` 1; CPU gate only |
 
 ## How to run
 
@@ -53,33 +42,19 @@ python -u experiments/train_gym_particle_finetune.py \
 tail -F results/gym/lunar_lander_particle_finetune/live.log
 ```
 
-CPU smoke (correctness only, not a landing result):
+CPU gate and smoke (correctness only, not a landing result):
 
 ```bash
+python -u examples/yue2_particle_2d.py
 python -u experiments/train_gym_particle_finetune.py \
   --config configs/gym/lunar_lander_particle_finetune/particle.yaml \
   --steps 2 --device cpu \
   --out-dir results/gym/lunar_lander_particle_finetune/smoke
 ```
 
-After a full run, score checkpoints 250, 1,000, and 2,500 on the existing
-control validation worlds before any test claim. This repository's control
-evaluator currently accepts only the imitation and joint checkpoint format, so
-that rollout harness still has to grow a loader for
-`gym_particle_finetune_v1`. Until then the landing cell stays empty.
-
-This checkout has no GPU and no saved adversarial checkpoint, so the full
-command was not run. A CPU correctness smoke did run: two updates on a
-synthetic eight-record fixture, with flushed `live.log` lines, auxiliary L2
-weight 0, gradient reach into both encoders and all three generators, and
-identical actions from `final.pt` and `checkpoint_2.pt`. That smoke is not a
-Lunar Lander score.
-
 ## Recommendation
 
-Keep the imitation controller as the playable default. Run one 2,500-update
-fine-tune on GPU 1, then evaluate landings. Do not start a seed repeat, a
-slider hybrid, or a claim that this arm beats 50/50. If the rollout is far
-below imitation, the next useful change is to put action MSE back on
-`E_control` only and leave the ParticleGAN terms on the prior and state paths,
-rather than tuning `b_cap`.
+Keep the imitation controller as the playable default until this paired-error
+arm has a real rollout. Do not ship `adv_weight=0` or put action MSE back in
+place of the GAN. Do not start a seed repeat. Score checkpoints 250, 1,000,
+and 2,500 on the existing control validation worlds before any test claim.

@@ -1,9 +1,9 @@
-"""Fine-tune the three-generator controller with a classic ParticleGAN game.
+"""Fine-tune the controller with YuE2's paired-error adversarial game.
 
-Arm A replaces paired action/state L2 with relativistic paired logistic losses
-and sample-point b_cap. It does not add an error-slider critic. Playback stays
-E_control(st, previous at) -> z -> G2. E_pair remains the current-action encoder
-used only as the reconstruction-path analogue inside the adversarial game.
+Playback stays E_control(st, previous at) -> z -> G2. Absolute imitation and
+reconstruction L2 stay out of the graph. The controller step is relativistic
+logistic loss on the edit-normalized action residual, plus sample-point b_cap
+on that critic. A configured GAN with weight 0 is rejected.
 """
 import copy
 import json
@@ -11,6 +11,10 @@ from pathlib import Path
 
 import torch
 from torch.nn import functional as F
+
+from lib.vendor.concept_slider_core.reference import (GlobalMixErrorCritic, noise_std,
+    rp_d_loss, rp_g_loss)
+from particlegan.grad_regularizers import GradientPenalty
 
 from experiments.train_gym_transition import build_models, load_checkpoint
 from lib.gym_previous_gan import adversarial_loss
@@ -34,6 +38,95 @@ def require_classic_particle_gan(gan, reg):
         raise ValueError("Arm A requires sample-point autograd L2 b_cap on every step")
     if reg.target_anneal != "none" or reg.coeff != 1. or reg.kappa != 1.:
         raise ValueError("Arm A keeps b_cap coeff 1, kappa 1, and no center anneal")
+
+
+# YuE2 FORMULATION.md: the cap is applied every fourth update and multiplied by 4.
+EDIT_CAP_EVERY = 4
+# FORMULATION.md: the other controls hold scheduled noise at 1.3 times edit RMS.
+EDIT_NOISE_HOLD = 1.3
+
+
+def require_live_adversary(adv_weight):
+    """Reject a configured GAN that the controller step does not apply."""
+    if adv_weight == 0:
+        raise ValueError("adv_weight=0 leaves RpGAN and b_cap configured but not applied")
+    if adv_weight != 1.:
+        raise ValueError("adv_weight stays 1 so the controller step is the adversarial loss")
+
+
+def configure_control_scope(bundle):
+    """Train E_control and G2. Freeze the world the way YuE2 freezes NAR/MLP/VAE."""
+    frozen = (bundle["E"], bundle["prior"], bundle["D"],
+              bundle["G"].branches[0], bundle["G"].branches[2])
+    for module in frozen:
+        module.requires_grad_(False)
+    bundle["E_control"].requires_grad_(True)
+    bundle["G"].branches[1].requires_grad_(True)
+    if not any(p.requires_grad for p in bundle["E_control"].parameters()):
+        raise ValueError("E_control must train")
+    if not any(p.requires_grad for p in bundle["G"].branches[1].parameters()):
+        raise ValueError("G2 must train")
+    if any(p.requires_grad for module in frozen for p in module.parameters()):
+        raise ValueError("G1, G3, E_pair, prior, and transition D stay frozen")
+    return bundle
+
+
+def normalized_g2_action(bundle, states, previous, terrain):
+    """Normalized tanh action from E_control -> G2. No current action and no G1/G3."""
+    scaler = bundle["scaler"]
+    encoded = bundle["E_control"](torch.cat([scaler.state(states), scaler.action(previous)], 1),
+                                  terrain, bundle["prior"])
+    raw = bundle["G"].branches[1](torch.cat([encoded.codes[:, 0], terrain], 1))
+    return (raw.tanh() - bundle["G"].action_mean) / bundle["G"].action_scale
+
+
+def edit_cap():
+    """Sample-point b_cap on the edit critic. Lazy every fourth step, coeff 1, times 4."""
+    return GradientPenalty(arm="b_cap", coeff=1., kappa=1., lazy_k=EDIT_CAP_EVERY, norm="l2",
+                           method="autograd", target_anneal="none")
+
+
+def build_edit_critic(targets, neutrals, cfg):
+    """Global-mix critic on the paired action edit. Card setting gmix_t8_w48_l1."""
+    if targets.shape != neutrals.shape or targets.ndim != 2 or targets.shape[1] != 2:
+        raise ValueError("Edit critic expects matching [rows, 2] action tensors")
+    critic = GlobalMixErrorCritic(targets.detach().cpu(), neutrals=neutrals.detach().cpu(),
+                                  tokens=cfg["error_tokens"], width=cfg["error_width"], layers=1,
+                                  heads=cfg["error_heads"], score_bound=8.)
+    if critic.normalization != "paired_edit_per_coordinate_std_median_rms_gain":
+        raise ValueError("Edit critic must whiten target-minus-neutral, not absolute targets")
+    return critic
+
+
+def paired_noise(critic, predicted, target, step, rng, total_steps):
+    """Shared Gaussian on the real/fake pair. Fake adds the normalized action error."""
+    residual = (predicted - target.detach()) / critic.target_std
+    sigma = noise_std(step - 1, start=float(critic.noise_start), decay_steps=total_steps,
+                      hold=EDIT_NOISE_HOLD * float(critic.edit_rms))
+    noise = torch.randn(residual.shape, device=residual.device, dtype=residual.dtype,
+                        generator=rng) * sigma
+    return noise, noise + residual
+
+
+def discriminator_objective(critic, predicted, target, step, rng, reg, total_steps):
+    """Rp logistic plus sample-point b_cap. The action graph is detached."""
+    noise, fake = paired_noise(critic, predicted.detach(), target, step, rng, total_steps)
+    adversarial = rp_d_loss(critic(noise), critic(fake))
+    penalty = reg(critic, noise, fake, step=step)
+    return adversarial + penalty, dict(error_d=adversarial.detach(), b_cap=penalty.detach(),
+                                       b_cap_applied=float(step % reg.lazy_k == 0))
+
+
+def controller_objective(critic, predicted, target, step, rng, total_steps, adv_weight):
+    """Adversarial controller loss. There is no action-MSE term in this graph."""
+    require_live_adversary(adv_weight)
+    noise, fake = paired_noise(critic, predicted, target, step, rng, total_steps)
+    with torch.no_grad():
+        real_score = critic(noise)
+    adversarial = rp_g_loss(real_score, critic(fake))
+    if not adversarial.requires_grad:
+        raise RuntimeError("Controller adversarial loss has no gradient")
+    return adv_weight * adversarial, dict(error_g=adversarial.detach(), adv_weight=float(adv_weight))
 
 
 def initialize_particle_finetune(checkpoint, device="cpu"):

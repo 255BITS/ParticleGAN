@@ -7,3 +7,8 @@ out_dir: results/gym/lunar_lander_particle_finetune/particle
 imitation_weight: 0.0
 real_encoding_weight: 0.0
 synthetic_reconstruction_weight: 0.0
+adv_weight: 1.0
+train_scope: control
+error_tokens: 8
+error_width: 48
+error_heads: 4
