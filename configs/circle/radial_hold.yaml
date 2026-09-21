@@ -1,5 +1,6 @@
 # Same paired-error spine as paired_error.yaml. The critic edit is tangent plus
-# outward radius, and the radial divisor is capped at the expert radial spread.
+# outward radius. The radial divisor is capped so critic noise sits under the
+# one-step restore of half the radial RMSE bar.
 seed: 24002
 device: cpu
 width: 128

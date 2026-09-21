@@ -8,13 +8,13 @@ import torch
 import yaml
 
 from experiments.train_circle_transition import DEFAULTS, train, validate
-from lib.circle_transition import (CENTER_BINS, CENTER_LIMIT, RADIUS_BINS, RADIUS_RANGE, SPEED_BINS,
-    SPEED_RANGE, SUCCESS_RADIAL_RMSE, CircleEncoder, CircleScaler, assert_aligned, cap_radial_edit_scale,
-    closed_loop_fidelity, evaluate_panel, evaluation_panel, expert_policy, expert_transition, in_split,
-    missing_restore_policy, paired_edit_actions, parameter_cell, radial_tangent, radius_hold_gate,
-    reversed_policy, rollout, sample_rows, zero_policy)
-from lib.gym_particle_finetune import (build_edit_critic, configure_control_scope, controller_objective,
-    discriminator_objective, edit_cap, paired_noise, require_live_adversary)
+from lib.circle_transition import (CENTER_BINS, CENTER_LIMIT, RADIAL_NOISE_FRACTION, RADIUS_BINS, RADIUS_RANGE,
+    RECOVERY_RATE, SPEED_BINS, SPEED_RANGE, SUCCESS_RADIAL_RMSE, CircleEncoder, CircleScaler, assert_aligned,
+    cap_radial_edit_scale, closed_loop_fidelity, evaluate_panel, evaluation_panel, expert_policy,
+    expert_transition, in_split, missing_restore_policy, paired_edit_actions, parameter_cell, radial_tangent,
+    radius_hold_gate, reversed_policy, rollout, sample_rows, zero_policy)
+from lib.gym_particle_finetune import (EDIT_NOISE_HOLD, build_edit_critic, configure_control_scope,
+    controller_objective, discriminator_objective, edit_cap, paired_noise, require_live_adversary)
 from lib.vendor.concept_slider_core.reference import rp_g_loss
 from particlegan import MoGParticlePrior
 
@@ -266,16 +266,21 @@ class RadiusHoldTests(unittest.TestCase):
         tangent = float(critic.target_std[0])
         noise = float(critic.noise_start)
         edit = float(critic.edit_rms)
-        info = cap_radial_edit_scale(critic, targets)
+        info = cap_radial_edit_scale(critic, targets, EDIT_NOISE_HOLD)
         signal = float(targets[:, 1].std(unbiased=False))
+        tolerance = RECOVERY_RATE * (SUCCESS_RADIAL_RMSE * RADIAL_NOISE_FRACTION)
+        expected = min(signal, max(tolerance / (EDIT_NOISE_HOLD * float(critic.edit_rms)), 1e-4))
         self.assertTrue(info["capped"])
-        self.assertLessEqual(float(critic.target_std[1]), signal + 1e-6)
+        self.assertAlmostEqual(float(critic.target_std[1]), expected, places=5)
+        self.assertLess(expected, signal)
         self.assertAlmostEqual(float(critic.target_std[0]), tangent)
         self.assertAlmostEqual(float(critic.noise_start), noise)
         self.assertAlmostEqual(float(critic.edit_rms), edit)
         self.assertGreater(float(critic.target_std[0]), float(critic.target_std[1]) * 4)
+        at_signal = cap_radial_edit_scale(build_edit_critic(targets, neutrals, cfg), targets, noise_hold=1e-6)
+        self.assertAlmostEqual(at_signal["radial_scale"], signal, places=4)
         tight = build_edit_critic(targets, targets, cfg)
-        self.assertFalse(cap_radial_edit_scale(tight, targets)["capped"])
+        self.assertFalse(cap_radial_edit_scale(tight, targets, EDIT_NOISE_HOLD)["capped"])
 
     def test_recipe_configs_name_the_edit_frame(self):
         paired = yaml.safe_load(Path("configs/circle/paired_error.yaml").read_text())

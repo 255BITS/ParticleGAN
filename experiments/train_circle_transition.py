@@ -27,8 +27,8 @@ from lib.circle_transition import (HORIZONS, PANEL_SEEDS, CircleDiscriminator, C
     normalized_control_action, paired_edit_actions, protocol, radial_channel_diagnostics,
     radius_hold_gate, sample_rows,
     zero_policy, reversed_policy, expert_policy, evaluate_panel)
-from lib.gym_particle_finetune import (build_edit_critic, configure_control_scope, controller_objective,
-    discriminator_objective, edit_cap, require_live_adversary)
+from lib.gym_particle_finetune import (EDIT_NOISE_HOLD, build_edit_critic, configure_control_scope,
+    controller_objective, discriminator_objective, edit_cap, require_live_adversary)
 from particlegan import get_recipe, learning_rate_scale
 
 
@@ -280,10 +280,12 @@ def train(cfg):
             "FROZEN G1 G3 E_pair prior transition D. diag_action_mse is outside the loss. "
             f"edit_frame={cfg['edit_frame']}.")
         if cfg["edit_frame"] == "radial_tangent":
-            cap_info = cap_radial_edit_scale(critic, targets)
+            cap_info = cap_radial_edit_scale(critic, targets, EDIT_NOISE_HOLD)
             log(f"RADIAL HOLD scale tangent={float(critic.target_std[0]):.5f} "
                 f"radial={float(critic.target_std[1]):.5f} capped={cap_info['capped']} "
-                f"signal_radial={cap_info['signal_scale']:.5f}")
+                f"signal_radial={cap_info['signal_scale']:.5f} "
+                f"noise_limited={cap_info['noise_limited']:.5f} "
+                f"tolerance={cap_info['tolerance']:.5f} hold_sigma={cap_info['hold_sigma']:.3f}")
         else:
             log(f"CARTESIAN edit scale={float(critic.target_std[0]):.5f},{float(critic.target_std[1]):.5f}")
         bundle["E_control"].train()

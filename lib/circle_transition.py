@@ -40,6 +40,9 @@ SUCCESS_DIRECTION = 0.95
 SHIPPED_RADIAL_RMSE_1024 = 0.2478
 SHIPPED_WORST_DIRECTION_1024 = 0.203125
 SHIPPED_CLEAR_MARGIN = 0.15
+# Radial critic noise must sit under the one-step restore of half the RMSE bar.
+# Capping only at the expert radial std still left that restore inside the hold.
+RADIAL_NOISE_FRACTION = 0.5
 CONTEXT_DIM = 4
 STATE_DIM = 2
 ACTION_DIM = 2
@@ -392,23 +395,34 @@ def paired_edit_actions(bundle, normalized_action, batch):
     raise ValueError(frame)
 
 
-def cap_radial_edit_scale(critic, targets):
-    """Keep the radial divisor from exceeding the expert radial spread.
+def cap_radial_edit_scale(critic, targets, noise_hold):
+    """Keep radial critic noise under the restore the radius bar requires.
 
     Paired-edit std is fit on target minus the frozen initial action. A large
     isotropic init makes that std similar on tangent and radial, so the small
-    restore sits under the noise. Capping the radial scale at the expert radial
-    standard deviation leaves the tangent scale, edit RMS, and noise start on
-    the paired edit.
+    restore sits under the noise. The radial divisor is the minimum of the
+    expert radial spread and ``tolerance / (noise_hold * edit_rms)``, where
+    the tolerance is the one-step restore of half the radial RMSE bar. Tangent
+    scale, edit RMS, and noise start stay on the paired edit.
     """
-    signal = targets[:, 1].detach().std(unbiased=False).clamp_min(1e-4)
+    if not math.isfinite(noise_hold) or noise_hold <= 0:
+        raise ValueError("noise_hold must be finite and positive")
+    signal = float(targets[:, 1].detach().std(unbiased=False).clamp_min(1e-4))
+    hold_sigma = float(noise_hold) * float(critic.edit_rms)
+    tolerance = RECOVERY_RATE * (SUCCESS_RADIAL_RMSE * RADIAL_NOISE_FRACTION)
+    if hold_sigma <= 1e-8:
+        noise_limited = signal
+    else:
+        noise_limited = max(tolerance / hold_sigma, 1e-4)
+    cap = min(signal, noise_limited)
     before = float(critic.target_std[1])
-    info = dict(capped=False, radial_scale=before, signal_scale=float(signal), previous_scale=before)
-    if before <= float(signal):
+    info = dict(capped=False, radial_scale=before, signal_scale=signal, previous_scale=before,
+                noise_limited=noise_limited, tolerance=tolerance, hold_sigma=hold_sigma)
+    if before <= cap:
         return info
     with torch.no_grad():
-        critic.target_std[1].copy_(signal.to(dtype=critic.target_std.dtype, device=critic.target_std.device))
-    info.update(capped=True, radial_scale=float(signal))
+        critic.target_std[1].copy_(torch.tensor(cap, dtype=critic.target_std.dtype, device=critic.target_std.device))
+    info.update(capped=True, radial_scale=cap)
     return info
 
 
