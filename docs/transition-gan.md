@@ -30,6 +30,11 @@ conditional prediction and synthetic composition have separate metrics. This is
 inspired by MisGAN's coordinated networks, and uses complete triples. There is
 no missingness generator or mask critic.
 
+The [Lunar Lander follow-up](gym-gan-control.md) now tests finite data, missing
+action labels, and actual simulator control. The toy settings and results below
+describe the original experiment; [lessons from that follow-up](#what-lunar-lander-taught-us)
+explain which conclusions carried over.
+
 Earlier adversarial-only experiments remain available explicitly:
 `ucd_joint.yaml` has only a joint critic; `marginals.yaml` adds separate marginal
 critics; `monolithic.yaml` generates all six coordinates with one network.
@@ -229,5 +234,65 @@ points show independently predicted `st+1`. Red lines show their disagreement.
 This comparison establishes whether the architecture learns useful joint
 transitions. Testing whether learning all three helps any one marginal needs a
 marginal-only baseline. The joint-plus-marginal arm tests added marginal feedback;
-it does not yet provide that marginal-only comparison. Sparse complete triples
-plus abundant partial records, physical controls and rollouts are subsequent experiments.
+it does not yet provide that marginal-only comparison. The Lunar Lander follow-up
+now covers sparse complete triples alongside partial records and physical control
+rollouts, with the results below.
+
+## What Lunar Lander taught us
+
+The three-generator structure carried over to continuous Lunar Lander with the
+same 1,024-particle MoG family and bcap recipe. For choosing actions, we changed
+the encoder to consume exactly what is available before acting:
+
+```text
+prior -> z -> G1 -> st
+           -> G2 -> at
+           -> G3 -> st+1
+
+observed st -> E -> z -> G2 -> at
+actual simulator.step(at) -> observed st+1 -> repeat
+```
+
+Terrain context also enters E and every G. G1/G3 share the encoded latent during
+training, but playback needs only E/G2/prior. The simulator advances the world;
+G3 predicts a successor for diagnostics. With this state-only encoder, G3 cannot
+answer what would happen under an independently chosen alternative action.
+
+The latest matched experiment trains all Gs, E, and the prior from scratch with
+GAN losses active throughout, alongside paired reconstruction/action losses.
+It retains 9,297 state/successor pairs from 47 heuristic-expert episodes but only
+1,010 action labels from five fixed episodes. This is sparse action supervision,
+not learning from only five episodes or from no data. Training uses individual
+transitions with no trajectory unrolling, reward optimization, or simulator calls.
+
+The [GAN-only leaderboard](../reports/gym/lunar_lander_gan_control/README.md)
+selects checkpoints on 20 validation worlds and evaluates them on the same 50
+fresh test worlds:
+
+| Controller | Action-labeled episodes | Test landings | Mean return |
+| --- | ---: | ---: | ---: |
+| New joint GAN | 5 | **34/50** | **157.33** |
+| Legacy joint GAN | 47 | 23/50 | 137.35 |
+| New joint + marginals | 5 | 16/50 | -0.72 |
+
+The legacy model uses pretrained weights and a different encoder, so only the
+two new models form a matched comparison. The joint GAN is the current playable
+default, chosen by validation. These counts describe one training run and label
+subset per arm; they do not establish reliability across training runs.
+
+The main lesson is that **better measured distribution fit does not necessarily
+produce better control**. Adding marginal critics improved prior-sample SW1
+from 0.19794 to 0.17363 and expert successor MSE from 0.051738 to 0.047770, while
+landings fell from 34 to 16. These Lander SW1 scores pool normalized records;
+they are not comparable numerically with this toy's conditional SW1. Some sample
+metrics also worsened, including prior precision. See the
+[full readout](../reports/gym/lunar_lander_gan_control/READOUT.md) for definitions,
+paired outcomes, and uncertainty.
+
+Keep separate measures for joint generation, conditional prediction, and control.
+The toy's generation winner remains useful evidence about sample fitting, while
+simulator rollouts determine whether a controller works. The follow-up does not
+yet establish that GAN training beats a matched non-GAN controller, or that
+learning G1/G3 helps G2. A proposed next GAN comparison reduces marginal generator
+loss weight from 1 to 0.1 while retaining every discriminator and adversarial
+updates throughout; it has not been run.

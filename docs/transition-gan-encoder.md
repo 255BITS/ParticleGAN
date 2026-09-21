@@ -5,6 +5,10 @@ The no-argument example and `configs/transition/default.yaml` now select
 `results/transition/default`. Named historical configs preserve their original
 settings; completed results and their pinned metadata remain unchanged.
 
+This page documents the original toy encoder. The
+[Lunar Lander lessons below](#lessons-from-the-lunar-lander-follow-up) describe
+the later state-only control architecture and its distinct training objectives.
+
 This experiment asks whether learning to encode real transitions also helps the
 original joint sampler. It adds an inference path to the existing MoG/bcap
 example, using the repository's deterministic `particle_ae` routing.
@@ -158,6 +162,76 @@ Reusable verification and frozen action-response diagnostic:
 The action probe holds state/context fixed and perturbs physical actions. These
 inputs leave the training route manifold; the probe is separate from the pinned
 prior-generation benchmark. Metrics and leaderboards drove this round's analysis.
+
+## Lessons from the Lunar Lander follow-up
+
+**Choose encoder inputs around the inference task.** The toy's `E(st, at)` is
+appropriate for predicting a successor after choosing an action. Choosing the
+action itself needs a different input contract. An early Lander prototype fed
+the previous action into a transition encoder; we subsequently trained a single
+`E(st)` from scratch, with terrain context, for the actual control loop:
+
+```text
+st -> E -> z -> G1 -> reconstructed st
+            -> G2 -> chosen at
+            -> G3 -> predicted st+1
+
+chosen at -> actual simulator -> observed st+1 -> E -> ...
+```
+
+All three Gs remain independent networks. Sharing z lets their losses shape a
+common representation, but does not enforce that G2's action causes G3's output
+in the simulator. This G3 has no alternative-action input. Action-conditioned
+prediction and intervention tests would be needed to establish counterfactual
+dynamics; good reconstruction or a successful landing does not establish that.
+
+**Partial observations can train the joint discriminator directly.** The latest
+Lander GAN uses complete triples from five action-labeled episodes and
+state/successor pairs from all 47 expert episodes. Real and fake receive identical
+fixed action masks, with the mask and terrain supplied as D context. Masking also
+happens inside D so bcap cannot use hidden coordinates. Hidden actions are absent
+from training arrays and action normalization uses only available labels. The
+mask is not learned, and there is no missingness generator. This brings the
+experiment closer to the original masked-observation idea without reproducing
+the full MisGAN architecture. Observed successors still carry action information;
+masking alone does not establish that the missing joint distribution is identifiable.
+
+**The later GAN objective differs from the toy's synthetic cycle.** Its two fake
+paths are `prior -> z -> G1/G2/G3` and `E(real st) -> z -> G1/G2/G3`. Both receive
+adversarial losses on complete and action-masked views. All Gs/E/prior train from
+scratch for all 2,500 updates, with paired action MSE, state/successor continuous
+MSE and contact BCE, plus prior regularization. There is no synthetic composition
+loss or imitation-only stage. The marginal arm adds D_action and one shared
+D_state with a current/successor role flag, using common state normalization.
+That role flag replaces the toy's physical-time context. See the
+[Lander GAN guide](gym-gan-control.md) and
+[frozen objectives](gym-gan-control-plan.md) for exact weights and gradient paths.
+
+**Better auxiliary predictions did not reliably help the policy.** Before
+restoring GAN training, the matched
+[sparse non-GAN experiment](../reports/gym/lunar_lander_sparse_action/READOUT.md)
+compared detached G1/G3 probes with letting their losses also update E/prior.
+The latter improved expert action MSE by 25% and successor MSE by 8.8×, yet
+landed 34/50 versus 44/50 for detached probes. Detached means only G1/G3's inputs
+were detached; the action loss still trained E/G2/prior. These are historical
+non-GAN findings, excluded from the current GAN-only leaderboard.
+
+The [GAN comparison](../reports/gym/lunar_lander_gan_control/READOUT.md) produced
+a similar tradeoff: joint plus marginal critics improved several expert-data
+prediction and sample-distribution metrics, yet landed 16/50 against 34/50 for
+joint alone. On the same learner-state traces, its G3 predictions were worse.
+Even on expert data, copying the current continuous state as the next-state
+prediction (persistence) scored MSE 0.022230, versus 0.051738 for joint G3 and
+0.047770 for marginal G3; learned contact predictions did beat persistence.
+
+These results motivate evaluating each claim separately: prior-generated sample
+quality, prediction against persistence, and paired closed-loop landing outcomes.
+Use fixed learner-state traces to compare models on identical inputs; errors on
+each controller's own visited states mix model quality with state distribution.
+The non-GAN and GAN rounds used different test worlds and protocols, so their
+landing counts are not a matched GAN-versus-MSE result. The next proposed GAN
+test weakens marginal generator pressure to 0.1 while keeping GAN updates active
+throughout. Whether that preserves sample quality and improves control remains open.
 
 
 ## Visual demo and sharing
