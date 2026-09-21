@@ -120,3 +120,7 @@ log as a landing rate, and do not treat this arm as better than the
 [50/50 imitation fine-tune](../reports/gym/lunar_lander_control/README.md)
 without that rollout. The short report is
 [here](../reports/gym/lunar_lander_particle_finetune/README.md).
+
+A separate CPU toy, [particle-collapse-2d](particle-collapse-2d.md), reproduces
+the RpGAN + sample `b_cap` collapse after imitation. It does not change this
+trainer and it does not set the adversarial weight to 0.
