@@ -1,14 +1,18 @@
 """Sampler, frozen circle protocol, and paired-error controller scope."""
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
 import torch
+import yaml
 
 from experiments.train_circle_transition import DEFAULTS, train, validate
 from lib.circle_transition import (CENTER_BINS, CENTER_LIMIT, RADIUS_BINS, RADIUS_RANGE, SPEED_BINS,
-    SPEED_RANGE, CircleEncoder, assert_aligned, evaluate_panel, evaluation_panel, expert_policy,
-    expert_transition, in_split, parameter_cell, reversed_policy, rollout, sample_rows, zero_policy)
+    SPEED_RANGE, SUCCESS_RADIAL_RMSE, CircleEncoder, CircleScaler, assert_aligned, cap_radial_edit_scale,
+    closed_loop_fidelity, evaluate_panel, evaluation_panel, expert_policy, expert_transition, in_split,
+    missing_restore_policy, paired_edit_actions, parameter_cell, radial_tangent, radius_hold_gate,
+    reversed_policy, rollout, sample_rows, zero_policy)
 from lib.gym_particle_finetune import (build_edit_critic, configure_control_scope, controller_objective,
     discriminator_objective, edit_cap, paired_noise, require_live_adversary)
 from lib.vendor.concept_slider_core.reference import rp_g_loss
@@ -188,8 +192,104 @@ class SmokeTests(unittest.TestCase):
             self.assertEqual(summary["evaluation"]["controls"]["test"]["zero"]["main"]["1024"]["success"], 0.)
             self.assertLess(summary["evaluation"]["controls"]["test"]["reversed"]["main"]["1024"]["direction_agreement"],
                             0.05)
+            self.assertIn("diag_radial_rho_corr", text)
             self.assertTrue((path / "run" / "metrics.jsonl").is_file())
             self.assertTrue((path / "run" / "final.pt").is_file())
+
+
+class RadiusHoldTests(unittest.TestCase):
+    def test_published_paired_error_row_fails_radius_hold(self):
+        published = json.loads(Path("reports/circle-transition/paired_error.json").read_text())
+        row = published["test_main"]["1024"]
+        fidelity = closed_loop_fidelity(row)
+        gate = radius_hold_gate(row)
+        self.assertGreater(fidelity, 0.05)
+        self.assertLess(fidelity, 0.2)
+        self.assertFalse(gate["passed"])
+        self.assertTrue(gate["checks"]["direction_agreement"])
+        self.assertTrue(gate["checks"]["finite"])
+        self.assertFalse(gate["checks"]["radial_rmse"])
+        self.assertFalse(gate["checks"]["signed_speed_error"])
+        self.assertFalse(gate["checks"]["worst_direction_success"])
+        self.assertFalse(gate["checks"]["majority_success"])
+        self.assertGreater(row["radial_rmse"], SUCCESS_RADIAL_RMSE)
+        self.assertEqual(row["worst_direction_success"], 0.203125)
+
+    def test_protocol_bars_can_pass(self):
+        row = dict(radial_rmse=0.05, signed_speed_error=0.01, direction_agreement=0.99,
+                   worst_direction_success=0.40, success=0.62, nonfinite=0, completed_turns=40.)
+        self.assertTrue(radius_hold_gate(row)["passed"])
+        row["worst_direction_success"] = 0.203125 + 0.15
+        self.assertFalse(radius_hold_gate(row)["passed"])
+
+    def test_missing_restore_keeps_direction_and_walks_off_radius(self):
+        panel = evaluation_panel("test", "main", 128)
+        row = evaluate_panel(missing_restore_policy, panel)[1024]
+        gate = radius_hold_gate(row)
+        self.assertGreater(row["direction_agreement"], 0.95)
+        self.assertGreaterEqual(row["completed_turns"], 1.)
+        self.assertFalse(gate["checks"]["radial_rmse"])
+        self.assertFalse(gate["passed"])
+
+    def test_radial_frame_matches_expert_and_cartesian_stays_normalized(self):
+        batch = sample_rows(32, torch.Generator().manual_seed(9), "train", "mixed")
+        scaler = CircleScaler.fit(batch)
+        bundle = {"edit_frame": "cartesian", "scaler": scaler}
+        normalized = scaler.action(batch.action)
+        predicted, target = paired_edit_actions(bundle, normalized, batch)
+        torch.testing.assert_close(predicted, normalized)
+        torch.testing.assert_close(target, scaler.action(batch.action))
+        bundle["edit_frame"] = "radial_tangent"
+        predicted, target = paired_edit_actions(bundle, normalized, batch)
+        expert = radial_tangent(batch.action, batch.position, batch.center, batch.angular_step)
+        torch.testing.assert_close(predicted, expert)
+        torch.testing.assert_close(target, expert)
+        position = torch.tensor([[1.2, 0.]])
+        center = torch.zeros(1, 2)
+        radius = torch.ones(1)
+        omega = torch.zeros(1)
+        action, _ = expert_transition(position, center, radius, omega)
+        frame = radial_tangent(action, position, center, omega)
+        torch.testing.assert_close(frame, torch.tensor([[0., -0.05]]), atol=1e-5, rtol=1e-5)
+
+    def test_radial_scale_cap_shrinks_only_the_radial_divisor(self):
+        generator = torch.Generator().manual_seed(5)
+        targets = torch.zeros(256, 2)
+        targets[:, 0] = torch.randn(256, generator=generator) * 0.2
+        targets[:, 1] = torch.randn(256, generator=generator) * 0.02
+        neutrals = torch.randn(256, 2, generator=generator)
+        cfg = dict(error_tokens=8, error_width=48, error_heads=4)
+        critic = build_edit_critic(targets, neutrals, cfg)
+        ratio = float(critic.target_std[0] / critic.target_std[1])
+        self.assertLess(ratio, 1.5)
+        self.assertGreater(ratio, 0.67)
+        tangent = float(critic.target_std[0])
+        noise = float(critic.noise_start)
+        edit = float(critic.edit_rms)
+        info = cap_radial_edit_scale(critic, targets)
+        signal = float(targets[:, 1].std(unbiased=False))
+        self.assertTrue(info["capped"])
+        self.assertLessEqual(float(critic.target_std[1]), signal + 1e-6)
+        self.assertAlmostEqual(float(critic.target_std[0]), tangent)
+        self.assertAlmostEqual(float(critic.noise_start), noise)
+        self.assertAlmostEqual(float(critic.edit_rms), edit)
+        self.assertGreater(float(critic.target_std[0]), float(critic.target_std[1]) * 4)
+        tight = build_edit_critic(targets, targets, cfg)
+        self.assertFalse(cap_radial_edit_scale(tight, targets)["capped"])
+
+    def test_recipe_configs_name_the_edit_frame(self):
+        paired = yaml.safe_load(Path("configs/circle/paired_error.yaml").read_text())
+        hold = yaml.safe_load(Path("configs/circle/radial_hold.yaml").read_text())
+        self.assertEqual(paired["edit_frame"], "cartesian")
+        self.assertEqual(hold["edit_frame"], "radial_tangent")
+        self.assertEqual(paired["adv_weight"], 1.0)
+        self.assertEqual(hold["adv_weight"], 1.0)
+        self.assertEqual(paired["finetune_steps"], hold["finetune_steps"])
+        self.assertEqual(paired["pretrain_steps"], hold["pretrain_steps"])
+        self.assertEqual(paired["seed"], hold["seed"])
+        self.assertEqual(paired["batch_size"], hold["batch_size"])
+        with self.assertRaises(ValueError):
+            validate({**DEFAULTS, "edit_frame": "polar"})
 
 
 if __name__ == "__main__":

@@ -22,10 +22,11 @@ sys.path.insert(0, str(ROOT))
 
 from experiments.config import read_config
 from lib.circle_transition import (HORIZONS, PANEL_SEEDS, CircleDiscriminator, CircleEncoder,
-    CircleGenerator, CircleScaler, assert_aligned, assert_feedforward, closed_loop_fidelity,
-    compose_pair, encode_pair, evaluation_panel, learned_policy, local_errors,
-    normalized_control_action, protocol, sample_rows, zero_policy, reversed_policy, expert_policy,
-    evaluate_panel)
+    CircleGenerator, CircleScaler, assert_aligned, assert_feedforward, cap_radial_edit_scale,
+    closed_loop_fidelity, compose_pair, encode_pair, evaluation_panel, learned_policy, local_errors,
+    normalized_control_action, paired_edit_actions, protocol, radial_channel_diagnostics,
+    radius_hold_gate, sample_rows,
+    zero_policy, reversed_policy, expert_policy, evaluate_panel)
 from lib.gym_particle_finetune import (build_edit_critic, configure_control_scope, controller_objective,
     discriminator_objective, edit_cap, require_live_adversary)
 from particlegan import get_recipe, learning_rate_scale
@@ -35,8 +36,8 @@ DEFAULTS = dict(
     seed=24002, device="cpu", width=128, encoder_width=128, d_width=128, z_dim=8,
     num_particles=64, sigma_rel=0.5, pretrain_steps=300, finetune_steps=2000, batch_size=128,
     log_interval=25, adv_weight=1.0, error_tokens=8, error_width=48, error_heads=4,
-    normalization_samples=8192, eval_episodes=128, recovery_window=64,
-    out_dir="results/circle_transition/paired_error", live_log="results/circle_transition/live.log",
+    normalization_samples=8192, eval_episodes=128, recovery_window=64, edit_frame="radial_tangent",
+    out_dir="results/circle_transition/radial_hold", live_log="results/circle_transition/live.log",
     save_checkpoint=True)
 
 
@@ -62,6 +63,8 @@ def validate(cfg):
         if not isinstance(cfg[key], str) or not cfg[key].strip():
             raise ValueError(f"{key} must be a nonempty string")
     require_live_adversary(cfg["adv_weight"])
+    if cfg["edit_frame"] not in ("cartesian", "radial_tangent"):
+        raise ValueError("edit_frame must be cartesian or radial_tangent")
     if cfg["recovery_window"] >= min(HORIZONS):
         raise ValueError("recovery window must be shorter than every horizon")
 
@@ -164,6 +167,7 @@ def train(cfg):
     torch.set_num_threads(1)
     out, live = _prepare_dirs(cfg)
     bundle = _build(cfg, device)
+    bundle["edit_frame"] = cfg["edit_frame"]
     recipe = bundle["recipe"]
     data_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 11)
     prior_rng = torch.Generator(device=device).manual_seed(cfg["seed"] + 12)
@@ -248,8 +252,10 @@ def train(cfg):
             neutrals, targets = [], []
             for start in range(0, len(neutral_rows), 1024):
                 chunk = neutral_rows.index(slice(start, start + 1024))
-                neutrals.append(normalized_control_action(bundle, chunk.position, chunk.context()))
-                targets.append(bundle["scaler"].action(chunk.action))
+                neutral, target = paired_edit_actions(
+                    bundle, normalized_control_action(bundle, chunk.position, chunk.context()), chunk)
+                neutrals.append(neutral)
+                targets.append(target)
             neutrals, targets = torch.cat(neutrals), torch.cat(targets)
         critic = build_edit_critic(targets, neutrals, cfg).to(device)
         trainable = [parameter for parameter in list(bundle["E_control"].parameters())
@@ -271,7 +277,15 @@ def train(cfg):
             f"edit_rms={float(critic.edit_rms):.4f}")
         log("CONTROLLER STEP: real=noise, fake=noise+(pred-target)/scale. Rp logistic, adv_weight=1. "
             "sample-point b_cap every 4 updates, coeff times 4. TRAIN E_control+G2. "
-            "FROZEN G1 G3 E_pair prior transition D. diag_action_mse is outside the loss.")
+            "FROZEN G1 G3 E_pair prior transition D. diag_action_mse is outside the loss. "
+            f"edit_frame={cfg['edit_frame']}.")
+        if cfg["edit_frame"] == "radial_tangent":
+            cap_info = cap_radial_edit_scale(critic, targets)
+            log(f"RADIAL HOLD scale tangent={float(critic.target_std[0]):.5f} "
+                f"radial={float(critic.target_std[1]):.5f} capped={cap_info['capped']} "
+                f"signal_radial={cap_info['signal_scale']:.5f}")
+        else:
+            log(f"CARTESIAN edit scale={float(critic.target_std[0]):.5f},{float(critic.target_std[1]):.5f}")
         bundle["E_control"].train()
         bundle["G"].train()
         for step in range(1, cfg["finetune_steps"] + 1):
@@ -279,9 +293,9 @@ def train(cfg):
             held = sample_rows(cfg["batch_size"], data_rng, "train", "mixed", device)
             with torch.no_grad():
                 predicted_d = normalized_control_action(bundle, held.position, held.context())
+                predicted_d, target_d = paired_edit_actions(bundle, predicted_d, held)
             d_loss, d_terms = discriminator_objective(
-                critic, predicted_d, bundle["scaler"].action(held.action), step, edit_rng["d"], reg,
-                cfg["finetune_steps"])
+                critic, predicted_d, target_d, step, edit_rng["d"], reg, cfg["finetune_steps"])
             opt_r.zero_grad(set_to_none=True)
             d_loss.backward()
             opt_r.step()
@@ -289,8 +303,8 @@ def train(cfg):
                 b_cap_applications += 1
             batch = sample_rows(cfg["batch_size"], data_rng, "train", "mixed", device)
             assert_aligned(batch)
-            predicted = normalized_control_action(bundle, batch.position, batch.context())
-            target = bundle["scaler"].action(batch.action)
+            normalized = normalized_control_action(bundle, batch.position, batch.context())
+            predicted, target = paired_edit_actions(bundle, normalized, batch)
             g_loss, g_terms = controller_objective(
                 critic, predicted, target, step, edit_rng["g"], cfg["finetune_steps"], cfg["adv_weight"])
             if not torch.allclose(g_loss.detach(), g_terms["error_g"] * cfg["adv_weight"], rtol=1e-4, atol=1e-5):
@@ -301,6 +315,8 @@ def train(cfg):
             opt_c.step()
             with torch.no_grad():
                 diagnostic = torch.nn.functional.mse_loss(predicted.detach(), target.detach())
+                physical = bundle["scaler"].inverse_action(normalized.detach())
+                radial_l1, radial_corr = radial_channel_diagnostics(physical, batch)
             finetune_draws += 2 * cfg["batch_size"]
             if not torch.isfinite(g_loss) or not torch.isfinite(d_loss):
                 raise FloatingPointError(f"nonfinite controller loss at step {step}")
@@ -308,6 +324,8 @@ def train(cfg):
                 row = dict(stage="finetune", step=step, loss=float(g_loss.detach()), d_loss=float(d_loss.detach()),
                            g_loss=float(g_loss.detach()), prior_loss=0., l2_aux_weight=0., adv_weight=1.,
                            b_cap_applied=d_terms["b_cap_applied"], diag_action_mse=float(diagnostic),
+                           diag_radial_l1=float(radial_l1), diag_radial_rho_corr=float(radial_corr),
+                           edit_frame=cfg["edit_frame"],
                            error_g=float(g_terms["error_g"]), error_d=float(d_terms["error_d"]),
                            b_cap=float(d_terms["b_cap"]), gan_grad_abs=gan_grad_abs, lr_scale=scale,
                            elapsed_seconds=time.perf_counter() - started)
@@ -315,6 +333,7 @@ def train(cfg):
                 log(f"step={step}/{cfg['finetune_steps']} stage=finetune loss={row['loss']:.5f} "
                     f"D={row['d_loss']:.5f} G={row['g_loss']:.5f} adv_weight=1 "
                     f"b_cap_applied={int(row['b_cap_applied'])} diag_action_mse={row['diag_action_mse']:.5f} "
+                    f"diag_radial_l1={row['diag_radial_l1']:.5f} diag_radial_rho_corr={row['diag_radial_rho_corr']:.3f} "
                     f"l2_aux=0 elapsed_s={row['elapsed_seconds']:.1f}")
         for name, saved in frozen.items():
             module = {"G1": bundle["G"].branches[0], "G3": bundle["G"].branches[2], "E_pair": bundle["E"],
@@ -341,20 +360,25 @@ def train(cfg):
         evaluation = _evaluate(bundle, cfg, device)
         train_seconds = time.perf_counter() - started
         learned = evaluation["test"]["main"]["1024"]
+        learned_val = evaluation["val"]["main"]["1024"]
         zero = evaluation["controls"]["test"]["zero"]["main"]["1024"]
         reversed_row = evaluation["controls"]["test"]["reversed"]["main"]["1024"]
         expert = evaluation["controls"]["test"]["expert"]["main"]["1024"]
         learned_fidelity = closed_loop_fidelity(learned)
         zero_fidelity = closed_loop_fidelity(zero)
         reversed_fidelity = closed_loop_fidelity(reversed_row)
+        hold_val = radius_hold_gate(learned_val)
+        hold_test = radius_hold_gate(learned)
         passed = bool(
-            learned_fidelity > zero_fidelity + 0.05 and learned_fidelity > reversed_fidelity + 0.05
-            and learned["nonfinite"] == 0 and b_cap_applications > 0 and gan_grad_abs > 0
+            hold_val["passed"] and hold_test["passed"] and b_cap_applications > 0 and gan_grad_abs > 0
             and cfg["adv_weight"] == 1 and expert["success"] >= 0.99 and zero["success"] == 0
             and reversed_row["direction_agreement"] < 0.05)
-        gate = dict(passed=passed, learned_fidelity=learned_fidelity, zero_fidelity=zero_fidelity,
-                    reversed_fidelity=reversed_fidelity, adv_weight=1., b_cap_applications=b_cap_applications,
-                    gan_grad_abs=gan_grad_abs)
+        gate = dict(passed=passed, radius_hold_val=hold_val, radius_hold_test=hold_test,
+                    legacy_fidelity=learned_fidelity, legacy_fidelity_would_pass=bool(
+                        learned_fidelity > zero_fidelity + 0.05 and learned_fidelity > reversed_fidelity + 0.05),
+                    zero_fidelity=zero_fidelity, reversed_fidelity=reversed_fidelity, adv_weight=1.,
+                    b_cap_applications=b_cap_applications, gan_grad_abs=gan_grad_abs,
+                    edit_frame=cfg["edit_frame"])
         counts = {name: sum(parameter.numel() for parameter in module.parameters())
                   for name, module in (("G", bundle["G"]), ("E_pair", bundle["E"]),
                                        ("E_control", bundle["E_control"]), ("D", bundle["D"]),
@@ -368,10 +392,14 @@ def train(cfg):
             train_seconds=train_seconds, wall_seconds=time.perf_counter() - started)
         write_json(out / "summary.json", summary)
         write_json(out / "evaluation.json", evaluation)
+        log(f"EVAL val main 1024 learned success={learned_val['success']:.3f} "
+            f"worst_dir={learned_val['worst_direction_success']:.3f} radial={learned_val['radial_rmse']:.4f} "
+            f"speed_err={learned_val['signed_speed_error']:.4f} hold={'PASS' if hold_val['passed'] else 'FAIL'}")
         log(f"EVAL test main 1024 learned success={learned['success']:.3f} "
             f"worst_dir={learned['worst_direction_success']:.3f} radial={learned['radial_rmse']:.4f} "
             f"speed_err={learned['signed_speed_error']:.4f} turns={learned['completed_turns']:.3f} "
-            f"dir={learned['direction_agreement']:.3f} fidelity={learned_fidelity:.3f}")
+            f"dir={learned['direction_agreement']:.3f} fidelity={learned_fidelity:.3f} "
+            f"hold={'PASS' if hold_test['passed'] else 'FAIL'}")
         log(f"EVAL controls zero_fidelity={zero_fidelity:.3f} reversed_fidelity={reversed_fidelity:.3f} "
             f"expert_success={expert['success']:.3f}")
         log(f"LOCAL test action_l2={evaluation['test']['local']['action_l2']:.4f} "

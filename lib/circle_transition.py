@@ -35,6 +35,11 @@ PANEL_SEEDS = {
 SUCCESS_RADIAL_RMSE = 0.1
 SUCCESS_SPEED_ERROR = 0.03
 SUCCESS_DIRECTION = 0.95
+# Frozen #22 cartesian paired-error run (f8a5a4a), test main, 1024 steps.
+# Direction and turns were solved; radius was not. The fidelity score still passed.
+SHIPPED_RADIAL_RMSE_1024 = 0.2478
+SHIPPED_WORST_DIRECTION_1024 = 0.203125
+SHIPPED_CLEAR_MARGIN = 0.15
 CONTEXT_DIM = 4
 STATE_DIM = 2
 ACTION_DIM = 2
@@ -345,6 +350,84 @@ def reversed_policy(position, center, radius, angular_step):
     return action
 
 
+def _radial_axis(position, center, angular_step):
+    relative = position - center
+    rho = relative.norm(dim=1, keepdim=True).clamp_min(1e-8)
+    radial = relative / rho
+    sign = torch.where(angular_step >= 0, torch.ones_like(angular_step), -torch.ones_like(angular_step))
+    tangent = torch.stack((-radial[:, 1], radial[:, 0]), 1) * sign[:, None]
+    return tangent, radial
+
+
+def radial_tangent(action, position, center, angular_step):
+    """Action in the requested-tangent, outward-radial frame. Linear in the action."""
+    tangent, radial = _radial_axis(position, center, angular_step)
+    return torch.stack(((action * tangent).sum(1), (action * radial).sum(1)), 1)
+
+
+def missing_restore_policy(position, center, radius, angular_step):
+    """Expert tangent plus the on-circle radial chord. Off-circle restore is dropped.
+
+    This is the closed-loop radius walk of the cartesian paired-error baseline:
+    direction stays correct while radius is not pulled back to 1.
+    """
+    action, _ = expert_transition(position, center, radius, angular_step)
+    _, radial = _radial_axis(position, center, angular_step)
+    on_circle = center + radius[:, None] * radial
+    on_action, _ = expert_transition(on_circle, center, radius, angular_step)
+    radial_command = (on_action * radial).sum(1, keepdim=True)
+    tangent_command = action - (action * radial).sum(1, keepdim=True) * radial
+    return tangent_command + radial_command * radial
+
+
+def paired_edit_actions(bundle, normalized_action, batch):
+    """Controller critic coordinates. Cartesian keeps the #22 recipe."""
+    frame = bundle["edit_frame"]
+    if frame == "cartesian":
+        return normalized_action, bundle["scaler"].action(batch.action)
+    if frame == "radial_tangent":
+        physical = bundle["scaler"].inverse_action(normalized_action)
+        return (radial_tangent(physical, batch.position, batch.center, batch.angular_step),
+                radial_tangent(batch.action, batch.position, batch.center, batch.angular_step))
+    raise ValueError(frame)
+
+
+def cap_radial_edit_scale(critic, targets):
+    """Keep the radial divisor from exceeding the expert radial spread.
+
+    Paired-edit std is fit on target minus the frozen initial action. A large
+    isotropic init makes that std similar on tangent and radial, so the small
+    restore sits under the noise. Capping the radial scale at the expert radial
+    standard deviation leaves the tangent scale, edit RMS, and noise start on
+    the paired edit.
+    """
+    signal = targets[:, 1].detach().std(unbiased=False).clamp_min(1e-4)
+    before = float(critic.target_std[1])
+    info = dict(capped=False, radial_scale=before, signal_scale=float(signal), previous_scale=before)
+    if before <= float(signal):
+        return info
+    with torch.no_grad():
+        critic.target_std[1].copy_(signal.to(dtype=critic.target_std.dtype, device=critic.target_std.device))
+    info.update(capped=True, radial_scale=float(signal))
+    return info
+
+
+def radial_channel_diagnostics(physical_action, batch):
+    """Outward-radial absolute error and its correlation with (1 - rho).
+
+    Logged only. This tensor is not part of the controller loss.
+    """
+    action = physical_action.detach()
+    frame = radial_tangent(action, batch.position, batch.center, batch.angular_step)
+    expert = radial_tangent(batch.action, batch.position, batch.center, batch.angular_step)
+    radial_l1 = (frame[:, 1] - expert[:, 1]).abs().mean()
+    restore = 1 - batch.rho
+    centered_action = frame[:, 1] - frame[:, 1].mean()
+    centered_restore = restore - restore.mean()
+    corr = centered_action.dot(centered_restore) / (centered_action.norm() * centered_restore.norm()).clamp_min(1e-8)
+    return radial_l1, corr
+
+
 def learned_policy(bundle):
     def policy(position, center, radius, angular_step):
         return physical_control_action(bundle, position, center, radius, angular_step)
@@ -446,9 +529,28 @@ def evaluate_panel(policy, batch, horizons=HORIZONS, recovery_window=0):
 
 
 def closed_loop_fidelity(summary):
-    """Joint score: right direction, near the requested radius, and at least a turn."""
+    """Legacy joint score. A solved direction can still pass with radial RMSE 0.25."""
     turns = min(1., max(0., summary["completed_turns"]))
     return summary["direction_agreement"] * math.exp(-summary["radial_rmse"] / SUCCESS_RADIAL_RMSE) * turns
+
+
+def radius_hold_gate(summary, baseline_worst=SHIPPED_WORST_DIRECTION_1024, margin=SHIPPED_CLEAR_MARGIN):
+    """Protocol bars plus a worst-direction gain over the cartesian #22 run.
+
+    Fails when direction and turn count look solved but the radius walks.
+    The #22 test row is the reference miss: radial RMSE 0.248, worst-direction
+    success 0.203, while legacy fidelity still cleared zero and reversed motion.
+    """
+    checks = dict(
+        radial_rmse=summary["radial_rmse"] < SUCCESS_RADIAL_RMSE,
+        signed_speed_error=summary["signed_speed_error"] < SUCCESS_SPEED_ERROR,
+        direction_agreement=summary["direction_agreement"] > SUCCESS_DIRECTION,
+        worst_direction_success=summary["worst_direction_success"] > baseline_worst + margin,
+        majority_success=summary["success"] >= 0.5,
+        finite=summary["nonfinite"] == 0,
+    )
+    return dict(passed=all(checks.values()), checks=checks,
+                baseline_worst=baseline_worst, margin=margin)
 
 
 @torch.no_grad()

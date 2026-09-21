@@ -1,4 +1,5 @@
-# Circle transition baseline: pretrain E_pair+G1/G2/G3, then paired-error RpGAN on E_control+G2.
+# Same paired-error spine as paired_error.yaml. The critic edit is tangent plus
+# outward radius, and the radial divisor is capped at the expert radial spread.
 seed: 24002
 device: cpu
 width: 128
@@ -18,7 +19,7 @@ error_heads: 4
 normalization_samples: 8192
 eval_episodes: 128
 recovery_window: 64
-edit_frame: cartesian
-out_dir: results/circle_transition/paired_error
+edit_frame: radial_tangent
+out_dir: results/circle_transition/radial_hold
 live_log: results/circle_transition/live.log
 save_checkpoint: true
