@@ -48,9 +48,10 @@ not learned entries. Protocol v1 above is the frozen comparison contract.
 ## Results
 
 Frozen evaluation after training. Rank key is worst-direction full-trace success
-at 1,024 steps on the test main panel. Validation matched the test closely
-(worst-direction success 0.203), and this recipe was fixed before that panel was
-read. Metrics: [paired_error.json](paired_error.json). Config:
+at 1,024 steps on the test main panel. Validation worst-direction success is
+0.203 as well. The recipe was fixed first; a four-episode probe only checked
+that action error moved. The table is the full 128-episode panel. Metrics:
+[paired_error.json](paired_error.json). Config:
 `configs/circle/paired_error.yaml`. Checkpoint and log:
 `results/circle_transition/paired_error/` at revision `f8a5a4a`.
 
