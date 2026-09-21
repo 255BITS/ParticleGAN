@@ -255,9 +255,19 @@ class ParticleFinetuneTests(unittest.TestCase):
         validate(armed)
         self.assertEqual(armed["adv_weight"], 1.)
         self.assertEqual(armed["safe_fast_weight"], 1.)
-        self.assertEqual(armed["safe_fast_horizon"], 48)
+        self.assertEqual(armed["safe_fast_horizon"], 40)
+        self.assertEqual(armed["safe_fast_speed_limit"], 0.18)
+        self.assertEqual(armed["safe_fast_action_map"], "throttle_up")
         self.assertEqual(armed["safe_fast_time_weight"], 0.15)
         self.assertNotEqual(armed["out_dir"], proven["out_dir"])
+        shipped_limit = {**armed, "safe_fast_speed_limit": 0.62}
+        with self.assertRaises(ValueError) as caught:
+            validate(shipped_limit)
+        self.assertIn("0.62", str(caught.exception))
+        swapped = {**armed, "safe_fast_action_map": "bipolar_swap"}
+        with self.assertRaises(ValueError) as caught:
+            validate(swapped)
+        self.assertIn("throttle_up", str(caught.exception))
         inactive = {**armed, "adv_weight": 0.}
         with self.assertRaises(ValueError) as caught:
             validate(inactive)
@@ -302,8 +312,11 @@ class ParticleFinetuneTests(unittest.TestCase):
             def predict_physical(full, prev, terr):
                 return bundle["scaler"].inverse_action(normalized_g2_action(bundle, full, prev, terr))
 
+            with self.assertRaises(ValueError):
+                gym_shaping_cost(states[:4], previous[:4], terrain[:4], predict_physical, 2,
+                                 0.15, 4., 2., 0.62, 0.35)
             cost = gym_shaping_cost(states[:4], previous[:4], terrain[:4], predict_physical, 2,
-                                    0.15, 4., 2., 0.62, 0.35)
+                                    0.15, 4., 2., 0.18, 0.35)
             self.assertTrue(cost.requires_grad)
             cost.backward()
             self.assertTrue(has_grad(bundle["E_control"]))
@@ -316,13 +329,16 @@ class ParticleFinetuneTests(unittest.TestCase):
                    "episodes": str(root / "episodes.json"), "out_dir": str(root / "safe"),
                    "live_log": str(root / "safe_live.log"), "safe_fast_weight": 1.,
                    "safe_fast_time_weight": 0.15, "safe_fast_crash_weight": 4.,
-                   "safe_fast_success_bonus": 2., "safe_fast_speed_limit": 0.62,
-                   "safe_fast_pad_half": 0.35, "safe_fast_horizon": 2}
+                   "safe_fast_success_bonus": 2., "safe_fast_speed_limit": 0.18,
+                   "safe_fast_pad_half": 0.35, "safe_fast_horizon": 2,
+                   "safe_fast_action_map": "throttle_up"}
             summary = train(cfg)
             text = (root / "safe_live.log").read_text()
             self.assertIn("SAFE-FAST on", text)
             self.assertIn("adv_weight=1", text)
             self.assertIn("Not adv_weight=0", text)
+            self.assertIn("action_map=throttle_up", text)
+            self.assertIn("Not the #21 bipolar channel swap", text)
             self.assertEqual(summary["adv_weight"], 1.)
             self.assertEqual(summary["safe_fast_weight"], 1.)
             self.assertEqual(summary["l2_aux_weight"], 0.)

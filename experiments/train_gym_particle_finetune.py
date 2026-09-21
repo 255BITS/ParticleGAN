@@ -24,7 +24,7 @@ from lib.gym_particle_finetune import (EDIT_CAP_EVERY, MODULE_KEYS, REMOVED_L2,
     build_edit_critic, configure_control_scope, controller_objective,
     discriminator_objective, edit_cap, initialize_particle_finetune, normalized_g2_action,
     require_live_adversary)
-from lib.safe_fast_landing import gym_shaping_cost
+from lib.safe_fast_landing import ACTION_MAP, MAX_SPEED_LIMIT, V21_SPEED_LIMIT, gym_shaping_cost
 from particlegan import learning_rate_scale
 
 DEFAULTS = dict(arm="particle", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
@@ -33,7 +33,7 @@ DEFAULTS = dict(arm="particle", steps=2500, batch_size=256, checkpoints=[250, 10
     adv_weight=1., train_scope="control", error_tokens=8, error_width=48, error_heads=4,
     safe_fast_weight=0., safe_fast_time_weight=0., safe_fast_crash_weight=0.,
     safe_fast_success_bonus=0., safe_fast_speed_limit=0., safe_fast_pad_half=0.,
-    safe_fast_horizon=0,
+    safe_fast_horizon=0, safe_fast_action_map=ACTION_MAP,
     checkpoint="results/gym/lunar_lander/adversarial/best.pt",
     episodes="results/gym/lunar_lander/data/episodes.json",
     out_dir="results/gym/lunar_lander_particle_finetune/particle",
@@ -57,6 +57,8 @@ def validate_safe_fast(cfg):
     horizon = cfg["safe_fast_horizon"]
     if isinstance(horizon, bool) or type(horizon) is not int or horizon < 0:
         raise ValueError("safe_fast_horizon must be a nonnegative integer")
+    if cfg["safe_fast_action_map"] != ACTION_MAP:
+        raise ValueError("safe_fast_action_map must be throttle_up; bipolar_swap is the failed #21 term")
     if cfg["safe_fast_weight"] == 0:
         return
     if horizon < 1:
@@ -64,6 +66,9 @@ def validate_safe_fast(cfg):
     for key in SAFE_FAST_NUMBERS:
         if cfg[key] <= 0:
             raise ValueError(f"{key} must be positive when safe_fast_weight>0")
+    if cfg["safe_fast_speed_limit"] > MAX_SPEED_LIMIT:
+        raise ValueError(f"safe_fast_speed_limit above {MAX_SPEED_LIMIT} scores crash impacts as "
+                         f"successes; {V21_SPEED_LIMIT} is the failed #21 limit")
 
 
 def validate(cfg):
@@ -213,6 +218,7 @@ def train(cfg):
         safe_fast_speed_limit=float(cfg["safe_fast_speed_limit"]),
         safe_fast_pad_half=float(cfg["safe_fast_pad_half"]),
         safe_fast_horizon=int(cfg["safe_fast_horizon"]),
+        safe_fast_action_map=cfg["safe_fast_action_map"],
         critic="gmix_t8_w48_l1", normalization=critic.normalization,
         initialization_recipe=recipe.to_dict())
     write_json(out / "provenance.json", provenance)
@@ -265,7 +271,8 @@ def train(cfg):
                 f"weight={cfg['safe_fast_weight']} time={cfg['safe_fast_time_weight']} "
                 f"crash={cfg['safe_fast_crash_weight']} success={cfg['safe_fast_success_bonus']} "
                 f"speed_limit={cfg['safe_fast_speed_limit']} pad_half={cfg['safe_fast_pad_half']} "
-                f"horizon={cfg['safe_fast_horizon']}. adv_weight=1. Not adv_weight=0.")
+                f"horizon={cfg['safe_fast_horizon']} action_map={cfg['safe_fast_action_map']}. "
+                "adv_weight=1. Not adv_weight=0. Not the #21 bipolar channel swap.")
         log(f"LR controller={groups['controller']['lr']} edit_critic={groups['edit_critic']['lr']} "
             f"b_cap coeff={reg.coeff} kappa={reg.kappa} lazy_k={reg.lazy_k}")
         log(f"Trainable parameters={trainable_counts}; inference={inference_count}")

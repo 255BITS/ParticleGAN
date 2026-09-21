@@ -57,10 +57,13 @@ live `(record, z)` pair. It is not the gym controller step.
 
 ## Safe-fast arm
 
-`particle.yaml` is unchanged. The safe-fast loss is
-`configs/gym/lunar_lander_particle_finetune/particle_safe_fast.yaml`
-(`adv_weight` 1 plus the toy weights). Its CPU gate passed. That is not a
-Lunar landing count. See [the note](../../../docs/gym-safe-fast.md).
+The first `particle_safe_fast.yaml` (#21) scored 0/20 validation and 0/50
+test on Lunar, mean return about −407, against YuE2 #18 at 20/20 and 50/50.
+That Lunar run is not remeasured here. The yaml is now the revised throttle-up
+term (`safe_fast_speed_limit` 0.18, `safe_fast_action_map: throttle_up`).
+The closed-loop toy fails the shipped #21 loss and passes the revision.
+A Lunar retrain of the revision has not been run.
+See [the note](../../../docs/gym-safe-fast.md).
 
 ```bash
 python -u examples/safe_fast_2d.py

@@ -1,6 +1,11 @@
-# Safe-fast arm. Not the #18 paired-error default.
-# particle.yaml leaves safe_fast_weight at 0. This file keeps adv_weight at 1
-# and adds the toy's safe-fast weights. No Lunar landing score is claimed here.
+# Revised safe-fast arm. Not the #18 paired-error default, and not the #21
+# recipe that scored 0/20 val and 0/50 test. particle.yaml leaves
+# safe_fast_weight at 0. adv_weight stays 1.
+#
+# #21 fed [main, side] into a bipolar step as [lateral, vertical] and paid a
+# success bonus at speed 0.62. This file uses throttle_up (main engine off is
+# thrust 0, side engine stays lateral) and the closed-loop soft speed 0.18.
+# A Lunar retrain has not been run for this revision.
 arm: particle
 steps: 2500
 batch_size: 256
@@ -20,6 +25,7 @@ safe_fast_weight: 1.0
 safe_fast_time_weight: 0.15
 safe_fast_crash_weight: 4.0
 safe_fast_success_bonus: 2.0
-safe_fast_speed_limit: 0.62
+safe_fast_speed_limit: 0.18
 safe_fast_pad_half: 0.35
-safe_fast_horizon: 48
+safe_fast_horizon: 40
+safe_fast_action_map: throttle_up
