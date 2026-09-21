@@ -8,6 +8,8 @@ The first round is complete: imitation-only landed **50/50** fresh test worlds,
 joint training **12/50**, and the original prototype **0/50**. The live viewer
 defaults to imitation based on validation results. The joint arm remains
 available; its added training package did not improve control in this round.
+The same action-MSE objective has a dedicated entrypoint with no adversarial
+loss path: [L2 finetune](gym-l2-finetune.md).
 
 ```text
 Shared MoG latent + terrain:
