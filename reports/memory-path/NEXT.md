@@ -1,4 +1,10 @@
-# Current entry point (September 21, 2026)
+# Superseded by the fresh circle transition experiment
+
+[Active collaborator guide](https://github.com/255BITS/ParticleGAN/blob/experiment/circle-transition/docs/circle-toy.md).
+The explicit-memory requirement and previous runs are dropped from the new task.
+This branch and all notes below are historical, not its baseline or work queue.
+
+# Earlier entry point (superseded September 21, 2026)
 
 The toy is preserved for collaborator experiments. Start with
 [the circle-toy guide](../../docs/circle-toy.md) for commands, metrics and next steps.
