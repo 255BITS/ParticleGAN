@@ -79,16 +79,10 @@ Exit 0 is GATE PASS. The board is written to
 python -m unittest tests.test_slow_fast_paired
 ```
 
-## Next Lunar steps (blocked)
+## Lunar path
 
-1. Collect successful rollouts from the #18 controller (`particle.yaml`,
-   `adv_weight=1`), not from `particle_safe_fast.yaml`.
-2. Split successes by steps-to-land. Drop crashes and timeouts from the fast set.
-3. Pair rows on the same or a nearby initial condition.
-4. Finetune with `controller_objective`: paired-error RpGAN, `adv_weight=1`,
-   sample-point `b_cap` every fourth update, diagnostic MSE outside the loss.
-   Neutral is the slow action. Target is the fast action.
-5. Leave `safe_fast_weight` at 0. Do not set `adv_weight=0`.
-
-Do not run that gym job until this gate has passed and the Lunar run is
-explicitly unblocked.
+This toy must **GATE PASS** before a Lunar speed claim. The gym commands are
+in [gym-slow-fast.md](gym-slow-fast.md): collect successful `#18` rollouts,
+split by steps-to-land, drop crashes from the fast set, pair nearby starts,
+and finetune with `controller_objective` (`adv_weight=1`, `safe_fast_weight=0`,
+diagnostic MSE outside the loss). A PASS here is not a Lunar landing number.

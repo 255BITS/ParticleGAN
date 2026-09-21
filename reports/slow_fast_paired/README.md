@@ -1,7 +1,7 @@
 # Slow→fast paired finetune (CPU gate)
 
 Gate **PASS**. Winner of the rank key: `paired`.
-Lunar real run is **NEXT and blocked** until this gate PASSes.
+This gate must **PASS** before a Lunar speed claim. Lunar commands are in `docs/gym-slow-fast.md`.
 These numbers are a 2D pad. They are not Lunar landings.
 
 One seed (`0`), fixed eval starts, no seed sweep. Rank key is
@@ -29,13 +29,9 @@ Collector: 80 matched starts, 3058 rows, fast failures excluded 0. Mean slow ste
 - `unpaired` uses fast actions from other starts. The student leaves the pad or hits too hard. That is not the same world flown faster.
 - `supervised` matches the fast member with MSE and `adv_weight=0`. Landings may be excellent. The rank key rejects it because the #18 step did not run.
 
-## Next Lunar steps (do not run yet)
+## Lunar path
 
-1. Collect successful rollouts from the #18 paired-error controller (`adv_weight=1`), not from the safe-fast cost.
-2. Split those successes into slow and fast by steps-to-land. Drop crashes and timeouts from the fast set.
-3. Build pairs on the same or a nearby initial condition.
-4. Finetune with `controller_objective`: paired-error RpGAN, `adv_weight=1`, sample-point `b_cap` every fourth update, diagnostic MSE outside the loss. Neutral is the slow action. Target is the fast action.
-5. Leave `safe_fast_weight` at 0. Do not set `adv_weight=0`.
+Keep this gate green. The gym collector, trainer, and shared-seed eval are documented in `docs/gym-slow-fast.md`. They use the same paired-error step (`adv_weight=1`, `b_cap` every fourth update, diagnostic MSE outside the loss) and do not use the safe-fast kinematic cost. This board is not a Lunar result.
 
 ```bash
 python -u examples/slow_fast_paired_2d.py

@@ -73,15 +73,15 @@ MAPPING = (
     dict(toy="Collect successful slow and fast rollouts from the same starts. "
              "Drop crashes and anything that is not strictly faster. "
              "Rows are (state, slow action, fast action) at states the slow law visits.",
-         gym="Blocked. After this gate passes: roll out the #18 controller, "
-             "split successes by steps-to-land, pair nearby initial conditions. "
-             "Do not put crashes in the fast set."),
+         gym="experiments/collect_slow_fast_lunar.py rolls the #18 controller, "
+             "splits successes by steps-to-land, and pairs nearby starts. "
+             "Crashes stay out of the fast set. This toy must GATE PASS first."),
     dict(toy="Student starts at the slow law. Controller loss is paired-error "
              "RpGAN, adv_weight 1, target = fast action, scale = std(fast − slow), "
              "sample-point b_cap every 4th update. Diagnostic MSE is not in the loss.",
-         gym="Blocked. Same controller_objective as particle.yaml. "
+         gym="experiments/train_gym_slow_fast.py calls controller_objective. "
              "Neutral = slow action, target = fast action. adv_weight stays 1. "
-             "safe_fast_weight stays 0."),
+             "safe_fast_weight stays 0. Diagnostic MSE stays outside the loss."),
     dict(toy="Slow-only target, a zero-update baseline, and crash actions in the "
              "fast slot lose the rank key. Unpaired fast actions crash. "
              "MSE-only can land quickly and is rejected because adv_weight is 0.",
@@ -536,8 +536,8 @@ def format_report(result):
         f"slow_only_steps>={limits['slow_only_steps_min']} "
         f"control_land<={limits['control_land_max']} adv_weight={limits['adv_weight']} "
         f"horizon={limits['horizon']} updates={limits['steps']}")
-    lines.append("[slow-fast] Lunar real run is NEXT and blocked until this gate PASSes. "
-                 "No Lunar landing is claimed.")
+    lines.append("[slow-fast] GATE PASS is required before a Lunar speed claim. "
+                 "Commands: docs/gym-slow-fast.md. No Lunar landing is claimed here.")
     lines.append("[slow-fast] mapping")
     for row in result["mapping"]:
         lines.append(f"[slow-fast] toy: {row['toy']}")
@@ -583,7 +583,8 @@ def board_markdown(result):
         "# Slow→fast paired finetune (CPU gate)",
         "",
         f"Gate **{status}**. Winner of the rank key: `{result['winner']}`.",
-        "Lunar real run is **NEXT and blocked** until this gate PASSes.",
+        "This gate must **PASS** before a Lunar speed claim. "
+        "Lunar commands are in `docs/gym-slow-fast.md`.",
         "These numbers are a 2D pad. They are not Lunar landings.",
         "",
         "One seed (`0`), fixed eval starts, no seed sweep. Rank key is",
@@ -613,17 +614,12 @@ def board_markdown(result):
         "- `supervised` matches the fast member with MSE and `adv_weight=0`. "
         "Landings may be excellent. The rank key rejects it because the #18 step did not run.",
         "",
-        "## Next Lunar steps (do not run yet)",
+        "## Lunar path",
         "",
-        "1. Collect successful rollouts from the #18 paired-error controller (`adv_weight=1`), "
-        "not from the safe-fast cost.",
-        "2. Split those successes into slow and fast by steps-to-land. Drop crashes and timeouts "
-        "from the fast set.",
-        "3. Build pairs on the same or a nearby initial condition.",
-        "4. Finetune with `controller_objective`: paired-error RpGAN, `adv_weight=1`, "
-        "sample-point `b_cap` every fourth update, diagnostic MSE outside the loss. "
-        "Neutral is the slow action. Target is the fast action.",
-        "5. Leave `safe_fast_weight` at 0. Do not set `adv_weight=0`.",
+        "Keep this gate green. The gym collector, trainer, and shared-seed eval are "
+        "documented in `docs/gym-slow-fast.md`. They use the same paired-error step "
+        "(`adv_weight=1`, `b_cap` every fourth update, diagnostic MSE outside the loss) "
+        "and do not use the safe-fast kinematic cost. This board is not a Lunar result.",
         "",
         "```bash",
         "python -u examples/slow_fast_paired_2d.py",

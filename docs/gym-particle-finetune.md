@@ -109,3 +109,8 @@ Checkpoints at 250, 1,000, and 2,500 are the last EMA weights, not a
 best-by-MSE pick. Landing selection has not been run for this objective.
 The short report is
 [here](../reports/gym/lunar_lander_particle_finetune/README.md).
+
+The slow→fast continuation of a selected `#18` checkpoint is a separate
+trainer. It keeps this controller step and does not turn on the safe-fast
+cost. The CPU toy must GATE PASS first. Commands are in
+[gym-slow-fast.md](gym-slow-fast.md).

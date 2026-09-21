@@ -206,10 +206,11 @@ def particle_game(d, real, fakes, terrain, gan, **kwargs):
     return adversarial_loss(d, real, fakes, terrain, gan, **kwargs)
 
 
-def load_particle_checkpoint(path, device="cpu"):
+def load_particle_checkpoint(path, device="cpu", formats=("gym_particle_finetune_v1",)):
     saved = torch.load(path, map_location=device, weights_only=False)
-    if saved.get("format") != "gym_particle_finetune_v1":
-        raise ValueError("Expected a gym_particle_finetune_v1 checkpoint")
+    if saved.get("format") not in formats:
+        allowed = ", ".join(formats)
+        raise ValueError(f"Expected checkpoint format {allowed}")
     cfg = saved["config"]
     for key in ("imitation_weight", "real_encoding_weight", "synthetic_reconstruction_weight"):
         if cfg[key] != 0:
@@ -227,4 +228,23 @@ def load_particle_checkpoint(path, device="cpu"):
     summary = Path(path).parent / "summary.json"
     if summary.exists():
         bundle["training_summary"] = json.loads(summary.read_text())
+    return bundle
+
+
+PAIRED_FORMATS = ("gym_particle_finetune_v1", "gym_slow_fast_finetune_v1")
+
+
+def load_paired_controller(path, device="cpu"):
+    """Load a #18 particle controller or a slow→fast continuation of one.
+
+    Both formats play back `E_control -> G2`. A checkpoint that records
+    `adv_weight` other than 1, or a nonzero safe-fast kinematic weight, is
+    refused. Missing `safe_fast_weight` means the #18 graph, which is 0.
+    """
+    bundle = load_particle_checkpoint(path, device, formats=PAIRED_FORMATS)
+    cfg = bundle["config"]
+    if "adv_weight" not in cfg or float(cfg["adv_weight"]) != 1.:
+        raise ValueError("paired controller checkpoint must record adv_weight 1")
+    if float(cfg.get("safe_fast_weight", 0.) or 0.) != 0.:
+        raise ValueError("slow-fast refuses a checkpoint trained with the safe-fast kinematic cost")
     return bundle

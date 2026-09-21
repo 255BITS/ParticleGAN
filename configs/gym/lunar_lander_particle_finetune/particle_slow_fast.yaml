@@ -1,0 +1,18 @@
+arm: slow_fast
+steps: 2500
+batch_size: 256
+checkpoints: [250, 1000, 2500]
+device: cuda:1
+adv_weight: 1.0
+safe_fast_weight: 0.0
+train_scope: control
+imitation_weight: 0.0
+real_encoding_weight: 0.0
+synthetic_reconstruction_weight: 0.0
+error_tokens: 8
+error_width: 48
+error_heads: 4
+checkpoint: results/gym/lunar_lander_particle_finetune/particle/best.pt
+pairs: results/gym/lunar_lander_slow_fast/pairs.npz
+out_dir: results/gym/lunar_lander_slow_fast/particle
+live_log: results/gym/lunar_lander_slow_fast/live.log

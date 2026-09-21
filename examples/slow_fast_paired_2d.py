@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """CPU gate: paired-error RpGAN finetunes a slow pad landing into a fast one.
 
-Lunar Lander is not run. The real Lunar slow→fast finetune stays blocked until
-this process exits 0.
+Lunar Lander is not run. This process must exit 0 (GATE PASS) before a Lunar
+speed claim. The gym commands live in docs/gym-slow-fast.md.
 """
 import sys
 from pathlib import Path
