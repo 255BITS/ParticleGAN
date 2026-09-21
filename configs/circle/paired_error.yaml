@@ -1,0 +1,23 @@
+# Circle transition baseline: pretrain E_pair+G1/G2/G3, then paired-error RpGAN on E_control+G2.
+seed: 24002
+device: cpu
+width: 128
+encoder_width: 128
+d_width: 128
+z_dim: 8
+num_particles: 64
+sigma_rel: 0.5
+pretrain_steps: 300
+finetune_steps: 2000
+batch_size: 128
+log_interval: 25
+adv_weight: 1.0
+error_tokens: 8
+error_width: 48
+error_heads: 4
+normalization_samples: 8192
+eval_episodes: 128
+recovery_window: 64
+out_dir: results/circle_transition/paired_error
+live_log: results/circle_transition/live.log
+save_checkpoint: true

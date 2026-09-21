@@ -1,10 +1,21 @@
 # Circle transition leaderboard
 
-**No completed runs.** This is a fresh benchmark for the
+**No completed learned runs yet.** This is a fresh benchmark for the
 [circle transition-encoder toy](../../docs/circle-toy.md). There are no inherited
 memory runs or Lunar Lander scores in this leaderboard.
 
-## Proposed evaluation protocol
+## Evaluation protocol v1
+
+Frozen before the first learned comparison. Thresholds are the handoff values.
+The cell split, recovery window, and panel seeds are the concrete v1 choices
+recorded in `lib/circle_transition.py` (`protocol()`).
+
+- Geometry cells: 5×5 centers in [-0.75, 0.75]², 4 radii in [0.6, 1.4], 4 speed magnitudes in [0.12, 0.40]. Bucket `cell % 20`: train 0–13, validation 14–16, test 17–19.
+- 128 episodes, both directions, horizons 256 and 1,024. Panel seeds: val/test main 51001/51002, recovery 51011/51012.
+- Main panel starts on the circle. Recovery starts at normalized radii 0.8 and 1.2. Recovery-window radial metrics use the suffix after 64 steps and are not a substitute for full-trace success.
+- Full-trace success: radial RMSE < 0.1, mean absolute signed-step error < 0.03 rad/step, direction agreement > 95%, at least one requested turn, finite trace.
+- Rank by worst-direction 1,024-step full-trace success, then radial RMSE and signed-speed error. Local action / G3 error is reported and does not rank the policy.
+- Analytic expert, zero action, and reversed expert are controls, not learned rows.
 
 Freeze and record these settings with the first evaluator before comparing models:
 
@@ -32,8 +43,7 @@ Freeze and record these settings with the first evaluator before comparing model
   examples seen and wall time. Compare learned arms at matched budgets.
 
 The analytic expert, zero action and reversed expert are evaluator controls,
-not learned entries. Definitions and numerical gates above are a proposed initial
-protocol, not measured results; version any revisions before running comparisons.
+not learned entries. Protocol v1 above is the frozen comparison contract.
 
 ## Results
 
@@ -47,6 +57,6 @@ rather than image inspection, and do not run seed-only repeats.
 
 ## Next recommendation
 
-Implement the independent circle sampler and evaluator, validate the three
-analytic controls, then train the first transition-encoder / paired-error model.
-There is no current winner and no experiment is queued.
+Train `configs/circle/paired_error.yaml` (transition pretrain, then paired-error
+RpGAN at `adv_weight=1` on `E_control`+G2) and fill this table from the frozen
+test panel. There is no current winner. Do not add a seed repeat.

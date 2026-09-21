@@ -6,11 +6,9 @@
 The explicit-memory requirement and previous memory runs are dropped from this
 experiment. There are no inherited circle scores, checkpoints or winning configs.
 
-**Status:** design handoff; the referenced transition and paired-error examples
-are implemented, but the new circle sampler, trainer and evaluator still need
-implementation. No new circle training has run. The
-[fresh leaderboard and evaluation contract](../reports/circle-transition/README.md)
-start empty.
+**Status:** sampler, trainer, and frozen evaluator are implemented. The first
+learned arm is paired-error RpGAN at `adv_weight=1` on `E_control`+G2. Scores
+live on the [circle leaderboard](../reports/circle-transition/README.md).
 
 ## Model and runtime
 
@@ -121,17 +119,28 @@ python3 -m venv .venv
 
 # Existing PR #18 CPU gate; this is not circle training.
 .venv/bin/python -u examples/yue2_particle_2d.py
+
+# Circle toy. Fresh directory, flushed log, paired-error controller at adv_weight 1.
+.venv/bin/python -u examples/circle_transition.py
+# equivalent:
+.venv/bin/python -u experiments/train_circle_transition.py --config configs/circle/paired_error.yaml
 ```
 
-The first implementation should add a dedicated circle example/config and a
-local sampler, with a command documented here after it exists. Use fresh output
-directories under `results/circle_transition/`, flushed per-run logs and a stable
-`results/circle_transition/live.log` so collaborators can use:
+Run artifacts go under `results/circle_transition/<run>/`. The stable log is
+`results/circle_transition/live.log` (the run directory links the same file):
 
 ```bash
-# Log contract for the circle trainer once implemented.
 tail -F results/circle_transition/live.log
 ```
+
+Protocol v1 partitions circle parameters by a 5×5×4×4 cell hash of center,
+radius, and speed magnitude (buckets 0–13 train, 14–16 validation, 17–19 test).
+Direction is balanced inside each split and is not a separate held-out axis.
+The main panel starts at normalized radius 1. The recovery panel starts at 0.8
+and 1.2; its extra radial readout uses a 64-step recovery window. Positive
+angular step is counterclockwise. Full-trace success thresholds are unchanged:
+radial RMSE below 0.1, mean absolute signed-step error below 0.03 rad/step,
+direction agreement above 95%, and at least one requested turn.
 
 ## First experiment and acceptance
 
