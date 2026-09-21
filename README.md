@@ -77,6 +77,10 @@ joint and marginal GAN training active.
 The [ParticleGAN fine-tune](docs/gym-particle-finetune.md) starts from the L2
 control checkpoint and instead replaces those paired losses with RpGAN,
 sample-point b_cap, and the joint/marginal critics.
+The [slider-error fine-tune](docs/gym-slider-finetune.md) uses the imitation
+fine-tune's world-model initialization and replaces only action MSE with the
+paired-error critic. G1, G3, the paired encoder, the prior, and the transition
+discriminators stay frozen.
 
 ```python
 from particlegan import ParticlePrior, GANLoss, GradientPenalty, ParticleRegularizer
