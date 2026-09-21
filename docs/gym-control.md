@@ -117,3 +117,8 @@ and deterministic Reset operate the actual Gym simulator and its native renderer
 See the [control leaderboard](../reports/gym/lunar_lander_control/README.md)
 and [research readout](../reports/gym/lunar_lander_control/READOUT.md) for results,
 costs, and the next experiment justified by those results.
+
+A later fine-tune keeps this initialization and three-generator graph but
+replaces the paired action and state L2 terms with relativistic ParticleGAN
+losses. That arm is [ParticleGAN fine-tune](gym-particle-finetune.md). It has
+no landing score yet.
