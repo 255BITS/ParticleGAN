@@ -1,0 +1,13 @@
+# Only changes the generator's class input gain relative to concat.yaml.
+# All branches still receive exactly the same MoG sample. No added parameters.
+architecture: branches
+width: 128
+num_particles: 1024
+critic_mode: joint
+d_conditioning: concat
+g_class_scale: 4.0
+out_dir: results/transition/conditioning/branches_concat_class4
+
+# Explicit historical factors; independent of the current example defaults.
+encoder: false
+shared_state_critic: false

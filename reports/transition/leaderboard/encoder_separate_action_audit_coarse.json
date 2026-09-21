@@ -1,0 +1,57 @@
+{
+  "run": "encoder_separate",
+  "description": "Post-hoc physical action finite differences on saved real inputs; held-fixed state/context. Perturbations leave the training route manifold. Ideal displacement-response Jacobian is identity.",
+  "delta": 0.005,
+  "splits": {
+    "train": {
+      "count": 1280,
+      "mean_response_matrix": [
+        [
+          1.5863174200057983,
+          0.08956124633550644
+        ],
+        [
+          1.430659532546997,
+          0.790634274482727
+        ]
+      ],
+      "mean_identity_error": 8.680455207824707,
+      "mean_response_norm": 8.808016777038574,
+      "route_switch_fraction": 0.22968749701976776,
+      "offset_rms_in_sigma": 2.311439275741577,
+      "offset_saturation_fraction": 0.24790039658546448,
+      "component_counts": {
+        "258": 153,
+        "301": 228,
+        "334": 95,
+        "409": 317,
+        "861": 487
+      }
+    },
+    "test": {
+      "count": 1280,
+      "mean_response_matrix": [
+        [
+          1.5583829879760742,
+          0.047479283064603806
+        ],
+        [
+          1.2602252960205078,
+          0.7960671782493591
+        ]
+      ],
+      "mean_identity_error": 8.751458168029785,
+      "mean_response_norm": 8.871508598327637,
+      "route_switch_fraction": 0.18984375894069672,
+      "offset_rms_in_sigma": 2.324496030807495,
+      "offset_saturation_fraction": 0.25178223848342896,
+      "component_counts": {
+        "258": 185,
+        "301": 208,
+        "334": 50,
+        "409": 382,
+        "861": 455
+      }
+    }
+  }
+}

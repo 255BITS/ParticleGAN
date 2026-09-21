@@ -1,0 +1,13 @@
+# Explicit class input to a scalar joint critic; no UCD classification loss.
+# Same shared-z branches, MoG prior, data and 28k update budget as the UCD baseline.
+architecture: branches
+width: 128
+num_particles: 1024
+critic_mode: joint
+d_conditioning: concat
+out_dir: results/transition/conditioning/branches_concat
+
+# Explicit historical factors; independent of the current example defaults.
+encoder: false
+g_class_scale: 1.0
+shared_state_critic: false

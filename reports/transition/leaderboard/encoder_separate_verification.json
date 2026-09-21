@@ -1,0 +1,88 @@
+[
+  {
+    "run": "encoder_separate",
+    "fixed_sigma": 0.13111965358257294,
+    "splits": {
+      "train": {
+        "prior_replay": "first 256 exact",
+        "metrics": "all contexts within 1e-6",
+        "classes": {
+          "0": {
+            "joint_sw1": 0.0750801851041615,
+            "coverage": 0.57021484375,
+            "precision": 0.534375,
+            "spread_ratio": 0.9081620216369629,
+            "state_sw1": 0.05552595197223127,
+            "action_sw1": 0.09866409981623292,
+            "next_state_sw1": 0.058942872611805794,
+            "consistency_mean": 0.012538383714854717,
+            "consistency_p50": 0.010905193164944649,
+            "consistency_p95": 0.02667236141860485
+          },
+          "1": {
+            "joint_sw1": 0.042427868396043775,
+            "coverage": 0.60380859375,
+            "precision": 0.5326171875,
+            "spread_ratio": 1.011672705411911,
+            "state_sw1": 0.02427469165995717,
+            "action_sw1": 0.06409531980752944,
+            "next_state_sw1": 0.027149297948926687,
+            "consistency_mean": 0.012398239225149155,
+            "consistency_p50": 0.01077023521065712,
+            "consistency_p95": 0.026676669716835022
+          }
+        },
+        "encoder_replay": "first 256 reconstructions, compositions, routing IDs exact"
+      },
+      "test": {
+        "prior_replay": "first 256 exact",
+        "metrics": "all contexts within 1e-6",
+        "classes": {
+          "0": {
+            "joint_sw1": 0.11152422204613685,
+            "coverage": 0.259375,
+            "precision": 0.2373046875,
+            "spread_ratio": 0.8984777331352234,
+            "state_sw1": 0.0962352592498064,
+            "action_sw1": 0.12492131115868688,
+            "next_state_sw1": 0.09880601605400444,
+            "consistency_mean": 0.019011691212654114,
+            "consistency_p50": 0.017587756738066673,
+            "consistency_p95": 0.036796584725379944
+          },
+          "1": {
+            "joint_sw1": 0.0792386420071125,
+            "coverage": 0.29482421875,
+            "precision": 0.2736328125,
+            "spread_ratio": 0.9985474824905396,
+            "state_sw1": 0.0671937506645918,
+            "action_sw1": 0.08990703905001282,
+            "next_state_sw1": 0.06683970969170332,
+            "consistency_mean": 0.017045242711901665,
+            "consistency_p50": 0.014805680140852928,
+            "consistency_p95": 0.03774852305650711
+          }
+        },
+        "encoder_replay": "first 256 reconstructions, compositions, routing IDs exact"
+      }
+    },
+    "preference": {
+      "tick": 31,
+      "time": 0.49206349206349204,
+      "classes": [
+        {
+          "c": 0,
+          "count": 2048,
+          "real_upper": 0.8154296875,
+          "generated_upper": 0.86474609375
+        },
+        {
+          "c": 1,
+          "count": 2048,
+          "real_upper": 0.29541015625,
+          "generated_upper": 0.2783203125
+        }
+      ]
+    }
+  }
+]

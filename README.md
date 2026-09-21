@@ -44,6 +44,14 @@ Our examples and experiment trainers consume these same public primitives and
 recipe factories. See the [migration and compatibility checks](https://github.com/255BITS/ParticleGAN/blob/master/reports/api-dogfood.md)
 for existing-config GPU smoke tests and checkpoint comparisons.
 
+The [single-transition example](docs/transition-gan.md) defaults to the winning
+MisGAN-inspired encoder: `G1 -> st`, `G2 -> at`, `G3 -> st+1`, plus
+`E(st, at) -> z -> G3 -> st+1`. It uses 1,024 MoG components, bcap, joint/action
+critics and a shared state critic. Run `python -u examples/transition_gan.py`.
+See the [toy demo](reports/transition/demo/index.html),
+[architecture and losses](docs/transition-gan-encoder.md), and
+[leaderboard](reports/transition/leaderboard/README.md).
+
 ```python
 from particlegan import ParticlePrior, GANLoss, GradientPenalty, ParticleRegularizer
 

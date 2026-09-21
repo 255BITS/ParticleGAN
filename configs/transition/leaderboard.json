@@ -1,0 +1,198 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "ucd_joint",
+      "path": "results/transition/mog_1024/branches_joint",
+      "summary_sha256": "f50b004b92834445faf38653dc6a3075fb16f00fb4c7b7f2fff43873c809c558",
+      "source_zip_sha256": "a68f47d19bf1e7e1fe71d9b18aa4f12e33522dda2a46057cb19696a0ff3d9478",
+      "note": "Established MoG baseline; weak preference-class separation."
+    },
+    {
+      "id": "ucd_marginals",
+      "path": "results/transition/mog_1024/branches_joint_marginals",
+      "summary_sha256": "2d29d31d37ec8cbffdd76b0e62810fbf797be1e1e68f806e81ed4eec5bf3e56b",
+      "source_zip_sha256": "80cf21c41d0e631eb935f5ba4b059f91a3bd9d794b000fe0b25e9c641f2e1d05",
+      "note": "Established MoG baseline; weak preference-class separation."
+    },
+    {
+      "id": "ucd_monolithic",
+      "path": "results/transition/mog_1024/monolithic_joint",
+      "summary_sha256": "626d0a6c4dc468ec1e01493829a62b2c5588e56e7396994135eb2663d19f0c2a",
+      "source_zip_sha256": "bef8f2b7d82544400d5e7480fc465cdf2d0112c356789b49a9c7f68c82d765eb",
+      "note": "Established MoG baseline; weak preference-class separation."
+    },
+    {
+      "id": "concat_joint",
+      "path": "results/transition/conditioning/branches_concat",
+      "summary_sha256": "95218a0385da58c8b4e272c5d3b52680e2ff4ef7a6ef24815afbcba4744654bd",
+      "source_zip_sha256": "50543087828d817f12975bb1ae263d4f69cba7dd317cd72c0a7a77666a310264",
+      "note": "Explicit class input to scalar joint D; no UCD CE. Did not restore preference separation."
+    },
+    {
+      "id": "concat_class4",
+      "path": "results/transition/conditioning/branches_concat_class4",
+      "summary_sha256": "55878f256b2d11bf422eeaa8d0c8292dab09eaa86ee3a8d6d75edc753d5157b1",
+      "source_zip_sha256": "6ab6a42a5bf122e348938e70137d3605c13b85cafeaa028a4fb249cd56d74c50",
+      "note": "Scalar class-conditioned joint D; generator class indicators scaled by 4. Same G parameters, prior, data and updates."
+    },
+    {
+      "id": "concat_class8",
+      "path": "results/transition/conditioning/branches_concat_class8",
+      "summary_sha256": "f63e0d6380cce806cc0ae80b36eb2b738bd3764ca8e7e7b891a4788be78b10cd",
+      "source_zip_sha256": "29cc875337e0dc162a8fdeccf35bab0590d4f4775fd13538dfffe1c6aa2d7167",
+      "note": "G class input scale 8; otherwise matches concat_class4. Same parameters, MoG, data and updates. GPUs shared with other workloads."
+    },
+    {
+      "id": "concat_class8_marginals",
+      "path": "results/transition/conditioning/branches_concat_class8_marginals",
+      "summary_sha256": "7e47697434c29bbf51cb59daae41a580530567f9055f9cd8e2c318526040b38e",
+      "source_zip_sha256": "5ef1e09ce035107c7b714223077e4e497e55cbc80be87a81893c28cd5b222e75",
+      "note": "Adds three scalar concat marginal critics at G class scale 8. G and joint D unchanged; marginal_weight=1. Same MoG, data and updates; extra critic compute. GPUs shared with other workloads."
+    },
+    {
+      "id": "concat_class8_context4",
+      "path": "results/transition/conditioning/branches_concat_class8_context4",
+      "summary_sha256": "40cc075d3ef028fa3148aa0ca101447e719596635da75686e3e94f791727677b",
+      "source_zip_sha256": "fe136520c218cd0719741548b15bda8f05394c60485fe1a9979fd0384b5b29b3",
+      "note": "G geometry/time input scale 4 versus 1; class scale 8, shared MoG1024 and one concat joint critic unchanged."
+    },
+    {
+      "id": "concat_class8_context2",
+      "path": "results/transition/conditioning/branches_concat_class8_context2",
+      "summary_sha256": "8aa03d09385645da15b14a0562503dea447d13e64c1c23e070f45738d8dabe2c",
+      "source_zip_sha256": "6bf8667d9f1c29d3326af72754fc0cf4b67ee7bf9bc574c6ec4fcc196a10b92d",
+      "note": "Intermediate G geometry/time input scale 2; class scale 8, shared MoG1024 and one concat joint critic unchanged."
+    },
+    {
+      "id": "concat_class6_context2",
+      "path": "results/transition/conditioning/branches_concat_class6_context2",
+      "summary_sha256": "a5a05d456f6e82635a0fd07427732de30014d90cd3f984413b12eb29254cf83d",
+      "source_zip_sha256": "94df6b0456b8459982adeb6e6ff139c9e1760337faa4f6ddbacb6cba6b5df062",
+      "note": "G class input scale 6 versus 8 at geometry/time scale 2; same shared MoG1024, one concat joint critic, data and update budget."
+    },
+    {
+      "id": "encoder_separate",
+      "path": "results/transition/encoder/encoder_separate",
+      "summary_sha256": "abfa2a3b9329556f8ed01096bbcd724ce151267eaca63856793065b0b0e52c16",
+      "source_zip_sha256": "27b6f8d6b98b41d1de2f84f7a221c6cf8d4e00752cead6800c975c2bf5608de1",
+      "note": "Paired encoder cohort: E(st,at) -> particle code -> G1/G2/G3; real triple MSE and synthetic st/at reconstruction, adversarial mean of original and composed paths. Adds 42688 E parameters; separate marginal critics; same real draws and original benchmark."
+    },
+    {
+      "id": "encoder_shared_state",
+      "path": "results/transition/encoder/encoder_shared_state",
+      "summary_sha256": "dd48edcf48fe1891e76cedeacef1c26ef7d8d47f4bdea7ac930fd3329f677b82",
+      "source_zip_sha256": "4f90213890bd8fdf97982f4592622aaf689787ca858eb6a61d3524186ff69e07",
+      "note": "Paired encoder cohort, matching encoder_separate except one shared state critic for G1/G3 with common physical-state normalization and actual t/t+dt conditioning. Retains three-role marginal weighting. E 42688; D 203779; identical source, data, recipe and budgets across encoder arms."
+    }
+  ],
+  "protocol": {
+    "code": {
+      "lib/transition.py:Transitions": "175d5710449a8a551f2b9543551374f571346fe5aa295f97a319638b5fa3bb18",
+      "lib/transition.py:TransitionScaler": "5e593429009bc9e65d3319cc94c17a4c42564608f1f4d6a668b974472fa7735d",
+      "lib/transition.py:metrics": "38d368e47dda809d5dbed55cdf8137f17aeb646eb41380782374cb50ee9f562a",
+      "lib/transition.py:residual": "ca8d1edeb2d8f5122b78355afa0edf61e2b16bfe1d3268b10b5ccac7f12841e8",
+      "lib/transition.py:shuffle_blocks": "35ebbaa4c00a86bb66b0adbe1072acb58100ec0f28bc04ae30545a42bf72d009",
+      "lib/trajectory.py:Routes": "457ee88140df00c14180f7b4e142a65bc9bed92e5fc1dc47361c0cfbb40c9791",
+      "lib/toy_metrics.py:sliced_w1": "8f022fc93cda4a11fda31b59b46c288324572f55aaded332ee740f879afde42a",
+      "experiments/train_transition.py:evaluate": "4f89609a05a31f6f71595cb3bd185af645ca21abad604e7221331360f3774620"
+    },
+    "references": {
+      "train": "59546c14d8c0cc3ae6376f9e3155030fe36578b242fe89cc0bcdf29908d27251",
+      "test": "66d57f007bcecd84578608c242302d7be3e3e2c99753345f4a2870a2a40d104c"
+    },
+    "recipe": {
+      "name": "mog",
+      "model": "gan",
+      "z_dim": 32,
+      "num_particles": 1024,
+      "prior_kind": "mog",
+      "sigma_rel": 0.025,
+      "standardize": true,
+      "num_classes": 2,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 256,
+      "total_steps": 28000,
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 100.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_betas": [
+        0.5,
+        0.999
+      ],
+      "loss_type": "logistic",
+      "gan_mode": "rp",
+      "reg_arm": "b_cap",
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "reg_every": 1,
+      "reg_method": "autograd",
+      "prior_reg": 1.0,
+      "ema_decay": 0.995,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "encoder_mode": "none",
+      "routing_temperature": 0.25,
+      "distance_reduction": "sum",
+      "observation_sigma": 0.03,
+      "reconstruction_weight": 1.0
+    },
+    "data": {
+      "seed": 24002,
+      "length": 64,
+      "geometry_mode": "discrete",
+      "z_dim": 32,
+      "num_particles": 1024,
+      "steps": 28000,
+      "batch_size": 256,
+      "eval_per_context": 512,
+      "normalization_samples": 32768
+    },
+    "normalization": {
+      "mean": [
+        -0.01848568581044674,
+        0.0289697777479887,
+        0.031744085252285004,
+        -9.467336349189281e-05,
+        0.013258399441838264,
+        0.02887510508298874
+      ],
+      "scale": [
+        0.5748946070671082,
+        0.3781934976577759,
+        0.001218863413669169,
+        0.021040987223386765,
+        0.5748928189277649,
+        0.377459317445755
+      ],
+      "split": "train",
+      "seed": 91001,
+      "count": 32768
+    },
+    "prior": {
+      "kind": "mog",
+      "num_particles": 1024,
+      "sigma_rel": 0.025,
+      "sigma": 0.13111965358257294,
+      "initial_neighbor_distance": 5.244785785675049,
+      "standardize": true,
+      "regularize": "raw centers; full table at <=1024"
+    },
+    "torch": "2.14.0+cu130",
+    "real_draws": 14336000
+  },
+  "generator_budget": 65286,
+  "encoder_budget": 42688
+}
