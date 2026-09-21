@@ -74,10 +74,22 @@ marginal GAN losses plus expert action MSE, using all 47 labeled episodes.
 The [slider-error experiment](docs/gym-slider-gan.md) replaces paired MSE/BCE
 supervision with an Anima-style critic on noisy prediction errors, while keeping
 joint and marginal GAN training active.
-The [ParticleGAN fine-tune](docs/gym-particle-finetune.md) keeps L2 weights at
-0 and updates `E_control` and G2 with YuE2 paired-error RpGAN at `adv_weight=1`
-plus sample-point b_cap on the edit critic. G1, G3, the paired encoder, the
-prior, and the transition discriminators stay frozen.
+The [ParticleGAN fine-tune](docs/gym-particle-finetune.md) is the **default**
+particle gym path. It keeps L2 weights at 0 and updates `E_control` and G2
+with YuE2 paired-error RpGAN at `adv_weight=1` plus sample-point b_cap on the
+edit critic. G1, G3, the paired encoder, the prior, and the transition
+discriminators stay frozen. `adv_weight=0` is rejected. On the shared control
+protocol that recipe scored validation **20/20**, test **50/50**, mean return
+**287.7** ([PR #18](https://github.com/255BITS/ParticleGAN/pull/18), selected
+step 2500). Train with
+`python -u experiments/train_gym_particle_finetune.py --config configs/gym/lunar_lander_particle_finetune/particle.yaml`,
+then select landings with `experiments/evaluate_gym_particle_finetune.py` (the
+control evaluator; `diag_action_mse` is not a landing rate). CPU toys, and
+what PASS/FAIL means, are in that note: the YuE2 2D gate is the default
+picture; the collapse repro shows pure RpGAN+b_cap FAIL; the native live-pair
+toy is an old-gate PASS that failed Lunar; the autopsy pad separates
+teacher-forced MSE from on-policy landings. L2 and slider fine-tunes are
+separate arms.
 The [slider-error fine-tune](docs/gym-slider-finetune.md) uses the imitation
 fine-tune's world-model initialization and replaces only action MSE with the
 paired-error critic. G1, G3, the paired encoder, the prior, and the transition

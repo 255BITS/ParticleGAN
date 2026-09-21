@@ -1,5 +1,10 @@
 #!/usr/bin/env python
-"""Fine-tune Lunar Lander control with ParticleGAN losses instead of paired L2."""
+"""Fine-tune Lunar Lander control with the default YuE2 paired-error RpGAN.
+
+adv_weight is 1. Weight 0 is rejected. Landing counts come from
+experiments/evaluate_gym_particle_finetune.py on the shared control protocol,
+not from diag_action_mse. See docs/gym-particle-finetune.md.
+"""
 import argparse
 import copy
 import hashlib
@@ -26,6 +31,7 @@ from lib.gym_particle_finetune import (EDIT_CAP_EVERY, MODULE_KEYS, REMOVED_L2,
     require_live_adversary)
 from particlegan import learning_rate_scale
 
+# YuE2 paired-error RpGAN. adv_weight stays 1; require_live_adversary rejects 0.
 DEFAULTS = dict(arm="particle", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1", marginal_weight=1.,
     imitation_weight=0., real_encoding_weight=0., synthetic_reconstruction_weight=0.,
@@ -209,6 +215,10 @@ def train(cfg):
 
         log(f"START arm=particle steps={cfg['steps']} expert_records={len(columns[0])} "
             f"episodes={len(np.unique(records['episode_ids']))} device={device} adv_weight=1")
+        log("DEFAULT recipe=yue2_paired_error_rpgan adv_weight=1. "
+            "Landing selection is experiments/evaluate_gym_particle_finetune.py "
+            "on the shared control protocol (val seeds 391000-391019, test 491000-491049). "
+            "diag_action_mse is not a landing rate.")
         log("PLAYBACK E_control(st, previous at) -> z -> G2. TRAIN E_control and G2 only. "
             "FROZEN G1, G3, E_pair, prior, transition D.")
         log("REMOVED L2: imitation MSE; real reconstruction MSE/BCE; synthetic reconstruction MSE/BCE. "
@@ -291,11 +301,14 @@ def train(cfg):
             checkpoints={path.name: sha256(path) for path in sorted(out.glob("*.pt"))},
             removed_l2=list(REMOVED_L2), l2_aux_weight=0., adv_weight=1.,
             b_cap_applications=b_cap_applications,
-            selection="Deferred: no landing evaluation has been run for this arm",
+            selection="Deferred to experiments/evaluate_gym_particle_finetune.py: "
+                      "shared control protocol, validation landing rate then mean return. "
+                      "diag_action_mse is not a landing score.",
             initialization="Same frozen adversarial checkpoint; E_control copied from paired E; scaler retained. "
                            "Controller step is paired-error RpGAN plus sample-point b_cap.")
         write_json(out / "summary.json", summary)
-        log(f"COMPLETE train_seconds={optimization_seconds:.1f}; awaiting rollout selection")
+        log(f"COMPLETE train_seconds={optimization_seconds:.1f}; "
+            "score checkpoints with experiments/evaluate_gym_particle_finetune.py")
     return summary
 
 

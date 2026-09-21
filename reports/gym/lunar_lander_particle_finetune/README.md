@@ -1,63 +1,59 @@
-# ParticleGAN fine-tune vs L2 imitation
+# ParticleGAN fine-tune — cited Lunar board
 
-The previous particle recipe deleted imitation and reconstruction L2 and
-trained the full graph with four-path RpGAN plus sample-point `b_cap`. On the
-shared-protocol board that run scored **0/20 validation** and **2/50 test**
-landings, against L2 at 50/50 and the slider arm at 45/50. Diagnostic action
-MSE grew from about 0.06 to above 1. Those figures are cited from that board.
-They were not remeasured in this checkout, and they are not a score for the
-paired-error objective below.
+**Default / recommended:** YuE2 paired-error RpGAN at `adv_weight=1`.
+The numbers below are the post-merge measurement on the shared control
+protocol (validation seeds 391000–391019, test seeds 491000–491049), selected
+step **2500**. They are cited from
+[PR #18](https://github.com/255BITS/ParticleGAN/pull/18). This checkout does
+not re-roll the simulator.
 
-This arm keeps a nonzero adversarial controller step. `adv_weight` is 1.
-Setting it to 0 configures RpGAN and `b_cap` without applying them, which is
-the failure mode of the closed model-glue attempt. The CPU gate
-(`python -u examples/yue2_particle_2d.py`) rejects that supervised-only arm
-even when its landings pass, and it accepts paired-error RpGAN plus lazy
-`b_cap`. Playback is still `E_control(st, previous at) -> z -> G2`. G1, G3,
-`E_pair`, the prior, and the transition critic stay frozen. Details are in
-[the experiment note](../../../docs/gym-particle-finetune.md).
+| Arm | Val landings | Test landings | Test mean return |
+| --- | ---: | ---: | ---: |
+| **YuE2 paired-error RpGAN (`adv_weight=1`) — default** | **20/20** | **50/50** | **287.7** |
+| L2 imitation (separate arm) | 20/20 | 50/50 | 286.8 |
+| Slider paired-error (separate arm) | — | 45/50 | — |
+| Native #16 live `(record, z)` | 1/20 | 4/50 | −66.8 |
+| Collapsed pure RpGAN + `b_cap` | 0/20 | 2/50 | −112.9 |
 
-## Cited control leaderboard
+`adv_weight=0` configures RpGAN and `b_cap` without applying them. The trainer
+rejects it. L2 and slider configs are separate arms and are not edited here.
 
-Rows other than the collapsed particle line are copied from the completed
-[control leaderboard](../lunar_lander_control/README.md). They are not
-remeasured here. The collapsed particle line is the shared-protocol result
-for the previous four-path recipe. The paired-error recipe in this branch
-has no rollout yet.
+Playback is `E_control(st, previous at) -> z -> G2`. G1, G3, `E_pair`, the
+prior, and the transition critic stay frozen. The controller step is
+edit-normalized paired-error RpGAN plus lazy sample-point `b_cap`. Details
+are in [the experiment note](../../../docs/gym-particle-finetune.md).
 
-| Controller | Selected update | Validation landings | Test landings | Notes |
-| --- | ---: | ---: | ---: | --- |
-| Imitation L2 | 2,500 | 20/20 | 50/50 | Playable default |
-| Slider paired-error | — | — | 45/50 | Separate arm, left intact |
-| Collapsed four-path particle | 2,500 | 0/20 | 2/50 | Previous recipe; action MSE exploded |
-| Paired-error particle (this branch) | — | not run | not run | `adv_weight` 1; CPU gate only |
+`diag_action_mse` during training is teacher-forced action error on the
+expert's previous command. It is not a landing rate. The #16 live-pair toy
+can pass that kind of gate and still miss the pad; see
+[the autopsy](../../../docs/native16-autopsy.md).
 
-## How to run
+## How to reproduce
 
-GPU 1, fresh directory, no seed sweep:
+GPU 1, fresh directory. Then select with the control evaluator. Training does
+not pick `best.pt`.
 
 ```bash
 python -u experiments/train_gym_particle_finetune.py \
   --config configs/gym/lunar_lander_particle_finetune/particle.yaml
 tail -F results/gym/lunar_lander_particle_finetune/live.log
+
+python -u experiments/evaluate_gym_particle_finetune.py --freeze \
+  --out reports/gym/lunar_lander_yue2 \
+  --episodes results/gym/lunar_lander/data/episodes.json
+python -u experiments/evaluate_gym_particle_finetune.py \
+  --out reports/gym/lunar_lander_yue2 \
+  --checkpoint results/gym/lunar_lander_particle_finetune/particle/checkpoint_250.pt \
+  --checkpoint results/gym/lunar_lander_particle_finetune/particle/checkpoint_1000.pt \
+  --checkpoint results/gym/lunar_lander_particle_finetune/particle/checkpoint_2500.pt \
+  --final results/gym/lunar_lander_particle_finetune/particle/final.pt
 ```
 
-CPU gate and smoke (correctness only, not a landing result):
+CPU toys (not Lunar scores):
 
-```bash
-python -u examples/yue2_particle_2d.py
-python -u experiments/train_gym_particle_finetune.py \
-  --config configs/gym/lunar_lander_particle_finetune/particle.yaml \
-  --steps 2 --device cpu \
-  --out-dir results/gym/lunar_lander_particle_finetune/smoke
-```
-
-`experiments/toy_particle_native_2d.py` remains a separate CPU example of the
-live `(record, z)` pair. It is not the gym controller step.
-
-## Recommendation
-
-Keep the imitation controller as the playable default until this paired-error
-arm has a real rollout. Do not ship `adv_weight=0` or put action MSE back in
-place of the GAN. Do not start a seed repeat. Score checkpoints 250, 1,000,
-and 2,500 on the existing control validation worlds before any test claim.
+| Toy | Command | Meaning |
+| --- | --- | --- |
+| YuE2 gate (default picture) | `python -u examples/yue2_particle_2d.py` | PASS: paired RpGAN + `b_cap` lands; `adv_weight=0` rejected |
+| Collapse repro | `python -u examples/particle_control_2d.py` | Test passes only when pure RpGAN + `b_cap` FAILs |
+| Native live pair | `python -u experiments/toy_particle_native_2d.py` | Old gate PASS, Lunar FAIL |
+| Honest pad | `python -u experiments/toy_native16_autopsy.py` | Teacher-forced vs on-policy |

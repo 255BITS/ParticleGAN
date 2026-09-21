@@ -9,8 +9,12 @@ sees the previous command where E_pair saw the current action.
 `current` is the collapsed recipe: observation critics, detached reals, every
 module trained, no paired L2. `fixed` is Rp logistic on the live pair
 (record, z), sample-point b_cap on that pair, and only E_control plus the
-action head trained. This file is that CPU example. The Lunar Lander particle
-trainer uses YuE2 paired-error RpGAN (`controller_objective`).
+action head trained.
+
+Not the gym default. The Lunar trainer uses YuE2 paired-error RpGAN
+(`controller_objective`, adv_weight 1). This fixed arm's old gate can PASS
+(EMA action MSE <= 0.18) while Lunar landings fail (val 1/20, test 4/50).
+See docs/native16-autopsy.md.
 
 python -u experiments/toy_particle_native_2d.py
 tail -F results/gym/particle_native_2d/live.log
@@ -254,6 +258,8 @@ def run_gate(log_path=None):
     log(f"  {fixed['ema']:.4f}  fixed latent-joint  threshold<={FIXED_MAX:.2f}  {'PASS' if passed else 'FAIL'}")
     log(f"  {current['ema']:.4f}  current observation  threshold>={COLLAPSE_MIN:.2f}  {'COLLAPSE' if collapse else 'FAIL'}")
     log("FIXED adv_weight=1 l2_weight=0 b_cap_coeff=1 b_cap_arm=b_cap supervised_only=false")
+    log("NOT THE GYM DEFAULT. Old gate PASS here is teacher-forced EMA action MSE. Lunar for this arm was val 1/20, test 4/50.")
+    log("Default gym recipe is YuE2 paired-error RpGAN, adv_weight=1. See docs/gym-particle-finetune.md.")
     log(f"GATE init={init_mse:.4f} collapse={collapse} fixed_pass={passed} elapsed_s={time.perf_counter()-started:.1f}")
     log.close()
     return dict(ok=bool(collapse and passed), init=init_mse, current=current, fixed=fixed,

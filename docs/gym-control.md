@@ -118,7 +118,9 @@ See the [control leaderboard](../reports/gym/lunar_lander_control/README.md)
 and [research readout](../reports/gym/lunar_lander_control/READOUT.md) for results,
 costs, and the next experiment justified by those results.
 
-A later fine-tune keeps this initialization and three-generator graph but
-replaces the paired action and state L2 terms with relativistic ParticleGAN
-losses. That arm is [ParticleGAN fine-tune](gym-particle-finetune.md). It has
-no landing score yet.
+A later fine-tune keeps this initialization and three-generator graph. The
+default particle path is YuE2 paired-error RpGAN at `adv_weight=1`
+([ParticleGAN fine-tune](gym-particle-finetune.md)). On the shared control
+protocol that recipe scored validation 20/20, test 50/50, mean return 287.7
+([PR #18](https://github.com/255BITS/ParticleGAN/pull/18)). L2 and the slider
+fine-tune remain separate arms.

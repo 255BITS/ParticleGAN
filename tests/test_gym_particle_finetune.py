@@ -7,6 +7,9 @@ import unittest
 import numpy as np
 import torch
 
+ROOT = Path(__file__).resolve().parents[1]
+from experiments.config import read_config
+from experiments.evaluate_gym_particle_finetune import assert_yue2_checkpoint
 from experiments.train_gym_transition import DEFAULTS as WORLD_DEFAULTS, build_models, sha256
 from experiments.train_gym_particle_finetune import DEFAULTS, train
 from lib.gym_control import build_expert_records, control_action
@@ -43,6 +46,15 @@ class ParticleFinetuneTests(unittest.TestCase):
                            for key in ("G", "E", "prior", "D", "direct")})
         torch.save(checkpoint, root / "initial.pt")
         return states, actions
+
+    def test_shipped_config_is_yue2_weight_one(self):
+        cfg = read_config(ROOT / "configs/gym/lunar_lander_particle_finetune/particle.yaml")
+        self.assertEqual(cfg["adv_weight"], 1.)
+        self.assertEqual(cfg["arm"], "particle")
+        self.assertEqual(cfg["imitation_weight"], 0.)
+        self.assertEqual(cfg["train_scope"], "control")
+        self.assertEqual(DEFAULTS["adv_weight"], 1.)
+        self.assertEqual({**DEFAULTS, **cfg}["adv_weight"], 1.)
 
     def test_rejects_auxiliary_l2(self):
         cfg = {**DEFAULTS, "imitation_weight": 1.}
@@ -199,6 +211,8 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertIn("adv_weight=1", text)
             self.assertIn("Not supervised_only", text)
             self.assertIn("edit-normalized", text)
+            self.assertIn("DEFAULT recipe=yue2_paired_error_rpgan", text)
+            self.assertIn("evaluate_gym_particle_finetune", text)
             self.assertNotIn("latent-joint", text)
             self.assertTrue((root / "particle" / "live.log").is_symlink())
             self.assertIn("REMOVED L2", (root / "particle" / "log.txt").read_text())
@@ -219,6 +233,14 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertEqual(row["l2_aux_weight"], 0.)
             self.assertIn("action_mse", row)
             bundle = load_particle_checkpoint(root / "particle" / "final.pt")
+            assert_yue2_checkpoint(bundle)
+            saved = torch.load(root / "particle" / "final.pt", weights_only=False)
+            saved["config"] = {**saved["config"], "adv_weight": 0.}
+            rejected = root / "particle" / "adv0.pt"
+            torch.save(saved, rejected)
+            with self.assertRaises(ValueError) as caught:
+                assert_yue2_checkpoint(load_particle_checkpoint(rejected))
+            self.assertIn("adv_weight=0", str(caught.exception))
             replay = load_particle_checkpoint(root / "particle" / "checkpoint_2.pt")
             action, route = control_action(bundle, states[0], [-1., 0.], [-.5] * 11)
             action2, route2 = control_action(replay, states[0], [-1., 0.], [-.5] * 11)

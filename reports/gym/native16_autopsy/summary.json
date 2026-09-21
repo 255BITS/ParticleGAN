@@ -1,0 +1,97 @@
+{
+  "ok": true,
+  "dead": {
+    "zero_tf": 0.5512521266937256,
+    "zero_closed": 0.0689065158367157,
+    "perfect_tf": 0.0,
+    "perfect_closed": 0.0
+  },
+  "analytic": {
+    "expert": {
+      "name": "expert",
+      "tf_mse": 0.0,
+      "early_tf_mse": 0.0,
+      "on_policy_mse": 0.0,
+      "land_rate": 1.0,
+      "final_abs": 1.4165965761201793e-24,
+      "old_pass": true,
+      "honest_pass": true
+    },
+    "bias": {
+      "name": "bias",
+      "tf_mse": 0.1600000113248825,
+      "early_tf_mse": 0.1600000262260437,
+      "on_policy_mse": 0.16000001008311907,
+      "land_rate": 0.0,
+      "final_abs": 0.19256770610809326,
+      "old_pass": true,
+      "honest_pass": false
+    },
+    "copy_prev": {
+      "name": "copy_prev",
+      "tf_mse": 0.0273183211684227,
+      "early_tf_mse": 0.21853694319725037,
+      "on_policy_mse": 0.5580207705497742,
+      "land_rate": 0.08171205967664719,
+      "final_abs": 0.5019454956054688,
+      "old_pass": true,
+      "honest_pass": false
+    },
+    "prev_leak": {
+      "name": "prev_leak_1.00",
+      "tf_mse": 0.022502131760120392,
+      "early_tf_mse": 0.18000909686088562,
+      "on_policy_mse": 0.5717480015009642,
+      "land_rate": 0.21400777995586395,
+      "final_abs": 0.41873228549957275,
+      "old_pass": true,
+      "honest_pass": false,
+      "alpha": 1.0
+    }
+  },
+  "trained": [
+    {
+      "step": 400,
+      "tf_mse": 0.015066997148096561,
+      "early_tf_mse": 0.1217656061053276,
+      "land_rate": 0.3255814015865326,
+      "on_policy_mse": 0.30992229903737706,
+      "final_abs": 0.2784610688686371,
+      "name": "fixed",
+      "kind": "fixed",
+      "adv_weight": 1.0,
+      "l2_weight": 0.0,
+      "old_pass": true,
+      "honest_pass": false
+    },
+    {
+      "step": 400,
+      "tf_mse": 0.018505167216062546,
+      "early_tf_mse": 0.12594588100910187,
+      "land_rate": 0.5736433863639832,
+      "on_policy_mse": 0.2452298446247975,
+      "final_abs": 0.15991409122943878,
+      "name": "action_pair",
+      "kind": "action_pair",
+      "adv_weight": 1.0,
+      "l2_weight": 0.0,
+      "old_pass": true,
+      "honest_pass": false
+    },
+    {
+      "step": 400,
+      "tf_mse": 0.008180945180356503,
+      "early_tf_mse": 0.06627138704061508,
+      "land_rate": 0.8682170510292053,
+      "on_policy_mse": 0.07399750485395391,
+      "final_abs": 0.041082754731178284,
+      "name": "l2_probe",
+      "kind": "l2",
+      "adv_weight": 0.0,
+      "l2_weight": 1.0,
+      "old_pass": true,
+      "honest_pass": true
+    }
+  ],
+  "elapsed_s": 5.752104516000031
+}

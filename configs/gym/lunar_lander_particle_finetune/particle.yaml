@@ -1,3 +1,12 @@
+# DEFAULT particle gym recipe: YuE2 paired-error RpGAN.
+# adv_weight must be 1. The trainer rejects 0.
+# Cited board (PR #18, shared control protocol, selected step 2500):
+#   validation 20/20, test 50/50, mean return 287.7
+# Train:
+#   python -u experiments/train_gym_particle_finetune.py --config configs/gym/lunar_lander_particle_finetune/particle.yaml
+# Landing selection is experiments/evaluate_gym_particle_finetune.py
+# (lib/gym_control_evaluation.py). diag_action_mse is not a landing rate.
+# See docs/gym-particle-finetune.md.
 arm: particle
 steps: 2500
 batch_size: 256
