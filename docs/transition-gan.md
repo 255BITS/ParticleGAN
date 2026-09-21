@@ -258,7 +258,17 @@ training, but playback needs only E/G2/prior. The simulator advances the world;
 G3 predicts a successor for diagnostics. With this state-only encoder, G3 cannot
 answer what would happen under an independently chosen alternative action.
 
-The latest matched experiment trains all Gs, E, and the prior from scratch with
+This was a later architecture change. The original **50/50 imitation fine-tune**
+used `E_control(st, at-1, terrain) -> z -> G2 -> at`. E_control was copied from
+the pretrained transition encoder; expert action MSE updated E_control and G2,
+while G1/G3, the paired encoder, prior, and discriminators stayed frozen.
+Training used the expert's previous command; playback fed back the controller's
+own command, starting with engines-off `[-1, 0]`. A separate, later **state-only
+probe model also reached 50/50**, trained from scratch without previous actions.
+These are different models and evaluation rounds. See the
+[original fine-tune](gym-control.md) and [state-only experiment](gym-state-control.md).
+
+The sparse-action GAN experiment trains all Gs, E, and the prior from scratch with
 GAN losses active throughout, alongside paired reconstruction/action losses.
 It retains 9,297 state/successor pairs from 47 heuristic-expert episodes but only
 1,010 action labels from five fixed episodes. This is sparse action supervision,
@@ -296,3 +306,13 @@ yet establish that GAN training beats a matched non-GAN controller, or that
 learning G1/G3 helps G2. A proposed next GAN comparison reduces marginal generator
 loss weight from 1 to 0.1 while retaining every discriminator and adversarial
 updates throughout; it has not been run.
+
+A later [previous-action GAN experiment](gym-previous-gan.md) restored
+`E(st, at-1, terrain)` and all 47 episodes' action labels, training G1/G2/G3/E/prior
+from scratch with joint and marginal GAN losses plus action MSE. It landed only
+**7/50** on new paired worlds, versus **50/50** for the original imitation
+fine-tune and **27/50** for the existing state-only joint GAN. Thus retaining
+previous actions and L2 alone did not reproduce the fine-tune's success in this
+jointly trained recipe. These new worlds differ from the table above. The
+[readout](../reports/gym/lunar_lander_previous_gan/READOUT.md) separates the
+architecture/training differences and reports the fixed-input action gap.

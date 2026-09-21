@@ -167,9 +167,28 @@ prior-generation benchmark. Metrics and leaderboards drove this round's analysis
 
 **Choose encoder inputs around the inference task.** The toy's `E(st, at)` is
 appropriate for predicting a successor after choosing an action. Choosing the
-action itself needs a different input contract. An early Lander prototype fed
-the previous action into a transition encoder; we subsequently trained a single
-`E(st)` from scratch, with terrain context, for the actual control loop:
+action itself needs a different input contract. The Lander experiments used
+three distinct stages:
+
+| Stage | Control encoder | What learned |
+| --- | --- | --- |
+| Initial prototype | Reused E_pair with `st, at-1, terrain` | No control adaptation; paired training had used current actions |
+| Original imitation fine-tune, 50/50 | Separate `E_control(st, at-1, terrain)` | Expert action MSE updated E_control/G2 from pretrained weights |
+| Later state-only probes, also 50/50 | `E(st, terrain)` | Scratch action training of E/G2/prior; detached G1/G3 probes |
+
+For the original successful fine-tune, E_control started as a copy of E_pair.
+G1/G3, E_pair, prior, and D stayed frozen. Previous actions were expert commands
+during training and the learner's own commands during rollout; the first command
+was `[-1, 0]`. Thus the successful fine-tune **did retain at-1**, with an encoder
+trained for that input, rather than simply reusing the mismatched prototype.
+The [original control guide](gym-control.md) records this experiment. Its joint
+GAN counterpart already combined action MSE with joint and marginal critics,
+but started from the earlier world-model checkpoint, not the 50/50 imitation
+checkpoint. Its control encoder received action MSE; the GAN paths used the
+prior and paired encoder.
+
+We subsequently trained a single state-only encoder from scratch, with terrain
+context, for the later control loop and first scratch GAN comparison:
 
 ```text
 st -> E -> z -> G1 -> reconstructed st
@@ -185,8 +204,8 @@ in the simulator. This G3 has no alternative-action input. Action-conditioned
 prediction and intervention tests would be needed to establish counterfactual
 dynamics; good reconstruction or a successful landing does not establish that.
 
-**Partial observations can train the joint discriminator directly.** The latest
-Lander GAN uses complete triples from five action-labeled episodes and
+**Partial observations can train the joint discriminator directly.** The
+sparse-action Lander GAN uses complete triples from five action-labeled episodes and
 state/successor pairs from all 47 expert episodes. Real and fake receive identical
 fixed action masks, with the mask and terrain supplied as D context. Masking also
 happens inside D so bcap cannot use hidden coordinates. Hidden actions are absent
@@ -232,6 +251,17 @@ The non-GAN and GAN rounds used different test worlds and protocols, so their
 landing counts are not a matched GAN-versus-MSE result. The next proposed GAN
 test weakens marginal generator pressure to 0.1 while keeping GAN updates active
 throughout. Whether that preserves sample quality and improves control remains open.
+
+The subsequent [previous-action scratch GAN](gym-previous-gan.md) retained
+`E(st, at-1, terrain)` and action MSE, now sending joint/marginal GAN feedback
+directly through that single encoder and all three Gs. With all 47 episodes
+labeled, it landed 7/50 on fresh worlds; the original imitation fine-tune landed
+50/50 on the same worlds. On identical inputs from the new GAN's own traces,
+its lateral-engine agreement with the heuristic was 33.7%, versus 86.9% for the
+imitation model. This recipe did not recover imitation performance; the experiment
+does not isolate previous-action feedback, pretraining, or loss competition as
+the cause. Full [results and diagnostics](../reports/gym/lunar_lander_previous_gan/READOUT.md)
+preserve that distinction.
 
 
 ## Visual demo and sharing

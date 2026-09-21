@@ -68,6 +68,9 @@ auxiliary learning helps when explicit action supervision is scarce.
 The [GAN control experiment](docs/gym-gan-control.md) trains all three generators
 and the state encoder adversarially throughout, with a dedicated GAN-only
 leaderboard comparing joint and marginal discriminators.
+The [previous-action GAN experiment](docs/gym-previous-gan.md) restores
+`E(st, at-1)` and trains the three-generator model from scratch with joint and
+marginal GAN losses plus expert action MSE, using all 47 labeled episodes.
 
 ```python
 from particlegan import ParticlePrior, GANLoss, GradientPenalty, ParticleRegularizer
