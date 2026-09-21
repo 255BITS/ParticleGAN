@@ -70,6 +70,18 @@ python -u examples/safe_fast_2d.py
 
 Keep `particle.yaml` as the paired-error default. Do not ship `adv_weight=0`
 or put action MSE back in place of the GAN. Do not start a seed repeat.
-The safe-fast yaml is the candidate if a later rollout wants earlier
-landings; score it on the existing validation worlds before any test claim.
-This checkout did not run that rollout.
+Earlier landings are not the safe-fast kinematic cost. The next mechanism is
+the CPU slow→fast gate: successful trajectories split into slow and fast,
+then the same paired-error RpGAN at `adv_weight=1`.
+
+**Lunar real run is next and blocked until that gate PASSes.** This checkout
+did not run a Lunar slow→fast finetune and does not claim Lunar landings.
+
+```bash
+python -u examples/slow_fast_paired_2d.py
+```
+
+See [the toy note](../../../docs/slow-fast-paired.md). When that is explicitly
+unblocked, the gym steps are: collect #18 successful rollouts, split by
+steps-to-land, drop crashes from the fast set, pair nearby starts, and call
+the same `controller_objective` with the fast action as the target.
