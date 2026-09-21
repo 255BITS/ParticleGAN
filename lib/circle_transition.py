@@ -141,7 +141,7 @@ def assert_aligned(batch, atol=1e-5):
         raise AssertionError("next state does not match the analytic successor")
 
 
-def _sample_signed(count, rng, split, sign, rho_mode, device, rho_range):
+def _sample_signed(count, rng, split, sign, rho_mode, device, rho_range, on_circle_rate):
     centers, radii, speeds, phases = [], [], [], []
     have = 0
     while have < count:
@@ -173,7 +173,7 @@ def _sample_signed(count, rng, split, sign, rho_mode, device, rho_range):
     elif rho_mode == "mixed":
         low, high = rho_range
         rho = low + (high - low) * torch.rand(count, device=device, generator=rng)
-        on_circle = torch.rand(count, device=device, generator=rng) < 0.5
+        on_circle = torch.rand(count, device=device, generator=rng) < on_circle_rate
         rho = torch.where(on_circle, torch.ones_like(rho), rho)
     elif rho_mode == "recovery":
         rho = torch.empty(count, device=device)
@@ -188,11 +188,11 @@ def _sample_signed(count, rng, split, sign, rho_mode, device, rho_range):
     return CircleBatch(position, center, radius, omega, action, nxt, rho)
 
 
-def sample_rows(n, rng, split="train", rho_mode="mixed", device="cpu", rho_range=None):
+def sample_rows(n, rng, split="train", rho_mode="mixed", device="cpu", rho_range=None, on_circle_rate=0.5):
     """Independent local rows. Shuffled. Not a collected trajectory.
 
-    ``rho_range`` changes only off-circle draws in ``off`` and ``mixed``.
-    Recovery panels stay on the protocol radii 0.8 and 1.2.
+    ``rho_range`` and ``on_circle_rate`` change only ``mixed`` and, for the range,
+    ``off``. Recovery panels stay on the protocol radii 0.8 and 1.2.
     """
     if type(n) is not int or n < 2:
         raise ValueError("n must be an integer >= 2")
@@ -201,11 +201,13 @@ def sample_rows(n, rng, split="train", rho_mode="mixed", device="cpu", rho_range
     low, high = float(rho_range[0]), float(rho_range[1])
     if not math.isfinite(low) or not math.isfinite(high) or low <= 0 or low >= high:
         raise ValueError("rho_range must be a positive finite interval")
+    if type(on_circle_rate) is not float or not 0 <= on_circle_rate <= 1:
+        raise ValueError("on_circle_rate must be a float in [0, 1]")
     rho_range = (low, high)
     device = torch.device(device)
     half = n // 2
-    positive = _sample_signed(half, rng, split, 1., rho_mode, device, rho_range)
-    negative = _sample_signed(n - half, rng, split, -1., rho_mode, device, rho_range)
+    positive = _sample_signed(half, rng, split, 1., rho_mode, device, rho_range, on_circle_rate)
+    negative = _sample_signed(n - half, rng, split, -1., rho_mode, device, rho_range, on_circle_rate)
     batch = CircleBatch(*(torch.cat([getattr(positive, name), getattr(negative, name)], 0) for name in _FIELDS))
     order = torch.randperm(n, device=device, generator=rng)
     shuffled = batch.index(order)

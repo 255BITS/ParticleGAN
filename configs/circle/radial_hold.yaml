@@ -2,6 +2,8 @@
 # divisor capped at the expert radial spread. Finetune rows that leave the circle
 # use a wider normalized radius so the restore clears the critic noise. The
 # critic fit and the evaluation panels stay on the protocol radius range.
+# Three quarters of finetune rows stay on the circle so the tangent step is not
+# pulled fast by the wide restore targets.
 seed: 24002
 device: cpu
 width: 128
@@ -24,6 +26,7 @@ recovery_window: 64
 edit_frame: radial_tangent
 rho_low: 0.5
 rho_high: 1.5
+on_circle_rate: 0.75
 out_dir: results/circle_transition/radial_hold
 live_log: results/circle_transition/live.log
 save_checkpoint: true
