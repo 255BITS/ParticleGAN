@@ -52,6 +52,9 @@ python -u experiments/train_gym_particle_finetune.py \
   --out-dir results/gym/lunar_lander_particle_finetune/smoke
 ```
 
+`experiments/toy_particle_native_2d.py` remains a separate CPU example of the
+live `(record, z)` pair. It is not the gym controller step.
+
 ## Recommendation
 
 Keep the imitation controller as the playable default until this paired-error

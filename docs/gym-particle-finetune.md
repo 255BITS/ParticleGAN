@@ -61,6 +61,18 @@ and it is not in the loss.
 | Strength sampling is a distillation detail. A linear action residual does not gain a second target from it. | Not required for the sign to recover. | Not a knob. Playback is full-strength G2. |
 | UNI16 feature matching and end-margin logit MSE. v2 omits them. | Not implemented. | Not a knob. |
 
+## Kept example, not the gym step
+
+`experiments/toy_particle_native_2d.py` and `tests/test_particle_native_2d.py`
+are the earlier live `(record, z)` RpGAN gate. They stay as a CPU example.
+`experiments/train_gym_particle_finetune.py` does not call that game. Its
+controller step is `controller_objective`.
+
+That toy's own readout is unchanged: observation-critic EMA action MSE 2.1065
+(collapse, threshold ≥ 1) and live-pair EMA action MSE 0.1396 (pass, threshold
+≤ 0.18). Init paired error was 1.9997. Those figures are not Lunar Lander
+landings.
+
 ## Logs and commands
 
 Lines flush to `log.txt`, `metrics.jsonl`, and the shared live log. The run
