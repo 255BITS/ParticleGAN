@@ -16,6 +16,6 @@ error_tokens: 8
 error_width: 48
 error_heads: 4
 checkpoint: results/gym/lunar_lander_particle_finetune/particle/best.pt
-pairs: results/gym/lunar_lander_slow_fast/pairs.npz
-out_dir: results/gym/lunar_lander_slow_fast/residual
-live_log: results/gym/lunar_lander_slow_fast/residual.log
+pairs: results/gym/lunar_lander_slow_fast/pairs_progress.npz
+out_dir: results/gym/lunar_lander_slow_fast/student
+live_log: results/gym/lunar_lander_slow_fast/student.log

@@ -1,12 +1,8 @@
-checkpoint: results/gym/lunar_lander_particle_finetune/particle/best.pt
-out: results/gym/lunar_lander_slow_fast/pairs.npz
-rollouts: results/gym/lunar_lander_slow_fast/rollouts.jsonl
-live_log: results/gym/lunar_lander_slow_fast/live.log
+safe_checkpoint: results/gym/lunar_lander_particle_finetune/particle/best.pt
+fast_checkpoint: results/gym/lunar_lander_slow_fast/fast_teacher/held.pt
+out: results/gym/lunar_lander_slow_fast/pairs_progress.npz
+rollouts: results/gym/lunar_lander_slow_fast/rollouts_progress.jsonl
+live_log: results/gym/lunar_lander_slow_fast/collect.log
 device: cuda:1
 seed_start: 591000
 episodes: 200
-fast_quantile: 0.30
-slow_quantile: 0.70
-max_start_distance: 0.50
-max_terrain_distance: 0.50
-max_state_distance: 0.75

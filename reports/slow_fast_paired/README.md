@@ -1,7 +1,7 @@
 # Slow→fast paired finetune (CPU gate)
 
 Gate **PASS**. Winner of the rank key: `connected`.
-This gate must **PASS** before Lunar collect is reworked. Do not train the current stranger pairs. Commands are in `docs/gym-slow-fast.md`.
+Gate PASS is the pairing check. Lunar collect now uses two teachers, the same seed, and progress alignment. Do not train the old stranger pairs. Commands are in `docs/gym-slow-fast.md`.
 These numbers are a 2D pad. They are not Lunar landings.
 
 One seed (`0`), fixed eval starts, no seed sweep. Rank is landings first,
@@ -33,7 +33,7 @@ Collector: 80 same-seed both-land starts, 3058 progress-aligned rows (mean edit 
 - `crash_fast` trains on actions from fast-teacher episodes that missed the pad after the speed break. Contact can be sooner. Landings fall, so the rank key drops it.
 - `unpaired` uses fast actions from other starts and trains every weight. The student leaves the pad.
 - `supervised` matches the progress-aligned fast action with MSE and `adv_weight=0`. Landings may hold. The rank key rejects it because the #18 step did not run.
-- `stranger` is the Lunar collector: a different episode's fast action at the nearest state, plentiful rows, full-weight RpGAN at `adv_weight=1`. Landings fall and crashes rise.
+- `stranger` is the disabled Lunar collector: a different episode's fast action at the nearest state, plentiful rows, full-weight RpGAN at `adv_weight=1`. Landings fall and crashes rise.
 - `overspeed` is the same progress alignment one speed update later. The teacher still lands. The student does not keep the pad.
 - `connected` is the held speed: same seed, both land, progress `t/T`, full fast action, `adv_weight=1`. Landings hold on the return panel and success steps fall. Diagnostic MSE stays outside the loss.
 
@@ -48,7 +48,7 @@ pop-os cuda:1 trained `train_scope=control` (E_control and G2) on nearest-state 
 | slow→fast @1000 | 0/20 | — | 19 |
 | slow→fast @2500 | 0/20 | — | 18 |
 
-Eval selected none. Longer training was worse. Those pairs are strangers: different episodes, matched by geometry, no shared landing. The trainer now refuses `slow_seed != fast_seed`. The next collect needs two teachers, the same seed, a both-land gate, and progress alignment. Not nearest-stranger pools. This board is not a new Lunar result.
+Eval selected none. Longer training was worse. Those pairs are strangers: different episodes, matched by geometry, no shared landing. The trainer refuses `slow_seed != fast_seed` and any file named `pairs.npz`. Lunar collect now rolls two teachers on the same seed, keeps a pair only when both land, and aligns by progress. This board is not a new Lunar result.
 
 ```bash
 python -u examples/slow_fast_paired_2d.py

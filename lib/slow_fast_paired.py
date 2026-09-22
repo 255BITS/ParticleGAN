@@ -94,8 +94,8 @@ MAPPING = (
     dict(toy="Connected pairs use the same start, keep the episode only if both "
              "land, and align by progress t/T. Neutral is the safe action. "
              "Target is the fast action at that progress. Held teacher update is 2.",
-         gym="Next Lunar collect uses two teachers, the same seed, and a both-land "
-             "gate. Align by progress (t/T or altitude), not nearest-stranger pools."),
+         gym="Lunar collect rolls #18 and the held fast teacher on the same seed, "
+             "keeps the pair only when both land, and aligns by progress t/T."),
     dict(toy="One more speed update (3) still lands as a teacher and the student "
              "loses the pad. By update 6 the teacher itself crashes. Those rows "
              "stay out of the fast set.",
@@ -103,8 +103,8 @@ MAPPING = (
              "action by a hand-picked fraction. Crashed fast-teacher rows are not pairs."),
     dict(toy="Stranger pastes a different episode's recorded fast action onto the "
              "nearest state. The rows are plentiful. The same RpGAN step loses landings.",
-         gym="Current Lunar collect is that match. slow_seed != fast_seed. "
-             "cuda:1 went 20/20 to 0/20. Do not train those pairs."),
+         gym="That nearest-state collector is disabled. cuda:1 went 20/20 to 0/20. "
+             "Do not train pairs.npz or pairs_stranger_do_not_train.npz."),
 )
 
 
@@ -861,9 +861,9 @@ def format_report(result):
         f"step_gap>={limits['step_gap_min']} speed_bias={limits['speed_bias']} "
         f"lr={limits['policy_lr']} "
         f"adv_weight={limits['adv_weight']} horizon={limits['horizon']} updates={limits['steps']}")
-    lines.append("[slow-fast] GATE PASS is required before Lunar collect is reworked. "
-                 "Next collect: two teachers, same seed, both land, progress alignment. "
-                 "Not nearest-stranger pools. The cuda:1 stranger run went 20/20 to 0/20. "
+    lines.append("[slow-fast] GATE PASS. Lunar collect is two teachers, same seed, both land, "
+                 "progress alignment. Nearest-stranger pairing is disabled. "
+                 "The cuda:1 stranger run went 20/20 to 0/20. "
                  "Commands: docs/gym-slow-fast.md. No new Lunar landing is claimed here.")
     lines.append("[slow-fast] mapping")
     for row in result["mapping"]:
@@ -909,8 +909,9 @@ def board_markdown(result):
         "# Slow→fast paired finetune (CPU gate)",
         "",
         f"Gate **{status}**. Winner of the rank key: `{result['winner']}`.",
-        "This gate must **PASS** before Lunar collect is reworked. "
-        "Do not train the current stranger pairs. Commands are in `docs/gym-slow-fast.md`.",
+        "Gate PASS is the pairing check. Lunar collect now uses two teachers, the same seed, "
+        "and progress alignment. Do not train the old stranger pairs. "
+        "Commands are in `docs/gym-slow-fast.md`.",
         "These numbers are a 2D pad. They are not Lunar landings.",
         "",
         "One seed (`0`), fixed eval starts, no seed sweep. Rank is landings first,",
@@ -954,7 +955,7 @@ def board_markdown(result):
         "The student leaves the pad.",
         "- `supervised` matches the progress-aligned fast action with MSE and `adv_weight=0`. "
         "Landings may hold. The rank key rejects it because the #18 step did not run.",
-        "- `stranger` is the Lunar collector: a different episode's fast action at the "
+        "- `stranger` is the disabled Lunar collector: a different episode's fast action at the "
         "nearest state, plentiful rows, full-weight RpGAN at `adv_weight=1`. "
         "Landings fall and crashes rise.",
         "- `overspeed` is the same progress alignment one speed update later. "
@@ -978,10 +979,10 @@ def board_markdown(result):
         "| slow→fast @2500 | 0/20 | — | 18 |",
         "",
         "Eval selected none. Longer training was worse. Those pairs are strangers: "
-        "different episodes, matched by geometry, no shared landing. The trainer now "
-        "refuses `slow_seed != fast_seed`. The next collect needs two teachers, the "
-        "same seed, a both-land gate, and progress alignment. Not nearest-stranger "
-        "pools. This board is not a new Lunar result.",
+        "different episodes, matched by geometry, no shared landing. The trainer refuses "
+        "`slow_seed != fast_seed` and any file named `pairs.npz`. Lunar collect now rolls "
+        "two teachers on the same seed, keeps a pair only when both land, and aligns by "
+        "progress. This board is not a new Lunar result.",
         "",
         "```bash",
         "python -u examples/slow_fast_paired_2d.py",

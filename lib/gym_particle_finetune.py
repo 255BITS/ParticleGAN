@@ -289,7 +289,8 @@ def load_particle_checkpoint(path, device="cpu", formats=("gym_particle_finetune
         bundle[key].load_state_dict(saved[key])
         bundle[key].eval().requires_grad_(False)
     bundle.update(config={**cfg, "context_dim": world["context_dim"]}, world_config=world,
-                  step=saved["step"], provenance=saved["provenance"], validation=saved["validation"])
+                  step=saved["step"], provenance=saved["provenance"], validation=saved["validation"],
+                  format=saved["format"])
     _attach_residual(bundle, saved, device)
     summary = Path(path).parent / "summary.json"
     if summary.exists():
@@ -316,7 +317,7 @@ def _attach_residual(bundle, saved, device):
     return bundle
 
 
-PAIRED_FORMATS = ("gym_particle_finetune_v1", "gym_slow_fast_finetune_v1")
+PAIRED_FORMATS = ("gym_particle_finetune_v1", "gym_slow_fast_finetune_v1", "gym_fast_teacher_v1")
 
 
 def load_paired_controller(path, device="cpu"):

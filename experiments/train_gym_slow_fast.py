@@ -35,9 +35,9 @@ DEFAULTS = dict(
     residual_scale=RESIDUAL_SCALE, residual_lr=0.01, residual_width=32,
     error_tokens=8, error_width=48, error_heads=4,
     checkpoint="results/gym/lunar_lander_particle_finetune/particle/best.pt",
-    pairs="results/gym/lunar_lander_slow_fast/pairs.npz",
-    out_dir="results/gym/lunar_lander_slow_fast/particle",
-    live_log="results/gym/lunar_lander_slow_fast/live.log")
+    pairs="results/gym/lunar_lander_slow_fast/pairs_progress.npz",
+    out_dir="results/gym/lunar_lander_slow_fast/student",
+    live_log="results/gym/lunar_lander_slow_fast/student.log")
 L2_KEYS = ("imitation_weight", "real_encoding_weight", "synthetic_reconstruction_weight")
 FORMAT = "gym_slow_fast_finetune_v1"
 CRITIC_LR = 1e-3
@@ -95,13 +95,24 @@ def train(cfg):
     torch.set_num_threads(1)
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
+    pairs_name = Path(cfg["pairs"]).name
+    if pairs_name == "pairs.npz" or "do_not_train" in pairs_name:
+        raise ValueError(
+            "refusing stranger pairs. Train pairs_progress.npz from the two-teacher collector.")
     arrays, manifest = load_pairs(cfg["pairs"])
+    if manifest is None or manifest.get("pairing") != "progress_same_seed" or manifest.get("alignment") != "t/T":
+        raise ValueError(
+            "pairs manifest pairing must be progress_same_seed with alignment t/T. "
+            "Nearest-state sidecars are not a shared landing.")
     if (arrays["slow_seed"] != arrays["fast_seed"]).any():
         raise ValueError(
             "stranger pairs: slow_seed and fast_seed differ. "
-            "Nearest-episode matching has no shared landing. "
-            "Rework collect to two teachers, same seed, both land, "
-            "progress alignment, before training.")
+            "Nearest-episode matching has no shared landing.")
+    bundle = load_paired_controller(cfg["checkpoint"], device)
+    if bundle.get("format") == "gym_fast_teacher_v1":
+        raise ValueError("student starts from the frozen #18 safe teacher, not the fast teacher")
+    if bundle.get("residual") is not None:
+        raise ValueError("start from a frozen #18 checkpoint, not a residual continuation")
     out = Path(cfg["out_dir"])
     out.mkdir(parents=True, exist_ok=True)
     if any(out.iterdir()):
@@ -110,9 +121,6 @@ def train(cfg):
     link_live_log(out, live)
     if len(arrays["states"]) < cfg["batch_size"]:
         raise ValueError("batch_size is larger than the paired rows")
-    bundle = load_paired_controller(cfg["checkpoint"], device)
-    if bundle.get("residual") is not None:
-        raise ValueError("start from a frozen #18 checkpoint, not a residual continuation")
     for key in MODULE_KEYS:
         bundle[key].eval().requires_grad_(False)
     residual = ActionResidual(scale=cfg["residual_scale"], width=cfg["residual_width"],
@@ -143,7 +151,8 @@ def train(cfg):
         reg_every=EDIT_CAP_EVERY, adv_weight=1., safe_fast_weight=0., train_scope="residual",
         residual_scale=RESIDUAL_SCALE, residual_lr=cfg["residual_lr"], critic_lr=CRITIC_LR,
         l2_aux_weight=0., diagnostic_mse="logged under no_grad; not added to the controller loss",
-        neutral="recorded slow action", target="recorded fast action at the nearest matched state",
+        neutral="safe teacher action on this seed",
+        target="fast teacher action at the same progress t/T on this seed",
         speed_mechanism="bounded residual on a frozen lander; not the safe-fast kinematic cost",
         critic="gmix_t8_w48_l1", normalization=critic.normalization,
         initialization_recipe=recipe.to_dict())
@@ -196,6 +205,8 @@ def train(cfg):
 
         log(f"START rows={len(columns[0])} pairs={0 if manifest is None else manifest.get('pairs')} "
             f"steps={cfg['steps']} device={device} adv_weight=1 safe_fast_weight=0")
+        log(f"PAIRS pairing={manifest.get('pairing')} alignment={manifest.get('alignment')} "
+            "same seed, both land. Not nearest-state strangers.")
         log(f"RESIDUAL frozen=#18 scale={RESIDUAL_SCALE} width={cfg['residual_width']} "
             f"lr={cfg['residual_lr']} critic_lr={CRITIC_LR} "
             "E_control and G2 are not updated.")

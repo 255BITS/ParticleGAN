@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """CPU gate: same-seed progress pairs pass; the next speed and strangers fail.
 
-Lunar Lander is not run. This process must exit 0 (GATE PASS) before Lunar
-collect is reworked to two teachers. The gym note is docs/gym-slow-fast.md.
+Lunar Lander is not run. Exit 0 is GATE PASS. The gym collector that matches
+this recipe is documented in docs/gym-slow-fast.md.
 """
 import sys
 from pathlib import Path

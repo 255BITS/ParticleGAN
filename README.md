@@ -80,14 +80,15 @@ plus sample-point b_cap on the edit critic. G1, G3, the paired encoder, the
 prior, and the transition discriminators stay frozen. `particle.yaml` is that
 default. The [safe-fast term](docs/gym-safe-fast.md) is a separate config,
 `particle_safe_fast.yaml`, and does not replace it.
-The [slow→fast paired toy](docs/slow-fast-paired.md) must **GATE PASS**
-(`python -u examples/slow_fast_paired_2d.py`) before Lunar collect is reworked.
+The [slow→fast paired toy](docs/slow-fast-paired.md) **GATE PASS**es
+(`python -u examples/slow_fast_paired_2d.py`) on same-seed progress pairs.
 The [Lunar slow→fast path](docs/gym-slow-fast.md) matched different successful
 episodes by nearest state and, on cuda:1, went from 20/20 validation landings
-to 0/20. Those stranger pairs are refused. The toy passes same-seed,
-both-land, progress-aligned pairs from a speed-biased teacher, and it fails
-the next faster update, under the same paired-error RpGAN (`adv_weight=1`).
-A toy PASS is not a Lunar landing number.
+to 0/20. That collector is disabled. The replacement rolls a frozen `#18`
+teacher and a speed-biased teacher on the same seed, keeps a pair only when
+both land, and aligns by progress `t/T`. The toy fails the next faster update
+under the same paired-error RpGAN (`adv_weight=1`). A toy PASS is not a Lunar
+landing number.
 The [slider-error fine-tune](docs/gym-slider-finetune.md) uses the imitation
 fine-tune's world-model initialization and replaces only action MSE with the
 paired-error critic. G1, G3, the paired encoder, the prior, and the transition

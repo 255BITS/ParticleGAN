@@ -1,14 +1,10 @@
-"""Slow→fast Lunar pairs and the speed score that refuses crash shortcuts.
+"""Same-seed slow→fast Lunar pairs and the speed score that refuses crash shortcuts.
 
-Successful landings from one frozen controller are split by steps-to-land.
-Crashes, timeouts, and flyaways never enter either pool. The matcher below
-is stranger pairing: a slow landing and a different, faster landing whose
-start and terrain are close, with the fast action taken at the nearest state.
-Those pairs do not share a landing. `train_gym_slow_fast.py` refuses them
-(`slow_seed != fast_seed`). The next collector has to roll two teachers on
-the same seed, keep a pair only when both land, and align by progress.
-Nearest-stranger pools stay out. There is no kinematic safe-fast cost
-in this file.
+The safe teacher and the fast teacher each roll a seed. A pair is kept only
+when both land and the fast landing is strictly sooner. Rows are aligned by
+progress ``t/T`` on that shared landing. Cross-episode nearest-state matching
+is disabled. Crashes, timeouts, and flyaways never enter the fast set.
+There is no kinematic safe-fast cost in this file.
 """
 import json
 from pathlib import Path
@@ -22,6 +18,9 @@ VALIDATION_SEEDS = tuple(range(391000, 391020))
 TEST_SEEDS = tuple(range(491000, 491050))
 EVAL_SEEDS = frozenset(VALIDATION_SEEDS + TEST_SEEDS)
 COLLECTION_SEED_START = 591000
+# Fast-teacher probes. Disjoint from validation, test, and collection.
+PROBE_SEED_START = 581000
+STRANGER_ARCHIVE_NAME = "pairs_stranger_do_not_train.npz"
 SUCCESS = "successful_landing"
 OUTCOMES = ("successful_landing", "crash", "out_of_bounds", "time_limit")
 # Continuous Lunar state: x, y, vx, vy, angle, angular velocity.
@@ -85,178 +84,132 @@ def _trajectory(episode):
     return states, actions, initial, terrain
 
 
-def start_distance(slow, fast):
-    left = np.asarray(slow["initial_state"], dtype=np.float32)[:6]
-    right = np.asarray(fast["initial_state"], dtype=np.float32)[:6]
-    return float(np.linalg.norm((left - right) * STATE_WEIGHT))
+def progress_index(slow_len, fast_len, index):
+    """Fast-trajectory index at the same fraction of the landing."""
+    if slow_len < 1 or fast_len < 1:
+        raise ValueError("progress alignment needs a nonempty trajectory")
+    if slow_len == 1:
+        return 0
+    fraction = index / (slow_len - 1)
+    return int(round(fraction * (fast_len - 1)))
 
 
-def terrain_distance(slow, fast):
-    left = np.asarray(slow["terrain"], dtype=np.float32)
-    right = np.asarray(fast["terrain"], dtype=np.float32)
-    return float(np.linalg.norm(left - right))
-
-
-def _quantile_cut(steps, quantile):
-    return float(np.quantile(np.asarray(steps, dtype=np.float64), quantile))
-
-
-def split_success_pools(episodes, fast_quantile=0.30, slow_quantile=0.70):
-    """Successes only. The fast pool is strictly sooner than the slow pool."""
-    if not 0 < float(fast_quantile) < float(slow_quantile) < 1:
-        raise ValueError("need 0 < fast_quantile < slow_quantile < 1")
+def _index_successes(episodes, role):
+    """One record per seed. Non-successes are counted and dropped."""
     dropped = {name: 0 for name in OUTCOMES if name != SUCCESS}
     dropped["other"] = 0
-    successes = []
-    seen = set()
+    by_seed = {}
     for episode in episodes:
         seed = int(episode["seed"])
-        if seed in seen:
-            raise ValueError(f"duplicate rollout seed {seed}")
-        seen.add(seed)
+        if seed in by_seed:
+            raise ValueError(f"duplicate {role} rollout seed {seed}")
         if is_success(episode):
             _trajectory(episode)
-            successes.append(episode)
+            by_seed[seed] = episode
             continue
         outcome = episode.get("outcome")
         dropped[outcome if outcome in dropped else "other"] += 1
-    if len(successes) < 4:
-        raise ValueError(f"need at least 4 successful landings to split pools, got {len(successes)}")
-    steps = [int(episode["steps"]) for episode in successes]
-    fast_cut = _quantile_cut(steps, fast_quantile)
-    slow_cut = _quantile_cut(steps, slow_quantile)
-    fast = [episode for episode in successes if int(episode["steps"]) <= fast_cut]
-    slow = [episode for episode in successes if int(episode["steps"]) >= slow_cut]
-    fast_seeds = {int(episode["seed"]) for episode in fast}
-    slow = [episode for episode in slow if int(episode["seed"]) not in fast_seeds]
-    if not fast or not slow:
-        raise ValueError("quantile split produced an empty slow or fast pool; collect more landings")
-    if max(int(episode["steps"]) for episode in fast) >= min(int(episode["steps"]) for episode in slow):
-        raise ValueError("fast pool is not strictly sooner than the slow pool")
-    for pool in (fast, slow):
-        if any(not is_success(episode) for episode in pool):
-            raise RuntimeError("a non-success entered a slow/fast pool")
-    return fast, slow, dropped, successes
+    return by_seed, dropped
 
 
-def match_episodes(slow, fast, max_start_distance, max_terrain_distance):
-    """One-to-one greedy match, slowest first. Far starts and terrain stay unpaired."""
-    unused = set(range(len(fast)))
-    order = sorted(range(len(slow)), key=lambda index: int(slow[index]["steps"]), reverse=True)
-    pairs, unmatched = [], []
-    nearest = []
-    for index in order:
-        best = None
-        best_key = None
-        closest = None
-        for other in unused:
-            start = start_distance(slow[index], fast[other])
-            terrain = terrain_distance(slow[index], fast[other])
-            key = (start + terrain, start, terrain, other)
-            if closest is None or key < closest:
-                closest = key
-            if start > max_start_distance or terrain > max_terrain_distance:
-                continue
-            if best_key is None or key < best_key:
-                best_key = key
-                best = other
-        nearest.append(dict(slow_seed=int(slow[index]["seed"]),
-                            nearest_start=None if closest is None else closest[1],
-                            nearest_terrain=None if closest is None else closest[2]))
-        if best is None:
-            unmatched.append(int(slow[index]["seed"]))
-            continue
-        unused.remove(best)
-        pairs.append(dict(slow=slow[index], fast=fast[best], start_distance=best_key[1],
-                          terrain_distance=best_key[2]))
-    return pairs, unmatched, nearest
+def _aligned_distance(slow_state, fast_state):
+    gap = (slow_state[:6] - fast_state[:6]) * STATE_WEIGHT
+    return float(np.linalg.norm(gap) + 0.1 * np.abs(slow_state[6:8] - fast_state[6:8]).sum())
 
 
-def _nearest_states(slow_states, fast_states):
-    left = slow_states[:, None, :6] * STATE_WEIGHT
-    right = fast_states[None, :, :6] * STATE_WEIGHT
-    distance = np.linalg.norm(left - right, axis=-1)
-    distance += 0.1 * np.abs(slow_states[:, None, 6:8] - fast_states[None, :, 6:8]).sum(-1)
-    index = distance.argmin(axis=1)
-    rows = np.arange(len(slow_states))
-    return index, distance[rows, index]
-
-
-def build_slow_fast_pairs(episodes, fast_quantile=0.30, slow_quantile=0.70,
-                          max_start_distance=0.50, max_terrain_distance=0.50,
-                          max_state_distance=0.75):
-    """Matched (slow, fast) rows. Crashes never become targets."""
-    for name, value in (("max_start_distance", max_start_distance),
-                        ("max_terrain_distance", max_terrain_distance),
-                        ("max_state_distance", max_state_distance)):
-        if type(value) is bool or not isinstance(value, (int, float)) or value < 0:
-            raise ValueError(f"{name} must be a nonnegative number")
-    fast, slow, dropped, successes = split_success_pools(episodes, fast_quantile, slow_quantile)
-    matched, unmatched, nearest = match_episodes(slow, fast, float(max_start_distance),
-                                                 float(max_terrain_distance))
+def build_progress_pairs(safe_episodes, fast_episodes):
+    """Same seed, both land, align by t/T. Crashed fast episodes are not targets."""
+    safe_by, safe_dropped = _index_successes(safe_episodes, "safe")
+    fast_by, fast_dropped = _index_successes(fast_episodes, "fast")
     columns = {name: [] for name in PAIR_ARRAYS}
     pair_rows = []
-    dropped_states = 0
-    for pair_id, pair in enumerate(matched):
-        slow_states, slow_actions, _, terrain = _trajectory(pair["slow"])
-        fast_states, fast_actions, _, _ = _trajectory(pair["fast"])
-        if int(pair["fast"]["steps"]) >= int(pair["slow"]["steps"]):
-            raise RuntimeError("matched pair is not strictly faster")
-        choice, distance = _nearest_states(slow_states, fast_states)
+    not_faster = 0
+    safe_only = sorted(set(safe_by) - set(fast_by))
+    fast_only = sorted(set(fast_by) - set(safe_by))
+    for seed in sorted(set(safe_by) & set(fast_by)):
+        safe, fast = safe_by[seed], fast_by[seed]
+        if int(fast["steps"]) >= int(safe["steps"]):
+            not_faster += 1
+            continue
+        slow_states, slow_actions, _, terrain = _trajectory(safe)
+        fast_states, fast_actions, _, _ = _trajectory(fast)
         previous = np.empty_like(slow_actions)
         previous[0] = OFF_ACTION
         if len(slow_actions) > 1:
             previous[1:] = slow_actions[:-1]
-        kept = 0
         for row in range(len(slow_states)):
-            if float(distance[row]) > max_state_distance:
-                dropped_states += 1
-                continue
-            fast_row = int(choice[row])
+            fast_row = progress_index(len(slow_states), len(fast_states), row)
             columns["states"].append(slow_states[row])
             columns["previous_actions"].append(previous[row])
             columns["neutral_actions"].append(slow_actions[row])
             columns["target_actions"].append(fast_actions[fast_row])
             columns["terrain"].append(terrain)
-            columns["slow_steps"].append(int(pair["slow"]["steps"]))
-            columns["fast_steps"].append(int(pair["fast"]["steps"]))
-            columns["slow_seed"].append(int(pair["slow"]["seed"]))
-            columns["fast_seed"].append(int(pair["fast"]["seed"]))
+            columns["slow_steps"].append(int(safe["steps"]))
+            columns["fast_steps"].append(int(fast["steps"]))
+            columns["slow_seed"].append(seed)
+            columns["fast_seed"].append(seed)
             columns["slow_index"].append(row)
             columns["fast_index"].append(fast_row)
-            columns["state_distance"].append(float(distance[row]))
-            kept += 1
-        if kept:
-            pair_rows.append(dict(slow_seed=int(pair["slow"]["seed"]), fast_seed=int(pair["fast"]["seed"]),
-                                  slow_steps=int(pair["slow"]["steps"]), fast_steps=int(pair["fast"]["steps"]),
-                                  start_distance=pair["start_distance"], terrain_distance=pair["terrain_distance"],
-                                  rows=kept))
+            columns["state_distance"].append(_aligned_distance(slow_states[row], fast_states[fast_row]))
+        pair_rows.append(dict(slow_seed=seed, fast_seed=seed, slow_steps=int(safe["steps"]),
+                              fast_steps=int(fast["steps"]), rows=len(slow_states)))
     if not columns["states"]:
-        raise ValueError("no matched slow/fast rows; loosen the distance caps or collect more landings. "
-                         f"nearest={_distance_summary(nearest)} unmatched_slow={len(unmatched)} "
-                         f"dropped_states={dropped_states}")
+        raise ValueError("no same-seed both-land progress pairs; the fast teacher did not "
+                         "land sooner on any shared seed")
     arrays = _stack_columns(columns)
-    if np.any(arrays["fast_steps"] >= arrays["slow_steps"]):
-        raise RuntimeError("a fast row is not strictly sooner than its slow partner")
-    edit = np.abs(arrays["target_actions"] - arrays["neutral_actions"]).mean()
+    if np.any(arrays["slow_seed"] != arrays["fast_seed"]):
+        raise RuntimeError("progress pairs must share a seed")
+    crashes = safe_dropped["crash"] + fast_dropped["crash"]
+    timeouts = safe_dropped["time_limit"] + fast_dropped["time_limit"]
+    oob = safe_dropped["out_of_bounds"] + fast_dropped["out_of_bounds"]
+    other = safe_dropped["other"] + fast_dropped["other"]
+    edit = float(np.abs(arrays["target_actions"] - arrays["neutral_actions"]).mean())
     manifest = dict(
         format="slow_fast_pairs_v1",
-        successes=len(successes),
-        fast_pool=len(fast), slow_pool=len(slow), pairs=len(pair_rows), rows=int(len(arrays["states"])),
-        crashes_excluded=dropped["crash"], timeouts_excluded=dropped["time_limit"],
-        oob_excluded=dropped["out_of_bounds"], other_excluded=dropped["other"],
+        pairing="progress_same_seed",
+        alignment="t/T",
+        successes=len(pair_rows),
+        fast_pool=len(pair_rows), slow_pool=len(pair_rows), pairs=len(pair_rows),
+        rows=int(len(arrays["states"])),
+        crashes_excluded=int(crashes), timeouts_excluded=int(timeouts),
+        oob_excluded=int(oob), other_excluded=int(other),
+        not_faster=int(not_faster), safe_only=len(safe_only), fast_only=len(fast_only),
         fast_steps_max=int(arrays["fast_steps"].max()), slow_steps_min=int(arrays["slow_steps"].min()),
-        mean_action_edit=float(edit), dropped_state_rows=dropped_states, unmatched_slow=len(unmatched),
-        nearest=_distance_summary(nearest), pairs_detail=pair_rows,
-        fast_quantile=float(fast_quantile), slow_quantile=float(slow_quantile),
-        max_start_distance=float(max_start_distance), max_terrain_distance=float(max_terrain_distance),
-        max_state_distance=float(max_state_distance),
+        mean_action_edit=edit, dropped_state_rows=0, unmatched_slow=len(safe_only),
+        nearest=dict(count=0, note="nearest-state matching is disabled"),
+        pairs_detail=pair_rows,
         outcomes_in_pools=[SUCCESS],
-        neutral="slow action on the slow trajectory",
-        target="fast action at the nearest state on the matched faster landing",
+        neutral="safe teacher action on the safe trajectory",
+        target="fast teacher action at the same progress t/T on this seed",
         speed_mechanism="paired successful actions; not the safe-fast kinematic cost",
     )
     return dict(arrays=arrays, manifest=manifest)
+
+
+def build_slow_fast_pairs(*_args, **_kwargs):
+    """Disabled. Cross-episode nearest matching has no shared landing."""
+    raise RuntimeError(
+        "stranger nearest pairing is disabled. "
+        "Use build_progress_pairs: same seed, both land, progress t/T.")
+
+
+def archive_stranger_pairs(directory):
+    """Rename a legacy pairs.npz so the student trainer cannot load it by habit."""
+    directory = Path(directory)
+    legacy = directory / "pairs.npz"
+    if not legacy.is_file():
+        return None
+    dest = directory / STRANGER_ARCHIVE_NAME
+    if dest.exists():
+        raise FileExistsError(f"Refusing to overwrite {dest} while archiving {legacy}")
+    legacy.rename(dest)
+    sidecar = legacy.with_suffix(".json")
+    archived_sidecar = dest.with_suffix(".json")
+    if sidecar.is_file():
+        if archived_sidecar.exists():
+            raise FileExistsError(f"Refusing to overwrite {archived_sidecar}")
+        sidecar.rename(archived_sidecar)
+    return dest
 
 
 def _stack_columns(columns):
@@ -276,15 +229,6 @@ def _stack_columns(columns):
     )
     _validate_pairs(arrays)
     return arrays
-
-
-def _distance_summary(nearest):
-    if not nearest:
-        return dict(count=0)
-    start = np.asarray([row["nearest_start"] for row in nearest], dtype=np.float64)
-    terrain = np.asarray([row["nearest_terrain"] for row in nearest], dtype=np.float64)
-    return dict(count=len(nearest), start_p50=float(np.median(start)), start_p90=float(np.quantile(start, 0.9)),
-                terrain_p50=float(np.median(terrain)), terrain_p90=float(np.quantile(terrain, 0.9)))
 
 
 def _validate_pairs(arrays):
@@ -311,6 +255,10 @@ def _validate_pairs(arrays):
             raise ValueError(f"{name} must stay inside [-1, 1]")
     if np.any(arrays["fast_steps"] >= arrays["slow_steps"]):
         raise ValueError("refusing pairs whose fast member is not strictly sooner")
+    if np.any(arrays["slow_seed"] != arrays["fast_seed"]):
+        raise ValueError(
+            "stranger pairs: slow_seed and fast_seed differ. "
+            "Nearest-episode matching has no shared landing.")
 
 
 def save_pairs(path, built):
@@ -383,27 +331,39 @@ def speed_decision(candidate, baseline):
                 ["faster among successes without lost landings or extra crashes"])
 
 
-def synthetic_episodes():
-    """Tiny successful and crashing rollouts for the CPU smoke. Not Lunar physics."""
-    def episode(seed, steps, outcome, x, action, terrain=0., success=False):
-        states = np.zeros((steps, 8), dtype=np.float32)
-        states[:, 0] = x
-        states[:, 1] = np.linspace(1.2, 0.05, steps)
-        actions = np.tile(np.asarray(action, dtype=np.float32), (steps, 1))
-        return dict(seed=seed, steps=steps, outcome=outcome, states=states, actions=actions,
-                    initial_state=states[0].tolist(), terrain=[terrain] * 11,
-                    game_over=not success, lander_awake=not success, terminated=outcome != "time_limit",
-                    truncated=outcome == "time_limit")
+def _synthetic_episode(seed, steps, outcome, action, success):
+    """One fake rollout. Not Lunar physics."""
+    states = np.zeros((steps, 8), dtype=np.float32)
+    states[:, 0] = 0.01 * seed
+    states[:, 1] = np.linspace(1.2, 0.05, steps)
+    actions = np.tile(np.asarray(action, dtype=np.float32), (steps, 1))
+    return dict(seed=seed, steps=steps, outcome=outcome, states=states, actions=actions,
+                initial_state=states[0].tolist(), terrain=[0.] * 11,
+                game_over=not success, lander_awake=not success, terminated=outcome != "time_limit",
+                truncated=outcome == "time_limit", teacher="synthetic")
 
-    return [
-        episode(1, 10, SUCCESS, 0.00, [0.2, 0.0], success=True),
-        episode(2, 12, SUCCESS, 0.02, [0.4, 0.1], success=True),
-        episode(3, 40, SUCCESS, 0.01, [-0.2, 0.0], success=True),
-        episode(4, 48, SUCCESS, 0.03, [-0.4, -0.1], success=True),
-        episode(5, 6, "crash", 0.00, [1.0, 1.0], success=False),
-        episode(6, 7, "time_limit", 0.00, [0.0, 0.0], success=False),
-        episode(7, 8, SUCCESS, 3.0, [0.9, 0.9], terrain=1.0, success=True),
+
+def synthetic_teacher_rollouts():
+    """Same seeds for both teachers. Seed 4 crashes on the fast teacher and stays out."""
+    safe = [
+        _synthetic_episode(1, 40, SUCCESS, [-0.2, 0.0], success=True),
+        _synthetic_episode(2, 48, SUCCESS, [-0.3, 0.1], success=True),
+        _synthetic_episode(3, 36, SUCCESS, [-0.1, -0.1], success=True),
+        _synthetic_episode(4, 40, SUCCESS, [-0.2, 0.0], success=True),
     ]
+    fast = [
+        _synthetic_episode(1, 12, SUCCESS, [0.4, 0.2], success=True),
+        _synthetic_episode(2, 16, SUCCESS, [0.5, 0.0], success=True),
+        _synthetic_episode(3, 14, SUCCESS, [0.3, -0.2], success=True),
+        _synthetic_episode(4, 8, "crash", [1.0, 1.0], success=False),
+    ]
+    return safe, fast
+
+
+def synthetic_episodes():
+    """Flat list kept for outcome checks. Pairing uses synthetic_teacher_rollouts."""
+    safe, fast = synthetic_teacher_rollouts()
+    return safe + fast
 
 
 def read_jsonl(path):

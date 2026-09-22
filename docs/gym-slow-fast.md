@@ -1,13 +1,17 @@
 # Lunar slow→fast paired finetune
 
 The cuda:1 pairs were **strangers**: different successful episodes, matched by
-nearest start, terrain, and state. Neutral was the slow action at `s`. Target
-was the fast action at a nearby `s′`. There is no shared landing in that
-edit. Fitting it destroyed a working controller. Do not train
-`results/gym/lunar_lander_slow_fast/pairs.npz`. The trainer refuses
-`slow_seed != fast_seed`. Collect has to be reworked to two teachers, the same
-seed, a both-land gate, and progress alignment before the next cuda:1 run.
-This page does not claim a new Lunar landing number.
+nearest start, terrain, and state. Fitting that edit destroyed a working
+controller. That collector is disabled. `build_slow_fast_pairs` raises.
+`train_gym_slow_fast.py` refuses `pairs.npz`, any name containing
+`do_not_train`, a manifest that is not `progress_same_seed` / `t/T`, and any
+row with `slow_seed != fast_seed`.
+
+The replacement matches the toy: a frozen safe teacher, a speed-biased fast
+teacher from the same spine, and pairs kept only when the **same seed** lands
+under both. Rows are aligned by progress `t/T`. Crashed fast-teacher episodes
+stay out of the file. This page does not claim a new Lunar landing number.
+Slider runs the cuda:1 commands below. This checkout does not.
 
 ## What failed (pop-os cuda:1, `train_scope=control`)
 
@@ -23,69 +27,150 @@ diagnostic blow-up. Shared-seed validation versus the `#18` baseline:
 | slow→fast @1000 | **0/20** | — | 19 |
 | slow→fast @2500 | **0/20** | — | 18 |
 
-Eval selected none. Longer training was worse. Pair data looked healthy. The
-failure was the update: nearest-state targets pasted a fast episode's action
-onto a different state, and training `E_control` and G2 overwrote the lander.
+Eval selected none. Longer training was worse. Nearest-state targets pasted a
+fast episode's action onto a different state, and training `E_control` and G2
+overwrote the lander. Do not resume
+`results/gym/lunar_lander_slow_fast/particle/`.
 
 ## Toy gate
 
-`python -u examples/slow_fast_paired_2d.py` must print `GATE PASS`. The pass
-arm is two teachers on the same start.
+`python -u examples/slow_fast_paired_2d.py` prints `GATE PASS`. The pass arm
+is two teachers on the same start.
 
 - Safe teacher: land-first, no speed term.
 - Fast teacher: the same spine, trained with an altitude speed bias. Speed
   rises until landings break. There is no separate crash policy and no
   hand-picked fraction of the fast action.
-- Connected pairs: same seed, both land, aligned by progress `t/T`. Neutral
-  is the safe action. Target is the fast action at that progress. On this
+- Connected pairs: same seed, both land, aligned by progress `t/T`. On this
   plant the held teacher is update 2 (lands in 23.41 steps). The student
   keeps the pad and finishes in 28.31 steps.
-- `overspeed` is update 3. The teacher still lands (20.04 steps). The same
-  student ends at landings 0.762, crash 0.237.
+- `overspeed` is update 3 (teacher 20.04 steps). The same student ends at
+  landings 0.762, crash 0.237.
 - `crash_fast` is update 6, where the teacher itself lands 0.442. Those
-  missed episodes stay out of the fast set. Training on them ends at
-  landings 0.455, crash 0.545.
-- `stranger` is cross-episode nearest state on the held teacher. The rows
-  are plentiful (2905). The student ends at landings 0.205, crash 0.795.
+  missed episodes stay out of the fast set.
+- `stranger` is cross-episode nearest state. The student ends at landings
+  0.205, crash 0.795.
 
 `adv_weight` stays 1. `safe_fast_weight` stays 0. Diagnostic MSE stays
-outside the loss. The kinematic plant cost is not the speed mechanism.
+outside the student loss. The kinematic plant cost is not the student's
+speed mechanism. The fast teacher's own loss is a separate altitude term,
+recorded as `speed_term`, not as `safe_fast_weight`.
+
+The toy winner trains full policy weights. The gym student command below
+still freezes `E_control` and G2 and trains an action residual of scale
+0.15, which is what `train_gym_slow_fast.py` accepts. That residual is not
+the measured toy winner. It is the locked student step, now fed same-seed
+progress pairs instead of strangers. `adv_weight` stays 1.
+
+## cuda:1 commands
+
+GPU 0 is not used. Logs are prefixed `[fast-teacher]`, `[slow-fast-collect]`,
+and `[slow-fast]`. Tail them while the job runs:
+
+```bash
+tail -f results/gym/lunar_lander_slow_fast/fast_teacher.log
+tail -f results/gym/lunar_lander_slow_fast/collect.log
+tail -f results/gym/lunar_lander_slow_fast/student.log
+```
+
+The yaml default `#18` path is
+`results/gym/lunar_lander_particle_finetune/particle/best.pt`. The failed
+cuda:1 collect used YuE2
+`results/gym/lunar_lander_particle_finetune/particle_yue18_143320/best.pt`.
+Pass that path, or whichever file is the frozen lander, on every `#18`
+argument below. The fast teacher, the collector's safe teacher, the student
+init, and the eval baseline must be the same checkpoint.
+
+```bash
+python -u experiments/train_gym_fast_teacher.py \
+  --config configs/gym/lunar_lander_slow_fast/fast_teacher.yaml \
+  --checkpoint results/gym/lunar_lander_particle_finetune/particle_yue18_143320/best.pt
+
+python -u experiments/collect_slow_fast_lunar.py \
+  --config configs/gym/lunar_lander_slow_fast/collect.yaml \
+  --safe-checkpoint results/gym/lunar_lander_particle_finetune/particle_yue18_143320/best.pt \
+  --fast-checkpoint results/gym/lunar_lander_slow_fast/fast_teacher/held.pt
+
+python -u experiments/train_gym_slow_fast.py \
+  --config configs/gym/lunar_lander_particle_finetune/particle_slow_fast.yaml \
+  --checkpoint results/gym/lunar_lander_particle_finetune/particle_yue18_143320/best.pt
+
+python -u experiments/evaluate_gym_slow_fast.py \
+  --baseline results/gym/lunar_lander_particle_finetune/particle_yue18_143320/best.pt \
+  --checkpoint results/gym/lunar_lander_slow_fast/student/checkpoint_250.pt \
+  --checkpoint results/gym/lunar_lander_slow_fast/student/checkpoint_1000.pt \
+  --checkpoint results/gym/lunar_lander_slow_fast/student/checkpoint_2500.pt \
+  --split validation \
+  --device cuda:1
+```
+
+Omit the `--checkpoint` / `--safe-checkpoint` / `--baseline` overrides only
+when `particle/best.pt` is that same `#18` file.
+
+### Fast teacher
+
+`configs/gym/lunar_lander_slow_fast/fast_teacher.yaml`. Starts from `#18`.
+Trains `E_control` and G2 only. The loss on the safe teacher's successful
+probe states is
+
+`speed_bias * (main_engine * altitude) + anchor_weight * MSE(action, frozen safe action)`.
+
+`speed_bias` starts at 0.05 and doubles each stage (`speed_growth: 2`), 40
+steps per stage, at most 6 stages, Adam lr `1e-4`. The anchor stops the first
+step from wiping the engine. It is not a hand-picked fraction of the action.
+After each stage the script probes seeds `581000–581019` (disjoint from
+validation, test, and collection). It writes `held.pt` only for a stage that
+still matches the safe probe's landings, crashes, and flyaways and is
+strictly faster among successes. The stage that loses the pad is saved as
+`stage_N.pt` and is not `held.pt`. If the first stage breaks, the process
+exits 1 and does not write `held.pt`. Do not collect in that case. Crashed
+probe episodes are not a training set.
+
+### Collect
+
+`configs/gym/lunar_lander_slow_fast/collect.yaml`. Rolls the safe checkpoint
+and `fast_teacher/held.pt` on seeds `591000` onward (`episodes: 200`). A pair
+is kept only when both land and the fast landing is strictly sooner. Every
+safe-trajectory state is a row. The target is the fast action at the same
+fraction `t/T`. The manifest is `pairing=progress_same_seed`, `alignment=t/T`.
+Output is `results/gym/lunar_lander_slow_fast/pairs_progress.npz`.
+
+If `pairs.npz` is still in that directory, collect renames it to
+`pairs_stranger_do_not_train.npz` (and the `.json` sidecar) before writing.
+It refuses to overwrite an existing archive. It also refuses to write a new
+file named `pairs.npz`. The fast checkpoint must be `gym_fast_teacher_v1`.
+
+### Student
+
+`configs/gym/lunar_lander_particle_finetune/particle_slow_fast.yaml`.
+`adv_weight: 1`, `safe_fast_weight: 0`, `train_scope: residual`,
+`residual_scale: 0.15`. Pairs are `pairs_progress.npz`. Output is a fresh
+`results/gym/lunar_lander_slow_fast/student/` directory. Do not resume
+`particle/` or `residual/`. The trainer rejects a nonempty `out_dir`.
+
+### Eval
+
+Landings first, then mean steps among successes, on the shared seeds, against
+the `#18` baseline. A candidate is ineligible when landings fall, crashes
+rise, or out-of-bounds rises. `mean_episode_steps` includes crashes and is
+not the speed metric. Validation writes `best.pt` only for an eligible
+checkpoint. Test is a later `--split test` command. A toy `GATE PASS` is not
+this table.
 
 ## Paths
 
 | Role | Path |
 | --- | --- |
-| `#18` checkpoint | the file the failed run collected from |
+| `#18` checkpoint | `particle/best.pt`, or `particle_yue18_143320/best.pt` when that is the lander |
+| Fast teacher held file | `results/gym/lunar_lander_slow_fast/fast_teacher/held.pt` |
+| Progress pairs | `results/gym/lunar_lander_slow_fast/pairs_progress.npz` |
+| Student run | `results/gym/lunar_lander_slow_fast/student/` |
+| Stranger pairs, do not train | `pairs.npz` (archived to `pairs_stranger_do_not_train.npz`) |
 | Failed stranger outputs | `results/gym/lunar_lander_slow_fast/particle/` (do not resume) |
-| Stranger pairs, do not train | `results/gym/lunar_lander_slow_fast/pairs.npz` |
 | Eval report | `reports/gym/lunar_lander_slow_fast/README.md` |
 
-Collection seeds start at `591000`. Validation stays `391000–391019` and test
-stays `491000–491049`. Those eval seeds are refused as collection seeds.
-
-## Do not train the current pairs
-
-```bash
-python -u examples/slow_fast_paired_2d.py
-```
-
-That is the only command to run. The existing `pairs.npz` is stranger matching
-(`slow_seed != fast_seed`). `train_gym_slow_fast.py` raises before it writes
-a checkpoint. The next collector has to roll two teachers on the same seed,
-keep a pair only when both land, and align by progress. A different episode's
-nearest state is not that pair. Push the fast teacher's speed term until
-landings break, and leave crashed fast-teacher rows out of the file. After
-that collector exists, train with `adv_weight=1` and `safe_fast_weight=0`,
-and stop if landings fall.
-
-## Eval rule
-
-Report landings and mean steps among successes, both on the shared seeds,
-against the `#18` baseline. `mean_episode_steps` includes crashes and is not
-the speed metric. A candidate is ineligible when landings fall, crashes rise,
-or out-of-bounds rises. Validation selects an eligible checkpoint and writes
-`best.pt`. Test is a separate `--split test` command after that selection.
-A toy `GATE PASS` is not this table.
+Collection seeds start at `591000`. Fast-teacher probes start at `581000`.
+Validation stays `391000–391019` and test stays `491000–491049`.
 
 ## CPU smoke
 
@@ -98,6 +183,7 @@ python -u experiments/collect_slow_fast_lunar.py \
   --live-log /tmp/slow_fast_collect.log
 ```
 
-`tests/test_slow_fast_lunar.py` refuses a cross-seed pair file, then trains
-4 CPU steps on a same-seed copy. That copy is only a plumbing check. It is
-not a two-teacher Lunar collect and it is not a landing number.
+`tests/test_slow_fast_lunar.py` checks progress pairs, the stranger-name
+refusal, a 4-step residual student on those fake pairs, and a 2-step fast
+teacher on random states. The fast-teacher smoke log says it is not a Lunar
+landing.

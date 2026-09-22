@@ -16,8 +16,8 @@ Train: 2500 steps, `adv_weight=1`, `safe_fast_weight=0`. Shared-seed validation:
 | slow→fast @2500 | 0/20 | — | 18 |
 
 Eval selected none. Longer training was worse. These pairs are strangers
-(different episodes, nearest state). Do not train them. The trainer refuses
-`slow_seed != fast_seed`. Collect has to be reworked to two teachers, the same
-seed, a both-land gate, and progress alignment after
-`examples/slow_fast_paired_2d.py` prints GATE PASS. Commands are in
-[the experiment note](../../../docs/gym-slow-fast.md).
+(different episodes, nearest state). Do not train them. The collector now
+rolls two teachers on the same seed, keeps a pair only when both land, and
+aligns by progress `t/T`. Commands are in
+[the experiment note](../../../docs/gym-slow-fast.md). No new Lunar number is
+claimed here.

@@ -103,12 +103,15 @@ python -m unittest tests.test_slow_fast_paired
 
 ## Lunar path
 
-This gate must PASS before Lunar collect is reworked. The next collector
-rolls a safe teacher and a speed-biased teacher on the **same seed**, keeps a
-pair only when both land, and aligns by progress. Nearest-stranger pools stay
-out. Push the speed term until landings break; do not shrink the fast action
-by a fixed fraction, and do not train crashed fast-teacher rows.
+The gym collector follows this gate. A frozen `#18` safe teacher and a
+speed-biased fast teacher from the same spine roll the **same seed**. A pair
+is kept only when both land, and rows are aligned by progress `t/T`.
+Nearest-stranger pairing is disabled. The fast teacher's speed term is pushed
+until landings break; crashed episodes stay out of the file. Commands are in
+[gym-slow-fast.md](gym-slow-fast.md).
 
-The current gym pairs are the stranger arm. `train_gym_slow_fast.py` refuses
-`slow_seed != fast_seed`. The failed cuda:1 numbers are in
-[gym-slow-fast.md](gym-slow-fast.md). A PASS here is not a Lunar landing number.
+`train_gym_slow_fast.py` refuses `slow_seed != fast_seed`, `pairs.npz`, and
+any manifest that is not `progress_same_seed`. The failed cuda:1 numbers are
+in that note. A PASS here is not a Lunar landing number. The gym student
+still trains a 0.15 residual on frozen `#18`; the toy winner trained full
+weights.
