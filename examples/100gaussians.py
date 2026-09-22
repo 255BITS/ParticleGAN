@@ -59,7 +59,6 @@ from typing import Tuple
 
 import torch
 import torch.nn as nn
-import matplotlib.pyplot as plt
 
 # Allow `python examples/100gaussians.py` from anywhere.
 _REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -102,6 +101,8 @@ def save_fake_scatter(
     This keeps the visual trajectory consistent across training, which is
     ideal for making a video.
     """
+    import matplotlib.pyplot as plt
+
     generator.eval()
     prior.eval()
 
@@ -175,8 +176,16 @@ def train(
     particle_beta1: float = None,
     mog_metrics: bool = False,
     mog_pass_criteria=None,
+    reg_kappa: float = _RECIPE.reg_kappa,
+    metric_callback=None,
+    metric_interval: int = 250,
+    save_plots: bool = True,
 
 ):
+    if type(metric_interval) is not int or metric_interval <= 0:
+        raise ValueError("metric_interval must be a positive integer")
+    # Optional callbacks observe completed live/EMA updates. Their RNG use is
+    # isolated from training; they must not modify model weights or buffers.
     # Device / seeds
     if device_str is not None:
         device = torch.device(device_str)
@@ -206,7 +215,7 @@ def train(
         z_dim=z_dim, num_particles=num_particles, batch_size=batch_size,
         total_steps=epochs * steps_per_epoch, lr=lr, d_lr_mult=d_lr_mult,
         betas=(beta1, _RECIPE.betas[1]), loss_type=loss_type, gan_mode=gan_mode,
-        reg_arm=reg_arm, reg_coeff=reg_coeff, reg_every=reg_every, reg_method=reg_method,
+        reg_arm=reg_arm, reg_coeff=reg_coeff, reg_kappa=reg_kappa, reg_every=reg_every, reg_method=reg_method,
         prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
         lr_floor=lr_floor,
     )
@@ -271,13 +280,14 @@ def train(
         metric_path.write_text("")
 
     # Initial snapshot (untrained model).
-    save_fake_scatter(
-        ema_G,
-        ema_prior,
-        device,
-        str(out_path / f"samples_step_{0:06d}.png"),
-        real_samples=real_viz, fixed_eps=fixed_eps,
-    )
+    if save_plots:
+        save_fake_scatter(
+            ema_G,
+            ema_prior,
+            device,
+            str(out_path / f"samples_step_{0:06d}.png"),
+            real_samples=real_viz, fixed_eps=fixed_eps,
+        )
 
     total_steps = epochs * steps_per_epoch
     all_opts = tuple(opt for opt in (opt_G, opt_D, opt_prior) if opt is not None)
@@ -390,7 +400,8 @@ def train(
             # Logging / snapshots
             # -------------------------
             metric_due = mog_metrics and ((global_step + 1) % log_interval == 0 or global_step + 1 == total_steps)
-            maintenance = (global_step % log_interval == 0 or metric_due or
+            callback_due = metric_callback is not None and ((global_step + 1) % metric_interval == 0 or global_step + 1 == total_steps)
+            maintenance = (global_step % log_interval == 0 or metric_due or callback_due or
                            (global_step % snapshot_interval == 0 and global_step > 0))
             if maintenance:
                 synchronize()
@@ -420,7 +431,18 @@ def train(
                     stream.write(json.dumps(json_safe(row), allow_nan=False) + '\n')
                 print(f"[mog step {global_step+1:06d}] hq={row['hq']:.6f} width_ratio={row['width_ratio']:.4f} kl={row['kl_balance']} pass={row['passed']}", flush=True)
 
-            if global_step % snapshot_interval == 0 and global_step > 0:
+            if callback_due:
+                devices = [device.index if device.index is not None else torch.cuda.current_device()] if device.type == "cuda" else []
+                models = (G, prior, ema_G, ema_prior)
+                flags = [model.training for model in models]
+                try:
+                    with torch.random.fork_rng(devices=devices):
+                        metric_callback(global_step + 1, *models, train_seconds)
+                finally:
+                    for model, flag in zip(models, flags):
+                        model.train(flag)
+
+            if save_plots and global_step % snapshot_interval == 0 and global_step > 0:
                 save_fake_scatter(
                     ema_G,
                     ema_prior,
@@ -437,13 +459,14 @@ def train(
         synchronize()
         train_seconds += time.perf_counter() - block_start
         # End-of-epoch snapshot
-        save_fake_scatter(
-            ema_G,
-            ema_prior,
-            device,
-            str(out_path / f"samples_epoch_{epoch:04d}.png"),
-            real_samples=real_viz, fixed_eps=fixed_eps,
-        )
+        if save_plots:
+            save_fake_scatter(
+                ema_G,
+                ema_prior,
+                device,
+                str(out_path / f"samples_epoch_{epoch:04d}.png"),
+                real_samples=real_viz, fixed_eps=fixed_eps,
+            )
 
         synchronize()
         block_start = time.perf_counter()
@@ -469,6 +492,7 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
     parser.add_argument("--lr", type=float, default=_RECIPE.lr)
     parser.add_argument("--d_lr_mult", type=float, default=_RECIPE.d_lr_mult)
     parser.add_argument("--beta1", type=float, default=_RECIPE.betas[0])
+    parser.add_argument("--reg_kappa", type=float, default=_RECIPE.reg_kappa)
     parser.add_argument("--lambda_ep", type=float, default=_RECIPE.prior_reg)
     parser.add_argument(
         "--reg_arm",
@@ -556,6 +580,7 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         lambda_ep=args.lambda_ep,
         reg_arm=reg_arm,
         reg_coeff=reg_coeff,
+        reg_kappa=args.reg_kappa,
         reg_method=args.reg_method, reg_every=args.reg_every, reg_fd_eps=args.reg_fd_eps,
         reg_sync_stats=args.reg_sync_stats, fused_adam=args.fused_adam,
         fourier=args.fourier,

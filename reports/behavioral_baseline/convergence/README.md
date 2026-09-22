@@ -88,3 +88,28 @@ forgiving universal default.** Keep it as a measured regression reference;
 validate transfer on the actual 100-Gaussian task before choosing a public preset.
 Input units and preprocessing must be documented rather than hidden in a claim
 that the same penalty setting works for arbitrary data scales.
+
+## 4. Actual 100-Gaussian transfer
+
+The [matched GPU comparison](grid/README.md) runs the actual existing example,
+not the eight-mode host. Each arm gets 7,000 steps, 20,000 particles and batch 256
+on one RTX A6000, seed 0. Original metrics and source hashes are recorded.
+
+| Recipe | Live modes | Live HQ | Stable from / confirmed step | Training seconds | Live core-width ratio | SW1 |
+| --- | ---: | ---: | --- | ---: | ---: | ---: |
+| Stock | 100/100 | 98.21% | 6,000 / 7,000 | 65.4 | 0.934 | 0.144 |
+| Full toy transfer | 100/100 | 98.45% | 6,000 / 7,000 | 69.5 | 0.844 | 0.147 |
+| Penalty only | 100/100 | 98.25% | 6,000 / 7,000 | 66.7 | 1.009 | 0.132 |
+
+All three have five passing late observations; EMA also passes separately.
+The full transfer improves worst-tail HQ but does not reach sustained live
+quality earlier. Its cluster cores are narrower. Penalty-only has a core width
+closer to the target and lower SW1, with slightly worse mode balance. These are
+tradeoffs, not a uniform speed/quality win. Timings are individual measurements,
+not repeated throughput estimates. No seed sweep was performed.
+
+Keep the existing stock production defaults. Expose the full transfer as a named
+behavioral candidate, and make the common recipe easy to apply correctly in one
+training helper. The 100-Gaussian entry point now accepts the cap target and can
+record live/EMA metrics without plotting; a test confirms that an observer
+cannot perturb the short-run model updates through RNG consumption.

@@ -41,7 +41,7 @@ def recipe_defaults(name):
     defaults["beta1"] = recipe.betas[0]
     if name == "100gaussians":
         defaults.update(epochs=recipe.total_steps // 1000, steps_per_epoch=1000,
-                        lambda_ep=recipe.prior_reg, ema_decay=recipe.ema_decay)
+                        lambda_ep=recipe.prior_reg, ema_decay=recipe.ema_decay, reg_kappa=recipe.reg_kappa)
     elif name == "denoising":
         defaults.update(model=recipe.model, d_mode=recipe.conditioning,
                         classes=recipe.num_classes, ucd_target=recipe.ucd_target,
