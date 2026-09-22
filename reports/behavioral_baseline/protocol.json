@@ -4,6 +4,7 @@
   "device": "cpu",
   "threads": 1,
   "evaluation": "final live weights; EMA reported separately where implemented",
+  "ranking": "passed toys, passed bounds, live ring modes, HQ, effective modes; descending",
   "budgets": {
     "two_pole": 80,
     "trajectory": 400,
@@ -196,7 +197,7 @@
     "benchmarks/locked_shared/__init__.py": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f",
     "benchmarks/locked_shared/__main__.py": "e01d15aabdf845d79185a577c9fa2c1e38357ec81d9fe38d427f17a01bbd0dfe",
     "benchmarks/locked_shared/base_recipe.py": "0a392e47e8305005fa27047a04443d7958ab8bbb2bb0317bc4d1ae59d8f83dd7",
-    "benchmarks/locked_shared/baseline.py": "c992903f1f0d1439d9489fba50a851b0065f205a55912572aaa77dbf03fea334",
+    "benchmarks/locked_shared/baseline.py": "1eeff0e309ae670c9370b903ee999913d8aa63e43005950323ae68c033d88d9e",
     "benchmarks/locked_shared/default_selection.py": "9557ae7fa34f4a41397a389120a8d822e6ea15548c8fce60973204105a53777f",
     "benchmarks/locked_shared/host_reference.py": "030fdb5d6b4ec3d212d7786409475d8aaf024384db3d26548f250cfa765b6dfa",
     "benchmarks/locked_shared/hosts/__init__.py": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb",

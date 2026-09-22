@@ -64,13 +64,16 @@ GPU landings for that arm have not been run.
 ## Measured conceptmod verification
 
 The expanded [live-weight baseline](../reports/behavioral_baseline/README.md)
-trains each candidate on nine toys and requires all 29 numerical bounds. R1+R2
-at coefficient 0.1 passes all nine with live weights; the original locked
-settings pass seven, and removing particle L2 passes eight. Ten shared geometry
+trains each candidate on nine toys and requires all 29 numerical bounds. The
+leading `b_cap` candidate uses cap target 1.25, coefficient 3, no particle L2 and
+LR multiplier 0.85: all nine toys pass, with 8/8 live modes at 100% HQ. All five
+late ring checkpoints keep eight modes; four also meet 90% HQ. R1+R2 at
+coefficient 0.1 passes the original bounds with seven final modes. Ten shared geometry
 and application checks also pass and are shown separately. See the
 [protocol](../benchmarks/locked_shared/BASELINE.md) for config fields, fixed
 budgets, scope, and commands for comparing another approach. EMA cannot rescue a
-live failure. The passing R1+R2 row retains particle L2 0.02.
+live failure. The [search ledger](../reports/behavioral_baseline/search/README.md)
+also preserves failed and incomplete attempts.
 
 The leaderboard now exposes actual ring mode counts, HQ, effective modes and
 late-checkpoint stability. Its original regression threshold permits 7/8 modes;

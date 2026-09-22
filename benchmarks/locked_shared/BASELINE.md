@@ -88,6 +88,12 @@ Candidates are JSON objects with a unique `name` and optional fields below.
 Unspecified fields use the locked-host defaults, regardless of the name. The
 checked-in [configs](../../reports/behavioral_baseline/configs.json) contain the
 fully resolved values. Unknown fields are rejected to catch misspelled settings.
+The [leading config](../../reports/behavioral_baseline/leading_config.json)
+selects the best completed candidate from the recorded search; use it with
+`--configs` for a single-candidate rerun. The [search ledger](../../reports/behavioral_baseline/search/README.md)
+retains all screening failures and untested metrics. The main comparison combines
+only completed nine-host rows with identical source/protocol/runtime fingerprints;
+each row links to its original artifact and its SHA-256 is preserved.
 
 | Field | Default | Applied to |
 | --- | ---: | --- |
