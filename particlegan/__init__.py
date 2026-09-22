@@ -7,6 +7,7 @@ from .conditioning import UCD, ucd_labels, ucd_loss, ucd_scores
 from .diffusion import DDGAN
 from .gan_loss import GANLoss
 from .grad_regularizers import GradientPenalty
+from .locked_shared import LOCKED_SHARED, locked_adv_defaults, make_b_cap, make_gan_loss
 from .particle_prior import GaussianPrior, MoGParticlePrior, ParticlePrior
 from .recipes import Recipe, get_recipe, learning_rate_scale
 from .vicreg_loss import ParticleRegularizer
@@ -16,4 +17,5 @@ __all__ = [
     "ParticlePrior", "MoGParticlePrior", "GaussianPrior", "GANLoss", "GradientPenalty",
     "ParticleRegularizer", "DDGAN", "UCD", "ucd_labels", "ucd_loss", "ucd_scores",
     "Recipe", "get_recipe", "learning_rate_scale",
+    "LOCKED_SHARED", "locked_adv_defaults", "make_gan_loss", "make_b_cap",
 ]
