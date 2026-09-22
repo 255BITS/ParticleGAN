@@ -1,6 +1,6 @@
 # Behavioral baseline — live weights
 
-**Latest result: delayed cosine decay makes the cap candidate sustain all nine
+**Supported baseline: delayed cosine decay makes the cap candidate sustain all nine
 behavioral toys, with 8/8 ring modes and 100% final HQ.**
 Read the [convergence study](convergence/README.md) for the current comparison,
 [resolved candidate](convergence/leading_config.json),
@@ -13,6 +13,13 @@ and [actual 100-Gaussian results](convergence/grid/README.md).
 | R1+R2 0.1 | 29/29 | 8/9 | 7/8 / 100% |
 | Cap 1.25, coeff 3, LR ×0.85, original schedules | 29/29 | 8/9 | 8/8 / 100% |
 | **Same cap + cosine from 60%, floor 5%** | **29/29** | **9/9** | **8/8 / 100%** |
+| Learned gradient feedback + same cosine | 29/29 | 9/9 | 8/8 / 100% |
+
+The [expanded smart-descent leaderboard](../smart_descent/README.md) compares
+learned LR/regularization control, direct fitting without cosine, plain SGD and
+per-tensor gradient descent. The learned addition improves mean normalized
+confirmation by 2.36%, but the ring confirms later (1,150 versus 1,050) and there
+is no established wall-time speedup. Cosine remains the supported baseline.
 
 Sustained means at least five consecutive final passing observations in a
 complete 24-point curve, with no later observed failure. It adds a full-coverage

@@ -5,6 +5,11 @@ measure convergence, test schedules, measure sensitivity, validate on the actual
 100-Gaussian task, then expose the supported recipe through the public API.
 All experiments use seed 0. Live weights determine success; EMA stays separate.
 
+The later [smart-descent experiments](../../smart_descent/README.md) add a learned
+feedback candidate that also sustains all nine toys. They report its speed
+tradeoff, fresh transfer, feedback ablations, and unsuccessful attempts to
+replace cosine or Adam. Production defaults remain unchanged.
+
 ## 1. Measure convergence
 
 The [measurement comparison](measurement/README.md) reruns the original locked

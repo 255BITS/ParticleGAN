@@ -1,5 +1,11 @@
 # Learned GAN LR controller — initial study
 
+**Continuation:** the [expanded smart-descent study](../smart_descent/README.md)
+fits gradient feedback on the full development suite, tests direct schedule
+replacement and raw-gradient descent, and reserves new transfer cases. Its
+cosine-backed candidate passes all 29 live bounds and sustains all nine toys.
+The initial experiment below is preserved as originally measured.
+
 This is a trained, runnable research controller. A 12-weight linear network was fitted on a four-mode ring and a nine-mode grid; all nine behavioral hosts and the evaluation tasks below were held out from fitting. Fitting and ring comparisons use 1,200 updates. The full suite preserves each host's original 80–1,200 update budget. All runs use seed 0 and live scoring; EMA is recorded separately.
 
 The frozen controller improves the fitting objective by 10.4% relative to cosine, but fails all three held-out coverage/HQ tasks. Zeroing its feedback inputs slightly improves the fitting objective, so this experiment does not establish a benefit from feedback over a learned time schedule. Cosine remains the stronger ring baseline.
