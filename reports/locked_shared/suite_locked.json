@@ -1,0 +1,156 @@
+{
+  "candidate": "locked_shared",
+  "conceptmod_commit": "5571213f5e8e129cfda45c785c3f30aad9c1d8c9",
+  "python": "3.12.13",
+  "torch": "2.13.0+cu126",
+  "peft": "0.21.0",
+  "cells": [
+    {
+      "config": "locked_shared",
+      "toy": "locked_shared_floor",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "demo LOCKED stamp"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "leaderboard_honesty",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "locked_shared won; declared negatives failed"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "shared_trajectory",
+      "kind": "stamp",
+      "verdict": "FAIL",
+      "reason": "identity_mse=0.23389"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "residual_student",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "identity_mse=0.00219 success=1.000"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "orbit_hold",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "radius hold"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "unipolar",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "locked_rpgan"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "ae_gan_hold",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "locked AE-GAN hold"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "cover_leftover",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "demo cover + faithful guard"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "erase_keep_backend",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "cpu locked geometry"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "particle_posture",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "locked_tiny n=12"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "mode_hold",
+      "kind": "stamp",
+      "verdict": "FAIL",
+      "reason": "modes=3 HQ=0.494873046875"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "late_collapse",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "val gate exports good checkpoint"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "keep_critic",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "frozen host + demo stamp"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "lm_target",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "trajectory"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "field_lift",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "locked_2d+locked_lift"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "unused_token_hold",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "unused hold"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "path_suffix_lora",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "locked_suffix+locked_regex"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "mid_scale_identity",
+      "kind": "stamp",
+      "verdict": "PASS",
+      "reason": "locked mid-scale grid"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "dsl_macro_expand",
+      "kind": "dsl",
+      "verdict": "PASS",
+      "reason": "documented triple + negatives"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "dsl_phrase_jobs",
+      "kind": "dsl",
+      "verdict": "PASS",
+      "reason": "documented phrases + negatives"
+    },
+    {
+      "config": "locked_shared",
+      "toy": "dsl_game_geometry",
+      "kind": "dsl",
+      "verdict": "PASS",
+      "reason": "locked game + geometric right"
+    }
+  ]
+}

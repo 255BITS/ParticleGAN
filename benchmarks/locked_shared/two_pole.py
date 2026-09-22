@@ -91,9 +91,10 @@ def cell_wins(mean_abs: float, grad_med: float) -> bool:
     return mean_abs >= TRAVEL_MIN and grad_med <= GRAD_MED_MAX
 
 
-def train(*, pairing="live", gan_factory=None, cap_factory=None) -> dict:
+def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=None) -> dict:
     """Run the original 80-step cloud experiment, including stranger arms."""
     torch.manual_seed(TOY_SEED)
+    particle_l2 = LOCKED_SHARED.particle_l2 if particle_l2 is None else particle_l2
     critic = HostCritic()
     particles = nn.Parameter(torch.zeros(LOCKED_SHARED.n_particles, 1))
     opt_d = torch.optim.Adam(critic.parameters(), lr=TOY_LR, betas=TOY_BETAS)
@@ -113,7 +114,7 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None) -> dict:
         d_real = critic(real).detach()
         paired = critic(particles) if pairing == "live" else critic(stranger)
         g_loss = gan.g_loss(paired, d_real)
-        g_loss = g_loss + LOCKED_SHARED.particle_l2 * particles.square().mean()
+        g_loss = g_loss + particle_l2 * particles.square().mean()
         g_loss.backward()
         opt_p.step()
 

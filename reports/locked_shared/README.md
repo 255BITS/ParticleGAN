@@ -1,5 +1,7 @@
 # Locked shared: measured behavior
 
+Follow-up: [existing-formulation comparison](comparison.md) and [original locked_shared suite row](suite_locked.md).
+
 **locked_shared meets 1/3 behavioral targets in this run.**
 
 Every row trains. Verdicts use measured outputs only; no configuration gates.

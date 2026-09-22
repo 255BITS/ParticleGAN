@@ -1,0 +1,512 @@
+{
+  "torch": "2.13.0+cu126",
+  "seed": 0,
+  "host": "Original 8-mode ring, 96-wide host MLPs, original initialization/evaluation; stock recipe supplies prior, losses, optimizers, EMA and LR schedule.",
+  "rows": [
+    {
+      "recipe": {
+        "name": "gan",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 1200,
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 10.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 1.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "ring": {
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.83056640625,
+        "cover": 1.0,
+        "effective_modes": 7.883747577667236,
+        "step": 1200,
+        "seed": 0,
+        "verdict": "INCONCLUSIVE",
+        "live": {
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.9150390625,
+          "cover": 1.0,
+          "effective_modes": 7.892080307006836,
+          "verdict": "PASS"
+        },
+        "curve": [
+          {
+            "modes": 2,
+            "n_modes": 8,
+            "hq": 0.00048828125,
+            "cover": 0.25,
+            "effective_modes": 2.0,
+            "step": 200,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.0146484375,
+            "cover": 1.0,
+            "effective_modes": 5.613036155700684,
+            "step": 400,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.06884765625,
+            "cover": 1.0,
+            "effective_modes": 7.6730265617370605,
+            "step": 600,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.440185546875,
+            "cover": 1.0,
+            "effective_modes": 7.905896186828613,
+            "step": 800,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.64990234375,
+            "cover": 1.0,
+            "effective_modes": 7.859059810638428,
+            "step": 1000,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.83056640625,
+            "cover": 1.0,
+            "effective_modes": 7.883747577667236,
+            "step": 1200,
+            "seed": 0
+          }
+        ]
+      }
+    },
+    {
+      "recipe": {
+        "name": "gan",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 10.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 1.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "ring": {
+        "modes": 8,
+        "n_modes": 8,
+        "hq": 0.99658203125,
+        "cover": 1.0,
+        "effective_modes": 7.954854965209961,
+        "step": 7000,
+        "seed": 0,
+        "verdict": "PASS",
+        "live": {
+          "modes": 8,
+          "n_modes": 8,
+          "hq": 0.990478515625,
+          "cover": 1.0,
+          "effective_modes": 7.952311992645264,
+          "verdict": "PASS"
+        },
+        "curve": [
+          {
+            "modes": 2,
+            "n_modes": 8,
+            "hq": 0.00048828125,
+            "cover": 0.25,
+            "effective_modes": 2.0,
+            "step": 200,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.0146484375,
+            "cover": 1.0,
+            "effective_modes": 5.613036155700684,
+            "step": 400,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.06884765625,
+            "cover": 1.0,
+            "effective_modes": 7.6730265617370605,
+            "step": 600,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.43994140625,
+            "cover": 1.0,
+            "effective_modes": 7.906565189361572,
+            "step": 800,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.649169921875,
+            "cover": 1.0,
+            "effective_modes": 7.858100414276123,
+            "step": 1000,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.837158203125,
+            "cover": 1.0,
+            "effective_modes": 7.898947715759277,
+            "step": 1200,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.926025390625,
+            "cover": 1.0,
+            "effective_modes": 7.898341178894043,
+            "step": 1400,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.9697265625,
+            "cover": 1.0,
+            "effective_modes": 7.926868915557861,
+            "step": 1600,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.98095703125,
+            "cover": 1.0,
+            "effective_modes": 7.937122821807861,
+            "step": 1800,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.988037109375,
+            "cover": 1.0,
+            "effective_modes": 7.940516471862793,
+            "step": 2000,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.991455078125,
+            "cover": 1.0,
+            "effective_modes": 7.944688320159912,
+            "step": 2200,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.993408203125,
+            "cover": 1.0,
+            "effective_modes": 7.948511600494385,
+            "step": 2400,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.99462890625,
+            "cover": 1.0,
+            "effective_modes": 7.950805187225342,
+            "step": 2600,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.995849609375,
+            "cover": 1.0,
+            "effective_modes": 7.950881004333496,
+            "step": 2800,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.997802734375,
+            "cover": 1.0,
+            "effective_modes": 7.951045989990234,
+            "step": 3000,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.997314453125,
+            "cover": 1.0,
+            "effective_modes": 7.9520182609558105,
+            "step": 3200,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.998046875,
+            "cover": 1.0,
+            "effective_modes": 7.95128059387207,
+            "step": 3400,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.998046875,
+            "cover": 1.0,
+            "effective_modes": 7.951277256011963,
+            "step": 3600,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.997802734375,
+            "cover": 1.0,
+            "effective_modes": 7.952239990234375,
+            "step": 3800,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.998046875,
+            "cover": 1.0,
+            "effective_modes": 7.953030586242676,
+            "step": 4000,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.995361328125,
+            "cover": 1.0,
+            "effective_modes": 7.955574035644531,
+            "step": 4200,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.995361328125,
+            "cover": 1.0,
+            "effective_modes": 7.955399513244629,
+            "step": 4400,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.99462890625,
+            "cover": 1.0,
+            "effective_modes": 7.956402778625488,
+            "step": 4600,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.99609375,
+            "cover": 1.0,
+            "effective_modes": 7.954583644866943,
+            "step": 4800,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.997802734375,
+            "cover": 1.0,
+            "effective_modes": 7.95348596572876,
+            "step": 5000,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.9970703125,
+            "cover": 1.0,
+            "effective_modes": 7.954187393188477,
+            "step": 5200,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.9970703125,
+            "cover": 1.0,
+            "effective_modes": 7.954187393188477,
+            "step": 5400,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.997314453125,
+            "cover": 1.0,
+            "effective_modes": 7.953958034515381,
+            "step": 5600,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.9970703125,
+            "cover": 1.0,
+            "effective_modes": 7.954187393188477,
+            "step": 5800,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.998046875,
+            "cover": 1.0,
+            "effective_modes": 7.953243255615234,
+            "step": 6000,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.99755859375,
+            "cover": 1.0,
+            "effective_modes": 7.953722953796387,
+            "step": 6200,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.99755859375,
+            "cover": 1.0,
+            "effective_modes": 7.954235076904297,
+            "step": 6400,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.99755859375,
+            "cover": 1.0,
+            "effective_modes": 7.954225540161133,
+            "step": 6600,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.997314453125,
+            "cover": 1.0,
+            "effective_modes": 7.954221725463867,
+            "step": 6800,
+            "seed": 0
+          },
+          {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 0.99658203125,
+            "cover": 1.0,
+            "effective_modes": 7.954854965209961,
+            "step": 7000,
+            "seed": 0
+          }
+        ]
+      }
+    }
+  ]
+}

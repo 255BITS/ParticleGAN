@@ -61,3 +61,29 @@ This is a selected behavioral leaderboard, not the original suite's mix of
 configuration checks, geometry checks and DSL claims. There is no score for
 untested variant/toy combinations and no seed sweep. See the checked-in
 [results](../../reports/locked_shared/README.md) for the actual verdicts.
+
+## Full reference row and formulation comparisons
+
+The optional `suite_reference` audit calls only the original `locked_shared`
+row and excludes cover-posture columns. It needs the reference project's
+dependencies, including PEFT 0.21 for its LoRA-path toy. Its original scorer
+results are recorded separately from the extracted behavioral leaderboard:
+
+```bash
+python -m benchmarks.locked_shared.suite_reference --reference /path/to/conceptmod
+```
+
+The [comparison report](../../reports/locked_shared/comparison.md) tests
+existing GAN losses, penalties and host regularization choices on the same
+seed and budgets. It includes separate stock-recipe ring runs with 20,000
+particles and explicitly labels the longer 7,000-step budget. Commands and
+raw measurements are linked there. `investigate --resume` reuses completed
+ring runs and fills missing diagnostics; all training variants can also be
+reproduced from scratch.
+
+Optional diagnostics record live versus EMA ring quality, learning curves,
+trajectory nearest-target assignments and critic slopes. They do not alter
+the default losses or reference comparison. The ring host accepts Ra as well
+as Rp real logits for the comparison, and an optional stock `Recipe` can
+supply its prior, optimizer groups and learning-rate schedule. Production
+`particlegan` modules are unchanged.

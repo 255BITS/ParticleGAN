@@ -96,6 +96,7 @@ def markdown(report):
     locked = [r for r in rows if r["arm"] == "locked_shared"]
     passed = sum(r["verdict"] == "PASS" for r in locked)
     lines = ["# Locked shared: measured behavior", "",
+             "Follow-up: [existing-formulation comparison](comparison.md) and [original locked_shared suite row](suite_locked.md).", "",
              f"**locked_shared meets {passed}/{len(locked)} behavioral targets in this run.**", "",
              "Every row trains. Verdicts use measured outputs only; no configuration gates.", "",
              "| Toy | Variant | Measurement | Result | conceptmod parity |",

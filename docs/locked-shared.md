@@ -73,3 +73,8 @@ negative controls. That establishes builder/extraction parity. It does not
 reproduce the original all-pass claim: two-pole passes, trajectory fails,
 and the ring result is inconclusive. See the table for metrics, provenance
 and [reproduction commands](../benchmarks/locked_shared/SOURCE.md).
+
+The [follow-up comparison](../reports/locked_shared/comparison.md) finds that
+removing the host particle L2 term clears all three measured targets while
+keeping RpGAN and `b_cap`. Other existing formulations have tradeoffs. This
+is recorded as an experimental candidate; it does not change the stamp.

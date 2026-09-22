@@ -130,7 +130,7 @@ def _cover(fake: torch.Tensor, real: torch.Tensor) -> torch.Tensor:
     return torch.cdist(real, fake).min(dim=1).values.square().mean()
 
 
-def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None) -> dict:
+def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None, diagnostics=False) -> dict:
     """Train and measure identity error; every pairing is allowed."""
     torch.set_num_threads(1)
     torch.manual_seed(PROTOCOL["seed"])
@@ -187,8 +187,24 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None) -> dic
         pred = generator(slow, prior.z)
         mse = identity_mse(pred, fast)
         paired_mse = identity_mse(pred, paired)
-    return {
+    result = {
         "identity_mse": mse,
         "paired_target_mse": paired_mse,
         "verdict": "PASS" if passed(mse) else "FAIL",
     }
+    if diagnostics:
+        with torch.no_grad():
+            distances = torch.cdist(pred, fast)
+            result["set_cover"] = float(_cover(pred, fast))
+            result["own_nearest_fraction"] = float((distances.argmin(1) == torch.arange(len(fast))).float().mean())
+            result["particle_mean_square"] = float(prior.z.square().mean())
+            result["particle_std_mean"] = float(prior.z.std(0).mean())
+        norms = []
+        for batch in (paired, pred):
+            point = batch.detach().requires_grad_(True)
+            grad = torch.autograd.grad(view(point).sum(), point)[0]
+            norms.append(grad.norm(dim=1).detach())
+        norms = torch.cat(norms)
+        result["critic_gradient_median"] = float(norms.median())
+        result["critic_gradient_max"] = float(norms.max())
+    return result
