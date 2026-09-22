@@ -9,6 +9,18 @@ The MIT notice is retained in [LICENSE](LICENSE).
 | `two_pole.py` | `leaderboard_honesty.py` | Stored host weights, live/stranger training, 80 steps, travel and slope thresholds |
 | `trajectory.py` | `shared_trajectory.py` | Arcs, models, full loss, 400 steps, shared/stranger/nearest pairing, identity MSE threshold |
 | `mode_hold.py` + `mlp.py` | `mode_hold.py` + `mlp.py` | Ring data, models, full loss, EMA, 1,200 steps, coverage/HQ thresholds |
+| `hosts/residual_student.py` | `residual_student.py` | Conditional residual head, landing objective and all three measured landing/identity bounds |
+| `hosts/unipolar.py` | `unipolar.py` | Positive-pole training, neutral hold, leakage and coverage |
+| `hosts/ae_gan_hold.py` | `ae_gan_hold.py` | AE encoder/decoder training, reconstruction and unconditional hold |
+| `hosts/cover_leftover.py` | `cover_leftover.py` | Guarded teacher, particles, live/EMA residual geometry and all six bounds |
+| `hosts/unused_token_hold.py` | `unused_token_hold.py` | Slot student, concept training and unused-slot hold |
+| `hosts/mid_scale_identity.py` | `mid_scale_identity.py` | Four-scale training, polarity/magnitude and identity checks |
+
+The additional hosts remove formulation refusals and unused config gate code;
+their models, random draws, budgets and numerical training operations remain.
+`host_reference.py` pins the original hashes and checks default numerical parity.
+The expanded [baseline protocol](BASELINE.md) defines the full scope and explains
+which application checks remain in the reference repository.
 
 Changes: remove configuration equality/refusal gates, reporting requirements,
 source-local logging and caches; inject `make_gan_loss()` and `make_b_cap()`

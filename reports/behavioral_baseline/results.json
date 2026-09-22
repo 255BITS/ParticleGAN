@@ -1,0 +1,2956 @@
+{
+  "protocol": {
+    "version": "behavior-v1",
+    "seed": 0,
+    "device": "cpu",
+    "threads": 1,
+    "evaluation": "final live weights; EMA reported separately where implemented",
+    "budgets": {
+      "two_pole": 80,
+      "trajectory": 400,
+      "residual_student": 400,
+      "unipolar": 400,
+      "ae_gan_hold": 250,
+      "cover_leftover": 800,
+      "unused_token_hold": 200,
+      "mid_scale_identity": 800,
+      "mode_hold": 1200
+    },
+    "metrics": {
+      "two_pole": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ],
+      "trajectory": [
+        [
+          "identity_mse",
+          "<=",
+          0.02
+        ]
+      ],
+      "residual_student": [
+        [
+          "identity_mse",
+          "<=",
+          0.02
+        ],
+        [
+          "success_rate",
+          ">=",
+          1.0
+        ],
+        [
+          "wrong_pad_rate",
+          "<=",
+          0.0
+        ]
+      ],
+      "unipolar": [
+        [
+          "cover",
+          ">=",
+          0.85
+        ],
+        [
+          "off_caption",
+          "<=",
+          0.05
+        ],
+        [
+          "neu_hold",
+          ">=",
+          0.85
+        ]
+      ],
+      "ae_gan_hold": [
+        [
+          "recon_mse",
+          "<=",
+          0.05
+        ],
+        [
+          "hold",
+          "<=",
+          0.35
+        ]
+      ],
+      "cover_leftover": [
+        [
+          "u_kept",
+          ">=",
+          0.85
+        ],
+        [
+          "content_kept",
+          ">=",
+          0.75
+        ],
+        [
+          "leak_ratio",
+          "<=",
+          0.2
+        ],
+        [
+          "pole_rel_err_plus",
+          "<=",
+          0.2
+        ],
+        [
+          "pole_rel_err_minus",
+          "<=",
+          0.2
+        ],
+        [
+          "same_dir",
+          "<=",
+          0.25
+        ]
+      ],
+      "unused_token_hold": [
+        [
+          "unused_hold",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_move",
+          ">=",
+          0.85
+        ]
+      ],
+      "mid_scale_identity": [
+        [
+          "concept_cos_plus",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_cos_minus",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_mag_plus",
+          ">=",
+          0.75
+        ],
+        [
+          "concept_mag_plus",
+          "<=",
+          1.25
+        ],
+        [
+          "concept_mag_minus",
+          ">=",
+          0.75
+        ],
+        [
+          "concept_mag_minus",
+          "<=",
+          1.25
+        ],
+        [
+          "identity_at_0",
+          ">=",
+          0.85
+        ],
+        [
+          "identity_at_mid",
+          ">=",
+          0.85
+        ]
+      ],
+      "mode_hold": [
+        [
+          "modes",
+          ">=",
+          7
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ]
+    },
+    "shared_checks": [
+      "orbit_hold",
+      "erase_keep_backend",
+      "late_collapse",
+      "keep_critic",
+      "lm_target",
+      "field_lift",
+      "path_suffix_lora",
+      "dsl_macro_expand",
+      "dsl_phrase_jobs",
+      "dsl_game_geometry"
+    ],
+    "source_sha256": {
+      "benchmarks/locked_shared/__init__.py": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f",
+      "benchmarks/locked_shared/__main__.py": "e01d15aabdf845d79185a577c9fa2c1e38357ec81d9fe38d427f17a01bbd0dfe",
+      "benchmarks/locked_shared/base_recipe.py": "0a392e47e8305005fa27047a04443d7958ab8bbb2bb0317bc4d1ae59d8f83dd7",
+      "benchmarks/locked_shared/baseline.py": "caa8edd74178399e7ac43dd2d327e21a7c19d0190b4f4ba007abd237e5a2d94c",
+      "benchmarks/locked_shared/host_reference.py": "030fdb5d6b4ec3d212d7786409475d8aaf024384db3d26548f250cfa765b6dfa",
+      "benchmarks/locked_shared/hosts/__init__.py": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb",
+      "benchmarks/locked_shared/hosts/ae_gan_hold.py": "8dadaa83b7e0f2133d7a58d831a0e89a334f36411f2890cb488bcb167f81e415",
+      "benchmarks/locked_shared/hosts/cover_leftover.py": "9a7e66cabc752340565f4214c8a98cf6a56a05fcc8fe184ac1a24a9d672c3b47",
+      "benchmarks/locked_shared/hosts/mid_scale_identity.py": "b36acb499fa5952c09bbf12dd20a0a5d395d7549f6c8837dc7cee01bf9470409",
+      "benchmarks/locked_shared/hosts/residual_student.py": "3664eb8f821c80eb51dc1688c284ee56c2cc1841cec34207d6530bbe46725f54",
+      "benchmarks/locked_shared/hosts/unipolar.py": "a376b0e981d8ed6e7ab563ccd44cb10f21e8419ebf7cffe1bcc9d6b857c6e93f",
+      "benchmarks/locked_shared/hosts/unused_token_hold.py": "82f5446ac1a6dbcc304ad8d0eb48030c3166d205f244a2777e15ca0dfa451da5",
+      "benchmarks/locked_shared/investigate.py": "c9e7e3f365e99b5a99baa0a3119abee0d833035a29e968c7258fad75d23f2b37",
+      "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "benchmarks/locked_shared/mode_hold.py": "b5a7cec066e3f2a2d2f596583fd1798123ec80cef6ab9005a849e8bfb7bf27fc",
+      "benchmarks/locked_shared/reference.py": "a97933b31a240822fc5535979a1e84bb884472a69b702808484257cff46cfbef",
+      "benchmarks/locked_shared/run.py": "5b2a54935b08dd5250a9bf82159e2d86880e89daa23b87281ee61daa6e3bea3d",
+      "benchmarks/locked_shared/shared_checks.py": "2ca7fe501a12193cf337bb6a9a470ccf02ce108a338afab57c686c46234f3fa5",
+      "benchmarks/locked_shared/suite_reference.py": "8bd939b18a9ff771846326d49b025ad4590ed3534d0749ae928c3ea1d0e8fe3f",
+      "benchmarks/locked_shared/summarize.py": "4a5585a310aa4f093269fe186252440ffa7d187f5e6c9e72a6324456b037b21c",
+      "benchmarks/locked_shared/trajectory.py": "4de4526d23de522d460bd92848be6fa673bff8d3f45c28cfd9d9927ddfb171bb",
+      "benchmarks/locked_shared/two_pole.py": "8b9649e61a8f616511761b874bc5af074f9413c27f12b7d1439f08a868c5c79d",
+      "particlegan/__init__.py": "3b9116013435c77f91f94cd02184dd591d27a87d456c8ed981b0a7ac02c95fa8",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+      "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "particlegan/grad_regularizers.py": "45fb38532b4d0e6fa3b8483fdf18b3c822055363e68dbee4fc8e6222dabb19c6",
+      "particlegan/locked_shared.py": "51fb6d90f4dc0ba859756bb427653b5a276b29e1d96fd466a871c7d7642a560d",
+      "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+      "particlegan/recipes.py": "33ea97c94f4dd79ee2c5451cdf9e9ce98272921d71a300918258e8df3e6a88bc",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    "torch": "2.13.0+cu126",
+    "python": "3.12.13"
+  },
+  "protocol_sha256": "08819a4caba0de139f2bdd27cba6e5114f5052d805880dd172badf621f897ba2",
+  "created_at": "2026-09-22T14:49:41.774455+00:00",
+  "rows": [
+    {
+      "config": {
+        "name": "locked_shared",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.02,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0
+      },
+      "config_sha256": "db725ec6a79aa9db8e0a202037d9be048dd98876bb8d72109d96adafa5b82d09",
+      "toys": {
+        "two_pole": {
+          "live": {
+            "mean_abs": 0.5143721103668213,
+            "grad_med": 0.41965192556381226
+          },
+          "raw": {
+            "mean_abs": 0.5143721103668213,
+            "grad_med": 0.41965192556381226,
+            "nearest": 0.4856279194355011,
+            "cover_score": 0.7715581208467484,
+            "verdict": "PASS"
+          },
+          "seconds": 1.0972182330442593
+        },
+        "trajectory": {
+          "live": {
+            "identity_mse": 0.2338901311159134
+          },
+          "raw": {
+            "identity_mse": 0.2338901311159134,
+            "paired_target_mse": 0.2338901311159134,
+            "verdict": "FAIL",
+            "set_cover": 0.0771372839808464,
+            "own_nearest_fraction": 0.5,
+            "particle_mean_square": 0.09695816040039062,
+            "particle_std_mean": 0.3229982852935791,
+            "critic_gradient_median": 0.9101542830467224,
+            "critic_gradient_max": 1.269986867904663
+          },
+          "seconds": 1.0795749260578305
+        },
+        "residual_student": {
+          "live": {
+            "identity_mse": 0.0021875102538615465,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          "raw": {
+            "event": "done",
+            "family": "residual_student",
+            "pairing": "shared",
+            "both_land_rows": 12,
+            "identity_mse": 0.0021875102538615465,
+            "paired_target_mse": 0.0021875102538615465,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0,
+            "endpoint_l2": 0.07861560583114624,
+            "pass": true,
+            "pass_identity_mse": 0.02,
+            "success_min": 1.0,
+            "land_tol": 0.25,
+            "slow_impact_max": 0.1,
+            "residual_weight": 1.0,
+            "fm_weight": 0.0,
+            "cover_weight": 1.5,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_norm": "l2",
+            "n_particles": 12,
+            "particle_l2": 0.02,
+            "vicreg_weight": 0.05,
+            "steps": 400,
+            "seed": 0
+          },
+          "seconds": 1.1120144110172987
+        },
+        "unipolar": {
+          "live": {
+            "cover": 0.9606202907704642,
+            "off_caption": 3.867536352114723e-06,
+            "neu_hold": 0.9634362608194351
+          },
+          "raw": {
+            "cover": 0.9606202907704642,
+            "off_caption": 3.867536352114723e-06,
+            "neu_hold": 0.9634362608194351,
+            "cos_plus": 0.9998966455459595,
+            "mag_ratio": 1.0392804145812988,
+            "half_norm_ratio": 0.4842722326699871,
+            "hit": true,
+            "canary": {
+              "scored": false,
+              "landed": "neg",
+              "cos_plus": -0.8914045095443726,
+              "cos_neg": 0.8914045095443726,
+              "off_caption": 0.0018937120545744683,
+              "dangerous": false
+            },
+            "arm": "locked_rpgan",
+            "steps": 400,
+            "seed": 0,
+            "polarity": 1.0,
+            "fm_weight": 0.0,
+            "cover_weight": 0.0,
+            "gan_mode": "rp",
+            "loss_type": "logistic",
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_norm": "l2",
+            "reg_lazy": 1,
+            "reg_anneal": "none",
+            "reg_is_gradient_penalty": true,
+            "origin_norm": 0.03656373918056488,
+            "odd_norm": 0.5361109375953674,
+            "even_norm": 0.5361109375953674,
+            "history": [
+              {
+                "cover": 0.0149999990150943,
+                "off_caption": 0.3214294975441988,
+                "neu_hold": 0.9900000067427754,
+                "cos_plus": 0.566947877407074,
+                "mag_ratio": 0.02645745687186718,
+                "half_norm_ratio": 0.6546548533609252,
+                "hit": false,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.5000002980232239,
+                  "cos_neg": -0.5000002980232239,
+                  "off_caption": 0.24999992474032964,
+                  "dangerous": true
+                },
+                "step": 1,
+                "g_loss": 0.7399747371673584,
+                "d_loss": 0.6947054862976074
+              },
+              {
+                "cover": 0.718675952448919,
+                "off_caption": 5.6770177778948105e-05,
+                "neu_hold": 0.8334875255823135,
+                "cos_plus": 0.999947726726532,
+                "mag_ratio": 0.7187135219573975,
+                "half_norm_ratio": 0.6157389791940554,
+                "hit": false,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9991220831871033,
+                  "cos_neg": -0.9991220831871033,
+                  "off_caption": 0.001395836394847376,
+                  "dangerous": true
+                },
+                "step": 50,
+                "g_loss": 0.9354475736618042,
+                "d_loss": 0.515997052192688
+              },
+              {
+                "cover": 0.9431618391633023,
+                "off_caption": 6.091940972893896e-06,
+                "neu_hold": 0.8744007796049118,
+                "cos_plus": 0.9999969601631165,
+                "mag_ratio": 1.0568352937698364,
+                "half_norm_ratio": 0.5594200336878292,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9999423623085022,
+                  "cos_neg": -0.9999423623085022,
+                  "off_caption": 4.577772564721951e-05,
+                  "dangerous": true
+                },
+                "step": 100,
+                "g_loss": 0.7428485155105591,
+                "d_loss": 0.6515434980392456
+              },
+              {
+                "cover": 0.9599407866748209,
+                "off_caption": 7.254599519728247e-06,
+                "neu_hold": 0.9690781626850367,
+                "cos_plus": 0.999994158744812,
+                "mag_ratio": 1.0400536060333252,
+                "half_norm_ratio": 0.48529491660432517,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "neg",
+                  "cos_plus": -0.9891183972358704,
+                  "cos_neg": 0.9891183972358704,
+                  "off_caption": 0.006439751034328913,
+                  "dangerous": false
+                },
+                "step": 150,
+                "g_loss": 0.6810510158538818,
+                "d_loss": 0.706047534942627
+              },
+              {
+                "cover": 0.973248606467422,
+                "off_caption": 0.00025565378173736473,
+                "neu_hold": 0.9832202401012182,
+                "cos_plus": 0.9996659755706787,
+                "mag_ratio": 0.9735738039016724,
+                "half_norm_ratio": 0.5055682803163538,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.6376792788505554,
+                  "cos_neg": -0.6376792788505554,
+                  "off_caption": 0.1410527095547051,
+                  "dangerous": true
+                },
+                "step": 200,
+                "g_loss": 0.685082197189331,
+                "d_loss": 0.7035608291625977
+              },
+              {
+                "cover": 0.9571203018968149,
+                "off_caption": 1.8105494507837237e-06,
+                "neu_hold": 0.9807406738400459,
+                "cos_plus": 0.9998646974563599,
+                "mag_ratio": 0.9572498202323914,
+                "half_norm_ratio": 0.508451438970123,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.8424367308616638,
+                  "cos_neg": -0.8424367308616638,
+                  "off_caption": 0.20182457141755877,
+                  "dangerous": true
+                },
+                "step": 250,
+                "g_loss": 0.7025535702705383,
+                "d_loss": 0.6842947006225586
+              },
+              {
+                "cover": 0.9650142453400008,
+                "off_caption": 9.881233091952653e-06,
+                "neu_hold": 0.9742795191705227,
+                "cos_plus": 0.9999617338180542,
+                "mag_ratio": 1.0349488258361816,
+                "half_norm_ratio": 0.48778931279022364,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "neg",
+                  "cos_plus": -0.9845406413078308,
+                  "cos_neg": 0.9845406413078308,
+                  "off_caption": 0.01524768810015171,
+                  "dangerous": false
+                },
+                "step": 300,
+                "g_loss": 0.6845643520355225,
+                "d_loss": 0.7021199464797974
+              },
+              {
+                "cover": 0.9707306831392231,
+                "off_caption": 4.925818970416217e-05,
+                "neu_hold": 0.954085648059845,
+                "cos_plus": 0.9998827576637268,
+                "mag_ratio": 1.0291554927825928,
+                "half_norm_ratio": 0.47881994726810845,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "neg",
+                  "cos_plus": -0.9505131244659424,
+                  "cos_neg": 0.9505131244659424,
+                  "off_caption": 3.0390063982065407e-06,
+                  "dangerous": false
+                },
+                "step": 350,
+                "g_loss": 0.6949024200439453,
+                "d_loss": 0.6916408538818359
+              },
+              {
+                "cover": 0.9606202907704642,
+                "off_caption": 3.867536352114723e-06,
+                "neu_hold": 0.9634362608194351,
+                "cos_plus": 0.9998966455459595,
+                "mag_ratio": 1.0392804145812988,
+                "half_norm_ratio": 0.4842722326699871,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "neg",
+                  "cos_plus": -0.8914045095443726,
+                  "cos_neg": 0.8914045095443726,
+                  "off_caption": 0.0018937120545744683,
+                  "dangerous": false
+                },
+                "step": 400,
+                "g_loss": 0.6990655064582825,
+                "d_loss": 0.6873667240142822
+              }
+            ]
+          },
+          "seconds": 1.413602571003139
+        },
+        "ae_gan_hold": {
+          "live": {
+            "recon_mse": 0.007352104410529137,
+            "hold": 0.018749481067061424
+          },
+          "raw": {
+            "name": "locked_shared",
+            "recon_mse": 0.007352104410529137,
+            "hold": 0.018749481067061424,
+            "init_recon_mse": 1.2815320491790771,
+            "penalty_applied": 250,
+            "adv_steps": 250,
+            "steps": 250
+          },
+          "seconds": 0.732665900955908
+        },
+        "cover_leftover": {
+          "live": {
+            "u_kept": 0.9894317289591373,
+            "content_kept": 0.9973019722028745,
+            "leak_ratio": 0.003252232396402507,
+            "pole_rel_err_plus": 0.007567198947072029,
+            "pole_rel_err_minus": 0.010743972845375538,
+            "same_dir": 0.002560549834008166
+          },
+          "raw": {
+            "arm": "locked",
+            "steps": 800,
+            "seed": 0,
+            "teacher": "faithful_guard_e",
+            "cover_weight": 1.5,
+            "reg_coeff": 1.0,
+            "reg_arm": "b_cap",
+            "kappa": 1.0,
+            "norm": "l2",
+            "fm_weight": 0.0,
+            "gan_mode": "rp",
+            "loss_type": "logistic",
+            "n_particles": 12,
+            "particle_l2": 0.02,
+            "particle_rms": 0.06016448885202408,
+            "u_kept": 0.9357793237568308,
+            "content_kept": 0.9731987212705988,
+            "leak_ratio": 0.0006282924201798933,
+            "on_u": 0.935779333114624,
+            "on_content": 0.5352593064308167,
+            "on_e": -0.0005879430682398379,
+            "pole_rel_err_plus": 0.04342861473560333,
+            "pole_rel_err_minus": 0.04565076157450676,
+            "covered": true,
+            "pass": true,
+            "fail_reasons": "",
+            "leak_frac": -0.9999999403953552,
+            "same_dir": 0.0015842995820100638,
+            "even_norm": 0.0017079777317121625,
+            "odd_norm": 1.0763568878173828,
+            "live": {
+              "u_kept": 0.9894317289591373,
+              "content_kept": 0.9973019722028745,
+              "leak_ratio": 0.003252232396402507,
+              "on_u": 0.9894317388534546,
+              "on_content": 0.5485160946846008,
+              "on_e": 0.0032178619876503944,
+              "pole_rel_err_plus": 0.007567198947072029,
+              "pole_rel_err_minus": 0.010743972845375538,
+              "covered": true,
+              "pass": true,
+              "fail_reasons": "",
+              "leak_frac": -0.9999897480010986,
+              "same_dir": 0.002560549834008166,
+              "even_norm": 0.0029006660915911198,
+              "odd_norm": 1.129928708076477
+            }
+          },
+          "ema": {
+            "u_kept": 0.9357793237568308,
+            "content_kept": 0.9731987212705988,
+            "leak_ratio": 0.0006282924201798933,
+            "pole_rel_err_plus": 0.04342861473560333,
+            "pole_rel_err_minus": 0.04565076157450676,
+            "same_dir": 0.0015842995820100638
+          },
+          "seconds": 3.408423557993956
+        },
+        "unused_token_hold": {
+          "live": {
+            "unused_hold": 0.9914478166028857,
+            "concept_move": 0.9676894873840638
+          },
+          "raw": {
+            "unused_hold": 0.9914478166028857,
+            "concept_move": 0.9676894873840638,
+            "unused_dist": 0.008552183397114277,
+            "concept_cos": 0.9999971389770508,
+            "concept_delta_norm": 1.032307744026184,
+            "scale0_err": 0.0
+          },
+          "seconds": 0.3337313550291583
+        },
+        "mid_scale_identity": {
+          "live": {
+            "concept_cos_plus": 0.9999642968177795,
+            "concept_cos_minus": 0.9999969601631165,
+            "concept_mag_plus": 1.0213077068328857,
+            "concept_mag_minus": 0.9710105657577515,
+            "identity_at_0": 0.9966386232848841,
+            "identity_at_mid": 0.9994924935629852
+          },
+          "raw": {
+            "scales": [
+              -1.0,
+              0.0,
+              0.5,
+              1.0
+            ],
+            "pairing": "matched",
+            "concept_cos_plus": 0.9999642968177795,
+            "concept_cos_minus": 0.9999969601631165,
+            "concept_mag_plus": 1.0213077068328857,
+            "concept_mag_minus": 0.9710105657577515,
+            "identity_at_0": 0.9966386232848841,
+            "identity_at_mid": 0.9994924935629852,
+            "pass": true,
+            "fail_reasons": "",
+            "per_scale": [
+              {
+                "scale": -1.0,
+                "identity_kept": 0.9971767990197155,
+                "on_concept": -0.9877127408981323
+              },
+              {
+                "scale": 0.0,
+                "identity_kept": 0.9966386232848841,
+                "on_concept": -0.016705183312296867
+              },
+              {
+                "scale": 0.5,
+                "identity_kept": 0.9994924935629852,
+                "on_concept": 0.5024619102478027
+              },
+              {
+                "scale": 1.0,
+                "identity_kept": 0.9886319858573609,
+                "on_concept": 1.0045660734176636
+              }
+            ],
+            "device": "cpu",
+            "same_dir": 0.025073718744317245,
+            "leak_frac": -0.9999517202377319,
+            "steps": 800,
+            "seed": 0,
+            "train_scales": [
+              -1.0,
+              0.0,
+              0.5,
+              1.0
+            ],
+            "loss_type": "logistic",
+            "gan_mode": "rp",
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_norm": "l2",
+            "reg_lazy": 1,
+            "reg_anneal": "none",
+            "reg_calls": 3200,
+            "reg_is_gradient_penalty": true,
+            "cover_weight": 1.5,
+            "fm_weight": 0.0,
+            "arm": "locked"
+          },
+          "seconds": 5.418870894005522
+        },
+        "mode_hold": {
+          "live": {
+            "modes": 5,
+            "hq": 0.822998046875
+          },
+          "raw": {
+            "modes": 3,
+            "n_modes": 8,
+            "hq": 0.494873046875,
+            "cover": 0.375,
+            "effective_modes": 2.7219676971435547,
+            "step": 1200,
+            "seed": 0,
+            "verdict": "INCONCLUSIVE",
+            "live": {
+              "modes": 5,
+              "n_modes": 8,
+              "hq": 0.822998046875,
+              "cover": 0.625,
+              "effective_modes": 4.734151840209961,
+              "verdict": "INCONCLUSIVE"
+            },
+            "curve": [
+              {
+                "modes": 0,
+                "n_modes": 8,
+                "hq": 0.0,
+                "cover": 0.0,
+                "effective_modes": 0.0,
+                "step": 200,
+                "seed": 0
+              },
+              {
+                "modes": 0,
+                "n_modes": 8,
+                "hq": 0.0,
+                "cover": 0.0,
+                "effective_modes": 0.0,
+                "step": 400,
+                "seed": 0
+              },
+              {
+                "modes": 0,
+                "n_modes": 8,
+                "hq": 0.0,
+                "cover": 0.0,
+                "effective_modes": 0.0,
+                "step": 600,
+                "seed": 0
+              },
+              {
+                "modes": 1,
+                "n_modes": 8,
+                "hq": 0.08251953125,
+                "cover": 0.125,
+                "effective_modes": 1.0,
+                "step": 800,
+                "seed": 0
+              },
+              {
+                "modes": 1,
+                "n_modes": 8,
+                "hq": 0.25390625,
+                "cover": 0.125,
+                "effective_modes": 1.0,
+                "step": 1000,
+                "seed": 0
+              },
+              {
+                "modes": 3,
+                "n_modes": 8,
+                "hq": 0.494873046875,
+                "cover": 0.375,
+                "effective_modes": 2.7219676971435547,
+                "step": 1200,
+                "seed": 0
+              }
+            ]
+          },
+          "ema": {
+            "modes": 3,
+            "hq": 0.494873046875
+          },
+          "seconds": 6.640634901006706
+        }
+      }
+    },
+    {
+      "config": {
+        "name": "no_particle_l2",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0
+      },
+      "config_sha256": "e5c50bca5f6aee9d83b994e6aeeaf2829c23cb85feef6e6d98b437093a3cfe1a",
+      "toys": {
+        "two_pole": {
+          "live": {
+            "mean_abs": 0.5292674899101257,
+            "grad_med": 0.41900351643562317
+          },
+          "raw": {
+            "mean_abs": 0.5292674899101257,
+            "grad_med": 0.41900351643562317,
+            "nearest": 0.47073256969451904,
+            "cover_score": 0.7939011454582214,
+            "verdict": "PASS"
+          },
+          "seconds": 0.11804279894568026
+        },
+        "trajectory": {
+          "live": {
+            "identity_mse": 0.0028351142536848783
+          },
+          "raw": {
+            "identity_mse": 0.0028351142536848783,
+            "paired_target_mse": 0.0028351142536848783,
+            "verdict": "PASS",
+            "set_cover": 0.04536182060837746,
+            "own_nearest_fraction": 1.0,
+            "particle_mean_square": 0.08895725011825562,
+            "particle_std_mean": 0.3085062503814697,
+            "critic_gradient_median": 0.9492878913879395,
+            "critic_gradient_max": 1.0867875814437866
+          },
+          "seconds": 1.0670309560373425
+        },
+        "residual_student": {
+          "live": {
+            "identity_mse": 0.0014887017896398902,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          "raw": {
+            "event": "done",
+            "family": "residual_student",
+            "pairing": "shared",
+            "both_land_rows": 12,
+            "identity_mse": 0.0014887017896398902,
+            "paired_target_mse": 0.0014887017896398902,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0,
+            "endpoint_l2": 0.07168010622262955,
+            "pass": true,
+            "pass_identity_mse": 0.02,
+            "success_min": 1.0,
+            "land_tol": 0.25,
+            "slow_impact_max": 0.1,
+            "residual_weight": 1.0,
+            "fm_weight": 0.0,
+            "cover_weight": 1.5,
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_norm": "l2",
+            "n_particles": 12,
+            "particle_l2": 0.0,
+            "vicreg_weight": 0.05,
+            "steps": 400,
+            "seed": 0
+          },
+          "seconds": 1.0761118090013042
+        },
+        "unipolar": {
+          "live": {
+            "cover": 0.9606202907704642,
+            "off_caption": 3.867536352114723e-06,
+            "neu_hold": 0.9634362608194351
+          },
+          "raw": {
+            "cover": 0.9606202907704642,
+            "off_caption": 3.867536352114723e-06,
+            "neu_hold": 0.9634362608194351,
+            "cos_plus": 0.9998966455459595,
+            "mag_ratio": 1.0392804145812988,
+            "half_norm_ratio": 0.4842722326699871,
+            "hit": true,
+            "canary": {
+              "scored": false,
+              "landed": "neg",
+              "cos_plus": -0.8914045095443726,
+              "cos_neg": 0.8914045095443726,
+              "off_caption": 0.0018937120545744683,
+              "dangerous": false
+            },
+            "arm": "locked_rpgan",
+            "steps": 400,
+            "seed": 0,
+            "polarity": 1.0,
+            "fm_weight": 0.0,
+            "cover_weight": 0.0,
+            "gan_mode": "rp",
+            "loss_type": "logistic",
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_norm": "l2",
+            "reg_lazy": 1,
+            "reg_anneal": "none",
+            "reg_is_gradient_penalty": true,
+            "origin_norm": 0.03656373918056488,
+            "odd_norm": 0.5361109375953674,
+            "even_norm": 0.5361109375953674,
+            "history": [
+              {
+                "cover": 0.0149999990150943,
+                "off_caption": 0.3214294975441988,
+                "neu_hold": 0.9900000067427754,
+                "cos_plus": 0.566947877407074,
+                "mag_ratio": 0.02645745687186718,
+                "half_norm_ratio": 0.6546548533609252,
+                "hit": false,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.5000002980232239,
+                  "cos_neg": -0.5000002980232239,
+                  "off_caption": 0.24999992474032964,
+                  "dangerous": true
+                },
+                "step": 1,
+                "g_loss": 0.7399747371673584,
+                "d_loss": 0.6947054862976074
+              },
+              {
+                "cover": 0.718675952448919,
+                "off_caption": 5.6770177778948105e-05,
+                "neu_hold": 0.8334875255823135,
+                "cos_plus": 0.999947726726532,
+                "mag_ratio": 0.7187135219573975,
+                "half_norm_ratio": 0.6157389791940554,
+                "hit": false,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9991220831871033,
+                  "cos_neg": -0.9991220831871033,
+                  "off_caption": 0.001395836394847376,
+                  "dangerous": true
+                },
+                "step": 50,
+                "g_loss": 0.9354475736618042,
+                "d_loss": 0.515997052192688
+              },
+              {
+                "cover": 0.9431618391633023,
+                "off_caption": 6.091940972893896e-06,
+                "neu_hold": 0.8744007796049118,
+                "cos_plus": 0.9999969601631165,
+                "mag_ratio": 1.0568352937698364,
+                "half_norm_ratio": 0.5594200336878292,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9999423623085022,
+                  "cos_neg": -0.9999423623085022,
+                  "off_caption": 4.577772564721951e-05,
+                  "dangerous": true
+                },
+                "step": 100,
+                "g_loss": 0.7428485155105591,
+                "d_loss": 0.6515434980392456
+              },
+              {
+                "cover": 0.9599407866748209,
+                "off_caption": 7.254599519728247e-06,
+                "neu_hold": 0.9690781626850367,
+                "cos_plus": 0.999994158744812,
+                "mag_ratio": 1.0400536060333252,
+                "half_norm_ratio": 0.48529491660432517,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "neg",
+                  "cos_plus": -0.9891183972358704,
+                  "cos_neg": 0.9891183972358704,
+                  "off_caption": 0.006439751034328913,
+                  "dangerous": false
+                },
+                "step": 150,
+                "g_loss": 0.6810510158538818,
+                "d_loss": 0.706047534942627
+              },
+              {
+                "cover": 0.973248606467422,
+                "off_caption": 0.00025565378173736473,
+                "neu_hold": 0.9832202401012182,
+                "cos_plus": 0.9996659755706787,
+                "mag_ratio": 0.9735738039016724,
+                "half_norm_ratio": 0.5055682803163538,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.6376792788505554,
+                  "cos_neg": -0.6376792788505554,
+                  "off_caption": 0.1410527095547051,
+                  "dangerous": true
+                },
+                "step": 200,
+                "g_loss": 0.685082197189331,
+                "d_loss": 0.7035608291625977
+              },
+              {
+                "cover": 0.9571203018968149,
+                "off_caption": 1.8105494507837237e-06,
+                "neu_hold": 0.9807406738400459,
+                "cos_plus": 0.9998646974563599,
+                "mag_ratio": 0.9572498202323914,
+                "half_norm_ratio": 0.508451438970123,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.8424367308616638,
+                  "cos_neg": -0.8424367308616638,
+                  "off_caption": 0.20182457141755877,
+                  "dangerous": true
+                },
+                "step": 250,
+                "g_loss": 0.7025535702705383,
+                "d_loss": 0.6842947006225586
+              },
+              {
+                "cover": 0.9650142453400008,
+                "off_caption": 9.881233091952653e-06,
+                "neu_hold": 0.9742795191705227,
+                "cos_plus": 0.9999617338180542,
+                "mag_ratio": 1.0349488258361816,
+                "half_norm_ratio": 0.48778931279022364,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "neg",
+                  "cos_plus": -0.9845406413078308,
+                  "cos_neg": 0.9845406413078308,
+                  "off_caption": 0.01524768810015171,
+                  "dangerous": false
+                },
+                "step": 300,
+                "g_loss": 0.6845643520355225,
+                "d_loss": 0.7021199464797974
+              },
+              {
+                "cover": 0.9707306831392231,
+                "off_caption": 4.925818970416217e-05,
+                "neu_hold": 0.954085648059845,
+                "cos_plus": 0.9998827576637268,
+                "mag_ratio": 1.0291554927825928,
+                "half_norm_ratio": 0.47881994726810845,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "neg",
+                  "cos_plus": -0.9505131244659424,
+                  "cos_neg": 0.9505131244659424,
+                  "off_caption": 3.0390063982065407e-06,
+                  "dangerous": false
+                },
+                "step": 350,
+                "g_loss": 0.6949024200439453,
+                "d_loss": 0.6916408538818359
+              },
+              {
+                "cover": 0.9606202907704642,
+                "off_caption": 3.867536352114723e-06,
+                "neu_hold": 0.9634362608194351,
+                "cos_plus": 0.9998966455459595,
+                "mag_ratio": 1.0392804145812988,
+                "half_norm_ratio": 0.4842722326699871,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "neg",
+                  "cos_plus": -0.8914045095443726,
+                  "cos_neg": 0.8914045095443726,
+                  "off_caption": 0.0018937120545744683,
+                  "dangerous": false
+                },
+                "step": 400,
+                "g_loss": 0.6990655064582825,
+                "d_loss": 0.6873667240142822
+              }
+            ]
+          },
+          "seconds": 1.4412585999816656
+        },
+        "ae_gan_hold": {
+          "live": {
+            "recon_mse": 0.0030494038946926594,
+            "hold": 0.0013684165896847844
+          },
+          "raw": {
+            "name": "no_particle_l2",
+            "recon_mse": 0.0030494038946926594,
+            "hold": 0.0013684165896847844,
+            "init_recon_mse": 1.2815320491790771,
+            "penalty_applied": 250,
+            "adv_steps": 250,
+            "steps": 250
+          },
+          "seconds": 0.7381220569368452
+        },
+        "cover_leftover": {
+          "live": {
+            "u_kept": 0.9797536036744489,
+            "content_kept": 0.9933574452554393,
+            "leak_ratio": 0.002132464154895452,
+            "pole_rel_err_plus": 0.01385064423084259,
+            "pole_rel_err_minus": 0.010945952497422695,
+            "same_dir": 0.002460048429044612
+          },
+          "raw": {
+            "arm": "locked",
+            "steps": 800,
+            "seed": 0,
+            "teacher": "faithful_guard_e",
+            "cover_weight": 1.5,
+            "reg_coeff": 1.0,
+            "reg_arm": "b_cap",
+            "kappa": 1.0,
+            "norm": "l2",
+            "fm_weight": 0.0,
+            "gan_mode": "rp",
+            "loss_type": "logistic",
+            "n_particles": 12,
+            "particle_l2": 0.0,
+            "particle_rms": 0.06036020442843437,
+            "u_kept": 0.9339783098283078,
+            "content_kept": 0.9716544191385874,
+            "leak_ratio": 0.0007661031966560961,
+            "on_u": 0.9339783191680908,
+            "on_content": 0.5344099402427673,
+            "on_e": -0.000715523783583194,
+            "pole_rel_err_plus": 0.044708944857120514,
+            "pole_rel_err_minus": 0.04617958143353462,
+            "covered": true,
+            "pass": true,
+            "fail_reasons": "",
+            "leak_frac": -0.9999998211860657,
+            "same_dir": 0.0010990852189204663,
+            "even_norm": 0.0011827587150037289,
+            "odd_norm": 1.0749473571777344,
+            "live": {
+              "u_kept": 0.9797536036744489,
+              "content_kept": 0.9933574452554393,
+              "leak_ratio": 0.002132464154895452,
+              "on_u": 0.9797536134719849,
+              "on_content": 0.5463466048240662,
+              "on_e": 0.0020892894826829433,
+              "pole_rel_err_plus": 0.01385064423084259,
+              "pole_rel_err_minus": 0.010945952497422695,
+              "covered": true,
+              "pass": true,
+              "fail_reasons": "",
+              "leak_frac": -0.9999984502792358,
+              "same_dir": 0.002460048429044612,
+              "even_norm": 0.002772840904071927,
+              "odd_norm": 1.1243760585784912
+            }
+          },
+          "ema": {
+            "u_kept": 0.9339783098283078,
+            "content_kept": 0.9716544191385874,
+            "leak_ratio": 0.0007661031966560961,
+            "pole_rel_err_plus": 0.044708944857120514,
+            "pole_rel_err_minus": 0.04617958143353462,
+            "same_dir": 0.0010990852189204663
+          },
+          "seconds": 3.286159512004815
+        },
+        "unused_token_hold": {
+          "live": {
+            "unused_hold": 0.9914478166028857,
+            "concept_move": 0.9676894873840638
+          },
+          "raw": {
+            "unused_hold": 0.9914478166028857,
+            "concept_move": 0.9676894873840638,
+            "unused_dist": 0.008552183397114277,
+            "concept_cos": 0.9999971389770508,
+            "concept_delta_norm": 1.032307744026184,
+            "scale0_err": 0.0
+          },
+          "seconds": 0.3278183500515297
+        },
+        "mid_scale_identity": {
+          "live": {
+            "concept_cos_plus": 0.9999642968177795,
+            "concept_cos_minus": 0.9999969601631165,
+            "concept_mag_plus": 1.0213077068328857,
+            "concept_mag_minus": 0.9710105657577515,
+            "identity_at_0": 0.9966386232848841,
+            "identity_at_mid": 0.9994924935629852
+          },
+          "raw": {
+            "scales": [
+              -1.0,
+              0.0,
+              0.5,
+              1.0
+            ],
+            "pairing": "matched",
+            "concept_cos_plus": 0.9999642968177795,
+            "concept_cos_minus": 0.9999969601631165,
+            "concept_mag_plus": 1.0213077068328857,
+            "concept_mag_minus": 0.9710105657577515,
+            "identity_at_0": 0.9966386232848841,
+            "identity_at_mid": 0.9994924935629852,
+            "pass": true,
+            "fail_reasons": "",
+            "per_scale": [
+              {
+                "scale": -1.0,
+                "identity_kept": 0.9971767990197155,
+                "on_concept": -0.9877127408981323
+              },
+              {
+                "scale": 0.0,
+                "identity_kept": 0.9966386232848841,
+                "on_concept": -0.016705183312296867
+              },
+              {
+                "scale": 0.5,
+                "identity_kept": 0.9994924935629852,
+                "on_concept": 0.5024619102478027
+              },
+              {
+                "scale": 1.0,
+                "identity_kept": 0.9886319858573609,
+                "on_concept": 1.0045660734176636
+              }
+            ],
+            "device": "cpu",
+            "same_dir": 0.025073718744317245,
+            "leak_frac": -0.9999517202377319,
+            "steps": 800,
+            "seed": 0,
+            "train_scales": [
+              -1.0,
+              0.0,
+              0.5,
+              1.0
+            ],
+            "loss_type": "logistic",
+            "gan_mode": "rp",
+            "reg_arm": "b_cap",
+            "reg_coeff": 1.0,
+            "reg_kappa": 1.0,
+            "reg_norm": "l2",
+            "reg_lazy": 1,
+            "reg_anneal": "none",
+            "reg_calls": 3200,
+            "reg_is_gradient_penalty": true,
+            "cover_weight": 1.5,
+            "fm_weight": 0.0,
+            "arm": "locked"
+          },
+          "seconds": 5.516334398998879
+        },
+        "mode_hold": {
+          "live": {
+            "modes": 8,
+            "hq": 0.740478515625
+          },
+          "raw": {
+            "modes": 8,
+            "n_modes": 8,
+            "hq": 1.0,
+            "cover": 1.0,
+            "effective_modes": 7.53853702545166,
+            "step": 1200,
+            "seed": 0,
+            "verdict": "PASS",
+            "live": {
+              "modes": 8,
+              "n_modes": 8,
+              "hq": 0.740478515625,
+              "cover": 1.0,
+              "effective_modes": 7.722367763519287,
+              "verdict": "INCONCLUSIVE"
+            },
+            "curve": [
+              {
+                "modes": 0,
+                "n_modes": 8,
+                "hq": 0.0,
+                "cover": 0.0,
+                "effective_modes": 0.0,
+                "step": 200,
+                "seed": 0
+              },
+              {
+                "modes": 0,
+                "n_modes": 8,
+                "hq": 0.0,
+                "cover": 0.0,
+                "effective_modes": 0.0,
+                "step": 400,
+                "seed": 0
+              },
+              {
+                "modes": 0,
+                "n_modes": 8,
+                "hq": 0.0,
+                "cover": 0.0,
+                "effective_modes": 0.0,
+                "step": 600,
+                "seed": 0
+              },
+              {
+                "modes": 2,
+                "n_modes": 8,
+                "hq": 0.237548828125,
+                "cover": 0.25,
+                "effective_modes": 1.8755420446395874,
+                "step": 800,
+                "seed": 0
+              },
+              {
+                "modes": 8,
+                "n_modes": 8,
+                "hq": 1.0,
+                "cover": 1.0,
+                "effective_modes": 7.53853702545166,
+                "step": 1000,
+                "seed": 0
+              },
+              {
+                "modes": 8,
+                "n_modes": 8,
+                "hq": 1.0,
+                "cover": 1.0,
+                "effective_modes": 7.53853702545166,
+                "step": 1200,
+                "seed": 0
+              }
+            ]
+          },
+          "ema": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "seconds": 6.582954915007576
+        }
+      }
+    },
+    {
+      "config": {
+        "name": "r1_r2_0_1",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "a_r1r2",
+        "reg_coeff": 0.1,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.02,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0
+      },
+      "config_sha256": "3b0841abdc6cf69e7fdc2a024043bd84645400ac0273d1ba14e0d643fae0e4e3",
+      "toys": {
+        "two_pole": {
+          "live": {
+            "mean_abs": 0.45241686701774597,
+            "grad_med": 0.7342168688774109
+          },
+          "raw": {
+            "mean_abs": 0.45241686701774597,
+            "grad_med": 0.7342168688774109,
+            "nearest": 0.5475831627845764,
+            "cover_score": 0.6786252558231354,
+            "verdict": "PASS"
+          },
+          "seconds": 0.11987746902741492
+        },
+        "trajectory": {
+          "live": {
+            "identity_mse": 0.003767777932807803
+          },
+          "raw": {
+            "identity_mse": 0.003767777932807803,
+            "paired_target_mse": 0.003767777932807803,
+            "verdict": "PASS",
+            "set_cover": 0.06028444692492485,
+            "own_nearest_fraction": 1.0,
+            "particle_mean_square": 0.07290918380022049,
+            "particle_std_mean": 0.2782438397407532,
+            "critic_gradient_median": 0.08991312235593796,
+            "critic_gradient_max": 0.1450987309217453
+          },
+          "seconds": 1.063266318058595
+        },
+        "residual_student": {
+          "live": {
+            "identity_mse": 0.0018429351039230824,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          "raw": {
+            "event": "done",
+            "family": "residual_student",
+            "pairing": "shared",
+            "both_land_rows": 12,
+            "identity_mse": 0.0018429351039230824,
+            "paired_target_mse": 0.0018429351039230824,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0,
+            "endpoint_l2": 0.07653430104255676,
+            "pass": true,
+            "pass_identity_mse": 0.02,
+            "success_min": 1.0,
+            "land_tol": 0.25,
+            "slow_impact_max": 0.1,
+            "residual_weight": 1.0,
+            "fm_weight": 0.0,
+            "cover_weight": 1.5,
+            "reg_arm": "a_r1r2",
+            "reg_coeff": 0.1,
+            "reg_kappa": 1.0,
+            "reg_norm": "l2",
+            "n_particles": 12,
+            "particle_l2": 0.02,
+            "vicreg_weight": 0.05,
+            "steps": 400,
+            "seed": 0
+          },
+          "seconds": 1.1117403110256419
+        },
+        "unipolar": {
+          "live": {
+            "cover": 0.9998142123222351,
+            "off_caption": 2.3555513006716984e-10,
+            "neu_hold": 0.9996280407358427
+          },
+          "raw": {
+            "cover": 0.9998142123222351,
+            "off_caption": 2.3555513006716984e-10,
+            "neu_hold": 0.9996280407358427,
+            "cos_plus": 1.0,
+            "mag_ratio": 0.9998142123222351,
+            "half_norm_ratio": 0.5001844212313048,
+            "hit": true,
+            "canary": {
+              "scored": false,
+              "landed": "pos",
+              "cos_plus": 0.9913999438285828,
+              "cos_neg": -0.9913999438285828,
+              "off_caption": 0.00031572678807823923,
+              "dangerous": true
+            },
+            "arm": "locked_rpgan",
+            "steps": 400,
+            "seed": 0,
+            "polarity": 1.0,
+            "fm_weight": 0.0,
+            "cover_weight": 0.0,
+            "gan_mode": "rp",
+            "loss_type": "logistic",
+            "reg_arm": "a_r1r2",
+            "reg_coeff": 0.1,
+            "reg_kappa": 1.0,
+            "reg_norm": "l2",
+            "reg_lazy": 1,
+            "reg_anneal": "none",
+            "reg_is_gradient_penalty": true,
+            "origin_norm": 0.00037195926415733993,
+            "odd_norm": 0.4997227191925049,
+            "even_norm": 0.4997227191925049,
+            "history": [
+              {
+                "cover": 0.014999997876455673,
+                "off_caption": 0.24999674977488623,
+                "neu_hold": 0.9900000691413879,
+                "cos_plus": 0.5000014305114746,
+                "mag_ratio": 0.029999909922480583,
+                "half_norm_ratio": 0.6666659836725057,
+                "hit": false,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.5000033974647522,
+                  "cos_neg": -0.5000033974647522,
+                  "off_caption": 0.24999081147701535,
+                  "dangerous": true
+                },
+                "step": 1,
+                "g_loss": 0.7404053211212158,
+                "d_loss": 0.6951785087585449
+              },
+              {
+                "cover": 0.7862437770336044,
+                "off_caption": 7.821051629151705e-05,
+                "neu_hold": 0.8029476851224899,
+                "cos_plus": 0.9999510049819946,
+                "mag_ratio": 0.7862823009490967,
+                "half_norm_ratio": 0.6252985984739343,
+                "hit": false,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9997567534446716,
+                  "cos_neg": -0.9997567534446716,
+                  "off_caption": 0.0004391979345840335,
+                  "dangerous": true
+                },
+                "step": 50,
+                "g_loss": 0.8908416628837585,
+                "d_loss": 0.6038583517074585
+              },
+              {
+                "cover": 0.9391846701130753,
+                "off_caption": 3.968468729071426e-06,
+                "neu_hold": 0.8859425038099289,
+                "cos_plus": 0.9999960064888,
+                "mag_ratio": 0.9391884207725525,
+                "half_norm_ratio": 0.5607206640713656,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9999727010726929,
+                  "cos_neg": -0.9999727010726929,
+                  "off_caption": 2.413153671318633e-05,
+                  "dangerous": true
+                },
+                "step": 100,
+                "g_loss": 0.7364435195922852,
+                "d_loss": 0.6727463603019714
+              },
+              {
+                "cover": 0.9800908206796777,
+                "off_caption": 8.553934843767234e-07,
+                "neu_hold": 0.9604599736630917,
+                "cos_plus": 0.9999988079071045,
+                "mag_ratio": 0.9800919890403748,
+                "half_norm_ratio": 0.5201388536238973,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9983922243118286,
+                  "cos_neg": -0.9983922243118286,
+                  "off_caption": 0.00010728972549864871,
+                  "dangerous": true
+                },
+                "step": 150,
+                "g_loss": 0.698757529258728,
+                "d_loss": 0.690632164478302
+              },
+              {
+                "cover": 0.9946724179582311,
+                "off_caption": 4.2968400818897795e-08,
+                "neu_hold": 0.9892643177881837,
+                "cos_plus": 0.9999999403953552,
+                "mag_ratio": 0.9946724772453308,
+                "half_norm_ratio": 0.5053929404258564,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9993373155593872,
+                  "cos_neg": -0.9993373155593872,
+                  "off_caption": 8.330643284802193e-06,
+                  "dangerous": true
+                },
+                "step": 200,
+                "g_loss": 0.6935741901397705,
+                "d_loss": 0.6929630041122437
+              },
+              {
+                "cover": 0.998542845249176,
+                "off_caption": 3.6337442729826364e-09,
+                "neu_hold": 0.9970812483225018,
+                "cos_plus": 1.0,
+                "mag_ratio": 0.998542845249176,
+                "half_norm_ratio": 0.5014599079108407,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9989098310470581,
+                  "cos_neg": -0.9989098310470581,
+                  "off_caption": 2.971566768691794e-05,
+                  "dangerous": true
+                },
+                "step": 250,
+                "g_loss": 0.693178653717041,
+                "d_loss": 0.6931335926055908
+              },
+              {
+                "cover": 0.9994874596595764,
+                "off_caption": 4.7405319123582695e-08,
+                "neu_hold": 0.9989486379781738,
+                "cos_plus": 1.0,
+                "mag_ratio": 0.9994874596595764,
+                "half_norm_ratio": 0.5004981030929148,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9470169544219971,
+                  "cos_neg": -0.9470169544219971,
+                  "off_caption": 0.03488246540892258,
+                  "dangerous": true
+                },
+                "step": 300,
+                "g_loss": 0.6931511163711548,
+                "d_loss": 0.6931455731391907
+              },
+              {
+                "cover": 0.9997398257255554,
+                "off_caption": 9.6003208635035e-11,
+                "neu_hold": 0.9994803663576022,
+                "cos_plus": 1.0,
+                "mag_ratio": 0.9997398257255554,
+                "half_norm_ratio": 0.5002593178697889,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9977968335151672,
+                  "cos_neg": -0.9977968335151672,
+                  "off_caption": 0.00031708236433730956,
+                  "dangerous": true
+                },
+                "step": 350,
+                "g_loss": 0.693148136138916,
+                "d_loss": 0.6931467652320862
+              },
+              {
+                "cover": 0.9998142123222351,
+                "off_caption": 2.3555513006716984e-10,
+                "neu_hold": 0.9996280407358427,
+                "cos_plus": 1.0,
+                "mag_ratio": 0.9998142123222351,
+                "half_norm_ratio": 0.5001844212313048,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9913999438285828,
+                  "cos_neg": -0.9913999438285828,
+                  "off_caption": 0.00031572678807823923,
+                  "dangerous": true
+                },
+                "step": 400,
+                "g_loss": 0.6931477189064026,
+                "d_loss": 0.6931469440460205
+              }
+            ]
+          },
+          "seconds": 1.3693044640822336
+        },
+        "ae_gan_hold": {
+          "live": {
+            "recon_mse": 0.007062762044370174,
+            "hold": 0.013251475058495998
+          },
+          "raw": {
+            "name": "r1_r2_0_1",
+            "recon_mse": 0.007062762044370174,
+            "hold": 0.013251475058495998,
+            "init_recon_mse": 1.2815320491790771,
+            "penalty_applied": 250,
+            "adv_steps": 250,
+            "steps": 250
+          },
+          "seconds": 0.6949521200731397
+        },
+        "cover_leftover": {
+          "live": {
+            "u_kept": 0.9940091868181784,
+            "content_kept": 1.0038434192899162,
+            "leak_ratio": 0.001957111992517533,
+            "pole_rel_err_plus": 0.004378636833280325,
+            "pole_rel_err_minus": 0.003165505826473236,
+            "same_dir": 0.001563189683980248
+          },
+          "raw": {
+            "arm": "locked",
+            "steps": 800,
+            "seed": 0,
+            "teacher": "faithful_guard_e",
+            "cover_weight": 1.5,
+            "reg_coeff": 0.1,
+            "reg_arm": "a_r1r2",
+            "kappa": 1.0,
+            "norm": "l2",
+            "fm_weight": 0.0,
+            "gan_mode": "rp",
+            "loss_type": "logistic",
+            "n_particles": 12,
+            "particle_l2": 0.02,
+            "particle_rms": 0.06262172758579254,
+            "u_kept": 0.9390742088824208,
+            "content_kept": 0.9699487509802907,
+            "leak_ratio": 0.00015669466227598996,
+            "on_u": 0.9390742182731628,
+            "on_content": 0.5334718227386475,
+            "on_e": 0.00014714791905134916,
+            "pole_rel_err_plus": 0.04160299524664879,
+            "pole_rel_err_minus": 0.0417834147810936,
+            "covered": true,
+            "pass": true,
+            "fail_reasons": "",
+            "leak_frac": -1.0,
+            "same_dir": 0.00018610964787944267,
+            "even_norm": 0.00020101977861486375,
+            "odd_norm": 1.0799137353897095,
+            "live": {
+              "u_kept": 0.9940091868181784,
+              "content_kept": 1.0038434192899162,
+              "leak_ratio": 0.001957111992517533,
+              "on_u": 0.9940091967582703,
+              "on_content": 0.5521138906478882,
+              "on_e": 0.001945387339219451,
+              "pole_rel_err_plus": 0.004378636833280325,
+              "pole_rel_err_minus": 0.003165505826473236,
+              "covered": true,
+              "pass": true,
+              "fail_reasons": "",
+              "leak_frac": -0.9999949932098389,
+              "same_dir": 0.001563189683980248,
+              "even_norm": 0.0017801440553739667,
+              "odd_norm": 1.1370093822479248
+            }
+          },
+          "ema": {
+            "u_kept": 0.9390742088824208,
+            "content_kept": 0.9699487509802907,
+            "leak_ratio": 0.00015669466227598996,
+            "pole_rel_err_plus": 0.04160299524664879,
+            "pole_rel_err_minus": 0.0417834147810936,
+            "same_dir": 0.00018610964787944267
+          },
+          "seconds": 3.2478209510445595
+        },
+        "unused_token_hold": {
+          "live": {
+            "unused_hold": 0.9943008092232049,
+            "concept_move": 0.999499921851811
+          },
+          "raw": {
+            "unused_hold": 0.9943008092232049,
+            "concept_move": 0.999499921851811,
+            "unused_dist": 0.005699190776795149,
+            "concept_cos": 0.9999901652336121,
+            "concept_delta_norm": 0.9995097517967224,
+            "scale0_err": 0.0
+          },
+          "seconds": 0.30949922394938767
+        },
+        "mid_scale_identity": {
+          "live": {
+            "concept_cos_plus": 1.0,
+            "concept_cos_minus": 1.0,
+            "concept_mag_plus": 1.0000033378601074,
+            "concept_mag_minus": 1.0000004768371582,
+            "identity_at_0": 0.9999984827909207,
+            "identity_at_mid": 0.9999860200020553
+          },
+          "raw": {
+            "scales": [
+              -1.0,
+              0.0,
+              0.5,
+              1.0
+            ],
+            "pairing": "matched",
+            "concept_cos_plus": 1.0,
+            "concept_cos_minus": 1.0,
+            "concept_mag_plus": 1.0000033378601074,
+            "concept_mag_minus": 1.0000004768371582,
+            "identity_at_0": 0.9999984827909207,
+            "identity_at_mid": 0.9999860200020553,
+            "pass": true,
+            "fail_reasons": "",
+            "per_scale": [
+              {
+                "scale": -1.0,
+                "identity_kept": 0.9999930641870662,
+                "on_concept": -1.000001072883606
+              },
+              {
+                "scale": 0.0,
+                "identity_kept": 0.9999984827909207,
+                "on_concept": -5.561161060541053e-07
+              },
+              {
+                "scale": 0.5,
+                "identity_kept": 0.9999860200020553,
+                "on_concept": 0.4999985098838806
+              },
+              {
+                "scale": 1.0,
+                "identity_kept": 0.999985694885824,
+                "on_concept": 1.0000027418136597
+              }
+            ],
+            "device": "cpu",
+            "same_dir": 6.985781615222351e-06,
+            "leak_frac": -1.0,
+            "steps": 800,
+            "seed": 0,
+            "train_scales": [
+              -1.0,
+              0.0,
+              0.5,
+              1.0
+            ],
+            "loss_type": "logistic",
+            "gan_mode": "rp",
+            "reg_arm": "a_r1r2",
+            "reg_coeff": 0.1,
+            "reg_kappa": 1.0,
+            "reg_norm": "l2",
+            "reg_lazy": 1,
+            "reg_anneal": "none",
+            "reg_calls": 3200,
+            "reg_is_gradient_penalty": true,
+            "cover_weight": 1.5,
+            "fm_weight": 0.0,
+            "arm": "locked"
+          },
+          "seconds": 5.1607973909704015
+        },
+        "mode_hold": {
+          "live": {
+            "modes": 7,
+            "hq": 1.0
+          },
+          "raw": {
+            "modes": 5,
+            "n_modes": 8,
+            "hq": 0.651611328125,
+            "cover": 0.625,
+            "effective_modes": 4.7443156242370605,
+            "step": 1200,
+            "seed": 0,
+            "verdict": "INCONCLUSIVE",
+            "live": {
+              "modes": 7,
+              "n_modes": 8,
+              "hq": 1.0,
+              "cover": 0.875,
+              "effective_modes": 6.372378826141357,
+              "verdict": "PASS"
+            },
+            "curve": [
+              {
+                "modes": 0,
+                "n_modes": 8,
+                "hq": 0.0,
+                "cover": 0.0,
+                "effective_modes": 0.0,
+                "step": 200,
+                "seed": 0
+              },
+              {
+                "modes": 2,
+                "n_modes": 8,
+                "hq": 0.17431640625,
+                "cover": 0.25,
+                "effective_modes": 1.9988702535629272,
+                "step": 400,
+                "seed": 0
+              },
+              {
+                "modes": 2,
+                "n_modes": 8,
+                "hq": 0.17431640625,
+                "cover": 0.25,
+                "effective_modes": 1.9988702535629272,
+                "step": 600,
+                "seed": 0
+              },
+              {
+                "modes": 7,
+                "n_modes": 8,
+                "hq": 0.749267578125,
+                "cover": 0.875,
+                "effective_modes": 6.636802673339844,
+                "step": 800,
+                "seed": 0
+              },
+              {
+                "modes": 5,
+                "n_modes": 8,
+                "hq": 0.486083984375,
+                "cover": 0.625,
+                "effective_modes": 4.789523601531982,
+                "step": 1000,
+                "seed": 0
+              },
+              {
+                "modes": 5,
+                "n_modes": 8,
+                "hq": 0.651611328125,
+                "cover": 0.625,
+                "effective_modes": 4.7443156242370605,
+                "step": 1200,
+                "seed": 0
+              }
+            ]
+          },
+          "ema": {
+            "modes": 5,
+            "hq": 0.651611328125
+          },
+          "seconds": 6.579475458012894
+        }
+      }
+    }
+  ],
+  "shared": {
+    "orbit_hold": {
+      "status": "PASS",
+      "metrics": [
+        {
+          "metric": "direction_cos",
+          "value": 0.992029696267167,
+          "op": ">=",
+          "threshold": 0.98,
+          "status": "PASS",
+          "margin": 0.01202969626716699
+        },
+        {
+          "metric": "speed_rel",
+          "value": 0.008034339861824875,
+          "op": "<=",
+          "threshold": 0.05,
+          "status": "PASS",
+          "margin": 0.041965660138175126
+        },
+        {
+          "metric": "radius_rel",
+          "value": 4.7415775010032725e-17,
+          "op": "<=",
+          "threshold": 0.02,
+          "status": "PASS",
+          "margin": 0.019999999999999952
+        }
+      ],
+      "summary": "direction_cos=0.99203 (>= 0.98); speed_rel=0.00803434 (<= 0.05); radius_rel=4.74158e-17 (<= 0.02)",
+      "seconds": 0.029710037051700056
+    },
+    "erase_keep_backend": {
+      "status": "PASS",
+      "metrics": [
+        {
+          "metric": "teacher_leak",
+          "value": 0.0,
+          "op": "<=",
+          "threshold": 0.2,
+          "status": "PASS",
+          "margin": 0.2
+        },
+        {
+          "metric": "u_kept",
+          "value": 0.9999999900000002,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.1499999900000002
+        },
+        {
+          "metric": "pole_rel_err",
+          "value": 0.0,
+          "op": "<=",
+          "threshold": 0.2,
+          "status": "PASS",
+          "margin": 0.2
+        },
+        {
+          "metric": "same_dir",
+          "value": 0.0,
+          "op": "<=",
+          "threshold": 0.25,
+          "status": "PASS",
+          "margin": 0.25
+        }
+      ],
+      "summary": "teacher_leak=0 (<= 0.2); u_kept=1 (>= 0.85); pole_rel_err=0 (<= 0.2); same_dir=0 (<= 0.25)",
+      "raw": {
+        "family": "erase_keep_backend",
+        "arm": "locked",
+        "backend": "cpu",
+        "backend_cls": "CpuBackend",
+        "latent_shape": [
+          4,
+          8,
+          8
+        ],
+        "teacher": "faithful_guard_e",
+        "cover_weight": 1.5,
+        "teacher_leak": 0.0,
+        "teacher_leak_ok": true,
+        "hold_cos": 1.0,
+        "leak_frac": -1.0,
+        "same_dir": 0.0,
+        "same_dir_ok": true,
+        "u_kept": 0.9999999900000002,
+        "pole_rel_err": 0.0,
+        "covered": true,
+        "axis_dot": 0.0,
+        "backend_calls": 8,
+        "pass": true,
+        "fail_reasons": "",
+        "leak_ratio_max": 0.2,
+        "locked_teacher": "faithful_guard_e"
+      },
+      "seconds": 1.144273026031442
+    },
+    "late_collapse": {
+      "status": "PASS",
+      "metrics": [
+        {
+          "metric": "selected_val_error",
+          "value": 0.06,
+          "op": "<=",
+          "threshold": 0.25,
+          "status": "PASS",
+          "margin": 0.19
+        },
+        {
+          "metric": "selected_collapsed",
+          "value": 0,
+          "op": "<=",
+          "threshold": 0,
+          "status": "PASS",
+          "margin": 0
+        },
+        {
+          "metric": "last_val_error",
+          "value": 1.4,
+          "op": ">=",
+          "threshold": 0.25,
+          "status": "PASS",
+          "margin": 1.15
+        },
+        {
+          "metric": "best_train_val_error",
+          "value": 1.4,
+          "op": ">=",
+          "threshold": 0.25,
+          "status": "PASS",
+          "margin": 1.15
+        }
+      ],
+      "summary": "selected_val_error=0.06 (<= 0.25); selected_collapsed=0 (<= 0); last_val_error=1.4 (>= 0.25); best_train_val_error=1.4 (>= 0.25)",
+      "raw": {
+        "validation": {
+          "step": 3,
+          "train_loss": 0.32,
+          "val_error": 0.06,
+          "collapsed": false
+        },
+        "last": {
+          "step": 7,
+          "train_loss": 0.01,
+          "val_error": 1.4,
+          "collapsed": true
+        },
+        "best_train": {
+          "step": 7,
+          "train_loss": 0.01,
+          "val_error": 1.4,
+          "collapsed": true
+        }
+      },
+      "seconds": 6.938993465155363e-05
+    },
+    "keep_critic": {
+      "status": "PASS",
+      "metrics": [
+        {
+          "metric": "weight_delta",
+          "value": 0.0,
+          "op": "<=",
+          "threshold": 0.0,
+          "status": "PASS",
+          "margin": 0.0
+        }
+      ],
+      "summary": "weight_delta=0 (<= 0.0)",
+      "seconds": 0.009987642988562584
+    },
+    "lm_target": {
+      "status": "PASS",
+      "metrics": [
+        {
+          "metric": "expr_gain",
+          "value": 1.0,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.15000000000000002
+        },
+        {
+          "metric": "struct_hold",
+          "value": 1.0,
+          "op": ">=",
+          "threshold": 0.95,
+          "status": "PASS",
+          "margin": 0.050000000000000044
+        },
+        {
+          "metric": "identity_mse",
+          "value": 0.0,
+          "op": "<=",
+          "threshold": 1e-08,
+          "status": "PASS",
+          "margin": 1e-08
+        }
+      ],
+      "summary": "expr_gain=1 (>= 0.85); struct_hold=1 (>= 0.95); identity_mse=0 (<= 1e-08)",
+      "seconds": 0.06177623302210122
+    },
+    "field_lift": {
+      "status": "PASS",
+      "rows": {
+        "plane": {
+          "status": "PASS",
+          "metrics": [
+            {
+              "metric": "u_kept",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.15000000000000002
+            },
+            {
+              "metric": "content_kept",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 0.75,
+              "status": "PASS",
+              "margin": 0.25
+            },
+            {
+              "metric": "leak_ratio",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 0.2,
+              "status": "PASS",
+              "margin": 0.2
+            },
+            {
+              "metric": "pole_rel_err",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 0.2,
+              "status": "PASS",
+              "margin": 0.2
+            },
+            {
+              "metric": "same_dir",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 0.25,
+              "status": "PASS",
+              "margin": 0.25
+            },
+            {
+              "metric": "lyric_abs",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 1e-06,
+              "status": "PASS",
+              "margin": 1e-06
+            }
+          ],
+          "summary": "u_kept=1 (>= 0.85); content_kept=1 (>= 0.75); leak_ratio=0 (<= 0.2); pole_rel_err=0 (<= 0.2); same_dir=0 (<= 0.25); lyric_abs=0 (<= 1e-06)"
+        },
+        "tilted": {
+          "status": "PASS",
+          "metrics": [
+            {
+              "metric": "u_kept",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.15000000000000002
+            },
+            {
+              "metric": "content_kept",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 0.75,
+              "status": "PASS",
+              "margin": 0.25
+            },
+            {
+              "metric": "leak_ratio",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 0.2,
+              "status": "PASS",
+              "margin": 0.2
+            },
+            {
+              "metric": "pole_rel_err",
+              "value": 7.316618492391588e-17,
+              "op": "<=",
+              "threshold": 0.2,
+              "status": "PASS",
+              "margin": 0.19999999999999993
+            },
+            {
+              "metric": "same_dir",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 0.25,
+              "status": "PASS",
+              "margin": 0.25
+            },
+            {
+              "metric": "lyric_abs",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 1e-06,
+              "status": "PASS",
+              "margin": 1e-06
+            }
+          ],
+          "summary": "u_kept=1 (>= 0.85); content_kept=1 (>= 0.75); leak_ratio=0 (<= 0.2); pole_rel_err=7.31662e-17 (<= 0.2); same_dir=0 (<= 0.25); lyric_abs=0 (<= 1e-06)"
+        }
+      },
+      "summary": "plane: PASS; tilted: PASS",
+      "seconds": 0.0006748799933120608
+    },
+    "path_suffix_lora": {
+      "status": "PASS",
+      "rows": {
+        "suffix": {
+          "status": "PASS",
+          "metrics": [
+            {
+              "metric": "coverage",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 0.0
+            },
+            {
+              "metric": "self_abs",
+              "value": 2.25,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 1.25
+            },
+            {
+              "metric": "cross_abs",
+              "value": 2.25,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 1.25
+            }
+          ],
+          "summary": "coverage=1 (>= 1.0); self_abs=2.25 (>= 1.0); cross_abs=2.25 (>= 1.0)",
+          "raw": {
+            "name": "suffix",
+            "targets": [
+              "self_attn.proj",
+              "cross_attn.proj"
+            ],
+            "passed": true,
+            "reasons": [],
+            "coverage": 1.0,
+            "self_abs": 2.25,
+            "cross_abs": 2.25,
+            "bare_abs": 0.0,
+            "refused": false,
+            "detail": ""
+          }
+        },
+        "regex": {
+          "status": "PASS",
+          "metrics": [
+            {
+              "metric": "coverage",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 0.0
+            },
+            {
+              "metric": "self_abs",
+              "value": 2.25,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 1.25
+            },
+            {
+              "metric": "cross_abs",
+              "value": 2.25,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 1.25
+            }
+          ],
+          "summary": "coverage=1 (>= 1.0); self_abs=2.25 (>= 1.0); cross_abs=2.25 (>= 1.0)",
+          "raw": {
+            "name": "regex",
+            "targets": "(?:self_attn|cross_attn)\\..+",
+            "passed": true,
+            "reasons": [],
+            "coverage": 1.0,
+            "self_abs": 2.25,
+            "cross_abs": 2.25,
+            "bare_abs": 0.0,
+            "refused": false,
+            "detail": ""
+          }
+        }
+      },
+      "summary": "suffix: PASS; regex: PASS",
+      "seconds": 0.006710994988679886
+    },
+    "dsl_macro_expand": {
+      "status": "PASS",
+      "raw": [
+        {
+          "name": "locked_expand",
+          "role": "locked_shared",
+          "toy": "dsl_macro_expand",
+          "kind": "documented",
+          "rules": [
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.4,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "blue",
+              "b": "red",
+              "alpha": -0.1,
+              "options": []
+            }
+          ],
+          "text_rules": [
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.4,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "blue",
+              "b": "red",
+              "alpha": -0.1,
+              "options": []
+            }
+          ],
+          "geometric_verdict": "recipe",
+          "won": true,
+          "reasons": [],
+          "order": 1
+        },
+        {
+          "name": "wrong_order",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "wrong_order",
+          "rules": [
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.4,
+              "options": []
+            },
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "blue",
+              "b": "red",
+              "alpha": -0.1,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "op_order"
+          ],
+          "order": 1
+        },
+        {
+          "name": "swapped_roles",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "swapped_roles",
+          "rules": [
+            {
+              "op": "exaggerate",
+              "a": "red",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "blue",
+              "b": "red",
+              "alpha": 0.4,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "red",
+              "b": "blue",
+              "alpha": -0.1,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "swapped_roles"
+          ],
+          "order": 1
+        },
+        {
+          "name": "wrong_alphas",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "wrong_alphas",
+          "rules": [
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 1.0,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 1.0,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "blue",
+              "b": "red",
+              "alpha": 1.0,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "alphas"
+          ],
+          "order": 1
+        },
+        {
+          "name": "dropped_percent",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "dropped_percent",
+          "rules": [
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.4,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "dropped_percent"
+          ],
+          "order": 1
+        },
+        {
+          "name": "single_write",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "single_write",
+          "rules": [
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 1.0,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "single_write"
+          ],
+          "order": 1
+        },
+        {
+          "name": "geometric_right",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "geometric_right",
+          "rules": [
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.4,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "blue",
+              "b": "red",
+              "alpha": -0.1,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "right",
+          "won": false,
+          "reasons": [
+            "geometric_right"
+          ],
+          "order": 1
+        },
+        {
+          "name": "fourth_loss",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "fourth_loss",
+          "rules": [
+            {
+              "op": "replace",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.1,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "fourth_loss"
+          ],
+          "order": 1
+        }
+      ],
+      "summary": "documented expansion PASS; 7/7 incorrect expansions rejected",
+      "seconds": 0.0004767499631270766
+    },
+    "dsl_phrase_jobs": {
+      "status": "PASS",
+      "rows": {
+        "neutralize": {
+          "status": "PASS",
+          "raw": {
+            "name": "neutralize",
+            "role": "documented",
+            "job": "neutralize",
+            "phrase": "red--",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 0.9992586374282837,
+            "color_on_red": 0.015094757080078125,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "blue_x": -0.015094757080078125,
+            "blue_y": 0.0,
+            "mix_x": -0.023432016372680664,
+            "mix_y": 0.9999999403953552,
+            "ops": [
+              "erase"
+            ],
+            "detail": "Neutralize \"red\": prompts that ask for it should come out without it (match the empty prompt)."
+          }
+        },
+        "bipolar": {
+          "status": "PASS",
+          "raw": {
+            "name": "bipolar",
+            "role": "documented",
+            "job": "bipolar",
+            "phrase": "red++",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 0.9983469843864441,
+            "color_on_red": 3.1668663024902344,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "blue_x": -3.1668663024902344,
+            "blue_y": 0.0,
+            "mix_x": 3.2244348526000977,
+            "mix_y": 0.9999999403953552,
+            "ops": [
+              "exaggerate"
+            ],
+            "detail": "Classic ++ stretches the color axis past the frozen red direction without dragging stripe."
+          }
+        },
+        "remap": {
+          "status": "PASS",
+          "raw": {
+            "name": "remap",
+            "role": "documented",
+            "job": "remap",
+            "phrase": "red=blue",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 0.9983469843864441,
+            "color_on_red": -1.1668663024902344,
+            "pattern_on_red": 0.0,
+            "write_cosine": 1.0,
+            "blue_x": 1.1668663024902344,
+            "blue_y": 0.0,
+            "mix_x": -1.2244348526000977,
+            "mix_y": 0.9999999403953552,
+            "ops": [
+              "write"
+            ],
+            "detail": "Trained red-direction aligns with frozen blue; stripe hold stays high."
+          }
+        },
+        "keep_erase": {
+          "status": "PASS",
+          "raw": {
+            "name": "keep_erase",
+            "role": "documented",
+            "job": "keep_erase",
+            "phrase": "red--|stripe#stripe",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 0.9999944567680359,
+            "color_on_red": 0.015244126319885254,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "blue_x": -0.015244126319885254,
+            "blue_y": 0.0,
+            "mix_x": 0.018573522567749023,
+            "mix_y": 0.9999999403953552,
+            "ops": [
+              "erase",
+              "freeze"
+            ],
+            "detail": "ESD plus `stripe#stripe` is the live-DSL way to pin the keep axis. Same geometry as the EA retain hook on this fixture."
+          }
+        },
+        "mix": {
+          "status": "PASS",
+          "raw": {
+            "name": "mix",
+            "role": "documented",
+            "job": "mix",
+            "phrase": "red=red stripe",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 1.0,
+            "color_on_red": 1.0,
+            "pattern_on_red": 0.9849053025245667,
+            "write_cosine": -0.7124635577201843,
+            "blue_x": -1.0,
+            "blue_y": -0.9849053025245667,
+            "mix_x": 1.0,
+            "mix_y": 2.0234320163726807,
+            "ops": [
+              "write"
+            ],
+            "detail": "Write red toward the mixed embedding: red keeps color and picks up stripe. First-class `+` would be a synonym here."
+          }
+        },
+        "isolate": {
+          "status": "PASS",
+          "raw": {
+            "name": "isolate",
+            "role": "documented",
+            "job": "isolate",
+            "phrase": "red stripe=stripe",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 0.9071813225746155,
+            "color_on_red": 0.5012162923812866,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "blue_x": -0.5012162923812866,
+            "blue_y": 0.0,
+            "mix_x": 0.03742825984954834,
+            "mix_y": 0.9999999403953552,
+            "ops": [
+              "write"
+            ],
+            "detail": "Write the mix onto stripe: `red stripe` lands on e_y. Standalone red/stripe drift is the linear LoRA class, same caveat as the antipodal write swap."
+          }
+        }
+      },
+      "summary": "neutralize: PASS; bipolar: PASS; remap: PASS; keep_erase: PASS; mix: PASS; isolate: PASS",
+      "seconds": 0.22640982700977474
+    },
+    "dsl_game_geometry": {
+      "status": "PASS",
+      "rows": {
+        "write": {
+          "status": "PASS",
+          "geometry": {
+            "teacher": "faithful_guard_e",
+            "teacher_leak": 0.0,
+            "teacher_leak_ok": true,
+            "hold_cos": 1.0,
+            "leak_frac": -1.0,
+            "same_dir": 0.0,
+            "even_norm": 0.0,
+            "odd_norm": 2.1668663024902344,
+            "same_dir_ok": true
+          },
+          "before": {
+            "step": 0,
+            "color_on_red": 1.0,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.0,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 1.0,
+            "red_norm": 1.0,
+            "stripe_norm": 0.9999999403953552
+          },
+          "after": {
+            "step": 40,
+            "color_on_red": -1.1668663024902344,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": -0.057568758726119995,
+            "pattern_on_red": 0.0,
+            "write_cosine": 1.0,
+            "stripe_hold": 0.9983469843864441,
+            "red_norm": 1.1668663024902344,
+            "stripe_norm": 1.0016556978225708
+          },
+          "summary": "Trained red-direction aligns with frozen blue; stripe hold stays high."
+        },
+        "erase_esd": {
+          "status": "PASS",
+          "geometry": {
+            "teacher": "faithful_guard_e",
+            "teacher_leak": 0.0,
+            "teacher_leak_ok": true,
+            "hold_cos": 1.0,
+            "leak_frac": -1.0,
+            "same_dir": 0.0,
+            "even_norm": 0.0,
+            "odd_norm": 0.9849052429199219,
+            "same_dir_ok": true
+          },
+          "before": {
+            "step": 0,
+            "color_on_red": 1.0,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.0,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 1.0,
+            "red_norm": 1.0,
+            "stripe_norm": 0.9999999403953552
+          },
+          "after": {
+            "step": 40,
+            "color_on_red": 0.015094757080078125,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": -0.0385267436504364,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 0.9992586374282837,
+            "red_norm": 0.015094757080078125,
+            "stripe_norm": 1.0007418394088745
+          },
+          "summary": "Live ESD (g=0) matches the empty prompt: red CFG goes to the origin, not onto blue. Stripe hold stays high."
+        },
+        "exaggerate": {
+          "status": "PASS",
+          "geometry": {
+            "teacher": "faithful_guard_e",
+            "teacher_leak": 0.0,
+            "teacher_leak_ok": true,
+            "hold_cos": 1.0,
+            "leak_frac": -1.0,
+            "same_dir": 0.0,
+            "even_norm": 0.0,
+            "odd_norm": 2.1668663024902344,
+            "same_dir_ok": true
+          },
+          "before": {
+            "step": 0,
+            "color_on_red": 1.0,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.0,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 1.0,
+            "red_norm": 1.0,
+            "stripe_norm": 0.9999999403953552
+          },
+          "after": {
+            "step": 40,
+            "color_on_red": 3.1668663024902344,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.057568758726119995,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 0.9983469843864441,
+            "red_norm": 3.1668663024902344,
+            "stripe_norm": 1.0016556978225708
+          },
+          "summary": "Classic ++ stretches the color axis past the frozen red direction without dragging stripe."
+        },
+        "erase_esd_freeze": {
+          "status": "PASS",
+          "geometry": {
+            "teacher": "faithful_guard_e",
+            "teacher_leak": 0.0,
+            "teacher_leak_ok": true,
+            "hold_cos": 1.0,
+            "leak_frac": -1.0,
+            "same_dir": 0.0,
+            "even_norm": 0.0,
+            "odd_norm": 0.9847558736801147,
+            "same_dir_ok": true
+          },
+          "before": {
+            "step": 0,
+            "color_on_red": 1.0,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.0,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 1.0,
+            "red_norm": 1.0,
+            "stripe_norm": 0.9999999403953552
+          },
+          "after": {
+            "step": 40,
+            "color_on_red": 0.015244126319885254,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.0033294782042503357,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 0.9999944567680359,
+            "red_norm": 0.015244126319885254,
+            "stripe_norm": 1.0000054836273193
+          },
+          "summary": "ESD plus `stripe#stripe` is the live-DSL way to pin the keep axis. Same geometry as the EA retain hook on this fixture."
+        }
+      },
+      "summary": "write: PASS; erase_esd: PASS; exaggerate: PASS; erase_esd_freeze: PASS",
+      "seconds": 0.14700103795621544
+    }
+  },
+  "shared_environment": {
+    "conceptmod_commit": "5571213f5e8e129cfda45c785c3f30aad9c1d8c9",
+    "peft": "0.21.0",
+    "transformers": "5.15.0"
+  }
+}

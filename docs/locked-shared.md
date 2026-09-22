@@ -63,6 +63,15 @@ GPU landings for that arm have not been run.
 
 ## Measured conceptmod verification
 
+The expanded [live-weight baseline](../reports/behavioral_baseline/README.md)
+trains each candidate on nine toys and requires all 29 numerical bounds. R1+R2
+at coefficient 0.1 passes all nine with live weights; the original locked
+settings pass seven, and removing particle L2 passes eight. Ten shared geometry
+and application checks also pass and are shown separately. See the
+[protocol](../benchmarks/locked_shared/BASELINE.md) for config fields, fixed
+budgets, scope, and commands for comparing another approach. EMA cannot rescue a
+live failure. The passing R1+R2 row retains particle L2 0.02.
+
 The [behavioral leaderboard](../reports/locked_shared/README.md) runs extracted
 two-pole, shared-trajectory and ring-diversity experiments through these
 builders. Every variant trains and is scored from measurements; no config

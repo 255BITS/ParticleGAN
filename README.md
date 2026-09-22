@@ -116,6 +116,10 @@ penalty = make_b_cap()     # GradientPenalty b_cap, κ=1, lazy_k=1
 three CPU training toys, numerical outcomes, and ten reference comparisons.
 Configuration checks do not contribute to the score.
 
+[Full live-weight behavioral baseline](reports/behavioral_baseline/README.md):
+nine trained toys, 29 numerical bounds, separate EMA diagnostics, and ten shared
+application checks. Includes a passing config and a reusable comparison runner.
+
 `prior.sample(batch_size)` returns `(z, indices)`, with `z` shaped `[B, z_dim]`.
 Include `prior.parameters()` in your generator optimizer to learn the particles.
 Use `GaussianPrior(z_dim=16)` for fresh Gaussian samples with the same sampling

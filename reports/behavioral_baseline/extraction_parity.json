@@ -1,0 +1,183 @@
+{
+  "conceptmod_commit": "5571213f5e8e129cfda45c785c3f30aad9c1d8c9",
+  "source_sha256": {
+    "residual_student.py": "923dbde86d8f664c75aec18a2a2a833450b060a664f08f5861598ebc96ddaeeb",
+    "unipolar.py": "8c639b81739ede7429071b06b898ef75a690c0a9d2f4358622db55f328bcccfa",
+    "ae_gan_hold.py": "0582a67a9c03139a0eca162363824bc08ce831735b4463319716e849d3e161ad",
+    "cover_leftover.py": "de576f93235df4476a4b69ea213d620d579630f78e0c1cca77727a6a79503181",
+    "unused_token_hold.py": "d0f3d83c4e552662364615e66a3ed3b44026adbd10abc3b74f0c4368739bcd9c",
+    "mid_scale_identity.py": "5df23bc4c749ffa161e3a4ee1c4358711ec0fbbeca1f5578beaa4856b8fcd3ce",
+    "shared_trajectory.py": "a1f76626d43c3ef96933bedac6809c8b11a44c1f02c30399488a3b3e49f5476c"
+  },
+  "torch": "2.13.0+cu126",
+  "rows": [
+    {
+      "toy": "residual_student",
+      "matches": true,
+      "metrics": {
+        "identity_mse": {
+          "reference": 0.0021875102538615465,
+          "extracted": 0.0021875102538615465,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "success_rate": {
+          "reference": 1.0,
+          "extracted": 1.0,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "wrong_pad_rate": {
+          "reference": 0.0,
+          "extracted": 0.0,
+          "abs_diff": 0.0,
+          "matches": true
+        }
+      }
+    },
+    {
+      "toy": "unipolar",
+      "matches": true,
+      "metrics": {
+        "cover": {
+          "reference": 0.9606202907704642,
+          "extracted": 0.9606202907704642,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "off_caption": {
+          "reference": 3.867536352114723e-06,
+          "extracted": 3.867536352114723e-06,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "neu_hold": {
+          "reference": 0.9634362608194351,
+          "extracted": 0.9634362608194351,
+          "abs_diff": 0.0,
+          "matches": true
+        }
+      }
+    },
+    {
+      "toy": "ae_gan_hold",
+      "matches": true,
+      "metrics": {
+        "recon_mse": {
+          "reference": 0.007352104410529137,
+          "extracted": 0.007352104410529137,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "hold": {
+          "reference": 0.018749481067061424,
+          "extracted": 0.018749481067061424,
+          "abs_diff": 0.0,
+          "matches": true
+        }
+      }
+    },
+    {
+      "toy": "cover_leftover",
+      "matches": true,
+      "metrics": {
+        "u_kept": {
+          "reference": 0.9357793237568308,
+          "extracted": 0.9357793237568308,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "content_kept": {
+          "reference": 0.9731987212705988,
+          "extracted": 0.9731987212705988,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "leak_ratio": {
+          "reference": 0.0006282924201798933,
+          "extracted": 0.0006282924201798933,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "pole_rel_err_plus": {
+          "reference": 0.04342861473560333,
+          "extracted": 0.04342861473560333,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "pole_rel_err_minus": {
+          "reference": 0.04565076157450676,
+          "extracted": 0.04565076157450676,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "same_dir": {
+          "reference": 0.0015842995820100638,
+          "extracted": 0.0015842995820100638,
+          "abs_diff": 0.0,
+          "matches": true
+        }
+      }
+    },
+    {
+      "toy": "unused_token_hold",
+      "matches": true,
+      "metrics": {
+        "unused_hold": {
+          "reference": 0.9914478166028857,
+          "extracted": 0.9914478166028857,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "concept_move": {
+          "reference": 0.9676894873840638,
+          "extracted": 0.9676894873840638,
+          "abs_diff": 0.0,
+          "matches": true
+        }
+      }
+    },
+    {
+      "toy": "mid_scale_identity",
+      "matches": true,
+      "metrics": {
+        "concept_cos_plus": {
+          "reference": 0.9999642968177795,
+          "extracted": 0.9999642968177795,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "concept_cos_minus": {
+          "reference": 0.9999969601631165,
+          "extracted": 0.9999969601631165,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "concept_mag_plus": {
+          "reference": 1.0213077068328857,
+          "extracted": 1.0213077068328857,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "concept_mag_minus": {
+          "reference": 0.9710105657577515,
+          "extracted": 0.9710105657577515,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "identity_at_0": {
+          "reference": 0.9966386232848841,
+          "extracted": 0.9966386232848841,
+          "abs_diff": 0.0,
+          "matches": true
+        },
+        "identity_at_mid": {
+          "reference": 0.9994924935629852,
+          "extracted": 0.9994924935629852,
+          "abs_diff": 0.0,
+          "matches": true
+        }
+      }
+    }
+  ]
+}
