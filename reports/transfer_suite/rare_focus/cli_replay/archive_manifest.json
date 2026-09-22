@@ -1,0 +1,60 @@
+{
+  "files": [
+    {
+      "path": "episode.json.gz",
+      "original_path": "episode.json.gz",
+      "original_sha256": "aec8c646034c4a7504701ad36226a5bd7e074a0cebc89a740893113924b4fa6d",
+      "archived_sha256": "aec8c646034c4a7504701ad36226a5bd7e074a0cebc89a740893113924b4fa6d",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "parity.json.gz",
+      "original_path": "parity.json",
+      "original_sha256": "ad8285e6c31b5ad593f9c6c7cccc71149c9135d0a9e90c95f845b20e1cb0079e",
+      "archived_sha256": "13f9b1d791ef10cb8787a45761ffc2ab9375427802c64868b6a260bca83aae3d",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "plan.json.gz",
+      "original_path": "plan.json",
+      "original_sha256": "1a102e3f4f92cd5f63e03b49425db1850219ec00afd84c877f9a7f22d6803446",
+      "archived_sha256": "69b6e3bf17502c032201fa2f0d967b3c04c297a40e130f1f647f2aa0ec24505c",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "protocol.json.gz",
+      "original_path": "protocol.json",
+      "original_sha256": "2785d730daddd80b8661ce9623b728d9f4b39560b3e2fc03afbe0f56dd200835",
+      "archived_sha256": "9cb55b0b0e7b735a49980e6c6c1e1d0732648b0e79063301244cf917e615d53b",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "reference.json.gz",
+      "original_path": "reference.json.gz",
+      "original_sha256": "07c505c9e26a18e393a2ca7156e0c1d94bbeb833d99b7d6dabd4134349a4a8bf",
+      "archived_sha256": "07c505c9e26a18e393a2ca7156e0c1d94bbeb833d99b7d6dabd4134349a4a8bf",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "run.log",
+      "original_path": "run.log",
+      "original_sha256": "1e0fcee9f9cc6bed1b9cb6e046595e4934a1d5075dd90b0e37bf3365d7dabf86",
+      "archived_sha256": "1e0fcee9f9cc6bed1b9cb6e046595e4934a1d5075dd90b0e37bf3365d7dabf86",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "source.tar.gz",
+      "original_path": "source.tar.gz",
+      "original_sha256": "03c38ac312e5704fd21a169a6dda2f2e8acef3f52601f52a3ea57c00d5aec381",
+      "archived_sha256": "03c38ac312e5704fd21a169a6dda2f2e8acef3f52601f52a3ea57c00d5aec381",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    }
+  ]
+}

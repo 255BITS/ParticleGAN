@@ -1,0 +1,108 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "original_path": "README.md",
+      "original_sha256": "d768043a4779ed024e835cea31422deaf05e2e51bb61d0efa6aee2525cc25313",
+      "archived_sha256": "d768043a4779ed024e835cea31422deaf05e2e51bb61d0efa6aee2525cc25313",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "architecture_checks.json.gz",
+      "original_path": "architecture_checks.json",
+      "original_sha256": "ab19e237b9eb135a75509d246be16e9c01cc09c3226ddb1292bb3feb1eb0faa7",
+      "archived_sha256": "1d7c3ce88c59350ef46f890fab97223b3969cfd05152dfee62a4a92df61b5593",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/ensemble2_softplus5_d96__vector_unequal_mass.json.gz",
+      "original_path": "episodes/ensemble2_softplus5_d96__vector_unequal_mass.json.gz",
+      "original_sha256": "9d262b73c5ef9e65c3df9ab81e909401ceb46403c1917763b60cde9073356214",
+      "archived_sha256": "9d262b73c5ef9e65c3df9ab81e909401ceb46403c1917763b60cde9073356214",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/ensemble2_softplus6_d96__vector_unequal_mass.json.gz",
+      "original_path": "episodes/ensemble2_softplus6_d96__vector_unequal_mass.json.gz",
+      "original_sha256": "22d17ed1c4c6ff0c6f23cceb19fd2b2c0a2cbfa78de62faebb29ecea1398dfbf",
+      "archived_sha256": "22d17ed1c4c6ff0c6f23cceb19fd2b2c0a2cbfa78de62faebb29ecea1398dfbf",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/ensemble4_softplus5_d96__vector_unequal_mass.json.gz",
+      "original_path": "episodes/ensemble4_softplus5_d96__vector_unequal_mass.json.gz",
+      "original_sha256": "2bcb4cf20f575c4676466e9219fbdf98c578a3bc7c1fa5723ddce6eed31c9b19",
+      "archived_sha256": "2bcb4cf20f575c4676466e9219fbdf98c578a3bc7c1fa5723ddce6eed31c9b19",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/ensemble4_softplus6_d96__vector_unequal_mass.json.gz",
+      "original_path": "episodes/ensemble4_softplus6_d96__vector_unequal_mass.json.gz",
+      "original_sha256": "8eb42858541fe981a2b592f578510b4f58d6d53367e15d392099f1bf64459c93",
+      "archived_sha256": "8eb42858541fe981a2b592f578510b4f58d6d53367e15d392099f1bf64459c93",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "index.json.gz",
+      "original_path": "index.json",
+      "original_sha256": "ff731a99109d3eb672879ba685f6eb303988fd54285c39d887278c788d229935",
+      "archived_sha256": "ef7e61a54367b64b15dac11ac60469392609b790a79c2ad1fa2db5cec7211983",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "plan.json.gz",
+      "original_path": "plan.json",
+      "original_sha256": "f064f750ca3a6e80dd3d7233ff89da1061bc3a24be4baec511878f9c1472114c",
+      "archived_sha256": "9e40e3fe82aadac6d756263471f925a28aae4e413170316ed24c64d3bf96794f",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "protocol.json.gz",
+      "original_path": "protocol.json",
+      "original_sha256": "d2010580c2ecbe06c4f367186b454fe871ca1db35053789ed76e7ada8d8ef96f",
+      "archived_sha256": "7c9f108abb49a7e296b2bd5397a1d5eb31f71eb620a5a24dea255a297704d519",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "run.log",
+      "original_path": "run.log",
+      "original_sha256": "8a148ca70a9cdc5524a84afd923143811cf2d1668c054844d1f992cfc79d81ca",
+      "archived_sha256": "8a148ca70a9cdc5524a84afd923143811cf2d1668c054844d1f992cfc79d81ca",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "run.py",
+      "original_path": "run.py",
+      "original_sha256": "1deee069ab0c62dff272c1924b92575f7833a03baa0030987e4b3b84ba5f555c",
+      "archived_sha256": "1deee069ab0c62dff272c1924b92575f7833a03baa0030987e4b3b84ba5f555c",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "selection.json.gz",
+      "original_path": "selection.json",
+      "original_sha256": "6cdc2be6556e59df1c4942ae2a1372ae0923c05fff39cd58f6a64e1ff10ff5b1",
+      "archived_sha256": "fb03fdf68639d7a318ab61b498f7dd2c92abed936312960182006cf40aca72bb",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "source.tar.gz",
+      "original_path": "source.tar.gz",
+      "original_sha256": "9830fa4bb35e44f9bae58ce1f5c4abcab43735e8bcf53a4e76a80164fcff5271",
+      "archived_sha256": "9830fa4bb35e44f9bae58ce1f5c4abcab43735e8bcf53a4e76a80164fcff5271",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    }
+  ]
+}

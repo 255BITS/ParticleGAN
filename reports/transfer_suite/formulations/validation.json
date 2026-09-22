@@ -1,7 +1,7 @@
 {
   "archive_files": 8,
   "archived_source_files": 56,
-  "referenced_artifacts": 167,
+  "referenced_artifacts": 230,
   "nominal_ring_runs": [
     {
       "artifact": "nominal_ring/episodes/bcap10_nominal_ring__stress_r1_r2.json.gz",
@@ -14,7 +14,7 @@
       "observations": 24
     }
   ],
-  "tests": "29 passed in 2.22s",
+  "tests": "34 passed in 1.38s",
   "errors": [],
   "retained_result_references": 66,
   "scope_revision": {
@@ -34,5 +34,17 @@
     "unchanged_recipe": true,
     "per_toy_architecture_allowed": true,
     "evidence": "../valid_search/validation.json"
+  },
+  "subsequent_rare_focus": {
+    "required": 9,
+    "practical": 10,
+    "total_practical": 10,
+    "candidates": 58,
+    "new_training_episodes": 63,
+    "diagnostic_replays": 2,
+    "winning_replays": 2,
+    "per_toy_architecture_allowed": true,
+    "unchanged_recipe": true,
+    "evidence": "../rare_focus/validation.json"
   }
 }

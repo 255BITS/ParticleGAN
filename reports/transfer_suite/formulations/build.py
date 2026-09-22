@@ -86,6 +86,8 @@ def build():
                     for folder in ("smooth_discriminator", "softplus_refinement"):
                         for path in sorted((SUITE / "valid_search" / folder).glob(f"**/episodes/*__{name}.json.gz")):
                             variants.append(trial(path, path.name.split("__")[0]))
+                    for path in sorted((SUITE / "rare_focus").glob(f"**/episodes/*__{name}.json.gz")):
+                        variants.append(trial(path, path.name.split("__")[0]))
             elif runner == "vector":
                 stage = "screen" if name in ("vector_unequal_mass", "vector_unequal_width", "vector_overlap") else "regressions"
                 variants.append(trial(SOLVE / "vectors" / stage / "episodes" / f"cap10__{name}.json.gz", "cap10 original architecture"))
@@ -123,12 +125,12 @@ def build():
                           for domain in ("vector", "image")}
         assert row["practical_total"] == 10 and len(row["diagnostics"]) == 5
         rows.append(row)
-    assert [r["practical_passes"] for r in rows] == [9, 7]
+    assert [r["practical_passes"] for r in rows] == [10, 7]
     report = dict(version="formulation-defaults-v2", rows=rows,
                   rule="One formulation entry; architecture trials stay inside each case. Target, formulation, training settings and resource budget must match within an architecture cell. Every attempt remains visible.",
                   scope_revision="User-requested PR scope: evaluate candidate-owned training recipes on nine required and ten data/image toys. Forced LR/batch/discriminator variants and the additional original-budget eight-Gaussian run are diagnostics. Longer training is a separate toy. Prior 7/16 becomes 7/10 by scope change only; no numerical result or metric threshold changed.",
                   candidate_recipe="Loss, regularization, LR, Adam, schedule, update balance and batch are declared candidate choices. Tests must not impose alternate choices and count those as core failures. Architecture remains separate.",
-                  improvement="b_cap3 reaches 9/10 with unchanged training settings: wider/deeper D solves overlap; Softplus(beta5) D solves unequal width. Suitable D architectures may differ by toy; same formulation entry, no extra updates. Rare mass remains unresolved.",
+                  improvement="b_cap3 reaches 10/10 with unchanged training settings: wider/deeper D solves overlap; Softplus(beta5) D solves unequal width; D96x2 Softplus5 plus a raw linear skip solves rare mass. Suitable D architectures differ by toy; same formulation entry, no extra updates.",
                   training_scope="Existing declared host recipes are retained, including different host learning rates and Adam betas. No claim of one universal numerical optimizer preset.",
                   source_sha256={str(p.relative_to(SUITE.parents[1])): hashlib.sha256(p.read_bytes()).hexdigest()
                                  for p in [Path(__file__), SUITE.parents[1] / "benchmarks/transfer_suite/formulations.py"]})
@@ -138,7 +140,7 @@ def build():
              "each case counts once. Architecture failures remain visible. Architecture cells cannot mix numerical "
              "formulations, optimizer settings, data or training budgets.", "",
              "Current PR scope: nine required regressions, six data toys and four image toys. "
-             "The scope revision changed 7/16 to 7/10. Subsequent discriminator-only results improve b_cap3 to 9/10 with the same training recipe. "
+             "The scope revision changed 7/16 to 7/10. Subsequent discriminator-only results improve b_cap3 to 10/10 with the same training recipe. "
              "[Longer training](LONG_TRAINING.md) is a separate toy; "
              "[imposed-setting diagnostics](DIAGNOSTICS.md) do not affect this comparison.", ""]
     for row in rows:

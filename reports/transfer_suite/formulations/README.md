@@ -13,24 +13,34 @@ recipes cannot be silently combined to produce one architecture result.
 
 ## Main comparison
 
-The [valid-toy search](../valid_search/README.md) improves the original
-b_cap3 recipe to **9/10** with suitable D architectures: a wider/deeper D fixes
-overlap, and Softplus(beta5) fixes unequal width. Broad, anisotropic and spiral
-retain passing architectures. A single D does not pass all five; the rare 2%
-mode remains unresolved.
+The [valid-toy search](../valid_search/README.md) and
+[focused rare-mode search](../rare_focus/README.md) bring the original b_cap3
+recipe to **9/9 required + 10/10 practical = 19/19 live behavioral toys** with
+suitable architectures. A wider/deeper D fixes overlap, Softplus(beta5) fixes
+unequal width, and D96×2 Softplus5 with a raw-coordinate linear skip fixes the
+rare 2% mode. Broad, anisotropic and spiral retain passing architectures.
+Different toys use different D architectures; no single D passes all six data toys.
 Loss, regularization, optimizer settings and update budgets remain fixed.
 The wider D grows from 4,929 to about 35,000 parameters; Softplus retains the
 original 4,929. No wall-time speedup is established.
 
+The rare-mode winner adds two learnable parameters to the 10,465-parameter
+D96×2 Softplus discriminator. It passes the final six measurements, starting
+at step 950 and confirming at 1,150 of 1,200 updates. Its own full data profile
+is 3/6: rare mass, broad and spiral pass; unequal width, anisotropic and overlap
+fail. Those cases retain other supported architectures under the same recipe.
+[Exact replays and diagnosis](../rare_focus/DIAGNOSIS.md) identified flattening
+in the earlier failed run; the new winner is independently reproduced.
+
 | Formulation | Required live | Data toys | Image toys with supported architecture | Practical support |
 | --- | ---: | ---: | ---: | ---: |
-| **RpGAN logistic + b_cap3 / κ1.25 + prior regularization .05, no L2** | **9/9** | **5/6** | **4/4** | **9/10** |
+| **RpGAN logistic + b_cap3 / κ1.25 + prior regularization .05, no L2** | **9/9** | **6/6** | **4/4** | **10/10** |
 | RpGAN logistic + b_cap10 / κ1.25 + prior regularization .05, no L2 | 8/9; not qualified yet | 4/6 | 3/4 | 7/10 |
 
 **Scope revision:** the previous 7/16 becomes 7/10 because the user requested
 that imposed training-condition variations be excluded from this PR's main
 comparison. That recount changed no measurement or threshold; the subsequent D search
-adds the two new practical passes shown above. The nine existing
+adds the three new practical passes shown above. The nine existing
 required behavioral regressions, including the required ring test, remain.
 Longer training is a separate toy below; the other five former dynamics rows
 remain [nonblocking diagnostic evidence](DIAGNOSTICS.md).

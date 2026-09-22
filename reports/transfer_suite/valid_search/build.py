@@ -72,7 +72,7 @@ def build():
     rows = [summary('Original recipe + supported D architectures', required,
                     {k:v for k,v in practical.items() if k.startswith('vector_')},
                     {k:v for k,v in practical.items() if k.startswith('img_')},
-                    'Original optimizer settings. D128x3/Fourier3 or4 adds overlap; D64x2/Fourier2 with Softplus(beta5 or10) adds unequal width. Suitable D can differ by toy; residual16 covers all images. Same b_cap3 formulation.')]
+                    'Original optimizer settings. D128x3/Fourier3 or4 adds overlap; D64x2/Fourier2 Softplus(beta5 or10) adds unequal width; D96x2/Fourier2 Softplus5 plus raw linear skip adds rare mass. Suitable D differs by toy; residual16 covers all images. Same b_cap3 formulation.')]
     for name, folder, data_paths, image_paths, description in [
         ('Adam beta2=.999', 'adam999_hosts',
          list((SUITE/'solvability/vectors/screen/episodes').glob('adam999__*.gz')) + list((SUITE/'solvability/vectors/regressions/episodes').glob('adam999__*.gz')),
@@ -104,8 +104,8 @@ def build():
                   source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
     (ROOT/'leaderboard.json').write_text(json.dumps(report,indent=2)+'\n')
     lines=['# Valid behavioral toys: search for b_cap3 defaults','',
-           '**The original b_cap3 recipe now passes 9/9 required and 9/10 practical toys using supported discriminator architectures.** '
-           'The rare 2% mode is the remaining failure. Different toys may use different D architectures; a single D does not pass them all. Adam beta2=.999 reaches 8/10 with different supported image architectures.',
+           '**The original b_cap3 recipe now passes 9/9 required and 10/10 practical toys using supported architectures.** '
+           'The subsequent rare-mode search supplies the final missing pass. Different toys use different D architectures; a single D does not pass them all. Adam beta2=.999 reaches 8/10 with different supported image architectures.',
            '', 'All rows use Rp logistic, b_cap3/κ1.25, prior regularization .05 and no particle L2. '
            'Optimizer choices are separate trials under that formulation. Architecture variants stay within a recipe; failures and every untested case remain visible.',
            '', '| Training recipe | Required live | Data | Images with supported architecture | Practical | Qualified on required |',
@@ -121,6 +121,10 @@ def build():
               '- **Smooth discriminator activation fixes unequal width.** Replacing LeakyReLU with Softplus(beta5) in the original D64×2/Fourier2 holds its 4,929 parameters and every training setting fixed. '
               'It passes the final seven checks; beta10 also passes. Their full six-data profiles pass 3/6; the formulation uses appropriate D architectures for the other toys. '
               '[Architecture results](smooth_discriminator/README.md) · [Reusable critic and reproduction](../../../benchmarks/transfer_suite/smooth_critic_research.md).',
+              '- **A raw-coordinate skip fixes rare mass.** The subsequent focused search finds D96×2/Fourier2 Softplus5 plus a zero-initialized, learned linear skip. '
+              'It sustains the final six rare-toy checks at the original 1,200 updates and has been independently reproduced. '
+              'Its full six-data profile is 3/6; the other supported architectures retain the remaining passes. '
+              '[All new attempts and reproduction](../rare_focus/README.md).',
               '- **Adam beta2=.999 is another recipe under the same formulation.** It passes all nine required hosts and fixes overlap with the smaller original vector D. '
               'Residual16 fails blobs (HQ 84.4%); transpose12 passes that toy under the same recipe. All four image architecture profiles are retained.',
               '- **The coordinated recipe trades away other passes.** The coordinated recipe solves rare mass and overlap at 256 particles and the original budget, '
@@ -133,6 +137,8 @@ def build():
               '[D/recipe combinations](discriminator_combinations/README.md) · [Adam999 required/image checks](adam999_hosts/README.md) · '
               '[Adam999 image architectures](adam999_images/README.md) · [Coordinated recipe across hosts](coordinated_hosts/README.md) · '
               '[Resource searches](resources/README.md) · [Softplus refinement](softplus_refinement/README.md) · [512-particle smooth-D checks](smooth512/README.md).',
+              '', '[Subsequent focused rare-mode search](../rare_focus/README.md) adds architecture-only attempts and exact update diagnostics. '
+              'Its results are included in the current formulation matrix; its episode counts and archives are separate from the 270-run search retained here.',
               '', 'The research host adapter applies the same LR factors to G, D and ParticlePrior parameter groups across hosts, including direct particle-only optimizers. '
               'It reproduces the native rare-vector result and the neutral image control exactly before cross-host evaluation; '
               '[parity evidence](coordinated_hosts/parity.json.gz) and exact driver source are archived. No production API or defaults changed.',
