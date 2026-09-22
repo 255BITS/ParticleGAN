@@ -1,0 +1,14 @@
+[
+  {
+    "name": "bcap_k1p25_c3p0_lr0p85",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 3.0,
+    "reg_kappa": 1.25,
+    "particle_l2": 0.0,
+    "vicreg_weight": 0.05,
+    "cover_weight": 1.5,
+    "lr_multiplier": 0.85
+  }
+]

@@ -1,5 +1,7 @@
 # Behavioral baseline — live weights
 
+> Same-runtime control for the side search. On this CPU `r1_r2_0_1` fails the live ring. Codex’s published row still passes. Summary: [../README.md](../README.md).
+
 **No complete passing live configuration recorded.**
 
 Protocol `behavior-v1` · CPU · seed 0 · fixed host budgets · final live weights.

@@ -1,5 +1,7 @@
 # Behavioral baseline — live weights
 
+> Side search on a CPU that does not reproduce the published ring. The PASS rows below are not wins over Codex’s `b_cap` leaderboard. Summary: [../README.md](../README.md).
+
 **Passing live baseline: `r1_r2_0_1_l2_004`, `r1_r2_0_1_l2_005`, `r1_r2_0_1_l2_007`.**
 
 Protocol `behavior-v1` · CPU · seed 0 · fixed host budgets · final live weights.

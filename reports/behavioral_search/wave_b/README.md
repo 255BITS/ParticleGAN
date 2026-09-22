@@ -1,5 +1,7 @@
 # Behavioral baseline — live weights
 
+> Side search on a CPU that does not reproduce the published ring. Do not promote these rows over the [PR #38 leaderboard](../../behavioral_baseline/README.md). Summary: [../README.md](../README.md).
+
 **No complete passing live configuration recorded.**
 
 Protocol `behavior-v1` · CPU · seed 0 · fixed host budgets · final live weights.

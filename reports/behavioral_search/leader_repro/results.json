@@ -1,0 +1,5294 @@
+{
+  "protocol": {
+    "version": "behavior-v1",
+    "seed": 0,
+    "device": "cpu",
+    "threads": 1,
+    "evaluation": "final live weights; EMA reported separately where implemented",
+    "ranking": "passed toys, passed bounds, live ring modes, HQ, effective modes; descending",
+    "budgets": {
+      "two_pole": 80,
+      "trajectory": 400,
+      "residual_student": 400,
+      "unipolar": 400,
+      "ae_gan_hold": 250,
+      "cover_leftover": 800,
+      "unused_token_hold": 200,
+      "mid_scale_identity": 800,
+      "mode_hold": 1200
+    },
+    "metrics": {
+      "two_pole": [
+        [
+          "mean_abs",
+          ">=",
+          0.3
+        ],
+        [
+          "grad_med",
+          "<=",
+          1.0
+        ]
+      ],
+      "trajectory": [
+        [
+          "identity_mse",
+          "<=",
+          0.02
+        ]
+      ],
+      "residual_student": [
+        [
+          "identity_mse",
+          "<=",
+          0.02
+        ],
+        [
+          "success_rate",
+          ">=",
+          1.0
+        ],
+        [
+          "wrong_pad_rate",
+          "<=",
+          0.0
+        ]
+      ],
+      "unipolar": [
+        [
+          "cover",
+          ">=",
+          0.85
+        ],
+        [
+          "off_caption",
+          "<=",
+          0.05
+        ],
+        [
+          "neu_hold",
+          ">=",
+          0.85
+        ]
+      ],
+      "ae_gan_hold": [
+        [
+          "recon_mse",
+          "<=",
+          0.05
+        ],
+        [
+          "hold",
+          "<=",
+          0.35
+        ]
+      ],
+      "cover_leftover": [
+        [
+          "u_kept",
+          ">=",
+          0.85
+        ],
+        [
+          "content_kept",
+          ">=",
+          0.75
+        ],
+        [
+          "leak_ratio",
+          "<=",
+          0.2
+        ],
+        [
+          "pole_rel_err_plus",
+          "<=",
+          0.2
+        ],
+        [
+          "pole_rel_err_minus",
+          "<=",
+          0.2
+        ],
+        [
+          "same_dir",
+          "<=",
+          0.25
+        ]
+      ],
+      "unused_token_hold": [
+        [
+          "unused_hold",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_move",
+          ">=",
+          0.85
+        ]
+      ],
+      "mid_scale_identity": [
+        [
+          "concept_cos_plus",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_cos_minus",
+          ">=",
+          0.85
+        ],
+        [
+          "concept_mag_plus",
+          ">=",
+          0.75
+        ],
+        [
+          "concept_mag_plus",
+          "<=",
+          1.25
+        ],
+        [
+          "concept_mag_minus",
+          ">=",
+          0.75
+        ],
+        [
+          "concept_mag_minus",
+          "<=",
+          1.25
+        ],
+        [
+          "identity_at_0",
+          ">=",
+          0.85
+        ],
+        [
+          "identity_at_mid",
+          ">=",
+          0.85
+        ]
+      ],
+      "mode_hold": [
+        [
+          "modes",
+          ">=",
+          7
+        ],
+        [
+          "hq",
+          ">=",
+          0.9
+        ]
+      ]
+    },
+    "shared_checks": [
+      "orbit_hold",
+      "erase_keep_backend",
+      "late_collapse",
+      "keep_critic",
+      "lm_target",
+      "field_lift",
+      "path_suffix_lora",
+      "dsl_macro_expand",
+      "dsl_phrase_jobs",
+      "dsl_game_geometry"
+    ],
+    "source_sha256": {
+      "benchmarks/locked_shared/__init__.py": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f",
+      "benchmarks/locked_shared/__main__.py": "e01d15aabdf845d79185a577c9fa2c1e38357ec81d9fe38d427f17a01bbd0dfe",
+      "benchmarks/locked_shared/base_recipe.py": "0a392e47e8305005fa27047a04443d7958ab8bbb2bb0317bc4d1ae59d8f83dd7",
+      "benchmarks/locked_shared/baseline.py": "1eeff0e309ae670c9370b903ee999913d8aa63e43005950323ae68c033d88d9e",
+      "benchmarks/locked_shared/default_selection.py": "9557ae7fa34f4a41397a389120a8d822e6ea15548c8fce60973204105a53777f",
+      "benchmarks/locked_shared/host_reference.py": "030fdb5d6b4ec3d212d7786409475d8aaf024384db3d26548f250cfa765b6dfa",
+      "benchmarks/locked_shared/hosts/__init__.py": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb",
+      "benchmarks/locked_shared/hosts/ae_gan_hold.py": "8dadaa83b7e0f2133d7a58d831a0e89a334f36411f2890cb488bcb167f81e415",
+      "benchmarks/locked_shared/hosts/cover_leftover.py": "9a7e66cabc752340565f4214c8a98cf6a56a05fcc8fe184ac1a24a9d672c3b47",
+      "benchmarks/locked_shared/hosts/mid_scale_identity.py": "b36acb499fa5952c09bbf12dd20a0a5d395d7549f6c8837dc7cee01bf9470409",
+      "benchmarks/locked_shared/hosts/residual_student.py": "3664eb8f821c80eb51dc1688c284ee56c2cc1841cec34207d6530bbe46725f54",
+      "benchmarks/locked_shared/hosts/unipolar.py": "a376b0e981d8ed6e7ab563ccd44cb10f21e8419ebf7cffe1bcc9d6b857c6e93f",
+      "benchmarks/locked_shared/hosts/unused_token_hold.py": "82f5446ac1a6dbcc304ad8d0eb48030c3166d205f244a2777e15ca0dfa451da5",
+      "benchmarks/locked_shared/investigate.py": "c9e7e3f365e99b5a99baa0a3119abee0d833035a29e968c7258fad75d23f2b37",
+      "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "benchmarks/locked_shared/mode_hold.py": "20c7bce11678f31033719811f9536692354248924a8e85eca84860026727c429",
+      "benchmarks/locked_shared/reference.py": "a97933b31a240822fc5535979a1e84bb884472a69b702808484257cff46cfbef",
+      "benchmarks/locked_shared/run.py": "5b2a54935b08dd5250a9bf82159e2d86880e89daa23b87281ee61daa6e3bea3d",
+      "benchmarks/locked_shared/shared_checks.py": "2ca7fe501a12193cf337bb6a9a470ccf02ce108a338afab57c686c46234f3fa5",
+      "benchmarks/locked_shared/suite_reference.py": "8bd939b18a9ff771846326d49b025ad4590ed3534d0749ae928c3ea1d0e8fe3f",
+      "benchmarks/locked_shared/summarize.py": "4a5585a310aa4f093269fe186252440ffa7d187f5e6c9e72a6324456b037b21c",
+      "benchmarks/locked_shared/trajectory.py": "4de4526d23de522d460bd92848be6fa673bff8d3f45c28cfd9d9927ddfb171bb",
+      "benchmarks/locked_shared/two_pole.py": "8b9649e61a8f616511761b874bc5af074f9413c27f12b7d1439f08a868c5c79d",
+      "particlegan/__init__.py": "3b9116013435c77f91f94cd02184dd591d27a87d456c8ed981b0a7ac02c95fa8",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+      "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "particlegan/grad_regularizers.py": "45fb38532b4d0e6fa3b8483fdf18b3c822055363e68dbee4fc8e6222dabb19c6",
+      "particlegan/locked_shared.py": "51fb6d90f4dc0ba859756bb427653b5a276b29e1d96fd466a871c7d7642a560d",
+      "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+      "particlegan/recipes.py": "33ea97c94f4dd79ee2c5451cdf9e9ce98272921d71a300918258e8df3e6a88bc",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    "torch": "2.13.0+cu126",
+    "python": "3.12.3"
+  },
+  "protocol_sha256": "22cbcdaa419318b6e15e0b5c6cd65f404d77441d9b499c9b5f73a458b83fcb7c",
+  "created_at": "2026-09-22T15:43:27.161254+00:00",
+  "rows": [
+    {
+      "config": {
+        "name": "bcap_k1p25_c3p0_lr0p85",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85
+      },
+      "config_sha256": "87e54e7a82a88d5550cd3013b178005842edc4cdd892db7a613ba3f2ae884437",
+      "toys": {
+        "two_pole": {
+          "live": {
+            "mean_abs": 0.4681435823440552,
+            "grad_med": 0.5139952301979065
+          },
+          "raw": {
+            "mean_abs": 0.4681435823440552,
+            "grad_med": 0.5139952301979065,
+            "nearest": 0.5318563580513,
+            "cover_score": 0.7022154629230499,
+            "verdict": "PASS"
+          },
+          "seconds": 0.9157104840001011
+        },
+        "trajectory": {
+          "live": {
+            "identity_mse": 0.02159944921731949
+          },
+          "raw": {
+            "identity_mse": 0.02159944921731949,
+            "paired_target_mse": 0.02159944921731949,
+            "verdict": "FAIL",
+            "set_cover": 0.07594714313745499,
+            "own_nearest_fraction": 0.8333333134651184,
+            "particle_mean_square": 0.06342374533414841,
+            "particle_std_mean": 0.26060763001441956,
+            "critic_gradient_median": 1.2445145845413208,
+            "critic_gradient_max": 1.369118332862854
+          },
+          "seconds": 1.0249075710000852
+        },
+        "residual_student": {
+          "live": {
+            "identity_mse": 0.0018423293950036168,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          "raw": {
+            "event": "done",
+            "family": "residual_student",
+            "pairing": "shared",
+            "both_land_rows": 12,
+            "identity_mse": 0.0018423293950036168,
+            "paired_target_mse": 0.0018423293950036168,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0,
+            "endpoint_l2": 0.08714886754751205,
+            "pass": true,
+            "pass_identity_mse": 0.02,
+            "success_min": 1.0,
+            "land_tol": 0.25,
+            "slow_impact_max": 0.1,
+            "residual_weight": 1.0,
+            "fm_weight": 0.0,
+            "cover_weight": 1.5,
+            "reg_arm": "b_cap",
+            "reg_coeff": 3.0,
+            "reg_kappa": 1.25,
+            "reg_norm": "l2",
+            "n_particles": 12,
+            "particle_l2": 0.0,
+            "vicreg_weight": 0.05,
+            "steps": 400,
+            "seed": 0
+          },
+          "seconds": 1.0610762139999679
+        },
+        "unipolar": {
+          "live": {
+            "cover": 0.9149806848580582,
+            "off_caption": 0.00018813262827400154,
+            "neu_hold": 0.9505006484687328
+          },
+          "raw": {
+            "cover": 0.9149806848580582,
+            "off_caption": 0.00018813262827400154,
+            "neu_hold": 0.9505006484687328,
+            "cos_plus": 0.9998936057090759,
+            "mag_ratio": 0.9150780439376831,
+            "half_norm_ratio": 0.5264244588256377,
+            "hit": true,
+            "canary": {
+              "scored": false,
+              "landed": "pos",
+              "cos_plus": 0.9772391319274902,
+              "cos_neg": -0.9772391319274902,
+              "off_caption": 0.0008865520886512686,
+              "dangerous": true
+            },
+            "arm": "locked_rpgan",
+            "steps": 400,
+            "seed": 0,
+            "polarity": 1.0,
+            "fm_weight": 0.0,
+            "cover_weight": 0.0,
+            "gan_mode": "rp",
+            "loss_type": "logistic",
+            "reg_arm": "b_cap",
+            "reg_coeff": 3.0,
+            "reg_kappa": 1.25,
+            "reg_norm": "l2",
+            "reg_lazy": 1,
+            "reg_anneal": "none",
+            "reg_is_gradient_penalty": true,
+            "origin_norm": 0.049499351531267166,
+            "odd_norm": 0.43342292308807373,
+            "even_norm": 0.43342292308807373,
+            "history": [
+              {
+                "cover": 0.012749999897153197,
+                "off_caption": 0.32142894073172906,
+                "neu_hold": 0.9915000051259995,
+                "cos_plus": 0.5669474005699158,
+                "mag_ratio": 0.022488858550786972,
+                "half_norm_ratio": 0.6546542319183416,
+                "hit": false,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.5000003576278687,
+                  "cos_neg": -0.5000003576278687,
+                  "off_caption": 0.24999999653978813,
+                  "dangerous": true
+                },
+                "step": 1,
+                "g_loss": 0.7326524257659912,
+                "d_loss": 0.6947054862976074
+              },
+              {
+                "cover": 0.6417050792464813,
+                "off_caption": 0.0001611810153707964,
+                "neu_hold": 0.8330473750829697,
+                "cos_plus": 0.9989822506904602,
+                "mag_ratio": 0.6423588395118713,
+                "half_norm_ratio": 0.6294187070539473,
+                "hit": false,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9968284368515015,
+                  "cos_neg": -0.9968284368515015,
+                  "off_caption": 4.76276228664131e-05,
+                  "dangerous": true
+                },
+                "step": 50,
+                "g_loss": 1.062543511390686,
+                "d_loss": 0.4471375644207001
+              },
+              {
+                "cover": 0.9871090834944312,
+                "off_caption": 1.7478526403919731e-06,
+                "neu_hold": 0.8406661599874496,
+                "cos_plus": 0.9999985694885254,
+                "mag_ratio": 1.0128895044326782,
+                "half_norm_ratio": 0.5785987979138741,
+                "hit": false,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9992548227310181,
+                  "cos_neg": -0.9992548227310181,
+                  "off_caption": 0.0010551068683104054,
+                  "dangerous": true
+                },
+                "step": 100,
+                "g_loss": 0.8051158785820007,
+                "d_loss": 0.6084481477737427
+              },
+              {
+                "cover": 0.9822373348024982,
+                "off_caption": 1.6703444316509585e-05,
+                "neu_hold": 0.9906835490837693,
+                "cos_plus": 0.9999901652336121,
+                "mag_ratio": 1.017753005027771,
+                "half_norm_ratio": 0.4960697653684465,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "neg",
+                  "cos_plus": -0.8576288223266602,
+                  "cos_neg": 0.8576288223266602,
+                  "off_caption": 0.20693098603371782,
+                  "dangerous": true
+                },
+                "step": 150,
+                "g_loss": 0.6893312931060791,
+                "d_loss": 0.6970815658569336
+              },
+              {
+                "cover": 0.8932623000031015,
+                "off_caption": 4.67860090889438e-05,
+                "neu_hold": 0.954912792891264,
+                "cos_plus": 0.9999415874481201,
+                "mag_ratio": 1.1066855192184448,
+                "half_norm_ratio": 0.47967539576138224,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "neg",
+                  "cos_plus": -0.9983265399932861,
+                  "cos_neg": 0.9983265399932861,
+                  "off_caption": 0.0028455129110062025,
+                  "dangerous": false
+                },
+                "step": 200,
+                "g_loss": 0.6785022020339966,
+                "d_loss": 0.7099968194961548
+              },
+              {
+                "cover": 0.976574518446732,
+                "off_caption": 3.766219857461772e-05,
+                "neu_hold": 0.9518255516886711,
+                "cos_plus": 0.9999780058860779,
+                "mag_ratio": 1.0234040021896362,
+                "half_norm_ratio": 0.4813039935650022,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "neg",
+                  "cos_plus": -0.8016416430473328,
+                  "cos_neg": 0.8016416430473328,
+                  "off_caption": 0.15406877754665835,
+                  "dangerous": true
+                },
+                "step": 250,
+                "g_loss": 0.7174382209777832,
+                "d_loss": 0.6706670522689819
+              },
+              {
+                "cover": 0.9714922496943643,
+                "off_caption": 2.7265677569950506e-05,
+                "neu_hold": 0.9586175382137299,
+                "cos_plus": 0.9997866153717041,
+                "mag_ratio": 0.971699595451355,
+                "half_norm_ratio": 0.517075691979809,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.8042371869087219,
+                  "cos_neg": -0.8042371869087219,
+                  "off_caption": 0.00828510196412478,
+                  "dangerous": true
+                },
+                "step": 300,
+                "g_loss": 0.6715972423553467,
+                "d_loss": 0.7157335877418518
+              },
+              {
+                "cover": 0.9290492912538788,
+                "off_caption": 0.00017537959568419243,
+                "neu_hold": 0.9533858671784401,
+                "cos_plus": 0.9996805787086487,
+                "mag_ratio": 0.9293461441993713,
+                "half_norm_ratio": 0.5245803558406733,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9819125533103943,
+                  "cos_neg": -0.9819125533103943,
+                  "off_caption": 0.006823643870640935,
+                  "dangerous": true
+                },
+                "step": 350,
+                "g_loss": 0.6697533130645752,
+                "d_loss": 0.7173453569412231
+              },
+              {
+                "cover": 0.9149806848580582,
+                "off_caption": 0.00018813262827400154,
+                "neu_hold": 0.9505006484687328,
+                "cos_plus": 0.9998936057090759,
+                "mag_ratio": 0.9150780439376831,
+                "half_norm_ratio": 0.5264244588256377,
+                "hit": true,
+                "canary": {
+                  "scored": false,
+                  "landed": "pos",
+                  "cos_plus": 0.9772391319274902,
+                  "cos_neg": -0.9772391319274902,
+                  "off_caption": 0.0008865520886512686,
+                  "dangerous": true
+                },
+                "step": 400,
+                "g_loss": 0.6741441488265991,
+                "d_loss": 0.7126566171646118
+              }
+            ]
+          },
+          "seconds": 1.3002460180000526
+        },
+        "ae_gan_hold": {
+          "live": {
+            "recon_mse": 0.003456808626651764,
+            "hold": 0.001542144687846303
+          },
+          "raw": {
+            "name": "bcap_k1p25_c3p0_lr0p85",
+            "recon_mse": 0.003456808626651764,
+            "hold": 0.001542144687846303,
+            "init_recon_mse": 1.2815321683883667,
+            "penalty_applied": 250,
+            "adv_steps": 250,
+            "steps": 250
+          },
+          "seconds": 0.6739218089999213
+        },
+        "cover_leftover": {
+          "live": {
+            "u_kept": 0.9722058079773743,
+            "content_kept": 1.0087113847262545,
+            "leak_ratio": 0.0010659429248731816,
+            "pole_rel_err_plus": 0.018618492409586906,
+            "pole_rel_err_minus": 0.01883343793451786,
+            "same_dir": 0.0023988673134256885
+          },
+          "raw": {
+            "arm": "locked",
+            "steps": 800,
+            "seed": 0,
+            "teacher": "faithful_guard_e",
+            "cover_weight": 1.5,
+            "reg_coeff": 3.0,
+            "reg_arm": "b_cap",
+            "kappa": 1.25,
+            "norm": "l2",
+            "fm_weight": 0.0,
+            "gan_mode": "rp",
+            "loss_type": "logistic",
+            "n_particles": 12,
+            "particle_l2": 0.0,
+            "particle_rms": 0.0535295233130455,
+            "u_kept": 0.8987560182341195,
+            "content_kept": 0.9660763998377621,
+            "leak_ratio": 0.0003326626593402831,
+            "on_u": 0.8987560272216797,
+            "on_content": 0.5313420295715332,
+            "on_e": -0.00029898257344029844,
+            "pole_rel_err_plus": 0.06784593313932419,
+            "pole_rel_err_minus": 0.0687851682305336,
+            "covered": true,
+            "pass": true,
+            "fail_reasons": "",
+            "leak_frac": -0.9999994039535522,
+            "same_dir": 0.0007757224761808837,
+            "even_norm": 0.0008100831182673573,
+            "odd_norm": 1.0434849262237549,
+            "live": {
+              "u_kept": 0.9722058079773743,
+              "content_kept": 1.0087113847262545,
+              "leak_ratio": 0.0010659429248731816,
+              "on_u": 0.9722058176994324,
+              "on_content": 0.554791271686554,
+              "on_e": 0.0010363159235566854,
+              "pole_rel_err_plus": 0.018618492409586906,
+              "pole_rel_err_minus": 0.01883343793451786,
+              "covered": true,
+              "pass": true,
+              "fail_reasons": "",
+              "leak_frac": -0.9999919533729553,
+              "same_dir": 0.0023988673134256885,
+              "even_norm": 0.002688045147806406,
+              "odd_norm": 1.1178596019744873
+            }
+          },
+          "ema": {
+            "u_kept": 0.8987560182341195,
+            "content_kept": 0.9660763998377621,
+            "leak_ratio": 0.0003326626593402831,
+            "pole_rel_err_plus": 0.06784593313932419,
+            "pole_rel_err_minus": 0.0687851682305336,
+            "same_dir": 0.0007757224761808837
+          },
+          "seconds": 2.9597054419998585
+        },
+        "unused_token_hold": {
+          "live": {
+            "unused_hold": 0.9962663191836327,
+            "concept_move": 0.9055901390857919
+          },
+          "raw": {
+            "unused_hold": 0.9962663191836327,
+            "concept_move": 0.9055901390857919,
+            "unused_dist": 0.0037336808163672686,
+            "concept_cos": 0.9996939301490784,
+            "concept_delta_norm": 0.9058673977851868,
+            "scale0_err": 0.0
+          },
+          "seconds": 0.27496858600011365
+        },
+        "mid_scale_identity": {
+          "live": {
+            "concept_cos_plus": 0.9999260902404785,
+            "concept_cos_minus": 0.9997996687889099,
+            "concept_mag_plus": 1.000198245048523,
+            "concept_mag_minus": 1.0061931610107422,
+            "identity_at_0": 0.9837596856434492,
+            "identity_at_mid": 0.9945565789398214
+          },
+          "raw": {
+            "scales": [
+              -1.0,
+              0.0,
+              0.5,
+              1.0
+            ],
+            "pairing": "matched",
+            "concept_cos_plus": 0.9999260902404785,
+            "concept_cos_minus": 0.9997996687889099,
+            "concept_mag_plus": 1.000198245048523,
+            "concept_mag_minus": 1.0061931610107422,
+            "identity_at_0": 0.9837596856434492,
+            "identity_at_mid": 0.9945565789398214,
+            "pass": true,
+            "fail_reasons": "",
+            "per_scale": [
+              {
+                "scale": -1.0,
+                "identity_kept": 0.9854316500488014,
+                "on_concept": -1.002905011177063
+              },
+              {
+                "scale": 0.0,
+                "identity_kept": 0.9837596856434492,
+                "on_concept": 0.0030866211745887995
+              },
+              {
+                "scale": 0.5,
+                "identity_kept": 0.9945565789398214,
+                "on_concept": 0.4947046935558319
+              },
+              {
+                "scale": 1.0,
+                "identity_kept": 0.997718767777245,
+                "on_concept": 1.0032109022140503
+              }
+            ],
+            "device": "cpu",
+            "same_dir": 0.016054974221040633,
+            "leak_frac": -0.999485433101654,
+            "steps": 800,
+            "seed": 0,
+            "train_scales": [
+              -1.0,
+              0.0,
+              0.5,
+              1.0
+            ],
+            "loss_type": "logistic",
+            "gan_mode": "rp",
+            "reg_arm": "b_cap",
+            "reg_coeff": 3.0,
+            "reg_kappa": 1.25,
+            "reg_norm": "l2",
+            "reg_lazy": 1,
+            "reg_anneal": "none",
+            "reg_calls": 3200,
+            "reg_is_gradient_penalty": true,
+            "cover_weight": 1.5,
+            "fm_weight": 0.0,
+            "arm": "locked"
+          },
+          "seconds": 4.320559302999982
+        },
+        "mode_hold": {
+          "live": {
+            "modes": 5,
+            "hq": 0.666748046875
+          },
+          "raw": {
+            "modes": 6,
+            "n_modes": 8,
+            "hq": 0.82958984375,
+            "cover": 0.75,
+            "effective_modes": 5.762116432189941,
+            "sample_count": 4096,
+            "hq_counts": [
+              0,
+              341,
+              664,
+              683,
+              695,
+              659,
+              356,
+              0
+            ],
+            "nearest_counts": [
+              698,
+              341,
+              664,
+              683,
+              695,
+              659,
+              356,
+              0
+            ],
+            "closest_distance_per_mode": [
+              0.3641124665737152,
+              0.06309984624385834,
+              0.046002209186553955,
+              0.048189178109169006,
+              0.04652784764766693,
+              0.04843592643737793,
+              0.16610750555992126,
+              1.9827183485031128
+            ],
+            "hq_radius": 0.21000000000000002,
+            "missing_modes": [
+              0,
+              7
+            ],
+            "support": {
+              "modes": 6,
+              "n_modes": 8,
+              "hq": 0.8333333134651184,
+              "cover": 0.75,
+              "effective_modes": 5.743492126464844,
+              "sample_count": 12,
+              "hq_counts": [
+                0,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                0
+              ],
+              "nearest_counts": [
+                2,
+                1,
+                2,
+                2,
+                2,
+                2,
+                1,
+                0
+              ],
+              "closest_distance_per_mode": [
+                0.36411377787590027,
+                0.06310739368200302,
+                0.04601043462753296,
+                0.04819898307323456,
+                0.04653037711977959,
+                0.048439398407936096,
+                0.16610656678676605,
+                1.9827181100845337
+              ],
+              "hq_radius": 0.21000000000000002,
+              "missing_modes": [
+                0,
+                7
+              ],
+              "points": [
+                [
+                  -2.081864833831787,
+                  -2.093219757080078
+                ],
+                [
+                  0.15515966713428497,
+                  -3.0593032836914062
+                ],
+                [
+                  -2.9116125106811523,
+                  0.0068833306431770325
+                ],
+                [
+                  2.60906982421875,
+                  -0.1995307207107544
+                ],
+                [
+                  -2.0702195167541504,
+                  -2.1095046997070312
+                ],
+                [
+                  -2.0253984928131104,
+                  2.1894092559814453
+                ],
+                [
+                  -0.0050583891570568085,
+                  2.954268455505371
+                ],
+                [
+                  2.679995536804199,
+                  -0.1737123429775238
+                ],
+                [
+                  -2.9560413360595703,
+                  0.01525462418794632
+                ],
+                [
+                  2.0685856342315674,
+                  2.086656093597412
+                ],
+                [
+                  0.007213879376649857,
+                  2.926067352294922
+                ],
+                [
+                  -2.0821163654327393,
+                  2.0932810306549072
+                ]
+              ],
+              "nearest_mode": [
+                5,
+                6,
+                4,
+                0,
+                5,
+                3,
+                2,
+                0,
+                4,
+                1,
+                2,
+                3
+              ],
+              "nearest_distance": [
+                0.048439398407936096,
+                0.16610656678676605,
+                0.08865512907505035,
+                0.4389064908027649,
+                0.052448820322752,
+                0.11763118207454681,
+                0.04601043462753296,
+                0.36411377787590027,
+                0.04653037711977959,
+                0.06310739368200302,
+                0.07428377121686935,
+                0.04819898307323456
+              ],
+              "is_hq": [
+                true,
+                true,
+                true,
+                false,
+                true,
+                true,
+                true,
+                false,
+                true,
+                true,
+                true,
+                true
+              ]
+            },
+            "step": 1200,
+            "seed": 0,
+            "verdict": "INCONCLUSIVE",
+            "live": {
+              "modes": 5,
+              "n_modes": 8,
+              "hq": 0.666748046875,
+              "cover": 0.625,
+              "effective_modes": 4.786448001861572,
+              "sample_count": 4096,
+              "hq_counts": [
+                698,
+                341,
+                664,
+                369,
+                0,
+                659,
+                0,
+                0
+              ],
+              "nearest_counts": [
+                698,
+                341,
+                664,
+                683,
+                695,
+                659,
+                0,
+                356
+              ],
+              "closest_distance_per_mode": [
+                0.05310381203889847,
+                0.050875063985586166,
+                0.17274945974349976,
+                0.19430649280548096,
+                0.31640172004699707,
+                0.14352479577064514,
+                2.025214910507202,
+                0.9268519878387451
+              ],
+              "hq_radius": 0.21000000000000002,
+              "missing_modes": [
+                4,
+                6,
+                7
+              ],
+              "support": {
+                "modes": 5,
+                "n_modes": 8,
+                "hq": 0.6666666865348816,
+                "cover": 0.625,
+                "effective_modes": 4.7568278312683105,
+                "sample_count": 12,
+                "hq_counts": [
+                  2,
+                  1,
+                  2,
+                  1,
+                  0,
+                  2,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  2,
+                  1,
+                  2,
+                  2,
+                  2,
+                  2,
+                  0,
+                  1
+                ],
+                "closest_distance_per_mode": [
+                  0.05311058089137077,
+                  0.050871770828962326,
+                  0.1727479100227356,
+                  0.19430957734584808,
+                  0.3164003789424896,
+                  0.14352095127105713,
+                  2.025214910507202,
+                  0.9268511533737183
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  4,
+                  6,
+                  7
+                ],
+                "points": [
+                  [
+                    -2.2639763355255127,
+                    -2.1370508670806885
+                  ],
+                  [
+                    2.0247557163238525,
+                    -3.0431265830993652
+                  ],
+                  [
+                    -3.3163812160491943,
+                    0.003480987623333931
+                  ],
+                  [
+                    3.0524063110351562,
+                    0.008620472624897957
+                  ],
+                  [
+                    -2.3213565349578857,
+                    -2.154975175857544
+                  ],
+                  [
+                    -2.501303195953369,
+                    2.1080925464630127
+                  ],
+                  [
+                    -0.17110398411750793,
+                    3.0237762928009033
+                  ],
+                  [
+                    3.080613136291504,
+                    0.015535103157162666
+                  ],
+                  [
+                    -3.44887375831604,
+                    0.02486349828541279
+                  ],
+                  [
+                    2.0822384357452393,
+                    2.153886318206787
+                  ],
+                  [
+                    -0.17133307456970215,
+                    3.065110445022583
+                  ],
+                  [
+                    -2.2620937824249268,
+                    2.2552568912506104
+                  ]
+                ],
+                "nearest_mode": [
+                  5,
+                  7,
+                  4,
+                  0,
+                  5,
+                  3,
+                  2,
+                  0,
+                  4,
+                  1,
+                  2,
+                  3
+                ],
+                "nearest_distance": [
+                  0.14352095127105713,
+                  0.9268511533737183,
+                  0.3164003789424896,
+                  0.05311058089137077,
+                  0.20284780859947205,
+                  0.3802131116390228,
+                  0.1727479100227356,
+                  0.0820963904261589,
+                  0.44956183433532715,
+                  0.050871770828962326,
+                  0.1832876056432724,
+                  0.19430957734584808
+                ],
+                "is_hq": [
+                  true,
+                  false,
+                  false,
+                  true,
+                  true,
+                  false,
+                  true,
+                  true,
+                  false,
+                  true,
+                  true,
+                  true
+                ]
+              },
+              "verdict": "INCONCLUSIVE"
+            },
+            "curve": [
+              {
+                "modes": 0,
+                "n_modes": 8,
+                "hq": 0.0,
+                "cover": 0.0,
+                "effective_modes": 0.0,
+                "sample_count": 4096,
+                "hq_counts": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  694,
+                  345,
+                  1064,
+                  0,
+                  688,
+                  338,
+                  967,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  1.9736175537109375,
+                  1.8345942497253418,
+                  2.332731246948242,
+                  2.458592653274536,
+                  2.633479356765747,
+                  2.228863000869751,
+                  1.4074755907058716,
+                  1.9855538606643677
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "support": {
+                  "modes": 0,
+                  "n_modes": 8,
+                  "hq": 0.0,
+                  "cover": 0.0,
+                  "effective_modes": 0.0,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    3,
+                    0,
+                    2,
+                    1,
+                    3,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    1.9736177921295166,
+                    1.8345942497253418,
+                    2.332731246948242,
+                    2.458592653274536,
+                    2.633479118347168,
+                    2.228863000869751,
+                    1.4074757099151611,
+                    1.9855537414550781
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -0.37605684995651245,
+                      -0.7349994778633118
+                    ],
+                    [
+                      0.011306684464216232,
+                      0.519934892654419
+                    ],
+                    [
+                      -0.0850336104631424,
+                      -0.42016735672950745
+                    ],
+                    [
+                      0.9009981155395508,
+                      0.3340747654438019
+                    ],
+                    [
+                      0.20345383882522583,
+                      -1.607306718826294
+                    ],
+                    [
+                      -0.05115069821476936,
+                      -0.5835888385772705
+                    ],
+                    [
+                      -0.1536855548620224,
+                      0.037602655589580536
+                    ],
+                    [
+                      1.1156699657440186,
+                      0.586913526058197
+                    ],
+                    [
+                      -0.3679027855396271,
+                      -0.08530235290527344
+                    ],
+                    [
+                      0.32936763763427734,
+                      0.09221576154232025
+                    ],
+                    [
+                      -0.0773816853761673,
+                      0.21360060572624207
+                    ],
+                    [
+                      -0.1358940452337265,
+                      0.6712302565574646
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    2,
+                    6,
+                    0,
+                    6,
+                    6,
+                    4,
+                    1,
+                    4,
+                    0,
+                    2,
+                    2
+                  ],
+                  "nearest_distance": [
+                    2.228863000869751,
+                    2.480090856552124,
+                    2.581233501434326,
+                    2.1254210472106934,
+                    1.4074757099151611,
+                    2.41695237159729,
+                    2.8465628623962402,
+                    1.8345942497253418,
+                    2.633479118347168,
+                    2.6722240447998047,
+                    2.787473678588867,
+                    2.332731246948242
+                  ],
+                  "is_hq": [
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false
+                  ]
+                },
+                "step": 200,
+                "seed": 0
+              },
+              {
+                "modes": 0,
+                "n_modes": 8,
+                "hq": 0.0,
+                "cover": 0.0,
+                "effective_modes": 0.0,
+                "sample_count": 4096,
+                "hq_counts": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  698,
+                  341,
+                  1334,
+                  369,
+                  695,
+                  659,
+                  0,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  0.571658730506897,
+                  1.7069380283355713,
+                  1.5629621744155884,
+                  1.0440599918365479,
+                  1.4555010795593262,
+                  0.933314323425293,
+                  1.1789774894714355,
+                  1.8657162189483643
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "support": {
+                  "modes": 0,
+                  "n_modes": 8,
+                  "hq": 0.0,
+                  "cover": 0.0,
+                  "effective_modes": 0.0,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    4,
+                    1,
+                    2,
+                    2,
+                    0,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    0.571658730506897,
+                    1.7069381475448608,
+                    1.5629615783691406,
+                    1.0440599918365479,
+                    1.4555013179779053,
+                    0.9333146214485168,
+                    1.178977370262146,
+                    1.8657162189483643
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -1.8008114099502563,
+                      -1.2447646856307983
+                    ],
+                    [
+                      0.025733582675457,
+                      0.6819456219673157
+                    ],
+                    [
+                      -0.9387006163597107,
+                      -0.162302628159523
+                    ],
+                    [
+                      1.8266165256500244,
+                      -0.2790258228778839
+                    ],
+                    [
+                      -1.0665283203125,
+                      -2.4975011348724365
+                    ],
+                    [
+                      -0.3448645770549774,
+                      1.475559949874878
+                    ],
+                    [
+                      -0.22608356177806854,
+                      1.2641714811325073
+                    ],
+                    [
+                      2.4914391040802,
+                      -0.2610737383365631
+                    ],
+                    [
+                      -1.5491397380828857,
+                      -0.11614132672548294
+                    ],
+                    [
+                      1.1661369800567627,
+                      0.7066603302955627
+                    ],
+                    [
+                      -0.14788971841335297,
+                      1.1080535650253296
+                    ],
+                    [
+                      -1.1893386840820312,
+                      1.650712490081787
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    2,
+                    4,
+                    0,
+                    5,
+                    2,
+                    2,
+                    0,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.9333146214485168,
+                    2.318197250366211,
+                    2.0676791667938232,
+                    1.206102967262268,
+                    1.119864821434021,
+                    1.5629615783691406,
+                    1.7504898309707642,
+                    0.571658730506897,
+                    1.4555013179779053,
+                    1.7069381475448608,
+                    1.8977177143096924,
+                    1.0440599918365479
+                  ],
+                  "is_hq": [
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false
+                  ]
+                },
+                "step": 400,
+                "seed": 0
+              },
+              {
+                "modes": 0,
+                "n_modes": 8,
+                "hq": 0.0,
+                "cover": 0.0,
+                "effective_modes": 0.0,
+                "sample_count": 4096,
+                "hq_counts": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  0,
+                  341,
+                  978,
+                  369,
+                  695,
+                  659,
+                  356,
+                  698
+                ],
+                "closest_distance_per_mode": [
+                  1.3666588068008423,
+                  0.8248491287231445,
+                  0.6470911502838135,
+                  0.33109214901924133,
+                  0.5994009971618652,
+                  0.41579779982566833,
+                  1.5024844408035278,
+                  0.9341370463371277
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "support": {
+                  "modes": 0,
+                  "n_modes": 8,
+                  "hq": 0.0,
+                  "cover": 0.0,
+                  "effective_modes": 0.0,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "nearest_counts": [
+                    0,
+                    1,
+                    3,
+                    1,
+                    2,
+                    2,
+                    1,
+                    2
+                  ],
+                  "closest_distance_per_mode": [
+                    1.3666585683822632,
+                    0.8248494267463684,
+                    0.6470907330513,
+                    0.33109259605407715,
+                    0.5994002223014832,
+                    0.4157971739768982,
+                    1.5024844408035278,
+                    0.9341370463371277
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -2.0956809520721436,
+                      -1.6970019340515137
+                    ],
+                    [
+                      0.16656912863254547,
+                      -1.506777286529541
+                    ],
+                    [
+                      -1.7988282442092896,
+                      -0.05756279081106186
+                    ],
+                    [
+                      2.0336060523986816,
+                      -1.098433017730713
+                    ],
+                    [
+                      -1.7159432172775269,
+                      -2.213824510574341
+                    ],
+                    [
+                      -0.5528056621551514,
+                      3.3363516330718994
+                    ],
+                    [
+                      -0.20773082971572876,
+                      2.2388923168182373
+                    ],
+                    [
+                      2.411076307296753,
+                      -1.2332576513290405
+                    ],
+                    [
+                      -2.4022011756896973,
+                      -0.04378627985715866
+                    ],
+                    [
+                      1.6819427013397217,
+                      1.4232343435287476
+                    ],
+                    [
+                      -0.13541141152381897,
+                      1.6895335912704468
+                    ],
+                    [
+                      -1.796684741973877,
+                      2.0562503337860107
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    6,
+                    4,
+                    7,
+                    5,
+                    2,
+                    2,
+                    7,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.4250926971435547,
+                    1.5024844408035278,
+                    1.2025501728057861,
+                    1.02664053440094,
+                    0.4157971739768982,
+                    0.6470907330513,
+                    0.7889467477798462,
+                    0.9341370463371277,
+                    0.5994002223014832,
+                    0.8248494267463684,
+                    1.31744384765625,
+                    0.33109259605407715
+                  ],
+                  "is_hq": [
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false
+                  ]
+                },
+                "step": 600,
+                "seed": 0
+              },
+              {
+                "modes": 2,
+                "n_modes": 8,
+                "hq": 0.2509765625,
+                "cover": 0.25,
+                "effective_modes": 1.9209336042404175,
+                "sample_count": 4096,
+                "hq_counts": [
+                  0,
+                  0,
+                  0,
+                  369,
+                  0,
+                  659,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  698,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  356,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  0.6681229472160339,
+                  0.29473912715911865,
+                  0.33987462520599365,
+                  0.13311733305454254,
+                  0.2264867126941681,
+                  0.1694328933954239,
+                  0.5795320272445679,
+                  1.6027936935424805
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  6,
+                  7
+                ],
+                "support": {
+                  "modes": 2,
+                  "n_modes": 8,
+                  "hq": 0.25,
+                  "cover": 0.25,
+                  "effective_modes": 1.8898816108703613,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    0,
+                    0,
+                    0,
+                    1,
+                    0,
+                    2,
+                    0,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    0.6681229472160339,
+                    0.2947385907173157,
+                    0.339874804019928,
+                    0.13312268257141113,
+                    0.2264871895313263,
+                    0.16943158209323883,
+                    0.5795329213142395,
+                    1.6027930974960327
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    0,
+                    1,
+                    2,
+                    4,
+                    6,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -2.10355281829834,
+                      -1.952823281288147
+                    ],
+                    [
+                      0.11554080247879028,
+                      -2.4321014881134033
+                    ],
+                    [
+                      -2.4892916679382324,
+                      0.034151870757341385
+                    ],
+                    [
+                      2.4064178466796875,
+                      -0.5440860390663147
+                    ],
+                    [
+                      -1.944765329360962,
+                      -2.116399049758911
+                    ],
+                    [
+                      -1.5029361248016357,
+                      2.810373544692993
+                    ],
+                    [
+                      -0.08942598104476929,
+                      2.672100782394409
+                    ],
+                    [
+                      2.6161773204803467,
+                      -0.5468714833259583
+                    ],
+                    [
+                      -2.7751479148864746,
+                      0.027165699750185013
+                    ],
+                    [
+                      1.9480161666870117,
+                      1.8829160928726196
+                    ],
+                    [
+                      -0.024537760764360428,
+                      2.3729207515716553
+                    ],
+                    [
+                      -1.9981791973114014,
+                      2.070744276046753
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    6,
+                    4,
+                    0,
+                    5,
+                    3,
+                    2,
+                    0,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.16943158209323883,
+                    0.5795329213142395,
+                    0.5118489861488342,
+                    0.8052138686180115,
+                    0.17662326991558075,
+                    0.9258473515510559,
+                    0.339874804019928,
+                    0.6681229472160339,
+                    0.2264871895313263,
+                    0.2947385907173157,
+                    0.6275591254234314,
+                    0.13312268257141113
+                  ],
+                  "is_hq": [
+                    true,
+                    false,
+                    false,
+                    false,
+                    true,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    true
+                  ]
+                },
+                "step": 800,
+                "seed": 0
+              },
+              {
+                "modes": 6,
+                "n_modes": 8,
+                "hq": 0.670166015625,
+                "cover": 0.75,
+                "effective_modes": 5.678606033325195,
+                "sample_count": 4096,
+                "hq_counts": [
+                  0,
+                  341,
+                  325,
+                  369,
+                  695,
+                  659,
+                  356,
+                  0
+                ],
+                "nearest_counts": [
+                  698,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  356,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  0.6603916883468628,
+                  0.12527815997600555,
+                  0.12493131309747696,
+                  0.0632055476307869,
+                  0.10049108415842056,
+                  0.06884592771530151,
+                  0.17676860094070435,
+                  1.6270159482955933
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  0,
+                  7
+                ],
+                "support": {
+                  "modes": 6,
+                  "n_modes": 8,
+                  "hq": 0.6666666865348816,
+                  "cover": 0.75,
+                  "effective_modes": 5.656854152679443,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    0,
+                    1,
+                    1,
+                    1,
+                    2,
+                    2,
+                    1,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    0.660391628742218,
+                    0.12527722120285034,
+                    0.12493275851011276,
+                    0.06320392340421677,
+                    0.10049256682395935,
+                    0.06884907186031342,
+                    0.17677007615566254,
+                    1.6270157098770142
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    0,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -2.101001262664795,
+                      -2.0555381774902344
+                    ],
+                    [
+                      0.0465780645608902,
+                      -3.170523166656494
+                    ],
+                    [
+                      -2.8006815910339355,
+                      0.022436005994677544
+                    ],
+                    [
+                      2.458376407623291,
+                      -0.5295992493629456
+                    ],
+                    [
+                      -2.040153980255127,
+                      -2.121483325958252
+                    ],
+                    [
+                      -1.9212226867675781,
+                      2.3623287677764893
+                    ],
+                    [
+                      -0.02569444477558136,
+                      2.8777379989624023
+                    ],
+                    [
+                      2.5803298950195312,
+                      -0.5098961591720581
+                    ],
+                    [
+                      -2.9034483432769775,
+                      0.027866078540682793
+                    ],
+                    [
+                      2.0504159927368164,
+                      2.0180392265319824
+                    ],
+                    [
+                      -0.008414879441261292,
+                      2.757046937942505
+                    ],
+                    [
+                      -2.0666685104370117,
+                      2.0895724296569824
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    6,
+                    4,
+                    0,
+                    5,
+                    3,
+                    2,
+                    0,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.06884907186031342,
+                    0.17677007615566254,
+                    0.20057721436023712,
+                    0.7575166821479797,
+                    0.08116619288921356,
+                    0.3132477402687073,
+                    0.12493275851011276,
+                    0.660391628742218,
+                    0.10049256682395935,
+                    0.12527722120285034,
+                    0.24309875071048737,
+                    0.06320392340421677
+                  ],
+                  "is_hq": [
+                    true,
+                    true,
+                    true,
+                    false,
+                    true,
+                    false,
+                    true,
+                    false,
+                    true,
+                    true,
+                    false,
+                    true
+                  ]
+                },
+                "step": 1000,
+                "seed": 0
+              },
+              {
+                "modes": 6,
+                "n_modes": 8,
+                "hq": 0.82958984375,
+                "cover": 0.75,
+                "effective_modes": 5.762116432189941,
+                "sample_count": 4096,
+                "hq_counts": [
+                  0,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  356,
+                  0
+                ],
+                "nearest_counts": [
+                  698,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  356,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  0.3641124665737152,
+                  0.06309984624385834,
+                  0.046002209186553955,
+                  0.048189178109169006,
+                  0.04652784764766693,
+                  0.04843592643737793,
+                  0.16610750555992126,
+                  1.9827183485031128
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  0,
+                  7
+                ],
+                "support": {
+                  "modes": 6,
+                  "n_modes": 8,
+                  "hq": 0.8333333134651184,
+                  "cover": 0.75,
+                  "effective_modes": 5.743492126464844,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    0,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    0.36411377787590027,
+                    0.06310739368200302,
+                    0.04601043462753296,
+                    0.04819898307323456,
+                    0.04653037711977959,
+                    0.048439398407936096,
+                    0.16610656678676605,
+                    1.9827181100845337
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    0,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -2.081864833831787,
+                      -2.093219757080078
+                    ],
+                    [
+                      0.15515966713428497,
+                      -3.0593032836914062
+                    ],
+                    [
+                      -2.9116125106811523,
+                      0.0068833306431770325
+                    ],
+                    [
+                      2.60906982421875,
+                      -0.1995307207107544
+                    ],
+                    [
+                      -2.0702195167541504,
+                      -2.1095046997070312
+                    ],
+                    [
+                      -2.0253984928131104,
+                      2.1894092559814453
+                    ],
+                    [
+                      -0.0050583891570568085,
+                      2.954268455505371
+                    ],
+                    [
+                      2.679995536804199,
+                      -0.1737123429775238
+                    ],
+                    [
+                      -2.9560413360595703,
+                      0.01525462418794632
+                    ],
+                    [
+                      2.0685856342315674,
+                      2.086656093597412
+                    ],
+                    [
+                      0.007213879376649857,
+                      2.926067352294922
+                    ],
+                    [
+                      -2.0821163654327393,
+                      2.0932810306549072
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    6,
+                    4,
+                    0,
+                    5,
+                    3,
+                    2,
+                    0,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.048439398407936096,
+                    0.16610656678676605,
+                    0.08865512907505035,
+                    0.4389064908027649,
+                    0.052448820322752,
+                    0.11763118207454681,
+                    0.04601043462753296,
+                    0.36411377787590027,
+                    0.04653037711977959,
+                    0.06310739368200302,
+                    0.07428377121686935,
+                    0.04819898307323456
+                  ],
+                  "is_hq": [
+                    true,
+                    true,
+                    true,
+                    false,
+                    true,
+                    true,
+                    true,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                },
+                "step": 1200,
+                "seed": 0
+              }
+            ],
+            "live_curve": [
+              {
+                "step": 200,
+                "modes": 0,
+                "n_modes": 8,
+                "hq": 0.0,
+                "cover": 0.0,
+                "effective_modes": 0.0,
+                "sample_count": 4096,
+                "hq_counts": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  0,
+                  1039,
+                  971,
+                  1064,
+                  363,
+                  338,
+                  321,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  2.263622999191284,
+                  0.4398110508918762,
+                  1.0597351789474487,
+                  0.3115326166152954,
+                  0.7026473879814148,
+                  0.7799654006958008,
+                  1.7538739442825317,
+                  3.164231300354004
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7
+                ],
+                "support": {
+                  "modes": 0,
+                  "n_modes": 8,
+                  "hq": 0.0,
+                  "cover": 0.0,
+                  "effective_modes": 0.0,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "nearest_counts": [
+                    0,
+                    3,
+                    3,
+                    3,
+                    1,
+                    1,
+                    1,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    2.263622283935547,
+                    0.4398110508918762,
+                    1.0597349405288696,
+                    0.31153109669685364,
+                    0.7026480436325073,
+                    0.7799655795097351,
+                    1.7538737058639526,
+                    3.164231300354004
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -1.7428069114685059,
+                      -2.803284168243408
+                    ],
+                    [
+                      -2.321272611618042,
+                      2.360214948654175
+                    ],
+                    [
+                      0.0917975902557373,
+                      0.3063117563724518
+                    ],
+                    [
+                      3.0168192386627197,
+                      2.2635598182678223
+                    ],
+                    [
+                      2.121725559234619,
+                      -6.517206192016602
+                    ],
+                    [
+                      0.2207309603691101,
+                      1.963507890701294
+                    ],
+                    [
+                      -0.5352602005004883,
+                      1.9264129400253296
+                    ],
+                    [
+                      2.902181386947632,
+                      2.807950019836426
+                    ],
+                    [
+                      -2.4798929691314697,
+                      0.4724433124065399
+                    ],
+                    [
+                      1.6867941617965698,
+                      2.1892969608306885
+                    ],
+                    [
+                      -1.374281406402588,
+                      1.9441272020339966
+                    ],
+                    [
+                      -4.132130146026611,
+                      3.354217290878296
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    3,
+                    2,
+                    1,
+                    6,
+                    2,
+                    2,
+                    1,
+                    4,
+                    1,
+                    3,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.7799655795097351,
+                    0.31153109669685364,
+                    2.695251941680908,
+                    0.9067251682281494,
+                    4.107609748840332,
+                    1.0597349405288696,
+                    1.1996217966079712,
+                    1.0398098230361938,
+                    0.7026480436325073,
+                    0.4398110508918762,
+                    0.7677658796310425,
+                    2.3586843013763428
+                  ],
+                  "is_hq": [
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false,
+                    false
+                  ]
+                }
+              },
+              {
+                "step": 400,
+                "modes": 2,
+                "n_modes": 8,
+                "hq": 0.1669921875,
+                "cover": 0.25,
+                "effective_modes": 1.9962308406829834,
+                "sample_count": 4096,
+                "hq_counts": [
+                  0,
+                  0,
+                  0,
+                  0,
+                  363,
+                  321,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  698,
+                  341,
+                  978,
+                  369,
+                  695,
+                  659,
+                  356,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  0.86152184009552,
+                  0.3950168192386627,
+                  0.41291043162345886,
+                  0.6586941480636597,
+                  0.13415566086769104,
+                  0.1777692437171936,
+                  1.583150863647461,
+                  1.464129090309143
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  6,
+                  7
+                ],
+                "support": {
+                  "modes": 2,
+                  "n_modes": 8,
+                  "hq": 0.1666666716337204,
+                  "cover": 0.25,
+                  "effective_modes": 2.0,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    1,
+                    1,
+                    0,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    3,
+                    1,
+                    2,
+                    2,
+                    1,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    0.8615214824676514,
+                    0.39501622319221497,
+                    0.4129104018211365,
+                    0.6586943864822388,
+                    0.13415662944316864,
+                    0.17777076363563538,
+                    1.5831507444381714,
+                    1.4641283750534058
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    6,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -2.9532504081726074,
+                      -1.4213722944259644
+                    ],
+                    [
+                      -0.03647812828421593,
+                      -1.4172695875167847
+                    ],
+                    [
+                      -2.1455788612365723,
+                      -0.08633983135223389
+                    ],
+                    [
+                      2.2098548412323,
+                      -0.34335097670555115
+                    ],
+                    [
+                      -2.2398838996887207,
+                      -2.2537784576416016
+                    ],
+                    [
+                      -0.3500632643699646,
+                      4.675631999969482
+                    ],
+                    [
+                      -0.25133490562438965,
+                      2.672393798828125
+                    ],
+                    [
+                      2.9180469512939453,
+                      -0.892946720123291
+                    ],
+                    [
+                      -3.046504020690918,
+                      -0.125838965177536
+                    ],
+                    [
+                      2.033442497253418,
+                      1.7362029552459717
+                    ],
+                    [
+                      -0.2648732662200928,
+                      1.922220230102539
+                    ],
+                    [
+                      -2.6576404571533203,
+                      1.738908290863037
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    6,
+                    4,
+                    0,
+                    5,
+                    2,
+                    2,
+                    0,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    1.0872148275375366,
+                    1.5831507444381714,
+                    0.8587723970413208,
+                    0.8615214824676514,
+                    0.17777076363563538,
+                    1.7118080854415894,
+                    0.4129104018211365,
+                    0.8966996073722839,
+                    0.13415662944316864,
+                    0.39501622319221497,
+                    1.1098500490188599,
+                    0.6586943864822388
+                  ],
+                  "is_hq": [
+                    false,
+                    false,
+                    false,
+                    false,
+                    true,
+                    false,
+                    false,
+                    false,
+                    true,
+                    false,
+                    false,
+                    false
+                  ]
+                }
+              },
+              {
+                "step": 600,
+                "modes": 5,
+                "n_modes": 8,
+                "hq": 0.500732421875,
+                "cover": 0.625,
+                "effective_modes": 4.738874912261963,
+                "sample_count": 4096,
+                "hq_counts": [
+                  0,
+                  341,
+                  325,
+                  369,
+                  695,
+                  321,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  0,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  356,
+                  698
+                ],
+                "closest_distance_per_mode": [
+                  2.1462008953094482,
+                  0.0774075984954834,
+                  0.03416573256254196,
+                  0.08242557942867279,
+                  0.09399382025003433,
+                  0.11700425297021866,
+                  0.2487647980451584,
+                  0.3115295469760895
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  0,
+                  6,
+                  7
+                ],
+                "support": {
+                  "modes": 5,
+                  "n_modes": 8,
+                  "hq": 0.5,
+                  "cover": 0.625,
+                  "effective_modes": 4.762203693389893,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    0,
+                    1,
+                    1,
+                    1,
+                    2,
+                    1,
+                    0,
+                    0
+                  ],
+                  "nearest_counts": [
+                    0,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    2
+                  ],
+                  "closest_distance_per_mode": [
+                    2.1462008953094482,
+                    0.07740934938192368,
+                    0.0341789536178112,
+                    0.0824272483587265,
+                    0.09399294853210449,
+                    0.11700575798749924,
+                    0.2487633377313614,
+                    0.3115276098251343
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    0,
+                    6,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -1.9022834300994873,
+                      -2.148678779602051
+                    ],
+                    [
+                      -0.11643543839454651,
+                      -2.780168294906616
+                    ],
+                    [
+                      -2.8215410709381104,
+                      -0.07833677530288696
+                    ],
+                    [
+                      1.9073046445846558,
+                      -1.85989511013031
+                    ],
+                    [
+                      -2.009979009628296,
+                      -2.085355043411255
+                    ],
+                    [
+                      -2.0598299503326416,
+                      4.106960773468018
+                    ],
+                    [
+                      0.026279468089342117,
+                      2.9781463146209717
+                    ],
+                    [
+                      1.9414312839508057,
+                      -1.8669788837432861
+                    ],
+                    [
+                      -2.9097208976745605,
+                      -0.026160478591918945
+                    ],
+                    [
+                      2.1510002613067627,
+                      2.0498268604278564
+                    ],
+                    [
+                      0.1272301822900772,
+                      2.135157823562622
+                    ],
+                    [
+                      -2.0395565032958984,
+                      2.1317577362060547
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    6,
+                    4,
+                    7,
+                    5,
+                    3,
+                    2,
+                    7,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.2207385003566742,
+                    0.2487633377313614,
+                    0.19489535689353943,
+                    0.3378545641899109,
+                    0.11700575798749924,
+                    1.986592411994934,
+                    0.0341789536178112,
+                    0.3115276098251343,
+                    0.09399294853210449,
+                    0.07740934938192368,
+                    0.8741507530212402,
+                    0.0824272483587265
+                  ],
+                  "is_hq": [
+                    false,
+                    false,
+                    true,
+                    false,
+                    true,
+                    false,
+                    true,
+                    false,
+                    true,
+                    true,
+                    false,
+                    true
+                  ]
+                }
+              },
+              {
+                "step": 800,
+                "modes": 3,
+                "n_modes": 8,
+                "hq": 0.339111328125,
+                "cover": 0.375,
+                "effective_modes": 2.8687961101531982,
+                "sample_count": 4096,
+                "hq_counts": [
+                  0,
+                  0,
+                  664,
+                  369,
+                  0,
+                  0,
+                  356,
+                  0
+                ],
+                "nearest_counts": [
+                  698,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  356,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  0.7708159685134888,
+                  0.40613144636154175,
+                  0.1003391221165657,
+                  0.1596224159002304,
+                  0.2723226547241211,
+                  0.2308780401945114,
+                  0.08686467260122299,
+                  2.056396961212158
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  0,
+                  1,
+                  4,
+                  5,
+                  7
+                ],
+                "support": {
+                  "modes": 3,
+                  "n_modes": 8,
+                  "hq": 0.3333333432674408,
+                  "cover": 0.375,
+                  "effective_modes": 2.8284270763397217,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    0,
+                    0,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    0.7708152532577515,
+                    0.4061320722103119,
+                    0.10033944994211197,
+                    0.15962065756320953,
+                    0.27232101559638977,
+                    0.2308792918920517,
+                    0.08686800301074982,
+                    2.056396722793579
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    0,
+                    1,
+                    4,
+                    5,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -1.9342190027236938,
+                      -1.986048936843872
+                    ],
+                    [
+                      -0.054420337080955505,
+                      -2.932291269302368
+                    ],
+                    [
+                      -2.7668824195861816,
+                      0.14346930384635925
+                    ],
+                    [
+                      2.1626086235046387,
+                      -0.06533712893724442
+                    ],
+                    [
+                      -1.954699993133545,
+                      -1.927609920501709
+                    ],
+                    [
+                      -1.7571181058883667,
+                      2.4876110553741455
+                    ],
+                    [
+                      0.04631991684436798,
+                      3.1421091556549072
+                    ],
+                    [
+                      2.2328176498413086,
+                      0.07474886626005173
+                    ],
+                    [
+                      -2.7815585136413574,
+                      0.16260984539985657
+                    ],
+                    [
+                      1.7776316404342651,
+                      2.337702751159668
+                    ],
+                    [
+                      -0.01561330072581768,
+                      3.0991172790527344
+                    ],
+                    [
+                      -2.0030581951141357,
+                      2.228524923324585
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    6,
+                    4,
+                    0,
+                    5,
+                    3,
+                    2,
+                    0,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.2308792918920517,
+                    0.08686800301074982,
+                    0.27372854948043823,
+                    0.8399364948272705,
+                    0.25551146268844604,
+                    0.5165386199951172,
+                    0.1494675874710083,
+                    0.7708152532577515,
+                    0.27232101559638977,
+                    0.4061320722103119,
+                    0.10033944994211197,
+                    0.15962065756320953
+                  ],
+                  "is_hq": [
+                    false,
+                    true,
+                    false,
+                    false,
+                    false,
+                    false,
+                    true,
+                    false,
+                    false,
+                    false,
+                    true,
+                    true
+                  ]
+                }
+              },
+              {
+                "step": 1000,
+                "modes": 6,
+                "n_modes": 8,
+                "hq": 0.826904296875,
+                "cover": 0.75,
+                "effective_modes": 5.75241756439209,
+                "sample_count": 4096,
+                "hq_counts": [
+                  345,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  698,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  356,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  0.019773883745074272,
+                  0.18926426768302917,
+                  0.02868834137916565,
+                  0.06786230951547623,
+                  0.04762181639671326,
+                  0.09468124806880951,
+                  0.7486305236816406,
+                  1.8210673332214355
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  6,
+                  7
+                ],
+                "support": {
+                  "modes": 6,
+                  "n_modes": 8,
+                  "hq": 0.8333333134651184,
+                  "cover": 0.75,
+                  "effective_modes": 5.743492126464844,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    1,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    0,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    0.019781043753027916,
+                    0.18926507234573364,
+                    0.028684554621577263,
+                    0.06786445528268814,
+                    0.04761965572834015,
+                    0.09467943757772446,
+                    0.7486308813095093,
+                    1.821067214012146
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    6,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -2.1491689682006836,
+                      -2.030829668045044
+                    ],
+                    [
+                      0.08678248524665833,
+                      -3.743583917617798
+                    ],
+                    [
+                      -2.9484972953796387,
+                      0.05295853316783905
+                    ],
+                    [
+                      2.8705689907073975,
+                      -0.4615263342857361
+                    ],
+                    [
+                      -2.1554923057556152,
+                      -2.029866933822632
+                    ],
+                    [
+                      -2.043769598007202,
+                      2.1365246772766113
+                    ],
+                    [
+                      -0.013592792674899101,
+                      3.0254781246185303
+                    ],
+                    [
+                      2.995117425918579,
+                      0.01916898973286152
+                    ],
+                    [
+                      -2.9556374549865723,
+                      0.01730857975780964
+                    ],
+                    [
+                      2.159419536590576,
+                      2.306710958480835
+                    ],
+                    [
+                      -0.009852034971117973,
+                      2.973060369491577
+                    ],
+                    [
+                      -2.095041036605835,
+                      2.0587503910064697
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    6,
+                    4,
+                    0,
+                    5,
+                    3,
+                    2,
+                    0,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.09467943757772446,
+                    0.7486308813095093,
+                    0.07387261092662811,
+                    0.47933176159858704,
+                    0.097629614174366,
+                    0.07902707159519196,
+                    0.028877245262265205,
+                    0.019781043753027916,
+                    0.04761965572834015,
+                    0.18926507234573364,
+                    0.028684554621577263,
+                    0.06786445528268814
+                  ],
+                  "is_hq": [
+                    true,
+                    false,
+                    true,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true
+                  ]
+                }
+              },
+              {
+                "step": 1050,
+                "modes": 5,
+                "n_modes": 8,
+                "hq": 0.746337890625,
+                "cover": 0.625,
+                "effective_modes": 4.860279560089111,
+                "sample_count": 4096,
+                "hq_counts": [
+                  698,
+                  341,
+                  664,
+                  0,
+                  695,
+                  659,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  698,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  356,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  0.05725188925862312,
+                  0.09901881217956543,
+                  0.045815251767635345,
+                  0.22468367218971252,
+                  0.18254144489765167,
+                  0.09285049885511398,
+                  0.2877563536167145,
+                  2.139690637588501
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  3,
+                  6,
+                  7
+                ],
+                "support": {
+                  "modes": 5,
+                  "n_modes": 8,
+                  "hq": 0.75,
+                  "cover": 0.625,
+                  "effective_modes": 4.860269069671631,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    2,
+                    1,
+                    2,
+                    0,
+                    2,
+                    2,
+                    0,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    0.05724630504846573,
+                    0.0990157201886177,
+                    0.04581248015165329,
+                    0.22468625009059906,
+                    0.18253952264785767,
+                    0.09285125136375427,
+                    0.2877587676048279,
+                    2.139690399169922
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    3,
+                    6,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -2.128192901611328,
+                      -2.2139172554016113
+                    ],
+                    [
+                      0.06714583933353424,
+                      -2.720184803009033
+                    ],
+                    [
+                      -2.891662120819092,
+                      -0.1469137817621231
+                    ],
+                    [
+                      3.031564950942993,
+                      -0.047757651656866074
+                    ],
+                    [
+                      -2.1471118927001953,
+                      -2.284907341003418
+                    ],
+                    [
+                      -2.0240285396575928,
+                      1.8769197463989258
+                    ],
+                    [
+                      0.04577217996120453,
+                      2.998081922531128
+                    ],
+                    [
+                      3.0740668773651123,
+                      0.03736873343586922
+                    ],
+                    [
+                      -2.8596954345703125,
+                      -0.1412370502948761
+                    ],
+                    [
+                      2.1575801372528076,
+                      2.2134578227996826
+                    ],
+                    [
+                      0.05385722219944,
+                      3.02321457862854
+                    ],
+                    [
+                      -2.027480363845825,
+                      1.917168378829956
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    6,
+                    4,
+                    0,
+                    5,
+                    3,
+                    2,
+                    0,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.09285125136375427,
+                    0.2877587676048279,
+                    0.18253952264785767,
+                    0.05724630504846573,
+                    0.16560737788677216,
+                    0.2630537748336792,
+                    0.04581248015165329,
+                    0.08295977860689163,
+                    0.19908088445663452,
+                    0.0990157201886177,
+                    0.0586475133895874,
+                    0.22468625009059906
+                  ],
+                  "is_hq": [
+                    true,
+                    false,
+                    true,
+                    true,
+                    true,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    false
+                  ]
+                }
+              },
+              {
+                "step": 1100,
+                "modes": 6,
+                "n_modes": 8,
+                "hq": 0.751953125,
+                "cover": 0.75,
+                "effective_modes": 5.639542102813721,
+                "sample_count": 4096,
+                "hq_counts": [
+                  698,
+                  341,
+                  325,
+                  683,
+                  695,
+                  338,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  698,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  356,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  0.06192515045404434,
+                  0.09280426800251007,
+                  0.18030211329460144,
+                  0.11589867621660233,
+                  0.13979177176952362,
+                  0.18183740973472595,
+                  0.34976211190223694,
+                  2.2901086807250977
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  6,
+                  7
+                ],
+                "support": {
+                  "modes": 6,
+                  "n_modes": 8,
+                  "hq": 0.75,
+                  "cover": 0.75,
+                  "effective_modes": 5.669644832611084,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    2,
+                    1,
+                    1,
+                    2,
+                    2,
+                    1,
+                    0,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    0.06192029267549515,
+                    0.09280654788017273,
+                    0.18030406534671783,
+                    0.1158992350101471,
+                    0.13979020714759827,
+                    0.18184125423431396,
+                    0.3497615456581116,
+                    2.2901089191436768
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    6,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -2.141949415206909,
+                      -1.9406534433364868
+                    ],
+                    [
+                      -0.10312360525131226,
+                      -2.6657865047454834
+                    ],
+                    [
+                      -2.8918745517730713,
+                      0.0886010229587555
+                    ],
+                    [
+                      2.9615235328674316,
+                      0.04958429932594299
+                    ],
+                    [
+                      -2.081665277481079,
+                      -1.8798779249191284
+                    ],
+                    [
+                      -1.9623483419418335,
+                      2.205639600753784
+                    ],
+                    [
+                      0.0886802077293396,
+                      3.1569883823394775
+                    ],
+                    [
+                      2.967716693878174,
+                      0.052838534116744995
+                    ],
+                    [
+                      -2.9773972034454346,
+                      0.14968588948249817
+                    ],
+                    [
+                      2.2132320404052734,
+                      2.108464241027832
+                    ],
+                    [
+                      0.11513131856918335,
+                      3.2914352416992188
+                    ],
+                    [
+                      -2.204464912414551,
+                      2.202064275741577
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    6,
+                    4,
+                    0,
+                    5,
+                    3,
+                    2,
+                    0,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.18184125423431396,
+                    0.3497615456581116,
+                    0.13979020714759827,
+                    0.06276178359985352,
+                    0.2446775883436203,
+                    0.17994949221611023,
+                    0.18030406534671783,
+                    0.06192029267549515,
+                    0.15138307213783264,
+                    0.09280654788017273,
+                    0.31335243582725525,
+                    0.1158992350101471
+                  ],
+                  "is_hq": [
+                    true,
+                    false,
+                    true,
+                    true,
+                    false,
+                    true,
+                    true,
+                    true,
+                    true,
+                    true,
+                    false,
+                    true
+                  ]
+                }
+              },
+              {
+                "step": 1150,
+                "modes": 4,
+                "n_modes": 8,
+                "hq": 0.408935546875,
+                "cover": 0.5,
+                "effective_modes": 3.7955429553985596,
+                "sample_count": 4096,
+                "hq_counts": [
+                  0,
+                  341,
+                  664,
+                  314,
+                  0,
+                  0,
+                  356,
+                  0
+                ],
+                "nearest_counts": [
+                  698,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  356,
+                  0
+                ],
+                "closest_distance_per_mode": [
+                  0.7134609222412109,
+                  0.061709169298410416,
+                  0.18315428495407104,
+                  0.2041342705488205,
+                  0.2170562595129013,
+                  0.2542403042316437,
+                  0.0628499686717987,
+                  2.1403307914733887
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  0,
+                  4,
+                  5,
+                  7
+                ],
+                "support": {
+                  "modes": 4,
+                  "n_modes": 8,
+                  "hq": 0.4166666567325592,
+                  "cover": 0.5,
+                  "effective_modes": 3.7892916202545166,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    0,
+                    1,
+                    2,
+                    1,
+                    0,
+                    0,
+                    1,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    1,
+                    0
+                  ],
+                  "closest_distance_per_mode": [
+                    0.7134615182876587,
+                    0.06171984225511551,
+                    0.1831563413143158,
+                    0.20413611829280853,
+                    0.2170555293560028,
+                    0.25423797965049744,
+                    0.06285727769136429,
+                    2.1403305530548096
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    0,
+                    4,
+                    5,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -2.2208592891693115,
+                      -2.3552627563476562
+                    ],
+                    [
+                      -0.019317902624607086,
+                      -3.0598151683807373
+                    ],
+                    [
+                      -3.0405349731445312,
+                      -0.2261429876089096
+                    ],
+                    [
+                      2.2039260864257812,
+                      0.017416536808013916
+                    ],
+                    [
+                      -2.300764322280884,
+                      -2.4130265712738037
+                    ],
+                    [
+                      -2.0482990741729736,
+                      1.930691123008728
+                    ],
+                    [
+                      0.18125024437904358,
+                      2.9463820457458496
+                    ],
+                    [
+                      2.2870378494262695,
+                      0.02668870985507965
+                    ],
+                    [
+                      -3.019368886947632,
+                      -0.21618987619876862
+                    ],
+                    [
+                      2.1678659915924072,
+                      2.1618521213531494
+                    ],
+                    [
+                      0.1769234836101532,
+                      2.9526262283325195
+                    ],
+                    [
+                      -1.9049872159957886,
+                      1.9574425220489502
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    6,
+                    4,
+                    0,
+                    5,
+                    3,
+                    2,
+                    0,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.25423797965049744,
+                    0.06285727769136429,
+                    0.22974684834480286,
+                    0.7962644100189209,
+                    0.34248000383377075,
+                    0.20413611829280853,
+                    0.18901477754116058,
+                    0.7134615182876587,
+                    0.2170555293560028,
+                    0.06171984225511551,
+                    0.1831563413143158,
+                    0.2713961899280548
+                  ],
+                  "is_hq": [
+                    false,
+                    true,
+                    false,
+                    false,
+                    false,
+                    true,
+                    true,
+                    false,
+                    false,
+                    true,
+                    true,
+                    false
+                  ]
+                }
+              },
+              {
+                "step": 1200,
+                "modes": 5,
+                "n_modes": 8,
+                "hq": 0.666748046875,
+                "cover": 0.625,
+                "effective_modes": 4.786448001861572,
+                "sample_count": 4096,
+                "hq_counts": [
+                  698,
+                  341,
+                  664,
+                  369,
+                  0,
+                  659,
+                  0,
+                  0
+                ],
+                "nearest_counts": [
+                  698,
+                  341,
+                  664,
+                  683,
+                  695,
+                  659,
+                  0,
+                  356
+                ],
+                "closest_distance_per_mode": [
+                  0.05310381203889847,
+                  0.050875063985586166,
+                  0.17274945974349976,
+                  0.19430649280548096,
+                  0.31640172004699707,
+                  0.14352479577064514,
+                  2.025214910507202,
+                  0.9268519878387451
+                ],
+                "hq_radius": 0.21000000000000002,
+                "missing_modes": [
+                  4,
+                  6,
+                  7
+                ],
+                "support": {
+                  "modes": 5,
+                  "n_modes": 8,
+                  "hq": 0.6666666865348816,
+                  "cover": 0.625,
+                  "effective_modes": 4.7568278312683105,
+                  "sample_count": 12,
+                  "hq_counts": [
+                    2,
+                    1,
+                    2,
+                    1,
+                    0,
+                    2,
+                    0,
+                    0
+                  ],
+                  "nearest_counts": [
+                    2,
+                    1,
+                    2,
+                    2,
+                    2,
+                    2,
+                    0,
+                    1
+                  ],
+                  "closest_distance_per_mode": [
+                    0.05311058089137077,
+                    0.050871770828962326,
+                    0.1727479100227356,
+                    0.19430957734584808,
+                    0.3164003789424896,
+                    0.14352095127105713,
+                    2.025214910507202,
+                    0.9268511533737183
+                  ],
+                  "hq_radius": 0.21000000000000002,
+                  "missing_modes": [
+                    4,
+                    6,
+                    7
+                  ],
+                  "points": [
+                    [
+                      -2.2639763355255127,
+                      -2.1370508670806885
+                    ],
+                    [
+                      2.0247557163238525,
+                      -3.0431265830993652
+                    ],
+                    [
+                      -3.3163812160491943,
+                      0.003480987623333931
+                    ],
+                    [
+                      3.0524063110351562,
+                      0.008620472624897957
+                    ],
+                    [
+                      -2.3213565349578857,
+                      -2.154975175857544
+                    ],
+                    [
+                      -2.501303195953369,
+                      2.1080925464630127
+                    ],
+                    [
+                      -0.17110398411750793,
+                      3.0237762928009033
+                    ],
+                    [
+                      3.080613136291504,
+                      0.015535103157162666
+                    ],
+                    [
+                      -3.44887375831604,
+                      0.02486349828541279
+                    ],
+                    [
+                      2.0822384357452393,
+                      2.153886318206787
+                    ],
+                    [
+                      -0.17133307456970215,
+                      3.065110445022583
+                    ],
+                    [
+                      -2.2620937824249268,
+                      2.2552568912506104
+                    ]
+                  ],
+                  "nearest_mode": [
+                    5,
+                    7,
+                    4,
+                    0,
+                    5,
+                    3,
+                    2,
+                    0,
+                    4,
+                    1,
+                    2,
+                    3
+                  ],
+                  "nearest_distance": [
+                    0.14352095127105713,
+                    0.9268511533737183,
+                    0.3164003789424896,
+                    0.05311058089137077,
+                    0.20284780859947205,
+                    0.3802131116390228,
+                    0.1727479100227356,
+                    0.0820963904261589,
+                    0.44956183433532715,
+                    0.050871770828962326,
+                    0.1832876056432724,
+                    0.19430957734584808
+                  ],
+                  "is_hq": [
+                    true,
+                    false,
+                    false,
+                    true,
+                    true,
+                    false,
+                    true,
+                    true,
+                    false,
+                    true,
+                    true,
+                    true
+                  ]
+                }
+              }
+            ]
+          },
+          "ema": {
+            "modes": 6,
+            "hq": 0.82958984375
+          },
+          "seconds": 5.442503923999993
+        }
+      }
+    }
+  ],
+  "shared": {
+    "orbit_hold": {
+      "status": "PASS",
+      "metrics": [
+        {
+          "metric": "direction_cos",
+          "value": 0.992029696267167,
+          "op": ">=",
+          "threshold": 0.98,
+          "status": "PASS",
+          "margin": 0.01202969626716699
+        },
+        {
+          "metric": "speed_rel",
+          "value": 0.008034339861824875,
+          "op": "<=",
+          "threshold": 0.05,
+          "status": "PASS",
+          "margin": 0.041965660138175126
+        },
+        {
+          "metric": "radius_rel",
+          "value": 4.7415775010032725e-17,
+          "op": "<=",
+          "threshold": 0.02,
+          "status": "PASS",
+          "margin": 0.019999999999999952
+        }
+      ],
+      "summary": "direction_cos=0.99203 (>= 0.98); speed_rel=0.00803434 (<= 0.05); radius_rel=4.74158e-17 (<= 0.02)",
+      "seconds": 0.14762204699991344
+    },
+    "erase_keep_backend": {
+      "status": "PASS",
+      "metrics": [
+        {
+          "metric": "teacher_leak",
+          "value": 0.0,
+          "op": "<=",
+          "threshold": 0.2,
+          "status": "PASS",
+          "margin": 0.2
+        },
+        {
+          "metric": "u_kept",
+          "value": 0.9999999900000002,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.1499999900000002
+        },
+        {
+          "metric": "pole_rel_err",
+          "value": 0.0,
+          "op": "<=",
+          "threshold": 0.2,
+          "status": "PASS",
+          "margin": 0.2
+        },
+        {
+          "metric": "same_dir",
+          "value": 0.0,
+          "op": "<=",
+          "threshold": 0.25,
+          "status": "PASS",
+          "margin": 0.25
+        }
+      ],
+      "summary": "teacher_leak=0 (<= 0.2); u_kept=1 (>= 0.85); pole_rel_err=0 (<= 0.2); same_dir=0 (<= 0.25)",
+      "raw": {
+        "family": "erase_keep_backend",
+        "arm": "locked",
+        "backend": "cpu",
+        "backend_cls": "CpuBackend",
+        "latent_shape": [
+          4,
+          8,
+          8
+        ],
+        "teacher": "faithful_guard_e",
+        "cover_weight": 1.5,
+        "teacher_leak": 0.0,
+        "teacher_leak_ok": true,
+        "hold_cos": 1.0,
+        "leak_frac": -1.0,
+        "same_dir": 0.0,
+        "same_dir_ok": true,
+        "u_kept": 0.9999999900000002,
+        "pole_rel_err": 0.0,
+        "covered": true,
+        "axis_dot": 0.0,
+        "backend_calls": 8,
+        "pass": true,
+        "fail_reasons": "",
+        "leak_ratio_max": 0.2,
+        "locked_teacher": "faithful_guard_e"
+      },
+      "seconds": 0.9673336459998154
+    },
+    "late_collapse": {
+      "status": "PASS",
+      "metrics": [
+        {
+          "metric": "selected_val_error",
+          "value": 0.06,
+          "op": "<=",
+          "threshold": 0.25,
+          "status": "PASS",
+          "margin": 0.19
+        },
+        {
+          "metric": "selected_collapsed",
+          "value": 0,
+          "op": "<=",
+          "threshold": 0,
+          "status": "PASS",
+          "margin": 0
+        },
+        {
+          "metric": "last_val_error",
+          "value": 1.4,
+          "op": ">=",
+          "threshold": 0.25,
+          "status": "PASS",
+          "margin": 1.15
+        },
+        {
+          "metric": "best_train_val_error",
+          "value": 1.4,
+          "op": ">=",
+          "threshold": 0.25,
+          "status": "PASS",
+          "margin": 1.15
+        }
+      ],
+      "summary": "selected_val_error=0.06 (<= 0.25); selected_collapsed=0 (<= 0); last_val_error=1.4 (>= 0.25); best_train_val_error=1.4 (>= 0.25)",
+      "raw": {
+        "validation": {
+          "step": 3,
+          "train_loss": 0.32,
+          "val_error": 0.06,
+          "collapsed": false
+        },
+        "last": {
+          "step": 7,
+          "train_loss": 0.01,
+          "val_error": 1.4,
+          "collapsed": true
+        },
+        "best_train": {
+          "step": 7,
+          "train_loss": 0.01,
+          "val_error": 1.4,
+          "collapsed": true
+        }
+      },
+      "seconds": 6.907200008754444e-05
+    },
+    "keep_critic": {
+      "status": "PASS",
+      "metrics": [
+        {
+          "metric": "weight_delta",
+          "value": 0.0,
+          "op": "<=",
+          "threshold": 0.0,
+          "status": "PASS",
+          "margin": 0.0
+        }
+      ],
+      "summary": "weight_delta=0 (<= 0.0)",
+      "seconds": 0.006696967999914705
+    },
+    "lm_target": {
+      "status": "PASS",
+      "metrics": [
+        {
+          "metric": "expr_gain",
+          "value": 1.0,
+          "op": ">=",
+          "threshold": 0.85,
+          "status": "PASS",
+          "margin": 0.15000000000000002
+        },
+        {
+          "metric": "struct_hold",
+          "value": 1.0,
+          "op": ">=",
+          "threshold": 0.95,
+          "status": "PASS",
+          "margin": 0.050000000000000044
+        },
+        {
+          "metric": "identity_mse",
+          "value": 0.0,
+          "op": "<=",
+          "threshold": 1e-08,
+          "status": "PASS",
+          "margin": 1e-08
+        }
+      ],
+      "summary": "expr_gain=1 (>= 0.85); struct_hold=1 (>= 0.95); identity_mse=0 (<= 1e-08)",
+      "seconds": 0.03991727299990089
+    },
+    "field_lift": {
+      "status": "PASS",
+      "rows": {
+        "plane": {
+          "status": "PASS",
+          "metrics": [
+            {
+              "metric": "u_kept",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.15000000000000002
+            },
+            {
+              "metric": "content_kept",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 0.75,
+              "status": "PASS",
+              "margin": 0.25
+            },
+            {
+              "metric": "leak_ratio",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 0.2,
+              "status": "PASS",
+              "margin": 0.2
+            },
+            {
+              "metric": "pole_rel_err",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 0.2,
+              "status": "PASS",
+              "margin": 0.2
+            },
+            {
+              "metric": "same_dir",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 0.25,
+              "status": "PASS",
+              "margin": 0.25
+            },
+            {
+              "metric": "lyric_abs",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 1e-06,
+              "status": "PASS",
+              "margin": 1e-06
+            }
+          ],
+          "summary": "u_kept=1 (>= 0.85); content_kept=1 (>= 0.75); leak_ratio=0 (<= 0.2); pole_rel_err=0 (<= 0.2); same_dir=0 (<= 0.25); lyric_abs=0 (<= 1e-06)"
+        },
+        "tilted": {
+          "status": "PASS",
+          "metrics": [
+            {
+              "metric": "u_kept",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 0.85,
+              "status": "PASS",
+              "margin": 0.15000000000000002
+            },
+            {
+              "metric": "content_kept",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 0.75,
+              "status": "PASS",
+              "margin": 0.25
+            },
+            {
+              "metric": "leak_ratio",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 0.2,
+              "status": "PASS",
+              "margin": 0.2
+            },
+            {
+              "metric": "pole_rel_err",
+              "value": 7.316618492391588e-17,
+              "op": "<=",
+              "threshold": 0.2,
+              "status": "PASS",
+              "margin": 0.19999999999999993
+            },
+            {
+              "metric": "same_dir",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 0.25,
+              "status": "PASS",
+              "margin": 0.25
+            },
+            {
+              "metric": "lyric_abs",
+              "value": 0.0,
+              "op": "<=",
+              "threshold": 1e-06,
+              "status": "PASS",
+              "margin": 1e-06
+            }
+          ],
+          "summary": "u_kept=1 (>= 0.85); content_kept=1 (>= 0.75); leak_ratio=0 (<= 0.2); pole_rel_err=7.31662e-17 (<= 0.2); same_dir=0 (<= 0.25); lyric_abs=0 (<= 1e-06)"
+        }
+      },
+      "summary": "plane: PASS; tilted: PASS",
+      "seconds": 0.0006461440000293805
+    },
+    "path_suffix_lora": {
+      "status": "PASS",
+      "rows": {
+        "suffix": {
+          "status": "PASS",
+          "metrics": [
+            {
+              "metric": "coverage",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 0.0
+            },
+            {
+              "metric": "self_abs",
+              "value": 2.25,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 1.25
+            },
+            {
+              "metric": "cross_abs",
+              "value": 2.25,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 1.25
+            }
+          ],
+          "summary": "coverage=1 (>= 1.0); self_abs=2.25 (>= 1.0); cross_abs=2.25 (>= 1.0)",
+          "raw": {
+            "name": "suffix",
+            "targets": [
+              "self_attn.proj",
+              "cross_attn.proj"
+            ],
+            "passed": true,
+            "reasons": [],
+            "coverage": 1.0,
+            "self_abs": 2.25,
+            "cross_abs": 2.25,
+            "bare_abs": 0.0,
+            "refused": false,
+            "detail": ""
+          }
+        },
+        "regex": {
+          "status": "PASS",
+          "metrics": [
+            {
+              "metric": "coverage",
+              "value": 1.0,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 0.0
+            },
+            {
+              "metric": "self_abs",
+              "value": 2.25,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 1.25
+            },
+            {
+              "metric": "cross_abs",
+              "value": 2.25,
+              "op": ">=",
+              "threshold": 1.0,
+              "status": "PASS",
+              "margin": 1.25
+            }
+          ],
+          "summary": "coverage=1 (>= 1.0); self_abs=2.25 (>= 1.0); cross_abs=2.25 (>= 1.0)",
+          "raw": {
+            "name": "regex",
+            "targets": "(?:self_attn|cross_attn)\\..+",
+            "passed": true,
+            "reasons": [],
+            "coverage": 1.0,
+            "self_abs": 2.25,
+            "cross_abs": 2.25,
+            "bare_abs": 0.0,
+            "refused": false,
+            "detail": ""
+          }
+        }
+      },
+      "summary": "suffix: PASS; regex: PASS",
+      "seconds": 0.004648037999913868
+    },
+    "dsl_macro_expand": {
+      "status": "PASS",
+      "raw": [
+        {
+          "name": "locked_expand",
+          "role": "locked_shared",
+          "toy": "dsl_macro_expand",
+          "kind": "documented",
+          "rules": [
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.4,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "blue",
+              "b": "red",
+              "alpha": -0.1,
+              "options": []
+            }
+          ],
+          "text_rules": [
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.4,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "blue",
+              "b": "red",
+              "alpha": -0.1,
+              "options": []
+            }
+          ],
+          "geometric_verdict": "recipe",
+          "won": true,
+          "reasons": [],
+          "order": 1
+        },
+        {
+          "name": "wrong_order",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "wrong_order",
+          "rules": [
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.4,
+              "options": []
+            },
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "blue",
+              "b": "red",
+              "alpha": -0.1,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "op_order"
+          ],
+          "order": 1
+        },
+        {
+          "name": "swapped_roles",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "swapped_roles",
+          "rules": [
+            {
+              "op": "exaggerate",
+              "a": "red",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "blue",
+              "b": "red",
+              "alpha": 0.4,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "red",
+              "b": "blue",
+              "alpha": -0.1,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "swapped_roles"
+          ],
+          "order": 1
+        },
+        {
+          "name": "wrong_alphas",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "wrong_alphas",
+          "rules": [
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 1.0,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 1.0,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "blue",
+              "b": "red",
+              "alpha": 1.0,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "alphas"
+          ],
+          "order": 1
+        },
+        {
+          "name": "dropped_percent",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "dropped_percent",
+          "rules": [
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.4,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "dropped_percent"
+          ],
+          "order": 1
+        },
+        {
+          "name": "single_write",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "single_write",
+          "rules": [
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 1.0,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "single_write"
+          ],
+          "order": 1
+        },
+        {
+          "name": "geometric_right",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "geometric_right",
+          "rules": [
+            {
+              "op": "exaggerate",
+              "a": "blue",
+              "b": "",
+              "alpha": 0.2,
+              "options": []
+            },
+            {
+              "op": "write",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.4,
+              "options": []
+            },
+            {
+              "op": "orthogonal",
+              "a": "blue",
+              "b": "red",
+              "alpha": -0.1,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "right",
+          "won": false,
+          "reasons": [
+            "geometric_right"
+          ],
+          "order": 1
+        },
+        {
+          "name": "fourth_loss",
+          "role": "negative",
+          "toy": "dsl_macro_expand",
+          "kind": "fourth_loss",
+          "rules": [
+            {
+              "op": "replace",
+              "a": "red",
+              "b": "blue",
+              "alpha": 0.1,
+              "options": []
+            }
+          ],
+          "text_rules": null,
+          "geometric_verdict": "recipe",
+          "won": false,
+          "reasons": [
+            "fourth_loss"
+          ],
+          "order": 1
+        }
+      ],
+      "summary": "documented expansion PASS; 7/7 incorrect expansions rejected",
+      "seconds": 0.00029506900000342284
+    },
+    "dsl_phrase_jobs": {
+      "status": "PASS",
+      "rows": {
+        "neutralize": {
+          "status": "PASS",
+          "raw": {
+            "name": "neutralize",
+            "role": "documented",
+            "job": "neutralize",
+            "phrase": "red--",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 0.9992586374282837,
+            "color_on_red": 0.015094757080078125,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "blue_x": -0.015094757080078125,
+            "blue_y": 0.0,
+            "mix_x": -0.023432016372680664,
+            "mix_y": 0.9999999403953552,
+            "ops": [
+              "erase"
+            ],
+            "detail": "Neutralize \"red\": prompts that ask for it should come out without it (match the empty prompt)."
+          }
+        },
+        "bipolar": {
+          "status": "PASS",
+          "raw": {
+            "name": "bipolar",
+            "role": "documented",
+            "job": "bipolar",
+            "phrase": "red++",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 0.9983469843864441,
+            "color_on_red": 3.1668663024902344,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "blue_x": -3.1668663024902344,
+            "blue_y": 0.0,
+            "mix_x": 3.2244348526000977,
+            "mix_y": 0.9999999403953552,
+            "ops": [
+              "exaggerate"
+            ],
+            "detail": "Classic ++ stretches the color axis past the frozen red direction without dragging stripe."
+          }
+        },
+        "remap": {
+          "status": "PASS",
+          "raw": {
+            "name": "remap",
+            "role": "documented",
+            "job": "remap",
+            "phrase": "red=blue",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 0.9983469843864441,
+            "color_on_red": -1.1668663024902344,
+            "pattern_on_red": 0.0,
+            "write_cosine": 1.0,
+            "blue_x": 1.1668663024902344,
+            "blue_y": 0.0,
+            "mix_x": -1.2244350910186768,
+            "mix_y": 0.9999999403953552,
+            "ops": [
+              "write"
+            ],
+            "detail": "Trained red-direction aligns with frozen blue; stripe hold stays high."
+          }
+        },
+        "keep_erase": {
+          "status": "PASS",
+          "raw": {
+            "name": "keep_erase",
+            "role": "documented",
+            "job": "keep_erase",
+            "phrase": "red--|stripe#stripe",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 0.9999944567680359,
+            "color_on_red": 0.015244126319885254,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "blue_x": -0.015244126319885254,
+            "blue_y": 0.0,
+            "mix_x": 0.0185735821723938,
+            "mix_y": 0.9999999403953552,
+            "ops": [
+              "erase",
+              "freeze"
+            ],
+            "detail": "ESD plus `stripe#stripe` is the live-DSL way to pin the keep axis. Same geometry as the EA retain hook on this fixture."
+          }
+        },
+        "mix": {
+          "status": "PASS",
+          "raw": {
+            "name": "mix",
+            "role": "documented",
+            "job": "mix",
+            "phrase": "red=red stripe",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 1.0,
+            "color_on_red": 1.0,
+            "pattern_on_red": 0.9849053025245667,
+            "write_cosine": -0.7124635577201843,
+            "blue_x": -1.0,
+            "blue_y": -0.9849053025245667,
+            "mix_x": 1.0,
+            "mix_y": 2.0234322547912598,
+            "ops": [
+              "write"
+            ],
+            "detail": "Write red toward the mixed embedding: red keeps color and picks up stripe. First-class `+` would be a synonym here."
+          }
+        },
+        "isolate": {
+          "status": "PASS",
+          "raw": {
+            "name": "isolate",
+            "role": "documented",
+            "job": "isolate",
+            "phrase": "red stripe=stripe",
+            "passed": true,
+            "reasons": [],
+            "toy": "dsl_phrase_jobs",
+            "geometric": "right",
+            "refused": false,
+            "stripe_hold": 0.9071813225746155,
+            "color_on_red": 0.5012162923812866,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "blue_x": -0.5012162923812866,
+            "blue_y": 0.0,
+            "mix_x": 0.03742814064025879,
+            "mix_y": 0.9999999403953552,
+            "ops": [
+              "write"
+            ],
+            "detail": "Write the mix onto stripe: `red stripe` lands on e_y. Standalone red/stripe drift is the linear LoRA class, same caveat as the antipodal write swap."
+          }
+        }
+      },
+      "summary": "neutralize: PASS; bipolar: PASS; remap: PASS; keep_erase: PASS; mix: PASS; isolate: PASS",
+      "seconds": 0.15940551800008507
+    },
+    "dsl_game_geometry": {
+      "status": "PASS",
+      "rows": {
+        "write": {
+          "status": "PASS",
+          "geometry": {
+            "teacher": "faithful_guard_e",
+            "teacher_leak": 0.0,
+            "teacher_leak_ok": true,
+            "hold_cos": 1.0,
+            "leak_frac": -1.0,
+            "same_dir": 0.0,
+            "even_norm": 0.0,
+            "odd_norm": 2.1668663024902344,
+            "same_dir_ok": true
+          },
+          "before": {
+            "step": 0,
+            "color_on_red": 1.0,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.0,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 1.0,
+            "red_norm": 1.0,
+            "stripe_norm": 0.9999999403953552
+          },
+          "after": {
+            "step": 40,
+            "color_on_red": -1.1668663024902344,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": -0.057568758726119995,
+            "pattern_on_red": 0.0,
+            "write_cosine": 1.0,
+            "stripe_hold": 0.9983469843864441,
+            "red_norm": 1.1668663024902344,
+            "stripe_norm": 1.0016556978225708
+          },
+          "summary": "Trained red-direction aligns with frozen blue; stripe hold stays high."
+        },
+        "erase_esd": {
+          "status": "PASS",
+          "geometry": {
+            "teacher": "faithful_guard_e",
+            "teacher_leak": 0.0,
+            "teacher_leak_ok": true,
+            "hold_cos": 1.0,
+            "leak_frac": -1.0,
+            "same_dir": 0.0,
+            "even_norm": 0.0,
+            "odd_norm": 0.9849052429199219,
+            "same_dir_ok": true
+          },
+          "before": {
+            "step": 0,
+            "color_on_red": 1.0,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.0,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 1.0,
+            "red_norm": 1.0,
+            "stripe_norm": 0.9999999403953552
+          },
+          "after": {
+            "step": 40,
+            "color_on_red": 0.015094757080078125,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": -0.0385267436504364,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 0.9992586374282837,
+            "red_norm": 0.015094757080078125,
+            "stripe_norm": 1.0007418394088745
+          },
+          "summary": "Live ESD (g=0) matches the empty prompt: red CFG goes to the origin, not onto blue. Stripe hold stays high."
+        },
+        "exaggerate": {
+          "status": "PASS",
+          "geometry": {
+            "teacher": "faithful_guard_e",
+            "teacher_leak": 0.0,
+            "teacher_leak_ok": true,
+            "hold_cos": 1.0,
+            "leak_frac": -1.0,
+            "same_dir": 0.0,
+            "even_norm": 0.0,
+            "odd_norm": 2.1668663024902344,
+            "same_dir_ok": true
+          },
+          "before": {
+            "step": 0,
+            "color_on_red": 1.0,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.0,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 1.0,
+            "red_norm": 1.0,
+            "stripe_norm": 0.9999999403953552
+          },
+          "after": {
+            "step": 40,
+            "color_on_red": 3.1668663024902344,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.057568758726119995,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 0.9983469843864441,
+            "red_norm": 3.1668663024902344,
+            "stripe_norm": 1.0016556978225708
+          },
+          "summary": "Classic ++ stretches the color axis past the frozen red direction without dragging stripe."
+        },
+        "erase_esd_freeze": {
+          "status": "PASS",
+          "geometry": {
+            "teacher": "faithful_guard_e",
+            "teacher_leak": 0.0,
+            "teacher_leak_ok": true,
+            "hold_cos": 1.0,
+            "leak_frac": -1.0,
+            "same_dir": 0.0,
+            "even_norm": 0.0,
+            "odd_norm": 0.9847558736801147,
+            "same_dir_ok": true
+          },
+          "before": {
+            "step": 0,
+            "color_on_red": 1.0,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.0,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 1.0,
+            "red_norm": 1.0,
+            "stripe_norm": 0.9999999403953552
+          },
+          "after": {
+            "step": 40,
+            "color_on_red": 0.015244126319885254,
+            "pattern_on_stripe": 0.9999999403953552,
+            "color_on_stripe": 0.0033294782042503357,
+            "pattern_on_red": 0.0,
+            "write_cosine": -1.0,
+            "stripe_hold": 0.9999944567680359,
+            "red_norm": 0.015244126319885254,
+            "stripe_norm": 1.0000054836273193
+          },
+          "summary": "ESD plus `stripe#stripe` is the live-DSL way to pin the keep axis. Same geometry as the EA retain hook on this fixture."
+        }
+      },
+      "summary": "write: PASS; erase_esd: PASS; exaggerate: PASS; erase_esd_freeze: PASS",
+      "seconds": 0.10647208000000319
+    }
+  },
+  "stock_ring": {
+    "source_sha256": "63cec4e7a2c0c060d844b8e7f496ea7987ceab6715826ce9bf9b36df251f7b27",
+    "protocol": {
+      "version": "behavior-v1",
+      "seed": 0,
+      "device": "cpu",
+      "threads": 1,
+      "evaluation": "final live weights; EMA reported separately where implemented",
+      "budgets": {
+        "two_pole": 80,
+        "trajectory": 400,
+        "residual_student": 400,
+        "unipolar": 400,
+        "ae_gan_hold": 250,
+        "cover_leftover": 800,
+        "unused_token_hold": 200,
+        "mid_scale_identity": 800,
+        "mode_hold": 1200
+      },
+      "metrics": {
+        "two_pole": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ],
+        "trajectory": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ]
+        ],
+        "residual_student": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ],
+          [
+            "success_rate",
+            ">=",
+            1.0
+          ],
+          [
+            "wrong_pad_rate",
+            "<=",
+            0.0
+          ]
+        ],
+        "unipolar": [
+          [
+            "cover",
+            ">=",
+            0.85
+          ],
+          [
+            "off_caption",
+            "<=",
+            0.05
+          ],
+          [
+            "neu_hold",
+            ">=",
+            0.85
+          ]
+        ],
+        "ae_gan_hold": [
+          [
+            "recon_mse",
+            "<=",
+            0.05
+          ],
+          [
+            "hold",
+            "<=",
+            0.35
+          ]
+        ],
+        "cover_leftover": [
+          [
+            "u_kept",
+            ">=",
+            0.85
+          ],
+          [
+            "content_kept",
+            ">=",
+            0.75
+          ],
+          [
+            "leak_ratio",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_plus",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_minus",
+            "<=",
+            0.2
+          ],
+          [
+            "same_dir",
+            "<=",
+            0.25
+          ]
+        ],
+        "unused_token_hold": [
+          [
+            "unused_hold",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_move",
+            ">=",
+            0.85
+          ]
+        ],
+        "mid_scale_identity": [
+          [
+            "concept_cos_plus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_cos_minus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_mag_plus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_plus",
+            "<=",
+            1.25
+          ],
+          [
+            "concept_mag_minus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_minus",
+            "<=",
+            1.25
+          ],
+          [
+            "identity_at_0",
+            ">=",
+            0.85
+          ],
+          [
+            "identity_at_mid",
+            ">=",
+            0.85
+          ]
+        ],
+        "mode_hold": [
+          [
+            "modes",
+            ">=",
+            7
+          ],
+          [
+            "hq",
+            ">=",
+            0.9
+          ]
+        ]
+      },
+      "shared_checks": [
+        "orbit_hold",
+        "erase_keep_backend",
+        "late_collapse",
+        "keep_critic",
+        "lm_target",
+        "field_lift",
+        "path_suffix_lora",
+        "dsl_macro_expand",
+        "dsl_phrase_jobs",
+        "dsl_game_geometry"
+      ],
+      "source_sha256": {
+        "benchmarks/locked_shared/__init__.py": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f",
+        "benchmarks/locked_shared/__main__.py": "e01d15aabdf845d79185a577c9fa2c1e38357ec81d9fe38d427f17a01bbd0dfe",
+        "benchmarks/locked_shared/base_recipe.py": "0a392e47e8305005fa27047a04443d7958ab8bbb2bb0317bc4d1ae59d8f83dd7",
+        "benchmarks/locked_shared/baseline.py": "c992903f1f0d1439d9489fba50a851b0065f205a55912572aaa77dbf03fea334",
+        "benchmarks/locked_shared/default_selection.py": "9557ae7fa34f4a41397a389120a8d822e6ea15548c8fce60973204105a53777f",
+        "benchmarks/locked_shared/host_reference.py": "030fdb5d6b4ec3d212d7786409475d8aaf024384db3d26548f250cfa765b6dfa",
+        "benchmarks/locked_shared/hosts/__init__.py": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb",
+        "benchmarks/locked_shared/hosts/ae_gan_hold.py": "8dadaa83b7e0f2133d7a58d831a0e89a334f36411f2890cb488bcb167f81e415",
+        "benchmarks/locked_shared/hosts/cover_leftover.py": "9a7e66cabc752340565f4214c8a98cf6a56a05fcc8fe184ac1a24a9d672c3b47",
+        "benchmarks/locked_shared/hosts/mid_scale_identity.py": "b36acb499fa5952c09bbf12dd20a0a5d395d7549f6c8837dc7cee01bf9470409",
+        "benchmarks/locked_shared/hosts/residual_student.py": "3664eb8f821c80eb51dc1688c284ee56c2cc1841cec34207d6530bbe46725f54",
+        "benchmarks/locked_shared/hosts/unipolar.py": "a376b0e981d8ed6e7ab563ccd44cb10f21e8419ebf7cffe1bcc9d6b857c6e93f",
+        "benchmarks/locked_shared/hosts/unused_token_hold.py": "82f5446ac1a6dbcc304ad8d0eb48030c3166d205f244a2777e15ca0dfa451da5",
+        "benchmarks/locked_shared/investigate.py": "c9e7e3f365e99b5a99baa0a3119abee0d833035a29e968c7258fad75d23f2b37",
+        "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+        "benchmarks/locked_shared/mode_hold.py": "20c7bce11678f31033719811f9536692354248924a8e85eca84860026727c429",
+        "benchmarks/locked_shared/reference.py": "a97933b31a240822fc5535979a1e84bb884472a69b702808484257cff46cfbef",
+        "benchmarks/locked_shared/run.py": "5b2a54935b08dd5250a9bf82159e2d86880e89daa23b87281ee61daa6e3bea3d",
+        "benchmarks/locked_shared/shared_checks.py": "2ca7fe501a12193cf337bb6a9a470ccf02ce108a338afab57c686c46234f3fa5",
+        "benchmarks/locked_shared/suite_reference.py": "8bd939b18a9ff771846326d49b025ad4590ed3534d0749ae928c3ea1d0e8fe3f",
+        "benchmarks/locked_shared/summarize.py": "4a5585a310aa4f093269fe186252440ffa7d187f5e6c9e72a6324456b037b21c",
+        "benchmarks/locked_shared/trajectory.py": "4de4526d23de522d460bd92848be6fa673bff8d3f45c28cfd9d9927ddfb171bb",
+        "benchmarks/locked_shared/two_pole.py": "8b9649e61a8f616511761b874bc5af074f9413c27f12b7d1439f08a868c5c79d",
+        "particlegan/__init__.py": "3b9116013435c77f91f94cd02184dd591d27a87d456c8ed981b0a7ac02c95fa8",
+        "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+        "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+        "particlegan/grad_regularizers.py": "45fb38532b4d0e6fa3b8483fdf18b3c822055363e68dbee4fc8e6222dabb19c6",
+        "particlegan/locked_shared.py": "51fb6d90f4dc0ba859756bb427653b5a276b29e1d96fd466a871c7d7642a560d",
+        "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+        "particlegan/recipes.py": "33ea97c94f4dd79ee2c5451cdf9e9ce98272921d71a300918258e8df3e6a88bc",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      },
+      "torch": "2.13.0+cu126",
+      "python": "3.12.13"
+    },
+    "rows": [
+      {
+        "name": "stock_b_cap",
+        "recipe": {
+          "name": "gan",
+          "model": "gan",
+          "z_dim": 4,
+          "num_particles": 20000,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": null,
+          "conditioning": "scalar",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 256,
+          "total_steps": 7000,
+          "lr": 0.0006,
+          "d_lr_mult": 1.5,
+          "prior_lr_mult": 10.0,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "prior_betas": null,
+          "loss_type": "logistic",
+          "gan_mode": "rp",
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "reg_every": 1,
+          "reg_method": "autograd",
+          "prior_reg": 1.0,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0
+        },
+        "ring": {
+          "modes": 8,
+          "hq": 0.99658203125,
+          "live": {
+            "modes": 8,
+            "hq": 0.990478515625,
+            "effective_modes": 7.952311992645264
+          },
+          "live_curve": [
+            {
+              "step": 6800,
+              "modes": 8,
+              "hq": 0.995361328125
+            },
+            {
+              "step": 6850,
+              "modes": 8,
+              "hq": 0.98974609375
+            },
+            {
+              "step": 6900,
+              "modes": 8,
+              "hq": 0.985107421875
+            },
+            {
+              "step": 6950,
+              "modes": 8,
+              "hq": 0.99072265625
+            },
+            {
+              "step": 7000,
+              "modes": 8,
+              "hq": 0.990478515625
+            }
+          ]
+        }
+      },
+      {
+        "name": "stock_r1_r2_0_1",
+        "recipe": {
+          "name": "gan",
+          "model": "gan",
+          "z_dim": 4,
+          "num_particles": 20000,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": null,
+          "conditioning": "scalar",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 256,
+          "total_steps": 7000,
+          "lr": 0.0006,
+          "d_lr_mult": 1.5,
+          "prior_lr_mult": 10.0,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "prior_betas": null,
+          "loss_type": "logistic",
+          "gan_mode": "rp",
+          "reg_arm": "a_r1r2",
+          "reg_coeff": 0.1,
+          "reg_kappa": 1.0,
+          "reg_every": 1,
+          "reg_method": "autograd",
+          "prior_reg": 1.0,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0
+        },
+        "ring": {
+          "modes": 8,
+          "hq": 0.994384765625,
+          "live": {
+            "modes": 8,
+            "hq": 0.9931640625,
+            "effective_modes": 7.936534404754639
+          },
+          "live_curve": [
+            {
+              "step": 6800,
+              "modes": 8,
+              "hq": 0.992431640625
+            },
+            {
+              "step": 6850,
+              "modes": 8,
+              "hq": 0.993408203125
+            },
+            {
+              "step": 6900,
+              "modes": 8,
+              "hq": 0.994140625
+            },
+            {
+              "step": 6950,
+              "modes": 8,
+              "hq": 0.99365234375
+            },
+            {
+              "step": 7000,
+              "modes": 8,
+              "hq": 0.9931640625
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "shared_environment": {
+    "conceptmod_commit": "5571213f5e8e129cfda45c785c3f30aad9c1d8c9",
+    "peft": "0.21.0",
+    "transformers": "5.15.0"
+  }
+}
