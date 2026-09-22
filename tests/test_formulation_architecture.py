@@ -15,12 +15,14 @@ def result(spec, passed):
 
 def test_discriminator_changes_are_architecture_only():
     spec = deepcopy(vector_tasks.TASKS[0])
-    changed = spec | dict(d_hidden=128, d_layers=3, fourier=4)
+    changed = spec | dict(d_hidden=128, d_layers=3, fourier=4,
+                          research_discriminator=dict(activation="softplus", beta=5., projection="axis"))
     before, after = axes(spec, "vector"), axes(changed, "vector")
     assert before["formulation"] == after["formulation"]
     assert before["training"] == after["training"]
     assert before["architecture"]["generator"] == after["architecture"]["generator"]
     assert before["architecture"]["discriminator"] != after["architecture"]["discriminator"]
+    assert after["architecture"]["discriminator"]["research"] == changed["research_discriminator"]
 
 
 def test_architecture_support_is_one_pass_with_failures_visible():

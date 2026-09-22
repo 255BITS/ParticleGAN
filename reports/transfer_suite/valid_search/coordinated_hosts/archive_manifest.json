@@ -1,0 +1,164 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "original_path": "README.md",
+      "original_sha256": "da1dca9021b46bb184608900c2853c36ea594c8e31de5e4c8ad31d89ebf524ef",
+      "archived_sha256": "da1dca9021b46bb184608900c2853c36ea594c8e31de5e4c8ad31d89ebf524ef",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "driver.py",
+      "original_path": "driver.py",
+      "original_sha256": "666d502845a6d3aa9081a6b5987c3a5f1cf6173e710e9247f00a8c6adebe9fd1",
+      "archived_sha256": "666d502845a6d3aa9081a6b5987c3a5f1cf6173e710e9247f00a8c6adebe9fd1",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__ae_gan_hold.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__ae_gan_hold.json.gz",
+      "original_sha256": "6b4c63ca2f74368571f7faefc836261dfc2ee4b2c0d5a5261333da1cadf21c68",
+      "archived_sha256": "6b4c63ca2f74368571f7faefc836261dfc2ee4b2c0d5a5261333da1cadf21c68",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__cover_leftover.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__cover_leftover.json.gz",
+      "original_sha256": "fd0c1723c358ef862225356061c0c9f302858d69a2c6f4d894e56166866281c8",
+      "archived_sha256": "fd0c1723c358ef862225356061c0c9f302858d69a2c6f4d894e56166866281c8",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__img_bars4.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__img_bars4.json.gz",
+      "original_sha256": "b44891e6a20be6822d44b4869a25b538f9ce1ae31848523fcbf097819db44757",
+      "archived_sha256": "b44891e6a20be6822d44b4869a25b538f9ce1ae31848523fcbf097819db44757",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__img_blobs4.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__img_blobs4.json.gz",
+      "original_sha256": "00837633b2ee7856c8838616e7c90c21665aade6d85ee78e06ccd28ac29855d6",
+      "archived_sha256": "00837633b2ee7856c8838616e7c90c21665aade6d85ee78e06ccd28ac29855d6",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__img_intensity2.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__img_intensity2.json.gz",
+      "original_sha256": "5c2e8f25774d290be1e6251aefd9c921686300533bedeb5bdcead7c6c260c302",
+      "archived_sha256": "5c2e8f25774d290be1e6251aefd9c921686300533bedeb5bdcead7c6c260c302",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__img_stripes2.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__img_stripes2.json.gz",
+      "original_sha256": "179ddf65699e529845dd568d92183201651fc44c63741d9274a09708f947788e",
+      "archived_sha256": "179ddf65699e529845dd568d92183201651fc44c63741d9274a09708f947788e",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__mid_scale_identity.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__mid_scale_identity.json.gz",
+      "original_sha256": "e5befc049156e89175e62ba9837d0fee88fd5fadd24dd2be8128f8d9ca9bb724",
+      "archived_sha256": "e5befc049156e89175e62ba9837d0fee88fd5fadd24dd2be8128f8d9ca9bb724",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__mode_hold.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__mode_hold.json.gz",
+      "original_sha256": "b4668c315b977c98e1d47f4efaf025505f472807bce4fa8f538ed03cab02a09a",
+      "archived_sha256": "b4668c315b977c98e1d47f4efaf025505f472807bce4fa8f538ed03cab02a09a",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__residual_student.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__residual_student.json.gz",
+      "original_sha256": "366b3080507e5495bc63b2bffcda3c180c3234ce9bdf0a05f602b92dbe03190d",
+      "archived_sha256": "366b3080507e5495bc63b2bffcda3c180c3234ce9bdf0a05f602b92dbe03190d",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__trajectory.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__trajectory.json.gz",
+      "original_sha256": "c86afa6c7fbf42d09ee4e8d6017d798789fc55ae57e1709a20694aa5055b7dda",
+      "archived_sha256": "c86afa6c7fbf42d09ee4e8d6017d798789fc55ae57e1709a20694aa5055b7dda",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__two_pole.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__two_pole.json.gz",
+      "original_sha256": "51aadec0321c8b7201bbae7e4e092d2304df88cbe8175a8847c23a8d9edfbdc5",
+      "archived_sha256": "51aadec0321c8b7201bbae7e4e092d2304df88cbe8175a8847c23a8d9edfbdc5",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__unipolar.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__unipolar.json.gz",
+      "original_sha256": "232c1b5506a7a74486527131a1878f5127abbf40b6c0b606ada85341a352faec",
+      "archived_sha256": "232c1b5506a7a74486527131a1878f5127abbf40b6c0b606ada85341a352faec",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/b999_lr075_d2_p30__unused_token_hold.json.gz",
+      "original_path": "episodes/b999_lr075_d2_p30__unused_token_hold.json.gz",
+      "original_sha256": "75caac6b22bb7d705148ce6f74bffc07354ae3bc46499a8569f69405c3d3fd27",
+      "archived_sha256": "75caac6b22bb7d705148ce6f74bffc07354ae3bc46499a8569f69405c3d3fd27",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "index.json.gz",
+      "original_path": "index.json",
+      "original_sha256": "49703dee7ecd66f412fb754e871687c2e77ec62ad33594779f9cf9231319a89d",
+      "archived_sha256": "637f5f3f5bf824ed1ca6beb5993db8a99d187fa0d078783a880804cb7eebf18b",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "parity.json.gz",
+      "original_path": "parity.json",
+      "original_sha256": "45303e0a8679f9f607fa67f139ae50941544ec151cbe3925dc56581475d25616",
+      "archived_sha256": "1a02625181b61a26ed1494cc26cff0fb82690718cdd1438902d45664deeecbdf",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "protocol.json.gz",
+      "original_path": "protocol.json",
+      "original_sha256": "dfdb20123f46832e2c22edc8de3cbd4b771bb0cc802814201dc85d3090e6e7da",
+      "archived_sha256": "b69a5f4ffe965ce6d7dd11d0e88ed8c024d1f252afdd66253aa43caa4e753c20",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "run.log",
+      "original_path": "run.log",
+      "original_sha256": "f85cd35943ec1cccaa763562c7669db0a8d62fc2e221607dd2084159459c9837",
+      "archived_sha256": "f85cd35943ec1cccaa763562c7669db0a8d62fc2e221607dd2084159459c9837",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "source.tar.gz",
+      "original_path": "source.tar.gz",
+      "original_sha256": "3e48ae2895a01c86a88ad459857dd2bd10b0d5fc75560387f5e6f2651acb17df",
+      "archived_sha256": "3e48ae2895a01c86a88ad459857dd2bd10b0d5fc75560387f5e6f2651acb17df",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    }
+  ]
+}

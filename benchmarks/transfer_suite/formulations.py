@@ -42,6 +42,8 @@ def axes(spec, runner):
             discriminator=dict(kind="mlp", width=spec.get("d_hidden", spec["hidden"]),
                                layers=spec.get("d_layers", spec["layers"]), fourier=spec["fourier"]),
         )
+        if "research_discriminator" in spec:
+            architecture["discriminator"]["research"] = deepcopy(spec["research_discriminator"])
     resources = dict(steps=spec["steps"], particles=spec["particles"], batch=spec["batch_size" if image else "batch"])
     target_keys = ("name", "kind", "means", "covariances", "masses", "identifiable", "pattern", "modes",
                    "noise_std", "turns", "radius_min", "radius_max", "noise", "scale_start", "scale_end",

@@ -1,0 +1,156 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "original_path": "README.md",
+      "original_sha256": "bd82970bf67fa39defd28cc6b97317b12da8b581ab7cd9b04fcfce6f62a4912b",
+      "archived_sha256": "bd82970bf67fa39defd28cc6b97317b12da8b581ab7cd9b04fcfce6f62a4912b",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "driver.py",
+      "original_path": "driver.py",
+      "original_sha256": "9bcae2eb85038818af3a5616dac685878c408eacdcf23ac1880a333463c3c6d3",
+      "archived_sha256": "9bcae2eb85038818af3a5616dac685878c408eacdcf23ac1880a333463c3c6d3",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__ae_gan_hold.json.gz",
+      "original_path": "episodes/bcap3_adam999__ae_gan_hold.json.gz",
+      "original_sha256": "0c3e7612f0569c89c0e54ff131067571a9b4901a19287a44806f8d17607bb528",
+      "archived_sha256": "0c3e7612f0569c89c0e54ff131067571a9b4901a19287a44806f8d17607bb528",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__cover_leftover.json.gz",
+      "original_path": "episodes/bcap3_adam999__cover_leftover.json.gz",
+      "original_sha256": "4bd3df90c53777d8e4b8c0acd7cc60e9f2984d0e36181b2e156564eed7e8389c",
+      "archived_sha256": "4bd3df90c53777d8e4b8c0acd7cc60e9f2984d0e36181b2e156564eed7e8389c",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__img_bars4.json.gz",
+      "original_path": "episodes/bcap3_adam999__img_bars4.json.gz",
+      "original_sha256": "87e8e4de8336e6177f6ac8647642f2f68bc1403663ed86e36f05fb03ae61d211",
+      "archived_sha256": "87e8e4de8336e6177f6ac8647642f2f68bc1403663ed86e36f05fb03ae61d211",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__img_blobs4.json.gz",
+      "original_path": "episodes/bcap3_adam999__img_blobs4.json.gz",
+      "original_sha256": "aec3bbd40cfd5de3177f1bc3ed80804e38755d25b3b7ef8dfdc64fd2528ee728",
+      "archived_sha256": "aec3bbd40cfd5de3177f1bc3ed80804e38755d25b3b7ef8dfdc64fd2528ee728",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__img_intensity2.json.gz",
+      "original_path": "episodes/bcap3_adam999__img_intensity2.json.gz",
+      "original_sha256": "7caa2806f35e8bc26478c5e0d14553c04747d0ec15af5f83069a38c8fe327888",
+      "archived_sha256": "7caa2806f35e8bc26478c5e0d14553c04747d0ec15af5f83069a38c8fe327888",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__img_stripes2.json.gz",
+      "original_path": "episodes/bcap3_adam999__img_stripes2.json.gz",
+      "original_sha256": "b3411a6ff6be93f579a55b363b1b9a4dd7841522c1adbe7959bfc2bd9e3ff8c0",
+      "archived_sha256": "b3411a6ff6be93f579a55b363b1b9a4dd7841522c1adbe7959bfc2bd9e3ff8c0",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__mid_scale_identity.json.gz",
+      "original_path": "episodes/bcap3_adam999__mid_scale_identity.json.gz",
+      "original_sha256": "bd1b0f43225d23620aea0e81cb3ce6d7bc45ce8faef426dfe1dc8f25693f1d89",
+      "archived_sha256": "bd1b0f43225d23620aea0e81cb3ce6d7bc45ce8faef426dfe1dc8f25693f1d89",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__mode_hold.json.gz",
+      "original_path": "episodes/bcap3_adam999__mode_hold.json.gz",
+      "original_sha256": "978ee50b851a9cfead5991f63ff4a48c73641f0da03d874372d0e3b832283f9d",
+      "archived_sha256": "978ee50b851a9cfead5991f63ff4a48c73641f0da03d874372d0e3b832283f9d",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__residual_student.json.gz",
+      "original_path": "episodes/bcap3_adam999__residual_student.json.gz",
+      "original_sha256": "0585defdd944f608b2b9e4453a7ef340a8cc854f0c7348a25c7d0f0c962f1b5c",
+      "archived_sha256": "0585defdd944f608b2b9e4453a7ef340a8cc854f0c7348a25c7d0f0c962f1b5c",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__trajectory.json.gz",
+      "original_path": "episodes/bcap3_adam999__trajectory.json.gz",
+      "original_sha256": "df9168a549ca50b92de3a2fcd601c6f066bca55d85e2b825da7afbee52660a1e",
+      "archived_sha256": "df9168a549ca50b92de3a2fcd601c6f066bca55d85e2b825da7afbee52660a1e",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__two_pole.json.gz",
+      "original_path": "episodes/bcap3_adam999__two_pole.json.gz",
+      "original_sha256": "fd4775efd7140d509eb149d3776d60d9611eb06cae4314fdb19d7dbec0ada0fd",
+      "archived_sha256": "fd4775efd7140d509eb149d3776d60d9611eb06cae4314fdb19d7dbec0ada0fd",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__unipolar.json.gz",
+      "original_path": "episodes/bcap3_adam999__unipolar.json.gz",
+      "original_sha256": "d6ba31cc8fd24233d7d82732ee8547a1f64f8a3e57542b8ffbeee123a7c0d3ea",
+      "archived_sha256": "d6ba31cc8fd24233d7d82732ee8547a1f64f8a3e57542b8ffbeee123a7c0d3ea",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/bcap3_adam999__unused_token_hold.json.gz",
+      "original_path": "episodes/bcap3_adam999__unused_token_hold.json.gz",
+      "original_sha256": "66f69d9a1bd85b244bd93f49c89ba506cea5f6e8f005e0ea85aa621eb87d8164",
+      "archived_sha256": "66f69d9a1bd85b244bd93f49c89ba506cea5f6e8f005e0ea85aa621eb87d8164",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "index.json.gz",
+      "original_path": "index.json",
+      "original_sha256": "ca349e783c1e52dccf7ccec3420af25bcf8aeb7e2e0f2ad952d32e3b69efb7db",
+      "archived_sha256": "648b606ac859fac1267523eb0387513e9d79d6a7bce080386b73baea98261ca3",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "protocol.json.gz",
+      "original_path": "protocol.json",
+      "original_sha256": "5cb5cd19a9040f932d90fddd2656a7676a4d8dca9dcc87c3e4d9592382360dc3",
+      "archived_sha256": "90426a3a42c3c505eed7a944339d4731df2addb081f4385f9adf364756cbca21",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "run.log",
+      "original_path": "run.log",
+      "original_sha256": "73ec4cb40a3f7b05abc8f6947c6f2c3d0b9243207786727f6a37f20e7b6372e0",
+      "archived_sha256": "73ec4cb40a3f7b05abc8f6947c6f2c3d0b9243207786727f6a37f20e7b6372e0",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "source.tar.gz",
+      "original_path": "source.tar.gz",
+      "original_sha256": "b12e06ce8f4e7b97fb0ea3ae52491debe8cda1bf1d436aedd22a7bcc0f94409d",
+      "archived_sha256": "b12e06ce8f4e7b97fb0ea3ae52491debe8cda1bf1d436aedd22a7bcc0f94409d",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    }
+  ]
+}

@@ -61,7 +61,9 @@ The broader [transfer leaderboard](reports/transfer_suite/README.md) separates
 required regressions, practical ranking tests, and nonblocking stress diagnostics.
 The [formulation leaderboard](reports/transfer_suite/formulations/README.md)
 compares candidate-owned training recipes, with architecture variants inside
-the same entry: b_cap3 passes 9/9 required and 7/10 practical data/image toys.
+the same entry: b_cap3 passes 9/9 required and 9/10 practical data/image toys.
+The [valid-toy search](reports/transfer_suite/valid_search/README.md) records the
+discriminator-only improvement and separate optimizer/resource trials.
 Imposed training-condition variants are diagnostics; [longer training](reports/transfer_suite/formulations/LONG_TRAINING.md)
 is a separate toy. The [solvability audit](reports/transfer_suite/solvability/README.md)
 retains all 16 historical individual solver witnesses.

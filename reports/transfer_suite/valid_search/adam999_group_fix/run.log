@@ -1,0 +1,8 @@
+START required ae_gan_hold
+ae-gan-hold arm=bcap3_adam999 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=bcap3_adam999 step=1 recon=1.2653 hold=1.4033 loss=4.2071
+ae-gan-hold arm=bcap3_adam999 step=50 recon=0.1303 hold=0.0288 loss=1.1721
+ae-gan-hold arm=bcap3_adam999 step=100 recon=0.0039 hold=0.0248 loss=1.0194
+ae-gan-hold arm=bcap3_adam999 step=150 recon=0.0167 hold=0.0317 loss=0.8489
+ae-gan-hold arm=bcap3_adam999 step=200 recon=0.0132 hold=0.0048 loss=0.7263
+DONE ae_gan_hold PASS {'recon_mse': 0.012664485722780228, 'hold': 0.0011342165526002645} None

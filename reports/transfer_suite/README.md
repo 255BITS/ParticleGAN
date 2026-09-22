@@ -2,7 +2,9 @@
 
 **Current PR comparison: [formulation defaults](formulations/README.md).**
 Each candidate owns its training recipe; G/D architecture is separate. The
-current b_cap3 entry passes **9/9 required and 7/10 practical data/image toys**.
+current b_cap3 entry passes **9/9 required and 9/10 practical data/image toys**.
+The [valid-toy search](valid_search/README.md) adds overlap and unequal-width passes through
+discriminator architecture changes with the original training recipe.
 Imposed LR/batch/discriminator variants are nonblocking diagnostics.
 [Longer training](formulations/LONG_TRAINING.md) is a separate toy: b_cap3
 passes at 7,200 updates with the same recipe and architecture.

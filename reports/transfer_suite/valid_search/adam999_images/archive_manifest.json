@@ -1,0 +1,148 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "original_path": "README.md",
+      "original_sha256": "e57b1885ea9ef334a04aa25a6faabba58b1804998514dfd279999562ce6a20f9",
+      "archived_sha256": "e57b1885ea9ef334a04aa25a6faabba58b1804998514dfd279999562ce6a20f9",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_residual12__img_bars4.json.gz",
+      "original_path": "episodes/adam999_residual12__img_bars4.json.gz",
+      "original_sha256": "8958e25e27e9418a6ef7cddd329c239c0cb0b3aaeb1563b6245e36e5cfa56b15",
+      "archived_sha256": "8958e25e27e9418a6ef7cddd329c239c0cb0b3aaeb1563b6245e36e5cfa56b15",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_residual12__img_blobs4.json.gz",
+      "original_path": "episodes/adam999_residual12__img_blobs4.json.gz",
+      "original_sha256": "ce85194c11a5e4e701ba49a6462bb357c343a37b9ba0ba94241e52d14f7ecffa",
+      "archived_sha256": "ce85194c11a5e4e701ba49a6462bb357c343a37b9ba0ba94241e52d14f7ecffa",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_residual12__img_intensity2.json.gz",
+      "original_path": "episodes/adam999_residual12__img_intensity2.json.gz",
+      "original_sha256": "ab0d215b31f31f23591ccfd6ffdd5dced3c0d7c6a2adff690930611b4db24527",
+      "archived_sha256": "ab0d215b31f31f23591ccfd6ffdd5dced3c0d7c6a2adff690930611b4db24527",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_residual12__img_stripes2.json.gz",
+      "original_path": "episodes/adam999_residual12__img_stripes2.json.gz",
+      "original_sha256": "aa3dba657a9f49a3bac3a8a512745319454b5f0b7f62aa23f64e11b9e1b4ba7a",
+      "archived_sha256": "aa3dba657a9f49a3bac3a8a512745319454b5f0b7f62aa23f64e11b9e1b4ba7a",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_residual24__img_bars4.json.gz",
+      "original_path": "episodes/adam999_residual24__img_bars4.json.gz",
+      "original_sha256": "6e146b1f129a7b65a2d4752eab710b15c440bb629671ca417244816a63326c90",
+      "archived_sha256": "6e146b1f129a7b65a2d4752eab710b15c440bb629671ca417244816a63326c90",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_residual24__img_blobs4.json.gz",
+      "original_path": "episodes/adam999_residual24__img_blobs4.json.gz",
+      "original_sha256": "be41d2fa6e99167e926026fb05791914caf6c3464aa8b3dfe8d78f5885a1a594",
+      "archived_sha256": "be41d2fa6e99167e926026fb05791914caf6c3464aa8b3dfe8d78f5885a1a594",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_residual24__img_intensity2.json.gz",
+      "original_path": "episodes/adam999_residual24__img_intensity2.json.gz",
+      "original_sha256": "54064fc1cbead20858ac63cdf6439c98b8249c174b3b8d58e7157a611de4109c",
+      "archived_sha256": "54064fc1cbead20858ac63cdf6439c98b8249c174b3b8d58e7157a611de4109c",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_residual24__img_stripes2.json.gz",
+      "original_path": "episodes/adam999_residual24__img_stripes2.json.gz",
+      "original_sha256": "d559d7e412302b3b06d936fe1ecab2dcef1479529785ed708bd90f3f01f129a5",
+      "archived_sha256": "d559d7e412302b3b06d936fe1ecab2dcef1479529785ed708bd90f3f01f129a5",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_transpose12__img_bars4.json.gz",
+      "original_path": "episodes/adam999_transpose12__img_bars4.json.gz",
+      "original_sha256": "39b3eb483006582c70e42e9e67ade055b146c0349ef4a35489ee48a5901b064f",
+      "archived_sha256": "39b3eb483006582c70e42e9e67ade055b146c0349ef4a35489ee48a5901b064f",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_transpose12__img_blobs4.json.gz",
+      "original_path": "episodes/adam999_transpose12__img_blobs4.json.gz",
+      "original_sha256": "29acab3b630439d703fce6b2ddd2b67b8405520fcc451e29a8ca9455e3c5a488",
+      "archived_sha256": "29acab3b630439d703fce6b2ddd2b67b8405520fcc451e29a8ca9455e3c5a488",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_transpose12__img_intensity2.json.gz",
+      "original_path": "episodes/adam999_transpose12__img_intensity2.json.gz",
+      "original_sha256": "64b080bb7cb9d3f5fc560e274a844c17d46706d08878dc106093a4875d688f8c",
+      "archived_sha256": "64b080bb7cb9d3f5fc560e274a844c17d46706d08878dc106093a4875d688f8c",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/adam999_transpose12__img_stripes2.json.gz",
+      "original_path": "episodes/adam999_transpose12__img_stripes2.json.gz",
+      "original_sha256": "59410f6d30826f0523da4e4ab5937713d273df17bd09c00a510406f7001c11ed",
+      "archived_sha256": "59410f6d30826f0523da4e4ab5937713d273df17bd09c00a510406f7001c11ed",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "index.json.gz",
+      "original_path": "index.json",
+      "original_sha256": "459beb20757f312a0ea2d3f32563c5f8e09b9b0e3c85735ea245d1ee2c016db8",
+      "archived_sha256": "f7f8d47fe0c530a5485870aba42c993242e0a48fd3d00d78a69171fc86c06241",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "plan.json.gz",
+      "original_path": "plan.json",
+      "original_sha256": "4994373b02663f8ec7cf08b6ba661706bad200b3ab79c51cd6b763059374df74",
+      "archived_sha256": "477351abece95fc33477e36b2665de447bcb294f87d64425e21e88d04ca5644a",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "protocol.json.gz",
+      "original_path": "protocol.json",
+      "original_sha256": "c3f4dc3e4649e82ed8d755b2622aa7e9b94f4e52bd36ebd1f9c72ba6aa2c778d",
+      "archived_sha256": "074e95e533935003ec01655659aa9d3faffb2071e99a0cd48ee9016223d6871d",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "run.log",
+      "original_path": "run.log",
+      "original_sha256": "75a4c55f9e8b9e4f5501dda3826ea0d4d899a56aa410c76c6cc32d1eddef2f03",
+      "archived_sha256": "75a4c55f9e8b9e4f5501dda3826ea0d4d899a56aa410c76c6cc32d1eddef2f03",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "source.tar.gz",
+      "original_path": "source.tar.gz",
+      "original_sha256": "89dbcfc20719dc27fb9ddab10b2b938173ee653106b7507b747910ad5ca646f8",
+      "archived_sha256": "89dbcfc20719dc27fb9ddab10b2b938173ee653106b7507b747910ad5ca646f8",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    }
+  ]
+}

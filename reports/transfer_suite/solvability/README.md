@@ -13,6 +13,15 @@ We did not find a shared configuration passing every behavioral metric.
 
 ## Current formulation leaderboard
 
+The [valid-toy search](../valid_search/README.md) improves the original
+b_cap3 recipe to **9/10** with suitable D architectures: a wider/deeper D fixes
+overlap, and Softplus(beta5) fixes unequal width. Broad, anisotropic and spiral
+retain passing architectures. A single D does not pass all five; the rare 2%
+mode remains unresolved.
+Loss, regularization, optimizer settings and update budgets remain fixed.
+The wider D grows from 4,929 to about 35,000 parameters; Softplus retains the
+original 4,929. No wall-time speedup is established.
+
 The current PR compares candidate-owned training recipes on nine required
 regressions and ten practical data/image toys. Architecture remains separate.
 Forced LR/batch/discriminator variants are diagnostic evidence; longer training
@@ -21,7 +30,7 @@ is a separate toy. This user-requested scope revision changes the previous
 
 | Formulation | Required live | Data toys | Image toys with supported architecture | Practical support |
 | --- | ---: | ---: | ---: | ---: |
-| **RpGAN logistic + b_cap3 / κ1.25, prior regularization .05, no L2** | **9/9** | **3/6** | **4/4** | **7/10** |
+| **RpGAN logistic + b_cap3 / κ1.25, prior regularization .05, no L2** | **9/9** | **5/6** | **4/4** | **9/10** |
 | RpGAN logistic + b_cap10 / κ1.25, prior regularization .05, no L2 | 8/9; not qualified yet | 4/6 | 3/4 | 7/10 |
 
 Residual16 solves all four image toys in the original 600 updates. It is an

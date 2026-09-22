@@ -80,6 +80,12 @@ def build():
             elif coefficient == 3:
                 path = SUITE / "study/episodes" / f"cosine__{name}.json.gz"
                 variants.append(trial(path, "original architecture", spec=original))
+                if runner == "vector":
+                    for path in sorted((SUITE / "valid_search/discriminator/episodes").glob(f"*__{name}.json.gz")):
+                        variants.append(trial(path, path.name.split("__")[0]))
+                    for folder in ("smooth_discriminator", "softplus_refinement"):
+                        for path in sorted((SUITE / "valid_search" / folder).glob(f"**/episodes/*__{name}.json.gz")):
+                            variants.append(trial(path, path.name.split("__")[0]))
             elif runner == "vector":
                 stage = "screen" if name in ("vector_unequal_mass", "vector_unequal_width", "vector_overlap") else "regressions"
                 variants.append(trial(SOLVE / "vectors" / stage / "episodes" / f"cap10__{name}.json.gz", "cap10 original architecture"))
@@ -117,11 +123,12 @@ def build():
                           for domain in ("vector", "image")}
         assert row["practical_total"] == 10 and len(row["diagnostics"]) == 5
         rows.append(row)
-    assert [r["practical_passes"] for r in rows] == [7, 7]
+    assert [r["practical_passes"] for r in rows] == [9, 7]
     report = dict(version="formulation-defaults-v2", rows=rows,
                   rule="One formulation entry; architecture trials stay inside each case. Target, formulation, training settings and resource budget must match within an architecture cell. Every attempt remains visible.",
                   scope_revision="User-requested PR scope: evaluate candidate-owned training recipes on nine required and ten data/image toys. Forced LR/batch/discriminator variants and the additional original-budget eight-Gaussian run are diagnostics. Longer training is a separate toy. Prior 7/16 becomes 7/10 by scope change only; no numerical result or metric threshold changed.",
                   candidate_recipe="Loss, regularization, LR, Adam, schedule, update balance and batch are declared candidate choices. Tests must not impose alternate choices and count those as core failures. Architecture remains separate.",
+                  improvement="b_cap3 reaches 9/10 with unchanged training settings: wider/deeper D solves overlap; Softplus(beta5) D solves unequal width. Suitable D architectures may differ by toy; same formulation entry, no extra updates. Rare mass remains unresolved.",
                   training_scope="Existing declared host recipes are retained, including different host learning rates and Adam betas. No claim of one universal numerical optimizer preset.",
                   source_sha256={str(p.relative_to(SUITE.parents[1])): hashlib.sha256(p.read_bytes()).hexdigest()
                                  for p in [Path(__file__), SUITE.parents[1] / "benchmarks/transfer_suite/formulations.py"]})
@@ -131,17 +138,34 @@ def build():
              "each case counts once. Architecture failures remain visible. Architecture cells cannot mix numerical "
              "formulations, optimizer settings, data or training budgets.", "",
              "Current PR scope: nine required regressions, six data toys and four image toys. "
-             "The previous 7/16 is now 7/10 because the scope changed, not because any run improved. "
+             "The scope revision changed 7/16 to 7/10. Subsequent discriminator-only results improve b_cap3 to 9/10 with the same training recipe. "
              "[Longer training](LONG_TRAINING.md) is a separate toy; "
              "[imposed-setting diagnostics](DIAGNOSTICS.md) do not affect this comparison.", ""]
     for row in rows:
         lines += [f"## {row['name']}", "", f"Required: {row['required_passes']}/9. Practical: {row['practical_passes']}/{row['practical_total']}. "
                   f"Eligible on required tests: {row['eligible']}.", "",
-                  "| Problem / condition | Supported | Architecture observations |", "| --- | --- | --- |"]
+                  "| Problem / condition | Supported | Passing / tested architectures | Earliest confirmed architecture |",
+                  "| --- | --- | ---: | --- |"]
         for name, cell in row["cases"].items():
-            values = "; ".join(f"{t['label']}: {t['verdict']['status']}" for t in cell["trials"])
-            lines.append(f"| {name} | {cell['status']} | {values} |")
+            passed = [t for t in cell["trials"] if t["verdict"]["passed"]]
+            best = min(passed, key=lambda t: t["verdict"]["convergence"]["confirmed_step"]) if passed else None
+            label = f"{best['label']} at {best['verdict']['convergence']['confirmed_step']}" if best else "—"
+            lines.append(f"| {name} | {cell['status']} | {len(passed)}/{len(cell['trials'])} | {label} |")
         lines.append("")
+        lines += [f"<details><summary>Every architecture trial for {row['name']}, including failures</summary>", ""]
+        for name, cell in row["cases"].items():
+            lines += [f"### {name}", "", "| Architecture | Sustained live | Final passing checks | Confirmed step | Final failing metrics |",
+                      "| --- | --- | ---: | ---: | --- |"]
+            for trial_record in cell["trials"]:
+                verdict = trial_record["verdict"]
+                convergence = verdict["convergence"]
+                failures = ", ".join(m["metric"] for m in verdict["metrics"] if m["status"] != "PASS")
+                if not failures and not verdict["passed"]:
+                    failures = "Final bounds pass; insufficient final passing checks"
+                lines.append(f"| {trial_record['label']} | {verdict['status']} | {convergence['passing_suffix']} | "
+                             f"{convergence['confirmed_step'] or '—'} | {failures or '—'} |")
+            lines.append("")
+        lines += ["</details>", ""]
     lines += ["The image variants include changes to G as well as D. Discriminator width changes alone, generator changes, "
               "and their combination are explicit in the machine-readable architecture records. These are inspected "
               "development cases with one initialization; architecture support is not a fresh-transfer result.", "",

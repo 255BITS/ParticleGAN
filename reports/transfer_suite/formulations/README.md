@@ -13,14 +13,24 @@ recipes cannot be silently combined to produce one architecture result.
 
 ## Main comparison
 
+The [valid-toy search](../valid_search/README.md) improves the original
+b_cap3 recipe to **9/10** with suitable D architectures: a wider/deeper D fixes
+overlap, and Softplus(beta5) fixes unequal width. Broad, anisotropic and spiral
+retain passing architectures. A single D does not pass all five; the rare 2%
+mode remains unresolved.
+Loss, regularization, optimizer settings and update budgets remain fixed.
+The wider D grows from 4,929 to about 35,000 parameters; Softplus retains the
+original 4,929. No wall-time speedup is established.
+
 | Formulation | Required live | Data toys | Image toys with supported architecture | Practical support |
 | --- | ---: | ---: | ---: | ---: |
-| **RpGAN logistic + b_cap3 / κ1.25 + prior regularization .05, no L2** | **9/9** | **3/6** | **4/4** | **7/10** |
+| **RpGAN logistic + b_cap3 / κ1.25 + prior regularization .05, no L2** | **9/9** | **5/6** | **4/4** | **9/10** |
 | RpGAN logistic + b_cap10 / κ1.25 + prior regularization .05, no L2 | 8/9; not qualified yet | 4/6 | 3/4 | 7/10 |
 
 **Scope revision:** the previous 7/16 becomes 7/10 because the user requested
 that imposed training-condition variations be excluded from this PR's main
-comparison. No run improved and no metric threshold changed. The nine existing
+comparison. That recount changed no measurement or threshold; the subsequent D search
+adds the two new practical passes shown above. The nine existing
 required behavioral regressions, including the required ring test, remain.
 Longer training is a separate toy below; the other five former dynamics rows
 remain [nonblocking diagnostic evidence](DIAGNOSTICS.md).
@@ -60,8 +70,9 @@ the same main toys. Architecture variants stay within that recipe's entry.
 All results use seed 0 and unchanged live thresholds. PASS requires every metric
 for the final five of a complete 24-observation curve. EMA is separate.
 Historical controller-study rankings and the earlier 16/16 individual solver
-witnesses remain intact. No training was rerun for this scope change and no
-production defaults changed.
+witnesses remain intact. The scope recount reused existing results; the
+subsequent valid-toy search archives all new runs separately. Production
+defaults remain unchanged.
 
 ```bash
 python -m reports.transfer_suite.formulations.build
