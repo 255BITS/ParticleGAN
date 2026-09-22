@@ -98,6 +98,20 @@ prior = ParticlePrior(num_particles=4096, z_dim=16).to(device)
 adversarial = GANLoss(loss_type="hinge", mode="vanilla")
 ```
 
+The [locked shared stamp](docs/locked-shared.md) is a separate, frozen demo
+posture: RpGAN logistic, sample-point `b_cap` at coeff 1 and κ 1 every step,
+feature matching off, cover weight 1.5, and a 12-particle cloud at
+`particle_l2` 0.02 when you build one. The host critic stays yours.
+`Recipe("gan")` is still 20_000 particles. This stamp is not a Music or Anima
+transfer, and Lunar Lander does not use it yet.
+
+```python
+from particlegan.locked_shared import make_gan_loss, make_b_cap
+
+loss = make_gan_loss()     # GANLoss("logistic", "rp")
+penalty = make_b_cap()     # GradientPenalty b_cap, κ=1, lazy_k=1
+```
+
 `prior.sample(batch_size)` returns `(z, indices)`, with `z` shaped `[B, z_dim]`.
 Include `prior.parameters()` in your generator optimizer to learn the particles.
 Use `GaussianPrior(z_dim=16)` for fresh Gaussian samples with the same sampling

@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Add `particlegan.locked_shared.LOCKED_SHARED`, the demo RpGAN + `b_cap`
+  stamp (cover 1.5, FM off, 12 particles, host critic). Builders are
+  `make_gan_loss` and `make_b_cap`. `Recipe("gan")` is unchanged. This is
+  not a Lunar Lander config.
+
 ## 0.5.0 — 2026-09-17
 
 - Add public `particle_ae`, `particle_vae` and `ParticleEncoding`, plus

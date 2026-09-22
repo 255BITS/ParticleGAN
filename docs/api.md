@@ -202,6 +202,7 @@ inference walks through every reverse step. Class-only UCD is the default;
 | [DDGAN](#ddgan) | Forward corruption and reverse transitions |
 | [UCD](#ucd) | Class-score selection and class supervision |
 | [Recipes](#recipes-and-defaults) | Inspectable defaults and optional factories |
+| [Locked shared](#locked-shared) | Demo RpGAN + `b_cap` stamp (not `Recipe("gan")`) |
 | [TOML](#toml-configuration) | Pass loaded dictionaries to constructors |
 | [Other pipelines](#loss-augmentation-and-teacherstudent-pipelines) | Compose with existing objectives |
 | [Inference](#inference-and-checkpoints) | Generate from saved G and prior states |
@@ -383,6 +384,21 @@ a closure when regularizing a conditional critic.
 - `penalty.penalty(D, real, fake, step=1, generator=None, collect_stats=True)`
   returns `(loss, stats)`. The callable form disables stats to avoid scalar
   synchronization. A skipped penalty returns a detached zero.
+
+### Locked shared
+
+```python
+from particlegan.locked_shared import LOCKED_SHARED, locked_adv_defaults, make_gan_loss, make_b_cap
+```
+
+`LOCKED_SHARED` is the demo stamp: RpGAN logistic, `b_cap` coeff 1, κ 1, L2,
+`lazy_k` 1, feature matching off, cover 1.5, a 12-particle cloud at
+`particle_l2` 0.02 when particles are built, and the host critic.
+`make_gan_loss()` and `make_b_cap()` build those two objects and refuse any
+other stamp. Music cover 1.0, a 128-particle hub cloud, FM-on, stranger
+pairing, and a thinned κ are not this stamp. `get_recipe("gan")` is unchanged.
+The full field table and the Lunar follow-up note are in
+[locked shared](locked-shared.md).
 
 ### `ParticleRegularizer`
 
