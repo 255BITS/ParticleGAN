@@ -113,3 +113,36 @@ behavioral candidate, and make the common recipe easy to apply correctly in one
 training helper. The 100-Gaussian entry point now accepts the cap target and can
 record live/EMA metrics without plotting; a test confirms that an observer
 cannot perturb the short-run model updates through RNG consumption.
+
+## 5. A supported training entry point
+
+`get_recipe("gan").make_trainer(G, D)` now manages the recipe's optimizers,
+regularization, update phases, cosine schedule and EMA. Supply real batches to
+`trainer.step(real)`; `trainer.sample(n)` uses live weights by default, with
+`ema=True` available separately. The [API guide](../../../docs/api.md#gantrainer)
+and [runnable quickstart](../../../examples/quickstart_gan.py) include checkpoint
+and resume examples. Models, data and preprocessing remain explicit.
+
+The named `gan_behavioral` recipe transfers cap κ=1.25, coefficient=3,
+LR=0.00051 and prior weight=0.05 into the existing 20,000-particle recipe.
+The nine hosts still use their own data, architectures, budgets and cover terms
+with the common [resolved candidate](leading_config.json). A generic training
+helper cannot supply those task-specific objectives. Stock `gan` is unchanged.
+
+Checkpoint loading validates compatibility before changing trainer state,
+including optimizer groups, parameter freezing and RNG streams. Tests cover
+CPU/CUDA continuation, detached statistics, EMA buffers, frozen critic flags,
+sampling isolation and rejected input/checkpoint behavior. The helper currently
+supports unconditional scalar GANs with particle priors; other formulations
+remain available through the component API.
+
+Run the same actual-grid comparison through the public helper:
+
+```bash
+python -m benchmarks.locked_shared.grid_study \
+  --output /tmp/actual_grid_api --device cuda --training-api
+```
+
+The original-loop evidence stays in [grid](grid/README.md). API parity and
+final validation are recorded separately so their source fingerprints remain
+traceable.

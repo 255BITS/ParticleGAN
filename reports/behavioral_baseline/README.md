@@ -1,5 +1,35 @@
 # Behavioral baseline — live weights
 
+**Latest result: delayed cosine decay makes the cap candidate sustain all nine
+behavioral toys, with 8/8 ring modes and 100% final HQ.**
+Read the [convergence study](convergence/README.md) for the current comparison,
+[resolved candidate](convergence/leading_config.json),
+[full schedule leaderboard](convergence/schedule/README.md), sensitivity tests
+and [actual 100-Gaussian results](convergence/grid/README.md).
+
+| Formulation | Final live bounds | Sustained toys | Final ring modes / HQ |
+| --- | ---: | ---: | --- |
+| Original locked shared | 26/29 | 7/9 | 5/8 / 82.30% |
+| R1+R2 0.1 | 29/29 | 8/9 | 7/8 / 100% |
+| Cap 1.25, coeff 3, LR ×0.85, original schedules | 29/29 | 8/9 | 8/8 / 100% |
+| **Same cap + cosine from 60%, floor 5%** | **29/29** | **9/9** | **8/8 / 100%** |
+
+Sustained means at least five consecutive final passing observations in a
+complete 24-point curve, with no later observed failure. It adds a full-coverage
+ring target without weakening the original bounds. All ten shared behavioral
+checks pass separately. EMA never rescues a live failure.
+
+On the actual 100-Gaussian task, stock and the transferred candidate both sustain
+100/100 modes from step 6,000, confirmed at 7,000. The candidate is sensitive to
+nearby settings and data units. Keep stock production defaults; use
+`get_recipe("gan_behavioral")` as an explicit candidate. The
+[training helper](../../docs/api.md#gantrainer) applies either recipe consistently.
+
+## Historical final-step search
+
+The following tables preserve the original protocol and its measurements;
+the updated convergence results above supersede its default-selection ranking.
+
 **Regression PASS: `bcap_k1p25_c3p0_lr0p85`, `b_cap_k1_25_c2_lr0_85`, `b_cap_k1_25_c2_0_no_l2`, `bcap_k1p25_c2p0_lr0p8`, `r1_r2_0_1`.**
 
 Protocol `behavior-v1` · CPU · seed 0 · fixed host budgets · final live weights.

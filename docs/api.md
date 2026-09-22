@@ -1,88 +1,102 @@
 # ParticleGAN API reference
 
 ParticleGAN provides independent PyTorch priors, losses, and diffusion helpers.
-You own the models, data, training loop, and checkpoints. Install the package
+You supply models and data; use an optional GAN trainer or compose your own loop. Install the package
 with `python -m pip install particlegan`; the core dependency is PyTorch.
 
 ## A minimal training loop
 
-This complete example learns a synthetic 2D distribution. Replace `real` with a
-batch from your pipeline and replace the two MLPs with your networks. The
-recommended defaults cover the optimizer, regularizers, schedule, and EMA;
-override only what your application needs.
+This complete example learns a synthetic 2D distribution. Replace `real_batch`
+with your pipeline and the MLPs with your networks. The helper applies one
+shared recipe to optimizers, losses, regularization, decay and EMA.
 
 ```python
-import copy
 import torch
 from torch import nn
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import get_recipe
 
-device = torch.device("cpu")  # Change to your device.
-recipe = get_recipe()  # Use total_steps=5 for a quick smoke check.
-
-G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(0.2),
+torch.manual_seed(0)
+device = torch.device("cpu")
+recipe = get_recipe("gan", total_steps=1000)
+G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(.2),
                   nn.Linear(64, 2)).to(device)
-D = nn.Sequential(nn.Linear(2, 64), nn.LeakyReLU(0.2),
+D = nn.Sequential(nn.Linear(2, 64), nn.LeakyReLU(.2),
                   nn.Linear(64, 1)).to(device)
-prior = recipe.make_prior().to(device)
-gan = recipe.make_loss()
-penalty = recipe.make_gradient_penalty()
-spread = recipe.make_prior_regularizer()
-opt_g, opt_d = recipe.make_optimizers(G, D, prior)
-base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-ema_g = copy.deepcopy(G).eval().requires_grad_(False)
-ema_prior = copy.deepcopy(prior).eval().requires_grad_(False)
+trainer = recipe.make_trainer(G, D, seed=0)
+
+def real_batch():
+    return .2 * torch.randn(recipe.batch_size, 2, device=device) + 1
 
 for step in range(recipe.total_steps):
-    scale = learning_rate_scale(step, recipe.total_steps,
-                               recipe.lr_anneal_start, recipe.lr_floor)
-    for opt, rates in zip((opt_g, opt_d), base_lrs):
-        for group, rate in zip(opt.param_groups, rates):
-            group["lr"] = rate * scale
+    stats = trainer.step(real_batch(), generator_real=real_batch)
+    if (step + 1) % 100 == 0:
+        print(step + 1, stats["loss_d"].item(), stats["loss_g"].item(), flush=True)
 
-    real = torch.randn(recipe.batch_size, 2, device=device)
-    z, indices = prior.sample(len(real))
-    fake = G(z)
-
-    # Update D; detached fakes leave G and the prior untouched.
-    opt_d.zero_grad(set_to_none=True)
-    d_loss = gan.d_loss(D(real), D(fake.detach()))
-    d_loss = d_loss + penalty(D, real, fake.detach(), step=step + 1)
-    d_loss.backward()
-    opt_d.step()
-
-    # Update G and the prior through the updated, frozen D.
-    D.requires_grad_(False)
-    opt_g.zero_grad(set_to_none=True)
-    g_loss = gan.g_loss(D(fake), D(real).detach())
-    g_loss = g_loss + spread(prior.z[indices.unique()])
-    g_loss.backward()
-    opt_g.step()
-    D.requires_grad_(True)
-
-    with torch.no_grad():
-        for average, current in ((ema_g, G), (ema_prior, prior)):
-            for target, source in zip(average.parameters(), current.parameters()):
-                target.lerp_(source, 1 - recipe.ema_decay)
-
-    if step % 100 == 0 or step + 1 == recipe.total_steps:
-        print(f"step={step + 1} d={d_loss.item():.4f} g={g_loss.item():.4f}", flush=True)
-
-with torch.inference_mode():
-    z, _ = ema_prior.sample(64)
-    samples = ema_g(z)  # [64, 2]
+samples = trainer.sample(256)            # Live weights by default.
+ema_samples = trainer.sample(256, ema=True)
+torch.save(trainer.state_dict(), "trainer.pt")
 ```
 
-The G optimizer includes the prior at its own learning rate. The regularizer
-uses unique sampled rows and already includes `recipe.prior_reg`. EMA tracks
-both G and the prior; these simple modules have no buffers to update. For models
-with running statistics, choose how to update their EMA buffers too. If your
-critic has intentionally frozen parameters, restore their original flags rather
-than enabling every parameter after the G step.
+[The runnable example](../examples/quickstart_gan.py) adds CLI options, flushed
+JSON logs and a data-RNG checkpoint. To verify continuation:
 
-For command-line arguments, TOML input, and flushed JSON logs, see
-[the runnable loop](../examples/pytorch_loop.py). The example-first presentation
-is inspired by [LeJEPA's minimal guide](https://github.com/galilai-group/lejepa/blob/main/MINIMAL.md).
+```bash
+python -u examples/quickstart_gan.py --steps 1000 --stop-after 500 --output run.pt
+python -u examples/quickstart_gan.py --steps 1000 --resume run.pt --output run.pt
+```
+
+The explicit [component-based loop](../examples/pytorch_loop.py) remains available
+for applications that manage their own updates.
+
+## GANTrainer
+
+`recipe.make_trainer(G, D, *, prior=None, seed=0, latent_generator=None,
+penalty_generator=None, optimizer_options=None, penalty_options=None)` is
+also available as `GANTrainer(recipe, G, D, ...)`. Move networks to the same
+device and floating dtype first. When omitted, the helper constructs the prior
+from the recipe; supply `prior=` to preserve an existing initialization.
+`seed` controls owned sampling streams, while callers seed network/prior
+initialization with `torch.manual_seed`.
+
+The helper supports scalar, unconditional GANs with `ParticlePrior`. MoG,
+encoders, conditional GANs and DDGAN use the component API. A step performs one
+D update, then one G/prior update with fresh latent samples. During the G phase,
+D is evaluated with frozen parameters; each original gradient flag is restored.
+Small particle tables (at most 1,024 rows) are regularized in full; larger tables
+use unique sampled rows. There is no particle L2 term.
+
+- `step(real, generator_real=None, collect_stats=False)` returns detached scalar
+  tensors `loss_d`, `loss_g`, `loss_gan`, `prior_regularization`, `penalty`, and
+  integer `step`. The reported prior term is unweighted; `loss_g` includes its
+  recipe weight. `generator_real` can supply a fresh tensor or zero-argument
+  callback for RP/RA; otherwise the real batch is reused. RP requires equal
+  batch sizes. `collect_stats=True` also returns penalty diagnostics.
+- `sample(n, ema=False, generator=None)` defaults to live weights. Its separate
+  RNG and temporary evaluation mode preserve training randomness and module
+  modes. EMA averages G/prior parameters and copies their buffers, including
+  integer counters. EMA never determines a live leaderboard pass.
+- `state_dict()` includes G, D, prior, EMA, optimizers, initial learning rates,
+  update count and RNG states. `load_state_dict(state)` restores them, including
+  global PyTorch RNG. Recreate the same recipe, architecture, options, dtype
+  and device, with the same parameter freezing, before loading. Save your data-loader position or separate data RNG
+  alongside it. Loading on CPU first works for a compatible CUDA trainer:
+  `trainer.load_state_dict(torch.load(path, map_location="cpu", weights_only=True))`.
+
+The recipe's `total_steps` is the full schedule budget. Resume with the same
+budget; further steps after it is exhausted raise an error. A failed user
+callback can occur after D has updated, so restore a checkpoint before retrying
+that interrupted update. AMP, distributed training and custom update ratios
+require a caller-owned loop.
+
+`get_recipe("gan")` retains the stock defaults. `"gan_behavioral"` selects cap
+κ=1.25, coefficient 3, LR=0.00051 and prior weight=0.05, with the same cosine
+schedule starting at 60% and ending toward a 5% floor. It transfers the winning
+behavioral settings to the stock 20,000-particle recipe; host-specific cover
+losses are defined by the behavioral harness. It is an opt-in candidate:
+[the study](../reports/behavioral_baseline/convergence/README.md) found nine
+sustained toy passes, but sensitivity to data units and no earlier live
+convergence than stock on 100 Gaussians. Document your input units and validate
+on your task before changing production settings.
 
 ## A minimal DDGAN + UCD loop
 
@@ -202,6 +216,7 @@ inference walks through every reverse step. Class-only UCD is the default;
 | [DDGAN](#ddgan) | Forward corruption and reverse transitions |
 | [UCD](#ucd) | Class-score selection and class supervision |
 | [Recipes](#recipes-and-defaults) | Inspectable defaults and optional factories |
+| [GANTrainer](#gantrainer) | Optional unconditional GAN updates, sampling and checkpoints |
 | [Locked shared](#locked-shared) | Demo RpGAN + `b_cap` stamp (not `Recipe("gan")`) |
 | [TOML](#toml-configuration) | Pass loaded dictionaries to constructors |
 | [Other pipelines](#loss-augmentation-and-teacherstudent-pipelines) | Compose with existing objectives |
@@ -210,7 +225,8 @@ inference walks through every reverse step. Class-only UCD is the default;
 All names below are exported from `particlegan`. Modules use ordinary
 `.to(device, dtype)`, `.parameters()`, and `.state_dict()` behavior. Move models
 and priors before constructing optimizers. Stateless loss helpers need no device
-setup. No component selects a device, seeds global RNG, or steps an optimizer.
+setup. These primitives never step an optimizer. The optional `GANTrainer`
+manages updates and restores RNG state when loading checkpoints.
 
 ## Priors
 

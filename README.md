@@ -32,9 +32,32 @@ CI tests Python 3.10–3.12 and builds installable distributions. See
 
 ## Use in your PyTorch project
 
-Use individual components in your existing loop. You own the networks, data,
-optimizers, backward calls, devices, logging, and checkpoints. No trainer is
-required, and the loss helpers never call backward or step an optimizer.
+For an unconditional GAN, supply your networks and real batches; the optional
+trainer applies the recipe's optimizer settings, particle regularization,
+learning-rate decay and EMA:
+
+```python
+from particlegan import get_recipe
+
+recipe = get_recipe("gan", total_steps=7000)
+trainer = recipe.make_trainer(G, D)  # Move your networks to their device first.
+for real in batches:               # Supply up to recipe.total_steps batches.
+    stats = trainer.step(real)
+samples = trainer.sample(256)       # Live weights; ema=True reports EMA separately.
+```
+
+Run `python -u examples/quickstart_gan.py --steps 1000` for a complete PyTorch-only
+example with flushed logs and resumable checkpoints. See
+[training and checkpoint contracts](docs/api.md#gantrainer).
+The optional helper supports scalar, unconditional GANs with particle priors;
+the independent primitives remain available for other training loops.
+
+The [convergence leaderboard](reports/behavioral_baseline/convergence/README.md)
+compares full behavioral passes, sustained coverage, speed and data-scale
+sensitivity. `get_recipe("gan_behavioral")` exposes the measured toy candidate.
+On the actual 100-Gaussian task it ties stock's live convergence step, so
+`"gan"` keeps the existing defaults. Neither preset guarantees transfer to new
+architectures or data units.
 
 See the [minimal GAN loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-training-loop),
 [minimal DDGAN + UCD loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-ddgan--ucd-loop), and

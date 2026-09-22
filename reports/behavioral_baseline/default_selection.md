@@ -1,5 +1,12 @@
 # Coverage and default selection
 
+**Update:** the [convergence study](convergence/README.md) resolves the late-HQ
+fluctuation with shared delayed cosine decay: 29/29 bounds and 9/9 sustained
+toys. It also finds settings/data-scale sensitivity and no earlier live
+convergence than stock on actual 100 Gaussians. Keep `gan` defaults; the
+opt-in `gan_behavioral` preset exposes the transferred candidate.
+The analysis below preserves the earlier search without the added schedule.
+
 **Logistic RP + `b_cap` now passes all nine toys and all 29 numerical bounds
 with 8/8 live modes at 100% HQ.** The leading final-step config uses cap target
 1.25, penalty coefficient 3, no particle L2, VICReg 0.05, cover 1.5 and a common

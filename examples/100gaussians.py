@@ -180,6 +180,7 @@ def train(
     metric_callback=None,
     metric_interval: int = 250,
     save_plots: bool = True,
+    use_training_api: bool = False,
 
 ):
     if type(metric_interval) is not int or metric_interval <= 0:
@@ -211,6 +212,9 @@ def train(
     # Models
     prior_kind = canonical_prior_kind(prior_kind)
     learnable_prior = prior_kind in ("particles", "mog")
+    if use_training_api and (prior_kind != "particles" or particle_lr_multiplier != 1.0
+                             or particle_beta1 is not None or mog_metrics):
+        raise ValueError("use_training_api supports particles without separate prior optimizer overrides or mog_metrics")
     recipe = get_recipe(
         z_dim=z_dim, num_particles=num_particles, batch_size=batch_size,
         total_steps=epochs * steps_per_epoch, lr=lr, d_lr_mult=d_lr_mult,
@@ -237,25 +241,35 @@ def train(
             if m.bias is not None:
                 nn.init.zeros_(m.bias)
 
-    # EMA copies of G + prior for snapshots/eval; the live weights orbit the
-    # equilibrium, the averaged ones sit on it.
-    ema_G = copy.deepcopy(G)
-    ema_prior = copy.deepcopy(prior)
-    for p in list(ema_G.parameters()) + list(ema_prior.parameters()):
-        p.requires_grad_(False)
+    if use_training_api:
+        trainer = recipe.make_trainer(
+            G, D, prior=prior, seed=seed,
+            latent_generator=latent_gen, penalty_generator=penalty_gen,
+            optimizer_options={"fused": fused_adam},
+            penalty_options={"fd_eps": reg_fd_eps},
+        )
+        ema_G, ema_prior = trainer.ema_G, trainer.ema_prior
+        opt_G, opt_D, opt_prior = trainer.opt_g, trainer.opt_d, None
+    else:
+        # EMA copies of G + prior for snapshots/eval; the live weights orbit the
+        # equilibrium, the averaged ones sit on it.
+        ema_G = copy.deepcopy(G)
+        ema_prior = copy.deepcopy(prior)
+        for p in list(ema_G.parameters()) + list(ema_prior.parameters()):
+            p.requires_grad_(False)
 
-    # Keep the raw spread value for diagnostics; apply lambda_ep in the loop.
-    vic_reg = recipe.make_prior_regularizer(weight=1.0)
-    gan_loss = recipe.make_loss()
-    regularizer = recipe.make_gradient_penalty(fd_eps=reg_fd_eps)
+        # Keep the raw spread value for diagnostics; apply lambda_ep in the loop.
+        vic_reg = recipe.make_prior_regularizer(weight=1.0)
+        gan_loss = recipe.make_loss()
+        regularizer = recipe.make_gradient_penalty(fd_eps=reg_fd_eps)
 
-    opt_G, opt_D = recipe.make_optimizers(G, D, fused=fused_adam)
-    # Keep a separate prior optimizer for the existing update/checkpoint layout.
-    opt_prior = (
-        torch.optim.Adam(prior.parameters(), lr=recipe.lr * recipe.prior_lr_mult * particle_lr_multiplier,
-                         betas=(beta1 if particle_beta1 is None else particle_beta1, recipe.betas[1]), fused=fused_adam)
-        if learnable_prior else None
-    )
+        opt_G, opt_D = recipe.make_optimizers(G, D, fused=fused_adam)
+        # Keep a separate prior optimizer for the existing update/checkpoint layout.
+        opt_prior = (
+            torch.optim.Adam(prior.parameters(), lr=recipe.lr * recipe.prior_lr_mult * particle_lr_multiplier,
+                             betas=(beta1 if particle_beta1 is None else particle_beta1, recipe.betas[1]), fused=fused_adam)
+            if learnable_prior else None
+        )
 
     out_path = Path(out_dir)
     out_path.mkdir(parents=True, exist_ok=True)
@@ -306,95 +320,105 @@ def train(
     global_step = 0
     for epoch in range(epochs):
         for _ in range(steps_per_epoch):
-            # Full LR until lr_anneal_start, then cosine down to lr_floor.
-            # Retain the historical minimum one-update decay duration.
-            anneal_from = lr_anneal_start * total_steps
-            scale = learning_rate_scale(global_step - anneal_from,
-                                        max(1.0, total_steps - anneal_from), 0.0, lr_floor)
-            for opt in all_opts:
-                for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
-                    group["lr"] = base * scale
-
-            # -------------------------
-            # 1) Discriminator step
-            # -------------------------
-            D.train()
-            G.eval()
-
-            x_real = sample_100gaussians(
-                batch_size=batch_size,
-                device=device,
-                generator=train_gen,
-            )
-            with torch.no_grad():
-                z_fake, _ = prior.sample(batch_size, generator=latent_gen)
-                x_fake = G(z_fake)
-
-            real_logits = D(x_real)
-            fake_logits = D(x_fake)
-
-            if mog_metrics:
-                last_d_gap = (real_logits.detach().mean() - fake_logits.detach().mean())
-            loss_d = gan_loss.d_loss(real_logits, fake_logits)
-
-            # Gradient penalty at the samples. This is what lets the sharp
-            # Fourier D coexist with full mode coverage: it caps D's
-            # steepness where the data is. The regularizer recomputes its own
-            # graph internally, so neither batch needs requires_grad here.
-            pen, _ = regularizer.penalty(
-                D, x_real, x_fake, global_step + 1, generator=penalty_gen,
-                collect_stats=reg_sync_stats,
-            )
-            loss_d = loss_d + pen
-
-            opt_D.zero_grad()
-            loss_d.backward()
-            opt_D.step()
-
-            # -------------------------
-            # 2) Generator + prior step
-            # -------------------------
-            D.eval()
-            G.train()
-
-            z_fake, idx = prior.sample(batch_size, generator=latent_gen)
-            x_fake = G(z_fake)
-            fake_logits = D(x_fake)
-
-            if gan_mode in ("rp", "ra"):
-                with torch.no_grad():
-                    x_real_g = sample_100gaussians(
-                        batch_size=batch_size,
-                        device=device,
-                        generator=train_gen,
-                    )
-                real_logits_g = D(x_real_g)
-                loss_gan = gan_loss.g_loss(fake_logits, real_logits_g)
+            if use_training_api:
+                x_real = sample_100gaussians(batch_size, device, generator=train_gen)
+                stats = trainer.step(
+                    x_real,
+                    generator_real=lambda: sample_100gaussians(batch_size, device, generator=train_gen),
+                    collect_stats=reg_sync_stats,
+                )
+                loss_d, loss_gan = stats["loss_d"], stats["loss_gan"]
+                ep_z = stats["prior_regularization"]
             else:
-                loss_gan = gan_loss.g_loss(fake_logits)
+                # Full LR until lr_anneal_start, then cosine down to lr_floor.
+                # Retain the historical minimum one-update decay duration.
+                anneal_from = lr_anneal_start * total_steps
+                scale = learning_rate_scale(global_step - anneal_from,
+                                            max(1.0, total_steps - anneal_from), 0.0, lr_floor)
+                for opt in all_opts:
+                    for group, base in zip(opt.param_groups, base_lrs[id(opt)]):
+                        group["lr"] = base * scale
 
-            ep_z = loss_gan.new_zeros(())
-            if learnable_prior:
-                unique_idx = torch.unique(idx)
-                raw = prior.z if num_particles <= 1024 else prior.z[unique_idx]
-                ep_z = vic_reg(raw)
-            loss_g = loss_gan + lambda_ep * ep_z
+                # -------------------------
+                # 1) Discriminator step
+                # -------------------------
+                D.train()
+                G.eval()
 
-            opt_G.zero_grad()
-            if opt_prior is not None:
-                opt_prior.zero_grad()
-            loss_g.backward()
+                x_real = sample_100gaussians(
+                    batch_size=batch_size,
+                    device=device,
+                    generator=train_gen,
+                )
+                with torch.no_grad():
+                    z_fake, _ = prior.sample(batch_size, generator=latent_gen)
+                    x_fake = G(z_fake)
 
-            opt_G.step()
-            if opt_prior is not None:
-                opt_prior.step()
+                real_logits = D(x_real)
+                fake_logits = D(x_fake)
 
-            # EMA update
-            with torch.no_grad():
-                for pe, p in zip(ema_G.parameters(), G.parameters()):
-                    pe.mul_(ema_decay).add_(p, alpha=1 - ema_decay)
-                for pe, p in zip(ema_prior.parameters(), prior.parameters()):
-                    pe.mul_(ema_decay).add_(p, alpha=1 - ema_decay)
+                if mog_metrics:
+                    last_d_gap = (real_logits.detach().mean() - fake_logits.detach().mean())
+                loss_d = gan_loss.d_loss(real_logits, fake_logits)
+
+                # Gradient penalty at the samples. This is what lets the sharp
+                # Fourier D coexist with full mode coverage: it caps D's
+                # steepness where the data is. The regularizer recomputes its own
+                # graph internally, so neither batch needs requires_grad here.
+                pen, _ = regularizer.penalty(
+                    D, x_real, x_fake, global_step + 1, generator=penalty_gen,
+                    collect_stats=reg_sync_stats,
+                )
+                loss_d = loss_d + pen
+
+                opt_D.zero_grad()
+                loss_d.backward()
+                opt_D.step()
+
+                # -------------------------
+                # 2) Generator + prior step
+                # -------------------------
+                D.eval()
+                G.train()
+
+                z_fake, idx = prior.sample(batch_size, generator=latent_gen)
+                x_fake = G(z_fake)
+                fake_logits = D(x_fake)
+
+                if gan_mode in ("rp", "ra"):
+                    with torch.no_grad():
+                        x_real_g = sample_100gaussians(
+                            batch_size=batch_size,
+                            device=device,
+                            generator=train_gen,
+                        )
+                    real_logits_g = D(x_real_g)
+                    loss_gan = gan_loss.g_loss(fake_logits, real_logits_g)
+                else:
+                    loss_gan = gan_loss.g_loss(fake_logits)
+
+                ep_z = loss_gan.new_zeros(())
+                if learnable_prior:
+                    unique_idx = torch.unique(idx)
+                    raw = prior.z if num_particles <= 1024 else prior.z[unique_idx]
+                    ep_z = vic_reg(raw)
+                loss_g = loss_gan + lambda_ep * ep_z
+
+                opt_G.zero_grad()
+                if opt_prior is not None:
+                    opt_prior.zero_grad()
+                loss_g.backward()
+
+                opt_G.step()
+                if opt_prior is not None:
+                    opt_prior.step()
+
+                # EMA update
+                with torch.no_grad():
+                    for pe, p in zip(ema_G.parameters(), G.parameters()):
+                        pe.mul_(ema_decay).add_(p, alpha=1 - ema_decay)
+                    for pe, p in zip(ema_prior.parameters(), prior.parameters()):
+                        pe.mul_(ema_decay).add_(p, alpha=1 - ema_decay)
 
             # -------------------------
             # Logging / snapshots
@@ -520,6 +544,7 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
     parser.add_argument("--reg_fd_eps", type=float, default=.05)
     parser.add_argument("--reg_sync_stats", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--fused_adam", action="store_true")
+    parser.add_argument("--training-api", action="store_true", help="Use the public GANTrainer for the learned-particle recipe.")
     parser.add_argument("--fourier", type=int, default=2)
     parser.add_argument("--ema_decay", type=float, default=_RECIPE.ema_decay)
     parser.add_argument(
@@ -595,6 +620,7 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         seed=args.seed,
         device_str=args.device,
         prior_kind=args.prior,
+        use_training_api=args.training_api,
     )
 
 

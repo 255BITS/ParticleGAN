@@ -2,6 +2,22 @@ import importlib.util
 from pathlib import Path
 
 import torch
+import pytest
+
+
+@pytest.mark.parametrize("overrides", [{}, {"reg_kappa": 1.25, "reg_coeff": 3., "lr": .00051, "lambda_ep": .05}])
+def test_public_trainer_matches_reference_updates(tmp_path, overrides):
+    spec = importlib.util.spec_from_file_location("grid_parity", Path(__file__).parents[1] / "examples/100gaussians.py")
+    grid = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(grid)
+    torch.set_num_threads(1)
+    options = dict(epochs=1, steps_per_epoch=20, batch_size=16, num_particles=32,
+                   seed=0, device_str="cpu", return_details=True, save_plots=False, **overrides)
+    reference = grid.train(**options, out_dir=str(tmp_path / "reference"))
+    public = grid.train(**options, out_dir=str(tmp_path / "public"), use_training_api=True)
+    for model in ("G", "D", "prior", "ema_G", "ema_prior"):
+        for key, tensor in reference[model].state_dict().items():
+            assert torch.equal(tensor, public[model].state_dict()[key]), (model, key)
 
 
 def test_grid_observer_preserves_training_and_forwards_cap(tmp_path, monkeypatch):

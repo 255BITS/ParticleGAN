@@ -173,7 +173,7 @@ def render(report, destination):
                          f"{fmt(summary['stable_from_step'], '.0f')} | {fmt(summary['confirmed_step'], '.0f')} | "
                          f"{fmt(summary['stable_from_seconds'], '.1f')} / {fmt(summary['stable_from_train_seconds'], '.1f')} | "
                          f"{fmt(train_seconds, '.1f')} | {fmt(throughput, '.1f')} |")
-    lines += ["", "Final distribution diagnostics use independent fixed-seed 20,000-sample fake and real draws. "
+    lines += ["", "Final distribution diagnostics use separate fixed-seed 20,000-sample fake and real draws, isolated from training. "
               "Width and core ratios near 1 indicate matching scale; covariance ratios expose collapsed axes. "
               "TV and SW1 are lower-is-better. These measurements have no tuned PASS threshold. "
               "Width/core summaries omit modes with fewer than 20 samples; audited counts are shown.", "",
@@ -213,7 +213,7 @@ def distribution_metrics(generator, prior, device):
         generator.train(previous_mode)
 
 
-def run(output, device):
+def run(output, device, *, training_api=False):
     output = Path(output)
     if (output / "results.json").exists():
         raise FileExistsError(f"refusing to overwrite {output / 'results.json'}")
@@ -227,7 +227,7 @@ def run(output, device):
     report = {"created_at": datetime.now(timezone.utc).isoformat(), "protocol": fingerprint,
               "protocol_sha256": digest(fingerprint), "rows": []}
     for name, overrides in ARMS:
-        kwargs = resolved_kwargs(example, output, name, device, overrides)
+        kwargs = resolved_kwargs(example, output, name, device, {**overrides, "use_training_api": training_api})
         report["rows"].append({"name": name, "overrides": overrides, "kwargs": kwargs,
                                "config_sha256": digest(kwargs), "curve": []})
     output.mkdir(parents=True, exist_ok=True)
@@ -287,8 +287,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--device", default="cuda")
+    parser.add_argument("--training-api", action="store_true", help="Benchmark the public GANTrainer on the same reference task.")
     args = parser.parse_args()
-    report = run(args.output, torch.device(args.device))
+    report = run(args.output, torch.device(args.device), training_api=args.training_api)
     return 0 if all(row.get("finished") for row in report["rows"]) else 1
 
 

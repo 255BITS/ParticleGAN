@@ -154,6 +154,11 @@ class Recipe:
         from .vicreg_loss import ParticleRegularizer
         return ParticleRegularizer(**{"weight": self.prior_reg, **overrides})
 
+    def make_trainer(self, generator, discriminator, **options):
+        """Build the optional unconditional GAN training helper."""
+        from .training import GANTrainer
+        return GANTrainer(self, generator, discriminator, **options)
+
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, **adam_kwargs):
         """Return ordinary ``(Adam(G + optional E + prior), Adam(D))`` optimizers.
 
@@ -188,6 +193,10 @@ def get_recipe(name="gan", **overrides):
     """Inspectable GAN/DDGAN and particle autoencoder defaults; historical aliases remain accepted."""
     if name in ("gan", "100gaussians"):
         recipe = Recipe(name=name)
+    elif name == "gan_behavioral":
+        # A measured behavioral-suite candidate, not a replacement for "gan".
+        recipe = Recipe(name=name, reg_kappa=1.25, reg_coeff=3.0,
+                        lr=0.00051, prior_reg=0.05)
     elif name == "mog":
         recipe = Recipe(name=name, prior_kind="mog", num_particles=400,
                         sigma_rel=1/40, standardize=True, total_steps=28_000,
@@ -212,7 +221,7 @@ def get_recipe(name="gan", **overrides):
                         routing_temperature=.125 if image else .25,
                         distance_reduction="mean" if image else "sum")
     else:
-        raise ValueError(f"Unknown recipe {name!r}; choose gan, mog, ddgan, ddgan_mog, ae_gan, vae_gan, or ae_ddgan")
+        raise ValueError(f"Unknown recipe {name!r}; choose gan, gan_behavioral, mog, ddgan, ddgan_mog, ae_gan, vae_gan, or ae_ddgan")
     return recipe.replace(**overrides)
 
 

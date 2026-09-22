@@ -63,6 +63,16 @@ GPU landings for that arm have not been run.
 
 ## Measured conceptmod verification
 
+The latest [convergence leaderboard](../reports/behavioral_baseline/convergence/README.md)
+adds a shared cosine schedule to the best cap: decay from 60% of the budget to a
+5% floor. It passes 29/29 bounds and sustains all nine toys, including 8/8 ring
+modes. Ten independent application checks pass. Sensitivity and the actual
+100-Gaussian comparison support retaining the stock defaults, with
+`get_recipe("gan_behavioral")` as an opt-in candidate. The
+[public training helper](api.md#gantrainer) applies the recipe consistently.
+The following paragraph describes the earlier search using original host schedules.
+
+
 The expanded [live-weight baseline](../reports/behavioral_baseline/README.md)
 trains each candidate on nine toys and requires all 29 numerical bounds. The
 leading `b_cap` candidate uses cap target 1.25, coefficient 3, no particle L2 and
