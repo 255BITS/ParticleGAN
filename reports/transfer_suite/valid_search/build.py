@@ -141,7 +141,7 @@ def build():
               'Its results are included in the current formulation matrix; its episode counts and archives are separate from the 270-run search retained here.',
               '', 'The research host adapter applies the same LR factors to G, D and ParticlePrior parameter groups across hosts, including direct particle-only optimizers. '
               'It reproduces the native rare-vector result and the neutral image control exactly before cross-host evaluation; '
-              '[parity evidence](coordinated_hosts/parity.json.gz) and exact driver source are archived. No production API or defaults changed.',
+              '[parity evidence](coordinated_hosts/parity.json.gz) and exact driver source are archived. Those archived adapter runs made no default changes. The winning formulation is now the public GAN default; [promotion verification](../default_promotion/README.md) is separate.',
               '', 'Independent review caught an explicit AE prior-group beta1=.5 overriding the declared Adam pair. '
               'Both affected AE cases were rerun with Adam(0,.999) enforced on every parameter group; both pass. '
               'The comparison uses only the corrected AE results. Original runs remain as superseded evidence. '

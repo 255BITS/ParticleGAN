@@ -19170,5 +19170,5 @@
   "grouping": "Recipe trials belong to the same core formulation. Never combine successes from different optimizer recipes or resource budgets into one row. Architecture may vary within a recipe.",
   "timing": "Mean confirmation fraction compares the same 17 passing cases using earliest supported architecture per case. This is development-selected update evidence, not wall-time speedup.",
   "correction": "Original cross-host AE runs preserved host per-group beta1=.5. Current comparison replaces those two AE results with explicit per-group Adam(0,.999) reruns; both pass. Originals retained as superseded evidence.",
-  "source_sha256": "e46bceafe0a9cd8bad1984de0798347017e41186519cb1fa9b074cdf99d61b74"
+  "source_sha256": "df0a426be853f4e19f926c245bdc200fde753da02d051b0c7ad44b9028197c62"
 }

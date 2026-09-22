@@ -82,7 +82,9 @@ for the final five of a complete 24-observation curve. EMA is separate.
 Historical controller-study rankings and the earlier 16/16 individual solver
 witnesses remain intact. The scope recount reused existing results; the
 subsequent valid-toy search archives all new runs separately. Production
-defaults remain unchanged.
+defaults now select this winning formulation through `get_recipe()`.
+[Default promotion and exact public-API replay](../default_promotion/README.md)
+record that implementation change separately from the historical search.
 
 ```bash
 python -m reports.transfer_suite.formulations.build

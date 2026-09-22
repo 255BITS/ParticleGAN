@@ -51,7 +51,7 @@ this object.
 | FM-on | any `fm_weight` other than 0 (named probe: 0.1) |
 | stranger | `pairing="stranger"` |
 | thinned κ | stored kappa, penalty center hardcoded (1 in one probe, 100 in another) |
-| `Recipe("gan")` | 20_000 particles, VICReg `prior_reg=1`, no cover and no FM field |
+| `Recipe("gan")` | 20_000 particles, b_cap3/κ1.25, VICReg `prior_reg=.05`, no cover and no FM field |
 | YuE2 gym controller | same cap, `lazy_k=4` (`EDIT_CAP_EVERY` in `lib/gym_particle_finetune.py`; still `particle.yaml`) |
 
 `drift(name)` returns the first five rows as `LockedShared` copies.
@@ -67,8 +67,11 @@ The latest [convergence leaderboard](../reports/behavioral_baseline/convergence/
 adds a shared cosine schedule to the best cap: decay from 60% of the budget to a
 5% floor. It passes 29/29 bounds and sustains all nine toys, including 8/8 ring
 modes. Ten independent application checks pass. Sensitivity and the actual
-100-Gaussian comparison support retaining the stock defaults, with
-`get_recipe("gan_behavioral")` as an opt-in candidate. The
+100-Gaussian comparison originally retained the stock defaults and exposed
+`get_recipe("gan_behavioral")` as an opt-in candidate. The subsequent
+[full behavioral search](../reports/transfer_suite/formulations/README.md)
+reaches 19/19 with supported architectures, and the winning formulation is now
+the `gan` default. `gan_legacy` preserves the original recipe. The
 [public training helper](api.md#gantrainer) applies the recipe consistently.
 The following paragraph describes the earlier search using original host schedules.
 

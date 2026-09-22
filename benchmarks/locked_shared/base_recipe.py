@@ -1,4 +1,4 @@
-"""Stock Recipe('gan') components/optimizers on the same ring host, seed 0."""
+"""Historical stock Recipe('gan') components/optimizers on the same ring host, seed 0."""
 
 import json
 from pathlib import Path
@@ -17,7 +17,7 @@ def main():
               "host": "Original 8-mode ring, 96-wide host MLPs, original initialization/evaluation; stock recipe supplies prior, losses, optimizers, EMA and LR schedule.",
               "rows": []}
     for steps in (1200, 7000):
-        recipe = get_recipe("gan", total_steps=steps)
+        recipe = get_recipe("gan_legacy", total_steps=steps).replace(name="gan")
         print(f"START stock ring recipe steps={steps} particles={recipe.num_particles}", flush=True)
         row = train_mode_hold(training_recipe=recipe, diagnostics=True)
         report["rows"].append({"recipe": recipe.to_dict(), "ring": row})

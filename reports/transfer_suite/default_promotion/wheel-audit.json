@@ -1,0 +1,57 @@
+{
+  "installed_path": "/tmp/pr38-default-installed/particlegan/__init__.py",
+  "wheel_sha256": "54f7f11334e27c1100f9d0ef487093993c8b32d36242e3c81470e84d4be6cde5",
+  "default_recipe": {
+    "name": "gan",
+    "model": "gan",
+    "z_dim": 4,
+    "num_particles": 20000,
+    "prior_kind": "particles",
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "num_classes": null,
+    "conditioning": "scalar",
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 256,
+    "total_steps": 7000,
+    "lr": 0.001,
+    "d_lr_mult": 1.5,
+    "prior_lr_mult": 10.0,
+    "betas": [
+      0.0,
+      0.99
+    ],
+    "prior_betas": null,
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 3.0,
+    "reg_kappa": 1.25,
+    "reg_every": 1,
+    "reg_method": "autograd",
+    "prior_reg": 0.05,
+    "ema_decay": 0.995,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "encoder_mode": "none",
+    "routing_temperature": 0.25,
+    "distance_reduction": "sum",
+    "observation_sigma": 0.03,
+    "reconstruction_weight": 1.0
+  },
+  "critic_parameters": 10467,
+  "resume_training_state_exact": true,
+  "extra_early_evaluation_differences": [
+    "/trainer/streams/eval_generator",
+    "/live_samples"
+  ],
+  "completed_steps": 4
+}

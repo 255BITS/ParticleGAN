@@ -54,16 +54,23 @@ the independent primitives remain available for other training loops.
 
 The [convergence leaderboard](reports/behavioral_baseline/convergence/README.md)
 compares full behavioral passes, sustained coverage, speed and data-scale
-sensitivity. `get_recipe("gan_behavioral")` exposes the measured toy candidate.
+sensitivity. `get_recipe()` now selects the winning b_cap3 formulation;
+`get_recipe("gan_legacy")` retains the earlier GAN defaults and
+`get_recipe("gan_behavioral")` preserves the earlier named study candidate.
 A [learned LR controller study](reports/learned_lr/README.md) also retains fitted
 weights and held-out comparisons; its current policy does not beat cosine.
 The broader [transfer leaderboard](reports/transfer_suite/README.md) separates
 required regressions, practical ranking tests, and nonblocking stress diagnostics.
 The [formulation leaderboard](reports/transfer_suite/formulations/README.md)
 compares candidate-owned training recipes, with architecture variants inside
-the same entry: b_cap3 passes 9/9 required and 9/10 practical data/image toys.
+the same entry: the selected b_cap3 default passes **9/9 required and 10/10
+practical data/image toys** with suitable architectures per toy.
 The [valid-toy search](reports/transfer_suite/valid_search/README.md) records the
 discriminator-only improvement and separate optimizer/resource trials.
+The [default promotion](reports/transfer_suite/default_promotion/README.md)
+verifies the public recipe, trainer and `LinearSkipDiscriminator` against the
+rare-mode winner at every live/EMA checkpoint. The reference discriminator
+passes 3/6 data toys itself; architecture remains an application choice.
 Imposed training-condition variants are diagnostics; [longer training](reports/transfer_suite/formulations/LONG_TRAINING.md)
 is a separate toy. The [solvability audit](reports/transfer_suite/solvability/README.md)
 retains all 16 historical individual solver witnesses.
@@ -127,12 +134,13 @@ paired-error critic. G1, G3, the paired encoder, the prior, and the transition
 discriminators stay frozen.
 
 ```python
-from particlegan import ParticlePrior, GANLoss, GradientPenalty, ParticleRegularizer
+from particlegan import ParticlePrior, GANLoss, get_recipe
 
-prior = ParticlePrior().to(device)  # 20,000 learnable particles, z_dim=4
-adversarial = GANLoss()            # relativistic-paired logistic loss
-penalty = GradientPenalty()       # exact L2 cap penalty, weight=1, cap=1
-spread = ParticleRegularizer()    # variance/covariance regularization, weight=1
+recipe = get_recipe()
+prior = recipe.make_prior().to(device)  # 20,000 particles, z_dim=4
+adversarial = recipe.make_loss()       # relativistic-paired logistic
+penalty = recipe.make_gradient_penalty()  # b_cap, coefficient 3, cap 1.25
+spread = recipe.make_prior_regularizer()  # variance/covariance weight .05
 
 # Customize with ordinary keyword arguments:
 prior = ParticlePrior(num_particles=4096, z_dim=16).to(device)
@@ -301,17 +309,20 @@ returns a new one. Unknown options raise errors.
 | --- | --- | --- |
 | Generation | One-shot GAN | Four-step DDGAN |
 | Prior | 20,000 learned particles, dimension 4 | Same |
-| GAN loss / critic penalty | Rp logistic / exact L2 cap, weight 1 | Same |
-| Particle regularizer | VICReg, weight 1, unique sampled rows | Same |
-| Adam learning rates: G / D / prior | 0.0006 / 0.0009 / 0.006 | Same |
-| Adam betas / EMA decay | (0, 0.999) / 0.995 | Same |
+| GAN loss / critic penalty | Rp logistic / exact L2 cap, weight 3, κ=1.25 | Rp logistic / cap weight 1, κ=1 |
+| Particle regularizer | VICReg, weight .05; no particle L2 | VICReg, weight 1 |
+| Adam learning rates: G / D / prior | .001 / .0015 / .01 | .0006 / .0009 / .006 |
+| Adam betas / EMA decay | (0, .99) / .995 | (0, .999) / .995 |
 | Schedule | Hold 60%, cosine to 5% | Same |
 | Batch size / training updates | 256 / 7,000 | 256 / 56,000 |
 | Conditioning | Unconditional | Class-only UCD, 4 classes, CE weight 0.02 |
 
-These defaults come from the selected 100-Gaussians and denoising experiments.
-Networks remain application choices: the reference toy benchmarks use MLPs and
-two Fourier frequencies in D. Changing the architecture or dataset changes the
+GAN now selects the behavioral-suite winner. DDGAN, MoG and autoencoder
+recipes retain their separately selected settings. `gan_legacy` preserves the
+previous GAN recipe, including its optimizer settings.
+Networks remain application choices. For flat vectors, the optional
+`LinearSkipDiscriminator()` supplies the rare-mode reference: D96×2,
+Softplus(beta5), Fourier2 and a learned raw linear skip initialized to zero. Changing the architecture or dataset changes the
 experiment; the recipe alone does not establish convergence on a new problem.
 
 [The executable PyTorch loop](https://github.com/255BITS/ParticleGAN/blob/master/examples/pytorch_loop.py) shows optimizer setup,
@@ -575,7 +586,7 @@ python examples/100gaussians.py
 
 The historical particle study reports runs with 100/100 modes and approximately 99% of samples within 3σ of a center after 7k steps. Coverage alone does not establish that the within-mode distribution is correct; the trainer also records shape and transport metrics.
 
-The default recipe is RpGAN (relativistic, logistic) + a one-sided cap gradient penalty on D (`relu(‖∇ₓD‖ − 1)²` on reals and fakes, coeff 1.0), Fourier-feature D, EMA evaluation, Adam β1=0, base LR 6e-4 with a delayed cosine anneal. The cap won a 420-run bake-off against the zero-centered R1/R2 penalty, which is still available with `--reg_arm a_r1r2 --reg_coeff 0.02`. See [FINDINGS.md](https://github.com/255BITS/ParticleGAN/blob/master/FINDINGS.md) for the study and [docs/convergence-tips.md](https://github.com/255BITS/ParticleGAN/blob/master/docs/convergence-tips.md) for the transferable reasoning behind each ingredient.
+The default GAN recipe is RpGAN (relativistic, logistic) + a one-sided cap gradient penalty on D (`relu(‖∇ₓD‖ − 1.25)²` on reals and fakes, coeff 3), particle variance/covariance regularization .05, no particle L2, Adam (0,.99), and base LR .001 with a delayed cosine anneal. Live weights determine success; EMA is reported separately. Architecture remains caller-owned, with `LinearSkipDiscriminator` available as the 2D rare-mode reference. The cap won a 420-run bake-off against the zero-centered R1/R2 penalty, which is still available with `--reg_arm a_r1r2 --reg_coeff 0.02`. See [FINDINGS.md](https://github.com/255BITS/ParticleGAN/blob/master/FINDINGS.md) for the study and [docs/convergence-tips.md](https://github.com/255BITS/ParticleGAN/blob/master/docs/convergence-tips.md) for the transferable reasoning behind each ingredient.
 
 **Without particle prior** (baseline):
 ```bash

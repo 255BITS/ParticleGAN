@@ -13,15 +13,14 @@ shared recipe to optimizers, losses, regularization, decay and EMA.
 ```python
 import torch
 from torch import nn
-from particlegan import get_recipe
+from particlegan import LinearSkipDiscriminator, get_recipe
 
 torch.manual_seed(0)
 device = torch.device("cpu")
 recipe = get_recipe("gan", total_steps=1000)
 G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(.2),
-                  nn.Linear(64, 2)).to(device)
-D = nn.Sequential(nn.Linear(2, 64), nn.LeakyReLU(.2),
-                  nn.Linear(64, 1)).to(device)
+                  nn.Linear(64, 64), nn.LeakyReLU(.2), nn.Linear(64, 2)).to(device)
+D = LinearSkipDiscriminator().to(device)
 trainer = recipe.make_trainer(G, D, seed=0)
 
 def real_batch():
@@ -88,15 +87,32 @@ callback can occur after D has updated, so restore a checkpoint before retrying
 that interrupted update. AMP, distributed training and custom update ratios
 require a caller-owned loop.
 
-`get_recipe("gan")` retains the stock defaults. `"gan_behavioral"` selects cap
-κ=1.25, coefficient 3, LR=0.00051 and prior weight=0.05, with the same cosine
-schedule starting at 60% and ending toward a 5% floor. It transfers the winning
-behavioral settings to the stock 20,000-particle recipe; host-specific cover
-losses are defined by the behavioral harness. It is an opt-in candidate:
-[the study](../reports/behavioral_baseline/convergence/README.md) found nine
-sustained toy passes, but sensitivity to data units and no earlier live
-convergence than stock on 100 Gaussians. Document your input units and validate
-on your task before changing production settings.
+`get_recipe()` / `get_recipe("gan")` selects Rp logistic, b_cap coefficient 3,
+κ=1.25, prior spread weight .05, Adam(0,.99), G LR .001, D LR .0015 and
+particle LR .01. Cosine holds the rate for 60% of the budget, then decays toward
+5%. There is no particle L2 term. Live sampling is the default; EMA is explicit.
+The 19/19 behavioral result permits a suitable architecture per toy and retains
+each host's resources/rates; it is not evidence of one universal network or
+optimizer preset. The generic recipe keeps 20,000 particles and 7,000 updates;
+set those resources for your task. [Promotion and exact API replay](../reports/transfer_suite/default_promotion/README.md).
+
+`get_recipe("gan_legacy")` restores the previous GAN recipe: LR .0006,
+Adam(0,.999), cap coefficient 1, κ=1 and prior weight 1. The older
+`gan_behavioral` study candidate remains unchanged (LR .00051, Adam(0,.999),
+cap coefficient 3, κ=1.25, prior weight .05). MoG, DDGAN and autoencoder presets
+keep their separately selected settings. Saved full recipe dictionaries restore
+through `Recipe(**saved_recipe)`; resume with the original networks and recipe.
+
+### Optional vector discriminator
+
+`LinearSkipDiscriminator(in_dim=2, hidden_dim=96, n_hidden=2, fourier=2, beta=5.)`
+accepts flat `[batch, in_dim]` inputs and returns one scalar per example.
+It adds a bias-free raw-input linear branch to a smooth Fourier MLP. The branch
+starts at zero. The 2D defaults exactly reproduce the rare-mode winner, with
+10,467 parameters and full gradient-cap double-backpropagation support.
+This D passes 3/6 data toys; other suite cases use other supported architectures.
+You can supply your own discriminator to `make_trainer`.
+
 
 ## A minimal DDGAN + UCD loop
 
@@ -412,7 +428,9 @@ from particlegan.locked_shared import LOCKED_SHARED, locked_adv_defaults, make_g
 `particle_l2` 0.02 when particles are built, and the host critic.
 `make_gan_loss()` and `make_b_cap()` build those two objects and refuse any
 other stamp. Music cover 1.0, a 128-particle hub cloud, FM-on, stranger
-pairing, and a thinned κ are not this stamp. `get_recipe("gan")` is unchanged.
+pairing, and a thinned κ are not this stamp. The selected `get_recipe("gan")`
+uses coefficient 3, κ=1.25 and prior regularization .05; this frozen stamp retains
+its original values.
 The full field table is in [locked shared](locked-shared.md). Lunar Lander's
 import of it is [the gym arm](gym-particle-finetune.md#locked-shared-arm).
 
@@ -555,8 +573,8 @@ resolve named presets. Unknown fields are rejected. Historical names
 `get_recipe("mog")` selects the compact MoG leader: 400 components, z_dim=4,
 sigma_rel=1/40, standardized reads, 28,000 steps, prior LR multiplier 100
 (relative to G, giving 0.06), and prior betas `(0.5, 0.999)`. G and D retain
-betas `(0, 0.999)`. Other GAN recipe settings are unchanged. `get_recipe()`
-and `get_recipe("gan")` still select the existing atoms recipe.
+betas `(0, 0.999)`, cap coefficient 1, κ=1 and prior weight 1. These MoG
+settings remain pinned separately from the new `get_recipe()` / `gan` default.
 
 `get_recipe("ddgan_mog")` combines DDGAN/class-only UCD with the MoG settings
 from the 100k study: 400 components, z_dim=4, sigma_rel=1/40, standardized reads,
@@ -587,12 +605,12 @@ GAN settings; `get_recipe("ddgan")` continues to use atoms and 56,000 updates.
 | `z_dim`, `num_particles` | `4`, `20_000` | Same |
 | `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) | Same |
 | `loss_type`, `gan_mode` | `logistic`, `rp` | Same |
-| `lr`, `d_lr_mult`, `prior_lr_mult` | `.0006`, `1.5`, `10` | Same |
-| `betas` | `(0, .999)` | Same |
+| `lr`, `d_lr_mult`, `prior_lr_mult` | `.001`, `1.5`, `10` | `.0006`, `1.5`, `10` |
+| `betas` | `(0, .99)` | `(0, .999)` |
 | `prior_betas` | `None` (inherit `betas`) | Same |
-| `reg_arm`, `reg_coeff`, `reg_kappa` | `b_cap`, `1`, `1` | Same |
+| `reg_arm`, `reg_coeff`, `reg_kappa` | `b_cap`, `3`, `1.25` | `b_cap`, `1`, `1` |
 | `reg_every`, `reg_method` | `1`, `autograd` | Same |
-| `prior_reg`, `ema_decay` | `1`, `.995` | Same |
+| `prior_reg`, `ema_decay` | `.05`, `.995` | `1`, `.995` |
 | `lr_anneal_start`, `lr_floor` | `.6`, `.05` | Same |
 | `batch_size`, `total_steps` | `256`, `7_000` | `256`, `56_000` |
 | `ucd_target`, `ucd_weight` | `class`, `.02` (unused) | `class`, `.02` |

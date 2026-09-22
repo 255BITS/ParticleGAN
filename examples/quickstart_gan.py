@@ -9,12 +9,12 @@ import torch
 from torch import nn
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from particlegan import get_recipe
+from particlegan import LinearSkipDiscriminator, get_recipe
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--recipe", choices=("gan", "gan_behavioral"), default="gan")
+    parser.add_argument("--recipe", choices=("gan", "gan_legacy", "gan_behavioral"), default="gan")
     parser.add_argument("--steps", type=int, default=1000, help="Total budget, including updates before resume.")
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--output", type=Path, default=Path("quickstart.pt"))
@@ -27,8 +27,9 @@ def main():
     torch.manual_seed(0)
     device = torch.device(args.device)
     recipe = get_recipe(args.recipe, total_steps=args.steps)
-    generator = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(.2), nn.Linear(64, 2)).to(device)
-    discriminator = nn.Sequential(nn.Linear(2, 64), nn.LeakyReLU(.2), nn.Linear(64, 1)).to(device)
+    generator = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(.2),
+                              nn.Linear(64, 64), nn.LeakyReLU(.2), nn.Linear(64, 2)).to(device)
+    discriminator = LinearSkipDiscriminator().to(device)
     trainer = recipe.make_trainer(generator, discriminator, seed=0)
     data_rng = torch.Generator(device=device).manual_seed(0)
     if args.resume:

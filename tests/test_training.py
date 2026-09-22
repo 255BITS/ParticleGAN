@@ -39,8 +39,13 @@ def assert_checkpoint_equal(left, right):
         assert left == right
 
 
-def test_recipe_is_opt_in_and_keeps_existing_defaults():
+def test_winning_recipe_is_default_and_earlier_candidate_is_preserved():
     assert get_recipe() == Recipe()
+    winner = get_recipe()
+    assert (winner.reg_arm, winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == ('b_cap', 1.25, 3., .05)
+    assert (winner.lr, winner.betas, winner.prior_lr_mult, winner.d_lr_mult) == (.001, (0., .99), 10., 1.5)
+    legacy = get_recipe('gan_legacy')
+    assert (legacy.lr, legacy.betas, legacy.reg_coeff, legacy.reg_kappa, legacy.prior_reg) == (.0006, (0., .999), 1., 1., 1.)
     recipe = get_recipe("gan_behavioral")
     assert (recipe.reg_arm, recipe.reg_kappa, recipe.reg_coeff) == ("b_cap", 1.25, 3.)
     assert (recipe.lr, recipe.prior_reg, recipe.lr_anneal_start, recipe.lr_floor) == (.00051, .05, .6, .05)

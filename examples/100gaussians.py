@@ -181,6 +181,7 @@ def train(
     metric_interval: int = 250,
     save_plots: bool = True,
     use_training_api: bool = False,
+    beta2: float = _RECIPE.betas[1],
 
 ):
     if type(metric_interval) is not int or metric_interval <= 0:
@@ -218,7 +219,7 @@ def train(
     recipe = get_recipe(
         z_dim=z_dim, num_particles=num_particles, batch_size=batch_size,
         total_steps=epochs * steps_per_epoch, lr=lr, d_lr_mult=d_lr_mult,
-        betas=(beta1, _RECIPE.betas[1]), loss_type=loss_type, gan_mode=gan_mode,
+        betas=(beta1, beta2), loss_type=loss_type, gan_mode=gan_mode,
         reg_arm=reg_arm, reg_coeff=reg_coeff, reg_kappa=reg_kappa, reg_every=reg_every, reg_method=reg_method,
         prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,
         lr_floor=lr_floor,
@@ -516,6 +517,7 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
     parser.add_argument("--lr", type=float, default=_RECIPE.lr)
     parser.add_argument("--d_lr_mult", type=float, default=_RECIPE.d_lr_mult)
     parser.add_argument("--beta1", type=float, default=_RECIPE.betas[0])
+    parser.add_argument("--beta2", type=float, default=_RECIPE.betas[1])
     parser.add_argument("--reg_kappa", type=float, default=_RECIPE.reg_kappa)
     parser.add_argument("--lambda_ep", type=float, default=_RECIPE.prior_reg)
     parser.add_argument(
@@ -602,6 +604,7 @@ def main(default_prior="particles", default_out_dir="100gaussians_samples") -> N
         lr=args.lr,
         d_lr_mult=args.d_lr_mult,
         beta1=args.beta1,
+        beta2=args.beta2,
         lambda_ep=args.lambda_ep,
         reg_arm=reg_arm,
         reg_coeff=reg_coeff,

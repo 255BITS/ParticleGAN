@@ -34,7 +34,11 @@ rule; this is a live-weight success. This same D passes only 3/6 data toys: broa
 pass; anisotropic, overlap and unequal width fail. Appropriate architectures
 for those cases bring the unchanged formulation to 19/19 across the main suite.
 These are fixed-seed development results, not a universal architecture or
-evidence of real-network transfer. Production defaults are unchanged.
+evidence of real-network transfer. The winning formulation is now the default
+`get_recipe()`. The matching optional public discriminator is
+`particlegan.LinearSkipDiscriminator()`; architectures and resources stay caller-owned.
+[Public-default replay](../../reports/transfer_suite/default_promotion/README.md)
+verifies the default recipe, trainer and critic together.
 
 [Implementation](linear_skip_refinement_research.py) ·
 [Leaderboard and full profiles](../../reports/transfer_suite/rare_focus/README.md) ·

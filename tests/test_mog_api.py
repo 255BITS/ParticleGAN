@@ -29,7 +29,7 @@ def test_default_mog_and_recipe_match_the_selected_compact_experiment():
     reference = read_config(root / "configs/mog/scale_longer/n400_r1over40_28k_s1.yaml")
     # The archived run used the then-implicit cap target of 1.0. It is now
     # exposed in the trainer config, without changing that historical default.
-    reference = {"reg_kappa": 1.0, **reference}
+    reference = {"reg_kappa": 1.0, "beta2": .999, **reference}
     assert {k: v for k, v in cfg.items() if k != "out_dir"} == {
         k: v for k, v in reference.items() if k != "out_dir"}
     assert cfg['epochs'] * cfg['steps_per_epoch'] == recipe.total_steps

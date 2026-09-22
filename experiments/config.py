@@ -40,7 +40,7 @@ def recipe_defaults(name):
     defaults = {key: getattr(recipe, key) for key in keys}
     defaults["beta1"] = recipe.betas[0]
     if name == "100gaussians":
-        defaults.update(epochs=recipe.total_steps // 1000, steps_per_epoch=1000,
+        defaults.update(beta2=recipe.betas[1], epochs=recipe.total_steps // 1000, steps_per_epoch=1000,
                         lambda_ep=recipe.prior_reg, ema_decay=recipe.ema_decay, reg_kappa=recipe.reg_kappa)
     elif name == "denoising":
         defaults.update(model=recipe.model, d_mode=recipe.conditioning,

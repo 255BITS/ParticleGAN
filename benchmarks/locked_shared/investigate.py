@@ -16,7 +16,7 @@ from . import mode_hold, trajectory, two_pole
 
 
 def candidates():
-    base = get_recipe("gan")
+    base = get_recipe("gan_legacy").replace(name="gan")
     return [
         ("base_core", "Stock Recipe('gan') loss + penalty; original host settings", {}, {}, base.make_loss, base.make_gradient_penalty),
         ("r1_r2", "Zero-centered R1+R2, coeff 0.02", {}, {}, None, partial(GradientPenalty, "a_r1r2", coeff=0.02)),
@@ -43,7 +43,7 @@ def main():
     parser.add_argument("--resume", action="store_true", help="reuse completed ring rows; fill missing diagnostics")
     args = parser.parse_args()
     torch.set_num_threads(1)
-    report = {"torch": torch.__version__, "seed": 0, "base_recipe": asdict(get_recipe("gan")),
+    report = {"torch": torch.__version__, "seed": 0, "base_recipe": asdict(get_recipe("gan_legacy").replace(name="gan")),
               "budget": {"trajectory": 400, "ring": 1200}, "rows": []}
     if args.resume and args.output.exists():
         report = json.loads(args.output.read_text())

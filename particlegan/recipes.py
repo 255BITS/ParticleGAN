@@ -19,19 +19,19 @@ class Recipe:
     alpha_bar: tuple[float, ...] = (1.0, 0.9, 0.5, 0.05, 0.0001)
     batch_size: int = 256
     total_steps: int = 7_000
-    lr: float = 6e-4
+    lr: float = 1e-3
     d_lr_mult: float = 1.5
     prior_lr_mult: float = 10.0
-    betas: tuple[float, float] = (0.0, 0.999)
+    betas: tuple[float, float] = (0.0, 0.99)
     prior_betas: tuple[float, float] | None = None
     loss_type: str = "logistic"
     gan_mode: str = "rp"
     reg_arm: str = "b_cap"
-    reg_coeff: float = 1.0
-    reg_kappa: float = 1.0
+    reg_coeff: float = 3.0
+    reg_kappa: float = 1.25
     reg_every: int = 1
     reg_method: str = "autograd"
-    prior_reg: float = 1.0
+    prior_reg: float = 0.05
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
@@ -189,20 +189,28 @@ class Recipe:
                 Adam(d_params, lr=self.lr * self.d_lr_mult, betas=self.betas, **adam_kwargs))
 
 
+def _legacy_recipe(**options):
+    """Pin previously selected domain recipes independently of new GAN defaults."""
+    return Recipe(**{**dict(lr=6e-4, betas=(0., .999), reg_coeff=1., reg_kappa=1., prior_reg=1.),
+                     **options})
+
+
 def get_recipe(name="gan", **overrides):
     """Inspectable GAN/DDGAN and particle autoencoder defaults; historical aliases remain accepted."""
     if name in ("gan", "100gaussians"):
         recipe = Recipe(name=name)
+    elif name == "gan_legacy":
+        recipe = _legacy_recipe(name=name)
     elif name == "gan_behavioral":
-        # A measured behavioral-suite candidate, not a replacement for "gan".
-        recipe = Recipe(name=name, reg_kappa=1.25, reg_coeff=3.0,
+        # Preserve the earlier named study candidate and its optimizer settings.
+        recipe = _legacy_recipe(name=name, reg_kappa=1.25, reg_coeff=3.0,
                         lr=0.00051, prior_reg=0.05)
     elif name == "mog":
-        recipe = Recipe(name=name, prior_kind="mog", num_particles=400,
+        recipe = _legacy_recipe(name=name, prior_kind="mog", num_particles=400,
                         sigma_rel=1/40, standardize=True, total_steps=28_000,
                         prior_lr_mult=100., prior_betas=(.5, .999))
     elif name in ("ddgan", "denoising"):
-        recipe = Recipe(name=name, model="ddgan", num_classes=4,
+        recipe = _legacy_recipe(name=name, model="ddgan", num_classes=4,
                         conditioning="ucd", total_steps=56_000)
     elif name == "ddgan_mog":
         recipe = get_recipe("ddgan").replace(
@@ -213,7 +221,7 @@ def get_recipe(name="gan", **overrides):
     elif name in ("ae_gan", "vae_gan", "ae_ddgan"):
         image = name == "ae_ddgan"
         mode = {"ae_gan": "ae", "vae_gan": "hard", "ae_ddgan": "ae"}[name]
-        recipe = Recipe(name=name, model="ddgan" if image else "gan",
+        recipe = _legacy_recipe(name=name, model="ddgan" if image else "gan",
                         encoder_mode=mode, prior_kind="mog", num_particles=1024 if image else 400,
                         z_dim=64 if image else 2, sigma_rel=.025, total_steps=10000 if image else 6000,
                         batch_size=64 if image else 256, lr=.0003, prior_lr_mult=10.,
@@ -221,7 +229,7 @@ def get_recipe(name="gan", **overrides):
                         routing_temperature=.125 if image else .25,
                         distance_reduction="mean" if image else "sum")
     else:
-        raise ValueError(f"Unknown recipe {name!r}; choose gan, gan_behavioral, mog, ddgan, ddgan_mog, ae_gan, vae_gan, or ae_ddgan")
+        raise ValueError(f"Unknown recipe {name!r}; choose gan, gan_legacy, gan_behavioral, mog, ddgan, ddgan_mog, ae_gan, vae_gan, or ae_ddgan")
     return recipe.replace(**overrides)
 
 
