@@ -1,5 +1,9 @@
 # Smart descent — expanded experiments
 
+The next [transfer study](../transfer_suite/README.md) declares test importance:
+required regressions determine eligibility, realistic variations affect ranking,
+and deliberate data/architecture limitations remain nonblocking diagnostics.
+
 **A learned feedback addition to cosine now passes all 29 live bounds and
 sustains all nine behavioral toys. It is not a reliable replacement for cosine
 or Adam.** Direct fitting without a clock did not produce a policy that sustains

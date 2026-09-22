@@ -1,0 +1,290 @@
+[
+  {
+    "name": "vector_anisotropic",
+    "control": "fixed_cosine",
+    "tier": "ranking",
+    "final_pass": true,
+    "sustained": true,
+    "suffix": 15,
+    "confirmed_step": 700,
+    "seconds": 5.520424584974535,
+    "metrics": {
+      "sw1_normalized": 0.14075334313934357,
+      "mass_tv": 0.1068522185087204,
+      "hq": 0.98974609375,
+      "component_covariance_error": 0.13558053721984228,
+      "component_min_eigen_ratio": 0.5556106567382812
+    },
+    "failed_bounds": []
+  },
+  {
+    "name": "vector_narrow",
+    "control": "fixed_cosine",
+    "tier": "diagnostic",
+    "final_pass": false,
+    "sustained": false,
+    "suffix": 0,
+    "confirmed_step": null,
+    "seconds": 7.713077855994925,
+    "metrics": {
+      "sw1_normalized": 0.49878779413620294,
+      "mass_tv": 0.5,
+      "hq": 0.978759765625,
+      "component_covariance_error": 36.84063124656677,
+      "component_min_eigen_ratio": 0.0
+    },
+    "failed_bounds": [
+      [
+        "sw1_normalized",
+        "<=",
+        0.18,
+        0.49878779413620294
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15,
+        0.5
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85,
+        36.84063124656677
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15,
+        0.0
+      ]
+    ]
+  },
+  {
+    "name": "vector_overlap",
+    "control": "fixed_cosine",
+    "tier": "ranking",
+    "final_pass": true,
+    "sustained": false,
+    "suffix": 4,
+    "confirmed_step": null,
+    "seconds": 5.345675018965267,
+    "metrics": {
+      "sw1_normalized": 0.09159826145118381,
+      "mean_error": 0.08065998554229736,
+      "covariance_error": 0.3377096951007843
+    },
+    "failed_bounds": []
+  },
+  {
+    "name": "vector_scale_drift",
+    "control": "fixed_cosine",
+    "tier": "diagnostic",
+    "final_pass": true,
+    "sustained": true,
+    "suffix": 22,
+    "confirmed_step": 467,
+    "seconds": 6.911620107013732,
+    "metrics": {
+      "sw1_normalized": 0.07029159001900712,
+      "mass_tv": 0.02001953125,
+      "hq": 0.961181640625,
+      "component_covariance_error": 0.5831803381443024,
+      "component_min_eigen_ratio": 1.1040279865264893
+    },
+    "failed_bounds": []
+  },
+  {
+    "name": "vector_spiral",
+    "control": "fixed_cosine",
+    "tier": "ranking",
+    "final_pass": true,
+    "sustained": true,
+    "suffix": 23,
+    "confirmed_step": 400,
+    "seconds": 6.7639126930153,
+    "metrics": {
+      "sw1_normalized": 0.06325822952486929,
+      "mean_error": 0.07759803533554077,
+      "covariance_error": 0.11381782591342926
+    },
+    "failed_bounds": []
+  },
+  {
+    "name": "vector_two_broad",
+    "control": "fixed_cosine",
+    "tier": "ranking",
+    "final_pass": true,
+    "sustained": true,
+    "suffix": 19,
+    "confirmed_step": 500,
+    "seconds": 6.347992641967721,
+    "metrics": {
+      "sw1_normalized": 0.039028881605598496,
+      "mass_tv": 0.0146484375,
+      "hq": 0.984375,
+      "component_covariance_error": 0.20217658579349518,
+      "component_min_eigen_ratio": 0.5616455674171448
+    },
+    "failed_bounds": []
+  },
+  {
+    "name": "vector_unequal_mass",
+    "control": "fixed_constant",
+    "tier": "ranking",
+    "final_pass": false,
+    "sustained": false,
+    "suffix": 0,
+    "confirmed_step": null,
+    "seconds": 6.30022093700245,
+    "metrics": {
+      "sw1_normalized": 0.11121551734360098,
+      "mass_tv": 0.06489258259534836,
+      "hq": 0.969482421875,
+      "component_covariance_error": 2.8915712162852287,
+      "component_min_eigen_ratio": 0.20582227408885956,
+      "min_mass_ratio": 0.8820134997367859
+    },
+    "failed_bounds": [
+      [
+        "component_covariance_error",
+        "<=",
+        0.85,
+        2.8915712162852287
+      ]
+    ]
+  },
+  {
+    "name": "vector_unequal_mass",
+    "control": "fixed_cosine",
+    "tier": "ranking",
+    "final_pass": false,
+    "sustained": false,
+    "suffix": 0,
+    "confirmed_step": null,
+    "seconds": 5.572573440964334,
+    "metrics": {
+      "sw1_normalized": 0.08068859440349768,
+      "mass_tv": 0.05170898884534836,
+      "hq": 0.9501953125,
+      "component_covariance_error": 5.800080198794603,
+      "component_min_eigen_ratio": 0.9366163015365601,
+      "min_mass_ratio": 0.9059836268424988
+    },
+    "failed_bounds": [
+      [
+        "component_covariance_error",
+        "<=",
+        0.85,
+        5.800080198794603
+      ]
+    ]
+  },
+  {
+    "name": "vector_unequal_mass",
+    "control": "fixed_cosine_r1r2_0p1",
+    "tier": "ranking",
+    "final_pass": false,
+    "sustained": false,
+    "suffix": 0,
+    "confirmed_step": null,
+    "seconds": 5.2794754930073395,
+    "metrics": {
+      "sw1_normalized": 0.025285914898879106,
+      "mass_tv": 0.013232419267296791,
+      "hq": 0.9755859375,
+      "component_covariance_error": 2.7381671220064163,
+      "component_min_eigen_ratio": 0.33232831954956055,
+      "min_mass_ratio": 0.907076358795166
+    },
+    "failed_bounds": [
+      [
+        "component_covariance_error",
+        "<=",
+        0.85,
+        2.7381671220064163
+      ]
+    ]
+  },
+  {
+    "name": "vector_unequal_width",
+    "control": "fixed_constant",
+    "tier": "ranking",
+    "final_pass": false,
+    "sustained": false,
+    "suffix": 0,
+    "confirmed_step": null,
+    "seconds": 5.391199334990233,
+    "metrics": {
+      "sw1_normalized": 0.08747542113181143,
+      "mass_tv": 0.083251953125,
+      "hq": 0.97314453125,
+      "component_covariance_error": 4.441901329904795,
+      "component_min_eigen_ratio": 0.49967658519744873
+    },
+    "failed_bounds": [
+      [
+        "component_covariance_error",
+        "<=",
+        0.85,
+        4.441901329904795
+      ]
+    ]
+  },
+  {
+    "name": "vector_unequal_width",
+    "control": "fixed_cosine",
+    "tier": "ranking",
+    "final_pass": false,
+    "sustained": false,
+    "suffix": 0,
+    "confirmed_step": null,
+    "seconds": 5.383421341073699,
+    "metrics": {
+      "sw1_normalized": 0.08506576910256845,
+      "mass_tv": 0.083251953125,
+      "hq": 0.970947265625,
+      "component_covariance_error": 7.80859362334013,
+      "component_min_eigen_ratio": 0.7037267684936523
+    },
+    "failed_bounds": [
+      [
+        "component_covariance_error",
+        "<=",
+        0.85,
+        7.80859362334013
+      ]
+    ]
+  },
+  {
+    "name": "vector_unequal_width",
+    "control": "fixed_cosine_r1r2_0p1",
+    "tier": "ranking",
+    "final_pass": false,
+    "sustained": false,
+    "suffix": 0,
+    "confirmed_step": null,
+    "seconds": 5.333140806062147,
+    "metrics": {
+      "sw1_normalized": 0.1675894831095995,
+      "mass_tv": 0.15673828125,
+      "hq": 0.9345703125,
+      "component_covariance_error": 16.675411224365234,
+      "component_min_eigen_ratio": 1.1875722408294678
+    },
+    "failed_bounds": [
+      [
+        "mass_tv",
+        "<=",
+        0.15,
+        0.15673828125
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85,
+        16.675411224365234
+      ]
+    ]
+  }
+]

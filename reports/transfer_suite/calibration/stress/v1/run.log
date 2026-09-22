@@ -1,0 +1,33 @@
+START stress_fast_critic cosine tier=ranking steps=1200
+DONE stress_fast_critic cosine FAIL live={'sw1_normalized': 0.045742657558519924, 'mass_tv': 0.056640625, 'hq': 0.98046875, 'component_covariance_error': 3.368561246432364} suffix=0 confirmed=None seconds=6.494351191096939
+START stress_fast_critic constant tier=ranking steps=1200
+DONE stress_fast_critic constant FAIL live={'sw1_normalized': 0.045091243149349244, 'mass_tv': 0.056640625, 'hq': 0.99169921875, 'component_covariance_error': 1.6216841861605644} suffix=0 confirmed=None seconds=5.559977493016049
+START stress_slow_critic cosine tier=ranking steps=1200
+DONE stress_slow_critic cosine FAIL live={'sw1_normalized': 0.09655671106868366, 'mass_tv': 0.19287109375, 'hq': 0.821533203125, 'component_covariance_error': 26.869698882102966} suffix=0 confirmed=None seconds=5.671052369987592
+START stress_slow_critic constant tier=ranking steps=1200
+DONE stress_slow_critic constant FAIL live={'sw1_normalized': 0.08986949790527703, 'mass_tv': 0.18212890625, 'hq': 0.8642578125, 'component_covariance_error': 18.451264560222626} suffix=0 confirmed=None seconds=5.5127373550785705
+START stress_small_batch cosine tier=ranking steps=1200
+DONE stress_small_batch cosine FAIL live={'sw1_normalized': 0.09043616818250891, 'mass_tv': 0.1025390625, 'hq': 0.76611328125, 'component_covariance_error': 38.125155568122864} suffix=0 confirmed=None seconds=5.096017831005156
+START stress_small_batch constant tier=ranking steps=1200
+DONE stress_small_batch constant FAIL live={'sw1_normalized': 0.07264421529919485, 'mass_tv': 0.101318359375, 'hq': 0.824462890625, 'component_covariance_error': 19.666278019547462} suffix=0 confirmed=None seconds=5.0803824429167435
+START stress_large_critic cosine tier=ranking steps=1200
+DONE stress_large_critic cosine FAIL live={'sw1_normalized': 0.09223277155318978, 'mass_tv': 0.14599609375, 'hq': 0.94384765625, 'component_covariance_error': 7.2974076513201} suffix=0 confirmed=None seconds=6.393831193912774
+START stress_large_critic constant tier=ranking steps=1200
+DONE stress_large_critic constant FAIL live={'sw1_normalized': 0.10238274491039251, 'mass_tv': 0.14599609375, 'hq': 0.957275390625, 'component_covariance_error': 5.5400976706296206} suffix=0 confirmed=None seconds=6.269035544944927
+START stress_long_horizon cosine tier=ranking steps=2400
+DONE stress_long_horizon cosine FAIL live={'sw1_normalized': 0.0835019685515801, 'mass_tv': 0.096923828125, 'hq': 0.992919921875, 'component_covariance_error': 0.9727373151108623} suffix=0 confirmed=None seconds=9.962819381966256
+START stress_long_horizon constant tier=ranking steps=2400
+DONE stress_long_horizon constant FAIL live={'sw1_normalized': 0.08596077339100715, 'mass_tv': 0.096923828125, 'hq': 0.986328125, 'component_covariance_error': 1.0148209417238832} suffix=0 confirmed=None seconds=10.02575411903672
+START stress_r1_r2 cosine tier=ranking steps=1200
+DONE stress_r1_r2 cosine FAIL live={'sw1_normalized': 0.08417586468077644, 'mass_tv': 0.189208984375, 'hq': 0.83984375, 'component_covariance_error': 23.11691188812256} suffix=0 confirmed=None seconds=5.2144366359570995
+START stress_r1_r2 constant tier=ranking steps=1200
+DONE stress_r1_r2 constant FAIL live={'sw1_normalized': 0.07359614974878798, 'mass_tv': 0.1875, 'hq': 0.887939453125, 'component_covariance_error': 12.60619411058724} suffix=0 confirmed=None seconds=5.205392461968586
+START stress_weak_critic cosine tier=diagnostic steps=1200
+DONE stress_weak_critic cosine FAIL live={'sw1_normalized': 0.17417082972772768, 'mass_tv': 0.2294921875, 'hq': 0.122802734375, 'component_covariance_error': 32.12964725494385} suffix=0 confirmed=None seconds=3.7309635860146955
+START stress_weak_critic constant tier=diagnostic steps=1200
+DONE stress_weak_critic constant FAIL live={'sw1_normalized': 0.1499807271202251, 'mass_tv': 0.163818359375, 'hq': 0.20654296875, 'component_covariance_error': 32.5804922580719} suffix=0 confirmed=None seconds=3.6860102879581973
+START stress_overlapping_data cosine tier=diagnostic steps=1200
+DONE stress_overlapping_data cosine PASS live={'sw1_normalized': 0.05351805714708731} suffix=23 confirmed=300 seconds=5.332692609983496
+START stress_overlapping_data constant tier=diagnostic steps=1200
+DONE stress_overlapping_data constant PASS live={'sw1_normalized': 0.035664080495546396} suffix=23 confirmed=300 seconds=5.206936948001385
+COMPLETE reference_solvable={'stress_fast_critic': False, 'stress_slow_critic': False, 'stress_small_batch': False, 'stress_large_critic': False, 'stress_long_horizon': False, 'stress_r1_r2': False, 'stress_weak_critic': False, 'stress_overlapping_data': True}

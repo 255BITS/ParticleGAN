@@ -57,6 +57,8 @@ compares full behavioral passes, sustained coverage, speed and data-scale
 sensitivity. `get_recipe("gan_behavioral")` exposes the measured toy candidate.
 A [learned LR controller study](reports/learned_lr/README.md) also retains fitted
 weights and held-out comparisons; its current policy does not beat cosine.
+The broader [transfer leaderboard](reports/transfer_suite/README.md) separates
+required regressions, practical ranking tests, and nonblocking stress diagnostics.
 On the actual 100-Gaussian task the behavioral candidate ties stock's live convergence step, so
 `"gan"` keeps the existing defaults. Neither preset guarantees transfer to new
 architectures or data units.

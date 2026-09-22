@@ -1,5 +1,8 @@
 # Smart descent v2
 
+For the broader data, dynamics and image suite with declared test importance,
+see [controller transfer](../transfer_suite/README.md).
+
 Research continuation of the first learned LR study. The controller reads only
 gradient statistics: current RMS relative to its initial RMS, alignment with a
 moving mean gradient, RMS relative to the moving mean, and the opposing role's

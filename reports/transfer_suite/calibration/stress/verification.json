@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "checks": {
+    "json_gzip_roundtrips": 6,
+    "source_archives": 2,
+    "source_members": 50,
+    "copied_logs_scripts": 3
+  },
+  "json_roundtrip": "Decoded bytes equal exact original file bytes",
+  "source_verification": "Each tar member equals original snapshot bytes and source manifest SHA-256",
+  "reserved_evaluated": false,
+  "retrained_for_v2": false,
+  "original_v1_results_sha256": "df1cc9cc06c1dcef55ef398453d748a0f7eb6687b94728bb87c756539fd909d2",
+  "original_v2_results_sha256": "666eb0c7f66759144b688531d7d0fd234c12b8eeaa95f3995bb427575f58bad8"
+}

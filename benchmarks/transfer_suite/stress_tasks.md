@@ -87,7 +87,7 @@ justify weakening that gate or pretending the tasks have a demonstrated training
 solution.
 
 All attempts, numerical cards, full live/EMA curves, timings, errors, source
-hashes and the never-evaluated reserved spec are in
+hashes and the spec reserved from calibration are in
 `/tmp/pr36-transfer-stress-v1/results.json`. The manifest was written before the
 first run at `/tmp/pr36-transfer-stress-v1/frozen_specs.json`; the serial runner
 and tail-able log are beside it. Total episode time was 94.44 CPU seconds. These

@@ -19,7 +19,9 @@ into a required gate, and reference failure does not change its declared tier.
 
 All eight belong to `image_conv_transpose`. `img_residual_bars4` is the single
 reserved `image_conv_residual_upsample` architecture family: width 16, nearest
-neighbor upsampling and residual convolutions. It has not been evaluated. The
+neighbor upsampling and residual convolutions. Reference calibration left it
+unevaluated; the later [frozen comparison](../../reports/transfer_suite/README.md)
+reports its transfer results. The
 reference CLI excludes it; the aggregate runner must freeze policy selection
 before calling its episode API.
 
@@ -111,7 +113,7 @@ attempts do not change the task defaults or establish a controller winner.
 
 All 24 episodes finished with complete curves and no numerical errors, using
 125.8 total CPU wall seconds (single observations, not speed estimates).
-The reserved family has zero evaluations. Six contract tests cover disjoint
+The reserved family has zero evaluations in these calibration runs. Six contract tests cover disjoint
 quality regions, collapse/blend rejection, deliberate architecture limitations,
 RNG isolation, independent EMA, exact fixed/zero-feedback numerical parity,
 post-backward action timing, and incomplete/transient convergence rejection.

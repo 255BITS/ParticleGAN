@@ -118,4 +118,5 @@ corrected manifest, a source snapshot, target-oracle evidence and a readable
 leaderboard. Every rescored row links its original JSON by SHA256 and records
 separate execution/scoring protocols with `retrained: false`. All eight
 independent target-sampler controls pass v2, and the partial-center-collapse
-negative control fails. The reserved annulus remains unexamined.
+negative control fails. Calibration leaves the reserved annulus unexamined;
+the later [frozen comparison](../../reports/transfer_suite/README.md) reports its transfer results.

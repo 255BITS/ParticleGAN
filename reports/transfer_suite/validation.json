@@ -1,0 +1,155 @@
+{
+  "tests": {
+    "passed": 54,
+    "seconds": 4.72,
+    "command": "python -m pytest tests/test_transfer_protocol.py tests/test_transfer_suite.py tests/test_transfer_image_tasks.py tests/test_transfer_vector_tasks.py tests/test_transfer_stress_tasks.py tests/test_smart_descent.py tests/test_sgd_controller.py tests/test_learned_lr_controller.py tests/test_learned_lr_evaluation.py -q"
+  },
+  "control_parity": {
+    "two_pole": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "trajectory": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "residual_student": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "unipolar": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "ae_gan_hold": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "cover_leftover": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "unused_token_hold": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "mid_scale_identity": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "mode_hold": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "vector_overlap": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "vector_spiral": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "vector_unequal_width": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "vector_narrow": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "vector_scale_drift": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "vector_unequal_mass": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "vector_anisotropic": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "vector_two_broad": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "stress_fast_critic": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "stress_slow_critic": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "stress_small_batch": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "stress_large_critic": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "stress_long_horizon": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "stress_r1_r2": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "stress_weak_critic": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "stress_overlapping_data": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "img_tiny_generator": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "img_mean_discriminator": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "img_bars4": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "img_stripes2": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "img_bars8": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "img_blobs4": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "img_intensity2": {
+      "live_exact": true,
+      "curve_exact": true
+    },
+    "img_uniform_generator": {
+      "live_exact": true,
+      "curve_exact": true
+    }
+  },
+  "calibration_gzip_verified": 63,
+  "calibration_source_files_verified": 114,
+  "experiment_episodes": 245,
+  "experiment_errors": 0,
+  "complete_curves": 245,
+  "source_files_verified": 54,
+  "manifest_and_freeze_hashes_verified": true,
+  "all_episode_hashes_verified": true,
+  "source_commit": "15ba06e",
+  "transfer_selection_leak": false,
+  "diagnostics_removed_rank_unchanged_for_every_row": true,
+  "frozen_winner_recomputed": true,
+  "log_freeze_precedes_every_reserved_episode": true,
+  "total_episode_seconds": 1309.0818207359407
+}

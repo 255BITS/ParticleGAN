@@ -1,0 +1,2263 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "original_path": "README.md",
+      "original_sha256": "9153590f2d4e4afdd1d7fcac33b41cff3b78a7a766380dc0d7eed08843ddc5c6",
+      "archived_sha256": "8346050be823ed38bf65aabac28e6f6bf644e1a2eebac5bb12ef1fe5cacc1455",
+      "original_bytes": 21886,
+      "gzip_added": false,
+      "markdown_links_adjusted": true
+    },
+    {
+      "path": "episodes/cosine__ae_gan_hold.json.gz",
+      "original_path": "episodes/cosine__ae_gan_hold.json.gz",
+      "original_sha256": "7424994e2446ff940423f67507e8397dc238cd67a59897e391f932988be9aca2",
+      "archived_sha256": "7424994e2446ff940423f67507e8397dc238cd67a59897e391f932988be9aca2",
+      "original_bytes": 4521,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__cover_leftover.json.gz",
+      "original_path": "episodes/cosine__cover_leftover.json.gz",
+      "original_sha256": "f8c4f99fea34ca649dbd62561fbf89ff1ca9ce49ef3a4b5d7f3740f0b9e57188",
+      "archived_sha256": "f8c4f99fea34ca649dbd62561fbf89ff1ca9ce49ef3a4b5d7f3740f0b9e57188",
+      "original_bytes": 8134,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__img_bars4.json.gz",
+      "original_path": "episodes/cosine__img_bars4.json.gz",
+      "original_sha256": "e3a68008b27b699f0cef787bdff3278caeb4f552aeef3b2e76c748889d1997dc",
+      "archived_sha256": "e3a68008b27b699f0cef787bdff3278caeb4f552aeef3b2e76c748889d1997dc",
+      "original_bytes": 8292,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__img_bars8.json.gz",
+      "original_path": "episodes/cosine__img_bars8.json.gz",
+      "original_sha256": "a738af401f7dab905691b2d7728bc131e85499ed71a1e8a4741ece7ed1b313ff",
+      "archived_sha256": "a738af401f7dab905691b2d7728bc131e85499ed71a1e8a4741ece7ed1b313ff",
+      "original_bytes": 8573,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__img_blobs4.json.gz",
+      "original_path": "episodes/cosine__img_blobs4.json.gz",
+      "original_sha256": "ebf3fd9794df7638bde8ffd2dabd5d88b07d51df47f489f87128a605262f7e68",
+      "archived_sha256": "ebf3fd9794df7638bde8ffd2dabd5d88b07d51df47f489f87128a605262f7e68",
+      "original_bytes": 8413,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__img_intensity2.json.gz",
+      "original_path": "episodes/cosine__img_intensity2.json.gz",
+      "original_sha256": "f40d3391ed83f19b0738946625e20653c81de437400f8ccf4de204fe08a2261d",
+      "archived_sha256": "f40d3391ed83f19b0738946625e20653c81de437400f8ccf4de204fe08a2261d",
+      "original_bytes": 7881,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__img_mean_discriminator.json.gz",
+      "original_path": "episodes/cosine__img_mean_discriminator.json.gz",
+      "original_sha256": "bbddfeb11cb575e32beee620b310a56cc5ab7f326392daf5bdad7a3e009f8c24",
+      "archived_sha256": "bbddfeb11cb575e32beee620b310a56cc5ab7f326392daf5bdad7a3e009f8c24",
+      "original_bytes": 7714,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__img_stripes2.json.gz",
+      "original_path": "episodes/cosine__img_stripes2.json.gz",
+      "original_sha256": "ed8ac3ab0052b9ace60720a73ac879a0620b1a7dd544e6b7107d885cd4c5be45",
+      "archived_sha256": "ed8ac3ab0052b9ace60720a73ac879a0620b1a7dd544e6b7107d885cd4c5be45",
+      "original_bytes": 8128,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__img_tiny_generator.json.gz",
+      "original_path": "episodes/cosine__img_tiny_generator.json.gz",
+      "original_sha256": "93856a96cdd568026ac5862cf3f6905da7e0bb2ef0dd5c24993df2482d87281a",
+      "archived_sha256": "93856a96cdd568026ac5862cf3f6905da7e0bb2ef0dd5c24993df2482d87281a",
+      "original_bytes": 7941,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__img_uniform_generator.json.gz",
+      "original_path": "episodes/cosine__img_uniform_generator.json.gz",
+      "original_sha256": "b486d424cb2882df3f192779480b1dd4db88c211ebbe1d170ce28de305cb18a7",
+      "archived_sha256": "b486d424cb2882df3f192779480b1dd4db88c211ebbe1d170ce28de305cb18a7",
+      "original_bytes": 8090,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__mid_scale_identity.json.gz",
+      "original_path": "episodes/cosine__mid_scale_identity.json.gz",
+      "original_sha256": "b0314a1f982cf398bf55d3bc85cf0b44986cd32de84cef63d9699e9490aa494b",
+      "archived_sha256": "b0314a1f982cf398bf55d3bc85cf0b44986cd32de84cef63d9699e9490aa494b",
+      "original_bytes": 8770,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__mode_hold.json.gz",
+      "original_path": "episodes/cosine__mode_hold.json.gz",
+      "original_sha256": "394c7fec15bad3baa25b7c95017381d00925d6fa08e09b9aefff0406501cdb52",
+      "archived_sha256": "394c7fec15bad3baa25b7c95017381d00925d6fa08e09b9aefff0406501cdb52",
+      "original_bytes": 23267,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__residual_student.json.gz",
+      "original_path": "episodes/cosine__residual_student.json.gz",
+      "original_sha256": "0ad9878b448c1b3dd96cd448787c09c1e1fd0ce003e3129665e1af8aee813d08",
+      "archived_sha256": "0ad9878b448c1b3dd96cd448787c09c1e1fd0ce003e3129665e1af8aee813d08",
+      "original_bytes": 4867,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__stress_fast_critic.json.gz",
+      "original_path": "episodes/cosine__stress_fast_critic.json.gz",
+      "original_sha256": "9d9de02ca928597ae761c4f01638afadda57b81f8c0f423e571322fe7a90a4cb",
+      "archived_sha256": "9d9de02ca928597ae761c4f01638afadda57b81f8c0f423e571322fe7a90a4cb",
+      "original_bytes": 14336,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__stress_large_critic.json.gz",
+      "original_path": "episodes/cosine__stress_large_critic.json.gz",
+      "original_sha256": "231a75015d197c35e4d447cd06537ad64d2e7776189c2763b01ed5f1e30d8c31",
+      "archived_sha256": "231a75015d197c35e4d447cd06537ad64d2e7776189c2763b01ed5f1e30d8c31",
+      "original_bytes": 14251,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__stress_long_horizon.json.gz",
+      "original_path": "episodes/cosine__stress_long_horizon.json.gz",
+      "original_sha256": "87a6b464770953c60609e6264e0e66ad0fc6a3aa03b0828f4abbf487b3e469dc",
+      "archived_sha256": "87a6b464770953c60609e6264e0e66ad0fc6a3aa03b0828f4abbf487b3e469dc",
+      "original_bytes": 14827,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__stress_overlapping_data.json.gz",
+      "original_path": "episodes/cosine__stress_overlapping_data.json.gz",
+      "original_sha256": "c378749a490571ac960219e81aeb4fe38e80a9de38c213ae9f26f59effed4e0c",
+      "archived_sha256": "c378749a490571ac960219e81aeb4fe38e80a9de38c213ae9f26f59effed4e0c",
+      "original_bytes": 6764,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__stress_r1_r2.json.gz",
+      "original_path": "episodes/cosine__stress_r1_r2.json.gz",
+      "original_sha256": "7b0c94670effdddf490080f616abaf9978799db95efed2c94a0ad2ec0189892f",
+      "archived_sha256": "7b0c94670effdddf490080f616abaf9978799db95efed2c94a0ad2ec0189892f",
+      "original_bytes": 14606,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__stress_slow_critic.json.gz",
+      "original_path": "episodes/cosine__stress_slow_critic.json.gz",
+      "original_sha256": "43f3a62703b83300a2d0f40756d4362fe644d2ea7c377f96bc9dcedcd248bb71",
+      "archived_sha256": "43f3a62703b83300a2d0f40756d4362fe644d2ea7c377f96bc9dcedcd248bb71",
+      "original_bytes": 14659,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__stress_small_batch.json.gz",
+      "original_path": "episodes/cosine__stress_small_batch.json.gz",
+      "original_sha256": "20b2c7309395c906525ff9b844c961f189885c1aed8e4d0610669210a7b980d1",
+      "archived_sha256": "20b2c7309395c906525ff9b844c961f189885c1aed8e4d0610669210a7b980d1",
+      "original_bytes": 14809,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__stress_weak_critic.json.gz",
+      "original_path": "episodes/cosine__stress_weak_critic.json.gz",
+      "original_sha256": "67431c52631d7800f47b89adc360d8fdf56e118300f2ab661e89933d56b57ece",
+      "archived_sha256": "67431c52631d7800f47b89adc360d8fdf56e118300f2ab661e89933d56b57ece",
+      "original_bytes": 14566,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__trajectory.json.gz",
+      "original_path": "episodes/cosine__trajectory.json.gz",
+      "original_sha256": "5e0c68e754b7aa0c15d9abaa6a9304f7d61c8a2d5de0c69786916f7159906bf5",
+      "archived_sha256": "5e0c68e754b7aa0c15d9abaa6a9304f7d61c8a2d5de0c69786916f7159906bf5",
+      "original_bytes": 4422,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__two_pole.json.gz",
+      "original_path": "episodes/cosine__two_pole.json.gz",
+      "original_sha256": "277a3a3ee99b44869a9c0dba88bde7e448be4300a3ab4b05520ff501aa29cf56",
+      "archived_sha256": "277a3a3ee99b44869a9c0dba88bde7e448be4300a3ab4b05520ff501aa29cf56",
+      "original_bytes": 4388,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__unipolar.json.gz",
+      "original_path": "episodes/cosine__unipolar.json.gz",
+      "original_sha256": "b919757510e6556847afa85027a898a78c5ef9516f1b23817ea41ec2537abec5",
+      "archived_sha256": "b919757510e6556847afa85027a898a78c5ef9516f1b23817ea41ec2537abec5",
+      "original_bytes": 7110,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__unused_token_hold.json.gz",
+      "original_path": "episodes/cosine__unused_token_hold.json.gz",
+      "original_sha256": "889e5678d4d82f10ea10754635dd4d30f9bd1cf089b429228d06ffbaf394e15f",
+      "archived_sha256": "889e5678d4d82f10ea10754635dd4d30f9bd1cf089b429228d06ffbaf394e15f",
+      "original_bytes": 5236,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__vector_anisotropic.json.gz",
+      "original_path": "episodes/cosine__vector_anisotropic.json.gz",
+      "original_sha256": "42c72adf1f93fb9f9fa267ee38d5f66fc67a2db167ffe33e231d08d8fee46428",
+      "archived_sha256": "42c72adf1f93fb9f9fa267ee38d5f66fc67a2db167ffe33e231d08d8fee46428",
+      "original_bytes": 10641,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__vector_narrow.json.gz",
+      "original_path": "episodes/cosine__vector_narrow.json.gz",
+      "original_sha256": "69c26d817a0d013e7d8e2d1d9c4cab0614673baf069e480be9f376860b4cf7d2",
+      "archived_sha256": "69c26d817a0d013e7d8e2d1d9c4cab0614673baf069e480be9f376860b4cf7d2",
+      "original_bytes": 9008,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__vector_overlap.json.gz",
+      "original_path": "episodes/cosine__vector_overlap.json.gz",
+      "original_sha256": "b03b832fe080217075bfb203658bb663a3f26dfebffb97178ca69638f703a231",
+      "archived_sha256": "b03b832fe080217075bfb203658bb663a3f26dfebffb97178ca69638f703a231",
+      "original_bytes": 6558,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__vector_scale_drift.json.gz",
+      "original_path": "episodes/cosine__vector_scale_drift.json.gz",
+      "original_sha256": "b376d2e8d917d1d278e1c78e05a5b6fd2a101c48858f3869a2e792cc7978a17f",
+      "archived_sha256": "b376d2e8d917d1d278e1c78e05a5b6fd2a101c48858f3869a2e792cc7978a17f",
+      "original_bytes": 10419,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__vector_spiral.json.gz",
+      "original_path": "episodes/cosine__vector_spiral.json.gz",
+      "original_sha256": "528a316f74aa36bf6e29a7acd1a9ac0406f82061c32222b1849eaded0823a666",
+      "archived_sha256": "528a316f74aa36bf6e29a7acd1a9ac0406f82061c32222b1849eaded0823a666",
+      "original_bytes": 6799,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__vector_two_broad.json.gz",
+      "original_path": "episodes/cosine__vector_two_broad.json.gz",
+      "original_sha256": "5f8ed7df513dd4474890f0576de4fcf93c7512739d4d6d50a1ea0225e651ead7",
+      "archived_sha256": "5f8ed7df513dd4474890f0576de4fcf93c7512739d4d6d50a1ea0225e651ead7",
+      "original_bytes": 9859,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__vector_unequal_mass.json.gz",
+      "original_path": "episodes/cosine__vector_unequal_mass.json.gz",
+      "original_sha256": "f4c08a528058151fbf8477686cda7bd903cf02360871bd433f4d9deaec71e42a",
+      "archived_sha256": "f4c08a528058151fbf8477686cda7bd903cf02360871bd433f4d9deaec71e42a",
+      "original_bytes": 11527,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cosine__vector_unequal_width.json.gz",
+      "original_path": "episodes/cosine__vector_unequal_width.json.gz",
+      "original_sha256": "b99c3323097f2d6d19db4cbe71e02e94dccdb132498c16a293f82611bed58184",
+      "archived_sha256": "b99c3323097f2d6d19db4cbe71e02e94dccdb132498c16a293f82611bed58184",
+      "original_bytes": 11132,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__ae_gan_hold.json.gz",
+      "original_path": "episodes/frozen_bias_only__ae_gan_hold.json.gz",
+      "original_sha256": "8ff867be8d8c61ae9ddce05bdd0deb43b6fb9a684ac11267b50839f92902bc84",
+      "archived_sha256": "8ff867be8d8c61ae9ddce05bdd0deb43b6fb9a684ac11267b50839f92902bc84",
+      "original_bytes": 5627,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__cover_leftover.json.gz",
+      "original_path": "episodes/frozen_bias_only__cover_leftover.json.gz",
+      "original_sha256": "f30afb3fe5d96e15dd7cade328ec4407f6572259c48b798697b57552b6fcda54",
+      "archived_sha256": "f30afb3fe5d96e15dd7cade328ec4407f6572259c48b798697b57552b6fcda54",
+      "original_bytes": 9703,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__img_bars4.json.gz",
+      "original_path": "episodes/frozen_bias_only__img_bars4.json.gz",
+      "original_sha256": "fb5c65c0efb6ebd52cf0d28cd0c9337d4b9a0754320eb905ad8d7d7953e225f1",
+      "archived_sha256": "fb5c65c0efb6ebd52cf0d28cd0c9337d4b9a0754320eb905ad8d7d7953e225f1",
+      "original_bytes": 9975,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__img_bars8.json.gz",
+      "original_path": "episodes/frozen_bias_only__img_bars8.json.gz",
+      "original_sha256": "8531fbed1af250e8b8800d2e3ec018b63046f1cba562a634ee907dab654823bf",
+      "archived_sha256": "8531fbed1af250e8b8800d2e3ec018b63046f1cba562a634ee907dab654823bf",
+      "original_bytes": 10282,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__img_blobs4.json.gz",
+      "original_path": "episodes/frozen_bias_only__img_blobs4.json.gz",
+      "original_sha256": "d718e7c9c43f90f37b1d3bfc34414cddd8dccc685dc4c1ddad3d671d05488559",
+      "archived_sha256": "d718e7c9c43f90f37b1d3bfc34414cddd8dccc685dc4c1ddad3d671d05488559",
+      "original_bytes": 10194,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__img_intensity2.json.gz",
+      "original_path": "episodes/frozen_bias_only__img_intensity2.json.gz",
+      "original_sha256": "e3c2c247bd6c14113aa414a57b69cd8b1437558b366fe4900e089f9f055fb3ac",
+      "archived_sha256": "e3c2c247bd6c14113aa414a57b69cd8b1437558b366fe4900e089f9f055fb3ac",
+      "original_bytes": 9633,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__img_mean_discriminator.json.gz",
+      "original_path": "episodes/frozen_bias_only__img_mean_discriminator.json.gz",
+      "original_sha256": "1918ce84178f81f76a49ca44ee1a0b717511518745bff121757a62643a1abfda",
+      "archived_sha256": "1918ce84178f81f76a49ca44ee1a0b717511518745bff121757a62643a1abfda",
+      "original_bytes": 9293,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__img_stripes2.json.gz",
+      "original_path": "episodes/frozen_bias_only__img_stripes2.json.gz",
+      "original_sha256": "632c52e1932960e2f8588dd5f7e149b8a1241b613f53e517d9b1f716da3b25a8",
+      "archived_sha256": "632c52e1932960e2f8588dd5f7e149b8a1241b613f53e517d9b1f716da3b25a8",
+      "original_bytes": 9856,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__img_tiny_generator.json.gz",
+      "original_path": "episodes/frozen_bias_only__img_tiny_generator.json.gz",
+      "original_sha256": "93312334e044bb8f412c2a6448d30eb3a8fa4863063cea859a4d2894eb1be20f",
+      "archived_sha256": "93312334e044bb8f412c2a6448d30eb3a8fa4863063cea859a4d2894eb1be20f",
+      "original_bytes": 9442,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__img_uniform_generator.json.gz",
+      "original_path": "episodes/frozen_bias_only__img_uniform_generator.json.gz",
+      "original_sha256": "8986a245a31a0ea2b0cc132e9d17ee8459f508f4f876d98a3bde70cb8bf89985",
+      "archived_sha256": "8986a245a31a0ea2b0cc132e9d17ee8459f508f4f876d98a3bde70cb8bf89985",
+      "original_bytes": 9698,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__mid_scale_identity.json.gz",
+      "original_path": "episodes/frozen_bias_only__mid_scale_identity.json.gz",
+      "original_sha256": "f4197ecb42f94b414794a4c3c2248ba243ad81ba4d33eb50701f1b44032ffecd",
+      "archived_sha256": "f4197ecb42f94b414794a4c3c2248ba243ad81ba4d33eb50701f1b44032ffecd",
+      "original_bytes": 10380,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__mode_hold.json.gz",
+      "original_path": "episodes/frozen_bias_only__mode_hold.json.gz",
+      "original_sha256": "812a8089ab5c8ddfdf25a4a3230a7dfd49d78a17fdbbeb0293bee1f5d26be795",
+      "archived_sha256": "812a8089ab5c8ddfdf25a4a3230a7dfd49d78a17fdbbeb0293bee1f5d26be795",
+      "original_bytes": 25119,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__residual_student.json.gz",
+      "original_path": "episodes/frozen_bias_only__residual_student.json.gz",
+      "original_sha256": "5feebe4867f87c9c113bb3d00cefb19880d8318b79b18b8bbdd10daac206a032",
+      "archived_sha256": "5feebe4867f87c9c113bb3d00cefb19880d8318b79b18b8bbdd10daac206a032",
+      "original_bytes": 6161,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__stress_fast_critic.json.gz",
+      "original_path": "episodes/frozen_bias_only__stress_fast_critic.json.gz",
+      "original_sha256": "dcc2f3260c6e243fa82c9862e38a785e612d076029500ff6bf2be0a8f7c1d82e",
+      "archived_sha256": "dcc2f3260c6e243fa82c9862e38a785e612d076029500ff6bf2be0a8f7c1d82e",
+      "original_bytes": 16223,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__stress_large_critic.json.gz",
+      "original_path": "episodes/frozen_bias_only__stress_large_critic.json.gz",
+      "original_sha256": "91bb06cf7aa7d76bd0577cfca775753a5d43e7ac0459d10ec920550f6e2dd5b3",
+      "archived_sha256": "91bb06cf7aa7d76bd0577cfca775753a5d43e7ac0459d10ec920550f6e2dd5b3",
+      "original_bytes": 16102,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__stress_long_horizon.json.gz",
+      "original_path": "episodes/frozen_bias_only__stress_long_horizon.json.gz",
+      "original_sha256": "876b2aebb30ada9cbc8bcebb0da95c29db27d5536f669b88a4539e1e3c40c9f8",
+      "archived_sha256": "876b2aebb30ada9cbc8bcebb0da95c29db27d5536f669b88a4539e1e3c40c9f8",
+      "original_bytes": 17496,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__stress_overlapping_data.json.gz",
+      "original_path": "episodes/frozen_bias_only__stress_overlapping_data.json.gz",
+      "original_sha256": "dcce630e5dc3052ffb17dba8ecbbe13ef6b4b779044545de25ac0204c18e7f26",
+      "archived_sha256": "dcce630e5dc3052ffb17dba8ecbbe13ef6b4b779044545de25ac0204c18e7f26",
+      "original_bytes": 8723,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__stress_r1_r2.json.gz",
+      "original_path": "episodes/frozen_bias_only__stress_r1_r2.json.gz",
+      "original_sha256": "18335185d000afde46dfb4855b6ddd3d198bb18aff09686c112f462db5aaa300",
+      "archived_sha256": "18335185d000afde46dfb4855b6ddd3d198bb18aff09686c112f462db5aaa300",
+      "original_bytes": 16429,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__stress_slow_critic.json.gz",
+      "original_path": "episodes/frozen_bias_only__stress_slow_critic.json.gz",
+      "original_sha256": "75cc47b26a4be71ec49bf7177b2e2a5d60451318a48f7c0ce2381ce2ac33fd38",
+      "archived_sha256": "75cc47b26a4be71ec49bf7177b2e2a5d60451318a48f7c0ce2381ce2ac33fd38",
+      "original_bytes": 16576,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__stress_small_batch.json.gz",
+      "original_path": "episodes/frozen_bias_only__stress_small_batch.json.gz",
+      "original_sha256": "783ffd5fb01cf3f2403eb44d649553e5b8836bb591e5154a1a38fa9a6107a259",
+      "archived_sha256": "783ffd5fb01cf3f2403eb44d649553e5b8836bb591e5154a1a38fa9a6107a259",
+      "original_bytes": 16414,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__stress_weak_critic.json.gz",
+      "original_path": "episodes/frozen_bias_only__stress_weak_critic.json.gz",
+      "original_sha256": "26704b84443218561cdbac9ffd04f007dc4c4276adef6e39d82f47a9f0e4e2d7",
+      "archived_sha256": "26704b84443218561cdbac9ffd04f007dc4c4276adef6e39d82f47a9f0e4e2d7",
+      "original_bytes": 16751,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__trajectory.json.gz",
+      "original_path": "episodes/frozen_bias_only__trajectory.json.gz",
+      "original_sha256": "51cfc5a5e03a6745427a934e41a363acc466b231127c15ecc9497cc582fd1690",
+      "archived_sha256": "51cfc5a5e03a6745427a934e41a363acc466b231127c15ecc9497cc582fd1690",
+      "original_bytes": 5685,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__two_pole.json.gz",
+      "original_path": "episodes/frozen_bias_only__two_pole.json.gz",
+      "original_sha256": "9723205bccc8e03c9b5097604f88eaac42403c8178da2b58ac20a12c3b403ed4",
+      "archived_sha256": "9723205bccc8e03c9b5097604f88eaac42403c8178da2b58ac20a12c3b403ed4",
+      "original_bytes": 4988,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__unipolar.json.gz",
+      "original_path": "episodes/frozen_bias_only__unipolar.json.gz",
+      "original_sha256": "b6c2eeb1f0857947d0cd87ab8c2b0feea59454a075c75b07d1dfaa17d0208430",
+      "archived_sha256": "b6c2eeb1f0857947d0cd87ab8c2b0feea59454a075c75b07d1dfaa17d0208430",
+      "original_bytes": 8385,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__unused_token_hold.json.gz",
+      "original_path": "episodes/frozen_bias_only__unused_token_hold.json.gz",
+      "original_sha256": "76434537c91e0d89a329f5082b9df5e4a3046ed82329cf3e1b4f37223e9524ef",
+      "archived_sha256": "76434537c91e0d89a329f5082b9df5e4a3046ed82329cf3e1b4f37223e9524ef",
+      "original_bytes": 6259,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__vector_anisotropic.json.gz",
+      "original_path": "episodes/frozen_bias_only__vector_anisotropic.json.gz",
+      "original_sha256": "b68496967c6fc7adf91d240f1556f6bffc20ba48d600e7643cd43aadab877e91",
+      "archived_sha256": "b68496967c6fc7adf91d240f1556f6bffc20ba48d600e7643cd43aadab877e91",
+      "original_bytes": 12611,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__vector_narrow.json.gz",
+      "original_path": "episodes/frozen_bias_only__vector_narrow.json.gz",
+      "original_sha256": "f24ed84f3d90b439e661b3acc83d098ac20a0c0f1080c6a6757fae8467e4bffb",
+      "archived_sha256": "f24ed84f3d90b439e661b3acc83d098ac20a0c0f1080c6a6757fae8467e4bffb",
+      "original_bytes": 13030,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__vector_overlap.json.gz",
+      "original_path": "episodes/frozen_bias_only__vector_overlap.json.gz",
+      "original_sha256": "e2e5bf6654f4bb4dd5d7c3c2d977b0fd733188fba32a5d75938817a2680f0943",
+      "archived_sha256": "e2e5bf6654f4bb4dd5d7c3c2d977b0fd733188fba32a5d75938817a2680f0943",
+      "original_bytes": 8503,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__vector_scale_drift.json.gz",
+      "original_path": "episodes/frozen_bias_only__vector_scale_drift.json.gz",
+      "original_sha256": "1239d4cd4030f937616987412db9d1755c1ce464af14358ee1a31e1d7f1eb94a",
+      "archived_sha256": "1239d4cd4030f937616987412db9d1755c1ce464af14358ee1a31e1d7f1eb94a",
+      "original_bytes": 12633,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__vector_spiral.json.gz",
+      "original_path": "episodes/frozen_bias_only__vector_spiral.json.gz",
+      "original_sha256": "b4c0d6a93f112c7caf9dc16df9f102a5095c02308d7d7c43c9b611d2f84236ea",
+      "archived_sha256": "b4c0d6a93f112c7caf9dc16df9f102a5095c02308d7d7c43c9b611d2f84236ea",
+      "original_bytes": 9004,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__vector_two_broad.json.gz",
+      "original_path": "episodes/frozen_bias_only__vector_two_broad.json.gz",
+      "original_sha256": "8f7da5145c4570d0781817a0acb4c786a27ca5e6c5ea23451f9cafc0b138dcfc",
+      "archived_sha256": "8f7da5145c4570d0781817a0acb4c786a27ca5e6c5ea23451f9cafc0b138dcfc",
+      "original_bytes": 11816,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__vector_unequal_mass.json.gz",
+      "original_path": "episodes/frozen_bias_only__vector_unequal_mass.json.gz",
+      "original_sha256": "8c16d95298bbbf0e0b3b898364021a20cbd3113be0bebe411728a45857c91b3d",
+      "archived_sha256": "8c16d95298bbbf0e0b3b898364021a20cbd3113be0bebe411728a45857c91b3d",
+      "original_bytes": 13232,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/frozen_bias_only__vector_unequal_width.json.gz",
+      "original_path": "episodes/frozen_bias_only__vector_unequal_width.json.gz",
+      "original_sha256": "258372acf0ead236b3d9f7222beff179b5674f2e7cc8d7e4ec5c6e5a5ce5f056",
+      "archived_sha256": "258372acf0ead236b3d9f7222beff179b5674f2e7cc8d7e4ec5c6e5a5ce5f056",
+      "original_bytes": 12923,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__ae_gan_hold.json.gz",
+      "original_path": "episodes/previous_feedback__ae_gan_hold.json.gz",
+      "original_sha256": "f942a9eefe8d93f87cec5b3c0024bc5e63ed2a978c5a86db13ebbb6867564ab2",
+      "archived_sha256": "f942a9eefe8d93f87cec5b3c0024bc5e63ed2a978c5a86db13ebbb6867564ab2",
+      "original_bytes": 9532,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__cover_leftover.json.gz",
+      "original_path": "episodes/previous_feedback__cover_leftover.json.gz",
+      "original_sha256": "9c11167c7dad8696b94ef2e971808b2899ec1daa16f445aa8a2a34a0f2b23e93",
+      "archived_sha256": "9c11167c7dad8696b94ef2e971808b2899ec1daa16f445aa8a2a34a0f2b23e93",
+      "original_bytes": 20154,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__mid_scale_identity.json.gz",
+      "original_path": "episodes/previous_feedback__mid_scale_identity.json.gz",
+      "original_sha256": "550df7384d51ec39896d71f9ff0e19ddd3033f58437c354decbb49d98595da3c",
+      "archived_sha256": "550df7384d51ec39896d71f9ff0e19ddd3033f58437c354decbb49d98595da3c",
+      "original_bytes": 21702,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__mode_hold.json.gz",
+      "original_path": "episodes/previous_feedback__mode_hold.json.gz",
+      "original_sha256": "b996ae2b53b8380649a51d7bee13db777734ab39c3291ce70618c4429449e3c4",
+      "archived_sha256": "b996ae2b53b8380649a51d7bee13db777734ab39c3291ce70618c4429449e3c4",
+      "original_bytes": 42155,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__residual_student.json.gz",
+      "original_path": "episodes/previous_feedback__residual_student.json.gz",
+      "original_sha256": "f654f5d3f6a4973dea370cbcb4ee0b58781b1ea9a02e60e4ae1223e600b14621",
+      "archived_sha256": "f654f5d3f6a4973dea370cbcb4ee0b58781b1ea9a02e60e4ae1223e600b14621",
+      "original_bytes": 11497,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__stress_fast_critic.json.gz",
+      "original_path": "episodes/previous_feedback__stress_fast_critic.json.gz",
+      "original_sha256": "6698c0e93add74dd3c9500b6841183c0daa6fb35af22e97b25afa76dab410665",
+      "archived_sha256": "6698c0e93add74dd3c9500b6841183c0daa6fb35af22e97b25afa76dab410665",
+      "original_bytes": 36242,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__stress_large_critic.json.gz",
+      "original_path": "episodes/previous_feedback__stress_large_critic.json.gz",
+      "original_sha256": "2fbf4a24006f00b4105fc1e9c345123a4c48418322862105baec17338e83e16e",
+      "archived_sha256": "2fbf4a24006f00b4105fc1e9c345123a4c48418322862105baec17338e83e16e",
+      "original_bytes": 35681,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__stress_long_horizon.json.gz",
+      "original_path": "episodes/previous_feedback__stress_long_horizon.json.gz",
+      "original_sha256": "9a8001ba31d3cdfa9209c321281b2780dc3dc3233aa5647cb67446c2e01dbde9",
+      "archived_sha256": "9a8001ba31d3cdfa9209c321281b2780dc3dc3233aa5647cb67446c2e01dbde9",
+      "original_bytes": 57420,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__stress_overlapping_data.json.gz",
+      "original_path": "episodes/previous_feedback__stress_overlapping_data.json.gz",
+      "original_sha256": "755b49b3f9960bb06c3b3f23207d7be1e4936f6170163c39fe855a6471b1eaee",
+      "archived_sha256": "755b49b3f9960bb06c3b3f23207d7be1e4936f6170163c39fe855a6471b1eaee",
+      "original_bytes": 28560,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__stress_r1_r2.json.gz",
+      "original_path": "episodes/previous_feedback__stress_r1_r2.json.gz",
+      "original_sha256": "a5e496660abf82ada3deda8e0331d6cd3be68fec65fec1699a1c33a6c902041e",
+      "archived_sha256": "a5e496660abf82ada3deda8e0331d6cd3be68fec65fec1699a1c33a6c902041e",
+      "original_bytes": 36011,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__stress_slow_critic.json.gz",
+      "original_path": "episodes/previous_feedback__stress_slow_critic.json.gz",
+      "original_sha256": "2115a505b43ed2822e92976d9f0791e32d895ea9f6188027aee9403e418468ed",
+      "archived_sha256": "2115a505b43ed2822e92976d9f0791e32d895ea9f6188027aee9403e418468ed",
+      "original_bytes": 36335,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__stress_small_batch.json.gz",
+      "original_path": "episodes/previous_feedback__stress_small_batch.json.gz",
+      "original_sha256": "21c1c12c54b219c36e94ee52c7f73edec85236ca789a9cb3a6ea3516c0e07e08",
+      "archived_sha256": "21c1c12c54b219c36e94ee52c7f73edec85236ca789a9cb3a6ea3516c0e07e08",
+      "original_bytes": 36484,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__stress_weak_critic.json.gz",
+      "original_path": "episodes/previous_feedback__stress_weak_critic.json.gz",
+      "original_sha256": "3e3062c83cd4fbd7844d6ffb482aa1a846a6de2ec03a2dfa65ecbdf58c66363a",
+      "archived_sha256": "3e3062c83cd4fbd7844d6ffb482aa1a846a6de2ec03a2dfa65ecbdf58c66363a",
+      "original_bytes": 37059,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__trajectory.json.gz",
+      "original_path": "episodes/previous_feedback__trajectory.json.gz",
+      "original_sha256": "f129d847cf467c5d885cb33ab85b786b50d3378ab2ef4e5d8313cea16daa34ed",
+      "archived_sha256": "f129d847cf467c5d885cb33ab85b786b50d3378ab2ef4e5d8313cea16daa34ed",
+      "original_bytes": 11512,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__two_pole.json.gz",
+      "original_path": "episodes/previous_feedback__two_pole.json.gz",
+      "original_sha256": "8e82e66d361671cca7e0ce0a15329841e5d40c39740697c906234451585e0dc0",
+      "archived_sha256": "8e82e66d361671cca7e0ce0a15329841e5d40c39740697c906234451585e0dc0",
+      "original_bytes": 6053,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__unipolar.json.gz",
+      "original_path": "episodes/previous_feedback__unipolar.json.gz",
+      "original_sha256": "031a300febd67dc17c38404b69c1cb171910f8b332fe7e090dab687f4dac0cad",
+      "archived_sha256": "031a300febd67dc17c38404b69c1cb171910f8b332fe7e090dab687f4dac0cad",
+      "original_bytes": 14625,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__unused_token_hold.json.gz",
+      "original_path": "episodes/previous_feedback__unused_token_hold.json.gz",
+      "original_sha256": "f814d881a57859ef278fa19300fea4508aff759669603011d65aaa2e55bca209",
+      "archived_sha256": "f814d881a57859ef278fa19300fea4508aff759669603011d65aaa2e55bca209",
+      "original_bytes": 8843,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__vector_anisotropic.json.gz",
+      "original_path": "episodes/previous_feedback__vector_anisotropic.json.gz",
+      "original_sha256": "13a6fb615ec5ed1f2062698a223a32cc9e5ea027be4c68290f5a8ca49ad03226",
+      "archived_sha256": "13a6fb615ec5ed1f2062698a223a32cc9e5ea027be4c68290f5a8ca49ad03226",
+      "original_bytes": 32242,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__vector_narrow.json.gz",
+      "original_path": "episodes/previous_feedback__vector_narrow.json.gz",
+      "original_sha256": "be3a78c18e66d8615aedc2f8ec46ec398afc331d61eee9b04173f3db481e414c",
+      "archived_sha256": "be3a78c18e66d8615aedc2f8ec46ec398afc331d61eee9b04173f3db481e414c",
+      "original_bytes": 39970,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__vector_overlap.json.gz",
+      "original_path": "episodes/previous_feedback__vector_overlap.json.gz",
+      "original_sha256": "2bfcebe9d25eec5a3e4e918f14d2fca83ea4a0a767d3951d4830bfa75d2afe0e",
+      "archived_sha256": "2bfcebe9d25eec5a3e4e918f14d2fca83ea4a0a767d3951d4830bfa75d2afe0e",
+      "original_bytes": 27651,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__vector_scale_drift.json.gz",
+      "original_path": "episodes/previous_feedback__vector_scale_drift.json.gz",
+      "original_sha256": "4926045b33467f67c26a6a61a148e409a48946031bc22c88cbfe1650ae9d1780",
+      "archived_sha256": "4926045b33467f67c26a6a61a148e409a48946031bc22c88cbfe1650ae9d1780",
+      "original_bytes": 35618,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__vector_spiral.json.gz",
+      "original_path": "episodes/previous_feedback__vector_spiral.json.gz",
+      "original_sha256": "55c67aa95744f0eed0048e0e4a908b301c52cef31772de4ba72b16ec4089841c",
+      "archived_sha256": "55c67aa95744f0eed0048e0e4a908b301c52cef31772de4ba72b16ec4089841c",
+      "original_bytes": 33104,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__vector_two_broad.json.gz",
+      "original_path": "episodes/previous_feedback__vector_two_broad.json.gz",
+      "original_sha256": "72acfb43d60a9941b1f534e33e33f62b0c900abfbd1311e375a22529dd21c7f1",
+      "archived_sha256": "72acfb43d60a9941b1f534e33e33f62b0c900abfbd1311e375a22529dd21c7f1",
+      "original_bytes": 30279,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__vector_unequal_mass.json.gz",
+      "original_path": "episodes/previous_feedback__vector_unequal_mass.json.gz",
+      "original_sha256": "6d33d4f7e9ee0c618c1cd648ff1db659789d0fa0caa346bbba5269ff17e62332",
+      "archived_sha256": "6d33d4f7e9ee0c618c1cd648ff1db659789d0fa0caa346bbba5269ff17e62332",
+      "original_bytes": 32984,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/previous_feedback__vector_unequal_width.json.gz",
+      "original_path": "episodes/previous_feedback__vector_unequal_width.json.gz",
+      "original_sha256": "01949460c190dcbd76093d4ac5e6f0de53765fef23e36483844181fdd3e12114",
+      "archived_sha256": "01949460c190dcbd76093d4ac5e6f0de53765fef23e36483844181fdd3e12114",
+      "original_bytes": 32843,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/reserved_bias_only__img_residual_bars4.json.gz",
+      "original_path": "episodes/reserved_bias_only__img_residual_bars4.json.gz",
+      "original_sha256": "9f7c004a3a455adf334cb7ac50000454d611ead9ab6bff9caf14f81efce90495",
+      "archived_sha256": "9f7c004a3a455adf334cb7ac50000454d611ead9ab6bff9caf14f81efce90495",
+      "original_bytes": 9892,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/reserved_bias_only__reserved_alternating_critic_updates.json.gz",
+      "original_path": "episodes/reserved_bias_only__reserved_alternating_critic_updates.json.gz",
+      "original_sha256": "a11225ecc88c487b5f4e801f20e00e5063cdc7d97487f824d450190736f58711",
+      "archived_sha256": "a11225ecc88c487b5f4e801f20e00e5063cdc7d97487f824d450190736f58711",
+      "original_bytes": 16700,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/reserved_bias_only__reserved_annulus.json.gz",
+      "original_path": "episodes/reserved_bias_only__reserved_annulus.json.gz",
+      "original_sha256": "c234de4e61ab0889a65edf1975e4c164afb3f3ceb44b9429774ded09aaaa5346",
+      "archived_sha256": "c234de4e61ab0889a65edf1975e4c164afb3f3ceb44b9429774ded09aaaa5346",
+      "original_bytes": 8984,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/reserved_cosine__img_residual_bars4.json.gz",
+      "original_path": "episodes/reserved_cosine__img_residual_bars4.json.gz",
+      "original_sha256": "6f9f56394a6adad404a0d1be640f709b0e00675ee134d601a5d33bdc1720115b",
+      "archived_sha256": "6f9f56394a6adad404a0d1be640f709b0e00675ee134d601a5d33bdc1720115b",
+      "original_bytes": 8000,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/reserved_cosine__reserved_alternating_critic_updates.json.gz",
+      "original_path": "episodes/reserved_cosine__reserved_alternating_critic_updates.json.gz",
+      "original_sha256": "4c3772dba8970e5ae6684aadfcdb50d1b7a09a4a239de428052452d5b4d92257",
+      "archived_sha256": "4c3772dba8970e5ae6684aadfcdb50d1b7a09a4a239de428052452d5b4d92257",
+      "original_bytes": 14857,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/reserved_cosine__reserved_annulus.json.gz",
+      "original_path": "episodes/reserved_cosine__reserved_annulus.json.gz",
+      "original_sha256": "15478f31f5a6a6266d7625a589b5d8bc1ddbeb64b7a9dc985bd95c8e781ccba6",
+      "archived_sha256": "15478f31f5a6a6266d7625a589b5d8bc1ddbeb64b7a9dc985bd95c8e781ccba6",
+      "original_bytes": 6745,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/reserved_feedback__img_residual_bars4.json.gz",
+      "original_path": "episodes/reserved_feedback__img_residual_bars4.json.gz",
+      "original_sha256": "029ffd3e559b61e1e08770d625a31850a58e4a6dc97933bf1f4dbbb3ce4b23af",
+      "archived_sha256": "029ffd3e559b61e1e08770d625a31850a58e4a6dc97933bf1f4dbbb3ce4b23af",
+      "original_bytes": 19605,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/reserved_feedback__reserved_alternating_critic_updates.json.gz",
+      "original_path": "episodes/reserved_feedback__reserved_alternating_critic_updates.json.gz",
+      "original_sha256": "7bde2c5474e220eb9c582b345888436b55d2d7a261876f1cf1d905423c33f2de",
+      "archived_sha256": "7bde2c5474e220eb9c582b345888436b55d2d7a261876f1cf1d905423c33f2de",
+      "original_bytes": 47268,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/reserved_feedback__reserved_annulus.json.gz",
+      "original_path": "episodes/reserved_feedback__reserved_annulus.json.gz",
+      "original_sha256": "0290d3fd491770f509348e86ddda82eebb347e98db68a5468560c37cb60fc55b",
+      "archived_sha256": "0290d3fd491770f509348e86ddda82eebb347e98db68a5468560c37cb60fc55b",
+      "original_bytes": 35901,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__ae_gan_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p02__ae_gan_hold.json.gz",
+      "original_sha256": "56e65f33938e9a2a79f236a5e99e371be03f6b5e13159ed956264d03f8263142",
+      "archived_sha256": "56e65f33938e9a2a79f236a5e99e371be03f6b5e13159ed956264d03f8263142",
+      "original_bytes": 9555,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__cover_leftover.json.gz",
+      "original_path": "episodes/transfer_g00_p02__cover_leftover.json.gz",
+      "original_sha256": "ccc361c0239dd161c9e7f10ea38b59c90f1a326049b0399d79bd7a69f2e614a9",
+      "archived_sha256": "ccc361c0239dd161c9e7f10ea38b59c90f1a326049b0399d79bd7a69f2e614a9",
+      "original_bytes": 20127,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__img_bars4.json.gz",
+      "original_path": "episodes/transfer_g00_p02__img_bars4.json.gz",
+      "original_sha256": "b79febd0b65307364b1580d7cc24b0849de1530a1e50f6ba956748f8de145c7b",
+      "archived_sha256": "b79febd0b65307364b1580d7cc24b0849de1530a1e50f6ba956748f8de145c7b",
+      "original_bytes": 19156,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__img_bars8.json.gz",
+      "original_path": "episodes/transfer_g00_p02__img_bars8.json.gz",
+      "original_sha256": "7563f0d29f1b663835d7e93441b909ead095ad071ab0c6daeb2374841bf45850",
+      "archived_sha256": "7563f0d29f1b663835d7e93441b909ead095ad071ab0c6daeb2374841bf45850",
+      "original_bytes": 18964,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__img_blobs4.json.gz",
+      "original_path": "episodes/transfer_g00_p02__img_blobs4.json.gz",
+      "original_sha256": "c2111d9689fdcebcf77d58247b50501b3922575ac18a0fe1cc4a6180e7ab8b87",
+      "archived_sha256": "c2111d9689fdcebcf77d58247b50501b3922575ac18a0fe1cc4a6180e7ab8b87",
+      "original_bytes": 19358,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__img_intensity2.json.gz",
+      "original_path": "episodes/transfer_g00_p02__img_intensity2.json.gz",
+      "original_sha256": "8717696c81b34163c20e73894aebc39c3a2e5ea036d4d94ae19b4ca085ea8d9c",
+      "archived_sha256": "8717696c81b34163c20e73894aebc39c3a2e5ea036d4d94ae19b4ca085ea8d9c",
+      "original_bytes": 19184,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__img_mean_discriminator.json.gz",
+      "original_path": "episodes/transfer_g00_p02__img_mean_discriminator.json.gz",
+      "original_sha256": "fb8547383f9ee1287c3e6aad2d949c9494b7da5fb4b2fc09132dc763059af188",
+      "archived_sha256": "fb8547383f9ee1287c3e6aad2d949c9494b7da5fb4b2fc09132dc763059af188",
+      "original_bytes": 16421,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__img_stripes2.json.gz",
+      "original_path": "episodes/transfer_g00_p02__img_stripes2.json.gz",
+      "original_sha256": "1acfeedc63b18b4870c333fb13884070d855602ae60eef6d320ba8cf99477194",
+      "archived_sha256": "1acfeedc63b18b4870c333fb13884070d855602ae60eef6d320ba8cf99477194",
+      "original_bytes": 18688,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__img_tiny_generator.json.gz",
+      "original_path": "episodes/transfer_g00_p02__img_tiny_generator.json.gz",
+      "original_sha256": "7eddcf0a99e0f5d44d77e4d0be4b52fa15f54e7889cfffb19e6794fa77a38820",
+      "archived_sha256": "7eddcf0a99e0f5d44d77e4d0be4b52fa15f54e7889cfffb19e6794fa77a38820",
+      "original_bytes": 16164,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__img_uniform_generator.json.gz",
+      "original_path": "episodes/transfer_g00_p02__img_uniform_generator.json.gz",
+      "original_sha256": "5513bbf3708c0ee357103a2b59a9e6841c0622f829f4a3a4b22d8565524dd8b9",
+      "archived_sha256": "5513bbf3708c0ee357103a2b59a9e6841c0622f829f4a3a4b22d8565524dd8b9",
+      "original_bytes": 16802,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__mid_scale_identity.json.gz",
+      "original_path": "episodes/transfer_g00_p02__mid_scale_identity.json.gz",
+      "original_sha256": "b0e6ecafc5b70004c85a53ed06af3678d029a428867cf6d644f0ca4e5099b7ee",
+      "archived_sha256": "b0e6ecafc5b70004c85a53ed06af3678d029a428867cf6d644f0ca4e5099b7ee",
+      "original_bytes": 21870,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__mode_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p02__mode_hold.json.gz",
+      "original_sha256": "f8575b1a47568c1942308ad9c4bc2ae9b10d9d1eb3df88bc271dd1aed39ae8c4",
+      "archived_sha256": "f8575b1a47568c1942308ad9c4bc2ae9b10d9d1eb3df88bc271dd1aed39ae8c4",
+      "original_bytes": 42099,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__residual_student.json.gz",
+      "original_path": "episodes/transfer_g00_p02__residual_student.json.gz",
+      "original_sha256": "513891fcba40b3fc9c574aa8a539f7d21c15125988bb860bd2f884db296c7c77",
+      "archived_sha256": "513891fcba40b3fc9c574aa8a539f7d21c15125988bb860bd2f884db296c7c77",
+      "original_bytes": 11760,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__stress_fast_critic.json.gz",
+      "original_path": "episodes/transfer_g00_p02__stress_fast_critic.json.gz",
+      "original_sha256": "e293e10f9434245bcf52c974310915ee46552d43ad38b20f1c6ef03e59a49e0c",
+      "archived_sha256": "e293e10f9434245bcf52c974310915ee46552d43ad38b20f1c6ef03e59a49e0c",
+      "original_bytes": 36232,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__stress_large_critic.json.gz",
+      "original_path": "episodes/transfer_g00_p02__stress_large_critic.json.gz",
+      "original_sha256": "bac4a723d9d213320e5d819f62e0f52e5922a06a8bc54f4de99450452513178f",
+      "archived_sha256": "bac4a723d9d213320e5d819f62e0f52e5922a06a8bc54f4de99450452513178f",
+      "original_bytes": 35617,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__stress_long_horizon.json.gz",
+      "original_path": "episodes/transfer_g00_p02__stress_long_horizon.json.gz",
+      "original_sha256": "b16c9041afd79f9d6a98d41fdc36ca33108f6f2e10e8b5268541d0470930233a",
+      "archived_sha256": "b16c9041afd79f9d6a98d41fdc36ca33108f6f2e10e8b5268541d0470930233a",
+      "original_bytes": 57789,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__stress_overlapping_data.json.gz",
+      "original_path": "episodes/transfer_g00_p02__stress_overlapping_data.json.gz",
+      "original_sha256": "0579d495a4a3286b060078776ba5b69c6b8f0f25bed7c8bf44f8c0668960cabd",
+      "archived_sha256": "0579d495a4a3286b060078776ba5b69c6b8f0f25bed7c8bf44f8c0668960cabd",
+      "original_bytes": 28666,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__stress_r1_r2.json.gz",
+      "original_path": "episodes/transfer_g00_p02__stress_r1_r2.json.gz",
+      "original_sha256": "4f4d13ad7f92e5185df0a1da6be171a28141944d921fc01411e7f4e9763fd509",
+      "archived_sha256": "4f4d13ad7f92e5185df0a1da6be171a28141944d921fc01411e7f4e9763fd509",
+      "original_bytes": 36012,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__stress_slow_critic.json.gz",
+      "original_path": "episodes/transfer_g00_p02__stress_slow_critic.json.gz",
+      "original_sha256": "349f82373d687b32a87740b7a1036b0eaf96b026f9a3c5cb3e2726f5c2fdaa0f",
+      "archived_sha256": "349f82373d687b32a87740b7a1036b0eaf96b026f9a3c5cb3e2726f5c2fdaa0f",
+      "original_bytes": 36388,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__stress_small_batch.json.gz",
+      "original_path": "episodes/transfer_g00_p02__stress_small_batch.json.gz",
+      "original_sha256": "66ed7d3fe2e097213a524fcf8987b32b47643bfc40f68a8071e9b887dd3a9730",
+      "archived_sha256": "66ed7d3fe2e097213a524fcf8987b32b47643bfc40f68a8071e9b887dd3a9730",
+      "original_bytes": 36201,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__stress_weak_critic.json.gz",
+      "original_path": "episodes/transfer_g00_p02__stress_weak_critic.json.gz",
+      "original_sha256": "9ac795f5c8e2d9b97b56df20e7b206c6589ceccd1c58befbe4a28b34ccc18c98",
+      "archived_sha256": "9ac795f5c8e2d9b97b56df20e7b206c6589ceccd1c58befbe4a28b34ccc18c98",
+      "original_bytes": 37225,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__trajectory.json.gz",
+      "original_path": "episodes/transfer_g00_p02__trajectory.json.gz",
+      "original_sha256": "5a86880b4337f61111ee36f6621f3b04b93c28178e335170857ce90d2dd5a5d4",
+      "archived_sha256": "5a86880b4337f61111ee36f6621f3b04b93c28178e335170857ce90d2dd5a5d4",
+      "original_bytes": 11332,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__two_pole.json.gz",
+      "original_path": "episodes/transfer_g00_p02__two_pole.json.gz",
+      "original_sha256": "e58855cc98b816568628a5164d9fc86e43543f749cea97360c5f9ef20f70d0b3",
+      "archived_sha256": "e58855cc98b816568628a5164d9fc86e43543f749cea97360c5f9ef20f70d0b3",
+      "original_bytes": 6041,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__unipolar.json.gz",
+      "original_path": "episodes/transfer_g00_p02__unipolar.json.gz",
+      "original_sha256": "239d4c1d26a900325df95d9669b1586ab65c90ca38194d880183caa0ce933fa5",
+      "archived_sha256": "239d4c1d26a900325df95d9669b1586ab65c90ca38194d880183caa0ce933fa5",
+      "original_bytes": 14606,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__unused_token_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p02__unused_token_hold.json.gz",
+      "original_sha256": "9c13926c53fbecdd00ac18204d77b390616be88dacd6a871fe0a7696a77d9e54",
+      "archived_sha256": "9c13926c53fbecdd00ac18204d77b390616be88dacd6a871fe0a7696a77d9e54",
+      "original_bytes": 8836,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__vector_anisotropic.json.gz",
+      "original_path": "episodes/transfer_g00_p02__vector_anisotropic.json.gz",
+      "original_sha256": "30f60008778f6dcc02739b64570ef37dd6f044c994b42bda9bbfe71fa19390b1",
+      "archived_sha256": "30f60008778f6dcc02739b64570ef37dd6f044c994b42bda9bbfe71fa19390b1",
+      "original_bytes": 32494,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__vector_narrow.json.gz",
+      "original_path": "episodes/transfer_g00_p02__vector_narrow.json.gz",
+      "original_sha256": "0f9e5e151c2a1c962479ba9cd7be2d3c332b83567eef621be8f8a978c6ef03b4",
+      "archived_sha256": "0f9e5e151c2a1c962479ba9cd7be2d3c332b83567eef621be8f8a978c6ef03b4",
+      "original_bytes": 40982,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__vector_overlap.json.gz",
+      "original_path": "episodes/transfer_g00_p02__vector_overlap.json.gz",
+      "original_sha256": "046c62b6de625db17a03fe49550cf10f0f902170dff90d879fb4f2608d79331b",
+      "archived_sha256": "046c62b6de625db17a03fe49550cf10f0f902170dff90d879fb4f2608d79331b",
+      "original_bytes": 27650,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__vector_scale_drift.json.gz",
+      "original_path": "episodes/transfer_g00_p02__vector_scale_drift.json.gz",
+      "original_sha256": "269f15f82192109d9d182bcd8ee462879659c2bc4ef73d0b266b7b9c635d3807",
+      "archived_sha256": "269f15f82192109d9d182bcd8ee462879659c2bc4ef73d0b266b7b9c635d3807",
+      "original_bytes": 38265,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__vector_spiral.json.gz",
+      "original_path": "episodes/transfer_g00_p02__vector_spiral.json.gz",
+      "original_sha256": "28e660181e4bb2ce83511db22b1c6a50f3983f66c4ebdae7eaa1c1fe79be0f57",
+      "archived_sha256": "28e660181e4bb2ce83511db22b1c6a50f3983f66c4ebdae7eaa1c1fe79be0f57",
+      "original_bytes": 32820,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__vector_two_broad.json.gz",
+      "original_path": "episodes/transfer_g00_p02__vector_two_broad.json.gz",
+      "original_sha256": "77670012081f543d57c846690baa5e32415f593150da3c11aae6c1fd37ad3a6b",
+      "archived_sha256": "77670012081f543d57c846690baa5e32415f593150da3c11aae6c1fd37ad3a6b",
+      "original_bytes": 30171,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__vector_unequal_mass.json.gz",
+      "original_path": "episodes/transfer_g00_p02__vector_unequal_mass.json.gz",
+      "original_sha256": "0d3f90de590dfcd318294bfc4ad597c02990c5c58286ff1e6b08f45e107bde2e",
+      "archived_sha256": "0d3f90de590dfcd318294bfc4ad597c02990c5c58286ff1e6b08f45e107bde2e",
+      "original_bytes": 33244,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p02__vector_unequal_width.json.gz",
+      "original_path": "episodes/transfer_g00_p02__vector_unequal_width.json.gz",
+      "original_sha256": "0a29d6827ede67059b51646e26468f847b0148d87e8250bc3fb2063a203650be",
+      "archived_sha256": "0a29d6827ede67059b51646e26468f847b0148d87e8250bc3fb2063a203650be",
+      "original_bytes": 32574,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p03__ae_gan_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p03__ae_gan_hold.json.gz",
+      "original_sha256": "d7735ff37731f57b97fadcca26dc34a0d6ca44600c32a58f4065ef8f44bbb32a",
+      "archived_sha256": "d7735ff37731f57b97fadcca26dc34a0d6ca44600c32a58f4065ef8f44bbb32a",
+      "original_bytes": 9538,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p03__cover_leftover.json.gz",
+      "original_path": "episodes/transfer_g00_p03__cover_leftover.json.gz",
+      "original_sha256": "ff31c0142f619e48b1bf8ba3021701d6092c95cccfef306ef09d2fde7f7ebdb9",
+      "archived_sha256": "ff31c0142f619e48b1bf8ba3021701d6092c95cccfef306ef09d2fde7f7ebdb9",
+      "original_bytes": 20026,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p03__mid_scale_identity.json.gz",
+      "original_path": "episodes/transfer_g00_p03__mid_scale_identity.json.gz",
+      "original_sha256": "a7487d05723b6d748b80c31d819d6d0c7d88b2615e1e578b0b64098b8be4e99d",
+      "archived_sha256": "a7487d05723b6d748b80c31d819d6d0c7d88b2615e1e578b0b64098b8be4e99d",
+      "original_bytes": 21913,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p03__mode_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p03__mode_hold.json.gz",
+      "original_sha256": "c921334bf8fcc7aaa2f1e32e1c2c5e79277a963665752d56caae739999a86e13",
+      "archived_sha256": "c921334bf8fcc7aaa2f1e32e1c2c5e79277a963665752d56caae739999a86e13",
+      "original_bytes": 42410,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p03__residual_student.json.gz",
+      "original_path": "episodes/transfer_g00_p03__residual_student.json.gz",
+      "original_sha256": "f8360d45269b610bd5a2cbbd0edb2959abe42c278c114757d41ef4b37e4d2108",
+      "archived_sha256": "f8360d45269b610bd5a2cbbd0edb2959abe42c278c114757d41ef4b37e4d2108",
+      "original_bytes": 11797,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p03__trajectory.json.gz",
+      "original_path": "episodes/transfer_g00_p03__trajectory.json.gz",
+      "original_sha256": "8e567a629b647b53da14b96115045f11b62408325fd121b8a989a5e282631087",
+      "archived_sha256": "8e567a629b647b53da14b96115045f11b62408325fd121b8a989a5e282631087",
+      "original_bytes": 11312,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p03__two_pole.json.gz",
+      "original_path": "episodes/transfer_g00_p03__two_pole.json.gz",
+      "original_sha256": "4fb024eba6dabc051b09454151705f90d59ebfe83b076c0c8884f6a02ad0ddba",
+      "archived_sha256": "4fb024eba6dabc051b09454151705f90d59ebfe83b076c0c8884f6a02ad0ddba",
+      "original_bytes": 6064,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p03__unipolar.json.gz",
+      "original_path": "episodes/transfer_g00_p03__unipolar.json.gz",
+      "original_sha256": "d8d4133cb748f1d333f7dfa33c12964113ca0545a10112df65ea134aac1655c3",
+      "archived_sha256": "d8d4133cb748f1d333f7dfa33c12964113ca0545a10112df65ea134aac1655c3",
+      "original_bytes": 14818,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p03__unused_token_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p03__unused_token_hold.json.gz",
+      "original_sha256": "a0b81c386aea5e00cb4325faa9ebb0c257e1db83d178707b7cb6ecc56161513b",
+      "archived_sha256": "a0b81c386aea5e00cb4325faa9ebb0c257e1db83d178707b7cb6ecc56161513b",
+      "original_bytes": 8884,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__ae_gan_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p04__ae_gan_hold.json.gz",
+      "original_sha256": "0dc5e64d6b36c117194f825f8963cc5bb5de2ee5ebad1bea3e906840117bb65b",
+      "archived_sha256": "0dc5e64d6b36c117194f825f8963cc5bb5de2ee5ebad1bea3e906840117bb65b",
+      "original_bytes": 9505,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__cover_leftover.json.gz",
+      "original_path": "episodes/transfer_g00_p04__cover_leftover.json.gz",
+      "original_sha256": "06bc4f1bf6c6ab07072987f508d37746e4dfc275c4ded00a4de0186af511265b",
+      "archived_sha256": "06bc4f1bf6c6ab07072987f508d37746e4dfc275c4ded00a4de0186af511265b",
+      "original_bytes": 20120,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__img_bars4.json.gz",
+      "original_path": "episodes/transfer_g00_p04__img_bars4.json.gz",
+      "original_sha256": "1e692c6a1aa12a9d641edf994879cdb520606b870a82fdcff8ff7a579b4e1150",
+      "archived_sha256": "1e692c6a1aa12a9d641edf994879cdb520606b870a82fdcff8ff7a579b4e1150",
+      "original_bytes": 19280,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__img_bars8.json.gz",
+      "original_path": "episodes/transfer_g00_p04__img_bars8.json.gz",
+      "original_sha256": "04dcd64b10ebdd20cf22ab704d4ba708fa041575cad0b2970da536bbd98b68d6",
+      "archived_sha256": "04dcd64b10ebdd20cf22ab704d4ba708fa041575cad0b2970da536bbd98b68d6",
+      "original_bytes": 19103,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__img_blobs4.json.gz",
+      "original_path": "episodes/transfer_g00_p04__img_blobs4.json.gz",
+      "original_sha256": "441d39695a7918f61f4b505c326716ebf8c72fed206f9094ddee0b85e6a7eff0",
+      "archived_sha256": "441d39695a7918f61f4b505c326716ebf8c72fed206f9094ddee0b85e6a7eff0",
+      "original_bytes": 19340,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__img_intensity2.json.gz",
+      "original_path": "episodes/transfer_g00_p04__img_intensity2.json.gz",
+      "original_sha256": "c41b81ecbba664442efda31f540256a0f9c21e0849bb3f492830c4f4ffe01286",
+      "archived_sha256": "c41b81ecbba664442efda31f540256a0f9c21e0849bb3f492830c4f4ffe01286",
+      "original_bytes": 19323,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__img_mean_discriminator.json.gz",
+      "original_path": "episodes/transfer_g00_p04__img_mean_discriminator.json.gz",
+      "original_sha256": "49f9387165a5bc1462cd77bfe266be1db564fb0f44afb5c4b27454a76c4139e4",
+      "archived_sha256": "49f9387165a5bc1462cd77bfe266be1db564fb0f44afb5c4b27454a76c4139e4",
+      "original_bytes": 15908,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__img_stripes2.json.gz",
+      "original_path": "episodes/transfer_g00_p04__img_stripes2.json.gz",
+      "original_sha256": "5543fb6b559f67f3bbe7b9474a21cbfa0d3837a6420ff6052826f32a15deac57",
+      "archived_sha256": "5543fb6b559f67f3bbe7b9474a21cbfa0d3837a6420ff6052826f32a15deac57",
+      "original_bytes": 18476,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__img_tiny_generator.json.gz",
+      "original_path": "episodes/transfer_g00_p04__img_tiny_generator.json.gz",
+      "original_sha256": "e6c4ef4ea592e695da1a13a2db8ce515a2458924b208f38d75cb49e6c7cf10a5",
+      "archived_sha256": "e6c4ef4ea592e695da1a13a2db8ce515a2458924b208f38d75cb49e6c7cf10a5",
+      "original_bytes": 16259,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__img_uniform_generator.json.gz",
+      "original_path": "episodes/transfer_g00_p04__img_uniform_generator.json.gz",
+      "original_sha256": "ec62a4d667888f2560eba2472627ecafe44d48ffc0342c00c4b3b0c1f49e4e44",
+      "archived_sha256": "ec62a4d667888f2560eba2472627ecafe44d48ffc0342c00c4b3b0c1f49e4e44",
+      "original_bytes": 16727,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__mid_scale_identity.json.gz",
+      "original_path": "episodes/transfer_g00_p04__mid_scale_identity.json.gz",
+      "original_sha256": "5cfb8b1a599a3de3857e0e5414cd7d5e2f49c3185a343b2656eb7bb3b87e68f1",
+      "archived_sha256": "5cfb8b1a599a3de3857e0e5414cd7d5e2f49c3185a343b2656eb7bb3b87e68f1",
+      "original_bytes": 21802,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__mode_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p04__mode_hold.json.gz",
+      "original_sha256": "770914a16794eadb6cb064add282370ba82a345d30797a45d9e0789d7f58e463",
+      "archived_sha256": "770914a16794eadb6cb064add282370ba82a345d30797a45d9e0789d7f58e463",
+      "original_bytes": 42369,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__residual_student.json.gz",
+      "original_path": "episodes/transfer_g00_p04__residual_student.json.gz",
+      "original_sha256": "c77613eca00065d53921e427c5b9aa734051569621b2c308787de80f78523c21",
+      "archived_sha256": "c77613eca00065d53921e427c5b9aa734051569621b2c308787de80f78523c21",
+      "original_bytes": 11794,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__stress_fast_critic.json.gz",
+      "original_path": "episodes/transfer_g00_p04__stress_fast_critic.json.gz",
+      "original_sha256": "3a217b840ec15abbe9bb05c1807841be8aa7a259627394b7ecafac397e99bb83",
+      "archived_sha256": "3a217b840ec15abbe9bb05c1807841be8aa7a259627394b7ecafac397e99bb83",
+      "original_bytes": 36424,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__stress_large_critic.json.gz",
+      "original_path": "episodes/transfer_g00_p04__stress_large_critic.json.gz",
+      "original_sha256": "19d2858ca3c2eb92dc5052a5b7e6834e843350c71891bb7bfda60344f57393ee",
+      "archived_sha256": "19d2858ca3c2eb92dc5052a5b7e6834e843350c71891bb7bfda60344f57393ee",
+      "original_bytes": 35951,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__stress_long_horizon.json.gz",
+      "original_path": "episodes/transfer_g00_p04__stress_long_horizon.json.gz",
+      "original_sha256": "1f21c632e3112c7b7ba54690038abdb0ecf23ec91ab0667f59dbaec53b996eef",
+      "archived_sha256": "1f21c632e3112c7b7ba54690038abdb0ecf23ec91ab0667f59dbaec53b996eef",
+      "original_bytes": 57532,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__stress_overlapping_data.json.gz",
+      "original_path": "episodes/transfer_g00_p04__stress_overlapping_data.json.gz",
+      "original_sha256": "f5da253d6d9a56db8cb5b1a9e8cbdd442fd33056ffcf050f1b5c20e441e7d0f1",
+      "archived_sha256": "f5da253d6d9a56db8cb5b1a9e8cbdd442fd33056ffcf050f1b5c20e441e7d0f1",
+      "original_bytes": 28624,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__stress_r1_r2.json.gz",
+      "original_path": "episodes/transfer_g00_p04__stress_r1_r2.json.gz",
+      "original_sha256": "cb784d4c64a34a4401ae74081f952f4adcad48be3bd92bb6447891ce10b918b3",
+      "archived_sha256": "cb784d4c64a34a4401ae74081f952f4adcad48be3bd92bb6447891ce10b918b3",
+      "original_bytes": 36163,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__stress_slow_critic.json.gz",
+      "original_path": "episodes/transfer_g00_p04__stress_slow_critic.json.gz",
+      "original_sha256": "65d565c87b7cfe2a4f8f6b2b71252bbb74a5c36dcaf4a44fff757d976b37e245",
+      "archived_sha256": "65d565c87b7cfe2a4f8f6b2b71252bbb74a5c36dcaf4a44fff757d976b37e245",
+      "original_bytes": 36472,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__stress_small_batch.json.gz",
+      "original_path": "episodes/transfer_g00_p04__stress_small_batch.json.gz",
+      "original_sha256": "fd3b2c936dfa67caffb8b4d9dce7c329d255122a85bd1c8d7f5b7ec2294c3ffc",
+      "archived_sha256": "fd3b2c936dfa67caffb8b4d9dce7c329d255122a85bd1c8d7f5b7ec2294c3ffc",
+      "original_bytes": 36706,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__stress_weak_critic.json.gz",
+      "original_path": "episodes/transfer_g00_p04__stress_weak_critic.json.gz",
+      "original_sha256": "301485a8dd2f8d4d53bf1376122223f71598c122583ee91a2ba5e3b0080e3da4",
+      "archived_sha256": "301485a8dd2f8d4d53bf1376122223f71598c122583ee91a2ba5e3b0080e3da4",
+      "original_bytes": 36801,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__trajectory.json.gz",
+      "original_path": "episodes/transfer_g00_p04__trajectory.json.gz",
+      "original_sha256": "4fea89d253b787d8963391222a1049b5ae5e968c74e732a6bb34178921e19069",
+      "archived_sha256": "4fea89d253b787d8963391222a1049b5ae5e968c74e732a6bb34178921e19069",
+      "original_bytes": 11283,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__two_pole.json.gz",
+      "original_path": "episodes/transfer_g00_p04__two_pole.json.gz",
+      "original_sha256": "a26ef68346bd0ced98489deda2ab7a248cce9f97b833798ac50211cc7ff907da",
+      "archived_sha256": "a26ef68346bd0ced98489deda2ab7a248cce9f97b833798ac50211cc7ff907da",
+      "original_bytes": 6066,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__unipolar.json.gz",
+      "original_path": "episodes/transfer_g00_p04__unipolar.json.gz",
+      "original_sha256": "25cd99cd1ff3815f9958870d236ad471a9d4cd45fd5cf12be3a90f66a58ba325",
+      "archived_sha256": "25cd99cd1ff3815f9958870d236ad471a9d4cd45fd5cf12be3a90f66a58ba325",
+      "original_bytes": 14683,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__unused_token_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p04__unused_token_hold.json.gz",
+      "original_sha256": "8fabf4af7e286c95d1179c21c673168b78ed28f84243df15f3d45b4ae5fff2ca",
+      "archived_sha256": "8fabf4af7e286c95d1179c21c673168b78ed28f84243df15f3d45b4ae5fff2ca",
+      "original_bytes": 8884,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__vector_anisotropic.json.gz",
+      "original_path": "episodes/transfer_g00_p04__vector_anisotropic.json.gz",
+      "original_sha256": "f7ee70ba74b2897988ab461c60c24003f95882c8cadda2f476395abfb7ca9bf3",
+      "archived_sha256": "f7ee70ba74b2897988ab461c60c24003f95882c8cadda2f476395abfb7ca9bf3",
+      "original_bytes": 32331,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__vector_narrow.json.gz",
+      "original_path": "episodes/transfer_g00_p04__vector_narrow.json.gz",
+      "original_sha256": "89fefcee98ede25ad30497246e09835c307da43f3ed4395185151f036cf096aa",
+      "archived_sha256": "89fefcee98ede25ad30497246e09835c307da43f3ed4395185151f036cf096aa",
+      "original_bytes": 40456,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__vector_overlap.json.gz",
+      "original_path": "episodes/transfer_g00_p04__vector_overlap.json.gz",
+      "original_sha256": "68b305a170a193a8389373a844dc9a06b7a53fe2282c90f4a12c51bbf7a4cb2c",
+      "archived_sha256": "68b305a170a193a8389373a844dc9a06b7a53fe2282c90f4a12c51bbf7a4cb2c",
+      "original_bytes": 27619,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__vector_scale_drift.json.gz",
+      "original_path": "episodes/transfer_g00_p04__vector_scale_drift.json.gz",
+      "original_sha256": "cbaeecfe1245f6da0ff526c7a09fea3b151a4b8606e6a987588c212d9a6eb1c8",
+      "archived_sha256": "cbaeecfe1245f6da0ff526c7a09fea3b151a4b8606e6a987588c212d9a6eb1c8",
+      "original_bytes": 36717,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__vector_spiral.json.gz",
+      "original_path": "episodes/transfer_g00_p04__vector_spiral.json.gz",
+      "original_sha256": "ef86129b3a0c64531fab3cc503ae24da3413049c7c683ca2c70fb8cb48b27f7f",
+      "archived_sha256": "ef86129b3a0c64531fab3cc503ae24da3413049c7c683ca2c70fb8cb48b27f7f",
+      "original_bytes": 33455,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__vector_two_broad.json.gz",
+      "original_path": "episodes/transfer_g00_p04__vector_two_broad.json.gz",
+      "original_sha256": "98dd62f22c97eb0da52b5eb933b366a47dd4201aa945ca4d50e52489ee1471f6",
+      "archived_sha256": "98dd62f22c97eb0da52b5eb933b366a47dd4201aa945ca4d50e52489ee1471f6",
+      "original_bytes": 30063,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__vector_unequal_mass.json.gz",
+      "original_path": "episodes/transfer_g00_p04__vector_unequal_mass.json.gz",
+      "original_sha256": "dc028396ad4c907ed1e51ebf4ea097934bff6b8ecb8ce5838a7966838861fad2",
+      "archived_sha256": "dc028396ad4c907ed1e51ebf4ea097934bff6b8ecb8ce5838a7966838861fad2",
+      "original_bytes": 32964,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p04__vector_unequal_width.json.gz",
+      "original_path": "episodes/transfer_g00_p04__vector_unequal_width.json.gz",
+      "original_sha256": "87e9e2d065fb580551cad40afcc88ecd925d083c164053d8dec457b051882f09",
+      "archived_sha256": "87e9e2d065fb580551cad40afcc88ecd925d083c164053d8dec457b051882f09",
+      "original_bytes": 32735,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p05__ae_gan_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p05__ae_gan_hold.json.gz",
+      "original_sha256": "ff5d24232207031cbd5f52f0ad2ed90a88f4a6a3d59f8cca4a2d2bdfbefc3655",
+      "archived_sha256": "ff5d24232207031cbd5f52f0ad2ed90a88f4a6a3d59f8cca4a2d2bdfbefc3655",
+      "original_bytes": 9493,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p05__cover_leftover.json.gz",
+      "original_path": "episodes/transfer_g00_p05__cover_leftover.json.gz",
+      "original_sha256": "4a18fcca53b6401af76fbd03d6961bb847a3f62f50dede2fc7a3cac1aa99b6ef",
+      "archived_sha256": "4a18fcca53b6401af76fbd03d6961bb847a3f62f50dede2fc7a3cac1aa99b6ef",
+      "original_bytes": 20122,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p05__mid_scale_identity.json.gz",
+      "original_path": "episodes/transfer_g00_p05__mid_scale_identity.json.gz",
+      "original_sha256": "a249b5682d618b5009b07b1140d9e2e9be749b19d46878a59818ddd73ebb630d",
+      "archived_sha256": "a249b5682d618b5009b07b1140d9e2e9be749b19d46878a59818ddd73ebb630d",
+      "original_bytes": 22139,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p05__mode_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p05__mode_hold.json.gz",
+      "original_sha256": "6bc31ce164f8b0a6a3d0aa1c42e77e12537373b1b2be1a767f63efa5b2d10444",
+      "archived_sha256": "6bc31ce164f8b0a6a3d0aa1c42e77e12537373b1b2be1a767f63efa5b2d10444",
+      "original_bytes": 42659,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p05__residual_student.json.gz",
+      "original_path": "episodes/transfer_g00_p05__residual_student.json.gz",
+      "original_sha256": "67a69f2b297305100c5c453dc0cdafc4599b541ce2aa624ccf85fb2e7b83bb8d",
+      "archived_sha256": "67a69f2b297305100c5c453dc0cdafc4599b541ce2aa624ccf85fb2e7b83bb8d",
+      "original_bytes": 11821,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p05__trajectory.json.gz",
+      "original_path": "episodes/transfer_g00_p05__trajectory.json.gz",
+      "original_sha256": "170cfed853f5636e49f69dc5af24dd47985b83f66a4021b6fef493d211d34b09",
+      "archived_sha256": "170cfed853f5636e49f69dc5af24dd47985b83f66a4021b6fef493d211d34b09",
+      "original_bytes": 11245,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p05__two_pole.json.gz",
+      "original_path": "episodes/transfer_g00_p05__two_pole.json.gz",
+      "original_sha256": "b9f6d64261c5bc31e69daafccfe5fda84b2f4169aafc6d4f27d631ac3f39bd40",
+      "archived_sha256": "b9f6d64261c5bc31e69daafccfe5fda84b2f4169aafc6d4f27d631ac3f39bd40",
+      "original_bytes": 6053,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p05__unipolar.json.gz",
+      "original_path": "episodes/transfer_g00_p05__unipolar.json.gz",
+      "original_sha256": "cae6760d1e4951ca574d3a7e8021fcbc85dd5b799cbfe313f548aa207c646c03",
+      "archived_sha256": "cae6760d1e4951ca574d3a7e8021fcbc85dd5b799cbfe313f548aa207c646c03",
+      "original_bytes": 14611,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g00_p05__unused_token_hold.json.gz",
+      "original_path": "episodes/transfer_g00_p05__unused_token_hold.json.gz",
+      "original_sha256": "6e2b4387d64756de2ba2681b89f457f82410bb5bf61b2cb6316f9c64536430d0",
+      "archived_sha256": "6e2b4387d64756de2ba2681b89f457f82410bb5bf61b2cb6316f9c64536430d0",
+      "original_bytes": 8922,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p00__ae_gan_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p00__ae_gan_hold.json.gz",
+      "original_sha256": "fcc90726f15cb2622a3db056af82363c60faaf6b1216b9d2a2633e9701b9953f",
+      "archived_sha256": "fcc90726f15cb2622a3db056af82363c60faaf6b1216b9d2a2633e9701b9953f",
+      "original_bytes": 9474,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p00__cover_leftover.json.gz",
+      "original_path": "episodes/transfer_g01_p00__cover_leftover.json.gz",
+      "original_sha256": "47d6b200c7d979dd96c1bcb1428a3f75b09356393c118f49be12f3be22c8e4c3",
+      "archived_sha256": "47d6b200c7d979dd96c1bcb1428a3f75b09356393c118f49be12f3be22c8e4c3",
+      "original_bytes": 20055,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p00__mid_scale_identity.json.gz",
+      "original_path": "episodes/transfer_g01_p00__mid_scale_identity.json.gz",
+      "original_sha256": "b4f82e322d010777151e7752d676ec1affe3646673801c0ac9d71dae849facd9",
+      "archived_sha256": "b4f82e322d010777151e7752d676ec1affe3646673801c0ac9d71dae849facd9",
+      "original_bytes": 22737,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p00__mode_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p00__mode_hold.json.gz",
+      "original_sha256": "c036f4119d0204f88036b5ad19d03ee47c183e6df1255b065798e7a489a21d96",
+      "archived_sha256": "c036f4119d0204f88036b5ad19d03ee47c183e6df1255b065798e7a489a21d96",
+      "original_bytes": 41960,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p00__residual_student.json.gz",
+      "original_path": "episodes/transfer_g01_p00__residual_student.json.gz",
+      "original_sha256": "be16c01a77fa1bf6b70e466efdf4c983eefbc85ffcf0137de526ee6440436525",
+      "archived_sha256": "be16c01a77fa1bf6b70e466efdf4c983eefbc85ffcf0137de526ee6440436525",
+      "original_bytes": 11820,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p00__trajectory.json.gz",
+      "original_path": "episodes/transfer_g01_p00__trajectory.json.gz",
+      "original_sha256": "79528ad0a997ace1b8c07a51dcbd40515c7c14c6761abf6238553b79cfa75b90",
+      "archived_sha256": "79528ad0a997ace1b8c07a51dcbd40515c7c14c6761abf6238553b79cfa75b90",
+      "original_bytes": 11278,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p00__two_pole.json.gz",
+      "original_path": "episodes/transfer_g01_p00__two_pole.json.gz",
+      "original_sha256": "86ffc967c05083d01c306a8da5020795d8d590cc2f680299f775998eb822b1b9",
+      "archived_sha256": "86ffc967c05083d01c306a8da5020795d8d590cc2f680299f775998eb822b1b9",
+      "original_bytes": 6050,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p00__unipolar.json.gz",
+      "original_path": "episodes/transfer_g01_p00__unipolar.json.gz",
+      "original_sha256": "906a9890c7142b29f3727082c7e4c76c192c5e2dfb2484d7568fc9488f884991",
+      "archived_sha256": "906a9890c7142b29f3727082c7e4c76c192c5e2dfb2484d7568fc9488f884991",
+      "original_bytes": 14595,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p00__unused_token_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p00__unused_token_hold.json.gz",
+      "original_sha256": "af70d53654bacd3f14ce2c8bc39e598400ed62f029c2ab71c78e11a1c948a021",
+      "archived_sha256": "af70d53654bacd3f14ce2c8bc39e598400ed62f029c2ab71c78e11a1c948a021",
+      "original_bytes": 8883,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p02__ae_gan_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p02__ae_gan_hold.json.gz",
+      "original_sha256": "546efb39bb38562c379bb6aab189dab900f6f2937b5818796ab416a47a584c9a",
+      "archived_sha256": "546efb39bb38562c379bb6aab189dab900f6f2937b5818796ab416a47a584c9a",
+      "original_bytes": 9512,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p02__cover_leftover.json.gz",
+      "original_path": "episodes/transfer_g01_p02__cover_leftover.json.gz",
+      "original_sha256": "2c4f79f939480a346c4fe697ecbb06ce39f197c07b2d3831994bbe469173bb85",
+      "archived_sha256": "2c4f79f939480a346c4fe697ecbb06ce39f197c07b2d3831994bbe469173bb85",
+      "original_bytes": 20048,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p02__mid_scale_identity.json.gz",
+      "original_path": "episodes/transfer_g01_p02__mid_scale_identity.json.gz",
+      "original_sha256": "26f226ad41f2a628c4db86a99e9fdc21e2b9a316f86319eaeba6239320cb78f8",
+      "archived_sha256": "26f226ad41f2a628c4db86a99e9fdc21e2b9a316f86319eaeba6239320cb78f8",
+      "original_bytes": 21712,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p02__mode_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p02__mode_hold.json.gz",
+      "original_sha256": "f401697e3568e48c112502ce3867ce34c1bc1fccfa04f85677941af45cb7d7df",
+      "archived_sha256": "f401697e3568e48c112502ce3867ce34c1bc1fccfa04f85677941af45cb7d7df",
+      "original_bytes": 42688,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p02__residual_student.json.gz",
+      "original_path": "episodes/transfer_g01_p02__residual_student.json.gz",
+      "original_sha256": "ca46f92635ab325dd486d9992ee2533357ddfdfe306054120d5af6ad16a38f56",
+      "archived_sha256": "ca46f92635ab325dd486d9992ee2533357ddfdfe306054120d5af6ad16a38f56",
+      "original_bytes": 11765,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p02__trajectory.json.gz",
+      "original_path": "episodes/transfer_g01_p02__trajectory.json.gz",
+      "original_sha256": "e883f615cb2965fd6571a34633c49883b7364e79e5d87092d3b153d77f95b3e6",
+      "archived_sha256": "e883f615cb2965fd6571a34633c49883b7364e79e5d87092d3b153d77f95b3e6",
+      "original_bytes": 11321,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p02__two_pole.json.gz",
+      "original_path": "episodes/transfer_g01_p02__two_pole.json.gz",
+      "original_sha256": "929871afc3b97eb021eb61c83e961672374bc762b48c6be4f9f2f70be5a0d5aa",
+      "archived_sha256": "929871afc3b97eb021eb61c83e961672374bc762b48c6be4f9f2f70be5a0d5aa",
+      "original_bytes": 6046,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p02__unipolar.json.gz",
+      "original_path": "episodes/transfer_g01_p02__unipolar.json.gz",
+      "original_sha256": "334560a749ee515c61d2a2325c714c14bb808d527d063334febab8ab8c8716a9",
+      "archived_sha256": "334560a749ee515c61d2a2325c714c14bb808d527d063334febab8ab8c8716a9",
+      "original_bytes": 14561,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p02__unused_token_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p02__unused_token_hold.json.gz",
+      "original_sha256": "762e9d0ccffa554cb5f04d7c22e659c4c7c2b3ce2e59bbee1b3a663b594f8a95",
+      "archived_sha256": "762e9d0ccffa554cb5f04d7c22e659c4c7c2b3ce2e59bbee1b3a663b594f8a95",
+      "original_bytes": 8938,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p03__ae_gan_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p03__ae_gan_hold.json.gz",
+      "original_sha256": "dbbf962cde49f13506caf56549f8efdc714e4a3a5bbd2441bbb92fa72c5c1dab",
+      "archived_sha256": "dbbf962cde49f13506caf56549f8efdc714e4a3a5bbd2441bbb92fa72c5c1dab",
+      "original_bytes": 9510,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p03__cover_leftover.json.gz",
+      "original_path": "episodes/transfer_g01_p03__cover_leftover.json.gz",
+      "original_sha256": "650c5d951810848662ecaa0811bf669f5b35a1a8168f7eb1a56622f0444164fc",
+      "archived_sha256": "650c5d951810848662ecaa0811bf669f5b35a1a8168f7eb1a56622f0444164fc",
+      "original_bytes": 20008,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p03__mid_scale_identity.json.gz",
+      "original_path": "episodes/transfer_g01_p03__mid_scale_identity.json.gz",
+      "original_sha256": "b52f45847e1ef8d5e3063c83e11b4abe7f2db45aab37bde189e1fc0aacc3a566",
+      "archived_sha256": "b52f45847e1ef8d5e3063c83e11b4abe7f2db45aab37bde189e1fc0aacc3a566",
+      "original_bytes": 21868,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p03__mode_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p03__mode_hold.json.gz",
+      "original_sha256": "b657381886b2432ef7efa0de75e362c9943f787c60cb30a9ab493813ac4926c3",
+      "archived_sha256": "b657381886b2432ef7efa0de75e362c9943f787c60cb30a9ab493813ac4926c3",
+      "original_bytes": 42233,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p03__residual_student.json.gz",
+      "original_path": "episodes/transfer_g01_p03__residual_student.json.gz",
+      "original_sha256": "5f0b13505d847f0e5ae98c8175825673cc93417ef2192784f855a1b5ec212925",
+      "archived_sha256": "5f0b13505d847f0e5ae98c8175825673cc93417ef2192784f855a1b5ec212925",
+      "original_bytes": 11804,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p03__trajectory.json.gz",
+      "original_path": "episodes/transfer_g01_p03__trajectory.json.gz",
+      "original_sha256": "3dc4a5d5edecfc10e67868c860a40f4ccdc04227a5405c911e54b84306f63190",
+      "archived_sha256": "3dc4a5d5edecfc10e67868c860a40f4ccdc04227a5405c911e54b84306f63190",
+      "original_bytes": 11452,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p03__two_pole.json.gz",
+      "original_path": "episodes/transfer_g01_p03__two_pole.json.gz",
+      "original_sha256": "575ba4147c6b62de04273a1deade45d5815e641572ffd629756b50a6ba46bac1",
+      "archived_sha256": "575ba4147c6b62de04273a1deade45d5815e641572ffd629756b50a6ba46bac1",
+      "original_bytes": 6065,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p03__unipolar.json.gz",
+      "original_path": "episodes/transfer_g01_p03__unipolar.json.gz",
+      "original_sha256": "42d76ce9d1a6cecdf6f0a5412d77e82b15adb57ece6ae03d970fce248c301548",
+      "archived_sha256": "42d76ce9d1a6cecdf6f0a5412d77e82b15adb57ece6ae03d970fce248c301548",
+      "original_bytes": 14681,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p03__unused_token_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p03__unused_token_hold.json.gz",
+      "original_sha256": "5535876466c59f5d6b24a2a5ed50f441ee488ae6f43a2ec3c769bfdef672d518",
+      "archived_sha256": "5535876466c59f5d6b24a2a5ed50f441ee488ae6f43a2ec3c769bfdef672d518",
+      "original_bytes": 8938,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__ae_gan_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p04__ae_gan_hold.json.gz",
+      "original_sha256": "2f53e676aae542b6d8772bdbff8701f54cb3fde63a1e3305f0f6e355e0f2a06c",
+      "archived_sha256": "2f53e676aae542b6d8772bdbff8701f54cb3fde63a1e3305f0f6e355e0f2a06c",
+      "original_bytes": 9533,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__cover_leftover.json.gz",
+      "original_path": "episodes/transfer_g01_p04__cover_leftover.json.gz",
+      "original_sha256": "bb51d3d214e68d2eb9e7b9e341585a6843ab025b52c8b8a80df3daa64c0c6752",
+      "archived_sha256": "bb51d3d214e68d2eb9e7b9e341585a6843ab025b52c8b8a80df3daa64c0c6752",
+      "original_bytes": 20063,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__mid_scale_identity.json.gz",
+      "original_path": "episodes/transfer_g01_p04__mid_scale_identity.json.gz",
+      "original_sha256": "61a4107c73dda3820d2b7afdb62e0a7a45517c62661811339a334aa5ff6d76f0",
+      "archived_sha256": "61a4107c73dda3820d2b7afdb62e0a7a45517c62661811339a334aa5ff6d76f0",
+      "original_bytes": 22947,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__mode_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p04__mode_hold.json.gz",
+      "original_sha256": "2ca688750cbad9fde375e0993795c0ac6b980a634eb4e19ab844d40ec5e7b9ed",
+      "archived_sha256": "2ca688750cbad9fde375e0993795c0ac6b980a634eb4e19ab844d40ec5e7b9ed",
+      "original_bytes": 42095,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__residual_student.json.gz",
+      "original_path": "episodes/transfer_g01_p04__residual_student.json.gz",
+      "original_sha256": "ea1e82318fae978c8cfa6d3473684288f398a978a1d82c98d2f80b1d49a3a3a2",
+      "archived_sha256": "ea1e82318fae978c8cfa6d3473684288f398a978a1d82c98d2f80b1d49a3a3a2",
+      "original_bytes": 11792,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__stress_fast_critic.json.gz",
+      "original_path": "episodes/transfer_g01_p04__stress_fast_critic.json.gz",
+      "original_sha256": "8cbccbd7b57992f29edbf6e60a4f3c06da1061b862d33e393328bc02c61580c0",
+      "archived_sha256": "8cbccbd7b57992f29edbf6e60a4f3c06da1061b862d33e393328bc02c61580c0",
+      "original_bytes": 36161,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__stress_large_critic.json.gz",
+      "original_path": "episodes/transfer_g01_p04__stress_large_critic.json.gz",
+      "original_sha256": "b9e4791adc996000807da147a14aa2d798c7039c50f18bc3b2a7e98b7d4086e3",
+      "archived_sha256": "b9e4791adc996000807da147a14aa2d798c7039c50f18bc3b2a7e98b7d4086e3",
+      "original_bytes": 35920,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__stress_long_horizon.json.gz",
+      "original_path": "episodes/transfer_g01_p04__stress_long_horizon.json.gz",
+      "original_sha256": "006bad6dee2fbbde97d27589fda3c76c00b516a028bca9d7a8ad7ca1d997c9f0",
+      "archived_sha256": "006bad6dee2fbbde97d27589fda3c76c00b516a028bca9d7a8ad7ca1d997c9f0",
+      "original_bytes": 57792,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__stress_overlapping_data.json.gz",
+      "original_path": "episodes/transfer_g01_p04__stress_overlapping_data.json.gz",
+      "original_sha256": "395013294d2edc31e693d4b5ea871fd9da7fc0abbf9568fb36a072d7d9673310",
+      "archived_sha256": "395013294d2edc31e693d4b5ea871fd9da7fc0abbf9568fb36a072d7d9673310",
+      "original_bytes": 28657,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__stress_r1_r2.json.gz",
+      "original_path": "episodes/transfer_g01_p04__stress_r1_r2.json.gz",
+      "original_sha256": "7bd6ce2d9eb3156a785798ba93dca4240fedee6b2fbf1a2934bacdb2a286c27c",
+      "archived_sha256": "7bd6ce2d9eb3156a785798ba93dca4240fedee6b2fbf1a2934bacdb2a286c27c",
+      "original_bytes": 36457,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__stress_slow_critic.json.gz",
+      "original_path": "episodes/transfer_g01_p04__stress_slow_critic.json.gz",
+      "original_sha256": "ec65c7f42490273a09f163ac986bb67eecf375b409c79bbe9fa026d09c51cb88",
+      "archived_sha256": "ec65c7f42490273a09f163ac986bb67eecf375b409c79bbe9fa026d09c51cb88",
+      "original_bytes": 36668,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__stress_small_batch.json.gz",
+      "original_path": "episodes/transfer_g01_p04__stress_small_batch.json.gz",
+      "original_sha256": "12647aed2dc30f9516d7a2bbc18acda557d12690dad3f6cc3eb6952b3e73cd48",
+      "archived_sha256": "12647aed2dc30f9516d7a2bbc18acda557d12690dad3f6cc3eb6952b3e73cd48",
+      "original_bytes": 36546,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__stress_weak_critic.json.gz",
+      "original_path": "episodes/transfer_g01_p04__stress_weak_critic.json.gz",
+      "original_sha256": "525a38517a59b5ea9b5b0175ae39be04cf67914526a5fef444caa0e7fd356eb1",
+      "archived_sha256": "525a38517a59b5ea9b5b0175ae39be04cf67914526a5fef444caa0e7fd356eb1",
+      "original_bytes": 36328,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__trajectory.json.gz",
+      "original_path": "episodes/transfer_g01_p04__trajectory.json.gz",
+      "original_sha256": "98b72a3e021f515d7d30dd91cf9e9a6d4572ecb50d79af3c1f9a4f6cb7e1eed6",
+      "archived_sha256": "98b72a3e021f515d7d30dd91cf9e9a6d4572ecb50d79af3c1f9a4f6cb7e1eed6",
+      "original_bytes": 11531,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__two_pole.json.gz",
+      "original_path": "episodes/transfer_g01_p04__two_pole.json.gz",
+      "original_sha256": "10318269f32a275d755c3e058ad19fe4f6a900b2ad337d7ad1fe45a6e8637111",
+      "archived_sha256": "10318269f32a275d755c3e058ad19fe4f6a900b2ad337d7ad1fe45a6e8637111",
+      "original_bytes": 6076,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__unipolar.json.gz",
+      "original_path": "episodes/transfer_g01_p04__unipolar.json.gz",
+      "original_sha256": "f44dc3b6a4ddc77aff55e984fae8b18aa917942ea53d30ffc932e734a1dfa24c",
+      "archived_sha256": "f44dc3b6a4ddc77aff55e984fae8b18aa917942ea53d30ffc932e734a1dfa24c",
+      "original_bytes": 14716,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__unused_token_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p04__unused_token_hold.json.gz",
+      "original_sha256": "294b9a5bd242a0e92859e087a101b93beddb400efeea824ee32c1f0396d4b0af",
+      "archived_sha256": "294b9a5bd242a0e92859e087a101b93beddb400efeea824ee32c1f0396d4b0af",
+      "original_bytes": 8871,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__vector_anisotropic.json.gz",
+      "original_path": "episodes/transfer_g01_p04__vector_anisotropic.json.gz",
+      "original_sha256": "b9b708deeb3da1df20686c90a41441924b05077e6bd7a4f714b63d5bb5023669",
+      "archived_sha256": "b9b708deeb3da1df20686c90a41441924b05077e6bd7a4f714b63d5bb5023669",
+      "original_bytes": 32236,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__vector_narrow.json.gz",
+      "original_path": "episodes/transfer_g01_p04__vector_narrow.json.gz",
+      "original_sha256": "e559dab4a2e11b9c4307d501473ab085d9edaf2e2f9dcb1e08528b245787bd30",
+      "archived_sha256": "e559dab4a2e11b9c4307d501473ab085d9edaf2e2f9dcb1e08528b245787bd30",
+      "original_bytes": 39800,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__vector_overlap.json.gz",
+      "original_path": "episodes/transfer_g01_p04__vector_overlap.json.gz",
+      "original_sha256": "7e6e0c7cd87e6ffc6eb29b3aabaaabd2928506ea4f1140954d621173984a7e75",
+      "archived_sha256": "7e6e0c7cd87e6ffc6eb29b3aabaaabd2928506ea4f1140954d621173984a7e75",
+      "original_bytes": 27252,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__vector_scale_drift.json.gz",
+      "original_path": "episodes/transfer_g01_p04__vector_scale_drift.json.gz",
+      "original_sha256": "8a60c9e063414db097dd91550c411d6827065fdc73f180ceee3db2799ffd7cd7",
+      "archived_sha256": "8a60c9e063414db097dd91550c411d6827065fdc73f180ceee3db2799ffd7cd7",
+      "original_bytes": 35985,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__vector_spiral.json.gz",
+      "original_path": "episodes/transfer_g01_p04__vector_spiral.json.gz",
+      "original_sha256": "4d2917363db64535f60cc126de80007966ca54a434f48306e7973407da2786da",
+      "archived_sha256": "4d2917363db64535f60cc126de80007966ca54a434f48306e7973407da2786da",
+      "original_bytes": 32202,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__vector_two_broad.json.gz",
+      "original_path": "episodes/transfer_g01_p04__vector_two_broad.json.gz",
+      "original_sha256": "1c8e74a83d6053cdce9a93de40be406320c48858af438a194fded5038c8f0ed3",
+      "archived_sha256": "1c8e74a83d6053cdce9a93de40be406320c48858af438a194fded5038c8f0ed3",
+      "original_bytes": 29971,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__vector_unequal_mass.json.gz",
+      "original_path": "episodes/transfer_g01_p04__vector_unequal_mass.json.gz",
+      "original_sha256": "ef323097f47bf3109d0cc9a37f8ca2b2d789cf371d43a3a1d63a2d4a9d9f59fa",
+      "archived_sha256": "ef323097f47bf3109d0cc9a37f8ca2b2d789cf371d43a3a1d63a2d4a9d9f59fa",
+      "original_bytes": 33097,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p04__vector_unequal_width.json.gz",
+      "original_path": "episodes/transfer_g01_p04__vector_unequal_width.json.gz",
+      "original_sha256": "f355a29bec721a2a6582ebfe109bcf8562031ad09c89432464f72fdd57a6df68",
+      "archived_sha256": "f355a29bec721a2a6582ebfe109bcf8562031ad09c89432464f72fdd57a6df68",
+      "original_bytes": 32944,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p05__ae_gan_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p05__ae_gan_hold.json.gz",
+      "original_sha256": "84a00d13b29d059d5eb447c2c18df591db478a53a4d656caa955d77b966bfcc7",
+      "archived_sha256": "84a00d13b29d059d5eb447c2c18df591db478a53a4d656caa955d77b966bfcc7",
+      "original_bytes": 9514,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p05__cover_leftover.json.gz",
+      "original_path": "episodes/transfer_g01_p05__cover_leftover.json.gz",
+      "original_sha256": "a829d357238f79aa7bbdf9b31cf5e633eb3b2dc5dee7bc65c55236a5bbc45556",
+      "archived_sha256": "a829d357238f79aa7bbdf9b31cf5e633eb3b2dc5dee7bc65c55236a5bbc45556",
+      "original_bytes": 20166,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p05__mid_scale_identity.json.gz",
+      "original_path": "episodes/transfer_g01_p05__mid_scale_identity.json.gz",
+      "original_sha256": "d83e7d45357fb7f5ada288b09c668b642d3dda7d44e4850c0a2bd9c2ed2a557b",
+      "archived_sha256": "d83e7d45357fb7f5ada288b09c668b642d3dda7d44e4850c0a2bd9c2ed2a557b",
+      "original_bytes": 22161,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p05__mode_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p05__mode_hold.json.gz",
+      "original_sha256": "a3a51eb1fa03d7e315fe64ee5f5e7fa9d1606247e1e9bad9ef5fa0e64854a1ea",
+      "archived_sha256": "a3a51eb1fa03d7e315fe64ee5f5e7fa9d1606247e1e9bad9ef5fa0e64854a1ea",
+      "original_bytes": 42268,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p05__residual_student.json.gz",
+      "original_path": "episodes/transfer_g01_p05__residual_student.json.gz",
+      "original_sha256": "fb384ec155a717af3526efe66aee2eb4f630ad5c976105a0b120e736468f09cb",
+      "archived_sha256": "fb384ec155a717af3526efe66aee2eb4f630ad5c976105a0b120e736468f09cb",
+      "original_bytes": 11743,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p05__trajectory.json.gz",
+      "original_path": "episodes/transfer_g01_p05__trajectory.json.gz",
+      "original_sha256": "998990a3b4a8f948ac8aa4e0d5dd8a66c4e9161e1b52a3b33bde3c2acc632978",
+      "archived_sha256": "998990a3b4a8f948ac8aa4e0d5dd8a66c4e9161e1b52a3b33bde3c2acc632978",
+      "original_bytes": 10949,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p05__two_pole.json.gz",
+      "original_path": "episodes/transfer_g01_p05__two_pole.json.gz",
+      "original_sha256": "e798798c56c1da9e1424813c132b7a157902d7c353cd5831f90b2b10f65e8965",
+      "archived_sha256": "e798798c56c1da9e1424813c132b7a157902d7c353cd5831f90b2b10f65e8965",
+      "original_bytes": 6052,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p05__unipolar.json.gz",
+      "original_path": "episodes/transfer_g01_p05__unipolar.json.gz",
+      "original_sha256": "dd0f919dc4134f2d4d1a049a8b065ad43c086d680e0ebacf09eccde5d8d2138f",
+      "archived_sha256": "dd0f919dc4134f2d4d1a049a8b065ad43c086d680e0ebacf09eccde5d8d2138f",
+      "original_bytes": 14699,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/transfer_g01_p05__unused_token_hold.json.gz",
+      "original_path": "episodes/transfer_g01_p05__unused_token_hold.json.gz",
+      "original_sha256": "a738e2bde95aff51110300ae82e8f54c09e172ad6779b2426bfb7c4591030a0d",
+      "archived_sha256": "a738e2bde95aff51110300ae82e8f54c09e172ad6779b2426bfb7c4591030a0d",
+      "original_bytes": 8907,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "frozen.json",
+      "original_path": "frozen.json",
+      "original_sha256": "060ff946ae1d332754895d4c753cc0cb55853d538373f9abf53a083024f9d30f",
+      "archived_sha256": "060ff946ae1d332754895d4c753cc0cb55853d538373f9abf53a083024f9d30f",
+      "original_bytes": 8033,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "manifest.json",
+      "original_path": "manifest.json",
+      "original_sha256": "946c6dd2268a122cecb9d206316dc86d1dbcd0c2a3a34f72d96701ebb28d667a",
+      "archived_sha256": "946c6dd2268a122cecb9d206316dc86d1dbcd0c2a3a34f72d96701ebb28d667a",
+      "original_bytes": 64498,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "protocol.json",
+      "original_path": "protocol.json",
+      "original_sha256": "04cc2febcfe300c9f54770f1ed1195d6d168e9f58ed64fe4468eea9aafd66257",
+      "archived_sha256": "04cc2febcfe300c9f54770f1ed1195d6d168e9f58ed64fe4468eea9aafd66257",
+      "original_bytes": 9238,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "results.json.gz",
+      "original_path": "results.json",
+      "original_sha256": "f9c7a6f9a8f330d570025af6166d82afb6fb54f0443bd3278861f2b7f9e7580f",
+      "archived_sha256": "e87e9e2fd237eb6246b782ad513c805826af3984a2492a1b37d4dfaad36c50ef",
+      "original_bytes": 11863374,
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "source.tar.gz",
+      "original_path": "source.tar.gz",
+      "original_sha256": "9625c36fcb19a780a7ea05a749f0fbaa97f26dec3f5db35d57dea011df27ba7f",
+      "archived_sha256": "9625c36fcb19a780a7ea05a749f0fbaa97f26dec3f5db35d57dea011df27ba7f",
+      "original_bytes": 120748,
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    }
+  ]
+}
