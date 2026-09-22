@@ -17,3 +17,6 @@ reports/learned_lr/*.svg linguist-generated=true
 reports/smart_descent/**/*.json linguist-generated=true
 reports/smart_descent/**/*.gz linguist-generated=true
 reports/smart_descent/**/*.log linguist-generated=true
+reports/transfer_suite/**/*.json linguist-generated=true
+reports/transfer_suite/**/*.gz linguist-generated=true
+reports/transfer_suite/**/*.log linguist-generated=true
