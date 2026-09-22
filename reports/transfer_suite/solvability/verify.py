@@ -50,7 +50,8 @@ def verify():
         return verdict
 
     for index in [*(ROOT / "vectors").glob("*/index.json.gz"),
-                  ROOT / "image_reproduction/index.json.gz", ROOT / "required_cap10/index.json.gz"]:
+                  ROOT / "image_reproduction/index.json.gz", ROOT / "required_cap10/index.json.gz",
+                  ROOT / "dynamics_followup/index.json.gz"]:
         for row in read(index)["records"]:
             data = gzip.decompress((index.parent / row["artifact"]).read_bytes())
             assert hashlib.sha256(data).hexdigest() == row["uncompressed_sha256"]
@@ -108,7 +109,7 @@ def verify():
                   native_image_replay=read(ROOT / "native_image_parity.json"),
                   focused_tests="71 passed in 5.82s; test command retained in tests.log",
                   all_profile_episode_hashes_verified=True)
-    assert counts["gan_episodes"] == 254 and counts["supervised_controls"] == 4
+    assert counts["gan_episodes"] == 256 and counts["supervised_controls"] == 4
     assert len(witnesses) == 16 and counts["errors"] == 0
     (ROOT / "validation.json").write_text(json.dumps(counts, indent=2) + "\n")
     print(json.dumps(counts, indent=2))

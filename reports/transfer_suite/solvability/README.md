@@ -66,8 +66,9 @@ retained separately. These rows deliberately show individual solver witnesses.
 
 More updates establish solvability at that larger budget. They are not a
 same-budget fix, early-stopping result or speedup. The former reserved cadence
-case is now inspected development data and remains unresolved; the previously
-solved annulus and residual bars are not new independent transfer evidence.
+case is now inspected development data and also has a sustained solver in the
+targeted followup below. The previously solved annulus and residual bars are
+not new independent transfer evidence.
 
 The slow-critic solution retains its original D learning-rate multiplier .75,
 data, architecture, particles and penalty. It changes the update ratio and
@@ -76,6 +77,16 @@ Eleven final observations pass; final HQ is 100%, covariance error .2384,
 minimum covariance eigen ratio .6403 and mode-mass TV .1392. The same ratio at
 3,600 outer steps only passes its final two checks and remains a failure.
 [Dynamics matrix, all failures and exact configurations](dynamics/MATRIX.md).
+
+The last targeted followup applies the same update-balance idea to the seen
+cadence case. Keeping **D every second outer step**, but updating **G every
+fourth step**, passes at both 6,000 and 12,000 outer steps. The shorter run uses
+3,000 D / 1,500 G updates, with final HQ99.24%, covariance error .2894, minimum
+eigen ratio .4482 and mass TV .1470. The original cadence run used 1,200 D /
+2,400 G updates. This changes both update balance and budget; it is not a
+same-budget or fresh-transfer win. The original 66-run dynamics archive remains
+unchanged and explicitly precedes these two successful followups.
+[Both complete followup runs](dynamics_followup/README.md).
 
 ## What the search explains
 
@@ -163,11 +174,16 @@ convergence result from the scoped search, excluding time fields.
 reproduces the earlier study exactly. Source archives retain the precise
 executed code, including versions preceding the plan-input validation changes.
 
-The new search retains **254 complete GAN episodes and four supervised
+The new search retains **256 complete GAN episodes and four supervised
 controls**, including all failures, plus separate target/representation controls.
 Every training curve has all 24 observations; no numerical errors occurred.
 [Archive and verdict verification](validation.json) can be reproduced with
 `python -m reports.transfer_suite.solvability.verify`.
+
+The concurrently added [paired 2D transport benchmark](../../paired_error_2d/README.md)
+is preserved separately from this fixed 16-test suite. Its seven focused tests
+also pass after integration; its original result and provenance records are
+unchanged.
 
 These are inspected toy tasks with one initialization. Individual solvability
 does not establish a universal recipe, natural-image transfer or the predictive

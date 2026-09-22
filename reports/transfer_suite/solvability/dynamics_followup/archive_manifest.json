@@ -1,0 +1,68 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "original_path": "README.md",
+      "original_sha256": "55ddb1f0d736394eb7a929703ce1b0cfd0ecb62341db97257763cca8f1c588fc",
+      "archived_sha256": "55ddb1f0d736394eb7a929703ce1b0cfd0ecb62341db97257763cca8f1c588fc",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cadence_d2_g4_12000__reserved_alternating_critic_updates.json.gz",
+      "original_path": "episodes/cadence_d2_g4_12000__reserved_alternating_critic_updates.json.gz",
+      "original_sha256": "2ceef89f8ae5fda0ff09326745832cbc5d319e7ec277ac50ff1befabb574ebe6",
+      "archived_sha256": "2ceef89f8ae5fda0ff09326745832cbc5d319e7ec277ac50ff1befabb574ebe6",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "episodes/cadence_d2_g4_6000__reserved_alternating_critic_updates.json.gz",
+      "original_path": "episodes/cadence_d2_g4_6000__reserved_alternating_critic_updates.json.gz",
+      "original_sha256": "c9c5051a724dd9d9e40392bedf95f878d0ad69cbabfba32c1614d27b31b296aa",
+      "archived_sha256": "c9c5051a724dd9d9e40392bedf95f878d0ad69cbabfba32c1614d27b31b296aa",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "index.json.gz",
+      "original_path": "index.json",
+      "original_sha256": "eb7a80c2b26b490945a79b7efae0869ce357be33eb15f165a5458c6be6a60e72",
+      "archived_sha256": "4a261833e20f51bd97da4755e8a661a3968d00f94c48ced3e4d777e34545b770",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "plan.json.gz",
+      "original_path": "plan.json",
+      "original_sha256": "e8a4ee1d3ee9d8ec1630b9da02041a6292274ddaaad328cc8e7becfb45d74f60",
+      "archived_sha256": "b5c6c6b29618b369f935a540ca63128c383dd531c88cecc72954cfe2298de1e2",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "protocol.json.gz",
+      "original_path": "protocol.json",
+      "original_sha256": "0e8d76d017ddb527ddd75df515a2ebd78f973cde2df7ad096155f2d030ef9be7",
+      "archived_sha256": "4d91402c8cf81e4dc5482126a522fe3ca1d759b9e8640082859553a5bb602a4a",
+      "gzip_added": true,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "run.log",
+      "original_path": "run.log",
+      "original_sha256": "c8831a10ff97bec46205ebe96a6e67596984b534312294061391ca9d00ac2f60",
+      "archived_sha256": "c8831a10ff97bec46205ebe96a6e67596984b534312294061391ca9d00ac2f60",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    },
+    {
+      "path": "source.tar.gz",
+      "original_path": "source.tar.gz",
+      "original_sha256": "f2d40956b7357d38d53b55208f76f868844d44f8da0c83bbcd9297e30e4cf3e0",
+      "archived_sha256": "f2d40956b7357d38d53b55208f76f868844d44f8da0c83bbcd9297e30e4cf3e0",
+      "gzip_added": false,
+      "markdown_links_adjusted": false
+    }
+  ]
+}
