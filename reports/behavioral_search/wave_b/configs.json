@@ -1,0 +1,62 @@
+[
+  {
+    "name": "no_vicreg",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "particle_l2": 0.02,
+    "vicreg_weight": 0.0,
+    "cover_weight": 1.5,
+    "lr_multiplier": 1.0
+  },
+  {
+    "name": "no_l2_no_vicreg",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "particle_l2": 0.0,
+    "vicreg_weight": 0.0,
+    "cover_weight": 1.5,
+    "lr_multiplier": 1.0
+  },
+  {
+    "name": "base_regularization",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "particle_l2": 0.0,
+    "vicreg_weight": 1.0,
+    "cover_weight": 0.0,
+    "lr_multiplier": 1.0
+  },
+  {
+    "name": "music_cover",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "particle_l2": 0.02,
+    "vicreg_weight": 0.05,
+    "cover_weight": 1.0,
+    "lr_multiplier": 1.0
+  },
+  {
+    "name": "no_cover",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "particle_l2": 0.02,
+    "vicreg_weight": 0.05,
+    "cover_weight": 0.0,
+    "lr_multiplier": 1.0
+  }
+]
