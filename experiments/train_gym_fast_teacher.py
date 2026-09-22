@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Train the Lunar fast teacher from a frozen #18 spine.
 
-The student does not see this loss. Each stage descends
+The student does not see this loss. Every stage descends
 
     speed_bias * (main_engine * altitude) + anchor_weight * MSE(action, frozen safe action)
 
@@ -9,13 +9,12 @@ on states from the safe teacher's own successful probe landings. Positive main
 engine fires up, so the speed term cuts hover. The anchor is only a stabilizer
 so the first step does not erase the lander. It is not a fractional shrink of
 the action, and it is not the safe-fast kinematic cost (`safe_fast_weight` stays
-0). After each stage a closed-loop probe on seeds 581000+ keeps the checkpoint
-only when it still lands and is strictly faster. The next stage that loses
-landings, or adds crashes or flyaways, is not saved as `held.pt`. Crashed
-episodes are never a training set.
+0). The speed term keeps growing through every stage. A crashy probe is
+expected. `held.pt` is the fastest stage that still has successful landings,
+not the last stage that matched the safe landing rate. Collect drops crashes.
+Crashed episodes are never a training set.
 """
 import argparse
-import shutil
 import sys
 import time
 from pathlib import Path
@@ -42,7 +41,8 @@ DEFAULTS = dict(
     anchor_weight=1.0,
     speed_growth=2.0,
     steps_per_stage=40,
-    max_stages=6,
+    max_stages=8,
+    min_held_landings=1,
     lr=1e-4,
     batch_size=256,
     seed=24011,
@@ -51,6 +51,10 @@ DEFAULTS = dict(
 )
 FORMAT = "gym_fast_teacher_v1"
 GRAD_CLIP = 1.0
+# A stage that still matches the safe landing count must be at least this much
+# faster. A 20/20 probe that is one step quicker is not a hold. A crashy stage
+# is not subject to this bar; fewer success steps win.
+FULL_LANDING_MIN_DROP = 0.10
 LOCKED = dict(
     arm="fast_teacher",
     imitation_weight=0.0,
@@ -81,9 +85,11 @@ def validate(cfg):
     _positive_number(cfg["speed_growth"], "speed_growth")
     if cfg["speed_growth"] <= 1:
         raise ValueError("speed_growth must be greater than 1 so each stage is faster")
-    for key in ("steps_per_stage", "max_stages", "batch_size", "probe_episodes"):
+    for key in ("steps_per_stage", "max_stages", "batch_size", "probe_episodes", "min_held_landings"):
         if type(cfg[key]) is not int or cfg[key] < 1:
             raise ValueError(f"{key} must be a positive integer")
+    if cfg["min_held_landings"] > cfg["probe_episodes"]:
+        raise ValueError("min_held_landings cannot exceed probe_episodes")
     if type(cfg["seed"]) is not int or type(cfg["probe_seed_start"]) is not int:
         raise ValueError("seed and probe_seed_start must be integers")
     if cfg["batch_size"] < 2:
@@ -102,20 +108,39 @@ def probe_seeds(start, count):
     return seeds
 
 
-def hold_decision(safe, stage):
-    """Hold a stage that still lands and is strictly faster. Break when the pad goes.
+def select_held_stage(stages, min_landings, safe=None, full_landing_min_drop=FULL_LANDING_MIN_DROP):
+    """Fastest stage that still has landings. Do not stop because the probe crashed.
 
-    `safe` and `stage` use landing_count, crash_count, oob_count, mean_success_steps.
+    Eligible stages have ``landing_count >= min_landings`` and a finite mean
+    success-step count. The hold minimizes that mean. Ties go to the later
+    stage. A stage that still matches the safe landing count must also be
+    ``full_landing_min_drop`` faster than the safe probe, so a 20/20 result
+    one step quicker is not kept. A crashy stage has no such bar.
     """
-    if stage["landing_count"] < safe["landing_count"]:
-        return "break"
-    if stage["crash_count"] > safe["crash_count"] or stage["oob_count"] > safe["oob_count"]:
-        return "break"
-    if stage["mean_success_steps"] is None or safe["mean_success_steps"] is None:
-        return "break"
-    if stage["mean_success_steps"] < safe["mean_success_steps"]:
-        return "hold"
-    return "continue"
+    if type(min_landings) is not int or min_landings < 1:
+        raise ValueError("min_landings must be a positive integer")
+    eligible = []
+    for row in stages:
+        steps = row.get("mean_success_steps")
+        if steps is None:
+            continue
+        if int(row["landing_count"]) < min_landings:
+            continue
+        eligible.append(row)
+    if not eligible:
+        return None
+    chosen = min(eligible, key=lambda row: (float(row["mean_success_steps"]), -int(row["stage"])))
+    if safe is None or safe.get("mean_success_steps") is None:
+        return chosen
+    if int(chosen["landing_count"]) < int(safe["landing_count"]):
+        return chosen
+    safe_steps = float(safe["mean_success_steps"])
+    if safe_steps <= 0:
+        return chosen
+    drop = (safe_steps - float(chosen["mean_success_steps"])) / safe_steps
+    if drop < full_landing_min_drop:
+        return None
+    return chosen
 
 
 def _speed_loss(action, altitude, safe_action, speed_bias, anchor_weight):
@@ -328,8 +353,8 @@ def _train_curriculum(cfg):
         speed_term=LOCKED["speed_term"],
         safe_fast_weight=0.0,
         adv_weight=1.0,
-        note="Held checkpoint is the last stage that still lands and is strictly faster. "
-             "Crashed probe episodes are not training rows.",
+        note="Held checkpoint is the fastest stage that still has successful landings. "
+             "The probe may be crashy. Crashed episodes are not training rows.",
     )
     held_path = None
     held_stage = None
@@ -343,6 +368,8 @@ def _train_curriculum(cfg):
             f"anchor_weight={cfg['anchor_weight']} safe_fast_weight=0 adv_weight=1")
         log("LOSS main_engine * altitude, plus an anchor to the frozen safe action. "
             "Not the safe-fast kinematic cost. Not the student paired-error step.")
+        log(f"HOLD after all {cfg['max_stages']} stages. min_held_landings={cfg['min_held_landings']}. "
+            "A crashy probe is expected. Do not stop at the first unsafe stage.")
         bundle["E_control"].eval()
         bundle["G"].branches[1].eval()
         safe_episodes, safe_columns = _roll(bundle, seeds, live, logfile, "safe")
@@ -363,6 +390,7 @@ def _train_curriculum(cfg):
              if p.requires_grad],
             lr=cfg["lr"])
         generator = torch.Generator(device=device).manual_seed(cfg["seed"])
+        history = []
         for stage in range(1, cfg["max_stages"] + 1):
             bias = float(cfg["speed_bias"]) * float(cfg["speed_growth"]) ** (stage - 1)
             log(f"STAGE {stage}/{cfg['max_stages']} speed_bias={bias:.6g} "
@@ -390,13 +418,14 @@ def _train_curriculum(cfg):
             bundle["G"].branches[1].eval()
             stage_episodes, _ignored = _roll(bundle, seeds, live, logfile, f"stage={stage}")
             stage_stats = speed_stats(stage_episodes)
-            decision = hold_decision(safe, stage_stats)
             steps_text = "none" if stage_stats["mean_success_steps"] is None else \
                 f"{stage_stats['mean_success_steps']:.2f}"
+            eligible = (stage_stats["mean_success_steps"] is not None
+                        and stage_stats["landing_count"] >= cfg["min_held_landings"])
             log(f"PROBE stage={stage} landings={stage_stats['landing_count']}/{stage_stats['episodes']} "
                 f"crashes={stage_stats['crash_count']} oob={stage_stats['oob_count']} "
-                f"success_steps={steps_text} decision={decision}")
-            record = dict(stage=stage, speed_bias=bias, decision=decision,
+                f"success_steps={steps_text} eligible={eligible}")
+            record = dict(stage=stage, speed_bias=bias, eligible=eligible,
                           loss=last[0], speed=last[1], anchor=last[2],
                           safe=safe, probe=stage_stats)
             metrics.write(json_line(record))
@@ -404,27 +433,39 @@ def _train_curriculum(cfg):
             stage_path = out / f"stage_{stage}.pt"
             _save_checkpoint(
                 stage_path, bundle, cfg, bias, total_step, provenance,
-                dict(status=decision, probe=stage_stats, safe=safe, held=decision == "hold"))
-            if decision == "hold":
-                held_path = out / "held.pt"
-                shutil.copyfile(stage_path, held_path)
-                held_stage = stage
-                log(f"HELD stage={stage} success_steps={steps_text} -> {held_path}")
-            elif decision == "break":
-                if held_path is None:
-                    log("STOP first speed stage lost the pad. No held checkpoint. Do not collect.")
-                else:
-                    log(f"STOP stage={stage} lost landings or added crashes. "
-                        f"Kept held stage {held_stage}. Crashed episodes are not the fast set.")
-                break
-            else:
-                log(f"CONTINUE stage={stage} still lands but is not strictly faster")
+                dict(status="recorded", probe=stage_stats, safe=safe, held=False))
+            history.append(dict(
+                stage=stage, path=stage_path, speed_bias=bias,
+                landing_count=stage_stats["landing_count"],
+                crash_count=stage_stats["crash_count"],
+                oob_count=stage_stats["oob_count"],
+                mean_success_steps=stage_stats["mean_success_steps"],
+                episodes=stage_stats["episodes"]))
+        chosen = select_held_stage(history, cfg["min_held_landings"], safe=safe)
+        if chosen is None:
+            log("STOP no stage was a faster landing worth holding. "
+                "A 20/20 probe a step quicker than safe is not kept. Do not collect.")
         else:
-            if held_path is None:
-                log("STOP max stages finished with no strictly faster landing. Do not collect.")
-            else:
-                log(f"DONE max stages. Held stage {held_stage} still lands. "
-                    "Raise max_stages to push further.")
+            held_stage = int(chosen["stage"])
+            held_path = out / "held.pt"
+            saved = torch.load(chosen["path"], map_location="cpu", weights_only=False)
+            saved["validation"] = dict(
+                status="held", held=True, stage=held_stage,
+                probe=dict(landing_count=chosen["landing_count"],
+                           crash_count=chosen["crash_count"],
+                           oob_count=chosen["oob_count"],
+                           mean_success_steps=chosen["mean_success_steps"],
+                           episodes=chosen["episodes"]),
+                safe=safe,
+                note="Fastest stage with successful landings. Probe crashes are expected. "
+                     "Collect keeps a pair only when both teachers land.")
+            torch.save(saved, held_path)
+            steps_text = f"{chosen['mean_success_steps']:.2f}"
+            log(f"HELD stage={held_stage} landings={chosen['landing_count']}/{chosen['episodes']} "
+                f"crashes={chosen['crash_count']} oob={chosen['oob_count']} "
+                f"success_steps={steps_text} -> {held_path}")
+            log("HELD may be crashy on the probe. Collect drops every seed this teacher misses. "
+                "Do not train crash actions.")
     write_json(out / "provenance.json", provenance)
     (out / "config.yaml").write_text(yaml.safe_dump(cfg))
     return dict(held=None if held_path is None else str(held_path), held_stage=held_stage, smoke=False)

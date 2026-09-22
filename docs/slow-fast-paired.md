@@ -34,10 +34,14 @@ On this plant, one seed, the closed-loop curve is:
 | 3 (overspeed) | 1.000 | 20.04 | 0 |
 | 6 (break) | 0.442 | 13.50 | 0.558 |
 
-Update 2 is as fast as the progress-aligned student can learn. Update 3 is
-faster and the student loses the pad. Update 6 is where the teacher itself
-cannot land. Those missed episodes are the crash rows. They are not given a
-separate downward-bias law.
+Update 2 is the both-land set this full-weight student can learn. Update 3 is
+faster and the student loses the pad. Update 6 is crashy (landings 0.442).
+Its missed episodes are the crash rows, and training on them fails. Training
+on update 6's both-land rows also fails this student (landings 0.023, same
+seed). That rate is allowed for the teacher. The fast set is still both-land
+only. Lunar does not stop at the first unsafe probe and does not copy update
+2 as `held.pt`. It keeps the fastest stage that still has landings, then
+collect drops every seed that teacher misses.
 
 Connected rows roll the **same start** with both teachers and keep the episode
 only when both land and the fast landing is strictly sooner. Alignment is

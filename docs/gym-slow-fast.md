@@ -38,12 +38,13 @@ overwrote the lander. Do not resume
 is two teachers on the same start.
 
 - Safe teacher: land-first, no speed term.
-- Fast teacher: the same spine, trained with an altitude speed bias. Speed
-  rises until landings break. There is no separate crash policy and no
+- Fast teacher: the same spine, trained with an altitude speed bias. A crashy
+  overall rate is allowed. There is no separate crash policy and no
   hand-picked fraction of the fast action.
 - Connected pairs: same seed, both land, aligned by progress `t/T`. On this
-  plant the held teacher is update 2 (lands in 23.41 steps). The student
-  keeps the pad and finishes in 28.31 steps.
+  plant the passing student uses update 2 (teacher 23.41 steps, student 28.31).
+  The same full-weight student does not fly update 6's both-land rows. Lunar
+  does not copy update 2 as the hold.
 - `overspeed` is update 3 (teacher 20.04 steps). The same student ends at
   landings 0.762, crash 0.237.
 - `crash_fast` is update 6, where the teacher itself lands 0.442. Those
@@ -110,30 +111,40 @@ when `particle/best.pt` is that same `#18` file.
 ### Fast teacher
 
 `configs/gym/lunar_lander_slow_fast/fast_teacher.yaml`. Starts from `#18`.
+Delete `results/gym/lunar_lander_slow_fast/fast_teacher/` before rerunning.
+That directory's stage-2 `held.pt` is the near-safe checkpoint and the trainer
+refuses a nonempty output directory.
 Trains `E_control` and G2 only. The loss on the safe teacher's successful
 probe states is
 
 `speed_bias * (main_engine * altitude) + anchor_weight * MSE(action, frozen safe action)`.
 
 `speed_bias` starts at 0.05 and doubles each stage (`speed_growth: 2`), 40
-steps per stage, at most 6 stages, Adam lr `1e-4`. The anchor stops the first
-step from wiping the engine. It is not a hand-picked fraction of the action.
-After each stage the script probes seeds `581000–581019` (disjoint from
-validation, test, and collection). It writes `held.pt` only for a stage that
-still matches the safe probe's landings, crashes, and flyaways and is
-strictly faster among successes. The stage that loses the pad is saved as
-`stage_N.pt` and is not `held.pt`. If the first stage breaks, the process
-exits 1 and does not write `held.pt`. Do not collect in that case. Crashed
-probe episodes are not a training set.
+steps per stage, 8 stages, Adam lr `1e-4`. The schedule does not stop when
+landings fall. The anchor stops the first step from wiping the engine. It is
+not a hand-picked fraction of the action. After each stage the script probes
+seeds `581000–581019` (disjoint from validation, test, and collection). A
+crashy probe is expected: a few landings and many crashes is a valid stage.
+
+`held.pt` is chosen after every stage. It is the stage with the fewest mean
+success steps among stages that landed at least `min_held_landings` times
+(default 1). A later crashy stage beats an earlier 20/20. A stage that still
+matches the safe landing count must also be at least 10% faster than the safe
+probe, so a 20/20 result one step quicker is not written. If nothing qualifies,
+the process exits 1 and does not write `held.pt`. Do not collect in that case.
+Every stage is also saved as `stage_N.pt`. Crashed probe episodes are not a
+training set.
 
 ### Collect
 
 `configs/gym/lunar_lander_slow_fast/collect.yaml`. Rolls the safe checkpoint
-and `fast_teacher/held.pt` on seeds `591000` onward (`episodes: 200`). A pair
-is kept only when both land and the fast landing is strictly sooner. Every
-safe-trajectory state is a row. The target is the fast action at the same
-fraction `t/T`. The manifest is `pairing=progress_same_seed`, `alignment=t/T`.
-Output is `results/gym/lunar_lander_slow_fast/pairs_progress.npz`.
+and `fast_teacher/held.pt` on seeds `591000` onward (`episodes: 200`). The
+fast teacher may crash on most seeds. A pair is kept only when both land and
+the fast landing is strictly sooner. Crashes, timeouts, and flyaways never
+become targets. Every kept safe-trajectory state is a row. The target is the
+fast action at the same fraction `t/T` on that seed. The manifest is
+`pairing=progress_same_seed`, `alignment=t/T`. Output is
+`results/gym/lunar_lander_slow_fast/pairs_progress.npz`.
 
 If `pairs.npz` is still in that directory, collect renames it to
 `pairs_stranger_do_not_train.npz` (and the `.json` sidecar) before writing.

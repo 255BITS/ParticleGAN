@@ -1,7 +1,7 @@
 # Slow→fast paired finetune (CPU gate)
 
 Gate **PASS**. Winner of the rank key: `connected`.
-Gate PASS is the pairing check. Lunar collect now uses two teachers, the same seed, and progress alignment. Do not train the old stranger pairs. Commands are in `docs/gym-slow-fast.md`.
+Gate PASS is the pairing check. Lunar `held.pt` is the fastest stage that still has landings, including a crashy probe. Collect keeps both-land seeds only. Do not train the old stranger pairs. Commands are in `docs/gym-slow-fast.md`.
 These numbers are a 2D pad. They are not Lunar landings.
 
 One seed (`0`), fixed eval starts, no seed sweep. Rank is landings first,
@@ -35,7 +35,7 @@ Collector: 80 same-seed both-land starts, 3058 progress-aligned rows (mean edit 
 - `supervised` matches the progress-aligned fast action with MSE and `adv_weight=0`. Landings may hold. The rank key rejects it because the #18 step did not run.
 - `stranger` is the disabled Lunar collector: a different episode's fast action at the nearest state, plentiful rows, full-weight RpGAN at `adv_weight=1`. Landings fall and crashes rise.
 - `overspeed` is the same progress alignment one speed update later. The teacher still lands. The student does not keep the pad.
-- `connected` is the held speed: same seed, both land, progress `t/T`, full fast action, `adv_weight=1`. Landings hold on the return panel and success steps fall. Diagnostic MSE stays outside the loss.
+- `connected` is both-land progress pairs, `adv_weight=1`. On this plant that set is teacher update 2. The teacher is not required to land every start. Update 6 is crashy, and its crash rows are `crash_fast`. Landings hold on the return panel and success steps fall. Diagnostic MSE stays outside the loss.
 
 ## Lunar validation that this gate is built to catch
 

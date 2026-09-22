@@ -7,8 +7,10 @@ hand-picked fraction of the fast action and no separate crash law.
 
 `connected` rolls the same start with both teachers and keeps the episode only
 when both land. Rows are aligned by progress ``t/T``. Neutral is the safe
-action. Target is the fast action at that progress. The held fast teacher is
-the last speed the student can take without losing the pad.
+action. Target is the fast action at that progress. A crashy fast teacher is
+allowed. Crash rows stay out of the fast set. This plant's passing student
+uses the both-land pairs from update 2. Lunar does not copy that index: it
+keeps the fastest stage that still has landings.
 
 The next speed update is `overspeed`: the teacher still lands, and the same
 RpGAN step does not. Past that, the teacher itself crashes. Those failed
@@ -99,8 +101,9 @@ MAPPING = (
     dict(toy="One more speed update (3) still lands as a teacher and the student "
              "loses the pad. By update 6 the teacher itself crashes. Those rows "
              "stay out of the fast set.",
-         gym="Push the speed term until landings break. Do not shrink the fast "
-             "action by a hand-picked fraction. Crashed fast-teacher rows are not pairs."),
+         gym="Run every speed stage. held.pt is the fastest stage that still has "
+             "landings, even when the probe is crashy. Collect drops crashes. "
+             "A near-safe 20/20 is not the hold."),
     dict(toy="Stranger pastes a different episode's recorded fast action onto the "
              "nearest state. The rows are plentiful. The same RpGAN step loses landings.",
          gym="That nearest-state collector is disabled. cuda:1 went 20/20 to 0/20. "
@@ -363,8 +366,8 @@ def collect_pairs(n_starts=COLLECT_STARTS, seed=4):
     held = by_step[HELD_TEACHER_STEPS]
     over = by_step[OVERSPEED_TEACHER_STEPS]
     broken = by_step[BREAK_TEACHER_STEPS]
-    if held["landings"] < LANDING_FLOOR:
-        raise RuntimeError("held fast teacher already lost the pad")
+    if held["landings"] <= 0:
+        raise RuntimeError("held fast teacher has no successful landings")
     if broken["landings"] >= LANDING_FLOOR:
         raise RuntimeError("fast teacher never lost the pad; speed did not reach the break")
     episodes, fast_failures, not_faster = _both_land_episodes(held["policy"], n_starts, seed)
@@ -861,8 +864,9 @@ def format_report(result):
         f"step_gap>={limits['step_gap_min']} speed_bias={limits['speed_bias']} "
         f"lr={limits['policy_lr']} "
         f"adv_weight={limits['adv_weight']} horizon={limits['horizon']} updates={limits['steps']}")
-    lines.append("[slow-fast] GATE PASS. Lunar collect is two teachers, same seed, both land, "
-                 "progress alignment. Nearest-stranger pairing is disabled. "
+    lines.append("[slow-fast] GATE PASS. Lunar held.pt is the fastest stage that still has "
+                 "landings, including a crashy probe. Collect keeps both-land seeds only. "
+                 "Nearest-stranger pairing is disabled. "
                  "The cuda:1 stranger run went 20/20 to 0/20. "
                  "Commands: docs/gym-slow-fast.md. No new Lunar landing is claimed here.")
     lines.append("[slow-fast] mapping")
@@ -909,9 +913,9 @@ def board_markdown(result):
         "# Slow→fast paired finetune (CPU gate)",
         "",
         f"Gate **{status}**. Winner of the rank key: `{result['winner']}`.",
-        "Gate PASS is the pairing check. Lunar collect now uses two teachers, the same seed, "
-        "and progress alignment. Do not train the old stranger pairs. "
-        "Commands are in `docs/gym-slow-fast.md`.",
+        "Gate PASS is the pairing check. Lunar `held.pt` is the fastest stage that still "
+        "has landings, including a crashy probe. Collect keeps both-land seeds only. "
+        "Do not train the old stranger pairs. Commands are in `docs/gym-slow-fast.md`.",
         "These numbers are a 2D pad. They are not Lunar landings.",
         "",
         "One seed (`0`), fixed eval starts, no seed sweep. Rank is landings first,",
@@ -960,9 +964,11 @@ def board_markdown(result):
         "Landings fall and crashes rise.",
         "- `overspeed` is the same progress alignment one speed update later. "
         "The teacher still lands. The student does not keep the pad.",
-        "- `connected` is the held speed: same seed, both land, progress `t/T`, "
-        "full fast action, `adv_weight=1`. Landings hold on the return panel and "
-        "success steps fall. Diagnostic MSE stays outside the loss.",
+        "- `connected` is both-land progress pairs, `adv_weight=1`. On this plant that "
+        "set is teacher update 2. The teacher is not required to land every start. "
+        "Update 6 is crashy, and its crash rows are `crash_fast`. "
+        "Landings hold on the return panel and success steps fall. "
+        "Diagnostic MSE stays outside the loss.",
         "",
         "## Lunar validation that this gate is built to catch",
         "",

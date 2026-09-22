@@ -11,7 +11,7 @@ import torch
 from experiments.collect_slow_fast_lunar import DEFAULTS as COLLECT_DEFAULTS, collect, validate as validate_collect
 from experiments.config import read_config
 from experiments.evaluate_gym_slow_fast import render_report, select_winner
-from experiments.train_gym_fast_teacher import (DEFAULTS as FAST_DEFAULTS, hold_decision,
+from experiments.train_gym_fast_teacher import (DEFAULTS as FAST_DEFAULTS, select_held_stage,
     train as train_fast, validate as validate_fast)
 from experiments.train_gym_slow_fast import DEFAULTS as TRAIN_DEFAULTS, train, validate as validate_train
 from experiments.train_gym_transition import DEFAULTS as WORLD_DEFAULTS, build_models, sha256
@@ -114,16 +114,22 @@ class SlowFastLunarTests(unittest.TestCase):
             validate_collect({**COLLECT_DEFAULTS, "out": "results/pairs.npz"})
         self.assertIn("pairs.npz", str(caught.exception))
 
-    def test_hold_decision_keeps_a_faster_landing_and_drops_the_break(self):
-        safe = dict(landing_count=20, crash_count=0, oob_count=0, mean_success_steps=200.)
-        self.assertEqual(hold_decision(safe, dict(
-            landing_count=20, crash_count=0, oob_count=0, mean_success_steps=150.)), "hold")
-        self.assertEqual(hold_decision(safe, dict(
-            landing_count=18, crash_count=2, oob_count=0, mean_success_steps=80.)), "break")
-        self.assertEqual(hold_decision(safe, dict(
-            landing_count=20, crash_count=0, oob_count=1, mean_success_steps=150.)), "break")
-        self.assertEqual(hold_decision(safe, dict(
-            landing_count=20, crash_count=0, oob_count=0, mean_success_steps=200.)), "continue")
+    def test_held_stage_is_the_fastest_landing_not_the_last_safe_probe(self):
+        safe = dict(landing_count=20, mean_success_steps=205.65)
+        near_safe = dict(stage=2, landing_count=20, mean_success_steps=204.25)
+        wreckless = dict(stage=5, landing_count=3, mean_success_steps=120.0)
+        quicker = dict(stage=7, landing_count=1, mean_success_steps=80.0)
+        missed = dict(stage=8, landing_count=0, mean_success_steps=None)
+        clearly_safe = dict(stage=4, landing_count=20, mean_success_steps=160.0)
+        chosen = select_held_stage([near_safe, wreckless, quicker, missed], 1, safe=safe)
+        self.assertEqual(chosen["stage"], 7)
+        self.assertEqual(select_held_stage([near_safe, wreckless], 3, safe=safe)["stage"], 5)
+        self.assertIsNone(select_held_stage([near_safe], 1, safe=safe))
+        self.assertEqual(select_held_stage([clearly_safe, near_safe], 1, safe=safe)["stage"], 4)
+        self.assertIsNone(select_held_stage([missed], 1, safe=safe))
+        fast_source = Path(train_fast.__code__.co_filename).read_text()
+        self.assertNotIn("first speed stage", fast_source)
+        self.assertNotIn("hold_decision", fast_source)
 
     def test_success_steps_ignore_crashes_and_shortcuts_are_refused(self):
         episodes = [dict(outcome="successful_landing", steps=300),
@@ -166,6 +172,8 @@ class SlowFastLunarTests(unittest.TestCase):
         validate_fast(fast_cfg)
         self.assertEqual(fast_cfg["device"], "cuda:1")
         self.assertEqual(fast_cfg["probe_seed_start"], 581000)
+        self.assertEqual(fast_cfg["max_stages"], 8)
+        self.assertEqual(fast_cfg["min_held_landings"], 1)
         self.assertGreater(fast_cfg["speed_bias"], 0)
         self.assertGreater(fast_cfg["anchor_weight"], 0)
         train_cfg = {**TRAIN_DEFAULTS, **read_config(
