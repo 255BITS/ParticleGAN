@@ -30,7 +30,7 @@ def main():
     stock = json.loads((root / "base_recipe.json").read_text())
     rows = initial["rows"] + followup["rows"]
     lines = ["# Which existing formulation works on these toys?", "",
-             "**Removing the host particle L2 term is the strongest small-change candidate in this fixed-seed comparison:** "
+             "**Removing the host particle L2 term is the strongest small-change candidate with EMA ring evaluation in this fixed-seed comparison:** "
              "all three measured targets pass, trajectory MSE is 0.002835, and the ring holds 8/8 modes at 100% HQ. "
              "The RpGAN loss, b_cap, models and training budgets stay unchanged. "
              "This is a candidate for these toys, not a universal replacement for particle L2.", "",
@@ -57,7 +57,31 @@ def main():
               "The base-core row calls `get_recipe('gan').make_loss()` and `.make_gradient_penalty()`. "
               "It is numerically identical to locked_shared on these hosts. "
               "Base regularization means VICReg 1, particle L2 0, trajectory cover 0; "
-              "the small cloud, host optimizers and budgets stay fixed in that row.", "",
+              "the small cloud, host optimizers and budgets stay fixed in that row.", ""]
+    lines += ["## Live-model leaderboard", "",
+              "Only the ring evaluation changes here: use the final live generator and live prior instead of their EMA. "
+              "Two-pole and trajectory already evaluate live weights. Budgets, seed and thresholds are unchanged. "
+              "Rows are ordered by the number of passed targets; equal counts are ties.", "",
+              "| Formulation | Two-pole | Trajectory | Live ring modes / HQ | Live ring verdict | Targets passed |",
+              "| --- | --- | --- | --- | --- | --- |"]
+    live_rows = [r for r in rows if all(k in r for k in ("two_pole", "trajectory", "ring"))]
+
+    def live_passes(row):
+        return sum(v["verdict"] == "PASS" for v in (row["two_pole"], row["trajectory"], row["ring"]["live"]))
+
+    for row in sorted(live_rows, key=lambda r: (-live_passes(r), LABELS[r["name"]])):
+        live = row["ring"]["live"]
+        lines.append(f"| {LABELS[row['name']]} | {row['two_pole']['verdict']} | {row['trajectory']['verdict']} "
+                     f"| {live['modes']}/8; {live['hq']:.2%} | {live['verdict']} | **{live_passes(row)}/3** |")
+    lines += ["", "**No particle L2 passes 2/3 live targets, tied for second by gate count.** "
+              "Its ring reaches 8/8 modes, but 74.05% HQ misses the 90% requirement. "
+              "It improves coverage over the original live model (5/8), while lowering HQ (82.30% → 74.05%). "
+              "The original ring verdict is INCONCLUSIVE; the suite's binary summary counts that as a missed target.", "",
+              "**R1+R2 at coefficient 0.1 is the only recorded same-budget variant passing all three live targets:** "
+              "two-pole slope 0.7342, trajectory MSE 0.003768, ring 7/8 modes at 100% HQ. "
+              "That run retains particle L2 0.02. Combining R1+R2 0.1 with no L2 has not been tested. "
+              "Its EMA ring misses the target, so there is no recorded small-host variant that wins all three targets "
+              "under both EMA and live evaluation. These are final-step measurements from one fixed seed, not a stability guarantee.", "",
               "## Stock recipe on the ring host", "",
               "Here the stock recipe supplies its 20,000-particle prior, VICReg 1, no particle L2, "
               "batch 256, learning rate 0.0006, discriminator LR multiplier 1.5, prior multiplier 10, "

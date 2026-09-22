@@ -1,6 +1,6 @@
 # Which existing formulation works on these toys?
 
-**Removing the host particle L2 term is the strongest small-change candidate in this fixed-seed comparison:** all three measured targets pass, trajectory MSE is 0.002835, and the ring holds 8/8 modes at 100% HQ. The RpGAN loss, b_cap, models and training budgets stay unchanged. This is a candidate for these toys, not a universal replacement for particle L2.
+**Removing the host particle L2 term is the strongest small-change candidate with EMA ring evaluation in this fixed-seed comparison:** all three measured targets pass, trajectory MSE is 0.002835, and the ring holds 8/8 modes at 100% HQ. The RpGAN loss, b_cap, models and training budgets stay unchanged. This is a candidate for these toys, not a universal replacement for particle L2.
 
 ## Same-budget comparison
 
@@ -27,6 +27,30 @@ All rows use seed 0. Training budgets remain two-pole 80, trajectory 400, ring 1
 Two-pole also requires travel ≥ 0.30; every candidate above reaches that travel threshold. Its slope limit is 1.0. Trajectory MSE must be ≤ 0.02. Ring requires ≥ 7 modes and HQ ≥ 90%. INCONCLUSIVE is preserved. Not-run combinations earn no pass.
 
 The base-core row calls `get_recipe('gan').make_loss()` and `.make_gradient_penalty()`. It is numerically identical to locked_shared on these hosts. Base regularization means VICReg 1, particle L2 0, trajectory cover 0; the small cloud, host optimizers and budgets stay fixed in that row.
+
+## Live-model leaderboard
+
+Only the ring evaluation changes here: use the final live generator and live prior instead of their EMA. Two-pole and trajectory already evaluate live weights. Budgets, seed and thresholds are unchanged. Rows are ordered by the number of passed targets; equal counts are ties.
+
+| Formulation | Two-pole | Trajectory | Live ring modes / HQ | Live ring verdict | Targets passed |
+| --- | --- | --- | --- | --- | --- |
+| R1+R2, coefficient 0.1 | PASS | PASS | 7/8; 100.00% | PASS | **3/3** |
+| Base regularization on tiny host | PASS | PASS | 2/8; 24.61% | FAIL | **2/3** |
+| Eikonal | PASS | FAIL | 8/8; 100.00% | PASS | **2/3** |
+| R1+R2, coefficient 0.02 | FAIL | PASS | 7/8; 91.67% | PASS | **2/3** |
+| Ra logistic | PASS | PASS | 4/8; 40.45% | INCONCLUSIVE | **2/3** |
+| Remove VICReg | PASS | PASS | 5/8; 66.50% | INCONCLUSIVE | **2/3** |
+| Remove particle L2 | PASS | PASS | 8/8; 74.05% | INCONCLUSIVE | **2/3** |
+| Rp hinge | PASS | PASS | 2/8; 32.89% | FAIL | **2/3** |
+| Cap coefficient 10 | PASS | FAIL | 6/8; 57.50% | INCONCLUSIVE | **1/3** |
+| Interpolation cap | PASS | FAIL | 5/8; 65.16% | INCONCLUSIVE | **1/3** |
+| Locked / base GAN core | PASS | FAIL | 5/8; 82.30% | INCONCLUSIVE | **1/3** |
+| Remove both prior penalties | PASS | FAIL | 4/8; 57.59% | INCONCLUSIVE | **1/3** |
+| VICReg weight 1 | PASS | FAIL | 5/8; 66.70% | INCONCLUSIVE | **1/3** |
+
+**No particle L2 passes 2/3 live targets, tied for second by gate count.** Its ring reaches 8/8 modes, but 74.05% HQ misses the 90% requirement. It improves coverage over the original live model (5/8), while lowering HQ (82.30% → 74.05%). The original ring verdict is INCONCLUSIVE; the suite's binary summary counts that as a missed target.
+
+**R1+R2 at coefficient 0.1 is the only recorded same-budget variant passing all three live targets:** two-pole slope 0.7342, trajectory MSE 0.003768, ring 7/8 modes at 100% HQ. That run retains particle L2 0.02. Combining R1+R2 0.1 with no L2 has not been tested. Its EMA ring misses the target, so there is no recorded small-host variant that wins all three targets under both EMA and live evaluation. These are final-step measurements from one fixed seed, not a stability guarantee.
 
 ## Stock recipe on the ring host
 
