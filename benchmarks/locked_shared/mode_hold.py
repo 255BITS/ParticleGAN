@@ -60,7 +60,7 @@ def sample_ring(means: torch.Tensor, n: int, sigma: float, generator: torch.Gene
     return means[idx] + float(sigma) * noise
 
 
-def diversity(samples: torch.Tensor, means: torch.Tensor, sigma: float = SIGMA) -> dict:
+def diversity(samples: torch.Tensor, means: torch.Tensor, sigma: float = SIGMA, *, detailed=False) -> dict:
     """Mode hold on the ring. HQ = within 3 sigma of a center, balls disjoint."""
     dist = torch.cdist(samples, means)
     nearest, which = dist.min(dim=1)
@@ -73,13 +73,26 @@ def diversity(samples: torch.Tensor, means: torch.Tensor, sigma: float = SIGMA) 
     entropy = -(positive * positive.log()).sum()
     effective = float(entropy.exp()) if modes else 0.0
     n_modes = int(means.shape[0])
-    return {
+    result = {
         "modes": modes,
         "n_modes": n_modes,
         "hq": float(hq.float().mean()),
         "cover": modes / n_modes,
         "effective_modes": effective,
     }
+    if detailed:
+        result.update(
+            sample_count=len(samples),
+            hq_counts=counts.to(torch.int64).tolist(),
+            nearest_counts=torch.bincount(which, minlength=n_modes).tolist(),
+            closest_distance_per_mode=dist.min(dim=0).values.tolist(),
+            hq_radius=3.0 * float(sigma),
+            missing_modes=(counts == 0).nonzero().flatten().tolist(),
+        )
+        if len(samples) <= 128:
+            result.update(points=samples.tolist(), nearest_mode=which.tolist(),
+                          nearest_distance=nearest.tolist(), is_hq=hq.tolist())
+    return result
 
 
 def verdict(row: dict) -> str:
@@ -93,7 +106,7 @@ def verdict(row: dict) -> str:
 
 def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
                     gan_factory=None, cap_factory=None, diagnostics=False,
-                    training_recipe=None) -> dict:
+                    training_recipe=None, log=None) -> dict:
     """Train every requested arm and score only its generated samples."""
     recipe = ModeHoldRecipe() if recipe is None else recipe
     if training_recipe is not None:
@@ -130,6 +143,19 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
     batch = BATCH if training_recipe is None else training_recipe.batch_size
     ema_g = [p.detach().clone() for p in generator.parameters()]
     ema_z = prior.z.detach().clone()
+
+    @torch.no_grad()
+    def measure():
+        # Evaluation uses its own RNG; support enumeration uses none. Neither
+        # changes the sequence of training batches or particle samples.
+        latent, _ = prior.sample(EVAL_N, generator=torch.Generator().manual_seed(seed + 9))
+        row = diversity(generator(latent), means, detailed=diagnostics)
+        if diagnostics:
+            # Every particle is equally likely. This is exact support coverage
+            # for ParticlePrior, rather than another random evaluation sample.
+            row["support"] = diversity(generator(prior.z), means, detailed=True)
+        return row
+
     def snapshot(step: int) -> dict:
         saved_g = [p.detach().clone() for p in generator.parameters()]
         saved_z = prior.z.detach().clone()
@@ -137,9 +163,7 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             for param, ema in zip(generator.parameters(), ema_g):
                 param.copy_(ema)
             prior.z.copy_(ema_z)
-            eval_stream = torch.Generator().manual_seed(seed + 9)
-            latent, _ = prior.sample(EVAL_N, generator=eval_stream)
-            row = diversity(generator(latent), means)
+            row = measure()
         with torch.no_grad():
             for param, saved in zip(generator.parameters(), saved_g):
                 param.copy_(saved)
@@ -148,6 +172,7 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         return row
 
     curve = []
+    live_curve = []
     for step in range(recipe.steps):
         if training_recipe is not None:
             scale = learning_rate_scale(step, recipe.steps, training_recipe.lr_anneal_start, training_recipe.lr_floor)
@@ -186,12 +211,17 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             ema_z.mul_(recipe.ema).add_(prior.z, alpha=1.0 - recipe.ema)
         if diagnostics and (step + 1) % 200 == 0:
             curve.append(snapshot(step + 1))
+        if diagnostics and ((step + 1) % 200 == 0 or
+                            (step + 1 >= recipe.steps - 200 and (step + 1) % 50 == 0)):
+            point = {"step": step + 1, **measure()}
+            live_curve.append(point)
+            if log is not None:
+                log(point)
     final = snapshot(recipe.steps)
     final["verdict"] = verdict(final)
     if diagnostics:
-        with torch.no_grad():
-            latent, _ = prior.sample(EVAL_N, generator=torch.Generator().manual_seed(seed + 9))
-            live = diversity(generator(latent), means)
+        live = measure()
         final["live"] = {**live, "verdict": verdict(live)}
         final["curve"] = curve
+        final["live_curve"] = live_curve
     return final

@@ -72,6 +72,11 @@ and application checks also pass and are shown separately. See the
 budgets, scope, and commands for comparing another approach. EMA cannot rescue a
 live failure. The passing R1+R2 row retains particle L2 0.02.
 
+The leaderboard now exposes actual ring mode counts, HQ, effective modes and
+late-checkpoint stability. Its original regression threshold permits 7/8 modes;
+that minimum PASS alone does not select a production default. See the
+[coverage and default-selection analysis](../reports/behavioral_baseline/default_selection.md).
+
 The [behavioral leaderboard](../reports/locked_shared/README.md) runs extracted
 two-pole, shared-trajectory and ring-diversity experiments through these
 builders. Every variant trains and is scored from measurements; no config

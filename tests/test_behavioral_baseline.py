@@ -6,10 +6,12 @@ import json
 import sys
 
 import pytest
+import torch
 
 from benchmarks.locked_shared import baseline
 from benchmarks.locked_shared.baseline import Candidate, METRICS, SHARED, run_toy, score_metrics, score_row
 from benchmarks.locked_shared import trajectory
+from benchmarks.locked_shared import mode_hold
 
 
 def passing_row():
@@ -118,3 +120,35 @@ def test_resume_rejects_changed_source_and_candidate_before_training(tmp_path, m
     with pytest.raises(SystemExit) as error:
         baseline.main()
     assert error.value.code == 2 and not trained
+
+
+def test_hq_does_not_hide_a_completely_missing_mode():
+    means = mode_hold.ring_means()
+    result = mode_hold.diversity(means[:-1], means, detailed=True)
+    assert result["hq"] == 1.0 and result["modes"] == 7
+    assert result["missing_modes"] == [7]
+    assert result["hq_counts"] == [1] * 7 + [0]
+    assert result["closest_distance_per_mode"][7] > result["hq_radius"]
+
+
+def test_diagnostics_preserve_training_and_show_quality_in_report(tmp_path):
+    before = torch.get_num_threads()
+    torch.set_num_threads(1)
+    try:
+        recipe = mode_hold.ModeHoldRecipe(steps=200)
+        original = mode_hold.train_mode_hold(recipe)
+        measured = mode_hold.train_mode_hold(recipe, diagnostics=True)
+        assert original == {key: measured[key] for key in original}
+    finally:
+        torch.set_num_threads(before)
+    row = passing_row()
+    row["toys"]["mode_hold"]["raw"] = {
+        "live": {"modes": 7, "hq": 1.0, "effective_modes": 6.37},
+        "live_curve": [{"step": 1000, "modes": 2, "hq": 0.16}],
+    }
+    path = tmp_path / "README.md"
+    baseline.render({"protocol": {"version": "test"}, "rows": [row], "shared": shared_pass()}, path)
+    text = path.read_text()
+    assert "7/8 | 100.00% | 6.37/8" in text
+    assert "2/8 | 16.00% | 0/1" in text
+    assert "minimum bar for default selection" in text

@@ -68,6 +68,7 @@ DEFAULT_CANDIDATES = (
     Candidate("locked_shared"),
     Candidate("no_particle_l2", particle_l2=0.0),
     Candidate("r1_r2_0_1", reg_arm="a_r1r2", reg_coeff=0.1),
+    Candidate("r1_r2_0_1_no_l2", reg_arm="a_r1r2", reg_coeff=0.1, particle_l2=0.0),
 )
 
 # Values are thresholds from the original behavioral scorers, not tuned on results.
@@ -195,28 +196,60 @@ def write_json(path, value):
     temp.replace(path)
 
 
+def ring_quality(row):
+    result = row.get("toys", {}).get("mode_hold", {})
+    raw = result.get("raw", {})
+    live = raw.get("live", result.get("live", {}))
+    curve = raw.get("live_curve", [])
+    tail = [point for point in curve if point["step"] >= BUDGETS["mode_hold"] - 200]
+    return {"live": live, "tail": tail,
+            "full_coverage_checks": sum(p["modes"] == mode_hold.N_MODES and p["hq"] >= mode_hold.PASS_HQ for p in tail)}
+
+
 def render(report, destination):
     scored = [(row, score_row(row, report.get("shared", {}))) for row in report["rows"]]
     scored.sort(key=lambda pair: (-pair[1]["passed_toys"], -pair[1]["passed_metrics"], pair[0]["config"]["name"]))
     winners = [row["config"]["name"] for row, score in scored if score["status"] == "PASS"]
-    winner_text = "**Passing live baseline: " + ", ".join(f"`{name}`" for name in winners) + ".**" if winners else "**No complete passing live configuration recorded.**"
+    winner_text = "**Regression PASS: " + ", ".join(f"`{name}`" for name in winners) + ".**" if winners else "**No complete passing live configuration recorded.**"
     lines = ["# Behavioral baseline — live weights", "", winner_text, "",
              f"Protocol `{report['protocol']['version']}` · CPU · seed 0 · fixed host budgets · final live weights.", "",
              "**Overall PASS requires all 29 numerical bounds on all 9 trained toys, plus the 10 shared behavioral/integration checks.** "
              "EMA is diagnostic and cannot rescue a live failure. Config equality checks are excluded. "
              "Shared checks are run once: they do not depend on the GAN config and do not contribute to its rank.", "",
+             "**Regression PASS is a minimum bar for default selection.** The original ring bar permits 7/8 modes. "
+             "Actual coverage, HQ, balance and checkpoint stability are visible below; a final-step PASS does not establish a stable ParticleGAN default. "
+             "The [default-selection analysis](default_selection.md) also compares the stock recipe on the ring host.", "",
              "Rows rank by passed toys, then passed numerical bounds; equal counts tie. "
              "Missing/nonfinite results and errors cannot pass. Thresholds and budgets are frozen before config search.", "",
-             "| Rank | Config | Live toys | Live bounds | Overall | Failed live targets |",
-             "| ---: | --- | ---: | ---: | --- | --- |"]
+             "| Rank | Config | Live toys | Live bounds | Ring modes | Ring HQ | Effective modes | Regression |",
+             "| ---: | --- | ---: | ---: | ---: | ---: | ---: | --- |"]
     last, rank = None, 0
     for index, (row, score) in enumerate(scored, 1):
         key = (score["passed_toys"], score["passed_metrics"])
         if key != last:
             rank = index
         last = key
-        failures = [name for name, t in score["toys"].items() if t["status"] != "PASS"]
-        lines.append(f"| {rank} | `{row['config']['name']}` | {score['passed_toys']}/9 | {score['passed_metrics']}/29 | **{score['status']}** | {', '.join(failures) or 'None'} |")
+        live = ring_quality(row)["live"]
+        hq = f"{live['hq']:.2%}" if "hq" in live else "Missing"
+        effective = f"{live['effective_modes']:.2f}/8" if "effective_modes" in live else "Missing"
+        lines.append(f"| {rank} | `{row['config']['name']}` | {score['passed_toys']}/9 | {score['passed_metrics']}/29 | {live.get('modes', 'Missing')}/8 | {hq} | {effective} | **{score['status']}** |")
+    lines += ["", "Effective modes measures balance among high-quality outputs; eight balanced modes gives 8. "
+              "HQ measures quality of generated samples and does not penalize a missing target cluster. "
+              "Thus 100% HQ can coexist with 7/8 coverage.", "",
+              "## Live stability and exact particle coverage", "",
+              "Final-step selection is unchanged. For default selection, report the five observations at steps 1,000, 1,050, 1,100, 1,150 and 1,200. "
+              "These are sampled checkpoints, not a claim about every intervening step. "
+              "Enumerating all 12 equally likely particles additionally distinguishes a missing mode from an unlucky 4,096-sample evaluation.", "",
+              "| Config | Worst tail modes | Worst tail HQ | Tail checks with 8/8 and HQ ≥90% | Final HQ particles by mode (0–7) |",
+              "| --- | ---: | ---: | ---: | --- |"]
+    for row, _ in scored:
+        quality = ring_quality(row)
+        tail = quality["tail"]
+        support = quality["live"].get("support", {})
+        modes = f"{min(p['modes'] for p in tail)}/8" if tail else "Missing"
+        hq = f"{min(p['hq'] for p in tail):.2%}" if tail else "Missing"
+        counts = str(support.get("hq_counts", "Missing"))
+        lines.append(f"| `{row['config']['name']}` | {modes} | {hq} | {quality['full_coverage_checks']}/{len(tail)} | {counts} |")
     lines += ["", "## Live toy matrix", "", "| Config | " + " | ".join(METRICS) + " |",
               "| --- | " + " | ".join("---" for _ in METRICS) + " |"]
     for row, score in scored:

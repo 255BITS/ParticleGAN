@@ -7,6 +7,29 @@ behavioral/integration check. EMA results are reported separately. No selection
 of the best checkpoint, seed sweep, config-identity gate, or missing-toy exemption
 contributes to the candidate ranking.
 
+Regression PASS is the original minimum bar, including **at least 7/8** ring
+modes. Default selection additionally needs the actual coverage, sample quality,
+mode balance and stability shown on the main leaderboard. A perfect final HQ
+score does not penalize an entirely missing cluster. Keep the original 29
+regression bounds fixed so new measurements cannot silently redefine PASS.
+
+The ring diagnostics now enumerate every learned particle and record live
+checkpoints every 200 steps, plus every 50 steps in the final 200 updates.
+They preserve the training RNG and final-step selection. The leaderboard shows
+the worst observed tail coverage/HQ and how many of its five tail observations
+have all eight modes with HQ at least 90%. These are observations, not guarantees
+about intervening updates. Effective modes is the entropy-based balance measure
+among HQ samples; exact support counts are also stored. With 12 equally weighted
+particles, the most even allocation across eight modes is four modes with one
+particle and four with two: its exact effective-mode ceiling is about 7.56.
+The 4,096-sample estimate fluctuates around that value.
+
+See [default-selection analysis](../../reports/behavioral_baseline/default_selection.md)
+for the missing-mode diagnosis and matched penalty comparison using the stock
+recipe's capacity, optimizer and schedule on the ring host. The main nine-toy
+board remains the same-budget 12-particle comparison. Neither board alone is a
+replacement for ParticleGAN's existing 100-Gaussian/default-recipe benchmarks.
+
 ## What is included
 
 This inventory accounts for every column in the pinned conceptmod suite.
