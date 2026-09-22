@@ -1,0 +1,9 @@
+{
+  "tests": 49,
+  "new_task_tests": 7,
+  "run": "particle-pr38-2d-replication-20260922",
+  "replicated_runs": 12,
+  "all_exact": true,
+  "earlier_launch_error": "spawn worker defined in package __main__; no training executed; fixed by moving worker to run.py",
+  "reference_scope": "affine2 and swirl2; seed 0; three recipes; fixed/movable clouds"
+}
