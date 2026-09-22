@@ -143,6 +143,17 @@ python -m benchmarks.locked_shared.grid_study \
   --output /tmp/actual_grid_api --device cuda --training-api
 ```
 
-The original-loop evidence stays in [grid](grid/README.md). API parity and
-final validation are recorded separately so their source fingerprints remain
-traceable.
+The original-loop evidence stays in [grid](grid/README.md). The
+[public-helper run](api_grid/README.md) reproduces **all 28 live/EMA coverage and
+HQ checkpoints for each of the three arms exactly**. Final distribution
+diagnostics differ by at most 1.24×10⁻¹³. CPU tests also match every G, D, prior
+and EMA tensor after 20 updates, for both stock and behavioral settings.
+[Parity and package evidence](api_grid/parity.json) records both source
+fingerprints and an installed-wheel checkpoint continuation with exact model,
+training RNG and data RNG equality.
+
+The combined validation passes 114 tests; the final trainer/grid rerun passes
+23 tests after the last input-validation fix. The
+[final behavioral rerun](validation/README.md) again passes 29/29 live bounds,
+all nine sustained targets and all ten independent checks. Historical phase
+artifacts retain their original source fingerprints.

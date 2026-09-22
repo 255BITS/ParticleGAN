@@ -1,0 +1,43 @@
+{
+  "reference_protocol_sha256": "ba77d297f3b540e4f29a487c333b9722739a18f9ce20cf9778256bc652c13745",
+  "api_protocol_sha256": "ed0a6718b67f97abe78111fea84063d9af91114f3a964bf383564951d03ccf2f",
+  "implementation_commit": "fdc6e00a5f1e70530b064d41682da391dac83d73",
+  "rows": [
+    {
+      "name": "stock",
+      "exact_live_ema_checkpoints": 28,
+      "max_distribution_absolute_difference": 8.837375276016246e-14,
+      "live_stable_from": 6000,
+      "live_confirmed": 7000
+    },
+    {
+      "name": "toy_transfer",
+      "exact_live_ema_checkpoints": 28,
+      "max_distribution_absolute_difference": 1.9539925233402755e-14,
+      "live_stable_from": 6000,
+      "live_confirmed": 7000
+    },
+    {
+      "name": "penalty_only",
+      "exact_live_ema_checkpoints": 28,
+      "max_distribution_absolute_difference": 1.234568003383174e-13,
+      "live_stable_from": 6000,
+      "live_confirmed": 7000
+    }
+  ],
+  "cpu_update_parity": "Stock and behavioral settings: all G/D/prior/EMA tensors equal after20 updates (tests/test_grid_observation.py).",
+  "tests": {
+    "combined_passed": 114,
+    "final_trainer_grid_passed": 23
+  },
+  "installed_wheel": {
+    "wheel_sha256": "16e75c74c60e869ce43275fea93b53e802c303ad7b3ea6aae4a32fdff8729ad8",
+    "uninterrupted_steps": 12,
+    "resume_after_step": 5,
+    "exact_model_tensors": 14,
+    "latent_rng_exact": true,
+    "penalty_rng_exact": true,
+    "data_rng_exact": true,
+    "note": "Extra sampling at interruption advances only the isolated evaluation RNG; training remains exact."
+  }
+}
