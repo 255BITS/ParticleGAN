@@ -331,6 +331,183 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertEqual(row["safe_fast_weight"], 1.)
             self.assertTrue(torch.isfinite(torch.tensor(row["safe_fast"])))
 
+    def test_locked_shared_config_uses_stamp_builders(self):
+        from unittest.mock import patch
+
+        from experiments.config import read_config
+        from experiments.train_gym_particle_finetune import validate
+        from lib.gym_particle_finetune import EDIT_CAP_EVERY, adversarial_game
+        from lib.vendor.concept_slider_core.reference import rp_d_loss, rp_g_loss
+        from particlegan.locked_shared import LOCKED_SHARED, make_b_cap, make_gan_loss
+
+        root = Path(__file__).resolve().parents[1]
+        raw = read_config(root / "configs/gym/lunar_lander_particle_finetune/locked_shared.yaml")
+        for pin in ("lazy_k", "loss_type", "gan_mode", "reg_coeff", "reg_kappa", "reg_arm"):
+            self.assertNotIn(pin, raw)
+        cfg = {**DEFAULTS, **raw}
+        validate(cfg)
+        self.assertEqual(cfg["adv_posture"], "locked_shared")
+        self.assertEqual(cfg["safe_fast_weight"], 0.)
+        self.assertEqual(cfg["adv_weight"], 1.)
+        self.assertNotEqual(cfg["out_dir"], DEFAULTS["out_dir"])
+        self.assertNotEqual(cfg["live_log"], DEFAULTS["live_log"])
+        yue = {**DEFAULTS, **read_config(
+            root / "configs/gym/lunar_lander_particle_finetune/particle.yaml")}
+        validate(yue)
+        self.assertEqual(yue["adv_posture"], "yue2")
+        self.assertNotIn("adv_posture", read_config(
+            root / "configs/gym/lunar_lander_particle_finetune/particle.yaml"))
+
+        with patch("lib.gym_particle_finetune.make_gan_loss", wraps=make_gan_loss) as loss, \
+             patch("lib.gym_particle_finetune.make_b_cap", wraps=make_b_cap) as cap:
+            gan, reg = adversarial_game("locked_shared")
+        self.assertEqual(loss.call_count, 1)
+        self.assertEqual(cap.call_count, 1)
+        self.assertIs(loss.call_args.args[0], LOCKED_SHARED)
+        self.assertIs(cap.call_args.args[0], LOCKED_SHARED)
+        self.assertEqual(gan.loss_type, LOCKED_SHARED.loss_type)
+        self.assertEqual(gan.mode, LOCKED_SHARED.gan_mode)
+        self.assertEqual(reg.lazy_k, LOCKED_SHARED.lazy_k)
+        self.assertEqual(reg.lazy_k, 1)
+        self.assertNotEqual(reg.lazy_k, EDIT_CAP_EVERY)
+        self.assertEqual((reg.arm, reg.coeff, reg.kappa, reg.norm, reg.method, reg.target_anneal),
+                         ("b_cap", 1.0, 1.0, "l2", "autograd", "none"))
+        real = torch.tensor([0.2, -0.4])
+        fake = torch.tensor([0.5, 0.1])
+        torch.testing.assert_close(gan.d_loss(real, fake), rp_d_loss(real, fake))
+        torch.testing.assert_close(gan.g_loss(fake, real), rp_g_loss(real, fake))
+
+        with patch("lib.gym_particle_finetune.make_gan_loss", wraps=make_gan_loss) as loss, \
+             patch("lib.gym_particle_finetune.make_b_cap", wraps=make_b_cap) as cap:
+            yue_gan, yue_reg = adversarial_game("yue2")
+        self.assertEqual(loss.call_count, 0)
+        self.assertEqual(cap.call_count, 0)
+        self.assertIsNone(yue_gan)
+        self.assertEqual(yue_reg.lazy_k, EDIT_CAP_EVERY)
+        with self.assertRaises(ValueError):
+            adversarial_game("music")
+        with self.assertRaises(ValueError) as caught:
+            validate({**cfg, "adv_posture": "music"})
+        self.assertIn("adv_posture", str(caught.exception))
+        armed = {**cfg, "safe_fast_weight": 1., "safe_fast_time_weight": 0.15,
+                 "safe_fast_crash_weight": 4., "safe_fast_success_bonus": 2.,
+                 "safe_fast_speed_limit": 0.62, "safe_fast_pad_half": 0.35,
+                 "safe_fast_horizon": 48}
+        with self.assertRaises(ValueError) as caught:
+            validate(armed)
+        self.assertIn("locked_shared does not add safe-fast", str(caught.exception))
+
+    def test_locked_shared_objective_calls_the_gan_object(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.fixture(root)
+            from lib.gym_particle_finetune import (adversarial_game, build_edit_critic,
+                configure_control_scope, controller_objective, discriminator_objective,
+                initialize_particle_finetune, normalized_g2_action)
+            bundle = configure_control_scope(initialize_particle_finetune(root / "initial.pt", "cpu"))
+            records = build_expert_records(root / "episodes.json")
+            states = torch.from_numpy(records["states"])
+            previous = torch.from_numpy(records["previous_actions"])
+            actions = torch.from_numpy(records["actions"])
+            terrain = torch.from_numpy(records["terrain"])
+            with torch.no_grad():
+                neutrals = normalized_g2_action(bundle, states, previous, terrain)
+            critic = build_edit_critic(bundle["scaler"].action(actions), neutrals,
+                                       {**DEFAULTS, "error_tokens": 4, "error_width": 8, "error_heads": 2})
+            predicted = normalized_g2_action(bundle, states[:4], previous[:4], terrain[:4])
+            target = bundle["scaler"].action(actions[:4])
+            _, reg = adversarial_game("locked_shared")
+
+            class Mark:
+                def __init__(self):
+                    self.d = self.g = 0
+
+                def d_loss(self, real, fake):
+                    self.d += 1
+                    return (real * 0).sum() + real.new_tensor(1.25)
+
+                def g_loss(self, fake, real):
+                    self.g += 1
+                    return (fake * 0).sum() + fake.new_tensor(0.5)
+
+            mark = Mark()
+            _, terms = discriminator_objective(
+                critic, predicted, target, 1, torch.Generator().manual_seed(7), reg, 8, mark)
+            self.assertEqual(mark.d, 1)
+            self.assertEqual(mark.g, 0)
+            self.assertAlmostEqual(float(terms["error_d"]), 1.25)
+            self.assertEqual(terms["b_cap_applied"], 1.)
+            _, g_terms = controller_objective(
+                critic, predicted, target, 1, torch.Generator().manual_seed(9), 8, 1., gan=mark)
+            self.assertEqual(mark.g, 1)
+            self.assertAlmostEqual(float(g_terms["error_g"]), 0.5)
+            _, skipped = discriminator_objective(
+                critic, predicted.detach(), target, 2, torch.Generator().manual_seed(8), reg, 8, mark)
+            self.assertEqual(skipped["b_cap_applied"], 1.)
+
+    def test_locked_shared_cpu_smoke_applies_stamp_every_step(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self.fixture(root)
+            from unittest.mock import patch
+
+            import experiments.train_gym_particle_finetune as trainer
+            from particlegan.gan_loss import GANLoss
+            from particlegan.locked_shared import LOCKED_SHARED
+            seen = {}
+            real_d, real_g = trainer.discriminator_objective, trainer.controller_objective
+
+            def watch_d(*args, **kwargs):
+                seen["d_gan"] = kwargs.get("gan", args[-1] if args else None)
+                return real_d(*args, **kwargs)
+
+            def watch_g(*args, **kwargs):
+                seen["g_gan"] = kwargs.get("gan", args[-1] if args else None)
+                return real_g(*args, **kwargs)
+
+            cfg = {**DEFAULTS, "adv_posture": "locked_shared", "steps": 2, "checkpoints": [1, 2],
+                   "batch_size": 4, "log_interval": 1, "device": "cpu",
+                   "error_tokens": 4, "error_width": 8, "error_heads": 2,
+                   "checkpoint": str(root / "initial.pt"), "episodes": str(root / "episodes.json"),
+                   "out_dir": str(root / "locked"), "live_log": str(root / "locked_live.log")}
+            with patch.object(trainer, "discriminator_objective", watch_d), \
+                 patch.object(trainer, "controller_objective", watch_g):
+                summary = train(cfg)
+            self.assertIsInstance(seen["d_gan"], GANLoss)
+            self.assertIs(seen["d_gan"], seen["g_gan"])
+            self.assertEqual(seen["d_gan"].loss_type, LOCKED_SHARED.loss_type)
+            self.assertEqual(seen["d_gan"].mode, LOCKED_SHARED.gan_mode)
+            self.assertEqual(summary["b_cap_applications"], 2)
+            self.assertEqual(summary["l2_aux_weight"], 0.)
+            self.assertEqual(summary["adv_weight"], 1.)
+            self.assertEqual(summary["simulator_calls"], 0)
+            self.assertIn("no landing", summary["selection"])
+            text = (root / "locked_live.log").read_text()
+            self.assertIn("STAMP particlegan.locked_shared", text)
+            self.assertIn("lazy_k=1", text)
+            self.assertIn("make_gan_loss+make_b_cap", text)
+            self.assertIn(f"Not YuE2 EDIT_CAP_EVERY=4", text)
+            self.assertNotIn("POSTURE yue2", text)
+            recipe = json.loads((root / "locked" / "recipe.json").read_text())
+            self.assertEqual(recipe["adv_posture"], "locked_shared")
+            self.assertEqual(recipe["stamp"], "particlegan.locked_shared.LOCKED_SHARED")
+            self.assertEqual(recipe["loss_type"], LOCKED_SHARED.loss_type)
+            self.assertEqual(recipe["gan_mode"], LOCKED_SHARED.gan_mode)
+            self.assertEqual(recipe["reg_every"], LOCKED_SHARED.lazy_k)
+            self.assertEqual(recipe["reg_arm"], LOCKED_SHARED.reg_arm)
+            self.assertEqual(recipe["reg_coeff"], LOCKED_SHARED.reg_coeff)
+            self.assertEqual(recipe["reg_kappa"], LOCKED_SHARED.reg_kappa)
+            self.assertEqual(recipe["fm_weight"], 0.)
+            self.assertFalse(recipe["cover_applied"])
+            self.assertFalse(recipe["particles_applied"])
+            self.assertEqual(recipe["critic_pin"], "host")
+            self.assertEqual(recipe["pairing"], "live")
+            provenance = json.loads((root / "locked" / "provenance.json").read_text())
+            self.assertIn("particlegan.locked_shared.make_b_cap", provenance["gradient_penalty"])
+            self.assertIn("every 1 steps", provenance["gradient_penalty"])
+            rows = [json.loads(line) for line in (root / "locked" / "metrics.jsonl").read_text().splitlines()]
+            self.assertEqual([row["b_cap_applied"] for row in rows], [1., 1.])
+
 
 def records_actions(records):
     return torch.from_numpy(records["actions"][:4])

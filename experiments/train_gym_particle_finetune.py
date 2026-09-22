@@ -21,13 +21,14 @@ from experiments.config import read_config
 from experiments.train_gym_transition import parameter_count, sha256, training_recipe, write_json
 from lib.gym_control import build_expert_records
 from lib.gym_particle_finetune import (EDIT_CAP_EVERY, MODULE_KEYS, REMOVED_L2,
-    build_edit_critic, configure_control_scope, controller_objective,
-    discriminator_objective, edit_cap, initialize_particle_finetune, normalized_g2_action,
-    require_live_adversary)
+    adversarial_game, build_edit_critic, configure_control_scope, controller_objective,
+    discriminator_objective, initialize_particle_finetune, locked_shared_recipe_fields,
+    normalized_g2_action, require_live_adversary)
 from lib.safe_fast_landing import gym_shaping_cost
 from particlegan import learning_rate_scale
 
-DEFAULTS = dict(arm="particle", steps=2500, batch_size=256, checkpoints=[250, 1000, 2500],
+DEFAULTS = dict(arm="particle", adv_posture="yue2", steps=2500, batch_size=256,
+    checkpoints=[250, 1000, 2500],
     log_interval=250, seed=24002, device="cuda:1", marginal_weight=1.,
     imitation_weight=0., real_encoding_weight=0., synthetic_reconstruction_weight=0.,
     adv_weight=1., train_scope="control", error_tokens=8, error_width=48, error_heads=4,
@@ -81,6 +82,11 @@ def validate(cfg):
             raise ValueError(f"{key} is removed; Arm A does not keep an auxiliary L2 term")
     require_live_adversary(cfg["adv_weight"])
     validate_safe_fast(cfg)
+    if cfg["adv_posture"] not in ("yue2", "locked_shared"):
+        raise ValueError("adv_posture must be yue2 or locked_shared")
+    if cfg["adv_posture"] == "locked_shared" and cfg["safe_fast_weight"] != 0:
+        raise ValueError("locked_shared does not add safe-fast; "
+                         "particle_safe_fast.yaml stays on the yue2 posture")
     if cfg["train_scope"] != "control":
         raise ValueError("train_scope stays control: E_control and G2, not the world")
     for key in ("error_tokens", "error_width", "error_heads"):
@@ -99,7 +105,7 @@ def validate(cfg):
         raise ValueError("Experiments must use cuda:1; GPU 0 belongs to the user")
 
 
-def capture_provenance(out, cfg, records, bundle):
+def capture_provenance(out, cfg, records, bundle, reg):
     paths = [Path(__file__), ROOT / "lib/gym_particle_finetune.py", ROOT / "lib/safe_fast_landing.py",
              ROOT / "lib/gym_control.py",
              ROOT / "lib/gym_previous_gan.py", ROOT / "lib/gym_transition.py",
@@ -129,7 +135,10 @@ def capture_provenance(out, cfg, records, bundle):
         controller_objective=("Rp logistic on the edit-normalized G2 residual; no action MSE; "
                               "safe_fast_weight=0" if cfg["safe_fast_weight"] == 0 else
                               "Rp logistic adv_weight=1 plus safe-fast kinematic shaping"),
-        gradient_penalty=f"sample-point b_cap on the edit critic, autograd L2, coeff 1, kappa 1, every {EDIT_CAP_EVERY} steps",
+        gradient_penalty=("sample-point b_cap on the edit critic, "
+                          f"{reg.method} {reg.norm}, coeff {reg.coeff:g}, kappa {reg.kappa:g}, "
+                          f"every {reg.lazy_k} steps "
+                          f"({'particlegan.locked_shared.make_b_cap' if cfg['adv_posture'] == 'locked_shared' else 'YuE2 edit_cap / EDIT_CAP_EVERY'})"),
         train_scope="E_control and G2; G1, G3, E_pair, prior, and transition D frozen",
         control_input="Expert previous command in shuffled records; learner previous command at playback")
 
@@ -155,6 +164,9 @@ def link_live_log(out, live):
 
 def train(cfg):
     validate(cfg)
+    gan, reg = adversarial_game(cfg["adv_posture"])
+    if cfg["adv_posture"] == "locked_shared":
+        locked_shared_recipe_fields(gan, reg)
     device = torch.device(cfg["device"])
     torch.set_num_threads(1)
     torch.backends.cuda.matmul.allow_tf32 = False
@@ -172,7 +184,7 @@ def train(cfg):
         raise ValueError("Expert episode source differs from initialization provenance")
     records = build_expert_records(cfg["episodes"])
     np.savez_compressed(out / "expert_records.npz", **records)
-    provenance = capture_provenance(out, cfg, records, bundle)
+    provenance = capture_provenance(out, cfg, records, bundle, reg)
     columns = [torch.as_tensor(records[key], device=device) for key in
                ("states", "previous_actions", "actions", "next_states", "terrain")]
     configure_control_scope(bundle)
@@ -182,7 +194,6 @@ def train(cfg):
         neutrals = _batched_actions(bundle, columns)
         targets = bundle["scaler"].action(columns[2])
     critic = build_edit_critic(targets, neutrals, cfg).to(device)
-    reg = edit_cap()
     adam_kwargs = dict(fused=True) if device.type == "cuda" else {}
     opt_g = torch.optim.Adam([p for p in list(ec.parameters()) + list(g.branches[1].parameters())
                               if p.requires_grad], lr=recipe.lr, betas=recipe.betas, **adam_kwargs)
@@ -204,8 +215,10 @@ def train(cfg):
     groups = dict(controller=dict(lr=recipe.lr, betas=list(recipe.betas), modules=["E_control", "G2"]),
         edit_critic=dict(lr=recipe.lr * recipe.d_lr_mult, betas=list(recipe.betas), modules=["R"]),
         frozen=["G1", "G3", "E", "prior", "D"])
-    objective = dict(loss_type="logistic", gan_mode="rp", reg_arm="b_cap", reg_method="autograd",
-        reg_every=EDIT_CAP_EVERY, adv_weight=1., train_scope="control", l2_aux_weight=0.,
+    objective = dict(adv_posture=cfg["adv_posture"], loss_type="logistic", gan_mode="rp",
+        reg_arm=reg.arm, reg_method=reg.method, reg_norm=reg.norm,
+        reg_coeff=float(reg.coeff), reg_kappa=float(reg.kappa), reg_every=reg.lazy_k,
+        target_anneal=reg.target_anneal, adv_weight=1., train_scope="control", l2_aux_weight=0.,
         safe_fast_weight=float(cfg["safe_fast_weight"]),
         safe_fast_time_weight=float(cfg["safe_fast_time_weight"]),
         safe_fast_crash_weight=float(cfg["safe_fast_crash_weight"]),
@@ -215,6 +228,8 @@ def train(cfg):
         safe_fast_horizon=int(cfg["safe_fast_horizon"]),
         critic="gmix_t8_w48_l1", normalization=critic.normalization,
         initialization_recipe=recipe.to_dict())
+    if cfg["adv_posture"] == "locked_shared":
+        objective.update(locked_shared_recipe_fields(gan, reg))
     write_json(out / "provenance.json", provenance)
     write_json(out / "recipe.json", objective)
     write_json(out / "optimizers.json", groups)
@@ -248,15 +263,25 @@ def train(cfg):
             logfile.write(text + "\n")
             livefile.write(text + "\n")
 
-        log(f"START arm=particle steps={cfg['steps']} expert_records={len(columns[0])} "
+        log(f"START arm=particle posture={cfg['adv_posture']} steps={cfg['steps']} expert_records={len(columns[0])} "
             f"episodes={len(np.unique(records['episode_ids']))} device={device} adv_weight=1 "
             f"safe_fast_weight={cfg['safe_fast_weight']} safe_fast_horizon={cfg['safe_fast_horizon']}")
         log("PLAYBACK E_control(st, previous at) -> z -> G2. TRAIN E_control and G2 only. "
             "FROZEN G1, G3, E_pair, prior, transition D.")
         log("REMOVED L2: imitation MSE; real reconstruction MSE/BCE; synthetic reconstruction MSE/BCE. "
             "AUX L2 weight=0.")
+        step_word = "update" if reg.lazy_k == 1 else "updates"
         log("CONTROLLER STEP: Rp logistic on noise versus noise plus the edit-normalized G2 residual. "
-            "sample-point b_cap on that critic every 4 updates. adv_weight=1. Not supervised_only.")
+            f"sample-point b_cap on that critic every {reg.lazy_k} {step_word}. adv_weight=1. Not supervised_only.")
+        if cfg["adv_posture"] == "locked_shared":
+            log("STAMP particlegan.locked_shared make_gan_loss+make_b_cap "
+                f"lazy_k={reg.lazy_k} loss={gan.loss_type} mode={gan.mode} "
+                f"b_cap arm={reg.arm} coeff={reg.coeff:g} kappa={reg.kappa:g} norm={reg.norm}. "
+                f"Not YuE2 EDIT_CAP_EVERY={EDIT_CAP_EVERY}. "
+                "Host prior stays frozen. No cover term. No demo particle cloud.")
+        else:
+            log(f"POSTURE yue2 edit_cap lazy_k={reg.lazy_k} EDIT_CAP_EVERY={EDIT_CAP_EVERY}. "
+                "Not particlegan.locked_shared.")
         if cfg["safe_fast_weight"] == 0:
             log("SAFE-FAST off safe_fast_weight=0. Paired-error RpGAN only. "
                 "The safe-fast arm is configs/gym/lunar_lander_particle_finetune/particle_safe_fast.yaml.")
@@ -284,7 +309,7 @@ def train(cfg):
                 predicted_d = normalized_g2_action(bundle, d_rows[0], d_rows[1], d_rows[4])
             target_d = bundle["scaler"].action(d_rows[2])
             ld, d_terms = discriminator_objective(critic, predicted_d, target_d, step, rng["edit_d"], reg,
-                                                  cfg["steps"])
+                                                  cfg["steps"], gan)
             if not torch.isfinite(ld):
                 raise FloatingPointError(f"Nonfinite discriminator loss at step {step}")
             opt_r.zero_grad(set_to_none=True)
@@ -305,7 +330,7 @@ def train(cfg):
                     cfg["safe_fast_success_bonus"], cfg["safe_fast_speed_limit"], cfg["safe_fast_pad_half"])
             lg, g_terms = controller_objective(
                 critic, predicted, target, step, rng["edit_g"], cfg["steps"], cfg["adv_weight"],
-                safe_cost, cfg["safe_fast_weight"])
+                safe_cost, cfg["safe_fast_weight"], gan)
             if not torch.isfinite(lg):
                 raise FloatingPointError(f"Nonfinite controller loss at step {step}")
             opt_g.zero_grad(set_to_none=True)

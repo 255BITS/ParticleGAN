@@ -1,8 +1,10 @@
 # Locked shared
 
-Importable demo adversarial stamp. Other code, including a later Lunar
-config, can depend on it. This page is the contract. Lunar Lander is not
-wired to it yet.
+Importable demo adversarial stamp. Other code can depend on it. This page is
+the contract. Lunar Lander imports it from
+`configs/gym/lunar_lander_particle_finetune/locked_shared.yaml`
+([gym note](gym-particle-finetune.md#locked-shared-arm)).
+`particle.yaml` is still the YuE2 cap (`lazy_k=4`), not this stamp.
 
 ```python
 from particlegan.locked_shared import LOCKED_SHARED, locked_adv_defaults, make_gan_loss, make_b_cap
@@ -50,11 +52,11 @@ this object.
 | stranger | `pairing="stranger"` |
 | thinned κ | stored kappa, penalty center hardcoded (1 in one probe, 100 in another) |
 | `Recipe("gan")` | 20_000 particles, VICReg `prior_reg=1`, no cover and no FM field |
-| YuE2 gym controller | same cap, `lazy_k=4` (`EDIT_CAP_EVERY` in `lib/gym_particle_finetune.py`) |
+| YuE2 gym controller | same cap, `lazy_k=4` (`EDIT_CAP_EVERY` in `lib/gym_particle_finetune.py`; still `particle.yaml`) |
 
 `drift(name)` returns the first five rows as `LockedShared` copies.
 `NAMED_DRIFTS` is that table.
 
-This is not a Music or Anima GPU transfer. It does not run a conceptmod toy,
-and it does not change Lunar Lander configs or `train_gym_particle_finetune`.
-Applying the stamp on Lunar Lander is a follow-up PR.
+This is not a Music or Anima GPU transfer. It does not run a conceptmod toy.
+The Lunar apply is the gym config above. It does not re-extract this stamp.
+GPU landings for that arm have not been run.

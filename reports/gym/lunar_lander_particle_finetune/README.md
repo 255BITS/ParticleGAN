@@ -30,7 +30,8 @@ has no rollout yet.
 | Imitation L2 | 2,500 | 20/20 | 50/50 | Playable default |
 | Slider paired-error | — | — | 45/50 | Separate arm, left intact |
 | Collapsed four-path particle | 2,500 | 0/20 | 2/50 | Previous recipe; action MSE exploded |
-| Paired-error particle (this branch) | — | not run | not run | `adv_weight` 1; CPU gate only |
+| Paired-error particle (YuE2 `particle.yaml`) | — | not run | not run | `adv_weight` 1; `lazy_k=4`; CPU gate only |
+| Locked-shared particle | — | not run | not run | Stamp `lazy_k=1`; no pop-os rollout yet |
 
 ## How to run
 
@@ -66,10 +67,24 @@ Lunar landing count. See [the note](../../../docs/gym-safe-fast.md).
 python -u examples/safe_fast_2d.py
 ```
 
+## Locked-shared arm
+
+`particle.yaml` is unchanged. The stamp arm is
+`configs/gym/lunar_lander_particle_finetune/locked_shared.yaml`
+(`make_gan_loss` / `make_b_cap`, `lazy_k=1`). No Lunar landing count exists
+for it. See [the note](../../../docs/gym-particle-finetune.md#locked-shared-arm).
+
+```bash
+python -u experiments/train_gym_particle_finetune.py \
+  --config configs/gym/lunar_lander_particle_finetune/locked_shared.yaml
+tail -F results/gym/lunar_lander_particle_finetune/locked_shared_live.log
+```
+
 ## Recommendation
 
-Keep `particle.yaml` as the paired-error default. Do not ship `adv_weight=0`
-or put action MSE back in place of the GAN. Do not start a seed repeat.
-The safe-fast yaml is the candidate if a later rollout wants earlier
-landings; score it on the existing validation worlds before any test claim.
-This checkout did not run that rollout.
+Keep `particle.yaml` as the paired-error default until a pop-os rollout
+scores `locked_shared.yaml`. Do not ship `adv_weight=0` or put action MSE
+back in place of the GAN. Do not start a seed repeat. The safe-fast yaml is
+the candidate if a later rollout wants earlier landings; score it on the
+existing validation worlds before any test claim. This checkout did not run
+that rollout, and it did not run locked-shared landings.
