@@ -55,7 +55,9 @@ the independent primitives remain available for other training loops.
 The [convergence leaderboard](reports/behavioral_baseline/convergence/README.md)
 compares full behavioral passes, sustained coverage, speed and data-scale
 sensitivity. `get_recipe("gan_behavioral")` exposes the measured toy candidate.
-On the actual 100-Gaussian task it ties stock's live convergence step, so
+A [learned LR controller study](reports/learned_lr/README.md) also retains fitted
+weights and held-out comparisons; its current policy does not beat cosine.
+On the actual 100-Gaussian task the behavioral candidate ties stock's live convergence step, so
 `"gan"` keeps the existing defaults. Neither preset guarantees transfer to new
 architectures or data units.
 

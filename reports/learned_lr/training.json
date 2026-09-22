@@ -1,0 +1,2535 @@
+{
+  "protocol": {
+    "version": "generic-lr-v1",
+    "seed": 0,
+    "torch": "2.13.0+cu126",
+    "python": "3.12.13",
+    "steps": 1200,
+    "training_tasks": [
+      "ring4",
+      "grid9"
+    ],
+    "held_out_tasks": [
+      "ring8",
+      "ring8_scale_half",
+      "ring8_r1r2"
+    ],
+    "candidate": {
+      "name": "learned_lr_base",
+      "loss_type": "logistic",
+      "gan_mode": "rp",
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.25,
+      "particle_l2": 0.0,
+      "vicreg_weight": 0.05,
+      "cover_weight": 1.5,
+      "lr_multiplier": 0.85,
+      "lr_schedule": "host",
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05
+    },
+    "generations": 4,
+    "population": 8,
+    "elite_count": 3,
+    "model": {
+      "z_dim": 4,
+      "hidden": 96,
+      "hidden_layers": 3,
+      "critic_fourier": 3,
+      "particles": 12,
+      "batch": 128,
+      "lr": 0.0017,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "data_sigma": 0.07
+    },
+    "objective": "mean over tasks of 0.5 mean trajectory normalized SW1 + 0.5 final-quarter normalized SW1",
+    "selection": "training distributions only; no held-out evaluation until policy freeze",
+    "source_sha256": {
+      "particlegan/__init__.py": "3ab26de05dd80b9b39e654ced674a5a7b858505fc42cc9e53b8576d5cc880433",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+      "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "particlegan/grad_regularizers.py": "45fb38532b4d0e6fa3b8483fdf18b3c822055363e68dbee4fc8e6222dabb19c6",
+      "particlegan/locked_shared.py": "51fb6d90f4dc0ba859756bb427653b5a276b29e1d96fd466a871c7d7642a560d",
+      "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+      "particlegan/recipes.py": "43a6b89fd6fa12e5cad0b590717a41fa5f3872a7c4634740df9ddddf5a22a101",
+      "particlegan/training.py": "d2f418ec1ab43ab24d57071382c2f1fd53e17eb5064fb6bbd391e84543eeb405",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+      "benchmarks/locked_shared/__init__.py": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f",
+      "benchmarks/locked_shared/__main__.py": "e01d15aabdf845d79185a577c9fa2c1e38357ec81d9fe38d427f17a01bbd0dfe",
+      "benchmarks/locked_shared/base_recipe.py": "0a392e47e8305005fa27047a04443d7958ab8bbb2bb0317bc4d1ae59d8f83dd7",
+      "benchmarks/locked_shared/baseline.py": "3dbe1fd5e8d789964c3ad532161245fdd656dc7562d6bbe041675447f4f548c2",
+      "benchmarks/locked_shared/default_selection.py": "9557ae7fa34f4a41397a389120a8d822e6ea15548c8fce60973204105a53777f",
+      "benchmarks/locked_shared/grid_study.py": "7971f41c890f4e6cac301061de7fd5f2e87b0500a511547f032dcbe5f309d75f",
+      "benchmarks/locked_shared/host_reference.py": "030fdb5d6b4ec3d212d7786409475d8aaf024384db3d26548f250cfa765b6dfa",
+      "benchmarks/locked_shared/investigate.py": "c9e7e3f365e99b5a99baa0a3119abee0d833035a29e968c7258fad75d23f2b37",
+      "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "benchmarks/locked_shared/mode_hold.py": "e9c77c5d7cd3deeddd9e55de5203b8ab56953a0649e36558faf36457c201dc3f",
+      "benchmarks/locked_shared/observation.py": "87580879e7160fbcbad81549ff6d2519fa4997dc7272af64efb092240bd5f3bd",
+      "benchmarks/locked_shared/reference.py": "a97933b31a240822fc5535979a1e84bb884472a69b702808484257cff46cfbef",
+      "benchmarks/locked_shared/run.py": "5b2a54935b08dd5250a9bf82159e2d86880e89daa23b87281ee61daa6e3bea3d",
+      "benchmarks/locked_shared/scale_probe.py": "825cc42741f8def0bb8c3ada39d2c29f98bbece79efb338b6b50beb100a7fcbb",
+      "benchmarks/locked_shared/shared_checks.py": "2ca7fe501a12193cf337bb6a9a470ccf02ce108a338afab57c686c46234f3fa5",
+      "benchmarks/locked_shared/suite_reference.py": "8bd939b18a9ff771846326d49b025ad4590ed3534d0749ae928c3ea1d0e8fe3f",
+      "benchmarks/locked_shared/summarize.py": "4a5585a310aa4f093269fe186252440ffa7d187f5e6c9e72a6324456b037b21c",
+      "benchmarks/locked_shared/trajectory.py": "6551f8bd189fc6a4851f158ca0f97caa04d64617072d92d3c0428df4a11bea65",
+      "benchmarks/locked_shared/two_pole.py": "2825d04d61094ede5156931e47c0773c3a3829bdf3dfed023e5965759d8b84e8",
+      "benchmarks/learned_lr/__init__.py": "cf9e55b41fea4ea8f4f83deea631b50ec047f8b68db2f874d8cbbba36cfb3303",
+      "benchmarks/learned_lr/controller.py": "099bbf965e22ac28b42850dbade9f0ec350d723ee79f251d9665a8878d193e52",
+      "benchmarks/learned_lr/study.py": "2b0b2fb20ef69b5848c8c70b4de306e9465d239e82ee1cfdab3cce359557637d"
+    }
+  },
+  "attempts": [
+    {
+      "name": "generation00_candidate00",
+      "generation": 0,
+      "objective": 0.2564066907148103,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.22088940155971154,
+          "seconds": 7.849244797020219,
+          "live": {
+            "modes": 2,
+            "n_modes": 4,
+            "hq": 0.25390625,
+            "cover": 0.5,
+            "effective_modes": 1.880018711090088,
+            "sw1": 0.14537878575080196,
+            "step": 1200,
+            "seconds": 7.840342312934808
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.2919239798699091,
+          "seconds": 7.501106782001443,
+          "live": {
+            "modes": 7,
+            "n_modes": 9,
+            "hq": 1.0,
+            "cover": 0.7777777777777778,
+            "effective_modes": 6.737425327301025,
+            "sw1": 0.2863649572169267,
+            "step": 1200,
+            "seconds": 7.493535516085103
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation00_candidate01",
+      "generation": 0,
+      "objective": 0.30379503017274834,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.3,
+            -1.4,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.3,
+            -1.4,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.19559109168806144,
+          "seconds": 7.446930589037947,
+          "live": {
+            "modes": 4,
+            "n_modes": 4,
+            "hq": 0.916748046875,
+            "cover": 1.0,
+            "effective_modes": 3.8393635749816895,
+            "sw1": 0.13576255737262855,
+            "step": 1200,
+            "seconds": 7.438169253990054
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.41199896865743524,
+          "seconds": 7.835797360981815,
+          "live": {
+            "modes": 2,
+            "n_modes": 9,
+            "hq": 0.427490234375,
+            "cover": 0.2222222222222222,
+            "effective_modes": 1.9705218076705933,
+            "sw1": 0.3800159138998474,
+            "step": 1200,
+            "seconds": 7.827907004975714
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation00_candidate02",
+      "generation": 0,
+      "objective": 0.28493685433449945,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.6934482487098195,
+            -0.32277179633704106,
+            -0.4357578764149115,
+            0.14210781932016694,
+            -0.21690446848480419,
+            -0.27971907907417537
+          ],
+          [
+            0.1815060814331847,
+            0.9218289662974258,
+            -0.14385151569387186,
+            -0.10083588123304364,
+            -0.11932707252302546,
+            0.03640729701226111
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.3091704245036132,
+          "seconds": 7.896204823045991,
+          "live": {
+            "modes": 2,
+            "n_modes": 4,
+            "hq": 0.237548828125,
+            "cover": 0.5,
+            "effective_modes": 1.8755420446395874,
+            "sw1": 0.36745425638893725,
+            "step": 1200,
+            "seconds": 7.888181428075768
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.26070328416538574,
+          "seconds": 7.063485978986137,
+          "live": {
+            "modes": 9,
+            "n_modes": 9,
+            "hq": 1.0,
+            "cover": 1.0,
+            "effective_modes": 8.130221366882324,
+            "sw1": 0.19615639501179094,
+            "step": 1200,
+            "seconds": 7.055849912925623
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation00_candidate03",
+      "generation": 0,
+      "objective": 0.3512735383924238,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.38550356698336846,
+            1.2106645879937699,
+            -0.21423747262182946,
+            0.03067530979082804,
+            -0.11326349503097094,
+            0.07462292683649992
+          ],
+          [
+            -0.40139789166295314,
+            -1.6600185190954224,
+            0.07407870667476306,
+            0.36412565169758415,
+            0.18796198159070515,
+            0.15496976355688338
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.3267301320647218,
+          "seconds": 6.90452506497968,
+          "live": {
+            "modes": 3,
+            "n_modes": 4,
+            "hq": 0.244140625,
+            "cover": 0.75,
+            "effective_modes": 2.9989471435546875,
+            "sw1": 0.1943595754004146,
+            "step": 1200,
+            "seconds": 6.897134816972539
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.37581694472012583,
+          "seconds": 6.762380828964524,
+          "live": {
+            "modes": 2,
+            "n_modes": 9,
+            "hq": 0.406494140625,
+            "cover": 0.2222222222222222,
+            "effective_modes": 1.96565580368042,
+            "sw1": 0.47547379920737687,
+            "step": 1200,
+            "seconds": 6.755013232934289
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation00_candidate04",
+      "generation": 0,
+      "objective": 0.27832876861855993,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.0863412423655611,
+            1.3901741978559439,
+            -0.258087020635694,
+            -0.19777567256907194,
+            -0.004175894599194872,
+            -0.14369600847200698
+          ],
+          [
+            0.23338653702796583,
+            -1.4437741581819192,
+            0.03839901437136726,
+            0.1356928373681942,
+            -0.44375587398600014,
+            0.05179690827324404
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.21140848076764623,
+          "seconds": 6.713214217917994,
+          "live": {
+            "modes": 2,
+            "n_modes": 4,
+            "hq": 0.4140625,
+            "cover": 0.5,
+            "effective_modes": 1.9687918424606323,
+            "sw1": 0.16273751004196557,
+            "step": 1200,
+            "seconds": 6.706025070045143
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3452490564694737,
+          "seconds": 6.736654205014929,
+          "live": {
+            "modes": 5,
+            "n_modes": 9,
+            "hq": 0.741943359375,
+            "cover": 0.5555555555555556,
+            "effective_modes": 4.864975929260254,
+            "sw1": 0.27194748951714975,
+            "step": 1200,
+            "seconds": 6.7289282800629735
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation00_candidate05",
+      "generation": 0,
+      "objective": 0.3529623238299583,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.46336598182935856,
+            -0.5508342536140807,
+            0.05467354768401527,
+            -0.22952499338139537,
+            -0.008084217494730235,
+            0.05762336537771082
+          ],
+          [
+            -0.0033917885837745597,
+            -1.0059449977274766,
+            -0.21771673053869836,
+            -0.0666490761430053,
+            0.03788469215144829,
+            -0.04380456219763993
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.3122625274105867,
+          "seconds": 7.46062925492879,
+          "live": {
+            "modes": 4,
+            "n_modes": 4,
+            "hq": 0.8408203125,
+            "cover": 1.0,
+            "effective_modes": 3.9034202098846436,
+            "sw1": 0.1938540923467582,
+            "step": 1200,
+            "seconds": 7.4528749390738085
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3936621202493299,
+          "seconds": 6.946097068954259,
+          "live": {
+            "modes": 4,
+            "n_modes": 9,
+            "hq": 0.747314453125,
+            "cover": 0.4444444444444444,
+            "effective_modes": 3.418583393096924,
+            "sw1": 0.36951075276487816,
+            "step": 1200,
+            "seconds": 6.938695203047246
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation00_candidate06",
+      "generation": 0,
+      "objective": 0.33476712665301367,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.9259160718267787,
+            -0.0389640712663941,
+            0.012543765916631176,
+            -0.19157657030111472,
+            0.21985010507038677,
+            0.5513076625744587
+          ],
+          [
+            0.07887749524994818,
+            -1.0246732099698181,
+            -0.3010979341856348,
+            -0.1652456307013626,
+            0.2646403345000167,
+            0.007422860931949216
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.23465794466947187,
+          "seconds": 6.746093178982846,
+          "live": {
+            "modes": 4,
+            "n_modes": 4,
+            "hq": 0.672607421875,
+            "cover": 1.0,
+            "effective_modes": 3.7546496391296387,
+            "sw1": 0.15358301545479572,
+            "step": 1200,
+            "seconds": 6.738760981941596
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.4348763086365554,
+          "seconds": 6.670715144020505,
+          "live": {
+            "modes": 5,
+            "n_modes": 9,
+            "hq": 0.82861328125,
+            "cover": 0.5555555555555556,
+            "effective_modes": 4.56504487991333,
+            "sw1": 0.32288670951331216,
+            "step": 1200,
+            "seconds": 6.66352169692982
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation00_candidate07",
+      "generation": 0,
+      "objective": 0.3491020619149509,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.1282091861084704,
+            -0.14678591716128528,
+            0.37858208597758036,
+            0.7777610654592882,
+            -0.09167916005414083,
+            -0.06719761460112997
+          ],
+          [
+            -0.7064937507270728,
+            1.354650438703204,
+            0.27892635443476926,
+            0.2927756054852933,
+            0.08670238766507735,
+            -0.34685003410457993
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.23398725577424725,
+          "seconds": 6.723272030008957,
+          "live": {
+            "modes": 4,
+            "n_modes": 4,
+            "hq": 0.82958984375,
+            "cover": 1.0,
+            "effective_modes": 3.634071111679077,
+            "sw1": 0.14198748054808066,
+            "step": 1200,
+            "seconds": 6.715511903981678
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.4642168680556546,
+          "seconds": 6.769956905976869,
+          "live": {
+            "modes": 3,
+            "n_modes": 9,
+            "hq": 0.490966796875,
+            "cover": 0.3333333333333333,
+            "effective_modes": 2.7392830848693848,
+            "sw1": 0.3116910021753315,
+            "step": 1200,
+            "seconds": 6.761767209973186
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation01_candidate00",
+      "generation": 1,
+      "objective": 0.2836746318897073,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.19494737276884513,
+            0.2668506003797257,
+            -0.17346122426265137,
+            -0.01391696331222625,
+            -0.05527009077099977,
+            -0.10585377188654557
+          ],
+          [
+            0.10372315461528764,
+            -0.13048629797112335,
+            -0.026363125330626153,
+            0.008714239033787641,
+            -0.1407707366272564,
+            0.02205105132137629
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.21526814857052967,
+          "seconds": 6.929524009930901,
+          "live": {
+            "modes": 3,
+            "n_modes": 4,
+            "hq": 0.66357421875,
+            "cover": 0.75,
+            "effective_modes": 2.951803684234619,
+            "sw1": 0.17135365696083774,
+            "step": 1200,
+            "seconds": 6.922002382925712
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3520811152088849,
+          "seconds": 6.898299284977838,
+          "live": {
+            "modes": 5,
+            "n_modes": 9,
+            "hq": 0.575927734375,
+            "cover": 0.5555555555555556,
+            "effective_modes": 4.351301193237305,
+            "sw1": 0.3379577812142316,
+            "step": 1200,
+            "seconds": 6.890765268937685
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation01_candidate01",
+      "generation": 1,
+      "objective": 0.2590317810109932,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.2645501864345824,
+            1.005261071444984,
+            -0.03202017830195414,
+            -0.004377271698949121,
+            -0.027060320406867903,
+            -0.0309760249565251
+          ],
+          [
+            -0.0048268572764554735,
+            -0.11267258955115397,
+            -0.012015937659823749,
+            0.1465698840372575,
+            -0.22594999735876914,
+            0.052015122015456015
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.23631896682686995,
+          "seconds": 6.936830124934204,
+          "live": {
+            "modes": 2,
+            "n_modes": 4,
+            "hq": 0.249755859375,
+            "cover": 0.5,
+            "effective_modes": 1.8684669733047485,
+            "sw1": 0.17096675336932524,
+            "step": 1200,
+            "seconds": 6.9295054889516905
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.28174459519511647,
+          "seconds": 7.014851585961878,
+          "live": {
+            "modes": 6,
+            "n_modes": 9,
+            "hq": 0.840576171875,
+            "cover": 0.6666666666666666,
+            "effective_modes": 5.480141639709473,
+            "sw1": 0.2970900427408537,
+            "step": 1200,
+            "seconds": 7.006858621025458
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation01_candidate02",
+      "generation": 1,
+      "objective": 0.4659052101690006,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.14069528664452377,
+            0.8588777927418778,
+            -0.31311003290630945,
+            -0.12141585365170324,
+            -0.13665936037959792,
+            -0.1274357791917426
+          ],
+          [
+            -0.22985430983006877,
+            0.7215458395310763,
+            0.00040381292390296794,
+            -0.009017492514659886,
+            -0.17480098244828807,
+            -0.017450046262596705
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.5079979861060394,
+          "seconds": 7.005191322998144,
+          "live": {
+            "modes": 3,
+            "n_modes": 4,
+            "hq": 0.504638671875,
+            "cover": 0.75,
+            "effective_modes": 2.7671053409576416,
+            "sw1": 0.21339053274383016,
+            "step": 1200,
+            "seconds": 6.997947797062807
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.4238124342319618,
+          "seconds": 6.979099469957873,
+          "live": {
+            "modes": 5,
+            "n_modes": 9,
+            "hq": 0.822998046875,
+            "cover": 0.5555555555555556,
+            "effective_modes": 4.100415229797363,
+            "sw1": 0.33755527499702276,
+            "step": 1200,
+            "seconds": 6.971750203054398
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation01_candidate03",
+      "generation": 1,
+      "objective": 0.29290917435091834,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.2891374202087137,
+            0.7395871493240352,
+            -0.29743204380802996,
+            -0.21594744066473734,
+            0.11402882572867558,
+            0.2174463044150596
+          ],
+          [
+            -0.0025136749838679667,
+            -1.2900652415658387,
+            -0.29869850016791377,
+            0.12707519963221756,
+            -0.6502319981902759,
+            0.01997404784078378
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.20955732224316445,
+          "seconds": 6.856501991045661,
+          "live": {
+            "modes": 3,
+            "n_modes": 4,
+            "hq": 0.822998046875,
+            "cover": 0.75,
+            "effective_modes": 2.9655113220214844,
+            "sw1": 0.1535479036870165,
+            "step": 1200,
+            "seconds": 6.84758584597148
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3762610264586722,
+          "seconds": 6.895024411031045,
+          "live": {
+            "modes": 4,
+            "n_modes": 9,
+            "hq": 0.681396484375,
+            "cover": 0.4444444444444444,
+            "effective_modes": 3.4117836952209473,
+            "sw1": 0.44261846035675906,
+            "step": 1200,
+            "seconds": 6.887618464999832
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation01_candidate04",
+      "generation": 1,
+      "objective": 0.3168491071761448,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.3664913048366629,
+            -0.1687588078456554,
+            -0.21977827405186157,
+            -0.19022443039454748,
+            -0.12571456779484164,
+            -0.12209306574939281
+          ],
+          [
+            0.07305115678922867,
+            -0.38224400275963566,
+            -0.14479893307036762,
+            0.009310025958347288,
+            -0.09639504537101226,
+            -0.03231523065389851
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.2903042209377557,
+          "seconds": 6.917630970012397,
+          "live": {
+            "modes": 4,
+            "n_modes": 4,
+            "hq": 1.0,
+            "cover": 1.0,
+            "effective_modes": 3.6579246520996094,
+            "sw1": 0.25807871215653666,
+            "step": 1200,
+            "seconds": 6.9094905849779025
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3433939934145339,
+          "seconds": 6.892334236064926,
+          "live": {
+            "modes": 7,
+            "n_modes": 9,
+            "hq": 1.0,
+            "cover": 0.7777777777777778,
+            "effective_modes": 6.483724594116211,
+            "sw1": 0.34356881032861747,
+            "step": 1200,
+            "seconds": 6.884841509978287
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation01_candidate05",
+      "generation": 1,
+      "objective": 0.31130651853024205,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.03858285228740277,
+            1.4530767069171604,
+            0.18840276785944277,
+            0.11433676302192627,
+            0.1953786325841954,
+            -0.008417917378022485
+          ],
+          [
+            0.010576394654419605,
+            1.1863131742042643,
+            0.016686903212452114,
+            0.020810378978481085,
+            -0.17283617114452166,
+            -0.009287608246424786
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.3337438004322024,
+          "seconds": 6.728392570978031,
+          "live": {
+            "modes": 2,
+            "n_modes": 4,
+            "hq": 0.3203125,
+            "cover": 0.5,
+            "effective_modes": 1.999767541885376,
+            "sw1": 0.3057627680432352,
+            "step": 1200,
+            "seconds": 6.721130063990131
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.2888692366282817,
+          "seconds": 6.75132596003823,
+          "live": {
+            "modes": 7,
+            "n_modes": 9,
+            "hq": 0.909912109375,
+            "cover": 0.7777777777777778,
+            "effective_modes": 6.32240104675293,
+            "sw1": 0.21137761947508443,
+            "step": 1200,
+            "seconds": 6.743886632961221
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation01_candidate06",
+      "generation": 1,
+      "objective": 0.29695295505958547,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.4827787270684838,
+            0.7896619055655276,
+            -0.19430132103128844,
+            0.0634374212628439,
+            -0.013224123742022288,
+            0.11720909713095012
+          ],
+          [
+            -0.1313594202552048,
+            -0.18995242060949954,
+            0.10291528363328459,
+            0.1742787871803438,
+            -0.30320713528508825,
+            -0.057104092918353944
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.27149411983225,
+          "seconds": 6.742698115063831,
+          "live": {
+            "modes": 3,
+            "n_modes": 4,
+            "hq": 0.48291015625,
+            "cover": 0.75,
+            "effective_modes": 2.3916687965393066,
+            "sw1": 0.19205170699370236,
+            "step": 1200,
+            "seconds": 6.734777188976295
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3224117902869209,
+          "seconds": 6.814325096085668,
+          "live": {
+            "modes": 5,
+            "n_modes": 9,
+            "hq": 0.7548828125,
+            "cover": 0.5555555555555556,
+            "effective_modes": 4.188875675201416,
+            "sw1": 0.28912148241085317,
+            "step": 1200,
+            "seconds": 6.806709059979767
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation01_candidate07",
+      "generation": 1,
+      "objective": 0.34434702632259045,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.5758674309089782,
+            0.8143937860652819,
+            -0.18125588763678127,
+            0.06259024988860941,
+            -0.037031120599303545,
+            -0.2984156912837154
+          ],
+          [
+            0.4870467141835034,
+            0.8383026417419022,
+            0.00931389404121731,
+            -0.1865187139074251,
+            -0.40450650780125996,
+            -0.030892070453182686
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.37972972921570614,
+          "seconds": 6.844323742086999,
+          "live": {
+            "modes": 2,
+            "n_modes": 4,
+            "hq": 0.494140625,
+            "cover": 0.5,
+            "effective_modes": 1.8705681562423706,
+            "sw1": 0.40563819149115465,
+            "step": 1200,
+            "seconds": 6.836970765027218
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3089643234294748,
+          "seconds": 6.84023914008867,
+          "live": {
+            "modes": 5,
+            "n_modes": 9,
+            "hq": 0.501708984375,
+            "cover": 0.5555555555555556,
+            "effective_modes": 4.729487419128418,
+            "sw1": 0.24067411402045003,
+            "step": 1200,
+            "seconds": 6.832312434096821
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation02_candidate00",
+      "generation": 2,
+      "objective": 0.3222953246354117,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.1036204948279554,
+            0.5696373553821177,
+            -0.16909366765882172,
+            -0.06203965974703474,
+            -0.005892919055047966,
+            -0.00630931607863916
+          ],
+          [
+            0.05002644424256296,
+            -0.41592760676480983,
+            -0.09086017212224745,
+            0.07276839043426259,
+            -0.28943086720088945,
+            0.029022818124748093
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.28660546919621205,
+          "seconds": 6.829612789093517,
+          "live": {
+            "modes": 3,
+            "n_modes": 4,
+            "hq": 0.6728515625,
+            "cover": 0.75,
+            "effective_modes": 2.8079822063446045,
+            "sw1": 0.24494382117155328,
+            "step": 1200,
+            "seconds": 6.8223094010027125
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3579851800746114,
+          "seconds": 7.0077131589641795,
+          "live": {
+            "modes": 5,
+            "n_modes": 9,
+            "hq": 0.41552734375,
+            "cover": 0.5555555555555556,
+            "effective_modes": 4.997209548950195,
+            "sw1": 0.3393403294705742,
+            "step": 1200,
+            "seconds": 7.000170633080415
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation02_candidate01",
+      "generation": 2,
+      "objective": 0.31992683859962917,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.1444125722574735,
+            0.9083929950357177,
+            -0.011550598467267942,
+            -0.15052002207603016,
+            -0.09221385021752423,
+            0.22728301250032437
+          ],
+          [
+            0.0598572039350619,
+            -1.0289659986626452,
+            0.0387037310639613,
+            -0.016331373605667915,
+            -0.1324884847236828,
+            0.027264804609632758
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.32324317860279506,
+          "seconds": 6.776568007073365,
+          "live": {
+            "modes": 3,
+            "n_modes": 4,
+            "hq": 0.747802734375,
+            "cover": 0.75,
+            "effective_modes": 2.5731842517852783,
+            "sw1": 0.28375982427262464,
+            "step": 1200,
+            "seconds": 6.769320290070027
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3166104985964633,
+          "seconds": 6.895537159987725,
+          "live": {
+            "modes": 7,
+            "n_modes": 9,
+            "hq": 0.83642578125,
+            "cover": 0.7777777777777778,
+            "effective_modes": 6.2678327560424805,
+            "sw1": 0.25017138997891636,
+            "step": 1200,
+            "seconds": 6.8881667740643024
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation02_candidate02",
+      "generation": 2,
+      "objective": 0.35002458418445076,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.41471337067249336,
+            0.6360633135136725,
+            -0.0787725396574178,
+            -0.015237195731036803,
+            -0.17459303319953304,
+            -0.18236315092492916
+          ],
+          [
+            -0.06438733926504538,
+            -0.3759083853557073,
+            -0.12836409108495458,
+            0.19566039210053693,
+            -0.3819566243689859,
+            0.008007227322434255
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.39301345459533454,
+          "seconds": 7.328354222001508,
+          "live": {
+            "modes": 4,
+            "n_modes": 4,
+            "hq": 0.75390625,
+            "cover": 1.0,
+            "effective_modes": 3.1706085205078125,
+            "sw1": 0.3002639843148711,
+            "step": 1200,
+            "seconds": 7.321059165056795
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.307035713773567,
+          "seconds": 6.895619919989258,
+          "live": {
+            "modes": 6,
+            "n_modes": 9,
+            "hq": 0.83056640625,
+            "cover": 0.6666666666666666,
+            "effective_modes": 5.4588751792907715,
+            "sw1": 0.28099301512133495,
+            "step": 1200,
+            "seconds": 6.886930305976421
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation02_candidate03",
+      "generation": 2,
+      "objective": 0.3186780895768318,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.02384406650871146,
+            1.3105742619691823,
+            -0.12483921785436344,
+            0.004661032016280042,
+            -0.017111355628829934,
+            0.13210520300194142
+          ],
+          [
+            0.0953242583974378,
+            -0.4698901258103115,
+            -0.15330434853324393,
+            0.22638552174196672,
+            -0.62945514301483,
+            0.005435148725943591
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.17979622914829152,
+          "seconds": 6.651409129030071,
+          "live": {
+            "modes": 1,
+            "n_modes": 4,
+            "hq": 0.25390625,
+            "cover": 0.25,
+            "effective_modes": 1.0,
+            "sw1": 0.14982505912821695,
+            "step": 1200,
+            "seconds": 6.643717341939919
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.4575599500053721,
+          "seconds": 6.59363164298702,
+          "live": {
+            "modes": 2,
+            "n_modes": 9,
+            "hq": 0.4150390625,
+            "cover": 0.2222222222222222,
+            "effective_modes": 1.9668385982513428,
+            "sw1": 0.4165065473956439,
+            "step": 1200,
+            "seconds": 6.586516844923608
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation02_candidate04",
+      "generation": 2,
+      "objective": 0.32136380693873495,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.05682083465656592,
+            0.723901578829976,
+            -0.28340384448764505,
+            -0.13701228198673632,
+            -0.01187055149066159,
+            -0.31691912554712476
+          ],
+          [
+            0.12169716058932854,
+            -1.2560606576295696,
+            -0.14815723067271852,
+            0.05900653237754497,
+            -0.5546135217594994,
+            -0.027542961646674677
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.24433538134422828,
+          "seconds": 6.614091025898233,
+          "live": {
+            "modes": 3,
+            "n_modes": 4,
+            "hq": 0.594482421875,
+            "cover": 0.75,
+            "effective_modes": 2.9439170360565186,
+            "sw1": 0.16027500940995376,
+            "step": 1200,
+            "seconds": 6.60684827901423
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.39839223253324163,
+          "seconds": 6.773133869981393,
+          "live": {
+            "modes": 6,
+            "n_modes": 9,
+            "hq": 0.909912109375,
+            "cover": 0.6666666666666666,
+            "effective_modes": 5.636420726776123,
+            "sw1": 0.38033711087668687,
+            "step": 1200,
+            "seconds": 6.765920212958008
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation02_candidate05",
+      "generation": 2,
+      "objective": 0.22524744121880974,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.31245762233457175,
+            0.3856820610266791,
+            -0.2311743236128348,
+            -0.019373912849550222,
+            0.06748990751961567,
+            -0.07566551163732302
+          ],
+          [
+            0.06286183927870612,
+            0.022807383287626826,
+            0.011776246227164389,
+            0.06631052868455109,
+            -0.3234177909528535,
+            0.05173581720909612
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.2288355164660146,
+          "seconds": 6.804049103986472,
+          "live": {
+            "modes": 4,
+            "n_modes": 4,
+            "hq": 1.0,
+            "cover": 1.0,
+            "effective_modes": 3.851213216781616,
+            "sw1": 0.14075134969635344,
+            "step": 1200,
+            "seconds": 6.7967706880299374
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.2216593659716049,
+          "seconds": 6.641939006047323,
+          "live": {
+            "modes": 8,
+            "n_modes": 9,
+            "hq": 1.0,
+            "cover": 0.8888888888888888,
+            "effective_modes": 7.531519889831543,
+            "sw1": 0.1699959112443764,
+            "step": 1200,
+            "seconds": 6.634087359998375
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation02_candidate06",
+      "generation": 2,
+      "objective": 0.2789063131896176,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.08700083066788641,
+            0.8110038007469469,
+            0.09431552339061211,
+            -0.3043823244535532,
+            0.02578116028681893,
+            0.06717554205899288
+          ],
+          [
+            0.0692162575052223,
+            0.2385517948737899,
+            -0.04545393564599626,
+            0.13604640337996704,
+            -0.08892867175652663,
+            0.023344450008027533
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.24156003076493093,
+          "seconds": 6.614811514969915,
+          "live": {
+            "modes": 1,
+            "n_modes": 4,
+            "hq": 0.1669921875,
+            "cover": 0.25,
+            "effective_modes": 1.0,
+            "sw1": 0.2087816918815975,
+            "step": 1200,
+            "seconds": 6.607333117979579
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3162525956143043,
+          "seconds": 6.664704274968244,
+          "live": {
+            "modes": 6,
+            "n_modes": 9,
+            "hq": 0.83837890625,
+            "cover": 0.6666666666666666,
+            "effective_modes": 5.697818279266357,
+            "sw1": 0.21696923118582795,
+            "step": 1200,
+            "seconds": 6.65742259810213
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation02_candidate07",
+      "generation": 2,
+      "objective": 0.3712558115064234,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.20716227946706134,
+            1.326404804001675,
+            0.058942949719568316,
+            0.038749353895027205,
+            -0.023312117549576968,
+            0.1671001790349078
+          ],
+          [
+            0.16463664993678162,
+            -1.0789879008225416,
+            -0.13050285022550648,
+            0.14946201488288804,
+            -0.5919821006007823,
+            -0.0036340628440590245
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.3985877046313826,
+          "seconds": 6.683544990955852,
+          "live": {
+            "modes": 2,
+            "n_modes": 4,
+            "hq": 0.24658203125,
+            "cover": 0.5,
+            "effective_modes": 1.9100695848464966,
+            "sw1": 0.3650691280484037,
+            "step": 1200,
+            "seconds": 6.6753104460658506
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.34392391838146424,
+          "seconds": 6.78162339492701,
+          "live": {
+            "modes": 4,
+            "n_modes": 9,
+            "hq": 0.666015625,
+            "cover": 0.4444444444444444,
+            "effective_modes": 3.4847652912139893,
+            "sw1": 0.30646537303689503,
+            "step": 1200,
+            "seconds": 6.77294141089078
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation03_candidate00",
+      "generation": 3,
+      "objective": 0.30019325320087475,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.07992050617080354,
+            0.7692243697812315,
+            -0.10769792143385196,
+            -0.09528371625846452,
+            0.017566698280639177,
+            0.029326479336243032
+          ],
+          [
+            0.0693571998559823,
+            -0.15611463860342614,
+            -0.06946055251858081,
+            0.12537771106018686,
+            -0.3328081182312749,
+            0.027384558516953834
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.2129901392111369,
+          "seconds": 6.788548812037334,
+          "live": {
+            "modes": 1,
+            "n_modes": 4,
+            "hq": 0.17041015625,
+            "cover": 0.25,
+            "effective_modes": 1.0,
+            "sw1": 0.18658170087021006,
+            "step": 1200,
+            "seconds": 6.780024277977645
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.38739636719061266,
+          "seconds": 6.82351945003029,
+          "live": {
+            "modes": 4,
+            "n_modes": 9,
+            "hq": 0.42236328125,
+            "cover": 0.4444444444444444,
+            "effective_modes": 3.81367564201355,
+            "sw1": 0.38331308730821717,
+            "step": 1200,
+            "seconds": 6.816136421984993
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation03_candidate01",
+      "generation": 3,
+      "objective": 0.300320090870301,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.03166673076740932,
+            1.3184593573111973,
+            -0.23447877855670182,
+            -0.17879965124240044,
+            0.034963557796762954,
+            0.06732800199711614
+          ],
+          [
+            0.10673814954292354,
+            -0.19541397272544916,
+            -0.1310274010192849,
+            0.056433851870270085,
+            -0.33870182690628126,
+            0.031088680965970446
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.3242984165529046,
+          "seconds": 6.740639418014325,
+          "live": {
+            "modes": 2,
+            "n_modes": 4,
+            "hq": 0.569091796875,
+            "cover": 0.5,
+            "effective_modes": 1.9882314205169678,
+            "sw1": 0.2541677949248046,
+            "step": 1200,
+            "seconds": 6.733428180916235
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.27634176518769743,
+          "seconds": 6.753912445041351,
+          "live": {
+            "modes": 5,
+            "n_modes": 9,
+            "hq": 0.5732421875,
+            "cover": 0.5555555555555556,
+            "effective_modes": 4.293801307678223,
+            "sw1": 0.2335296559621875,
+            "step": 1200,
+            "seconds": 6.745205400045961
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation03_candidate02",
+      "generation": 3,
+      "objective": 0.3379192841600764,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.17414068662104504,
+            0.9705746870986731,
+            -8.168896218964383e-05,
+            -0.33247108535206993,
+            0.021922638760399828,
+            0.021823037632027663
+          ],
+          [
+            0.10292875011180422,
+            -0.05980102521619897,
+            -0.05233585690083124,
+            0.19389755194362748,
+            -0.5302052005431566,
+            -0.020729377538191308
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.330497117674983,
+          "seconds": 6.751504719024524,
+          "live": {
+            "modes": 3,
+            "n_modes": 4,
+            "hq": 0.32470703125,
+            "cover": 0.75,
+            "effective_modes": 2.8437724113464355,
+            "sw1": 0.2617425549007601,
+            "step": 1200,
+            "seconds": 6.744189782999456
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.34534145064516975,
+          "seconds": 6.681991574005224,
+          "live": {
+            "modes": 5,
+            "n_modes": 9,
+            "hq": 0.746337890625,
+            "cover": 0.5555555555555556,
+            "effective_modes": 4.538815021514893,
+            "sw1": 0.3173866889858226,
+            "step": 1200,
+            "seconds": 6.674711027066223
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation03_candidate03",
+      "generation": 3,
+      "objective": 0.34316716394837177,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.4233404445519852,
+            0.6841887719946288,
+            0.24062373576606652,
+            -0.13221478263048247,
+            0.07862546658438624,
+            0.013540444346525661
+          ],
+          [
+            0.08339532987095312,
+            -0.24259354718897908,
+            -0.13550678833553265,
+            0.10767841996671856,
+            -0.47976677629434056,
+            0.023158487369308783
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.4010917922263483,
+          "seconds": 6.662734547979198,
+          "live": {
+            "modes": 2,
+            "n_modes": 4,
+            "hq": 0.42578125,
+            "cover": 0.5,
+            "effective_modes": 1.6350882053375244,
+            "sw1": 0.36547979528434915,
+            "step": 1200,
+            "seconds": 6.655578930978663
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.2852425356703953,
+          "seconds": 6.5900574289262295,
+          "live": {
+            "modes": 3,
+            "n_modes": 9,
+            "hq": 0.489990234375,
+            "cover": 0.3333333333333333,
+            "effective_modes": 2.7279977798461914,
+            "sw1": 0.21432693564763064,
+            "step": 1200,
+            "seconds": 6.582922802073881
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation03_candidate04",
+      "generation": 3,
+      "objective": 0.44091204371801473,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.17453935411066124,
+            0.5285068536989644,
+            -0.016034352116082534,
+            0.04456626071296396,
+            0.07099676581253511,
+            0.11643507080623347
+          ],
+          [
+            0.05303054590319663,
+            -0.05752180492795601,
+            -0.014452692840671029,
+            0.17684425635001993,
+            -0.2548801725288917,
+            -0.0332532543370023
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.5740238513068132,
+          "seconds": 6.497060847003013,
+          "live": {
+            "modes": 2,
+            "n_modes": 4,
+            "hq": 0.41845703125,
+            "cover": 0.5,
+            "effective_modes": 1.950531244277954,
+            "sw1": 0.46272399903372413,
+            "step": 1200,
+            "seconds": 6.490007389103994
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.30780023612921625,
+          "seconds": 6.627399101969786,
+          "live": {
+            "modes": 5,
+            "n_modes": 9,
+            "hq": 0.67041015625,
+            "cover": 0.5555555555555556,
+            "effective_modes": 4.414037704467773,
+            "sw1": 0.25026649340106727,
+            "step": 1200,
+            "seconds": 6.620173785020597
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation03_candidate05",
+      "generation": 3,
+      "objective": 0.3312730091253791,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.20522517866689965,
+            0.3001018873788872,
+            -0.024874855870315696,
+            -0.1941802772292492,
+            -0.010700222385076768,
+            -0.1416568188163674
+          ],
+          [
+            0.0863128690899204,
+            0.20124652858357164,
+            -0.17604399035568866,
+            0.20314138560525805,
+            -0.7088919662598436,
+            0.01020681488829284
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.27296673809570626,
+          "seconds": 6.557943225954659,
+          "live": {
+            "modes": 4,
+            "n_modes": 4,
+            "hq": 0.830322265625,
+            "cover": 1.0,
+            "effective_modes": 3.632114887237549,
+            "sw1": 0.16248411543625668,
+            "step": 1200,
+            "seconds": 6.550761859980412
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.38957928015505194,
+          "seconds": 6.808311927015893,
+          "live": {
+            "modes": 4,
+            "n_modes": 9,
+            "hq": 0.762451171875,
+            "cover": 0.4444444444444444,
+            "effective_modes": 3.17004656791687,
+            "sw1": 0.37287995436782756,
+            "step": 1200,
+            "seconds": 6.800874299951829
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation03_candidate06",
+      "generation": 3,
+      "objective": 0.31223432638384374,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            -0.1650440338100264,
+            0.5582002905334675,
+            -0.1193861362574005,
+            -0.03634994877221765,
+            0.08230825431703645,
+            0.05502474808479178
+          ],
+          [
+            0.04821650570099312,
+            0.192699256250095,
+            0.014268289265504469,
+            0.1329731141232705,
+            -0.018424729506325677,
+            0.10552674196029896
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.25665599737083084,
+          "seconds": 6.92621164501179,
+          "live": {
+            "modes": 4,
+            "n_modes": 4,
+            "hq": 0.911376953125,
+            "cover": 1.0,
+            "effective_modes": 3.6473355293273926,
+            "sw1": 0.19528304298242163,
+            "step": 1200,
+            "seconds": 6.919022799003869
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3678126553968566,
+          "seconds": 6.721340412972495,
+          "live": {
+            "modes": 5,
+            "n_modes": 9,
+            "hq": 0.844970703125,
+            "cover": 0.5555555555555556,
+            "effective_modes": 4.757430076599121,
+            "sw1": 0.3845096142899279,
+            "step": 1200,
+            "seconds": 6.713920186972246
+          }
+        }
+      ]
+    },
+    {
+      "name": "generation03_candidate07",
+      "generation": 3,
+      "objective": 0.27093875210651197,
+      "policy": {
+        "schema": 1,
+        "features": [
+          "bias",
+          "progress",
+          "log_gradient_ratio",
+          "gradient_alignment",
+          "log_adam_direction_ratio",
+          "log_parameter_ratio"
+        ],
+        "row_roles": [
+          "g",
+          "d"
+        ],
+        "weights": [
+          [
+            0.04232697424633809,
+            0.4116008671109924,
+            -0.20482756016857034,
+            0.032237592896758704,
+            0.01241479097124751,
+            0.14448075397772742
+          ],
+          [
+            -0.029396056596059345,
+            0.4627483577314474,
+            -0.11464924124245679,
+            0.08450824188455199,
+            -0.6066881324790457,
+            0.0605475012841728
+          ]
+        ],
+        "interval": 20,
+        "smoothing": 0.5,
+        "multiplier_bounds": [
+          0.05,
+          2.0
+        ]
+      },
+      "episodes": [
+        {
+          "task": "ring4",
+          "objective": 0.24002348626146752,
+          "seconds": 6.679122288012877,
+          "live": {
+            "modes": 2,
+            "n_modes": 4,
+            "hq": 0.408935546875,
+            "cover": 0.5,
+            "effective_modes": 1.6866098642349243,
+            "sw1": 0.19618792941691993,
+            "step": 1200,
+            "seconds": 6.671664942055941
+          }
+        },
+        {
+          "task": "grid9",
+          "objective": 0.3018540179515565,
+          "seconds": 6.862706809071824,
+          "live": {
+            "modes": 8,
+            "n_modes": 9,
+            "hq": 0.909912109375,
+            "cover": 0.8888888888888888,
+            "effective_modes": 7.189366817474365,
+            "sw1": 0.20206705632015196,
+            "step": 1200,
+            "seconds": 6.855211372952908
+          }
+        }
+      ]
+    }
+  ],
+  "best": "generation02_candidate05",
+  "frozen_selection": {
+    "overall_selected_attempt": "generation02_candidate05",
+    "overall_training_objective": 0.22524744121880974,
+    "adaptive_selected_attempt": "generation02_candidate05",
+    "adaptive_training_objective": 0.22524744121880974,
+    "adaptive_selection_role": "overall_winner",
+    "selection_rule": "Both choices use training objective only; best policy with at least one nonzero feedback coefficient is exported even if constant wins. No held-out metrics used.",
+    "selection_script_sha256": "3bafb6507059507823c1112814ad0ed735feb49b5d9e004ce052a3b032f98465",
+    "policy_sha256": "6dda872063bb0993cb69ae04ca7ca3f332389f0bce309b26f66c6a29d77836b8",
+    "adaptive_policy_sha256": "13983852dc2d0d1138fa41068d2045a67965cf60643352131741076e00399cf5",
+    "policy_file": "policy.json",
+    "adaptive_policy_file": "adaptive_policy.json"
+  }
+}

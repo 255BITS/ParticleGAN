@@ -1,0 +1,12 @@
+ring8 constant/none objective=0.171041 modes=8 hq=1.000000 stable=None seconds=8.128
+ring8 cosine/none objective=0.157330 modes=8 hq=1.000000 stable=850 seconds=6.894
+ring8 learned/none objective=0.262638 modes=4 hq=0.669434 stable=None seconds=6.884
+ring8 learned/time_only objective=0.275731 modes=2 hq=0.337646 stable=None seconds=6.959
+ring8_scale_half constant/none objective=0.241882 modes=5 hq=0.734375 stable=None seconds=6.956
+ring8_scale_half cosine/none objective=0.185528 modes=7 hq=0.834717 stable=None seconds=7.034
+ring8_scale_half learned/none objective=0.247012 modes=4 hq=0.329834 stable=None seconds=6.953
+ring8_scale_half learned/time_only objective=0.146133 modes=4 hq=0.406494 stable=None seconds=6.989
+ring8_r1r2 constant/none objective=0.181653 modes=7 hq=1.000000 stable=None seconds=6.681
+ring8_r1r2 cosine/none objective=0.190520 modes=7 hq=0.746094 stable=None seconds=6.723
+ring8_r1r2 learned/none objective=0.278997 modes=6 hq=0.743896 stable=None seconds=6.762
+ring8_r1r2 learned/time_only objective=0.245257 modes=2 hq=0.240234 stable=None seconds=6.849

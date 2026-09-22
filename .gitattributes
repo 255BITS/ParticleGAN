@@ -10,3 +10,7 @@ reports/gym/**/*.json linguist-generated=true
 reports/gym/**/*.gif linguist-generated=true
 reports/gym/**/*.zip linguist-generated=true
 reports/gym/**/*.npz linguist-generated=true
+reports/behavioral_baseline/**/*.json linguist-generated=true
+reports/learned_lr/**/*.json linguist-generated=true
+reports/learned_lr/*.log linguist-generated=true
+reports/learned_lr/*.svg linguist-generated=true

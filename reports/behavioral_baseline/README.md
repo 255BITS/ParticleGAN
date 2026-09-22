@@ -30,6 +30,11 @@ were also rerun: none passes every bound here, with or without the shared cosine
 schedule. The L2 .005 R1+R2 row reaches 8/8 modes at 100% HQ but fails trajectory.
 The external runtime's different outcomes remain documented separately.
 
+A [trained generic LR controller](../learned_lr/README.md) was also tested on
+this full suite after fitting only on separate distributions. It reaches 27/29
+bounds and seven sustained toys; cosine retains 29/29 and all nine. Its fitting
+objective improves, but it does not replace the scheduled cap baseline.
+
 ## Historical final-step search
 
 The following tables preserve the original protocol and its measurements;

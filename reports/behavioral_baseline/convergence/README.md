@@ -192,3 +192,15 @@ details are absent. **The cause of the cross-runtime divergence is unresolved.**
 We retain both results with their provenance; neither source hashes nor one
 successful runtime establishes portability. This strengthens the reason to keep
 the experimental candidate opt-in and validate on the target task/runtime.
+
+## Learned LR controller follow-up
+
+The [trained generic adapter](../../learned_lr/README.md) uses only optimizer
+state and progress to choose separate G/D learning-rate multipliers. After
+32 policy proposals and 64 fitting episodes on separate four-mode/nine-mode
+training distributions, its fitting objective improves 10.4% over cosine.
+The frozen full-suite evaluation achieves 27/29 bounds and 7/9 sustained toys,
+with 4/8 ring modes at 66.94% HQ. Cosine remains at 29/29 and 9/9. A feedback
+ablation and shifted-scale/formulation tests expose the transfer limitation;
+all weights, failed trials and action traces are retained. Defaults remain
+unchanged.
