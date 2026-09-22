@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 
 
-from ..observation import checkpoint
+from ..observation import checkpoint, schedule_optimizer
 
 import torch
 
@@ -236,6 +236,7 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None) 
             bcap_applied += 1
         d_loss = gan.d_loss(critic(real), critic(fake)) + penalty
         d_loss.backward()
+        schedule_optimizer(opt_d, step)
         opt_d.step()
 
         critic.requires_grad_(False)
@@ -254,6 +255,7 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None) 
             loss = loss + float(recipe.hold_weight) * unused_hold_loss(embeds, student.neu, pairs)
         loss.backward()
         critic.requires_grad_(True)
+        schedule_optimizer(opt_g, step)
         opt_g.step()
         checkpoint(step + 1, lambda: score_student(student))
 

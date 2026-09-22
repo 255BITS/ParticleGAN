@@ -6,6 +6,7 @@ import math
 import time
 
 import torch
+from particlegan import learning_rate_scale
 
 _active = ContextVar("behavior_observer", default=None)
 OBSERVATIONS = 24
@@ -48,8 +49,13 @@ def sustained(curve, requirements, *, expected_steps, minimum=MIN_STABLE_CHECKS)
 
 
 class Recorder:
-    def __init__(self, total_steps):
+    def __init__(self, total_steps, *, schedule="host", start=0.6, floor=0.05):
         self.steps = {math.ceil(i * total_steps / OBSERVATIONS) for i in range(1, OBSERVATIONS + 1)}
+        self.total_steps = total_steps
+        self.schedule = schedule
+        self.start = start
+        self.floor = floor
+        self.base_rates = {}
         self.started = time.monotonic()
         self.curve = []
 
@@ -63,8 +69,8 @@ class Recorder:
 
 
 @contextmanager
-def recording(total_steps):
-    recorder = Recorder(total_steps)
+def recording(total_steps, **options):
+    recorder = Recorder(total_steps, **options)
     token = _active.set(recorder)
     try:
         yield recorder
@@ -76,3 +82,15 @@ def checkpoint(step, measure):
     recorder = _active.get()
     if recorder is not None:
         recorder.record(step, measure)
+
+
+def schedule_optimizer(optimizer, completed_updates):
+    """Replace host schedules using initial group LRs; never compound decay."""
+    recorder = _active.get()
+    if recorder is None or recorder.schedule == "host":
+        return
+    if optimizer not in recorder.base_rates:
+        recorder.base_rates[optimizer] = [group["lr"] for group in optimizer.param_groups]
+    scale = learning_rate_scale(completed_updates, recorder.total_steps, recorder.start, recorder.floor)
+    for group, initial in zip(optimizer.param_groups, recorder.base_rates[optimizer]):
+        group["lr"] = initial * scale

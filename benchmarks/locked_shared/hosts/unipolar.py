@@ -13,7 +13,7 @@ import math
 from dataclasses import dataclass
 
 
-from ..observation import checkpoint
+from ..observation import checkpoint, schedule_optimizer
 
 import torch
 
@@ -221,6 +221,7 @@ def _fit_mse_only(student: FreeOriginResidual, target: torch.Tensor, *, steps: i
         loss = F.mse_loss(student.delta(1.0), target)
         opt.zero_grad(set_to_none=True)
         loss.backward()
+        schedule_optimizer(opt, step)
         opt.step()
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == steps:
             row = score_residual(student)
@@ -279,6 +280,7 @@ def _fit_rpgan(
             d_term = gan.d_loss(critic(real[scale], scale), critic(fake, scale))
             d_loss = d_loss + 0.5 * (d_term + cap)
         d_loss.backward()
+        schedule_optimizer(opt_d, step)
         opt_d.step()
 
         critic.requires_grad_(False)
@@ -291,6 +293,7 @@ def _fit_rpgan(
             g_term = gan.g_loss(critic(fake, scale), real_scores[scale])
             g_loss = g_loss + 0.5 * g_term
         g_loss.backward()
+        schedule_optimizer(opt_g, step)
         opt_g.step()
         critic.requires_grad_(True)
         checkpoint(step + 1, lambda: score_residual(student))

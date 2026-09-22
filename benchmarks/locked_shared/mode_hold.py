@@ -6,7 +6,7 @@ See SOURCE.md and LICENSE for provenance. Default losses use PR #36 builders.
 
 from __future__ import annotations
 
-from .observation import checkpoint
+from .observation import checkpoint, schedule_optimizer
 
 import torch
 from torch import nn
@@ -188,6 +188,7 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         d_loss = d_loss + regularizer(critic, real, fake, step=step + 1)
         opt_d.zero_grad()
         d_loss.backward()
+        schedule_optimizer(opt_d, step)
         opt_d.step()
 
         latent, _ = prior.sample(batch, generator=stream)
@@ -206,6 +207,7 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
         g_loss = g_loss + vicreg(prior.z)
         opt_g.zero_grad()
         g_loss.backward()
+        schedule_optimizer(opt_g, step)
         opt_g.step()
         with torch.no_grad():
             for ema, param in zip(ema_g, generator.parameters()):

@@ -6,7 +6,7 @@ See SOURCE.md and LICENSE for provenance. Default losses use PR #36 builders.
 
 from __future__ import annotations
 
-from .observation import checkpoint
+from .observation import checkpoint, schedule_optimizer
 
 import torch
 from torch import nn
@@ -165,6 +165,7 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None, diagno
         view.slow = slow.detach()
         d_loss = d_loss + regularizer(view, paired, fake.detach(), step=step)
         d_loss.backward()
+        schedule_optimizer(opt_d, step - 1)
         opt_d.step()
 
         flags = [p.requires_grad for p in critic.parameters()]
@@ -180,6 +181,7 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None, diagno
             g_loss = g_loss + PROTOCOL["particle_l2"] * prior.z.square().mean()
             g_loss = g_loss + spread(prior.z)
             g_loss.backward()
+            schedule_optimizer(opt_g, step - 1)
             opt_g.step()
         finally:
             for parameter, flag in zip(critic.parameters(), flags):

@@ -13,7 +13,7 @@ import math
 from dataclasses import dataclass
 
 
-from ..observation import checkpoint
+from ..observation import checkpoint, schedule_optimizer
 
 import torch
 
@@ -464,6 +464,7 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         d_loss = d_loss + cap
         opt_d.zero_grad()
         d_loss.backward()
+        schedule_optimizer(opt_d, step)
         opt_d.step()
 
         fake_p, fake_m = fake_batch()
@@ -479,6 +480,7 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
             g_loss = g_loss + cover_w * cover
         opt_g.zero_grad()
         g_loss.backward()
+        schedule_optimizer(opt_g, step)
         opt_g.step()
         ema.update(list(residual.parameters()))
         checkpoint(step + 1, lambda: score_geometry(residual, field, poles_p, poles_m, neu))

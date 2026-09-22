@@ -41,6 +41,9 @@ class Candidate:
     vicreg_weight: float = 0.05
     cover_weight: float = 1.5
     lr_multiplier: float = 1.0
+    lr_schedule: str = "host"
+    lr_anneal_start: float = 0.6
+    lr_floor: float = 0.05
 
     def __post_init__(self):
         if not self.name or any(c not in "abcdefghijklmnopqrstuvwxyz0123456789_-" for c in self.name):
@@ -51,6 +54,14 @@ class Candidate:
                 raise ValueError(f"{key} must be a finite nonnegative number")
         if self.lr_multiplier == 0:
             raise ValueError("lr_multiplier must be positive")
+        if self.lr_schedule not in ("host", "cosine"):
+            raise ValueError("lr_schedule must be host or cosine")
+        for key in ("lr_anneal_start", "lr_floor"):
+            value = getattr(self, key)
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+                raise ValueError(f"{key} must be finite")
+        if not 0 <= self.lr_anneal_start < 1 or not 0 <= self.lr_floor <= 1:
+            raise ValueError("invalid cosine schedule bounds")
         self.make_loss()
         self.make_penalty()
 
@@ -62,7 +73,7 @@ class Candidate:
                                norm="l2", lazy_k=1, target_anneal="none")
 
     def host_options(self):
-        return {key: value for key, value in asdict(self).items() if key not in ("name", "lr_multiplier")}
+        return {key: value for key, value in asdict(self).items() if key not in ("name", "lr_multiplier", "lr_schedule", "lr_anneal_start", "lr_floor")}
 
 
 DEFAULT_CANDIDATES = (
@@ -117,6 +128,7 @@ def protocol():
             "ranking": "passed toys, passed bounds, live ring modes, HQ, effective modes; descending",
             "convergence": {"observations": OBSERVATIONS, "minimum_passing_suffix": MIN_STABLE_CHECKS,
                             "ring_requires_all_modes": True, "timing": "wall seconds including setup and measurement"},
+            "schedule_policy": "host preserves original schedules; cosine replaces all host schedules using initial optimizer group rates",
             "budgets": BUDGETS, "metrics": METRICS, "shared_checks": SHARED,
             "source_sha256": hashes, "torch": str(torch.__version__), "python": platform.python_version()}
 
@@ -155,7 +167,8 @@ def score_row(row, shared):
 def run_toy(toy, cfg):
     """Serial, scoped host injection; one candidate card, no per-toy tuning."""
     knobs = cfg.host_options()
-    with recording(BUDGETS[toy]) as recorder, ExitStack() as stack:
+    with recording(BUDGETS[toy], schedule=cfg.lr_schedule, start=cfg.lr_anneal_start,
+                   floor=cfg.lr_floor) as recorder, ExitStack() as stack:
         for module in (trajectory, residual_student, cover_leftover, mid_scale_identity):
             target = module.PROTOCOL if module in (trajectory, residual_student) else module.FORMULATION
             values = {k: v for k, v in knobs.items() if k in target}
