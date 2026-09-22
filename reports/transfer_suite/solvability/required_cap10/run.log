@@ -1,0 +1,76 @@
+START cap10 two_pole
+DONE cap10 two_pole PASS {'mean_abs': 0.348248690366745, 'grad_med': 0.39463818073272705}
+START cap10 trajectory
+DONE cap10 trajectory PASS {'identity_mse': 0.019067024812102318}
+START cap10 residual_student
+DONE cap10 residual_student PASS {'identity_mse': 1.5753941625007428e-05, 'success_rate': 1.0, 'wrong_pad_rate': 0.0}
+START cap10 unipolar
+unipolar_dir arm=locked_rpgan step=1/400 cover=0.0127 leak=0.3214 neu_hold=0.9915 cos_plus=+0.5669 hit=FAIL
+unipolar_dir arm=locked_rpgan step=50/400 cover=0.6597 leak=0.0015 neu_hold=0.8201 cos_plus=+0.9946 hit=FAIL
+unipolar_dir arm=locked_rpgan step=100/400 cover=0.9669 leak=0.0009 neu_hold=0.8383 cos_plus=+0.9989 hit=FAIL
+unipolar_dir arm=locked_rpgan step=150/400 cover=0.9153 leak=0.0000 neu_hold=0.9772 cos_plus=+0.9999 hit=PASS
+unipolar_dir arm=locked_rpgan step=200/400 cover=0.9405 leak=0.0001 neu_hold=0.8641 cos_plus=+0.9997 hit=PASS
+unipolar_dir arm=locked_rpgan step=250/400 cover=0.9558 leak=0.0021 neu_hold=0.9133 cos_plus=+0.9977 hit=PASS
+unipolar_dir arm=locked_rpgan step=300/400 cover=0.9518 leak=0.0000 neu_hold=0.9194 cos_plus=+0.9996 hit=PASS
+unipolar_dir arm=locked_rpgan step=350/400 cover=0.9498 leak=0.0002 neu_hold=0.9241 cos_plus=+0.9970 hit=PASS
+unipolar_dir arm=locked_rpgan step=400/400 cover=0.9843 leak=0.0003 neu_hold=0.9102 cos_plus=+0.9997 hit=PASS
+unipolar_dir arm=locked_rpgan step=400 seed=0 cover=0.9843 leak=0.0003 neu_hold=0.9102 cos_plus=+0.9997 hit=PASS
+DONE cap10 unipolar PASS {'cover': 0.9842736597634598, 'off_caption': 0.00033467903403159845, 'neu_hold': 0.9101824909448624}
+START cap10 ae_gan_hold
+ae-gan-hold arm=cap10 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=cap10 step=1 recon=1.2653 hold=1.4033 loss=4.2071
+ae-gan-hold arm=cap10 step=50 recon=0.0991 hold=0.0277 loss=1.0818
+ae-gan-hold arm=cap10 step=100 recon=0.0029 hold=0.0056 loss=1.0853
+ae-gan-hold arm=cap10 step=150 recon=0.0094 hold=0.0201 loss=0.8663
+ae-gan-hold arm=cap10 step=200 recon=0.0083 hold=0.0072 loss=0.7019
+DONE cap10 ae_gan_hold PASS {'recon_mse': 0.010074117220938206, 'hold': 0.0019521701615303755}
+START cap10 cover_leftover
+cover_leftover start arm=locked steps=800 seed=0 teacher=faithful_guard_e cover=1.5 penalty_coeff=10.0 kappa=1.2 fm=0.0 n_particles=12
+cover_leftover arm=locked step=1/800 d=0.7237 g=1.7440 cap=0.0000 u_kept=0.008 content=0.000 leak=0.000 err=0.749 covered=0
+cover_leftover arm=locked step=50/800 d=0.5157 g=1.5273 cap=0.0000 u_kept=0.201 content=0.347 leak=0.141 err=0.578 covered=0
+cover_leftover arm=locked step=100/800 d=0.6083 g=1.0892 cap=0.0000 u_kept=0.424 content=0.631 leak=0.004 err=0.411 covered=0
+cover_leftover arm=locked step=150/800 d=0.6949 g=0.8510 cap=0.0000 u_kept=0.581 content=0.749 leak=0.016 err=0.309 covered=0
+cover_leftover arm=locked step=200/800 d=0.6739 g=0.8274 cap=0.0000 u_kept=0.688 content=0.840 leak=0.020 err=0.284 covered=0
+cover_leftover arm=locked step=250/800 d=0.7101 g=0.7667 cap=0.0000 u_kept=0.637 content=0.895 leak=0.019 err=0.243 covered=0
+cover_leftover arm=locked step=300/800 d=0.6936 g=0.7353 cap=0.0000 u_kept=0.756 content=0.972 leak=0.003 err=0.161 covered=1
+cover_leftover arm=locked step=350/800 d=0.6998 g=0.7131 cap=0.0000 u_kept=0.818 content=0.975 leak=0.001 err=0.121 covered=1
+cover_leftover arm=locked step=400/800 d=0.6931 g=0.7028 cap=0.0000 u_kept=0.887 content=1.005 leak=0.001 err=0.075 covered=1
+cover_leftover arm=locked step=450/800 d=0.6950 g=0.6974 cap=0.0000 u_kept=0.927 content=0.997 leak=0.007 err=0.049 covered=1
+cover_leftover arm=locked step=500/800 d=0.6931 g=0.6944 cap=0.0000 u_kept=0.966 content=1.018 leak=0.013 err=0.032 covered=1
+cover_leftover arm=locked step=550/800 d=0.6931 g=0.6951 cap=0.0000 u_kept=0.979 content=0.971 leak=0.007 err=0.019 covered=1
+cover_leftover arm=locked step=600/800 d=0.6925 g=0.6939 cap=0.0000 u_kept=0.997 content=0.998 leak=0.003 err=0.007 covered=1
+cover_leftover arm=locked step=650/800 d=0.6926 g=0.6938 cap=0.0000 u_kept=0.990 content=0.995 leak=0.004 err=0.010 covered=1
+cover_leftover arm=locked step=700/800 d=0.6936 g=0.6936 cap=0.0000 u_kept=1.006 content=1.008 leak=0.001 err=0.006 covered=1
+cover_leftover arm=locked step=750/800 d=0.6933 g=0.6929 cap=0.0000 u_kept=0.997 content=0.994 leak=0.001 err=0.009 covered=1
+cover_leftover arm=locked step=800/800 d=0.6939 g=0.6941 cap=0.0000 u_kept=0.993 content=0.999 leak=0.005 err=0.006 covered=1
+cover_leftover DONE arm=locked pass=1 reasons=none u_kept=0.935 content=0.965 leak=0.000 err=0.045 same_dir=0.001 particle_rms=0.065
+DONE cap10 cover_leftover PASS {'u_kept': 0.9925086995056076, 'content_kept': 0.9993849919417793, 'leak_ratio': 0.004780130875068807, 'pole_rel_err_plus': 0.006306793540716171, 'pole_rel_err_minus': 0.00316216005012393, 'same_dir': 0.0035152964977382714}
+START cap10 unused_token_hold
+unused-token arm=cap10 step=1 hold=0.9940 concept=0.0000 unused_dist=0.0060
+unused-token arm=cap10 step=50 hold=0.9868 concept=0.5412 unused_dist=0.0132
+unused-token arm=cap10 step=100 hold=0.9892 concept=0.9574 unused_dist=0.0108
+unused-token arm=cap10 step=150 hold=0.9987 concept=0.8302 unused_dist=0.0013
+unused-token arm=cap10 step=200 hold=0.9932 concept=0.8982 unused_dist=0.0068
+DONE cap10 unused_token_hold PASS {'unused_hold': 0.9932466051541269, 'concept_move': 0.898216498110699}
+START cap10 mid_scale_identity
+mid_scale arm=locked step=1 seed=0 concept+=+0.5774 concept-=+0.0000 id0=+0.0077 id_mid=+0.0232 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=50 seed=0 concept+=+0.8888 concept-=+0.4069 id0=+0.3982 id_mid=+0.9527 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=100 seed=0 concept+=+0.9190 concept-=+0.7830 id0=+0.5913 id_mid=+0.7276 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=150 seed=0 concept+=+0.9713 concept-=+0.9184 id0=+0.6457 id_mid=+0.8141 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=200 seed=0 concept+=+0.9934 concept-=+0.9650 id0=+0.7306 id_mid=+0.9600 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=250 seed=0 concept+=+0.9992 concept-=+0.9797 id0=+0.8801 id_mid=+0.9596 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=300 seed=0 concept+=+0.9999 concept-=+1.0000 id0=+0.9820 id_mid=+0.9610 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=350 seed=0 concept+=+0.9993 concept-=+0.9995 id0=+0.9683 id_mid=+0.9913 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=400 seed=0 concept+=+0.9984 concept-=+0.9996 id0=+0.9860 id_mid=+0.9482 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=450 seed=0 concept+=+0.9999 concept-=+1.0000 id0=+0.9977 id_mid=+0.9685 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=500 seed=0 concept+=+0.9997 concept-=+0.9996 id0=+0.9643 id_mid=+0.9231 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=550 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9872 id_mid=+0.9867 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=600 seed=0 concept+=+0.9997 concept-=+0.9998 id0=+0.9766 id_mid=+0.9999 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=650 seed=0 concept+=+0.9999 concept-=+0.9999 id0=+0.9861 id_mid=+0.9912 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=700 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9958 id_mid=+0.9989 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=750 seed=0 concept+=+0.9999 concept-=+0.9999 id0=+0.9897 id_mid=+0.9930 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+0.9999 concept-=+0.9999 id0=+0.9891 id_mid=+0.9954 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+0.9999 concept-=+0.9999 id0=+0.9891 id_mid=+0.9954 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+DONE cap10 mid_scale_identity PASS {'concept_cos_plus': 0.9998862147331238, 'concept_cos_minus': 0.999938428401947, 'concept_mag_plus': 0.9984052777290344, 'concept_mag_minus': 1.0084861516952515, 'identity_at_0': 0.9891068722991715, 'identity_at_mid': 0.9953590741706765}
+START cap10 mode_hold
+DONE cap10 mode_hold FAIL {'modes': 4, 'hq': 0.575927734375}

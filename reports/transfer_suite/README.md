@@ -1,5 +1,12 @@
 # Transfer leaderboard with test importance
 
+**Latest: [solvability audit and fixes](solvability/README.md).** Every one of the
+16 practical tasks now has a sustained GAN solution, using different settings.
+Replacing the healthy image generators with residual upsampling gives an
+updated reference with **9/9 required and 7/16 practical passes**, versus 4/16
+for the original architecture. No one configuration passes all tasks. The
+original controller comparison below remains unchanged.
+
 **Cosine remains the baseline.** The broader learned-controller search did not
 improve practical coverage or transfer. Deliberately poor architectures and
 data stresses remain visible without vetoing candidate selection.

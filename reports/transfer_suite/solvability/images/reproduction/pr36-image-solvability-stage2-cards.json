@@ -1,0 +1,4 @@
+[
+  {"name":"residual12", "scope":"architecture changed, original G/D widths", "changes":{"architecture":"residual_upsample","width":12}},
+  {"name":"transpose16", "scope":"width changed, original transpose architecture", "changes":{"width":16}}
+]

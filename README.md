@@ -59,6 +59,9 @@ A [learned LR controller study](reports/learned_lr/README.md) also retains fitte
 weights and held-out comparisons; its current policy does not beat cosine.
 The broader [transfer leaderboard](reports/transfer_suite/README.md) separates
 required regressions, practical ranking tests, and nonblocking stress diagnostics.
+The [solvability audit](reports/transfer_suite/solvability/README.md) demonstrates
+GAN solutions for all 16 practical tests using different settings; a shared
+residual image setup improves the working reference from 4/16 to 7/16.
 On the actual 100-Gaussian task the behavioral candidate ties stock's live convergence step, so
 `"gan"` keeps the existing defaults. Neither preset guarantees transfer to new
 architectures or data units.

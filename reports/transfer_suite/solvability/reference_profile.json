@@ -1,0 +1,1959 @@
+{
+  "name": "cosine_residual_image_reference",
+  "scope": "Same optimizer/formulation; residual-upsample width16 replaces transpose width12 on four healthy image tasks only. All other task/config results are exactly reused. Original test identities/family weights are retained for comparison.",
+  "overrides": {
+    "healthy_image_tasks": {
+      "architecture": "residual_upsample",
+      "width": 16
+    }
+  },
+  "summary": {
+    "eligible": true,
+    "selection_ready": true,
+    "evaluation_complete": true,
+    "counts": {
+      "required": {
+        "total": 9,
+        "passed": 9,
+        "attempted": 9
+      },
+      "ranking": {
+        "total": 16,
+        "passed": 7,
+        "attempted": 16
+      },
+      "diagnostic": {
+        "total": 8,
+        "passed": 2,
+        "attempted": 8
+      }
+    },
+    "families": {
+      "image/image_conv_transpose": {
+        "domain": "image",
+        "total": 4,
+        "passed": 4,
+        "pass_fraction": 1.0,
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.7916666666666666
+      },
+      "stress/capacity_imbalance": {
+        "domain": "stress",
+        "total": 1,
+        "passed": 0,
+        "pass_fraction": 0.0,
+        "shortfall": 0.4,
+        "confirmation_fraction": 2.0
+      },
+      "stress/gradient_penalty_formulation": {
+        "domain": "stress",
+        "total": 1,
+        "passed": 0,
+        "pass_fraction": 0.0,
+        "shortfall": 0.4546683517156863,
+        "confirmation_fraction": 2.0
+      },
+      "stress/learning_rate_imbalance": {
+        "domain": "stress",
+        "total": 2,
+        "passed": 0,
+        "pass_fraction": 0.0,
+        "shortfall": 0.43192976409313727,
+        "confirmation_fraction": 2.0
+      },
+      "stress/minibatch_noise": {
+        "domain": "stress",
+        "total": 1,
+        "passed": 0,
+        "pass_fraction": 0.0,
+        "shortfall": 0.41973805147058824,
+        "confirmation_fraction": 2.0
+      },
+      "stress/training_horizon": {
+        "domain": "stress",
+        "total": 1,
+        "passed": 0,
+        "pass_fraction": 0.0,
+        "shortfall": 0.02887936826137936,
+        "confirmation_fraction": 2.0
+      },
+      "vector/anisotropic": {
+        "domain": "vector",
+        "total": 1,
+        "passed": 1,
+        "pass_fraction": 1.0,
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5833333333333334
+      },
+      "vector/curved_continuous": {
+        "domain": "vector",
+        "total": 1,
+        "passed": 1,
+        "pass_fraction": 1.0,
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.25
+      },
+      "vector/overlapping": {
+        "domain": "vector",
+        "total": 1,
+        "passed": 0,
+        "pass_fraction": 0.0,
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "vector/separated_broad": {
+        "domain": "vector",
+        "total": 1,
+        "passed": 1,
+        "pass_fraction": 1.0,
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.4166666666666667
+      },
+      "vector/unequal_mass": {
+        "domain": "vector",
+        "total": 1,
+        "passed": 0,
+        "pass_fraction": 0.0,
+        "shortfall": 0.3333333333333333,
+        "confirmation_fraction": 2.0
+      },
+      "vector/unequal_width": {
+        "domain": "vector",
+        "total": 1,
+        "passed": 0,
+        "pass_fraction": 0.0,
+        "shortfall": 0.4,
+        "confirmation_fraction": 2.0
+      }
+    },
+    "domains": {
+      "image": {
+        "pass_fraction": 1.0,
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.7916666666666666
+      },
+      "stress": {
+        "pass_fraction": 0.0,
+        "shortfall": 0.3470431071081582,
+        "confirmation_fraction": 2.0
+      },
+      "vector": {
+        "pass_fraction": 0.5,
+        "shortfall": 0.12222222222222223,
+        "confirmation_fraction": 1.2083333333333333
+      }
+    },
+    "verdicts": {
+      "two_pole": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "mean_abs",
+            "value": 0.3517892360687256,
+            "op": ">=",
+            "threshold": 0.3,
+            "status": "PASS",
+            "margin": 0.0517892360687256
+          },
+          {
+            "metric": "grad_med",
+            "value": 0.3972667455673218,
+            "op": "<=",
+            "threshold": 1.0,
+            "status": "PASS",
+            "margin": 0.6027332544326782
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 7,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 7,
+          "first_pass_step": 60,
+          "stable_from_step": 60,
+          "stable_from_seconds": 1.1956349910469726,
+          "confirmed_step": 74,
+          "confirmed_seconds": 1.2173313550883904
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.925
+      },
+      "trajectory": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 2.0105224393773824e-05,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.019979894775606227
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 19,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 19,
+          "first_pass_step": 100,
+          "stable_from_step": 100,
+          "stable_from_seconds": 0.2878617919050157,
+          "confirmed_step": 167,
+          "confirmed_seconds": 0.4711089679040015
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.4175
+      },
+      "residual_student": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 1.6864316421560943e-05,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.01998313568357844
+          },
+          {
+            "metric": "success_rate",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 1.0,
+            "status": "PASS",
+            "margin": 0.0
+          },
+          {
+            "metric": "wrong_pad_rate",
+            "value": 0.0,
+            "op": "<=",
+            "threshold": 0.0,
+            "status": "PASS",
+            "margin": 0.0
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 21,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 19,
+          "first_pass_step": 50,
+          "stable_from_step": 100,
+          "stable_from_seconds": 0.28689158998895437,
+          "confirmed_step": 167,
+          "confirmed_seconds": 0.4745709910057485
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.4175
+      },
+      "unipolar": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "cover",
+            "value": 0.982617710057589,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13261771005758904
+          },
+          {
+            "metric": "off_caption",
+            "value": 0.0006809285182022889,
+            "op": "<=",
+            "threshold": 0.05,
+            "status": "PASS",
+            "margin": 0.04931907148179771
+          },
+          {
+            "metric": "neu_hold",
+            "value": 0.9705528393387794,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12055283933877947
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 18,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 18,
+          "first_pass_step": 117,
+          "stable_from_step": 117,
+          "stable_from_seconds": 0.4295187459792942,
+          "confirmed_step": 184,
+          "confirmed_seconds": 0.6631383040221408
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.46
+      },
+      "ae_gan_hold": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "recon_mse",
+            "value": 0.009792635217308998,
+            "op": "<=",
+            "threshold": 0.05,
+            "status": "PASS",
+            "margin": 0.040207364782691005
+          },
+          {
+            "metric": "hold",
+            "value": 0.0014229558873921633,
+            "op": "<=",
+            "threshold": 0.35,
+            "status": "PASS",
+            "margin": 0.3485770441126078
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 19,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 19,
+          "first_pass_step": 63,
+          "stable_from_step": 63,
+          "stable_from_seconds": 0.3202089429832995,
+          "confirmed_step": 105,
+          "confirmed_seconds": 0.4483801410533488
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.42
+      },
+      "cover_leftover": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "u_kept",
+            "value": 0.9944554467891492,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14445544678914923
+          },
+          {
+            "metric": "content_kept",
+            "value": 0.9939026651870989,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.2439026651870989
+          },
+          {
+            "metric": "leak_ratio",
+            "value": 0.0020671901799351553,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.19793280982006486
+          },
+          {
+            "metric": "pole_rel_err_plus",
+            "value": 0.00673892954364419,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.19326107045635582
+          },
+          {
+            "metric": "pole_rel_err_minus",
+            "value": 0.003417979460209608,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.1965820205397904
+          },
+          {
+            "metric": "same_dir",
+            "value": 0.002780375526160004,
+            "op": "<=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.24721962447384
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 14,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 14,
+          "first_pass_step": 367,
+          "stable_from_step": 367,
+          "stable_from_seconds": 1.601745878928341,
+          "confirmed_step": 500,
+          "confirmed_seconds": 2.1610904379049316
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.625
+      },
+      "unused_token_hold": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "unused_hold",
+            "value": 0.9919152026996017,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14191520269960167
+          },
+          {
+            "metric": "concept_move",
+            "value": 0.9652063899110885,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.11520638991108856
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 14,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 14,
+          "first_pass_step": 92,
+          "stable_from_step": 92,
+          "stable_from_seconds": 0.1902360999956727,
+          "confirmed_step": 125,
+          "confirmed_seconds": 0.24820324801839888
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.625
+      },
+      "mid_scale_identity": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "concept_cos_plus",
+            "value": 0.9999809861183167,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14998098611831667
+          },
+          {
+            "metric": "concept_cos_minus",
+            "value": 0.999997615814209,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.149997615814209
+          },
+          {
+            "metric": "concept_mag_plus",
+            "value": 0.9993701577186584,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.24937015771865845
+          },
+          {
+            "metric": "concept_mag_plus",
+            "value": 0.9993701577186584,
+            "op": "<=",
+            "threshold": 1.25,
+            "status": "PASS",
+            "margin": 0.25062984228134155
+          },
+          {
+            "metric": "concept_mag_minus",
+            "value": 1.0006170272827148,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.25061702728271484
+          },
+          {
+            "metric": "concept_mag_minus",
+            "value": 1.0006170272827148,
+            "op": "<=",
+            "threshold": 1.25,
+            "status": "PASS",
+            "margin": 0.24938297271728516
+          },
+          {
+            "metric": "identity_at_0",
+            "value": 0.998754588090076,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14875458809007602
+          },
+          {
+            "metric": "identity_at_mid",
+            "value": 0.9977136742896218,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.1477136742896218
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 17,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 17,
+          "first_pass_step": 267,
+          "stable_from_step": 267,
+          "stable_from_seconds": 1.880524109932594,
+          "confirmed_step": 400,
+          "confirmed_seconds": 2.7815174859715626
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5
+      },
+      "mode_hold": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 8,
+            "op": ">=",
+            "threshold": 8,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 8,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 8,
+          "first_pass_step": 850,
+          "stable_from_step": 850,
+          "stable_from_seconds": 4.7572741699405015,
+          "confirmed_step": 1050,
+          "confirmed_seconds": 5.88745778799057
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.875
+      },
+      "vector_two_broad": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.039028881605598496,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.1409711183944015
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.0146484375,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1353515625
+          },
+          {
+            "metric": "hq",
+            "value": 0.984375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13437500000000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.20217658579349518,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.6478234142065048
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.5616455674171448,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.41164556741714475
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 19,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 19,
+          "first_pass_step": 300,
+          "stable_from_step": 300,
+          "stable_from_seconds": 1.3821591379819438,
+          "confirmed_step": 500,
+          "confirmed_seconds": 2.3183756939833984
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.4166666666666667
+      },
+      "vector_unequal_mass": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.08068859440349768,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.09931140559650231
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.05170898884534836,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.09829101115465164
+          },
+          {
+            "metric": "hq",
+            "value": 0.9501953125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.10019531250000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 5.800080198794603,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -4.950080198794604
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.9366163015365601,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.78661630153656
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.9059836268424988,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.6559836268424988
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.3333333333333333,
+        "confirmation_fraction": 2.0
+      },
+      "vector_unequal_width": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.08506576910256845,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.09493423089743154
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.083251953125,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.066748046875
+          },
+          {
+            "metric": "hq",
+            "value": 0.970947265625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12094726562500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 7.80859362334013,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -6.95859362334013
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.7037267684936523,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.5537267684936523
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.4,
+        "confirmation_fraction": 2.0
+      },
+      "vector_anisotropic": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.14075334313934357,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.039246656860656426
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.1068522185087204,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.043147781491279596
+          },
+          {
+            "metric": "hq",
+            "value": 0.98974609375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13974609375000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.13558053721984228,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.7144194627801577
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.5556106567382812,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.40561065673828123
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 15,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 15,
+          "first_pass_step": 500,
+          "stable_from_step": 500,
+          "stable_from_seconds": 2.2222457659663633,
+          "confirmed_step": 700,
+          "confirmed_seconds": 3.112789546023123
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5833333333333334
+      },
+      "vector_overlap": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.09159826145118381,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.08840173854881618
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.08065998554229736,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.06934001445770263
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.3377096951007843,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.11229030489921571
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 15,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 4,
+          "first_pass_step": 200,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "vector_narrow": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.49878779413620294,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "FAIL",
+            "margin": -0.31878779413620295
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.5,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.35
+          },
+          {
+            "metric": "hq",
+            "value": 0.978759765625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12875976562500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 36.84063124656677,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -35.99063124656677
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.0,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.15
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 1.3542086601513366,
+        "confirmation_fraction": 2.0
+      },
+      "vector_scale_drift": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.07029159001900712,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.10970840998099288
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.02001953125,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.12998046875
+          },
+          {
+            "metric": "hq",
+            "value": 0.961181640625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.11118164062500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.5831803381443024,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.2668196618556976
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 1.1040279865264893,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.9540279865264892
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 22,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 22,
+          "first_pass_step": 200,
+          "stable_from_step": 200,
+          "stable_from_seconds": 0.8788141399854794,
+          "confirmed_step": 467,
+          "confirmed_seconds": 2.036421981989406
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.291875
+      },
+      "vector_spiral": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.06325822952486929,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.11674177047513071
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.07759803533554077,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.07240196466445922
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.11381782591342926,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.33618217408657075
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 23,
+          "first_pass_step": 134,
+          "stable_from_step": 134,
+          "stable_from_seconds": 0.5756893759826198,
+          "confirmed_step": 400,
+          "confirmed_seconds": 1.693984692916274
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.25
+      },
+      "stress_fast_critic": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.045742657558519924,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.13425734244148008
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.056640625,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.093359375
+          },
+          {
+            "metric": "hq",
+            "value": 0.98046875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13046875000000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 3.368561246432364,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -2.518561246432364
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.3632425367832184,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.2132425367832184
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.4,
+        "confirmation_fraction": 2.0
+      },
+      "stress_slow_critic": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.09655671106868366,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.08344328893131633
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.19287109375,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.042871093750000006
+          },
+          {
+            "metric": "hq",
+            "value": 0.821533203125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.028466796874999978
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 26.869698882102966,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -26.019698882102965
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.5646657943725586,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.41466579437255857
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.4638595281862745,
+        "confirmation_fraction": 2.0
+      },
+      "stress_small_batch": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.09043616818250891,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.08956383181749109
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.1025390625,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.047460937499999994
+          },
+          {
+            "metric": "hq",
+            "value": 0.76611328125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.08388671874999998
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 38.125155568122864,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -37.27515556812286
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.36454424262046814,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.21454424262046815
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.41973805147058824,
+        "confirmation_fraction": 2.0
+      },
+      "stress_large_critic": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.09223277155318978,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.08776722844681022
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.14599609375,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.0040039062499999944
+          },
+          {
+            "metric": "hq",
+            "value": 0.94384765625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.09384765625000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 7.2974076513201,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -6.4474076513201
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.4906703531742096,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.3406703531742096
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.4,
+        "confirmation_fraction": 2.0
+      },
+      "stress_long_horizon": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.0835019685515801,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.0964980314484199
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.096923828125,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.053076171874999994
+          },
+          {
+            "metric": "hq",
+            "value": 0.992919921875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14291992187500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.9727373151108623,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.12273731511086228
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.33125752210617065,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.18125752210617066
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.02887936826137936,
+        "confirmation_fraction": 2.0
+      },
+      "stress_r1_r2": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.08417586468077644,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.09582413531922356
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.189208984375,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.039208984375000006
+          },
+          {
+            "metric": "hq",
+            "value": 0.83984375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.010156249999999978
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 23.11691188812256,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -22.266911888122557
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 1.0302318334579468,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.8802318334579468
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.4546683517156863,
+        "confirmation_fraction": 2.0
+      },
+      "stress_weak_critic": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.17417082972772768,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.0058291702722723104
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.2294921875,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.0794921875
+          },
+          {
+            "metric": "hq",
+            "value": 0.122802734375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.727197265625
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 32.12964725494385,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -31.279647254943846
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.0,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.15
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.8770948223039217,
+        "confirmation_fraction": 2.0
+      },
+      "stress_overlapping_data": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.05351805714708731,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.1264819428529127
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 23,
+          "first_pass_step": 100,
+          "stable_from_step": 100,
+          "stable_from_seconds": 0.44516324903815985,
+          "confirmed_step": 300,
+          "confirmed_seconds": 1.3385353890480474
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.25
+      },
+      "img_stripes2": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 2,
+            "op": ">=",
+            "threshold": 2,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 20,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 20,
+          "first_pass_step": 125,
+          "stable_from_step": 125,
+          "stable_from_seconds": 2.7986520879203454,
+          "confirmed_step": 225,
+          "confirmed_seconds": 3.80309767392464
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.375
+      },
+      "img_bars4": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 4,
+            "op": ">=",
+            "threshold": 4,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 0.9375,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.03749999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 16,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 7,
+          "first_pass_step": 200,
+          "stable_from_step": 450,
+          "stable_from_seconds": 4.427276035072282,
+          "confirmed_step": 550,
+          "confirmed_seconds": 5.378383505041711
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.9166666666666666
+      },
+      "img_blobs4": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 4,
+            "op": ">=",
+            "threshold": 4,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 12,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 7,
+          "first_pass_step": 300,
+          "stable_from_step": 450,
+          "stable_from_seconds": 4.617628847947344,
+          "confirmed_step": 550,
+          "confirmed_seconds": 5.547217702958733
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.9166666666666666
+      },
+      "img_intensity2": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 2,
+            "op": ">=",
+            "threshold": 2,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 7,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 6,
+          "first_pass_step": 400,
+          "stable_from_step": 475,
+          "stable_from_seconds": 4.520336118992418,
+          "confirmed_step": 575,
+          "confirmed_seconds": 5.4640143730212
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.9583333333333334
+      },
+      "img_bars8": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 5,
+            "op": ">=",
+            "threshold": 8,
+            "status": "FAIL",
+            "margin": -3
+          },
+          {
+            "metric": "hq",
+            "value": 0.75,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "FAIL",
+            "margin": -0.15000000000000002
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.27083333333333337,
+        "confirmation_fraction": 2.0
+      },
+      "img_tiny_generator": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 1,
+            "op": ">=",
+            "threshold": 4,
+            "status": "FAIL",
+            "margin": -3
+          },
+          {
+            "metric": "hq",
+            "value": 0.375,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "FAIL",
+            "margin": -0.525
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.6666666666666667,
+        "confirmation_fraction": 2.0
+      },
+      "img_mean_discriminator": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 0,
+            "op": ">=",
+            "threshold": 4,
+            "status": "FAIL",
+            "margin": -4
+          },
+          {
+            "metric": "hq",
+            "value": 0.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "FAIL",
+            "margin": -0.9
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 1.0,
+        "confirmation_fraction": 2.0
+      },
+      "img_uniform_generator": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 0,
+            "op": ">=",
+            "threshold": 2,
+            "status": "FAIL",
+            "margin": -2
+          },
+          {
+            "metric": "hq",
+            "value": 0.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "FAIL",
+            "margin": -0.9
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 1.0,
+        "confirmation_fraction": 2.0
+      }
+    },
+    "ranking_pass_fraction": 0.5,
+    "worst_family_fraction": 0.0,
+    "shortfall": 0.15642177644346014,
+    "confirmation_fraction": 1.3333333333333333
+  },
+  "episode_provenance": {
+    "two_pole": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__two_pole.json.gz",
+      "artifact_sha256": "277a3a3ee99b44869a9c0dba88bde7e448be4300a3ab4b05520ff501aa29cf56"
+    },
+    "trajectory": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__trajectory.json.gz",
+      "artifact_sha256": "5e0c68e754b7aa0c15d9abaa6a9304f7d61c8a2d5de0c69786916f7159906bf5"
+    },
+    "residual_student": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__residual_student.json.gz",
+      "artifact_sha256": "0ad9878b448c1b3dd96cd448787c09c1e1fd0ce003e3129665e1af8aee813d08"
+    },
+    "unipolar": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__unipolar.json.gz",
+      "artifact_sha256": "b919757510e6556847afa85027a898a78c5ef9516f1b23817ea41ec2537abec5"
+    },
+    "ae_gan_hold": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__ae_gan_hold.json.gz",
+      "artifact_sha256": "7424994e2446ff940423f67507e8397dc238cd67a59897e391f932988be9aca2"
+    },
+    "cover_leftover": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__cover_leftover.json.gz",
+      "artifact_sha256": "f8c4f99fea34ca649dbd62561fbf89ff1ca9ce49ef3a4b5d7f3740f0b9e57188"
+    },
+    "unused_token_hold": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__unused_token_hold.json.gz",
+      "artifact_sha256": "889e5678d4d82f10ea10754635dd4d30f9bd1cf089b429228d06ffbaf394e15f"
+    },
+    "mid_scale_identity": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__mid_scale_identity.json.gz",
+      "artifact_sha256": "b0314a1f982cf398bf55d3bc85cf0b44986cd32de84cef63d9699e9490aa494b"
+    },
+    "mode_hold": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__mode_hold.json.gz",
+      "artifact_sha256": "394c7fec15bad3baa25b7c95017381d00925d6fa08e09b9aefff0406501cdb52"
+    },
+    "vector_two_broad": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__vector_two_broad.json.gz",
+      "artifact_sha256": "5f8ed7df513dd4474890f0576de4fcf93c7512739d4d6d50a1ea0225e651ead7"
+    },
+    "vector_unequal_mass": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__vector_unequal_mass.json.gz",
+      "artifact_sha256": "f4c08a528058151fbf8477686cda7bd903cf02360871bd433f4d9deaec71e42a"
+    },
+    "vector_unequal_width": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__vector_unequal_width.json.gz",
+      "artifact_sha256": "b99c3323097f2d6d19db4cbe71e02e94dccdb132498c16a293f82611bed58184"
+    },
+    "vector_anisotropic": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__vector_anisotropic.json.gz",
+      "artifact_sha256": "42c72adf1f93fb9f9fa267ee38d5f66fc67a2db167ffe33e231d08d8fee46428"
+    },
+    "vector_overlap": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__vector_overlap.json.gz",
+      "artifact_sha256": "b03b832fe080217075bfb203658bb663a3f26dfebffb97178ca69638f703a231"
+    },
+    "vector_narrow": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__vector_narrow.json.gz",
+      "artifact_sha256": "69c26d817a0d013e7d8e2d1d9c4cab0614673baf069e480be9f376860b4cf7d2"
+    },
+    "vector_scale_drift": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__vector_scale_drift.json.gz",
+      "artifact_sha256": "b376d2e8d917d1d278e1c78e05a5b6fd2a101c48858f3869a2e792cc7978a17f"
+    },
+    "vector_spiral": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__vector_spiral.json.gz",
+      "artifact_sha256": "528a316f74aa36bf6e29a7acd1a9ac0406f82061c32222b1849eaded0823a666"
+    },
+    "stress_fast_critic": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__stress_fast_critic.json.gz",
+      "artifact_sha256": "9d9de02ca928597ae761c4f01638afadda57b81f8c0f423e571322fe7a90a4cb"
+    },
+    "stress_slow_critic": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__stress_slow_critic.json.gz",
+      "artifact_sha256": "43f3a62703b83300a2d0f40756d4362fe644d2ea7c377f96bc9dcedcd248bb71"
+    },
+    "stress_small_batch": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__stress_small_batch.json.gz",
+      "artifact_sha256": "20b2c7309395c906525ff9b844c961f189885c1aed8e4d0610669210a7b980d1"
+    },
+    "stress_large_critic": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__stress_large_critic.json.gz",
+      "artifact_sha256": "231a75015d197c35e4d447cd06537ad64d2e7776189c2763b01ed5f1e30d8c31"
+    },
+    "stress_long_horizon": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__stress_long_horizon.json.gz",
+      "artifact_sha256": "87a6b464770953c60609e6264e0e66ad0fc6a3aa03b0828f4abbf487b3e469dc"
+    },
+    "stress_r1_r2": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__stress_r1_r2.json.gz",
+      "artifact_sha256": "7b0c94670effdddf490080f616abaf9978799db95efed2c94a0ad2ec0189892f"
+    },
+    "stress_weak_critic": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__stress_weak_critic.json.gz",
+      "artifact_sha256": "67431c52631d7800f47b89adc360d8fdf56e118300f2ab661e89933d56b57ece"
+    },
+    "stress_overlapping_data": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__stress_overlapping_data.json.gz",
+      "artifact_sha256": "c378749a490571ac960219e81aeb4fe38e80a9de38c213ae9f26f59effed4e0c"
+    },
+    "img_stripes2": {
+      "kind": "new native-host reproduction",
+      "artifact": "image_reproduction/episodes/residual16__img_stripes2.json.gz",
+      "artifact_sha256": "d1d7402bbf59d9eb86f4c2ac9208c5b937d28ae272fbd88979d09408ca5ee808"
+    },
+    "img_bars4": {
+      "kind": "new native-host reproduction",
+      "artifact": "image_reproduction/episodes/residual16__img_bars4.json.gz",
+      "artifact_sha256": "dc969ad3286ab3d9c66636d34fca6a87215fa8f0a454ac1ff90388813b243906"
+    },
+    "img_blobs4": {
+      "kind": "new native-host reproduction",
+      "artifact": "image_reproduction/episodes/residual16__img_blobs4.json.gz",
+      "artifact_sha256": "c2d302e7405788c9d112ad7c43a790063ca98fcfd4fedeeaa49faf161267f710"
+    },
+    "img_intensity2": {
+      "kind": "new native-host reproduction",
+      "artifact": "image_reproduction/episodes/residual16__img_intensity2.json.gz",
+      "artifact_sha256": "5e8cf1708df6a8fc171d9ce4cda27db2a36a4380c58206b260cafcf99801531e"
+    },
+    "img_bars8": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__img_bars8.json.gz",
+      "artifact_sha256": "a738af401f7dab905691b2d7728bc131e85499ed71a1e8a4741ece7ed1b313ff"
+    },
+    "img_tiny_generator": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__img_tiny_generator.json.gz",
+      "artifact_sha256": "93856a96cdd568026ac5862cf3f6905da7e0bb2ef0dd5c24993df2482d87281a"
+    },
+    "img_mean_discriminator": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__img_mean_discriminator.json.gz",
+      "artifact_sha256": "bbddfeb11cb575e32beee620b310a56cc5ab7f326392daf5bdad7a3e009f8c24"
+    },
+    "img_uniform_generator": {
+      "kind": "unchanged exact task/config; reuse existing cosine episode",
+      "artifact": "../study/episodes/cosine__img_uniform_generator.json.gz",
+      "artifact_sha256": "b486d424cb2882df3f192779480b1dd4db88c211ebbe1d170ce28de305cb18a7"
+    }
+  },
+  "fresh_holdout": false,
+  "overall_all_behavioral_pass": false
+}

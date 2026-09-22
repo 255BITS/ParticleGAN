@@ -1,5 +1,12 @@
 # Controller transfer: test importance
 
+The [solvability search](../../reports/transfer_suite/solvability/README.md)
+now supplies individual GAN witnesses for all 16 practical tasks and a shared
+four-task image reference. To reproduce that reference, use
+`python -u -m benchmarks.transfer_suite.solvability_search --plan benchmarks/transfer_suite/plans/residual16.json --output /tmp/residual-image-reference`.
+It retains the behavioral thresholds and records architecture/resource changes
+explicitly; original task definitions and controller results remain intact.
+
 A poor architecture or deliberately ambiguous dataset can expose a limitation
 without making that limitation a requirement for choosing a default. This suite
 separates **importance**, **observed solvability**, and **measured performance**.

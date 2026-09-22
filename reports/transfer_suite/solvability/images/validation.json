@@ -1,0 +1,10 @@
+{
+  "command": "/home/mikkel/anaconda3/envs/conceptmod/bin/python -m pytest tests/test_image_solvability.py -q",
+  "result": "3 passed in 3.76s",
+  "healthy_gan_episodes": 60,
+  "supervised_controls": 4,
+  "diagnostic_gan_episodes": 2,
+  "all_episodes_complete": true,
+  "numerical_errors": 0,
+  "fresh_holdout_evaluations": 0
+}

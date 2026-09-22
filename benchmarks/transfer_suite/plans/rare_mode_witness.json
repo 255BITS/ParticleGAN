@@ -1,0 +1,19 @@
+{
+  "purpose": "Reproduce a rare-mode GAN solvability witness with extra resources. This uses 4096 particles, batch256 and6000 updates versus original256/batch128/1200. Thresholds and target are unchanged; it is not a same-budget speedup or shared default.",
+  "tasks": ["vector_unequal_mass"],
+  "candidates": [
+    {
+      "name": "density_capacity_budget",
+      "overrides": {
+        "particles": 4096,
+        "batch": 256,
+        "steps": 6000,
+        "lr": 0.0006,
+        "betas": [0.0, 0.999],
+        "prior_reg": 1.0,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0
+      }
+    }
+  ]
+}

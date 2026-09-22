@@ -1,0 +1,13 @@
+START 25 prior_lr_30 stress_slow_critic same architecture/data/update budget
+DONE prior_lr_30 stress_slow_critic FAIL suffix 0 metrics {'sw1_normalized': 0.06287732886416776, 'mass_tv': 0.072998046875, 'hq': 0.806396484375, 'component_covariance_error': 28.027546644210815, 'component_min_eigen_ratio': 0.8208250403404236} seconds 13.796593511942774
+START 26 prior_lr_30 stress_small_batch same architecture/data/update budget
+DONE prior_lr_30 stress_small_batch FAIL suffix 0 metrics {'sw1_normalized': 0.10955799936596887, 'mass_tv': 0.235107421875, 'hq': 0.848876953125, 'component_covariance_error': 20.91155629605055, 'component_min_eigen_ratio': 0.26631903648376465} seconds 10.392504822928458
+START 27 prior_lr_30 stress_large_critic same architecture/data/update budget
+DONE prior_lr_30 stress_large_critic FAIL suffix 0 metrics {'sw1_normalized': 0.05350388492850883, 'mass_tv': 0.10986328125, 'hq': 0.9814453125, 'component_covariance_error': 3.363320991396904, 'component_min_eigen_ratio': 0.7465806007385254} seconds 12.76420994300861
+START 28 prior_lr_30 stress_long_horizon same architecture/data/update budget
+DONE prior_lr_30 stress_long_horizon FAIL suffix 0 metrics {'sw1_normalized': 0.10178514676947652, 'mass_tv': 0.197998046875, 'hq': 0.952392578125, 'component_covariance_error': 4.4633197002112865, 'component_min_eigen_ratio': 0.5009239912033081} seconds 18.13760483195074
+START 29 prior_lr_30 stress_r1_r2 same architecture/data/update budget
+DONE prior_lr_30 stress_r1_r2 FAIL suffix 0 metrics {'sw1_normalized': 0.06196666793631598, 'mass_tv': 0.141845703125, 'hq': 0.918701171875, 'component_covariance_error': 12.801078643649817, 'component_min_eigen_ratio': 0.37779349088668823} seconds 9.518010458094068
+START 30 prior_lr_30 reserved_alternating_critic_updates same architecture/data/update budget
+DONE prior_lr_30 reserved_alternating_critic_updates FAIL suffix 0 metrics {'sw1_normalized': 0.1313558148549763, 'mass_tv': 0.14990234375, 'hq': 0.879150390625, 'component_covariance_error': 16.068395733833313, 'component_min_eigen_ratio': 0.4916873574256897} seconds 13.2119927899912
+COMPLETE cross total_episodes 30

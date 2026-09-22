@@ -1,0 +1,18 @@
+[
+  {
+    "task": "img_stripes2",
+    "live_ema_all24_losses_actions_convergence_equal": true
+  },
+  {
+    "task": "img_bars4",
+    "live_ema_all24_losses_actions_convergence_equal": true
+  },
+  {
+    "task": "img_blobs4",
+    "live_ema_all24_losses_actions_convergence_equal": true
+  },
+  {
+    "task": "img_intensity2",
+    "live_ema_all24_losses_actions_convergence_equal": true
+  }
+]

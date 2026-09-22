@@ -1,0 +1,18 @@
+{
+  "episodes": 66,
+  "gzip_roundtrips": 9,
+  "live_observations": 1584,
+  "recorded_wall_seconds": 888.8228394469479,
+  "results_sha256": "b01f5ffa8e23d3047024b4c9b7c1269ead4ed980d99304d7912102fedcfa17de",
+  "scoring_positive_controls": 7,
+  "source_members": 25,
+  "trained_ranking_witnesses": [
+    "stress_fast_critic",
+    "stress_large_critic",
+    "stress_long_horizon",
+    "stress_r1_r2",
+    "stress_slow_critic",
+    "stress_small_batch"
+  ],
+  "verified": true
+}

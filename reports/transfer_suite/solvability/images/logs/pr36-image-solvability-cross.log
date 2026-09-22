@@ -1,0 +1,8 @@
+START residual16_cap10 img_stripes2
+{"card": "residual16_cap10", "task": "img_stripes2", "quality": [true, 2, 1.0], "seconds": 7.51382232492324, "error": null}
+START residual16_cap10 img_bars4
+{"card": "residual16_cap10", "task": "img_bars4", "quality": [false, 4, 0.8125], "seconds": 6.152291228063405, "error": null}
+START residual16_cap10 img_blobs4
+{"card": "residual16_cap10", "task": "img_blobs4", "quality": [true, 4, 0.96875], "seconds": 6.8767953891074285, "error": null}
+START residual16_cap10 img_intensity2
+{"card": "residual16_cap10", "task": "img_intensity2", "quality": [true, 2, 1.0], "seconds": 6.141482090926729, "error": null}
