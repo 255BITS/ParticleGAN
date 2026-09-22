@@ -24,6 +24,15 @@ particles, the most even allocation across eight modes is four modes with one
 particle and four with two: its exact effective-mode ceiling is about 7.56.
 The 4,096-sample estimate fluctuates around that value.
 
+For the expanded comparison, equal regression pass counts are ordered by live
+ring coverage, then HQ, then effective modes. This makes quality improvements
+visible among equally passing configs while preserving all original bounds.
+The main leaderboard also displays the matched stock-recipe ring comparison
+separately. Its recorded source fingerprint is retained; those larger-budget
+rows cannot earn passes in the small-host suite. The optional `--stock-reference`
+argument selects that recorded comparison, defaulting to the checked-in
+`reports/behavioral_baseline/stock_ring.json` when present.
+
 See [default-selection analysis](../../reports/behavioral_baseline/default_selection.md)
 for the missing-mode diagnosis and matched penalty comparison using the stock
 recipe's capacity, optimizer and schedule on the ring host. The main nine-toy

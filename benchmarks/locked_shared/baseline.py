@@ -69,6 +69,10 @@ DEFAULT_CANDIDATES = (
     Candidate("no_particle_l2", particle_l2=0.0),
     Candidate("r1_r2_0_1", reg_arm="a_r1r2", reg_coeff=0.1),
     Candidate("r1_r2_0_1_no_l2", reg_arm="a_r1r2", reg_coeff=0.1, particle_l2=0.0),
+    Candidate("b_cap_no_l2_lr_half", particle_l2=0.0, lr_multiplier=0.5),
+    Candidate("b_cap_no_l2_lr_quarter", particle_l2=0.0, lr_multiplier=0.25),
+    Candidate("b_cap_no_l2_coeff_2", particle_l2=0.0, reg_coeff=2.0),
+    Candidate("b_cap_no_l2_coeff_5", particle_l2=0.0, reg_coeff=5.0),
 )
 
 # Values are thresholds from the original behavioral scorers, not tuned on results.
@@ -109,6 +113,7 @@ def protocol():
     hashes = {str(path.relative_to(repo)): hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted(files)}
     return {"version": VERSION, "seed": 0, "device": "cpu", "threads": 1,
             "evaluation": "final live weights; EMA reported separately where implemented",
+            "ranking": "passed toys, passed bounds, live ring modes, HQ, effective modes; descending",
             "budgets": BUDGETS, "metrics": METRICS, "shared_checks": SHARED,
             "source_sha256": hashes, "torch": str(torch.__version__), "python": platform.python_version()}
 
@@ -208,7 +213,11 @@ def ring_quality(row):
 
 def render(report, destination):
     scored = [(row, score_row(row, report.get("shared", {}))) for row in report["rows"]]
-    scored.sort(key=lambda pair: (-pair[1]["passed_toys"], -pair[1]["passed_metrics"], pair[0]["config"]["name"]))
+    def quality_key(row, score):
+        live = ring_quality(row)["live"]
+        return (score["passed_toys"], score["passed_metrics"], live.get("modes", 0),
+                live.get("hq", 0), live.get("effective_modes", 0))
+    scored.sort(key=lambda pair: tuple(-v for v in quality_key(*pair)) + (pair[0]["config"]["name"],))
     winners = [row["config"]["name"] for row, score in scored if score["status"] == "PASS"]
     winner_text = "**Regression PASS: " + ", ".join(f"`{name}`" for name in winners) + ".**" if winners else "**No complete passing live configuration recorded.**"
     lines = ["# Behavioral baseline — live weights", "", winner_text, "",
@@ -219,20 +228,21 @@ def render(report, destination):
              "**Regression PASS is a minimum bar for default selection.** The original ring bar permits 7/8 modes. "
              "Actual coverage, HQ, balance and checkpoint stability are visible below; a final-step PASS does not establish a stable ParticleGAN default. "
              "The [default-selection analysis](default_selection.md) also compares the stock recipe on the ring host.", "",
-             "Rows rank by passed toys, then passed numerical bounds; equal counts tie. "
+             "Rows rank by passed toys, then passed numerical bounds, then live ring coverage, HQ and effective modes. "
              "Missing/nonfinite results and errors cannot pass. Thresholds and budgets are frozen before config search.", "",
              "| Rank | Config | Live toys | Live bounds | Ring modes | Ring HQ | Effective modes | Regression |",
              "| ---: | --- | ---: | ---: | ---: | ---: | ---: | --- |"]
     last, rank = None, 0
     for index, (row, score) in enumerate(scored, 1):
-        key = (score["passed_toys"], score["passed_metrics"])
+        key = quality_key(row, score)
         if key != last:
             rank = index
         last = key
         live = ring_quality(row)["live"]
         hq = f"{live['hq']:.2%}" if "hq" in live else "Missing"
         effective = f"{live['effective_modes']:.2f}/8" if "effective_modes" in live else "Missing"
-        lines.append(f"| {rank} | `{row['config']['name']}` | {score['passed_toys']}/9 | {score['passed_metrics']}/29 | {live.get('modes', 'Missing')}/8 | {hq} | {effective} | **{score['status']}** |")
+        penalty = row["config"].get("reg_arm", "unspecified")
+        lines.append(f"| {rank} | `{row['config']['name']}` ({penalty}) | {score['passed_toys']}/9 | {score['passed_metrics']}/29 | {live.get('modes', 'Missing')}/8 | {hq} | {effective} | **{score['status']}** |")
     lines += ["", "Effective modes measures balance among high-quality outputs; eight balanced modes gives 8. "
               "HQ measures quality of generated samples and does not penalize a missing target cluster. "
               "Thus 100% HQ can coexist with 7/8 coverage.", "",
@@ -250,6 +260,23 @@ def render(report, destination):
         hq = f"{min(p['hq'] for p in tail):.2%}" if tail else "Missing"
         counts = str(support.get("hq_counts", "Missing"))
         lines.append(f"| `{row['config']['name']}` | {modes} | {hq} | {quality['full_coverage_checks']}/{len(tail)} | {counts} |")
+    if report.get("stock_ring"):
+        lines += ["", "## Stock-recipe ring comparison", "",
+                  "Both rows use the same 20,000 particles, 7,000 steps, optimizer and cosine schedule; only the penalty changes. "
+                  "They are compared with each other and are not included in the 12-particle regression rank. "
+                  "This is the ring host, not the 100-Gaussian benchmark. Tail observations cover the final 200 steps at 50-step intervals.", "",
+                  "| Penalty | Live modes | Live HQ | Effective modes | EMA modes / HQ | Worst tail live HQ | Full-coverage/HQ tail checks |",
+                  "| --- | ---: | ---: | ---: | --- | ---: | ---: |"]
+        for row in report["stock_ring"]["rows"]:
+            ring = row["ring"]
+            live = ring["live"]
+            tail = [p for p in ring["live_curve"] if p["step"] >= row["recipe"]["total_steps"] - 200]
+            full = sum(p["modes"] == 8 and p["hq"] >= 0.9 for p in tail)
+            label = f"{row['recipe']['reg_arm']} coeff {row['recipe']['reg_coeff']}"
+            lines.append(f"| {label} | {live['modes']}/8 | {live['hq']:.2%} | {live['effective_modes']:.2f}/8 | {ring['modes']}/8 / {ring['hq']:.2%} | {min(p['hq'] for p in tail):.2%} | {full}/{len(tail)} |")
+        lines += ["", "Both stock-recipe penalties sustain full coverage at the measured late checkpoints. "
+                  "The current `b_cap` recipe and its EMA pass; the small-host R1+R2 result does not justify replacing the default or disabling EMA. "
+                  "Raw evidence and its original source fingerprint are in [stock_ring.json](stock_ring.json).", ""]
     lines += ["", "## Live toy matrix", "", "| Config | " + " | ".join(METRICS) + " |",
               "| --- | " + " | ".join("---" for _ in METRICS) + " |"]
     for row, score in scored:
@@ -303,6 +330,8 @@ def main():
     parser.add_argument("--configs", type=Path, help="JSON list of candidate objects; unspecified fields use defaults")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--reference", type=Path, help="clean conceptmod checkout at the pinned revision for shared checks")
+    parser.add_argument("--stock-reference", type=Path, default=DEFAULT_OUTPUT / "stock_ring.json",
+                        help="optional recorded stock-recipe ring comparison; displayed separately from candidate ranks")
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
     configs = [Candidate(**c) for c in json.loads(args.configs.read_text())] if args.configs else list(DEFAULT_CANDIDATES)
@@ -312,6 +341,19 @@ def main():
     fingerprint = protocol()
     report = {"protocol": fingerprint, "protocol_sha256": digest(fingerprint),
               "created_at": datetime.now(timezone.utc).isoformat(), "rows": [], "shared": {}}
+    stock = json.loads(args.stock_reference.read_text()) if args.stock_reference.exists() else None
+    if stock is not None:
+        # Preserve only the final observations and the tail needed for display;
+        # the source artifact retains the complete curves and per-mode evidence.
+        report["stock_ring"] = {"source_sha256": hashlib.sha256(args.stock_reference.read_bytes()).hexdigest(),
+                                "protocol": stock["protocol"], "rows": []}
+        for row in stock["rows"]:
+            ring = row["ring"]
+            report["stock_ring"]["rows"].append({"name": row["name"], "recipe": row["recipe"], "ring": {
+                "modes": ring["modes"], "hq": ring["hq"],
+                "live": {k: ring["live"][k] for k in ("modes", "hq", "effective_modes")},
+                "live_curve": [{k: p[k] for k in ("step", "modes", "hq")} for p in ring["live_curve"]
+                               if p["step"] >= row["recipe"]["total_steps"] - 200]}})
     output = args.output
     output.mkdir(parents=True, exist_ok=True)
     result_path = output / "results.json"

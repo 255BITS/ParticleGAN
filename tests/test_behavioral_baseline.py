@@ -152,3 +152,19 @@ def test_diagnostics_preserve_training_and_show_quality_in_report(tmp_path):
     assert "7/8 | 100.00% | 6.37/8" in text
     assert "2/8 | 16.00% | 0/1" in text
     assert "minimum bar for default selection" in text
+
+
+def test_stock_full_coverage_is_visible_without_rescuing_candidate_failure(tmp_path):
+    row = passing_row()
+    row["toys"]["trajectory"]["live"]["identity_mse"] = 0.5
+    stock = {"rows": [{"recipe": {"total_steps": 7000, "reg_arm": "b_cap", "reg_coeff": 1.0},
+                       "ring": {"modes": 8, "hq": 1.0,
+                                "live": {"modes": 8, "hq": 0.99, "effective_modes": 7.95},
+                                "live_curve": [{"step": 7000, "modes": 8, "hq": 0.99}]}}]}
+    report = {"protocol": {"version": "test"}, "rows": [row], "shared": shared_pass(), "stock_ring": stock}
+    path = tmp_path / "README.md"
+    baseline.render(report, path)
+    text = path.read_text()
+    assert "b_cap coeff 1.0 | 8/8 | 99.00% | 7.95/8" in text
+    assert "8/9 | 28/29" in text and "**FAIL**" in text
+    assert baseline.score_row(row, report["shared"])["status"] == "FAIL"
