@@ -9,17 +9,19 @@ import math
 
 
 PROTOCOL = {
-    "version": "transfer-stress-v1", "seed": 0, "observations": 24,
+    "version": "transfer-stress-v2", "seed": 0, "observations": 24,
     "minimum_stable_checks": 5,
     "references": ["fixed_cosine", "fixed_constant"],
     "reference_attempts_per_task": 2,
     "selection": "Live numerical behavior; EMA separate. New tasks rank or diagnose, never block eligibility.",
     "unsolved_reference": "NOT DEMONSTRATED; preserve the predeclared tier and report all attempts.",
+    "correction": "v2 adds minimum normalized component covariance eigenvalue >= .15; v1 source and executed results are preserved, and recorded curves are re-scored explicitly.",
 }
 
 THRESHOLDS = [
     ["sw1_normalized", "<=", .18], ["mass_tv", "<=", .15],
     ["hq", ">=", .85], ["component_covariance_error", "<=", .85],
+    ["component_min_eigen_ratio", ">=", .15],
 ]
 
 _BASE = {

@@ -60,3 +60,22 @@ def test_reference_distribution_satisfies_the_gate_without_claiming_training_sol
     samples = vector.sample_target(spec, 4096, torch.Generator().manual_seed(0), spec["steps"])
     metrics = vector.score_samples(samples, spec, spec["steps"])
     assert vector.passes(metrics, spec["thresholds"])
+
+
+def test_partial_component_collapse_cannot_hide_behind_average_covariance():
+    from benchmarks.transfer_suite import vector_tasks as vector
+    spec = stress_tasks.TASKS[0]
+    corners = torch.tensor([[1., 0.], [-1., 0.], [0., 1.], [0., -1.]]) * (.12 * 2 ** .5)
+    components = []
+    for index, mean in enumerate(spec["means"]):
+        center = torch.tensor(mean, dtype=torch.float32)
+        # Six collapsed components and two with exactly the target covariance.
+        offsets = torch.zeros(128, 2) if index < 6 else corners.repeat(32, 1)
+        components.append(center + offsets)
+    metrics = vector.score_samples(torch.cat(components), spec, spec["steps"])
+    old_bounds = [bound for bound in spec["thresholds"] if bound[0] != "component_min_eigen_ratio"]
+    assert metrics["hq"] == 1. and metrics["mass_tv"] == 0.
+    assert metrics["component_covariance_error"] == pytest.approx(.75, abs=1e-5)
+    assert vector.passes(metrics, old_bounds)
+    assert metrics["component_min_eigen_ratio"] == pytest.approx(0.)
+    assert not vector.passes(metrics, spec["thresholds"])

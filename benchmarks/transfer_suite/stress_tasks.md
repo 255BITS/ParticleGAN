@@ -1,17 +1,20 @@
 # Development stress tasks
 
-These eight tasks were specified before their reference runs. Six contribute to
-ranking; two diagnose intentionally weak architecture or ambiguous data. Neither
-tier adds eligibility blockers: the existing nine required behavioral toys remain
-the blockers. The tiers and thresholds stay fixed even when neither reference
-solves a task. Such a result is reported as **reference solvability not
-demonstrated**, with both attempts retained.
+These eight tasks were specified as v1 before their reference runs. The current
+**v2 corrects a demonstrated partial-collapse scoring loophole** by adding a
+minimum component covariance eigenvalue bound; the correction and explicit
+rescoring are recorded below. Six tasks contribute to ranking; two diagnose
+intentionally weak architecture or ambiguous data. Neither tier adds eligibility
+blockers: the existing nine required behavioral toys remain the blockers. An
+unsolved reference never changes a task's tier and is reported as **reference
+solvability not demonstrated**, with both attempts retained.
 
 Every development episode uses seed 0, CPU, 24 fixed live-weight observations and
 a passing suffix of at least five observations. EMA is reported separately and
 cannot rescue a live failure. Fixed cosine and fixed constant schedules are the
 only calibration references; no learned policy is fitted here, and there are no
-seed sweeps or post-result threshold changes.
+seed sweeps. The later v2 scoring correction is versioned separately, not presented
+as a threshold that preceded the v1 executions.
 
 The common target is an equal eight-component ring of radius 3, with Gaussian
 standard deviation .12. The base model has 256 particles, latent dimension 4,
@@ -33,11 +36,11 @@ settings are recorded numerically in [stress_tasks.py](stress_tasks.py).
 
 The first seven tasks require normalized sliced Wasserstein-1 distance ≤.18,
 component mass total variation ≤.15, Mahalanobis-radius-3 HQ ≥.85 and relative
-component covariance error ≤.85. These numerical distribution checks prevent
-mode-center memorization from receiving full credit. The overlapping-data task
-uses only sliced distance ≤.18 because component-conditioned diagnostics are
-inappropriate for strongly overlapping labels. All thresholds are declared in
-the specs, not inferred from reference results.
+component covariance error ≤.85. V2 additionally requires minimum normalized
+component covariance eigenvalue ≥.15, so healthy components cannot hide collapsed
+ones behind an average. The overlapping-data task uses only sliced distance ≤.18
+because component-conditioned diagnostics are inappropriate for strongly
+overlapping labels. The current specs are frozen before any learned-policy search.
 
 The reserved dynamics family uses a previously unseen update cadence: the critic
 updates every second outer step, and the generator updates every step. Its static
@@ -46,7 +49,7 @@ published, but it is **never evaluated during development**. The parent can unlo
 it only after freezing the selected method. Report actual D/G update counts and
 wall time because outer-step budgets alone do not represent equal work.
 
-## Frozen reference results
+## Executed v1 references
 
 All 16 predeclared attempts completed. The overlapping-data diagnostic has a
 demonstrated sustained reference solution. **Reference solvability is not
@@ -97,9 +100,39 @@ Recorded hashes:
 - Common vector runner: `433b0566ca07a0118ea0fcae188975658df48e8b84503998af163aa55664bd3d`.
 - Complete reference results: `df1cc9cc06c1dcef55ef398453d748a0f7eb6687b94728bb87c756539fd909d2`.
 
-The stress source stayed unchanged throughout calibration. No learned-policy
-fitting, seed experiments, threshold changes, tier changes or reserved-family
+The v1 stress source stayed unchanged throughout those executions. No
+learned-policy fitting, seed experiments, tier changes or reserved-family
 evaluation occurred. The metric tests additionally demonstrate that target
 samples can satisfy the numerical gate and memorized centers fail despite perfect
 HQ and occupancy; the former is a scoring sanity check, **not** evidence of a
 trainable reference solution.
+
+## V2 correction and explicit rescoring
+
+Review exposed a counterexample to the averaged covariance gate: six collapsed
+components and two healthy components on this eight-mode target produce covariance
+error .75, perfect HQ and correct occupancy, passing all v1 bounds. V2 adds
+`component_min_eigen_ratio >= .15` to every identifiable stress task, including the
+reserved cadence spec. The counterexample has minimum eigenvalue ratio zero and
+now fails. A regression test verifies both its old false positive and its v2
+rejection. No data, architectures, budgets, tiers, existing nine required gates,
+or nonidentifiable-data thresholds changed.
+
+The metric was already recorded at every v1 observation, so **no training was
+repeated**. `/tmp/pr36-transfer-stress-v2-rescore/results.json` explicitly records
+each source row, the old verdict/convergence, the new verdict/convergence, both
+protocols and source hashes. All 16 final and sustained outcomes remain unchanged;
+the table above therefore also describes v2 outcomes. Seven tasks still lack a
+demonstrated sustained reference solution, and the overlapping-data diagnostic
+remains solved. This scoring correction is based on a constructed failure case,
+not a tuned attempt to make any method pass.
+
+The original JSON remains byte-for-byte unchanged. Both archive directories
+contain `source_snapshot/` and `source_manifest.json`, preserving all 25 recorded
+source files for their respective scoring versions. The v1 numerical cards and
+the exact v1 stress/vector runner bytes remain available alongside the original
+executions. V2 also retains its frozen specs and standalone `rescore.py`.
+
+- V2 stress specification: `3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4`.
+- V2 vector runner: `0dc77115c92fbebf3cc44344e3f3c0fdfb730cb139218fd2b6b92c7c6eabb9ac`.
+- Explicit v2 results: `666eb0c7f66759144b688531d7d0fd234c12b8eeaa95f3995bb427575f58bad8`.
