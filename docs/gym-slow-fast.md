@@ -137,13 +137,14 @@ training set.
 
 ### Collect
 
-`configs/gym/lunar_lander_slow_fast/collect.yaml`. Rolls the safe checkpoint
-and `fast_teacher/held.pt` on seeds `591000` onward (`episodes: 200`). The
-fast teacher may crash on most seeds. A pair is kept only when both land and
-the fast landing is strictly sooner. Crashes, timeouts, and flyaways never
-become targets. Every kept safe-trajectory state is a row. The target is the
-fast action at the same fraction `t/T` on that seed. The manifest is
-`pairing=progress_same_seed`, `alignment=t/T`. Output is
+`configs/gym/lunar_lander_slow_fast/collect.yaml`. The fast teacher flies
+every seed from `591000` (`episodes: 200`) first. The safe teacher flies a
+seed only when that fast rollout's outcome is `successful_landing`. Seeds the
+fast teacher misses are not flown by the safe teacher. A pair is still kept
+only when both land and the fast landing is strictly sooner. Crashes,
+timeouts, and flyaways never become targets. Every kept safe-trajectory state
+is a row. The target is the fast action at the same fraction `t/T` on that
+seed. The manifest is `pairing=progress_same_seed`, `alignment=t/T`. Output is
 `results/gym/lunar_lander_slow_fast/pairs_progress.npz`.
 
 If `pairs.npz` is still in that directory, collect renames it to

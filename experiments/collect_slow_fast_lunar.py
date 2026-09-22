@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-"""Roll the safe teacher and the fast teacher and write same-seed Lunar pairs.
+"""Roll the wreckless teacher first, then the safe teacher only where it landed.
 
-Each seed is flown by both checkpoints. A pair is kept only when both land and
-the fast landing is strictly sooner. Rows are aligned by progress t/T.
-Cross-episode nearest matching is disabled. A legacy pairs.npz in the output
-directory is renamed to pairs_stranger_do_not_train.npz before anything new
-is written.
+The fast teacher flies every collection seed. The safe teacher flies a seed
+only when that fast rollout's outcome is ``successful_landing``. A pair is
+kept only when both land and the fast landing is strictly sooner. Rows are
+aligned by progress t/T. Cross-episode nearest matching is disabled. A legacy
+pairs.npz in the output directory is renamed to
+pairs_stranger_do_not_train.npz before anything new is written.
 """
 import argparse
 import json
@@ -114,6 +115,16 @@ def rollout_teacher(bundle, seeds, teacher, rollouts_path, live):
     return written
 
 
+def fast_landing_seeds(episodes, seeds):
+    """Seeds in ``seeds`` whose fast rollout landed. Misses are not safe work."""
+    outcome = {}
+    for episode in episodes:
+        if episode.get("teacher") != "fast":
+            continue
+        outcome[int(episode["seed"])] = episode.get("outcome")
+    return [int(seed) for seed in seeds if outcome.get(int(seed)) == SUCCESS]
+
+
 def _split_teachers(episodes):
     safe, fast = [], []
     for episode in episodes:
@@ -168,20 +179,29 @@ def collect(cfg, smoke=False, from_jsonl=False):
             _log_to(live, f"PAIR from {cfg['rollouts']} safe={len(safe)} fast={len(fast)}")
             return pair_from_episodes(safe, fast, cfg, live)
         seeds = assert_collection_seeds(range(cfg["seed_start"], cfg["seed_start"] + cfg["episodes"]))
-        _log_to(live, f"START safe={cfg['safe_checkpoint']} fast={cfg['fast_checkpoint']} "
+        _log_to(live, f"START fast={cfg['fast_checkpoint']} then safe={cfg['safe_checkpoint']} "
                       f"device={cfg['device']} seeds={seeds[0]}-{seeds[-1]} n={len(seeds)} "
-                      "pairing=progress_same_seed")
+                      "order=fast_then_safe_on_landings pairing=progress_same_seed")
         started = time.perf_counter()
-        safe_bundle = load_paired_controller(cfg["safe_checkpoint"], cfg["device"])
         fast_bundle = load_paired_controller(cfg["fast_checkpoint"], cfg["device"])
         if fast_bundle.get("format") != "gym_fast_teacher_v1":
             raise ValueError("fast checkpoint must be gym_fast_teacher_v1, the held speed teacher")
+        if fast_bundle.get("residual") is not None:
+            raise ValueError("teachers are E_control -> G2 checkpoints, not residual students")
+        written = rollout_teacher(fast_bundle, seeds, "fast", cfg["rollouts"], live)
+        safe_seeds = fast_landing_seeds(read_jsonl(cfg["rollouts"]), seeds)
+        missed = len(seeds) - len(safe_seeds)
+        _log_to(live, f"FAST landed={len(safe_seeds)}/{len(seeds)} "
+                      f"safe_rollouts={len(safe_seeds)} skipped_fast_misses={missed}")
+        if not safe_seeds:
+            _log_to(live, "STOP fast teacher landed on no collection seed. Safe teacher was not rolled.")
+            raise ValueError("fast teacher landed on no collection seed; refusing to roll the safe teacher")
+        safe_bundle = load_paired_controller(cfg["safe_checkpoint"], cfg["device"])
         if safe_bundle.get("format") == "gym_fast_teacher_v1":
             raise ValueError("safe checkpoint must be the frozen #18 lander, not the fast teacher")
-        if fast_bundle.get("residual") is not None or safe_bundle.get("residual") is not None:
+        if safe_bundle.get("residual") is not None:
             raise ValueError("teachers are E_control -> G2 checkpoints, not residual students")
-        written = rollout_teacher(safe_bundle, seeds, "safe", cfg["rollouts"], live)
-        written += rollout_teacher(fast_bundle, seeds, "fast", cfg["rollouts"], live)
+        written += rollout_teacher(safe_bundle, safe_seeds, "safe", cfg["rollouts"], live)
         _log_to(live, f"ROLLOUTS wrote={written} file={cfg['rollouts']} "
                       f"elapsed_s={time.perf_counter() - started:.1f}")
         safe, fast = _split_teachers(read_jsonl(cfg["rollouts"]))

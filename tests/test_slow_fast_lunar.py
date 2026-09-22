@@ -8,7 +8,8 @@ import unittest
 import numpy as np
 import torch
 
-from experiments.collect_slow_fast_lunar import DEFAULTS as COLLECT_DEFAULTS, collect, validate as validate_collect
+from experiments.collect_slow_fast_lunar import (DEFAULTS as COLLECT_DEFAULTS, collect,
+    fast_landing_seeds, validate as validate_collect)
 from experiments.config import read_config
 from experiments.evaluate_gym_slow_fast import render_report, select_winner
 from experiments.train_gym_fast_teacher import (DEFAULTS as FAST_DEFAULTS, select_held_stage,
@@ -98,6 +99,22 @@ class SlowFastLunarTests(unittest.TestCase):
         self.assertTrue(np.all(built["arrays"]["terrain"][seeds == 2] == 1))
         self.assertNotIn(3, set(seeds.tolist()))
         self.assertEqual(built["manifest"]["crashes_excluded"], 1)
+
+    def test_safe_teacher_rolls_only_where_fast_landed(self):
+        episodes = [
+            dict(teacher="fast", seed=1, outcome="successful_landing"),
+            dict(teacher="fast", seed=2, outcome="crash"),
+            dict(teacher="fast", seed=3, outcome="out_of_bounds"),
+            dict(teacher="fast", seed=4, outcome="time_limit"),
+            dict(teacher="safe", seed=2, outcome="successful_landing"),
+        ]
+        self.assertEqual(fast_landing_seeds(episodes, [1, 2, 3, 4, 5]), [1])
+        source = Path(collect.__code__.co_filename).read_text()
+        fast_at = source.index("rollout_teacher(fast_bundle")
+        safe_at = source.index("rollout_teacher(safe_bundle")
+        self.assertLess(fast_at, safe_at)
+        self.assertIn("successful_landing", source)
+        self.assertIn("skipped_fast_misses", source)
 
     def test_archive_renames_legacy_pairs_and_collect_refuses_that_name(self):
         with tempfile.TemporaryDirectory() as td:

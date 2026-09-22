@@ -107,9 +107,10 @@ python -m unittest tests.test_slow_fast_paired
 
 ## Lunar path
 
-The gym collector follows this gate. A frozen `#18` safe teacher and a
-speed-biased fast teacher from the same spine roll the **same seed**. A pair
-is kept only when both land, and rows are aligned by progress `t/T`.
+The gym collector follows this gate. The speed-biased teacher flies every
+seed first. The frozen `#18` teacher flies a seed only when that fast rollout
+lands. A pair is kept only when both land, and rows are aligned by progress
+`t/T`.
 Nearest-stranger pairing is disabled. The fast teacher's speed term is pushed
 until landings break; crashed episodes stay out of the file. Commands are in
 [gym-slow-fast.md](gym-slow-fast.md).
