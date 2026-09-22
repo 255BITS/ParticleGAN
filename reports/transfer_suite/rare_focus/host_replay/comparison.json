@@ -1,0 +1,47 @@
+{
+  "claim": "Published b_cap3 linear_skip_d96_beta5 rare-mode pass. This file is a fresh seed-0 replay, not a new recipe.",
+  "archived": {
+    "torch": "2.13.0+cu126",
+    "cpu": "AVX2",
+    "python": "3.12.13",
+    "status": "PASS",
+    "suffix": 6,
+    "confirmed_step": 1150,
+    "hq": 0.9970703125,
+    "cov": 0.44131382554769516,
+    "eigen": 0.2697688937187195
+  },
+  "this_host": {
+    "torch": "2.13.0+cu126",
+    "cpu": "AVX2",
+    "python": "3.12.3",
+    "aten_cpu_capability": "avx2",
+    "status": "FAIL",
+    "suffix": 0,
+    "confirmed_step": null,
+    "hq": 0.989501953125,
+    "cov": 2.624247767031193,
+    "eigen": 0.09190863370895386,
+    "mass_tv": 0.05439453572034836,
+    "sw": 0.08438561223000494,
+    "min_mass": 0.9011008143424988,
+    "component_covariance_errors": [
+      0.29747867584228516,
+      0.3284313678741455,
+      0.3791166841983795,
+      9.491964340209961
+    ],
+    "fails": [
+      "component_covariance_error",
+      "component_min_eigen_ratio"
+    ]
+  },
+  "identical_replays_on_this_host": [
+    "torch 2.13.0+cpu",
+    "torch 2.13.0+cu126",
+    "torch 2.13.0+cu126 with ATEN_CPU_CAPABILITY=avx2"
+  ],
+  "first_differing_metrics": "step 50 sliced W1 and component covariance; HQ and mass TV still match",
+  "leaderboard": "unchanged; formulations.build still reports required 9 and practical 10 from archived curves",
+  "archive_verify": "rare_focus.verify: 1 sustained rare winner, 2 exact winning replays, thresholds unchanged"
+}
