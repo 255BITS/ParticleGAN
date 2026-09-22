@@ -1,4 +1,5 @@
 .venv/
+/artifacts/
 results/runs/
 results/runs_audit/
 __pycache__/

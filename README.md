@@ -66,6 +66,12 @@ On the actual 100-Gaussian task the behavioral candidate ties stock's live conve
 `"gan"` keeps the existing defaults. Neither preset guarantees transfer to new
 architectures or data units.
 
+The [paired 2D transport extraction](reports/paired_error_2d/README.md) tests the
+MSE-free paired-error game with movable/fixed clouds. All 12 matching application
+runs reproduce exactly using this checkout's public primitives. The cap/schedule
+helps affine fidelity and slightly worsens swirl fidelity at the fixed seed;
+its behavior depends on the task and on live versus EMA evaluation.
+
 See the [minimal GAN loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-training-loop),
 [minimal DDGAN + UCD loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-ddgan--ucd-loop), and
 [API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#reference-index) for complete examples and contracts.
