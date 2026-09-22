@@ -22,9 +22,10 @@ import torch
 
 from particlegan import GANLoss, GradientPenalty
 from . import mode_hold, trajectory, two_pole
+from .observation import recording, sustained, OBSERVATIONS, MIN_STABLE_CHECKS
 from .hosts import ae_gan_hold, cover_leftover, mid_scale_identity, residual_student, unipolar, unused_token_hold
 
-VERSION = "behavior-v1"
+VERSION = "behavior-v2"
 DEFAULT_OUTPUT = Path("reports/behavioral_baseline")
 
 
@@ -114,6 +115,8 @@ def protocol():
     return {"version": VERSION, "seed": 0, "device": "cpu", "threads": 1,
             "evaluation": "final live weights; EMA reported separately where implemented",
             "ranking": "passed toys, passed bounds, live ring modes, HQ, effective modes; descending",
+            "convergence": {"observations": OBSERVATIONS, "minimum_passing_suffix": MIN_STABLE_CHECKS,
+                            "ring_requires_all_modes": True, "timing": "wall seconds including setup and measurement"},
             "budgets": BUDGETS, "metrics": METRICS, "shared_checks": SHARED,
             "source_sha256": hashes, "torch": str(torch.__version__), "python": platform.python_version()}
 
@@ -152,7 +155,7 @@ def score_row(row, shared):
 def run_toy(toy, cfg):
     """Serial, scoped host injection; one candidate card, no per-toy tuning."""
     knobs = cfg.host_options()
-    with ExitStack() as stack:
+    with recording(BUDGETS[toy]) as recorder, ExitStack() as stack:
         for module in (trajectory, residual_student, cover_leftover, mid_scale_identity):
             target = module.PROTOCOL if module in (trajectory, residual_student) else module.FORMULATION
             values = {k: v for k, v in knobs.items() if k in target}
@@ -189,6 +192,9 @@ def run_toy(toy, cfg):
     live = raw.get("live", raw)
     # Keep raw diagnostics as well, but never use their legacy verdict strings.
     result = {"live": {key: live[key] for key, _, _ in METRICS[toy] if key in live}, "raw": raw}
+    result["observations"] = recorder.curve
+    requirements = [("modes", ">=", 8), ("hq", ">=", 0.90)] if toy == "mode_hold" else METRICS[toy]
+    result["convergence"] = sustained(recorder.curve, requirements, expected_steps=recorder.steps)
     if "live" in raw:
         result["ema"] = {key: raw[key] for key, _, _ in METRICS[toy] if key in raw}
     return result
@@ -260,6 +266,23 @@ def render(report, destination):
         hq = f"{min(p['hq'] for p in tail):.2%}" if tail else "Missing"
         counts = str(support.get("hq_counts", "Missing"))
         lines.append(f"| `{row['config']['name']}` | {modes} | {hq} | {quality['full_coverage_checks']}/{len(tail)} | {counts} |")
+    if any("convergence" in t for row, _ in scored for t in row["toys"].values()):
+        lines += ["", "## Convergence speed", "",
+                  "Each host has 24 evenly spaced observations. Sustained PASS requires a complete curve, at least five consecutive passing observations, "
+                  "and no later failure through the final budget. Ring convergence requires all eight modes and HQ ≥90%; original regression bounds stay unchanged. "
+                  "Stable-from is the start of that final passing stretch; confirmation is its fifth observation. Times include setup and measurement overhead. "
+                  "These certify observations, not every intervening update. Historical runs without timing are not assigned estimated speeds.", "",
+                  "| Config | Sustained toys | Ring first PASS step | Ring stable from step | Ring confirmed step | Ring confirmed seconds | All toys wall seconds |",
+                  "| --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
+        for row, _ in scored:
+            c = row["toys"].get("mode_hold", {}).get("convergence", {})
+            stable = sum(t.get("convergence", {}).get("stable_from_step") is not None for t in row["toys"].values())
+            seconds = c.get("confirmed_seconds")
+            elapsed = [t.get("seconds") for t in row["toys"].values()]
+            wall = f"{sum(elapsed):.2f}" if len(elapsed) == len(METRICS) and all(isinstance(s, (int, float)) for s in elapsed) else "Missing"
+            confirm = f"{seconds:.2f}" if seconds is not None else "Not reached"
+            values = [str(c.get(key)) if c.get(key) is not None else "Not reached" for key in ("first_pass_step", "stable_from_step", "confirmed_step")]
+            lines.append(f"| `{row['config']['name']}` | {stable}/9 | {' | '.join(values)} | {confirm} | {wall} |")
     if report.get("stock_ring"):
         lines += ["", "## Stock-recipe ring comparison", "",
                   "Both rows use the same 20,000 particles, 7,000 steps, optimizer and cosine schedule; only the penalty changes. "

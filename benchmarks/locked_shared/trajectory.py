@@ -6,6 +6,8 @@ See SOURCE.md and LICENSE for provenance. Default losses use PR #36 builders.
 
 from __future__ import annotations
 
+from .observation import checkpoint
+
 import torch
 from torch import nn
 from particlegan.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
@@ -182,6 +184,7 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None, diagno
         finally:
             for parameter, flag in zip(critic.parameters(), flags):
                 parameter.requires_grad_(flag)
+        checkpoint(step, lambda: {"identity_mse": identity_mse(generator(slow, prior.z).detach(), fast)})
 
     with torch.no_grad():
         pred = generator(slow, prior.z)

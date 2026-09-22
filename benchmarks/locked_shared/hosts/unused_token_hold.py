@@ -10,6 +10,8 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 
 
+from ..observation import checkpoint
+
 import torch
 
 
@@ -253,6 +255,7 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None) 
         loss.backward()
         critic.requires_grad_(True)
         opt_g.step()
+        checkpoint(step + 1, lambda: score_student(student))
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == int(recipe.steps):
             _log(recipe.name, step + 1, score_student(student))

@@ -13,6 +13,8 @@ import json
 from typing import Callable
 
 
+from ..observation import checkpoint
+
 import torch
 
 
@@ -255,6 +257,11 @@ def train(*, pairing: str = "shared", echo: bool = False,
         finally:
             for parameter, flag in zip(critic.parameters(), flags):
                 parameter.requires_grad_(flag)
+        def observe_student():
+            with torch.no_grad():
+                pred = head(slow, prior.z)
+                return {"identity_mse": identity_mse(pred, fast), **landing_stats(pred, fast)}
+        checkpoint(step, observe_student)
 
         if step == 1 or step % LOG_EVERY == 0 or step == steps:
             with torch.no_grad():

@@ -13,6 +13,8 @@ import math
 from dataclasses import dataclass
 
 
+from ..observation import checkpoint
+
 import torch
 
 
@@ -291,6 +293,7 @@ def _fit_rpgan(
         g_loss.backward()
         opt_g.step()
         critic.requires_grad_(True)
+        checkpoint(step + 1, lambda: score_residual(student))
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == steps:
             row = score_residual(student)

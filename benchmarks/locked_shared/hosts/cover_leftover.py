@@ -13,6 +13,8 @@ import math
 from dataclasses import dataclass
 
 
+from ..observation import checkpoint
+
 import torch
 
 
@@ -479,6 +481,7 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         g_loss.backward()
         opt_g.step()
         ema.update(list(residual.parameters()))
+        checkpoint(step + 1, lambda: score_geometry(residual, field, poles_p, poles_m, neu))
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == recipe.steps:
             live = score_geometry(residual, field, poles_p, poles_m, neu)

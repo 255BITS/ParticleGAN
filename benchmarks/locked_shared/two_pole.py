@@ -6,6 +6,8 @@ See SOURCE.md and LICENSE for provenance. Default losses use PR #36 builders.
 
 from __future__ import annotations
 
+from .observation import checkpoint
+
 import torch
 from torch import nn
 from particlegan.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
@@ -117,6 +119,8 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
         g_loss = g_loss + particle_l2 * particles.square().mean()
         g_loss.backward()
         opt_p.step()
+        checkpoint(step, lambda: {"mean_abs": float(particles.detach().abs().mean()),
+                                 "grad_med": _grad_median(critic, real, particles)})
 
     with torch.no_grad():
         mean_abs = float(particles.abs().mean())

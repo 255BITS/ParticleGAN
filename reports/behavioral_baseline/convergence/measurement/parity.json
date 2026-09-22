@@ -1,0 +1,141 @@
+{
+  "historical_protocol_sha256": "ec8da4732b918b382069db2f040c918ffbccdfb17f7c507a34d13abf85b8d5c8",
+  "measurement_protocol_sha256": "c2f784a059981f4dad844cb36ac920fa54b9004f579248726e56cde1a6a3cc48",
+  "checks": [
+    {
+      "candidate": "locked_shared",
+      "toy": "two_pole",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "locked_shared",
+      "toy": "trajectory",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "locked_shared",
+      "toy": "residual_student",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "locked_shared",
+      "toy": "unipolar",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "locked_shared",
+      "toy": "ae_gan_hold",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "locked_shared",
+      "toy": "cover_leftover",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "locked_shared",
+      "toy": "unused_token_hold",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "locked_shared",
+      "toy": "mid_scale_identity",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "locked_shared",
+      "toy": "mode_hold",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "r1_r2_0_1",
+      "toy": "two_pole",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "r1_r2_0_1",
+      "toy": "trajectory",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "r1_r2_0_1",
+      "toy": "residual_student",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "r1_r2_0_1",
+      "toy": "unipolar",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "r1_r2_0_1",
+      "toy": "ae_gan_hold",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "r1_r2_0_1",
+      "toy": "cover_leftover",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "r1_r2_0_1",
+      "toy": "unused_token_hold",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "r1_r2_0_1",
+      "toy": "mid_scale_identity",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "r1_r2_0_1",
+      "toy": "mode_hold",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "bcap_k1p25_c3p0_lr0p85",
+      "toy": "two_pole",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "bcap_k1p25_c3p0_lr0p85",
+      "toy": "trajectory",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "bcap_k1p25_c3p0_lr0p85",
+      "toy": "residual_student",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "bcap_k1p25_c3p0_lr0p85",
+      "toy": "unipolar",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "bcap_k1p25_c3p0_lr0p85",
+      "toy": "ae_gan_hold",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "bcap_k1p25_c3p0_lr0p85",
+      "toy": "cover_leftover",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "bcap_k1p25_c3p0_lr0p85",
+      "toy": "unused_token_hold",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "bcap_k1p25_c3p0_lr0p85",
+      "toy": "mid_scale_identity",
+      "max_absolute_difference": 0
+    },
+    {
+      "candidate": "bcap_k1p25_c3p0_lr0p85",
+      "toy": "mode_hold",
+      "max_absolute_difference": 0
+    }
+  ]
+}

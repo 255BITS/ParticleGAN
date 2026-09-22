@@ -13,6 +13,8 @@ import math
 from dataclasses import dataclass
 
 
+from ..observation import checkpoint
+
 import torch
 
 
@@ -483,6 +485,8 @@ def _fit(
         g_loss.backward()
         opt_g.step()
         critic.requires_grad_(True)
+        checkpoint(step + 1, lambda: score_hold(student, scales=_eval_scales(arm),
+                   pairing="stranger" if arm == "stranger" else "matched", teacher=teacher))
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == int(steps):
             preview_scales = _eval_scales(arm)

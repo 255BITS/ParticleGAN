@@ -10,6 +10,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
+from ..observation import checkpoint
+
 import torch
 
 
@@ -211,6 +213,7 @@ def train(cfg: HoldConfig) -> dict:
         for param in critic.parameters():
             param.requires_grad_(True)
         opt_g.step()
+        checkpoint(step, lambda: evaluate(encoder, decoder, prior, recipe))
         if step == 1 or (step % 50 == 0 and step != cfg.steps):
             snap = evaluate(encoder, decoder, prior, recipe)
             _log(cfg.name, step, snap, extra=f" loss={float(loss.detach()):.4f}")

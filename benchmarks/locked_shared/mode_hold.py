@@ -6,6 +6,8 @@ See SOURCE.md and LICENSE for provenance. Default losses use PR #36 builders.
 
 from __future__ import annotations
 
+from .observation import checkpoint
+
 import torch
 from torch import nn
 from particlegan.locked_shared import LOCKED_SHARED, make_gan_loss, make_b_cap
@@ -209,6 +211,7 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             for ema, param in zip(ema_g, generator.parameters()):
                 ema.mul_(recipe.ema).add_(param, alpha=1.0 - recipe.ema)
             ema_z.mul_(recipe.ema).add_(prior.z, alpha=1.0 - recipe.ema)
+        checkpoint(step + 1, measure)
         if diagnostics and (step + 1) % 200 == 0:
             curve.append(snapshot(step + 1))
         if diagnostics and ((step + 1) % 200 == 0 or
