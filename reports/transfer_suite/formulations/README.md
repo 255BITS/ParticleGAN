@@ -30,12 +30,21 @@ at step 950 and confirming at 1,150 of 1,200 updates. Its own full data profile
 is 3/6: rare mass, broad and spiral pass; unequal width, anisotropic and overlap
 fail. Those cases retain other supported architectures under the same recipe.
 [Exact replays and diagnosis](../rare_focus/DIAGNOSIS.md) identified flattening
-in the earlier failed run; the new winner is independently reproduced.
+in the earlier failed run; the new winner is reproduced exactly on its original host.
 
 | Formulation | Required live | Data toys | Image toys with supported architecture | Practical support |
 | --- | ---: | ---: | ---: | ---: |
 | **RpGAN logistic + b_cap3 / κ1.25 + prior regularization .05, no L2** | **9/9** | **6/6** | **4/4** | **10/10** |
 | RpGAN logistic + b_cap10 / κ1.25 + prior regularization .05, no L2 | 8/9; not qualified yet | 4/6 | 3/4 | 7/10 |
+
+**Second-host replication: 16/19.** Replaying every archived b_cap3 supporting
+episode on another CPU host keeps source, torch 2.13.0, seed 0, settings and
+thresholds identical. The result is 8/9 required and 8/10 practical: the required
+eight-mode ring, the rare 2% mode and bars4 fail. Every episode differs from
+its archive at the first measurement at floating-point scale. Both torch 2.13.0
+builds agree bit-for-bit on the second host. The table above still counts the archived
+live evidence; the 19/19 is exact on the original host but not host-robust.
+[Replication audit](../host_replication/README.md).
 
 **Scope revision:** the previous 7/16 becomes 7/10 because the user requested
 that imposed training-condition variations be excluded from this PR's main
