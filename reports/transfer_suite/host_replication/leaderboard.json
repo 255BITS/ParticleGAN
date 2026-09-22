@@ -1,0 +1,1195 @@
+{
+  "version": "host-replication-v1",
+  "claim": "rp_logistic_bcap3 9/9 required + 10/10 practical on archived host",
+  "host": {
+    "torch": "2.13.0+cpu",
+    "cpu_capability": "AVX512",
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "threads": 1,
+    "processes": 4
+  },
+  "archived_host": {
+    "torch": "2.13.0+cu126",
+    "cpu_capability": "AVX2",
+    "python": "3.12.13"
+  },
+  "rule": "Jobs are fixed before training: the nine required episodes and every passing\narchitecture trial in formulations/leaderboard.json. Each replay reuses the\narchived spec, policy and discriminator constructor; nothing is retuned. Seed 0\nonly. Bitwise curve parity and the recomputed sustained verdict are recorded.",
+  "required_passes": 8,
+  "practical_passes": 8,
+  "trial_passes": 39,
+  "trials": 46,
+  "supported": {
+    "two_pole": true,
+    "trajectory": true,
+    "residual_student": true,
+    "unipolar": true,
+    "ae_gan_hold": true,
+    "cover_leftover": true,
+    "unused_token_hold": true,
+    "mid_scale_identity": true,
+    "mode_hold": false,
+    "vector_two_broad": true,
+    "vector_unequal_mass": false,
+    "vector_unequal_width": true,
+    "vector_anisotropic": true,
+    "vector_overlap": true,
+    "vector_spiral": true,
+    "img_stripes2": true,
+    "img_bars4": false,
+    "img_blobs4": true,
+    "img_intensity2": true
+  },
+  "cases": {
+    "two_pole": [
+      {
+        "label": "original required host",
+        "kind": "required",
+        "archived": {
+          "confirmed_step": 74,
+          "passing_suffix": 7,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 7,
+          "confirmed_step": 74,
+          "final_failing": []
+        },
+        "first_divergent_step": 4,
+        "first_divergence_abs": 5.960464477539063e-08,
+        "artifact": "episodes/original_required_host__two_pole.json.gz",
+        "source_artifact": "study/episodes/cosine__two_pole.json.gz"
+      }
+    ],
+    "trajectory": [
+      {
+        "label": "original required host",
+        "kind": "required",
+        "archived": {
+          "confirmed_step": 167,
+          "passing_suffix": 19,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 8,
+          "confirmed_step": 350,
+          "final_failing": []
+        },
+        "first_divergent_step": 34,
+        "first_divergence_abs": 0.0007212162017822266,
+        "artifact": "episodes/original_required_host__trajectory.json.gz",
+        "source_artifact": "study/episodes/cosine__trajectory.json.gz"
+      }
+    ],
+    "residual_student": [
+      {
+        "label": "original required host",
+        "kind": "required",
+        "archived": {
+          "confirmed_step": 167,
+          "passing_suffix": 19,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 19,
+          "confirmed_step": 167,
+          "final_failing": []
+        },
+        "first_divergent_step": 17,
+        "first_divergence_abs": 1.1920928955078125e-07,
+        "artifact": "episodes/original_required_host__residual_student.json.gz",
+        "source_artifact": "study/episodes/cosine__residual_student.json.gz"
+      }
+    ],
+    "unipolar": [
+      {
+        "label": "original required host",
+        "kind": "required",
+        "archived": {
+          "confirmed_step": 184,
+          "passing_suffix": 18,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 18,
+          "confirmed_step": 184,
+          "final_failing": []
+        },
+        "first_divergent_step": 17,
+        "first_divergence_abs": 7.931135770355979e-08,
+        "artifact": "episodes/original_required_host__unipolar.json.gz",
+        "source_artifact": "study/episodes/cosine__unipolar.json.gz"
+      }
+    ],
+    "ae_gan_hold": [
+      {
+        "label": "original required host",
+        "kind": "required",
+        "archived": {
+          "confirmed_step": 105,
+          "passing_suffix": 19,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 19,
+          "confirmed_step": 105,
+          "final_failing": []
+        },
+        "first_divergent_step": 11,
+        "first_divergence_abs": 1.1920928955078125e-07,
+        "artifact": "episodes/original_required_host__ae_gan_hold.json.gz",
+        "source_artifact": "study/episodes/cosine__ae_gan_hold.json.gz"
+      }
+    ],
+    "cover_leftover": [
+      {
+        "label": "original required host",
+        "kind": "required",
+        "archived": {
+          "confirmed_step": 500,
+          "passing_suffix": 14,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 14,
+          "confirmed_step": 500,
+          "final_failing": []
+        },
+        "first_divergent_step": 34,
+        "first_divergence_abs": 0.005491803755856034,
+        "artifact": "episodes/original_required_host__cover_leftover.json.gz",
+        "source_artifact": "study/episodes/cosine__cover_leftover.json.gz"
+      }
+    ],
+    "unused_token_hold": [
+      {
+        "label": "original required host",
+        "kind": "required",
+        "archived": {
+          "confirmed_step": 125,
+          "passing_suffix": 14,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 14,
+          "confirmed_step": 125,
+          "final_failing": []
+        },
+        "first_divergent_step": 9,
+        "first_divergence_abs": 4.470348358154297e-08,
+        "artifact": "episodes/original_required_host__unused_token_hold.json.gz",
+        "source_artifact": "study/episodes/cosine__unused_token_hold.json.gz"
+      }
+    ],
+    "mid_scale_identity": [
+      {
+        "label": "original required host",
+        "kind": "required",
+        "archived": {
+          "confirmed_step": 400,
+          "passing_suffix": 17,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 17,
+          "confirmed_step": 400,
+          "final_failing": []
+        },
+        "first_divergent_step": 34,
+        "first_divergence_abs": 0.005108524113893509,
+        "artifact": "episodes/original_required_host__mid_scale_identity.json.gz",
+        "source_artifact": "study/episodes/cosine__mid_scale_identity.json.gz"
+      }
+    ],
+    "mode_hold": [
+      {
+        "label": "original required host",
+        "kind": "required",
+        "archived": {
+          "confirmed_step": 1050,
+          "passing_suffix": 8,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "FAIL",
+          "passing_suffix": 0,
+          "confirmed_step": null,
+          "final_failing": [
+            "modes",
+            "hq"
+          ]
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.002685546875,
+        "artifact": "episodes/original_required_host__mode_hold.json.gz",
+        "source_artifact": "study/episodes/cosine__mode_hold.json.gz"
+      }
+    ],
+    "vector_two_broad": [
+      {
+        "label": "original architecture",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 500,
+          "passing_suffix": 19,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 19,
+          "confirmed_step": 500,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 4.3213367462158203e-07,
+        "artifact": "episodes/original_architecture__vector_two_broad.json.gz",
+        "source_artifact": "study/episodes/cosine__vector_two_broad.json.gz"
+      },
+      {
+        "label": "d128_l3_f3",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 400,
+          "passing_suffix": 21,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 21,
+          "confirmed_step": 400,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.1628686711192131,
+        "artifact": "episodes/d128_l3_f3__vector_two_broad.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d128_l3_f3__vector_two_broad.json.gz"
+      },
+      {
+        "label": "d128_l3_f4",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 350,
+          "passing_suffix": 22,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 22,
+          "confirmed_step": 350,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.006268322467803955,
+        "artifact": "episodes/d128_l3_f4__vector_two_broad.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d128_l3_f4__vector_two_broad.json.gz"
+      },
+      {
+        "label": "d256_l3_f3",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 300,
+          "passing_suffix": 23,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 16,
+          "confirmed_step": 650,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.3133198916912079,
+        "artifact": "episodes/d256_l3_f3__vector_two_broad.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d256_l3_f3__vector_two_broad.json.gz"
+      },
+      {
+        "label": "axis_softplus5",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 600,
+          "passing_suffix": 17,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 17,
+          "confirmed_step": 600,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 5.066394805908203e-07,
+        "artifact": "episodes/axis_softplus5__vector_two_broad.json.gz",
+        "source_artifact": "valid_search/smooth_discriminator/cross/episodes/axis_softplus5__vector_two_broad.json.gz"
+      },
+      {
+        "label": "axis_tanh",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 600,
+          "passing_suffix": 17,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 17,
+          "confirmed_step": 600,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 5.662441253662109e-07,
+        "artifact": "episodes/axis_tanh__vector_two_broad.json.gz",
+        "source_artifact": "valid_search/smooth_discriminator/cross/episodes/axis_tanh__vector_two_broad.json.gz"
+      },
+      {
+        "label": "softplus10_d64_l2_f2",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 900,
+          "passing_suffix": 11,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 16,
+          "confirmed_step": 650,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 1.7881393432617188e-07,
+        "artifact": "episodes/softplus10_d64_l2_f2__vector_two_broad.json.gz",
+        "source_artifact": "valid_search/softplus_refinement/episodes/softplus10_d64_l2_f2__vector_two_broad.json.gz"
+      },
+      {
+        "label": "softplus5_d128_l3_f2",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 250,
+          "passing_suffix": 24,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 24,
+          "confirmed_step": 250,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.0015902817249298096,
+        "artifact": "episodes/softplus5_d128_l3_f2__vector_two_broad.json.gz",
+        "source_artifact": "valid_search/softplus_refinement/episodes/softplus5_d128_l3_f2__vector_two_broad.json.gz"
+      },
+      {
+        "label": "linear_skip_d96_beta5",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 700,
+          "passing_suffix": 15,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 18,
+          "confirmed_step": 550,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 3.457069396972656e-05,
+        "artifact": "episodes/linear_skip_d96_beta5__vector_two_broad.json.gz",
+        "source_artifact": "rare_focus/linear_refinement/cross/episodes/linear_skip_d96_beta5__vector_two_broad.json.gz"
+      }
+    ],
+    "vector_unequal_mass": [
+      {
+        "label": "linear_skip_d96_beta5",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 1150,
+          "passing_suffix": 6,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "FAIL",
+          "passing_suffix": 0,
+          "confirmed_step": null,
+          "final_failing": [
+            "component_covariance_error",
+            "component_min_eigen_ratio"
+          ]
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 3.6954879760742188e-06,
+        "artifact": "episodes/linear_skip_d96_beta5__vector_unequal_mass.json.gz",
+        "source_artifact": "rare_focus/linear_refinement/screen/episodes/linear_skip_d96_beta5__vector_unequal_mass.json.gz"
+      }
+    ],
+    "vector_unequal_width": [
+      {
+        "label": "axis_softplus5",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 1100,
+          "passing_suffix": 7,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "FAIL",
+          "passing_suffix": 4,
+          "confirmed_step": null,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 1.239776611328125e-05,
+        "artifact": "episodes/axis_softplus5__vector_unequal_width.json.gz",
+        "source_artifact": "valid_search/smooth_discriminator/screen/episodes/axis_softplus5__vector_unequal_width.json.gz"
+      },
+      {
+        "label": "softplus10_d64_l2_f2",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 1050,
+          "passing_suffix": 8,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 5,
+          "confirmed_step": 1200,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 1.1920928955078125e-06,
+        "artifact": "episodes/softplus10_d64_l2_f2__vector_unequal_width.json.gz",
+        "source_artifact": "valid_search/softplus_refinement/episodes/softplus10_d64_l2_f2__vector_unequal_width.json.gz"
+      }
+    ],
+    "vector_anisotropic": [
+      {
+        "label": "original architecture",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 700,
+          "passing_suffix": 15,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 16,
+          "confirmed_step": 650,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.33896988630294755,
+        "artifact": "episodes/original_architecture__vector_anisotropic.json.gz",
+        "source_artifact": "study/episodes/cosine__vector_anisotropic.json.gz"
+      },
+      {
+        "label": "d128_l3_f3",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 800,
+          "passing_suffix": 13,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 16,
+          "confirmed_step": 650,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.32422045866648364,
+        "artifact": "episodes/d128_l3_f3__vector_anisotropic.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d128_l3_f3__vector_anisotropic.json.gz"
+      },
+      {
+        "label": "d128_l3_f4",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 800,
+          "passing_suffix": 13,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 7,
+          "confirmed_step": 1100,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.14087949196497607,
+        "artifact": "episodes/d128_l3_f4__vector_anisotropic.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d128_l3_f4__vector_anisotropic.json.gz"
+      }
+    ],
+    "vector_overlap": [
+      {
+        "label": "d128_l3_f3",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 1200,
+          "passing_suffix": 5,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "FAIL",
+          "passing_suffix": 0,
+          "confirmed_step": null,
+          "final_failing": [
+            "mean_error",
+            "covariance_error"
+          ]
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.011209845542907715,
+        "artifact": "episodes/d128_l3_f3__vector_overlap.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d128_l3_f3__vector_overlap.json.gz"
+      },
+      {
+        "label": "d128_l3_f4",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 900,
+          "passing_suffix": 11,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 8,
+          "confirmed_step": 1050,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.08193433284759521,
+        "artifact": "episodes/d128_l3_f4__vector_overlap.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d128_l3_f4__vector_overlap.json.gz"
+      },
+      {
+        "label": "d256_l3_f3",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 1100,
+          "passing_suffix": 7,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "FAIL",
+          "passing_suffix": 0,
+          "confirmed_step": null,
+          "final_failing": [
+            "mean_error"
+          ]
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.0076157450675964355,
+        "artifact": "episodes/d256_l3_f3__vector_overlap.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d256_l3_f3__vector_overlap.json.gz"
+      },
+      {
+        "label": "d64_l2_f5",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 950,
+          "passing_suffix": 10,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 14,
+          "confirmed_step": 750,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.20514795184135437,
+        "artifact": "episodes/d64_l2_f5__vector_overlap.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d64_l2_f5__vector_overlap.json.gz"
+      },
+      {
+        "label": "axis_tanh",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 1150,
+          "passing_suffix": 6,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 5,
+          "confirmed_step": 1200,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 1.3113021850585938e-06,
+        "artifact": "episodes/axis_tanh__vector_overlap.json.gz",
+        "source_artifact": "valid_search/smooth_discriminator/screen/episodes/axis_tanh__vector_overlap.json.gz"
+      },
+      {
+        "label": "oriented8_tanh",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 1200,
+          "passing_suffix": 5,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 5,
+          "confirmed_step": 1200,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 2.384185791015625e-07,
+        "artifact": "episodes/oriented8_tanh__vector_overlap.json.gz",
+        "source_artifact": "valid_search/smooth_discriminator/screen/episodes/oriented8_tanh__vector_overlap.json.gz"
+      }
+    ],
+    "vector_spiral": [
+      {
+        "label": "original architecture",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 400,
+          "passing_suffix": 23,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 23,
+          "confirmed_step": 400,
+          "final_failing": []
+        },
+        "first_divergent_step": 67,
+        "first_divergence_abs": 0.03503453731536865,
+        "artifact": "episodes/original_architecture__vector_spiral.json.gz",
+        "source_artifact": "study/episodes/cosine__vector_spiral.json.gz"
+      },
+      {
+        "label": "d128_l3_f3",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 334,
+          "passing_suffix": 24,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 24,
+          "confirmed_step": 334,
+          "final_failing": []
+        },
+        "first_divergent_step": 67,
+        "first_divergence_abs": 0.039342060685157776,
+        "artifact": "episodes/d128_l3_f3__vector_spiral.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d128_l3_f3__vector_spiral.json.gz"
+      },
+      {
+        "label": "d128_l3_f4",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 467,
+          "passing_suffix": 22,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 22,
+          "confirmed_step": 467,
+          "final_failing": []
+        },
+        "first_divergent_step": 67,
+        "first_divergence_abs": 0.14529326558113098,
+        "artifact": "episodes/d128_l3_f4__vector_spiral.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d128_l3_f4__vector_spiral.json.gz"
+      },
+      {
+        "label": "d256_l3_f3",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 400,
+          "passing_suffix": 23,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 20,
+          "confirmed_step": 600,
+          "final_failing": []
+        },
+        "first_divergent_step": 67,
+        "first_divergence_abs": 0.5603810250759125,
+        "artifact": "episodes/d256_l3_f3__vector_spiral.json.gz",
+        "source_artifact": "valid_search/discriminator/episodes/d256_l3_f3__vector_spiral.json.gz"
+      },
+      {
+        "label": "axis_softplus5",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 467,
+          "passing_suffix": 22,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 22,
+          "confirmed_step": 467,
+          "final_failing": []
+        },
+        "first_divergent_step": 67,
+        "first_divergence_abs": 5.960464477539062e-07,
+        "artifact": "episodes/axis_softplus5__vector_spiral.json.gz",
+        "source_artifact": "valid_search/smooth_discriminator/cross/episodes/axis_softplus5__vector_spiral.json.gz"
+      },
+      {
+        "label": "axis_tanh",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 934,
+          "passing_suffix": 15,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 16,
+          "confirmed_step": 867,
+          "final_failing": []
+        },
+        "first_divergent_step": 67,
+        "first_divergence_abs": 6.556510925292969e-07,
+        "artifact": "episodes/axis_tanh__vector_spiral.json.gz",
+        "source_artifact": "valid_search/smooth_discriminator/cross/episodes/axis_tanh__vector_spiral.json.gz"
+      },
+      {
+        "label": "softplus10_d64_l2_f2",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 467,
+          "passing_suffix": 22,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 22,
+          "confirmed_step": 467,
+          "final_failing": []
+        },
+        "first_divergent_step": 67,
+        "first_divergence_abs": 3.5762786865234375e-07,
+        "artifact": "episodes/softplus10_d64_l2_f2__vector_spiral.json.gz",
+        "source_artifact": "valid_search/softplus_refinement/episodes/softplus10_d64_l2_f2__vector_spiral.json.gz"
+      },
+      {
+        "label": "softplus5_d128_l3_f2",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 334,
+          "passing_suffix": 24,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 23,
+          "confirmed_step": 400,
+          "final_failing": []
+        },
+        "first_divergent_step": 67,
+        "first_divergence_abs": 0.12656766176223755,
+        "artifact": "episodes/softplus5_d128_l3_f2__vector_spiral.json.gz",
+        "source_artifact": "valid_search/softplus_refinement/episodes/softplus5_d128_l3_f2__vector_spiral.json.gz"
+      },
+      {
+        "label": "linear_skip_d96_beta5",
+        "kind": "vector",
+        "archived": {
+          "confirmed_step": 400,
+          "passing_suffix": 23,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 23,
+          "confirmed_step": 400,
+          "final_failing": []
+        },
+        "first_divergent_step": 67,
+        "first_divergence_abs": 9.894371032714844e-06,
+        "artifact": "episodes/linear_skip_d96_beta5__vector_spiral.json.gz",
+        "source_artifact": "rare_focus/linear_refinement/cross/episodes/linear_skip_d96_beta5__vector_spiral.json.gz"
+      }
+    ],
+    "img_stripes2": [
+      {
+        "label": "residual16",
+        "kind": "image",
+        "archived": {
+          "confirmed_step": 225,
+          "passing_suffix": 20,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 20,
+          "confirmed_step": 225,
+          "final_failing": []
+        },
+        "first_divergent_step": 100,
+        "first_divergence_abs": 1.4901161193847656e-08,
+        "artifact": "episodes/residual16__img_stripes2.json.gz",
+        "source_artifact": "solvability/images/stage1/episodes/residual16__img_stripes2.json.gz"
+      },
+      {
+        "label": "residual12",
+        "kind": "image",
+        "archived": {
+          "confirmed_step": 525,
+          "passing_suffix": 8,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 7,
+          "confirmed_step": 550,
+          "final_failing": []
+        },
+        "first_divergent_step": 25,
+        "first_divergence_abs": 1.4901161193847656e-08,
+        "artifact": "episodes/residual12__img_stripes2.json.gz",
+        "source_artifact": "solvability/images/stage2/episodes/residual12__img_stripes2.json.gz"
+      }
+    ],
+    "img_bars4": [
+      {
+        "label": "residual16",
+        "kind": "image",
+        "archived": {
+          "confirmed_step": 550,
+          "passing_suffix": 7,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "FAIL",
+          "passing_suffix": 4,
+          "confirmed_step": null,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 0.0625,
+        "artifact": "episodes/residual16__img_bars4.json.gz",
+        "source_artifact": "solvability/images/stage1/episodes/residual16__img_bars4.json.gz"
+      }
+    ],
+    "img_blobs4": [
+      {
+        "label": "baseline",
+        "kind": "image",
+        "archived": {
+          "confirmed_step": 525,
+          "passing_suffix": 8,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "FAIL",
+          "passing_suffix": 0,
+          "confirmed_step": null,
+          "final_failing": [
+            "modes",
+            "hq"
+          ]
+        },
+        "first_divergent_step": 175,
+        "first_divergence_abs": 0.0625,
+        "artifact": "episodes/baseline__img_blobs4.json.gz",
+        "source_artifact": "solvability/images/stage1/episodes/baseline__img_blobs4.json.gz"
+      },
+      {
+        "label": "residual16",
+        "kind": "image",
+        "archived": {
+          "confirmed_step": 550,
+          "passing_suffix": 7,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 12,
+          "confirmed_step": 425,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 2.086162567138672e-07,
+        "artifact": "episodes/residual16__img_blobs4.json.gz",
+        "source_artifact": "solvability/images/stage1/episodes/residual16__img_blobs4.json.gz"
+      }
+    ],
+    "img_intensity2": [
+      {
+        "label": "residual16",
+        "kind": "image",
+        "archived": {
+          "confirmed_step": 575,
+          "passing_suffix": 6,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 6,
+          "confirmed_step": 575,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 1.4901161193847656e-08,
+        "artifact": "episodes/residual16__img_intensity2.json.gz",
+        "source_artifact": "solvability/images/stage1/episodes/residual16__img_intensity2.json.gz"
+      },
+      {
+        "label": "residual12",
+        "kind": "image",
+        "archived": {
+          "confirmed_step": 550,
+          "passing_suffix": 7,
+          "status": "PASS"
+        },
+        "replay": {
+          "status": "PASS",
+          "passing_suffix": 6,
+          "confirmed_step": 575,
+          "final_failing": []
+        },
+        "first_divergent_step": 50,
+        "first_divergence_abs": 7.450580596923828e-09,
+        "artifact": "episodes/residual12__img_intensity2.json.gz",
+        "source_artifact": "solvability/images/stage2/episodes/residual12__img_intensity2.json.gz"
+      }
+    ]
+  },
+  "rare_cli_replays": [
+    {
+      "run": "default",
+      "torch": "2.13.0+cpu",
+      "build": "CPU wheel",
+      "pinned": "none",
+      "exact": false,
+      "first_divergent_step": 50,
+      "first_divergence_abs": 3.6954879760742188e-06,
+      "replay": {
+        "status": "FAIL",
+        "passing_suffix": 0,
+        "confirmed_step": null,
+        "final_failing": [
+          "component_covariance_error",
+          "component_min_eigen_ratio"
+        ]
+      },
+      "final": {
+        "component_covariance_error": 2.624247767031193,
+        "component_min_eigen_ratio": 0.09190863370895386,
+        "covariance_error": 0.0938158631324768,
+        "hq": 0.989501953125,
+        "mass_tv": 0.05439453572034836,
+        "mean_error": 0.10569971054792404,
+        "min_mass_ratio": 0.9011008143424988,
+        "sw1_normalized": 0.08438561223000494,
+        "target_scale": 1.7593295574188232
+      }
+    },
+    {
+      "run": "aten_avx2",
+      "torch": "2.13.0+cpu",
+      "build": "CPU wheel",
+      "pinned": "ATen AVX2",
+      "exact": false,
+      "first_divergent_step": 50,
+      "first_divergence_abs": 3.6954879760742188e-06,
+      "replay": {
+        "status": "FAIL",
+        "passing_suffix": 0,
+        "confirmed_step": null,
+        "final_failing": [
+          "component_covariance_error",
+          "component_min_eigen_ratio"
+        ]
+      },
+      "final": {
+        "component_covariance_error": 2.624247767031193,
+        "component_min_eigen_ratio": 0.09190863370895386,
+        "covariance_error": 0.0938158631324768,
+        "hq": 0.989501953125,
+        "mass_tv": 0.05439453572034836,
+        "mean_error": 0.10569971054792404,
+        "min_mass_ratio": 0.9011008143424988,
+        "sw1_normalized": 0.08438561223000494,
+        "target_scale": 1.7593295574188232
+      }
+    },
+    {
+      "run": "all_avx2",
+      "torch": "2.13.0+cpu",
+      "build": "CPU wheel",
+      "pinned": "ATen+MKL+oneDNN AVX2",
+      "exact": false,
+      "first_divergent_step": 50,
+      "first_divergence_abs": 1.9371509552001953e-06,
+      "replay": {
+        "status": "FAIL",
+        "passing_suffix": 0,
+        "confirmed_step": null,
+        "final_failing": [
+          "component_min_eigen_ratio"
+        ]
+      },
+      "final": {
+        "component_covariance_error": 0.30703964829444885,
+        "component_min_eigen_ratio": 0.030034925788640976,
+        "covariance_error": 0.16802679002285004,
+        "hq": 0.997314453125,
+        "mass_tv": 0.05512695759534836,
+        "mean_error": 0.07859543710947037,
+        "min_mass_ratio": 0.899769127368927,
+        "sw1_normalized": 0.08424050769714668,
+        "target_scale": 1.7593295574188232
+      }
+    },
+    {
+      "run": "cu126_default",
+      "torch": "2.13.0+cu126",
+      "build": "cu126 wheel (archive build)",
+      "pinned": "none",
+      "exact": false,
+      "first_divergent_step": 50,
+      "first_divergence_abs": 3.6954879760742188e-06,
+      "replay": {
+        "status": "FAIL",
+        "passing_suffix": 0,
+        "confirmed_step": null,
+        "final_failing": [
+          "component_covariance_error",
+          "component_min_eigen_ratio"
+        ]
+      },
+      "final": {
+        "component_covariance_error": 2.624247767031193,
+        "component_min_eigen_ratio": 0.09190863370895386,
+        "covariance_error": 0.0938158631324768,
+        "hq": 0.989501953125,
+        "mass_tv": 0.05439453572034836,
+        "mean_error": 0.10569971054792404,
+        "min_mass_ratio": 0.9011008143424988,
+        "sw1_normalized": 0.08438561223000494,
+        "target_scale": 1.7593295574188232
+      }
+    },
+    {
+      "run": "cu126_aten_avx2",
+      "torch": "2.13.0+cu126",
+      "build": "cu126 wheel (archive build)",
+      "pinned": "ATen AVX2",
+      "exact": false,
+      "first_divergent_step": 50,
+      "first_divergence_abs": 3.6954879760742188e-06,
+      "replay": {
+        "status": "FAIL",
+        "passing_suffix": 0,
+        "confirmed_step": null,
+        "final_failing": [
+          "component_covariance_error",
+          "component_min_eigen_ratio"
+        ]
+      },
+      "final": {
+        "component_covariance_error": 2.624247767031193,
+        "component_min_eigen_ratio": 0.09190863370895386,
+        "covariance_error": 0.0938158631324768,
+        "hq": 0.989501953125,
+        "mass_tv": 0.05439453572034836,
+        "mean_error": 0.10569971054792404,
+        "min_mass_ratio": 0.9011008143424988,
+        "sw1_normalized": 0.08438561223000494,
+        "target_scale": 1.7593295574188232
+      }
+    },
+    {
+      "run": "cu126_all_avx2",
+      "torch": "2.13.0+cu126",
+      "build": "cu126 wheel (archive build)",
+      "pinned": "ATen+MKL+oneDNN AVX2",
+      "exact": false,
+      "first_divergent_step": 50,
+      "first_divergence_abs": 1.9371509552001953e-06,
+      "replay": {
+        "status": "FAIL",
+        "passing_suffix": 0,
+        "confirmed_step": null,
+        "final_failing": [
+          "component_min_eigen_ratio"
+        ]
+      },
+      "final": {
+        "component_covariance_error": 0.30703964829444885,
+        "component_min_eigen_ratio": 0.030034925788640976,
+        "covariance_error": 0.16802679002285004,
+        "hq": 0.997314453125,
+        "mass_tv": 0.05512695759534836,
+        "mean_error": 0.07859543710947037,
+        "min_mass_ratio": 0.899769127368927,
+        "sw1_normalized": 0.08424050769714668,
+        "target_scale": 1.7593295574188232
+      }
+    }
+  ],
+  "torch_build_changes_result": false,
+  "driver_equals_official_cli": true,
+  "winner_all_six_cli": [
+    {
+      "task": "vector_two_broad",
+      "status": "PASS",
+      "passing_suffix": 18,
+      "confirmed_step": 550,
+      "final_failing": []
+    },
+    {
+      "task": "vector_unequal_mass",
+      "status": "FAIL",
+      "passing_suffix": 0,
+      "confirmed_step": null,
+      "final_failing": [
+        "component_covariance_error",
+        "component_min_eigen_ratio"
+      ]
+    },
+    {
+      "task": "vector_unequal_width",
+      "status": "FAIL",
+      "passing_suffix": 0,
+      "confirmed_step": null,
+      "final_failing": [
+        "component_covariance_error"
+      ]
+    },
+    {
+      "task": "vector_anisotropic",
+      "status": "PASS",
+      "passing_suffix": 17,
+      "confirmed_step": 600,
+      "final_failing": []
+    },
+    {
+      "task": "vector_overlap",
+      "status": "FAIL",
+      "passing_suffix": 2,
+      "confirmed_step": null,
+      "final_failing": []
+    },
+    {
+      "task": "vector_spiral",
+      "status": "PASS",
+      "passing_suffix": 23,
+      "confirmed_step": 400,
+      "final_failing": []
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+START vector_two_broad
+DONE vector_two_broad: PASS; final passing checks=18; confirmed step=550
+START vector_unequal_mass
+DONE vector_unequal_mass: FAIL; final passing checks=0; confirmed step=None
+START vector_unequal_width
+DONE vector_unequal_width: FAIL; final passing checks=0; confirmed step=None
+START vector_anisotropic
+DONE vector_anisotropic: PASS; final passing checks=17; confirmed step=600
+START vector_overlap
+DONE vector_overlap: FAIL; final passing checks=2; confirmed step=None
+START vector_spiral
+DONE vector_spiral: PASS; final passing checks=23; confirmed step=400
