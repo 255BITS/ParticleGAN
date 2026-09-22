@@ -1,17 +1,17 @@
 # Transfer leaderboard with test importance
 
-**Current grouping: [one entry per formulation](formulations/README.md).**
-Discriminator and generator architectures are separate observations within a
-formulation entry. Supported-architecture passes count once per problem;
-failed architecture trials remain visible. Loss/regularization and optimizer
-changes cannot be silently combined into an architecture result.
+**Current PR comparison: [formulation defaults](formulations/README.md).**
+Each candidate owns its training recipe; G/D architecture is separate. The
+current b_cap3 entry passes **9/9 required and 7/10 practical data/image toys**.
+Imposed LR/batch/discriminator variants are nonblocking diagnostics.
+[Longer training](formulations/LONG_TRAINING.md) is a separate toy: b_cap3
+passes at 7,200 updates with the same recipe and architecture.
 
-**Latest: [solvability audit and fixes](solvability/README.md).** Every one of the
-16 practical tasks now has a sustained GAN solution, using different settings.
-Replacing the healthy image generators with residual upsampling gives an
-updated reference with **9/9 required and 7/16 practical passes**, versus 4/16
-for the original architecture. No one configuration passes all tasks. The
-original controller comparison below remains unchanged.
+The prior 7/16 becomes 7/10 through an explicit user-requested scope revision;
+no measured result or threshold changed. The [solvability audit](solvability/README.md)
+retains all 16 historical individual solver witnesses. No shared all-pass
+recipe has been found. **The controller study below retains its original
+16-case ranking, tiers and scores; it is historical evidence.**
 
 **Cosine remains the baseline.** The broader learned-controller search did not
 improve practical coverage or transfer. Deliberately poor architectures and

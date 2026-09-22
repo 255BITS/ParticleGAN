@@ -1,7 +1,7 @@
 {
   "archive_files": 8,
   "archived_source_files": 56,
-  "referenced_artifacts": 66,
+  "referenced_artifacts": 68,
   "nominal_ring_runs": [
     {
       "artifact": "nominal_ring/episodes/bcap10_nominal_ring__stress_r1_r2.json.gz",
@@ -14,6 +14,17 @@
       "observations": 24
     }
   ],
-  "tests": "19 passed in 3.00s",
-  "errors": []
+  "tests": "19 passed in 1.33s",
+  "errors": [],
+  "retained_result_references": 66,
+  "scope_revision": {
+    "version": "formulation-defaults-v2",
+    "main_required": 9,
+    "main_practical": 10,
+    "separate_long_training": true,
+    "imposed_variants_affect_selection": false,
+    "numerical_verdicts_unchanged": true,
+    "new_training_runs": 0,
+    "additional_archived_budget_results": 2
+  }
 }

@@ -6,48 +6,43 @@ the existing generator and 256 particles. The three failing image targets are
 also representable by the original generator under supervised training.
 These controls establish feasibility; they do not count as GAN wins.
 
-Actual GAN training now supplies sustained solutions for **16/16 practical
-tests**, using different configurations.
+Actual GAN training supplies sustained solutions for **16/16 tests in the
+historical solvability audit**, using different configurations.
 This is a per-task solvability result, **not one configuration passing 16/16**.
 We did not find a shared configuration passing every behavioral metric.
 
-## Formulation leaderboard
+## Current formulation leaderboard
 
-The useful immediate improvement is **residual nearest-neighbor upsampling,
-width 16**, for the healthy image tasks, retaining the original RpGAN logistic
-loss, b_cap coefficient 3 / κ1.25, Adam, particle settings and cosine schedule.
-All four image tasks sustain success in their original 600 updates.
+The current PR compares candidate-owned training recipes on nine required
+regressions and ten practical data/image toys. Architecture remains separate.
+Forced LR/batch/discriminator variants are diagnostic evidence; longer training
+is a separate toy. This user-requested scope revision changes the previous
+7/16 count to 7/10 without changing any numerical result or threshold.
 
-| Formulation | Required live | Data | Dynamics | Images with supported architecture | Practical support |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| **RpGAN logistic + b_cap3 / κ1.25, prior regularization .05, no L2** | **9/9** | **3/6** | **0/6** | **4/4** | **7/16** |
-| RpGAN logistic + b_cap10 / κ1.25, prior regularization .05, no L2 | 8/9; not qualified yet | 4/6 | 0/6 | 3/4 | 7/16 |
+| Formulation | Required live | Data toys | Image toys with supported architecture | Practical support |
+| --- | ---: | ---: | ---: | ---: |
+| **RpGAN logistic + b_cap3 / κ1.25, prior regularization .05, no L2** | **9/9** | **3/6** | **4/4** | **7/10** |
+| RpGAN logistic + b_cap10 / κ1.25, prior regularization .05, no L2 | 8/9; not qualified yet | 4/6 | 3/4 | 7/10 |
 
-**Architecture variants belong to the same formulation entry.** Discriminator
-architecture may vary; G architecture is recorded separately too. The transpose
-profile's 4/16 and residual image profile's 7/16 are observations within the
-same b_cap3 row. Each problem counts once, with all tested architectures visible.
-Formulation or training-settings changes cannot be mixed to manufacture a pass.
-[Grouping rules and architecture matrix](../formulations/README.md).
+Residual16 solves all four image toys in the original 600 updates. It is an
+architecture observation within the b_cap3 entry. Cap10 loses the required
+ring (4/8 modes, HQ57.6%) and image bars quality. Existing host optimizer
+settings are explicit; a universal numerical preset has not been established.
+Production defaults remain unchanged.
 
-The historical residual image profile reuses 29 unchanged episodes and reruns
-four image tasks; every reused episode and hash remains in
-[the profile](reference_profile.json).
-[Complete profile curves](reference_profile_results.json.gz).
+[Current grouping and scope](../formulations/README.md) ·
+[Architecture matrix](../formulations/MATRIX.md) ·
+[Separate longer-training toy](../formulations/LONG_TRAINING.md).
 
-The current formulation view corrects one historical mismatch: the R1+R2 stress
-condition changes the formulation, so its data/model/budget counterpart is now
-run with b_cap held fixed. Both nominal-ring reruns fail, leaving totals unchanged.
-Historical R1+R2 evidence stays under R1+R2; it cannot contribute to a b_cap row.
+The longer-training toy passes with b_cap3 at 7,200 updates using the same
+recipe and architecture. Its 2,400- and 4,800-update runs fail the sustained
+criterion. These observations do not enter the main practical count.
 
-The cap10 row changes the cap coefficient across hosts and uses residual16 for
-images.
-It loses the required ring badly: **4/8 modes, HQ57.6%**. Its image bars case
-also falls to HQ81.25%, below 90%. More practical passes cannot rescue a required
-regression. A discriminator-only change could still repair its required ring
-cell under the same formulation; that success has not been demonstrated.
-Production defaults remain unchanged. Existing host-specific optimizer settings
-are explicit; this is not yet one universal numerical optimizer preset.
+The rest of this report is the **historical 16-case solvability audit**, including
+imposed training conditions and the R1+R2 alternative. All individual solver
+witnesses remain available. The earlier architecture profile and its exact
+reuse hashes also remain in [the profile archive](reference_profile.json) and
+[complete curves](reference_profile_results.json.gz).
 
 ## Which failures are passable?
 

@@ -1,17 +1,23 @@
 # Controller transfer: test importance
 
-The [formulation leaderboard](../../reports/transfer_suite/formulations/README.md)
-groups G/D architecture variants within one formulation entry. Numerical
-formulation and training settings remain fixed within each architecture
-comparison; resource changes remain explicit. The historical R1+R2 stress arm
-has a separately executed fixed-b_cap nominal-ring counterpart in this view.
+The [current formulation leaderboard](../../reports/transfer_suite/formulations/README.md)
+compares each candidate's declared training recipe on nine required regressions
+and ten practical data/image toys. G/D architecture may vary within an entry.
+Imposed LR, batch and discriminator variants are nonblocking diagnostics for
+this PR; [longer training](../../reports/transfer_suite/formulations/LONG_TRAINING.md)
+is a separate toy. The recipe owns its optimizer, schedule and update balance.
 
-The [solvability search](../../reports/transfer_suite/solvability/README.md)
-now supplies individual GAN witnesses for all 16 practical tasks and a shared
-four-task image reference. To reproduce that reference, use
+This is a user-requested scope revision of the formulation comparison. It does
+not rewrite the historical controller study described below or alter behavioral
+thresholds. Rebuild the current view with
+`python -m reports.transfer_suite.formulations.build`.
+
+The [solvability archive](../../reports/transfer_suite/solvability/README.md)
+retains all 16 historical individual solver witnesses. Reproduce the shared
+image recipe with
 `python -u -m benchmarks.transfer_suite.solvability_search --plan benchmarks/transfer_suite/plans/residual16.json --output /tmp/residual-image-reference`.
-It retains the behavioral thresholds and records architecture/resource changes
-explicitly; original task definitions and controller results remain intact.
+
+## Historical controller-study protocol
 
 A poor architecture or deliberately ambiguous dataset can expose a limitation
 without making that limitation a requirement for choosing a default. This suite

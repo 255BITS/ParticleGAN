@@ -1,79 +1,73 @@
-# One entry per formulation; architecture is a separate axis
+# Formulation defaults: behavioral leaderboard
 
-**Discriminator architecture may vary without creating another formulation.**
-Generator architecture is also recorded separately. A supported architecture
-can establish that a formulation passes a problem; failures on other tested
-architectures remain visible in the architecture matrix rather than vetoing
-that success. Each problem counts once.
+**Each candidate chooses its training recipe. Architecture is separate.**
+The recipe includes the adversarial loss, regularization, learning rates, Adam
+settings, schedule, update balance and batch size. The current comparison tests
+that recipe on behavioral problems. Imposed faster/slower discriminator rates,
+smaller batches and discriminator widths do not count as additional failures.
 
-The formulation fixes the adversarial loss/mode, penalty and its coefficients,
-and particle-prior regularization. Loss or regularization changes cannot rescue
-another formulation's row. For selecting stable defaults, LR, Adam settings,
-schedule and update ratio also stay fixed within an architecture comparison.
-Changing those settings creates a separate settings trial under that formulation.
-More steps, particles or batch size are reported as resource changes.
+Discriminator architecture may vary within the same formulation entry. G and D
+choices are recorded independently. A supported architecture can satisfy a toy;
+all tested architectures and their failures remain visible. Different training
+recipes cannot be silently combined to produce one architecture result.
 
-## Formulation leaderboard
+## Main comparison
 
-| Formulation | Required live | Data | Dynamics | Images with a supported architecture | Practical support |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| **RpGAN logistic + b_cap3 / κ1.25 + prior regularization .05, no L2** | **9/9** | **3/6** | **0/6** | **4/4** | **7/16** |
-| RpGAN logistic + b_cap10 / κ1.25 + prior regularization .05, no L2 | 8/9; not qualified yet | 4/6 | 0/6 | 3/4 | 7/16 |
+| Formulation | Required live | Data toys | Image toys with supported architecture | Practical support |
+| --- | ---: | ---: | ---: | ---: |
+| **RpGAN logistic + b_cap3 / κ1.25 + prior regularization .05, no L2** | **9/9** | **3/6** | **4/4** | **7/10** |
+| RpGAN logistic + b_cap10 / κ1.25 + prior regularization .05, no L2 | 8/9; not qualified yet | 4/6 | 3/4 | 7/10 |
 
-Transpose12 and residual16 are **architecture observations inside the same
-b_cap3 entry**. The original architecture profile passes 4/16; the supported
-residual image architecture brings that same formulation's demonstrated support
-to 7/16. It does not create a new formulation or show an optimizer improvement.
+**Scope revision:** the previous 7/16 becomes 7/10 because the user requested
+that imposed training-condition variations be excluded from this PR's main
+comparison. No run improved and no metric threshold changed. The nine existing
+required behavioral regressions, including the required ring test, remain.
+Longer training is a separate toy below; the other five former dynamics rows
+remain [nonblocking diagnostic evidence](DIAGNOSTICS.md).
 
-The residual image result changes G to residual upsampling and increases both
-G and D width to 16. It is not evidence that changing only D solved the images.
-Discriminator-only trials are allowed by the grouping rule; the exact G and D
-architectures are recorded independently.
+Transpose12 and residual16 are architecture observations inside the b_cap3
+entry. Residual16 changes G to residual upsampling and increases G/D width to
+16, so it does not isolate a discriminator-only effect. It solves all four
+image toys with the same formulation and training settings at 600 updates.
 
-The b_cap10 entry currently lacks a required ring pass on its tested architecture.
-A successful discriminator variant using the same formulation and training
-settings could repair that cell. It cannot borrow b_cap3 or R1+R2 results.
+[Main architecture matrix](MATRIX.md) · [Exact settings, metrics and artifacts](leaderboard.json).
 
-[Full architecture matrix](MATRIX.md) · [Exact axes, verdicts and artifact references](leaderboard.json).
+## Separate toy: longer training
 
-## Corrected formulation-changing condition
+Train on eight Gaussian clusters for increasing budgets, keeping the recipe and
+architecture fixed. Report sustained live performance and convergence time at
+each budget, separately from the main ten-toy count.
 
-The historical `stress_r1_r2` condition hardcoded R1+R2. Those observations are
-valid R1+R2 evidence, but cannot belong to a fixed-b_cap entry. This view uses
-the same target, model, data streams, metrics and budget as a **nominal ring**
-condition and runs each b_cap formulation on it. Both b_cap3 and b_cap10 fail
-at 1,200 steps, so the numerical totals remain unchanged. The two new complete
-runs and exact sources are [retained here](nominal_ring/README.md).
+| Formulation | 2,400 updates | 4,800 updates | 7,200 updates |
+| --- | --- | --- | --- |
+| b_cap3 | FAIL | FAIL: only four final passing checks | **PASS: six final passing checks** |
+| b_cap10 | FAIL | Not run | Not run |
 
-Historical R1+R2 runs, the 16/16 individual solver witnesses and the original
-controller study remain intact. They are not silently reclassified as b_cap
-successes. The old architecture-profile table remains available in its exact
-machine-readable archive; the current leaderboard groups those profiles.
+These are existing independent runs; cosine spans each run's declared budget.
+The b_cap3 rows change only that budget. [Full metrics and convergence](LONG_TRAINING.md).
 
-## Limits and reproduction
+The old “nominal ring” name meant the ordinary eight-Gaussian reference run at
+1,200 updates. It is now only an archived diagnostic, with its original
+[results and sources](nominal_ring/README.md). It adds no new selection gate.
 
-This grouping retains the existing declared host training recipes. Those
-recipes use different base learning rates and Adam betas across hosts, and
-include explicit learning-rate stress conditions. It is **not yet evidence of
-one universal numerical optimizer preset**. The full per-case settings are
-visible in `leaderboard.json`; architecture grouping cannot conceal a settings
-change within a case.
+## Evidence and reproduction
 
-Architecture variants are inspected development evidence from seed 0, with
-unchanged live thresholds and five final passing checks in a complete
-24-observation curve. EMA is separate. Diagnostic cases remain nonblocking.
-No production defaults changed and no new seed sweep was run.
+This view retains existing host recipes, including their different base learning
+rates and Adam betas. It does not yet demonstrate one universal numerical
+optimizer preset. A new recipe must declare its choices and be compared across
+the same main toys. Architecture variants stay within that recipe's entry.
 
-Rebuild this view from the archived runs:
+All results use seed 0 and unchanged live thresholds. PASS requires every metric
+for the final five of a complete 24-observation curve. EMA is separate.
+Historical controller-study rankings and the earlier 16/16 individual solver
+witnesses remain intact. No training was rerun for this scope change and no
+production defaults changed.
 
 ```bash
 python -m reports.transfer_suite.formulations.build
 ```
 
-`architecture_cell` rejects mixing formulations, training settings, resources or
-targets while allowing G/D architecture changes. These are evidence-grouping
-checks, not behavioral leaderboard gates.
-
-Validation: [19 grouping/protocol/suite tests pass](tests.log). The
-[artifact audit](validation.json) verifies all 66 result references, both new
-24-observation runs and their 56 archived source files.
+The builder verifies that only the budget changes between the b_cap3 long runs.
+`architecture_cell` rejects mixing recipes, resources or targets while allowing
+G/D architecture changes. These are evidence checks, not behavioral gates.
+[Grouping/protocol/suite tests](tests.log) · [Artifact validation](validation.json).
