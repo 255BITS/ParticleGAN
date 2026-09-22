@@ -25,6 +25,11 @@ nearby settings and data units. Keep stock production defaults; use
 `get_recipe("gan_behavioral")` as an explicit candidate. The
 [training helper](../../docs/api.md#gantrainer) applies either recipe consistently.
 
+The [new PR #39 candidates](convergence/README.md#additional-candidates-from-pr-39)
+were also rerun: none passes every bound here, with or without the shared cosine
+schedule. The L2 .005 R1+R2 row reaches 8/8 modes at 100% HQ but fails trajectory.
+The external runtime's different outcomes remain documented separately.
+
 ## Historical final-step search
 
 The following tables preserve the original protocol and its measurements;

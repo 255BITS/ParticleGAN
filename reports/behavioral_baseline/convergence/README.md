@@ -157,3 +157,38 @@ The combined validation passes 114 tests; the final trainer/grid rerun passes
 [final behavioral rerun](validation/README.md) again passes 29/29 live bounds,
 all nine sustained targets and all ten independent checks. Historical phase
 artifacts retain their original source fingerprints.
+
+## Additional candidates from PR #39
+
+[PR #39](https://github.com/255BITS/ParticleGAN/pull/39), currently open against
+this branch, records three final-step R1+R2 passes in another runtime. We rerun
+those exact cards, then apply the same 60% cosine / 5% floor policy to each.
+The current scheduled cap is a control in the same seven-config run. Thresholds,
+budgets, seed and all nine hosts stay fixed; ten shared checks pass.
+
+| Candidate | Final bounds | Sustained toys | Live ring modes / HQ | Failed toys |
+| --- | ---: | ---: | --- | --- |
+| **Scheduled cap control** | **29/29** | **9/9** | **8/8 / 100%** | None |
+| R1+R2, L2 .004 | 27/29 | 8/9 | 6/8 / 83.47% | Ring |
+| R1+R2, L2 .005 | 28/29 | 7/9 | 8/8 / 100% | Trajectory |
+| R1+R2, L2 .007 | 24/29 | 6/9 | 5/8 / 57.50% | Trajectory, residual student, ring |
+| R1+R2, L2 .004 + cosine | 26/29 | 7/9 | 1/8 / 17.70% | Two-pole, ring |
+| R1+R2, L2 .005 + cosine | 26/29 | 6/9 | 6/8 / 91.31% | Two-pole, trajectory, ring |
+| R1+R2, L2 .007 + cosine | 25/29 | 6/9 | 2/8 / 24.51% | Two-pole, trajectory, ring |
+
+None displaces the scheduled cap in this runtime. Full curves, EMA and every
+bound are in the [additional-candidate leaderboard](pr39/README.md).
+The [upstream inventory](pr39/upstream.json) preserves the source commit, raw
+artifact hashes and all 23 external runs (22 unique settings). Its three passing
+candidates have no live curves, so those records cannot establish sustained
+success.
+
+The external and local runs both report Torch 2.13.0+cu126, CPU, one thread and
+seed 0; Python is 3.12.3 there versus 3.12.13 here. The external reproduction of
+our old unscheduled cap has exactly the same archived source hashes, yet fails
+trajectory and ring. Earlier external waves predate ring diagnostics, while
+training loops and primitive hashes match. CPU model and native-library build
+details are absent. **The cause of the cross-runtime divergence is unresolved.**
+We retain both results with their provenance; neither source hashes nor one
+successful runtime establishes portability. This strengthens the reason to keep
+the experimental candidate opt-in and validate on the target task/runtime.
