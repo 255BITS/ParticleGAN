@@ -112,6 +112,10 @@ loss = make_gan_loss()     # GANLoss("logistic", "rp")
 penalty = make_b_cap()     # GradientPenalty b_cap, κ=1, lazy_k=1
 ```
 
+[Measured conceptmod parity and leaderboard](reports/locked_shared/README.md):
+three CPU training toys, numerical outcomes, and ten reference comparisons.
+Configuration checks do not contribute to the score.
+
 `prior.sample(batch_size)` returns `(z, indices)`, with `z` shaped `[B, z_dim]`.
 Include `prior.parameters()` in your generator optimizer to learn the particles.
 Use `GaussianPrior(z_dim=16)` for fresh Gaussian samples with the same sampling

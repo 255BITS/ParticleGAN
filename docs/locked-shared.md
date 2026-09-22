@@ -60,3 +60,16 @@ this object.
 This is not a Music or Anima GPU transfer. It does not run a conceptmod toy.
 The Lunar apply is the gym config above. It does not re-extract this stamp.
 GPU landings for that arm have not been run.
+
+## Measured conceptmod verification
+
+The [behavioral leaderboard](../reports/locked_shared/README.md) runs extracted
+two-pole, shared-trajectory and ring-diversity experiments through these
+builders. Every variant trains and is scored from measurements; no config
+equality or refusal is counted as a behavioral result.
+
+The recorded run matches all ten original conceptmod runs exactly, including
+negative controls. That establishes builder/extraction parity. It does not
+reproduce the original all-pass claim: two-pole passes, trajectory fails,
+and the ring result is inconclusive. See the table for metrics, provenance
+and [reproduction commands](../benchmarks/locked_shared/SOURCE.md).
