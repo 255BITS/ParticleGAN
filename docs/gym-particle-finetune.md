@@ -9,6 +9,8 @@ Imitation and reconstruction L2 stay out of the graph.
 the safe-fast weights default to 0, so they are not in the graph.
 The optional safe-fast arm is a different file,
 [`particle_safe_fast.yaml`](gym-safe-fast.md).
+The locked-shared stamp is a third file,
+[`locked_shared.yaml`](#locked-shared-arm). It does not replace this recipe.
 
 This is the continuation of the collapsed four-path particle finetune. On the
 shared-protocol board that arm scored **0/20 validation** and **2/50 test**
@@ -65,6 +67,54 @@ and it is not in the loss.
 | Strength sampling is a distillation detail. A linear action residual does not gain a second target from it. | Not required for the sign to recover. | Not a knob. Playback is full-strength G2. |
 | UNI16 feature matching and end-margin logit MSE. v2 omits them. | Not implemented. | Not a knob. |
 
+## Locked shared arm
+
+`configs/gym/lunar_lander_particle_finetune/locked_shared.yaml` trains with
+the same script. `adv_posture: locked_shared` builds the Rp logistic loss and
+the sample-point cap from
+[`particlegan.locked_shared`](locked-shared.md) (`make_gan_loss`,
+`make_b_cap` on `LOCKED_SHARED`). The yaml does not copy those pins.
+`particle.yaml` stays YuE2 Arm A (`adv_posture: yue2`, the default when the
+key is omitted).
+
+| Knob | `locked_shared.yaml` | `particle.yaml` (YuE2) |
+| --- | --- | --- |
+| Rp logistic | `make_gan_loss()` | `rp_d_loss` / `rp_g_loss` (same logistic kernel) |
+| `b_cap` coeff, kappa, norm, method, anneal | 1, 1, `l2`, autograd, none via `make_b_cap()` | same numbers via `edit_cap()` |
+| `lazy_k` | stamp `1` (every step; coeff is not multiplied) | `EDIT_CAP_EVERY` `4`, and the penalty is multiplied by 4 |
+| `adv_weight` | 1 | 1 |
+| safe-fast | off; a nonzero weight is rejected | off here; the other file is `particle_safe_fast.yaml` on `yue2` |
+| critic | host `GlobalMixErrorCritic` (`gmix_t8_w48_l1`) | same |
+| prior | frozen checkpoint prior | same |
+| FM, cover, 12-particle cloud, `particle_l2` | not in this step | not in this step |
+
+`n_particles` 12, `particle_l2` 0.02, and `z_dim` 2 are the demo cloud. This
+step does not build that cloud, so those fields are not applied. The prior
+stays the frozen initialization prior. `cover_weight` 1.5 is the demo cover;
+this controller has no cover term. `fm_weight` 0 matches, because feature
+matching is not in the graph. `critic=host` matches: the critic stays the gym
+edit critic, not a Music MLP. `pairing=live` matches the paired edit. That
+is the gym host posture. It is not a second copy of the cap.
+
+No Lunar landing score has been measured for this arm. A pop-os rollout is
+follow-up.
+
+```bash
+python -u experiments/train_gym_particle_finetune.py \
+  --config configs/gym/lunar_lander_particle_finetune/locked_shared.yaml
+tail -F results/gym/lunar_lander_particle_finetune/locked_shared_live.log
+```
+
+CPU smoke does not produce a landing score. It still needs the initialization
+checkpoint and expert episodes:
+
+```bash
+python -u experiments/train_gym_particle_finetune.py \
+  --config configs/gym/lunar_lander_particle_finetune/locked_shared.yaml \
+  --steps 2 --device cpu \
+  --out-dir results/gym/lunar_lander_particle_finetune/locked_shared_smoke
+```
+
 ## Kept example, not the gym step
 
 `experiments/toy_particle_native_2d.py` and `tests/test_particle_native_2d.py`
@@ -80,7 +130,9 @@ landings.
 ## Logs and commands
 
 Lines flush to `log.txt`, `metrics.jsonl`, and the shared live log. The run
-directory's `live.log` is a symlink.
+directory's `live.log` is a symlink. The locked-shared arm writes
+`results/gym/lunar_lander_particle_finetune/locked_shared_live.log` instead,
+so the two arms can be tailed separately.
 
 ```bash
 tail -F results/gym/lunar_lander_particle_finetune/live.log

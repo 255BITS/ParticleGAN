@@ -1,3 +1,5 @@
+# YuE2 Arm A. The cap is edit_cap() with EDIT_CAP_EVERY=4, not the locked_shared stamp.
+# The stamp arm is locked_shared.yaml.
 arm: particle
 steps: 2500
 batch_size: 256
