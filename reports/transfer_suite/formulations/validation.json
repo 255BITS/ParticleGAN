@@ -1,0 +1,19 @@
+{
+  "archive_files": 8,
+  "archived_source_files": 56,
+  "referenced_artifacts": 66,
+  "nominal_ring_runs": [
+    {
+      "artifact": "nominal_ring/episodes/bcap10_nominal_ring__stress_r1_r2.json.gz",
+      "status": "FAIL",
+      "observations": 24
+    },
+    {
+      "artifact": "nominal_ring/episodes/bcap3_nominal_ring__stress_r1_r2.json.gz",
+      "status": "FAIL",
+      "observations": 24
+    }
+  ],
+  "tests": "19 passed in 3.00s",
+  "errors": []
+}

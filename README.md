@@ -62,6 +62,9 @@ required regressions, practical ranking tests, and nonblocking stress diagnostic
 The [solvability audit](reports/transfer_suite/solvability/README.md) demonstrates
 GAN solutions for all 16 practical tests using different settings; a shared
 residual image setup improves the working reference from 4/16 to 7/16.
+The [formulation leaderboard](reports/transfer_suite/formulations/README.md)
+keeps architecture variants inside the same formulation entry, with G/D choices
+and all settings changes explicit.
 On the actual 100-Gaussian task the behavioral candidate ties stock's live convergence step, so
 `"gan"` keeps the existing defaults. Neither preset guarantees transfer to new
 architectures or data units.

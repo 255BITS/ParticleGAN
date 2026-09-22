@@ -1,5 +1,11 @@
 # Transfer leaderboard with test importance
 
+**Current grouping: [one entry per formulation](formulations/README.md).**
+Discriminator and generator architectures are separate observations within a
+formulation entry. Supported-architecture passes count once per problem;
+failed architecture trials remain visible. Loss/regularization and optimizer
+changes cannot be silently combined into an architecture result.
+
 **Latest: [solvability audit and fixes](solvability/README.md).** Every one of the
 16 practical tasks now has a sustained GAN solution, using different settings.
 Replacing the healthy image generators with residual upsampling gives an

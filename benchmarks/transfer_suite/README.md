@@ -1,5 +1,11 @@
 # Controller transfer: test importance
 
+The [formulation leaderboard](../../reports/transfer_suite/formulations/README.md)
+groups G/D architecture variants within one formulation entry. Numerical
+formulation and training settings remain fixed within each architecture
+comparison; resource changes remain explicit. The historical R1+R2 stress arm
+has a separately executed fixed-b_cap nominal-ring counterpart in this view.
+
 The [solvability search](../../reports/transfer_suite/solvability/README.md)
 now supplies individual GAN witnesses for all 16 practical tasks and a shared
 four-task image reference. To reproduce that reference, use

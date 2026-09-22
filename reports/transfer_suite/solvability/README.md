@@ -11,33 +11,43 @@ tests**, using different configurations.
 This is a per-task solvability result, **not one configuration passing 16/16**.
 We did not find a shared configuration passing every behavioral metric.
 
-## Working reference leaderboard
+## Formulation leaderboard
 
 The useful immediate improvement is **residual nearest-neighbor upsampling,
 width 16**, for the healthy image tasks, retaining the original RpGAN logistic
 loss, b_cap coefficient 3 / κ1.25, Adam, particle settings and cosine schedule.
 All four image tasks sustain success in their original 600 updates.
 
-| Reference profile | Required live | Data | Dynamics | Images | Practical total | Balanced score |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Original cosine / transpose images | 9/9 | 3/6 | 0/6 | 1/4 | 4/16 | 25.0% |
-| **Cosine / residual16 images** | **9/9** | **3/6** | **0/6** | **4/4** | **7/16** | **50.0%** |
-| Cap10 / residual16 images | 8/9; **ineligible** | 4/6 | 0/6 | 3/4 | 7/16 | 47.2% |
+| Formulation | Required live | Data | Dynamics | Images with supported architecture | Practical support |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| **RpGAN logistic + b_cap3 / κ1.25, prior regularization .05, no L2** | **9/9** | **3/6** | **0/6** | **4/4** | **7/16** |
+| RpGAN logistic + b_cap10 / κ1.25, prior regularization .05, no L2 | 8/9; not qualified yet | 4/6 | 0/6 | 3/4 | 7/16 |
 
-This compares explicit host configurations, including the changed image
-architecture. It is not a learned-controller gain or an equal-parameter-count
-comparison. The residual image reference reuses the 29 unchanged required,
-vector/dynamics and diagnostic episodes from the original cosine study; its
-four changed image tasks were rerun in the native host. Every reused episode
-and hash is identified in [the profile](reference_profile.json).
+**Architecture variants belong to the same formulation entry.** Discriminator
+architecture may vary; G architecture is recorded separately too. The transpose
+profile's 4/16 and residual image profile's 7/16 are observations within the
+same b_cap3 row. Each problem counts once, with all tested architectures visible.
+Formulation or training-settings changes cannot be mixed to manufacture a pass.
+[Grouping rules and architecture matrix](../formulations/README.md).
+
+The historical residual image profile reuses 29 unchanged episodes and reruns
+four image tasks; every reused episode and hash remains in
+[the profile](reference_profile.json).
 [Complete profile curves](reference_profile_results.json.gz).
 
+The current formulation view corrects one historical mismatch: the R1+R2 stress
+condition changes the formulation, so its data/model/budget counterpart is now
+run with b_cap held fixed. Both nominal-ring reruns fail, leaving totals unchanged.
+Historical R1+R2 evidence stays under R1+R2; it cannot contribute to a b_cap row.
+
 The cap10 row changes the cap coefficient across hosts and uses residual16 for
-images. It preserves the R1+R2 stress test's declared arm and coefficient.
+images.
 It loses the required ring badly: **4/8 modes, HQ57.6%**. Its image bars case
 also falls to HQ81.25%, below 90%. More practical passes cannot rescue a required
-regression. Production defaults remain unchanged; the residual image reference
-is a better starting point for subsequent controller comparisons.
+regression. A discriminator-only change could still repair its required ring
+cell under the same formulation; that success has not been demonstrated.
+Production defaults remain unchanged. Existing host-specific optimizer settings
+are explicit; this is not yet one universal numerical optimizer preset.
 
 ## Which failures are passable?
 

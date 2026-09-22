@@ -1,0 +1,5293 @@
+{
+  "version": "formulation-architecture-v1",
+  "rows": [
+    {
+      "name": "rp_logistic_bcap3",
+      "penalty_coefficient": 3,
+      "fixed": {
+        "loss": "logistic",
+        "mode": "rp",
+        "penalty": "b_cap",
+        "kappa": 1.25,
+        "prior_regularization": 0.05,
+        "particle_l2": 0.0
+      },
+      "cases": {
+        "vector_two_broad": {
+          "runner": "vector",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": true,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.039028881605598496,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.1409711183944015
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.0146484375,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.1353515625
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.984375,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.13437500000000002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 0.20217658579349518,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.6478234142065048
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.5616455674171448,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.41164556741714475
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 19,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 19,
+                  "first_pass_step": 300,
+                  "stable_from_step": 300,
+                  "stable_from_seconds": 1.3821591379819438,
+                  "confirmed_step": 500,
+                  "confirmed_seconds": 2.3183756939833984
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.4166666666666667
+              },
+              "artifact": "study/episodes/cosine__vector_two_broad.json.gz",
+              "sha256": "5f8ed7df513dd4474890f0576de4fcf93c7512739d4d6d50a1ea0225e651ead7"
+            }
+          ]
+        },
+        "vector_unequal_mass": {
+          "runner": "vector",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.08068859440349768,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.09931140559650231
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.05170898884534836,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.09829101115465164
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.9501953125,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.10019531250000002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 5.800080198794603,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -4.950080198794604
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.9366163015365601,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.78661630153656
+                  },
+                  {
+                    "metric": "min_mass_ratio",
+                    "value": 0.9059836268424988,
+                    "op": ">=",
+                    "threshold": 0.25,
+                    "status": "PASS",
+                    "margin": 0.6559836268424988
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.3333333333333333,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "study/episodes/cosine__vector_unequal_mass.json.gz",
+              "sha256": "f4c08a528058151fbf8477686cda7bd903cf02360871bd433f4d9deaec71e42a"
+            }
+          ]
+        },
+        "vector_unequal_width": {
+          "runner": "vector",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.08506576910256845,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.09493423089743154
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.083251953125,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.066748046875
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.970947265625,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.12094726562500002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 7.80859362334013,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -6.95859362334013
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.7037267684936523,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.5537267684936523
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.4,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "study/episodes/cosine__vector_unequal_width.json.gz",
+              "sha256": "b99c3323097f2d6d19db4cbe71e02e94dccdb132498c16a293f82611bed58184"
+            }
+          ]
+        },
+        "vector_anisotropic": {
+          "runner": "vector",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": true,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.14075334313934357,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.039246656860656426
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.1068522185087204,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.043147781491279596
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.98974609375,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.13974609375000002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 0.13558053721984228,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.7144194627801577
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.5556106567382812,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.40561065673828123
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 15,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 15,
+                  "first_pass_step": 500,
+                  "stable_from_step": 500,
+                  "stable_from_seconds": 2.2222457659663633,
+                  "confirmed_step": 700,
+                  "confirmed_seconds": 3.112789546023123
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.5833333333333334
+              },
+              "artifact": "study/episodes/cosine__vector_anisotropic.json.gz",
+              "sha256": "42c72adf1f93fb9f9fa267ee38d5f66fc67a2db167ffe33e231d08d8fee46428"
+            }
+          ]
+        },
+        "vector_overlap": {
+          "runner": "vector",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.09159826145118381,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.08840173854881618
+                  },
+                  {
+                    "metric": "mean_error",
+                    "value": 0.08065998554229736,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.06934001445770263
+                  },
+                  {
+                    "metric": "covariance_error",
+                    "value": 0.3377096951007843,
+                    "op": "<=",
+                    "threshold": 0.45,
+                    "status": "PASS",
+                    "margin": 0.11229030489921571
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 15,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 4,
+                  "first_pass_step": 200,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "study/episodes/cosine__vector_overlap.json.gz",
+              "sha256": "b03b832fe080217075bfb203658bb663a3f26dfebffb97178ca69638f703a231"
+            }
+          ]
+        },
+        "vector_spiral": {
+          "runner": "vector",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": true,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1600,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.06325822952486929,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.11674177047513071
+                  },
+                  {
+                    "metric": "mean_error",
+                    "value": 0.07759803533554077,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.07240196466445922
+                  },
+                  {
+                    "metric": "covariance_error",
+                    "value": 0.11381782591342926,
+                    "op": "<=",
+                    "threshold": 0.45,
+                    "status": "PASS",
+                    "margin": 0.33618217408657075
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 23,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 23,
+                  "first_pass_step": 134,
+                  "stable_from_step": 134,
+                  "stable_from_seconds": 0.5756893759826198,
+                  "confirmed_step": 400,
+                  "confirmed_seconds": 1.693984692916274
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.25
+              },
+              "artifact": "study/episodes/cosine__vector_spiral.json.gz",
+              "sha256": "528a316f74aa36bf6e29a7acd1a9ac0406f82061c32222b1849eaded0823a666"
+            }
+          ]
+        },
+        "stress_fast_critic": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.003,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.045742657558519924,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.13425734244148008
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.056640625,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.093359375
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.98046875,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.13046875000000002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 3.368561246432364,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -2.518561246432364
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.3632425367832184,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.2132425367832184
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.4,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "study/episodes/cosine__stress_fast_critic.json.gz",
+              "sha256": "9d9de02ca928597ae761c4f01638afadda57b81f8c0f423e571322fe7a90a4cb"
+            }
+          ]
+        },
+        "stress_slow_critic": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.00075,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.09655671106868366,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.08344328893131633
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.19287109375,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "FAIL",
+                    "margin": -0.042871093750000006
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.821533203125,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -0.028466796874999978
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 26.869698882102966,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -26.019698882102965
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.5646657943725586,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.41466579437255857
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.4638595281862745,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "study/episodes/cosine__stress_slow_critic.json.gz",
+              "sha256": "43f3a62703b83300a2d0f40756d4362fe644d2ea7c377f96bc9dcedcd248bb71"
+            }
+          ]
+        },
+        "stress_small_batch": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 64
+          },
+          "trials": [
+            {
+              "label": "original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.09043616818250891,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.08956383181749109
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.1025390625,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.047460937499999994
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.76611328125,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -0.08388671874999998
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 38.125155568122864,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -37.27515556812286
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.36454424262046814,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.21454424262046815
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.41973805147058824,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "study/episodes/cosine__stress_small_batch.json.gz",
+              "sha256": "20b2c7309395c906525ff9b844c961f189885c1aed8e4d0610669210a7b980d1"
+            }
+          ]
+        },
+        "stress_large_critic": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 128,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.09223277155318978,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.08776722844681022
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.14599609375,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.0040039062499999944
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.94384765625,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.09384765625000002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 7.2974076513201,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -6.4474076513201
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.4906703531742096,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.3406703531742096
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.4,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "study/episodes/cosine__stress_large_critic.json.gz",
+              "sha256": "231a75015d197c35e4d447cd06537ad64d2e7776189c2763b01ed5f1e30d8c31"
+            }
+          ]
+        },
+        "stress_long_horizon": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 2400,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.0835019685515801,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.0964980314484199
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.096923828125,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.053076171874999994
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.992919921875,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.14291992187500002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 0.9727373151108623,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -0.12273731511086228
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.33125752210617065,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.18125752210617066
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.02887936826137936,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "study/episodes/cosine__stress_long_horizon.json.gz",
+              "sha256": "87a6b464770953c60609e6264e0e66ad0fc6a3aa03b0828f4abbf487b3e469dc"
+            }
+          ]
+        },
+        "stress_nominal_ring": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "bcap3, nominal ring",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.09399347757343036,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.08600652242656963
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.096435546875,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.053564453124999994
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.86572265625,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.015722656250000022
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 20.246476769447327,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -19.396476769447325
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.9576480984687805,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.8076480984687805
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.4,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "formulations/nominal_ring/episodes/bcap3_nominal_ring__stress_r1_r2.json.gz",
+              "sha256": "a80fbd6d7759d3cd323b5134bcf4d78c3025d0081eb91fdcff199d67c21d660f"
+            }
+          ]
+        },
+        "img_stripes2": {
+          "runner": "image",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.0017,
+            "lr_d": 0.0017,
+            "lr_prior": 0.0017,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 600,
+            "particles": 32,
+            "batch": 32
+          },
+          "trials": [
+            {
+              "label": "baseline",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 12,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 12
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 1,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "FAIL",
+                    "margin": -1
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 1.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.09999999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.25,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage1/episodes/baseline__img_stripes2.json.gz",
+              "sha256": "44801d3c29ed3dafe7654b8e0350a3103c8ab1aa85b5b78d399d92fcaa5dcbeb"
+            },
+            {
+              "label": "residual16",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 2,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "PASS",
+                    "margin": 0
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 1.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.09999999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 20,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 20,
+                  "first_pass_step": 125,
+                  "stable_from_step": 125,
+                  "stable_from_seconds": 2.3291867710649967,
+                  "confirmed_step": 225,
+                  "confirmed_seconds": 4.086578035959974
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.375
+              },
+              "artifact": "solvability/images/stage1/episodes/residual16__img_stripes2.json.gz",
+              "sha256": "b9b83caf1061f49c027ede780c9c0c447e72873cca0344a80996104a83d77479"
+            },
+            {
+              "label": "transpose24",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 24,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 24
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 1,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "FAIL",
+                    "margin": -1
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 1.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.09999999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.25,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage1/episodes/transpose24__img_stripes2.json.gz",
+              "sha256": "363fae3542435546a968cebaeeae1f27a21625bc2f8948bddabcb049b30e7f3d"
+            },
+            {
+              "label": "residual12",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 12,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 12
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 2,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "PASS",
+                    "margin": 0
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 1.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.09999999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 15,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 8,
+                  "first_pass_step": 225,
+                  "stable_from_step": 425,
+                  "stable_from_seconds": 6.663279835949652,
+                  "confirmed_step": 525,
+                  "confirmed_seconds": 7.880492360913195
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.875
+              },
+              "artifact": "solvability/images/stage2/episodes/residual12__img_stripes2.json.gz",
+              "sha256": "8ef596e202d5630f523249971c36e83093b5b647ef084a1194fa4a02821afbf0"
+            },
+            {
+              "label": "transpose16",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 1,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "FAIL",
+                    "margin": -1
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.9375,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.03749999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.25,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage2/episodes/transpose16__img_stripes2.json.gz",
+              "sha256": "dbe348831c2343912521a9ae408d27029c0a78389af3f71e0fa52a7f7cae97e4"
+            }
+          ]
+        },
+        "img_bars4": {
+          "runner": "image",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.0017,
+            "lr_d": 0.0017,
+            "lr_prior": 0.0017,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 600,
+            "particles": 32,
+            "batch": 32
+          },
+          "trials": [
+            {
+              "label": "baseline",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 12,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 12
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 2,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "FAIL",
+                    "margin": -2
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 1.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.09999999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.25,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage1/episodes/baseline__img_bars4.json.gz",
+              "sha256": "898ef324189ce4ed2ca263abdae13465981003f920cae3d9139e2df2f666234d"
+            },
+            {
+              "label": "residual16",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 4,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "PASS",
+                    "margin": 0
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.9375,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.03749999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 16,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 7,
+                  "first_pass_step": 200,
+                  "stable_from_step": 450,
+                  "stable_from_seconds": 7.632594463066198,
+                  "confirmed_step": 550,
+                  "confirmed_seconds": 9.166966652031988
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.9166666666666666
+              },
+              "artifact": "solvability/images/stage1/episodes/residual16__img_bars4.json.gz",
+              "sha256": "15708bea52dd93c45d5f61c98355239fe3d73b99e268e05ad80653b9729eb26b"
+            },
+            {
+              "label": "transpose24",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 24,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 24
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 2,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "FAIL",
+                    "margin": -2
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.90625,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.006249999999999978
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.25,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage1/episodes/transpose24__img_bars4.json.gz",
+              "sha256": "47924c75c901fdab6cea8321eed9ee85e363a7f86ead02ae9c666fb892d4d1f4"
+            },
+            {
+              "label": "residual12",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 12,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 12
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 3,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "FAIL",
+                    "margin": -1
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.9375,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.03749999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.125,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage2/episodes/residual12__img_bars4.json.gz",
+              "sha256": "0671b1b653d6fc9c1a4db6629cca9aa864c0e7afb1aa7f8573ab54ebf2091367"
+            },
+            {
+              "label": "transpose16",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 2,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "FAIL",
+                    "margin": -2
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.8125,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "FAIL",
+                    "margin": -0.08750000000000002
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.2986111111111111,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage2/episodes/transpose16__img_bars4.json.gz",
+              "sha256": "f1393e29fc23f370279c3770275a905797d5807f13512ed286cc7375f8465e7d"
+            }
+          ]
+        },
+        "img_blobs4": {
+          "runner": "image",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.0017,
+            "lr_d": 0.0017,
+            "lr_prior": 0.0017,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 600,
+            "particles": 32,
+            "batch": 32
+          },
+          "trials": [
+            {
+              "label": "baseline",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 12,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 12
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 4,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "PASS",
+                    "margin": 0
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.96875,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.06874999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 8,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 8,
+                  "first_pass_step": 425,
+                  "stable_from_step": 425,
+                  "stable_from_seconds": 4.612839203095064,
+                  "confirmed_step": 525,
+                  "confirmed_seconds": 5.8898517090128735
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.875
+              },
+              "artifact": "solvability/images/stage1/episodes/baseline__img_blobs4.json.gz",
+              "sha256": "9bc9395bfa0d952d953995d3378b562620e309683b908537f0928b528dd1baa3"
+            },
+            {
+              "label": "residual16",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 4,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "PASS",
+                    "margin": 0
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 1.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.09999999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 12,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 7,
+                  "first_pass_step": 300,
+                  "stable_from_step": 450,
+                  "stable_from_seconds": 6.232928453013301,
+                  "confirmed_step": 550,
+                  "confirmed_seconds": 7.824887802940793
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.9166666666666666
+              },
+              "artifact": "solvability/images/stage1/episodes/residual16__img_blobs4.json.gz",
+              "sha256": "a2ff48c2008108372bd43914e79df4e8f3547f50f0aa858db31ddbaa1219125b"
+            },
+            {
+              "label": "transpose24",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 24,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 24
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 2,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "FAIL",
+                    "margin": -2
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.75,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "FAIL",
+                    "margin": -0.15000000000000002
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.33333333333333337,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage1/episodes/transpose24__img_blobs4.json.gz",
+              "sha256": "a8defa745f137ebedf11219818534bfed011f95065e6ef399ee7ab178c47653d"
+            },
+            {
+              "label": "residual12",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 12,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 12
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 3,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "FAIL",
+                    "margin": -1
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.71875,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "FAIL",
+                    "margin": -0.18125000000000002
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.22569444444444445,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage2/episodes/residual12__img_blobs4.json.gz",
+              "sha256": "52befade214ff7dd8deec26102d1780001f1d77058a816e92ffc73634ace0932"
+            },
+            {
+              "label": "transpose16",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 3,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "FAIL",
+                    "margin": -1
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.90625,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.006249999999999978
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.125,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage2/episodes/transpose16__img_blobs4.json.gz",
+              "sha256": "38509394831b0f29519abf235ee51518003933534aaf50cc1594daa91733d9f8"
+            }
+          ]
+        },
+        "img_intensity2": {
+          "runner": "image",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 3.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.0017,
+            "lr_d": 0.0017,
+            "lr_prior": 0.0017,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 600,
+            "particles": 32,
+            "batch": 32
+          },
+          "trials": [
+            {
+              "label": "baseline",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 12,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 12
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 0,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "FAIL",
+                    "margin": -2
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "FAIL",
+                    "margin": -0.9
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 1.0,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage1/episodes/baseline__img_intensity2.json.gz",
+              "sha256": "e9f6cb501b136a9925fefc8bd5be1570de5cfced69a8639e2efe5071883a25e1"
+            },
+            {
+              "label": "residual16",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 2,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "PASS",
+                    "margin": 0
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 1.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.09999999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 7,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 6,
+                  "first_pass_step": 400,
+                  "stable_from_step": 475,
+                  "stable_from_seconds": 6.684527129982598,
+                  "confirmed_step": 575,
+                  "confirmed_seconds": 7.965895178029314
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.9583333333333334
+              },
+              "artifact": "solvability/images/stage1/episodes/residual16__img_intensity2.json.gz",
+              "sha256": "127f9da08ea919d4ce2d319626308ae326da3456579d7b13c1708b0d178fae7d"
+            },
+            {
+              "label": "transpose24",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 24,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 24
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 0,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "FAIL",
+                    "margin": -2
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "FAIL",
+                    "margin": -0.9
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 1.0,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage1/episodes/transpose24__img_intensity2.json.gz",
+              "sha256": "70d04b218e3561201b527b4d1c954d1587c6af2ff35dbaf62fb2a03770efe7a7"
+            },
+            {
+              "label": "residual12",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 12,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 12
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 2,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "PASS",
+                    "margin": 0
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 1.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.09999999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 8,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 7,
+                  "first_pass_step": 325,
+                  "stable_from_step": 450,
+                  "stable_from_seconds": 4.670780982938595,
+                  "confirmed_step": 550,
+                  "confirmed_seconds": 5.687512030941434
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.9166666666666666
+              },
+              "artifact": "solvability/images/stage2/episodes/residual12__img_intensity2.json.gz",
+              "sha256": "b52cb63c49fdd94df47bcb1be22eef1488bd1540f5133c9f455742afd00ece19"
+            },
+            {
+              "label": "transpose16",
+              "architecture": {
+                "generator": {
+                  "kind": "transpose",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 0,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "FAIL",
+                    "margin": -2
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "FAIL",
+                    "margin": -0.9
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 1.0,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/stage2/episodes/transpose16__img_intensity2.json.gz",
+              "sha256": "bc9767e8e5422f7436acffd3c0209d0355b9f4dd3dfd0caeacf83df6d5bd6b58"
+            }
+          ]
+        }
+      },
+      "required": {
+        "two_pole": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "mean_abs",
+                "value": 0.3517892360687256,
+                "op": ">=",
+                "threshold": 0.3,
+                "status": "PASS",
+                "margin": 0.0517892360687256
+              },
+              {
+                "metric": "grad_med",
+                "value": 0.3972667455673218,
+                "op": "<=",
+                "threshold": 1.0,
+                "status": "PASS",
+                "margin": 0.6027332544326782
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 7,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 7,
+              "first_pass_step": 60,
+              "stable_from_step": 60,
+              "stable_from_seconds": 1.1956349910469726,
+              "confirmed_step": 74,
+              "confirmed_seconds": 1.2173313550883904
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.925
+          },
+          "artifact": "study/episodes/cosine__two_pole.json.gz",
+          "sha256": "277a3a3ee99b44869a9c0dba88bde7e448be4300a3ab4b05520ff501aa29cf56"
+        },
+        "trajectory": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 2.0105224393773824e-05,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.019979894775606227
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 19,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 19,
+              "first_pass_step": 100,
+              "stable_from_step": 100,
+              "stable_from_seconds": 0.2878617919050157,
+              "confirmed_step": 167,
+              "confirmed_seconds": 0.4711089679040015
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.4175
+          },
+          "artifact": "study/episodes/cosine__trajectory.json.gz",
+          "sha256": "5e0c68e754b7aa0c15d9abaa6a9304f7d61c8a2d5de0c69786916f7159906bf5"
+        },
+        "residual_student": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 1.6864316421560943e-05,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.01998313568357844
+              },
+              {
+                "metric": "success_rate",
+                "value": 1.0,
+                "op": ">=",
+                "threshold": 1.0,
+                "status": "PASS",
+                "margin": 0.0
+              },
+              {
+                "metric": "wrong_pad_rate",
+                "value": 0.0,
+                "op": "<=",
+                "threshold": 0.0,
+                "status": "PASS",
+                "margin": 0.0
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 21,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 19,
+              "first_pass_step": 50,
+              "stable_from_step": 100,
+              "stable_from_seconds": 0.28689158998895437,
+              "confirmed_step": 167,
+              "confirmed_seconds": 0.4745709910057485
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.4175
+          },
+          "artifact": "study/episodes/cosine__residual_student.json.gz",
+          "sha256": "0ad9878b448c1b3dd96cd448787c09c1e1fd0ce003e3129665e1af8aee813d08"
+        },
+        "unipolar": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "cover",
+                "value": 0.982617710057589,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.13261771005758904
+              },
+              {
+                "metric": "off_caption",
+                "value": 0.0006809285182022889,
+                "op": "<=",
+                "threshold": 0.05,
+                "status": "PASS",
+                "margin": 0.04931907148179771
+              },
+              {
+                "metric": "neu_hold",
+                "value": 0.9705528393387794,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.12055283933877947
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 18,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 18,
+              "first_pass_step": 117,
+              "stable_from_step": 117,
+              "stable_from_seconds": 0.4295187459792942,
+              "confirmed_step": 184,
+              "confirmed_seconds": 0.6631383040221408
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.46
+          },
+          "artifact": "study/episodes/cosine__unipolar.json.gz",
+          "sha256": "b919757510e6556847afa85027a898a78c5ef9516f1b23817ea41ec2537abec5"
+        },
+        "ae_gan_hold": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "recon_mse",
+                "value": 0.009792635217308998,
+                "op": "<=",
+                "threshold": 0.05,
+                "status": "PASS",
+                "margin": 0.040207364782691005
+              },
+              {
+                "metric": "hold",
+                "value": 0.0014229558873921633,
+                "op": "<=",
+                "threshold": 0.35,
+                "status": "PASS",
+                "margin": 0.3485770441126078
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 19,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 19,
+              "first_pass_step": 63,
+              "stable_from_step": 63,
+              "stable_from_seconds": 0.3202089429832995,
+              "confirmed_step": 105,
+              "confirmed_seconds": 0.4483801410533488
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.42
+          },
+          "artifact": "study/episodes/cosine__ae_gan_hold.json.gz",
+          "sha256": "7424994e2446ff940423f67507e8397dc238cd67a59897e391f932988be9aca2"
+        },
+        "cover_leftover": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "u_kept",
+                "value": 0.9944554467891492,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.14445544678914923
+              },
+              {
+                "metric": "content_kept",
+                "value": 0.9939026651870989,
+                "op": ">=",
+                "threshold": 0.75,
+                "status": "PASS",
+                "margin": 0.2439026651870989
+              },
+              {
+                "metric": "leak_ratio",
+                "value": 0.0020671901799351553,
+                "op": "<=",
+                "threshold": 0.2,
+                "status": "PASS",
+                "margin": 0.19793280982006486
+              },
+              {
+                "metric": "pole_rel_err_plus",
+                "value": 0.00673892954364419,
+                "op": "<=",
+                "threshold": 0.2,
+                "status": "PASS",
+                "margin": 0.19326107045635582
+              },
+              {
+                "metric": "pole_rel_err_minus",
+                "value": 0.003417979460209608,
+                "op": "<=",
+                "threshold": 0.2,
+                "status": "PASS",
+                "margin": 0.1965820205397904
+              },
+              {
+                "metric": "same_dir",
+                "value": 0.002780375526160004,
+                "op": "<=",
+                "threshold": 0.25,
+                "status": "PASS",
+                "margin": 0.24721962447384
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 14,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 14,
+              "first_pass_step": 367,
+              "stable_from_step": 367,
+              "stable_from_seconds": 1.601745878928341,
+              "confirmed_step": 500,
+              "confirmed_seconds": 2.1610904379049316
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.625
+          },
+          "artifact": "study/episodes/cosine__cover_leftover.json.gz",
+          "sha256": "f8c4f99fea34ca649dbd62561fbf89ff1ca9ce49ef3a4b5d7f3740f0b9e57188"
+        },
+        "unused_token_hold": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "unused_hold",
+                "value": 0.9919152026996017,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.14191520269960167
+              },
+              {
+                "metric": "concept_move",
+                "value": 0.9652063899110885,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.11520638991108856
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 14,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 14,
+              "first_pass_step": 92,
+              "stable_from_step": 92,
+              "stable_from_seconds": 0.1902360999956727,
+              "confirmed_step": 125,
+              "confirmed_seconds": 0.24820324801839888
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.625
+          },
+          "artifact": "study/episodes/cosine__unused_token_hold.json.gz",
+          "sha256": "889e5678d4d82f10ea10754635dd4d30f9bd1cf089b429228d06ffbaf394e15f"
+        },
+        "mid_scale_identity": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "concept_cos_plus",
+                "value": 0.9999809861183167,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.14998098611831667
+              },
+              {
+                "metric": "concept_cos_minus",
+                "value": 0.999997615814209,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.149997615814209
+              },
+              {
+                "metric": "concept_mag_plus",
+                "value": 0.9993701577186584,
+                "op": ">=",
+                "threshold": 0.75,
+                "status": "PASS",
+                "margin": 0.24937015771865845
+              },
+              {
+                "metric": "concept_mag_plus",
+                "value": 0.9993701577186584,
+                "op": "<=",
+                "threshold": 1.25,
+                "status": "PASS",
+                "margin": 0.25062984228134155
+              },
+              {
+                "metric": "concept_mag_minus",
+                "value": 1.0006170272827148,
+                "op": ">=",
+                "threshold": 0.75,
+                "status": "PASS",
+                "margin": 0.25061702728271484
+              },
+              {
+                "metric": "concept_mag_minus",
+                "value": 1.0006170272827148,
+                "op": "<=",
+                "threshold": 1.25,
+                "status": "PASS",
+                "margin": 0.24938297271728516
+              },
+              {
+                "metric": "identity_at_0",
+                "value": 0.998754588090076,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.14875458809007602
+              },
+              {
+                "metric": "identity_at_mid",
+                "value": 0.9977136742896218,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.1477136742896218
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 17,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 17,
+              "first_pass_step": 267,
+              "stable_from_step": 267,
+              "stable_from_seconds": 1.880524109932594,
+              "confirmed_step": 400,
+              "confirmed_seconds": 2.7815174859715626
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.5
+          },
+          "artifact": "study/episodes/cosine__mid_scale_identity.json.gz",
+          "sha256": "b0314a1f982cf398bf55d3bc85cf0b44986cd32de84cef63d9699e9490aa494b"
+        },
+        "mode_hold": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "modes",
+                "value": 8,
+                "op": ">=",
+                "threshold": 8,
+                "status": "PASS",
+                "margin": 0
+              },
+              {
+                "metric": "hq",
+                "value": 1.0,
+                "op": ">=",
+                "threshold": 0.9,
+                "status": "PASS",
+                "margin": 0.09999999999999998
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 8,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 8,
+              "first_pass_step": 850,
+              "stable_from_step": 850,
+              "stable_from_seconds": 4.7572741699405015,
+              "confirmed_step": 1050,
+              "confirmed_seconds": 5.88745778799057
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.875
+          },
+          "artifact": "study/episodes/cosine__mode_hold.json.gz",
+          "sha256": "394c7fec15bad3baa25b7c95017381d00925d6fa08e09b9aefff0406501cdb52"
+        }
+      },
+      "required_passes": 9,
+      "practical_passes": 7,
+      "eligible": true,
+      "domains": {
+        "vector": {
+          "passed": 3,
+          "total": 6
+        },
+        "stress": {
+          "passed": 0,
+          "total": 6
+        },
+        "image": {
+          "passed": 4,
+          "total": 4
+        }
+      }
+    },
+    {
+      "name": "rp_logistic_bcap10",
+      "penalty_coefficient": 10,
+      "fixed": {
+        "loss": "logistic",
+        "mode": "rp",
+        "penalty": "b_cap",
+        "kappa": 1.25,
+        "prior_regularization": 0.05,
+        "particle_l2": 0.0
+      },
+      "cases": {
+        "vector_two_broad": {
+          "runner": "vector",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": true,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "cap10 original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.04597111401817821,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.13402888598182178
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.005615234375,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.144384765625
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.9912109375,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.14121093750000002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 0.5202289074659348,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.3297710925340652
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.4900134205818176,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.3400134205818176
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 20,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 20,
+                  "first_pass_step": 250,
+                  "stable_from_step": 250,
+                  "stable_from_seconds": 1.2532951009925455,
+                  "confirmed_step": 450,
+                  "confirmed_seconds": 2.2289961570641026
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.375
+              },
+              "artifact": "solvability/vectors/regressions/episodes/cap10__vector_two_broad.json.gz",
+              "sha256": "b5040a1aa924d3f8c9304ffd709bc2004ceb7e6f1c4240c115bc1d392be860e0"
+            }
+          ]
+        },
+        "vector_unequal_mass": {
+          "runner": "vector",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "cap10 original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.09603618635583645,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.08396381364416354
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.07075195759534836,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.07924804240465164
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.966796875,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.11679687500000002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 4.431075610220432,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -3.581075610220432
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.17464876174926758,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.024648761749267584
+                  },
+                  {
+                    "metric": "min_mass_ratio",
+                    "value": 0.8713600635528564,
+                    "op": ">=",
+                    "threshold": 0.25,
+                    "status": "PASS",
+                    "margin": 0.6213600635528564
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.3333333333333333,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/vectors/screen/episodes/cap10__vector_unequal_mass.json.gz",
+              "sha256": "76ba20ae3524ad25abb8ff41750bdc5e0680a7476acbb03c67d59fc91a88e555"
+            }
+          ]
+        },
+        "vector_unequal_width": {
+          "runner": "vector",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": true,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "cap10 original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.09679146563834293,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.08320853436165707
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.087890625,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.062109374999999994
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 1.0,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.15000000000000002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 0.23614582791924477,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.6138541720807552
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.26828479766845703,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.11828479766845704
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 11,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 5,
+                  "first_pass_step": 650,
+                  "stable_from_step": 1000,
+                  "stable_from_seconds": 6.958906461019069,
+                  "confirmed_step": 1200,
+                  "confirmed_seconds": 8.193312947056256
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 1.0
+              },
+              "artifact": "solvability/vectors/screen/episodes/cap10__vector_unequal_width.json.gz",
+              "sha256": "efce508aad06220ce9d4e27ef988635519bc02dde5467c5024d9fe7ceab505d8"
+            }
+          ]
+        },
+        "vector_anisotropic": {
+          "runner": "vector",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": true,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "cap10 original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.11197867785215058,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.06802132214784941
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.0751139372587204,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.0748860627412796
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.96728515625,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.11728515625000002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 0.5284388872484366,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.3215611127515634
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.6116551160812378,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.46165511608123777
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 12,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 12,
+                  "first_pass_step": 650,
+                  "stable_from_step": 650,
+                  "stable_from_seconds": 3.3857971320394427,
+                  "confirmed_step": 850,
+                  "confirmed_seconds": 4.398464414989576
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.7083333333333334
+              },
+              "artifact": "solvability/vectors/regressions/episodes/cap10__vector_anisotropic.json.gz",
+              "sha256": "41e8928d114dcde78ffab30a74c3695fc8e8726fbb0ff00b4a6066ee0aeb240c"
+            }
+          ]
+        },
+        "vector_overlap": {
+          "runner": "vector",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "cap10 original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.07623976857676604,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.10376023142323396
+                  },
+                  {
+                    "metric": "mean_error",
+                    "value": 0.057337477803230286,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.09266252219676971
+                  },
+                  {
+                    "metric": "covariance_error",
+                    "value": 0.2697111666202545,
+                    "op": "<=",
+                    "threshold": 0.45,
+                    "status": "PASS",
+                    "margin": 0.1802888333797455
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 11,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 2,
+                  "first_pass_step": 250,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/vectors/screen/episodes/cap10__vector_overlap.json.gz",
+              "sha256": "234fa04c93a57c1cc5ec0720594b46480d2e26b5e3df2c8a9161719f2628e1b1"
+            }
+          ]
+        },
+        "vector_spiral": {
+          "runner": "vector",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": true,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1600,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "cap10 original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.041985102130623626,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.13801489786937637
+                  },
+                  {
+                    "metric": "mean_error",
+                    "value": 0.051294032484292984,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.09870596751570701
+                  },
+                  {
+                    "metric": "covariance_error",
+                    "value": 0.022565670311450958,
+                    "op": "<=",
+                    "threshold": 0.45,
+                    "status": "PASS",
+                    "margin": 0.42743432968854905
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 23,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 23,
+                  "first_pass_step": 134,
+                  "stable_from_step": 134,
+                  "stable_from_seconds": 0.6719786879839376,
+                  "confirmed_step": 400,
+                  "confirmed_seconds": 1.9542129799956456
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.25
+              },
+              "artifact": "solvability/vectors/regressions/episodes/cap10__vector_spiral.json.gz",
+              "sha256": "c91bbb4a8d6d85f4c24bc63805254a2e455c99cf020884c6d55d6a44a54011e1"
+            }
+          ]
+        },
+        "stress_fast_critic": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.003,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "cap10 original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.09287046283875335,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.08712953716124665
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.136474609375,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.013525390624999994
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.880615234375,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.030615234375000022
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 11.33258243650198,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -10.48258243650198
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.06368590891361237,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "FAIL",
+                    "margin": -0.08631409108638763
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.5150854547818502,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/dynamics/episodes.json.gz",
+              "sha256": "c9cc476802c1247bb5b78fe99f9d634ba34ed89152af100c61a8e4d7dcf1b9bb",
+              "episode_index": 54
+            }
+          ]
+        },
+        "stress_slow_critic": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.00075,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "cap10 original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.15667048950138887,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.023329510498611122
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.127685546875,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.022314453124999994
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.54296875,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -0.30703125
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 74.8020533323288,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -73.9520533323288
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.9748584628105164,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.8248584628105163
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.4722426470588236,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/dynamics/episodes.json.gz",
+              "sha256": "c9cc476802c1247bb5b78fe99f9d634ba34ed89152af100c61a8e4d7dcf1b9bb",
+              "episode_index": 55
+            }
+          ]
+        },
+        "stress_small_batch": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 64
+          },
+          "trials": [
+            {
+              "label": "cap10 original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.14823421538251558,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.031765784617484416
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.10498046875,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.045019531249999994
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.728271484375,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -0.12172851562499998
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 37.002166241407394,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -36.15216624140739
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.2507402300834656,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.10074023008346558
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.42864200367647054,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/dynamics/episodes.json.gz",
+              "sha256": "c9cc476802c1247bb5b78fe99f9d634ba34ed89152af100c61a8e4d7dcf1b9bb",
+              "episode_index": 56
+            }
+          ]
+        },
+        "stress_large_critic": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "cap10 original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 128,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.07379507800606337,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.10620492199393662
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.09814453125,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.051855468749999994
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.816162109375,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -0.03383789062499998
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 22.997717387974262,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -22.14771738797426
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.3308259844779968,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.18082598447799683
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.407961856617647,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/dynamics/episodes.json.gz",
+              "sha256": "c9cc476802c1247bb5b78fe99f9d634ba34ed89152af100c61a8e4d7dcf1b9bb",
+              "episode_index": 57
+            }
+          ]
+        },
+        "stress_long_horizon": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 2400,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "cap10 original architecture",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.05401374831821062,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.12598625168178937
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.0849609375,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.0650390625
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.93505859375,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "PASS",
+                    "margin": 0.08505859375000002
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 7.1641361974179745,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -6.314136197417975
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.5158778429031372,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.3658778429031372
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.4,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/dynamics/episodes.json.gz",
+              "sha256": "c9cc476802c1247bb5b78fe99f9d634ba34ed89152af100c61a8e4d7dcf1b9bb",
+              "episode_index": 58
+            }
+          ]
+        },
+        "stress_nominal_ring": {
+          "runner": "stress",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "lr_g": 0.001,
+            "lr_d": 0.0015,
+            "lr_prior": 0.01,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 1200,
+            "particles": 256,
+            "batch": 128
+          },
+          "trials": [
+            {
+              "label": "bcap10, nominal ring",
+              "architecture": {
+                "generator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "z_dim": 4
+                },
+                "discriminator": {
+                  "kind": "mlp",
+                  "width": 64,
+                  "layers": 2,
+                  "fourier": 2
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "sw1_normalized",
+                    "value": 0.08571994670647018,
+                    "op": "<=",
+                    "threshold": 0.18,
+                    "status": "PASS",
+                    "margin": 0.09428005329352981
+                  },
+                  {
+                    "metric": "mass_tv",
+                    "value": 0.149658203125,
+                    "op": "<=",
+                    "threshold": 0.15,
+                    "status": "PASS",
+                    "margin": 0.00034179687499999445
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.83056640625,
+                    "op": ">=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -0.019433593749999978
+                  },
+                  {
+                    "metric": "component_covariance_error",
+                    "value": 16.163938134908676,
+                    "op": "<=",
+                    "threshold": 0.85,
+                    "status": "FAIL",
+                    "margin": -15.313938134908677
+                  },
+                  {
+                    "metric": "component_min_eigen_ratio",
+                    "value": 0.07550567388534546,
+                    "op": ">=",
+                    "threshold": 0.15,
+                    "status": "FAIL",
+                    "margin": -0.07449432611465454
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 0,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": null,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.5038983784469904,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "formulations/nominal_ring/episodes/bcap10_nominal_ring__stress_r1_r2.json.gz",
+              "sha256": "0ab7db4093d89c083fd6be34183450f39c27dbc74e81593b8f29a6238cfdf221"
+            }
+          ]
+        },
+        "img_stripes2": {
+          "runner": "image",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": true,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.0017,
+            "lr_d": 0.0017,
+            "lr_prior": 0.0017,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 600,
+            "particles": 32,
+            "batch": 32
+          },
+          "trials": [
+            {
+              "label": "residual16_cap10",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 2,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "PASS",
+                    "margin": 0
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 1.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.09999999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 19,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 19,
+                  "first_pass_step": 150,
+                  "stable_from_step": 150,
+                  "stable_from_seconds": 3.0365670659812167,
+                  "confirmed_step": 250,
+                  "confirmed_seconds": 4.049471849924885
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.4166666666666667
+              },
+              "artifact": "solvability/images/cross/episodes/residual16_cap10__img_stripes2.json.gz",
+              "sha256": "bc567dc1dfc20de0767275cb525c613323d8a5bb3315223230af912e1d508ec4"
+            }
+          ]
+        },
+        "img_bars4": {
+          "runner": "image",
+          "status": "FAIL",
+          "supported": false,
+          "all_tested_architectures_pass": false,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.0017,
+            "lr_d": 0.0017,
+            "lr_prior": 0.0017,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 600,
+            "particles": 32,
+            "batch": 32
+          },
+          "trials": [
+            {
+              "label": "residual16_cap10",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "FAIL",
+                "attempted": true,
+                "passed": false,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 4,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "PASS",
+                    "margin": 0
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.8125,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "FAIL",
+                    "margin": -0.08750000000000002
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 11,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 0,
+                  "first_pass_step": 175,
+                  "stable_from_step": null,
+                  "stable_from_seconds": null,
+                  "confirmed_step": null,
+                  "confirmed_seconds": null
+                },
+                "shortfall": 0.04861111111111112,
+                "confirmation_fraction": 2.0
+              },
+              "artifact": "solvability/images/cross/episodes/residual16_cap10__img_bars4.json.gz",
+              "sha256": "5e88f88f1e8c513ad5b708671f490c242980b07ab73ee476e7d87c8de8dfb47a"
+            }
+          ]
+        },
+        "img_blobs4": {
+          "runner": "image",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": true,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.0017,
+            "lr_d": 0.0017,
+            "lr_prior": 0.0017,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 600,
+            "particles": 32,
+            "batch": 32
+          },
+          "trials": [
+            {
+              "label": "residual16_cap10",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 4,
+                    "op": ">=",
+                    "threshold": 4,
+                    "status": "PASS",
+                    "margin": 0
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 0.96875,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.06874999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 13,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 7,
+                  "first_pass_step": 175,
+                  "stable_from_step": 450,
+                  "stable_from_seconds": 5.328358641010709,
+                  "confirmed_step": 550,
+                  "confirmed_seconds": 6.349844385054894
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.9166666666666666
+              },
+              "artifact": "solvability/images/cross/episodes/residual16_cap10__img_blobs4.json.gz",
+              "sha256": "9c4e6992d350bc7092e1177b6f37d60a3994f60633c945bfd8a57c9f758c756c"
+            }
+          ]
+        },
+        "img_intensity2": {
+          "runner": "image",
+          "status": "PASS",
+          "supported": true,
+          "all_tested_architectures_pass": true,
+          "formulation": {
+            "loss": "logistic",
+            "mode": "rp",
+            "penalty": "b_cap",
+            "coefficient": 10.0,
+            "kappa": 1.25,
+            "particle_l2": 0.0,
+            "prior_regularization": 0.05,
+            "prior_kind": "particles"
+          },
+          "training": {
+            "optimizer": "Adam",
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "lr_g": 0.0017,
+            "lr_d": 0.0017,
+            "lr_prior": 0.0017,
+            "schedule": "cosine",
+            "d_every": 1,
+            "g_every": 1
+          },
+          "resources": {
+            "steps": 600,
+            "particles": 32,
+            "batch": 32
+          },
+          "trials": [
+            {
+              "label": "residual16_cap10",
+              "architecture": {
+                "generator": {
+                  "kind": "residual_upsample",
+                  "width": 16,
+                  "z_dim": 8
+                },
+                "discriminator": {
+                  "kind": "convolutional",
+                  "width": 16
+                }
+              },
+              "verdict": {
+                "status": "PASS",
+                "attempted": true,
+                "passed": true,
+                "metrics": [
+                  {
+                    "metric": "modes",
+                    "value": 2,
+                    "op": ">=",
+                    "threshold": 2,
+                    "status": "PASS",
+                    "margin": 0
+                  },
+                  {
+                    "metric": "hq",
+                    "value": 1.0,
+                    "op": ">=",
+                    "threshold": 0.9,
+                    "status": "PASS",
+                    "margin": 0.09999999999999998
+                  }
+                ],
+                "convergence": {
+                  "complete": true,
+                  "observations": 24,
+                  "passing_observations": 7,
+                  "minimum_stable_checks": 5,
+                  "passing_suffix": 6,
+                  "first_pass_step": 400,
+                  "stable_from_step": 475,
+                  "stable_from_seconds": 4.909931214991957,
+                  "confirmed_step": 575,
+                  "confirmed_seconds": 5.883956273901276
+                },
+                "shortfall": 0.0,
+                "confirmation_fraction": 0.9583333333333334
+              },
+              "artifact": "solvability/images/cross/episodes/residual16_cap10__img_intensity2.json.gz",
+              "sha256": "3a4c14be4fb9d2feafecb6d8c5436d871ce9735c49e55463fe076b619504616b"
+            }
+          ]
+        }
+      },
+      "required": {
+        "two_pole": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "mean_abs",
+                "value": 0.348248690366745,
+                "op": ">=",
+                "threshold": 0.3,
+                "status": "PASS",
+                "margin": 0.048248690366745006
+              },
+              {
+                "metric": "grad_med",
+                "value": 0.39463818073272705,
+                "op": "<=",
+                "threshold": 1.0,
+                "status": "PASS",
+                "margin": 0.605361819267273
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 7,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 7,
+              "first_pass_step": 60,
+              "stable_from_step": 60,
+              "stable_from_seconds": 1.280446675955318,
+              "confirmed_step": 74,
+              "confirmed_seconds": 1.3037802670150995
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.925
+          },
+          "artifact": "solvability/required_cap10/episodes/cap10__two_pole.json.gz",
+          "sha256": "ca944fe818a5572fff8b7ed3c6b026f9379ba6f098e82f9a868aff05bd944663"
+        },
+        "trajectory": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.019067024812102318,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.0009329751878976826
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 6,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 6,
+              "first_pass_step": 317,
+              "stable_from_step": 317,
+              "stable_from_seconds": 0.9052691300166771,
+              "confirmed_step": 384,
+              "confirmed_seconds": 1.1029041280271485
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.96
+          },
+          "artifact": "solvability/required_cap10/episodes/cap10__trajectory.json.gz",
+          "sha256": "29c50aa21d1962f73fb8a63f69ac710c921ac8d77b725a08d863fa93635ec211"
+        },
+        "residual_student": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 1.5753941625007428e-05,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.019984246058374993
+              },
+              {
+                "metric": "success_rate",
+                "value": 1.0,
+                "op": ">=",
+                "threshold": 1.0,
+                "status": "PASS",
+                "margin": 0.0
+              },
+              {
+                "metric": "wrong_pad_rate",
+                "value": 0.0,
+                "op": "<=",
+                "threshold": 0.0,
+                "status": "PASS",
+                "margin": 0.0
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 21,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 14,
+              "first_pass_step": 50,
+              "stable_from_step": 184,
+              "stable_from_seconds": 0.5708329059416428,
+              "confirmed_step": 250,
+              "confirmed_seconds": 0.7839779480127618
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.625
+          },
+          "artifact": "solvability/required_cap10/episodes/cap10__residual_student.json.gz",
+          "sha256": "c51ac811b7fd52583c8e72ef15bc0a8fb322e2a0b683f8fd7300cfb0e3bf0f78"
+        },
+        "unipolar": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "cover",
+                "value": 0.9842736597634598,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.13427365976345984
+              },
+              {
+                "metric": "off_caption",
+                "value": 0.00033467903403159845,
+                "op": "<=",
+                "threshold": 0.05,
+                "status": "PASS",
+                "margin": 0.0496653209659684
+              },
+              {
+                "metric": "neu_hold",
+                "value": 0.9101824909448624,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.06018249094486239
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 18,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 18,
+              "first_pass_step": 117,
+              "stable_from_step": 117,
+              "stable_from_seconds": 0.4600399399641901,
+              "confirmed_step": 184,
+              "confirmed_seconds": 0.719506322988309
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.46
+          },
+          "artifact": "solvability/required_cap10/episodes/cap10__unipolar.json.gz",
+          "sha256": "bede4bd5080be9db395e44b9f58807d551761dc1acb6ab9848368beb021ac046"
+        },
+        "ae_gan_hold": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "recon_mse",
+                "value": 0.010074117220938206,
+                "op": "<=",
+                "threshold": 0.05,
+                "status": "PASS",
+                "margin": 0.0399258827790618
+              },
+              {
+                "metric": "hold",
+                "value": 0.0019521701615303755,
+                "op": "<=",
+                "threshold": 0.35,
+                "status": "PASS",
+                "margin": 0.3480478298384696
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 19,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 19,
+              "first_pass_step": 63,
+              "stable_from_step": 63,
+              "stable_from_seconds": 0.2078466530656442,
+              "confirmed_step": 105,
+              "confirmed_seconds": 0.3458241029875353
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.42
+          },
+          "artifact": "solvability/required_cap10/episodes/cap10__ae_gan_hold.json.gz",
+          "sha256": "6a864f66701174344c97bff8993e5fb190bc1722533046f704cb7af7bbc73a62"
+        },
+        "cover_leftover": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "u_kept",
+                "value": 0.9925086995056076,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.14250869950560763
+              },
+              {
+                "metric": "content_kept",
+                "value": 0.9993849919417793,
+                "op": ">=",
+                "threshold": 0.75,
+                "status": "PASS",
+                "margin": 0.24938499194177932
+              },
+              {
+                "metric": "leak_ratio",
+                "value": 0.004780130875068807,
+                "op": "<=",
+                "threshold": 0.2,
+                "status": "PASS",
+                "margin": 0.1952198691249312
+              },
+              {
+                "metric": "pole_rel_err_plus",
+                "value": 0.006306793540716171,
+                "op": "<=",
+                "threshold": 0.2,
+                "status": "PASS",
+                "margin": 0.19369320645928384
+              },
+              {
+                "metric": "pole_rel_err_minus",
+                "value": 0.00316216005012393,
+                "op": "<=",
+                "threshold": 0.2,
+                "status": "PASS",
+                "margin": 0.19683783994987608
+              },
+              {
+                "metric": "same_dir",
+                "value": 0.0035152964977382714,
+                "op": "<=",
+                "threshold": 0.25,
+                "status": "PASS",
+                "margin": 0.24648470350226173
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 13,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 13,
+              "first_pass_step": 400,
+              "stable_from_step": 400,
+              "stable_from_seconds": 1.8816030570305884,
+              "confirmed_step": 534,
+              "confirmed_seconds": 2.4995356369763613
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.6675
+          },
+          "artifact": "solvability/required_cap10/episodes/cap10__cover_leftover.json.gz",
+          "sha256": "5497f09a663bec3ee6347324fb9350dcef0531fde836ecb1a822fc37069a53b0"
+        },
+        "unused_token_hold": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "unused_hold",
+                "value": 0.9932466051541269,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.1432466051541269
+              },
+              {
+                "metric": "concept_move",
+                "value": 0.898216498110699,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.04821649811069906
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 10,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 5,
+              "first_pass_step": 92,
+              "stable_from_step": 167,
+              "stable_from_seconds": 0.3049911910202354,
+              "confirmed_step": 200,
+              "confirmed_seconds": 0.3700899180257693
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 1.0
+          },
+          "artifact": "solvability/required_cap10/episodes/cap10__unused_token_hold.json.gz",
+          "sha256": "7ca6246cbb0e48a948ce048e8591333ef50d1e95939a09e666f4cf184cf5abe8"
+        },
+        "mid_scale_identity": {
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "concept_cos_plus",
+                "value": 0.9998862147331238,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.1498862147331238
+              },
+              {
+                "metric": "concept_cos_minus",
+                "value": 0.999938428401947,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.14993842840194704
+              },
+              {
+                "metric": "concept_mag_plus",
+                "value": 0.9984052777290344,
+                "op": ">=",
+                "threshold": 0.75,
+                "status": "PASS",
+                "margin": 0.24840527772903442
+              },
+              {
+                "metric": "concept_mag_plus",
+                "value": 0.9984052777290344,
+                "op": "<=",
+                "threshold": 1.25,
+                "status": "PASS",
+                "margin": 0.2515947222709656
+              },
+              {
+                "metric": "concept_mag_minus",
+                "value": 1.0084861516952515,
+                "op": ">=",
+                "threshold": 0.75,
+                "status": "PASS",
+                "margin": 0.25848615169525146
+              },
+              {
+                "metric": "concept_mag_minus",
+                "value": 1.0084861516952515,
+                "op": "<=",
+                "threshold": 1.25,
+                "status": "PASS",
+                "margin": 0.24151384830474854
+              },
+              {
+                "metric": "identity_at_0",
+                "value": 0.9891068722991715,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.1391068722991715
+              },
+              {
+                "metric": "identity_at_mid",
+                "value": 0.9953590741706765,
+                "op": ">=",
+                "threshold": 0.85,
+                "status": "PASS",
+                "margin": 0.1453590741706765
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 17,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 17,
+              "first_pass_step": 267,
+              "stable_from_step": 267,
+              "stable_from_seconds": 1.9662581520387903,
+              "confirmed_step": 400,
+              "confirmed_seconds": 2.953432467067614
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.5
+          },
+          "artifact": "solvability/required_cap10/episodes/cap10__mid_scale_identity.json.gz",
+          "sha256": "78abdf80dead356694704f0f74f08f8625b96f77eb4d9c533db26efd66664a59"
+        },
+        "mode_hold": {
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "modes",
+                "value": 4,
+                "op": ">=",
+                "threshold": 8,
+                "status": "FAIL",
+                "margin": -4
+              },
+              {
+                "metric": "hq",
+                "value": 0.575927734375,
+                "op": ">=",
+                "threshold": 0.9,
+                "status": "FAIL",
+                "margin": -0.324072265625
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.4300401475694444,
+            "confirmation_fraction": 2.0
+          },
+          "artifact": "solvability/required_cap10/episodes/cap10__mode_hold.json.gz",
+          "sha256": "bec160f7d752c4b8679ae906eac5fca9f4cb0a1adf48c8966c4ea037f83d4f30"
+        }
+      },
+      "required_passes": 8,
+      "practical_passes": 7,
+      "eligible": false,
+      "domains": {
+        "vector": {
+          "passed": 4,
+          "total": 6
+        },
+        "stress": {
+          "passed": 0,
+          "total": 6
+        },
+        "image": {
+          "passed": 3,
+          "total": 4
+        }
+      }
+    }
+  ],
+  "rule": "One formulation entry; architecture trials stay inside each case. Target, formulation, training settings and resource budget must match within an architecture cell. Every attempt remains visible.",
+  "nominal_ring": "Replaces the formulation-changing R1+R2 condition with its b_cap counterpart for b_cap entries; historical R1+R2 results remain separate.",
+  "training_scope": "Existing declared host recipes are retained, including different host learning rates and Adam betas. No claim of one universal numerical optimizer preset.",
+  "source_sha256": {
+    "reports/transfer_suite/formulations/build.py": "266da89f2758bd7e5ada44325a202eb1a160264a872f5a0d0da3fb62fd1255c4",
+    "benchmarks/transfer_suite/formulations.py": "d7876206aeb74bd5e3ea00f708ae8ab2a136788bf863c8cea3504a703bfefdd8"
+  }
+}
