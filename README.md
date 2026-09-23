@@ -54,6 +54,18 @@ CI tests Python 3.10–3.12 and builds installable distributions. See
 
 ## Use in your PyTorch project
 
+Train and fly a **fast Lunar lander** from scratch with one command:
+
+```bash
+uv run --extra lunar python -u examples/fast_lander.py
+```
+
+The command gathers expert flights, trains a world model and RpGAN controllers,
+extracts successful slow/fast trajectories, selects a faster policy on validation
+worlds, and exports real simulator GIFs plus a local demo page. It includes a
+named Lunar variant with downward thrust. See the [fast-lander guide](docs/fast-lander.md)
+for the measured results, artifacts, and success/speed gate.
+
 For an unconditional GAN, supply your networks and real batches; the optional
 trainer applies the recipe's optimizer settings, particle regularization,
 learning-rate decay and EMA. `Recipe` holds hyperparameters and small component

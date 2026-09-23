@@ -1,0 +1,677 @@
+[
+  {
+    "checkpoint": "fast_round_1.pt",
+    "metrics": {
+      "episodes": 20,
+      "success_count": 20,
+      "success_rate": 1.0,
+      "mean_steps": 184.1,
+      "mean_success_steps": 184.1,
+      "mean_contact_step": 131.8,
+      "mean_return": 283.54439331335436,
+      "outcomes": {
+        "successful_landing": 20,
+        "crash": 0,
+        "out_of_bounds": 0,
+        "time_limit": 0,
+        "other_termination": 0
+      },
+      "matched_landings": 19,
+      "paired_speedup": 1.1493728620296466,
+      "fast_wins": 19,
+      "median_steps_saved": 22.0
+    },
+    "episodes": [
+      {
+        "seed": 34000,
+        "outcome": "successful_landing",
+        "steps": 215,
+        "contact_step": 151,
+        "return_": 300.84049169671465,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 300.84049169671465,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34001,
+        "outcome": "successful_landing",
+        "steps": 199,
+        "contact_step": 135,
+        "return_": 280.4577949358846,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 280.4577949358846,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34002,
+        "outcome": "successful_landing",
+        "steps": 155,
+        "contact_step": 121,
+        "return_": 280.4102558751408,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 280.4102558751408,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34003,
+        "outcome": "successful_landing",
+        "steps": 173,
+        "contact_step": 124,
+        "return_": 266.2991081990849,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 266.2991081990849,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34004,
+        "outcome": "successful_landing",
+        "steps": 195,
+        "contact_step": 146,
+        "return_": 286.16153573466585,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 286.16153573466585,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34005,
+        "outcome": "successful_landing",
+        "steps": 169,
+        "contact_step": 128,
+        "return_": 264.95178808781634,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 264.95178808781634,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34006,
+        "outcome": "successful_landing",
+        "steps": 175,
+        "contact_step": 119,
+        "return_": 291.43936714900724,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 291.43936714900724,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34007,
+        "outcome": "successful_landing",
+        "steps": 157,
+        "contact_step": 115,
+        "return_": 264.6434609192229,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 264.6434609192229,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34008,
+        "outcome": "successful_landing",
+        "steps": 200,
+        "contact_step": 133,
+        "return_": 273.2600417943984,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 273.2600417943984,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34009,
+        "outcome": "successful_landing",
+        "steps": 178,
+        "contact_step": 124,
+        "return_": 294.9386909438156,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 294.9386909438156,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34010,
+        "outcome": "successful_landing",
+        "steps": 182,
+        "contact_step": 123,
+        "return_": 298.41732006238703,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 298.41732006238703,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34011,
+        "outcome": "successful_landing",
+        "steps": 168,
+        "contact_step": 117,
+        "return_": 284.93946905700216,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 284.93946905700216,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34012,
+        "outcome": "successful_landing",
+        "steps": 206,
+        "contact_step": 158,
+        "return_": 296.88029960297666,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 296.88029960297666,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34013,
+        "outcome": "successful_landing",
+        "steps": 179,
+        "contact_step": 132,
+        "return_": 281.3256709229633,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 281.3256709229633,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34014,
+        "outcome": "successful_landing",
+        "steps": 174,
+        "contact_step": 118,
+        "return_": 281.7082867322705,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 281.7082867322705,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34015,
+        "outcome": "successful_landing",
+        "steps": 236,
+        "contact_step": 168,
+        "return_": 311.8519274381714,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 311.8519274381714,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34016,
+        "outcome": "successful_landing",
+        "steps": 174,
+        "contact_step": 134,
+        "return_": 267.886920624505,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 267.886920624505,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34017,
+        "outcome": "successful_landing",
+        "steps": 219,
+        "contact_step": 154,
+        "return_": 293.8516518025938,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 293.8516518025938,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34018,
+        "outcome": "successful_landing",
+        "steps": 156,
+        "contact_step": 116,
+        "return_": 272.7114346186966,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 272.7114346186966,
+        "controller": "fast round 1"
+      },
+      {
+        "seed": 34019,
+        "outcome": "successful_landing",
+        "steps": 172,
+        "contact_step": 120,
+        "return_": 277.91235006976956,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 277.91235006976956,
+        "controller": "fast round 1"
+      }
+    ]
+  },
+  {
+    "checkpoint": "fast_round_2.pt",
+    "metrics": {
+      "episodes": 20,
+      "success_count": 20,
+      "success_rate": 1.0,
+      "mean_steps": 186.0,
+      "mean_success_steps": 186.0,
+      "mean_contact_step": 132.25,
+      "mean_return": 283.8488969435629,
+      "outcomes": {
+        "successful_landing": 20,
+        "crash": 0,
+        "out_of_bounds": 0,
+        "time_limit": 0,
+        "other_termination": 0
+      },
+      "matched_landings": 19,
+      "paired_speedup": 1.1373765867418901,
+      "fast_wins": 19,
+      "median_steps_saved": 24.0
+    },
+    "episodes": [
+      {
+        "seed": 34000,
+        "outcome": "successful_landing",
+        "steps": 222,
+        "contact_step": 151,
+        "return_": 301.7428607953815,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 301.7428607953815,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34001,
+        "outcome": "successful_landing",
+        "steps": 201,
+        "contact_step": 135,
+        "return_": 280.3531024497156,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 280.3531024497156,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34002,
+        "outcome": "successful_landing",
+        "steps": 157,
+        "contact_step": 121,
+        "return_": 280.42675391116325,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 280.42675391116325,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34003,
+        "outcome": "successful_landing",
+        "steps": 176,
+        "contact_step": 124,
+        "return_": 266.2034206985593,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 266.2034206985593,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34004,
+        "outcome": "successful_landing",
+        "steps": 203,
+        "contact_step": 147,
+        "return_": 287.13512267291003,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 287.13512267291003,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34005,
+        "outcome": "successful_landing",
+        "steps": 167,
+        "contact_step": 129,
+        "return_": 265.86190606821367,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 265.86190606821367,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34006,
+        "outcome": "successful_landing",
+        "steps": 171,
+        "contact_step": 119,
+        "return_": 292.9007946872774,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 292.9007946872774,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34007,
+        "outcome": "successful_landing",
+        "steps": 161,
+        "contact_step": 115,
+        "return_": 263.1731180485353,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 263.1731180485353,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34008,
+        "outcome": "successful_landing",
+        "steps": 202,
+        "contact_step": 132,
+        "return_": 273.08092699939624,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 273.08092699939624,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34009,
+        "outcome": "successful_landing",
+        "steps": 178,
+        "contact_step": 124,
+        "return_": 295.14972590778143,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 295.14972590778143,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34010,
+        "outcome": "successful_landing",
+        "steps": 181,
+        "contact_step": 123,
+        "return_": 298.42547344676143,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 298.42547344676143,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34011,
+        "outcome": "successful_landing",
+        "steps": 166,
+        "contact_step": 119,
+        "return_": 285.127548543329,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 285.127548543329,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34012,
+        "outcome": "successful_landing",
+        "steps": 211,
+        "contact_step": 160,
+        "return_": 296.3453525671865,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 296.3453525671865,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34013,
+        "outcome": "successful_landing",
+        "steps": 184,
+        "contact_step": 133,
+        "return_": 280.6690355837137,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 280.6690355837137,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34014,
+        "outcome": "successful_landing",
+        "steps": 171,
+        "contact_step": 118,
+        "return_": 283.07197365509694,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 283.07197365509694,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34015,
+        "outcome": "successful_landing",
+        "steps": 234,
+        "contact_step": 166,
+        "return_": 312.9785178806452,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 312.9785178806452,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34016,
+        "outcome": "successful_landing",
+        "steps": 175,
+        "contact_step": 135,
+        "return_": 268.1945394600722,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 268.1945394600722,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34017,
+        "outcome": "successful_landing",
+        "steps": 227,
+        "contact_step": 156,
+        "return_": 295.3320178384513,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 295.3320178384513,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34018,
+        "outcome": "successful_landing",
+        "steps": 158,
+        "contact_step": 118,
+        "return_": 272.76117107563306,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 272.76117107563306,
+        "controller": "fast round 2"
+      },
+      {
+        "seed": 34019,
+        "outcome": "successful_landing",
+        "steps": 175,
+        "contact_step": 120,
+        "return_": 278.0445765814355,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 278.0445765814355,
+        "controller": "fast round 2"
+      }
+    ]
+  },
+  {
+    "checkpoint": "fast_round_3.pt",
+    "metrics": {
+      "episodes": 20,
+      "success_count": 20,
+      "success_rate": 1.0,
+      "mean_steps": 186.75,
+      "mean_success_steps": 186.75,
+      "mean_contact_step": 132.3,
+      "mean_return": 283.56234982505833,
+      "outcomes": {
+        "successful_landing": 20,
+        "crash": 0,
+        "out_of_bounds": 0,
+        "time_limit": 0,
+        "other_termination": 0
+      },
+      "matched_landings": 19,
+      "paired_speedup": 1.1322662173546756,
+      "fast_wins": 19,
+      "median_steps_saved": 22.0
+    },
+    "episodes": [
+      {
+        "seed": 34000,
+        "outcome": "successful_landing",
+        "steps": 220,
+        "contact_step": 151,
+        "return_": 302.02953443457784,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 302.02953443457784,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34001,
+        "outcome": "successful_landing",
+        "steps": 204,
+        "contact_step": 136,
+        "return_": 280.0377087516274,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 280.0377087516274,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34002,
+        "outcome": "successful_landing",
+        "steps": 157,
+        "contact_step": 121,
+        "return_": 280.32609458833156,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 280.32609458833156,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34003,
+        "outcome": "successful_landing",
+        "steps": 177,
+        "contact_step": 124,
+        "return_": 265.7775284993836,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 265.7775284993836,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34004,
+        "outcome": "successful_landing",
+        "steps": 202,
+        "contact_step": 147,
+        "return_": 287.2199668989241,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 287.2199668989241,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34005,
+        "outcome": "successful_landing",
+        "steps": 179,
+        "contact_step": 129,
+        "return_": 265.7019622021353,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 265.7019622021353,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34006,
+        "outcome": "successful_landing",
+        "steps": 176,
+        "contact_step": 120,
+        "return_": 291.74225852154143,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 291.74225852154143,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34007,
+        "outcome": "successful_landing",
+        "steps": 163,
+        "contact_step": 116,
+        "return_": 263.0453320110681,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 263.0453320110681,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34008,
+        "outcome": "successful_landing",
+        "steps": 199,
+        "contact_step": 132,
+        "return_": 273.99163844584564,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 273.99163844584564,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34009,
+        "outcome": "successful_landing",
+        "steps": 181,
+        "contact_step": 123,
+        "return_": 295.05681998254636,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 295.05681998254636,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34010,
+        "outcome": "successful_landing",
+        "steps": 177,
+        "contact_step": 123,
+        "return_": 297.7356422171289,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 297.7356422171289,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34011,
+        "outcome": "successful_landing",
+        "steps": 160,
+        "contact_step": 119,
+        "return_": 284.05441365629605,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 284.05441365629605,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34012,
+        "outcome": "successful_landing",
+        "steps": 218,
+        "contact_step": 160,
+        "return_": 298.0036878647031,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 298.0036878647031,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34013,
+        "outcome": "successful_landing",
+        "steps": 181,
+        "contact_step": 132,
+        "return_": 279.9731818346406,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 279.9731818346406,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34014,
+        "outcome": "successful_landing",
+        "steps": 178,
+        "contact_step": 119,
+        "return_": 282.1257974596439,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 282.1257974596439,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34015,
+        "outcome": "successful_landing",
+        "steps": 230,
+        "contact_step": 166,
+        "return_": 311.63806500956116,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 311.63806500956116,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34016,
+        "outcome": "successful_landing",
+        "steps": 174,
+        "contact_step": 136,
+        "return_": 267.58404527581365,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 267.58404527581365,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34017,
+        "outcome": "successful_landing",
+        "steps": 230,
+        "contact_step": 155,
+        "return_": 294.5307760411172,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 294.5307760411172,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34018,
+        "outcome": "successful_landing",
+        "steps": 156,
+        "contact_step": 117,
+        "return_": 272.7051418625408,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 272.7051418625408,
+        "controller": "fast round 3"
+      },
+      {
+        "seed": 34019,
+        "outcome": "successful_landing",
+        "steps": 173,
+        "contact_step": 120,
+        "return_": 277.9674009437404,
+        "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+        "return": 277.9674009437404,
+        "controller": "fast round 3"
+      }
+    ]
+  }
+]
