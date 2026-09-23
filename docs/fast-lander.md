@@ -20,8 +20,10 @@ leaderboard. Follow another terminal with
 
 The [recorded full run](../reports/lunar_fast/README.md) landed **29/30** held-out
 test worlds with the fast policy versus **28/30** with the learned slow policy.
-Fast won all 27 matched successful flights, with **1.172× paired speedup** and
-30 median steps saved. The entire run took about one minute on this host.
+Fast won all 27 matched successful flights, with **1.180× paired speedup** and
+32 median steps saved. The entire run took about 73 seconds on this host.
+Neither policy crashed or flew away; the three failed flights settled with
+incomplete leg contact and still count as failures under the strict gate.
 These measurements use the declared variant below, not stock Lunar.
 
 ![Learned slow and fast flights, same world and clock](../reports/lunar_fast/comparison.gif)

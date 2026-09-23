@@ -1,14 +1,18 @@
 {
   "train": {
-    "next_state_mse": 0.0013750294456258416,
-    "next_state_mae": 0.007056879810988903,
-    "next_state_normalized_mse": 0.33664828538894653
+    "next_state_mse": 0.0011896411888301373,
+    "next_state_mae": 0.005965115036815405,
+    "next_state_normalized_mse": 0.3236493766307831
   },
   "validation": {
-    "next_state_mse": 0.002236634725704789,
-    "next_state_mae": 0.008655834943056107,
-    "next_state_normalized_mse": 0.4739644527435303
+    "next_state_mse": 0.002215007785707712,
+    "next_state_mae": 0.007784317247569561,
+    "next_state_normalized_mse": 0.5175604820251465
   },
   "updates": 2500,
-  "records": 31671
+  "records": 37143,
+  "action_features": "engine_power",
+  "weight_kind": "live",
+  "expert_transitions": 31671,
+  "counterfactual_transitions": 5472
 }

@@ -63,8 +63,13 @@ slow policy landed 20/20 validation and won all 20 same-reset paired flights
 at 1.143× speed. At 2,400 slow updates, high/rising false upward commands
 rose to 39/42 and one training reset failed even though validation remained
 20/20. This supports the bounded 1,200/400 schedule and continued gate-based
-selection. It does not establish performance on the untouched `94000:94030`
-test cohort; that full result is pending.
+selection. The subsequent [full calibrated run](../reports/lunar_fast/report.json)
+evaluated the previously untouched `94000:94030` cohort after validation
+selection: slow landed 28/30, fast 29/30, and fast won all 27 both-land
+paired flights at 1.180× speed. The three non-successful outcomes were
+`incomplete_landing` (two slow, one fast), with zero classified crash or
+flyaway. This supports the bounded schedule on that cohort while leaving
+one fast incomplete landing and the 2,400-update drift unresolved.
 
 The original outcome classifier also conflated some sleeping, incomplete
 contacts with a generic crash. Current reports distinguish

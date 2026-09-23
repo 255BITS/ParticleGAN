@@ -3,9 +3,9 @@
 All development comparisons below reuse the fixed expert training cohort
 `24000:24096` and controller validation cohort `34000:34020` in the declared
 bidirectional Box2D variant. The old `84000:84030` test result is now a
-**diagnostic**, because it was inspected before the calibration fix. The next
-full pipeline run predeclares the untouched `94000:94030` test cohort; its
-landing and speed results remain pending. [Failure analysis](lunar-failure-analysis.md)
+**diagnostic**, because it was inspected before the calibration fix. The new
+full pipeline evaluated its predeclared, previously untouched `94000:94030`
+test cohort once after validation selection. [Failure analysis](lunar-failure-analysis.md)
 explains the mechanism and limits of these measurements.
 
 The first pilot exposed an actuator problem: any positive main command ignites
@@ -61,7 +61,25 @@ upward engine on 39/42 high/rising training states where the expert kept it
 off and lost one training-world landing. More adversarial updates are therefore
 not an established durability improvement. The bounded 1,200/400 budget is
 supported by the fixed-data audit; it is **not** a claim that 2,400 updates
-are stable or that the pending test set will pass.
+are stable.
+
+## Calibrated single-command result
+
+The [calibrated report](../reports/lunar_fast/report.json) records the
+predeclared `94000:94030` test cohort after selecting the slow-1,200 →
+fast-400 path on validation. Both controllers landed 20/20 validation worlds;
+mean successful flight time was 210.80 steps for slow and 184.40 for fast.
+On the new test cohort, slow landed **28/30** at 217.43 mean successful steps
+and fast landed **29/30** at 186.45. Both landed on 27 identical resets;
+fast finished sooner on all 27, with a 32-step median saving and **1.180×**
+paired speedup. The remaining outcomes were two slow and one fast
+`incomplete_landing`; there were no classified crashes or flyaways.
+
+This passes the declared success and speed gate on the new cohort. The old
+84000 and new 94000 results come from different resets and different policy
+versions, so their numerical difference is **not** a paired before/after
+improvement estimate. A 29/30 result also leaves one observed incomplete
+landing; it does not establish universal reliability.
 
 Earlier scratch recipe metadata showed `ema_decay=0.995`, but none of these
 training loops ever updated or selected EMA weights. The live policy weights
