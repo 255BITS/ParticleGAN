@@ -58,14 +58,18 @@ tree; public contracts and default promotion are the main concerns.
    supported combinations have a deliberate contract. Do not silently change
    the formula: that would invalidate the recorded winner.
 
-5. **Tracked research failure, with independently tested gate logic.**
+5. **Platform-sensitive research gate, with independently tested reporting.**
    The native-2D toy expects fixed-arm EMA action MSE <= .18 but produces
    .248968631. Replaying exact original source `c7e8a73` gives the same result;
-   the integration's GitHub matrix reproduces it on Python 3.10, 3.11 and 3.12.
-   The historical convergence assertion is now a strict expected failure,
-   separate from protocol, finite-value, threshold-boundary and CLI tests.
-   Thresholds are unchanged and the benchmark CLI still fails this numerical
-   gate. This repairs test reporting, not the unmet convergence claim.
+   the initial GitHub matrix reproduces it on Python 3.10, 3.11 and 3.12.
+   Later runners both pass and fail the same gate, including Python 3.11 with
+   the same PyTorch build. The convergence assertion is now explicitly opt-in
+   with `RUN_PARTICLE_NATIVE_RESEARCH_GATE=1`, separate from protocol,
+   finite-value, threshold-boundary and CLI tests. Thresholds are unchanged
+   and the benchmark CLI still fails whenever they are unmet. Skipping this
+   platform-sensitive research acceptance check does not establish convergence.
+   Archived shared-default metrics separately allow float32 drift of
+   `atol=1e-6, rtol=1e-5`; schedule steps and actions remain exact.
 
 6. **Resolved: documentation of the trainer boundary.**
    `GANTrainer` remains a separately constructed convenience for scalar,
@@ -92,9 +96,9 @@ status alone is not a reason to merge them into `develop`.
 
 ## Current validation
 
-- CPU suite: **706 passed, 5 skipped, 1 strict expected failure**, plus 27
-  passing subtests, in 70.27 seconds. The expected failure is the unmet
-  native-2D convergence target discussed above.
+- CPU suite: **706 passed, 6 skipped**, plus 27 passing subtests, in 70.05
+  seconds. One skip is the opt-in native-2D convergence target discussed above;
+  the other five require CUDA or explicitly enabled real-data integration.
 - Installed wheel: explicit trainer quickstart, named AE/VAE reconstruction
   examples and model-family selection pass outside the checkout.
 - Named recipe tests verify shared current hyperparameters, explicit overrides,
