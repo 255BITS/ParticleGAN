@@ -1,0 +1,19 @@
+{
+  "arm": "baseline_transpose12",
+  "card": {
+    "changes": {},
+    "name": "baseline_transpose12",
+    "scope": "published image path (transpose width 12)"
+  },
+  "confirmed_step": null,
+  "hq": 0.0,
+  "mean_rmse": 0.16536885499954224,
+  "modes": 0,
+  "seconds": 5.886945320060477,
+  "solv_quality": [
+    false,
+    0,
+    0.0
+  ],
+  "verdict": "FAIL"
+}
