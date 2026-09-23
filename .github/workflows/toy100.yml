@@ -1,13 +1,19 @@
-name: Toy100 trained gate
+name: Shared-recipe 22-toy trained gate
 
 on:
   pull_request:
     paths:
       - "benchmarks/toy100/**"
+      - "benchmarks/toy_suite.py"
+      - "benchmarks/transfer_suite/**"
+      - "benchmarks/locked_shared/**"
       - "configs/toy100/**"
       - "particlegan/**"
       - "lib/toy_models.py"
       - "tests/test_toy100*.py"
+      - "tests/test_toy_suite*.py"
+      - "tests/test_legacy_noise*.py"
+      - "tests/test_legacy_recipe_schedule.py"
       - ".github/workflows/toy100.yml"
       - "pyproject.toml"
   workflow_dispatch:
@@ -17,9 +23,9 @@ permissions:
 
 jobs:
   trained-gate:
-    name: CPU / Python 3.11 / all 100-Gaussian problems
+    name: CPU / Python 3.11 / one recipe across all 22 toys
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     env:
       CUDA_VISIBLE_DEVICES: ""
       OMP_NUM_THREADS: "1"
@@ -39,19 +45,19 @@ jobs:
         run: python -m pip install -e '.[dev,experiments]'
       - name: Validate dependencies
         run: python -m pip check
-      - name: Check toy100 protocol and runner
-        run: python -m pytest -q tests/test_toy100*.py
-      - name: Train and gate all three problems
+      - name: Check accuracy, common-recipe protocol, and host adapters
+        run: python -m pytest -q tests/test_toy100*.py tests/test_toy_suite*.py tests/test_legacy_noise*.py tests/test_legacy_recipe_schedule.py
+      - name: Train and gate all 22 problems under one candidate
         shell: bash
         run: |
           set -o pipefail
-          python -u -m benchmarks.toy100 run --output artifacts/toy100-ci --no-render 2>&1 | tee toy100-ci.log
+          python -u -m benchmarks.toy_suite run --config configs/toy100/shared_candidate.json --output artifacts/toy-suite-ci 2>&1 | tee toy-suite-ci.log
       - name: Upload gate evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: toy100-trained-gate
+          name: common22-trained-gate
           path: |
-            toy100-ci.log
-            artifacts/toy100-ci/
+            toy-suite-ci.log
+            artifacts/toy-suite-ci/
           if-no-files-found: warn

@@ -8,10 +8,14 @@ Each host keeps its declared architecture, data, batch, prior size, budget,
 evaluation schedule, and thresholds. The separate installed-wheel public v3
 replay is a control, not a substitute for testing the candidate recipe.
 
-The control passes **19/19** on this branch after the optional custom-host
-noise adapters were added: summary (raw `artifacts/toy100-accuracy/compatibility/current-branch-public19/summary.json`).
-Raw `artifacts/` evidence is retained in the local workspace and is not linked from GitHub. Its default-off adapter behavior is also checked by exact zero-noise parity
-tests. Candidate runs use seed 0 and one CPU thread, with no seed search or
+The final current-branch installed-wheel control passes **19/19** after the
+optional custom-host noise adapters and exact candidate-schedule bridge were
+added. Its raw summary is
+`artifacts/toy100-accuracy/compatibility/final-branch-public19/summary.json`;
+strict episode regrading independently reports **PASS 19/19**.
+Raw `artifacts/` evidence is retained in the local workspace and is not linked
+from GitHub. Exact zero-noise parity tests also check the adapters' default
+behavior. Candidate runs use seed 0 and one CPU thread, with no seed search or
 changes to the historical gates.
 
 | Shared candidate | Frozen live observations | Strict replay | Finding |
@@ -21,6 +25,7 @@ changes to the historical gates.
 | 40% LR anneal; output noise warms over first 20% of host budget | 16/19 (raw `artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm02-adapted-all19/summary.json`) | **Invalid common-recipe evidence** | Same custom-host LR schedule mismatch; observed count is diagnostic only. |
 | Same 40% LR anneal and 20% output warmup, with the legacy LR bridge corrected | 14/19 (raw `artifacts/toy100-accuracy/compatibility/exact-schedule-warm02-all19/summary.json`) | Valid FAIL | Trajectory passes; unused-token, mode-hold, unequal-width, anisotropic, and four-bar image fail. |
 | β₂ 0.999 and 60% LR anneal; 20% output warmup; input noise ends by 10% | 15/19 (raw `artifacts/toy100-accuracy/compatibility/exact-beta999-a6-all19/summary.json`) | Valid FAIL | Trajectory, unequal-width, and anisotropic pass; mode-hold, overlap, stripes, and blobs fail. |
+| Same β₂ 0.999 core; prior LR multiplier 3; input noise ends by 20% | 16/19 (raw `artifacts/toy100-accuracy/compatibility/exact-beta999-priorlr3-end02-all19/summary.json`) | Valid FAIL | Mode-hold and all four images pass; trajectory sustained identity, unequal-mass rare covariance, and overlap terminal stability fail. |
 
 The corrected 20%-warmup result demonstrates why an isolated trajectory repair
 is not enough for the common-recipe claim. Bounded 5% and 10% warmup screens
@@ -48,6 +53,7 @@ python -m benchmarks.toy_suite regrade --output PATH_TO_NEW_OUTPUT
 ```
 
 The independent regrader reads and hashes every compressed transfer episode,
+the saved source archive, copied candidate config, and noise implementation;
 recomputes frozen live verdicts, checks all 24 observations and complete update
 traces, checks the noise schedule and receipts, and rejects mixed recipe fields
 or noise settings. The `compatibility.json` and `compatibility.md` files under

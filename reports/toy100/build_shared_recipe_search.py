@@ -23,7 +23,6 @@ from benchmarks.transfer_suite.compare_defaults import plan
 ARTIFACTS = ROOT / "artifacts/toy100-accuracy/compatibility"
 HERE = Path(__file__).resolve().parent
 ALL_NAMES = tuple(job["spec"]["name"] for job in plan())
-CONTROLS = {"base19", "current-branch-public19"}
 
 
 def _digest(path: Path) -> str:
@@ -61,7 +60,7 @@ def build():
         summary = json.loads(summary_path.read_text())
         protocol = json.loads((directory / "protocol.json").read_text())
         names = summary.get("tasks") or [row["name"] for row in summary["cases"]]
-        control = directory.name in CONTROLS
+        control = protocol["version"] == "public-default-verification-v1"
         recipe = (summary.get("global_recipe") or protocol.get("base_get_recipe")
                   or protocol.get("global_recipe"))
         noise = summary.get("noise") or protocol.get("noise")

@@ -22,6 +22,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import tarfile
 
 from benchmarks.toy100.accuracy_gate import evaluate_suite as accuracy_suite
 from benchmarks.toy100.gate import evaluate_suite as coverage_suite
@@ -133,6 +134,42 @@ def _check_actions(record: dict, base: Recipe, noise: dict | None):
                 raise ValueError(f"trainer output warmup differs: {name}.{completed}")
 
 
+def _verify_saved_provenance(directory: Path, protocol: dict, *, candidate: bool):
+    """Bind the saved executable source and declared config to their hashes."""
+    source_hashes = dict(protocol["source_sha256"])
+    noise_name = "benchmarks/toy100/models.py"
+    if candidate:
+        expected_noise_hash = source_hashes.pop(noise_name)
+        if (expected_noise_hash != protocol["noise_source_sha256"]
+                or hashlib.sha256((directory / "noise_source.py").read_bytes()).hexdigest()
+                != expected_noise_hash):
+            raise ValueError("saved noise source differs from protocol hash")
+        config_name = Path(protocol["config_file"])
+        if config_name.is_absolute() or len(config_name.parts) != 1:
+            raise ValueError("candidate config path escapes evidence directory")
+        config_bytes = (directory / config_name).read_bytes()
+        if hashlib.sha256(config_bytes).hexdigest() != protocol["config_sha256"]:
+            raise ValueError("saved candidate config differs from protocol hash")
+        base, noise, overrides = declared_recipe(json.loads(config_bytes))
+        declared_noise = {**protocol["noise"],
+                          "output_noise_warmup": protocol["noise"].get(
+                              "output_noise_warmup", 0.0)}
+        if (_json_value(base.to_dict()) != protocol["global_recipe"]
+                or noise != declared_noise
+                or overrides != protocol["ignored_toy100_resource_overrides"]):
+            raise ValueError("saved candidate config does not resolve to declared recipe")
+    with tarfile.open(directory / "source.tar.gz", "r:gz") as archive:
+        all_members = archive.getmembers()
+        members = {member.name: member for member in all_members}
+        if len(members) != len(all_members) or set(members) != set(source_hashes):
+            raise ValueError("source archive members differ from protocol manifest")
+        for name, expected_hash in source_hashes.items():
+            member = members[name]
+            stream = archive.extractfile(member) if member.isfile() else None
+            if stream is None or hashlib.sha256(stream.read()).hexdigest() != expected_hash:
+                raise ValueError(f"saved source archive differs: {name}")
+
+
 def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate: bool):
     """Recompute every live verdict from the compressed episode, not the stamp."""
     if not (directory / "protocol.json").is_file():
@@ -140,6 +177,7 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                     cases={}, reason="protocol.json is absent")
     try:
         protocol = _read(directory / "protocol.json")
+        _verify_saved_provenance(directory, protocol, candidate=candidate)
         index = _read(directory / "index.json")
         rows = index["records"]
         names = [row["name"] for row in rows]
@@ -268,6 +306,7 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                     passed=passed, required=len(expected_names), cases=cases,
                     protocol=protocol, reason=None)
     except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError,
+            tarfile.TarError,
             gzip.BadGzipFile, EOFError) as error:
         return dict(status="INVALID", passed=0, required=len(expected_names),
                     cases={}, reason=str(error))

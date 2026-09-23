@@ -5,8 +5,10 @@ from __future__ import annotations
 from copy import deepcopy
 import gzip
 import hashlib
+import io
 import json
 import math
+import tarfile
 
 import pytest
 
@@ -30,6 +32,11 @@ def _write_candidate_episode(directory, mutate=lambda record: None):
     recipe = base.to_dict()
     noise = dict(output_noise_std=0.029, input_noise_std=0.5,
                  input_noise_anneal_end=0.1, output_noise_warmup=0.2)
+    source_bytes = b"frozen benchmark source"
+    noise_source_bytes = b"frozen noise source"
+    source_hashes = dict(frozen=hashlib.sha256(source_bytes).hexdigest(),
+                         **{"benchmarks/toy100/models.py": hashlib.sha256(
+                             noise_source_bytes).hexdigest()})
     result = dict(
         observations=[dict(step=math.ceil(i * steps / 24)) for i in range(1, 25)],
         actions=[dict(
@@ -50,7 +57,7 @@ def _write_candidate_episode(directory, mutate=lambda record: None):
         name=spec["name"], original_spec=deepcopy(job["spec"]), spec=spec,
         discriminator_variant=variant,
         host_recipe=host_recipe(base, spec).to_dict(),
-        source_sha256={"frozen": "digest"}, recipe=deepcopy(recipe), noise=deepcopy(noise),
+        source_sha256=source_hashes, recipe=deepcopy(recipe), noise=deepcopy(noise),
         applied=[dict(role=role, lr=base.lr * multiplier, betas=list(base.betas),
                       parameters=1, optimizer="Adam")
                  for role, multiplier in (("g", 1), ("prior", base.prior_lr_mult),
@@ -69,8 +76,22 @@ def _write_candidate_episode(directory, mutate=lambda record: None):
     artifact = "episodes/vector_two_broad.json.gz"
     raw = (json.dumps(record, sort_keys=True) + "\n").encode()
     (directory / artifact).write_bytes(gzip.compress(raw, mtime=0))
+    config_bytes = (json.dumps(dict(
+        name="gan_v3", output_noise_std=0.029, input_noise_std=0.5,
+        input_noise_anneal_end=0.1, output_noise_warmup=0.2,
+    )) + "\n").encode()
+    (directory / "candidate.json").write_bytes(config_bytes)
+    (directory / "noise_source.py").write_bytes(noise_source_bytes)
+    with tarfile.open(directory / "source.tar.gz", "w:gz") as archive:
+        member = tarfile.TarInfo("frozen")
+        member.size = len(source_bytes)
+        archive.addfile(member, io.BytesIO(source_bytes))
     (directory / "protocol.json").write_text(json.dumps(dict(
-        source_sha256={"frozen": "digest"}, global_recipe=recipe, noise=noise,
+        source_sha256=source_hashes, global_recipe=recipe, noise=noise,
+        noise_source_sha256=source_hashes["benchmarks/toy100/models.py"],
+        config_file="candidate.json",
+        config_sha256=hashlib.sha256(config_bytes).hexdigest(),
+        ignored_toy100_resource_overrides={},
         jobs=[job], frozen_discriminators=profile["discriminators"],
     )))
     (directory / "index.json").write_text(json.dumps(dict(records=[dict(
@@ -108,6 +129,69 @@ def test_candidate_episode_rejects_mixed_recipe_or_forged_noise(
     grade = toy_suite._episode_rows(tmp_path / "candidate", (name,), candidate=True)
     assert grade["status"] == "INVALID"
     assert expected in grade["reason"]
+
+
+@pytest.mark.parametrize("file_name,expected", [
+    ("candidate.json", "saved candidate config differs"),
+    ("noise_source.py", "saved noise source differs"),
+    ("source.tar.gz", "saved source archive differs"),
+])
+def test_candidate_episode_binds_saved_config_and_sources(
+    tmp_path, monkeypatch, file_name, expected,
+):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory)
+    assert toy_suite._episode_rows(directory, (name,), candidate=True)["status"] == "PASS"
+    path = directory / file_name
+    if file_name == "source.tar.gz":
+        with tarfile.open(path, "w:gz") as archive:
+            payload = b"altered benchmark source"
+            member = tarfile.TarInfo("frozen")
+            member.size = len(payload)
+            archive.addfile(member, io.BytesIO(payload))
+    else:
+        path.write_bytes(b"forged source or config")
+    grade = toy_suite._episode_rows(directory, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert expected in grade["reason"]
+
+
+def test_candidate_episode_rejects_omitted_nonzero_output_warmup(
+    tmp_path, monkeypatch,
+):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory)
+    protocol = json.loads((directory / "protocol.json").read_text())
+    protocol["noise"].pop("output_noise_warmup")
+    (directory / "protocol.json").write_text(json.dumps(protocol))
+    grade = toy_suite._episode_rows(directory, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert "saved candidate config does not resolve to declared recipe" in grade["reason"]
+
+
+def test_candidate_episode_rejects_duplicate_source_archive_member(
+    tmp_path, monkeypatch,
+):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory)
+    with tarfile.open(directory / "source.tar.gz", "w:gz") as archive:
+        for _ in range(2):
+            payload = b"frozen benchmark source"
+            member = tarfile.TarInfo("frozen")
+            member.size = len(payload)
+            archive.addfile(member, io.BytesIO(payload))
+    grade = toy_suite._episode_rows(directory, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert "source archive members differ" in grade["reason"]
 
 
 def test_common_22_gate_requires_exact_noise_and_recipe_identity(tmp_path, monkeypatch):

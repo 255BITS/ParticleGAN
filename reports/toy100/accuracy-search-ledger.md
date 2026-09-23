@@ -4,6 +4,14 @@ Every discovered 100-mode trial is retained, including failures and interrupted 
 
 | Run | Steps | Coverage gate | Final modes | HQ | Mass TV | Center / σ | Width bias | Radial KS | Final fidelity |
 |---|---:|---|---:|---:|---:|---:|---:|---:|---|
+| `affine-normal/grid100` | 7000 | FAIL | 96 | 0.9817 | 0.1183 | 0.1891 | -0.0183 | 0.0088 | FAIL |
+| `affine-square-rotated-beta999/rotated100` | 7000 | FAIL | 5 | 0.0874 | 0.2984 | — | — | — | FAIL |
+| `ci-original-coverage/artifacts/toy100-ci/grid100` | 7000 | PASS | 100 | 0.9812 | 0.0835 | 0.6638 | -0.1794 | 0.0258 | FAIL |
+| `ci-original-coverage/artifacts/toy100-ci/rotated100` | 7000 | PASS | 100 | 0.9892 | 0.0545 | 0.1749 | -0.1521 | 0.0634 | FAIL |
+| `ci-original-coverage/artifacts/toy100-ci/staggered100` | 7000 | PASS | 100 | 0.9826 | 0.0750 | 0.2397 | -0.1963 | 0.0740 | FAIL |
+| `fanin-equalized/g-and-d/grid100` | 7000 | FAIL | 100 | 0.9863 | 0.0946 | 0.1679 | 0.0004 | 0.0079 | FAIL |
+| `fanin-equalized/g-and-d-beta999-prior3-end02/grid100` | 7000 | FAIL | 98 | 0.9832 | 0.1264 | 0.1401 | 0.0048 | 0.0104 | FAIL |
+| `fanin-equalized/g-only/grid100` | 7000 | FAIL | 92 | 0.9861 | 0.1637 | 0.1895 | 0.0014 | 0.0092 | FAIL |
 | `root-search/refine/fourier3_batch2048_8k/grid100` | 8000 | PASS | 100 | 0.9885 | 0.0666 | 0.1368 | -0.0442 | 0.0169 | FAIL |
 | `root-search/refine/fourier3_batch2048_floor002/grid100` | 7000 | PASS | 100 | 0.9885 | 0.0651 | 0.1428 | -0.0400 | 0.0144 | FAIL |
 | `root-search/screen/cap2/grid100` | 7000 | FAIL | 100 | 0.9880 | 0.0628 | 0.1371 | 0.0136 | 0.0117 | FAIL |
@@ -25,6 +33,9 @@ Every discovered 100-mode trial is retained, including failures and interrupted 
 | `search-agent/residual-architecture/alpha030_noiseend010_anneal040/grid100` | 7000 | FAIL | 84 | 0.9766 | 0.1833 | — | — | — | FAIL |
 | `search-agent/residual-architecture/alpha030_noiseend010_cap2/grid100` | 7000 | FAIL | 94 | 0.9794 | 0.1116 | 0.1491 | -0.0061 | 0.0061 | FAIL |
 | `search-agent/residual-architecture/alpha050_noiseend010/grid100` | 7000 | FAIL | 88 | 0.9585 | 0.1683 | — | — | — | FAIL |
+| `search-agent/warmup-screen/warm_b2048_f2_beta0999/warm_b2048_f2_beta0999/grid100` | 7000 | FAIL | 54 | 0.8909 | 0.3824 | 0.7265 | -0.0509 | 0.0810 | FAIL |
+| `search-agent/warmup-screen/warm_b2048_f2_beta0999_anneal060/warm_b2048_f2_beta0999_anneal060/grid100` | 7000 | FAIL | 59 | 0.9194 | 0.3687 | 0.6321 | -0.0416 | 0.0506 | FAIL |
+| `search-agent/warmup-screen/warm_b2048_f2_g128_d3/warm_b2048_f2_g128_d3/grid100` | 7000 | FAIL | 85 | 0.9827 | 0.2010 | 0.2729 | 0.0063 | 0.0174 | FAIL |
 | `shared-v3/screen/v3_noise/grid100` | 7000 | FAIL | 80 | 0.8780 | 0.2147 | — | — | — | FAIL |
 | `shared-v3/screen/v3_noise_anneal04/grid100` | 7000 | FAIL | 84 | 0.9631 | 0.1774 | 0.4298 | 0.0916 | 0.0674 | FAIL |
 | `shared-v3/screen/v3_noise_cap2/grid100` | 7000 | FAIL | 93 | 0.9752 | 0.1531 | 0.2520 | 0.0363 | 0.0292 | FAIL |
