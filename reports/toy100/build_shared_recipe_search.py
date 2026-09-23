@@ -62,7 +62,7 @@ def build():
     summary_paths = sorted(ARTIFACTS.glob("*/summary.json"))
     for family in ("network-floor005-nine", "network-floor-bracket-v1",
                    "network-floor-residual-controls-v1",
-                   "network-floor-kappa-bracket-v1"):
+                   "network-floor-kappa-bracket-v1", "promotion-v1"):
         summary_paths += sorted((ARTIFACTS / family).rglob("summary.json"))
     # The learnable-scale experiment is kept beside the fixed-noise searches
     # so its full 19-host replay and the native 100-mode trials share a folder.

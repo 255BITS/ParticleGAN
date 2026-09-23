@@ -32,6 +32,13 @@ Every discovered 100-mode trial is retained, including failures and interrupted 
 | `fanin-equalized/g-only/grid100` | 7000 | FAIL | 92 | 0.9861 | 0.1637 | 0.1895 | 0.0014 | 0.0092 | FAIL |
 | `learnable-broad/grid/grid100` | 7000 | FAIL | 14 | 0.3701 | 0.7188 | — | — | — | FAIL |
 | `learnable-shared/grid/grid100` | 7000 | FAIL | 4 | 0.1037 | 0.6096 | — | — | — | FAIL |
+| `network-floor-native/grid100-run/grid100` | 7000 | PASS | 100 | 0.9827 | 0.0447 | 0.1441 | -0.0387 | 0.0163 | PASS |
+| `network-floor010-native/all3-run/grid100` | 7000 | PASS | 100 | 0.9829 | 0.0447 | 0.1291 | -0.0378 | 0.0166 | PASS |
+| `network-floor010-native/all3-run/rotated100` | 0 | INCOMPLETE | — | — | — | — | — | — | running |
+| `prior-horizon4000/grid100/grid100` | 7000 | PASS | 100 | 0.9830 | 0.0433 | 0.1525 | -0.0279 | 0.0097 | PASS |
+| `production-shared-policy22/toy100/grid100` | 7000 | PASS | 100 | 0.9868 | 0.0435 | 0.1502 | -0.0349 | 0.0130 | PASS |
+| `production-shared-policy22/toy100/rotated100` | 7000 | PASS | 100 | 0.9828 | 0.0471 | 0.1475 | -0.0374 | 0.0146 | PASS |
+| `production-shared-policy22/toy100/staggered100` | 7000 | PASS | 100 | 0.9872 | 0.0512 | 0.1243 | -0.0336 | 0.0152 | PASS |
 | `root-search/refine/fourier3_batch2048_8k/grid100` | 8000 | PASS | 100 | 0.9885 | 0.0666 | 0.1368 | -0.0442 | 0.0169 | FAIL |
 | `root-search/refine/fourier3_batch2048_floor002/grid100` | 7000 | PASS | 100 | 0.9885 | 0.0651 | 0.1428 | -0.0400 | 0.0144 | FAIL |
 | `root-search/screen/cap2/grid100` | 7000 | FAIL | 100 | 0.9880 | 0.0628 | 0.1371 | 0.0136 | 0.0117 | FAIL |

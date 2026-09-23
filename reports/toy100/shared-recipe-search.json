@@ -9043,6 +9043,1260 @@
       }
     },
     {
+      "run": "promotion-v1/beta9975/nine/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 6,
+      "attempted": 9,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 6,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_blobs4",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "trajectory",
+        "img_bars4"
+      ],
+      "passing_tasks": [
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "img_bars4",
+        "img_blobs4"
+      ],
+      "failing_tasks": [
+        "trajectory",
+        "mode_hold",
+        "img_stripes2"
+      ],
+      "recipe": {
+        "name": "residual_escape_shape_v1_beta9975",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.9975
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/beta9975/nine/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/beta9975/nine/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/beta9975/nine/episode/config.json",
+        "config_sha256": "17223b5f1c97e7c43221827da3ff0908d8a5ac6c399d020c50a9af0a3f07c620",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/beta9975/nine/episode/source.tar.gz",
+        "source_archive_sha256": "c7bcaa3dcecb367bcfe4645d13f7235b8228de3c5bdd06d51ac2e997681f342e",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "promotion-v1/beta9975/residual_reference",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "residual_escape_shape_v1_beta9975",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.9975
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/beta9975/residual_reference/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/beta9975/residual_reference/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/beta9975/residual_reference/beta9975.json",
+        "config_sha256": "17223b5f1c97e7c43221827da3ff0908d8a5ac6c399d020c50a9af0a3f07c620",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/beta9975/residual_reference/source.tar.gz",
+        "source_archive_sha256": "28cca7ee09a0a4377aac9a87327536c45878f5d2696736d063bfccb38eefb957",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "promotion-v1/out0285/nine/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 6,
+      "attempted": 9,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 6,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_blobs4",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "trajectory",
+        "img_bars4"
+      ],
+      "passing_tasks": [
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4"
+      ],
+      "failing_tasks": [
+        "trajectory",
+        "mode_hold",
+        "vector_overlap"
+      ],
+      "recipe": {
+        "name": "residual_escape_shape_v1_out0285",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.0285,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0285/nine/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0285/nine/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0285/nine/episode/config.json",
+        "config_sha256": "89547a0ce92936f3cb2f142a99086c50f211f58e16b47e0a1001ecba46758ec1",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0285/nine/episode/source.tar.gz",
+        "source_archive_sha256": "29f4bdb7f0ee88fea58c4ddb94f6779d94f7ab25e1f5b57f18b9439f6422ed90",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "promotion-v1/out0285/residual_reference",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "residual_escape_shape_v1_out0285",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.0285,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0285/residual_reference/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0285/residual_reference/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0285/residual_reference/out0285.json",
+        "config_sha256": "89547a0ce92936f3cb2f142a99086c50f211f58e16b47e0a1001ecba46758ec1",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0285/residual_reference/source.tar.gz",
+        "source_archive_sha256": "cd261ca1405afc9a8e469821c9ef74d4269154a85dbc22e7c3009d58b564994d",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "promotion-v1/out0295/nine/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 4,
+      "attempted": 9,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 4,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_blobs4",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "trajectory",
+        "img_bars4"
+      ],
+      "passing_tasks": [
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "img_bars4",
+        "img_blobs4"
+      ],
+      "failing_tasks": [
+        "trajectory",
+        "mode_hold",
+        "vector_unequal_mass",
+        "vector_overlap",
+        "img_stripes2"
+      ],
+      "recipe": {
+        "name": "residual_escape_shape_v1_out0295",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.0295,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0295/nine/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0295/nine/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0295/nine/episode/config.json",
+        "config_sha256": "3b0f54d8c11b3ea40ebed1e74bef654ec93c8e2107dce3c83b83744b720c6e2a",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0295/nine/episode/source.tar.gz",
+        "source_archive_sha256": "38620a3a902cf8e0ea02de4f8163e04e428c5faf7f81aebcf94766d043c7d29b",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "promotion-v1/out0295/residual_reference",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "residual_escape_shape_v1_out0295",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.0295,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0295/residual_reference/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0295/residual_reference/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0295/residual_reference/out0295.json",
+        "config_sha256": "3b0f54d8c11b3ea40ebed1e74bef654ec93c8e2107dce3c83b83744b720c6e2a",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/out0295/residual_reference/source.tar.gz",
+        "source_archive_sha256": "39f4df61beec911fe12630f97d2e50b0a5c5348e160104d548a25766aadb171d",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "promotion-v1/outwarm015/nine/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 5,
+      "attempted": 9,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 5,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_blobs4",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "trajectory",
+        "img_bars4"
+      ],
+      "passing_tasks": [
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "img_stripes2",
+        "img_blobs4"
+      ],
+      "failing_tasks": [
+        "trajectory",
+        "mode_hold",
+        "vector_overlap",
+        "img_bars4"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_outwarm015",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.15
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm015/nine/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm015/nine/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm015/nine/episode/config.json",
+        "config_sha256": "09ea48e5c2f5c7ccf6df7b1e0cea7e3950f643df014a256422665777262d69ab",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm015/nine/episode/source.tar.gz",
+        "source_archive_sha256": "fadac2c22a2df8719d9a695cf32110823c9aabd693810669ce3d51fd03f8a09a",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "promotion-v1/outwarm015/residual_reference",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "accuracy_network_floor010_outwarm015",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.15
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm015/residual_reference/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm015/residual_reference/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm015/residual_reference/accuracy_network_floor010_outwarm015.json",
+        "config_sha256": "09ea48e5c2f5c7ccf6df7b1e0cea7e3950f643df014a256422665777262d69ab",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm015/residual_reference/source.tar.gz",
+        "source_archive_sha256": "edcafc89d59db505789d6c04bf221f4186bf994ecb462920ce13c901e0858f66",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "promotion-v1/outwarm025/nine/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 4,
+      "attempted": 9,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 4,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_blobs4",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "trajectory",
+        "img_bars4"
+      ],
+      "passing_tasks": [
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "img_bars4",
+        "img_blobs4"
+      ],
+      "failing_tasks": [
+        "trajectory",
+        "mode_hold",
+        "vector_unequal_mass",
+        "vector_overlap",
+        "img_stripes2"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_outwarm025",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.25
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm025/nine/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm025/nine/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm025/nine/episode/config.json",
+        "config_sha256": "3e69de25fa13ebfcd17acf352f8ee3b858949686c8e1878c4fe7c4b14eabf559",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm025/nine/episode/source.tar.gz",
+        "source_archive_sha256": "ab9e2cf2686bcbfa55def6b5cc2b838a7ca83c43a02512ef8f71682294513032",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "promotion-v1/outwarm025/residual_reference",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "accuracy_network_floor010_outwarm025",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.25
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm025/residual_reference/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm025/residual_reference/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm025/residual_reference/accuracy_network_floor010_outwarm025.json",
+        "config_sha256": "3e69de25fa13ebfcd17acf352f8ee3b858949686c8e1878c4fe7c4b14eabf559",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/outwarm025/residual_reference/source.tar.gz",
+        "source_archive_sha256": "2b21c596d71d67ba27c29f5c3dbbe4ffa1d2c4b2b233e987d8031b492ce89156",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "promotion-v1/priorreg060/nine/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 5,
+      "attempted": 9,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 5,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_blobs4",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "trajectory",
+        "img_bars4"
+      ],
+      "passing_tasks": [
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "img_bars4",
+        "img_blobs4"
+      ],
+      "failing_tasks": [
+        "trajectory",
+        "mode_hold",
+        "vector_unequal_mass",
+        "img_stripes2"
+      ],
+      "recipe": {
+        "name": "residual_escape_shape_v1_priorreg060",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.06,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/priorreg060/nine/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/priorreg060/nine/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/priorreg060/nine/episode/config.json",
+        "config_sha256": "adc8be17e01bbf12eb231db99bc7afd01e1252e2ac5014440814649696884085",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/priorreg060/nine/episode/source.tar.gz",
+        "source_archive_sha256": "b0b923a2128e8a2ade8e5c4af7f6501183177265fe694a9db1c74f1ac2980f76",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "promotion-v1/priorreg060/residual_reference",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "residual_escape_shape_v1_priorreg060",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.06,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/promotion-v1/priorreg060/residual_reference/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/promotion-v1/priorreg060/residual_reference/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/promotion-v1/priorreg060/residual_reference/priorreg060.json",
+        "config_sha256": "adc8be17e01bbf12eb231db99bc7afd01e1252e2ac5014440814649696884085",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/promotion-v1/priorreg060/residual_reference/source.tar.gz",
+        "source_archive_sha256": "51b5a12a024e7822427e60fec4b269cd8c210f650d9c0780e777971bca26e22b",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
       "run": "learnable-shared/candidate19",
       "kind": "shared candidate screen",
       "observed_live_passes": 13,
