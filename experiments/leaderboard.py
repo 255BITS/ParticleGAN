@@ -61,6 +61,7 @@ Usage:
     python experiments/leaderboard.py
     python experiments/leaderboard.py --runs_dir results/runs \
         --audit_dir results/runs_audit --out_dir results
+    python experiments/leaderboard.py --toy100-output artifacts/toy100/baseline
 """
 
 import argparse
@@ -634,7 +635,7 @@ def write_leaderboard(
     return path, champion
 
 
-def main() -> None:
+def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
         description="Build results/LEADERBOARD.md from the run trees."
     )
@@ -646,13 +647,29 @@ def main() -> None:
         help="Audit run tree (default: <runs_dir>_audit). Absent is fine.",
     )
     parser.add_argument("--out_dir", type=str, default="results")
-    args = parser.parse_args()
+    parser.add_argument("--toy100-output", type=Path,
+                        help="Grade recorded 100-Gaussian toy runs with the new gate")
+    parser.add_argument("--toy100-problem", choices=("grid100", "rotated100", "staggered100"),
+                        help="Scope the toy100 gate to one named deep dive")
+    args = parser.parse_args(argv)
+
+    if args.toy100_output is not None:
+        from benchmarks.toy100.gate import evaluate_suite
+        verdict = evaluate_suite(args.toy100_output, problem=args.toy100_problem)
+        suffix = f"-{args.toy100_problem}" if args.toy100_problem else ""
+        print(f"[toy100] {verdict['status']} "
+              f"({verdict['passed_problems']}/{verdict['required_problems']}); "
+              f"wrote {args.toy100_output / ('leaderboard' + suffix + '.md')}")
+        return 0 if verdict["status"] == "PASS" else 1
+    if args.toy100_problem:
+        parser.error("--toy100-problem requires --toy100-output")
 
     runs_dir = Path(args.runs_dir)
     audit_dir = Path(args.audit_dir) if args.audit_dir else None
     path, _ = write_leaderboard(runs_dir, Path(args.out_dir), audit_dir)
     print(f"[leaderboard] wrote {path}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

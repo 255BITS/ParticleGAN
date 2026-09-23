@@ -28,6 +28,18 @@ One illustrative run of `get_recipe("gan")` with the example's Fourier MLP:
 **99/100 modes, 75.1% within 3σ after 7,000 updates** (EMA, seed 1234).
 [Metrics, limitations, and reproduction](reports/readme-100gaussians/README.md).
 
+The [100-mode convergence gate](docs/toy100.md) tests square, rotated, and
+staggered Gaussian grids together, with step-zero snapshots, live/EMA traces,
+and explicit coverage, balance, and spread checks. Run the current-default
+failure reproduction with:
+
+```bash
+python -u -m benchmarks.toy100 run \
+  --config configs/toy100/baseline.json --output artifacts/toy100/baseline
+```
+
+The command exits nonzero when any problem misses the numerical gate.
+
 ## Installation
 
 Requires Python 3.10+ and PyTorch. Install from PyPI:
