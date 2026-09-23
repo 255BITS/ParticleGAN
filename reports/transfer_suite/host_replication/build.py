@@ -100,6 +100,10 @@ def render(report):
              '(the rare-mode winner by 3.7e-6 at step 50); differences then amplify. '
              f"{report['trial_passes']}/{report['trials']} archived passing trials still pass. "
              f"Cases without a surviving supporting architecture: **{', '.join(flipped)}**.", '',
+             '**Why:** two MKL kernels, narrow output matrix products and float32 sqrt in Adam, round differently by CPU. Seed-0 training amplifies '
+             'those one-ULP differences to macroscopic divergence by update ~300. With `MKL_CBWR=AVX2`, a full rare-mode run is bit-identical on native '
+             'Intel AVX512 and emulated Intel AVX2 CPUs. That portable mode scores 17/19; the rare mode and ring still fail. '
+             'See the [portability analysis](portability/README.md).', '',
              'This is verification of the Codex result, not a new formulation or leaderboard entry. '
              'The formulation leaderboard still counts the archived live evidence. '
              'This host is a robustness audit: only archived passing trials were replayed, so archived failures cannot be promoted by a lucky host.', '',

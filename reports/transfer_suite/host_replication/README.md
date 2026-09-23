@@ -2,6 +2,8 @@
 
 **Not replicated: 8/9 required + 8/10 practical = 16/19 on a second CPU host.** The archived 19/19 evidence rebuilds and verifies unchanged, and it replays exactly on its original host. This replay keeps identical source hashes, torch 2.13.0, seed 0, specs, policies, architectures and thresholds. Every one of the 46 replayed episodes already differs from its archive at its first measurement (the rare-mode winner by 3.7e-6 at step 50); differences then amplify. 39/46 archived passing trials still pass. Cases without a surviving supporting architecture: **mode_hold, vector_unequal_mass, img_bars4**.
 
+**Why:** two MKL kernels, narrow output matrix products and float32 sqrt in Adam, round differently by CPU. Seed-0 training amplifies those one-ULP differences to macroscopic divergence by update ~300. With `MKL_CBWR=AVX2`, a full rare-mode run is bit-identical on native Intel AVX512 and emulated Intel AVX2 CPUs. That portable mode scores 17/19; the rare mode and ring still fail. See the [portability analysis](portability/README.md).
+
 This is verification of the Codex result, not a new formulation or leaderboard entry. The formulation leaderboard still counts the archived live evidence. This host is a robustness audit: only archived passing trials were replayed, so archived failures cannot be promoted by a lucky host.
 
 | Case | Archived | This host | Archived passing architectures still passing | Replayed final passing checks |

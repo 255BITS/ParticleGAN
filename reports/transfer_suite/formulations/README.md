@@ -44,7 +44,10 @@ eight-mode ring, the rare 2% mode and bars4 fail. Every episode differs from
 its archive at the first measurement at floating-point scale. Both torch 2.13.0
 builds agree bit-for-bit on the second host. The table above still counts the archived
 live evidence; the 19/19 is exact on the original host but not host-robust.
-[Replication audit](../host_replication/README.md).
+Two MKL kernels round differently by CPU, and training amplifies the one-ULP
+differences by update ~300. Under Intel-portable `MKL_CBWR=AVX2`, fresh runs score
+17/19; the ring and rare mode still fail. **19/19 is not host-portable.**
+[Replication audit](../host_replication/README.md) · [Why it diverges](../host_replication/portability/README.md).
 
 **Scope revision:** the previous 7/16 becomes 7/10 because the user requested
 that imposed training-condition variations be excluded from this PR's main
