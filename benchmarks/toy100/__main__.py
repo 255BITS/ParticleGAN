@@ -53,9 +53,11 @@ def _run(args):
     configs = {name: resolve_problem_config(manifest, name, steps=args.steps, device=args.device)
                for name in PROBLEM_NAMES}
     policy_source_hashes = None
+    policy_source_receipt = None
     if any("toy100_model" in config or "network_lr_horizon_cap" in config
            for config in configs.values()):
-        policy_source_hashes = _source_provenance(include_policy=True)["source_sha256"]
+        policy_source_receipt = _source_provenance(include_policy=True)
+        policy_source_hashes = policy_source_receipt["source_sha256"]
     names = (args.problem,) if args.problem else PROBLEM_NAMES
     args.output.mkdir(parents=True, exist_ok=True)
     # A new CLI invocation must not mix old rows with new training evidence.
@@ -71,6 +73,8 @@ def _run(args):
                    "selected_problems": names}
     if policy_source_hashes is not None:
         declaration["policy_source_sha256"] = policy_source_hashes
+        declaration["policy_source_scope"] = policy_source_receipt["source_archive_scope"]
+        declaration["policy_source_version"] = policy_source_receipt["source_archive_version"]
     (args.output / "run_manifest.json").write_text(json.dumps(declaration, indent=2, allow_nan=False) + "\n")
     policy_source_ok = True
     for name in names:

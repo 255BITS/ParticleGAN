@@ -16,7 +16,10 @@ from benchmarks import toy_suite
 from benchmarks.toy100.models import linear_input_noise
 from benchmarks.toy100.schedule import policy_multipliers
 from benchmarks.toy100.problems import PROBLEM_NAMES
-from benchmarks.toy100.train import resolve_config
+from benchmarks.toy100.train import (
+    POLICY_SOURCE_FILES_V1, POLICY_SOURCE_SCOPE_V1, POLICY_SOURCE_SCOPE_V2,
+    _source_provenance, policy_source_scope, resolve_config, verify_source_archive,
+)
 from benchmarks.toy100.train import train as train_toy100
 from benchmarks.transfer_suite.compare_defaults import plan
 from benchmarks.transfer_suite.public_default_verification import (
@@ -368,6 +371,62 @@ def test_native_affine_policy_regrade_rejects_scratch_and_tampered_receipts(tmp_
     with pytest.raises(ValueError, match="archive hash differs"):
         toy_suite._check_toy100_policy(directory, summary, resolved, policy)
 
+    # A v2 map cannot hide an imported loss by deleting both its hash and its
+    # archive member. The old 13-file shape remains readable, but is labeled.
+    archive_path.write_bytes(archive)
+    with tarfile.open(archive_path, "r:gz") as saved:
+        contents = {member.name: saved.extractfile(member).read()
+                    for member in saved.getmembers()}
+
+    def rewrite_archive(names):
+        with tarfile.open(archive_path, "w:gz") as saved:
+            for member_name in sorted(names):
+                data = contents[member_name]
+                member = tarfile.TarInfo(member_name)
+                member.size = len(data)
+                saved.addfile(member, io.BytesIO(data))
+        return hashlib.sha256(archive_path.read_bytes()).hexdigest()
+
+    missing = deepcopy(summary["provenance"])
+    missing["source_sha256"].pop("particlegan/gan_loss.py")
+    missing["source_archive_sha256"] = rewrite_archive(missing["source_sha256"])
+    provenance_path.write_text(json.dumps(missing))
+    missing_summary = deepcopy(summary)
+    missing_summary["provenance"] = missing
+    with pytest.raises(ValueError, match="omits a required public source"):
+        verify_source_archive(directory, missing)
+    with pytest.raises(ValueError, match="omits a required public source"):
+        toy_suite._check_toy100_policy(directory, missing_summary, resolved, policy)
+
+    imported = "particlegan/gan_loss.py"
+    original_imported = contents[imported]
+    contents[imported] = b"changed imported GAN loss"
+    tampered = deepcopy(summary["provenance"])
+    tampered["source_archive_sha256"] = rewrite_archive(tampered["source_sha256"])
+    provenance_path.write_text(json.dumps(tampered))
+    tampered_summary = deepcopy(summary)
+    tampered_summary["provenance"] = tampered
+    with pytest.raises(ValueError, match="archive member SHA-256 mismatch"):
+        verify_source_archive(directory, tampered)
+    with pytest.raises(ValueError, match="policy source differs"):
+        toy_suite._check_toy100_policy(directory, tampered_summary, resolved, policy)
+    contents[imported] = original_imported
+
+    historical = deepcopy(summary["provenance"])
+    historical["source_sha256"] = {name: historical["source_sha256"][name]
+                                   for name in POLICY_SOURCE_FILES_V1}
+    historical.pop("source_archive_scope")
+    historical.pop("source_archive_version")
+    historical["source_archive_sha256"] = rewrite_archive(historical["source_sha256"])
+    provenance_path.write_text(json.dumps(historical))
+    historical_summary = deepcopy(summary)
+    historical_summary["provenance"] = historical
+    assert policy_source_scope(historical) == POLICY_SOURCE_SCOPE_V1
+    verify_source_archive(directory, historical)
+    assert toy_suite._check_toy100_policy(
+        directory, historical_summary, resolved, policy,
+    ) == historical["source_sha256"]
+
 
 def test_native_policy_with_learned_noise_regrades_from_archive_after_relocation(
     tmp_path, monkeypatch,
@@ -387,10 +446,65 @@ def test_native_policy_with_learned_noise_regrades_from_archive_after_relocation
     toy_suite._check_toy100_policy(
         directory, summary, resolved, declared_model_policy(config),
     )
+    assert policy_source_scope(summary["provenance"]) == POLICY_SOURCE_SCOPE_V2
+    relocated = tmp_path / "relocated-native"
+    relocated.mkdir()
+    for name in ("source.tar.gz", "provenance.json", "events.jsonl"):
+        (relocated / name).write_bytes((directory / name).read_bytes())
     monkeypatch.setattr(toy_suite, "ROOT", tmp_path / "no-live-source-tree")
-    toy_suite._check_toy100_learned_noise(
-        directory, summary, resolved, policy_archive_verified=True,
+    toy_suite._check_toy100_policy(
+        relocated, summary, resolved, declared_model_policy(config),
     )
+    toy_suite._check_toy100_learned_noise(
+        relocated, summary, resolved, policy_archive_verified=True,
+    )
+
+
+def test_common_gate_requires_full_public_package_match_for_policy_pass(
+    tmp_path, monkeypatch,
+):
+    recipe = get_recipe().to_dict()
+    noise = dict(output_noise_std=.029, input_noise_std=.5,
+                 input_noise_anneal_end=.1, output_noise_warmup=.2)
+    sources = _source_provenance(include_policy=True)["source_sha256"]
+    case_names = tuple(job["spec"]["name"] for job in plan())
+    policy = {"network_lr_horizon_cap": 1600}
+    toy = dict(status="PASS", passed=3, cases={name: {"status": "PASS"}
+                                                for name in PROBLEM_NAMES},
+               recipe=recipe, noise=noise, model_policy=policy,
+               policy_source_scope=POLICY_SOURCE_SCOPE_V2,
+               policy_source_sha256=sources)
+    candidate = dict(status="PASS", passed=19,
+                     cases={name: {"status": "PASS", "passed": True,
+                                   "noise_applied": True} for name in case_names},
+                     protocol=dict(global_recipe=json.loads(json.dumps(recipe)),
+                                   noise=noise, model_policy=policy,
+                                   source_sha256=dict(sources)))
+    absent = dict(status="MISSING", passed=0, cases={})
+    candidate_row = candidate
+    monkeypatch.setattr(toy_suite, "_toy100_rows", lambda directory: toy)
+    monkeypatch.setattr(toy_suite, "_episode_rows",
+                        lambda directory, names, candidate: (
+                            candidate_row if directory.name == "candidate19" else absent))
+
+    candidate_row["protocol"]["source_sha256"].pop("particlegan/gan_loss.py")
+    report = toy_suite.regrade(tmp_path / "missing-public")
+    assert report["status"] == "INCOMPLETE"
+    assert not report["global_recipe_identical"]
+    assert report["reason"] == "100-mode and candidate-19 public package source sets differ"
+
+    candidate_row["protocol"]["source_sha256"] = dict(sources)
+    assert toy_suite.regrade(tmp_path / "full-public")["status"] == "PASS"
+
+    toy["policy_source_scope"] = POLICY_SOURCE_SCOPE_V1
+    toy["policy_source_sha256"] = {name: sources[name] for name in POLICY_SOURCE_FILES_V1}
+    report = toy_suite.regrade(tmp_path / "limited-public")
+    assert report["status"] == "INCOMPLETE"
+    assert report["global_recipe_identical"]
+    assert report["full_public_source_coverage"] is False
+    toy["status"] = "FAIL"
+    toy["passed"] = 2
+    assert toy_suite.regrade(tmp_path / "limited-failing")["status"] == "FAIL"
 
 
 @pytest.mark.parametrize("name", ["vector_two_broad", "img_stripes2"])

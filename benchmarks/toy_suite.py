@@ -29,7 +29,9 @@ from benchmarks.toy100.accuracy_gate import evaluate_suite as accuracy_suite
 from benchmarks.toy100.gate import evaluate_suite as coverage_suite
 from benchmarks.toy100.problems import PROBLEM_NAMES
 from benchmarks.toy100.models import linear_input_noise
-from benchmarks.toy100.train import resolve_config
+from benchmarks.toy100.train import (
+    POLICY_SOURCE_SCOPE_V2, policy_source_scope, resolve_config,
+)
 from benchmarks.transfer_suite.compare_defaults import plan
 from benchmarks.transfer_suite.protocol import test_verdict
 from benchmarks.transfer_suite.public_default_verification import (
@@ -394,6 +396,7 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
     if (summary.get("provenance") != provenance
             or not isinstance(sources, dict) or not required <= set(sources)):
         raise ValueError(f"100-mode policy source provenance differs: {name}")
+    policy_source_scope(provenance)
     archive_file = provenance.get("source_archive_file")
     archive_hash = provenance.get("source_archive_sha256")
     if (archive_file != "source.tar.gz"
@@ -697,6 +700,7 @@ def _toy100_rows(directory: Path):
         model_policy = declared_model_policy(declared)
         config_fields = {name: getattr(recipe, name) for name in GLOBAL_RECIPE_FIELDS}
         policy_sources = None
+        policy_scope = None
         for name in PROBLEM_NAMES:
             executed = _read(directory / name / "config.json")
             expected_config, _ = resolve_config(manifest["resolved_problem_configs"][name])
@@ -718,6 +722,7 @@ def _toy100_rows(directory: Path):
             if declared_model_policy(executed) != model_policy:
                 raise ValueError(f"100-mode model policy varies by problem: {name}")
             if model_policy:
+                archived_scope = policy_source_scope(_read(directory / name / "provenance.json"))
                 sources = _check_toy100_policy(
                     directory / name,
                     _read(directory / name / "summary.json"),
@@ -725,14 +730,24 @@ def _toy100_rows(directory: Path):
                 )
                 if policy_sources is None:
                     policy_sources = sources
+                    policy_scope = archived_scope
                 elif sources != policy_sources:
                     raise ValueError("100-mode policy source differs between problems")
+                elif archived_scope != policy_scope:
+                    raise ValueError("100-mode policy source scope differs between problems")
             _check_toy100_learned_noise(
                 directory / name, _read(directory / name / "summary.json"), executed,
                 policy_archive_verified=bool(model_policy),
             )
         if model_policy and manifest.get("policy_source_sha256") != policy_sources:
             raise ValueError("100-mode policy manifest source differs from archived runs")
+        if model_policy and policy_scope == POLICY_SOURCE_SCOPE_V2:
+            if (manifest.get("policy_source_scope") != policy_scope
+                    or manifest.get("policy_source_version") != 2):
+                raise ValueError("100-mode policy manifest source scope differs")
+        elif model_policy and ("policy_source_scope" in manifest
+                               or "policy_source_version" in manifest):
+            raise ValueError("historical 100-mode policy manifest has a new source scope")
         cases = {name: dict(
             status="PASS" if coverage["problems"][name]["passed"]
                              and accuracy["problems"][name]["passed"] else "FAIL",
@@ -747,6 +762,7 @@ def _toy100_rows(directory: Path):
                     passed=passed, required=len(PROBLEM_NAMES), cases=cases,
                     recipe=recipe.to_dict(), noise=noise,
                     model_policy=model_policy, policy_source_sha256=policy_sources,
+                    policy_source_scope=policy_scope,
                     config_sha256=manifest["config_sha256"],
                     coverage_status=coverage["status"],
                     accuracy_status=accuracy["status"], reason=None)
@@ -773,6 +789,7 @@ def regrade(output: Path):
                       reason="derived from candidate-19 episodes")
     control = _episode_rows(output / "public19", expected19, candidate=False)
     identity = False
+    full_source_coverage = None
     reason = None
     if "recipe" in toy and "protocol" in candidate:
         candidate_recipe = candidate["protocol"]["global_recipe"]
@@ -786,6 +803,7 @@ def regrade(output: Path):
         elif toy.get("model_policy"):
             native_sources = toy.get("policy_source_sha256") or {}
             transfer_sources = candidate["protocol"]["source_sha256"]
+            full_source_coverage = toy.get("policy_source_scope") == POLICY_SOURCE_SCOPE_V2
             shared = set(native_sources) & set(transfer_sources)
             required_shared = {"particlegan/training.py", "particlegan/recipes.py",
                                "lib/toy_models.py", "benchmarks/toy100/models.py",
@@ -797,6 +815,14 @@ def regrade(output: Path):
                     or any(native_sources[key] != transfer_sources[key] for key in shared)):
                 identity = False
                 reason = "100-mode and candidate-19 executable policy source differs"
+            elif full_source_coverage:
+                native_public = {name for name in native_sources
+                                 if name.startswith("particlegan/") and name.endswith(".py")}
+                transfer_public = {name for name in transfer_sources
+                                   if name.startswith("particlegan/") and name.endswith(".py")}
+                if native_public != transfer_public:
+                    identity = False
+                    reason = "100-mode and candidate-19 public package source sets differ"
     else:
         reason = "complete 100-mode and candidate-19 evidence is required"
     noise_covered = (len(candidate["cases"]) == len(expected19)
@@ -806,6 +832,9 @@ def regrade(output: Path):
     complete = toy["status"] in ("PASS", "FAIL") and candidate["status"] in ("PASS", "FAIL")
     if not complete or not identity or not noise_covered:
         status = "INCOMPLETE"
+    elif toy["status"] == candidate["status"] == "PASS" and full_source_coverage is False:
+        status = "INCOMPLETE"
+        reason = "historical 13-file policy archive has limited public-source coverage"
     elif toy["status"] == candidate["status"] == "PASS":
         status = "PASS"
     else:
@@ -814,6 +843,8 @@ def regrade(output: Path):
     report = dict(protocol="toy-suite-common22-v1", status=status,
                   observed_passes=observed_passes, required=22,
                   global_recipe_identical=identity, noise_applied_on_all_19=noise_covered,
+                  policy_source_scope=toy.get("policy_source_scope"),
+                  full_public_source_coverage=full_source_coverage,
                   reason=reason, toy100=toy, candidate19=candidate,
                   vector6=vector, public_default19_control=control)
     _write(output / "compatibility.json", report)
@@ -830,6 +861,8 @@ def regrade(output: Path):
              f"| Public v3 installed-wheel control | {control['passed']}/19 | {control['status']} |",
              "", f"Global fields identical: **{identity}**. Noise applied on all 19: "
              f"**{noise_covered}**. {reason or ''}", "",
+             f"Native policy archive scope: **{toy.get('policy_source_scope') or 'not applicable'}**. "
+             f"Full public package source coverage: **{full_source_coverage}**.", "",
              "## Per-case result", "",
              "| Group | Case | Live | Detail |",
              "| --- | --- | --- | --- |"]

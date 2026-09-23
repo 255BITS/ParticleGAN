@@ -18,7 +18,8 @@ from benchmarks.toy100.schedule import (
     policy_multipliers, policy_rate_action, step_with_policy,
 )
 from benchmarks.toy100.train import (
-    _source_provenance, make_trainer, resolve_config, train, verify_source_archive,
+    POLICY_PUBLIC_SOURCE_FILES, POLICY_SOURCE_SCOPE_V2, _source_provenance,
+    make_trainer, resolve_config, train, verify_source_archive,
 )
 from particlegan.recipes import learning_rate_scale
 
@@ -220,6 +221,9 @@ def test_policy_run_archives_source_and_logs_actual_rates(tmp_path):
     assert model["generator_initial_bias"] == [0.0, 0.0]
     provenance = summary["provenance"]
     assert provenance == json.loads((run_dir / "provenance.json").read_text())
+    assert provenance["source_archive_scope"] == POLICY_SOURCE_SCOPE_V2
+    assert provenance["source_archive_version"] == 2
+    assert set(POLICY_PUBLIC_SOURCE_FILES) <= set(provenance["source_sha256"])
     for name in ("benchmarks/toy100/schedule.py", "benchmarks/toy100/config.py",
                  "benchmarks/toy100/__main__.py"):
         assert name in provenance["source_sha256"]
@@ -262,3 +266,5 @@ def test_cli_rejects_policy_source_mismatch_even_when_a_fake_gate_passes(tmp_pat
     declaration = json.loads((args.output / "run_manifest.json").read_text())
     assert declaration["policy_source_sha256"] == _source_provenance(
         include_policy=True)["source_sha256"]
+    assert declaration["policy_source_scope"] == POLICY_SOURCE_SCOPE_V2
+    assert declaration["policy_source_version"] == 2

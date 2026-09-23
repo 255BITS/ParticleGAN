@@ -67,6 +67,46 @@ OPTIONAL_RUN_FIELDS = {
 RECIPE_FIELDS = {field.name for field in fields(Recipe)}
 RUN_FIELDS = set(RUN_DEFAULTS) | OPTIONAL_RUN_FIELDS
 
+# The v1 policy archive held only the first 13 files below. v2 includes every
+# public package module, including the losses and prior imported by GANTrainer.
+POLICY_SOURCE_FILES_V1 = (
+    "benchmarks/toy100/train.py", "benchmarks/toy100/models.py",
+    "benchmarks/toy100/problems.py", "benchmarks/toy100/metrics.py",
+    "benchmarks/toy100/accuracy.py", "benchmarks/toy100/accuracy_evidence.py",
+    "benchmarks/toy100/accuracy_gate.py", "lib/toy_models.py",
+    "particlegan/training.py", "particlegan/recipes.py",
+    "benchmarks/toy100/schedule.py", "benchmarks/toy100/config.py",
+    "benchmarks/toy100/__main__.py",
+)
+POLICY_PUBLIC_SOURCE_FILES = (
+    "particlegan/__init__.py", "particlegan/autoencoder.py",
+    "particlegan/conditioning.py", "particlegan/diffusion.py",
+    "particlegan/discriminators.py", "particlegan/gan_loss.py",
+    "particlegan/grad_regularizers.py", "particlegan/locked_shared.py",
+    "particlegan/particle_prior.py", "particlegan/recipes.py",
+    "particlegan/training.py", "particlegan/vicreg_loss.py",
+)
+POLICY_SOURCE_SCOPE_V1 = "native-policy-limited-v1"
+POLICY_SOURCE_SCOPE_V2 = "native-policy-public-package-v2"
+
+
+def policy_source_scope(provenance: Mapping[str, Any]) -> str:
+    """Classify a policy receipt without consulting the current source tree."""
+    sources = provenance.get("source_sha256")
+    if not isinstance(sources, dict):
+        raise ValueError("policy source hash map is absent")
+    scope = provenance.get("source_archive_scope")
+    version = provenance.get("source_archive_version")
+    if scope is None and version is None:
+        if set(sources) != set(POLICY_SOURCE_FILES_V1):
+            raise ValueError("unversioned policy archive is not the historical 13-file scope")
+        return POLICY_SOURCE_SCOPE_V1
+    if scope != POLICY_SOURCE_SCOPE_V2 or type(version) is not int or version != 2:
+        raise ValueError("policy source archive scope or version differs")
+    if not set(POLICY_SOURCE_FILES_V1 + POLICY_PUBLIC_SOURCE_FILES) <= set(sources):
+        raise ValueError("full policy archive omits a required public source file")
+    return scope
+
 
 def load_config(path: str | Path) -> dict[str, Any]:
     """Load a flat JSON or TOML recipe; ``train`` validates all fields."""
@@ -278,33 +318,32 @@ def _learnable_output_receipt(trainer: GANTrainer, initial_std: float) -> dict[s
 
 
 def _source_provenance(*, include_policy: bool = False) -> dict[str, Any]:
-    paths = (
-        "benchmarks/toy100/train.py", "benchmarks/toy100/models.py",
-        "benchmarks/toy100/problems.py",
-        "benchmarks/toy100/metrics.py", "benchmarks/toy100/accuracy.py",
-        "benchmarks/toy100/accuracy_evidence.py",
-        "benchmarks/toy100/accuracy_gate.py", "lib/toy_models.py",
-        "particlegan/training.py", "particlegan/recipes.py",
-    )
+    paths = POLICY_SOURCE_FILES_V1[:10]
     if include_policy:
-        paths += (
-            "benchmarks/toy100/schedule.py",
-            "benchmarks/toy100/config.py",
-            "benchmarks/toy100/__main__.py",
-        )
+        public = {str(path.relative_to(ROOT)) for path in ROOT.glob("particlegan/**/*.py")}
+        if not set(POLICY_PUBLIC_SOURCE_FILES) <= public:
+            raise RuntimeError("required public package source is missing")
+        paths = tuple(sorted(set(POLICY_SOURCE_FILES_V1) | public))
     hashes = {}
     for name in paths:
         path = ROOT / name
-        if path.exists():
-            hashes[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+        if not path.exists():
+            if include_policy:
+                raise RuntimeError(f"required policy source is missing: {name}")
+            continue
+        hashes[name] = hashlib.sha256(path.read_bytes()).hexdigest()
     try:
         git_sha = subprocess.check_output(
             ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL
         ).strip()
     except (OSError, subprocess.CalledProcessError):
         git_sha = None
-    return {"git_sha": git_sha, "source_sha256": hashes,
-            "generated_at_utc": datetime.now(timezone.utc).isoformat()}
+    provenance = {"git_sha": git_sha, "source_sha256": hashes,
+                  "generated_at_utc": datetime.now(timezone.utc).isoformat()}
+    if include_policy:
+        provenance.update(source_archive_scope=POLICY_SOURCE_SCOPE_V2,
+                          source_archive_version=2)
+    return provenance
 
 
 def _write_source_archive(directory: Path, provenance: dict[str, Any]) -> None:
@@ -326,6 +365,7 @@ def _write_source_archive(directory: Path, provenance: dict[str, Any]) -> None:
 
 def verify_source_archive(directory: Path, provenance: Mapping[str, Any]) -> None:
     """Verify the policy archive against its manifest without the live tree."""
+    policy_source_scope(provenance)
     archive = directory / provenance["source_archive_file"]
     if hashlib.sha256(archive.read_bytes()).hexdigest() != provenance["source_archive_sha256"]:
         raise ValueError("policy source archive SHA-256 mismatch")
