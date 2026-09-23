@@ -1,0 +1,59 @@
+{
+  "task": "img_ramp_corner2",
+  "tip_sha": "510e0054b2499ce725482de8e7a4ae8d72fd8f25",
+  "principal": "ramp_corner2 NW-vs-SE corner lighting ramp: published transpose12 vs residual16",
+  "published_winner": "image suite baseline transpose12 (RpGAN+b_cap+particles)",
+  "arms": {
+    "baseline_transpose12": {
+      "card": {
+        "name": "baseline_transpose12",
+        "scope": "published image path (transpose width 12)",
+        "changes": {}
+      },
+      "verdict": "FAIL",
+      "quality": {
+        "sustained": false,
+        "confirmed_step": null,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.040018223226070404,
+        "error": null,
+        "seconds": 5.760264087002724,
+        "last_obs": {
+          "hq": 1.0,
+          "mean_rmse": 0.040018223226070404,
+          "modes": 2
+        }
+      },
+      "seconds": 5.760636741993949
+    },
+    "residual16": {
+      "card": {
+        "name": "residual16",
+        "scope": "in-formulation architecture control",
+        "changes": {
+          "architecture": "residual_upsample",
+          "width": 16
+        }
+      },
+      "verdict": "PASS",
+      "quality": {
+        "sustained": true,
+        "confirmed_step": 575,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.02463848516345024,
+        "error": null,
+        "seconds": 5.4144049261230975,
+        "last_obs": {
+          "hq": 1.0,
+          "mean_rmse": 0.02463848516345024,
+          "modes": 2
+        }
+      },
+      "seconds": 5.414769021095708
+    }
+  },
+  "hit": true,
+  "soft_miss": false
+}
