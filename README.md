@@ -13,7 +13,7 @@ with declared discriminator choices (15/19 with the reference D profile).
 
 [Illustrated guide and equations](docs/gan-v3.md) ·
 [Full leaderboard](reports/transfer_suite/unadjusted/README.md) ·
-[Installed-default verification](reports/transfer_suite/public_v3_promotion/README.md) ·
+[Installed-default verification](reports/transfer_suite/single_default_verification/README.md) ·
 [Reproduce or compare a candidate](benchmarks/transfer_suite/UNADJUSTED_SEARCH.md).
 EMA is separate; a PASS requires every metric at five consecutive final checks.
 

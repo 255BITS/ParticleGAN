@@ -136,6 +136,7 @@ def build():
     rows.sort(key=lambda r: (r['attempted'] != 19, -r['passed'], r['shortfall'], r['name']))
     (ROOT/'leaderboard.json').write_text(json.dumps(dict(version='unadjusted-defaults-v1', rows=rows), indent=2)+'\n')
     lines = ['# Unadjusted ParticleGAN default leaderboard', '',
+             'The public API now exposes one common winning default. Its [installed-package replay](../single_default_verification/README.md) reproduces **19/19** exactly after removing preset selection. Historical IDs below label recorded comparisons, not selectable public recipes.', '',
              'Reproduce the selected profile with [one command](../../../benchmarks/transfer_suite/UNADJUSTED_SEARCH.md). '
              '[Findings and discriminator details](FINDINGS.md). Generated JSON, curves and replay archives '
              'linked below are local artifacts; source, plans and this readable leaderboard stay in Git '

@@ -1,5 +1,7 @@
 # Unadjusted ParticleGAN default leaderboard
 
+The public API now exposes one common winning default. Its [installed-package replay](../single_default_verification/README.md) reproduces **19/19** exactly after removing preset selection. Historical IDs below label recorded comparisons, not selectable public recipes.
+
 Reproduce the selected profile with [one command](../../../benchmarks/transfer_suite/UNADJUSTED_SEARCH.md). [Findings and discriminator details](FINDINGS.md). Generated JSON, curves and replay archives linked below are local artifacts; source, plans and this readable leaderboard stay in Git ([artifact policy](../../README.md)).
 
 **This is the primary comparison for selecting a shared default.** Each candidate uses one unchanged loss/regularization/optimizer recipe on every test. No per-example LR, Adam, prior-rate or loss-weight adjustments. The earlier adjusted 19/19 result does not compete on this leaderboard.
