@@ -51,7 +51,7 @@ def test_both_defaults_keep_all_nineteen_targets_architectures_and_resources():
     assert len(jobs) == 19
     assert sum(j['spec']['runner'] == 'legacy' for j in jobs) == 9
     for job in jobs:
-        old, new = [effective_spec(job['spec'], get_recipe(name)) for name in ('gan_legacy', 'gan')]
+        old, new = [effective_spec(job['spec'], get_recipe(name)) for name in ('gan_legacy', 'gan_v2')]
         if old['runner'] == 'legacy':
             assert old == new
         else:

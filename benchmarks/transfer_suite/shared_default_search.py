@@ -47,7 +47,9 @@ def prepare(declaration):
         if not name or any(c not in 'abcdefghijklmnopqrstuvwxyz0123456789_-' for c in name) or name in seen:
             raise ValueError('candidate names must be unique lowercase identifiers')
         seen.add(name)
-        recipe = get_recipe(**card['overrides']).replace(name=name)
+        # This archived search began from the previous public GAN preset.
+        # New package defaults must not change its unspecified fields.
+        recipe = get_recipe('gan_v2', **card['overrides']).replace(name=name)
         recipes.append((card, recipe))
     if not recipes:
         raise ValueError('at least one candidate required')

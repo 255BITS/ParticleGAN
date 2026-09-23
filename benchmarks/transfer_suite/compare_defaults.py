@@ -30,7 +30,7 @@ from .protocol import test_verdict
 
 ROOT = Path(__file__).resolve().parents[2]
 REPORTS = ROOT / 'reports/transfer_suite'
-RECIPES = {'current': 'gan_legacy', 'proposed': 'gan'}
+RECIPES = {'current': 'gan_legacy', 'proposed': 'gan_v2'}
 
 
 def read(path):
@@ -163,7 +163,8 @@ def run(arm, output, tasks=None):
     output.mkdir(parents=True, exist_ok=False)
     (output / 'episodes').mkdir()
     torch.set_num_threads(1)
-    recipe = get_recipe(RECIPES[arm])
+    # Retain the archived arm names as well as their exact historical settings.
+    recipe = get_recipe(RECIPES[arm]).replace(name='gan' if arm == 'proposed' else 'gan_legacy')
     assert recipe.lr_anneal_start == .6 and recipe.lr_floor == .05
     policy = vector_tasks.fixed_policy('cosine')
     protocol = suite.snapshot(output)

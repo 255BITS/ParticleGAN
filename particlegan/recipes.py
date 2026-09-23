@@ -1,11 +1,12 @@
 """Versioned, inspectable recipes selected in the repository's toy studies."""
 from dataclasses import asdict, dataclass, replace
 import math
+from types import MappingProxyType
 
 
 @dataclass(frozen=True)
 class Recipe:
-    name: str = "gan"
+    name: str = "gan_v3"
     model: str = "gan"
     z_dim: int = 4
     num_particles: int = 20_000
@@ -19,15 +20,15 @@ class Recipe:
     alpha_bar: tuple[float, ...] = (1.0, 0.9, 0.5, 0.05, 0.0001)
     batch_size: int = 256
     total_steps: int = 7_000
-    lr: float = 1e-3
-    d_lr_mult: float = 1.5
-    prior_lr_mult: float = 10.0
+    lr: float = 0.00425
+    d_lr_mult: float = 1.0
+    prior_lr_mult: float = 2.0
     betas: tuple[float, float] = (0.0, 0.99)
     prior_betas: tuple[float, float] | None = None
     loss_type: str = "logistic"
     gan_mode: str = "rp"
     reg_arm: str = "b_cap"
-    reg_coeff: float = 3.0
+    reg_coeff: float = 6.0
     reg_kappa: float = 1.25
     reg_every: int = 1
     reg_method: str = "autograd"
@@ -189,17 +190,36 @@ class Recipe:
                 Adam(d_params, lr=self.lr * self.d_lr_mult, betas=self.betas, **adam_kwargs))
 
 
+_GAN_V3_FIELDS = MappingProxyType(dict(
+    model="gan", z_dim=4, num_particles=20_000, prior_kind="particles",
+    sigma_rel=0., standardize=True, num_classes=None, conditioning="scalar",
+    ucd_target="class", ucd_weight=.02, alpha_bar=(1., .9, .5, .05, .0001),
+    batch_size=256, total_steps=7_000,
+    lr=.00425, d_lr_mult=1., prior_lr_mult=2., betas=(0., .99), prior_betas=None,
+    loss_type="logistic", gan_mode="rp", reg_arm="b_cap", reg_coeff=6.,
+    reg_kappa=1.25, reg_every=1, reg_method="autograd", prior_reg=.05,
+    ema_decay=.995, lr_anneal_start=.6, lr_floor=.05, encoder_mode="none",
+    routing_temperature=.25, distance_reduction="sum",
+    observation_sigma=.03, reconstruction_weight=1.,
+))
+_GAN_V2_FIELDS = MappingProxyType({**_GAN_V3_FIELDS, "lr": .001,
+    "d_lr_mult": 1.5, "prior_lr_mult": 10., "reg_coeff": 3.})
+_GAN_V1_FIELDS = MappingProxyType({**_GAN_V2_FIELDS, "lr": .0006,
+    "betas": (0., .999), "reg_coeff": 1., "reg_kappa": 1., "prior_reg": 1.})
+
+
 def _legacy_recipe(**options):
     """Pin previously selected domain recipes independently of new GAN defaults."""
-    return Recipe(**{**dict(lr=6e-4, betas=(0., .999), reg_coeff=1., reg_kappa=1., prior_reg=1.),
-                     **options})
+    return Recipe(**{**_GAN_V1_FIELDS, **options})
 
 
 def get_recipe(name="gan", **overrides):
-    """Inspectable GAN/DDGAN and particle autoencoder defaults; historical aliases remain accepted."""
-    if name in ("gan", "100gaussians"):
-        recipe = Recipe(name=name)
-    elif name == "gan_legacy":
+    """Return the current GAN default or a pinned historical/domain recipe."""
+    if name in ("gan", "gan_v3"):
+        recipe = Recipe(name="gan_v3", **_GAN_V3_FIELDS)
+    elif name in ("gan_v2", "100gaussians"):
+        recipe = Recipe(name=name, **_GAN_V2_FIELDS)
+    elif name in ("gan_v1", "gan_legacy"):
         recipe = _legacy_recipe(name=name)
     elif name == "gan_behavioral":
         # Preserve the earlier named study candidate and its optimizer settings.
@@ -229,7 +249,8 @@ def get_recipe(name="gan", **overrides):
                         routing_temperature=.125 if image else .25,
                         distance_reduction="mean" if image else "sum")
     else:
-        raise ValueError(f"Unknown recipe {name!r}; choose gan, gan_legacy, gan_behavioral, mog, ddgan, ddgan_mog, ae_gan, vae_gan, or ae_ddgan")
+        raise ValueError(f"Unknown recipe {name!r}; choose gan, gan_v1, gan_v2, gan_v3, gan_legacy, "
+                         "100gaussians, gan_behavioral, mog, ddgan, ddgan_mog, ae_gan, vae_gan, or ae_ddgan")
     return recipe.replace(**overrides)
 
 

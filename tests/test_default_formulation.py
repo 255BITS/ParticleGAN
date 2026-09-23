@@ -33,8 +33,8 @@ def test_default_optimizers_and_losses_bind_the_winning_recipe():
     recipe = get_recipe(num_particles=16)
     g, d = nn.Linear(4, 2), LinearSkipDiscriminator()
     trainer = recipe.make_trainer(g, d)
-    assert [group['lr'] for group in trainer.opt_g.param_groups] == [.001, .01]
-    assert [group['lr'] for group in trainer.opt_d.param_groups] == [.0015]
+    assert [group['lr'] for group in trainer.opt_g.param_groups] == [.00425, .0085]
+    assert [group['lr'] for group in trainer.opt_d.param_groups] == [.00425]
     assert all(group['betas'] == (0., .99) for opt in (trainer.opt_g, trainer.opt_d) for group in opt.param_groups)
     assert trainer.loss.mode == 'rp' and trainer.loss.loss_type == 'logistic'
     result = trainer.step(torch.randn(8, 2))

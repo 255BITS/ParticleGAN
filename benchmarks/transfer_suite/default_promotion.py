@@ -31,9 +31,10 @@ def main():
         (args.output/name).write_text(json.dumps(value, indent=2, allow_nan=False)+'\n')
 
     write('protocol.json', protocol)
-    # Only resources differ from get_recipe(); all formulation/optimizer fields
-    # are the promoted defaults. Architecture, data units and init remain host choices.
-    recipe = get_recipe(num_particles=spec['particles'], batch_size=spec['batch'], total_steps=spec['steps'])
+    # This historical replay used the previous public gan_v2 recipe. Keep its
+    # recorded name and all numerical settings fixed after the v3 promotion.
+    recipe = get_recipe('gan_v2', num_particles=spec['particles'],
+                        batch_size=spec['batch'], total_steps=spec['steps']).replace(name='gan')
     torch.set_num_threads(1)
     torch.manual_seed(0)
     prior = recipe.make_prior(init_std=.5, generator=torch.Generator().manual_seed(0))

@@ -26,7 +26,7 @@ def test_shared_recipe_is_resolved_once_for_all_nineteen_jobs():
 
 def test_new_runner_exactly_reproduces_existing_default_control():
     jobs, _ = prepare(dict(candidates=[dict(name='control', overrides={})], tasks=['two_pole']))
-    result = episode(jobs[0], get_recipe().replace(name='control'))['result']
+    result = episode(jobs[0], get_recipe('gan_v2').replace(name='control'))['result']
     expected = read(Path(__file__).with_name('fixtures')/'shared_default_two_pole.json')['result']
     clean = lambda curve: [{k: v for k, v in p.items() if k != 'seconds'} for p in curve]
     assert result['live'] == expected['live']
