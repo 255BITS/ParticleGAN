@@ -1,0 +1,59 @@
+{
+  "arms": {
+    "baseline_transpose12": {
+      "card": {
+        "changes": {},
+        "name": "baseline_transpose12",
+        "scope": "published image path (transpose width 12)"
+      },
+      "quality": {
+        "confirmed_step": null,
+        "error": null,
+        "hq": 0.03125,
+        "last_obs": {
+          "hq": 0.03125,
+          "mean_rmse": 0.07831675559282303,
+          "modes": 0
+        },
+        "mean_rmse": 0.07831675559282303,
+        "modes": 0,
+        "seconds": 8.631658026017249,
+        "sustained": false
+      },
+      "seconds": 8.63227583700791,
+      "verdict": "FAIL"
+    },
+    "residual16": {
+      "card": {
+        "changes": {
+          "architecture": "residual_upsample",
+          "width": 16
+        },
+        "name": "residual16",
+        "scope": "in-formulation architecture control"
+      },
+      "quality": {
+        "confirmed_step": 575,
+        "error": null,
+        "hq": 1.0,
+        "last_obs": {
+          "hq": 1.0,
+          "mean_rmse": 0.02227468602359295,
+          "modes": 2
+        },
+        "mean_rmse": 0.02227468602359295,
+        "modes": 2,
+        "seconds": 8.39554320811294,
+        "sustained": true
+      },
+      "seconds": 8.3961759400554,
+      "verdict": "PASS"
+    }
+  },
+  "hit": true,
+  "principal": "vh_bars2 unpaired V vs H bars: published transpose12 vs residual16",
+  "published_winner": "image suite baseline transpose12 (RpGAN+b_cap+particles)",
+  "soft_miss": false,
+  "task": "img_vh_bars2",
+  "tip_sha": "510e0054b2499ce725482de8e7a4ae8d72fd8f25"
+}
