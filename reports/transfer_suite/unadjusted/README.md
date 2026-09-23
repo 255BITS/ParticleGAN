@@ -8,7 +8,7 @@ Reproduce the selected profile with [one command](../../../benchmarks/transfer_s
 
 | Candidate | Required | Data | Images | Live total | Reference D profile | Attempted | Overall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| shared c6 (`shared_c6`) | 9/9 | 6/6 | 4/4 | **19/19** | 15/19 | 19/19 | **PASS** |
+| GAN v3 (current default; shared_c6) (`shared_c6`) | 9/9 | 6/6 | 4/4 | **19/19** | 15/19 | 19/19 | **PASS** |
 | lr00425 prior2 (`lr00425_prior2`) | 8/9 | 3/6 | 4/4 | **15/19** | 15/19 | 19/19 | **FAIL** |
 | Ratio G0.0034 D0.0068 P0.0085 (`ratio_g34_d68_p85`) | 8/9 | 3/6 | 4/4 | **15/19** | 15/19 | 19/19 | **FAIL** |
 | equal lr 00425 (`equal_lr_00425`) | 8/9 | 3/6 | 3/4 | **14/19** | 14/19 | 19/19 | **FAIL** |
@@ -20,8 +20,8 @@ Reproduce the selected profile with [one command](../../../benchmarks/transfer_s
 | lr0034 dprior125 (`lr0034_dprior125`) | 7/9 | 3/6 | 3/4 | **13/19** | 13/19 | 19/19 | **FAIL** |
 | relative cap 05 (`relative_cap_05`) | 7/9 | 2/6 | 3/4 | **12/19** | 12/19 | 19/19 | **FAIL** |
 | equal lr 0017 (`equal_lr_0017`) | 5/9 | 2/6 | 4/4 | **11/19** | 11/19 | 19/19 | **FAIL** |
-| Proposed public default (`gan`) | 1/9 | 6/6 | 1/4 | **8/19** | 8/19 | 19/19 | **FAIL** |
-| Current master default (`gan_legacy`) | 1/9 | 3/6 | 1/4 | **5/19** | 5/19 | 19/19 | **FAIL** |
+| GAN v2 (previous default; archived gan) (`gan`) | 1/9 | 6/6 | 1/4 | **8/19** | 8/19 | 19/19 | **FAIL** |
+| GAN v1 (original preset) (`gan_legacy`) | 1/9 | 3/6 | 1/4 | **5/19** | 5/19 | 19/19 | **FAIL** |
 
 Rank complete candidates by live passes, then lower normalized final metric shortfall. An all-pass candidate is the target; a partial improvement is not an all-pass stamp.
 

@@ -49,7 +49,8 @@ Create a JSON file, for example `/tmp/my-candidate.json`:
 ```
 
 These are example search settings, not a claim that this candidate passes.
-Unspecified fields inherit `get_recipe("gan")`. The resolved full recipe is
+This historical search runner pins unspecified fields to `get_recipe("gan_v2")`.
+Use the explicit leading profile to reproduce v3; public `get_recipe()` selects v3. The resolved full recipe is
 recorded for every run. The same card applies to all tests.
 
 ```bash

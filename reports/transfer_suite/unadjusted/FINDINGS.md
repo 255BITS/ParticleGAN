@@ -10,15 +10,16 @@ features, making concentration within each generated cluster visible to it.
 | `shared_c6`, with declared D choices | 9/9 | 6/6 | 4/4 | **19/19** | 15/19 |
 | `lr00425_prior2`, cap coefficient 3 | 8/9 | 3/6 | 4/4 | 15/19 | 15/19 |
 | `ratio_g34_d68_p85` | 8/9 | 3/6 | 4/4 | 15/19 | 15/19 |
-| Public preset `gan` | 1/9 | 6/6 | 1/4 | 8/19 | 8/19 |
-| Pinned old preset `gan_legacy` | 1/9 | 3/6 | 1/4 | 5/19 | 5/19 |
+| Previous preset `gan_v2` | 1/9 | 6/6 | 1/4 | 8/19 | 8/19 |
+| Original preset `gan_v1` | 1/9 | 3/6 | 1/4 | 5/19 | 5/19 |
 
 The winning recipe is unchanged from the 18/19 baseline: **Rp logistic, b_cap
 coefficient 6, κ1.25, particle spread .05, no particle L2, Adam (0,.99), G/D LR
 .00425 and particle LR .0085** everywhere. Rates hold for 60% of the fixed
 budget, then cosine toward 5%. No host-specific optimizer or loss adjustments.
-This establishes a reproducible shared-recipe baseline; package preset values
-have not been changed by this research round.
+This is now the public `gan_v3` default, also selected by `get_recipe()` and
+`get_recipe("gan")`. Versioned v1/v2 presets preserve earlier behavior.
+[Illustrated guide, equations and version comparison](../../../docs/gan-v3.md).
 
 ## What fixed the last case
 

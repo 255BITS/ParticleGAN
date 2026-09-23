@@ -2,13 +2,19 @@
 
 **Learnable particle priors and GAN building blocks for PyTorch.**
 
-**Shared-default search:** the [primary unadjusted leaderboard](reports/transfer_suite/unadjusted/README.md)
-tests one unchanged recipe across all 19 behavioral cases. Baselines are **8/19
-for the proposed default** and **5/19 for current master**; neither is an overall
-PASS. [Join the search: rules and one-command candidate evaluation](benchmarks/transfer_suite/UNADJUSTED_SEARCH.md).
-The first shared-recipe search reaches **15/19**; [results and remaining failures](reports/transfer_suite/unadjusted/FINDINGS.md)
-include every attempt and exact candidate cards.
-The historical adjusted 19/19 result does not qualify for this leaderboard.
+**GAN v3 is the default:** one shared recipe passes **19/19 live behavioral toys**
+with declared discriminator choices (15/19 with the reference D profile).
+
+| Recipe version | Live toys passed | Status |
+| --- | ---: | --- |
+| `gan_v1` / `gan_legacy` | 5/19 | Original preset |
+| `gan_v2` | 8/19 | Previous default |
+| **`gan_v3` / `gan`** | **19/19** | **Current default, with documented D choices** |
+
+[Illustrated guide and equations](docs/gan-v3.md) ·
+[Full leaderboard](reports/transfer_suite/unadjusted/README.md) ·
+[Reproduce or compare a candidate](benchmarks/transfer_suite/UNADJUSTED_SEARCH.md).
+EMA is separate; a PASS requires every metric at five consecutive final checks.
 
 [API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md) · [Minimal GAN loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-training-loop) ·
 [Minimal DDGAN + UCD loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-ddgan--ucd-loop)
@@ -60,36 +66,23 @@ example with flushed logs and resumable checkpoints. See
 The optional helper supports scalar, unconditional GANs with particle priors;
 the independent primitives remain available for other training loops.
 
-The [convergence leaderboard](reports/behavioral_baseline/convergence/README.md)
-compares full behavioral passes, sustained coverage, speed and data-scale
-sensitivity. `get_recipe()` now selects the winning b_cap3 formulation;
-`get_recipe("gan_legacy")` retains the earlier GAN defaults and
-`get_recipe("gan_behavioral")` preserves the earlier named study candidate.
-A [learned LR controller study](reports/learned_lr/README.md) also retains fitted
-weights and held-out comparisons; its current policy does not beat cosine.
-The broader [transfer leaderboard](reports/transfer_suite/README.md) separates
-required regressions, practical ranking tests, and nonblocking stress diagnostics.
-The [formulation leaderboard](reports/transfer_suite/formulations/README.md)
-compares candidate-owned training recipes, with architecture variants inside
-the same entry: the selected b_cap3 core passes **9/9 required and 10/10
-practical data/image toys** with suitable architectures and established training
-settings per toy. The [matched default comparison](reports/transfer_suite/default_comparison/README.md)
-scores the full public optimizer presets **8/19 proposed versus 5/19 current**
-on those same test hosts. Holding host optimizer settings fixed, the core
-formulations score **19/19 versus 17/19**. One universal numerical preset has
-not passed the full suite.
-The [valid-toy search](reports/transfer_suite/valid_search/README.md) records the
-discriminator-only improvement and separate optimizer/resource trials.
-The [default promotion](reports/transfer_suite/default_promotion/README.md)
-verifies the public recipe, trainer and `LinearSkipDiscriminator` against the
-rare-mode winner at every live/EMA checkpoint. The reference discriminator
-passes 3/6 data toys itself; architecture remains an application choice.
-Imposed training-condition variants are diagnostics; [longer training](reports/transfer_suite/formulations/LONG_TRAINING.md)
-is a separate toy. The [solvability audit](reports/transfer_suite/solvability/README.md)
-retains all 16 historical individual solver witnesses.
-On the actual 100-Gaussian task the earlier behavioral candidate ties stock's
-live convergence step. The newly promoted numerical preset has not been compared
-there yet. Neither preset guarantees transfer to new architectures or data units.
+`get_recipe()` selects the versioned **GAN v3** recipe: Rp logistic, b_cap6,
+κ1.25, particle spread .05, Adam (0,.99), G/D LR .00425 and particle LR .0085.
+The optional `BatchDistanceDiscriminator` exposes local within-batch spread to D.
+The 19/19 result uses an explicit D profile; architecture remains an application
+choice. [See the illustrated explanation and measured limits](docs/gan-v3.md).
+
+![How GAN v3 trains particles, generator and discriminator.](docs/figures/gan-v3-pipeline.svg)
+
+Pin `gan_v1`, `gan_v2` or `gan_v3` for reproducibility. `gan_legacy` remains v1;
+the historical `100gaussians` alias remains v2. Domain recipes stay separately
+pinned. Existing checkpoints retain their full resolved recipe and architecture.
+The [historical adjusted comparison](reports/transfer_suite/default_comparison/README.md)
+used different optimizer settings per toy and remains separate. Earlier
+[controller research](reports/learned_lr/README.md), [transfer studies](reports/transfer_suite/README.md)
+and [individual solvability witnesses](reports/transfer_suite/solvability/README.md)
+remain documented. The v3 result does not establish unseen-network or
+100-Gaussian convergence improvements.
 
 The [paired 2D transport extraction](reports/paired_error_2d/README.md) tests the
 MSE-free paired-error game with movable/fixed clouds. All 12 matching application
@@ -152,7 +145,7 @@ from particlegan import ParticlePrior, GANLoss, get_recipe
 recipe = get_recipe()
 prior = recipe.make_prior().to(device)  # 20,000 particles, z_dim=4
 adversarial = recipe.make_loss()       # relativistic-paired logistic
-penalty = recipe.make_gradient_penalty()  # b_cap, coefficient 3, cap 1.25
+penalty = recipe.make_gradient_penalty()  # b_cap, coefficient 6, cap 1.25
 spread = recipe.make_prior_regularizer()  # variance/covariance weight .05
 
 # Customize with ordinary keyword arguments:
@@ -322,21 +315,21 @@ returns a new one. Unknown options raise errors.
 | --- | --- | --- |
 | Generation | One-shot GAN | Four-step DDGAN |
 | Prior | 20,000 learned particles, dimension 4 | Same |
-| GAN loss / critic penalty | Rp logistic / exact L2 cap, weight 3, κ=1.25 | Rp logistic / cap weight 1, κ=1 |
+| GAN loss / critic penalty | Rp logistic / exact L2 cap, weight 6, κ=1.25 | Rp logistic / cap weight 1, κ=1 |
 | Particle regularizer | VICReg, weight .05; no particle L2 | VICReg, weight 1 |
-| Adam learning rates: G / D / prior | .001 / .0015 / .01 | .0006 / .0009 / .006 |
+| Adam learning rates: G / D / prior | .00425 / .00425 / .0085 | .0006 / .0009 / .006 |
 | Adam betas / EMA decay | (0, .99) / .995 | (0, .999) / .995 |
 | Schedule | Hold 60%, cosine to 5% | Same |
 | Batch size / training updates | 256 / 7,000 | 256 / 56,000 |
 | Conditioning | Unconditional | Class-only UCD, 4 classes, CE weight 0.02 |
 
-GAN now selects the behavioral-suite winner. DDGAN, MoG and autoencoder
-recipes retain their separately selected settings. `gan_legacy` preserves the
-previous GAN recipe, including its optimizer settings.
-Networks remain application choices. For flat vectors, the optional
-`LinearSkipDiscriminator()` supplies the rare-mode reference: D96×2,
-Softplus(beta5), Fourier2 and a learned raw linear skip initialized to zero. Changing the architecture or dataset changes the
-experiment; the recipe alone does not establish convergence on a new problem.
+GAN selects the v3 shared-recipe winner. DDGAN, MoG and autoencoder recipes
+retain their separately selected settings. `gan_v1` / `gan_legacy` and `gan_v2`
+preserve earlier GAN recipes, including optimizer settings.
+For flat 2D vectors, `BatchDistanceDiscriminator()` provides the final witness:
+centered features, D96×3, Softplus β6 and four smooth local-distance features.
+The older `LinearSkipDiscriminator` remains available. The new D depends on batch
+composition and input units; see [the guide](docs/gan-v3.md) before changing those.
 
 [The executable PyTorch loop](https://github.com/255BITS/ParticleGAN/blob/master/examples/pytorch_loop.py) shows optimizer setup,
 D freezing/restoration, unique-particle regularization, the learning-rate
@@ -599,7 +592,11 @@ python examples/100gaussians.py
 
 The historical particle study reports runs with 100/100 modes and approximately 99% of samples within 3σ of a center after 7k steps. Coverage alone does not establish that the within-mode distribution is correct; the trainer also records shape and transport metrics.
 
-The default GAN recipe is RpGAN (relativistic, logistic) + a one-sided cap gradient penalty on D (`relu(‖∇ₓD‖ − 1.25)²` on reals and fakes, coeff 3), particle variance/covariance regularization .05, no particle L2, Adam (0,.99), and base LR .001 with a delayed cosine anneal. Live weights determine success; EMA is reported separately. Architecture remains caller-owned, with `LinearSkipDiscriminator` available as the 2D rare-mode reference. The cap won a 420-run bake-off against the zero-centered R1/R2 penalty, which is still available with `--reg_arm a_r1r2 --reg_coeff 0.02`. See [FINDINGS.md](https://github.com/255BITS/ParticleGAN/blob/master/FINDINGS.md) for the study and [docs/convergence-tips.md](https://github.com/255BITS/ParticleGAN/blob/master/docs/convergence-tips.md) for the transferable reasoning behind each ingredient.
+The default library recipe is GAN v3: Rp logistic, one-sided cap coefficient 6
+and κ1.25, particle spread .05, no particle L2, Adam (0,.99), G/D LR .00425,
+particle LR .0085, and delayed cosine decay. The `100gaussians` experiment alias
+retains v2 settings. See the [versioned guide](docs/gan-v3.md) and
+[original cap study](FINDINGS.md).
 
 **Without particle prior** (baseline):
 ```bash
@@ -641,11 +638,19 @@ toy trainers. The faster CIFAR default retains exact derivatives; FD is optional
 
 - The text experiments (`five_modes.py`) use the same recipe (RpGAN + one-sided cap penalty on the joint critic ∇₍ₓ,𝓏₎D, EMA, β1=0, cosine anneal)
 - The 100-Gaussian experiments use the one-sided cap penalty (`--reg_arm`, default `b_cap`); a gradient penalty is what lets the sharp Fourier discriminator keep full mode coverage
-- Particles use a higher learning rate (10×) than G/D for faster adaptation
+- GAN v3 particles use 2× the G learning rate; historical/domain recipes keep their own ratios.
 
 ## Changelog
 
 Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
+
+### 0.6.0 — unreleased
+
+- Promote the shared 19/19 recipe to GAN v3; preserve explicit v1/v2 presets.
+- Add `BatchDistanceDiscriminator`, the batch-aware final toy witness, and use
+  it in the GAN quickstart. D architecture remains explicit in the leaderboard.
+- Add the [illustrated configuration guide](docs/gan-v3.md), equations and
+  versioned toy results. Live weights decide PASS; EMA remains separate.
 
 ### 0.5.0 — 2026-09-17
 

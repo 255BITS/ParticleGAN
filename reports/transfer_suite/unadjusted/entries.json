@@ -1,14 +1,14 @@
 [
   {
     "name": "gan",
-    "label": "Proposed public default",
+    "label": "GAN v2 (previous default; archived gan)",
     "indexes": [
       "reports/transfer_suite/default_comparison/proposed/index.json"
     ]
   },
   {
     "name": "gan_legacy",
-    "label": "Current master default",
+    "label": "GAN v1 (original preset)",
     "indexes": [
       "reports/transfer_suite/default_comparison/current/index.json"
     ]
@@ -57,7 +57,7 @@
   },
   {
     "name": "shared_c6",
-    "label": "shared c6",
+    "label": "GAN v3 (current default; shared_c6)",
     "indexes": [
       "reports/transfer_suite/unadjusted/runs/round1-0/index.json",
       "reports/transfer_suite/unadjusted/runs/completion-1/index.json",

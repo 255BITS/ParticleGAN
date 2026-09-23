@@ -13,14 +13,14 @@ shared recipe to optimizers, losses, regularization, decay and EMA.
 ```python
 import torch
 from torch import nn
-from particlegan import LinearSkipDiscriminator, get_recipe
+from particlegan import BatchDistanceDiscriminator, get_recipe
 
 torch.manual_seed(0)
 device = torch.device("cpu")
 recipe = get_recipe("gan", total_steps=1000)
 G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(.2),
                   nn.Linear(64, 64), nn.LeakyReLU(.2), nn.Linear(64, 2)).to(device)
-D = LinearSkipDiscriminator().to(device)
+D = BatchDistanceDiscriminator().to(device)
 trainer = recipe.make_trainer(G, D, seed=0)
 
 def real_batch():
@@ -87,38 +87,49 @@ callback can occur after D has updated, so restore a checkpoint before retrying
 that interrupted update. AMP, distributed training and custom update ratios
 require a caller-owned loop.
 
-`get_recipe()` / `get_recipe("gan")` selects Rp logistic, b_cap coefficient 3,
-κ=1.25, prior spread weight .05, Adam(0,.99), G LR .001, D LR .0015 and
-particle LR .01. Cosine holds the rate for 60% of the budget, then decays toward
-5%. There is no particle L2 term. Live sampling is the default; EMA is explicit.
-The 19/19 behavioral result permits a suitable architecture per toy and retains
-each host's resources/rates; it is not evidence of one universal network or
-optimizer preset. The generic recipe keeps 20,000 particles and 7,000 updates;
-set those resources for your task. [Promotion and exact API replay](../reports/transfer_suite/default_promotion/README.md).
+`get_recipe()` / `get_recipe("gan")` selects canonical **`gan_v3`**: Rp logistic,
+b_cap coefficient 6, κ1.25, spread .05, Adam (0,.99), G/D LR .00425 and particle
+LR .0085. Rates hold for 60% of the budget, then cosine toward 5%. There is no
+particle L2 term. Live sampling is the default; EMA is explicit.
 
-The subsequent [matched test comparison](../reports/transfer_suite/default_comparison/README.md)
-applies the public optimizer settings to every host: `gan` passes **8/19** and
-`gan_legacy` **5/19**. With the established host optimizer settings held fixed,
-the new and old core formulations pass **19/19** and **17/19**, respectively.
-The default preset itself has not achieved the all-tests-pass target.
+| Version | Live behavioral toys passed | Meaning |
+| --- | ---: | --- |
+| `gan_v1` / `gan_legacy` | 5/19 | Original preset |
+| `gan_v2` | 8/19 | Previous public preset |
+| `gan_v3` / `gan` | **19/19** | Shared recipe with declared D choices |
 
-`get_recipe("gan_legacy")` restores the previous GAN recipe: LR .0006,
-Adam(0,.999), cap coefficient 1, κ=1 and prior weight 1. The older
-`gan_behavioral` study candidate remains unchanged (LR .00051, Adam(0,.999),
-cap coefficient 3, κ=1.25, prior weight .05). MoG, DDGAN and autoencoder presets
-keep their separately selected settings. Saved full recipe dictionaries restore
-through `Recipe(**saved_recipe)`; resume with the original networks and recipe.
+The v3 reference D profile scores 15/19. Its 19/19 result keeps optimizer/loss
+settings identical across tests and permits task-specific discriminator
+architectures. Each host retains its frozen resources and update budget.
+The generic API uses 20,000 particles and 7,000 updates; choose resources for
+your application. [Illustrated guide, math and limits](gan-v3.md).
 
-### Optional vector discriminator
+`gan_v1` restores G/D/particle LR .0006/.0009/.006, Adam (0,.999), cap1/κ1,
+spread1. `gan_v2` restores .001/.0015/.01, Adam (0,.99), cap3/κ1.25, spread .05.
+`gan_behavioral`, `100gaussians`, MoG, DDGAN and autoencoder recipes retain their
+historical settings. Restore saved full recipe dictionaries through
+`Recipe(**saved_recipe)` and resume with the original networks and recipe.
+
+### Optional vector discriminators
+
+`BatchDistanceDiscriminator(in_dim=2, hidden_dim=96, n_hidden=3,
+scales=(.1,.25,.5,1.), beta=6., eps=1e-5)` accepts nonempty flat
+`[batch, in_dim]` inputs and returns one score per sample. Its 2D defaults exactly
+reproduce the v3 unequal-mass witness with **19,013 parameters**: per-example
+hidden feature centering, Softplus β6, and differentiable kernel-weighted
+neighbor distances appended to the final head. Self-pairs are excluded.
+
+Scores depend on other samples in the current input batch, including during
+G updates and gradient-cap differentiation. Real/fake calls compute separate
+features; there are no running statistics. Cost is quadratic in batch size,
+and scales are in input-coordinate units. The measured witness uses 2D inputs
+and batch size 128. You supply D explicitly; the class is not substituted for
+every network in the 19/19 architecture profile.
 
 `LinearSkipDiscriminator(in_dim=2, hidden_dim=96, n_hidden=2, fourier=2, beta=5.)`
-accepts flat `[batch, in_dim]` inputs and returns one scalar per example.
-It adds a bias-free raw-input linear branch to a smooth Fourier MLP. The branch
-starts at zero. The 2D defaults exactly reproduce the rare-mode winner, with
-10,467 parameters and full gradient-cap double-backpropagation support.
-This D passes 3/6 data toys; other suite cases use other supported architectures.
-You can supply your own discriminator to `make_trainer`.
-
+remains the historical v2 witness: a smooth Fourier MLP plus a zero-initialized
+raw linear branch, 10,467 parameters. It supports native cap double backward.
+Both classes can be passed to `make_trainer` or used in a custom loop.
 
 ## A minimal DDGAN + UCD loop
 
@@ -435,7 +446,7 @@ from particlegan.locked_shared import LOCKED_SHARED, locked_adv_defaults, make_g
 `make_gan_loss()` and `make_b_cap()` build those two objects and refuse any
 other stamp. Music cover 1.0, a 128-particle hub cloud, FM-on, stranger
 pairing, and a thinned κ are not this stamp. The selected `get_recipe("gan")`
-uses coefficient 3, κ=1.25 and prior regularization .05; this frozen stamp retains
+uses coefficient 6, κ=1.25 and prior regularization .05; this frozen stamp retains
 its original values.
 The full field table is in [locked shared](locked-shared.md). Lunar Lander's
 import of it is [the gym arm](gym-particle-finetune.md#locked-shared-arm).
@@ -574,7 +585,8 @@ Recipe(**resolved_dict)                      # Restore resolved fields.
 overrides its class count. `Recipe` is the resolved data object: setting only
 `Recipe(name="ddgan")` does **not** select those defaults. Use `get_recipe` to
 resolve named presets. Unknown fields are rejected. Historical names
-`100gaussians` and `denoising` remain accepted aliases for GAN and DDGAN.
+`100gaussians` and `denoising` remain pinned to historical GAN v2 and DDGAN settings.
+`gan_v1`, `gan_v2` and `gan_v3` select fixed GAN versions; `gan` follows v3.
 
 `get_recipe("mog")` selects the compact MoG leader: 400 components, z_dim=4,
 sigma_rel=1/40, standardized reads, 28,000 steps, prior LR multiplier 100
