@@ -18,6 +18,8 @@ def policy_multipliers(
     anneal_start: float,
     floor: float,
     network_lr_horizon_cap: int | None = None,
+    *,
+    network_lr_floor: float | None = None,
 ) -> tuple[float, float]:
     """Return (G/D multiplier, prior multiplier) for the next update."""
     if type(completed_step) is not int or completed_step < 0:
@@ -28,14 +30,25 @@ def policy_multipliers(
         type(network_lr_horizon_cap) is not int or network_lr_horizon_cap <= 0
     ):
         raise ValueError("network_lr_horizon_cap must be a positive integer")
+    if network_lr_floor is not None:
+        if network_lr_horizon_cap is None:
+            raise ValueError("network_lr_floor requires network_lr_horizon_cap")
+        if (isinstance(network_lr_floor, bool)
+                or not isinstance(network_lr_floor, (int, float))
+                or not math.isfinite(network_lr_floor)
+                or not 0 <= network_lr_floor <= 1):
+            raise ValueError("network_lr_floor must be a finite fraction in [0, 1]")
     horizon = min(total_steps, network_lr_horizon_cap or total_steps)
-    network = learning_rate_scale(completed_step, horizon, anneal_start, floor)
+    network = learning_rate_scale(
+        completed_step, horizon, anneal_start,
+        floor if network_lr_floor is None else network_lr_floor,
+    )
     prior = learning_rate_scale(completed_step, total_steps, anneal_start, floor)
     return network, prior
 
 
 def step_with_policy(trainer, real, *, network_lr_horizon_cap: int | None = None,
-                     **step_kwargs):
+                     network_lr_floor: float | None = None, **step_kwargs):
     """Run one ordinary GANTrainer update with a capped dense-network horizon.
 
     GANTrainer sets ordinary full-budget group rates inside ``step``. Local
@@ -45,16 +58,16 @@ def step_with_policy(trainer, real, *, network_lr_horizon_cap: int | None = None
     the trainer's base rates are never modified, including in checkpoints.
     """
     total = trainer.recipe.total_steps
-    if network_lr_horizon_cap is None or network_lr_horizon_cap >= total:
-        if network_lr_horizon_cap is not None:
-            policy_multipliers(trainer.completed_steps, total,
-                               trainer.recipe.lr_anneal_start, trainer.recipe.lr_floor,
-                               network_lr_horizon_cap)
+    if network_lr_horizon_cap is None and network_lr_floor is None:
         return trainer.step(real, **step_kwargs)
     network, prior = policy_multipliers(
         trainer.completed_steps, total, trainer.recipe.lr_anneal_start,
         trainer.recipe.lr_floor, network_lr_horizon_cap,
+        network_lr_floor=network_lr_floor,
     )
+    if (network_lr_horizon_cap >= total
+            and (network_lr_floor is None or network_lr_floor == trainer.recipe.lr_floor)):
+        return trainer.step(real, **step_kwargs)
     if len(trainer.opt_g.param_groups) != 2 or len(trainer.opt_d.param_groups) != 1:
         raise RuntimeError("expected G, prior, and D optimizer groups")
 
@@ -77,7 +90,8 @@ def step_with_policy(trainer, real, *, network_lr_horizon_cap: int | None = None
 
 
 def policy_rate_action(trainer, completed_step: int, *,
-                       network_lr_horizon_cap: int | None = None) -> dict:
+                       network_lr_horizon_cap: int | None = None,
+                       network_lr_floor: float | None = None) -> dict:
     """Record and verify the rates actually left on optimizer groups."""
     if type(completed_step) is not int or completed_step != trainer.completed_steps or completed_step < 1:
         raise ValueError("completed_step must equal the trainer's completed update count")
@@ -85,6 +99,7 @@ def policy_rate_action(trainer, completed_step: int, *,
         completed_step - 1, trainer.recipe.total_steps,
         trainer.recipe.lr_anneal_start, trainer.recipe.lr_floor,
         network_lr_horizon_cap,
+        network_lr_floor=network_lr_floor,
     )
     if len(trainer.opt_g.param_groups) != 2 or len(trainer.opt_d.param_groups) != 1:
         raise RuntimeError("expected G, prior, and D optimizer groups")
@@ -101,6 +116,9 @@ def policy_rate_action(trainer, completed_step: int, *,
     for role, actual in rates.items():
         if not math.isclose(actual, expected[role], rel_tol=1e-12, abs_tol=1e-15):
             raise RuntimeError(f"{role} diverged from declared network LR policy")
-    return {**rates, "network_multiplier": network,
-            "prior_multiplier": prior,
-            "network_lr_horizon_cap": network_lr_horizon_cap}
+    receipt = {**rates, "network_multiplier": network,
+               "prior_multiplier": prior,
+               "network_lr_horizon_cap": network_lr_horizon_cap}
+    if network_lr_floor is not None:
+        receipt["network_lr_floor"] = float(network_lr_floor)
+    return receipt

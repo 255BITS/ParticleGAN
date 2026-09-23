@@ -54,7 +54,7 @@ REMAINING_NAMES = (
     "img_stripes2", "img_bars4", "img_blobs4", "img_intensity2",
 )
 NOISE_SOURCE = ROOT / "benchmarks/toy100/models.py"
-MODEL_POLICY_FIELDS = ("toy100_model", "network_lr_horizon_cap")
+MODEL_POLICY_FIELDS = ("toy100_model", "network_lr_horizon_cap", "network_lr_floor")
 
 
 def declared_model_policy(config: dict) -> dict:
@@ -77,6 +77,13 @@ def declared_model_policy(config: dict) -> dict:
         if type(cap) is not int or cap <= 0:
             raise ValueError("network_lr_horizon_cap must be a positive integer")
         policy["network_lr_horizon_cap"] = cap
+    if "network_lr_floor" in config:
+        floor = config["network_lr_floor"]
+        if ("network_lr_horizon_cap" not in policy
+                or isinstance(floor, bool) or not isinstance(floor, (int, float))
+                or not math.isfinite(floor) or not 0 <= floor <= 1):
+            raise ValueError("network_lr_floor requires a cap and a finite fraction in [0, 1]")
+        policy["network_lr_floor"] = float(floor)
     return policy
 
 
@@ -221,6 +228,7 @@ def run_vector(spec, card, base, noise, *, model_policy=None):
         real = vector_tasks.sample_target(cfg, cfg["batch"], data_rng, completed)
         real_g = lambda: vector_tasks.sample_target(cfg, cfg["batch"], data_rng, completed)
         cap = (model_policy or {}).get("network_lr_horizon_cap")
+        network_floor = (model_policy or {}).get("network_lr_floor")
         if cap is None:
             stats = trainer.step(real, generator_real=real_g)
             action = rate_action(trainer, completed)
@@ -229,9 +237,11 @@ def run_vector(spec, card, base, noise, *, model_policy=None):
             stats = step_with_policy(
                 trainer, real, generator_real=real_g,
                 network_lr_horizon_cap=cap,
+                network_lr_floor=network_floor,
             )
             action = dict(step=completed) | policy_rate_action(
                 trainer, completed, network_lr_horizon_cap=cap,
+                network_lr_floor=network_floor,
             )
         if not all(torch.isfinite(value) for key, value in stats.items()
                    if key != "step" and isinstance(value, torch.Tensor)):
@@ -334,6 +344,7 @@ def run_image(spec, base, noise, *, model_policy=None):
         real = centers[torch.randint(len(centers), (spec["batch_size"],))]
         real = (real + spec["noise_std"] * torch.randn_like(real)).clamp(0., 1.)
         cap = (model_policy or {}).get("network_lr_horizon_cap")
+        network_floor = (model_policy or {}).get("network_lr_floor")
         if cap is None:
             stats = trainer.step(real, generator_real=real)
             action = rate_action(trainer, completed)
@@ -342,9 +353,11 @@ def run_image(spec, base, noise, *, model_policy=None):
             stats = step_with_policy(
                 trainer, real, generator_real=real,
                 network_lr_horizon_cap=cap,
+                network_lr_floor=network_floor,
             )
             action = dict(step=completed) | policy_rate_action(
                 trainer, completed, network_lr_horizon_cap=cap,
+                network_lr_floor=network_floor,
             )
         if not all(torch.isfinite(value) for key, value in stats.items()
                    if key != "step" and isinstance(value, torch.Tensor)):

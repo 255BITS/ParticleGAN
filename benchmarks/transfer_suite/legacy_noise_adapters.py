@@ -348,7 +348,9 @@ def run_legacy(spec: dict, recipe, noise: dict, *, model_policy: dict | None = N
     )
     schedule = vector_tasks.fixed_policy("cosine")
     cap = (model_policy or {}).get("network_lr_horizon_cap")
-    with optimizer_defaults(recipe, applied, network_lr_horizon_cap=cap):
+    network_floor = (model_policy or {}).get("network_lr_floor")
+    with optimizer_defaults(recipe, applied, network_lr_horizon_cap=cap,
+                            network_lr_floor=network_floor):
         control = evaluate.FixedControl(schedule, spec["steps"])
         with bridge.control_host_schedules(control):
             result = baseline.run_toy(

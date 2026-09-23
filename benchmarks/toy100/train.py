@@ -62,7 +62,7 @@ RUN_DEFAULTS = {
 }
 OPTIONAL_RUN_FIELDS = {
     "output_noise_warmup", "output_noise_learnable",
-    "toy100_model", "network_lr_horizon_cap",
+    "toy100_model", "network_lr_horizon_cap", "network_lr_floor",
 }
 RECIPE_FIELDS = {field.name for field in fields(Recipe)}
 RUN_FIELDS = set(RUN_DEFAULTS) | OPTIONAL_RUN_FIELDS
@@ -213,6 +213,13 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         or run["network_lr_horizon_cap"] <= 0
     ):
         raise ValueError("network_lr_horizon_cap must be a positive integer")
+    if "network_lr_floor" in run:
+        value = run["network_lr_floor"]
+        if "network_lr_horizon_cap" not in run:
+            raise ValueError("network_lr_floor requires network_lr_horizon_cap")
+        if (isinstance(value, bool) or not isinstance(value, (int, float))
+                or not math.isfinite(value) or not 0 <= value <= 1):
+            raise ValueError("network_lr_floor must be a finite fraction in [0, 1]")
     recipe_kwargs = {key: user[key] for key in user if key in RECIPE_FIELDS and key != "name"}
     recipe_kwargs["total_steps"] = run["steps"]
     recipe = get_recipe(**recipe_kwargs)
@@ -462,7 +469,8 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     if torch.device(resolved["device"]).type == "cuda":
         torch.backends.cuda.matmul.allow_tf32 = False
     _write_json(out_dir / "config.json", resolved)
-    policy_enabled = ("toy100_model" in resolved or "network_lr_horizon_cap" in resolved)
+    policy_enabled = ("toy100_model" in resolved or "network_lr_horizon_cap" in resolved
+                      or "network_lr_floor" in resolved)
     provenance = (_source_provenance(include_policy=True) if policy_enabled
                   else _source_provenance())
     if policy_enabled:
@@ -500,6 +508,8 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     }
     if "network_lr_horizon_cap" in resolved:
         summary["network_lr_horizon_cap"] = resolved["network_lr_horizon_cap"]
+    if "network_lr_floor" in resolved:
+        summary["network_lr_floor"] = resolved["network_lr_floor"]
     if accuracy_enabled:
         summary["accuracy"] = {
             "protocol": ACCURACY_PROTOCOL,
@@ -643,6 +653,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                 trainer,
                 real,
                 network_lr_horizon_cap=resolved.get("network_lr_horizon_cap"),
+                network_lr_floor=resolved.get("network_lr_floor"),
                 generator_real=lambda: sample_real(
                     resolved["problem"], recipe.batch_size, device=device,
                     generator=train_data_rng,
@@ -662,6 +673,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                 train_event.update(policy_rate_action(
                     trainer, step,
                     network_lr_horizon_cap=resolved["network_lr_horizon_cap"],
+                    network_lr_floor=resolved.get("network_lr_floor"),
                 ))
             if resolved.get("output_noise_learnable", False):
                 train_event["output_sigma_live"] = _effective_output_sigma(trainer.G)

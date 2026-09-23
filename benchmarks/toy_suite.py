@@ -133,6 +133,7 @@ def _check_actions(record: dict, base: Recipe, noise: dict | None,
     name, steps = spec["name"], spec["steps"]
     actions = result.get("actions", [])
     cap = (model_policy or {}).get("network_lr_horizon_cap")
+    network_floor = (model_policy or {}).get("network_lr_floor")
     if spec["runner"] == "legacy":
         expected = [(step, role) for step in (
                     range(steps) if cap is not None else range(0, steps, 20))
@@ -149,12 +150,17 @@ def _check_actions(record: dict, base: Recipe, noise: dict | None,
             from benchmarks.toy100.schedule import policy_multipliers
             network, prior = policy_multipliers(
                 item["step"], steps, base.lr_anneal_start, base.lr_floor, cap,
+                network_lr_floor=network_floor,
             )
             if (item.get("network_lr_horizon_cap") != cap
                     or not _close(item.get("multiplier"), network)
                     or not _close(item.get("network_multiplier"), network)
                     or not _close(item.get("prior_multiplier"), prior)):
                 raise ValueError(f"custom-host network horizon differs: {name}")
+            if (network_floor is not None and not _close(
+                    item.get("network_lr_floor"), network_floor)) or (
+                    network_floor is None and "network_lr_floor" in item):
+                raise ValueError(f"custom-host network floor differs: {name}")
             expected_roles = ({"d"} if item["role"] == "d" else
                               {row["role"] for row in record["applied"] if row["role"] != "d"})
             actual_groups = item.get("group_lrs")
@@ -183,15 +189,20 @@ def _check_actions(record: dict, base: Recipe, noise: dict | None,
             from benchmarks.toy100.schedule import policy_multipliers
             network, prior = policy_multipliers(
                 completed - 1, steps, base.lr_anneal_start, base.lr_floor, cap,
+                network_lr_floor=network_floor,
             )
             expected_rates = dict(step=completed, network_multiplier=network,
                                   prior_multiplier=prior,
                                   network_lr_horizon_cap=cap)
+            if network_floor is not None:
+                expected_rates["network_lr_floor"] = network_floor
         expected_rates.update(lr_g=base.lr * network,
                               lr_prior=base.lr * base.prior_lr_mult * prior,
                               lr_d=base.lr * base.d_lr_mult * network)
         if any(not _close(action.get(key), value) for key, value in expected_rates.items()):
             raise ValueError(f"trainer LR action differs from common recipe: {name}.{completed}")
+        if network_floor is None and "network_lr_floor" in action:
+            raise ValueError(f"undeclared trainer network floor: {name}.{completed}")
         if noise is not None:
             input_sigma = linear_input_noise(
                 noise["input_noise_std"], completed - 1, steps,
@@ -461,9 +472,14 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
                 or card.get("generator_initial_bias_sha256") != expected_bias_hash):
             raise ValueError(f"100-mode affine initialization receipt differs: {name}")
     cap = policy.get("network_lr_horizon_cap")
+    network_floor = policy.get("network_lr_floor")
     if cap is not None:
         if summary.get("network_lr_horizon_cap") != cap:
             raise ValueError(f"100-mode network horizon receipt differs: {name}")
+        if (network_floor is not None and not _close(
+                summary.get("network_lr_floor"), network_floor)) or (
+                network_floor is None and "network_lr_floor" in summary):
+            raise ValueError(f"100-mode network floor receipt differs: {name}")
         from benchmarks.toy100.schedule import policy_multipliers
         train_events = {}
         for line in (directory / "events.jsonl").read_text().splitlines():
@@ -478,16 +494,23 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
         for step, event in train_events.items():
             network, prior = policy_multipliers(
                 step - 1, steps, config["lr_anneal_start"], config["lr_floor"], cap,
+                network_lr_floor=network_floor,
             )
             expected = dict(network_lr_horizon_cap=cap,
                             network_multiplier=network, prior_multiplier=prior,
                             lr_g=config["lr"] * network,
                             lr_prior=config["lr"] * config["prior_lr_mult"] * prior,
                             lr_d=config["lr"] * config["d_lr_mult"] * network)
+            if network_floor is not None:
+                expected["network_lr_floor"] = network_floor
             if any(not _close(event.get(key), value) for key, value in expected.items()):
                 raise ValueError(f"100-mode policy action differs: {name}.{step}")
+            if network_floor is None and "network_lr_floor" in event:
+                raise ValueError(f"undeclared 100-mode network floor action: {name}.{step}")
     elif summary.get("network_lr_horizon_cap") is not None:
         raise ValueError(f"undeclared 100-mode network horizon receipt: {name}")
+    elif "network_lr_floor" in summary:
+        raise ValueError(f"undeclared 100-mode network floor receipt: {name}")
     return sources
 
 

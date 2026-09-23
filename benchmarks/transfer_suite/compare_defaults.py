@@ -12,6 +12,7 @@ from dataclasses import asdict
 import gzip
 import hashlib
 import json
+import math
 from pathlib import Path
 import time
 import traceback
@@ -83,13 +84,20 @@ def effective_spec(original, recipe):
 
 
 @contextmanager
-def optimizer_defaults(recipe, applied, *, network_lr_horizon_cap=None):
+def optimizer_defaults(recipe, applied, *, network_lr_horizon_cap=None,
+                       network_lr_floor=None):
     """Apply absolute recipe rates to every group, including mixed/AE priors.
 
     The phase bridge identifies existing opt_p direct-particle optimizers. Prior
     instances identify their parameters even when mixed with generator weights.
     Both optimizer-level and explicit per-group Adam betas are replaced.
     """
+    if network_lr_floor is not None and (
+            network_lr_horizon_cap is None or isinstance(network_lr_floor, bool)
+            or not isinstance(network_lr_floor, (int, float))
+            or not math.isfinite(network_lr_floor)
+            or not 0 <= network_lr_floor <= 1):
+        raise ValueError("network_lr_floor requires a cap and a finite fraction in [0, 1]")
     prior_ids = set()
     original_prior = ParticlePrior.__init__
     original_adam = torch.optim.Adam.__init__
@@ -152,6 +160,7 @@ def optimizer_defaults(recipe, applied, *, network_lr_horizon_cap=None):
                     completed_updates, self.total_steps,
                     recipe.lr_anneal_start, recipe.lr_floor,
                     network_lr_horizon_cap,
+                    network_lr_floor=network_lr_floor,
                 )
             group_lrs = []
             for group, rate in zip(optimizer.param_groups, rates):
@@ -167,6 +176,8 @@ def optimizer_defaults(recipe, applied, *, network_lr_horizon_cap=None):
                                   network_multiplier=network_scale,
                                   prior_multiplier=prior_scale,
                                   group_lrs=group_lrs)
+                    if network_lr_floor is not None:
+                        action["network_lr_floor"] = float(network_lr_floor)
                 self.trace.append(action)
 
     with ExitStack() as stack:

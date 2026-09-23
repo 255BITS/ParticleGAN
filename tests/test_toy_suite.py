@@ -35,7 +35,7 @@ from particlegan import get_recipe, learning_rate_scale
 
 
 def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=False,
-                             cap=None):
+                             cap=None, network_floor=None):
     jobs, profile = load_declaration()
     job = next(job for job in jobs if job["spec"]["name"] == "vector_two_broad")
     base = get_recipe()
@@ -79,13 +79,18 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
         for completed, action in enumerate(result["actions"], start=1):
             network, prior = policy_multipliers(
                 completed - 1, steps, base.lr_anneal_start, base.lr_floor, cap,
+                network_lr_floor=network_floor,
             )
             action.update(network_multiplier=network, prior_multiplier=prior,
                           network_lr_horizon_cap=cap,
                           lr_g=base.lr * network,
                           lr_prior=base.lr * base.prior_lr_mult * prior,
                           lr_d=base.lr * base.d_lr_mult * network)
+            if network_floor is not None:
+                action["network_lr_floor"] = network_floor
         model_policy = {"network_lr_horizon_cap": cap}
+        if network_floor is not None:
+            model_policy["network_lr_floor"] = network_floor
     verdict = dict(status="PASS", passed=True, convergence=dict(passing_suffix=5))
     record = dict(
         name=spec["name"], original_spec=deepcopy(job["spec"]), spec=spec,
@@ -147,6 +152,7 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
         input_noise_anneal_end=0.1, output_noise_warmup=0.2,
         **({"output_noise_learnable": True} if learned else {}),
         **({"network_lr_horizon_cap": cap} if cap is not None else {}),
+        **({"network_lr_floor": network_floor} if network_floor is not None else {}),
     )) + "\n").encode()
     (directory / "candidate.json").write_bytes(config_bytes)
     (directory / "noise_source.py").write_bytes(noise_source_bytes)
@@ -325,6 +331,43 @@ def test_candidate_horizon_policy_binds_config_and_archived_schedule(tmp_path, m
     assert "saved source archive differs" in grade["reason"]
 
 
+@pytest.mark.parametrize("floor", [True, float("nan"), float("inf"), -0.01, 1.01])
+def test_transfer_network_floor_rejects_invalid_declaration(floor):
+    with pytest.raises(ValueError, match="network_lr_floor"):
+        declared_model_policy({"network_lr_horizon_cap": 40,
+                               "network_lr_floor": floor})
+    with pytest.raises(ValueError, match="network_lr_floor"):
+        declared_model_policy({"network_lr_floor": 0.005})
+
+
+@pytest.mark.parametrize("tamper,expected", [
+    (lambda record: record["model_policy"].update(network_lr_floor=.01),
+     "global fields differ"),
+    (lambda record: record["result"]["actions"][80].update(network_lr_floor=.01),
+     "trainer LR action differs"),
+    (lambda record: record["result"]["actions"][80].pop("network_lr_floor"),
+     "trainer LR action differs"),
+    (lambda record: record["result"]["actions"][80].update(lr_g=.99),
+     "trainer LR action differs"),
+    (lambda record: record["result"]["actions"][80].update(lr_prior=.99),
+     "trainer LR action differs"),
+])
+def test_candidate_network_floor_binds_policy_and_all_roles(
+    tmp_path, monkeypatch, tamper, expected,
+):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory, cap=40, network_floor=.005)
+    assert toy_suite._episode_rows(directory, (name,), candidate=True)["status"] == "PASS"
+    tampered = tmp_path / "tampered"
+    _write_candidate_episode(tampered, tamper, cap=40, network_floor=.005)
+    grade = toy_suite._episode_rows(tampered, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert expected in grade["reason"]
+
+
 def test_native_affine_policy_regrade_rejects_scratch_and_tampered_receipts(tmp_path):
     config = dict(problem="grid100", seed=31, steps=6, device="cpu",
                   z_dim=2, num_particles=32, batch_size=8,
@@ -428,6 +471,39 @@ def test_native_affine_policy_regrade_rejects_scratch_and_tampered_receipts(tmp_
     ) == historical["source_sha256"]
 
 
+def test_native_network_floor_regrade_binds_summary_and_each_rate(tmp_path):
+    config = dict(problem="grid100", seed=31, steps=6, device="cpu",
+                  z_dim=2, num_particles=32, batch_size=8,
+                  d_hidden=8, n_hidden=1, fourier=3,
+                  eval_samples=128, snapshot_samples=16,
+                  eval_interval=3, snapshot_interval=3, log_interval=3,
+                  threads=1, output_noise_std=.029, input_noise_std=.5,
+                  toy100_model="affine_square_v1", network_lr_horizon_cap=3,
+                  network_lr_floor=.005)
+    directory = tmp_path / "native-floor"
+    summary = train_toy100(config, directory)
+    resolved = summary["config"]
+    policy = declared_model_policy(config)
+    toy_suite._check_toy100_policy(directory, summary, resolved, policy)
+    assert summary["network_lr_floor"] == .005
+
+    missing = deepcopy(summary)
+    missing.pop("network_lr_floor")
+    with pytest.raises(ValueError, match="network floor receipt differs"):
+        toy_suite._check_toy100_policy(directory, missing, resolved, policy)
+
+    path = directory / "events.jsonl"
+    original = path.read_text()
+    for key, value in (("network_lr_floor", .05), ("lr_g", .99),
+                       ("lr_d", .99), ("lr_prior", .99)):
+        rows = [json.loads(line) for line in original.splitlines()]
+        next(row for row in rows if row.get("event") == "train")[key] = value
+        path.write_text("\n".join(json.dumps(row) for row in rows) + "\n")
+        with pytest.raises(ValueError, match="policy action differs"):
+            toy_suite._check_toy100_policy(directory, summary, resolved, policy)
+    path.write_text(original)
+
+
 def test_native_policy_with_learned_noise_regrades_from_archive_after_relocation(
     tmp_path, monkeypatch,
 ):
@@ -508,25 +584,39 @@ def test_common_gate_requires_full_public_package_match_for_policy_pass(
 
 
 @pytest.mark.parametrize("name", ["vector_two_broad", "img_stripes2"])
-def test_transfer_trainer_hosts_record_actual_capped_network_rates(name, monkeypatch):
-    recipe, noise, _ = declared_recipe({"network_lr_horizon_cap": 8})
+@pytest.mark.parametrize("network_floor", [None, .005])
+def test_transfer_trainer_hosts_record_actual_capped_network_rates(
+    name, network_floor, monkeypatch,
+):
+    cap = 1600 if network_floor is not None else 8
+    declaration = {"network_lr_horizon_cap": cap}
+    if network_floor is not None:
+        declaration["network_lr_floor"] = network_floor
+    recipe, noise, _ = declared_recipe(declaration)
     jobs, profile = load_declaration()
     job = next(row for row in jobs if row["spec"]["name"] == name)
     spec, card, _ = declared_spec(job, profile, recipe)
     spec["steps"] = 24
     monkeypatch.setattr(vector_tasks, "EVAL_SAMPLES", 256)
-    policy = {"network_lr_horizon_cap": 8}
+    policy = {"network_lr_horizon_cap": cap}
+    if network_floor is not None:
+        policy["network_lr_floor"] = network_floor
     result, context = (run_vector(spec, card, recipe, noise, model_policy=policy)
                        if name.startswith("vector") else
                        run_image(spec, recipe, noise, model_policy=policy))
     assert len(result["actions"]) == 24
     network, prior = policy_multipliers(23, 24, recipe.lr_anneal_start,
-                                        recipe.lr_floor, 8)
+                                        recipe.lr_floor, cap,
+                                        network_lr_floor=network_floor)
     assert network < prior
     action = result["actions"][-1]
     assert action["step"] == 24
     assert action["network_multiplier"] == network
     assert action["prior_multiplier"] == prior
+    if network_floor is not None:
+        assert action["network_lr_floor"] == network_floor
+    else:
+        assert "network_lr_floor" not in action
     assert action["lr_g"] == pytest.approx(recipe.lr * network)
     assert action["lr_prior"] == pytest.approx(recipe.lr * recipe.prior_lr_mult * prior)
     assert action["lr_d"] == pytest.approx(recipe.lr * recipe.d_lr_mult * network)
