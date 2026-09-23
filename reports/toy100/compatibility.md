@@ -77,6 +77,11 @@ A [four-variant follow-up](noise-near-v1.md) changed one shared field at a time
 around that closest 7/8 row. The two input-decay brackets and reduced input
 peak each pass 6/8; earlier LR annealing passes 5/8. All strict episode checks
 are valid, but no variant reaches the 8/8 threshold for a full 19-host replay.
+A [production-policy prior/cap screen](regularization-screen-v1.md) tested four
+one-field changes on nine frozen bottlenecks with the affine-square/H1600
+model policy recorded. Lowering the critic-cap threshold to κ=1.0 reaches
+7/9, leaving overlap and stripes unresolved. No row reaches its 9/9
+promotion threshold.
 The combined gate remains **incomplete** until one
 identical recipe passes both the three 100-mode problems and all 19 transfer
 cases. Every listed full candidate run includes actual G-output and

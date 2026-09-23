@@ -56,6 +56,10 @@ The installed-wheel public-v3 control is separate from candidate evidence:
 | `noisnear_v1_near_i045`; `artifacts/toy100-accuracy/compatibility/noisnear_v1_near_i045/summary.json` | 6/8 | FAIL | subset only | `artifacts/toy100-accuracy/compatibility/noisnear_v1_near_i045/near_i045.json` · `5159131af458` |
 | `output_only_warm02-bottleneck8`; `artifacts/toy100-accuracy/compatibility/output_only_warm02-bottleneck8/summary.json` | 5/8 | FAIL | subset only | `artifacts/toy100-accuracy/compatibility/output_only_warm02-bottleneck8/accuracy_output_only_warm02.json` · `c2109995988e` |
 | `recommended-vector6`; `artifacts/toy100-accuracy/compatibility/recommended-vector6/summary.json` | 5/6 | INVALID | subset only; noise mechanism not verified on every selected host; strict regrade: candidate noise receipt is absent: vector_two_broad | `artifacts/toy100-accuracy/compatibility/recommended-vector6/recommended.json` · `58b85e9e9fda` |
+| `regscreen_v1_kappa100`; `artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa100/summary.json` | 7/9 | FAIL | subset only | `artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa100/kappa100.json` · `12c1933787fb` |
+| `regscreen_v1_kappa150`; `artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa150/summary.json` | 5/9 | FAIL | subset only | `artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa150/kappa150.json` · `ab824321fbe4` |
+| `regscreen_v1_prior002`; `artifacts/toy100-accuracy/compatibility/regscreen_v1_prior002/summary.json` | 3/9 | FAIL | subset only | `artifacts/toy100-accuracy/compatibility/regscreen_v1_prior002/prior002.json` · `c072a5f4c902` |
+| `regscreen_v1_prior010`; `artifacts/toy100-accuracy/compatibility/regscreen_v1_prior010/summary.json` | 5/9 | FAIL | subset only | `artifacts/toy100-accuracy/compatibility/regscreen_v1_prior010/prior010.json` · `d3c0babd13c7` |
 | `repair-beta99`; `artifacts/toy100-accuracy/compatibility/repair-beta99/summary.json` | 0/1 | INVALID | subset only; noise mechanism not verified on every selected host; strict regrade: candidate noise receipt is absent: vector_unequal_mass | `artifacts/toy100-accuracy/compatibility/repair-beta99/beta99.json` · `21e7f2331dbd` |
 | `repair-cap2`; `artifacts/toy100-accuracy/compatibility/repair-cap2/summary.json` | 1/1 | INVALID | subset only; noise mechanism not verified on every selected host; strict regrade: candidate noise receipt is absent: vector_unequal_mass | `artifacts/toy100-accuracy/compatibility/repair-cap2/cap2.json` · `bbaf4ef2619d` |
 | `repair-cap6`; `artifacts/toy100-accuracy/compatibility/repair-cap6/summary.json` | 0/1 | INVALID | subset only; noise mechanism not verified on every selected host; strict regrade: candidate noise receipt is absent: vector_unequal_mass | `artifacts/toy100-accuracy/compatibility/repair-cap6/cap6.json` · `f68b7d6dd915` |
@@ -84,7 +88,7 @@ The installed-wheel public-v3 control is separate from candidate evidence:
 | `learnable-broad/bottleneck8`; `artifacts/toy100-accuracy/learnable-broad/bottleneck8/summary.json` | 5/8 | FAIL | subset only | `artifacts/toy100-accuracy/learnable-broad/bottleneck8/accuracy_learnable_broad.json` · `d8a4266bb398` |
 
 The [JSON ledger](shared-recipe-search.json) records every selected task,
-pass/fail case, full resolved recipe and noise policy, exact config digest,
+pass/fail case, full resolved recipe, noise and model policies, exact config digest,
 source-archive digest, and custom-host schedule validity. A PASS on a
 subset never counts as 19/19 or 22/22. The combined 22-toy gate is
 [`benchmarks/toy_suite.py`](../../benchmarks/toy_suite.py).

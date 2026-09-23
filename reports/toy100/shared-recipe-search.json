@@ -108,6 +108,7 @@
         "reconstruction_weight": 1.0
       },
       "noise": null,
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/base19/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/base19/protocol.json",
@@ -217,6 +218,7 @@
         "input_noise_anneal_end": 0.2,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/beta1-half-bottleneck8/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/beta1-half-bottleneck8/protocol.json",
@@ -346,6 +348,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/cap2-all19/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/cap2-all19/protocol.json",
@@ -449,6 +452,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/cap2-vector6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/cap2-vector6/protocol.json",
@@ -555,6 +559,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.05
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/coupled_short_warmup-bottleneck8/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/coupled_short_warmup-bottleneck8/protocol.json",
@@ -675,6 +680,7 @@
         "reconstruction_weight": 1.0
       },
       "noise": null,
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/current-branch-public19/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/current-branch-public19/protocol.json",
@@ -777,6 +783,7 @@
         "input_noise_anneal_end": 0.2,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta99-a6-inputend02-subset6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta99-a6-inputend02-subset6/protocol.json",
@@ -887,6 +894,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta99-a6-native10/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta99-a6-native10/protocol.json",
@@ -993,6 +1001,7 @@
         "input_noise_anneal_end": 0.2,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta99-a6-priorlr3-inputend02-subset/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta99-a6-priorlr3-inputend02-subset/protocol.json",
@@ -1099,6 +1108,7 @@
         "input_noise_anneal_end": 0.15,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta99-end015-bottleneck8/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta99-end015-bottleneck8/protocol.json",
@@ -1225,6 +1235,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-all19/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-all19/protocol.json",
@@ -1327,6 +1338,7 @@
         "input_noise_anneal_end": 0.2,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-inputend02-subset6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-inputend02-subset6/protocol.json",
@@ -1432,6 +1444,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-priorbetas99-subset6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-priorbetas99-subset6/protocol.json",
@@ -1534,6 +1547,7 @@
         "input_noise_anneal_end": 0.2,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-priorlr3-inputend02-subset/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-priorlr3-inputend02-subset/protocol.json",
@@ -1636,6 +1650,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-priorlr3-subset6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-priorlr3-subset6/protocol.json",
@@ -1740,6 +1755,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-subset7/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta999-a6-subset7/protocol.json",
@@ -1846,6 +1862,7 @@
         "input_noise_anneal_end": 0.2,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta999-priorlr25-end02-subset8/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta999-priorlr25-end02-subset8/protocol.json",
@@ -1952,6 +1969,7 @@
         "input_noise_anneal_end": 0.15,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta999-priorlr3-end015-subset8/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta999-priorlr3-end015-subset8/protocol.json",
@@ -2078,6 +2096,7 @@
         "input_noise_anneal_end": 0.2,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta999-priorlr3-end02-all19/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta999-priorlr3-end02-all19/protocol.json",
@@ -2186,6 +2205,7 @@
         "input_noise_anneal_end": 0.2,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-beta999-priorlr3-end02-floor005-subset9/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-beta999-priorlr3-end02-floor005-subset9/protocol.json",
@@ -2277,6 +2297,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.0
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-schedule-nowarm-trajectory/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-schedule-nowarm-trajectory/protocol.json",
@@ -2403,6 +2424,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-schedule-warm02-all19/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-schedule-warm02-all19/protocol.json",
@@ -2494,6 +2516,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-schedule-warm02-trajectory/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-schedule-warm02-trajectory/protocol.json",
@@ -2602,6 +2625,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.8
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/exact-v3-outputonly-warm08-subset9/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/exact-v3-outputonly-warm08-subset9/protocol.json",
@@ -2722,6 +2746,7 @@
         "reconstruction_weight": 1.0
       },
       "noise": null,
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/final-branch-public19/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/final-branch-public19/protocol.json",
@@ -2828,6 +2853,7 @@
         "input_noise_anneal_end": 0.2,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/g-timescale-bottleneck8/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/g-timescale-bottleneck8/protocol.json",
@@ -2934,6 +2960,7 @@
         "input_noise_anneal_end": 0.2,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta999_p3_o028_e02/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta999_p3_o028_e02/protocol.json",
@@ -3040,6 +3067,7 @@
         "input_noise_anneal_end": 0.2,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta999_p3_o029_e02_i025/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta999_p3_o029_e02_i025/protocol.json",
@@ -3146,6 +3174,7 @@
         "input_noise_anneal_end": 0.125,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o0275_e0125/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o0275_e0125/protocol.json",
@@ -3252,6 +3281,7 @@
         "input_noise_anneal_end": 0.15,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o0275_e015/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o0275_e015/protocol.json",
@@ -3358,6 +3388,7 @@
         "input_noise_anneal_end": 0.175,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o0275_e0175/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o0275_e0175/protocol.json",
@@ -3464,6 +3495,7 @@
         "input_noise_anneal_end": 0.125,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o028_e0125/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o028_e0125/protocol.json",
@@ -3570,6 +3602,7 @@
         "input_noise_anneal_end": 0.15,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o028_e015/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o028_e015/protocol.json",
@@ -3676,6 +3709,7 @@
         "input_noise_anneal_end": 0.175,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o028_e0175/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o028_e0175/protocol.json",
@@ -3782,6 +3816,7 @@
         "input_noise_anneal_end": 0.125,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o029_e0125/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o029_e0125/protocol.json",
@@ -3888,6 +3923,7 @@
         "input_noise_anneal_end": 0.15,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o029_e015_i025/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o029_e015_i025/protocol.json",
@@ -3994,6 +4030,7 @@
         "input_noise_anneal_end": 0.175,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o029_e0175/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisegrid_v1_beta99_o029_e0175/protocol.json",
@@ -4100,6 +4137,7 @@
         "input_noise_anneal_end": 0.125,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisnear_v1_near_a055/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisnear_v1_near_a055/protocol.json",
@@ -4206,6 +4244,7 @@
         "input_noise_anneal_end": 0.12,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisnear_v1_near_e012/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisnear_v1_near_e012/protocol.json",
@@ -4312,6 +4351,7 @@
         "input_noise_anneal_end": 0.13,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisnear_v1_near_e013/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisnear_v1_near_e013/protocol.json",
@@ -4418,6 +4458,7 @@
         "input_noise_anneal_end": 0.125,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/noisnear_v1_near_i045/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/noisnear_v1_near_i045/protocol.json",
@@ -4524,6 +4565,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/output_only_warm02-bottleneck8/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/output_only_warm02-bottleneck8/protocol.json",
@@ -4627,6 +4669,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/recommended-vector6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/recommended-vector6/protocol.json",
@@ -4637,6 +4680,454 @@
         "compare_defaults_sha256": "bcfe83ea383f835530fbaf645f98b6ce21f8d56b39e33a00bda5e2ae834ecb19",
         "noise_source_sha256": "5907e503afa6a56f606ab09f4a88f7a9911d7fb7f9d97e275f3b1e43877856dd",
         "protocol_version": "toy100-vector-compatibility-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "regscreen_v1_kappa100",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 7,
+      "attempted": 9,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 7,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_blobs4",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "trajectory",
+        "img_bars4"
+      ],
+      "passing_tasks": [
+        "trajectory",
+        "mode_hold",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "img_bars4",
+        "img_blobs4"
+      ],
+      "failing_tasks": [
+        "vector_overlap",
+        "img_stripes2"
+      ],
+      "recipe": {
+        "name": "accuracy_shared_policy_kappa100",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa100/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa100/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa100/kappa100.json",
+        "config_sha256": "12c1933787fb133e9708247c807aeb279df83a7053404ce7aafdde8d3e3d37d8",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa100/source.tar.gz",
+        "source_archive_sha256": "e2ce7dc3807639e357b5386d89a07bb31bbbd8c6d071a93b4314bf628a18d701",
+        "compare_defaults_sha256": "13257eef2d195a57109e83613d226866270ce73c32f472b3991c10e2d8ef6060",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "regscreen_v1_kappa150",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 5,
+      "attempted": 9,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 5,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_blobs4",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "trajectory",
+        "img_bars4"
+      ],
+      "passing_tasks": [
+        "trajectory",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "img_blobs4"
+      ],
+      "failing_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_bars4"
+      ],
+      "recipe": {
+        "name": "accuracy_shared_policy_kappa150",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.5,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa150/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa150/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa150/kappa150.json",
+        "config_sha256": "ab824321fbe433437c777ef49cf67da50c05c8e227ef33c60e6fcaa11deed59f",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/regscreen_v1_kappa150/source.tar.gz",
+        "source_archive_sha256": "be383e93a3fe700dffacbf176b3f1d4901dc35b4a6775ae111df66daa2bc9a98",
+        "compare_defaults_sha256": "13257eef2d195a57109e83613d226866270ce73c32f472b3991c10e2d8ef6060",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "regscreen_v1_prior002",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 3,
+      "attempted": 9,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 3,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_blobs4",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "trajectory",
+        "img_bars4"
+      ],
+      "passing_tasks": [
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "img_blobs4"
+      ],
+      "failing_tasks": [
+        "trajectory",
+        "mode_hold",
+        "vector_anisotropic",
+        "vector_overlap",
+        "img_stripes2",
+        "img_bars4"
+      ],
+      "recipe": {
+        "name": "accuracy_shared_policy_prior002",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.02,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/regscreen_v1_prior002/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/regscreen_v1_prior002/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/regscreen_v1_prior002/prior002.json",
+        "config_sha256": "c072a5f4c902ad9507d03d906dfce17e2e528a4843a5e9ed0ed3ddd09bed24c5",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/regscreen_v1_prior002/source.tar.gz",
+        "source_archive_sha256": "cdb591a3bcf20475333c315a4c5c1045ed21fff50a85307871242032c20b9f3d",
+        "compare_defaults_sha256": "13257eef2d195a57109e83613d226866270ce73c32f472b3991c10e2d8ef6060",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      }
+    },
+    {
+      "run": "regscreen_v1_prior010",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 5,
+      "attempted": 9,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 5,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_blobs4",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "trajectory",
+        "img_bars4"
+      ],
+      "passing_tasks": [
+        "trajectory",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "img_stripes2",
+        "img_blobs4"
+      ],
+      "failing_tasks": [
+        "mode_hold",
+        "vector_unequal_mass",
+        "vector_overlap",
+        "img_bars4"
+      ],
+      "recipe": {
+        "name": "accuracy_shared_policy_prior010",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.1,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/regscreen_v1_prior010/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/regscreen_v1_prior010/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/regscreen_v1_prior010/prior010.json",
+        "config_sha256": "d3c0babd13c7de846bfb1930a0ec9de5c20072003f92a2186e83ec23d1b3f2b4",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/regscreen_v1_prior010/source.tar.gz",
+        "source_archive_sha256": "12f2e39a4a69975cb316d29c6524fd63c140829522355a19b0efe59144b2a880",
+        "compare_defaults_sha256": "13257eef2d195a57109e83613d226866270ce73c32f472b3991c10e2d8ef6060",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
         "seed": 0,
         "device": "cpu",
         "threads": 1
@@ -4719,6 +5210,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/repair-beta99/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/repair-beta99/protocol.json",
@@ -4811,6 +5303,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/repair-cap2/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/repair-cap2/protocol.json",
@@ -4903,6 +5396,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/repair-cap6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/repair-cap6/protocol.json",
@@ -4995,6 +5489,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/repair-lr001_prior6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/repair-lr001_prior6/protocol.json",
@@ -5123,6 +5618,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.1
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-adapted-all19/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-adapted-all19/protocol.json",
@@ -5252,6 +5748,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm02-adapted-all19/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm02-adapted-all19/protocol.json",
@@ -5358,6 +5855,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm02-lr002125-subset7/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm02-lr002125-subset7/protocol.json",
@@ -5451,6 +5949,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.2
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm02-trajectory/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm02-trajectory/protocol.json",
@@ -5551,6 +6050,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.05
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm05-subset4/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm05-subset4/protocol.json",
@@ -5644,6 +6144,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm05-trajectory/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm05-trajectory/protocol.json",
@@ -5744,6 +6245,7 @@
         "input_noise_anneal_end": 0.1,
         "output_noise_warmup": 0.1
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm10-subset4/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3-end01-anneal04-outwarm10-subset4/protocol.json",
@@ -5844,6 +6346,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3_anneal04-failed5/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3_anneal04-failed5/protocol.json",
@@ -5944,6 +6447,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3_cap2-failed5/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3_cap2-failed5/protocol.json",
@@ -6045,6 +6549,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.1
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3_end01_anneal04-vector6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3_end01_anneal04-vector6/protocol.json",
@@ -6147,6 +6652,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.1
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3_end01_cap2-vector6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3_end01_cap2-vector6/protocol.json",
@@ -6249,6 +6755,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.1
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3_end01_cap2_floor005-vector6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3_end01_cap2_floor005-vector6/protocol.json",
@@ -6349,6 +6856,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3_floor005-failed5/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3_floor005-failed5/protocol.json",
@@ -6439,6 +6947,7 @@
         "input_noise_std": 0.1,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3_input01-trajectory-adapted/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3_input01-trajectory-adapted/protocol.json",
@@ -6541,6 +7050,7 @@
         "input_noise_std": 0.1,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3_input01-vector6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3_input01-vector6/protocol.json",
@@ -6643,6 +7153,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.1
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3_input05_end01-vector6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3_input05_end01-vector6/protocol.json",
@@ -6733,6 +7244,7 @@
         "input_noise_std": 0.0,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3_output_only-trajectory-adapted/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3_output_only-trajectory-adapted/protocol.json",
@@ -6835,6 +7347,7 @@
         "input_noise_std": 0.0,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3_output_only-vector6/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3_output_only-vector6/protocol.json",
@@ -6960,6 +7473,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3core-noise029-adapted-all19/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3core-noise029-adapted-all19/protocol.json",
@@ -7088,6 +7602,7 @@
         "input_noise_std": 0.5,
         "input_noise_anneal_end": 0.5
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/compatibility/v3core-noise029-all19/summary.json",
         "protocol": "artifacts/toy100-accuracy/compatibility/v3core-noise029-all19/protocol.json",
@@ -7215,6 +7730,7 @@
         "output_noise_warmup": 0.2,
         "output_noise_learnable": true
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/learnable-shared/candidate19/summary.json",
         "protocol": "artifacts/toy100-accuracy/learnable-shared/candidate19/protocol.json",
@@ -7322,6 +7838,7 @@
         "output_noise_warmup": 0.0,
         "output_noise_learnable": true
       },
+      "model_policy": null,
       "provenance": {
         "summary": "artifacts/toy100-accuracy/learnable-broad/bottleneck8/summary.json",
         "protocol": "artifacts/toy100-accuracy/learnable-broad/bottleneck8/protocol.json",

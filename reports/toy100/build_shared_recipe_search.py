@@ -112,6 +112,7 @@ def build():
             failing_tasks=[case["name"] for case in summary["cases"] if case["live"] != "PASS"],
             recipe=recipe,
             noise=noise,
+            model_policy=summary.get("model_policy") or protocol.get("model_policy"),
             provenance=dict(
                 summary=str(summary_path.relative_to(ROOT)),
                 protocol=str((directory / "protocol.json").relative_to(ROOT)),
@@ -163,7 +164,7 @@ def build():
                      f"| {row['strict_regrade_status']} "
                      f"| {validity} | {config_cell} |")
     lines += ["", "The [JSON ledger](shared-recipe-search.json) records every selected task,",
-              "pass/fail case, full resolved recipe and noise policy, exact config digest,",
+              "pass/fail case, full resolved recipe, noise and model policies, exact config digest,",
               "source-archive digest, and custom-host schedule validity. A PASS on a",
               "subset never counts as 19/19 or 22/22. The combined 22-toy gate is",
               "[`benchmarks/toy_suite.py`](../../benchmarks/toy_suite.py).", ""]
