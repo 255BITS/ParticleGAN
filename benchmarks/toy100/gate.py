@@ -95,7 +95,7 @@ def _check_snapshot(path: Path, expected_n: int | None):
                 points = archive[key]
                 if (points.ndim != 2 or points.shape[1] != 2 or len(points) == 0
                         or (expected_n is not None and len(points) != expected_n)
-                        or not np.issubdtype(points.dtype, np.number)
+                        or not np.issubdtype(points.dtype, np.floating)
                         or not np.isfinite(points).all()):
                     raise ValueError(f"{path}: invalid {key} samples")
     except (OSError, KeyError, TypeError, ValueError) as exc:

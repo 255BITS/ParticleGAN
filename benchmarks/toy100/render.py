@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 from io import BytesIO
 import json
 from pathlib import Path
@@ -111,6 +112,21 @@ def _save_gif(path: Path, runs: list[dict], steps: list[int]):
                    duration=durations, loop=0, optimize=True)
     for frame in frames:
         frame.close()
+    sources = {}
+    for run in runs:
+        sources[run["name"]] = {
+            "events_sha256": hashlib.sha256((run["dir"] / "events.jsonl").read_bytes()).hexdigest(),
+            "snapshots": [
+                {"step": step, "path": str(run["dir"] / "snapshots" / f"step_{step:06d}.npz"),
+                 "sha256": hashlib.sha256((run["dir"] / "snapshots" / f"step_{step:06d}.npz").read_bytes()).hexdigest()}
+                for step in steps
+            ],
+        }
+    provenance = {"model": "live", "frames": len(steps), "steps": steps,
+                  "axes": {"xlim": [-6.9, 6.9], "ylim": [-6.9, 6.9]},
+                  "gif_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                  "sources": sources}
+    path.with_suffix(".json").write_text(json.dumps(provenance, indent=2) + "\n")
     return path
 
 

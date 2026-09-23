@@ -234,8 +234,8 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     resolved, recipe = resolve_config(config)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
-    if any((out_dir / name).exists() for name in ("config.json", "events.jsonl", "summary.json")):
-        raise FileExistsError(f"run evidence already exists in {out_dir}")
+    if any(out_dir.iterdir()):
+        raise FileExistsError(f"output directory is not empty: {out_dir}")
     (out_dir / "snapshots").mkdir(exist_ok=True)
     torch.set_num_threads(resolved["threads"])
     if torch.device(resolved["device"]).type == "cuda":
@@ -295,6 +295,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                 resolved["snapshot_samples"] if is_snapshot else 0,
             )
             arrays = {}
+            final_draws = {}
             devices = [device.index if device.index is not None else torch.cuda.current_device()] if device.type == "cuda" else []
             # Any random work inside metrics is replayable and leaves the
             # caller's global training RNG state exactly as it was.
@@ -312,7 +313,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                         logger.event({"event": "eval", "step": step, "model": model,
                                       "metrics": metrics, "elapsed": elapsed})
                         final_metrics[model] = metrics
-                        if metrics["modes"] == 100 and first_full[model] is None:
+                        if step > 0 and metrics["modes"] == 100 and first_full[model] is None:
                             first_full[model] = step
                         if step > 0 and metrics["passed"]:
                             if first_pass[model] is None:
@@ -330,11 +331,21 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                         )
                     if is_snapshot:
                         arrays[model] = draw[:resolved["snapshot_samples"]].detach().cpu().numpy()
+                    if step == budget:
+                        # Retain the exact scored draws for an independent
+                        # final metric audit, separate from the smaller GIF frame.
+                        final_draws[model] = draw[:resolved["eval_samples"]].detach().cpu().numpy()
             if is_snapshot:
                 filename = out_dir / "snapshots" / f"step_{step:06d}.npz"
                 np.savez_compressed(
                     filename, live=arrays["live"], ema=arrays["ema"],
                     target=target[:resolved["snapshot_samples"]].detach().cpu().numpy(),
+                )
+            if step == budget:
+                np.savez_compressed(
+                    out_dir / "final_samples.npz", live=final_draws["live"],
+                    ema=final_draws["ema"],
+                    target=target[:resolved["eval_samples"]].detach().cpu().numpy(),
                 )
             eval_seconds += time.perf_counter() - observed_start
 
@@ -373,6 +384,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
             "status": "complete", "completed_steps": trainer.completed_steps,
             "first_full_coverage_step": first_full, "first_pass_step": first_pass,
             "stable_pass_step": stable_pass, "final": final_metrics,
+            "final_samples_file": "final_samples.npz",
             "train_seconds": train_seconds, "eval_seconds": eval_seconds,
             "total_seconds": time.perf_counter() - start,
             "steps_per_second": budget / train_seconds,

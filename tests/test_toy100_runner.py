@@ -3,7 +3,9 @@
 import json
 
 import numpy as np
+import torch
 
+from benchmarks.toy100.metrics import evaluate_samples
 from benchmarks.toy100.train import evaluation_steps, load_config, resolve_config, train
 
 
@@ -28,6 +30,15 @@ def test_initial_and_final_samples_do_not_depend_on_observation_schedule(tmp_pat
         with np.load(sparse / "snapshots" / filename) as left, np.load(dense / "snapshots" / filename) as right:
             for key in ("live", "ema", "target"):
                 np.testing.assert_array_equal(left[key], right[key])
+
+    with np.load(dense / "final_samples.npz") as full, np.load(
+        dense / "snapshots" / "step_000003.npz"
+    ) as frame:
+        assert full["live"].shape == full["ema"].shape == full["target"].shape == (1024, 2)
+        for model in ("live", "ema"):
+            np.testing.assert_array_equal(full[model][:64], frame[model])
+            rescored = evaluate_samples(torch.from_numpy(full[model]), "grid100")
+            assert rescored == dense_summary["final"][model]
 
     events = [json.loads(line) for line in (dense / "events.jsonl").read_text().splitlines()]
     assert [(row["event"], row["step"], row.get("model")) for row in events[:2]] == [

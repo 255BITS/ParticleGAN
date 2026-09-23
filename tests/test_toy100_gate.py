@@ -70,8 +70,11 @@ def test_complete_terminal_suffix_is_required(tmp_path):
 def test_missing_checkpoint_and_missing_snapshot_are_invalid(tmp_path):
     write_run(tmp_path / "missing-event", event_steps=[step for step in STEPS if step != 500])
     write_run(tmp_path / "missing-snapshot", snapshots=[step for step in STEPS if step != 0])
+    corrupt = write_run(tmp_path / "corrupt-snapshot")
+    (corrupt / "snapshots" / "step_000000.npz").write_bytes(b"not an NPZ")
     assert score_run(tmp_path / "missing-event" / "grid100", "grid100")["status"] == "INVALID"
     assert score_run(tmp_path / "missing-snapshot" / "grid100", "grid100")["status"] == "INVALID"
+    assert score_run(corrupt, "grid100")["status"] == "INVALID"
 
 
 def test_final_collapse_fails_even_if_earlier_checks_pass(tmp_path):
