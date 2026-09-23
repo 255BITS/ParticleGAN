@@ -1,0 +1,12 @@
+[
+  {
+    "name": "gan",
+    "label": "Proposed public default",
+    "indexes": ["reports/transfer_suite/default_comparison/proposed/index.json"]
+  },
+  {
+    "name": "gan_legacy",
+    "label": "Current master default",
+    "indexes": ["reports/transfer_suite/default_comparison/current/index.json"]
+  }
+]

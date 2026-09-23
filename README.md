@@ -2,6 +2,12 @@
 
 **Learnable particle priors and GAN building blocks for PyTorch.**
 
+**Shared-default search:** the [primary unadjusted leaderboard](reports/transfer_suite/unadjusted/README.md)
+tests one unchanged recipe across all 19 behavioral cases. Baselines are **8/19
+for the proposed default** and **5/19 for current master**; neither is an overall
+PASS. [Join the search: rules and one-command candidate evaluation](benchmarks/transfer_suite/UNADJUSTED_SEARCH.md).
+The historical adjusted 19/19 result does not qualify for this leaderboard.
+
 [API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md) · [Minimal GAN loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-training-loop) ·
 [Minimal DDGAN + UCD loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-ddgan--ucd-loop)
 
@@ -79,9 +85,9 @@ passes 3/6 data toys itself; architecture remains an application choice.
 Imposed training-condition variants are diagnostics; [longer training](reports/transfer_suite/formulations/LONG_TRAINING.md)
 is a separate toy. The [solvability audit](reports/transfer_suite/solvability/README.md)
 retains all 16 historical individual solver witnesses.
-On the actual 100-Gaussian task the behavioral candidate ties stock's live convergence step, so
-`"gan"` keeps the existing defaults. Neither preset guarantees transfer to new
-architectures or data units.
+On the actual 100-Gaussian task the earlier behavioral candidate ties stock's
+live convergence step. The newly promoted numerical preset has not been compared
+there yet. Neither preset guarantees transfer to new architectures or data units.
 
 The [paired 2D transport extraction](reports/paired_error_2d/README.md) tests the
 MSE-free paired-error game with movable/fixed clouds. All 12 matching application

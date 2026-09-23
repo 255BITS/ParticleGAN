@@ -1,5 +1,9 @@
 # Current default versus proposed default: measured tests
 
+The [primary unadjusted leaderboard](../unadjusted/README.md) carries the public
+preset baselines into the shared-default search. Only its unchanged-recipe rows
+compete; the per-host comparisons below remain historical explanatory evidence.
+
 **Both presets were trained on all 19 behavioral tests.** Data, architecture, particle support, batch, initialization and update budget match within every pair. The [current master recipe](current-master-audit.json) matches every `gan_legacy` field exactly. Each arm uses its public recipe's loss, regularization, absolute G/D/particle LRs and Adam betas. Seed 0; no seed search or changed thresholds.
 
 ## Direct public-default comparison

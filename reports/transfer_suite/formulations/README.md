@@ -1,5 +1,9 @@
 # Formulation defaults: behavioral leaderboard
 
+**Historical comparison with per-host training settings.** Use the
+[primary unadjusted leaderboard](../unadjusted/README.md) to select a shared
+default. This page's adjusted 19/19 result is not eligible for that competition.
+
 **Each candidate chooses its training recipe. Architecture is separate.**
 The recipe includes the adversarial loss, regularization, learning rates, Adam
 settings, schedule, update balance and batch size. The current comparison tests
