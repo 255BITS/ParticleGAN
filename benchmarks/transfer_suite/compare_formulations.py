@@ -3,6 +3,7 @@
 The proposed reference is the archived 19/19 row. This is explicitly separate
 from compare_defaults, which applies each public numerical optimizer preset.
 """
+from benchmarks.locked_shared.recorded_recipes import GAN_V1
 import argparse
 from contextlib import ExitStack
 from dataclasses import asdict, replace
@@ -15,7 +16,6 @@ from unittest.mock import patch
 
 import torch
 
-from particlegan import get_recipe
 from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.locked_shared import baseline
 from benchmarks.smart_descent import evaluate, study
@@ -30,7 +30,7 @@ def run(output):
     output.mkdir(parents=True, exist_ok=False)
     (output / 'episodes').mkdir()
     torch.set_num_threads(1)
-    recipe = get_recipe('gan_legacy')
+    recipe = GAN_V1
     config = replace(study.BASE, name='current_core_host_recipe',
                      reg_coeff=recipe.reg_coeff, reg_kappa=recipe.reg_kappa,
                      vicreg_weight=recipe.prior_reg, particle_l2=0.)

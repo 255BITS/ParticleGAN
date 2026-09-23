@@ -45,7 +45,7 @@ def sha256(path):
 
 
 def training_recipe(cfg):
-    return get_recipe("mog", z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
+    return get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
                       total_steps=cfg["steps"], batch_size=cfg["batch_size"])
 
 
@@ -251,7 +251,7 @@ def train(cfg):
         groups = [dict(params=params, lr=recipe.lr)]
         if prior is not None:
             groups.append(dict(params=list(prior.parameters()), lr=recipe.lr * recipe.prior_lr_mult,
-                               betas=recipe.prior_betas))
+                               betas=recipe.prior_betas or recipe.betas))
         opt_g = torch.optim.Adam(groups, lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")
         opt_d = None
     optimizers = [opt_g] + ([opt_d] if opt_d is not None else [])

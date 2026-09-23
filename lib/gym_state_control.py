@@ -37,7 +37,7 @@ class GymStateEncoder(nn.Module):
 
 
 def training_recipe(cfg):
-    return get_recipe("mog", z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
+    return get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
                       total_steps=cfg["steps"], batch_size=cfg["batch_size"])
 
 

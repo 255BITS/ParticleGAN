@@ -17,7 +17,7 @@ from particlegan import BatchDistanceDiscriminator, get_recipe
 
 torch.manual_seed(0)
 device = torch.device("cpu")
-recipe = get_recipe("gan", total_steps=1000)
+recipe = get_recipe(total_steps=1000)
 G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(.2),
                   nn.Linear(64, 64), nn.LeakyReLU(.2), nn.Linear(64, 2)).to(device)
 D = BatchDistanceDiscriminator().to(device)
@@ -87,16 +87,16 @@ callback can occur after D has updated, so restore a checkpoint before retrying
 that interrupted update. AMP, distributed training and custom update ratios
 require a caller-owned loop.
 
-`get_recipe()` / `get_recipe("gan")` selects canonical **`gan_v3`**: Rp logistic,
+`get_recipe()` constructs the shared **GAN v3** winner: Rp logistic,
 b_cap coefficient 6, κ1.25, spread .05, Adam (0,.99), G/D LR .00425 and particle
 LR .0085. Rates hold for 60% of the budget, then cosine toward 5%. There is no
 particle L2 term. Live sampling is the default; EMA is explicit.
 
 | Version | Live behavioral toys passed | Meaning |
 | --- | ---: | --- |
-| `gan_v1` / `gan_legacy` | 5/19 | Original preset |
-| `gan_v2` | 8/19 | Previous public preset |
-| `gan_v3` / `gan` | **19/19** | Shared recipe with declared D choices |
+| v1 (archived) | 5/19 | Original preset |
+| v2 (archived) | 8/19 | Previous public preset |
+| v3 (current) | **19/19** | Shared recipe with declared D choices |
 
 The v3 reference D profile scores 15/19. Its 19/19 result keeps optimizer/loss
 settings identical across tests and permits task-specific discriminator
@@ -104,10 +104,8 @@ architectures. Each host retains its frozen resources and update budget.
 The generic API uses 20,000 particles and 7,000 updates; choose resources for
 your application. [Illustrated guide, math and limits](gan-v3.md).
 
-`gan_v1` restores G/D/particle LR .0006/.0009/.006, Adam (0,.999), cap1/κ1,
-spread1. `gan_v2` restores .001/.0015/.01, Adam (0,.99), cap3/κ1.25, spread .05.
-`gan_behavioral`, `100gaussians`, MoG, DDGAN and autoencoder recipes retain their
-historical settings. Restore saved full recipe dictionaries through
+Historical rows preserve measured settings in benchmark receipts. They are not
+public recipe selectors. Restore complete saved settings through
 `Recipe(**saved_recipe)` and resume with the original networks and recipe.
 
 ### Optional vector discriminators
@@ -146,7 +144,7 @@ from torch.nn import functional as F
 from particlegan import DDGAN, UCD, get_recipe, learning_rate_scale, ucd_loss
 
 device = torch.device("cpu")
-recipe = get_recipe("ddgan", num_classes=2)  # Add total_steps=5 for a smoke check.
+recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=2)  # Add total_steps=5 for a smoke check.
 process = DDGAN(recipe.alpha_bar).to(device)
 
 class Generator(nn.Module):
@@ -355,7 +353,7 @@ the tree. No SciPy or NumPy is needed for sampling, gradients or the fallback.
 The default experiment is [configs/mog/default.toml](../configs/mog/default.toml),
 run via `python -u experiments/train_100gaussians.py --config configs/mog/default.toml`.
 It retains the benchmark's networks, Fourier discriminator and full metric suite.
-The corresponding API preset is `get_recipe("mog")`; a recipe alone does not
+Use `get_recipe(prior_kind="mog", sigma_rel=.025)`; a recipe alone does not
 reproduce benchmark quality with arbitrary networks or data.
 
 ### `GaussianPrior`
@@ -445,7 +443,7 @@ from particlegan.locked_shared import LOCKED_SHARED, locked_adv_defaults, make_g
 `particle_l2` 0.02 when particles are built, and the host critic.
 `make_gan_loss()` and `make_b_cap()` build those two objects and refuse any
 other stamp. Music cover 1.0, a 128-particle hub cloud, FM-on, stranger
-pairing, and a thinned κ are not this stamp. The selected `get_recipe("gan")`
+pairing, and a thinned κ are not this stamp. The selected `get_recipe()`
 uses coefficient 6, κ=1.25 and prior regularization .05; this frozen stamp retains
 its original values.
 The full field table is in [locked shared](locked-shared.md). Lunar Lander's
@@ -552,10 +550,11 @@ and applicable device checks still run.
 
 ## Particle autoencoders
 
-`get_recipe("ae_gan")`, `get_recipe("vae_gan")` and `get_recipe("ae_ddgan")`
-add reconstruction encodings to caller-owned networks and loops. The default
-VAE selects one particle with prior-matching Gaussian noise and constant joint
-KL. No KL penalty is added by `reconstruction_loss`.
+Set `prior_kind="mog"`, `sigma_rel=.025` and `encoder_mode="ae"` or `"hard"`
+to add reconstruction encodings to caller-owned networks and loops. Set
+`model="ddgan"` when supplying a diffusion generator. These component choices
+share the winning optimizer/loss defaults. Hard VAE selects one particle with
+prior-matching Gaussian noise and constant joint KL; reconstruction adds no KL.
 
 | API | Contract |
 | --- | --- |
@@ -575,68 +574,46 @@ examples, gradient caveats, DDGAN integration and measured evidence.
 ## Recipes and defaults
 
 ```python
-get_recipe(name="gan", **overrides)          # Returns a frozen Recipe.
-recipe.replace(**overrides)                  # Returns a new Recipe.
-recipe.to_dict()                             # All resolved fields.
-Recipe(**resolved_dict)                      # Restore resolved fields.
+get_recipe(**overrides)       # One shared set of winning defaults.
+recipe.replace(**overrides)   # A new immutable Recipe.
+recipe.to_dict()              # Complete resolved fields.
+Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
 ```
 
-`get_recipe("ddgan", num_classes=8)` starts with the DDGAN defaults and
-overrides its class count. `Recipe` is the resolved data object: setting only
-`Recipe(name="ddgan")` does **not** select those defaults. Use `get_recipe` to
-resolve named presets. Unknown fields are rejected. Historical names
-`100gaussians` and `denoising` remain pinned to historical GAN v2 and DDGAN settings.
-`gan_v1`, `gan_v2` and `gan_v3` select fixed GAN versions; `gan` follows v3.
+There is no recipe ID dispatch or legacy preset table. Positional preset names
+are rejected. `name` is descriptive metadata only: changing it cannot change
+hyperparameters. Unknown keyword fields are rejected. Old checkpoints remain
+readable because they contain the full resolved recipe, not just a selector.
 
-`get_recipe("mog")` selects the compact MoG leader: 400 components, z_dim=4,
-sigma_rel=1/40, standardized reads, 28,000 steps, prior LR multiplier 100
-(relative to G, giving 0.06), and prior betas `(0.5, 0.999)`. G and D retain
-betas `(0, 0.999)`, cap coefficient 1, κ=1 and prior weight 1. These MoG
-settings remain pinned separately from the new `get_recipe()` / `gan` default.
-
-`get_recipe("ddgan_mog")` combines DDGAN/class-only UCD with the MoG settings
-from the 100k study: 400 components, z_dim=4, sigma_rel=1/40, standardized reads,
-100,000 updates, prior LR multiplier 100, prior betas `(0.5, 0.999)`, and
-`lr_floor=1.0` for a constant learning rate. Other fields use DDGAN defaults.
-The Gaussian diffusion schedule is unchanged; MoG supplies G's latent codes.
+Choose components explicitly, while inheriting the common training defaults:
 
 ```python
-recipe = get_recipe("ddgan_mog", num_classes=4)
+recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=4,
+                    prior_kind="mog", sigma_rel=.025, num_particles=400)
 prior = recipe.make_prior().to(device)
 process = DDGAN(recipe.alpha_bar).to(device)
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)
-z, indices = prior.sample(batch_size)
-prior_loss = recipe.make_prior_regularizer()(prior.z[indices.unique()])
 ```
 
-All fields can be overridden, including `total_steps` and `lr_floor`. The recipe
-supplies the package hyperparameters from the
-[100k study](../reports/denoising-toy/mog_capacity_100k/READOUT.md), not its
-architecture: that study used G width 32, D width 128 and depth 3. Callers own
-the networks, loops and EMA. `get_recipe("mog")` continues to select one-shot
-GAN settings; `get_recipe("ddgan")` continues to use atoms and 56,000 updates.
+| Shared field | Default |
+| --- | --- |
+| `model`, `conditioning`, `num_classes` | `gan`, `scalar`, `None` |
+| `z_dim`, `num_particles` | `4`, `20_000` |
+| `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) |
+| `loss_type`, `gan_mode` | `logistic`, `rp` |
+| `lr`, `d_lr_mult`, `prior_lr_mult` | `.00425`, `1`, `2` |
+| `betas`, `prior_betas` | `(0, .99)`, `None` (inherit betas) |
+| `reg_arm`, `reg_coeff`, `reg_kappa` | `b_cap`, `6`, `1.25` |
+| `reg_every`, `reg_method` | `1`, `autograd` |
+| `prior_reg`, `ema_decay` | `.05`, `.995` |
+| `lr_anneal_start`, `lr_floor` | `.6`, `.05` |
+| `batch_size`, `total_steps` | `256`, `7_000` |
+| `ucd_target`, `ucd_weight` | `class`, `.02` |
+| `alpha_bar` | `(1, .9, .5, .05, .0001)` |
 
-| Field | `get_recipe()` / `gan` | `ddgan` |
-| --- | --- | --- |
-| `model` | `gan` | `ddgan` |
-| `conditioning`, `num_classes` | `scalar`, `None` | `ucd`, `4` |
-| `z_dim`, `num_particles` | `4`, `20_000` | Same |
-| `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) | Same |
-| `loss_type`, `gan_mode` | `logistic`, `rp` | Same |
-| `lr`, `d_lr_mult`, `prior_lr_mult` | `.001`, `1.5`, `10` | `.0006`, `1.5`, `10` |
-| `betas` | `(0, .99)` | `(0, .999)` |
-| `prior_betas` | `None` (inherit `betas`) | Same |
-| `reg_arm`, `reg_coeff`, `reg_kappa` | `b_cap`, `3`, `1.25` | `b_cap`, `1`, `1` |
-| `reg_every`, `reg_method` | `1`, `autograd` | Same |
-| `prior_reg`, `ema_decay` | `.05`, `.995` | `1`, `.995` |
-| `lr_anneal_start`, `lr_floor` | `.6`, `.05` | Same |
-| `batch_size`, `total_steps` | `256`, `7_000` | `256`, `56_000` |
-| `ucd_target`, `ucd_weight` | `class`, `.02` (unused) | `class`, `.02` |
-| `alpha_bar` | `(1, .9, .5, .05, .0001)` (unused) | `(1, .9, .5, .05, .0001)` |
-
-Recipes describe recommended starting defaults; they do not construct
-architectures or execute a training procedure. Networks, data, and training
-budgets remain application choices.
+Architectures, model/prior choices, data and resource budgets belong to the
+caller. Historical v1/v2 comparison receipts live in benchmark data, outside
+the installable package; they are not alternate production defaults.
 
 | Optional factory | Result |
 | --- | --- |

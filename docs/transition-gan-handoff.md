@@ -386,7 +386,7 @@ for now; this is not yet missing-data recovery or arbitrary state/action inferen
 The user corrected the initial prior choice: it MUST now be MoG with about 1k
 particles, not the original point-particle GAN preset.
 
-Current defaults: get_recipe("mog"), 1,024 components, z_dim=32, sigma_rel=.025,
+Historical handoff settings (before the shared-default cleanup): 1,024 components, z_dim=32, sigma_rel=.025,
 standardized sampled means, fixed calibrated sigma (~.13112 for this initialization).
 28k updates, batch256, Rp logistic, UCD class heads, bcap cap1/weight1/every step.
 G LR=.0006, D multiplier1.5, prior multiplier100 (LR=.06); G/D betas(0,.999),

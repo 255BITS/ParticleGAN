@@ -108,7 +108,7 @@ def train(cfg):
         error_cap="b_cap on R noise coordinates only, lazy every 4 updates; not applied to transitions",
         minibatch="Generator draws use seed+11, the imitation fine-tune stream; critic draws use seed+21",
         control_input="Expert previous command in shuffled records; learner previous command at rollout")
-    recipe = get_recipe("mog", z_dim=world["z_dim"], num_particles=world["num_particles"],
+    recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=world["z_dim"], num_particles=world["num_particles"],
                         total_steps=cfg["steps"], batch_size=cfg["batch_size"])
     opt_g = torch.optim.Adam(list(bundle["E_control"].parameters()) + list(bundle["G"].branches[1].parameters()),
                              lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")

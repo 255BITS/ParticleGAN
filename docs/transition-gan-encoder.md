@@ -91,8 +91,9 @@ mean over the original and composed paths.
 
 ## Recipe and comparison limits
 
-We adapt encoding to `get_recipe("mog")`; we do not switch to the different
-`ae_gan` optimizer/training preset. Both arms use seed24002, 1,024 particles,
+The recorded comparison below used the original MoG study settings. Current
+callers use explicit MoG fields with the shared winning defaults; the historical
+settings and results here are not a claim about that new configuration. Both arms use seed24002, 1,024 particles,
 z_dim32, fixed sigma_rel.025 (calibrated sigma approximately.13112), batch256,
 28k updates, Rp logistic, bcap cap1/coefficient1/every update, the existing
 optimizer groups, raw-center spread, cosine schedule and EMA. E joins G's Adam

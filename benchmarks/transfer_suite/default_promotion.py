@@ -1,4 +1,5 @@
 """Verify the public default recipe, trainer and critic against the rare winner."""
+from benchmarks.locked_shared.recorded_recipes import GAN_V2
 import argparse
 from copy import deepcopy
 import gzip
@@ -10,7 +11,7 @@ import time
 
 import torch
 
-from particlegan import LinearSkipDiscriminator, get_recipe, learning_rate_scale
+from particlegan import LinearSkipDiscriminator, learning_rate_scale
 from lib.toy_models import SimpleMLPGenerator
 from . import suite, vector_tasks
 from .protocol import test_verdict
@@ -33,7 +34,7 @@ def main():
     write('protocol.json', protocol)
     # This historical replay used the previous public gan_v2 recipe. Keep its
     # recorded name and all numerical settings fixed after the v3 promotion.
-    recipe = get_recipe('gan_v2', num_particles=spec['particles'],
+    recipe = GAN_V2.replace(num_particles=spec['particles'],
                         batch_size=spec['batch'], total_steps=spec['steps']).replace(name='gan')
     torch.set_num_threads(1)
     torch.manual_seed(0)

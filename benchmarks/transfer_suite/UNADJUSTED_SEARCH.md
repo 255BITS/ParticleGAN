@@ -52,7 +52,8 @@ Create a JSON file, for example `/tmp/my-candidate.json`:
 ```
 
 These are example search settings, not a claim that this candidate passes.
-This historical search runner pins unspecified fields to `get_recipe("gan_v2")`.
+This historical search runner pins unspecified fields to the archived v2
+receipt in `plans/recipe_history.json`, outside the public package.
 Use the explicit leading profile to reproduce v3; public `get_recipe()` selects v3. The resolved full recipe is
 recorded for every run. The same card applies to all tests.
 

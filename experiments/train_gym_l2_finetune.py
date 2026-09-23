@@ -119,7 +119,7 @@ def train(cfg):
     scaler = bundle["scaler"]
     normalized = scaler(physical)
     g, ec = bundle["G"], bundle["E_control"]
-    recipe = get_recipe("mog", z_dim=world["z_dim"], num_particles=world["num_particles"],
+    recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=world["z_dim"], num_particles=world["num_particles"],
                         total_steps=cfg["steps"], batch_size=cfg["batch_size"])
     opt = torch.optim.Adam(list(ec.parameters()) + list(g.branches[1].parameters()),
                            lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")

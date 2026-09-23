@@ -68,10 +68,10 @@ adds a shared cosine schedule to the best cap: decay from 60% of the budget to a
 5% floor. It passes 29/29 bounds and sustains all nine toys, including 8/8 ring
 modes. Ten independent application checks pass. Sensitivity and the actual
 100-Gaussian comparison originally retained the stock defaults and exposed
-`get_recipe("gan_behavioral")` as an opt-in candidate. The subsequent
+`gan_behavioral` as a historical candidate. The subsequent
 [full behavioral search](../reports/transfer_suite/formulations/README.md)
 reaches 19/19 with supported architectures, and the winning formulation is now
-the `gan` default. `gan_legacy` preserves the original recipe. The
+the shared `get_recipe()` default. Earlier settings remain benchmark records. The
 [public training helper](api.md#gantrainer) applies the recipe consistently.
 The following paragraph describes the earlier search using original host schedules.
 

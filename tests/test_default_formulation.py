@@ -42,10 +42,14 @@ def test_default_optimizers_and_losses_bind_the_winning_recipe():
     assert Recipe(**trainer.state_dict()['recipe']) == recipe
 
 
-@pytest.mark.parametrize('name', ['mog', 'ddgan', 'denoising', 'ddgan_mog', 'ae_gan', 'vae_gan', 'ae_ddgan'])
-def test_other_domain_recipes_keep_their_selected_core(name):
-    recipe = get_recipe(name)
-    assert (recipe.reg_coeff, recipe.reg_kappa, recipe.prior_reg, recipe.betas) == (1., 1., 1., (0., .999))
+@pytest.mark.parametrize('options', [dict(prior_kind='mog', sigma_rel=.025),
+    dict(model='ddgan', conditioning='ucd', num_classes=4),
+    dict(prior_kind='mog', sigma_rel=.025, encoder_mode='ae'),
+    dict(prior_kind='mog', sigma_rel=.025, encoder_mode='hard')])
+def test_component_choices_share_the_winning_training_defaults(options):
+    recipe = get_recipe(**options)
+    assert (recipe.reg_coeff, recipe.reg_kappa, recipe.prior_reg, recipe.betas) == (6., 1.25, .05, (0., .99))
+    assert (recipe.lr, recipe.d_lr_mult, recipe.prior_lr_mult) == (.00425, 1., 2.)
 
 
 @pytest.mark.parametrize('kwargs', [dict(in_dim=0), dict(hidden_dim=0), dict(n_hidden=0),

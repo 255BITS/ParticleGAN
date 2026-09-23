@@ -8,7 +8,7 @@ from particlegan import GANTrainer, Recipe, get_recipe, learning_rate_scale
 
 
 def make_trainer(*, particles=12, steps=8, buffers=False, dropout=False, **overrides):
-    recipe = get_recipe("gan_behavioral", num_particles=particles, z_dim=3,
+    recipe = get_recipe(num_particles=particles, z_dim=3,
                         batch_size=6, total_steps=steps, **overrides)
     generator = nn.Sequential(nn.Linear(3, 8), nn.BatchNorm1d(8) if buffers else nn.Identity(),
                               nn.LeakyReLU(.2), nn.Dropout(.25) if dropout else nn.Identity(),
@@ -39,18 +39,12 @@ def assert_checkpoint_equal(left, right):
         assert left == right
 
 
-def test_winning_recipe_is_default_and_earlier_candidate_is_preserved():
+def test_winning_recipe_is_the_common_default():
     assert get_recipe() == Recipe()
     winner = get_recipe()
     assert winner.name == 'gan_v3'
     assert (winner.reg_arm, winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == ('b_cap', 1.25, 6., .05)
     assert (winner.lr, winner.betas, winner.prior_lr_mult, winner.d_lr_mult) == (.00425, (0., .99), 2., 1.)
-    legacy = get_recipe('gan_legacy')
-    assert (legacy.lr, legacy.betas, legacy.reg_coeff, legacy.reg_kappa, legacy.prior_reg,
-            legacy.prior_lr_mult, legacy.d_lr_mult) == (.0006, (0., .999), 1., 1., 1., 10., 1.5)
-    recipe = get_recipe("gan_behavioral")
-    assert (recipe.reg_arm, recipe.reg_kappa, recipe.reg_coeff) == ("b_cap", 1.25, 3.)
-    assert (recipe.lr, recipe.prior_reg, recipe.lr_anneal_start, recipe.lr_floor) == (.00051, .05, .6, .05)
     assert isinstance(make_trainer(), GANTrainer)
 
 
@@ -188,7 +182,7 @@ def test_schedule_budget_and_rejected_checkpoint_do_not_change_models():
 def test_validation_rejects_unsupported_recipe_and_mismatched_models():
     trainer = make_trainer()
     with pytest.raises(ValueError, match="unconditional"):
-        get_recipe("ddgan").make_trainer(trainer.G, trainer.D)
+        get_recipe(model='ddgan', num_classes=4, conditioning='ucd').make_trainer(trainer.G, trainer.D)
     with pytest.raises(ValueError, match="dimensions"):
         trainer.recipe.replace(z_dim=4).make_trainer(trainer.G, trainer.D, prior=trainer.prior)
     with pytest.raises(ValueError, match="dtype"):
@@ -248,7 +242,7 @@ def test_checkpoint_requires_matching_parameter_freezing():
 
 @pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA is unavailable")
 def test_cuda_accepts_current_device_streams_and_restores_checkpoint():
-    recipe = get_recipe("gan_behavioral", num_particles=12, z_dim=3, total_steps=3)
+    recipe = get_recipe(num_particles=12, z_dim=3, total_steps=3)
     device = torch.device("cuda", torch.cuda.current_device())
     generator = nn.Sequential(nn.Linear(3, 8), nn.LeakyReLU(.2), nn.Linear(8, 2)).to(device)
     discriminator = nn.Sequential(nn.Linear(2, 8), nn.LeakyReLU(.2), nn.Linear(8, 1)).to(device)

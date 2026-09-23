@@ -135,9 +135,11 @@ def _log(arm: str, step: int, metrics: dict, extra: str = "") -> None:
 
 
 def make_recipe(cfg: HoldConfig):
-    """``ae_gan`` recipe with this candidate's numerical training settings."""
+    """Frozen AE host resources with this candidate's numerical settings."""
     return get_recipe(
-        "ae_gan",
+        prior_kind='mog', sigma_rel=0.025, z_dim=2, total_steps=6000,
+        betas=(0., .999), d_lr_mult=1.5, prior_lr_mult=10., prior_betas=(.5, .999),
+        prior_reg=1., lr_floor=1.,
         num_particles=cfg.n_particles,
         reg_every=cfg.reg_lazy,
         reg_arm=cfg.reg_arm,

@@ -7,9 +7,9 @@ with declared discriminator choices (15/19 with the reference D profile).
 
 | Recipe version | Live toys passed | Status |
 | --- | ---: | --- |
-| `gan_v1` / `gan_legacy` | 5/19 | Original preset |
-| `gan_v2` | 8/19 | Previous default |
-| **`gan_v3` / `gan`** | **19/19** | **Current default, with documented D choices** |
+| v1 (archived) | 5/19 | Original preset |
+| v2 (archived) | 8/19 | Previous default |
+| **v3 (current)** | **19/19** | **Current default, with documented D choices** |
 
 [Illustrated guide and equations](docs/gan-v3.md) ·
 [Full leaderboard](reports/transfer_suite/unadjusted/README.md) ·
@@ -57,7 +57,7 @@ learning-rate decay and EMA:
 ```python
 from particlegan import get_recipe
 
-recipe = get_recipe("gan", total_steps=7000)
+recipe = get_recipe(total_steps=7000)
 trainer = recipe.make_trainer(G, D)  # Move your networks to their device first.
 for real in batches:               # Supply up to recipe.total_steps batches.
     stats = trainer.step(real)
@@ -70,7 +70,7 @@ example with flushed logs and resumable checkpoints. See
 The optional helper supports scalar, unconditional GANs with particle priors;
 the independent primitives remain available for other training loops.
 
-`get_recipe()` selects the versioned **GAN v3** recipe: Rp logistic, b_cap6,
+`get_recipe()` supplies the **GAN v3** winning defaults: Rp logistic, b_cap6,
 κ1.25, particle spread .05, Adam (0,.99), G/D LR .00425 and particle LR .0085.
 The optional `BatchDistanceDiscriminator` exposes local within-batch spread to D.
 The 19/19 result uses an explicit D profile; architecture remains an application
@@ -78,9 +78,11 @@ choice. [See the illustrated explanation and measured limits](docs/gan-v3.md).
 
 ![How GAN v3 trains particles, generator and discriminator.](docs/figures/gan-v3-pipeline.svg)
 
-Pin `gan_v1`, `gan_v2` or `gan_v3` for reproducibility. `gan_legacy` remains v1;
-the historical `100gaussians` alias remains v2. Domain recipes stay separately
-pinned. Existing checkpoints retain their full resolved recipe and architecture.
+There is one recipe path: `get_recipe(**overrides)` constructs `Recipe` with
+explicit keyword fields. Named presets and legacy recipe selectors are removed.
+Model/prior/encoder choices inherit the same winning training defaults. The
+`name` field is report/checkpoint metadata only. Restore an old run with its
+complete saved `Recipe(**resolved_fields)` or the corresponding Git revision.
 The [historical adjusted comparison](reports/transfer_suite/default_comparison/README.md)
 used different optimizer settings per toy and remains separate. Earlier
 [controller research](reports/learned_lr/README.md), [transfer studies](reports/transfer_suite/README.md)
@@ -196,17 +198,16 @@ from particlegan import MoGParticlePrior, get_recipe
 prior = MoGParticlePrior().to(device)
 z, component_ids = prior.sample(256)
 
-recipe = get_recipe("mog")  # 400 components, 28k steps, prior LR 0.06, beta1=0.5
+recipe = get_recipe(prior_kind="mog", sigma_rel=.025, num_particles=400)
 prior = recipe.make_prior().to(device)
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 # Regularize raw means, not noisy draws. Use the full table at N <= 1024.
 prior_loss = recipe.make_prior_regularizer()(prior.z)
 ```
 
-Use `ParticlePrior` for atoms. Existing GAN/DDGAN presets and examples keep their
-defaults; `mog` and `ddgan_mog` are dedicated opt-in recipes. The MoG recipe's `prior_lr_mult=100`
-is relative to G's LR, giving 0.06. It is equivalent to the experiment's 10×
-multiplier on the original prior LR of 0.006.
+Use `ParticlePrior` for atoms. Prior type changes sampling, not the optimizer
+recipe: the shared defaults still use G/D LR .00425 and particle LR .0085.
+The historical MoG study below has explicit experiment settings in its config.
 
 Run the default MoG benchmark with the existing experiment trainer:
 
@@ -233,7 +234,7 @@ from this checkout).
 ```python
 from particlegan import get_recipe
 
-recipe = get_recipe("vae_gan")  # also: ae_gan, ae_ddgan
+recipe = get_recipe(prior_kind="mog", sigma_rel=.025, encoder_mode="hard")
 prior = recipe.make_prior()
 # query = E(x): [batch, recipe.z_dim], produced by your encoder
 # encoded = recipe.encode(query, prior)
@@ -241,7 +242,7 @@ prior = recipe.make_prior()
 # loss = encoded.reconstruction_loss(x_hat, x)
 ```
 
-`vae_gan` selects one particle and adds fixed-sigma Gaussian noise. Its joint
+`encoder_mode="hard"` selects one particle and adds fixed-sigma Gaussian noise. Its joint
 KL is constant, so it needs no KL regularizer in training. AE uses a deterministic
 bounded offset instead. You own the networks, loop and loss composition;
 reconstruction never silently adds KL. See the
@@ -252,12 +253,12 @@ matched CIFAR32 evidence.
 
 ### DDGAN with MoG particles (0.4.0)
 
-Select the combined recipe with one name:
+Choose the model and prior explicitly:
 
 ```python
 from particlegan import DDGAN, get_recipe
 
-recipe = get_recipe("ddgan_mog")
+recipe = get_recipe(model="ddgan", prior_kind="mog", sigma_rel=.025, conditioning="ucd", num_classes=4)
 prior = recipe.make_prior().to(device)
 process = DDGAN(recipe.alpha_bar).to(device)
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)
@@ -266,15 +267,10 @@ z, indices = prior.sample(batch_size)
 prior_loss = recipe.make_prior_regularizer()(prior.z[indices.unique()])
 ```
 
-Defaults: **400 components, z_dim=4, sigma_rel=0.025, standardized reads,
-100k updates, constant LR, prior LR 0.06, prior betas (0.5, 0.999)**, and the
-existing four-step DDGAN/class-only UCD settings. Override any recipe field with
-keywords, for example `get_recipe("ddgan_mog", num_classes=8, z_dim=16)`.
-
-These are the package hyperparameters from the
-[100k study](reports/denoising-toy/mog_capacity_100k/READOUT.md), which used a
-32-wide generator and 128-wide discriminator. You supply the networks, data,
-training/sampling loop and EMA; the recipe does not select architectures.
+The model and prior share the winning optimizer/loss defaults. Set resource
+sizes, class count and budget explicitly for your application. The historical
+[100k study](reports/denoising-toy/mog_capacity_100k/READOUT.md) used different
+explicit settings and remains a recorded experiment, not a public preset.
 
 ### Add a loss to an existing pipeline
 
@@ -315,21 +311,19 @@ has separate generator and particle groups. You can build your own optimizers
 using the recipe's fields instead. Recipes are immutable; `.replace(...)`
 returns a new one. Unknown options raise errors.
 
-| Default | `get_recipe()` / `gan` | `ddgan` |
-| --- | --- | --- |
-| Generation | One-shot GAN | Four-step DDGAN |
-| Prior | 20,000 learned particles, dimension 4 | Same |
-| GAN loss / critic penalty | Rp logistic / exact L2 cap, weight 6, κ=1.25 | Rp logistic / cap weight 1, κ=1 |
-| Particle regularizer | VICReg, weight .05; no particle L2 | VICReg, weight 1 |
-| Adam learning rates: G / D / prior | .00425 / .00425 / .0085 | .0006 / .0009 / .006 |
-| Adam betas / EMA decay | (0, .99) / .995 | (0, .999) / .995 |
-| Schedule | Hold 60%, cosine to 5% | Same |
-| Batch size / training updates | 256 / 7,000 | 256 / 56,000 |
-| Conditioning | Unconditional | Class-only UCD, 4 classes, CE weight 0.02 |
+| Shared default | Value |
+| --- | --- |
+| Model / conditioning | GAN / scalar |
+| Prior | 20,000 learned particles, dimension 4 |
+| Loss / cap | Rp logistic / b_cap6, κ1.25 |
+| Particle regularizer | Spread .05; no particle L2 |
+| Adam G / D / particle LR | .00425 / .00425 / .0085 |
+| Adam betas / EMA | (0, .99) / .995 |
+| Schedule | Hold 60%, cosine toward 5% |
+| Batch / updates | 256 / 7,000 |
 
-GAN selects the v3 shared-recipe winner. DDGAN, MoG and autoencoder recipes
-retain their separately selected settings. `gan_v1` / `gan_legacy` and `gan_v2`
-preserve earlier GAN recipes, including optimizer settings.
+`model="ddgan"`, `prior_kind="mog"` and encoder options change components;
+they do not silently select different learning rates or regularizers.
 For flat 2D vectors, `BatchDistanceDiscriminator()` provides the final witness:
 centered features, D96×3, Softplus β6 and four smooth local-distance features.
 The older `LinearSkipDiscriminator` remains available. The new D depends on batch
@@ -355,7 +349,8 @@ The library does not require a parser or configuration framework:
 
 ```toml
 [particlegan]
-# Omit name for GAN defaults; use name = "ddgan" for DDGAN + UCD.
+# Omit model for GAN; set model = "ddgan" for diffusion.
+# For UCD also set conditioning = "ucd" and num_classes.
 z_dim = 16
 num_particles = 4096
 lr = 0.0003
@@ -442,7 +437,7 @@ labels, and device:
 import torch
 from particlegan import DDGAN, UCD, ucd_loss
 
-recipe = get_recipe("ddgan", num_classes=4)
+recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=4)
 prior = recipe.make_prior().to(device)
 adversarial = recipe.make_loss()
 penalty = recipe.make_gradient_penalty()
@@ -642,7 +637,7 @@ toy trainers. The faster CIFAR default retains exact derivatives; FD is optional
 
 - The text experiments (`five_modes.py`) use the same recipe (RpGAN + one-sided cap penalty on the joint critic ∇₍ₓ,𝓏₎D, EMA, β1=0, cosine anneal)
 - The 100-Gaussian experiments use the one-sided cap penalty (`--reg_arm`, default `b_cap`); a gradient penalty is what lets the sharp Fourier discriminator keep full mode coverage
-- GAN v3 particles use 2× the G learning rate; historical/domain recipes keep their own ratios.
+- GAN v3 particles use 2× the G learning rate; explicit experiment configurations can override that ratio.
 
 ## Changelog
 
@@ -650,7 +645,9 @@ Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
 
 ### 0.6.0 — unreleased
 
-- Promote the shared 19/19 recipe to GAN v3; preserve explicit v1/v2 presets.
+- Promote the shared 19/19 recipe to GAN v3 as the single common default.
+- Remove named/legacy preset selection; component choices are keyword fields.
+  Historical comparison values remain benchmark data, outside the public package.
 - Add `BatchDistanceDiscriminator`, the batch-aware final toy witness, and use
   it in the GAN quickstart. D architecture remains explicit in the leaderboard.
 - Add the [illustrated configuration guide](docs/gan-v3.md), equations and

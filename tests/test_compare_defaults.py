@@ -1,4 +1,5 @@
 """Catch ignored optimizer options and changed test conditions in the comparison."""
+from benchmarks.locked_shared.recorded_recipes import GAN_V1, GAN_V2
 import pytest
 import torch
 from torch import nn
@@ -11,9 +12,8 @@ from benchmarks.transfer_suite.formulations import axes
 from benchmarks.transfer_suite.vector_tasks import fixed_policy
 
 
-@pytest.mark.parametrize('name', ['gan', 'gan_legacy'])
-def test_recipe_replaces_mixed_group_rates_and_explicit_ae_betas(name):
-    recipe = get_recipe(name)
+@pytest.mark.parametrize('recipe', [GAN_V2, GAN_V1])
+def test_recipe_replaces_mixed_group_rates_and_explicit_ae_betas(recipe):
     applied = []
     with optimizer_defaults(recipe, applied):
         prior = MoGParticlePrior(8, 2)
@@ -32,9 +32,8 @@ def test_recipe_replaces_mixed_group_rates_and_explicit_ae_betas(name):
         assert [(r['role'], r['parameters']) for r in applied] == [('g', 6), ('prior', 16), ('d', 3)]
 
 
-@pytest.mark.parametrize('name', ['gan', 'gan_legacy'])
-def test_direct_particle_optimizer_uses_prior_rate(name):
-    recipe = get_recipe(name)
+@pytest.mark.parametrize('recipe', [GAN_V2, GAN_V1])
+def test_direct_particle_optimizer_uses_prior_rate(recipe):
     applied = []
     with optimizer_defaults(recipe, applied):
         points = nn.Parameter(torch.zeros(8, 2))
@@ -51,7 +50,7 @@ def test_both_defaults_keep_all_nineteen_targets_architectures_and_resources():
     assert len(jobs) == 19
     assert sum(j['spec']['runner'] == 'legacy' for j in jobs) == 9
     for job in jobs:
-        old, new = [effective_spec(job['spec'], get_recipe(name)) for name in ('gan_legacy', 'gan_v2')]
+        old, new = [effective_spec(job['spec'], recipe) for recipe in (GAN_V1, GAN_V2)]
         if old['runner'] == 'legacy':
             assert old == new
         else:

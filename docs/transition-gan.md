@@ -67,7 +67,7 @@ include these statistics; consistency metrics convert back to physical units.
 
 ## Recipe and comparison
 
-The example calls `get_recipe("mog")`, changing the component count to **1,024**,
+The example calls `get_recipe(prior_kind="mog", sigma_rel=.025)`, changing the component count to **1,024**,
 latent dimension to 32, conditioning to explicit two-class inputs, and any explicit step/batch
 overrides. Each component is a learned center with Gaussian noise. All branches
 share the same selected center **and the same Gaussian noise draw**.
@@ -77,11 +77,11 @@ The resulting absolute sigma stays fixed. Centers are standardized when sampled.
 The prior spread regularizer sees all 1,024 **raw centers**, once per generator
 update, rather than noisy or standardized draws. `prior.json` records calibration.
 
-Defaults are 28,000 updates, batch 256, Rp logistic loss, Adam with G LR 0.0006,
-D multiplier 1.5 and MoG prior multiplier **100** (prior LR 0.06). G/D betas are
-(0, 0.999), prior betas are (0.5, 0.999). Spread weight is 1, bcap threshold and
-coefficient are 1 for every critic on every step, and EMA is 0.995. LR stays constant for the
-first 60% of updates, then follows the default cosine decay to 5%.
+The task keeps 28,000 updates and batch 256. The current shared recipe uses
+Rp logistic, G/D LR .00425, particle LR .0085, Adam (0,.99), spread .05,
+b_cap coefficient6/κ1.25 and EMA .995. Rates hold for 60%, then cosine to 5%.
+Historical tables below used the earlier explicit MoG study settings; their
+reported scores do not establish results for the new shared default.
 
 The default `d_conditioning: concat` feeds two class indicators into each
 scalar real/fake critic and has no UCD classification loss. Geometry and physical

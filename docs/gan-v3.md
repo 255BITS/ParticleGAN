@@ -1,8 +1,7 @@
 # GAN v3: the default, explained
 
 **GAN v3 passes 19/19 live behavioral toys with one shared training recipe and
-explicit discriminator choices.** It is now selected by `get_recipe()` and
-`get_recipe("gan")`. The final improvement gives the discriminator information
+explicit discriminator choices.** It is now the single default returned by `get_recipe()`. The final improvement gives the discriminator information
 about nearby samples, providing local spread information.
 
 ![GAN v3 alternates discriminator updates with generator and particle updates.](figures/gan-v3-pipeline.svg)
@@ -10,13 +9,14 @@ about nearby samples, providing local spread information.
 ## Versions and measured results
 
 These are **recipe versions**, separate from the Python package version.
-Versioned names preserve their settings; `gan` follows the current default.
+Versions label recorded experiments. The public API exposes only the winner;
+old rows remain benchmark data, not selectable presets.
 
 | Recipe | Required toys | Data toys | Image toys | Total live PASS | Reference D profile |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `gan_v1` / `gan_legacy` | 1/9 | 3/6 | 1/4 | **5/19** | 5/19 |
-| `gan_v2` — previous default | 1/9 | 6/6 | 1/4 | **8/19** | 8/19 |
-| **`gan_v3` / `gan` — current default** | **9/9** | **6/6** | **4/4** | **19/19** | 15/19 |
+| v1 (archived) | 1/9 | 3/6 | 1/4 | **5/19** | 5/19 |
+| v2 — previous default (archived) | 1/9 | 6/6 | 1/4 | **8/19** | 8/19 |
+| **v3 — current default** | **9/9** | **6/6** | **4/4** | **19/19** | 15/19 |
 
 V3 is the measured `shared_c6` recipe, now promoted to the public API. Its
 19/19 score includes documented discriminator variants per task. The reference
@@ -202,11 +202,10 @@ for real in batches:
 samples = trainer.sample(256)           # Live weights.
 ```
 
-Use `get_recipe("gan_v1")`, `get_recipe("gan_v2")` or
-`get_recipe("gan_v3")` to pin a version. `gan_legacy` stays on v1; the historical
-`100gaussians` alias stays on v2. MoG, DDGAN and autoencoder recipes preserve
-their separately selected settings. Restore old checkpoints from their full
-saved recipe and original architecture.
+Use keyword fields for component choices and explicit overrides. All choices
+share the winning defaults; `name` is metadata, not a recipe selector.
+`get_recipe()` is exactly `Recipe()`. Restore old checkpoints from their full
+saved recipe and original architecture, or use the matching Git revision.
 
 The full 19/19 result requires the declared D profile, including different
 architectures for anisotropic data, overlap and unequal widths. The public

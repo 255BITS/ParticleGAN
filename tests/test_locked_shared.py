@@ -113,7 +113,7 @@ def test_music_mlp_alias_is_not_the_host_critic():
 
 
 def test_study_recipe_and_yue2_lazy_cap_are_not_the_stamp():
-    recipe = get_recipe("gan")
+    recipe = get_recipe()
     assert recipe.num_particles == 20_000
     assert recipe.num_particles != LOCKED_SHARED.n_particles
     assert recipe.prior_reg == 0.05

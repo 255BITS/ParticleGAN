@@ -6,6 +6,7 @@ The 100-mode/HQ criterion is independent of the nine extracted toy bounds.
 """
 
 from __future__ import annotations
+from benchmarks.locked_shared.recorded_recipes import GAN_V1
 
 import argparse
 from datetime import datetime, timezone
@@ -101,9 +102,7 @@ def make_protocol(device):
 
 
 def resolved_kwargs(example, output, name, device, overrides):
-    from particlegan import get_recipe
-
-    legacy = get_recipe('gan_legacy')
+    legacy = GAN_V1
     parameters = inspect.signature(example.train).parameters
     required = {"reg_kappa", "metric_callback", "metric_interval", "save_plots"}
     if not required <= parameters.keys():
@@ -112,7 +111,7 @@ def resolved_kwargs(example, output, name, device, overrides):
     values.update(epochs=7, steps_per_epoch=1000, batch_size=256, num_particles=20_000,
                   fourier=2, seed=0, device_str=str(device), out_dir=str(output / name),
                   return_details=True, metric_interval=INTERVAL, save_plots=False,
-                  lr=legacy.lr, beta1=legacy.betas[0], beta2=legacy.betas[1],
+                  lr=legacy.lr, d_lr_mult=legacy.d_lr_mult, prior_lr_mult=legacy.prior_lr_mult, beta1=legacy.betas[0], beta2=legacy.betas[1],
                   reg_coeff=legacy.reg_coeff, reg_kappa=legacy.reg_kappa, lambda_ep=legacy.prior_reg)
     values.update(overrides)
     values["metric_callback"] = "benchmarks.locked_shared.grid_study:checkpoint_callback"

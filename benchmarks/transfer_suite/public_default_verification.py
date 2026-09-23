@@ -111,7 +111,7 @@ def load_declaration():
 def public_default(profile):
     from particlegan import get_recipe
     base = get_recipe()
-    if base != get_recipe('gan_v3') or base.name != 'gan_v3':
+    if base.name != 'gan_v3':
         raise ValueError('get_recipe() does not resolve to the public gan_v3 default')
     for name, expected in profile['candidates'][0]['overrides'].items():
         actual = getattr(base, name)
