@@ -12,6 +12,6 @@
 
 This is NOT a diffusion/non-GAN baseline. Both arms stay inside ParticleGAN RpGAN + b_cap + particles. Batchfeat/shared_c6 vector D does not wire into the image suite; the documented published path for images is the transpose12 baseline.
 
-**Tip:**  ()
+**Tip:** `510e0054b2499ce725482de8e7a4ae8d72fd8f25` (`origin/particle-finetune/base`)
 
 **HIT gate:** winner (baseline_transpose12) FAIL + control (residual16) PASS on img_diag_ramp2.
