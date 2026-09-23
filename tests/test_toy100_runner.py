@@ -6,6 +6,7 @@ import numpy as np
 import torch
 
 from benchmarks.toy100.metrics import evaluate_samples
+from benchmarks.toy100.models import InputNoise, OutputNoise, linear_input_noise
 from benchmarks.toy100.train import evaluation_steps, load_config, resolve_config, train
 
 
@@ -61,3 +62,46 @@ def test_json_and_toml_custom_recipe_labels_resolve(tmp_path):
         assert (config["name"], config["steps"], recipe.total_steps, recipe.lr) == (
             "toy100_test", 12, 12, 0.001,
         )
+
+
+def test_stochastic_generator_and_critic_observation_isolation(tmp_path):
+    config = {
+        "problem": "grid100", "steps": 4, "seed": 23, "device": "cpu",
+        "num_particles": 128, "batch_size": 16,
+        "g_hidden": 16, "d_hidden": 16, "n_hidden": 1,
+        "eval_samples": 1024, "snapshot_samples": 64,
+        "eval_interval": 4, "snapshot_interval": 4,
+        "log_interval": 4, "threads": 1,
+        "output_noise_std": 0.026,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.5,
+    }
+    assert [linear_input_noise(0.5, step, 4, 0.5) for step in range(4)] == [
+        0.5, 0.25, 0.0, 0.0,
+    ]
+    sparse = tmp_path / "sparse_noise"
+    dense = tmp_path / "dense_noise"
+    sparse_summary = train({**config, "early_eval_steps": [0, 4]}, sparse)
+    dense_summary = train({**config, "early_eval_steps": [0, 1, 2, 3, 4]}, dense)
+    assert sparse_summary["status"] == dense_summary["status"] == "complete"
+    for step in (0, 4):
+        filename = f"step_{step:06d}.npz"
+        with np.load(sparse / "snapshots" / filename) as left, np.load(dense / "snapshots" / filename) as right:
+            for key in ("live", "ema", "target"):
+                np.testing.assert_array_equal(left[key], right[key])
+    with np.load(sparse / "final_samples.npz") as left, np.load(dense / "final_samples.npz") as right:
+        for key in ("live", "ema", "target"):
+            np.testing.assert_array_equal(left[key], right[key])
+        for model in ("live", "ema"):
+            assert evaluate_samples(torch.from_numpy(left[model]), "grid100") == sparse_summary["final"][model]
+    sparse_events = [json.loads(line) for line in (sparse / "events.jsonl").read_text().splitlines()]
+    dense_events = [json.loads(line) for line in (dense / "events.jsonl").read_text().splitlines()]
+    for key in ("loss_d", "loss_g", "loss_gan", "prior_regularization", "penalty"):
+        assert [row[key] for row in sparse_events if row["event"] == "train"] == [
+            row[key] for row in dense_events if row["event"] == "train"
+        ]
+    from benchmarks.toy100.train import make_trainer
+    resolved, recipe = resolve_config(config)
+    trainer = make_trainer(resolved, recipe)
+    assert isinstance(trainer.G, OutputNoise)
+    assert isinstance(trainer.D, InputNoise)

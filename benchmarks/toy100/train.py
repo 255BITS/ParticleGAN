@@ -29,6 +29,7 @@ from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import GANTrainer, Recipe, get_recipe
 
 from .metrics import EVAL_N, evaluate_samples
+from .models import InputNoise, OutputNoise, linear_input_noise
 from .problems import PROBLEM_NAMES, sample_real
 
 
@@ -52,6 +53,9 @@ RUN_DEFAULTS = {
     "log_interval": 250,
     "fused_adam": False,
     "threads": 1,
+    "output_noise_std": 0.0,
+    "input_noise_std": 0.0,
+    "input_noise_anneal_end": 0.5,
 }
 RECIPE_FIELDS = {field.name for field in fields(Recipe)}
 RUN_FIELDS = set(RUN_DEFAULTS)
@@ -135,6 +139,14 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         raise ValueError("CUDA requested but unavailable")
     if type(run["fused_adam"]) is not bool:
         raise ValueError("fused_adam must be a boolean")
+    for key in ("output_noise_std", "input_noise_std", "input_noise_anneal_end"):
+        value = run[key]
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+            raise ValueError(f"{key} must be a finite number")
+    if run["output_noise_std"] < 0 or run["input_noise_std"] < 0:
+        raise ValueError("noise standard deviations must be nonnegative")
+    if not 0 < run["input_noise_anneal_end"] <= 1:
+        raise ValueError("input_noise_anneal_end must be in (0, 1]")
     recipe_kwargs = {key: user[key] for key in user if key in RECIPE_FIELDS and key != "name"}
     recipe_kwargs["total_steps"] = run["steps"]
     recipe = get_recipe(**recipe_kwargs)
@@ -175,6 +187,10 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
         ).to(device)
         _init_linear(generator)
         _init_linear(discriminator)
+        if config["output_noise_std"]:
+            generator = OutputNoise(generator, config["output_noise_std"])
+        if config["input_noise_std"]:
+            discriminator = InputNoise(discriminator, seed=seed + 901, device=device)
         return GANTrainer(
             recipe, generator, discriminator, prior=prior, seed=seed,
             optimizer_options={"fused": config["fused_adam"]},
@@ -183,7 +199,8 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
 
 def _source_provenance() -> dict[str, Any]:
     paths = (
-        "benchmarks/toy100/train.py", "benchmarks/toy100/problems.py",
+        "benchmarks/toy100/train.py", "benchmarks/toy100/models.py",
+        "benchmarks/toy100/problems.py",
         "benchmarks/toy100/metrics.py", "lib/toy_models.py",
         "particlegan/training.py", "particlegan/recipes.py",
     )
@@ -275,6 +292,10 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
 
     try:
         trainer = make_trainer(resolved, recipe)
+        if resolved["output_noise_std"]:
+            # OutputNoise uses the global stream during updates. Evaluation
+            # forks it, so denser observations cannot alter the training path.
+            torch.manual_seed(resolved["seed"])
         train_data_rng = device_seed(resolved["seed"])
         target_rng = device_seed(resolved["seed"] + 401)
         target = sample_real(
@@ -353,6 +374,11 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
         observe(0)
         for step in range(1, budget + 1):
             step_start = time.perf_counter()
+            if resolved["input_noise_std"]:
+                trainer.D.sigma = linear_input_noise(
+                    resolved["input_noise_std"], trainer.completed_steps,
+                    budget, resolved["input_noise_anneal_end"],
+                )
             real = sample_real(
                 resolved["problem"], recipe.batch_size, device=device, generator=train_data_rng,
             )
