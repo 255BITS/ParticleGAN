@@ -1,5 +1,23 @@
 # GitHub CI common-22 trained-gate audit
 
+## Current affine shared candidate: 20/22
+
+[GitHub Actions run 35924517861](https://github.com/255BITS/ParticleGAN/actions/runs/35924517861), head `4bf434d`, trained the current `shared_candidate.json` with the declared affine model, network horizon 1600, network floor .01, κ=1.0, and the AVX2 dispatch profile. Both the saved aggregate and independent regrades before and after relocation report **valid FAIL, 20/22**: 2/3 native accuracy gates and 18/19 older gates pass. Shared-recipe identity, actual noise application on all 19 hosts, and full public-package V2 source coverage are verified; there is no evidence-integrity error. The optional public-default control was not requested in this hosted run. Unit CI at the same head passed on Python 3.10, 3.11, and 3.12.
+
+| Native problem | Passing terminal checks | 100k holdout precision | Mass TV | Center RMS / σ | Covariance trace bias | Radial KS | Gate |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| grid100 | 5/5 | .98168 | .03704 | .11213 | −.03767 | .01438 | PASS |
+| rotated100 | 4/5 | .97739 | .03740 | .08198 | −.03685 | .01495 | FAIL |
+| staggered100 | 5/5 | .98556 | .03971 | .10851 | −.03703 | .01476 | PASS |
+
+Rotated100 covers all 100 modes throughout the terminal window, but its step-6000 live precision is **.96935**, below the frozen **.97** minimum. Its next four checks and independent holdout pass. The stricter center/shape/mass conditions already pass at step 6000; the combined accuracy verdict correctly retains the original coverage failure. The shortfall is not waived or replaced by EMA performance.
+
+The sole older failure is `residual_student`: final identity MSE .049151, success rate .583333, wrong-pad rate .416667, and no passing terminal suffix. The other 18 frozen hosts pass under the exact same candidate. This supersedes the earlier statement that rotated100 and staggered100 had not yet been measured under this configuration; it does not establish a 22/22 recipe.
+
+The downloaded artifact and logs are retained at `artifacts/toy100-accuracy/ci-common22-network-floor010/`. All 179 copied files were SHA-256 verified against the RAM download before independent regrading after relocation. `copy-sha256.json` records those pre-relocation digests; the regrader rewrites derived leaderboard/aggregate files with local paths. The grid100 final and holdout metrics also reproduce the local floor-.01 grid run. The older native-3/3 GIF below in the PR uses the different κ=1.25/floor-.05 recipe, whose older score is 15/19.
+
+## Earlier MLP shared candidate
+
 [GitHub Actions run 35898491581](https://github.com/255BITS/ParticleGAN/actions/runs/35898491581) executed the single `benchmarks.toy_suite run` command in [the workflow](../../.github/workflows/toy100.yml) against `configs/toy100/shared_candidate.json`. Its downloaded `common22-trained-gate` evidence is retained locally at `artifacts/toy100-accuracy/ci-common22-fixed/artifacts/toy-suite-ci/`, with the console log at `artifacts/toy100-accuracy/ci-common22-fixed/toy-suite-ci.log`. The runner launched all three 7,000-step 100-mode trainings, their separate accuracy gate, and all 19 frozen transfer tasks. `command_returns.json` records exit codes `1`, `1`, and `0` for those three commands: both 100-mode gates failed, while the transfer runner completed. The workflow's training step therefore failed as expected; artifact upload still ran.
 
 The saved `compatibility.json` reports **INCOMPLETE, 16/22**, with `global_recipe_identical: false`. That identity flag is a comparison bug: the resolved in-memory `Recipe.to_dict()` contains tuple-valued Adam betas, while the saved transfer protocol contains their JSON list representation. Their values and every other global recipe/noise field agree. After normalizing this comparison to JSON values, an independent strict regrade of the *unchanged* downloaded `toy100` and `candidate19` evidence reports **valid FAIL, 16/22**: recipe identity true, noise actually applied on all 19 hosts, 0/3 native passes, 16/19 transfer passes, and 4/6 vector passes. The [regression test](../../tests/test_toy_suite.py) covers the real shared config's tuple-to-JSON-list round trip; all 35 `test_toy_suite.py` tests pass. The correction changes the classification from incomplete evidence to a fully tested failing recipe. It does not turn a failed model into a pass.
