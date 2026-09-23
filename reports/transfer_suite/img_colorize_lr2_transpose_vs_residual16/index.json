@@ -1,0 +1,26 @@
+{
+  "arms": {
+    "baseline_transpose12": {
+      "arm": "baseline_transpose12",
+      "confirmed_step": null,
+      "hq": 0.0,
+      "mean_rmse": 0.34731513261795044,
+      "modes": 0,
+      "seconds": 8.432218023997848,
+      "verdict": "FAIL"
+    },
+    "residual16": {
+      "arm": "residual16",
+      "confirmed_step": 500,
+      "hq": 1.0,
+      "mean_rmse": 0.012782095931470394,
+      "modes": 2,
+      "seconds": 10.585672746994533,
+      "verdict": "PASS"
+    }
+  },
+  "device": "cpu",
+  "hit": true,
+  "principal": "colorize_lr2 colorization proxy LR shade: published transpose12 vs residual16",
+  "tip_sha": "510e0054b2499ce725482de8e7a4ae8d72fd8f25"
+}
