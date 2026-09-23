@@ -3,7 +3,10 @@
 The [unadjusted leaderboard](../../reports/transfer_suite/unadjusted/README.md)
 is the primary comparison. The winner is **19/19 with `shared_c6` and declared
 discriminator choices**; its reference D profile scores 15/19. The initial
-baselines are **8/19 for the public preset** and **5/19 for the pinned old preset**.
+baselines are **8/19 for `gan_v2`** and **5/19 for `gan_v1` / `gan_legacy`**.
+Public `get_recipe()` now selects `gan_v3`, the promoted `shared_c6` recipe.
+The [installed-package verification](../../reports/transfer_suite/public_v3_promotion/README.md)
+passes all 19 using the public trainer and the required custom-host routes.
 The earlier 19/19 uses different optimizer settings per host and does not qualify
 here. The objective is one unchanged recipe that passes all 19 live tests.
 

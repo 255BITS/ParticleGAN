@@ -13,6 +13,7 @@ with declared discriminator choices (15/19 with the reference D profile).
 
 [Illustrated guide and equations](docs/gan-v3.md) ·
 [Full leaderboard](reports/transfer_suite/unadjusted/README.md) ·
+[Installed-default verification](reports/transfer_suite/public_v3_promotion/README.md) ·
 [Reproduce or compare a candidate](benchmarks/transfer_suite/UNADJUSTED_SEARCH.md).
 EMA is separate; a PASS requires every metric at five consecutive final checks.
 
@@ -30,6 +31,9 @@ Requires Python 3.10+ and PyTorch. Install from PyPI:
 ```bash
 python -m pip install particlegan
 ```
+
+This change prepares version 0.6.0. To use GAN v3 before that release is
+published, install this checkout with `python -m pip install .`.
 
 For development and the repository's research experiments:
 

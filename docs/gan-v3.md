@@ -24,6 +24,11 @@ D profile alone scores 15/19; a single universal network has not been establishe
 The older adjusted 19/19 result used per-toy optimizer settings and is a separate
 comparison. [Full leaderboard and every attempted variant](../reports/transfer_suite/unadjusted/README.md).
 
+A fresh [installed-package verification](../reports/transfer_suite/public_v3_promotion/README.md)
+also passes all 19: ten through `make_trainer`, nine through custom loops using
+public primitives. Every 24-point live curve matches the native winning run.
+Resolved attributes, tensor shapes and checkpoint resume are verified separately.
+
 A toy passes only if **every metric passes at five or more consecutive final
 observations**, using the complete 24-point live curve. EMA is scored separately.
 Tests keep their data, generators, batch sizes, particle counts, budgets and
