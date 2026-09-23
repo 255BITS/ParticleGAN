@@ -1,4 +1,7 @@
-# Lunar consolidation against `develop` (`fde698b`)
+# Lunar consolidation against `develop`
+
+The audit started at `fde698b`; the combined branch was rebased onto `3d08a3a`
+and the complete command and test suite were rerun against that API.
 
 The single Lunar pipeline should start from the current `develop` API and own collection, training, evaluation, and evidence under one command. The old PRs have different bases (`feature/gym-world-model` or `particle-finetune/base`); their GitHub diff sizes are therefore not the amount of work missing from `develop`. This map records the useful behavior, not an instruction to merge their branches.
 

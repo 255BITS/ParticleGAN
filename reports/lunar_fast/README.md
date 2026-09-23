@@ -1,6 +1,6 @@
 # Fast Lunar lander: full command evidence
 
-The complete pipeline ran from an empty output directory in about **61 seconds**
+The complete pipeline ran from an empty output directory in about **60 seconds**
 on CPU. Its declared landing/speed gate passed on validation and then on a
 separate, untouched test cohort. This is the bidirectional-main-thrust Box2D
 variant, not stock LunarLander. A crash never counts as a fast landing.
@@ -48,3 +48,9 @@ and [consolidated PR map](../../docs/lunar-consolidation.md). The behavior-cloni
 initialization is explicit; the final policy performs real RpGAN updates and
 receives gradients through its frozen learned world model. This run establishes
 the final controller's behavior, not an isolated benefit of RpGAN over cloning.
+
+Validation on the rebased source: **718 passed, 5 skipped, 1 expected failure**,
+plus 27 passing subtests. The expected failure is the legacy native toy already
+recorded on `develop`. Four skips require opt-in CUDA data and one needs the
+optional local `torch-fidelity` package. The complete command and separate
+smoke export both completed.

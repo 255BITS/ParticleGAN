@@ -1,5 +1,5 @@
 {
-  "out": "results/gym/fast_lander_release",
+  "out": "results/gym/fast_lander_develop",
   "device": "cpu",
   "threads": 2,
   "train_episodes": 96,
@@ -166,8 +166,8 @@
       84029
     ]
   },
-  "revision": "fde698b6cf13980fa8c121cd52d21a7d92cd1fa5",
-  "git_dirty": true,
+  "revision": "9e40c6a179982098440b04726af38889628cf2fb",
+  "git_dirty": false,
   "source_sha256": {
     "lunar_flight.py": "dd5370d34554b8304df6c7476e2ea3987d9f56d06b2e06292efce6003fdb12f3",
     "lunar_training.py": "d558f6a1b49bce552beb3828851874c0929eb86ee9005d6c79c4da16a85e4721",
@@ -181,7 +181,7 @@
     "Box2D": "2.3.10",
     "Pillow": "12.3.0"
   },
-  "started_at": "2026-09-23T05:11:13.065418+00:00",
+  "started_at": "2026-09-23T05:15:23.585665+00:00",
   "selection": "validation success count first, then mean steps on successful landings",
   "gate": "at least 90% success, no success count loss, >=1.1x paired speedup"
 }
