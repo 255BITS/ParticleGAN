@@ -10,7 +10,7 @@ import torch
 from particlegan import ParticlePrior, get_recipe
 
 ROOT = Path(__file__).resolve().parent
-REPO = Path("/home/mikkel/sliders-outscore/ParticleGAN")
+REPO = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO))
 
 from benchmarks.transfer_suite import shared_discriminator_search as architecture

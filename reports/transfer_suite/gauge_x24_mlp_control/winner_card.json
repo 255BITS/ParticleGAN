@@ -1,0 +1,1 @@
+{"name": "batchfeat_center6_distance_head", "implementation": "shared_batch_feature_v1", "width": 96, "layers": 3, "fourier": 0, "trunk_normalization": "center", "softplus_beta": 6.0, "feature": "distance", "placement": "head", "kernel_scales": [0.1, 0.25, 0.5, 1.0], "eps": 1e-05, "batch_dependence": true, "batch_statistics": "current discriminator input only"}
