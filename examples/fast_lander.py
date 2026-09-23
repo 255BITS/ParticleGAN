@@ -23,8 +23,8 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from lib.lunar_flight import (VARIANT, fast_expert, rollout_episode, slow_expert,
-                              summarize_episodes)
+from lib.lunar_flight import (VARIANT, collect_counterfactuals, fast_expert,
+                              rollout_episode, slow_expert, summarize_episodes)
 
 
 def jsonable(value):
@@ -158,12 +158,13 @@ def main(argv=None):
     parser.add_argument("--test-episodes", type=int, default=30)
     parser.add_argument("--world-steps", type=int, default=2500)
     parser.add_argument("--warmup-steps", type=int, default=8000)
+    parser.add_argument("--slow-gan-steps", type=int, default=1200)
     parser.add_argument("--gan-steps", type=int, default=400)
     parser.add_argument("--rounds", type=int, default=3)
     parser.add_argument("--batch-size", type=int, default=256)
     parser.add_argument("--smoke", action="store_true", help="Small integration run; cannot establish merge readiness")
     args = parser.parse_args(argv)
-    for name in ("threads", "train_episodes", "validation_episodes", "test_episodes", "world_steps", "warmup_steps", "gan_steps", "rounds", "batch_size"):
+    for name in ("threads", "train_episodes", "validation_episodes", "test_episodes", "world_steps", "warmup_steps", "slow_gan_steps", "gan_steps", "rounds", "batch_size"):
         if getattr(args, name) < 1:
             parser.error(f"--{name.replace('_', '-')} must be positive")
     if args.train_episodes < 2:
@@ -171,6 +172,7 @@ def main(argv=None):
     if args.smoke:
         args.train_episodes, args.validation_episodes, args.test_episodes = 8, 3, 3
         args.world_steps, args.warmup_steps, args.gan_steps, args.rounds = 20, 20, 8, 1
+        args.slow_gan_steps = 8
     if args.out.exists() and any(args.out.iterdir()):
         parser.error(f"Output directory is not empty: {args.out}; use a fresh --out to preserve evidence")
     args.out.mkdir(parents=True, exist_ok=True)
@@ -180,7 +182,9 @@ def main(argv=None):
     mission.console.print(Panel("[bold cyan]PARTICLEGAN · LUNAR FLIGHT SCHOOL[/]\nCollect → learn dynamics → learn landing → extract → accelerate → prove → replay", border_style="cyan"))
     seed_sets = {"train": list(range(24000, 24000 + args.train_episodes)),
                  "validation": list(range(34000, 34000 + args.validation_episodes)),
-                 "test": list(range(84000, 84000 + args.test_episodes))}
+                 # The original 84000 cohort informed the failure investigation.
+                 # Freeze a new final cohort before evaluating the correction.
+                 "test": list(range(94000, 94000 + args.test_episodes))}
     if args.smoke:
         seed_sets = {key: [seed + 1000000 for seed in seeds] for key, seeds in seed_sets.items()}
     if any(set(seed_sets[a]) & set(seed_sets[b]) for a, b in (("train", "validation"), ("train", "test"), ("validation", "test"))):
@@ -193,6 +197,8 @@ def main(argv=None):
     for source in source_paths:
         shutil.copy2(source, source_dir / source.name)
     config = {**vars(args), "variant": VARIANT, "seed_sets": seed_sets, "revision": revision, "git_dirty": dirty,
+              "weight_kind": "live", "ema_decay": 0.,
+              "world_action_features": "engine_power",
               "source_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in source_dir.iterdir()},
               "dependencies": {name: version(name) for name in ("torch", "numpy", "gymnasium", "Box2D", "Pillow")},
               "started_at": datetime.now(timezone.utc).isoformat(),
@@ -211,17 +217,27 @@ def main(argv=None):
     np.savez_compressed(args.out / "world_validation.npz", **world_validation)
     np.savez_compressed(args.out / "slow_expert.npz", **slow_data)
     write_json(args.out / "expert_episodes.json", {"slow": [compact_episode(e) for e in slow], "fast": [compact_episode(e) for e in fast]})
+    # Branch only inside the world-training cohort. Off/down/ignition examples
+    # teach dynamics; their alternative actions never become imitation labels.
+    branches = collect_counterfactuals(slow[:cut] + fast[:cut], log=mission.log)
+    np.savez_compressed(args.out / "counterfactuals.npz", **branches)
+    dynamics_data = {key: np.concatenate([world_data[key], branches[key]])
+                     for key in ("states", "actions", "next_states")}
     mission.stage(2, "Train the world model")
     world = args.out / "world.pt"
-    world_metrics = train_world_model(world_data, world, validation_records=world_validation, steps=args.world_steps,
+    world_metrics = train_world_model(dynamics_data, world, validation_records=world_validation, steps=args.world_steps,
         batch_size=args.batch_size, device=args.device, seed=7301, log=mission.log)
+    world_metrics["expert_transitions"] = len(world_data["states"])
+    world_metrics["counterfactual_transitions"] = len(branches["states"])
     write_json(args.out / "world_metrics.json", world_metrics)
     mission.stage(3, "Train the slow RpGAN landing policy")
     slow_path = args.out / "slow.pt"
-    train_fast_policy(slow_data, world, slow_path, warmup_steps=args.warmup_steps,
-        steps=args.gan_steps, batch_size=args.batch_size, device=args.device, seed=7302, log=mission.log)
+    slow_metrics = train_fast_policy(slow_data, world, slow_path, warmup_steps=args.warmup_steps,
+        steps=args.slow_gan_steps, batch_size=args.batch_size, device=args.device, seed=7302, log=mission.log)
+    write_json(args.out / "slow_metrics.json", slow_metrics)
     slow_policy = load_fast_policy(slow_path, device=args.device)
     slow_validation = mission.flights(seed_sets["validation"], slow_policy.act, "slow policy validation")
+    write_json(args.out / "slow_validation.json", [compact_episode(e) for e in slow_validation])
     mission.stage(4, "Extract successful slow → fast trajectories")
     pairs, fast_data, count = extract_pairs(slow, fast)
     np.savez_compressed(args.out / "slow_fast_pairs.npz", **pairs)
@@ -257,7 +273,8 @@ def main(argv=None):
         ("learned slow (validation)", slow_validation), ("learned fast (validation)", winner["episodes"]),
         ("learned slow (test)", slow_test), ("learned fast (test)", fast_test)) if episodes]
     full_evaluation = args.validation_episodes >= 20 and args.test_episodes >= 30
-    report = {"variant": VARIANT, "smoke": args.smoke, "merge_ready": bool(validation_pass and test_pass and not args.smoke and full_evaluation),
+    report = {"variant": VARIANT, "weight_kind": "live", "ema_decay": 0.,
+              "smoke": args.smoke, "merge_ready": bool(validation_pass and test_pass and not args.smoke and full_evaluation),
               "full_evaluation": full_evaluation,
               "validation_pass": validation_pass, "test_pass": test_pass, "leaderboard": leaderboard,
               "paired_test": paired_speed(slow_test, fast_test), "winner": winner["checkpoint"],

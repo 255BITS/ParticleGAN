@@ -15,6 +15,8 @@ import numpy as np
 VARIANT = "LunarLanderContinuous-v3-bidirectional-main-v1"
 STOCK_VARIANT = "LunarLanderContinuous-v3"
 GYM_VERSION = "1.2.3"
+COUNTERFACTUAL_MAIN_ACTIONS = (-0.3, 0., 0.001, 0.12, 0.5, 1.)
+COUNTERFACTUAL_ACTION_KINDS = ("down", "off", "up_ignition", "up_low", "up_medium", "up_full")
 
 
 def make_lunar_env(*, bidirectional: bool = True, render_mode: str | None = None):
@@ -102,7 +104,9 @@ def _outcome(env, state, terminated, truncated):
         both_legs = all(leg.ground_contact for leg in base.legs)
         if not base.lander.awake and both_legs and on_pad:
             return "successful_landing"
-        return "crash"
+        if not base.lander.awake:
+            return "incomplete_landing" if on_pad else "off_pad_landing"
+        return "other_termination"
     return "time_limit" if truncated else None
 
 
@@ -170,6 +174,80 @@ def collect_expert_episodes(seeds: Iterable[int], behavior: str = "slow",
             for seed in seeds]
 
 
+def _counterfactual_anchors(steps: int, contact_step: int | None) -> list[int]:
+    """First three steps and quarters of the flight before first leg contact."""
+    flight = min(steps, contact_step) if contact_step is not None else steps
+    if flight < 1:
+        raise ValueError("Counterfactual source episode must contain a live step")
+    return sorted(set(range(min(3, flight))) |
+                  {min(flight - 1, int(fraction * flight))
+                   for fraction in (0.25, 0.5, 0.75)})
+
+
+def collect_counterfactuals(episodes: Iterable[dict], log: Callable | None = None) -> dict[str, np.ndarray]:
+    """Collect real one-step dynamics branches from supplied expert episodes.
+
+    These are *dynamics only*, never imitation targets for the policy. Each
+    anchor is restored with its exact seed and full source-action prefix before
+    trying six main commands with the source lateral command held fixed.
+    Callers own the episode cohort and must keep validation/test episodes out.
+    """
+    episodes = list(episodes)
+    if not episodes:
+        raise ValueError("Expected at least one source episode")
+    rows = {name: [] for name in ("states", "actions", "next_states",
+                                  "episode_seeds", "anchor_steps", "controllers",
+                                  "action_kind", "source_main_action",
+                                  "terminated", "truncated")}
+    env = make_lunar_env()
+    try:
+        for episode_index, episode in enumerate(episodes, 1):
+            if episode.get("variant") != VARIANT:
+                raise ValueError("Counterfactual source must use the bidirectional Lunar variant")
+            seed = int(episode["seed"])
+            states = np.asarray(episode["states"], dtype=np.float32)
+            actions = np.asarray(episode["actions"], dtype=np.float32)
+            next_states = np.asarray(episode["next_states"], dtype=np.float32)
+            steps = len(states)
+            if (steps != int(episode["steps"]) or states.shape != (steps, 8)
+                    or actions.shape != (steps, 2) or next_states.shape != (steps, 8)
+                    or not all(np.isfinite(array).all() for array in (states, actions, next_states))):
+                raise ValueError(f"Malformed counterfactual source episode seed={seed}")
+            controller = str(episode.get("controller", episode.get("behavior", "expert")))
+            for anchor in _counterfactual_anchors(steps, episode.get("contact_step")):
+                for kind, main_action in zip(COUNTERFACTUAL_ACTION_KINDS, COUNTERFACTUAL_MAIN_ACTIONS):
+                    restored, _ = env.reset(seed=seed)
+                    for prefix_step, prior_action in enumerate(actions[:anchor]):
+                        restored, _, terminated, truncated, _ = env.step(prior_action)
+                        if terminated or truncated:
+                            raise RuntimeError(f"Replay prefix ended at seed={seed} step={prefix_step}")
+                    if not np.array_equal(restored, states[anchor]):
+                        error = float(np.max(np.abs(restored - states[anchor])))
+                        raise RuntimeError(f"Replay mismatch at seed={seed} anchor={anchor}: max_error={error}")
+                    command = np.asarray([main_action, actions[anchor, 1]], dtype=np.float32)
+                    following, _, terminated, truncated, _ = env.step(command)
+                    if np.array_equal(command, actions[anchor]) and not np.array_equal(following, next_states[anchor]):
+                        raise RuntimeError(f"Behavior successor mismatch at seed={seed} anchor={anchor}")
+                    for key, value in (("states", restored), ("actions", command),
+                                       ("next_states", following), ("episode_seeds", seed),
+                                       ("anchor_steps", anchor), ("controllers", controller),
+                                       ("action_kind", kind),
+                                       ("source_main_action", actions[anchor, 0]),
+                                       ("terminated", terminated), ("truncated", truncated)):
+                        rows[key].append(value)
+            if log is not None and (episode_index % 8 == 0 or episode_index == len(episodes)):
+                log(f"counterfactuals: {episode_index}/{len(episodes)} episodes, {len(rows['states'])} real branches")
+    finally:
+        env.close()
+    float_keys = {"states", "actions", "next_states", "source_main_action"}
+    integer_keys = {"episode_seeds", "anchor_steps"}
+    boolean_keys = {"terminated", "truncated"}
+    return {key: np.asarray(value, dtype=np.float32 if key in float_keys else
+                            np.int64 if key in integer_keys else
+                            bool if key in boolean_keys else str)
+            for key, value in rows.items()}
+
+
 def summarize_episodes(episodes: Iterable[dict]) -> dict:
     """Success and speed metrics; successful means simulator sleep on the pad."""
     episodes = list(episodes)
@@ -184,4 +262,5 @@ def summarize_episodes(episodes: Iterable[dict]) -> dict:
                 mean_contact_step=float(np.mean(contacts)) if contacts else None,
                 mean_return=float(np.mean([e["return_"] for e in episodes])),
                 outcomes={outcome: sum(e["outcome"] == outcome for e in episodes)
-                          for outcome in ("successful_landing", "crash", "out_of_bounds", "time_limit", "other_termination")})
+                          for outcome in ("successful_landing", "incomplete_landing", "off_pad_landing",
+                                          "crash", "out_of_bounds", "time_limit", "other_termination")})

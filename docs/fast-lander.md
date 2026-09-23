@@ -31,7 +31,11 @@ These measurements use the declared variant below, not stock Lunar.
 1. Collect slow and fast heuristic expert trajectories in the actual Box2D
    simulator, with states, actions, successors, and episode provenance.
 2. Train a small action-conditioned delta world model. A separate subset of
-   training-world episodes measures dynamics generalization.
+   training-world episodes measures dynamics generalization. Before fitting,
+   replay training-only prefixes and branch into off, down, and upward commands.
+   These real counterfactuals teach dynamics, never policy imitation targets.
+   Action features encode the simulator's main-engine ignition threshold and
+   side-engine dead zone; the network learns the resulting motion.
 3. Initialize a slow policy by behavior cloning, then train it with conditional
    paired relativistic logistic GAN loss and the public ParticleGAN gradient
    cap. A frozen world model also supplies a differentiable successor loss.
@@ -47,6 +51,11 @@ These measurements use the declared variant below, not stock Lunar.
    checkpoints, datasets, hashes, configuration, and a machine-readable report.
 
 The policy is a learned network at inference; it does not call an expert.
+All training, checkpoint selection, and flight evaluation use **live weights**.
+There is no EMA. New checkpoints explicitly record `weight_kind: live`, and
+the policy recipe sets `ema_decay: 0`; loaders reject checkpoints declared as
+EMA. Legacy checkpoints used live weights too, despite an unused inherited
+recipe `ema_decay: 0.995` field. New formats require explicit live provenance.
 An explicit main-engine deadband maps commands with absolute value below 0.12
 to exact zero, avoiding Gym's minimum half-power upward burn for arbitrarily
 small positive commands. The same projection is used during training, with a
@@ -58,6 +67,10 @@ Resolved objective weights and the `get_recipe()` configuration are saved in
 each checkpoint. These are the current `develop` public API primitives.
 The [training rounds](lunar-training-rounds.md) explain the failed first attempt,
 the engine decoder fix, declared recipe overrides, and measured limitations.
+The [failure analysis](lunar-failure-analysis.md) reproduces the training-world
+flyaway and explains the dynamics correction. Defaults use 1,200 slow-policy
+RpGAN updates (`--slow-gan-steps`) and 400 per fast round (`--gan-steps`), each
+after 8,000 cloning updates. Longer adversarial training can still drift.
 
 This is a consolidated, independently runnable application, informed by the old
 Lunar experiments. It does not claim to reproduce the historical three-generator
@@ -75,8 +88,11 @@ not the stock Lunar benchmark. The library supports stock physics via
 `make_lunar_env(bidirectional=False)`.
 
 A successful landing requires no crash flag, both legs touching, a sleeping
-lander, and its center inside the pad. Crashes, flyaways, and timeouts never
-become training targets or fast landings. Speed means steps through successful
+lander, and its center inside the pad. A settled one-leg landing is labeled
+`incomplete_landing`, a settled off-pad landing `off_pad_landing`, and a real
+simulator crash `crash`; none counts as success. Failed flights never become
+policy imitation targets, though their transitions can teach dynamics.
+Speed means steps through successful
 termination, including settling. First contact is reported separately.
 
 The promotion gate requires at least 90% landings, no reduction in landing
@@ -99,10 +115,11 @@ demo explicitly shows the failure. A downward-boost indicator identifies burns.
 | --- | --- |
 | `config.json`, `source/` | Exact settings, cohorts, dependency versions, Git revision, source snapshots/hashes |
 | `transitions.npz`, `world_validation.npz` | Episode-disjoint dynamics data |
+| `counterfactuals.npz` | Training-only simulator branches with seed, anchor, controller, and action provenance |
 | `slow_expert.npz`, `fast_expert.npz` | Successful physical state/action/successor trajectories |
 | `slow_fast_pairs.npz` | Same-reset, both-land progress alignment, with both seed columns |
 | `world.pt`, `slow.pt`, `fast_round_*.pt`, `fast.pt` | Learned dynamics, baseline, candidates, validation-selected winner |
-| `world_metrics.json`, `validation.json`, `report.json` | Dynamics errors, selection history, held-out landing results |
+| `world_metrics.json`, `slow_metrics.json`, `slow_validation.json`, `validation.json`, `report.json` | Dynamics errors, slow baseline, selection history, held-out landing results |
 | `run.log`, `metrics.jsonl` | Tail-friendly text and structured progress |
 | `slow.gif`, `fast.gif`, `comparison.gif`, `index.html` | Real-time flight evidence and a standalone demo page |
 

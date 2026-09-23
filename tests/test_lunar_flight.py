@@ -1,12 +1,14 @@
 """Physics and outcome checks for the real LunarLander Box2D variant."""
 import numpy as np
 import pytest
+from types import SimpleNamespace
 
 pytest.importorskip("gymnasium")
 pytest.importorskip("Box2D")
 
-from lib.lunar_flight import (VARIANT, fast_expert, make_lunar_env,
-                              rollout_episode, slow_expert, summarize_episodes)
+from lib.lunar_flight import (VARIANT, _outcome, collect_counterfactuals,
+                              fast_expert, make_lunar_env, rollout_episode,
+                              slow_expert, summarize_episodes)
 
 
 def test_negative_main_command_accelerates_down_and_stock_opt_out_is_off():
@@ -36,7 +38,8 @@ def test_expert_rollout_contains_real_transitions_and_outcome_metrics():
         assert episode["actions"].shape == (episode["steps"], 2)
         assert episode["next_states"].shape == (episode["steps"], 8)
         assert episode["variant"] == VARIANT
-        assert episode["outcome"] in ("successful_landing", "crash", "out_of_bounds", "time_limit")
+        assert episode["outcome"] in ("successful_landing", "incomplete_landing",
+                                      "off_pad_landing", "crash", "out_of_bounds", "time_limit")
         if episode["outcome"] == "successful_landing":
             assert episode["terminated"][-1]
             assert episode["contact_step"] is not None
@@ -61,3 +64,42 @@ def test_fixed_paired_flights_land_safely_and_fast_uses_down_thruster():
     assert all(e["outcome"] == "successful_landing" for e in slow + fast)
     assert all(np.any(e["downward_main_power"] > 0) for e in fast)
     assert sum(e["steps"] for e in fast) < 0.9 * sum(e["steps"] for e in slow)
+
+
+def test_counterfactuals_replay_prefix_and_capture_main_ignition_jump():
+    episode = rollout_episode(24053, slow_expert, max_steps=5)
+    messages = []
+    branches = collect_counterfactuals([episode], log=messages.append)
+    assert len(branches["states"]) == 24  # first 3 and three-quarter anchor
+    assert len(messages) == 1
+    assert set(branches["action_kind"]) == {"down", "off", "up_ignition",
+                                               "up_low", "up_medium", "up_full"}
+    for step in range(4):
+        off = (branches["anchor_steps"] == step) & (branches["action_kind"] == "off")
+        ignition = (branches["anchor_steps"] == step) & (branches["action_kind"] == "up_ignition")
+        np.testing.assert_array_equal(branches["states"][off], branches["states"][ignition])
+        assert (branches["next_states"][ignition, 3] - branches["next_states"][off, 3])[0] > .01
+    assert np.all(branches["episode_seeds"] == 24053)
+
+
+def test_counterfactuals_reject_wrong_prefix_state():
+    episode = rollout_episode(24053, slow_expert, max_steps=5)
+    episode["states"][1, 0] += .01
+    with pytest.raises(RuntimeError, match="Replay mismatch.*anchor=1"):
+        collect_counterfactuals([episode])
+
+
+def test_settled_incomplete_or_off_pad_is_not_a_crash():
+    base = SimpleNamespace(game_over=False, helipad_x1=0., helipad_x2=1.,
+                           lander=SimpleNamespace(awake=False, position=SimpleNamespace(x=.5)),
+                           legs=[SimpleNamespace(ground_contact=True),
+                                 SimpleNamespace(ground_contact=False)])
+    env = SimpleNamespace(unwrapped=base)
+    state = np.zeros(8, dtype=np.float32)
+    assert _outcome(env, state, True, False) == "incomplete_landing"
+    base.legs[1].ground_contact = True
+    assert _outcome(env, state, True, False) == "successful_landing"
+    base.lander.position.x = 2.
+    assert _outcome(env, state, True, False) == "off_pad_landing"
+    base.game_over = True
+    assert _outcome(env, state, True, False) == "crash"

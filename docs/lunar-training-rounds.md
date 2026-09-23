@@ -1,86 +1,69 @@
 # Lunar training rounds
 
-These are development measurements on fixed train seeds `24000:24096` and
-validation seeds `34000:34020`. No held-out test seeds were used. All flights
-ran in the declared bidirectional Box2D variant. A successful landing means
-the simulator settled the lander on its legs; low imitation loss alone does
-not count as success.
+All development comparisons below reuse the fixed expert training cohort
+`24000:24096` and controller validation cohort `34000:34020` in the declared
+bidirectional Box2D variant. The old `84000:84030` test result is now a
+**diagnostic**, because it was inspected before the calibration fix. The next
+full pipeline run predeclares the untouched `94000:94030` test cohort; its
+landing and speed results remain pending. [Failure analysis](lunar-failure-analysis.md)
+explains the mechanism and limits of these measurements.
 
-| Development round | Learned slow validation | Learned fast validation | Paired speedup | Finding |
-| --- | ---: | ---: | ---: | --- |
-| Initial pilot: 2,500 action-cloning updates, 400 paired RpGAN updates, no engine deadband | 17/20; 205.5 successful-flight steps | 0/20; all timeouts | unavailable | The neural output put small positive values near the expert's exact zero main command. The stock upward engine fires at a minimum power for any positive command. |
-| Corrected pilot: final expert code, 8,000 action-cloning updates, 400 paired RpGAN updates, `0.12` main deadband | 20/20; 212.15 steps | 20/20; 183.65 steps | 1.155× | The controller emits an exact zero main command in the deadband. The same projected action enters critic and frozen world-model training through a straight-through gradient path. |
-| Pair-filtered check: same corrected slow checkpoint, fast training restricted to 91 successful, faster same-world expert pairs | 20/20; 212.15 steps | 20/20; 182.75 steps | 1.161× | This matches the full pipeline's fast-data extraction rule; 17,053 fast transitions remained. |
+The first pilot exposed an actuator problem: any positive main command ignites
+the stock engine at at least half power. A `0.12` policy deadband corrected the
+initial network's near-zero commands; applying it to the **same** first-pilot
+checkpoints changed slow validation from 17/20 to 20/20 and fast from 0/20 to
+20/20. A later independent pilot used 8,000 behavior-cloning updates and 400
+conditional paired RpGAN updates. Restricting fast training to successful,
+faster same-reset expert flights gave slow 20/20, fast 20/20 and a 1.161×
+paired speedup on validation. These were development results, not a new test.
 
-The first pilot used an earlier slow expert; its results diagnose the engine
-activation problem but are not a matched ablation against the corrected pilot.
-Applying the `0.12` deadband to those **same first-pilot checkpoints**, without
-retraining, changed slow validation from 17/20 to 20/20 and fast validation
-from 0/20 to 20/20, at 211.85 and 184.65 successful-flight steps. This is
-direct evidence for the action-semantics fix. A separate direct fast-policy
-cloning check on the final expert data landed 11/20 after 2,500 cloning updates
-and 20/20 after 8,000. Longer initialization is therefore also necessary for
-the chosen compact network.
+The original single-command run used 2,500 world updates, 8,000 cloning and
+400 RpGAN updates per policy round. It selected fast round 1 by validation
+success then successful-flight steps. Its [archived report](../reports/lunar_fast/audit/original_report.json)
+shows slow 19/20 and fast 20/20 validation landings; on the former test cohort
+slow landed 28/30 and fast 29/30. Both landed on 27 identical test resets, and
+fast won all 27 at 1.172× paired speed. This is a genuine measurement of the
+**old policy** in the named simulator variant, but the subsequent diagnosis
+shows that its slow controller fails on successful expert training resets.
 
-The corrected pilot used 96 fixed train worlds. The slow expert landed 92/96
-and the fast expert 94/96; only successful expert episodes supplied policy
-targets. The world model trained on both behaviors from the first 76 train
-worlds and used the remaining 20 train worlds for episode-disjoint validation.
-Its validation next-state MSE was `0.002106` after 1,800 updates on 31,671
-transitions. That split is independent of world-model fitting, although the
-policy's expert dataset contains some of the same episodes. The validation
-flights above use entirely separate worlds.
+## Fixed-data mechanism and budget comparisons
 
-Both corrected controllers used a 128-wide neural policy, 8,000 supervised
-initialization updates followed by 400 paired conditional RpGAN updates with
-the public `get_recipe().make_loss()` and `make_gradient_penalty()` APIs.
-Declared recipe overrides were `reg_coeff=1` and `reg_every=4`; the loss
-remained paired relativistic logistic. The generator used Adam at `3e-4`, the
-critic Adam at `2e-4`, both with betas `(0.5, 0.99)`. The adversarial weight
-was `1` and the frozen learned world's successor loss weight was `2.5`.
-There was no direct action-cloning loss during the adversarial phase. The
-learned world supplied a differentiable next-state target for policy actions;
-the action discriminator scored `(state, action)` pairs. These are explicit
-task-specific choices, not the repository's unmodified default optimizer or
-regularization settings.
+The audits held expert data, simulator variant, policy architecture, 8,000
+cloning updates, paired Rp logistic loss, `b_cap` cadence, optimizer settings,
+and training seed fixed. The old raw-action world had too little data around
+the off-to-up ignition jump. A training-only collector replayed exact expert
+prefixes on the world-model training seeds and took six one-step main-action
+branches per anchor. These 5,472 real Box2D transitions trained **only the
+world model**. Policy targets stayed the original successful expert actions.
+The calibrated model also maps raw commands to their known engine-power
+features. Its predicted mean off-to-up velocity jump was 0.02496 against
+0.02731 measured, compared with 0.00468 from the original world model. The
+[calibration audit](../reports/lunar_fast/audit/calibrated_world.json) records
+the model comparison; scratch runs remain under
+`results/gym/lunar_systematic_audit/calibrated_durability/`.
 
-The adversarial phase ran and changed the policy, but these pilots do not show
-that RpGAN alone improves landings over the cloning initialization. In the
-corrected fast pilot, training action MSE rose from `0.000979` before RpGAN to
-`0.006170` afterward; normalized world successor MSE fell from `0.41299` to
-`0.41038`. Simulator flights establish the final controller's landing and
-speed result. The full pipeline uses a stricter extraction of same-world pairs
-where both experts landed and the fast flight finished sooner, and evaluates
-its selected checkpoint separately.
+| Calibrated policy | Fixed validation landings | Mean successful steps | Expert training-world landings | Wrong upward commands on 42 high/rising expert-off states |
+| --- | ---: | ---: | ---: | ---: |
+| Slow, 400 RpGAN updates | 20/20 | 211.60 | 91/92; one off-pad landing | 0/42 |
+| **Slow, 1,200 updates** | **20/20** | **210.80** | **92/92** | **1/42** |
+| Slow, 2,400 updates | 20/20 | 214.00 | 91/92; one crash | 39/42 |
+| Fast, 400 updates from slow-1,200 | 20/20 | 184.40 | 90/91; one incomplete landing | n/a; fast expert commands down on the 29 analogous rows |
 
-Source hashes at full-run start (the checkpoint format was revised after the
-pilot, without changing its training equations or action projection): `lib/lunar_training.py`
-`d558f6a1b49bce552beb3828851874c0929eb86ee9005d6c79c4da16a85e4721`,
-`lib/lunar_flight.py`
-`dd5370d34554b8304df6c7476e2ea3987d9f56d06b2e06292efce6003fdb12f3`.
+The [slow-1,200](../reports/lunar_fast/audit/calibrated_slow_1200.json) →
+[fast-400](../reports/lunar_fast/audit/calibrated_fast_400.json) pair landed on
+all 20 matched validation resets.
+Fast won all 20, saving 26.4 steps on average for a 1.143× paired speedup.
+The [paired comparison](../reports/lunar_fast/audit/calibrated_pair.json)
+records those per-controller results. The
+[2,400-step slow checkpoint](../reports/lunar_fast/audit/calibrated_slow_2400.json)
+still scored 20/20 validation, yet fired the
+upward engine on 39/42 high/rising training states where the expert kept it
+off and lost one training-world landing. More adversarial updates are therefore
+not an established durability improvement. The bounded 1,200/400 budget is
+supported by the fixed-data audit; it is **not** a claim that 2,400 updates
+are stable or that the pending test set will pass.
 
-## Full single-command release run
-
-The frozen [release report](../reports/lunar_fast/report.json)
-records 2,500 world-model updates, 8,000 cloning and 400 RpGAN updates for
-each policy round, 96 train worlds, 20 validation worlds, and 30 previously
-untouched test worlds (`84000:84030`). The world model's episode-disjoint
-validation next-state MSE was `0.002237`. Three fast rounds were trained;
-round 1 won the predeclared validation selection rule, and `fast.pt` is
-byte-identical to `fast_round_1.pt`. The run took 60.5 seconds on CPU with two
-threads.
-
-| Controller | Validation landings | Test landings | Test successful-flight steps |
-| --- | ---: | ---: | ---: |
-| Learned slow | 19/20 | 28/30 | 220.39 |
-| Learned fast | 20/20 | 29/30 | 188.83 |
-
-Both controllers landed on 27 identical test worlds. On that matched set the
-fast policy finished sooner on all 27, saving a median of 30 simulator steps
-and achieving a 1.172× paired speedup. The fast policy crashed on one other
-test world; the slow policy crashed on one and left the bounds on another.
-Thus the result supports the declared success and speed gate, not universal
-landing success. Checkpoints store the learned weights, explicit `0.12`
-main-command deadband, optimizer settings, public RpGAN recipe values, and
-update counts. The source hashes above match the release configuration's
-recorded hashes.
+Earlier scratch recipe metadata showed `ema_decay=0.995`, but none of these
+training loops ever updated or selected EMA weights. The live policy weights
+produced every reported flight. Current code sets unused recipe EMA metadata
+to zero so the saved configuration describes that fact accurately.

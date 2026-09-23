@@ -4,7 +4,8 @@ import pytest
 torch = pytest.importorskip("torch")
 
 from lib.lunar_training import (load_fast_policy, load_world_model,
-                                train_fast_policy, train_world_model, FastPolicy)
+                                train_fast_policy, train_world_model, FastPolicy,
+                                DynamicsModel, engine_power)
 
 
 def _transitions(count=96, seed=14):
@@ -66,6 +67,29 @@ def test_main_engine_deadband_preserves_training_gradient():
     assert policy.net[-1].bias.grad[0].item() > 0
 
 
+def test_world_engine_features_preserve_ignition_and_side_dead_zone():
+    commands = torch.tensor([[-.3, -.8], [0., -.5], [.001, .5], [1., .8]], requires_grad=True)
+    expected = torch.tensor([[-.3, -.8], [0., 0.], [.5005, 0.], [1., .8]])
+    torch.testing.assert_close(engine_power(commands), expected)
+    engine_power(commands).sum().backward()
+    torch.testing.assert_close(commands.grad[:, 0], torch.tensor([1., 1., .5, .5]))
+
+
+def test_world_checkpoint_preserves_original_or_explicit_action_features(tmp_path):
+    model = DynamicsModel(np.zeros(8), np.ones(8), np.zeros(8), np.ones(8), width=8)
+    path = tmp_path / "world.pt"
+    saved = {"format": "lunar_world_v1", "state_dict": model.state_dict(), "width": 8}
+    torch.save(saved, path)
+    assert load_world_model(path).action_features == "raw"
+    saved.update(format="lunar_world_v2", action_features="engine_power", weight_kind="live")
+    torch.save(saved, path)
+    assert load_world_model(path).action_features == "engine_power"
+    del saved["action_features"]
+    torch.save(saved, path)
+    with pytest.raises(ValueError, match="action features"):
+        load_world_model(path)
+
+
 def test_checkpoint_declares_action_semantics(tmp_path):
     policy = FastPolicy(np.zeros(8), np.ones(8), width=8)
     with torch.no_grad():
@@ -80,3 +104,45 @@ def test_checkpoint_declares_action_semantics(tmp_path):
                 "width": 8}, path)
     with pytest.raises(ValueError, match="deadband"):
         load_fast_policy(path)
+
+
+def test_checkpoints_save_exact_live_parameters_and_reject_ema(tmp_path, monkeypatch):
+    import lib.lunar_training as training
+    torch.set_num_threads(1)
+    data = _transitions()
+    world_path, policy_path = tmp_path / "world.pt", tmp_path / "policy.pt"
+    train_world_model(data, world_path, steps=4, width=8, batch_size=16)
+    instances = []
+    original = training.FastPolicy
+
+    def capture_policy(*args, **kwargs):
+        policy = original(*args, **kwargs)
+        instances.append(policy)
+        return policy
+
+    monkeypatch.setattr(training, "FastPolicy", capture_policy)
+    metrics = train_fast_policy(data, world_path, policy_path, warmup_steps=4, steps=4,
+                                width=8, batch_size=16)
+    saved = torch.load(policy_path, weights_only=True)
+    assert saved["weight_kind"] == "live"
+    assert metrics["weight_kind"] == "live" and metrics["recipe"]["ema_decay"] == 0.
+    for name, value in instances[0].state_dict().items():
+        torch.testing.assert_close(saved["state_dict"][name], value, rtol=0, atol=0)
+    del saved["weight_kind"]
+    torch.save(saved, policy_path)
+    with pytest.raises(ValueError, match="live weights"):
+        load_fast_policy(policy_path)
+    saved["weight_kind"] = "ema"
+    torch.save(saved, policy_path)
+    with pytest.raises(ValueError, match="live weights"):
+        load_fast_policy(policy_path)
+    world = torch.load(world_path, weights_only=True)
+    assert world["weight_kind"] == "live"
+    del world["weight_kind"]
+    torch.save(world, world_path)
+    with pytest.raises(ValueError, match="live weights"):
+        load_world_model(world_path)
+    world["weight_kind"] = "ema"
+    torch.save(world, world_path)
+    with pytest.raises(ValueError, match="live weights"):
+        load_world_model(world_path)

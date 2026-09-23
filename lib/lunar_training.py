@@ -1,5 +1,6 @@
 """Learn Lunar Lander dynamics and a conditional RpGAN controller.
 
+All optimization, checkpoints, and evaluation use live weights; there is no EMA.
 The policy's adversarial phase has no action-cloning term. Its frozen learned
 world model supplies a differentiable successor target from expert transitions.
 Rollout success and speed must be measured separately in the actual simulator.
@@ -38,19 +39,36 @@ def _mlp(input_dim, output_dim, width=128):
                          nn.Linear(width, width), nn.SiLU(), nn.Linear(width, output_dim))
 
 
+def engine_power(actions):
+    """Known actuator semantics; dynamics still learns the resulting motion.
+
+    A positive main command ignites at half power. Off and down are distinct
+    from that jump. Side commands have a half-power dead zone as in Box2D.
+    """
+    main = torch.where(actions[:, :1] > 0, .5 + .5 * actions[:, :1], actions[:, :1])
+    side = torch.where(actions[:, 1:].abs() > .5, actions[:, 1:], torch.zeros_like(actions[:, 1:]))
+    return torch.cat([main, side], dim=-1)
+
+
 class DynamicsModel(nn.Module):
     """Predict standardized next-state delta from state and continuous action."""
 
-    def __init__(self, state_mean, state_scale, delta_mean, delta_scale, width=128):
+    def __init__(self, state_mean, state_scale, delta_mean, delta_scale, width=128,
+                 action_features="engine_power"):
         super().__init__()
+        if action_features not in ("raw", "engine_power"):
+            raise ValueError("Unknown world-model action features")
         for name, value in (("state_mean", state_mean), ("state_scale", state_scale),
                             ("delta_mean", delta_mean), ("delta_scale", delta_scale)):
             self.register_buffer(name, torch.as_tensor(value, dtype=torch.float32).clone())
         self.net = _mlp(STATE_DIM + ACTION_DIM, STATE_DIM, width)
         self.width = width
+        self.action_features = action_features
 
     def normalized_delta(self, states, actions):
         standardized = (states - self.state_mean) / self.state_scale
+        if self.action_features == "engine_power":
+            actions = engine_power(actions)
         return self.net(torch.cat([standardized, actions], dim=-1))
 
     def forward(self, states, actions):
@@ -143,7 +161,8 @@ def _world_metrics(model, values):
 
 
 def train_world_model(records, checkpoint_path, *, validation_records=None, steps=1500,
-                      batch_size=256, device="cpu", seed=0, log=None, width=128):
+                      batch_size=256, device="cpu", seed=0, log=None, width=128,
+                      action_features="engine_power"):
     """Train on real transitions; return final train and held-out errors."""
     records = _records(records)
     validation = _records(validation_records) if validation_records is not None else None
@@ -154,7 +173,7 @@ def train_world_model(records, checkpoint_path, *, validation_records=None, step
         torch.manual_seed(seed)
         mean, scale = _state_statistics(records)
         delta_mean, delta_scale = _dynamics_statistics(records)
-        model = DynamicsModel(mean, scale, delta_mean, delta_scale, width).to(device)
+        model = DynamicsModel(mean, scale, delta_mean, delta_scale, width, action_features).to(device)
     train_values = _tensor_records(records, device)
     val_values = _tensor_records(validation, device) if validation is not None else None
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
@@ -173,21 +192,29 @@ def train_world_model(records, checkpoint_path, *, validation_records=None, step
     model.eval()
     metrics = {"train": _world_metrics(model, train_values),
                "validation": _world_metrics(model, val_values) if val_values is not None else None,
-               "updates": steps, "records": len(records["states"])}
+               "updates": steps, "records": len(records["states"]),
+               "action_features": action_features, "weight_kind": "live"}
     path = Path(checkpoint_path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    torch.save({"format": "lunar_world_v1", "state_dict": model.state_dict(),
+    torch.save({"format": "lunar_world_v2", "weight_kind": "live", "state_dict": model.state_dict(),
+                "action_features": action_features,
                 "width": width, "metrics": metrics}, path)
     return metrics
 
 
 def load_world_model(path, device="cpu"):
     checkpoint = torch.load(path, map_location=device, weights_only=True)
-    if checkpoint.get("format") != "lunar_world_v1":
-        raise ValueError("Expected a lunar_world_v1 checkpoint")
+    legacy = checkpoint.get("format") == "lunar_world_v1"
+    if checkpoint.get("weight_kind", "live" if legacy else None) != "live":
+        raise ValueError("Lunar world checkpoints must use live weights")
+    if checkpoint.get("format") not in ("lunar_world_v1", "lunar_world_v2"):
+        raise ValueError("Expected a lunar_world_v1 or v2 checkpoint")
+    if checkpoint["format"] == "lunar_world_v2" and "action_features" not in checkpoint:
+        raise ValueError("v2 world checkpoint must declare action features")
     state = checkpoint["state_dict"]
     model = DynamicsModel(state["state_mean"], state["state_scale"],
-                          state["delta_mean"], state["delta_scale"], checkpoint["width"])
+                          state["delta_mean"], state["delta_scale"], checkpoint["width"],
+                          checkpoint.get("action_features", "raw"))
     model.load_state_dict(state)
     return model.to(device).eval().requires_grad_(False)
 
@@ -241,7 +268,10 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
     val_values = _tensor_records(validation, device) if validation is not None else None
     optimizer_g = torch.optim.Adam(policy.parameters(), lr=3e-4, betas=(.5, .99))
     optimizer_d = torch.optim.Adam(critic.parameters(), lr=2e-4, betas=(.5, .99))
-    recipe = get_recipe(total_steps=steps, batch_size=batch_size, reg_coeff=1., reg_every=4)
+    # Only loss/cap factories are used, but also disable the unused recipe EMA
+    # setting explicitly so checkpoint metadata cannot suggest averaged weights.
+    recipe = get_recipe(total_steps=steps, batch_size=batch_size, reg_coeff=1., reg_every=4,
+                        ema_decay=0.)
     gan = recipe.make_loss()
     penalty = recipe.make_gradient_penalty()
     rng = torch.Generator(device=device).manual_seed(seed + 29)
@@ -296,7 +326,7 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
                "before_adversarial": before_adversarial,
                "warmup_updates": warmup_steps, "rpgan_updates": steps,
                "world_weight": world_weight, "adversarial_weight": adversarial_weight,
-               "records": len(records["states"]), "recipe": recipe.to_dict(),
+               "records": len(records["states"]), "recipe": recipe.to_dict(), "weight_kind": "live",
                "optimizers": {"generator": {"name": "Adam", "lr": 3e-4, "betas": (.5, .99)},
                               "discriminator": {"name": "Adam", "lr": 2e-4, "betas": (.5, .99)}},
                "main_deadband": policy.main_deadband,
@@ -304,7 +334,7 @@ def train_fast_policy(records, world_checkpoint, checkpoint_path, *, validation_
                "world_checkpoint": str(world_checkpoint)}
     path = Path(checkpoint_path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    torch.save({"format": "lunar_policy_rpgan_v2", "state_dict": policy.state_dict(),
+    torch.save({"format": "lunar_policy_rpgan_v3", "weight_kind": "live", "state_dict": policy.state_dict(),
                 "width": width, "main_deadband": policy.main_deadband, "metrics": metrics}, path)
     return metrics
 
@@ -314,10 +344,13 @@ train_policy = train_fast_policy
 
 def load_fast_policy(path, device="cpu"):
     checkpoint = torch.load(path, map_location=device, weights_only=True)
-    if checkpoint.get("format") not in ("lunar_policy_rpgan_v1", "lunar_policy_rpgan_v2"):
-        raise ValueError("Expected a lunar_policy_rpgan_v1 or v2 checkpoint")
-    if checkpoint["format"] == "lunar_policy_rpgan_v2" and "main_deadband" not in checkpoint:
-        raise ValueError("v2 policy checkpoint must declare its main-engine deadband")
+    legacy = checkpoint.get("format") in ("lunar_policy_rpgan_v1", "lunar_policy_rpgan_v2")
+    if checkpoint.get("weight_kind", "live" if legacy else None) != "live":
+        raise ValueError("Lunar policy checkpoints must use live weights")
+    if checkpoint.get("format") not in ("lunar_policy_rpgan_v1", "lunar_policy_rpgan_v2", "lunar_policy_rpgan_v3"):
+        raise ValueError("Expected a lunar_policy_rpgan_v1, v2 or v3 checkpoint")
+    if checkpoint["format"] != "lunar_policy_rpgan_v1" and "main_deadband" not in checkpoint:
+        raise ValueError("v2/v3 policy checkpoint must declare its main-engine deadband")
     state = checkpoint["state_dict"]
     # Early v1 pilots emitted raw main commands. Later v1 checkpoints included
     # an explicit deadband; v2 requires it, so neither silently changes action

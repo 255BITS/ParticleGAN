@@ -1,0 +1,370 @@
+{
+  "protocol": "Only RpGAN-stage update budget changes; same 8000 BC updates, initial seed7302, dataset, frozen world, optimizer and fixed validation34000:34020. No test flight evaluated. RpGAN stage includes existing world successor objective.",
+  "rows": [
+    {
+      "label": "BC initialization only",
+      "rpgan_updates": 0,
+      "episodes": 20,
+      "success_count": 20,
+      "success_rate": 1.0,
+      "mean_steps": 214.9,
+      "mean_success_steps": 214.9,
+      "mean_contact_step": 167.95,
+      "mean_return": 281.4250422771253,
+      "outcomes": {
+        "successful_landing": 20,
+        "crash": 0,
+        "out_of_bounds": 0,
+        "time_limit": 0,
+        "other_termination": 0
+      },
+      "failures": [],
+      "training_metrics": null
+    },
+    {
+      "label": "RpGAN 400",
+      "rpgan_updates": 400,
+      "episodes": 20,
+      "success_count": 19,
+      "success_rate": 0.95,
+      "mean_steps": 226.2,
+      "mean_success_steps": 212.21052631578948,
+      "mean_contact_step": 167.73684210526315,
+      "mean_return": 119.87367346658334,
+      "outcomes": {
+        "successful_landing": 19,
+        "crash": 0,
+        "out_of_bounds": 1,
+        "time_limit": 0,
+        "other_termination": 0
+      },
+      "failures": [
+        {
+          "seed": 34016,
+          "outcome": "out_of_bounds",
+          "steps": 492,
+          "return_": -2942.863947855106
+        }
+      ],
+      "training_metrics": {
+        "train": {
+          "action_mse": 0.004092599730938673,
+          "world_successor_mse": 0.0012197449104860425,
+          "world_successor_normalized_mse": 0.29326164722442627
+        },
+        "validation": null,
+        "before_adversarial": {
+          "action_mse": 0.001876983791589737,
+          "world_successor_mse": 0.0012216689065098763,
+          "world_successor_normalized_mse": 0.2943980395793915
+        },
+        "warmup_updates": 8000,
+        "rpgan_updates": 400,
+        "world_weight": 2.5,
+        "adversarial_weight": 1.0,
+        "records": 20629,
+        "recipe": {
+          "name": "gan_v3",
+          "model": "gan",
+          "z_dim": 4,
+          "num_particles": 20000,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": null,
+          "conditioning": "scalar",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 256,
+          "total_steps": 400,
+          "lr": 0.00425,
+          "d_lr_mult": 1.0,
+          "prior_lr_mult": 2.0,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "prior_betas": null,
+          "loss_type": "logistic",
+          "gan_mode": "rp",
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.25,
+          "reg_every": 4,
+          "reg_method": "autograd",
+          "prior_reg": 0.05,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0
+        },
+        "optimizers": {
+          "generator": {
+            "name": "Adam",
+            "lr": 0.0003,
+            "betas": [
+              0.5,
+              0.99
+            ]
+          },
+          "discriminator": {
+            "name": "Adam",
+            "lr": 0.0002,
+            "betas": [
+              0.5,
+              0.99
+            ]
+          }
+        },
+        "main_deadband": 0.12,
+        "initial_policy": null,
+        "world_checkpoint": "/ml2/hypergan/ParticleGAN-lunar-fast/results/gym/fast_lander_develop/world.pt"
+      }
+    },
+    {
+      "label": "RpGAN 1200",
+      "rpgan_updates": 1200,
+      "episodes": 20,
+      "success_count": 18,
+      "success_rate": 0.9,
+      "mean_steps": 262.6,
+      "mean_success_steps": 209.05555555555554,
+      "mean_contact_step": 168.31578947368422,
+      "mean_return": 91.77531974180441,
+      "outcomes": {
+        "successful_landing": 18,
+        "crash": 0,
+        "out_of_bounds": 1,
+        "time_limit": 1,
+        "other_termination": 0
+      },
+      "failures": [
+        {
+          "seed": 34012,
+          "outcome": "time_limit",
+          "steps": 1000,
+          "return_": 21.898948252183875
+        },
+        {
+          "seed": 34016,
+          "outcome": "out_of_bounds",
+          "steps": 489,
+          "return_": -3250.5451890086442
+        }
+      ],
+      "training_metrics": {
+        "train": {
+          "action_mse": 0.00421181321144104,
+          "world_successor_mse": 0.0012166851665824652,
+          "world_successor_normalized_mse": 0.2923855781555176
+        },
+        "validation": null,
+        "before_adversarial": {
+          "action_mse": 0.001876983791589737,
+          "world_successor_mse": 0.0012216689065098763,
+          "world_successor_normalized_mse": 0.2943980395793915
+        },
+        "warmup_updates": 8000,
+        "rpgan_updates": 1200,
+        "world_weight": 2.5,
+        "adversarial_weight": 1.0,
+        "records": 20629,
+        "recipe": {
+          "name": "gan_v3",
+          "model": "gan",
+          "z_dim": 4,
+          "num_particles": 20000,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": null,
+          "conditioning": "scalar",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 256,
+          "total_steps": 1200,
+          "lr": 0.00425,
+          "d_lr_mult": 1.0,
+          "prior_lr_mult": 2.0,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "prior_betas": null,
+          "loss_type": "logistic",
+          "gan_mode": "rp",
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.25,
+          "reg_every": 4,
+          "reg_method": "autograd",
+          "prior_reg": 0.05,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0
+        },
+        "optimizers": {
+          "generator": {
+            "name": "Adam",
+            "lr": 0.0003,
+            "betas": [
+              0.5,
+              0.99
+            ]
+          },
+          "discriminator": {
+            "name": "Adam",
+            "lr": 0.0002,
+            "betas": [
+              0.5,
+              0.99
+            ]
+          }
+        },
+        "main_deadband": 0.12,
+        "initial_policy": null,
+        "world_checkpoint": "/ml2/hypergan/ParticleGAN-lunar-fast/results/gym/fast_lander_develop/world.pt"
+      }
+    },
+    {
+      "label": "RpGAN 2400",
+      "rpgan_updates": 2400,
+      "episodes": 20,
+      "success_count": 18,
+      "success_rate": 0.9,
+      "mean_steps": 266.2,
+      "mean_success_steps": 210.44444444444446,
+      "mean_contact_step": 170.26315789473685,
+      "mean_return": 35.588944507584756,
+      "outcomes": {
+        "successful_landing": 18,
+        "crash": 0,
+        "out_of_bounds": 1,
+        "time_limit": 1,
+        "other_termination": 0
+      },
+      "failures": [
+        {
+          "seed": 34012,
+          "outcome": "time_limit",
+          "steps": 1000,
+          "return_": 27.952157421808828
+        },
+        {
+          "seed": 34016,
+          "outcome": "out_of_bounds",
+          "steps": 536,
+          "return_": -4372.73781289789
+        }
+      ],
+      "training_metrics": {
+        "train": {
+          "action_mse": 0.004648473113775253,
+          "world_successor_mse": 0.0012191428104415536,
+          "world_successor_normalized_mse": 0.2930498421192169
+        },
+        "validation": null,
+        "before_adversarial": {
+          "action_mse": 0.001876983791589737,
+          "world_successor_mse": 0.0012216689065098763,
+          "world_successor_normalized_mse": 0.2943980395793915
+        },
+        "warmup_updates": 8000,
+        "rpgan_updates": 2400,
+        "world_weight": 2.5,
+        "adversarial_weight": 1.0,
+        "records": 20629,
+        "recipe": {
+          "name": "gan_v3",
+          "model": "gan",
+          "z_dim": 4,
+          "num_particles": 20000,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": null,
+          "conditioning": "scalar",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 256,
+          "total_steps": 2400,
+          "lr": 0.00425,
+          "d_lr_mult": 1.0,
+          "prior_lr_mult": 2.0,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "prior_betas": null,
+          "loss_type": "logistic",
+          "gan_mode": "rp",
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.25,
+          "reg_every": 4,
+          "reg_method": "autograd",
+          "prior_reg": 0.05,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0
+        },
+        "optimizers": {
+          "generator": {
+            "name": "Adam",
+            "lr": 0.0003,
+            "betas": [
+              0.5,
+              0.99
+            ]
+          },
+          "discriminator": {
+            "name": "Adam",
+            "lr": 0.0002,
+            "betas": [
+              0.5,
+              0.99
+            ]
+          }
+        },
+        "main_deadband": 0.12,
+        "initial_policy": null,
+        "world_checkpoint": "/ml2/hypergan/ParticleGAN-lunar-fast/results/gym/fast_lander_develop/world.pt"
+      }
+    }
+  ]
+}
