@@ -72,4 +72,4 @@ These holdouts confirm that counting all modes does not establish accurate
 component widths, centers, or mass. The current pull-request workflow trains
 and grades all 22 cases under `configs/toy100/shared_candidate.json`; its
 three 100-mode rows now require both coverage and this accuracy protocol.
-The current shared candidate is failing, and the PR remains a draft.
+These are historical failures. The subsequent [κ=1.176 shared recipe](shared22/README.md) passes all 22 gates, including the stricter native accuracy checks, in a fresh production-runner replay.
