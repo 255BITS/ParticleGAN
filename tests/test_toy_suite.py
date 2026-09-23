@@ -318,6 +318,14 @@ def test_common_transfer_gate_rejects_partially_removed_scratch_marker(tmp_path,
     assert "scratch or unsupported optimizer policy" in grade["reason"]
 
 
+def test_common_transfer_gate_rejects_malformed_nested_result(tmp_path):
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory, lambda record: record.update(result=None))
+    grade = toy_suite._episode_rows(directory, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert "optimizer policy evidence must be an object" in grade["reason"]
+
+
 def test_candidate_episode_rejects_omitted_nonzero_output_warmup(
     tmp_path, monkeypatch,
 ):

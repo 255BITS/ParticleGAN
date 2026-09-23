@@ -1,17 +1,8 @@
 # 100-mode convergence: failures and shared-recipe search
 
-The current shared recipe passes **20/22** in trained CI: grid100,
-staggered100, and 18 older toys. Rotated100 and residual_student fail.
-The [CI audit](ci-common22.md) records both complete replays and their
-independent regrades. A different recipe passes strict native accuracy on
-all three new problems but fails four older toys; no shared 22/22 recipe
-has been verified. Follow the [combined gate commands](../../docs/toy100.md#one-shared-recipe-across-all-22-toys)
-for the current workflow.
+The current [winning shared recipe](shared22/README.md) passes **22/22** in a fresh production-runner replay, with independent regrading and a separate **19/19** installed-wheel public-default control. Its final change from the previous 20/22 recipe is `reg_kappa: 1.0 → 1.176`. All three native problems first cover 100 modes at update 750 and pass all terminal accuracy checks plus independent 100k holdouts. The detailed report includes the exact settings, [convergence GIF](shared22/toy100/toy100-progress.gif), and [per-case combined gate](shared22/compatibility.md). Hosted CI for this new configuration is pending.
 
-Recent retained searches include the [64 shared-parameter candidates](shared-halton64-v1.md)
-and a [fresh noiseless recipe that passes the older 19](affine-noiseless-f5-transfer.md).
-With that noiseless recipe, [projected discriminator inputs](projected-discriminator-f5.md)
-improve native centering, but component shape and precision still fail.
+The [fine κ search](shared-kappa-fine-v1.md), [failed 64-candidate search](shared-halton64-v1.md), [optimizer/formulation comparisons](optimizer-formulation-research.md), and [screening-cost audit](fail-fast-stage-order.md) retain both successes and failures. Follow the [combined gate commands](../../docs/toy100.md#one-shared-recipe-across-all-22-toys) to run all 22 together or one problem.
 
 **Scope of the historical result below:** the original coverage gate passes
 3/3, but the stricter distribution-fidelity audit records **0/3 passes**,

@@ -1,0 +1,166 @@
+{
+  "version": "public-default-verification-v1",
+  "attempted": 19,
+  "passed": 19,
+  "overall": "PASS",
+  "routes": {
+    "vector": "GANTrainer",
+    "image": "GANTrainer",
+    "legacy": "public_primitives_custom_host"
+  },
+  "public_package": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/site/particlegan/__init__.py",
+  "cases": [
+    {
+      "name": "two_pole",
+      "route": "public_primitives_custom_host",
+      "live": "PASS",
+      "ema": "N/A",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__two_pole.json.gz"
+    },
+    {
+      "name": "trajectory",
+      "route": "public_primitives_custom_host",
+      "live": "PASS",
+      "ema": "N/A",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__trajectory.json.gz"
+    },
+    {
+      "name": "residual_student",
+      "route": "public_primitives_custom_host",
+      "live": "PASS",
+      "ema": "N/A",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__residual_student.json.gz"
+    },
+    {
+      "name": "unipolar",
+      "route": "public_primitives_custom_host",
+      "live": "PASS",
+      "ema": "N/A",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__unipolar.json.gz"
+    },
+    {
+      "name": "ae_gan_hold",
+      "route": "public_primitives_custom_host",
+      "live": "PASS",
+      "ema": "N/A",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__ae_gan_hold.json.gz"
+    },
+    {
+      "name": "cover_leftover",
+      "route": "public_primitives_custom_host",
+      "live": "PASS",
+      "ema": "N/A",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__cover_leftover.json.gz"
+    },
+    {
+      "name": "unused_token_hold",
+      "route": "public_primitives_custom_host",
+      "live": "PASS",
+      "ema": "N/A",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__unused_token_hold.json.gz"
+    },
+    {
+      "name": "mid_scale_identity",
+      "route": "public_primitives_custom_host",
+      "live": "PASS",
+      "ema": "N/A",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__mid_scale_identity.json.gz"
+    },
+    {
+      "name": "mode_hold",
+      "route": "public_primitives_custom_host",
+      "live": "PASS",
+      "ema": "N/A",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__mode_hold.json.gz"
+    },
+    {
+      "name": "vector_two_broad",
+      "route": "GANTrainer",
+      "live": "PASS",
+      "ema": "PASS",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__vector_two_broad.json.gz"
+    },
+    {
+      "name": "vector_unequal_mass",
+      "route": "GANTrainer",
+      "live": "PASS",
+      "ema": "FAIL",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__vector_unequal_mass.json.gz"
+    },
+    {
+      "name": "vector_unequal_width",
+      "route": "GANTrainer",
+      "live": "PASS",
+      "ema": "PASS",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__vector_unequal_width.json.gz"
+    },
+    {
+      "name": "vector_anisotropic",
+      "route": "GANTrainer",
+      "live": "PASS",
+      "ema": "PASS",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__vector_anisotropic.json.gz"
+    },
+    {
+      "name": "vector_overlap",
+      "route": "GANTrainer",
+      "live": "PASS",
+      "ema": "PASS",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__vector_overlap.json.gz"
+    },
+    {
+      "name": "vector_spiral",
+      "route": "GANTrainer",
+      "live": "PASS",
+      "ema": "PASS",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__vector_spiral.json.gz"
+    },
+    {
+      "name": "img_stripes2",
+      "route": "GANTrainer",
+      "live": "PASS",
+      "ema": "PASS",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__img_stripes2.json.gz"
+    },
+    {
+      "name": "img_bars4",
+      "route": "GANTrainer",
+      "live": "PASS",
+      "ema": "PASS",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__img_bars4.json.gz"
+    },
+    {
+      "name": "img_blobs4",
+      "route": "GANTrainer",
+      "live": "PASS",
+      "ema": "FAIL",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__img_blobs4.json.gz"
+    },
+    {
+      "name": "img_intensity2",
+      "route": "GANTrainer",
+      "live": "PASS",
+      "ema": "FAIL",
+      "observations": 24,
+      "artifact": "episodes/gan_v3__img_intensity2.json.gz"
+    }
+  ]
+}

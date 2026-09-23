@@ -759,6 +759,8 @@ def _verify_saved_provenance(directory: Path, protocol: dict, *, candidate: bool
 
 
 def _reject_scratch_optimizer(payload: dict) -> None:
+    if not isinstance(payload, dict):
+        raise ValueError("optimizer policy evidence must be an object")
     if (payload.get("shared_gate_eligible") is False
             or "scratch_optimizer_policy" in payload
             or "optimizer_policy" in payload):

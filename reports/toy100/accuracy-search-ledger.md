@@ -19,8 +19,12 @@ Every discovered 100-mode trial is retained, including failures and interrupted 
 | `affine-noiseless/native-f5-f7-v1/accuracy_affine_public_noiseless_f5/grid100` | 7000 | FAIL | 100 | 0.9467 | 0.0526 | 0.4985 | -0.2028 | 0.0437 | FAIL |
 | `affine-noiseless/native-f5-f7-v1/accuracy_affine_public_noiseless_f7/grid100` | 7000 | FAIL | 91 | 0.9583 | 0.0998 | — | — | — | FAIL |
 | `affine-noiseless/native-f6-v1-1c1a086/accuracy_affine_public_noiseless_f6/grid100` | 7000 | FAIL | 100 | 0.9480 | 0.0478 | 0.3917 | -0.1100 | 0.0194 | FAIL |
+| `affine-noiseless/projected-d-f4-f6-v2-6ecf234/affine_f4/grid100` | 7000 | FAIL | 99 | 0.9757 | 0.0650 | 0.2101 | -0.0759 | 0.0330 | FAIL |
+| `affine-noiseless/projected-d-f4-f6-v2-6ecf234/affine_f6/grid100` | 7000 | FAIL | 100 | 0.9492 | 0.0519 | 0.3227 | -0.1199 | 0.0407 | FAIL |
 | `affine-noiseless/projected-d-f5-v1-fc9410a/affine/grid100` | 7000 | FAIL | 100 | 0.9651 | 0.0600 | 0.2036 | -0.0831 | 0.0399 | FAIL |
 | `affine-noiseless/projected-d-f5-v1-fc9410a/translation/grid100` | 7000 | FAIL | 100 | 0.9654 | 0.0507 | 0.2248 | -0.0888 | 0.0329 | FAIL |
+| `affine-noiseless/projected-d8-f5-v1-b26a2c2/affine/grid100` | 7000 | FAIL | 96 | 0.9674 | 0.0947 | 0.2179 | -0.0872 | 0.0345 | FAIL |
+| `affine-noiseless/projected-f5-h3200-v1-4a0bf2c/affine/grid100` | 7000 | FAIL | 100 | 0.9648 | 0.0594 | 0.2641 | -0.0742 | 0.0193 | FAIL |
 | `affine-noiseless-dhorizon-v1/d4000/grid100` | 7000 | FAIL | 100 | 0.9398 | 0.0581 | 0.5208 | -0.1899 | 0.0541 | FAIL |
 | `affine-noiseless-dhorizon-v1/d7000/grid100` | 7000 | FAIL | 100 | 0.9368 | 0.0579 | 0.5781 | -0.2484 | 0.0366 | FAIL |
 | `affine-noiseless-horizon-v1/h2400/grid100` | 7000 | FAIL | 100 | 0.9529 | 0.0558 | 0.4624 | -0.2089 | 0.0851 | FAIL |
@@ -57,6 +61,9 @@ Every discovered 100-mode trial is retained, including failures and interrupted 
 | `prior-horizon-f5-v1-f2c1c3e/h4000/grid100` | 7000 | FAIL | 100 | 0.9276 | 0.0525 | 0.5463 | -0.2052 | 0.0479 | FAIL |
 | `prior-horizon-f5-v1-f2c1c3e/h5000/grid100` | 7000 | FAIL | 100 | 0.9346 | 0.0526 | 0.6471 | -0.1611 | 0.0715 | FAIL |
 | `prior-horizon4000/grid100/grid100` | 7000 | PASS | 100 | 0.9830 | 0.0433 | 0.1525 | -0.0279 | 0.0097 | PASS |
+| `production-k1176-shared22/toy100/grid100` | 7000 | PASS | 100 | 0.9832 | 0.0448 | 0.1301 | -0.0361 | 0.0152 | PASS |
+| `production-k1176-shared22/toy100/rotated100` | 7000 | PASS | 100 | 0.9792 | 0.0480 | 0.1107 | -0.0343 | 0.0155 | PASS |
+| `production-k1176-shared22/toy100/staggered100` | 7000 | PASS | 100 | 0.9851 | 0.0506 | 0.1167 | -0.0364 | 0.0171 | PASS |
 | `production-shared-policy22/toy100/grid100` | 7000 | PASS | 100 | 0.9868 | 0.0435 | 0.1502 | -0.0349 | 0.0130 | PASS |
 | `production-shared-policy22/toy100/rotated100` | 7000 | PASS | 100 | 0.9828 | 0.0471 | 0.1475 | -0.0374 | 0.0146 | PASS |
 | `production-shared-policy22/toy100/staggered100` | 7000 | PASS | 100 | 0.9872 | 0.0512 | 0.1243 | -0.0336 | 0.0152 | PASS |
