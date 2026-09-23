@@ -65,23 +65,23 @@ repair the remaining allocation failure at this fixed budget.
 One further fixed-seed CPU probe changed **only staggered100 batch size from
 512 to 1024**, keeping input noise σ=0.5→0 by 50%, output noise σ=0.026,
 prior regularization 0.05, and the same 7,000-update budget. It earned the
-[strict individual gate PASS](../../artifacts/toy100/search-schedule/instance-noise-batch1024/sigma05/gate-staggered100.json):
+[strict individual gate PASS](search/trials.json):
 all 100 modes were covered by update 5,500; full quality began at update
 6,000 and held for each of the five terminal live checks through update
 7,000. The final 20,000 draws had HQ 98.26%, weakest in-radius count 113,
 mass TV 0.0750, worst covariance eigenvalue ratios 0.499–1.038, and radial
-median ratios 0.777–1.118. Its [run receipt](../../artifacts/toy100/search-schedule/instance-noise-batch1024/sigma05/staggered100/summary.json),
-[probe source](../../artifacts/toy100/search-schedule/instance-noise-batch1024/sigma05/staggered100/probe_source.py),
+median ratios 0.777–1.118. Its [run receipt](search/trials.json),
+[probe source](search/sources/1a9f0daff39025e231fbf66d82222437e76f5391f76769aa9639008dd535f92a.py),
 and [schedule/batch search report](search-schedule.md) preserve the full
 curve and exact implementation.
 
 The [recommended manifest](../../configs/toy100/recommended.json) declares
 batch 512 for grid100 and rotated100, with an explicit staggered100 batch
 1024 override. The three individually passing CPU curves support that one
-command suite recipe. The [production all-problem gate](../../artifacts/toy100/recommended/gate.json)
+command suite recipe. The [production all-problem gate](recommended/gate.json)
 passes 3/3, with five terminal live checks for each problem; its
-[leaderboard](../../artifacts/toy100/recommended/leaderboard.md) and
-[animation](../../artifacts/toy100/recommended/toy100-progress.gif) retain the
+[leaderboard](recommended/leaderboard.md) and
+[animation](recommended/toy100-progress.gif) retain the
 full evidence. Every production evaluation metric row and all final scored
 sample arrays match the saved passing CPU probes exactly. The
 [toy100 report index](README.md) links the aggregate result. The unchanged

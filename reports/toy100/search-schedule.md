@@ -7,7 +7,7 @@ recipe: generator LR 0.0006, D LR ×1.5, prior LR ×10, Adam β=(0, 0.999),
 one-sided cap coefficient 1 with κ=1, prior regularization 1, Fourier-2,
 and width 128. Only anneal start or batch size changed. The exact candidate
 overrides are in [`search_schedule.json`](../../configs/toy100/search_schedule.json)
-and full run receipts are in [`grid7k/results.json`](../../artifacts/toy100/search-schedule/grid7k/results.json).
+and full run receipts are in [`grid7k/results.json`](search/trials.json).
 
 | Grid candidate | Live modes | HQ | Mass TV | Worst covariance eig. ratios | First 100-mode step | Gate |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
@@ -27,7 +27,7 @@ from a sharp solution. Earlier annealing sharpened samples but did not repair
 the allocation that feeds each mode.
 
 The batch-1024 recipe was promoted unchanged to the other two geometries. The
-[all-problem leaderboard](../../artifacts/toy100/search-schedule/batch1024_suite/leaderboard.md)
+[all-problem leaderboard](search/README.md)
 reports FAIL 0/3: rotated100 ended at 99 modes, HQ 0.9727, TV 0.0902, with
 one underpopulated and collapsed mode; staggered100 ended at 99 modes,
 HQ 0.9817, TV 0.1081, also with poor worst-mode spread. This is evidence for
@@ -35,9 +35,9 @@ full grid coverage under the classic architecture, not an all-task pass.
 
 Related fixed-seed follow-ups used saved scratch model sources and kept the
 same evaluator. The affine direct-particle F3 recipe that passed grid100
-failed unchanged on [rotated100](../../artifacts/toy100/search-schedule/direct_f3_rotated/leaderboard-rotated100.md)
+failed unchanged on [rotated100](search/README.md)
 (88 modes, HQ 0.8162, TV 0.1490); on
-[staggered100](../../artifacts/toy100/search-schedule/direct_f3_staggered/leaderboard-staggered100.md)
+[staggered100](search/README.md)
 it covered 100 modes with per-mode spread inside the gate but had HQ 0.9313
 and TV 0.1061. A generic disk radius 6.5 initial prior failed even on grid
 (97 modes, HQ 0.8188); raising the affine generator LR while keeping absolute
@@ -46,9 +46,9 @@ under `artifacts/toy100/search-schedule/`.
 
 One schedule follow-up to the separate noisy MLP near-pass changed its anneal
 start from 40% to 25%. It ended grid100 at 96 modes, HQ 0.9912, TV 0.1089:
-early sharpening starved modes. The [run receipt](../../artifacts/toy100/search-schedule/noisy_mlp_anneal025/grid100/summary.json)
+early sharpening starved modes. The [run receipt](search/trials.json)
 preserves its full curve. Extending that noisy MLP recipe unchanged from 7,000
-to 8,000 updates also failed: the [8,000-step run](../../artifacts/toy100/search-schedule/noisy_mlp_8k/grid100/summary.json)
+to 8,000 updates also failed: the [8,000-step run](search/trials.json)
 ended at 96 modes, HQ 0.9953, and TV 0.1081. Its schedule fractions are tied
 to the total budget, so this is an 8,000-step recipe test, not continuation
 of the 7,000-step weights.
@@ -57,18 +57,18 @@ The separate input-noise probe added Gaussian noise to discriminator inputs,
 with peak standard deviation 0.5 declining linearly to zero halfway through
 training. It also used fresh output noise of standard deviation 0.026. At batch
 512, its saved CPU runs passed the strict five-check live gate on
-[grid100](../../artifacts/toy100/instance-noise-cpu/sigma05/grid100/summary.json)
-and [rotated100](../../artifacts/toy100/instance-noise-cpu/sigma05/rotated100/summary.json),
+[grid100](search/trials.json)
+and [rotated100](search/trials.json),
 but staggered100 ended at 99 modes. A one-variable follow-up raised only the
 staggered100 batch size to 1024. The
-[staggered100 gate](../../artifacts/toy100/search-schedule/instance-noise-batch1024/sigma05/gate-staggered100.json)
+[staggered100 gate](search/trials.json)
 passed all five terminal live checks from step 6,000 through 7,000. Its final
 20,000 draws covered all 100 modes with HQ 0.9826, minimum in-radius count
 113, TV 0.0750, worst covariance eigenvalue ratios 0.499–1.038, and radial
-median ratios 0.777–1.118. The [full run](../../artifacts/toy100/search-schedule/instance-noise-batch1024/sigma05/staggered100/summary.json)
-and [saved probe source](../../artifacts/toy100/search-schedule/instance-noise-batch1024/sigma05/staggered100/probe_source.py)
+median ratios 0.777–1.118. The [full run](search/trials.json)
+and [saved probe source](search/sources/1a9f0daff39025e231fbf66d82222437e76f5391f76769aa9639008dd535f92a.py)
 record this result. The declared per-problem batch override was then run by
-the production all-problem command. Its [aggregate gate](../../artifacts/toy100/recommended/gate.json)
+the production all-problem command. Its [aggregate gate](recommended/gate.json)
 passes 3/3 with five terminal live checks on every problem. Every evaluation
 metric row and all final scored sample arrays match the saved CPU probes
 exactly for all three problems.

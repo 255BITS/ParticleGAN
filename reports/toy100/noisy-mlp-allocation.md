@@ -40,6 +40,6 @@ source copy/hash, snapshots, and exact final 20,000 live/EMA samples under
 final live sample array: integer and Boolean metrics matched exactly, and
 floating metrics matched to `1e-12` despite CPU/GPU reduction order. The
 scratch probe is
-[noisy_mlp_allocation_probe.py](../../artifacts/toy100/noisy_mlp_allocation_probe.py);
+[noisy_mlp_allocation_probe.py](search/sources/1749806daeec8f114912bb6b4aabf14751f56fe0cc6e838a05874bbb593c5959.py);
 production `benchmarks/toy100/train.py` was not modified during these runs.
 This is a fixed-seed configuration comparison, not a robustness estimate.
