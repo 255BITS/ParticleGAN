@@ -35,7 +35,10 @@ def validate_manifest(manifest: Mapping) -> dict:
     for problem, fields in overrides.items():
         if not isinstance(fields, Mapping) or not all(isinstance(key, str) for key in fields):
             raise ValueError(f"problem_overrides.{problem} must be a field object")
-        forbidden = set(fields) & {"problem", "seed", _MANIFEST_FIELD}
+        forbidden = set(fields) & {
+            "problem", "seed", _MANIFEST_FIELD,
+            "toy100_model", "network_lr_horizon_cap",
+        }
         if forbidden:
             raise ValueError(f"problem_overrides.{problem} cannot set {', '.join(sorted(forbidden))}")
         unknown_fields = set(fields) - _ALLOWED

@@ -54,6 +54,30 @@ REMAINING_NAMES = (
     "img_stripes2", "img_bars4", "img_blobs4", "img_intensity2",
 )
 NOISE_SOURCE = ROOT / "benchmarks/toy100/models.py"
+MODEL_POLICY_FIELDS = ("toy100_model", "network_lr_horizon_cap")
+
+
+def declared_model_policy(config: dict) -> dict:
+    """Declare one optional native model card and network schedule for all hosts."""
+    overrides = config.get("problem_overrides", {})
+    if not isinstance(overrides, dict):
+        raise ValueError("problem_overrides must be an object")
+    for values in overrides.values():
+        if not isinstance(values, dict):
+            raise ValueError("problem overrides must contain field objects")
+        if any(key in values for key in MODEL_POLICY_FIELDS):
+            raise ValueError("model policy cannot vary by 100-mode problem")
+    policy = {}
+    if "toy100_model" in config:
+        if config["toy100_model"] != "affine_square_v1":
+            raise ValueError("unsupported toy100_model")
+        policy["toy100_model"] = "affine_square_v1"
+    if "network_lr_horizon_cap" in config:
+        cap = config["network_lr_horizon_cap"]
+        if type(cap) is not int or cap <= 0:
+            raise ValueError("network_lr_horizon_cap must be a positive integer")
+        policy["network_lr_horizon_cap"] = cap
+    return policy
 
 
 def declared_recipe(config: dict):
@@ -169,7 +193,7 @@ def setup_vector(spec, card, base, noise):
                 output_scale_initial=output_scale_initial)
 
 
-def run_vector(spec, card, base, noise):
+def run_vector(spec, card, base, noise, *, model_policy=None):
     from benchmarks.locked_shared.observation import sustained
 
     started = time.perf_counter()
@@ -196,11 +220,23 @@ def run_vector(spec, card, base, noise):
             trainer.D.sigma = sigma
         real = vector_tasks.sample_target(cfg, cfg["batch"], data_rng, completed)
         real_g = lambda: vector_tasks.sample_target(cfg, cfg["batch"], data_rng, completed)
-        stats = trainer.step(real, generator_real=real_g)
+        cap = (model_policy or {}).get("network_lr_horizon_cap")
+        if cap is None:
+            stats = trainer.step(real, generator_real=real_g)
+            action = rate_action(trainer, completed)
+        else:
+            from benchmarks.toy100.schedule import policy_rate_action, step_with_policy
+            stats = step_with_policy(
+                trainer, real, generator_real=real_g,
+                network_lr_horizon_cap=cap,
+            )
+            action = dict(step=completed) | policy_rate_action(
+                trainer, completed, network_lr_horizon_cap=cap,
+            )
         if not all(torch.isfinite(value) for key, value in stats.items()
                    if key != "step" and isinstance(value, torch.Tensor)):
             raise FloatingPointError("nonfinite transfer-screen loss")
-        actions.append(rate_action(trainer, completed) |
+        actions.append(action |
                        {"input_sigma": sigma, "output_sigma": output_sigma,
                         "output_sigma_effective": output_sigma_effective})
         if completed in expected:
@@ -270,7 +306,7 @@ def setup_image(spec, base, noise):
                 output_scale_initial=output_scale_initial)
 
 
-def run_image(spec, base, noise):
+def run_image(spec, base, noise, *, model_policy=None):
     from benchmarks.locked_shared.observation import sustained
 
     started = time.perf_counter()
@@ -297,11 +333,23 @@ def run_image(spec, base, noise):
             trainer.D.sigma = sigma
         real = centers[torch.randint(len(centers), (spec["batch_size"],))]
         real = (real + spec["noise_std"] * torch.randn_like(real)).clamp(0., 1.)
-        stats = trainer.step(real, generator_real=real)
+        cap = (model_policy or {}).get("network_lr_horizon_cap")
+        if cap is None:
+            stats = trainer.step(real, generator_real=real)
+            action = rate_action(trainer, completed)
+        else:
+            from benchmarks.toy100.schedule import policy_rate_action, step_with_policy
+            stats = step_with_policy(
+                trainer, real, generator_real=real,
+                network_lr_horizon_cap=cap,
+            )
+            action = dict(step=completed) | policy_rate_action(
+                trainer, completed, network_lr_horizon_cap=cap,
+            )
         if not all(torch.isfinite(value) for key, value in stats.items()
                    if key != "step" and isinstance(value, torch.Tensor)):
             raise FloatingPointError("nonfinite transfer-screen loss")
-        actions.append(rate_action(trainer, completed) |
+        actions.append(action |
                        {"input_sigma": sigma, "output_sigma": output_sigma,
                         "output_sigma_effective": output_sigma_effective})
         if completed in expected:
@@ -345,7 +393,9 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
         raise FileExistsError("use a new output directory")
     config_path = config_path.resolve()
     config_bytes = config_path.read_bytes()
-    base, noise, resource_overrides = declared_recipe(load_config(config_path))
+    config = load_config(config_path)
+    base, noise, resource_overrides = declared_recipe(config)
+    model_policy = declared_model_policy(config)
     jobs, profile = load_declaration()
     tasks = tuple(tasks)
     if not tasks or len(set(tasks)) != len(tasks):
@@ -371,6 +421,8 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
                     config_sha256=hashlib.sha256(config_bytes).hexdigest(),
                     noise_source_sha256=noise_hash,
                     public_package=package)
+    if model_policy:
+        protocol["model_policy"] = model_policy
     write(output / "protocol.json", protocol)
     records = []
     for job in selected_jobs:
@@ -384,11 +436,17 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
         started = time.perf_counter()
         try:
             if spec["runner"] == "vector":
-                result, context = run_vector(spec, card, base, noise)
+                result, context = run_vector(
+                    spec, card, base, noise, model_policy=model_policy,
+                )
             elif spec["runner"] == "image":
-                result, context = run_image(spec, base, noise)
+                result, context = run_image(
+                    spec, base, noise, model_policy=model_policy,
+                )
             else:
-                result, context = run_noisy_legacy(spec, base, noise)
+                result, context = run_noisy_legacy(
+                    spec, base, noise, model_policy=model_policy,
+                )
             observations = result.get("observations", result.get("curve", []))
             if len(observations) != 24:
                 raise RuntimeError("incomplete frozen transfer curve")
@@ -439,6 +497,8 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
                       applied=context["applied"], shapes=context["shapes"],
                       verdict=verdict, ema_verdict=ema, result=result,
                       source_sha256=protocol["source_sha256"])
+        if model_policy:
+            record["model_policy"] = model_policy
         raw = (json.dumps(record, sort_keys=True, allow_nan=False) + "\n").encode()
         artifact = f'episodes/{base.name}__{spec["name"]}.json.gz'
         (output / artifact).write_bytes(gzip.compress(raw, mtime=0))
@@ -459,7 +519,7 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
     complete_all19 = len(tasks) == len(jobs) and set(tasks) == {
         job["spec"]["name"] for job in jobs}
     full_mechanism = all(row["noise_applied"] for row in records)
-    write(output / "summary.json", dict(version=protocol["version"],
+    summary = dict(version=protocol["version"],
          attempted=len(records), passed=passed,
          overall=("PASS" if passed == len(tasks) else "FAIL")
          if complete_vector_screen or complete_all19 and full_mechanism else "INCOMPLETE",
@@ -476,7 +536,10 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
                      observations=row["observations"], live_final=row["live"],
                      route=row["route"], noise_applied=row["noise_applied"],
                      noise_receipt=row["noise_receipt"],
-                     artifact=row["artifact"]) for row in records]))
+                     artifact=row["artifact"]) for row in records])
+    if model_policy:
+        summary["model_policy"] = model_policy
+    write(output / "summary.json", summary)
     return records
 
 

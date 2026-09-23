@@ -21,6 +21,7 @@ import math
 import os
 from pathlib import Path
 import subprocess
+import struct
 import sys
 import tarfile
 
@@ -35,7 +36,7 @@ from benchmarks.transfer_suite.public_default_verification import (
     GLOBAL_RECIPE_FIELDS, declared_spec, host_recipe, load_declaration,
 )
 from benchmarks.transfer_suite.toy100_compatibility import (
-    VECTOR_NAMES, declared_recipe, output_noise_at,
+    VECTOR_NAMES, declared_model_policy, declared_recipe, output_noise_at,
 )
 from particlegan import Recipe, learning_rate_scale
 
@@ -124,30 +125,69 @@ def _check_optimizer_receipts(record: dict, base: Recipe):
             raise ValueError(f"trainer optimizer type differs: {record['name']}.{role}")
 
 
-def _check_actions(record: dict, base: Recipe, noise: dict | None):
+def _check_actions(record: dict, base: Recipe, noise: dict | None,
+                   model_policy: dict | None = None):
     spec, result = record["spec"], record["result"]
     name, steps = spec["name"], spec["steps"]
     actions = result.get("actions", [])
+    cap = (model_policy or {}).get("network_lr_horizon_cap")
     if spec["runner"] == "legacy":
-        expected = [(step, role) for step in range(0, steps, 20)
+        expected = [(step, role) for step in (
+                    range(steps) if cap is not None else range(0, steps, 20))
                     for role in ("d", "g")]
         if [(item.get("step"), item.get("role")) for item in actions] != expected:
             raise ValueError(f"custom-host optimizer trace is incomplete: {name}")
         for item in actions:
-            scale = learning_rate_scale(item["step"], steps,
-                                        base.lr_anneal_start, base.lr_floor)
-            if not _close(item.get("multiplier"), scale):
-                raise ValueError(f"custom-host LR schedule differs from common recipe: {name}")
+            if cap is None:
+                scale = learning_rate_scale(item["step"], steps,
+                                            base.lr_anneal_start, base.lr_floor)
+                if not _close(item.get("multiplier"), scale):
+                    raise ValueError(f"custom-host LR schedule differs from common recipe: {name}")
+                continue
+            from benchmarks.toy100.schedule import policy_multipliers
+            network, prior = policy_multipliers(
+                item["step"], steps, base.lr_anneal_start, base.lr_floor, cap,
+            )
+            if (item.get("network_lr_horizon_cap") != cap
+                    or not _close(item.get("multiplier"), network)
+                    or not _close(item.get("network_multiplier"), network)
+                    or not _close(item.get("prior_multiplier"), prior)):
+                raise ValueError(f"custom-host network horizon differs: {name}")
+            expected_roles = ({"d"} if item["role"] == "d" else
+                              {row["role"] for row in record["applied"] if row["role"] != "d"})
+            actual_groups = item.get("group_lrs")
+            if (not isinstance(actual_groups, list)
+                    or not all(isinstance(row, dict) for row in actual_groups)
+                    or len(actual_groups) != len(expected_roles)
+                    or {row.get("role") for row in actual_groups} != expected_roles):
+                raise ValueError(f"custom-host optimizer group receipt differs: {name}")
+            for group in actual_groups:
+                role = group["role"]
+                rate = base.lr * {"g": 1.0, "d": base.d_lr_mult,
+                                  "prior": base.prior_lr_mult}[role]
+                scale = prior if role == "prior" else network
+                if not _close(group.get("lr"), rate * scale):
+                    raise ValueError(f"custom-host optimizer rate differs: {name}.{role}")
         return
     if len(actions) != steps or result.get("update_counts") != {"g": steps, "d": steps}:
         raise ValueError(f"trainer action or update trace is incomplete: {name}")
     for completed, action in enumerate(actions, start=1):
-        scale = learning_rate_scale(completed - 1, steps,
-                                    base.lr_anneal_start, base.lr_floor)
-        expected_rates = dict(step=completed, multiplier=scale,
-                              lr_g=base.lr * scale,
-                              lr_prior=base.lr * base.prior_lr_mult * scale,
-                              lr_d=base.lr * base.d_lr_mult * scale)
+        if cap is None:
+            network = prior = learning_rate_scale(
+                completed - 1, steps, base.lr_anneal_start, base.lr_floor,
+            )
+            expected_rates = dict(step=completed, multiplier=network)
+        else:
+            from benchmarks.toy100.schedule import policy_multipliers
+            network, prior = policy_multipliers(
+                completed - 1, steps, base.lr_anneal_start, base.lr_floor, cap,
+            )
+            expected_rates = dict(step=completed, network_multiplier=network,
+                                  prior_multiplier=prior,
+                                  network_lr_horizon_cap=cap)
+        expected_rates.update(lr_g=base.lr * network,
+                              lr_prior=base.lr * base.prior_lr_mult * prior,
+                              lr_d=base.lr * base.d_lr_mult * network)
         if any(not _close(action.get(key), value) for key, value in expected_rates.items()):
             raise ValueError(f"trainer LR action differs from common recipe: {name}.{completed}")
         if noise is not None:
@@ -254,7 +294,8 @@ def _check_learned_transfer_noise(record: dict, receipt: dict, noise: dict):
             raise ValueError(f"learned output evaluation differs from receipt: {name}")
 
 
-def _check_toy100_learned_noise(directory: Path, summary: dict, config: dict):
+def _check_toy100_learned_noise(directory: Path, summary: dict, config: dict,
+                                *, policy_archive_verified: bool = False):
     """Audit the native scalar and its post-update/evaluation noise evidence.
 
     Train events record the effective sigma after that update. The update
@@ -326,11 +367,125 @@ def _check_toy100_learned_noise(directory: Path, summary: dict, config: dict):
     if (summary.get("provenance") != provenance
             or not set(NATIVE_SOURCE_FILES) <= set(provenance.get("source_sha256", {}))):
         raise ValueError(f"learned 100-mode source provenance differs: {name}")
-    for source in NATIVE_SOURCE_FILES:
-        if provenance["source_sha256"][source] != hashlib.sha256(
-            (ROOT / source).read_bytes(),
-        ).hexdigest():
-            raise ValueError(f"learned 100-mode source hash differs: {name}.{source}")
+    if not policy_archive_verified:
+        for source in NATIVE_SOURCE_FILES:
+            if provenance["source_sha256"][source] != hashlib.sha256(
+                (ROOT / source).read_bytes(),
+            ).hexdigest():
+                raise ValueError(f"learned 100-mode source hash differs: {name}.{source}")
+
+
+def _check_toy100_policy(directory: Path, summary: dict, config: dict,
+                         policy: dict) -> dict[str, str]:
+    """Regrade the optional model and LR policy from portable saved evidence."""
+    name, steps = config["problem"], config["steps"]
+    provenance = _read(directory / "provenance.json")
+    if (any(field in provenance or field in summary
+            for field in ("trainer_factory", "model_options"))
+            or provenance.get("shared_gate_eligible") is False
+            or summary.get("shared_gate_eligible") is False
+            or (directory / "model_options.json").exists()):
+        raise ValueError(f"scratch trainer override cannot enter common gate: {name}")
+    sources = provenance.get("source_sha256")
+    required = set(NATIVE_SOURCE_FILES) | {
+        "benchmarks/toy100/config.py", "benchmarks/toy100/__main__.py",
+        "benchmarks/toy100/schedule.py",
+    }
+    if (summary.get("provenance") != provenance
+            or not isinstance(sources, dict) or not required <= set(sources)):
+        raise ValueError(f"100-mode policy source provenance differs: {name}")
+    archive_file = provenance.get("source_archive_file")
+    archive_hash = provenance.get("source_archive_sha256")
+    if (archive_file != "source.tar.gz"
+            or not isinstance(archive_hash, str)):
+        raise ValueError(f"100-mode policy source archive receipt differs: {name}")
+    archive_bytes = (directory / archive_file).read_bytes()
+    if hashlib.sha256(archive_bytes).hexdigest() != archive_hash:
+        raise ValueError(f"100-mode policy source archive hash differs: {name}")
+    with tarfile.open(directory / archive_file, "r:gz") as archive:
+        entries = archive.getmembers()
+        members = {entry.name: entry for entry in entries}
+        if len(members) != len(entries) or set(members) != set(sources):
+            raise ValueError(f"100-mode policy source archive members differ: {name}")
+        for path, digest in sources.items():
+            entry = members[path]
+            stream = archive.extractfile(entry) if entry.isfile() else None
+            if stream is None or hashlib.sha256(stream.read()).hexdigest() != digest:
+                raise ValueError(f"100-mode policy source differs: {name}.{path}")
+    if summary.get("completed_steps") != steps:
+        raise ValueError(f"100-mode policy training budget differs: {name}")
+    card = summary.get("model_policy")
+    expected_model = policy.get("toy100_model", "mlp_v1")
+    if (not isinstance(card, dict)
+            or card.get("toy100_model") != expected_model
+            or card.get("generator_class") != (
+                "Linear" if expected_model == "affine_square_v1" else "SimpleMLPGenerator")
+            or card.get("generator_wrapper_class") != (
+                "OutputNoise" if config["output_noise_std"] else None)
+            or card.get("discriminator_class") != "SimpleMLPDiscriminator"
+            or card.get("discriminator_wrapper_class") != (
+                "InputNoise" if config["input_noise_std"] else None)
+            or card.get("prior_class") != "ParticlePrior"
+            or type(card.get("generator_base_parameters")) is not int
+            or card["generator_base_parameters"] <= 0
+            or card.get("generator_parameters") != card["generator_base_parameters"]
+               + int(config.get("output_noise_learnable", False))
+            or type(card.get("discriminator_parameters")) is not int
+            or card["discriminator_parameters"] <= 0
+            or card.get("prior_parameters") != config["num_particles"] * config["z_dim"]):
+        raise ValueError(f"100-mode model policy receipt differs: {name}")
+    if expected_model == "affine_square_v1":
+        expected_weight_hash = hashlib.sha256(
+            struct.pack("<4f", 1.0, 0.0, 0.0, 1.0),
+        ).hexdigest()
+        expected_bias_hash = hashlib.sha256(
+            struct.pack("<2f", 0.0, 0.0),
+        ).hexdigest()
+        if (card.get("generator_base_parameters") != 6
+                or card.get("generator_parameters") != 6 + int(
+                    config.get("output_noise_learnable", False))
+                or card.get("prior_initialization") != "uniform_square"
+                or not _close(card.get("prior_scale"), 5.0)
+                or card.get("prior_shape") != [config["num_particles"], 2]
+                or not isinstance(card.get("prior_initial_sha256"), str)
+                or len(card["prior_initial_sha256"]) != 64
+                or not isinstance(card.get("prior_initial_min"), (int, float))
+                or not isinstance(card.get("prior_initial_max"), (int, float))
+                or not -5.0 <= card["prior_initial_min"] <= card["prior_initial_max"] <= 5.0
+                or card.get("generator_initial_weight") != [[1.0, 0.0], [0.0, 1.0]]
+                or card.get("generator_initial_bias") != [0.0, 0.0]
+                or card.get("generator_initial_weight_sha256") != expected_weight_hash
+                or card.get("generator_initial_bias_sha256") != expected_bias_hash):
+            raise ValueError(f"100-mode affine initialization receipt differs: {name}")
+    cap = policy.get("network_lr_horizon_cap")
+    if cap is not None:
+        if summary.get("network_lr_horizon_cap") != cap:
+            raise ValueError(f"100-mode network horizon receipt differs: {name}")
+        from benchmarks.toy100.schedule import policy_multipliers
+        train_events = {}
+        for line in (directory / "events.jsonl").read_text().splitlines():
+            event = json.loads(line)
+            if event.get("event") == "train":
+                step = event.get("step")
+                if step in train_events:
+                    raise ValueError(f"duplicate 100-mode policy action: {name}.{step}")
+                train_events[step] = event
+        if set(train_events) != set(range(1, steps + 1)):
+            raise ValueError(f"100-mode policy action trace is incomplete: {name}")
+        for step, event in train_events.items():
+            network, prior = policy_multipliers(
+                step - 1, steps, config["lr_anneal_start"], config["lr_floor"], cap,
+            )
+            expected = dict(network_lr_horizon_cap=cap,
+                            network_multiplier=network, prior_multiplier=prior,
+                            lr_g=config["lr"] * network,
+                            lr_prior=config["lr"] * config["prior_lr_mult"] * prior,
+                            lr_d=config["lr"] * config["d_lr_mult"] * network)
+            if any(not _close(event.get(key), value) for key, value in expected.items()):
+                raise ValueError(f"100-mode policy action differs: {name}.{step}")
+    elif summary.get("network_lr_horizon_cap") is not None:
+        raise ValueError(f"undeclared 100-mode network horizon receipt: {name}")
+    return sources
 
 
 def _verify_saved_provenance(directory: Path, protocol: dict, *, candidate: bool):
@@ -349,11 +504,19 @@ def _verify_saved_provenance(directory: Path, protocol: dict, *, candidate: bool
         config_bytes = (directory / config_name).read_bytes()
         if hashlib.sha256(config_bytes).hexdigest() != protocol["config_sha256"]:
             raise ValueError("saved candidate config differs from protocol hash")
-        base, noise, overrides = declared_recipe(json.loads(config_bytes))
+        saved_config = json.loads(config_bytes)
+        base, noise, overrides = declared_recipe(saved_config)
+        model_policy = declared_model_policy(saved_config)
         if (_json_value(base.to_dict()) != protocol["global_recipe"]
                 or _noise_identity(noise) != _noise_identity(protocol["noise"])
-                or overrides != protocol["ignored_toy100_resource_overrides"]):
+                or overrides != protocol["ignored_toy100_resource_overrides"]
+                or model_policy != protocol.get("model_policy", {})):
             raise ValueError("saved candidate config does not resolve to declared recipe")
+        if model_policy and not {
+            "benchmarks/toy100/schedule.py", "benchmarks/toy100/train.py",
+            "benchmarks/toy100/config.py", "benchmarks/toy100/__main__.py",
+        } <= set(source_hashes):
+            raise ValueError("candidate policy and parser source is absent")
     with tarfile.open(directory / "source.tar.gz", "r:gz") as archive:
         all_members = archive.getmembers()
         members = {member.name: member for member in all_members}
@@ -419,7 +582,8 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                 raise ValueError(f"episode source differs: {name}")
             if candidate:
                 if (record["recipe"] != protocol["global_recipe"]
-                        or _noise_identity(record["noise"]) != _noise_identity(protocol["noise"])):
+                        or _noise_identity(record["noise"]) != _noise_identity(protocol["noise"])
+                        or record.get("model_policy", {}) != protocol.get("model_policy", {})):
                     raise ValueError(f"candidate global fields differ between cases: {name}")
                 receipt = record.get("noise_receipt")
                 if not isinstance(receipt, dict):
@@ -481,7 +645,8 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
             result = record["result"]
             _check_optimizer_receipts(record, expected_host_recipe)
             _check_actions(record, expected_host_recipe,
-                           protocol["noise"] if candidate else None)
+                           protocol["noise"] if candidate else None,
+                           protocol.get("model_policy") if candidate else None)
             verdict = test_verdict(record["spec"], result)
             if (verdict["status"] != record["verdict"]["status"]
                     or verdict["passed"] != record["verdict"]["passed"]
@@ -529,7 +694,9 @@ def _toy100_rows(directory: Path):
         if hashlib.sha256(manifest["config_contents"].encode()).hexdigest() != manifest["config_sha256"]:
             raise ValueError("100-mode manifest config hash differs")
         recipe, noise, _ = declared_recipe(declared)
+        model_policy = declared_model_policy(declared)
         config_fields = {name: getattr(recipe, name) for name in GLOBAL_RECIPE_FIELDS}
+        policy_sources = None
         for name in PROBLEM_NAMES:
             executed = _read(directory / name / "config.json")
             expected_config, _ = resolve_config(manifest["resolved_problem_configs"][name])
@@ -548,9 +715,24 @@ def _toy100_rows(directory: Path):
                 noise.get("output_noise_learnable", False),
             ):
                 raise ValueError(f"100-mode learned-noise flag varies by problem: {name}")
+            if declared_model_policy(executed) != model_policy:
+                raise ValueError(f"100-mode model policy varies by problem: {name}")
+            if model_policy:
+                sources = _check_toy100_policy(
+                    directory / name,
+                    _read(directory / name / "summary.json"),
+                    executed, model_policy,
+                )
+                if policy_sources is None:
+                    policy_sources = sources
+                elif sources != policy_sources:
+                    raise ValueError("100-mode policy source differs between problems")
             _check_toy100_learned_noise(
                 directory / name, _read(directory / name / "summary.json"), executed,
+                policy_archive_verified=bool(model_policy),
             )
+        if model_policy and manifest.get("policy_source_sha256") != policy_sources:
+            raise ValueError("100-mode policy manifest source differs from archived runs")
         cases = {name: dict(
             status="PASS" if coverage["problems"][name]["passed"]
                              and accuracy["problems"][name]["passed"] else "FAIL",
@@ -564,10 +746,12 @@ def _toy100_rows(directory: Path):
         return dict(status=_status(passed, len(PROBLEM_NAMES), complete=True),
                     passed=passed, required=len(PROBLEM_NAMES), cases=cases,
                     recipe=recipe.to_dict(), noise=noise,
+                    model_policy=model_policy, policy_source_sha256=policy_sources,
                     config_sha256=manifest["config_sha256"],
                     coverage_status=coverage["status"],
                     accuracy_status=accuracy["status"], reason=None)
-    except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError) as error:
+    except (OSError, KeyError, TypeError, ValueError, json.JSONDecodeError,
+            tarfile.TarError, EOFError) as error:
         return dict(status="INVALID", passed=0, required=len(PROBLEM_NAMES),
                     cases={}, reason=str(error))
 
@@ -595,9 +779,24 @@ def regrade(output: Path):
         candidate_noise = candidate["protocol"]["noise"]
         identity = (all(_json_value(toy["recipe"][name]) == candidate_recipe[name]
                         for name in GLOBAL_RECIPE_FIELDS)
-                    and _noise_identity(toy["noise"]) == _noise_identity(candidate_noise))
+                    and _noise_identity(toy["noise"]) == _noise_identity(candidate_noise)
+                    and toy.get("model_policy", {}) == candidate["protocol"].get("model_policy", {}))
         if not identity:
-            reason = "100-mode and candidate-19 global recipe or noise fields differ"
+            reason = "100-mode and candidate-19 global recipe, noise, or model policy fields differ"
+        elif toy.get("model_policy"):
+            native_sources = toy.get("policy_source_sha256") or {}
+            transfer_sources = candidate["protocol"]["source_sha256"]
+            shared = set(native_sources) & set(transfer_sources)
+            required_shared = {"particlegan/training.py", "particlegan/recipes.py",
+                               "lib/toy_models.py", "benchmarks/toy100/models.py",
+                               "benchmarks/toy100/config.py",
+                               "benchmarks/toy100/__main__.py",
+                               "benchmarks/toy100/train.py",
+                               "benchmarks/toy100/schedule.py"}
+            if (not required_shared <= shared
+                    or any(native_sources[key] != transfer_sources[key] for key in shared)):
+                identity = False
+                reason = "100-mode and candidate-19 executable policy source differs"
     else:
         reason = "complete 100-mode and candidate-19 evidence is required"
     noise_covered = (len(candidate["cases"]) == len(expected19)

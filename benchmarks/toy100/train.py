@@ -10,6 +10,7 @@ from __future__ import annotations
 from dataclasses import fields
 from datetime import datetime, timezone
 import hashlib
+import io
 import json
 import math
 import os
@@ -17,6 +18,7 @@ from pathlib import Path
 import platform
 import subprocess
 import sys
+import tarfile
 import time
 import traceback
 from typing import Any, Mapping
@@ -31,6 +33,7 @@ from particlegan import GANTrainer, Recipe, get_recipe
 from .metrics import EVAL_N, evaluate_samples
 from .models import InputNoise, OutputNoise, linear_input_noise, linear_output_noise
 from .problems import PROBLEM_NAMES, sample_real
+from .schedule import policy_rate_action, step_with_policy
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -57,7 +60,10 @@ RUN_DEFAULTS = {
     "input_noise_std": 0.0,
     "input_noise_anneal_end": 0.5,
 }
-OPTIONAL_RUN_FIELDS = {"output_noise_warmup", "output_noise_learnable"}
+OPTIONAL_RUN_FIELDS = {
+    "output_noise_warmup", "output_noise_learnable",
+    "toy100_model", "network_lr_horizon_cap",
+}
 RECIPE_FIELDS = {field.name for field in fields(Recipe)}
 RUN_FIELDS = set(RUN_DEFAULTS) | OPTIONAL_RUN_FIELDS
 
@@ -160,6 +166,13 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
             raise ValueError("output_noise_learnable must be a boolean")
         if run["output_noise_learnable"] and run["output_noise_std"] <= 0:
             raise ValueError("output_noise_learnable requires output_noise_std > 0")
+    if "toy100_model" in run and run["toy100_model"] != "affine_square_v1":
+        raise ValueError("toy100_model must be 'affine_square_v1'")
+    if "network_lr_horizon_cap" in run and (
+        type(run["network_lr_horizon_cap"]) is not int
+        or run["network_lr_horizon_cap"] <= 0
+    ):
+        raise ValueError("network_lr_horizon_cap must be a positive integer")
     recipe_kwargs = {key: user[key] for key in user if key in RECIPE_FIELDS and key != "name"}
     recipe_kwargs["total_steps"] = run["steps"]
     recipe = get_recipe(**recipe_kwargs)
@@ -168,6 +181,8 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
     if (recipe.model != "gan" or recipe.conditioning != "scalar"
             or recipe.encoder_mode != "none" or recipe.prior_kind != "particles"):
         raise ValueError("toy100 requires an unconditional scalar GAN with a learned particle prior")
+    if run.get("toy100_model") == "affine_square_v1" and recipe.z_dim != 2:
+        raise ValueError("affine_square_v1 requires z_dim=2")
     run["device"] = str(device)
     # Store all resolved inputs, including the public recipe's inherited values.
     return {**recipe.to_dict(), **run}, recipe
@@ -191,14 +206,26 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
         if device.type == "cuda":
             torch.cuda.manual_seed_all(seed)
         prior = recipe.make_prior(learnable=True).to(device)
-        generator = SimpleMLPGenerator(
-            z_dim=recipe.z_dim, hidden_dim=config["g_hidden"], n_hidden=config["n_hidden"]
-        ).to(device)
+        if config.get("toy100_model") == "affine_square_v1":
+            # Preserve the scratch probe's RNG order: construct the ordinary
+            # prior, redraw its coordinates, construct nn.Linear (which draws
+            # its defaults), then replace those defaults with identity.
+            with torch.no_grad():
+                prior.z.uniform_(-5.0, 5.0)
+            generator = nn.Linear(2, 2).to(device)
+            with torch.no_grad():
+                generator.weight.copy_(torch.eye(2, device=device, dtype=generator.weight.dtype))
+                generator.bias.zero_()
+        else:
+            generator = SimpleMLPGenerator(
+                z_dim=recipe.z_dim, hidden_dim=config["g_hidden"], n_hidden=config["n_hidden"]
+            ).to(device)
         discriminator = SimpleMLPDiscriminator(
             in_dim=2, hidden_dim=config["d_hidden"], n_hidden=config["n_hidden"],
             fourier=config["fourier"],
         ).to(device)
-        _init_linear(generator)
+        if config.get("toy100_model") != "affine_square_v1":
+            _init_linear(generator)
         _init_linear(discriminator)
         if config["output_noise_std"]:
             generator = OutputNoise(
@@ -250,7 +277,7 @@ def _learnable_output_receipt(trainer: GANTrainer, initial_std: float) -> dict[s
     }
 
 
-def _source_provenance() -> dict[str, Any]:
+def _source_provenance(*, include_policy: bool = False) -> dict[str, Any]:
     paths = (
         "benchmarks/toy100/train.py", "benchmarks/toy100/models.py",
         "benchmarks/toy100/problems.py",
@@ -259,6 +286,12 @@ def _source_provenance() -> dict[str, Any]:
         "benchmarks/toy100/accuracy_gate.py", "lib/toy_models.py",
         "particlegan/training.py", "particlegan/recipes.py",
     )
+    if include_policy:
+        paths += (
+            "benchmarks/toy100/schedule.py",
+            "benchmarks/toy100/config.py",
+            "benchmarks/toy100/__main__.py",
+        )
     hashes = {}
     for name in paths:
         path = ROOT / name
@@ -272,6 +305,82 @@ def _source_provenance() -> dict[str, Any]:
         git_sha = None
     return {"git_sha": git_sha, "source_sha256": hashes,
             "generated_at_utc": datetime.now(timezone.utc).isoformat()}
+
+
+def _write_source_archive(directory: Path, provenance: dict[str, Any]) -> None:
+    """Store the exact policy-run source bytes for portable offline regrading."""
+    archive = directory / "source.tar.gz"
+    with tarfile.open(archive, "w:gz") as stream:
+        for name, digest in sorted(provenance["source_sha256"].items()):
+            contents = (ROOT / name).read_bytes()
+            if hashlib.sha256(contents).hexdigest() != digest:
+                raise RuntimeError(f"source changed before archive: {name}")
+            info = tarfile.TarInfo(name)
+            info.size = len(contents)
+            info.mode = 0o644
+            info.mtime = 0
+            stream.addfile(info, io.BytesIO(contents))
+    provenance["source_archive_file"] = archive.name
+    provenance["source_archive_sha256"] = hashlib.sha256(archive.read_bytes()).hexdigest()
+
+
+def verify_source_archive(directory: Path, provenance: Mapping[str, Any]) -> None:
+    """Verify the policy archive against its manifest without the live tree."""
+    archive = directory / provenance["source_archive_file"]
+    if hashlib.sha256(archive.read_bytes()).hexdigest() != provenance["source_archive_sha256"]:
+        raise ValueError("policy source archive SHA-256 mismatch")
+    expected = provenance["source_sha256"]
+    with tarfile.open(archive, "r:gz") as stream:
+        members = stream.getmembers()
+        names = [member.name for member in members]
+        if (len(names) != len(set(names)) or set(names) != set(expected)
+                or any(not member.isfile() for member in members)):
+            raise ValueError("policy source archive members differ from provenance")
+        for member in members:
+            contents = stream.extractfile(member).read()
+            if hashlib.sha256(contents).hexdigest() != expected[member.name]:
+                raise ValueError(f"policy source archive member SHA-256 mismatch: {member.name}")
+
+
+def _verify_live_source(provenance: Mapping[str, Any]) -> None:
+    for name, digest in provenance["source_sha256"].items():
+        if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != digest:
+            raise RuntimeError(f"source changed during training: {name}")
+
+
+def _tensor_sha256(value: torch.Tensor) -> str:
+    return hashlib.sha256(value.detach().cpu().contiguous().numpy().tobytes()).hexdigest()
+
+
+def _model_policy_receipt(trainer: GANTrainer, config: Mapping[str, Any]) -> dict[str, Any]:
+    generator = trainer.G.model if isinstance(trainer.G, OutputNoise) else trainer.G
+    discriminator = trainer.D.model if isinstance(trainer.D, InputNoise) else trainer.D
+    receipt = {
+        "toy100_model": config.get("toy100_model", "mlp_v1"),
+        "generator_class": type(generator).__name__,
+        "generator_wrapper_class": type(trainer.G).__name__ if generator is not trainer.G else None,
+        "discriminator_class": type(discriminator).__name__,
+        "discriminator_wrapper_class": type(trainer.D).__name__ if discriminator is not trainer.D else None,
+        "prior_class": type(trainer.prior).__name__,
+        "generator_parameters": sum(p.numel() for p in trainer.G.parameters()),
+        "generator_base_parameters": sum(p.numel() for p in generator.parameters()),
+        "discriminator_parameters": sum(p.numel() for p in trainer.D.parameters()),
+        "prior_parameters": sum(p.numel() for p in trainer.prior.parameters()),
+    }
+    if config.get("toy100_model") == "affine_square_v1":
+        receipt.update({
+            "prior_initialization": "uniform_square",
+            "prior_scale": 5.0,
+            "prior_shape": list(trainer.prior.z.shape),
+            "prior_initial_min": float(trainer.prior.z.detach().min()),
+            "prior_initial_max": float(trainer.prior.z.detach().max()),
+            "prior_initial_sha256": _tensor_sha256(trainer.prior.z),
+            "generator_initial_weight": generator.weight.detach().cpu().tolist(),
+            "generator_initial_bias": generator.bias.detach().cpu().tolist(),
+            "generator_initial_weight_sha256": _tensor_sha256(generator.weight),
+            "generator_initial_bias_sha256": _tensor_sha256(generator.bias),
+        })
+    return receipt
 
 
 def _write_json(path: Path, data: Any) -> None:
@@ -313,7 +422,12 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     if torch.device(resolved["device"]).type == "cuda":
         torch.backends.cuda.matmul.allow_tf32 = False
     _write_json(out_dir / "config.json", resolved)
-    provenance = _source_provenance()
+    policy_enabled = ("toy100_model" in resolved or "network_lr_horizon_cap" in resolved)
+    provenance = (_source_provenance(include_policy=True) if policy_enabled
+                  else _source_provenance())
+    if policy_enabled:
+        _write_source_archive(out_dir, provenance)
+        verify_source_archive(out_dir, provenance)
     _write_json(out_dir / "provenance.json", provenance)
     device = torch.device(resolved["device"])
     environment = {
@@ -344,6 +458,8 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
         "config": resolved, "eval_steps": eval_steps, "snapshot_steps": snap_steps,
         "provenance": provenance, "environment": environment,
     }
+    if "network_lr_horizon_cap" in resolved:
+        summary["network_lr_horizon_cap"] = resolved["network_lr_horizon_cap"]
     if accuracy_enabled:
         summary["accuracy"] = {
             "protocol": ACCURACY_PROTOCOL,
@@ -369,6 +485,8 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     try:
         trainer = make_trainer(resolved, recipe)
         _set_output_sigma(trainer, resolved, trainer.completed_steps)
+        if policy_enabled:
+            summary["model_policy"] = _model_policy_receipt(trainer, resolved)
         if resolved.get("output_noise_learnable", False):
             summary["learnable_output_noise"] = _learnable_output_receipt(
                 trainer, resolved["output_noise_std"],
@@ -481,8 +599,10 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
             real = sample_real(
                 resolved["problem"], recipe.batch_size, device=device, generator=train_data_rng,
             )
-            stats = trainer.step(
+            stats = step_with_policy(
+                trainer,
                 real,
+                network_lr_horizon_cap=resolved.get("network_lr_horizon_cap"),
                 generator_real=lambda: sample_real(
                     resolved["problem"], recipe.batch_size, device=device,
                     generator=train_data_rng,
@@ -498,6 +618,11 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                 raise FloatingPointError(f"nonfinite training loss at step {step}: {losses}")
             train_event = {"event": "train", "step": step,
                            "elapsed": time.perf_counter() - start, **losses}
+            if "network_lr_horizon_cap" in resolved:
+                train_event.update(policy_rate_action(
+                    trainer, step,
+                    network_lr_horizon_cap=resolved["network_lr_horizon_cap"],
+                ))
             if resolved.get("output_noise_learnable", False):
                 train_event["output_sigma_live"] = _effective_output_sigma(trainer.G)
                 train_event["output_sigma_ema"] = _effective_output_sigma(trainer.ema_G)
@@ -547,6 +672,9 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                 "final_base_std_live": float(trainer.G.output_scale().detach()),
                 "final_base_std_ema": float(trainer.ema_G.output_scale().detach()),
             })
+        if policy_enabled:
+            _verify_live_source(provenance)
+            verify_source_archive(out_dir, provenance)
         _write_json(out_dir / "summary.json", summary)
         logger.say(
             f"COMPLETE problem={resolved['problem']} steps={budget} "

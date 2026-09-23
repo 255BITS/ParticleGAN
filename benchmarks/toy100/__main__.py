@@ -22,7 +22,7 @@ from .accuracy_gate import evaluate_suite as evaluate_accuracy_suite
 from .config import resolve_problem_config
 from .problems import PROBLEM_NAMES
 from .render import render_progress
-from .train import load_config, train
+from .train import _source_provenance, load_config, train
 
 
 def _parser():
@@ -52,6 +52,10 @@ def _run(args):
     # invalid hidden override cannot be ignored just because it was unselected.
     configs = {name: resolve_problem_config(manifest, name, steps=args.steps, device=args.device)
                for name in PROBLEM_NAMES}
+    policy_source_hashes = None
+    if any("toy100_model" in config or "network_lr_horizon_cap" in config
+           for config in configs.values()):
+        policy_source_hashes = _source_provenance(include_policy=True)["source_sha256"]
     names = (args.problem,) if args.problem else PROBLEM_NAMES
     args.output.mkdir(parents=True, exist_ok=True)
     # A new CLI invocation must not mix old rows with new training evidence.
@@ -65,17 +69,27 @@ def _run(args):
                    "declared_manifest": manifest, "resolved_problem_configs": configs,
                    "command_overrides": {"steps": args.steps, "device": args.device},
                    "selected_problems": names}
+    if policy_source_hashes is not None:
+        declaration["policy_source_sha256"] = policy_source_hashes
     (args.output / "run_manifest.json").write_text(json.dumps(declaration, indent=2, allow_nan=False) + "\n")
+    policy_source_ok = True
     for name in names:
         folder = args.output / name
         config = configs[name]
         print(json.dumps({"event": "problem_start", "problem": name,
                           "steps": config["steps"], "output": str(folder)}), flush=True)
         try:
+            if (policy_source_hashes is not None
+                    and _source_provenance(include_policy=True)["source_sha256"] != policy_source_hashes):
+                raise RuntimeError("policy source changed between selected problems")
             summary = train(config, folder)
+            if (policy_source_hashes is not None
+                    and summary.get("provenance", {}).get("source_sha256") != policy_source_hashes):
+                raise RuntimeError("problem source differs from declared policy source")
             print(json.dumps({"event": "problem_complete", "problem": name,
                               "status": summary.get("status"), "output": str(folder)}), flush=True)
         except Exception as exc:
+            policy_source_ok = False
             # Keep the attempted problem visible in the aggregate gate. Preserve
             # any runner-written receipt and all partial events for debugging.
             folder.mkdir(parents=True, exist_ok=True)
@@ -89,6 +103,12 @@ def _run(args):
             print(json.dumps({"event": "problem_error", "problem": name,
                               "error": repr(exc)}), flush=True)
             traceback.print_exc()
+
+    if (policy_source_hashes is not None
+            and _source_provenance(include_policy=True)["source_sha256"] != policy_source_hashes):
+        policy_source_ok = False
+        print(json.dumps({"event": "policy_source_mismatch",
+                          "error": "policy source changed during selected problem run"}), flush=True)
 
     gate = evaluate_suite(args.output, problem=args.problem)
     print(json.dumps({"event": "gate", "status": gate["status"],
@@ -111,7 +131,8 @@ def _run(args):
         except (OSError, ValueError, ImportError) as exc:
             render_error = exc
             print(json.dumps({"event": "render_error", "error": str(exc)}), flush=True)
-    return 0 if gate["status"] == "PASS" and accuracy_ok and render_error is None else 1
+    return 0 if (gate["status"] == "PASS" and accuracy_ok
+                 and render_error is None and policy_source_ok) else 1
 
 
 def main(argv=None):

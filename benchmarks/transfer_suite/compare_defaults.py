@@ -83,7 +83,7 @@ def effective_spec(original, recipe):
 
 
 @contextmanager
-def optimizer_defaults(recipe, applied):
+def optimizer_defaults(recipe, applied, *, network_lr_horizon_cap=None):
     """Apply absolute recipe rates to every group, including mixed/AE priors.
 
     The phase bridge identifies existing opt_p direct-particle optimizers. Prior
@@ -141,15 +141,33 @@ def optimizer_defaults(recipe, applied):
             rates = self.base_rates.setdefault(
                 optimizer, [group['lr'] for group in optimizer.param_groups],
             )
-            scale = learning_rate_scale(
-                completed_updates, self.total_steps,
-                recipe.lr_anneal_start, recipe.lr_floor,
-            )
+            if network_lr_horizon_cap is None:
+                network_scale = prior_scale = learning_rate_scale(
+                    completed_updates, self.total_steps,
+                    recipe.lr_anneal_start, recipe.lr_floor,
+                )
+            else:
+                from benchmarks.toy100.schedule import policy_multipliers
+                network_scale, prior_scale = policy_multipliers(
+                    completed_updates, self.total_steps,
+                    recipe.lr_anneal_start, recipe.lr_floor,
+                    network_lr_horizon_cap,
+                )
+            group_lrs = []
             for group, rate in zip(optimizer.param_groups, rates):
-                group['lr'] = rate * scale
-            if completed_updates % 20 == 0:
-                self.trace.append(dict(step=completed_updates, role=role,
-                                       multiplier=scale))
+                kind = 'd' if role == 'd' else 'prior' if group['_comparison_prior'] else 'g'
+                group['lr'] = rate * (prior_scale if kind == 'prior' else network_scale)
+                if network_lr_horizon_cap is not None:
+                    group_lrs.append(dict(role=kind, lr=group['lr']))
+            if network_lr_horizon_cap is not None or completed_updates % 20 == 0:
+                action = dict(step=completed_updates, role=role,
+                              multiplier=network_scale)
+                if network_lr_horizon_cap is not None:
+                    action.update(network_lr_horizon_cap=network_lr_horizon_cap,
+                                  network_multiplier=network_scale,
+                                  prior_multiplier=prior_scale,
+                                  group_lrs=group_lrs)
+                self.trace.append(action)
 
     with ExitStack() as stack:
         stack.enter_context(patch.object(ParticlePrior, '__init__', prior_init))

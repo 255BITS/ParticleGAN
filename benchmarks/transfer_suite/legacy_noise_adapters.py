@@ -330,7 +330,7 @@ def wrap_input(
     return model if policy is None else _InputAdapter(model, policy, data_index)
 
 
-def run_legacy(spec: dict, recipe, noise: dict) -> tuple[dict, dict]:
+def run_legacy(spec: dict, recipe, noise: dict, *, model_policy: dict | None = None) -> tuple[dict, dict]:
     """Run one frozen custom host with the common recipe and explicit noise."""
     from benchmarks import learned_lr_evaluation as bridge
     from benchmarks.locked_shared import baseline
@@ -347,7 +347,8 @@ def run_legacy(spec: dict, recipe, noise: dict) -> tuple[dict, dict]:
         output_noise_learnable=noise.get("output_noise_learnable", False),
     )
     schedule = vector_tasks.fixed_policy("cosine")
-    with optimizer_defaults(recipe, applied):
+    cap = (model_policy or {}).get("network_lr_horizon_cap")
+    with optimizer_defaults(recipe, applied, network_lr_horizon_cap=cap):
         control = evaluate.FixedControl(schedule, spec["steps"])
         with bridge.control_host_schedules(control):
             result = baseline.run_toy(

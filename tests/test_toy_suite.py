@@ -14,21 +14,25 @@ import pytest
 
 from benchmarks import toy_suite
 from benchmarks.toy100.models import linear_input_noise
+from benchmarks.toy100.schedule import policy_multipliers
 from benchmarks.toy100.problems import PROBLEM_NAMES
 from benchmarks.toy100.train import resolve_config
+from benchmarks.toy100.train import train as train_toy100
 from benchmarks.transfer_suite.compare_defaults import plan
 from benchmarks.transfer_suite.public_default_verification import (
     GLOBAL_RECIPE_FIELDS, declared_spec, host_recipe, load_declaration,
 )
 from benchmarks.transfer_suite.toy100_compatibility import (
-    declared_recipe, output_noise_at, setup_image, setup_vector,
+    declared_model_policy, declared_recipe, output_noise_at,
+    run_image, run_vector, setup_image, setup_vector,
 )
 from benchmarks.transfer_suite import vector_tasks
 from lib.toy_models import SimpleMLPGenerator
 from particlegan import get_recipe, learning_rate_scale
 
 
-def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=False):
+def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=False,
+                             cap=None):
     jobs, profile = load_declaration()
     job = next(job for job in jobs if job["spec"]["name"] == "vector_two_broad")
     base = get_recipe()
@@ -44,6 +48,15 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
     source_hashes = dict(frozen=hashlib.sha256(source_bytes).hexdigest(),
                          **{"benchmarks/toy100/models.py": hashlib.sha256(
                              noise_source_bytes).hexdigest()})
+    policy_source_bytes = {
+        "benchmarks/toy100/schedule.py": b"frozen shared policy schedule",
+        "benchmarks/toy100/train.py": b"frozen native trainer",
+        "benchmarks/toy100/config.py": b"frozen manifest parser",
+        "benchmarks/toy100/__main__.py": b"frozen native CLI",
+    }
+    if cap is not None:
+        source_hashes.update({name: hashlib.sha256(contents).hexdigest()
+                              for name, contents in policy_source_bytes.items()})
     result = dict(
         observations=[dict(step=math.ceil(i * steps / 24)) for i in range(1, 25)],
         actions=[dict(
@@ -59,6 +72,17 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
         ) for step in range(steps)],
         update_counts=dict(g=steps, d=steps),
     )
+    if cap is not None:
+        for completed, action in enumerate(result["actions"], start=1):
+            network, prior = policy_multipliers(
+                completed - 1, steps, base.lr_anneal_start, base.lr_floor, cap,
+            )
+            action.update(network_multiplier=network, prior_multiplier=prior,
+                          network_lr_horizon_cap=cap,
+                          lr_g=base.lr * network,
+                          lr_prior=base.lr * base.prior_lr_mult * prior,
+                          lr_d=base.lr * base.d_lr_mult * network)
+        model_policy = {"network_lr_horizon_cap": cap}
     verdict = dict(status="PASS", passed=True, convergence=dict(passing_suffix=5))
     record = dict(
         name=spec["name"], original_spec=deepcopy(job["spec"]), spec=spec,
@@ -77,6 +101,8 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
                            output_sigma_first=0.0, output_sigma_last=0.029),
         noise_applied=True, result=result, verdict=verdict,
     )
+    if cap is not None:
+        record["model_policy"] = deepcopy(model_policy)
     if learned:
         cfg = vector_tasks.resolve(spec)
         bare = SimpleMLPGenerator(cfg["z_dim"], cfg["hidden"], cfg["layers"], 2)
@@ -117,6 +143,7 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
         name="gan_v3", output_noise_std=0.029, input_noise_std=0.5,
         input_noise_anneal_end=0.1, output_noise_warmup=0.2,
         **({"output_noise_learnable": True} if learned else {}),
+        **({"network_lr_horizon_cap": cap} if cap is not None else {}),
     )) + "\n").encode()
     (directory / "candidate.json").write_bytes(config_bytes)
     (directory / "noise_source.py").write_bytes(noise_source_bytes)
@@ -124,14 +151,22 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
         member = tarfile.TarInfo("frozen")
         member.size = len(source_bytes)
         archive.addfile(member, io.BytesIO(source_bytes))
-    (directory / "protocol.json").write_text(json.dumps(dict(
+        if cap is not None:
+            for name, contents in policy_source_bytes.items():
+                member = tarfile.TarInfo(name)
+                member.size = len(contents)
+                archive.addfile(member, io.BytesIO(contents))
+    protocol = dict(
         source_sha256=source_hashes, global_recipe=recipe, noise=noise,
         noise_source_sha256=source_hashes["benchmarks/toy100/models.py"],
         config_file="candidate.json",
         config_sha256=hashlib.sha256(config_bytes).hexdigest(),
         ignored_toy100_resource_overrides={},
         jobs=[job], frozen_discriminators=profile["discriminators"],
-    )))
+    )
+    if cap is not None:
+        protocol["model_policy"] = model_policy
+    (directory / "protocol.json").write_text(json.dumps(protocol))
     (directory / "index.json").write_text(json.dumps(dict(records=[dict(
         name=spec["name"], artifact=artifact,
         uncompressed_sha256=hashlib.sha256(raw).hexdigest(), verdict=verdict,
@@ -230,6 +265,158 @@ def test_candidate_episode_rejects_duplicate_source_archive_member(
     grade = toy_suite._episode_rows(directory, (name,), candidate=True)
     assert grade["status"] == "INVALID"
     assert "source archive members differ" in grade["reason"]
+
+
+@pytest.mark.parametrize("tamper,expected", [
+    (lambda record: record["model_policy"].update(network_lr_horizon_cap=41),
+     "global fields differ"),
+    (lambda record: record["result"]["actions"][80].update(lr_g=.99),
+     "trainer LR action differs"),
+    (lambda record: record["result"]["actions"][80].update(lr_prior=.99),
+     "trainer LR action differs"),
+    (lambda record: record["result"]["actions"][80].update(network_multiplier=.99),
+     "trainer LR action differs"),
+])
+def test_candidate_horizon_policy_binds_each_network_and_prior_rate(
+    tmp_path, monkeypatch, tamper, expected,
+):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory, cap=40)
+    assert toy_suite._episode_rows(directory, (name,), candidate=True)["status"] == "PASS"
+    directory = tmp_path / "tampered"
+    _write_candidate_episode(directory, tamper, cap=40)
+    grade = toy_suite._episode_rows(directory, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert expected in grade["reason"]
+
+
+def test_candidate_horizon_policy_binds_config_and_archived_schedule(tmp_path, monkeypatch):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory, cap=40)
+    assert toy_suite._episode_rows(directory, (name,), candidate=True)["status"] == "PASS"
+    protocol = json.loads((directory / "protocol.json").read_text())
+    protocol["model_policy"]["network_lr_horizon_cap"] = 41
+    (directory / "protocol.json").write_text(json.dumps(protocol))
+    grade = toy_suite._episode_rows(directory, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert "saved candidate config does not resolve" in grade["reason"]
+    protocol["model_policy"]["network_lr_horizon_cap"] = 40
+    (directory / "protocol.json").write_text(json.dumps(protocol))
+    with tarfile.open(directory / "source.tar.gz", "w:gz") as archive:
+        for member_name, contents in (("frozen", b"frozen benchmark source"),
+                                      ("benchmarks/toy100/schedule.py", b"tampered"),
+                                      ("benchmarks/toy100/train.py", b"frozen native trainer"),
+                                      ("benchmarks/toy100/config.py", b"frozen manifest parser"),
+                                      ("benchmarks/toy100/__main__.py", b"frozen native CLI")):
+            member = tarfile.TarInfo(member_name)
+            member.size = len(contents)
+            archive.addfile(member, io.BytesIO(contents))
+    grade = toy_suite._episode_rows(directory, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert "saved source archive differs" in grade["reason"]
+
+
+def test_native_affine_policy_regrade_rejects_scratch_and_tampered_receipts(tmp_path):
+    config = dict(problem="grid100", seed=31, steps=6, device="cpu",
+                  z_dim=2, num_particles=32, batch_size=8,
+                  d_hidden=8, n_hidden=1, fourier=3,
+                  eval_samples=128, snapshot_samples=16,
+                  eval_interval=3, snapshot_interval=3, log_interval=3,
+                  threads=1, output_noise_std=.029, input_noise_std=.5,
+                  toy100_model="affine_square_v1", network_lr_horizon_cap=3)
+    directory = tmp_path / "native"
+    summary = train_toy100(config, directory)
+    resolved = summary["config"]
+    policy = declared_model_policy(config)
+    sources = toy_suite._check_toy100_policy(directory, summary, resolved, policy)
+    assert "benchmarks/toy100/schedule.py" in sources
+
+    event_path = directory / "events.jsonl"
+    original_events = event_path.read_text()
+    events = [json.loads(line) for line in original_events.splitlines()]
+    next(row for row in events if row.get("event") == "train")["lr_prior"] = .99
+    event_path.write_text("\n".join(json.dumps(row) for row in events) + "\n")
+    with pytest.raises(ValueError, match="policy action differs"):
+        toy_suite._check_toy100_policy(directory, summary, resolved, policy)
+    event_path.write_text(original_events)
+
+    original_card = deepcopy(summary["model_policy"])
+    summary["model_policy"]["generator_initial_weight"] = [[2.0, 0.0], [0.0, 1.0]]
+    with pytest.raises(ValueError, match="affine initialization receipt differs"):
+        toy_suite._check_toy100_policy(directory, summary, resolved, policy)
+    summary["model_policy"] = original_card
+
+    provenance_path = directory / "provenance.json"
+    original_provenance = provenance_path.read_text()
+    scratch = json.loads(original_provenance)
+    scratch["trainer_factory"] = "scratch monkeypatch"
+    scratch["model_options"] = {"shared_gate_eligible": False}
+    provenance_path.write_text(json.dumps(scratch))
+    with pytest.raises(ValueError, match="scratch trainer override"):
+        toy_suite._check_toy100_policy(directory, summary, resolved, policy)
+    provenance_path.write_text(original_provenance)
+
+    archive_path = directory / "source.tar.gz"
+    archive = archive_path.read_bytes()
+    archive_path.write_bytes(archive + b"tampered")
+    with pytest.raises(ValueError, match="archive hash differs"):
+        toy_suite._check_toy100_policy(directory, summary, resolved, policy)
+
+
+def test_native_policy_with_learned_noise_regrades_from_archive_after_relocation(
+    tmp_path, monkeypatch,
+):
+    config = dict(problem="grid100", seed=31, steps=6, device="cpu",
+                  z_dim=2, num_particles=32, batch_size=8,
+                  d_hidden=8, n_hidden=1, fourier=3,
+                  eval_samples=128, snapshot_samples=16,
+                  eval_interval=3, snapshot_interval=3, log_interval=3,
+                  threads=1, output_noise_std=.029,
+                  output_noise_learnable=True, output_noise_warmup=.2,
+                  input_noise_std=.5,
+                  toy100_model="affine_square_v1", network_lr_horizon_cap=3)
+    directory = tmp_path / "learned-native"
+    summary = train_toy100(config, directory)
+    resolved = summary["config"]
+    toy_suite._check_toy100_policy(
+        directory, summary, resolved, declared_model_policy(config),
+    )
+    monkeypatch.setattr(toy_suite, "ROOT", tmp_path / "no-live-source-tree")
+    toy_suite._check_toy100_learned_noise(
+        directory, summary, resolved, policy_archive_verified=True,
+    )
+
+
+@pytest.mark.parametrize("name", ["vector_two_broad", "img_stripes2"])
+def test_transfer_trainer_hosts_record_actual_capped_network_rates(name, monkeypatch):
+    recipe, noise, _ = declared_recipe({"network_lr_horizon_cap": 8})
+    jobs, profile = load_declaration()
+    job = next(row for row in jobs if row["spec"]["name"] == name)
+    spec, card, _ = declared_spec(job, profile, recipe)
+    spec["steps"] = 24
+    monkeypatch.setattr(vector_tasks, "EVAL_SAMPLES", 256)
+    policy = {"network_lr_horizon_cap": 8}
+    result, context = (run_vector(spec, card, recipe, noise, model_policy=policy)
+                       if name.startswith("vector") else
+                       run_image(spec, recipe, noise, model_policy=policy))
+    assert len(result["actions"]) == 24
+    network, prior = policy_multipliers(23, 24, recipe.lr_anneal_start,
+                                        recipe.lr_floor, 8)
+    assert network < prior
+    action = result["actions"][-1]
+    assert action["step"] == 24
+    assert action["network_multiplier"] == network
+    assert action["prior_multiplier"] == prior
+    assert action["lr_g"] == pytest.approx(recipe.lr * network)
+    assert action["lr_prior"] == pytest.approx(recipe.lr * recipe.prior_lr_mult * prior)
+    assert action["lr_d"] == pytest.approx(recipe.lr * recipe.d_lr_mult * network)
+    assert context["trainer"].completed_steps == 24
 
 
 @pytest.mark.parametrize("tamper,expected", [
@@ -435,6 +622,9 @@ def test_common_22_gate_requires_exact_noise_and_recipe_identity(tmp_path, monke
     candidate_data = deepcopy(candidate)
     candidate_data["protocol"]["noise"]["output_noise_learnable"] = False
     assert toy_suite.regrade(tmp_path / "explicit-fixed-noise")["status"] == "PASS"
+    candidate_data = deepcopy(candidate)
+    candidate_data["protocol"]["model_policy"] = {"network_lr_horizon_cap": 1600}
+    assert toy_suite.regrade(tmp_path / "mixed-network-policy")["status"] == "INCOMPLETE"
 
 
 def test_common_22_identity_normalizes_real_recipe_tuple_after_json(tmp_path, monkeypatch):
