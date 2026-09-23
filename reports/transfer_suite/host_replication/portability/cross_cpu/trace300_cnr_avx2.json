@@ -1,0 +1,1510 @@
+{
+ "environment": "MKL_CBWR=AVX2 on both",
+ "native_capability": "AVX512",
+ "emulated_capability": "AVX2",
+ "emulator": "qemu-x86_64 8.2.2 -cpu Haswell-v4",
+ "all_300_updates_bit_identical": true,
+ "command": "TRACE_STEPS=300 MKL_CBWR=AVX2 [qemu-x86_64 -cpu Haswell-v4] python3 -m reports.transfer_suite.host_replication.portability.trace OUT.pt",
+ "per_update_parameter_sha256_prefix": [
+  {
+   "g_update": 1,
+   "native_intel_avx512": "d63fb5f055400049",
+   "emulated_haswell_avx2": "d63fb5f055400049"
+  },
+  {
+   "g_update": 2,
+   "native_intel_avx512": "33db71a5b16022f1",
+   "emulated_haswell_avx2": "33db71a5b16022f1"
+  },
+  {
+   "g_update": 3,
+   "native_intel_avx512": "7ab49514ce2263c2",
+   "emulated_haswell_avx2": "7ab49514ce2263c2"
+  },
+  {
+   "g_update": 4,
+   "native_intel_avx512": "7ea4a86a284efd4f",
+   "emulated_haswell_avx2": "7ea4a86a284efd4f"
+  },
+  {
+   "g_update": 5,
+   "native_intel_avx512": "7e4a44567dd38bfb",
+   "emulated_haswell_avx2": "7e4a44567dd38bfb"
+  },
+  {
+   "g_update": 6,
+   "native_intel_avx512": "d3caff9c18c9193e",
+   "emulated_haswell_avx2": "d3caff9c18c9193e"
+  },
+  {
+   "g_update": 7,
+   "native_intel_avx512": "a5f176b730ae381d",
+   "emulated_haswell_avx2": "a5f176b730ae381d"
+  },
+  {
+   "g_update": 8,
+   "native_intel_avx512": "e08adf425d2fa24c",
+   "emulated_haswell_avx2": "e08adf425d2fa24c"
+  },
+  {
+   "g_update": 9,
+   "native_intel_avx512": "ac0023b54531f0aa",
+   "emulated_haswell_avx2": "ac0023b54531f0aa"
+  },
+  {
+   "g_update": 10,
+   "native_intel_avx512": "165c473e461d4fae",
+   "emulated_haswell_avx2": "165c473e461d4fae"
+  },
+  {
+   "g_update": 11,
+   "native_intel_avx512": "68cb83815107a084",
+   "emulated_haswell_avx2": "68cb83815107a084"
+  },
+  {
+   "g_update": 12,
+   "native_intel_avx512": "a09c1697288c5347",
+   "emulated_haswell_avx2": "a09c1697288c5347"
+  },
+  {
+   "g_update": 13,
+   "native_intel_avx512": "a4dcc7c92b8c12fa",
+   "emulated_haswell_avx2": "a4dcc7c92b8c12fa"
+  },
+  {
+   "g_update": 14,
+   "native_intel_avx512": "dc50ad201214e04e",
+   "emulated_haswell_avx2": "dc50ad201214e04e"
+  },
+  {
+   "g_update": 15,
+   "native_intel_avx512": "fb344572f533f0f6",
+   "emulated_haswell_avx2": "fb344572f533f0f6"
+  },
+  {
+   "g_update": 16,
+   "native_intel_avx512": "351c631f70f8606a",
+   "emulated_haswell_avx2": "351c631f70f8606a"
+  },
+  {
+   "g_update": 17,
+   "native_intel_avx512": "6cab4a50e4b4e51e",
+   "emulated_haswell_avx2": "6cab4a50e4b4e51e"
+  },
+  {
+   "g_update": 18,
+   "native_intel_avx512": "80df1dfe41e033f7",
+   "emulated_haswell_avx2": "80df1dfe41e033f7"
+  },
+  {
+   "g_update": 19,
+   "native_intel_avx512": "018e150c2a687d9a",
+   "emulated_haswell_avx2": "018e150c2a687d9a"
+  },
+  {
+   "g_update": 20,
+   "native_intel_avx512": "273ab89fdd70038f",
+   "emulated_haswell_avx2": "273ab89fdd70038f"
+  },
+  {
+   "g_update": 21,
+   "native_intel_avx512": "7260dd7177090e42",
+   "emulated_haswell_avx2": "7260dd7177090e42"
+  },
+  {
+   "g_update": 22,
+   "native_intel_avx512": "0c78e41470ed3826",
+   "emulated_haswell_avx2": "0c78e41470ed3826"
+  },
+  {
+   "g_update": 23,
+   "native_intel_avx512": "5ee747e9ab8dfa23",
+   "emulated_haswell_avx2": "5ee747e9ab8dfa23"
+  },
+  {
+   "g_update": 24,
+   "native_intel_avx512": "9e7c1ce1febd2167",
+   "emulated_haswell_avx2": "9e7c1ce1febd2167"
+  },
+  {
+   "g_update": 25,
+   "native_intel_avx512": "9075c7d2cd5a5cb9",
+   "emulated_haswell_avx2": "9075c7d2cd5a5cb9"
+  },
+  {
+   "g_update": 26,
+   "native_intel_avx512": "885ada26d9581d8f",
+   "emulated_haswell_avx2": "885ada26d9581d8f"
+  },
+  {
+   "g_update": 27,
+   "native_intel_avx512": "a361ebfc1a2c7f5b",
+   "emulated_haswell_avx2": "a361ebfc1a2c7f5b"
+  },
+  {
+   "g_update": 28,
+   "native_intel_avx512": "4fe28e3022cf3b5f",
+   "emulated_haswell_avx2": "4fe28e3022cf3b5f"
+  },
+  {
+   "g_update": 29,
+   "native_intel_avx512": "fb909c2b8a60cdb4",
+   "emulated_haswell_avx2": "fb909c2b8a60cdb4"
+  },
+  {
+   "g_update": 30,
+   "native_intel_avx512": "0206da1b9ef8dfb8",
+   "emulated_haswell_avx2": "0206da1b9ef8dfb8"
+  },
+  {
+   "g_update": 31,
+   "native_intel_avx512": "88d3aa7eddfed13b",
+   "emulated_haswell_avx2": "88d3aa7eddfed13b"
+  },
+  {
+   "g_update": 32,
+   "native_intel_avx512": "0d00c13245f420c1",
+   "emulated_haswell_avx2": "0d00c13245f420c1"
+  },
+  {
+   "g_update": 33,
+   "native_intel_avx512": "0ad655515b06ab41",
+   "emulated_haswell_avx2": "0ad655515b06ab41"
+  },
+  {
+   "g_update": 34,
+   "native_intel_avx512": "433948504ad8f064",
+   "emulated_haswell_avx2": "433948504ad8f064"
+  },
+  {
+   "g_update": 35,
+   "native_intel_avx512": "fa1614c78d2b4d25",
+   "emulated_haswell_avx2": "fa1614c78d2b4d25"
+  },
+  {
+   "g_update": 36,
+   "native_intel_avx512": "98dca58143ea6151",
+   "emulated_haswell_avx2": "98dca58143ea6151"
+  },
+  {
+   "g_update": 37,
+   "native_intel_avx512": "4fea38db01a2b7d6",
+   "emulated_haswell_avx2": "4fea38db01a2b7d6"
+  },
+  {
+   "g_update": 38,
+   "native_intel_avx512": "e55653c4da860723",
+   "emulated_haswell_avx2": "e55653c4da860723"
+  },
+  {
+   "g_update": 39,
+   "native_intel_avx512": "3e8a9394c5399a48",
+   "emulated_haswell_avx2": "3e8a9394c5399a48"
+  },
+  {
+   "g_update": 40,
+   "native_intel_avx512": "13776683046b5cd1",
+   "emulated_haswell_avx2": "13776683046b5cd1"
+  },
+  {
+   "g_update": 41,
+   "native_intel_avx512": "15242230819962df",
+   "emulated_haswell_avx2": "15242230819962df"
+  },
+  {
+   "g_update": 42,
+   "native_intel_avx512": "f154aeefca5c5f16",
+   "emulated_haswell_avx2": "f154aeefca5c5f16"
+  },
+  {
+   "g_update": 43,
+   "native_intel_avx512": "b0bce0ab16bac294",
+   "emulated_haswell_avx2": "b0bce0ab16bac294"
+  },
+  {
+   "g_update": 44,
+   "native_intel_avx512": "dce8e39736760419",
+   "emulated_haswell_avx2": "dce8e39736760419"
+  },
+  {
+   "g_update": 45,
+   "native_intel_avx512": "49d2941a997769d3",
+   "emulated_haswell_avx2": "49d2941a997769d3"
+  },
+  {
+   "g_update": 46,
+   "native_intel_avx512": "50ec220371d60a4d",
+   "emulated_haswell_avx2": "50ec220371d60a4d"
+  },
+  {
+   "g_update": 47,
+   "native_intel_avx512": "75c5a4284de3b8dd",
+   "emulated_haswell_avx2": "75c5a4284de3b8dd"
+  },
+  {
+   "g_update": 48,
+   "native_intel_avx512": "dfbae24c68037ab8",
+   "emulated_haswell_avx2": "dfbae24c68037ab8"
+  },
+  {
+   "g_update": 49,
+   "native_intel_avx512": "b07cd2b554c27aef",
+   "emulated_haswell_avx2": "b07cd2b554c27aef"
+  },
+  {
+   "g_update": 50,
+   "native_intel_avx512": "edadc3b843c93d87",
+   "emulated_haswell_avx2": "edadc3b843c93d87"
+  },
+  {
+   "g_update": 51,
+   "native_intel_avx512": "3a3f035e57cfd4d8",
+   "emulated_haswell_avx2": "3a3f035e57cfd4d8"
+  },
+  {
+   "g_update": 52,
+   "native_intel_avx512": "5f08656b592d23bc",
+   "emulated_haswell_avx2": "5f08656b592d23bc"
+  },
+  {
+   "g_update": 53,
+   "native_intel_avx512": "10aec45f4e51bd8d",
+   "emulated_haswell_avx2": "10aec45f4e51bd8d"
+  },
+  {
+   "g_update": 54,
+   "native_intel_avx512": "5f6f92c64b4d6a53",
+   "emulated_haswell_avx2": "5f6f92c64b4d6a53"
+  },
+  {
+   "g_update": 55,
+   "native_intel_avx512": "f41df8345342f53e",
+   "emulated_haswell_avx2": "f41df8345342f53e"
+  },
+  {
+   "g_update": 56,
+   "native_intel_avx512": "254875951fc90279",
+   "emulated_haswell_avx2": "254875951fc90279"
+  },
+  {
+   "g_update": 57,
+   "native_intel_avx512": "3ddd21b8bef52a5a",
+   "emulated_haswell_avx2": "3ddd21b8bef52a5a"
+  },
+  {
+   "g_update": 58,
+   "native_intel_avx512": "878bc16d5ee1e58b",
+   "emulated_haswell_avx2": "878bc16d5ee1e58b"
+  },
+  {
+   "g_update": 59,
+   "native_intel_avx512": "56aa206242cdca47",
+   "emulated_haswell_avx2": "56aa206242cdca47"
+  },
+  {
+   "g_update": 60,
+   "native_intel_avx512": "9deb457d0f21185f",
+   "emulated_haswell_avx2": "9deb457d0f21185f"
+  },
+  {
+   "g_update": 61,
+   "native_intel_avx512": "04da50ff2e9ab4f4",
+   "emulated_haswell_avx2": "04da50ff2e9ab4f4"
+  },
+  {
+   "g_update": 62,
+   "native_intel_avx512": "deb3837bcec1337a",
+   "emulated_haswell_avx2": "deb3837bcec1337a"
+  },
+  {
+   "g_update": 63,
+   "native_intel_avx512": "9cc69cf630d856e1",
+   "emulated_haswell_avx2": "9cc69cf630d856e1"
+  },
+  {
+   "g_update": 64,
+   "native_intel_avx512": "a3320c70089cf40b",
+   "emulated_haswell_avx2": "a3320c70089cf40b"
+  },
+  {
+   "g_update": 65,
+   "native_intel_avx512": "8d1130db36f21c3b",
+   "emulated_haswell_avx2": "8d1130db36f21c3b"
+  },
+  {
+   "g_update": 66,
+   "native_intel_avx512": "a953d06dbdf96c2b",
+   "emulated_haswell_avx2": "a953d06dbdf96c2b"
+  },
+  {
+   "g_update": 67,
+   "native_intel_avx512": "6a3a456e6547ab50",
+   "emulated_haswell_avx2": "6a3a456e6547ab50"
+  },
+  {
+   "g_update": 68,
+   "native_intel_avx512": "08f7e634cbbbcf18",
+   "emulated_haswell_avx2": "08f7e634cbbbcf18"
+  },
+  {
+   "g_update": 69,
+   "native_intel_avx512": "80350c0282df9fea",
+   "emulated_haswell_avx2": "80350c0282df9fea"
+  },
+  {
+   "g_update": 70,
+   "native_intel_avx512": "aeaae9f9ad261d3b",
+   "emulated_haswell_avx2": "aeaae9f9ad261d3b"
+  },
+  {
+   "g_update": 71,
+   "native_intel_avx512": "d162a165209a88ad",
+   "emulated_haswell_avx2": "d162a165209a88ad"
+  },
+  {
+   "g_update": 72,
+   "native_intel_avx512": "e3621d7b8f32752c",
+   "emulated_haswell_avx2": "e3621d7b8f32752c"
+  },
+  {
+   "g_update": 73,
+   "native_intel_avx512": "0007fd2e9dfe6499",
+   "emulated_haswell_avx2": "0007fd2e9dfe6499"
+  },
+  {
+   "g_update": 74,
+   "native_intel_avx512": "c5932f27e4671374",
+   "emulated_haswell_avx2": "c5932f27e4671374"
+  },
+  {
+   "g_update": 75,
+   "native_intel_avx512": "cfcd44f42608b0db",
+   "emulated_haswell_avx2": "cfcd44f42608b0db"
+  },
+  {
+   "g_update": 76,
+   "native_intel_avx512": "a5c1c2eaa9dff560",
+   "emulated_haswell_avx2": "a5c1c2eaa9dff560"
+  },
+  {
+   "g_update": 77,
+   "native_intel_avx512": "ecd89256a80a5666",
+   "emulated_haswell_avx2": "ecd89256a80a5666"
+  },
+  {
+   "g_update": 78,
+   "native_intel_avx512": "995fe82e00388929",
+   "emulated_haswell_avx2": "995fe82e00388929"
+  },
+  {
+   "g_update": 79,
+   "native_intel_avx512": "cb86545938c44045",
+   "emulated_haswell_avx2": "cb86545938c44045"
+  },
+  {
+   "g_update": 80,
+   "native_intel_avx512": "c499f17995f56cf7",
+   "emulated_haswell_avx2": "c499f17995f56cf7"
+  },
+  {
+   "g_update": 81,
+   "native_intel_avx512": "e9601d81f4b7434f",
+   "emulated_haswell_avx2": "e9601d81f4b7434f"
+  },
+  {
+   "g_update": 82,
+   "native_intel_avx512": "e020e67a95464179",
+   "emulated_haswell_avx2": "e020e67a95464179"
+  },
+  {
+   "g_update": 83,
+   "native_intel_avx512": "2f2d83544c706163",
+   "emulated_haswell_avx2": "2f2d83544c706163"
+  },
+  {
+   "g_update": 84,
+   "native_intel_avx512": "b51d966f83c0a6f3",
+   "emulated_haswell_avx2": "b51d966f83c0a6f3"
+  },
+  {
+   "g_update": 85,
+   "native_intel_avx512": "f6a4a85ed5ec0db5",
+   "emulated_haswell_avx2": "f6a4a85ed5ec0db5"
+  },
+  {
+   "g_update": 86,
+   "native_intel_avx512": "93a93fe740950992",
+   "emulated_haswell_avx2": "93a93fe740950992"
+  },
+  {
+   "g_update": 87,
+   "native_intel_avx512": "ec0b0abf6a0d0f4b",
+   "emulated_haswell_avx2": "ec0b0abf6a0d0f4b"
+  },
+  {
+   "g_update": 88,
+   "native_intel_avx512": "b05b4c225fa03bbd",
+   "emulated_haswell_avx2": "b05b4c225fa03bbd"
+  },
+  {
+   "g_update": 89,
+   "native_intel_avx512": "585e0f29b74b888e",
+   "emulated_haswell_avx2": "585e0f29b74b888e"
+  },
+  {
+   "g_update": 90,
+   "native_intel_avx512": "0de4d2fd4c935807",
+   "emulated_haswell_avx2": "0de4d2fd4c935807"
+  },
+  {
+   "g_update": 91,
+   "native_intel_avx512": "8ed1aed84a801e3a",
+   "emulated_haswell_avx2": "8ed1aed84a801e3a"
+  },
+  {
+   "g_update": 92,
+   "native_intel_avx512": "5c60c18a0bc78a51",
+   "emulated_haswell_avx2": "5c60c18a0bc78a51"
+  },
+  {
+   "g_update": 93,
+   "native_intel_avx512": "3b2e6f3c432b4063",
+   "emulated_haswell_avx2": "3b2e6f3c432b4063"
+  },
+  {
+   "g_update": 94,
+   "native_intel_avx512": "de81ffeee0bcd4ac",
+   "emulated_haswell_avx2": "de81ffeee0bcd4ac"
+  },
+  {
+   "g_update": 95,
+   "native_intel_avx512": "699e4bab7266b298",
+   "emulated_haswell_avx2": "699e4bab7266b298"
+  },
+  {
+   "g_update": 96,
+   "native_intel_avx512": "554ca1a30e8a669a",
+   "emulated_haswell_avx2": "554ca1a30e8a669a"
+  },
+  {
+   "g_update": 97,
+   "native_intel_avx512": "e9a20404d0f6a171",
+   "emulated_haswell_avx2": "e9a20404d0f6a171"
+  },
+  {
+   "g_update": 98,
+   "native_intel_avx512": "4d790a3c1b620259",
+   "emulated_haswell_avx2": "4d790a3c1b620259"
+  },
+  {
+   "g_update": 99,
+   "native_intel_avx512": "22cf6438a759e476",
+   "emulated_haswell_avx2": "22cf6438a759e476"
+  },
+  {
+   "g_update": 100,
+   "native_intel_avx512": "49d4838c6038657f",
+   "emulated_haswell_avx2": "49d4838c6038657f"
+  },
+  {
+   "g_update": 101,
+   "native_intel_avx512": "7e53d303b35c8f32",
+   "emulated_haswell_avx2": "7e53d303b35c8f32"
+  },
+  {
+   "g_update": 102,
+   "native_intel_avx512": "618568369965971d",
+   "emulated_haswell_avx2": "618568369965971d"
+  },
+  {
+   "g_update": 103,
+   "native_intel_avx512": "d6618ded3ef714c2",
+   "emulated_haswell_avx2": "d6618ded3ef714c2"
+  },
+  {
+   "g_update": 104,
+   "native_intel_avx512": "0fe6a5a9a16edece",
+   "emulated_haswell_avx2": "0fe6a5a9a16edece"
+  },
+  {
+   "g_update": 105,
+   "native_intel_avx512": "d4db859dcd96783f",
+   "emulated_haswell_avx2": "d4db859dcd96783f"
+  },
+  {
+   "g_update": 106,
+   "native_intel_avx512": "b71c61f6267b9774",
+   "emulated_haswell_avx2": "b71c61f6267b9774"
+  },
+  {
+   "g_update": 107,
+   "native_intel_avx512": "a29945d95ae3a2a6",
+   "emulated_haswell_avx2": "a29945d95ae3a2a6"
+  },
+  {
+   "g_update": 108,
+   "native_intel_avx512": "9f544f3c05527ddd",
+   "emulated_haswell_avx2": "9f544f3c05527ddd"
+  },
+  {
+   "g_update": 109,
+   "native_intel_avx512": "50e9e9cc89f46b79",
+   "emulated_haswell_avx2": "50e9e9cc89f46b79"
+  },
+  {
+   "g_update": 110,
+   "native_intel_avx512": "825123e0f1a1e235",
+   "emulated_haswell_avx2": "825123e0f1a1e235"
+  },
+  {
+   "g_update": 111,
+   "native_intel_avx512": "51f06f02dfd7d2a7",
+   "emulated_haswell_avx2": "51f06f02dfd7d2a7"
+  },
+  {
+   "g_update": 112,
+   "native_intel_avx512": "dfbe7803001d8a5f",
+   "emulated_haswell_avx2": "dfbe7803001d8a5f"
+  },
+  {
+   "g_update": 113,
+   "native_intel_avx512": "57090063e9111485",
+   "emulated_haswell_avx2": "57090063e9111485"
+  },
+  {
+   "g_update": 114,
+   "native_intel_avx512": "97227bf81e66f5eb",
+   "emulated_haswell_avx2": "97227bf81e66f5eb"
+  },
+  {
+   "g_update": 115,
+   "native_intel_avx512": "02bb6f056543eb33",
+   "emulated_haswell_avx2": "02bb6f056543eb33"
+  },
+  {
+   "g_update": 116,
+   "native_intel_avx512": "21533e720bb9ed3c",
+   "emulated_haswell_avx2": "21533e720bb9ed3c"
+  },
+  {
+   "g_update": 117,
+   "native_intel_avx512": "7e7e3695c2025b5f",
+   "emulated_haswell_avx2": "7e7e3695c2025b5f"
+  },
+  {
+   "g_update": 118,
+   "native_intel_avx512": "eaf95e9f4bf8cc5a",
+   "emulated_haswell_avx2": "eaf95e9f4bf8cc5a"
+  },
+  {
+   "g_update": 119,
+   "native_intel_avx512": "aa17c82626c69ad9",
+   "emulated_haswell_avx2": "aa17c82626c69ad9"
+  },
+  {
+   "g_update": 120,
+   "native_intel_avx512": "37c4951fa871b541",
+   "emulated_haswell_avx2": "37c4951fa871b541"
+  },
+  {
+   "g_update": 121,
+   "native_intel_avx512": "7f813da9746defdc",
+   "emulated_haswell_avx2": "7f813da9746defdc"
+  },
+  {
+   "g_update": 122,
+   "native_intel_avx512": "3917fd035a19c108",
+   "emulated_haswell_avx2": "3917fd035a19c108"
+  },
+  {
+   "g_update": 123,
+   "native_intel_avx512": "2724b4cc0050bfee",
+   "emulated_haswell_avx2": "2724b4cc0050bfee"
+  },
+  {
+   "g_update": 124,
+   "native_intel_avx512": "f2e339604b1a7e21",
+   "emulated_haswell_avx2": "f2e339604b1a7e21"
+  },
+  {
+   "g_update": 125,
+   "native_intel_avx512": "ec730de024b0430c",
+   "emulated_haswell_avx2": "ec730de024b0430c"
+  },
+  {
+   "g_update": 126,
+   "native_intel_avx512": "31e53ae8ac711490",
+   "emulated_haswell_avx2": "31e53ae8ac711490"
+  },
+  {
+   "g_update": 127,
+   "native_intel_avx512": "2a547b922af8966e",
+   "emulated_haswell_avx2": "2a547b922af8966e"
+  },
+  {
+   "g_update": 128,
+   "native_intel_avx512": "b3d00c9b17b2fdc7",
+   "emulated_haswell_avx2": "b3d00c9b17b2fdc7"
+  },
+  {
+   "g_update": 129,
+   "native_intel_avx512": "c3a6a96ac3963d81",
+   "emulated_haswell_avx2": "c3a6a96ac3963d81"
+  },
+  {
+   "g_update": 130,
+   "native_intel_avx512": "bd1630e49f85a69b",
+   "emulated_haswell_avx2": "bd1630e49f85a69b"
+  },
+  {
+   "g_update": 131,
+   "native_intel_avx512": "2af91e67cc0231da",
+   "emulated_haswell_avx2": "2af91e67cc0231da"
+  },
+  {
+   "g_update": 132,
+   "native_intel_avx512": "986b74a721569f3a",
+   "emulated_haswell_avx2": "986b74a721569f3a"
+  },
+  {
+   "g_update": 133,
+   "native_intel_avx512": "49db46eea5a2f4a3",
+   "emulated_haswell_avx2": "49db46eea5a2f4a3"
+  },
+  {
+   "g_update": 134,
+   "native_intel_avx512": "06fd377b92c85d61",
+   "emulated_haswell_avx2": "06fd377b92c85d61"
+  },
+  {
+   "g_update": 135,
+   "native_intel_avx512": "c46239813256f094",
+   "emulated_haswell_avx2": "c46239813256f094"
+  },
+  {
+   "g_update": 136,
+   "native_intel_avx512": "03236b14126b0235",
+   "emulated_haswell_avx2": "03236b14126b0235"
+  },
+  {
+   "g_update": 137,
+   "native_intel_avx512": "22bb4ab27f6888ed",
+   "emulated_haswell_avx2": "22bb4ab27f6888ed"
+  },
+  {
+   "g_update": 138,
+   "native_intel_avx512": "5deaf44047fa9413",
+   "emulated_haswell_avx2": "5deaf44047fa9413"
+  },
+  {
+   "g_update": 139,
+   "native_intel_avx512": "7f6f856bbffc0021",
+   "emulated_haswell_avx2": "7f6f856bbffc0021"
+  },
+  {
+   "g_update": 140,
+   "native_intel_avx512": "21b078344387a68c",
+   "emulated_haswell_avx2": "21b078344387a68c"
+  },
+  {
+   "g_update": 141,
+   "native_intel_avx512": "a90600c4355eac00",
+   "emulated_haswell_avx2": "a90600c4355eac00"
+  },
+  {
+   "g_update": 142,
+   "native_intel_avx512": "ce845f28c3e94715",
+   "emulated_haswell_avx2": "ce845f28c3e94715"
+  },
+  {
+   "g_update": 143,
+   "native_intel_avx512": "83fdd6a2313dadc4",
+   "emulated_haswell_avx2": "83fdd6a2313dadc4"
+  },
+  {
+   "g_update": 144,
+   "native_intel_avx512": "ba2b561023b830bf",
+   "emulated_haswell_avx2": "ba2b561023b830bf"
+  },
+  {
+   "g_update": 145,
+   "native_intel_avx512": "8bf1c4eda256050c",
+   "emulated_haswell_avx2": "8bf1c4eda256050c"
+  },
+  {
+   "g_update": 146,
+   "native_intel_avx512": "343dca8146bf54d1",
+   "emulated_haswell_avx2": "343dca8146bf54d1"
+  },
+  {
+   "g_update": 147,
+   "native_intel_avx512": "7373ff8232dbc57a",
+   "emulated_haswell_avx2": "7373ff8232dbc57a"
+  },
+  {
+   "g_update": 148,
+   "native_intel_avx512": "ab104641014c4159",
+   "emulated_haswell_avx2": "ab104641014c4159"
+  },
+  {
+   "g_update": 149,
+   "native_intel_avx512": "6e63f2a2364c1502",
+   "emulated_haswell_avx2": "6e63f2a2364c1502"
+  },
+  {
+   "g_update": 150,
+   "native_intel_avx512": "b5e9e44977504ca9",
+   "emulated_haswell_avx2": "b5e9e44977504ca9"
+  },
+  {
+   "g_update": 151,
+   "native_intel_avx512": "a4c7deca7542dd40",
+   "emulated_haswell_avx2": "a4c7deca7542dd40"
+  },
+  {
+   "g_update": 152,
+   "native_intel_avx512": "e8df8465435e45c1",
+   "emulated_haswell_avx2": "e8df8465435e45c1"
+  },
+  {
+   "g_update": 153,
+   "native_intel_avx512": "4b062780183d1f95",
+   "emulated_haswell_avx2": "4b062780183d1f95"
+  },
+  {
+   "g_update": 154,
+   "native_intel_avx512": "ab3a5beb5349d75c",
+   "emulated_haswell_avx2": "ab3a5beb5349d75c"
+  },
+  {
+   "g_update": 155,
+   "native_intel_avx512": "614d3265feab9fe0",
+   "emulated_haswell_avx2": "614d3265feab9fe0"
+  },
+  {
+   "g_update": 156,
+   "native_intel_avx512": "81bf0ef38ec1bacc",
+   "emulated_haswell_avx2": "81bf0ef38ec1bacc"
+  },
+  {
+   "g_update": 157,
+   "native_intel_avx512": "7022b0f7c93c26bb",
+   "emulated_haswell_avx2": "7022b0f7c93c26bb"
+  },
+  {
+   "g_update": 158,
+   "native_intel_avx512": "10fcd90270e6f455",
+   "emulated_haswell_avx2": "10fcd90270e6f455"
+  },
+  {
+   "g_update": 159,
+   "native_intel_avx512": "ac280d4e2b194de9",
+   "emulated_haswell_avx2": "ac280d4e2b194de9"
+  },
+  {
+   "g_update": 160,
+   "native_intel_avx512": "1c28ae13a7f66d81",
+   "emulated_haswell_avx2": "1c28ae13a7f66d81"
+  },
+  {
+   "g_update": 161,
+   "native_intel_avx512": "cfe3ccf202b69846",
+   "emulated_haswell_avx2": "cfe3ccf202b69846"
+  },
+  {
+   "g_update": 162,
+   "native_intel_avx512": "7572a3b3cbe3ac6b",
+   "emulated_haswell_avx2": "7572a3b3cbe3ac6b"
+  },
+  {
+   "g_update": 163,
+   "native_intel_avx512": "ff2f56b8024ab728",
+   "emulated_haswell_avx2": "ff2f56b8024ab728"
+  },
+  {
+   "g_update": 164,
+   "native_intel_avx512": "b2a3ea73f12d5a4e",
+   "emulated_haswell_avx2": "b2a3ea73f12d5a4e"
+  },
+  {
+   "g_update": 165,
+   "native_intel_avx512": "7404cfcff57e8a87",
+   "emulated_haswell_avx2": "7404cfcff57e8a87"
+  },
+  {
+   "g_update": 166,
+   "native_intel_avx512": "07bdf9f0def1f653",
+   "emulated_haswell_avx2": "07bdf9f0def1f653"
+  },
+  {
+   "g_update": 167,
+   "native_intel_avx512": "f4f2020fa8496488",
+   "emulated_haswell_avx2": "f4f2020fa8496488"
+  },
+  {
+   "g_update": 168,
+   "native_intel_avx512": "65204f803e4b4e7c",
+   "emulated_haswell_avx2": "65204f803e4b4e7c"
+  },
+  {
+   "g_update": 169,
+   "native_intel_avx512": "87b11d401b4948e5",
+   "emulated_haswell_avx2": "87b11d401b4948e5"
+  },
+  {
+   "g_update": 170,
+   "native_intel_avx512": "9f35b5413f6bb4f1",
+   "emulated_haswell_avx2": "9f35b5413f6bb4f1"
+  },
+  {
+   "g_update": 171,
+   "native_intel_avx512": "283c9438c473f5e1",
+   "emulated_haswell_avx2": "283c9438c473f5e1"
+  },
+  {
+   "g_update": 172,
+   "native_intel_avx512": "dec95219759998ad",
+   "emulated_haswell_avx2": "dec95219759998ad"
+  },
+  {
+   "g_update": 173,
+   "native_intel_avx512": "3789dd8206d76831",
+   "emulated_haswell_avx2": "3789dd8206d76831"
+  },
+  {
+   "g_update": 174,
+   "native_intel_avx512": "4eacddf813766a79",
+   "emulated_haswell_avx2": "4eacddf813766a79"
+  },
+  {
+   "g_update": 175,
+   "native_intel_avx512": "8d2a526c72fae1d7",
+   "emulated_haswell_avx2": "8d2a526c72fae1d7"
+  },
+  {
+   "g_update": 176,
+   "native_intel_avx512": "f34cb2b326fc1d3d",
+   "emulated_haswell_avx2": "f34cb2b326fc1d3d"
+  },
+  {
+   "g_update": 177,
+   "native_intel_avx512": "b86e82848bf914f4",
+   "emulated_haswell_avx2": "b86e82848bf914f4"
+  },
+  {
+   "g_update": 178,
+   "native_intel_avx512": "e4c9448f376f177a",
+   "emulated_haswell_avx2": "e4c9448f376f177a"
+  },
+  {
+   "g_update": 179,
+   "native_intel_avx512": "ff374b852ba3e832",
+   "emulated_haswell_avx2": "ff374b852ba3e832"
+  },
+  {
+   "g_update": 180,
+   "native_intel_avx512": "db7ba65e6a8f19ca",
+   "emulated_haswell_avx2": "db7ba65e6a8f19ca"
+  },
+  {
+   "g_update": 181,
+   "native_intel_avx512": "0381328234f7a336",
+   "emulated_haswell_avx2": "0381328234f7a336"
+  },
+  {
+   "g_update": 182,
+   "native_intel_avx512": "f84a03c5f4c7f7f3",
+   "emulated_haswell_avx2": "f84a03c5f4c7f7f3"
+  },
+  {
+   "g_update": 183,
+   "native_intel_avx512": "77abe5a995240cc4",
+   "emulated_haswell_avx2": "77abe5a995240cc4"
+  },
+  {
+   "g_update": 184,
+   "native_intel_avx512": "aea3f9b66e8f46b5",
+   "emulated_haswell_avx2": "aea3f9b66e8f46b5"
+  },
+  {
+   "g_update": 185,
+   "native_intel_avx512": "273747697e3f1020",
+   "emulated_haswell_avx2": "273747697e3f1020"
+  },
+  {
+   "g_update": 186,
+   "native_intel_avx512": "c20c3a2e2011a90e",
+   "emulated_haswell_avx2": "c20c3a2e2011a90e"
+  },
+  {
+   "g_update": 187,
+   "native_intel_avx512": "2d1e2e807bfd485c",
+   "emulated_haswell_avx2": "2d1e2e807bfd485c"
+  },
+  {
+   "g_update": 188,
+   "native_intel_avx512": "17ebf799f951389d",
+   "emulated_haswell_avx2": "17ebf799f951389d"
+  },
+  {
+   "g_update": 189,
+   "native_intel_avx512": "475fcd8accbf3c13",
+   "emulated_haswell_avx2": "475fcd8accbf3c13"
+  },
+  {
+   "g_update": 190,
+   "native_intel_avx512": "9cd4fae8a209cf26",
+   "emulated_haswell_avx2": "9cd4fae8a209cf26"
+  },
+  {
+   "g_update": 191,
+   "native_intel_avx512": "9c489bf20b391f9b",
+   "emulated_haswell_avx2": "9c489bf20b391f9b"
+  },
+  {
+   "g_update": 192,
+   "native_intel_avx512": "839d712279665ed2",
+   "emulated_haswell_avx2": "839d712279665ed2"
+  },
+  {
+   "g_update": 193,
+   "native_intel_avx512": "5e48ca78290d60b8",
+   "emulated_haswell_avx2": "5e48ca78290d60b8"
+  },
+  {
+   "g_update": 194,
+   "native_intel_avx512": "e537fcb3479e44ee",
+   "emulated_haswell_avx2": "e537fcb3479e44ee"
+  },
+  {
+   "g_update": 195,
+   "native_intel_avx512": "661198a7d2a1e616",
+   "emulated_haswell_avx2": "661198a7d2a1e616"
+  },
+  {
+   "g_update": 196,
+   "native_intel_avx512": "27142a7dab75554a",
+   "emulated_haswell_avx2": "27142a7dab75554a"
+  },
+  {
+   "g_update": 197,
+   "native_intel_avx512": "76ab1328fad06213",
+   "emulated_haswell_avx2": "76ab1328fad06213"
+  },
+  {
+   "g_update": 198,
+   "native_intel_avx512": "8b979724f4096fbe",
+   "emulated_haswell_avx2": "8b979724f4096fbe"
+  },
+  {
+   "g_update": 199,
+   "native_intel_avx512": "5855a30e177f9a4e",
+   "emulated_haswell_avx2": "5855a30e177f9a4e"
+  },
+  {
+   "g_update": 200,
+   "native_intel_avx512": "cd22dcfacbb2b555",
+   "emulated_haswell_avx2": "cd22dcfacbb2b555"
+  },
+  {
+   "g_update": 201,
+   "native_intel_avx512": "4ae4447eca1ad69c",
+   "emulated_haswell_avx2": "4ae4447eca1ad69c"
+  },
+  {
+   "g_update": 202,
+   "native_intel_avx512": "3c272f42b0a28dfa",
+   "emulated_haswell_avx2": "3c272f42b0a28dfa"
+  },
+  {
+   "g_update": 203,
+   "native_intel_avx512": "623185cabe6fcc21",
+   "emulated_haswell_avx2": "623185cabe6fcc21"
+  },
+  {
+   "g_update": 204,
+   "native_intel_avx512": "89113bb6a2faf17c",
+   "emulated_haswell_avx2": "89113bb6a2faf17c"
+  },
+  {
+   "g_update": 205,
+   "native_intel_avx512": "638bc1a7c2ba20cd",
+   "emulated_haswell_avx2": "638bc1a7c2ba20cd"
+  },
+  {
+   "g_update": 206,
+   "native_intel_avx512": "777241c9cfc49df4",
+   "emulated_haswell_avx2": "777241c9cfc49df4"
+  },
+  {
+   "g_update": 207,
+   "native_intel_avx512": "ed4a171c6aa8e624",
+   "emulated_haswell_avx2": "ed4a171c6aa8e624"
+  },
+  {
+   "g_update": 208,
+   "native_intel_avx512": "696df1d39fdbc866",
+   "emulated_haswell_avx2": "696df1d39fdbc866"
+  },
+  {
+   "g_update": 209,
+   "native_intel_avx512": "20feec25f1d7151e",
+   "emulated_haswell_avx2": "20feec25f1d7151e"
+  },
+  {
+   "g_update": 210,
+   "native_intel_avx512": "e6cb45397bb8b5c5",
+   "emulated_haswell_avx2": "e6cb45397bb8b5c5"
+  },
+  {
+   "g_update": 211,
+   "native_intel_avx512": "800ab3d7ad26ea1a",
+   "emulated_haswell_avx2": "800ab3d7ad26ea1a"
+  },
+  {
+   "g_update": 212,
+   "native_intel_avx512": "bb919b16b1a35497",
+   "emulated_haswell_avx2": "bb919b16b1a35497"
+  },
+  {
+   "g_update": 213,
+   "native_intel_avx512": "57029af607df5b68",
+   "emulated_haswell_avx2": "57029af607df5b68"
+  },
+  {
+   "g_update": 214,
+   "native_intel_avx512": "00921ed7b7d53ddd",
+   "emulated_haswell_avx2": "00921ed7b7d53ddd"
+  },
+  {
+   "g_update": 215,
+   "native_intel_avx512": "222badd0153d5d23",
+   "emulated_haswell_avx2": "222badd0153d5d23"
+  },
+  {
+   "g_update": 216,
+   "native_intel_avx512": "97398fc219ad7b62",
+   "emulated_haswell_avx2": "97398fc219ad7b62"
+  },
+  {
+   "g_update": 217,
+   "native_intel_avx512": "2c91bcc2f293af8b",
+   "emulated_haswell_avx2": "2c91bcc2f293af8b"
+  },
+  {
+   "g_update": 218,
+   "native_intel_avx512": "4f77dec9031679aa",
+   "emulated_haswell_avx2": "4f77dec9031679aa"
+  },
+  {
+   "g_update": 219,
+   "native_intel_avx512": "46695d425f2bdb1f",
+   "emulated_haswell_avx2": "46695d425f2bdb1f"
+  },
+  {
+   "g_update": 220,
+   "native_intel_avx512": "d444c54202b89ec5",
+   "emulated_haswell_avx2": "d444c54202b89ec5"
+  },
+  {
+   "g_update": 221,
+   "native_intel_avx512": "21fdbf5a8dd59628",
+   "emulated_haswell_avx2": "21fdbf5a8dd59628"
+  },
+  {
+   "g_update": 222,
+   "native_intel_avx512": "7adb845cc91f7509",
+   "emulated_haswell_avx2": "7adb845cc91f7509"
+  },
+  {
+   "g_update": 223,
+   "native_intel_avx512": "2f49f35316611d39",
+   "emulated_haswell_avx2": "2f49f35316611d39"
+  },
+  {
+   "g_update": 224,
+   "native_intel_avx512": "379d5562c32c9a1c",
+   "emulated_haswell_avx2": "379d5562c32c9a1c"
+  },
+  {
+   "g_update": 225,
+   "native_intel_avx512": "19dea119b098f960",
+   "emulated_haswell_avx2": "19dea119b098f960"
+  },
+  {
+   "g_update": 226,
+   "native_intel_avx512": "e3888428cf231d4b",
+   "emulated_haswell_avx2": "e3888428cf231d4b"
+  },
+  {
+   "g_update": 227,
+   "native_intel_avx512": "ad9935749292e737",
+   "emulated_haswell_avx2": "ad9935749292e737"
+  },
+  {
+   "g_update": 228,
+   "native_intel_avx512": "9f6c3a54a3e0cd26",
+   "emulated_haswell_avx2": "9f6c3a54a3e0cd26"
+  },
+  {
+   "g_update": 229,
+   "native_intel_avx512": "370994eb366337b9",
+   "emulated_haswell_avx2": "370994eb366337b9"
+  },
+  {
+   "g_update": 230,
+   "native_intel_avx512": "c19e07f048008d9a",
+   "emulated_haswell_avx2": "c19e07f048008d9a"
+  },
+  {
+   "g_update": 231,
+   "native_intel_avx512": "de72278ab10ba47b",
+   "emulated_haswell_avx2": "de72278ab10ba47b"
+  },
+  {
+   "g_update": 232,
+   "native_intel_avx512": "777e23c2983d67bf",
+   "emulated_haswell_avx2": "777e23c2983d67bf"
+  },
+  {
+   "g_update": 233,
+   "native_intel_avx512": "a13a4a23a01c68a6",
+   "emulated_haswell_avx2": "a13a4a23a01c68a6"
+  },
+  {
+   "g_update": 234,
+   "native_intel_avx512": "b35b5dd9475f6a37",
+   "emulated_haswell_avx2": "b35b5dd9475f6a37"
+  },
+  {
+   "g_update": 235,
+   "native_intel_avx512": "f8ebd874097d3b0f",
+   "emulated_haswell_avx2": "f8ebd874097d3b0f"
+  },
+  {
+   "g_update": 236,
+   "native_intel_avx512": "becf9cce55c6846c",
+   "emulated_haswell_avx2": "becf9cce55c6846c"
+  },
+  {
+   "g_update": 237,
+   "native_intel_avx512": "de1fbd2e4e413fa3",
+   "emulated_haswell_avx2": "de1fbd2e4e413fa3"
+  },
+  {
+   "g_update": 238,
+   "native_intel_avx512": "9fb862959d3ae55a",
+   "emulated_haswell_avx2": "9fb862959d3ae55a"
+  },
+  {
+   "g_update": 239,
+   "native_intel_avx512": "f5c8e22d87b39fc3",
+   "emulated_haswell_avx2": "f5c8e22d87b39fc3"
+  },
+  {
+   "g_update": 240,
+   "native_intel_avx512": "4f713a6f86697e4a",
+   "emulated_haswell_avx2": "4f713a6f86697e4a"
+  },
+  {
+   "g_update": 241,
+   "native_intel_avx512": "8645a398a7370241",
+   "emulated_haswell_avx2": "8645a398a7370241"
+  },
+  {
+   "g_update": 242,
+   "native_intel_avx512": "97c7f0bf8487d42e",
+   "emulated_haswell_avx2": "97c7f0bf8487d42e"
+  },
+  {
+   "g_update": 243,
+   "native_intel_avx512": "b5e72dcc56f83649",
+   "emulated_haswell_avx2": "b5e72dcc56f83649"
+  },
+  {
+   "g_update": 244,
+   "native_intel_avx512": "4c088b700b851e72",
+   "emulated_haswell_avx2": "4c088b700b851e72"
+  },
+  {
+   "g_update": 245,
+   "native_intel_avx512": "59300d5153b37fec",
+   "emulated_haswell_avx2": "59300d5153b37fec"
+  },
+  {
+   "g_update": 246,
+   "native_intel_avx512": "d1baf7bfa9bc75ff",
+   "emulated_haswell_avx2": "d1baf7bfa9bc75ff"
+  },
+  {
+   "g_update": 247,
+   "native_intel_avx512": "1982b9194e7b811e",
+   "emulated_haswell_avx2": "1982b9194e7b811e"
+  },
+  {
+   "g_update": 248,
+   "native_intel_avx512": "f4f6588762bced01",
+   "emulated_haswell_avx2": "f4f6588762bced01"
+  },
+  {
+   "g_update": 249,
+   "native_intel_avx512": "d9f9af376fa057f2",
+   "emulated_haswell_avx2": "d9f9af376fa057f2"
+  },
+  {
+   "g_update": 250,
+   "native_intel_avx512": "81d2f4b74432a2d2",
+   "emulated_haswell_avx2": "81d2f4b74432a2d2"
+  },
+  {
+   "g_update": 251,
+   "native_intel_avx512": "2c9d809f4658509f",
+   "emulated_haswell_avx2": "2c9d809f4658509f"
+  },
+  {
+   "g_update": 252,
+   "native_intel_avx512": "3f0c1ca8c1a9bf62",
+   "emulated_haswell_avx2": "3f0c1ca8c1a9bf62"
+  },
+  {
+   "g_update": 253,
+   "native_intel_avx512": "a67f193af8d58534",
+   "emulated_haswell_avx2": "a67f193af8d58534"
+  },
+  {
+   "g_update": 254,
+   "native_intel_avx512": "6bb198fce42bb504",
+   "emulated_haswell_avx2": "6bb198fce42bb504"
+  },
+  {
+   "g_update": 255,
+   "native_intel_avx512": "9415a174004cd2f7",
+   "emulated_haswell_avx2": "9415a174004cd2f7"
+  },
+  {
+   "g_update": 256,
+   "native_intel_avx512": "55f23d4111f71b0e",
+   "emulated_haswell_avx2": "55f23d4111f71b0e"
+  },
+  {
+   "g_update": 257,
+   "native_intel_avx512": "852aec7a34eca7e9",
+   "emulated_haswell_avx2": "852aec7a34eca7e9"
+  },
+  {
+   "g_update": 258,
+   "native_intel_avx512": "5bb5123502184e53",
+   "emulated_haswell_avx2": "5bb5123502184e53"
+  },
+  {
+   "g_update": 259,
+   "native_intel_avx512": "48106bcb2ad73400",
+   "emulated_haswell_avx2": "48106bcb2ad73400"
+  },
+  {
+   "g_update": 260,
+   "native_intel_avx512": "4f6449affbf9df8d",
+   "emulated_haswell_avx2": "4f6449affbf9df8d"
+  },
+  {
+   "g_update": 261,
+   "native_intel_avx512": "96211d458b7a3266",
+   "emulated_haswell_avx2": "96211d458b7a3266"
+  },
+  {
+   "g_update": 262,
+   "native_intel_avx512": "850234e63b2b8ffe",
+   "emulated_haswell_avx2": "850234e63b2b8ffe"
+  },
+  {
+   "g_update": 263,
+   "native_intel_avx512": "cfeb0cee01db21e8",
+   "emulated_haswell_avx2": "cfeb0cee01db21e8"
+  },
+  {
+   "g_update": 264,
+   "native_intel_avx512": "9b1ae5483e8d17c4",
+   "emulated_haswell_avx2": "9b1ae5483e8d17c4"
+  },
+  {
+   "g_update": 265,
+   "native_intel_avx512": "66fca5cba6e90959",
+   "emulated_haswell_avx2": "66fca5cba6e90959"
+  },
+  {
+   "g_update": 266,
+   "native_intel_avx512": "bff2a91465ac8f8e",
+   "emulated_haswell_avx2": "bff2a91465ac8f8e"
+  },
+  {
+   "g_update": 267,
+   "native_intel_avx512": "e40cc3a7862d8c0c",
+   "emulated_haswell_avx2": "e40cc3a7862d8c0c"
+  },
+  {
+   "g_update": 268,
+   "native_intel_avx512": "14a3e160458ac546",
+   "emulated_haswell_avx2": "14a3e160458ac546"
+  },
+  {
+   "g_update": 269,
+   "native_intel_avx512": "5093212025aa057a",
+   "emulated_haswell_avx2": "5093212025aa057a"
+  },
+  {
+   "g_update": 270,
+   "native_intel_avx512": "97eb3247902ce1d8",
+   "emulated_haswell_avx2": "97eb3247902ce1d8"
+  },
+  {
+   "g_update": 271,
+   "native_intel_avx512": "1e017b4fdd06f091",
+   "emulated_haswell_avx2": "1e017b4fdd06f091"
+  },
+  {
+   "g_update": 272,
+   "native_intel_avx512": "e70744d2b793ff4b",
+   "emulated_haswell_avx2": "e70744d2b793ff4b"
+  },
+  {
+   "g_update": 273,
+   "native_intel_avx512": "3cd41d9a9d593fb5",
+   "emulated_haswell_avx2": "3cd41d9a9d593fb5"
+  },
+  {
+   "g_update": 274,
+   "native_intel_avx512": "368fdec69ec2ab23",
+   "emulated_haswell_avx2": "368fdec69ec2ab23"
+  },
+  {
+   "g_update": 275,
+   "native_intel_avx512": "4b388cbc5ddfd1b4",
+   "emulated_haswell_avx2": "4b388cbc5ddfd1b4"
+  },
+  {
+   "g_update": 276,
+   "native_intel_avx512": "8cbc327e598cc35f",
+   "emulated_haswell_avx2": "8cbc327e598cc35f"
+  },
+  {
+   "g_update": 277,
+   "native_intel_avx512": "d5481e01f43cf4c2",
+   "emulated_haswell_avx2": "d5481e01f43cf4c2"
+  },
+  {
+   "g_update": 278,
+   "native_intel_avx512": "e5c6af1739be1d9e",
+   "emulated_haswell_avx2": "e5c6af1739be1d9e"
+  },
+  {
+   "g_update": 279,
+   "native_intel_avx512": "1f833fe1b2a2df19",
+   "emulated_haswell_avx2": "1f833fe1b2a2df19"
+  },
+  {
+   "g_update": 280,
+   "native_intel_avx512": "c5a4d0df1bad8657",
+   "emulated_haswell_avx2": "c5a4d0df1bad8657"
+  },
+  {
+   "g_update": 281,
+   "native_intel_avx512": "1676d67b7344fcb2",
+   "emulated_haswell_avx2": "1676d67b7344fcb2"
+  },
+  {
+   "g_update": 282,
+   "native_intel_avx512": "1dba5140ff117068",
+   "emulated_haswell_avx2": "1dba5140ff117068"
+  },
+  {
+   "g_update": 283,
+   "native_intel_avx512": "8c45129d8c296ebb",
+   "emulated_haswell_avx2": "8c45129d8c296ebb"
+  },
+  {
+   "g_update": 284,
+   "native_intel_avx512": "5d5d0d6ccd6bac31",
+   "emulated_haswell_avx2": "5d5d0d6ccd6bac31"
+  },
+  {
+   "g_update": 285,
+   "native_intel_avx512": "803e4aecbba410f8",
+   "emulated_haswell_avx2": "803e4aecbba410f8"
+  },
+  {
+   "g_update": 286,
+   "native_intel_avx512": "a22f6b1ffddda021",
+   "emulated_haswell_avx2": "a22f6b1ffddda021"
+  },
+  {
+   "g_update": 287,
+   "native_intel_avx512": "d6e8a9195b68fcf5",
+   "emulated_haswell_avx2": "d6e8a9195b68fcf5"
+  },
+  {
+   "g_update": 288,
+   "native_intel_avx512": "983e0f67c4c9e363",
+   "emulated_haswell_avx2": "983e0f67c4c9e363"
+  },
+  {
+   "g_update": 289,
+   "native_intel_avx512": "2b583ad103342e89",
+   "emulated_haswell_avx2": "2b583ad103342e89"
+  },
+  {
+   "g_update": 290,
+   "native_intel_avx512": "948e5c1651f53c87",
+   "emulated_haswell_avx2": "948e5c1651f53c87"
+  },
+  {
+   "g_update": 291,
+   "native_intel_avx512": "aa7e9982cefb43ba",
+   "emulated_haswell_avx2": "aa7e9982cefb43ba"
+  },
+  {
+   "g_update": 292,
+   "native_intel_avx512": "90657426f541e41b",
+   "emulated_haswell_avx2": "90657426f541e41b"
+  },
+  {
+   "g_update": 293,
+   "native_intel_avx512": "44492f8894fd94ac",
+   "emulated_haswell_avx2": "44492f8894fd94ac"
+  },
+  {
+   "g_update": 294,
+   "native_intel_avx512": "2f45d970d69c578d",
+   "emulated_haswell_avx2": "2f45d970d69c578d"
+  },
+  {
+   "g_update": 295,
+   "native_intel_avx512": "a60ed3644289feff",
+   "emulated_haswell_avx2": "a60ed3644289feff"
+  },
+  {
+   "g_update": 296,
+   "native_intel_avx512": "c909ccab5ad31d68",
+   "emulated_haswell_avx2": "c909ccab5ad31d68"
+  },
+  {
+   "g_update": 297,
+   "native_intel_avx512": "b75ec2eb835eb618",
+   "emulated_haswell_avx2": "b75ec2eb835eb618"
+  },
+  {
+   "g_update": 298,
+   "native_intel_avx512": "f3a297181b30c03b",
+   "emulated_haswell_avx2": "f3a297181b30c03b"
+  },
+  {
+   "g_update": 299,
+   "native_intel_avx512": "14d36426ff12e3f7",
+   "emulated_haswell_avx2": "14d36426ff12e3f7"
+  },
+  {
+   "g_update": 300,
+   "native_intel_avx512": "1a93c77885162f16",
+   "emulated_haswell_avx2": "1a93c77885162f16"
+  }
+ ]
+}

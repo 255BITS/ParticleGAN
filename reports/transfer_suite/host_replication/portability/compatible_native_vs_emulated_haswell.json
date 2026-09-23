@@ -1,0 +1,155 @@
+{
+ "a": "native MKL_CBWR=COMPATIBLE (AVX512)",
+ "b": "emulated Haswell-v4 MKL_CBWR=COMPATIBLE (qemu-user)",
+ "capabilities": [
+  "AVX512",
+  "AVX2"
+ ],
+ "sizes": {
+  "g": 4610,
+  "p": 1024,
+  "d": 10467
+ },
+ "step1_outputs_and_first_update": {
+  "g.net.0": {
+   "shape": [
+    128,
+    64
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "g.net.1": {
+   "shape": [
+    128,
+    64
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "g.net.2": {
+   "shape": [
+    128,
+    64
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "g.net.3": {
+   "shape": [
+    128,
+    64
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "g.net.4": {
+   "shape": [
+    128,
+    2
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "g.net": {
+   "shape": [
+    128,
+    2
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "d.main.net.0": {
+   "shape": [
+    128,
+    96
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "d.main.net.1": {
+   "shape": [
+    128,
+    96
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "d.main.net.2": {
+   "shape": [
+    128,
+    96
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "d.main.net.3": {
+   "shape": [
+    128,
+    96
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "d.main.net.4": {
+   "shape": [
+    128,
+    1
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "d.main.net": {
+   "shape": [
+    128,
+    1
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "d.main": {
+   "shape": [
+    128
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "d.skip": {
+   "shape": [
+    128,
+    1
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "d_grad_before_first_update": {
+   "shape": [
+    10467
+   ],
+   "max_abs_difference": 0.0,
+   "differing_elements": 0
+  },
+  "d_after_first_update": {
+   "shape": [
+    10467
+   ],
+   "max_abs_difference": 1.4901161193847656e-08,
+   "differing_elements": 104
+  }
+ },
+ "first_g_update_with_parameter_difference": 1,
+ "relative_parameter_difference": [
+  {
+   "g_update": 1,
+   "generator": 1.4583879181017397e-08,
+   "particles": 5.338955615080833e-09,
+   "discriminator": 4.0705076455033626e-09
+  },
+  {
+   "g_update": 2,
+   "generator": 1.6019708473915324e-08,
+   "particles": 1.2294754893723514e-08,
+   "discriminator": 9.579199813200641e-09
+  }
+ ]
+}

@@ -1,0 +1,692 @@
+{
+ "numerical_paths": [
+  {
+   "label": "native default",
+   "emulated_cpu": null,
+   "environment": {},
+   "capability": "AVX512",
+   "fingerprint": "a6d2934c35a8e183",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 3.6954879760742188e-06,
+   "sqrt_not_correctly_rounded": 73,
+   "sqrt_digest": "7aabc06c9760",
+   "adam_step_digest": "73c1cdf7f5db"
+  },
+  {
+   "label": "native ATen AVX2",
+   "emulated_cpu": null,
+   "environment": {
+    "ATEN_CPU_CAPABILITY": "avx2"
+   },
+   "capability": "AVX2",
+   "fingerprint": "a6d2934c35a8e183",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 3.6954879760742188e-06,
+   "sqrt_not_correctly_rounded": 73,
+   "sqrt_digest": "7aabc06c9760",
+   "adam_step_digest": "73c1cdf7f5db"
+  },
+  {
+   "label": "native ATen scalar",
+   "emulated_cpu": null,
+   "environment": {
+    "ATEN_CPU_CAPABILITY": "default"
+   },
+   "capability": "DEFAULT",
+   "fingerprint": "c2ba7fd042b8fba6",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 6.854534149169922e-07,
+   "sqrt_not_correctly_rounded": 80,
+   "sqrt_digest": "50ec0aa75e4b",
+   "adam_step_digest": "b1fb8bfd26c8"
+  },
+  {
+   "label": "native MKL instructions AVX2",
+   "emulated_cpu": null,
+   "environment": {
+    "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+   },
+   "capability": "AVX512",
+   "fingerprint": "2a5fafcb6626038c",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 1.9371509552001953e-06,
+   "sqrt_not_correctly_rounded": 0,
+   "sqrt_digest": "13c02569fc80",
+   "adam_step_digest": "73c1cdf7f5db"
+  },
+  {
+   "label": "native MKL CNR AVX2",
+   "emulated_cpu": null,
+   "environment": {
+    "MKL_CBWR": "AVX2"
+   },
+   "capability": "AVX512",
+   "fingerprint": "2a5fafcb6626038c",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 1.9371509552001953e-06,
+   "sqrt_not_correctly_rounded": 0,
+   "sqrt_digest": "13c02569fc80",
+   "adam_step_digest": "73c1cdf7f5db"
+  },
+  {
+   "label": "native MKL CNR AVX",
+   "emulated_cpu": null,
+   "environment": {
+    "MKL_CBWR": "AVX"
+   },
+   "capability": "AVX512",
+   "fingerprint": "f2f40c3f35b37ef6",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 4.023313522338867e-06,
+   "sqrt_not_correctly_rounded": 1735,
+   "sqrt_digest": "033dfd3373b9",
+   "adam_step_digest": "bcbe822f24eb"
+  },
+  {
+   "label": "native MKL CNR COMPATIBLE",
+   "emulated_cpu": null,
+   "environment": {
+    "MKL_CBWR": "COMPATIBLE"
+   },
+   "capability": "AVX512",
+   "fingerprint": "6f99c137c7a399d1",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 2.3245811462402344e-06,
+   "sqrt_not_correctly_rounded": 1735,
+   "sqrt_digest": "033dfd3373b9",
+   "adam_step_digest": "bcbe822f24eb"
+  },
+  {
+   "label": "native all AVX2 pins",
+   "emulated_cpu": null,
+   "environment": {
+    "ATEN_CPU_CAPABILITY": "avx2",
+    "MKL_CBWR": "AVX2",
+    "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+    "ONEDNN_MAX_CPU_ISA": "AVX2"
+   },
+   "capability": "AVX2",
+   "fingerprint": "2a5fafcb6626038c",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 1.9371509552001953e-06,
+   "sqrt_not_correctly_rounded": 0,
+   "sqrt_digest": "13c02569fc80",
+   "adam_step_digest": "73c1cdf7f5db"
+  },
+  {
+   "label": "emulated Haswell-v4",
+   "emulated_cpu": "Haswell-v4",
+   "environment": {},
+   "capability": "AVX2",
+   "fingerprint": "2a5fafcb6626038c",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 1.9371509552001953e-06,
+   "sqrt_not_correctly_rounded": 0,
+   "sqrt_digest": "13c02569fc80",
+   "adam_step_digest": "73c1cdf7f5db"
+  },
+  {
+   "label": "emulated Skylake-Client-v4",
+   "emulated_cpu": "Skylake-Client-v4",
+   "environment": {},
+   "capability": "AVX2",
+   "fingerprint": "2a5fafcb6626038c",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 1.9371509552001953e-06,
+   "sqrt_not_correctly_rounded": 0,
+   "sqrt_digest": "13c02569fc80",
+   "adam_step_digest": "73c1cdf7f5db"
+  },
+  {
+   "label": "emulated EPYC-Rome-v4",
+   "emulated_cpu": "EPYC-Rome-v4",
+   "environment": {},
+   "capability": "AVX2",
+   "fingerprint": "ded0a0f1b26004a2",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 1.4603137969970703e-06,
+   "sqrt_not_correctly_rounded": 1581,
+   "sqrt_digest": "285dcde8b93a",
+   "adam_step_digest": "f6c51898bf02"
+  },
+  {
+   "label": "emulated EPYC-Milan-v2",
+   "emulated_cpu": "EPYC-Milan-v2",
+   "environment": {},
+   "capability": "AVX2",
+   "fingerprint": "ded0a0f1b26004a2",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 1.4603137969970703e-06,
+   "sqrt_not_correctly_rounded": 1581,
+   "sqrt_digest": "285dcde8b93a",
+   "adam_step_digest": "f6c51898bf02"
+  },
+  {
+   "label": "emulated Haswell-v4 MKL CNR AVX2",
+   "emulated_cpu": "Haswell-v4",
+   "environment": {
+    "MKL_CBWR": "AVX2"
+   },
+   "capability": "AVX2",
+   "fingerprint": "2a5fafcb6626038c",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 1.9371509552001953e-06,
+   "sqrt_not_correctly_rounded": 0,
+   "sqrt_digest": "13c02569fc80",
+   "adam_step_digest": "73c1cdf7f5db"
+  },
+  {
+   "label": "emulated Haswell-v4 MKL CNR COMPATIBLE",
+   "emulated_cpu": "Haswell-v4",
+   "environment": {
+    "MKL_CBWR": "COMPATIBLE"
+   },
+   "capability": "AVX2",
+   "fingerprint": "1e78d5a02996b3e4",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 4.470348358154297e-06,
+   "sqrt_not_correctly_rounded": 1581,
+   "sqrt_digest": "285dcde8b93a",
+   "adam_step_digest": "f6c51898bf02"
+  },
+  {
+   "label": "emulated EPYC-Rome-v4 MKL CNR AVX2",
+   "emulated_cpu": "EPYC-Rome-v4",
+   "environment": {
+    "MKL_CBWR": "AVX2"
+   },
+   "capability": "AVX2",
+   "fingerprint": "717ea16909ad9682",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 3.2782554626464844e-06,
+   "sqrt_not_correctly_rounded": 1581,
+   "sqrt_digest": "285dcde8b93a",
+   "adam_step_digest": "f6c51898bf02"
+  },
+  {
+   "label": "emulated EPYC-Rome-v4 MKL CNR COMPATIBLE",
+   "emulated_cpu": "EPYC-Rome-v4",
+   "environment": {
+    "MKL_CBWR": "COMPATIBLE"
+   },
+   "capability": "AVX2",
+   "fingerprint": "1e78d5a02996b3e4",
+   "archive_fingerprint": "b2da3ce2c10fdc29",
+   "equals_archive": false,
+   "max_abs_vs_archive": 4.470348358154297e-06,
+   "sqrt_not_correctly_rounded": 1581,
+   "sqrt_digest": "285dcde8b93a",
+   "adam_step_digest": "f6c51898bf02"
+  }
+ ],
+ "fingerprint_classes": {
+  "a6d2934c35a8e183": [
+   "native default",
+   "native ATen AVX2"
+  ],
+  "c2ba7fd042b8fba6": [
+   "native ATen scalar"
+  ],
+  "2a5fafcb6626038c": [
+   "native MKL instructions AVX2",
+   "native MKL CNR AVX2",
+   "native all AVX2 pins",
+   "emulated Haswell-v4",
+   "emulated Skylake-Client-v4",
+   "emulated Haswell-v4 MKL CNR AVX2"
+  ],
+  "f2f40c3f35b37ef6": [
+   "native MKL CNR AVX"
+  ],
+  "6f99c137c7a399d1": [
+   "native MKL CNR COMPATIBLE"
+  ],
+  "ded0a0f1b26004a2": [
+   "emulated EPYC-Rome-v4",
+   "emulated EPYC-Milan-v2"
+  ],
+  "1e78d5a02996b3e4": [
+   "emulated Haswell-v4 MKL CNR COMPATIBLE",
+   "emulated EPYC-Rome-v4 MKL CNR COMPATIBLE"
+  ],
+  "717ea16909ad9682": [
+   "emulated EPYC-Rome-v4 MKL CNR AVX2"
+  ]
+ },
+ "archive_fingerprint": "b2da3ce2c10fdc29",
+ "default_vs_cnr_avx2": {
+  "a": "native default (AVX512)",
+  "b": "native MKL_CBWR=AVX2",
+  "capabilities": [
+   "AVX512",
+   "AVX512"
+  ],
+  "sizes": {
+   "g": 4610,
+   "p": 1024,
+   "d": 10467
+  },
+  "step1_outputs_and_first_update": {
+   "g.net.0": {
+    "shape": [
+     128,
+     64
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "g.net.1": {
+    "shape": [
+     128,
+     64
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "g.net.2": {
+    "shape": [
+     128,
+     64
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "g.net.3": {
+    "shape": [
+     128,
+     64
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "g.net.4": {
+    "shape": [
+     128,
+     2
+    ],
+    "max_abs_difference": 5.960464477539063e-08,
+    "differing_elements": 142
+   },
+   "g.net": {
+    "shape": [
+     128,
+     2
+    ],
+    "max_abs_difference": 5.960464477539063e-08,
+    "differing_elements": 142
+   },
+   "d.main.net.0": {
+    "shape": [
+     128,
+     96
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.main.net.1": {
+    "shape": [
+     128,
+     96
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.main.net.2": {
+    "shape": [
+     128,
+     96
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.main.net.3": {
+    "shape": [
+     128,
+     96
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.main.net.4": {
+    "shape": [
+     128,
+     1
+    ],
+    "max_abs_difference": 8.940696716308594e-08,
+    "differing_elements": 70
+   },
+   "d.main.net": {
+    "shape": [
+     128,
+     1
+    ],
+    "max_abs_difference": 8.940696716308594e-08,
+    "differing_elements": 70
+   },
+   "d.main": {
+    "shape": [
+     128
+    ],
+    "max_abs_difference": 8.940696716308594e-08,
+    "differing_elements": 70
+   },
+   "d.skip": {
+    "shape": [
+     128,
+     1
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d_grad_before_first_update": {
+    "shape": [
+     10467
+    ],
+    "max_abs_difference": 1.341104507446289e-07,
+    "differing_elements": 4468
+   },
+   "d_after_first_update": {
+    "shape": [
+     10467
+    ],
+    "max_abs_difference": 1.776963472366333e-06,
+    "differing_elements": 209
+   }
+  },
+  "first_g_update_with_parameter_difference": 1,
+  "relative_parameter_difference": [
+   {
+    "g_update": 1,
+    "generator": 2.23766985379283e-08,
+    "particles": 6.587482298161252e-09,
+    "discriminator": 2.155833738837227e-07
+   },
+   {
+    "g_update": 2,
+    "generator": 2.446492861945696e-08,
+    "particles": 1.3337943013205416e-08,
+    "discriminator": 2.1582087685443131e-07
+   },
+   {
+    "g_update": 5,
+    "generator": 2.980863957919193e-08,
+    "particles": 3.451610919986699e-08,
+    "discriminator": 2.1607258436919247e-07
+   },
+   {
+    "g_update": 10,
+    "generator": 4.3502188150936e-08,
+    "particles": 6.097910953810355e-08,
+    "discriminator": 2.189312242681131e-07
+   },
+   {
+    "g_update": 20,
+    "generator": 7.742388353196166e-08,
+    "particles": 1.2168281624577695e-07,
+    "discriminator": 2.6200090136375764e-07
+   },
+   {
+    "g_update": 50,
+    "generator": 1.972207761856846e-06,
+    "particles": 6.511222316652159e-06,
+    "discriminator": 6.233354636174239e-06
+   },
+   {
+    "g_update": 100,
+    "generator": 1.4945714160482913e-05,
+    "particles": 3.176974514987574e-05,
+    "discriminator": 1.5961834196679986e-05
+   },
+   {
+    "g_update": 150,
+    "generator": 0.000270854806405967,
+    "particles": 0.0006332631208665413,
+    "discriminator": 0.0001706194105112455
+   },
+   {
+    "g_update": 200,
+    "generator": 0.0023999297171292877,
+    "particles": 0.008346334891980462,
+    "discriminator": 0.0092231675313987
+   },
+   {
+    "g_update": 250,
+    "generator": 0.016852957437047587,
+    "particles": 0.02436707175568821,
+    "discriminator": 0.015758157321747616
+   },
+   {
+    "g_update": 300,
+    "generator": 0.035190076572771296,
+    "particles": 0.07948300113092992,
+    "discriminator": 0.06830990854389407
+   },
+   {
+    "g_update": 400,
+    "generator": 0.034667674863408035,
+    "particles": 0.0760578589403093,
+    "discriminator": 0.06610597704125516
+   },
+   {
+    "g_update": 600,
+    "generator": 0.057803200070306,
+    "particles": 0.10902297891910404,
+    "discriminator": 0.09446577404240611
+   },
+   {
+    "g_update": 800,
+    "generator": 0.056582266680691565,
+    "particles": 0.13552734278227146,
+    "discriminator": 0.11337148662315695
+   },
+   {
+    "g_update": 1000,
+    "generator": 0.07004409434861993,
+    "particles": 0.14854474197237344,
+    "discriminator": 0.1367042494968017
+   },
+   {
+    "g_update": 1200,
+    "generator": 0.06883828947163642,
+    "particles": 0.15601350005983286,
+    "discriminator": 0.1377217323851808
+   }
+  ]
+ },
+ "compatible_native_vs_emulated": {
+  "a": "native MKL_CBWR=COMPATIBLE (AVX512)",
+  "b": "emulated Haswell-v4 MKL_CBWR=COMPATIBLE (qemu-user)",
+  "capabilities": [
+   "AVX512",
+   "AVX2"
+  ],
+  "sizes": {
+   "g": 4610,
+   "p": 1024,
+   "d": 10467
+  },
+  "step1_outputs_and_first_update": {
+   "g.net.0": {
+    "shape": [
+     128,
+     64
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "g.net.1": {
+    "shape": [
+     128,
+     64
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "g.net.2": {
+    "shape": [
+     128,
+     64
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "g.net.3": {
+    "shape": [
+     128,
+     64
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "g.net.4": {
+    "shape": [
+     128,
+     2
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "g.net": {
+    "shape": [
+     128,
+     2
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.main.net.0": {
+    "shape": [
+     128,
+     96
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.main.net.1": {
+    "shape": [
+     128,
+     96
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.main.net.2": {
+    "shape": [
+     128,
+     96
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.main.net.3": {
+    "shape": [
+     128,
+     96
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.main.net.4": {
+    "shape": [
+     128,
+     1
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.main.net": {
+    "shape": [
+     128,
+     1
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.main": {
+    "shape": [
+     128
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d.skip": {
+    "shape": [
+     128,
+     1
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d_grad_before_first_update": {
+    "shape": [
+     10467
+    ],
+    "max_abs_difference": 0.0,
+    "differing_elements": 0
+   },
+   "d_after_first_update": {
+    "shape": [
+     10467
+    ],
+    "max_abs_difference": 1.4901161193847656e-08,
+    "differing_elements": 104
+   }
+  },
+  "first_g_update_with_parameter_difference": 1,
+  "relative_parameter_difference": [
+   {
+    "g_update": 1,
+    "generator": 1.4583879181017397e-08,
+    "particles": 5.338955615080833e-09,
+    "discriminator": 4.0705076455033626e-09
+   },
+   {
+    "g_update": 2,
+    "generator": 1.6019708473915324e-08,
+    "particles": 1.2294754893723514e-08,
+    "discriminator": 9.579199813200641e-09
+   }
+  ]
+ },
+ "cross_cpu_full_run_exact": true,
+ "cnr_avx2_rare_verdict": "FAIL",
+ "cnr_avx2_rare_passing_suffix": 0,
+ "scores": {
+  "default_path": {
+   "required": 8,
+   "practical": 8,
+   "trials": 39,
+   "total_trials": 46,
+   "unsupported": [
+    "mode_hold",
+    "vector_unequal_mass",
+    "img_bars4"
+   ]
+  },
+  "mkl_cnr_avx2_path": {
+   "required": 8,
+   "practical": 9,
+   "trials": 38,
+   "total_trials": 46,
+   "unsupported": [
+    "mode_hold",
+    "vector_unequal_mass"
+   ]
+  }
+ }
+}

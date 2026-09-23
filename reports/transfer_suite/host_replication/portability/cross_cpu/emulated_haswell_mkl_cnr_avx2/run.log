@@ -1,0 +1,3 @@
+command: MKL_CBWR=AVX2 qemu-x86_64 -cpu Haswell-v4 /usr/bin/python3 -u -m benchmarks.transfer_suite.run_linear_skip --tasks vector_unequal_mass --output DIR
+START vector_unequal_mass
+DONE vector_unequal_mass: FAIL; final passing checks=0; confirmed step=None

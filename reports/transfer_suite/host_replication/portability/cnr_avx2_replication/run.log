@@ -1,0 +1,48 @@
+PLAN 46 episodes
+DONE two_pole               original required host   archived=PASS replay=PASS suffix=7 bitwise=False diverge@4 fails=-
+DONE trajectory             original required host   archived=PASS replay=PASS suffix=20 bitwise=False diverge@34 fails=-
+DONE residual_student       original required host   archived=PASS replay=PASS suffix=19 bitwise=False diverge@17 fails=-
+DONE unipolar               original required host   archived=PASS replay=PASS suffix=18 bitwise=False diverge@17 fails=-
+DONE ae_gan_hold            original required host   archived=PASS replay=PASS suffix=19 bitwise=False diverge@21 fails=-
+DONE cover_leftover         original required host   archived=PASS replay=PASS suffix=13 bitwise=False diverge@34 fails=-
+DONE unused_token_hold      original required host   archived=PASS replay=PASS suffix=14 bitwise=False diverge@9 fails=-
+DONE mid_scale_identity     original required host   archived=PASS replay=PASS suffix=17 bitwise=False diverge@34 fails=-
+DONE mode_hold              original required host   archived=PASS replay=FAIL suffix=0 bitwise=False diverge@50 fails=modes,hq
+DONE vector_two_broad       original architecture    archived=PASS replay=PASS suffix=19 bitwise=False diverge@50 fails=-
+DONE vector_two_broad       d128_l3_f3               archived=PASS replay=PASS suffix=21 bitwise=False diverge@50 fails=-
+DONE vector_two_broad       d128_l3_f4               archived=PASS replay=PASS suffix=11 bitwise=False diverge@50 fails=-
+DONE vector_two_broad       d256_l3_f3               archived=PASS replay=PASS suffix=18 bitwise=False diverge@50 fails=-
+DONE vector_two_broad       axis_softplus5           archived=PASS replay=PASS suffix=17 bitwise=False diverge@50 fails=-
+DONE vector_two_broad       axis_tanh                archived=PASS replay=PASS suffix=17 bitwise=False diverge@50 fails=-
+DONE vector_two_broad       softplus10_d64_l2_f2     archived=PASS replay=PASS suffix=16 bitwise=False diverge@50 fails=-
+DONE vector_two_broad       softplus5_d128_l3_f2     archived=PASS replay=PASS suffix=24 bitwise=False diverge@50 fails=-
+DONE vector_two_broad       linear_skip_d96_beta5    archived=PASS replay=PASS suffix=17 bitwise=False diverge@50 fails=-
+DONE vector_unequal_mass    linear_skip_d96_beta5    archived=PASS replay=FAIL suffix=0 bitwise=False diverge@50 fails=component_min_eigen_ratio
+DONE vector_unequal_width   axis_softplus5           archived=PASS replay=PASS suffix=13 bitwise=False diverge@50 fails=-
+DONE vector_unequal_width   softplus10_d64_l2_f2     archived=PASS replay=FAIL suffix=4 bitwise=False diverge@50 fails=-
+DONE vector_anisotropic     original architecture    archived=PASS replay=PASS suffix=9 bitwise=False diverge@50 fails=-
+DONE vector_anisotropic     d128_l3_f3               archived=PASS replay=FAIL suffix=0 bitwise=False diverge@50 fails=component_covariance_error
+DONE vector_anisotropic     d128_l3_f4               archived=PASS replay=FAIL suffix=0 bitwise=False diverge@50 fails=component_covariance_error
+DONE vector_overlap         d128_l3_f3               archived=PASS replay=FAIL suffix=2 bitwise=False diverge@50 fails=-
+DONE vector_overlap         d128_l3_f4               archived=PASS replay=PASS suffix=6 bitwise=False diverge@50 fails=-
+DONE vector_overlap         d256_l3_f3               archived=PASS replay=PASS suffix=9 bitwise=False diverge@50 fails=-
+DONE vector_overlap         d64_l2_f5                archived=PASS replay=PASS suffix=14 bitwise=False diverge@50 fails=-
+DONE vector_overlap         axis_tanh                archived=PASS replay=PASS suffix=11 bitwise=False diverge@50 fails=-
+DONE vector_overlap         oriented8_tanh           archived=PASS replay=FAIL suffix=1 bitwise=False diverge@50 fails=-
+DONE vector_spiral          original architecture    archived=PASS replay=PASS suffix=23 bitwise=False diverge@67 fails=-
+DONE vector_spiral          d128_l3_f3               archived=PASS replay=PASS suffix=24 bitwise=False diverge@67 fails=-
+DONE vector_spiral          d128_l3_f4               archived=PASS replay=PASS suffix=22 bitwise=False diverge@67 fails=-
+DONE vector_spiral          d256_l3_f3               archived=PASS replay=PASS suffix=20 bitwise=False diverge@67 fails=-
+DONE vector_spiral          axis_softplus5           archived=PASS replay=PASS suffix=22 bitwise=False diverge@67 fails=-
+DONE vector_spiral          axis_tanh                archived=PASS replay=PASS suffix=16 bitwise=False diverge@67 fails=-
+DONE vector_spiral          softplus10_d64_l2_f2     archived=PASS replay=PASS suffix=22 bitwise=False diverge@67 fails=-
+DONE vector_spiral          softplus5_d128_l3_f2     archived=PASS replay=PASS suffix=24 bitwise=False diverge@67 fails=-
+DONE vector_spiral          linear_skip_d96_beta5    archived=PASS replay=PASS suffix=23 bitwise=False diverge@67 fails=-
+DONE img_stripes2           residual16               archived=PASS replay=PASS suffix=20 bitwise=False diverge@25 fails=-
+DONE img_stripes2           residual12               archived=PASS replay=PASS suffix=16 bitwise=False diverge@50 fails=-
+DONE img_bars4              residual16               archived=PASS replay=PASS suffix=13 bitwise=False diverge@50 fails=-
+DONE img_blobs4             baseline                 archived=PASS replay=FAIL suffix=0 bitwise=False diverge@150 fails=modes
+DONE img_blobs4             residual16               archived=PASS replay=PASS suffix=5 bitwise=False diverge@50 fails=-
+DONE img_intensity2         residual16               archived=PASS replay=PASS suffix=7 bitwise=False diverge@50 fails=-
+DONE img_intensity2         residual12               archived=PASS replay=PASS suffix=10 bitwise=False diverge@50 fails=-
+COMPLETE 46
