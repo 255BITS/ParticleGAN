@@ -108,7 +108,7 @@ def train(cfg):
     recipe = training_recipe(cfg)
     groups = [dict(params=list(bundle["G"].parameters()) + list(bundle["E"].parameters()), lr=recipe.lr),
               dict(params=list(bundle["prior"].parameters()), lr=recipe.lr * recipe.prior_lr_mult,
-                   betas=recipe.prior_betas)]
+                   betas=recipe.prior_betas or recipe.betas)]
     optimizer = torch.optim.Adam(groups, lr=recipe.lr, betas=recipe.betas, fused=device.type == "cuda")
     base_rates = [g["lr"] for g in optimizer.param_groups]
     prior_regularizer = recipe.make_prior_regularizer()

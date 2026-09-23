@@ -10,14 +10,16 @@ epochs = 28
 steps_per_epoch = 1000
 batch_size = 256
 lr = 0.0006
+d_lr_mult = 1.5
+prior_lr_mult = 10.0
 # Keep the separately selected MoG formulation and Adam settings pinned.
 beta2 = 0.999
 lambda_ep = 1.0
 reg_arm = "b_cap"
 reg_coeff = 1.0
 reg_kappa = 1.0
-# Experiment multiplier is relative to the shipped prior LR (0.006).
-# Public Recipe.prior_lr_mult is relative to G's LR and is therefore 100.
+# Experiment multiplier is relative to this config's explicit prior LR (0.006).
+# The effective multiplier relative to G is 10 × 10 = 100.
 particle_lr_multiplier = 10.0
 particle_beta1 = 0.5
 mog_metrics = true

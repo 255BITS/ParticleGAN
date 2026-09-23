@@ -27,7 +27,7 @@ def bundle():
     return dict(device=torch.device("cpu"), scaler=scaler,
         G=GymTransitionGenerator(scaler, z_dim=4, width=8).eval(),
         E=GymTransitionEncoder(z_dim=4, width=8).eval(),
-        prior=get_recipe("mog", z_dim=4, num_particles=8).make_prior(device="cpu"))
+        prior=get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=4, num_particles=8).make_prior(device="cpu"))
 
 
 @contextmanager

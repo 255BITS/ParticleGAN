@@ -45,7 +45,7 @@ class SliderGanTests(unittest.TestCase):
             zero_logits[:, [6,7,16,17]] = 0.
             loss, _ = error_loss(critic, zero_logits, zero_targets, 1, torch.Generator().manual_seed(9))
             self.assertAlmostEqual(float(loss.detach()), math.log(2), places=6)
-            cap = training_recipe(self.cfg).make_gradient_penalty(lazy_k=4)
+            cap = training_recipe(self.cfg).make_gradient_penalty(lazy_k=4, coeff=1., kappa=1.)
             x = torch.randn(4,18)
             f = lambda a: 2*a[:,0]
             off,_ = cap.penalty(f,x,x,step=3)

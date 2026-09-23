@@ -124,7 +124,7 @@ def training_recipe(cfg):
     Every experiment override is retained, including historical image defaults.
     """
     return get_recipe(
-        'ddgan', z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
+        model='ddgan', z_dim=cfg['z_dim'], num_particles=cfg['num_particles'],
         num_classes=cfg['classes'],
         conditioning='ucd' if cfg['d_mode'] == 'ucd' else 'conditional',
         ucd_target=cfg.get('ucd_target', 'class'), ucd_weight=cfg['ucd_lambda'],

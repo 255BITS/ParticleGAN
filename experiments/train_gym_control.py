@@ -101,7 +101,7 @@ def train(cfg):
     scaler = bundle["scaler"]
     normalized = scaler(physical)
     g, e, prior, d, ec = [bundle[k] for k in MODULE_KEYS]
-    recipe = get_recipe("mog", z_dim=world["z_dim"], num_particles=world["num_particles"],
+    recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=world["z_dim"], num_particles=world["num_particles"],
                         total_steps=cfg["steps"], batch_size=cfg["batch_size"])
     if cfg["arm"] == "joint":
         opt_g, opt_d = recipe.make_optimizers(g, d, prior,

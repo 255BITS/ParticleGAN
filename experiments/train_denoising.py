@@ -67,7 +67,7 @@ DEFAULT_CONFIG = ROOT / "configs" / "denoising" / "default.toml"
 def training_recipe(cfg):
     """Resolve legacy experiment fields into the public, caller-owned recipe."""
     return get_recipe(
-        cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
+        model=cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"],
         num_classes=cfg["classes"],
         prior_kind="mog" if cfg["prior"] == "mog" else "particles",
         sigma_rel=cfg.get("sigma_rel", 1 / 40) if cfg["prior"] == "mog" else 0.0,
@@ -76,7 +76,7 @@ def training_recipe(cfg):
         ucd_target=cfg["ucd_target"], ucd_weight=cfg["ucd_lambda"],
         alpha_bar=cfg["alpha_bar"], batch_size=cfg["batch_size"], total_steps=cfg["steps"],
         lr=cfg["lr"], d_lr_mult=cfg["d_lr_mult"], prior_lr_mult=cfg["prior_lr_mult"],
-        betas=(cfg["beta1"], .999), loss_type=cfg["loss_type"], gan_mode=cfg["gan_mode"],
+        betas=(cfg["beta1"], cfg.get("beta2", .999)), loss_type=cfg["loss_type"], gan_mode=cfg["gan_mode"],
         reg_arm=cfg["reg_arm"], reg_coeff=cfg["reg_coeff"], reg_kappa=cfg["reg_kappa"],
         reg_every=cfg["reg_every"], reg_method=cfg["reg_method"], prior_reg=cfg["prior_reg"],
         ema_decay=cfg["ema"], lr_anneal_start=cfg["lr_anneal_start"], lr_floor=cfg["lr_floor"],

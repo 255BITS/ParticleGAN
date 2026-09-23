@@ -76,7 +76,7 @@ from lib.toy_models import (  # noqa: E402
     SimpleMLPGenerator, SimpleMLPDiscriminator, sample_100gaussians, mode_coverage,
 )
 
-_RECIPE = get_recipe("100gaussians")
+_RECIPE = get_recipe()
 
 # =========================
 #  Visualization
@@ -172,6 +172,7 @@ def train(
     return_details: bool = False,
     sigma_rel: float = 0.0,
     standardize: bool = False,
+    prior_lr_mult: float = _RECIPE.prior_lr_mult,
     particle_lr_multiplier: float = 1.0,
     particle_beta1: float = None,
     mog_metrics: bool = False,
@@ -218,7 +219,7 @@ def train(
         raise ValueError("use_training_api supports particles without separate prior optimizer overrides or mog_metrics")
     recipe = get_recipe(
         z_dim=z_dim, num_particles=num_particles, batch_size=batch_size,
-        total_steps=epochs * steps_per_epoch, lr=lr, d_lr_mult=d_lr_mult,
+        total_steps=epochs * steps_per_epoch, lr=lr, d_lr_mult=d_lr_mult, prior_lr_mult=prior_lr_mult,
         betas=(beta1, beta2), loss_type=loss_type, gan_mode=gan_mode,
         reg_arm=reg_arm, reg_coeff=reg_coeff, reg_kappa=reg_kappa, reg_every=reg_every, reg_method=reg_method,
         prior_reg=lambda_ep, ema_decay=ema_decay, lr_anneal_start=lr_anneal_start,

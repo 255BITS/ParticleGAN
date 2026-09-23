@@ -3,6 +3,7 @@
 This comparison isolates the penalty in the full recipe. It is separate from
 the twelve-particle regression suite and does not claim 100-Gaussian results.
 """
+from benchmarks.locked_shared.recorded_recipes import GAN_V1
 
 from dataclasses import asdict
 from pathlib import Path
@@ -10,7 +11,6 @@ import time
 
 import torch
 
-from particlegan import get_recipe
 from .baseline import digest, protocol, write_json
 from .mode_hold import train_mode_hold
 
@@ -25,7 +25,7 @@ def main():
               "host": "8-mode ring, 96-wide MLPs, Fourier-3 critic; full stock prior/optimizer/schedule",
               "rows": []}
     for name, options in (("stock_b_cap", {}), ("stock_r1_r2_0_1", {"reg_arm": "a_r1r2", "reg_coeff": 0.1})):
-        recipe = get_recipe("gan_legacy", **options).replace(name="gan")
+        recipe = GAN_V1.replace(**options).replace(name="gan")
         print(f"START {name} steps={recipe.total_steps} particles={recipe.num_particles}", flush=True)
         start = time.monotonic()
         def log(point):

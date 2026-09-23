@@ -81,7 +81,7 @@ class StateControlTrainingTests(unittest.TestCase):
                 self.assertEqual(summary["simulator_calls"], 0)
                 self.assertEqual(summary["unique_training_records"], 8)
                 self.assertEqual(summary["real_draws"], 8)
-                self.assertEqual(summary["recipe"]["prior_lr_mult"], 100.)
+                self.assertEqual(summary["recipe"]["prior_lr_mult"], 2.)
                 self.assertEqual(summary["auxiliary_gradient_scope"], "G1/G3 only" if arm == "probes" else "G1/G3 plus E/prior")
                 self.assertNotIn("previous_actions", np.load(root / arm / "expert_records.npz").files)
                 bundle = load_state_control_checkpoint(root / arm / "final.pt")

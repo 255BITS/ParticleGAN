@@ -1,11 +1,11 @@
 """Historical stock Recipe('gan') components/optimizers on the same ring host, seed 0."""
+from benchmarks.locked_shared.recorded_recipes import GAN_V1
 
 import json
 from pathlib import Path
 
 import torch
 
-from particlegan import get_recipe
 from .mode_hold import train_mode_hold
 
 
@@ -17,7 +17,7 @@ def main():
               "host": "Original 8-mode ring, 96-wide host MLPs, original initialization/evaluation; stock recipe supplies prior, losses, optimizers, EMA and LR schedule.",
               "rows": []}
     for steps in (1200, 7000):
-        recipe = get_recipe("gan_legacy", total_steps=steps).replace(name="gan")
+        recipe = GAN_V1.replace(total_steps=steps).replace(name="gan")
         print(f"START stock ring recipe steps={steps} particles={recipe.num_particles}", flush=True)
         row = train_mode_hold(training_recipe=recipe, diagnostics=True)
         report["rows"].append({"recipe": recipe.to_dict(), "ring": row})

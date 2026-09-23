@@ -4,6 +4,7 @@ Keep each toy's data, architecture, support and budget fixed. Apply each public
 recipe's loss, regularization and absolute G/D/prior optimizer settings. This
 is distinct from the historical 19/19 row with per-host optimizer settings.
 """
+from benchmarks.locked_shared.recorded_recipes import GAN_V1, GAN_V2
 import argparse
 from contextlib import contextmanager, ExitStack
 from copy import deepcopy
@@ -18,7 +19,7 @@ from unittest.mock import patch
 
 import torch
 
-from particlegan import ParticlePrior, get_recipe
+from particlegan import ParticlePrior
 from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.locked_shared import baseline
 from benchmarks.smart_descent import evaluate
@@ -30,7 +31,7 @@ from .protocol import test_verdict
 
 ROOT = Path(__file__).resolve().parents[2]
 REPORTS = ROOT / 'reports/transfer_suite'
-RECIPES = {'current': 'gan_legacy', 'proposed': 'gan_v2'}
+RECIPES = {'current': GAN_V1, 'proposed': GAN_V2}
 
 
 def read(path):
@@ -164,7 +165,7 @@ def run(arm, output, tasks=None):
     (output / 'episodes').mkdir()
     torch.set_num_threads(1)
     # Retain the archived arm names as well as their exact historical settings.
-    recipe = get_recipe(RECIPES[arm]).replace(name='gan' if arm == 'proposed' else 'gan_legacy')
+    recipe = RECIPES[arm].replace(name='gan' if arm == 'proposed' else 'gan_legacy')
     assert recipe.lr_anneal_start == .6 and recipe.lr_floor == .05
     policy = vector_tasks.fixed_policy('cosine')
     protocol = suite.snapshot(output)

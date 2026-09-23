@@ -124,7 +124,11 @@ class Logger:
 
 
 def pretrain(log):
-    recipe = get_recipe("mog", z_dim=Z, num_particles=K, total_steps=FINE, batch_size=B)
+    # This frozen regression compares its original arms, not changing API defaults.
+    recipe = get_recipe(prior_kind='mog', sigma_rel=.025, z_dim=Z, num_particles=K,
+                        total_steps=FINE, batch_size=B, lr=.0006, d_lr_mult=1.5,
+                        prior_lr_mult=100., betas=(0., .999), prior_betas=(.5, .999),
+                        reg_coeff=1., reg_kappa=1., prior_reg=1.)
     spread = recipe.make_prior_regularizer()
     generator = torch.Generator().manual_seed(11)
     prior = recipe.make_prior(generator=torch.Generator().manual_seed(3))

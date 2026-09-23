@@ -3,6 +3,7 @@
 Plans may select screening tasks, but never specify per-task optimizer overrides.
 Only a complete 19-case row can qualify as an overall PASS.
 """
+from benchmarks.locked_shared.recorded_recipes import GAN_V2
 import argparse
 from contextlib import ExitStack
 from dataclasses import asdict
@@ -16,7 +17,6 @@ from unittest.mock import patch
 
 import torch
 
-from particlegan import get_recipe
 from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.locked_shared import baseline
 from benchmarks.smart_descent import evaluate
@@ -49,7 +49,7 @@ def prepare(declaration):
         seen.add(name)
         # This archived search began from the previous public GAN preset.
         # New package defaults must not change its unspecified fields.
-        recipe = get_recipe('gan_v2', **card['overrides']).replace(name=name)
+        recipe = GAN_V2.replace(**card['overrides']).replace(name=name)
         recipes.append((card, recipe))
     if not recipes:
         raise ValueError('at least one candidate required')

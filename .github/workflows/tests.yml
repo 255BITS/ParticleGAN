@@ -58,7 +58,6 @@ jobs:
           assert particlegan.__file__.startswith('/tmp/particlegan-installed/')
           assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4)
           assert MoGParticlePrior().sample(2)[0].shape == (2, 4)
-          assert get_recipe('mog').total_steps == 28000
           assert DDGAN().steps == 4
           default = get_recipe()
           assert default.lr == 0.00425
@@ -67,13 +66,12 @@ jobs:
           assert default.betas == (0., .99)
           assert default.reg_arm == 'b_cap' and default.reg_coeff == 6.0
           assert default.reg_kappa == 1.25 and default.prior_reg == 0.05
-          assert get_recipe('gan_v2').lr == 0.001
-          assert get_recipe('gan_v1').lr == 0.0006
-          assert get_recipe('gan_legacy').lr == 0.0006
+          assert default.name == 'gan_v3'
+          assert get_recipe(prior_kind='mog', sigma_rel=.025, num_particles=8).reg_coeff == 6.
           assert sum(p.numel() for p in LinearSkipDiscriminator().parameters()) == 10467
           assert sum(p.numel() for p in BatchDistanceDiscriminator().parameters()) == 19013
           PY
-          PYTHONPATH=/tmp/particlegan-installed python -c "from particlegan import get_recipe; recipe = get_recipe('ddgan_mog'); assert recipe.model == 'ddgan' and recipe.total_steps == 100000; assert recipe.make_prior().sigma > 0"
+          PYTHONPATH=/tmp/particlegan-installed python -c "from particlegan import get_recipe; recipe = get_recipe(model='ddgan', prior_kind='mog', sigma_rel=.025, num_particles=8); assert recipe.model == 'ddgan' and recipe.lr == .00425; assert recipe.make_prior().sigma > 0"
 
   distributions:
     name: Build release distributions

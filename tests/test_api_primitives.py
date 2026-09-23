@@ -175,9 +175,9 @@ def test_caller_validated_hot_paths_do_not_convert_tensors_to_python(monkeypatch
 
 
 def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
-    recipe = get_recipe("denoising", z_dim=2, num_particles=8, lr=.001,
+    recipe = get_recipe(model='ddgan', num_classes=4, conditioning='ucd', z_dim=2, num_particles=8, lr=.001,
                         reg_coeff=.3, prior_reg=.4, betas=[0., .9])
-    assert recipe.total_steps == 56000 and recipe.num_classes == 4
+    assert recipe.total_steps == 7000 and recipe.num_classes == 4
     assert recipe.betas == (0., .9)
     assert Recipe(**recipe.to_dict()) == recipe
     prior = recipe.make_prior()
@@ -187,8 +187,8 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
     generator, discriminator = nn.Linear(2, 2), nn.Linear(2, 1)
     generator.bias.requires_grad_(False)
     opt_g, opt_d = recipe.make_optimizers(generator, discriminator, prior)
-    assert [g["lr"] for g in opt_g.param_groups] == [.001, .01]
-    assert opt_d.param_groups[0]["lr"] == .0015
+    assert [g["lr"] for g in opt_g.param_groups] == [.001, .002]
+    assert opt_d.param_groups[0]["lr"] == .001
     assert all(p is not generator.bias for g in opt_g.param_groups for p in g["params"])
     assert opt_g.param_groups[1]["params"] == [prior.z]
     for frozen in (GaussianPrior(2), ParticlePrior(8, 2, learnable=False)):
@@ -200,18 +200,13 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
         get_recipe(gan_mode="typo")
 
 
-def test_generic_recipes_preserve_existing_config_values():
-    assert get_recipe() == get_recipe("gan") == get_recipe("gan_v3") == Recipe()
-    for name, legacy in (("gan_v2", "100gaussians"), ("ddgan", "denoising")):
-        current = get_recipe(name, z_dim=8, num_particles=32)
-        historical = get_recipe(legacy, z_dim=8, num_particles=32)
-        current_values, legacy_values = current.to_dict(), historical.to_dict()
-        assert current_values.pop("name") == name
-        assert legacy_values.pop("name") == legacy
-        assert current_values == legacy_values
-        assert Recipe(**historical.to_dict()) == historical
-    ddgan = get_recipe("ddgan", num_classes=2)
-    assert (ddgan.model, ddgan.conditioning, ddgan.num_classes) == ("ddgan", "ucd", 2)
+def test_explicit_component_choices_preserve_shared_defaults():
+    default = get_recipe()
+    assert default == Recipe()
+    ddgan = get_recipe(model='ddgan', conditioning='ucd', num_classes=2)
+    assert (ddgan.model, ddgan.conditioning, ddgan.num_classes) == ('ddgan', 'ucd', 2)
+    assert ddgan.lr == default.lr and ddgan.reg_coeff == default.reg_coeff
+    assert Recipe(**ddgan.to_dict()) == ddgan
 
 
 def test_delayed_cosine_endpoints():

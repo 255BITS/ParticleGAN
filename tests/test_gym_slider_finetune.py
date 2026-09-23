@@ -46,7 +46,7 @@ class SliderFinetuneTests(unittest.TestCase):
             self.assertEqual(float(grad[:, :8].abs().sum()), 0.)
             self.assertEqual(float(grad[:, 10:].abs().sum()), 0.)
             self.assertGreater(float(grad[:, 8:10].abs().sum()), 0.)
-            cap = get_recipe("mog", z_dim=4, num_particles=8, total_steps=4, batch_size=4).make_gradient_penalty(
+            cap = get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=4, num_particles=8, total_steps=4, batch_size=4).make_gradient_penalty(
                 arm="b_cap", lazy_k=4, coeff=1., kappa=1.)
             steep = lambda sample: 2 * sample[:, 0]
             noise = torch.randn(4, 2)

@@ -58,6 +58,7 @@ def snapshot(output):
     paths = sorted({*root.glob("particlegan/**/*.py"), *root.glob("benchmarks/locked_shared/**/*.py"),
                     *root.glob("benchmarks/smart_descent/*.py"), *root.glob("benchmarks/transfer_suite/*.py"),
                     root / "benchmarks/transfer_suite/plans/default_comparison.json",
+                    root / "benchmarks/transfer_suite/plans/recipe_history.json",
                     root / "lib/toy_models.py", root / "lib/toy_metrics.py",
                     root / "benchmarks/learned_lr_evaluation.py"})
     hashes = {}

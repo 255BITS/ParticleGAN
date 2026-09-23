@@ -39,7 +39,7 @@ DEFAULTS = {
 def training_recipe(cfg):
     """Use the public primitives with this study's explicit numerical choices."""
     return get_recipe(
-        cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"], num_classes=2,
+        model=cfg["model"], z_dim=cfg["z_dim"], num_particles=cfg["num_particles"], num_classes=2,
         conditioning="conditional" if cfg["d_mode"] == "concat" else "ucd",
         ucd_target="time_class" if cfg["model"] == "ddgan" and cfg["d_mode"] == "ucd" else "class",
         ucd_weight=cfg["ucd_lambda"], alpha_bar=cfg["alpha_bar"],

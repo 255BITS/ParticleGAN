@@ -32,7 +32,7 @@ DEFAULTS = dict(encoder=True, shared_state_critic=True, encoder_width=128,
                 d_conditioning="concat", g_class_scale=8.0, g_context_scale=1.0,
                 num_particles=1024, critic_mode="joint_marginals", marginal_width=128, marginal_weight=1.0,
                 length=64, geometry_mode="discrete", seed=24002, device="cuda:0",
-                steps=get_recipe("mog").total_steps, batch_size=get_recipe("mog").batch_size,
+                steps=28_000, batch_size=get_recipe().batch_size,
                 log_interval=250, eval_per_context=512, normalization_samples=32768,
                 out_dir="results/transition/default", live_log="results/transition/live.log",
                 save_checkpoint=True)
@@ -40,7 +40,7 @@ DEFAULTS = dict(encoder=True, shared_state_critic=True, encoder_width=128,
 
 def training_recipe(cfg):
     # Preserve the public recipe's optimizer, losses, regularizers and LR schedule.
-    return get_recipe("mog", z_dim=cfg["z_dim"], num_particles=cfg["num_particles"], num_classes=2,
+    return get_recipe(prior_kind='mog', sigma_rel=0.025, z_dim=cfg["z_dim"], num_particles=cfg["num_particles"], num_classes=2,
                       conditioning="ucd" if cfg["d_conditioning"] == "ucd" else "conditional",
                       total_steps=cfg["steps"], batch_size=cfg["batch_size"])
 

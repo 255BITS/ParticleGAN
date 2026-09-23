@@ -5,8 +5,8 @@ from particlegan import get_recipe
 
 
 def main():
-    for name in ('ae_gan', 'vae_gan', 'ae_ddgan'):
-        recipe = get_recipe(name, num_particles=16, z_dim=2)
+    for mode in ('ae', 'hard'):
+        recipe = get_recipe(prior_kind='mog', sigma_rel=.025, encoder_mode=mode, num_particles=16, z_dim=2)
         prior = recipe.make_prior()
         encoder, decoder, critic = nn.Linear(2, 4), nn.Linear(2, 2), nn.Linear(2, 1)
         opt_g, opt_d = recipe.make_optimizers(decoder, critic, prior, encoder=encoder)
@@ -19,7 +19,7 @@ def main():
         loss.backward()
         opt_g.step()
         assert torch.isfinite(loss)
-        print(f'{name}: reconstruction step passed', flush=True)
+        print(f'{mode}: reconstruction step passed', flush=True)
 
 
 if __name__ == '__main__':
