@@ -1,0 +1,6 @@
+[
+  {
+    "name": "noise029_batch1024_floor005",
+    "overrides": {"output_noise_std": 0.029, "batch_size": 1024}
+  }
+]

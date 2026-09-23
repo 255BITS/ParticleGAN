@@ -192,17 +192,42 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                 output_std = protocol["noise"]["output_noise_std"]
                 input_std = protocol["noise"]["input_noise_std"]
                 warmup = protocol["noise"].get("output_noise_warmup", 0.0)
-                if receipt.get("step_calls") != record["spec"]["steps"]:
+                steps = record["spec"]["steps"]
+                if receipt.get("step_calls") != steps:
                     raise ValueError(f"candidate noise schedule is incomplete: {name}")
-                expected_first = output_noise_at(output_std, 0, record["spec"]["steps"], warmup)
+                expected_first = output_noise_at(output_std, 0, steps, warmup)
                 expected_last = output_noise_at(
-                    output_std, record["spec"]["steps"] - 1, record["spec"]["steps"], warmup,
+                    output_std, steps - 1, steps, warmup,
                 )
+                expected_input_nonzero = sum(
+                    linear_input_noise(input_std, step, steps,
+                                       protocol["noise"]["input_noise_anneal_end"]) > 0
+                    for step in range(steps)
+                )
+                if receipt.get("input_nonzero_steps") != expected_input_nonzero:
+                    raise ValueError(f"candidate input noise duration differs: {name}")
                 if "output_noise_warmup" in protocol["noise"] and warmup:
                     if (not _close(receipt.get("output_sigma_first"), expected_first)
                             or not _close(receipt.get("output_sigma_last"), expected_last)):
                         raise ValueError(f"candidate output warmup differs: {name}")
+                    expected_output_nonzero = sum(
+                        output_noise_at(output_std, step, steps, warmup) > 0
+                        for step in range(steps)
+                    )
+                    if receipt.get("output_nonzero_steps") != expected_output_nonzero:
+                        raise ValueError(f"candidate output warmup duration differs: {name}")
                 if record["spec"]["runner"] == "legacy":
+                    if (not _close(receipt.get("output_std"), output_std)
+                            or not _close(receipt.get("input_std"), input_std)
+                            or not _close(receipt.get("input_anneal_end"),
+                                          protocol["noise"]["input_noise_anneal_end"])
+                            or not _close(receipt.get("input_sigma_first"),
+                                          linear_input_noise(input_std, 0, steps,
+                                                             protocol["noise"]["input_noise_anneal_end"]))
+                            or not _close(receipt.get("input_sigma_last"),
+                                          linear_input_noise(input_std, steps - 1, steps,
+                                                             protocol["noise"]["input_noise_anneal_end"]))):
+                        raise ValueError(f"custom-host noise receipt differs from common policy: {name}")
                     actual_noise = ((output_std == 0 or receipt.get("train_output_applied"))
                                     and (input_std == 0 or receipt.get("train_input_applied")
                                          and receipt.get("input_nonzero_steps", 0) > 0))

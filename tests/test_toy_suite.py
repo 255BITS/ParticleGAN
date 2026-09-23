@@ -56,7 +56,10 @@ def _write_candidate_episode(directory, mutate=lambda record: None):
                  for role, multiplier in (("g", 1), ("prior", base.prior_lr_mult),
                                           ("d", base.d_lr_mult))],
         noise_receipt=dict(step_calls=steps, output_module="OutputNoise",
-                           input_module="InputNoise", input_nonzero_steps=1,
+                           input_module="InputNoise",
+                           input_nonzero_steps=sum(linear_input_noise(
+                               0.5, step, steps, 0.1) > 0 for step in range(steps)),
+                           output_nonzero_steps=steps - 1,
                            output_sigma_first=0.0, output_sigma_last=0.029),
         noise_applied=True, result=result, verdict=verdict,
     )
@@ -87,6 +90,8 @@ def _write_candidate_episode(directory, mutate=lambda record: None):
      "frozen 24-checkpoint schedule differs"),
     (lambda record: record["result"]["actions"][1].update(input_sigma=0.0),
      "input noise schedule differs"),
+    (lambda record: record["noise_receipt"].update(input_nonzero_steps=1),
+     "input noise duration differs"),
     (lambda record: record["result"]["actions"][1].update(output_sigma=0.0),
      "output warmup differs"),
     (lambda record: record["applied"][0].update(lr=0.0001),

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "warm_b2048_f2_lrhalf",
+    "overrides": {"lr": 0.002125}
+  },
+  {
+    "name": "warm_b2048_f2_beta0999",
+    "overrides": {"betas": [0.0, 0.999]}
+  },
+  {
+    "name": "warm_b2048_f2_beta0999_anneal060",
+    "overrides": {"betas": [0.0, 0.999], "lr_anneal_start": 0.6}
+  }
+]

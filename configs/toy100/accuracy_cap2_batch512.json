@@ -1,0 +1,11 @@
+[
+  {
+    "name": "noise029_batch512_cap2_floor002",
+    "overrides": {
+      "output_noise_std": 0.029,
+      "batch_size": 512,
+      "reg_coeff": 2.0,
+      "lr_floor": 0.02
+    }
+  }
+]
