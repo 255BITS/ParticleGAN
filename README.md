@@ -30,15 +30,18 @@ One illustrative run of `get_recipe("gan")` with the example's Fourier MLP:
 
 The [100-mode convergence gate](docs/toy100.md) tests square, rotated, and
 staggered Gaussian grids together, with step-zero snapshots, live/EMA traces,
-and explicit coverage, balance, and spread checks. Run the current-default
-failure reproduction with:
+and explicit coverage, balance, and spread checks. The selected toy config
+reaches **100/100 modes on all three**, sustaining the full live-weight gate
+from updates 6,000–7,000. Train and gate them together with:
 
 ```bash
-python -u -m benchmarks.toy100 run \
-  --config configs/toy100/baseline.json --output artifacts/toy100/baseline
+python -u -m benchmarks.toy100 run --output artifacts/toy100/gate
 ```
 
-The command exits nonzero when any problem misses the numerical gate.
+The command exits nonzero when any problem misses the numerical gate. Add
+`--problem grid100` for an individual run. [Before/after GIFs, search results,
+and the preserved default failures](reports/toy100/README.md) document the
+explicit noise settings and staggered batch override.
 
 ## Installation
 
