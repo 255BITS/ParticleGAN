@@ -59,22 +59,17 @@ def _legacy_schedule_matches_archive(directory: Path, recipe: dict, names: list[
 
 def build():
     rows = []
-    summary_paths = sorted(ARTIFACTS.glob("*/summary.json"))
-    for family in ("network-floor005-nine", "network-floor-bracket-v1",
-                   "network-floor-residual-controls-v1",
-                   "network-floor-kappa-bracket-v1", "network-floor-lr-bracket-v1",
-                   "network-floor-noise-phase-v1", "promotion-v1", "kappa-near-v2",
-                   "isolated-rng-shared-policy-all19-v1"):
-        summary_paths += sorted((ARTIFACTS / family).rglob("summary.json"))
-    # The learnable-scale experiment is kept beside the fixed-noise searches
-    # so its full 19-host replay and the native 100-mode trials share a folder.
-    for family in ("learnable-shared", "learnable-broad"):
-        summary_paths += sorted((ARTIFACTS.parent / family).glob("*/summary.json"))
-    summary_paths += sorted((ARTIFACTS.parent / "residual-escape-shape-v1-a3be165").rglob("summary.json"))
-    summary_paths += sorted((ARTIFACTS.parent / "production-shared-policy22").glob("*/summary.json"))
-    summary_paths += sorted((ARTIFACTS.parent / "isolated-rng").glob("full19*/summary.json"))
-    summary_paths += sorted((ARTIFACTS.parent / "ci-common22-network-floor010" / "artifacts" / "toy-suite-ci").glob("*/summary.json"))
-    summary_paths = sorted(set(summary_paths))
+    # Discover every completed supported transfer archive, including nested
+    # screens and CI replays. Scratch dynamic-policy results have a separate
+    # protocol and are deliberately not treated as constant-recipe evidence.
+    supported = {"toy100-vector-compatibility-v1", "toy100-compatibility-screen-v1",
+                 "public-default-verification-v1"}
+    summary_paths = []
+    for path in sorted(ARTIFACTS.parent.rglob("summary.json")):
+        protocol_path = path.parent / "protocol.json"
+        if (protocol_path.is_file()
+                and json.loads(protocol_path.read_text()).get("version") in supported):
+            summary_paths.append(path)
     for summary_path in summary_paths:
         directory = summary_path.parent
         summary = json.loads(summary_path.read_text())
@@ -146,12 +141,29 @@ def build():
     # Promotion folders retain exact copies of their prerequisite episodes.
     # Keep those audit paths visible without presenting them as new trials.
     episode_sets = {}
+    signatures = {}
     for row in rows:
         directory = (ROOT / row["provenance"]["summary"]).parent
         signature = tuple(sorted(_digest(path) for path in (directory / "episodes").glob("*.json.gz")))
+        signatures[row["run"]] = set(signature)
         if signature:
             row["reused_evidence_of"] = episode_sets.get(signature)
             episode_sets.setdefault(signature, row["run"])
+    # A dispatch comparison can copy only several episodes and the original
+    # full-run summary. Identify such references by exact payload hashes;
+    # their copied summary must not look like a newly executed full replay.
+    for row in rows:
+        directory = (ROOT / row["provenance"]["summary"]).parent
+        signature = signatures[row["run"]]
+        if signature and not (directory / "index.json").is_file():
+            sources = [other for other in rows
+                       if other["strict_regrade_status"] in ("PASS", "FAIL")
+                       and signature < signatures[other["run"]]]
+            if sources:
+                row["kind"] = "copied comparison reference"
+                row["reused_evidence_of"] = sources[0]["run"]
+                row["copied_episode_count"] = len(signature)
+                row["limitations"].insert(0, f"{len(signature)} copied episodes; not a standalone replay")
     output = dict(protocol="shared-recipe-search-ledger-v1", candidate_selection="no seed search",
                   note="Observed subset and schedule-mismatched scores are diagnostics, not 22-case passes.",
                   rows=rows)
@@ -185,8 +197,10 @@ def build():
         config = row["provenance"]["config"]
         config_cell = (f"{_local(ROOT / config)} · `{row['provenance']['config_sha256'][:12]}`"
                        if config else "—")
+        raw_live = ("copied subset" if row["kind"] == "copied comparison reference"
+                    else f"{row['observed_live_passes']}/{row['attempted']}")
         lines.append(f"| `{row['run']}`; {_local(ROOT / row['provenance']['summary'])} "
-                     f"| {row['observed_live_passes']}/{row['attempted']} "
+                     f"| {raw_live} "
                      f"| {row['strict_regrade_status']} "
                      f"| {validity} | {config_cell} |")
     lines += ["", "The [JSON ledger](shared-recipe-search.json) records every selected task,",

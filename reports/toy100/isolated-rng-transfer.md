@@ -19,3 +19,5 @@ The fresh, fixed-seed 19-case transfer replay of `configs/toy100/shared_candidat
 | img_blobs4 | Final metrics pass, but only 2 consecutive passing checks; 5 required | 2 |
 
 The other 11 cases passed their saved and independently recomputed gates. This is a quality failure, not missing application of the isolated-noise mechanism or an invalid evidence archive.
+
+The separate [shared-base replay](isolated-rng-shared-base19.md) used the same isolated RNG mechanism with κ=1.25 and the base effective network floor .05. It independently regraded as valid **FAIL 14/19**, missing residual_student, mode_hold, vector_unequal_mass, vector_overlap, and img_bars4. Because κ and the network floor differ from this 11/19 run, the score difference does not isolate an RNG effect. Both archives are retained and neither qualifies for the combined 22-task gate.

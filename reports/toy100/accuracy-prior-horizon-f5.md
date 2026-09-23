@@ -19,12 +19,13 @@ the capped-prior rows still missed the center and covariance limits. The
 5,000-step row had a smaller final covariance bias than the control, alongside
 a larger center error and radial KS. Its 100k holdout failed as well.
 
-The [predeclared manifest](accuracy_prior_horizon_f5_manifest.json) froze the
-exact [F5 config](accuracy_affine_public_noiseless_f5_prior_base.json), seed
+The archived predeclared manifest froze the
+exact F5 config, seed
 1234, 7,000 updates, CPU/one thread, Fourier 5, zero input and output noise,
 the G/D LR horizon of 1,600, all other optimizer fields, resources, data,
 budgets, and thresholds. The only experimental change was the particle-prior
-cosine horizon, applied by the [scratch adapter](accuracy_prior_horizon_f5_probe.py).
+cosine horizon, applied by the archived scratch adapter
+`reports/toy100/accuracy_prior_horizon_f5_probe.py`.
 The adapter and native source were pinned at commit `f2c1c3e6efc008a1d49474b49a7a813a8af2b5c1`.
 Every actual G, prior, and D optimizer rate across all 7,000 updates is
 archived and checked against the declared schedule; final-five 20k clouds

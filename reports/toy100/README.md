@@ -1,4 +1,17 @@
-# 100-mode convergence: failures, search, and passing gate
+# 100-mode convergence: failures and shared-recipe search
+
+The current shared recipe passes **20/22** in trained CI: grid100,
+staggered100, and 18 older toys. Rotated100 and residual_student fail.
+The [CI audit](ci-common22.md) records both complete replays and their
+independent regrades. A different recipe passes strict native accuracy on
+all three new problems but fails four older toys; no shared 22/22 recipe
+has been verified. Follow the [combined gate commands](../../docs/toy100.md#one-shared-recipe-across-all-22-toys)
+for the current workflow.
+
+Recent retained searches include the [64 shared-parameter candidates](shared-halton64-v1.md)
+and a [fresh noiseless recipe that passes the older 19](affine-noiseless-f5-transfer.md).
+With that noiseless recipe, [projected discriminator inputs](projected-discriminator-f5.md)
+improve native centering, but component shape and precision still fail.
 
 **Scope of the historical result below:** the original coverage gate passes
 3/3, but the stricter distribution-fidelity audit records **0/3 passes**,
