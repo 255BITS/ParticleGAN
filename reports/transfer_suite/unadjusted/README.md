@@ -1,12 +1,14 @@
 # Unadjusted ParticleGAN default leaderboard
 
+Reproduce the selected profile with [one command](../../../benchmarks/transfer_suite/UNADJUSTED_SEARCH.md). [Findings and discriminator details](FINDINGS.md). Generated JSON, curves and replay archives linked below are local artifacts; source, plans and this readable leaderboard stay in Git ([artifact policy](../../README.md)).
+
 **This is the primary comparison for selecting a shared default.** Each candidate uses one unchanged loss/regularization/optimizer recipe on every test. No per-example LR, Adam, prior-rate or loss-weight adjustments. The earlier adjusted 19/19 result does not compete on this leaderboard.
 
 **Overall PASS requires 19/19 live behavioral tests**, each passing every metric for at least five final observations of a complete 24-point curve. EMA is separate. Missing cases stay in the denominator; partial rows cannot beat a completed candidate or qualify as winners.
 
 | Candidate | Required | Data | Images | Live total | Reference D profile | Attempted | Overall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| shared c6 (`shared_c6`) | 9/9 | 5/6 | 4/4 | **18/19** | 15/19 | 19/19 | **FAIL** |
+| shared c6 (`shared_c6`) | 9/9 | 6/6 | 4/4 | **19/19** | 15/19 | 19/19 | **PASS** |
 | lr00425 prior2 (`lr00425_prior2`) | 8/9 | 3/6 | 4/4 | **15/19** | 15/19 | 19/19 | **FAIL** |
 | Ratio G0.0034 D0.0068 P0.0085 (`ratio_g34_d68_p85`) | 8/9 | 3/6 | 4/4 | **15/19** | 15/19 | 19/19 | **FAIL** |
 | equal lr 00425 (`equal_lr_00425`) | 8/9 | 3/6 | 3/4 | **14/19** | 14/19 | 19/19 | **FAIL** |
@@ -44,42 +46,58 @@ Live total counts a test once when the unchanged recipe supports a declared disc
 | relative_cap_01 | 1 | 6/19 | INCOMPLETE |
 | shared_c20 | 1 | 6/19 | INCOMPLETE |
 | shared_p4 | 0 | 6/19 | INCOMPLETE |
+| sched_h50_f01 | 0 | 1/19 | INCOMPLETE |
+| sched_h40_f01 | 0 | 1/19 | INCOMPLETE |
+| c6_profile_prior4 | 0 | 1/19 | INCOMPLETE |
+| sched_h30_f01 | 0 | 1/19 | INCOMPLETE |
+| sched_h30_f05 | 0 | 1/19 | INCOMPLETE |
+| c6_profile_prior3 | 0 | 1/19 | INCOMPLETE |
+| c6_profile_beta2_095 | 0 | 1/19 | INCOMPLETE |
+| c6_profile_beta1_01 | 0 | 1/19 | INCOMPLETE |
 
 ## One recipe per row
 
-| Candidate | G / D / particle LR | Adam betas | b_cap coefficient / κ | Spread weight | Update rule |
-| --- | --- | --- | --- | ---: | --- |
-| shared_c6 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 6 / 1.25 | 0.05 | Adam |
-| lr00425_prior2 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| ratio_g34_d68_p85 | 0.0034 / 0.0068 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| equal_lr_00425 | 0.00425 / 0.00425 / 0.00425 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| equal_lr_0025 | 0.0025 / 0.0025 / 0.0025 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| shared_k075 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 0.75 | 0.05 | Adam |
-| shared_spread01 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.01 | Adam |
-| ratio_g425_d6375_p85 | 0.00425 / 0.006375 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| equal_lr_0034 | 0.0034 / 0.0034 / 0.0034 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| lr0034_dprior125 | 0.0034 / 0.00425 / 0.00425 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| relative_cap_05 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam + relative step cap 0.05 |
-| equal_lr_0017 | 0.0017 / 0.0017 / 0.0017 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| gan | 0.001 / 0.0015 / 0.01 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| gan_legacy | 0.0006 / 0.0009 / 0.006 | (0.0, 0.999) | 1 / 1 | 1 | Adam |
-| shared_b05_999 | 0.00425 / 0.00425 / 0.0085 | (0.5, 0.999) | 3 / 1.25 | 0.05 | Adam |
-| ratio_g25_d15_p85 | 0.0025 / 0.0015 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| ratio_g425_d2125_p85 | 0.00425 / 0.002125 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| ratio_g25_d375_p100 | 0.0025 / 0.00375 / 0.01 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| shared_k10 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1 | 0.05 | Adam |
-| shared_k15 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.5 | 0.05 | Adam |
-| shared_c10 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 10 / 1.25 | 0.05 | Adam |
-| shared_b0_999 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.999) | 3 / 1.25 | 0.05 | Adam |
-| shared_p3 | 0.00425 / 0.00425 / 0.01275 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| ratio_g34_d255_p85 | 0.0034 / 0.00255 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| relative_cap_025 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam + relative step cap 0.025 |
-| shared_b05 | 0.00425 / 0.00425 / 0.0085 | (0.5, 0.99) | 3 / 1.25 | 0.05 | Adam |
-| relative_cap_01 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam + relative step cap 0.01 |
-| shared_c20 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 20 / 1.25 | 0.05 | Adam |
-| shared_p4 | 0.00425 / 0.00425 / 0.017 | (0.0, 0.99) | 3 / 1.25 | 0.05 | Adam |
+| Candidate | G / D / particle LR | Adam betas | b_cap coefficient / κ | Spread weight | Schedule hold / floor | Update rule |
+| --- | --- | --- | --- | ---: | --- | --- |
+| shared_c6 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 6 / 1.25 | 0.05 | 60% / 5% | Adam |
+| lr00425_prior2 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| ratio_g34_d68_p85 | 0.0034 / 0.0068 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| equal_lr_00425 | 0.00425 / 0.00425 / 0.00425 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| equal_lr_0025 | 0.0025 / 0.0025 / 0.0025 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| shared_k075 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 0.75 | 0.05 | 60% / 5% | Adam |
+| shared_spread01 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.01 | 60% / 5% | Adam |
+| ratio_g425_d6375_p85 | 0.00425 / 0.006375 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| equal_lr_0034 | 0.0034 / 0.0034 / 0.0034 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| lr0034_dprior125 | 0.0034 / 0.00425 / 0.00425 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| relative_cap_05 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam + relative step cap 0.05 |
+| equal_lr_0017 | 0.0017 / 0.0017 / 0.0017 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| gan | 0.001 / 0.0015 / 0.01 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| gan_legacy | 0.0006 / 0.0009 / 0.006 | (0.0, 0.999) | 1 / 1 | 1 | 60% / 5% | Adam |
+| shared_b05_999 | 0.00425 / 0.00425 / 0.0085 | (0.5, 0.999) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| ratio_g25_d15_p85 | 0.0025 / 0.0015 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| ratio_g425_d2125_p85 | 0.00425 / 0.002125 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| ratio_g25_d375_p100 | 0.0025 / 0.00375 / 0.01 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| shared_k10 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1 | 0.05 | 60% / 5% | Adam |
+| shared_k15 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.5 | 0.05 | 60% / 5% | Adam |
+| shared_c10 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 10 / 1.25 | 0.05 | 60% / 5% | Adam |
+| shared_b0_999 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.999) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| shared_p3 | 0.00425 / 0.00425 / 0.01275 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| ratio_g34_d255_p85 | 0.0034 / 0.00255 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| relative_cap_025 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam + relative step cap 0.025 |
+| shared_b05 | 0.00425 / 0.00425 / 0.0085 | (0.5, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| relative_cap_01 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam + relative step cap 0.01 |
+| shared_c20 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 20 / 1.25 | 0.05 | 60% / 5% | Adam |
+| shared_p4 | 0.00425 / 0.00425 / 0.017 | (0.0, 0.99) | 3 / 1.25 | 0.05 | 60% / 5% | Adam |
+| sched_h50_f01 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 6 / 1.25 | 0.05 | 50% / 1% | Adam |
+| sched_h40_f01 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 6 / 1.25 | 0.05 | 40% / 1% | Adam |
+| c6_profile_prior4 | 0.00425 / 0.00425 / 0.017 | (0.0, 0.99) | 6 / 1.25 | 0.05 | 60% / 5% | Adam |
+| sched_h30_f01 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 6 / 1.25 | 0.05 | 30% / 1% | Adam |
+| sched_h30_f05 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.99) | 6 / 1.25 | 0.05 | 30% / 5% | Adam |
+| c6_profile_prior3 | 0.00425 / 0.00425 / 0.01275 | (0.0, 0.99) | 6 / 1.25 | 0.05 | 60% / 5% | Adam |
+| c6_profile_beta2_095 | 0.00425 / 0.00425 / 0.0085 | (0.0, 0.95) | 6 / 1.25 | 0.05 | 60% / 5% | Adam |
+| c6_profile_beta1_01 | 0.00425 / 0.00425 / 0.0085 | (0.1, 0.99) | 6 / 1.25 | 0.05 | 60% / 5% | Adam |
 
-All current entries use Rp logistic, no particle L2, and the same schedule: hold for 60% of the budget, then cosine toward 5%. Rates above are absolute and are applied to every optimizer group, including directly optimized particles and AE prior groups.
+All current entries use Rp logistic and no particle L2. The schedule holds rates for the declared fraction of each budget, then follows cosine toward the declared floor. Recorded schedule actions are checked against each recipe. Rates above are absolute and are applied to every optimizer group, including directly optimized particles and AE prior groups.
 
 The update-rule column declares any additional transformation of the Adam proposal. Its complete equation and identical global parameters are retained in leaderboard.json and each episode; reported LRs are the base schedule before that transformation.
 
@@ -99,7 +117,7 @@ All candidate metrics and EMA profiles remain in [leaderboard.json](leaderboard.
 | mid_scale_identity | [PASS](runs/completion-1/episodes/shared_c6__mid_scale_identity.json.gz) | [PASS](runs/round0-2/episodes/lr00425_prior2__mid_scale_identity.json.gz) | [PASS](runs/shared-ratio-search/completion/episodes/ratio_g34_d68_p85__mid_scale_identity.json.gz) | [FAIL](../default_comparison/proposed/episodes/proposed__mid_scale_identity.json.gz) | [FAIL](../default_comparison/current/episodes/current__mid_scale_identity.json.gz) |
 | mode_hold | [PASS](runs/round1-0/episodes/shared_c6__mode_hold.json.gz) | [FAIL](runs/round0-2/episodes/lr00425_prior2__mode_hold.json.gz) | [FAIL](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__mode_hold.json.gz) | [FAIL](../default_comparison/proposed/episodes/proposed__mode_hold.json.gz) | [FAIL](../default_comparison/current/episodes/current__mode_hold.json.gz) |
 | vector_two_broad | [PASS](runs/completion-1/episodes/shared_c6__vector_two_broad.json.gz) | [PASS](runs/round0-2/episodes/lr00425_prior2__vector_two_broad.json.gz) | [PASS](runs/shared-ratio-search/completion/episodes/ratio_g34_d68_p85__vector_two_broad.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_two_broad.json.gz) | [PASS](../default_comparison/current/episodes/current__vector_two_broad.json.gz) |
-| vector_unequal_mass | [FAIL](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta4_l3__vector_unequal_mass.json.gz) | [FAIL](runs/round0-2/episodes/lr00425_prior2__vector_unequal_mass.json.gz) | [FAIL](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__vector_unequal_mass.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_unequal_mass.json.gz) | [FAIL](../default_comparison/current/episodes/current__vector_unequal_mass.json.gz) |
+| vector_unequal_mass | [PASS](runs/shared-batch-feature-search/screen/episodes/shared_c6__batchfeat_center6_distance_head__vector_unequal_mass.json.gz) | [FAIL](runs/round0-2/episodes/lr00425_prior2__vector_unequal_mass.json.gz) | [FAIL](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__vector_unequal_mass.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_unequal_mass.json.gz) | [FAIL](../default_comparison/current/episodes/current__vector_unequal_mass.json.gz) |
 | vector_unequal_width | [PASS](runs/shared-width-search/last_refinement/episodes/shared_c6__width_last_softplus8_128_l3__vector_unequal_width.json.gz) | [FAIL](runs/round0-2/episodes/lr00425_prior2__vector_unequal_width.json.gz) | [FAIL](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__vector_unequal_width.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_unequal_width.json.gz) | [FAIL](../default_comparison/current/episodes/current__vector_unequal_width.json.gz) |
 | vector_anisotropic | [PASS](runs/shared-discriminator-search/cross/episodes/shared_c6__additive_raw_fourier64_l2__vector_anisotropic.json.gz) | [PASS](runs/round0-2/episodes/lr00425_prior2__vector_anisotropic.json.gz) | [FAIL](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__vector_anisotropic.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_anisotropic.json.gz) | [PASS](../default_comparison/current/episodes/current__vector_anisotropic.json.gz) |
 | vector_overlap | [PASS](runs/shared-discriminator-search/cross/episodes/shared_c6__raw_softplus96_l3__vector_overlap.json.gz) | [FAIL](runs/round0-2/episodes/lr00425_prior2__vector_overlap.json.gz) | [PASS](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__vector_overlap.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_overlap.json.gz) | [FAIL](../default_comparison/current/episodes/current__vector_overlap.json.gz) |
@@ -116,7 +134,7 @@ These choices share the exact recipe above. The passing streak counts consecutiv
 | Test | Discriminator | Live | Final passing streak | EMA |
 | --- | --- | --- | ---: | --- |
 | vector_two_broad | original architecture | [PASS](runs/completion-1/episodes/shared_c6__vector_two_broad.json.gz) | 20/24 | PASS |
-| vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta4_l3__vector_unequal_mass.json.gz) | 0/24 | FAIL |
+| vector_unequal_mass | batchfeat_center6_distance_head | [PASS](runs/shared-batch-feature-search/screen/episodes/shared_c6__batchfeat_center6_distance_head__vector_unequal_mass.json.gz) | 7/24 | FAIL |
 | vector_unequal_width | width_last_softplus8_128_l3 | [PASS](runs/shared-width-search/last_refinement/episodes/shared_c6__width_last_softplus8_128_l3__vector_unequal_width.json.gz) | 5/24 | PASS |
 | vector_anisotropic | additive_raw_fourier64_l2 | [PASS](runs/shared-discriminator-search/cross/episodes/shared_c6__additive_raw_fourier64_l2__vector_anisotropic.json.gz) | 8/24 | PASS |
 | vector_overlap | raw_softplus96_l3 | [PASS](runs/shared-discriminator-search/cross/episodes/shared_c6__raw_softplus96_l3__vector_overlap.json.gz) | 10/24 | PASS |
@@ -128,7 +146,6 @@ The final passing streak must reach five observations. A good last checkpoint al
 
 | Recipe | Test | Final failing metrics (value; required bound) | Final passing streak |
 | --- | --- | --- | ---: |
-| shared_c6 | [vector_unequal_mass](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta4_l3__vector_unequal_mass.json.gz) | component_min_eigen_ratio: 0.12525; needs >= 0.15 | 0/5 |
 | lr00425_prior2 | [mode_hold](runs/round0-2/episodes/lr00425_prior2__mode_hold.json.gz) | modes: 7; needs >= 8 | 0/5 |
 | lr00425_prior2 | [vector_unequal_mass](runs/round0-2/episodes/lr00425_prior2__vector_unequal_mass.json.gz) | component_min_eigen_ratio: 5.0555e-05; needs >= 0.15 | 0/5 |
 | lr00425_prior2 | [vector_unequal_width](runs/round0-2/episodes/lr00425_prior2__vector_unequal_width.json.gz) | component_min_eigen_ratio: 0.0048636; needs >= 0.15 | 0/5 |
@@ -142,7 +159,7 @@ The final passing streak must reach five observations. A good last checkpoint al
 
 Architecture support is within a single unchanged recipe. All trials are shown, including failures; it does not mean one universal discriminator works everywhere.
 
-<details><summary>All 155 architecture trials, including failures</summary>
+<details><summary>All 244 architecture trials, including failures</summary>
 
 | Recipe | Test | Discriminator | Live |
 | --- | --- | --- | --- |
@@ -205,6 +222,83 @@ Architecture support is within a single unchanged recipe. All trials are shown, 
 | shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta4_l3__vector_unequal_mass.json.gz) |
 | shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta6_l3 | [FAIL](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta6_l3__vector_unequal_mass.json.gz) |
 | shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta8_l3 | [FAIL](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta8_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_sn_raw_first | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_sn_raw_first__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_sn_raw_hidden | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_sn_raw_hidden__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_sn_raw_head | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_sn_raw_head__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_sn_raw_all | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_sn_raw_all__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_sn_layer_first | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_sn_layer_first__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_sn_layer_hidden | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_sn_layer_hidden__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_sn_layer_head | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_sn_layer_head__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_sn_layer_all | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_sn_layer_all__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_bound_layer_1 | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_bound_layer_1__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_bound_layer_2 | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_bound_layer_2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_bound_layer_4 | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_bound_layer_4__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | rare_bound_raw_2 | [FAIL](runs/shared-rare-gradient/screen/episodes/shared_c6__rare_bound_raw_2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_pre_fixed | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_ln_pre_fixed__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_post_affine | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_ln_post_affine__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_post_fixed | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_ln_post_fixed__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_first_last | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_ln_first_last__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_last | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_ln_last__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_rms_pre_affine | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_rms_pre_affine__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_rms_pre_fixed | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_rms_pre_fixed__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_rms_post_affine | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_rms_post_affine__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_center_pre_affine | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_center_pre_affine__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_center_pre_fixed | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_center_pre_fixed__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_raw_blend025 | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_ln_raw_blend025__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_raw_blend050 | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_ln_raw_blend050__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_post_raw_blend025 | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_ln_post_raw_blend025__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_residual025 | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_ln_residual025__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_input_injection025 | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_ln_input_injection025__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_rms_mix050 | [FAIL](runs/shared-norm-structure-search/screen/episodes/shared_c6__normstruct_ln_rms_mix050__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_power025_fixed | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_power025_fixed__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_power050_fixed | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_power050_fixed__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_power075_fixed | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_power075_fixed__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_power025_affine | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_power025_affine__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_power050_affine | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_power050_affine__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_group2_affine | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_group2_affine__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_group4_affine | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_group4_affine__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_group2_fixed | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_group2_fixed__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_blend050_first | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_ln_blend050_first__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_blend050_last | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_ln_blend050_last__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_ln_blend050_first_last | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_ln_blend050_first_last__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_center_fixed_blend025 | [FAIL](runs/shared-norm-structure-search/refinement/episodes/shared_c6__normstruct_center_fixed_blend025__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_center_fixed96_beta3 | [FAIL](runs/shared-norm-structure-search/center-followup/episodes/shared_c6__normstruct_center_fixed96_beta3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_center_fixed96_beta5 | [FAIL](runs/shared-norm-structure-search/center-followup/episodes/shared_c6__normstruct_center_fixed96_beta5__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_center_fixed96_beta6 | [FAIL](runs/shared-norm-structure-search/center-followup/episodes/shared_c6__normstruct_center_fixed96_beta6__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_center_fixed96_beta8 | [FAIL](runs/shared-norm-structure-search/center-followup/episodes/shared_c6__normstruct_center_fixed96_beta8__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_center_fixed128_beta4 | [FAIL](runs/shared-norm-structure-search/center-followup/episodes/shared_c6__normstruct_center_fixed128_beta4__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | normstruct_center_fixed128_beta8 | [FAIL](runs/shared-norm-structure-search/center-followup/episodes/shared_c6__normstruct_center_fixed128_beta8__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_poly2_lnsp96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_poly2_lnsp96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_poly3_lnsp96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_poly3_lnsp96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_tanhcoords_lnsp96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_tanhcoords_lnsp96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_asinhcoords_lnsp96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_asinhcoords_lnsp96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_ridgehinge2_lnsp96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_ridgehinge2_lnsp96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_ridgehinge8_lnsp96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_ridgehinge8_lnsp96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_ridgetanh2_lnsp96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_ridgetanh2_lnsp96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_ridgewindow4_lnsp96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_ridgewindow4_lnsp96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_raw_lngelu96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_raw_lngelu96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_raw_lnmish96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_raw_lnmish96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_raw_lntanh96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_raw_lntanh96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_raw_lngate96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_raw_lngate96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_poly2_lngate96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_poly2_lngate96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_raw_lnquadhead96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_raw_lnquadhead96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_poly2_lnquadhead96 | [FAIL](runs/shared-geometry-search/screen/episodes/shared_c6__geometry_poly2_lnquadhead96__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_resid_poly2_first | [FAIL](runs/shared-geometry-search/residual/episodes/shared_c6__geometry_resid_poly2_first__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_resid_hinge_first | [FAIL](runs/shared-geometry-search/residual/episodes/shared_c6__geometry_resid_hinge_first__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_resid_hinge_all | [FAIL](runs/shared-geometry-search/residual/episodes/shared_c6__geometry_resid_hinge_all__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_resid_raw_later | [FAIL](runs/shared-geometry-search/residual/episodes/shared_c6__geometry_resid_raw_later__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_resid_poly2_later | [FAIL](runs/shared-geometry-search/residual/episodes/shared_c6__geometry_resid_poly2_later__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_resid_hinge_later | [FAIL](runs/shared-geometry-search/residual/episodes/shared_c6__geometry_resid_hinge_later__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_resid_poly2_head | [FAIL](runs/shared-geometry-search/residual/episodes/shared_c6__geometry_resid_poly2_head__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_resid_hinge_head | [FAIL](runs/shared-geometry-search/residual/episodes/shared_c6__geometry_resid_hinge_head__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_resid_tanh_activation | [FAIL](runs/shared-geometry-search/residual/episodes/shared_c6__geometry_resid_tanh_activation__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_readout_asinh2 | [FAIL](runs/shared-geometry-search/readout/episodes/shared_c6__geometry_readout_asinh2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | geometry_readout_rational2 | [FAIL](runs/shared-geometry-search/readout/episodes/shared_c6__geometry_readout_rational2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | batchfeat_center6_std_scalar | [FAIL](runs/shared-batch-feature-search/screen/episodes/shared_c6__batchfeat_center6_std_scalar__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | batchfeat_center6_std_vector | [FAIL](runs/shared-batch-feature-search/screen/episodes/shared_c6__batchfeat_center6_std_vector__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | batchfeat_layer4_std_scalar | [FAIL](runs/shared-batch-feature-search/screen/episodes/shared_c6__batchfeat_layer4_std_scalar__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | batchfeat_center6_density_head | [FAIL](runs/shared-batch-feature-search/screen/episodes/shared_c6__batchfeat_center6_density_head__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | batchfeat_center6_distance_head | [PASS](runs/shared-batch-feature-search/screen/episodes/shared_c6__batchfeat_center6_distance_head__vector_unequal_mass.json.gz) |
 | shared_c6 | vector_unequal_width | raw_softplus96_l3 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__raw_softplus96_l3__vector_unequal_width.json.gz) |
 | shared_c6 | vector_unequal_width | raw_silu128_l3 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__raw_silu128_l3__vector_unequal_width.json.gz) |
 | shared_c6 | vector_unequal_width | quadratic_softplus96_l2 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__quadratic_softplus96_l2__vector_unequal_width.json.gz) |
@@ -301,6 +395,18 @@ Architecture support is within a single unchanged recipe. All trials are shown, 
 | shared_c6 | vector_anisotropic | additive_raw_fourier64_l2 | [PASS](runs/shared-discriminator-search/cross/episodes/shared_c6__additive_raw_fourier64_l2__vector_anisotropic.json.gz) |
 | shared_c6 | vector_spiral | raw_silu128_l3 | [FAIL](runs/shared-discriminator-search/completion/episodes/shared_c6__raw_silu128_l3__vector_spiral.json.gz) |
 | shared_c6 | vector_spiral | raw_softplus96_l3 | [PASS](runs/shared-discriminator-search/completion/episodes/shared_c6__raw_softplus96_l3__vector_spiral.json.gz) |
+| sched_h50_f01 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/shared-schedule-search/screen/episodes/sched_h50_f01__vector_unequal_mass.json.gz) |
+| sched_h50_f01 | vector_unequal_mass | normstruct_center_fixed96_beta6 | [FAIL](runs/shared-schedule-search/beta6_screen/episodes/sched_h50_f01__vector_unequal_mass.json.gz) |
+| sched_h40_f01 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/shared-schedule-search/screen/episodes/sched_h40_f01__vector_unequal_mass.json.gz) |
+| sched_h40_f01 | vector_unequal_mass | normstruct_center_fixed96_beta6 | [FAIL](runs/shared-schedule-search/beta6_screen/episodes/sched_h40_f01__vector_unequal_mass.json.gz) |
+| c6_profile_prior4 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/rare-global-optimizer-screen/episodes/c6_profile_prior4__vector_unequal_mass.json.gz) |
+| sched_h30_f01 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/shared-schedule-search/screen/episodes/sched_h30_f01__vector_unequal_mass.json.gz) |
+| sched_h30_f01 | vector_unequal_mass | normstruct_center_fixed96_beta6 | [FAIL](runs/shared-schedule-search/beta6_screen/episodes/sched_h30_f01__vector_unequal_mass.json.gz) |
+| sched_h30_f05 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/shared-schedule-search/screen/episodes/sched_h30_f05__vector_unequal_mass.json.gz) |
+| sched_h30_f05 | vector_unequal_mass | normstruct_center_fixed96_beta6 | [FAIL](runs/shared-schedule-search/beta6_screen/episodes/sched_h30_f05__vector_unequal_mass.json.gz) |
+| c6_profile_prior3 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/rare-global-optimizer-screen/episodes/c6_profile_prior3__vector_unequal_mass.json.gz) |
+| c6_profile_beta2_095 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/rare-global-optimizer-screen/episodes/c6_profile_beta2_095__vector_unequal_mass.json.gz) |
+| c6_profile_beta1_01 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/rare-global-optimizer-screen/episodes/c6_profile_beta1_01__vector_unequal_mass.json.gz) |
 
 </details>
 

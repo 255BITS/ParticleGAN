@@ -1,6 +1,6 @@
 # Independent architecture replays
 
-The overlap control, new unequal-width PASS and closest rare failure reproduce every live/EMA
+The overlap control, unequal-width PASS, earlier rare failure and new rare PASS reproduce every live/EMA
 checkpoint, optimizer receipt, recipe, architecture, schedule action and verdict
 exactly. Only timing fields are excluded. Replays are validation evidence and do
 not add leaderboard points.
@@ -10,11 +10,20 @@ not add leaderboard points.
 | Existing raw Softplus96×3 overlap control | PASS | 10/24 | [Checks](control/checks.json) |
 | Raw Softplus128×3, beta8, unequal widths | PASS | 5/24 | [Checks](unequal-width/checks.json) |
 | LayerNorm Softplus96×3, beta4, rare component | FAIL | 0/24 | [Checks](rare-near-miss/checks.json) |
+| Centered Softplus96×3, beta6, batch neighbor distances, rare component | PASS | 7/24 | [Checks](rare-batch-pass/checks.json) |
 
 The width witness passes all metrics at the five observations from step 1000 through 1200. Its minimum
 component eigen ratio across those five observations is .2561695, above .15;
 HQ stays at least .93042, above .85; covariance error stays at most .628182,
 below .85. This is a live-weight pass; EMA also passes independently.
+
+The batch-distance witness passes all six rare-case metrics from step 900
+through 1200. Its worst final-five minimum eigen ratio is .42385 (gate .15).
+Its EMA curve fails the sustained gate and receives no selection credit.
+
+Generated checks, curves and source archives are local artifacts; see
+[repository artifact policy](../../../../README.md). The reproduction commands
+and source remain in Git.
 
 Each folder retains the exact source archive, source hashes, replay payload,
 reference byte hash and field-by-field comparison results. Run from the repo root:

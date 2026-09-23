@@ -8,7 +8,7 @@ import os
 from pathlib import Path
 import tarfile
 
-from particlegan import Recipe
+from particlegan import Recipe, learning_rate_scale
 from benchmarks.transfer_suite.compare_defaults import candidate, effective_spec, ema_verdict, plan, read
 from benchmarks.transfer_suite.protocol import test_verdict
 from benchmarks.transfer_suite.shared_variants import architecture_identity, architecture_spec, select_architecture
@@ -40,6 +40,20 @@ def validate_update_rule(payload, indexed):
                        (step['proposal_rms'] + rule['epsilon']))
         assert 0 < step['factor'] <= 1 and math.isclose(step['factor'], expected, rel_tol=1e-10, abs_tol=1e-12), 'Adaptation receipt contradicts equation'
     return rule
+
+
+def validate_schedule(payload, recipe):
+    expected = dict(kind='cosine', hold=recipe.lr_anneal_start, floor=recipe.lr_floor)
+    if 'schedule' in payload:
+        assert {key: payload['schedule'].get(key) for key in expected} == expected, 'Schedule declaration differs from recipe'
+    actions = payload['result'].get('actions', [])
+    assert actions or payload['result'].get('error'), 'Missing actual schedule actions'
+    for action in actions:
+        assert action['role'] in ('g', 'd')
+        assert type(action['step']) is int and 0 <= action['step'] < payload['spec']['steps']
+        multiplier = learning_rate_scale(action['step'], payload['spec']['steps'],
+                                         recipe.lr_anneal_start, recipe.lr_floor)
+        assert math.isclose(action['multiplier'], multiplier, rel_tol=1e-12, abs_tol=1e-12), 'Schedule action contradicts recipe'
 
 
 def build():
@@ -75,6 +89,8 @@ def build():
                 assert recipe_dict == payload['recipe'], 'Per-test recipe adjustment is forbidden'
                 assert update_rule == validate_update_rule(payload, indexed), 'Per-test update rule adjustment is forbidden'
                 recipe = Recipe(**recipe_dict)
+                assert payload.get('schedule') == indexed.get('schedule'), 'Indexed schedule receipt differs'
+                validate_schedule(payload, recipe)
                 spec, result = payload['spec'], payload['result']
                 name = spec['name']
                 assert name in declared, 'Unknown test'
@@ -120,6 +136,10 @@ def build():
     rows.sort(key=lambda r: (r['attempted'] != 19, -r['passed'], r['shortfall'], r['name']))
     (ROOT/'leaderboard.json').write_text(json.dumps(dict(version='unadjusted-defaults-v1', rows=rows), indent=2)+'\n')
     lines = ['# Unadjusted ParticleGAN default leaderboard', '',
+             'Reproduce the selected profile with [one command](../../../benchmarks/transfer_suite/UNADJUSTED_SEARCH.md). '
+             '[Findings and discriminator details](FINDINGS.md). Generated JSON, curves and replay archives '
+             'linked below are local artifacts; source, plans and this readable leaderboard stay in Git '
+             '([artifact policy](../../README.md)).', '',
              '**This is the primary comparison for selecting a shared default.** Each candidate uses one unchanged '
              'loss/regularization/optimizer recipe on every test. No per-example LR, Adam, prior-rate or loss-weight '
              'adjustments. The earlier adjusted 19/19 result does not compete on this leaderboard.', '',
@@ -149,19 +169,21 @@ def build():
         lines.append('| No partial candidates | — | — | — |')
     lines += ['',
               '## One recipe per row', '',
-              '| Candidate | G / D / particle LR | Adam betas | b_cap coefficient / κ | Spread weight | Update rule |',
-              '| --- | --- | --- | --- | ---: | --- |']
+              '| Candidate | G / D / particle LR | Adam betas | b_cap coefficient / κ | Spread weight | Schedule hold / floor | Update rule |',
+              '| --- | --- | --- | --- | ---: | --- | --- |']
     for r in rows:
         p = r['recipe']
         betas = str(tuple(p['betas']))+(f"; prior {tuple(p['prior_betas'])}" if p['prior_betas'] is not None else '')
         rule = r['mechanism']
         update_label = 'Adam' if rule['kind'] == 'adam' else f"Adam + relative step cap {rule['fraction']:g}"
         lines.append(f"| {r['name']} | {p['lr']:.6g} / {p['lr']*p['d_lr_mult']:.6g} / {p['lr']*p['prior_lr_mult']:.6g} | "
-                     f"{betas} | {p['reg_coeff']:g} / {p['reg_kappa']:g} | {p['prior_reg']:g} | {update_label} |")
+                     f"{betas} | {p['reg_coeff']:g} / {p['reg_kappa']:g} | {p['prior_reg']:g} | "
+                     f"{p['lr_anneal_start']:.0%} / {p['lr_floor']:.0%} | {update_label} |")
     display = [r for r in rows if r['attempted'] == 19][:3]
     display += [r for r in rows if r['name'] in ('gan', 'gan_legacy') and r not in display]
-    lines += ['', 'All current entries use Rp logistic, no particle L2, and the same schedule: hold for 60% of '
-              'the budget, then cosine toward 5%. Rates above are absolute and are applied to every optimizer '
+    lines += ['', 'All current entries use Rp logistic and no particle L2. The schedule holds rates for the '
+              'declared fraction of each budget, then follows cosine toward the declared floor. '
+              'Recorded schedule actions are checked against each recipe. Rates above are absolute and are applied to every optimizer '
               'group, including directly optimized particles and AE prior groups.', '',
               'The update-rule column declares any additional transformation of the Adam proposal. '
               'Its complete equation and identical global parameters are retained in leaderboard.json '

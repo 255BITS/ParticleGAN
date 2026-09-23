@@ -1,12 +1,31 @@
 # Find one shared ParticleGAN default
 
 The [unadjusted leaderboard](../../reports/transfer_suite/unadjusted/README.md)
-is the primary comparison. The initial baselines are **8/19 for the proposed
-public default** and **5/19 for current master**. There is no overall PASS yet.
+is the primary comparison. The winner is **19/19 with `shared_c6` and declared
+discriminator choices**; its reference D profile scores 15/19. The initial
+baselines are **8/19 for the public preset** and **5/19 for the pinned old preset**.
 The earlier 19/19 uses different optimizer settings per host and does not qualify
 here. The objective is one unchanged recipe that passes all 19 live tests.
 
 ## Run a candidate
+
+To reproduce the 19/19 shared recipe with its explicit discriminator
+profile in one command:
+
+```sh
+python -u -m benchmarks.transfer_suite.shared_profile_search \
+  --plan reports/transfer_suite/unadjusted/leading_profile.json \
+  --output /tmp/shared-c6-profile > /tmp/shared-c6-profile.log 2>&1
+tail -f /tmp/shared-c6-profile.log
+```
+
+The [full replay controls](../../reports/transfer_suite/unadjusted/runs/rare-profile-replays/README.md)
+exactly reproduced both the earlier 18/19 profile and the winning 19/19 profile.
+The unequal-mass winner uses batch-dependent neighbor-distance features;
+see the [findings](../../reports/transfer_suite/unadjusted/FINDINGS.md).
+Architecture cards are explicit;
+recipe overrides remain global. Change the candidate name and global overrides
+in a copy of the plan to compare another recipe using the same profile.
 
 Create a JSON file, for example `/tmp/my-candidate.json`:
 
@@ -51,6 +70,12 @@ per-test options. A new generic optimizer or adaptation rule can be added as a
 separate candidate mechanism, with integration/parity checks and its exact source
 archived. Its rule must be the same everywhere; do not branch on task names or
 feed evaluation metrics/target labels into training.
+
+`shared_schedule_search` additionally accepts global `lr_anneal_start` and
+`lr_floor` changes around `shared_c6`. It applies the declared cosine schedule
+through the existing controller on every host and records actual multipliers.
+The importer checks every recorded action against the recipe's schedule equation.
+Schedule screens remain incomplete until all 19 cases run with that recipe.
 
 ## Rules for comparison
 
