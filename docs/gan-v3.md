@@ -54,7 +54,7 @@ The prior is a table of learnable latent vectors $Z=\{z_1,\ldots,z_M\}$.
 Sampling selects a row uniformly, then the generator maps it to a sample:
 
 ```math
-k \sim \operatorname{Uniform}\{1,\ldots,M\},
+k \sim \mathrm{Uniform}\{1,\ldots,M\},
 \qquad \widetilde{x}=G_\theta(z_k).
 ```
 
@@ -67,13 +67,13 @@ and Z. Gradients still flow through D into the generated samples.
 
 Let $R$ and $F$ be equally sized real and generated batches. Write $D_i(X)$ for
 the score of sample $i$ within batch $X$, and define
-$\Delta_i=D_i(R)-D_i(F)$. With $\operatorname{sp}(u)=\log(1+e^u)$:
+$\Delta_i=D_i(R)-D_i(F)$. With $\mathrm{sp}(u)=\log(1+e^u)$:
 
 ```math
 \begin{aligned}
-\mathcal{L}_D &= \frac{1}{B}\sum_{i=1}^{B}\operatorname{sp}(-\Delta_i)
+\mathcal{L}_D &= \frac{1}{B}\sum_{i=1}^{B}\mathrm{sp}(-\Delta_i)
                  + \mathcal{R}_{\mathrm{cap}},\\
-\mathcal{L}_{G,Z} &= \frac{1}{B}\sum_{i=1}^{B}\operatorname{sp}(\Delta_i)
+\mathcal{L}_{G,Z} &= \frac{1}{B}\sum_{i=1}^{B}\mathrm{sp}(\Delta_i)
                  + 0.05\,\mathcal{R}_{\mathrm{spread}}(Z).
 \end{aligned}
 ```
@@ -173,7 +173,7 @@ same multiplier $m_t$, applied to their own starting rates:
 
 ```math
 \begin{aligned}
-u_t &= \operatorname{clip}\!\left(\frac{t-0.6T}{0.4T},0,1\right),\\
+u_t &= \mathrm{clip}\!\left(\frac{t-0.6T}{0.4T},0,1\right),\\
 m_t &= 0.05+\frac{0.95}{2}\left(1+\cos(\pi u_t)\right),
 \qquad \eta_t=\eta_0m_t.
 \end{aligned}
