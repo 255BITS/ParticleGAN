@@ -10,17 +10,52 @@ import math
 
 import torch
 from torch import nn
+from torch.nn import functional as F
+
+
+class LearnableOutputScale(nn.Module):
+    """One positive output-noise standard deviation learned with the generator."""
+
+    def __init__(self, initial_std: float):
+        super().__init__()
+        if (isinstance(initial_std, bool) or not math.isfinite(initial_std)
+                or initial_std <= 0):
+            raise ValueError("learnable output noise requires a positive finite initial std")
+        self.initial_std = float(initial_std)
+        self.raw_scale = nn.Parameter(torch.tensor(
+            initial_std + math.log(-math.expm1(-initial_std)),
+        ))
+
+    def forward(self) -> torch.Tensor:
+        return F.softplus(self.raw_scale)
 
 
 class OutputNoise(nn.Module):
     """Add fresh isotropic output noise in both training and sampling."""
 
-    def __init__(self, model: nn.Module, std: float):
+    def __init__(self, model: nn.Module, std: float, learnable: bool = False):
         super().__init__()
         if not math.isfinite(std) or std < 0:
             raise ValueError("output noise std must be finite and nonnegative")
+        if type(learnable) is not bool:
+            raise ValueError("learnable must be a boolean")
         self.model = model
         self.std = float(std)
+        self.initial_std = float(std)
+        self.output_scale = LearnableOutputScale(std) if learnable else None
+        if self.output_scale is not None:
+            reference = next(model.parameters(), None)
+            if reference is None:
+                reference = next(model.buffers(), None)
+            if reference is not None:
+                dtype = reference.dtype if reference.is_floating_point() else torch.get_default_dtype()
+                self.output_scale.to(device=reference.device, dtype=dtype)
+
+    def effective_std(self) -> float | torch.Tensor:
+        """Apply the common warmup amplitude to the learned base scale."""
+        if self.output_scale is None:
+            return self.std
+        return self.output_scale() * (self.std / self.initial_std)
 
     def forward(self, latent: torch.Tensor) -> torch.Tensor:
         prediction = self.model(latent)
@@ -28,7 +63,7 @@ class OutputNoise(nn.Module):
             return prediction
         # GANTrainer.sample forks the global RNG, so evaluation leaves this
         # training noise stream untouched and fixed-seed frames replay exactly.
-        return prediction + self.std * torch.randn_like(prediction)
+        return prediction + self.effective_std() * torch.randn_like(prediction)
 
 
 class InputNoise(nn.Module):

@@ -16,7 +16,9 @@ import time
 import torch
 from torch import nn
 
-from benchmarks.toy100.models import linear_input_noise, linear_output_noise
+from benchmarks.toy100.models import (
+    LearnableOutputScale, linear_input_noise, linear_output_noise,
+)
 
 
 EVAL_SCOPES = {
@@ -38,6 +40,7 @@ class NoisePolicy:
     def __init__(
         self, output_std: float, input_std: float, input_anneal_end: float,
         total_steps: int, *, seed: int = 0, output_noise_warmup: float = 0.0,
+        output_noise_learnable: bool = False,
     ) -> None:
         if not math.isfinite(output_std) or output_std < 0:
             raise ValueError("output_std must be finite and nonnegative")
@@ -49,9 +52,22 @@ class NoisePolicy:
             raise ValueError("output_noise_warmup must be in [0, 1]")
         if type(seed) is not int or type(total_steps) is not int or total_steps <= 0:
             raise ValueError("seed and total_steps must be integers; total_steps > 0")
+        if type(output_noise_learnable) is not bool:
+            raise ValueError("output_noise_learnable must be a boolean")
+        if output_noise_learnable and output_std <= 0:
+            raise ValueError("output_noise_learnable requires output_std > 0")
         # Validate the fraction with the same function as the trainer hosts.
         linear_input_noise(input_std, 0, total_steps, input_anneal_end)
         self.output_std = float(output_std)
+        self.output_noise_learnable = output_noise_learnable
+        self.output_scale = (LearnableOutputScale(output_std)
+                             if output_noise_learnable else None)
+        self.generator_base_parameters: int | None = None
+        self._output_scale_optimizer_owned = False
+        self._final_live_scale: float | None = None
+        self._final_ema_scale: float | None = None
+        self._detach_output_scale = False
+        self._effective_step_trace: list[float] = []
         self.output_noise_warmup = float(output_noise_warmup)
         self.output_sigma = linear_output_noise(
             output_std, 0, total_steps, output_noise_warmup,
@@ -83,6 +99,64 @@ class NoisePolicy:
             self.output_noise_warmup,
         )
 
+    def scale_parameters(self) -> list[nn.Parameter]:
+        """The single G-owned scalar, or an empty list in fixed-noise mode."""
+        return [] if self.output_scale is None else list(self.output_scale.parameters())
+
+    def register_generator_base(self, model: nn.Module | nn.Parameter | int) -> None:
+        if isinstance(model, nn.Module):
+            count = sum(parameter.numel() for parameter in model.parameters())
+        elif isinstance(model, nn.Parameter):
+            count = model.numel()
+        elif type(model) is int:
+            count = model
+        else:
+            raise TypeError("generator base must be a module, parameter, or integer")
+        if count <= 0 or self.generator_base_parameters is not None:
+            raise ValueError("generator base parameters must be positive and registered once")
+        self.generator_base_parameters = count
+
+    def register_generator_optimizer(
+        self, generator_optimizer: torch.optim.Optimizer,
+        discriminator_optimizer: torch.optim.Optimizer,
+    ) -> None:
+        if self.output_scale is None:
+            return
+        scalar = self.output_scale.raw_scale
+        g_count = sum(parameter is scalar for group in generator_optimizer.param_groups
+                      for parameter in group["params"])
+        d_count = sum(parameter is scalar for group in discriminator_optimizer.param_groups
+                      for parameter in group["params"])
+        if g_count != 1 or d_count:
+            raise ValueError("learnable output scale must occur exactly once in G and never D")
+        self._output_scale_optimizer_owned = True
+
+    def _scale_value(self) -> float:
+        return (self.output_std if self.output_scale is None
+                else float(self.output_scale().detach()))
+
+    def _effective_sigma(self, base_sigma: float, scale: float | None = None) -> float:
+        if self.output_scale is None:
+            return base_sigma
+        return base_sigma / self.output_std * (self._scale_value() if scale is None else scale)
+
+    def capture_final_live(self) -> None:
+        """Preserve the learned live scalar before a host copies EMA weights."""
+        self._final_live_scale = self._scale_value()
+
+    def capture_final_ema(self) -> None:
+        self._final_ema_scale = self._scale_value()
+
+    @contextmanager
+    def discriminator(self):
+        """Detach the noise scalar when drawing a fake batch for a D update."""
+        previous = self._detach_output_scale
+        self._detach_output_scale = True
+        try:
+            yield
+        finally:
+            self._detach_output_scale = previous
+
     def set_step(self, completed_steps: int) -> float:
         """Set both noise amplitudes for the next D and G update."""
         sigma = linear_input_noise(
@@ -100,9 +174,10 @@ class NoisePolicy:
             self._first_output_sigma = self.output_sigma
         self._last_output_sigma = self.output_sigma
         self._nonzero_output_steps += int(self.output_sigma > 0.0)
+        self._effective_step_trace.append(self._effective_sigma(self.output_sigma))
         return sigma
 
-    def output(self, generated: torch.Tensor) -> torch.Tensor:
+    def output(self, generated: torch.Tensor, *, generator_step: bool | None = None) -> torch.Tensor:
         """Add fresh Gaussian noise after one generated data batch is formed."""
         key = "output_eval" if self._evaluating else "output_train"
         self._counts[key + "_calls"] += 1
@@ -110,7 +185,14 @@ class NoisePolicy:
             return generated
         self._counts[key + "_elements"] += generated.numel()
         # Match the ordinary OutputNoise wrapper's global training stream.
-        return generated + self.output_sigma * torch.randn_like(generated)
+        if self.output_scale is None:
+            sigma = self.output_sigma
+        else:
+            sigma = self.output_scale() * (self.output_sigma / self.output_std)
+            if (self._detach_output_scale or self._evaluating
+                    or generator_step is False):
+                sigma = sigma.detach()
+        return generated + sigma * torch.randn_like(generated)
 
     def input(self, data: torch.Tensor) -> torch.Tensor:
         """Perturb only the critic's data coordinates, never its conditioning."""
@@ -135,6 +217,7 @@ class NoisePolicy:
             raise ValueError("evaluation step must be a nonnegative integer")
         saved_d = self.input_stream.get_state()
         previous = self._evaluating
+        previous_detach = self._detach_output_scale
         previous_output_sigma = self.output_sigma
         try:
             with torch.random.fork_rng(devices=[]):
@@ -142,16 +225,47 @@ class NoisePolicy:
                 self.input_stream.manual_seed(self.seed + 1402 + step)
                 self.output_sigma = self._output_sigma_for(step)
                 self._evaluating = True
+                self._detach_output_scale = True
                 yield
         finally:
             self._evaluating = previous
+            self._detach_output_scale = previous_detach
             self.output_sigma = previous_output_sigma
             self.input_stream.set_state(saved_d)
 
     def receipt(self) -> dict:
         """Report actual host call coverage, not merely configured intent."""
+        live_scale = (self._scale_value() if self._final_live_scale is None
+                      else self._final_live_scale)
+        ema_scale = self._final_ema_scale
         return {
             "output_std": self.output_std,
+            "output_noise_learnable": self.output_noise_learnable,
+            "output_scale_parameter_count": len(self.scale_parameters()),
+            "output_scale_optimizer_owned": self._output_scale_optimizer_owned,
+            "generator_base_parameters": self.generator_base_parameters,
+            "generator_total_parameters": (
+                None if self.generator_base_parameters is None else
+                self.generator_base_parameters + len(self.scale_parameters())
+            ),
+            "output_scale_initial": self.output_std,
+            "output_scale_final": live_scale,
+            "output_scale_ema_final": ema_scale,
+            "output_sigma_effective_first": (
+                self._effective_step_trace[0] if self._effective_step_trace else None
+            ),
+            "output_sigma_effective_last": (
+                self._effective_step_trace[-1] if self._effective_step_trace else None
+            ),
+            "output_sigma_effective_step_trace": self._effective_step_trace,
+            "output_sigma_effective_final_evaluation": self._effective_sigma(
+                self._output_sigma_for(self.total_steps), live_scale,
+            ),
+            "output_sigma_effective_ema_final_evaluation": (
+                None if ema_scale is None else self._effective_sigma(
+                    self._output_sigma_for(self.total_steps), ema_scale,
+                )
+            ),
             "output_noise_warmup": self.output_noise_warmup,
             "output_sigma_first": self._first_output_sigma,
             "output_sigma_last": self._last_output_sigma,
@@ -178,6 +292,11 @@ class _OutputAdapter(nn.Module):
         super().__init__()
         self.model = model
         self.policy = policy
+        policy.register_generator_base(model)
+        # Register the one learnable scalar on the G wrapper before the host
+        # constructs its optimizer. The policy itself is deliberately not a
+        # Module, so the scalar appears exactly once in generator.parameters().
+        self.output_scale = policy.output_scale
 
     def forward(self, *args, **kwargs):
         return self.policy.output(self.model(*args, **kwargs))
@@ -225,6 +344,7 @@ def run_legacy(spec: dict, recipe, noise: dict) -> tuple[dict, dict]:
         noise["output_noise_std"], noise["input_noise_std"],
         noise["input_noise_anneal_end"], spec["steps"], seed=0,
         output_noise_warmup=noise.get("output_noise_warmup", 0.0),
+        output_noise_learnable=noise.get("output_noise_learnable", False),
     )
     schedule = vector_tasks.fixed_policy("cosine")
     with optimizer_defaults(recipe, applied):

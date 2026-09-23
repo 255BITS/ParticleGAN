@@ -260,8 +260,15 @@ def _fit_rpgan(
         lazy_k=recipe.reg_lazy,
         target_anneal=recipe.target_anneal,
     )
-    opt_g = torch.optim.Adam(student.parameters(), lr=LR, betas=BETAS)
+    if noise_policy is not None:
+        noise_policy.register_generator_base(student)
+    g_parameters = list(student.parameters()) + (
+        noise_policy.scale_parameters() if noise_policy is not None else []
+    )
+    opt_g = torch.optim.Adam(g_parameters, lr=LR, betas=BETAS)
     opt_d = torch.optim.Adam(critic.parameters(), lr=LR, betas=BETAS)
+    if noise_policy is not None:
+        noise_policy.register_generator_optimizer(opt_g, opt_d)
     for opt in (opt_g, opt_d):
         opt.param_groups[0]["initial_lr"] = LR
     real = {
@@ -280,7 +287,7 @@ def _fit_rpgan(
         for scale in SCALES:
             fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1).detach()
             if noise_policy is not None:
-                fake = noise_policy.output(fake)
+                fake = noise_policy.output(fake, generator_step=False)
             cap, _stats = reg.penalty(
                 lambda z, scale=scale: critic.score(z, scale),
                 real[scale] / critic.input_scale,
@@ -301,7 +308,7 @@ def _fit_rpgan(
         for scale in SCALES:
             fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
             if noise_policy is not None:
-                fake = noise_policy.output(fake)
+                fake = noise_policy.output(fake, generator_step=True)
             g_term = gan.g_loss(critic(fake, scale), real_scores[scale])
             g_loss = g_loss + 0.5 * g_term
         g_loss.backward()

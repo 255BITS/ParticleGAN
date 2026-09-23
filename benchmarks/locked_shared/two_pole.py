@@ -105,8 +105,18 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
         from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input
         critic = wrap_input(base_critic, noise_policy)
     particles = nn.Parameter(torch.zeros(LOCKED_SHARED.n_particles, 1))
+    if noise_policy is not None:
+        noise_policy.register_generator_base(particles)
     opt_d = torch.optim.Adam(critic.parameters(), lr=TOY_LR, betas=TOY_BETAS)
-    opt_p = torch.optim.Adam([particles], lr=TOY_LR, betas=TOY_BETAS)
+    if noise_policy is not None and noise_policy.scale_parameters():
+        opt_p = torch.optim.Adam([
+            {"params": [particles]},
+            {"params": noise_policy.scale_parameters(), "_comparison_output_scale": True},
+        ], lr=TOY_LR, betas=TOY_BETAS)
+    else:
+        opt_p = torch.optim.Adam([particles], lr=TOY_LR, betas=TOY_BETAS)
+    if noise_policy is not None:
+        noise_policy.register_generator_optimizer(opt_p, opt_d)
     gan = (gan_factory or make_gan_loss)()
     regularizer = (cap_factory or make_b_cap)()
     real = real_batch(LOCKED_SHARED.n_particles)
@@ -117,7 +127,7 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
         opt_d.zero_grad(set_to_none=True)
         fake = particles.detach() if pairing == "live" else stranger
         if noise_policy is not None:
-            fake = noise_policy.output(fake)
+            fake = noise_policy.output(fake, generator_step=False)
         d_loss = gan.d_loss(critic(real), critic(fake))
         (d_loss + regularizer(critic, real, fake, step=step)).backward()
         schedule_optimizer(opt_d, step - 1)
@@ -127,7 +137,7 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
         d_real = critic(real).detach()
         generated = particles if pairing == "live" else stranger
         if noise_policy is not None:
-            generated = noise_policy.output(generated)
+            generated = noise_policy.output(generated, generator_step=True)
         paired = critic(generated)
         g_loss = gan.g_loss(paired, d_real)
         g_loss = g_loss + particle_l2 * particles.square().mean()

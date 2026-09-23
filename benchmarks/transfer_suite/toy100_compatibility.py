@@ -7,7 +7,7 @@ settings and the two target-agnostic noise wrappers come from the supplied
 19-case public-default verification or a search over host settings.
 
 python -u -m benchmarks.transfer_suite.toy100_compatibility \
-    --config configs/toy100/recommended.json --output /tmp/toy100-vector-screen
+    --config configs/toy100/shared_candidate.json --output /tmp/toy100-vector-screen
 """
 from __future__ import annotations
 
@@ -74,7 +74,62 @@ def declared_recipe(config: dict):
     noise = {name: resolved[name] for name in
              ("output_noise_std", "input_noise_std", "input_noise_anneal_end")}
     noise["output_noise_warmup"] = float(output_warmup)
+    # Omit the optional false value so archived fixed-noise protocols keep
+    # their original canonical noise identity. True is always explicit.
+    if resolved.get("output_noise_learnable", False):
+        noise["output_noise_learnable"] = True
     return recipe, noise, resource_overrides
+
+
+def _effective_output_std(model) -> float:
+    value = model.effective_std()
+    return float(value.detach()) if isinstance(value, torch.Tensor) else float(value)
+
+
+def _native_noise_receipt(context, noise, spec, result):
+    trainer = context["trainer"]
+    learned = noise.get("output_noise_learnable", False)
+    scale = trainer.G.output_scale if learned else None
+    scalar = scale.raw_scale if scale is not None else None
+    ownership = bool(
+        scalar is not None
+        and sum(p is scalar for group in trainer.opt_g.param_groups for p in group["params"]) == 1
+        and all(p is not scalar for group in trainer.opt_d.param_groups for p in group["params"])
+        and any(p is scalar for p in trainer.opt_g.param_groups[0]["params"])
+        and all(p is not scalar for p in trainer.opt_g.param_groups[1]["params"])
+    )
+    trace = [action["output_sigma_effective"] for action in result["actions"]]
+    receipt = dict(
+        output_module=type(trainer.G).__name__,
+        input_module=type(trainer.D).__name__,
+        input_nonzero_steps=sum(action["input_sigma"] > 0 for action in result["actions"]),
+        output_nonzero_steps=sum(action["output_sigma"] > 0 for action in result["actions"]),
+        output_sigma_first=result["actions"][0]["output_sigma"],
+        output_sigma_last=result["actions"][-1]["output_sigma"],
+        output_sigma_final_evaluation=output_noise_at(
+            noise["output_noise_std"], spec["steps"], spec["steps"],
+            noise.get("output_noise_warmup", 0.0),
+        ),
+        output_noise_learnable=learned,
+        output_scale_parameter_count=scalar.numel() if scalar is not None else 0,
+        output_scale_optimizer_owned=ownership,
+        generator_base_parameters=context["generator_base_parameters"],
+        generator_total_parameters=sum(p.numel() for p in trainer.G.parameters()),
+        output_scale_initial=context["output_scale_initial"],
+        output_scale_final=float(scale().detach()) if scale is not None else None,
+        output_sigma_effective_first=trace[0],
+        output_sigma_effective_last=trace[-1],
+        output_sigma_effective_final_evaluation=_effective_output_std(trainer.G)
+            if noise["output_noise_std"] else 0.0,
+        output_sigma_effective_step_trace=trace,
+        step_calls=len(result["actions"]),
+    )
+    if learned:
+        receipt["output_scale_ema_final"] = float(trainer.ema_G.output_scale().detach())
+        receipt["output_sigma_effective_ema_final_evaluation"] = _effective_output_std(
+            trainer.ema_G,
+        )
+    return receipt
 
 
 def setup_vector(spec, card, base, noise):
@@ -89,9 +144,15 @@ def setup_vector(spec, card, base, noise):
     recipe = host_recipe(base, spec)
     prior = recipe.make_prior(init_std=.5, generator=torch.Generator().manual_seed(0))
     generator = SimpleMLPGenerator(cfg["z_dim"], cfg["hidden"], cfg["layers"], 2)
+    generator_base_parameters = sum(p.numel() for p in generator.parameters())
     discriminator = vector_discriminator(spec, card)
     if noise["output_noise_std"]:
-        generator = OutputNoise(generator, noise["output_noise_std"])
+        generator = OutputNoise(
+            generator, noise["output_noise_std"],
+            learnable=noise.get("output_noise_learnable", False),
+        )
+    output_scale_initial = (float(generator.output_scale().detach())
+                            if noise.get("output_noise_learnable", False) else None)
     if noise["input_noise_std"]:
         discriminator = InputNoise(discriminator, seed=901, device=torch.device("cpu"))
     trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
@@ -103,7 +164,9 @@ def setup_vector(spec, card, base, noise):
     if noise["output_noise_std"]:
         torch.manual_seed(0)
     return dict(trainer=trainer, cfg=cfg, data_rng=data_rng, shapes=shapes,
-                applied=optimizer_receipts(trainer), host_recipe=recipe)
+                applied=optimizer_receipts(trainer), host_recipe=recipe,
+                generator_base_parameters=generator_base_parameters,
+                output_scale_initial=output_scale_initial)
 
 
 def run_vector(spec, card, base, noise):
@@ -122,6 +185,9 @@ def run_vector(spec, card, base, noise):
         if noise["output_noise_std"]:
             trainer.G.std = output_sigma
             trainer.ema_G.std = output_sigma
+        output_sigma_effective = (
+            _effective_output_std(trainer.G) if noise["output_noise_std"] else 0.0
+        )
         sigma = linear_input_noise(
             noise["input_noise_std"], trainer.completed_steps, cfg["steps"],
             noise["input_noise_anneal_end"],
@@ -135,7 +201,8 @@ def run_vector(spec, card, base, noise):
                    if key != "step" and isinstance(value, torch.Tensor)):
             raise FloatingPointError("nonfinite transfer-screen loss")
         actions.append(rate_action(trainer, completed) |
-                       {"input_sigma": sigma, "output_sigma": output_sigma})
+                       {"input_sigma": sigma, "output_sigma": output_sigma,
+                        "output_sigma_effective": output_sigma_effective})
         if completed in expected:
             if noise["output_noise_std"]:
                 evaluated_sigma = output_noise_at(
@@ -154,7 +221,10 @@ def run_vector(spec, card, base, noise):
                 live = measure(trainer.G, trainer.prior)
                 ema = measure(trainer.ema_G, trainer.ema_prior)
             observations.append(dict(**live, ema=ema, step=completed,
-                                     seconds=time.perf_counter() - started))
+                                     seconds=time.perf_counter() - started,
+                                     **({"output_sigma_live": _effective_output_std(trainer.G),
+                                         "output_sigma_ema": _effective_output_std(trainer.ema_G)}
+                                        if noise.get("output_noise_learnable", False) else {})))
             losses.append(dict(step=completed, d=float(stats["loss_d"]),
                                g=float(stats["loss_g"]), penalty=float(stats["penalty"]),
                                prior=float(stats["prior_regularization"])))
@@ -176,9 +246,15 @@ def setup_image(spec, base, noise):
     recipe = host_recipe(base, spec)
     # Preserve the frozen host's G, D, then prior construction order.
     generator, discriminator = image_tasks.Generator(spec), image_tasks.Discriminator(spec)
+    generator_base_parameters = sum(p.numel() for p in generator.parameters())
     prior = recipe.make_prior()
     if noise["output_noise_std"]:
-        generator = OutputNoise(generator, noise["output_noise_std"])
+        generator = OutputNoise(
+            generator, noise["output_noise_std"],
+            learnable=noise.get("output_noise_learnable", False),
+        )
+    output_scale_initial = (float(generator.output_scale().detach())
+                            if noise.get("output_noise_learnable", False) else None)
     if noise["input_noise_std"]:
         discriminator = InputNoise(discriminator, seed=901, device=torch.device("cpu"))
     global_stream = torch.default_generator
@@ -189,7 +265,9 @@ def setup_image(spec, base, noise):
     if noise["output_noise_std"]:
         torch.manual_seed(0)
     return dict(trainer=trainer, centers=centers, shapes=shapes,
-                applied=optimizer_receipts(trainer), host_recipe=recipe)
+                applied=optimizer_receipts(trainer), host_recipe=recipe,
+                generator_base_parameters=generator_base_parameters,
+                output_scale_initial=output_scale_initial)
 
 
 def run_image(spec, base, noise):
@@ -208,6 +286,9 @@ def run_image(spec, base, noise):
         if noise["output_noise_std"]:
             trainer.G.std = output_sigma
             trainer.ema_G.std = output_sigma
+        output_sigma_effective = (
+            _effective_output_std(trainer.G) if noise["output_noise_std"] else 0.0
+        )
         sigma = linear_input_noise(
             noise["input_noise_std"], trainer.completed_steps, spec["steps"],
             noise["input_noise_anneal_end"],
@@ -221,7 +302,8 @@ def run_image(spec, base, noise):
                    if key != "step" and isinstance(value, torch.Tensor)):
             raise FloatingPointError("nonfinite transfer-screen loss")
         actions.append(rate_action(trainer, completed) |
-                       {"input_sigma": sigma, "output_sigma": output_sigma})
+                       {"input_sigma": sigma, "output_sigma": output_sigma,
+                        "output_sigma_effective": output_sigma_effective})
         if completed in expected:
             if noise["output_noise_std"]:
                 evaluated_sigma = output_noise_at(
@@ -235,7 +317,10 @@ def run_image(spec, base, noise):
                                       centers, spec["thresholds"])
             observations.append(dict(step=completed,
                                      seconds=time.perf_counter() - started,
-                                     **live, ema=ema))
+                                     **live, ema=ema,
+                                     **({"output_sigma_live": _effective_output_std(trainer.G),
+                                         "output_sigma_ema": _effective_output_std(trainer.ema_G)}
+                                        if noise.get("output_noise_learnable", False) else {})))
             losses.append(dict(step=completed, d=float(stats["loss_d"]),
                                g=float(stats["loss_g"]), penalty=float(stats["penalty"]),
                                prior=float(stats["prior_regularization"])))
@@ -315,18 +400,7 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
             context = dict(applied=[], shapes={}, host_recipe=host_recipe(base, spec))
         receipt = context.get("noise_receipt")
         if spec["runner"] in ("vector", "image") and not result.get("error"):
-            trainer = context["trainer"]
-            receipt = dict(
-                output_module=type(trainer.G).__name__,
-                input_module=type(trainer.D).__name__,
-                input_nonzero_steps=sum(action["input_sigma"] > 0
-                                        for action in result["actions"]),
-                output_nonzero_steps=sum(action["output_sigma"] > 0
-                                         for action in result["actions"]),
-                output_sigma_first=result["actions"][0]["output_sigma"],
-                output_sigma_last=result["actions"][-1]["output_sigma"],
-                step_calls=len(result["actions"]),
-            )
+            receipt = _native_noise_receipt(context, noise, spec, result)
             noise_applied = (
                 receipt["step_calls"] == spec["steps"]
                 and (noise["output_noise_std"] == 0 or
@@ -334,6 +408,9 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
                 and (noise["input_noise_std"] == 0 or
                      receipt["input_module"] == "InputNoise"
                      and receipt["input_nonzero_steps"] > 0)
+                and (not noise.get("output_noise_learnable", False) or
+                     receipt["output_scale_parameter_count"] == 1
+                     and receipt["output_scale_optimizer_owned"])
             )
         elif receipt is not None and not result.get("error"):
             noise_applied = (
@@ -343,6 +420,9 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
                 and (noise["input_noise_std"] == 0 or
                      receipt["train_input_applied"]
                      and receipt["input_nonzero_steps"] > 0)
+                and (not noise.get("output_noise_learnable", False) or
+                     receipt.get("output_scale_parameter_count") == 1
+                     and receipt.get("output_scale_optimizer_owned"))
             )
         else:
             noise_applied = False

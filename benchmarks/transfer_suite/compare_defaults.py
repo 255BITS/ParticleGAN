@@ -123,7 +123,9 @@ def optimizer_defaults(recipe, applied):
         result = original_role(optimizer, locals_)
         if locals_.get('opt_p') is optimizer:
             for group in optimizer.param_groups:
-                group['_comparison_prior'] = True
+                # Direct particles remain prior-owned. A learnable output
+                # noise scalar on the same host optimizer is generator-owned.
+                group['_comparison_prior'] = not group.get('_comparison_output_scale', False)
         return result
 
     class RecipeControl(original_control):

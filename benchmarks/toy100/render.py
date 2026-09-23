@@ -6,6 +6,7 @@ import hashlib
 from io import BytesIO
 import json
 from pathlib import Path
+import textwrap
 
 import numpy as np
 
@@ -76,7 +77,7 @@ def _make_frame(runs: list[dict], step: int):
     from PIL import Image
 
     columns = len(runs)
-    fig, axes = plt.subplots(2, columns, figsize=(4.4 * columns, 8.0), squeeze=False,
+    fig, axes = plt.subplots(2, columns, figsize=(4.4 * columns, 9.0), squeeze=False,
                              facecolor="#f8fafc")
     for column, run in enumerate(runs):
         live, target = _snapshot(run, step)
@@ -88,14 +89,37 @@ def _make_frame(runs: list[dict], step: int):
         _style_axes(target_ax, name=run["name"], step=step, metrics=None, target=True)
         _style_axes(live_ax, name=run["name"], step=step,
                     metrics=run["rows"][step]["metrics"], target=False)
+        row = run["rows"][step]
+        accuracy = row.get("accuracy")
+        if accuracy is not None:
+            verdict = "PASS" if accuracy["passed"] else "FAIL"
+            def value(key, spec=".3f"):
+                number = accuracy.get(key)
+                return "n/a" if number is None else format(number, spec)
+            center = value("center_rms_sigma", ".2f")
+            if center != "n/a":
+                center += "σ"
+            live_ax.set_xlabel(
+                f"Mass TV {value('mass_tv')} · center RMS {center}\n"
+                f"Covariance bias {value('cov_trace_bias', '+.3f')} · radial KS {value('radial_ks')}\n"
+                f"This checkpoint: {verdict}",
+                fontsize=9, color="#0f172a", labelpad=8,
+            )
+        else:
+            live_ax.set_xlabel(
+                f"Mass TV {row['metrics']['mass_tv']:.3f} · accuracy not recorded",
+                fontsize=9, color="#0f172a", labelpad=8,
+            )
     label = runs[0]["config"].get("name", "toy100")
     budget = runs[0]["config"]["steps"]
-    fig.suptitle(f"100-Gaussian toys · {label} · step {step:,}/{budget:,}",
-                 fontsize=15, color="#0f172a", y=.99)
-    fig.text(.5, .015, "Recorded target and generated samples at each checkpoint · "
-             "live weights · fixed axes · per-mode quality scored separately",
-             ha="center", fontsize=8, color="#475569")
-    fig.tight_layout(rect=(0, .035, 1, .955))
+    title = (f"100-Gaussian toys\n{textwrap.fill(label, width=42 * columns)}\n"
+             f"Step {step:,}/{budget:,}")
+    fig.suptitle(title, fontsize=11, color="#0f172a", y=.99)
+    footer = ("Recorded live samples · fixed axes · full gate also requires "
+              "sustained terminal accuracy and an independent holdout")
+    fig.text(.5, .015, textwrap.fill(footer, width=72 * columns),
+             ha="center", fontsize=7, color="#475569")
+    fig.tight_layout(rect=(0, .05, 1, .925))
     buffer = BytesIO()
     fig.savefig(buffer, format="png", dpi=105, facecolor=fig.get_facecolor())
     plt.close(fig)

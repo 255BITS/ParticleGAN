@@ -147,6 +147,8 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
     )
     if training_recipe is not None:
         opt_g, opt_d = training_recipe.make_optimizers(generator, critic, prior)
+    if noise_policy is not None:
+        noise_policy.register_generator_optimizer(opt_g, opt_d)
     base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
     batch = BATCH if training_recipe is None else training_recipe.batch_size
     ema_g = [p.detach().clone() for p in generator.parameters()]
@@ -175,6 +177,8 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             for param, ema in zip(generator.parameters(), ema_g):
                 param.copy_(ema)
             prior.z.copy_(ema_z)
+            if noise_policy is not None and step == recipe.steps:
+                noise_policy.capture_final_ema()
             row = measure(step)
         with torch.no_grad():
             for param, saved in zip(generator.parameters(), saved_g):
@@ -195,7 +199,9 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
                     group["lr"] = rate * scale
         real = sample_ring(means, batch, SIGMA, stream)
         latent, _ = prior.sample(batch, generator=stream)
-        fake = generator(latent).detach()
+        context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
+        with context:
+            fake = generator(latent).detach()
         d_loss = gan.d_loss(critic(real), critic(fake))
         d_loss = d_loss + regularizer(critic, real, fake, step=step + 1)
         opt_d.zero_grad()
@@ -234,6 +240,8 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             live_curve.append(point)
             if log is not None:
                 log(point)
+    if noise_policy is not None:
+        noise_policy.capture_final_live()
     final = snapshot(recipe.steps)
     final["verdict"] = verdict(final)
     if diagnostics:

@@ -52,3 +52,24 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m benchmarks.toy100.accuracy \
   reports/toy100/recommended --oracle-repetitions 16 \
   --output reports/toy100/accuracy-diagnostics.json
 ```
+
+## Independent hosted-run audit
+
+The [last original-coverage CI run](https://github.com/255BITS/ParticleGAN/actions/runs/35896027038)
+passed all three original coverage gates at commit `2b810a9`. Unlike the
+earlier archived samples, this fresh run also retained all five terminal
+20,000-draw clouds and separate 100,000-draw holdouts. Reopening that downloaded
+evidence with `python -m benchmarks.toy100 accuracy --output DIR` produces a
+valid **0/3 accuracy PASS** result, with no missing-evidence failures.
+
+| Problem | Passing final accuracy checks / 5 | 100k mass TV | Center RMS / σ | Covariance trace bias | Radial KS |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| grid100 | 0 | .0842 | .6561 | −.1802 | .0222 |
+| rotated100 | 1 | .0474 | .1520 | −.1558 | .0638 |
+| staggered100 | 0 | .0658 | .2170 | −.1938 | .0759 |
+
+These holdouts confirm that counting all modes does not establish accurate
+component widths, centers, or mass. The current pull-request workflow trains
+and grades all 22 cases under `configs/toy100/shared_candidate.json`; its
+three 100-mode rows now require both coverage and this accuracy protocol.
+The current shared candidate is failing, and the PR remains a draft.

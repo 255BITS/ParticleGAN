@@ -207,6 +207,8 @@ def train(*, pairing: str = "shared", echo: bool = False,
     opt_d = torch.optim.Adam(
         critic.parameters(), lr=PROTOCOL["lr"], betas=(PROTOCOL["beta1"], PROTOCOL["beta2"]),
     )
+    if noise_policy is not None:
+        noise_policy.register_generator_optimizer(opt_g, opt_d)
     _emit({
         "event": "config",
         "family": "residual_student",
@@ -235,7 +237,9 @@ def train(*, pairing: str = "shared", echo: bool = False,
     for step in range(1, steps + 1):
         if noise_policy is not None:
             noise_policy.set_step(step - 1)
-        fake = head(slow, prior.z)
+        context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
+        with context:
+            fake = head(slow, prior.z)
         opt_d.zero_grad(set_to_none=True)
         d_loss = gan.d_loss(critic(slow, paired), critic(slow, fake.detach()))
         view.slow = slow.detach()

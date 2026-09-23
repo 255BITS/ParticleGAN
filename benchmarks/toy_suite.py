@@ -8,7 +8,7 @@ noise on every host, as well as each host's frozen live gate. Candidate runs
 without complete training-noise receipts remain INCOMPLETE for that claim.
 
 python -u -m benchmarks.toy_suite run \
-    --config configs/toy100/recommended.json --output /tmp/toy-suite-22
+    --config configs/toy100/shared_candidate.json --output /tmp/toy-suite-22
 python -m benchmarks.toy_suite regrade --output /tmp/toy-suite-22
 """
 from __future__ import annotations
@@ -43,6 +43,26 @@ from particlegan import Recipe, learning_rate_scale
 ROOT = Path(__file__).resolve().parents[1]
 NOISE_FIELDS = ("output_noise_std", "input_noise_std",
                 "input_noise_anneal_end", "output_noise_warmup")
+NATIVE_SOURCE_FILES = (
+    "benchmarks/toy100/train.py", "benchmarks/toy100/models.py",
+    "benchmarks/toy100/problems.py", "benchmarks/toy100/metrics.py",
+    "benchmarks/toy100/accuracy.py", "benchmarks/toy100/accuracy_evidence.py",
+    "benchmarks/toy100/accuracy_gate.py", "lib/toy_models.py",
+    "particlegan/training.py", "particlegan/recipes.py",
+)
+
+
+def _noise_identity(noise: dict) -> dict:
+    """Treat the optional absent learnable flag as its historical false value."""
+    if not isinstance(noise, dict):
+        raise ValueError("noise declaration is not an object")
+    learned = noise.get("output_noise_learnable", False)
+    if type(learned) is not bool:
+        raise ValueError("output_noise_learnable must be a boolean")
+    if learned and (not _positive_scale(noise.get("output_noise_std"))):
+        raise ValueError("learnable output noise requires a positive peak")
+    return {**noise, "output_noise_warmup": noise.get("output_noise_warmup", 0.0),
+            "output_noise_learnable": learned}
 
 
 def _read(path: Path):
@@ -66,6 +86,18 @@ def _close(actual, expected):
     return (isinstance(actual, (int, float)) and not isinstance(actual, bool)
             and math.isfinite(actual)
             and math.isclose(actual, expected, rel_tol=1e-12, abs_tol=1e-14))
+
+
+def _scale_close(actual, expected):
+    """Allow float32 softplus roundoff while still binding scalar receipts."""
+    return (isinstance(actual, (int, float)) and not isinstance(actual, bool)
+            and math.isfinite(actual)
+            and math.isclose(actual, expected, rel_tol=1e-5, abs_tol=1e-7))
+
+
+def _positive_scale(value):
+    return (isinstance(value, (int, float)) and not isinstance(value, bool)
+            and math.isfinite(value) and value > 0)
 
 
 def _check_optimizer_receipts(record: dict, base: Recipe):
@@ -134,6 +166,173 @@ def _check_actions(record: dict, base: Recipe, noise: dict | None):
                 raise ValueError(f"trainer output warmup differs: {name}.{completed}")
 
 
+def _check_learned_transfer_noise(record: dict, receipt: dict, noise: dict):
+    """Bind the learned scalar, its optimizer ownership, and its actual sigma."""
+    name = record["name"]
+    learned = _noise_identity(noise)["output_noise_learnable"]
+    reported = receipt.get("output_noise_learnable", False)
+    if type(reported) is not bool or reported != learned:
+        raise ValueError(f"learnable-noise flag differs from common recipe: {name}")
+    if not learned:
+        if receipt.get("output_scale_parameter_count", 0) != 0:
+            raise ValueError(f"fixed-noise host has a learned output parameter: {name}")
+        return
+
+    peak = noise["output_noise_std"]
+    steps = record["spec"]["steps"]
+    warmup = noise.get("output_noise_warmup", 0.0)
+    if (receipt.get("output_scale_parameter_count") != 1
+            or receipt.get("output_scale_optimizer_owned") is not True):
+        raise ValueError(f"learned output scale lacks one G-owned parameter: {name}")
+    base_count = receipt.get("generator_base_parameters")
+    total_count = receipt.get("generator_total_parameters")
+    if (type(base_count) is not int or base_count < 1
+            or type(total_count) is not int or total_count != base_count + 1):
+        raise ValueError(f"learned output wrapper parameter count differs: {name}")
+    if record["spec"]["runner"] != "legacy":
+        from benchmarks.transfer_suite import image_tasks, vector_tasks
+        from lib.toy_models import SimpleMLPGenerator
+        import torch
+
+        with torch.random.fork_rng(devices=[]):
+            if record["spec"]["runner"] == "vector":
+                cfg = vector_tasks.resolve(record["spec"])
+                bare = SimpleMLPGenerator(cfg["z_dim"], cfg["hidden"], cfg["layers"], 2)
+            else:
+                bare = image_tasks.Generator(record["spec"])
+        expected_base = sum(parameter.numel() for parameter in bare.parameters())
+        g_receipts = [item for item in record["applied"] if item.get("role") == "g"]
+        if (len(g_receipts) != 1 or g_receipts[0].get("parameters") != total_count
+                or record.get("shapes", {}).get("generator_parameters") != total_count
+                or base_count != expected_base):
+            raise ValueError(f"native generator optimizer or shape count differs: {name}")
+
+    initial_scale = receipt.get("output_scale_initial")
+    final_scale = receipt.get("output_scale_final")
+    if (not _scale_close(initial_scale, peak) or not _positive_scale(final_scale)):
+        raise ValueError(f"learned output scale is invalid: {name}")
+    trace = receipt.get("output_sigma_effective_step_trace")
+    if not isinstance(trace, list) or len(trace) != steps:
+        raise ValueError(f"learned output sigma trace is incomplete: {name}")
+    first_base = output_noise_at(peak, 0, steps, warmup)
+    last_base = output_noise_at(peak, steps - 1, steps, warmup)
+    final_base = output_noise_at(peak, steps, steps, warmup)
+    if (not _close(receipt.get("output_sigma_first"), first_base)
+            or not _close(receipt.get("output_sigma_last"), last_base)
+            or not _close(receipt.get("output_sigma_final_evaluation"), final_base)
+            or receipt.get("output_nonzero_steps") != sum(
+                output_noise_at(peak, step, steps, warmup) > 0
+                for step in range(steps)
+            )):
+        raise ValueError(f"learned output base schedule differs: {name}")
+    for completed, effective in enumerate(trace):
+        base_sigma = output_noise_at(peak, completed, steps, warmup)
+        if not (_scale_close(effective, 0.0) if base_sigma == 0
+                else _positive_scale(effective)):
+            raise ValueError(f"learned output sigma is invalid: {name}.{completed}")
+        if record["spec"]["runner"] != "legacy":
+            action = record["result"]["actions"][completed]
+            if not _scale_close(action.get("output_sigma_effective"), effective):
+                raise ValueError(f"learned output sigma action differs: {name}.{completed}")
+    if (not _scale_close(trace[0], first_base / peak * initial_scale)
+            or not _scale_close(receipt.get("output_sigma_effective_first"), trace[0])
+            or not _scale_close(receipt.get("output_sigma_effective_last"), trace[-1])
+            or not _scale_close(receipt.get("output_sigma_effective_final_evaluation"),
+                                final_base / peak * final_scale)):
+        raise ValueError(f"learned output sigma endpoint differs: {name}")
+    ema_scale = receipt.get("output_scale_ema_final")
+    ema_effective = receipt.get("output_sigma_effective_ema_final_evaluation")
+    if record["spec"]["runner"] != "legacy" or ema_scale is not None or ema_effective is not None:
+        if (not _positive_scale(ema_scale)
+                or not _scale_close(ema_effective, final_base / peak * ema_scale)):
+            raise ValueError(f"learned EMA output sigma differs: {name}")
+    if record["spec"]["runner"] != "legacy":
+        last = record["result"]["observations"][-1]
+        if (not _scale_close(last.get("output_sigma_live"),
+                             receipt["output_sigma_effective_final_evaluation"])
+                or not _scale_close(last.get("output_sigma_ema"), ema_effective)):
+            raise ValueError(f"learned output evaluation differs from receipt: {name}")
+
+
+def _check_toy100_learned_noise(directory: Path, summary: dict, config: dict):
+    """Audit the native scalar and its post-update/evaluation noise evidence.
+
+    Train events record the effective sigma after that update. The update
+    itself used the preceding completed-step schedule value.
+    """
+    if not config.get("output_noise_learnable", False):
+        if summary.get("learnable_output_noise") is not None:
+            raise ValueError("fixed-noise 100-mode run has a learned-scale receipt")
+        return
+    name = config["problem"]
+    peak, steps = config["output_noise_std"], config["steps"]
+    warmup = config.get("output_noise_warmup", 0.0)
+    receipt = summary.get("learnable_output_noise")
+    if not isinstance(receipt, dict):
+        raise ValueError(f"learned output-scale receipt is absent: {name}")
+    if (not _close(receipt.get("initial_std"), peak)
+            or receipt.get("added_trainable_parameters") != 1
+            or receipt.get("parameter") != "G.output_scale.raw_scale"
+            or receipt.get("optimizer") != "G"
+            or receipt.get("optimizer_group") != 0):
+        raise ValueError(f"learned output scale is not bound to G optimizer: {name}")
+    initial = output_noise_at(peak, 0, steps, warmup)
+    final = output_noise_at(peak, steps, steps, warmup)
+    for model in ("live", "ema"):
+        if (not _scale_close(receipt.get(f"initial_output_sigma_{model}"), initial)
+                or not _positive_scale(receipt.get(f"final_base_std_{model}"))
+                or not _scale_close(receipt.get(f"final_output_sigma_{model}"),
+                                    final / peak * receipt[f"final_base_std_{model}"])):
+            raise ValueError(f"learned 100-mode output sigma endpoint differs: {name}.{model}")
+    train_events, eval_events = {}, {}
+    for line in (directory / "events.jsonl").read_text().splitlines():
+        event = json.loads(line)
+        if event.get("event") == "train":
+            step = event.get("step")
+            if step in train_events:
+                raise ValueError(f"duplicate learned training sigma: {name}.{step}")
+            train_events[step] = event
+        if event.get("event") == "eval" and event.get("model") in ("live", "ema"):
+            key = (event.get("step"), event["model"])
+            if key in eval_events:
+                raise ValueError(f"duplicate learned evaluation sigma: {name}.{key}")
+            eval_events[key] = event
+    if set(train_events) != set(range(1, steps + 1)):
+        raise ValueError(f"learned training sigma trace is incomplete: {name}")
+    if set(eval_events) != {(step, model) for step in summary["eval_steps"]
+                           for model in ("live", "ema")}:
+        raise ValueError(f"learned evaluation sigma trace is incomplete: {name}")
+    for step, event in train_events.items():
+        base_sigma = output_noise_at(peak, step, steps, warmup)
+        for model in ("live", "ema"):
+            value = event.get(f"output_sigma_{model}")
+            if not (_scale_close(value, 0.0) if base_sigma == 0
+                    else _positive_scale(value)):
+                raise ValueError(f"invalid learned training sigma: {name}.{step}.{model}")
+    for (step, model), event in eval_events.items():
+        base_sigma = output_noise_at(peak, step, steps, warmup)
+        value = event.get("output_sigma")
+        if not (_scale_close(value, 0.0) if base_sigma == 0 else _positive_scale(value)):
+            raise ValueError(f"invalid learned evaluation sigma: {name}.{step}.{model}")
+        if step > 0 and not _scale_close(
+            value, train_events[step][f"output_sigma_{model}"],
+        ):
+            raise ValueError(f"learned evaluation sigma differs from training: {name}.{step}.{model}")
+        if step == steps and not _scale_close(
+            value, receipt[f"final_output_sigma_{model}"],
+        ):
+            raise ValueError(f"learned final evaluation sigma differs: {name}.{model}")
+    provenance = _read(directory / "provenance.json")
+    if (summary.get("provenance") != provenance
+            or not set(NATIVE_SOURCE_FILES) <= set(provenance.get("source_sha256", {}))):
+        raise ValueError(f"learned 100-mode source provenance differs: {name}")
+    for source in NATIVE_SOURCE_FILES:
+        if provenance["source_sha256"][source] != hashlib.sha256(
+            (ROOT / source).read_bytes(),
+        ).hexdigest():
+            raise ValueError(f"learned 100-mode source hash differs: {name}.{source}")
+
+
 def _verify_saved_provenance(directory: Path, protocol: dict, *, candidate: bool):
     """Bind the saved executable source and declared config to their hashes."""
     source_hashes = dict(protocol["source_sha256"])
@@ -151,11 +350,8 @@ def _verify_saved_provenance(directory: Path, protocol: dict, *, candidate: bool
         if hashlib.sha256(config_bytes).hexdigest() != protocol["config_sha256"]:
             raise ValueError("saved candidate config differs from protocol hash")
         base, noise, overrides = declared_recipe(json.loads(config_bytes))
-        declared_noise = {**protocol["noise"],
-                          "output_noise_warmup": protocol["noise"].get(
-                              "output_noise_warmup", 0.0)}
         if (_json_value(base.to_dict()) != protocol["global_recipe"]
-                or noise != declared_noise
+                or _noise_identity(noise) != _noise_identity(protocol["noise"])
                 or overrides != protocol["ignored_toy100_resource_overrides"]):
             raise ValueError("saved candidate config does not resolve to declared recipe")
     with tarfile.open(directory / "source.tar.gz", "r:gz") as archive:
@@ -222,7 +418,8 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
             if record["source_sha256"] != protocol["source_sha256"]:
                 raise ValueError(f"episode source differs: {name}")
             if candidate:
-                if record["recipe"] != protocol["global_recipe"] or record["noise"] != protocol["noise"]:
+                if (record["recipe"] != protocol["global_recipe"]
+                        or _noise_identity(record["noise"]) != _noise_identity(protocol["noise"])):
                     raise ValueError(f"candidate global fields differ between cases: {name}")
                 receipt = record.get("noise_receipt")
                 if not isinstance(receipt, dict):
@@ -275,6 +472,7 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                     actual_noise = ((output_std == 0 or receipt.get("output_module") == "OutputNoise")
                                     and (input_std == 0 or receipt.get("input_module") == "InputNoise"
                                          and receipt.get("input_nonzero_steps", 0) > 0))
+                _check_learned_transfer_noise(record, receipt, protocol["noise"])
                 if bool(actual_noise) != record.get("noise_applied"):
                     raise ValueError(f"candidate noise claim differs from receipt: {name}")
             else:
@@ -346,6 +544,13 @@ def _toy100_rows(directory: Path):
                     raise ValueError(f"100-mode global field varies by problem: {name}.{key}")
             if any(executed.get(key, 0.0) != noise[key] for key in NOISE_FIELDS):
                 raise ValueError(f"100-mode noise varies by problem: {name}")
+            if bool(executed.get("output_noise_learnable", False)) != bool(
+                noise.get("output_noise_learnable", False),
+            ):
+                raise ValueError(f"100-mode learned-noise flag varies by problem: {name}")
+            _check_toy100_learned_noise(
+                directory / name, _read(directory / name / "summary.json"), executed,
+            )
         cases = {name: dict(
             status="PASS" if coverage["problems"][name]["passed"]
                              and accuracy["problems"][name]["passed"] else "FAIL",
@@ -388,11 +593,9 @@ def regrade(output: Path):
     if "recipe" in toy and "protocol" in candidate:
         candidate_recipe = candidate["protocol"]["global_recipe"]
         candidate_noise = candidate["protocol"]["noise"]
-        candidate_noise = {**candidate_noise,
-                           "output_noise_warmup": candidate_noise.get("output_noise_warmup", 0.0)}
         identity = (all(toy["recipe"][name] == candidate_recipe[name]
                         for name in GLOBAL_RECIPE_FIELDS)
-                    and toy["noise"] == candidate_noise)
+                    and _noise_identity(toy["noise"]) == _noise_identity(candidate_noise))
         if not identity:
             reason = "100-mode and candidate-19 global recipe or noise fields differ"
     else:

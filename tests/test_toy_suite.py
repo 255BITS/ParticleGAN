@@ -15,15 +15,20 @@ import pytest
 from benchmarks import toy_suite
 from benchmarks.toy100.models import linear_input_noise
 from benchmarks.toy100.problems import PROBLEM_NAMES
+from benchmarks.toy100.train import resolve_config
 from benchmarks.transfer_suite.compare_defaults import plan
 from benchmarks.transfer_suite.public_default_verification import (
     GLOBAL_RECIPE_FIELDS, declared_spec, host_recipe, load_declaration,
 )
-from benchmarks.transfer_suite.toy100_compatibility import output_noise_at
+from benchmarks.transfer_suite.toy100_compatibility import (
+    declared_recipe, output_noise_at, setup_image, setup_vector,
+)
+from benchmarks.transfer_suite import vector_tasks
+from lib.toy_models import SimpleMLPGenerator
 from particlegan import get_recipe, learning_rate_scale
 
 
-def _write_candidate_episode(directory, mutate=lambda record: None):
+def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=False):
     jobs, profile = load_declaration()
     job = next(job for job in jobs if job["spec"]["name"] == "vector_two_broad")
     base = get_recipe()
@@ -32,6 +37,8 @@ def _write_candidate_episode(directory, mutate=lambda record: None):
     recipe = base.to_dict()
     noise = dict(output_noise_std=0.029, input_noise_std=0.5,
                  input_noise_anneal_end=0.1, output_noise_warmup=0.2)
+    if learned:
+        noise["output_noise_learnable"] = True
     source_bytes = b"frozen benchmark source"
     noise_source_bytes = b"frozen noise source"
     source_hashes = dict(frozen=hashlib.sha256(source_bytes).hexdigest(),
@@ -70,6 +77,36 @@ def _write_candidate_episode(directory, mutate=lambda record: None):
                            output_sigma_first=0.0, output_sigma_last=0.029),
         noise_applied=True, result=result, verdict=verdict,
     )
+    if learned:
+        cfg = vector_tasks.resolve(spec)
+        bare = SimpleMLPGenerator(cfg["z_dim"], cfg["hidden"], cfg["layers"], 2)
+        base_parameters = sum(parameter.numel() for parameter in bare.parameters())
+        record["shapes"] = {"generator_parameters": base_parameters + 1}
+        record["applied"][0]["parameters"] = base_parameters + 1
+        effective_trace = [
+            output_noise_at(.029, step, steps, .2) / .029 * (.029 - .002 * step / steps)
+            for step in range(steps)
+        ]
+        for action, effective in zip(result["actions"], effective_trace):
+            action["output_sigma_effective"] = effective
+        result["observations"][-1].update(output_sigma_live=.027,
+                                           output_sigma_ema=.028)
+        record["noise_receipt"].update(
+            output_noise_learnable=True,
+            output_scale_parameter_count=1,
+            output_scale_optimizer_owned=True,
+            generator_base_parameters=base_parameters,
+            generator_total_parameters=base_parameters + 1,
+            output_scale_initial=.029,
+            output_scale_final=.027,
+            output_scale_ema_final=.028,
+            output_sigma_final_evaluation=.029,
+            output_sigma_effective_first=effective_trace[0],
+            output_sigma_effective_last=effective_trace[-1],
+            output_sigma_effective_final_evaluation=.027,
+            output_sigma_effective_ema_final_evaluation=.028,
+            output_sigma_effective_step_trace=effective_trace,
+        )
     mutate(record)
     directory.mkdir()
     (directory / "episodes").mkdir()
@@ -79,6 +116,7 @@ def _write_candidate_episode(directory, mutate=lambda record: None):
     config_bytes = (json.dumps(dict(
         name="gan_v3", output_noise_std=0.029, input_noise_std=0.5,
         input_noise_anneal_end=0.1, output_noise_warmup=0.2,
+        **({"output_noise_learnable": True} if learned else {}),
     )) + "\n").encode()
     (directory / "candidate.json").write_bytes(config_bytes)
     (directory / "noise_source.py").write_bytes(noise_source_bytes)
@@ -194,6 +232,176 @@ def test_candidate_episode_rejects_duplicate_source_archive_member(
     assert "source archive members differ" in grade["reason"]
 
 
+@pytest.mark.parametrize("tamper,expected", [
+    (lambda record: record["noise_receipt"].update(output_scale_optimizer_owned=False),
+     "lacks one G-owned parameter"),
+    (lambda record: record["noise_receipt"].update(generator_base_parameters=1),
+     "wrapper parameter count differs"),
+    (lambda record: record["shapes"].update(generator_parameters=1),
+     "native generator optimizer or shape count differs"),
+    (lambda record: record["result"]["actions"][1].update(output_sigma_effective=.99),
+     "sigma action differs"),
+    (lambda record: record["noise_receipt"].update(output_scale_final=0),
+     "learned output scale is invalid"),
+    (lambda record: record["noise_receipt"].update(output_sigma_final_evaluation=.01),
+     "learned output base schedule differs"),
+    (lambda record: record["noise_receipt"].update(
+        output_sigma_effective_ema_final_evaluation=.99),
+     "learned EMA output sigma differs"),
+    (lambda record: record["result"]["observations"][-1].update(output_sigma_live=.99),
+     "learned output evaluation differs"),
+])
+def test_learned_candidate_receipt_binds_scale_and_actual_noise(
+    tmp_path, monkeypatch, tamper, expected,
+):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory, tamper, learned=True)
+    grade = toy_suite._episode_rows(directory, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert expected in grade["reason"]
+
+
+def test_learned_candidate_receipt_accepts_valid_trace(tmp_path, monkeypatch):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory, learned=True)
+    assert toy_suite._episode_rows(directory, (name,), candidate=True)["status"] == "PASS"
+
+
+@pytest.mark.parametrize("name", ["vector_two_broad", "img_stripes2"])
+def test_native_transfer_hosts_register_exactly_one_g_noise_scalar(name):
+    recipe, noise, _ = declared_recipe(dict(
+        output_noise_std=.029, output_noise_learnable=True,
+        output_noise_warmup=.2, input_noise_std=.5,
+        input_noise_anneal_end=.1,
+    ))
+    jobs, profile = load_declaration()
+    job = next(job for job in jobs if job["spec"]["name"] == name)
+    spec, card, _ = declared_spec(job, profile, recipe)
+    context = (setup_vector(spec, card, recipe, noise) if name.startswith("vector")
+               else setup_image(spec, recipe, noise))
+    trainer = context["trainer"]
+    scalar = trainer.G.output_scale.raw_scale
+    assert context["applied"][0]["parameters"] == context["generator_base_parameters"] + 1
+    assert context["shapes"]["generator_parameters"] == context["applied"][0]["parameters"]
+    assert sum(p is scalar for group in trainer.opt_g.param_groups
+               for p in group["params"]) == 1
+    assert all(p is not scalar for group in trainer.opt_d.param_groups
+               for p in group["params"])
+    assert trainer.ema_G.output_scale.raw_scale is not scalar
+
+
+def _write_learned_toy100_evidence(directory):
+    directory.mkdir()
+    config = dict(problem="grid100", steps=4, output_noise_std=.029,
+                  output_noise_warmup=.5, output_noise_learnable=True)
+    hashes = {
+        source: hashlib.sha256((toy_suite.ROOT / source).read_bytes()).hexdigest()
+        for source in toy_suite.NATIVE_SOURCE_FILES
+    }
+    provenance = {"source_sha256": hashes}
+    receipt = dict(initial_std=.029, added_trainable_parameters=1,
+                   parameter="G.output_scale.raw_scale", optimizer="G",
+                   optimizer_group=0, initial_output_sigma_live=0.,
+                   initial_output_sigma_ema=0., final_output_sigma_live=.027,
+                   final_output_sigma_ema=.028, final_base_std_live=.027,
+                   final_base_std_ema=.028)
+    summary = dict(eval_steps=[0, 4], learnable_output_noise=receipt,
+                   provenance=provenance)
+    events = [dict(event="eval", step=0, model=model, output_sigma=0.)
+              for model in ("live", "ema")]
+    events.extend(dict(event="train", step=step,
+                       output_sigma_live=base / .029 * .027,
+                       output_sigma_ema=base / .029 * .028)
+                  for step in range(1, 5)
+                  for base in [output_noise_at(.029, step, 4, .5)])
+    events.extend(dict(event="eval", step=4, model=model,
+                       output_sigma=.027 if model == "live" else .028)
+                  for model in ("live", "ema"))
+    (directory / "provenance.json").write_text(json.dumps(provenance))
+    (directory / "summary.json").write_text(json.dumps(summary))
+    (directory / "events.jsonl").write_text(
+        "".join(json.dumps(event) + "\n" for event in events),
+    )
+    return config, summary, events
+
+
+@pytest.mark.parametrize("alter,expected", [
+    (lambda summary, events: summary["learnable_output_noise"].update(optimizer="D"),
+     "not bound to G optimizer"),
+    (lambda summary, events: summary["learnable_output_noise"].update(
+        final_base_std_live=.01), "output sigma endpoint differs"),
+    (lambda summary, events: events[3].update(output_sigma_live=-1),
+     "invalid learned training sigma"),
+    (lambda summary, events: events[-2].update(output_sigma=.1),
+     "learned evaluation sigma differs"),
+    (lambda summary, events: summary["provenance"]["source_sha256"].update(
+        {"benchmarks/toy100/train.py": "0" * 64}), "source provenance differs"),
+])
+def test_toy100_learned_evidence_rejects_tampering(tmp_path, alter, expected):
+    directory = tmp_path / "grid100"
+    config, summary, events = _write_learned_toy100_evidence(directory)
+    alter(summary, events)
+    (directory / "events.jsonl").write_text(
+        "".join(json.dumps(event) + "\n" for event in events),
+    )
+    with pytest.raises(ValueError, match=expected):
+        toy_suite._check_toy100_learned_noise(directory, summary, config)
+
+
+def test_toy100_learned_evidence_accepts_complete_trace(tmp_path):
+    directory = tmp_path / "grid100"
+    config, summary, _ = _write_learned_toy100_evidence(directory)
+    toy_suite._check_toy100_learned_noise(directory, summary, config)
+
+
+def test_toy100_learned_evidence_binds_current_native_source(tmp_path):
+    directory = tmp_path / "grid100"
+    config, summary, _ = _write_learned_toy100_evidence(directory)
+    summary["provenance"]["source_sha256"]["benchmarks/toy100/train.py"] = "0" * 64
+    (directory / "provenance.json").write_text(json.dumps(summary["provenance"]))
+    with pytest.raises(ValueError, match="source hash differs"):
+        toy_suite._check_toy100_learned_noise(directory, summary, config)
+
+
+def test_three_problem_gate_requires_each_learned_receipt(tmp_path, monkeypatch):
+    declared = dict(steps=4, output_noise_std=.029,
+                    output_noise_warmup=.5, output_noise_learnable=True)
+    config_contents = json.dumps(declared)
+    resolved_configs = {}
+    for name in PROBLEM_NAMES:
+        directory = tmp_path / name
+        _write_learned_toy100_evidence(directory)
+        resolved, _ = resolve_config({**declared, "problem": name})
+        resolved_configs[name] = resolved
+        (directory / "config.json").write_text(json.dumps(resolved))
+    (tmp_path / "run_manifest.json").write_text(json.dumps(dict(
+        declared_manifest=declared, resolved_problem_configs=resolved_configs,
+        config_contents=config_contents,
+        config_sha256=hashlib.sha256(config_contents.encode()).hexdigest(),
+    )))
+    passed_gate = dict(protocol="toy100-v1", scope="all declared problems",
+                       problems={name: dict(passed=True, status="PASS")
+                                 for name in PROBLEM_NAMES}, status="PASS")
+    passed_accuracy = deepcopy(passed_gate)
+    passed_accuracy["protocol"] = "toy100-accuracy-v1"
+    monkeypatch.setattr(toy_suite, "coverage_suite", lambda *args, **kwargs: passed_gate)
+    monkeypatch.setattr(toy_suite, "accuracy_suite", lambda *args, **kwargs: passed_accuracy)
+    assert toy_suite._toy100_rows(tmp_path)["status"] == "PASS"
+    summary_path = tmp_path / PROBLEM_NAMES[-1] / "summary.json"
+    summary = json.loads(summary_path.read_text())
+    summary.pop("learnable_output_noise")
+    summary_path.write_text(json.dumps(summary))
+    grade = toy_suite._toy100_rows(tmp_path)
+    assert grade["status"] == "INVALID"
+    assert "learned output-scale receipt is absent" in grade["reason"]
+
+
 def test_common_22_gate_requires_exact_noise_and_recipe_identity(tmp_path, monkeypatch):
     names = tuple(job["spec"]["name"] for job in plan())
     recipe = {field: 1 for field in GLOBAL_RECIPE_FIELDS}
@@ -221,3 +429,9 @@ def test_common_22_gate_requires_exact_noise_and_recipe_identity(tmp_path, monke
     candidate_data = deepcopy(candidate)
     candidate_data["protocol"]["noise"]["output_noise_warmup"] = 0.5
     assert toy_suite.regrade(tmp_path / "mixed-noise")["status"] == "INCOMPLETE"
+    candidate_data = deepcopy(candidate)
+    candidate_data["protocol"]["noise"]["output_noise_learnable"] = True
+    assert toy_suite.regrade(tmp_path / "mixed-learned-noise")["status"] == "INCOMPLETE"
+    candidate_data = deepcopy(candidate)
+    candidate_data["protocol"]["noise"]["output_noise_learnable"] = False
+    assert toy_suite.regrade(tmp_path / "explicit-fixed-noise")["status"] == "PASS"

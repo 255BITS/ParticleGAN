@@ -227,8 +227,15 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
         critic = wrap_input(critic, noise_policy)
     gan = GANLoss(loss_type=recipe.loss_type, mode=recipe.gan_mode)
     reg = regularizer if regularizer is not None else _make_regularizer(recipe)
-    opt_g = torch.optim.Adam(student.parameters(), lr=LR, betas=BETAS)
+    if noise_policy is not None:
+        noise_policy.register_generator_base(student)
+    g_parameters = list(student.parameters()) + (
+        noise_policy.scale_parameters() if noise_policy is not None else []
+    )
+    opt_g = torch.optim.Adam(g_parameters, lr=LR, betas=BETAS)
     opt_d = torch.optim.Adam(critic.parameters(), lr=LR, betas=BETAS)
+    if noise_policy is not None:
+        noise_policy.register_generator_optimizer(opt_g, opt_d)
     real = _batch(CONCEPT_DIR)
     pairs = hold_pairs(recipe.pairing)
     bcap_applied = 0
@@ -237,7 +244,7 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
             noise_policy.set_step(step)
         fake = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1).detach()
         if noise_policy is not None:
-            fake = noise_policy.output(fake)
+            fake = noise_policy.output(fake, generator_step=False)
         opt_d.zero_grad(set_to_none=True)
         penalty, stats = reg.penalty(critic, real, fake, step=step + 1)
         if stats.get("applied"):
@@ -251,7 +258,7 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
         opt_g.zero_grad(set_to_none=True)
         fake_g = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1)
         if noise_policy is not None:
-            fake_g = noise_policy.output(fake_g)
+            fake_g = noise_policy.output(fake_g, generator_step=True)
         g_loss = gan.g_loss(critic(fake_g), critic(real).detach())
         # Demo cover and the n=12 cloud are recorded on the card and are
         # not added here. The train pin is the unused-token hold.

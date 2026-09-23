@@ -166,6 +166,8 @@ def train(cfg: HoldConfig, *, noise_policy=None) -> dict:
         decoder = wrap_output(decoder, noise_policy)
         critic = wrap_input(critic, noise_policy)
     opt_g, opt_d = recipe.make_optimizers(decoder, critic, prior, encoder=encoder)
+    if noise_policy is not None:
+        noise_policy.register_generator_optimizer(opt_g, opt_d)
     gan = recipe.make_loss()
     regularizer = recipe.make_gradient_penalty(norm=cfg.reg_norm, target_anneal=cfg.target_anneal)
     # The source's removed regularizer audit reset the CPU RNG to seed 0 and
@@ -193,7 +195,9 @@ def train(cfg: HoldConfig, *, noise_policy=None) -> dict:
         data = sample_data(cfg.batch)
         if cfg.adversarial_weight > 0:
             codes, _ = prior.sample(cfg.batch)
-            fake = decoder(codes).detach()
+            context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
+            with context:
+                fake = decoder(codes).detach()
             opt_d.zero_grad(set_to_none=True)
             d_loss = gan.d_loss(critic(data).squeeze(-1), critic(fake).squeeze(-1))
             penalty, stats = regularizer.penalty(critic, data, fake, step=step)

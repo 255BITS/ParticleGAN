@@ -57,7 +57,7 @@ RUN_DEFAULTS = {
     "input_noise_std": 0.0,
     "input_noise_anneal_end": 0.5,
 }
-OPTIONAL_RUN_FIELDS = {"output_noise_warmup"}
+OPTIONAL_RUN_FIELDS = {"output_noise_warmup", "output_noise_learnable"}
 RECIPE_FIELDS = {field.name for field in fields(Recipe)}
 RUN_FIELDS = set(RUN_DEFAULTS) | OPTIONAL_RUN_FIELDS
 
@@ -155,6 +155,11 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         if (isinstance(warmup, bool) or not isinstance(warmup, (int, float))
                 or not math.isfinite(warmup) or not 0 <= warmup <= 1):
             raise ValueError("output_noise_warmup must be a finite fraction in [0, 1]")
+    if "output_noise_learnable" in run:
+        if type(run["output_noise_learnable"]) is not bool:
+            raise ValueError("output_noise_learnable must be a boolean")
+        if run["output_noise_learnable"] and run["output_noise_std"] <= 0:
+            raise ValueError("output_noise_learnable requires output_noise_std > 0")
     recipe_kwargs = {key: user[key] for key in user if key in RECIPE_FIELDS and key != "name"}
     recipe_kwargs["total_steps"] = run["steps"]
     recipe = get_recipe(**recipe_kwargs)
@@ -196,7 +201,10 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
         _init_linear(generator)
         _init_linear(discriminator)
         if config["output_noise_std"]:
-            generator = OutputNoise(generator, config["output_noise_std"])
+            generator = OutputNoise(
+                generator, config["output_noise_std"],
+                learnable=config.get("output_noise_learnable", False),
+            ).to(device)
         if config["input_noise_std"]:
             discriminator = InputNoise(discriminator, seed=seed + 901, device=device)
         return GANTrainer(
@@ -216,6 +224,30 @@ def _set_output_sigma(trainer: GANTrainer, config: Mapping[str, Any], completed_
         trainer.G.std = sigma
         trainer.ema_G.std = sigma
     return sigma
+
+
+def _effective_output_sigma(generator: nn.Module) -> float:
+    value = generator.effective_std()
+    return float(value.detach()) if isinstance(value, torch.Tensor) else float(value)
+
+
+def _learnable_output_receipt(trainer: GANTrainer, initial_std: float) -> dict[str, Any]:
+    parameter = trainer.G.output_scale.raw_scale
+    g_groups = [index for index, group in enumerate(trainer.opt_g.param_groups)
+                if any(value is parameter for value in group["params"])]
+    d_groups = [index for index, group in enumerate(trainer.opt_d.param_groups)
+                if any(value is parameter for value in group["params"])]
+    if g_groups != [0] or d_groups:
+        raise RuntimeError("learnable output scale must belong only to the generator optimizer group")
+    return {
+        "initial_std": float(initial_std),
+        "added_trainable_parameters": parameter.numel(),
+        "parameter": "G.output_scale.raw_scale",
+        "optimizer": "G",
+        "optimizer_group": g_groups[0],
+        "initial_output_sigma_live": _effective_output_sigma(trainer.G),
+        "initial_output_sigma_ema": _effective_output_sigma(trainer.ema_G),
+    }
 
 
 def _source_provenance() -> dict[str, Any]:
@@ -337,6 +369,10 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     try:
         trainer = make_trainer(resolved, recipe)
         _set_output_sigma(trainer, resolved, trainer.completed_steps)
+        if resolved.get("output_noise_learnable", False):
+            summary["learnable_output_noise"] = _learnable_output_receipt(
+                trainer, resolved["output_noise_std"],
+            )
         if resolved["output_noise_std"]:
             # OutputNoise uses the global stream during updates. Evaluation
             # forks it, so denser observations cannot alter the training path.
@@ -385,6 +421,10 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                         elapsed = time.perf_counter() - start
                         event = {"event": "eval", "step": step, "model": model,
                                  "metrics": metrics, "elapsed": elapsed}
+                        if resolved.get("output_noise_learnable", False):
+                            event["output_sigma"] = _effective_output_sigma(
+                                trainer.ema_G if model == "ema" else trainer.G,
+                            )
                         if accuracy is not None:
                             event["accuracy"] = accuracy
                             final_accuracy[model] = accuracy
@@ -401,10 +441,12 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                                 stable_pass[model] = step
                         else:
                             pass_streak[model] = 0
+                        sigma_text = (f" sigma={event['output_sigma']:.6f}"
+                                      if "output_sigma" in event else "")
                         logger.say(
                             f"EVAL step={step}/{budget} model={model} "
                             f"modes={metrics['modes']}/100 hq={metrics['hq']:.4f} "
-                            f"pass={metrics['passed']} elapsed={elapsed:.1f}s"
+                            f"pass={metrics['passed']}{sigma_text} elapsed={elapsed:.1f}s"
                         )
                     if is_snapshot:
                         arrays[model] = draw[:resolved["snapshot_samples"]].detach().cpu().numpy()
@@ -454,12 +496,18 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                       ("loss_d", "loss_g", "loss_gan", "prior_regularization", "penalty")}
             if not all(math.isfinite(value) for value in losses.values()):
                 raise FloatingPointError(f"nonfinite training loss at step {step}: {losses}")
-            logger.event({"event": "train", "step": step, "elapsed": time.perf_counter() - start,
-                          **losses})
+            train_event = {"event": "train", "step": step,
+                           "elapsed": time.perf_counter() - start, **losses}
+            if resolved.get("output_noise_learnable", False):
+                train_event["output_sigma_live"] = _effective_output_sigma(trainer.G)
+                train_event["output_sigma_ema"] = _effective_output_sigma(trainer.ema_G)
+            logger.event(train_event)
             if step == 1 or step % resolved["log_interval"] == 0 or step == budget:
+                sigma_text = (f" sigma={train_event['output_sigma_live']:.6f}"
+                              if "output_sigma_live" in train_event else "")
                 logger.say(
                     f"TRAIN step={step}/{budget} d={losses['loss_d']:.4f} "
-                    f"g={losses['loss_g']:.4f} train_seconds={train_seconds:.1f}"
+                    f"g={losses['loss_g']:.4f}{sigma_text} train_seconds={train_seconds:.1f}"
                 )
             if step in eval_set or step in snap_set:
                 observe(step)
@@ -492,6 +540,13 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
             "total_seconds": time.perf_counter() - start,
             "steps_per_second": budget / train_seconds,
         })
+        if resolved.get("output_noise_learnable", False):
+            summary["learnable_output_noise"].update({
+                "final_output_sigma_live": _effective_output_sigma(trainer.G),
+                "final_output_sigma_ema": _effective_output_sigma(trainer.ema_G),
+                "final_base_std_live": float(trainer.G.output_scale().detach()),
+                "final_base_std_ema": float(trainer.ema_G.output_scale().detach()),
+            })
         _write_json(out_dir / "summary.json", summary)
         logger.say(
             f"COMPLETE problem={resolved['problem']} steps={budget} "
