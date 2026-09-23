@@ -10,6 +10,7 @@ import argparse
 import json
 from pathlib import Path
 
+from .config import resolve_problem_config
 from .gate import evaluate_suite
 from .problems import PROBLEM_NAMES
 from .train import train
@@ -41,7 +42,7 @@ def run_search(base: dict, candidates: list[dict], output: Path, *,
         scores = {}
         for problem in problems:
             try:
-                train({**config, "problem": problem}, directory / problem)
+                train(resolve_problem_config(config, problem), directory / problem)
             except Exception as error:
                 # Numerical/configuration failures stay visible in the search.
                 # The runner retains partial evidence when training has begun.

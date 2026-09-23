@@ -1,0 +1,57 @@
+name: Toy100 trained gate
+
+on:
+  pull_request:
+    paths:
+      - "benchmarks/toy100/**"
+      - "configs/toy100/**"
+      - "particlegan/**"
+      - "lib/toy_models.py"
+      - "tests/test_toy100*.py"
+      - ".github/workflows/toy100.yml"
+      - "pyproject.toml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trained-gate:
+    name: CPU / Python 3.11 / all 100-Gaussian problems
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      MPLBACKEND: Agg
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install CPU PyTorch
+        run: python -m pip install 'torch==2.13.0+cpu' --index-url https://download.pytorch.org/whl/cpu
+      - name: Install benchmark and test dependencies
+        run: python -m pip install -e '.[dev,experiments]'
+      - name: Validate dependencies
+        run: python -m pip check
+      - name: Check toy100 protocol and runner
+        run: python -m pytest -q tests/test_toy100*.py
+      - name: Train and gate all three problems
+        shell: bash
+        run: |
+          set -o pipefail
+          python -u -m benchmarks.toy100 run --output artifacts/toy100-ci --no-render 2>&1 | tee toy100-ci.log
+      - name: Upload gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: toy100-trained-gate
+          path: |
+            toy100-ci.log
+            artifacts/toy100-ci/
+          if-no-files-found: warn

@@ -8,13 +8,16 @@ Step zero is reported but cannot contribute to convergence.
 from __future__ import annotations
 
 import json
+import hashlib
 import math
 from pathlib import Path
 
 import numpy as np
+import torch
 
 from . import metrics, problems
-from .train import evaluation_steps
+from .config import resolve_problem_config, validate_manifest
+from .train import ROOT, evaluation_steps, resolve_config
 
 
 MIN_BUDGET_STEPS = 1000
@@ -102,6 +105,131 @@ def _check_snapshot(path: Path, expected_n: int | None):
         raise ValueError(f"invalid snapshot: {exc}") from exc
 
 
+def _same_metrics(recorded: dict, recalculated: dict) -> bool:
+    """Allow only tiny CPU/GPU reduction differences, never threshold changes."""
+    integers = {"n", "valid_n", "modes", "min_hq_count"}
+    for key in metrics.REQUIRED_KEYS:
+        actual, expected = recorded.get(key), recalculated[key]
+        if isinstance(actual, bool) or not isinstance(actual, (int, float)) or not math.isfinite(actual):
+            return False
+        if key in integers:
+            if actual != expected:
+                return False
+        elif not math.isclose(actual, expected, rel_tol=1e-5, abs_tol=1e-4):
+            return False
+    return True
+
+
+def _audit_final_samples(run_dir: Path, problem: str, summary: dict, config: dict,
+                         final_metrics: dict) -> bool:
+    """Recompute the terminal live score from the exact saved evaluation draw."""
+    filename = summary.get("final_samples_file")
+    if filename is None:
+        return False  # Legacy runs had event receipts but no full saved draw.
+    if filename != "final_samples.npz":
+        raise ValueError("final evaluation samples must be final_samples.npz")
+    path = run_dir / filename
+    if not path.is_file():
+        raise ValueError("missing saved final evaluation samples")
+    expected_n = config.get("eval_samples", metrics.EVAL_N)
+    try:
+        with np.load(path, allow_pickle=False) as archive:
+            if not {"live", "ema", "target"}.issubset(archive.files):
+                raise ValueError("missing live, EMA, or target final draws")
+            for key in ("live", "ema", "target"):
+                points = archive[key]
+                if (points.ndim != 2 or points.shape != (expected_n, 2)
+                        or not np.issubdtype(points.dtype, np.floating)
+                        or not np.isfinite(points).all()):
+                    raise ValueError(f"invalid {key} final draws")
+            audited = metrics.evaluate_samples(torch.from_numpy(archive["live"]), problem)
+    except (OSError, KeyError, TypeError, ValueError) as exc:
+        raise ValueError(f"invalid final evaluation samples: {exc}") from exc
+    if not _same_metrics(final_metrics, audited):
+        raise ValueError("terminal live metrics disagree with saved final evaluation samples")
+    if metrics.passes(problem, final_metrics) != metrics.passes(problem, audited):
+        raise ValueError("terminal live verdict disagrees with saved final evaluation samples")
+    recorded_final = summary.get("final")
+    if isinstance(recorded_final, dict) and isinstance(recorded_final.get("live"), dict):
+        if not _same_metrics(recorded_final["live"], audited):
+            raise ValueError("summary terminal metrics disagree with saved final evaluation samples")
+    return True
+
+
+def _manifest_source(declaration: dict) -> dict:
+    """Check the archived recipe bytes, or the original file in older runs."""
+    path_text = declaration.get("config_path")
+    digest = declaration.get("config_sha256")
+    if not isinstance(path_text, str) or not isinstance(digest, str) or len(digest) != 64:
+        raise ValueError("run manifest lacks its config path or SHA256")
+    contents = declaration.get("config_contents")
+    if contents is not None:
+        if not isinstance(contents, str):
+            raise ValueError("run manifest config_contents must be text")
+        data = contents.encode("utf-8")
+    else:
+        # Earlier CLI receipts recorded only the path and digest. Resolve the
+        # source when it is still present, while preserving portable old runs.
+        path = Path(path_text)
+        candidates = (path, ROOT / path) if not path.is_absolute() else (path,)
+        source = next((candidate for candidate in candidates if candidate.is_file()), None)
+        if source is None:
+            return declaration.get("declared_manifest")
+        data = source.read_bytes()
+    if hashlib.sha256(data).hexdigest() != digest:
+        raise ValueError("run manifest config SHA256 disagrees with archived source")
+    if Path(path_text).suffix.lower() == ".json":
+        parsed = json.loads(data)
+    elif Path(path_text).suffix.lower() == ".toml":
+        try:
+            import tomllib
+        except ModuleNotFoundError:
+            import tomli as tomllib
+        parsed = tomllib.loads(data.decode("utf-8"))
+    else:
+        raise ValueError("run manifest config path must identify JSON or TOML")
+    return parsed
+
+
+def _manifest_expected(output: Path, names: tuple[str, ...]) -> dict[str, dict] | None:
+    path = output / "run_manifest.json"
+    if not path.is_file():
+        return None  # The earlier baseline and isolated searches predate manifests.
+    declaration = _read_json(path)
+    if not isinstance(declaration, dict):
+        raise ValueError("run manifest must be an object")
+    declared = declaration.get("declared_manifest")
+    validate_manifest(declared)
+    if _manifest_source(declaration) != declared:
+        raise ValueError("run manifest source differs from its declared recipe")
+    selected = declaration.get("selected_problems")
+    if (not isinstance(selected, list) or not selected
+            or selected != [name for name in problems.PROBLEM_NAMES if name in selected]):
+        raise ValueError("run manifest selected_problems is invalid")
+    if not set(names).issubset(selected):
+        raise ValueError("run manifest did not execute every requested problem")
+    if len(names) == len(problems.PROBLEM_NAMES) and selected != list(problems.PROBLEM_NAMES):
+        raise ValueError("run manifest does not cover all declared problems")
+    command = declaration.get("command_overrides", {"steps": None, "device": None})
+    if (not isinstance(command, dict) or set(command) != {"steps", "device"}):
+        raise ValueError("run manifest command overrides are invalid")
+    stored = declaration.get("resolved_problem_configs")
+    if not isinstance(stored, dict) or set(stored) != set(problems.PROBLEM_NAMES):
+        raise ValueError("run manifest must resolve all three problem configs")
+    expected = {}
+    for name in problems.PROBLEM_NAMES:
+        flat = resolve_problem_config(declared, name, steps=command["steps"],
+                                      device=command["device"], validate_runtime=False)
+        if stored[name] != flat:
+            raise ValueError(f"run manifest resolved config differs for {name}")
+        # A CUDA receipt can be audited without CUDA. Only the availability
+        # check is replaced; all other recipe and runner fields are resolved.
+        resolved, _ = resolve_config({**flat, "device": "cpu"})
+        resolved["device"] = flat.get("device", "cpu")
+        expected[name] = json.loads(json.dumps(resolved))
+    return expected
+
+
 def score_run(run_dir: Path | str, problem: str) -> dict:
     """Recompute one verdict; malformed or absent evidence never earns a pass."""
     run_dir = Path(run_dir)
@@ -168,6 +296,9 @@ def score_run(run_dir: Path | str, problem: str) -> dict:
             if expected_eval_n is not None and values.get("n") != expected_eval_n:
                 raise ValueError(f"evaluation draw count differs from config at step {row['step']}")
             passing.append(bool(metrics.passes(problem, values)))
+        audited_final_samples = _audit_final_samples(
+            run_dir, problem, summary, config, rows[-1]["metrics"]
+        )
     except (OSError, UnicodeError, json.JSONDecodeError, TypeError, ValueError, KeyError) as exc:
         return _failure(problem, "INVALID", str(exc))
 
@@ -207,6 +338,7 @@ def score_run(run_dir: Path | str, problem: str) -> dict:
         "final_elapsed": final["elapsed"],
         "initial_metrics": rows[0]["metrics"],
         "final_metrics": final["metrics"],
+        "audited_final_samples": audited_final_samples,
         "run_dir": str(run_dir),
     }
     return result
@@ -260,7 +392,29 @@ def evaluate_suite(output: Path | str, *, problem: str | None = None, write: boo
     if problem is not None and problem not in problems.PROBLEM_NAMES:
         raise ValueError(f"unknown problem: {problem}")
     names = (problem,) if problem else problems.PROBLEM_NAMES
-    verdicts = {name: score_run(output / name, name) for name in names}
+    try:
+        expected_configs = _manifest_expected(output, names)
+        manifest_error = None
+    except (OSError, UnicodeError, json.JSONDecodeError, TypeError, ValueError, KeyError) as exc:
+        expected_configs = None
+        manifest_error = str(exc)
+    verdicts = {}
+    for name in names:
+        if manifest_error is not None:
+            verdicts[name] = _failure(name, "INVALID", "invalid run manifest: " + manifest_error)
+            continue
+        row = score_run(output / name, name)
+        if expected_configs is not None:
+            path = output / name / "config.json"
+            if path.is_file():
+                try:
+                    if _read_json(path) != expected_configs[name]:
+                        row = _failure(name, "INVALID", "executed config differs from run manifest")
+                    elif row["status"] in {"PASS", "FAIL"} and not row["audited_final_samples"]:
+                        row = _failure(name, "INVALID", "manifested run lacks saved final evaluation draw")
+                except (OSError, UnicodeError, json.JSONDecodeError, TypeError, ValueError) as exc:
+                    row = _failure(name, "INVALID", f"invalid executed config: {exc}")
+        verdicts[name] = row
     status = "PASS" if all(row["passed"] for row in verdicts.values()) else "FAIL"
     result = {"status": status, "scope": "individual" if problem else "all declared problems",
               "protocol": "toy100-v1", "requirements": metrics.REQUIREMENTS,
