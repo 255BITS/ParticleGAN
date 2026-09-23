@@ -375,7 +375,8 @@ def _log(handle, message: str) -> None:
         handle.flush()
 
 
-def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | None = None) -> dict:
+def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | None = None,
+                       noise_policy=None) -> dict:
     """Train one arm. Returns the EMA residual score plus recipe pins."""
     field = field or LeftoverField()
     torch.manual_seed(recipe.seed)
@@ -389,6 +390,9 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         hidden=recipe.knob("critic_hidden"),
         seed=recipe.seed,
     )
+    if noise_policy is not None:
+        from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input
+        critic = wrap_input(critic, noise_policy)
     gan = GANLoss(loss_type=recipe.knob("loss_type"), mode=recipe.knob("gan_mode"))
     penalty = GradientPenalty(
         arm=recipe.knob("reg_arm"),
@@ -439,6 +443,8 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         return fake_p, fake_m
 
     for step in range(recipe.steps):
+        if noise_policy is not None:
+            noise_policy.set_step(step)
         scale = _delayed_cosine(step, recipe.steps, int(recipe.knob("delay")), float(recipe.knob("min_lr_ratio")))
         for group in opt_g.param_groups:
             group["lr"] = lr * scale
@@ -459,6 +465,8 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         real = torch.cat([real_p, real_m], dim=0)
         fake_p, fake_m = fake_batch()
         fake = torch.cat([fake_p, fake_m], dim=0).detach()
+        if noise_policy is not None:
+            fake = noise_policy.output(fake)
         d_loss = gan.d_loss(critic(real.detach()), critic(fake))
         cap = penalty(critic, real.detach(), fake, step=step + 1)
         d_loss = d_loss + cap
@@ -469,6 +477,8 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
 
         fake_p, fake_m = fake_batch()
         fake = torch.cat([fake_p, fake_m], dim=0)
+        if noise_policy is not None:
+            fake = noise_policy.output(fake)
         g_loss = gan.g_loss(critic(fake), critic(real.detach()))
         parts = torch.cat([prior_p.z, prior_m.z], dim=0)
         g_loss = g_loss + spread(parts)

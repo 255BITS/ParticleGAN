@@ -62,3 +62,24 @@ def linear_input_noise(
     if not math.isfinite(end_fraction) or not 0 < end_fraction <= 1:
         raise ValueError("input noise anneal end must be in (0, 1]")
     return float(peak * max(0.0, 1.0 - completed_steps / (total_steps * end_fraction)))
+
+
+def linear_output_noise(
+    peak: float, completed_steps: int, total_steps: int, warmup_fraction: float = 0.0,
+) -> float:
+    """Rise from zero to ``peak`` over a fraction of completed updates.
+
+    A zero warmup retains the original constant-noise recipe. The first
+    update of a positive warmup runs with zero output noise.
+    """
+    if isinstance(peak, bool) or not math.isfinite(peak) or peak < 0:
+        raise ValueError("output noise std must be finite and nonnegative")
+    if (type(completed_steps) is not int or completed_steps < 0
+            or type(total_steps) is not int or total_steps <= 0):
+        raise ValueError("invalid output noise step count")
+    if (isinstance(warmup_fraction, bool) or not math.isfinite(warmup_fraction)
+            or not 0 <= warmup_fraction <= 1):
+        raise ValueError("output noise warmup must be a finite fraction in [0, 1]")
+    if warmup_fraction == 0:
+        return float(peak)
+    return float(peak * min(1.0, completed_steps / (warmup_fraction * total_steps)))

@@ -18,6 +18,7 @@ import sys
 import traceback
 
 from .gate import evaluate_suite
+from .accuracy_gate import evaluate_suite as evaluate_accuracy_suite
 from .config import resolve_problem_config
 from .problems import PROBLEM_NAMES
 from .render import render_progress
@@ -35,7 +36,9 @@ def _parser():
     run.add_argument("--steps", type=int, help="override training budget for a deep dive")
     run.add_argument("--device", help="override device from the config")
     run.add_argument("--no-render", action="store_true", help="skip diagnostic GIF rendering")
-    for name in ("gate", "render"):
+    run.add_argument("--require-accuracy", action="store_true",
+                     help="also require sustained fidelity and a separate 100k-sample holdout")
+    for name in ("gate", "accuracy", "render"):
         command = commands.add_parser(name, help=f"{name} existing recorded runs")
         command.add_argument("--output", type=Path, required=True)
         command.add_argument("--problem", choices=PROBLEM_NAMES, help="inspect one problem")
@@ -93,6 +96,13 @@ def _run(args):
                       "required": gate["required_problems"],
                       "leaderboard": str(args.output / (f"leaderboard-{args.problem}.md" if args.problem
                                                           else "leaderboard.md"))}), flush=True)
+    accuracy_ok = True
+    if getattr(args, "require_accuracy", False):
+        accuracy = evaluate_accuracy_suite(args.output, problem=args.problem)
+        accuracy_ok = accuracy["status"] == "PASS"
+        print(json.dumps({"event": "accuracy_gate", "status": accuracy["status"],
+                          "passed": accuracy["passed_problems"],
+                          "required": accuracy["required_problems"]}), flush=True)
     render_error = None
     if not args.no_render:
         try:
@@ -101,7 +111,7 @@ def _run(args):
         except (OSError, ValueError, ImportError) as exc:
             render_error = exc
             print(json.dumps({"event": "render_error", "error": str(exc)}), flush=True)
-    return 0 if gate["status"] == "PASS" and render_error is None else 1
+    return 0 if gate["status"] == "PASS" and accuracy_ok and render_error is None else 1
 
 
 def main(argv=None):
@@ -109,8 +119,9 @@ def main(argv=None):
     try:
         if args.command == "run":
             return _run(args)
-        if args.command == "gate":
-            verdict = evaluate_suite(args.output, problem=args.problem)
+        if args.command in ("gate", "accuracy"):
+            evaluator = evaluate_accuracy_suite if args.command == "accuracy" else evaluate_suite
+            verdict = evaluator(args.output, problem=args.problem)
             print(json.dumps({"status": verdict["status"],
                               "scope": verdict["scope"],
                               "passed": verdict["passed_problems"],

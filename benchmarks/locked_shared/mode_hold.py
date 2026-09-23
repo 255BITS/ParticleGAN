@@ -6,6 +6,8 @@ See SOURCE.md and LICENSE for provenance. Default losses use PR #36 builders.
 
 from __future__ import annotations
 
+from contextlib import nullcontext
+
 from .observation import checkpoint, schedule_optimizer
 
 import torch
@@ -108,7 +110,7 @@ def verdict(row: dict) -> str:
 
 def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
                     gan_factory=None, cap_factory=None, diagnostics=False,
-                    training_recipe=None, log=None) -> dict:
+                    training_recipe=None, log=None, noise_policy=None) -> dict:
     """Train every requested arm and score only its generated samples."""
     recipe = ModeHoldRecipe() if recipe is None else recipe
     if training_recipe is not None:
@@ -126,6 +128,10 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
     # Host critic shape from the 100-Gaussians toy. Fourier width is the
     # sharp-D stress, not an architecture swap.
     critic = SimpleMLPDiscriminator(2, HIDDEN, N_HIDDEN, FOURIER)
+    if noise_policy is not None:
+        from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input, wrap_output
+        generator = wrap_output(generator, noise_policy)
+        critic = wrap_input(critic, noise_policy)
     gan = (gan_factory or (training_recipe.make_loss if training_recipe else make_gan_loss))()
     regularizer = (cap_factory or (training_recipe.make_gradient_penalty if training_recipe else make_b_cap))()
     vicreg = ParticleRegularizer(weight=recipe.vicreg_weight)
@@ -147,15 +153,19 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
     ema_z = prior.z.detach().clone()
 
     @torch.no_grad()
-    def measure():
-        # Evaluation uses its own RNG; support enumeration uses none. Neither
-        # changes the sequence of training batches or particle samples.
-        latent, _ = prior.sample(EVAL_N, generator=torch.Generator().manual_seed(seed + 9))
-        row = diversity(generator(latent), means, detailed=diagnostics)
-        if diagnostics:
-            # Every particle is equally likely. This is exact support coverage
-            # for ParticlePrior, rather than another random evaluation sample.
-            row["support"] = diversity(generator(prior.z), means, detailed=True)
+    def measure(step: int):
+        # Evaluation uses its own RNG; explicit prior indices remain fixed.
+        # Neither changes training batches or the training noise stream.
+        context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
+        with context:
+            latent, _ = prior.sample(EVAL_N, generator=torch.Generator().manual_seed(seed + 9))
+            row = diversity(generator(latent), means, detailed=diagnostics)
+            if diagnostics:
+                # With output noise, this is one noisy draw per particle;
+                # without noise it enumerates deterministic support exactly.
+                row["support"] = diversity(generator(prior.z), means, detailed=True)
+                if noise_policy is not None and noise_policy.output_std > 0:
+                    row["support_scope"] = "one noisy draw per particle"
         return row
 
     def snapshot(step: int) -> dict:
@@ -165,7 +175,7 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             for param, ema in zip(generator.parameters(), ema_g):
                 param.copy_(ema)
             prior.z.copy_(ema_z)
-            row = measure()
+            row = measure(step)
         with torch.no_grad():
             for param, saved in zip(generator.parameters(), saved_g):
                 param.copy_(saved)
@@ -176,6 +186,8 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
     curve = []
     live_curve = []
     for step in range(recipe.steps):
+        if noise_policy is not None:
+            noise_policy.set_step(step)
         if training_recipe is not None:
             scale = learning_rate_scale(step, recipe.steps, training_recipe.lr_anneal_start, training_recipe.lr_floor)
             for opt, rates in zip((opt_g, opt_d), base_lrs):
@@ -213,19 +225,19 @@ def train_mode_hold(recipe: ModeHoldRecipe | None = None, *, seed: int = 0,
             for ema, param in zip(ema_g, generator.parameters()):
                 ema.mul_(recipe.ema).add_(param, alpha=1.0 - recipe.ema)
             ema_z.mul_(recipe.ema).add_(prior.z, alpha=1.0 - recipe.ema)
-        checkpoint(step + 1, measure)
+        checkpoint(step + 1, lambda: measure(step + 1))
         if diagnostics and (step + 1) % 200 == 0:
             curve.append(snapshot(step + 1))
         if diagnostics and ((step + 1) % 200 == 0 or
                             (step + 1 >= recipe.steps - 200 and (step + 1) % 50 == 0)):
-            point = {"step": step + 1, **measure()}
+            point = {"step": step + 1, **measure(step + 1)}
             live_curve.append(point)
             if log is not None:
                 log(point)
     final = snapshot(recipe.steps)
     final["verdict"] = verdict(final)
     if diagnostics:
-        live = measure()
+        live = measure(recipe.steps)
         final["live"] = {**live, "verdict": verdict(live)}
         final["curve"] = curve
         final["live_curve"] = live_curve

@@ -1,5 +1,12 @@
 # 100-mode convergence: failures, search, and passing gate
 
+**Scope of the historical result below:** the original coverage gate passes
+3/3, but the stricter distribution-fidelity audit records **0/3 passes**,
+and this recipe does not pass all 19 older toys. It is not a common-22
+recommendation. See the [accuracy audit](accuracy-diagnostics.md),
+[new search ledger](accuracy-search-ledger.md), and
+[combined gate commands](../../docs/toy100.md#one-shared-recipe-across-all-22-toys).
+
 The selected CPU configuration passes **all three 100-Gaussian problems** with
 live weights at five consecutive checks from updates 6,000 through 7,000.
 The original public recipe fails all three under the same frozen criteria.

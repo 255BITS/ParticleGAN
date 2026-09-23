@@ -29,7 +29,7 @@ from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import GANTrainer, Recipe, get_recipe
 
 from .metrics import EVAL_N, evaluate_samples
-from .models import InputNoise, OutputNoise, linear_input_noise
+from .models import InputNoise, OutputNoise, linear_input_noise, linear_output_noise
 from .problems import PROBLEM_NAMES, sample_real
 
 
@@ -57,8 +57,9 @@ RUN_DEFAULTS = {
     "input_noise_std": 0.0,
     "input_noise_anneal_end": 0.5,
 }
+OPTIONAL_RUN_FIELDS = {"output_noise_warmup"}
 RECIPE_FIELDS = {field.name for field in fields(Recipe)}
-RUN_FIELDS = set(RUN_DEFAULTS)
+RUN_FIELDS = set(RUN_DEFAULTS) | OPTIONAL_RUN_FIELDS
 
 
 def load_config(path: str | Path) -> dict[str, Any]:
@@ -118,6 +119,8 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
     unknown = set(user) - RUN_FIELDS - RECIPE_FIELDS
     if unknown:
         raise ValueError(f"unknown config fields: {', '.join(sorted(unknown))}")
+    # Optional fields stay absent from resolved old manifests. Explicit zero
+    # is equivalent at runtime but should not silently rewrite old receipts.
     run = {**RUN_DEFAULTS, **{key: user[key] for key in user if key in RUN_FIELDS}}
     if "steps" in user and "total_steps" in user and user["steps"] != user["total_steps"]:
         raise ValueError("steps and total_steps disagree")
@@ -147,6 +150,11 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         raise ValueError("noise standard deviations must be nonnegative")
     if not 0 < run["input_noise_anneal_end"] <= 1:
         raise ValueError("input_noise_anneal_end must be in (0, 1]")
+    if "output_noise_warmup" in run:
+        warmup = run["output_noise_warmup"]
+        if (isinstance(warmup, bool) or not isinstance(warmup, (int, float))
+                or not math.isfinite(warmup) or not 0 <= warmup <= 1):
+            raise ValueError("output_noise_warmup must be a finite fraction in [0, 1]")
     recipe_kwargs = {key: user[key] for key in user if key in RECIPE_FIELDS and key != "name"}
     recipe_kwargs["total_steps"] = run["steps"]
     recipe = get_recipe(**recipe_kwargs)
@@ -197,11 +205,26 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
         )
 
 
+def _set_output_sigma(trainer: GANTrainer, config: Mapping[str, Any], completed_steps: int) -> float:
+    sigma = linear_output_noise(
+        config["output_noise_std"], completed_steps, config["steps"],
+        config.get("output_noise_warmup", 0.0),
+    )
+    if config["output_noise_std"]:
+        # GANTrainer deep-copies G for EMA. Its scalar noise standard deviation
+        # is not an EMA parameter; both copies must follow the same schedule.
+        trainer.G.std = sigma
+        trainer.ema_G.std = sigma
+    return sigma
+
+
 def _source_provenance() -> dict[str, Any]:
     paths = (
         "benchmarks/toy100/train.py", "benchmarks/toy100/models.py",
         "benchmarks/toy100/problems.py",
-        "benchmarks/toy100/metrics.py", "lib/toy_models.py",
+        "benchmarks/toy100/metrics.py", "benchmarks/toy100/accuracy.py",
+        "benchmarks/toy100/accuracy_evidence.py",
+        "benchmarks/toy100/accuracy_gate.py", "lib/toy_models.py",
         "particlegan/training.py", "particlegan/recipes.py",
     )
     hashes = {}
@@ -273,11 +296,31 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     eval_steps = evaluation_steps(budget, resolved["eval_interval"], resolved["early_eval_steps"])
     snap_steps = snapshot_steps(budget, eval_steps, resolved["snapshot_interval"])
     eval_set, snap_set = set(eval_steps), set(snap_steps)
+    # Large production runs retain all scored draws at the final five checks,
+    # plus a separate 100k-draw holdout. Small smoke runs keep their old scope.
+    accuracy_enabled = budget >= 1000 and resolved["eval_samples"] >= EVAL_N
+    accuracy_steps: list[int] = []
+    if accuracy_enabled:
+        from .accuracy import PROTOCOL as ACCURACY_PROTOCOL
+        from .accuracy_gate import HOLDOUT_N, HOLDOUT_SEED_OFFSETS
+        from .accuracy_evidence import AccuracyEvidence
+        from .gate import MIN_STABLE_CHECKS
+
+        accuracy_steps = eval_steps[-MIN_STABLE_CHECKS:]
     summary: dict[str, Any] = {
         "status": "running", "problem": resolved["problem"], "budget_steps": budget,
         "config": resolved, "eval_steps": eval_steps, "snapshot_steps": snap_steps,
         "provenance": provenance, "environment": environment,
     }
+    if accuracy_enabled:
+        summary["accuracy"] = {
+            "protocol": ACCURACY_PROTOCOL,
+            "check_steps": accuracy_steps,
+            "sample_count": resolved["eval_samples"],
+            "holdout_samples": HOLDOUT_N,
+            "holdout_seed_offsets": HOLDOUT_SEED_OFFSETS,
+        }
+        summary["accuracy_check_steps"] = accuracy_steps
     _write_json(out_dir / "summary.json", summary)
     logger = _Log(out_dir)
     start = time.perf_counter()
@@ -288,10 +331,12 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     stable_pass = {"live": None, "ema": None}
     pass_streak = {"live": 0, "ema": 0}
     final_metrics: dict[str, dict[str, Any]] = {}
+    final_accuracy: dict[str, dict[str, Any]] = {}
     device_seed = lambda value: torch.Generator(device=device).manual_seed(value)
 
     try:
         trainer = make_trainer(resolved, recipe)
+        _set_output_sigma(trainer, resolved, trainer.completed_steps)
         if resolved["output_noise_std"]:
             # OutputNoise uses the global stream during updates. Evaluation
             # forks it, so denser observations cannot alter the training path.
@@ -301,6 +346,11 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
         target = sample_real(
             resolved["problem"], max(resolved["eval_samples"], resolved["snapshot_samples"]),
             device=device, generator=target_rng,
+        )
+        target_eval = target[:resolved["eval_samples"]].detach().cpu().numpy()
+        accuracy_evidence = (
+            AccuracyEvidence(resolved, out_dir, eval_steps, target)
+            if accuracy_enabled else None
         )
         logger.say(
             f"START problem={resolved['problem']} steps={budget} device={device} "
@@ -330,9 +380,15 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                     if is_eval:
                         metrics = evaluate_samples(draw[:resolved["eval_samples"]], resolved["problem"])
                         metrics = dict(metrics)
+                        accuracy = (accuracy_evidence.observe(step, model, draw, metrics)
+                                    if accuracy_evidence is not None else None)
                         elapsed = time.perf_counter() - start
-                        logger.event({"event": "eval", "step": step, "model": model,
-                                      "metrics": metrics, "elapsed": elapsed})
+                        event = {"event": "eval", "step": step, "model": model,
+                                 "metrics": metrics, "elapsed": elapsed}
+                        if accuracy is not None:
+                            event["accuracy"] = accuracy
+                            final_accuracy[model] = accuracy
+                        logger.event(event)
                         final_metrics[model] = metrics
                         if step > 0 and metrics["modes"] == 100 and first_full[model] is None:
                             first_full[model] = step
@@ -366,7 +422,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                 np.savez_compressed(
                     out_dir / "final_samples.npz", live=final_draws["live"],
                     ema=final_draws["ema"],
-                    target=target[:resolved["eval_samples"]].detach().cpu().numpy(),
+                    target=target_eval,
                 )
             eval_seconds += time.perf_counter() - observed_start
 
@@ -374,6 +430,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
         observe(0)
         for step in range(1, budget + 1):
             step_start = time.perf_counter()
+            _set_output_sigma(trainer, resolved, trainer.completed_steps)
             if resolved["input_noise_std"]:
                 trainer.D.sigma = linear_input_noise(
                     resolved["input_noise_std"], trainer.completed_steps,
@@ -389,6 +446,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                     generator=train_data_rng,
                 ),
             )
+            _set_output_sigma(trainer, resolved, trainer.completed_steps)
             if device.type == "cuda":
                 torch.cuda.synchronize(device)
             train_seconds += time.perf_counter() - step_start
@@ -406,11 +464,30 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
             if step in eval_set or step in snap_set:
                 observe(step)
 
+        if accuracy_enabled:
+            holdout_start = time.perf_counter()
+            summary["accuracy"], summary["holdout"] = accuracy_evidence.finish(trainer)
+            summary["holdout_samples_file"] = "holdout_samples.npz"
+            summary["holdout_sha256"] = hashlib.sha256(
+                (out_dir / "holdout_samples.npz").read_bytes()
+            ).hexdigest()
+            summary["quality_check_sha256"] = {
+                str(step): hashlib.sha256(
+                    (out_dir / "quality_checks" / f"step_{step:06d}.npz").read_bytes()
+                ).hexdigest()
+                for step in accuracy_steps
+            }
+            summary["final_accuracy"] = final_accuracy
+            eval_seconds += time.perf_counter() - holdout_start
+
         summary.update({
             "status": "complete", "completed_steps": trainer.completed_steps,
             "first_full_coverage_step": first_full, "first_pass_step": first_pass,
             "stable_pass_step": stable_pass, "final": final_metrics,
             "final_samples_file": "final_samples.npz",
+            "final_samples_sha256": hashlib.sha256(
+                (out_dir / "final_samples.npz").read_bytes()
+            ).hexdigest(),
             "train_seconds": train_seconds, "eval_seconds": eval_seconds,
             "total_seconds": time.perf_counter() - start,
             "steps_per_second": budget / train_seconds,

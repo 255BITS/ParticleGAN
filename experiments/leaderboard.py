@@ -647,12 +647,23 @@ def main(argv=None) -> int:
         help="Audit run tree (default: <runs_dir>_audit). Absent is fine.",
     )
     parser.add_argument("--out_dir", type=str, default="results")
+    parser.add_argument("--toy-suite-output", type=Path,
+                        help="Regrade the common-recipe 22-toy accuracy and regression gate")
     parser.add_argument("--toy100-output", type=Path,
                         help="Grade recorded 100-Gaussian toy runs with the new gate")
     parser.add_argument("--toy100-problem", choices=("grid100", "rotated100", "staggered100"),
                         help="Scope the toy100 gate to one named deep dive")
     args = parser.parse_args(argv)
 
+    if args.toy_suite_output is not None:
+        if args.toy100_output is not None or args.toy100_problem:
+            parser.error("--toy-suite-output cannot be combined with individual toy100 options")
+        from benchmarks.toy_suite import regrade
+        verdict = regrade(args.toy_suite_output)
+        print(f"[toy-suite] {verdict['status']} "
+              f"({verdict['observed_passes']}/{verdict['required']}); "
+              f"wrote {args.toy_suite_output / 'compatibility.md'}")
+        return 0 if verdict["status"] == "PASS" else 1
     if args.toy100_output is not None:
         from benchmarks.toy100.gate import evaluate_suite
         verdict = evaluate_suite(args.toy100_output, problem=args.toy100_problem)

@@ -6,6 +6,8 @@ See SOURCE.md and LICENSE for provenance. Default losses use PR #36 builders.
 
 from __future__ import annotations
 
+from contextlib import nullcontext
+
 from .observation import checkpoint, schedule_optimizer
 
 import torch
@@ -132,7 +134,8 @@ def _cover(fake: torch.Tensor, real: torch.Tensor) -> torch.Tensor:
     return torch.cdist(real, fake).min(dim=1).values.square().mean()
 
 
-def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None, diagnostics=False) -> dict:
+def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
+          diagnostics=False, noise_policy=None) -> dict:
     """Train and measure identity error; every pairing is allowed."""
     torch.set_num_threads(1)
     torch.manual_seed(PROTOCOL["seed"])
@@ -142,6 +145,10 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None, diagno
     hidden = PROTOCOL["critic_hidden"]
     generator = _Generator(slow.shape[1], PROTOCOL["z_dim"], fast.shape[1], hidden)
     critic = _Critic(slow.shape[1] + fast.shape[1], hidden)
+    if noise_policy is not None:
+        from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input, wrap_output
+        generator = wrap_output(generator, noise_policy)
+        critic = wrap_input(critic, noise_policy, data_index=1)
     view = _FastView(critic)
     prior = ParticlePrior(
         PROTOCOL["n_particles"], PROTOCOL["z_dim"], init_std=0.1,
@@ -159,6 +166,8 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None, diagno
     )
     steps = PROTOCOL["steps"]
     for step in range(1, steps + 1):
+        if noise_policy is not None:
+            noise_policy.set_step(step - 1)
         fake = generator(slow, prior.z)
         opt_d.zero_grad(set_to_none=True)
         d_loss = gan.d_loss(critic(slow, paired), critic(slow, fake.detach()))
@@ -186,9 +195,14 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None, diagno
         finally:
             for parameter, flag in zip(critic.parameters(), flags):
                 parameter.requires_grad_(flag)
-        checkpoint(step, lambda: {"identity_mse": identity_mse(generator(slow, prior.z).detach(), fast)})
+        def measure_identity():
+            context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
+            with context:
+                return {"identity_mse": identity_mse(generator(slow, prior.z).detach(), fast)}
+        checkpoint(step, measure_identity)
 
-    with torch.no_grad():
+    context = noise_policy.evaluation(steps) if noise_policy is not None else nullcontext()
+    with torch.no_grad(), context:
         pred = generator(slow, prior.z)
         mse = identity_mse(pred, fast)
         paired_mse = identity_mse(pred, paired)
@@ -198,17 +212,20 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None, diagno
         "verdict": "PASS" if passed(mse) else "FAIL",
     }
     if diagnostics:
-        with torch.no_grad():
+        context = noise_policy.evaluation(steps) if noise_policy is not None else nullcontext()
+        with torch.no_grad(), context:
             distances = torch.cdist(pred, fast)
             result["set_cover"] = float(_cover(pred, fast))
             result["own_nearest_fraction"] = float((distances.argmin(1) == torch.arange(len(fast))).float().mean())
             result["particle_mean_square"] = float(prior.z.square().mean())
             result["particle_std_mean"] = float(prior.z.std(0).mean())
         norms = []
-        for batch in (paired, pred):
-            point = batch.detach().requires_grad_(True)
-            grad = torch.autograd.grad(view(point).sum(), point)[0]
-            norms.append(grad.norm(dim=1).detach())
+        context = noise_policy.evaluation(steps) if noise_policy is not None else nullcontext()
+        with context:
+            for batch in (paired, pred):
+                point = batch.detach().requires_grad_(True)
+                grad = torch.autograd.grad(view(point).sum(), point)[0]
+                norms.append(grad.norm(dim=1).detach())
         norms = torch.cat(norms)
         result["critic_gradient_median"] = float(norms.median())
         result["critic_gradient_max"] = float(norms.max())

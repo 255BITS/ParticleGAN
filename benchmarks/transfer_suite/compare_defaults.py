@@ -19,7 +19,7 @@ from unittest.mock import patch
 
 import torch
 
-from particlegan import ParticlePrior
+from particlegan import ParticlePrior, learning_rate_scale
 from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.locked_shared import baseline
 from benchmarks.smart_descent import evaluate
@@ -136,7 +136,18 @@ def optimizer_defaults(recipe, applied):
                     group['betas'] = (recipe.prior_betas or recipe.betas) if kind == 'prior' else recipe.betas
                     applied.append(dict(role=kind, host_lr=old_rate, lr=group['lr'], betas=list(group['betas']),
                                         parameters=sum(p.numel() for p in group['params'])))
-            super().step(optimizer, completed_updates, role)
+            rates = self.base_rates.setdefault(
+                optimizer, [group['lr'] for group in optimizer.param_groups],
+            )
+            scale = learning_rate_scale(
+                completed_updates, self.total_steps,
+                recipe.lr_anneal_start, recipe.lr_floor,
+            )
+            for group, rate in zip(optimizer.param_groups, rates):
+                group['lr'] = rate * scale
+            if completed_updates % 20 == 0:
+                self.trace.append(dict(step=completed_updates, role=role,
+                                       multiplier=scale))
 
     with ExitStack() as stack:
         stack.enter_context(patch.object(ParticlePrior, '__init__', prior_init))

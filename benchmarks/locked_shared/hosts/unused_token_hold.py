@@ -216,11 +216,15 @@ def _make_regularizer(recipe: UnusedHoldRecipe) -> GradientPenalty:
     )
 
 
-def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None) -> dict:
+def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None,
+          *, noise_policy=None) -> dict:
     """Fit one arm. Prints a tailable line at the checkpoints."""
     torch.manual_seed(int(recipe.seed))
     student = SharedSlotStudent()
     critic = SlotCritic()
+    if noise_policy is not None:
+        from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input
+        critic = wrap_input(critic, noise_policy)
     gan = GANLoss(loss_type=recipe.loss_type, mode=recipe.gan_mode)
     reg = regularizer if regularizer is not None else _make_regularizer(recipe)
     opt_g = torch.optim.Adam(student.parameters(), lr=LR, betas=BETAS)
@@ -229,7 +233,11 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None) 
     pairs = hold_pairs(recipe.pairing)
     bcap_applied = 0
     for step in range(int(recipe.steps)):
+        if noise_policy is not None:
+            noise_policy.set_step(step)
         fake = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1).detach()
+        if noise_policy is not None:
+            fake = noise_policy.output(fake)
         opt_d.zero_grad(set_to_none=True)
         penalty, stats = reg.penalty(critic, real, fake, step=step + 1)
         if stats.get("applied"):
@@ -242,6 +250,8 @@ def train(recipe: UnusedHoldRecipe, regularizer: GradientPenalty | None = None) 
         critic.requires_grad_(False)
         opt_g.zero_grad(set_to_none=True)
         fake_g = student.embeds(1.0)[CONCEPT].unsqueeze(0).expand(N_ROWS, -1)
+        if noise_policy is not None:
+            fake_g = noise_policy.output(fake_g)
         g_loss = gan.g_loss(critic(fake_g), critic(real).detach())
         # Demo cover and the n=12 cloud are recorded on the card and are
         # not added here. The train pin is the unused-token hold.
