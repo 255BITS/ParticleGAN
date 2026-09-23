@@ -758,13 +758,29 @@ def _verify_saved_provenance(directory: Path, protocol: dict, *, candidate: bool
                 raise ValueError(f"saved source archive differs: {name}")
 
 
-def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate: bool):
+def _reject_scratch_optimizer(payload: dict) -> None:
+    if (payload.get("shared_gate_eligible") is False
+            or "scratch_optimizer_policy" in payload
+            or "optimizer_policy" in payload):
+        raise ValueError("scratch or unsupported optimizer policy cannot enter common gate")
+
+
+def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate: bool,
+                  allow_scratch: bool = False):
     """Recompute every live verdict from the compressed episode, not the stamp."""
     if not (directory / "protocol.json").is_file():
         return dict(status="MISSING", passed=0, required=len(expected_names),
                     cases={}, reason="protocol.json is absent")
     try:
         protocol = _read(directory / "protocol.json")
+        if not allow_scratch:
+            _reject_scratch_optimizer(protocol)
+            summary_path = directory / "summary.json"
+            if summary_path.is_file():
+                summary = _read(summary_path)
+                _reject_scratch_optimizer(summary)
+                for case in summary.get("cases", []):
+                    _reject_scratch_optimizer(case)
         _verify_saved_provenance(directory, protocol, candidate=candidate)
         index = _read(directory / "index.json")
         rows = index["records"]
@@ -789,6 +805,8 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
             raise ValueError("archived recipe does not resolve to declared fields")
         cases = {}
         for row in rows:
+            if not allow_scratch:
+                _reject_scratch_optimizer(row)
             artifact = (directory / row["artifact"]).resolve()
             if not artifact.is_relative_to(directory.resolve()):
                 raise ValueError("episode path escapes evidence directory")
@@ -796,6 +814,8 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
             if hashlib.sha256(raw).hexdigest() != row["uncompressed_sha256"]:
                 raise ValueError(f"episode hash differs: {row['name']}")
             record = json.loads(raw)
+            if not allow_scratch:
+                _reject_scratch_optimizer(record)
             name = row["name"]
             if record["name"] != name or record["original_spec"] != frozen_jobs[name]["spec"]:
                 raise ValueError(f"frozen task declaration differs: {name}")

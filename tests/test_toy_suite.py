@@ -265,6 +265,54 @@ def test_candidate_episode_binds_saved_config_and_sources(
     assert expected in grade["reason"]
 
 
+@pytest.mark.parametrize("location,field,value", [
+    ("protocol", "scratch_optimizer_policy", {"scratch_optimizer": "optimistic_adam"}),
+    ("index", "shared_gate_eligible", False),
+    ("record", "scratch_optimizer_policy", None),
+    ("summary", "optimizer_policy", {"name": "unapproved_adam_variant"}),
+])
+def test_common_transfer_gate_rejects_scratch_optimizer_at_any_saved_layer(
+    tmp_path, monkeypatch, location, field, value,
+):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    tamper = (lambda record: record.update({field: value})) if location == "record" else (lambda record: None)
+    name = _write_candidate_episode(directory, tamper)
+    if location in ("protocol", "index"):
+        path = directory / f"{location}.json"
+        saved = json.loads(path.read_text())
+        target = saved if location == "protocol" else saved["records"][0]
+        target[field] = value
+        path.write_text(json.dumps(saved))
+    elif location == "summary":
+        (directory / "summary.json").write_text(json.dumps({field: value, "cases": []}))
+    grade = toy_suite._episode_rows(directory, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert "scratch or unsupported optimizer policy" in grade["reason"]
+    assert toy_suite._episode_rows(
+        directory, (name,), candidate=True, allow_scratch=True,
+    )["status"] == "PASS"
+
+
+def test_common_transfer_gate_rejects_partially_removed_scratch_marker(tmp_path, monkeypatch):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory)
+    index_path = directory / "index.json"
+    index = json.loads(index_path.read_text())
+    index["records"][0]["scratch_optimizer_policy"] = {"alpha": 1.0}
+    index_path.write_text(json.dumps(index))
+    # Removing the protocol marker cannot make the remaining scratch receipt eligible.
+    assert "scratch_optimizer_policy" not in json.loads((directory / "protocol.json").read_text())
+    grade = toy_suite._episode_rows(directory, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert "scratch or unsupported optimizer policy" in grade["reason"]
+
+
 def test_candidate_episode_rejects_omitted_nonzero_output_warmup(
     tmp_path, monkeypatch,
 ):
