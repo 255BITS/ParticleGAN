@@ -1,7 +1,13 @@
 {
-  "entries": 2,
-  "episodes": 38,
+  "entries": 8,
+  "episodes": 152,
   "live_counts": {
+    "lr00425_prior2": 15,
+    "equal_lr_00425": 14,
+    "equal_lr_0025": 14,
+    "equal_lr_0034": 13,
+    "lr0034_dprior125": 13,
+    "equal_lr_0017": 11,
     "gan": 8,
     "gan_legacy": 5
   },

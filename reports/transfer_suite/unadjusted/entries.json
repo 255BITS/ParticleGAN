@@ -2,11 +2,57 @@
   {
     "name": "gan",
     "label": "Proposed public default",
-    "indexes": ["reports/transfer_suite/default_comparison/proposed/index.json"]
+    "indexes": [
+      "reports/transfer_suite/default_comparison/proposed/index.json"
+    ]
   },
   {
     "name": "gan_legacy",
     "label": "Current master default",
-    "indexes": ["reports/transfer_suite/default_comparison/current/index.json"]
+    "indexes": [
+      "reports/transfer_suite/default_comparison/current/index.json"
+    ]
+  },
+  {
+    "name": "equal_lr_0017",
+    "label": "equal lr 0017",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-0/index.json"
+    ]
+  },
+  {
+    "name": "equal_lr_0025",
+    "label": "equal lr 0025",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-0/index.json"
+    ]
+  },
+  {
+    "name": "equal_lr_0034",
+    "label": "equal lr 0034",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-1/index.json"
+    ]
+  },
+  {
+    "name": "equal_lr_00425",
+    "label": "equal lr 00425",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-1/index.json"
+    ]
+  },
+  {
+    "name": "lr00425_prior2",
+    "label": "lr00425 prior2",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-2/index.json"
+    ]
+  },
+  {
+    "name": "lr0034_dprior125",
+    "label": "lr0034 dprior125",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-2/index.json"
+    ]
   }
 ]

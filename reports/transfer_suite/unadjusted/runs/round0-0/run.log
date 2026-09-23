@@ -1,0 +1,192 @@
+START equal_lr_0017 two_pole
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "two_pole", "status": "FAIL", "suffix": 0, "live": {"mean_abs": 0.09452400356531143, "grad_med": 0.0727626383304596}, "error": null}
+START equal_lr_0017 trajectory
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "trajectory", "status": "FAIL", "suffix": 0, "live": {"identity_mse": 0.20685744285583496}, "error": null}
+START equal_lr_0017 residual_student
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "residual_student", "status": "PASS", "suffix": 20, "live": {"identity_mse": 2.5195799025823362e-05, "success_rate": 1.0, "wrong_pad_rate": 0.0}, "error": null}
+START equal_lr_0017 unipolar
+unipolar_dir arm=locked_rpgan step=1/400 cover=0.0051 leak=0.3214 neu_hold=0.9966 cos_plus=+0.5669 hit=FAIL
+unipolar_dir arm=locked_rpgan step=50/400 cover=0.3713 leak=0.0249 neu_hold=0.8776 cos_plus=+0.9764 hit=FAIL
+unipolar_dir arm=locked_rpgan step=100/400 cover=0.5866 leak=0.0008 neu_hold=0.8388 cos_plus=+0.9994 hit=FAIL
+unipolar_dir arm=locked_rpgan step=150/400 cover=0.7626 leak=0.0001 neu_hold=0.8253 cos_plus=+0.9999 hit=FAIL
+unipolar_dir arm=locked_rpgan step=200/400 cover=0.9079 leak=0.0000 neu_hold=0.8275 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=250/400 cover=0.9813 leak=0.0000 neu_hold=0.8531 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=300/400 cover=0.9592 leak=0.0000 neu_hold=0.9199 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=350/400 cover=0.9844 leak=0.0000 neu_hold=0.9725 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=400/400 cover=0.9910 leak=0.0000 neu_hold=0.9852 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=400 seed=0 cover=0.9910 leak=0.0000 neu_hold=0.9852 cos_plus=+1.0000 hit=PASS
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "unipolar", "status": "PASS", "suffix": 10, "live": {"cover": 0.9909652503851873, "off_caption": 6.321568815347848e-07, "neu_hold": 0.985227664001286}, "error": null}
+START equal_lr_0017 ae_gan_hold
+ae-gan-hold arm=equal_lr_0017 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=equal_lr_0017 step=1 recon=1.2648 hold=1.4069 loss=4.2033
+ae-gan-hold arm=equal_lr_0017 step=50 recon=0.0738 hold=0.0363 loss=0.9876
+ae-gan-hold arm=equal_lr_0017 step=100 recon=0.0249 hold=0.0308 loss=0.9293
+ae-gan-hold arm=equal_lr_0017 step=150 recon=0.0039 hold=0.0158 loss=1.0785
+ae-gan-hold arm=equal_lr_0017 step=200 recon=0.0025 hold=0.0007 loss=1.1533
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "ae_gan_hold", "status": "PASS", "suffix": 18, "live": {"recon_mse": 0.0025121800135821104, "hold": 0.0008421606034971774}, "error": null}
+START equal_lr_0017 cover_leftover
+cover_leftover start arm=locked steps=800 seed=0 teacher=faithful_guard_e cover=1.5 penalty_coeff=3.0 kappa=1.2 fm=0.0 n_particles=12
+cover_leftover arm=locked step=1/800 d=0.7237 g=1.6856 cap=0.0000 u_kept=0.003 content=0.000 leak=0.000 err=0.751 covered=0
+cover_leftover arm=locked step=50/800 d=0.2839 g=2.2741 cap=0.0067 u_kept=0.096 content=0.148 leak=0.457 err=0.673 covered=0
+cover_leftover arm=locked step=100/800 d=0.3687 g=1.8790 cap=0.0041 u_kept=0.180 content=0.295 leak=0.091 err=0.598 covered=0
+cover_leftover arm=locked step=150/800 d=0.4740 g=1.5119 cap=0.0021 u_kept=0.264 content=0.451 leak=0.045 err=0.525 covered=0
+cover_leftover arm=locked step=200/800 d=0.5202 g=1.2618 cap=0.0140 u_kept=0.344 content=0.541 leak=0.008 err=0.463 covered=0
+cover_leftover arm=locked step=250/800 d=0.6067 g=1.0916 cap=0.0000 u_kept=0.421 content=0.631 leak=0.013 err=0.408 covered=0
+cover_leftover arm=locked step=300/800 d=0.6608 g=0.9519 cap=0.0011 u_kept=0.494 content=0.677 leak=0.008 err=0.357 covered=0
+cover_leftover arm=locked step=350/800 d=0.6769 g=0.8854 cap=0.0000 u_kept=0.564 content=0.752 leak=0.007 err=0.323 covered=0
+cover_leftover arm=locked step=400/800 d=0.6861 g=0.8518 cap=0.0000 u_kept=0.566 content=0.796 leak=0.006 err=0.303 covered=0
+cover_leftover arm=locked step=450/800 d=0.7028 g=0.8266 cap=0.0000 u_kept=0.592 content=0.843 leak=0.012 err=0.285 covered=0
+cover_leftover arm=locked step=500/800 d=0.6870 g=0.8032 cap=0.0000 u_kept=0.630 content=0.922 leak=0.028 err=0.247 covered=0
+cover_leftover arm=locked step=550/800 d=0.7011 g=0.7803 cap=0.0000 u_kept=0.666 content=0.929 leak=0.007 err=0.228 covered=0
+cover_leftover arm=locked step=600/800 d=0.6896 g=0.7654 cap=0.0000 u_kept=0.714 content=0.965 leak=0.005 err=0.203 covered=0
+cover_leftover arm=locked step=650/800 d=0.6850 g=0.7577 cap=0.0000 u_kept=0.723 content=0.969 leak=0.016 err=0.187 covered=1
+cover_leftover arm=locked step=700/800 d=0.6921 g=0.7433 cap=0.0000 u_kept=0.748 content=0.985 leak=0.002 err=0.173 covered=1
+cover_leftover arm=locked step=750/800 d=0.6904 g=0.7389 cap=0.0000 u_kept=0.760 content=0.986 leak=0.005 err=0.163 covered=1
+cover_leftover arm=locked step=800/800 d=0.6907 g=0.7452 cap=0.0000 u_kept=0.768 content=0.987 leak=0.000 err=0.163 covered=1
+cover_leftover DONE arm=locked pass=0 reasons=undershoot u_kept=0.673 content=0.899 leak=0.001 err=0.225 same_dir=0.006 particle_rms=0.111
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "cover_leftover", "status": "FAIL", "suffix": 0, "live": {"u_kept": 0.7680175823657531, "content_kept": 0.9867997423564818, "leak_ratio": 0.00020743977053260275, "pole_rel_err_plus": 0.1529729664325714, "pole_rel_err_minus": 0.16314372420310974, "same_dir": 0.00967934721700428}, "error": null}
+START equal_lr_0017 unused_token_hold
+unused-token arm=equal_lr_0017 step=1 hold=0.9976 concept=0.0000 unused_dist=0.0024
+unused-token arm=equal_lr_0017 step=50 hold=0.9945 concept=0.1828 unused_dist=0.0055
+unused-token arm=equal_lr_0017 step=100 hold=0.9938 concept=0.4348 unused_dist=0.0062
+unused-token arm=equal_lr_0017 step=150 hold=0.9943 concept=0.6086 unused_dist=0.0057
+unused-token arm=equal_lr_0017 step=200 hold=0.9944 concept=0.6611 unused_dist=0.0056
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "unused_token_hold", "status": "FAIL", "suffix": 0, "live": {"unused_hold": 0.9944106130860746, "concept_move": 0.6610757546521384}, "error": null}
+START equal_lr_0017 mid_scale_identity
+mid_scale arm=locked step=1 seed=0 concept+=+0.5774 concept-=+0.0000 id0=+0.0031 id_mid=+0.0093 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=50 seed=0 concept+=+0.7529 concept-=-0.3333 id0=+0.1978 id_mid=+0.5682 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=polarity,identity_0,identity_mid
+mid_scale arm=locked step=100 seed=0 concept+=+0.8581 concept-=+0.1696 id0=+0.3430 id_mid=+0.8651 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=150 seed=0 concept+=+0.8451 concept-=+0.6421 id0=+0.4587 id_mid=+0.8717 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=200 seed=0 concept+=+0.9362 concept-=+0.6571 id0=+0.5361 id_mid=+0.8214 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=250 seed=0 concept+=+0.9443 concept-=+0.7825 id0=+0.5936 id_mid=+0.7222 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=300 seed=0 concept+=+0.9838 concept-=+0.8563 id0=+0.6050 id_mid=+0.9264 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=350 seed=0 concept+=+0.9750 concept-=+0.9526 id0=+0.6552 id_mid=+0.9593 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=400 seed=0 concept+=+0.9812 concept-=+0.9751 id0=+0.7384 id_mid=+0.9807 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=450 seed=0 concept+=+0.9908 concept-=+0.9865 id0=+0.8237 id_mid=+0.9991 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=500 seed=0 concept+=+0.9972 concept-=+0.9957 id0=+0.9082 id_mid=+0.9915 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=550 seed=0 concept+=+0.9999 concept-=+0.9998 id0=+0.9909 id_mid=+0.9778 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=600 seed=0 concept+=+0.9999 concept-=+0.9998 id0=+0.9813 id_mid=+0.9960 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=650 seed=0 concept+=+0.9995 concept-=+0.9998 id0=+0.9691 id_mid=+0.9948 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=700 seed=0 concept+=+0.9990 concept-=+1.0000 id0=+0.9736 id_mid=+0.9897 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=750 seed=0 concept+=+0.9995 concept-=+0.9998 id0=+0.9840 id_mid=+0.9990 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+0.9997 concept-=+0.9997 id0=+0.9864 id_mid=+0.9948 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+0.9997 concept-=+0.9997 id0=+0.9864 id_mid=+0.9948 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "mid_scale_identity", "status": "PASS", "suffix": 11, "live": {"concept_cos_plus": 0.9997063279151917, "concept_cos_minus": 0.9997276663780212, "concept_mag_plus": 1.0419557094573975, "concept_mag_minus": 1.0491423606872559, "identity_at_0": 0.9863949694420588, "identity_at_mid": 0.9948365040149462}, "error": null}
+START equal_lr_0017 mode_hold
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "mode_hold", "status": "PASS", "suffix": 8, "live": {"modes": 8, "hq": 1.0}, "error": null}
+START equal_lr_0017 vector_two_broad
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "vector_two_broad", "status": "PASS", "suffix": 7, "live": {"sw1_normalized": 0.0766340930720489, "mean_error": 0.05921373888850212, "covariance_error": 0.18528348207473755, "target_scale": 1.0555585622787476, "sample_count": 4096, "mass_tv": 0.0166015625, "min_mass_ratio": 0.966796875, "hq": 0.978515625, "component_covariance_error": 0.47230038046836853, "component_covariance_errors": [0.4665844738483429, 0.47801628708839417], "component_min_eigen_ratio": 0.3949332535266876, "component_mass": [0.4833984375, 0.5166015625], "target_mass": [0.5, 0.5], "component_counts": [1980, 2116]}, "error": null}
+START equal_lr_0017 vector_unequal_mass
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "vector_unequal_mass", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.14735740675178247, "mean_error": 0.2036137580871582, "covariance_error": 0.3441532552242279, "target_scale": 1.7593294382095337, "sample_count": 4096, "mass_tv": 0.12998045980930328, "min_mass_ratio": 0.0, "hq": 0.976318359375, "component_covariance_error": 17.584079034626484, "component_covariance_errors": [0.3487633466720581, 0.25610747933387756, 68.7314453125, 1.0], "component_min_eigen_ratio": 0.0, "component_mass": [0.636962890625, 0.343017578125, 0.02001953125, 0.0], "target_mass": [0.550000011920929, 0.30000001192092896, 0.12999999523162842, 0.019999999552965164], "component_counts": [2609, 1405, 82, 0]}, "error": null}
+START equal_lr_0017 vector_unequal_width
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "vector_unequal_width", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.15062823492142358, "mean_error": 0.21217118203639984, "covariance_error": 0.1271803081035614, "target_scale": 2.1343955993652344, "sample_count": 4096, "mass_tv": 0.124267578125, "min_mass_ratio": 0.5029296875, "hq": 0.97021484375, "component_covariance_error": 6.04226322285831, "component_covariance_errors": [19.263668060302734, 4.1200785636901855, 0.09445720165967941, 0.6908490657806396], "component_min_eigen_ratio": 0.3011307120323181, "component_mass": [0.125732421875, 0.27294921875, 0.300048828125, 0.30126953125], "target_mass": [0.25, 0.25, 0.25, 0.25], "component_counts": [515, 1118, 1229, 1234]}, "error": null}
+START equal_lr_0017 vector_anisotropic
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "vector_anisotropic", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.14629045800434162, "mean_error": 0.20652425289154053, "covariance_error": 0.18721903860569, "target_scale": 2.032285690307617, "sample_count": 4096, "mass_tv": 0.1162923127412796, "min_mass_ratio": 0.651123046875, "hq": 0.9755859375, "component_covariance_error": 1.3105450496077538, "component_covariance_errors": [3.6582720279693604, 0.16902482509613037, 0.10433829575777054], "component_min_eigen_ratio": 0.32781869173049927, "component_mass": [0.3466796875, 0.217041015625, 0.436279296875], "target_mass": [0.3333333432674408, 0.3333333432674408, 0.3333333432674408], "component_counts": [1420, 889, 1787]}, "error": null}
+START equal_lr_0017 vector_overlap
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "vector_overlap", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.095788004945648, "mean_error": 0.04126822203397751, "covariance_error": 0.46068355441093445, "target_scale": 0.8501437306404114, "sample_count": 4096}, "error": null}
+START equal_lr_0017 vector_spiral
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "vector_spiral", "status": "PASS", "suffix": 23, "live": {"sw1_normalized": 0.029575713912335322, "mean_error": 0.031270548701286316, "covariance_error": 0.022075850516557693, "target_scale": 1.224178433418274, "sample_count": 4096}, "error": null}
+START equal_lr_0017 img_stripes2
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "img_stripes2", "status": "PASS", "suffix": 20, "live": {"modes": 2, "hq": 1.0, "mean_rmse": 0.001007964019663632, "quality_mode_fractions": [0.46875, 0.53125], "mode_fractions": [0.46875, 0.53125], "distribution_tv": 0.03125}, "error": null}
+START equal_lr_0017 img_bars4
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "img_bars4", "status": "PASS", "suffix": 7, "live": {"modes": 4, "hq": 0.9375, "mean_rmse": 0.01802218332886696, "quality_mode_fractions": [0.3125, 0.25, 0.21875, 0.15625], "mode_fractions": [0.3125, 0.28125, 0.21875, 0.1875], "distribution_tv": 0.09375}, "error": null}
+START equal_lr_0017 img_blobs4
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "img_blobs4", "status": "PASS", "suffix": 7, "live": {"modes": 4, "hq": 1.0, "mean_rmse": 0.0034728108439594507, "quality_mode_fractions": [0.3125, 0.28125, 0.21875, 0.1875], "mode_fractions": [0.3125, 0.28125, 0.21875, 0.1875], "distribution_tv": 0.09375}, "error": null}
+START equal_lr_0017 img_intensity2
+{"event": "DONE", "candidate": "equal_lr_0017", "task": "img_intensity2", "status": "PASS", "suffix": 6, "live": {"modes": 2, "hq": 1.0, "mean_rmse": 0.021032892167568207, "quality_mode_fractions": [0.5, 0.5], "mode_fractions": [0.5, 0.5], "distribution_tv": 0.0}, "error": null}
+START equal_lr_0025 two_pole
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "two_pole", "status": "FAIL", "suffix": 0, "live": {"mean_abs": 0.14457722008228302, "grad_med": 0.11475574970245361}, "error": null}
+START equal_lr_0025 trajectory
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "trajectory", "status": "PASS", "suffix": 20, "live": {"identity_mse": 2.0495988792390563e-05}, "error": null}
+START equal_lr_0025 residual_student
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "residual_student", "status": "PASS", "suffix": 21, "live": {"identity_mse": 1.5291152521967888e-05, "success_rate": 1.0, "wrong_pad_rate": 0.0}, "error": null}
+START equal_lr_0025 unipolar
+unipolar_dir arm=locked_rpgan step=1/400 cover=0.0075 leak=0.3214 neu_hold=0.9950 cos_plus=+0.5669 hit=FAIL
+unipolar_dir arm=locked_rpgan step=50/400 cover=0.4714 leak=0.0205 neu_hold=0.8407 cos_plus=+0.9802 hit=FAIL
+unipolar_dir arm=locked_rpgan step=100/400 cover=0.7480 leak=0.0008 neu_hold=0.8212 cos_plus=+0.9995 hit=FAIL
+unipolar_dir arm=locked_rpgan step=150/400 cover=0.9534 leak=0.0000 neu_hold=0.8325 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=200/400 cover=0.9446 leak=0.0000 neu_hold=0.9000 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=250/400 cover=0.9864 leak=0.0000 neu_hold=0.9605 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=300/400 cover=0.9215 leak=0.0000 neu_hold=0.9423 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=350/400 cover=0.9442 leak=0.0002 neu_hold=0.9137 cos_plus=+0.9999 hit=PASS
+unipolar_dir arm=locked_rpgan step=400/400 cover=0.9545 leak=0.0007 neu_hold=0.9111 cos_plus=+0.9995 hit=PASS
+unipolar_dir arm=locked_rpgan step=400 seed=0 cover=0.9545 leak=0.0007 neu_hold=0.9111 cos_plus=+0.9995 hit=PASS
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "unipolar", "status": "PASS", "suffix": 14, "live": {"cover": 0.9544573725320049, "off_caption": 0.0007151191907181382, "neu_hold": 0.9111253023147583}, "error": null}
+START equal_lr_0025 ae_gan_hold
+ae-gan-hold arm=equal_lr_0025 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=equal_lr_0025 step=1 recon=1.2588 hold=1.3920 loss=4.2068
+ae-gan-hold arm=equal_lr_0025 step=50 recon=0.0401 hold=0.0374 loss=0.9598
+ae-gan-hold arm=equal_lr_0025 step=100 recon=0.0041 hold=0.0315 loss=0.9921
+ae-gan-hold arm=equal_lr_0025 step=150 recon=0.0122 hold=0.0065 loss=0.9719
+ae-gan-hold arm=equal_lr_0025 step=200 recon=0.0338 hold=0.0111 loss=0.8518
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "ae_gan_hold", "status": "PASS", "suffix": 10, "live": {"recon_mse": 0.026465820148587227, "hold": 0.0009432869264855981}, "error": null}
+START equal_lr_0025 cover_leftover
+cover_leftover start arm=locked steps=800 seed=0 teacher=faithful_guard_e cover=1.5 penalty_coeff=3.0 kappa=1.2 fm=0.0 n_particles=12
+cover_leftover arm=locked step=1/800 d=0.7237 g=1.7054 cap=0.0000 u_kept=0.005 content=0.000 leak=0.000 err=0.751 covered=0
+cover_leftover arm=locked step=50/800 d=0.3389 g=2.1135 cap=0.0008 u_kept=0.146 content=0.226 leak=0.083 err=0.637 covered=0
+cover_leftover arm=locked step=100/800 d=0.4405 g=1.5725 cap=0.0023 u_kept=0.263 content=0.433 leak=0.088 err=0.528 covered=0
+cover_leftover arm=locked step=150/800 d=0.5867 g=1.1760 cap=0.0000 u_kept=0.384 content=0.576 leak=0.013 err=0.442 covered=0
+cover_leftover arm=locked step=200/800 d=0.6545 g=0.9676 cap=0.0000 u_kept=0.478 content=0.662 leak=0.013 err=0.365 covered=0
+cover_leftover arm=locked step=250/800 d=0.6705 g=0.8861 cap=0.0000 u_kept=0.575 content=0.776 leak=0.027 err=0.316 covered=0
+cover_leftover arm=locked step=300/800 d=0.6887 g=0.8422 cap=0.0000 u_kept=0.569 content=0.805 leak=0.003 err=0.293 covered=0
+cover_leftover arm=locked step=350/800 d=0.6955 g=0.8012 cap=0.0000 u_kept=0.623 content=0.858 leak=0.005 err=0.253 covered=0
+cover_leftover arm=locked step=400/800 d=0.6955 g=0.7758 cap=0.0000 u_kept=0.665 content=0.907 leak=0.001 err=0.223 covered=0
+cover_leftover arm=locked step=450/800 d=0.7034 g=0.7555 cap=0.0000 u_kept=0.713 content=0.962 leak=0.003 err=0.190 covered=1
+cover_leftover arm=locked step=500/800 d=0.6887 g=0.7343 cap=0.0000 u_kept=0.790 content=0.989 leak=0.001 err=0.157 covered=1
+cover_leftover arm=locked step=550/800 d=0.6990 g=0.7168 cap=0.0000 u_kept=0.819 content=0.971 leak=0.006 err=0.120 covered=1
+cover_leftover arm=locked step=600/800 d=0.6911 g=0.7131 cap=0.0000 u_kept=0.873 content=0.999 leak=0.002 err=0.098 covered=1
+cover_leftover arm=locked step=650/800 d=0.6857 g=0.7048 cap=0.0000 u_kept=0.878 content=1.003 leak=0.011 err=0.081 covered=1
+cover_leftover arm=locked step=700/800 d=0.6935 g=0.6994 cap=0.0000 u_kept=0.904 content=0.998 leak=0.000 err=0.064 covered=1
+cover_leftover arm=locked step=750/800 d=0.6895 g=0.6973 cap=0.0000 u_kept=0.917 content=1.000 leak=0.004 err=0.056 covered=1
+cover_leftover arm=locked step=800/800 d=0.6950 g=0.6993 cap=0.0000 u_kept=0.920 content=1.005 leak=0.001 err=0.059 covered=1
+cover_leftover DONE arm=locked pass=0 reasons=undershoot u_kept=0.818 content=0.946 leak=0.001 err=0.123 same_dir=0.002 particle_rms=0.057
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "cover_leftover", "status": "PASS", "suffix": 7, "live": {"u_kept": 0.9198817518752487, "content_kept": 1.0051452930802216, "leak_ratio": 0.000711149848454428, "pole_rel_err_plus": 0.05283500999212265, "pole_rel_err_minus": 0.059056252241134644, "same_dir": 0.004724549202903949}, "error": null}
+START equal_lr_0025 unused_token_hold
+unused-token arm=equal_lr_0025 step=1 hold=0.9965 concept=0.0000 unused_dist=0.0035
+unused-token arm=equal_lr_0025 step=50 hold=0.9907 concept=0.3256 unused_dist=0.0093
+unused-token arm=equal_lr_0025 step=100 hold=0.9919 concept=0.6199 unused_dist=0.0081
+unused-token arm=equal_lr_0025 step=150 hold=0.9928 concept=0.8488 unused_dist=0.0072
+unused-token arm=equal_lr_0025 step=200 hold=0.9931 concept=0.9195 unused_dist=0.0069
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "unused_token_hold", "status": "PASS", "suffix": 6, "live": {"unused_hold": 0.993135929107666, "concept_move": 0.9195057153701782}, "error": null}
+START equal_lr_0025 mid_scale_identity
+mid_scale arm=locked step=1 seed=0 concept+=+0.5774 concept-=+0.0000 id0=+0.0045 id_mid=+0.0136 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=50 seed=0 concept+=+0.8329 concept-=-0.0485 id0=+0.2678 id_mid=+0.7138 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=polarity,identity_0,identity_mid
+mid_scale arm=locked step=100 seed=0 concept+=+0.8488 concept-=+0.6121 id0=+0.4540 id_mid=+0.8845 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=150 seed=0 concept+=+0.9488 concept-=+0.6901 id0=+0.5565 id_mid=+0.8020 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=200 seed=0 concept+=+0.9595 concept-=+0.8560 id0=+0.6143 id_mid=+0.7534 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=250 seed=0 concept+=+0.9831 concept-=+0.9419 id0=+0.6470 id_mid=+0.9509 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=300 seed=0 concept+=+0.9857 concept-=+0.9794 id0=+0.7463 id_mid=+0.9837 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=350 seed=0 concept+=+0.9931 concept-=+0.9934 id0=+0.8465 id_mid=+0.9920 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=400 seed=0 concept+=+0.9987 concept-=+0.9995 id0=+0.9495 id_mid=+0.9909 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=450 seed=0 concept+=+0.9998 concept-=+0.9997 id0=+0.9756 id_mid=+0.9932 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=500 seed=0 concept+=+0.9996 concept-=+0.9993 id0=+0.9757 id_mid=+0.9642 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=550 seed=0 concept+=+0.9984 concept-=+0.9999 id0=+0.9928 id_mid=+0.9303 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=600 seed=0 concept+=+0.9999 concept-=+0.9996 id0=+0.9913 id_mid=+0.9938 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=650 seed=0 concept+=+1.0000 concept-=+0.9999 id0=+0.9966 id_mid=+0.9851 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=700 seed=0 concept+=+1.0000 concept-=+0.9999 id0=+0.9967 id_mid=+0.9951 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=750 seed=0 concept+=+1.0000 concept-=+0.9999 id0=+0.9962 id_mid=+0.9980 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9966 id_mid=+0.9912 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9966 id_mid=+0.9912 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "mid_scale_identity", "status": "PASS", "suffix": 14, "live": {"concept_cos_plus": 0.9999940395355225, "concept_cos_minus": 0.9999654293060303, "concept_mag_plus": 1.0205012559890747, "concept_mag_minus": 0.9539103507995605, "identity_at_0": 0.9965754423639402, "identity_at_mid": 0.9911502278127128}, "error": null}
+START equal_lr_0025 mode_hold
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "mode_hold", "status": "FAIL", "suffix": 0, "live": {"modes": 8, "hq": 0.75537109375}, "error": null}
+START equal_lr_0025 vector_two_broad
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "vector_two_broad", "status": "PASS", "suffix": 16, "live": {"sw1_normalized": 0.10652903434990836, "mean_error": 0.1477031409740448, "covariance_error": 0.23866356909275055, "target_scale": 1.0555585622787476, "sample_count": 4096, "mass_tv": 0.009033203125, "min_mass_ratio": 0.98193359375, "hq": 0.994873046875, "component_covariance_error": 0.3698272556066513, "component_covariance_errors": [0.35588541626930237, 0.38376909494400024], "component_min_eigen_ratio": 0.4959520995616913, "component_mass": [0.490966796875, 0.509033203125], "target_mass": [0.5, 0.5], "component_counts": [2011, 2085]}, "error": null}
+START equal_lr_0025 vector_unequal_mass
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "vector_unequal_mass", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.11515640325036886, "mean_error": 0.14010567963123322, "covariance_error": 0.15911464393138885, "target_scale": 1.7593294382095337, "sample_count": 4096, "mass_tv": 0.09661132842302322, "min_mass_ratio": 0.13427734375, "hq": 0.9853515625, "component_covariance_error": 0.468500342220068, "component_covariance_errors": [0.22962811589241028, 0.04175134003162384, 0.6026219129562378, 1.0], "component_min_eigen_ratio": 0.0, "component_mass": [0.643798828125, 0.220703125, 0.1328125, 0.002685546875], "target_mass": [0.550000011920929, 0.30000001192092896, 0.12999999523162842, 0.019999999552965164], "component_counts": [2637, 904, 544, 11]}, "error": null}
+START equal_lr_0025 vector_unequal_width
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "vector_unequal_width", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.06875084894346752, "mean_error": 0.08098884671926498, "covariance_error": 0.07202378660440445, "target_scale": 2.1343955993652344, "sample_count": 4096, "mass_tv": 0.073486328125, "min_mass_ratio": 0.78515625, "hq": 0.98974609375, "component_covariance_error": 2.901731964200735, "component_covariance_errors": [11.052844047546387, 0.20086006820201874, 0.116742342710495, 0.23648139834403992], "component_min_eigen_ratio": 0.10141709446907043, "component_mass": [0.266845703125, 0.1962890625, 0.306640625, 0.230224609375], "target_mass": [0.25, 0.25, 0.25, 0.25], "component_counts": [1093, 804, 1256, 943]}, "error": null}
+START equal_lr_0025 vector_anisotropic
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "vector_anisotropic", "status": "PASS", "suffix": 8, "live": {"sw1_normalized": 0.08349917832235104, "mean_error": 0.11076872795820236, "covariance_error": 0.09563662111759186, "target_scale": 2.032285690307617, "sample_count": 4096, "mass_tv": 0.0511881560087204, "min_mass_ratio": 0.90966796875, "hq": 0.99169921875, "component_covariance_error": 0.7184701512257258, "component_covariance_errors": [0.18755243718624115, 0.2414296269416809, 1.7264283895492554], "component_min_eigen_ratio": 0.22333717346191406, "component_mass": [0.30322265625, 0.312255859375, 0.384521484375], "target_mass": [0.3333333432674408, 0.3333333432674408, 0.3333333432674408], "component_counts": [1242, 1279, 1575]}, "error": null}
+START equal_lr_0025 vector_overlap
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "vector_overlap", "status": "FAIL", "suffix": 1, "live": {"sw1_normalized": 0.1018404905824808, "mean_error": 0.12075629085302353, "covariance_error": 0.34698164463043213, "target_scale": 0.8501437306404114, "sample_count": 4096}, "error": null}
+START equal_lr_0025 vector_spiral
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "vector_spiral", "status": "PASS", "suffix": 23, "live": {"sw1_normalized": 0.03627027163291851, "mean_error": 0.04287654533982277, "covariance_error": 0.03216366097331047, "target_scale": 1.224178433418274, "sample_count": 4096}, "error": null}
+START equal_lr_0025 img_stripes2
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "img_stripes2", "status": "PASS", "suffix": 20, "live": {"modes": 2, "hq": 1.0, "mean_rmse": 0.0005979760317131877, "quality_mode_fractions": [0.5, 0.5], "mode_fractions": [0.5, 0.5], "distribution_tv": 0.0}, "error": null}
+START equal_lr_0025 img_bars4
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "img_bars4", "status": "PASS", "suffix": 9, "live": {"modes": 4, "hq": 1.0, "mean_rmse": 0.00303490087389946, "quality_mode_fractions": [0.3125, 0.21875, 0.25, 0.21875], "mode_fractions": [0.3125, 0.21875, 0.25, 0.21875], "distribution_tv": 0.0625}, "error": null}
+START equal_lr_0025 img_blobs4
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "img_blobs4", "status": "PASS", "suffix": 7, "live": {"modes": 4, "hq": 1.0, "mean_rmse": 0.007121877744793892, "quality_mode_fractions": [0.21875, 0.3125, 0.21875, 0.25], "mode_fractions": [0.21875, 0.3125, 0.21875, 0.25], "distribution_tv": 0.0625}, "error": null}
+START equal_lr_0025 img_intensity2
+{"event": "DONE", "candidate": "equal_lr_0025", "task": "img_intensity2", "status": "PASS", "suffix": 10, "live": {"modes": 2, "hq": 1.0, "mean_rmse": 0.012579178437590599, "quality_mode_fractions": [0.53125, 0.46875], "mode_fractions": [0.53125, 0.46875], "distribution_tv": 0.03125}, "error": null}
