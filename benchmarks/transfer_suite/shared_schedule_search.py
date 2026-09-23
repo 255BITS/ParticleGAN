@@ -16,7 +16,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 import torch
-from particlegan import learning_rate_scale
+from particlegan import get_recipe, learning_rate_scale
 from benchmarks import learned_lr_evaluation as bridge
 
 from . import shared_default_search as reference, shared_profile_search as profile, suite
@@ -29,7 +29,7 @@ SCHEDULE_FIELDS = {'lr_anneal_start', 'lr_floor'}
 def prepare(declaration):
     with patch.object(reference, 'OPTIONS', reference.OPTIONS | SCHEDULE_FIELDS):
         jobs, recipes, discriminators = profile.prepare(declaration)
-    base = reference.get_recipe(lr=.00425, d_lr_mult=1., prior_lr_mult=2.,
+    base = get_recipe(lr=.00425, d_lr_mult=1., prior_lr_mult=2.,
                                 betas=(0., .99), prior_betas=None, reg_coeff=6.,
                                 reg_kappa=1.25, prior_reg=.05).replace(name='shared_c6')
     for _, recipe in recipes:
