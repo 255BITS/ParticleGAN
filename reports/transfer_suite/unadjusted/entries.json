@@ -54,5 +54,92 @@
     "indexes": [
       "reports/transfer_suite/unadjusted/runs/round0-2/index.json"
     ]
+  },
+  {
+    "name": "shared_c6",
+    "label": "shared c6",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-0/index.json",
+      "reports/transfer_suite/unadjusted/runs/completion-1/index.json"
+    ]
+  },
+  {
+    "name": "shared_c10",
+    "label": "shared c10",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-0/index.json"
+    ]
+  },
+  {
+    "name": "shared_c20",
+    "label": "shared c20",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-0/index.json"
+    ]
+  },
+  {
+    "name": "shared_k075",
+    "label": "shared k075",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-0/index.json",
+      "reports/transfer_suite/unadjusted/runs/completion-2/index.json"
+    ]
+  },
+  {
+    "name": "shared_k10",
+    "label": "shared k10",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-1/index.json"
+    ]
+  },
+  {
+    "name": "shared_k15",
+    "label": "shared k15",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-1/index.json"
+    ]
+  },
+  {
+    "name": "shared_b05",
+    "label": "shared b05",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-1/index.json"
+    ]
+  },
+  {
+    "name": "shared_b05_999",
+    "label": "shared b05 999",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-1/index.json"
+    ]
+  },
+  {
+    "name": "shared_b0_999",
+    "label": "shared b0 999",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-2/index.json"
+    ]
+  },
+  {
+    "name": "shared_p3",
+    "label": "shared p3",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-2/index.json"
+    ]
+  },
+  {
+    "name": "shared_p4",
+    "label": "shared p4",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-2/index.json"
+    ]
+  },
+  {
+    "name": "shared_spread01",
+    "label": "shared spread01",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-2/index.json",
+      "reports/transfer_suite/unadjusted/runs/completion-0/index.json"
+    ]
   }
 ]

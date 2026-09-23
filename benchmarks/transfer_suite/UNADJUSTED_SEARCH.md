@@ -55,7 +55,7 @@ feed evaluation metrics/target labels into training.
 ## Rules for comparison
 
 - One candidate means one complete recipe and update rule across all tests.
-- Keep frozen data, architectures, initialization, particle counts, batch sizes,
+- Keep frozen data, initialization, particle counts, batch sizes,
   budgets, auxiliary objectives, behavioral metrics and thresholds unchanged.
 - A PASS needs all metrics for at least five final observations of the complete
   24-checkpoint live curve. Overall PASS needs all 19 tests. EMA is separate.
@@ -64,8 +64,14 @@ feed evaluation metrics/target labels into training.
 - Optional top-level `"tasks": ["two_pole", "vector_unequal_mass"]` screens a
   subset. Mark these results INCOMPLETE. Run the remaining tests with the exact
   same recipe before claiming a full score.
-- A separately studied architecture or longer budget must be labeled separately;
-  it cannot silently improve this frozen comparison.
+- Architecture remains separate from formulation identity. Discriminator
+  variants are allowed under the same unchanged recipe, with every architecture
+  trial and failure recorded. The supplied runner/importer currently implements
+  the common reference architecture profile; add explicit variant support and
+  validation before submitting another profile, instead of silently replacing
+  its networks. Changing the optimizer recipe per example is still prohibited.
+- A longer training budget is a separate toy and cannot replace a failed run at
+  the original budget.
 
 ## Submit a result
 

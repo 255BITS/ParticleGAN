@@ -1,0 +1,84 @@
+START shared_k075 trajectory
+{"event": "DONE", "candidate": "shared_k075", "task": "trajectory", "status": "FAIL", "suffix": 0, "live": {"identity_mse": 0.4528278112411499}, "error": null}
+START shared_k075 residual_student
+{"event": "DONE", "candidate": "shared_k075", "task": "residual_student", "status": "FAIL", "suffix": 0, "live": {"identity_mse": 0.05093741416931152, "success_rate": 0.5833333134651184, "wrong_pad_rate": 0.4166666567325592}, "error": null}
+START shared_k075 unipolar
+unipolar_dir arm=locked_rpgan step=1/400 cover=0.0127 leak=0.3214 neu_hold=0.9915 cos_plus=+0.5669 hit=FAIL
+unipolar_dir arm=locked_rpgan step=50/400 cover=0.6120 leak=0.0000 neu_hold=0.8450 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=100/400 cover=0.9879 leak=0.0000 neu_hold=0.8396 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=150/400 cover=0.9699 leak=0.0000 neu_hold=0.9869 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=200/400 cover=0.9892 leak=0.0002 neu_hold=0.9304 cos_plus=+0.9997 hit=PASS
+unipolar_dir arm=locked_rpgan step=250/400 cover=0.9547 leak=0.0000 neu_hold=0.9469 cos_plus=+0.9998 hit=PASS
+unipolar_dir arm=locked_rpgan step=300/400 cover=0.9719 leak=0.0003 neu_hold=0.9631 cos_plus=+0.9998 hit=PASS
+unipolar_dir arm=locked_rpgan step=350/400 cover=0.9811 leak=0.0000 neu_hold=0.9617 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=400/400 cover=0.9885 leak=0.0001 neu_hold=0.9860 cos_plus=+0.9998 hit=PASS
+unipolar_dir arm=locked_rpgan step=400 seed=0 cover=0.9885 leak=0.0001 neu_hold=0.9860 cos_plus=+0.9998 hit=PASS
+{"event": "DONE", "candidate": "shared_k075", "task": "unipolar", "status": "PASS", "suffix": 18, "live": {"cover": 0.9885467485243993, "off_caption": 0.0001407049083370348, "neu_hold": 0.9859617967158556}, "error": null}
+START shared_k075 ae_gan_hold
+ae-gan-hold arm=shared_k075 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=shared_k075 step=1 recon=1.2443 hold=1.3589 loss=4.2147
+ae-gan-hold arm=shared_k075 step=50 recon=0.0084 hold=0.0582 loss=0.9875
+ae-gan-hold arm=shared_k075 step=100 recon=0.0280 hold=0.0611 loss=0.8634
+ae-gan-hold arm=shared_k075 step=150 recon=0.0102 hold=0.0354 loss=0.7902
+ae-gan-hold arm=shared_k075 step=200 recon=0.0035 hold=0.0153 loss=0.7810
+{"event": "DONE", "candidate": "shared_k075", "task": "ae_gan_hold", "status": "PASS", "suffix": 16, "live": {"recon_mse": 0.0027402809355407953, "hold": 0.000244140625}, "error": null}
+START shared_k075 cover_leftover
+cover_leftover start arm=locked steps=800 seed=0 teacher=faithful_guard_e cover=1.5 penalty_coeff=3.0 kappa=0.8 fm=0.0 n_particles=12
+cover_leftover arm=locked step=1/800 d=0.7237 g=1.7440 cap=0.0000 u_kept=0.008 content=0.000 leak=0.000 err=0.749 covered=0
+cover_leftover arm=locked step=50/800 d=0.5643 g=1.4540 cap=0.0005 u_kept=0.202 content=0.364 leak=0.035 err=0.575 covered=0
+cover_leftover arm=locked step=100/800 d=0.6850 g=1.0232 cap=0.0000 u_kept=0.405 content=0.627 leak=0.003 err=0.428 covered=0
+cover_leftover arm=locked step=150/800 d=0.6949 g=0.8844 cap=0.0000 u_kept=0.529 content=0.788 leak=0.001 err=0.344 covered=0
+cover_leftover arm=locked step=200/800 d=0.6953 g=0.8004 cap=0.0000 u_kept=0.625 content=0.903 leak=0.003 err=0.250 covered=0
+cover_leftover arm=locked step=250/800 d=0.6946 g=0.7470 cap=0.0000 u_kept=0.733 content=0.970 leak=0.000 err=0.176 covered=1
+cover_leftover arm=locked step=300/800 d=0.6925 g=0.7161 cap=0.0000 u_kept=0.834 content=0.987 leak=0.006 err=0.116 covered=1
+cover_leftover arm=locked step=350/800 d=0.6946 g=0.7025 cap=0.0000 u_kept=0.904 content=1.008 leak=0.002 err=0.069 covered=1
+cover_leftover arm=locked step=400/800 d=0.6927 g=0.6977 cap=0.0000 u_kept=0.945 content=1.005 leak=0.001 err=0.036 covered=1
+cover_leftover arm=locked step=450/800 d=0.6925 g=0.6959 cap=0.0000 u_kept=0.983 content=1.000 leak=0.006 err=0.020 covered=1
+cover_leftover arm=locked step=500/800 d=0.6932 g=0.6937 cap=0.0000 u_kept=1.000 content=0.999 leak=0.003 err=0.013 covered=1
+cover_leftover arm=locked step=550/800 d=0.6938 g=0.6940 cap=0.0000 u_kept=0.984 content=0.997 leak=0.005 err=0.013 covered=1
+cover_leftover arm=locked step=600/800 d=0.6929 g=0.6937 cap=0.0000 u_kept=0.998 content=0.990 leak=0.011 err=0.008 covered=1
+cover_leftover arm=locked step=650/800 d=0.6930 g=0.6949 cap=0.0000 u_kept=0.998 content=0.996 leak=0.000 err=0.006 covered=1
+cover_leftover arm=locked step=700/800 d=0.6929 g=0.6940 cap=0.0000 u_kept=0.998 content=0.992 leak=0.003 err=0.004 covered=1
+cover_leftover arm=locked step=750/800 d=0.6935 g=0.6923 cap=0.0000 u_kept=1.001 content=0.986 leak=0.003 err=0.009 covered=1
+cover_leftover arm=locked step=800/800 d=0.6951 g=0.6935 cap=0.0000 u_kept=0.994 content=0.998 leak=0.004 err=0.006 covered=1
+cover_leftover DONE arm=locked pass=1 reasons=none u_kept=0.947 content=0.966 leak=0.001 err=0.037 same_dir=0.001 particle_rms=0.066
+{"event": "DONE", "candidate": "shared_k075", "task": "cover_leftover", "status": "PASS", "suffix": 15, "live": {"u_kept": 0.9942946334591534, "content_kept": 0.9978633395743707, "leak_ratio": 0.004051046905975766, "pole_rel_err_plus": 0.005535971373319626, "pole_rel_err_minus": 0.005646776407957077, "same_dir": 0.005767222562609887}, "error": null}
+START shared_k075 unused_token_hold
+unused-token arm=shared_k075 step=1 hold=0.9940 concept=0.0000 unused_dist=0.0060
+unused-token arm=shared_k075 step=50 hold=0.9913 concept=0.4897 unused_dist=0.0087
+unused-token arm=shared_k075 step=100 hold=0.9926 concept=0.9022 unused_dist=0.0074
+unused-token arm=shared_k075 step=150 hold=0.9963 concept=0.9155 unused_dist=0.0037
+unused-token arm=shared_k075 step=200 hold=0.9944 concept=0.9823 unused_dist=0.0056
+{"event": "DONE", "candidate": "shared_k075", "task": "unused_token_hold", "status": "PASS", "suffix": 13, "live": {"unused_hold": 0.9944050125777721, "concept_move": 0.9822626004036294}, "error": null}
+START shared_k075 mid_scale_identity
+mid_scale arm=locked step=1 seed=0 concept+=+0.5774 concept-=+0.0000 id0=+0.0077 id_mid=+0.0232 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=50 seed=0 concept+=+0.7942 concept-=+0.7918 id0=+0.3621 id_mid=+0.9341 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=100 seed=0 concept+=+0.9274 concept-=+0.8191 id0=+0.5604 id_mid=+0.8270 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=150 seed=0 concept+=+0.9793 concept-=+0.9284 id0=+0.6568 id_mid=+0.7576 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=200 seed=0 concept+=+0.9987 concept-=+0.9749 id0=+0.7428 id_mid=+0.8846 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=250 seed=0 concept+=+0.9985 concept-=+0.9971 id0=+0.8822 id_mid=+0.9922 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=300 seed=0 concept+=+0.9998 concept-=+1.0000 id0=+0.9718 id_mid=+0.9092 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=350 seed=0 concept+=+0.9997 concept-=+0.9993 id0=+0.9511 id_mid=+0.8925 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=400 seed=0 concept+=+0.9997 concept-=+0.9998 id0=+0.9798 id_mid=+0.9896 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=450 seed=0 concept+=+0.9997 concept-=+0.9999 id0=+0.9825 id_mid=+0.9999 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=500 seed=0 concept+=+0.9998 concept-=+0.9999 id0=+0.9811 id_mid=+0.9979 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=550 seed=0 concept+=+0.9998 concept-=+0.9998 id0=+0.9771 id_mid=+0.9965 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=600 seed=0 concept+=+0.9999 concept-=+0.9999 id0=+0.9825 id_mid=+0.9976 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=650 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9898 id_mid=+0.9983 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=700 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9956 id_mid=+0.9980 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=750 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+1.0000 id_mid=+0.9990 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9975 id_mid=+0.9984 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9975 id_mid=+0.9984 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+{"event": "DONE", "candidate": "shared_k075", "task": "mid_scale_identity", "status": "PASS", "suffix": 17, "live": {"concept_cos_plus": 0.9999971985816956, "concept_cos_minus": 0.9999980926513672, "concept_mag_plus": 0.9991894364356995, "concept_mag_minus": 1.004940390586853, "identity_at_0": 0.9974644185123136, "identity_at_mid": 0.998448003483987}, "error": null}
+START shared_k075 vector_two_broad
+{"event": "DONE", "candidate": "shared_k075", "task": "vector_two_broad", "status": "PASS", "suffix": 18, "live": {"sw1_normalized": 0.07741407017338992, "mean_error": 0.011437241919338703, "covariance_error": 0.18573147058486938, "target_scale": 1.0555585622787476, "sample_count": 4096, "mass_tv": 0.00146484375, "min_mass_ratio": 0.9970703125, "hq": 0.9931640625, "component_covariance_error": 0.47197099030017853, "component_covariance_errors": [0.4895355701446533, 0.45440641045570374], "component_min_eigen_ratio": 0.310588538646698, "component_mass": [0.50146484375, 0.49853515625], "target_mass": [0.5, 0.5], "component_counts": [2054, 2042]}, "error": null}
+START shared_k075 vector_anisotropic
+{"event": "DONE", "candidate": "shared_k075", "task": "vector_anisotropic", "status": "PASS", "suffix": 5, "live": {"sw1_normalized": 0.10847984619705435, "mean_error": 0.09248973429203033, "covariance_error": 0.11489758640527725, "target_scale": 2.032285690307617, "sample_count": 4096, "mass_tv": 0.0498860627412796, "min_mass_ratio": 0.850341796875, "hq": 0.962890625, "component_covariance_error": 0.672665943702062, "component_covariance_errors": [0.6190886497497559, 0.48268941044807434, 0.9162197709083557], "component_min_eigen_ratio": 0.5182479619979858, "component_mass": [0.283447265625, 0.339111328125, 0.37744140625], "target_mass": [0.3333333432674408, 0.3333333432674408, 0.3333333432674408], "component_counts": [1161, 1389, 1546]}, "error": null}
+START shared_k075 vector_spiral
+{"event": "DONE", "candidate": "shared_k075", "task": "vector_spiral", "status": "PASS", "suffix": 24, "live": {"sw1_normalized": 0.05611448066846409, "mean_error": 0.08326000720262527, "covariance_error": 0.0868305042386055, "target_scale": 1.224178433418274, "sample_count": 4096}, "error": null}
+START shared_k075 img_stripes2
+{"event": "DONE", "candidate": "shared_k075", "task": "img_stripes2", "status": "PASS", "suffix": 22, "live": {"modes": 2, "hq": 0.96875, "mean_rmse": 0.008530443534255028, "quality_mode_fractions": [0.46875, 0.5], "mode_fractions": [0.46875, 0.53125], "distribution_tv": 0.03125}, "error": null}
+START shared_k075 img_blobs4
+{"event": "DONE", "candidate": "shared_k075", "task": "img_blobs4", "status": "PASS", "suffix": 8, "live": {"modes": 4, "hq": 0.96875, "mean_rmse": 0.02234514430165291, "quality_mode_fractions": [0.25, 0.21875, 0.21875, 0.28125], "mode_fractions": [0.25, 0.25, 0.21875, 0.28125], "distribution_tv": 0.03125}, "error": null}
+START shared_k075 img_intensity2
+{"event": "DONE", "candidate": "shared_k075", "task": "img_intensity2", "status": "PASS", "suffix": 10, "live": {"modes": 2, "hq": 1.0, "mean_rmse": 0.013627937063574791, "quality_mode_fractions": [0.5625, 0.4375], "mode_fractions": [0.5625, 0.4375], "distribution_tv": 0.0625}, "error": null}

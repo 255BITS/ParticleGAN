@@ -86,11 +86,22 @@ def build():
              '| Candidate | Required | Data | Images | Live total | Attempted | Overall |',
              '| --- | ---: | ---: | ---: | ---: | ---: | --- |']
     for r in rows:
+        if r['attempted'] != 19:
+            continue
         c = r['counts']
         lines.append(f"| {r['label']} (`{r['name']}`) | {c['legacy']['passed']}/9 | {c['vector']['passed']}/6 | "
                      f"{c['image']['passed']}/4 | **{r['passed']}/19** | {r['attempted']}/19 | **{r['overall']}** |")
     lines += ['', 'Rank complete candidates by live passes, then lower normalized final metric shortfall. '
               'An all-pass candidate is the target; a partial improvement is not an all-pass stamp.', '',
+              '## Screening results — not ranked', '',
+              '| Candidate | Passing measured tests | Attempted | Status |',
+              '| --- | ---: | ---: | --- |']
+    for r in rows:
+        if r['attempted'] != 19:
+            lines.append(f"| {r['name']} | {r['passed']} | {r['attempted']}/19 | INCOMPLETE |")
+    if all(r['attempted'] == 19 for r in rows):
+        lines.append('| No partial candidates | — | — | — |')
+    lines += ['',
               '## One recipe per row', '',
               '| Candidate | G / D / particle LR | Adam betas | b_cap coefficient / κ | Spread weight |',
               '| --- | --- | --- | --- | ---: |']
@@ -99,14 +110,18 @@ def build():
         betas = str(tuple(p['betas']))+(f"; prior {tuple(p['prior_betas'])}" if p['prior_betas'] is not None else '')
         lines.append(f"| {r['name']} | {p['lr']:.6g} / {p['lr']*p['d_lr_mult']:.6g} / {p['lr']*p['prior_lr_mult']:.6g} | "
                      f"{betas} | {p['reg_coeff']:g} / {p['reg_kappa']:g} | {p['prior_reg']:g} |")
+    display = [r for r in rows if r['attempted'] == 19][:3]
+    display += [r for r in rows if r['name'] in ('gan', 'gan_legacy') and r not in display]
     lines += ['', 'All current entries use Rp logistic, no particle L2, and the same schedule: hold for 60% of '
               'the budget, then cosine toward 5%. Rates above are absolute and are applied to every optimizer '
               'group, including directly optimized particles and AE prior groups.', '',
-              '## Every test', '', '| Test | '+' | '.join(r['name'] for r in rows)+' |',
-              '| --- | '+' | '.join('---' for _ in rows)+' |']
+              '## Every test: leading complete candidates and public baselines', '',
+              'All candidate metrics and EMA profiles remain in [leaderboard.json](leaderboard.json).', '',
+              '| Test | '+' | '.join(r['name'] for r in display)+' |',
+              '| --- | '+' | '.join('---' for _ in display)+' |']
     for name in declared:
         cells = []
-        for row in rows:
+        for row in display:
             record = row['records'].get(name)
             cells.append(f"[{record['verdict']['status']}]({record['artifact']})" if record else 'NOT RUN')
         lines.append(f"| {name} | "+' | '.join(cells)+' |')
@@ -115,18 +130,22 @@ def build():
               'and update budgets are the frozen test setup. They match for every candidate. Each task keeps its '
               'existing reconstruction/identity/cover objective. Resource sizes differ between tests, but a '
               'candidate cannot change them to obtain a pass. These are development cases, not unseen holdouts.', '',
-              'The selected architecture for each test is shared by all candidates. A different architecture study '
-              'must be reported separately; no candidate may silently cherry-pick a different network per result. '
+              'This table currently compares the common reference architecture profile. Architecture remains '
+              'separate from formulation: discriminator variants are allowed under the same unchanged recipe, '
+              'with all trials/failures recorded. The current runner/importer validates the reference profile; '
+              'explicit variant support is needed before importing another profile. '
               'Legacy EMA measurement remains host-specific and never affects ranking.', '',
               '## Join the search', '',
               '[Contribution instructions and one-command run](../../../benchmarks/transfer_suite/UNADJUSTED_SEARCH.md). '
               'The runner accepts one global recipe card and runs all 19 tests by default. Preserve failed runs. '
               'Screening is allowed, but only a complete row can qualify.', '',
+              '[Current search findings and remaining failures](FINDINGS.md) · [Reproduce the leading recipes](leading_candidates.json).', '',
               '[All metrics, convergence and separate EMA](leaderboard.json) · [Registered entries](entries.json) · '
               '[Validation](validation.json) · [Historical adjusted comparison](../default_comparison/README.md).', '']
     (ROOT/'README.md').write_text('\n'.join(lines))
     validation = dict(entries=len(rows), episodes=sum(r['attempted'] for r in rows),
                       live_counts={r['name']: r['passed'] for r in rows},
+                      attempted_counts={r['name']: r['attempted'] for r in rows},
                       overall_passes=[r['name'] for r in rows if r['overall']=='PASS'], errors=[])
     (ROOT/'validation.json').write_text(json.dumps(validation, indent=2)+'\n')
     print(json.dumps(validation))

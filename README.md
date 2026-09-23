@@ -6,6 +6,8 @@
 tests one unchanged recipe across all 19 behavioral cases. Baselines are **8/19
 for the proposed default** and **5/19 for current master**; neither is an overall
 PASS. [Join the search: rules and one-command candidate evaluation](benchmarks/transfer_suite/UNADJUSTED_SEARCH.md).
+The first shared-recipe search reaches **15/19**; [results and remaining failures](reports/transfer_suite/unadjusted/FINDINGS.md)
+include every attempt and exact candidate cards.
 The historical adjusted 19/19 result does not qualify for this leaderboard.
 
 [API reference](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md) · [Minimal GAN loop](https://github.com/255BITS/ParticleGAN/blob/master/docs/api.md#a-minimal-training-loop) ·
