@@ -41,7 +41,9 @@
   "lr_floor": 0.05,
   "model": "gan",
   "n_hidden": 3,
-  "name": "accuracy_network_floor010",
+  "name": "kappa_fine_k1176",
+  "network_lr_floor": 0.01,
+  "network_lr_horizon_cap": 1600,
   "num_classes": null,
   "num_particles": 20000,
   "observation_sigma": 0.03,
@@ -55,7 +57,7 @@
   "reg_arm": "b_cap",
   "reg_coeff": 6.0,
   "reg_every": 1,
-  "reg_kappa": 1.0,
+  "reg_kappa": 1.176,
   "reg_method": "autograd",
   "routing_temperature": 0.25,
   "seed": 1234,
@@ -67,10 +69,8 @@
   "steps": 7000,
   "threads": 1,
   "total_steps": 7000,
+  "toy100_model": "affine_square_v1",
   "ucd_target": "class",
   "ucd_weight": 0.02,
-  "z_dim": 2,
-  "toy100_model": "affine_square_v1",
-  "network_lr_horizon_cap": 1600,
-  "network_lr_floor": 0.01
+  "z_dim": 2
 }
