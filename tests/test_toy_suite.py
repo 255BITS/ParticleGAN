@@ -35,7 +35,7 @@ from particlegan import get_recipe, learning_rate_scale
 
 
 def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=False,
-                             cap=None, network_floor=None):
+                             isolated=False, cap=None, network_floor=None):
     jobs, profile = load_declaration()
     job = next(job for job in jobs if job["spec"]["name"] == "vector_two_broad")
     base = get_recipe()
@@ -46,6 +46,8 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
                  input_noise_anneal_end=0.1, output_noise_warmup=0.2)
     if learned:
         noise["output_noise_learnable"] = True
+    if isolated:
+        noise["output_noise_rng"] = "isolated"
     source_bytes = b"frozen benchmark source"
     noise_source_bytes = b"frozen noise source"
     source_hashes = dict(frozen=hashlib.sha256(source_bytes).hexdigest(),
@@ -57,7 +59,7 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
         "benchmarks/toy100/config.py": b"frozen manifest parser",
         "benchmarks/toy100/__main__.py": b"frozen native CLI",
     }
-    if cap is not None:
+    if cap is not None or isolated:
         source_hashes.update({name: hashlib.sha256(contents).hexdigest()
                               for name, contents in policy_source_bytes.items()})
     result = dict(
@@ -141,6 +143,27 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
             output_sigma_effective_ema_final_evaluation=.028,
             output_sigma_effective_step_trace=effective_trace,
         )
+    if isolated:
+        record["noise_receipt"].update(
+            output_module="IsolatedOutputNoise",
+            input_module="StatefulInputNoise",
+            output_noise_rng="isolated",
+            output_noise_seed_offset=1901,
+            output_noise_seed=1901,
+            output_noise_training_stream_isolated=True,
+            output_noise_train_state_initial_sha256="a" * 64,
+            output_noise_train_state_final_sha256="b" * 64,
+            output_train_calls=steps * 2,
+            output_train_elements=steps * 512,
+            output_eval_calls=48,
+            output_eval_elements=48 * 512,
+            output_noise_eval_state_pairs=[dict(
+                step=math.ceil(i * steps / 24),
+                live_before_sha256="c" * 64, live_after_sha256="c" * 64,
+                ema_before_sha256="d" * 64, ema_after_sha256="d" * 64,
+            ) for i in range(1, 25)],
+            output_noise_eval_state_preserved=True,
+        )
     mutate(record)
     directory.mkdir()
     (directory / "episodes").mkdir()
@@ -151,6 +174,7 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
         name="gan_v3", output_noise_std=0.029, input_noise_std=0.5,
         input_noise_anneal_end=0.1, output_noise_warmup=0.2,
         **({"output_noise_learnable": True} if learned else {}),
+        **({"output_noise_rng": "isolated"} if isolated else {}),
         **({"network_lr_horizon_cap": cap} if cap is not None else {}),
         **({"network_lr_floor": network_floor} if network_floor is not None else {}),
     )) + "\n").encode()
@@ -160,7 +184,7 @@ def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=F
         member = tarfile.TarInfo("frozen")
         member.size = len(source_bytes)
         archive.addfile(member, io.BytesIO(source_bytes))
-        if cap is not None:
+        if cap is not None or isolated:
             for name, contents in policy_source_bytes.items():
                 member = tarfile.TarInfo(name)
                 member.size = len(contents)
@@ -664,6 +688,41 @@ def test_learned_candidate_receipt_accepts_valid_trace(tmp_path, monkeypatch):
     assert toy_suite._episode_rows(directory, (name,), candidate=True)["status"] == "PASS"
 
 
+@pytest.mark.parametrize("tamper,expected", [
+    (lambda record: record["noise_receipt"].update(output_noise_seed=1902),
+     "isolated output-noise stream differs"),
+    (lambda record: record["noise_receipt"].update(output_train_calls=0),
+     "isolated output-noise draw counts differ"),
+    (lambda record: record["noise_receipt"]["output_noise_eval_state_pairs"][2].update(
+        live_after_sha256="e" * 64),
+     "isolated output-noise evaluation advanced training stream"),
+    (lambda record: record["noise_receipt"]["output_noise_eval_state_pairs"].pop(),
+     "isolated output-noise evaluation trace is incomplete"),
+    (lambda record: record["noise_receipt"].update(output_module="OutputNoise"),
+     "candidate noise claim differs"),
+    (lambda record: record["noise"].pop("output_noise_rng"),
+     "candidate global fields differ"),
+])
+def test_isolated_transfer_receipt_rejects_tampering(tmp_path, monkeypatch, tamper, expected):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory, tamper, isolated=True)
+    grade = toy_suite._episode_rows(directory, (name,), candidate=True)
+    assert grade["status"] == "INVALID"
+    assert expected in grade["reason"]
+
+
+def test_isolated_transfer_receipt_accepts_restored_eval_stream(tmp_path, monkeypatch):
+    monkeypatch.setattr(toy_suite, "test_verdict", lambda spec, result: dict(
+        status="PASS", passed=True, convergence=dict(passing_suffix=5),
+    ))
+    directory = tmp_path / "candidate"
+    name = _write_candidate_episode(directory, isolated=True)
+    assert toy_suite._episode_rows(directory, (name,), candidate=True)["status"] == "PASS"
+
+
 @pytest.mark.parametrize("name", ["vector_two_broad", "img_stripes2"])
 def test_native_transfer_hosts_register_exactly_one_g_noise_scalar(name):
     recipe, noise, _ = declared_recipe(dict(
@@ -760,6 +819,125 @@ def test_toy100_learned_evidence_binds_current_native_source(tmp_path):
         toy_suite._check_toy100_learned_noise(directory, summary, config)
 
 
+def _write_isolated_toy100_receipt(directory):
+    directory.mkdir()
+    config = dict(problem="grid100", steps=4, seed=37,
+                  output_noise_std=.029, output_noise_rng="isolated",
+                  input_noise_std=.5)
+    initial, end, ema = "a" * 64, "d" * 64, "a" * 64
+    receipt = dict(
+        mode="isolated", namespace_offset=1901, training_seed=1938,
+        generator_wrapper_class="IsolatedOutputNoise",
+        discriminator_wrapper_class="StatefulInputNoise",
+        checkpoint_state_key="_extra_state",
+        initial_live_state_sha256=initial, initial_ema_state_sha256=initial,
+        initial_input_state_sha256="e" * 64,
+        final_live_state_sha256=end, final_ema_state_sha256=ema,
+        final_input_state_sha256="f" * 64,
+        final_live_draw_calls=6, final_live_draw_elements=192,
+        holdout_eval_seed=37 + 1602,
+        holdout_live_before_state_sha256=end,
+        holdout_live_after_state_sha256=end,
+        holdout_ema_before_state_sha256=ema,
+        holdout_ema_after_state_sha256=ema,
+    )
+    summary = dict(output_noise_rng="isolated", output_noise_rng_receipt=receipt,
+                   eval_steps=[0, 4])
+    events = [dict(event="train", step=step,
+                   output_noise_rng_state_sha256=state * 64,
+                   output_noise_rng_draw_calls=calls,
+                   output_noise_rng_draw_elements=calls * 32)
+              for step, state, calls in ((1, "a", 0), (2, "b", 2),
+                                          (3, "c", 4), (4, "d", 6))]
+    for step in (0, 4):
+        for model in ("live", "ema"):
+            state = (initial if step == 0 else end) if model == "live" else ema
+            calls = 0 if step == 0 else 6
+            events.append(dict(
+                event="eval", step=step, model=model,
+                output_noise_rng_eval_seed=37 + 402,
+                output_noise_rng_state_before_sha256=state,
+                output_noise_rng_state_after_sha256=state,
+                output_noise_rng_draw_calls_before=calls,
+                output_noise_rng_draw_calls_after=calls,
+                output_noise_rng_draw_elements_before=calls * 32,
+                output_noise_rng_draw_elements_after=calls * 32,
+            ))
+    (directory / "events.jsonl").write_text(
+        "".join(json.dumps(event) + "\n" for event in events),
+    )
+    return config, summary, events
+
+
+def test_toy100_isolated_rng_receipt_accepts_complete_trace(tmp_path):
+    directory = tmp_path / "grid100"
+    config, summary, _ = _write_isolated_toy100_receipt(directory)
+    toy_suite._check_toy100_output_rng(directory, summary, config)
+
+
+@pytest.mark.parametrize("alter,expected", [
+    (lambda summary, events: summary["output_noise_rng_receipt"].update(
+        training_seed=1939), "policy differs"),
+    (lambda summary, events: events[1].update(
+        output_noise_rng_draw_calls=8), "train stream differs"),
+    (lambda summary, events: events[6].update(
+        output_noise_rng_state_before_sha256="0" * 64,
+        output_noise_rng_state_after_sha256="0" * 64), "evaluation state differs"),
+    (lambda summary, events: events[5].update(
+        output_noise_rng_state_after_sha256="0" * 64), "evaluation advanced stream"),
+    (lambda summary, events: events.pop(2), "training trace is incomplete"),
+    (lambda summary, events: summary["output_noise_rng_receipt"].update(
+        holdout_eval_seed=37 + 1603), "holdout seed differs"),
+    (lambda summary, events: summary["output_noise_rng_receipt"].update(
+        holdout_ema_after_state_sha256="0" * 64), "holdout advanced stream"),
+])
+def test_toy100_isolated_rng_receipt_rejects_tampering(tmp_path, alter, expected):
+    directory = tmp_path / "grid100"
+    config, summary, events = _write_isolated_toy100_receipt(directory)
+    alter(summary, events)
+    (directory / "events.jsonl").write_text(
+        "".join(json.dumps(event) + "\n" for event in events),
+    )
+    with pytest.raises(ValueError, match=expected):
+        toy_suite._check_toy100_output_rng(directory, summary, config)
+
+
+def test_isolated_selector_without_model_cap_requires_archived_parser(tmp_path):
+    directory = tmp_path / "candidate"
+    _write_candidate_episode(directory, isolated=True)
+    protocol = json.loads((directory / "protocol.json").read_text())
+    protocol["source_sha256"].pop("benchmarks/toy100/config.py")
+    with pytest.raises(ValueError, match="candidate policy and parser source is absent"):
+        toy_suite._verify_saved_provenance(directory, protocol, candidate=True)
+
+
+@pytest.mark.parametrize("name,scope,expected", [
+    ("two_pole", "learned_particles_and_critic_gradient", None),
+    ("mode_hold", "generated_samples", "evaluation draws are absent"),
+])
+def test_legacy_isolated_rng_eval_requirement_follows_frozen_scope(name, scope, expected):
+    record = {"name": name, "spec": {"runner": "legacy", "steps": 40}}
+    receipt = dict(
+        eval_scope=scope, output_noise_rng="isolated",
+        output_noise_seed_offset=1901, output_noise_seed=1901,
+        output_noise_training_stream_isolated=True,
+        output_noise_train_state_initial_sha256="a" * 64,
+        output_noise_train_state_final_sha256="b" * 64,
+        output_train_calls=40, output_train_elements=100,
+        output_eval_calls=0, output_eval_elements=0,
+        output_noise_eval_state_pairs=[], output_noise_eval_state_preserved=True,
+    )
+    if expected:
+        with pytest.raises(ValueError, match=expected):
+            toy_suite._check_isolated_transfer_noise(
+                record, receipt, {"output_noise_rng": "isolated"},
+            )
+    else:
+        toy_suite._check_isolated_transfer_noise(
+            record, receipt, {"output_noise_rng": "isolated"},
+        )
+
+
 def test_three_problem_gate_requires_each_learned_receipt(tmp_path, monkeypatch):
     declared = dict(steps=4, output_noise_std=.029,
                     output_noise_warmup=.5, output_noise_learnable=True)
@@ -827,8 +1005,27 @@ def test_common_22_gate_requires_exact_noise_and_recipe_identity(tmp_path, monke
     candidate_data["protocol"]["noise"]["output_noise_learnable"] = False
     assert toy_suite.regrade(tmp_path / "explicit-fixed-noise")["status"] == "PASS"
     candidate_data = deepcopy(candidate)
+    candidate_data["protocol"]["noise"]["output_noise_rng"] = "isolated"
+    assert toy_suite.regrade(tmp_path / "mixed-output-rng")["status"] == "INCOMPLETE"
+    toy["noise"] = {**noise, "output_noise_rng": "isolated"}
+    sources = _source_provenance(include_policy=True)["source_sha256"]
+    toy["policy_source_sha256"] = sources
+    toy["policy_source_scope"] = POLICY_SOURCE_SCOPE_V2
+    candidate_data["protocol"]["source_sha256"] = deepcopy(sources)
+    assert toy_suite.regrade(tmp_path / "same-isolated-output-rng")["status"] == "PASS"
+    toy["noise"] = noise
+    candidate_data = deepcopy(candidate)
     candidate_data["protocol"]["model_policy"] = {"network_lr_horizon_cap": 1600}
     assert toy_suite.regrade(tmp_path / "mixed-network-policy")["status"] == "INCOMPLETE"
+
+
+@pytest.mark.parametrize("selector,output_std", [
+    (None, .029), (False, .029), ("global", .029), ("isolated", 0.0),
+])
+def test_output_noise_rng_identity_rejects_invalid_explicit_selector(selector, output_std):
+    with pytest.raises(ValueError, match="output_noise_rng"):
+        toy_suite._noise_identity(dict(output_noise_std=output_std,
+                                       output_noise_rng=selector))
 
 
 def test_common_22_identity_normalizes_real_recipe_tuple_after_json(tmp_path, monkeypatch):

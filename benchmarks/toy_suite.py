@@ -25,7 +25,9 @@ import struct
 import sys
 import tarfile
 
-from benchmarks.toy100.accuracy_gate import evaluate_suite as accuracy_suite
+from benchmarks.toy100.accuracy_gate import (
+    HOLDOUT_SEED_OFFSETS, evaluate_suite as accuracy_suite,
+)
 from benchmarks.toy100.gate import evaluate_suite as coverage_suite
 from benchmarks.toy100.problems import PROBLEM_NAMES
 from benchmarks.toy100.models import linear_input_noise
@@ -33,6 +35,7 @@ from benchmarks.toy100.train import (
     POLICY_SOURCE_SCOPE_V2, policy_source_scope, resolve_config,
 )
 from benchmarks.transfer_suite.compare_defaults import plan
+from benchmarks.transfer_suite.legacy_noise_adapters import EVAL_SCOPES
 from benchmarks.transfer_suite.protocol import test_verdict
 from benchmarks.transfer_suite.public_default_verification import (
     GLOBAL_RECIPE_FIELDS, declared_spec, host_recipe, load_declaration,
@@ -53,10 +56,17 @@ NATIVE_SOURCE_FILES = (
     "benchmarks/toy100/accuracy_gate.py", "lib/toy_models.py",
     "particlegan/training.py", "particlegan/recipes.py",
 )
+OUTPUT_NOISE_SEED_OFFSET = 1901
+ISOLATED_TRANSFER_RECEIPT_FIELDS = (
+    "output_noise_rng", "output_noise_seed_offset", "output_noise_seed",
+    "output_noise_training_stream_isolated",
+    "output_noise_train_state_initial_sha256", "output_noise_train_state_final_sha256",
+    "output_noise_eval_state_pairs", "output_noise_eval_state_preserved",
+)
 
 
 def _noise_identity(noise: dict) -> dict:
-    """Treat the optional absent learnable flag as its historical false value."""
+    """Validate shared noise fields while preserving absent historical options."""
     if not isinstance(noise, dict):
         raise ValueError("noise declaration is not an object")
     learned = noise.get("output_noise_learnable", False)
@@ -64,6 +74,11 @@ def _noise_identity(noise: dict) -> dict:
         raise ValueError("output_noise_learnable must be a boolean")
     if learned and (not _positive_scale(noise.get("output_noise_std"))):
         raise ValueError("learnable output noise requires a positive peak")
+    if "output_noise_rng" in noise:
+        if noise["output_noise_rng"] != "isolated":
+            raise ValueError("output_noise_rng must be 'isolated' when declared")
+        if not _positive_scale(noise.get("output_noise_std")):
+            raise ValueError("isolated output_noise_rng requires a positive peak")
     return {**noise, "output_noise_warmup": noise.get("output_noise_warmup", 0.0),
             "output_noise_learnable": learned}
 
@@ -101,6 +116,12 @@ def _scale_close(actual, expected):
 def _positive_scale(value):
     return (isinstance(value, (int, float)) and not isinstance(value, bool)
             and math.isfinite(value) and value > 0)
+
+
+def _sha256_hex(value):
+    return isinstance(value, str) and len(value) == 64 and all(
+        character in "0123456789abcdef" for character in value
+    )
 
 
 def _check_optimizer_receipts(record: dict, base: Recipe):
@@ -307,6 +328,62 @@ def _check_learned_transfer_noise(record: dict, receipt: dict, noise: dict):
             raise ValueError(f"learned output evaluation differs from receipt: {name}")
 
 
+def _check_isolated_transfer_noise(record: dict, receipt: dict, noise: dict):
+    """Bind the private output stream and prove each scoped eval restores it."""
+    name = record["name"]
+    isolated = noise.get("output_noise_rng") == "isolated"
+    if not isolated:
+        if any(field in receipt for field in ISOLATED_TRANSFER_RECEIPT_FIELDS):
+            raise ValueError(f"undeclared isolated output-noise receipt: {name}")
+        return
+    if (receipt.get("output_noise_rng") != "isolated"
+            or receipt.get("output_noise_seed_offset") != OUTPUT_NOISE_SEED_OFFSET
+            or receipt.get("output_noise_seed") != OUTPUT_NOISE_SEED_OFFSET
+            or receipt.get("output_noise_training_stream_isolated") is not True):
+        raise ValueError(f"isolated output-noise stream differs: {name}")
+    initial = receipt.get("output_noise_train_state_initial_sha256")
+    final = receipt.get("output_noise_train_state_final_sha256")
+    if not (_sha256_hex(initial) and _sha256_hex(final) and initial != final):
+        raise ValueError(f"isolated output-noise train state differs: {name}")
+    train_calls, train_elements = (receipt.get("output_train_calls"),
+                                   receipt.get("output_train_elements"))
+    eval_calls, eval_elements = (receipt.get("output_eval_calls"),
+                                 receipt.get("output_eval_elements"))
+    if (type(train_calls) is not int or train_calls <= 0
+            or type(train_elements) is not int or train_elements <= 0
+            or type(eval_calls) is not int or eval_calls < 0
+            or type(eval_elements) is not int or eval_elements < 0
+            or (eval_calls == 0) != (eval_elements == 0)):
+        raise ValueError(f"isolated output-noise draw counts differ: {name}")
+    pairs = receipt.get("output_noise_eval_state_pairs")
+    if (not isinstance(pairs, list)
+            or receipt.get("output_noise_eval_state_preserved") is not True
+            or (eval_calls > 0 and not pairs)):
+        raise ValueError(f"isolated output-noise evaluation receipt differs: {name}")
+    legacy = record["spec"]["runner"] == "legacy"
+    if legacy and receipt.get("eval_scope") != EVAL_SCOPES[name]:
+        raise ValueError(f"isolated output-noise evaluation scope differs: {name}")
+    if (not legacy or EVAL_SCOPES[name] in (
+            "generated_samples", "generated_and_reconstructed_samples")) and eval_calls == 0:
+        raise ValueError(f"isolated output-noise evaluation draws are absent: {name}")
+    required = (("before_sha256", "after_sha256") if legacy else
+                ("live_before_sha256", "live_after_sha256",
+                 "ema_before_sha256", "ema_after_sha256"))
+    steps = record["spec"]["steps"]
+    for pair in pairs:
+        if (not isinstance(pair, dict) or type(pair.get("step")) is not int
+                or not 0 <= pair["step"] <= steps
+                or any(not _sha256_hex(pair.get(field)) for field in required)):
+            raise ValueError(f"isolated output-noise evaluation state is invalid: {name}")
+        if (pair[required[0]] != pair[required[1]]
+                or not legacy and pair[required[2]] != pair[required[3]]):
+            raise ValueError(f"isolated output-noise evaluation advanced training stream: {name}")
+    if not legacy:
+        expected_steps = sorted({math.ceil(i * steps / 24) for i in range(1, 25)})
+        if [pair["step"] for pair in pairs] != expected_steps or eval_calls == 0:
+            raise ValueError(f"isolated output-noise evaluation trace is incomplete: {name}")
+
+
 def _check_toy100_learned_noise(directory: Path, summary: dict, config: dict,
                                 *, policy_archive_verified: bool = False):
     """Audit the native scalar and its post-update/evaluation noise evidence.
@@ -388,6 +465,122 @@ def _check_toy100_learned_noise(directory: Path, summary: dict, config: dict,
                 raise ValueError(f"learned 100-mode source hash differs: {name}.{source}")
 
 
+def _check_toy100_output_rng(directory: Path, summary: dict, config: dict):
+    """Audit the private output stream through training, evaluation, and holdout."""
+    name = config["problem"]
+    isolated = config.get("output_noise_rng") == "isolated"
+    if not isolated:
+        if ("output_noise_rng" in summary or "output_noise_rng_receipt" in summary):
+            raise ValueError(f"undeclared isolated output-noise receipt: {name}")
+        return
+    receipt = summary.get("output_noise_rng_receipt")
+    if (summary.get("output_noise_rng") != "isolated"
+            or not isinstance(receipt, dict)
+            or receipt.get("mode") != "isolated"
+            or receipt.get("namespace_offset") != OUTPUT_NOISE_SEED_OFFSET
+            or receipt.get("training_seed") != config["seed"] + OUTPUT_NOISE_SEED_OFFSET
+            or receipt.get("generator_wrapper_class") != "IsolatedOutputNoise"
+            or receipt.get("discriminator_wrapper_class") != (
+                "StatefulInputNoise" if config["input_noise_std"] else None)
+            or receipt.get("checkpoint_state_key") != "_extra_state"):
+        raise ValueError(f"100-mode isolated output-noise policy differs: {name}")
+    for field in ("initial_live_state_sha256", "initial_ema_state_sha256",
+                  "final_live_state_sha256", "final_ema_state_sha256"):
+        if not _sha256_hex(receipt.get(field)):
+            raise ValueError(f"100-mode isolated output-noise state is invalid: {name}.{field}")
+    if receipt["initial_live_state_sha256"] != receipt["initial_ema_state_sha256"]:
+        raise ValueError(f"100-mode isolated output-noise initial streams differ: {name}")
+    if config["input_noise_std"]:
+        if not (_sha256_hex(receipt.get("initial_input_state_sha256"))
+                and _sha256_hex(receipt.get("final_input_state_sha256"))):
+            raise ValueError(f"100-mode isolated input-noise state is invalid: {name}")
+    elif (receipt.get("initial_input_state_sha256") is not None
+          or receipt.get("final_input_state_sha256") is not None):
+        raise ValueError(f"undeclared 100-mode isolated input-noise state: {name}")
+
+    train_events, eval_events = {}, {}
+    for line in (directory / "events.jsonl").read_text().splitlines():
+        event = json.loads(line)
+        if event.get("event") == "train":
+            step = event.get("step")
+            if step in train_events:
+                raise ValueError(f"duplicate isolated output-noise training step: {name}.{step}")
+            train_events[step] = event
+        elif event.get("event") == "eval" and event.get("model") in ("live", "ema"):
+            key = (event.get("step"), event["model"])
+            if key in eval_events:
+                raise ValueError(f"duplicate isolated output-noise evaluation: {name}.{key}")
+            eval_events[key] = event
+    steps = config["steps"]
+    if set(train_events) != set(range(1, steps + 1)):
+        raise ValueError(f"100-mode isolated output-noise training trace is incomplete: {name}")
+    expected_evals = {(step, model) for step in summary["eval_steps"]
+                      for model in ("live", "ema")}
+    if set(eval_events) != expected_evals or not summary["eval_steps"]:
+        raise ValueError(f"100-mode isolated output-noise evaluation trace is incomplete: {name}")
+    previous_calls = previous_elements = 0
+    for step in range(1, steps + 1):
+        event = train_events[step]
+        calls = event.get("output_noise_rng_draw_calls")
+        elements = event.get("output_noise_rng_draw_elements")
+        if (not _sha256_hex(event.get("output_noise_rng_state_sha256"))
+                or type(calls) is not int or calls < previous_calls
+                or type(elements) is not int or elements < previous_elements
+                or (calls == 0) != (elements == 0)):
+            raise ValueError(f"100-mode isolated output-noise train stream differs: {name}.{step}")
+        previous_calls, previous_elements = calls, elements
+    last = train_events[steps]
+    if (previous_calls <= 0 or previous_elements <= 0
+            or receipt.get("final_live_draw_calls") != previous_calls
+            or receipt.get("final_live_draw_elements") != previous_elements
+            or receipt["final_live_state_sha256"] != last["output_noise_rng_state_sha256"]):
+        raise ValueError(f"100-mode isolated output-noise endpoint differs: {name}")
+
+    for (step, model), event in eval_events.items():
+        state_before = event.get("output_noise_rng_state_before_sha256")
+        state_after = event.get("output_noise_rng_state_after_sha256")
+        calls_before = event.get("output_noise_rng_draw_calls_before")
+        calls_after = event.get("output_noise_rng_draw_calls_after")
+        elements_before = event.get("output_noise_rng_draw_elements_before")
+        elements_after = event.get("output_noise_rng_draw_elements_after")
+        if (event.get("output_noise_rng_eval_seed") != config["seed"] + 402
+                or not _sha256_hex(state_before) or state_before != state_after
+                or type(calls_before) is not int or calls_before < 0
+                or calls_before != calls_after
+                or type(elements_before) is not int or elements_before < 0
+                or elements_before != elements_after):
+            raise ValueError(f"100-mode isolated output-noise evaluation advanced stream: "
+                             f"{name}.{step}.{model}")
+        if model == "live":
+            expected_state = (receipt["initial_live_state_sha256"] if step == 0 else
+                              train_events[step]["output_noise_rng_state_sha256"])
+            expected_calls = (0 if step == 0 else
+                              train_events[step]["output_noise_rng_draw_calls"])
+            expected_elements = (0 if step == 0 else
+                                 train_events[step]["output_noise_rng_draw_elements"])
+            if ((state_before, calls_before, elements_before) !=
+                    (expected_state, expected_calls, expected_elements)):
+                raise ValueError(f"100-mode isolated output-noise evaluation state differs: "
+                                 f"{name}.{step}.live")
+        elif step == 0 and (state_before != receipt["initial_ema_state_sha256"]
+                             or calls_before != 0 or elements_before != 0):
+            raise ValueError(f"100-mode isolated output-noise initial EMA state differs: {name}")
+    final_ema = eval_events.get((steps, "ema"))
+    if (final_ema is None or receipt["final_ema_state_sha256"] !=
+            final_ema["output_noise_rng_state_before_sha256"]):
+        raise ValueError(f"100-mode isolated output-noise final EMA state differs: {name}")
+
+    if receipt.get("holdout_eval_seed") != config["seed"] + HOLDOUT_SEED_OFFSETS["noise"]:
+        raise ValueError(f"100-mode isolated output-noise holdout seed differs: {name}")
+    for model in ("live", "ema"):
+        before = receipt.get(f"holdout_{model}_before_state_sha256")
+        after = receipt.get(f"holdout_{model}_after_state_sha256")
+        if (not _sha256_hex(before) or before != after
+                or before != receipt[f"final_{model}_state_sha256"]):
+            raise ValueError(f"100-mode isolated output-noise holdout advanced stream: "
+                             f"{name}.{model}")
+
+
 def _check_toy100_policy(directory: Path, summary: dict, config: dict,
                          policy: dict) -> dict[str, str]:
     """Regrade the optional model and LR policy from portable saved evidence."""
@@ -435,10 +628,12 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
             or card.get("generator_class") != (
                 "Linear" if expected_model == "affine_square_v1" else "SimpleMLPGenerator")
             or card.get("generator_wrapper_class") != (
-                "OutputNoise" if config["output_noise_std"] else None)
+                ("IsolatedOutputNoise" if config.get("output_noise_rng") == "isolated"
+                 else "OutputNoise") if config["output_noise_std"] else None)
             or card.get("discriminator_class") != "SimpleMLPDiscriminator"
             or card.get("discriminator_wrapper_class") != (
-                "InputNoise" if config["input_noise_std"] else None)
+                ("StatefulInputNoise" if config.get("output_noise_rng") == "isolated"
+                 else "InputNoise") if config["input_noise_std"] else None)
             or card.get("prior_class") != "ParticlePrior"
             or type(card.get("generator_base_parameters")) is not int
             or card["generator_base_parameters"] <= 0
@@ -538,7 +733,7 @@ def _verify_saved_provenance(directory: Path, protocol: dict, *, candidate: bool
                 or overrides != protocol["ignored_toy100_resource_overrides"]
                 or model_policy != protocol.get("model_policy", {})):
             raise ValueError("saved candidate config does not resolve to declared recipe")
-        if model_policy and not {
+        if (model_policy or noise.get("output_noise_rng") == "isolated") and not {
             "benchmarks/toy100/schedule.py", "benchmarks/toy100/train.py",
             "benchmarks/toy100/config.py", "benchmarks/toy100/__main__.py",
         } <= set(source_hashes):
@@ -659,10 +854,17 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                     if not receipt.get("eval_scope"):
                         raise ValueError(f"custom-host evaluation scope is absent: {name}")
                 else:
-                    actual_noise = ((output_std == 0 or receipt.get("output_module") == "OutputNoise")
-                                    and (input_std == 0 or receipt.get("input_module") == "InputNoise"
+                    output_module = ("IsolatedOutputNoise" if
+                                     protocol["noise"].get("output_noise_rng") == "isolated"
+                                     else "OutputNoise")
+                    input_module = ("StatefulInputNoise" if
+                                    protocol["noise"].get("output_noise_rng") == "isolated"
+                                    else "InputNoise")
+                    actual_noise = ((output_std == 0 or receipt.get("output_module") == output_module)
+                                    and (input_std == 0 or receipt.get("input_module") == input_module
                                          and receipt.get("input_nonzero_steps", 0) > 0))
                 _check_learned_transfer_noise(record, receipt, protocol["noise"])
+                _check_isolated_transfer_noise(record, receipt, protocol["noise"])
                 if bool(actual_noise) != record.get("noise_applied"):
                     raise ValueError(f"candidate noise claim differs from receipt: {name}")
             else:
@@ -721,6 +923,8 @@ def _toy100_rows(directory: Path):
             raise ValueError("100-mode manifest config hash differs")
         recipe, noise, _ = declared_recipe(declared)
         model_policy = declared_model_policy(declared)
+        isolated_output_rng = noise.get("output_noise_rng") == "isolated"
+        requires_archive = bool(model_policy) or isolated_output_rng
         config_fields = {name: getattr(recipe, name) for name in GLOBAL_RECIPE_FIELDS}
         policy_sources = None
         policy_scope = None
@@ -742,9 +946,11 @@ def _toy100_rows(directory: Path):
                 noise.get("output_noise_learnable", False),
             ):
                 raise ValueError(f"100-mode learned-noise flag varies by problem: {name}")
+            if executed.get("output_noise_rng") != noise.get("output_noise_rng"):
+                raise ValueError(f"100-mode output-noise RNG varies by problem: {name}")
             if declared_model_policy(executed) != model_policy:
                 raise ValueError(f"100-mode model policy varies by problem: {name}")
-            if model_policy:
+            if requires_archive:
                 archived_scope = policy_source_scope(_read(directory / name / "provenance.json"))
                 sources = _check_toy100_policy(
                     directory / name,
@@ -760,15 +966,20 @@ def _toy100_rows(directory: Path):
                     raise ValueError("100-mode policy source scope differs between problems")
             _check_toy100_learned_noise(
                 directory / name, _read(directory / name / "summary.json"), executed,
-                policy_archive_verified=bool(model_policy),
+                policy_archive_verified=requires_archive,
             )
-        if model_policy and manifest.get("policy_source_sha256") != policy_sources:
+            _check_toy100_output_rng(
+                directory / name, _read(directory / name / "summary.json"), executed,
+            )
+        if requires_archive and manifest.get("policy_source_sha256") != policy_sources:
             raise ValueError("100-mode policy manifest source differs from archived runs")
-        if model_policy and policy_scope == POLICY_SOURCE_SCOPE_V2:
+        if isolated_output_rng and policy_scope != POLICY_SOURCE_SCOPE_V2:
+            raise ValueError("isolated output-noise RNG requires full V2 source archive")
+        if requires_archive and policy_scope == POLICY_SOURCE_SCOPE_V2:
             if (manifest.get("policy_source_scope") != policy_scope
                     or manifest.get("policy_source_version") != 2):
                 raise ValueError("100-mode policy manifest source scope differs")
-        elif model_policy and ("policy_source_scope" in manifest
+        elif requires_archive and ("policy_source_scope" in manifest
                                or "policy_source_version" in manifest):
             raise ValueError("historical 100-mode policy manifest has a new source scope")
         cases = {name: dict(
@@ -823,7 +1034,7 @@ def regrade(output: Path):
                     and toy.get("model_policy", {}) == candidate["protocol"].get("model_policy", {}))
         if not identity:
             reason = "100-mode and candidate-19 global recipe, noise, or model policy fields differ"
-        elif toy.get("model_policy"):
+        elif toy.get("model_policy") or toy["noise"].get("output_noise_rng") == "isolated":
             native_sources = toy.get("policy_source_sha256") or {}
             transfer_sources = candidate["protocol"]["source_sha256"]
             full_source_coverage = toy.get("policy_source_scope") == POLICY_SOURCE_SCOPE_V2
