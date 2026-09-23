@@ -1,0 +1,10 @@
+{
+  "purpose": "Reproduce the shared image solvability witness. Same 600-step budgets, data, optimizer, loss and metric thresholds; residual upsampling and width16 replace transpose width12. These are inspected development tasks.",
+  "tasks": ["img_stripes2", "img_bars4", "img_blobs4", "img_intensity2"],
+  "candidates": [
+    {
+      "name": "residual16",
+      "overrides": {"architecture": "residual_upsample", "width": 16}
+    }
+  ]
+}

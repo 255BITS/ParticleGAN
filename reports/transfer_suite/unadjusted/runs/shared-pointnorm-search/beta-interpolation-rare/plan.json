@@ -1,0 +1,12 @@
+{
+  "purpose": "Final frozen rare-only activation-curvature interpolation around the LayerNorm-all Softplus96 beta5 lead, after a separate raw-Softplus beta8 width PASS; shared_c6 and all hosts/gates unchanged.",
+  "architectures": [
+    "pointnorm_layer_all_softplus96_beta3_l3",
+    "pointnorm_layer_all_softplus96_beta4_l3",
+    "pointnorm_layer_all_softplus96_beta6_l3",
+    "pointnorm_layer_all_softplus96_beta8_l3"
+  ],
+  "tasks": [
+    "vector_unequal_mass"
+  ]
+}

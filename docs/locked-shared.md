@@ -51,7 +51,7 @@ this object.
 | FM-on | any `fm_weight` other than 0 (named probe: 0.1) |
 | stranger | `pairing="stranger"` |
 | thinned κ | stored kappa, penalty center hardcoded (1 in one probe, 100 in another) |
-| `Recipe("gan")` | 20_000 particles, VICReg `prior_reg=1`, no cover and no FM field |
+| `Recipe("gan")` | 20_000 particles, b_cap3/κ1.25, VICReg `prior_reg=.05`, no cover and no FM field |
 | YuE2 gym controller | same cap, `lazy_k=4` (`EDIT_CAP_EVERY` in `lib/gym_particle_finetune.py`; still `particle.yaml`) |
 
 `drift(name)` returns the first five rows as `LockedShared` copies.
@@ -60,3 +60,51 @@ this object.
 This is not a Music or Anima GPU transfer. It does not run a conceptmod toy.
 The Lunar apply is the gym config above. It does not re-extract this stamp.
 GPU landings for that arm have not been run.
+
+## Measured conceptmod verification
+
+The latest [convergence leaderboard](../reports/behavioral_baseline/convergence/README.md)
+adds a shared cosine schedule to the best cap: decay from 60% of the budget to a
+5% floor. It passes 29/29 bounds and sustains all nine toys, including 8/8 ring
+modes. Ten independent application checks pass. Sensitivity and the actual
+100-Gaussian comparison originally retained the stock defaults and exposed
+`get_recipe("gan_behavioral")` as an opt-in candidate. The subsequent
+[full behavioral search](../reports/transfer_suite/formulations/README.md)
+reaches 19/19 with supported architectures, and the winning formulation is now
+the `gan` default. `gan_legacy` preserves the original recipe. The
+[public training helper](api.md#gantrainer) applies the recipe consistently.
+The following paragraph describes the earlier search using original host schedules.
+
+
+The expanded [live-weight baseline](../reports/behavioral_baseline/README.md)
+trains each candidate on nine toys and requires all 29 numerical bounds. The
+leading `b_cap` candidate uses cap target 1.25, coefficient 3, no particle L2 and
+LR multiplier 0.85: all nine toys pass, with 8/8 live modes at 100% HQ. All five
+late ring checkpoints keep eight modes; four also meet 90% HQ. R1+R2 at
+coefficient 0.1 passes the original bounds with seven final modes. Ten shared geometry
+and application checks also pass and are shown separately. See the
+[protocol](../benchmarks/locked_shared/BASELINE.md) for config fields, fixed
+budgets, scope, and commands for comparing another approach. EMA cannot rescue a
+live failure. The [search ledger](../reports/behavioral_baseline/search/README.md)
+also preserves failed and incomplete attempts.
+
+The leaderboard now exposes actual ring mode counts, HQ, effective modes and
+late-checkpoint stability. Its original regression threshold permits 7/8 modes;
+that minimum PASS alone does not select a production default. See the
+[coverage and default-selection analysis](../reports/behavioral_baseline/default_selection.md).
+
+The [behavioral leaderboard](../reports/locked_shared/README.md) runs extracted
+two-pole, shared-trajectory and ring-diversity experiments through these
+builders. Every variant trains and is scored from measurements; no config
+equality or refusal is counted as a behavioral result.
+
+The recorded run matches all ten original conceptmod runs exactly, including
+negative controls. That establishes builder/extraction parity. It does not
+reproduce the original all-pass claim: two-pole passes, trajectory fails,
+and the ring result is inconclusive. See the table for metrics, provenance
+and [reproduction commands](../benchmarks/locked_shared/SOURCE.md).
+
+The [follow-up comparison](../reports/locked_shared/comparison.md) finds that
+removing the host particle L2 term clears all three measured targets while
+keeping RpGAN and `b_cap`. Other existing formulations have tradeoffs. This
+is recorded as an experimental candidate; it does not change the stamp.

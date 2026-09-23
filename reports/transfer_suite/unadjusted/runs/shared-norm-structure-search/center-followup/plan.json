@@ -1,0 +1,14 @@
+{
+  "purpose": "Frozen final six-card follow-up around the stable fixed-center-only discriminator. Vary only Softplus curvature and width; unchanged shared_c6 and rare-mass test only. Retain all failures and stop lane if no sustained PASS.",
+  "architectures": [
+    "normstruct_center_fixed96_beta3",
+    "normstruct_center_fixed96_beta5",
+    "normstruct_center_fixed96_beta6",
+    "normstruct_center_fixed96_beta8",
+    "normstruct_center_fixed128_beta4",
+    "normstruct_center_fixed128_beta8"
+  ],
+  "tasks": [
+    "vector_unequal_mass"
+  ]
+}

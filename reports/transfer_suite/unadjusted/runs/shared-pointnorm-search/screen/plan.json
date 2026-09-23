@@ -1,0 +1,15 @@
+{
+  "purpose": "Frozen bounded follow-up after 12-card ensemble screen failed: pointwise normalization or differentiable weight parameterization in raw smooth discriminators, on both remaining cases under shared_c6.",
+  "architectures": [
+    "pointnorm_layer_first_softplus96_l3",
+    "pointnorm_layer_all_softplus96_l3",
+    "pointnorm_layer_first_silu128_l3",
+    "pointnorm_layer_all_silu128_l3",
+    "pointnorm_rms_all_silu128_l3",
+    "pointnorm_weight_all_silu128_l3"
+  ],
+  "tasks": [
+    "vector_unequal_mass",
+    "vector_unequal_width"
+  ]
+}

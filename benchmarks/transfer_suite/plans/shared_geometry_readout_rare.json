@@ -1,0 +1,8 @@
+{
+  "purpose": "Frozen final D-only score-readout screen: LN-all Softplus beta4 trunk and shared_c6 unchanged; rare-mass case only; all checkpoints retained.",
+  "architectures": [
+    "geometry_readout_asinh2",
+    "geometry_readout_rational2"
+  ],
+  "tasks": ["vector_unequal_mass"]
+}

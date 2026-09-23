@@ -1,0 +1,55 @@
+{
+  "purpose": "Bounded shared-recipe refinements of the 15/19 candidate; hard-case screening only.",
+  "tasks": [
+    "two_pole",
+    "mode_hold",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_overlap",
+    "img_bars4"
+  ],
+  "candidates": [
+    {
+      "name": "shared_k10",
+      "overrides": {
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "reg_kappa": 1.0
+      }
+    },
+    {
+      "name": "shared_k15",
+      "overrides": {
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "reg_kappa": 1.5
+      }
+    },
+    {
+      "name": "shared_b05",
+      "overrides": {
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.5,
+          0.99
+        ]
+      }
+    },
+    {
+      "name": "shared_b05_999",
+      "overrides": {
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.5,
+          0.999
+        ]
+      }
+    }
+  ]
+}

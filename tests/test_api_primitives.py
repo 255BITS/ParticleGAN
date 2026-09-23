@@ -201,8 +201,8 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
 
 
 def test_generic_recipes_preserve_existing_config_values():
-    assert get_recipe() == get_recipe("gan") == Recipe()
-    for name, legacy in (("gan", "100gaussians"), ("ddgan", "denoising")):
+    assert get_recipe() == get_recipe("gan") == get_recipe("gan_v3") == Recipe()
+    for name, legacy in (("gan_v2", "100gaussians"), ("ddgan", "denoising")):
         current = get_recipe(name, z_dim=8, num_particles=32)
         historical = get_recipe(legacy, z_dim=8, num_particles=32)
         current_values, legacy_values = current.to_dict(), historical.to_dict()

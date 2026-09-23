@@ -1,0 +1,21 @@
+{
+  "purpose": "Frozen first screen of generic smooth coordinate-scale ensembles on the two remaining shared_c6 vector cases; 12 discriminator cards, both cases, no seed sweep.",
+  "architectures": [
+    "ensemble2_equal_softplus64_l2",
+    "ensemble2_multiscale_softplus64_l2",
+    "ensemble3_multiscale_softplus64_l2",
+    "ensemble3_multiscale_silu64_l2",
+    "ensemble2_multiscale_silu64_l3",
+    "ensemble3_broad_softplus48_l3",
+    "ensemble4_broad_silu48_l2",
+    "ensemble2_highscale_softplus96_l2",
+    "ensemble2_mixed64_l2",
+    "ensemble2_multiscale_halfscore64_l2",
+    "ensemble2_multiscale_fullscore64_l2",
+    "ensemble2_multiscale_spectrum64_l2"
+  ],
+  "tasks": [
+    "vector_unequal_mass",
+    "vector_unequal_width"
+  ]
+}

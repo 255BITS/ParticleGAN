@@ -44,9 +44,35 @@ jobs:
           python -m pip wheel --no-deps . --wheel-dir /tmp/particlegan-wheel
           python -m pip install --no-deps --target /tmp/particlegan-installed /tmp/particlegan-wheel/*.whl
           cp examples/particle_autoencoder.py /tmp/particlegan-autoencoder-smoke.py
+          cp examples/quickstart_gan.py /tmp/particlegan-gan-smoke.py
           cd /tmp
           PYTHONPATH=/tmp/particlegan-installed python /tmp/particlegan-autoencoder-smoke.py
-          PYTHONPATH=/tmp/particlegan-installed python -c "import particlegan; from particlegan import ParticlePrior, MoGParticlePrior, DDGAN, get_recipe; assert particlegan.__file__.startswith('/tmp/particlegan-installed/'); assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4); assert MoGParticlePrior().sample(2)[0].shape == (2, 4); assert get_recipe('mog').total_steps == 28000; assert DDGAN().steps == 4; assert get_recipe().lr == 0.0006"
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/particlegan-gan-smoke.py --steps 2 --output /tmp/particlegan-gan-smoke.pt
+          PYTHONPATH=/tmp/particlegan-installed python - <<'PY'
+          import particlegan
+          from particlegan import (
+              BatchDistanceDiscriminator, DDGAN, LinearSkipDiscriminator,
+              MoGParticlePrior, ParticlePrior, get_recipe,
+          )
+
+          assert particlegan.__file__.startswith('/tmp/particlegan-installed/')
+          assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4)
+          assert MoGParticlePrior().sample(2)[0].shape == (2, 4)
+          assert get_recipe('mog').total_steps == 28000
+          assert DDGAN().steps == 4
+          default = get_recipe()
+          assert default.lr == 0.00425
+          assert default.d_lr_mult == 1.0
+          assert default.prior_lr_mult == 2.0
+          assert default.betas == (0., .99)
+          assert default.reg_arm == 'b_cap' and default.reg_coeff == 6.0
+          assert default.reg_kappa == 1.25 and default.prior_reg == 0.05
+          assert get_recipe('gan_v2').lr == 0.001
+          assert get_recipe('gan_v1').lr == 0.0006
+          assert get_recipe('gan_legacy').lr == 0.0006
+          assert sum(p.numel() for p in LinearSkipDiscriminator().parameters()) == 10467
+          assert sum(p.numel() for p in BatchDistanceDiscriminator().parameters()) == 19013
+          PY
           PYTHONPATH=/tmp/particlegan-installed python -c "from particlegan import get_recipe; recipe = get_recipe('ddgan_mog'); assert recipe.model == 'ddgan' and recipe.total_steps == 100000; assert recipe.make_prior().sigma > 0"
 
   distributions:

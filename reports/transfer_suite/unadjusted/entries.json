@@ -1,0 +1,292 @@
+[
+  {
+    "name": "gan",
+    "label": "GAN v2 (previous default; archived gan)",
+    "indexes": [
+      "reports/transfer_suite/default_comparison/proposed/index.json"
+    ]
+  },
+  {
+    "name": "gan_legacy",
+    "label": "GAN v1 (original preset)",
+    "indexes": [
+      "reports/transfer_suite/default_comparison/current/index.json"
+    ]
+  },
+  {
+    "name": "equal_lr_0017",
+    "label": "equal lr 0017",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-0/index.json"
+    ]
+  },
+  {
+    "name": "equal_lr_0025",
+    "label": "equal lr 0025",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-0/index.json"
+    ]
+  },
+  {
+    "name": "equal_lr_0034",
+    "label": "equal lr 0034",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-1/index.json"
+    ]
+  },
+  {
+    "name": "equal_lr_00425",
+    "label": "equal lr 00425",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-1/index.json"
+    ]
+  },
+  {
+    "name": "lr00425_prior2",
+    "label": "lr00425 prior2",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-2/index.json"
+    ]
+  },
+  {
+    "name": "lr0034_dprior125",
+    "label": "lr0034 dprior125",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round0-2/index.json"
+    ]
+  },
+  {
+    "name": "shared_c6",
+    "label": "GAN v3 (current default; shared_c6)",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-0/index.json",
+      "reports/transfer_suite/unadjusted/runs/completion-1/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/cross/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/completion/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-local-density-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-local-density-search/refinement/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-width-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-width-search/refinement/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-width-search/last_refinement/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-width-search/cross/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-ensemble-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/refinement-rare/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/refinement-width/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/beta-interpolation-rare/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-rare-gradient/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-norm-structure-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-norm-structure-search/refinement/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-norm-structure-search/center-followup/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-geometry-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-geometry-search/residual/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-geometry-search/readout/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-batch-feature-search/screen/index.json"
+    ]
+  },
+  {
+    "name": "shared_c10",
+    "label": "shared c10",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-0/index.json"
+    ]
+  },
+  {
+    "name": "shared_c20",
+    "label": "shared c20",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-0/index.json"
+    ]
+  },
+  {
+    "name": "shared_k075",
+    "label": "shared k075",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-0/index.json",
+      "reports/transfer_suite/unadjusted/runs/completion-2/index.json"
+    ]
+  },
+  {
+    "name": "shared_k10",
+    "label": "shared k10",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-1/index.json"
+    ]
+  },
+  {
+    "name": "shared_k15",
+    "label": "shared k15",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-1/index.json"
+    ]
+  },
+  {
+    "name": "shared_b05",
+    "label": "shared b05",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-1/index.json"
+    ]
+  },
+  {
+    "name": "shared_b05_999",
+    "label": "shared b05 999",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-1/index.json"
+    ]
+  },
+  {
+    "name": "shared_b0_999",
+    "label": "shared b0 999",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-2/index.json"
+    ]
+  },
+  {
+    "name": "shared_p3",
+    "label": "shared p3",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-2/index.json"
+    ]
+  },
+  {
+    "name": "shared_p4",
+    "label": "shared p4",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-2/index.json"
+    ]
+  },
+  {
+    "name": "shared_spread01",
+    "label": "shared spread01",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/round1-2/index.json",
+      "reports/transfer_suite/unadjusted/runs/completion-0/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g425_d2125_p85",
+    "label": "Ratio G0.00425 D0.002125 P0.0085",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g425_d6375_p85",
+    "label": "Ratio G0.00425 D0.006375 P0.0085",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/completion/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g34_d255_p85",
+    "label": "Ratio G0.0034 D0.00255 P0.0085",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g34_d68_p85",
+    "label": "Ratio G0.0034 D0.0068 P0.0085",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/completion/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g25_d375_p100",
+    "label": "Ratio G0.0025 D0.00375 P0.01",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g25_d15_p85",
+    "label": "Ratio G0.0025 D0.0015 P0.0085",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json"
+    ]
+  },
+  {
+    "name": "relative_cap_01",
+    "label": "relative cap 01",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-adapter-search/study/index.json.gz"
+    ]
+  },
+  {
+    "name": "relative_cap_025",
+    "label": "relative cap 025",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-adapter-search/study/index.json.gz"
+    ]
+  },
+  {
+    "name": "relative_cap_05",
+    "label": "relative cap 05",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-adapter-search/study/index.json.gz"
+    ]
+  },
+  {
+    "name": "c6_profile_prior3",
+    "label": "Cap6 profile, prior LR ratio3",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/rare-global-optimizer-screen/index.json"
+    ]
+  },
+  {
+    "name": "c6_profile_prior4",
+    "label": "Cap6 profile, prior LR ratio4",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/rare-global-optimizer-screen/index.json"
+    ]
+  },
+  {
+    "name": "c6_profile_beta1_01",
+    "label": "Cap6 profile, Adam beta1 .1",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/rare-global-optimizer-screen/index.json"
+    ]
+  },
+  {
+    "name": "c6_profile_beta2_095",
+    "label": "Cap6 profile, Adam beta2 .95",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/rare-global-optimizer-screen/index.json"
+    ]
+  },
+  {
+    "name": "sched_h30_f01",
+    "label": "Cap 6 cosine hold 30% / floor 1%",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-schedule-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-schedule-search/beta6_screen/index.json"
+    ]
+  },
+  {
+    "name": "sched_h30_f05",
+    "label": "Cap 6 cosine hold 30% / floor 5%",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-schedule-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-schedule-search/beta6_screen/index.json"
+    ]
+  },
+  {
+    "name": "sched_h40_f01",
+    "label": "Cap 6 cosine hold 40% / floor 1%",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-schedule-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-schedule-search/beta6_screen/index.json"
+    ]
+  },
+  {
+    "name": "sched_h50_f01",
+    "label": "Cap 6 cosine hold 50% / floor 1%",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-schedule-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-schedule-search/beta6_screen/index.json"
+    ]
+  }
+]

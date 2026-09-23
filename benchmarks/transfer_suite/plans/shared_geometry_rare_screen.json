@@ -1,0 +1,21 @@
+{
+  "purpose": "Frozen D-only nonperiodic geometry screen under shared_c6; rare-mass case only; all 24 live and EMA checks retained, final suffix five required.",
+  "architectures": [
+    "geometry_poly2_lnsp96",
+    "geometry_poly3_lnsp96",
+    "geometry_tanhcoords_lnsp96",
+    "geometry_asinhcoords_lnsp96",
+    "geometry_ridgehinge2_lnsp96",
+    "geometry_ridgehinge8_lnsp96",
+    "geometry_ridgetanh2_lnsp96",
+    "geometry_ridgewindow4_lnsp96",
+    "geometry_raw_lngelu96",
+    "geometry_raw_lnmish96",
+    "geometry_raw_lntanh96",
+    "geometry_raw_lngate96",
+    "geometry_poly2_lngate96",
+    "geometry_raw_lnquadhead96",
+    "geometry_poly2_lnquadhead96"
+  ],
+  "tasks": ["vector_unequal_mass"]
+}
