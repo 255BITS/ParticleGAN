@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/tmp/pr38-replay-verifier-audit/audit.py", line 48, in <module>
+    assert all(r['passed'] for r in results),'Mutation audit exposed a verifier gap'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Mutation audit exposed a verifier gap

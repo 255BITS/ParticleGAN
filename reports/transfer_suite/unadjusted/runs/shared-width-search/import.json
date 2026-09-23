@@ -1,0 +1,12 @@
+{
+  "append_to_existing_entry": "shared_c6",
+  "indexes": [
+    "reports/transfer_suite/unadjusted/runs/shared-width-search/screen/index.json",
+    "reports/transfer_suite/unadjusted/runs/shared-width-search/refinement/index.json",
+    "reports/transfer_suite/unadjusted/runs/shared-width-search/last_refinement/index.json",
+    "reports/transfer_suite/unadjusted/runs/shared-width-search/cross/index.json"
+  ],
+  "raw_width_trials": 34,
+  "rare_cross_checks": 1,
+  "generated_aggregate_untouched": true
+}

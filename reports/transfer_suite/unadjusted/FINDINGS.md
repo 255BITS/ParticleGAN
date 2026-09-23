@@ -1,13 +1,13 @@
 # Shared-default search results
 
-**Best supported score: 17/19 with one unchanged recipe and explicit discriminator
-choices. No all-pass shared default yet.** The same recipe scores 15/19 with the
-reference discriminator profile. Public presets remain 8/19 proposed and 5/19
-current master; this search has not changed package defaults.
+**Best supported score: 18/19 with one unchanged recipe and explicit discriminator
+choices, up from 17/19. Rare-component variance is the only remaining failure.**
+The same recipe scores 15/19 with the reference discriminator profile. Public
+presets remain 8/19 proposed and 5/19 old; this search does not change package defaults.
 
 | Shared recipe | Required | Data | Images | Live total | Reference D profile |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `shared_c6`, including declared D trials | 9/9 | 4/6 | 4/4 | **17/19** | 15/19 |
+| `shared_c6`, including declared D trials | 9/9 | 5/6 | 4/4 | **18/19** | 15/19 |
 | `lr00425_prior2`, cap coefficient 3 | 8/9 | 3/6 | 4/4 | 15/19 | 15/19 |
 | `ratio_g34_d68_p85` | 8/9 | 3/6 | 4/4 | 15/19 | 15/19 |
 | `relative_cap_05`, adaptive step limiter | 7/9 | 2/6 | 3/4 | 12/19 | 12/19 |
@@ -17,82 +17,114 @@ The leader uses Rp logistic, b_cap coefficient **6**, κ **1.25**, particle spre
 LR .0085 on every test**. Hold rates for the first 60% of the budget, then cosine
 toward 5%. No optimizer setting or objective is adjusted by example.
 
-## What improved
+## The new width pass
 
-The cap-6 recipe already passed all required and image cases. Two discriminator
-changes now supply the additional data passes:
+A raw-input discriminator with **128 units in each of three hidden layers and
+Softplus β=8** passes all five behavioral metrics at the last five observations,
+steps 1000, 1050, 1100, 1150 and 1200. It has 33,537 parameters, no Fourier features,
+no extra skip head and no output scaling. Here β controls activation sharpness;
+Adam's betas remain `(0,.99)`.
 
-| Case | Supported discriminator | Parameters | Final passing observations |
-| --- | --- | ---: | ---: |
-| Anisotropic | Raw MLP plus a small Fourier branch, width 64, two layers, Softplus | 5,796 | 8 |
-| Overlap | Raw-input MLP, width 96, three layers, Softplus | 19,009 | 10 |
+| Metric | Worst of the final five observations | Required |
+| --- | ---: | ---: |
+| Minimum normalized component variance | .25617 | ≥ .15 |
+| Component covariance error | .62818 | ≤ .85 |
+| High-quality sample fraction | .93042 | ≥ .85 |
+| Mixture mass error | .03540 | ≤ .15 |
+| Normalized sliced distance | .09772 | ≤ .18 |
 
-A raw-input SiLU discriminator, width 128 and three layers, also passes
-anisotropic with six final passing observations. All three witnesses reproduce
-exactly in independent integration replays, including all 24 live/EMA
-checkpoints and optimizer receipts. [Replay checks](runs/shared-architecture-replays/README.md).
+The otherwise matching β=5 discriminator passes only its last observation. This
+paired comparison supports the sharper activation for this case; it does not
+establish a general mechanism or unseen-task transfer. EMA also passes with β=8,
+but contributes no selection points. An independent replay matches every
+live/EMA checkpoint, action, optimizer receipt and verdict exactly.
 
-Architecture choices are separate from recipe identity. **This is not one
-universal discriminator.** The complete raw-Softplus profile passes 3/6 data
-tests; raw-SiLU passes 1/6. The leaderboard retains the original reference-profile
-score and every architecture failure. [All 28 architecture trials](runs/shared-discriminator-search/README.md).
+The width winner **fails rare-component variance**, ending at .00302 versus .15.
+That failure is retained alongside its successful case. [All 35 width-study
+runs](runs/shared-width-search/README.md) · [Independent replays](runs/remaining-replays/README.md).
 
-## Two remaining blockers
+## Selected architecture support
 
-- **Rare mixture mass:** the closest tested cap-6 discriminator still collapses
-  a component's narrow direction: minimum normalized variance **.01891**, below
-  **.15**. Occupancy and aggregate sample quality alone do not expose this.
-- **Unequal widths:** raw-SiLU meets every final bound, but only the last **one**
-  observation passes. It needs at least **five** consecutive final observations.
-  The original reference architecture also fails. Longer training would be a
-  separate toy, not a replacement pass at this budget.
+| Case | Supported discriminator | Final passing observations |
+| --- | --- | ---: |
+| Broad mixture and spiral | Original reference discriminators | 20 and 23 |
+| Anisotropic | Raw MLP plus small Fourier branch, 64×2, Softplus | 8 |
+| Overlap | Raw-input MLP, 96×3, Softplus β5 | 10 |
+| Unequal widths | Raw-input MLP, 128×3, Softplus β8 | 5 |
+| Rare component | None found | 0 |
 
-The cap-3 leader still ends mode-hold at **7/8 modes**. Its overlap metrics pass
-only the last three observations. These failures and measured bounds are now
-visible directly in the main leaderboard.
+Architecture is separate from recipe identity. **This is not one universal
+network architecture.** The leaderboard shows both architecture-supported and
+reference-profile scores and retains every failed architecture trial. Required
+and image cases still use their original discriminators.
 
-## What the other agents found
+## Remaining failure: rare-component spread
 
-- Six global G:D:particle rate ratios produced 66 episodes. The best complete
-  row scores 15/19 and trades overlap for an anisotropic failure. The other
-  completed row scores 13/19; four screens remain INCOMPLETE.
-  [Rate study and all failures](runs/shared-ratio-search/README.md).
-- Three generic, role-blind Adam proposal caps produced 31 candidate episodes.
-  The selected cap scores 12/19, fixing none of the four original failures and
-  adding trajectory, anisotropic and stripe regressions. The two other caps
-  remain INCOMPLETE. Identity controls reproduce exactly; the mechanism and
-  its actual attenuation receipts are explicit. [Adapter findings](runs/shared-adapter-search/FINDINGS.md).
+The strongest final result in this round is a raw-input Softplus96×3 critic with
+LayerNorm after each hidden linear layer and activation β4. Its final minimum
+normalized variance is **.12525**, below **.15**, with zero final passing
+observations. Its other final bounds pass; the full late curve still determines
+the verdict. All five late variance readings are below .15 (.0310–.1253);
+step 1100 also fails sample quality and covariance. This failure reproduces
+exactly in an independent replay. It improves the final variance statistic over the previous raw-SiLU
+near miss (.01891), but supplies no additional behavioral PASS.
 
-This round adds **125 candidate episodes**: 66 rate, 31 adapter and 28
-architecture trials. The primary importer validates **388 episodes across 29
-recipe entries**, including all earlier runs and 38 public-baseline episodes.
-Fourteen entries cover all 19 tests; fifteen are partial. Separate parity replays
-and stopped metadata checks are retained without adding leaderboard points.
-All failures, complete curves, source archives and actual optimizer settings are
-preserved. There are no seed sweeps or relaxed thresholds. EMA is separate.
+This case is demonstrably passable with the lower-rate public preset. These
+negative architecture trials do not show that ParticleGAN cannot solve it.
+They show that this shared high-rate recipe still lacks a passing architecture
+in the recorded search. A future global schedule or update-rule change must
+compete as its own unchanged full-suite recipe, preserving all other successes.
 
-**35 focused tests pass.** Independent review prompted checks that reject
-renamed/no-op duplicate architectures, undeclared optimizer transformations and
-adaptation receipts that contradict their equation. The revised checks pass;
-the primary importer reports no validation errors.
+## This round and retained evidence
 
-## Reproduce and continue
+Three agents, including GPT-6 Sol at max reasoning, ran **127 new candidate
+episodes** with the exact shared-cap6 recipe:
 
-The [leader recipe cards](leading_candidates.json) reproduce both original
-19-case reference profiles. Run the added architecture trials with:
+| Study | Episodes | New sustained live passes | Finding |
+| --- | ---: | ---: | --- |
+| Width/depth, activation, skip and score parameterizations | 35 | 1 | β8 fixes unequal widths; rare cross fails |
+| Local radial features, quadratic experts and multiplicative models | 44 | 0 | Local features do not preserve rare variance at these rates |
+| Ensembles and pointwise normalization | 48 | 0 | LayerNorm improves a final rare statistic, but no sustained pass |
 
-```bash
-python -u -m benchmarks.transfer_suite.shared_discriminator_search \
-  --plan reports/transfer_suite/unadjusted/leading_discriminator_trials.json \
-  --output /tmp/shared-d-witnesses > /tmp/shared-d-witnesses.log 2>&1
-tail -f /tmp/shared-d-witnesses.log
+[Width evidence](runs/shared-width-search/README.md) ·
+[Local-feature evidence](runs/shared-local-density-search/README.md) ·
+[Ensemble evidence](runs/shared-ensemble-search/README.md) ·
+[Normalization evidence](runs/shared-pointnorm-search/README.md).
+
+All complete curves, failures, exact source archives and actual optimizer groups
+are retained. Data, generators, initialization rules, particle counts, batch
+sizes, original budgets, thresholds and auxiliary objectives stay fixed. No seed
+sweeps or longer-budget replacements. EMA remains separate. These are inspected
+development tests, not unseen holdouts.
+
+The primary importer now covers **515 episodes across 29 recipe entries**.
+Fourteen entries cover all 19 tests; fifteen partial entries cannot win. The
+previous 125-run rate/adapter/architecture round remains intact: rate finalists
+scored 15/19 and 13/19, while the generic Adam proposal limiter scored 12/19.
+[Rate study](runs/shared-ratio-search/README.md) ·
+[Adapter negative result](runs/shared-adapter-search/FINDINGS.md).
+
+**88 focused tests pass**, alongside three exact independent replays and nine
+verifier mutation checks. The complete 515-episode import reports no errors.
+
+Independent review hardened replay validation: it requires every numerical
+comparison field and a complete, nonempty source manifest. The primary importer
+also checks the exact source-manifest coverage. Nine mutation checks reject
+missing or changed evidence while accepting timing-only changes.
+[Validation audit](runs/remaining-verifier-audit/README.md).
+
+## Reproduce
+
+The [leader recipe cards](leading_candidates.json) reproduce the original
+19-case reference profiles. The [earlier D plan](leading_discriminator_trials.json)
+reproduces anisotropic and overlap support. Reproduce both the new width pass
+and its rare cross-failure with:
+
+```sh
+python -u -m benchmarks.transfer_suite.shared_width_last_refinement \
+  --plan reports/transfer_suite/unadjusted/leading_width_trials.json \
+  --output /tmp/shared-width-witness > /tmp/shared-width-witness.log 2>&1
+tail -f /tmp/shared-width-witness.log
 ```
-
-That command runs both declared discriminators on both target cases, retaining
-their cross-failures. The strongest next target is preserving rare-component
-variance and making the unequal-width success persist, with this exact shared
-recipe. A new update rule must remain identical across tasks and earn its own
-full-suite row. These inspected development tests do not establish transfer to
-real networks.
 
 [Primary leaderboard](README.md) · [Contributor instructions](../../../benchmarks/transfer_suite/UNADJUSTED_SEARCH.md).

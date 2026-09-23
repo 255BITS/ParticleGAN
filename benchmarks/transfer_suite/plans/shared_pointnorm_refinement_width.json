@@ -1,0 +1,8 @@
+{
+  "purpose": "Predeclared width cross after no rare PASS: the two closest rare failures by final passing suffix, normalized final shortfall, then name; beta2 and raw-skip selected from the frozen six-card rare stage.",
+  "architectures": [
+    "pointnorm_layer_all_softplus96_beta2_l3",
+    "pointnorm_layer_all_softplus96_skip_l3"
+  ],
+  "tasks": ["vector_unequal_width"]
+}

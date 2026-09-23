@@ -1,0 +1,68 @@
+{
+  "verifier_sha256": "d7dab8841a63b75122e9cf9270004441070c710637b43841e9bbfe3a09f90128",
+  "results": [
+    {
+      "case": "valid",
+      "expected_reject": false,
+      "rejected": false,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "empty_checks",
+      "expected_reject": true,
+      "rejected": true,
+      "passed": true,
+      "error": "AssertionError: "
+    },
+    {
+      "case": "missing_result_check",
+      "expected_reject": true,
+      "rejected": true,
+      "passed": true,
+      "error": "AssertionError: "
+    },
+    {
+      "case": "truthy_nonboolean",
+      "expected_reject": true,
+      "rejected": true,
+      "passed": true,
+      "error": "AssertionError: "
+    },
+    {
+      "case": "changed_metric",
+      "expected_reject": true,
+      "rejected": true,
+      "passed": true,
+      "error": "AssertionError: ('control', 'result')"
+    },
+    {
+      "case": "timing_only",
+      "expected_reject": false,
+      "rejected": false,
+      "passed": true,
+      "error": null
+    },
+    {
+      "case": "empty_source_manifest",
+      "expected_reject": true,
+      "rejected": false,
+      "passed": false,
+      "error": null
+    },
+    {
+      "case": "bad_reference_hash",
+      "expected_reject": true,
+      "rejected": true,
+      "passed": true,
+      "error": "AssertionError: "
+    },
+    {
+      "case": "no_replays",
+      "expected_reject": true,
+      "rejected": true,
+      "passed": true,
+      "error": "AssertionError: No replay evidence found"
+    }
+  ]
+}

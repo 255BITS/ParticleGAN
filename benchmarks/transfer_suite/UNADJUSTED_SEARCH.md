@@ -113,3 +113,22 @@ Keep all trials in the submitted indexes, including the failures. The importer
 counts a test once if a declared architecture passes, while retaining the
 original-profile score and links to every attempt. This measures architecture
 support within one recipe, not a universal network architecture.
+
+## Independently replay a discriminator result
+
+The shared-cap6 architecture runner has a reusable exact replay command:
+
+```sh
+python -u -m benchmarks.transfer_suite.replay_shared_architecture \
+  --reference reports/transfer_suite/unadjusted/runs/shared-discriminator-search/cross/episodes/shared_c6__raw_softplus96_l3__vector_overlap.json.gz \
+  --output /tmp/shared-overlap-replay
+```
+
+For another architecture implementation, pass its Python module with
+`--implementation benchmarks.transfer_suite.shared_pointnorm_research`, for
+example. The module must expose the declared constructor and variant card.
+The command uses the canonical host and shared recipe, freezes current source,
+and compares all live/EMA observations, actions, optimizer receipts and verdicts
+against the retained episode. Only timing fields are excluded. It retains
+evidence before failing on any mismatch. Validation replays do not add selection
+points or new architecture trials.

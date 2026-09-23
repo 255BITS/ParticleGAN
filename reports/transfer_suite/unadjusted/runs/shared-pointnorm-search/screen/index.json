@@ -1,0 +1,7330 @@
+{
+  "records": [
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 2,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis_fourier",
+          "fourier_bands": 2,
+          "hidden": 96,
+          "layers": 2,
+          "name": "linear_skip_d96_beta5",
+          "normalization": "none",
+          "skip": "raw_linear",
+          "skip_bias": false,
+          "skip_output_initialization": "zero"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 3,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_layer_first_softplus96_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 96,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "softplus",
+          "softplus_beta": 5.0,
+          "normalization": "layernorm",
+          "normalization_scope": "first",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_layer_first_softplus96_l3",
+        "overrides": {
+          "d_hidden": 96,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_layer_first_softplus96_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 96,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "softplus",
+            "softplus_beta": 5.0,
+            "normalization": "layernorm",
+            "normalization_scope": "first",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_layer_first_softplus96_l3",
+      "reference": "rare_focus/linear_refinement/screen/episodes/linear_skip_d96_beta5__vector_unequal_mass.json.gz",
+      "reference_sha256": "07c505c9e26a18e393a2ca7156e0c1d94bbeb833d99b7d6dabd4134349a4a8bf",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 19201
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.13470022004529647,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.04529977995470352
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.004814455285668373,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.14518554471433162
+          },
+          {
+            "metric": "hq",
+            "value": 0.66943359375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.18056640624999998
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 1.7018993496894836,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.8518993496894837
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.005441455170512199,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.1445585448294878
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.87890625,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.62890625
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.36306487123658454,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.05938905668495578,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12061094331504421
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.019707033410668373,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.13029296658933162
+          },
+          {
+            "metric": "hq",
+            "value": 0.979736328125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12973632812500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.7307111695408821,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.11928883045911787
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.02539314329624176,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.12460685670375823
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.87890625,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.62890625
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.1384520630041758,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_layer_first_softplus96_l3__vector_unequal_mass.json.gz",
+      "uncompressed_sha256": "03eff76e71ed7266fe9f75195878b2713c4d05f780dda615a12bafd8433d2b0e",
+      "live": {
+        "sw1_normalized": 0.13470022004529647,
+        "mean_error": 0.129163920879364,
+        "covariance_error": 0.3998092710971832,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.004814455285668373,
+        "min_mass_ratio": 0.87890625,
+        "hq": 0.66943359375,
+        "component_covariance_error": 1.7018993496894836,
+        "component_covariance_errors": [
+          1.650835633277893,
+          3.5886728763580322,
+          0.6034547686576843,
+          0.964634120464325
+        ],
+        "component_min_eigen_ratio": 0.005441455170512199,
+        "component_mass": [
+          0.547607421875,
+          0.30029296875,
+          0.134521484375,
+          0.017578125
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2243,
+          1230,
+          551,
+          72
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.05938905668495578,
+        "mean_error": 0.03327466547489166,
+        "covariance_error": 0.018980618566274643,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.019707033410668373,
+        "min_mass_ratio": 0.87890625,
+        "hq": 0.979736328125,
+        "component_covariance_error": 0.7307111695408821,
+        "component_covariance_errors": [
+          0.46708956360816956,
+          0.7027276158332825,
+          0.7988372445106506,
+          0.9541902542114258
+        ],
+        "component_min_eigen_ratio": 0.02539314329624176,
+        "component_mass": [
+          0.565185546875,
+          0.28271484375,
+          0.134521484375,
+          0.017578125
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2315,
+          1158,
+          551,
+          72
+        ]
+      },
+      "seconds": 9.899565870990045
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis",
+          "name": "axis_softplus5"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_layer_first_softplus96_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 96,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "softplus",
+          "softplus_beta": 5.0,
+          "normalization": "layernorm",
+          "normalization_scope": "first",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "d_hidden": 96,
+        "d_layers": 3,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_layer_first_softplus96_l3",
+        "overrides": {
+          "d_hidden": 96,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_layer_first_softplus96_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 96,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "softplus",
+            "softplus_beta": 5.0,
+            "normalization": "layernorm",
+            "normalization_scope": "first",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_layer_first_softplus96_l3",
+      "reference": "valid_search/smooth_discriminator/screen/episodes/axis_softplus5__vector_unequal_width.json.gz",
+      "reference_sha256": "612f20a1abaa9d7f73952b50245e4d6a96e00fc013e14166a47330cc3b28867e",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 19201
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.03680603479283098,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.143193965207169
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.01806640625,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.13193359375
+          },
+          {
+            "metric": "hq",
+            "value": 0.985595703125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13559570312500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.5991560369729996,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.2508439630270004
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.05817681550979614,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.09182318449020385
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 10,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 150,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.12243091265360515,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.0299370453963583,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.1500629546036417
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.01806640625,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.13193359375
+          },
+          {
+            "metric": "hq",
+            "value": 0.99609375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14609375000000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.5518200434744358,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.29817995652556417
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.11665995419025421,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.03334004580974578
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 10,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 650,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.04445339441299438,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_layer_first_softplus96_l3__vector_unequal_width.json.gz",
+      "uncompressed_sha256": "76b1eb9fd6025573adb4bfd16e5eaf812c6103fe445084e2506f16a9df9939ce",
+      "live": {
+        "sw1_normalized": 0.03680603479283098,
+        "mean_error": 0.014147120527923107,
+        "covariance_error": 0.012915465980768204,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.01806640625,
+        "min_mass_ratio": 0.95703125,
+        "hq": 0.985595703125,
+        "component_covariance_error": 0.5991560369729996,
+        "component_covariance_errors": [
+          0.6937674283981323,
+          0.7068222761154175,
+          0.6976702809333801,
+          0.29836416244506836
+        ],
+        "component_min_eigen_ratio": 0.05817681550979614,
+        "component_mass": [
+          0.259521484375,
+          0.2392578125,
+          0.24267578125,
+          0.258544921875
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1063,
+          980,
+          994,
+          1059
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.0299370453963583,
+        "mean_error": 0.024704260751605034,
+        "covariance_error": 0.03652344271540642,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.01806640625,
+        "min_mass_ratio": 0.95703125,
+        "hq": 0.99609375,
+        "component_covariance_error": 0.5518200434744358,
+        "component_covariance_errors": [
+          0.6616128087043762,
+          0.6467960476875305,
+          0.65250563621521,
+          0.24636568129062653
+        ],
+        "component_min_eigen_ratio": 0.11665995419025421,
+        "component_mass": [
+          0.259521484375,
+          0.2392578125,
+          0.24267578125,
+          0.258544921875
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1063,
+          980,
+          994,
+          1059
+        ]
+      },
+      "seconds": 8.902924273977987
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 2,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis_fourier",
+          "fourier_bands": 2,
+          "hidden": 96,
+          "layers": 2,
+          "name": "linear_skip_d96_beta5",
+          "normalization": "none",
+          "skip": "raw_linear",
+          "skip_bias": false,
+          "skip_output_initialization": "zero"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 3,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_layer_all_softplus96_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 96,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "softplus",
+          "softplus_beta": 5.0,
+          "normalization": "layernorm",
+          "normalization_scope": "all",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_layer_all_softplus96_l3",
+        "overrides": {
+          "d_hidden": 96,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_layer_all_softplus96_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 96,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "softplus",
+            "softplus_beta": 5.0,
+            "normalization": "layernorm",
+            "normalization_scope": "all",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_layer_all_softplus96_l3",
+      "reference": "rare_focus/linear_refinement/screen/episodes/linear_skip_d96_beta5__vector_unequal_mass.json.gz",
+      "reference_sha256": "07c505c9e26a18e393a2ca7156e0c1d94bbeb833d99b7d6dabd4134349a4a8bf",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 19585
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.07309225471047696,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.10690774528952303
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.049003906548023224,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.10099609345197677
+          },
+          {
+            "metric": "hq",
+            "value": 0.96728515625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.11728515625000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.7533296644687653,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.09667033553123472
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.11904837191104889,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.030951628088951105
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.86669921875,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.61669921875
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.03439069787661234,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.05123560769938323,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12876439230061676
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.004814455285668373,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.14518554471433162
+          },
+          {
+            "metric": "hq",
+            "value": 0.92138671875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.07138671875000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 1.8671240657567978,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -1.0171240657567977
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.25271132588386536,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.10271132588386536
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.86669921875,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.61669921875
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.19943609132486229,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_layer_all_softplus96_l3__vector_unequal_mass.json.gz",
+      "uncompressed_sha256": "b856eb9919faf7d51fe776c7ad39e59ba522f6f1150233b7c8f1e4a7b9699a65",
+      "live": {
+        "sw1_normalized": 0.07309225471047696,
+        "mean_error": 0.07201678305864334,
+        "covariance_error": 0.06264644861221313,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.049003906548023224,
+        "min_mass_ratio": 0.86669921875,
+        "hq": 0.96728515625,
+        "component_covariance_error": 0.7533296644687653,
+        "component_covariance_errors": [
+          0.7304691672325134,
+          0.8664926290512085,
+          0.7278146147727966,
+          0.6885422468185425
+        ],
+        "component_min_eigen_ratio": 0.11904837191104889,
+        "component_mass": [
+          0.503662109375,
+          0.346435546875,
+          0.132568359375,
+          0.017333984375
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2063,
+          1419,
+          543,
+          71
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.05123560769938323,
+        "mean_error": 0.022272802889347076,
+        "covariance_error": 0.04156946390867233,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.004814455285668373,
+        "min_mass_ratio": 0.86669921875,
+        "hq": 0.92138671875,
+        "component_covariance_error": 1.8671240657567978,
+        "component_covariance_errors": [
+          1.9225876331329346,
+          1.4545518159866333,
+          0.8165138363838196,
+          3.2748429775238037
+        ],
+        "component_min_eigen_ratio": 0.25271132588386536,
+        "component_mass": [
+          0.55224609375,
+          0.2978515625,
+          0.132568359375,
+          0.017333984375
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2262,
+          1220,
+          543,
+          71
+        ]
+      },
+      "seconds": 9.952125750947744
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis",
+          "name": "axis_softplus5"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_layer_all_softplus96_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 96,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "softplus",
+          "softplus_beta": 5.0,
+          "normalization": "layernorm",
+          "normalization_scope": "all",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "d_hidden": 96,
+        "d_layers": 3,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_layer_all_softplus96_l3",
+        "overrides": {
+          "d_hidden": 96,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_layer_all_softplus96_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 96,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "softplus",
+            "softplus_beta": 5.0,
+            "normalization": "layernorm",
+            "normalization_scope": "all",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_layer_all_softplus96_l3",
+      "reference": "valid_search/smooth_discriminator/screen/episodes/axis_softplus5__vector_unequal_width.json.gz",
+      "reference_sha256": "612f20a1abaa9d7f73952b50245e4d6a96e00fc013e14166a47330cc3b28867e",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 19585
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.05222802839358449,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.1277719716064155
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.04052734375,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.10947265625
+          },
+          {
+            "metric": "hq",
+            "value": 0.95751953125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.10751953125000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 1.117168813943863,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.26716881394386294
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.0795326828956604,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.0704673171043396
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 6,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 300,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.1568196731455186,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.05806955882530352,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12193044117469648
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.033203125,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.116796875
+          },
+          {
+            "metric": "hq",
+            "value": 0.947998046875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.09799804687500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 3.04170760512352,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -2.19170760512352
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.14306244254112244,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.006937557458877558
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 2,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 700,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.4092500766118367,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_layer_all_softplus96_l3__vector_unequal_width.json.gz",
+      "uncompressed_sha256": "30db065184e25c0df0252554d608f05dcd5bb45d63678105eb74238a35352ea1",
+      "live": {
+        "sw1_normalized": 0.05222802839358449,
+        "mean_error": 0.04121123626828194,
+        "covariance_error": 0.05987442284822464,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.04052734375,
+        "min_mass_ratio": 0.9169921875,
+        "hq": 0.95751953125,
+        "component_covariance_error": 1.117168813943863,
+        "component_covariance_errors": [
+          1.7999681234359741,
+          1.350797176361084,
+          0.6218384504318237,
+          0.6960715055465698
+        ],
+        "component_min_eigen_ratio": 0.0795326828956604,
+        "component_mass": [
+          0.229248046875,
+          0.2724609375,
+          0.26806640625,
+          0.230224609375
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          939,
+          1116,
+          1098,
+          943
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.05806955882530352,
+        "mean_error": 0.05300147458910942,
+        "covariance_error": 0.030753200873732567,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.033203125,
+        "min_mass_ratio": 0.9169921875,
+        "hq": 0.947998046875,
+        "component_covariance_error": 3.04170760512352,
+        "component_covariance_errors": [
+          3.099745273590088,
+          7.806731700897217,
+          0.6308115720748901,
+          0.6295418739318848
+        ],
+        "component_min_eigen_ratio": 0.14306244254112244,
+        "component_mass": [
+          0.229248046875,
+          0.26513671875,
+          0.26806640625,
+          0.237548828125
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          939,
+          1086,
+          1098,
+          973
+        ]
+      },
+      "seconds": 9.735819588997401
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 2,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis_fourier",
+          "fourier_bands": 2,
+          "hidden": 96,
+          "layers": 2,
+          "name": "linear_skip_d96_beta5",
+          "normalization": "none",
+          "skip": "raw_linear",
+          "skip_bias": false,
+          "skip_output_initialization": "zero"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_layer_first_silu128_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 128,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "silu",
+          "softplus_beta": 5.0,
+          "normalization": "layernorm",
+          "normalization_scope": "first",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_layer_first_silu128_l3",
+        "overrides": {
+          "d_hidden": 128,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_layer_first_silu128_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 128,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "silu",
+            "softplus_beta": 5.0,
+            "normalization": "layernorm",
+            "normalization_scope": "first",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_layer_first_silu128_l3",
+      "reference": "rare_focus/linear_refinement/screen/episodes/linear_skip_d96_beta5__vector_unequal_mass.json.gz",
+      "reference_sha256": "07c505c9e26a18e393a2ca7156e0c1d94bbeb833d99b7d6dabd4134349a4a8bf",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 33793
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.13499785714164717,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.04500214285835283
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.10434568673372269,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.04565431326627731
+          },
+          {
+            "metric": "hq",
+            "value": 0.98193359375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13193359375000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.7434712499380112,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.10652875006198881
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.0,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.15
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.0,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "FAIL",
+            "margin": -0.25
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.3333333333333333,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.12598598587576842,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.05401401412423157
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.10434568673372269,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.04565431326627731
+          },
+          {
+            "metric": "hq",
+            "value": 0.98486328125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13486328125000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.7084525972604752,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14154740273952482
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.0,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.15
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.0,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "FAIL",
+            "margin": -0.25
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 1,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 500,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.3333333333333333,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_layer_first_silu128_l3__vector_unequal_mass.json.gz",
+      "uncompressed_sha256": "c65806ce62ac1500bb15b27bd624faeb085057ff567aabfccf6ccfee37f3805e",
+      "live": {
+        "sw1_normalized": 0.13499785714164717,
+        "mean_error": 0.1688619703054428,
+        "covariance_error": 0.3176382780075073,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.10434568673372269,
+        "min_mass_ratio": 0.0,
+        "hq": 0.98193359375,
+        "component_covariance_error": 0.7434712499380112,
+        "component_covariance_errors": [
+          0.552616536617279,
+          0.4803199768066406,
+          0.940948486328125,
+          1.0
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_mass": [
+          0.6474609375,
+          0.306884765625,
+          0.045654296875,
+          0.0
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2652,
+          1257,
+          187,
+          0
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.12598598587576842,
+        "mean_error": 0.14915543794631958,
+        "covariance_error": 0.3221355676651001,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.10434568673372269,
+        "min_mass_ratio": 0.0,
+        "hq": 0.98486328125,
+        "component_covariance_error": 0.7084525972604752,
+        "component_covariance_errors": [
+          0.48854586482048035,
+          0.45420852303504944,
+          0.8910560011863708,
+          1.0
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_mass": [
+          0.6474609375,
+          0.306884765625,
+          0.045654296875,
+          0.0
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2652,
+          1257,
+          187,
+          0
+        ]
+      },
+      "seconds": 9.278113648993894
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis",
+          "name": "axis_softplus5"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_layer_first_silu128_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 128,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "silu",
+          "softplus_beta": 5.0,
+          "normalization": "layernorm",
+          "normalization_scope": "first",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_layer_first_silu128_l3",
+        "overrides": {
+          "d_hidden": 128,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_layer_first_silu128_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 128,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "silu",
+            "softplus_beta": 5.0,
+            "normalization": "layernorm",
+            "normalization_scope": "first",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_layer_first_silu128_l3",
+      "reference": "valid_search/smooth_discriminator/screen/episodes/axis_softplus5__vector_unequal_width.json.gz",
+      "reference_sha256": "612f20a1abaa9d7f73952b50245e4d6a96e00fc013e14166a47330cc3b28867e",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 33793
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.055312370564046975,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12468762943595302
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.0419921875,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1080078125
+          },
+          {
+            "metric": "hq",
+            "value": 0.922119140625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.07211914062500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 1.338215857744217,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.48821585774421694
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.07685693353414536,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.07314306646585464
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.21239840809036706,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.04684787360326459,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.1331521263967354
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.0419921875,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1080078125
+          },
+          {
+            "metric": "hq",
+            "value": 0.92333984375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.07333984375000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 1.3278815522789955,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.47788155227899554
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.03198646008968353,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.11801353991031646
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 1,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 700,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.2697941047303817,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_layer_first_silu128_l3__vector_unequal_width.json.gz",
+      "uncompressed_sha256": "16bd62d3a0296b26a8c032297fe4281701c845c0c5a84423d5c457aa0bd5024e",
+      "live": {
+        "sw1_normalized": 0.055312370564046975,
+        "mean_error": 0.0529993437230587,
+        "covariance_error": 0.08742967247962952,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.0419921875,
+        "min_mass_ratio": 0.83203125,
+        "hq": 0.922119140625,
+        "component_covariance_error": 1.338215857744217,
+        "component_covariance_errors": [
+          3.552243709564209,
+          0.8761361837387085,
+          0.4975672960281372,
+          0.426916241645813
+        ],
+        "component_min_eigen_ratio": 0.07685693353414536,
+        "component_mass": [
+          0.2724609375,
+          0.2080078125,
+          0.2666015625,
+          0.2529296875
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1116,
+          852,
+          1092,
+          1036
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.04684787360326459,
+        "mean_error": 0.04563889652490616,
+        "covariance_error": 0.05936768651008606,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.0419921875,
+        "min_mass_ratio": 0.83203125,
+        "hq": 0.92333984375,
+        "component_covariance_error": 1.3278815522789955,
+        "component_covariance_errors": [
+          3.5291223526000977,
+          0.9052063822746277,
+          0.5523927211761475,
+          0.32480475306510925
+        ],
+        "component_min_eigen_ratio": 0.03198646008968353,
+        "component_mass": [
+          0.2724609375,
+          0.2080078125,
+          0.2666015625,
+          0.2529296875
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1116,
+          852,
+          1092,
+          1036
+        ]
+      },
+      "seconds": 9.246719054994173
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 2,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis_fourier",
+          "fourier_bands": 2,
+          "hidden": 96,
+          "layers": 2,
+          "name": "linear_skip_d96_beta5",
+          "normalization": "none",
+          "skip": "raw_linear",
+          "skip_bias": false,
+          "skip_output_initialization": "zero"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_layer_all_silu128_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 128,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "silu",
+          "softplus_beta": 5.0,
+          "normalization": "layernorm",
+          "normalization_scope": "all",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_layer_all_silu128_l3",
+        "overrides": {
+          "d_hidden": 128,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_layer_all_silu128_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 128,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "silu",
+            "softplus_beta": 5.0,
+            "normalization": "layernorm",
+            "normalization_scope": "all",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_layer_all_silu128_l3",
+      "reference": "rare_focus/linear_refinement/screen/episodes/linear_skip_d96_beta5__vector_unequal_mass.json.gz",
+      "reference_sha256": "07c505c9e26a18e393a2ca7156e0c1d94bbeb833d99b7d6dabd4134349a4a8bf",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 34305
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.07122629092393615,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.10877370907606385
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.025078127160668373,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.12492187283933162
+          },
+          {
+            "metric": "hq",
+            "value": 0.99267578125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14267578125000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.6975328847765923,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.15246711522340772
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.0003052661195397377,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.14969473388046026
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.76904296875,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.51904296875
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.1663274820894003,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.06609616098032806,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.11390383901967194
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.025078127160668373,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.12492187283933162
+          },
+          {
+            "metric": "hq",
+            "value": 0.989501953125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13950195312500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.7166787385940552,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.1333212614059448
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.0014746710658073425,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.14852532893419265
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.76904296875,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.51904296875
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.16502814326021406,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_layer_all_silu128_l3__vector_unequal_mass.json.gz",
+      "uncompressed_sha256": "e5629a7733af866fe6e11671b3055738af7ebb7a1891d8f5ba7352ee5ccabaae",
+      "live": {
+        "sw1_normalized": 0.07122629092393615,
+        "mean_error": 0.06641846895217896,
+        "covariance_error": 0.09889581799507141,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.025078127160668373,
+        "min_mass_ratio": 0.76904296875,
+        "hq": 0.99267578125,
+        "component_covariance_error": 0.6975328847765923,
+        "component_covariance_errors": [
+          0.7163936495780945,
+          0.47847750782966614,
+          0.6615105271339417,
+          0.9337498545646667
+        ],
+        "component_min_eigen_ratio": 0.0003052661195397377,
+        "component_mass": [
+          0.565185546875,
+          0.279541015625,
+          0.139892578125,
+          0.015380859375
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2315,
+          1145,
+          573,
+          63
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.06609616098032806,
+        "mean_error": 0.06282708793878555,
+        "covariance_error": 0.07763311266899109,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.025078127160668373,
+        "min_mass_ratio": 0.76904296875,
+        "hq": 0.989501953125,
+        "component_covariance_error": 0.7166787385940552,
+        "component_covariance_errors": [
+          0.6978203654289246,
+          0.6000496745109558,
+          0.6407532691955566,
+          0.9280916452407837
+        ],
+        "component_min_eigen_ratio": 0.0014746710658073425,
+        "component_mass": [
+          0.565185546875,
+          0.279541015625,
+          0.139892578125,
+          0.015380859375
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2315,
+          1145,
+          573,
+          63
+        ]
+      },
+      "seconds": 12.632386937038973
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis",
+          "name": "axis_softplus5"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_layer_all_silu128_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 128,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "silu",
+          "softplus_beta": 5.0,
+          "normalization": "layernorm",
+          "normalization_scope": "all",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_layer_all_silu128_l3",
+        "overrides": {
+          "d_hidden": 128,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_layer_all_silu128_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 128,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "silu",
+            "softplus_beta": 5.0,
+            "normalization": "layernorm",
+            "normalization_scope": "all",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_layer_all_silu128_l3",
+      "reference": "valid_search/smooth_discriminator/screen/episodes/axis_softplus5__vector_unequal_width.json.gz",
+      "reference_sha256": "612f20a1abaa9d7f73952b50245e4d6a96e00fc013e14166a47330cc3b28867e",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 34305
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.041716258183368216,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.13828374181663178
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.02197265625,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.12802734375
+          },
+          {
+            "metric": "hq",
+            "value": 0.985107421875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13510742187500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.711461141705513,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13853885829448698
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.05109222233295441,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.09890777766704559
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 5,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 600,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.13187703688939412,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.03029680264432486,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.14970319735567514
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.02197265625,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.12802734375
+          },
+          {
+            "metric": "hq",
+            "value": 0.974853515625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12485351562500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.6037497967481613,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.24625020325183866
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.10620895028114319,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.043791049718856806
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 6,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 750,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.05838806629180908,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_layer_all_silu128_l3__vector_unequal_width.json.gz",
+      "uncompressed_sha256": "69bbf16485b52295fda24efe3ba75919ab8f5cbb0913dc8310ce56953d26de6a",
+      "live": {
+        "sw1_normalized": 0.041716258183368216,
+        "mean_error": 0.0351560115814209,
+        "covariance_error": 0.06044182553887367,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.02197265625,
+        "min_mass_ratio": 0.9521484375,
+        "hq": 0.985107421875,
+        "component_covariance_error": 0.711461141705513,
+        "component_covariance_errors": [
+          0.6788420081138611,
+          0.8192718029022217,
+          0.7978909611701965,
+          0.5498397946357727
+        ],
+        "component_min_eigen_ratio": 0.05109222233295441,
+        "component_mass": [
+          0.26806640625,
+          0.238037109375,
+          0.25390625,
+          0.239990234375
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1098,
+          975,
+          1040,
+          983
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.03029680264432486,
+        "mean_error": 0.004242859780788422,
+        "covariance_error": 0.016883322969079018,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.02197265625,
+        "min_mass_ratio": 0.9521484375,
+        "hq": 0.974853515625,
+        "component_covariance_error": 0.6037497967481613,
+        "component_covariance_errors": [
+          0.6480026841163635,
+          0.5882972478866577,
+          0.771699070930481,
+          0.40700018405914307
+        ],
+        "component_min_eigen_ratio": 0.10620895028114319,
+        "component_mass": [
+          0.26806640625,
+          0.238037109375,
+          0.25390625,
+          0.239990234375
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1098,
+          975,
+          1040,
+          983
+        ]
+      },
+      "seconds": 11.202393192914315
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 2,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis_fourier",
+          "fourier_bands": 2,
+          "hidden": 96,
+          "layers": 2,
+          "name": "linear_skip_d96_beta5",
+          "normalization": "none",
+          "skip": "raw_linear",
+          "skip_bias": false,
+          "skip_output_initialization": "zero"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_rms_all_silu128_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 128,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "silu",
+          "softplus_beta": 5.0,
+          "normalization": "rmsnorm",
+          "normalization_scope": "all",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_rms_all_silu128_l3",
+        "overrides": {
+          "d_hidden": 128,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_rms_all_silu128_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 128,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "silu",
+            "softplus_beta": 5.0,
+            "normalization": "rmsnorm",
+            "normalization_scope": "all",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_rms_all_silu128_l3",
+      "reference": "rare_focus/linear_refinement/screen/episodes/linear_skip_d96_beta5__vector_unequal_mass.json.gz",
+      "reference_sha256": "07c505c9e26a18e393a2ca7156e0c1d94bbeb833d99b7d6dabd4134349a4a8bf",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 33921
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.09732788104341109,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.08267211895658891
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.045585937798023224,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.10441406220197677
+          },
+          {
+            "metric": "hq",
+            "value": 0.852294921875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.002294921875000022
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 4.563415005803108,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -3.713415005803108
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 2.9802322387695312e-08,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.1499999701976776
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.45166015625,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.20166015625
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.49999996688630843,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.15156362595348727,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.028436374046512725
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.054619140923023224,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.09538085907697677
+          },
+          {
+            "metric": "hq",
+            "value": 0.7353515625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.11464843749999998
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 3.5672630220651627,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -2.7172630220651626
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.0,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.15
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.0,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "FAIL",
+            "margin": -0.25
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.6891467524509803,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_rms_all_silu128_l3__vector_unequal_mass.json.gz",
+      "uncompressed_sha256": "c36b7704dfda7359ca1d97282a98f3ce148e91b9ae12eca9205562f295392be5",
+      "live": {
+        "sw1_normalized": 0.09732788104341109,
+        "mean_error": 0.08599452674388885,
+        "covariance_error": 0.15890637040138245,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.045585937798023224,
+        "min_mass_ratio": 0.45166015625,
+        "hq": 0.852294921875,
+        "component_covariance_error": 4.563415005803108,
+        "component_covariance_errors": [
+          3.374077558517456,
+          0.9517946839332581,
+          9.907333374023438,
+          4.020454406738281
+        ],
+        "component_min_eigen_ratio": 2.9802322387695312e-08,
+        "component_mass": [
+          0.590087890625,
+          0.265380859375,
+          0.135498046875,
+          0.009033203125
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2417,
+          1087,
+          555,
+          37
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.15156362595348727,
+        "mean_error": 0.081515833735466,
+        "covariance_error": 0.3686767816543579,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.054619140923023224,
+        "min_mass_ratio": 0.0,
+        "hq": 0.7353515625,
+        "component_covariance_error": 3.5672630220651627,
+        "component_covariance_errors": [
+          4.600283145904541,
+          0.7258487343788147,
+          7.942920207977295,
+          1.0
+        ],
+        "component_min_eigen_ratio": 0.0,
+        "component_mass": [
+          0.594970703125,
+          0.265380859375,
+          0.1396484375,
+          0.0
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2437,
+          1087,
+          572,
+          0
+        ]
+      },
+      "seconds": 13.760456918971613
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis",
+          "name": "axis_softplus5"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_rms_all_silu128_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 128,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "silu",
+          "softplus_beta": 5.0,
+          "normalization": "rmsnorm",
+          "normalization_scope": "all",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_rms_all_silu128_l3",
+        "overrides": {
+          "d_hidden": 128,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_rms_all_silu128_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 128,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "silu",
+            "softplus_beta": 5.0,
+            "normalization": "rmsnorm",
+            "normalization_scope": "all",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_rms_all_silu128_l3",
+      "reference": "valid_search/smooth_discriminator/screen/episodes/axis_softplus5__vector_unequal_width.json.gz",
+      "reference_sha256": "612f20a1abaa9d7f73952b50245e4d6a96e00fc013e14166a47330cc3b28867e",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 33921
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.03343719532982794,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.14656280467017205
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.010498046875,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.139501953125
+          },
+          {
+            "metric": "hq",
+            "value": 0.97119140625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12119140625000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.8031956404447556,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.046804359555244424
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.08552932739257812,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.06447067260742187
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 2,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 150,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.08596089680989583,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.034770050536711,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.145229949463289
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.014404296875,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.135595703125
+          },
+          {
+            "metric": "hq",
+            "value": 0.9521484375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.10214843750000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 1.8156109303236008,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "FAIL",
+            "margin": -0.9656109303236008
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.2887025475502014,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.13870254755020142
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.22720257184084724,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_rms_all_silu128_l3__vector_unequal_width.json.gz",
+      "uncompressed_sha256": "2a66a6a74764fbdb269a73bda4ea688a2f52f56a8a5fccaa760254dce829d8bd",
+      "live": {
+        "sw1_normalized": 0.03343719532982794,
+        "mean_error": 0.027152404189109802,
+        "covariance_error": 0.03490729629993439,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.010498046875,
+        "min_mass_ratio": 0.9609375,
+        "hq": 0.97119140625,
+        "component_covariance_error": 0.8031956404447556,
+        "component_covariance_errors": [
+          0.7468385696411133,
+          1.1477099657058716,
+          0.6611149311065674,
+          0.65711909532547
+        ],
+        "component_min_eigen_ratio": 0.08552932739257812,
+        "component_mass": [
+          0.2548828125,
+          0.240234375,
+          0.255615234375,
+          0.249267578125
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1044,
+          984,
+          1047,
+          1021
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.034770050536711,
+        "mean_error": 0.011948755942285061,
+        "covariance_error": 0.05826513096690178,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.014404296875,
+        "min_mass_ratio": 0.9453125,
+        "hq": 0.9521484375,
+        "component_covariance_error": 1.8156109303236008,
+        "component_covariance_errors": [
+          4.494397163391113,
+          1.9147547483444214,
+          0.5215177536010742,
+          0.3317740559577942
+        ],
+        "component_min_eigen_ratio": 0.2887025475502014,
+        "component_mass": [
+          0.2587890625,
+          0.236328125,
+          0.249267578125,
+          0.255615234375
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1060,
+          968,
+          1021,
+          1047
+        ]
+      },
+      "seconds": 13.844247385975905
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 2,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis_fourier",
+          "fourier_bands": 2,
+          "hidden": 96,
+          "layers": 2,
+          "name": "linear_skip_d96_beta5",
+          "normalization": "none",
+          "skip": "raw_linear",
+          "skip_bias": false,
+          "skip_output_initialization": "zero"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_weight_all_silu128_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 128,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "silu",
+          "softplus_beta": 5.0,
+          "normalization": "weightnorm",
+          "normalization_scope": "all",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_weight_all_silu128_l3",
+        "overrides": {
+          "d_hidden": 128,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_weight_all_silu128_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 128,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "silu",
+            "softplus_beta": 5.0,
+            "normalization": "weightnorm",
+            "normalization_scope": "all",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_weight_all_silu128_l3",
+      "reference": "rare_focus/linear_refinement/screen/episodes/linear_skip_d96_beta5__vector_unequal_mass.json.gz",
+      "reference_sha256": "07c505c9e26a18e393a2ca7156e0c1d94bbeb833d99b7d6dabd4134349a4a8bf",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 33922
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.09830473647924137,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.08169526352075862
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.022773435339331627,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.12722656466066837
+          },
+          {
+            "metric": "hq",
+            "value": 0.96630859375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.11630859375000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.8294172286987305,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.02058277130126951
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.017729852348566055,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.13227014765143394
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.8620042204856873,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.6120042204856873
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 1,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 600,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.1469668307238155,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.057580704449861346,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12241929555013864
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.022773435339331627,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.12722656466066837
+          },
+          {
+            "metric": "hq",
+            "value": 0.994873046875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14487304687500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.7049058899283409,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14509411007165907
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.024685198441147804,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.1253148015588522
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.8620042204856873,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.6120042204856873
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 1,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 700,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.13923866839872465,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_weight_all_silu128_l3__vector_unequal_mass.json.gz",
+      "uncompressed_sha256": "64ae5a17a97cbe2ba07576d5e2c6420a79bd180188a216fed4ef93d0995734b8",
+      "live": {
+        "sw1_normalized": 0.09830473647924137,
+        "mean_error": 0.056615199893713,
+        "covariance_error": 0.24023780226707458,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.022773435339331627,
+        "min_mass_ratio": 0.8620042204856873,
+        "hq": 0.96630859375,
+        "component_covariance_error": 0.8294172286987305,
+        "component_covariance_errors": [
+          0.6113646030426025,
+          0.9021612405776978,
+          0.9341821074485779,
+          0.8699609637260437
+        ],
+        "component_min_eigen_ratio": 0.017729852348566055,
+        "component_mass": [
+          0.563232421875,
+          0.295166015625,
+          0.112060546875,
+          0.029541015625
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2307,
+          1209,
+          459,
+          121
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.057580704449861346,
+        "mean_error": 0.01085809525102377,
+        "covariance_error": 0.08811163902282715,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.022773435339331627,
+        "min_mass_ratio": 0.8620042204856873,
+        "hq": 0.994873046875,
+        "component_covariance_error": 0.7049058899283409,
+        "component_covariance_errors": [
+          0.7829951643943787,
+          0.9324766397476196,
+          0.6226955652236938,
+          0.4814561903476715
+        ],
+        "component_min_eigen_ratio": 0.024685198441147804,
+        "component_mass": [
+          0.563232421875,
+          0.295166015625,
+          0.112060546875,
+          0.029541015625
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2307,
+          1209,
+          459,
+          121
+        ]
+      },
+      "seconds": 9.857656117994338
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis",
+          "name": "axis_softplus5"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "name": "pointnorm_weight_all_silu128_l3",
+          "implementation": "shared_pointnorm_v1",
+          "width": 128,
+          "layers": 3,
+          "fourier": 0,
+          "activation": "silu",
+          "softplus_beta": 5.0,
+          "normalization": "weightnorm",
+          "normalization_scope": "all",
+          "layernorm_eps": 1e-05,
+          "rmsnorm_eps": 1e-05,
+          "output_scale": 1.0
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "pointnorm_weight_all_silu128_l3",
+        "overrides": {
+          "d_hidden": 128,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "pointnorm_weight_all_silu128_l3",
+            "implementation": "shared_pointnorm_v1",
+            "width": 128,
+            "layers": 3,
+            "fourier": 0,
+            "activation": "silu",
+            "softplus_beta": 5.0,
+            "normalization": "weightnorm",
+            "normalization_scope": "all",
+            "layernorm_eps": 1e-05,
+            "rmsnorm_eps": 1e-05,
+            "output_scale": 1.0
+          }
+        }
+      },
+      "architecture": "pointnorm_weight_all_silu128_l3",
+      "reference": "valid_search/smooth_discriminator/screen/episodes/axis_softplus5__vector_unequal_width.json.gz",
+      "reference_sha256": "612f20a1abaa9d7f73952b50245e4d6a96e00fc013e14166a47330cc3b28867e",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 33922
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.04677124877573416,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.13322875122426583
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.011962890625,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.138037109375
+          },
+          {
+            "metric": "hq",
+            "value": 0.9814453125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13144531250000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.5491408780217171,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.3008591219782829
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.08794840425252914,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.06205159574747085
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 5,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 500,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0827354609966278,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.048795263347848776,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.1312047366521512
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.012451171875,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.137548828125
+          },
+          {
+            "metric": "hq",
+            "value": 0.96044921875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.11044921875000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.8481782823801041,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.0018217176198959129
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.14688634872436523,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "FAIL",
+            "margin": -0.00311365127563476
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 1,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 650,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.00415153503417968,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__pointnorm_weight_all_silu128_l3__vector_unequal_width.json.gz",
+      "uncompressed_sha256": "6e582650143d8ec5ee307cfc2a47d28a1cb34ad9292acf8ac9dbef70d2bac04c",
+      "live": {
+        "sw1_normalized": 0.04677124877573416,
+        "mean_error": 0.04751783236861229,
+        "covariance_error": 0.013280598446726799,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.011962890625,
+        "min_mass_ratio": 0.98046875,
+        "hq": 0.9814453125,
+        "component_covariance_error": 0.5491408780217171,
+        "component_covariance_errors": [
+          0.6382282376289368,
+          0.8419505953788757,
+          0.5359626412391663,
+          0.18042203783988953
+        ],
+        "component_min_eigen_ratio": 0.08794840425252914,
+        "component_mass": [
+          0.246826171875,
+          0.261962890625,
+          0.24609375,
+          0.2451171875
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1011,
+          1073,
+          1008,
+          1004
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.048795263347848776,
+        "mean_error": 0.04880366101861,
+        "covariance_error": 0.023740144446492195,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.012451171875,
+        "min_mass_ratio": 0.962890625,
+        "hq": 0.96044921875,
+        "component_covariance_error": 0.8481782823801041,
+        "component_covariance_errors": [
+          1.5313299894332886,
+          0.8042759299278259,
+          0.668846845626831,
+          0.3882603645324707
+        ],
+        "component_min_eigen_ratio": 0.14688634872436523,
+        "component_mass": [
+          0.246826171875,
+          0.261962890625,
+          0.24072265625,
+          0.25048828125
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          1011,
+          1073,
+          986,
+          1026
+        ]
+      },
+      "seconds": 10.272921805037186
+    }
+  ]
+}

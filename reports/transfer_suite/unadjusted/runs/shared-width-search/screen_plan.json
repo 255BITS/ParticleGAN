@@ -1,0 +1,24 @@
+{
+  "architectures": [
+    "width_raw_silu64_l3",
+    "width_raw_silu96_l3",
+    "width_raw_silu160_l3",
+    "width_raw_silu192_l3",
+    "width_raw_silu128_l2",
+    "width_raw_silu128_l4",
+    "width_raw_silu96_l2",
+    "width_raw_silu96_l4",
+    "width_raw_silu160_l2",
+    "width_raw_silu160_l4",
+    "width_raw_silu192_l2",
+    "width_raw_silu128_l3_linear_skip",
+    "width_residual_raw_silu128_l3",
+    "width_raw_softplus128_l3",
+    "width_raw_softplus2_128_l3",
+    "width_raw_softplus128_l4"
+  ],
+  "purpose": "Sixteen frozen D-only cards target unequal-width late stability. Exact shared_c6 recipe, original G/data/init rules/resources/budgets/gates, seed0. No per-task optimizer changes.",
+  "tasks": [
+    "vector_unequal_width"
+  ]
+}

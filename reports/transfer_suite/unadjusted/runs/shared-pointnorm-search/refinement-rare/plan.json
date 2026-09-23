@@ -1,0 +1,14 @@
+{
+  "purpose": "Frozen six-card architecture refinement around the LayerNorm-all Softplus rare-component lead, using identical shared_c6 recipe; unequal-mass first, width only for rare PASS cards or the two closest failures.",
+  "architectures": [
+    "pointnorm_layer_all_softplus64_l3",
+    "pointnorm_layer_all_softplus128_l3",
+    "pointnorm_layer_all_softplus160_l3",
+    "pointnorm_layer_all_softplus96_beta2_l3",
+    "pointnorm_layer_all_softplus96_beta10_l3",
+    "pointnorm_layer_all_softplus96_skip_l3"
+  ],
+  "tasks": [
+    "vector_unequal_mass"
+  ]
+}

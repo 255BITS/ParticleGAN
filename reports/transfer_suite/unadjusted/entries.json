@@ -63,7 +63,18 @@
       "reports/transfer_suite/unadjusted/runs/completion-1/index.json",
       "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/screen/index.json",
       "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/cross/index.json",
-      "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/completion/index.json"
+      "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/completion/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-local-density-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-local-density-search/refinement/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-width-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-width-search/refinement/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-width-search/last_refinement/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-width-search/cross/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-ensemble-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/refinement-rare/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/refinement-width/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-pointnorm-search/beta-interpolation-rare/index.json"
     ]
   },
   {

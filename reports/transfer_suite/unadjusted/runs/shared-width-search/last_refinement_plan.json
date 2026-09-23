@@ -1,0 +1,14 @@
+{
+  "architectures": [
+    "width_last_softplus3_128_l3",
+    "width_last_softplus4_128_l3",
+    "width_last_softplus6_128_l3",
+    "width_last_softplus8_128_l3",
+    "width_last_silu160_l2_linear_skip_head05",
+    "width_last_silu160_l2_linear_skip_head2"
+  ],
+  "purpose": "Explicit final6-card adaptive D-only followup after28 negative width trials. Exact shared_c6, original setup and gates; rare cross only for sustained width PASS.",
+  "tasks": [
+    "vector_unequal_width"
+  ]
+}

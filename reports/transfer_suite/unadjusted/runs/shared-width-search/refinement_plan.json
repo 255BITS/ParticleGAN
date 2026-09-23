@@ -1,0 +1,20 @@
+{
+  "architectures": [
+    "width_ref_softplus128_l3_head025",
+    "width_ref_softplus128_l3_head05",
+    "width_ref_softplus128_l3_head2",
+    "width_ref_softplus1_128_l3",
+    "width_ref_softplus10_128_l3",
+    "width_ref_softplus128_l3_linear_skip",
+    "width_ref_softplus128_l3_residual",
+    "width_ref_silu160_l2_head025",
+    "width_ref_silu160_l2_head05",
+    "width_ref_silu160_l2_head2",
+    "width_ref_silu160_l2_linear_skip",
+    "width_ref_silu160_l2_residual"
+  ],
+  "purpose": "Adaptive12-card head/skip refinement after16 negative width cards; exact shared_c6 and original allother setup/gates. No more candidates after this batch; every width winner crosses to rare unchanged.",
+  "tasks": [
+    "vector_unequal_width"
+  ]
+}

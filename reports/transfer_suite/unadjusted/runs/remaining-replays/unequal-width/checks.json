@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "recipe": true,
+    "candidate": true,
+    "original_spec": true,
+    "spec": true,
+    "architecture": true,
+    "discriminator_variant": true,
+    "applied": true,
+    "result": true,
+    "verdict": true,
+    "ema_verdict": true
+  },
+  "architecture": "width_last_softplus8_128_l3",
+  "task": "vector_unequal_width",
+  "uncompressed_sha256": "bdee41b206a6f675e24a6aaa39da33b333374b95ef25ae6703cb2280de4ce613"
+}

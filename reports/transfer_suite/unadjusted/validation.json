@@ -1,9 +1,9 @@
 {
   "entries": 29,
-  "episodes": 388,
-  "discriminator_variants": 28,
+  "episodes": 515,
+  "discriminator_variants": 155,
   "live_counts": {
-    "shared_c6": 17,
+    "shared_c6": 18,
     "lr00425_prior2": 15,
     "ratio_g34_d68_p85": 15,
     "equal_lr_00425": 14,

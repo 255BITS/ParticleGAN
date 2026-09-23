@@ -6,7 +6,7 @@
 
 | Candidate | Required | Data | Images | Live total | Reference D profile | Attempted | Overall |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| shared c6 (`shared_c6`) | 9/9 | 4/6 | 4/4 | **17/19** | 15/19 | 19/19 | **FAIL** |
+| shared c6 (`shared_c6`) | 9/9 | 5/6 | 4/4 | **18/19** | 15/19 | 19/19 | **FAIL** |
 | lr00425 prior2 (`lr00425_prior2`) | 8/9 | 3/6 | 4/4 | **15/19** | 15/19 | 19/19 | **FAIL** |
 | Ratio G0.0034 D0.0068 P0.0085 (`ratio_g34_d68_p85`) | 8/9 | 3/6 | 4/4 | **15/19** | 15/19 | 19/19 | **FAIL** |
 | equal lr 00425 (`equal_lr_00425`) | 8/9 | 3/6 | 3/4 | **14/19** | 14/19 | 19/19 | **FAIL** |
@@ -99,8 +99,8 @@ All candidate metrics and EMA profiles remain in [leaderboard.json](leaderboard.
 | mid_scale_identity | [PASS](runs/completion-1/episodes/shared_c6__mid_scale_identity.json.gz) | [PASS](runs/round0-2/episodes/lr00425_prior2__mid_scale_identity.json.gz) | [PASS](runs/shared-ratio-search/completion/episodes/ratio_g34_d68_p85__mid_scale_identity.json.gz) | [FAIL](../default_comparison/proposed/episodes/proposed__mid_scale_identity.json.gz) | [FAIL](../default_comparison/current/episodes/current__mid_scale_identity.json.gz) |
 | mode_hold | [PASS](runs/round1-0/episodes/shared_c6__mode_hold.json.gz) | [FAIL](runs/round0-2/episodes/lr00425_prior2__mode_hold.json.gz) | [FAIL](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__mode_hold.json.gz) | [FAIL](../default_comparison/proposed/episodes/proposed__mode_hold.json.gz) | [FAIL](../default_comparison/current/episodes/current__mode_hold.json.gz) |
 | vector_two_broad | [PASS](runs/completion-1/episodes/shared_c6__vector_two_broad.json.gz) | [PASS](runs/round0-2/episodes/lr00425_prior2__vector_two_broad.json.gz) | [PASS](runs/shared-ratio-search/completion/episodes/ratio_g34_d68_p85__vector_two_broad.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_two_broad.json.gz) | [PASS](../default_comparison/current/episodes/current__vector_two_broad.json.gz) |
-| vector_unequal_mass | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__raw_silu128_l3__vector_unequal_mass.json.gz) | [FAIL](runs/round0-2/episodes/lr00425_prior2__vector_unequal_mass.json.gz) | [FAIL](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__vector_unequal_mass.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_unequal_mass.json.gz) | [FAIL](../default_comparison/current/episodes/current__vector_unequal_mass.json.gz) |
-| vector_unequal_width | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__raw_silu128_l3__vector_unequal_width.json.gz) | [FAIL](runs/round0-2/episodes/lr00425_prior2__vector_unequal_width.json.gz) | [FAIL](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__vector_unequal_width.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_unequal_width.json.gz) | [FAIL](../default_comparison/current/episodes/current__vector_unequal_width.json.gz) |
+| vector_unequal_mass | [FAIL](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta4_l3__vector_unequal_mass.json.gz) | [FAIL](runs/round0-2/episodes/lr00425_prior2__vector_unequal_mass.json.gz) | [FAIL](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__vector_unequal_mass.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_unequal_mass.json.gz) | [FAIL](../default_comparison/current/episodes/current__vector_unequal_mass.json.gz) |
+| vector_unequal_width | [PASS](runs/shared-width-search/last_refinement/episodes/shared_c6__width_last_softplus8_128_l3__vector_unequal_width.json.gz) | [FAIL](runs/round0-2/episodes/lr00425_prior2__vector_unequal_width.json.gz) | [FAIL](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__vector_unequal_width.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_unequal_width.json.gz) | [FAIL](../default_comparison/current/episodes/current__vector_unequal_width.json.gz) |
 | vector_anisotropic | [PASS](runs/shared-discriminator-search/cross/episodes/shared_c6__additive_raw_fourier64_l2__vector_anisotropic.json.gz) | [PASS](runs/round0-2/episodes/lr00425_prior2__vector_anisotropic.json.gz) | [FAIL](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__vector_anisotropic.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_anisotropic.json.gz) | [PASS](../default_comparison/current/episodes/current__vector_anisotropic.json.gz) |
 | vector_overlap | [PASS](runs/shared-discriminator-search/cross/episodes/shared_c6__raw_softplus96_l3__vector_overlap.json.gz) | [FAIL](runs/round0-2/episodes/lr00425_prior2__vector_overlap.json.gz) | [PASS](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__vector_overlap.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_overlap.json.gz) | [FAIL](../default_comparison/current/episodes/current__vector_overlap.json.gz) |
 | vector_spiral | [PASS](runs/completion-1/episodes/shared_c6__vector_spiral.json.gz) | [PASS](runs/round0-2/episodes/lr00425_prior2__vector_spiral.json.gz) | [PASS](runs/shared-ratio-search/completion/episodes/ratio_g34_d68_p85__vector_spiral.json.gz) | [PASS](../default_comparison/proposed/episodes/proposed__vector_spiral.json.gz) | [PASS](../default_comparison/current/episodes/current__vector_spiral.json.gz) |
@@ -109,14 +109,26 @@ All candidate metrics and EMA profiles remain in [leaderboard.json](leaderboard.
 | img_blobs4 | [PASS](runs/completion-1/episodes/shared_c6__img_blobs4.json.gz) | [PASS](runs/round0-2/episodes/lr00425_prior2__img_blobs4.json.gz) | [PASS](runs/shared-ratio-search/screen/episodes/ratio_g34_d68_p85__img_blobs4.json.gz) | [FAIL](../default_comparison/proposed/episodes/proposed__img_blobs4.json.gz) | [FAIL](../default_comparison/current/episodes/current__img_blobs4.json.gz) |
 | img_intensity2 | [PASS](runs/completion-1/episodes/shared_c6__img_intensity2.json.gz) | [PASS](runs/round0-2/episodes/lr00425_prior2__img_intensity2.json.gz) | [PASS](runs/shared-ratio-search/completion/episodes/ratio_g34_d68_p85__img_intensity2.json.gz) | [FAIL](../default_comparison/proposed/episodes/proposed__img_intensity2.json.gz) | [FAIL](../default_comparison/current/episodes/current__img_intensity2.json.gz) |
 
+## Selected data architectures: `shared_c6`
+
+These choices share the exact recipe above. The passing streak counts consecutive observations ending at the final checkpoint; at least five are required. Every alternative and failure remains in the trial table below.
+
+| Test | Discriminator | Live | Final passing streak | EMA |
+| --- | --- | --- | ---: | --- |
+| vector_two_broad | original architecture | [PASS](runs/completion-1/episodes/shared_c6__vector_two_broad.json.gz) | 20/24 | PASS |
+| vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta4_l3__vector_unequal_mass.json.gz) | 0/24 | FAIL |
+| vector_unequal_width | width_last_softplus8_128_l3 | [PASS](runs/shared-width-search/last_refinement/episodes/shared_c6__width_last_softplus8_128_l3__vector_unequal_width.json.gz) | 5/24 | PASS |
+| vector_anisotropic | additive_raw_fourier64_l2 | [PASS](runs/shared-discriminator-search/cross/episodes/shared_c6__additive_raw_fourier64_l2__vector_anisotropic.json.gz) | 8/24 | PASS |
+| vector_overlap | raw_softplus96_l3 | [PASS](runs/shared-discriminator-search/cross/episodes/shared_c6__raw_softplus96_l3__vector_overlap.json.gz) | 10/24 | PASS |
+| vector_spiral | original architecture | [PASS](runs/completion-1/episodes/shared_c6__vector_spiral.json.gz) | 23/24 | PASS |
+
 ## Remaining failures in the leading complete recipes
 
 The final passing streak must reach five observations. A good last checkpoint alone does not pass.
 
 | Recipe | Test | Final failing metrics (value; required bound) | Final passing streak |
 | --- | --- | --- | ---: |
-| shared_c6 | [vector_unequal_mass](runs/shared-discriminator-search/screen/episodes/shared_c6__raw_silu128_l3__vector_unequal_mass.json.gz) | component_min_eigen_ratio: 0.018911; needs >= 0.15 | 0/5 |
-| shared_c6 | [vector_unequal_width](runs/shared-discriminator-search/screen/episodes/shared_c6__raw_silu128_l3__vector_unequal_width.json.gz) | Final metrics pass | 1/5 |
+| shared_c6 | [vector_unequal_mass](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta4_l3__vector_unequal_mass.json.gz) | component_min_eigen_ratio: 0.12525; needs >= 0.15 | 0/5 |
 | lr00425_prior2 | [mode_hold](runs/round0-2/episodes/lr00425_prior2__mode_hold.json.gz) | modes: 7; needs >= 8 | 0/5 |
 | lr00425_prior2 | [vector_unequal_mass](runs/round0-2/episodes/lr00425_prior2__vector_unequal_mass.json.gz) | component_min_eigen_ratio: 5.0555e-05; needs >= 0.15 | 0/5 |
 | lr00425_prior2 | [vector_unequal_width](runs/round0-2/episodes/lr00425_prior2__vector_unequal_width.json.gz) | component_min_eigen_ratio: 0.0048636; needs >= 0.15 | 0/5 |
@@ -130,6 +142,8 @@ The final passing streak must reach five observations. A good last checkpoint al
 
 Architecture support is within a single unchanged recipe. All trials are shown, including failures; it does not mean one universal discriminator works everywhere.
 
+<details><summary>All 155 architecture trials, including failures</summary>
+
 | Recipe | Test | Discriminator | Live |
 | --- | --- | --- | --- |
 | shared_c6 | vector_unequal_mass | raw_softplus96_l3 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__raw_softplus96_l3__vector_unequal_mass.json.gz) |
@@ -140,6 +154,57 @@ Architecture support is within a single unchanged recipe. All trials are shown, 
 | shared_c6 | vector_unequal_mass | residual_lowfreq_softplus96_l3 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__residual_lowfreq_softplus96_l3__vector_unequal_mass.json.gz) |
 | shared_c6 | vector_unequal_mass | halfscore_fourier_skip96_l2 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__halfscore_fourier_skip96_l2__vector_unequal_mass.json.gz) |
 | shared_c6 | vector_unequal_mass | additive_raw_fourier64_l2 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__additive_raw_fourier64_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_rbf64_direct | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_rbf64_direct__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_rbf128_direct | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_rbf128_direct__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_rbf256_direct | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_rbf256_direct__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_rbf128_adaptive | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_rbf128_adaptive__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_cauchy128_direct | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_cauchy128_direct__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_rbf128_softplus64 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_rbf128_softplus64__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_quad16_width1 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_quad16_width1__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_quad32_width1 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_quad32_width1__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_quad32_width05 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_quad32_width05__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_quad32_adaptive | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_quad32_adaptive__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_product_silu64_l2 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_product_silu64_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_product_silu96_l2 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_product_silu96_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_product_silu128_l2 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_product_silu128_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_squared_silu64_l3 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_squared_silu64_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_squared_silu96_l3 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_squared_silu96_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | local_product_softplus96_l2 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_product_softplus96_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | curvature_raw_silu128_l3_q32_w1p0 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_silu128_l3_q32_w1p0__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | curvature_raw_silu128_l3_q64_w1p0 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_silu128_l3_q64_w1p0__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | curvature_raw_silu128_l3_q32_w0p5 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_silu128_l3_q32_w0p5__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | curvature_raw_softplus96_l3_q32_w1p0 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_softplus96_l3_q32_w1p0__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | curvature_raw_softplus96_l3_q64_w1p0 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_softplus96_l3_q64_w1p0__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | curvature_raw_softplus96_l3_q32_w0p5 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_softplus96_l3_q32_w0p5__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | width_last_softplus8_128_l3 | [FAIL](runs/shared-width-search/cross/episodes/shared_c6__width_last_softplus8_128_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble2_equal_softplus64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_equal_softplus64_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble2_multiscale_softplus64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_multiscale_softplus64_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble3_multiscale_softplus64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble3_multiscale_softplus64_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble3_multiscale_silu64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble3_multiscale_silu64_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble2_multiscale_silu64_l3 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_multiscale_silu64_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble3_broad_softplus48_l3 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble3_broad_softplus48_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble4_broad_silu48_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble4_broad_silu48_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble2_highscale_softplus96_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_highscale_softplus96_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble2_mixed64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_mixed64_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble2_multiscale_halfscore64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_multiscale_halfscore64_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble2_multiscale_fullscore64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_multiscale_fullscore64_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | ensemble2_multiscale_spectrum64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_multiscale_spectrum64_l2__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_first_softplus96_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_layer_first_softplus96_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus96_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_layer_all_softplus96_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_first_silu128_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_layer_first_silu128_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_silu128_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_layer_all_silu128_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_rms_all_silu128_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_rms_all_silu128_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_weight_all_silu128_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_weight_all_silu128_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus64_l3 | [FAIL](runs/shared-pointnorm-search/refinement-rare/episodes/shared_c6__pointnorm_layer_all_softplus64_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus128_l3 | [FAIL](runs/shared-pointnorm-search/refinement-rare/episodes/shared_c6__pointnorm_layer_all_softplus128_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus160_l3 | [FAIL](runs/shared-pointnorm-search/refinement-rare/episodes/shared_c6__pointnorm_layer_all_softplus160_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta2_l3 | [FAIL](runs/shared-pointnorm-search/refinement-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta2_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta10_l3 | [FAIL](runs/shared-pointnorm-search/refinement-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta10_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus96_skip_l3 | [FAIL](runs/shared-pointnorm-search/refinement-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_skip_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta3_l3 | [FAIL](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta3_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta4_l3 | [FAIL](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta4_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta6_l3 | [FAIL](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta6_l3__vector_unequal_mass.json.gz) |
+| shared_c6 | vector_unequal_mass | pointnorm_layer_all_softplus96_beta8_l3 | [FAIL](runs/shared-pointnorm-search/beta-interpolation-rare/episodes/shared_c6__pointnorm_layer_all_softplus96_beta8_l3__vector_unequal_mass.json.gz) |
 | shared_c6 | vector_unequal_width | raw_softplus96_l3 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__raw_softplus96_l3__vector_unequal_width.json.gz) |
 | shared_c6 | vector_unequal_width | raw_silu128_l3 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__raw_silu128_l3__vector_unequal_width.json.gz) |
 | shared_c6 | vector_unequal_width | quadratic_softplus96_l2 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__quadratic_softplus96_l2__vector_unequal_width.json.gz) |
@@ -148,6 +213,82 @@ Architecture support is within a single unchanged recipe. All trials are shown, 
 | shared_c6 | vector_unequal_width | residual_lowfreq_softplus96_l3 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__residual_lowfreq_softplus96_l3__vector_unequal_width.json.gz) |
 | shared_c6 | vector_unequal_width | halfscore_fourier_skip96_l2 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__halfscore_fourier_skip96_l2__vector_unequal_width.json.gz) |
 | shared_c6 | vector_unequal_width | additive_raw_fourier64_l2 | [FAIL](runs/shared-discriminator-search/screen/episodes/shared_c6__additive_raw_fourier64_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_rbf64_direct | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_rbf64_direct__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_rbf128_direct | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_rbf128_direct__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_rbf256_direct | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_rbf256_direct__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_rbf128_adaptive | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_rbf128_adaptive__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_cauchy128_direct | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_cauchy128_direct__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_rbf128_softplus64 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_rbf128_softplus64__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_quad16_width1 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_quad16_width1__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_quad32_width1 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_quad32_width1__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_quad32_width05 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_quad32_width05__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_quad32_adaptive | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_quad32_adaptive__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_product_silu64_l2 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_product_silu64_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_product_silu96_l2 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_product_silu96_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_product_silu128_l2 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_product_silu128_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_squared_silu64_l3 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_squared_silu64_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_squared_silu96_l3 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_squared_silu96_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | local_product_softplus96_l2 | [FAIL](runs/shared-local-density-search/screen/episodes/shared_c6__local_product_softplus96_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | curvature_raw_silu128_l3_q32_w1p0 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_silu128_l3_q32_w1p0__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | curvature_raw_silu128_l3_q64_w1p0 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_silu128_l3_q64_w1p0__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | curvature_raw_silu128_l3_q32_w0p5 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_silu128_l3_q32_w0p5__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | curvature_raw_softplus96_l3_q32_w1p0 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_softplus96_l3_q32_w1p0__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | curvature_raw_softplus96_l3_q64_w1p0 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_softplus96_l3_q64_w1p0__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | curvature_raw_softplus96_l3_q32_w0p5 | [FAIL](runs/shared-local-density-search/refinement/episodes/shared_c6__curvature_raw_softplus96_l3_q32_w0p5__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu64_l3 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu64_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu96_l3 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu96_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu160_l3 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu160_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu192_l3 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu192_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu128_l2 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu128_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu128_l4 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu128_l4__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu96_l2 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu96_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu96_l4 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu96_l4__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu160_l2 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu160_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu160_l4 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu160_l4__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu192_l2 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu192_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_silu128_l3_linear_skip | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_silu128_l3_linear_skip__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_residual_raw_silu128_l3 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_residual_raw_silu128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_softplus128_l3 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_softplus128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_softplus2_128_l3 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_softplus2_128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_raw_softplus128_l4 | [FAIL](runs/shared-width-search/screen/episodes/shared_c6__width_raw_softplus128_l4__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_softplus128_l3_head025 | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_softplus128_l3_head025__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_softplus128_l3_head05 | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_softplus128_l3_head05__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_softplus128_l3_head2 | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_softplus128_l3_head2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_softplus1_128_l3 | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_softplus1_128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_softplus10_128_l3 | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_softplus10_128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_softplus128_l3_linear_skip | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_softplus128_l3_linear_skip__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_softplus128_l3_residual | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_softplus128_l3_residual__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_silu160_l2_head025 | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_silu160_l2_head025__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_silu160_l2_head05 | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_silu160_l2_head05__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_silu160_l2_head2 | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_silu160_l2_head2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_silu160_l2_linear_skip | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_silu160_l2_linear_skip__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_ref_silu160_l2_residual | [FAIL](runs/shared-width-search/refinement/episodes/shared_c6__width_ref_silu160_l2_residual__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_last_softplus3_128_l3 | [FAIL](runs/shared-width-search/last_refinement/episodes/shared_c6__width_last_softplus3_128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_last_softplus4_128_l3 | [FAIL](runs/shared-width-search/last_refinement/episodes/shared_c6__width_last_softplus4_128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_last_softplus6_128_l3 | [FAIL](runs/shared-width-search/last_refinement/episodes/shared_c6__width_last_softplus6_128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_last_softplus8_128_l3 | [PASS](runs/shared-width-search/last_refinement/episodes/shared_c6__width_last_softplus8_128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_last_silu160_l2_linear_skip_head05 | [FAIL](runs/shared-width-search/last_refinement/episodes/shared_c6__width_last_silu160_l2_linear_skip_head05__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | width_last_silu160_l2_linear_skip_head2 | [FAIL](runs/shared-width-search/last_refinement/episodes/shared_c6__width_last_silu160_l2_linear_skip_head2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble2_equal_softplus64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_equal_softplus64_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble2_multiscale_softplus64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_multiscale_softplus64_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble3_multiscale_softplus64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble3_multiscale_softplus64_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble3_multiscale_silu64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble3_multiscale_silu64_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble2_multiscale_silu64_l3 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_multiscale_silu64_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble3_broad_softplus48_l3 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble3_broad_softplus48_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble4_broad_silu48_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble4_broad_silu48_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble2_highscale_softplus96_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_highscale_softplus96_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble2_mixed64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_mixed64_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble2_multiscale_halfscore64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_multiscale_halfscore64_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble2_multiscale_fullscore64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_multiscale_fullscore64_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | ensemble2_multiscale_spectrum64_l2 | [FAIL](runs/shared-ensemble-search/screen/episodes/shared_c6__ensemble2_multiscale_spectrum64_l2__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | pointnorm_layer_first_softplus96_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_layer_first_softplus96_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | pointnorm_layer_all_softplus96_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_layer_all_softplus96_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | pointnorm_layer_first_silu128_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_layer_first_silu128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | pointnorm_layer_all_silu128_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_layer_all_silu128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | pointnorm_rms_all_silu128_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_rms_all_silu128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | pointnorm_weight_all_silu128_l3 | [FAIL](runs/shared-pointnorm-search/screen/episodes/shared_c6__pointnorm_weight_all_silu128_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | pointnorm_layer_all_softplus96_beta2_l3 | [FAIL](runs/shared-pointnorm-search/refinement-width/episodes/shared_c6__pointnorm_layer_all_softplus96_beta2_l3__vector_unequal_width.json.gz) |
+| shared_c6 | vector_unequal_width | pointnorm_layer_all_softplus96_skip_l3 | [FAIL](runs/shared-pointnorm-search/refinement-width/episodes/shared_c6__pointnorm_layer_all_softplus96_skip_l3__vector_unequal_width.json.gz) |
 | shared_c6 | vector_overlap | raw_silu128_l3 | [FAIL](runs/shared-discriminator-search/cross/episodes/shared_c6__raw_silu128_l3__vector_overlap.json.gz) |
 | shared_c6 | vector_overlap | quadratic_tanh96_l3 | [FAIL](runs/shared-discriminator-search/cross/episodes/shared_c6__quadratic_tanh96_l3__vector_overlap.json.gz) |
 | shared_c6 | vector_overlap | raw_softplus96_l3 | [PASS](runs/shared-discriminator-search/cross/episodes/shared_c6__raw_softplus96_l3__vector_overlap.json.gz) |
@@ -160,6 +301,8 @@ Architecture support is within a single unchanged recipe. All trials are shown, 
 | shared_c6 | vector_anisotropic | additive_raw_fourier64_l2 | [PASS](runs/shared-discriminator-search/cross/episodes/shared_c6__additive_raw_fourier64_l2__vector_anisotropic.json.gz) |
 | shared_c6 | vector_spiral | raw_silu128_l3 | [FAIL](runs/shared-discriminator-search/completion/episodes/shared_c6__raw_silu128_l3__vector_spiral.json.gz) |
 | shared_c6 | vector_spiral | raw_softplus96_l3 | [PASS](runs/shared-discriminator-search/completion/episodes/shared_c6__raw_softplus96_l3__vector_spiral.json.gz) |
+
+</details>
 
 ## What stays fixed in the tests
 

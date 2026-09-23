@@ -54,6 +54,9 @@ def build():
             protocol = read(protocol_path if protocol_path.exists() else protocol_path.with_suffix('.json.gz'))
             if index_name not in checked_sources:
                 with tarfile.open(index_path.parent/'source.tar.gz') as archive:
+                    source_names = [member.name for member in archive.getmembers() if member.isfile()]
+                    assert protocol['source_sha256'] and len(source_names) == len(set(source_names))
+                    assert set(source_names) == set(protocol['source_sha256']), 'Incomplete source manifest'
                     for name, sha in protocol['source_sha256'].items():
                         assert hashlib.sha256(archive.extractfile(name).read()).hexdigest() == sha, name
                 checked_sources.add(index_name)
@@ -173,6 +176,21 @@ def build():
             record = row['records'].get(name)
             cells.append(f"[{record['verdict']['status']}]({record['artifact']})" if record else 'NOT RUN')
         lines.append(f"| {name} | "+' | '.join(cells)+' |')
+    leader = next((r for r in rows if r['attempted'] == 19), None)
+    if leader:
+        lines += ['', f"## Selected data architectures: `{leader['name']}`", '',
+                  'These choices share the exact recipe above. The passing streak counts consecutive '
+                  'observations ending at the final checkpoint; at least five are required. '
+                  'Every alternative and failure remains in the trial table below.', '',
+                  '| Test | Discriminator | Live | Final passing streak | EMA |',
+                  '| --- | --- | --- | ---: | --- |']
+        for name, job in declared.items():
+            if job['spec']['runner'] != 'vector':
+                continue
+            record = leader['records'][name]
+            suffix = record['verdict'].get('convergence', {}).get('passing_suffix', 0)
+            lines.append(f"| {name} | {record['architecture']} | [{record['verdict']['status']}]({record['artifact']}) | "
+                         f"{suffix}/24 | {record['ema_verdict']['status']} |")
     lines += ['', '## Remaining failures in the leading complete recipes', '',
               'The final passing streak must reach five observations. A good last checkpoint alone does not pass.', '',
               '| Recipe | Test | Final failing metrics (value; required bound) | Final passing streak |',
@@ -196,10 +214,12 @@ def build():
         lines += ['', '## Discriminator architecture trials', '',
                   'Architecture support is within a single unchanged recipe. All trials are shown, including failures; '
                   'it does not mean one universal discriminator works everywhere.', '',
+                  f'<details><summary>All {len(variants)} architecture trials, including failures</summary>', '',
                   '| Recipe | Test | Discriminator | Live |', '| --- | --- | --- | --- |']
         for recipe_name, name, trial in variants:
             lines.append(f"| {recipe_name} | {name} | {trial['architecture']} | "
                          f"[{trial['status']}]({trial['artifact']}) |")
+        lines += ['', '</details>']
     lines += ['', '## What stays fixed in the tests', '',
               'Data, target metrics, thresholds, seed 0, generators, initialization rules, particle counts, batch sizes '
               'and update budgets are the frozen test setup. They match for every candidate. Each task keeps its '

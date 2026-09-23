@@ -1,0 +1,17 @@
+{
+  "episodes": 44,
+  "observations": 1056,
+  "passed": 0,
+  "errors": 0,
+  "seed": 0,
+  "source_members": {
+    "screen": 72,
+    "refinement": 74
+  },
+  "source_manifests_verified": 2,
+  "old_source_unchanged": true,
+  "optimizer_receipts_verified": 44,
+  "verdicts_recomputed": 44,
+  "seconds": 466.99296218296513,
+  "focused_tests_passed": 25
+}
