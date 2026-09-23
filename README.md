@@ -24,8 +24,8 @@ EMA is separate; a PASS requires every metric at five consecutive final checks.
 
 ![100 Gaussians: current GAN defaults with a learned particle prior](100gaussians.gif)
 
-One illustrative run of `get_recipe("gan")` with the example's Fourier MLP:
-**99/100 modes, 75.1% within 3σ after 7,000 updates** (EMA, seed 1234).
+One illustrative run of `get_recipe("gan", total_steps=20000)` with the example's Fourier MLP:
+**100/100 modes, 93.3% within 3σ after 20,000 updates** (EMA, seed 1234).
 [Metrics, limitations, and reproduction](reports/readme-100gaussians/README.md).
 
 ## Installation
