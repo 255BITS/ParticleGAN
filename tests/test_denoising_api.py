@@ -85,8 +85,8 @@ def test_recipe_preserves_optimizer_updates_and_weighted_regularization(trainer,
     for source, key in ((old_prior, "prior_lr_mult"), (old_noise, "noise_lr_mult")):
         if source.kind == "learned":
             groups.append({"params": list(source.parameters()), "lr": cfg["lr"] * cfg[key]})
-    old_opts = (torch.optim.Adam(groups, betas=(cfg["beta1"], .999)),
-                torch.optim.Adam(old_d.parameters(), lr=cfg["lr"] * cfg["d_lr_mult"], betas=(cfg["beta1"], .999)))
+    old_opts = (torch.optim.Adam(groups, betas=(cfg["beta1"], cfg.get("beta2", .999))),
+                torch.optim.Adam(old_d.parameters(), lr=cfg["lr"] * cfg["d_lr_mult"], betas=(cfg["beta1"], cfg.get("beta2", .999))))
     # Compare multiple real Adam updates, including each separately rated source.
     for current, original in zip((opt_g, opt_d), old_opts):
         assert len(current.param_groups) == len(original.param_groups)

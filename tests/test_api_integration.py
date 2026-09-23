@@ -129,7 +129,9 @@ def test_loaded_toml_dicts_can_be_passed_directly_to_constructors():
         import tomli as tomllib
     config = tomllib.loads('''
 [particlegan]
-name = "denoising"
+model = "ddgan"
+conditioning = "ucd"
+total_steps = 56000
 z_dim = 8
 num_particles = 32
 num_classes = 3

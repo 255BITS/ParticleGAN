@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "particlegan"
-version = "0.5.0"
+version = "0.6.0"
 description = "Composable PyTorch primitives for learnable particle priors, GANs, and DDGAN"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -27,6 +27,7 @@ experiments = [
     "tomli>=2,<3; python_version < '3.11'",
 ]
 dev = ["pytest>=8,<10"]
+gym = ["gymnasium[box2d]==1.2.3", "numpy>=1.26,<3"]
 images = ["torchvision>=0.21,<1", "torch-fidelity==0.3.0", "scipy>=1.10,<1.18", "tqdm>=4.60,<5"]
 
 [tool.setuptools.packages.find]

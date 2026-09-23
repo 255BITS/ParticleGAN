@@ -1,0 +1,20 @@
+{
+  "purpose": "Frozen focused structural refinement after the 16-card normalization screen. Partial variance scaling, per-example grouped normalization, and where a raw activation bypass is applied, under unchanged shared_c6. Rare case only; archive every failure.",
+  "architectures": [
+    "normstruct_power025_fixed",
+    "normstruct_power050_fixed",
+    "normstruct_power075_fixed",
+    "normstruct_power025_affine",
+    "normstruct_power050_affine",
+    "normstruct_group2_affine",
+    "normstruct_group4_affine",
+    "normstruct_group2_fixed",
+    "normstruct_ln_blend050_first",
+    "normstruct_ln_blend050_last",
+    "normstruct_ln_blend050_first_last",
+    "normstruct_center_fixed_blend025"
+  ],
+  "tasks": [
+    "vector_unequal_mass"
+  ]
+}

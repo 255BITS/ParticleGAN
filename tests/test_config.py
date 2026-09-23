@@ -57,13 +57,15 @@ class ConfigTests(unittest.TestCase):
             self.assertEqual(set(defaults) - set(supplied),
                              {key for key, value in defaults.items() if value is None})
             self.assertEqual(defaults, load_config(ROOT / "configs" / name / "default.toml", defaults))
-            recipe = get_recipe(name)
+            recipe = get_recipe()
             self.assertEqual(defaults["lr"], recipe.lr)
             self.assertEqual(defaults["batch_size"], recipe.batch_size)
             self.assertEqual(defaults["z_dim"], recipe.z_dim)
             self.assertEqual(defaults["num_particles"], recipe.num_particles)
         historical = read_config(ROOT / "configs/denoising/ddgan_ucd.yaml")
-        self.assertEqual({**defaults, **historical}, defaults)
+        self.assertEqual(load_config(ROOT / "configs/denoising/ddgan_ucd.yaml", defaults),
+                         {**defaults, **historical})
+        self.assertEqual(historical["lr"], .0006)  # Explicit old run configuration.
 
     def test_example_signature_matches_recipe(self):
         spec = importlib.util.spec_from_file_location("example100", ROOT / "examples/100gaussians.py")

@@ -1,0 +1,29 @@
+{
+  "purpose": "Complete all unmeasured cases for a screened shared recipe; settings unchanged.",
+  "tasks": [
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "ae_gan_hold",
+    "cover_leftover",
+    "unused_token_hold",
+    "mid_scale_identity",
+    "vector_two_broad",
+    "vector_anisotropic",
+    "vector_spiral",
+    "img_stripes2",
+    "img_blobs4",
+    "img_intensity2"
+  ],
+  "candidates": [
+    {
+      "name": "shared_k075",
+      "overrides": {
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "reg_kappa": 0.75
+      }
+    }
+  ]
+}

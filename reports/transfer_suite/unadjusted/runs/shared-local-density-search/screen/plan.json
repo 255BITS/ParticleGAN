@@ -1,0 +1,25 @@
+{
+  "purpose": "Frozen16-card pointwise local-density architecture screen. Exact shared_c6; no G/data/resources/budget/threshold changes. Both remaining cases; all failures retained. New source and every card frozen before scoring.",
+  "architectures": [
+    "local_rbf64_direct",
+    "local_rbf128_direct",
+    "local_rbf256_direct",
+    "local_rbf128_adaptive",
+    "local_cauchy128_direct",
+    "local_rbf128_softplus64",
+    "local_quad16_width1",
+    "local_quad32_width1",
+    "local_quad32_width05",
+    "local_quad32_adaptive",
+    "local_product_silu64_l2",
+    "local_product_silu96_l2",
+    "local_product_silu128_l2",
+    "local_squared_silu64_l3",
+    "local_squared_silu96_l3",
+    "local_product_softplus96_l2"
+  ],
+  "tasks": [
+    "vector_unequal_mass",
+    "vector_unequal_width"
+  ]
+}

@@ -1,0 +1,394 @@
+{
+  "command": "OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /tmp/pr38-default-env/bin/python -u -m benchmarks.transfer_suite.shared_default_search --plan /tmp/pr38-shared-ratio-search/screen_plan.json --output /tmp/pr38-shared-ratio-search/screen > /tmp/pr38-shared-ratio-search/screen.log 2>&1",
+  "created_utc": "2026-09-23T01:49:28.027666+00:00",
+  "rationale": [
+    "Halve or increase D1.5x at G.00425/P.0085 to isolate critic speed around current leader.",
+    "Lower G.0034 with slowD.00255 or fastD.0068 while retaining P.0085.",
+    "Lower G.0025 with D.00375/P.010 or D.0015/P.0085 to approach successful public data rates without losing particle speed."
+  ],
+  "resolved_recipes": [
+    {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 256,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "conditioning": "scalar",
+      "d_lr_mult": 0.5,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "gan_mode": "rp",
+      "loss_type": "logistic",
+      "lr": 0.00425,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "ratio_g425_d2125_p85",
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.05,
+      "reconstruction_weight": 1.0,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.25,
+      "reg_method": "autograd",
+      "routing_temperature": 0.25,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "total_steps": 7000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    },
+    {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 256,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "conditioning": "scalar",
+      "d_lr_mult": 1.5,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "gan_mode": "rp",
+      "loss_type": "logistic",
+      "lr": 0.00425,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "ratio_g425_d6375_p85",
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.05,
+      "reconstruction_weight": 1.0,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.25,
+      "reg_method": "autograd",
+      "routing_temperature": 0.25,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "total_steps": 7000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    },
+    {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 256,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "conditioning": "scalar",
+      "d_lr_mult": 0.75,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "gan_mode": "rp",
+      "loss_type": "logistic",
+      "lr": 0.0034,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "ratio_g34_d255_p85",
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.5,
+      "prior_reg": 0.05,
+      "reconstruction_weight": 1.0,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.25,
+      "reg_method": "autograd",
+      "routing_temperature": 0.25,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "total_steps": 7000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    },
+    {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 256,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "conditioning": "scalar",
+      "d_lr_mult": 2.0,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "gan_mode": "rp",
+      "loss_type": "logistic",
+      "lr": 0.0034,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "ratio_g34_d68_p85",
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.5,
+      "prior_reg": 0.05,
+      "reconstruction_weight": 1.0,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.25,
+      "reg_method": "autograd",
+      "routing_temperature": 0.25,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "total_steps": 7000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    },
+    {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 256,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "conditioning": "scalar",
+      "d_lr_mult": 1.5,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "gan_mode": "rp",
+      "loss_type": "logistic",
+      "lr": 0.0025,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "ratio_g25_d375_p100",
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 4.0,
+      "prior_reg": 0.05,
+      "reconstruction_weight": 1.0,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.25,
+      "reg_method": "autograd",
+      "routing_temperature": 0.25,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "total_steps": 7000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    },
+    {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 256,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "conditioning": "scalar",
+      "d_lr_mult": 0.6,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "gan_mode": "rp",
+      "loss_type": "logistic",
+      "lr": 0.0025,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "ratio_g25_d15_p85",
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 3.4,
+      "prior_reg": 0.05,
+      "reconstruction_weight": 1.0,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.25,
+      "reg_method": "autograd",
+      "routing_temperature": 0.25,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "total_steps": 7000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 4
+    }
+  ],
+  "screen": {
+    "candidates": [
+      {
+        "name": "ratio_g425_d2125_p85",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 0.5,
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      },
+      {
+        "name": "ratio_g425_d6375_p85",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.5,
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      },
+      {
+        "name": "ratio_g34_d255_p85",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 0.75,
+          "lr": 0.0034,
+          "prior_lr_mult": 2.5,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      },
+      {
+        "name": "ratio_g34_d68_p85",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 2.0,
+          "lr": 0.0034,
+          "prior_lr_mult": 2.5,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      },
+      {
+        "name": "ratio_g25_d375_p100",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.5,
+          "lr": 0.0025,
+          "prior_lr_mult": 4.0,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      },
+      {
+        "name": "ratio_g25_d15_p85",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 0.6,
+          "lr": 0.0025,
+          "prior_lr_mult": 3.4,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      }
+    ],
+    "purpose": "Frozen shared LR-ratio screen: same unchanged recipe across every host, native reference architecture/resources/budgets/gates, seed0 only. Six cards contrast D balance and moderately lower G with retained particle speed. No per-task overrides.",
+    "tasks": [
+      "two_pole",
+      "mode_hold",
+      "vector_unequal_mass",
+      "vector_unequal_width",
+      "vector_anisotropic",
+      "vector_overlap",
+      "img_blobs4"
+    ]
+  },
+  "selection": "After all42 screen episodes, select two by descending sustained screen passes, then mean final normalized bound shortfall, then mean confirmation fraction, then name. Complete the other12 unique tests with the exact same recipe. No additional numerical candidate search in this bounded study.",
+  "source_commit": "78c872236b70f6e5527169db7143559536e052a1",
+  "worktree": "/ml2/hypergan/ParticleGAN-shared-ratio"
+}

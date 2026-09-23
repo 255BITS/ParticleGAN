@@ -1,0 +1,20 @@
+{
+  "purpose": "Frozen 12-card pointwise critic-gradient regularity screen for the remaining unequal-mass vector case; the shared_c6 recipe, all resources, and the original behavioral gates are unchanged.",
+  "architectures": [
+    "rare_sn_raw_first",
+    "rare_sn_raw_hidden",
+    "rare_sn_raw_head",
+    "rare_sn_raw_all",
+    "rare_sn_layer_first",
+    "rare_sn_layer_hidden",
+    "rare_sn_layer_head",
+    "rare_sn_layer_all",
+    "rare_bound_layer_1",
+    "rare_bound_layer_2",
+    "rare_bound_layer_4",
+    "rare_bound_raw_2"
+  ],
+  "tasks": [
+    "vector_unequal_mass"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "purpose": "First unadjusted search: shared absolute rates, fixed beta/cap/spread/schedule; all 19 hosts.",
+  "candidates": [
+    {
+      "name": "equal_lr_0017",
+      "overrides": {
+        "lr": 0.0017,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 1.0
+      }
+    },
+    {
+      "name": "equal_lr_0025",
+      "overrides": {
+        "lr": 0.0025,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 1.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "features": [
+    "bias",
+    "log_gradient_ratio",
+    "gradient_alignment",
+    "log_gradient_innovation",
+    "opponent_log_gradient_ratio"
+  ],
+  "roles": [
+    "g",
+    "d"
+  ],
+  "actions": [
+    "lr_log_multiplier",
+    "next_regularization_log_multiplier"
+  ],
+  "weights": [
+    [
+      [
+        0.00870143687823211,
+        -0.010391289110964957,
+        -0.023772618494273826,
+        -0.015034496355839765,
+        -0.007700880471751077
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    [
+      [
+        -0.024711078690585885,
+        -0.007664109664496393,
+        -0.00998616014111879,
+        0.011027333040712229,
+        0.009258823902768679
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ]
+  ],
+  "interval": 5,
+  "schedule": "cosine"
+}

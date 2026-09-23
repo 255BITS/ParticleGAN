@@ -1,0 +1,23 @@
+arm: auxiliary
+batch_size: 256
+checkpoints:
+- 250
+- 1000
+- 2500
+contact_weight: 1.0
+context_dim: 11
+continuous_weight: 1.0
+device: cuda:1
+encoder_width: 128
+episodes: results/gym/lunar_lander/data/episodes.json
+labeled_episode_count: 5
+lambda_next: 1.0
+lambda_state: 1.0
+live_log: results/gym/lunar_lander_sparse_action/live.log
+log_interval: 250
+num_particles: 1024
+out_dir: results/gym/lunar_lander_sparse_action/auxiliary
+seed: 24003
+steps: 2500
+width: 128
+z_dim: 32

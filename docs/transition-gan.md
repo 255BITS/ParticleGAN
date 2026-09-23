@@ -30,6 +30,11 @@ conditional prediction and synthetic composition have separate metrics. This is
 inspired by MisGAN's coordinated networks, and uses complete triples. There is
 no missingness generator or mask critic.
 
+The [Lunar Lander follow-up](gym-gan-control.md) now tests finite data, missing
+action labels, and actual simulator control. The toy settings and results below
+describe the original experiment; [lessons from that follow-up](#what-lunar-lander-taught-us)
+explain which conclusions carried over.
+
 Earlier adversarial-only experiments remain available explicitly:
 `ucd_joint.yaml` has only a joint critic; `marginals.yaml` adds separate marginal
 critics; `monolithic.yaml` generates all six coordinates with one network.
@@ -62,7 +67,7 @@ include these statistics; consistency metrics convert back to physical units.
 
 ## Recipe and comparison
 
-The example calls `get_recipe("mog")`, changing the component count to **1,024**,
+The example calls `get_recipe(prior_kind="mog", sigma_rel=.025)`, changing the component count to **1,024**,
 latent dimension to 32, conditioning to explicit two-class inputs, and any explicit step/batch
 overrides. Each component is a learned center with Gaussian noise. All branches
 share the same selected center **and the same Gaussian noise draw**.
@@ -72,11 +77,11 @@ The resulting absolute sigma stays fixed. Centers are standardized when sampled.
 The prior spread regularizer sees all 1,024 **raw centers**, once per generator
 update, rather than noisy or standardized draws. `prior.json` records calibration.
 
-Defaults are 28,000 updates, batch 256, Rp logistic loss, Adam with G LR 0.0006,
-D multiplier 1.5 and MoG prior multiplier **100** (prior LR 0.06). G/D betas are
-(0, 0.999), prior betas are (0.5, 0.999). Spread weight is 1, bcap threshold and
-coefficient are 1 for every critic on every step, and EMA is 0.995. LR stays constant for the
-first 60% of updates, then follows the default cosine decay to 5%.
+The task keeps 28,000 updates and batch 256. The current shared recipe uses
+Rp logistic, G/D LR .00425, particle LR .0085, Adam (0,.99), spread .05,
+b_cap coefficient6/κ1.25 and EMA .995. Rates hold for 60%, then cosine to 5%.
+Historical tables below used the earlier explicit MoG study settings; their
+reported scores do not establish results for the new shared default.
 
 The default `d_conditioning: concat` feeds two class indicators into each
 scalar real/fake critic and has no UCD classification loss. Geometry and physical
@@ -229,5 +234,85 @@ points show independently predicted `st+1`. Red lines show their disagreement.
 This comparison establishes whether the architecture learns useful joint
 transitions. Testing whether learning all three helps any one marginal needs a
 marginal-only baseline. The joint-plus-marginal arm tests added marginal feedback;
-it does not yet provide that marginal-only comparison. Sparse complete triples
-plus abundant partial records, physical controls and rollouts are subsequent experiments.
+it does not yet provide that marginal-only comparison. The Lunar Lander follow-up
+now covers sparse complete triples alongside partial records and physical control
+rollouts, with the results below.
+
+## What Lunar Lander taught us
+
+The three-generator structure carried over to continuous Lunar Lander with the
+same 1,024-particle MoG family and bcap recipe. For choosing actions, we changed
+the encoder to consume exactly what is available before acting:
+
+```text
+prior -> z -> G1 -> st
+           -> G2 -> at
+           -> G3 -> st+1
+
+observed st -> E -> z -> G2 -> at
+actual simulator.step(at) -> observed st+1 -> repeat
+```
+
+Terrain context also enters E and every G. G1/G3 share the encoded latent during
+training, but playback needs only E/G2/prior. The simulator advances the world;
+G3 predicts a successor for diagnostics. With this state-only encoder, G3 cannot
+answer what would happen under an independently chosen alternative action.
+
+This was a later architecture change. The original **50/50 imitation fine-tune**
+used `E_control(st, at-1, terrain) -> z -> G2 -> at`. E_control was copied from
+the pretrained transition encoder; expert action MSE updated E_control and G2,
+while G1/G3, the paired encoder, prior, and discriminators stayed frozen.
+Training used the expert's previous command; playback fed back the controller's
+own command, starting with engines-off `[-1, 0]`. A separate, later **state-only
+probe model also reached 50/50**, trained from scratch without previous actions.
+These are different models and evaluation rounds. See the
+[original fine-tune](gym-control.md) and [state-only experiment](gym-state-control.md).
+
+The sparse-action GAN experiment trains all Gs, E, and the prior from scratch with
+GAN losses active throughout, alongside paired reconstruction/action losses.
+It retains 9,297 state/successor pairs from 47 heuristic-expert episodes but only
+1,010 action labels from five fixed episodes. This is sparse action supervision,
+not learning from only five episodes or from no data. Training uses individual
+transitions with no trajectory unrolling, reward optimization, or simulator calls.
+
+The [GAN-only leaderboard](../reports/gym/lunar_lander_gan_control/README.md)
+selects checkpoints on 20 validation worlds and evaluates them on the same 50
+fresh test worlds:
+
+| Controller | Action-labeled episodes | Test landings | Mean return |
+| --- | ---: | ---: | ---: |
+| New joint GAN | 5 | **34/50** | **157.33** |
+| Legacy joint GAN | 47 | 23/50 | 137.35 |
+| New joint + marginals | 5 | 16/50 | -0.72 |
+
+The legacy model uses pretrained weights and a different encoder, so only the
+two new models form a matched comparison. The joint GAN is the current playable
+default, chosen by validation. These counts describe one training run and label
+subset per arm; they do not establish reliability across training runs.
+
+The main lesson is that **better measured distribution fit does not necessarily
+produce better control**. Adding marginal critics improved prior-sample SW1
+from 0.19794 to 0.17363 and expert successor MSE from 0.051738 to 0.047770, while
+landings fell from 34 to 16. These Lander SW1 scores pool normalized records;
+they are not comparable numerically with this toy's conditional SW1. Some sample
+metrics also worsened, including prior precision. See the
+[full readout](../reports/gym/lunar_lander_gan_control/READOUT.md) for definitions,
+paired outcomes, and uncertainty.
+
+Keep separate measures for joint generation, conditional prediction, and control.
+The toy's generation winner remains useful evidence about sample fitting, while
+simulator rollouts determine whether a controller works. The follow-up does not
+yet establish that GAN training beats a matched non-GAN controller, or that
+learning G1/G3 helps G2. A proposed next GAN comparison reduces marginal generator
+loss weight from 1 to 0.1 while retaining every discriminator and adversarial
+updates throughout; it has not been run.
+
+A later [previous-action GAN experiment](gym-previous-gan.md) restored
+`E(st, at-1, terrain)` and all 47 episodes' action labels, training G1/G2/G3/E/prior
+from scratch with joint and marginal GAN losses plus action MSE. It landed only
+**7/50** on new paired worlds, versus **50/50** for the original imitation
+fine-tune and **27/50** for the existing state-only joint GAN. Thus retaining
+previous actions and L2 alone did not reproduce the fine-tune's success in this
+jointly trained recipe. These new worlds differ from the table above. The
+[readout](../reports/gym/lunar_lander_previous_gan/READOUT.md) separates the
+architecture/training differences and reports the fixed-input action gap.

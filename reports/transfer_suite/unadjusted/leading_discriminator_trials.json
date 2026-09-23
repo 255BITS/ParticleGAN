@@ -1,0 +1,11 @@
+{
+  "purpose": "Reproduce the two new cap6-supported data cases, retaining both architecture cross-failures.",
+  "architectures": [
+    "raw_softplus96_l3",
+    "additive_raw_fourier64_l2"
+  ],
+  "tasks": [
+    "vector_anisotropic",
+    "vector_overlap"
+  ]
+}

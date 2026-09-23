@@ -1,0 +1,11 @@
+{
+  "purpose": "Bounded stage3: complete best two four-task profiles ranked by sustained passes then summed normalized final shortfall then suffix. Same shared_c6, no new cards.",
+  "architectures": [
+    "raw_silu128_l3",
+    "raw_softplus96_l3"
+  ],
+  "tasks": [
+    "vector_two_broad",
+    "vector_spiral"
+  ]
+}

@@ -33,18 +33,18 @@ def recipe_defaults(name):
     """
     from particlegan import get_recipe
 
-    recipe = get_recipe(name)
+    recipe = get_recipe()
     keys = ("batch_size", "z_dim", "num_particles", "lr", "d_lr_mult",
             "loss_type", "gan_mode", "reg_arm", "reg_coeff", "reg_every",
             "reg_method", "lr_anneal_start", "lr_floor")
     defaults = {key: getattr(recipe, key) for key in keys}
     defaults["beta1"] = recipe.betas[0]
     if name == "100gaussians":
-        defaults.update(epochs=recipe.total_steps // 1000, steps_per_epoch=1000,
-                        lambda_ep=recipe.prior_reg, ema_decay=recipe.ema_decay)
+        defaults.update(beta2=recipe.betas[1], prior_lr_mult=recipe.prior_lr_mult, epochs=recipe.total_steps // 1000, steps_per_epoch=1000,
+                        lambda_ep=recipe.prior_reg, ema_decay=recipe.ema_decay, reg_kappa=recipe.reg_kappa)
     elif name == "denoising":
-        defaults.update(model=recipe.model, d_mode=recipe.conditioning,
-                        classes=recipe.num_classes, ucd_target=recipe.ucd_target,
+        defaults.update(model="ddgan", d_mode="ucd", beta2=recipe.betas[1],
+                        classes=4, ucd_target=recipe.ucd_target,
                         ucd_lambda=recipe.ucd_weight, alpha_bar=list(recipe.alpha_bar),
                         steps=recipe.total_steps, prior_lr_mult=recipe.prior_lr_mult,
                         prior_reg=recipe.prior_reg, reg_kappa=recipe.reg_kappa,

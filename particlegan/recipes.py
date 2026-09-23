@@ -1,11 +1,11 @@
-"""Versioned, inspectable recipes selected in the repository's toy studies."""
+"""One shared winning recipe; callers provide explicit component overrides."""
 from dataclasses import asdict, dataclass, replace
 import math
 
 
 @dataclass(frozen=True)
 class Recipe:
-    name: str = "gan"
+    name: str = "gan_v3"
     model: str = "gan"
     z_dim: int = 4
     num_particles: int = 20_000
@@ -19,19 +19,19 @@ class Recipe:
     alpha_bar: tuple[float, ...] = (1.0, 0.9, 0.5, 0.05, 0.0001)
     batch_size: int = 256
     total_steps: int = 7_000
-    lr: float = 6e-4
-    d_lr_mult: float = 1.5
-    prior_lr_mult: float = 10.0
-    betas: tuple[float, float] = (0.0, 0.999)
+    lr: float = 0.00425
+    d_lr_mult: float = 1.0
+    prior_lr_mult: float = 2.0
+    betas: tuple[float, float] = (0.0, 0.99)
     prior_betas: tuple[float, float] | None = None
     loss_type: str = "logistic"
     gan_mode: str = "rp"
     reg_arm: str = "b_cap"
-    reg_coeff: float = 1.0
-    reg_kappa: float = 1.0
+    reg_coeff: float = 6.0
+    reg_kappa: float = 1.25
     reg_every: int = 1
     reg_method: str = "autograd"
-    prior_reg: float = 1.0
+    prior_reg: float = 0.05
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
@@ -154,6 +154,11 @@ class Recipe:
         from .vicreg_loss import ParticleRegularizer
         return ParticleRegularizer(**{"weight": self.prior_reg, **overrides})
 
+    def make_trainer(self, generator, discriminator, **options):
+        """Build the optional unconditional GAN training helper."""
+        from .training import GANTrainer
+        return GANTrainer(self, generator, discriminator, **options)
+
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, **adam_kwargs):
         """Return ordinary ``(Adam(G + optional E + prior), Adam(D))`` optimizers.
 
@@ -184,36 +189,13 @@ class Recipe:
                 Adam(d_params, lr=self.lr * self.d_lr_mult, betas=self.betas, **adam_kwargs))
 
 
-def get_recipe(name="gan", **overrides):
-    """Inspectable GAN/DDGAN and particle autoencoder defaults; historical aliases remain accepted."""
-    if name in ("gan", "100gaussians"):
-        recipe = Recipe(name=name)
-    elif name == "mog":
-        recipe = Recipe(name=name, prior_kind="mog", num_particles=400,
-                        sigma_rel=1/40, standardize=True, total_steps=28_000,
-                        prior_lr_mult=100., prior_betas=(.5, .999))
-    elif name in ("ddgan", "denoising"):
-        recipe = Recipe(name=name, model="ddgan", num_classes=4,
-                        conditioning="ucd", total_steps=56_000)
-    elif name == "ddgan_mog":
-        recipe = get_recipe("ddgan").replace(
-            name=name, prior_kind="mog", num_particles=400, sigma_rel=1/40,
-            standardize=True, total_steps=100_000, prior_lr_mult=100.,
-            prior_betas=(.5, .999), lr_floor=1.,
-        )
-    elif name in ("ae_gan", "vae_gan", "ae_ddgan"):
-        image = name == "ae_ddgan"
-        mode = {"ae_gan": "ae", "vae_gan": "hard", "ae_ddgan": "ae"}[name]
-        recipe = Recipe(name=name, model="ddgan" if image else "gan",
-                        encoder_mode=mode, prior_kind="mog", num_particles=1024 if image else 400,
-                        z_dim=64 if image else 2, sigma_rel=.025, total_steps=10000 if image else 6000,
-                        batch_size=64 if image else 256, lr=.0003, prior_lr_mult=10.,
-                        prior_betas=(.5, .999), reg_every=4, lr_floor=1.,
-                        routing_temperature=.125 if image else .25,
-                        distance_reduction="mean" if image else "sum")
-    else:
-        raise ValueError(f"Unknown recipe {name!r}; choose gan, mog, ddgan, ddgan_mog, ae_gan, vae_gan, or ae_ddgan")
-    return recipe.replace(**overrides)
+def get_recipe(**overrides):
+    """Return the winning defaults with explicit keyword overrides.
+
+    ``name`` is checkpoint/report metadata, never a preset selector. Configure
+    model, prior and encoder choices directly; all share the same defaults.
+    """
+    return Recipe(**overrides)
 
 
 def learning_rate_scale(step, total_steps, start=0.6, floor=0.05):

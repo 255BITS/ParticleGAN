@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased
+
+- Use one common winning recipe: `get_recipe(**overrides)` constructs `Recipe`
+  directly. Remove legacy/version/domain preset selection. `name` is metadata.
+  Specify model, prior and encoder choices explicitly; they inherit the same
+  optimizer, cap and spread defaults. Full saved recipe dictionaries still restore.
+- Preserve historical leaderboard comparisons as benchmark inputs outside the
+  installable package. The quickstart uses the winning batch-distance D directly.
+
+- Add `particlegan.locked_shared.LOCKED_SHARED`, the demo RpGAN + `b_cap`
+  stamp (cover 1.5, FM off, 12 particles, host critic). Builders are
+  `make_gan_loss` and `make_b_cap`. `Recipe("gan")` is unchanged. This is
+  not a Lunar Lander config.
+
 ## 0.5.0 — 2026-09-17
 
 - Add public `particle_ae`, `particle_vae` and `ParticleEncoding`, plus

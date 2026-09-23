@@ -1,0 +1,364 @@
+{
+  "name": "persistence",
+  "conditional": {
+    "count": 8192,
+    "continuous_mse": 0.01156676933169365,
+    "continuous_mse_p95": 0.01692710630595684,
+    "position_l2": 0.00924152322113514,
+    "velocity_l2": 0.02044403739273548,
+    "angle_mae": 0.004697695840150118,
+    "angular_velocity_mae": 0.02005952224135399,
+    "contact_brier": 0.005249022359567278,
+    "contact_bce": 0.08447566969932777,
+    "contact_precision": 0.9947183098591549,
+    "contact_recall": 0.9682947729220223,
+    "contact_positive_labels": 2334,
+    "nonfinite": 0,
+    "outside_horizontal_bounds": 0.0,
+    "phases": {
+      "flight": {
+        "count": 4096,
+        "continuous_mse": 0.00623477715998888,
+        "continuous_mse_p95": 0.01567300781607628,
+        "position_l2": 0.014432115480303764,
+        "velocity_l2": 0.023434914648532867,
+        "angle_mae": 0.004890600685030222,
+        "angular_velocity_mae": 0.018699070438742638,
+        "contact_brier": 1.000000023372195e-14,
+        "contact_bce": 1.0000000616861024e-07,
+        "contact_precision": 0.0,
+        "contact_recall": 0.0,
+        "contact_positive_labels": 0,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      },
+      "approach": {
+        "count": 2858,
+        "continuous_mse": 0.005509071983397007,
+        "continuous_mse_p95": 0.014636843465268612,
+        "position_l2": 0.005464605055749416,
+        "velocity_l2": 0.019995292648673058,
+        "angle_mae": 0.0049681044183671474,
+        "angular_velocity_mae": 0.018106734380126,
+        "contact_brier": 1.0000000233721948e-14,
+        "contact_bce": 1.0000000616861022e-07,
+        "contact_precision": 0.0,
+        "contact_recall": 0.0,
+        "contact_positive_labels": 0,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      },
+      "contact": {
+        "count": 1238,
+        "continuous_mse": 0.04319257289171219,
+        "continuous_mse_p95": 0.1556294858455658,
+        "position_l2": 0.0007873795693740249,
+        "velocity_l2": 0.01158448401838541,
+        "angle_mae": 0.0034352042712271214,
+        "angular_velocity_mae": 0.02906879037618637,
+        "contact_brier": 0.03473343390105461,
+        "contact_bce": 0.5589854529699921,
+        "contact_precision": 0.9947183098591549,
+        "contact_recall": 0.9682947729220223,
+        "contact_positive_labels": 2334,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      }
+    }
+  },
+  "action_response": {
+    "all": {
+      "pairs": 12288,
+      "effect_mse": 0.012995335524202706,
+      "zero_response_mse": 0.012995335524202706
+    },
+    "threshold_crossing": {
+      "pairs": 11259,
+      "effect_mse": 0.01415626618638805,
+      "zero_response_mse": 0.01415626618638805
+    },
+    "same_active_regime": {
+      "pairs": 722,
+      "effect_mse": 0.00041728799011053297,
+      "zero_response_mse": 0.00041728799011053297
+    },
+    "both_inactive": {
+      "pairs": 307,
+      "effect_mse": 0.0,
+      "zero_response_mse": 0.0
+    }
+  },
+  "inference_samples_per_second": 428003784.2709543,
+  "rollout": {
+    "horizons": {
+      "1": {
+        "count": 24,
+        "continuous_mse": 0.13866235315799713,
+        "continuous_mse_p95": 0.946834146976471,
+        "position_l2": 0.006501136813312769,
+        "velocity_l2": 0.02091706544160843,
+        "angle_mae": 0.007961738854646683,
+        "angular_velocity_mae": 0.06762310862541199,
+        "contact_brier": 0.1041666458333436,
+        "contact_bce": 1.6789683877420234,
+        "contact_precision": 1.0,
+        "contact_recall": 0.5454545454545454,
+        "contact_positive_labels": 11,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      },
+      "5": {
+        "count": 24,
+        "continuous_mse": 0.5475941300392151,
+        "continuous_mse_p95": 1.5882402658462524,
+        "position_l2": 0.0322561077773571,
+        "velocity_l2": 0.08597144484519958,
+        "angle_mae": 0.04232301935553551,
+        "angular_velocity_mae": 0.16343152523040771,
+        "contact_brier": 0.1249999741996232,
+        "contact_bce": 2.011101409276803,
+        "contact_precision": 0.8333333333333334,
+        "contact_recall": 0.5,
+        "contact_positive_labels": 10,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      },
+      "20": {
+        "count": 24,
+        "continuous_mse": 0.5526134967803955,
+        "continuous_mse_p95": 1.270297646522522,
+        "position_l2": 0.13113413751125336,
+        "velocity_l2": 0.2847520709037781,
+        "angle_mae": 0.11203888058662415,
+        "angular_velocity_mae": 0.13470689952373505,
+        "contact_brier": 0.18749996250001008,
+        "contact_bce": 3.0221430160147076,
+        "contact_precision": 1.0,
+        "contact_recall": 0.4,
+        "contact_positive_labels": 15,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      },
+      "50": {
+        "count": 22,
+        "continuous_mse": 1.5026860237121582,
+        "continuous_mse_p95": 4.126008987426758,
+        "position_l2": 0.3862515389919281,
+        "velocity_l2": 0.4091035723686218,
+        "angle_mae": 0.19883190095424652,
+        "angular_velocity_mae": 0.18545666337013245,
+        "contact_brier": 0.2499999500000099,
+        "contact_bce": 4.029523987000934,
+        "contact_precision": 1.0,
+        "contact_recall": 0.3125,
+        "contact_positive_labels": 16,
+        "nonfinite": 0,
+        "outside_horizontal_bounds": 0.0
+      }
+    },
+    "anchors": [
+      {
+        "episode_id": 200000,
+        "anchor": 0,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200000,
+        "anchor": 75,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200000,
+        "anchor": 124,
+        "phase": "contact",
+        "length": 41
+      },
+      {
+        "episode_id": 200001,
+        "anchor": 1,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200001,
+        "anchor": 135,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200001,
+        "anchor": 207,
+        "phase": "contact",
+        "length": 50
+      },
+      {
+        "episode_id": 200002,
+        "anchor": 3,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200002,
+        "anchor": 78,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200002,
+        "anchor": 130,
+        "phase": "contact",
+        "length": 50
+      },
+      {
+        "episode_id": 200003,
+        "anchor": 0,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200003,
+        "anchor": 83,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200003,
+        "anchor": 129,
+        "phase": "contact",
+        "length": 50
+      },
+      {
+        "episode_id": 200004,
+        "anchor": 1,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200004,
+        "anchor": 79,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200004,
+        "anchor": 148,
+        "phase": "contact",
+        "length": 50
+      },
+      {
+        "episode_id": 200005,
+        "anchor": 2,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200005,
+        "anchor": 128,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200005,
+        "anchor": 207,
+        "phase": "contact",
+        "length": 43
+      },
+      {
+        "episode_id": 200006,
+        "anchor": 1,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200006,
+        "anchor": 64,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200006,
+        "anchor": 115,
+        "phase": "contact",
+        "length": 50
+      },
+      {
+        "episode_id": 200007,
+        "anchor": 0,
+        "phase": "flight",
+        "length": 50
+      },
+      {
+        "episode_id": 200007,
+        "anchor": 79,
+        "phase": "approach",
+        "length": 50
+      },
+      {
+        "episode_id": 200007,
+        "anchor": 133,
+        "phase": "contact",
+        "length": 50
+      }
+    ],
+    "termination": "stop at saved reference episode end"
+  },
+  "counterfactual_commands": {
+    "off": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.0,
+      "zero_response_mse": 0.0
+    },
+    "main_boundary": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.0,
+      "zero_response_mse": 0.0
+    },
+    "main_above": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.0036420745465661868,
+      "zero_response_mse": 0.0036420745465661868
+    },
+    "main_full": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.016476694254642994,
+      "zero_response_mse": 0.016476694254642994
+    },
+    "left_boundary": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.0,
+      "zero_response_mse": 0.0
+    },
+    "left_above": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.003063615786352133,
+      "zero_response_mse": 0.003063615786352133
+    },
+    "left_full": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.012250733929139418,
+      "zero_response_mse": 0.012250733929139418
+    },
+    "right_boundary": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.0,
+      "zero_response_mse": 0.0
+    },
+    "right_above": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.003363347746238473,
+      "zero_response_mse": 0.003363347746238473
+    },
+    "right_full": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.013453056611580283,
+      "zero_response_mse": 0.013453056611580283
+    },
+    "combined": {
+      "anchors": 24,
+      "effect_mse_vs_off": 0.026081854434091153,
+      "zero_response_mse": 0.026081854434091153
+    }
+  }
+}

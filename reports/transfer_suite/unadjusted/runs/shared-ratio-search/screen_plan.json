@@ -1,0 +1,104 @@
+{
+  "candidates": [
+    {
+      "name": "ratio_g425_d2125_p85",
+      "overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 0.5,
+        "lr": 0.00425,
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25
+      }
+    },
+    {
+      "name": "ratio_g425_d6375_p85",
+      "overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "lr": 0.00425,
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25
+      }
+    },
+    {
+      "name": "ratio_g34_d255_p85",
+      "overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 0.75,
+        "lr": 0.0034,
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.05,
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25
+      }
+    },
+    {
+      "name": "ratio_g34_d68_p85",
+      "overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 2.0,
+        "lr": 0.0034,
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.05,
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25
+      }
+    },
+    {
+      "name": "ratio_g25_d375_p100",
+      "overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "lr": 0.0025,
+        "prior_lr_mult": 4.0,
+        "prior_reg": 0.05,
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25
+      }
+    },
+    {
+      "name": "ratio_g25_d15_p85",
+      "overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 0.6,
+        "lr": 0.0025,
+        "prior_lr_mult": 3.4,
+        "prior_reg": 0.05,
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25
+      }
+    }
+  ],
+  "purpose": "Frozen shared LR-ratio screen: same unchanged recipe across every host, native reference architecture/resources/budgets/gates, seed0 only. Six cards contrast D balance and moderately lower G with retained particle speed. No per-task overrides.",
+  "tasks": [
+    "two_pole",
+    "mode_hold",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "img_blobs4"
+  ]
+}

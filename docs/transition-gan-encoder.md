@@ -5,6 +5,10 @@ The no-argument example and `configs/transition/default.yaml` now select
 `results/transition/default`. Named historical configs preserve their original
 settings; completed results and their pinned metadata remain unchanged.
 
+This page documents the original toy encoder. The
+[Lunar Lander lessons below](#lessons-from-the-lunar-lander-follow-up) describe
+the later state-only control architecture and its distinct training objectives.
+
 This experiment asks whether learning to encode real transitions also helps the
 original joint sampler. It adds an inference path to the existing MoG/bcap
 example, using the repository's deterministic `particle_ae` routing.
@@ -87,8 +91,9 @@ mean over the original and composed paths.
 
 ## Recipe and comparison limits
 
-We adapt encoding to `get_recipe("mog")`; we do not switch to the different
-`ae_gan` optimizer/training preset. Both arms use seed24002, 1,024 particles,
+The recorded comparison below used the original MoG study settings. Current
+callers use explicit MoG fields with the shared winning defaults; the historical
+settings and results here are not a claim about that new configuration. Both arms use seed24002, 1,024 particles,
 z_dim32, fixed sigma_rel.025 (calibrated sigma approximately.13112), batch256,
 28k updates, Rp logistic, bcap cap1/coefficient1/every update, the existing
 optimizer groups, raw-center spread, cosine schedule and EMA. E joins G's Adam
@@ -158,6 +163,106 @@ Reusable verification and frozen action-response diagnostic:
 The action probe holds state/context fixed and perturbs physical actions. These
 inputs leave the training route manifold; the probe is separate from the pinned
 prior-generation benchmark. Metrics and leaderboards drove this round's analysis.
+
+## Lessons from the Lunar Lander follow-up
+
+**Choose encoder inputs around the inference task.** The toy's `E(st, at)` is
+appropriate for predicting a successor after choosing an action. Choosing the
+action itself needs a different input contract. The Lander experiments used
+three distinct stages:
+
+| Stage | Control encoder | What learned |
+| --- | --- | --- |
+| Initial prototype | Reused E_pair with `st, at-1, terrain` | No control adaptation; paired training had used current actions |
+| Original imitation fine-tune, 50/50 | Separate `E_control(st, at-1, terrain)` | Expert action MSE updated E_control/G2 from pretrained weights |
+| Later state-only probes, also 50/50 | `E(st, terrain)` | Scratch action training of E/G2/prior; detached G1/G3 probes |
+
+For the original successful fine-tune, E_control started as a copy of E_pair.
+G1/G3, E_pair, prior, and D stayed frozen. Previous actions were expert commands
+during training and the learner's own commands during rollout; the first command
+was `[-1, 0]`. Thus the successful fine-tune **did retain at-1**, with an encoder
+trained for that input, rather than simply reusing the mismatched prototype.
+The [original control guide](gym-control.md) records this experiment. Its joint
+GAN counterpart already combined action MSE with joint and marginal critics,
+but started from the earlier world-model checkpoint, not the 50/50 imitation
+checkpoint. Its control encoder received action MSE; the GAN paths used the
+prior and paired encoder.
+
+We subsequently trained a single state-only encoder from scratch, with terrain
+context, for the later control loop and first scratch GAN comparison:
+
+```text
+st -> E -> z -> G1 -> reconstructed st
+            -> G2 -> chosen at
+            -> G3 -> predicted st+1
+
+chosen at -> actual simulator -> observed st+1 -> E -> ...
+```
+
+All three Gs remain independent networks. Sharing z lets their losses shape a
+common representation, but does not enforce that G2's action causes G3's output
+in the simulator. This G3 has no alternative-action input. Action-conditioned
+prediction and intervention tests would be needed to establish counterfactual
+dynamics; good reconstruction or a successful landing does not establish that.
+
+**Partial observations can train the joint discriminator directly.** The
+sparse-action Lander GAN uses complete triples from five action-labeled episodes and
+state/successor pairs from all 47 expert episodes. Real and fake receive identical
+fixed action masks, with the mask and terrain supplied as D context. Masking also
+happens inside D so bcap cannot use hidden coordinates. Hidden actions are absent
+from training arrays and action normalization uses only available labels. The
+mask is not learned, and there is no missingness generator. This brings the
+experiment closer to the original masked-observation idea without reproducing
+the full MisGAN architecture. Observed successors still carry action information;
+masking alone does not establish that the missing joint distribution is identifiable.
+
+**The later GAN objective differs from the toy's synthetic cycle.** Its two fake
+paths are `prior -> z -> G1/G2/G3` and `E(real st) -> z -> G1/G2/G3`. Both receive
+adversarial losses on complete and action-masked views. All Gs/E/prior train from
+scratch for all 2,500 updates, with paired action MSE, state/successor continuous
+MSE and contact BCE, plus prior regularization. There is no synthetic composition
+loss or imitation-only stage. The marginal arm adds D_action and one shared
+D_state with a current/successor role flag, using common state normalization.
+That role flag replaces the toy's physical-time context. See the
+[Lander GAN guide](gym-gan-control.md) and
+[frozen objectives](gym-gan-control-plan.md) for exact weights and gradient paths.
+
+**Better auxiliary predictions did not reliably help the policy.** Before
+restoring GAN training, the matched
+[sparse non-GAN experiment](../reports/gym/lunar_lander_sparse_action/READOUT.md)
+compared detached G1/G3 probes with letting their losses also update E/prior.
+The latter improved expert action MSE by 25% and successor MSE by 8.8×, yet
+landed 34/50 versus 44/50 for detached probes. Detached means only G1/G3's inputs
+were detached; the action loss still trained E/G2/prior. These are historical
+non-GAN findings, excluded from the current GAN-only leaderboard.
+
+The [GAN comparison](../reports/gym/lunar_lander_gan_control/READOUT.md) produced
+a similar tradeoff: joint plus marginal critics improved several expert-data
+prediction and sample-distribution metrics, yet landed 16/50 against 34/50 for
+joint alone. On the same learner-state traces, its G3 predictions were worse.
+Even on expert data, copying the current continuous state as the next-state
+prediction (persistence) scored MSE 0.022230, versus 0.051738 for joint G3 and
+0.047770 for marginal G3; learned contact predictions did beat persistence.
+
+These results motivate evaluating each claim separately: prior-generated sample
+quality, prediction against persistence, and paired closed-loop landing outcomes.
+Use fixed learner-state traces to compare models on identical inputs; errors on
+each controller's own visited states mix model quality with state distribution.
+The non-GAN and GAN rounds used different test worlds and protocols, so their
+landing counts are not a matched GAN-versus-MSE result. The next proposed GAN
+test weakens marginal generator pressure to 0.1 while keeping GAN updates active
+throughout. Whether that preserves sample quality and improves control remains open.
+
+The subsequent [previous-action scratch GAN](gym-previous-gan.md) retained
+`E(st, at-1, terrain)` and action MSE, now sending joint/marginal GAN feedback
+directly through that single encoder and all three Gs. With all 47 episodes
+labeled, it landed 7/50 on fresh worlds; the original imitation fine-tune landed
+50/50 on the same worlds. On identical inputs from the new GAN's own traces,
+its lateral-engine agreement with the heuristic was 33.7%, versus 86.9% for the
+imitation model. This recipe did not recover imitation performance; the experiment
+does not isolate previous-action feedback, pretraining, or loss competition as
+the cause. Full [results and diagnostics](../reports/gym/lunar_lander_previous_gan/READOUT.md)
+preserve that distinction.
 
 
 ## Visual demo and sharing

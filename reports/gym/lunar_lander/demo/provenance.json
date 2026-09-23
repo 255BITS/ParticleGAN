@@ -1,0 +1,24 @@
+{
+  "renderer_sha256": "f11d72299bd0eb6e6760cb91c3df07a259ce2b69ac486eb02d17500f6dc8f861",
+  "inputs": {
+    "leaderboard.json": "a46575e217c3b6df3ff3d396b08361a106be9f77fcec9d1f66d46f04ca8bb33b",
+    "demo_data.json": "b78f62ded3113bafdaea5200d1e062d70a4ddd4eae193a5ce53ffc188db9bccf"
+  },
+  "checkpoints": {
+    "direct_final": "16ae0c36fcaf17f7c5334a59fdd9aef6e6bf16bf0b5e30521784b927d625159a",
+    "direct_best": "eee69ecc310b52e02a090ade026f18df1bb01e740cae70537e6983b4ef77b87c",
+    "adversarial_best": "837fcc86be4027885b6db691c78438f4f3ad7be2547d1d88627ef725d385878f",
+    "reconstruction_best": "abffba4cdc143120802f1c21b0499e2aef9111f1a884b2f733ab000fc30b840f",
+    "adversarial_final": "575d1fea15158f693f917f7b6bba599b9bfee38cae1331896d93acaf12b0c33e",
+    "reconstruction_final": "0a58fa6c27530252e4836daa4967dfffff3f58a3f44ff69d5a6132fb6ff7949f"
+  },
+  "scenes": "Evaluator's fixed episode/phase selection; first saved gallery samples",
+  "one_step": "Checkpoint inference from each real preceding state; cached offline",
+  "recursive": "Evaluator's existing predicted arrays without modification",
+  "html_sha256": "425b394679f7d085cc2bccfc4b965669af8b2c182cb4119fd4dd38d34bcf5363",
+  "gif": {
+    "model": "adversarial_best",
+    "scene_index": 0,
+    "sha256": "fac90da09806466595d44f4dda7ef830a92d3f08e200e5f300cbbdb937f66754"
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "kind": "Posthoc descriptive sample quality; never used for checkpoint selection",
+  "protocol_sha256": "82b0f6a79f628e946f5818712fe0b4c9cd3fa3d15a1f4790a0c8808bb0c47649",
+  "source_sha256": "d3c79d61dd4bccf1dace06c772087942e2a4f4121df92ce9095bee6b2dc80a37",
+  "metrics_source_sha256": "5422148100ed7c8b48c79ebe8a2c9f68c165bf07bce005b9c7ee59dab17908fd",
+  "source_episodes": {
+    "path": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander/data/episodes.json",
+    "sha256": "2e3e3aa539d4d4b5c71f8c41cba5777f860bd6bc2ba18ea6bd6344b66da15589"
+  },
+  "reference": {
+    "split": "test",
+    "records": 2444,
+    "episode_ids": [
+      200000,
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200010,
+      200011,
+      200012,
+      200013,
+      200014,
+      200015
+    ],
+    "array_hashes": {
+      "states": "41daa0c5c8b0d7e653e0b02759e1c836bb7827937cad041cb135a5dc271133c3",
+      "actions": "854a500074c05ced7ec314552152a65c51c3f521808c7c694e348a341da161b9",
+      "next_states": "7f77687dbdb55617f0883c920521839427437260d4a8b090a8b4d2e1457b7260",
+      "terrain": "5c14b6f4b94aa0db80e48ea439ca0b5ac71fd8ec97daf4fd38f67ccd8b529658",
+      "episode_ids": "197be8959fce4fa3b4765381485af15c17a74c77be6c71259eeb073b02c78d71",
+      "steps": "24c318d9a21b74d55ed70a08365e9f6c586223b7127d0a453c45aca38b854e18"
+    },
+    "normalized_joint_array_sha256": "282a991aa43d86e40e424695d30067f412200d91d0aef71d129432978321a131"
+  },
+  "normalization": {
+    "state_mean": [
+      -0.015654921531677246,
+      0.41975340247154236,
+      -0.000395170965930447,
+      -0.31715357303619385,
+      -0.008850584737956524,
+      -1.2687833077507094e-05
+    ],
+    "state_scale": [
+      0.13392214477062225,
+      0.4885222613811493,
+      0.24465128779411316,
+      0.31972387433052063,
+      0.12804174423217773,
+      0.12366370856761932
+    ],
+    "action_mean": [
+      -0.0824756994843483,
+      -0.01828956790268421
+    ],
+    "action_scale": [
+      0.7529905438423157,
+      0.32139548659324646
+    ]
+  },
+  "simulator_steps": 0,
+  "simulator_resets": 0,
+  "training_updates": 0,
+  "device": "cpu",
+  "sampling": {
+    "batch_size": 256,
+    "latent_seed": 92173,
+    "prior_contact_seed": 92174,
+    "encoded_contact_seed": 92175,
+    "contexts": "Exact held-out expert record terrain order, one fake per real record for each path",
+    "common_randomness": "Same component draws and Gaussian-noise RNG stream across arms; trained centers differ. Independent common contact-uniform streams for prior and encoded paths.",
+    "contacts": "Sampled binary contacts, matching discriminator training representation"
+  },
+  "metrics": {
+    "joint_sw1": "128 fixed directions, inherited projection seed31415; lower is better",
+    "reference_radius": "95th percentile of each real record's nearest other real record distance; shared scalar radius",
+    "precision": "Fraction of generated records within reference radius of any real record",
+    "coverage": "Fraction of real records within reference radius of any generated record",
+    "contact_pattern_tv": "Total variation between distributions of four binary contact bits; lower is better"
+  },
+  "limitations": [
+    "Pooled normalized joint records exclude terrain from metric distances; matching context frequencies does not prove conditional fidelity or physical consistency.",
+    "Reference records are temporally correlated expert behavior observations, not independent samples or an unrestricted counterfactual dynamics benchmark.",
+    "Encoded path receives actual held-out current states; it is not an unconditional prior sample and does not receive held-out actions or successors.",
+    "All explicit action labels in the reference are held-out posthoc scoring targets; no new labels enter training or checkpoint selection.",
+    "Nearest-neighbor precision/coverage depend on reference density and the inherited radius convention; these are descriptive metrics without confidence intervals."
+  ],
+  "controllers": {
+    "joint": {
+      "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_gan_control/joint/best.pt",
+      "checkpoint_sha256": "ab4412ee1e3a0acb205ebda894b11976b8f8e07d050cfaed632061f3fcbf3b5e",
+      "selection_sha256": "52beb0b65eb4976dcec5eaddd7f20ad9023f87c7d5a64cdf843094d8a25d6545",
+      "step": 2500,
+      "sampling": {
+        "final_rng_state_sha256": {
+          "latent": "515d69364b4d8400a5a7e431d812cd2f1e57d69ee007f6ddc9c351a0239bf7d8",
+          "prior_contacts": "e2447ffa1395084bb3bba48b05c72347681a174aa6e65a1455022bf7bc0d4917",
+          "encoded_contacts": "d0bf75df7904cf6467bc75615b81621ee7145b98ce00ce536f886ca96b5fde06"
+        },
+        "prior_component_indices_sha256": "571c2d68af7a7fb4024d78964c5cba9bf60e4ade1240220664831d4047b362b6",
+        "generated_array_sha256": {
+          "prior": "f528889e2da52a62530e8f85f304a2c2ade97a14452080050b2a0fc90bc5ba2b",
+          "encoded": "e1b3844ccf5071f8c932ed3494ffe7fc44f08f3e084924ad9b15f496996ee913"
+        }
+      },
+      "paths": {
+        "prior": {
+          "records": 2444,
+          "joint_sw1": 0.1979430615901947,
+          "coverage": 0.33633387088775635,
+          "precision": 0.40302783250808716,
+          "contact_pattern_tv": 0.17635025084018707,
+          "reference_radius": 0.6608978509902954
+        },
+        "encoded": {
+          "records": 2444,
+          "joint_sw1": 0.08720621466636658,
+          "coverage": 0.43739771842956543,
+          "precision": 0.557692289352417,
+          "contact_pattern_tv": 0.007774157449603081,
+          "reference_radius": 0.6608978509902954
+        }
+      }
+    },
+    "marginals": {
+      "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_gan_control/marginals/best.pt",
+      "checkpoint_sha256": "d4b8190f36be0198cee94a7b46765a63dac1d53ed0692b0e4d2fb6d69f41791e",
+      "selection_sha256": "b4b39a473100e7ffe56df9dc6a99a4707b101e4f052bb6b6384fc7e9a8c4e0ea",
+      "step": 2500,
+      "sampling": {
+        "final_rng_state_sha256": {
+          "latent": "515d69364b4d8400a5a7e431d812cd2f1e57d69ee007f6ddc9c351a0239bf7d8",
+          "prior_contacts": "e2447ffa1395084bb3bba48b05c72347681a174aa6e65a1455022bf7bc0d4917",
+          "encoded_contacts": "d0bf75df7904cf6467bc75615b81621ee7145b98ce00ce536f886ca96b5fde06"
+        },
+        "prior_component_indices_sha256": "571c2d68af7a7fb4024d78964c5cba9bf60e4ade1240220664831d4047b362b6",
+        "generated_array_sha256": {
+          "prior": "d33aa337fdedcaf9917ec32cf55c855d2d1c8beaf2fd3497648f423eaa39f255",
+          "encoded": "361106c343e9a35937f6e5860b0e078c1b8119dab40030e77e44feaef93f64d1"
+        }
+      },
+      "paths": {
+        "prior": {
+          "records": 2444,
+          "joint_sw1": 0.17362503707408905,
+          "coverage": 0.36661210656166077,
+          "precision": 0.38788869976997375,
+          "contact_pattern_tv": 0.11702129244804382,
+          "reference_radius": 0.6608978509902954
+        },
+        "encoded": {
+          "records": 2444,
+          "joint_sw1": 0.08208650350570679,
+          "coverage": 0.4811784029006958,
+          "precision": 0.585106372833252,
+          "contact_pattern_tv": 0.009001650847494602,
+          "reference_radius": 0.6608978509902954
+        }
+      }
+    }
+  },
+  "projection_source_sha256": "12e8975fe31ed4d9973d53649ce940171da78739a3d7b80544ba5f4d2313367c"
+}

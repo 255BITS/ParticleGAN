@@ -1,0 +1,17 @@
+{
+  "purpose": "Frozen bounded follow-up: initially-zero geometry pathways preserve the raw LN-all Softplus beta4 critic at initialization. Rare-mass screen only, shared_c6 unchanged.",
+  "architectures": [
+    "geometry_resid_poly2_first",
+    "geometry_resid_hinge_first",
+    "geometry_resid_hinge_all",
+    "geometry_resid_raw_later",
+    "geometry_resid_poly2_later",
+    "geometry_resid_hinge_later",
+    "geometry_resid_poly2_head",
+    "geometry_resid_hinge_head",
+    "geometry_resid_tanh_activation"
+  ],
+  "tasks": [
+    "vector_unequal_mass"
+  ]
+}

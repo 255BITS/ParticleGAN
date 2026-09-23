@@ -87,8 +87,8 @@ class TransitionTests(unittest.TestCase):
 
     def test_default_recipe_and_parameter_budgets(self):
         r = training_recipe(DEFAULTS).to_dict()
-        expected = get_recipe("mog").to_dict()
-        for key in ("z_dim", "num_particles", "num_classes", "conditioning"):
+        expected = get_recipe(prior_kind='mog', sigma_rel=0.025).to_dict()
+        for key in ("z_dim", "num_particles", "num_classes", "conditioning", "total_steps"):
             expected[key] = r[key]
         self.assertEqual(r, expected)
         self.assertEqual(r["num_particles"], 1024)

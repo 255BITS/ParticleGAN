@@ -1,0 +1,86 @@
+[
+  {
+    "name": "b_cap_k1_25_c2_lr0_75",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 2.0,
+    "reg_kappa": 1.25,
+    "particle_l2": 0.0,
+    "vicreg_weight": 0.05,
+    "cover_weight": 1.5,
+    "lr_multiplier": 0.75
+  },
+  {
+    "name": "b_cap_k1_25_c2_lr0_85",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 2.0,
+    "reg_kappa": 1.25,
+    "particle_l2": 0.0,
+    "vicreg_weight": 0.05,
+    "cover_weight": 1.5,
+    "lr_multiplier": 0.85
+  },
+  {
+    "name": "b_cap_k1_25_c2_lr0_9",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 2.0,
+    "reg_kappa": 1.25,
+    "particle_l2": 0.0,
+    "vicreg_weight": 0.05,
+    "cover_weight": 1.5,
+    "lr_multiplier": 0.9
+  },
+  {
+    "name": "b_cap_k1_25_c2_lr0_95",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 2.0,
+    "reg_kappa": 1.25,
+    "particle_l2": 0.0,
+    "vicreg_weight": 0.05,
+    "cover_weight": 1.5,
+    "lr_multiplier": 0.95
+  },
+  {
+    "name": "b_cap_k1_25_c2_lr1_05",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 2.0,
+    "reg_kappa": 1.25,
+    "particle_l2": 0.0,
+    "vicreg_weight": 0.05,
+    "cover_weight": 1.5,
+    "lr_multiplier": 1.05
+  },
+  {
+    "name": "b_cap_k1_25_c2_lr1_1",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 2.0,
+    "reg_kappa": 1.25,
+    "particle_l2": 0.0,
+    "vicreg_weight": 0.05,
+    "cover_weight": 1.5,
+    "lr_multiplier": 1.1
+  },
+  {
+    "name": "b_cap_k1_25_c2_lr1_25",
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 2.0,
+    "reg_kappa": 1.25,
+    "particle_l2": 0.0,
+    "vicreg_weight": 0.05,
+    "cover_weight": 1.5,
+    "lr_multiplier": 1.25
+  }
+]

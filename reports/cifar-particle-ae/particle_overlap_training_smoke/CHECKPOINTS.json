@@ -1,0 +1,12 @@
+{
+  "freeze_centers": {
+    "path": "runs/cifar_particle_ae/particle_overlap_training_smoke_freeze_centers/freeze_centers/checkpoint_080016.pt",
+    "sha256": "cad7f1126c5ab234c95d38c5215d58078046b4a9d0cf4ce711f9de09b9dce450",
+    "fid50k": 141.8541449783641
+  },
+  "reduced_noise": {
+    "path": "runs/cifar_particle_ae/particle_overlap_training_smoke_reduced_noise/reduced_noise/checkpoint_080016.pt",
+    "sha256": "298ad68e9c2e8a46c07248c7319fb544a7025cca78a199ebf37de9da74b33cc0",
+    "fid50k": 141.09910757071628
+  }
+}

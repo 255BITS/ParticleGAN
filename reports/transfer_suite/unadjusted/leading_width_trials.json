@@ -1,0 +1,10 @@
+{
+  "purpose": "Reproduce the shared-c6 unequal-width PASS and its rare-component cross-failure with the same discriminator and recipe.",
+  "architectures": [
+    "width_last_softplus8_128_l3"
+  ],
+  "tasks": [
+    "vector_unequal_width",
+    "vector_unequal_mass"
+  ]
+}

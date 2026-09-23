@@ -1,0 +1,11 @@
+arm: l2
+steps: 2500
+batch_size: 256
+checkpoints: [250, 1000, 2500]
+log_interval: 250
+seed: 24002
+device: cuda:1
+checkpoint: results/gym/lunar_lander/adversarial/best.pt
+episodes: results/gym/lunar_lander/data/episodes.json
+out_dir: results/gym/lunar_lander_finetune/l2
+live_log: results/gym/lunar_lander_finetune/live.log

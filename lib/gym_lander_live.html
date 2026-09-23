@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lunar Lander · Controller comparison</title>
+<style>
+:root{color-scheme:dark;--bg:#101723;--panel:#192334;--line:#324159;--text:#edf3fb;--muted:#aab9cd;--accent:#82e0c2}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,sans-serif}main{max-width:1120px;margin:0 auto;padding:32px 24px 48px}header{margin-bottom:22px}h1{font-size:clamp(24px,4vw,36px);line-height:1.2;margin:0 0 10px;letter-spacing:-.03em}p{margin:8px 0;color:var(--muted)}.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:10px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 275px;gap:18px}.scene,.details,.controls,.graph{border:1px solid var(--line);border-radius:14px;background:var(--panel)}.scene{overflow:hidden;background:#000;display:flex;align-items:center;justify-content:center;min-height:300px}#simulator-frame{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}.details{padding:20px}.details h2{font-size:13px;color:var(--muted);font-weight:500;margin:0 0 5px}.value{font-variant-numeric:tabular-nums;font-size:25px;font-weight:650}.metric+.metric{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}.action{display:flex;justify-content:space-between;gap:10px;font-size:14px;font-variant-numeric:tabular-nums}.action strong{font-weight:650}.controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:15px;margin-top:18px}button,input,select{font:inherit;color:var(--text);background:#26344a;border:1px solid #485b77;border-radius:7px;padding:9px 12px}button{cursor:pointer;font-weight:600}button:hover:not(:disabled){background:#354865}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}button:disabled{opacity:.45;cursor:default}#play{background:var(--accent);color:#10251f;border-color:var(--accent);min-width:90px}label{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted)}input{width:94px}select{padding-left:8px}.spacer{flex:1}#status{min-height:24px;font-size:14px;margin:12px 2px;color:var(--accent)}#status.error{color:#ffaeab}.graph{padding:16px 20px;margin-top:18px}.flow{font:14px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.flow span{color:var(--accent)}.fine{font-size:13px}.metadata{font-size:12px;color:var(--muted);margin-top:14px;overflow-wrap:anywhere}#checkpoint{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}@media(max-width:740px){main{padding:24px 14px}.layout{grid-template-columns:1fr}.details{display:grid;grid-template-columns:1fr 1fr;gap:14px}.metric+.metric{margin:0;padding:0;border:0}.scene{min-height:220px}.controls{gap:8px}.spacer{display:none}.controls label{margin-left:0}.value{font-size:22px}}
+</style>
+</head>
+<body>
+<main>
+<header><div class="eyebrow">Three-generator experiment · live simulator</div><h1>Put G2 at the controls</h1><p>Compare learned controllers with the heuristic expert. Every action advances the real Lunar Lander simulator.</p></header>
+<div class="layout">
+<div class="scene"><img id="simulator-frame" alt="Live Lunar Lander simulator view"></div>
+<aside class="details" aria-label="Episode measurements">
+<div class="metric"><h2>Simulation time</h2><div class="value"><span id="sim-time">0.00</span> s</div><div class="fine">Step <span id="step">0</span></div></div>
+<div class="metric"><h2>Episode return</h2><div class="value" id="episode-return">0.00</div><div class="fine">Latest reward <span id="reward">—</span></div></div>
+<div class="metric"><h2>Action commands</h2><div class="action"><span>Main engine</span><strong id="action-main">—</strong></div><div class="action"><span>Side engine</span><strong id="action-side">—</strong></div></div>
+<div class="metric"><h2>MoG component</h2><div class="value" id="component">—</div></div>
+</aside>
+</div>
+<div class="controls" aria-label="Simulator controls">
+<label>Controller <select id="controller" disabled></select></label>
+<button id="play" disabled>Play</button><button id="single-step" disabled>Step</button>
+<label>Speed <select id="speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option></select></label>
+<div class="spacer"></div><label>Seed <input id="seed" type="number" value="42" min="0" max="4294967295" step="1"></label><button id="reset" disabled>Reset</button>
+</div>
+<div id="status" role="status" aria-live="polite">Connecting to the simulator…</div>
+<div class="graph"><div class="flow" id="flow"><span>E(state, previous action, terrain)</span> → z → <span>G2(z, terrain)</span> → action<br><span>simulator.step(action)</span> → next state<br>action → previous action for the next step</div><p id="mode" class="fine">Loading encoder mode…</p><p class="fine" id="controller-note"></p><p class="fine">Shared latent + terrain: G1 → st · G2 → at · G3 → st+1. The simulator supplies physical next states during playback. Switching controllers pauses and resets the same world.</p></div>
+<div class="metadata" id="default-selection"></div>
+<div class="metadata">Checkpoint: <span id="checkpoint">Loading…</span></div>
+</main>
+<script>
+'use strict';
+const el = Object.fromEntries(['play','single-step','reset','seed','speed','simulator-frame','status','step','sim-time','episode-return','reward','action-main','action-side','component','mode','checkpoint','controller','controller-note','flow','default-selection'].map(id => [id, document.getElementById(id)]));
+let state = null, playing = false, busy = false, failed = false, timer = null;
+const number = (value, digits = 2) => Number.isFinite(value) ? value.toFixed(digits) : '—';
+function setStatus(message, error = false) { el.status.textContent = message; el.status.classList.toggle('error', error); }
+function controls() {
+  el.play.textContent = playing ? 'Pause' : 'Play';
+  el.play.disabled = !playing && (!state || state.done || busy || failed);
+  el['single-step'].disabled = !state || state.done || busy || playing || failed;
+  el.reset.disabled = busy;
+  el.seed.disabled = busy || playing;
+  el.controller.disabled = !state || busy;
+}
+function pause() { playing = false; clearTimeout(timer); timer = null; controls(); }
+function render(data) {
+  state = data;
+  if (Number.isSafeInteger(data.seed)) el.seed.value = data.seed;
+  const frame = data.frame || data.frame_url;
+  if (frame) el['simulator-frame'].src = frame;
+  el.step.textContent = data.step;
+  el['sim-time'].textContent = number(data.step / 50);
+  el['episode-return'].textContent = number(data.return);
+  el.reward.textContent = data.step ? number(data.reward) : '—';
+  el['action-main'].textContent = data.step && data.action ? number(data.action[0], 3) : '—';
+  el['action-side'].textContent = data.step && data.action ? number(data.action[1], 3) : '—';
+  el.component.textContent = data.component_id == null ? '—' : data.component_id;
+  if (data.controllers) {
+    const available = data.controllers.map(c => c.id).join(',');
+    if (el.controller.dataset.available !== available) {
+      el.controller.replaceChildren(...data.controllers.map(c => new Option(c.label, c.id)));
+      el.controller.dataset.available = available;
+    }
+    el.controller.value = data.controller;
+  }
+  if (data.note) el['controller-note'].textContent = data.note;
+  if (data.default_selection) el['default-selection'].textContent = data.default_selection;
+  el.flow.innerHTML = data.controller === 'expert'
+    ? '<span>heuristic(st)</span> → action<br><span>simulator.step(action)</span> → next state'
+    : data.input_kind === 'state_only'
+    ? '<span>E(st, terrain)</span> → z → <span>G2</span> → at<br><span>simulator.step(at)</span> → observed st+1 → E<br>Training heads: z → G1 → reconstructed st · z → G3 → predicted st+1'
+    : '<span>E' + (data.controller === 'original' ? '' : '_control') + '(st, previous action, terrain)</span> → z → <span>G2(z, terrain)</span> → action<br><span>simulator.step(action)</span> → st+1<br>action → previous action for the next step';
+  if (data.controller === 'gan_joint' || data.controller === 'gan_marginals') {
+    el.flow.innerHTML += '<br>Training: <span>D_joint(st, masked at, st+1, mask, terrain)</span>';
+    if (data.controller === 'gan_marginals') el.flow.innerHTML += '<br>+ state and action marginal discriminators';
+  }
+  if (data.mode) el.mode.textContent = data.mode;
+  el.checkpoint.textContent = data.checkpoint || 'Built-in Gym heuristic · no checkpoint';
+  if (data.done) { pause(); setStatus(data.status || (data.truncated ? 'Episode reached its time limit. Reset to start again.' : 'Episode ended. Reset to start again.')); }
+  else setStatus(playing ? 'Running · real simulator' : (data.status || 'Paused · press Play or Step'));
+  controls();
+}
+async function request(path, body) {
+  if (busy) return false;
+  busy = true; controls();
+  try {
+    const options = body === undefined ? {} : {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)};
+    const response = await fetch(path, options);
+    const data = await response.json();
+    if (!response.ok || data.error) throw new Error(data.error || `Request failed (${response.status})`);
+    failed = false; render(data); return true;
+  } catch (error) { failed = true; pause(); setStatus(`Stopped: ${error.message}. Reset to reconnect.`, true); return false; }
+  finally { busy = false; controls(); }
+}
+async function advance() {
+  if (!state || state.done || busy || failed) return false;
+  return request('/api/step', {episode_id:state.episode_id,step:state.step});
+}
+async function tick() {
+  if (!playing) return;
+  const started = performance.now();
+  const ok = await advance();
+  if (ok && playing && !state.done) timer = setTimeout(tick, Math.max(0, 20 / Number(el.speed.value) - (performance.now() - started)));
+}
+el.play.addEventListener('click', () => {
+  if (playing) { pause(); setStatus('Paused · simulator state preserved'); return; }
+  if (!state || state.done || busy || failed) return;
+  playing = true; controls(); setStatus('Running · real simulator'); tick();
+});
+el['single-step'].addEventListener('click', advance);
+el.reset.addEventListener('click', async () => {
+  pause();
+  const seed = Number(el.seed.value);
+  if (!Number.isSafeInteger(seed) || seed < 0 || seed > 4294967295 || el.seed.value.trim() === '') { setStatus('Enter a whole-number seed between 0 and 4294967295.', true); return; }
+  await request('/api/reset', {seed});
+});
+el.controller.addEventListener('change', async () => {
+  const controller = el.controller.value;
+  pause();
+  await request('/api/controller', {controller, seed:state.seed});
+});
+request('/api/state');
+</script>
+</body>
+</html>
