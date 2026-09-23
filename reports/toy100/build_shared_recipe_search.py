@@ -9,12 +9,16 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 import sys
 import tarfile
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT))
+# A newer checked-out regrader can audit evidence produced from an isolated
+# source epoch while this report is written to the main review worktree.
+CODE_ROOT = Path(os.environ.get("TOY100_LEDGER_CODE_ROOT", ROOT))
+sys.path.insert(0, str(CODE_ROOT))
 
 from benchmarks.toy_suite import _episode_rows
 from benchmarks.transfer_suite.compare_defaults import plan
@@ -56,6 +60,10 @@ def _legacy_schedule_matches_archive(directory: Path, recipe: dict, names: list[
 def build():
     rows = []
     summary_paths = sorted(ARTIFACTS.glob("*/summary.json"))
+    for family in ("network-floor005-nine", "network-floor-bracket-v1",
+                   "network-floor-residual-controls-v1",
+                   "network-floor-kappa-bracket-v1"):
+        summary_paths += sorted((ARTIFACTS / family).rglob("summary.json"))
     # The learnable-scale experiment is kept beside the fixed-noise searches
     # so its full 19-host replay and the native 100-mode trials share a folder.
     for family in ("learnable-shared", "learnable-broad"):
@@ -92,8 +100,8 @@ def build():
         config_path = directory / config_file if config_file else None
         source_archive = directory / "source.tar.gz"
         rows.append(dict(
-            run=(directory.name if directory.parent == ARTIFACTS else
-                 f"{directory.parent.name}/{directory.name}"),
+            run=(str(directory.relative_to(ARTIFACTS)) if directory.is_relative_to(ARTIFACTS)
+                 else f"{directory.parent.name}/{directory.name}"),
             kind="installed-wheel control" if control else "shared candidate screen",
             observed_live_passes=summary["passed"], attempted=summary["attempted"],
             observed_overall=summary["overall"],
