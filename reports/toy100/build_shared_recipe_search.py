@@ -63,7 +63,8 @@ def build():
     for family in ("network-floor005-nine", "network-floor-bracket-v1",
                    "network-floor-residual-controls-v1",
                    "network-floor-kappa-bracket-v1", "network-floor-lr-bracket-v1",
-                   "network-floor-noise-phase-v1", "promotion-v1"):
+                   "network-floor-noise-phase-v1", "promotion-v1", "kappa-near-v2",
+                   "isolated-rng-shared-policy-all19-v1"):
         summary_paths += sorted((ARTIFACTS / family).rglob("summary.json"))
     # The learnable-scale experiment is kept beside the fixed-noise searches
     # so its full 19-host replay and the native 100-mode trials share a folder.
@@ -71,6 +72,9 @@ def build():
         summary_paths += sorted((ARTIFACTS.parent / family).glob("*/summary.json"))
     summary_paths += sorted((ARTIFACTS.parent / "residual-escape-shape-v1-a3be165").rglob("summary.json"))
     summary_paths += sorted((ARTIFACTS.parent / "production-shared-policy22").glob("*/summary.json"))
+    summary_paths += sorted((ARTIFACTS.parent / "isolated-rng").glob("full19*/summary.json"))
+    summary_paths += sorted((ARTIFACTS.parent / "ci-common22-network-floor010" / "artifacts" / "toy-suite-ci").glob("*/summary.json"))
+    summary_paths = sorted(set(summary_paths))
     for summary_path in summary_paths:
         directory = summary_path.parent
         summary = json.loads(summary_path.read_text())

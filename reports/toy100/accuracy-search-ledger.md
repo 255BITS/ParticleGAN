@@ -24,6 +24,9 @@ Every discovered 100-mode trial is retained, including failures and interrupted 
 | `ci-common22-learned-support/artifacts/toy-suite-ci/toy100/grid100` | 7000 | FAIL | 47 | 0.6250 | 0.2851 | — | — | — | FAIL |
 | `ci-common22-learned-support/artifacts/toy-suite-ci/toy100/rotated100` | 7000 | FAIL | 11 | 0.1819 | 0.2245 | — | — | — | FAIL |
 | `ci-common22-learned-support/artifacts/toy-suite-ci/toy100/staggered100` | 7000 | FAIL | 45 | 0.7844 | 0.4527 | — | — | — | FAIL |
+| `ci-common22-network-floor010/artifacts/toy-suite-ci/toy100/grid100` | 7000 | PASS | 100 | 0.9829 | 0.0447 | 0.1291 | -0.0378 | 0.0166 | PASS |
+| `ci-common22-network-floor010/artifacts/toy-suite-ci/toy100/rotated100` | 7000 | FAIL | 100 | 0.9775 | 0.0415 | 0.1183 | -0.0340 | 0.0145 | PASS |
+| `ci-common22-network-floor010/artifacts/toy-suite-ci/toy100/staggered100` | 7000 | PASS | 100 | 0.9856 | 0.0498 | 0.1276 | -0.0365 | 0.0162 | PASS |
 | `ci-original-coverage/artifacts/toy100-ci/grid100` | 7000 | PASS | 100 | 0.9812 | 0.0835 | 0.6638 | -0.1794 | 0.0258 | FAIL |
 | `ci-original-coverage/artifacts/toy100-ci/rotated100` | 7000 | PASS | 100 | 0.9892 | 0.0545 | 0.1749 | -0.1521 | 0.0634 | FAIL |
 | `ci-original-coverage/artifacts/toy100-ci/staggered100` | 7000 | PASS | 100 | 0.9826 | 0.0750 | 0.2397 | -0.1963 | 0.0740 | FAIL |
