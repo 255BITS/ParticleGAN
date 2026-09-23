@@ -57,25 +57,33 @@ fixed-data comparison.
 
 Using the calibrated world and the original actual-successor loss, slow
 training at 1,200 RpGAN updates landed 92/92 successful expert training
-resets and 20/20 fixed validation resets, with only 1/42 wrong upward
-commands in the high/rising slice. A 400-update fast continuation from that
-slow policy landed 20/20 validation and won all 20 same-reset paired flights
-at 1.143× speed. At 2,400 slow updates, high/rising false upward commands
-rose to 39/42 and one training reset failed even though validation remained
-20/20. This supports the bounded 1,200/400 schedule and continued gate-based
-selection. The subsequent [full calibrated run](../reports/lunar_fast/report.json)
-evaluated the previously untouched `94000:94030` cohort after validation
-selection: slow landed 28/30, fast 29/30, and fast won all 27 both-land
-paired flights at 1.180× speed. The three non-successful outcomes were
-`incomplete_landing` (two slow, one fast), with zero classified crash or
-flyaway. This supports the bounded schedule on that cohort while leaving
-one fast incomplete landing and the 2,400-update drift unresolved.
+resets and 20/20 fixed validation resets under the then-current flag rule,
+with only 1/42 wrong upward commands in the high/rising slice. A 400-update
+fast continuation from that slow policy scored 20/20 validation and won all
+20 same-reset paired flights at 1.143× speed. At 2,400 slow updates,
+high/rising false upward commands rose to 39/42; one training reset received
+a failing old flag score despite 20/20 validation. Its physical contact state
+was not audited. This supports the bounded 1,200/400 schedule as an action
+calibration choice, but does not establish 2,400-step stability.
 
-The original outcome classifier also conflated some sleeping, incomplete
-contacts with a generic crash. Current reports distinguish
-`successful_landing`, `incomplete_landing`, `off_pad_landing`, crash,
-out-of-bounds, and time limit; only the strict successful class counts in the
-speed gate. Previous 84000-cohort scores remain diagnostic under their saved
-classifier. Recipe files once displayed `ema_decay=0.995`; EMA was never
-updated or used for any of these flights. Current metadata explicitly sets
-the unused value to zero.
+The first calibrated full run labeled slow 28/30 and fast 29/30 on the
+`94000:94030` cohort. The three apparent misses were **false negatives of
+cached leg flags**, not demonstrated physical failures. Slow seeds 94006 and
+94029 and fast seed 94020 ended with both legs in active terrain contact.
+On fast 94020, `EndContact` cleared leg 0's cached flag at step 169 while
+another enabled terrain contact remained. Replaying the frozen slow and fast
+checkpoints on those same 30 resets each gave 30/30 by actual active-contact
+scoring. The old report is retained under
+`reports/lunar_fast/audit/contact_correction/`; its 28/30 and 29/30 values
+remain historical cached-flag scores. This replay does not substitute for the
+pending full pipeline rerun with corrected scoring. Since 94000 has now been
+examined, it is a diagnostic cohort in that rerun.
+
+The original outcome classifier also conflated some sleeping contacts with a
+generic crash. The later classifier added `incomplete_landing` and
+`off_pad_landing`, but still trusted cached leg flags that can disagree with
+active Box2D contacts. The original model-calibration and long-budget
+findings remain measured action/physics errors; they do **not** explain the
+three apparent 94000 test misses, which arose in scoring. Recipe files once
+displayed `ema_decay=0.995`; EMA was never updated or used for any of these
+flights. Current metadata explicitly sets the unused value to zero.

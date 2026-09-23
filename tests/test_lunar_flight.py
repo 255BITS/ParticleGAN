@@ -6,9 +6,10 @@ from types import SimpleNamespace
 pytest.importorskip("gymnasium")
 pytest.importorskip("Box2D")
 
-from lib.lunar_flight import (VARIANT, _outcome, collect_counterfactuals,
+from lib.lunar_flight import (SCORING_VERSION, VARIANT, _outcome,
+                              active_ground_contact_counts, collect_counterfactuals,
                               fast_expert, make_lunar_env, rollout_episode,
-                              slow_expert, summarize_episodes)
+                              slow_expert, summarize_episodes, terminal_contact_diagnostic)
 
 
 def test_negative_main_command_accelerates_down_and_stock_opt_out_is_off():
@@ -38,6 +39,8 @@ def test_expert_rollout_contains_real_transitions_and_outcome_metrics():
         assert episode["actions"].shape == (episode["steps"], 2)
         assert episode["next_states"].shape == (episode["steps"], 8)
         assert episode["variant"] == VARIANT
+        assert episode["scoring_version"] == SCORING_VERSION
+        assert len(episode["terminal_contact_diagnostic"]["active_ground_contacts"]) == 2
         assert episode["outcome"] in ("successful_landing", "incomplete_landing",
                                       "off_pad_landing", "crash", "out_of_bounds", "time_limit")
         if episode["outcome"] == "successful_landing":
@@ -89,17 +92,39 @@ def test_counterfactuals_reject_wrong_prefix_state():
         collect_counterfactuals([episode])
 
 
-def test_settled_incomplete_or_off_pad_is_not_a_crash():
-    base = SimpleNamespace(game_over=False, helipad_x1=0., helipad_x2=1.,
+def test_terminal_scoring_requires_live_enabled_touching_terrain_contacts():
+    moon, other = object(), object()
+
+    def edge(body=moon, *, enabled=True, touching=True):
+        return SimpleNamespace(other=body, contact=SimpleNamespace(enabled=enabled, touching=touching))
+
+    base = SimpleNamespace(game_over=False, moon=moon, helipad_x1=0., helipad_x2=1.,
                            lander=SimpleNamespace(awake=False, position=SimpleNamespace(x=.5)),
-                           legs=[SimpleNamespace(ground_contact=True),
-                                 SimpleNamespace(ground_contact=False)])
+                           legs=[SimpleNamespace(ground_contact=False, contacts=[edge()]),
+                                 SimpleNamespace(ground_contact=False, contacts=[edge()])])
     env = SimpleNamespace(unwrapped=base)
     state = np.zeros(8, dtype=np.float32)
-    assert _outcome(env, state, True, False) == "incomplete_landing"
-    base.legs[1].ground_contact = True
+    assert active_ground_contact_counts(env) == (1, 1)
+    assert terminal_contact_diagnostic(env, state)["cached_leg_flags"] == [False, False]
     assert _outcome(env, state, True, False) == "successful_landing"
+    base.legs[0].ground_contact = base.legs[1].ground_contact = True
+    for inactive in (edge(enabled=False), edge(touching=False), edge(body=other)):
+        base.legs[0].contacts = [inactive]
+        assert active_ground_contact_counts(env) == (0, 1)
+        assert _outcome(env, state, True, False) == "incomplete_landing"
+    base.legs[0].contacts = []
+    assert _outcome(env, state, True, False) == "incomplete_landing"
+    base.legs[0].contacts = [edge()]
     base.lander.position.x = 2.
     assert _outcome(env, state, True, False) == "off_pad_landing"
     base.game_over = True
     assert _outcome(env, state, True, False) == "crash"
+
+
+def test_fast_expert_seed_94020_scores_real_contacts_despite_stale_flag():
+    episode = rollout_episode(94020, fast_expert)
+    terminal = episode["terminal_contact_diagnostic"]
+    assert terminal["cached_leg_flags"] == [False, True]
+    assert terminal["active_ground_contacts"] == [1, 1]
+    assert terminal["on_pad"] and terminal["asleep"] and not terminal["game_over"]
+    assert episode["outcome"] == "successful_landing"

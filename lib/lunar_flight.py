@@ -15,6 +15,7 @@ import numpy as np
 VARIANT = "LunarLanderContinuous-v3-bidirectional-main-v1"
 STOCK_VARIANT = "LunarLanderContinuous-v3"
 GYM_VERSION = "1.2.3"
+SCORING_VERSION = "box2d-active-ground-contacts-v1"
 COUNTERFACTUAL_MAIN_ACTIONS = (-0.3, 0., 0.001, 0.12, 0.5, 1.)
 COUNTERFACTUAL_ACTION_KINDS = ("down", "off", "up_ignition", "up_low", "up_medium", "up_full")
 
@@ -93,19 +94,41 @@ def fast_expert(state):
     return _expert(state, height_gain=0.5, velocity_gain=0.5, down_power=0.3)
 
 
-def _outcome(env, state, terminated, truncated):
+def active_ground_contact_counts(env) -> tuple[int, int]:
+    """Count each leg's enabled, touching contacts with the moon terrain.
+
+    Gym's ``ground_contact`` observation flag is listener state and can remain
+    stale after a Box2D contact changes. Scoring reads the live contact graph.
+    """
+    base = env.unwrapped
+    return tuple(sum(edge.other == base.moon and edge.contact.enabled
+                     and edge.contact.touching for edge in leg.contacts)
+                 for leg in base.legs)
+
+
+def terminal_contact_diagnostic(env, state) -> dict:
+    """Expose cached flags and live terrain contacts behind the terminal score."""
+    base = env.unwrapped
+    return dict(cached_leg_flags=[bool(leg.ground_contact) for leg in base.legs],
+                observed_leg_flags=[bool(value > .5) for value in state[6:8]],
+                active_ground_contacts=list(active_ground_contact_counts(env)),
+                on_pad=bool(base.helipad_x1 <= base.lander.position.x <= base.helipad_x2),
+                asleep=bool(not base.lander.awake),
+                game_over=bool(base.game_over),
+                out_of_bounds=bool(abs(float(state[0])) >= 1.))
+
+
+def _outcome(env, state, terminated, truncated, diagnostic=None):
     if terminated:
-        base = env.unwrapped
-        if base.game_over:
+        diagnostic = terminal_contact_diagnostic(env, state) if diagnostic is None else diagnostic
+        if diagnostic["game_over"]:
             return "crash"
-        if abs(float(state[0])) >= 1.:
+        if diagnostic["out_of_bounds"]:
             return "out_of_bounds"
-        on_pad = base.helipad_x1 <= base.lander.position.x <= base.helipad_x2
-        both_legs = all(leg.ground_contact for leg in base.legs)
-        if not base.lander.awake and both_legs and on_pad:
+        if diagnostic["asleep"] and all(diagnostic["active_ground_contacts"]) and diagnostic["on_pad"]:
             return "successful_landing"
-        if not base.lander.awake:
-            return "incomplete_landing" if on_pad else "off_pad_landing"
+        if diagnostic["asleep"]:
+            return "incomplete_landing" if diagnostic["on_pad"] else "off_pad_landing"
         return "other_termination"
     return "time_limit" if truncated else None
 
@@ -141,12 +164,15 @@ def rollout_episode(seed: int, policy: Callable, *, bidirectional: bool = True,
             state = following
             if terminated or truncated:
                 break
-        outcome = _outcome(env, state, terminated, truncated)
+        terminal_diagnostic = terminal_contact_diagnostic(env, state)
+        outcome = _outcome(env, state, terminated, truncated, terminal_diagnostic)
         if outcome is None:
             outcome = "time_limit"
         data = dict(seed=int(seed), outcome=outcome, steps=len(rows),
                     contact_step=first_contact, return_=float(sum(r[3] for r in rows)),
                     variant=VARIANT if bidirectional else STOCK_VARIANT,
+                    scoring_version=SCORING_VERSION,
+                    terminal_contact_diagnostic=terminal_diagnostic,
                     states=np.asarray([r[0] for r in rows], np.float32),
                     actions=np.asarray([r[1] for r in rows], np.float32),
                     next_states=np.asarray([r[2] for r in rows], np.float32),

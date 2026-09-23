@@ -23,7 +23,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from lib.lunar_flight import (VARIANT, collect_counterfactuals, fast_expert,
+from lib.lunar_flight import (SCORING_VERSION, VARIANT, collect_counterfactuals, fast_expert,
                               rollout_episode, slow_expert, summarize_episodes)
 
 
@@ -182,8 +182,8 @@ def main(argv=None):
     mission.console.print(Panel("[bold cyan]PARTICLEGAN · LUNAR FLIGHT SCHOOL[/]\nCollect → learn dynamics → learn landing → extract → accelerate → prove → replay", border_style="cyan"))
     seed_sets = {"train": list(range(24000, 24000 + args.train_episodes)),
                  "validation": list(range(34000, 34000 + args.validation_episodes)),
-                 # The original 84000 cohort informed the failure investigation.
-                 # Freeze a new final cohort before evaluating the correction.
+                 # Fixed regression cohort: originally held out for calibration,
+                 # subsequently inspected to diagnose cached contact flags.
                  "test": list(range(94000, 94000 + args.test_episodes))}
     if args.smoke:
         seed_sets = {key: [seed + 1000000 for seed in seeds] for key, seeds in seed_sets.items()}
@@ -197,6 +197,8 @@ def main(argv=None):
     for source in source_paths:
         shutil.copy2(source, source_dir / source.name)
     config = {**vars(args), "variant": VARIANT, "seed_sets": seed_sets, "revision": revision, "git_dirty": dirty,
+              "scoring_version": SCORING_VERSION,
+              "test_cohort_status": "fixed regression cohort; previously inspected for contact scoring",
               "weight_kind": "live", "ema_decay": 0.,
               "world_action_features": "engine_power",
               "source_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in source_dir.iterdir()},
@@ -261,19 +263,21 @@ def main(argv=None):
     validation_pass = passes_gate(slow_validation, winner["episodes"])
     fast_policy = load_fast_policy(args.out / "fast.pt", device=args.device)
     slow_test, fast_test, test_pass = [], [], False
-    mission.stage(6, "Evaluate the frozen winner on untouched test worlds")
+    mission.stage(6, "Evaluate the frozen winner on the fixed test cohort")
     if validation_pass and not args.smoke:
         slow_test = mission.flights(seed_sets["test"], slow_policy.act, "slow policy test")
         fast_test = mission.flights(seed_sets["test"], fast_policy.act, "fast policy test")
         test_pass = passes_gate(slow_test, fast_test)
     else:
-        mission.log("Test cohort remains untouched: validation gate not established or smoke run")
+        mission.log("Test cohort not evaluated: validation gate not established or smoke run")
     leaderboard = [{"controller": name, **summarize_episodes(episodes)} for name, episodes in (
         ("slow expert (train)", slow), ("fast expert (train)", fast),
         ("learned slow (validation)", slow_validation), ("learned fast (validation)", winner["episodes"]),
         ("learned slow (test)", slow_test), ("learned fast (test)", fast_test)) if episodes]
     full_evaluation = args.validation_episodes >= 20 and args.test_episodes >= 30
     report = {"variant": VARIANT, "weight_kind": "live", "ema_decay": 0.,
+              "scoring_version": SCORING_VERSION,
+              "test_cohort_status": config["test_cohort_status"],
               "smoke": args.smoke, "merge_ready": bool(validation_pass and test_pass and not args.smoke and full_evaluation),
               "full_evaluation": full_evaluation,
               "validation_pass": validation_pass, "test_pass": test_pass, "leaderboard": leaderboard,

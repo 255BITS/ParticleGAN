@@ -15,6 +15,11 @@ the same real simulator branches. `calibrated_slow_1200.json`,
 `calibrated_slow_2400.json`, `calibrated_fast_400.json`, and
 `calibrated_pair.json` report the corrected model's bounded training schedule.
 
+[Contact scoring correction](contact_correction/README.md) archives the
+calibrated checkpoints and proves that the three later apparent incomplete
+landings were false negatives from cached Gym contact flags. All earlier
+tables retain their historical scoring; they have not been silently rescored.
+
 Paths inside these historical JSON records identify the original local scratch
 artifacts, some of which are intentionally not committed. The historical
 `reports/lunar_fast/slow.pt` reference means `original_slow.pt` here. Original

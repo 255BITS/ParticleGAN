@@ -2,11 +2,11 @@
 
 All development comparisons below reuse the fixed expert training cohort
 `24000:24096` and controller validation cohort `34000:34020` in the declared
-bidirectional Box2D variant. The old `84000:84030` test result is now a
-**diagnostic**, because it was inspected before the calibration fix. The new
-full pipeline evaluated its predeclared, previously untouched `94000:94030`
-test cohort once after validation selection. [Failure analysis](lunar-failure-analysis.md)
-explains the mechanism and limits of these measurements.
+bidirectional Box2D variant. Both `84000:84030` and `94000:94030` have now
+been inspected and are **diagnostic** cohorts. The corrected contact scoring
+is being run through the full pipeline with unchanged training settings; its
+new report is pending. [Failure analysis](lunar-failure-analysis.md) explains
+the mechanism and limits of these measurements.
 
 The first pilot exposed an actuator problem: any positive main command ignites
 the stock engine at at least half power. A `0.12` policy deadband corrected the
@@ -42,12 +42,12 @@ features. Its predicted mean off-to-up velocity jump was 0.02496 against
 the model comparison; scratch runs remain under
 `results/gym/lunar_systematic_audit/calibrated_durability/`.
 
-| Calibrated policy | Fixed validation landings | Mean successful steps | Expert training-world landings | Wrong upward commands on 42 high/rising expert-off states |
+| Calibrated policy | Fixed validation, old flag score | Mean flagged-success steps | Training worlds, old flag score | Wrong upward commands on 42 high/rising expert-off states |
 | --- | ---: | ---: | ---: | ---: |
-| Slow, 400 RpGAN updates | 20/20 | 211.60 | 91/92; one off-pad landing | 0/42 |
+| Slow, 400 RpGAN updates | 20/20 | 211.60 | 91/92; one `off_pad_landing` flag | 0/42 |
 | **Slow, 1,200 updates** | **20/20** | **210.80** | **92/92** | **1/42** |
-| Slow, 2,400 updates | 20/20 | 214.00 | 91/92; one crash | 39/42 |
-| Fast, 400 updates from slow-1,200 | 20/20 | 184.40 | 90/91; one incomplete landing | n/a; fast expert commands down on the 29 analogous rows |
+| Slow, 2,400 updates | 20/20 | 214.00 | 91/92; one generic crash classification | 39/42 |
+| Fast, 400 updates from slow-1,200 | 20/20 | 184.40 | 90/91; one `incomplete_landing` flag | n/a; fast expert commands down on the 29 analogous rows |
 
 The [slow-1,200](../reports/lunar_fast/audit/calibrated_slow_1200.json) →
 [fast-400](../reports/lunar_fast/audit/calibrated_fast_400.json) pair landed on
@@ -56,30 +56,34 @@ Fast won all 20, saving 26.4 steps on average for a 1.143× paired speedup.
 The [paired comparison](../reports/lunar_fast/audit/calibrated_pair.json)
 records those per-controller results. The
 [2,400-step slow checkpoint](../reports/lunar_fast/audit/calibrated_slow_2400.json)
-still scored 20/20 validation, yet fired the
-upward engine on 39/42 high/rising training states where the expert kept it
-off and lost one training-world landing. More adversarial updates are therefore
-not an established durability improvement. The bounded 1,200/400 budget is
-supported by the fixed-data audit; it is **not** a claim that 2,400 updates
-are stable.
+still scored 20/20 under the old validation flag rule, yet fired the upward
+engine on 39/42 high/rising training states where the expert kept it off. Its
+one old-score training miss has not been checked against physical contacts.
+More adversarial updates are therefore not an established durability
+improvement. The bounded 1,200/400 budget is supported by the fixed-data
+action-calibration audit; it is **not** a claim that 2,400 updates are stable.
 
-## Calibrated single-command result
+## Contact-score correction and next full run
 
-The [calibrated report](../reports/lunar_fast/report.json) records the
-predeclared `94000:94030` test cohort after selecting the slow-1,200 →
-fast-400 path on validation. Both controllers landed 20/20 validation worlds;
-mean successful flight time was 210.80 steps for slow and 184.40 for fast.
-On the new test cohort, slow landed **28/30** at 217.43 mean successful steps
-and fast landed **29/30** at 186.45. Both landed on 27 identical resets;
-fast finished sooner on all 27, with a 32-step median saving and **1.180×**
-paired speedup. The remaining outcomes were two slow and one fast
-`incomplete_landing`; there were no classified crashes or flyaways.
+The first calibrated full run selected the slow-1,200 → fast-400 path, then
+scored `94000:94030` with a cached leg-contact flag. Its **historical flag
+scores** were 20/20 for both on validation; on test, slow was 28/30 at 217.43
+flagged-success steps and fast was 29/30 at 186.45. The three misses were
+labeled `incomplete_landing`. These numbers remain in the archived original
+calibrated report under `reports/lunar_fast/audit/contact_correction/` and
+must not be read as physical landing failures.
 
-This passes the declared success and speed gate on the new cohort. The old
-84000 and new 94000 results come from different resets and different policy
-versions, so their numerical difference is **not** a paired before/after
-improvement estimate. A 29/30 result also leaves one observed incomplete
-landing; it does not establish universal reliability.
+The terminal contact audit found both legs actually touching terrain in all
+three cases: slow seeds 94006 and 94029, and fast seed 94020. On fast 94020,
+Box2D `EndContact` cleared leg 0's cached ground flag at step 169 while an
+enabled terrain contact remained. A frozen-checkpoint replay of the same 60
+flights scored **30/30 physical contacts for slow and 30/30 for fast**. This is
+a scoring correction on existing policies, **not** a retrained full-pipeline
+result. The old 94000 cohort is now inspected, so the forthcoming full run
+cannot describe it as untouched. Its corrected metrics remain pending.
+
+The old 84000 and 94000 results use different resets and policy versions;
+their numerical difference is not a paired before/after improvement estimate.
 
 Earlier scratch recipe metadata showed `ema_decay=0.995`, but none of these
 training loops ever updated or selected EMA weights. The live policy weights

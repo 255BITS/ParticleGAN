@@ -1,5 +1,11 @@
 # Fast Lunar lander: full command evidence
 
+This preceding report used cached Gym contact flags. Its three apparent
+incomplete landings were false negatives: [the frozen-checkpoint contact
+audit](audit/contact_correction/README.md) scores both controllers 30/30
+using actual Box2D terrain contacts. Corrected full-command evidence follows
+separately because the scoring fix also changes training-data selection.
+
 The complete pipeline ran from an empty output directory in about **73 seconds**
 on CPU. Its declared landing/speed gate passed on validation and then on a
 separate, untouched test cohort. This is the bidirectional-main-thrust Box2D
@@ -13,8 +19,8 @@ variant, not stock LunarLander. A crash never counts as a fast landing.
 On the **27 test worlds where both landed**, fast won **27/27**, with a
 **1.180× ratio of mean flight times** (15.2% fewer steps) and **32 median steps
 saved**. No test flight crashed or flew away. Two slow and one fast flight
-settled with incomplete leg contact; these remain failures under the unchanged
-strict success rule. This is a finite-cohort result, not a universal landing
+were incorrectly labeled incomplete because of stale cached contact flags.
+This is a finite-cohort result, not a universal landing
 guarantee. Validation, not test outcomes, selected
 `fast_round_1.pt` from three candidates. The final checkpoint is `fast.pt`.
 

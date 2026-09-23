@@ -18,12 +18,12 @@ leaderboard. Follow another terminal with
 `tail -F results/gym/fast_lander/run.log`. Structured events are in
 `metrics.jsonl`. Open `results/gym/fast_lander/index.html` for the local demo.
 
-The [recorded full run](../reports/lunar_fast/README.md) landed **29/30** held-out
-test worlds with the fast policy versus **28/30** with the learned slow policy.
-Fast won all 27 matched successful flights, with **1.180× paired speedup** and
-32 median steps saved. The entire run took about 73 seconds on this host.
-Neither policy crashed or flew away; the three failed flights settled with
-incomplete leg contact and still count as failures under the strict gate.
+The preceding full run reported 29/30 fast and 28/30 slow landings because it
+trusted cached Gym contact flags. Replaying those same frozen weights with
+actual Box2D contacts gives **30/30 for both policies**. The
+[contact correction audit](../reports/lunar_fast/audit/contact_correction/README.md)
+preserves the original weights and the false-negative evidence. A fresh
+full command run with corrected training-data selection is recorded separately.
 These measurements use the declared variant below, not stock Lunar.
 
 ![Learned slow and fast flights, same world and clock](../reports/lunar_fast/comparison.gif)
@@ -89,8 +89,13 @@ fuel cost; zero turns the engine off. This is a declared simulator variant,
 not the stock Lunar benchmark. The library supports stock physics via
 `make_lunar_env(bidirectional=False)`.
 
-A successful landing requires no crash flag, both legs touching, a sleeping
-lander, and its center inside the pad. A settled one-leg landing is labeled
+A successful landing requires no crash flag, an enabled touching Box2D terrain
+contact on each leg, a sleeping lander, and its center inside the pad. The
+evaluator reads actual contact edges: Gym's cached leg flags can be false
+while a second valid contact remains. This fixes scoring without altering
+Gym observations, physics, or policy inputs. Reports declare
+`box2d-active-ground-contacts-v1` and include terminal contact diagnostics.
+A genuinely settled one-leg landing is labeled
 `incomplete_landing`, a settled off-pad landing `off_pad_landing`, and a real
 simulator crash `crash`; none counts as success. Failed flights never become
 policy imitation targets, though their transitions can teach dynamics.
@@ -104,6 +109,12 @@ episodes. The report includes matched-flight counts, wins, and median steps
 saved. A failed full run exits 2 and saves its evidence; it does not label the
 result merge-ready. `--smoke` exercises all stages with a tiny training budget
 and separate seeds; it always remains a smoke result, never landing evidence.
+
+The fixed 94000–94029 test cohort was inspected to diagnose the contact-score
+bug. Subsequent runs on it are regression measurements, not a new untouched
+test. The [frozen-checkpoint audit](../reports/lunar_fast/audit/contact_correction/README.md)
+separates the scoring correction from a fresh training run, where corrected
+success labels also change expert-data selection.
 
 GIFs render real simulator frames on the same reset and use the same simulation
 clock: 50 steps/second, sampled every three steps. The finished side is held
