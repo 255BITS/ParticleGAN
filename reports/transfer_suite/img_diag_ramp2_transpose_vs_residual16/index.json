@@ -1,0 +1,26 @@
+{
+  "arms": {
+    "baseline_transpose12": {
+      "arm": "baseline_transpose12",
+      "confirmed_step": null,
+      "hq": 0.65625,
+      "mean_rmse": 0.04415489733219147,
+      "modes": 1,
+      "seconds": 7.444389514857903,
+      "verdict": "FAIL"
+    },
+    "residual16": {
+      "arm": "residual16",
+      "confirmed_step": 350,
+      "hq": 1.0,
+      "mean_rmse": 0.018833046779036522,
+      "modes": 2,
+      "seconds": 6.430022578919306,
+      "verdict": "PASS"
+    }
+  },
+  "device": "cpu",
+  "hit": true,
+  "principal": "diag_ramp2 soft diagonal vs complement: published transpose12 vs residual16",
+  "tip_sha": "510e0054b2499ce725482de8e7a4ae8d72fd8f25"
+}
