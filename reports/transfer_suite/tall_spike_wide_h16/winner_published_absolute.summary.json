@@ -1,0 +1,27 @@
+{
+  "arm": "winner_published_absolute",
+  "status": "FAIL",
+  "suffix": 0,
+  "shortfall": 0.3871753328020048,
+  "error": null,
+  "seconds": 20.765374538023025,
+  "sha256": "a49c4ab47d43a1ab45d81d596e0af796fa8dea9e8fca67bc71a282eb01e63995",
+  "kind": "batchfeat",
+  "init_std": 0.5,
+  "reach": 16.0,
+  "local_width": 1.0,
+  "means": [
+    [
+      -6.0,
+      0.0
+    ],
+    [
+      6.0,
+      0.0
+    ],
+    [
+      0.0,
+      16.0
+    ]
+  ]
+}
