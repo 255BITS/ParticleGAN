@@ -30,6 +30,12 @@ jobs:
       CUDA_VISIBLE_DEVICES: ""
       OMP_NUM_THREADS: "1"
       MKL_NUM_THREADS: "1"
+      # Pin all CPU dispatch layers: identical source/config previously gave
+      # different image-toy trajectories on AVX2 and AVX512 hosted runners.
+      ATEN_CPU_CAPABILITY: avx2
+      ONEDNN_MAX_CPU_ISA: AVX2
+      DNNL_MAX_CPU_ISA: AVX2
+      MKL_ENABLE_INSTRUCTIONS: AVX2
       MPLBACKEND: Agg
       PYTHONUNBUFFERED: "1"
     steps:
@@ -45,6 +51,17 @@ jobs:
         run: python -m pip install -e '.[dev,experiments]'
       - name: Validate dependencies
         run: python -m pip check
+      - name: Record the CPU dispatch profile
+        run: |
+          python - <<'PY'
+          import os
+          import torch
+          keys = ("ATEN_CPU_CAPABILITY", "ONEDNN_MAX_CPU_ISA",
+                  "DNNL_MAX_CPU_ISA", "MKL_ENABLE_INSTRUCTIONS")
+          print({key: os.environ[key] for key in keys})
+          print(torch.__config__.show())
+          assert torch.backends.cpu.get_cpu_capability() == "AVX2"
+          PY
       - name: Check accuracy, common-recipe protocol, and host adapters
         run: python -m pytest -q tests/test_toy100*.py tests/test_toy_suite*.py tests/test_legacy_noise*.py tests/test_legacy_recipe_schedule.py
       - name: Train and gate all 22 problems under one candidate
