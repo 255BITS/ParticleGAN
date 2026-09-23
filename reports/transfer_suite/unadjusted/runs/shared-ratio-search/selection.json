@@ -1,0 +1,159 @@
+{
+  "ranking": [
+    {
+      "card": {
+        "name": "ratio_g34_d68_p85",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 2.0,
+          "lr": 0.0034,
+          "prior_lr_mult": 2.5,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      },
+      "final_shortfall": 0.0982777348717798,
+      "key": [
+        -3,
+        0.0982777348717798,
+        1.4708333333333334,
+        "ratio_g34_d68_p85"
+      ],
+      "passed": 3
+    },
+    {
+      "card": {
+        "name": "ratio_g425_d6375_p85",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.5,
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      },
+      "final_shortfall": 0.0719047831158379,
+      "key": [
+        -2,
+        0.0719047831158379,
+        1.655357142857143,
+        "ratio_g425_d6375_p85"
+      ],
+      "passed": 2
+    },
+    {
+      "card": {
+        "name": "ratio_g25_d15_p85",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 0.6,
+          "lr": 0.0025,
+          "prior_lr_mult": 3.4,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      },
+      "final_shortfall": 0.09759014512666167,
+      "key": [
+        -2,
+        0.09759014512666167,
+        1.7023809523809523,
+        "ratio_g25_d15_p85"
+      ],
+      "passed": 2
+    },
+    {
+      "card": {
+        "name": "ratio_g425_d2125_p85",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 0.5,
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      },
+      "final_shortfall": 0.156998170772321,
+      "key": [
+        -2,
+        0.156998170772321,
+        1.6726190476190477,
+        "ratio_g425_d2125_p85"
+      ],
+      "passed": 2
+    },
+    {
+      "card": {
+        "name": "ratio_g25_d375_p100",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.5,
+          "lr": 0.0025,
+          "prior_lr_mult": 4.0,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      },
+      "final_shortfall": 0.2700464497228651,
+      "key": [
+        -2,
+        0.2700464497228651,
+        1.6428571428571428,
+        "ratio_g25_d375_p100"
+      ],
+      "passed": 2
+    },
+    {
+      "card": {
+        "name": "ratio_g34_d255_p85",
+        "overrides": {
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 0.75,
+          "lr": 0.0034,
+          "prior_lr_mult": 2.5,
+          "prior_reg": 0.05,
+          "reg_coeff": 3.0,
+          "reg_kappa": 1.25
+        }
+      },
+      "final_shortfall": 0.1353040403440372,
+      "key": [
+        -1,
+        0.1353040403440372,
+        1.8273809523809523,
+        "ratio_g34_d255_p85"
+      ],
+      "passed": 1
+    }
+  ],
+  "rule": "After all42 screen episodes, select two by descending sustained screen passes, then mean final normalized bound shortfall, then mean confirmation fraction, then name. Complete the other12 unique tests with the exact same recipe. No additional numerical candidate search in this bounded study.",
+  "selected": [
+    "ratio_g34_d68_p85",
+    "ratio_g425_d6375_p85"
+  ]
+}

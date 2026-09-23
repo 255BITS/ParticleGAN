@@ -1,0 +1,38 @@
+{
+  "selected": [
+    "ratio_g34_d68_p85",
+    "ratio_g425_d6375_p85"
+  ],
+  "ranking": [
+    {
+      "name": "ratio_g34_d68_p85",
+      "passed": 3,
+      "shortfall": 0.0982777348717798
+    },
+    {
+      "name": "ratio_g425_d6375_p85",
+      "passed": 2,
+      "shortfall": 0.0719047831158379
+    },
+    {
+      "name": "ratio_g25_d15_p85",
+      "passed": 2,
+      "shortfall": 0.09759014512666167
+    },
+    {
+      "name": "ratio_g425_d2125_p85",
+      "passed": 2,
+      "shortfall": 0.156998170772321
+    },
+    {
+      "name": "ratio_g25_d375_p100",
+      "passed": 2,
+      "shortfall": 0.2700464497228651
+    },
+    {
+      "name": "ratio_g34_d255_p85",
+      "passed": 1,
+      "shortfall": 0.1353040403440372
+    }
+  ]
+}

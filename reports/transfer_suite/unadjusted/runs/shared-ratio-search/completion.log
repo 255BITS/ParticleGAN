@@ -1,0 +1,164 @@
+START ratio_g34_d68_p85 trajectory
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "trajectory", "status": "PASS", "suffix": 23, "live": {"identity_mse": 4.409329903865e-06}, "error": null}
+START ratio_g34_d68_p85 residual_student
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "residual_student", "status": "PASS", "suffix": 17, "live": {"identity_mse": 5.935665740253171e-06, "success_rate": 1.0, "wrong_pad_rate": 0.0}, "error": null}
+START ratio_g34_d68_p85 unipolar
+unipolar_dir arm=locked_rpgan step=1/400 cover=0.0102 leak=0.3214 neu_hold=0.9932 cos_plus=+0.5669 hit=FAIL
+unipolar_dir arm=locked_rpgan step=50/400 cover=0.4958 leak=0.0007 neu_hold=0.8658 cos_plus=+0.9994 hit=FAIL
+unipolar_dir arm=locked_rpgan step=100/400 cover=0.8234 leak=0.0000 neu_hold=0.8398 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=150/400 cover=0.9451 leak=0.0000 neu_hold=0.8744 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=200/400 cover=0.9751 leak=0.0000 neu_hold=0.9543 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=250/400 cover=0.9644 leak=0.0002 neu_hold=0.9887 cos_plus=+0.9997 hit=PASS
+unipolar_dir arm=locked_rpgan step=300/400 cover=0.9717 leak=0.0001 neu_hold=0.9845 cos_plus=+0.9995 hit=PASS
+unipolar_dir arm=locked_rpgan step=350/400 cover=0.9728 leak=0.0000 neu_hold=0.9803 cos_plus=+0.9999 hit=PASS
+unipolar_dir arm=locked_rpgan step=400/400 cover=0.9960 leak=0.0000 neu_hold=0.9740 cos_plus=+0.9999 hit=PASS
+unipolar_dir arm=locked_rpgan step=400 seed=0 cover=0.9960 leak=0.0000 neu_hold=0.9740 cos_plus=+0.9999 hit=PASS
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "unipolar", "status": "PASS", "suffix": 17, "live": {"cover": 0.9959522401117056, "off_caption": 1.4354119180018614e-05, "neu_hold": 0.9739772565662861}, "error": null}
+START ratio_g34_d68_p85 ae_gan_hold
+ae-gan-hold arm=ratio_g34_d68_p85 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=ratio_g34_d68_p85 step=1 recon=1.2544 hold=1.3742 loss=4.2262
+ae-gan-hold arm=ratio_g34_d68_p85 step=50 recon=0.0090 hold=0.0501 loss=1.1481
+ae-gan-hold arm=ratio_g34_d68_p85 step=100 recon=0.0245 hold=0.0343 loss=0.7870
+ae-gan-hold arm=ratio_g34_d68_p85 step=150 recon=0.0076 hold=0.0257 loss=0.8627
+ae-gan-hold arm=ratio_g34_d68_p85 step=200 recon=0.0035 hold=0.0064 loss=0.7713
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "ae_gan_hold", "status": "PASS", "suffix": 21, "live": {"recon_mse": 0.002252215286716819, "hold": 0.0}, "error": null}
+START ratio_g34_d68_p85 cover_leftover
+cover_leftover start arm=locked steps=800 seed=0 teacher=faithful_guard_e cover=1.5 penalty_coeff=3.0 kappa=1.2 fm=0.0 n_particles=12
+cover_leftover arm=locked step=1/800 d=0.7237 g=1.7920 cap=0.0000 u_kept=0.007 content=0.012 leak=0.000 err=0.752 covered=0
+cover_leftover arm=locked step=50/800 d=0.5970 g=1.4649 cap=0.0000 u_kept=0.187 content=0.305 leak=0.001 err=0.605 covered=0
+cover_leftover arm=locked step=100/800 d=0.6746 g=1.1293 cap=0.0000 u_kept=0.324 content=0.502 leak=0.011 err=0.481 covered=0
+cover_leftover arm=locked step=150/800 d=0.6900 g=0.9720 cap=0.0000 u_kept=0.425 content=0.677 leak=0.003 err=0.409 covered=0
+cover_leftover arm=locked step=200/800 d=0.6938 g=0.8815 cap=0.0000 u_kept=0.521 content=0.808 leak=0.009 err=0.330 covered=0
+cover_leftover arm=locked step=250/800 d=0.6956 g=0.8091 cap=0.0000 u_kept=0.613 content=0.894 leak=0.005 err=0.258 covered=0
+cover_leftover arm=locked step=300/800 d=0.6893 g=0.7650 cap=0.0000 u_kept=0.715 content=0.949 leak=0.000 err=0.195 covered=1
+cover_leftover arm=locked step=350/800 d=0.6976 g=0.7310 cap=0.0000 u_kept=0.785 content=0.989 leak=0.001 err=0.142 covered=1
+cover_leftover arm=locked step=400/800 d=0.6992 g=0.7055 cap=0.0000 u_kept=0.855 content=1.005 leak=0.003 err=0.096 covered=1
+cover_leftover arm=locked step=450/800 d=0.6920 g=0.7008 cap=0.0000 u_kept=0.909 content=1.003 leak=0.006 err=0.060 covered=1
+cover_leftover arm=locked step=500/800 d=0.6938 g=0.6937 cap=0.0000 u_kept=0.958 content=0.997 leak=0.010 err=0.033 covered=1
+cover_leftover arm=locked step=550/800 d=0.6932 g=0.6933 cap=0.0000 u_kept=0.970 content=1.003 leak=0.007 err=0.020 covered=1
+cover_leftover arm=locked step=600/800 d=0.6913 g=0.6946 cap=0.0000 u_kept=0.991 content=0.994 leak=0.000 err=0.008 covered=1
+cover_leftover arm=locked step=650/800 d=0.6936 g=0.6934 cap=0.0000 u_kept=0.989 content=0.995 leak=0.006 err=0.008 covered=1
+cover_leftover arm=locked step=700/800 d=0.6952 g=0.6934 cap=0.0000 u_kept=0.993 content=0.988 leak=0.004 err=0.007 covered=1
+cover_leftover arm=locked step=750/800 d=0.6919 g=0.6935 cap=0.0000 u_kept=0.998 content=1.002 leak=0.003 err=0.003 covered=1
+cover_leftover arm=locked step=800/800 d=0.6926 g=0.6942 cap=0.0000 u_kept=1.001 content=1.005 leak=0.000 err=0.003 covered=1
+cover_leftover DONE arm=locked pass=1 reasons=none u_kept=0.926 content=0.963 leak=0.000 err=0.051 same_dir=0.000 particle_rms=0.285
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "cover_leftover", "status": "PASS", "suffix": 13, "live": {"u_kept": 1.0009771485366763, "content_kept": 1.0050541521614131, "leak_ratio": 2.8781291934628738e-05, "pole_rel_err_plus": 0.0030240241903811693, "pole_rel_err_minus": 0.003119297092780471, "same_dir": 0.0017704804625581416}, "error": null}
+START ratio_g34_d68_p85 unused_token_hold
+unused-token arm=ratio_g34_d68_p85 step=1 hold=0.9952 concept=0.0000 unused_dist=0.0048
+unused-token arm=ratio_g34_d68_p85 step=50 hold=0.9904 concept=0.4152 unused_dist=0.0096
+unused-token arm=ratio_g34_d68_p85 step=100 hold=0.9917 concept=0.7432 unused_dist=0.0083
+unused-token arm=ratio_g34_d68_p85 step=150 hold=0.9928 concept=0.9767 unused_dist=0.0072
+unused-token arm=ratio_g34_d68_p85 step=200 hold=0.9954 concept=0.9055 unused_dist=0.0046
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "unused_token_hold", "status": "PASS", "suffix": 10, "live": {"unused_hold": 0.9953770954161882, "concept_move": 0.905481566747028}, "error": null}
+START ratio_g34_d68_p85 mid_scale_identity
+mid_scale arm=locked step=1 seed=0 concept+=+0.5774 concept-=+0.0000 id0=+0.0062 id_mid=+0.0185 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=50 seed=0 concept+=+0.8443 concept-=+0.5724 id0=+0.3013 id_mid=+0.7729 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=100 seed=0 concept+=+0.8627 concept-=+0.7946 id0=+0.5076 id_mid=+0.7996 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=150 seed=0 concept+=+0.9540 concept-=+0.8600 id0=+0.5987 id_mid=+0.7902 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=200 seed=0 concept+=+0.9908 concept-=+0.9104 id0=+0.6678 id_mid=+0.9726 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=250 seed=0 concept+=+0.9884 concept-=+0.9819 id0=+0.7632 id_mid=+0.9904 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=300 seed=0 concept+=+0.9975 concept-=+0.9955 id0=+0.8784 id_mid=+0.9850 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=350 seed=0 concept+=+0.9998 concept-=+0.9997 id0=+0.9911 id_mid=+0.9730 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=400 seed=0 concept+=+0.9991 concept-=+0.9996 id0=+0.9840 id_mid=+0.9144 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=450 seed=0 concept+=+0.9992 concept-=+0.9998 id0=+0.9874 id_mid=+0.9761 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=500 seed=0 concept+=+0.9993 concept-=+0.9993 id0=+0.9450 id_mid=+0.9601 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=550 seed=0 concept+=+1.0000 concept-=+0.9997 id0=+0.9778 id_mid=+0.9817 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=600 seed=0 concept+=+0.9999 concept-=+0.9999 id0=+0.9867 id_mid=+0.9938 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=650 seed=0 concept+=+0.9999 concept-=+0.9999 id0=+0.9989 id_mid=+0.9950 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=700 seed=0 concept+=+0.9999 concept-=+0.9999 id0=+0.9861 id_mid=+0.9873 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=750 seed=0 concept+=+1.0000 concept-=+0.9999 id0=+0.9868 id_mid=+0.9962 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+1.0000 concept-=+0.9998 id0=+0.9862 id_mid=+0.9966 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+1.0000 concept-=+0.9998 id0=+0.9862 id_mid=+0.9966 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "mid_scale_identity", "status": "PASS", "suffix": 16, "live": {"concept_cos_plus": 0.9999605417251587, "concept_cos_minus": 0.9998496770858765, "concept_mag_plus": 1.0181198120117188, "concept_mag_minus": 0.9599897265434265, "identity_at_0": 0.9861818015664219, "identity_at_mid": 0.9965714325970879}, "error": null}
+START ratio_g34_d68_p85 vector_two_broad
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "vector_two_broad", "status": "PASS", "suffix": 20, "live": {"sw1_normalized": 0.0994558716889071, "mean_error": 0.023988798260688782, "covariance_error": 0.3141370117664337, "target_scale": 1.0555585622787476, "sample_count": 4096, "mass_tv": 0.01708984375, "min_mass_ratio": 0.9658203125, "hq": 0.98193359375, "component_covariance_error": 0.597039207816124, "component_covariance_errors": [1.014054298400879, 0.18002411723136902], "component_min_eigen_ratio": 0.5052143335342407, "component_mass": [0.48291015625, 0.51708984375], "target_mass": [0.5, 0.5], "component_counts": [1978, 2118]}, "error": null}
+START ratio_g34_d68_p85 vector_spiral
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "vector_spiral", "status": "PASS", "suffix": 24, "live": {"sw1_normalized": 0.035596764893852495, "mean_error": 0.040221527218818665, "covariance_error": 0.05141713470220566, "target_scale": 1.224178433418274, "sample_count": 4096}, "error": null}
+START ratio_g34_d68_p85 img_stripes2
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "img_stripes2", "status": "PASS", "suffix": 18, "live": {"modes": 2, "hq": 1.0, "mean_rmse": 0.0022941329516470432, "quality_mode_fractions": [0.375, 0.625], "mode_fractions": [0.375, 0.625], "distribution_tv": 0.125}, "error": null}
+START ratio_g34_d68_p85 img_bars4
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "img_bars4", "status": "PASS", "suffix": 10, "live": {"modes": 4, "hq": 1.0, "mean_rmse": 0.012318257242441177, "quality_mode_fractions": [0.28125, 0.28125, 0.1875, 0.25], "mode_fractions": [0.28125, 0.28125, 0.1875, 0.25], "distribution_tv": 0.0625}, "error": null}
+START ratio_g34_d68_p85 img_intensity2
+{"event": "DONE", "candidate": "ratio_g34_d68_p85", "task": "img_intensity2", "status": "PASS", "suffix": 17, "live": {"modes": 2, "hq": 1.0, "mean_rmse": 0.010547518730163574, "quality_mode_fractions": [0.5, 0.5], "mode_fractions": [0.5, 0.5], "distribution_tv": 0.0}, "error": null}
+START ratio_g425_d6375_p85 trajectory
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "trajectory", "status": "PASS", "suffix": 24, "live": {"identity_mse": 6.2035273913352285e-06}, "error": null}
+START ratio_g425_d6375_p85 residual_student
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "residual_student", "status": "PASS", "suffix": 22, "live": {"identity_mse": 5.021603556087939e-06, "success_rate": 1.0, "wrong_pad_rate": 0.0}, "error": null}
+START ratio_g425_d6375_p85 unipolar
+unipolar_dir arm=locked_rpgan step=1/400 cover=0.0127 leak=0.3214 neu_hold=0.9915 cos_plus=+0.5669 hit=FAIL
+unipolar_dir arm=locked_rpgan step=50/400 cover=0.6082 leak=0.0000 neu_hold=0.8438 cos_plus=+0.9997 hit=FAIL
+unipolar_dir arm=locked_rpgan step=100/400 cover=0.9824 leak=0.0000 neu_hold=0.8330 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=150/400 cover=0.9922 leak=0.0000 neu_hold=0.9959 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=200/400 cover=0.9360 leak=0.0000 neu_hold=0.9518 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=250/400 cover=0.9884 leak=0.0002 neu_hold=0.9720 cos_plus=+0.9993 hit=PASS
+unipolar_dir arm=locked_rpgan step=300/400 cover=0.9666 leak=0.0004 neu_hold=0.9823 cos_plus=+0.9997 hit=PASS
+unipolar_dir arm=locked_rpgan step=350/400 cover=0.9795 leak=0.0000 neu_hold=0.9836 cos_plus=+0.9997 hit=PASS
+unipolar_dir arm=locked_rpgan step=400/400 cover=0.9940 leak=0.0001 neu_hold=0.9766 cos_plus=+0.9995 hit=PASS
+unipolar_dir arm=locked_rpgan step=400 seed=0 cover=0.9940 leak=0.0001 neu_hold=0.9766 cos_plus=+0.9995 hit=PASS
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "unipolar", "status": "PASS", "suffix": 18, "live": {"cover": 0.9939826893825128, "off_caption": 0.00012958158060648767, "neu_hold": 0.9765503220260143}, "error": null}
+START ratio_g425_d6375_p85 ae_gan_hold
+ae-gan-hold arm=ratio_g425_d6375_p85 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=ratio_g425_d6375_p85 step=1 recon=1.2443 hold=1.3589 loss=4.2243
+ae-gan-hold arm=ratio_g425_d6375_p85 step=50 recon=0.0046 hold=0.0305 loss=1.1375
+ae-gan-hold arm=ratio_g425_d6375_p85 step=100 recon=0.0195 hold=0.0449 loss=0.7929
+ae-gan-hold arm=ratio_g425_d6375_p85 step=150 recon=0.0091 hold=0.0226 loss=0.8836
+ae-gan-hold arm=ratio_g425_d6375_p85 step=200 recon=0.0042 hold=0.0217 loss=0.7381
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "ae_gan_hold", "status": "PASS", "suffix": 16, "live": {"recon_mse": 0.003106263931840658, "hold": 0.00048828125}, "error": null}
+START ratio_g425_d6375_p85 cover_leftover
+cover_leftover start arm=locked steps=800 seed=0 teacher=faithful_guard_e cover=1.5 penalty_coeff=3.0 kappa=1.2 fm=0.0 n_particles=12
+cover_leftover arm=locked step=1/800 d=0.7237 g=1.7848 cap=0.0000 u_kept=0.008 content=0.000 leak=0.000 err=0.749 covered=0
+cover_leftover arm=locked step=50/800 d=0.5492 g=1.4738 cap=0.0000 u_kept=0.206 content=0.371 leak=0.023 err=0.571 covered=0
+cover_leftover arm=locked step=100/800 d=0.6997 g=0.9983 cap=0.0000 u_kept=0.412 content=0.616 leak=0.025 err=0.421 covered=0
+cover_leftover arm=locked step=150/800 d=0.6814 g=0.9070 cap=0.0000 u_kept=0.549 content=0.803 leak=0.022 err=0.370 covered=0
+cover_leftover arm=locked step=200/800 d=0.6941 g=0.8166 cap=0.0000 u_kept=0.589 content=0.871 leak=0.001 err=0.275 covered=0
+cover_leftover arm=locked step=250/800 d=0.6947 g=0.7601 cap=0.0000 u_kept=0.693 content=0.951 leak=0.013 err=0.204 covered=0
+cover_leftover arm=locked step=300/800 d=0.6927 g=0.7250 cap=0.0000 u_kept=0.798 content=0.976 leak=0.004 err=0.134 covered=1
+cover_leftover arm=locked step=350/800 d=0.6926 g=0.7073 cap=0.0000 u_kept=0.860 content=0.990 leak=0.005 err=0.093 covered=1
+cover_leftover arm=locked step=400/800 d=0.6929 g=0.6971 cap=0.0000 u_kept=0.930 content=1.003 leak=0.006 err=0.046 covered=1
+cover_leftover arm=locked step=450/800 d=0.6923 g=0.6969 cap=0.0000 u_kept=0.962 content=0.996 leak=0.002 err=0.025 covered=1
+cover_leftover arm=locked step=500/800 d=0.6937 g=0.6938 cap=0.0000 u_kept=0.992 content=1.008 leak=0.009 err=0.013 covered=1
+cover_leftover arm=locked step=550/800 d=0.6946 g=0.6940 cap=0.0000 u_kept=0.989 content=0.993 leak=0.003 err=0.010 covered=1
+cover_leftover arm=locked step=600/800 d=0.6927 g=0.6930 cap=0.0000 u_kept=0.994 content=1.004 leak=0.007 err=0.007 covered=1
+cover_leftover arm=locked step=650/800 d=0.6931 g=0.6955 cap=0.0000 u_kept=0.999 content=0.993 leak=0.008 err=0.008 covered=1
+cover_leftover arm=locked step=700/800 d=0.6926 g=0.6939 cap=0.0000 u_kept=0.996 content=1.002 leak=0.001 err=0.006 covered=1
+cover_leftover arm=locked step=750/800 d=0.6932 g=0.6936 cap=0.0000 u_kept=0.998 content=0.991 leak=0.000 err=0.004 covered=1
+cover_leftover arm=locked step=800/800 d=0.6937 g=0.6932 cap=0.0000 u_kept=1.000 content=1.010 leak=0.004 err=0.005 covered=1
+cover_leftover DONE arm=locked pass=1 reasons=none u_kept=0.944 content=0.969 leak=0.000 err=0.039 same_dir=0.000 particle_rms=0.062
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "cover_leftover", "status": "PASS", "suffix": 15, "live": {"u_kept": 0.9997183580562528, "content_kept": 1.0100404599084993, "leak_ratio": 0.0041047891081790215, "pole_rel_err_plus": 0.004547258839011192, "pole_rel_err_minus": 0.003083632094785571, "same_dir": 0.003983626481298963}, "error": null}
+START ratio_g425_d6375_p85 unused_token_hold
+unused-token arm=ratio_g425_d6375_p85 step=1 hold=0.9940 concept=0.0000 unused_dist=0.0060
+unused-token arm=ratio_g425_d6375_p85 step=50 hold=0.9882 concept=0.5194 unused_dist=0.0118
+unused-token arm=ratio_g425_d6375_p85 step=100 hold=0.9901 concept=0.9194 unused_dist=0.0099
+unused-token arm=ratio_g425_d6375_p85 step=150 hold=0.9969 concept=0.8903 unused_dist=0.0031
+unused-token arm=ratio_g425_d6375_p85 step=200 hold=0.9912 concept=0.9994 unused_dist=0.0088
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "unused_token_hold", "status": "PASS", "suffix": 14, "live": {"unused_hold": 0.991187047213316, "concept_move": 0.9994432996194291}, "error": null}
+START ratio_g425_d6375_p85 mid_scale_identity
+mid_scale arm=locked step=1 seed=0 concept+=+0.5774 concept-=+0.0000 id0=+0.0077 id_mid=+0.0232 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=50 seed=0 concept+=+0.8611 concept-=+0.5866 id0=+0.3726 id_mid=+0.9219 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=100 seed=0 concept+=+0.9245 concept-=+0.8059 id0=+0.5635 id_mid=+0.7899 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=150 seed=0 concept+=+0.9796 concept-=+0.9219 id0=+0.6288 id_mid=+0.9092 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=200 seed=0 concept+=+0.9863 concept-=+0.9808 id0=+0.7372 id_mid=+0.9709 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=250 seed=0 concept+=+0.9964 concept-=+0.9973 id0=+0.8719 id_mid=+0.9471 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=300 seed=0 concept+=+0.9996 concept-=+0.9997 id0=+0.9695 id_mid=+0.9684 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=350 seed=0 concept+=+0.9975 concept-=+0.9994 id0=+0.9805 id_mid=+0.8862 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=400 seed=0 concept+=+0.9996 concept-=+0.9996 id0=+0.9617 id_mid=+0.9571 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=450 seed=0 concept+=+0.9998 concept-=+1.0000 id0=+0.9970 id_mid=+0.9569 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=500 seed=0 concept+=+0.9994 concept-=+0.9997 id0=+0.9794 id_mid=+0.9597 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=550 seed=0 concept+=+0.9999 concept-=+1.0000 id0=+0.9933 id_mid=+0.9826 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=600 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9966 id_mid=+0.9926 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=650 seed=0 concept+=+1.0000 concept-=+0.9999 id0=+0.9844 id_mid=+0.9846 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=700 seed=0 concept+=+1.0000 concept-=+0.9999 id0=+0.9877 id_mid=+0.9965 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=750 seed=0 concept+=+1.0000 concept-=+0.9999 id0=+0.9886 id_mid=+0.9897 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9937 id_mid=+0.9944 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9937 id_mid=+0.9944 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "mid_scale_identity", "status": "PASS", "suffix": 17, "live": {"concept_cos_plus": 0.9999969601631165, "concept_cos_minus": 0.999970555305481, "concept_mag_plus": 1.0168763399124146, "concept_mag_minus": 0.9819584488868713, "identity_at_0": 0.993732300921471, "identity_at_mid": 0.9943574994342061}, "error": null}
+START ratio_g425_d6375_p85 vector_two_broad
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "vector_two_broad", "status": "PASS", "suffix": 23, "live": {"sw1_normalized": 0.07898600252273745, "mean_error": 0.042088743299245834, "covariance_error": 0.12691868841648102, "target_scale": 1.0555585622787476, "sample_count": 4096, "mass_tv": 0.021240234375, "min_mass_ratio": 0.95751953125, "hq": 0.991943359375, "component_covariance_error": 0.30562154948711395, "component_covariance_errors": [0.3030945360660553, 0.3081485629081726], "component_min_eigen_ratio": 0.5683256387710571, "component_mass": [0.478759765625, 0.521240234375], "target_mass": [0.5, 0.5], "component_counts": [1961, 2135]}, "error": null}
+START ratio_g425_d6375_p85 vector_spiral
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "vector_spiral", "status": "PASS", "suffix": 17, "live": {"sw1_normalized": 0.04648447515583807, "mean_error": 0.05318646878004074, "covariance_error": 0.09058483690023422, "target_scale": 1.224178433418274, "sample_count": 4096}, "error": null}
+START ratio_g425_d6375_p85 img_stripes2
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "img_stripes2", "status": "PASS", "suffix": 12, "live": {"modes": 2, "hq": 0.96875, "mean_rmse": 0.006264268886297941, "quality_mode_fractions": [0.34375, 0.625], "mode_fractions": [0.34375, 0.65625], "distribution_tv": 0.15625}, "error": null}
+START ratio_g425_d6375_p85 img_bars4
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "img_bars4", "status": "FAIL", "suffix": 0, "live": {"modes": 2, "hq": 0.40625, "mean_rmse": 0.16572248935699463, "quality_mode_fractions": [0.0, 0.03125, 0.1875, 0.1875], "mode_fractions": [0.28125, 0.28125, 0.1875, 0.25], "distribution_tv": 0.0625}, "error": null}
+START ratio_g425_d6375_p85 img_intensity2
+{"event": "DONE", "candidate": "ratio_g425_d6375_p85", "task": "img_intensity2", "status": "PASS", "suffix": 11, "live": {"modes": 2, "hq": 1.0, "mean_rmse": 0.0114897470921278, "quality_mode_fractions": [0.5, 0.5], "mode_fractions": [0.5, 0.5], "distribution_tv": 0.0}, "error": null}

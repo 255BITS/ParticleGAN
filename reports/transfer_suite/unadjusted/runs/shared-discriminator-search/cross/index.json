@@ -1,0 +1,3956 @@
+{
+  "records": [
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "research_discriminator": {
+          "name": "raw_silu128_l3",
+          "implementation": "shared_critic_v1",
+          "hidden": 128,
+          "layers": 3,
+          "activation": "silu",
+          "beta": 5.0,
+          "features": "raw",
+          "fourier": 0,
+          "frequency_scale": 1.0,
+          "quadratic_scale": 0.25,
+          "residual": false,
+          "residual_scale": 0.7071067811865476,
+          "output_scale": 1.0,
+          "raw_linear_skip": false,
+          "branch_hidden": 32,
+          "branch_scale": 0.25,
+          "normalization": "none"
+        },
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "raw_silu128_l3",
+        "overrides": {
+          "d_hidden": 128,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "raw_silu128_l3",
+            "implementation": "shared_critic_v1",
+            "hidden": 128,
+            "layers": 3,
+            "activation": "silu",
+            "beta": 5.0,
+            "features": "raw",
+            "fourier": 0,
+            "frequency_scale": 1.0,
+            "quadratic_scale": 0.25,
+            "residual": false,
+            "residual_scale": 0.7071067811865476,
+            "output_scale": 1.0,
+            "raw_linear_skip": false,
+            "branch_hidden": 32,
+            "branch_scale": 0.25,
+            "normalization": "none"
+          }
+        }
+      },
+      "architecture": "raw_silu128_l3",
+      "reference": "study/episodes/cosine__vector_anisotropic.json.gz",
+      "reference_sha256": "42c72adf1f93fb9f9fa267ee38d5f66fc67a2db167ffe33e231d08d8fee46428",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 33537
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.05002911110409825,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12997088889590175
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.029703781008720398,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1202962189912796
+          },
+          {
+            "metric": "hq",
+            "value": 0.983642578125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13364257812500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.3092641433080037,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.5407358566919962
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.3650486469268799,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.2150486469268799
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 13,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 6,
+          "first_pass_step": 100,
+          "stable_from_step": 950,
+          "stable_from_seconds": 14.046642977977172,
+          "confirmed_step": 1150,
+          "confirmed_seconds": 15.382736330037005
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.9583333333333334
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.05018860517051571,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12981139482948428
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.029703781008720398,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1202962189912796
+          },
+          {
+            "metric": "hq",
+            "value": 0.986328125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13632812500000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.2980124205350876,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.5519875794649124
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.2728153169155121,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.12281531691551209
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 9,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 8,
+          "first_pass_step": 600,
+          "stable_from_step": 850,
+          "stable_from_seconds": null,
+          "confirmed_step": 1050,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.875
+      },
+      "artifact": "episodes/shared_c6__raw_silu128_l3__vector_anisotropic.json.gz",
+      "uncompressed_sha256": "35c1cacc8baa4fdb012467f572fe01ddbe4040618993539753235e89f37bf385",
+      "live": {
+        "sw1_normalized": 0.05002911110409825,
+        "mean_error": 0.054314229637384415,
+        "covariance_error": 0.10167092829942703,
+        "target_scale": 2.032285690307617,
+        "sample_count": 4096,
+        "mass_tv": 0.029703781008720398,
+        "min_mass_ratio": 0.922119140625,
+        "hq": 0.983642578125,
+        "component_covariance_error": 0.3092641433080037,
+        "component_covariance_errors": [
+          0.5170047283172607,
+          0.3125767409801483,
+          0.09821096062660217
+        ],
+        "component_min_eigen_ratio": 0.3650486469268799,
+        "component_mass": [
+          0.307373046875,
+          0.363037109375,
+          0.32958984375
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1259,
+          1487,
+          1350
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.05018860517051571,
+        "mean_error": 0.05512835830450058,
+        "covariance_error": 0.07478686422109604,
+        "target_scale": 2.032285690307617,
+        "sample_count": 4096,
+        "mass_tv": 0.029703781008720398,
+        "min_mass_ratio": 0.922119140625,
+        "hq": 0.986328125,
+        "component_covariance_error": 0.2980124205350876,
+        "component_covariance_errors": [
+          0.29866570234298706,
+          0.3922874331474304,
+          0.20308412611484528
+        ],
+        "component_min_eigen_ratio": 0.2728153169155121,
+        "component_mass": [
+          0.307373046875,
+          0.363037109375,
+          0.32958984375
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1259,
+          1487,
+          1350
+        ]
+      },
+      "seconds": 15.715559785021469
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 3,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "name": "vector_overlap",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+        "lr": 0.00425,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "name": "vector_overlap",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "research_discriminator": {
+          "name": "raw_silu128_l3",
+          "implementation": "shared_critic_v1",
+          "hidden": 128,
+          "layers": 3,
+          "activation": "silu",
+          "beta": 5.0,
+          "features": "raw",
+          "fourier": 0,
+          "frequency_scale": 1.0,
+          "quadratic_scale": 0.25,
+          "residual": false,
+          "residual_scale": 0.7071067811865476,
+          "output_scale": 1.0,
+          "raw_linear_skip": false,
+          "branch_hidden": 32,
+          "branch_scale": 0.25,
+          "normalization": "none"
+        },
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "raw_silu128_l3",
+        "overrides": {
+          "d_hidden": 128,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "raw_silu128_l3",
+            "implementation": "shared_critic_v1",
+            "hidden": 128,
+            "layers": 3,
+            "activation": "silu",
+            "beta": 5.0,
+            "features": "raw",
+            "fourier": 0,
+            "frequency_scale": 1.0,
+            "quadratic_scale": 0.25,
+            "residual": false,
+            "residual_scale": 0.7071067811865476,
+            "output_scale": 1.0,
+            "raw_linear_skip": false,
+            "branch_hidden": 32,
+            "branch_scale": 0.25,
+            "normalization": "none"
+          }
+        }
+      },
+      "architecture": "raw_silu128_l3",
+      "reference": "valid_search/discriminator/episodes/d128_l3_f3__vector_overlap.json.gz",
+      "reference_sha256": "49c882392411dfcb65f3c5261a63e0c8bf56fc170bf4e1dcbb621e0ef57301a0",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 33537
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.09203685994119769,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.0879631400588023
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.12942320108413696,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.02057679891586303
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.1508072465658188,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.2991927534341812
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 18,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 4,
+          "first_pass_step": 100,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.03872646058397768,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.1412735394160223
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.03077997826039791,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.11922002173960208
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.050851333886384964,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.39914866611361505
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 17,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 17,
+          "first_pass_step": 400,
+          "stable_from_step": 400,
+          "stable_from_seconds": null,
+          "confirmed_step": 600,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5
+      },
+      "artifact": "episodes/shared_c6__raw_silu128_l3__vector_overlap.json.gz",
+      "uncompressed_sha256": "182c51b8e37ff4a4ee81294b8d8ebc1d99860c4e58638d1ce8135f7bfa351522",
+      "live": {
+        "sw1_normalized": 0.09203685994119769,
+        "mean_error": 0.12942320108413696,
+        "covariance_error": 0.1508072465658188,
+        "target_scale": 0.8501437306404114,
+        "sample_count": 4096
+      },
+      "ema": {
+        "sw1_normalized": 0.03872646058397768,
+        "mean_error": 0.03077997826039791,
+        "covariance_error": 0.050851333886384964,
+        "target_scale": 0.8501437306404114,
+        "sample_count": 4096
+      },
+      "seconds": 9.201304727932438
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "d_hidden": 96,
+        "d_layers": 3,
+        "research_discriminator": {
+          "name": "quadratic_tanh96_l3",
+          "implementation": "shared_critic_v1",
+          "hidden": 96,
+          "layers": 3,
+          "activation": "tanh",
+          "beta": 5.0,
+          "features": "quadratic",
+          "fourier": 0,
+          "frequency_scale": 1.0,
+          "quadratic_scale": 0.25,
+          "residual": false,
+          "residual_scale": 0.7071067811865476,
+          "output_scale": 1.0,
+          "raw_linear_skip": false,
+          "branch_hidden": 32,
+          "branch_scale": 0.25,
+          "normalization": "none"
+        },
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "quadratic_tanh96_l3",
+        "overrides": {
+          "d_hidden": 96,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "quadratic_tanh96_l3",
+            "implementation": "shared_critic_v1",
+            "hidden": 96,
+            "layers": 3,
+            "activation": "tanh",
+            "beta": 5.0,
+            "features": "quadratic",
+            "fourier": 0,
+            "frequency_scale": 1.0,
+            "quadratic_scale": 0.25,
+            "residual": false,
+            "residual_scale": 0.7071067811865476,
+            "output_scale": 1.0,
+            "raw_linear_skip": false,
+            "branch_hidden": 32,
+            "branch_scale": 0.25,
+            "normalization": "none"
+          }
+        }
+      },
+      "architecture": "quadratic_tanh96_l3",
+      "reference": "study/episodes/cosine__vector_anisotropic.json.gz",
+      "reference_sha256": "42c72adf1f93fb9f9fa267ee38d5f66fc67a2db167ffe33e231d08d8fee46428",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 19297
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.04550957241556335,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.13449042758443663
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.006022140383720398,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1439778596162796
+          },
+          {
+            "metric": "hq",
+            "value": 0.88330078125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.03330078125000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.18184780950347582,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.6681521904965242
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.24500317871570587,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.09500317871570588
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 13,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 4,
+          "first_pass_step": 350,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.027433696148086866,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.15256630385191314
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.006022140383720398,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1439778596162796
+          },
+          {
+            "metric": "hq",
+            "value": 0.97607421875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12607421875000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.26772792637348175,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.5822720736265182
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.29441630840301514,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.14441630840301514
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 13,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 13,
+          "first_pass_step": 600,
+          "stable_from_step": 600,
+          "stable_from_seconds": null,
+          "confirmed_step": 800,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.6666666666666666
+      },
+      "artifact": "episodes/shared_c6__quadratic_tanh96_l3__vector_anisotropic.json.gz",
+      "uncompressed_sha256": "3a3cd30aaa67389f513329976dde809732bb5b8953b7cf9a1eca698abfe5335c",
+      "live": {
+        "sw1_normalized": 0.04550957241556335,
+        "mean_error": 0.048738036304712296,
+        "covariance_error": 0.06718821823596954,
+        "target_scale": 2.032285690307617,
+        "sample_count": 4096,
+        "mass_tv": 0.006022140383720398,
+        "min_mass_ratio": 0.9873046875,
+        "hq": 0.88330078125,
+        "component_covariance_error": 0.18184780950347582,
+        "component_covariance_errors": [
+          0.19270099699497223,
+          0.037246983498334885,
+          0.31559544801712036
+        ],
+        "component_min_eigen_ratio": 0.24500317871570587,
+        "component_mass": [
+          0.33935546875,
+          0.33154296875,
+          0.3291015625
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1390,
+          1358,
+          1348
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.027433696148086866,
+        "mean_error": 0.018901996314525604,
+        "covariance_error": 0.026778748258948326,
+        "target_scale": 2.032285690307617,
+        "sample_count": 4096,
+        "mass_tv": 0.006022140383720398,
+        "min_mass_ratio": 0.9873046875,
+        "hq": 0.97607421875,
+        "component_covariance_error": 0.26772792637348175,
+        "component_covariance_errors": [
+          0.24065521359443665,
+          0.10666649043560028,
+          0.4558620750904083
+        ],
+        "component_min_eigen_ratio": 0.29441630840301514,
+        "component_mass": [
+          0.33935546875,
+          0.33154296875,
+          0.3291015625
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1390,
+          1358,
+          1348
+        ]
+      },
+      "seconds": 8.45795899699442
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 3,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "name": "vector_overlap",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 3,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+        "lr": 0.00425,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "name": "vector_overlap",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "research_discriminator": {
+          "name": "quadratic_tanh96_l3",
+          "implementation": "shared_critic_v1",
+          "hidden": 96,
+          "layers": 3,
+          "activation": "tanh",
+          "beta": 5.0,
+          "features": "quadratic",
+          "fourier": 0,
+          "frequency_scale": 1.0,
+          "quadratic_scale": 0.25,
+          "residual": false,
+          "residual_scale": 0.7071067811865476,
+          "output_scale": 1.0,
+          "raw_linear_skip": false,
+          "branch_hidden": 32,
+          "branch_scale": 0.25,
+          "normalization": "none"
+        },
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "quadratic_tanh96_l3",
+        "overrides": {
+          "d_hidden": 96,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "quadratic_tanh96_l3",
+            "implementation": "shared_critic_v1",
+            "hidden": 96,
+            "layers": 3,
+            "activation": "tanh",
+            "beta": 5.0,
+            "features": "quadratic",
+            "fourier": 0,
+            "frequency_scale": 1.0,
+            "quadratic_scale": 0.25,
+            "residual": false,
+            "residual_scale": 0.7071067811865476,
+            "output_scale": 1.0,
+            "raw_linear_skip": false,
+            "branch_hidden": 32,
+            "branch_scale": 0.25,
+            "normalization": "none"
+          }
+        }
+      },
+      "architecture": "quadratic_tanh96_l3",
+      "reference": "valid_search/discriminator/episodes/d128_l3_f3__vector_overlap.json.gz",
+      "reference_sha256": "49c882392411dfcb65f3c5261a63e0c8bf56fc170bf4e1dcbb621e0ef57301a0",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 19297
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.18167545920243539,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "FAIL",
+            "margin": -0.001675459202435392
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.11047154664993286,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.03952845335006713
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.7934877872467041,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "FAIL",
+            "margin": -0.3434877872467041
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 15,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": 50,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.25753810018725376,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.04891308272532268,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.1310869172746773
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.03558454290032387,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.11441545709967613
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.07936837524175644,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.37063162475824357
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 17,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 17,
+          "first_pass_step": 400,
+          "stable_from_step": 400,
+          "stable_from_seconds": null,
+          "confirmed_step": 600,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5
+      },
+      "artifact": "episodes/shared_c6__quadratic_tanh96_l3__vector_overlap.json.gz",
+      "uncompressed_sha256": "b766261ab1b684521678f73c5e0c73e66470463ac582ceee99f2b593c0220caa",
+      "live": {
+        "sw1_normalized": 0.18167545920243539,
+        "mean_error": 0.11047154664993286,
+        "covariance_error": 0.7934877872467041,
+        "target_scale": 0.8501437306404114,
+        "sample_count": 4096
+      },
+      "ema": {
+        "sw1_normalized": 0.04891308272532268,
+        "mean_error": 0.03558454290032387,
+        "covariance_error": 0.07936837524175644,
+        "target_scale": 0.8501437306404114,
+        "sample_count": 4096
+      },
+      "seconds": 8.660147411050275
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "d_hidden": 96,
+        "d_layers": 3,
+        "research_discriminator": {
+          "name": "raw_softplus96_l3",
+          "implementation": "shared_critic_v1",
+          "hidden": 96,
+          "layers": 3,
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "raw",
+          "fourier": 0,
+          "frequency_scale": 1.0,
+          "quadratic_scale": 0.25,
+          "residual": false,
+          "residual_scale": 0.7071067811865476,
+          "output_scale": 1.0,
+          "raw_linear_skip": false,
+          "branch_hidden": 32,
+          "branch_scale": 0.25,
+          "normalization": "none"
+        },
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "raw_softplus96_l3",
+        "overrides": {
+          "d_hidden": 96,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "raw_softplus96_l3",
+            "implementation": "shared_critic_v1",
+            "hidden": 96,
+            "layers": 3,
+            "activation": "softplus",
+            "beta": 5.0,
+            "features": "raw",
+            "fourier": 0,
+            "frequency_scale": 1.0,
+            "quadratic_scale": 0.25,
+            "residual": false,
+            "residual_scale": 0.7071067811865476,
+            "output_scale": 1.0,
+            "raw_linear_skip": false,
+            "branch_hidden": 32,
+            "branch_scale": 0.25,
+            "normalization": "none"
+          }
+        }
+      },
+      "architecture": "raw_softplus96_l3",
+      "reference": "study/episodes/cosine__vector_anisotropic.json.gz",
+      "reference_sha256": "42c72adf1f93fb9f9fa267ee38d5f66fc67a2db167ffe33e231d08d8fee46428",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 19009
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.05574511741754833,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12425488258245165
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.013264968991279602,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1367350310087204
+          },
+          {
+            "metric": "hq",
+            "value": 0.9755859375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12558593750000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.4171804239352544,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.4328195760647456
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.18749842047691345,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.03749842047691346
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 11,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 2,
+          "first_pass_step": 400,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.04967973826094342,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.1303202617390566
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.013264968991279602,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1367350310087204
+          },
+          {
+            "metric": "hq",
+            "value": 0.958740234375,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.10874023437500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.5828846494356791,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.2671153505643209
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.15155214071273804,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.0015521407127380427
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 8,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 1,
+          "first_pass_step": 750,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/shared_c6__raw_softplus96_l3__vector_anisotropic.json.gz",
+      "uncompressed_sha256": "e48fa22eee1f0ac8a2945b371a4f2a0cadcac3cc04e4555887f90d214e8a7e77",
+      "live": {
+        "sw1_normalized": 0.05574511741754833,
+        "mean_error": 0.020473085343837738,
+        "covariance_error": 0.16241951286792755,
+        "target_scale": 2.032285690307617,
+        "sample_count": 4096,
+        "mass_tv": 0.013264968991279602,
+        "min_mass_ratio": 0.960205078125,
+        "hq": 0.9755859375,
+        "component_covariance_error": 0.4171804239352544,
+        "component_covariance_errors": [
+          0.7272517681121826,
+          0.24767322838306427,
+          0.27661627531051636
+        ],
+        "component_min_eigen_ratio": 0.18749842047691345,
+        "component_mass": [
+          0.336669921875,
+          0.320068359375,
+          0.34326171875
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1379,
+          1311,
+          1406
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.04967973826094342,
+        "mean_error": 0.044104643166065216,
+        "covariance_error": 0.06087259575724602,
+        "target_scale": 2.032285690307617,
+        "sample_count": 4096,
+        "mass_tv": 0.013264968991279602,
+        "min_mass_ratio": 0.960205078125,
+        "hq": 0.958740234375,
+        "component_covariance_error": 0.5828846494356791,
+        "component_covariance_errors": [
+          0.8320896625518799,
+          0.47400471568107605,
+          0.4425595700740814
+        ],
+        "component_min_eigen_ratio": 0.15155214071273804,
+        "component_mass": [
+          0.336669921875,
+          0.320068359375,
+          0.34326171875
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1379,
+          1311,
+          1406
+        ]
+      },
+      "seconds": 10.345747397979721
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 3,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "name": "vector_overlap",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 3,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 0,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+        "lr": 0.00425,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "name": "vector_overlap",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "research_discriminator": {
+          "name": "raw_softplus96_l3",
+          "implementation": "shared_critic_v1",
+          "hidden": 96,
+          "layers": 3,
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "raw",
+          "fourier": 0,
+          "frequency_scale": 1.0,
+          "quadratic_scale": 0.25,
+          "residual": false,
+          "residual_scale": 0.7071067811865476,
+          "output_scale": 1.0,
+          "raw_linear_skip": false,
+          "branch_hidden": 32,
+          "branch_scale": 0.25,
+          "normalization": "none"
+        },
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "raw_softplus96_l3",
+        "overrides": {
+          "d_hidden": 96,
+          "d_layers": 3,
+          "fourier": 0,
+          "research_discriminator": {
+            "name": "raw_softplus96_l3",
+            "implementation": "shared_critic_v1",
+            "hidden": 96,
+            "layers": 3,
+            "activation": "softplus",
+            "beta": 5.0,
+            "features": "raw",
+            "fourier": 0,
+            "frequency_scale": 1.0,
+            "quadratic_scale": 0.25,
+            "residual": false,
+            "residual_scale": 0.7071067811865476,
+            "output_scale": 1.0,
+            "raw_linear_skip": false,
+            "branch_hidden": 32,
+            "branch_scale": 0.25,
+            "normalization": "none"
+          }
+        }
+      },
+      "architecture": "raw_softplus96_l3",
+      "reference": "valid_search/discriminator/episodes/d128_l3_f3__vector_overlap.json.gz",
+      "reference_sha256": "49c882392411dfcb65f3c5261a63e0c8bf56fc170bf4e1dcbb621e0ef57301a0",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 19009
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.10614583001035192,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.07385416998964807
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.10609917342662811,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.04390082657337188
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.3253627121448517,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.12463728785514833
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 16,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 10,
+          "first_pass_step": 50,
+          "stable_from_step": 750,
+          "stable_from_seconds": 4.887521416065283,
+          "confirmed_step": 950,
+          "confirmed_seconds": 6.1302738200174645
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.7916666666666666
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.036917046815739554,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.14308295318426045
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.02463843673467636,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.12536156326532363
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.05662302300333977,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.39337697699666024
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 17,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 17,
+          "first_pass_step": 400,
+          "stable_from_step": 400,
+          "stable_from_seconds": null,
+          "confirmed_step": 600,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5
+      },
+      "artifact": "episodes/shared_c6__raw_softplus96_l3__vector_overlap.json.gz",
+      "uncompressed_sha256": "d582440399a09b9899fc8f7fcba1c9c3ec6f1e0a9caaba118e966ac219a8eaf8",
+      "live": {
+        "sw1_normalized": 0.10614583001035192,
+        "mean_error": 0.10609917342662811,
+        "covariance_error": 0.3253627121448517,
+        "target_scale": 0.8501437306404114,
+        "sample_count": 4096
+      },
+      "ema": {
+        "sw1_normalized": 0.036917046815739554,
+        "mean_error": 0.02463843673467636,
+        "covariance_error": 0.05662302300333977,
+        "target_scale": 0.8501437306404114,
+        "sample_count": 4096
+      },
+      "seconds": 7.74841754604131
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.00425,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "d_hidden": 64,
+        "d_layers": 2,
+        "research_discriminator": {
+          "name": "additive_raw_fourier64_l2",
+          "implementation": "shared_critic_v1",
+          "hidden": 64,
+          "layers": 2,
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "additive",
+          "fourier": 2,
+          "frequency_scale": 1.0,
+          "quadratic_scale": 0.25,
+          "residual": false,
+          "residual_scale": 0.7071067811865476,
+          "output_scale": 1.0,
+          "raw_linear_skip": true,
+          "branch_hidden": 32,
+          "branch_scale": 0.25,
+          "normalization": "none"
+        },
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "additive_raw_fourier64_l2",
+        "overrides": {
+          "d_hidden": 64,
+          "d_layers": 2,
+          "fourier": 2,
+          "research_discriminator": {
+            "name": "additive_raw_fourier64_l2",
+            "implementation": "shared_critic_v1",
+            "hidden": 64,
+            "layers": 2,
+            "activation": "softplus",
+            "beta": 5.0,
+            "features": "additive",
+            "fourier": 2,
+            "frequency_scale": 1.0,
+            "quadratic_scale": 0.25,
+            "residual": false,
+            "residual_scale": 0.7071067811865476,
+            "output_scale": 1.0,
+            "raw_linear_skip": true,
+            "branch_hidden": 32,
+            "branch_scale": 0.25,
+            "normalization": "none"
+          }
+        }
+      },
+      "architecture": "additive_raw_fourier64_l2",
+      "reference": "study/episodes/cosine__vector_anisotropic.json.gz",
+      "reference_sha256": "42c72adf1f93fb9f9fa267ee38d5f66fc67a2db167ffe33e231d08d8fee46428",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 5796
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.05119354426970173,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12880645573029825
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.0384114533662796,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.11158854663372039
+          },
+          {
+            "metric": "hq",
+            "value": 0.9482421875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.09824218750000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.331361323595047,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.518638676404953
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.16660423576831818,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.016604235768318182
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 17,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 8,
+          "first_pass_step": 250,
+          "stable_from_step": 850,
+          "stable_from_seconds": 5.937582663958892,
+          "confirmed_step": 1050,
+          "confirmed_seconds": 7.4219946298981085
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.875
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.04940071071479855,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.13059928928520145
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.0384114533662796,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.11158854663372039
+          },
+          {
+            "metric": "hq",
+            "value": 0.98828125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13828125000000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.29513101279735565,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.5548689872026443
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.2741389274597168,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1241389274597168
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 10,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 6,
+          "first_pass_step": 550,
+          "stable_from_step": 950,
+          "stable_from_seconds": null,
+          "confirmed_step": 1150,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.9583333333333334
+      },
+      "artifact": "episodes/shared_c6__additive_raw_fourier64_l2__vector_anisotropic.json.gz",
+      "uncompressed_sha256": "6b4ba5cbcbe2a4b1adaf4a03b2995e1f907ea98e316d3377b32b8206a55a8088",
+      "live": {
+        "sw1_normalized": 0.05119354426970173,
+        "mean_error": 0.024947496131062508,
+        "covariance_error": 0.04711337015032768,
+        "target_scale": 2.032285690307617,
+        "sample_count": 4096,
+        "mass_tv": 0.0384114533662796,
+        "min_mass_ratio": 0.884765625,
+        "hq": 0.9482421875,
+        "component_covariance_error": 0.331361323595047,
+        "component_covariance_errors": [
+          0.38253745436668396,
+          0.35126417875289917,
+          0.26028233766555786
+        ],
+        "component_min_eigen_ratio": 0.16660423576831818,
+        "component_mass": [
+          0.357421875,
+          0.294921875,
+          0.34765625
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1464,
+          1208,
+          1424
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.04940071071479855,
+        "mean_error": 0.04201331362128258,
+        "covariance_error": 0.06591927260160446,
+        "target_scale": 2.032285690307617,
+        "sample_count": 4096,
+        "mass_tv": 0.0384114533662796,
+        "min_mass_ratio": 0.884765625,
+        "hq": 0.98828125,
+        "component_covariance_error": 0.29513101279735565,
+        "component_covariance_errors": [
+          0.4989549219608307,
+          0.2571412920951843,
+          0.12929682433605194
+        ],
+        "component_min_eigen_ratio": 0.2741389274597168,
+        "component_mass": [
+          0.357421875,
+          0.294921875,
+          0.34765625
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1464,
+          1208,
+          1424
+        ]
+      },
+      "seconds": 8.497259232914075
+    },
+    {
+      "recipe": {
+        "name": "shared_c6",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "candidate": {
+        "name": "shared_c6",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "particle_l2": 0.0,
+        "vicreg_weight": 0.05,
+        "cover_weight": 1.5,
+        "lr_multiplier": 1.0,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 3,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "name": "vector_overlap",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 64,
+        "d_layers": 2,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+        "lr": 0.00425,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "name": "vector_overlap",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4,
+        "research_discriminator": {
+          "name": "additive_raw_fourier64_l2",
+          "implementation": "shared_critic_v1",
+          "hidden": 64,
+          "layers": 2,
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "additive",
+          "fourier": 2,
+          "frequency_scale": 1.0,
+          "quadratic_scale": 0.25,
+          "residual": false,
+          "residual_scale": 0.7071067811865476,
+          "output_scale": 1.0,
+          "raw_linear_skip": true,
+          "branch_hidden": 32,
+          "branch_scale": 0.25,
+          "normalization": "none"
+        },
+        "loss_type": "logistic",
+        "gan_mode": "rp"
+      },
+      "discriminator_variant": {
+        "name": "additive_raw_fourier64_l2",
+        "overrides": {
+          "d_hidden": 64,
+          "d_layers": 2,
+          "fourier": 2,
+          "research_discriminator": {
+            "name": "additive_raw_fourier64_l2",
+            "implementation": "shared_critic_v1",
+            "hidden": 64,
+            "layers": 2,
+            "activation": "softplus",
+            "beta": 5.0,
+            "features": "additive",
+            "fourier": 2,
+            "frequency_scale": 1.0,
+            "quadratic_scale": 0.25,
+            "residual": false,
+            "residual_scale": 0.7071067811865476,
+            "output_scale": 1.0,
+            "raw_linear_skip": true,
+            "branch_hidden": 32,
+            "branch_scale": 0.25,
+            "normalization": "none"
+          }
+        }
+      },
+      "architecture": "additive_raw_fourier64_l2",
+      "reference": "valid_search/discriminator/episodes/d128_l3_f3__vector_overlap.json.gz",
+      "reference_sha256": "49c882392411dfcb65f3c5261a63e0c8bf56fc170bf4e1dcbb621e0ef57301a0",
+      "applied": [
+        {
+          "role": "d",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 5796
+        },
+        {
+          "role": "g",
+          "host_lr": 0.00425,
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "prior",
+          "host_lr": 0.0085,
+          "lr": 0.0085,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.10046036803501636,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.07953963196498363
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.14165635406970978,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.008343645930290217
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.24121853709220886,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.20878146290779115
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 6,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 1,
+          "first_pass_step": 100,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.06623675028719324,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.11376324971280675
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.057955387979745865,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.09204461202025413
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.1795571744441986,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.2704428255558014
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 17,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 17,
+          "first_pass_step": 400,
+          "stable_from_step": 400,
+          "stable_from_seconds": null,
+          "confirmed_step": 600,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5
+      },
+      "artifact": "episodes/shared_c6__additive_raw_fourier64_l2__vector_overlap.json.gz",
+      "uncompressed_sha256": "49091ea3d98d4fc58697bfc9ffb242c2d9fda735840f08b37e5014a9e87a3999",
+      "live": {
+        "sw1_normalized": 0.10046036803501636,
+        "mean_error": 0.14165635406970978,
+        "covariance_error": 0.24121853709220886,
+        "target_scale": 0.8501437306404114,
+        "sample_count": 4096
+      },
+      "ema": {
+        "sw1_normalized": 0.06623675028719324,
+        "mean_error": 0.057955387979745865,
+        "covariance_error": 0.1795571744441986,
+        "target_scale": 0.8501437306404114,
+        "sample_count": 4096
+      },
+      "seconds": 9.43949777900707
+    }
+  ]
+}

@@ -60,7 +60,10 @@
     "label": "shared c6",
     "indexes": [
       "reports/transfer_suite/unadjusted/runs/round1-0/index.json",
-      "reports/transfer_suite/unadjusted/runs/completion-1/index.json"
+      "reports/transfer_suite/unadjusted/runs/completion-1/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/cross/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-discriminator-search/completion/index.json"
     ]
   },
   {
@@ -140,6 +143,71 @@
     "indexes": [
       "reports/transfer_suite/unadjusted/runs/round1-2/index.json",
       "reports/transfer_suite/unadjusted/runs/completion-0/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g425_d2125_p85",
+    "label": "Ratio G0.00425 D0.002125 P0.0085",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g425_d6375_p85",
+    "label": "Ratio G0.00425 D0.006375 P0.0085",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/completion/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g34_d255_p85",
+    "label": "Ratio G0.0034 D0.00255 P0.0085",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g34_d68_p85",
+    "label": "Ratio G0.0034 D0.0068 P0.0085",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json",
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/completion/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g25_d375_p100",
+    "label": "Ratio G0.0025 D0.00375 P0.01",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json"
+    ]
+  },
+  {
+    "name": "ratio_g25_d15_p85",
+    "label": "Ratio G0.0025 D0.0015 P0.0085",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-ratio-search/screen/index.json"
+    ]
+  },
+  {
+    "name": "relative_cap_01",
+    "label": "relative cap 01",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-adapter-search/study/index.json.gz"
+    ]
+  },
+  {
+    "name": "relative_cap_025",
+    "label": "relative cap 025",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-adapter-search/study/index.json.gz"
+    ]
+  },
+  {
+    "name": "relative_cap_05",
+    "label": "relative cap 05",
+    "indexes": [
+      "reports/transfer_suite/unadjusted/runs/shared-adapter-search/study/index.json.gz"
     ]
   }
 ]

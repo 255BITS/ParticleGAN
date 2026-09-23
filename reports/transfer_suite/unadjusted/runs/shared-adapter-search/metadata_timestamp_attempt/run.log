@@ -1,0 +1,17 @@
+START control identity mode_hold
+{"event": "DONE", "candidate": "identity", "task": "mode_hold", "status": "FAIL", "suffix": 0, "shortfall": 0.0625, "live": {"modes": 7, "hq": 1.0}, "adapter_seconds": 0.737151907524094, "error": null, "parity": {"result_except_timing": true, "recipe": true, "applied_groups": true, "spec": true}}
+START control identity vector_unequal_mass
+{"event": "DONE", "candidate": "identity", "task": "vector_unequal_mass", "status": "FAIL", "suffix": 0, "shortfall": 0.16661049446298018, "live": {"sw1_normalized": 0.08800077244538253, "mean_error": 0.11754100024700165, "covariance_error": 0.09386519342660904, "target_scale": 1.7593294382095337, "sample_count": 4096, "mass_tv": 0.042167969048023224, "min_mass_ratio": 0.62255859375, "hq": 1.0, "component_covariance_error": 0.4760853685438633, "component_covariance_errors": [0.2082955539226532, 0.15850834548473358, 0.5482469201087952, 0.9892906546592712], "component_min_eigen_ratio": 5.055498331785202e-05, "component_mass": [0.586669921875, 0.265380859375, 0.135498046875, 0.012451171875], "target_mass": [0.550000011920929, 0.30000001192092896, 0.12999999523162842, 0.019999999552965164], "component_counts": [2403, 1087, 555, 51]}, "adapter_seconds": 0.6325265564955771, "error": null, "parity": {"result_except_timing": true, "recipe": true, "applied_groups": true, "spec": true}}
+START control identity img_bars4
+{"event": "DONE", "candidate": "identity", "task": "img_bars4", "status": "PASS", "suffix": 7, "shortfall": 0.0, "live": {"modes": 4, "hq": 1.0, "mean_rmse": 0.0070070489309728146, "quality_mode_fractions": [0.25, 0.25, 0.25, 0.25], "mode_fractions": [0.25, 0.25, 0.25, 0.25], "distribution_tv": 0.0}, "adapter_seconds": 0.31786301056854427, "error": null, "parity": {"result_except_timing": false, "recipe": true, "applied_groups": true, "spec": true}}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/ml2/hypergan/ParticleGAN-shared-adapter/benchmarks/transfer_suite/shared_adapter_search.py", line 151, in <module>
+    run(parser.parse_args().output)
+  File "/ml2/hypergan/ParticleGAN-shared-adapter/benchmarks/transfer_suite/shared_adapter_search.py", line 127, in run
+    episode(dict(name='identity', mechanism=mechanism(None)), name, 'control')
+  File "/ml2/hypergan/ParticleGAN-shared-adapter/benchmarks/transfer_suite/shared_adapter_search.py", line 124, in episode
+    assert all(parity.values()), parity
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'result_except_timing': False, 'recipe': True, 'applied_groups': True, 'spec': True}

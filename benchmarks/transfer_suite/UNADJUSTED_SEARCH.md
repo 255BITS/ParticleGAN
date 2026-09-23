@@ -66,10 +66,10 @@ feed evaluation metrics/target labels into training.
   same recipe before claiming a full score.
 - Architecture remains separate from formulation identity. Discriminator
   variants are allowed under the same unchanged recipe, with every architecture
-  trial and failure recorded. The supplied runner/importer currently implements
-  the common reference architecture profile; add explicit variant support and
-  validation before submitting another profile, instead of silently replacing
-  its networks. Changing the optimizer recipe per example is still prohibited.
+  trial and failure recorded. The ordinary runner uses the reference profile;
+  a research runner must declare a `discriminator_variant` card in each episode.
+  The importer accepts explicit vector D variants and shows reference-profile
+  performance separately. Changing the optimizer recipe per example is prohibited.
 - A longer training budget is a separate toy and cannot replace a failed run at
   the original budget.
 
@@ -80,7 +80,8 @@ feed evaluation metrics/target labels into training.
 2. Add an entry to `reports/transfer_suite/unadjusted/entries.json` with your
    candidate `name`, readable `label`, and repository-relative `indexes` paths.
    Multiple screening/completion indexes are allowed only for one identical
-   recipe, with no duplicate tests.
+   recipe. Duplicate tests require distinct declared discriminator variants;
+   rerunning an identical architecture does not supply another selection chance.
 3. Run `python -m reports.transfer_suite.unadjusted.build`. It checks matching
    test setups, unchanged per-case recipes, actual LRs/betas, source hashes and
    behavioral verdicts, then regenerates the readable leaderboard.
@@ -91,3 +92,24 @@ feed evaluation metrics/target labels into training.
 The existing `compare_defaults` adapter has tests for mixed G/particle groups,
 AE prior betas, direct particle optimizers and exact control replay. Run relevant
 tests when changing that integration; do not silently bypass an ignored setting.
+
+## Discriminator architecture trials
+
+Keep `original_spec` equal to the frozen reference job. Declare the D change as:
+
+```json
+{"discriminator_variant": {"name": "plain_d128", "overrides": {
+  "d_hidden": 128, "d_layers": 2, "fourier": 0,
+  "research_discriminator": null
+}}}
+```
+
+Use `shared_variants.architecture_spec(original_spec, discriminator_variant)`
+before applying the unchanged recipe with `effective_spec`. Only `d_hidden`,
+`d_layers`, `fourier` and `research_discriminator` may change. The null research
+card restores the ordinary MLP; custom cards need their exact constructor in
+the archived source. Set the episode's `architecture` to the variant name.
+Keep all trials in the submitted indexes, including the failures. The importer
+counts a test once if a declared architecture passes, while retaining the
+original-profile score and links to every attempt. This measures architecture
+support within one recipe, not a universal network architecture.

@@ -1,0 +1,59 @@
+[
+  {
+    "architecture": "additive_raw_fourier64_l2",
+    "task": "vector_anisotropic",
+    "checks": {
+      "recipe": true,
+      "candidate": true,
+      "spec": true,
+      "original_spec": true,
+      "architecture": true,
+      "discriminator_variant": true,
+      "applied": true,
+      "result": true,
+      "verdict": true,
+      "ema_verdict": true
+    },
+    "reference_sha256": "7ae30a3940cea8ec403567eb35ca2803f9cf0f62e44ad2c42da1d5b4dbf33977",
+    "artifact": "additive_raw_fourier64_l2__vector_anisotropic.json.gz",
+    "uncompressed_sha256": "84f0df2609752c9f7a7f398fd1ec6d6d42d6c9f479408bfbd307128322fe390b"
+  },
+  {
+    "architecture": "raw_softplus96_l3",
+    "task": "vector_overlap",
+    "checks": {
+      "recipe": true,
+      "candidate": true,
+      "spec": true,
+      "original_spec": true,
+      "architecture": true,
+      "discriminator_variant": true,
+      "applied": true,
+      "result": true,
+      "verdict": true,
+      "ema_verdict": true
+    },
+    "reference_sha256": "b62f6bd13b939fc9ca379a35033dda4b7635e3c850f7c238c9902538f2d5a618",
+    "artifact": "raw_softplus96_l3__vector_overlap.json.gz",
+    "uncompressed_sha256": "fc9ae23842871b7211dfbf4e576330ed5f954ec64ecc8302abe894f54ee53dff"
+  },
+  {
+    "architecture": "raw_silu128_l3",
+    "task": "vector_anisotropic",
+    "checks": {
+      "recipe": true,
+      "candidate": true,
+      "spec": true,
+      "original_spec": true,
+      "architecture": true,
+      "discriminator_variant": true,
+      "applied": true,
+      "result": true,
+      "verdict": true,
+      "ema_verdict": true
+    },
+    "reference_sha256": "1f3f0bc1fb05ae36624df7e635aed31224274f1e451a3bd007ecd96409fe0d82",
+    "artifact": "raw_silu128_l3__vector_anisotropic.json.gz",
+    "uncompressed_sha256": "4ee8b62f58d7a0a79fed6d1b62f7bb1b50ddba9617a72c31ad6e0f874d3aa698"
+  }
+]
