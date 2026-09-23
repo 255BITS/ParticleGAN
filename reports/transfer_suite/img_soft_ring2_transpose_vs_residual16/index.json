@@ -1,0 +1,26 @@
+{
+  "arms": {
+    "baseline_transpose12": {
+      "arm": "baseline_transpose12",
+      "confirmed_step": null,
+      "hq": 0.0,
+      "mean_rmse": 0.17322750389575958,
+      "modes": 0,
+      "seconds": 6.480277622118592,
+      "verdict": "FAIL"
+    },
+    "residual16": {
+      "arm": "residual16",
+      "confirmed_step": 575,
+      "hq": 0.9375,
+      "mean_rmse": 0.02200695499777794,
+      "modes": 2,
+      "seconds": 5.1880988399498165,
+      "verdict": "PASS"
+    }
+  },
+  "device": "cpu",
+  "hit": true,
+  "principal": "soft_ring2 topology+photometric: published transpose12 vs residual16",
+  "tip_sha": "510e0054b2499ce725482de8e7a4ae8d72fd8f25"
+}
