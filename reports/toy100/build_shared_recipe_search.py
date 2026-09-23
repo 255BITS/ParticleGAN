@@ -62,12 +62,15 @@ def build():
     summary_paths = sorted(ARTIFACTS.glob("*/summary.json"))
     for family in ("network-floor005-nine", "network-floor-bracket-v1",
                    "network-floor-residual-controls-v1",
-                   "network-floor-kappa-bracket-v1", "promotion-v1"):
+                   "network-floor-kappa-bracket-v1", "network-floor-lr-bracket-v1",
+                   "network-floor-noise-phase-v1", "promotion-v1"):
         summary_paths += sorted((ARTIFACTS / family).rglob("summary.json"))
     # The learnable-scale experiment is kept beside the fixed-noise searches
     # so its full 19-host replay and the native 100-mode trials share a folder.
     for family in ("learnable-shared", "learnable-broad"):
         summary_paths += sorted((ARTIFACTS.parent / family).glob("*/summary.json"))
+    summary_paths += sorted((ARTIFACTS.parent / "residual-escape-shape-v1-a3be165").rglob("summary.json"))
+    summary_paths += sorted((ARTIFACTS.parent / "production-shared-policy22").glob("*/summary.json"))
     for summary_path in summary_paths:
         directory = summary_path.parent
         summary = json.loads(summary_path.read_text())
@@ -101,7 +104,7 @@ def build():
         source_archive = directory / "source.tar.gz"
         rows.append(dict(
             run=(str(directory.relative_to(ARTIFACTS)) if directory.is_relative_to(ARTIFACTS)
-                 else f"{directory.parent.name}/{directory.name}"),
+                 else str(directory.relative_to(ARTIFACTS.parent))),
             kind="installed-wheel control" if control else "shared candidate screen",
             observed_live_passes=summary["passed"], attempted=summary["attempted"],
             observed_overall=summary["overall"],
@@ -136,6 +139,15 @@ def build():
                 threads=protocol.get("threads"),
             ),
         ))
+    # Promotion folders retain exact copies of their prerequisite episodes.
+    # Keep those audit paths visible without presenting them as new trials.
+    episode_sets = {}
+    for row in rows:
+        directory = (ROOT / row["provenance"]["summary"]).parent
+        signature = tuple(sorted(_digest(path) for path in (directory / "episodes").glob("*.json.gz")))
+        if signature:
+            row["reused_evidence_of"] = episode_sets.get(signature)
+            episode_sets.setdefault(signature, row["run"])
     output = dict(protocol="shared-recipe-search-ledger-v1", candidate_selection="no seed search",
                   note="Observed subset and schedule-mismatched scores are diagnostics, not 22-case passes.",
                   rows=rows)
@@ -164,6 +176,8 @@ def build():
     for row in candidates:
         validity = ("full 19, same schedule/noise" if row["eligible_full19_evidence"]
                     else "; ".join(row["limitations"]) or "subset diagnostic")
+        if row.get("reused_evidence_of"):
+            validity += f"; reuses `{row['reused_evidence_of']}`"
         config = row["provenance"]["config"]
         config_cell = (f"{_local(ROOT / config)} · `{row['provenance']['config_sha256'][:12]}`"
                        if config else "—")
@@ -175,7 +189,8 @@ def build():
               "pass/fail case, full resolved recipe, noise and model policies, exact config digest,",
               "source-archive digest, and custom-host schedule validity. A PASS on a",
               "subset never counts as 19/19 or 22/22. The combined 22-toy gate is",
-              "[`benchmarks/toy_suite.py`](../../benchmarks/toy_suite.py).", ""]
+              "[`benchmarks/toy_suite.py`](../../benchmarks/toy_suite.py). Promotion",
+              "references may reuse exact saved episodes; marked copies are not independent trials.", ""]
     (HERE / "shared-recipe-search.md").write_text("\n".join(lines))
     return output
 

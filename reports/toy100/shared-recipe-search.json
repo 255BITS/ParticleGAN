@@ -122,7 +122,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "beta1-half-bottleneck8",
@@ -232,7 +233,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "cap2-all19",
@@ -362,7 +364,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "cap2-vector6",
@@ -466,7 +469,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "coupled_short_warmup-bottleneck8",
@@ -573,7 +577,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "current-branch-public19",
@@ -694,7 +699,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta99-a6-inputend02-subset6",
@@ -797,7 +803,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta99-a6-native10",
@@ -908,7 +915,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta99-a6-priorlr3-inputend02-subset",
@@ -1015,7 +1023,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta99-end015-bottleneck8",
@@ -1122,7 +1131,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta999-a6-all19",
@@ -1249,7 +1259,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta999-a6-inputend02-subset6",
@@ -1352,7 +1363,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta999-a6-priorbetas99-subset6",
@@ -1458,7 +1470,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta999-a6-priorlr3-inputend02-subset",
@@ -1561,7 +1574,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta999-a6-priorlr3-subset6",
@@ -1664,7 +1678,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta999-a6-subset7",
@@ -1769,7 +1784,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta999-priorlr25-end02-subset8",
@@ -1876,7 +1892,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta999-priorlr3-end015-subset8",
@@ -1983,7 +2000,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta999-priorlr3-end02-all19",
@@ -2110,7 +2128,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-beta999-priorlr3-end02-floor005-subset9",
@@ -2219,7 +2238,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-schedule-nowarm-trajectory",
@@ -2311,7 +2331,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-schedule-warm02-all19",
@@ -2438,7 +2459,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-schedule-warm02-trajectory",
@@ -2530,7 +2552,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "exact-v3-outputonly-warm08-subset9",
@@ -2639,7 +2662,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "final-branch-public19",
@@ -2760,7 +2784,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "g-timescale-bottleneck8",
@@ -2867,7 +2892,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisegrid_v1_beta999_p3_o028_e02",
@@ -2974,7 +3000,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisegrid_v1_beta999_p3_o029_e02_i025",
@@ -3081,7 +3108,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisegrid_v1_beta99_o0275_e0125",
@@ -3188,7 +3216,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisegrid_v1_beta99_o0275_e015",
@@ -3295,7 +3324,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisegrid_v1_beta99_o0275_e0175",
@@ -3402,7 +3432,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisegrid_v1_beta99_o028_e0125",
@@ -3509,7 +3540,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisegrid_v1_beta99_o028_e015",
@@ -3616,7 +3648,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisegrid_v1_beta99_o028_e0175",
@@ -3723,7 +3756,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisegrid_v1_beta99_o029_e0125",
@@ -3830,7 +3864,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisegrid_v1_beta99_o029_e015_i025",
@@ -3937,7 +3972,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisegrid_v1_beta99_o029_e0175",
@@ -4044,7 +4080,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisnear_v1_near_a055",
@@ -4151,7 +4188,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisnear_v1_near_e012",
@@ -4258,7 +4296,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisnear_v1_near_e013",
@@ -4365,7 +4404,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "noisnear_v1_near_i045",
@@ -4472,7 +4512,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "output_only_warm02-bottleneck8",
@@ -4579,7 +4620,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "recommended-vector6",
@@ -4683,7 +4725,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "regscreen_v1_kappa100",
@@ -4795,7 +4838,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "regscreen_v1_kappa150",
@@ -4907,7 +4951,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "regscreen_v1_prior002",
@@ -5019,7 +5064,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "regscreen_v1_prior010",
@@ -5131,7 +5177,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "repair-beta99",
@@ -5224,7 +5271,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "repair-cap2",
@@ -5317,7 +5365,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "repair-cap6",
@@ -5410,7 +5459,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "repair-lr001_prior6",
@@ -5503,7 +5553,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3-end01-anneal04-adapted-all19",
@@ -5632,7 +5683,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3-end01-anneal04-outwarm02-adapted-all19",
@@ -5762,7 +5814,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3-end01-anneal04-outwarm02-lr002125-subset7",
@@ -5869,7 +5922,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3-end01-anneal04-outwarm02-trajectory",
@@ -5963,7 +6017,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3-end01-anneal04-outwarm05-subset4",
@@ -6064,7 +6119,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3-end01-anneal04-outwarm05-trajectory",
@@ -6158,7 +6214,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3-end01-anneal04-outwarm10-subset4",
@@ -6259,7 +6316,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3_anneal04-failed5",
@@ -6360,7 +6418,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3_cap2-failed5",
@@ -6461,7 +6520,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3_end01_anneal04-vector6",
@@ -6563,7 +6623,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3_end01_cap2-vector6",
@@ -6666,7 +6727,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3_end01_cap2_floor005-vector6",
@@ -6769,7 +6831,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3_floor005-failed5",
@@ -6870,7 +6933,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3_input01-trajectory-adapted",
@@ -6961,7 +7025,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3_input01-vector6",
@@ -7064,7 +7129,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3_input05_end01-vector6",
@@ -7167,7 +7233,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3_output_only-trajectory-adapted",
@@ -7258,7 +7325,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3_output_only-vector6",
@@ -7361,7 +7429,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3core-noise029-adapted-all19",
@@ -7487,7 +7556,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "v3core-noise029-all19",
@@ -7616,7 +7686,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor005-nine/episode",
@@ -7729,7 +7800,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-bracket-v1/full19/episode",
@@ -7860,7 +7932,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-bracket-v1/rows/floor002/episode",
@@ -7973,7 +8046,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-bracket-v1/rows/floor010/episode",
@@ -8085,7 +8159,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-bracket-v1/rows/floor020/episode",
@@ -8198,7 +8273,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-residual-controls-v1/rows/cap100_floor005/episode",
@@ -8294,7 +8370,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-residual-controls-v1/rows/cap100_floor020/episode",
@@ -8390,7 +8467,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-residual-controls-v1/rows/cap100_nofloor/episode",
@@ -8485,7 +8563,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-residual-controls-v1/rows/cap125_nofloor/episode",
@@ -8580,7 +8659,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-kappa-bracket-v1/rows/kappa110/episode",
@@ -8695,7 +8775,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-kappa-bracket-v1/rows/kappa115/episode",
@@ -8810,7 +8891,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-kappa-bracket-v1/rows/kappa120/episode",
@@ -8925,7 +9007,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "network-floor-kappa-bracket-v1/rows/kappa125/episode",
@@ -9040,7 +9123,1172 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-lr-bracket-v1/runs/lr00415",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_lr00415",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00415,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00415/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00415/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00415/accuracy_network_floor010_lr00415.json",
+        "config_sha256": "ada0f7f41633517a8949471910c77d4ecb6c54105427bfbde39026e1b9db46a6",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00415/source.tar.gz",
+        "source_archive_sha256": "b332238cde5ee2d11660ed6e03068679aecd0e0cbc0a4c31f870daa81486f888",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-lr-bracket-v1/runs/lr00420",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_lr00420",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.0042,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00420/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00420/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00420/accuracy_network_floor010_lr00420.json",
+        "config_sha256": "6f3c79857d8936daa30f6e17d659ad022edfdda6353cfb6c4ded1d1a0e4e04f8",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00420/source.tar.gz",
+        "source_archive_sha256": "5bcaa3d67e7a5ec190d79af1e8acfde6b440ebb64782f607f2e7a2644cb5d177",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-lr-bracket-v1/runs/lr00430",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_lr00430",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.0043,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00430/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00430/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00430/accuracy_network_floor010_lr00430.json",
+        "config_sha256": "51da63a414213dfbb7c0fa4b4bb8b26dc3883d74a2c82579bbe7dc9802e18af6",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00430/source.tar.gz",
+        "source_archive_sha256": "9e1fa455586045befff3316a42f57f24738e2735d2f63c7410b0ab45aeaa2241",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-lr-bracket-v1/runs/lr00435",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_lr00435",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00435,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00435/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00435/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00435/accuracy_network_floor010_lr00435.json",
+        "config_sha256": "00d8768e59863449efae3245598040040533ac270bc64afef361acbcfac53d3b",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-lr-bracket-v1/runs/lr00435/source.tar.gz",
+        "source_archive_sha256": "0d378c34c438691b137ca5b1f693eec3c233be0e198dc1b0257286bb8c31429e",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-noise-phase-v1/runs/inputend005",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_inputend005",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.05,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend005/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend005/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend005/accuracy_network_floor010_inputend005.json",
+        "config_sha256": "2950892f85a98f887c7ca99156cab6067e7f1614ad02e7c476632562fb43b7ab",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend005/source.tar.gz",
+        "source_archive_sha256": "a0283de3f4372e1cacff45a094029f6bb856eb20f1eb1b1fb991246d5a6243b7",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-noise-phase-v1/runs/inputend0075",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_inputend0075",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.075,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend0075/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend0075/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend0075/accuracy_network_floor010_inputend0075.json",
+        "config_sha256": "bbe05437d30fd472d8b5813cb5d92e4a0e426fe6b03371f0aeba9afdd2b61e01",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend0075/source.tar.gz",
+        "source_archive_sha256": "feaf456dbdccf694c56573a727f425dfaa15855568bf74597869f881b6db82c6",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-noise-phase-v1/runs/inputend0125",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_inputend0125",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.125,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend0125/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend0125/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend0125/accuracy_network_floor010_inputend0125.json",
+        "config_sha256": "1a334beb2bc4a3dd3d234427c8e70eae81f6cd529fc3efc3cce5ddc9d73a4e56",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend0125/source.tar.gz",
+        "source_archive_sha256": "2f85308011bd6f71e1ade252e6b1a0cfb753dd7f4fe591b411c1d8908c0c5379",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-noise-phase-v1/runs/inputend015",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_inputend015",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.15,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend015/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend015/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend015/accuracy_network_floor010_inputend015.json",
+        "config_sha256": "78e9bcbec0c845d41332a978f26d965e801c602b38a34a18b1c2882c9a9760fa",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/inputend015/source.tar.gz",
+        "source_archive_sha256": "a63e40d65ce3b1ec6c3904f94f27dcb77e6f43f531c9b0fe80c7ac384a77840d",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-noise-phase-v1/runs/outwarm010",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_outwarm010",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.1
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm010/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm010/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm010/accuracy_network_floor010_outwarm010.json",
+        "config_sha256": "433b1051262de06d2dd7c940cadc6633b24dc5ab599b38cb0700343a7f5f4846",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm010/source.tar.gz",
+        "source_archive_sha256": "45e015c491697d472d9dc45964236ca45ed9629954b1358287c1a87b23a18630",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-noise-phase-v1/runs/outwarm015",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "accuracy_network_floor010_outwarm015",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.15
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm015/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm015/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm015/accuracy_network_floor010_outwarm015.json",
+        "config_sha256": "09ea48e5c2f5c7ccf6df7b1e0cea7e3950f643df014a256422665777262d69ab",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm015/source.tar.gz",
+        "source_archive_sha256": "edcafc89d59db505789d6c04bf221f4186bf994ecb462920ce13c901e0858f66",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-noise-phase-v1/runs/outwarm025",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "accuracy_network_floor010_outwarm025",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.25
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm025/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm025/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm025/accuracy_network_floor010_outwarm025.json",
+        "config_sha256": "3e69de25fa13ebfcd17acf352f8ee3b858949686c8e1878c4fe7c4b14eabf559",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm025/source.tar.gz",
+        "source_archive_sha256": "2b21c596d71d67ba27c29f5c3dbbe4ffa1d2c4b2b233e987d8031b492ce89156",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "network-floor-noise-phase-v1/runs/outwarm030",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "accuracy_network_floor010_outwarm030",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.3
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm030/summary.json",
+        "protocol": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm030/protocol.json",
+        "config": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm030/accuracy_network_floor010_outwarm030.json",
+        "config_sha256": "921168d74cfddbff5dbf9ca0a539688eecfe74cc47e9c81422a6274366c189f8",
+        "source_archive": "artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1/runs/outwarm030/source.tar.gz",
+        "source_archive_sha256": "d283fbda1e5d71c382611194a7abb189f31d9b7ba1ab897cf3909b43ce13f06b",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "promotion-v1/beta9975/nine/episode",
@@ -9153,7 +10401,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "promotion-v1/beta9975/residual_reference",
@@ -9249,7 +10498,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "promotion-v1/out0285/nine/episode",
@@ -9362,7 +10612,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "promotion-v1/out0285/residual_reference",
@@ -9458,7 +10709,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "promotion-v1/out0295/nine/episode",
@@ -9571,7 +10823,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "promotion-v1/out0295/residual_reference",
@@ -9667,7 +10920,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "promotion-v1/outwarm015/nine/episode",
@@ -9780,7 +11034,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "promotion-v1/outwarm015/residual_reference",
@@ -9876,7 +11131,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": "network-floor-noise-phase-v1/runs/outwarm015"
     },
     {
       "run": "promotion-v1/outwarm025/nine/episode",
@@ -9989,7 +11245,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "promotion-v1/outwarm025/residual_reference",
@@ -10085,7 +11342,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": "network-floor-noise-phase-v1/runs/outwarm025"
     },
     {
       "run": "promotion-v1/priorreg060/nine/episode",
@@ -10198,7 +11456,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "promotion-v1/priorreg060/residual_reference",
@@ -10294,7 +11553,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "learnable-shared/candidate19",
@@ -10422,7 +11682,8 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
     },
     {
       "run": "learnable-broad/bottleneck8",
@@ -10530,7 +11791,843 @@
         "seed": 0,
         "device": "cpu",
         "threads": 1
-      }
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "residual-escape-shape-v1-a3be165/rows/beta995/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "residual_escape_shape_v1_beta995",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.995
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/beta995/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/beta995/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/beta995/episode/beta995.json",
+        "config_sha256": "07aa9826349b43e92ed1cdb12474a4cd2b53f0966813b0d18f5cb45865ae75e5",
+        "source_archive": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/beta995/episode/source.tar.gz",
+        "source_archive_sha256": "f7eb940bd01bd62993e80ad4bb6c6d7322f5eb6cd4d617d82fb4d21f1a34b2f4",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "residual-escape-shape-v1-a3be165/rows/beta9975/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "residual_escape_shape_v1_beta9975",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.9975
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/beta9975/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/beta9975/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/beta9975/episode/beta9975.json",
+        "config_sha256": "17223b5f1c97e7c43221827da3ff0908d8a5ac6c399d020c50a9af0a3f07c620",
+        "source_archive": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/beta9975/episode/source.tar.gz",
+        "source_archive_sha256": "28cca7ee09a0a4377aac9a87327536c45878f5d2696736d063bfccb38eefb957",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": "promotion-v1/beta9975/residual_reference"
+    },
+    {
+      "run": "residual-escape-shape-v1-a3be165/rows/out0285/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "residual_escape_shape_v1_out0285",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.0285,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/out0285/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/out0285/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/out0285/episode/out0285.json",
+        "config_sha256": "89547a0ce92936f3cb2f142a99086c50f211f58e16b47e0a1001ecba46758ec1",
+        "source_archive": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/out0285/episode/source.tar.gz",
+        "source_archive_sha256": "cd261ca1405afc9a8e469821c9ef74d4269154a85dbc22e7c3009d58b564994d",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": "promotion-v1/out0285/residual_reference"
+    },
+    {
+      "run": "residual-escape-shape-v1-a3be165/rows/out0295/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "residual_escape_shape_v1_out0295",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.0295,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/out0295/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/out0295/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/out0295/episode/out0295.json",
+        "config_sha256": "3b0f54d8c11b3ea40ebed1e74bef654ec93c8e2107dce3c83b83744b720c6e2a",
+        "source_archive": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/out0295/episode/source.tar.gz",
+        "source_archive_sha256": "39f4df61beec911fe12630f97d2e50b0a5c5348e160104d548a25766aadb171d",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": "promotion-v1/out0295/residual_reference"
+    },
+    {
+      "run": "residual-escape-shape-v1-a3be165/rows/priorreg040/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 0,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 0,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [],
+      "failing_tasks": [
+        "residual_student"
+      ],
+      "recipe": {
+        "name": "residual_escape_shape_v1_priorreg040",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.04,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/priorreg040/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/priorreg040/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/priorreg040/episode/priorreg040.json",
+        "config_sha256": "b1e71b625924dac1a4d6f3f95e44b02ea0f689fdf8bd0be87f1a30be3a5491a1",
+        "source_archive": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/priorreg040/episode/source.tar.gz",
+        "source_archive_sha256": "c36f80a6bca647f3bee9b66c7d2b8cae96afff92717788a7273b81cc078fc8f1",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "residual-escape-shape-v1-a3be165/rows/priorreg060/episode",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 1,
+      "attempted": 1,
+      "observed_overall": "INCOMPLETE",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 1,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": false,
+      "eligible_full19_evidence": false,
+      "limitations": [
+        "subset only"
+      ],
+      "selected_tasks": [
+        "residual_student"
+      ],
+      "passing_tasks": [
+        "residual_student"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "residual_escape_shape_v1_priorreg060",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.06,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600,
+        "network_lr_floor": 0.01
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/priorreg060/episode/summary.json",
+        "protocol": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/priorreg060/episode/protocol.json",
+        "config": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/priorreg060/episode/priorreg060.json",
+        "config_sha256": "adc8be17e01bbf12eb231db99bc7afd01e1252e2ac5014440814649696884085",
+        "source_archive": "artifacts/toy100-accuracy/residual-escape-shape-v1-a3be165/rows/priorreg060/episode/source.tar.gz",
+        "source_archive_sha256": "51b5a12a024e7822427e60fec4b269cd8c210f650d9c0780e777971bca26e22b",
+        "compare_defaults_sha256": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": "promotion-v1/priorreg060/residual_reference"
+    },
+    {
+      "run": "production-shared-policy22/candidate19",
+      "kind": "shared candidate screen",
+      "observed_live_passes": 15,
+      "attempted": 19,
+      "observed_overall": "FAIL",
+      "strict_regrade_status": "FAIL",
+      "strict_regrade_passes": 15,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "legacy controller read candidate schedule",
+      "noise_mechanism_verified": true,
+      "complete_19": true,
+      "eligible_full19_evidence": true,
+      "limitations": [],
+      "selected_tasks": [
+        "two_pole",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "ae_gan_hold",
+        "cover_leftover",
+        "unused_token_hold",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2"
+      ],
+      "passing_tasks": [
+        "two_pole",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "ae_gan_hold",
+        "cover_leftover",
+        "unused_token_hold",
+        "mid_scale_identity",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_spiral",
+        "img_bars4",
+        "img_intensity2"
+      ],
+      "failing_tasks": [
+        "mode_hold",
+        "vector_overlap",
+        "img_stripes2",
+        "img_blobs4"
+      ],
+      "recipe": {
+        "name": "accuracy_shared_policy_affine_square_h1600",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": {
+        "output_noise_std": 0.029,
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_warmup": 0.2
+      },
+      "model_policy": {
+        "toy100_model": "affine_square_v1",
+        "network_lr_horizon_cap": 1600
+      },
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/production-shared-policy22/candidate19/summary.json",
+        "protocol": "artifacts/toy100-accuracy/production-shared-policy22/candidate19/protocol.json",
+        "config": "artifacts/toy100-accuracy/production-shared-policy22/candidate19/accuracy_shared_policy.json",
+        "config_sha256": "681f6140095edd64062eee619f43a036594c86e4fdb56aad538a8be885574a7b",
+        "source_archive": "artifacts/toy100-accuracy/production-shared-policy22/candidate19/source.tar.gz",
+        "source_archive_sha256": "92900bdddcc17789be886cd607bf65eae98b3715c775722522903242a390c114",
+        "compare_defaults_sha256": "13257eef2d195a57109e83613d226866270ce73c32f472b3991c10e2d8ef6060",
+        "noise_source_sha256": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+        "protocol_version": "toy100-compatibility-screen-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
+    },
+    {
+      "run": "production-shared-policy22/public19",
+      "kind": "installed-wheel control",
+      "observed_live_passes": 19,
+      "attempted": 19,
+      "observed_overall": "PASS",
+      "strict_regrade_status": "PASS",
+      "strict_regrade_passes": 19,
+      "strict_regrade_reason": null,
+      "valid_shared_schedule": true,
+      "schedule_reason": "installed-wheel public v3 control",
+      "noise_mechanism_verified": null,
+      "complete_19": true,
+      "eligible_full19_evidence": false,
+      "limitations": [],
+      "selected_tasks": [
+        "two_pole",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "ae_gan_hold",
+        "cover_leftover",
+        "unused_token_hold",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2"
+      ],
+      "passing_tasks": [
+        "two_pole",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "ae_gan_hold",
+        "cover_leftover",
+        "unused_token_hold",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2"
+      ],
+      "failing_tasks": [],
+      "recipe": {
+        "name": "gan_v3",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 7000,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "reg_every": 1,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "noise": null,
+      "model_policy": null,
+      "provenance": {
+        "summary": "artifacts/toy100-accuracy/production-shared-policy22/public19/summary.json",
+        "protocol": "artifacts/toy100-accuracy/production-shared-policy22/public19/protocol.json",
+        "config": null,
+        "config_sha256": null,
+        "source_archive": "artifacts/toy100-accuracy/production-shared-policy22/public19/source.tar.gz",
+        "source_archive_sha256": "be352b7389da68bab753456667cd51b6329b31b88bd8ec01e5ec2fadc1a86ef2",
+        "compare_defaults_sha256": "13257eef2d195a57109e83613d226866270ce73c32f472b3991c10e2d8ef6060",
+        "noise_source_sha256": null,
+        "protocol_version": "public-default-verification-v1",
+        "seed": 0,
+        "device": "cpu",
+        "threads": 1
+      },
+      "reused_evidence_of": null
     }
   ]
 }
