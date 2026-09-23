@@ -63,16 +63,42 @@ changing shared defaults. No seed sweep or additional tuning was performed.
 
 ## Reproduce
 
-Install the repository's experiment dependencies, then run from its root:
+Install the repository's experiment dependencies. Generate both live and
+EMA previews from one 7,000-update training run:
 
 ```bash
-python -u reports/readme-100gaussians/generate.py > /tmp/readme-image-20k.log 2>&1
+python -u reports/readme-100gaussians/generate.py \
+  --steps 7000 --views live ema --frame-every 25 --fps 25 \
+  --output-dir artifacts/100gaussians-7k > /tmp/readme-image-7k.log 2>&1
+tail -f /tmp/readme-image-7k.log
+```
+
+These are the default training/rendering options; the default output directory
+is `artifacts/100gaussians`. Select `--views live` or `--views ema` for one GIF.
+The seed stays 1234. Supported frame rates are 1, 2, 4, 5, 10, 20, 25, 50,
+and 100 fps, which GIF timing can represent exactly. Each GIF holds its final
+frame for one second.
+
+To reproduce the 20k EMA configuration shown in the README:
+
+```bash
+python -u reports/readme-100gaussians/generate.py \
+  --steps 20000 --views ema --frame-every 100 --fps 25 \
+  --output-dir artifacts/100gaussians-20k > /tmp/readme-image-20k.log 2>&1
 tail -f /tmp/readme-image-20k.log
 ```
 
-The script replaces the root GIF and this directory's `summary.json`. Frames
-and evaluation samples are saved under `/tmp/particlegan-develop-qc/readme-image-20k/`.
-The recorded run log is `/tmp/particlegan-develop-qc/readme-image-20k.log`.
+Outputs stay in the selected directory: `100gaussians-live.gif` and/or
+`100gaussians-ema.gif`, per-view PNG frames and `final_samples.npz`, shared
+`final-models.pt`, `metrics.jsonl`, and `summary.json`. Both views use the same
+fixed particle indices and evaluation draws, with separate metrics and
+explicit labels. The summary records all CLI options, recipe settings,
+timing, source hashes, and environment. Choose a fresh output directory for
+each invocation; existing results are not overwritten. `artifacts/` is
+ignored by Git. The command does not replace the root GIF or historical
+report summaries; preview the output before publishing it.
+
+The historical 20k run's log is `/tmp/particlegan-develop-qc/readme-image-20k.log`.
 [summary.json](summary.json) records all resolved recipe fields, checkpoint
 metrics, source hashes, checkout commit, and environment. Source hashes cover
 the working tree at the start of this run, including the renderer changes;
