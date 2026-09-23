@@ -69,7 +69,7 @@ from particlegan.particle_prior import (  # noqa: E402
     PRIOR_KINDS, canonical_prior_kind, make_prior,
 )
 from particlegan import (  # noqa: E402
-    GradientPenalty, ParticlePrior, get_recipe, learning_rate_scale,
+    GANTrainer, GradientPenalty, ParticlePrior, get_recipe, learning_rate_scale,
 )
 
 from lib.toy_models import (  # noqa: E402
@@ -244,8 +244,8 @@ def train(
                 nn.init.zeros_(m.bias)
 
     if use_training_api:
-        trainer = recipe.make_trainer(
-            G, D, prior=prior, seed=seed,
+        trainer = GANTrainer(
+            recipe, G, D, prior=prior, seed=seed,
             latent_generator=latent_gen, penalty_generator=penalty_gen,
             optimizer_options={"fused": fused_adam},
             penalty_options={"fd_eps": reg_fd_eps},

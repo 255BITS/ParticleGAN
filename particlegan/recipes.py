@@ -1,4 +1,4 @@
-"""One shared winning recipe; callers provide explicit component overrides."""
+"""Shared hyperparameters and small component factories; callers own control flow."""
 from dataclasses import asdict, dataclass, replace
 import math
 
@@ -154,11 +154,6 @@ class Recipe:
         from .vicreg_loss import ParticleRegularizer
         return ParticleRegularizer(**{"weight": self.prior_reg, **overrides})
 
-    def make_trainer(self, generator, discriminator, **options):
-        """Build the optional unconditional GAN training helper."""
-        from .training import GANTrainer
-        return GANTrainer(self, generator, discriminator, **options)
-
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, **adam_kwargs):
         """Return ordinary ``(Adam(G + optional E + prior), Adam(D))`` optimizers.
 
@@ -189,13 +184,34 @@ class Recipe:
                 Adam(d_params, lr=self.lr * self.d_lr_mult, betas=self.betas, **adam_kwargs))
 
 
-def get_recipe(**overrides):
-    """Return the winning defaults with explicit keyword overrides.
+def get_recipe(name="gan", **overrides):
+    """Select a model family with current shared defaults and explicit overrides.
 
-    ``name`` is checkpoint/report metadata, never a preset selector. Configure
-    model, prior and encoder choices directly; all share the same defaults.
+    Names configure components, never training control flow or historical
+    optimizer versions. Use ``Recipe(**saved_fields)`` for resolved checkpoints
+    and ``recipe.replace(name=...)`` for custom report labels.
     """
-    return Recipe(**overrides)
+    families = {
+        "gan": {},
+        "mog": dict(prior_kind="mog", sigma_rel=.025, num_particles=400),
+        "ddgan": dict(model="ddgan", conditioning="ucd", num_classes=4),
+        "ddgan_mog": dict(model="ddgan", conditioning="ucd", num_classes=4,
+                          prior_kind="mog", sigma_rel=.025, num_particles=400),
+        "ae_gan": dict(encoder_mode="ae", prior_kind="mog", sigma_rel=.025,
+                       num_particles=400, z_dim=2),
+        "vae_gan": dict(encoder_mode="hard", prior_kind="mog", sigma_rel=.025,
+                        num_particles=400, z_dim=2),
+        "ae_ddgan": dict(model="ddgan", encoder_mode="ae", prior_kind="mog",
+                         sigma_rel=.025, num_particles=1024, z_dim=64,
+                         batch_size=64, routing_temperature=.125,
+                         distance_reduction="mean"),
+    }
+    if name not in families:
+        raise ValueError(f"Unknown recipe {name!r}; choose {', '.join(families)}")
+    options = families[name]
+    if name != "gan":
+        options = {"name": name, **options}
+    return Recipe(**{**options, **overrides})
 
 
 def learning_rate_scale(step, total_steps, start=0.6, floor=0.05):

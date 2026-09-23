@@ -122,10 +122,14 @@ are the earlier live `(record, z)` RpGAN gate. They stay as a CPU example.
 `experiments/train_gym_particle_finetune.py` does not call that game. Its
 controller step is `controller_objective`.
 
-That toy's own readout is unchanged: observation-critic EMA action MSE 2.1065
-(collapse, threshold ≥ 1) and live-pair EMA action MSE 0.1396 (pass, threshold
-≤ 0.18). Init paired error was 1.9997. Those figures are not Lunar Lander
-landings.
+The historical report recorded observation-critic EMA action MSE 2.1065 and
+live-pair EMA action MSE 0.1396, against thresholds ≥ 1 and ≤ 0.18 respectively.
+The develop quality-control replay, including the exact original `c7e8a73`
+source, instead produces 1.7523 and 0.24897: the collapse reproduces, but the
+live-pair acceptance target fails. The original thresholds remain unchanged;
+the CLI reports failure and the historical convergence assertion is tracked
+as a strict expected failure in tests. These are CPU toy metrics, not Lunar
+Lander landings.
 
 ## Logs and commands
 

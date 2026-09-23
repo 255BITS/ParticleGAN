@@ -1,6 +1,6 @@
 """Verify the public GAN default through real user-facing construction paths.
 
-Vector and image cases train through get_recipe().make_trainer(). The nine
+Vector and image cases train through GANTrainer(get_recipe(), ...). The nine
 legacy auxiliary hosts retain their required custom loops, using public GAN
 primitives and the same unmodified global recipe. Frozen host data, model
 initialization order, RNG streams, resources, steps, measurements, and gates
@@ -233,7 +233,7 @@ def rate_action(trainer, completed):
 
 
 def setup_vector(spec, card, base):
-    from particlegan import ParticlePrior
+    from particlegan import GANTrainer, ParticlePrior
     from lib.toy_models import SimpleMLPGenerator
     from . import vector_tasks
     cfg = vector_tasks.resolve(spec)
@@ -250,7 +250,7 @@ def setup_vector(spec, card, base):
     assert type(prior) is ParticlePrior
     generator = SimpleMLPGenerator(cfg['z_dim'], cfg['hidden'], cfg['layers'], 2)
     discriminator = vector_discriminator(spec, card)
-    trainer = recipe.make_trainer(generator, discriminator, prior=prior, seed=0,
+    trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
                                   latent_generator=latent_rng,
                                   penalty_generator=penalty_rng)
     shapes = shape_receipt(trainer, cfg['batch'], (2,))
@@ -302,6 +302,7 @@ def run_vector(spec, card, base, *, max_steps=None):
 
 
 def setup_image(spec, base):
+    from particlegan import GANTrainer
     from . import image_tasks
     torch.set_num_threads(1)
     torch.manual_seed(0)
@@ -311,7 +312,7 @@ def setup_image(spec, base):
     generator, discriminator = image_tasks.Generator(spec), image_tasks.Discriminator(spec)
     prior = recipe.make_prior()
     global_stream = torch.default_generator
-    trainer = recipe.make_trainer(generator, discriminator, prior=prior, seed=0,
+    trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
                                   latent_generator=global_stream,
                                   penalty_generator=global_stream)
     shapes = shape_receipt(trainer, spec['batch_size'], (1, 8, 8))
@@ -403,15 +404,15 @@ def run(output, *, tasks=None, require_installed_root=None):
                     profile_path=str(PROFILE_PATH.relative_to(ROOT)),
                     profile_sha256=hashlib.sha256(PROFILE_PATH.read_bytes()).hexdigest(),
                     frozen_profile=profile, jobs=jobs, seed=0,
-                    routes=dict(vector='get_recipe().make_trainer',
-                                image='get_recipe().make_trainer',
+                    routes=dict(vector='GANTrainer',
+                                image='GANTrainer',
                                 legacy='public_primitives_custom_host'))
     write(output/'protocol.json', protocol)
     records = []
     for job in jobs:
         suite.verify_source(protocol)
         spec, card, variant = declared_spec(job, profile, base)
-        route = ('get_recipe().make_trainer' if spec['runner'] in ('vector', 'image')
+        route = ('GANTrainer' if spec['runner'] in ('vector', 'image')
                  else 'public_primitives_custom_host')
         print(f'START {spec["name"]} route={route} steps={spec["steps"]}', flush=True)
         started = time.perf_counter()
@@ -425,7 +426,7 @@ def run(output, *, tasks=None, require_installed_root=None):
             observations = result.get('observations', result.get('curve', []))
             if len(observations) != 24:
                 raise RuntimeError(f'frozen host did not produce 24 live observations: {spec["name"]}')
-            if route == 'get_recipe().make_trainer':
+            if route == 'GANTrainer':
                 if any(not isinstance(point.get('ema'), dict) for point in observations):
                     raise RuntimeError(f'frozen host has an incomplete EMA curve: {spec["name"]}')
                 if len(result['actions']) != spec['steps']:

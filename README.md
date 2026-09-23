@@ -22,7 +22,11 @@ EMA is separate; a PASS requires every metric at five consecutive final checks.
 
 [![Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml/badge.svg)](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml)
 
-![100 Gaussians with Particle Prior](https://raw.githubusercontent.com/255BITS/ParticleGAN/master/100gaussians.gif)
+![100 Gaussians: current GAN defaults with a learned particle prior](100gaussians.gif)
+
+One illustrative run of `get_recipe("gan")` with the example's Fourier MLP:
+**99/100 modes, 75.1% within 3σ after 7,000 updates** (EMA, seed 1234).
+[Metrics, limitations, and reproduction](reports/readme-100gaussians/README.md).
 
 ## Installation
 
@@ -52,13 +56,14 @@ CI tests Python 3.10–3.12 and builds installable distributions. See
 
 For an unconditional GAN, supply your networks and real batches; the optional
 trainer applies the recipe's optimizer settings, particle regularization,
-learning-rate decay and EMA:
+learning-rate decay and EMA. `Recipe` holds hyperparameters and small component
+factories; construct `GANTrainer` explicitly when you want it to own updates:
 
 ```python
-from particlegan import get_recipe
+from particlegan import GANTrainer, get_recipe
 
 recipe = get_recipe(total_steps=7000)
-trainer = recipe.make_trainer(G, D)  # Move your networks to their device first.
+trainer = GANTrainer(recipe, G, D)  # Move your networks to their device first.
 for real in batches:               # Supply up to recipe.total_steps batches.
     stats = trainer.step(real)
 samples = trainer.sample(256)       # Live weights; ema=True reports EMA separately.
@@ -78,10 +83,11 @@ choice. [See the illustrated explanation and measured limits](docs/gan-v3.md).
 
 ![How GAN v3 trains particles, generator and discriminator.](docs/figures/gan-v3-pipeline.svg)
 
-There is one recipe path: `get_recipe(**overrides)` constructs `Recipe` with
-explicit keyword fields. Named presets and legacy recipe selectors are removed.
-Model/prior/encoder choices inherit the same winning training defaults. The
-`name` field is report/checkpoint metadata only. Restore an old run with its
+Use `get_recipe("gan")`, `get_recipe("ae_gan")`, `get_recipe("vae_gan")`, or
+another [model-family recipe](docs/api.md#recipes-and-defaults), with explicit
+keyword overrides. Families select components and inherit the current shared
+training hyperparameters. Historical optimizer versions are not selectable;
+recipes never construct training loops. Restore an old run with its
 complete saved `Recipe(**resolved_fields)` or the corresponding Git revision.
 The [historical adjusted comparison](reports/transfer_suite/default_comparison/README.md)
 used different optimizer settings per toy and remains separate. Earlier
@@ -646,8 +652,9 @@ Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
 ### 0.6.0 — unreleased
 
 - Promote the shared 19/19 recipe to GAN v3 as the single common default.
-- Remove named/legacy preset selection; component choices are keyword fields.
-  Historical comparison values remain benchmark data, outside the public package.
+- Offer named model-family configurations with current shared hyperparameters
+  and explicit overrides. Historical optimizer versions remain benchmark data.
+- Keep training control flow in the separately constructed `GANTrainer` helper.
 - Add `BatchDistanceDiscriminator`, the batch-aware final toy witness, and use
   it in the GAN quickstart. D architecture remains explicit in the leaderboard.
 - Add the [illustrated configuration guide](docs/gan-v3.md), equations and

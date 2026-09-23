@@ -17,6 +17,7 @@ tail -F results/gym/particle_native_2d/live.log
 """
 import argparse
 import copy
+import math
 from pathlib import Path
 import sys
 import time
@@ -34,7 +35,7 @@ from particlegan import get_recipe, learning_rate_scale, particle_ae
 Z, K, H, B = 2, 32, 64, 128
 PRE, FINE = 250, 400
 # Untrained paired action MSE is about 2. The observation game stays there.
-# The latent-joint EMA readout falls through 0.18.
+# Historical latent-joint acceptance threshold; a run must earn this result.
 COLLAPSE_MIN = 1.0
 FIXED_MAX = 0.18
 
@@ -242,18 +243,26 @@ def run_arm(name, kind, recipe, init, log):
                 max_ema=max(row["ema"] for row in series))
 
 
+def gate_status(current_ema, fixed_ema):
+    """Keep the historical research thresholds separate from test expectations."""
+    finite = math.isfinite(current_ema) and math.isfinite(fixed_ema)
+    collapse = math.isfinite(current_ema) and current_ema >= COLLAPSE_MIN
+    passed = finite and fixed_ema <= FIXED_MAX and fixed_ema < current_ema * 0.25
+    return collapse, passed
+
+
 def run_gate(log_path=None):
     torch.set_num_threads(4)
     torch.manual_seed(0)
     log = Logger(log_path)
+    log(f"ENV torch={torch.__version__} dtype={torch.get_default_dtype()} threads={torch.get_num_threads()}")
     started = time.perf_counter()
     recipe, init, init_mse = pretrain(log)
     if recipe.reg_arm != "b_cap" or recipe.reg_coeff != 1. or recipe.gan_mode != "rp" or recipe.loss_type != "logistic":
         raise RuntimeError("Fixed arm requires nonzero Rp logistic GANLoss and sample-point b_cap")
     current = run_arm("current", "current", recipe, init, log)
     fixed = run_arm("fixed", "fixed", recipe, init, log)
-    collapse = current["ema"] >= COLLAPSE_MIN
-    passed = fixed["ema"] <= FIXED_MAX and fixed["ema"] < current["ema"] * 0.25
+    collapse, passed = gate_status(current["ema"], fixed["ema"])
     log("LEADERBOARD ema_action_mse lower is better")
     log(f"  {fixed['ema']:.4f}  fixed latent-joint  threshold<={FIXED_MAX:.2f}  {'PASS' if passed else 'FAIL'}")
     log(f"  {current['ema']:.4f}  current observation  threshold>={COLLAPSE_MIN:.2f}  {'COLLAPSE' if collapse else 'FAIL'}")

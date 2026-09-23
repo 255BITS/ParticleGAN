@@ -25,7 +25,7 @@ The older adjusted 19/19 result used per-toy optimizer settings and is a separat
 comparison. [Full leaderboard and every attempted variant](../reports/transfer_suite/unadjusted/README.md).
 
 A fresh [installed-package verification](../reports/transfer_suite/single_default_verification/README.md)
-also passes all 19: ten through `make_trainer`, nine through custom loops using
+also passes all 19: ten through the optional trainer, nine through custom loops using
 public primitives. Every 24-point live curve matches the native winning run.
 Resolved attributes, tensor shapes and checkpoint resume are verified separately.
 
@@ -192,18 +192,19 @@ The first 60% uses the full rate. The remaining updates decay smoothly toward
 For a 2D application, supply your generator and real batches:
 
 ```python
-from particlegan import BatchDistanceDiscriminator, get_recipe
+from particlegan import BatchDistanceDiscriminator, GANTrainer, get_recipe
 
 recipe = get_recipe()                  # Canonical name: gan_v3
 D = BatchDistanceDiscriminator()        # 2D input; move G and D to your device.
-trainer = recipe.make_trainer(G, D)
+trainer = GANTrainer(recipe, G, D)
 for real in batches:
     stats = trainer.step(real)
 samples = trainer.sample(256)           # Live weights.
 ```
 
-Use keyword fields for component choices and explicit overrides. All choices
-share the winning defaults; `name` is metadata, not a recipe selector.
+Use `get_recipe("gan")`, `get_recipe("ae_gan")` or another model-family name
+for component choices, with explicit keyword overrides. All families share
+the current winning training hyperparameters; no old optimizer versions are selected.
 `get_recipe()` is exactly `Recipe()`. Restore old checkpoints from their full
 saved recipe and original architecture, or use the matching Git revision.
 

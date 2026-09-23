@@ -1,7 +1,7 @@
 # Particle AE-GAN, VAE-GAN and AE-DDGAN
 
 These are composable encodings and recipes, not trainers. You supply E, G, D,
-data, optimizers, EMA and the loop. The package never adds a training loss,
+data, optimizers, EMA and the loop. These components never add a training loss,
 backpropagates or steps an optimizer for you. The core dependency remains Torch.
 
 ## Three component combinations
@@ -33,9 +33,11 @@ constant LR and b_cap with lazy interval 4. Toy distance reduction was sum,
 temperature .25; images used mean and .125. These are historical results,
 not selectable public presets. Architectures and preprocessing remain caller-owned.
 
-The current API uses `get_recipe(prior_kind="mog", sigma_rel=.025,
-encoder_mode="ae")` or `encoder_mode="hard"`; add `model="ddgan"` for diffusion.
-All inherit the common winning training defaults. `reconstruction_weight=1`
+The current API provides `get_recipe("ae_gan")`, `get_recipe("vae_gan")` and
+`get_recipe("ae_ddgan")`, with explicit keyword overrides. These names select
+component settings, not training loops or the historical optimizer settings.
+All inherit the current shared training defaults; their convergence with those
+defaults is not established by the historical studies above. `reconstruction_weight=1`
 and `observation_sigma=.03` are explicit caller settings, not automatic losses.
 The observation sigma is distinct from latent prior sigma. Complete settings
 roundtrip through `recipe.to_dict()` and `Recipe(**config)`.
@@ -43,14 +45,14 @@ roundtrip through `recipe.to_dict()` and `Recipe(**config)`.
 ## A runnable reconstruction step
 
 This small example exercises the installed API. It is not a new benchmark or
-a full adversarial training loop. Set `encoder_mode="ae"` for deterministic reconstruction.
+a full adversarial training loop. Select `ae_gan` for deterministic reconstruction.
 
 ```python
 import torch
 from torch import nn
 from particlegan import get_recipe
 
-recipe = get_recipe(prior_kind="mog", sigma_rel=.025, encoder_mode="hard", num_particles=32)
+recipe = get_recipe("vae_gan", num_particles=32)
 prior = recipe.make_prior()
 E = nn.Linear(2, 2 * recipe.z_dim)
 G = nn.Linear(recipe.z_dim, 2)

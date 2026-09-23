@@ -15,7 +15,7 @@ def make_trainer(*, particles=12, steps=8, buffers=False, dropout=False, **overr
                               nn.Linear(8, 2))
     discriminator = nn.Sequential(nn.Linear(2, 8), nn.LeakyReLU(.2),
                                   nn.Dropout(.2) if dropout else nn.Identity(), nn.Linear(8, 1))
-    return recipe.make_trainer(generator, discriminator)
+    return GANTrainer(recipe, generator, discriminator)
 
 
 def assert_models_equal(left, right):
@@ -182,11 +182,11 @@ def test_schedule_budget_and_rejected_checkpoint_do_not_change_models():
 def test_validation_rejects_unsupported_recipe_and_mismatched_models():
     trainer = make_trainer()
     with pytest.raises(ValueError, match="unconditional"):
-        get_recipe(model='ddgan', num_classes=4, conditioning='ucd').make_trainer(trainer.G, trainer.D)
+        GANTrainer(get_recipe(model='ddgan', num_classes=4, conditioning='ucd'), trainer.G, trainer.D)
     with pytest.raises(ValueError, match="dimensions"):
-        trainer.recipe.replace(z_dim=4).make_trainer(trainer.G, trainer.D, prior=trainer.prior)
+        GANTrainer(trainer.recipe.replace(z_dim=4), trainer.G, trainer.D, prior=trainer.prior)
     with pytest.raises(ValueError, match="dtype"):
-        trainer.recipe.make_trainer(deepcopy(trainer.G).double(), trainer.D)
+        GANTrainer(trainer.recipe, deepcopy(trainer.G).double(), trainer.D)
     with pytest.raises(ValueError, match="nonempty"):
         trainer.step(torch.zeros(0, 2))
 
@@ -248,7 +248,7 @@ def test_cuda_accepts_current_device_streams_and_restores_checkpoint():
     discriminator = nn.Sequential(nn.Linear(2, 8), nn.LeakyReLU(.2), nn.Linear(8, 1)).to(device)
     latent = torch.Generator(device="cuda").manual_seed(2)
     penalty = torch.Generator(device="cuda").manual_seed(3)
-    trainer = recipe.make_trainer(generator, discriminator,
+    trainer = GANTrainer(recipe, generator, discriminator,
                                   latent_generator=latent, penalty_generator=penalty)
     real = torch.randn(6, 2, device=device)
     trainer.step(real)

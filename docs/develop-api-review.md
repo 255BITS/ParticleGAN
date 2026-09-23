@@ -16,27 +16,26 @@ tree; public contracts and default promotion are the main concerns.
 
 ## Prioritized findings
 
-1. **High: keyword recipe selection silently changes behavior.**
-   `particlegan/recipes.py:get_recipe` no longer accepts positional presets, and
-   `get_recipe(name="ddgan")`, `get_recipe(name="mog")`, and
-   `get_recipe(name="ae_gan")` now all create an ordinary particle GAN without
-   an encoder. Previously those names selected different components. Positional
-   calls fail visibly; keyword calls can train the wrong model. Current tests
-   explicitly require the new behavior, so passing them does not establish
-   compatibility with 0.5.0. Define a migration policy before release: preserve
-   old calls temporarily with warnings, or reject ambiguous legacy selectors
-   with actionable migration errors. Keep complete saved-recipe restoration.
+1. **Resolved: named component selection and recipe ownership.**
+   The integration initially removed positional names and silently interpreted
+   `get_recipe(name="ae_gan")` as ordinary GAN metadata. Model-family names
+   (`gan`, `mog`, `ddgan`, `ddgan_mog`, `ae_gan`, `vae_gan`, `ae_ddgan`) now
+   select component configurations. Explicit keyword overrides remain supported.
+   `Recipe.make_trainer` is removed; callers explicitly import and construct
+   `GANTrainer(recipe, G, D)`. UCD, encoding and diffusion compose through
+   caller-owned loops. The recipe owns settings and small object factories.
 
-2. **High: a measured GAN winner becomes defaults for unverified model families.**
-   `Recipe` raises generator LR from .0006 to .00425, changes Adam beta2 from
-   .999 to .99, changes cap coefficient/target from 1/1 to 6/1.25, and lowers
-   particle spread weight from 1 to .05. Removing domain presets also changes
-   prior optimizers and model-specific settings. The existing verification
-   report explicitly says MoG/DDGAN/application convergence under the common
-   defaults is unestablished. Separate API simplification from default
-   promotion. Preserve established behavior through a migration period or
-   supply matched evidence for each supported family before calling these
-   stable defaults. A smoke test establishes execution, not training quality.
+2. **Accepted defaults; remaining evidence gap across model families.**
+   The new shared hyperparameters are retained by design: G/D LR .00425,
+   particle LR .0085, Adam (0,.99), cap coefficient/target 6/1.25 and particle
+   spread weight .05. No legacy numerical preset selectors or compatibility
+   tables are added. Named families select components, dimensions and routing,
+   while inheriting current optimizer/loss/schedule settings. GAN remains a
+   discrete particle prior; a MoG default is not promoted in this change.
+   The existing verification report does not establish MoG/DDGAN/AE/VAE
+   convergence under these common settings. Evaluate those families before
+   describing the defaults as their individually vetted best settings; passing
+   component and execution checks alone does not establish that claim.
 
 3. **Medium: application-specific policy is now a top-level library API.**
    `particlegan/locked_shared.py` contains Music/slider terminology, cover
@@ -59,20 +58,23 @@ tree; public contracts and default promotion are the main concerns.
    supported combinations have a deliberate contract. Do not silently change
    the formula: that would invalidate the recorded winner.
 
-5. **Medium: the repository test gate is red.**
-   `test_particle_native_2d.py` expects fixed-arm EMA action MSE <= .18 but
-   produces .248968631. The source branch's installed-default verification
-   already reports this failure. Diagnose the benchmark or explicitly separate
-   research acceptance gates from deterministic API checks with honest reporting;
-   do not weaken its threshold merely to obtain green CI.
+5. **Tracked research failure, with independently tested gate logic.**
+   The native-2D toy expects fixed-arm EMA action MSE <= .18 but produces
+   .248968631. Replaying exact original source `c7e8a73` gives the same result;
+   the integration's GitHub matrix reproduces it on Python 3.10, 3.11 and 3.12.
+   The historical convergence assertion is now a strict expected failure,
+   separate from protocol, finite-value, threshold-boundary and CLI tests.
+   Thresholds are unchanged and the benchmark CLI still fails this numerical
+   gate. This repairs test reporting, not the unmet convergence claim.
 
-6. **Low: trainer scope and documentation need clearer boundaries.**
-   `GANTrainer` is optional and reasonably small, but supports only scalar,
-   unconditional GANs with the exact `ParticlePrior` type, and owns Adam,
+6. **Resolved: documentation of the trainer boundary.**
+   `GANTrainer` remains a separately constructed convenience for scalar,
+   unconditional GANs with the exact `ParticlePrior` type. It owns Adam,
    scheduling, train/eval modes, EMA, RNG restoration and update cadence.
-   Keep that scope explicit; avoid extending it into an application framework.
-   `CHANGELOG.md` and `locked_shared.py` still describe old recipe defaults as
-   unchanged, contradicting the current implementation. Reconcile these claims.
+   Recipes no longer construct it. Named AE/VAE/DDGAN and UCD configurations
+   are explicitly rejected by the helper and documented with caller-owned
+   component composition. Stale claims about unchanged numeric defaults were
+   corrected in the changelog and stamp documentation.
 
 ## Recommended boundary
 
@@ -88,7 +90,26 @@ Review remaining PRs individually against this boundary. Several are application
 experiments or superseded by commits already in the integration; their open
 status alone is not a reason to merge them into `develop`.
 
-## Verification
+## Current validation
+
+- CPU suite: **706 passed, 5 skipped, 1 strict expected failure**, plus 27
+  passing subtests, in 70.27 seconds. The expected failure is the unmet
+  native-2D convergence target discussed above.
+- Installed wheel: explicit trainer quickstart, named AE/VAE reconstruction
+  examples and model-family selection pass outside the checkout.
+- Named recipe tests verify shared current hyperparameters, explicit overrides,
+  serialization and the absence of training lifecycle methods on `Recipe`.
+- The plain GAN example rejects encoder configurations before training.
+- Refreshed README animation: one 7,000-update run, 99/100 modes and 75.08% HQ
+  on 20,000 EMA samples. See the [image report](../reports/readme-100gaussians/README.md)
+  for metrics, limitations and reproduction. This does not establish full
+  convergence or live-model performance.
+- Final suite log: `/tmp/particlegan-develop-qc/pytest-final.log`; image log:
+  `/tmp/particlegan-develop-qc/readme-image.log`.
+
+## Integration baseline verification
+
+These results precede the recipe repair and test fix.
 
 - CPU suite: **686 passed, 5 skipped, 1 failed**, plus 27 passing subtests,
   in 77.23 seconds. Four real-data CUDA tests and one trainer CUDA test skipped.
@@ -119,6 +140,7 @@ loops; it is not universal default convergence evidence. See the
 [verification report](../reports/transfer_suite/single_default_verification/README.md)
 and [version comparison](gan-v3.md).
 
-Recommended next work: settle recipe compatibility first, remove application
-policy from the public namespace second, then verify defaults across the
-supported model families with matched configurations rather than seed sweeps.
+Recommended next work: review application policy in the public namespace and
+verify current defaults across the supported model families with matched
+configurations rather than seed sweeps. Keep the archived numerical evidence
+distinct from validation of the current API.

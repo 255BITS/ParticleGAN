@@ -8,8 +8,8 @@ definition plus two builders. It is not a trainer, a toy gate, or a gym config.
 update (``EDIT_CAP_EVERY`` in ``lib/gym_particle_finetune.py``). That card
 compensation is a different posture.
 
-``Recipe("gan")`` stays the 100-Gaussians study prior (20_000 particles,
-VICReg ``prior_reg`` 1). This stamp's 12-particle cloud and ``particle_l2``
+``get_recipe("gan")`` uses the shared GAN defaults (20_000 particles,
+VICReg ``prior_reg`` .05). This stamp's 12-particle cloud and ``particle_l2``
 apply only when the caller builds a cloud. The builders do not construct a
 prior and do not add that term to the GAN loss.
 

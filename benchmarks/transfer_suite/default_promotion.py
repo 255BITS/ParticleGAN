@@ -11,7 +11,7 @@ import time
 
 import torch
 
-from particlegan import LinearSkipDiscriminator, learning_rate_scale
+from particlegan import GANTrainer, LinearSkipDiscriminator, learning_rate_scale
 from lib.toy_models import SimpleMLPGenerator
 from . import suite, vector_tasks
 from .protocol import test_verdict
@@ -41,7 +41,7 @@ def main():
     prior = recipe.make_prior(init_std=.5, generator=torch.Generator().manual_seed(0))
     g = SimpleMLPGenerator(recipe.z_dim, spec['hidden'], spec['layers'], 2)
     d = LinearSkipDiscriminator()
-    trainer = recipe.make_trainer(g, d, prior=prior,
+    trainer = GANTrainer(recipe, g, d, prior=prior,
                                  latent_generator=torch.Generator().manual_seed(1),
                                  penalty_generator=torch.Generator().manual_seed(2))
     write('recipe.json', recipe.to_dict())

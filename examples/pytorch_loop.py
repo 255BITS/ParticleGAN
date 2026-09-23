@@ -50,8 +50,9 @@ def main():
     if args.batch_size is not None:
         options["batch_size"] = args.batch_size
     recipe = get_recipe(**options)
-    if recipe.model != "gan" or recipe.conditioning != "scalar":
-        parser.error("this one-shot example requires model='gan', conditioning='scalar'")
+    if (recipe.model != "gan" or recipe.conditioning != "scalar"
+            or recipe.encoder_mode != "none"):
+        parser.error("this one-shot example requires model='gan', conditioning='scalar', encoder_mode='none'")
 
     device = torch.device(args.device)
     # These choices belong to this application, not the library.

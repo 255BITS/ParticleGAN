@@ -86,9 +86,9 @@ def test_gaussian_elbo_dimensions_and_constant_kl():
                                prediction.new_tensor(1.))
 
 
-@pytest.mark.parametrize('mode,model', [('ae', 'gan'), ('hard', 'gan'), ('ae', 'ddgan')])
-def test_recipe_roundtrip_and_optimizer_encoder(mode, model):
-    recipe = get_recipe(model=model, prior_kind='mog', sigma_rel=.025, encoder_mode=mode, num_particles=3, z_dim=2)
+@pytest.mark.parametrize('name', ['ae_gan', 'vae_gan', 'ae_ddgan'])
+def test_recipe_roundtrip_and_optimizer_encoder(name):
+    recipe = get_recipe(name, num_particles=3, z_dim=2)
     assert Recipe(**recipe.to_dict()) == recipe
     p = recipe.make_prior()
     e, g, d = nn.Linear(2, 2), nn.Linear(2, 2), nn.Linear(2, 1)

@@ -8,12 +8,14 @@ with `python -m pip install particlegan`; the core dependency is PyTorch.
 
 This complete example learns a synthetic 2D distribution. Replace `real_batch`
 with your pipeline and the MLPs with your networks. The helper applies one
-shared recipe to optimizers, losses, regularization, decay and EMA.
+shared recipe to optimizers, losses, regularization, decay and EMA. The recipe
+contains configuration and component factories; the separately constructed
+trainer owns the training lifecycle.
 
 ```python
 import torch
 from torch import nn
-from particlegan import BatchDistanceDiscriminator, get_recipe
+from particlegan import BatchDistanceDiscriminator, GANTrainer, get_recipe
 
 torch.manual_seed(0)
 device = torch.device("cpu")
@@ -21,7 +23,7 @@ recipe = get_recipe(total_steps=1000)
 G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(.2),
                   nn.Linear(64, 64), nn.LeakyReLU(.2), nn.Linear(64, 2)).to(device)
 D = BatchDistanceDiscriminator().to(device)
-trainer = recipe.make_trainer(G, D, seed=0)
+trainer = GANTrainer(recipe, G, D, seed=0)
 
 def real_batch():
     return .2 * torch.randn(recipe.batch_size, 2, device=device) + 1
@@ -49,9 +51,9 @@ for applications that manage their own updates.
 
 ## GANTrainer
 
-`recipe.make_trainer(G, D, *, prior=None, seed=0, latent_generator=None,
-penalty_generator=None, optimizer_options=None, penalty_options=None)` is
-also available as `GANTrainer(recipe, G, D, ...)`. Move networks to the same
+`GANTrainer(recipe, G, D, *, prior=None, seed=0, latent_generator=None,
+penalty_generator=None, optimizer_options=None, penalty_options=None)` is an
+explicitly imported helper, separate from `Recipe`. Move networks to the same
 device and floating dtype first. When omitted, the helper constructs the prior
 from the recipe; supply `prior=` to preserve an existing initialization.
 `seed` controls owned sampling streams, while callers seed network/prior
@@ -127,7 +129,7 @@ every network in the 19/19 architecture profile.
 `LinearSkipDiscriminator(in_dim=2, hidden_dim=96, n_hidden=2, fourier=2, beta=5.)`
 remains the historical v2 witness: a smooth Fourier MLP plus a zero-initialized
 raw linear branch, 10,467 parameters. It supports native cap double backward.
-Both classes can be passed to `make_trainer` or used in a custom loop.
+Both classes can be passed to `GANTrainer` or used in a custom loop.
 
 ## A minimal DDGAN + UCD loop
 
@@ -574,16 +576,66 @@ examples, gradient caveats, DDGAN integration and measured evidence.
 ## Recipes and defaults
 
 ```python
-get_recipe(**overrides)       # One shared set of winning defaults.
+get_recipe("gan", **overrides) # Named components, current shared hyperparameters.
 recipe.replace(**overrides)   # A new immutable Recipe.
 recipe.to_dict()              # Complete resolved fields.
 Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
 ```
 
-There is no recipe ID dispatch or legacy preset table. Positional preset names
-are rejected. `name` is descriptive metadata only: changing it cannot change
-hyperparameters. Unknown keyword fields are rejected. Old checkpoints remain
-readable because they contain the full resolved recipe, not just a selector.
+`get_recipe(name="gan", **overrides)` selects components without constructing a
+training loop. Explicit keyword fields override the selected configuration.
+Every family uses the current shared optimizer, loss, penalty and schedule
+defaults; historical hyperparameter versions are not selectable. Unknown names
+and fields are rejected. Restore a complete saved configuration with
+`Recipe(**saved_fields)`; use `recipe.replace(name="my-run")` to label a run.
+
+| Name | Components and dimensions |
+| --- | --- |
+| `gan` (default) | Scalar GAN, 20,000 particles, latent dimension 4, no sampling noise |
+| `mog` | GAN, 400 MoG components, latent dimension 4, relative sigma .025 |
+| `ddgan` | DDGAN, UCD with 4 classes, discrete particles |
+| `ddgan_mog` | DDGAN, UCD with 4 classes, 400 MoG components, relative sigma .025 |
+| `ae_gan` | GAN, AE encoding, 400 MoG components, latent dimension 2 |
+| `vae_gan` | GAN, hard VAE encoding, 400 MoG components, latent dimension 2 |
+| `ae_ddgan` | DDGAN, AE encoding, 1,024 MoG components, latent dimension 64, batch 64 |
+
+The encoder families use relative sigma .025. `ae_ddgan` uses mean routing
+distance and temperature .125; the others use sum distance and temperature .25.
+These component choices retain the original API's model-family structure with
+the new shared hyperparameters. The GAN development-suite evidence does not
+establish convergence of those hyperparameters for every AE/VAE/DDGAN setup.
+
+### Components that change a loop
+
+The recipe publishes settings and small operations; the caller composes them.
+UCD settings describe score selection and class-loss weight. AE/VAE settings
+describe encoding and reconstruction. Neither creates a training strategy:
+
+```python
+ucd_recipe = get_recipe("gan", conditioning="ucd", num_classes=4)
+ae_recipe = get_recipe("ae_gan")
+vae_recipe = get_recipe("vae_gan")
+```
+
+| Component | Recipe supplies | Caller controls |
+| --- | --- | --- |
+| UCD | Class count, target, auxiliary loss weight | Labels, discriminator heads, score selection, adding `ucd_loss` to the D objective |
+| AE/VAE | Prior, routing settings, `encode`, reconstruction weight, optional encoder optimizer group | Encoder forward pass, reconstruction/adversarial loss composition, backward and optimizer steps |
+| DDGAN | Model selection and diffusion schedule | Corruption, timestep sampling, reverse transitions and update order |
+
+See the [DDGAN/UCD loop](#a-minimal-ddgan--ucd-loop) and
+[AE/VAE example](../examples/particle_autoencoder.py). `GANTrainer(recipe, G, D)`
+is a separate, optional helper for unconditional particle GANs; it explicitly
+rejects UCD, encoders and DDGAN. `Recipe` has no trainer factory or training step.
+
+Discrete learned particles are the zero-noise limit of a mixture of Gaussians.
+The current `ParticlePrior` reads raw centers; `MoGParticlePrior` standardizes
+centers by default, even when sigma is zero. For matching center reads use
+`sigma_rel=0, standardize=False`. The default GAN retains `ParticlePrior`;
+unifying implementations or promoting a noisy MoG default requires separate
+validation.
+
+### Explicit composition
 
 Choose components explicitly, while inheriting the common training defaults:
 

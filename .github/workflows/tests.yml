@@ -67,6 +67,12 @@ jobs:
           assert default.reg_arm == 'b_cap' and default.reg_coeff == 6.0
           assert default.reg_kappa == 1.25 and default.prior_reg == 0.05
           assert default.name == 'gan_v3'
+          assert get_recipe('gan') == default
+          assert not hasattr(default, 'make_trainer')
+          assert get_recipe('ae_gan').encoder_mode == 'ae'
+          assert get_recipe('vae_gan').encoder_mode == 'hard'
+          assert get_recipe('ddgan').model == 'ddgan'
+          assert get_recipe('ae_gan').lr == default.lr
           assert get_recipe(prior_kind='mog', sigma_rel=.025, num_particles=8).reg_coeff == 6.
           assert sum(p.numel() for p in LinearSkipDiscriminator().parameters()) == 10467
           assert sum(p.numel() for p in BatchDistanceDiscriminator().parameters()) == 19013

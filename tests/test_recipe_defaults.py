@@ -1,11 +1,11 @@
-"""One public default; old complete checkpoint receipts remain readable."""
+"""Named component configurations share current hyperparameters, without loops."""
 import json
 from pathlib import Path
 
 import pytest
 from torch import nn
 
-from particlegan import Recipe, get_recipe
+from particlegan import GANTrainer, Recipe, get_recipe
 
 
 ARCHIVED = json.loads((Path(__file__).with_name('fixtures') / 'gan_recipe_versions.json').read_text())
@@ -21,13 +21,67 @@ def test_default_matches_every_recorded_winning_field():
     assert get_recipe() == Recipe()
 
 
-@pytest.mark.parametrize('name', ['gan', 'gan_v1', 'gan_v2', 'gan_v3', 'gan_legacy', 'mog', 'ddgan'])
-def test_no_positional_preset_selection(name):
-    with pytest.raises(TypeError):
+def test_recipe_stays_configuration_and_components_without_training_lifecycle():
+    recipe = get_recipe()
+    for method in ('make_trainer', 'step', 'sample', 'state_dict', 'load_state_dict'):
+        assert not hasattr(recipe, method)
+    # Persisting configuration does not create networks, optimizers or a trainer.
+    assert Recipe(**recipe.to_dict()) == recipe
+    assert recipe.make_loss().mode == recipe.gan_mode
+    assert recipe.make_gradient_penalty().coeff == recipe.reg_coeff
+
+
+@pytest.mark.parametrize('name,model,prior,encoder,conditioning', [
+    ('gan', 'gan', 'particles', 'none', 'scalar'),
+    ('mog', 'gan', 'mog', 'none', 'scalar'),
+    ('ddgan', 'ddgan', 'particles', 'none', 'ucd'),
+    ('ddgan_mog', 'ddgan', 'mog', 'none', 'ucd'),
+    ('ae_gan', 'gan', 'mog', 'ae', 'scalar'),
+    ('vae_gan', 'gan', 'mog', 'hard', 'scalar'),
+    ('ae_ddgan', 'ddgan', 'mog', 'ae', 'scalar'),
+])
+def test_named_components_share_current_training_hyperparameters(name, model, prior, encoder, conditioning):
+    recipe = get_recipe(name)
+    assert recipe == get_recipe(name=name)
+    assert (recipe.model, recipe.prior_kind, recipe.encoder_mode, recipe.conditioning) == (
+        model, prior, encoder, conditioning)
+    fields = ('lr', 'd_lr_mult', 'prior_lr_mult', 'betas', 'prior_betas',
+              'loss_type', 'gan_mode', 'reg_arm', 'reg_coeff', 'reg_kappa',
+              'reg_every', 'reg_method', 'prior_reg', 'ema_decay',
+              'lr_anneal_start', 'lr_floor', 'total_steps')
+    for field in fields:
+        assert getattr(recipe, field) == getattr(get_recipe(), field)
+    if prior == 'mog':
+        assert recipe.sigma_rel == .025
+    assert Recipe(**recipe.to_dict()) == recipe
+
+
+@pytest.mark.parametrize('name', ['gan_v1', 'gan_v2', 'gan_v3', 'gan_legacy', 'unknown'])
+def test_historical_versions_are_not_selectable(name):
+    with pytest.raises(ValueError, match='Unknown recipe'):
         get_recipe(name)
-    # Names in saved receipts identify runs, never choose a formulation.
-    labeled = get_recipe(name=name)
-    assert without_name(labeled.to_dict()) == without_name(get_recipe().to_dict())
+
+
+def test_named_recipe_overrides_and_small_objects():
+    recipe = get_recipe('ae_gan', num_particles=8, z_dim=3, lr=.002)
+    assert recipe.lr == .002 and recipe.z_dim == 3
+    assert recipe.make_prior().z.shape == (8, 3)
+    assert get_recipe('ddgan', num_classes=2).num_classes == 2
+    assert get_recipe('gan') == Recipe()
+    with pytest.raises(ValueError, match='particle encoders require'):
+        get_recipe('ae_gan', prior_kind='particles', sigma_rel=0)
+    with pytest.raises(TypeError):
+        get_recipe('gan', not_a_field=True)
+
+
+@pytest.mark.parametrize('name,overrides', [
+    ('gan', dict(conditioning='ucd', num_classes=2)),
+    ('ae_gan', {}), ('vae_gan', {}), ('ddgan', {}), ('mog', {}),
+])
+def test_named_components_do_not_implicitly_choose_training_control_flow(name, overrides):
+    recipe = get_recipe(name, **overrides)
+    with pytest.raises(ValueError, match='unconditional scalar GANs'):
+        GANTrainer(recipe, nn.Linear(recipe.z_dim, 2), nn.Linear(2, 1))
 
 
 def test_v3_optimizer_roles_resolve_to_recorded_absolute_rates():
@@ -42,10 +96,10 @@ def test_v3_optimizer_roles_resolve_to_recorded_absolute_rates():
 @pytest.mark.parametrize('version', ['gan_v1', 'gan_v2', 'gan_v3'])
 def test_complete_old_receipts_still_restore_without_preset_dispatch(version):
     recipe = Recipe(**ARCHIVED['recipes'][version]).replace(num_particles=8, z_dim=2, batch_size=4, total_steps=2)
-    trainer = recipe.make_trainer(nn.Linear(2, 2), nn.Linear(2, 1))
+    trainer = GANTrainer(recipe, nn.Linear(2, 2), nn.Linear(2, 1))
     checkpoint = trainer.state_dict()
     assert checkpoint['schema'] == 1 and checkpoint['recipe'] == recipe.to_dict()
     assert Recipe(**checkpoint['recipe']) == recipe
-    restored = recipe.make_trainer(nn.Linear(2, 2), nn.Linear(2, 1))
+    restored = GANTrainer(recipe, nn.Linear(2, 2), nn.Linear(2, 1))
     restored.load_state_dict(checkpoint)
     assert restored.state_dict()['recipe'] == checkpoint['recipe']
