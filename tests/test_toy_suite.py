@@ -938,6 +938,37 @@ def test_legacy_isolated_rng_eval_requirement_follows_frozen_scope(name, scope, 
         )
 
 
+@pytest.mark.parametrize("attack", ["truncate", "drop_first", "drop_middle"])
+def test_legacy_generated_rng_receipt_requires_every_frozen_checkpoint(attack):
+    record = {"name": "mode_hold", "spec": {"runner": "legacy", "steps": 160}}
+    pairs = [dict(step=math.ceil(i * 160 / 24),
+                  before_sha256="c" * 64, after_sha256="c" * 64)
+             for i in range(1, 25)]
+    receipt = dict(
+        eval_scope="generated_samples", output_noise_rng="isolated",
+        output_noise_seed_offset=1901, output_noise_seed=1901,
+        output_noise_training_stream_isolated=True,
+        output_noise_train_state_initial_sha256="a" * 64,
+        output_noise_train_state_final_sha256="b" * 64,
+        output_train_calls=160, output_train_elements=1000,
+        output_eval_calls=24, output_eval_elements=2400,
+        output_noise_eval_state_pairs=pairs, output_noise_eval_state_preserved=True,
+    )
+    toy_suite._check_isolated_transfer_noise(
+        record, receipt, {"output_noise_rng": "isolated"},
+    )
+    if attack == "truncate":
+        receipt["output_noise_eval_state_pairs"] = pairs[-1:]
+    elif attack == "drop_first":
+        receipt["output_noise_eval_state_pairs"] = pairs[1:]
+    else:
+        receipt["output_noise_eval_state_pairs"] = pairs[:11] + pairs[12:]
+    with pytest.raises(ValueError, match="evaluation trace is incomplete"):
+        toy_suite._check_isolated_transfer_noise(
+            record, receipt, {"output_noise_rng": "isolated"},
+        )
+
+
 def test_three_problem_gate_requires_each_learned_receipt(tmp_path, monkeypatch):
     declared = dict(steps=4, output_noise_std=.029,
                     output_noise_warmup=.5, output_noise_learnable=True)

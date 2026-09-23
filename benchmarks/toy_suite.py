@@ -370,17 +370,25 @@ def _check_isolated_transfer_noise(record: dict, receipt: dict, noise: dict):
                 ("live_before_sha256", "live_after_sha256",
                  "ema_before_sha256", "ema_after_sha256"))
     steps = record["spec"]["steps"]
+    pair_steps = []
     for pair in pairs:
         if (not isinstance(pair, dict) or type(pair.get("step")) is not int
                 or not 0 <= pair["step"] <= steps
                 or any(not _sha256_hex(pair.get(field)) for field in required)):
             raise ValueError(f"isolated output-noise evaluation state is invalid: {name}")
+        pair_steps.append(pair["step"])
         if (pair[required[0]] != pair[required[1]]
                 or not legacy and pair[required[2]] != pair[required[3]]):
             raise ValueError(f"isolated output-noise evaluation advanced training stream: {name}")
-    if not legacy:
-        expected_steps = sorted({math.ceil(i * steps / 24) for i in range(1, 25)})
-        if [pair["step"] for pair in pairs] != expected_steps or eval_calls == 0:
+    if pair_steps != sorted(pair_steps):
+        raise ValueError(f"isolated output-noise evaluation trace is out of order: {name}")
+    expected_steps = sorted({math.ceil(i * steps / 24) for i in range(1, 25)})
+    if legacy:
+        if (EVAL_SCOPES[name] in ("generated_samples", "generated_and_reconstructed_samples")
+                and not set(expected_steps) <= set(pair_steps)):
+            raise ValueError(f"isolated output-noise evaluation trace is incomplete: {name}")
+    else:
+        if pair_steps != expected_steps or eval_calls == 0:
             raise ValueError(f"isolated output-noise evaluation trace is incomplete: {name}")
 
 
