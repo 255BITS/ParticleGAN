@@ -73,6 +73,10 @@ The closest row uses β₂=0.99/prior multiplier 2, output σ=0.0275 warmed over
 overlap has four passing terminal checks instead of the required five. All
 rows are strict-valid but **subset-only** evidence, so none was promoted to
 a full 19-host replay.
+A [four-variant follow-up](noise-near-v1.md) changed one shared field at a time
+around that closest 7/8 row. The two input-decay brackets and reduced input
+peak each pass 6/8; earlier LR annealing passes 5/8. All strict episode checks
+are valid, but no variant reaches the 8/8 threshold for a full 19-host replay.
 The combined gate remains **incomplete** until one
 identical recipe passes both the three 100-mode problems and all 19 transfer
 cases. Every listed full candidate run includes actual G-output and
