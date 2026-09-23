@@ -41,6 +41,18 @@ import torch
 import torch.nn.functional as F
 
 
+def _score_scalar(logits):
+    """Sum of per-image logit means.
+
+    One logit per image matches ``logits.sum()``: other batch rows do not
+    change an image's gradient. Extra logits are averaged inside the image so
+    a spatial map does not multiply that gradient by its number of locations.
+    """
+    if logits.ndim < 2:
+        return logits.sum()
+    return logits.flatten(1).mean(dim=1).sum()
+
+
 def finite_difference_norm(critic, x, eps):
     """Central derivative along detached normalized grad_x D.
 
@@ -51,7 +63,7 @@ def finite_difference_norm(critic, x, eps):
     not per-pixel noise. No random-direction surrogate and no pixel clamping.
     """
     x = x.detach().requires_grad_(True)
-    grad = torch.autograd.grad(critic(x).sum(), x, create_graph=False)[0]
+    grad = torch.autograd.grad(_score_scalar(critic(x)), x, create_graph=False)[0]
     norm = (grad.square().flatten(1).sum(1) + 1e-12).sqrt()
     direction = (grad / norm.reshape((-1,) + (1,) * (x.ndim - 1))).detach()
     center = x.detach()
@@ -302,12 +314,15 @@ class GradRegularizer:
         `squared` returns the squared L2 norm ||g||^2 without the sqrt/epsilon
         (the R1/R2 form) and ignores `self.norm`, which the constructor has
         already pinned to 'l2' for the one arm that asks for it.
+
+        The differentiated scalar is the sum of per-image logit means. A
+        critic that returns one logit per image is unchanged.
         """
         if self.method == "finite_difference":
             return finite_difference_norm(D, x, self.fd_eps)
         x = x.detach().clone().requires_grad_(True)
         logits = D(x)
-        g = torch.autograd.grad(logits.sum(), x, create_graph=True)[0]
+        g = torch.autograd.grad(_score_scalar(logits), x, create_graph=True)[0]
         if squared:
             return g.pow(2).flatten(1).sum(dim=1)
         if self.norm == "l1":
@@ -352,7 +367,7 @@ def grad_norm_stats(
         for key, x in (("r", x_real), ("f", x_fake), ("i", x_interp)):
             xd = x.detach().clone().requires_grad_(True)
             logits = D(xd)
-            g = torch.autograd.grad(logits.sum(), xd, create_graph=False)[0]
+            g = torch.autograd.grad(_score_scalar(logits), xd, create_graph=False)[0]
             norms[key] = torch.sqrt(g.pow(2).flatten(1).sum(dim=1) + 1e-12).detach()
 
     stats = {}
