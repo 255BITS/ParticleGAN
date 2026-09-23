@@ -1,0 +1,8 @@
+{
+  "generator": "trainable_affine",
+  "prior": "square",
+  "scale": 5.0,
+  "initialization": "identity",
+  "lr_horizon_cap": 2400,
+  "shared_gate_eligible": false
+}

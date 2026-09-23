@@ -435,3 +435,33 @@ def test_common_22_gate_requires_exact_noise_and_recipe_identity(tmp_path, monke
     candidate_data = deepcopy(candidate)
     candidate_data["protocol"]["noise"]["output_noise_learnable"] = False
     assert toy_suite.regrade(tmp_path / "explicit-fixed-noise")["status"] == "PASS"
+
+
+def test_common_22_identity_normalizes_real_recipe_tuple_after_json(tmp_path, monkeypatch):
+    # The saved CI protocol is JSON, while declared_recipe().to_dict() keeps
+    # Adam betas as a tuple in memory. Their values still describe one recipe.
+    candidate_config = json.loads((
+        toy_suite.ROOT / "configs/toy100/shared_candidate.json"
+    ).read_text())
+    recipe, noise, _ = declared_recipe(candidate_config)
+    live_recipe = recipe.to_dict()
+    protocol_recipe = json.loads(json.dumps(live_recipe))
+    assert isinstance(live_recipe["betas"], tuple)
+    assert isinstance(protocol_recipe["betas"], list)
+    names = tuple(job["spec"]["name"] for job in plan())
+    toy = dict(status="PASS", passed=3, recipe=live_recipe, noise=noise,
+               cases={name: dict(status="PASS") for name in PROBLEM_NAMES})
+    candidate_row = dict(status="PASS", passed=19,
+                         protocol=dict(global_recipe=protocol_recipe, noise=noise),
+                         cases={name: dict(status="PASS", passed=True,
+                                           noise_applied=True)
+                                for name in names})
+    monkeypatch.setattr(toy_suite, "_toy100_rows", lambda directory: toy)
+    def fake_episode_rows(directory, expected, *, candidate):
+        return (candidate_row if directory.name == "candidate19" else
+                dict(status="MISSING", passed=0, cases={}))
+
+    monkeypatch.setattr(toy_suite, "_episode_rows", fake_episode_rows)
+    grade = toy_suite.regrade(tmp_path / "json-roundtrip")
+    assert grade["status"] == "PASS"
+    assert grade["global_recipe_identical"] is True

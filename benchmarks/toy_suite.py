@@ -593,7 +593,7 @@ def regrade(output: Path):
     if "recipe" in toy and "protocol" in candidate:
         candidate_recipe = candidate["protocol"]["global_recipe"]
         candidate_noise = candidate["protocol"]["noise"]
-        identity = (all(toy["recipe"][name] == candidate_recipe[name]
+        identity = (all(_json_value(toy["recipe"][name]) == candidate_recipe[name]
                         for name in GLOBAL_RECIPE_FIELDS)
                     and _noise_identity(toy["noise"]) == _noise_identity(candidate_noise))
         if not identity:

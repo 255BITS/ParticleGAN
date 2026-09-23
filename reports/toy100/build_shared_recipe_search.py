@@ -55,7 +55,12 @@ def _legacy_schedule_matches_archive(directory: Path, recipe: dict, names: list[
 
 def build():
     rows = []
-    for summary_path in sorted(ARTIFACTS.glob("*/summary.json")):
+    summary_paths = sorted(ARTIFACTS.glob("*/summary.json"))
+    # The learnable-scale experiment is kept beside the fixed-noise searches
+    # so its full 19-host replay and the native 100-mode trials share a folder.
+    for family in ("learnable-shared", "learnable-broad"):
+        summary_paths += sorted((ARTIFACTS.parent / family).glob("*/summary.json"))
+    for summary_path in summary_paths:
         directory = summary_path.parent
         summary = json.loads(summary_path.read_text())
         protocol = json.loads((directory / "protocol.json").read_text())
@@ -87,7 +92,8 @@ def build():
         config_path = directory / config_file if config_file else None
         source_archive = directory / "source.tar.gz"
         rows.append(dict(
-            run=directory.name,
+            run=(directory.name if directory.parent == ARTIFACTS else
+                 f"{directory.parent.name}/{directory.name}"),
             kind="installed-wheel control" if control else "shared candidate screen",
             observed_live_passes=summary["passed"], attempted=summary["attempted"],
             observed_overall=summary["overall"],

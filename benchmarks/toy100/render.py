@@ -31,9 +31,17 @@ def _run(output: Path, name: str):
     if verdict["status"] in ("MISSING", "INVALID", "ERROR"):
         raise ValueError(f"cannot render {name}: {verdict['reason']}")
     config = json.loads((run_dir / "config.json").read_text())
+    label = config.get("name", "toy100")
+    provenance_path = run_dir / "provenance.json"
+    if provenance_path.is_file():
+        options = json.loads(provenance_path.read_text()).get("model_options", {})
+        if "lr_horizon_cap" in options:
+            label = f"{label} · LR horizon {options['lr_horizon_cap']:,}"
+        if "network_lr_horizon_cap" in options:
+            label = f"{label} · G/D horizon {options['network_lr_horizon_cap']:,}, prior full budget"
     rows = {row["step"]: row for row in _events(run_dir / "events.jsonl")}
     return {"name": name, "dir": run_dir, "config": config, "rows": rows,
-            "steps": sorted(rows), "verdict": verdict}
+            "steps": sorted(rows), "verdict": verdict, "label": label}
 
 
 def _snapshot(run: dict, step: int):
@@ -110,7 +118,7 @@ def _make_frame(runs: list[dict], step: int):
                 f"Mass TV {row['metrics']['mass_tv']:.3f} · accuracy not recorded",
                 fontsize=9, color="#0f172a", labelpad=8,
             )
-    label = runs[0]["config"].get("name", "toy100")
+    label = runs[0]["label"]
     budget = runs[0]["config"]["steps"]
     title = (f"100-Gaussian toys\n{textwrap.fill(label, width=42 * columns)}\n"
              f"Step {step:,}/{budget:,}")
