@@ -38,6 +38,7 @@ def validate_manifest(manifest: Mapping) -> dict:
         forbidden = set(fields) & {
             "problem", "seed", _MANIFEST_FIELD,
             "toy100_model", "network_lr_horizon_cap", "network_lr_floor",
+            "output_noise_rng",
         }
         if forbidden:
             raise ValueError(f"problem_overrides.{problem} cannot set {', '.join(sorted(forbidden))}")

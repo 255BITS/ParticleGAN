@@ -31,7 +31,10 @@ from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
 from particlegan import GANTrainer, Recipe, get_recipe
 
 from .metrics import EVAL_N, evaluate_samples
-from .models import InputNoise, OutputNoise, linear_input_noise, linear_output_noise
+from .models import (
+    OUTPUT_NOISE_SEED_OFFSET, InputNoise, IsolatedOutputNoise, OutputNoise,
+    StatefulInputNoise, linear_input_noise, linear_output_noise, paired_output_noise,
+)
 from .problems import PROBLEM_NAMES, sample_real
 from .schedule import policy_rate_action, step_with_policy
 
@@ -62,7 +65,7 @@ RUN_DEFAULTS = {
 }
 OPTIONAL_RUN_FIELDS = {
     "output_noise_warmup", "output_noise_learnable",
-    "toy100_model", "network_lr_horizon_cap", "network_lr_floor",
+    "output_noise_rng", "toy100_model", "network_lr_horizon_cap", "network_lr_floor",
 }
 RECIPE_FIELDS = {field.name for field in fields(Recipe)}
 RUN_FIELDS = set(RUN_DEFAULTS) | OPTIONAL_RUN_FIELDS
@@ -206,6 +209,11 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
             raise ValueError("output_noise_learnable must be a boolean")
         if run["output_noise_learnable"] and run["output_noise_std"] <= 0:
             raise ValueError("output_noise_learnable requires output_noise_std > 0")
+    if "output_noise_rng" in run:
+        if type(run["output_noise_rng"]) is not str or run["output_noise_rng"] != "isolated":
+            raise ValueError("output_noise_rng must be 'isolated'")
+        if run["output_noise_std"] <= 0:
+            raise ValueError("isolated output_noise_rng requires output_noise_std > 0")
     if "toy100_model" in run and run["toy100_model"] != "affine_square_v1":
         raise ValueError("toy100_model must be 'affine_square_v1'")
     if "network_lr_horizon_cap" in run and (
@@ -243,6 +251,62 @@ def _init_linear(module: nn.Module) -> None:
                 nn.init.zeros_(layer.bias)
 
 
+def _noise_state_sha256(model: nn.Module) -> str:
+    return hashlib.sha256(model.noise_stream.get_state().cpu().numpy().tobytes()).hexdigest()
+
+
+def _noise_state_seed(stream: torch.Generator) -> int:
+    """Derive a varying direct-sample seed without consuming the caller stream."""
+    digest = hashlib.sha256(stream.get_state().cpu().numpy().tobytes()).digest()
+    return int.from_bytes(digest[:8], "little") & ((1 << 63) - 1)
+
+
+class IsolatedNoiseGANTrainer(GANTrainer):
+    """Preserve private training noise across direct public-style sampling."""
+
+    @torch.no_grad()
+    def sample(self, n, *, ema=False, generator=None, output_noise_eval_seed=None):
+        model = self.ema_G if ema else self.G
+        if model._output_rng_scope_active:
+            # The caller already paired live/EMA output noise, as in holdout.
+            return super().sample(n, ema=ema, generator=generator)
+        if output_noise_eval_seed is None:
+            stream = self.eval_generator if generator is None else self._stream(generator, 0)
+            output_noise_eval_seed = _noise_state_seed(stream)
+        with paired_output_noise((self.G, self.ema_G), seed=output_noise_eval_seed):
+            return super().sample(n, ema=ema, generator=generator)
+
+    def load_state_dict(self, state):
+        # GANTrainer checks tensor shape/dtype before mutating state, but it
+        # cannot know whether a benchmark-local generator state is valid.
+        # Validate those values first so a malformed stream cannot partially
+        # load G, D, optimizers, or the caller's global RNG.
+        models = state.get("models") if isinstance(state, dict) else None
+        if isinstance(models, dict):
+            for name, model in (("G", self.G), ("D", self.D), ("ema_G", self.ema_G)):
+                if not isinstance(model, (IsolatedOutputNoise, StatefulInputNoise)):
+                    continue
+                values = models.get(name)
+                if not isinstance(values, dict):
+                    continue  # The public validator reports missing model state.
+                value = values.get("_extra_state")
+                try:
+                    if (not isinstance(value, torch.Tensor) or value.dtype != torch.uint8
+                            or value.ndim != 1):
+                        raise ValueError("RNG state must be a ByteTensor")
+                    torch.Generator(device=self.device).set_state(value.cpu())
+                    if isinstance(model, IsolatedOutputNoise):
+                        for key in ("noise_draw_calls", "noise_draw_elements"):
+                            counter = values.get(key)
+                            if (not isinstance(counter, torch.Tensor)
+                                    or counter.dtype != torch.int64 or counter.shape != ()
+                                    or int(counter) < 0):
+                                raise ValueError(f"invalid {key}")
+                except (TypeError, ValueError, RuntimeError, AttributeError) as error:
+                    raise ValueError(f"checkpoint model {name} has invalid noise RNG state") from error
+        return super().load_state_dict(state)
+
+
 def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
     """Match the public 100-Gaussian example's model and initialization."""
     device = torch.device(config["device"])
@@ -274,14 +338,23 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
         if config.get("toy100_model") != "affine_square_v1":
             _init_linear(generator)
         _init_linear(discriminator)
+        isolated = config.get("output_noise_rng") == "isolated"
         if config["output_noise_std"]:
-            generator = OutputNoise(
-                generator, config["output_noise_std"],
-                learnable=config.get("output_noise_learnable", False),
-            ).to(device)
+            if isolated:
+                generator = IsolatedOutputNoise(
+                    generator, config["output_noise_std"], seed=seed, device=device,
+                    learnable=config.get("output_noise_learnable", False),
+                ).to(device)
+            else:
+                generator = OutputNoise(
+                    generator, config["output_noise_std"],
+                    learnable=config.get("output_noise_learnable", False),
+                ).to(device)
         if config["input_noise_std"]:
-            discriminator = InputNoise(discriminator, seed=seed + 901, device=device)
-        return GANTrainer(
+            wrapper = StatefulInputNoise if isolated else InputNoise
+            discriminator = wrapper(discriminator, seed=seed + 901, device=device)
+        trainer_class = IsolatedNoiseGANTrainer if isolated else GANTrainer
+        return trainer_class(
             recipe, generator, discriminator, prior=prior, seed=seed,
             optimizer_options={"fused": config["fused_adam"]},
         )
@@ -321,6 +394,28 @@ def _learnable_output_receipt(trainer: GANTrainer, initial_std: float) -> dict[s
         "optimizer_group": g_groups[0],
         "initial_output_sigma_live": _effective_output_sigma(trainer.G),
         "initial_output_sigma_ema": _effective_output_sigma(trainer.ema_G),
+    }
+
+
+def _isolated_output_receipt(trainer: GANTrainer, config: Mapping[str, Any]) -> dict[str, Any]:
+    if not isinstance(trainer.G, IsolatedOutputNoise) or not isinstance(trainer.ema_G, IsolatedOutputNoise):
+        raise RuntimeError("isolated output-noise policy lacks both private streams")
+    if config["input_noise_std"] and not isinstance(trainer.D, StatefulInputNoise):
+        raise RuntimeError("isolated output-noise policy lacks checkpointable input noise")
+    return {
+        "mode": "isolated",
+        "namespace_offset": OUTPUT_NOISE_SEED_OFFSET,
+        "training_seed": config["seed"] + OUTPUT_NOISE_SEED_OFFSET,
+        "generator_wrapper_class": type(trainer.G).__name__,
+        "discriminator_wrapper_class": (
+            type(trainer.D).__name__ if isinstance(trainer.D, StatefulInputNoise) else None
+        ),
+        "checkpoint_state_key": "_extra_state",
+        "initial_live_state_sha256": _noise_state_sha256(trainer.G),
+        "initial_ema_state_sha256": _noise_state_sha256(trainer.ema_G),
+        "initial_input_state_sha256": (
+            _noise_state_sha256(trainer.D) if isinstance(trainer.D, StatefulInputNoise) else None
+        ),
     }
 
 
@@ -470,7 +565,7 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
         torch.backends.cuda.matmul.allow_tf32 = False
     _write_json(out_dir / "config.json", resolved)
     policy_enabled = ("toy100_model" in resolved or "network_lr_horizon_cap" in resolved
-                      or "network_lr_floor" in resolved)
+                      or "network_lr_floor" in resolved or "output_noise_rng" in resolved)
     provenance = (_source_provenance(include_policy=True) if policy_enabled
                   else _source_provenance())
     if policy_enabled:
@@ -510,6 +605,8 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
         summary["network_lr_horizon_cap"] = resolved["network_lr_horizon_cap"]
     if "network_lr_floor" in resolved:
         summary["network_lr_floor"] = resolved["network_lr_floor"]
+    if "output_noise_rng" in resolved:
+        summary["output_noise_rng"] = resolved["output_noise_rng"]
     if accuracy_enabled:
         summary["accuracy"] = {
             "protocol": ACCURACY_PROTOCOL,
@@ -541,7 +638,10 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
             summary["learnable_output_noise"] = _learnable_output_receipt(
                 trainer, resolved["output_noise_std"],
             )
-        if resolved["output_noise_std"]:
+        isolated = resolved.get("output_noise_rng") == "isolated"
+        if isolated:
+            summary["output_noise_rng_receipt"] = _isolated_output_receipt(trainer, resolved)
+        if resolved["output_noise_std"] and not isolated:
             # OutputNoise uses the global stream during updates. Evaluation
             # forks it, so denser observations cannot alter the training path.
             torch.manual_seed(resolved["seed"])
@@ -577,10 +677,21 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
             with torch.random.fork_rng(devices=devices):
                 torch.manual_seed(resolved["seed"] + 402)
                 for model in ("live", "ema"):
-                    draw = trainer.sample(
-                        count, ema=(model == "ema"),
-                        generator=device_seed(resolved["seed"] + 403),
-                    )
+                    sample_options = {
+                        "ema": model == "ema",
+                        "generator": device_seed(resolved["seed"] + 403),
+                    }
+                    if isolated:
+                        sampled_model = trainer.ema_G if model == "ema" else trainer.G
+                        before_state = _noise_state_sha256(sampled_model)
+                        before_draws = sampled_model.draw_receipt()
+                        sample_options["output_noise_eval_seed"] = resolved["seed"] + 402
+                    draw = trainer.sample(count, **sample_options)
+                    if isolated:
+                        after_state = _noise_state_sha256(sampled_model)
+                        after_draws = sampled_model.draw_receipt()
+                        if before_state != after_state or before_draws != after_draws:
+                            raise RuntimeError("evaluation advanced the isolated training-noise stream")
                     if is_eval:
                         metrics = evaluate_samples(draw[:resolved["eval_samples"]], resolved["problem"])
                         metrics = dict(metrics)
@@ -589,6 +700,16 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                         elapsed = time.perf_counter() - start
                         event = {"event": "eval", "step": step, "model": model,
                                  "metrics": metrics, "elapsed": elapsed}
+                        if isolated:
+                            event.update({
+                                "output_noise_rng_eval_seed": resolved["seed"] + 402,
+                                "output_noise_rng_state_before_sha256": before_state,
+                                "output_noise_rng_state_after_sha256": after_state,
+                                "output_noise_rng_draw_calls_before": before_draws["calls"],
+                                "output_noise_rng_draw_calls_after": after_draws["calls"],
+                                "output_noise_rng_draw_elements_before": before_draws["elements"],
+                                "output_noise_rng_draw_elements_after": after_draws["elements"],
+                            })
                         if resolved.get("output_noise_learnable", False):
                             event["output_sigma"] = _effective_output_sigma(
                                 trainer.ema_G if model == "ema" else trainer.G,
@@ -678,6 +799,12 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
             if resolved.get("output_noise_learnable", False):
                 train_event["output_sigma_live"] = _effective_output_sigma(trainer.G)
                 train_event["output_sigma_ema"] = _effective_output_sigma(trainer.ema_G)
+            if isolated:
+                train_event.update({
+                    "output_noise_rng_state_sha256": _noise_state_sha256(trainer.G),
+                    "output_noise_rng_draw_calls": int(trainer.G.noise_draw_calls),
+                    "output_noise_rng_draw_elements": int(trainer.G.noise_draw_elements),
+                })
             logger.event(train_event)
             if step == 1 or step % resolved["log_interval"] == 0 or step == budget:
                 sigma_text = (f" sigma={train_event['output_sigma_live']:.6f}"
@@ -691,7 +818,26 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
 
         if accuracy_enabled:
             holdout_start = time.perf_counter()
-            summary["accuracy"], summary["holdout"] = accuracy_evidence.finish(trainer)
+            if isolated:
+                holdout_models = {"live": trainer.G, "ema": trainer.ema_G}
+                holdout_before = {name: _noise_state_sha256(model)
+                                  for name, model in holdout_models.items()}
+                holdout_draws_before = {name: model.draw_receipt()
+                                        for name, model in holdout_models.items()}
+                holdout_seed = resolved["seed"] + HOLDOUT_SEED_OFFSETS["noise"]
+                with paired_output_noise(holdout_models.values(), seed=holdout_seed):
+                    summary["accuracy"], summary["holdout"] = accuracy_evidence.finish(trainer)
+                receipt = summary["output_noise_rng_receipt"]
+                receipt["holdout_eval_seed"] = holdout_seed
+                for name, model in holdout_models.items():
+                    after = _noise_state_sha256(model)
+                    after_draws = model.draw_receipt()
+                    if holdout_before[name] != after or holdout_draws_before[name] != after_draws:
+                        raise RuntimeError("holdout advanced the isolated training-noise stream")
+                    receipt[f"holdout_{name}_before_state_sha256"] = holdout_before[name]
+                    receipt[f"holdout_{name}_after_state_sha256"] = after
+            else:
+                summary["accuracy"], summary["holdout"] = accuracy_evidence.finish(trainer)
             summary["holdout_samples_file"] = "holdout_samples.npz"
             summary["holdout_sha256"] = hashlib.sha256(
                 (out_dir / "holdout_samples.npz").read_bytes()
@@ -723,6 +869,17 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                 "final_output_sigma_ema": _effective_output_sigma(trainer.ema_G),
                 "final_base_std_live": float(trainer.G.output_scale().detach()),
                 "final_base_std_ema": float(trainer.ema_G.output_scale().detach()),
+            })
+        if isolated:
+            summary["output_noise_rng_receipt"].update({
+                "final_live_state_sha256": _noise_state_sha256(trainer.G),
+                "final_ema_state_sha256": _noise_state_sha256(trainer.ema_G),
+                "final_input_state_sha256": (
+                    _noise_state_sha256(trainer.D)
+                    if isinstance(trainer.D, StatefulInputNoise) else None
+                ),
+                "final_live_draw_calls": int(trainer.G.noise_draw_calls),
+                "final_live_draw_elements": int(trainer.G.noise_draw_elements),
             })
         if policy_enabled:
             _verify_live_source(provenance)
