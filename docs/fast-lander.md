@@ -18,12 +18,13 @@ leaderboard. Follow another terminal with
 `tail -F results/gym/fast_lander/run.log`. Structured events are in
 `metrics.jsonl`. Open `results/gym/fast_lander/index.html` for the local demo.
 
-The preceding full run reported 29/30 fast and 28/30 slow landings because it
-trusted cached Gym contact flags. Replaying those same frozen weights with
-actual Box2D contacts gives **30/30 for both policies**. The
-[contact correction audit](../reports/lunar_fast/audit/contact_correction/README.md)
-preserves the original weights and the false-negative evidence. A fresh
-full command run with corrected training-data selection is recorded separately.
+The [recorded full run](../reports/lunar_fast/README.md) lands **30/30** fixed
+regression worlds with both learned policies and **20/20** validation worlds.
+Fast wins all 30 paired flights, with **1.177× speedup** and 32 median steps
+saved. The full command takes about 72 seconds on this host. These are fresh
+training results with physical contact scoring; the separate
+[frozen-checkpoint audit](../reports/lunar_fast/audit/contact_correction/README.md)
+preserves the earlier scoring bug and its correction without retraining.
 These measurements use the declared variant below, not stock Lunar.
 
 ![Learned slow and fast flights, same world and clock](../reports/lunar_fast/comparison.gif)

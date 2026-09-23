@@ -73,11 +73,18 @@ cached leg flags**, not demonstrated physical failures. Slow seeds 94006 and
 On fast 94020, `EndContact` cleared leg 0's cached flag at step 169 while
 another enabled terrain contact remained. Replaying the frozen slow and fast
 checkpoints on those same 30 resets each gave 30/30 by actual active-contact
-scoring. The old report is retained under
-`reports/lunar_fast/audit/contact_correction/`; its 28/30 and 29/30 values
-remain historical cached-flag scores. This replay does not substitute for the
-pending full pipeline rerun with corrected scoring. Since 94000 has now been
-examined, it is a diagnostic cohort in that rerun.
+scoring. The [old report](../reports/lunar_fast/audit/contact_correction/report.json)
+is retained; its 28/30 and 29/30 values
+remain historical cached-flag scores. The frozen-checkpoint replay is
+separate from the fresh full pipeline run with corrected scoring: the frozen
+weights scored 30/30 each at 1.222× paired speed. The new run
+retrained from the newly classified expert flights using the same
+hyperparameters, selected fast round 3, and scored slow 30/30 and fast 30/30
+on the fixed 94000 regression cohort. Fast won all 30 same-reset flights at
+1.177× paired speed; both controllers had 20/20 validation landings. The
+[corrected report](../reports/lunar_fast/report.json) contains those new
+weights and measurements. The 94000 cohort was already examined during
+diagnosis, so this is a regression result rather than an untouched test.
 
 The original outcome classifier also conflated some sleeping contacts with a
 generic crash. The later classifier added `incomplete_landing` and

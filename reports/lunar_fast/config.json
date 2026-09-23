@@ -1,5 +1,5 @@
 {
-  "out": "results/gym/fast_lander_calibrated",
+  "out": "results/gym/fast_lander_contacts",
   "device": "cpu",
   "threads": 2,
   "train_episodes": 96,
@@ -167,16 +167,18 @@
       94029
     ]
   },
-  "revision": "1a4f347a12a74aeaced58d811e3b3471b8de5355",
+  "revision": "194fe918e1832cd9dd552d9adb3d55cfb40e67d7",
   "git_dirty": false,
+  "scoring_version": "box2d-active-ground-contacts-v1",
+  "test_cohort_status": "fixed regression cohort; previously inspected for contact scoring",
   "weight_kind": "live",
   "ema_decay": 0.0,
   "world_action_features": "engine_power",
   "source_sha256": {
-    "lunar_flight.py": "9e3e0233bf305c0af721d5aa9909bf86162803c70f23496d9eda1ab77c3b8717",
+    "lunar_flight.py": "9cae6e8e18c26dd66e460bed684a629eb0e640aa38e85dda8da783e4807b6a12",
     "lunar_training.py": "6bfdb7a4860155c4b7a52ba94afaf6235213fcb95c442d9cddea69d38f777c32",
     "lunar_artifacts.py": "3a4d126314f71de9fbf534d0ea582b5e5bf9d9c812f2625a0a608acd903f4f23",
-    "fast_lander.py": "ccf732fce90a89dcc87c502c9344755efa0101bc469582251aba8139bab33aa9"
+    "fast_lander.py": "3c8c425086dea6f138c324021a8c4384023e24140dd1c0747d0255893d87538b"
   },
   "dependencies": {
     "torch": "2.11.0+cu128",
@@ -185,7 +187,7 @@
     "Box2D": "2.3.10",
     "Pillow": "12.3.0"
   },
-  "started_at": "2026-09-23T06:02:37.551756+00:00",
+  "started_at": "2026-09-23T06:20:06.276528+00:00",
   "selection": "validation success count first, then mean steps on successful landings",
   "gate": "at least 90% success, no success count loss, >=1.1x paired speedup"
 }

@@ -1,20 +1,20 @@
 {
   "train": {
-    "action_mse": 0.005752097349613905,
-    "world_successor_mse": 0.0012251702137291431,
-    "world_successor_normalized_mse": 0.3266351521015167
+    "action_mse": 0.004745436366647482,
+    "world_successor_mse": 0.001362895593047142,
+    "world_successor_normalized_mse": 0.3460736572742462
   },
   "validation": null,
   "before_adversarial": {
-    "action_mse": 0.001876983791589737,
-    "world_successor_mse": 0.0012293851468712091,
-    "world_successor_normalized_mse": 0.3309933841228485
+    "action_mse": 0.0020072958432137966,
+    "world_successor_mse": 0.0013684885343536735,
+    "world_successor_normalized_mse": 0.35244661569595337
   },
   "warmup_updates": 8000,
   "rpgan_updates": 1200,
   "world_weight": 2.5,
   "adversarial_weight": 1.0,
-  "records": 20629,
+  "records": 21727,
   "recipe": {
     "name": "gan_v3",
     "model": "gan",
@@ -82,5 +82,5 @@
   },
   "main_deadband": 0.12,
   "initial_policy": null,
-  "world_checkpoint": "results/gym/fast_lander_calibrated/world.pt"
+  "world_checkpoint": "results/gym/fast_lander_contacts/world.pt"
 }

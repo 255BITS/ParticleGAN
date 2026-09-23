@@ -2,6 +2,8 @@
   "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
   "weight_kind": "live",
   "ema_decay": 0.0,
+  "scoring_version": "box2d-active-ground-contacts-v1",
+  "test_cohort_status": "fixed regression cohort; previously inspected for contact scoring",
   "smoke": false,
   "merge_ready": true,
   "full_evaluation": true,
@@ -11,15 +13,15 @@
     {
       "controller": "slow expert (train)",
       "episodes": 96,
-      "success_count": 92,
-      "success_rate": 0.9583333333333334,
+      "success_count": 96,
+      "success_rate": 1.0,
       "mean_steps": 226.32291666666666,
-      "mean_success_steps": 224.22826086956522,
+      "mean_success_steps": 226.32291666666666,
       "mean_contact_step": 179.69791666666666,
       "mean_return": 276.36705717034533,
       "outcomes": {
-        "successful_landing": 92,
-        "incomplete_landing": 4,
+        "successful_landing": 96,
+        "incomplete_landing": 0,
         "off_pad_landing": 0,
         "crash": 0,
         "out_of_bounds": 0,
@@ -30,15 +32,15 @@
     {
       "controller": "fast expert (train)",
       "episodes": 96,
-      "success_count": 94,
-      "success_rate": 0.9791666666666666,
+      "success_count": 96,
+      "success_rate": 1.0,
       "mean_steps": 189.1875,
-      "mean_success_steps": 188.54255319148936,
+      "mean_success_steps": 189.1875,
       "mean_contact_step": 137.05208333333334,
       "mean_return": 280.1778456869626,
       "outcomes": {
-        "successful_landing": 94,
-        "incomplete_landing": 2,
+        "successful_landing": 96,
+        "incomplete_landing": 0,
         "off_pad_landing": 0,
         "crash": 0,
         "out_of_bounds": 0,
@@ -51,10 +53,10 @@
       "episodes": 20,
       "success_count": 20,
       "success_rate": 1.0,
-      "mean_steps": 210.8,
-      "mean_success_steps": 210.8,
-      "mean_contact_step": 166.7,
-      "mean_return": 281.1966366552548,
+      "mean_steps": 210.35,
+      "mean_success_steps": 210.35,
+      "mean_contact_step": 165.45,
+      "mean_return": 281.5573362542424,
       "outcomes": {
         "successful_landing": 20,
         "incomplete_landing": 0,
@@ -70,10 +72,10 @@
       "episodes": 20,
       "success_count": 20,
       "success_rate": 1.0,
-      "mean_steps": 184.4,
-      "mean_success_steps": 184.4,
-      "mean_contact_step": 131.2,
-      "mean_return": 284.03068058018147,
+      "mean_steps": 184.35,
+      "mean_success_steps": 184.35,
+      "mean_contact_step": 131.75,
+      "mean_return": 283.86683592984025,
       "outcomes": {
         "successful_landing": 20,
         "incomplete_landing": 0,
@@ -87,15 +89,15 @@
     {
       "controller": "learned slow (test)",
       "episodes": 30,
-      "success_count": 28,
-      "success_rate": 0.9333333333333333,
-      "mean_steps": 228.5,
-      "mean_success_steps": 217.42857142857142,
-      "mean_contact_step": 178.76666666666668,
-      "mean_return": 275.9131312675368,
+      "success_count": 30,
+      "success_rate": 1.0,
+      "mean_steps": 219.83333333333334,
+      "mean_success_steps": 219.83333333333334,
+      "mean_contact_step": 176.5,
+      "mean_return": 278.1501920203653,
       "outcomes": {
-        "successful_landing": 28,
-        "incomplete_landing": 2,
+        "successful_landing": 30,
+        "incomplete_landing": 0,
         "off_pad_landing": 0,
         "crash": 0,
         "out_of_bounds": 0,
@@ -106,15 +108,15 @@
     {
       "controller": "learned fast (test)",
       "episodes": 30,
-      "success_count": 29,
-      "success_rate": 0.9666666666666667,
-      "mean_steps": 186.96666666666667,
-      "mean_success_steps": 186.44827586206895,
-      "mean_contact_step": 136.5,
-      "mean_return": 280.60886659962193,
+      "success_count": 30,
+      "success_rate": 1.0,
+      "mean_steps": 186.76666666666668,
+      "mean_success_steps": 186.76666666666668,
+      "mean_contact_step": 136.8,
+      "mean_return": 281.2083982444781,
       "outcomes": {
-        "successful_landing": 29,
-        "incomplete_landing": 1,
+        "successful_landing": 30,
+        "incomplete_landing": 0,
         "off_pad_landing": 0,
         "crash": 0,
         "out_of_bounds": 0,
@@ -124,22 +126,41 @@
     }
   ],
   "paired_test": {
-    "matched_landings": 27,
-    "paired_speedup": 1.1796214256947242,
-    "fast_wins": 27,
+    "matched_landings": 30,
+    "paired_speedup": 1.1770480099946456,
+    "fast_wins": 30,
     "median_steps_saved": 32.0
   },
-  "winner": "fast_round_1.pt",
+  "winner": "fast_round_3.pt",
   "test_episodes": {
     "slow": [
       {
         "seed": 94000,
         "outcome": "successful_landing",
-        "steps": 239,
-        "contact_step": 186,
-        "return_": 279.2047673184114,
+        "steps": 225,
+        "contact_step": 182,
+        "return_": 279.55129922013833,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 279.2047673184114,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 279.55129922013833,
         "controller": "slow policy test"
       },
       {
@@ -147,139 +168,405 @@
         "outcome": "successful_landing",
         "steps": 189,
         "contact_step": 149,
-        "return_": 273.98339975675884,
+        "return_": 274.1125987743603,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 273.98339975675884,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 274.1125987743603,
         "controller": "slow policy test"
       },
       {
         "seed": 94002,
         "outcome": "successful_landing",
-        "steps": 198,
+        "steps": 197,
         "contact_step": 155,
-        "return_": 291.46514202888295,
+        "return_": 291.06331119924596,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 291.46514202888295,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 291.06331119924596,
         "controller": "slow policy test"
       },
       {
         "seed": 94003,
         "outcome": "successful_landing",
-        "steps": 180,
+        "steps": 181,
         "contact_step": 146,
-        "return_": 268.8325059290627,
+        "return_": 269.3140447187121,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 268.8325059290627,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 269.3140447187121,
         "controller": "slow policy test"
       },
       {
         "seed": 94004,
         "outcome": "successful_landing",
-        "steps": 203,
+        "steps": 195,
         "contact_step": 155,
-        "return_": 243.5673996365157,
+        "return_": 243.48229796326777,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 243.5673996365157,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 243.48229796326777,
         "controller": "slow policy test"
       },
       {
         "seed": 94005,
         "outcome": "successful_landing",
         "steps": 218,
-        "contact_step": 180,
-        "return_": 257.56688379270526,
+        "contact_step": 179,
+        "return_": 256.4251419582706,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 257.56688379270526,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 256.4251419582706,
         "controller": "slow policy test"
       },
       {
         "seed": 94006,
-        "outcome": "incomplete_landing",
-        "steps": 508,
-        "contact_step": 251,
-        "return_": 242.81931979772375,
+        "outcome": "successful_landing",
+        "steps": 267,
+        "contact_step": 222,
+        "return_": 298.1267004789689,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 242.81931979772375,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 298.1267004789689,
         "controller": "slow policy test"
       },
       {
         "seed": 94007,
         "outcome": "successful_landing",
         "steps": 224,
-        "contact_step": 183,
-        "return_": 284.7629120718506,
+        "contact_step": 182,
+        "return_": 284.46281094593354,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 284.7629120718506,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 284.46281094593354,
         "controller": "slow policy test"
       },
       {
         "seed": 94008,
         "outcome": "successful_landing",
-        "steps": 201,
-        "contact_step": 159,
-        "return_": 236.70319361271348,
+        "steps": 197,
+        "contact_step": 158,
+        "return_": 236.99962109447176,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 236.70319361271348,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 236.99962109447176,
         "controller": "slow policy test"
       },
       {
         "seed": 94009,
         "outcome": "successful_landing",
-        "steps": 214,
-        "contact_step": 164,
-        "return_": 289.3357754797363,
+        "steps": 215,
+        "contact_step": 163,
+        "return_": 289.4911025879844,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 289.3357754797363,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 289.4911025879844,
         "controller": "slow policy test"
       },
       {
         "seed": 94010,
         "outcome": "successful_landing",
         "steps": 223,
-        "contact_step": 181,
-        "return_": 292.8548800123208,
+        "contact_step": 179,
+        "return_": 293.3974318312063,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 292.8548800123208,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 293.3974318312063,
         "controller": "slow policy test"
       },
       {
         "seed": 94011,
         "outcome": "successful_landing",
-        "steps": 246,
-        "contact_step": 200,
-        "return_": 298.984829971443,
+        "steps": 250,
+        "contact_step": 196,
+        "return_": 299.362550162365,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 298.984829971443,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 299.362550162365,
         "controller": "slow policy test"
       },
       {
         "seed": 94012,
         "outcome": "successful_landing",
-        "steps": 208,
-        "contact_step": 164,
-        "return_": 257.2396628074455,
+        "steps": 206,
+        "contact_step": 163,
+        "return_": 256.51377852861424,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 257.2396628074455,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 256.51377852861424,
         "controller": "slow policy test"
       },
       {
         "seed": 94013,
         "outcome": "successful_landing",
-        "steps": 244,
-        "contact_step": 206,
-        "return_": 292.6233913752058,
+        "steps": 248,
+        "contact_step": 204,
+        "return_": 292.4001120156745,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 292.6233913752058,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 292.4001120156745,
         "controller": "slow policy test"
       },
       {
         "seed": 94014,
         "outcome": "successful_landing",
-        "steps": 217,
-        "contact_step": 180,
-        "return_": 278.85862929196014,
+        "steps": 216,
+        "contact_step": 177,
+        "return_": 279.0565579603192,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 278.85862929196014,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 279.0565579603192,
         "controller": "slow policy test"
       },
       {
@@ -287,149 +574,434 @@
         "outcome": "successful_landing",
         "steps": 193,
         "contact_step": 152,
-        "return_": 278.6436813207714,
+        "return_": 277.92367414207877,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 278.6436813207714,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 277.92367414207877,
         "controller": "slow policy test"
       },
       {
         "seed": 94016,
         "outcome": "successful_landing",
-        "steps": 191,
+        "steps": 188,
         "contact_step": 151,
-        "return_": 257.02977078313495,
+        "return_": 256.7085137531179,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 257.02977078313495,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 256.7085137531179,
         "controller": "slow policy test"
       },
       {
         "seed": 94017,
         "outcome": "successful_landing",
-        "steps": 233,
+        "steps": 237,
         "contact_step": 189,
-        "return_": 293.8229094446102,
+        "return_": 293.6661464624042,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 293.8229094446102,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 293.6661464624042,
         "controller": "slow policy test"
       },
       {
         "seed": 94018,
         "outcome": "successful_landing",
-        "steps": 262,
-        "contact_step": 212,
-        "return_": 299.6462410047192,
+        "steps": 257,
+        "contact_step": 211,
+        "return_": 299.4784666103244,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 299.6462410047192,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 299.4784666103244,
         "controller": "slow policy test"
       },
       {
         "seed": 94019,
         "outcome": "successful_landing",
-        "steps": 196,
-        "contact_step": 157,
-        "return_": 242.43485467514506,
+        "steps": 198,
+        "contact_step": 156,
+        "return_": 241.93829390213006,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 242.43485467514506,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 241.93829390213006,
         "controller": "slow policy test"
       },
       {
         "seed": 94020,
         "outcome": "successful_landing",
-        "steps": 230,
-        "contact_step": 176,
-        "return_": 263.7804460579257,
+        "steps": 231,
+        "contact_step": 174,
+        "return_": 265.04569074519486,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 263.7804460579257,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 265.04569074519486,
         "controller": "slow policy test"
       },
       {
         "seed": 94021,
         "outcome": "successful_landing",
-        "steps": 222,
-        "contact_step": 185,
-        "return_": 277.78464430917995,
+        "steps": 218,
+        "contact_step": 180,
+        "return_": 279.04727605210826,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 277.78464430917995,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 279.04727605210826,
         "controller": "slow policy test"
       },
       {
         "seed": 94022,
         "outcome": "successful_landing",
         "steps": 224,
-        "contact_step": 180,
-        "return_": 282.8790224939511,
+        "contact_step": 179,
+        "return_": 282.48823834997603,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 282.8790224939511,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 282.48823834997603,
         "controller": "slow policy test"
       },
       {
         "seed": 94023,
         "outcome": "successful_landing",
-        "steps": 198,
+        "steps": 201,
         "contact_step": 157,
-        "return_": 269.51804147474036,
+        "return_": 269.71735161394173,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 269.51804147474036,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 269.71735161394173,
         "controller": "slow policy test"
       },
       {
         "seed": 94024,
         "outcome": "successful_landing",
-        "steps": 244,
-        "contact_step": 204,
-        "return_": 291.04766543314383,
+        "steps": 243,
+        "contact_step": 201,
+        "return_": 293.0968286547768,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 291.04766543314383,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 293.0968286547768,
         "controller": "slow policy test"
       },
       {
         "seed": 94025,
         "outcome": "successful_landing",
-        "steps": 226,
-        "contact_step": 186,
-        "return_": 291.58573219397897,
+        "steps": 227,
+        "contact_step": 184,
+        "return_": 291.5971647948038,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 291.58573219397897,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 291.5971647948038,
         "controller": "slow policy test"
       },
       {
         "seed": 94026,
         "outcome": "successful_landing",
-        "steps": 227,
-        "contact_step": 187,
-        "return_": 296.3489574050152,
+        "steps": 238,
+        "contact_step": 190,
+        "return_": 294.78224252215267,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 296.3489574050152,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 294.78224252215267,
         "controller": "slow policy test"
       },
       {
         "seed": 94027,
         "outcome": "successful_landing",
-        "steps": 215,
-        "contact_step": 176,
-        "return_": 280.42688973393194,
+        "steps": 218,
+        "contact_step": 175,
+        "return_": 279.9489794586198,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 280.42688973393194,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 279.9489794586198,
         "controller": "slow policy test"
       },
       {
         "seed": 94028,
         "outcome": "successful_landing",
         "steps": 223,
-        "contact_step": 184,
-        "return_": 279.9851503345051,
+        "contact_step": 182,
+        "return_": 279.66689111773724,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 279.9851503345051,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 279.66689111773724,
         "controller": "slow policy test"
       },
       {
         "seed": 94029,
-        "outcome": "incomplete_landing",
-        "steps": 259,
-        "contact_step": 208,
-        "return_": 283.6572384786137,
+        "outcome": "successful_landing",
+        "steps": 248,
+        "contact_step": 204,
+        "return_": 295.64064299205927,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 283.6572384786137,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 295.64064299205927,
         "controller": "slow policy test"
       }
     ],
@@ -437,81 +1009,233 @@
       {
         "seed": 94000,
         "outcome": "successful_landing",
-        "steps": 186,
-        "contact_step": 131,
-        "return_": 280.0377552386034,
+        "steps": 173,
+        "contact_step": 132,
+        "return_": 280.33907988379644,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 280.0377552386034,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 280.33907988379644,
         "controller": "fast policy test"
       },
       {
         "seed": 94001,
         "outcome": "successful_landing",
-        "steps": 165,
-        "contact_step": 120,
-        "return_": 278.2143733815575,
+        "steps": 161,
+        "contact_step": 121,
+        "return_": 277.40952871890727,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 278.2143733815575,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 277.40952871890727,
         "controller": "fast policy test"
       },
       {
         "seed": 94002,
         "outcome": "successful_landing",
-        "steps": 173,
-        "contact_step": 121,
-        "return_": 293.666003518171,
+        "steps": 177,
+        "contact_step": 120,
+        "return_": 293.0289116112393,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 293.666003518171,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 293.0289116112393,
         "controller": "fast policy test"
       },
       {
         "seed": 94003,
         "outcome": "successful_landing",
-        "steps": 147,
-        "contact_step": 111,
-        "return_": 272.962612416879,
+        "steps": 148,
+        "contact_step": 112,
+        "return_": 273.77287700263463,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 272.962612416879,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 273.77287700263463,
         "controller": "fast policy test"
       },
       {
         "seed": 94004,
         "outcome": "successful_landing",
         "steps": 163,
-        "contact_step": 121,
-        "return_": 246.19883948272135,
+        "contact_step": 123,
+        "return_": 245.8597988936404,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 246.19883948272135,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 245.8597988936404,
         "controller": "fast policy test"
       },
       {
         "seed": 94005,
         "outcome": "successful_landing",
-        "steps": 170,
-        "contact_step": 135,
-        "return_": 260.3068732848496,
+        "steps": 174,
+        "contact_step": 136,
+        "return_": 259.32080505790805,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 260.3068732848496,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 259.32080505790805,
         "controller": "fast policy test"
       },
       {
         "seed": 94006,
         "outcome": "successful_landing",
-        "steps": 226,
-        "contact_step": 169,
-        "return_": 307.42770646047245,
+        "steps": 222,
+        "contact_step": 170,
+        "return_": 306.19036513090106,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 307.42770646047245,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 306.19036513090106,
         "controller": "fast policy test"
       },
       {
         "seed": 94007,
         "outcome": "successful_landing",
-        "steps": 197,
-        "contact_step": 141,
-        "return_": 285.31150283269886,
+        "steps": 198,
+        "contact_step": 140,
+        "return_": 284.64748224657797,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 285.31150283269886,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 284.64748224657797,
         "controller": "fast policy test"
       },
       {
@@ -519,9 +1243,28 @@
         "outcome": "successful_landing",
         "steps": 153,
         "contact_step": 113,
-        "return_": 239.27180843802557,
+        "return_": 239.14349143163696,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 239.27180843802557,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 239.14349143163696,
         "controller": "fast policy test"
       },
       {
@@ -529,189 +1272,550 @@
         "outcome": "successful_landing",
         "steps": 186,
         "contact_step": 132,
-        "return_": 292.49570538512876,
+        "return_": 292.93809587899017,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 292.49570538512876,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 292.93809587899017,
         "controller": "fast policy test"
       },
       {
         "seed": 94010,
         "outcome": "successful_landing",
-        "steps": 204,
-        "contact_step": 147,
-        "return_": 296.09382125374407,
+        "steps": 208,
+        "contact_step": 144,
+        "return_": 297.8260599796729,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 296.09382125374407,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 297.8260599796729,
         "controller": "fast policy test"
       },
       {
         "seed": 94011,
         "outcome": "successful_landing",
-        "steps": 203,
-        "contact_step": 144,
-        "return_": 300.8973666164977,
+        "steps": 209,
+        "contact_step": 143,
+        "return_": 299.7612682555813,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 300.8973666164977,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 299.7612682555813,
         "controller": "fast policy test"
       },
       {
         "seed": 94012,
         "outcome": "successful_landing",
-        "steps": 175,
-        "contact_step": 128,
-        "return_": 259.2330438207746,
+        "steps": 174,
+        "contact_step": 129,
+        "return_": 259.8319382774978,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 259.2330438207746,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 259.8319382774978,
         "controller": "fast policy test"
       },
       {
         "seed": 94013,
         "outcome": "successful_landing",
-        "steps": 209,
+        "steps": 215,
         "contact_step": 164,
-        "return_": 294.1662032831522,
+        "return_": 294.5104960301482,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 294.1662032831522,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 294.5104960301482,
         "controller": "fast policy test"
       },
       {
         "seed": 94014,
         "outcome": "successful_landing",
-        "steps": 170,
-        "contact_step": 125,
-        "return_": 279.89099061225613,
+        "steps": 173,
+        "contact_step": 126,
+        "return_": 280.6508419383471,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 279.89099061225613,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 280.6508419383471,
         "controller": "fast policy test"
       },
       {
         "seed": 94015,
         "outcome": "successful_landing",
-        "steps": 176,
-        "contact_step": 117,
-        "return_": 280.89518089541514,
+        "steps": 174,
+        "contact_step": 115,
+        "return_": 282.0383943111064,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 280.89518089541514,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 282.0383943111064,
         "controller": "fast policy test"
       },
       {
         "seed": 94016,
         "outcome": "successful_landing",
-        "steps": 151,
-        "contact_step": 106,
-        "return_": 260.3694871155609,
+        "steps": 145,
+        "contact_step": 108,
+        "return_": 261.7679954309209,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 260.3694871155609,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 261.7679954309209,
         "controller": "fast policy test"
       },
       {
         "seed": 94017,
         "outcome": "successful_landing",
-        "steps": 206,
-        "contact_step": 150,
-        "return_": 296.08752136769175,
+        "steps": 210,
+        "contact_step": 151,
+        "return_": 296.0645356742819,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 296.08752136769175,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 296.0645356742819,
         "controller": "fast policy test"
       },
       {
         "seed": 94018,
         "outcome": "successful_landing",
-        "steps": 217,
-        "contact_step": 168,
-        "return_": 307.1599915146767,
+        "steps": 222,
+        "contact_step": 173,
+        "return_": 306.9224407964607,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 307.1599915146767,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 306.9224407964607,
         "controller": "fast policy test"
       },
       {
         "seed": 94019,
         "outcome": "successful_landing",
-        "steps": 166,
+        "steps": 165,
         "contact_step": 121,
-        "return_": 245.7079210603893,
+        "return_": 245.44552258614527,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 245.7079210603893,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 245.44552258614527,
         "controller": "fast policy test"
       },
       {
         "seed": 94020,
-        "outcome": "incomplete_landing",
-        "steps": 202,
-        "contact_step": 131,
-        "return_": 255.27205638870637,
+        "outcome": "successful_landing",
+        "steps": 200,
+        "contact_step": 133,
+        "return_": 267.32852927945873,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 255.27205638870637,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 267.32852927945873,
         "controller": "fast policy test"
       },
       {
         "seed": 94021,
         "outcome": "successful_landing",
-        "steps": 185,
+        "steps": 177,
         "contact_step": 133,
-        "return_": 276.78600090464556,
+        "return_": 278.29807247566055,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 276.78600090464556,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 278.29807247566055,
         "controller": "fast policy test"
       },
       {
         "seed": 94022,
         "outcome": "successful_landing",
-        "steps": 192,
-        "contact_step": 137,
-        "return_": 281.72012251453066,
+        "steps": 193,
+        "contact_step": 139,
+        "return_": 282.7117302233948,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 281.72012251453066,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 282.7117302233948,
         "controller": "fast policy test"
       },
       {
         "seed": 94023,
         "outcome": "successful_landing",
-        "steps": 172,
-        "contact_step": 123,
-        "return_": 271.8141225119329,
+        "steps": 171,
+        "contact_step": 122,
+        "return_": 271.6694795687922,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 271.8141225119329,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 271.6694795687922,
         "controller": "fast policy test"
       },
       {
         "seed": 94024,
         "outcome": "successful_landing",
-        "steps": 217,
-        "contact_step": 160,
-        "return_": 296.4216511669257,
+        "steps": 211,
+        "contact_step": 157,
+        "return_": 297.7275887709692,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 296.4216511669257,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 297.7275887709692,
         "controller": "fast policy test"
       },
       {
         "seed": 94025,
         "outcome": "successful_landing",
-        "steps": 205,
-        "contact_step": 154,
-        "return_": 291.26593974266325,
+        "steps": 203,
+        "contact_step": 153,
+        "return_": 291.60044350311966,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 291.26593974266325,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 291.60044350311966,
         "controller": "fast policy test"
       },
       {
         "seed": 94026,
         "outcome": "successful_landing",
-        "steps": 205,
-        "contact_step": 152,
-        "return_": 301.0576488609777,
+        "steps": 207,
+        "contact_step": 151,
+        "return_": 300.6747821491141,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 301.0576488609777,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 300.6747821491141,
         "controller": "fast policy test"
       },
       {
         "seed": 94027,
         "outcome": "successful_landing",
-        "steps": 191,
-        "contact_step": 137,
-        "return_": 280.99070639186857,
+        "steps": 184,
+        "contact_step": 135,
+        "return_": 282.7921678645725,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 280.99070639186857,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 282.7921678645725,
         "controller": "fast policy test"
       },
       {
@@ -719,19 +1823,57 @@
         "outcome": "successful_landing",
         "steps": 182,
         "contact_step": 142,
-        "return_": 282.96358923219407,
+        "return_": 283.0031585765388,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 282.96358923219407,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 283.0031585765388,
         "controller": "fast policy test"
       },
       {
         "seed": 94029,
         "outcome": "successful_landing",
-        "steps": 215,
-        "contact_step": 162,
-        "return_": 303.57945229494754,
+        "steps": 225,
+        "contact_step": 166,
+        "return_": 302.9760657863261,
         "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
-        "return": 303.57945229494754,
+        "scoring_version": "box2d-active-ground-contacts-v1",
+        "terminal_contact_diagnostic": {
+          "cached_leg_flags": [
+            true,
+            true
+          ],
+          "observed_leg_flags": [
+            true,
+            true
+          ],
+          "active_ground_contacts": [
+            1,
+            1
+          ],
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "out_of_bounds": false
+        },
+        "return": 302.9760657863261,
         "controller": "fast policy test"
       }
     ]
@@ -768,17 +1910,17 @@
   "demo_split": "test",
   "demo_is_success_pair": true,
   "sha256": {
-    "fast_round_2.pt": "120e88bd562ac3a3eef6df567293693113029e5fe37d4ba7d63e31bf8b146f9e",
-    "slow.pt": "00e657c6427745e180d33883c6b393cc4ca680d34ff1738a8dd79c14b7860b4f",
+    "fast_round_2.pt": "e46c7a570db3303b9714573598ce40c1844b43234a3d1f63a894d96285d4b2cd",
+    "slow.pt": "9567b96e8d52181981056567206b46efe23eceadf1ab4902e2aad455f024ad3a",
     "transitions.npz": "31bc0b458c5fe88e6c1508a8a61a4a56e2d854a75340f4a78b6e8de737cbefd4",
     "counterfactuals.npz": "252e40aba53fed18a4e7e7ed33bb0dd04e4e10890cdfa01e450f27cda941669c",
-    "fast_expert.npz": "264b2107c2fec28e12c8d0fa7d8ee23f8fc602912aa1104201cd03d696477deb",
+    "fast_expert.npz": "f2be01e1b1b89b6131fe6f0705f3da6345d5cd9e517152544c37c21c87aa3728",
     "world.pt": "795747b30959b03250ef26cb4a2ab68d48350f606583be9c049b5f80c29209bc",
-    "fast.pt": "a689cbf26222db0dd5d53928e7750e3938aaf4f149752ef82d1edff0557ba223",
-    "slow_fast_pairs.npz": "25a01a44fda9828857cd9315c2e93b7c76c834fdbdfb6471dce6cec5075b331d",
-    "slow_expert.npz": "f84c16d070c1d71252e7d2f9ce37276075f12d834aca0735d6ecae77f4071ae1",
+    "fast.pt": "ea080306bb779a4faa146e06cd1c077677153e338e2088523a0d9ff0d7f2ea10",
+    "slow_fast_pairs.npz": "5d3af9d72ffc3c76ccf19b2e94a6fbf165fe190e10d5be55a4deafb22d21d5fe",
+    "slow_expert.npz": "960b8791181bb8f1a7df8613a5b6e0346bca6a4bec4b084906bd8cbad5976dea",
     "world_validation.npz": "1d1078b1b580974962028cb7a8dcc6b18c8858a6e677a9be3a0a493502a00cab",
-    "fast_round_1.pt": "a689cbf26222db0dd5d53928e7750e3938aaf4f149752ef82d1edff0557ba223",
-    "fast_round_3.pt": "f7b511289d111bf160eb16546cafc8039d515062f5eee3fb300fc3a891e995be"
+    "fast_round_1.pt": "af0904f5f1fedff9f3506f6dd1278223bf076a969c3b801464f7c83c86197d4d",
+    "fast_round_3.pt": "ea080306bb779a4faa146e06cd1c077677153e338e2088523a0d9ff0d7f2ea10"
   }
 }

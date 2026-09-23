@@ -3,10 +3,10 @@
 All development comparisons below reuse the fixed expert training cohort
 `24000:24096` and controller validation cohort `34000:34020` in the declared
 bidirectional Box2D variant. Both `84000:84030` and `94000:94030` have now
-been inspected and are **diagnostic** cohorts. The corrected contact scoring
-is being run through the full pipeline with unchanged training settings; its
-new report is pending. [Failure analysis](lunar-failure-analysis.md) explains
-the mechanism and limits of these measurements.
+been inspected and are **diagnostic** cohorts. A fresh single-command run on
+clean revision `194fe91` completed with corrected contact scoring and the
+same training hyperparameters. [Failure analysis](lunar-failure-analysis.md)
+explains the mechanism and limits of these measurements.
 
 The first pilot exposed an actuator problem: any positive main command ignites
 the stock engine at at least half power. A `0.12` policy deadband corrected the
@@ -63,24 +63,49 @@ More adversarial updates are therefore not an established durability
 improvement. The bounded 1,200/400 budget is supported by the fixed-data
 action-calibration audit; it is **not** a claim that 2,400 updates are stable.
 
-## Contact-score correction and next full run
+## Contact-score correction and fresh full run
 
 The first calibrated full run selected the slow-1,200 → fast-400 path, then
 scored `94000:94030` with a cached leg-contact flag. Its **historical flag
 scores** were 20/20 for both on validation; on test, slow was 28/30 at 217.43
 flagged-success steps and fast was 29/30 at 186.45. The three misses were
-labeled `incomplete_landing`. These numbers remain in the archived original
-calibrated report under `reports/lunar_fast/audit/contact_correction/` and
-must not be read as physical landing failures.
+labeled `incomplete_landing`. These numbers remain in the
+[archived cached-flag report](../reports/lunar_fast/audit/contact_correction/report.json)
+and must not be read as physical landing failures.
 
 The terminal contact audit found both legs actually touching terrain in all
 three cases: slow seeds 94006 and 94029, and fast seed 94020. On fast 94020,
 Box2D `EndContact` cleared leg 0's cached ground flag at step 169 while an
-enabled terrain contact remained. A frozen-checkpoint replay of the same 60
-flights scored **30/30 physical contacts for slow and 30/30 for fast**. This is
-a scoring correction on existing policies, **not** a retrained full-pipeline
-result. The old 94000 cohort is now inspected, so the forthcoming full run
-cannot describe it as untouched. Its corrected metrics remain pending.
+enabled terrain contact remained. The
+[terminal event trace](../reports/lunar_fast/audit/contact_correction/event_trace.json)
+records that mismatch. A
+[frozen-checkpoint replay](../reports/lunar_fast/audit/contact_correction/frozen_rescore.json)
+of the same 60 flights scored **30/30 physical contacts for slow and 30/30 for
+fast**, with 1.222× paired speed. This is a scoring correction on existing
+policies, **not** a retrained full-pipeline result. The old 94000 cohort is
+now inspected, so the fresh full run treats it as a regression cohort.
+
+The fresh [corrected report](../reports/lunar_fast/report.json) comes from a
+new end-to-end run, not the frozen replay. Correct contact labels made all
+96 slow and 96 fast expert training flights successful. All 96 same-reset
+pairs met the faster-fast criterion; policy training used 21,727 slow and
+18,162 fast physical transition rows. The optimizer, loss, 1,200 slow and
+400 fast RpGAN update budgets, and live-weight policy selection stayed the
+same. Fast round 3 won validation selection. The run finished in 71.8 seconds
+on CPU.
+
+| Fresh corrected controller | Validation landings / mean steps | 94000 regression landings / mean steps |
+| --- | ---: | ---: |
+| Slow | 20/20 / 210.35 | 30/30 / 219.83 |
+| Fast | 20/20 / 184.35 | 30/30 / 186.77 |
+
+On all 30 matched 94000 resets the newly trained fast policy landed sooner:
+**1.177×** paired speedup and 32 median steps saved. This is a completed
+full-pipeline measurement with corrected scoring. Because 94000 was already
+inspected during diagnosis, it is a fixed regression cohort here, not a new
+untouched test. The older frozen-checkpoint rescore also reached 30/30 for
+both policies, but involved different weights and a 1.222× paired speedup;
+it must not be substituted for this fresh-run result.
 
 The old 84000 and 94000 results use different resets and policy versions;
 their numerical difference is not a paired before/after improvement estimate.

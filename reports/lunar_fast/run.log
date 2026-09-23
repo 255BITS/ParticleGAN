@@ -1,171 +1,171 @@
 [     0.0s] Gather expert flights and transition data
 [     0.2s] slow expert: 8/96 flights · 8 landings
-[     0.3s] slow expert: 16/96 flights · 15 landings
-[     0.5s] slow expert: 24/96 flights · 23 landings
-[     0.6s] slow expert: 32/96 flights · 30 landings
-[     0.7s] slow expert: 40/96 flights · 38 landings
-[     0.8s] slow expert: 48/96 flights · 46 landings
-[     0.9s] slow expert: 56/96 flights · 54 landings
-[     1.0s] slow expert: 64/96 flights · 62 landings
-[     1.1s] slow expert: 72/96 flights · 70 landings
-[     1.2s] slow expert: 80/96 flights · 78 landings
-[     1.4s] slow expert: 88/96 flights · 85 landings
-[     1.4s] slow expert: 96/96 flights · 92 landings
-[     1.5s] fast expert: 8/96 flights · 8 landings
-[     1.6s] fast expert: 16/96 flights · 16 landings
-[     1.7s] fast expert: 24/96 flights · 24 landings
+[     0.4s] slow expert: 16/96 flights · 16 landings
+[     0.5s] slow expert: 24/96 flights · 24 landings
+[     0.6s] slow expert: 32/96 flights · 32 landings
+[     0.7s] slow expert: 40/96 flights · 40 landings
+[     0.8s] slow expert: 48/96 flights · 48 landings
+[     0.9s] slow expert: 56/96 flights · 56 landings
+[     1.0s] slow expert: 64/96 flights · 64 landings
+[     1.1s] slow expert: 72/96 flights · 72 landings
+[     1.2s] slow expert: 80/96 flights · 80 landings
+[     1.4s] slow expert: 88/96 flights · 88 landings
+[     1.5s] slow expert: 96/96 flights · 96 landings
+[     1.6s] fast expert: 8/96 flights · 8 landings
+[     1.7s] fast expert: 16/96 flights · 16 landings
+[     1.8s] fast expert: 24/96 flights · 24 landings
 [     1.8s] fast expert: 32/96 flights · 32 landings
 [     1.9s] fast expert: 40/96 flights · 40 landings
 [     2.0s] fast expert: 48/96 flights · 48 landings
-[     2.1s] fast expert: 56/96 flights · 55 landings
-[     2.2s] fast expert: 64/96 flights · 63 landings
-[     2.3s] fast expert: 72/96 flights · 71 landings
-[     2.4s] fast expert: 80/96 flights · 79 landings
-[     2.5s] fast expert: 88/96 flights · 87 landings
-[     2.6s] fast expert: 96/96 flights · 94 landings
+[     2.1s] fast expert: 56/96 flights · 56 landings
+[     2.2s] fast expert: 64/96 flights · 64 landings
+[     2.3s] fast expert: 72/96 flights · 72 landings
+[     2.4s] fast expert: 80/96 flights · 80 landings
+[     2.5s] fast expert: 88/96 flights · 88 landings
+[     2.6s] fast expert: 96/96 flights · 96 landings
 [     3.2s] counterfactuals: 8/152 episodes, 288 real branches
 [     3.8s] counterfactuals: 16/152 episodes, 576 real branches
 [     4.3s] counterfactuals: 24/152 episodes, 864 real branches
-[     5.0s] counterfactuals: 32/152 episodes, 1152 real branches
-[     5.6s] counterfactuals: 40/152 episodes, 1440 real branches
-[     6.3s] counterfactuals: 48/152 episodes, 1728 real branches
-[     6.9s] counterfactuals: 56/152 episodes, 2016 real branches
-[     7.5s] counterfactuals: 64/152 episodes, 2304 real branches
-[     8.1s] counterfactuals: 72/152 episodes, 2592 real branches
-[     8.6s] counterfactuals: 80/152 episodes, 2880 real branches
-[     9.1s] counterfactuals: 88/152 episodes, 3168 real branches
-[     9.6s] counterfactuals: 96/152 episodes, 3456 real branches
-[    10.0s] counterfactuals: 104/152 episodes, 3744 real branches
-[    10.4s] counterfactuals: 112/152 episodes, 4032 real branches
-[    10.9s] counterfactuals: 120/152 episodes, 4320 real branches
-[    11.4s] counterfactuals: 128/152 episodes, 4608 real branches
-[    11.8s] counterfactuals: 136/152 episodes, 4896 real branches
-[    12.3s] counterfactuals: 144/152 episodes, 5184 real branches
-[    12.7s] counterfactuals: 152/152 episodes, 5472 real branches
-[    12.7s] Train the world model
-[    13.4s] world step=1/2500 normalized_mse=0.76076
-[    13.7s] world step=250/2500 normalized_mse=0.58012
-[    14.0s] world step=500/2500 normalized_mse=0.41190
-[    14.3s] world step=750/2500 normalized_mse=0.28106
-[    14.6s] world step=1000/2500 normalized_mse=0.42215
-[    14.8s] world step=1250/2500 normalized_mse=0.37792
-[    15.1s] world step=1500/2500 normalized_mse=0.33178
-[    15.4s] world step=1750/2500 normalized_mse=0.13154
-[    15.7s] world step=2000/2500 normalized_mse=0.18275
-[    15.9s] world step=2250/2500 normalized_mse=0.52254
-[    16.2s] world step=2500/2500 normalized_mse=0.11546
-[    16.3s] Train the slow RpGAN landing policy
-[    16.3s] policy BC step=1/8000 action_mse=0.12857
-[    17.1s] policy BC step=800/8000 action_mse=0.01658
-[    18.0s] policy BC step=1600/8000 action_mse=0.01204
-[    18.9s] policy BC step=2400/8000 action_mse=0.00663
-[    19.7s] policy BC step=3200/8000 action_mse=0.00519
-[    20.6s] policy BC step=4000/8000 action_mse=0.00427
-[    21.5s] policy BC step=4800/8000 action_mse=0.00376
-[    22.3s] policy BC step=5600/8000 action_mse=0.00306
-[    23.2s] policy BC step=6400/8000 action_mse=0.00233
-[    24.1s] policy BC step=7200/8000 action_mse=0.00214
-[    25.0s] policy BC step=8000/8000 action_mse=0.00256
-[    25.0s] policy RpGAN step=1/1200 d=0.69315 g_adv=0.69316 world=0.24784
-[    25.6s] policy RpGAN step=120/1200 d=0.69175 g_adv=0.69463 world=0.27965
-[    26.2s] policy RpGAN step=240/1200 d=0.69114 g_adv=0.69532 world=0.13695
-[    26.8s] policy RpGAN step=360/1200 d=0.69347 g_adv=0.69293 world=0.13046
-[    27.3s] policy RpGAN step=480/1200 d=0.69462 g_adv=0.69185 world=0.23553
-[    27.8s] policy RpGAN step=600/1200 d=0.69418 g_adv=0.69222 world=0.23355
-[    28.4s] policy RpGAN step=720/1200 d=0.69318 g_adv=0.69322 world=0.14751
-[    28.9s] policy RpGAN step=840/1200 d=0.69133 g_adv=0.69533 world=0.13581
-[    29.4s] policy RpGAN step=960/1200 d=0.69301 g_adv=0.69355 world=0.22067
-[    29.9s] policy RpGAN step=1080/1200 d=0.69152 g_adv=0.69497 world=0.21945
-[    30.5s] policy RpGAN step=1200/1200 d=0.69322 g_adv=0.69357 world=0.13861
-[    30.8s] slow policy validation: 8/20 flights · 8 landings
+[     4.9s] counterfactuals: 32/152 episodes, 1152 real branches
+[     5.5s] counterfactuals: 40/152 episodes, 1440 real branches
+[     6.0s] counterfactuals: 48/152 episodes, 1728 real branches
+[     6.5s] counterfactuals: 56/152 episodes, 2016 real branches
+[     7.1s] counterfactuals: 64/152 episodes, 2304 real branches
+[     7.6s] counterfactuals: 72/152 episodes, 2592 real branches
+[     8.1s] counterfactuals: 80/152 episodes, 2880 real branches
+[     8.5s] counterfactuals: 88/152 episodes, 3168 real branches
+[     8.9s] counterfactuals: 96/152 episodes, 3456 real branches
+[     9.4s] counterfactuals: 104/152 episodes, 3744 real branches
+[     9.8s] counterfactuals: 112/152 episodes, 4032 real branches
+[    10.3s] counterfactuals: 120/152 episodes, 4320 real branches
+[    10.8s] counterfactuals: 128/152 episodes, 4608 real branches
+[    11.2s] counterfactuals: 136/152 episodes, 4896 real branches
+[    11.7s] counterfactuals: 144/152 episodes, 5184 real branches
+[    12.1s] counterfactuals: 152/152 episodes, 5472 real branches
+[    12.1s] Train the world model
+[    12.8s] world step=1/2500 normalized_mse=0.76076
+[    13.1s] world step=250/2500 normalized_mse=0.58012
+[    13.4s] world step=500/2500 normalized_mse=0.41190
+[    13.7s] world step=750/2500 normalized_mse=0.28106
+[    13.9s] world step=1000/2500 normalized_mse=0.42215
+[    14.2s] world step=1250/2500 normalized_mse=0.37792
+[    14.5s] world step=1500/2500 normalized_mse=0.33178
+[    14.7s] world step=1750/2500 normalized_mse=0.13154
+[    15.0s] world step=2000/2500 normalized_mse=0.18275
+[    15.2s] world step=2250/2500 normalized_mse=0.52254
+[    15.5s] world step=2500/2500 normalized_mse=0.11546
+[    15.6s] Train the slow RpGAN landing policy
+[    15.6s] policy BC step=1/8000 action_mse=0.11116
+[    16.4s] policy BC step=800/8000 action_mse=0.02045
+[    17.2s] policy BC step=1600/8000 action_mse=0.01111
+[    18.0s] policy BC step=2400/8000 action_mse=0.00556
+[    18.8s] policy BC step=3200/8000 action_mse=0.00535
+[    19.6s] policy BC step=4000/8000 action_mse=0.00388
+[    20.4s] policy BC step=4800/8000 action_mse=0.00311
+[    21.2s] policy BC step=5600/8000 action_mse=0.00292
+[    22.2s] policy BC step=6400/8000 action_mse=0.00293
+[    23.1s] policy BC step=7200/8000 action_mse=0.00203
+[    24.0s] policy BC step=8000/8000 action_mse=0.00163
+[    24.0s] policy RpGAN step=1/1200 d=0.69314 g_adv=0.69319 world=0.17289
+[    24.6s] policy RpGAN step=120/1200 d=0.69357 g_adv=0.69275 world=0.20880
+[    25.2s] policy RpGAN step=240/1200 d=0.69266 g_adv=0.69381 world=0.16169
+[    25.8s] policy RpGAN step=360/1200 d=0.69047 g_adv=0.69608 world=0.22157
+[    26.4s] policy RpGAN step=480/1200 d=0.69320 g_adv=0.69338 world=0.17399
+[    26.9s] policy RpGAN step=600/1200 d=0.69210 g_adv=0.69435 world=0.13129
+[    27.6s] policy RpGAN step=720/1200 d=0.69423 g_adv=0.69225 world=0.22462
+[    28.2s] policy RpGAN step=840/1200 d=0.69319 g_adv=0.69327 world=0.16617
+[    28.9s] policy RpGAN step=960/1200 d=0.69433 g_adv=0.69214 world=0.15410
+[    29.6s] policy RpGAN step=1080/1200 d=0.69245 g_adv=0.69401 world=0.16943
+[    30.3s] policy RpGAN step=1200/1200 d=0.69191 g_adv=0.69449 world=0.19199
+[    30.7s] slow policy validation: 8/20 flights · 8 landings
 [    31.1s] slow policy validation: 16/20 flights · 16 landings
 [    31.3s] slow policy validation: 20/20 flights · 20 landings
 [    31.3s] Extract successful slow → fast trajectories
-[    31.4s] Extracted 91 successful same-world pairs and 17053 real fast transitions
+[    31.4s] Extracted 96 successful same-world pairs and 18162 real fast transitions
 [    31.4s] Refine fast policies and select by real validation landings
-[    31.4s] policy BC step=1/8000 action_mse=0.04800
-[    32.2s] policy BC step=800/8000 action_mse=0.00147
-[    33.1s] policy BC step=1600/8000 action_mse=0.00168
-[    33.9s] policy BC step=2400/8000 action_mse=0.00151
-[    34.8s] policy BC step=3200/8000 action_mse=0.00157
-[    35.6s] policy BC step=4000/8000 action_mse=0.00177
-[    36.5s] policy BC step=4800/8000 action_mse=0.00125
-[    37.3s] policy BC step=5600/8000 action_mse=0.00122
-[    38.2s] policy BC step=6400/8000 action_mse=0.00096
-[    39.0s] policy BC step=7200/8000 action_mse=0.00097
-[    39.9s] policy BC step=8000/8000 action_mse=0.00101
-[    39.9s] policy RpGAN step=1/400 d=0.69307 g_adv=0.69327 world=0.45984
-[    40.1s] policy RpGAN step=40/400 d=0.69271 g_adv=0.69363 world=0.30628
-[    40.3s] policy RpGAN step=80/400 d=0.69288 g_adv=0.69345 world=0.23680
-[    40.5s] policy RpGAN step=120/400 d=0.69249 g_adv=0.69392 world=0.21310
-[    40.6s] policy RpGAN step=160/400 d=0.69262 g_adv=0.69375 world=0.21512
-[    40.8s] policy RpGAN step=200/400 d=0.69275 g_adv=0.69371 world=0.17394
-[    41.0s] policy RpGAN step=240/400 d=0.69136 g_adv=0.69505 world=0.25812
-[    41.2s] policy RpGAN step=280/400 d=0.69212 g_adv=0.69426 world=0.32343
-[    41.4s] policy RpGAN step=320/400 d=0.69096 g_adv=0.69547 world=0.36650
-[    41.6s] policy RpGAN step=360/400 d=0.69234 g_adv=0.69413 world=0.20789
-[    41.8s] policy RpGAN step=400/400 d=0.69269 g_adv=0.69368 world=0.16509
-[    42.0s] fast round 1: 8/20 flights · 8 landings
-[    42.3s] fast round 1: 16/20 flights · 16 landings
-[    42.5s] fast round 1: 20/20 flights · 20 landings
-[    42.5s] policy BC step=1/8000 action_mse=0.00345
-[    43.4s] policy BC step=800/8000 action_mse=0.00085
-[    44.3s] policy BC step=1600/8000 action_mse=0.00077
-[    45.1s] policy BC step=2400/8000 action_mse=0.00102
-[    46.0s] policy BC step=3200/8000 action_mse=0.00101
-[    46.9s] policy BC step=4000/8000 action_mse=0.00114
-[    47.8s] policy BC step=4800/8000 action_mse=0.00099
-[    48.6s] policy BC step=5600/8000 action_mse=0.00077
-[    49.4s] policy BC step=6400/8000 action_mse=0.00073
-[    50.3s] policy BC step=7200/8000 action_mse=0.00054
-[    51.2s] policy BC step=8000/8000 action_mse=0.00067
-[    51.2s] policy RpGAN step=1/400 d=0.69322 g_adv=0.69311 world=0.45585
-[    51.4s] policy RpGAN step=40/400 d=0.69301 g_adv=0.69332 world=0.30178
-[    51.5s] policy RpGAN step=80/400 d=0.69307 g_adv=0.69325 world=0.23762
-[    51.7s] policy RpGAN step=120/400 d=0.69252 g_adv=0.69381 world=0.21111
-[    51.9s] policy RpGAN step=160/400 d=0.69245 g_adv=0.69388 world=0.20886
-[    52.1s] policy RpGAN step=200/400 d=0.69298 g_adv=0.69363 world=0.17442
-[    52.3s] policy RpGAN step=240/400 d=0.69233 g_adv=0.69402 world=0.25340
-[    52.5s] policy RpGAN step=280/400 d=0.69278 g_adv=0.69360 world=0.32549
-[    52.7s] policy RpGAN step=320/400 d=0.69222 g_adv=0.69412 world=0.37375
-[    52.9s] policy RpGAN step=360/400 d=0.69206 g_adv=0.69451 world=0.20184
-[    53.0s] policy RpGAN step=400/400 d=0.69288 g_adv=0.69346 world=0.16476
-[    53.3s] fast round 2: 8/20 flights · 8 landings
-[    53.6s] fast round 2: 16/20 flights · 16 landings
-[    53.7s] fast round 2: 20/20 flights · 20 landings
-[    53.8s] policy BC step=1/8000 action_mse=0.00322
-[    54.6s] policy BC step=800/8000 action_mse=0.00064
-[    55.5s] policy BC step=1600/8000 action_mse=0.00054
-[    56.4s] policy BC step=2400/8000 action_mse=0.00069
-[    57.4s] policy BC step=3200/8000 action_mse=0.00073
-[    58.3s] policy BC step=4000/8000 action_mse=0.00074
-[    59.3s] policy BC step=4800/8000 action_mse=0.00079
-[    60.3s] policy BC step=5600/8000 action_mse=0.00055
-[    61.2s] policy BC step=6400/8000 action_mse=0.00052
-[    62.1s] policy BC step=7200/8000 action_mse=0.00037
-[    62.9s] policy BC step=8000/8000 action_mse=0.00050
-[    62.9s] policy RpGAN step=1/400 d=0.69327 g_adv=0.69306 world=0.45438
-[    63.1s] policy RpGAN step=40/400 d=0.69278 g_adv=0.69356 world=0.29860
-[    63.3s] policy RpGAN step=80/400 d=0.69291 g_adv=0.69343 world=0.23591
-[    63.5s] policy RpGAN step=120/400 d=0.69276 g_adv=0.69354 world=0.21107
-[    63.7s] policy RpGAN step=160/400 d=0.69238 g_adv=0.69399 world=0.21160
-[    63.9s] policy RpGAN step=200/400 d=0.69284 g_adv=0.69360 world=0.17321
-[    64.1s] policy RpGAN step=240/400 d=0.69244 g_adv=0.69393 world=0.25485
-[    64.2s] policy RpGAN step=280/400 d=0.69297 g_adv=0.69346 world=0.31946
-[    64.4s] policy RpGAN step=320/400 d=0.69240 g_adv=0.69393 world=0.36500
-[    64.6s] policy RpGAN step=360/400 d=0.69333 g_adv=0.69312 world=0.20808
-[    64.8s] policy RpGAN step=400/400 d=0.69274 g_adv=0.69360 world=0.16297
-[    65.1s] fast round 3: 8/20 flights · 8 landings
-[    65.4s] fast round 3: 16/20 flights · 16 landings
-[    65.5s] fast round 3: 20/20 flights · 20 landings
-[    65.5s] Evaluate the frozen winner on untouched test worlds
-[    65.9s] slow policy test: 8/30 flights · 7 landings
-[    66.2s] slow policy test: 16/30 flights · 15 landings
-[    66.5s] slow policy test: 24/30 flights · 23 landings
-[    66.8s] slow policy test: 30/30 flights · 28 landings
-[    67.1s] fast policy test: 8/30 flights · 8 landings
-[    67.3s] fast policy test: 16/30 flights · 16 landings
-[    67.6s] fast policy test: 24/30 flights · 23 landings
-[    67.9s] fast policy test: 30/30 flights · 29 landings
-[    67.9s] Export real flight GIFs and the demo page
-[    73.0s] PASS · fast landing demonstrated
+[    31.4s] policy BC step=1/8000 action_mse=0.04316
+[    32.3s] policy BC step=800/8000 action_mse=0.00170
+[    33.1s] policy BC step=1600/8000 action_mse=0.00157
+[    34.0s] policy BC step=2400/8000 action_mse=0.00159
+[    34.9s] policy BC step=3200/8000 action_mse=0.00152
+[    35.8s] policy BC step=4000/8000 action_mse=0.00147
+[    36.7s] policy BC step=4800/8000 action_mse=0.00105
+[    37.5s] policy BC step=5600/8000 action_mse=0.00144
+[    38.4s] policy BC step=6400/8000 action_mse=0.00125
+[    39.2s] policy BC step=7200/8000 action_mse=0.00112
+[    40.1s] policy BC step=8000/8000 action_mse=0.00113
+[    40.1s] policy RpGAN step=1/400 d=0.69298 g_adv=0.69334 world=0.44686
+[    40.3s] policy RpGAN step=40/400 d=0.69298 g_adv=0.69341 world=0.21193
+[    40.5s] policy RpGAN step=80/400 d=0.69286 g_adv=0.69351 world=0.33672
+[    40.6s] policy RpGAN step=120/400 d=0.69271 g_adv=0.69363 world=0.36835
+[    40.8s] policy RpGAN step=160/400 d=0.69261 g_adv=0.69374 world=0.22944
+[    41.0s] policy RpGAN step=200/400 d=0.69255 g_adv=0.69376 world=0.21143
+[    41.2s] policy RpGAN step=240/400 d=0.69249 g_adv=0.69387 world=0.14592
+[    41.4s] policy RpGAN step=280/400 d=0.69309 g_adv=0.69332 world=0.29520
+[    41.5s] policy RpGAN step=320/400 d=0.69259 g_adv=0.69384 world=0.31784
+[    41.7s] policy RpGAN step=360/400 d=0.69254 g_adv=0.69381 world=0.15028
+[    41.9s] policy RpGAN step=400/400 d=0.69210 g_adv=0.69429 world=0.36992
+[    42.2s] fast round 1: 8/20 flights · 8 landings
+[    42.5s] fast round 1: 16/20 flights · 16 landings
+[    42.6s] fast round 1: 20/20 flights · 20 landings
+[    42.6s] policy BC step=1/8000 action_mse=0.00315
+[    43.4s] policy BC step=800/8000 action_mse=0.00099
+[    44.2s] policy BC step=1600/8000 action_mse=0.00115
+[    45.0s] policy BC step=2400/8000 action_mse=0.00087
+[    45.8s] policy BC step=3200/8000 action_mse=0.00114
+[    46.6s] policy BC step=4000/8000 action_mse=0.00095
+[    47.4s] policy BC step=4800/8000 action_mse=0.00074
+[    48.3s] policy BC step=5600/8000 action_mse=0.00103
+[    49.1s] policy BC step=6400/8000 action_mse=0.00083
+[    49.9s] policy BC step=7200/8000 action_mse=0.00078
+[    50.7s] policy BC step=8000/8000 action_mse=0.00081
+[    50.7s] policy RpGAN step=1/400 d=0.69294 g_adv=0.69340 world=0.44485
+[    50.9s] policy RpGAN step=40/400 d=0.69304 g_adv=0.69337 world=0.21524
+[    51.1s] policy RpGAN step=80/400 d=0.69302 g_adv=0.69332 world=0.33543
+[    51.3s] policy RpGAN step=120/400 d=0.69272 g_adv=0.69362 world=0.36208
+[    51.5s] policy RpGAN step=160/400 d=0.69217 g_adv=0.69424 world=0.22377
+[    51.6s] policy RpGAN step=200/400 d=0.69251 g_adv=0.69380 world=0.21337
+[    51.8s] policy RpGAN step=240/400 d=0.69282 g_adv=0.69356 world=0.14556
+[    52.1s] policy RpGAN step=280/400 d=0.69307 g_adv=0.69329 world=0.28907
+[    52.2s] policy RpGAN step=320/400 d=0.69256 g_adv=0.69383 world=0.31495
+[    52.4s] policy RpGAN step=360/400 d=0.69286 g_adv=0.69352 world=0.14891
+[    52.6s] policy RpGAN step=400/400 d=0.69266 g_adv=0.69368 world=0.36708
+[    52.9s] fast round 2: 8/20 flights · 8 landings
+[    53.2s] fast round 2: 16/20 flights · 16 landings
+[    53.4s] fast round 2: 20/20 flights · 20 landings
+[    53.4s] policy BC step=1/8000 action_mse=0.00259
+[    54.2s] policy BC step=800/8000 action_mse=0.00069
+[    55.0s] policy BC step=1600/8000 action_mse=0.00072
+[    55.8s] policy BC step=2400/8000 action_mse=0.00063
+[    56.7s] policy BC step=3200/8000 action_mse=0.00085
+[    57.6s] policy BC step=4000/8000 action_mse=0.00063
+[    58.4s] policy BC step=4800/8000 action_mse=0.00058
+[    59.3s] policy BC step=5600/8000 action_mse=0.00083
+[    60.1s] policy BC step=6400/8000 action_mse=0.00060
+[    60.9s] policy BC step=7200/8000 action_mse=0.00061
+[    61.8s] policy BC step=8000/8000 action_mse=0.00068
+[    61.8s] policy RpGAN step=1/400 d=0.69292 g_adv=0.69341 world=0.44668
+[    62.0s] policy RpGAN step=40/400 d=0.69287 g_adv=0.69352 world=0.21829
+[    62.1s] policy RpGAN step=80/400 d=0.69287 g_adv=0.69344 world=0.33251
+[    62.3s] policy RpGAN step=120/400 d=0.69300 g_adv=0.69333 world=0.36242
+[    62.5s] policy RpGAN step=160/400 d=0.69296 g_adv=0.69340 world=0.22365
+[    62.7s] policy RpGAN step=200/400 d=0.69322 g_adv=0.69312 world=0.21266
+[    62.9s] policy RpGAN step=240/400 d=0.69285 g_adv=0.69354 world=0.14719
+[    63.1s] policy RpGAN step=280/400 d=0.69288 g_adv=0.69347 world=0.28929
+[    63.2s] policy RpGAN step=320/400 d=0.69272 g_adv=0.69365 world=0.30614
+[    63.4s] policy RpGAN step=360/400 d=0.69295 g_adv=0.69346 world=0.14788
+[    63.6s] policy RpGAN step=400/400 d=0.69283 g_adv=0.69351 world=0.36760
+[    63.9s] fast round 3: 8/20 flights · 8 landings
+[    64.2s] fast round 3: 16/20 flights · 16 landings
+[    64.3s] fast round 3: 20/20 flights · 20 landings
+[    64.3s] Evaluate the frozen winner on the fixed test cohort
+[    64.6s] slow policy test: 8/30 flights · 8 landings
+[    65.0s] slow policy test: 16/30 flights · 16 landings
+[    65.3s] slow policy test: 24/30 flights · 24 landings
+[    65.5s] slow policy test: 30/30 flights · 30 landings
+[    65.8s] fast policy test: 8/30 flights · 8 landings
+[    66.1s] fast policy test: 16/30 flights · 16 landings
+[    66.3s] fast policy test: 24/30 flights · 24 landings
+[    66.5s] fast policy test: 30/30 flights · 30 landings
+[    66.6s] Export real flight GIFs and the demo page
+[    71.8s] PASS · fast landing demonstrated
