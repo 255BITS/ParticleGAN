@@ -783,6 +783,8 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                     _reject_scratch_optimizer(case)
         _verify_saved_provenance(directory, protocol, candidate=candidate)
         index = _read(directory / "index.json")
+        if not allow_scratch:
+            _reject_scratch_optimizer(index)
         rows = index["records"]
         names = [row["name"] for row in rows]
         if len(names) != len(set(names)) or set(names) - set(expected_names):
@@ -816,6 +818,7 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
             record = json.loads(raw)
             if not allow_scratch:
                 _reject_scratch_optimizer(record)
+                _reject_scratch_optimizer(record.get("result", {}))
             name = row["name"]
             if record["name"] != name or record["original_spec"] != frozen_jobs[name]["spec"]:
                 raise ValueError(f"frozen task declaration differs: {name}")

@@ -268,7 +268,9 @@ def test_candidate_episode_binds_saved_config_and_sources(
 @pytest.mark.parametrize("location,field,value", [
     ("protocol", "scratch_optimizer_policy", {"scratch_optimizer": "optimistic_adam"}),
     ("index", "shared_gate_eligible", False),
+    ("index_root", "scratch_optimizer_policy", None),
     ("record", "scratch_optimizer_policy", None),
+    ("result", "optimizer_policy", {"name": "unapproved_adam_variant"}),
     ("summary", "optimizer_policy", {"name": "unapproved_adam_variant"}),
 ])
 def test_common_transfer_gate_rejects_scratch_optimizer_at_any_saved_layer(
@@ -278,12 +280,15 @@ def test_common_transfer_gate_rejects_scratch_optimizer_at_any_saved_layer(
         status="PASS", passed=True, convergence=dict(passing_suffix=5),
     ))
     directory = tmp_path / "candidate"
-    tamper = (lambda record: record.update({field: value})) if location == "record" else (lambda record: None)
+    tamper = (lambda record: record.update({field: value})) if location == "record" else (
+        (lambda record: record["result"].update({field: value}))
+        if location == "result" else (lambda record: None)
+    )
     name = _write_candidate_episode(directory, tamper)
-    if location in ("protocol", "index"):
-        path = directory / f"{location}.json"
+    if location in ("protocol", "index", "index_root"):
+        path = directory / f"{location.removesuffix('_root')}.json"
         saved = json.loads(path.read_text())
-        target = saved if location == "protocol" else saved["records"][0]
+        target = saved if location in ("protocol", "index_root") else saved["records"][0]
         target[field] = value
         path.write_text(json.dumps(saved))
     elif location == "summary":
