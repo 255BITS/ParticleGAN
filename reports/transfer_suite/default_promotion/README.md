@@ -5,6 +5,12 @@ The `100gaussians` alias and direct `Recipe()` construction resolve the same
 GAN settings. This promotion was requested after the formulation reached
 19/19 live behavioral toys with supported architectures.
 
+**Subsequent matched comparison:** the public numerical presets score **8/19
+new versus 5/19 previous** on identical test hosts. Keeping the established
+host training settings fixed gives **19/19 new core versus 17/19 previous core**.
+The promoted public preset itself is not an all-tests-pass result.
+[Per-test leaderboard, full curves and exact comparison](../default_comparison/README.md).
+
 | Setting | New GAN default | `gan_legacy` |
 | --- | --- | --- |
 | Adversarial objective | Rp logistic | Rp logistic |

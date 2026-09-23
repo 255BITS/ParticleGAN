@@ -1,0 +1,4937 @@
+{
+  "records": [
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "name": "two_pole",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Basic adversarial movement remains bounded.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 80,
+        "thresholds": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ]
+      },
+      "spec": {
+        "name": "two_pole",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Basic adversarial movement remains bounded.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 80,
+        "thresholds": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ]
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original host",
+      "reference": "study/episodes/cosine__two_pole.json.gz",
+      "reference_sha256": "277a3a3ee99b44869a9c0dba88bde7e448be4300a3ab4b05520ff501aa29cf56",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 97
+        },
+        {
+          "role": "g",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 12
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "mean_abs",
+            "value": 0.315768837928772,
+            "op": ">=",
+            "threshold": 0.3,
+            "status": "PASS",
+            "margin": 0.015768837928771984
+          },
+          {
+            "metric": "grad_med",
+            "value": 0.2628054618835449,
+            "op": "<=",
+            "threshold": 1.0,
+            "status": "PASS",
+            "margin": 0.7371945381164551
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 4,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 4,
+          "first_pass_step": 70,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "N/A",
+        "reason": "Host does not record a complete EMA curve"
+      },
+      "artifact": "episodes/current_core__two_pole.json.gz",
+      "uncompressed_sha256": "53b94b1f18672a2ed61804aba5b4140c29c7a8d18d718b50aafc80617527b08c",
+      "live": {
+        "mean_abs": 0.315768837928772,
+        "grad_med": 0.2628054618835449
+      },
+      "ema": null,
+      "seconds": 2.6505353979300708
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "name": "trajectory",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Preserves the shared trajectory's identity constraint.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 400,
+        "thresholds": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ]
+        ]
+      },
+      "spec": {
+        "name": "trajectory",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Preserves the shared trajectory's identity constraint.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 400,
+        "thresholds": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ]
+        ]
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original host",
+      "reference": "study/episodes/cosine__trajectory.json.gz",
+      "reference_sha256": "5e0c68e754b7aa0c15d9abaa6a9304f7d61c8a2d5de0c69786916f7159906bf5",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 6337
+        },
+        {
+          "role": "g",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 6592
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 1.6719175619073212e-05,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.019983280824380927
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 20,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 20,
+          "first_pass_step": 84,
+          "stable_from_step": 84,
+          "stable_from_seconds": 0.3236070809653029,
+          "confirmed_step": 150,
+          "confirmed_seconds": 0.5531790750101209
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.375
+      },
+      "ema_verdict": {
+        "status": "N/A",
+        "reason": "Host does not record a complete EMA curve"
+      },
+      "artifact": "episodes/current_core__trajectory.json.gz",
+      "uncompressed_sha256": "705962e0785ab63b4a5c7992e73136ee0fc60d655ee5f00d097ee8f2a1050fb6",
+      "live": {
+        "identity_mse": 1.6719175619073212e-05
+      },
+      "ema": null,
+      "seconds": 1.407894397038035
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "name": "residual_student",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Moves the intended residual without choosing the wrong target.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 400,
+        "thresholds": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ],
+          [
+            "success_rate",
+            ">=",
+            1.0
+          ],
+          [
+            "wrong_pad_rate",
+            "<=",
+            0.0
+          ]
+        ]
+      },
+      "spec": {
+        "name": "residual_student",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Moves the intended residual without choosing the wrong target.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 400,
+        "thresholds": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ],
+          [
+            "success_rate",
+            ">=",
+            1.0
+          ],
+          [
+            "wrong_pad_rate",
+            "<=",
+            0.0
+          ]
+        ]
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original host",
+      "reference": "study/episodes/cosine__residual_student.json.gz",
+      "reference_sha256": "0ad9878b448c1b3dd96cd448787c09c1e1fd0ce003e3129665e1af8aee813d08",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 6337
+        },
+        {
+          "role": "g",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 6592
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 6.8041649683436844e-06,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.019993195835031657
+          },
+          {
+            "metric": "success_rate",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 1.0,
+            "status": "PASS",
+            "margin": 0.0
+          },
+          {
+            "metric": "wrong_pad_rate",
+            "value": 0.0,
+            "op": "<=",
+            "threshold": 0.0,
+            "status": "PASS",
+            "margin": 0.0
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 21,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 21,
+          "first_pass_step": 67,
+          "stable_from_step": 67,
+          "stable_from_seconds": 0.23733251891098917,
+          "confirmed_step": 134,
+          "confirmed_seconds": 0.48373091500252485
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.335
+      },
+      "ema_verdict": {
+        "status": "N/A",
+        "reason": "Host does not record a complete EMA curve"
+      },
+      "artifact": "episodes/current_core__residual_student.json.gz",
+      "uncompressed_sha256": "88acb4da6b42de03352b3ee3dc4b158dd4a212cbfc2a63d9d1fe08d3aa11b65e",
+      "live": {
+        "identity_mse": 6.8041649683436844e-06,
+        "success_rate": 1.0,
+        "wrong_pad_rate": 0.0
+      },
+      "ema": null,
+      "seconds": 1.4997937999432907
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "name": "unipolar",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Target coverage preserves unrelated content.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 400,
+        "thresholds": [
+          [
+            "cover",
+            ">=",
+            0.85
+          ],
+          [
+            "off_caption",
+            "<=",
+            0.05
+          ],
+          [
+            "neu_hold",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "spec": {
+        "name": "unipolar",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Target coverage preserves unrelated content.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 400,
+        "thresholds": [
+          [
+            "cover",
+            ">=",
+            0.85
+          ],
+          [
+            "off_caption",
+            "<=",
+            0.05
+          ],
+          [
+            "neu_hold",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original host",
+      "reference": "study/episodes/cosine__unipolar.json.gz",
+      "reference_sha256": "b919757510e6556847afa85027a898a78c5ef9516f1b23817ea41ec2537abec5",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4609
+        },
+        {
+          "role": "g",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 12
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "cover",
+            "value": 0.9832189780187441,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13321897801874416
+          },
+          {
+            "metric": "off_caption",
+            "value": 1.376254296481488e-06,
+            "op": "<=",
+            "threshold": 0.05,
+            "status": "PASS",
+            "margin": 0.04999862374570352
+          },
+          {
+            "metric": "neu_hold",
+            "value": 0.9732391946017742,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12323919460177424
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 18,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 18,
+          "first_pass_step": 117,
+          "stable_from_step": 117,
+          "stable_from_seconds": 0.4782058330019936,
+          "confirmed_step": 184,
+          "confirmed_seconds": 0.7879392120521516
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.46
+      },
+      "ema_verdict": {
+        "status": "N/A",
+        "reason": "Host does not record a complete EMA curve"
+      },
+      "artifact": "episodes/current_core__unipolar.json.gz",
+      "uncompressed_sha256": "e817f8dc9da13dc52915c7c81f23a47b2151082efeaa0af174fc095af23820d8",
+      "live": {
+        "cover": 0.9832189780187441,
+        "off_caption": 1.376254296481488e-06,
+        "neu_hold": 0.9732391946017742
+      },
+      "ema": null,
+      "seconds": 1.7696179499616846
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "name": "ae_gan_hold",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Adversarial training preserves reconstruction and hold behavior.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 250,
+        "thresholds": [
+          [
+            "recon_mse",
+            "<=",
+            0.05
+          ],
+          [
+            "hold",
+            "<=",
+            0.35
+          ]
+        ]
+      },
+      "spec": {
+        "name": "ae_gan_hold",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Adversarial training preserves reconstruction and hold behavior.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 250,
+        "thresholds": [
+          [
+            "recon_mse",
+            "<=",
+            0.05
+          ],
+          [
+            "hold",
+            "<=",
+            0.35
+          ]
+        ]
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original host",
+      "reference": "study/episodes/cosine__ae_gan_hold.json.gz",
+      "reference_sha256": "7424994e2446ff940423f67507e8397dc238cd67a59897e391f932988be9aca2",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0025499999999999997,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "parameters": 129
+        },
+        {
+          "role": "g",
+          "lr": 0.0017,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "parameters": 390
+        },
+        {
+          "role": "g",
+          "lr": 0.016999999999999998,
+          "betas": [
+            0.5,
+            0.999
+          ],
+          "parameters": 24
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "recon_mse",
+            "value": 0.007768645882606506,
+            "op": "<=",
+            "threshold": 0.05,
+            "status": "PASS",
+            "margin": 0.042231354117393496
+          },
+          {
+            "metric": "hold",
+            "value": 0.0018475987017154694,
+            "op": "<=",
+            "threshold": 0.35,
+            "status": "PASS",
+            "margin": 0.3481524012982845
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 19,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 19,
+          "first_pass_step": 63,
+          "stable_from_step": 63,
+          "stable_from_seconds": 0.7262702559819445,
+          "confirmed_step": 105,
+          "confirmed_seconds": 0.9263026269618422
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.42
+      },
+      "ema_verdict": {
+        "status": "N/A",
+        "reason": "Host does not record a complete EMA curve"
+      },
+      "artifact": "episodes/current_core__ae_gan_hold.json.gz",
+      "uncompressed_sha256": "4c3c91eb26d126ee38401ddd5cb58eef6a20268f7e260c7c3e9a0844be926ffb",
+      "live": {
+        "recon_mse": 0.007768645882606506,
+        "hold": 0.0018475987017154694
+      },
+      "ema": null,
+      "seconds": 1.6195113970898092
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "name": "cover_leftover",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Coverage preserves both content and the unwanted remainder constraint.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 800,
+        "thresholds": [
+          [
+            "u_kept",
+            ">=",
+            0.85
+          ],
+          [
+            "content_kept",
+            ">=",
+            0.75
+          ],
+          [
+            "leak_ratio",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_plus",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_minus",
+            "<=",
+            0.2
+          ],
+          [
+            "same_dir",
+            "<=",
+            0.25
+          ]
+        ]
+      },
+      "spec": {
+        "name": "cover_leftover",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Coverage preserves both content and the unwanted remainder constraint.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 800,
+        "thresholds": [
+          [
+            "u_kept",
+            ">=",
+            0.85
+          ],
+          [
+            "content_kept",
+            ">=",
+            0.75
+          ],
+          [
+            "leak_ratio",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_plus",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_minus",
+            "<=",
+            0.2
+          ],
+          [
+            "same_dir",
+            "<=",
+            0.25
+          ]
+        ]
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original host",
+      "reference": "study/episodes/cosine__cover_leftover.json.gz",
+      "reference_sha256": "f8c4f99fea34ca649dbd62561fbf89ff1ca9ce49ef3a4b5d7f3740f0b9e57188",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 7361
+        },
+        {
+          "role": "g",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 8
+        },
+        {
+          "role": "g",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 96
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "u_kept",
+            "value": 0.9953413506155868,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14534135061558684
+          },
+          {
+            "metric": "content_kept",
+            "value": 1.0028444454616439,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.25284444546164386
+          },
+          {
+            "metric": "leak_ratio",
+            "value": 0.04908909253164516,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.15091090746835484
+          },
+          {
+            "metric": "pole_rel_err_plus",
+            "value": 0.03376677259802818,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.16623322740197183
+          },
+          {
+            "metric": "pole_rel_err_minus",
+            "value": 0.03351661190390587,
+            "op": "<=",
+            "threshold": 0.2,
+            "status": "PASS",
+            "margin": 0.16648338809609414
+          },
+          {
+            "metric": "same_dir",
+            "value": 0.00750575766437667,
+            "op": "<=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.24249424233562333
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 14,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 14,
+          "first_pass_step": 367,
+          "stable_from_step": 367,
+          "stable_from_seconds": 2.122169548063539,
+          "confirmed_step": 500,
+          "confirmed_seconds": 2.8161021909909323
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.625
+      },
+      "ema_verdict": {
+        "status": "N/A",
+        "reason": "Host does not record a complete EMA curve"
+      },
+      "artifact": "episodes/current_core__cover_leftover.json.gz",
+      "uncompressed_sha256": "97311ceec5cf7278d6a215b9ffef012f989e37e2e06b7fae2aa4a4dce0bbb61d",
+      "live": {
+        "u_kept": 0.9953413506155868,
+        "content_kept": 1.0028444454616439,
+        "leak_ratio": 0.04908909253164516,
+        "pole_rel_err_plus": 0.03376677259802818,
+        "pole_rel_err_minus": 0.03351661190390587,
+        "same_dir": 0.00750575766437667
+      },
+      "ema": {
+        "u_kept": 0.9366490151200516,
+        "content_kept": 0.9668576541584406,
+        "leak_ratio": 0.0340060630707544,
+        "pole_rel_err_plus": 0.04840798303484917,
+        "pole_rel_err_minus": 0.04971964284777641,
+        "same_dir": 0.0009560406672712823
+      },
+      "seconds": 4.396438742987812
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "name": "unused_token_hold",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Unused controls remain unchanged while active controls move.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 200,
+        "thresholds": [
+          [
+            "unused_hold",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_move",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "spec": {
+        "name": "unused_token_hold",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Unused controls remain unchanged while active controls move.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 200,
+        "thresholds": [
+          [
+            "unused_hold",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_move",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original host",
+      "reference": "study/episodes/cosine__unused_token_hold.json.gz",
+      "reference_sha256": "889e5678d4d82f10ea10754635dd4d30f9bd1cf089b429228d06ffbaf394e15f",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 257
+        },
+        {
+          "role": "g",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 6
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "unused_hold",
+            "value": 0.9930318291299045,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14303182912990453
+          },
+          {
+            "metric": "concept_move",
+            "value": 0.9791086002511697,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.12910860025116977
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 14,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 14,
+          "first_pass_step": 92,
+          "stable_from_step": 92,
+          "stable_from_seconds": 0.19889000908005983,
+          "confirmed_step": 125,
+          "confirmed_seconds": 0.269624951062724
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.625
+      },
+      "ema_verdict": {
+        "status": "N/A",
+        "reason": "Host does not record a complete EMA curve"
+      },
+      "artifact": "episodes/current_core__unused_token_hold.json.gz",
+      "uncompressed_sha256": "388fed983adbd93d30c4fee51bd2d2c54da67499b72df787cd6fde3c708b6332",
+      "live": {
+        "unused_hold": 0.9930318291299045,
+        "concept_move": 0.9791086002511697
+      },
+      "ema": null,
+      "seconds": 0.42125068395398557
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "name": "mid_scale_identity",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Intermediate control strengths preserve identity and target magnitude.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 800,
+        "thresholds": [
+          [
+            "concept_cos_plus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_cos_minus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_mag_plus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_plus",
+            "<=",
+            1.25
+          ],
+          [
+            "concept_mag_minus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_minus",
+            "<=",
+            1.25
+          ],
+          [
+            "identity_at_0",
+            ">=",
+            0.85
+          ],
+          [
+            "identity_at_mid",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "spec": {
+        "name": "mid_scale_identity",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "Intermediate control strengths preserve identity and target magnitude.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 800,
+        "thresholds": [
+          [
+            "concept_cos_plus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_cos_minus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_mag_plus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_plus",
+            "<=",
+            1.25
+          ],
+          [
+            "concept_mag_minus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_minus",
+            "<=",
+            1.25
+          ],
+          [
+            "identity_at_0",
+            ">=",
+            0.85
+          ],
+          [
+            "identity_at_mid",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original host",
+      "reference": "study/episodes/cosine__mid_scale_identity.json.gz",
+      "reference_sha256": "b0314a1f982cf398bf55d3bc85cf0b44986cd32de84cef63d9699e9490aa494b",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4609
+        },
+        {
+          "role": "g",
+          "lr": 0.00425,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 16
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "concept_cos_plus",
+            "value": 0.9999956488609314,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14999564886093142
+          },
+          {
+            "metric": "concept_cos_minus",
+            "value": 0.9999971389770508,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.1499971389770508
+          },
+          {
+            "metric": "concept_mag_plus",
+            "value": 0.9922777414321899,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.24227774143218994
+          },
+          {
+            "metric": "concept_mag_plus",
+            "value": 0.9922777414321899,
+            "op": "<=",
+            "threshold": 1.25,
+            "status": "PASS",
+            "margin": 0.25772225856781006
+          },
+          {
+            "metric": "concept_mag_minus",
+            "value": 1.0099369287490845,
+            "op": ">=",
+            "threshold": 0.75,
+            "status": "PASS",
+            "margin": 0.2599369287490845
+          },
+          {
+            "metric": "concept_mag_minus",
+            "value": 1.0099369287490845,
+            "op": "<=",
+            "threshold": 1.25,
+            "status": "PASS",
+            "margin": 0.24006307125091553
+          },
+          {
+            "metric": "identity_at_0",
+            "value": 0.9954924801975749,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14549248019757488
+          },
+          {
+            "metric": "identity_at_mid",
+            "value": 0.9941901729471784,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.1441901729471784
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 18,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 18,
+          "first_pass_step": 234,
+          "stable_from_step": 234,
+          "stable_from_seconds": 2.2493644920177758,
+          "confirmed_step": 367,
+          "confirmed_seconds": 3.5893804259831086
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.45875
+      },
+      "ema_verdict": {
+        "status": "N/A",
+        "reason": "Host does not record a complete EMA curve"
+      },
+      "artifact": "episodes/current_core__mid_scale_identity.json.gz",
+      "uncompressed_sha256": "85e679d3df74dffca92309b971c0ab9e37db5140e25de6792d0dec376a720b5b",
+      "live": {
+        "concept_cos_plus": 0.9999956488609314,
+        "concept_cos_minus": 0.9999971389770508,
+        "concept_mag_plus": 0.9922777414321899,
+        "concept_mag_minus": 1.0099369287490845,
+        "identity_at_0": 0.9954924801975749,
+        "identity_at_mid": 0.9941901729471784
+      },
+      "ema": null,
+      "seconds": 8.021523838979192
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "name": "mode_hold",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "All eight modes must remain present with sufficient sample quality.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "modes",
+            ">=",
+            8
+          ],
+          [
+            "hq",
+            ">=",
+            0.9
+          ]
+        ]
+      },
+      "spec": {
+        "name": "mode_hold",
+        "family": "existing_behavior",
+        "runner": "legacy",
+        "split": "development",
+        "phase": "fit",
+        "tier": "required",
+        "importance_reason": "All eight modes must remain present with sufficient sample quality.",
+        "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "modes",
+            ">=",
+            8
+          ],
+          [
+            "hq",
+            ">=",
+            0.9
+          ]
+        ]
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original host",
+      "reference": "study/episodes/cosine__mode_hold.json.gz",
+      "reference_sha256": "394c7fec15bad3baa25b7c95017381d00925d6fa08e09b9aefff0406501cdb52",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0017,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 20161
+        },
+        {
+          "role": "g",
+          "lr": 0.0017,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 19346
+        }
+      ],
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 8,
+            "op": ">=",
+            "threshold": 8,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 1,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 1,
+          "first_pass_step": 1200,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "ema_verdict": {
+        "status": "N/A",
+        "reason": "Host does not record a complete EMA curve"
+      },
+      "artifact": "episodes/current_core__mode_hold.json.gz",
+      "uncompressed_sha256": "caab6a88f6804021f65c14b4dcf0cf2669af3b426bc727288a3d4aebcef2ff54",
+      "live": {
+        "modes": 8,
+        "hq": 1.0
+      },
+      "ema": {
+        "modes": 7,
+        "hq": 0.92333984375
+      },
+      "seconds": 9.6365086970618
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ],
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "separated_broad",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Basic learnable multimodal distribution and within-mode spread.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ],
+        "name": "vector_two_broad",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ],
+          [
+            [
+              0.0625,
+              0.0
+            ],
+            [
+              0.0,
+              0.0625
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "separated_broad",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Basic learnable multimodal distribution and within-mode spread.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ],
+        "name": "vector_two_broad",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original architecture",
+      "reference": "study/episodes/cosine__vector_two_broad.json.gz",
+      "reference_sha256": "5f8ed7df513dd4474890f0576de4fcf93c7512739d4d6d50a1ea0225e651ead7",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0015,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4929
+        },
+        {
+          "role": "g",
+          "lr": 0.001,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "g",
+          "lr": 0.01,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.1031103216529769,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.0768896783470231
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.009033203125,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.140966796875
+          },
+          {
+            "metric": "hq",
+            "value": 0.992919921875,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14291992187500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.5207912772893906,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.3292087227106094
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.1988588273525238,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.04885882735252381
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 21,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 21,
+          "first_pass_step": 200,
+          "stable_from_step": 200,
+          "stable_from_seconds": 1.3957698020385578,
+          "confirmed_step": 400,
+          "confirmed_seconds": 2.6632751780562103
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.3333333333333333
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.051889507815483064,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12811049218451692
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.009033203125,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.140966796875
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.15000000000000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.4253228157758713,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.4246771842241287
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.43646568059921265,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.2864656805992126
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 16,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 16,
+          "first_pass_step": 450,
+          "stable_from_step": 450,
+          "stable_from_seconds": null,
+          "confirmed_step": 650,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5416666666666666
+      },
+      "artifact": "episodes/current_core__vector_two_broad.json.gz",
+      "uncompressed_sha256": "04679ac0aa3f5a291854b1222474e43b0401aa7c7d35a00e7df105ce6dd4e47a",
+      "live": {
+        "sw1_normalized": 0.1031103216529769,
+        "mean_error": 0.10035885125398636,
+        "covariance_error": 0.18243145942687988,
+        "target_scale": 1.0555585622787476,
+        "sample_count": 4096,
+        "mass_tv": 0.009033203125,
+        "min_mass_ratio": 0.98193359375,
+        "hq": 0.992919921875,
+        "component_covariance_error": 0.5207912772893906,
+        "component_covariance_errors": [
+          0.664627194404602,
+          0.3769553601741791
+        ],
+        "component_min_eigen_ratio": 0.1988588273525238,
+        "component_mass": [
+          0.490966796875,
+          0.509033203125
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          2011,
+          2085
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.051889507815483064,
+        "mean_error": 0.04388376325368881,
+        "covariance_error": 0.04247240349650383,
+        "target_scale": 1.0555585622787476,
+        "sample_count": 4096,
+        "mass_tv": 0.009033203125,
+        "min_mass_ratio": 0.98193359375,
+        "hq": 1.0,
+        "component_covariance_error": 0.4253228157758713,
+        "component_covariance_errors": [
+          0.5333564281463623,
+          0.31728920340538025
+        ],
+        "component_min_eigen_ratio": 0.43646568059921265,
+        "component_mass": [
+          0.490966796875,
+          0.509033203125
+        ],
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "component_counts": [
+          2011,
+          2085
+        ]
+      },
+      "seconds": 8.366212462075055
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 2,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis_fourier",
+          "fourier_bands": 2,
+          "hidden": 96,
+          "layers": 2,
+          "name": "linear_skip_d96_beta5",
+          "normalization": "none",
+          "skip": "raw_linear",
+          "skip_bias": false,
+          "skip_output_initialization": "zero"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0.0
+            ],
+            [
+              0.0,
+              0.0324
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 96,
+        "d_layers": 2,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_mass",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks target occupancy including the rare 2% component, not uniformity.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_mass",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis_fourier",
+          "fourier_bands": 2,
+          "hidden": 96,
+          "layers": 2,
+          "name": "linear_skip_d96_beta5",
+          "normalization": "none",
+          "skip": "raw_linear",
+          "skip_bias": false,
+          "skip_output_initialization": "zero"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "linear_skip_d96_beta5",
+      "reference": "rare_focus/linear_refinement/screen/episodes/linear_skip_d96_beta5__vector_unequal_mass.json.gz",
+      "reference_sha256": "07c505c9e26a18e393a2ca7156e0c1d94bbeb833d99b7d6dabd4134349a4a8bf",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0015,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 10467
+        },
+        {
+          "role": "g",
+          "lr": 0.001,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "g",
+          "lr": 0.01,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.07646552030802954,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.10353447969197045
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.07941406220197678,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.07058593779802322
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.15000000000000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.3022229839116335,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.5477770160883665
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.2548960745334625,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.10489607453346253
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.7267878651618958,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.47678786516189575
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 6,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 6,
+          "first_pass_step": 950,
+          "stable_from_step": 950,
+          "stable_from_seconds": 7.840315133915283,
+          "confirmed_step": 1150,
+          "confirmed_seconds": 9.301815552986227
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.9583333333333334
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.076017205543312,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.103982794456688
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.07941406220197678,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.07058593779802322
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.15000000000000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.3648178093135357,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.4851821906864643
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.21352282166481018,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.06352282166481019
+          },
+          {
+            "metric": "min_mass_ratio",
+            "value": 0.7267878651618958,
+            "op": ">=",
+            "threshold": 0.25,
+            "status": "PASS",
+            "margin": 0.47678786516189575
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 3,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 3,
+          "first_pass_step": 1100,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/current_core__vector_unequal_mass.json.gz",
+      "uncompressed_sha256": "3fe1da2029a5712fc2d64065b47ebe94d801d553f2949b04e9e12a5c760fd264",
+      "live": {
+        "sw1_normalized": 0.07646552030802954,
+        "mean_error": 0.0712057426571846,
+        "covariance_error": 0.11716505140066147,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.07941406220197678,
+        "min_mass_ratio": 0.7267878651618958,
+        "hq": 1.0,
+        "component_covariance_error": 0.3022229839116335,
+        "component_covariance_errors": [
+          0.10681147128343582,
+          0.25204500555992126,
+          0.30620047450065613,
+          0.5438349843025208
+        ],
+        "component_min_eigen_ratio": 0.2548960745334625,
+        "component_mass": [
+          0.6220703125,
+          0.256103515625,
+          0.094482421875,
+          0.02734375
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2548,
+          1049,
+          387,
+          112
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.076017205543312,
+        "mean_error": 0.06543295830488205,
+        "covariance_error": 0.14198336005210876,
+        "target_scale": 1.7593294382095337,
+        "sample_count": 4096,
+        "mass_tv": 0.07941406220197678,
+        "min_mass_ratio": 0.7267878651618958,
+        "hq": 1.0,
+        "component_covariance_error": 0.3648178093135357,
+        "component_covariance_errors": [
+          0.21390999853610992,
+          0.22053751349449158,
+          0.45476144552230835,
+          0.5700622797012329
+        ],
+        "component_min_eigen_ratio": 0.21352282166481018,
+        "component_mass": [
+          0.6220703125,
+          0.256103515625,
+          0.094482421875,
+          0.02734375
+        ],
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "component_counts": [
+          2548,
+          1049,
+          387,
+          112
+        ]
+      },
+      "seconds": 9.71835925092455
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis",
+          "name": "axis_softplus5"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.004900000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.004900000000000001
+            ]
+          ],
+          [
+            [
+              0.0144,
+              0.0
+            ],
+            [
+              0.0,
+              0.0144
+            ]
+          ],
+          [
+            [
+              0.04000000000000001,
+              0.0
+            ],
+            [
+              0.0,
+              0.04000000000000001
+            ]
+          ],
+          [
+            [
+              0.09,
+              0.0
+            ],
+            [
+              0.0,
+              0.09
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "unequal_width",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks component-specific scales without imposing one shared Gaussian width.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ],
+        "name": "vector_unequal_width",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "research_discriminator": {
+          "activation": "softplus",
+          "beta": 5.0,
+          "features": "axis",
+          "name": "axis_softplus5"
+        },
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "axis_softplus5",
+      "reference": "valid_search/smooth_discriminator/screen/episodes/axis_softplus5__vector_unequal_width.json.gz",
+      "reference_sha256": "612f20a1abaa9d7f73952b50245e4d6a96e00fc013e14166a47330cc3b28867e",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0015,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4929
+        },
+        {
+          "role": "g",
+          "lr": 0.001,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "g",
+          "lr": 0.01,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.10422446137888079,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.0757755386211192
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.091064453125,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.058935546874999994
+          },
+          {
+            "metric": "hq",
+            "value": 0.992431640625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14243164062500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.20069551095366478,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.6493044890463352
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.4769812822341919,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.3269812822341919
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 13,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 13,
+          "first_pass_step": 600,
+          "stable_from_step": 600,
+          "stable_from_seconds": 4.23601516301278,
+          "confirmed_step": 800,
+          "confirmed_seconds": 5.546097488026135
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.6666666666666666
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.10449025189493118,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.07550974810506882
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.091064453125,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.058935546874999994
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.15000000000000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.420530766248703,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.429469233751297
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.22654978930950165,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.07654978930950165
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 4,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 2,
+          "first_pass_step": 700,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/current_core__vector_unequal_width.json.gz",
+      "uncompressed_sha256": "7b8528f6f482e3b85555831d26990a54934a312528216328d6fe4d567054249e",
+      "live": {
+        "sw1_normalized": 0.10422446137888079,
+        "mean_error": 0.13998708128929138,
+        "covariance_error": 0.12594939768314362,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.091064453125,
+        "min_mass_ratio": 0.759765625,
+        "hq": 0.992431640625,
+        "component_covariance_error": 0.20069551095366478,
+        "component_covariance_errors": [
+          0.37443938851356506,
+          0.1535513997077942,
+          0.12901946902275085,
+          0.145771786570549
+        ],
+        "component_min_eigen_ratio": 0.4769812822341919,
+        "component_mass": [
+          0.224365234375,
+          0.18994140625,
+          0.24462890625,
+          0.341064453125
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          919,
+          778,
+          1002,
+          1397
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.10449025189493118,
+        "mean_error": 0.1471029371023178,
+        "covariance_error": 0.12504832446575165,
+        "target_scale": 2.1343955993652344,
+        "sample_count": 4096,
+        "mass_tv": 0.091064453125,
+        "min_mass_ratio": 0.759765625,
+        "hq": 1.0,
+        "component_covariance_error": 0.420530766248703,
+        "component_covariance_errors": [
+          0.743449330329895,
+          0.4458625316619873,
+          0.2783726751804352,
+          0.2144385278224945
+        ],
+        "component_min_eigen_ratio": 0.22654978930950165,
+        "component_mass": [
+          0.224365234375,
+          0.18994140625,
+          0.24462890625,
+          0.341064453125
+        ],
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "component_counts": [
+          919,
+          778,
+          1002,
+          1397
+        ]
+      },
+      "seconds": 8.094586884020828
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "anisotropic",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "importance_reason": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Finite-particle approximation; one initialization only.",
+        "lr": 0.001,
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2.0,
+            -1.0
+          ],
+          [
+            0.0,
+            1.5
+          ],
+          [
+            2.0,
+            -1.0
+          ]
+        ],
+        "name": "vector_anisotropic",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original architecture",
+      "reference": "study/episodes/cosine__vector_anisotropic.json.gz",
+      "reference_sha256": "42c72adf1f93fb9f9fa267ee38d5f66fc67a2db167ffe33e231d08d8fee46428",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0015,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4929
+        },
+        {
+          "role": "g",
+          "lr": 0.001,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "g",
+          "lr": 0.01,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.09577611172845125,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.08422388827154874
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.0665690153837204,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.0834309846162796
+          },
+          {
+            "metric": "hq",
+            "value": 0.994384765625,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.14438476562500002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.5032359858353933,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.34676401416460667
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.5917752385139465,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.4417752385139465
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 13,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 13,
+          "first_pass_step": 600,
+          "stable_from_step": 600,
+          "stable_from_seconds": 3.6607238240540028,
+          "confirmed_step": 800,
+          "confirmed_seconds": 4.873625104082748
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.6666666666666666
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.09204939474595566,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.08795060525404433
+          },
+          {
+            "metric": "mass_tv",
+            "value": 0.0665690153837204,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.0834309846162796
+          },
+          {
+            "metric": "hq",
+            "value": 0.9892578125,
+            "op": ">=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.13925781250000002
+          },
+          {
+            "metric": "component_covariance_error",
+            "value": 0.4966603567202886,
+            "op": "<=",
+            "threshold": 0.85,
+            "status": "PASS",
+            "margin": 0.3533396432797114
+          },
+          {
+            "metric": "component_min_eigen_ratio",
+            "value": 0.4462641477584839,
+            "op": ">=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.29626414775848386
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 11,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 11,
+          "first_pass_step": 700,
+          "stable_from_step": 700,
+          "stable_from_seconds": null,
+          "confirmed_step": 900,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.75
+      },
+      "artifact": "episodes/current_core__vector_anisotropic.json.gz",
+      "uncompressed_sha256": "124b486b07c1f2674b3c95184c2816e1d76ee87b1afbf2d0759d06f61d93fc54",
+      "live": {
+        "sw1_normalized": 0.09577611172845125,
+        "mean_error": 0.13719405233860016,
+        "covariance_error": 0.12569284439086914,
+        "target_scale": 2.032285690307617,
+        "sample_count": 4096,
+        "mass_tv": 0.0665690153837204,
+        "min_mass_ratio": 0.863525390625,
+        "hq": 0.994384765625,
+        "component_covariance_error": 0.5032359858353933,
+        "component_covariance_errors": [
+          0.04680332541465759,
+          0.19953304529190063,
+          1.2633715867996216
+        ],
+        "component_min_eigen_ratio": 0.5917752385139465,
+        "component_mass": [
+          0.312255859375,
+          0.287841796875,
+          0.39990234375
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1279,
+          1179,
+          1638
+        ]
+      },
+      "ema": {
+        "sw1_normalized": 0.09204939474595566,
+        "mean_error": 0.1313849836587906,
+        "covariance_error": 0.1146436557173729,
+        "target_scale": 2.032285690307617,
+        "sample_count": 4096,
+        "mass_tv": 0.0665690153837204,
+        "min_mass_ratio": 0.863525390625,
+        "hq": 0.9892578125,
+        "component_covariance_error": 0.4966603567202886,
+        "component_covariance_errors": [
+          0.17433156073093414,
+          0.1729891300201416,
+          1.14266037940979
+        ],
+        "component_min_eigen_ratio": 0.4462641477584839,
+        "component_mass": [
+          0.312255859375,
+          0.287841796875,
+          0.39990234375
+        ],
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "component_counts": [
+          1279,
+          1179,
+          1638
+        ]
+      },
+      "seconds": 7.346236464101821
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 3,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "name": "vector_overlap",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "covariances": [
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ],
+          [
+            [
+              0.30250000000000005,
+              0.0
+            ],
+            [
+              0.0,
+              0.30250000000000005
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_hidden": 128,
+        "d_layers": 3,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "overlapping",
+        "fourier": 3,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": false,
+        "importance_reason": "Scores the observable distribution when latent components are not identifiable.",
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "limitations": "Component labels and mode recall are deliberately not scored for overlapping densities.",
+        "lr": 0.001,
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -0.35,
+            0.0
+          ],
+          [
+            0.35,
+            0.0
+          ]
+        ],
+        "name": "vector_overlap",
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1200,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "z_dim": 4
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "d128_l3_f3",
+      "reference": "valid_search/discriminator/episodes/d128_l3_f3__vector_overlap.json.gz",
+      "reference_sha256": "49c882392411dfcb65f3c5261a63e0c8bf56fc170bf4e1dcbb621e0ef57301a0",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0015,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 35073
+        },
+        {
+          "role": "g",
+          "lr": 0.001,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "g",
+          "lr": 0.01,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.059096405255679975,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.12090359474432003
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.06643559783697128,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.08356440216302871
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.13362345099449158,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.31637654900550843
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 15,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 7,
+          "first_pass_step": 50,
+          "stable_from_step": 900,
+          "stable_from_seconds": 8.29381984192878,
+          "confirmed_step": 1100,
+          "confirmed_seconds": 10.037708143005148
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.9166666666666666
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.039472518841523675,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.14052748115847633
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.02618781104683876,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.12381218895316123
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.10500489920377731,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.3449951007962227
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 17,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 17,
+          "first_pass_step": 400,
+          "stable_from_step": 400,
+          "stable_from_seconds": null,
+          "confirmed_step": 600,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5
+      },
+      "artifact": "episodes/current_core__vector_overlap.json.gz",
+      "uncompressed_sha256": "0e404b12967fbc918ccffc2f2364eb23223eb43198afda868a62df86eee71bec",
+      "live": {
+        "sw1_normalized": 0.059096405255679975,
+        "mean_error": 0.06643559783697128,
+        "covariance_error": 0.13362345099449158,
+        "target_scale": 0.8501437306404114,
+        "sample_count": 4096
+      },
+      "ema": {
+        "sw1_normalized": 0.039472518841523675,
+        "mean_error": 0.02618781104683876,
+        "covariance_error": 0.10500489920377731,
+        "target_scale": 0.8501437306404114,
+        "sample_count": 4096
+      },
+      "seconds": 10.912702631903812
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "curved_continuous",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "importance_reason": "Checks continuous curved mass rather than a finite list of target mode centers.",
+        "kind": "spiral",
+        "layers": 2,
+        "limitations": "Finite particles approximate a noisy spiral; sliced distances do not prove identical density.",
+        "lr": 0.001,
+        "name": "vector_spiral",
+        "noise": 0.08,
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 0.05,
+        "radius_max": 2.0,
+        "radius_min": 0.3,
+        "reg_arm": "b_cap",
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1600,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "turns": 1.5,
+        "z_dim": 4
+      },
+      "spec": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "family": "curved_continuous",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "importance_reason": "Checks continuous curved mass rather than a finite list of target mode centers.",
+        "kind": "spiral",
+        "layers": 2,
+        "limitations": "Finite particles approximate a noisy spiral; sliced distances do not prove identical density.",
+        "lr": 0.001,
+        "name": "vector_spiral",
+        "noise": 0.08,
+        "particles": 256,
+        "phase": "fit",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "radius_max": 2.0,
+        "radius_min": 0.3,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "runner": "vector",
+        "split": "development",
+        "steps": 1600,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mean_error",
+            "<=",
+            0.15
+          ],
+          [
+            "covariance_error",
+            "<=",
+            0.45
+          ]
+        ],
+        "tier": "ranking",
+        "turns": 1.5,
+        "z_dim": 4
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "original architecture",
+      "reference": "study/episodes/cosine__vector_spiral.json.gz",
+      "reference_sha256": "528a316f74aa36bf6e29a7acd1a9ac0406f82061c32222b1849eaded0823a666",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0015,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4929
+        },
+        {
+          "role": "g",
+          "lr": 0.001,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4610
+        },
+        {
+          "role": "g",
+          "lr": 0.01,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 1024
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.049604510956259,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.130395489043741
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.0645337626338005,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.08546623736619949
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.0910605788230896,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.3589394211769104
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 23,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 23,
+          "first_pass_step": 134,
+          "stable_from_step": 134,
+          "stable_from_seconds": 0.8506981700193137,
+          "confirmed_step": 400,
+          "confirmed_seconds": 2.5384694760432467
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.25
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "sw1_normalized",
+            "value": 0.024328727196390978,
+            "op": "<=",
+            "threshold": 0.18,
+            "status": "PASS",
+            "margin": 0.155671272803609
+          },
+          {
+            "metric": "mean_error",
+            "value": 0.014883475378155708,
+            "op": "<=",
+            "threshold": 0.15,
+            "status": "PASS",
+            "margin": 0.1351165246218443
+          },
+          {
+            "metric": "covariance_error",
+            "value": 0.03728066384792328,
+            "op": "<=",
+            "threshold": 0.45,
+            "status": "PASS",
+            "margin": 0.41271933615207673
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 19,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 19,
+          "first_pass_step": 400,
+          "stable_from_step": 400,
+          "stable_from_seconds": null,
+          "confirmed_step": 667,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.416875
+      },
+      "artifact": "episodes/current_core__vector_spiral.json.gz",
+      "uncompressed_sha256": "ab7dd47111dbb34b0dff4a5a0e9fbefd5981c5c6f58d39285baa2536fa129746",
+      "live": {
+        "sw1_normalized": 0.049604510956259,
+        "mean_error": 0.0645337626338005,
+        "covariance_error": 0.0910605788230896,
+        "target_scale": 1.224178433418274,
+        "sample_count": 4096
+      },
+      "ema": {
+        "sw1_normalized": 0.024328727196390978,
+        "mean_error": 0.014883475378155708,
+        "covariance_error": 0.03728066384792328,
+        "target_scale": 1.224178433418274,
+        "sample_count": 4096
+      },
+      "seconds": 9.535784396110103
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy orientation transfer: two distinct stripe orientations with an adequately sized convolutional GAN.",
+        "kappa": 1.25,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 2,
+        "name": "img_stripes2",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "stripes2",
+        "penalty_coeff": 3.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 0.05,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.25,
+          "minimum_stable_checks": 5,
+          "modes": 2,
+          "observations": 24,
+          "quality_rmse": 0.1
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      },
+      "spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy orientation transfer: two distinct stripe orientations with an adequately sized convolutional GAN.",
+        "kappa": 1.0,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 2,
+        "name": "img_stripes2",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "stripes2",
+        "penalty_coeff": 1.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 1.0,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.25,
+          "minimum_stable_checks": 5,
+          "modes": 2,
+          "observations": 24,
+          "quality_rmse": 0.1
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "residual16",
+      "reference": "solvability/images/stage1/episodes/residual16__img_stripes2.json.gz",
+      "reference_sha256": "b9b83caf1061f49c027ede780c9c0c447e72873cca0344a80996104a83d77479",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0017,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4929
+        },
+        {
+          "role": "g",
+          "lr": 0.0017,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 5617
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 2,
+            "op": ">=",
+            "threshold": 2,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 20,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 20,
+          "first_pass_step": 125,
+          "stable_from_step": 125,
+          "stable_from_seconds": 1.2759415860055014,
+          "confirmed_step": 225,
+          "confirmed_seconds": 2.308431006036699
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.375
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 2,
+            "op": ">=",
+            "threshold": 2,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 17,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 17,
+          "first_pass_step": 200,
+          "stable_from_step": 200,
+          "stable_from_seconds": null,
+          "confirmed_step": 300,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.5
+      },
+      "artifact": "episodes/current_core__img_stripes2.json.gz",
+      "uncompressed_sha256": "30aae3c0eb6423f94536bef4f47b4706d205887b3335f0f1bf0fd4846339b2b2",
+      "live": {
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.0053309909999370575,
+        "quality_mode_fractions": [
+          0.4375,
+          0.5625
+        ],
+        "mode_fractions": [
+          0.4375,
+          0.5625
+        ],
+        "distribution_tv": 0.0625
+      },
+      "ema": {
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.0019086282700300217,
+        "quality_mode_fractions": [
+          0.4375,
+          0.5625
+        ],
+        "mode_fractions": [
+          0.4375,
+          0.5625
+        ],
+        "distribution_tv": 0.0625
+      },
+      "seconds": 6.483697497053072
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy location transfer: four horizontal/vertical bar positions test spatial coverage.",
+        "kappa": 1.25,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 4,
+        "name": "img_bars4",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "bars4",
+        "penalty_coeff": 3.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 0.05,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.125,
+          "minimum_stable_checks": 5,
+          "modes": 4,
+          "observations": 24,
+          "quality_rmse": 0.1
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      },
+      "spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy location transfer: four horizontal/vertical bar positions test spatial coverage.",
+        "kappa": 1.0,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 4,
+        "name": "img_bars4",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "bars4",
+        "penalty_coeff": 1.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 1.0,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.125,
+          "minimum_stable_checks": 5,
+          "modes": 4,
+          "observations": 24,
+          "quality_rmse": 0.1
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "residual16",
+      "reference": "solvability/images/stage1/episodes/residual16__img_bars4.json.gz",
+      "reference_sha256": "15708bea52dd93c45d5f61c98355239fe3d73b99e268e05ad80653b9729eb26b",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0017,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4929
+        },
+        {
+          "role": "g",
+          "lr": 0.0017,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 5617
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 4,
+            "op": ">=",
+            "threshold": 4,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 14,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 10,
+          "first_pass_step": 225,
+          "stable_from_step": 375,
+          "stable_from_seconds": 4.179701459943317,
+          "confirmed_step": 475,
+          "confirmed_seconds": 5.207263724994846
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.7916666666666666
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 4,
+            "op": ">=",
+            "threshold": 4,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 11,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 11,
+          "first_pass_step": 350,
+          "stable_from_step": 350,
+          "stable_from_seconds": null,
+          "confirmed_step": 450,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.75
+      },
+      "artifact": "episodes/current_core__img_bars4.json.gz",
+      "uncompressed_sha256": "79834831d20fecf99749a0a8bde98c3235358722ad5a492de8540a60fac57d7a",
+      "live": {
+        "modes": 4,
+        "hq": 1.0,
+        "mean_rmse": 0.004796756897121668,
+        "quality_mode_fractions": [
+          0.28125,
+          0.34375,
+          0.15625,
+          0.21875
+        ],
+        "mode_fractions": [
+          0.28125,
+          0.34375,
+          0.15625,
+          0.21875
+        ],
+        "distribution_tv": 0.125
+      },
+      "ema": {
+        "modes": 4,
+        "hq": 1.0,
+        "mean_rmse": 0.003532935166731477,
+        "quality_mode_fractions": [
+          0.28125,
+          0.34375,
+          0.15625,
+          0.21875
+        ],
+        "mode_fractions": [
+          0.28125,
+          0.34375,
+          0.15625,
+          0.21875
+        ],
+        "distribution_tv": 0.125
+      },
+      "seconds": 6.51300449098926
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy location transfer: four small corner patches test localized quality and coverage.",
+        "kappa": 1.25,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 4,
+        "name": "img_blobs4",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "blobs4",
+        "penalty_coeff": 3.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 0.05,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.125,
+          "minimum_stable_checks": 5,
+          "modes": 4,
+          "observations": 24,
+          "quality_rmse": 0.1
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      },
+      "spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy location transfer: four small corner patches test localized quality and coverage.",
+        "kappa": 1.0,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 4,
+        "name": "img_blobs4",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "blobs4",
+        "penalty_coeff": 1.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 1.0,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.125,
+          "minimum_stable_checks": 5,
+          "modes": 4,
+          "observations": 24,
+          "quality_rmse": 0.1
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "residual16",
+      "reference": "solvability/images/stage1/episodes/residual16__img_blobs4.json.gz",
+      "reference_sha256": "a2ff48c2008108372bd43914e79df4e8f3547f50f0aa858db31ddbaa1219125b",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0017,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4929
+        },
+        {
+          "role": "g",
+          "lr": 0.0017,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 5617
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 4,
+            "op": ">=",
+            "threshold": 4,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 0.96875,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.06874999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 13,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 13,
+          "first_pass_step": 300,
+          "stable_from_step": 300,
+          "stable_from_seconds": 3.091232353937812,
+          "confirmed_step": 400,
+          "confirmed_seconds": 4.210400843992829
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.6666666666666666
+      },
+      "ema_verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 4,
+            "op": ">=",
+            "threshold": 4,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 0.9375,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.03749999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 10,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 7,
+          "first_pass_step": 325,
+          "stable_from_step": 450,
+          "stable_from_seconds": null,
+          "confirmed_step": 550,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.9166666666666666
+      },
+      "artifact": "episodes/current_core__img_blobs4.json.gz",
+      "uncompressed_sha256": "6004783330bc3852017dcf48521a071f145d0304b72792bc14cfc325c3c67fd2",
+      "live": {
+        "modes": 4,
+        "hq": 0.96875,
+        "mean_rmse": 0.010544675402343273,
+        "quality_mode_fractions": [
+          0.28125,
+          0.25,
+          0.1875,
+          0.25
+        ],
+        "mode_fractions": [
+          0.28125,
+          0.28125,
+          0.1875,
+          0.25
+        ],
+        "distribution_tv": 0.0625
+      },
+      "ema": {
+        "modes": 4,
+        "hq": 0.9375,
+        "mean_rmse": 0.011531186290085316,
+        "quality_mode_fractions": [
+          0.28125,
+          0.21875,
+          0.1875,
+          0.25
+        ],
+        "mode_fractions": [
+          0.28125,
+          0.28125,
+          0.1875,
+          0.25
+        ],
+        "distribution_tv": 0.0625
+      },
+      "seconds": 7.222160166944377
+    },
+    {
+      "arm": "current_core",
+      "original_spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy photometric transfer: two patch intensities require intensity fidelity as well as support coverage.",
+        "kappa": 1.25,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 2,
+        "name": "img_intensity2",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "intensity2",
+        "penalty_coeff": 3.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 0.05,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.25,
+          "minimum_stable_checks": 5,
+          "modes": 2,
+          "observations": 24,
+          "quality_rmse": 0.06
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      },
+      "spec": {
+        "adam_betas": [
+          0.0,
+          0.99
+        ],
+        "architecture": "residual_upsample",
+        "batch_size": 32,
+        "ema_decay": 0.99,
+        "family": "image_conv_transpose",
+        "gan_mode": "rp",
+        "gradient_penalty": "b_cap",
+        "importance_reason": "Healthy photometric transfer: two patch intensities require intensity fidelity as well as support coverage.",
+        "kappa": 1.0,
+        "limitations": "Finite 32-particle prior; 8x8 grayscale templates; no natural-image or stochastic-texture fidelity claim.",
+        "loss_type": "logistic",
+        "lr_d": 0.0017,
+        "lr_g": 0.0017,
+        "modes": 2,
+        "name": "img_intensity2",
+        "noise_std": 0.01,
+        "particles": 32,
+        "pattern": "intensity2",
+        "penalty_coeff": 1.0,
+        "prior_learnable": true,
+        "prior_lr_multiplier": 1.0,
+        "prior_weight": 1.0,
+        "split": "development",
+        "steps": 600,
+        "thresholds": {
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.25,
+          "minimum_stable_checks": 5,
+          "modes": 2,
+          "observations": 24,
+          "quality_rmse": 0.06
+        },
+        "tier": "ranking",
+        "width": 16,
+        "z_dim": 8,
+        "runner": "image"
+      },
+      "candidate": {
+        "name": "current_core_host_recipe",
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "particle_l2": 0.0,
+        "vicreg_weight": 1.0,
+        "cover_weight": 1.5,
+        "lr_multiplier": 0.85,
+        "lr_schedule": "host",
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05
+      },
+      "architecture": "residual16",
+      "reference": "solvability/images/stage1/episodes/residual16__img_intensity2.json.gz",
+      "reference_sha256": "127f9da08ea919d4ce2d319626308ae326da3456579d7b13c1708b0d178fae7d",
+      "applied": [
+        {
+          "role": "d",
+          "lr": 0.0017,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 4929
+        },
+        {
+          "role": "g",
+          "lr": 0.0017,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "parameters": 5617
+        }
+      ],
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 2,
+            "op": ">=",
+            "threshold": 2,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 8,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 6,
+          "first_pass_step": 350,
+          "stable_from_step": 475,
+          "stable_from_seconds": 6.254701639991254,
+          "confirmed_step": 575,
+          "confirmed_seconds": 7.5009453650563955
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.9583333333333334
+      },
+      "ema_verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 2,
+            "op": ">=",
+            "threshold": 2,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 1.0,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09999999999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 4,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 4,
+          "first_pass_step": 525,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 2.0
+      },
+      "artifact": "episodes/current_core__img_intensity2.json.gz",
+      "uncompressed_sha256": "c712ff46b82d8f0fa793789f27807a100bee14af7f47975a5a5bf1402db2fb9e",
+      "live": {
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.022288722917437553,
+        "quality_mode_fractions": [
+          0.53125,
+          0.46875
+        ],
+        "mode_fractions": [
+          0.53125,
+          0.46875
+        ],
+        "distribution_tv": 0.03125
+      },
+      "ema": {
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.024907365441322327,
+        "quality_mode_fractions": [
+          0.53125,
+          0.46875
+        ],
+        "mode_fractions": [
+          0.53125,
+          0.46875
+        ],
+        "distribution_tv": 0.03125
+      },
+      "seconds": 7.884580943966284
+    }
+  ]
+}

@@ -1,0 +1,364 @@
+{
+  "files": [
+    {
+      "path": "current/episodes/current__ae_gan_hold.json.gz",
+      "sha256": "8ed9e68689388d8f87cef4c1692187084c7b865f4da2276caf59f97a91fad8c0",
+      "bytes": 5551
+    },
+    {
+      "path": "current/episodes/current__cover_leftover.json.gz",
+      "sha256": "f156a0d45ab679e799496bc9a14eae9eb03efca3315aec9a1f8f440c24de67d1",
+      "bytes": 9255
+    },
+    {
+      "path": "current/episodes/current__img_bars4.json.gz",
+      "sha256": "fe9be850945336184fc2a193bdf03ed07353f7acc35b5bad29edd436f7059d36",
+      "bytes": 9559
+    },
+    {
+      "path": "current/episodes/current__img_blobs4.json.gz",
+      "sha256": "fee0d9158d9a8ff16b4801be47b01fea58b4733fdf4ddf0004b7f1e2db36964b",
+      "bytes": 9746
+    },
+    {
+      "path": "current/episodes/current__img_intensity2.json.gz",
+      "sha256": "30350f1b673a2a59a8a3c3b9031b59d17047a97660a985f248ceb2b32e7c7e9a",
+      "bytes": 9407
+    },
+    {
+      "path": "current/episodes/current__img_stripes2.json.gz",
+      "sha256": "b55bb8faf151c4d39eba5c444bcfbab7f144749e22b495ee347c1e9cca72094a",
+      "bytes": 9375
+    },
+    {
+      "path": "current/episodes/current__mid_scale_identity.json.gz",
+      "sha256": "fbcf4abf2a0358c2dab038e6407fd913ce34194dd1b9d9111f5131ea389ef6f0",
+      "bytes": 10314
+    },
+    {
+      "path": "current/episodes/current__mode_hold.json.gz",
+      "sha256": "690bd660212b6a22808abbf65bf91a6c07560b17e6f22b4446d658990fdcddc8",
+      "bytes": 25030
+    },
+    {
+      "path": "current/episodes/current__residual_student.json.gz",
+      "sha256": "d6ca51f63d1c1936d99281f4faf276dc555eb02529e8a67c31e7ad94eb73eefc",
+      "bytes": 5940
+    },
+    {
+      "path": "current/episodes/current__trajectory.json.gz",
+      "sha256": "f6cbf260e8969655ed2a957e6f8faba8c3e4b01d5b6a8c8109ee176f21f62e3d",
+      "bytes": 5393
+    },
+    {
+      "path": "current/episodes/current__two_pole.json.gz",
+      "sha256": "d513b923e79be08ebd71a4132e3289a9ec7afc037cd6438253d8f17a7d019e5c",
+      "bytes": 5447
+    },
+    {
+      "path": "current/episodes/current__unipolar.json.gz",
+      "sha256": "d7c97e817d87908cb5cf5f972aafab78eaebfb332425208a34eebe83fedd7b28",
+      "bytes": 7961
+    },
+    {
+      "path": "current/episodes/current__unused_token_hold.json.gz",
+      "sha256": "40a5dee6e5e8cf1b688c67937a2614ac424b73f8a750a51018f7a111fb9d4b36",
+      "bytes": 6284
+    },
+    {
+      "path": "current/episodes/current__vector_anisotropic.json.gz",
+      "sha256": "9f3805a97011f01c05fcea45f04a24f3a49b6aeb93347aa0ac21cbfd6aa8d4e1",
+      "bytes": 12464
+    },
+    {
+      "path": "current/episodes/current__vector_overlap.json.gz",
+      "sha256": "fda110623716a00496f421d3f0401cc51552a1ab5523d241f65ae6cc8e3e53e6",
+      "bytes": 7678
+    },
+    {
+      "path": "current/episodes/current__vector_spiral.json.gz",
+      "sha256": "40f88a7455fba89462582af17dc268f8a287f53fd0ec99d36c983708f4a8d54f",
+      "bytes": 7871
+    },
+    {
+      "path": "current/episodes/current__vector_two_broad.json.gz",
+      "sha256": "4e78d0cefdf6790e767d81082c8fdd48384464a03b726ef4973c5b9ec2b99857",
+      "bytes": 11402
+    },
+    {
+      "path": "current/episodes/current__vector_unequal_mass.json.gz",
+      "sha256": "8ca282a58a3b13e55eef249db1a1669eabb9609b018da81648b36202acacda78",
+      "bytes": 12950
+    },
+    {
+      "path": "current/episodes/current__vector_unequal_width.json.gz",
+      "sha256": "0dd5184a76555f90c9c706d8668c5155b0ba9cb4f571c4228bd0aa3015b8296b",
+      "bytes": 13131
+    },
+    {
+      "path": "current/index.json",
+      "sha256": "bd2c53873691f7664f828294b4810db028d855308402fe1f02a0bca330ac92da",
+      "bytes": 153536
+    },
+    {
+      "path": "current/protocol.json",
+      "sha256": "3fd8034d820788836f7a8e02d513048c194b9901448cf011830dff229c23342b",
+      "bytes": 40933
+    },
+    {
+      "path": "current/run.log",
+      "sha256": "f9315e36022ed42ec5d119893f64ee0549f787a6e92928d50fbdc1406a36c628",
+      "bytes": 15367
+    },
+    {
+      "path": "current/source.tar.gz",
+      "sha256": "4d045bb60d64cb43417e526f91606b693852510f9a4ea82731cacf18c93a2887",
+      "bytes": 134796
+    },
+    {
+      "path": "proposed/episodes/proposed__ae_gan_hold.json.gz",
+      "sha256": "f892bb132c8899f9100e0183fe8221a1af4afcf629bb39a842564a2f863c4d86",
+      "bytes": 5553
+    },
+    {
+      "path": "proposed/episodes/proposed__cover_leftover.json.gz",
+      "sha256": "c9771eed340b7fde3de06c803daed5663e2add27f0c264b2ef738d14914bd29d",
+      "bytes": 9231
+    },
+    {
+      "path": "proposed/episodes/proposed__img_bars4.json.gz",
+      "sha256": "ffd4e600eed724d3a6ca97f333e6243681d68c7b849235cfcca92a723b0e7c3a",
+      "bytes": 9519
+    },
+    {
+      "path": "proposed/episodes/proposed__img_blobs4.json.gz",
+      "sha256": "b47e8b361832d78eef0c1666eb8c3967041fbd934d8e7149109c2a06f70e493d",
+      "bytes": 9601
+    },
+    {
+      "path": "proposed/episodes/proposed__img_intensity2.json.gz",
+      "sha256": "2806d9cfd1e87b1e234d015be00d1a1d6486943b52cb376bbfc4d2f9a6abdc03",
+      "bytes": 9400
+    },
+    {
+      "path": "proposed/episodes/proposed__img_stripes2.json.gz",
+      "sha256": "4c32308cc59be9f0588c0f9c02cd9cc29d06070754f281d9f41c3d5d44af82cd",
+      "bytes": 9193
+    },
+    {
+      "path": "proposed/episodes/proposed__mid_scale_identity.json.gz",
+      "sha256": "d01d344ae0c7bfba902f7c123114aed9b1ec5376108b67cb84ece7254c66f471",
+      "bytes": 10291
+    },
+    {
+      "path": "proposed/episodes/proposed__mode_hold.json.gz",
+      "sha256": "d899ed227fdc5c6fadaf589d41a58f9c028bb29658b56358604ce2a4ada2e517",
+      "bytes": 24824
+    },
+    {
+      "path": "proposed/episodes/proposed__residual_student.json.gz",
+      "sha256": "5330177c2b8781fa41c9a09238f3690f2d5ab96cba040aa99bfd10f1fb6a579d",
+      "bytes": 5925
+    },
+    {
+      "path": "proposed/episodes/proposed__trajectory.json.gz",
+      "sha256": "d7907bf7fd6916a83fecbc290fff1d69890200545069dd8f5ce58e3247e3bfec",
+      "bytes": 5382
+    },
+    {
+      "path": "proposed/episodes/proposed__two_pole.json.gz",
+      "sha256": "3a6dc3ab55ed9d259fa153d995e36a36b93894a0d6801531e2ca9ccc88cae31b",
+      "bytes": 5439
+    },
+    {
+      "path": "proposed/episodes/proposed__unipolar.json.gz",
+      "sha256": "b1979f64aa47407c2a3c2e487f58ee9c6a464977bfde41452ee9f671d22d96b1",
+      "bytes": 7996
+    },
+    {
+      "path": "proposed/episodes/proposed__unused_token_hold.json.gz",
+      "sha256": "7cf62792bb845030b33fa4e1b82a902f1e23f33358965b9cb4aab0fc84a4089f",
+      "bytes": 6282
+    },
+    {
+      "path": "proposed/episodes/proposed__vector_anisotropic.json.gz",
+      "sha256": "57d1f31a5009543c273c5f4f642b93e6555d895dad74752a8fcc1768631792cb",
+      "bytes": 12500
+    },
+    {
+      "path": "proposed/episodes/proposed__vector_overlap.json.gz",
+      "sha256": "43f9d7131786350093027a91b2ffb2808f229c3d73839830ef2d30722c8d8f05",
+      "bytes": 7664
+    },
+    {
+      "path": "proposed/episodes/proposed__vector_spiral.json.gz",
+      "sha256": "b33c2373a4c0000beadd5c8ecab3b3e022735b30a7e07e5753d60b0061c041cd",
+      "bytes": 7864
+    },
+    {
+      "path": "proposed/episodes/proposed__vector_two_broad.json.gz",
+      "sha256": "b741cb38d094a4e19b812d55338c951e7ec17e726c8df24152f3bc931bd04847",
+      "bytes": 11636
+    },
+    {
+      "path": "proposed/episodes/proposed__vector_unequal_mass.json.gz",
+      "sha256": "a4270b8770e58a27fd17473af9502c042e8cd1dcbd7a84e490565934fb70b0da",
+      "bytes": 13202
+    },
+    {
+      "path": "proposed/episodes/proposed__vector_unequal_width.json.gz",
+      "sha256": "60896e3cb6a4e6a39022c7eb982ad2a260cf19e6ec3bfdce25405c49cde634ef",
+      "bytes": 12968
+    },
+    {
+      "path": "proposed/index.json",
+      "sha256": "aa0553ec36ace8c460de9430d454547797b80809527c6a33f80992aad7a6d2bb",
+      "bytes": 153071
+    },
+    {
+      "path": "proposed/protocol.json",
+      "sha256": "fb577c2fd000a79d8bafad9348575b86183a4d1bcf7a39953801fe1a62bca474",
+      "bytes": 40927
+    },
+    {
+      "path": "proposed/run.log",
+      "sha256": "468ab0cf115dd058f93f70a70174d0927c442bc1e64ad9d0b51e2ca31c3c7bb5",
+      "bytes": 15344
+    },
+    {
+      "path": "proposed/source.tar.gz",
+      "sha256": "4d045bb60d64cb43417e526f91606b693852510f9a4ea82731cacf18c93a2887",
+      "bytes": 134796
+    },
+    {
+      "path": "current_core/episodes/current_core__ae_gan_hold.json.gz",
+      "sha256": "81da1c2519d5b34230f0a5479ad27e72a9ab11175ac1e69777a305d79d106e0c",
+      "bytes": 5331
+    },
+    {
+      "path": "current_core/episodes/current_core__cover_leftover.json.gz",
+      "sha256": "8e49ee7d36bf01ce6ca84214f547301e6fafbff7d2f81c1c4fdec7a465b221bd",
+      "bytes": 8934
+    },
+    {
+      "path": "current_core/episodes/current_core__img_bars4.json.gz",
+      "sha256": "fe4e81c486e8a94f1a9b2ba07992428e684dbc7d43e092874729469606dc071c",
+      "bytes": 9152
+    },
+    {
+      "path": "current_core/episodes/current_core__img_blobs4.json.gz",
+      "sha256": "ee2bde247c12fe502a48f44c5ed6e525469e54c69093d4b4171d80cceae6e452",
+      "bytes": 9448
+    },
+    {
+      "path": "current_core/episodes/current_core__img_intensity2.json.gz",
+      "sha256": "0a4a6dac69d2976f1ad9058d4bd37b6bf8fed318bf01d24e35bbf9de91480547",
+      "bytes": 9194
+    },
+    {
+      "path": "current_core/episodes/current_core__img_stripes2.json.gz",
+      "sha256": "4c68bca4266948ba46e9e9c709d59964eb793d2ba26f801fe5c0723346e4ae1f",
+      "bytes": 8854
+    },
+    {
+      "path": "current_core/episodes/current_core__mid_scale_identity.json.gz",
+      "sha256": "75f0025472dbffbcf4667b8d8417d520fa150bb204015935436d8a011a999eb3",
+      "bytes": 9936
+    },
+    {
+      "path": "current_core/episodes/current_core__mode_hold.json.gz",
+      "sha256": "8f1f8da69298aaebce78e891eda2e4d21175a851e8c61ec95194f92b83e79620",
+      "bytes": 24643
+    },
+    {
+      "path": "current_core/episodes/current_core__residual_student.json.gz",
+      "sha256": "bc4d1183888bbab8915cdb293020155ddd1d6e0d3b5c8d8b016aca93ae257a6b",
+      "bytes": 5645
+    },
+    {
+      "path": "current_core/episodes/current_core__trajectory.json.gz",
+      "sha256": "01538db5bbf77488bd65b7936500482acc3ec5ee8a98c75ed24a4a2a5a88d781",
+      "bytes": 5174
+    },
+    {
+      "path": "current_core/episodes/current_core__two_pole.json.gz",
+      "sha256": "db5e74078983da7e662511fe03043c03b9df2edf2d9ec545f595837186a0fb6f",
+      "bytes": 5189
+    },
+    {
+      "path": "current_core/episodes/current_core__unipolar.json.gz",
+      "sha256": "551edaae8ec4ff3b158708ff3a232a02774a086963926011eca137a8778cf7be",
+      "bytes": 7879
+    },
+    {
+      "path": "current_core/episodes/current_core__unused_token_hold.json.gz",
+      "sha256": "a1451a7988669407590a7ab4f99e01df25c5fb29c7b424ca287472d81cd53986",
+      "bytes": 6009
+    },
+    {
+      "path": "current_core/episodes/current_core__vector_anisotropic.json.gz",
+      "sha256": "8b8d50d7c460f5c9982b496dbc23d97849f501994d508557a7a2dfa3c955c5ad",
+      "bytes": 12229
+    },
+    {
+      "path": "current_core/episodes/current_core__vector_overlap.json.gz",
+      "sha256": "846acd3a71256a1cb70d9ca7889a796985865914569d2013183c1ee4d784aad3",
+      "bytes": 7468
+    },
+    {
+      "path": "current_core/episodes/current_core__vector_spiral.json.gz",
+      "sha256": "edee4df99f8e929a2ecc6524de35ec43484fd15ad99be87347b64dfde4505706",
+      "bytes": 7664
+    },
+    {
+      "path": "current_core/episodes/current_core__vector_two_broad.json.gz",
+      "sha256": "4de111da6e631193fd9911b382f19d463d2f8161f73e290b117726dd9c7812db",
+      "bytes": 11246
+    },
+    {
+      "path": "current_core/episodes/current_core__vector_unequal_mass.json.gz",
+      "sha256": "5b6bd2560da3d7d24d8ecc5d57aebeb048f9ee8c6a7524f465c976e67e4cda49",
+      "bytes": 13122
+    },
+    {
+      "path": "current_core/episodes/current_core__vector_unequal_width.json.gz",
+      "sha256": "4f0ca1c973ff9523eb6d97c61ca2c6f178e78d0f7c8787231eed0b7c74bef6e9",
+      "bytes": 12749
+    },
+    {
+      "path": "current_core/index.json",
+      "sha256": "8c34dc2815d1489830aa3b4a7f5a9063b83572bf7ff4f75f3da055a7ec2fc79c",
+      "bytes": 128446
+    },
+    {
+      "path": "current_core/protocol.json",
+      "sha256": "80f5297ef5c61eb4736df8583df788d9209dac53575e76be42a2fc7058c3c204",
+      "bytes": 40398
+    },
+    {
+      "path": "current_core/run.log",
+      "sha256": "dec449307f5d324bce46131c1230201640529794a17411d3158e1fa74c4bc8ff",
+      "bytes": 15472
+    },
+    {
+      "path": "current_core/source.tar.gz",
+      "sha256": "893b3cbcaf26b36c4da9157e40cfc17a5239b76d96798aa8719730751f973417",
+      "bytes": 135329
+    },
+    {
+      "path": "tests.log",
+      "sha256": "cf0163bfdc4ef563232afe804d0b7e103a6b972a940139b3ddc2d4be922bfc39",
+      "bytes": 98
+    },
+    {
+      "path": "current-master-recipes.py.txt",
+      "sha256": "33ea97c94f4dd79ee2c5451cdf9e9ce98272921d71a300918258e8df3e6a88bc",
+      "bytes": 12019
+    },
+    {
+      "path": "current-master-audit.json",
+      "sha256": "578bc5b298d856b11795b17f6d6d333cb21bf9f1e508214285b89e345fd5ee6b",
+      "bytes": 1315
+    }
+  ]
+}

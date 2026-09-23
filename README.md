@@ -63,8 +63,13 @@ The broader [transfer leaderboard](reports/transfer_suite/README.md) separates
 required regressions, practical ranking tests, and nonblocking stress diagnostics.
 The [formulation leaderboard](reports/transfer_suite/formulations/README.md)
 compares candidate-owned training recipes, with architecture variants inside
-the same entry: the selected b_cap3 default passes **9/9 required and 10/10
-practical data/image toys** with suitable architectures per toy.
+the same entry: the selected b_cap3 core passes **9/9 required and 10/10
+practical data/image toys** with suitable architectures and established training
+settings per toy. The [matched default comparison](reports/transfer_suite/default_comparison/README.md)
+scores the full public optimizer presets **8/19 proposed versus 5/19 current**
+on those same test hosts. Holding host optimizer settings fixed, the core
+formulations score **19/19 versus 17/19**. One universal numerical preset has
+not passed the full suite.
 The [valid-toy search](reports/transfer_suite/valid_search/README.md) records the
 discriminator-only improvement and separate optimizer/resource trials.
 The [default promotion](reports/transfer_suite/default_promotion/README.md)

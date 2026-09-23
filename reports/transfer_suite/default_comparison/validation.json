@@ -1,0 +1,22 @@
+{
+  "new_episodes": 57,
+  "reference_episodes": 19,
+  "new_observations": 1368,
+  "source_file_instances": 190,
+  "archive_files": 72,
+  "exact_proposed_vector_replays": [
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral"
+  ],
+  "live_counts": {
+    "current": 5,
+    "proposed": 8,
+    "current_core": 17
+  },
+  "focused_adapter_tests": 5,
+  "errors": []
+}

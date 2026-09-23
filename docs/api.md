@@ -96,6 +96,12 @@ each host's resources/rates; it is not evidence of one universal network or
 optimizer preset. The generic recipe keeps 20,000 particles and 7,000 updates;
 set those resources for your task. [Promotion and exact API replay](../reports/transfer_suite/default_promotion/README.md).
 
+The subsequent [matched test comparison](../reports/transfer_suite/default_comparison/README.md)
+applies the public optimizer settings to every host: `gan` passes **8/19** and
+`gan_legacy` **5/19**. With the established host optimizer settings held fixed,
+the new and old core formulations pass **19/19** and **17/19**, respectively.
+The default preset itself has not achieved the all-tests-pass target.
+
 `get_recipe("gan_legacy")` restores the previous GAN recipe: LR .0006,
 Adam(0,.999), cap coefficient 1, κ=1 and prior weight 1. The older
 `gan_behavioral` study candidate remains unchanged (LR .00051, Adam(0,.999),

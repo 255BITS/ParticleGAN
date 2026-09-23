@@ -13,6 +13,14 @@ recipes cannot be silently combined to produce one architecture result.
 
 ## Main comparison
 
+The [matched stock comparison](../default_comparison/README.md) now measures
+both formulations on these same architectures. With host training settings
+fixed, the old cap1/κ1/spread1 core passes **17/19**, and this cap3/κ1.25/spread.05
+core passes **19/19**. With each public recipe's numerical optimizer settings
+applied across all hosts, the scores are **5/19 old versus 8/19 new**.
+The 19/19 below belongs to the per-host training recipes; the public preset
+has not passed the whole suite unchanged.
+
 The [valid-toy search](../valid_search/README.md) and
 [focused rare-mode search](../rare_focus/README.md) bring the original b_cap3
 recipe to **9/9 required + 10/10 practical = 19/19 live behavioral toys** with

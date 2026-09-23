@@ -1,0 +1,96 @@
+START current two_pole steps=80
+{"event": "DONE", "arm": "current", "task": "two_pole", "status": "FAIL", "passing_suffix": 0, "live": {"mean_abs": 0.14728447794914246, "grad_med": 0.030356496572494507}, "ema_status": "N/A", "error": null}
+START current trajectory steps=400
+{"event": "DONE", "arm": "current", "task": "trajectory", "status": "FAIL", "passing_suffix": 0, "live": {"identity_mse": 0.24900652468204498}, "ema_status": "N/A", "error": null}
+START current residual_student steps=400
+{"event": "DONE", "arm": "current", "task": "residual_student", "status": "FAIL", "passing_suffix": 0, "live": {"identity_mse": 0.043405864387750626, "success_rate": 0.5833333134651184, "wrong_pad_rate": 0.4166666567325592}, "ema_status": "N/A", "error": null}
+START current unipolar steps=400
+unipolar_dir arm=locked_rpgan step=1/400 cover=0.0018 leak=0.2500 neu_hold=0.9988 cos_plus=+0.5000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=50/400 cover=0.1525 leak=0.0569 neu_hold=0.9486 cos_plus=+0.9565 hit=FAIL
+unipolar_dir arm=locked_rpgan step=100/400 cover=0.2594 leak=0.0050 neu_hold=0.9147 cos_plus=+0.9911 hit=FAIL
+unipolar_dir arm=locked_rpgan step=150/400 cover=0.3412 leak=0.0266 neu_hold=0.8919 cos_plus=+0.9830 hit=FAIL
+unipolar_dir arm=locked_rpgan step=200/400 cover=0.4184 leak=0.0014 neu_hold=0.8860 cos_plus=+0.9992 hit=FAIL
+unipolar_dir arm=locked_rpgan step=250/400 cover=0.4908 leak=0.0000 neu_hold=0.8757 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=300/400 cover=0.5519 leak=0.0000 neu_hold=0.8670 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=350/400 cover=0.5844 leak=0.0000 neu_hold=0.8625 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=400/400 cover=0.5927 leak=0.0000 neu_hold=0.8614 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=400 seed=0 cover=0.5927 leak=0.0000 neu_hold=0.8614 cos_plus=+1.0000 hit=FAIL
+{"event": "DONE", "arm": "current", "task": "unipolar", "status": "FAIL", "passing_suffix": 0, "live": {"cover": 0.5927451252937317, "off_caption": 1.6849988123373977e-11, "neu_hold": 0.8613732010126114}, "ema_status": "N/A", "error": null}
+START current ae_gan_hold steps=250
+ae-gan-hold arm=gan_legacy step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=gan_legacy step=1 recon=1.2727 hold=1.4262 loss=4.1997
+ae-gan-hold arm=gan_legacy step=50 recon=0.8175 hold=0.5479 loss=2.6505
+ae-gan-hold arm=gan_legacy step=100 recon=0.2998 hold=0.0680 loss=1.3557
+ae-gan-hold arm=gan_legacy step=150 recon=0.1101 hold=0.0156 loss=1.0177
+ae-gan-hold arm=gan_legacy step=200 recon=0.0379 hold=0.0014 loss=0.9720
+{"event": "DONE", "arm": "current", "task": "ae_gan_hold", "status": "PASS", "passing_suffix": 7, "live": {"recon_mse": 0.028666015714406967, "hold": 0.0003452669770922512}, "ema_status": "N/A", "error": null}
+START current cover_leftover steps=800
+cover_leftover start arm=locked steps=800 seed=0 teacher=faithful_guard_e cover=1.5 penalty_coeff=1.0 kappa=1.0 fm=0.0 n_particles=12
+cover_leftover arm=locked step=1/800 d=0.7237 g=1.6663 cap=0.0000 u_kept=0.000 content=0.000 leak=0.019 err=0.752 covered=0
+cover_leftover arm=locked step=50/800 d=0.3888 g=2.1438 cap=0.0244 u_kept=0.056 content=0.072 leak=0.263 err=0.742 covered=0
+cover_leftover arm=locked step=100/800 d=0.4686 g=1.8127 cap=0.0030 u_kept=0.093 content=0.126 leak=0.068 err=0.716 covered=0
+cover_leftover arm=locked step=150/800 d=0.6095 g=1.6900 cap=0.0067 u_kept=0.134 content=0.156 leak=0.058 err=0.694 covered=0
+cover_leftover arm=locked step=200/800 d=0.6091 g=1.5691 cap=0.0025 u_kept=0.156 content=0.209 leak=0.109 err=0.668 covered=0
+cover_leftover arm=locked step=250/800 d=0.6729 g=1.6135 cap=0.0007 u_kept=0.167 content=0.234 leak=0.052 err=0.634 covered=0
+cover_leftover arm=locked step=300/800 d=0.6003 g=1.4707 cap=0.0006 u_kept=0.190 content=0.278 leak=0.011 err=0.612 covered=0
+cover_leftover arm=locked step=350/800 d=0.5608 g=1.8157 cap=0.0000 u_kept=0.204 content=0.314 leak=0.013 err=0.585 covered=0
+cover_leftover arm=locked step=400/800 d=0.6248 g=1.5997 cap=0.0000 u_kept=0.228 content=0.353 leak=0.008 err=0.565 covered=0
+cover_leftover arm=locked step=450/800 d=0.5846 g=1.3593 cap=0.0003 u_kept=0.253 content=0.380 leak=0.002 err=0.545 covered=0
+cover_leftover arm=locked step=500/800 d=0.6798 g=1.7675 cap=0.0001 u_kept=0.274 content=0.427 leak=0.022 err=0.526 covered=0
+cover_leftover arm=locked step=550/800 d=0.6818 g=1.3058 cap=0.0002 u_kept=0.295 content=0.460 leak=0.061 err=0.508 covered=0
+cover_leftover arm=locked step=600/800 d=0.6417 g=1.2565 cap=0.0000 u_kept=0.318 content=0.495 leak=0.070 err=0.496 covered=0
+cover_leftover arm=locked step=650/800 d=0.6274 g=1.3128 cap=0.0011 u_kept=0.328 content=0.518 leak=0.035 err=0.483 covered=0
+cover_leftover arm=locked step=700/800 d=0.7117 g=1.1327 cap=0.0000 u_kept=0.340 content=0.527 leak=0.012 err=0.477 covered=0
+cover_leftover arm=locked step=750/800 d=0.6708 g=1.2175 cap=0.0000 u_kept=0.346 content=0.537 leak=0.002 err=0.475 covered=0
+cover_leftover arm=locked step=800/800 d=0.6952 g=1.1100 cap=0.0000 u_kept=0.347 content=0.541 leak=0.010 err=0.474 covered=0
+cover_leftover DONE arm=locked pass=0 reasons=undershoot,content u_kept=0.300 content=0.465 leak=0.013 err=0.510 same_dir=0.042 particle_rms=0.677
+{"event": "DONE", "arm": "current", "task": "cover_leftover", "status": "FAIL", "passing_suffix": 0, "live": {"u_kept": 0.34715240846618955, "content_kept": 0.5411586879826282, "leak_ratio": 0.009703752829673794, "pole_rel_err_plus": 0.46128708124160767, "pole_rel_err_minus": 0.4740443527698517, "same_dir": 0.03748652023917813}, "ema_status": "N/A", "error": null}
+START current unused_token_hold steps=200
+unused-token arm=gan_legacy step=1 hold=0.9992 concept=0.0000 unused_dist=0.0008
+unused-token arm=gan_legacy step=50 hold=0.9993 concept=0.0119 unused_dist=0.0007
+unused-token arm=gan_legacy step=100 hold=0.9979 concept=0.1397 unused_dist=0.0021
+unused-token arm=gan_legacy step=150 hold=0.9979 concept=0.2331 unused_dist=0.0021
+unused-token arm=gan_legacy step=200 hold=0.9979 concept=0.2575 unused_dist=0.0021
+{"event": "DONE", "arm": "current", "task": "unused_token_hold", "status": "FAIL", "passing_suffix": 0, "live": {"unused_hold": 0.9979296191595495, "concept_move": 0.2574754894381641}, "ema_status": "N/A", "error": null}
+START current mid_scale_identity steps=800
+mid_scale arm=locked step=1 seed=0 concept+=+0.5774 concept-=+0.0000 id0=+0.0011 id_mid=+0.0033 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=50 seed=0 concept+=+0.6840 concept-=-0.4817 id0=+0.0782 id_mid=+0.2303 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=polarity,identity_0,identity_mid
+mid_scale arm=locked step=100 seed=0 concept+=+0.7315 concept-=-0.1346 id0=+0.1388 id_mid=+0.4050 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=polarity,identity_0,identity_mid
+mid_scale arm=locked step=150 seed=0 concept+=+0.7753 concept-=+0.1152 id0=+0.1910 id_mid=+0.5432 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=200 seed=0 concept+=+0.7612 concept-=+0.5093 id0=+0.2385 id_mid=+0.6762 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=250 seed=0 concept+=+0.7487 concept-=+0.8201 id0=+0.2821 id_mid=+0.7971 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=300 seed=0 concept+=+0.7630 concept-=+0.9261 id0=+0.3230 id_mid=+0.8923 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=350 seed=0 concept+=+0.7867 concept-=+0.8858 id0=+0.3619 id_mid=+0.9722 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=400 seed=0 concept+=+0.8183 concept-=+0.8510 id0=+0.3977 id_mid=+0.9669 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=450 seed=0 concept+=+0.8398 concept-=+0.8467 id0=+0.4289 id_mid=+0.9159 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=500 seed=0 concept+=+0.8731 concept-=+0.8342 id0=+0.4559 id_mid=+0.8943 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=550 seed=0 concept+=+0.9131 concept-=+0.8104 id0=+0.4767 id_mid=+0.9057 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=600 seed=0 concept+=+0.9315 concept-=+0.8130 id0=+0.4940 id_mid=+0.9048 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=650 seed=0 concept+=+0.9380 concept-=+0.8252 id0=+0.5069 id_mid=+0.8954 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=700 seed=0 concept+=+0.9408 concept-=+0.8343 id0=+0.5149 id_mid=+0.8878 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=750 seed=0 concept+=+0.9420 concept-=+0.8387 id0=+0.5189 id_mid=+0.8841 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=800 seed=0 concept+=+0.9425 concept-=+0.8404 id0=+0.5204 id_mid=+0.8827 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=800 seed=0 concept+=+0.9425 concept-=+0.8404 id0=+0.5204 id_mid=+0.8827 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+{"event": "DONE", "arm": "current", "task": "mid_scale_identity", "status": "FAIL", "passing_suffix": 0, "live": {"concept_cos_plus": 0.9424891471862793, "concept_cos_minus": 0.8403640389442444, "concept_mag_plus": 0.5232707858085632, "concept_mag_minus": 0.48737096786499023, "identity_at_0": 0.5204108060901331, "identity_at_mid": 0.88269600468778}, "ema_status": "N/A", "error": null}
+START current mode_hold steps=1200
+{"event": "DONE", "arm": "current", "task": "mode_hold", "status": "FAIL", "passing_suffix": 0, "live": {"modes": 7, "hq": 0.917236328125}, "ema_status": "N/A", "error": null}
+START current vector_two_broad steps=1200
+{"event": "DONE", "arm": "current", "task": "vector_two_broad", "status": "PASS", "passing_suffix": 18, "live": {"sw1_normalized": 0.09361869565507093, "mean_error": 0.0741017684340477, "covariance_error": 0.20537669956684113, "target_scale": 1.0555585622787476, "sample_count": 4096, "mass_tv": 0.01611328125, "min_mass_ratio": 0.9677734375, "hq": 0.99658203125, "component_covariance_error": 0.29375675320625305, "component_covariance_errors": [0.1969636082649231, 0.390549898147583], "component_min_eigen_ratio": 0.5647364258766174, "component_mass": [0.48388671875, 0.51611328125], "target_mass": [0.5, 0.5], "component_counts": [1982, 2114]}, "ema_status": "PASS", "error": null}
+START current vector_unequal_mass steps=1200
+{"event": "DONE", "arm": "current", "task": "vector_unequal_mass", "status": "FAIL", "passing_suffix": 0, "live": {"sw1_normalized": 0.0907772392869787, "mean_error": 0.11427634954452515, "covariance_error": 0.08334824442863464, "target_scale": 1.7593294382095337, "sample_count": 4096, "mass_tv": 0.06767577677965164, "min_mass_ratio": 0.69580078125, "hq": 0.960693359375, "component_covariance_error": 1.9268929436802864, "component_covariance_errors": [0.8955816626548767, 3.954686164855957, 2.4331867694854736, 0.42411717772483826], "component_min_eigen_ratio": 0.4500662088394165, "component_mass": [0.61767578125, 0.24267578125, 0.125732421875, 0.013916015625], "target_mass": [0.550000011920929, 0.30000001192092896, 0.12999999523162842, 0.019999999552965164], "component_counts": [2530, 994, 515, 57]}, "ema_status": "FAIL", "error": null}
+START current vector_unequal_width steps=1200
+{"event": "DONE", "arm": "current", "task": "vector_unequal_width", "status": "FAIL", "passing_suffix": 0, "live": {"sw1_normalized": 0.06861284675989555, "mean_error": 0.09838009625673294, "covariance_error": 0.12399741262197495, "target_scale": 2.1343955993652344, "sample_count": 4096, "mass_tv": 0.0361328125, "min_mass_ratio": 0.9443359375, "hq": 0.981201171875, "component_covariance_error": 3.065372321754694, "component_covariance_errors": [0.1971983164548874, 8.63078784942627, 0.18444964289665222, 3.249053478240967], "component_min_eigen_ratio": 0.7287306785583496, "component_mass": [0.23681640625, 0.240966796875, 0.236083984375, 0.2861328125], "target_mass": [0.25, 0.25, 0.25, 0.25], "component_counts": [970, 987, 967, 1172]}, "ema_status": "FAIL", "error": null}
+START current vector_anisotropic steps=1200
+{"event": "DONE", "arm": "current", "task": "vector_anisotropic", "status": "PASS", "passing_suffix": 14, "live": {"sw1_normalized": 0.09170071846348626, "mean_error": 0.1264190524816513, "covariance_error": 0.08800899237394333, "target_scale": 2.032285690307617, "sample_count": 4096, "mass_tv": 0.0680338591337204, "min_mass_ratio": 0.88916015625, "hq": 0.988037109375, "component_covariance_error": 0.31960729757944745, "component_covariance_errors": [0.24698229134082794, 0.4939219355583191, 0.21791766583919525], "component_min_eigen_ratio": 0.7823304533958435, "component_mass": [0.30224609375, 0.29638671875, 0.4013671875], "target_mass": [0.3333333432674408, 0.3333333432674408, 0.3333333432674408], "component_counts": [1238, 1214, 1644]}, "ema_status": "PASS", "error": null}
+START current vector_overlap steps=1200
+{"event": "DONE", "arm": "current", "task": "vector_overlap", "status": "FAIL", "passing_suffix": 3, "live": {"sw1_normalized": 0.10054447525055134, "mean_error": 0.09968113154172897, "covariance_error": 0.3234969973564148, "target_scale": 0.8501437306404114, "sample_count": 4096}, "ema_status": "PASS", "error": null}
+START current vector_spiral steps=1600
+{"event": "DONE", "arm": "current", "task": "vector_spiral", "status": "PASS", "passing_suffix": 22, "live": {"sw1_normalized": 0.029609394879012905, "mean_error": 0.02231907658278942, "covariance_error": 0.06565967202186584, "target_scale": 1.224178433418274, "sample_count": 4096}, "ema_status": "PASS", "error": null}
+START current img_stripes2 steps=600
+{"event": "DONE", "arm": "current", "task": "img_stripes2", "status": "PASS", "passing_suffix": 13, "live": {"modes": 2, "hq": 0.96875, "mean_rmse": 0.015700258314609528, "quality_mode_fractions": [0.40625, 0.5625], "mode_fractions": [0.40625, 0.59375], "distribution_tv": 0.09375}, "ema_status": "PASS", "error": null}
+START current img_bars4 steps=600
+{"event": "DONE", "arm": "current", "task": "img_bars4", "status": "FAIL", "passing_suffix": 0, "live": {"modes": 3, "hq": 0.9375, "mean_rmse": 0.015826303511857986, "quality_mode_fractions": [0.25, 0.3125, 0.09375, 0.28125], "mode_fractions": [0.25, 0.375, 0.09375, 0.28125], "distribution_tv": 0.15625}, "ema_status": "FAIL", "error": null}
+START current img_blobs4 steps=600
+{"event": "DONE", "arm": "current", "task": "img_blobs4", "status": "FAIL", "passing_suffix": 0, "live": {"modes": 2, "hq": 0.71875, "mean_rmse": 0.07011669874191284, "quality_mode_fractions": [0.4375, 0.0625, 0.0625, 0.15625], "mode_fractions": [0.59375, 0.1875, 0.0625, 0.15625], "distribution_tv": 0.34375}, "ema_status": "FAIL", "error": null}
+START current img_intensity2 steps=600
+{"event": "DONE", "arm": "current", "task": "img_intensity2", "status": "FAIL", "passing_suffix": 1, "live": {"modes": 2, "hq": 0.90625, "mean_rmse": 0.028655674308538437, "quality_mode_fractions": [0.5, 0.40625], "mode_fractions": [0.5, 0.5], "distribution_tv": 0.0}, "ema_status": "FAIL", "error": null}
