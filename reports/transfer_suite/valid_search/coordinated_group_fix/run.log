@@ -1,8 +1,0 @@
-START required ae_gan_hold
-ae-gan-hold arm=smart_descent step=0 recon=1.2815 hold=1.4373 phase=init
-ae-gan-hold arm=smart_descent step=1 recon=1.2644 hold=1.4063 loss=4.2071
-ae-gan-hold arm=smart_descent step=50 recon=0.2787 hold=0.0268 loss=1.4063
-ae-gan-hold arm=smart_descent step=100 recon=0.0208 hold=0.0279 loss=1.0614
-ae-gan-hold arm=smart_descent step=150 recon=0.0052 hold=0.0212 loss=0.8773
-ae-gan-hold arm=smart_descent step=200 recon=0.0114 hold=0.0134 loss=0.6750
-DONE ae_gan_hold PASS {'recon_mse': 0.016662856563925743, 'hold': 0.0017786580137908459} None

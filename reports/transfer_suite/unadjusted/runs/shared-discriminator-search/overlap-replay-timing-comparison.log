@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/tmp/pr38-shared-discriminator/reproduce.py", line 33, in <module>
-    assert clean(new['result'])==clean(old['result'])
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError

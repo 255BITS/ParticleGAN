@@ -26,7 +26,7 @@ from . import image_tasks, suite, vector_tasks
 from .formulations import axes
 from .linear_skip_refinement_research import constructor as skip_constructor
 from .smooth_critic_research import constructor as smooth_constructor
-from .protocol import required_tasks, test_verdict
+from .protocol import test_verdict
 
 ROOT = Path(__file__).resolve().parents[2]
 REPORTS = ROOT / 'reports/transfer_suite'
@@ -43,25 +43,13 @@ def write(path, value):
 
 
 def plan():
-    """Choose the already published passing architecture before either arm runs."""
-    leaderboard = read(REPORTS / 'formulations/leaderboard.json')['rows'][0]
-    jobs = []
-    for spec in required_tasks():
-        reference = leaderboard['required'][spec['name']]['artifact']
-        jobs.append(dict(spec=spec, reference=reference, architecture='original host'))
-    chosen = {'vector_unequal_mass': 'linear_skip_d96_beta5',
-              'vector_unequal_width': 'axis_softplus5', 'vector_overlap': 'd128_l3_f3'}
-    for name, cell in leaderboard['cases'].items():
-        label = 'residual16' if cell['runner'] == 'image' else chosen.get(name, 'original architecture')
-        trial = next(t for t in cell['trials'] if t['label'] == label)
-        assert trial['verdict']['passed']
-        payload = read(REPORTS / trial['artifact'])
-        spec = deepcopy(payload.get('effective_spec', payload.get('spec', payload.get('task'))))
-        spec['runner'] = cell['runner']
-        jobs.append(dict(spec=spec, reference=trial['artifact'], architecture=label))
+    """Load frozen test definitions without requiring historical run outputs.
+
+    Extracted from the published passing architectures at d77e9e8. Reference
+    paths and hashes retain their provenance; the archives are local artifacts.
+    """
+    jobs = read(Path(__file__).with_name('plans') / 'default_comparison.json')
     assert len(jobs) == 19 and len({j['spec']['name'] for j in jobs}) == 19
-    for job in jobs:
-        job['reference_sha256'] = hashlib.sha256((REPORTS / job['reference']).read_bytes()).hexdigest()
     return jobs
 
 

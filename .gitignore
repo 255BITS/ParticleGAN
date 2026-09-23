@@ -25,3 +25,26 @@ dist/
 /runs/cifar_particle_ae/
 /runs/cifar_particle_ddgan/
 /runs/mog_vae/
+
+# Research outputs stay local; keep source, writeups, and reproduction inputs.
+/reports/behavioral_baseline/**
+/reports/learned_lr/**
+/reports/locked_shared/**
+/reports/paired_error_2d/**
+/reports/smart_descent/**
+/reports/transfer_suite/**
+!/reports/**/
+!/reports/**/*.md
+!/reports/**/*.py
+!/reports/**/configs.json
+!/reports/**/passing_configs.json
+!/reports/**/leading_*.json
+!/reports/**/policy.json
+!/reports/**/adaptive_policy.json
+!/reports/**/frozen.json
+!/reports/**/entries.json
+!/reports/**/current-recipes.json
+!/reports/**/previous-recipes.json
+!/reports/**/reference_profile.json
+!/reports/**/plan.json
+!/reports/**/*_plan.json

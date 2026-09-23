@@ -1,3 +1,0 @@
-[
-  {"name":"residual16_cap10", "scope":"architecture changed; cross-domain cap10", "changes":{"architecture":"residual_upsample","width":16,"penalty_coeff":10.0}}
-]
