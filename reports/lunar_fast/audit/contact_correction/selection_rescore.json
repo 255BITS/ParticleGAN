@@ -1,0 +1,5816 @@
+{
+  "recorded_run": "/ml2/hypergan/ParticleGAN-lunar-fast/results/gym/fast_lander_calibrated",
+  "source_sha256": {
+    "lib/lunar_flight.py": "9cae6e8e18c26dd66e460bed684a629eb0e640aa38e85dda8da783e4807b6a12",
+    "lib/lunar_training.py": "6bfdb7a4860155c4b7a52ba94afaf6235213fcb95c442d9cddea69d38f777c32"
+  },
+  "expert_slow": {
+    "episodes": 96,
+    "old_success_count": 92,
+    "physical_success_count": 96,
+    "new_success_seeds": [
+      24009,
+      24027,
+      24080,
+      24089
+    ],
+    "lost_success_seeds": [],
+    "mean_physical_success_steps": 226.32291666666666
+  },
+  "expert_fast": {
+    "episodes": 96,
+    "old_success_count": 94,
+    "physical_success_count": 96,
+    "new_success_seeds": [
+      24051,
+      24089
+    ],
+    "lost_success_seeds": [],
+    "mean_physical_success_steps": 189.1875
+  },
+  "old_pair_count": 91,
+  "physical_pair_count": 96,
+  "new_pair_seeds": [
+    24009,
+    24027,
+    24051,
+    24080,
+    24089
+  ],
+  "lost_pair_seeds": [],
+  "old_slow_policy_target_rows": 20629,
+  "physical_slow_policy_target_rows": 21727,
+  "old_fast_policy_target_rows": 17053,
+  "physical_fast_policy_target_rows": 18162,
+  "slow_validation": {
+    "episodes": 20,
+    "old_success_count": 20,
+    "physical_success_count": 20,
+    "new_success_seeds": [],
+    "lost_success_seeds": [],
+    "mean_physical_success_steps": 210.8
+  },
+  "candidates": [
+    {
+      "checkpoint": "fast_round_1.pt",
+      "summary": {
+        "episodes": 20,
+        "old_success_count": 20,
+        "physical_success_count": 20,
+        "new_success_seeds": [],
+        "lost_success_seeds": [],
+        "mean_physical_success_steps": 184.4
+      },
+      "rows": [
+        {
+          "seed": 34000,
+          "steps": 213,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34001,
+          "steps": 200,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34002,
+          "steps": 155,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34003,
+          "steps": 178,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34004,
+          "steps": 196,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34005,
+          "steps": 169,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34006,
+          "steps": 176,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34007,
+          "steps": 158,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34008,
+          "steps": 197,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34009,
+          "steps": 179,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34010,
+          "steps": 184,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34011,
+          "steps": 160,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34012,
+          "steps": 211,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34013,
+          "steps": 180,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34014,
+          "steps": 176,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34015,
+          "steps": 233,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34016,
+          "steps": 171,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34017,
+          "steps": 223,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34018,
+          "steps": 156,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34019,
+          "steps": 173,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        }
+      ]
+    },
+    {
+      "checkpoint": "fast_round_2.pt",
+      "summary": {
+        "episodes": 20,
+        "old_success_count": 20,
+        "physical_success_count": 20,
+        "new_success_seeds": [],
+        "lost_success_seeds": [],
+        "mean_physical_success_steps": 186.05
+      },
+      "rows": [
+        {
+          "seed": 34000,
+          "steps": 219,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34001,
+          "steps": 204,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34002,
+          "steps": 151,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34003,
+          "steps": 171,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34004,
+          "steps": 202,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34005,
+          "steps": 174,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34006,
+          "steps": 174,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34007,
+          "steps": 164,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34008,
+          "steps": 200,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34009,
+          "steps": 176,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34010,
+          "steps": 183,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34011,
+          "steps": 160,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34012,
+          "steps": 221,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34013,
+          "steps": 181,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34014,
+          "steps": 173,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34015,
+          "steps": 233,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34016,
+          "steps": 171,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34017,
+          "steps": 226,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34018,
+          "steps": 159,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34019,
+          "steps": 179,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        }
+      ]
+    },
+    {
+      "checkpoint": "fast_round_3.pt",
+      "summary": {
+        "episodes": 20,
+        "old_success_count": 20,
+        "physical_success_count": 20,
+        "new_success_seeds": [],
+        "lost_success_seeds": [],
+        "mean_physical_success_steps": 185.75
+      },
+      "rows": [
+        {
+          "seed": 34000,
+          "steps": 222,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34001,
+          "steps": 204,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34002,
+          "steps": 152,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34003,
+          "steps": 174,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34004,
+          "steps": 202,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34005,
+          "steps": 168,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34006,
+          "steps": 171,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34007,
+          "steps": 164,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34008,
+          "steps": 200,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34009,
+          "steps": 180,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34010,
+          "steps": 182,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34011,
+          "steps": 160,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34012,
+          "steps": 220,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34013,
+          "steps": 183,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34014,
+          "steps": 173,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34015,
+          "steps": 233,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34016,
+          "steps": 175,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34017,
+          "steps": 222,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34018,
+          "steps": 155,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        },
+        {
+          "seed": 34019,
+          "steps": 175,
+          "terminal_reward": 100.0,
+          "terminated": true,
+          "truncated": false,
+          "on_pad": true,
+          "asleep": true,
+          "game_over": false,
+          "cached_flags": [
+            true,
+            true
+          ],
+          "enabled_touching_moon_contacts": [
+            1,
+            1
+          ],
+          "physical_success": true,
+          "old_outcome": "successful_landing",
+          "old_success": true
+        }
+      ]
+    }
+  ],
+  "old_winner": "fast_round_1.pt",
+  "physical_winner": "fast_round_1.pt",
+  "expert_rows": {
+    "slow": [
+      {
+        "seed": 24000,
+        "steps": 195,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24001,
+        "steps": 246,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24002,
+        "steps": 198,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24003,
+        "steps": 226,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24004,
+        "steps": 204,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24005,
+        "steps": 209,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24006,
+        "steps": 211,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24007,
+        "steps": 215,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24008,
+        "steps": 216,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24009,
+        "steps": 252,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          false
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "incomplete_landing",
+        "old_success": false
+      },
+      {
+        "seed": 24010,
+        "steps": 242,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24011,
+        "steps": 197,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24012,
+        "steps": 352,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24013,
+        "steps": 241,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24014,
+        "steps": 229,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24015,
+        "steps": 279,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          2,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24016,
+        "steps": 196,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24017,
+        "steps": 198,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24018,
+        "steps": 224,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24019,
+        "steps": 223,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24020,
+        "steps": 208,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24021,
+        "steps": 243,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24022,
+        "steps": 255,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24023,
+        "steps": 210,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24024,
+        "steps": 249,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24025,
+        "steps": 200,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24026,
+        "steps": 205,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24027,
+        "steps": 314,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          false
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "incomplete_landing",
+        "old_success": false
+      },
+      {
+        "seed": 24028,
+        "steps": 222,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24029,
+        "steps": 201,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24030,
+        "steps": 216,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24031,
+        "steps": 213,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24032,
+        "steps": 225,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24033,
+        "steps": 202,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24034,
+        "steps": 218,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24035,
+        "steps": 273,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24036,
+        "steps": 230,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24037,
+        "steps": 251,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          2
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24038,
+        "steps": 279,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24039,
+        "steps": 223,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24040,
+        "steps": 208,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24041,
+        "steps": 242,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24042,
+        "steps": 269,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24043,
+        "steps": 240,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24044,
+        "steps": 279,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24045,
+        "steps": 186,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24046,
+        "steps": 210,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24047,
+        "steps": 221,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24048,
+        "steps": 215,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24049,
+        "steps": 216,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24050,
+        "steps": 219,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24051,
+        "steps": 248,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24052,
+        "steps": 220,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24053,
+        "steps": 220,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24054,
+        "steps": 200,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24055,
+        "steps": 221,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24056,
+        "steps": 202,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24057,
+        "steps": 231,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24058,
+        "steps": 203,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24059,
+        "steps": 209,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24060,
+        "steps": 330,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24061,
+        "steps": 212,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24062,
+        "steps": 201,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24063,
+        "steps": 256,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24064,
+        "steps": 257,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24065,
+        "steps": 222,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24066,
+        "steps": 200,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24067,
+        "steps": 205,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24068,
+        "steps": 237,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24069,
+        "steps": 226,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24070,
+        "steps": 200,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24071,
+        "steps": 207,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24072,
+        "steps": 212,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24073,
+        "steps": 216,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24074,
+        "steps": 234,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24075,
+        "steps": 243,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24076,
+        "steps": 218,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24077,
+        "steps": 201,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24078,
+        "steps": 208,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24079,
+        "steps": 260,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24080,
+        "steps": 282,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          false,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "incomplete_landing",
+        "old_success": false
+      },
+      {
+        "seed": 24081,
+        "steps": 222,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24082,
+        "steps": 232,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24083,
+        "steps": 211,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24084,
+        "steps": 195,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24085,
+        "steps": 232,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24086,
+        "steps": 220,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24087,
+        "steps": 212,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24088,
+        "steps": 230,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24089,
+        "steps": 250,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          false
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "incomplete_landing",
+        "old_success": false
+      },
+      {
+        "seed": 24090,
+        "steps": 216,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24091,
+        "steps": 194,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24092,
+        "steps": 204,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24093,
+        "steps": 234,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24094,
+        "steps": 196,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24095,
+        "steps": 203,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      }
+    ],
+    "fast": [
+      {
+        "seed": 24000,
+        "steps": 158,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24001,
+        "steps": 208,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24002,
+        "steps": 169,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24003,
+        "steps": 180,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24004,
+        "steps": 172,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24005,
+        "steps": 176,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24006,
+        "steps": 177,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24007,
+        "steps": 191,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24008,
+        "steps": 174,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24009,
+        "steps": 222,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24010,
+        "steps": 185,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24011,
+        "steps": 175,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24012,
+        "steps": 233,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24013,
+        "steps": 207,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24014,
+        "steps": 200,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24015,
+        "steps": 233,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24016,
+        "steps": 169,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24017,
+        "steps": 178,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24018,
+        "steps": 177,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24019,
+        "steps": 195,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24020,
+        "steps": 172,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24021,
+        "steps": 205,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24022,
+        "steps": 230,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24023,
+        "steps": 164,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24024,
+        "steps": 208,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24025,
+        "steps": 168,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24026,
+        "steps": 192,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24027,
+        "steps": 215,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24028,
+        "steps": 190,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24029,
+        "steps": 158,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24030,
+        "steps": 171,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24031,
+        "steps": 166,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24032,
+        "steps": 183,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24033,
+        "steps": 161,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24034,
+        "steps": 171,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24035,
+        "steps": 238,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24036,
+        "steps": 189,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24037,
+        "steps": 199,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          2
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24038,
+        "steps": 230,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24039,
+        "steps": 165,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24040,
+        "steps": 163,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24041,
+        "steps": 217,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24042,
+        "steps": 223,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24043,
+        "steps": 200,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24044,
+        "steps": 237,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24045,
+        "steps": 143,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24046,
+        "steps": 186,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24047,
+        "steps": 185,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24048,
+        "steps": 184,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24049,
+        "steps": 177,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24050,
+        "steps": 177,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24051,
+        "steps": 219,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          false
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "incomplete_landing",
+        "old_success": false
+      },
+      {
+        "seed": 24052,
+        "steps": 200,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24053,
+        "steps": 166,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24054,
+        "steps": 171,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24055,
+        "steps": 178,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24056,
+        "steps": 169,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24057,
+        "steps": 207,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24058,
+        "steps": 172,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24059,
+        "steps": 173,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24060,
+        "steps": 237,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24061,
+        "steps": 188,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24062,
+        "steps": 162,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24063,
+        "steps": 222,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24064,
+        "steps": 212,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24065,
+        "steps": 185,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24066,
+        "steps": 181,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24067,
+        "steps": 183,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24068,
+        "steps": 187,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24069,
+        "steps": 190,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24070,
+        "steps": 165,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24071,
+        "steps": 160,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24072,
+        "steps": 187,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24073,
+        "steps": 181,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24074,
+        "steps": 206,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24075,
+        "steps": 217,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24076,
+        "steps": 192,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24077,
+        "steps": 162,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24078,
+        "steps": 187,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24079,
+        "steps": 222,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24080,
+        "steps": 233,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24081,
+        "steps": 202,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24082,
+        "steps": 185,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24083,
+        "steps": 172,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24084,
+        "steps": 172,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24085,
+        "steps": 216,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24086,
+        "steps": 184,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24087,
+        "steps": 165,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24088,
+        "steps": 214,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24089,
+        "steps": 220,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          false,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "incomplete_landing",
+        "old_success": false
+      },
+      {
+        "seed": 24090,
+        "steps": 179,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24091,
+        "steps": 171,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24092,
+        "steps": 172,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24093,
+        "steps": 197,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24094,
+        "steps": 165,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      },
+      {
+        "seed": 24095,
+        "steps": 188,
+        "terminal_reward": 100.0,
+        "terminated": true,
+        "truncated": false,
+        "on_pad": true,
+        "asleep": true,
+        "game_over": false,
+        "cached_flags": [
+          true,
+          true
+        ],
+        "enabled_touching_moon_contacts": [
+          1,
+          1
+        ],
+        "physical_success": true,
+        "old_outcome": "successful_landing",
+        "old_success": true
+      }
+    ]
+  },
+  "slow_validation_rows": [
+    {
+      "seed": 34000,
+      "steps": 231,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34001,
+      "steps": 216,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34002,
+      "steps": 190,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34003,
+      "steps": 199,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34004,
+      "steps": 226,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34005,
+      "steps": 216,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34006,
+      "steps": 192,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34007,
+      "steps": 193,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34008,
+      "steps": 215,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34009,
+      "steps": 203,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34010,
+      "steps": 205,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34011,
+      "steps": 188,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34012,
+      "steps": 238,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34013,
+      "steps": 214,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34014,
+      "steps": 192,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34015,
+      "steps": 243,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34016,
+      "steps": 223,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34017,
+      "steps": 239,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34018,
+      "steps": 201,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    },
+    {
+      "seed": 34019,
+      "steps": 192,
+      "terminal_reward": 100.0,
+      "terminated": true,
+      "truncated": false,
+      "on_pad": true,
+      "asleep": true,
+      "game_over": false,
+      "cached_flags": [
+        true,
+        true
+      ],
+      "enabled_touching_moon_contacts": [
+        1,
+        1
+      ],
+      "physical_success": true,
+      "old_outcome": "successful_landing",
+      "old_success": true
+    }
+  ]
+}

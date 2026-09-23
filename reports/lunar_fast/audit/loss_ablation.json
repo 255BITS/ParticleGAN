@@ -1,0 +1,427 @@
+{
+  "results": [
+    {
+      "mode": "gan_only",
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 1,
+      "high_rising_wrong_down": 32,
+      "expert_off_count": 7092,
+      "off_wrong_up": 774,
+      "off_wrong_down": 4459,
+      "action_mse": 0.19060850143432617,
+      "example_train_24053_step0_main": 0.0,
+      "episodes": 20,
+      "success_count": 14,
+      "success_rate": 0.7,
+      "mean_steps": 234.9,
+      "mean_success_steps": 222.42857142857142,
+      "mean_contact_step": 167.45,
+      "mean_return": 246.32903490701028,
+      "outcomes": {
+        "successful_landing": 14,
+        "crash": 5,
+        "out_of_bounds": 1,
+        "time_limit": 0,
+        "other_termination": 0
+      },
+      "failed_validation_seeds": [
+        34000,
+        34002,
+        34007,
+        34010,
+        34013,
+        34015
+      ],
+      "training_metrics": {
+        "train": {
+          "action_mse": 0.19060850143432617,
+          "world_successor_mse": 0.0012852632207795978,
+          "world_successor_normalized_mse": 0.34103167057037354
+        },
+        "validation": null,
+        "before_adversarial": {
+          "action_mse": 0.001876983791589737,
+          "world_successor_mse": 0.0012216689065098763,
+          "world_successor_normalized_mse": 0.2943980395793915
+        },
+        "warmup_updates": 8000,
+        "rpgan_updates": 400,
+        "world_weight": 0.0,
+        "adversarial_weight": 1.0,
+        "records": 20629,
+        "recipe": {
+          "name": "gan_v3",
+          "model": "gan",
+          "z_dim": 4,
+          "num_particles": 20000,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": null,
+          "conditioning": "scalar",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 256,
+          "total_steps": 400,
+          "lr": 0.00425,
+          "d_lr_mult": 1.0,
+          "prior_lr_mult": 2.0,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "prior_betas": null,
+          "loss_type": "logistic",
+          "gan_mode": "rp",
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.25,
+          "reg_every": 4,
+          "reg_method": "autograd",
+          "prior_reg": 0.05,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0
+        },
+        "optimizers": {
+          "generator": {
+            "name": "Adam",
+            "lr": 0.0003,
+            "betas": [
+              0.5,
+              0.99
+            ]
+          },
+          "discriminator": {
+            "name": "Adam",
+            "lr": 0.0002,
+            "betas": [
+              0.5,
+              0.99
+            ]
+          }
+        },
+        "main_deadband": 0.12,
+        "initial_policy": null,
+        "world_checkpoint": "/ml2/hypergan/ParticleGAN-lunar-fast/results/gym/fast_lander_develop/world.pt"
+      }
+    },
+    {
+      "mode": "world_only",
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 5,
+      "high_rising_wrong_down": 0,
+      "expert_off_count": 7092,
+      "off_wrong_up": 289,
+      "off_wrong_down": 925,
+      "action_mse": 0.007215937599539757,
+      "example_train_24053_step0_main": 0.12934067845344543,
+      "episodes": 20,
+      "success_count": 19,
+      "success_rate": 0.95,
+      "mean_steps": 214.85,
+      "mean_success_steps": 213.1578947368421,
+      "mean_contact_step": 169.7,
+      "mean_return": 279.0775934754703,
+      "outcomes": {
+        "successful_landing": 19,
+        "crash": 1,
+        "out_of_bounds": 0,
+        "time_limit": 0,
+        "other_termination": 0
+      },
+      "failed_validation_seeds": [
+        34015
+      ],
+      "training_metrics": {
+        "train": {
+          "action_mse": 0.007215937599539757,
+          "world_successor_mse": 0.0012235795147717,
+          "world_successor_normalized_mse": 0.2930276393890381
+        },
+        "validation": null,
+        "before_adversarial": {
+          "action_mse": 0.001876983791589737,
+          "world_successor_mse": 0.0012216689065098763,
+          "world_successor_normalized_mse": 0.2943980395793915
+        },
+        "warmup_updates": 8000,
+        "rpgan_updates": 400,
+        "world_weight": 2.5,
+        "adversarial_weight": 0.0,
+        "records": 20629,
+        "recipe": {
+          "name": "gan_v3",
+          "model": "gan",
+          "z_dim": 4,
+          "num_particles": 20000,
+          "prior_kind": "particles",
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "num_classes": null,
+          "conditioning": "scalar",
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "batch_size": 256,
+          "total_steps": 400,
+          "lr": 0.00425,
+          "d_lr_mult": 1.0,
+          "prior_lr_mult": 2.0,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "prior_betas": null,
+          "loss_type": "logistic",
+          "gan_mode": "rp",
+          "reg_arm": "b_cap",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.25,
+          "reg_every": 4,
+          "reg_method": "autograd",
+          "prior_reg": 0.05,
+          "ema_decay": 0.995,
+          "lr_anneal_start": 0.6,
+          "lr_floor": 0.05,
+          "encoder_mode": "none",
+          "routing_temperature": 0.25,
+          "distance_reduction": "sum",
+          "observation_sigma": 0.03,
+          "reconstruction_weight": 1.0
+        },
+        "optimizers": {
+          "generator": {
+            "name": "Adam",
+            "lr": 0.0003,
+            "betas": [
+              0.5,
+              0.99
+            ]
+          },
+          "discriminator": {
+            "name": "Adam",
+            "lr": 0.0002,
+            "betas": [
+              0.5,
+              0.99
+            ]
+          }
+        },
+        "main_deadband": 0.12,
+        "initial_policy": null,
+        "world_checkpoint": "/ml2/hypergan/ParticleGAN-lunar-fast/results/gym/fast_lander_develop/world.pt"
+      }
+    },
+    {
+      "mode": "bc_only",
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 8,
+      "high_rising_wrong_down": 0,
+      "expert_off_count": 7092,
+      "off_wrong_up": 137,
+      "off_wrong_down": 154,
+      "action_mse": 0.001876983791589737,
+      "example_train_24053_step0_main": 0.1355549544095993
+    },
+    {
+      "mode": "published_both",
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 22,
+      "high_rising_wrong_down": 0,
+      "expert_off_count": 7092,
+      "off_wrong_up": 194,
+      "off_wrong_down": 693,
+      "action_mse": 0.004092599730938673,
+      "example_train_24053_step0_main": 0.17087586224079132
+    }
+  ],
+  "trace": [
+    {
+      "mode": "gan_only",
+      "step": 0,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 8,
+      "high_rising_wrong_down": 0,
+      "expert_off_count": 7092,
+      "off_wrong_up": 137,
+      "off_wrong_down": 154,
+      "action_mse": 0.001876983791589737,
+      "example_train_24053_step0_main": 0.1355549544095993,
+      "gradient_at_policy": {
+        "adv_mean": 4.748384981212439e-06,
+        "world_mean": 0.0006304983980953693,
+        "adv_descent_increases_main": 20,
+        "world_descent_increases_main": 15
+      }
+    },
+    {
+      "mode": "gan_only",
+      "step": 1,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 11,
+      "high_rising_wrong_down": 0,
+      "expert_off_count": 7092,
+      "off_wrong_up": 201,
+      "off_wrong_down": 111,
+      "action_mse": 0.0022271396592259407,
+      "example_train_24053_step0_main": 0.14173194766044617
+    },
+    {
+      "mode": "gan_only",
+      "step": 20,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 0,
+      "high_rising_wrong_down": 11,
+      "expert_off_count": 7092,
+      "off_wrong_up": 28,
+      "off_wrong_down": 1953,
+      "action_mse": 0.034655120223760605,
+      "example_train_24053_step0_main": 0.0
+    },
+    {
+      "mode": "gan_only",
+      "step": 100,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 0,
+      "high_rising_wrong_down": 42,
+      "expert_off_count": 7092,
+      "off_wrong_up": 3937,
+      "off_wrong_down": 3101,
+      "action_mse": 0.2004179060459137,
+      "example_train_24053_step0_main": -0.20896025002002716
+    },
+    {
+      "mode": "gan_only",
+      "step": 200,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 0,
+      "high_rising_wrong_down": 42,
+      "expert_off_count": 7092,
+      "off_wrong_up": 0,
+      "off_wrong_down": 7092,
+      "action_mse": 0.4603564441204071,
+      "example_train_24053_step0_main": -0.5925846099853516
+    },
+    {
+      "mode": "gan_only",
+      "step": 400,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 1,
+      "high_rising_wrong_down": 32,
+      "expert_off_count": 7092,
+      "off_wrong_up": 774,
+      "off_wrong_down": 4459,
+      "action_mse": 0.19060850143432617,
+      "example_train_24053_step0_main": 0.0,
+      "gradient_at_policy": {
+        "adv_mean": -0.00029004536918364465,
+        "world_mean": -0.010608039796352386,
+        "adv_descent_increases_main": 42,
+        "world_descent_increases_main": 37
+      }
+    },
+    {
+      "mode": "world_only",
+      "step": 0,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 8,
+      "high_rising_wrong_down": 0,
+      "expert_off_count": 7092,
+      "off_wrong_up": 137,
+      "off_wrong_down": 154,
+      "action_mse": 0.001876983791589737,
+      "example_train_24053_step0_main": 0.1355549544095993,
+      "gradient_at_policy": {
+        "adv_mean": 4.748384981212439e-06,
+        "world_mean": 0.0006304983980953693,
+        "adv_descent_increases_main": 20,
+        "world_descent_increases_main": 15
+      }
+    },
+    {
+      "mode": "world_only",
+      "step": 1,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 0,
+      "high_rising_wrong_down": 4,
+      "expert_off_count": 7092,
+      "off_wrong_up": 13,
+      "off_wrong_down": 3006,
+      "action_mse": 0.00903844740241766,
+      "example_train_24053_step0_main": 0.0
+    },
+    {
+      "mode": "world_only",
+      "step": 20,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 4,
+      "high_rising_wrong_down": 0,
+      "expert_off_count": 7092,
+      "off_wrong_up": 91,
+      "off_wrong_down": 1014,
+      "action_mse": 0.008410506881773472,
+      "example_train_24053_step0_main": 0.0
+    },
+    {
+      "mode": "world_only",
+      "step": 100,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 11,
+      "high_rising_wrong_down": 0,
+      "expert_off_count": 7092,
+      "off_wrong_up": 313,
+      "off_wrong_down": 851,
+      "action_mse": 0.009051250293850899,
+      "example_train_24053_step0_main": 0.15444891154766083
+    },
+    {
+      "mode": "world_only",
+      "step": 200,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 6,
+      "high_rising_wrong_down": 0,
+      "expert_off_count": 7092,
+      "off_wrong_up": 798,
+      "off_wrong_down": 1374,
+      "action_mse": 0.00845226738601923,
+      "example_train_24053_step0_main": 0.13729895651340485
+    },
+    {
+      "mode": "world_only",
+      "step": 400,
+      "high_rising_count": 42,
+      "high_rising_wrong_up": 5,
+      "high_rising_wrong_down": 0,
+      "expert_off_count": 7092,
+      "off_wrong_up": 289,
+      "off_wrong_down": 925,
+      "action_mse": 0.007215937599539757,
+      "example_train_24053_step0_main": 0.12934067845344543,
+      "gradient_at_policy": {
+        "adv_mean": 0.0015284077962860465,
+        "world_mean": 0.0003343563002999872,
+        "adv_descent_increases_main": 0,
+        "world_descent_increases_main": 18
+      }
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "train": {
+    "action_mse": 0.005752097349613905,
+    "world_successor_mse": 0.0012251702137291431,
+    "world_successor_normalized_mse": 0.3266351521015167
+  },
+  "validation": null,
+  "before_adversarial": {
+    "action_mse": 0.001876983791589737,
+    "world_successor_mse": 0.0012293851468712091,
+    "world_successor_normalized_mse": 0.3309933841228485
+  },
+  "warmup_updates": 8000,
+  "rpgan_updates": 1200,
+  "world_weight": 2.5,
+  "adversarial_weight": 1.0,
+  "records": 20629,
+  "recipe": {
+    "name": "gan_v3",
+    "model": "gan",
+    "z_dim": 4,
+    "num_particles": 20000,
+    "prior_kind": "particles",
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "num_classes": null,
+    "conditioning": "scalar",
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 256,
+    "total_steps": 1200,
+    "lr": 0.00425,
+    "d_lr_mult": 1.0,
+    "prior_lr_mult": 2.0,
+    "betas": [
+      0.0,
+      0.99
+    ],
+    "prior_betas": null,
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.25,
+    "reg_every": 4,
+    "reg_method": "autograd",
+    "prior_reg": 0.05,
+    "ema_decay": 0.0,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "encoder_mode": "none",
+    "routing_temperature": 0.25,
+    "distance_reduction": "sum",
+    "observation_sigma": 0.03,
+    "reconstruction_weight": 1.0
+  },
+  "weight_kind": "live",
+  "optimizers": {
+    "generator": {
+      "name": "Adam",
+      "lr": 0.0003,
+      "betas": [
+        0.5,
+        0.99
+      ]
+    },
+    "discriminator": {
+      "name": "Adam",
+      "lr": 0.0002,
+      "betas": [
+        0.5,
+        0.99
+      ]
+    }
+  },
+  "main_deadband": 0.12,
+  "initial_policy": null,
+  "world_checkpoint": "results/gym/fast_lander_calibrated/world.pt"
+}

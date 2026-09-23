@@ -1,0 +1,823 @@
+{
+  "label": "slow_power_actual_1200",
+  "source_sha256": "f9e659494ded3593541db3b19d3251c29cbfea5cbe3d7229e9be918e732c72ef",
+  "world_sha256": "1cc9382651f1f9799c3d5f98b873f651c04f616fd74b980b15858654eb10a42c",
+  "data_sha256": "f84c16d070c1d71252e7d2f9ce37276075f12d834aca0735d6ecae77f4071ae1",
+  "checkpoint_sha256": "cc56eace2d6a6bae2ca9400b96419759f3c90699e80e37deccc27110f68339d7",
+  "configuration": {
+    "seed": 7302,
+    "warmup_steps": 8000,
+    "rpgan_steps": 1200,
+    "batch_size": 256,
+    "device": "cpu",
+    "threads": 2,
+    "world_weight": 2.5,
+    "adversarial_weight": 1.0,
+    "loss_target": "actual observed successor",
+    "initial_policy": null,
+    "weight_kind": "live; no EMA"
+  },
+  "training_metrics": {
+    "train": {
+      "action_mse": 0.005752097349613905,
+      "world_successor_mse": 0.0012251702137291431,
+      "world_successor_normalized_mse": 0.3266351521015167
+    },
+    "validation": null,
+    "before_adversarial": {
+      "action_mse": 0.001876983791589737,
+      "world_successor_mse": 0.0012293851468712091,
+      "world_successor_normalized_mse": 0.3309933841228485
+    },
+    "warmup_updates": 8000,
+    "rpgan_updates": 1200,
+    "world_weight": 2.5,
+    "adversarial_weight": 1.0,
+    "records": 20629,
+    "recipe": {
+      "name": "gan_v3",
+      "model": "gan",
+      "z_dim": 4,
+      "num_particles": 20000,
+      "prior_kind": "particles",
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "num_classes": null,
+      "conditioning": "scalar",
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 256,
+      "total_steps": 1200,
+      "lr": 0.00425,
+      "d_lr_mult": 1.0,
+      "prior_lr_mult": 2.0,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "prior_betas": null,
+      "loss_type": "logistic",
+      "gan_mode": "rp",
+      "reg_arm": "b_cap",
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.25,
+      "reg_every": 4,
+      "reg_method": "autograd",
+      "prior_reg": 0.05,
+      "ema_decay": 0.0,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05,
+      "encoder_mode": "none",
+      "routing_temperature": 0.25,
+      "distance_reduction": "sum",
+      "observation_sigma": 0.03,
+      "reconstruction_weight": 1.0
+    },
+    "optimizers": {
+      "generator": {
+        "name": "Adam",
+        "lr": 0.0003,
+        "betas": [
+          0.5,
+          0.99
+        ]
+      },
+      "discriminator": {
+        "name": "Adam",
+        "lr": 0.0002,
+        "betas": [
+          0.5,
+          0.99
+        ]
+      }
+    },
+    "main_deadband": 0.12,
+    "initial_policy": null,
+    "world_checkpoint": "/ml2/hypergan/ParticleGAN-lunar-fast/results/gym/lunar_systematic_audit/calibrated_world/power_world.pt"
+  },
+  "high_rising_action_errors": {
+    "high_rising_rows": 42,
+    "high_rising_expert_off_rows": 42,
+    "wrong_up_on_expert_off": 1,
+    "wrong_down_on_expert_off": 0,
+    "wrong_nonzero_on_expert_off": 1,
+    "high_rising_expert_up_rows": 0,
+    "high_rising_expert_down_rows": 0,
+    "action_mse_all": 0.005752097349613905
+  },
+  "validation": {
+    "episodes": 20,
+    "success_count": 20,
+    "success_rate": 1.0,
+    "mean_steps": 210.8,
+    "mean_success_steps": 210.8,
+    "mean_contact_step": 166.7,
+    "mean_return": 281.1966366552548,
+    "outcomes": {
+      "successful_landing": 20,
+      "crash": 0,
+      "out_of_bounds": 0,
+      "time_limit": 0,
+      "other_termination": 0
+    }
+  },
+  "validation_episodes": [
+    {
+      "seed": 34000,
+      "outcome": "successful_landing",
+      "steps": 231,
+      "return": 300.1457750337819
+    },
+    {
+      "seed": 34001,
+      "outcome": "successful_landing",
+      "steps": 216,
+      "return": 281.45012349578246
+    },
+    {
+      "seed": 34002,
+      "outcome": "successful_landing",
+      "steps": 190,
+      "return": 278.0264646033753
+    },
+    {
+      "seed": 34003,
+      "outcome": "successful_landing",
+      "steps": 199,
+      "return": 264.5854961198288
+    },
+    {
+      "seed": 34004,
+      "outcome": "successful_landing",
+      "steps": 226,
+      "return": 284.2407667960594
+    },
+    {
+      "seed": 34005,
+      "outcome": "successful_landing",
+      "steps": 216,
+      "return": 261.9459710501781
+    },
+    {
+      "seed": 34006,
+      "outcome": "successful_landing",
+      "steps": 192,
+      "return": 288.60434492412986
+    },
+    {
+      "seed": 34007,
+      "outcome": "successful_landing",
+      "steps": 193,
+      "return": 262.9930958596793
+    },
+    {
+      "seed": 34008,
+      "outcome": "successful_landing",
+      "steps": 215,
+      "return": 272.52418942211034
+    },
+    {
+      "seed": 34009,
+      "outcome": "successful_landing",
+      "steps": 203,
+      "return": 289.7706386315366
+    },
+    {
+      "seed": 34010,
+      "outcome": "successful_landing",
+      "steps": 205,
+      "return": 293.0874536228613
+    },
+    {
+      "seed": 34011,
+      "outcome": "successful_landing",
+      "steps": 188,
+      "return": 282.24415648227045
+    },
+    {
+      "seed": 34012,
+      "outcome": "successful_landing",
+      "steps": 238,
+      "return": 293.8037323943911
+    },
+    {
+      "seed": 34013,
+      "outcome": "successful_landing",
+      "steps": 214,
+      "return": 280.12604605792774
+    },
+    {
+      "seed": 34014,
+      "outcome": "successful_landing",
+      "steps": 192,
+      "return": 278.95659885325085
+    },
+    {
+      "seed": 34015,
+      "outcome": "successful_landing",
+      "steps": 243,
+      "return": 310.291638309972
+    },
+    {
+      "seed": 34016,
+      "outcome": "successful_landing",
+      "steps": 223,
+      "return": 269.1899607102765
+    },
+    {
+      "seed": 34017,
+      "outcome": "successful_landing",
+      "steps": 239,
+      "return": 290.29340819730226
+    },
+    {
+      "seed": 34018,
+      "outcome": "successful_landing",
+      "steps": 201,
+      "return": 268.3459686261423
+    },
+    {
+      "seed": 34019,
+      "outcome": "successful_landing",
+      "steps": 192,
+      "return": 273.30690391423826
+    }
+  ],
+  "train_cohort": {
+    "episodes": 92,
+    "success_count": 92,
+    "success_rate": 1.0,
+    "mean_steps": 218.15217391304347,
+    "mean_success_steps": 218.15217391304347,
+    "mean_contact_step": 174.4891304347826,
+    "mean_return": 276.3060277265464,
+    "outcomes": {
+      "successful_landing": 92,
+      "crash": 0,
+      "out_of_bounds": 0,
+      "time_limit": 0,
+      "other_termination": 0
+    }
+  },
+  "train_cohort_episodes": [
+    {
+      "seed": 24000,
+      "outcome": "successful_landing",
+      "steps": 190,
+      "return": 278.77637260022175
+    },
+    {
+      "seed": 24001,
+      "outcome": "successful_landing",
+      "steps": 233,
+      "return": 296.98172034613947
+    },
+    {
+      "seed": 24002,
+      "outcome": "successful_landing",
+      "steps": 188,
+      "return": 274.86405279179235
+    },
+    {
+      "seed": 24003,
+      "outcome": "successful_landing",
+      "steps": 214,
+      "return": 256.9707889295307
+    },
+    {
+      "seed": 24004,
+      "outcome": "successful_landing",
+      "steps": 203,
+      "return": 256.1666935118116
+    },
+    {
+      "seed": 24005,
+      "outcome": "successful_landing",
+      "steps": 205,
+      "return": 274.88508394294365
+    },
+    {
+      "seed": 24006,
+      "outcome": "successful_landing",
+      "steps": 194,
+      "return": 263.4104190078856
+    },
+    {
+      "seed": 24007,
+      "outcome": "successful_landing",
+      "steps": 213,
+      "return": 279.9372101529702
+    },
+    {
+      "seed": 24008,
+      "outcome": "successful_landing",
+      "steps": 212,
+      "return": 266.0090303791527
+    },
+    {
+      "seed": 24010,
+      "outcome": "successful_landing",
+      "steps": 235,
+      "return": 278.4358187655315
+    },
+    {
+      "seed": 24011,
+      "outcome": "successful_landing",
+      "steps": 195,
+      "return": 264.90757760001213
+    },
+    {
+      "seed": 24012,
+      "outcome": "successful_landing",
+      "steps": 266,
+      "return": 289.3801304675236
+    },
+    {
+      "seed": 24013,
+      "outcome": "successful_landing",
+      "steps": 244,
+      "return": 286.82770425955414
+    },
+    {
+      "seed": 24014,
+      "outcome": "successful_landing",
+      "steps": 214,
+      "return": 275.7364003979895
+    },
+    {
+      "seed": 24015,
+      "outcome": "successful_landing",
+      "steps": 273,
+      "return": 292.89022202633794
+    },
+    {
+      "seed": 24016,
+      "outcome": "successful_landing",
+      "steps": 199,
+      "return": 291.4008018421508
+    },
+    {
+      "seed": 24017,
+      "outcome": "successful_landing",
+      "steps": 198,
+      "return": 276.14923918593206
+    },
+    {
+      "seed": 24018,
+      "outcome": "successful_landing",
+      "steps": 215,
+      "return": 259.2178668944566
+    },
+    {
+      "seed": 24019,
+      "outcome": "successful_landing",
+      "steps": 220,
+      "return": 292.7582885145234
+    },
+    {
+      "seed": 24020,
+      "outcome": "successful_landing",
+      "steps": 206,
+      "return": 260.2679476067497
+    },
+    {
+      "seed": 24021,
+      "outcome": "successful_landing",
+      "steps": 244,
+      "return": 292.0612985596407
+    },
+    {
+      "seed": 24022,
+      "outcome": "successful_landing",
+      "steps": 252,
+      "return": 298.8833844497457
+    },
+    {
+      "seed": 24023,
+      "outcome": "successful_landing",
+      "steps": 201,
+      "return": 236.74589211569287
+    },
+    {
+      "seed": 24024,
+      "outcome": "successful_landing",
+      "steps": 235,
+      "return": 291.068072277507
+    },
+    {
+      "seed": 24025,
+      "outcome": "successful_landing",
+      "steps": 194,
+      "return": 256.7785585278866
+    },
+    {
+      "seed": 24026,
+      "outcome": "successful_landing",
+      "steps": 200,
+      "return": 295.4823242405581
+    },
+    {
+      "seed": 24028,
+      "outcome": "successful_landing",
+      "steps": 231,
+      "return": 272.04172711231377
+    },
+    {
+      "seed": 24029,
+      "outcome": "successful_landing",
+      "steps": 197,
+      "return": 260.25934995266175
+    },
+    {
+      "seed": 24030,
+      "outcome": "successful_landing",
+      "steps": 212,
+      "return": 268.27979711454225
+    },
+    {
+      "seed": 24031,
+      "outcome": "successful_landing",
+      "steps": 202,
+      "return": 270.7985773594214
+    },
+    {
+      "seed": 24032,
+      "outcome": "successful_landing",
+      "steps": 223,
+      "return": 271.8204520881636
+    },
+    {
+      "seed": 24033,
+      "outcome": "successful_landing",
+      "steps": 188,
+      "return": 267.1749097191619
+    },
+    {
+      "seed": 24034,
+      "outcome": "successful_landing",
+      "steps": 208,
+      "return": 238.98969460343724
+    },
+    {
+      "seed": 24035,
+      "outcome": "successful_landing",
+      "steps": 261,
+      "return": 302.0680761082547
+    },
+    {
+      "seed": 24036,
+      "outcome": "successful_landing",
+      "steps": 226,
+      "return": 283.37131459676704
+    },
+    {
+      "seed": 24037,
+      "outcome": "successful_landing",
+      "steps": 255,
+      "return": 295.24992135857894
+    },
+    {
+      "seed": 24038,
+      "outcome": "successful_landing",
+      "steps": 276,
+      "return": 288.57493001893926
+    },
+    {
+      "seed": 24039,
+      "outcome": "successful_landing",
+      "steps": 211,
+      "return": 257.6148417079068
+    },
+    {
+      "seed": 24040,
+      "outcome": "successful_landing",
+      "steps": 196,
+      "return": 243.9011201137871
+    },
+    {
+      "seed": 24041,
+      "outcome": "successful_landing",
+      "steps": 231,
+      "return": 293.8439283376846
+    },
+    {
+      "seed": 24042,
+      "outcome": "successful_landing",
+      "steps": 258,
+      "return": 296.61893011496795
+    },
+    {
+      "seed": 24043,
+      "outcome": "successful_landing",
+      "steps": 240,
+      "return": 292.3689125561775
+    },
+    {
+      "seed": 24044,
+      "outcome": "successful_landing",
+      "steps": 270,
+      "return": 290.0155346414489
+    },
+    {
+      "seed": 24045,
+      "outcome": "successful_landing",
+      "steps": 180,
+      "return": 281.00994168115335
+    },
+    {
+      "seed": 24046,
+      "outcome": "successful_landing",
+      "steps": 211,
+      "return": 275.1054160225266
+    },
+    {
+      "seed": 24047,
+      "outcome": "successful_landing",
+      "steps": 211,
+      "return": 286.317001487389
+    },
+    {
+      "seed": 24048,
+      "outcome": "successful_landing",
+      "steps": 212,
+      "return": 264.575174951437
+    },
+    {
+      "seed": 24049,
+      "outcome": "successful_landing",
+      "steps": 209,
+      "return": 277.04499095021083
+    },
+    {
+      "seed": 24050,
+      "outcome": "successful_landing",
+      "steps": 216,
+      "return": 263.4366629978471
+    },
+    {
+      "seed": 24051,
+      "outcome": "successful_landing",
+      "steps": 245,
+      "return": 304.37996811471294
+    },
+    {
+      "seed": 24052,
+      "outcome": "successful_landing",
+      "steps": 220,
+      "return": 275.3307489850554
+    },
+    {
+      "seed": 24053,
+      "outcome": "successful_landing",
+      "steps": 216,
+      "return": 273.64165451337317
+    },
+    {
+      "seed": 24054,
+      "outcome": "successful_landing",
+      "steps": 196,
+      "return": 257.6951095605072
+    },
+    {
+      "seed": 24055,
+      "outcome": "successful_landing",
+      "steps": 220,
+      "return": 270.15573680737
+    },
+    {
+      "seed": 24056,
+      "outcome": "successful_landing",
+      "steps": 190,
+      "return": 273.32427226779976
+    },
+    {
+      "seed": 24057,
+      "outcome": "successful_landing",
+      "steps": 223,
+      "return": 292.5104832201546
+    },
+    {
+      "seed": 24058,
+      "outcome": "successful_landing",
+      "steps": 204,
+      "return": 273.37237033089355
+    },
+    {
+      "seed": 24059,
+      "outcome": "successful_landing",
+      "steps": 205,
+      "return": 277.2115433009084
+    },
+    {
+      "seed": 24060,
+      "outcome": "successful_landing",
+      "steps": 320,
+      "return": 275.25508158218986
+    },
+    {
+      "seed": 24061,
+      "outcome": "successful_landing",
+      "steps": 204,
+      "return": 303.4174160761021
+    },
+    {
+      "seed": 24062,
+      "outcome": "successful_landing",
+      "steps": 194,
+      "return": 245.82063654808772
+    },
+    {
+      "seed": 24063,
+      "outcome": "successful_landing",
+      "steps": 242,
+      "return": 295.68729178461444
+    },
+    {
+      "seed": 24064,
+      "outcome": "successful_landing",
+      "steps": 252,
+      "return": 288.6143058094011
+    },
+    {
+      "seed": 24065,
+      "outcome": "successful_landing",
+      "steps": 220,
+      "return": 269.95250975643427
+    },
+    {
+      "seed": 24066,
+      "outcome": "successful_landing",
+      "steps": 199,
+      "return": 277.0361692065113
+    },
+    {
+      "seed": 24067,
+      "outcome": "successful_landing",
+      "steps": 201,
+      "return": 266.7370471535765
+    },
+    {
+      "seed": 24068,
+      "outcome": "successful_landing",
+      "steps": 233,
+      "return": 271.5459226442186
+    },
+    {
+      "seed": 24069,
+      "outcome": "successful_landing",
+      "steps": 212,
+      "return": 258.50453607954444
+    },
+    {
+      "seed": 24070,
+      "outcome": "successful_landing",
+      "steps": 199,
+      "return": 251.64292049970203
+    },
+    {
+      "seed": 24071,
+      "outcome": "successful_landing",
+      "steps": 200,
+      "return": 244.0175206105157
+    },
+    {
+      "seed": 24072,
+      "outcome": "successful_landing",
+      "steps": 205,
+      "return": 292.05026191272555
+    },
+    {
+      "seed": 24073,
+      "outcome": "successful_landing",
+      "steps": 209,
+      "return": 274.56454519764173
+    },
+    {
+      "seed": 24074,
+      "outcome": "successful_landing",
+      "steps": 225,
+      "return": 285.4453961911321
+    },
+    {
+      "seed": 24075,
+      "outcome": "successful_landing",
+      "steps": 243,
+      "return": 286.9232652079727
+    },
+    {
+      "seed": 24076,
+      "outcome": "successful_landing",
+      "steps": 219,
+      "return": 287.6946640500344
+    },
+    {
+      "seed": 24077,
+      "outcome": "successful_landing",
+      "steps": 191,
+      "return": 265.7589580748036
+    },
+    {
+      "seed": 24078,
+      "outcome": "successful_landing",
+      "steps": 199,
+      "return": 282.06448971854
+    },
+    {
+      "seed": 24079,
+      "outcome": "successful_landing",
+      "steps": 250,
+      "return": 295.31254114246326
+    },
+    {
+      "seed": 24081,
+      "outcome": "successful_landing",
+      "steps": 220,
+      "return": 285.0911245788874
+    },
+    {
+      "seed": 24082,
+      "outcome": "successful_landing",
+      "steps": 233,
+      "return": 284.896345331046
+    },
+    {
+      "seed": 24083,
+      "outcome": "successful_landing",
+      "steps": 209,
+      "return": 251.5379232345563
+    },
+    {
+      "seed": 24084,
+      "outcome": "successful_landing",
+      "steps": 199,
+      "return": 294.7757911789041
+    },
+    {
+      "seed": 24085,
+      "outcome": "successful_landing",
+      "steps": 229,
+      "return": 287.30284012729646
+    },
+    {
+      "seed": 24086,
+      "outcome": "successful_landing",
+      "steps": 223,
+      "return": 277.3709341131976
+    },
+    {
+      "seed": 24087,
+      "outcome": "successful_landing",
+      "steps": 200,
+      "return": 255.1675543127776
+    },
+    {
+      "seed": 24088,
+      "outcome": "successful_landing",
+      "steps": 228,
+      "return": 304.4437259981895
+    },
+    {
+      "seed": 24090,
+      "outcome": "successful_landing",
+      "steps": 209,
+      "return": 265.5319730235251
+    },
+    {
+      "seed": 24091,
+      "outcome": "successful_landing",
+      "steps": 192,
+      "return": 283.8970718419889
+    },
+    {
+      "seed": 24092,
+      "outcome": "successful_landing",
+      "steps": 205,
+      "return": 246.02852702413804
+    },
+    {
+      "seed": 24093,
+      "outcome": "successful_landing",
+      "steps": 227,
+      "return": 297.71865350157634
+    },
+    {
+      "seed": 24094,
+      "outcome": "successful_landing",
+      "steps": 196,
+      "return": 265.2757928515524
+    },
+    {
+      "seed": 24095,
+      "outcome": "successful_landing",
+      "steps": 197,
+      "return": 277.9748223886305
+    }
+  ]
+}
