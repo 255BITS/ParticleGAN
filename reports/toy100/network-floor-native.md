@@ -36,3 +36,25 @@ held pending a shared transfer recipe that passes all nine bottleneck hosts;
 the floor-0.005 transfer candidate was 8/9 because `img_bars4` missed one
 required sustained checkpoint. This grid-only diagnostic is not common-22
 evidence.
+
+## Floor 0.01 follow-up
+
+The predeclared floor-0.01 variant changes only the name and G/D floor from
+the floor-0.005 configuration. It passed the nine frozen transfer bottlenecks,
+but the full 19-host replay was 18/19: `residual_student` failed. Its matching
+grid100 native run passed both individual gates. Live 20k final HQ was 0.98285,
+mass TV 0.0447, center RMS 0.1291σ, covariance-trace bias −0.0378, and radial
+KS 0.01663. The independent 100k holdout passed with HQ 0.98168, mass TV
+0.03704, center RMS 0.11213σ, covariance bias −0.03767, and radial KS
+0.01438. Live accuracy first passed at step 6000 and passed each of the five
+terminal checks.
+
+Because transfer failed, the all-three CLI was intentionally interrupted
+after grid100 completed. `rotated100` was interrupted during step-0 evaluation
+and `staggered100` was never started; both are explicitly excluded from
+numerical success/failure counts in `interruption.json`. The complete RAM tree
+was copied to
+[`artifacts/toy100-accuracy/network-floor010-native/all3-run`](../../artifacts/toy100-accuracy/network-floor010-native/all3-run),
+all 59 files matched by SHA-256, the 23-file source archive verified, and both
+grid100 gates passed again from the isolated floor worktree after relocation.
+The RAM original remains intact. This variant is also not common-22 evidence.
