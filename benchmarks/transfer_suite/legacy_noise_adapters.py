@@ -10,6 +10,7 @@ update and place its checkpoints in ``evaluation`` to isolate training RNG.
 from __future__ import annotations
 
 from contextlib import contextmanager
+import hashlib
 import math
 import time
 
@@ -17,7 +18,8 @@ import torch
 from torch import nn
 
 from benchmarks.toy100.models import (
-    LearnableOutputScale, linear_input_noise, linear_output_noise,
+    LearnableOutputScale, OUTPUT_NOISE_SEED_OFFSET, linear_input_noise,
+    linear_output_noise,
 )
 
 
@@ -34,6 +36,10 @@ EVAL_SCOPES = {
 }
 
 
+def _rng_state_sha256(stream: torch.Generator) -> str:
+    return hashlib.sha256(stream.get_state().cpu().numpy().tobytes()).hexdigest()
+
+
 class NoisePolicy:
     """One target-agnostic noise rule with separate D and evaluation streams."""
 
@@ -41,6 +47,7 @@ class NoisePolicy:
         self, output_std: float, input_std: float, input_anneal_end: float,
         total_steps: int, *, seed: int = 0, output_noise_warmup: float = 0.0,
         output_noise_learnable: bool = False,
+        output_noise_rng: str | None = None,
     ) -> None:
         if not math.isfinite(output_std) or output_std < 0:
             raise ValueError("output_std must be finite and nonnegative")
@@ -56,6 +63,10 @@ class NoisePolicy:
             raise ValueError("output_noise_learnable must be a boolean")
         if output_noise_learnable and output_std <= 0:
             raise ValueError("output_noise_learnable requires output_std > 0")
+        if output_noise_rng not in (None, "isolated"):
+            raise ValueError("output_noise_rng must be 'isolated' when declared")
+        if output_noise_rng == "isolated" and output_std <= 0:
+            raise ValueError("isolated output_noise_rng requires output_std > 0")
         # Validate the fraction with the same function as the trainer hosts.
         linear_input_noise(input_std, 0, total_steps, input_anneal_end)
         self.output_std = float(output_std)
@@ -77,6 +88,15 @@ class NoisePolicy:
         self.total_steps = total_steps
         self.seed = seed
         self.input_stream = torch.Generator(device="cpu").manual_seed(seed + 901)
+        self.output_noise_rng = output_noise_rng
+        self.output_stream = (
+            torch.Generator(device="cpu").manual_seed(seed + OUTPUT_NOISE_SEED_OFFSET)
+            if output_noise_rng == "isolated" else None
+        )
+        self._output_stream_initial_sha256 = (
+            _rng_state_sha256(self.output_stream) if self.output_stream is not None else None
+        )
+        self._output_eval_state_pairs: list[dict] = []
         self.input_sigma = 0.0
         self._evaluating = False
         self._step_calls = 0
@@ -184,7 +204,8 @@ class NoisePolicy:
         if self.output_sigma == 0.0:
             return generated
         self._counts[key + "_elements"] += generated.numel()
-        # Match the ordinary OutputNoise wrapper's global training stream.
+        # Historical output noise consumes the global training stream. The
+        # optional policy draws from a dedicated, fixed-seed stream instead.
         if self.output_scale is None:
             sigma = self.output_sigma
         else:
@@ -192,7 +213,14 @@ class NoisePolicy:
             if (self._detach_output_scale or self._evaluating
                     or generator_step is False):
                 sigma = sigma.detach()
-        return generated + sigma * torch.randn_like(generated)
+        if self.output_stream is None:
+            noise = torch.randn_like(generated)
+        else:
+            noise = torch.randn(
+                generated.shape, generator=self.output_stream,
+                device=generated.device, dtype=generated.dtype,
+            )
+        return generated + sigma * noise
 
     def input(self, data: torch.Tensor) -> torch.Tensor:
         """Perturb only the critic's data coordinates, never its conditioning."""
@@ -216,6 +244,10 @@ class NoisePolicy:
         if type(step) is not int or step < 0:
             raise ValueError("evaluation step must be a nonnegative integer")
         saved_d = self.input_stream.get_state()
+        saved_output = (self.output_stream.get_state().clone()
+                        if self.output_stream is not None else None)
+        output_state_before = (_rng_state_sha256(self.output_stream)
+                               if self.output_stream is not None else None)
         previous = self._evaluating
         previous_detach = self._detach_output_scale
         previous_output_sigma = self.output_sigma
@@ -223,6 +255,10 @@ class NoisePolicy:
             with torch.random.fork_rng(devices=[]):
                 torch.random.default_generator.manual_seed(self.seed + 402 + step)
                 self.input_stream.manual_seed(self.seed + 1402 + step)
+                if self.output_stream is not None:
+                    self.output_stream.manual_seed(
+                        self.seed + 402 + step + OUTPUT_NOISE_SEED_OFFSET,
+                    )
                 self.output_sigma = self._output_sigma_for(step)
                 self._evaluating = True
                 self._detach_output_scale = True
@@ -232,13 +268,20 @@ class NoisePolicy:
             self._detach_output_scale = previous_detach
             self.output_sigma = previous_output_sigma
             self.input_stream.set_state(saved_d)
+            if self.output_stream is not None:
+                self.output_stream.set_state(saved_output)
+                self._output_eval_state_pairs.append({
+                    "step": step,
+                    "before_sha256": output_state_before,
+                    "after_sha256": _rng_state_sha256(self.output_stream),
+                })
 
     def receipt(self) -> dict:
         """Report actual host call coverage, not merely configured intent."""
         live_scale = (self._scale_value() if self._final_live_scale is None
                       else self._final_live_scale)
         ema_scale = self._final_ema_scale
-        return {
+        receipt = {
             "output_std": self.output_std,
             "output_noise_learnable": self.output_noise_learnable,
             "output_scale_parameter_count": len(self.scale_parameters()),
@@ -285,6 +328,21 @@ class NoisePolicy:
             "train_input_applied": bool(self._counts["input_train_elements"]),
             "eval_output_applied": bool(self._counts["output_eval_elements"]),
         }
+        if self.output_stream is not None:
+            receipt.update({
+                "output_noise_rng": "isolated",
+                "output_noise_seed_offset": OUTPUT_NOISE_SEED_OFFSET,
+                "output_noise_seed": self.seed + OUTPUT_NOISE_SEED_OFFSET,
+                "output_noise_training_stream_isolated": True,
+                "output_noise_train_state_initial_sha256": self._output_stream_initial_sha256,
+                "output_noise_train_state_final_sha256": _rng_state_sha256(self.output_stream),
+                "output_noise_eval_state_pairs": self._output_eval_state_pairs,
+                "output_noise_eval_state_preserved": all(
+                    row["before_sha256"] == row["after_sha256"]
+                    for row in self._output_eval_state_pairs
+                ),
+            })
+        return receipt
 
 
 class _OutputAdapter(nn.Module):
@@ -345,6 +403,7 @@ def run_legacy(spec: dict, recipe, noise: dict, *, model_policy: dict | None = N
         noise["input_noise_anneal_end"], spec["steps"], seed=0,
         output_noise_warmup=noise.get("output_noise_warmup", 0.0),
         output_noise_learnable=noise.get("output_noise_learnable", False),
+        output_noise_rng=noise.get("output_noise_rng"),
     )
     schedule = vector_tasks.fixed_policy("cosine")
     cap = (model_policy or {}).get("network_lr_horizon_cap")

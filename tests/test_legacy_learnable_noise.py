@@ -165,3 +165,30 @@ def test_two_pole_direct_particles_keep_prior_role_while_scalar_is_generator(
 def test_invalid_legacy_learnable_policy_is_rejected(learnable, std):
     with pytest.raises(ValueError, match="output_noise_learnable"):
         NoisePolicy(std, 0.5, 0.5, 2, output_noise_learnable=learnable)
+
+
+@pytest.mark.parametrize("host", (
+    "two_pole", "trajectory", "residual_student", "unipolar",
+    "ae_gan_hold", "cover_leftover", "unused_token_hold",
+    "mid_scale_identity", "mode_hold",
+))
+def test_isolated_output_draws_reach_every_legacy_host_without_advancing_data_rng(
+    host, monkeypatch,
+):
+    control = NoisePolicy(0.0, 0.5, 0.5, 2)
+    _run(host, control, monkeypatch)
+    control_global = torch.random.get_rng_state().clone()
+
+    isolated = NoisePolicy(0.029, 0.5, 0.5, 2,
+                           output_noise_rng="isolated")
+    _run(host, isolated, monkeypatch)
+    receipt = isolated.receipt()
+    assert torch.equal(control_global, torch.random.get_rng_state())
+    assert receipt["step_calls"] == 2
+    assert receipt["output_train_elements"] > 0
+    assert receipt["input_train_elements"] > 0
+    assert receipt["output_noise_training_stream_isolated"] is True
+    assert receipt["output_noise_eval_state_preserved"] is True
+    if host in ("trajectory", "residual_student", "ae_gan_hold", "mode_hold"):
+        assert receipt["output_eval_calls"] > 0
+        assert receipt["output_noise_eval_state_pairs"]

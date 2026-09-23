@@ -12,6 +12,7 @@ python -u -m benchmarks.transfer_suite.toy100_compatibility \
 from __future__ import annotations
 
 import argparse
+from contextlib import nullcontext
 from copy import deepcopy
 import gzip
 import hashlib
@@ -25,7 +26,9 @@ import traceback
 import torch
 
 from benchmarks.toy100.models import (
-    InputNoise, OutputNoise, linear_input_noise,
+    InputNoise, IsolatedOutputNoise, OutputNoise, OUTPUT_NOISE_SEED_OFFSET,
+    StatefulInputNoise,
+    paired_output_noise, linear_input_noise,
     linear_output_noise as output_noise_at,
 )
 from benchmarks.toy100.train import load_config, resolve_config
@@ -99,12 +102,23 @@ def declared_recipe(config: dict):
     if (isinstance(output_warmup, bool) or not isinstance(output_warmup, (int, float))
             or not math.isfinite(output_warmup) or not 0 <= output_warmup <= 1):
         raise ValueError("output_noise_warmup must be a finite fraction in [0, 1]")
+    # This is a common noise mechanism, not a host resource override. Omit it
+    # from historical protocols when undeclared so old records retain their
+    # exact recipe/noise identity.
+    output_rng_declared = "output_noise_rng" in candidate
+    output_rng = candidate.pop("output_noise_rng", None)
+    if output_rng_declared and output_rng != "isolated":
+        raise ValueError("output_noise_rng must be 'isolated' when declared")
     resolved, _ = resolve_config(candidate)
     globals_only = {name: resolved[name] for name in GLOBAL_RECIPE_FIELDS}
     recipe = get_recipe(**globals_only).replace(name=str(config.get("name", "toy100_transfer")))
     noise = {name: resolved[name] for name in
              ("output_noise_std", "input_noise_std", "input_noise_anneal_end")}
     noise["output_noise_warmup"] = float(output_warmup)
+    if output_rng_declared:
+        if noise["output_noise_std"] <= 0:
+            raise ValueError("isolated output_noise_rng requires output_noise_std > 0")
+        noise["output_noise_rng"] = output_rng
     # Omit the optional false value so archived fixed-noise protocols keep
     # their original canonical noise identity. True is always explicit.
     if resolved.get("output_noise_learnable", False):
@@ -115,6 +129,10 @@ def declared_recipe(config: dict):
 def _effective_output_std(model) -> float:
     value = model.effective_std()
     return float(value.detach()) if isinstance(value, torch.Tensor) else float(value)
+
+
+def _output_stream_sha256(model) -> str:
+    return hashlib.sha256(model.noise_stream.get_state().cpu().numpy().tobytes()).hexdigest()
 
 
 def _native_noise_receipt(context, noise, spec, result):
@@ -160,6 +178,26 @@ def _native_noise_receipt(context, noise, spec, result):
         receipt["output_sigma_effective_ema_final_evaluation"] = _effective_output_std(
             trainer.ema_G,
         )
+    if noise.get("output_noise_rng") == "isolated":
+        pairs = context["output_eval_state_pairs"]
+        receipt.update(
+            output_noise_rng="isolated",
+            output_noise_seed_offset=OUTPUT_NOISE_SEED_OFFSET,
+            output_noise_seed=OUTPUT_NOISE_SEED_OFFSET,
+            output_noise_training_stream_isolated=True,
+            output_noise_train_state_initial_sha256=context["output_stream_initial_sha256"],
+            output_noise_train_state_final_sha256=_output_stream_sha256(trainer.G),
+            output_noise_eval_state_pairs=pairs,
+            output_noise_eval_state_preserved=bool(pairs) and all(
+                row["live_before_sha256"] == row["live_after_sha256"]
+                and row["ema_before_sha256"] == row["ema_after_sha256"]
+                for row in pairs
+            ),
+            output_train_calls=int(trainer.G.noise_draw_calls),
+            output_train_elements=int(trainer.G.noise_draw_elements),
+            output_eval_calls=context["output_eval_calls"],
+            output_eval_elements=context["output_eval_elements"],
+        )
     return receipt
 
 
@@ -178,26 +216,42 @@ def setup_vector(spec, card, base, noise):
     generator_base_parameters = sum(p.numel() for p in generator.parameters())
     discriminator = vector_discriminator(spec, card)
     if noise["output_noise_std"]:
-        generator = OutputNoise(
-            generator, noise["output_noise_std"],
-            learnable=noise.get("output_noise_learnable", False),
-        )
+        if noise.get("output_noise_rng") == "isolated":
+            generator = IsolatedOutputNoise(
+                generator, noise["output_noise_std"], seed=0,
+                device=torch.device("cpu"),
+                learnable=noise.get("output_noise_learnable", False),
+            )
+        else:
+            generator = OutputNoise(
+                generator, noise["output_noise_std"],
+                learnable=noise.get("output_noise_learnable", False),
+            )
     output_scale_initial = (float(generator.output_scale().detach())
                             if noise.get("output_noise_learnable", False) else None)
     if noise["input_noise_std"]:
-        discriminator = InputNoise(discriminator, seed=901, device=torch.device("cpu"))
+        input_wrapper = (StatefulInputNoise if noise.get("output_noise_rng") == "isolated"
+                         else InputNoise)
+        discriminator = input_wrapper(discriminator, seed=901, device=torch.device("cpu"))
     trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
                          latent_generator=latent_rng, penalty_generator=penalty_rng)
     # Shape probing must not consume the generator's training-noise stream.
-    with torch.random.fork_rng(devices=[]):
+    isolated = noise.get("output_noise_rng") == "isolated"
+    shape_noise = (paired_output_noise((trainer.G, trainer.ema_G), seed=402)
+                   if isolated else nullcontext())
+    with torch.random.fork_rng(devices=[]), shape_noise:
         shapes = shape_receipt(trainer, cfg["batch"], (2,))
     # Match the noise wrapper's declared fixed-seed stream after construction.
-    if noise["output_noise_std"]:
+    if noise["output_noise_std"] and not isolated:
         torch.manual_seed(0)
     return dict(trainer=trainer, cfg=cfg, data_rng=data_rng, shapes=shapes,
                 applied=optimizer_receipts(trainer), host_recipe=recipe,
                 generator_base_parameters=generator_base_parameters,
-                output_scale_initial=output_scale_initial)
+                output_scale_initial=output_scale_initial,
+                output_stream_initial_sha256=(
+                    _output_stream_sha256(trainer.G) if isolated else None),
+                output_eval_state_pairs=[], output_eval_calls=0,
+                output_eval_elements=0)
 
 
 def run_vector(spec, card, base, noise, *, model_policy=None):
@@ -257,7 +311,19 @@ def run_vector(spec, card, base, noise, *, model_policy=None):
                 )
                 trainer.G.std = evaluated_sigma
                 trainer.ema_G.std = evaluated_sigma
-            with torch.no_grad(), torch.random.fork_rng(devices=[]):
+            paired = (paired_output_noise((trainer.G, trainer.ema_G), seed=402)
+                      if noise.get("output_noise_rng") == "isolated" else nullcontext())
+            if noise.get("output_noise_rng") == "isolated":
+                before_live = _output_stream_sha256(trainer.G)
+                before_ema = _output_stream_sha256(trainer.ema_G)
+            with torch.no_grad(), torch.random.fork_rng(devices=[]), paired:
+                if noise.get("output_noise_rng") == "isolated":
+                    before_draws = (
+                        int(trainer.G.noise_draw_calls),
+                        int(trainer.G.noise_draw_elements),
+                        int(trainer.ema_G.noise_draw_calls),
+                        int(trainer.ema_G.noise_draw_elements),
+                    )
                 def measure(model, prior):
                     torch.manual_seed(402)
                     latent = prior.sample(vector_tasks.EVAL_SAMPLES,
@@ -266,6 +332,23 @@ def run_vector(spec, card, base, noise, *, model_policy=None):
 
                 live = measure(trainer.G, trainer.prior)
                 ema = measure(trainer.ema_G, trainer.ema_prior)
+                if noise.get("output_noise_rng") == "isolated":
+                    context["output_eval_calls"] += (
+                        int(trainer.G.noise_draw_calls) - before_draws[0]
+                        + int(trainer.ema_G.noise_draw_calls) - before_draws[2]
+                    )
+                    context["output_eval_elements"] += (
+                        int(trainer.G.noise_draw_elements) - before_draws[1]
+                        + int(trainer.ema_G.noise_draw_elements) - before_draws[3]
+                    )
+            if noise.get("output_noise_rng") == "isolated":
+                context["output_eval_state_pairs"].append(dict(
+                    step=completed,
+                    live_before_sha256=before_live,
+                    live_after_sha256=_output_stream_sha256(trainer.G),
+                    ema_before_sha256=before_ema,
+                    ema_after_sha256=_output_stream_sha256(trainer.ema_G),
+                ))
             observations.append(dict(**live, ema=ema, step=completed,
                                      seconds=time.perf_counter() - started,
                                      **({"output_sigma_live": _effective_output_std(trainer.G),
@@ -295,25 +378,41 @@ def setup_image(spec, base, noise):
     generator_base_parameters = sum(p.numel() for p in generator.parameters())
     prior = recipe.make_prior()
     if noise["output_noise_std"]:
-        generator = OutputNoise(
-            generator, noise["output_noise_std"],
-            learnable=noise.get("output_noise_learnable", False),
-        )
+        if noise.get("output_noise_rng") == "isolated":
+            generator = IsolatedOutputNoise(
+                generator, noise["output_noise_std"], seed=0,
+                device=torch.device("cpu"),
+                learnable=noise.get("output_noise_learnable", False),
+            )
+        else:
+            generator = OutputNoise(
+                generator, noise["output_noise_std"],
+                learnable=noise.get("output_noise_learnable", False),
+            )
     output_scale_initial = (float(generator.output_scale().detach())
                             if noise.get("output_noise_learnable", False) else None)
     if noise["input_noise_std"]:
-        discriminator = InputNoise(discriminator, seed=901, device=torch.device("cpu"))
+        input_wrapper = (StatefulInputNoise if noise.get("output_noise_rng") == "isolated"
+                         else InputNoise)
+        discriminator = input_wrapper(discriminator, seed=901, device=torch.device("cpu"))
     global_stream = torch.default_generator
     trainer = GANTrainer(recipe, generator, discriminator, prior=prior, seed=0,
                          latent_generator=global_stream, penalty_generator=global_stream)
-    with torch.random.fork_rng(devices=[]):
+    isolated = noise.get("output_noise_rng") == "isolated"
+    shape_noise = (paired_output_noise((trainer.G, trainer.ema_G), seed=402)
+                   if isolated else nullcontext())
+    with torch.random.fork_rng(devices=[]), shape_noise:
         shapes = shape_receipt(trainer, spec["batch_size"], (1, 8, 8))
-    if noise["output_noise_std"]:
+    if noise["output_noise_std"] and not isolated:
         torch.manual_seed(0)
     return dict(trainer=trainer, centers=centers, shapes=shapes,
                 applied=optimizer_receipts(trainer), host_recipe=recipe,
                 generator_base_parameters=generator_base_parameters,
-                output_scale_initial=output_scale_initial)
+                output_scale_initial=output_scale_initial,
+                output_stream_initial_sha256=(
+                    _output_stream_sha256(trainer.G) if isolated else None),
+                output_eval_state_pairs=[], output_eval_calls=0,
+                output_eval_elements=0)
 
 
 def run_image(spec, base, noise, *, model_policy=None):
@@ -373,9 +472,39 @@ def run_image(spec, base, noise, *, model_policy=None):
                 )
                 trainer.G.std = evaluated_sigma
                 trainer.ema_G.std = evaluated_sigma
-            live = image_tasks.measure(trainer.G, trainer.prior, centers, spec["thresholds"])
-            ema = image_tasks.measure(trainer.ema_G, trainer.ema_prior,
-                                      centers, spec["thresholds"])
+            paired = (paired_output_noise((trainer.G, trainer.ema_G), seed=402 + completed)
+                      if noise.get("output_noise_rng") == "isolated" else nullcontext())
+            if noise.get("output_noise_rng") == "isolated":
+                before_live = _output_stream_sha256(trainer.G)
+                before_ema = _output_stream_sha256(trainer.ema_G)
+            with paired:
+                if noise.get("output_noise_rng") == "isolated":
+                    before_draws = (
+                        int(trainer.G.noise_draw_calls),
+                        int(trainer.G.noise_draw_elements),
+                        int(trainer.ema_G.noise_draw_calls),
+                        int(trainer.ema_G.noise_draw_elements),
+                    )
+                live = image_tasks.measure(trainer.G, trainer.prior, centers, spec["thresholds"])
+                ema = image_tasks.measure(trainer.ema_G, trainer.ema_prior,
+                                          centers, spec["thresholds"])
+                if noise.get("output_noise_rng") == "isolated":
+                    context["output_eval_calls"] += (
+                        int(trainer.G.noise_draw_calls) - before_draws[0]
+                        + int(trainer.ema_G.noise_draw_calls) - before_draws[2]
+                    )
+                    context["output_eval_elements"] += (
+                        int(trainer.G.noise_draw_elements) - before_draws[1]
+                        + int(trainer.ema_G.noise_draw_elements) - before_draws[3]
+                    )
+            if noise.get("output_noise_rng") == "isolated":
+                context["output_eval_state_pairs"].append(dict(
+                    step=completed,
+                    live_before_sha256=before_live,
+                    live_after_sha256=_output_stream_sha256(trainer.G),
+                    ema_before_sha256=before_ema,
+                    ema_after_sha256=_output_stream_sha256(trainer.ema_G),
+                ))
             observations.append(dict(step=completed,
                                      seconds=time.perf_counter() - started,
                                      **live, ema=ema,
@@ -475,13 +604,23 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
             noise_applied = (
                 receipt["step_calls"] == spec["steps"]
                 and (noise["output_noise_std"] == 0 or
-                     receipt["output_module"] == "OutputNoise")
+                     receipt["output_module"] == (
+                         "IsolatedOutputNoise" if noise.get("output_noise_rng") == "isolated"
+                         else "OutputNoise"
+                     ))
                 and (noise["input_noise_std"] == 0 or
-                     receipt["input_module"] == "InputNoise"
+                     receipt["input_module"] == (
+                         "StatefulInputNoise" if noise.get("output_noise_rng") == "isolated"
+                         else "InputNoise"
+                     )
                      and receipt["input_nonzero_steps"] > 0)
                 and (not noise.get("output_noise_learnable", False) or
                      receipt["output_scale_parameter_count"] == 1
                      and receipt["output_scale_optimizer_owned"])
+                and (noise.get("output_noise_rng") != "isolated" or
+                     receipt["output_train_calls"] > 0
+                     and receipt["output_eval_calls"] > 0
+                     and receipt["output_noise_eval_state_preserved"])
             )
         elif receipt is not None and not result.get("error"):
             noise_applied = (
@@ -494,6 +633,12 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
                 and (not noise.get("output_noise_learnable", False) or
                      receipt.get("output_scale_parameter_count") == 1
                      and receipt.get("output_scale_optimizer_owned"))
+                and (noise.get("output_noise_rng") != "isolated" or
+                     receipt.get("output_noise_eval_state_preserved")
+                     and receipt.get("output_train_calls", 0) > 0
+                     and (receipt.get("eval_scope") not in (
+                         "generated_samples", "generated_and_reconstructed_samples",
+                     ) or receipt.get("output_eval_calls", 0) > 0))
             )
         else:
             noise_applied = False
