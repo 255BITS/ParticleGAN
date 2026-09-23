@@ -11,8 +11,8 @@ Every discovered 100-mode trial is retained, including failures and interrupted 
 | `affine-horizon2400/grid100/grid100` | 7000 | FAIL | 37 | 0.4094 | 0.2163 | — | — | — | FAIL |
 | `affine-horizon2400/rotated100/rotated100` | 7000 | PASS | 100 | 0.9768 | 0.0455 | 0.1597 | -0.0313 | 0.0103 | PASS |
 | `affine-horizon2400/staggered100/staggered100` | 7000 | PASS | 100 | 0.9852 | 0.0496 | 0.1376 | -0.0245 | 0.0081 | PASS |
-| `affine-network-best-old-grid/grid100` | 0 | INCOMPLETE | — | — | — | — | — | — | running |
-| `affine-network-best16-rotated/rotated100` | 0 | INCOMPLETE | — | — | — | — | — | — | running |
+| `affine-network-best-old-grid/grid100` | 7000 | FAIL | 100 | 0.9815 | 0.1019 | 0.2375 | -0.0609 | 0.0153 | FAIL |
+| `affine-network-best16-rotated/rotated100` | 7000 | FAIL | 100 | 0.9786 | 0.0425 | 0.1341 | -0.0291 | 0.0113 | PASS |
 | `affine-network-horizon/grid100/grid100` | 7000 | PASS | 100 | 0.9868 | 0.0435 | 0.1502 | -0.0349 | 0.0130 | PASS |
 | `affine-network-horizon/rotated100/rotated100` | 7000 | PASS | 100 | 0.9828 | 0.0471 | 0.1475 | -0.0374 | 0.0146 | PASS |
 | `affine-network-horizon/staggered100/staggered100` | 7000 | PASS | 100 | 0.9872 | 0.0512 | 0.1243 | -0.0336 | 0.0152 | PASS |
@@ -21,6 +21,9 @@ Every discovered 100-mode trial is retained, including failures and interrupted 
 | `ci-common22-fixed/artifacts/toy-suite-ci/toy100/grid100` | 7000 | FAIL | 47 | 0.6250 | 0.2851 | — | — | — | FAIL |
 | `ci-common22-fixed/artifacts/toy-suite-ci/toy100/rotated100` | 7000 | FAIL | 11 | 0.1819 | 0.2245 | — | — | — | FAIL |
 | `ci-common22-fixed/artifacts/toy-suite-ci/toy100/staggered100` | 7000 | FAIL | 45 | 0.7844 | 0.4527 | — | — | — | FAIL |
+| `ci-common22-learned-support/artifacts/toy-suite-ci/toy100/grid100` | 7000 | FAIL | 47 | 0.6250 | 0.2851 | — | — | — | FAIL |
+| `ci-common22-learned-support/artifacts/toy-suite-ci/toy100/rotated100` | 7000 | FAIL | 11 | 0.1819 | 0.2245 | — | — | — | FAIL |
+| `ci-common22-learned-support/artifacts/toy-suite-ci/toy100/staggered100` | 7000 | FAIL | 45 | 0.7844 | 0.4527 | — | — | — | FAIL |
 | `ci-original-coverage/artifacts/toy100-ci/grid100` | 7000 | PASS | 100 | 0.9812 | 0.0835 | 0.6638 | -0.1794 | 0.0258 | FAIL |
 | `ci-original-coverage/artifacts/toy100-ci/rotated100` | 7000 | PASS | 100 | 0.9892 | 0.0545 | 0.1749 | -0.1521 | 0.0634 | FAIL |
 | `ci-original-coverage/artifacts/toy100-ci/staggered100` | 7000 | PASS | 100 | 0.9826 | 0.0750 | 0.2397 | -0.1963 | 0.0740 | FAIL |
