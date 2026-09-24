@@ -25,7 +25,7 @@ at update472. No full ring quality verdict is available. An [independent exact a
 isolates float32 strong-Wolfe interpolation overflow. A [bounded finite-trial repair](pr84-critic-refinement-finite-recovery.md)
 recovers the exact best finite critic, leaves44 passing saved-state checks bitwise unchanged,
 and completes twenty saved-state numerical updates; these remain at three modes and do not
-pass acquisition. Its full cold rerun reproduces trajectory and is testing ring acquisition.
+pass acquisition. Its [full cold rerun](pr84-critic-refinement-finite-cold.md) reproduces trajectory but fails ring acquisition:3 modes/HQ .451416,0/24 passing checks. The same three modes appear in every observation from100 onward; no later promotion gate follows.
 This costs roughly53 extra
 1024-pair D gradients per update; fits remain nonconverged. Cold acquisition
 is not yet complete. [Independent warm/hold audit and evidence](pr84-critic-refinement-independent-audit.md),

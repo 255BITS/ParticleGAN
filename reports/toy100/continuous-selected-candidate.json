@@ -1,7 +1,7 @@
 {
   "schema": "continuous-research-candidate-v2",
   "date": "2026-09-24",
-  "status": "research_only_original_cold_error_repaired_cold_running",
+  "status": "research_only_conditional_stability_pass_cold_acquisition_fail",
   "selected": "PR84 plus bounded empirical penalized critic refinement",
   "adapter": "reports/toy100/pr84_critic_refinement.py",
   "adapter_sha256": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11",
@@ -10,12 +10,12 @@
   "cold_adapter_sha256": "742693fe0d1a3186c145490e1576ae4ccf19f8f49d242e9dff2e79543ed8084e",
   "scope": [
     "fixed-target mode_hold warm continuation",
-    "cold mode_hold and trajectory support verified; acquisition pending"
+    "guarded cold trajectory passes; full ring acquisition fails"
   ],
   "production_gate_eligible": false,
   "production_modified": false,
   "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5",
-  "reason": "Original critic refinement passes44 saved-state checks, warm200, dense hold1200 and cold trajectory, but ring aborts at472. A separate bounded finite-trial repair passes exact numerical recovery and44 unchanged finite-path checks; its full cold rerun is running, with trajectory reproduced exactly. No no-decay solution qualifies.",
+  "reason": "Original critic refinement passes44 saved-state checks, warm200 and dense hold1200. Its separately guarded cold epoch fixes numerical trial failure but fails ring acquisition:3 modes/HQ.451416,0/24passing checks; trajectory reproduced exactly. No replacement qualifies.",
   "settings": {
     "g_lr": 0.00425,
     "d_lr": 0.00425,
@@ -162,10 +162,10 @@
   "distribution_shift_required": false,
   "rest_without_signal_allowed": true,
   "previous_reference": "https://github.com/255BITS/ParticleGAN/blob/7fa6e8e/reports/toy100/continuous-selected-candidate.json",
-  "next_research": "complete repaired cold gate; diagnose saved failing state if rejected; own-acquired hold and same-target response only after acquisition passes",
+  "next_research": "saved-state differentiated critic response and early-acquisition diagnosis; no later promotion gates",
   "finite_trial_source_epoch": {
     "method": "pr84_critic_refinement_with_later_nonfinite_trial_rejection",
-    "status": "NUMERICAL_FILTERS_PASS_NEW_COLD_RUNNING",
+    "status": "NUMERICAL_FILTERS_PASS_COLD_RING_FAIL",
     "adapter": "reports/toy100/pr84_critic_refinement_finite.py",
     "adapter_sha256": "e6668d711a4b98fbcb232a3a350e612003e3eacdc5942b6508a9509f98519561",
     "production_gate_eligible": false,
@@ -189,17 +189,989 @@
       "evidence": "continuous-evidence/pr84-critic-refinement-finite-parity/manifest.json"
     },
     "cold": {
-      "status": "RUNNING",
+      "status": "FAIL",
+      "evidence": "continuous-evidence/pr84-critic-refinement-finite-cold/manifest.json",
       "trajectory": {
-        "status": "PASS",
-        "identity_mse": 0.0009098352747969329,
-        "original_final_state_file_exact": true
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "identity_mse",
+              "value": 0.0009098352747969329,
+              "op": "<=",
+              "threshold": 0.02,
+              "status": "PASS",
+              "margin": 0.019090164725203067
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 22,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 22,
+            "first_pass_step": 50,
+            "stable_from_step": 50,
+            "stable_from_seconds": 7.143709829077125,
+            "confirmed_step": 117,
+            "confirmed_seconds": 15.214623376959935
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.2925
+        },
+        "live": {
+          "identity_mse": 0.0009098352747969329
+        },
+        "seconds": 53.86497872509062,
+        "actual_adam_accounting": {
+          "d": {
+            "applied_rates": [
+              0.00425
+            ],
+            "actual_adam_calls": 400,
+            "moment_steps_min": 400,
+            "moment_steps_max": 400
+          },
+          "g": {
+            "applied_rates": [
+              0.00425,
+              0.0085
+            ],
+            "actual_adam_calls": 400,
+            "moment_steps_min": 400,
+            "moment_steps_max": 400
+          }
+        },
+        "finite_final_state": true,
+        "final_state_file_sha256": "bb1d957180c2f358718d0fff52425c015b75d0e7f442c45fa3c8f9279464e060",
+        "fit_gradient_evaluations": 23263,
+        "finite_fit_gradient_evaluations": 23263,
+        "nonfinite_fit_gradient_evaluations": 0,
+        "nonfinite_rejected_updates": [],
+        "fit_budget_exhausted_updates": [
+          2,
+          4,
+          7,
+          17,
+          29,
+          35,
+          41,
+          53,
+          56,
+          62,
+          72,
+          82,
+          87,
+          110,
+          124,
+          133,
+          153,
+          155,
+          166,
+          172,
+          176,
+          188,
+          195,
+          200,
+          207,
+          210,
+          217,
+          224,
+          228,
+          231,
+          257,
+          260,
+          292,
+          295,
+          299,
+          301,
+          302,
+          312,
+          314,
+          325,
+          333,
+          354,
+          360,
+          371,
+          373,
+          383,
+          390,
+          393
+        ],
+        "observations": [
+          {
+            "step": 17,
+            "identity_mse": 0.10814529657363892
+          },
+          {
+            "step": 34,
+            "identity_mse": 0.09703370183706284
+          },
+          {
+            "step": 50,
+            "identity_mse": 0.007441842928528786
+          },
+          {
+            "step": 67,
+            "identity_mse": 0.0015700273215770721
+          },
+          {
+            "step": 84,
+            "identity_mse": 0.001267872634343803
+          },
+          {
+            "step": 100,
+            "identity_mse": 0.0012642102083191276
+          },
+          {
+            "step": 117,
+            "identity_mse": 0.0012239706702530384
+          },
+          {
+            "step": 134,
+            "identity_mse": 0.0009348634630441666
+          },
+          {
+            "step": 150,
+            "identity_mse": 0.001012806431390345
+          },
+          {
+            "step": 167,
+            "identity_mse": 0.0010307697812095284
+          },
+          {
+            "step": 184,
+            "identity_mse": 0.0009798280661925673
+          },
+          {
+            "step": 200,
+            "identity_mse": 0.001009250176139176
+          },
+          {
+            "step": 217,
+            "identity_mse": 0.0008945952286012471
+          },
+          {
+            "step": 234,
+            "identity_mse": 0.0009740741807036102
+          },
+          {
+            "step": 250,
+            "identity_mse": 0.0008468216401524842
+          },
+          {
+            "step": 267,
+            "identity_mse": 0.0007491172291338444
+          },
+          {
+            "step": 284,
+            "identity_mse": 0.001002912875264883
+          },
+          {
+            "step": 300,
+            "identity_mse": 0.0008877800428308547
+          },
+          {
+            "step": 317,
+            "identity_mse": 0.000786365068051964
+          },
+          {
+            "step": 334,
+            "identity_mse": 0.0009156493470072746
+          },
+          {
+            "step": 350,
+            "identity_mse": 0.0008841510280035436
+          },
+          {
+            "step": 367,
+            "identity_mse": 0.0007837803568691015
+          },
+          {
+            "step": 384,
+            "identity_mse": 0.0010208722669631243
+          },
+          {
+            "step": 400,
+            "identity_mse": 0.0009098352747969329
+          }
+        ]
       },
       "ring": {
-        "status": "RUNNING",
-        "budget": 1200
-      },
-      "log": "/tmp/pr84-critic-refinement-finite-cold.log"
+        "verdict": {
+          "status": "FAIL",
+          "attempted": true,
+          "passed": false,
+          "metrics": [
+            {
+              "metric": "modes",
+              "value": 3,
+              "op": ">=",
+              "threshold": 8,
+              "status": "FAIL",
+              "margin": -5
+            },
+            {
+              "metric": "hq",
+              "value": 0.451416015625,
+              "op": ">=",
+              "threshold": 0.9,
+              "status": "FAIL",
+              "margin": -0.448583984375
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 0,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 0,
+            "first_pass_step": null,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.5617133246527778,
+          "confirmation_fraction": 2.0
+        },
+        "live": {
+          "modes": 3,
+          "hq": 0.451416015625
+        },
+        "seconds": 789.2241946400609,
+        "actual_adam_accounting": {
+          "d": {
+            "applied_rates": [
+              0.00425
+            ],
+            "actual_adam_calls": 1200,
+            "moment_steps_min": 1200,
+            "moment_steps_max": 1200
+          },
+          "g": {
+            "applied_rates": [
+              0.00425,
+              0.0085
+            ],
+            "actual_adam_calls": 1200,
+            "moment_steps_min": 1200,
+            "moment_steps_max": 1200
+          }
+        },
+        "finite_final_state": true,
+        "final_state_file_sha256": "eaa6b16f31762ceacc03556273550646ff9be6d332793d10d70755f53f3cd46b",
+        "fit_gradient_evaluations": 69328,
+        "finite_fit_gradient_evaluations": 69326,
+        "nonfinite_fit_gradient_evaluations": 2,
+        "nonfinite_rejected_updates": [
+          472,
+          1037
+        ],
+        "fit_budget_exhausted_updates": [
+          2,
+          3,
+          5,
+          7,
+          10,
+          11,
+          12,
+          14,
+          16,
+          18,
+          19,
+          20,
+          23,
+          26,
+          31,
+          32,
+          34,
+          39,
+          42,
+          43,
+          44,
+          45,
+          46,
+          49,
+          51,
+          52,
+          53,
+          57,
+          59,
+          63,
+          67,
+          70,
+          72,
+          74,
+          88,
+          89,
+          90,
+          102,
+          104,
+          105,
+          108,
+          123,
+          127,
+          130,
+          132,
+          135,
+          143,
+          153,
+          154,
+          155,
+          157,
+          158,
+          162,
+          166,
+          169,
+          172,
+          201,
+          207,
+          208,
+          209,
+          212,
+          213,
+          216,
+          218,
+          219,
+          223,
+          224,
+          226,
+          230,
+          239,
+          240,
+          242,
+          246,
+          260,
+          275,
+          282,
+          286,
+          307,
+          320,
+          326,
+          335,
+          359,
+          371,
+          372,
+          373,
+          376,
+          383,
+          398,
+          415,
+          419,
+          423,
+          424,
+          425,
+          433,
+          435,
+          450,
+          461,
+          462,
+          494,
+          495,
+          497,
+          500,
+          505,
+          506,
+          516,
+          525,
+          530,
+          552,
+          554,
+          576,
+          582,
+          586,
+          595,
+          626,
+          638,
+          665,
+          670,
+          673,
+          684,
+          710,
+          714,
+          721,
+          731,
+          737,
+          749,
+          772,
+          778,
+          786,
+          789,
+          801,
+          808,
+          809,
+          832,
+          838,
+          854,
+          863,
+          879,
+          887,
+          889,
+          904,
+          911,
+          913,
+          936,
+          942,
+          1000,
+          1004,
+          1005,
+          1006,
+          1024,
+          1026,
+          1036,
+          1046,
+          1057,
+          1088,
+          1103,
+          1106,
+          1112,
+          1125,
+          1129,
+          1143,
+          1153,
+          1164,
+          1166,
+          1171,
+          1181,
+          1196
+        ],
+        "observations": [
+          {
+            "step": 50,
+            "modes": 0,
+            "hq": 0.0,
+            "nearest_counts": [
+              1367,
+              1762,
+              0,
+              0,
+              0,
+              0,
+              0,
+              967
+            ],
+            "missing_modes": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          },
+          {
+            "step": 100,
+            "modes": 3,
+            "hq": 0.336181640625,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 150,
+            "modes": 3,
+            "hq": 0.291259765625,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 200,
+            "modes": 3,
+            "hq": 0.007080078125,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 250,
+            "modes": 3,
+            "hq": 0.7001953125,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 300,
+            "modes": 3,
+            "hq": 0.8876953125,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 350,
+            "modes": 3,
+            "hq": 0.301025390625,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 400,
+            "modes": 3,
+            "hq": 0.689208984375,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 450,
+            "modes": 3,
+            "hq": 0.898681640625,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 500,
+            "modes": 3,
+            "hq": 0.89892578125,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 550,
+            "modes": 3,
+            "hq": 0.7763671875,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 600,
+            "modes": 3,
+            "hq": 0.98876953125,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 650,
+            "modes": 3,
+            "hq": 0.97705078125,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 700,
+            "modes": 3,
+            "hq": 0.73291015625,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 750,
+            "modes": 3,
+            "hq": 0.98681640625,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 800,
+            "modes": 3,
+            "hq": 0.700439453125,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 850,
+            "modes": 3,
+            "hq": 0.9873046875,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 900,
+            "modes": 3,
+            "hq": 0.669677734375,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 950,
+            "modes": 3,
+            "hq": 0.15966796875,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 1000,
+            "modes": 3,
+            "hq": 0.999267578125,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 1050,
+            "modes": 3,
+            "hq": 0.99658203125,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 1100,
+            "modes": 3,
+            "hq": 0.99560546875,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 1150,
+            "modes": 3,
+            "hq": 0.87744140625,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "step": 1200,
+            "modes": 3,
+            "hq": 0.451416015625,
+            "nearest_counts": [
+              1368,
+              1423,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1305
+            ],
+            "missing_modes": [
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          }
+        ]
+      }
     },
     "not_run": [
       "own_acquired_continuation",
@@ -207,6 +1179,7 @@
       "longer_hold",
       "remaining_shared_hosts",
       "production_common22"
-    ]
+    ],
+    "next": "saved-state differentiated critic response and early-acquisition diagnosis; no later promotion gates"
   }
 }

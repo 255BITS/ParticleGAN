@@ -31,8 +31,8 @@ isolates float32 strong-Wolfe interpolation overflow from otherwise finite accep
 state. The [finite-trial repair](pr84-critic-refinement-finite-recovery.md) restores the
 saved best critic exactly, preserves all44 finite-path saved-state checks, and completes
 updates472–491 with finite state. Those20 checks still have three modes: numerical
-recovery alone does not pass acquisition. A new source-bound full cold run is in progress;
-its trajectory reproduces the original pass and final snapshot exactly.
+recovery alone does not pass acquisition. The [new source-bound full cold run](pr84-critic-refinement-finite-cold.md)
+reproduces trajectory exactly but fails ring:3 modes/HQ .451416,0/24 passing checks. Its same three-mode sampled assignments persist from100 through1200. No own-acquired hold or later host follows; the next saved-state tests isolate early acquisition and differentiated critic response.
 Each update costs about53 additional1024-pair critic-gradient evaluations in
 the warm run, plus a parity check. Fits are nonconverged and D's retained Adam
 moments precede the refinement. [Rule, strict filter and frozen evidence](pr84-critic-refinement-filter.md).

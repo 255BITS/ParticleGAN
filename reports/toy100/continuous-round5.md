@@ -6,7 +6,7 @@ passes all44 saved-state continuation checks and warm200/200, minimum HQ
 .939453 with eight modes throughout. Cold trajectory passes, but the original cold ring aborts on a nonfinite inner-fit trial
 at update472; the full acquisition gate is incomplete and failed. An independently checked finite-trial repair
 passes the exact failed fit, twenty numerical continuation updates and all44 unchanged finite-path checks.
-Its new cold gate is running; this numerical repair is not an acquisition or stability pass. Opponent prediction passes warm200 but fails
+Its new cold gate completes but fails ring acquisition:3 modes/HQ .451416,0/24 passing observations. No later promotion gate follows. Opponent prediction passes warm200 but fails
 22 of1,200 later per-update checks, including temporary mode loss. Cold gates
 were not run after that failure. This round investigates the delayed loss of quality on the **unchanged**
 dataset. The production recipe still uses LR decay. Research tests use live
@@ -215,8 +215,7 @@ noise, metrics and original update records exactly; seven focused helper tests p
 The exact472–491 continuation remains finite but retains only three modes throughout
 (HQ .16748–.95435). That is a numerical check, not an acquisition pass or a diagnosis of
 quality deterioration. The repaired full cold trajectory reproduces MSE .000909835 and
-its final snapshot byte-for-byte. Cold ring is running under the original1200 budget.
-The original failed gate remains archived separately.
+its final snapshot byte-for-byte. Cold ring completes the original1200 budget but fails:3 modes/HQ .451416,0/24 passing observations. The same three modes are observed from100 onward, before either rejected trial. The original error remains archived separately. [Complete repaired cold result and evidence](pr84-critic-refinement-finite-cold.md).
 
 The nominal rates are fixed, but this rule still uses state-dependent
 curvature limits. In four successive windows through2400, the median G
