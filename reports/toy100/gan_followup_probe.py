@@ -12,6 +12,7 @@ from contextlib import contextmanager
 import hashlib
 import importlib
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -33,6 +34,8 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "reachstall_post_g125": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
+                             dict(ramp="stall", post_arm_g_bound=.125)),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
@@ -44,6 +47,7 @@ SOURCES = (
     "benchmarks/toy100/continuous_probe.py",
     "benchmarks/locked_shared/mode_hold.py",
     "benchmarks/locked_shared/trajectory.py",
+    "benchmarks/locked_shared/observation.py",
 )
 
 
@@ -61,8 +65,11 @@ def declare(output, phase, method):
     source = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
               for name in SOURCES if (ROOT / name).exists()}
     import torch
+    pins = ("ATEN_CPU_CAPABILITY", "MKL_ENABLE_INSTRUCTIONS", "ONEDNN_MAX_CPU_ISA", "DNNL_MAX_CPU_ISA")
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
-               cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
+               cpu=torch.backends.cpu.get_cpu_capability(),
+               cpu_env={name: os.environ.get(name) for name in pins},
+               shared_gate_eligible=False,
                purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
                source=source)
     (output / "declaration.json").write_text(json.dumps(row, indent=2) + "\n")
@@ -107,6 +114,26 @@ def warm(output, method):
         emit(event="WARM", variant=name, status=row["status"],
              **{k: loc.get(k) for k in ("checks", "passing_checks", "min_modes", "min_hq",
                                         "failing_steps") if k in loc})
+    identity = compact["identity"]["local"]
+    if identity.get("checks") != 200 or identity.get("passing_checks") != 200:
+        emit(event="REFUSE", reason="identity fork is not 200/200",
+             checks=identity.get("checks"), passing=identity.get("passing_checks"),
+             min_modes=identity.get("min_modes"), min_hq=identity.get("min_hq"))
+        raise SystemExit(3)
+    method_json = output / "forks" / f"{method}.json"
+    if method_json.exists():
+        dyn = json.loads(method_json.read_text()).get("dynamics_receipt") or {}
+        emit(event="ARM", **{k: dyn.get(k) for k in
+             ("armed", "arm_update", "arm_phase", "post_arm_fires", "post_arm_g_bound",
+              "g_bound_pre_arm", "cpu")})
+    if method == "reachstall_post_g125":
+        loc = compact[method]["local"]
+        if loc.get("checks") != 200 or loc.get("passing_checks") != 200:
+            emit(event="KILL", reason="warm regressed vs stall reach 200/200",
+                 checks=loc.get("checks"), passing=loc.get("passing_checks"),
+                 min_modes=loc.get("min_modes"), min_hq=loc.get("min_hq"),
+                 pr84_reference="196/200")
+            raise SystemExit(4)
 
 
 def cold(output, method, tasks):
@@ -152,8 +179,11 @@ def stay(output, method, steps):
             recorder.accounting = lambda calls, outer: declare_calls(
                 calls=calls + (steps - outer), moment_updates=steps)
             recorder.accounting(recorder.rows[recorder.optimizers[0]]["calls"], recorder.outer_steps)
+        def log(row):
+            if row.get("event") == "checkpoint" and (row["step"] % 50 == 0 or row["step"] > 1200):
+                emit(event="CHECKPOINT", step=row["step"], modes=row["modes"], hq=round(row["hq"], 4))
         evidence = run_probe(config, mode="constant", steps=steps, diagnostic_every=10,
-                             checkpoint_hook_step=1, checkpoint_hook=hook)
+                             checkpoint_hook_step=1, checkpoint_hook=hook, log=log)
     diag = evidence.get("diagnostic") or []
     late = [p for p in diag if p["step"] > 1200]
     fails = [p for p in late if not (p["modes"] == 8 and p["hq"] >= .9)]
@@ -167,7 +197,9 @@ def stay(output, method, steps):
                final=(diag[-1]["step"], diag[-1]["modes"], round(diag[-1]["hq"], 4)) if diag else None,
                dynamics=_dynamics(recorder))
     records = [dict(step=r["outer_step"], sharp=r.get("critic_sharpness"), width=r.get("critic_width"),
-                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"])
+                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"],
+                    armed=r.get("armed"), g_bound_before=r.get("g_bound_before"),
+                    g_bound_after=r.get("g_bound_after"))
                for r in getattr(recorder, "records", [])]
     (output / "stay.json").write_text(json.dumps(dict(summary=row, diagnostic=diag, records=records),
                                                  default=float) + "\n")
@@ -189,7 +221,8 @@ def main():
         cold(args.output, args.method, [t for t in args.tasks.split(",") if t])
     else:
         stay(args.output, args.method, args.steps)
-    emit(event="DONE")
+    import torch
+    emit(event="DONE", cpu=torch.backends.cpu.get_cpu_capability())
 
 
 if __name__ == "__main__":
