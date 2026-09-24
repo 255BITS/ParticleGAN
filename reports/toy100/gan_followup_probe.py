@@ -33,9 +33,12 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    # Sticky +2 host D steps after the first diagnostic at update>=1200 with modes>=8 and HQ>=.9.
+    "delayextrad": ("reports.toy100.pr84_delayed_arm_extra_d", "pr84_delayed_arm_extra_d"),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
+    "reports/toy100/pr84_delayed_arm_extra_d.py",
     "reports/toy100/pr84_reach_candidate.py",
     "reports/toy100/pr84_smoothed_candidate.py",
     "reports/toy100/alternating_curvature_scratch.py",
@@ -53,6 +56,8 @@ def factory(method):
 
 
 def emit(**row):
+    import torch
+    row.setdefault("cpu", torch.backends.cpu.get_cpu_capability())
     print(json.dumps(row, default=float), flush=True)
 
 
@@ -61,10 +66,15 @@ def declare(output, phase, method):
     source = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
               for name in SOURCES if (ROOT / name).exists()}
     import torch
+    purity = ("delayed-arm extra D TTUR: sticky arm on the first diagnostic with "
+              "update_index>=1200, modes>=8 and HQ>=0.9; each later turn takes +2 host D "
+              "Adam steps before G. Stall reach, G Adam lr and curvature bounds are unchanged. "
+              "No mode-count or stall predicate, no coverage, likelihood, anchor, assignment or clip."
+              if method == "delayextrad" else
+              "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder")
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
                cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
-               purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
-               source=source)
+               purity=purity, source=source)
     (output / "declaration.json").write_text(json.dumps(row, indent=2) + "\n")
     emit(event="DECLARED", **{k: v for k, v in row.items() if k != "source"})
 
@@ -83,8 +93,15 @@ def warm(output, method):
         recorder, _ = prefix
         recorder.enabled = name == method
         completed, target = state["completed_steps"], state["target_steps"]
-        recorder.accounting = lambda calls, outer: state["declare_optimizer_accounting"](
-            calls=completed + calls + (target - completed - outer), moment_updates=target)
+
+        def account(calls, outer, completed=completed, target=target):
+            extra = getattr(recorder, "extra_d_steps", None)
+            kwargs = {} if extra is None else {"d_moment_updates": target + extra}
+            state["declare_optimizer_accounting"](
+                calls=completed + calls + (target - completed - outer),
+                moment_updates=target, **kwargs)
+
+        recorder.accounting = account
         receipt = dict(method=name, shared_gate_eligible=False)
         if name == "identity":
             yield receipt
@@ -107,6 +124,22 @@ def warm(output, method):
         emit(event="WARM", variant=name, status=row["status"],
              **{k: loc.get(k) for k in ("checks", "passing_checks", "min_modes", "min_hq",
                                         "failing_steps") if k in loc})
+    identity = compact.get("identity", {}).get("local", {})
+    method_local = compact.get(method, {}).get("local", {})
+    control_ok = identity.get("checks") == 200 and identity.get("passing_checks") == 200
+    emit(event="WARM_RANK", control_ok=control_ok,
+         control_passing=identity.get("passing_checks"), control_checks=identity.get("checks"),
+         method_passing=method_local.get("passing_checks"), method_checks=method_local.get("checks"),
+         method_min_hq=method_local.get("min_hq"), method_min_modes=method_local.get("min_modes"))
+    if not control_ok:
+        emit(event="WARM_RANK_REFUSED", reason="identity/control != 200/200",
+             checks=identity.get("checks"), passing_checks=identity.get("passing_checks"))
+        raise SystemExit(2)
+    # PR #84 pin is 196/200. Below that is a warm regress; do not continue the protocol.
+    if method_local.get("passing_checks", 0) < 196:
+        emit(event="WARM_KILL", reason="regress vs PR84 pin 196/200",
+             passing_checks=method_local.get("passing_checks"))
+        raise SystemExit(3)
 
 
 def cold(output, method, tasks):
@@ -149,8 +182,13 @@ def stay(output, method, steps):
     with factory(method)(task="mode_hold") as (recorder, _source):
         def hook(state):
             declare_calls = state["declare_optimizer_accounting"]
-            recorder.accounting = lambda calls, outer: declare_calls(
-                calls=calls + (steps - outer), moment_updates=steps)
+
+            def account(calls, outer):
+                extra = getattr(recorder, "extra_d_steps", None)
+                kwargs = {} if extra is None else {"d_moment_updates": steps + extra}
+                declare_calls(calls=calls + (steps - outer), moment_updates=steps, **kwargs)
+
+            recorder.accounting = account
             recorder.accounting(recorder.rows[recorder.optimizers[0]]["calls"], recorder.outer_steps)
         evidence = run_probe(config, mode="constant", steps=steps, diagnostic_every=10,
                              checkpoint_hook_step=1, checkpoint_hook=hook)
@@ -158,13 +196,30 @@ def stay(output, method, steps):
     late = [p for p in diag if p["step"] > 1200]
     fails = [p for p in late if not (p["modes"] == 8 and p["hq"] >= .9)]
     terminal = [p for p in diag if p["step"] in range(1000, 1201, 50)]
+    suffix = 0
+    for point in reversed(late):
+        if point["modes"] == 8 and point["hq"] >= .9:
+            suffix += 1
+        else:
+            break
+    acquire, dropout, after, before = (recorder.fire_counts()
+                                       if hasattr(recorder, "fire_counts") else (None, None, None, None))
     row = dict(event="STAY", steps=steps, seconds=round(time.perf_counter() - began, 1),
                terminal_1000_1200=[(p["step"], p["modes"], round(p["hq"], 4)) for p in terminal],
                checks=len(late), passing=len(late) - len(fails),
                min_modes=min((p["modes"] for p in late), default=None),
                min_hq=round(min((p["hq"] for p in late), default=float("nan")), 4),
+               zero_mode_steps=[p["step"] for p in late if p["modes"] == 0],
+               severe_dips=[p["step"] for p in late if p["modes"] <= 4],
+               suffix=suffix,
                failing_steps=[p["step"] for p in fails][:40],
                final=(diag[-1]["step"], diag[-1]["modes"], round(diag[-1]["hq"], 4)) if diag else None,
+               armed=getattr(recorder, "armed", None),
+               arm_update_index=getattr(recorder, "arm_update_index", None),
+               fires=getattr(recorder, "fires", None),
+               extra_d_steps=getattr(recorder, "extra_d_steps", None),
+               fires_acquire=acquire, fires_dropout=dropout, fires_after_2300=after,
+               fires_before_arm_index=before,
                dynamics=_dynamics(recorder))
     records = [dict(step=r["outer_step"], sharp=r.get("critic_sharpness"), width=r.get("critic_width"),
                     adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"])

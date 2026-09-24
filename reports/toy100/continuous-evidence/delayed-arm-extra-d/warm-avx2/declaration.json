@@ -1,0 +1,22 @@
+{
+  "phase": "warm",
+  "method": "delayextrad",
+  "seed": 0,
+  "host": "neural",
+  "torch": "2.14.0+cpu",
+  "cpu": "AVX2",
+  "shared_gate_eligible": false,
+  "purity": "delayed-arm extra D TTUR: sticky arm on the first diagnostic with update_index>=1200, modes>=8 and HQ>=0.9; each later turn takes +2 host D Adam steps before G. Stall reach, G Adam lr and curvature bounds are unchanged. No mode-count or stall predicate, no coverage, likelihood, anchor, assignment or clip.",
+  "source": {
+    "reports/toy100/gan_followup_probe.py": "910df6c4affcd3abf1bb73ecca9da7fd2aa5107d5f395bc471998655e26f5d4e",
+    "reports/toy100/pr84_delayed_arm_extra_d.py": "ee2a830ae922cd119a00336538daffd3e24c3383841b3f1175f4f123f399490b",
+    "reports/toy100/pr84_reach_candidate.py": "6fdcf4d8750d9c37b9a0a289016f137af98a408f8ed94dc1ba19c4b1ae43441b",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/toy100/continuous_probe.py": "55ac5acbae900ad233ab1f3779f8b2b5d1d7b0a0042cb519da6396ab17f4a96b",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792"
+  }
+}
