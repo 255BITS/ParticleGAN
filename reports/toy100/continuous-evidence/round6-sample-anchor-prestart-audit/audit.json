@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "scope": "read-only archived evidence audit",
+  "gate": {
+    "checks": 44,
+    "branches": [
+      {
+        "start": 1324,
+        "end": 1335,
+        "checks": 12,
+        "min_hq": 1.0,
+        "original_passing": 9,
+        "jacobians": 24,
+        "nonlinear_trials": 24
+      },
+      {
+        "start": 1380,
+        "end": 1395,
+        "checks": 16,
+        "min_hq": 1.0,
+        "original_passing": 14,
+        "jacobians": 32,
+        "nonlinear_trials": 32
+      },
+      {
+        "start": 1530,
+        "end": 1545,
+        "checks": 16,
+        "min_hq": 1.0,
+        "original_passing": 1,
+        "jacobians": 32,
+        "nonlinear_trials": 32
+      }
+    ],
+    "method": "pr84_sample_group_anchor_prestart_joint_fit_rest_on_nonconvergence",
+    "summary_sha256": "58aff6298b02130fb3854c44b9546cc7f239b1c0a33cc13be9dc93232409b55f"
+  },
+  "motion": {
+    "input_state_sha256": "d90f2cb1dc0fd08425e05e50091b4ca21118b7dc08030e44cc1a874f90a5fcbc",
+    "native": {
+      "total_norm": 0.021879570804831647,
+      "linear_output_norm": 0.38070758594938203,
+      "null_norm": 0.020821684182229783,
+      "null_fraction": 0.9516495715552038
+    },
+    "post_native_fit": {
+      "total_norm": 0.024485944516798547,
+      "linear_output_norm": 0.13976376458276296,
+      "null_norm": 0.020840698938181343,
+      "null_fraction": 0.8511290599341026
+    },
+    "pre_start_fit": {
+      "total_norm": 0.012887936185400559,
+      "linear_output_norm": 0.13978077849440018,
+      "null_norm": 1.1054333773070065e-06,
+      "null_fraction": 8.577272275441901e-05
+    },
+    "target_max_error": 1.430511474609375e-06,
+    "result_sha256": "3aff37b9883b25fcc841b42c3c1d7a27c0ecc45b877279105b455c4d042e8b98"
+  }
+}
