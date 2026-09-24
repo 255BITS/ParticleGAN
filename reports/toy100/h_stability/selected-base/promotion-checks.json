@@ -1,0 +1,17 @@
+{
+  "scope": "research starting point, not production promotion",
+  "cold_checkpoint_bitwise_identical": true,
+  "original_and_replayed_live_metrics_identical": [
+    "mode_hold",
+    "two_pole"
+  ],
+  "own_state_short": {
+    "status": "FAIL",
+    "passing_checks": 83,
+    "first_failure_step": 1284,
+    "hq_at_failure": 0.76123046875,
+    "modes_at_failure": 8,
+    "fixed_rates_preserved": true,
+    "state_origin": "same candidate own cold acquisition"
+  }
+}

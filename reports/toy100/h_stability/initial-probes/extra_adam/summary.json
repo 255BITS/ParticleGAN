@@ -1,0 +1,121 @@
+{
+  "candidate": "h_n05r06_mixup_c0p01_lr15",
+  "variant": "extra_adam",
+  "gate": "selected_h_warm_stability_probe",
+  "status": "FAIL",
+  "initial": {
+    "step": 1200,
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.999267578125,
+    "cover": 1.0,
+    "effective_modes": 7.493038654327393,
+    "sample_count": 4096,
+    "hq_counts": [
+      345,
+      692,
+      341,
+      657,
+      314,
+      318,
+      701,
+      725
+    ],
+    "nearest_counts": [
+      345,
+      692,
+      341,
+      657,
+      314,
+      321,
+      701,
+      725
+    ],
+    "closest_distance_per_mode": [
+      0.0032388914842158556,
+      0.0,
+      0.002183660166338086,
+      0.0078125,
+      0.022881589829921722,
+      0.04158138483762741,
+      0.014778072014451027,
+      0.0044751716777682304
+    ],
+    "hq_radius": 0.21000000000000002,
+    "missing_modes": []
+  },
+  "window": {
+    "checks": 3,
+    "passing_checks": 2,
+    "failing_steps": [
+      1203
+    ],
+    "min_modes": 8,
+    "min_hq": 0.752197265625,
+    "passing_suffix": 0,
+    "stable_from_step": null,
+    "pass_all": false,
+    "pass_suffix": false
+  },
+  "final": {
+    "step": 1203,
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.752197265625,
+    "cover": 1.0,
+    "effective_modes": 6.425720691680908,
+    "sample_count": 4096,
+    "hq_counts": [
+      78,
+      151,
+      149,
+      657,
+      314,
+      321,
+      697,
+      714
+    ],
+    "nearest_counts": [
+      345,
+      692,
+      341,
+      657,
+      314,
+      321,
+      701,
+      725
+    ],
+    "closest_distance_per_mode": [
+      0.15231244266033173,
+      0.12888406217098236,
+      0.11846230924129486,
+      0.0009765625,
+      0.003088161814957857,
+      0.009959022514522076,
+      0.02460860088467598,
+      0.04740102216601372
+    ],
+    "hq_radius": 0.21000000000000002,
+    "missing_modes": []
+  },
+  "work": {
+    "d_backwards": 6,
+    "g_backwards": 6,
+    "d_commits": 3,
+    "g_commits": 3,
+    "d_provisional": 3,
+    "g_provisional": 3
+  },
+  "optimizer_steps": {
+    "opt_g": [
+      1203
+    ],
+    "opt_d": [
+      1203
+    ]
+  },
+  "elapsed_seconds": 1.5312502551823854,
+  "full_budget": false,
+  "hold_budget_complete": false,
+  "shared_gate_eligible": false
+}

@@ -1,0 +1,3 @@
+Continue the assigned task from eps_net_1m (current-base.json). The user explicitly reconfirmed that this must remain a GAN. Generator and particles learn solely through the discriminator objective; no direct target-fitting replacement. The independently reproduced200/200 hold is the candidate's own state.
+
+The combination lane owns eps_net plus radial split geometry; the movement lane owns alternatives. Baseline qualification may run the explicitly authorized one-time remaining-host/1200-step diagnostic despite two_pole failure; that never qualifies a failed candidate or authorizes native100 training. Keep tests cheap and results visible.

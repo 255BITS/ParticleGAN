@@ -1,0 +1,6 @@
+{"event": "START", "candidate": "eps_net_1m", "gate": "trajectory"}
+START trajectory route=public primitives custom host + shared noise policy steps=400
+{"event": "UPDATE", "task": "trajectory", "step": 200}
+{"event": "UPDATE", "task": "trajectory", "step": 400}
+{"event": "DONE", "task": "trajectory", "status": "PASS", "suffix": 21, "live": {"identity_mse": 0.0017528926255181432}, "error": null}
+{"event": "DONE", "candidate": "eps_net_1m", "gate": "trajectory", "status": "PASS", "seconds": 2.4007714258041233, "live": {"identity_mse": 0.0017528926255181432}}

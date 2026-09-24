@@ -1,0 +1,29 @@
+{
+  "candidate": "g_threequarter_rate",
+  "role": "experimental search base; not release-qualified",
+  "declaration": "reports/toy100/h_stability/selected-base/declaration.json",
+  "cold_candidate": "reports/toy100/h_stability/selected-base/cold/g_threequarter_rate",
+  "cold_checkpoint_sha256": "16cb6beeef88de93fb5a7c0c9e96b44fe481ceaf8f231b78215bd037ee711b10",
+  "fixed_rates": {
+    "g": 0.0011250000000000001,
+    "d": 0.0015,
+    "prior": 0.0022500000000000003
+  },
+  "options": {
+    "consistency": "mixup",
+    "consistency_coeff": 0.01,
+    "consistency_sigma": 0.1,
+    "noise": "fixed",
+    "sigma": 0.05,
+    "smooth": 0.0
+  },
+  "acquisition": "cold ring PASS; terminal suffix9; other original cold gates UNRUN",
+  "borrowed_H_warm_probe": "200/200 PASS; not own-state qualification",
+  "blockers": [
+    "two_pole FAIL: mean_abs0.02855 <0.30",
+    "own-state hold UNRUN",
+    "other older gates UNRUN",
+    "native100 gates SKIPPED"
+  ],
+  "previous_base": "h_n05r06_mixup_c0p01_lr15"
+}

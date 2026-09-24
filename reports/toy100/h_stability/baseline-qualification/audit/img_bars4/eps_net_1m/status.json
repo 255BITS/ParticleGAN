@@ -1,0 +1,988 @@
+{
+  "seconds": 7.805650162976235,
+  "shared_gate_eligible": false,
+  "stages": [
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/eps-net-20260924T185715Z/baseline_qualification/20260924T185715Z-1646701/repo/reports/toy100/h_stability/baseline-qualification/audit/img_bars4/eps_net_1m/img_bars4/episodes/eps_net_1m__img_bars4.json.gz",
+      "candidate": "eps_net_1m",
+      "checkpoint_sha256": "b9ebbb4b10c76e0f9ce3d19c1c5918d26a912aa7d385a374570db2ad02d97b7e",
+      "gate": "img_bars4",
+      "metrics": {
+        "frozen_evidence_audit": "PASS",
+        "live": {
+          "distribution_tv": 0.03125,
+          "hq": 0.96875,
+          "mean_rmse": 0.035087950527668,
+          "mode_fractions": [
+            0.21875,
+            0.25,
+            0.25,
+            0.28125
+          ],
+          "modes": 4,
+          "quality_mode_fractions": [
+            0.21875,
+            0.25,
+            0.21875,
+            0.28125
+          ]
+        },
+        "observations": [
+          {
+            "distribution_tv": 0.125,
+            "ema": {
+              "distribution_tv": 0.375,
+              "hq": 0.0,
+              "mean_rmse": 0.4788852632045746,
+              "mode_fractions": [
+                0.21875,
+                0.625,
+                0.09375,
+                0.0625
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.0,
+            "mean_rmse": 0.40860339999198914,
+            "mode_fractions": [
+              0.34375,
+              0.25,
+              0.28125,
+              0.125
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "seconds": 1.2382284831255674,
+            "step": 25
+          },
+          {
+            "distribution_tv": 0.15625,
+            "ema": {
+              "distribution_tv": 0.28125,
+              "hq": 0.0,
+              "mean_rmse": 0.4647785425186157,
+              "mode_fractions": [
+                0.25,
+                0.53125,
+                0.09375,
+                0.125
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.0,
+            "mean_rmse": 0.3074682354927063,
+            "mode_fractions": [
+              0.28125,
+              0.375,
+              0.125,
+              0.21875
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "seconds": 1.5131126269698143,
+            "step": 50
+          },
+          {
+            "distribution_tv": 0.0625,
+            "ema": {
+              "distribution_tv": 0.0625,
+              "hq": 0.0,
+              "mean_rmse": 0.4410788118839264,
+              "mode_fractions": [
+                0.25,
+                0.3125,
+                0.25,
+                0.1875
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.03125,
+            "mean_rmse": 0.24120086431503296,
+            "mode_fractions": [
+              0.21875,
+              0.3125,
+              0.25,
+              0.21875
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.03125,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "seconds": 1.7931033030617982,
+            "step": 75
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.0625,
+              "hq": 0.0,
+              "mean_rmse": 0.40843236446380615,
+              "mode_fractions": [
+                0.21875,
+                0.3125,
+                0.25,
+                0.21875
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.125,
+            "mean_rmse": 0.1713206171989441,
+            "mode_fractions": [
+              0.25,
+              0.28125,
+              0.21875,
+              0.25
+            ],
+            "modes": 1,
+            "quality_mode_fractions": [
+              0.0,
+              0.125,
+              0.0,
+              0.0
+            ],
+            "seconds": 2.0593940301332623,
+            "step": 100
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.0,
+              "mean_rmse": 0.37111929059028625,
+              "mode_fractions": [
+                0.21875,
+                0.28125,
+                0.25,
+                0.25
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.625,
+            "mean_rmse": 0.11891572922468185,
+            "mode_fractions": [
+              0.25,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.125,
+              0.1875,
+              0.09375,
+              0.21875
+            ],
+            "seconds": 2.3285394001286477,
+            "step": 125
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.0625,
+              "hq": 0.0,
+              "mean_rmse": 0.3330479860305786,
+              "mode_fractions": [
+                0.21875,
+                0.21875,
+                0.28125,
+                0.28125
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.8125,
+            "mean_rmse": 0.08665767312049866,
+            "mode_fractions": [
+              0.25,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.1875,
+              0.1875,
+              0.1875,
+              0.25
+            ],
+            "seconds": 2.59913810598664,
+            "step": 150
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.0625,
+              "hq": 0.0,
+              "mean_rmse": 0.2936057448387146,
+              "mode_fractions": [
+                0.21875,
+                0.21875,
+                0.28125,
+                0.28125
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.84375,
+            "mean_rmse": 0.06845677644014359,
+            "mode_fractions": [
+              0.25,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.1875,
+              0.1875,
+              0.25
+            ],
+            "seconds": 2.861621516989544,
+            "step": 175
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.0,
+              "mean_rmse": 0.2568724751472473,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.875,
+            "mean_rmse": 0.06268787384033203,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.1875,
+              0.1875,
+              0.28125
+            ],
+            "seconds": 3.1236013260204345,
+            "step": 200
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.0,
+              "mean_rmse": 0.22258295118808746,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.90625,
+            "mean_rmse": 0.05660230666399002,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.21875,
+              0.1875,
+              0.28125
+            ],
+            "seconds": 3.380984046962112,
+            "step": 225
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.0,
+              "mean_rmse": 0.19138707220554352,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.90625,
+            "mean_rmse": 0.049440279603004456,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.21875,
+              0.1875,
+              0.28125
+            ],
+            "seconds": 3.654932117089629,
+            "step": 250
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.0,
+              "mean_rmse": 0.16366897523403168,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.90625,
+            "mean_rmse": 0.043029673397541046,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.21875,
+              0.1875,
+              0.28125
+            ],
+            "seconds": 3.935913515975699,
+            "step": 275
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.1875,
+              "mean_rmse": 0.13988924026489258,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0625,
+                0.03125,
+                0.03125,
+                0.0625
+              ]
+            },
+            "hq": 0.9375,
+            "mean_rmse": 0.039684660732746124,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.1875,
+              0.28125
+            ],
+            "seconds": 4.20667757303454,
+            "step": 300
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.53125,
+              "mean_rmse": 0.11890359222888947,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 3,
+              "quality_mode_fractions": [
+                0.15625,
+                0.125,
+                0.09375,
+                0.15625
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.037685710936784744,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 4.473044491140172,
+            "step": 325
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.65625,
+              "mean_rmse": 0.10180403292179108,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 4,
+              "quality_mode_fractions": [
+                0.15625,
+                0.15625,
+                0.125,
+                0.21875
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.037139371037483215,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 4.749012839049101,
+            "step": 350
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.75,
+              "mean_rmse": 0.08754777908325195,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 4,
+              "quality_mode_fractions": [
+                0.15625,
+                0.1875,
+                0.1875,
+                0.21875
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.03610760718584061,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 5.020799030084163,
+            "step": 375
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.8125,
+              "mean_rmse": 0.07602338492870331,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 4,
+              "quality_mode_fractions": [
+                0.21875,
+                0.1875,
+                0.1875,
+                0.21875
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.03525073081254959,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 5.3122316740918905,
+            "step": 400
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.84375,
+              "mean_rmse": 0.0676218718290329,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 4,
+              "quality_mode_fractions": [
+                0.21875,
+                0.1875,
+                0.1875,
+                0.25
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.03548797219991684,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 5.583623354090378,
+            "step": 425
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.875,
+              "mean_rmse": 0.05940697342157364,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 4,
+              "quality_mode_fractions": [
+                0.21875,
+                0.21875,
+                0.1875,
+                0.25
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.03502654284238815,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 5.856507779099047,
+            "step": 450
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.9375,
+              "mean_rmse": 0.054520316421985626,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 4,
+              "quality_mode_fractions": [
+                0.21875,
+                0.25,
+                0.1875,
+                0.28125
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.03495950251817703,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 6.135807542130351,
+            "step": 475
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.9375,
+              "mean_rmse": 0.050193481147289276,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 4,
+              "quality_mode_fractions": [
+                0.21875,
+                0.25,
+                0.1875,
+                0.28125
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.03494963422417641,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 6.4110589870251715,
+            "step": 500
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.9375,
+              "mean_rmse": 0.0464947447180748,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 4,
+              "quality_mode_fractions": [
+                0.21875,
+                0.25,
+                0.1875,
+                0.28125
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.03390166163444519,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 6.686323472997174,
+            "step": 525
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.96875,
+              "mean_rmse": 0.04423558712005615,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 4,
+              "quality_mode_fractions": [
+                0.21875,
+                0.25,
+                0.21875,
+                0.28125
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.0406748428940773,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 6.961547248065472,
+            "step": 550
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.96875,
+              "mean_rmse": 0.04159920662641525,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 4,
+              "quality_mode_fractions": [
+                0.21875,
+                0.25,
+                0.21875,
+                0.28125
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.03911059722304344,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 7.23148376098834,
+            "step": 575
+          },
+          {
+            "distribution_tv": 0.03125,
+            "ema": {
+              "distribution_tv": 0.03125,
+              "hq": 0.96875,
+              "mean_rmse": 0.040611520409584045,
+              "mode_fractions": [
+                0.21875,
+                0.25,
+                0.25,
+                0.28125
+              ],
+              "modes": 4,
+              "quality_mode_fractions": [
+                0.21875,
+                0.25,
+                0.21875,
+                0.28125
+              ]
+            },
+            "hq": 0.96875,
+            "mean_rmse": 0.035087950527668,
+            "mode_fractions": [
+              0.21875,
+              0.25,
+              0.25,
+              0.28125
+            ],
+            "modes": 4,
+            "quality_mode_fractions": [
+              0.21875,
+              0.25,
+              0.21875,
+              0.28125
+            ],
+            "seconds": 7.621311342110857,
+            "step": 600
+          }
+        ],
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.5416666666666666,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 4.473044491140172,
+            "confirmed_step": 325,
+            "first_pass_step": 225,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 16,
+            "passing_suffix": 16,
+            "stable_from_seconds": 3.380984046962112,
+            "stable_from_step": 225
+          },
+          "metrics": [
+            {
+              "margin": 0,
+              "metric": "modes",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 4,
+              "value": 4
+            },
+            {
+              "margin": 0.06874999999999998,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.9,
+              "value": 0.96875
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "seconds": 7.803814745042473,
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS",
+  "tag": "eps_net_1m"
+}

@@ -1,0 +1,2 @@
+{"event": "PREDECLARED", "rows": 1, "output": "/ml2/hypergan/gan-attempts/eps-net-20260924T185715Z/baseline_qualification/20260924T185715Z-1646701/repo/reports/toy100/h_stability/baseline-qualification/audit/vector_overlap"}
+{"event": "CANDIDATE_DONE", "tag": "eps_net_1m", "status": "PASS", "seconds": 10.124499310972169, "stages": [{"gate": "vector_overlap", "status": "PASS"}]}

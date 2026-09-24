@@ -1,0 +1,108 @@
+[
+  {
+    "candidate": "regression",
+    "recipe": "eps_net_1m",
+    "gate": "retained_regrade_two_pole",
+    "status": "FAIL",
+    "seconds": 0.00032957084476947784,
+    "metrics": {
+      "live": {
+        "grad_med": 0.017855465412139893,
+        "mean_abs": 0.029888831079006195
+      },
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "mean_abs",
+            "value": 0.029888831079006195,
+            "op": ">=",
+            "threshold": 0.3,
+            "status": "FAIL",
+            "margin": -0.2701111689209938
+          },
+          {
+            "metric": "grad_med",
+            "value": 0.017855465412139893,
+            "op": "<=",
+            "threshold": 1.0,
+            "status": "PASS",
+            "margin": 0.9821445345878601
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.45018528153498966,
+        "confirmation_fraction": 2.0
+      },
+      "training_rerun": false,
+      "retained_independent_evidence": true
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/eps-net-20260924T185715Z/baseline_qualification/20260924T185715Z-1646701/repo/reports/toy100/h_stability/eps-net-base/independent-cold/eps_net_1m/two_pole/episodes/eps_net_1m__two_pole.json.gz"
+  },
+  {
+    "candidate": "regression",
+    "recipe": "eps_net_1m",
+    "gate": "retained_regrade_mode_hold",
+    "status": "PASS",
+    "seconds": 0.002197248861193657,
+    "metrics": {
+      "live": {
+        "hq": 0.996826171875,
+        "modes": 8
+      },
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 8,
+            "op": ">=",
+            "threshold": 8,
+            "status": "PASS",
+            "margin": 0
+          },
+          {
+            "metric": "hq",
+            "value": 0.996826171875,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.09682617187499998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 14,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 14,
+          "first_pass_step": 550,
+          "stable_from_step": 550,
+          "stable_from_seconds": 4.52548754401505,
+          "confirmed_step": 750,
+          "confirmed_seconds": 5.806323073105887
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.625
+      },
+      "training_rerun": false,
+      "retained_independent_evidence": true
+    },
+    "artifact": "/ml2/hypergan/gan-attempts/eps-net-20260924T185715Z/baseline_qualification/20260924T185715Z-1646701/repo/reports/toy100/h_stability/eps-net-base/independent-cold/eps_net_1m/mode_hold/episodes/eps_net_1m__mode_hold.json.gz"
+  }
+]

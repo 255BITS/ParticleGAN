@@ -1,0 +1,120 @@
+{
+  "candidate": "eps_net_1m",
+  "variant": "eps_net_1m",
+  "gate": "own_state_diagnostic_200",
+  "status": "PASS",
+  "initial": {
+    "step": 1200,
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.996826171875,
+    "cover": 1.0,
+    "effective_modes": 7.4932122230529785,
+    "sample_count": 4096,
+    "hq_counts": [
+      685,
+      725,
+      664,
+      695,
+      338,
+      321,
+      314,
+      341
+    ],
+    "nearest_counts": [
+      698,
+      725,
+      664,
+      695,
+      338,
+      321,
+      314,
+      341
+    ],
+    "closest_distance_per_mode": [
+      0.0023920799139887094,
+      0.001953125,
+      0.0036539623979479074,
+      0.002183660166338086,
+      0.0,
+      0.0029296875,
+      0.0,
+      0.006098630838096142
+    ],
+    "hq_radius": 0.21000000000000002,
+    "missing_modes": []
+  },
+  "window": {
+    "checks": 200,
+    "passing_checks": 200,
+    "failing_steps": [],
+    "min_modes": 8,
+    "min_hq": 0.9189453125,
+    "passing_suffix": 200,
+    "stable_from_step": 1201,
+    "pass_all": true,
+    "pass_suffix": true
+  },
+  "final": {
+    "step": 1400,
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.999755859375,
+    "cover": 1.0,
+    "effective_modes": 7.488031387329102,
+    "sample_count": 4096,
+    "hq_counts": [
+      697,
+      725,
+      664,
+      695,
+      338,
+      321,
+      314,
+      341
+    ],
+    "nearest_counts": [
+      698,
+      725,
+      664,
+      695,
+      338,
+      321,
+      314,
+      341
+    ],
+    "closest_distance_per_mode": [
+      0.0033829116728156805,
+      0.009765625,
+      0.009366858750581741,
+      0.0035210461355745792,
+      0.009417627938091755,
+      0.002583741443231702,
+      0.001953125,
+      0.0009765625
+    ],
+    "hq_radius": 0.21000000000000002,
+    "missing_modes": []
+  },
+  "work": {
+    "d_backwards": 200,
+    "g_backwards": 200,
+    "d_commits": 200,
+    "g_commits": 200,
+    "d_provisional": 0,
+    "g_provisional": 0
+  },
+  "optimizer_steps": {
+    "opt_g": [
+      1400
+    ],
+    "opt_d": [
+      1400
+    ]
+  },
+  "elapsed_seconds": 2.571771749993786,
+  "full_budget": true,
+  "hold_budget_complete": false,
+  "shared_gate_eligible": false,
+  "state_origin": "same-policy own cold acquisition"
+}

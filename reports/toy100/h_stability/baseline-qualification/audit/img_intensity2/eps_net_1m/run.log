@@ -1,0 +1,4 @@
+{"event": "START", "candidate": "eps_net_1m", "gate": "img_intensity2"}
+START img_intensity2 route=GANTrainer + generic noise wrappers steps=600
+{"event": "DONE", "task": "img_intensity2", "status": "FAIL", "suffix": 0, "live": {"modes": 2, "hq": 0.875, "mean_rmse": 0.04908951371908188, "quality_mode_fractions": [0.46875, 0.40625], "mode_fractions": [0.5625, 0.4375], "distribution_tv": 0.0625}, "error": null}
+{"event": "DONE", "candidate": "eps_net_1m", "gate": "img_intensity2", "status": "FAIL", "seconds": 7.394551491830498, "live": {"distribution_tv": 0.0625, "hq": 0.875, "mean_rmse": 0.04908951371908188, "mode_fractions": [0.5625, 0.4375], "modes": 2, "quality_mode_fractions": [0.46875, 0.40625]}}

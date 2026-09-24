@@ -1,0 +1,4 @@
+{"event": "START", "candidate": "eps_net_1m", "gate": "img_bars4"}
+START img_bars4 route=GANTrainer + generic noise wrappers steps=600
+{"event": "DONE", "task": "img_bars4", "status": "PASS", "suffix": 16, "live": {"modes": 4, "hq": 0.96875, "mean_rmse": 0.035087950527668, "quality_mode_fractions": [0.21875, 0.25, 0.21875, 0.28125], "mode_fractions": [0.21875, 0.25, 0.25, 0.28125], "distribution_tv": 0.03125}, "error": null}
+{"event": "DONE", "candidate": "eps_net_1m", "gate": "img_bars4", "status": "PASS", "seconds": 7.803814745042473, "live": {"distribution_tv": 0.03125, "hq": 0.96875, "mean_rmse": 0.035087950527668, "mode_fractions": [0.21875, 0.25, 0.25, 0.28125], "modes": 4, "quality_mode_fractions": [0.21875, 0.25, 0.21875, 0.28125]}}
