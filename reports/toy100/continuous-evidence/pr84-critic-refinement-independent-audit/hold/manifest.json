@@ -1,0 +1,80 @@
+{
+  "files": {
+    "declaration.json": {
+      "bytes": 2456,
+      "sha256": "4a19260c9570705e9f4aecaa73365f94e76b4f66f009c2d62f63aee21788380a",
+      "stored": "declaration.json.gz",
+      "stored_sha256": "a5883c4fb0ae33d5895da8bad325963f837be1333844e38ad068cbc822c64cbe"
+    },
+    "forks/cold.json": {
+      "bytes": 368132,
+      "sha256": "810135033aec41575e3638626824238145b8a0463276ff1e50501d62a8b826c6",
+      "stored": "forks/cold.json.gz",
+      "stored_sha256": "a9afe77fc243b3df9ffbe4c688c3144e7becd3d282e4b36f40f354e6590d2fe5"
+    },
+    "forks/identity.json": {
+      "bytes": 369192,
+      "sha256": "524f3c224fad2af5914bea357e028edbbb3752cb820a40edd3a9d102bf73b3cc",
+      "stored": "forks/identity.json.gz",
+      "stored_sha256": "21d91a21e17f0bdf5a569448a390cc78072003d55f6a47881ad885167ec35b5c"
+    },
+    "forks/original.json": {
+      "bytes": 812163,
+      "sha256": "9fc1c6ad92940f850ce7f189b6e219183fd9dceffb4bca1e96986dbe3e49b2e0",
+      "stored": "forks/original.json.gz",
+      "stored_sha256": "ea5c75254c1d24ae9b6dcb20b0954e2a3e987dc363314668dd7b8a765ec56adb"
+    },
+    "forks/refinement.json": {
+      "bytes": 35951853,
+      "sha256": "66f7c6dd070ddb74f5cebab8639c72e9a55fa4e2e48b2991c9b057c7ef81daf3",
+      "stored": "forks/refinement.json.gz",
+      "stored_sha256": "11f99c01151affa13780008330dc84f393b92476d5958bd132599dc7c74f4167"
+    },
+    "forks/summary.json": {
+      "bytes": 5050,
+      "sha256": "4f2e6fd8f161f77f21f5deb239604b04a63888b4d5a06fcd2d068d3c4754d6f8",
+      "stored": "forks/summary.json.gz",
+      "stored_sha256": "2d0863584e97bd86ca9852b1967c8c2f1b33ef858ca82082b9f3cd9faead4450"
+    },
+    "previous-gate.json": {
+      "bytes": 8695,
+      "sha256": "acd414de698ddb5484c18b6b0a4f4d3680250b0a8cb4ac1a511c6d3b7de4f1c4",
+      "stored": "previous-gate.json.gz",
+      "stored_sha256": "7bfddea9655a1fa4cc4ee529d2f07b84c3730d6243726c96eac0c4527a8cb3ed"
+    },
+    "source/configs/toy100/constraints_simple_regularization.json": {
+      "bytes": 1507,
+      "sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "stored": "source/configs/toy100/constraints_simple_regularization.json.gz",
+      "stored_sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f"
+    },
+    "summary.json": {
+      "bytes": 6937,
+      "sha256": "5c80fad3a2cbb9f4b197aa465c59922a5006882675af81de7409493d0169d54f",
+      "stored": "summary.json.gz",
+      "stored_sha256": "2e34cd22e95cdbbb36bb690852becb3420ccbfb540a5376eeec8b4b07bbe23a2"
+    }
+  },
+  "phase": "hold",
+  "source_archive": {
+    "stored_sha256": "7d8c0f67820fdafa78d1fddb48e0532c62c0c1c94d03eecc9c4e101449360460",
+    "tar_sha256": "e56185ac27421d439088ec5ce1b8c8019fc0637ac9b34694df260f7a299bd642"
+  },
+  "source_files": {
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "generated_warm_observer.py": "a58f4462d8341ea4fb2dbeb958af51d45c0a33e198c2d08b7decffbcde2d3507",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/pr84_critic_refinement.py": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11",
+    "reports/toy100/pr84_critic_refinement_probe.py": "33fa91f5da341e64ac2c4de8eeb2712ed41a9a9861e17d916cbe89cecd78266a",
+    "reports/toy100/pr84_critic_relaxation.py": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/pr84_smoothed_parity.py": "27a8b6fecd289369a94f069346cec136e4e38ffe1c7c96aac65b35318a4d1bea"
+  }
+}
