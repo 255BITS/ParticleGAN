@@ -1,0 +1,69 @@
+{
+  "candidate_commit": "eb70e6eee2f88e28f36758f9b385a7d09ba1c152",
+  "evidence": {
+    "captured-raw.json.gz": {
+      "raw_bytes": 74403,
+      "raw_sha256": "17c2315e3cd7faf12ea568ccbe282cb5c53b4de99de21ead3c9335e34cc9b4f5",
+      "stored_sha256": "b12be893961a094bd0eb7699e4938cfb21c211294f92c899c0a44f903d55ef4f"
+    },
+    "diagnosis.json.gz": {
+      "raw_bytes": 241505,
+      "raw_sha256": "773a901304e03d82f7d1d817827084303fe40fa37b55714388ba892a88c8131c",
+      "stored_sha256": "ed7995a3f7dd63855165746e597ad43ece3d752cc19f56ab0725edce3bf7df60"
+    },
+    "fixed-eval.json.gz": {
+      "raw_bytes": 24054,
+      "raw_sha256": "2416eb285149d7ae6c70aac57fa91067cfddc1f40e43083b6a7d52d835c062c7",
+      "stored_sha256": "32defc58886d34b299946d865846fc3615f8a749dccbc680c8eabde877f5d20c"
+    },
+    "original-coverage-reference.json.gz": {
+      "raw_bytes": 420157,
+      "raw_sha256": "0ea8eae016a3e667d064d00e4b3af0558828358149d06e46007863de2bf381f6",
+      "stored_sha256": "7bf201ef6909bf9d7ca3e8a7451b1506d73dc32d5b6c5cb4c497da8bbfcd63ba"
+    },
+    "post-gan-counterfactual-states.pt": {
+      "format": "torch.save primitive tensor dictionary; load weights_only=True",
+      "raw_bytes": 247741,
+      "raw_sha256": "45e1b0e5d14fcc54c420205d6c221330721a4d1740f85efaf9726866023d4b24",
+      "stored_sha256": "45e1b0e5d14fcc54c420205d6c221330721a4d1740f85efaf9726866023d4b24"
+    },
+    "replay-cold.json.gz": {
+      "raw_bytes": 58685,
+      "raw_sha256": "f2c36801c1811b426b4d29f67c132862fb7aca1dc55818fce8dc6e12eb598172",
+      "stored_sha256": "d303c91449a4463692a708d9ebdeea4fca009f63824002a145616ac303b0dcf8"
+    },
+    "replay-coverage.json.gz": {
+      "raw_bytes": 420161,
+      "raw_sha256": "d4c407d0e78d1c46a8763b54f014e55683de5439ccea3512a30236f050235b23",
+      "stored_sha256": "1d140ad1118529539df3df6c324b8e0932348de9b368592ef4bcc52007749f0a"
+    },
+    "replay-identity.json.gz": {
+      "raw_bytes": 85694,
+      "raw_sha256": "5d14b19694085245724f5c7ab2fed104ba889702956e8e51210b95f43ef64fad",
+      "stored_sha256": "2f2ba6abb920f5d385b6e59ca0666c3437f9d49ffdb641c3a336a4ee4ebd9d97"
+    },
+    "replay-summary.json.gz": {
+      "raw_bytes": 2053,
+      "raw_sha256": "afa11b747bbfd45526a3c7ab2050b9fd97aa32b1ed7813645fdd03841a4b34c0",
+      "stored_sha256": "27082080c265f2283a6aa38859614c5b269f64875cdd941420d70f60b6329ab0"
+    },
+    "replay.log.gz": {
+      "raw_bytes": 291,
+      "raw_sha256": "48ba5e12b23bd86cba10eb9f2951e79851bacdf64d72dd4751be6dbeefd455c0",
+      "stored_sha256": "971fcc7654a4de55405e5c08cc1804fd7343a5f8334641c655ec20364b92a083"
+    }
+  },
+  "scope": "nine predeclared warm checkpoints; observer-only replay; no candidate edits, cold test or tuning",
+  "source_sha256": {
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/coverage_failure_replay.py": "9a8b56750d5b9fcf5ec45d8c951152f4ec2dc9bfa4bfd774c354efc8e7133365",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/coverage_pullback.py": "785e2f268442025a3582616759fb9fbcdac66fea7e427f15c8e619e97c424d35",
+    "reports/toy100/coverage_smoothed_candidate.py": "9051462504903db1ac359c8e288d154436500eeea9c55593d01ae2a0338a3d10",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f"
+  }
+}
