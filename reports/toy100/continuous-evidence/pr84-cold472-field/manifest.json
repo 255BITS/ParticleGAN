@@ -1,0 +1,14 @@
+{
+  "capture_raw_sha256": "19ceb38a92ba95ffaccd3aafbda55bbd77917765612666d923e986e5523d6965",
+  "receipt": {
+    "compressed_bytes": 69084,
+    "compressed_sha256": "ae20f86de1ead05cfeb237d22d955830dfcc3366f234d0fa2621a5c07e3cf136",
+    "gzip_mtime": 0,
+    "path": "diagnosis.json.gz",
+    "raw_bytes": 318146,
+    "raw_sha256": "444af96bb28ce3918db6d86a89f210beb59b430cf8450058df131e0587256b97"
+  },
+  "schema": "pr84-cold472-field-v1",
+  "scope": "single saved-state eight common G batch diagnostic; no D fit or outer training",
+  "source_sha256": "fe69c7c354212f068b73cb0a4117a7867dd691d7a607a1b3eff96a935eb997fe"
+}
