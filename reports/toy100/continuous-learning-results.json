@@ -14,23 +14,27 @@
     "continuation_rule": "uninterrupted training, fixed original noise horizon, every dense live check passes"
   },
   "counts": {
-    "primary_candidate_rows": 36,
-    "primary_control_rows": 3,
-    "primary_first_failed_mode_hold": 28,
-    "primary_first_failed_trajectory": 8,
+    "primary_candidate_rows": 41,
+    "primary_control_rows": 4,
+    "primary_first_failed_mode_hold": 30,
+    "primary_first_failed_trajectory": 11,
     "calibration_unique_arms": 3,
     "calibration_runs": 5,
     "diagnostic_followups": 1,
-    "warm_diagnostic_runs": 4,
-    "warm_candidate_diagnostic_runs": 2,
-    "warm_candidate_passes": 0,
+    "warm_diagnostic_runs": 22,
+    "warm_candidate_diagnostic_runs": 13,
+    "warm_candidate_passes": 8,
+    "warm_extended_control_runs": 3,
     "production_gate_winners": 0
   },
   "limits": [
     "No training-seed sweep. Same-seed method controls are separate rows, not statistical replications.",
     "Scratch optimizer or game-policy rows are not eligible for the shared production gate.",
     "A cold 1,200-step rejection does not establish fundamental impossibility or exclude a successful warm-state mechanism.",
-    "Warm fixed-metric EG results are conditional on a scheduled passing state at update 1000; they do not test cold acquisition.",
+    "Warm method results are conditional on a scheduled passing state at update 1000; they do not test cold acquisition.",
+    "Warm lookahead and confidence candidate PASS rows failed their separate cold acquisitions; no overall survivor is implied.",
+    "Warm secant candidates passed 200/200 local checks but failed the separately declared cold trajectory acquisition; no mode-hold was attempted for them.",
+    "The confidence warm adapter hash was not recorded at execution; its current archived cold source must not be attributed to the warm run.",
     "The two warm EG variants have nonfinite denominator diagnostics but finite recorded host metrics; no broad EG impossibility follows.",
     "No unattempted downstream task is counted as a pass or failure.",
     "Eps-wave1/2 saved episodes changed after stage hashes were recorded. Original stage hashes and current file hashes are both recorded; the independent regrade matches current files, grades them FAIL, and the production gate rejects them."
@@ -52,7 +56,7 @@
       "declaration": {
         "worktree": "ParticleGAN-continuous-learning",
         "path": "reports/toy100/continuous-evidence/manifest.json",
-        "sha256": "3c32ed149aa0385d4ba1b017a307828353cdddbea510f8cfe4458a13ed71a8f2"
+        "sha256": "407ba992ec84a0a917a0ecda8e24e982aa7e711fc5994dbff709202b44414c36"
       },
       "runs": [
         {
@@ -2781,6 +2785,21 @@
         "ParticleGAN-continuous-probe:benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
         "ParticleGAN-continuous-probe:benchmarks/toy100/continuous_probe.py": "49d2a56484ea1efac29f77f2de6c024ef7187b85a6adc4c6694d613efc2e3067"
       },
+      "source_archive": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-fixedmetric-eg-warm-v2/source_archive/sha256.json",
+        "sha256": "0f1cd63d71aa0a544cafe0a849b75a3ad420de0c2ab20ab52ed93d034adee075"
+      },
+      "transformed_mode_hold": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-fixedmetric-eg-warm-v2/source_archive/mode_hold_transformed.py",
+        "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da"
+      },
+      "transformed_trajectory": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-fixedmetric-eg-warm-v2/source_archive/trajectory_transformed.py",
+        "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e"
+      },
       "declaration": {
         "worktree": "ParticleGAN-continuous-mechanism",
         "path": "artifacts/continuous-fixedmetric-eg-warm-v2.declaration.json",
@@ -3018,6 +3037,1804 @@
             "worktree": "ParticleGAN-continuous-mechanism",
             "path": "artifacts/continuous-fixedmetric-eg-warm-v2/independent_sample.json",
             "sha256": "8d4341aeffe17ad28f8c680dddf8ee3da297cad0ca54406c0a289d106fc07945"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lookahead-warm-v1",
+      "phase": "warm_local_stability",
+      "scope": "All forks start from the same scheduled passing state at update 1000; 200 updates only. Passing rows still failed cold mode-hold.",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/warm-lookahead"
+      },
+      "run_count": 9,
+      "candidate_diagnostic_runs": 6,
+      "control_runs": 3,
+      "source_hashes": {
+        "reports/toy100/continuous_lookahead.py": "45e673f241d83963aacde856c64ae188e484ea3dfbf4f84f5664361f3506ad16",
+        "benchmarks/toy100/warm_equilibrium_probe.py": "f57d70d6fcf947072edd2f18ab1c34f562b53801b7066e95a98c48a6a61baa71",
+        "benchmarks/toy100/continuous_probe.py": "73cedcbb6e58161596d039506634defeb5f0645b13b2a9047804b8b9f0c4889a",
+        "source.tar.gz": "cd3ef70a1412acf38a46961ec4265618bc9201b33a96b9c2d4c134d78c6a3334"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/warm-lookahead/manifest.json",
+        "sha256": "39005f7d4738b8a5cb1f31956f609b9da1f0669fec50ed0866ddb8ec62713113"
+      },
+      "summary": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/warm-lookahead/summary.json.gz",
+        "sha256": "912eb44c54ff20648eee52b56271d918699ad58d928e2ee99bbf023087b509de"
+      },
+      "runs": [
+        {
+          "tag": "identity",
+          "kind": "control",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "cold_row": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.996337890625,
+          "final": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 4.254505882408814e-05,
+              "max": 0.0016017594338655719,
+              "observations": 200
+            },
+            "g": {
+              "min": 4.254505882408814e-05,
+              "max": 0.0016017594338655719,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0004250864765310783,
+              "max": 0.003417518105398572,
+              "observations": 200
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "synchronization_count": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-lookahead/identity.json.gz",
+            "sha256": "f25cc04eb9ff985d32c74e3c389060a4bd5c8e4f84438e2af78c0c07123577ac"
+          }
+        },
+        {
+          "tag": "lookahead_k10_100",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "cold_row": "la_k10_lr0p001",
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.99951171875,
+          "final": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.001,
+              "max": 0.001,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.001,
+              "max": 0.001,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.002,
+              "max": 0.002,
+              "observations": 200
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "synchronization_count": 20,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-lookahead/lookahead_k10_100.json.gz",
+            "sha256": "c9ef7b86353a59850c1373d6fd8a3a127b0e07b3b7f414bc7c9af541b5ab1c51"
+          }
+        },
+        {
+          "tag": "lookahead_k10_425",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "warm_local_stability",
+          "cold_row": "la_k10_lr0p00425",
+          "passing_checks": 8,
+          "checks": 200,
+          "min_modes": 1,
+          "min_hq": 0.010986328125,
+          "final": {
+            "modes": 8,
+            "hq": 0.79541015625
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 200
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "synchronization_count": 20,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-lookahead/lookahead_k10_425.json.gz",
+            "sha256": "9caffa321c135f3cacef35071f06eba4333763dac67396b876edb7dad06baa37"
+          }
+        },
+        {
+          "tag": "lookahead_k2_100",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "cold_row": "la_k2_lr0p001",
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.99951171875,
+          "final": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.001,
+              "max": 0.001,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.001,
+              "max": 0.001,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.002,
+              "max": 0.002,
+              "observations": 200
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "synchronization_count": 100,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-lookahead/lookahead_k2_100.json.gz",
+            "sha256": "2e0a86f500a7bfe68d8db88c283504e943d7c49129a570e9e45259f8bae0db5e"
+          }
+        },
+        {
+          "tag": "lookahead_k2_425",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "warm_local_stability",
+          "cold_row": "la_k2_lr0p00425",
+          "passing_checks": 1,
+          "checks": 200,
+          "min_modes": 1,
+          "min_hq": 0.010986328125,
+          "final": {
+            "modes": 7,
+            "hq": 0.288818359375
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 200
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "synchronization_count": 100,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-lookahead/lookahead_k2_425.json.gz",
+            "sha256": "5b1d7f6d83c968a855b971449b88b3acd4852d1f3e57773ca60c39604730bdde"
+          }
+        },
+        {
+          "tag": "lookahead_k5_100",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "cold_row": "la_k5_lr0p001",
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.999267578125,
+          "final": {
+            "modes": 8,
+            "hq": 0.999755859375
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.001,
+              "max": 0.001,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.001,
+              "max": 0.001,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.002,
+              "max": 0.002,
+              "observations": 200
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "synchronization_count": 40,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-lookahead/lookahead_k5_100.json.gz",
+            "sha256": "9fd8c6d5a6837f1a4af306eaa2d3b250392b0131c5ce2ed778d0ebcbb18f8d01"
+          }
+        },
+        {
+          "tag": "lookahead_k5_425",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "warm_local_stability",
+          "cold_row": "la_k5_lr0p00425",
+          "passing_checks": 28,
+          "checks": 200,
+          "min_modes": 1,
+          "min_hq": 0.010986328125,
+          "final": {
+            "modes": 8,
+            "hq": 0.986083984375
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 200
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "synchronization_count": 40,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-lookahead/lookahead_k5_425.json.gz",
+            "sha256": "e928b77b7e3325db906038f9ad2ef14d092134fa4ef0b24cb86d589185c3788b"
+          }
+        },
+        {
+          "tag": "ordinary_100",
+          "kind": "control",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "cold_row": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.999267578125,
+          "final": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.001,
+              "max": 0.001,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.001,
+              "max": 0.001,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.002,
+              "max": 0.002,
+              "observations": 200
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "synchronization_count": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-lookahead/ordinary_100.json.gz",
+            "sha256": "00d6046d059302f6f4e4490bd88add90b4800d80602d2ca5e115abf549ec8a4f"
+          }
+        },
+        {
+          "tag": "ordinary_425",
+          "kind": "control",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "warm_local_stability",
+          "cold_row": null,
+          "passing_checks": 6,
+          "checks": 200,
+          "min_modes": 1,
+          "min_hq": 0.00537109375,
+          "final": {
+            "modes": 6,
+            "hq": 0.504638671875
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 200
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "synchronization_count": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-lookahead/ordinary_425.json.gz",
+            "sha256": "10dcf9c8ef6c63a975e05fbced186a8afcb4988661ad8054df73d93276cc4481"
+          }
+        }
+      ]
+    },
+    {
+      "id": "warm-extended-2400",
+      "phase": "warm_extended_hold",
+      "scope": "Three controls from one scheduled passing state at update 1000; dense 1001\u20131200 plus uninterrupted 1210\u20132400 hold.",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/warm-extended-2400"
+      },
+      "run_count": 3,
+      "control_runs": 3,
+      "source_hashes": {
+        "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+        "benchmarks/toy100/continuous_probe.py": "49d2a56484ea1efac29f77f2de6c024ef7187b85a6adc4c6694d613efc2e3067",
+        "source.tar.gz": "09be8804101e8706cad91f2d6b23ff00e96ff22d2249e90aa7821e240bcabad1"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/warm-extended-2400/manifest.json",
+        "sha256": "660de94ff4ac3a7d357aca865c29b030bfc94dd92c1df9ec3f8e6367649ac910"
+      },
+      "summary": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/warm-extended-2400/summary.json.gz",
+        "sha256": "9ba0a765e60736c543d0bbc70937650de5809441e1c15a2b7354c22cc30df722"
+      },
+      "runs": [
+        {
+          "tag": "constant_001",
+          "kind": "control",
+          "phase": "warm_extended_hold",
+          "warm_step": 1000,
+          "steps": 2400,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "continued_hold",
+          "local_stability": {
+            "checks": 200,
+            "passing_checks": 200,
+            "min_modes": 8,
+            "min_hq": 0.999267578125
+          },
+          "continued_hold": {
+            "checks": 120,
+            "passing_checks": 119,
+            "passing_suffix": 45,
+            "min_modes": 8,
+            "min_hq": 0.790283203125
+          },
+          "final": {
+            "modes": 8,
+            "hq": 0.9990234375
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.001,
+              "max": 0.001,
+              "observations": 1400
+            },
+            "g": {
+              "min": 0.001,
+              "max": 0.001,
+              "observations": 1400
+            },
+            "prior": {
+              "min": 0.002,
+              "max": 0.002,
+              "observations": 1400
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              2400,
+              2400
+            ],
+            [
+              2400,
+              2400
+            ]
+          ],
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-extended-2400/constant_001.json.gz",
+            "sha256": "97a4935d186727b2113d853da33e2170ad4f0dfb8a444698c024009d91afe60f"
+          }
+        },
+        {
+          "tag": "constant_00425",
+          "kind": "control",
+          "phase": "warm_extended_hold",
+          "warm_step": 1000,
+          "steps": 2400,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "warm_local_stability",
+          "local_stability": {
+            "checks": 200,
+            "passing_checks": 6,
+            "min_modes": 1,
+            "min_hq": 0.00537109375
+          },
+          "continued_hold": {
+            "checks": 120,
+            "passing_checks": 6,
+            "passing_suffix": 0,
+            "min_modes": 4,
+            "min_hq": 0.101806640625
+          },
+          "final": {
+            "modes": 8,
+            "hq": 0.767822265625
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 1400
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 1400
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 1400
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              2400,
+              2400
+            ],
+            [
+              2400,
+              2400
+            ]
+          ],
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-extended-2400/constant_00425.json.gz",
+            "sha256": "d35749e67fb87fa78a4cf1753c7a20ba8068054b22763c6e86a700f5bd6ffc13"
+          }
+        },
+        {
+          "tag": "identity",
+          "kind": "control",
+          "phase": "warm_extended_hold",
+          "warm_step": 1000,
+          "steps": 2400,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "local_stability": {
+            "checks": 200,
+            "passing_checks": 200,
+            "min_modes": 8,
+            "min_hq": 0.996337890625
+          },
+          "continued_hold": {
+            "checks": 120,
+            "passing_checks": 120,
+            "passing_suffix": 120,
+            "min_modes": 8,
+            "min_hq": 0.998291015625
+          },
+          "final": {
+            "modes": 8,
+            "hq": 0.99951171875
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 4.25e-05,
+              "max": 0.0016017594338655719,
+              "observations": 1400
+            },
+            "g": {
+              "min": 4.25e-05,
+              "max": 0.0016017594338655719,
+              "observations": 1400
+            },
+            "prior": {
+              "min": 0.00042500000000000003,
+              "max": 0.003417518105398572,
+              "observations": 1400
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              2400,
+              2400
+            ],
+            [
+              2400,
+              2400
+            ]
+          ],
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/warm-extended-2400/identity.json.gz",
+            "sha256": "b5495af3ab6554099b270039219dd567982df837b15d269439cf9a9e8e443eaa"
+          }
+        }
+      ]
+    },
+    {
+      "id": "confidence-cold-v1",
+      "phase": "cold",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/confidence-cold-v1"
+      },
+      "declared_rows": 3,
+      "candidate_rows": 2,
+      "control_rows": 1,
+      "source_hashes": {
+        "reports/toy100/confidence_dynamics_scratch.py": "9ca16d50f81b929cc6b1c3c8cf1a4990e58e8637ec916e9898755cb45500d74e"
+      },
+      "adapter_archive": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/confidence-cold-v1/adapter_v1.py",
+        "sha256": "9ca16d50f81b929cc6b1c3c8cf1a4990e58e8637ec916e9898755cb45500d74e"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/confidence-cold-v1/declaration.json",
+        "sha256": "264859cf850f5b12e6541b11e2bb2968ef1e02d1a79f0f22cd910c52c9be2659"
+      },
+      "rows": [
+        {
+          "tag": "threshold_025",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "threshold": 0.25
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 5,
+              "hq": 0.423828125
+            },
+            {
+              "step": 1050,
+              "modes": 6,
+              "hq": 0.6181640625
+            },
+            {
+              "step": 1100,
+              "modes": 4,
+              "hq": 0.59326171875
+            },
+            {
+              "step": 1150,
+              "modes": 3,
+              "hq": 0.173583984375
+            },
+            {
+              "step": 1200,
+              "modes": 4,
+              "hq": 0.58837890625
+            }
+          ],
+          "final": {
+            "modes": 4,
+            "hq": 0.58837890625
+          },
+          "passing_suffix": 0,
+          "proposal_scale_min": 0.07006597518920898,
+          "proposal_scale_max": 1.0,
+          "subunit_scale_updates": 151,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/confidence-cold-v1/threshold_025.json.gz",
+            "sha256": "c573298ec1403cae45df1f0b1bdaa83b66639598445a2e3df07bdce101427f17"
+          }
+        },
+        {
+          "tag": "threshold_100",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "threshold": 1.0
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.91162109375
+            },
+            {
+              "step": 1050,
+              "modes": 5,
+              "hq": 0.719970703125
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.537109375
+            },
+            {
+              "step": 1150,
+              "modes": 2,
+              "hq": 0.139892578125
+            },
+            {
+              "step": 1200,
+              "modes": 6,
+              "hq": 0.74462890625
+            }
+          ],
+          "final": {
+            "modes": 6,
+            "hq": 0.74462890625
+          },
+          "passing_suffix": 0,
+          "proposal_scale_min": 0.02,
+          "proposal_scale_max": 0.49886560440063477,
+          "subunit_scale_updates": 1200,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/confidence-cold-v1/threshold_100.json.gz",
+            "sha256": "c67bebc26f50f922497c8112800e147bcf16f6f8e21a76520c1fde6087dfddcb"
+          }
+        },
+        {
+          "tag": "ordinary_observed",
+          "kind": "control",
+          "phase": "cold",
+          "parameters": {
+            "threshold": 1.0,
+            "observe_only": true
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 5,
+              "hq": 0.202880859375
+            },
+            {
+              "step": 1050,
+              "modes": 8,
+              "hq": 0.626708984375
+            },
+            {
+              "step": 1100,
+              "modes": 8,
+              "hq": 0.444091796875
+            },
+            {
+              "step": 1150,
+              "modes": 4,
+              "hq": 0.24365234375
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.369384765625
+            }
+          ],
+          "final": {
+            "modes": 7,
+            "hq": 0.369384765625
+          },
+          "passing_suffix": 0,
+          "proposal_scale_min": 1.0,
+          "proposal_scale_max": 1.0,
+          "subunit_scale_updates": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/confidence-cold-v1/ordinary_observed.json.gz",
+            "sha256": "b0b3ce687a0e9684c40cf1b60a224b2f994ca4ec986481a22b8e7742156f13ed"
+          }
+        }
+      ]
+    },
+    {
+      "id": "confidence-warm-v1",
+      "phase": "warm_local_stability",
+      "scope": "Conditional 200-step local stability from scheduled passing update 1000; both candidate variants failed cold mode-hold.",
+      "source_hash_status": "confidence adapter bytes/hash at warm execution were not recorded; current cold adapter hash is not attributed to this run",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/confidence-warm-v1"
+      },
+      "run_count": 4,
+      "candidate_diagnostic_runs": 2,
+      "control_runs": 2,
+      "source_hashes": {
+        "benchmarks/toy100/continuous_probe.py": "73cedcbb6e58161596d039506634defeb5f0645b13b2a9047804b8b9f0c4889a"
+      },
+      "summary": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/confidence-warm-v1/summary.json",
+        "sha256": "a9f435c5b0596474883d0bc14ff64f0a4a875262f7982c33ece713deb9152499"
+      },
+      "runs": [
+        {
+          "tag": "confidence_0p25",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.932373046875,
+          "final": {
+            "modes": 8,
+            "hq": 0.992431640625
+          },
+          "proposal_scale_min": 0.02,
+          "proposal_scale_max": 0.38646793365478516,
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 200
+            }
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/confidence-warm-v1/confidence_0p25.json",
+            "sha256": "69b3b35b9c5f3500796536b51ca70d84dabf051aeda1119de9c5027b633da24c"
+          }
+        },
+        {
+          "tag": "confidence_1p0",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.920166015625,
+          "final": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "proposal_scale_min": 0.02,
+          "proposal_scale_max": 0.09587812423706055,
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 200
+            }
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/confidence-warm-v1/confidence_1p0.json",
+            "sha256": "38d1d70146292426c023b07fef93156c070c46886e2cd22d2547214d8a469edd"
+          }
+        },
+        {
+          "tag": "identity",
+          "kind": "control",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.996337890625,
+          "final": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "proposal_scale_min": null,
+          "proposal_scale_max": null,
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 4.254505882408814e-05,
+              "max": 0.0016017594338655719,
+              "observations": 200
+            },
+            "g": {
+              "min": 4.254505882408814e-05,
+              "max": 0.0016017594338655719,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0004250864765310783,
+              "max": 0.003417518105398572,
+              "observations": 200
+            }
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/confidence-warm-v1/identity.json",
+            "sha256": "791388d9de1a67a608e2daa18cb0b186490fa4d8264a4c91cb90a5d25c3d6452"
+          }
+        },
+        {
+          "tag": "ordinary_observed",
+          "kind": "control",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "warm_local_stability",
+          "passing_checks": 6,
+          "checks": 200,
+          "min_modes": 1,
+          "min_hq": 0.00537109375,
+          "final": {
+            "modes": 6,
+            "hq": 0.504638671875
+          },
+          "proposal_scale_min": 1.0,
+          "proposal_scale_max": 1.0,
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 200
+            }
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/confidence-warm-v1/ordinary_observed.json",
+            "sha256": "265756240ed42b34fd953e0a9174f852956b07759d1b5a0cd79f1a4453bce17d"
+          }
+        }
+      ]
+    },
+    {
+      "id": "secant-eg-cold-v1",
+      "phase": "cold",
+      "scope": "Trajectory is first in the declared order; all three fail 0/24 checks at 400 updates, so mode-hold is unattempted. Nominal group rates are fixed, while a state-dependent accepted scale changes each joint proposal.",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-secant-eg-cold"
+      },
+      "declared_rows": 3,
+      "candidate_rows": 3,
+      "control_rows": 0,
+      "source_hashes": {
+        "reports/toy100/secant_extra_scratch.py": "8d8cee454baab2c4cd8beea7961eb5a9bfe49010b9b53770657e402dd29a698c",
+        "reports/toy100/fixed_metric_extra_scratch.py": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+        "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+        "reports/toy100/secant_extra_probe.py": "d0aab2274abfb2dc8672f57cb52395c55432e36b28e09c1972462fdfc59182bf"
+      },
+      "source_archive": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-secant-eg-cold/source_archive/sha256.json",
+        "sha256": "a9e3bd3ca8ed17cc7d39ca4bd984014579f51ef75c22044f31d2c76e7a0c67b7"
+      },
+      "transformed_mode_hold": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-secant-eg-cold/source_archive/mode_hold_transformed.py",
+        "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da"
+      },
+      "transformed_trajectory": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-secant-eg-cold/source_archive/trajectory_transformed.py",
+        "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-secant-eg-cold/declaration.json",
+        "sha256": "6ddade649f18f82aadc2b93941409fa43d535555098124aa04911734e56e5aac"
+      },
+      "rows": [
+        {
+          "tag": "secant_c25",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "c": 0.25,
+            "lr": 0.00425,
+            "prior_lr": 0.0085
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "trajectory": [
+            {
+              "step": 17,
+              "identity_mse": 0.2594210207462311
+            },
+            {
+              "step": 34,
+              "identity_mse": 0.2571526765823364
+            },
+            {
+              "step": 50,
+              "identity_mse": 0.2591879963874817
+            },
+            {
+              "step": 67,
+              "identity_mse": 0.22127576172351837
+            },
+            {
+              "step": 84,
+              "identity_mse": 0.2714729607105255
+            },
+            {
+              "step": 100,
+              "identity_mse": 0.2819303572177887
+            },
+            {
+              "step": 117,
+              "identity_mse": 0.28742000460624695
+            },
+            {
+              "step": 134,
+              "identity_mse": 0.28366589546203613
+            },
+            {
+              "step": 150,
+              "identity_mse": 0.28761589527130127
+            },
+            {
+              "step": 167,
+              "identity_mse": 0.28407153487205505
+            },
+            {
+              "step": 184,
+              "identity_mse": 0.28052833676338196
+            },
+            {
+              "step": 200,
+              "identity_mse": 0.2859034836292267
+            },
+            {
+              "step": 217,
+              "identity_mse": 0.28477320075035095
+            },
+            {
+              "step": 234,
+              "identity_mse": 0.2908354699611664
+            },
+            {
+              "step": 250,
+              "identity_mse": 0.2837860584259033
+            },
+            {
+              "step": 267,
+              "identity_mse": 0.2832608222961426
+            },
+            {
+              "step": 284,
+              "identity_mse": 0.28308698534965515
+            },
+            {
+              "step": 300,
+              "identity_mse": 0.2774318754673004
+            },
+            {
+              "step": 317,
+              "identity_mse": 0.28349944949150085
+            },
+            {
+              "step": 334,
+              "identity_mse": 0.2852432429790497
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.27886563539505005
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.2846900522708893
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.28517016768455505
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.2872024476528168
+            }
+          ],
+          "final": {
+            "identity_mse": 0.2872024476528168
+          },
+          "passing_checks": 0,
+          "checks": 24,
+          "applied_rate_by_role": {
+            "d": 0.00425,
+            "g": 0.00425,
+            "prior": 0.0085
+          },
+          "accepted_scale_min": 4.76837158203125e-07,
+          "accepted_scale_max": 0.25,
+          "rejected_trials": 416,
+          "optimizer_moment_steps": 400,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-secant-eg-cold/secant_c25/trajectory.json",
+            "sha256": "53db607ddc1d131a29b143bfb5e172e1a8063f178a7d403bfdd617fa677aa0b3"
+          },
+          "status_evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-secant-eg-cold/secant_c25/status.json",
+            "sha256": "b4207831f7638bbc1a41fa672a6d551fb3ca9277284cd62fcec36e04045aa2b0"
+          }
+        },
+        {
+          "tag": "secant_c50",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "c": 0.5,
+            "lr": 0.00425,
+            "prior_lr": 0.0085
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "trajectory": [
+            {
+              "step": 17,
+              "identity_mse": 0.39382246136665344
+            },
+            {
+              "step": 34,
+              "identity_mse": 0.3927837312221527
+            },
+            {
+              "step": 50,
+              "identity_mse": 0.3815845549106598
+            },
+            {
+              "step": 67,
+              "identity_mse": 0.376848965883255
+            },
+            {
+              "step": 84,
+              "identity_mse": 0.37653324007987976
+            },
+            {
+              "step": 100,
+              "identity_mse": 0.36904096603393555
+            },
+            {
+              "step": 117,
+              "identity_mse": 0.3654308617115021
+            },
+            {
+              "step": 134,
+              "identity_mse": 0.37088146805763245
+            },
+            {
+              "step": 150,
+              "identity_mse": 0.3615223169326782
+            },
+            {
+              "step": 167,
+              "identity_mse": 0.35466432571411133
+            },
+            {
+              "step": 184,
+              "identity_mse": 0.3484911024570465
+            },
+            {
+              "step": 200,
+              "identity_mse": 0.3554430902004242
+            },
+            {
+              "step": 217,
+              "identity_mse": 0.35136547684669495
+            },
+            {
+              "step": 234,
+              "identity_mse": 0.3568520247936249
+            },
+            {
+              "step": 250,
+              "identity_mse": 0.3528924882411957
+            },
+            {
+              "step": 267,
+              "identity_mse": 0.35227587819099426
+            },
+            {
+              "step": 284,
+              "identity_mse": 0.35010436177253723
+            },
+            {
+              "step": 300,
+              "identity_mse": 0.3470819294452667
+            },
+            {
+              "step": 317,
+              "identity_mse": 0.3518396317958832
+            },
+            {
+              "step": 334,
+              "identity_mse": 0.3541022539138794
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.350101113319397
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.3520180284976959
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.3505000174045563
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.35397371649742126
+            }
+          ],
+          "final": {
+            "identity_mse": 0.35397371649742126
+          },
+          "passing_checks": 0,
+          "checks": 24,
+          "applied_rate_by_role": {
+            "d": 0.00425,
+            "g": 0.00425,
+            "prior": 0.0085
+          },
+          "accepted_scale_min": 6.103515625e-05,
+          "accepted_scale_max": 0.5,
+          "rejected_trials": 406,
+          "optimizer_moment_steps": 400,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-secant-eg-cold/secant_c50/trajectory.json",
+            "sha256": "6f16711fe9be8b6b50b08e94302fa34de79bb870320c55e3f34954dafa5a2f25"
+          },
+          "status_evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-secant-eg-cold/secant_c50/status.json",
+            "sha256": "02d2c339e9f07c1c9866d7c8359482b4681ae9696f8e284e05605694525a1de9"
+          }
+        },
+        {
+          "tag": "secant_c90",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "c": 0.9,
+            "lr": 0.00425,
+            "prior_lr": 0.0085
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "trajectory": [
+            {
+              "step": 17,
+              "identity_mse": 0.3665841519832611
+            },
+            {
+              "step": 34,
+              "identity_mse": 0.3379749357700348
+            },
+            {
+              "step": 50,
+              "identity_mse": 0.32732751965522766
+            },
+            {
+              "step": 67,
+              "identity_mse": 0.31917497515678406
+            },
+            {
+              "step": 84,
+              "identity_mse": 0.2933303117752075
+            },
+            {
+              "step": 100,
+              "identity_mse": 0.24245412647724152
+            },
+            {
+              "step": 117,
+              "identity_mse": 0.23350238800048828
+            },
+            {
+              "step": 134,
+              "identity_mse": 0.23789851367473602
+            },
+            {
+              "step": 150,
+              "identity_mse": 0.2369099110364914
+            },
+            {
+              "step": 167,
+              "identity_mse": 0.23305177688598633
+            },
+            {
+              "step": 184,
+              "identity_mse": 0.22723931074142456
+            },
+            {
+              "step": 200,
+              "identity_mse": 0.22654969990253448
+            },
+            {
+              "step": 217,
+              "identity_mse": 0.22840984165668488
+            },
+            {
+              "step": 234,
+              "identity_mse": 0.22865594923496246
+            },
+            {
+              "step": 250,
+              "identity_mse": 0.22577141225337982
+            },
+            {
+              "step": 267,
+              "identity_mse": 0.22438298165798187
+            },
+            {
+              "step": 284,
+              "identity_mse": 0.22215332090854645
+            },
+            {
+              "step": 300,
+              "identity_mse": 0.22029484808444977
+            },
+            {
+              "step": 317,
+              "identity_mse": 0.22393567860126495
+            },
+            {
+              "step": 334,
+              "identity_mse": 0.22716844081878662
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.22346191108226776
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.20751453936100006
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.1508769392967224
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.13317124545574188
+            }
+          ],
+          "final": {
+            "identity_mse": 0.13317124545574188
+          },
+          "passing_checks": 0,
+          "checks": 24,
+          "applied_rate_by_role": {
+            "d": 0.00425,
+            "g": 0.00425,
+            "prior": 0.0085
+          },
+          "accepted_scale_min": 0.00390625,
+          "accepted_scale_max": 1.0,
+          "rejected_trials": 402,
+          "optimizer_moment_steps": 400,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-secant-eg-cold/secant_c90/trajectory.json",
+            "sha256": "653b7f862d6ab1ac7adf9dc37121f5a88189d45fe8ac1a03ec415428b623af14"
+          },
+          "status_evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-secant-eg-cold/secant_c90/status.json",
+            "sha256": "11a60c1c599f0c8828a644e6758fb47887ce47ee426374ff99d495da2e103280"
+          }
+        }
+      ]
+    },
+    {
+      "id": "secant-eg-warm-v1",
+      "phase": "warm_local_stability",
+      "scope": "Three 200-step local stability passes from the same scheduled passing update-1000 state; all three fail the separate cold trajectory acquisition. The accepted joint proposal scale varies by state despite fixed nominal optimizer rates.",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-secant-eg-warm"
+      },
+      "run_count": 5,
+      "candidate_diagnostic_runs": 3,
+      "control_runs": 2,
+      "source_hashes": {
+        "ParticleGAN-continuous-mechanism:reports/toy100/secant_extra_warm_probe.py": "18afe6b2683ae6457d5af75848c55137e671b5e3874b2b4cfb5e58b27fb73ad6",
+        "ParticleGAN-continuous-mechanism:reports/toy100/secant_extra_scratch.py": "8d8cee454baab2c4cd8beea7961eb5a9bfe49010b9b53770657e402dd29a698c",
+        "ParticleGAN-continuous-mechanism:reports/toy100/fixed_metric_extra_scratch.py": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+        "ParticleGAN-continuous-mechanism:reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+        "ParticleGAN-continuous-probe:benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+        "ParticleGAN-continuous-probe:benchmarks/toy100/continuous_probe.py": "49d2a56484ea1efac29f77f2de6c024ef7187b85a6adc4c6694d613efc2e3067"
+      },
+      "source_archive": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-secant-eg-warm/source_archive/sha256.json",
+        "sha256": "e56fe5b2733889d6bdc4b13125f61b4d6cd5c0b2b21a1da73cac39c27272ae43"
+      },
+      "transformed_mode_hold": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-secant-eg-warm/source_archive/mode_hold_transformed.py",
+        "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da"
+      },
+      "transformed_trajectory": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-secant-eg-warm/source_archive/trajectory_transformed.py",
+        "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-secant-eg-warm.declaration.json",
+        "sha256": "c032784f95dab141cc82bb7bee1b0782eb369f981d97cb0a6a181b7429104bcb"
+      },
+      "summary": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-secant-eg-warm/summary.json",
+        "sha256": "696e1d8974ddcf5a714cfbb9ba205a13fb88803aab49580863bd5403dcd7144b"
+      },
+      "runs": [
+        {
+          "tag": "identity",
+          "kind": "control",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.996337890625,
+          "final": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 4.254505882408814e-05,
+              "max": 0.0016017594338655719,
+              "observations": 200
+            },
+            "g": {
+              "min": 4.254505882408814e-05,
+              "max": 0.0016017594338655719,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0004250864765310783,
+              "max": 0.003417518105398572,
+              "observations": 200
+            }
+          },
+          "accepted_scale_min": null,
+          "accepted_scale_max": null,
+          "rejected_trials": null,
+          "optimizer_moment_steps": null,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-secant-eg-warm/identity.json",
+            "sha256": "6c57ba72e56f74637fdf5448bb164db2537dd5121673468ef0b87510b182daa7"
+          }
+        },
+        {
+          "tag": "constant",
+          "kind": "control",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "warm_local_stability",
+          "passing_checks": 6,
+          "checks": 200,
+          "min_modes": 1,
+          "min_hq": 0.00537109375,
+          "final": {
+            "modes": 6,
+            "hq": 0.504638671875
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 200
+            }
+          },
+          "accepted_scale_min": null,
+          "accepted_scale_max": null,
+          "rejected_trials": null,
+          "optimizer_moment_steps": null,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-secant-eg-warm/constant.json",
+            "sha256": "f75d5ecac6e9ad5368b391fd06cf593b54b1abb876be99079090adc98b3f0090"
+          }
+        },
+        {
+          "tag": "c025",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.9990234375,
+          "final": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 602
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 602
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 602
+            }
+          },
+          "accepted_scale_min": 0.03125,
+          "accepted_scale_max": 0.25,
+          "rejected_trials": 202,
+          "optimizer_moment_steps": 1200,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-secant-eg-warm/c025.json",
+            "sha256": "e55c8ba349d5a466dc13db9492f4172d20be8ad36a5f1676d25b16017af44a96"
+          }
+        },
+        {
+          "tag": "c05",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.998291015625,
+          "final": {
+            "modes": 8,
+            "hq": 0.998291015625
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 600
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 600
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 600
+            }
+          },
+          "accepted_scale_min": 0.0625,
+          "accepted_scale_max": 0.5,
+          "rejected_trials": 200,
+          "optimizer_moment_steps": 1200,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-secant-eg-warm/c05.json",
+            "sha256": "c9bd738db1fa8c3b892a95be731cf1ce9539e4a368b5577f346982c8e838f4e5"
+          }
+        },
+        {
+          "tag": "c09",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.924560546875,
+          "final": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 593
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 593
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 593
+            }
+          },
+          "accepted_scale_min": 0.125,
+          "accepted_scale_max": 1.0,
+          "rejected_trials": 193,
+          "optimizer_moment_steps": 1200,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-secant-eg-warm/c09.json",
+            "sha256": "64e94536dd0757f6b393c4adb27d4a6c8c4fe6756d36f51d1e7e386e84229535"
           }
         }
       ]
