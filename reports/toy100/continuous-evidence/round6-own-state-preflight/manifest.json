@@ -1,0 +1,10 @@
+{
+  "scope": "no-training preflight only",
+  "source_sha256": {
+    "reports/toy100/pr84_critic_refinement_resume.py": "9b23c40b3263753552f69860404759eded03ec2ac84f8c592f403caff804264b",
+    "reports/toy100/pr84_model_error_recovery.py": "d38f9c09f679c96ed598f8b965438f43303a7a4e75930033cadb25f047e33ed7",
+    "reports/toy100/sample_anchor_own_state_probe.py": "bcf3871a83c2763701af056fa4634139a7387f06019729b73c7068a9b08bcccd",
+    "tests/test_sample_anchor_own_state_probe.py": "e55cc29affce3f80bf9ec61d5a4c3a95d4e40ac734f82b6c8aaeb4ff39e6f427"
+  },
+  "test_log_sha256": "9221a13db52443d289e4afdd72bab2848423a0c9684dd9836868bc6b7a8eaed0"
+}
