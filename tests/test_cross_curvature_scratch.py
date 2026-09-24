@@ -152,3 +152,18 @@ def test_amplification_bound_caps_each_players_step_at_its_explicit_adam_step():
     row = recorder.curvature[-1]
     assert row["g_amplification"]["clamped"] and not row["d_amplification"]["clamped"]
     assert row["g_amplification"]["proposed_to_explicit"] == pytest.approx(1.044776, abs=1e-5)
+
+
+def test_explicit_mode_is_plain_adam_until_own_curvature_bound_binds():
+    recorder = CrossCurvatureRecorder(explicit=True)
+    x, y, *_ = _run_quadratic_game(0., 0., recorder)
+    assert x.item() == pytest.approx(.9, abs=1e-9)
+    assert y.item() == pytest.approx(2.1, abs=1e-9)
+    assert {q["kind"] for q in recorder.queries} == {"own_curvature_d", "own_curvature_g"}
+    a, b, lr = 3., -.01, 10.
+    recorder = CrossCurvatureRecorder(explicit=True)
+    x, y, *_ = _run_quadratic_game(a, b, recorder, lr=lr)
+    rho = lr / 5. * 3.
+    assert recorder.curvature[-1]["g"]["rho"] == pytest.approx(rho, rel=1e-4)
+    assert x.item() == pytest.approx(1. - lr / 5. * 5. / rho, rel=1e-4)
+    assert y.item() == pytest.approx(2. - lr / abs(-1.02) * -1.02, rel=1e-6)

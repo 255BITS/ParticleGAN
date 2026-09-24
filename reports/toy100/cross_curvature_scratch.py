@@ -15,6 +15,11 @@ rho_p is the effective preconditioned step times curvature along the step
 (GD on a quadratic is monotone for rho<1 and unstable beyond 2). It depends
 on the current state, not on training age.
 
+With ``explicit=True`` there is no cross solve: the proposal is the ordinary
+beta1=0 Adam step u=-sqrt(P) F0 (constant Adam, which acquires the cold
+trajectory host unaided), and only the per-player own-curvature bound is
+applied. That costs two extra same-sample evaluations per update.
+
 The underlying solve:
 
 P is the first-gradient Adam metric including each role's constant LR, as in
@@ -46,11 +51,12 @@ from reports.toy100.implicit_extra_scratch import ImplicitExtraRecorder
 from reports.toy100.extra_adam_scratch import HOSTS,sha,transformed_function
 
 METHOD='same_sample_cross_only_response_with_own_curvature_step_bound'
+EXPLICIT_METHOD='adam_with_same_sample_own_curvature_step_bound'
 
 
 class CrossCurvatureRecorder(ImplicitExtraRecorder):
     def __init__(self,start_step=0,krylov_dim=8,linear_tolerance=.1,fd_relative=1e-4,
-                 correction_limit=2.,max_backtracks=8,curvature_bound=1.,amplification_bound=None):
+                 correction_limit=2.,max_backtracks=8,curvature_bound=1.,amplification_bound=None,explicit=False):
         super().__init__(start_step=start_step,krylov_dim=krylov_dim,linear_tolerance=linear_tolerance,
                          nonlinear_tolerance=.5,fd_relative=fd_relative,correction_limit=correction_limit,
                          max_backtracks=max_backtracks)
@@ -58,6 +64,7 @@ class CrossCurvatureRecorder(ImplicitExtraRecorder):
         if amplification_bound is not None and (not math.isfinite(amplification_bound) or amplification_bound<=0):
             raise ValueError('invalid amplification bound')
         self.curvature_bound=curvature_bound;self.amplification_bound=amplification_bound
+        self.explicit=explicit
         self.split=None;self.curvature=[]
 
     def _own_curvature_bound(self,solution,q0,scale):
@@ -173,7 +180,10 @@ class CrossCurvatureRecorder(ImplicitExtraRecorder):
             scale=1.
         else:
             for retry in range(self.max_backtracks+1):
-                solution,diagnostic=yield from self._solve(scale,q0)
+                if self.explicit:
+                    solution=-scale*q0
+                    diagnostic=dict(krylov_iterations=0,linear_relative_residual=0.,finite_difference_evaluations=0)
+                else:solution,diagnostic=yield from self._solve(scale,q0)
                 diagnostic.update(outer_step=self.outer_steps+1,retry=retry,scale=scale,accepted=False)
                 correction_ratio=float(torch.linalg.vector_norm(solution))/(scale*qnorm)
                 diagnostic['correction_to_explicit_norm_ratio']=correction_ratio
@@ -234,7 +244,7 @@ class CrossCurvatureRecorder(ImplicitExtraRecorder):
 
     def receipt(self):
         value=super().receipt()
-        value.update(method=METHOD,nonlinear_tolerance=None,
+        value.update(method=EXPLICIT_METHOD if self.explicit else METHOD,nonlinear_tolerance=None,
             output_weights='accepted linear-residual-checked cross-only competitive proposal',
             scratch_optimizer_policy=METHOD,summary=self.summary(),
             jacobian_blocks='cross-player only in the solve; own-player blocks measured along the accepted step and used only for the per-player curvature bound',
