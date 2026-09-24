@@ -1,0 +1,171 @@
+{
+  "cap_diagnostic": "four exact phase-0 D real/latent banks, fake output-noise draw reconstructed from saved RNG",
+  "completed": "v2 four saved states, 17 paired batches per state, summary present",
+  "files": [
+    {
+      "compressed_bytes": 1535,
+      "compressed_sha256": "43f630a16c1b3a234f2202a0934066aa42aa0878eefc7e669844b8873434d57a",
+      "path": "cap_diagnostic/ideal-cap-actual-d.json.gz",
+      "raw_bytes": 4851,
+      "raw_sha256": "e32a08f6df926efd475f07facfef86661ddae6a2c1249b18a8f3d5ab0417e6c0"
+    },
+    {
+      "compressed_bytes": 1628,
+      "compressed_sha256": "d74d2dea00ba17ce48eb570b90c96a69da7f71dc1bac106f57e2d77bfbc613be",
+      "path": "cap_diagnostic/source.py.gz",
+      "raw_bytes": 4365,
+      "raw_sha256": "47f7064c427effb99342332c39bba7758d63cc2b7cddb9312173434acbbd02f4"
+    },
+    {
+      "compressed_bytes": 732,
+      "compressed_sha256": "d06878c5b4e0bb288b85d51d4b4f10b59400977a5306ece13aecd12681411c76",
+      "path": "completed_v2/declaration.json.gz",
+      "raw_bytes": 1280,
+      "raw_sha256": "2c5788cb14775c65d769d15cf6a52cc27816a5695f376ec3da18a6847ed488ab"
+    },
+    {
+      "compressed_bytes": 3580,
+      "compressed_sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "path": "completed_v2/source/benchmarks/locked_shared/mode_hold.py.gz",
+      "raw_bytes": 10774,
+      "raw_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    {
+      "compressed_bytes": 661,
+      "compressed_sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "path": "completed_v2/source/configs/toy100/constraints_simple_regularization.json.gz",
+      "raw_bytes": 1507,
+      "raw_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+    },
+    {
+      "compressed_bytes": 5836,
+      "compressed_sha256": "82f93c450efc6ebdaf804cf2b7a085a38e744a1e3543072a20fea28817ee5779",
+      "path": "completed_v2/source/reports/toy100/pr84_heldout_signal.py.gz",
+      "raw_bytes": 20647,
+      "raw_sha256": "06984409baeb279f7b6ed119ee3beb407d9812368d1bd574230a5c349a0f8c1f"
+    },
+    {
+      "compressed_bytes": 2968,
+      "compressed_sha256": "55c2741f773f3999de35dae25bf64213016cefde22dd1377ea85fa10d3167d81",
+      "path": "completed_v2/source/reports/toy100/pr84_population_field.py.gz",
+      "raw_bytes": 8492,
+      "raw_sha256": "25b35cbd35c7ce6b621edba2ebb966308b7196e90bf11ab48ef15792f0119581"
+    },
+    {
+      "compressed_bytes": 1767,
+      "compressed_sha256": "bf38d8b3b997f51dcaca36cf66248d926bd08020279364fc2082c4f69afdca41",
+      "path": "completed_v2/source/reports/toy100/pr84_stationary_field_analysis.py.gz",
+      "raw_bytes": 4867,
+      "raw_sha256": "e4ae90161a8c76b542b9c92ce38712eeefe57ca40089cb8f52194a4fa503c15a"
+    },
+    {
+      "compressed_bytes": 21047,
+      "compressed_sha256": "c29143655e876b9c246440744f1460c9ace19bdfffd6ac10e0c8ff981f152172",
+      "path": "completed_v2/step-1325.json.gz",
+      "raw_bytes": 95230,
+      "raw_sha256": "50e05c95ae4d4acc2493ff86cf927339d9e503845ddfb4bb85bd347f266a8d19"
+    },
+    {
+      "compressed_bytes": 21104,
+      "compressed_sha256": "80e73eec6180c9d7a13e0c13cc8fe2bb0de01dfeb3fea7890867f9511df65177",
+      "path": "completed_v2/step-1389.json.gz",
+      "raw_bytes": 95344,
+      "raw_sha256": "453dd0309ed9da2ee12cbf22d4d2e238420ddf6c783edc3af862f6af3852e6df"
+    },
+    {
+      "compressed_bytes": 21097,
+      "compressed_sha256": "6a0f357b6cce0d46c6f484a4a1be052800e3225528a9828d933f30a24d998df5",
+      "path": "completed_v2/step-1530.json.gz",
+      "raw_bytes": 95421,
+      "raw_sha256": "3cff2b48675d058edb0877b2f62eee8f06d71de0723cc00e35308e7ee6c98af8"
+    },
+    {
+      "compressed_bytes": 20993,
+      "compressed_sha256": "a79a6427a3b57bd17f4c44b2accfb4135d44d25ab92bc3746f031a3929ead2b3",
+      "path": "completed_v2/step-1540.json.gz",
+      "raw_bytes": 94561,
+      "raw_sha256": "51edeb806bf1d2e09f83efb750a9dad8cfa334d085aa657160410eaa26b659b6"
+    },
+    {
+      "compressed_bytes": 83186,
+      "compressed_sha256": "9b3aa94fe95945157397891e5ad9de69073d98bc6418303cd8e050119a8bdc95",
+      "path": "completed_v2/summary.json.gz",
+      "raw_bytes": 381771,
+      "raw_sha256": "35717419174c8d53b491ee048c5cd6ae72879ff4bee2a1382c11d23202cf73be"
+    },
+    {
+      "compressed_bytes": 774,
+      "compressed_sha256": "252f02ba2482ba8e1884313f94597373bb5f2672b62d0dc19e3015118fd66f04",
+      "path": "logs/completed.log.gz",
+      "raw_bytes": 1353,
+      "raw_sha256": "1a46b78ac1dcd25e0631b8e0d686b8e6a006b09e6362ff5fd3a89e455f278061"
+    },
+    {
+      "compressed_bytes": 989,
+      "compressed_sha256": "ebc829face16c76c4f31853ab1b8fadc409455d3b67ebad890f8c7094a75e770",
+      "path": "logs/setup-failure.log.gz",
+      "raw_bytes": 1938,
+      "raw_sha256": "e5ee44810f2c34e099de1a208d05407edc0b71d4b02bed219b985e21a4013568"
+    },
+    {
+      "compressed_bytes": 50,
+      "compressed_sha256": "ec41a1555def645e17c7c0c785726112e42a4f219d3b95f22b1a7900f2a0cbd3",
+      "path": "logs/tests.log.gz",
+      "raw_bytes": 98,
+      "raw_sha256": "e4c352829b707e689f65650c11a635ec3143af66beebca040d4671c7f74bd243"
+    },
+    {
+      "compressed_bytes": 733,
+      "compressed_sha256": "f08e980828e5d979241502f6f566fad7d72de946ec1beb32b878547447cfbb42",
+      "path": "setup_failure_v1/declaration.json.gz",
+      "raw_bytes": 1280,
+      "raw_sha256": "4634e56bf73056c14507308ca73849522c1bfff91ad91b37439c475506b6e1b7"
+    },
+    {
+      "compressed_bytes": 3580,
+      "compressed_sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "path": "setup_failure_v1/source/benchmarks/locked_shared/mode_hold.py.gz",
+      "raw_bytes": 10774,
+      "raw_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    {
+      "compressed_bytes": 661,
+      "compressed_sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "path": "setup_failure_v1/source/configs/toy100/constraints_simple_regularization.json.gz",
+      "raw_bytes": 1507,
+      "raw_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+    },
+    {
+      "compressed_bytes": 5836,
+      "compressed_sha256": "82f93c450efc6ebdaf804cf2b7a085a38e744a1e3543072a20fea28817ee5779",
+      "path": "setup_failure_v1/source/reports/toy100/pr84_heldout_signal.py.gz",
+      "raw_bytes": 20647,
+      "raw_sha256": "06984409baeb279f7b6ed119ee3beb407d9812368d1bd574230a5c349a0f8c1f"
+    },
+    {
+      "compressed_bytes": 2962,
+      "compressed_sha256": "b5506e9c2bf046be276254dde1ef3d53f9cf8cf4da7e283ea7cae020f9f9afcd",
+      "path": "setup_failure_v1/source/reports/toy100/pr84_population_field.py.gz",
+      "raw_bytes": 8515,
+      "raw_sha256": "9cd4371ce2b1a21e6b1efbf03dd48caf0d123079e0674c8b022dd20cad3a614b"
+    },
+    {
+      "compressed_bytes": 1767,
+      "compressed_sha256": "bf38d8b3b997f51dcaca36cf66248d926bd08020279364fc2082c4f69afdca41",
+      "path": "setup_failure_v1/source/reports/toy100/pr84_stationary_field_analysis.py.gz",
+      "raw_bytes": 4867,
+      "raw_sha256": "e4ae90161a8c76b542b9c92ce38712eeefe57ca40089cb8f52194a4fa503c15a"
+    },
+    {
+      "compressed_bytes": 528,
+      "compressed_sha256": "cd07ba18e9c3f75a7a5ba1ce4648c6466899f8d6270c448907fb50c93e6f60a7",
+      "path": "tests/test_pr84_population_field.py.gz",
+      "raw_bytes": 1153,
+      "raw_sha256": "15af37689bccabc18551e79d30dea279f48ba271a337ad12ac0549e8f58e272c"
+    }
+  ],
+  "schema": "pr84-population-field-evidence-v1",
+  "scope": "read-only saved-state analytic field and actual-D-bank penalty; zero training updates",
+  "setup_failure": "v1 KeyError before any step output; preserved declaration/source/traceback",
+  "tests": "2 analytic tests passed"
+}
