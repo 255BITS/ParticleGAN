@@ -1,15 +1,19 @@
 """Benchmark-local geometry ablations retain explicit, unlabeled initialization."""
 
 import math
+from copy import deepcopy
 
+import numpy as np
 import pytest
 import torch
 
 from benchmarks.toy100.problems import sample_real
 from benchmarks.toy100.train import (
     EMPIRICAL_INIT_SEED_OFFSET, _model_policy_receipt, make_trainer,
-    resolve_config,
+    resolve_config, train,
 )
+from benchmarks.toy_suite import _check_toy100_policy
+from benchmarks.transfer_suite.toy100_compatibility import declared_model_policy
 
 
 def _config(model: str):
@@ -27,6 +31,7 @@ def _config(model: str):
     ("affine_normal_random_v1", "normal", False),
     ("affine_empirical_box_v1", "empirical_box", True),
     ("affine_empirical_box_random_v1", "empirical_box", False),
+    ("affine_moment_box_v1", "moment_box", True),
 ])
 def test_affine_geometry_receipt(model, prior_kind, identity):
     config, recipe = _config(model)
@@ -50,6 +55,17 @@ def test_affine_geometry_receipt(model, prior_kind, identity):
         assert receipt["init_data_lower"] == initial_batch.amin(dim=0).tolist()
         assert receipt["init_data_upper"] == initial_batch.amax(dim=0).tolist()
         assert receipt["init_data_samples"] == config["batch_size"]
+    if prior_kind == "moment_box":
+        stream = torch.Generator().manual_seed(config["seed"] + EMPIRICAL_INIT_SEED_OFFSET)
+        initial_batch = sample_real("grid100", config["batch_size"], generator=stream)
+        mean = initial_batch.mean(dim=0)
+        std = initial_batch.std(dim=0, unbiased=False)
+        half_width = math.sqrt(3.0) * std
+        assert receipt["init_data_mean"] == mean.tolist()
+        assert receipt["init_data_std"] == std.tolist()
+        assert receipt["init_data_lower"] == (mean - half_width).tolist()
+        assert receipt["init_data_upper"] == (mean + half_width).tolist()
+        assert receipt["init_data_samples"] == config["batch_size"]
 
 
 def test_unknown_or_dimension_mismatch_rejected():
@@ -57,3 +73,36 @@ def test_unknown_or_dimension_mismatch_rejected():
         _config("affine_target_centers")
     with pytest.raises(ValueError, match="requires z_dim=2"):
         resolve_config({"model": "gan", "toy100_model": "affine_normal_v1", "z_dim": 4})
+
+
+def test_moment_box_archive_regrade_binds_unlabelled_calibration_data(tmp_path):
+    config = dict(
+        model="gan", problem="grid100", device="cpu", seed=1234, steps=6,
+        z_dim=2, num_particles=32, batch_size=16, d_hidden=8, n_hidden=1,
+        fourier=0, eval_samples=128, snapshot_samples=16,
+        eval_interval=3, snapshot_interval=3, log_interval=3, threads=1,
+        output_noise_std=.029, input_noise_std=.5,
+        toy100_model="affine_moment_box_v1",
+    )
+    summary = train(config, tmp_path)
+    resolved = summary["config"]
+    policy = declared_model_policy(config)
+    assert _check_toy100_policy(tmp_path, summary, resolved, policy)
+    card = summary["model_policy"]
+    assert card["init_data_file"] == "initialization-samples.npy"
+    assert card["init_data_samples"] == 16
+
+    altered = deepcopy(summary)
+    altered["model_policy"]["init_data_lower"][0] += .1
+    with pytest.raises(ValueError, match="sample/formula differs"):
+        _check_toy100_policy(tmp_path, altered, resolved, policy)
+
+    path = tmp_path / "initialization-samples.npy"
+    original = path.read_bytes()
+    samples = np.load(path, allow_pickle=False)
+    samples[0, 0] += .1
+    np.save(path, samples, allow_pickle=False)
+    with pytest.raises(ValueError, match="sample/formula differs"):
+        _check_toy100_policy(tmp_path, summary, resolved, policy)
+    path.write_bytes(original)
+    assert _check_toy100_policy(tmp_path, summary, resolved, policy)
