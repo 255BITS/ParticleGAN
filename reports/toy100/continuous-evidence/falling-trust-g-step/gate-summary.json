@@ -1,0 +1,56 @@
+{
+  "call": "kill",
+  "host": "neural",
+  "seed": 0,
+  "torch": "2.14.0+cpu",
+  "not_production": true,
+  "not_a_retune_of": [
+    "always-on G bound .125",
+    "1-step game bound",
+    "2-step game bound",
+    "translation trust",
+    "G-trust/D-slope utilisation",
+    "idle or mode-exit predicates",
+    "rest-damping",
+    "DD-exit 0.3 floor"
+  ],
+  "mechanism": {
+    "scale": 0.5,
+    "window": 8,
+    "signal": "negative delta of G own-curvature ratio",
+    "g_curvature_bound": 0.25,
+    "stall_reach": "unchanged when trust_fall is off"
+  },
+  "warm_avx2": {
+    "cpu": "AVX2",
+    "control_passing": "200/200",
+    "control_min_hq": 0.989990234375,
+    "candidate_passing": "200/200",
+    "candidate_min_hq": 0.91943359375,
+    "candidate_final": {"modes": 8, "hq": 1.0},
+    "ranked": true
+  },
+  "warm_aten_only_unranked": {
+    "reason": "ATEN_CPU_CAPABILITY=avx2 without the oneDNN/MKL AVX2 pin. Identity fork 0/200, min modes 6, min HQ 0.953125, matching the archived AVX512 identity. Not ranked.",
+    "ranked": false
+  },
+  "cold_trajectory_avx2": {"passed": true, "seconds": 3.7},
+  "cold_ring_avx2": {
+    "passed": false,
+    "max_modes": 7,
+    "terminal_modes": 7,
+    "terminal_hq": 0.66015625,
+    "passing_observations": "0/24",
+    "trust_fall_halves": "588/1200"
+  },
+  "cold_ring_avx512": {
+    "passed": false,
+    "max_modes": 7,
+    "terminal_modes": 4,
+    "terminal_hq": 0.2861328125,
+    "modes_at_1100": 0,
+    "passing_observations": "0/24",
+    "trust_fall_halves": "604/1200"
+  },
+  "stay": "not run; cold ring never acquired 8 modes"
+}

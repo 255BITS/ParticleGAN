@@ -12,6 +12,7 @@ from contextlib import contextmanager
 import hashlib
 import importlib
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -63,8 +64,11 @@ def declare(output, phase, method):
     source = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
               for name in SOURCES if (ROOT / name).exists()}
     import torch
+    cpu_env = {name: os.environ.get(name) for name in (
+        "ATEN_CPU_CAPABILITY", "MKL_ENABLE_INSTRUCTIONS", "ONEDNN_MAX_CPU_ISA", "DNNL_MAX_CPU_ISA")}
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
-               cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
+               cpu=torch.backends.cpu.get_cpu_capability(), cpu_env=cpu_env,
+               shared_gate_eligible=False,
                purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
                source=source)
     (output / "declaration.json").write_text(json.dumps(row, indent=2) + "\n")
