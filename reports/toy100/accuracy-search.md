@@ -6,7 +6,7 @@ live-weight gate, and the independently declared
 current low-learning-rate recommendation with its staggered batch override
 removed; each trial changed only the fields named below. Complete configs,
 events, scored final draws, logs, and source hashes are retained under
-[`artifacts/toy100-accuracy/search-agent`](../../artifacts/toy100-accuracy/search-agent).
+the local ignored path `artifacts/toy100-accuracy/search-agent`.
 The one interrupted duplicate attempt is retained under `grid-screen` with
 partial events; its completed rerun is the batch-1024 row below.
 
@@ -46,7 +46,7 @@ generic data-space architecture under the established v3 optimizer core:
 `G(z) = z + α·MLP(z)`, with a 2D learnable prior initialized uniformly in a
 radius-6.5 disk and a Fourier-3 discriminator. All use batch 1024, 7,000
 updates, seed 1234, and σout .029. The disk and architecture see no target
-centers or labels. Each [run directory](../../artifacts/toy100-accuracy/search-agent/residual-architecture)
+centers or labels. Each run directory under the local ignored path `artifacts/toy100-accuracy/search-agent/residual-architecture`
 contains the exact copied probe source, declared configuration, model options,
 source hash in provenance, events, final draws, and independently rescored
 gate/accuracy JSON.

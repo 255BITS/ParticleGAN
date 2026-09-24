@@ -1,9 +1,9 @@
 # Late-checkpoint stability of saved 100-Gaussian runs
 
 This is a read-only audit of existing `grid100` samples. It compares the
-lower-rate [MLP run](../../artifacts/toy100-accuracy/search-agent/batch2048/noise029_batch2048_floor005/grid100),
-the shared-v3 [warmup MLP run](../../artifacts/toy100-accuracy/search-agent/warmup-screen/warm_b2048_f2_g128_d3/warm_b2048_f2_g128_d3/grid100),
-and the [affine-normal probe](../../artifacts/toy100-accuracy/affine-normal/grid100).
+lower-rate MLP run at the local ignored path `artifacts/toy100-accuracy/search-agent/batch2048/noise029_batch2048_floor005/grid100`,
+the shared-v3 warmup MLP run at `artifacts/toy100-accuracy/search-agent/warmup-screen/warm_b2048_f2_g128_d3/warm_b2048_f2_g128_d3/grid100`,
+and the affine-normal probe at `artifacts/toy100-accuracy/affine-normal/grid100`.
 All three have seed 1234, 20,000 particles, batch 2048, 4,096-sample saved
 frames, and final output-noise standard deviation 0.029. The two MLPs also
 have the same depth, width, Fourier features, and latent dimension. Their

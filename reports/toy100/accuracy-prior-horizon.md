@@ -34,4 +34,4 @@ durable improvement is small and was tested only on grid100, this prior-only
 cap is not being advanced to rotated100 or staggered100. The saved run contains
 every actual G, D, and prior learning rate, 20k scored draws at all five
 terminal checks, the 100k holdout, and its exact source archive:
-[`artifacts/toy100-accuracy/prior-horizon4000/grid100`](../../artifacts/toy100-accuracy/prior-horizon4000/grid100).
+local ignored path `artifacts/toy100-accuracy/prior-horizon4000/grid100`.

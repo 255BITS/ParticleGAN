@@ -1,6 +1,6 @@
 # Residual-student noise timing screen
 
-The network-floor `.01`, κ=1.0 candidate passed nine frozen bottleneck hosts but failed `residual_student` in its full 19-host replay. This eight-row screen changed exactly one noise timing field and the recipe name per row from that candidate. The [plan, configs, source manifest, and source archive](../../artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1) were written before training. Source commit was `a3be165e2ab47290d35ed98426be77d148f04320`; every row used seed 0, the frozen 400-step budget, and 24 checkpoints.
+The network-floor `.01`, κ=1.0 candidate passed nine frozen bottleneck hosts but failed `residual_student` in its full 19-host replay. This eight-row screen changed exactly one noise timing field and the recipe name per row from that candidate. The plan, configs, source manifest, and source archive at the local ignored path `artifacts/toy100-accuracy/compatibility/network-floor-noise-phase-v1` were written before training. Source commit was `a3be165e2ab47290d35ed98426be77d148f04320`; every row used seed 0, the frozen 400-step budget, and 24 checkpoints.
 
 | Changed field | Value | Identity MSE ↓ | Success ↑ | Wrong-pad ↓ | Passing checks / 24 | Sustained suffix | Verdict |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | :--- |

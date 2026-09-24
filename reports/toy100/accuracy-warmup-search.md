@@ -44,7 +44,7 @@ source hashes, and exact final scored draws are retained.
 
 Three plain-MLP F2/batch-2048 candidates ran all 7,000 updates on CPU with the
 same 20%-warmup output noise and 10%-cutoff input noise. Each complete
-[run directory](../../artifacts/toy100-accuracy/search-agent/warmup-screen)
+run directory under the local ignored path `artifacts/toy100-accuracy/search-agent/warmup-screen`
 retains its plan, config, events, source hashes, progress log, frozen-gate
 result, and exact final live draws for the independent accuracy audit.
 

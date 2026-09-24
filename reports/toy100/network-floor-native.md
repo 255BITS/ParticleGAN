@@ -28,7 +28,7 @@ through 7000 and the independent 100k holdout pass. The original coverage and
 accuracy gates both report PASS after relocation.
 
 The complete 52-file RAM evidence tree was copied byte-for-byte to
-[`artifacts/toy100-accuracy/network-floor-native/grid100-run`](../../artifacts/toy100-accuracy/network-floor-native/grid100-run).
+the local ignored path `artifacts/toy100-accuracy/network-floor-native/grid100-run`.
 Every copied file matched its RAM original by SHA-256, and the archived
 23-file source bundle passed offline verification from the isolated floor
 worktree. The RAM evidence remains intact. Rotated100 and staggered100 are
@@ -54,7 +54,7 @@ after grid100 completed. `rotated100` was interrupted during step-0 evaluation
 and `staggered100` was never started; both are explicitly excluded from
 numerical success/failure counts in `interruption.json`. The complete RAM tree
 was copied to
-[`artifacts/toy100-accuracy/network-floor010-native/all3-run`](../../artifacts/toy100-accuracy/network-floor010-native/all3-run),
+the local ignored path `artifacts/toy100-accuracy/network-floor010-native/all3-run`,
 all 59 files matched by SHA-256, the 23-file source archive verified, and both
 grid100 gates passed again from the isolated floor worktree after relocation.
 The RAM original remains intact. This variant is also not common-22 evidence.
