@@ -33,6 +33,8 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "reachstall_drop": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
+                        dict(ramp="stall", mode_drop=True)),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
@@ -63,7 +65,12 @@ def declare(output, phase, method):
     import torch
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
                cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
-               purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
+               purity=("mode-drop G freeze: after the first 8-mode HQ>=0.9 state, skip the G "
+                       "parameter write while modes<=6 and resume at modes>=7. Stall reach width, "
+                       "curvature bounds, and rates are unchanged. No coverage loss, anchor, "
+                       "assignment, or clip ladder."
+                       if method == "reachstall_drop" else
+                       "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder"),
                source=source)
     (output / "declaration.json").write_text(json.dumps(row, indent=2) + "\n")
     emit(event="DECLARED", **{k: v for k, v in row.items() if k != "source"})
