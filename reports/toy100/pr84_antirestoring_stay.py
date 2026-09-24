@@ -2,10 +2,11 @@
 
 The magnitude bound min(1, 0.25/rho) accepts a full generator step whenever
 rho is below 0.25. Negative directional curvature along that step means the
-move is concave in the Adam metric: the critic response pushes further along
-the descent instead of restoring. Restoring steps and already-bounded steps
-stay exactly PR84. A fully accepted anti-restoring step shrinks to
-max(0.5, 1+alignment).
+move is concave in the Adam metric. That sign alone also trips on a hold the
+pin already keeps, so the shrink stays idle unless the base-point critic
+advantage is negative. Restoring steps, already-bounded steps, and
+anti-restoring steps with a non-negative critic advantage stay exactly PR84.
+When the shrink does fire it is still max(0.5, 1+alignment).
 
 No coverage term, likelihood, target center, HQ clip, or rest gate.
 """
@@ -48,11 +49,18 @@ def signed_alignment(base, new, g0, g1, metric):
     return kappa, rho, alignment
 
 
-def mild_factor(rho, bound, alignment, *, mild=True, floor=MILD_FLOOR):
-    """PR84 magnitude factor, then a mild shrink on an accepted anti-restoring step."""
+def mild_factor(rho, bound, alignment, *, mild=True, floor=MILD_FLOOR, advantage=None):
+    """PR84 magnitude factor, then a mild shrink on an accepted anti-restoring step.
+
+    Negative alignment alone is common on a hold the pin already keeps. The
+    shrink stays idle unless the base-point critic advantage is also negative
+    (discriminator loss above log 2: the critic is not confirming the step).
+    The floor and ``max(0.5, 1+alignment)`` shape are unchanged.
+    """
     factor = min(1., bound / rho) if rho > 0. else 1.
     applied = False
-    if mild and factor >= 1. and alignment < 0.:
+    critic_losing = advantage is not None and advantage < 0.
+    if mild and factor >= 1. and alignment < 0. and critic_losing:
         shrunk = max(floor, 1. + alignment)
         if shrunk < factor:
             factor = shrunk
@@ -116,11 +124,12 @@ class AntiRestoringStayRecorder(SmoothedBothBoundRecorder):
                 raise RuntimeError("signed curvature magnitude disagrees with rho")
             factor, applied = mild_factor(
                 rho, self.curvature_bound, alignment,
-                mild=self.mild, floor=self.mild_floor)
+                mild=self.mild, floor=self.mild_floor, advantage=self.advantage)
             for p, b, n in zip(self._params(opt_g), self.g_base, self.g1):
                 p.copy_(torch.lerp(b, n, factor) if factor < 1 else n)
             self.row["g"] = dict(rho=rho, factor=factor, kappa=kappa,
-                                 alignment=alignment, mild=applied)
+                                 alignment=alignment, mild=applied,
+                                 critic_advantage=self.advantage)
         return None
 
     def receipt(self):

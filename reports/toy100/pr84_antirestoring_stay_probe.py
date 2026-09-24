@@ -136,7 +136,7 @@ def main():
     args = parser.parse_args()
     os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
     args.output.mkdir(parents=True, exist_ok=True)
-    decision = dict(mechanism="mild G shrink when signed own-curvature alignment is negative and the PR84 magnitude bound would accept the full step",
+    decision = dict(mechanism="same mild G shrink, idle unless alignment is negative and critic advantage is negative",
                     purity="GAN dynamics only — no coverage/likelihood term")
     _tail("DECLARED", stay_until=STAY_UNTIL, **decision)
     warm = None if args.skip_warm else run_warm(args.output)

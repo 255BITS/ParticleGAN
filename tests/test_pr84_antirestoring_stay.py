@@ -8,15 +8,19 @@ from reports.toy100.pr84_antirestoring_stay import pr84_antirestoring_stay
 
 
 def test_mild_shrink_only_on_accepted_antirestoring_steps():
-    factor, applied = mild_factor(.1, .25, -.4)
+    factor, applied = mild_factor(.1, .25, -.4, advantage=-.01)
     assert applied and factor == .6
-    factor, applied = mild_factor(.1, .25, -1.)
+    factor, applied = mild_factor(.1, .25, -1., advantage=-.2)
     assert applied and factor == .5
-    factor, applied = mild_factor(.1, .25, .2)
+    factor, applied = mild_factor(.1, .25, .2, advantage=-.2)
     assert not applied and factor == 1.
-    factor, applied = mild_factor(.5, .25, -1.)
+    factor, applied = mild_factor(.5, .25, -1., advantage=-.2)
     assert not applied and factor == .5
-    factor, applied = mild_factor(.1, .25, -.4, mild=False)
+    factor, applied = mild_factor(.1, .25, -.4, mild=False, advantage=-.2)
+    assert not applied and factor == 1.
+    factor, applied = mild_factor(.1, .25, -.4, advantage=.02)
+    assert not applied and factor == 1.
+    factor, applied = mild_factor(.1, .25, -.4, advantage=0.)
     assert not applied and factor == 1.
 
 
