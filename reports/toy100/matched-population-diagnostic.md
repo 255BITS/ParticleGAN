@@ -1,5 +1,11 @@
 # Does constant-rate drift persist when the target law is representable?
 
+**Scope update, September 23, 2026:** PR #60 now requires fixed-target acquisition
+and sustained training without LR decay. Distribution-shift adaptation is a
+separate study. The stationary hold below remains relevant evidence; the
+post-shift failures are not promotion blockers. The original declaration and
+all measured results are preserved.
+
 Yes, ordinary constant-rate Adam drifted from a constructed exactly matched
 population law. The generator functional-metric step held that synthetic law
 more closely for 200 updates, but neither method sustained recovery after a

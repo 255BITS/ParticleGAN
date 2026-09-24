@@ -1,15 +1,20 @@
 # Removing learning-rate decay: mechanism and validation
 
 This study targets PR #60's remaining learning-rate schedules. A replacement
-must learn with time-independent optimizer hyperparameters, preserve live
-sample quality during uninterrupted continuation, and remain responsive when
-the real distribution changes. Passing a final checkpoint is insufficient.
+must learn with time-independent optimizer hyperparameters and preserve live
+sample quality during uninterrupted continuation on a fixed target distribution.
+Passing a final checkpoint is insufficient.
 Stationary weights and arbitrarily small steps are acceptable when there is
 no useful acquisition signal. The requirement is to acquire an initially
-unlearned target and respond to a new learnable discrepancy, not to maintain
-a positive amount of parameter movement at an already matched distribution.
+unlearned target and maintain its quality. A positive amount of parameter
+movement at an already matched distribution is not required.
 The existing shared 22-case recipe remains the control until a replacement
 passes its unchanged production gates. No training-seed sweep is used.
+
+**Scope clarified September 23, 2026:** adaptation to a changed target
+distribution is a separate problem. Shift experiments and their original
+bounds remain preserved as diagnostics; they no longer gate PR #60 promotion.
+The existing acquisition and stationary-quality failures still apply.
 
 ## Isolation before research or candidate search
 
@@ -132,8 +137,8 @@ gate: final identity MSE .2872, .3540 and .1332 versus the required .02.
 During the last 50 trajectory updates, their mean step factors are only
 4.27e-6, .00407 and .0519. Small factors alone are not a failure: sitting still
 can be appropriate at a matched target. These rows are rejected for their
-measured cold acquisition failures, not for having small factors. A candidate
-that holds quality still requires a shift test to establish responsiveness.
+measured cold acquisition failures, not for having small factors. A shift test
+can separately assess adaptation after changing the target distribution.
 No cold mode-hold or larger-host tests are run for these rejected candidates.
 The next bounded mechanism tests an implicit linearized joint response. This
 is related to game-aware coupled updates discussed by
@@ -174,10 +179,11 @@ probabilities.
 
 A promising stationary result also receives uninterrupted continuation to
 2,400 updates with dense live checks. Noise burn-in remains tied to the original
-1,200-update horizon. Neither models, moments, nor RNG state reset. Distribution
-shift is tested only after sustained hold, with a matched frozen negative
-control. Survivors still require fresh full 19, the three strict native
+1,200-update horizon. Neither models, moments, nor RNG state reset. Survivors
+still require fresh full 19, the three strict native
 100-mode problems, a production common-22 replay, and longer continuation.
+Distribution-shift experiments with matched frozen controls are now optional
+and separate from this fixed-target promotion sequence.
 
 All scratch-policy outputs are explicitly marked ineligible for the production
 common gate. Actual optimizer-group rates, epsilon values, source/configuration

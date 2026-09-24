@@ -140,7 +140,7 @@
   "limits": [
     "Warm transplant failure does not establish that a different cold attractor is impossible.",
     "Trajectory failure rejects the tested shared recipe; it does not prove ring acquisition failure.",
-    "Rest and tiny applied steps are acceptable. Rejections come from acquisition, quality or response tests.",
+    "Rest and tiny applied steps are acceptable. Candidate rejections come from fixed-target acquisition or quality; shift response is separate.",
     "Approximate energy lane MSEs are rounded here; exact raw episodes in preserved archives are authoritative.",
     "No seed experiments or GitHub CI waiting. Original gates, architectures and budgets were not relaxed."
   ],
@@ -159,5 +159,18 @@
     "continuous-evidence/round2-mechanism/manifest.json": "c283bc394c5157f89b9ed4b7971bff8a716c8db6b273a74e580fe81f23ec925b",
     "continuous-evidence/adaptive-d-allocation/audit-result.json": "41c8ee616cab00297293cc42bd785909096a4448bd576dab366953fe51a493f6",
     "continuous-evidence/matched-population-diagnostic/declaration.json": "73e2aed61762cb512a1a1583f31e4abbc71ed9204a1d377fbc934ce16658dafe"
+  },
+  "scope_policy": {
+    "clarified_on": "2026-09-23",
+    "required": [
+      "initial acquisition on unchanged fixed-target hosts",
+      "sustained live quality during uninterrupted fixed-target training without LR decay",
+      "unchanged production common-22 gates"
+    ],
+    "distribution_shift_recovery_required": false,
+    "distribution_shift_status": "separate optional adaptation study; historical declarations and measurements preserved",
+    "trajectory_distribution_changes_during_training": false,
+    "candidate_verdicts_changed": 0,
+    "reason": "All eight configurations first fail fixed-target acquisition or stationary quality; none was rejected solely for shift response."
   }
 }

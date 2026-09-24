@@ -5,9 +5,16 @@ candidate has passed both acquisition and continued quality. Work here is
 limited to replacing those schedules with responsive training dynamics;
 production defaults have not been changed.
 
+**Scope clarified September 23, 2026:** PR #60 targets initial acquisition and
+sustained live quality on a fixed target distribution without LR decay.
+Adapting to a changed target distribution is a separate problem; translation
+or replacement tests are optional diagnostics, not promotion requirements.
+None of the current candidate verdicts changes: their first failures occur
+during fixed-target acquisition or stationary quality checks.
+
 Sitting still at a matched target is acceptable. A replacement must acquire
-an initially unlearned target, hold it, and respond when a new learnable
-discrepancy appears. Nonzero parameter movement is not a success criterion.
+an initially unlearned target and maintain its quality during continued training.
+Nonzero parameter movement is not a success criterion.
 Favor changes to the game update over R1/R2 or other zero-centered pulls, but
 select by measured results. Do not repeat seed sweeps or the rejected grids.
 
@@ -70,18 +77,21 @@ results are retained under [continuous-evidence](continuous-evidence/).
    only conditional local stability, never evidence of cold acquisition.
 3. For warm survivors, run full-budget cold trajectory first: 400 updates,
    identity MSE <= .02 and the original sustained gate. It has rejected the
-   newest dynamics candidates cheaply. Then cold mode-hold, followed by the
+   newest dynamics candidates cheaply. Trajectory is a fixed conditional
+   dataset throughout training; it does not change the target distribution.
+   Then cold mode-hold, followed by the
    other cheap hosts in the fail-fast screen. Do not run expensive downstream
    tasks after a failed full-budget host.
 4. Extend a surviving learner uninterrupted to at least 2400 mode-hold updates,
    checking every ten updates after 1200. Keep noise burn-in tied to the original
    1200-update horizon; do not restart models, optimizer moments or RNG streams.
-5. Test response to an in-place +.35 x translation at update 2400 through update
-   3600. Require recovery within 400 updates and every subsequent check to pass.
-   A matched frozen control must have the same pre-shift trace and fail after
-   the recovery deadline. This separates legitimate rest from failure to wake.
-6. A viable shared replacement still needs fresh older-19, the three strict
+5. A viable shared replacement still needs fresh older-19, the three strict
    native 100-mode cases, production common-22 replay, and longer continuation.
+
+**Separate distribution-adaptation study:** the existing +.35 translation
+protocol and matched frozen controls remain available for optional diagnosis.
+Its historical recovery bounds and results are preserved, but a shift failure
+does not veto a replacement that passes the fixed-target requirements above.
 
 No architecture, data, frozen budget or quality threshold is relaxed. The
 warm prefix uses decay only as a diagnostic starting state; the candidate's
@@ -153,8 +163,8 @@ not a tested fix or a reason to relax either gate.
 
 Small accepted step factors are diagnostic, not automatic failures. The
 rejections above come from failed acquisition or quality, not an imposed
-minimum movement. Use the shift test to determine whether a quiet method can
-react to a new signal.
+minimum movement. Initial learning from scratch remains required; recovery
+after changing the target is assessed separately.
 
 Local handoff validation: 149 integrated tests and two additional cross-only
 audit tests passed. The portable implicit warm driver
@@ -165,10 +175,16 @@ The [second research round](continuous-round2.md) tests eight additional
 configurations, including projected skew response, with **170 integrated tests
 passing**. No candidate qualifies. Its [ledger](continuous-round2-results.json)
 and [exactly matched population / shift diagnostic](matched-population-diagnostic.md)
-separate stationary drift, acquisition and response to new signal. The
+separate stationary drift, acquisition and optional response to changed data. The
 handoff validation count above records the original publication, not the
 current total. The follow-up also distinguishes a conservative warm-state
 rejection from impossibility of a different cold attractor.
+
+Functional damping's 20/20 matched-population stationary checks are a useful
+partial result. That 200-update hold on a constructed target does not establish
+long-term stability or original-task acquisition: its fixed-target trajectory
+MSE is .037305 against the unchanged .02 limit. Removing shift recovery from
+scope therefore does not promote it.
 
 [PR #81](https://github.com/255BITS/ParticleGAN/pull/81) independently replays the
 cross-only method on another environment. Its warm-state hash differs even

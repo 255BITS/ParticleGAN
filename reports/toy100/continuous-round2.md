@@ -2,8 +2,16 @@
 
 No replacement qualifies yet. The original scheduled production recipe stays
 unchanged. This round tests mechanisms rather than another learning-rate grid.
-Rest at a matched target is acceptable; cold acquisition, sustained live quality,
-and response to a new learnable signal determine success.
+Rest at a matched target is acceptable; cold acquisition and sustained live
+quality on a fixed target determine success.
+
+**Scope clarified September 23, 2026:** adapting to a changed target distribution
+is a separate problem and is no longer a promotion requirement for PR #60.
+Historical shift declarations and measurements below remain intact as optional
+diagnostics. Removing that requirement changes none of the eight verdicts:
+each first failure is fixed-target acquisition or stationary quality. The
+trajectory host uses a fixed conditional dataset; its name does not imply a
+distribution shift.
 
 The inherited passing-state fork is a cheap, deliberately conservative rejection
 filter. Its failure does not prove a method could never reach a different stable
@@ -68,7 +76,8 @@ Ordinary constant Adam passes 14/20 hold checks at the predeclared MMD²≤.01
 bound; functional damping passes 20/20. Neither sustains recovery after the
 same target shifts by +.35. Each has its own exactly matched frozen sibling.
 Functional damping finishes at MMD² .20521 versus frozen .19188, showing that
-better stationary hold does not establish responsiveness. The original noise
+better stationary hold does not establish responsiveness in that separate
+adaptation study. Shift failure is not a PR #60 veto. The original noise
 horizon stays 1200, and there is no optimizer reset at the shift. This gives
 future agents a small test with a representable starting law in addition to
 the unchanged real-task acquisition and quality gates.
@@ -127,11 +136,12 @@ launched. The invalid first cold attempt is not labeled acquisition failure.
 
 These results argue against tuning only a scalar residual cutoff, movement
 floor or energy threshold on these same examples. A useful next mechanism must
-identify when current critic feedback supports an achievable improvement,
-while retaining response to shifted data. The matched-population diagnostic
-now separates equilibrium drift and wake-up from the original ring's target
-mismatch. Any future candidate still needs the original shared acquisition,
-continued live quality, translation response and production common-22 gates.
+identify when current critic feedback supports an achievable improvement while
+preserving quality near a learned fixed target. The matched-population diagnostic
+separates equilibrium drift from the original ring's target mismatch; its
+post-shift segment addresses the separate adaptation problem. Any future
+candidate still needs the original shared acquisition, continued live quality
+and production common-22 gates.
 
 ## Loss-budget experiment
 
@@ -175,7 +185,7 @@ constant-rate final state hash. Actual warm rates remain G/D .00425 and prior
 .0085. Three analytic tests verify the linear loss budget, untouched ordinary
 moments and prior behavior, exact observation control, and rest followed by a
 response to synthetic signal. That last test is an implementation check, not
-the required training distribution-shift gate.
+evidence of training distribution-shift recovery.
 
 Reproduce with `python -u reports/toy100/loss_budget_probe.py --output NEW_PATH`
 using the [handoff environment](continuous-learning-handoff.md).
