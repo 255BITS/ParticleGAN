@@ -16,7 +16,7 @@ Rank **acquisition first, then sustained quality and recovery**, with runtime an
 
 PR84's reported ring pass does not reproduce under our pinned PyTorch2.13.0+cu126 CPU/AVX2 environment. We preserve both outcomes; we do not average them or run seed sweeps to choose the favorable one. Sparse external holds and dense local holds are labeled separately. The [source snapshot](continuous-evidence/practical-board/external-pr-status.json) pins submitted PR heads and claims.
 
-The next single bet must address **both** the cold acquisition barrier and harmful stationary guidance using a discriminator-driven update. We are isolating that hypothesis on the existing cold and warm captured states before implementing another training rule. Extra radius/rho cuts, weaker gates, zero-centered pulls, and standalone fitting objectives are not the plan.
+The next single bet must address **both** the cold acquisition barrier and harmful stationary guidance using a discriminator-driven update. The [first nonlocal adversarial output test](pr84-adversarial-reallocation-assay.md) preserves warm8 and improves cold3→4 on copied states; [actual neural realization](pr84-adversarial-landing.md) also passes on those copies; a short native alternating continuation is next. A separate [fixed common instance-noise assay](gan-dynamics-current-bets.md) tests an adversarial observation model. Neither is a full neural acquisition result. Extra radius/rho cuts, weaker gates, zero-centered pulls, and standalone fitting objectives are not the plan.
 
 Reference results that help explain the problem, without qualifying as the GAN solution:
 
