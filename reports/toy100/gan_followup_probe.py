@@ -7,6 +7,7 @@ Every phase prints one JSON line per event so ``tail -f`` on the log is readable
 """
 
 import argparse
+import functools
 from contextlib import contextmanager
 import hashlib
 import importlib
@@ -21,6 +22,7 @@ sys.path.insert(0, str(ROOT))
 FACTORIES = {
     "baseline": ("reports.toy100.pr84_smoothed_candidate", "pr84_smoothed_candidate"),
     "reach": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate"),
+    "reach1": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate", dict(reach=1.)),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
@@ -36,8 +38,8 @@ SOURCES = (
 
 
 def factory(method):
-    module, name = FACTORIES[method]
-    return getattr(importlib.import_module(module), name)
+    module, name, *kwargs = FACTORIES[method]
+    return functools.partial(getattr(importlib.import_module(module), name), **(kwargs or [{}])[0])
 
 
 def emit(**row):

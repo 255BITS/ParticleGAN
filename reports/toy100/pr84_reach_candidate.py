@@ -22,22 +22,24 @@ B_CAP_SLOPE = 1.
 REACH = .5
 
 
-def reach_width(sharpness):
+def reach_width(sharpness, reach=REACH):
     utilisation = min(sharpness / B_CAP_SLOPE, B_CAP_SLOPE / sharpness)
-    return max(base.SMOOTH_WIDTH_CAP, REACH / B_CAP_SLOPE * utilisation)
+    return max(base.SMOOTH_WIDTH_CAP, reach / B_CAP_SLOPE * utilisation)
 
 
 class ReachRecorder(base.SmoothedBothBoundRecorder):
+    reach = REACH
+
     def _arm_smoothed_critic(self):
         super()._arm_smoothed_critic()
         if self._smooth_on:
-            self._smooth_width = reach_width(self.row["critic_sharpness"])
+            self._smooth_width = reach_width(self.row["critic_sharpness"], self.reach)
             self.row["critic_width"] = self._smooth_width
 
     def receipt(self):
         value = super().receipt()
         widths = [row.get("critic_width", 0.) for row in self.records]
-        value.update(method=METHOD, scratch_optimizer_policy=METHOD, reach=REACH,
+        value.update(method=METHOD, scratch_optimizer_policy=METHOD, reach=self.reach,
                      b_cap_slope=B_CAP_SLOPE,
                      widened_updates=int(sum(w > base.SMOOTH_WIDTH_CAP for w in widths)),
                      max_width=max(widths, default=0.))
@@ -45,9 +47,9 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
 
 
 @contextmanager
-def pr84_reach_candidate(*, task="mode_hold", start_step=0):
+def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH):
     original = base.SmoothedBothBoundRecorder
-    base.SmoothedBothBoundRecorder = ReachRecorder
+    base.SmoothedBothBoundRecorder = type("ReachRecorder", (ReachRecorder,), dict(reach=reach))
     try:
         with base.pr84_smoothed_candidate(task=task, start_step=start_step) as value:
             yield value

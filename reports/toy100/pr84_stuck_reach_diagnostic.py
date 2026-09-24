@@ -16,14 +16,17 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
+from reports.toy100.pr84_reach_candidate import pr84_reach_candidate
 from reports.toy100.pr84_smoothed_candidate import pr84_smoothed_candidate, SmoothedBothBoundRecorder
+
+FACTORIES = dict(baseline=pr84_smoothed_candidate, reach=pr84_reach_candidate)
 
 
 class _Stop(Exception):
     pass
 
 
-def run_capture(step, path):
+def run_capture(step, path, method):
     from benchmarks.transfer_suite.compare_defaults import plan
     from benchmarks.transfer_suite.legacy_noise_adapters import run_legacy
     from benchmarks.transfer_suite.toy100_compatibility import declared_recipe, declared_model_policy
@@ -50,7 +53,7 @@ def run_capture(step, path):
 
     SmoothedBothBoundRecorder.phases = phases
     try:
-        with pr84_smoothed_candidate(task="mode_hold"):
+        with FACTORIES[method](task="mode_hold"):
             run_legacy(spec, recipe, noise, model_policy=declared_model_policy(config))
     except _Stop:
         pass
@@ -95,9 +98,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--step", type=int, default=1000)
     parser.add_argument("--path", type=Path, required=True)
+    parser.add_argument("--method", choices=tuple(FACTORIES), default="baseline")
     args = parser.parse_args()
     if not args.path.exists():
-        run_capture(args.step, args.path)
+        run_capture(args.step, args.path, args.method)
     print(json.dumps(analyse(args.path, (0, .15, .3, .5, .75, 1.0, 1.5))), flush=True)
 
 
