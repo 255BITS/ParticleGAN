@@ -1,3 +1,8 @@
+Current scope update: the user now authorizes broader GAN formulation changes.
+Read [formulation-search.md](../formulation-search.md) first; its explicit objective/
+regularizer/optimizer permissions supersede older restrictions below. The known
+CPU recipe remains the starting reference, with GPU gates and budgets unchanged.
+
 # Current task: make the known 22/22 CPU GAN recipe work on GPU
 
 Start a fresh attempt from `configs/toy100/constraints_simple_regularization.json`.

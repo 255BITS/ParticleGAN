@@ -8,7 +8,7 @@
   "toy_total": 22,
   "native_gpu_passes": 3,
   "gpu_release_qualified": false,
-  "priority": "preserve scheduled CPU recipe; resolve GPU failures before continuous-rate optimizer search",
+  "priority": "GPU GAN formulation search from the scheduled CPU recipe; clear both blockers, all 22 toys, then own-state stability",
   "porting_reference": "cuda_cpu_init: CPU initial parameters, native CUDA random draws and CUDA updates",
   "diagnostic_passes": 4,
   "diagnostic_total": 6,
@@ -27,5 +27,12 @@
   "schedules": "preserve original decay",
   "auxiliary_host_terms": "preserve original AE and unused-token terms",
   "seed_sweeps": false,
-  "stability_priority": "quality after convergence"
+  "stability_priority": "quality after convergence",
+  "formulation_search": "reports/toy100/formulation-search.md",
+  "allowed_declared_changes": [
+    "adversarial objective",
+    "critic regularization",
+    "particle preconditioning",
+    "adversarial update rule"
+  ]
 }
