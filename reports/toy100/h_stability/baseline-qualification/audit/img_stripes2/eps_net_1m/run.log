@@ -1,0 +1,4 @@
+{"event": "START", "candidate": "eps_net_1m", "gate": "img_stripes2"}
+START img_stripes2 route=GANTrainer + generic noise wrappers steps=600
+{"event": "DONE", "task": "img_stripes2", "status": "PASS", "suffix": 18, "live": {"modes": 2, "hq": 1.0, "mean_rmse": 0.03085179813206196, "quality_mode_fractions": [0.46875, 0.53125], "mode_fractions": [0.46875, 0.53125], "distribution_tv": 0.03125}, "error": null}
+{"event": "DONE", "candidate": "eps_net_1m", "gate": "img_stripes2", "status": "PASS", "seconds": 7.670995692024007, "live": {"distribution_tv": 0.03125, "hq": 1.0, "mean_rmse": 0.03085179813206196, "mode_fractions": [0.46875, 0.53125], "modes": 2, "quality_mode_fractions": [0.46875, 0.53125]}}

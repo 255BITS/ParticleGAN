@@ -19,7 +19,8 @@ import selected_h_remaining
 import critic_signal
 from adam_response import response_policy
 from benchmarks.locked_shared import two_pole
-from benchmarks.locked_shared.hosts import unipolar, mid_scale_identity, cover_leftover
+from benchmarks.locked_shared.hosts import (unipolar, mid_scale_identity, cover_leftover,
+                                           residual_student, ae_gan_hold, unused_token_hold)
 
 screen = selected_h_remaining.screen
 critic_signal.signal_policy = response_policy
@@ -27,7 +28,10 @@ original_capture = screen.capture
 original_sources = screen.source_hashes
 HOSTS = {"two_pole": (two_pole, 80), "unipolar": (unipolar, 400),
          "mid_scale_identity": (mid_scale_identity, mid_scale_identity.GATE_STEPS),
-         "cover_leftover": (cover_leftover, cover_leftover.GATE_STEPS)}
+         "cover_leftover": (cover_leftover, cover_leftover.GATE_STEPS),
+         "residual_student": (residual_student, residual_student.PROTOCOL['steps']),
+         "ae_gan_hold": (ae_gan_hold, ae_gan_hold.STEPS),
+         "unused_token_hold": (unused_token_hold, unused_token_hold.STEPS)}
 
 
 @contextmanager
@@ -71,7 +75,7 @@ def capture(directory, task):
                 scales = module._eval_scales(values["arm"])
                 payload["sample_scales"] = list(scales)
                 payload["samples"] = torch.stack([values["student"].state(s) for s in scales])
-            else:
+            elif task == "cover_leftover":
                 payload["sample_scales"] = [-1., 1.]
                 payload["samples"] = torch.stack([values["residual"].delta(s) for s in (-1., 1.)])
         torch.save(payload, directory / "final-state.pt")

@@ -28,9 +28,9 @@ must reacquire their own cold state with the same policy. All surviving proposal
 need two_pole, ring, unipolar, mid_scale_identity, cover_leftover and the original
 ten gates before full own-state1200 and native100 promotion. Do not credit a
 partial endpoint, a borrowed state, another variant's passes or skipped tests.
-One assigned baseline audit may measure remaining older gates and a1200-step
-own-state diagnostic despite the known two_pole failure. Stop that hold at its
-first failed check. No native100 runs until older failures are resolved.
+The baseline audit is complete: older19 has10 PASS/9 FAIL; own1200 stopped
+at1692 after491 passing checks (HQ.864746094). Read RESULTS.md for the full
+blocker table. Do not repeat this audit. No native100 until older failures resolve.
 
 Retain exact configs, effective rates, source per batch, raw metrics/checkpoints
 and honest FAIL/ERROR/SKIPPED statuses. A setup error is not a GAN failure; repair

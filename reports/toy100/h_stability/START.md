@@ -13,11 +13,18 @@ at cold initialization. No additional generator-fitting objective is present.
 
 | Case | Selected result |
 | --- | --- |
-| Cold ring1200 | PASS:8 modes, HQ.999755859, terminal suffix14 |
+| Cold ring1200 | PASS:8 modes, HQ.996826172, terminal suffix14 |
 | Own-state200 | PASS:200/200 dense checks, minimum HQ.918945313 |
 | two_pole80 | FAIL:spread.029888831 <.30 |
-| Other17 older hosts | UNRUN for this candidate |
-| Own-state1200 / native100 | UNRUN / SKIPPED |
+| Other17 older hosts | Audit complete:9 PASS /8 FAIL; complete19 total10 PASS /9 FAIL |
+| Own-state1200 / native100 | FAIL at1692/HQ.864746094 after491 passing checks / SKIPPED |
+
+The authorized one-time audit is complete. See [RESULTS.md](RESULTS.md) and
+[audit evidence](baseline-qualification/audit/audit-results.json). The long hold
+stopped at its first failed dense check after492 of1200 requested updates;
+the first200 reproduce minimum HQ.918945313. Cold ring's retained terminal HQ
+is .996826172; .999755859 is the own200 endpoint. This remains an unqualified
+experimental base. Do not repeat the completed baseline audit.
 
 Own-state200 uses the candidate's OWN cold-acquired models, Adam moments, RNG
 and the same epsilon/rates. It is not borrowed-H evidence. Old g_threequarter_rate
@@ -39,8 +46,8 @@ policy and must not be used to claim a selected-base replay.
 Best separate mobility comparator: g_radial_split_adam passes two_pole and cold
 ring, but fails unipolar neutral retention .8084<.85 and own continuation at1211.
 Its source and declaration are in radial-mobility-reference/, with executable
-particle_geometry.py, geometry_runner.py and geometry_probe.py. It has never
-been tested together with eps_net_1m. Combining independent optimizer wrappers
+particle_geometry.py, geometry_runner.py and geometry_probe.py. The current combination lane has tested it with eps_net_1m; the first
+combined proposal passes two_pole and ring but fails unipolar retention. Combining independent optimizer wrappers
 requires checking the actual applied epsilon, roles and state, not nesting
 observers blindly. Every candidate needs its own gates and checkpoint.
 
@@ -50,7 +57,7 @@ The geometry and response reports retain exact failures; broader H-era sweeps
 are historical. Pure AE has no encoder adversarial path; unused-token hold has
 a documented shared-gradient conflict. Neither is a parameter-sweep target.
 
-One assigned baseline audit may run remaining older hosts and a1200-step own
-continuation as diagnostics despite two_pole failure, to expose the next cheap
-blocker. Stop the long hold at its first failed check. This exception never
-promotes a failed recipe or enables expensive native100 runs.
+The assigned baseline audit ran remaining older hosts and a1200-step own
+continuation as diagnostics despite two_pole failure. It stopped the long hold
+at its first failed check. This completed exception never promotes a failed
+recipe or enables expensive native100 runs.

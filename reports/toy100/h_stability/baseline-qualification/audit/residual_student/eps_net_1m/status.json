@@ -1,0 +1,263 @@
+{
+  "seconds": 2.4971318540629,
+  "shared_gate_eligible": false,
+  "stages": [
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/eps-net-20260924T185715Z/baseline_qualification/20260924T185715Z-1646701/repo/reports/toy100/h_stability/baseline-qualification/audit/residual_student/eps_net_1m/residual_student/episodes/eps_net_1m__residual_student.json.gz",
+      "candidate": "eps_net_1m",
+      "checkpoint_sha256": "650a4aefecfdb2dd55ab1769d76df69f5c4023fb3ab104e0e3e53591fbf46575",
+      "gate": "residual_student",
+      "metrics": {
+        "frozen_evidence_audit": "PASS",
+        "live": {
+          "identity_mse": 0.0022454001009464264,
+          "success_rate": 1.0,
+          "wrong_pad_rate": 0.0
+        },
+        "observations": [
+          {
+            "endpoint_l2": 1.0252944231033325,
+            "identity_mse": 0.2190471887588501,
+            "seconds": 0.9586672701407224,
+            "step": 17,
+            "success_rate": 0.0,
+            "wrong_pad_rate": 1.0
+          },
+          {
+            "endpoint_l2": 0.7166419625282288,
+            "identity_mse": 0.11565059423446655,
+            "seconds": 1.0200209091417491,
+            "step": 34,
+            "success_rate": 0.0833333358168602,
+            "wrong_pad_rate": 0.9166666865348816
+          },
+          {
+            "endpoint_l2": 0.1469837725162506,
+            "identity_mse": 0.01702296920120716,
+            "seconds": 1.0790836289525032,
+            "step": 50,
+            "success_rate": 0.8333333134651184,
+            "wrong_pad_rate": 0.1666666716337204
+          },
+          {
+            "endpoint_l2": 0.35792216658592224,
+            "identity_mse": 0.03968575596809387,
+            "seconds": 1.1503698909655213,
+            "step": 67,
+            "success_rate": 0.3333333432674408,
+            "wrong_pad_rate": 0.4166666567325592
+          },
+          {
+            "endpoint_l2": 0.14850522577762604,
+            "identity_mse": 0.011574785225093365,
+            "seconds": 1.2085168580524623,
+            "step": 84,
+            "success_rate": 0.8333333134651184,
+            "wrong_pad_rate": 0.0833333358168602
+          },
+          {
+            "endpoint_l2": 0.14132848381996155,
+            "identity_mse": 0.009502881206572056,
+            "seconds": 1.2674036470707506,
+            "step": 100,
+            "success_rate": 0.9166666865348816,
+            "wrong_pad_rate": 0.0833333358168602
+          },
+          {
+            "endpoint_l2": 0.1092187836766243,
+            "identity_mse": 0.006088704336434603,
+            "seconds": 1.3260459050070494,
+            "step": 117,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.07250500470399857,
+            "identity_mse": 0.005006736144423485,
+            "seconds": 1.3849392640404403,
+            "step": 134,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.07553218305110931,
+            "identity_mse": 0.004113696049898863,
+            "seconds": 1.4410228519700468,
+            "step": 150,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.08912479877471924,
+            "identity_mse": 0.003524680621922016,
+            "seconds": 1.5003156829625368,
+            "step": 167,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.07639575004577637,
+            "identity_mse": 0.002633023075759411,
+            "seconds": 1.5596460041124374,
+            "step": 184,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.07098610699176788,
+            "identity_mse": 0.002704926999285817,
+            "seconds": 1.6151533189695328,
+            "step": 200,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.07849042117595673,
+            "identity_mse": 0.0025406137574464083,
+            "seconds": 1.6761268570553511,
+            "step": 217,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.06815873831510544,
+            "identity_mse": 0.0024140572641044855,
+            "seconds": 1.7373170871287584,
+            "step": 234,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.06136775389313698,
+            "identity_mse": 0.0019882400520145893,
+            "seconds": 1.7938843360170722,
+            "step": 250,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.06601940840482712,
+            "identity_mse": 0.002037779428064823,
+            "seconds": 1.8548772539943457,
+            "step": 267,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.06948582828044891,
+            "identity_mse": 0.0021149080712348223,
+            "seconds": 1.9165470760781318,
+            "step": 284,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.05163687840104103,
+            "identity_mse": 0.002094453666359186,
+            "seconds": 1.9743295600637794,
+            "step": 300,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.053616732358932495,
+            "identity_mse": 0.002326643792912364,
+            "seconds": 2.035545170074329,
+            "step": 317,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.05324165150523186,
+            "identity_mse": 0.002079067751765251,
+            "seconds": 2.0967059191316366,
+            "step": 334,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.05141318216919899,
+            "identity_mse": 0.0017306877998635173,
+            "seconds": 2.154683643952012,
+            "step": 350,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.06745070219039917,
+            "identity_mse": 0.0017167954938486218,
+            "seconds": 2.215241250116378,
+            "step": 367,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.04439539089798927,
+            "identity_mse": 0.0020062581170350313,
+            "seconds": 2.2756370960269123,
+            "step": 384,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          },
+          {
+            "endpoint_l2": 0.05845385789871216,
+            "identity_mse": 0.0022454001009464264,
+            "seconds": 2.3335078209638596,
+            "step": 400,
+            "success_rate": 1.0,
+            "wrong_pad_rate": 0.0
+          }
+        ],
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.46,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 1.5596460041124374,
+            "confirmed_step": 184,
+            "first_pass_step": 117,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 18,
+            "passing_suffix": 18,
+            "stable_from_seconds": 1.3260459050070494,
+            "stable_from_step": 117
+          },
+          "metrics": [
+            {
+              "margin": 0.017754599899053574,
+              "metric": "identity_mse",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.02,
+              "value": 0.0022454001009464264
+            },
+            {
+              "margin": 0.0,
+              "metric": "success_rate",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 1.0,
+              "value": 1.0
+            },
+            {
+              "margin": 0.0,
+              "metric": "wrong_pad_rate",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.0,
+              "value": 0.0
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "seconds": 2.4963590411935,
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS",
+  "tag": "eps_net_1m"
+}

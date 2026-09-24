@@ -1,0 +1,988 @@
+{
+  "seconds": 7.532518786145374,
+  "shared_gate_eligible": false,
+  "stages": [
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/eps-net-20260924T185715Z/baseline_qualification/20260924T185715Z-1646701/repo/reports/toy100/h_stability/baseline-qualification/audit/img_blobs4/eps_net_1m/img_blobs4/episodes/eps_net_1m__img_blobs4.json.gz",
+      "candidate": "eps_net_1m",
+      "checkpoint_sha256": "2d481c9696bee03266532b2571281b7cf238b31fab4d4a6c655b8cfd8376b6ac",
+      "gate": "img_blobs4",
+      "metrics": {
+        "frozen_evidence_audit": "FAIL",
+        "live": {
+          "distribution_tv": 0.15625,
+          "hq": 0.84375,
+          "mean_rmse": 0.06595023721456528,
+          "mode_fractions": [
+            0.09375,
+            0.3125,
+            0.34375,
+            0.25
+          ],
+          "modes": 3,
+          "quality_mode_fractions": [
+            0.09375,
+            0.25,
+            0.3125,
+            0.1875
+          ]
+        },
+        "observations": [
+          {
+            "distribution_tv": 0.21875,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.0,
+              "mean_rmse": 0.46998390555381775,
+              "mode_fractions": [
+                0.09375,
+                0.28125,
+                0.21875,
+                0.40625
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.0,
+            "mean_rmse": 0.24883787333965302,
+            "mode_fractions": [
+              0.40625,
+              0.09375,
+              0.3125,
+              0.1875
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "seconds": 1.1792513828258961,
+            "step": 25
+          },
+          {
+            "distribution_tv": 0.125,
+            "ema": {
+              "distribution_tv": 0.21875,
+              "hq": 0.0,
+              "mean_rmse": 0.4180983006954193,
+              "mode_fractions": [
+                0.15625,
+                0.125,
+                0.28125,
+                0.4375
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.0,
+            "mean_rmse": 0.24801218509674072,
+            "mode_fractions": [
+              0.3125,
+              0.15625,
+              0.21875,
+              0.3125
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "seconds": 1.434508393984288,
+            "step": 50
+          },
+          {
+            "distribution_tv": 0.15625,
+            "ema": {
+              "distribution_tv": 0.09375,
+              "hq": 0.0,
+              "mean_rmse": 0.3627631664276123,
+              "mode_fractions": [
+                0.28125,
+                0.15625,
+                0.3125,
+                0.25
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.0,
+            "mean_rmse": 0.24545049667358398,
+            "mode_fractions": [
+              0.40625,
+              0.15625,
+              0.1875,
+              0.25
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "seconds": 1.6916828828398138,
+            "step": 75
+          },
+          {
+            "distribution_tv": 0.21875,
+            "ema": {
+              "distribution_tv": 0.0625,
+              "hq": 0.0,
+              "mean_rmse": 0.3162941038608551,
+              "mode_fractions": [
+                0.25,
+                0.1875,
+                0.3125,
+                0.25
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.0,
+            "mean_rmse": 0.24484558403491974,
+            "mode_fractions": [
+              0.46875,
+              0.21875,
+              0.15625,
+              0.15625
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "seconds": 1.9507893498521298,
+            "step": 100
+          },
+          {
+            "distribution_tv": 0.21875,
+            "ema": {
+              "distribution_tv": 0.125,
+              "hq": 0.0,
+              "mean_rmse": 0.2851982116699219,
+              "mode_fractions": [
+                0.1875,
+                0.21875,
+                0.375,
+                0.21875
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.0,
+            "mean_rmse": 0.24395360052585602,
+            "mode_fractions": [
+              0.15625,
+              0.28125,
+              0.125,
+              0.4375
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "seconds": 2.205256356857717,
+            "step": 125
+          },
+          {
+            "distribution_tv": 0.21875,
+            "ema": {
+              "distribution_tv": 0.09375,
+              "hq": 0.0,
+              "mean_rmse": 0.26515594124794006,
+              "mode_fractions": [
+                0.25,
+                0.25,
+                0.34375,
+                0.15625
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.0,
+            "mean_rmse": 0.22200554609298706,
+            "mode_fractions": [
+              0.15625,
+              0.25,
+              0.46875,
+              0.125
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "seconds": 2.459656164981425,
+            "step": 150
+          },
+          {
+            "distribution_tv": 0.1875,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.0,
+              "mean_rmse": 0.24806146323680878,
+              "mode_fractions": [
+                0.25,
+                0.1875,
+                0.4375,
+                0.125
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.125,
+            "mean_rmse": 0.1820395588874817,
+            "mode_fractions": [
+              0.09375,
+              0.21875,
+              0.4375,
+              0.25
+            ],
+            "modes": 0,
+            "quality_mode_fractions": [
+              0.0,
+              0.03125,
+              0.09375,
+              0.0
+            ],
+            "seconds": 2.718028788920492,
+            "step": 175
+          },
+          {
+            "distribution_tv": 0.25,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.0,
+              "mean_rmse": 0.236421138048172,
+              "mode_fractions": [
+                0.1875,
+                0.21875,
+                0.4375,
+                0.15625
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.4375,
+            "mean_rmse": 0.14703363180160522,
+            "mode_fractions": [
+              0.03125,
+              0.21875,
+              0.46875,
+              0.28125
+            ],
+            "modes": 1,
+            "quality_mode_fractions": [
+              0.0,
+              0.09375,
+              0.34375,
+              0.0
+            ],
+            "seconds": 2.9719303138554096,
+            "step": 200
+          },
+          {
+            "distribution_tv": 0.21875,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.0,
+              "mean_rmse": 0.2272493839263916,
+              "mode_fractions": [
+                0.15625,
+                0.21875,
+                0.4375,
+                0.1875
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.59375,
+            "mean_rmse": 0.12348679453134537,
+            "mode_fractions": [
+              0.125,
+              0.25,
+              0.46875,
+              0.15625
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.0,
+              0.1875,
+              0.34375,
+              0.0625
+            ],
+            "seconds": 3.228565740864724,
+            "step": 225
+          },
+          {
+            "distribution_tv": 0.21875,
+            "ema": {
+              "distribution_tv": 0.21875,
+              "hq": 0.0,
+              "mean_rmse": 0.21618956327438354,
+              "mode_fractions": [
+                0.09375,
+                0.28125,
+                0.4375,
+                0.1875
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.59375,
+            "mean_rmse": 0.11470947414636612,
+            "mode_fractions": [
+              0.03125,
+              0.3125,
+              0.40625,
+              0.25
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.0,
+              0.1875,
+              0.34375,
+              0.0625
+            ],
+            "seconds": 3.485821340000257,
+            "step": 250
+          },
+          {
+            "distribution_tv": 0.21875,
+            "ema": {
+              "distribution_tv": 0.25,
+              "hq": 0.0,
+              "mean_rmse": 0.20523220300674438,
+              "mode_fractions": [
+                0.125,
+                0.28125,
+                0.46875,
+                0.125
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.625,
+            "mean_rmse": 0.11056020855903625,
+            "mode_fractions": [
+              0.09375,
+              0.28125,
+              0.4375,
+              0.1875
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.03125,
+              0.1875,
+              0.34375,
+              0.0625
+            ],
+            "seconds": 3.7500543789938092,
+            "step": 275
+          },
+          {
+            "distribution_tv": 0.15625,
+            "ema": {
+              "distribution_tv": 0.125,
+              "hq": 0.0,
+              "mean_rmse": 0.19274751842021942,
+              "mode_fractions": [
+                0.125,
+                0.25,
+                0.34375,
+                0.28125
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "hq": 0.65625,
+            "mean_rmse": 0.10450980812311172,
+            "mode_fractions": [
+              0.09375,
+              0.28125,
+              0.34375,
+              0.28125
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.03125,
+              0.1875,
+              0.34375,
+              0.09375
+            ],
+            "seconds": 4.019217278808355,
+            "step": 300
+          },
+          {
+            "distribution_tv": 0.1875,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.09375,
+              "mean_rmse": 0.17777718603610992,
+              "mode_fractions": [
+                0.15625,
+                0.28125,
+                0.40625,
+                0.15625
+              ],
+              "modes": 0,
+              "quality_mode_fractions": [
+                0.0,
+                0.03125,
+                0.0625,
+                0.0
+              ]
+            },
+            "hq": 0.6875,
+            "mean_rmse": 0.09685531258583069,
+            "mode_fractions": [
+              0.125,
+              0.28125,
+              0.40625,
+              0.1875
+            ],
+            "modes": 2,
+            "quality_mode_fractions": [
+              0.03125,
+              0.21875,
+              0.34375,
+              0.09375
+            ],
+            "seconds": 4.287048312835395,
+            "step": 325
+          },
+          {
+            "distribution_tv": 0.15625,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.1875,
+              "mean_rmse": 0.16313065588474274,
+              "mode_fractions": [
+                0.125,
+                0.21875,
+                0.4375,
+                0.21875
+              ],
+              "modes": 1,
+              "quality_mode_fractions": [
+                0.0,
+                0.03125,
+                0.15625,
+                0.0
+              ]
+            },
+            "hq": 0.71875,
+            "mean_rmse": 0.09423794597387314,
+            "mode_fractions": [
+              0.125,
+              0.25,
+              0.40625,
+              0.21875
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.03125,
+              0.21875,
+              0.34375,
+              0.125
+            ],
+            "seconds": 4.5628462608437985,
+            "step": 350
+          },
+          {
+            "distribution_tv": 0.1875,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.375,
+              "mean_rmse": 0.15090347826480865,
+              "mode_fractions": [
+                0.125,
+                0.3125,
+                0.375,
+                0.1875
+              ],
+              "modes": 1,
+              "quality_mode_fractions": [
+                0.0,
+                0.0625,
+                0.25,
+                0.0625
+              ]
+            },
+            "hq": 0.71875,
+            "mean_rmse": 0.09219586104154587,
+            "mode_fractions": [
+              0.09375,
+              0.3125,
+              0.375,
+              0.21875
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.03125,
+              0.21875,
+              0.34375,
+              0.125
+            ],
+            "seconds": 4.835156443994492,
+            "step": 375
+          },
+          {
+            "distribution_tv": 0.1875,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.4375,
+              "mean_rmse": 0.13988827168941498,
+              "mode_fractions": [
+                0.15625,
+                0.28125,
+                0.40625,
+                0.15625
+              ],
+              "modes": 2,
+              "quality_mode_fractions": [
+                0.0,
+                0.125,
+                0.25,
+                0.0625
+              ]
+            },
+            "hq": 0.75,
+            "mean_rmse": 0.08549097180366516,
+            "mode_fractions": [
+              0.1875,
+              0.28125,
+              0.40625,
+              0.125
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.0625,
+              0.21875,
+              0.34375,
+              0.125
+            ],
+            "seconds": 5.103466529864818,
+            "step": 400
+          },
+          {
+            "distribution_tv": 0.1875,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.5,
+              "mean_rmse": 0.1293826699256897,
+              "mode_fractions": [
+                0.09375,
+                0.3125,
+                0.375,
+                0.21875
+              ],
+              "modes": 2,
+              "quality_mode_fractions": [
+                0.0,
+                0.15625,
+                0.28125,
+                0.0625
+              ]
+            },
+            "hq": 0.75,
+            "mean_rmse": 0.08715587854385376,
+            "mode_fractions": [
+              0.125,
+              0.3125,
+              0.375,
+              0.1875
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.09375,
+              0.21875,
+              0.3125,
+              0.125
+            ],
+            "seconds": 5.36627261294052,
+            "step": 425
+          },
+          {
+            "distribution_tv": 0.15625,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.5625,
+              "mean_rmse": 0.12065578252077103,
+              "mode_fractions": [
+                0.0625,
+                0.28125,
+                0.34375,
+                0.3125
+              ],
+              "modes": 2,
+              "quality_mode_fractions": [
+                0.0,
+                0.1875,
+                0.28125,
+                0.09375
+              ]
+            },
+            "hq": 0.75,
+            "mean_rmse": 0.0834498405456543,
+            "mode_fractions": [
+              0.09375,
+              0.28125,
+              0.3125,
+              0.3125
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.09375,
+              0.21875,
+              0.3125,
+              0.125
+            ],
+            "seconds": 5.632732400903478,
+            "step": 450
+          },
+          {
+            "distribution_tv": 0.125,
+            "ema": {
+              "distribution_tv": 0.125,
+              "hq": 0.59375,
+              "mean_rmse": 0.11140748858451843,
+              "mode_fractions": [
+                0.15625,
+                0.25,
+                0.375,
+                0.21875
+              ],
+              "modes": 2,
+              "quality_mode_fractions": [
+                0.03125,
+                0.1875,
+                0.28125,
+                0.09375
+              ]
+            },
+            "hq": 0.78125,
+            "mean_rmse": 0.07904103398323059,
+            "mode_fractions": [
+              0.125,
+              0.25,
+              0.375,
+              0.25
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.09375,
+              0.21875,
+              0.3125,
+              0.15625
+            ],
+            "seconds": 5.898752136854455,
+            "step": 475
+          },
+          {
+            "distribution_tv": 0.125,
+            "ema": {
+              "distribution_tv": 0.15625,
+              "hq": 0.65625,
+              "mean_rmse": 0.10325140506029129,
+              "mode_fractions": [
+                0.125,
+                0.28125,
+                0.375,
+                0.21875
+              ],
+              "modes": 2,
+              "quality_mode_fractions": [
+                0.0625,
+                0.1875,
+                0.3125,
+                0.09375
+              ]
+            },
+            "hq": 0.75,
+            "mean_rmse": 0.08947551995515823,
+            "mode_fractions": [
+              0.125,
+              0.28125,
+              0.34375,
+              0.25
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.09375,
+              0.15625,
+              0.3125,
+              0.1875
+            ],
+            "seconds": 6.165255585918203,
+            "step": 500
+          },
+          {
+            "distribution_tv": 0.125,
+            "ema": {
+              "distribution_tv": 0.125,
+              "hq": 0.71875,
+              "mean_rmse": 0.09723951667547226,
+              "mode_fractions": [
+                0.15625,
+                0.25,
+                0.375,
+                0.21875
+              ],
+              "modes": 3,
+              "quality_mode_fractions": [
+                0.0625,
+                0.21875,
+                0.3125,
+                0.125
+              ]
+            },
+            "hq": 0.75,
+            "mean_rmse": 0.07695373892784119,
+            "mode_fractions": [
+              0.15625,
+              0.25,
+              0.375,
+              0.21875
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.09375,
+              0.1875,
+              0.28125,
+              0.1875
+            ],
+            "seconds": 6.431966924807057,
+            "step": 525
+          },
+          {
+            "distribution_tv": 0.1875,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.6875,
+              "mean_rmse": 0.09343154728412628,
+              "mode_fractions": [
+                0.09375,
+                0.21875,
+                0.40625,
+                0.28125
+              ],
+              "modes": 3,
+              "quality_mode_fractions": [
+                0.0625,
+                0.21875,
+                0.28125,
+                0.125
+              ]
+            },
+            "hq": 0.8125,
+            "mean_rmse": 0.07184842228889465,
+            "mode_fractions": [
+              0.09375,
+              0.21875,
+              0.40625,
+              0.28125
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.09375,
+              0.21875,
+              0.3125,
+              0.1875
+            ],
+            "seconds": 6.698631913866848,
+            "step": 550
+          },
+          {
+            "distribution_tv": 0.15625,
+            "ema": {
+              "distribution_tv": 0.1875,
+              "hq": 0.71875,
+              "mean_rmse": 0.09038770943880081,
+              "mode_fractions": [
+                0.125,
+                0.21875,
+                0.4375,
+                0.21875
+              ],
+              "modes": 3,
+              "quality_mode_fractions": [
+                0.0625,
+                0.21875,
+                0.3125,
+                0.125
+              ]
+            },
+            "hq": 0.75,
+            "mean_rmse": 0.07903464138507843,
+            "mode_fractions": [
+              0.125,
+              0.25,
+              0.40625,
+              0.21875
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.09375,
+              0.21875,
+              0.25,
+              0.1875
+            ],
+            "seconds": 6.968361866893247,
+            "step": 575
+          },
+          {
+            "distribution_tv": 0.15625,
+            "ema": {
+              "distribution_tv": 0.125,
+              "hq": 0.71875,
+              "mean_rmse": 0.08694706112146378,
+              "mode_fractions": [
+                0.125,
+                0.25,
+                0.375,
+                0.25
+              ],
+              "modes": 3,
+              "quality_mode_fractions": [
+                0.0625,
+                0.21875,
+                0.3125,
+                0.125
+              ]
+            },
+            "hq": 0.84375,
+            "mean_rmse": 0.06595023721456528,
+            "mode_fractions": [
+              0.09375,
+              0.3125,
+              0.34375,
+              0.25
+            ],
+            "modes": 3,
+            "quality_mode_fractions": [
+              0.09375,
+              0.25,
+              0.3125,
+              0.1875
+            ],
+            "seconds": 7.353239346994087,
+            "step": 600
+          }
+        ],
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": -1,
+              "metric": "modes",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 4,
+              "value": 3
+            },
+            {
+              "margin": -0.05625000000000002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.9,
+              "value": 0.84375
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.15625,
+          "status": "FAIL"
+        }
+      },
+      "seconds": 7.530419497052208,
+      "status": "FAIL"
+    }
+  ],
+  "status": "FAIL",
+  "tag": "eps_net_1m"
+}

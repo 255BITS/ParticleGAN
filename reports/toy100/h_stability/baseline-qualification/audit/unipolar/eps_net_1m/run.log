@@ -1,0 +1,14 @@
+{"event": "START", "candidate": "eps_net_1m", "gate": "unipolar"}
+START unipolar route=public primitives custom host + shared noise policy steps=400
+unipolar_dir arm=locked_rpgan step=1/400 cover=0.0032 leak=0.2319 neu_hold=0.9979 cos_plus=+0.5484 hit=FAIL
+unipolar_dir arm=locked_rpgan step=50/400 cover=0.2278 leak=0.0840 neu_hold=0.9259 cos_plus=+0.9178 hit=FAIL
+unipolar_dir arm=locked_rpgan step=100/400 cover=0.4116 leak=0.0000 neu_hold=0.8735 cos_plus=+0.9998 hit=FAIL
+unipolar_dir arm=locked_rpgan step=150/400 cover=0.5540 leak=0.0000 neu_hold=0.8360 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=200/400 cover=0.6643 leak=0.0000 neu_hold=0.8101 cos_plus=+0.9998 hit=FAIL
+unipolar_dir arm=locked_rpgan step=250/400 cover=0.7454 leak=0.0000 neu_hold=0.7974 cos_plus=+0.9999 hit=FAIL
+unipolar_dir arm=locked_rpgan step=300/400 cover=0.8056 leak=0.0000 neu_hold=0.7940 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=350/400 cover=0.8499 leak=0.0000 neu_hold=0.7987 cos_plus=+0.9999 hit=FAIL
+unipolar_dir arm=locked_rpgan step=400/400 cover=0.8786 leak=0.0000 neu_hold=0.8105 cos_plus=+0.9997 hit=FAIL
+unipolar_dir arm=locked_rpgan step=400 seed=0 cover=0.8786 leak=0.0000 neu_hold=0.8105 cos_plus=+0.9997 hit=FAIL
+{"event": "DONE", "task": "unipolar", "status": "FAIL", "suffix": 0, "live": {"cover": 0.8785668231332266, "off_caption": 9.259497406875443e-06, "neu_hold": 0.8104581087827682}, "error": null}
+{"event": "DONE", "candidate": "eps_net_1m", "gate": "unipolar", "status": "FAIL", "seconds": 3.0549005758948624, "live": {"cover": 0.8785668231332266, "neu_hold": 0.8104581087827682, "off_caption": 9.259497406875443e-06}}

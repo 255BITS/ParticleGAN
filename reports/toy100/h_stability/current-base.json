@@ -34,9 +34,43 @@
     "state_origin": "same-policy own cold acquisition"
   },
   "blockers": [
-    "two_pole FAIL:mean_abs0.029888831079006195 <0.30",
-    "full own1200 UNRUN",
-    "other17 older hosts UNRUN",
-    "native100 gates SKIPPED"
-  ]
+    "two_pole FAIL: mean_abs=0.0298888311 requires >=0.3",
+    "unipolar FAIL: neu_hold=0.810458109 requires >=0.85",
+    "mid_scale_identity FAIL: identity_at_0=0.718450265 requires >=0.85",
+    "cover_leftover FAIL: u_kept=0.441448624 requires >=0.85; content_kept=0.444301657 requires >=0.75; pole_rel_err_plus=0.419609755 requires <=0.2; pole_rel_err_minus=0.460157573 requires <=0.2",
+    "img_blobs4 FAIL: modes=3 requires >=4; hq=0.84375 requires >=0.9",
+    "img_intensity2 FAIL: hq=0.875 requires >=0.9",
+    "vector_unequal_mass FAIL: component_covariance_error=1.60670958 requires <=0.85; component_min_eigen_ratio=0.0183518231 requires >=0.15; min_mass_ratio=0.131460339 requires >=0.25",
+    "ae_gan_hold FAIL: recon_mse=3.05687213 requires <=0.05",
+    "unused_token_hold FAIL: unused_hold=0.788209453 requires >=0.85; concept_move=0.423579831 requires >=0.85",
+    "own-state1200 FAIL at1692: HQ .86474609375 < .90 after491 passing checks; stopped",
+    "native100 SKIPPED; older hosts and stability unresolved"
+  ],
+  "older_host_audit": {
+    "status": "FAIL",
+    "passed": 10,
+    "failed": 9,
+    "total": 19,
+    "new_host_executions": 17,
+    "retained_independent_hosts": [
+      "two_pole",
+      "mode_hold"
+    ],
+    "artifact": "reports/toy100/h_stability/baseline-qualification/audit/audit-results.json",
+    "diagnostic_only": true
+  },
+  "own_state_long_probe": {
+    "status": "FAIL",
+    "budget": 1200,
+    "checks": 492,
+    "passing_checks": 491,
+    "first_failed_step": 1692,
+    "final_modes": 8,
+    "final_hq": 0.86474609375,
+    "minimum_hq_among_passing_checks": 0.905517578125,
+    "full_budget": false,
+    "stopped_on_first_failure": true,
+    "state_origin": "same-policy own cold acquisition",
+    "artifact": "reports/toy100/h_stability/baseline-qualification/audit/own_state_diagnostic_1200/summary.json"
+  }
 }

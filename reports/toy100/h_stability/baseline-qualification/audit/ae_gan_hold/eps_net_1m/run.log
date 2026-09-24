@@ -1,0 +1,10 @@
+{"event": "START", "candidate": "eps_net_1m", "gate": "ae_gan_hold"}
+START ae_gan_hold route=public primitives custom host + shared noise policy steps=250
+ae-gan-hold arm=eps_net_1m step=0 recon=1.2835 hold=1.4371 phase=init
+ae-gan-hold arm=eps_net_1m step=1 recon=1.2679 hold=1.4351 loss=0.8059
+ae-gan-hold arm=eps_net_1m step=50 recon=1.1704 hold=1.0974 loss=0.8174
+ae-gan-hold arm=eps_net_1m step=100 recon=1.2226 hold=0.0367 loss=0.7562
+ae-gan-hold arm=eps_net_1m step=150 recon=2.5436 hold=0.0842 loss=0.7198
+ae-gan-hold arm=eps_net_1m step=200 recon=2.9459 hold=0.0433 loss=0.7095
+{"event": "DONE", "task": "ae_gan_hold", "status": "FAIL", "suffix": 0, "live": {"recon_mse": 3.0568721294403076, "hold": 0.006833471357822418}, "error": null}
+{"event": "DONE", "candidate": "eps_net_1m", "gate": "ae_gan_hold", "status": "FAIL", "seconds": 2.038630912080407, "live": {"hold": 0.006833471357822418, "recon_mse": 3.0568721294403076}}

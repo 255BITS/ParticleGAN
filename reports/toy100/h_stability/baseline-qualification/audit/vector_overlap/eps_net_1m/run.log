@@ -1,0 +1,4 @@
+{"event": "START", "candidate": "eps_net_1m", "gate": "vector_overlap"}
+START vector_overlap route=GANTrainer + generic noise wrappers steps=1200
+{"event": "DONE", "task": "vector_overlap", "status": "PASS", "suffix": 23, "live": {"sw1_normalized": 0.03667182831576287, "mean_error": 0.029511338099837303, "covariance_error": 0.0383533239364624, "target_scale": 0.8501437306404114, "sample_count": 4096}, "error": null}
+{"event": "DONE", "candidate": "eps_net_1m", "gate": "vector_overlap", "status": "PASS", "seconds": 10.123472737148404, "live": {"covariance_error": 0.0383533239364624, "mean_error": 0.029511338099837303, "sample_count": 4096, "sw1_normalized": 0.03667182831576287, "target_scale": 0.8501437306404114}}
