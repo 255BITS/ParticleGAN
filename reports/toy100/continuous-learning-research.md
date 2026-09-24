@@ -1,6 +1,7 @@
 # Removing learning-rate decay: mechanism and validation
 
-Latest: [sample-derived anchors, conditional invariance and neural continuation](continuous-round6.md).
+Latest: [functional fitting, acquisition and the missing-minibatch failure](continuous-round7.md).
+Previous: [sample-derived anchors and neural continuation](continuous-round6.md).
 Previous: [exact stationary failure and opponent prediction](continuous-round5.md).
 Prediction passes warm200 but fails22/1200 dense later checks. Original PR84
 fails89/1200 with identical archived training state; scheduled control1200/1200.

@@ -1,0 +1,61 @@
+{
+  "scope": "finite neural gates and explicit rare fixed-target minibatch counterexample; exact sources/raw",
+  "files": {
+    "result.json.gz": {
+      "original_name": "result.json",
+      "original_sha256": "9c3b4ec2d9fc2ad03625bd58de6c158badebfde1e76e567182e3a755ca223619",
+      "stored_sha256": "3314669ae6f0857a4983c74050e7aa4b99c7fe5156fd1bdea9b1be3740d0e293",
+      "original_bytes": 34296,
+      "stored_bytes": 8238
+    },
+    "source/benchmarks/locked_shared/mlp.py.gz": {
+      "original_name": "source/benchmarks/locked_shared/mlp.py",
+      "original_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "stored_sha256": "f5f9ffe455030054182ed9a11c1b8e1111b88c9371db8adf5e9982e0b08c886e",
+      "original_bytes": 2289,
+      "stored_bytes": 879
+    },
+    "source/benchmarks/locked_shared/mode_hold.py.gz": {
+      "original_name": "source/benchmarks/locked_shared/mode_hold.py",
+      "original_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "stored_sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "original_bytes": 10774,
+      "stored_bytes": 3580
+    },
+    "source/reports/toy100/anchor_missing_batch_group.py.gz": {
+      "original_name": "source/reports/toy100/anchor_missing_batch_group.py",
+      "original_sha256": "82ee9ebf1599c05d39e3b012c4c45d3218c6788e9adf1e334fd18214c43efdbd",
+      "stored_sha256": "21fee71bc8ed3e6626c7ab362af832b5e492447b0cacd3c7eb4d47a42d1d84e1",
+      "original_bytes": 3239,
+      "stored_bytes": 1414
+    },
+    "source/reports/toy100/coverage_fixed_eval.py.gz": {
+      "original_name": "source/reports/toy100/coverage_fixed_eval.py",
+      "original_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "stored_sha256": "781a69107df11fa473feacf197aff169c6e7b1c243d14de972d7af8d77401e98",
+      "original_bytes": 3996,
+      "stored_bytes": 1661
+    },
+    "source/reports/toy100/pr84_early_geometry.py.gz": {
+      "original_name": "source/reports/toy100/pr84_early_geometry.py",
+      "original_sha256": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+      "stored_sha256": "d4a37cd332e8724ed8d68cc0c9d13edb1f3370d1857bfd46a96bf7178d9aaa26",
+      "original_bytes": 7322,
+      "stored_bytes": 2733
+    },
+    "source/reports/toy100/sample_anchor_free1200.py.gz": {
+      "original_name": "source/reports/toy100/sample_anchor_free1200.py",
+      "original_sha256": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+      "stored_sha256": "2a1067249e23164ad5a576a8a64b914d36835939104635efc1762a34bef0fd2b",
+      "original_bytes": 12051,
+      "stored_bytes": 3903
+    },
+    "source/reports/toy100/sample_group_anchor.py.gz": {
+      "original_name": "source/reports/toy100/sample_group_anchor.py",
+      "original_sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+      "stored_sha256": "c0bf364cf5d9a4b130bd66e546cfda8e28196d791088358c51b87669efc1d2c9",
+      "original_bytes": 12791,
+      "stored_bytes": 4342
+    }
+  }
+}

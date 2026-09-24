@@ -1,11 +1,11 @@
 # Same-dataset stability status, September 24
 
-**No complete solution is qualified.** The current [sample-group anchor candidate](continuous-round6.md)
-passes saved44 and neural warm200, all HQ1. Its free-output warm1200 also
-passes, while split-batch reallocation fails the equivalent longer filter.
-Dense neural hold and cold acquisition remain required. Conditional output
-invariance has explicit group/error premises; internal state and complete
-distribution fidelity remain open. The fixed dataset never changes.
+**No complete solution is qualified.** [Round7](continuous-round7.md) passes
+cold acquisition, borrowed and own-acquired continuation, and model-error
+response with constant LR. Its memoryless group objective still deletes a
+mode on a minibatch that omits that component, reproduced in one actual
+neural update. Support-memory tests are next; the longer run is withheld.
+The target distribution is unchanged in this counterexample.
 
 **Subsequent exact diagnosis and new attempt:** the [fifth round](continuous-round5.md)
 checks every update through2400. Original PR84 fails89 of1,200 later checks,

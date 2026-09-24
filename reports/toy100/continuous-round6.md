@@ -1,5 +1,9 @@
 # Allocation, neural landing, and validation of continuing updates
 
+**Superseded status:** [Round7](continuous-round7.md) completes the corrected gates,
+selects pre-start fitting, and isolates a remaining minibatch-omission failure.
+The investigation below retains its earlier sequence and evidence.
+
 No complete replacement for LR decay is qualified. The latest candidate is
 **sample-derived distinct-group anchors with joint G/prior fitting**, restoring
 the pre-G state if the bounded fit does not converge. It passes the 44-check

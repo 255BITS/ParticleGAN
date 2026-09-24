@@ -5,15 +5,14 @@ candidate has passed both acquisition and continued quality. Work here is
 limited to replacing those schedules with responsive training dynamics;
 production defaults have not been changed.
 
-**Latest, round 6:** [sample-derived anchors and conditional stability](continuous-round6.md).
-Split-batch reallocation passes saved44 but fails longer free-output checks,
-so further GAN runs were withheld. Distinct sample-group anchors pass the
-same free-output warm1200, saved44, and neural warm200, all HQ1. Dense neural
-hold and cold acquisition are next. The new conditional invariant-region
-argument requires correct bounded-error group estimates and numerical
-margins; internal parameter stability and full distribution fidelity are
-still open. This adds a data objective and joint G/prior fitting, and is not
-a qualified production replacement. Earlier investigations remain below.
+**Latest, round 7:** [functional fitting and observed-support memory](continuous-round7.md).
+Pre-start joint fitting passes saved44, warm200, borrowed hold1200, both cold
+hosts, its own acquired hold1200, and immediate same-target model-error
+recovery. A controlled same-target minibatch omission nevertheless removes
+a mode in one actual neural update. The 12000-step run is withheld; the next
+cheap test preserves previously observed support while allowing new-group
+acquisition. No production replacement or unavoidable impossibility is
+established. Earlier investigations remain below.
 
 **Latest stability investigation:** exact replay isolates a destructive
 generator update at1325 and accumulated mode loss beginning1533. All16 held-out

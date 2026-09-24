@@ -192,8 +192,13 @@ def slim(branch):
 def run_hold(output, saved, recipe, noise, factory, declaration):
     from reports.toy100.pr84_critic_refinement_capture import _sha
     events = []
+    def observe(row):
+        events.append(row)
+        if row['step'] % 20 == 0 or not row['passed']:
+            print(json.dumps(dict(event='OWN_HOLD_PROGRESS', step=row['step'],
+                                  modes=row['modes'], hq=row['hq'], passed=row['passed'])), flush=True)
     branch, generated = run_bound(saved, recipe, noise, factory, completed=NOISE_HORIZON,
-        target=HOLD_END, fail_fast=True, log=lambda row: events.append(row))
+        target=HOLD_END, fail_fast=True, log=observe)
     receipt = branch['receipt']
     if len(events) != receipt['updates'] or any(row['step'] != NOISE_HORIZON + i + 1
                                                 for i, row in enumerate(events)):

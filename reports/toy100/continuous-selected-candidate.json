@@ -1183,23 +1183,20 @@
     "next": "saved-state differentiated critic response and early-acquisition diagnosis; no later promotion gates"
   },
   "next_research_candidate": {
-    "name": "sample-derived distinct-group anchors with joint fitting and rest on nonconvergence",
-    "method": "pr84_sample_group_anchor_joint_fit_rest_on_nonconvergence",
-    "status": "warm200_pass_dense_hold_running",
+    "name": "pre-start sample-group anchors with support memory proposed",
+    "current_method": "pr84_sample_group_anchor_prestart_joint_fit_rest_on_nonconvergence",
     "qualified": false,
-    "saved_checks": 44,
-    "saved_passes": 44,
-    "warm_checks": 200,
-    "warm_passes": 200,
-    "warm_min_hq": 1.0,
-    "free_output_warm_checks": 1200,
-    "free_output_warm_passes": 1200,
-    "report": "continuous-round6.md",
-    "limitations": [
-      "conditional group/error premises",
-      "internal parameter drift not bounded",
-      "centroid coverage is not complete distribution fidelity",
-      "cold and own-acquired continuation pending"
-    ]
+    "status": "finite_neural_gates_pass_but_actual_missing_batch_group_failure",
+    "saved_checks_passed": 44,
+    "warm_checks_passed": 200,
+    "borrowed_hold_checks_passed": 1200,
+    "cold_trajectory": "PASS",
+    "cold_ring": "PASS 24/24 HQ1",
+    "own_hold_checks_passed": 1200,
+    "model_error_response": "PASS_LOCAL_RESPONSE; firstupdate HQ1",
+    "structural_failure": "same-target D bank omits one component; converged actual update loses that mode",
+    "long12000": "withheld",
+    "next_test": "data-support memory with omission/discovery and exact state serialization",
+    "report": "continuous-round7.md"
   }
 }
