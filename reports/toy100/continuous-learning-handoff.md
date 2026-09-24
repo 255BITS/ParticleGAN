@@ -135,6 +135,7 @@ ineligible for the production gate until a real implementation is audited.
 | Cross-player-only competitive response | 196/200 | Warm HQ falls to .8894; unplanned cold diagnostic ends at MSE .020058 > .02, with no passing checkpoints |
 | Cross-only + own-curvature step bound (no nonlinear backtracking) | 199/200 | Update 1085, HQ .8013: cross solve lengthened G's step 15.5× its explicit Adam step ([report](cross-curvature-report.md)) |
 | Same + per-player step ≤ explicit Adam step | 198/200 | Updates 1134–1135, HQ .8884: slow ten-update walk with every bound inactive |
+| Alternating Adam, G own-curvature bound .25, D bound 2 | 200/200 | Cold trajectory PASS (.00094, 20-check suffix); cold ring terminal HQ .43/.52/.83/.92/.92, final 7 modes ([report](alternating-curvature-report.md)) |
 
 Earlier constant Adam, optimistic Adam/AMSGrad, ExtraAdam, epsilon changes,
 fixed output-motion bounds and persistent-noise grids also failed. R1+R2
