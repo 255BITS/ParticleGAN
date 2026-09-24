@@ -32,6 +32,7 @@ from benchmarks.toy100.gate import evaluate_suite as coverage_suite
 from benchmarks.toy100.problems import PROBLEM_NAMES
 from benchmarks.toy100.models import linear_input_noise
 from benchmarks.toy100.train import (
+    AFFINE_MODEL_POLICIES, EMPIRICAL_INIT_SEED_OFFSET,
     POLICY_SOURCE_SCOPE_V2, policy_source_scope, resolve_config,
 )
 from benchmarks.transfer_suite.compare_defaults import plan
@@ -634,7 +635,7 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
     if (not isinstance(card, dict)
             or card.get("toy100_model") != expected_model
             or card.get("generator_class") != (
-                "Linear" if expected_model == "affine_square_v1" else "SimpleMLPGenerator")
+                "Linear" if expected_model in AFFINE_MODEL_POLICIES else "SimpleMLPGenerator")
             or card.get("generator_wrapper_class") != (
                 ("IsolatedOutputNoise" if config.get("output_noise_rng") == "isolated"
                  else "OutputNoise") if config["output_noise_std"] else None)
@@ -651,29 +652,81 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
             or card["discriminator_parameters"] <= 0
             or card.get("prior_parameters") != config["num_particles"] * config["z_dim"]):
         raise ValueError(f"100-mode model policy receipt differs: {name}")
-    if expected_model == "affine_square_v1":
+    if expected_model in AFFINE_MODEL_POLICIES:
         expected_weight_hash = hashlib.sha256(
             struct.pack("<4f", 1.0, 0.0, 0.0, 1.0),
         ).hexdigest()
         expected_bias_hash = hashlib.sha256(
             struct.pack("<2f", 0.0, 0.0),
         ).hexdigest()
+        identity = expected_model in {
+            "affine_square_v1", "affine_normal_v1", "affine_empirical_box_v1",
+        }
+        prior_kind = ("uniform_square" if expected_model in {
+            "affine_square_v1", "affine_square_random_v1",
+        } else "empirical_box" if expected_model in {
+            "affine_empirical_box_v1", "affine_empirical_box_random_v1",
+        } else "normal")
+        weight = card.get("generator_initial_weight")
+        bias = card.get("generator_initial_bias")
+        if (not isinstance(weight, list) or len(weight) != 2
+                or any(not isinstance(row, list) or len(row) != 2 for row in weight)
+                or not isinstance(bias, list) or len(bias) != 2
+                or not all(isinstance(value, (int, float)) and not isinstance(value, bool)
+                           and math.isfinite(value) for row in weight for value in row)
+                or not all(isinstance(value, (int, float)) and not isinstance(value, bool)
+                           and math.isfinite(value) for value in bias)):
+            raise ValueError(f"100-mode affine initialization values differ: {name}")
+        weight_hash = hashlib.sha256(struct.pack("<4f", *(x for row in weight for x in row))).hexdigest()
+        bias_hash = hashlib.sha256(struct.pack("<2f", *bias)).hexdigest()
         if (card.get("generator_base_parameters") != 6
                 or card.get("generator_parameters") != 6 + int(
                     config.get("output_noise_learnable", False))
-                or card.get("prior_initialization") != "uniform_square"
-                or not _close(card.get("prior_scale"), 5.0)
+                or card.get("prior_initialization") != prior_kind
                 or card.get("prior_shape") != [config["num_particles"], 2]
                 or not isinstance(card.get("prior_initial_sha256"), str)
                 or len(card["prior_initial_sha256"]) != 64
                 or not isinstance(card.get("prior_initial_min"), (int, float))
                 or not isinstance(card.get("prior_initial_max"), (int, float))
-                or not -5.0 <= card["prior_initial_min"] <= card["prior_initial_max"] <= 5.0
-                or card.get("generator_initial_weight") != [[1.0, 0.0], [0.0, 1.0]]
-                or card.get("generator_initial_bias") != [0.0, 0.0]
-                or card.get("generator_initial_weight_sha256") != expected_weight_hash
-                or card.get("generator_initial_bias_sha256") != expected_bias_hash):
+                or not math.isfinite(card["prior_initial_min"])
+                or not math.isfinite(card["prior_initial_max"])
+                or card["prior_initial_min"] > card["prior_initial_max"]
+                or card.get("generator_initial_weight_sha256") != weight_hash
+                or card.get("generator_initial_bias_sha256") != bias_hash):
             raise ValueError(f"100-mode affine initialization receipt differs: {name}")
+        if identity:
+            if (weight != [[1.0, 0.0], [0.0, 1.0]] or bias != [0.0, 0.0]
+                    or weight_hash != expected_weight_hash or bias_hash != expected_bias_hash
+                    or card.get("generator_initialization") not in (
+                        ("identity", None) if expected_model == "affine_square_v1"
+                        else ("identity",)
+                    )):
+                raise ValueError(f"100-mode affine identity receipt differs: {name}")
+        elif (card.get("generator_initialization") != "torch_linear_default"
+              or any(abs(value) > 2 ** -0.5 + 1e-7 for row in weight for value in row)
+              or any(abs(value) > 2 ** -0.5 + 1e-7 for value in bias)):
+            raise ValueError(f"100-mode default affine receipt differs: {name}")
+        if prior_kind == "uniform_square":
+            if (not _close(card.get("prior_scale"), 5.0)
+                    or not -5.0 <= card["prior_initial_min"] <= card["prior_initial_max"] <= 5.0):
+                raise ValueError(f"100-mode square-prior receipt differs: {name}")
+        elif prior_kind == "normal":
+            if ("prior_scale" in card or not -10.0 <= card["prior_initial_min"]
+                    <= card["prior_initial_max"] <= 10.0):
+                raise ValueError(f"100-mode normal-prior receipt differs: {name}")
+        else:
+            lower, upper = card.get("init_data_lower"), card.get("init_data_upper")
+            if (card.get("init_data_samples") != config["batch_size"]
+                    or card.get("init_data_seed_offset") != EMPIRICAL_INIT_SEED_OFFSET
+                    or not _sha256_hex(card.get("init_data_sha256"))
+                    or not isinstance(lower, list) or not isinstance(upper, list)
+                    or len(lower) != 2 or len(upper) != 2
+                    or not all(isinstance(value, (int, float)) and not isinstance(value, bool)
+                               and math.isfinite(value) for value in lower + upper)
+                    or not all(low < high for low, high in zip(lower, upper))
+                    or not min(lower) <= card["prior_initial_min"]
+                    <= card["prior_initial_max"] <= max(upper)):
+                raise ValueError(f"100-mode empirical-box receipt differs: {name}")
     cap = policy.get("network_lr_horizon_cap")
     network_floor = policy.get("network_lr_floor")
     if cap is not None:

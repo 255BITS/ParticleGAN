@@ -67,6 +67,12 @@ OPTIONAL_RUN_FIELDS = {
     "output_noise_warmup", "output_noise_learnable",
     "output_noise_rng", "toy100_model", "network_lr_horizon_cap", "network_lr_floor",
 }
+AFFINE_MODEL_POLICIES = {
+    "affine_square_v1", "affine_normal_v1", "affine_square_random_v1",
+    "affine_normal_random_v1", "affine_empirical_box_v1",
+    "affine_empirical_box_random_v1",
+}
+EMPIRICAL_INIT_SEED_OFFSET = 701
 RECIPE_FIELDS = {field.name for field in fields(Recipe)}
 RUN_FIELDS = set(RUN_DEFAULTS) | OPTIONAL_RUN_FIELDS
 
@@ -214,8 +220,8 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
             raise ValueError("output_noise_rng must be 'isolated'")
         if run["output_noise_std"] <= 0:
             raise ValueError("isolated output_noise_rng requires output_noise_std > 0")
-    if "toy100_model" in run and run["toy100_model"] != "affine_square_v1":
-        raise ValueError("toy100_model must be 'affine_square_v1'")
+    if "toy100_model" in run and run["toy100_model"] not in AFFINE_MODEL_POLICIES:
+        raise ValueError("unsupported toy100_model")
     if "network_lr_horizon_cap" in run and (
         type(run["network_lr_horizon_cap"]) is not int
         or run["network_lr_horizon_cap"] <= 0
@@ -236,8 +242,8 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
     if (recipe.model != "gan" or recipe.conditioning != "scalar"
             or recipe.encoder_mode != "none" or recipe.prior_kind != "particles"):
         raise ValueError("toy100 requires an unconditional scalar GAN with a learned particle prior")
-    if run.get("toy100_model") == "affine_square_v1" and recipe.z_dim != 2:
-        raise ValueError("affine_square_v1 requires z_dim=2")
+    if run.get("toy100_model") in AFFINE_MODEL_POLICIES and recipe.z_dim != 2:
+        raise ValueError("affine toy100_model requires z_dim=2")
     run["device"] = str(device)
     # Store all resolved inputs, including the public recipe's inherited values.
     return {**recipe.to_dict(), **run}, recipe
@@ -307,6 +313,17 @@ class IsolatedNoiseGANTrainer(GANTrainer):
         return super().load_state_dict(state)
 
 
+def _empirical_init_box(config: Mapping[str, Any], device: torch.device):
+    """Estimate support from unlabelled real samples on a separate fixed stream."""
+    stream = torch.Generator(device=device).manual_seed(
+        config["seed"] + EMPIRICAL_INIT_SEED_OFFSET,
+    )
+    samples = sample_real(
+        config["problem"], config["batch_size"], device=device, generator=stream,
+    )
+    return samples, samples.amin(dim=0), samples.amax(dim=0)
+
+
 def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
     """Match the public 100-Gaussian example's model and initialization."""
     device = torch.device(config["device"])
@@ -317,16 +334,25 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
         if device.type == "cuda":
             torch.cuda.manual_seed_all(seed)
         prior = recipe.make_prior(learnable=True).to(device)
-        if config.get("toy100_model") == "affine_square_v1":
+        model_policy = config.get("toy100_model")
+        if model_policy in AFFINE_MODEL_POLICIES:
             # Preserve the scratch probe's RNG order: construct the ordinary
             # prior, redraw its coordinates, construct nn.Linear (which draws
             # its defaults), then replace those defaults with identity.
             with torch.no_grad():
-                prior.z.uniform_(-5.0, 5.0)
+                if model_policy in {"affine_square_v1", "affine_square_random_v1"}:
+                    prior.z.uniform_(-5.0, 5.0)
+                elif model_policy in {"affine_empirical_box_v1",
+                                      "affine_empirical_box_random_v1"}:
+                    _, lower, upper = _empirical_init_box(config, device)
+                    prior.z.uniform_(0.0, 1.0)
+                    prior.z.mul_(upper - lower).add_(lower)
             generator = nn.Linear(2, 2).to(device)
-            with torch.no_grad():
-                generator.weight.copy_(torch.eye(2, device=device, dtype=generator.weight.dtype))
-                generator.bias.zero_()
+            if model_policy in {"affine_square_v1", "affine_normal_v1",
+                                "affine_empirical_box_v1"}:
+                with torch.no_grad():
+                    generator.weight.copy_(torch.eye(2, device=device, dtype=generator.weight.dtype))
+                    generator.bias.zero_()
         else:
             generator = SimpleMLPGenerator(
                 z_dim=recipe.z_dim, hidden_dim=config["g_hidden"], n_hidden=config["n_hidden"]
@@ -335,7 +361,7 @@ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
             in_dim=2, hidden_dim=config["d_hidden"], n_hidden=config["n_hidden"],
             fourier=config["fourier"],
         ).to(device)
-        if config.get("toy100_model") != "affine_square_v1":
+        if model_policy not in AFFINE_MODEL_POLICIES:
             _init_linear(generator)
         _init_linear(discriminator)
         isolated = config.get("output_noise_rng") == "isolated"
@@ -509,19 +535,42 @@ def _model_policy_receipt(trainer: GANTrainer, config: Mapping[str, Any]) -> dic
         "discriminator_parameters": sum(p.numel() for p in trainer.D.parameters()),
         "prior_parameters": sum(p.numel() for p in trainer.prior.parameters()),
     }
-    if config.get("toy100_model") == "affine_square_v1":
+    model_policy = config.get("toy100_model")
+    if model_policy in AFFINE_MODEL_POLICIES:
+        if model_policy in {"affine_square_v1", "affine_square_random_v1"}:
+            initialization = "uniform_square"
+        elif model_policy in {"affine_empirical_box_v1",
+                              "affine_empirical_box_random_v1"}:
+            initialization = "empirical_box"
+        else:
+            initialization = "normal"
         receipt.update({
-            "prior_initialization": "uniform_square",
-            "prior_scale": 5.0,
+            "prior_initialization": initialization,
             "prior_shape": list(trainer.prior.z.shape),
             "prior_initial_min": float(trainer.prior.z.detach().min()),
             "prior_initial_max": float(trainer.prior.z.detach().max()),
             "prior_initial_sha256": _tensor_sha256(trainer.prior.z),
+            "generator_initialization": (
+                "identity" if model_policy in {"affine_square_v1", "affine_normal_v1",
+                                               "affine_empirical_box_v1"}
+                else "torch_linear_default"
+            ),
             "generator_initial_weight": generator.weight.detach().cpu().tolist(),
             "generator_initial_bias": generator.bias.detach().cpu().tolist(),
             "generator_initial_weight_sha256": _tensor_sha256(generator.weight),
             "generator_initial_bias_sha256": _tensor_sha256(generator.bias),
         })
+        if initialization == "uniform_square":
+            receipt["prior_scale"] = 5.0
+        if initialization == "empirical_box":
+            samples, lower, upper = _empirical_init_box(config, torch.device(config["device"]))
+            receipt.update({
+                "init_data_samples": config["batch_size"],
+                "init_data_seed_offset": EMPIRICAL_INIT_SEED_OFFSET,
+                "init_data_sha256": _tensor_sha256(samples),
+                "init_data_lower": lower.detach().cpu().tolist(),
+                "init_data_upper": upper.detach().cpu().tolist(),
+            })
     return receipt
 
 

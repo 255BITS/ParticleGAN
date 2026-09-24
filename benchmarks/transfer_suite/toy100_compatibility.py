@@ -31,7 +31,7 @@ from benchmarks.toy100.models import (
     paired_output_noise, linear_input_noise,
     linear_output_noise as output_noise_at,
 )
-from benchmarks.toy100.train import load_config, resolve_config
+from benchmarks.toy100.train import AFFINE_MODEL_POLICIES, load_config, resolve_config
 from lib.toy_models import SimpleMLPGenerator
 from particlegan import GANTrainer, get_recipe
 
@@ -72,9 +72,9 @@ def declared_model_policy(config: dict) -> dict:
             raise ValueError("model policy cannot vary by 100-mode problem")
     policy = {}
     if "toy100_model" in config:
-        if config["toy100_model"] != "affine_square_v1":
+        if config["toy100_model"] not in AFFINE_MODEL_POLICIES:
             raise ValueError("unsupported toy100_model")
-        policy["toy100_model"] = "affine_square_v1"
+        policy["toy100_model"] = config["toy100_model"]
     if "network_lr_horizon_cap" in config:
         cap = config["network_lr_horizon_cap"]
         if type(cap) is not int or cap <= 0:
