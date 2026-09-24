@@ -1,5 +1,9 @@
 # Current evaluation: GPU
 
+The [known finite-budget recipe](../gpu-known-winner-control/README.md) remains
+22/22 on its recorded CPU evidence and scores 16/22 in the GPU control. The
+reference below is for strict continuous-learning research, a different scope.
+
 Use the completed [GPU leaderboard](../gpu-leaderboard/LEADERBOARD.md) and
 [portable CUDA replay](../gpu-leaderboard/README.md) for all new qualification.
 The GPU research reference is **shared column RMS**, with 11/22 toys passing and

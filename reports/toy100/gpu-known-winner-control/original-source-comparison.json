@@ -1,0 +1,23 @@
+{
+  "native": {
+    "bound_files": 23,
+    "differences_before_CUDA_adaptation": [
+      "benchmarks/toy100/__main__.py",
+      "benchmarks/toy100/train.py"
+    ]
+  },
+  "older": {
+    "bound_files": 119,
+    "differences_before_CUDA_adaptation": [
+      "benchmarks/toy100/__main__.py",
+      "benchmarks/toy100/train.py",
+      "benchmarks/transfer_suite/plans/default_comparison.json",
+      "benchmarks/transfer_suite/plans/recipe_history.json"
+    ]
+  },
+  "interpretation": {
+    "benchmarks/toy100/train.py": "adds affine_moment_box_v1 branches; original affine_square_v1 policy is unchanged",
+    "benchmarks/toy100/__main__.py": "CLI default config and stricter-accuracy default changed; this control invokes train directly with explicit frozen config and both gates",
+    "public_training_package": "all original bound package file hashes match before CUDA adaptation"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "purpose": "Previously recorded 22/22 recipe, omitted from the continuous-learning GPU cohort",
+  "original_config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+  "config_changes": {
+    "device": [
+      "cpu",
+      "cuda:0"
+    ]
+  },
+  "policy_changes": [],
+  "gpu_profile": "cuda_fp32_v1",
+  "auxiliary_host_losses": "original frozen host settings, preserved for comparison",
+  "convergence": "not run: constant-rate probe would change this decaying recipe"
+}

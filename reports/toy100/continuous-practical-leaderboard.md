@@ -1,33 +1,46 @@
-# Current GPU leaderboard
+# 22-toy results and continuous stability
 
-The completed CUDA audit is now authoritative for GPU research. All supported
-runs trained on an RTX A6000 with the same pinned FP32/CUDA profile: **97 toy
-runs plus eight convergence runs**. All saved verdicts were independently
-recomputed. Unsupported adapters receive no credit.
+**Yes, there is a recorded 22/22 PASS.** The original
+`constraints_simple_regularization` recipe still passes when its saved CPU
+evidence is independently regraded. Its preserved-recipe CUDA control scores
+**16/22**, with all three native 100-mode gates passing.
 
-| Fully tested candidate | Toy PASS | Good post-convergence hold / 1200 |
-|---|---:|---:|
-| Shared column RMS | 11/22 | 131, then FAIL |
-| Shared RMS | 11/22 | 35, then FAIL |
-| H | 11/22 | Not confirmed by update 6000 |
-| Epsilon base | 9/22 | 19, then FAIL |
+| Recipe / scope | Backend | Toy PASS / 22 | Native PASS / 3 | Post-convergence hold |
+|---|---|---:|---:|---|
+| Original recipe, decay and original auxiliary host terms | Recorded CPU, regraded | **22/22 PASS** | 3/3 | Not a constant-rate claim |
+| Same original recipe | CUDA control | **16/22** | 3/3 | Not a constant-rate claim |
+| Shared column RMS, strict continuous variant | CUDA | 11/22 | 0/3 | 131 good updates, then FAIL |
+| Shared RMS, strict continuous variant | CUDA | 11/22 | 0/3 | 35 good updates, then FAIL |
+| H, strict continuous variant | CUDA | 11/22 | 0/3 | Not confirmed by 6000 |
+| Epsilon, strict continuous variant | CUDA | 9/22 | 0/3 | 19 good updates, then FAIL |
 
-**Shared column RMS is the next GPU research reference. No release winner is
-qualified.** All twelve native 100-mode runs fail the coverage/accuracy gates.
-The averaging and PR107/140/143 adapters have limited toy coverage; their
-separate results and explicit unsupported cells are in the full matrix.
+[Original 22/22 evidence](simpler22/README.md) ·
+[Same-recipe GPU control and all 22 results](gpu-known-winner-control/README.md) ·
+[Continuous-learning GPU matrix](gpu-leaderboard/LEADERBOARD.md)
 
-[Full GPU leaderboard](gpu-leaderboard/LEADERBOARD.md) ·
-[Protocol, raw evidence, and portable replay](gpu-leaderboard/README.md) ·
-[GPU research reference](gpu-leaderboard/current-gpu-reference.json)
+The first GPU report omitted the original winner and evaluated only eight
+continuous-learning variants. Its statement that no candidate qualified applied
+to that cohort. It did not invalidate the earlier passing recipe. The new
+control supplies the missing same-recipe CPU/GPU comparison.
 
-The hold begins after the first 200 consecutive full-ring/HQ >= .90 checks and
-scores the next 1,200 updates. Learning-time dips do not themselves fail it.
-PR107 and PR140 never confirm within the GPU budget; PR143 confirms at 1400
-then has 11 good hold checks before a miss. These dense results do not share
-the old sparse CPU stay denominator.
+The original recipe uses decaying learning rates and the frozen auxiliary
+losses in the autoencoder and unused-token hosts. The strict H-family variants
+keep rates active and disable those auxiliary terms. Compare these scopes
+explicitly: a finite-budget pass with decay is not evidence of continual
+stability with active rates, and the historical 22/22 is not a claim that every
+host uses an exclusively adversarial objective.
 
-[Historical CPU leaderboard](continuous-practical-leaderboard-cpu-history.md)
-remains available, including the MKL reproduction audit. CPU scores and GPU
-scores are not pooled. The old CPU epsilon selection is retained as provenance,
-not the current GPU ranking.
+The preserved-recipe GPU failures are `mode_hold`, `trajectory`, `img_bars4`,
+`img_blobs4`, `img_intensity2`, and `vector_unequal_mass`. The other sixteen pass,
+including native coverage and accuracy on all three 100-mode problems. All 22
+GPU control verdicts and all 105 earlier GPU variant results were regraded.
+
+Shared column RMS remains the next **strict continuous-learning** GPU research
+reference; it is not the overall finite-budget recipe winner. None of the
+continuous variants passes the required 1,200-update hold after confirmation.
+PR107/140 do not confirm by 6000; PR143 confirms at 1400 and fails after 11 good
+hold checks. Their published adapters cover only two toys.
+
+[GPU protocol and replay](gpu-leaderboard/README.md) ·
+[Strict GPU research reference](gpu-leaderboard/current-gpu-reference.json) ·
+[Historical continuous-learning CPU board](continuous-practical-leaderboard-cpu-history.md)

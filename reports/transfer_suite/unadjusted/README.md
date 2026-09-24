@@ -1,5 +1,10 @@
 # Unadjusted ParticleGAN default leaderboard
 
+For the **22-toy recipe and GPU results**, see the
+[current comparison](../../toy100/continuous-practical-leaderboard.md): the
+recorded CPU winner is 22/22; its GPU control is 16/22. This page retains the
+separate 19-toy public-default comparison.
+
 The public API now exposes one common winning default. Its [installed-package replay](../single_default_verification/README.md) reproduces **19/19** exactly after removing preset selection. Historical IDs below label recorded comparisons, not selectable public recipes.
 
 Reproduce the selected profile with [one command](../../../benchmarks/transfer_suite/UNADJUSTED_SEARCH.md). [Findings and discriminator details](FINDINGS.md). Generated JSON, curves and replay archives linked below are local artifacts; source, plans and this readable leaderboard stay in Git ([artifact policy](../../README.md)).

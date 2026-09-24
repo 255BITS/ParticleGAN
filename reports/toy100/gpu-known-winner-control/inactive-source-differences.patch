@@ -1,0 +1,127 @@
+--- winning/benchmarks/toy100/__main__.py
++++ control-before-device-adaptation/benchmarks/toy100/__main__.py
+@@ -29,15 +29,18 @@
+     parser = argparse.ArgumentParser(description="100-Gaussian training and evidence gate")
+     commands = parser.add_subparsers(dest="command", required=True)
+     run = commands.add_parser("run", help="train then gate all problems, or one named problem")
+-    run.add_argument("--config", type=Path, default=Path("configs/toy100/shared_candidate.json"),
++    run.add_argument("--config", type=Path, default=Path("configs/toy100/constraints_simple_regularization.json"),
+                      help="frozen JSON/TOML recipe (default: the verified shared 22-toy candidate)")
+     run.add_argument("--output", type=Path, required=True, help="new run directory")
+     run.add_argument("--problem", choices=PROBLEM_NAMES, help="individual deep dive")
+     run.add_argument("--steps", type=int, help="override training budget for a deep dive")
+     run.add_argument("--device", help="override device from the config")
+     run.add_argument("--no-render", action="store_true", help="skip diagnostic GIF rendering")
+-    run.add_argument("--require-accuracy", action="store_true",
+-                     help="also require sustained fidelity and a separate 100k-sample holdout")
++    accuracy = run.add_mutually_exclusive_group()
++    accuracy.add_argument("--require-accuracy", action="store_true", default=True,
++                          help="require sustained fidelity and a 100k-sample holdout (default)")
++    accuracy.add_argument("--coverage-only", dest="require_accuracy", action="store_false",
++                          help="diagnostic only: skip the stricter Gaussian accuracy gate")
+     for name in ("gate", "accuracy", "render"):
+         command = commands.add_parser(name, help=f"{name} existing recorded runs")
+         command.add_argument("--output", type=Path, required=True)
+--- winning/benchmarks/toy100/train.py
++++ control-before-device-adaptation/benchmarks/toy100/train.py
+@@ -70,7 +70,7 @@
+ AFFINE_MODEL_POLICIES = {
+     "affine_square_v1", "affine_normal_v1", "affine_square_random_v1",
+     "affine_normal_random_v1", "affine_empirical_box_v1",
+-    "affine_empirical_box_random_v1",
++    "affine_empirical_box_random_v1", "affine_moment_box_v1",
+ }
+ EMPIRICAL_INIT_SEED_OFFSET = 701
+ RECIPE_FIELDS = {field.name for field in fields(Recipe)}
+@@ -324,6 +324,24 @@
+     return samples, samples.amin(dim=0), samples.amax(dim=0)
+ 
+ 
++def _moment_init_box(config: Mapping[str, Any], device: torch.device):
++    """Match an unlabeled batch's per-axis mean and population variance.
++
++    A uniform variable on [-a, a] has standard deviation a/sqrt(3), so
++    sqrt(3) times the observed standard deviation gives its half-width.
++    """
++    stream = torch.Generator(device=device).manual_seed(
++        config["seed"] + EMPIRICAL_INIT_SEED_OFFSET,
++    )
++    samples = sample_real(
++        config["problem"], config["batch_size"], device=device, generator=stream,
++    )
++    mean = samples.mean(dim=0)
++    std = samples.std(dim=0, unbiased=False)
++    half_width = math.sqrt(3.0) * std
++    return samples, mean, std, mean - half_width, mean + half_width
++
++
+ def make_trainer(config: Mapping[str, Any], recipe: Recipe) -> GANTrainer:
+     """Match the public 100-Gaussian example's model and initialization."""
+     device = torch.device(config["device"])
+@@ -347,9 +365,13 @@
+                     _, lower, upper = _empirical_init_box(config, device)
+                     prior.z.uniform_(0.0, 1.0)
+                     prior.z.mul_(upper - lower).add_(lower)
++                elif model_policy == "affine_moment_box_v1":
++                    _, _, _, lower, upper = _moment_init_box(config, device)
++                    prior.z.uniform_(0.0, 1.0)
++                    prior.z.mul_(upper - lower).add_(lower)
+             generator = nn.Linear(2, 2).to(device)
+             if model_policy in {"affine_square_v1", "affine_normal_v1",
+-                                "affine_empirical_box_v1"}:
++                                "affine_empirical_box_v1", "affine_moment_box_v1"}:
+                 with torch.no_grad():
+                     generator.weight.copy_(torch.eye(2, device=device, dtype=generator.weight.dtype))
+                     generator.bias.zero_()
+@@ -542,6 +564,8 @@
+         elif model_policy in {"affine_empirical_box_v1",
+                               "affine_empirical_box_random_v1"}:
+             initialization = "empirical_box"
++        elif model_policy == "affine_moment_box_v1":
++            initialization = "moment_box"
+         else:
+             initialization = "normal"
+         receipt.update({
+@@ -552,7 +576,7 @@
+             "prior_initial_sha256": _tensor_sha256(trainer.prior.z),
+             "generator_initialization": (
+                 "identity" if model_policy in {"affine_square_v1", "affine_normal_v1",
+-                                               "affine_empirical_box_v1"}
++                                               "affine_empirical_box_v1", "affine_moment_box_v1"}
+                 else "torch_linear_default"
+             ),
+             "generator_initial_weight": generator.weight.detach().cpu().tolist(),
+@@ -568,6 +592,20 @@
+                 "init_data_samples": config["batch_size"],
+                 "init_data_seed_offset": EMPIRICAL_INIT_SEED_OFFSET,
+                 "init_data_sha256": _tensor_sha256(samples),
++                "init_data_lower": lower.detach().cpu().tolist(),
++                "init_data_upper": upper.detach().cpu().tolist(),
++            })
++        elif initialization == "moment_box":
++            samples, mean, std, lower, upper = _moment_init_box(
++                config, torch.device(config["device"]),
++            )
++            receipt.update({
++                "init_data_samples": config["batch_size"],
++                "init_data_seed_offset": EMPIRICAL_INIT_SEED_OFFSET,
++                "init_data_file": "initialization-samples.npy",
++                "init_data_sha256": _tensor_sha256(samples),
++                "init_data_mean": mean.detach().cpu().tolist(),
++                "init_data_std": std.detach().cpu().tolist(),
+                 "init_data_lower": lower.detach().cpu().tolist(),
+                 "init_data_upper": upper.detach().cpu().tolist(),
+             })
+@@ -683,6 +721,12 @@
+         _set_output_sigma(trainer, resolved, trainer.completed_steps)
+         if policy_enabled:
+             summary["model_policy"] = _model_policy_receipt(trainer, resolved)
++            if resolved.get("toy100_model") == "affine_moment_box_v1":
++                samples, _, _, _, _ = _moment_init_box(resolved, device)
++                np.save(
++                    out_dir / "initialization-samples.npy",
++                    samples.detach().cpu().numpy(), allow_pickle=False,
++                )
+         if resolved.get("output_noise_learnable", False):
+             summary["learnable_output_noise"] = _learnable_output_receipt(
+                 trainer, resolved["output_noise_std"],

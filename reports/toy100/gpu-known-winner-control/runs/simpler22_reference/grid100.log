@@ -1,0 +1,108 @@
+{"event": "START", "candidate": "simpler22_reference", "task": "grid100", "environment": {"profile": "cuda_fp32_v1", "torch": "2.13.0+cu126", "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb", "cuda": "12.6", "cudnn": 91002, "gpu": "NVIDIA RTX A6000", "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69", "device": "cuda:0", "visible_devices": "1", "deterministic": true, "tf32": false, "cudnn_benchmark": false, "cublas_workspace": ":4096:8", "threads": 1, "interop": 1, "adam_foreach": false, "adam_fused": false}}
+START problem=grid100 steps=7000 device=cuda:0 events=/ml2/hypergan/gpu-known-winner-20260924/runs/simpler22_reference/grid100/native/grid100/events.jsonl
+EVAL step=0/7000 model=live modes=0/100 hq=0.0268 pass=False elapsed=0.4s
+EVAL step=0/7000 model=ema modes=0/100 hq=0.0268 pass=False elapsed=0.5s
+TRAIN step=1/7000 d=0.8605 g=0.7035 train_seconds=0.1
+EVAL step=1/7000 model=live modes=0/100 hq=0.0269 pass=False elapsed=0.7s
+EVAL step=1/7000 model=ema modes=0/100 hq=0.0268 pass=False elapsed=0.8s
+EVAL step=10/7000 model=live modes=0/100 hq=0.0255 pass=False elapsed=1.0s
+EVAL step=10/7000 model=ema modes=0/100 hq=0.0267 pass=False elapsed=1.1s
+EVAL step=25/7000 model=live modes=0/100 hq=0.0266 pass=False elapsed=1.4s
+EVAL step=25/7000 model=ema modes=0/100 hq=0.0267 pass=False elapsed=1.5s
+EVAL step=50/7000 model=live modes=0/100 hq=0.0265 pass=False elapsed=1.8s
+EVAL step=50/7000 model=ema modes=0/100 hq=0.0272 pass=False elapsed=2.0s
+EVAL step=100/7000 model=live modes=0/100 hq=0.0234 pass=False elapsed=2.5s
+EVAL step=100/7000 model=ema modes=0/100 hq=0.0265 pass=False elapsed=2.7s
+TRAIN step=250/7000 d=0.6869 g=0.7080 train_seconds=2.6
+EVAL step=250/7000 model=live modes=0/100 hq=0.0389 pass=False elapsed=4.3s
+EVAL step=250/7000 model=ema modes=0/100 hq=0.0278 pass=False elapsed=4.4s
+TRAIN step=500/7000 d=0.6815 g=0.7095 train_seconds=5.3
+EVAL step=500/7000 model=live modes=16/100 hq=0.4370 pass=False elapsed=7.2s
+EVAL step=500/7000 model=ema modes=0/100 hq=0.0890 pass=False elapsed=7.2s
+TRAIN step=750/7000 d=0.6937 g=0.6950 train_seconds=7.8
+EVAL step=750/7000 model=live modes=100/100 hq=0.9806 pass=False elapsed=9.9s
+EVAL step=750/7000 model=ema modes=80/100 hq=0.5676 pass=False elapsed=10.0s
+{"event": "UPDATES", "candidate": "simpler22_reference", "task": "grid100", "adam_calls": 2000}
+TRAIN step=1000/7000 d=0.6919 g=0.6963 train_seconds=10.3
+EVAL step=1000/7000 model=live modes=100/100 hq=0.9773 pass=False elapsed=12.7s
+EVAL step=1000/7000 model=ema modes=100/100 hq=0.9527 pass=False elapsed=12.8s
+TRAIN step=1250/7000 d=0.6931 g=0.6933 train_seconds=13.0
+EVAL step=1250/7000 model=live modes=100/100 hq=0.9790 pass=True elapsed=15.6s
+EVAL step=1250/7000 model=ema modes=100/100 hq=0.9795 pass=True elapsed=15.7s
+TRAIN step=1500/7000 d=0.6887 g=0.7019 train_seconds=15.6
+EVAL step=1500/7000 model=live modes=100/100 hq=0.9084 pass=False elapsed=18.5s
+EVAL step=1500/7000 model=ema modes=100/100 hq=0.9837 pass=True elapsed=18.6s
+TRAIN step=1750/7000 d=0.6880 g=0.7007 train_seconds=18.1
+EVAL step=1750/7000 model=live modes=100/100 hq=0.9153 pass=False elapsed=21.3s
+EVAL step=1750/7000 model=ema modes=100/100 hq=0.9839 pass=True elapsed=21.3s
+{"event": "UPDATES", "candidate": "simpler22_reference", "task": "grid100", "adam_calls": 4000}
+TRAIN step=2000/7000 d=0.6888 g=0.7009 train_seconds=20.8
+EVAL step=2000/7000 model=live modes=100/100 hq=0.9223 pass=False elapsed=24.2s
+EVAL step=2000/7000 model=ema modes=100/100 hq=0.9847 pass=True elapsed=24.4s
+TRAIN step=2250/7000 d=0.6868 g=0.7001 train_seconds=23.4
+EVAL step=2250/7000 model=live modes=100/100 hq=0.9264 pass=False elapsed=27.0s
+EVAL step=2250/7000 model=ema modes=100/100 hq=0.9847 pass=True elapsed=27.1s
+TRAIN step=2500/7000 d=0.6885 g=0.6990 train_seconds=26.0
+EVAL step=2500/7000 model=live modes=100/100 hq=0.9311 pass=False elapsed=30.0s
+EVAL step=2500/7000 model=ema modes=100/100 hq=0.9839 pass=True elapsed=30.1s
+TRAIN step=2750/7000 d=0.6890 g=0.7002 train_seconds=28.8
+EVAL step=2750/7000 model=live modes=100/100 hq=0.9343 pass=False elapsed=33.0s
+EVAL step=2750/7000 model=ema modes=100/100 hq=0.9841 pass=True elapsed=33.1s
+{"event": "UPDATES", "candidate": "simpler22_reference", "task": "grid100", "adam_calls": 6000}
+TRAIN step=3000/7000 d=0.6879 g=0.6998 train_seconds=31.4
+EVAL step=3000/7000 model=live modes=100/100 hq=0.9328 pass=False elapsed=35.9s
+EVAL step=3000/7000 model=ema modes=100/100 hq=0.9837 pass=True elapsed=36.0s
+TRAIN step=3250/7000 d=0.6887 g=0.7012 train_seconds=34.0
+EVAL step=3250/7000 model=live modes=100/100 hq=0.9345 pass=False elapsed=38.8s
+EVAL step=3250/7000 model=ema modes=100/100 hq=0.9844 pass=True elapsed=38.9s
+TRAIN step=3500/7000 d=0.6884 g=0.6992 train_seconds=36.5
+EVAL step=3500/7000 model=live modes=100/100 hq=0.9374 pass=False elapsed=41.5s
+EVAL step=3500/7000 model=ema modes=100/100 hq=0.9840 pass=True elapsed=41.6s
+TRAIN step=3750/7000 d=0.6884 g=0.7011 train_seconds=38.9
+EVAL step=3750/7000 model=live modes=100/100 hq=0.9335 pass=False elapsed=44.2s
+EVAL step=3750/7000 model=ema modes=100/100 hq=0.9840 pass=True elapsed=44.3s
+{"event": "UPDATES", "candidate": "simpler22_reference", "task": "grid100", "adam_calls": 8000}
+TRAIN step=4000/7000 d=0.6877 g=0.7008 train_seconds=41.6
+EVAL step=4000/7000 model=live modes=100/100 hq=0.9351 pass=False elapsed=47.2s
+EVAL step=4000/7000 model=ema modes=100/100 hq=0.9841 pass=True elapsed=47.4s
+TRAIN step=4250/7000 d=0.6900 g=0.7003 train_seconds=44.2
+EVAL step=4250/7000 model=live modes=100/100 hq=0.9386 pass=False elapsed=50.1s
+EVAL step=4250/7000 model=ema modes=100/100 hq=0.9842 pass=True elapsed=50.2s
+TRAIN step=4500/7000 d=0.6888 g=0.7028 train_seconds=46.8
+EVAL step=4500/7000 model=live modes=100/100 hq=0.9373 pass=False elapsed=53.0s
+EVAL step=4500/7000 model=ema modes=100/100 hq=0.9839 pass=True elapsed=53.1s
+TRAIN step=4750/7000 d=0.6884 g=0.7006 train_seconds=49.4
+EVAL step=4750/7000 model=live modes=100/100 hq=0.9444 pass=False elapsed=55.9s
+EVAL step=4750/7000 model=ema modes=100/100 hq=0.9840 pass=True elapsed=56.0s
+{"event": "UPDATES", "candidate": "simpler22_reference", "task": "grid100", "adam_calls": 10000}
+TRAIN step=5000/7000 d=0.6881 g=0.6991 train_seconds=51.9
+EVAL step=5000/7000 model=live modes=100/100 hq=0.9508 pass=False elapsed=58.6s
+EVAL step=5000/7000 model=ema modes=100/100 hq=0.9847 pass=True elapsed=58.8s
+TRAIN step=5250/7000 d=0.6886 g=0.6989 train_seconds=54.6
+EVAL step=5250/7000 model=live modes=100/100 hq=0.9587 pass=False elapsed=61.6s
+EVAL step=5250/7000 model=ema modes=100/100 hq=0.9848 pass=True elapsed=61.7s
+TRAIN step=5500/7000 d=0.6895 g=0.6984 train_seconds=57.0
+EVAL step=5500/7000 model=live modes=100/100 hq=0.9666 pass=False elapsed=64.3s
+EVAL step=5500/7000 model=ema modes=100/100 hq=0.9849 pass=True elapsed=64.4s
+TRAIN step=5750/7000 d=0.6913 g=0.6996 train_seconds=59.6
+EVAL step=5750/7000 model=live modes=100/100 hq=0.9736 pass=True elapsed=67.1s
+EVAL step=5750/7000 model=ema modes=100/100 hq=0.9857 pass=True elapsed=67.2s
+{"event": "UPDATES", "candidate": "simpler22_reference", "task": "grid100", "adam_calls": 12000}
+TRAIN step=6000/7000 d=0.6910 g=0.6987 train_seconds=62.2
+EVAL step=6000/7000 model=live modes=100/100 hq=0.9779 pass=True elapsed=70.0s
+EVAL step=6000/7000 model=ema modes=100/100 hq=0.9862 pass=True elapsed=70.1s
+TRAIN step=6250/7000 d=0.6913 g=0.6962 train_seconds=64.8
+EVAL step=6250/7000 model=live modes=100/100 hq=0.9830 pass=True elapsed=72.9s
+EVAL step=6250/7000 model=ema modes=100/100 hq=0.9861 pass=True elapsed=73.0s
+TRAIN step=6500/7000 d=0.6905 g=0.6979 train_seconds=67.4
+EVAL step=6500/7000 model=live modes=100/100 hq=0.9836 pass=True elapsed=75.8s
+EVAL step=6500/7000 model=ema modes=100/100 hq=0.9855 pass=True elapsed=75.9s
+TRAIN step=6750/7000 d=0.6907 g=0.6961 train_seconds=70.0
+EVAL step=6750/7000 model=live modes=100/100 hq=0.9859 pass=True elapsed=78.6s
+EVAL step=6750/7000 model=ema modes=100/100 hq=0.9866 pass=True elapsed=78.7s
+{"event": "UPDATES", "candidate": "simpler22_reference", "task": "grid100", "adam_calls": 14000}
+TRAIN step=7000/7000 d=0.6915 g=0.6980 train_seconds=72.7
+EVAL step=7000/7000 model=live modes=100/100 hq=0.9865 pass=True elapsed=81.6s
+EVAL step=7000/7000 model=ema modes=100/100 hq=0.9868 pass=True elapsed=81.7s
+COMPLETE problem=grid100 steps=7000 live_modes=100/100 live_hq=0.9865 stable_pass=6750 total_seconds=84.0
+{"event": "DONE", "candidate": "simpler22_reference", "task": "grid100", "status": "PASS", "seconds": 90.35293163405731, "environment": {"profile": "cuda_fp32_v1", "torch": "2.13.0+cu126", "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb", "cuda": "12.6", "cudnn": 91002, "gpu": "NVIDIA RTX A6000", "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69", "device": "cuda:0", "visible_devices": "1", "deterministic": true, "tf32": false, "cudnn_benchmark": false, "cublas_workspace": ":4096:8", "threads": 1, "interop": 1, "adam_foreach": false, "adam_fused": false}, "device_proof": {"adam_calls": 14000, "optimizers": {"130679676177824": {"calls": 7000, "parameters": 35073, "device": "cuda:0"}, "130679655782192": {"calls": 7000, "parameters": 40006, "device": "cuda:0"}}, "cpu_parameter_calls": 0, "gradient_devices": ["cuda:0"]}, "artifact": "/ml2/hypergan/gpu-known-winner-20260924/runs/simpler22_reference/grid100/result.json"}

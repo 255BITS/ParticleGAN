@@ -1,0 +1,25 @@
+{
+  "candidate": "constraints_simple_regularization",
+  "cpu_saved_evidence": {
+    "status": "PASS",
+    "passed": 22,
+    "total": 22,
+    "action": "independent artifact regrade; no retraining"
+  },
+  "gpu": {
+    "profile": "cuda_fp32_v1",
+    "passed": 16,
+    "total": 22,
+    "status": "FAIL",
+    "failed": [
+      "mode_hold",
+      "trajectory",
+      "img_bars4",
+      "img_blobs4",
+      "img_intensity2",
+      "vector_unequal_mass"
+    ],
+    "native_passes": 3
+  },
+  "interpretation": "Original recipe preserved, including decay and original auxiliary host terms; not the strict continuous-learning policy."
+}
