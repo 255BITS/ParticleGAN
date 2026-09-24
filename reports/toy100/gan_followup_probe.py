@@ -33,9 +33,11 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "zeromean": ("reports.toy100.pr84_zero_mean_outputs", "zero_mean_g_outputs"),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
+    "reports/toy100/pr84_zero_mean_outputs.py",
     "reports/toy100/pr84_reach_candidate.py",
     "reports/toy100/pr84_smoothed_candidate.py",
     "reports/toy100/alternating_curvature_scratch.py",

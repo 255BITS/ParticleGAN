@@ -97,8 +97,13 @@ class SmoothedBothBoundRecorder(BothBoundRecorder):
 
 
 @contextmanager
-def pr84_smoothed_candidate(*, task="mode_hold", start_step=0):
-    """Yield ``(recorder, generated_host_source)`` for one declared toy host."""
+def pr84_smoothed_candidate(*, task="mode_hold", start_step=0, prepare_tree=None):
+    """Yield ``(recorder, generated_host_source)`` for one declared toy host.
+
+    ``prepare_tree`` may mutate the transformed function after the phase
+    adapter is installed. The default leaves the PR84 / stall-reach host
+    unchanged.
+    """
     from benchmarks.locked_shared import mode_hold, trajectory
 
     module = {"mode_hold": mode_hold, "trajectory": trajectory}[task]
@@ -109,6 +114,8 @@ def pr84_smoothed_candidate(*, task="mode_hold", start_step=0):
     if len(calls) != 1:
         raise RuntimeError("expected one phase iterator")
     calls[0].args.append(ast.Call(func=ast.Name(id="locals", ctx=ast.Load()), args=[], keywords=[]))
+    if prepare_tree is not None:
+        prepare_tree(tree)
     ast.fix_missing_locations(tree)
     source = ast.unparse(tree) + "\n"
     recorder = SmoothedBothBoundRecorder(start_step=start_step)
