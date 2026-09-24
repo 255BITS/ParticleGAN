@@ -1,0 +1,140 @@
+{
+  "scope": "frozen round-6 reallocation evidence",
+  "origin": "/ml2/hypergan/ParticleGAN-continuous-learning/artifacts/continuous-learning/round6/reallocation-saved44",
+  "files": {
+    "audit.json": {
+      "stored_sha256": "df3612fca5f4f13acb9778f6e3e716336b4f2a006ee0e5372e364ddb5b016338",
+      "stored_bytes": 1232
+    },
+    "declaration.json": {
+      "stored_sha256": "36396beb314f8d549b009a0810cdb4bb956bdd2185bec87fd7d837d43d6a9091",
+      "stored_bytes": 3147
+    },
+    "original-1324-1335.json.gz": {
+      "stored_sha256": "1ee742d13bb5499e235a9fe4f7e3a2e8121970664e9a3fb0e8200ec9d609ac18",
+      "stored_bytes": 6816,
+      "uncompressed_sha256": "f5763f8fe85278b325540950266239f345814fe1006b033744e80c59f477b638",
+      "uncompressed_bytes": 19829
+    },
+    "original-1380-1395.json.gz": {
+      "stored_sha256": "f27297bbcf173f22ec47e7b5a7aab5eba6332f4fca0542a3d94a8e7e0223c0c1",
+      "stored_bytes": 8568,
+      "uncompressed_sha256": "2fd7a259d8d61ff638582183adf24a75ca87e96cbe8d772e992674f924189ae8",
+      "uncompressed_bytes": 25434
+    },
+    "original-1530-1545.json.gz": {
+      "stored_sha256": "4be268be8254e2ab708b63c79f76c004cd0d8db988faa1ed3db98b2f23ec54bb",
+      "stored_bytes": 8559,
+      "uncompressed_sha256": "b12f4da631d6e40c9c1a41d6ba1493e5b2d6f046cb1e8621ea1e4c788c61263f",
+      "uncompressed_bytes": 25339
+    },
+    "reallocation-1324-1335.json.gz": {
+      "stored_sha256": "01e5a758836266ac105001a6853e8b17e0ff9515cecc244c6a84dc45d4267a57",
+      "stored_bytes": 19712,
+      "uncompressed_sha256": "60194bc1d26b96a101bf688a46c60aa644db9b8545974d1c857a64d157eb70fc",
+      "uncompressed_bytes": 81508
+    },
+    "reallocation-1380-1395.json.gz": {
+      "stored_sha256": "1cad34a6e9af0b620e8b14c06c985a9122f77c323378bfba68839a7a312ec6b1",
+      "stored_bytes": 24932,
+      "uncompressed_sha256": "8713444839b31b3a1aa16be3bf3e0c4392cb7ce0e3977bf05447c32d0fb7c2e3",
+      "uncompressed_bytes": 104962
+    },
+    "reallocation-1530-1545.json.gz": {
+      "stored_sha256": "041defebfc9734cf4a08b854b30456abc8d099e95fbb76c0c0b01d3fb01afd6a",
+      "stored_bytes": 25878,
+      "uncompressed_sha256": "37044d998abdc25896819695a1a84ceeb48f11ef4c4ddc5bbfdca0a8c5b75a7d",
+      "uncompressed_bytes": 109185
+    },
+    "source/benchmarks/locked_shared/mlp.py": {
+      "stored_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "stored_bytes": 2289
+    },
+    "source/benchmarks/locked_shared/mode_hold.py": {
+      "stored_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "stored_bytes": 10774
+    },
+    "source/configs/toy100/constraints_simple_regularization.json": {
+      "stored_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "stored_bytes": 1507
+    },
+    "source/host-1324-1335.py": {
+      "stored_sha256": "8b1a0f5d26785c0ea537f6ef069843f45bf800ecfbd9fe1c84b68eb0804c4db1",
+      "stored_bytes": 6602
+    },
+    "source/host-1380-1395.py": {
+      "stored_sha256": "911cd032897585771b4c5ca9c61536f8acba0246c69c105478c3331c256f7257",
+      "stored_bytes": 6602
+    },
+    "source/host-1530-1545.py": {
+      "stored_sha256": "d77d320f2802c7c418612647f0308bb0e9e12bebd2598eb84d066113554f4d1a",
+      "stored_bytes": 6602
+    },
+    "source/particlegan/gan_loss.py": {
+      "stored_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "stored_bytes": 7960
+    },
+    "source/particlegan/grad_regularizers.py": {
+      "stored_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+      "stored_bytes": 17129
+    },
+    "source/reports/toy100/alternating_curvature_scratch.py": {
+      "stored_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "stored_bytes": 16689
+    },
+    "source/reports/toy100/chamfer_discrete_reallocation.py": {
+      "stored_sha256": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24",
+      "stored_bytes": 4218
+    },
+    "source/reports/toy100/chamfer_pullback.py": {
+      "stored_sha256": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+      "stored_bytes": 7290
+    },
+    "source/reports/toy100/coverage_fixed_eval.py": {
+      "stored_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "stored_bytes": 3996
+    },
+    "source/reports/toy100/extra_adam_scratch.py": {
+      "stored_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "stored_bytes": 13261
+    },
+    "source/reports/toy100/joint_output_pullback.py": {
+      "stored_sha256": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3",
+      "stored_bytes": 6674
+    },
+    "source/reports/toy100/pr84_critic_refinement_capture.py": {
+      "stored_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+      "stored_bytes": 7367
+    },
+    "source/reports/toy100/pr84_critic_refinement_filter.py": {
+      "stored_sha256": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+      "stored_bytes": 7717
+    },
+    "source/reports/toy100/pr84_opponent_prediction.py": {
+      "stored_sha256": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846",
+      "stored_bytes": 8204
+    },
+    "source/reports/toy100/pr84_prediction_state_filter.py": {
+      "stored_sha256": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4",
+      "stored_bytes": 15392
+    },
+    "source/reports/toy100/pr84_smoothed_candidate.py": {
+      "stored_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+      "stored_bytes": 6530
+    },
+    "source/reports/toy100/reallocation_smoothed_candidate.py": {
+      "stored_sha256": "ca16cf667a03e585d50c110edcd0b219991768877dff1a640ec2371c7d16439c",
+      "stored_bytes": 8789
+    },
+    "source/reports/toy100/reallocation_state_filter.py": {
+      "stored_sha256": "be3beae7267bf6514802e0febaf13780c922e16fd13c0e4741d3f3016db29361",
+      "stored_bytes": 6079
+    },
+    "summary.json.gz": {
+      "stored_sha256": "446aa2c483e7e9c54ffb3b1af4bfd95a190352648c16117a440fa9398a99b2af",
+      "stored_bytes": 89443,
+      "uncompressed_sha256": "9d38fe4d5106dcdc6e0a3679433b9fdf026cf06a307b7579756d4bbbe0e6f85f",
+      "uncompressed_bytes": 369518
+    }
+  }
+}

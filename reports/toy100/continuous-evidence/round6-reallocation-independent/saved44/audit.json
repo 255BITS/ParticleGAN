@@ -1,0 +1,55 @@
+{
+  "scope": "saved-state local filter only; no warm/cold promotion",
+  "frozen_summary_sha256": "9d38fe4d5106dcdc6e0a3679433b9fdf026cf06a307b7579756d4bbbe0e6f85f",
+  "original_full_captured_state_hashes_verified": 11,
+  "original_supports_and_records_verified": 44,
+  "all_constant_role_rates": true,
+  "one_moment_update_per_role_per_step": true,
+  "same_original_candidate_rng_noise_endpoints": true,
+  "passing": 43,
+  "checks": 44,
+  "all_pass": false,
+  "branches": [
+    {
+      "start": 1324,
+      "end": 1335,
+      "passing": 12,
+      "checks": 12,
+      "failing": [],
+      "min_hq": 0.9404296875,
+      "selections": {
+        "joint_fit": 12,
+        "native_gan": 0,
+        "rest": 0
+      }
+    },
+    {
+      "start": 1380,
+      "end": 1395,
+      "passing": 15,
+      "checks": 16,
+      "failing": [
+        1391
+      ],
+      "min_hq": 0.855224609375,
+      "selections": {
+        "joint_fit": 16,
+        "native_gan": 0,
+        "rest": 0
+      }
+    },
+    {
+      "start": 1530,
+      "end": 1545,
+      "passing": 16,
+      "checks": 16,
+      "failing": [],
+      "min_hq": 0.932861328125,
+      "selections": {
+        "joint_fit": 16,
+        "native_gan": 0,
+        "rest": 0
+      }
+    }
+  ]
+}
