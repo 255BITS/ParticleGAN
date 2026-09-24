@@ -18,6 +18,7 @@ relaxation or acquisition-budget extension.
 | PR84 head plus rest gate, `468ad26` | 200/200; min HQ .99414 | PASS .00094266, suffix18 | FAIL7 modes/HQ .99438;0/24 |
 | PR84 rest gate, single-convolution repair | 200/200; min HQ .91602 | PASS .00094266, suffix18 | FAIL6 modes/HQ .96094;0/24 |
 | Same frozen stencil for D and G | 200/200; min HQ .92261 | PASS .00094266, suffix18 | FAIL7 modes/HQ .78125;0/24 |
+| Sampled-real coverage projection | FAIL197/200; min HQ .84619 | Not run | Stopped at dense warm |
 
 PR81's oracle target-error guard remains diagnostic and its reported cold
 trajectory fails. The preceding [nine-candidate round](continuous-round3.md)
@@ -89,12 +90,15 @@ trainer implementation and exact disabled-policy parity.
 A [recent nonlocal transport rule](nonlocal-signal-filter.md) was first tested
 on tiny fixed clouds. Its exact-matching field rests, but the distinct
 eight-mode proxy loses quality, so it did not advance to GAN training. One
-sampled-data coverage mechanism is now being prepared as an explicitly
-changed objective/constraint, after a promising output-space proxy; all
-original host gates remain required.
+sampled-data [coverage projection](coverage-projection-report.md) recovers
+the eighth mode in a clean final-state check, but fails three of200 dense
+warm updates. It stops before cold acquisition. Every accepted correction
+decreases its sampled coverage objective; that alone does not guarantee
+quality of every generated particle. A read-only replay is isolating the
+failure before selecting another mechanism.
 
 [Machine-readable results](continuous-round4-results.json) bind the selected
-candidate, four completed local configurations and evidence hashes. The
-[integrated local suite](continuous-evidence/round4/integrated-tests.log) passes
-219 tests in28.87 seconds, including all previous controller checks and
-the new stencil, repair and extraction checks in one invocation.
+candidate, five completed local configurations and evidence hashes. The
+[integrated local suite](continuous-evidence/round4/integrated-coverage-tests.log) passes
+230 tests in29.43 seconds, including all previous controller checks and
+the new stencil, repair, extraction and coverage checks in one invocation.

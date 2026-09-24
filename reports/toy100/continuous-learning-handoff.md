@@ -45,6 +45,10 @@ FAIL. Its reported eight-mode ring pass does not reproduce locally. The
 shared D/G stencil also fails ring acquisition. Read the [fourth-round
 report](continuous-round4.md) before running another candidate; it records
 the double-smoothing implementation issue and the local gradient barrier.
+The first sampled-data coverage projection recovers the missing mode in a
+one-state check, then fails dense warm197/200; no cold run followed. Its
+[source and failed gate](coverage-projection-report.md) are available for
+other agents. The original PR84 adapter remains the selected partial candidate.
 
 ## Reproduction starting point
 

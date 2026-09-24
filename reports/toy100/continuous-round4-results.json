@@ -456,25 +456,63 @@
       ],
       "first_failed_stage": "mode_hold",
       "shared_gate_eligible": false
+    },
+    {
+      "name": "PR84 plus one-sided sampled-real centroid pullback",
+      "kind": "explicit_coverage_objective_addition",
+      "warm": {
+        "checks": 200,
+        "passing_checks": 197,
+        "failing_steps": [
+          1133,
+          1148,
+          1186
+        ],
+        "min_modes": 8,
+        "min_hq": 0.84619140625,
+        "passing_suffix": 14,
+        "stable_from_step": 1187,
+        "pass_all": false,
+        "pass_suffix": true
+      },
+      "identity_cold_parity": true,
+      "original_control_exact_parity": true,
+      "cold": [],
+      "first_failed_stage": "dense_warm",
+      "not_run": [
+        "cold_trajectory",
+        "cold_ring",
+        "hold2400",
+        "other_hosts",
+        "production_common22"
+      ],
+      "shared_gate_eligible": false
     }
   ],
-  "completed_host_configuration_count": 4,
-  "new_mechanisms_or_repairs": 2,
+  "completed_host_configuration_count": 5,
+  "new_mechanisms_or_repairs": 3,
   "external_reproductions": 2,
   "in_progress": [
-    "Sampled-real support-coverage projection: clean-state filter before warm/cold"
+    "Read-only replay of coverage warm failures to isolate next mechanism"
   ],
   "validation": {
-    "passed": 219,
-    "seconds": 28.87,
-    "log": "reports/toy100/continuous-evidence/round4/integrated-tests.log",
-    "log_sha256": "ce3d20c2ea03492ea7b71d0a45cd6e36840f28f1360d0f70eee2e2628b7c04f3",
+    "passed": 230,
+    "seconds": 29.43,
+    "log": "reports/toy100/continuous-evidence/round4/integrated-coverage-tests.log",
+    "log_sha256": "fee693ac97e8921ba1b16337997ab318f2ba925725c820db8755658dc5b86916",
     "manifest_sha256": {
       "pr84-independent-audit": "d374fb3d27c34c85a4ea7dd4a925e1df3d98923ba83c2b555ae20f156f296cbb",
       "pr84-smoothed-candidate": "766e27d6f526899e8aa08f79d15b45cea9b720dd20c006a595e4bce227a263a8",
       "consistent-stencil-round4": "51c61b4f0425d7dff35aa4ecb7fdfd09488e873d928936e33700bfb3e0649a1b",
       "pr84-rest-repair": "3f832509ee0413197ba497b9846c046bce58aa373b0e383d68664b59c0004f1a",
-      "sinkhorn-fixed-cloud": "7a6a7c02621e38d3179afbf59ce345348e618559659f5a369787ed52ec8535c1"
+      "sinkhorn-fixed-cloud": "7a6a7c02621e38d3179afbf59ce345348e618559659f5a369787ed52ec8535c1",
+      "coverage-projection-round4": "684bf5ea2cbf75aeadb609dd2923246b10f297d6a37e491da05da947ac7d421b"
+    },
+    "previous_integrated_run": {
+      "passed": 219,
+      "seconds": 28.87,
+      "log": "reports/toy100/continuous-evidence/round4/integrated-tests.log",
+      "log_sha256": "ce3d20c2ea03492ea7b71d0a45cd6e36840f28f1360d0f70eee2e2628b7c04f3"
     }
   },
   "production_modified": false,

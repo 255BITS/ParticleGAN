@@ -1,0 +1,152 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "coverage-projection-round4",
+  "base_commit": "eb70e6eee2f88e28f36758f9b385a7d09ba1c152",
+  "shared_gate_eligible": false,
+  "files": {
+    "warm/declaration.json.gz": {
+      "sha256": "ec4b3926fd482eaaa2ba1e41220abd90f57ecd2c4457b9be70481b1cbd8b2a2c",
+      "original_sha256": "9ffbc623b4827f0d3491e93131ec40bbf5c373d0f144e28b3e1766aee0e8a4c9",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/declaration.json",
+      "compression": "gzip"
+    },
+    "warm/forks/cold.json.gz": {
+      "sha256": "db0edca07e0ecac3f32d88d6c412b5d27fd5e0b8b07bd42bd6b2bf77409ed495",
+      "original_sha256": "01e90b5a298201676ecefd5e48611340565e620d898bc3a30cff67990346fc49",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/forks/cold.json",
+      "compression": "gzip"
+    },
+    "warm/forks/constant.json.gz": {
+      "sha256": "214d2ab77f78b2ad863f4ddececc09058bacedeb579b469075b6ef5a223b090d",
+      "original_sha256": "c627703fe150533d3496c34f72cc5a11616bb9349243d5b17a96a42d7dced71f",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/forks/constant.json",
+      "compression": "gzip"
+    },
+    "warm/forks/coverage.json.gz": {
+      "sha256": "432e46181c6abe309528170c24788ac84ef473d1a3473d1906214f604e8b6e89",
+      "original_sha256": "0ea8eae016a3e667d064d00e4b3af0558828358149d06e46007863de2bf381f6",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/forks/coverage.json",
+      "compression": "gzip"
+    },
+    "warm/forks/identity.json.gz": {
+      "sha256": "216b46f967cded776bfcce0908bfd05c3df3152c829689bc38450120a6885dad",
+      "original_sha256": "121e1b052db22f5fc821605eab777d8e2fa0dd081bdc27a79961e7d515a02146",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/forks/identity.json",
+      "compression": "gzip"
+    },
+    "warm/forks/original.json.gz": {
+      "sha256": "f0fed95f4fee15e401fb5018cb14fbed3e42e0f47faf83b08b23af785555bf8e",
+      "original_sha256": "fd2fe652542cc552253314611f9e0dfbb9e78a6b166596e0583094ff2506bcf5",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/forks/original.json",
+      "compression": "gzip"
+    },
+    "warm/forks/summary.json.gz": {
+      "sha256": "fe0ca1465edd676e0d3d7300b20e813b0c78dd2080e7e2bc6c106fda227527d0",
+      "original_sha256": "8c93465eb8a851db327fcd9e1eefeb154163895e25266b77dc28e446c1fa7c0a",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/forks/summary.json",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/locked_shared/mode_hold.py.gz": {
+      "sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "original_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/source/benchmarks/locked_shared/mode_hold.py",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/locked_shared/trajectory.py.gz": {
+      "sha256": "bee13d21d6e613476544afafd0a6fad911c1281658a6516ea982da5a827024ad",
+      "original_sha256": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/source/benchmarks/locked_shared/trajectory.py",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/toy100/continuous_probe.py.gz": {
+      "sha256": "5b6b82473026e8f57176e22a953c34b54e71d8a685effbdd080d07f48c30e613",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/source/benchmarks/toy100/continuous_probe.py",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/toy100/warm_equilibrium_probe.py.gz": {
+      "sha256": "21c13cc9990de385e478dcab28b03340ccbe6a59c3f733813c5287fce70ac8f7",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/source/benchmarks/toy100/warm_equilibrium_probe.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/alternating_curvature_scratch.py.gz": {
+      "sha256": "4655b8735ed1df2ff0051b7e1816df9084b9c639c1f92bf6c0d8f62c78ca024c",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/source/reports/toy100/alternating_curvature_scratch.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/coverage_projection_probe.py.gz": {
+      "sha256": "096f8d55c736844a23851091194c1fab9abb8b09eecdf8422e44cfedb3200aa4",
+      "original_sha256": "71268cd5afc73aa23ad19592c717aed9487a82d1c42a26add716e040f7a29e26",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/source/reports/toy100/coverage_projection_probe.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/coverage_pullback.py.gz": {
+      "sha256": "59d4a403eb4d2f536ca83840cccb1d6333f776d038b173e66c85ac899e5b7991",
+      "original_sha256": "785e2f268442025a3582616759fb9fbcdac66fea7e427f15c8e619e97c424d35",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/source/reports/toy100/coverage_pullback.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/coverage_smoothed_candidate.py.gz": {
+      "sha256": "41f3fe8c64e31159c5bf29601d8b5240688dd6e96b5ff73c783ef76fc95033e3",
+      "original_sha256": "9051462504903db1ac359c8e288d154436500eeea9c55593d01ae2a0338a3d10",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/source/reports/toy100/coverage_smoothed_candidate.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/extra_adam_scratch.py.gz": {
+      "sha256": "fc9d646056ee4e469c924dd88f1d94abff5d5f02d9c1caec3d47b2c52cdb7f63",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/source/reports/toy100/extra_adam_scratch.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/pr84_smoothed_candidate.py.gz": {
+      "sha256": "ec9ede71c84a00dcfb965dd8788caaccea204107f1357032397df14764d684eb",
+      "original_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/source/reports/toy100/pr84_smoothed_candidate.py",
+      "compression": "gzip"
+    },
+    "warm/summary.json.gz": {
+      "sha256": "2432f8c98480c2072529d7c94d6e9d50f80b287263337b3474f1ab5fe30331b0",
+      "original_sha256": "b7e796b36e1b66ab8cf71dd12a59d11c6070e0ad8298cb8cd68ee6ec57c083e4",
+      "original_path": "artifacts/continuous-learning/round4/coverage-projection-warm/summary.json",
+      "compression": "gzip"
+    },
+    "warm/monitor.log.gz": {
+      "sha256": "f5611aef5729f82acf44bb65d8a7c5b56496ad263af880719a63a5bd16460c95",
+      "original_sha256": "644d7b6acd7cede1cc103fa95768b142a59c40fa73fbfe840f5e95deb73601df",
+      "original_path": "/tmp/coverage-projection-warm.log",
+      "compression": "gzip"
+    },
+    "support/reports/toy100/pr84_pullback_final_probe.py.gz": {
+      "sha256": "1a9a57bdf19a1d1bc672abaea132da9acdeec5bff062356878f37df6e34b1a44",
+      "original_sha256": "5aac712b8423ae523fcaf8d80b2f3f4ffdb196b38c9db875f171ba0b3c60aa97",
+      "original_path": "reports/toy100/pr84_pullback_final_probe.py",
+      "compression": "gzip"
+    },
+    "support/reports/toy100/pr84_coverage_proxy.py.gz": {
+      "sha256": "95ad0c92ba7a245b0a1c222ad84aef227fc3218ce26a466d593709f3facf318e",
+      "original_sha256": "0110df912b14cc4762eead8b5a25d6bf0376373bf230a4516c189b5886805df1",
+      "original_path": "reports/toy100/pr84_coverage_proxy.py",
+      "compression": "gzip"
+    },
+    "support/reports/toy100/continuous-evidence/pr84-field/pullback-final.json.gz": {
+      "sha256": "fcde744b6def41fa07b4da7d5709c24a395ee381866b9095b5313b44c8f0171d",
+      "original_sha256": "3aafd5bc998f4ba916401137934dac8ece95f387772a29b0ea128841c35e4e62",
+      "original_path": "reports/toy100/continuous-evidence/pr84-field/pullback-final.json",
+      "compression": "gzip"
+    },
+    "support/reports/toy100/continuous-evidence/pr84-field/coverage-proxy.json.gz": {
+      "sha256": "b63f47402d44016ddbd3b2eae691aed5670c592430c93c931a27c4489bbbdf53",
+      "original_sha256": "36d25bfd7926363de89c5fe9ba3e78fb0a13818cdc4cc2483e69958054a3812d",
+      "original_path": "reports/toy100/continuous-evidence/pr84-field/coverage-proxy.json",
+      "compression": "gzip"
+    },
+    "support/tests/test_coverage_pullback_independent.py.gz": {
+      "sha256": "497592a22881995020b737406d7bed83013f706a31f7f04dd20a6be4330751f2",
+      "original_sha256": "f02a5b097dcc182eb6609c33bdf3c96a060eca8636ca68086f0b1e64b4db8323",
+      "original_path": "tests/test_coverage_pullback_independent.py",
+      "compression": "gzip"
+    }
+  }
+}
