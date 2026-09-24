@@ -141,3 +141,14 @@ A stronger game bound slows acquisition exactly as a globally slower G does.
 Every stay stabilizer on this line trades against acquisition. The pattern holds across a global G bound of .125, a one-step game bound (thinner ring margin) and a two-step game bound (the AVX2 ring fails). The dropout mode and acquisition both run on G's fast, low-own-curvature common motion. Separating them needs a signal this line does not have: D's slope and G's own curvature both look the same at dropout onset and in healthy acquisition. **Final: keep stall reach** for acquisition. Its stay is 97/120, ending on the full ring, with the shared 1720–2150 episode unresolved.
 
 For the #104 lineage: at dropout onset G's own-curvature ratio *falls* (5.0 → .9) while a G-led translation grows. An idle or leave signal built on G's own step curvature will read healthy during exactly this onset.
+
+## AVX2 re-gate of wave-2 kills
+
+The branch heads were run unchanged with the AVX2 pin, where the warm identity fork is 200/200 ([receipt](continuous-evidence/pr84-reach/avx2-regate-wave2.json)).
+
+| PR | Reported (AVX512 warm, prefix at 6 modes) | AVX2 warm | AVX2 cold |
+| --- | --- | --- | --- |
+| #105 idle-when-covered | min 4 modes, final 5 / .844 | 196/200, identical to the PR84 pin (idle on a solved cloud) | Trajectory PASS. Ring FAIL: ends 8 / 1.0, but only 6/24 checks pass, suffix 3 |
+| #103 critic-shell consensus | min HQ .191 | **200/200** | Trajectory PASS. Ring FAIL at 0 modes (the shrink action runs on all 1200 updates) |
+
+Both kills stand, but on acquisition, not warm. The warm regressions these lanes reported came from an unsolved 6-mode prefix, and warm results from that prefix should not be used to rank.
