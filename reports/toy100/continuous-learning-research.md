@@ -4,6 +4,10 @@ This study targets PR #60's remaining learning-rate schedules. A replacement
 must learn with time-independent optimizer hyperparameters, preserve live
 sample quality during uninterrupted continuation, and remain responsive when
 the real distribution changes. Passing a final checkpoint is insufficient.
+Stationary weights and arbitrarily small steps are acceptable when there is
+no useful acquisition signal. The requirement is to acquire an initially
+unlearned target and respond to a new learnable discrepancy, not to maintain
+a positive amount of parameter movement at an already matched distribution.
 The existing shared 22-case recipe remains the control until a replacement
 passes its unchanged production gates. No training-seed sweep is used.
 
@@ -126,8 +130,10 @@ Tolerances .25, .5 and .9 each pass 200/200 warm checks; their mean accepted
 factors are .112, .267 and .315. All three then fail the cheaper cold trajectory
 gate: final identity MSE .2872, .3540 and .1332 versus the required .02.
 During the last 50 trajectory updates, their mean step factors are only
-4.27e-6, .00407 and .0519. The strictest rule effectively stops learning even
-though the nominal LR remains fixed; this cannot qualify as continuous learning.
+4.27e-6, .00407 and .0519. Small factors alone are not a failure: sitting still
+can be appropriate at a matched target. These rows are rejected for their
+measured cold acquisition failures, not for having small factors. A candidate
+that holds quality still requires a shift test to establish responsiveness.
 No cold mode-hold or larger-host tests are run for these rejected candidates.
 The next bounded mechanism tests an implicit linearized joint response. This
 is related to game-aware coupled updates discussed by
