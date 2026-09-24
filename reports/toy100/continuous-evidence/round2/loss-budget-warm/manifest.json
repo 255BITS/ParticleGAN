@@ -1,0 +1,98 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "loss-budget",
+  "phase": "warm",
+  "files": {
+    "confidence_dynamics_scratch.py": {
+      "sha256": "993aa0856fddd3a6aa7e9e814ecea000002c9b0755cff18cc21a667af9e80d36",
+      "original_sha256": "993aa0856fddd3a6aa7e9e814ecea000002c9b0755cff18cc21a667af9e80d36",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/confidence_dynamics_scratch.py",
+      "compression": "identity"
+    },
+    "declaration.json.gz": {
+      "sha256": "6f8591ee037a7a1f9ff16ee8d97372eb038286bc729e1baa6bd65619dd22b4f1",
+      "original_sha256": "0a255904cead2b2a3e2c9c92c40001ffe65a2c1ed37721a86bd9544f58fb3952",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/declaration.json",
+      "compression": "gzip"
+    },
+    "forks/cold.json.gz": {
+      "sha256": "b01655b6f21207f1516619e85b771ab8dc142c65e402b7f2d6de955e5bafa9ae",
+      "original_sha256": "1be630527a060f9ffc15399191c2c5cb15bab934b43e97feabdb417b5a286412",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/forks/cold.json",
+      "compression": "gzip"
+    },
+    "forks/identity.json.gz": {
+      "sha256": "4e0ac7f049a0417fc829b15135a29a5e7cea14705fc4866bc1523523353a4139",
+      "original_sha256": "04dfe39578bf3a5636b069734d80f81d4159d4efb8da80eddadad0e58e0e26fe",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/forks/identity.json",
+      "compression": "gzip"
+    },
+    "forks/joint.json.gz": {
+      "sha256": "8adac9e1d1ed873bf8dfba461fa00686d5e834dca0c65a747b803cbf0a4b2578",
+      "original_sha256": "e0f51715b9a63259e1c62782a7b0d028fd12670ff034a8944adc37b341758e43",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/forks/joint.json",
+      "compression": "gzip"
+    },
+    "forks/network.json.gz": {
+      "sha256": "45b9e816c7bb37a07c2fd858ac3a49be945f2d1fcd9eca1e6222bd0a0a5e252f",
+      "original_sha256": "d31b400d44edae17b019347b0febfde98043db21d6230d874ab2a140b8e0b58b",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/forks/network.json",
+      "compression": "gzip"
+    },
+    "forks/observed.json.gz": {
+      "sha256": "012c73b7f9e70f1c32ab5aa6a5897277476689d054d60b112e9620b331480a38",
+      "original_sha256": "7b7db2e2854fc0ac439017ea6e7def736b6d2ca90e3340426d7d4c33defe696e",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/forks/observed.json",
+      "compression": "gzip"
+    },
+    "forks/summary.json.gz": {
+      "sha256": "04da6867a5b6e1df5b4e900f53d905d341bc459c822c49391e96a652acc98208",
+      "original_sha256": "4abcb0e9ca486644a040e0adc9fc37034e4d6aa7b6bf31ff5ced7022ae7f02c9",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/forks/summary.json",
+      "compression": "gzip"
+    },
+    "loss_budget_probe.py": {
+      "sha256": "7fbe0bd595396675c6e4f9c5e979e6189e7229feaf0ab277a55b7a0cdb672c98",
+      "original_sha256": "7fbe0bd595396675c6e4f9c5e979e6189e7229feaf0ab277a55b7a0cdb672c98",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/loss_budget_probe.py",
+      "compression": "identity"
+    },
+    "loss_budget_scratch.py": {
+      "sha256": "deef2db0269fef16cac47e4334a614555c1585527be95db6b81de882c846eff0",
+      "original_sha256": "deef2db0269fef16cac47e4334a614555c1585527be95db6b81de882c846eff0",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/loss_budget_scratch.py",
+      "compression": "identity"
+    },
+    "models.py": {
+      "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+      "original_sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/models.py",
+      "compression": "identity"
+    },
+    "results.json.gz": {
+      "sha256": "2527e9786836ec21b60f3a6d8881d91b689b380e3b1f6538534fb759634347ed",
+      "original_sha256": "9f2cd2586786a868d44e0d31851c3c84c72bb7e11452f368cd0001ea8112f8c3",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/results.json",
+      "compression": "gzip"
+    },
+    "source.tar.gz": {
+      "sha256": "84baf5892ac3bcb93730c0608ad33d075e282a08f0c8cf3c2ebe391332f50c41",
+      "original_sha256": "84baf5892ac3bcb93730c0608ad33d075e282a08f0c8cf3c2ebe391332f50c41",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/loss-budget-warm/source.tar.gz",
+      "compression": "identity"
+    }
+  }
+}

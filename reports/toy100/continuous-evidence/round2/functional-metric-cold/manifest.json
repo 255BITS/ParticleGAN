@@ -1,0 +1,49 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "functional-metric",
+  "phase": "functional-metric-cold",
+  "files": {
+    "declaration.json.gz": {
+      "sha256": "41957759529e2d7696f5e93c5475237d1ff55ba6571a0182d9907db988b454f7",
+      "original_sha256": "7e4aa93feda7fd972b410f97a13c8bfdc3e188cb8bdd524a700d8cb2a978f8f8",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/functional-metric-cold/declaration.json",
+      "compression": "gzip"
+    },
+    "functional_metric_probe.py": {
+      "sha256": "c38ec8556c953959441fd3ca1f83b8e0eb567844b62afbb680f7bb180230970a",
+      "original_sha256": "c38ec8556c953959441fd3ca1f83b8e0eb567844b62afbb680f7bb180230970a",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/functional-metric-cold/functional_metric_probe.py",
+      "compression": "identity"
+    },
+    "functional_metric_scratch.py": {
+      "sha256": "e63007296a2ae0a56185852028e75bbc4aaecb4c9fbfd3601be05a75fb45f38e",
+      "original_sha256": "e63007296a2ae0a56185852028e75bbc4aaecb4c9fbfd3601be05a75fb45f38e",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/functional-metric-cold/functional_metric_scratch.py",
+      "compression": "identity"
+    },
+    "models.py": {
+      "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+      "original_sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/functional-metric-cold/models.py",
+      "compression": "identity"
+    },
+    "source.tar.gz": {
+      "sha256": "0ade2c662960be5fddba30d50f0150200549c660e6c0e9c0143e49fc69f1bf82",
+      "original_sha256": "0ade2c662960be5fddba30d50f0150200549c660e6c0e9c0143e49fc69f1bf82",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/functional-metric-cold/source.tar.gz",
+      "compression": "identity"
+    },
+    "functional-metric-cold.log.gz": {
+      "sha256": "ce7e9174669459e96a6722839042ba9952dc20639ae47500b482798c914cc419",
+      "original_sha256": "4a82449dfe02432520a7dfb58fa6edbce505214e3af22346db89f85ac1db4fae",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/round2/functional-metric-cold.log",
+      "compression": "gzip"
+    }
+  }
+}
