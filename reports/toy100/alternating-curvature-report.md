@@ -88,9 +88,9 @@ result bit-identical to the recorded 200/200.
 
 | D bound | Cold trajectory | Cold ring terminal HQ (1000/1050/1100/1150/1200) | Ring verdict |
 | --- | --- | --- | --- |
-| none (v6) | PASS .00099 | .9995 at 1000, then 0 modes by 1100 (critic divergence) | FAIL |
+| none (v6) | PASS .00099 | 1.0 at 1000 but only 6 modes, then 0 modes by 1100 (critic divergence) | FAIL |
 | 2 (v8) | PASS .00094, 20 | .43 / .52 / .83 / .92 / .92, 7 modes | FAIL |
-| **3 (v10)** | **PASS .00094, 18** | **.916 / .843 / 1.0 / .995 / 1.0, 8 modes** | **FAIL, 3/5 terminal checks** |
+| **3 (v10)** | **PASS .00094, 18** | **.916 (7 modes) / .843 (7 modes) / 1.0 / .995 / 1.0 (8 modes)** | **FAIL, 3/5 terminal checks** |
 | 4 | PASS .00095, 16 | .39 / .79 / .83 / .51 / .67 | FAIL |
 
 The D-bound response is not monotone, so the ring outcome behaves chaotically
@@ -147,6 +147,30 @@ generator particles): `v8_ring_cold.gif`, `v6_ring_cold.gif`,
   change who wins a close finish.
 * Mode-coverage triggers need the target's mode count, and first-N-update
   boosts are an elapsed-time schedule, so neither was used.
+
+## Critic-side lever (v14) and acquisition margin
+
+v14 keeps v10 (G .25, D bound 3) but takes G's gradient against an
+exponential moving average of the critic's parameters (decay .9); D itself
+trains normally. Warm fork passed 200/200 (min .9341). Cold trajectory failed
+at MSE .251 (bad basin), so fail-fast stopped it. A diagnostic-only ring run
+reached 1 mode (HQ .081) by 1200. The critic-side family is closed here.
+
+Acquisition margin from per-update particle traces (a mode counts as covered
+when a clean particle is within .21 of it):
+
+| Run | First 8-mode checkpoint | First update with all 8 covered | Updates with all 8 covered before 1000 |
+| --- | ---: | ---: | ---: |
+| v10 | 1100 | 1084 | 0 |
+| v8 | never (max 7) | never | 0 |
+| v6 | never (max 6) | never | 0 |
+| v14 | never | never | 0 |
+| plain alternating constant Adam | never | never | 0 |
+
+No variant covers all eight modes before update 1084. The actual bottleneck is
+reaching the last one or two modes, not holding them. v10 scrapes the gate
+by reaching its eighth mode just after the terminal window opens, rather than
+holding a pass with margin.
 
 ## Recommendations
 
