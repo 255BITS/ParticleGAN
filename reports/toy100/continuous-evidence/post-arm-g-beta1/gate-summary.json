@@ -1,0 +1,15 @@
+{
+  "call": "KILL",
+  "solved": false,
+  "production": false,
+  "warm_rankable": true,
+  "reason": "G Adam beta1 on the #107 recipe is already 0. Setting it to 0 and zeroing exp_avg once does not change the update. Gates match stall reach, including the 1720-2150 dropout.",
+  "g_beta1_before": 0.0,
+  "gates": {
+    "warm_avx2": {"identity": "200/200", "method": "200/200", "min_hq": 0.920654296875, "final": [8, 0.9814453125]},
+    "cold_trajectory_avx2": {"status": "PASS", "mse": 0.0009426682372577488, "armed": false},
+    "cold_ring_avx2": {"modes": 8, "passing": "10/24", "suffix": 8, "final_hq": 0.998779296875, "arm_update": 650},
+    "cold_ring_avx512": {"modes": 8, "passing": "8/24", "suffix": 8, "final_hq": 0.998046875, "arm_update": 850, "rank_warm": false},
+    "stay_avx2": {"passing": "97/120", "final": [2400, 8, 0.9714], "suffix": 25, "min_modes": 0, "zero_mode_steps": [1770, 1820]}
+  }
+}
