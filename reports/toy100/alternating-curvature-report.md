@@ -197,6 +197,37 @@ recovers warm with the best margin of any candidate but loses the ring.
 Width magnitude alone does not separate the two outcomes. By the stop rule,
 this knob does not recover warm without killing the ring.
 
+## Peer stencil critic: warm repair attempt (v16 reproduction, v17)
+
+v16 ports peer #84's ring-passing recipe verbatim (`--stencil-critic`): after
+each D step, G's 2D critic scores average a centre plus ±width stencil on
+each axis, with width = min(.15, .5 / sharpness) from the critic's RMS input
+gradient on clean particles. G .25 and D bound 3 are unchanged. It reproduces
+#84 exactly on this VM: warm 196/200 (fails 1129-1132, min HQ .8662),
+trajectory PASS .00094 (18), ring PASS 8 modes, final HQ .9988.
+
+Mechanism of the warm dip: at the matched warm state the critic is almost flat
+at the particles (sharpness .07-.15). G's own-curvature ratio, measured
+through the smoothed critic, falls to .16-.4, so the .25 G bound lets through
+full constant-rate Adam steps (factor 1.0 at 1123-1129). Modes 3 and 4 then
+bleed from ~660/715 to ~440/460 in-radius samples.
+
+v17 keeps the width formula, cap and smoothed step direction, but measures
+G's curvature ratio on the plain critic (two unsmoothed replays, 4 gradient
+evaluations per update). The rule is identical on every host.
+
+| Run | Warm | Cold trajectory | Cold ring |
+| --- | --- | --- | --- |
+| v16 = #84 recipe | 196/200 (.8662) | PASS .00094 | PASS, 8 modes, HQ ~.99 |
+| v17 plain-critic curvature | **200/200 (.9763)** | PASS .00094 | FAIL: 7 modes, HQ ~.92 from 800 to 1200 |
+
+The G step factor on the ring falls from mean .156 (v16) to .089 (v17). The
+looseness that lets the smoothed recipe reach the eighth mode is the same
+looseness that drifts at rest. Stopped by the rule: warm cannot be recovered
+here without losing the ring. A warm-only switch or an HQ/mode-count
+condition would reach the same outcome only by testing a different method in
+the warm fork, or by reading the target, so neither was used.
+
 ## Recommendations
 
 1. Put future game-update candidates in the alternating adapter

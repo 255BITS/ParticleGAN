@@ -160,7 +160,9 @@ class AlternatingCurvatureRecorder:
             prior_rho=stats([g['rho'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),
             per_particle=getattr(self,'per_particle',False),critic_average=getattr(self,'critic_average',None),
             smooth_critic=getattr(self,'smooth_critic',None),smooth_samples=getattr(self,'smooth_samples',None),
-            smoothing_sigma=stats([r.get('smoothing_sigma') for r in closed]),critic_length=stats([r.get('critic_length') for r in closed]),
+            smoothing_sigma=stats([r.get('smoothing_sigma') for r in closed]),stencil_critic=getattr(self,'stencil_critic',False),
+            plain_curvature=getattr(self,'plain_curvature',False),
+            critic_width=stats([r.get('critic_width') for r in closed]),critic_sharpness=stats([r.get('critic_sharpness') for r in closed]),critic_length=stats([r.get('critic_length') for r in closed]),
             critic_average_distance=stats([r.get('critic_average_distance') for r in closed]),
             particle_factor=stats([q['factor'] for r in closed for q in r.get('particles',[])]),
             particle_factor_max=stats([max(q['factor'] for q in r['particles']) for r in closed if r.get('particles')]),critic_advantage=stats([r['critic_advantage'] for r in self.records]),
@@ -228,7 +230,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
     """
 
     def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False,
-                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False,per_particle=False,critic_average=None,smooth_critic=None,smooth_samples=8):
+                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False,per_particle=False,critic_average=None,smooth_critic=None,smooth_samples=8,stencil_critic=False,plain_curvature=False):
         super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
         if ratio_reference is not None and (not math.isfinite(ratio_reference) or ratio_reference<=0
                                             or not ratio_span>=1 or not 0<=ratio_decay<1):
@@ -241,6 +243,9 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         if smooth_critic is not None and (not math.isfinite(smooth_critic) or smooth_critic<=0 or smooth_samples<2 or smooth_samples%2):
             raise ValueError('invalid critic smoothing')
         self.smooth_critic=smooth_critic;self.smooth_samples=smooth_samples;self._smoothing=None
+        self.plain_curvature=bool(plain_curvature)
+        if self.plain_curvature and not stencil_critic:raise ValueError('plain curvature needs the stencil critic')
+        self.stencil_critic=bool(stencil_critic);self._stencil_on=False;self._stencil_width=0.;self._local=None
         self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
         if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
 
@@ -263,17 +268,17 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
                  if isinstance((m:=local.get(name)),torch.nn.Module) for b in m.buffers()]
         self.d0=[p.detach().clone() for p in self._params(opt_d)]
         self.g_base=[p.detach().clone() for p in self._params(opt_g)]
-        self._critic_wrapper=local.get('critic')
+        self._critic_wrapper=local.get('critic');self._local=local
         if self.smooth_critic is not None and not isinstance(self._critic_wrapper,torch.nn.Module):
             raise RuntimeError('critic smoothing needs the host critic')
         rng_before=self._rng(streams);self.advantage=None;self.row=dict(outer_step=self.outer_steps+1)
         rng_after=None
-        for phase in range(3):
+        for phase in range(4 if self.plain_curvature else 3):
             if phase:
                 self._set_rng(streams,rng_before)
                 with torch.no_grad():
                     for b,saved in buffers:b.copy_(saved)
-            self.phase=phase
+            self.phase=phase;self._stencil_on=False
             yield phase
             state=self._rng(streams)
             if rng_after is None:rng_after=state
@@ -316,6 +321,35 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         inner.forward=smoothed.__get__(inner)
         self._smoothing=inner
 
+    @torch.no_grad()
+    def _arm_stencil(self):
+        """Peer #84 recipe, verbatim: after each D step, G's 2D critic scores are the
+        mean of a centre-plus-(+/-width per axis) stencil, width = min(.15, .5 / sharpness),
+        sharpness = RMS central-difference input gradient of the critic on clean particles.
+
+        With ``plain_curvature`` G still steps along the stencil-smoothed critic
+        (pass 1), but G's own-curvature ratio is measured against the plain
+        critic from two extra unsmoothed replays at (D*, G1) and (D*, G0)."""
+        from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
+        self._stencil_on=False;self._stencil_width=0.
+        local=self._local or {}
+        if local.get('slow') is not None:return
+        critic,generator,prior=local.get('critic'),local.get('generator'),local.get('prior')
+        if critic is None or generator is None or prior is None or not hasattr(prior,'z'):return
+        module=critic
+        while not isinstance(module,SimpleMLPDiscriminator) and hasattr(module,'model'):module=module.model
+        if not isinstance(module,SimpleMLPDiscriminator):return
+        clean=getattr(generator,'model',generator);points=clean(prior.z).detach()
+        if points.ndim!=2 or points.shape[-1]!=2:return
+        eps=1e-3;acc=0.
+        for dim in range(points.shape[-1]):
+            shift=torch.zeros_like(points);shift[:,dim]=eps
+            acc=acc+((module(points+shift)-module(points-shift))/(2*eps)).square()
+        sharp=float(acc.mean().sqrt())
+        if not math.isfinite(sharp) or sharp<=1e-6:return
+        self._stencil_width=min(.15,.5/sharp);self._stencil_on=True
+        self.row['critic_sharpness']=sharp;self.row['critic_width']=self._stencil_width
+
     def _disable_smoothing(self):
         if self._smoothing is not None:
             del self._smoothing.forward
@@ -329,6 +363,23 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         self.rows[optimizer]['calls']+=1
         opt_d,opt_g=self.optimizers
         grads=lambda opt:[p.grad.detach().clone() for p in self._params(opt)]
+        if self.stencil_critic and optimizer is opt_d:
+            result=self._step_inner(optimizer,ordinary_step,grads,opt_d,opt_g)
+            if not (self.plain_curvature and self.phase>=2):self._arm_stencil()
+            return result
+        if self.plain_curvature and self.phase>=2:
+            if optimizer is opt_d:
+                for p,v in zip(self._params(opt_d),self.d_star):p.copy_(v)
+                return None
+            if self.phase==2:
+                self.plain_g1=grads(opt_g)
+                for p,v in zip(self._params(opt_g),self.g_base):p.copy_(v)
+                return None
+            rho=_rho(self.g_base,self.g1,grads(opt_g),self.plain_g1,self.metric_g)
+            factor=min(1.,self.curvature_bound/rho) if rho>0 else 1.
+            for p,b,n in zip(self._params(opt_g),self.g_base,self.g1):p.copy_(torch.lerp(b,n,factor) if factor<1 else n)
+            self.row['g']=dict(rho=rho,factor=factor,curvature_critic='plain')
+            return None
         if self.smooth_critic is not None:
             if optimizer is opt_d and self.phase>0:
                 result=self._step_inner(optimizer,ordinary_step,grads,opt_d,opt_g)
@@ -432,4 +483,16 @@ def alternating_curvature(task='mode_hold',bound_d=False,**options):
         stack.enter_context(patch.object(torch.optim.Adam,'step',
             lambda optimizer,closure=None:recorder.step(optimizer,ordinary_step,closure)))
         stack.enter_context(patch.object(GANLoss,'d_loss',observed_d_loss))
+        from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
+        original_forward=SimpleMLPDiscriminator.forward
+        def stencil_forward(module,x):
+            if (getattr(recorder,'_stencil_on',False) and recorder.enabled and not recorder.passthrough
+                    and x.ndim>=2 and x.shape[-1]==2 and recorder._stencil_width>0):
+                width=recorder._stencil_width;values=[original_forward(module,x)]
+                for dim in range(x.shape[-1]):
+                    shift=torch.zeros_like(x);shift[...,dim]=width
+                    values.append(original_forward(module,x+shift));values.append(original_forward(module,x-shift))
+                return torch.stack(values,0).mean(0)
+            return original_forward(module,x)
+        stack.enter_context(patch.object(SimpleMLPDiscriminator,'forward',stencil_forward))
         yield recorder,source
