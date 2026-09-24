@@ -1,0 +1,61 @@
+{
+  "method": "stall_reach_delayed_g125_scored_on_counterfactual_g25",
+  "arm": "apply .125 for update_index >= 1200; stall reads min(1, .25/rho)",
+  "pre_budget_g_bound": 0.25,
+  "post_budget_g_bound": 0.125,
+  "stall_counterfactual_cap": 0.25,
+  "seed": 0,
+  "torch": "2.14.0+cu130",
+  "cpu": "AVX2",
+  "shared_gate_eligible": false,
+  "solved": false,
+  "verdict": "KILL",
+  "gates": {
+    "warm_avx2": {
+      "cpu": "AVX2",
+      "identity": "200/200",
+      "identity_min_hq": 0.989990234375,
+      "method": "200/200",
+      "method_min_hq": 0.920654296875,
+      "ranked": true,
+      "g_bound_applies": 200,
+      "fires": 1,
+      "first_armed_update_index": 1200
+    },
+    "cold_avx2": {
+      "cpu": "AVX2",
+      "trajectory": "PASS",
+      "trajectory_seconds": 4.1,
+      "trajectory_armed": false,
+      "trajectory_fires": 0,
+      "ring": "PASS",
+      "ring_seconds": 29.7,
+      "ring_passing": "10/24",
+      "ring_suffix": 8,
+      "ring_terminal": [[1000, 8, 0.999], [1050, 8, 1.0], [1100, 8, 0.9993], [1150, 8, 0.9995], [1200, 8, 0.9988]],
+      "fires": 1
+    },
+    "stay_avx2_1210_2400": {
+      "cpu": "AVX2",
+      "seconds": 60.1,
+      "checks": 120,
+      "passing": 108,
+      "min_modes": 4,
+      "min_hq": 0.4023,
+      "final": [2400, 8, 0.8247],
+      "suffix": 0,
+      "failing_steps": [1560, 1580, 1610, 1820, 2280, 2290, 2310, 2330, 2350, 2360, 2390, 2400],
+      "severe_dips_modes_le_4": 1,
+      "fires": 1201,
+      "pre_budget_applies": 1199,
+      "pre_budget_bounds": [0.25, 0.25],
+      "post_budget_bounds": [0.25, 0.125],
+      "post_budget_applied_factor_max": 0.1508557297043984,
+      "post_budget_stall_factor_max": 0.3017114594087968,
+      "width_0.5_frac_800_1199": 0.105,
+      "width_0.5_frac_2100_2279": 0.533,
+      "width_0.5_frac_2280_2400": 0.058,
+      "first_stall_predicate_flip_update": 2296
+    }
+  }
+}
