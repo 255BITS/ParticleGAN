@@ -1,0 +1,364 @@
+{
+  "actual_support": [
+    [
+      2.036858558654785,
+      -1.970924735069275
+    ],
+    [
+      2.020531415939331,
+      1.997987151145935
+    ],
+    [
+      2.3810691833496094,
+      -1.6652244329452515
+    ],
+    [
+      2.3097140789031982,
+      1.7924050092697144
+    ],
+    [
+      2.0874176025390625,
+      -2.477041006088257
+    ],
+    [
+      2.6107497215270996,
+      -2.27986741065979
+    ],
+    [
+      2.9741358757019043,
+      -0.19768095016479492
+    ],
+    [
+      2.2916958332061768,
+      2.259795904159546
+    ],
+    [
+      2.8812308311462402,
+      -0.2694888114929199
+    ],
+    [
+      2.902395248413086,
+      0.12770235538482666
+    ],
+    [
+      2.883636236190796,
+      0.4223689138889313
+    ],
+    [
+      2.2643487453460693,
+      2.4031550884246826
+    ]
+  ],
+  "captured_update": 100,
+  "centered_support": [
+    [
+      2.121320343559642,
+      -2.121320343559643
+    ],
+    [
+      2.121320343559643,
+      2.1213203435596424
+    ],
+    [
+      2.121320343559642,
+      -2.121320343559643
+    ],
+    [
+      2.121320343559643,
+      2.1213203435596424
+    ],
+    [
+      2.121320343559642,
+      -2.121320343559643
+    ],
+    [
+      2.121320343559642,
+      -2.121320343559643
+    ],
+    [
+      3.0,
+      0.0
+    ],
+    [
+      2.121320343559643,
+      2.1213203435596424
+    ],
+    [
+      3.0,
+      0.0
+    ],
+    [
+      3.0,
+      0.0
+    ],
+    [
+      3.0,
+      0.0
+    ],
+    [
+      2.121320343559643,
+      2.1213203435596424
+    ]
+  ],
+  "laws": {
+    "captured_step100": {
+      "actual_clean_cloud": {
+        "gradient": [
+          [
+            6.726616874071282,
+            -11.97779401948169
+          ],
+          [
+            8.011538980144072,
+            9.826943056069592
+          ],
+          [
+            -20.686761024439136,
+            -36.32416460969339
+          ],
+          [
+            -14.992392123851477,
+            26.18706188551454
+          ],
+          [
+            2.7000692459888573,
+            28.330163133164856
+          ],
+          [
+            -38.978944853266675,
+            12.626944168900355
+          ],
+          [
+            5.54581832375524,
+            18.409980760945615
+          ],
+          [
+            -12.85296019709474,
+            -14.762862231635618
+          ],
+          [
+            5.976309794370836,
+            18.76935831973891
+          ],
+          [
+            7.775032957307275,
+            -10.275364992298902
+          ],
+          [
+            9.258438329990327,
+            -33.49740589450169
+          ],
+          [
+            -12.10401311305665,
+            -18.707972668023707
+          ]
+        ],
+        "max_autodiff_error": 3.552713678800501e-15,
+        "max_score_gradient_norm": 41.80175853088427,
+        "mean_score_gradient_norm": 24.687053075391443,
+        "missing_chord_projection": [
+          -1.6308803254622122,
+          -3.6410885893184606,
+          33.01273109506353,
+          23.872518952515527,
+          -13.336022779994739,
+          31.179727013982102,
+          9.096336493622578,
+          6.225084067942797,
+          9.046051364336329,
+          -12.763558793282282,
+          -30.23294738649399,
+          4.023418783209665
+        ],
+        "occupied_center_projection": [
+          13.737355063426486,
+          12.678854341804676,
+          41.80175853087748,
+          30.17505586627435,
+          28.458540318942354,
+          40.973135844337456,
+          18.973869931499493,
+          19.285253109099997,
+          19.58550284231228,
+          12.885277091873359,
+          34.75333157884917,
+          22.16029828340204
+        ],
+        "toward_assigned_occupied_center": 12,
+        "toward_nearest_missing_chord": 7
+      },
+      "centered_cloud": {
+        "adjacent_mode_center_distance": 2.296100594190539,
+        "hq_radius": 0.21000000000000002,
+        "leading_log10_missing_specific_tangent_at_mode1": -144.34909087353404,
+        "leading_log10_q_neighbor_relative_mass_at_hq_radius": -119.93414938819468,
+        "local_isolated_component_curvature": 48.57417699578751,
+        "log_ratio_at_missing_mode2": 336.52481100741977,
+        "log_ratio_at_occupied_mode1": -1.457007225399565,
+        "log_ratio_empty_vs_occupied_at_midpoint": 0.6931471805599543,
+        "max_clean_center_gradient_norm": 9.352209462828054e-90,
+        "midpoint_distance": 1.1480502970952695,
+        "midpoint_is_hq_radii": 5.46690617664414,
+        "one_real_sigma_displacement": 0.07,
+        "one_sigma_fixed_d_score_ascent_toward_empty": 3.4001923897051265,
+        "one_sigma_retracked_d_partial_score_ascent_toward_empty": -5.5749128919860595
+      },
+      "effective_fake_sigma": 0.08831393664790402,
+      "effective_real_sigma": 0.11205467415507488
+    },
+    "late_noise_law_on_same_frozen_step100_support": {
+      "actual_clean_cloud": {
+        "gradient": [
+          [
+            17.23709896017485,
+            -30.69298132456488
+          ],
+          [
+            20.56916890210444,
+            25.170039268103533
+          ],
+          [
+            -53.009967304074976,
+            -93.08079808456965
+          ],
+          [
+            -38.447701090521505,
+            67.12557842651591
+          ],
+          [
+            6.918926738893762,
+            72.59605357726815
+          ],
+          [
+            -99.88354652397094,
+            32.356544306152486
+          ],
+          [
+            5.308809848615973,
+            40.36656096571723
+          ],
+          [
+            -34.77040517109451,
+            -28.260858018237794
+          ],
+          [
+            24.208188753803505,
+            54.97420671953069
+          ],
+          [
+            19.919337058553886,
+            -26.061705180576865
+          ],
+          [
+            23.747706899837567,
+            -86.19773752835331
+          ],
+          [
+            -29.18957267236679,
+            -57.5167553419548
+          ]
+        ],
+        "max_autodiff_error": 1.4210854715202004e-14,
+        "max_score_gradient_norm": 107.11718632245491,
+        "mean_score_gradient_norm": 63.53340171900521,
+        "missing_chord_projection": [
+          -4.179307486375045,
+          -9.371277129539997,
+          84.59530310961237,
+          61.20889086139583,
+          -34.17356176011794,
+          79.89805083358411,
+          24.78957354805256,
+          21.308703526697112,
+          21.754859933672847,
+          -32.51350677331443,
+          -77.74316931574249,
+          4.956939401988084
+        ],
+        "occupied_center_projection": [
+          35.201941468517745,
+          32.50571620624862,
+          107.1171863224549,
+          77.35676439872874,
+          72.9250200014492,
+          104.99366088313272,
+          40.71414952139528,
+          44.80688754483185,
+          60.068290056949806,
+          32.80232409100894,
+          89.40919157451029,
+          64.49967672592484
+        ],
+        "toward_assigned_occupied_center": 12,
+        "toward_nearest_missing_chord": 7
+      },
+      "centered_cloud": {
+        "adjacent_mode_center_distance": 2.296100594190539,
+        "hq_radius": 0.21000000000000002,
+        "leading_log10_missing_specific_tangent_at_mode1": -1357.855239035078,
+        "leading_log10_q_neighbor_relative_mass_at_hq_radius": -1112.2575228159503,
+        "local_isolated_component_curvature": 984.9790094396853,
+        "log_ratio_at_missing_mode2": 3131.66696136528,
+        "log_ratio_at_occupied_mode1": -2.743228077137496,
+        "log_ratio_empty_vs_occupied_at_midpoint": 0.6931471805602314,
+        "max_clean_center_gradient_norm": 8.289066392389102e-232,
+        "midpoint_distance": 1.1480502970952695,
+        "midpoint_is_hq_radii": 5.46690617664414,
+        "one_real_sigma_displacement": 0.07,
+        "one_sigma_fixed_d_score_ascent_toward_empty": 68.94853066077799,
+        "one_sigma_retracked_d_partial_score_ascent_toward_empty": -14.285714285714285
+      },
+      "effective_fake_sigma": 0.029,
+      "effective_real_sigma": 0.07
+    }
+  },
+  "limitations": [
+    "not the finite b_cap-penalized critic optimum",
+    "not the noisy-pair expected G update or shared-network Adam step",
+    "mode centers are used only after training to construct and grade this copy",
+    "late noise law is applied to the same step-100 cloud, not a late trained state",
+    "no claim that the wrong-subset cloud is a stable host equilibrium"
+  ],
+  "nearest_counts": [
+    4,
+    4,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4
+  ],
+  "nearest_mode": [
+    7,
+    1,
+    7,
+    1,
+    7,
+    7,
+    0,
+    1,
+    0,
+    0,
+    0,
+    1
+  ],
+  "noise": {
+    "configured_late_output_sigma": 0.029,
+    "input_sigma": 0.08750000000000002,
+    "output_sigma": 0.0119625
+  },
+  "runtime": {
+    "cpu_capability": "AVX2",
+    "threads": 1,
+    "torch": "2.13.0+cu126"
+  },
+  "scope": "read-only unrestricted unregularized population Rp ratio; clean-point partial field with q frozen",
+  "source": {
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "reports/toy100/ideal_ratio_three_mode.py": "c95186b12737b762d0210f42ded1db1e1224215bf9058bba7139b41cc2181372"
+  },
+  "state_archive_sha256": "0371f70c5139cb04678bcfe06455e257d2f8bb0848062443f6ca711c3f772665",
+  "state_raw_sha256": "002b3019c42c77414cb4f853db7818bba79bffab095f0d19052e4517ff45392d"
+}
