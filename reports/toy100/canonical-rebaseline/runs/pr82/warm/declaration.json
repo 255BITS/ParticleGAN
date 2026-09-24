@@ -1,0 +1,61 @@
+{
+  "phase": "warm",
+  "method": "pr82",
+  "seed": 0,
+  "host": "neural",
+  "torch": "2.14.0+cpu",
+  "cpu": "AVX2",
+  "shared_gate_eligible": false,
+  "purity": "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
+  "source": {
+    "reports/toy100/gan_followup_probe.py": "25ca80dfe3250a5babbae9e2b13ef60a95f8b663ce085a842815c66f47b91f24",
+    "benchmarks/toy100/canonical_env.py": "42137f8de6030a5218efe86dc7c264d0cd6f5a77eef9a2886dd8f163590a3e83",
+    "reports/toy100/baseline_adam.py": "51392cdb3beb78894cdeb1d3dd7fe3ab202202e4d4144f556174753f56fd116c",
+    "reports/toy100/pr82_alternating_curvature_scratch.py": "46169fb12bafd44441a9fc0a1343d08e3487eb5d723530414405cdb30b1fe95e",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/pr93_fence_restore.py": "941b0e7a51a4433e1f6bd9a9084d85c4cad5854e5c0f681095da74c2d79a01c0",
+    "reports/toy100/exit_aware_step_clip.py": "c723a24028442cfd2ad43b37afb6315222ad8e674a84c84fafe9e811d1ad0627",
+    "reports/toy100/cross_competitive_scratch.py": "4eed96ab3d7557ba216c594b87f0b4f04f12e0653bf2c478b0aba97de6f9ce95",
+    "reports/toy100/implicit_extra_scratch.py": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+    "reports/toy100/fixed_metric_extra_scratch.py": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792"
+  },
+  "harness": {
+    "torch": "2.14.0+cpu",
+    "torch_git": "08187d9e0fba026dc8217405802ab5381dc88d90",
+    "torch_build": "TORCH_VERSION=2.14.0 COMMIT_SHA=08187d9e0fba026dc8217405802ab5381dc88d90 BLAS_INFO=mkl USE_MKL=ON",
+    "cpu": {
+      "vendor": "GenuineIntel",
+      "model": "Intel(R) Xeon(R) Processor",
+      "machine": "x86_64"
+    },
+    "cpu_capability": "AVX2",
+    "mkl_version": "Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications",
+    "cbwr_env": "COMPATIBLE",
+    "cbwr_effective": "COMPATIBLE",
+    "cbwr_raw": 3,
+    "cbwr_getter": "mkl_serv_cbwr_get(-1)",
+    "cbwr_reason": "AVX2,STRICT is effective on this CPU (mkl_serv_cbwr_get(-1)=65546) but oneMKL does not keep it on the non-Intel dispatch path (effective raw 65538). Fell back to COMPATIBLE so both vendors use one mode.",
+    "isa": {
+      "ATEN_CPU_CAPABILITY": "avx2",
+      "MKL_ENABLE_INSTRUCTIONS": "AVX2",
+      "ONEDNN_MAX_CPU_ISA": "AVX2",
+      "DNNL_MAX_CPU_ISA": "AVX2"
+    },
+    "threads": {
+      "torch": 1,
+      "interop": 1,
+      "omp": 1,
+      "omp_env": "1",
+      "mkl": 1,
+      "mkl_env": "1"
+    },
+    "deterministic": true,
+    "seed": 0
+  }
+}
