@@ -1,16 +1,27 @@
 """Fast, production-derived sustained mode-hold probe.
 
-The 1,200-update case calls the frozen transfer host unchanged. Longer runs
-reuse that same host training body and optimizer policy, extending only its
-budget and observation window. Noise keeps its original 1,200-update horizon;
-changing the training horizon must not postpone noise burn-in. A ring shift
-mutates the target tensor in place after a recorded update, so model, Adam
-moments, EMA, and random streams continue without reconstruction.
+Run the 1,200-update stationary control first. A survivor then runs an
+uninterrupted 2,400-update hold. For adaptation, run 3,600 updates with the
+same target through update 2,400, shift the ring in place, and run a matched
+3,600-update control that freezes Adam updates after the shift. Pass requires
+the frozen stationary window, every diagnostic hold check, recovery by 400
+updates after the shift, every later check, and a failing frozen control.
+
+The host training body, optimizer policy, and sampling are unchanged. Noise
+keeps its original 1,200-update horizon; extending training must not postpone
+burn-in. The shift mutates the target tensor after a recorded update, so model,
+Adam moments, EMA, and random streams continue without reconstruction.
 
 Example::
 
     python -u -m benchmarks.toy100.continuous_probe --mode constant \
-        --steps 2400 --shift-step 1200 --output /tmp/constant-shift.json
+        --steps 2400 --diagnostic-every 10 --output /tmp/hold.json
+    python -u -m benchmarks.toy100.continuous_probe --mode constant \
+        --steps 3600 --shift-step 2400 --output /tmp/frozen.json \
+        --freeze-after-shift
+    python -u -m benchmarks.toy100.continuous_probe --mode constant \
+        --steps 3600 --shift-step 2400 --output /tmp/shift.json \
+        --frozen-control /tmp/frozen.json
 """
 
 from __future__ import annotations
@@ -22,6 +33,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import platform
 import time
 from unittest.mock import patch
 
@@ -30,7 +42,7 @@ import torch
 from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.locked_shared import baseline, mode_hold
 from benchmarks.smart_descent import evaluate
-from benchmarks.transfer_suite import vector_tasks
+from benchmarks.transfer_suite import suite, vector_tasks
 from benchmarks.transfer_suite.compare_defaults import candidate, optimizer_defaults
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy
 from benchmarks.transfer_suite.protocol import required_tasks, test_verdict
@@ -40,6 +52,37 @@ from benchmarks.transfer_suite.toy100_compatibility import declared_recipe
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_CONFIG = ROOT / "configs/toy100/constraints_simple_regularization.json"
 FROZEN_STEPS = baseline.BUDGETS["mode_hold"]
+RECOVERY_DEADLINE = 400
+_SOURCE_FILES = (
+    "benchmarks/toy100/continuous_probe.py",
+    "benchmarks/locked_shared/mode_hold.py",
+    "benchmarks/locked_shared/baseline.py",
+    "benchmarks/locked_shared/observation.py",
+    "benchmarks/transfer_suite/compare_defaults.py",
+    "benchmarks/transfer_suite/legacy_noise_adapters.py",
+    "benchmarks/transfer_suite/toy100_compatibility.py",
+    "benchmarks/transfer_suite/protocol.py",
+    "benchmarks/transfer_suite/suite.py",
+    "particlegan/grad_regularizers.py",
+    "particlegan/recipes.py",
+)
+
+
+def _provenance() -> dict:
+    """Bind the exact executable sources and CPU/PyTorch environment."""
+    return dict(
+        source_sha256={name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
+                       for name in _SOURCE_FILES},
+        runtime=dict(python=platform.python_version(),
+                     torch=str(torch.__version__),
+                     torch_git_revision=torch.version.git_version,
+                     torch_build=torch.__config__.show(),
+                     cpu_capability=torch.backends.cpu.get_cpu_capability(),
+                     machine=platform.machine(),
+                     processor=platform.processor(),
+                     threads=torch.get_num_threads(),
+                     device="cpu"),
+    )
 
 
 def prepared_config(source: dict, mode: str) -> dict:
@@ -207,8 +250,10 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
     if type(diagnostic_every) is not int or diagnostic_every < 1 or 50 % diagnostic_every:
         raise ValueError("diagnostic_every must divide the frozen 50-step cadence")
     if shift_step is not None and (type(shift_step) is not int
-                                   or not 0 < shift_step < steps):
-        raise ValueError("shift_step must be inside the training episode")
+                                   or not FROZEN_STEPS <= shift_step < steps
+                                   or shift_step % diagnostic_every):
+        raise ValueError("shift_step must be at or after 1,200, before the end, "
+                         "and on the diagnostic cadence")
     if freeze_after_shift and shift_step is None:
         raise ValueError("a frozen continuation requires shift_step")
     if (len(shift) != 2 or not all(isinstance(x, (int, float))
@@ -237,12 +282,20 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
     if stationary["checks"] != 5:
         raise RuntimeError("the frozen stationary terminal window is incomplete")
     continued = (_window([point for point in diagnostic
-                          if point["step"] > FROZEN_STEPS])
+                          if FROZEN_STEPS < point["step"] <=
+                          (shift_step if shift_step is not None else steps)])
                  if steps > FROZEN_STEPS else None)
     recovery = (_window([point for point in diagnostic
                          if point["step"] > shift_step])
                 if shift_step is not None else None)
     if recovery is not None:
+        deadline_step = shift_step + RECOVERY_DEADLINE
+        late = _window([point for point in diagnostic
+                        if point["step"] >= deadline_step])
+        recovery["deadline_step"] = deadline_step
+        recovery["deadline_window"] = late
+        recovery["deadline_assessable"] = late["checks"] >= 5
+        recovery["deadline_pass"] = bool(late["checks"] >= 5 and late["pass_all"])
         recovery["delay_updates"] = (None if recovery["stable_from_step"] is None else
                                      recovery["stable_from_step"] - shift_step)
     rate_expected = dict(g=recipe.lr,
@@ -269,16 +322,29 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
     if shift_pair is not None and any(row["updates"] != shift_step
                                       for row in shift_pair["optimizer_at_shift"]):
         raise RuntimeError("optimizer state reset at distribution shift")
-    window_pass = (stationary["pass_all"] and
-                   (recovery["pass_suffix"] if recovery is not None else
-                    continued["pass_all"] if continued is not None else True))
+    hold_pass = bool(continued is None or continued["pass_all"])
+    shift_quality = bool(recovery is not None and recovery["deadline_pass"])
+    window_pass = (stationary["pass_all"] and hold_pass and
+                   (shift_quality if recovery is not None else True))
+    if recovery is not None and (not continued["checks"]
+                                 or not recovery["deadline_assessable"]):
+        status = "INCOMPLETE"
+    elif recovery is not None and window_pass:
+        # A bare shift result is not evidence of adaptation: compare a
+        # separately run frozen control with exactly matching pre-shift state.
+        status = "UNCONFIRMED"
+    else:
+        status = "PASS" if window_pass else "FAIL"
+    provenance = _provenance()
     return dict(
         mode=mode, config_sha256=hashlib.sha256(json.dumps(
             effective, sort_keys=True).encode()).hexdigest(),
-        source_recipe=recipe.to_dict(), steps=steps, noise_horizon=noise_horizon,
+        effective_config=effective, source_recipe=recipe.to_dict(),
+        **provenance, steps=steps, noise_horizon=noise_horizon,
+        diagnostic_every=diagnostic_every,
         shift_step=shift_step, shift=list(shift) if shift_step else None,
         freeze_after_shift=freeze_after_shift,
-        status="PASS" if window_pass else "FAIL",
+        status=status,
         terminal_grade=grade["status"], convergence=grade["convergence"],
         stationary=stationary, continued_hold=continued,
         shift_recovery=recovery,
@@ -295,6 +361,45 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
     )
 
 
+def match_frozen_control(active: dict, frozen: dict) -> dict:
+    """Confirm a shift result using a same-initialization no-update control."""
+    if active.get("shift_step") is None or active.get("freeze_after_shift"):
+        raise ValueError("active evidence must contain an unfrozen shift")
+    if not frozen.get("freeze_after_shift"):
+        raise ValueError("control must freeze all Adam updates after the shift")
+    matching = ("mode", "config_sha256", "source_sha256", "runtime", "steps",
+                "noise_horizon", "diagnostic_every", "shift_step", "shift")
+    changed = [key for key in matching if active.get(key) != frozen.get(key)]
+    if changed:
+        raise ValueError(f"shift and frozen control differ in {changed}")
+    shift_step = active["shift_step"]
+    for key in ("stationary", "continued_hold", "shift_pair"):
+        if active.get(key) != frozen.get(key):
+            raise ValueError(f"pre-shift control state differs in {key}")
+    pre_active = [point for point in active["diagnostic"]
+                  if point["step"] <= shift_step]
+    pre_frozen = [point for point in frozen["diagnostic"]
+                  if point["step"] <= shift_step]
+    if pre_active != pre_frozen:
+        raise ValueError("pre-shift diagnostic curves differ")
+    frozen_late = frozen["shift_recovery"]["deadline_window"]
+    sensitivity = (frozen_late["checks"] >= 5
+                   and frozen_late["passing_checks"] == 0)
+    quality = (active["stationary"]["pass_all"]
+               and active["continued_hold"]["pass_all"]
+               and active["shift_recovery"]["deadline_pass"])
+    confirmed = deepcopy(active)
+    confirmed["matched_control"] = dict(
+        frozen_config_sha256=frozen["config_sha256"],
+        frozen_post_deadline=frozen_late,
+        frozen_optimizer_updates=[row["updates"] for row in
+                                  frozen["optimizer_final"]],
+        sensitivity_pass=sensitivity,
+    )
+    confirmed["status"] = "PASS" if quality and sensitivity else "FAIL"
+    return confirmed
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
@@ -305,9 +410,14 @@ def main() -> None:
     parser.add_argument("--shift-x", type=float, default=1.0)
     parser.add_argument("--shift-y", type=float, default=0.0)
     parser.add_argument("--freeze-after-shift", action="store_true")
+    parser.add_argument("--frozen-control", type=Path,
+                        help="matched frozen evidence required to confirm adaptation")
+    parser.add_argument("--archive-sources", type=Path,
+                        help="directory for the standard transfer-suite source archive")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    config = json.loads(args.config.read_text())
+    config_bytes = args.config.read_bytes()
+    config = json.loads(config_bytes)
     def log(row):
         print(json.dumps(row, sort_keys=True, allow_nan=False), flush=True)
     evidence = run_probe(
@@ -316,6 +426,27 @@ def main() -> None:
         shift_step=args.shift_step, shift=(args.shift_x, args.shift_y),
         freeze_after_shift=args.freeze_after_shift, log=log,
     )
+    evidence["input_config_sha256"] = hashlib.sha256(config_bytes).hexdigest()
+    evidence["input_config_path"] = str(args.config)
+    if args.frozen_control:
+        evidence = match_frozen_control(
+            evidence, json.loads(args.frozen_control.read_text()),
+        )
+        evidence["matched_control_path"] = str(args.frozen_control)
+        evidence["matched_control_sha256"] = hashlib.sha256(
+            args.frozen_control.read_bytes()).hexdigest()
+    if args.archive_sources:
+        args.archive_sources.mkdir(parents=True, exist_ok=True)
+        archive = suite.snapshot(args.archive_sources)
+        for name, expected in evidence["source_sha256"].items():
+            if archive["source_sha256"].get(name) != expected:
+                raise RuntimeError(f"archived source differs from executed source: {name}")
+        source_file = args.archive_sources / "source.tar.gz"
+        evidence["source_archive"] = dict(
+            path=str(source_file),
+            sha256=hashlib.sha256(source_file.read_bytes()).hexdigest(),
+            source_sha256=archive["source_sha256"],
+        )
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         temporary = args.output.with_name(args.output.name + ".tmp")

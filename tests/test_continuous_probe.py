@@ -1,9 +1,12 @@
 """Focused integration checks for the uninterrupted mode-hold screen."""
 
 import json
+from copy import deepcopy
+
+import pytest
 
 from benchmarks.toy100.continuous_probe import (
-    DEFAULT_CONFIG, _window, run_probe,
+    DEFAULT_CONFIG, _window, match_frozen_control, run_probe,
 )
 
 
@@ -40,7 +43,14 @@ def test_shifted_frozen_control_uses_same_target_sample_and_no_updates():
     assert all(row["calls"] == 1300 and row["updates"] == 1200
                for row in result["optimizer_final"])
     assert result["noise"]["horizon"] == 1200
-    assert result["status"] == "FAIL"
+    assert result["status"] == "INCOMPLETE"
+    assert result["continued_hold"]["checks"] == 0
+    assert not result["shift_recovery"]["deadline_assessable"]
+
+
+def test_shift_before_stationary_window_is_rejected():
+    with pytest.raises(ValueError, match="at or after 1,200"):
+        run_probe(_simple(), steps=2400, shift_step=1000)
 
 
 def test_final_recovery_does_not_erase_intermediate_collapse():
@@ -52,3 +62,22 @@ def test_final_recovery_does_not_erase_intermediate_collapse():
     assert window["failing_steps"] == [20]
     assert not window["pass_all"]
     assert not window["pass_suffix"]
+
+
+def test_adaptation_requires_matching_frozen_sensitivity_control():
+    prior = dict(step=2400, modes=8, hq=1.)
+    active = dict(mode="constant", config_sha256="same", source_sha256={"source": "same"},
+                  runtime={"torch": "same"}, steps=3600, noise_horizon=1200,
+                  diagnostic_every=10, shift_step=2400, shift=[.35, 0.],
+                  freeze_after_shift=False,
+                  diagnostic=[prior], stationary=dict(pass_all=True),
+                  continued_hold=dict(pass_all=True), shift_pair=dict(before=prior),
+                  shift_recovery=dict(deadline_pass=True), status="UNCONFIRMED")
+    frozen = deepcopy(active)
+    frozen["freeze_after_shift"] = True
+    frozen["shift_recovery"] = dict(deadline_window=dict(checks=81, passing_checks=0))
+    frozen["optimizer_final"] = [dict(updates=2400), dict(updates=2400)]
+    assert match_frozen_control(active, frozen)["status"] == "PASS"
+    frozen["config_sha256"] = "different"
+    with pytest.raises(ValueError, match="config_sha256"):
+        match_frozen_control(active, frozen)

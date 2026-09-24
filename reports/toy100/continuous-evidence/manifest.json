@@ -1,0 +1,34 @@
+{
+  "files": {
+    "constant1200.json.gz": {
+      "bytes": 20240,
+      "sha256": "318fb427fc69c7893cab5fb6c7dd897db9b012ee2ed30261cbebbd0dc8543728"
+    },
+    "r1r2_1200.json.gz": {
+      "bytes": 19136,
+      "sha256": "d61d563e36e5b37a093ac082d30c8cd1ae53f0d5899dc91da35c00376a8a0771"
+    },
+    "r1r2_2400.json.gz": {
+      "bytes": 25340,
+      "sha256": "eaf5bf748d0843a14191eb5e0f233bfb00fbe1a44532e9a21c2fe5c39855ac66"
+    },
+    "r1r2_config.json": {
+      "bytes": 1420,
+      "sha256": "4ed4d938613f5134659cad85bac7f1cbf8a87ee9c96f45b490a7ae856e5f1059"
+    },
+    "scheduled1200.json.gz": {
+      "bytes": 25464,
+      "sha256": "0003952abc40de3e8efcb0a4a7db2e32f67b24f698f51d9750a397b6ce8b0bbd"
+    },
+    "scheduled2400.json.gz": {
+      "bytes": 21398,
+      "sha256": "19fca0e79d7c25886e4fafcff54274bd33534c57dae5fdf8c90110b6375ae3d9"
+    },
+    "source.tar.gz": {
+      "bytes": 233122,
+      "sha256": "2940ae9525535c45ffbf72395851c8a711d3f217ce79ab72ffd47d3dbdf3fd95"
+    }
+  },
+  "schema": "continuous-probe-evidence-v1",
+  "source_epoch": "The per-episode source_sha256 and source.tar.gz are authoritative; wall-clock fields are diagnostic."
+}
