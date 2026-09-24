@@ -1,0 +1,33 @@
+{
+  "mechanism": "DD-exit shrink of the curvature-bounded stall-reach G step",
+  "purity": "GAN dynamics only",
+  "host": "neural",
+  "seed": 0,
+  "method": "reachstall_ddexit",
+  "g_curvature_bound": 0.25,
+  "d_curvature_bound": 3.0,
+  "ramp": "stall",
+  "pin": "PR84 AVX2 warm 196/200 min modes 8; cold ring 8; stay 53/120 final 6",
+  "stall_reach": "warm 200/200; cold ring 8; stay 97/120 final 8",
+  "warm": {
+    "identity_passing": 0,
+    "identity_min_modes": 6,
+    "passing": 0,
+    "checks": 200,
+    "min_modes": 6,
+    "min_hq": 0.949951171875,
+    "final": {
+      "modes": 6,
+      "hq": 0.995849609375
+    },
+    "projected_updates": 15,
+    "negative_dd_updates": 15,
+    "clipped_exit_updates": 14,
+    "legacy_full_step_exit_updates": 1,
+    "curv_factor_min": 0.05234292580372116,
+    "g_curvature_bound": 0.25,
+    "d_curvature_bound": 3.0
+  },
+  "verdict": "ABORT",
+  "reason": "warm identity is not the AVX2 8-mode pin; comparison is invalid"
+}
