@@ -21,16 +21,28 @@ freezing or shrinking-step schedule. Fixed algorithmic preconditioning is a
 declared proposal and must retain positive movement in all trainable directions.
 Keep frozen host architecture, seeds, budgets, data and scoring unchanged.
 
-Gate cheaply. Cold-mobility proposals start two_pole80 then cold ring1200;
-stability proposals start the200-update diagnostic from the selected base's OWN
-checkpoint and stop at the first modes!=8/HQ<.90 observation. Changed policies
-must reacquire their own cold state with the same policy. All surviving proposals
-need two_pole, ring, unipolar, mid_scale_identity, cover_leftover and the original
-ten gates before full own-state1200 and native100 promotion. Do not credit a
-partial endpoint, a borrowed state, another variant's passes or skipped tests.
-The baseline audit is complete: older19 has10 PASS/9 FAIL; own1200 stopped
-at1692 after491 passing checks (HQ.864746094). Read RESULTS.md for the full
-blocker table. Do not repeat this audit. No native100 until older failures resolve.
+Gate cheaply on toy coverage, but prioritize STABILITY AFTER CONVERGENCE over
+smooth learning. Do not reject a useful policy solely for a pre-convergence dip
+or failure of the historical step1200-immediate-hold diagnostic. Keep frozen
+cold toy verdicts and budgets unchanged, including failed ring suffixes.
+
+Use the separate first_convergence_then_hold_v1 diagnostic in converged_probe.py:
+from the candidate's OWN completed cold1200 state, allow up to4800 further
+settling updates. The FIRST200 consecutive dense checks with8 modes/HQ>=.90
+confirm quality convergence. The NEXT1200 updates form a disjoint hold with the
+same policy, models, Adam state, RNG and fixed rates; no reset at convergence and
+no restart after a failed hold. Early dips are recorded but do not fail the hold.
+NOT_CONVERGED and POST_CONVERGENCE_FAIL are distinct outcomes. Quality
+convergence is an operational criterion, not a proof of mathematical equilibrium.
+Metrics observe training only. No metric-conditioned update/freeze/decay is allowed.
+
+At most1-2 promising policies per attempt get this bounded diagnostic even if
+an earlier strict hold failed; a completed cold-ring FAIL may be studied for late
+convergence, but it keeps its original frozen-budget FAIL. No promotion by
+renaming a failed old gate. Rank toy coverage, time to confirmed convergence,
+and post-convergence retention separately. All original toy gates, retention
+cases and native100 remain required before claiming a release-qualified winner.
+The baseline older19 audit is complete (10PASS/9FAIL); do not repeat it.
 
 Retain exact configs, effective rates, source per batch, raw metrics/checkpoints
 and honest FAIL/ERROR/SKIPPED statuses. A setup error is not a GAN failure; repair

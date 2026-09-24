@@ -4,6 +4,13 @@ Selection: [current-base.json](current-base.json). Replay declaration:
 [eps-net-base/declaration.json](eps-net-base/declaration.json).
 This is a measured search starting point, not a release-qualified winner.
 
+Current priority: [stability after confirmed convergence](CONVERGENCE.md).
+The epsilon base confirms quality at1400, then passes291 hold checks before
+failing at1692. No reviewed candidate passes the new1200-check hold; see
+[comparison results](convergence-comparisons/results.json).
+The historical immediate-hold failures below remain recorded; pre-convergence
+dips alone no longer reject a promising policy from further research.
+
 It is still a GAN. The generator and trainable latent particles learn only
 through the discriminator's logistic relativistic adversarial loss. The
 critic retains R1+R2 .6, mixup consistency .01 and fixed input noise .05.
