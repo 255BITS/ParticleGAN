@@ -1,0 +1,15 @@
+{
+  "scope": "archived 1324 pre-step, local continuation through favorable native step 1332 only",
+  "capture_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47",
+  "natural_native_improves": true,
+  "prior_eight_corrections_exact": true,
+  "forced_fit_nonconverged_rested": true,
+  "all_g_prior_parameters_exactly_pre_g": true,
+  "own_full_state_sha256": "95d6032d24d3a83ed625532d7eb86e7517356f3c95ae722bb8eab8e3ab6ec4d0",
+  "own_rng_sha256": "d17bf464b59c8ffbd4bbdbc42c3ac83a194bb3b99e09dd04ac443e42b8cd9361",
+  "no_extra_adam_updates": true,
+  "native_sample_checks": 27,
+  "pre_cost": 0.0025639977433542993,
+  "native_cost": 0.00248728707913232,
+  "final_cost": 0.0025639977433542993
+}

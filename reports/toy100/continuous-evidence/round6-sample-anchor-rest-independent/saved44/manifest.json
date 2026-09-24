@@ -1,0 +1,151 @@
+{
+  "raw": {
+    "declaration.json": {
+      "bytes": 3640,
+      "sha256": "d6e235e0e5621ae48d0984f1b5c02de051d2ed884ed01ddd3080b92eafa0b868",
+      "stored": "declaration.json",
+      "stored_sha256": "d6e235e0e5621ae48d0984f1b5c02de051d2ed884ed01ddd3080b92eafa0b868"
+    },
+    "original-1324-1335.json": {
+      "bytes": 20269,
+      "sha256": "ab4927653b9925102f98cb6ff3b6bf351f2f780754e35818fa36cd88496907ef",
+      "stored": "original-1324-1335.json.gz",
+      "stored_sha256": "0e07e24dc79019e37ab3bc2ed76d5fa6cc3f705909d3befd9cccfcf58e1a465b"
+    },
+    "original-1380-1395.json": {
+      "bytes": 25874,
+      "sha256": "05bc96bfb43d109d1bc0925dd221507b0e37f1ba47c7a55c7eb72dd39afb8f99",
+      "stored": "original-1380-1395.json.gz",
+      "stored_sha256": "e3003352cc199f71e1b40ed101f8a552ea5989310e1766c11531ebf19590848f"
+    },
+    "original-1530-1545.json": {
+      "bytes": 25779,
+      "sha256": "0484120946b869bc85981e4e36f1b7886c1ec0cd7f28a31d1028841ff52ee593",
+      "stored": "original-1530-1545.json.gz",
+      "stored_sha256": "08c74c5a1131de4643afb9bdbd7dfe9d80b9b0232ced5630835764788eecf85d"
+    },
+    "reallocation-1324-1335.json": {
+      "bytes": 67970,
+      "sha256": "d54c5895be50f7657d6d96fa44f6d533b1a0713c19259d9a92278fde02e7a439",
+      "stored": "reallocation-1324-1335.json.gz",
+      "stored_sha256": "c6b35f14cef15bd222f445f80916560ff33f6990bd6697c4a47a557164f16911"
+    },
+    "reallocation-1380-1395.json": {
+      "bytes": 89299,
+      "sha256": "d42d3301a95680dbc734b64861cb164f364365008812e56bfe49e3ceb48b4ec3",
+      "stored": "reallocation-1380-1395.json.gz",
+      "stored_sha256": "52490dfddb864a0a5dc3928995b39e4135fdc536880259d39126dad9cf03e8a6"
+    },
+    "reallocation-1530-1545.json": {
+      "bytes": 89243,
+      "sha256": "832221fd1420857d0d60f3a074f25899f505fe9479b7b69a1b246bb17debc556",
+      "stored": "reallocation-1530-1545.json.gz",
+      "stored_sha256": "5830f7d8e48c4ba7d2b47610b4161f253da119ef1dcd0ddfde12d1c01acfb6bc"
+    },
+    "summary.json": {
+      "bytes": 322171,
+      "sha256": "59fe6d9411bcc7805c03179f8ed4ffbea47df99ec4754fba059e7c41923a76d4",
+      "stored": "summary.json.gz",
+      "stored_sha256": "f14ad7224d1e37f688460c97483181e7fd059be5db71c36fd68e73ed56d33965"
+    }
+  },
+  "scope": "frozen saved-state success-path check, not a native episode",
+  "source": {
+    "benchmarks/locked_shared/mlp.py": {
+      "bytes": 2289,
+      "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+    },
+    "benchmarks/locked_shared/mode_hold.py": {
+      "bytes": 10774,
+      "sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    "configs/toy100/constraints_simple_regularization.json": {
+      "bytes": 1507,
+      "sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+    },
+    "host-1324-1335.py": {
+      "bytes": 6602,
+      "sha256": "8b1a0f5d26785c0ea537f6ef069843f45bf800ecfbd9fe1c84b68eb0804c4db1"
+    },
+    "host-1380-1395.py": {
+      "bytes": 6602,
+      "sha256": "911cd032897585771b4c5ca9c61536f8acba0246c69c105478c3331c256f7257"
+    },
+    "host-1530-1545.py": {
+      "bytes": 6602,
+      "sha256": "d77d320f2802c7c418612647f0308bb0e9e12bebd2598eb84d066113554f4d1a"
+    },
+    "particlegan/gan_loss.py": {
+      "bytes": 7960,
+      "sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da"
+    },
+    "particlegan/grad_regularizers.py": {
+      "bytes": 17129,
+      "sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f"
+    },
+    "reports/toy100/alternating_curvature_scratch.py": {
+      "bytes": 16689,
+      "sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450"
+    },
+    "reports/toy100/chamfer_discrete_reallocation.py": {
+      "bytes": 4218,
+      "sha256": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24"
+    },
+    "reports/toy100/chamfer_pullback.py": {
+      "bytes": 7290,
+      "sha256": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda"
+    },
+    "reports/toy100/coverage_fixed_eval.py": {
+      "bytes": 3996,
+      "sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e"
+    },
+    "reports/toy100/extra_adam_scratch.py": {
+      "bytes": 13261,
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55"
+    },
+    "reports/toy100/joint_output_pullback.py": {
+      "bytes": 6674,
+      "sha256": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3"
+    },
+    "reports/toy100/pr84_critic_refinement_capture.py": {
+      "bytes": 7367,
+      "sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585"
+    },
+    "reports/toy100/pr84_critic_refinement_filter.py": {
+      "bytes": 7717,
+      "sha256": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29"
+    },
+    "reports/toy100/pr84_opponent_prediction.py": {
+      "bytes": 8204,
+      "sha256": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846"
+    },
+    "reports/toy100/pr84_prediction_state_filter.py": {
+      "bytes": 15392,
+      "sha256": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4"
+    },
+    "reports/toy100/pr84_smoothed_candidate.py": {
+      "bytes": 6530,
+      "sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f"
+    },
+    "reports/toy100/reallocation_smoothed_candidate.py": {
+      "bytes": 8789,
+      "sha256": "ca16cf667a03e585d50c110edcd0b219991768877dff1a640ec2371c7d16439c"
+    },
+    "reports/toy100/sample_anchor_candidate.py": {
+      "bytes": 5113,
+      "sha256": "2fb4ee97bfc4a1f00f0076c55f0e210bc531fc34779c1e23a719ba7722a15c33"
+    },
+    "reports/toy100/sample_anchor_rest_candidate.py": {
+      "bytes": 2500,
+      "sha256": "287d3c5d21d2ca8ff80c8167bd2af294f4de088a54619bfd03d0c3eaf3715560"
+    },
+    "reports/toy100/sample_anchor_rest_filter.py": {
+      "bytes": 6361,
+      "sha256": "6623588e736c5d581ce1a199bca22fa056ce25ab4414c8c30d258d4addb1c949"
+    },
+    "reports/toy100/sample_group_anchor.py": {
+      "bytes": 12791,
+      "sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037"
+    }
+  }
+}

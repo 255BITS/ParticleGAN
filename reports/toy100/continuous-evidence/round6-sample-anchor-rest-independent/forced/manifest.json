@@ -1,0 +1,29 @@
+{
+  "files": {
+    "forced-favorable-native.json": {
+      "bytes": 714,
+      "sha256": "8eac5de7c7e7f600d55e85b9b71f7ed9e2ea20d5189d8b93130386682311bfd7"
+    },
+    "forced-nonconvergence.json": {
+      "bytes": 13586,
+      "sha256": "5953082c77b7733f66187c2002c8ddcf355e6d2c266a3d46e07bbe9e19398016"
+    },
+    "run.log": {
+      "bytes": 557,
+      "sha256": "77991ce5571143ae9f04a57f899096d07016e883bbefb15ecc79c829d7cc0036"
+    },
+    "source/host-1324-1332.py": {
+      "bytes": 6602,
+      "sha256": "0d649a6c0fb92bd8bfbe599bfed3e3a17218dcdef30262f554ebf193d4f5f311"
+    },
+    "success-parity.json": {
+      "bytes": 364,
+      "sha256": "0a5b82952dfc0c880cbc98f284c2d9519b4886e707f0c965e5c607d353c6e749"
+    },
+    "tests.log": {
+      "bytes": 98,
+      "sha256": "04abbde499bc1bea6ae1b68a1efa521c15addbb6b24302b4a9db439fcd656f61"
+    }
+  },
+  "scope": "forced native one-update plus saved-state favorable-native branch"
+}
