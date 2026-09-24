@@ -1,20 +1,13 @@
-**Current status: [round9](continuous-round9.md).** Mean16 Adam fails20/44 consecutive checks; local MMD loses a mode despite improving its objective. Forward KL passes the one-bank cold/warm filter; short continuation and a separate profiled-critic-value diagnostic are active. No qualified replacement yet.
+**Current status: [practical leaderboard](continuous-practical-leaderboard.md), [round9 evidence](continuous-round9.md).** Pre-start anchors lead completed neural acquisition/own-hold/response; a conditioned missing-bank loss recovers after two updates. PR84 remains the reference with fewer objective changes, but its local cold ring has seven modes. Longer retention, fidelity and production cost remain open. No qualified LR-decay replacement.
 
 # PR #60: remove LR decay without losing acquisition or stability
 
-**Unresolved.** The passing shared 22-task recipe still uses LR decay. No new
-candidate has passed both acquisition and continued quality. Work here is
-limited to replacing those schedules with responsive training dynamics;
-production defaults have not been changed.
-
-**Latest, round 7:** [functional fitting and observed-support memory](continuous-round7.md).
-Pre-start joint fitting passes saved44, warm200, borrowed hold1200, both cold
-hosts, its own acquired hold1200, and immediate same-target model-error
-recovery. A controlled same-target minibatch omission nevertheless removes
-a mode in one actual neural update. The 12000-step run is withheld; the next
-cheap test preserves previously observed support while allowing new-group
-acquisition. No production replacement or unavoidable impossibility is
-established. Earlier investigations remain below.
+**Unresolved for production.** The passing shared22-task recipe still uses LR
+decay. A neural sampled-anchor candidate passes the toy acquisition, own-hold
+and response gates, with measured recovery from a conditioned omission. Its
+objective changes and production scaling/fidelity prevent promotion. The
+current board above supersedes the historical ranking below; original strict
+results and source epochs remain unchanged.
 
 **Latest stability investigation:** exact replay isolates a destructive
 generator update at1325 and accumulated mode loss beginning1533. All16 held-out

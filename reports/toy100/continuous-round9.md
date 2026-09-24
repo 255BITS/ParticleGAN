@@ -1,68 +1,58 @@
-# Separate estimator noise from the objective's restoring behavior
+# Practical ranking after the restoring-objective screens
 
-There is still no qualified replacement for LR decay. The latest cheap tests
-reject two apparent fixes: averaging sixteen banks repairs the original bad
-step but fails continued training, and local MMD can improve while deleting a
-mode. Fixed-support memory passes a long hold but rejects a genuinely unseen
-component after incomplete bootstrap. These failures remain on the same target
-distribution; no whole-target shift is required.
+**Current comparison: [practical leaderboard](continuous-practical-leaderboard.md).**
+The strongest completed neural acquisition/own-hold/response evidence is the
+pre-start sampled-anchor rule. Its conditioned missing-bank failure lasts two
+updates and recovers by2403 under ordinary native continuation; the original
+strict failure is retained. This changes its practical ranking, not its old
+receipt. Longer retention, mass/shape fidelity, and production cost remain open.
+PR84 remains the preferred reference with fewer changes to the GAN objective,
+but our reproduced cold ring has seven modes. No production replacement is
+qualified, and no unavoidable impossibility has been established.
 
-| Candidate / cheapest decisive test | Result | Decision |
+| Candidate | Completed evidence | Current decision |
 | --- | --- | --- |
-| Pre-start sampled group anchors | Acquisition, own hold1200 and response pass; one omitted minibatch deletes a mode | Reject memoryless rule |
-| Two-bank fixed-support memory | Saved44, warm200, hold1200 pass; later ordinary bank's22 missing-mode samples all rejected | Reject frozen identities |
-| Fresh-data mass discovery outside fixed cells | Ring acquisition eventually supported; a new component inside an old cell never proposed | Reject outside-only discovery |
-| Actual Adam with16-bank D/G means | Saved1325 repaired; own consecutive saved windows24/44 | Reject before warm |
-| Local emitted-law MMD + donor search | Cold acquires; first fresh-warm update loses a mode while population MMD improves | Reject before neural training |
-| Emitted-law forward KL + donor search/EM | One cold update0→8 modes/HQ .999756; own warm bank retains8/HQ .999512 | Continue short free-output tests only |
-| Profiled sharp critic value over frozen features | Convex inner-fit/value-bound diagnostic in progress | No training claim |
+| Pre-start sampled anchors — neural | Cold trajectory/ring, own hold1200 and error response pass; conditioned omission recovers after two failing updates | Practical lead; own continuation through12000 next |
+| PR84 — neural | Trajectory pass; locally ring7; reported other build ring8; temporary continuation losses | Minimal-change reference, acquisition unresolved |
+| PR93 — neural | Independent cold ring4, compared with same-process PR84 ring7; clip1195/1200 | Demote despite reported119/120 borrowed hold |
+| Two-bank fixed support — neural/bank | Warm/hold pass; incomplete bootstrap then rejects22 missing-mode samples | Reject frozen identities |
+| Actual Adam16-bank means — neural | Repairs1325;24/44 consecutive saved checks pass | Reject this averaging rule |
+| Local emitted-law MMD — bank | Warm mode loss while actual population objective improves | Reject before neural |
+| Finite-GH9 likelihood donor/EM — bank + neural filter | Six bank stress gates pass; remembered donor escapes a specific rest trap; first actual neural target fits and all44 native windows pass | Keep neural-filter lead; no full neural acquisition claim |
+| Profiled sharp critic value — copied neural states | Warm moves improve quality; cold six certified moves still3 modes | Diagnostic only; pause expansion |
 
-The [mean-field screen](mean16-continuous-screen.md) preserves actual new Adam
-moments, constant rates and exact original replay controls. Its failure is not
-an optimizer-counter or RNG mismatch. The [finite-bank diagnosis](pr84-finite-bank-variance-geometry.md)
-finds substantial critic-side noise, but also nonmonotone local mean-field
-geometry. Reducing noise alone does not make that tested update stable.
+The likelihood work now separates proposal from acceptance. GH5 proposes
+observed-data donor replacements and equal-weight EM steps; the **whole map**
+must lower the finite positive GH9 objective. If needed, a GH9 EM fallback and
+remembered-donor search run before exact rest. A higher-order audit found real
+inner GH5 reversals, so the original cumulative epoch remains FAIL. The new
+whole-map rule has an explicit, different source epoch. It is not certified
+continuous-KL descent or global convergence.
 
-The [MMD audit](local-mmd-independent-audit.md) verifies the emitted-Gaussian
-formulas and replacement deltas independently. The whole losing proposal also
-improves true population MMD, so simply checking the whole proposal on more
-data would not cure this example. A particular mode-deleting submove is harmful
-in population, but a single held-out bank incorrectly approves it. This
-distinguishes a data-estimation failure from an objective/finite-particle issue.
+Relevant reproducible evidence:
 
-The [new forward-KL filter](round8-forward-kl-first-bank.md) evaluates smoothed
-target cross-entropy under the actual emitted Gaussian-mixture family.
-Observed-data global replacements address allocation and equal-weight EM
-refines locations. Both current one-bank gates pass with each state's own
-native real bank; the earlier common-bank warm result remains archived and
-does not substitute for that test. The [independent audit](forward-kl-free-output-independent-audit.md)
-checks the formulas, exact donor selection, EM step and data-stream hashes.
+- [Six bank stress gates](round8-forward-kl-gh9-stress.md),
+  [quadrature audit](round8-forward-kl-quadrature-audit.md), and
+  [remembered-rest repair](round8-forward-kl-remembered-wrapper.md).
+- [Actual neural44 filter](forward-kl-neural44.md) and [first-target realization](forward-kl-target-realization.md)
+  and [research assumptions](forward-kl-research-scope.md). The all-history
+  implementation still grows in memory and work; short success alone does not
+  justify an expensive full rollout.
+- [Paired neural omission recovery](round8-prestart-omission-recovery10.md),
+  [pinned acquisition/hold/runtime comparison](continuous-acquisition-first-leaderboard.md),
+  and [exact PR93 acquisition audit](pr93-cold-independent-audit.md).
+- [Mean16 continuation failure](mean16-continuous-screen.md),
+  [MMD objective audit](local-mmd-independent-audit.md), and
+  [bounded profiled-value cold continuation](pr84-convex-profiled-cold-continuation.md).
 
-Its current guarantee is descent of a finite positive5×5 quadrature objective.
-A9×9 numerical audit also decreases at every accepted one-bank step, but
-the cold endpoint gradient differs materially between the two rules. This is
-not an exact continuous-KL optimum or a neural training result. The
-[research-scope note](forward-kl-research-scope.md) connects the experiment to
-current inclusive-KL and Gaussian-mixture EM research and states why their
-theorems do not automatically cover this model.
+Ranking now distinguishes acquisition, recovery, and objective/cost changes.
+An x/120 count remains useful evidence but cannot rank a frozen six-mode cloud
+above an actual eight-mode acquirer. A transient HQ dip with measured recovery
+is not silently called permanent collapse. Conversely, ending at eight does
+not erase repeated departures along the way. Sparse and dense observers and
+different Torch builds remain explicitly separated.
 
-Next tests, in cost/failure order: consecutive cold/warm output updates;
-an omitted bank after acquisition; initially missing support followed by real
-signal; a same-target model error; and only then actual neural realization and
-the strict44-window gate. Any memory-bearing neural survivor must pass exact
-complete-state restart, warm200, borrowed hold1200, cold acquisition, its own
-hold, immediate error response, and the longer stationary run. Full mass/shape
-fidelity and the shared production22 gates remain required before promotion.
-
-The separate critic lane freezes nonlinear features, solves the original
-sharp Rp+b_cap readout objective, and tests a generator derivative of that
-same profiled value, including fake-cap input dependence. Certified value
-bounds must decide acceptance; an inner numerical fit cannot simply be called
-an exact best response. This is a bounded structural diagnostic, not a sweep.
-
-[Round8 memory evidence](continuous-round8.md) and earlier failures remain
-available. The [emitted-law/chart note](emitted-law-and-chart-principles.md)
-proves only a scoped unrestricted-critic no-pure-Nash statement; it is not an
-impossibility theorem for the actual finite capped critic or bounded quality.
-No unavoidable obstruction has been established. Production PR60 head remains
-983d037a7028afc5c1b0df4d4097eff8e6abe9b5. No CI wait or seed sweep is involved.
+Full mass/shape fidelity and shared production gates remain before promotion.
+The production PR60 head remains
+`983d037a7028afc5c1b0df4d4097eff8e6abe9b5`, with scheduled LR decay. Research
+continues on the separate branch without a CI wait or seed sweep.

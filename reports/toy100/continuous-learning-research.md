@@ -1,4 +1,4 @@
-**Current status: [round9](continuous-round9.md).** Mean16 Adam fails20/44 consecutive checks; local MMD loses a mode despite improving its objective. Forward KL passes the one-bank cold/warm filter; short continuation and a separate profiled-critic-value diagnostic are active. No qualified replacement yet.
+**Current status: [practical leaderboard](continuous-practical-leaderboard.md), [round9 evidence](continuous-round9.md).** Pre-start anchors lead completed neural acquisition/own-hold/response; a conditioned missing-bank loss recovers after two updates. PR84 remains the reference with fewer objective changes, but its local cold ring has seven modes. Longer retention, fidelity and production cost remain open. No qualified LR-decay replacement.
 
 # Removing learning-rate decay: mechanism and validation
 

@@ -1,5 +1,5 @@
 {
-  "schema": "continuous-research-candidate-v3",
+  "schema": "continuous-research-candidate-v4",
   "date": "2026-09-24",
   "status": "no_qualified_constant_lr_replacement",
   "production_gate_eligible": false,
@@ -24,8 +24,16 @@
     "cold_ring1200": "PASS 24/24",
     "own_hold1200": "PASS",
     "same_target_model_error": "PASS first update",
-    "disqualifier": "one conditioned D minibatch omits a mode; actual neural model loses it in one update",
-    "long12000": "withheld"
+    "long12000": "running new practical observer from own2400",
+    "strict_omission_gate": "FAIL:7 modes at2401 and2402",
+    "ordinary_recovery": "PASS:8/HQ1 from2403 through2410",
+    "remaining_gaps": [
+      "longer own-state retention",
+      "distribution mass and shape fidelity",
+      "practical production cost",
+      "production host gates"
+    ],
+    "fidelity": "coverage pass but endpoint particle counts1,1,1,1,1,1,1,5; TV.291667; emittedstd.029 vs target.07"
   },
   "current_memory_experiment": {
     "method": "pr84_confirmed_fixed_support_prestart_joint_fit",
@@ -39,9 +47,9 @@
     "later_gates": "withheld"
   },
   "next_tests": [
-    "free-output continuation, omission, later same-target acquisition and model-error repair",
-    "actual neural realization and saved44 only after free filters",
-    "complete learner restart and unchanged warm/cold/hold/response/long/fidelity gates"
+    "prestart anchor own2400 to12000; record strict misses and recovery separately",
+    "finite-GH9 native44 saved-window filter; no neural acquisition claim",
+    "practical realization and mass/shape audit before expensive production qualification"
   ],
   "unavoidable_impossibility_established": false,
   "latest_rejections": {
@@ -50,7 +58,9 @@
     "outside_only_mass_discovery": "FAIL component inside existing cell never proposed"
   },
   "active_lanes": {
-    "forward_kl": "PASS one-bank cold0to8/HQ.999756 and warm8/HQ.999512; free-output only; continuation pending",
-    "profiled_critic_value": "frozen-feature convex readout and verified value bound diagnostic; pending"
-  }
+    "prestart_anchors": "best completed neural acquisition/ownhold/response; conditioned omission recovers",
+    "forward_kl": "six bank stress gates and native saved44 PASS; full neural cold acquisition untested; growing cost unresolved",
+    "profiled_critic_value": "diagnostic complete; cold six certified moves remain three modes; no practical expansion"
+  },
+  "leaderboard": "continuous-practical-leaderboard.md"
 }
