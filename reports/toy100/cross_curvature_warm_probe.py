@@ -36,11 +36,12 @@ def variants():
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--amplification-bound',type=float)
-    parser.add_argument('--explicit',action='store_true');args=parser.parse_args()
+    parser.add_argument('--explicit',action='store_true')
+    parser.add_argument('--curvature-bound',type=float,default=1.);args=parser.parse_args()
     config=json.loads((ROOT/'configs/toy100/constraints_simple_regularization.json').read_text())
     declaration=dict(methods=['identity','constant','cross_curvature'],prefix_steps=1000,total_steps=1200,
         seed=0,shared_gate_eligible=False,scratch_optimizer_policy=METHOD,
-        solver=dict(krylov_dim=8,linear_tolerance=.1,nonlinear_tolerance=None,curvature_bound=1.,amplification_bound=args.amplification_bound,explicit=args.explicit,fd_relative=1e-4,
+        solver=dict(krylov_dim=8,linear_tolerance=.1,nonlinear_tolerance=None,curvature_bound=args.curvature_bound,amplification_bound=args.amplification_bound,explicit=args.explicit,fd_relative=1e-4,
                     correction_limit=2.,max_backtracks=8),
         source={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in
         [Path(__file__),ROOT/'reports/toy100/cross_curvature_scratch.py',ROOT/'reports/toy100/implicit_extra_scratch.py',
@@ -49,7 +50,7 @@ def main():
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.with_suffix('.declaration.json').write_text(json.dumps(declaration,indent=2)+'\n')
     result=run_warm_variants(config,variants(),output_dir=args.output,
-        prefix_context=lambda:cross_curvature(start_step=1000,amplification_bound=args.amplification_bound,explicit=args.explicit))
+        prefix_context=lambda:cross_curvature(start_step=1000,amplification_bound=args.amplification_bound,explicit=args.explicit,curvature_bound=args.curvature_bound))
     print(json.dumps(result,indent=2),flush=True)
 
 
