@@ -1,0 +1,79 @@
+{
+  "archives": {
+    "backtracking_warm_fail": {
+      "adapter_sha256": "63655e219cb5134d91ec402bf6197d4a20dc8d4866193d6191ca228fe30167dc",
+      "bytes": 81025,
+      "file": "backtracking_warm_fail.tar.gz",
+      "runner_sha256": "b7db52b7cb06b9e738426336e0854297f475e5352dc938ed7d13c860d6811ef7",
+      "scope": "passing_state_local_stability_only",
+      "sha256": "43ed1d9ffe88b9a30651b8d38b2f04506224cb7aa0fce4b0c50b919b2eb59682"
+    },
+    "cold_observer": {
+      "adapter_sha256": "78e8e4b0b88cbb72321ba2b0b8d3c4671c30cab1ddfa83de2989945048dfed53",
+      "bytes": 72699,
+      "file": "cold_observer.tar.gz",
+      "runner_sha256": "66aed133589c48bbb0f1b04cd9ff8da35d7eb405a00762dc490399c6c6c5e390",
+      "scope": "cold_observer_only",
+      "sha256": "29429437bf542493448c4d1d465387e5ba6b021c094056452802955e180d2546"
+    },
+    "conditional_modehold_fail": {
+      "adapter_sha256": "a52e4e3147514613bc1470f0ff635b4ba7b0896d2c8a0157307237c74d2b1a36",
+      "bytes": 72093,
+      "file": "conditional_modehold_fail.tar.gz",
+      "runner_sha256": "44ccb8886ae29adf88029b27b5111b8e7e59db046555be9edcb1eb7766fe46b7",
+      "scope": "cold_mode_hold_acquisition_gate",
+      "sha256": "85951c0d545bd8dbe2afaf599ae36f1c502c2bdd7b3cb9e8694165b6ca370047"
+    },
+    "conditional_trajectory_pass": {
+      "adapter_sha256": "a52e4e3147514613bc1470f0ff635b4ba7b0896d2c8a0157307237c74d2b1a36",
+      "bytes": 280845,
+      "file": "conditional_trajectory_pass.tar.gz",
+      "runner_sha256": "065bdc2de13f6ee9115a623d144f768f5c3c076dae21f18ff7508eb1a9562fef",
+      "scope": "cold_trajectory_acquisition_gate",
+      "sha256": "d24199f079c81249de42789429954f46b94535481e3a30d3133aca1f39e9dc27"
+    },
+    "conditional_warm_gate": {
+      "adapter_sha256": "a52e4e3147514613bc1470f0ff635b4ba7b0896d2c8a0157307237c74d2b1a36",
+      "bytes": 69559,
+      "file": "conditional_warm_gate.tar.gz",
+      "runner_sha256": "065bdc2de13f6ee9115a623d144f768f5c3c076dae21f18ff7508eb1a9562fef",
+      "scope": "passing_state_local_stability_only",
+      "sha256": "3488dc80617b49018ce88af5ac324e03970bfeb3e810744e187685105694dc10"
+    },
+    "fractional_diagnostic": {
+      "adapter_sha256": "1d3ff9c4112471158efb1809863baf98ccf6c8f824de3e102f6d4f5ed8566b04",
+      "bytes": 75040,
+      "file": "fractional_diagnostic.tar.gz",
+      "runner_sha256": "ca4dd2952e7f14e9a5fdb3cef7c1ada7dcf1b73d5ae3a0846701b8145e485923",
+      "scope": "cold_fraction_diagnostic",
+      "sha256": "148edbc27a18b5391ecad30c9b907b2433592ff137669d987da13d2716bc9a33"
+    },
+    "marginal_trajectory_fail": {
+      "adapter_sha256": "c8c5a219d156f1d7d0eef4225bff70f1c65757d70b1059411cb826325c51ad89",
+      "bytes": 280772,
+      "file": "marginal_trajectory_fail.tar.gz",
+      "runner_sha256": "065bdc2de13f6ee9115a623d144f768f5c3c076dae21f18ff7508eb1a9562fef",
+      "scope": "cold_trajectory_acquisition_gate",
+      "sha256": "4173c1d98718f8e8a63a77ed660dfa6b02846153445f6000369dea83073f6851"
+    },
+    "marginal_warm_gate": {
+      "adapter_sha256": "78e8e4b0b88cbb72321ba2b0b8d3c4671c30cab1ddfa83de2989945048dfed53",
+      "bytes": 69091,
+      "file": "marginal_warm_gate.tar.gz",
+      "runner_sha256": "66aed133589c48bbb0f1b04cd9ff8da35d7eb405a00762dc490399c6c6c5e390",
+      "scope": "passing_state_local_stability_only",
+      "sha256": "3152a6f767abd69c9ee7f95283095b2425da37be1d6afb5d99d96c47702cd453"
+    },
+    "warm_observer": {
+      "adapter_sha256": "78e8e4b0b88cbb72321ba2b0b8d3c4671c30cab1ddfa83de2989945048dfed53",
+      "bytes": 76515,
+      "file": "warm_observer.tar.gz",
+      "runner_sha256": "66aed133589c48bbb0f1b04cd9ff8da35d7eb405a00762dc490399c6c6c5e390",
+      "scope": "passing_state_local_stability_only",
+      "sha256": "30314f0cfe55dabebc1a4f8cd3b54191c87feaea470d8db20057387ba414d1f7"
+    }
+  },
+  "fixed_seed": 0,
+  "schema": "continuous-energy-signal-evidence-v1",
+  "scratch_policy_only": true
+}
