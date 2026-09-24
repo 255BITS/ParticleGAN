@@ -96,3 +96,23 @@ def test_both_bound_scales_d_then_g_responds_to_bounded_d():
     assert recorder.records[-1]["g"]["rho"] == pytest.approx(rho_g)
     assert x.item() == pytest.approx(1. - min(1., .25 / rho_g))
     assert opt_g.state[x]["step"] == opt_d.state[y]["step"] == 1
+
+
+@pytest.mark.parametrize("a,b", [(3., 4.), (.3, 4.), (30., .8)])
+def test_ratio_controller_scales_g_bound_by_clipped_reference_over_ratio(a, b):
+    x = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([x], lr=1., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+    recorder = BothBoundRecorder(curvature_bound=.25, d_curvature_bound=1e9, ratio_reference=2.)
+    for phase in recorder.phases(0, opt_d, opt_g, {}):
+        y.grad = (-x + b * y).detach().clone()
+        recorder.step(opt_d, torch.optim.Adam.step)
+        x.grad = (y + a * x).detach().clone()
+        recorder.step(opt_g, torch.optim.Adam.step)
+    row = recorder.records[-1]
+    ratio = row["g"]["rho"] / row["d"]["rho"]
+    expected_bound = .25 * min(1.5, max(1 / 1.5, 2. / ratio))
+    assert row["smoothed_ratio"] == pytest.approx(ratio)
+    assert row["g_bound"] == pytest.approx(expected_bound)
+    assert row["g"]["factor"] == pytest.approx(min(1., expected_bound / row["g"]["rho"]))
