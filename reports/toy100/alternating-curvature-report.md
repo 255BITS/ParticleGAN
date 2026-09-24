@@ -156,4 +156,15 @@ Controller on the v10 adapter (alternating, D bound 3, nominal G cap .25). The G
 | loosen .25, tighten .12, knots 2.5/4.5 | 200/200, min HQ .9668 | PASS MSE .000984, suffix 18 | FAIL 5 modes, final HQ .468. Tightening through the terminal window stalled coverage and then dropped it |
 | loosen .30, tighten .18, knots 1.2/5 | not run | FAIL MSE .253 | not run |
 
-v10 (fixed G cap .25, D bound 3) remains the ring near-miss: 8 modes, and the only terminal miss is update 1050 at HQ .843. Moving the G cap with `rho_G/rho_D` either spends that eighth mode or falls into the trajectory basin. The ratio separates acquisition from rest in bin medians, but using it as a step-size controller did not clear the five terminal checks.
+v10 (fixed G cap .25, D bound 3) remains the ring near-miss: 8 modes, and the only terminal miss is update 1050 at HQ .843. Moving the G cap with `rho_G/rho_D` either spends that eighth mode or falls into the trajectory basin. The ratio separates acquisition from rest in bin medians, but using it as a step-size controller did not clear the five terminal checks. That family is closed.
+
+## Two non-ratio attempts (neither beats v10)
+
+Both keep D bound 3 and the nominal G cap .25, and neither changes cold trajectory (MSE .000943, suffix 18) or the warm fork (200/200, min HQ .9297). v10's archived ring is still ahead: modes/HQ at 1000–1200 are 7/.916, 7/.843, 8/1, 8/.995, 8/1.
+
+| Mechanism | Cold ring 1000–1200 |
+| --- | --- |
+| Loosen G to .40 until 8 modes have been occupied, then latch back to .25 | Never latched. Terminal modes/HQ: 2/.108, 7/.911, 7/.909, 7/.910, 7/1. Mode 1 stays empty; update 900 collapses to 1 mode |
+| Ring-only G cap .35 for the first 300 updates, then .25 | Boost ran 300 steps. Terminal modes/HQ: 5/.506, 6/.821, 6/.821, 6/.811, 6/.820 |
+
+No 2400 hold. v10 remains the ring near-miss.

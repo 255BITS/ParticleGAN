@@ -189,17 +189,25 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
     """
 
     def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False,
-                 ratio_loosen=None,ratio_tighten=None,acq_ratio=1.5,rest_ratio=4.):
+                 ratio_loosen=None,ratio_tighten=None,acq_ratio=1.5,rest_ratio=4.,
+                 mode_loosen=None,boost_steps=0,boost_cap=None):
         super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
         self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
         if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
         if ratio_loosen is not None and (not math.isfinite(ratio_loosen) or ratio_loosen<=0):raise ValueError('invalid ratio loosen')
         if ratio_tighten is not None and (not math.isfinite(ratio_tighten) or ratio_tighten<=0):raise ValueError('invalid ratio tighten')
         if not (math.isfinite(acq_ratio) and math.isfinite(rest_ratio) and 0<acq_ratio<rest_ratio):raise ValueError('invalid rho ratio knots')
+        if mode_loosen is not None and (not math.isfinite(mode_loosen) or mode_loosen<=0):raise ValueError('invalid mode loosen')
         self.ratio_loosen=ratio_loosen
         self.ratio_tighten=self.curvature_bound if ratio_tighten is None else ratio_tighten
         self.acq_ratio=acq_ratio
         self.rest_ratio=rest_ratio
+        self.mode_loosen=mode_loosen
+        self._modes_latched=False
+        if type(boost_steps) is not int or boost_steps<0:raise ValueError('invalid boost steps')
+        if boost_cap is not None and (not math.isfinite(boost_cap) or boost_cap<=0):raise ValueError('invalid boost cap')
+        self.boost_steps=boost_steps
+        self.boost_cap=boost_cap
 
     def phases(self,step,opt_d,opt_g,local):
         if not self.enabled or step<self.start_step:
@@ -220,7 +228,16 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
                  if isinstance((m:=local.get(name)),torch.nn.Module) for b in m.buffers()]
         self.d0=[p.detach().clone() for p in self._params(opt_d)]
         self.g_base=[p.detach().clone() for p in self._params(opt_g)]
-        rng_before=self._rng(streams);self.advantage=None;self.row=dict(outer_step=self.outer_steps+1)
+        occupied=self._occupied_modes(local)
+        if occupied is not None and occupied>=8:self._modes_latched=True
+        if self.mode_loosen is not None and occupied is not None and not self._modes_latched:
+            self._step_g_cap=self.mode_loosen
+        elif self.boost_cap is not None and occupied is not None and step<self.boost_steps:
+            self._step_g_cap=self.boost_cap
+        else:
+            self._step_g_cap=None
+        rng_before=self._rng(streams);self.advantage=None
+        self.row=dict(outer_step=self.outer_steps+1,occupied_modes=occupied,modes_latched=self._modes_latched)
         rng_after=None
         for phase in range(3):
             if phase:
@@ -271,6 +288,9 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         else:
             rho=_rho(self.g_base,self.g1,self.gg0,grads(opt_g),self.metric_g)
             cap,rho_ratio=self._g_cap(rho)
+            if self._step_g_cap is not None:
+                cap=self._step_g_cap
+                self.row['g_bound']=cap
             factor=min(1.,cap/rho) if rho>0 else 1.
             for p,b,n in zip(self._params(opt_g),self.g_base,self.g1):p.copy_(torch.lerp(b,n,factor) if factor<1 else n)
             self.row['g']=dict(rho=rho,factor=factor,cap=cap,rho_ratio=rho_ratio)
@@ -292,6 +312,15 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         if ratio>=self.rest_ratio:return self.ratio_tighten,ratio
         weight=(ratio-self.acq_ratio)/(self.rest_ratio-self.acq_ratio)
         return self.ratio_loosen+(self.ratio_tighten-self.ratio_loosen)*weight,ratio
+
+    def _occupied_modes(self,local):
+        means,generator,prior=local.get('means'),local.get('generator'),local.get('prior')
+        if means is None or generator is None or prior is None:return None
+        clean=getattr(generator,'model',generator)
+        with torch.no_grad():
+            points=clean(prior.z)
+            nearest=torch.cdist(points,means).min(0).values
+        return int((nearest<=.21).sum())
 
 
 @contextmanager
