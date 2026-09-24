@@ -1,0 +1,13 @@
+{
+  "call": "KILL",
+  "host": "neural",
+  "mechanism": "sustained-arm Gx0.5 after 200 consecutive unwrapped updates at 8 modes and HQ>=0.9",
+  "cpu_pin": "ATEN_CPU_CAPABILITY=avx2",
+  "torch": "2.14.0+cpu",
+  "warm_identity": {"checks": 200, "passing": 200, "min_hq": 0.989990234375, "ranked": true, "cpu": "AVX2"},
+  "warm": {"passing": "200/200", "min_hq": 0.920654296875, "armed_at": 1199, "half_steps": 1},
+  "cold_trajectory_avx2": {"status": "PASS", "identity_mse": 0.0009426682372577488, "armed": false, "half_steps": 0},
+  "cold_ring_avx2": {"status": "PASS", "passing": "10/24", "suffix": 8, "final_modes": 8, "final_hq": 0.998779296875, "armed": false, "half_steps": 0, "max_hold": 185, "matches_107": true},
+  "cold_ring_avx512": {"status": "PASS", "passing": "8/24", "suffix": 8, "final_modes": 8, "final_hq": 0.998046875, "armed": false, "half_steps": 0, "max_hold": 155, "cpu": "AVX512", "matches_107": true},
+  "stay_avx2": {"passing": "97/120", "suffix": 25, "min_modes": 0, "final": [2400, 8, 0.9714], "armed": false, "half_steps": 0, "max_hold": 185, "matches_107_failing_steps": true}
+}

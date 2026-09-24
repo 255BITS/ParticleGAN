@@ -1,0 +1,17 @@
+{"event": "DECLARED", "phase": "cold", "method": "reachstall_gsustain", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX512", "shared_gate_eligible": false, "purity": "sustained-arm G\u00d70.5: after 200 consecutive updates with 8 modes and HQ>=0.9 on the fixed unwrapped draw, halve each later G+prior Adam step. Stall reach width, curvature bounds, rates, and the D step are unchanged. No coverage loss, anchor, assignment, mode freeze, or clip."}
+{"event": "HOLD", "state_step": 0, "hold": 0, "armed": false, "modes": 0, "hq": 0.0, "half_steps": 0}
+{"event": "HOLD", "state_step": 100, "hold": 0, "armed": false, "modes": 0, "hq": 0.0, "half_steps": 0}
+{"event": "HOLD", "state_step": 200, "hold": 0, "armed": false, "modes": 0, "hq": 0.0, "half_steps": 0}
+{"event": "HOLD", "state_step": 300, "hold": 0, "armed": false, "modes": 1, "hq": 0.0825, "half_steps": 0}
+{"event": "HOLD", "state_step": 400, "hold": 0, "armed": false, "modes": 2, "hq": 0.1655, "half_steps": 0}
+{"event": "HOLD", "state_step": 500, "hold": 0, "armed": false, "modes": 4, "hq": 0.4062, "half_steps": 0}
+{"event": "HOLD", "state_step": 600, "hold": 0, "armed": false, "modes": 3, "hq": 0.501, "half_steps": 0}
+{"event": "HOLD", "state_step": 700, "hold": 0, "armed": false, "modes": 6, "hq": 0.7402, "half_steps": 0}
+{"event": "HOLD", "state_step": 800, "hold": 0, "armed": false, "modes": 7, "hq": 0.9158, "half_steps": 0}
+{"event": "HOLD", "state_step": 900, "hold": 90, "armed": false, "modes": 8, "hq": 1.0, "half_steps": 0}
+{"event": "HOLD_RESET", "state_step": 904, "hold": 93, "modes": 7, "hq": 0.9233}
+{"event": "HOLD", "state_step": 1000, "hold": 95, "armed": false, "modes": 8, "hq": 1.0, "half_steps": 0}
+{"event": "HOLD_RESET", "state_step": 1061, "hold": 155, "modes": 7, "hq": 0.9189}
+{"event": "HOLD", "state_step": 1100, "hold": 31, "armed": false, "modes": 8, "hq": 1.0, "half_steps": 0}
+{"event": "COLD", "task": "mode_hold", "passed": true, "status": "PASS", "seconds": 27.0, "tail": [{"step": 1000, "modes": 8, "hq": 0.9921875}, {"step": 1050, "modes": 8, "hq": 0.91845703125}, {"step": 1100, "modes": 8, "hq": 1.0}, {"step": 1150, "modes": 8, "hq": 0.983154296875}, {"step": 1200, "modes": 8, "hq": 0.998046875}], "dynamics": {"method": "pr84_slope_utilisation_reach+sustained_g_half", "scratch_optimizer_policy": "pr84_slope_utilisation_reach", "shared_gate_eligible": false, "curvature_bound": 0.25, "d_curvature_bound": 3.0, "advantage_gate": null, "outer_steps": 1200, "gate_open": 0, "bound_evaluated": 1200, "bound_active": 1200, "d_bound_active": 82, "gradient_evaluations_per_outer_step": 3.0, "moment_updates_per_outer_step": 1, "rng_replay_verified": 2400, "update_order": "alternating: D Adam step, then G+prior Adam step against the new D", "smooth_critic": true, "smooth_width_cap": 0.15, "reach": 0.5, "ramp": "stall", "game_bound": false, "game_steps": 1, "b_cap_slope": 1.0, "widened_updates": 1043, "max_width": 0.5, "sustained_g_scale": 0.5, "hold_updates": 200, "armed": false, "arm_update": null, "post_arm_g_steps": 0, "max_hold": 155, "hold": 130}}
+{"event": "DONE"}

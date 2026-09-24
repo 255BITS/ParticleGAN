@@ -1,0 +1,12 @@
+{"event": "DECLARED", "phase": "warm", "method": "reachstall_gsustain", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX2", "shared_gate_eligible": false, "purity": "sustained-arm G\u00d70.5: after 200 consecutive updates with 8 modes and HQ>=0.9 on the fixed unwrapped draw, halve each later G+prior Adam step. Stall reach width, curvature bounds, rates, and the D step are unchanged. No coverage loss, anchor, assignment, mode freeze, or clip."}
+{"event": "VARIANT_START", "variant": "identity"}
+{"event": "VARIANT_START", "variant": "reachstall_gsustain"}
+{"event": "HOLD", "state_step": 1000, "hold": 1, "armed": false, "modes": 8, "hq": 1.0, "half_steps": 0}
+{"event": "VARIANT_DONE", "variant": "identity"}
+{"event": "HOLD", "state_step": 1100, "hold": 101, "armed": false, "modes": 8, "hq": 1.0, "half_steps": 0}
+{"event": "SUSTAINED_ARM", "state_step": 1199, "hold": 200, "modes": 8, "hq": 1.0, "g_scale": 0.5}
+{"event": "VARIANT_DONE", "variant": "reachstall_gsustain"}
+{"event": "WARM", "variant": "identity", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.989990234375, "failing_steps": []}
+{"event": "WARM", "variant": "reachstall_gsustain", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.920654296875, "failing_steps": []}
+{"event": "WARM_RANK", "ranked": true, "cpu": "AVX2", "identity_passing": 200, "identity_checks": 200}
+{"event": "DONE"}
