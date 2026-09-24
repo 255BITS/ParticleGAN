@@ -26,6 +26,7 @@ from benchmarks.transfer_suite.public_default_verification import load_declarati
 
 
 BASE_CONFIG = ROOT / "configs/toy100/shared_candidate.json"
+F5_BASE_CONFIG = ROOT / "configs/toy100/bandwidth_noiseless_f5_base.json"
 SCRIPT = Path(__file__).resolve()
 GATE = ROOT / "benchmarks/toy_suite.py"
 MODEL = ROOT / "benchmarks/toy100/models.py"
@@ -50,11 +51,40 @@ def _write(path: Path, data: dict) -> None:
     path.write_text(json.dumps(data, indent=2, sort_keys=True, allow_nan=False) + "\n")
 
 
-def _rows() -> list[dict]:
+def _rows(wave: str = "isolated_v1") -> list[dict]:
+    if wave == "global_v2":
+        rows = []
+        for learnable in (False, True):
+            for width in WIDTHS:
+                for input_std in (0., .5):
+                    for warmup in (0., .2):
+                        rows.append(dict(output_std=width, input_std=input_std,
+                                         input_end=1. if input_std == 0 else .1,
+                                         warmup=warmup, learnable=learnable,
+                                         reference=False, global_rng=True,
+                                         base_kind="kappa1176"))
+        for input_std, warmup in ((0., 0.), (.5, .2)):
+            rows.append(dict(output_std=.029, input_std=input_std,
+                             input_end=1. if input_std == 0 else .1,
+                             warmup=warmup, learnable=False,
+                             reference=True, global_rng=True,
+                             base_kind="kappa1176"))
+        for learnable in (False, True):
+            for width in WIDTHS:
+                for warmup in (0., .2):
+                    rows.append(dict(output_std=width, input_std=0.,
+                                     input_end=.1, warmup=warmup,
+                                     learnable=learnable, reference=False,
+                                     global_rng=True, base_kind="noiseless_f5"))
+        assert len(rows) == 62
+        return rows
+    if wave != "isolated_v1":
+        raise ValueError("unknown predeclared bandwidth wave")
     rows = []
     for input_std, end in ((0., 1.), (.25, 1.), (.5, .1), (.5, 1.)):
         rows.append(dict(output_std=0., input_std=input_std, input_end=end,
-                         warmup=0., learnable=False, reference=False))
+                         warmup=0., learnable=False, reference=False,
+                         global_rng=False, base_kind="kappa1176"))
     for learnable in (False, True):
         for width in WIDTHS:
             for input_std in (0., .5):
@@ -62,14 +92,17 @@ def _rows() -> list[dict]:
                     rows.append(dict(output_std=width, input_std=input_std,
                                      input_end=1. if input_std == 0 else .1,
                                      warmup=warmup, learnable=learnable,
-                                     reference=False))
+                                     reference=False, global_rng=False,
+                                     base_kind="kappa1176"))
             # Constant input noise probes removal of the original end=.1 timing.
             rows.append(dict(output_std=width, input_std=.5, input_end=1.,
-                             warmup=0., learnable=learnable, reference=False))
+                             warmup=0., learnable=learnable, reference=False,
+                             global_rng=False, base_kind="kappa1176"))
     for input_std in (0., .5):
         rows.append(dict(output_std=.029, input_std=input_std,
                          input_end=1. if input_std == 0 else .1,
-                         warmup=0., learnable=False, reference=True))
+                         warmup=0., learnable=False, reference=True,
+                         global_rng=False, base_kind="kappa1176"))
     assert len(rows) == 56
     return rows
 
@@ -80,29 +113,32 @@ def _name(row: dict) -> str:
         family = "reference"
     if row["output_std"] == 0:
         family = "zero"
-    return (f"{family}_o{round(row['output_std'] * 1000):03d}"
+    namespace = "global_" if row["global_rng"] else ""
+    core = "f5_" if row["base_kind"] == "noiseless_f5" else ""
+    return (f"{namespace}{core}{family}_o{round(row['output_std'] * 1000):03d}"
             f"_i{round(row['input_std'] * 1000):03d}"
             f"_w{round(row['warmup'] * 1000):03d}"
             f"_e{round(row['input_end'] * 1000):04d}")
 
 
-def prepare(root: Path) -> dict:
+def prepare(root: Path, wave: str = "isolated_v1") -> dict:
     if root.exists():
         raise FileExistsError("bandwidth evidence root must be new")
     root.mkdir(parents=True)
     (root / "configs").mkdir()
     (root / "source").mkdir()
-    base = json.loads(BASE_CONFIG.read_text())
+    bases = {"kappa1176": json.loads(BASE_CONFIG.read_text()),
+             "noiseless_f5": json.loads(F5_BASE_CONFIG.read_text())}
     rows = []
-    for specification in _rows():
+    for specification in _rows(wave):
         name = _name(specification)
-        config = dict(base)
+        config = dict(bases[specification["base_kind"]])
         config.update(name="bandwidth_" + name,
                       output_noise_std=specification["output_std"],
                       input_noise_std=specification["input_std"],
                       input_noise_anneal_end=specification["input_end"],
                       output_noise_warmup=specification["warmup"])
-        if specification["output_std"]:
+        if specification["output_std"] and not specification["global_rng"]:
             config["output_noise_rng"] = "isolated"
         else:
             config.pop("output_noise_rng", None)
@@ -119,10 +155,13 @@ def prepare(root: Path) -> dict:
     shutil.copyfile(SCRIPT, root / "source/bandwidth_wave.py")
     shutil.copyfile(GATE, root / "source/toy_suite.py")
     manifest = dict(
-        status="predeclared", base_commit="f0595c41807731857d215f0134a80bdd12c7e441",
+        status="predeclared", wave=wave,
+        base_commit="f0595c41807731857d215f0134a80bdd12c7e441",
         source_commit=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT,
                                               text=True).strip(),
-        base_config_sha256=_sha(BASE_CONFIG), source_sha256=source,
+        base_config_sha256={"kappa1176": _sha(BASE_CONFIG),
+                            "noiseless_f5": _sha(F5_BASE_CONFIG)},
+        source_sha256=source,
         screen_source_sha256=_sha(SCRIPT), gate_source_sha256=_sha(GATE),
         task_order=list(ORDER), rows=rows,
         fixed_host_seed=0, fixed_native_seed=1234, fixed_budget=True,
@@ -147,11 +186,16 @@ def validate(root: Path) -> dict:
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True,
     ).strip() or manifest["screen_source_sha256"] != _sha(SCRIPT)
             or manifest["gate_source_sha256"] != _sha(GATE)
-            or manifest["base_config_sha256"] != _sha(BASE_CONFIG)):
+            or manifest["base_config_sha256"] != {
+                "kappa1176": _sha(BASE_CONFIG),
+                "noiseless_f5": _sha(F5_BASE_CONFIG),
+            }):
         raise ValueError("source epoch changed")
-    if (manifest["task_order"] != list(ORDER) or len(manifest["rows"]) != 56
+    expected_rows = _rows(manifest["wave"])
+    if (manifest["task_order"] != list(ORDER)
+            or len(manifest["rows"]) != len(expected_rows)
             or {row["id"] for row in manifest["rows"]} != {
-                _name(row) for row in _rows()
+                _name(row) for row in expected_rows
             } or manifest["environment"] != ENV_PIN):
         raise ValueError("bounded screen declaration changed")
     for filename, digest in manifest["source_sha256"].items():
@@ -236,9 +280,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("prepare", "screen"))
     parser.add_argument("--root", required=True, type=Path)
+    parser.add_argument("--wave", choices=("isolated_v1", "global_v2"),
+                        default="isolated_v1")
     parser.add_argument("--workers", type=int, default=6)
     args = parser.parse_args()
-    result = prepare(args.root) if args.action == "prepare" else screen(
+    result = prepare(args.root, args.wave) if args.action == "prepare" else screen(
         args.root, args.workers,
     )
     print(json.dumps(dict(status=result["status"], rows=len(result["rows"]))), flush=True)
