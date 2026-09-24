@@ -134,6 +134,17 @@ generator particles): `v8_ring_cold.gif`, `v6_ring_cold.gif`,
   pull particle 2 out of a doubled mode. v12 tested the matching fix, freeing
   particle latents from the network's sharper curvature, and it made ring
   acquisition worse.
+* v13 isolated the particle-level lever. The network and all non-prior
+  parameters keep v10's joint factor, and each particle's latent row gets its
+  own same-replay curvature ratio. Warm passed 200/200 (min .9236) and cold
+  trajectory passed (.00098, 20-check suffix), but the cold ring got worse:
+  .57 / .48 / .43 / .39 / .51 with 5 modes.
+* Across seven mechanism variants that all keep trajectory passing, ring
+  terminal outcomes scatter widely (v10 3/5 at 8 modes down to 5 modes/.51),
+  with no ordering by mechanism. A single cold ring run cannot distinguish a
+  small real improvement from this spread. A mechanism that clears the ring
+  probably has to finish acquisition well before update 1000, not merely
+  change who wins a close finish.
 * Mode-coverage triggers need the target's mode count, and first-N-update
   boosts are an elapsed-time schedule, so neither was used.
 
