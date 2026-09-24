@@ -1,0 +1,11 @@
+{"event": "DECLARED", "phase": "warm", "method": "reachstall_gbeta0", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX2", "aten": "avx2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "shared_gate_eligible": false, "purity": "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder"}
+{"event": "ARM", "update": 1000, "phase": "warm", "aten": "avx2", "cpu": "AVX2"}
+{"event": "VARIANT_START", "variant": "identity"}
+{"event": "VARIANT_START", "variant": "reachstall_gbeta0"}
+{"event": "G_BETA1_0", "arm_update": 1000, "phase": "warm", "apply_update": 1001, "exp_avg_zeroed": true, "exp_avg_zero_count": 9, "g_beta1_before": 0.0, "aten": "avx2", "cpu": "AVX2"}
+{"event": "VARIANT_DONE", "variant": "identity"}
+{"event": "VARIANT_DONE", "variant": "reachstall_gbeta0"}
+{"event": "WARM", "variant": "identity", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.989990234375, "failing_steps": []}
+{"event": "WARM", "variant": "reachstall_gbeta0", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.920654296875, "failing_steps": []}
+{"event": "WARM_GATE", "rankable": true, "identity_passing": 200, "method_passing": 200, "method_min_hq": 0.920654296875, "aten": "avx2"}
+{"event": "DONE"}
