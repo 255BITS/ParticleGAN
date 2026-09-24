@@ -279,6 +279,17 @@ def candidate(root_text: str, row: dict) -> dict:
     torch.set_num_threads(1)
     root = Path(root_text)
     directory = root / "runs" / row["id"]
+    if directory.exists():
+        # A complete declared row can serve as the full-budget harness smoke.
+        # Reuse requires a fresh raw/source/transform/optimizer regrade.
+        manifest = validate(root)
+        saved = json.loads((directory / "row_result.json").read_text())
+        assert all(saved[key] == value for key, value in row.items())
+        assert saved["status"] in ("READY_EXPAND", "STOPPED")
+        for observation in saved["attempted"]:
+            checked = regrade(directory / observation["task"], row, manifest, digest(root / "manifest.json"))
+            assert checked == observation
+        return saved
     directory.mkdir(parents=True)
     result = dict(**row, status="running", attempted=[], skipped=[])
     with (directory / "worker.log").open("x", buffering=1) as stream, redirect_stdout(stream), redirect_stderr(stream):
