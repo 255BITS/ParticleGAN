@@ -1,0 +1,711 @@
+{
+  "audit_source_sha256": "f8bbbcaf92b3730dcd37d15e06cd1ee7c84fffb493e61d5f13f9ce3918a0a05e",
+  "dense_hold": {
+    "caveat": "intermediate particle counts use one noisy draw, while endpoint counts use clean saved states",
+    "first_last": [
+      1201,
+      2400
+    ],
+    "min_fixed_draw_hq": 1.0,
+    "min_fixed_draw_modes": 8,
+    "one_noisy_draw_particle_count_patterns": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        5
+      ]
+    ],
+    "updates": 1200
+  },
+  "endpoints": {
+    "cold1200": {
+      "result": {
+        "clean_nearest_mode_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          5
+        ],
+        "clean_nearest_mode_mass_tv": 0.2916666666666667,
+        "clean_nearest_mode_min_max_count": [
+          1,
+          5
+        ],
+        "emitted_output_sigma": 0.029,
+        "fixed_4096_draw_hq": 1.0,
+        "fixed_4096_draw_mass_tv": 0.281005859375,
+        "fixed_4096_draw_modes": 8,
+        "fixed_4096_draw_nearest_mode_counts": [
+          341,
+          345,
+          369,
+          356,
+          338,
+          321,
+          363,
+          1663
+        ],
+        "grouped_emitted_law": [
+          {
+            "center_error": 0.03605850621343521,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.028445651467988647,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.02188767579496104,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.024086114191159226,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.025407965905350955,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.030324478690765416,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.01378330694898333,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.026478426236615553,
+            "clean_covariance": [
+              [
+                2.2737367544323207e-14,
+                1.1368683772161604e-14
+              ],
+              [
+                1.1368683772161604e-14,
+                3.1832314562052485e-14
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029000000000392025,
+              0.029000000000548833
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000227374,
+                1.1368683772161604e-14
+              ],
+              [
+                1.1368683772161604e-14,
+                0.0008410000000318323
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306586475,
+              0.17163265306772085
+            ],
+            "max_pairwise_clean_distance": 5.331201499700045e-07,
+            "particle_count": 5,
+            "particle_weight": 0.4166666666666667
+          }
+        ],
+        "one_noisy_draw_per_particle_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          5
+        ],
+        "target_mode_sigma": 0.07
+      },
+      "result_file": {
+        "archive": "reports/toy100/continuous-evidence/round6-sample-anchor-qualified/sample-anchor-prestart-cold-v2/mode_hold.json.gz",
+        "gzip_bytes": 1353195,
+        "gzip_sha256": "4d6d69b96ceb12377dc392817df0bff4fe703341d1e6f09a686c9decbe6ad39f",
+        "raw_bytes": 11223232,
+        "raw_sha256": "bedca03751d8c49ac973b7c68c18d65245dcaf1e52c6e3dad002f9d16e639109"
+      },
+      "state_file": {
+        "archive": "reports/toy100/continuous-evidence/round6-sample-anchor-qualified/sample-anchor-prestart-cold-v2/mode_hold-final-state.pt.gz",
+        "gzip_bytes": 533667,
+        "gzip_sha256": "222a232f9f0759a335aabb87aab0f3f172e23d6ab180c7ce60a82cd990fa6b5c",
+        "raw_bytes": 603506,
+        "raw_sha256": "8a761531fe172147f923fdc2f68609b0e3c45fb8204c549b650f513b9baac163"
+      }
+    },
+    "ownhold2400": {
+      "result": {
+        "clean_nearest_mode_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          5
+        ],
+        "clean_nearest_mode_mass_tv": 0.2916666666666667,
+        "clean_nearest_mode_min_max_count": [
+          1,
+          5
+        ],
+        "emitted_output_sigma": 0.029,
+        "fixed_4096_draw_hq": 1.0,
+        "fixed_4096_draw_mass_tv": 0.281005859375,
+        "fixed_4096_draw_modes": 8,
+        "fixed_4096_draw_nearest_mode_counts": [
+          341,
+          345,
+          369,
+          356,
+          338,
+          321,
+          363,
+          1663
+        ],
+        "grouped_emitted_law": [
+          {
+            "center_error": 0.023687695380270737,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.03574529637992372,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.021565400607825247,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.024938423059807077,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.015484819909357695,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.020487122547069744,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.011223264432883543,
+            "clean_covariance": [
+              [
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029,
+              0.029
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000000000001,
+                0.0
+              ],
+              [
+                0.0,
+                0.0008410000000000001
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265306122447,
+              0.17163265306122447
+            ],
+            "max_pairwise_clean_distance": 0.0,
+            "particle_count": 1,
+            "particle_weight": 0.08333333333333333
+          },
+          {
+            "center_error": 0.049522796813693586,
+            "clean_covariance": [
+              [
+                1.6825651982799172e-13,
+                -2.046363078989088e-14
+              ],
+              [
+                -2.046363078989088e-14,
+                3.1832314562052485e-14
+              ]
+            ],
+            "emitted_coordinate_std": [
+              0.029000000002900976,
+              0.029000000000548833
+            ],
+            "emitted_covariance": [
+              [
+                0.0008410000001682565,
+                -2.046363078989088e-14
+              ],
+              [
+                -2.046363078989088e-14,
+                0.0008410000000318323
+              ]
+            ],
+            "emitted_to_target_coordinate_variance_ratio": [
+              0.17163265309556253,
+              0.17163265306772085
+            ],
+            "max_pairwise_clean_distance": 1.215700987241932e-06,
+            "particle_count": 5,
+            "particle_weight": 0.4166666666666667
+          }
+        ],
+        "one_noisy_draw_per_particle_counts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          5
+        ],
+        "target_mode_sigma": 0.07
+      },
+      "result_file": {
+        "archive": "reports/toy100/continuous-evidence/round6-anchor-own-and-missing/sample-anchor-prestart-own-hold/hold.json.gz",
+        "gzip_bytes": 2145698,
+        "gzip_sha256": "b56d9e1af560f694b7249724df9202df0eff895ff1726ba80117596a5d35b3f1",
+        "raw_bytes": 17306381,
+        "raw_sha256": "6be5e0bea4b010f45e7fd072f12025a62348b6713e0758132ff83b4341f86655"
+      },
+      "state_file": {
+        "archive": "reports/toy100/continuous-evidence/round6-anchor-own-and-missing/sample-anchor-prestart-own-hold/hold-final-state.pt.gz",
+        "gzip_bytes": 533968,
+        "gzip_sha256": "7ad444771f6f72362fd24622943b28e21a16fa7c63a8d476934a06c2b92c3fa1",
+        "raw_bytes": 613887,
+        "raw_sha256": "aae43815fd731c9d7d0b1e4019c5457de9f319e53e201ceeedebfef15274d2ea"
+      }
+    }
+  },
+  "integer_mass_floor": {
+    "achieved_by_count_multiset": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      2
+    ],
+    "equal_particles": 12,
+    "equal_target_modes": 8,
+    "minimum_tv": 0.16666666666666666
+  },
+  "scope": "archived stationary 8-mode / 12-equal-particle toy; post-hoc evaluator centers only",
+  "source_sha256": {
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+  }
+}
