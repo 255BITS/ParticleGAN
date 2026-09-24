@@ -41,34 +41,38 @@ METHOD = "pr84_mode_exit_projection"
 PROJECTION_FLOOR = 0.3
 
 
-def directional_derivative_stats(critic, generator, prior, g_base_params,
-                                 g_new_params, *, original_forward):
+def directional_derivative_stats(critic, generator, prior, g_base_all,
+                                 g_new_all, *, original_forward):
     """Compute mean directional derivative of D along the G step on fake samples.
 
-    Returns (mean_dd, fired) where mean_dd is the mean per-sample dot product
-    of grad_D with the sample displacement, and fired is True when the
-    projection should activate (mean_dd < 0).
+    g_base_all / g_new_all are the full opt_g param list (generator + prior).
+    Only the generator-parameter prefix is used to produce fakes; the prior
+    latents (z) stay fixed.
+
+    Returns (mean_dd, dx_norm, fired).
     """
     clean_gen = getattr(generator, "model", generator)
     z = prior.z.detach()
 
-    saved = [p.detach().clone() for p in clean_gen.parameters()]
     gen_params = list(clean_gen.parameters())
+    n_gen = len(gen_params)
+    saved = [p.detach().clone() for p in gen_params]
 
     with torch.no_grad():
-        for p, v in zip(gen_params, g_base_params):
+        for p, v in zip(gen_params, g_base_all[:n_gen]):
             p.copy_(v)
         x_base = clean_gen(z).detach()
 
-        for p, v in zip(gen_params, g_new_params):
+        for p, v in zip(gen_params, g_new_all[:n_gen]):
             p.copy_(v)
         x_new = clean_gen(z).detach()
+
+        for p, v in zip(gen_params, saved):
+            p.copy_(v)
 
     dx = x_new - x_base
     dx_norm = dx.norm(dim=-1).mean()
     if float(dx_norm) < 1e-10:
-        for p, v in zip(gen_params, saved):
-            p.copy_(v)
         return 0.0, 0.0, False
 
     x_eval = x_new.detach().requires_grad_(True)
@@ -77,18 +81,13 @@ def directional_derivative_stats(critic, generator, prior, g_base_params,
     while not isinstance(critic_module, SimpleMLPDiscriminator) and hasattr(critic_module, "model"):
         critic_module = critic_module.model
     if not isinstance(critic_module, SimpleMLPDiscriminator):
-        for p, v in zip(gen_params, saved):
-            p.copy_(v)
         return 0.0, 0.0, False
 
     d_vals = original_forward(critic_module, x_eval)
     grad_d = torch.autograd.grad(d_vals.sum(), x_eval, create_graph=False)[0]
 
-    dd_per_sample = (grad_d * dx).sum(dim=-1)
+    dd_per_sample = (grad_d.detach() * dx).sum(dim=-1)
     mean_dd = float(dd_per_sample.mean())
-
-    for p, v in zip(gen_params, saved):
-        p.copy_(v)
 
     return mean_dd, float(dx_norm), mean_dd < 0
 
