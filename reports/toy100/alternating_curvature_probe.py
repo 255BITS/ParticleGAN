@@ -21,7 +21,11 @@ def main():
     parser.add_argument('--curvature-bound',type=float,default=1.)
     parser.add_argument('--advantage-gate',type=float)
     parser.add_argument('--bound-d',action='store_true')
-    parser.add_argument('--d-curvature-bound',type=float);args=parser.parse_args()
+    parser.add_argument('--d-curvature-bound',type=float)
+    parser.add_argument('--ratio-loosen',type=float,default=None)
+    parser.add_argument('--ratio-tighten',type=float,default=None)
+    parser.add_argument('--acq-ratio',type=float,default=1.5)
+    parser.add_argument('--rest-ratio',type=float,default=4.);args=parser.parse_args()
     torch.set_num_threads(1)
     config=json.loads((ROOT/'configs/toy100/constraints_simple_regularization.json').read_text())
     config.update(name='alternating_curvature_response',lr_floor=1.,lr_anneal_start=0.)
@@ -38,7 +42,8 @@ def main():
     for task in declaration['task_order']:
         spec=next(job['spec'] for job in plan() if job['spec']['name']==task)
         try:
-            with alternating_curvature(task=task,curvature_bound=args.curvature_bound,**({'bound_d':True,'d_curvature_bound':args.d_curvature_bound} if args.bound_d else {'advantage_gate':args.advantage_gate})) as (recorder,source):
+            extra=dict(bound_d=True,d_curvature_bound=args.d_curvature_bound,ratio_loosen=args.ratio_loosen,ratio_tighten=args.ratio_tighten,acq_ratio=args.acq_ratio,rest_ratio=args.rest_ratio) if args.bound_d else dict(advantage_gate=args.advantage_gate)
+            with alternating_curvature(task=task,curvature_bound=args.curvature_bound,**extra) as (recorder,source):
                 result,context=run_legacy(spec,recipe,noise,model_policy=declared_model_policy(config))
             verdict=test_verdict(spec,result)
             data=dict(result=result,applied=context['applied'],noise=context['noise_receipt'],

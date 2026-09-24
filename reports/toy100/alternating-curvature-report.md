@@ -144,3 +144,16 @@ Evidence, source copies and hashes:
 Tests: `tests/test_alternating_curvature_scratch.py` (exact plain-Adam
 parity, analytic D-then-G bound), `tests/test_cross_curvature_scratch.py`;
 the full handoff suite with these ran 168 passed.
+
+
+## Rho-ratio G cap (measured, ring still open)
+
+Controller on the v10 adapter (alternating, D bound 3, nominal G cap .25). The G cap interpolates from `--ratio-loosen` when `rho_G/rho_D <= --acq-ratio` to `--ratio-tighten` when `rho_G/rho_D >= --rest-ratio`. G never goes to .5. Same seed 0. No 2400 run, because the ring gate failed.
+
+| Setting | Warm | Cold trajectory | Cold ring terminal |
+| --- | --- | --- | --- |
+| loosen .35, tighten .15, knots 1.5/4 | 200/200, min HQ .9272 | PASS MSE .000957, suffix 19 | FAIL 7 modes. HQ .910/1/1/.998/1 from 1000-1200. The rest cap held quality; one mode never arrived |
+| loosen .25, tighten .12, knots 2.5/4.5 | 200/200, min HQ .9668 | PASS MSE .000984, suffix 18 | FAIL 5 modes, final HQ .468. Tightening through the terminal window stalled coverage and then dropped it |
+| loosen .30, tighten .18, knots 1.2/5 | not run | FAIL MSE .253 | not run |
+
+v10 (fixed G cap .25, D bound 3) remains the ring near-miss: 8 modes, and the only terminal miss is update 1050 at HQ .843. Moving the G cap with `rho_G/rho_D` either spends that eighth mode or falls into the trajectory basin. The ratio separates acquisition from rest in bin medians, but using it as a step-size controller did not clear the five terminal checks.

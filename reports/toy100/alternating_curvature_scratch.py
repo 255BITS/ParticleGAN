@@ -188,10 +188,18 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
     G still responds to the D that actually materializes.
     """
 
-    def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False):
+    def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False,
+                 ratio_loosen=None,ratio_tighten=None,acq_ratio=1.5,rest_ratio=4.):
         super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
         self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
         if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
+        if ratio_loosen is not None and (not math.isfinite(ratio_loosen) or ratio_loosen<=0):raise ValueError('invalid ratio loosen')
+        if ratio_tighten is not None and (not math.isfinite(ratio_tighten) or ratio_tighten<=0):raise ValueError('invalid ratio tighten')
+        if not (math.isfinite(acq_ratio) and math.isfinite(rest_ratio) and 0<acq_ratio<rest_ratio):raise ValueError('invalid rho ratio knots')
+        self.ratio_loosen=ratio_loosen
+        self.ratio_tighten=self.curvature_bound if ratio_tighten is None else ratio_tighten
+        self.acq_ratio=acq_ratio
+        self.rest_ratio=rest_ratio
 
     def phases(self,step,opt_d,opt_g,local):
         if not self.enabled or step<self.start_step:
@@ -262,10 +270,28 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
             self.metric_g=_metric(opt_g);self.g1=[p.detach().clone() for p in self._params(opt_g)]
         else:
             rho=_rho(self.g_base,self.g1,self.gg0,grads(opt_g),self.metric_g)
-            factor=min(1.,self.curvature_bound/rho) if rho>0 else 1.
+            cap,rho_ratio=self._g_cap(rho)
+            factor=min(1.,cap/rho) if rho>0 else 1.
             for p,b,n in zip(self._params(opt_g),self.g_base,self.g1):p.copy_(torch.lerp(b,n,factor) if factor<1 else n)
-            self.row['g']=dict(rho=rho,factor=factor)
+            self.row['g']=dict(rho=rho,factor=factor,cap=cap,rho_ratio=rho_ratio)
+            self.row['rho_ratio']=rho_ratio
+            self.row['g_bound']=cap
         return None
+
+    def _g_cap(self,rho_g):
+        """Loosen G while rho_G/rho_D is in the acquisition band; tighten at rest.
+
+        v10 medians: ring acquisition about 1.1-1.9, ring rest about 5.8.
+        The loose cap stays below the .5 value that drops trajectory into the .25 basin.
+        """
+        if self.ratio_loosen is None:return self.curvature_bound,None
+        rho_d=self.row['d']['rho']
+        ratio=rho_g/rho_d if rho_d>1e-8 else self.rest_ratio
+        if not math.isfinite(ratio):raise FloatingPointError('nonfinite curvature ratio')
+        if ratio<=self.acq_ratio:return self.ratio_loosen,ratio
+        if ratio>=self.rest_ratio:return self.ratio_tighten,ratio
+        weight=(ratio-self.acq_ratio)/(self.rest_ratio-self.acq_ratio)
+        return self.ratio_loosen+(self.ratio_tighten-self.ratio_loosen)*weight,ratio
 
 
 @contextmanager
