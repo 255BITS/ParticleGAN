@@ -1,0 +1,16 @@
+{
+  "status": "STOP",
+  "reason": "hold regressed",
+  "step": 2210,
+  "modes": 8,
+  "hq": 0.882080078125,
+  "clips": 204,
+  "rates": {
+    "policy": "warm_constant_rate_v1",
+    "g": 0.00425,
+    "prior": 0.0085,
+    "d": 0.00425,
+    "shared_gate_eligible": false
+  },
+  "clump_rho_max": 0.25
+}
