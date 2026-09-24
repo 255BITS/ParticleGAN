@@ -1,0 +1,196 @@
+{
+  "declaration": {
+    "scope": "one_dimensional_population_analogue",
+    "quadrature_orders": [
+      64,
+      96
+    ],
+    "mu_difference": 1e-05,
+    "sigma_p": 0.07,
+    "sigma_q": 0.029,
+    "kappa": 1.0,
+    "cap_coefficient": 1.0,
+    "critic": "a*x+b*x*x",
+    "python": "3.12.13",
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "source_sha256": "febf0a83ca31abe06ce5b4a501cc62c8ef3da646c5e2f54c808636dadbece828"
+  },
+  "derivative_check": {
+    "d_gradient_max_error": 1.0805263368079965e-11,
+    "d_hessian_max_error": 1.116981160342867e-11,
+    "g_own_curvature_error": 4.49709602889925e-10,
+    "g_cross_max_error": 4.481295976660471e-13,
+    "cap_exact_vs_independent_integral_max_error": 2.2521646937612918e-15
+  },
+  "primary": {
+    "order": 64,
+    "critic": [
+      -5.428813402129715e-17,
+      3.3018661029774616
+    ],
+    "d_loss": 0.6872902020075572,
+    "d_logistic_loss": 0.6865358306195734,
+    "d_cap_penalty": 0.0007543713879838219,
+    "d_cap_active_real": 0.03051973794072644,
+    "d_cap_active_fake": 1.7728074213151497e-07,
+    "d_gradient": [
+      1.734723475976807e-18,
+      -3.289449141939625e-20
+    ],
+    "d_hessian": [
+      [
+        0.0319540081318006,
+        5.017978307380875e-19
+      ],
+      [
+        5.017978307380875e-19,
+        0.0038738239835643677
+      ]
+    ],
+    "d_hessian_eigenvalues": [
+      0.0038738239835643677,
+      0.0319540081318006
+    ],
+    "g_loss": 0.699938105131559,
+    "g_gradient_mu": 2.76136353035669e-17,
+    "g_own_fixed_d_curvature": -3.314817018212732,
+    "g_cross_critic": [
+      -0.5019611508812534,
+      7.706053512590129e-21
+    ],
+    "d_gradient_cross_mu": [
+      0.4980400199165653,
+      2.1684250244863224e-14
+    ],
+    "d_response_mu_finite_difference": [
+      -15.586154408291982,
+      -2.2204460492503128e-11
+    ],
+    "d_response_mu_implicit": [
+      -15.586151754806508,
+      -5.5956154021686544e-12
+    ],
+    "g_best_response_stiffness_finite_difference": 4.508827159852247,
+    "g_best_response_stiffness_implicit": 4.508825654439809,
+    "joint_gradient_jacobian": [
+      [
+        0.0319540081318006,
+        5.017978307380875e-19,
+        0.4980400199165653
+      ],
+      [
+        5.017978307380875e-19,
+        0.0038738239835643677,
+        2.1684250244863224e-14
+      ],
+      [
+        -0.5019611508812534,
+        7.706053512590129e-21,
+        -3.314817018212732
+      ]
+    ],
+    "simultaneous_identity_gradient_flow_eigenvalues": [
+      [
+        3.2383730613012363,
+        0.0
+      ],
+      [
+        0.04448994877969649,
+        0.0
+      ],
+      [
+        -0.0038738239835643677,
+        0.0
+      ]
+    ],
+    "critic_speed_to_g_speed_trace_threshold": 103.73712757849083,
+    "a_mu_jacobian_determinant": 0.1440750516268408,
+    "mu_difference": 1e-05
+  },
+  "quadrature_check": {
+    "order": 96,
+    "critic": [
+      0.0,
+      3.3018661029774616
+    ],
+    "d_loss": 0.6872902020075573,
+    "d_logistic_loss": 0.6865358306195735,
+    "d_cap_penalty": 0.0007543713879838237,
+    "d_cap_active_real": 0.03051973794072644,
+    "d_cap_active_fake": 1.7728074213151497e-07,
+    "d_gradient": [
+      0.0,
+      8.344713824720701e-19
+    ],
+    "d_hessian": [
+      [
+        0.0319540081318006,
+        0.0
+      ],
+      [
+        0.0,
+        0.0038738239835643677
+      ]
+    ],
+    "d_hessian_eigenvalues": [
+      0.0038738239835643677,
+      0.0319540081318006
+    ],
+    "g_loss": 0.6999381051315591,
+    "g_gradient_mu": -1.0842559359941477e-18,
+    "g_own_fixed_d_curvature": -3.3148170182127323,
+    "g_cross_critic": [
+      -0.5019611508812534,
+      1.1858543979621518e-19
+    ],
+    "d_gradient_cross_mu": [
+      0.49804001991647856,
+      -0.0
+    ],
+    "d_response_mu_finite_difference": [
+      -15.586154408283843,
+      2.2204460492503128e-11
+    ],
+    "d_response_mu_implicit": [
+      -15.586151754803794,
+      0.0
+    ],
+    "g_best_response_stiffness_finite_difference": 4.508827159847561,
+    "g_best_response_stiffness_implicit": 4.508825654438446,
+    "joint_gradient_jacobian": [
+      [
+        0.0319540081318006,
+        0.0,
+        0.49804001991647856
+      ],
+      [
+        0.0,
+        0.0038738239835643677,
+        -0.0
+      ],
+      [
+        -0.5019611508812534,
+        1.1858543979621518e-19,
+        -3.3148170182127323
+      ]
+    ],
+    "simultaneous_identity_gradient_flow_eigenvalues": [
+      [
+        0.04448994877968282,
+        0.0
+      ],
+      [
+        3.2383730613012487,
+        0.0
+      ],
+      [
+        -0.0038738239835643677,
+        0.0
+      ]
+    ],
+    "critic_speed_to_g_speed_trace_threshold": 103.73712757849084,
+    "a_mu_jacobian_determinant": 0.1440750516267973,
+    "mu_difference": 1e-05
+  }
+}
