@@ -2,7 +2,7 @@
 
 This has no model, critic, optimizer, or training updates. It reads the host's
 one noisy support draw from the frozen PR84 audit and applies Lloyd centroid
-updates against one independently drawn 256-example real minibatch.
+updates against one independently drawn native 128-example real minibatch.
 """
 import argparse
 import gzip
@@ -58,10 +58,10 @@ def main():
     cold_observation = cold["result"]["observations"][-1]
     warm_observation = warm["observations"][-1]
     means = ring_means()
-    real = sample_ring(means, 256, .07, torch.Generator().manual_seed(0))
+    real = sample_ring(means, 128, .07, torch.Generator().manual_seed(0))
     output = {
         "scope": "fixed cloud from one noisy support draw per particle, not model training",
-        "real_batch": 256,
+        "real_batch": 128,
         "real_batch_sha256": hashlib.sha256(real.numpy().tobytes()).hexdigest(),
         "source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "cold_input_sha256": hashlib.sha256(args.cold.read_bytes()).hexdigest(),

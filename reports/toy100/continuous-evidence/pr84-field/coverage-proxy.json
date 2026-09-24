@@ -1,8 +1,8 @@
 {
   "scope": "fixed cloud from one noisy support draw per particle, not model training",
-  "real_batch": 256,
-  "real_batch_sha256": "b63dc64994e3a54365f1b315fa90f96a749206822a8a7ec6520343cea0ff87fd",
-  "source_sha256": "2fb7f6aedf15c56346073c9fc5465d33497869a7b5a0aad42bfa7ecbbdaec6d9",
+  "real_batch": 128,
+  "real_batch_sha256": "0c29d14b43650aaed5a82052be002cbd62d28634eaf5f4571f708d3543bc5702",
+  "source_sha256": "0110df912b14cc4762eead8b5a25d6bf0376373bf230a4516c189b5886805df1",
   "cold_input_sha256": "6dcdba638396a265b72cd678d57076f04c47ac9bfb36025267503f22fba3b4c2",
   "warm_input_sha256": "554da394b5cef037cce9bebaeab35978a41eeb2ed3ada20d7e0a0f0793b4905f",
   "cold_missing_mode_for_reporting_only": [
@@ -13,176 +13,176 @@
       "step": 0,
       "modes": 7,
       "hq": 1.0,
-      "coverage_loss": 0.5254935026168823,
+      "coverage_loss": 0.4583497941493988,
       "empty_cells": 0,
       "assignment_counts": [
-        25,
-        33,
-        27,
-        12,
-        29,
-        3,
-        16,
-        28,
-        8,
-        31,
-        26,
-        18
+        13,
+        14,
+        5,
+        6,
+        17,
+        6,
+        4,
+        18,
+        4,
+        13,
+        18,
+        10
       ],
       "centroid_force_toward_missing": [
-        0.0470154732465744,
-        1.435897707939148,
-        -0.05457621440291405,
-        -0.015734625980257988,
-        0.0737009197473526,
-        0.02917303331196308,
-        -0.016153452917933464,
-        0.04523297771811485,
-        0.0124320974573493,
-        -0.0027184600476175547,
-        0.5324891805648804,
-        -0.056689418852329254
+        0.01526075042784214,
+        1.7079987525939941,
+        -0.018560636788606644,
+        -0.029272928833961487,
+        0.08714059740304947,
+        -0.007145786192268133,
+        0.009135870262980461,
+        0.031110582873225212,
+        0.04022692143917084,
+        -0.020808804780244827,
+        0.14740367233753204,
+        -0.0074404822662472725
       ]
     },
     {
       "step": 1,
       "modes": 7,
-      "hq": 0.8333333134651184,
-      "coverage_loss": 0.07229924947023392,
-      "empty_cells": 1
+      "hq": 0.9166666865348816,
+      "coverage_loss": 0.029155291616916656,
+      "empty_cells": 0
     },
     {
       "step": 2,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.009233996272087097,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00686202198266983,
+      "empty_cells": 0
     },
     {
       "step": 3,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.0091470405459404,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.006752200424671173,
+      "empty_cells": 0
     },
     {
       "step": 4,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.009106665849685669,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 5,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.009093962609767914,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 6,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 7,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 8,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 9,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 10,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 11,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 12,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 13,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 14,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 15,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 16,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 17,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 18,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 19,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     },
     {
       "step": 20,
       "modes": 8,
-      "hq": 0.9166666865348816,
-      "coverage_loss": 0.00908920168876648,
-      "empty_cells": 1
+      "hq": 1.0,
+      "coverage_loss": 0.00657007098197937,
+      "empty_cells": 0
     }
   ],
   "warm": [
@@ -190,161 +190,161 @@
       "step": 0,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.012789566069841385,
+      "coverage_loss": 0.009311549365520477,
       "empty_cells": 0,
       "assignment_counts": [
-        41,
-        11,
-        15,
-        43,
-        23,
-        29,
-        13,
         17,
-        16,
         5,
-        14,
-        29
+        6,
+        19,
+        15,
+        13,
+        6,
+        16,
+        6,
+        3,
+        5,
+        17
       ]
     },
     {
       "step": 1,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.00894961878657341,
+      "coverage_loss": 0.00626460462808609,
       "empty_cells": 0
     },
     {
       "step": 2,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.00879368931055069,
+      "coverage_loss": 0.006068319082260132,
       "empty_cells": 0
     },
     {
       "step": 3,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 4,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 5,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 6,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 7,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 8,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 9,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 10,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 11,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 12,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 13,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 14,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 15,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 16,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 17,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 18,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 19,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     },
     {
       "step": 20,
       "modes": 8,
       "hq": 1.0,
-      "coverage_loss": 0.008778281509876251,
+      "coverage_loss": 0.006027594208717346,
       "empty_cells": 0
     }
   ]
