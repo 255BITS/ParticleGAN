@@ -172,3 +172,16 @@ No 2400 hold. v10 remains the ring near-miss.
 ## Centered critic (G fixed at v10; fails)
 
 The critic scores 2D inputs after subtracting a detached batch mean. Generator curvature stays at v10 (G cap .25, D bound 3). No mode-count controller and no G-cap schedule. Cold trajectory is unchanged because its critic input is not 2D: MSE .000943, suffix 18. The warm fork fails 0/200 (final 0 modes, HQ 0). Cold ring never reaches 8 modes (`first_eight` null, `hold_before_1000` 0); every checkpoint from 200 through 1200 is 0 modes / HQ 0. Removing absolute position from the critic removes the signal that places the cloud on the ring.
+
+## Spatially smoothed critic for G (v10 caps)
+
+After each D step, G's 2D critic scores are the mean of a stencil at ±width along each input axis. Width is `min(0.15, 0.5 / sharpness)`, where sharpness is the RMS input-gradient of the critic on the clean particles. On this run the cap bound every step (width 0.15). D's own loss stays sharp. G cap .25 and D bound 3 are unchanged. Trajectory inputs are not 2D, so that host matches v10.
+
+| Gate | Result |
+| --- | --- |
+| Warm | FAIL 196/200. Misses updates 1129–1132 only. Minimum HQ .8662, 8 modes throughout, final HQ .9993 |
+| Cold trajectory | PASS MSE .000943, suffix 18 |
+| Cold ring | PASS 8 modes. Terminal HQ .995 / .988 / .988 / .996 / .999. Suffix 5 |
+| First update with 8 modes | 600. Consecutive hold before update 1000 is only 6 steps; checkpoints are back at 8 modes from 800 on |
+
+The ring terminal window clears. The warm fork does not, so this is not a 2400 candidate. No 22/22 claim.
