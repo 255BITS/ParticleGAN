@@ -1,3 +1,5 @@
+**Current status: [round8](continuous-round8.md).** Fixed-support memory passes saved44/warm200/hold1200 but fails same-target later acquisition after incomplete bootstrap. Later gates are withheld; research continues.
+
 # PR #60: remove LR decay without losing acquisition or stability
 
 **Unresolved.** The passing shared 22-task recipe still uses LR decay. No new
