@@ -33,6 +33,8 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "reachstall_gsustain": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
+                            dict(ramp="stall", sustained_g_scale=.5)),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
@@ -63,7 +65,12 @@ def declare(output, phase, method):
     import torch
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
                cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
-               purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
+               purity=("sustained-arm G×0.5: after 200 consecutive updates with 8 modes and "
+                       "HQ>=0.9 on the fixed unwrapped draw, halve each later G+prior Adam "
+                       "step. Stall reach width, curvature bounds, rates, and the D step are "
+                       "unchanged. No coverage loss, anchor, assignment, mode freeze, or clip."
+                       if method == "reachstall_gsustain" else
+                       "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder"),
                source=source)
     (output / "declaration.json").write_text(json.dumps(row, indent=2) + "\n")
     emit(event="DECLARED", **{k: v for k, v in row.items() if k != "source"})
@@ -107,6 +114,15 @@ def warm(output, method):
         emit(event="WARM", variant=name, status=row["status"],
              **{k: loc.get(k) for k in ("checks", "passing_checks", "min_modes", "min_hq",
                                         "failing_steps") if k in loc})
+    import torch
+    identity = compact.get("identity", {}).get("local") or {}
+    ranked = identity.get("checks") == 200 and identity.get("passing_checks") == 200
+    emit(event="WARM_RANK", ranked=ranked, cpu=torch.backends.cpu.get_cpu_capability(),
+         identity_passing=identity.get("passing_checks"), identity_checks=identity.get("checks"))
+    if not ranked:
+        emit(event="WARM_UNRANKED",
+             reason="identity/control warm is not 200/200 on this machine; refuse to rank")
+        sys.exit(2)
 
 
 def cold(output, method, tasks):
