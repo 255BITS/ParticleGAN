@@ -50,7 +50,8 @@ def main():
     parser.add_argument('--latent-step',type=float,default=.02)
     parser.add_argument('--center-critic',action='store_true')
     parser.add_argument('--stray-step',type=float,default=0.)
-    parser.add_argument('--smooth-critic',action='store_true');args=parser.parse_args()
+    parser.add_argument('--smooth-critic',action='store_true')
+    parser.add_argument('--smooth-cap',type=float,default=.15);args=parser.parse_args()
     config=json.loads((ROOT/'configs/toy100/constraints_simple_regularization.json').read_text())
     declaration=dict(methods=['identity','constant','alternating_curvature'],prefix_steps=1000,total_steps=1200,
         seed=0,shared_gate_eligible=False,scratch_optimizer_policy=METHOD,
@@ -61,7 +62,7 @@ def main():
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.with_suffix('.declaration.json').write_text(json.dumps(declaration,indent=2)+'\n')
     result=run_warm_variants(config,variants(),output_dir=args.output,
-        prefix_context=lambda:alternating_curvature(start_step=1000,curvature_bound=args.curvature_bound,center_critic=args.center_critic,smooth_critic=args.smooth_critic,**dict(bound_d=True,d_curvature_bound=args.d_curvature_bound,ratio_loosen=args.ratio_loosen,ratio_tighten=args.ratio_tighten,acq_ratio=args.acq_ratio,rest_ratio=args.rest_ratio,mode_loosen=args.mode_loosen,boost_steps=args.boost_steps,boost_cap=args.boost_cap,latent_nudge=args.latent_nudge,latent_step=args.latent_step,stray_step=args.stray_step) if args.bound_d else dict(advantage_gate=args.advantage_gate)))
+        prefix_context=lambda:alternating_curvature(start_step=1000,curvature_bound=args.curvature_bound,center_critic=args.center_critic,smooth_critic=args.smooth_critic,smooth_cap=args.smooth_cap,**dict(bound_d=True,d_curvature_bound=args.d_curvature_bound,ratio_loosen=args.ratio_loosen,ratio_tighten=args.ratio_tighten,acq_ratio=args.acq_ratio,rest_ratio=args.rest_ratio,mode_loosen=args.mode_loosen,boost_steps=args.boost_steps,boost_cap=args.boost_cap,latent_nudge=args.latent_nudge,latent_step=args.latent_step,stray_step=args.stray_step) if args.bound_d else dict(advantage_gate=args.advantage_gate)))
     print(json.dumps(result,indent=2),flush=True)
 
 

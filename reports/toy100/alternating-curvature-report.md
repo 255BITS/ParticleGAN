@@ -185,3 +185,16 @@ After each D step, G's 2D critic scores are the mean of a stencil at ±width alo
 | First update with 8 modes | 600. Consecutive hold before update 1000 is only 6 steps; checkpoints are back at 8 modes from 800 on |
 
 The ring terminal window clears. The warm fork does not, so this is not a 2400 candidate. No 22/22 claim.
+
+## Post-bound mean slope scale (re-trades; stopped)
+
+The stencil, width `min(0.15, 0.5/sharpness)`, G cap .25, and D bound 3 stay as in the ring pass above. After that bound, the whole G step is multiplied by the mean smoothed-critic slope `||dD/dx|| / (0.5/width)`, clipped to [0, 1]. The gradient is not reweighted before the bound. Same rule on warm and cold. No mode centers.
+
+| Gate | Result |
+| --- | --- |
+| Warm | PASS 200/200. Minimum HQ .9990, 8 modes, final HQ 1 |
+| Cold trajectory | PASS MSE .000943, suffix 18 (same as the unsmoothed-path trajectory) |
+| Cold ring | FAIL 1 mode, final HQ .479. Terminal HQ .466/.241/.474/.435/.479. `first_eight` null |
+| Slope scale | mean .118, max .251, so the clip never left a full bounded step |
+
+The matched warm state is flat, so the scale damps the drift at 1129–1132. The same damping runs during acquisition and the eighth mode never arrives. This knob recovers warm by killing the ring. It is stopped. No 2400 hold. The unsmoothed post-step scale is not a candidate. The smoothed critic with the frozen width remains the best ring evidence (full cold-ring pass, 8 modes at update 600, warm 196/200).

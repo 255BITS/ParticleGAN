@@ -245,6 +245,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         rng_before=self._rng(streams);self.advantage=None
         self._local=local
         self.row=dict(outer_step=self.outer_steps+1,occupied_modes=occupied,modes_latched=self._modes_latched)
+        self._x_before=self._clean_points(local)
         rng_after=None
         for phase in range(3):
             if phase:
@@ -261,6 +262,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
             else:self.rng_replay_verified+=1
         self.row['critic_advantage']=self.advantage;self.row['gate_open']=False
         self.row['rho'],self.row['factor']=self.row['g']['rho'],self.row['g']['factor']
+        self._scale_bounded_g_step(local)
         self._fill_angular_hole(local)
         self.records.append(self.row);self._record_trace(local)
         self.phase=None;self.outer_steps+=1
@@ -472,7 +474,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
             acc=acc+((module(points+shift)-module(points-shift))/(2*eps)).square()
         sharp=float(acc.mean().sqrt())
         if not math.isfinite(sharp) or sharp<=1e-6:return
-        width=min(.15,.5/sharp)
+        width=min(getattr(self,'smooth_cap',.15),.5/sharp)
         self._smooth_width=width
         self._smooth_on=True
         self.row['critic_sharpness']=sharp
@@ -483,11 +485,61 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         value['early_acquisition']=self.early_acquisition()
         value['center_critic']=getattr(self,'center_critic',False)
         value['smooth_critic']=getattr(self,'smooth_critic',False)
+        scales=[r.get('slope_scale') for r in self.records if r.get('slope_scale') is not None]
+        value['slope_scale']=dict(min=min(scales),mean=sum(scales)/len(scales),max=max(scales)) if scales else None
         return value
+
+    def _clean_points(self,local):
+        if not getattr(self,'smooth_critic',False) or local.get('slow') is not None:return None
+        generator,prior=local.get('generator'),local.get('prior')
+        if generator is None or prior is None or not hasattr(prior,'z'):return None
+        clean=getattr(generator,'model',generator)
+        points=clean(prior.z).detach()
+        if points.ndim!=2 or points.shape[-1]!=2:return None
+        return points
+
+    @torch.no_grad()
+    def _scale_bounded_g_step(self,local):
+        """After the curvature bound, shrink the whole G step by the mean local slope.
+
+        Slope is ||dD/dx|| on the smoothed critic, divided by the stencil slope 0.5/width,
+        then clipped to [0, 1]. The gradient is not reweighted before the bound.
+        Trajectory inputs are not 2D, so this does not run there.
+        """
+        before=getattr(self,'_x_before',None)
+        width=float(getattr(self,'_smooth_width',0.) or 0.)
+        if before is None or width<=0 or not self._smooth_on or self.optimizers is None:return
+        from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
+        critic=local.get('critic')
+        if critic is None:return
+        module=critic
+        while not isinstance(module,SimpleMLPDiscriminator) and hasattr(module,'model'):
+            module=module.model
+        if not isinstance(module,SimpleMLPDiscriminator):return
+        def score(points):
+            vals=[module(points)]
+            for dim in range(points.shape[-1]):
+                shift=torch.zeros_like(points);shift[:,dim]=width
+                vals.append(module(points+shift));vals.append(module(points-shift))
+            return torch.stack(vals,0).mean(0).reshape(-1)
+        eps=1e-3
+        grad=[]
+        for dim in range(before.shape[-1]):
+            shift=torch.zeros_like(before);shift[:,dim]=eps
+            grad.append((score(before+shift)-score(before-shift))/(2*eps))
+        slope=float(torch.stack(grad,1).norm(dim=1).mean())/(0.5/width)
+        if not math.isfinite(slope):return
+        scale=min(1.,max(0.,slope))
+        self.row['slope_scale']=scale
+        self.row['mean_local_slope']=slope
+        if scale>=1-1e-8:return
+        opt_g=self.optimizers[1]
+        for p,base in zip(self._params(opt_g),self.g_base):
+            p.copy_(torch.lerp(base,p,scale))
 
 
 @contextmanager
-def alternating_curvature(task='mode_hold',bound_d=False,center_critic=False,smooth_critic=False,**options):
+def alternating_curvature(task='mode_hold',bound_d=False,center_critic=False,smooth_critic=False,smooth_cap=.15,**options):
     from benchmarks.locked_shared import mode_hold,trajectory
     from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
     module={'mode_hold':mode_hold,'trajectory':trajectory}[task]
@@ -498,6 +550,7 @@ def alternating_curvature(task='mode_hold',bound_d=False,center_critic=False,smo
     source=ast.unparse(tree)+'\n';recorder=(BothBoundRecorder if bound_d else AlternatingCurvatureRecorder)(**options)
     recorder.center_critic=center_critic
     recorder.smooth_critic=smooth_critic
+    recorder.smooth_cap=smooth_cap
     recorder._smooth_on=False
     recorder._smooth_width=0.
     recorder.host_source=dict(task=task,original_function_sha256=original_sha,generated_function_sha256=sha(source.encode()))
