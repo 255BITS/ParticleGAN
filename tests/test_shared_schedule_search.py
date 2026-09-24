@@ -35,7 +35,7 @@ def test_mixed_ae_and_direct_prior_groups_receive_same_global_schedule():
                         lr_anneal_start=.3, lr_floor=.01).replace(name='schedule_check')
     applied = []
     with search.configured_schedule(recipe) as receipt, optimizer_defaults(recipe, applied):
-        prior = MoGParticlePrior(8, 2)
+        prior = MoGParticlePrior(8, 2, sigma=.025)
         g, d = nn.Linear(2, 2), nn.Linear(2, 1)
         opt_g = torch.optim.Adam([{'params': list(g.parameters()) + list(prior.parameters()),
                                    'lr': .123, 'betas': (.5, .8)}], lr=.4, betas=(.6, .7))

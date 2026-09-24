@@ -19,7 +19,7 @@ def audit(run, device):
     cfg = json.loads((run / "config.json").read_text())
     metrics = json.loads((run / "metrics.json").read_text())
     checkpoint = torch.load(run / "checkpoint.pt", map_location=device, weights_only=True)
-    prior = MoGParticlePrior(num_particles=400, z_dim=2, device=device).to(device)
+    prior = MoGParticlePrior(sigma=0, num_particles=400, z_dim=2, device=device).to(device)
     encoder = RoutingEncoder(cfg["width"]).to(device)
     prior.load_state_dict(checkpoint["prior"])
     encoder.load_state_dict(checkpoint["encoder"])

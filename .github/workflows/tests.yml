@@ -62,7 +62,7 @@ jobs:
 
           assert particlegan.__file__.startswith('/tmp/particlegan-installed/')
           assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4)
-          assert MoGParticlePrior().sample(2)[0].shape == (2, 4)
+          assert MoGParticlePrior(sigma=0.1).sample(2)[0].shape == (2, 4)
           assert DDGAN().steps == 4
           default = get_recipe()
           assert default.lr == 0.00425

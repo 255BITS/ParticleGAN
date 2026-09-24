@@ -292,15 +292,17 @@ or sampling without consuming the global RNG; use a generator for the same devic
 ```python
 MoGParticlePrior(num_particles=400, z_dim=4, init_std=1.0,
                  device=None, dtype=None, learnable=True, generator=None,
-                 *, sigma_rel=1/40, standardize=True)
+                 *, sigma, standardize=True)
 ```
 
 An equal-weight mixture: choose component `i` uniformly, then draw
 `z = means()[i] + sigma * eps`, with standard-normal epsilon. The raw component
-centers are the parameter `prior.z`. Sigma is a **shared fixed buffer**, calibrated
-once as `sigma_rel * d0`, where `d0` is the median nearest-neighbor distance of
-the initial read-space means. At least two components and positive initial
-median spacing are required. `learnable=False` freezes the table as a buffer.
+centers are the parameter `prior.z`. Sigma is a **required keyword argument**:
+a finite, nonnegative real scalar stored as one shared isotropic buffer, fixed
+during training. Construction draws the centers once and performs no calibration
+or nearest-neighbor search. `learnable=False` freezes the table as a buffer.
+Standardized reads require at least two components; raw reads allow one.
+Coincident centers and `init_std=0` are valid with an explicit sigma.
 
 With `standardize=True`, each read centers and divides the table by its
 per-dimension sample standard deviation plus `1e-6`. This is differentiable;
@@ -313,8 +315,9 @@ table, as in `ParticlePrior`. Learning and EMA updates do not recalibrate sigma.
 | `prior(indices, generator=None, *, eps=None)` | Noisy draws for supplied indices; use this forward path through DDP |
 | `means()` | Differentiable read-space centers, with no noise |
 | `z` | Raw learned table; the input to particle regularization |
-| `sigma`, `d0` | Saved scalar buffers, moving with `.to(...)` |
-| `calibrate()` | Explicitly reset d0 and sigma from current means; not a training-step operation |
+| `sigma` | Fixed scalar buffer, moving with `.to(...)` |
+| `d0`, `sigma_rel` | Legacy calibration metadata; zero for explicitly supplied sigma |
+| `set_sigma(sigma)` | Explicitly replace the fixed scale and update zero-noise RNG handling |
 
 `fixed_first_n=True` fixes component indices, **not epsilon**. For a stable scatter,
 save a fixed epsilon tensor too:
@@ -322,7 +325,7 @@ save a fixed epsilon tensor too:
 ```python
 from particlegan import MoGParticlePrior
 
-prior = MoGParticlePrior()
+prior = MoGParticlePrior(num_particles=65536, z_dim=128, sigma=0.212616428732872)
 eps = torch.randn(64, prior.z_dim, device=prior.z.device, dtype=prior.z.dtype)
 z, indices = prior.sample(64, fixed_first_n=True, eps=eps)
 # Reuse eps at every snapshot; use prior.means()[indices] only for a centers-only audit.
@@ -330,7 +333,7 @@ z, indices = prior.sample(64, fixed_first_n=True, eps=eps)
 
 Explicit epsilon must match the sampled codes' shape, device and dtype. An explicit
 generator controls both component selection and Gaussian draws without touching
-global RNG. `sigma_rel=0, standardize=False` preserves `ParticlePrior` outputs and
+global RNG. `sigma=0, standardize=False` preserves `ParticlePrior` outputs and
 RNG consumption; zero sigma never draws noise. `eval()` keeps Gaussian noise on.
 
 For DDP, sample indices from the unwrapped prior, then call the wrapped module:
@@ -340,17 +343,46 @@ full raw table at N ≤ 1024, otherwise `prior.z[indices.unique()]`. The denoisi
 trainer and loops above regularize sampled unique raw rows for either prior.
 
 For EMA, deepcopy the prior and average its learned `z`; the fixed buffers retain
-their calibrated values. Standardization is computed from the EMA table itself.
+their fixed values. Standardization is computed from the EMA table itself.
 State dicts include `z`, `sigma`, `d0`, and `_extra_state` containing `sigma_rel`
-and `standardize`. Reconstruct with matching dimensions, then `load_state_dict`:
+and `standardize`. Reconstruct with matching dimensions and an explicit placeholder `sigma=0`, then
+`load_state_dict`:
 read settings and noise are restored even if constructor defaults differ.
 Legacy experimental checkpoints containing only z/sigma/d0 are accepted; supply
 their original `standardize` setting when constructing the prior.
 
-Calibration uses SciPy's CPU tree when available. Install `particlegan[mog]` for
-that optional acceleration. Without SciPy, exact Torch distances use bounded
-temporary memory but quadratic work; large low-dimensional tables benefit from
-the tree. No SciPy or NumPy is needed for sampling, gradients or the fallback.
+Optional spacing calibration is a standalone helper:
+
+```python
+from particlegan import MoGParticlePrior, calibrate_mog_sigma
+
+prior = MoGParticlePrior(num_particles=400, z_dim=4, sigma=0)
+sigma, d0 = calibrate_mog_sigma(prior.means(), sigma_rel=1/40)
+prior.set_sigma(sigma)
+prior.d0.copy_(d0)        # Optional historical metric/checkpoint metadata.
+prior.sigma_rel = 1/40
+```
+
+This calibrates the **already initialized centers without redrawing them**.
+The helper accepts supplied read-space centers; it does not standardize, mutate
+centers, or consume RNG. It returns detached scalar tensors `(sigma, d0)` on the
+centers' device and dtype. The exact median averages the two middle nearest-neighbor
+distances for even component counts. As before, `d0` is rounded to the centers'
+dtype before multiplication by `sigma_rel`. Calibration requires at least two
+finite centers and a positive median spacing, even when `sigma_rel=0`.
+
+**Calibration can be very expensive**, especially for 65,536 centers in 128
+dimensions. It copies centers to CPU float64 and uses SciPy's exact CPU tree
+when installed (`pip install 'particlegan[mog]'`), or memory-bounded, quadratic
+Torch distances otherwise. Trees can also be slow in high dimensions. Choose
+an explicit sigma to avoid this work. Sampling needs neither SciPy nor NumPy.
+
+Migration from 0.5: replace constructor `sigma_rel=...` with `sigma=...`; the
+`calibrate()` method is replaced by `calibrate_mog_sigma`. Historical MoG recipes
+retain spacing calibration explicitly; `recipe.make_prior(sigma=...)` skips it.
+For HyperGAN, pass `sigma=fixed_sigma` directly and remove the subsequent buffer
+overwrite. Checkpoint loading must restore its saved sigma, even when it differs
+from the constructor's value. Do not call the helper when loading a checkpoint.
 
 The default experiment is [configs/mog/default.toml](../configs/mog/default.toml),
 run via `python -u experiments/train_100gaussians.py --config configs/mog/default.toml`.

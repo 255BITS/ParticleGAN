@@ -9,6 +9,7 @@ counts (e.g. 100k+).
 
 from typing import Optional, Tuple
 import math
+from numbers import Real
 
 import torch
 import torch.nn as nn
@@ -177,18 +178,72 @@ class ParticlePrior(nn.Module):
         return z_batch, idx
 
 
+def _nonnegative_scalar(value, name):
+    if isinstance(value, torch.Tensor):
+        valid = value.ndim == 0 and not value.is_complex() and value.dtype != torch.bool
+    else:
+        valid = isinstance(value, Real) and not isinstance(value, bool)
+    if not valid or not math.isfinite(value) or value < 0:
+        raise ValueError(f"{name} must be a finite, nonnegative scalar")
+    return float(value.detach() if isinstance(value, torch.Tensor) else value)
+
+
+@torch.no_grad()
+def calibrate_mog_sigma(centers: torch.Tensor, sigma_rel: float) -> Tuple[torch.Tensor, torch.Tensor]:
+    """Return ``(sigma, d0)`` from supplied read-space centers, without RNG draws.
+
+    ``d0`` is the median nearest-neighbor distance, averaging both middle
+    distances for even counts. Both detached scalar tensors use centers' device
+    and dtype; d0 is rounded to that dtype *before* multiplying by sigma_rel,
+    preserving historical calibration. Centers are neither modified nor
+    standardized here; pass ``prior.means()`` to calibrate standardized reads.
+
+    Potentially very expensive: copies centers to CPU float64 and runs an exact
+    SciPy cKDTree search if available, otherwise chunked Torch pairwise distances
+    (quadratic work, bounded temporary memory). Even SciPy can be slow for large,
+    high-dimensional tables. Construction and checkpoint loading never call this.
+    """
+    sigma_rel = _nonnegative_scalar(sigma_rel, "sigma_rel")
+    if (centers.ndim != 2 or centers.shape[0] < 2 or centers.shape[1] < 1
+            or not centers.is_floating_point()):
+        raise ValueError("centers must be a floating-point (N, D) tensor with N >= 2 and D >= 1")
+    points = centers.detach().cpu().double()
+    if not torch.isfinite(points).all():
+        raise ValueError("component means must be finite for calibration")
+    num_particles = len(points)
+    try:
+        from scipy.spatial import cKDTree
+    except ImportError:
+        # At most ~32 MiB of distances; no full N x N matrix is retained.
+        chunk_size = max(1, min(1024, 4_000_000 // num_particles))
+        nearest = []
+        for start in range(0, num_particles, chunk_size):
+            chunk = points[start:start + chunk_size]
+            distances = torch.cdist(chunk, points, compute_mode="donot_use_mm_for_euclid_dist")
+            rows = torch.arange(len(chunk))
+            distances[rows, rows + start] = float("inf")
+            nearest.append(distances.min(dim=1).values)
+        distance = torch.cat(nearest).quantile(.5).item()
+    else:
+        import numpy as np
+        distance = float(np.median(cKDTree(points.numpy()).query(points.numpy(), k=2)[0][:, 1]))
+    d0 = centers.new_tensor(distance)
+    if not torch.isfinite(d0) or d0 <= 0:
+        raise ValueError("median nearest-neighbor distance must be finite and positive")
+    sigma = d0 * sigma_rel
+    if not torch.isfinite(sigma):
+        raise ValueError("calibrated sigma must be finite")
+    return sigma, d0
+
+
 class MoGParticlePrior(ParticlePrior):
-    """Uniform Gaussian mixture with learned means and fixed calibrated noise.
+    """Uniform Gaussian mixture with learned means and one fixed isotropic sigma.
 
-    Each draw is ``means()[idx] + sigma * eps``. ``sigma_rel`` multiplies the
-    initial median nearest-neighbor distance; sigma stays fixed while training.
-    Optional per-dimension read standardization is differentiable. Regularize
-    raw ``z``, not noisy draws or standardized means. ``forward`` samples noise
-    for supplied indices, so it can be used through a DDP wrapper.
-
-    Calibration uses SciPy when installed (``pip install particlegan[mog]``),
-    otherwise exact, memory-bounded Torch distances. The Torch fallback is
-    quadratic in table size; SciPy is recommended for large low-dimensional tables.
+    ``sigma`` is a required finite, nonnegative scalar. Construction only draws
+    centers; it never searches neighbors or calibrates noise. Each sample is
+    ``means()[idx] + sigma * eps``. Optional per-dimension read standardization
+    is differentiable. Regularize raw ``z``, not noisy or standardized draws.
+    Use :func:`calibrate_mog_sigma` explicitly for historical spacing-based noise.
     """
 
     def __init__(
@@ -201,21 +256,21 @@ class MoGParticlePrior(ParticlePrior):
         learnable: bool = True,
         generator: Optional[torch.Generator] = None,
         *,
-        sigma_rel: float = 1 / 40,
+        sigma: float,
         standardize: bool = True,
     ) -> None:
-        if not math.isfinite(sigma_rel) or sigma_rel < 0:
-            raise ValueError("sigma_rel must be finite and nonnegative")
+        sigma = _nonnegative_scalar(sigma, "sigma")
         if type(standardize) is not bool:
             raise ValueError("standardize must be a boolean")
         super().__init__(num_particles, z_dim, init_std, device, dtype, learnable, generator)
-        if self.num_particles < 2:
-            raise ValueError("MoG calibration requires at least two particles")
-        self.sigma_rel = float(sigma_rel)
+        if standardize and self.num_particles < 2:
+            raise ValueError("standardized means require at least two particles")
+        # Retain legacy checkpoint/metric fields; explicit sigma has no spacing.
+        self.sigma_rel = 0.0
         self.standardize = standardize
         self.register_buffer("sigma", self.z.new_zeros(()))
         self.register_buffer("d0", self.z.new_zeros(()))
-        self.calibrate()
+        self.set_sigma(sigma)
 
     def means(self):
         """Return all differentiable component centers, without sampling noise."""
@@ -224,39 +279,17 @@ class MoGParticlePrior(ParticlePrior):
         return (self.z - self.z.mean(0)) / (self.z.std(0) + 1e-6)
 
     @torch.no_grad()
-    def calibrate(self):
-        """Reset d0 and sigma from current means; called once during construction.
+    def set_sigma(self, sigma):
+        """Explicitly replace the shared fixed scale, e.g. after optional calibration.
 
-        Calling this again explicitly changes the fixed noise scale. Training,
-        EMA copies and checkpoint loading do not recalibrate.
+        Use this instead of mutating the buffer so zero-noise RNG behavior stays
+        in sync. Optimizers never update sigma.
         """
-        points = self.means().detach().cpu().double()
-        if not torch.isfinite(points).all():
-            raise ValueError("component means must be finite for calibration")
-        try:
-            from scipy.spatial import cKDTree
-        except ImportError:
-            # At most ~32 MiB of distances; no full N x N matrix is retained.
-            chunk_size = max(1, min(1024, 4_000_000 // self.num_particles))
-            nearest = []
-            for start in range(0, self.num_particles, chunk_size):
-                chunk = points[start:start + chunk_size]
-                distances = torch.cdist(chunk, points, compute_mode="donot_use_mm_for_euclid_dist")
-                rows = torch.arange(len(chunk))
-                distances[rows, rows + start] = float("inf")
-                nearest.append(distances.min(dim=1).values)
-            # quantile averages the two middle distances for an even table.
-            distance = torch.cat(nearest).quantile(.5).item()
-        else:
-            # Preserve the experimental calibration, including even-N median.
-            import numpy as np
-            distance = float(np.median(cKDTree(points.numpy()).query(points.numpy(), k=2)[0][:, 1]))
-        self.d0.fill_(distance)
-        if not torch.isfinite(self.d0) or self.d0 <= 0:
-            raise ValueError("median nearest-neighbor distance must be finite and positive")
-        self.sigma.copy_(self.d0 * self.sigma_rel)
-        if not torch.isfinite(self.sigma):
-            raise ValueError("calibrated sigma must be finite")
+        sigma = _nonnegative_scalar(sigma, "sigma")
+        value = self.sigma.new_tensor(sigma)
+        if not torch.isfinite(value):
+            raise ValueError("sigma must be finite in the prior dtype")
+        self.sigma.copy_(value)
         self._noise_enabled = bool(self.sigma > 0)
 
     def forward(self, idx, generator=None, *, eps=None):
@@ -302,7 +335,8 @@ class MoGParticlePrior(ParticlePrior):
         key = prefix + "_extra_state"
         if key not in state_dict:
             state = self.get_extra_state()
-            if prefix + "sigma" in state_dict and prefix + "d0" in state_dict:
+            if (prefix + "sigma" in state_dict and prefix + "d0" in state_dict
+                    and state_dict[prefix + "d0"] > 0):
                 state["sigma_rel"] = float(state_dict[prefix + "sigma"] / state_dict[prefix + "d0"])
             state_dict[key] = state
         super()._load_from_state_dict(state_dict, prefix, local_metadata, strict,

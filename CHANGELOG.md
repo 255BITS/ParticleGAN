@@ -19,6 +19,19 @@
   `make_gan_loss` and `make_b_cap`. This stamp is separate from the current
   recipe hyperparameters.
 
+## 0.6.0 — 2026-09-24
+
+- Require explicit keyword `sigma` in `MoGParticlePrior`; construction no longer
+  searches nearest neighbors. The shared isotropic noise remains fixed in training.
+- Add optional `calibrate_mog_sigma(centers, sigma_rel)` returning `(sigma, d0)`;
+  retain exact even-count median and historical dtype rounding. Recipes explicitly
+  calibrate their initialized centers unless `make_prior(sigma=...)` overrides them.
+- Preserve legacy checkpoint centers, sigma, d0, read settings, samples and RNG
+  behavior. Load with matching dimensions and `sigma=0`, then `load_state_dict`.
+- Migrate fixed-noise integrations to `MoGParticlePrior(..., sigma=fixed_sigma)`
+  and remove post-construction sigma overwrites. Replace `calibrate()` with the
+  standalone helper only when spacing-based calibration is intended.
+
 ## 0.5.0 — 2026-09-17
 
 - Add public `particle_ae`, `particle_vae` and `ParticleEncoding`, plus
