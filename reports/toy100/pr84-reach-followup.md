@@ -1,41 +1,37 @@
-# PR84 follow-up: G critic reach follows D's slope utilisation
+# PR84 follow-up: G critic reach driven by D's slope use and G's stall
 
-Host: neural. Seed 0, one thread, PyTorch 2.14.0+cpu, `ATEN_CPU_CAPABILITY=avx2`
-(the repository's parity pin). AVX512 cold rings are reported as a build check,
-not a second seed. Receipts: [continuous-evidence/pr84-reach](continuous-evidence/pr84-reach/).
+Host: neural. Seed 0, one thread, PyTorch 2.14.0+cpu. The repository's parity pin
+is `ATEN_CPU_CAPABILITY=avx2`; the AVX512 cold ring is a build check, not a second
+seed. Receipts: [continuous-evidence/pr84-reach](continuous-evidence/pr84-reach/).
 Runner: [gan_followup_probe.py](gan_followup_probe.py). Candidate:
 [pr84_reach_candidate.py](pr84_reach_candidate.py).
 
-## Mechanism
+## Mechanism (kept: stall reach)
 
-G's five-point critic stencil width becomes `max(.15, .5·min(s/κ, κ/s)/κ)`.
-Here `s` is D's RMS input slope on the clean particles and `κ = 1` is the host's
-b_cap slope limit. PR84's `min(.15, .5/s)` is capped at .15 on every update, so it
-never adapts. The new width equals PR84's whenever `s ≤ .3`, which covers the
-covered, indistinguishable cloud. It widens to .5 (PR84's own uncapped value at
-`s = κ`) only while D is saturating its Lipschitz budget and still separating.
-D, both own-curvature bounds, and the losses are unchanged.
+PR84 reads the critic for G through a five-point stencil of width
+`min(.15, .5/s)`, where `s` is D's RMS input slope on the clean particles. The
+.15 cap binds on every update, so the width never adapts. With the host's b_cap
+slope limit `κ = 1`:
 
-**Purity:** GAN dynamics only. There is no coverage, likelihood, anchor,
-assignment, mode-count or clip-ladder term. Mode centers are read only by the
-offline diagnostic, after training.
+- **reach .5:** width `max(.15, .5·min(s, 1/s))`. This is exactly PR84 for `s ≤ .3` (a covered, indistinguishable cloud).
+- **stall reach:** as reach .5, except the width is .5 when the game has stalled. A stall is D near its slope limit (`s ≥ .6`) while G's own-curvature trust factor averages ≤ .1 over the last 50 updates.
+
+D, both curvature bounds and the losses are unchanged.
+
+**Purity:** GAN dynamics only. The trigger reads D's slope and G's own trust
+factor; there is no coverage, likelihood, anchor, assignment, mode-count or clip
+term. Mode centers are read only by offline diagnostics, after training.
 
 ## Why this formulation
 
-The pinned PR84 failures share one signature. That signature appears in the
-AVX512 stuck seven-mode cold ring and in the own-acquired stay after it
-collapses at around update 1800. In both, D sits at its slope limit (sharpness
-≈1.0–1.1, advantage .12–.17), while G's own-curvature trust factor collapses to
-.06–.08 and its read of the critic stays at .15.
+Every failure pinned here has the same signature: D at its slope limit (`s` about
+1.0–1.1, advantage .12–.17), G's trust factor at .06–.08, and G's read fixed at .15.
+It appears in two places: the AVX512 cold ring that sticks at 7 modes, and PR84's
+continued run after its collapse. In the covered state `s ≈ .15`.
 
-In the covered state, D's slope is ≈.15 and its advantage is ≈.03. D's own
-slope utilisation therefore separates "game unresolved" from "game at rest",
-without reading coverage.
-
-At the stuck state, the missing mode has the highest critic value (5.25). The
-wider read orients all three nearest particles toward it: at width .15 the
-projections are −.01/.97/.45, and at width .5 they are .86/.73/1.04. This is the
-"idle once covered" critic channel that #97 asked for.
+At the stuck state the missing mode has the highest critic value. The nearest
+particles point toward it only when G reads the critic at width ≥ .5. That makes
+this the "idle once covered" critic channel #97 asked for.
 
 Rejected alternatives:
 - R1/R2 zero-centred pulls: already screened, and ruled out by the board.
@@ -43,61 +39,57 @@ Rejected alternatives:
 - The one-step unroll: it does not reverse the outward field.
 - Functional output metrics: they fail the trajectory gate.
 - Rest-damping on slope: it damps acquisition.
-- Barrier probes: killed in #97.
+- Barrier probes (#97) and the idle anti-gradient field (#101).
+- Occupied-basin D curvature (#100), and #100's "shape D where the cloud is absent": D already points at the missing mode, so the gap is G's read.
 
-## Gate table (AVX2 pin)
+## Gates (AVX2 pin unless noted)
 
-| Gate | PR84 pin | Reach .5 (candidate) | Reach 1.0 (revision 1) | Saturating ramp (revision 2) |
-| --- | --- | --- | --- | --- |
-| Warm 1001–1200 | FAIL 196/200. Failures 1129–1132, min HQ .866 | **PASS 200/200**, min 8 modes, min HQ .921 | 199/200, fails 1095 (min HQ .900) | 199/200, fails 1095 (min HQ .869) |
-| Cold trajectory | PASS | PASS (not a 2-D input, so identical to PR84) | PASS | PASS |
-| Cold ring 1200 | PASS 8. Terminal HQ .995/.988/.988/.996/.999. 10/24 observations, suffix 5 | **PASS 8**. Terminal HQ .991/.997/.998/1.0/1.0. 11/24 observations, suffix 10 | FAIL, 5 modes / HQ .438 | FAIL, 6–7 modes, HQ .60–.80 |
-| Own-acquired stay 1210–2400 (constant rate) | 53/120, min 0 modes, **final 6 / .904**. Degenerate from 1770 to the end | **103/120**, min 0 modes during 1710–1970, **final 8 / 1.0**. Last failure 2070, 33-check passing suffix | 18/120, final 8 / .921 | 36/120, final 8 / 1.0 |
-| Cold ring, AVX512 build | FAIL 7 (1200 HQ .993) | FAIL 7 (1200 HQ 1.0; 4 modes at 1150) | FAIL 1 mode | **PASS 8**, terminal HQ .97–1.0 |
+| Gate | PR84 pin | Reach .5 | **Stall reach** | Reach 1.0 | Saturating ramp |
+| --- | --- | --- | --- | --- | --- |
+| Warm 1001–1200 | 196/200, min HQ .866 | 200/200, min HQ .921 | **200/200**, min HQ .921 | 199/200 | 199/200 |
+| Cold trajectory | PASS | PASS | **PASS** | PASS | PASS |
+| Cold ring (AVX2) | 8, terminal HQ .988–.999, suffix 5 | 8, terminal HQ .991–1.0, suffix 10 | **8, terminal HQ 1.0 ×5, suffix 8** | 5 | 6–7 |
+| Cold ring (AVX512) | 7 | 7 | **8, terminal HQ .92–1.0, suffix 8** | 1 | 8 |
+| Continued from own ring, 1210–2400 | 53/120, **final 6 / .904** | 103/120, final 8 / 1.0, suffix 33 | **97/120, final 8 / .971, suffix 25** | 18/120 | 36/120 |
 
-The AVX512 scheduled warm prefix itself reaches only 6 modes at update 1000,
-with the identity fork at 0/200, so warm is valid only on AVX2.
+The "suffix" is the number of consecutive passing checks at the end of the run.
 
-Reach 1.0 was one declared revision. The AVX512 reach stuck state points toward
-the missing mode only at widths ≥ .5, while the run used ≈.35 there. Reach 1.0
-regresses warm and destroys acquisition on both builds. **Killed.**
+**Warm is valid only on AVX2.** On AVX512 the scheduled warm prefix itself
+reaches only 6 modes at update 1000 (identity fork 0/200, min HQ .935; receipt
+`pin-warm-avx512`). A warm "regression" reported against a 6-mode baseline is
+therefore measured from an unsolved state. #101's reported baseline matches this
+AVX512 artifact exactly.
 
-### Stuck-state fork
+**Stuck-state fork.** [pr84_reach_stuck_fork.py](pr84_reach_stuck_fork.py) forks
+the AVX512 reach .5 state at update 1000 (7 modes) and continues it to 1200:
 
-[pr84_reach_stuck_fork.py](pr84_reach_stuck_fork.py) forks the identical AVX512
-reach state at update 1000, which has 7 modes, and continues it to 1200 three
-ways. This is a counterfactual probe of one state, not a candidate.
-
-| Variant | 1050 / 1100 / 1150 / 1200 | Mean G trust factor |
+| Fork | Modes at 1050 / 1100 / 1150 / 1200 | G trust factor |
 | --- | --- | --- |
-| Reach .5 as-is (width ≈ .35) | 7 / 7 / 4 / 7 | .10 |
-| Width held at .5, bound on | **8 / 8 / 8 / 8**, HQ .66 / .94 / .98 / .92 | .09 |
-| Width .5, G bound removed | 0 / 0 / 2 / 1 | 1.0 |
+| Reach .5 as-is (width about .35) | 7 / 7 / 4 / 7 | .10 |
+| Width held at .5, bound on | 8 / 8 / 8 / 8 | .09 |
+| Width .5, bound off | 0 / 0 / 2 / 1 | 1.0 |
 
-The blocker is the `min(s, 1/s)` ramp keeping the width under .5. It is not the
-trust region: the bound is protective.
-
-Revision 2 was the final declared revision: exact PR84 width up to `s = .3`, a
-linear rise to .5 by `s = .6`, and .5 above that. It swaps which build acquires:
-AVX512 reaches ring 8, but AVX2 falls to 6–7. It also costs warm and the stay.
-Holding .5 through the whole acquisition phase makes the outcome chaotic rather
-than robust. **Killed.**
+The blocker was the width, not the trust region; the bound is protective. The
+saturating ramp (.5 whenever `s ≥ .6`) shows that D's slope alone is a bad
+trigger: it is also high in healthy acquisition, and the ramp just swaps which
+build acquires. Adding G's own stall fixes that. In stall reach the width is .5
+on 9–12% of updates outside the early acquisition window (42% during
+updates 400–800).
 
 ## Rank claim (GAN-native track only)
 
-On the pinned AVX2 harness, reach .5 is the first GAN-native entry with warm
-200/200, trajectory PASS, cold ring 8, and an own-acquired constant-rate
-continuation that ends on the full ring. PR84 on the same harness ends that
-continuation degenerate at 6 modes. That makes it rank 1 over PR84 for
-acquire + stay on this build.
+Stall reach ranks first. It is the only GAN-native entry here with warm 200/200,
+trajectory PASS, and cold ring 8 on both builds. Its continued constant-rate run
+from its own ring ends back on the full ring. PR84 ends that run degenerate at
+6 modes.
 
-It is not a clean stay. There is a 26-check episode with whole-cloud dropouts,
-including 0 modes at 1780 and 1970, each recovered within 10 updates. And the
-ring is still build-sensitive: AVX512 remains at 7, the same as PR84.
+**This is not a clean stay.** Every variant, PR84 included, has an episode
+between about 1720 and 2150. In stall reach, 23 of 120 checks fail, including
+whole-cloud dropouts to 0 modes at 1770 and 1820. Each recovers within 10–30
+updates, and there are no failures after 2150.
 
 ## Keep / kill / next bet
 
-- **Keep** reach .5 as the GAN-native reference. It dominates PR84 on warm and stay at unchanged ring acquisition.
+- **Keep** stall reach as the GAN-native reference. Reach .5 is the fallback, with a slightly better stay (103 vs 97) but no AVX512 ring.
 - **Kill** reach 1.0 and the saturating ramp.
-- **Not pursued:** #100's "shape D where the cloud is absent" idea. The stuck-state probes show that D already points the nearest particles at the missing mode once G reads it at width ≥ .5, so the missing piece is on G's read side, not in D's field.
-- **Next single bet:** widen to .5 on a stall, not on D's slope alone. The trigger is D at its slope limit (`s ≥ .6`) **and** G's trust factor collapsed, for example `≤ .1`, as in both the AVX512 stuck ring and PR84's post-collapse stay. Otherwise keep reach .5 unchanged. Revision 2 shows that D's slope alone is on during healthy acquisition too. The fork shows that a width of .5 from a stalled state recovers 8 modes with the bound kept.
+- **Next single bet:** the 1720–2150 episode is shared across the whole family, so it is not caused by the width channel. Fork the stall-reach stay at about update 1700, and find which step starts the dropout: a D step (a sharpness spike or D bound factor) or a G step. Then target that player's update only.
