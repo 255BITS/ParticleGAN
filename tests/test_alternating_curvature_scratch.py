@@ -243,3 +243,14 @@ def test_slope_step_scale_multiplies_the_bounded_g_step_only():
     rows = scaled[3].records
     assert all(0 < r["slope_step_scale"] < 1e-3 for r in rows)
     assert all(torch.equal(a, b) for a, b in zip(stencil[1:3], scaled[1:3]))
+
+
+def test_slope_gate_is_inert_above_threshold_and_multiplies_by_slope_below():
+    options = dict(start_step=0, curvature_bound=.25, bound_d=True, d_curvature_bound=3., stencil_critic=True)
+    stencil = _host(alternating_curvature(**options))
+    never = _host(alternating_curvature(slope_gate=1e-12, **options))
+    assert stencil[0] == never[0]
+    assert not any(r.get("slope_gate_fired") for r in never[3].records)
+    always = _host(alternating_curvature(slope_gate=1e6, **options))
+    rows = always[3].records
+    assert all(r["slope_gate_fired"] and r["slope_step_scale"] == r["slope_at_base"] for r in rows)
