@@ -148,7 +148,9 @@ with step factor one. Its own cross-residual guard accepts those steps.
 Applying a new full-joint residual cutoff of .5 would still miss two of the
 four failures while rejecting 133/200 warm and 305/400 cold proposals.
 
-A fresh fork on torch 2.14.0+cpu does not reproduce that 1194 window. The
+A fresh fork on torch 2.14.0+cpu, and the same fork on torch 2.13.0+cu126
+CPU with Python 3.12.3, does not reproduce that 1194 window. The cu126 warm
+hash matches the local 2.14 sibling, not the archived hash. The
 scheduled warm-state hash changes, and stock cross-only fails once at update
 1002 (199/200, HQ .8938) with generator output RMS .203 against HQ radius .21.
 Prior motion is .013. The accepted step factor is .5 after α=1 is rejected

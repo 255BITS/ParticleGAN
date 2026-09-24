@@ -26,6 +26,33 @@ matched-state failure.
 The archived 1194–1197 HQ dip (minimum .8894, G output RMS about .02–.04) did
 not reappear. Those steps remain in
 `continuous-evidence/cross-implicit/warm/cross_only.json.gz`.
+Archived warm hash
+`6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21`.
+
+## cu126 re-run
+
+Python on this machine is 3.12.3, not the handoff pin 3.12.13. The wheel is
+`torch==2.13.0+cu126` from `https://download.pytorch.org/whl/cu126`, run with
+`CUDA_VISIBLE_DEVICES=''` and the AVX2 caps. `torch.cuda.is_available()` is
+false. The matched-output cap stayed off (`matched_output_rms_limit` null, 0
+guard rejections).
+
+The fresh stock fork did not move back to 1194–1197. It matches the local
+2.14+cpu sibling, including the warm-state hash above and the cross-only final
+hash `c9d308d3d3a1d9f9e7fcd0f95d6309d07834e0bfaa80ba35218fcef1c86999c4`.
+
+| Update | HQ on cu126 | Archived HQ |
+| --- | ---: | ---: |
+| 1002 | .8938, the only failure | passing |
+| 1194 | 1.0 | .8999 |
+| 1195 | 1.0 | .8945 |
+| 1196 | 1.0 | .8894 |
+| 1197 | .9995 | .8896 |
+
+Update 1002 again has G output RMS .203, prior RMS .013, accepted α=.5, cross
+residual .390. Identity parity held. Constant Adam is still 4/200. This does
+not make the .05 cap a cold-trajectory fix; that host was not re-run, and the
+earlier 2.14 trajectory failure stands only as a 2.14 result.
 
 ## Cap that was tested
 
