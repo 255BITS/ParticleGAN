@@ -1,0 +1,23 @@
+{
+  "evidence": {
+    "full_cold_parity.json.gz": {
+      "raw_bytes": 5194,
+      "raw_sha256": "357ccdaeb296ecdc9bafd17ed0f33edd44e0248531266848cc0418fb6c834438",
+      "stored_sha256": "40f5ce200236d0c906bc4d815307686f7b730abe25713ca61c00319bad357cdb"
+    },
+    "full_cold_parity.log.gz": {
+      "raw_bytes": 3395,
+      "raw_sha256": "61bd58d9d0f35b2e99312f5c8c7dbd42af63b8f39c3144c9ac33a722d09399e2",
+      "stored_sha256": "01e26a17bd22d2ff548af153220e9d54fc80b294ef5d88c26596a9e943f6e690"
+    }
+  },
+  "scope": "scratch mode_hold and trajectory only; exact 40ec parity, not a passing ring candidate",
+  "source_sha256": {
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/continuous-evidence/pr84-smoothed-candidate/original_40ec.py": "4bcf47e0b806b935d3a3dd52079476d89ebe72f8f188095206085a807a0ce2dc",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/pr84_smoothed_parity.py": "27a8b6fecd289369a94f069346cec136e4e38ffe1c7c96aac65b35318a4d1bea",
+    "tests/test_pr84_smoothed_candidate.py": "c8bc5edfd7b1b8b088389d5a225e2add762108a9838766935458992d9e8c178a"
+  }
+}
