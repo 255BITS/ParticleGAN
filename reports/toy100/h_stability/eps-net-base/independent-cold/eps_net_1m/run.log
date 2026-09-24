@@ -1,0 +1,14 @@
+{"event": "START", "candidate": "eps_net_1m", "gate": "mode_hold"}
+START mode_hold route=public primitives custom host + shared noise policy steps=1200
+{"event": "UPDATE", "task": "mode_hold", "step": 200}
+{"event": "UPDATE", "task": "mode_hold", "step": 400}
+{"event": "UPDATE", "task": "mode_hold", "step": 600}
+{"event": "UPDATE", "task": "mode_hold", "step": 800}
+{"event": "UPDATE", "task": "mode_hold", "step": 1000}
+{"event": "UPDATE", "task": "mode_hold", "step": 1200}
+{"event": "DONE", "task": "mode_hold", "status": "PASS", "suffix": 14, "live": {"modes": 8, "hq": 0.996826171875}, "error": null}
+{"event": "DONE", "candidate": "eps_net_1m", "gate": "mode_hold", "status": "PASS", "seconds": 8.871191610116512, "live": {"hq": 0.996826171875, "modes": 8}}
+{"event": "START", "candidate": "eps_net_1m", "gate": "two_pole"}
+START two_pole route=public primitives custom host + shared noise policy steps=80
+{"event": "DONE", "task": "two_pole", "status": "FAIL", "suffix": 0, "live": {"mean_abs": 0.029888831079006195, "grad_med": 0.017855465412139893}, "error": null}
+{"event": "DONE", "candidate": "eps_net_1m", "gate": "two_pole", "status": "FAIL", "seconds": 0.2627234428655356, "live": {"grad_med": 0.017855465412139893, "mean_abs": 0.029888831079006195}}

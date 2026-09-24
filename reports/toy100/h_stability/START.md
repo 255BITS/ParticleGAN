@@ -1,53 +1,56 @@
-# Current research base: g_threequarter_rate
+# Current research base: eps_net_1m
 
-Executable selection: [current-base.json](current-base.json). Exact declaration:
-[selected-base/declaration.json](selected-base/declaration.json).
-G LR .001125, D .0015, particles .00225 are constant from initialization onward.
-The logistic relativistic GAN, Adam(0,.999), R1+R2 .6, mixup .01 and fixed critic
-input noise .05 are inherited from H. No additional G fitting objective exists.
+Selection: [current-base.json](current-base.json). Replay declaration:
+[eps-net-base/declaration.json](eps-net-base/declaration.json).
+This is a measured search starting point, not a release-qualified winner.
 
-| Measured result | Current base | Earlier H control |
-| --- | --- | --- |
-| Cold ring | PASS:8 modes, HQ.999755859, suffix9 | PASS:8 modes, HQ.999267578, suffix5 |
-| Own-state dense continuation | FAIL at1284:83 checks pass, then HQ.761230469 | FAIL at1255:54 checks pass, then HQ.780517578 |
-| two_pole | FAIL:spread.028546154 <.30 | FAIL:spread.032636743 <.30 |
-| Broader older suite | Other17 hosts UNRUN | 13/19 PASS,6FAIL |
+It is still a GAN. The generator and trainable latent particles learn only
+through the discriminator's logistic relativistic adversarial loss. The
+critic retains R1+R2 .6, mixup consistency .01 and fixed input noise .05.
+The change is fixed Adam epsilon .001 for G and D; particle epsilon stays1e-8.
+Actual G/D/particle rates stay .001125/.0015/.00225 with Adam(0,.999), starting
+at cold initialization. No additional generator-fitting objective is present.
 
-This is a selected experiment starting point, not an overall leaderboard winner
-or release-qualified replacement. Its earlier200/200 warm PASS used H's borrowed
-checkpoint; that differs from the now measured failure on its own state.
-Full1200 own-state hold and native100 tests are gated off after cheap failures.
+| Case | Selected result |
+| --- | --- |
+| Cold ring1200 | PASS:8 modes, HQ.999755859, terminal suffix14 |
+| Own-state200 | PASS:200/200 dense checks, minimum HQ.918945313 |
+| two_pole80 | FAIL:spread.029888831 <.30 |
+| Other17 older hosts | UNRUN for this candidate |
+| Own-state1200 / native100 | UNRUN / SKIPPED |
 
-Independent cold replay reproduces both measured live results and the entire
-ring checkpoint byte-for-byte. See selected-base/promotion-checks.json and
-selected-base/own-state-short/metrics.json. All125 original H training files
-still match their archive. The default stability_runner.py retains the H control;
-selected_base_probe.py explicitly selects the NEW base and its own checkpoint.
-
-Run from the repository root with the launcher's pinned CPU/AVX2 environment:
+Own-state200 uses the candidate's OWN cold-acquired models, Adam moments, RNG
+and the same epsilon/rates. It is not borrowed-H evidence. Old g_threequarter_rate
+failed its own short hold after83 passing checks; H failed after54. Those older
+candidates remain in selected-base/ and ../critic_signal_attempt/ respectively.
+Do not borrow their passing toy results or use their ordinary-epsilon runners.
 
 ```bash
+# Run with pinned CPU/AVX2 and one thread, as supplied by the launcher.
 python reports/toy100/h_stability/selected_base_probe.py --output NEW_OUTPUT
-python reports/toy100/selected_h_remaining.py --declaration reports/toy100/h_stability/selected-base/declaration.json --output NEW_OUTPUT --ledger NEW_LEDGER --workers 1 --tasks two_pole mode_hold unipolar mid_scale_identity cover_leftover trajectory
+python reports/toy100/h_stability/adam_response_cold.py --declaration reports/toy100/h_stability/eps-net-base/declaration.json --output NEW_OUTPUT --ledger NEW_LEDGER --workers 1 --tasks two_pole mode_hold unipolar mid_scale_identity cover_leftover trajectory
 ```
 
-Do not repeat finished failed families. The preceding search tried paired and
-simultaneous updates, matched observation noise, bounded temporal/optimistic
-corrections, rate interpolations and nine critic-regularizer/noise proposals.
-Three proposals passed borrowed-H warm screens; only this one also passed cold
-ring. None passed the shared cold suite or an own-state hold.
+Executable policy is adam_response.py::response_policy. adam_response_cold.py
+installs it for all frozen cold hosts; selected_base_probe.py selects it for
+own-state diagnostics. The generic selected_h_remaining.py lacks this epsilon
+policy and must not be used to claim a selected-base replay.
 
-A separate cold-repair comparator h_g020_d005_p010_c01 passes two_pole, unipolar,
-mid_scale_identity and cover_leftover, but fails sustained ring. Its positive
-particle-centroid mobility preconditioner uses no target fitting. The exact
-source snapshot/declaration are in cold-repair-reference/. Do not combine that
-candidate's passes with this base's passes.
+Best separate mobility comparator: g_radial_split_adam passes two_pole and cold
+ring, but fails unipolar neutral retention .8084<.85 and own continuation at1211.
+Its source and declaration are in radial-mobility-reference/, with executable
+particle_geometry.py, geometry_runner.py and geometry_probe.py. It has never
+been tested together with eps_net_1m. Combining independent optimizer wrappers
+requires checking the actual applied epsilon, roles and state, not nesting
+observers blindly. Every candidate needs its own gates and checkpoint.
 
-Pure AE reconstruction has no encoder adversarial gradient path; pure unused-
-token preservation has an identical-gradient parameter constraint. These remain
-explicit blockers. Do not sweep their parameters, restore supervised losses and
-claim pure-GAN qualification, or change frozen scoring/architecture.
+Finished failures: seven particle geometry proposals, nine Adam-response
+proposals, and relativistic-mean/product losses. Do not repeat the same rows.
+The geometry and response reports retain exact failures; broader H-era sweeps
+are historical. Pure AE has no encoder adversarial path; unused-token hold has
+a documented shared-gradient conflict. Neither is a parameter-sweep target.
 
-Preserved references: ../critic_signal_attempt/ (H),
-selected-base/previous-attempt-results.md (finished dynamics), and
-rejected-signal-results.md (finished discriminator-signal attempt).
+One assigned baseline audit may run remaining older hosts and a1200-step own
+continuation as diagnostics despite two_pole failure, to expose the next cheap
+blocker. Stop the long hold at its first failed check. This exception never
+promotes a failed recipe or enables expensive native100 runs.

@@ -1,0 +1,11 @@
+{
+  "bitwise_models_optimizers_samples_rng_and_update_state": true,
+  "identical_all_metrics_and_losses": true,
+  "tensor_leaves": 81,
+  "generator_rng_objects": 1,
+  "cold_checkpoint_byte_identical": true,
+  "actual_optimizer_updates": 400,
+  "fixed_epsilon_and_rates_verified": true,
+  "unchanged_H_sources": 125,
+  "regression_tests_passed": 27
+}

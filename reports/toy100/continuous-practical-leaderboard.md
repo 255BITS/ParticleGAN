@@ -1,19 +1,18 @@
 # Current experiment starting point (2026-09-24)
 
-The user-selected continuation search now starts from **g_threequarter_rate**.
-It is experimental, not a release-qualified or overall leaderboard winner.
-Fixed G/D/prior rates: .001125/.0015/.00225; other H GAN settings unchanged.
+**eps_net_1m** is the selected research base. The GAN objective is unchanged;
+G/D Adam epsilon is .001, particle epsilon1e-8, and learning rates remain fixed.
+It is not a release-qualified or overall leaderboard winner.
 
-| Candidate | Cold ring | Own-state short hold | Remaining qualification |
+| Candidate | Cold ring | Own-state continuation | Known coverage limit |
 | --- | --- | --- | --- |
-| Selected g_threequarter_rate | PASS, 8 modes/HQ .999756, suffix9 | FAIL at1284 after83 passing checks | two_pole FAIL; other17 older tasks UNRUN; native3 SKIPPED |
-| Preserved H acquisition control | PASS, 8 modes/HQ .999268, suffix5 | First failure1255 after54 passing checks | older13/19 PASS; full own-state hold FAIL |
+| Selected eps_net_1m | PASS,8 modes/HQ.999756,suffix14 | Short200 PASS, minHQ.918945 | two_pole FAIL; other17 UNRUN; native3 SKIPPED |
+| g_threequarter_rate | PASS,8 modes/HQ.999756,suffix9 | FAIL at1284 after83 passing checks | two_pole FAIL; other17 UNRUN |
+| H acquisition control | PASS,8 modes/HQ.999268,suffix5 | FAIL at1255 after54 passing checks | older13/19 PASS; full hold FAIL |
 
-The selected cold checkpoint independently replays byte-for-byte. Its earlier
-200/200 borrowed-H warm result is separate from its own-state failure above.
-See [current settings](h_stability/current-base.json), [replay and comparison](h_stability/START.md),
-and [raw own-state metrics](h_stability/selected-base/own-state-short/metrics.json).
-These are two distinct recipes; do not combine their gate passes.
+Each own-state result starts from that candidate's own acquired optimizer/model/
+RNG state. No candidate's toy passes are credited to another. See
+[current recipe](h_stability/current-base.json) and [replay guide](h_stability/START.md).
 
 The following board is preserved historical evidence, not the current assignment.
 
