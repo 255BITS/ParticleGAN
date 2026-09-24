@@ -1,0 +1,36 @@
+{
+  "status": "COMPLETE",
+  "scope": "synthetic fixed finite target, no native training",
+  "method_source_sha256": "adc5d6f6ded8e6cf297ee90aa0d540723becc632a601b93b5b9a4393cd344485",
+  "script_sha256": "ceca84a5413208e07de79637c052045c8c7bf80c3b4309389240d7cad7af70fd",
+  "target_banks": [
+    {
+      "x": -2.0,
+      "count": 128
+    },
+    {
+      "x": 2.0,
+      "count": 128
+    },
+    {
+      "x": 0.0,
+      "count": 128,
+      "current_donor_bank": true
+    }
+  ],
+  "equal_weight_particles": 12,
+  "initial_particle_x": 0.0,
+  "width": 0.031286240422040236,
+  "sigma": 0.029,
+  "selected": "EXACT_REST",
+  "gh9_before": 728.7363687213137,
+  "gh9_after": 728.7363687213137,
+  "gh9_explicit_4_4_4_allocation": -2.834654844149171,
+  "gh9_gradient_norm": 1.9712336685362662e-15,
+  "proposal_donors": 0,
+  "proposal_em": 0,
+  "fallback_em": 0,
+  "exact_output_rest": true,
+  "torch_rng_unchanged": true,
+  "interpretation": "symmetry and current-bank donor support block this local method; a different candidate bank or nonsymmetric perturbation can escape; this gives no native ring failure probability"
+}
