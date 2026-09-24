@@ -632,5 +632,52 @@
   },
   "production_modified": false,
   "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5",
-  "next_filter": "Cold same-target nonlinear refinement at steps750/1200; also test whether early target assignments preserve acquisition. No new host run yet."
+  "next_filter": "Exact replay around the first long-warm failed check1390; prioritize same-dataset sustained quality before more acquisition corrections.",
+  "additional_stability_diagnostics": [
+    {
+      "candidate": "PR84 original G-only stencil",
+      "scope": "passing_state_local_stability_only",
+      "steps": 2400,
+      "scheduled_prefix_steps": 1000,
+      "noise_horizon": 1200,
+      "first_observed_failure": 1390,
+      "status": "FAIL",
+      "local_stability": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.97021484375,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "long_hold": {
+        "checks": 120,
+        "failing_steps": [
+          1390,
+          1540,
+          1550,
+          1560,
+          1570,
+          1910,
+          2060,
+          2150
+        ],
+        "min_hq": 0.78857421875,
+        "min_modes": 7,
+        "pass_all": false,
+        "pass_suffix": true,
+        "passing_checks": 112,
+        "passing_suffix": 25,
+        "stable_from_step": 2160
+      },
+      "final": {
+        "hq": 0.998046875,
+        "modes": 8
+      },
+      "evidence": "continuous-evidence/pr84-stationary-hold/manifest.json"
+    }
+  ]
 }

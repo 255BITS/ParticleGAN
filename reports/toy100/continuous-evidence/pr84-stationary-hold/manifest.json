@@ -1,0 +1,123 @@
+{
+  "schema": "pr84-stationary-hold-evidence-v1",
+  "date": "2026-09-24",
+  "scope": "same-dataset conditional warm continuation, no acquisition promotion",
+  "training_runs": 1,
+  "files": [
+    {
+      "path": "declaration.json.gz",
+      "raw_sha256": "3382f7fe9cb014448f0396433de8a4cbafbeb4eebb77b9979a228335470471ff",
+      "sha256": "4cc678feb78dd01dfe8eb924a4ecefd33223a3a950985c0df4eee9f10355b76b",
+      "raw_bytes": 1571
+    },
+    {
+      "path": "forks/cold.json.gz",
+      "raw_sha256": "79f5b0c4e136f119712aca066fba0fdf050d27047e05f1056c1a93de13d6b896",
+      "sha256": "0106879bf135c1d97b15fc0d29837ed29a22297f6b3bb4e2ee048363ed69c166",
+      "raw_bytes": 86928
+    },
+    {
+      "path": "forks/constant.json.gz",
+      "raw_sha256": "b696b0e001213fe6b2ba5e0f7d5bc309a5b04de9c1c4041051520ab5313bc348",
+      "sha256": "48768792ca1f486565cfa9578db2643b9d7c0fe0e7eb10d6a615e20504950f47",
+      "raw_bytes": 115952
+    },
+    {
+      "path": "forks/identity.json.gz",
+      "raw_sha256": "a882cff518e9be9e91cd95069fc8cc9f4ab7e7346c3c01a2655366e3e10a8e9c",
+      "sha256": "a54b8852584a3121f06ef08c806749f5681ce17bd6c95b2a522e056ff36a3d21",
+      "raw_bytes": 111965
+    },
+    {
+      "path": "forks/original.json.gz",
+      "raw_sha256": "13536b8fea80a81013064fe7785280f462097bd6ce6b3fdaf877e393cec4389c",
+      "sha256": "89f2172dc6f6876818acc74e04378328ab3a3be2a92623c22ad797e66a92d3c4",
+      "raw_bytes": 548157
+    },
+    {
+      "path": "forks/summary.json.gz",
+      "raw_sha256": "2a01ae5f4a845be11db261d93a9f7e29c2c1d060756e816b79be03aa2dbd32cf",
+      "sha256": "78aae645b7a16509ffacef9d8f235760ffe7abe7b7ba3f5cd9417862e5d29ee9",
+      "raw_bytes": 8774
+    },
+    {
+      "path": "source/benchmarks/locked_shared/mode_hold.py.gz",
+      "raw_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "sha256": "a5610686a60c882940c4da616b25896dd768e0ce8e2ac882ecb3f68429ec9a4a",
+      "raw_bytes": 10774
+    },
+    {
+      "path": "source/benchmarks/toy100/continuous_probe.py.gz",
+      "raw_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "sha256": "b5febe5559fd033fd3fe68980cb12e605692738e7faff8ac2e51966cd04c80f2",
+      "raw_bytes": 29080
+    },
+    {
+      "path": "source/benchmarks/toy100/warm_equilibrium_probe.py.gz",
+      "raw_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "sha256": "a7e7bf0a9ad5e7dc65b4c30953ee48e02922333542e2077dad778eec1e7ad974",
+      "raw_bytes": 14377
+    },
+    {
+      "path": "source/configs/toy100/constraints_simple_regularization.json.gz",
+      "raw_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "sha256": "921e0ebd2ea53b472db8cd7fc2deb8b570233221c3419a18580cf27abc75d800",
+      "raw_bytes": 1507
+    },
+    {
+      "path": "source/reports/toy100/alternating_curvature_scratch.py.gz",
+      "raw_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "sha256": "c5fe98bf157132e2502a24a0c2b3e35e224c061ed637e10918c2e64f3ef2bb1b",
+      "raw_bytes": 16689
+    },
+    {
+      "path": "source/reports/toy100/extra_adam_scratch.py.gz",
+      "raw_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "sha256": "0544b747488cf1b4bc2b395b3438f69713207fda2627710cc6446e633f99944c",
+      "raw_bytes": 13261
+    },
+    {
+      "path": "source/reports/toy100/pr84_smoothed_candidate.py.gz",
+      "raw_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+      "sha256": "2c24e067db0ae7e64efc8a5babe94c3400681d010007452e8a39358ad0125340",
+      "raw_bytes": 6530
+    },
+    {
+      "path": "source/reports/toy100/pr84_stationary_hold_probe.py.gz",
+      "raw_sha256": "b44c9dd394e8de79e9cd3157987b973aad474020d31b3b8965d798c3af71ee9c",
+      "sha256": "1d07925704ce121486785daa5181486fede8f467a69c1f662cb7490d9a0caf1f",
+      "raw_bytes": 5118
+    },
+    {
+      "path": "summary.json.gz",
+      "raw_sha256": "4a214b592c0e18c63f69be4df6d9e4ebcd66bdb62bab9d0b781611df6bab021d",
+      "sha256": "57e77dc2e8b3d3063003ed872bff0b4a05a4867b555701ee223b41ff975ecb6e",
+      "raw_bytes": 10759
+    },
+    {
+      "path": "training.log.gz",
+      "raw_sha256": "3a181fd2f9ad21496cd5629da84afd76fc6b7d284ff2b4c9f363c2678bd40fc2",
+      "sha256": "706ec64c810094f7a150d549fa0b1a5c7b0fcd77bbb748cf1a79e804b7348990",
+      "raw_bytes": 2283
+    },
+    {
+      "path": "validation.log.gz",
+      "raw_sha256": "9322db04eeb13efdda178137a741b00b4d32b7a56b39642c6b5e4de51c52b1ee",
+      "sha256": "337ddb2193f3f1bd0368ec8c49c860ff519c2c096e55bea7ff194526d53d021d",
+      "raw_bytes": 6392
+    },
+    {
+      "path": "validation_source/pr84_stationary_hold_probe.py.gz",
+      "raw_sha256": "bb686b8d470092bf6f4d9102daefa45d522177aec970b826612be78bda2b03f3",
+      "sha256": "b4f7dcb1c7cbee6c852438641cb2c14a1e1a68a08ec0312ba552e1d013aaee6c",
+      "raw_bytes": 6923
+    },
+    {
+      "path": "review/pr82-current.json.gz",
+      "raw_sha256": "1900996be23a5c11e41935bfbee005cdba7361ef8b308f950bc8fe9a32b8bb79",
+      "sha256": "b99a7574d3a64b29b61bae672a9229d09e0598f4df452bad13a86645e8dc9129",
+      "raw_bytes": 19387
+    }
+  ],
+  "validation_note": "Training and fork checks completed. Initial postprocessing compared full records to pre-extraction PR84 schema and rejected removed inactive diagnostic fields. Corrected read-only validator compares all records to the previously audited clean adapter reference and verifies reference state/metrics against original PR84. No training rerun or candidate change."
+}
