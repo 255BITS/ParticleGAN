@@ -1,0 +1,316 @@
+{
+  "status": "COMPLETE",
+  "scope": "archived conditioned update2401 followed by nine ordinary native updates through2410; same fixed target",
+  "conditioned_event": "D real128 bank only at update2401 in omitted arm; no subsequent intervention",
+  "source_first_step_sha256": "8a8c20f2545a82e6c612306bee94d58e9b4f35391522c32fe3d23dd11c0b1002",
+  "qualified_own2400_state_sha256": "01a1947916f97334dc09151ba16b0086f436c655f7e1390b5e461fc84ac434ae",
+  "method": "pr84_sample_group_anchor_prestart_joint_fit_rest_on_nonconvergence",
+  "factory": "reports.toy100.sample_anchor_prestart_candidate:sample_anchor_prestart_candidate",
+  "branches": {
+    "ordinary": {
+      "first_step": {
+        "step": 2401,
+        "modes": 8,
+        "hq": 1.0,
+        "passed": true,
+        "missing_modes": []
+      },
+      "suffix": [
+        {
+          "step": 2402,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2403,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2404,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2405,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2406,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2407,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2408,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2409,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2410,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        }
+      ],
+      "first_full_recovery_step": 2402,
+      "last_five": [
+        {
+          "step": 2406,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2407,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2408,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2409,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2410,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        }
+      ],
+      "failing_steps": [],
+      "worst_modes": 8,
+      "worst_hq": 1.0,
+      "final": {
+        "step": 2410,
+        "modes": 8,
+        "hq": 1.0,
+        "passed": true,
+        "missing_modes": []
+      },
+      "elapsed_seconds": 1.8111087400466204,
+      "initial_state_sha256": "601bf0b8dc5acf6f06c2f5241122375f7b98aa17f9cb10ebc28dcf4711d76240",
+      "final_state_sha256": "92cb38e161d8d0a9054b69c4bc14ff9e0ed235b7d80014ee165778ada069bded",
+      "final_rng_sha256": "b1137853ad8a5b0c08147b63fffb6a20f4f49c97c9aab68a4ccd7fb09233841f",
+      "final_noise_step_calls": 2410,
+      "actual_adam_updates": {
+        "d": 9,
+        "g": 9
+      },
+      "optimizer_callbacks": {
+        "d": 27,
+        "g": 27
+      },
+      "optimizer_rates": null,
+      "generated_source_sha256": "b45eb74f436e98eb5d327d3208f060e67bc62cf1d2bf2d9dcc932094fc2f2ed2",
+      "selected": [
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit"
+      ]
+    },
+    "omitted_D_bank": {
+      "first_step": {
+        "step": 2401,
+        "modes": 7,
+        "hq": 1.0,
+        "passed": false,
+        "missing_modes": [
+          0
+        ]
+      },
+      "suffix": [
+        {
+          "step": 2402,
+          "modes": 7,
+          "hq": 0.92333984375,
+          "passed": false,
+          "missing_modes": [
+            0
+          ]
+        },
+        {
+          "step": 2403,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2404,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2405,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2406,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2407,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2408,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2409,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2410,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        }
+      ],
+      "first_full_recovery_step": 2403,
+      "last_five": [
+        {
+          "step": 2406,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2407,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2408,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2409,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        },
+        {
+          "step": 2410,
+          "modes": 8,
+          "hq": 1.0,
+          "passed": true,
+          "missing_modes": []
+        }
+      ],
+      "failing_steps": [
+        2401,
+        2402
+      ],
+      "worst_modes": 7,
+      "worst_hq": 0.92333984375,
+      "final": {
+        "step": 2410,
+        "modes": 8,
+        "hq": 1.0,
+        "passed": true,
+        "missing_modes": []
+      },
+      "elapsed_seconds": 0.7523802819196135,
+      "initial_state_sha256": "777ca1ca82c2c0434ac72dfe80301405a6599f3a00587107c04f2678166a6e3b",
+      "final_state_sha256": "022c26fe9a8d6a21210698c85ec768197a3d526f1e7e4b560522b3ca5352ec33",
+      "final_rng_sha256": "b1137853ad8a5b0c08147b63fffb6a20f4f49c97c9aab68a4ccd7fb09233841f",
+      "final_noise_step_calls": 2410,
+      "actual_adam_updates": {
+        "d": 9,
+        "g": 9
+      },
+      "optimizer_callbacks": {
+        "d": 27,
+        "g": 27
+      },
+      "optimizer_rates": null,
+      "generated_source_sha256": "b45eb74f436e98eb5d327d3208f060e67bc62cf1d2bf2d9dcc932094fc2f2ed2",
+      "selected": [
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit",
+        "joint_fit"
+      ]
+    }
+  },
+  "paired_final_rng_equal": true,
+  "paired_generated_host_equal": true
+}

@@ -1,0 +1,71 @@
+{
+  "files": {
+    "console.log": {
+      "bytes": 598,
+      "sha256": "68dd03497ddb8d66bd8a4ca8deef1a0a974514487a7b8c6c6c796f7a05bdb46c"
+    },
+    "first-step-omitted_D_bank-state.pt": {
+      "bytes": 614235,
+      "sha256": "2d90e5c737f54a3f4bc14f1abebcfe50650ea66142977278826d68efb8a14940"
+    },
+    "first-step-ordinary-state.pt": {
+      "bytes": 613713,
+      "sha256": "f4b7b82f8532d3dc95beccfab5d607f449186555beffc1bc8769c61798a61dbb"
+    },
+    "first-step-result.json": {
+      "bytes": 63285,
+      "sha256": "8a8c20f2545a82e6c612306bee94d58e9b4f35391522c32fe3d23dd11c0b1002"
+    },
+    "omitted_D_bank-raw.json.gz": {
+      "bytes": 19709,
+      "sha256": "41a90ba2daa8e5761b7be899c5947d9dfd3e9643c132f4611e22912fcc614739"
+    },
+    "omitted_D_bank-update2410-state.pt": {
+      "bytes": 615384,
+      "sha256": "043697d02774318690e52a10536b1c83f0228b28de96f580436996c687c5b9bf"
+    },
+    "ordinary-raw.json.gz": {
+      "bytes": 19496,
+      "sha256": "054ab140a5af5bbc2e27013d7bd7fc37741f4e04423373be19d7fb7e82076171"
+    },
+    "ordinary-update2410-state.pt": {
+      "bytes": 614798,
+      "sha256": "a3aefba4f62425fc446b94815ff2f024edba1453590a1ab5c9982e69d8dae780"
+    },
+    "qualified-own2400-state.pt": {
+      "bytes": 613887,
+      "sha256": "aae43815fd731c9d7d0b1e4019c5457de9f319e53e201ceeedebfef15274d2ea"
+    },
+    "result.json": {
+      "bytes": 7542,
+      "sha256": "fa1852b852b9cb03ec08a3e64acddcf0f620d8f17d51fc010eca6326f1d53f47"
+    },
+    "source/reports/toy100/anchor_missing_batch_neural.py": {
+      "bytes": 3921,
+      "sha256": "50ab7ca081d932c98193166f1bf0dc225d1459a23aa684d9bf219c103d86192b"
+    },
+    "source/reports/toy100/prestart_omission_recovery10.py": {
+      "bytes": 7557,
+      "sha256": "bdbe505e9ccc27e15532ba6430e3a764e489cc9ee07d3ba45f1957575c97c646"
+    },
+    "source/reports/toy100/sample_anchor_candidate.py": {
+      "bytes": 5113,
+      "sha256": "2fb4ee97bfc4a1f00f0076c55f0e210bc531fc34779c1e23a719ba7722a15c33"
+    },
+    "source/reports/toy100/sample_anchor_own_state_probe.py": {
+      "bytes": 19085,
+      "sha256": "cd7bfc7a1a821068463da09b375ed6882c53ccae39137b13600a273512660831"
+    },
+    "source/reports/toy100/sample_anchor_prestart_candidate.py": {
+      "bytes": 1840,
+      "sha256": "2f9152349fe3937fd8738297dff939489c4011a6e8aca7386ad9e889771dce17"
+    },
+    "source/reports/toy100/sample_anchor_rest_candidate.py": {
+      "bytes": 2500,
+      "sha256": "287d3c5d21d2ca8ff80c8167bd2af294f4de088a54619bfd03d0c3eaf3715560"
+    }
+  },
+  "scope": "exact own2400 archived firststep plus nine ordinary native updates per arm",
+  "source_verified": true,
+  "status": "COMPLETE"
+}
