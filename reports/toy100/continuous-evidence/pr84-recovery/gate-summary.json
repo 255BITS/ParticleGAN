@@ -1,0 +1,24 @@
+{
+  "verdict": "KILL",
+  "aten_cpu_capability": "avx2",
+  "cpu_capability": "AVX2",
+  "torch": "2.14.0+cpu",
+  "seed": 0,
+  "recovery_reach": 0.75,
+  "support_drop": 0.15,
+  "support_alpha": 0.2,
+  "warm_identity": {"checks": 200, "passing": 200, "min_modes": 8, "min_hq": 0.989990234375},
+  "warm_method": {"checks": 200, "passing": 200, "min_modes": 8, "min_hq": 0.920654296875},
+  "trajectory": "PASS",
+  "cold_ring": {
+    "status": "FAIL",
+    "passing_observations": 6,
+    "observations": 24,
+    "passing_suffix": 4,
+    "step_1000": {"modes": 8, "hq": 0.571533203125},
+    "final": {"step": 1200, "modes": 8, "hq": 0.997314453125},
+    "recovery_updates": 115
+  },
+  "stay": "not run; cold ring failed",
+  "shared_gate_eligible": false
+}

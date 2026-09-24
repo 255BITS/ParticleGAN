@@ -13,9 +13,13 @@ game losses are unchanged. No coverage, assignment, likelihood or clip term.
 """
 
 from contextlib import contextmanager
+import math
+import os
 
 import torch
 
+from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
+from benchmarks.locked_shared.mode_hold import SIGMA, sample_ring
 from reports.toy100 import pr84_smoothed_candidate as base
 from reports.toy100.alternating_curvature_scratch import _rho
 
@@ -30,6 +34,15 @@ SATURATED_UTILISATION = .6
 STALL_TRUST = .1
 STALL_WINDOW = 50
 
+# One recovery width, between stall reach .5 and the killed reach 1.0. Not swept.
+RECOVERY_REACH = .75
+# Critic-value gap (particles minus a fixed real probe) must fall this far
+# below its short EMA. Read off the stall-reach dip trace; not retuned after a kill.
+SUPPORT_DROP = .15
+SUPPORT_ALPHA = .2
+SUPPORT_PROBE_N = 128
+SUPPORT_PROBE_SEED = 0
+
 
 def reach_width(sharpness, reach=REACH, ramp="peak"):
     """``peak``: ``.5·min(u, 1/u)``. ``saturating``: PR84 until u = .3, .5 from u = .6."""
@@ -42,6 +55,24 @@ def reach_width(sharpness, reach=REACH, ramp="peak"):
     return max(base.SMOOTH_WIDTH_CAP, reach / B_CAP_SLOPE * utilisation)
 
 
+def note_support(ema, support, drop=SUPPORT_DROP, alpha=SUPPORT_ALPHA):
+    """One short-EMA step. A hard dip is a sharp fall, not G's curvature."""
+    if support is None or not math.isfinite(support):
+        return False, ema
+    if ema is None or not math.isfinite(ema):
+        return False, support
+    return support <= ema - drop, (1. - alpha) * ema + alpha * support
+
+
+def recovery_width(sharpness, *, stalled, dip, reach=REACH):
+    """Stall reach, or one fixed wider stencil while a hard dip is on."""
+    if dip:
+        return RECOVERY_REACH
+    if stalled:
+        return reach / B_CAP_SLOPE
+    return reach_width(sharpness, reach)
+
+
 class ReachRecorder(base.SmoothedBothBoundRecorder):
     reach = REACH
     ramp = "peak"
@@ -52,12 +83,58 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         super()._arm_smoothed_critic()
         if self._smooth_on:
             sharpness = self.row["critic_sharpness"]
-            if self.ramp == "stall":
-                self._smooth_width = (self.reach / B_CAP_SLOPE if self._stalled(sharpness)
-                                      else reach_width(sharpness, self.reach))
+            dip = self._recovery_dip() if self.ramp == "recovery" else False
+            if self.ramp in ("stall", "recovery"):
+                self._smooth_width = recovery_width(sharpness, stalled=self._stalled(sharpness), dip=dip,
+                                                    reach=self.reach)
             else:
                 self._smooth_width = reach_width(sharpness, self.reach, self.ramp)
             self.row["critic_width"] = self._smooth_width
+            if self.ramp == "recovery":
+                self.row["critic_support"] = getattr(self, "_support_gap", None)
+                self.row["support_ema"] = getattr(self, "_support_ema", None)
+                self.row["recovery"] = bool(dip)
+
+    def _recovery_dip(self):
+        """Hard dip: critic-value support of the clean particles falls sharply.
+
+        Support is the mean critic gap between clean particles and one fixed
+        real probe. The short EMA advances once per outer step. G's curvature
+        and trust factor are not inputs. A missing probe leaves the dip off.
+        """
+        if self.phase not in (0, None) and getattr(self, "_dip_token", None) == self.outer_steps:
+            return bool(getattr(self, "_recovery", False))
+        self._dip_token = self.outer_steps
+        support = self._critic_support_gap()
+        self._support_gap = support
+        self._recovery, self._support_ema = note_support(getattr(self, "_support_ema", None), support)
+        return self._recovery
+
+    @torch.no_grad()
+    def _critic_support_gap(self):
+        local = self._local or {}
+        means, critic = local.get("means"), local.get("critic")
+        generator, prior = local.get("generator"), local.get("prior")
+        if means is None or critic is None or generator is None or prior is None or not hasattr(prior, "z"):
+            return None
+        module = critic
+        while not isinstance(module, SimpleMLPDiscriminator) and hasattr(module, "model"):
+            module = module.model
+        if not isinstance(module, SimpleMLPDiscriminator):
+            return None
+        points = getattr(generator, "model", generator)(prior.z).detach()
+        if points.ndim != 2 or points.shape[-1] != 2:
+            return None
+        probe = torch.Generator()
+        probe.manual_seed(SUPPORT_PROBE_SEED)
+        real = sample_ring(means, SUPPORT_PROBE_N, SIGMA, probe)
+        armed = self._smooth_on
+        self._smooth_on = False
+        try:
+            gap = float(module(points).mean() - module(real).mean())
+        finally:
+            self._smooth_on = armed
+        return gap if math.isfinite(gap) else None
 
     def _stalled(self, sharpness):
         """D near its slope limit while G's own trust region has kept G nearly still."""
@@ -153,6 +230,10 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         value.update(method=METHOD, scratch_optimizer_policy=METHOD, reach=self.reach, ramp=self.ramp,
                      game_bound=self.game_bound, game_steps=self.game_steps,
                      b_cap_slope=B_CAP_SLOPE,
+                     recovery_reach=RECOVERY_REACH, support_drop=SUPPORT_DROP, support_alpha=SUPPORT_ALPHA,
+                     recovery_updates=int(sum(bool(row.get("recovery")) for row in self.records)),
+                     aten_cpu_capability=os.environ.get("ATEN_CPU_CAPABILITY", ""),
+                     cpu_capability=torch.backends.cpu.get_cpu_capability(),
                      widened_updates=int(sum(w > base.SMOOTH_WIDTH_CAP for w in widths)),
                      max_width=max(widths, default=0.))
         return value
@@ -177,4 +258,5 @@ def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="p
         base.SmoothedBothBoundRecorder = original
 
 
-__all__ = ["METHOD", "ReachRecorder", "pr84_reach_candidate", "reach_width"]
+__all__ = ["METHOD", "ReachRecorder", "note_support", "pr84_reach_candidate", "reach_width",
+           "recovery_width", "RECOVERY_REACH", "SUPPORT_DROP"]

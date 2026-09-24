@@ -12,6 +12,7 @@ from contextlib import contextmanager
 import hashlib
 import importlib
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -33,6 +34,8 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "reachrecover": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
+                     dict(ramp="recovery")),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
@@ -62,6 +65,7 @@ def declare(output, phase, method):
               for name in SOURCES if (ROOT / name).exists()}
     import torch
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
+               aten_cpu_capability=os.environ.get("ATEN_CPU_CAPABILITY", ""),
                cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
                purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
                source=source)
@@ -167,8 +171,11 @@ def stay(output, method, steps):
                final=(diag[-1]["step"], diag[-1]["modes"], round(diag[-1]["hq"], 4)) if diag else None,
                dynamics=_dynamics(recorder))
     records = [dict(step=r["outer_step"], sharp=r.get("critic_sharpness"), width=r.get("critic_width"),
-                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"])
+                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"],
+                    support=r.get("critic_support"), support_ema=r.get("support_ema"),
+                    recovery=r.get("recovery"))
                for r in getattr(recorder, "records", [])]
+    row["recovery_steps"] = int(sum(bool(r.get("recovery")) for r in records))
     (output / "stay.json").write_text(json.dumps(dict(summary=row, diagnostic=diag, records=records),
                                                  default=float) + "\n")
     emit(**row)
