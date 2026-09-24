@@ -161,7 +161,8 @@ class AlternatingCurvatureRecorder:
             per_particle=getattr(self,'per_particle',False),critic_average=getattr(self,'critic_average',None),
             smooth_critic=getattr(self,'smooth_critic',None),smooth_samples=getattr(self,'smooth_samples',None),
             smoothing_sigma=stats([r.get('smoothing_sigma') for r in closed]),stencil_critic=getattr(self,'stencil_critic',False),
-            plain_curvature=getattr(self,'plain_curvature',False),
+            plain_curvature=getattr(self,'plain_curvature',False),slope_reference=getattr(self,'slope_reference',None),
+            slope_weight_mean=stats([r.get('slope_weight_mean') for r in closed]),slope_weight_max=stats([r.get('slope_weight_max') for r in closed]),
             critic_width=stats([r.get('critic_width') for r in closed]),critic_sharpness=stats([r.get('critic_sharpness') for r in closed]),critic_length=stats([r.get('critic_length') for r in closed]),
             critic_average_distance=stats([r.get('critic_average_distance') for r in closed]),
             particle_factor=stats([q['factor'] for r in closed for q in r.get('particles',[])]),
@@ -230,7 +231,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
     """
 
     def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False,
-                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False,per_particle=False,critic_average=None,smooth_critic=None,smooth_samples=8,stencil_critic=False,plain_curvature=False):
+                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False,per_particle=False,critic_average=None,smooth_critic=None,smooth_samples=8,stencil_critic=False,plain_curvature=False,slope_reference=None):
         super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
         if ratio_reference is not None and (not math.isfinite(ratio_reference) or ratio_reference<=0
                                             or not ratio_span>=1 or not 0<=ratio_decay<1):
@@ -245,6 +246,9 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         self.smooth_critic=smooth_critic;self.smooth_samples=smooth_samples;self._smoothing=None
         self.plain_curvature=bool(plain_curvature)
         if self.plain_curvature and not stencil_critic:raise ValueError('plain curvature needs the stencil critic')
+        if slope_reference is not None and (not stencil_critic or not math.isfinite(slope_reference) or slope_reference<=0):
+            raise ValueError('slope weighting needs the stencil critic and a positive reference')
+        self.slope_reference=slope_reference
         self.stencil_critic=bool(stencil_critic);self._stencil_on=False;self._stencil_width=0.;self._local=None
         self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
         if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
@@ -329,7 +333,12 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
 
         With ``plain_curvature`` G still steps along the stencil-smoothed critic
         (pass 1), but G's own-curvature ratio is measured against the plain
-        critic from two extra unsmoothed replays at (D*, G1) and (D*, G0)."""
+        critic from two extra unsmoothed replays at (D*, G1) and (D*, G0).
+
+        With ``slope_reference`` each generated sample's gradient into G is scaled
+        by min(1, ||grad_x D_s(x)|| / slope_reference), the smoothed critic's
+        slope at that sample's own location. Values are unchanged; only G's
+        backward pass through each sample is weighted."""
         from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
         self._stencil_on=False;self._stencil_width=0.
         local=self._local or {}
@@ -485,10 +494,26 @@ def alternating_curvature(task='mode_hold',bound_d=False,**options):
         stack.enter_context(patch.object(GANLoss,'d_loss',observed_d_loss))
         from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
         original_forward=SimpleMLPDiscriminator.forward
+        def stencil_mean(module,x,width):
+            values=[original_forward(module,x)]
+            for dim in range(x.shape[-1]):
+                shift=torch.zeros_like(x);shift[...,dim]=width
+                values.append(original_forward(module,x+shift));values.append(original_forward(module,x-shift))
+            return torch.stack(values,0).mean(0)
         def stencil_forward(module,x):
             if (getattr(recorder,'_stencil_on',False) and recorder.enabled and not recorder.passthrough
                     and x.ndim>=2 and x.shape[-1]==2 and recorder._stencil_width>0):
-                width=recorder._stencil_width;values=[original_forward(module,x)]
+                width=recorder._stencil_width
+                reference=getattr(recorder,'slope_reference',None)
+                if reference is not None and x.requires_grad:
+                    with torch.enable_grad():
+                        probe=x.detach().requires_grad_(True)
+                        slope,=torch.autograd.grad(stencil_mean(module,probe,width).sum(),probe)
+                    weight=(slope.norm(dim=-1,keepdim=True)/reference).clamp(max=1.).to(x.dtype)
+                    x=x.detach()+weight*(x-x.detach())
+                    if recorder.phase==1:
+                        recorder.row['slope_weight_mean']=float(weight.mean());recorder.row['slope_weight_max']=float(weight.max())
+                values=[original_forward(module,x)]
                 for dim in range(x.shape[-1]):
                     shift=torch.zeros_like(x);shift[...,dim]=width
                     values.append(original_forward(module,x+shift));values.append(original_forward(module,x-shift))

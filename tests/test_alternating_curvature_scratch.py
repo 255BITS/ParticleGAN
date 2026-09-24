@@ -222,3 +222,13 @@ def test_plain_curvature_path_equals_v10_when_stencil_cannot_arm():
     plain = run(stencil_critic=True, plain_curvature=True)
     assert plain[:2] == base[:2]
     assert plain[2].rng_replay_verified == 3 * 3
+
+
+def test_slope_weight_of_one_reproduces_the_stencil_recipe_and_small_slopes_shrink_steps():
+    options = dict(start_step=0, curvature_bound=.25, bound_d=True, d_curvature_bound=3., stencil_critic=True)
+    stencil = _host(alternating_curvature(**options))
+    unit = _host(alternating_curvature(slope_reference=1e-12, **options))
+    assert stencil[0] == unit[0]
+    weighted = _host(alternating_curvature(slope_reference=1e6, **options))
+    assert all(r["slope_weight_max"] < 1e-3 for r in weighted[3].records)
+    assert all(torch.equal(a, b) for a, b in zip(stencil[1:3], weighted[1:3]))
