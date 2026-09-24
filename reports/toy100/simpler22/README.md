@@ -39,8 +39,10 @@ export ONEDNN_MAX_CPU_ISA=AVX2 DNNL_MAX_CPU_ISA=AVX2
 python -u -m benchmarks.toy_suite run \
   --config configs/toy100/constraints_simple_regularization.json \
   --output artifacts/toy-suite/simpler22
-python -m benchmarks.toy_suite regrade --output reports/toy100/simpler22
+python -m benchmarks.toy_suite regrade --output artifacts/toy-suite/simpler22
 python -m benchmarks.toy100 render --output artifacts/toy-suite/simpler22/toy100
+# Independently regrade the checked-in evidence without retraining:
+python -m benchmarks.toy_suite regrade --output reports/toy100/simpler22
 ```
 
 Training source was frozen at `43d800d`; config SHA-256 is `4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7`. The archive binds executable policy and full public-package source across the native and older hosts. Actual optimizer-rate and noise receipts are checked. The 188-file run, including raw checkpoint/holdout samples and rendered GIFs, was copied from RAM and every file hash verified; [retention.json](retention.json) records the initial copy. Regrading regenerates aggregate reports from those raw files.
