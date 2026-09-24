@@ -1,0 +1,106 @@
+{
+  "files": {
+    "config.json": {
+      "bytes": 1464,
+      "sha256": "5dda3e89140c993bdbe12350c88125a147aaa9a820bbf6db3b864f8912b96d46"
+    },
+    "generated-mode_hold.py": {
+      "bytes": 6604,
+      "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da"
+    },
+    "result.json": {
+      "bytes": 5165,
+      "sha256": "fb3639efd9abbf198d9e27c60121cdf6f3a834c2a3fddfb2dc3989f93e488846"
+    },
+    "run.log": {
+      "bytes": 1056,
+      "sha256": "1be5f9cccdbfdfd18b0d3cef85eb598ddb71fd21ff8d27d3e89cec64fb0466fa"
+    },
+    "source/benchmarks/locked_shared/mlp.py": {
+      "bytes": 2289,
+      "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+    },
+    "source/benchmarks/locked_shared/mode_hold.py": {
+      "bytes": 10774,
+      "sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    "source/configs/toy100/constraints_simple_regularization.json": {
+      "bytes": 1507,
+      "sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+    },
+    "source/particlegan/gan_loss.py": {
+      "bytes": 7960,
+      "sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da"
+    },
+    "source/particlegan/grad_regularizers.py": {
+      "bytes": 17129,
+      "sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f"
+    },
+    "source/reports/toy100/alternating_curvature_scratch.py": {
+      "bytes": 16689,
+      "sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450"
+    },
+    "source/reports/toy100/chamfer_discrete_reallocation.py": {
+      "bytes": 4218,
+      "sha256": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24"
+    },
+    "source/reports/toy100/chamfer_pullback.py": {
+      "bytes": 7290,
+      "sha256": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda"
+    },
+    "source/reports/toy100/coverage_fixed_eval.py": {
+      "bytes": 3996,
+      "sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e"
+    },
+    "source/reports/toy100/extra_adam_scratch.py": {
+      "bytes": 13261,
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55"
+    },
+    "source/reports/toy100/joint_output_pullback.py": {
+      "bytes": 6674,
+      "sha256": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3"
+    },
+    "source/reports/toy100/pr84_critic_refinement_capture.py": {
+      "bytes": 7367,
+      "sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585"
+    },
+    "source/reports/toy100/pr84_critic_refinement_filter.py": {
+      "bytes": 7717,
+      "sha256": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29"
+    },
+    "source/reports/toy100/pr84_opponent_prediction.py": {
+      "bytes": 8204,
+      "sha256": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846"
+    },
+    "source/reports/toy100/pr84_prediction_state_filter.py": {
+      "bytes": 15392,
+      "sha256": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4"
+    },
+    "source/reports/toy100/pr84_smoothed_candidate.py": {
+      "bytes": 6530,
+      "sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f"
+    },
+    "source/reports/toy100/reallocation_smoothed_candidate.py": {
+      "bytes": 8789,
+      "sha256": "ca16cf667a03e585d50c110edcd0b219991768877dff1a640ec2371c7d16439c"
+    },
+    "source/reports/toy100/sample_anchor_candidate.py": {
+      "bytes": 5113,
+      "sha256": "2fb4ee97bfc4a1f00f0076c55f0e210bc531fc34779c1e23a719ba7722a15c33"
+    },
+    "source/reports/toy100/sample_anchor_state_filter.py": {
+      "bytes": 6230,
+      "sha256": "68a66c8485b06315df23bfa47fbfc79fdeedbd3fdfa91a7e00a0a68311018fd4"
+    },
+    "source/reports/toy100/sample_group_anchor.py": {
+      "bytes": 12791,
+      "sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037"
+    },
+    "states.pt.gz": {
+      "bytes": 1593472,
+      "sha256": "d2908e4d05f7a6da11e310c3fba68b457e8362c39c0d21eb8c36d1f2860402b7"
+    }
+  },
+  "scope": "native cold mode_hold first complete update only; stopped before EMA/checkpoint",
+  "states_raw_sha256": "22e536f4be19f70d10d6bb78d71edae597246b8463c57a75de91f9da24a9458f"
+}

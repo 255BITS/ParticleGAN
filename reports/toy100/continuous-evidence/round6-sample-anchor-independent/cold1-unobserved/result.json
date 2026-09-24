@@ -1,0 +1,119 @@
+{
+  "scope": "native cold mode_hold first complete update only; stopped before EMA/checkpoint",
+  "no_saved_state_continuation_observer": true,
+  "internal_pr84_locals_phase_binding": true,
+  "native_recipe_steps": 1200,
+  "native_noise_horizon": 1200,
+  "original_disabled_full_state_parity": true,
+  "active_nonowner_state_parity": true,
+  "states_raw_sha256": "22e536f4be19f70d10d6bb78d71edae597246b8463c57a75de91f9da24a9458f",
+  "source": {
+    "reports/toy100/sample_anchor_state_filter.py": "68a66c8485b06315df23bfa47fbfc79fdeedbd3fdfa91a7e00a0a68311018fd4",
+    "reports/toy100/sample_anchor_candidate.py": "2fb4ee97bfc4a1f00f0076c55f0e210bc531fc34779c1e23a719ba7722a15c33",
+    "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+    "reports/toy100/reallocation_smoothed_candidate.py": "ca16cf667a03e585d50c110edcd0b219991768877dff1a640ec2371c7d16439c",
+    "reports/toy100/chamfer_discrete_reallocation.py": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24",
+    "reports/toy100/chamfer_pullback.py": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+    "reports/toy100/joint_output_pullback.py": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3",
+    "reports/toy100/pr84_critic_refinement_capture.py": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+    "reports/toy100/pr84_prediction_state_filter.py": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4",
+    "reports/toy100/pr84_critic_refinement_filter.py": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+    "reports/toy100/pr84_opponent_prediction.py": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+  },
+  "generated_host_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+  "arms": {
+    "original": {
+      "state_sha256": "ff17bc436e56b9f5f79740f08f8ebbf85a721f3ed1d4ef25f66ed0c66179e947",
+      "applied": {
+        "d": {
+          "rate": [
+            0.00425
+          ],
+          "calls": 1,
+          "moments": 1
+        },
+        "g_prior": {
+          "rate": [
+            0.00425,
+            0.0085
+          ],
+          "calls": 1,
+          "moments": 1
+        }
+      },
+      "source_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "method": "alternating_adam_with_spatially_smoothed_g_critic",
+      "phase_replays": 2,
+      "selected": null,
+      "group_count": null,
+      "fit_status": null,
+      "anchor_cost_before": null,
+      "anchor_cost_final": null
+    },
+    "disabled": {
+      "state_sha256": "ff17bc436e56b9f5f79740f08f8ebbf85a721f3ed1d4ef25f66ed0c66179e947",
+      "applied": {
+        "d": {
+          "rate": [
+            0.00425
+          ],
+          "calls": 1,
+          "moments": 1
+        },
+        "g_prior": {
+          "rate": [
+            0.00425,
+            0.0085
+          ],
+          "calls": 1,
+          "moments": 1
+        }
+      },
+      "source_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "method": "pr84_sample_group_distinct_anchor_joint_output_fit",
+      "phase_replays": 2,
+      "selected": null,
+      "group_count": null,
+      "fit_status": null,
+      "anchor_cost_before": null,
+      "anchor_cost_final": null
+    },
+    "active": {
+      "state_sha256": "ebca381e681b3fc433ca0eb801a58e7c25fdc51fe82cfdacf02b9f21667d4e25",
+      "applied": {
+        "d": {
+          "rate": [
+            0.00425
+          ],
+          "calls": 1,
+          "moments": 1
+        },
+        "g_prior": {
+          "rate": [
+            0.00425,
+            0.0085
+          ],
+          "calls": 1,
+          "moments": 1
+        }
+      },
+      "source_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "method": "pr84_sample_group_distinct_anchor_joint_output_fit",
+      "phase_replays": 2,
+      "selected": "joint_fit",
+      "group_count": 8,
+      "fit_status": "CONVERGED",
+      "anchor_cost_before": 17.371271752040997,
+      "anchor_cost_final": 3.129425538954511
+    }
+  }
+}
