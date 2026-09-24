@@ -1,0 +1,23 @@
+{
+  "format": "research-persistent-noise-grid-v1",
+  "production_recipe": false,
+  "base_config": "configs/toy100/shared_candidate.json",
+  "cores": {
+    "winner": {"reg_kappa": 1.176, "reg_coeff": 6.0, "prior_reg": 0.05},
+    "simple": {"reg_kappa": 1.0, "reg_coeff": 1.0, "prior_reg": 0.0}
+  },
+  "lr": [0.001, 0.0025],
+  "constant_input_sigma": [0.1, 0.5],
+  "rows": 8,
+  "optimizer": "ordinary alternating Adam",
+  "constant_schedule": {"lr_anneal_start": 0.0, "lr_floor": 1.0},
+  "remove_fields": ["network_lr_horizon_cap", "network_lr_floor"],
+  "noise_override": "sigma(t)=input_noise_std; input_noise_anneal_end is explicitly superseded, not reinterpreted",
+  "fixed": {"betas": [0.0, 0.999], "d_lr_mult": 1.0, "prior_lr_mult": 2.0, "seed": 0, "output_noise_std": 0.029, "output_noise_warmup": 0.2},
+  "task_order": ["mode_hold", "trajectory"],
+  "budget": {"mode_hold": 1200, "trajectory": 400},
+  "expansion": "No further nearby rows if all eight fail; both full-budget task passes are READY_EXPAND only, requiring remaining hosts then fresh19/native3/common22",
+  "new_tuning": ["persistent input noise sigma"],
+  "hypothesis_source": "https://arxiv.org/html/1801.04406v4",
+  "theory_limit": "Dirac-GAN local gradient-descent stability under assumptions; not an Adam/b_cap/rp global convergence guarantee"
+}
