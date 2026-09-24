@@ -1,0 +1,549 @@
+"""Alternating Adam with a critic-gated same-sample G own-curvature bound.
+
+Every recorder-based game update tested before this (extragradient, implicit,
+cross-only, error-relative guards) evaluates D and G at one joint point: a
+simultaneous game. With its own bound disabled, that simultaneous scaffold
+already fails cold trajectory (MSE .228), while the host's alternating
+constant Adam passes (.003). This adapter keeps the host's alternation: D
+takes its ordinary Adam step, then G takes its ordinary Adam step against the
+new D. Nothing else changes while the critic is clearly winning.
+
+When the critic's base-point advantage log 2 - L_D (raw relativistic D loss,
+before penalties) is below ``advantage_gate``, the host block is replayed once
+with identical data/noise at (D_new, G_new) with D's replayed step discarded.
+With P = lr / Adam denominator and Delta the G+prior Adam step,
+
+    rho = ||sqrt(P) (F_G(D_new, G_new) - F_G(D_new, G_base))|| / ||Delta / sqrt(P)||
+
+is the effective preconditioned step times own curvature along the step, and
+G+prior is placed at G_base + min(1, c / rho) Delta. Moments advance once. The
+target is never read, and there is no elapsed-time schedule.
+"""
+from contextlib import ExitStack,contextmanager
+import ast
+import math
+from unittest.mock import patch
+
+import torch
+
+from particlegan.gan_loss import GANLoss
+from reports.toy100.extra_adam_scratch import HOSTS,sha,transformed_function
+
+METHOD='alternating_adam_with_critic_gated_own_curvature_bound'
+
+
+class AlternatingCurvatureRecorder:
+    def __init__(self,start_step=0,curvature_bound=.25,advantage_gate=.1,trace_outputs=False):
+        if not math.isfinite(curvature_bound) or curvature_bound<=0:raise ValueError('invalid curvature bound')
+        if advantage_gate is not None and (not math.isfinite(advantage_gate) or advantage_gate<=0):
+            raise ValueError('invalid critic-advantage gate')
+        self.start_step=start_step;self.curvature_bound=curvature_bound;self.advantage_gate=advantage_gate
+        self.enabled=True;self.passthrough=False;self.phase=None;self.optimizers=None
+        self.rows={};self.records=[];self.outer_steps=0;self.rng_replay_verified=0
+        self.advantage=None;self.accounting=None;self.host_source=None
+        self.trace_outputs=trace_outputs;self.trace=[]
+
+    @staticmethod
+    def _rng(streams):
+        return [torch.get_rng_state().clone()]+[s.get_state().clone() for s in streams]
+
+    @staticmethod
+    def _set_rng(streams,states):
+        torch.set_rng_state(states[0])
+        for stream,state in zip(streams,states[1:]):stream.set_state(state)
+
+    @torch.no_grad()
+    def _record_trace(self,local):
+        if not self.trace_outputs or 'means' not in local:return
+        model=local['generator'];clean=getattr(model,'model',model)
+        self.trace.append([[round(float(v),5) for v in row] for row in clean(local['prior'].z).tolist()])
+        if not hasattr(self,'trace_means'):self.trace_means=local['means'].tolist()
+
+    def _params(self,opt):
+        return [p for group in opt.param_groups for p in group['params']]
+
+    def phases(self,step,opt_d,opt_g,local):
+        if not self.enabled or step<self.start_step:
+            self.passthrough=True
+            try:yield 0
+            finally:self.passthrough=False
+            return
+        if self.optimizers is None:
+            self.optimizers=(opt_d,opt_g)
+            self.rows={opt:dict(role=role,calls=0) for role,opt in zip(('d','g'),self.optimizers)}
+        if self.optimizers!=(opt_d,opt_g):raise RuntimeError('game optimizers changed')
+        streams=[v for v in local.values() if isinstance(v,torch.Generator)]
+        policy=local.get('noise_policy')
+        if policy is not None:streams.extend(v for name in ('input_stream','output_stream')
+            if isinstance((v:=getattr(policy,name,None)),torch.Generator))
+        streams=list({id(s):s for s in streams}.values())
+        buffers=[(b,b.detach().clone()) for name in ('generator','critic','prior')
+                 if isinstance((m:=local.get(name)),torch.nn.Module) for b in m.buffers()]
+        self.g_base=[p.detach().clone() for p in self._params(opt_g)]
+        rng_before=self._rng(streams)
+        self.advantage=None;self.phase=0;self.pending=None
+        yield 0
+        rng_after=self._rng(streams)
+        row=dict(outer_step=self.outer_steps+1,critic_advantage=self.advantage)
+        gate_open=(self.advantage_gate is not None and self.advantage is not None
+                   and self.advantage>=self.advantage_gate)
+        row['gate_open']=gate_open
+        if not gate_open:
+            if self.advantage_gate is not None and self.advantage is None:
+                raise RuntimeError('critic advantage was not observed at the base point')
+            g_new=[p.detach().clone() for p in self._params(opt_g)]
+            d_new=[p.detach().clone() for p in self._params(opt_d)]
+            self._set_rng(streams,rng_before);self.phase=1
+            yield 1
+            if not all(torch.equal(a,b) for a,b in zip(rng_after,self._rng(streams))):
+                raise RuntimeError('replayed block consumed a different RNG pattern')
+            self.rng_replay_verified+=1
+            if any(not torch.equal(p,v) for p,v in zip(self._params(opt_d),d_new)):
+                raise RuntimeError('D moved during G curvature replay')
+            with torch.no_grad():
+                num=den=0.
+                for p,base,new,g0,g1,metric in zip(self._params(opt_g),self.g_base,g_new,self.g0,self.g1,self.metric):
+                    delta=(new-base).double()
+                    num+=float((metric*(g1-g0).double().square()).sum())
+                    den+=float((delta.square()/metric).sum())
+                rho=math.sqrt(num/den) if den>0 else 0.
+                if not math.isfinite(rho):raise FloatingPointError('nonfinite own-curvature ratio')
+                factor=min(1.,self.curvature_bound/rho) if rho>0 else 1.
+                for p,base,new in zip(self._params(opt_g),self.g_base,g_new):
+                    p.copy_(torch.lerp(base,new,factor) if factor<1 else new)
+                for b,saved in buffers:b.copy_(saved)
+            row.update(rho=rho,factor=factor)
+        self.records.append(row);self._record_trace(local)
+        self.phase=None;self.outer_steps+=1
+        if self.accounting is not None:self.accounting(self.rows[opt_d]['calls'],self.outer_steps)
+
+    @torch.no_grad()
+    def step(self,optimizer,ordinary_step,closure=None):
+        if self.passthrough:return ordinary_step(optimizer,closure=closure)
+        if self.phase is None or optimizer not in self.rows or closure is not None:
+            raise RuntimeError('optimizer call outside the declared game update')
+        self.rows[optimizer]['calls']+=1
+        opt_d,opt_g=self.optimizers
+        if self.phase==0:
+            if optimizer is opt_g:
+                self.g0=[p.grad.detach().clone() for p in self._params(opt_g)]
+            result=ordinary_step(optimizer)
+            if optimizer is opt_g:
+                self.metric=[]
+                for group in opt_g.param_groups:
+                    for p in group['params']:
+                        state=opt_g.state[p]
+                        denominator=(state['exp_avg_sq']/(1-group['betas'][1]**float(state['step']))).sqrt()+group['eps']
+                        self.metric.append(group['lr']/denominator.double())
+            return result
+        if optimizer is opt_g:
+            self.g1=[p.grad.detach().clone() for p in self._params(opt_g)]
+        return None
+
+    def receipt(self):
+        closed=[r for r in self.records if not r['gate_open']]
+        def stats(values):
+            values=[v for v in values if v is not None]
+            return dict(min=min(values),mean=sum(values)/len(values),max=max(values)) if values else None
+        return dict(method=METHOD,scratch_optimizer_policy=METHOD,shared_gate_eligible=False,
+            curvature_bound=self.curvature_bound,d_curvature_bound=getattr(self,'d_curvature_bound',None),advantage_gate=self.advantage_gate,
+            outer_steps=self.outer_steps,gate_open=len(self.records)-len(closed),bound_evaluated=len(closed),
+            bound_active=sum(r['factor']<1 for r in closed),rho=stats([r['rho'] for r in closed]),
+            factor=stats([r['factor'] for r in closed]),
+            d_rho=stats([r.get('d',{}).get('rho') for r in closed]),d_factor=stats([r.get('d',{}).get('factor') for r in closed]),
+            d_bound_active=sum(r.get('d',{}).get('factor',1.)<1 for r in closed),
+            ratio_reference=getattr(self,'ratio_reference',None),ratio_span=getattr(self,'ratio_span',None),
+            ratio_decay=getattr(self,'ratio_decay',None),g_bound=stats([r.get('g_bound') for r in closed]),
+            smoothed_ratio=stats([r.get('smoothed_ratio') for r in closed]),per_group=getattr(self,'per_group',False),
+            network_factor=stats([g['factor'] for r in closed for g in r.get('g_groups',[]) if not g['prior']]),
+            prior_factor=stats([g['factor'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),
+            prior_rho=stats([g['rho'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),
+            per_particle=getattr(self,'per_particle',False),critic_average=getattr(self,'critic_average',None),
+            smooth_critic=getattr(self,'smooth_critic',None),smooth_samples=getattr(self,'smooth_samples',None),
+            smoothing_sigma=stats([r.get('smoothing_sigma') for r in closed]),stencil_critic=getattr(self,'stencil_critic',False),
+            plain_curvature=getattr(self,'plain_curvature',False),slope_reference=getattr(self,'slope_reference',None),
+            slope_weight_mean=stats([r.get('slope_weight_mean') for r in closed]),
+            slope_step_reference=getattr(self,'slope_step_reference',None),slope_gate=getattr(self,'slope_gate',None),
+            slope_gate_fired=sum(bool(r.get('slope_gate_fired')) for r in closed),slope_step_scale=stats([r.get('slope_step_scale') for r in closed]),slope_weight_max=stats([r.get('slope_weight_max') for r in closed]),
+            critic_width=stats([r.get('critic_width') for r in closed]),critic_sharpness=stats([r.get('critic_sharpness') for r in closed]),critic_length=stats([r.get('critic_length') for r in closed]),
+            critic_average_distance=stats([r.get('critic_average_distance') for r in closed]),
+            particle_factor=stats([q['factor'] for r in closed for q in r.get('particles',[])]),
+            particle_factor_max=stats([max(q['factor'] for q in r['particles']) for r in closed if r.get('particles')]),critic_advantage=stats([r['critic_advantage'] for r in self.records]),
+            gradient_evaluations_per_outer_step=(sum(3 if 'd' in r else 1 if r['gate_open'] else 2 for r in self.records)/self.outer_steps) if self.outer_steps else None,
+            moment_updates_per_outer_step=1,rng_replay_verified=self.rng_replay_verified,
+            update_order='alternating: D Adam step, then G+prior Adam step against the new D',
+            host_source=self.host_source,records=self.records)
+
+
+def _metric(opt):
+    values=[]
+    for group in opt.param_groups:
+        for p in group['params']:
+            state=opt.state[p]
+            denominator=(state['exp_avg_sq']/(1-group['betas'][1]**float(state['step']))).sqrt()+group['eps']
+            values.append(group['lr']/denominator.double())
+    return values
+
+
+def _rho(base,new,g0,g1,metric):
+    num=den=0.
+    for b,n,a,c,m in zip(base,new,g0,g1,metric):
+        num+=float((m*(c-a).double().square()).sum());den+=float(((n-b).double().square()/m).sum())
+    rho=math.sqrt(num/den) if den>0 else 0.
+    if not math.isfinite(rho):raise FloatingPointError('nonfinite own-curvature ratio')
+    return rho
+
+
+class BothBoundRecorder(AlternatingCurvatureRecorder):
+    """Alternating Adam with the same-sample own-curvature bound on D and G.
+
+    Pass 0: D takes its ordinary Adam step (D0 -> D1); G's gradient is ignored.
+    Pass 1 (same data/noise) at (D1, G0): D's own field change gives rho_D and
+    D* = D0 + min(1, c/rho_D)(D1 - D0); G's gradient at (D*, G0) then takes
+    G's ordinary Adam step (G0 -> G1). Pass 2 at (D*, G1) gives rho_G and
+    G = G0 + min(1, c/rho_G)(G1 - G0). Each player's moments advance once and
+    G still responds to the D that actually materializes.
+
+    With ``ratio_reference`` the G bound is c * clip(r_ref / r, 1/span, span),
+    where r is an exponential moving average (decay ``ratio_decay``) of
+    log(rho_G / rho_D). The measured ratio is about 1-2 while either host is
+    acquiring and 6-18 once matched, so the bound loosens during acquisition
+    and tightens at rest. It is a function of the current state only.
+
+    With ``per_group`` the G network and particle-prior parameter groups each
+    get their own ratio and factor from the same replay. A prior particle's
+    latent moves only its own output, while a network step moves every output.
+
+    With ``per_particle`` the network and every non-prior parameter keep the
+    joint G factor, and each prior particle's latent row instead gets its own
+    ratio and factor from the same replay. A particle resting in a sharp basin
+    stays bounded, while one in a flat region between basins can move further
+    through its own latent without a global network step.
+
+    With ``critic_average`` (EMA decay) D trains normally, but G's gradient in
+    passes 1 and 2 is taken against an exponential moving average of D's
+    bounded parameters; the live D is restored after the update.
+
+    With ``smooth_critic`` (alpha) G's critic calls in passes 1 and 2 use
+    E_eps[D(x + sigma eps)] over ``smooth_samples`` antithetic Gaussian draws
+    on the data input, from a private generator seeded by the update index so
+    both passes see identical draws and no host RNG stream is touched.
+    sigma = alpha * std(D) / RMS ||grad_x D|| on the first G critic batch of
+    the update: the critic's own length scale, a state quantity.
+    """
+
+    def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False,
+                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False,per_particle=False,critic_average=None,smooth_critic=None,smooth_samples=8,stencil_critic=False,plain_curvature=False,slope_reference=None,slope_step_reference=None,slope_gate=None):
+        super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
+        if ratio_reference is not None and (not math.isfinite(ratio_reference) or ratio_reference<=0
+                                            or not ratio_span>=1 or not 0<=ratio_decay<1):
+            raise ValueError('invalid curvature-ratio controller')
+        self.ratio_reference=ratio_reference;self.ratio_span=ratio_span;self.ratio_decay=ratio_decay
+        self.log_ratio=None;self.per_group=per_group;self.per_particle=per_particle
+        if per_group and per_particle:raise ValueError('choose per-group or per-particle bounds')
+        if critic_average is not None and not 0<critic_average<1:raise ValueError('invalid critic averaging decay')
+        self.critic_average=critic_average;self.critic_ema=None
+        if smooth_critic is not None and (not math.isfinite(smooth_critic) or smooth_critic<=0 or smooth_samples<2 or smooth_samples%2):
+            raise ValueError('invalid critic smoothing')
+        self.smooth_critic=smooth_critic;self.smooth_samples=smooth_samples;self._smoothing=None
+        self.plain_curvature=bool(plain_curvature)
+        if self.plain_curvature and not stencil_critic:raise ValueError('plain curvature needs the stencil critic')
+        if slope_reference is not None and (not stencil_critic or not math.isfinite(slope_reference) or slope_reference<=0):
+            raise ValueError('slope weighting needs the stencil critic and a positive reference')
+        self.slope_reference=slope_reference
+        if slope_step_reference is not None and (not stencil_critic or not math.isfinite(slope_step_reference) or slope_step_reference<=0):
+            raise ValueError('slope step scaling needs the stencil critic and a positive reference')
+        self.slope_step_reference=slope_step_reference
+        if slope_gate is not None and (not stencil_critic or slope_step_reference is not None or not math.isfinite(slope_gate) or slope_gate<=0):
+            raise ValueError('slope gate needs the stencil critic, a positive threshold, and no proportional slope scale')
+        self.slope_gate=slope_gate
+        self.stencil_critic=bool(stencil_critic);self._stencil_on=False;self._stencil_width=0.;self._local=None
+        self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
+        if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
+
+    def phases(self,step,opt_d,opt_g,local):
+        if not self.enabled or step<self.start_step:
+            self.passthrough=True
+            try:yield 0
+            finally:self.passthrough=False
+            return
+        if self.optimizers is None:
+            self.optimizers=(opt_d,opt_g)
+            self.rows={opt:dict(role=role,calls=0) for role,opt in zip(('d','g'),self.optimizers)}
+        if self.optimizers!=(opt_d,opt_g):raise RuntimeError('game optimizers changed')
+        streams=[v for v in local.values() if isinstance(v,torch.Generator)]
+        policy=local.get('noise_policy')
+        if policy is not None:streams.extend(v for name in ('input_stream','output_stream')
+            if isinstance((v:=getattr(policy,name,None)),torch.Generator))
+        streams=list({id(s):s for s in streams}.values())
+        buffers=[(b,b.detach().clone()) for name in ('generator','critic','prior')
+                 if isinstance((m:=local.get(name)),torch.nn.Module) for b in m.buffers()]
+        self.d0=[p.detach().clone() for p in self._params(opt_d)]
+        self.g_base=[p.detach().clone() for p in self._params(opt_g)]
+        self._critic_wrapper=local.get('critic');self._local=local
+        if self.smooth_critic is not None and not isinstance(self._critic_wrapper,torch.nn.Module):
+            raise RuntimeError('critic smoothing needs the host critic')
+        rng_before=self._rng(streams);self.advantage=None;self.row=dict(outer_step=self.outer_steps+1)
+        rng_after=None
+        for phase in range(4 if self.plain_curvature else 3):
+            if phase:
+                self._set_rng(streams,rng_before)
+                with torch.no_grad():
+                    for b,saved in buffers:b.copy_(saved)
+            self.phase=phase;self._stencil_on=False
+            yield phase
+            state=self._rng(streams)
+            if rng_after is None:rng_after=state
+            elif not all(torch.equal(a,b) for a,b in zip(rng_after,state)):
+                raise RuntimeError('replayed block consumed a different RNG pattern')
+            else:self.rng_replay_verified+=1
+        if self.critic_average is not None:
+            with torch.no_grad():
+                for p,v in zip(self._params(opt_d),self.d_star):p.copy_(v)
+        self.row['critic_advantage']=self.advantage;self.row['gate_open']=False
+        self.row['rho'],self.row['factor']=self.row['g']['rho'],self.row['g']['factor']
+        self.records.append(self.row);self._record_trace(local)
+        self.phase=None;self.outer_steps+=1
+        if self.accounting is not None:self.accounting(self.rows[opt_d]['calls'],self.outer_steps)
+
+
+    def _enable_smoothing(self):
+        """Route G's critic calls through E_eps[D(x + sigma eps)] for this pass."""
+        wrapper=self._critic_wrapper;inner=getattr(wrapper,'model',wrapper)
+        index=getattr(wrapper,'data_index',0);original=type(inner).forward
+        noise=torch.Generator().manual_seed(1000003*(self.outer_steps+1)+7)
+        recorder=self
+        def smoothed(module,*args,**kwargs):
+            values=list(args);x=values[index]
+            if recorder.row.get('smoothing_sigma') is None:
+                with torch.enable_grad():
+                    probe=x.detach().clone().requires_grad_(True)
+                    values[index]=probe;score=original(module,*values,**kwargs)
+                    gradient,=torch.autograd.grad(score.sum(),probe)
+                spread=float(score.detach().std());slope=float(gradient.square().sum(-1).mean().sqrt())
+                length=spread/slope if slope>0 else 0.
+                recorder.row.update(smoothing_sigma=recorder.smooth_critic*length,critic_length=length)
+            sigma=recorder.row['smoothing_sigma']
+            half=recorder.smooth_samples//2;total=0.
+            for _ in range(half):
+                eps=torch.randn(x.shape,generator=noise,dtype=x.dtype)
+                for sign in (1.,-1.):
+                    values[index]=x+sign*sigma*eps;total=total+original(module,*values,**kwargs)
+            return total/recorder.smooth_samples
+        inner.forward=smoothed.__get__(inner)
+        self._smoothing=inner
+
+    @torch.no_grad()
+    def _arm_stencil(self):
+        """Peer #84 recipe, verbatim: after each D step, G's 2D critic scores are the
+        mean of a centre-plus-(+/-width per axis) stencil, width = min(.15, .5 / sharpness),
+        sharpness = RMS central-difference input gradient of the critic on clean particles.
+
+        With ``plain_curvature`` G still steps along the stencil-smoothed critic
+        (pass 1), but G's own-curvature ratio is measured against the plain
+        critic from two extra unsmoothed replays at (D*, G1) and (D*, G0).
+
+        With ``slope_reference`` each generated sample's gradient into G is scaled
+        by min(1, ||grad_x D_s(x)|| / slope_reference), the smoothed critic's
+        slope at that sample's own location. Values are unchanged; only G's
+        backward pass through each sample is weighted.
+
+        With ``slope_step_reference`` G's applied step, after the curvature bound,
+        is further scaled by min(1, s / slope_step_reference), where s is the
+        RMS input slope of the critic at the clean particles, measured after D's
+        step at the base G. Moments and the curvature measurement are untouched.
+
+        With ``slope_gate`` the step is instead multiplied by s only when s is
+        below the gate, and left unmodified otherwise."""
+        from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
+        self._stencil_on=False;self._stencil_width=0.
+        local=self._local or {}
+        if local.get('slow') is not None:return
+        critic,generator,prior=local.get('critic'),local.get('generator'),local.get('prior')
+        if critic is None or generator is None or prior is None or not hasattr(prior,'z'):return
+        module=critic
+        while not isinstance(module,SimpleMLPDiscriminator) and hasattr(module,'model'):module=module.model
+        if not isinstance(module,SimpleMLPDiscriminator):return
+        clean=getattr(generator,'model',generator);points=clean(prior.z).detach()
+        if points.ndim!=2 or points.shape[-1]!=2:return
+        eps=1e-3;acc=0.
+        for dim in range(points.shape[-1]):
+            shift=torch.zeros_like(points);shift[:,dim]=eps
+            acc=acc+((module(points+shift)-module(points-shift))/(2*eps)).square()
+        sharp=float(acc.mean().sqrt())
+        if not math.isfinite(sharp) or sharp<=1e-6:return
+        self._stencil_width=min(.15,.5/sharp);self._stencil_on=True
+        self.row['critic_sharpness']=sharp;self.row['critic_width']=self._stencil_width
+        if self.phase==1:self.row['slope_at_base']=sharp
+
+    def _disable_smoothing(self):
+        if self._smoothing is not None:
+            del self._smoothing.forward
+            self._smoothing=None
+
+    @torch.no_grad()
+    def step(self,optimizer,ordinary_step,closure=None):
+        if self.passthrough:return ordinary_step(optimizer,closure=closure)
+        if self.phase is None or optimizer not in self.rows or closure is not None:
+            raise RuntimeError('optimizer call outside the declared game update')
+        self.rows[optimizer]['calls']+=1
+        opt_d,opt_g=self.optimizers
+        grads=lambda opt:[p.grad.detach().clone() for p in self._params(opt)]
+        if self.stencil_critic and optimizer is opt_d:
+            result=self._step_inner(optimizer,ordinary_step,grads,opt_d,opt_g)
+            if not (self.plain_curvature and self.phase>=2):self._arm_stencil()
+            return result
+        if self.plain_curvature and self.phase>=2:
+            if optimizer is opt_d:
+                for p,v in zip(self._params(opt_d),self.d_star):p.copy_(v)
+                return None
+            if self.phase==2:
+                self.plain_g1=grads(opt_g)
+                for p,v in zip(self._params(opt_g),self.g_base):p.copy_(v)
+                return None
+            rho=_rho(self.g_base,self.g1,grads(opt_g),self.plain_g1,self.metric_g)
+            factor=min(1.,self.curvature_bound/rho) if rho>0 else 1.
+            for p,b,n in zip(self._params(opt_g),self.g_base,self.g1):p.copy_(torch.lerp(b,n,factor) if factor<1 else n)
+            self.row['g']=dict(rho=rho,factor=factor,curvature_critic='plain')
+            return None
+        if self.smooth_critic is not None:
+            if optimizer is opt_d and self.phase>0:
+                result=self._step_inner(optimizer,ordinary_step,grads,opt_d,opt_g)
+                self._enable_smoothing();return result
+            if optimizer is opt_g:self._disable_smoothing()
+        return self._step_inner(optimizer,ordinary_step,grads,opt_d,opt_g)
+
+    @torch.no_grad()
+    def _step_inner(self,optimizer,ordinary_step,grads,opt_d,opt_g):
+        if optimizer is opt_d:
+            if self.phase==0:
+                self.gd0=grads(opt_d);ordinary_step(opt_d)
+                self.metric_d=_metric(opt_d);self.d1=[p.detach().clone() for p in self._params(opt_d)]
+                for p,v in zip(self._params(opt_g),self.g_base):p.copy_(v)
+            elif self.phase==1:
+                rho=_rho(self.d0,self.d1,self.gd0,grads(opt_d),self.metric_d)
+                factor=min(1.,self.d_curvature_bound/rho) if rho>0 else 1.
+                for p,b,n in zip(self._params(opt_d),self.d0,self.d1):p.copy_(torch.lerp(b,n,factor) if factor<1 else n)
+                self.d_star=[p.detach().clone() for p in self._params(opt_d)]
+                self.row['d']=dict(rho=rho,factor=factor)
+                if self.critic_average is not None:
+                    if self.critic_ema is None:self.critic_ema=[v.clone() for v in self.d_star]
+                    else:
+                        for e,v in zip(self.critic_ema,self.d_star):e.lerp_(v,1-self.critic_average)
+                    for p,v in zip(self._params(opt_d),self.critic_ema):p.copy_(v)
+                    self.row['critic_average_distance']=math.sqrt(sum(float((e-v).double().square().sum()) for e,v in zip(self.critic_ema,self.d_star)))
+            else:
+                for p,v in zip(self._params(opt_d),self.critic_ema if self.critic_average is not None else self.d_star):p.copy_(v)
+            return None
+        if self.phase==0:
+            for p,v in zip(self._params(opt_g),self.g_base):p.copy_(v)
+            for p,v in zip(self._params(opt_d),self.d1):p.copy_(v)
+        elif self.phase==1:
+            self.gg0=grads(opt_g);ordinary_step(opt_g)
+            self.metric_g=_metric(opt_g);self.g1=[p.detach().clone() for p in self._params(opt_g)]
+        else:
+            rho=_rho(self.g_base,self.g1,self.gg0,grads(opt_g),self.metric_g)
+            bound=self.curvature_bound
+            if self.ratio_reference is not None:
+                rho_d=self.row['d']['rho']
+                if rho>0 and rho_d>0:
+                    current=math.log(rho/rho_d)
+                    self.log_ratio=current if self.log_ratio is None else self.ratio_decay*self.log_ratio+(1-self.ratio_decay)*current
+                if self.log_ratio is not None:
+                    scale=min(self.ratio_span,max(1/self.ratio_span,self.ratio_reference/math.exp(self.log_ratio)))
+                    bound=self.curvature_bound*scale
+                self.row['g_bound']=bound;self.row['smoothed_ratio']=None if self.log_ratio is None else math.exp(self.log_ratio)
+            factor=min(1.,bound/rho) if rho>0 else 1.
+            factors=[factor]*len(self.g_base)
+            if self.per_group:
+                g1_now=grads(opt_g);offset=0;groups=[]
+                for group in opt_g.param_groups:
+                    count=len(group['params']);block=slice(offset,offset+count);offset+=count
+                    group_rho=_rho(self.g_base[block],self.g1[block],self.gg0[block],g1_now[block],self.metric_g[block])
+                    group_factor=min(1.,bound/group_rho) if group_rho>0 else 1.
+                    factors[block]=[group_factor]*count
+                    groups.append(dict(prior=bool(group.get('_comparison_prior')),rho=group_rho,factor=group_factor))
+                self.row['g_groups']=groups
+            gate=getattr(self,'slope_gate',None)
+            if gate is not None and self.row.get('slope_at_base') is not None:
+                slope=self.row['slope_at_base'];self.row['slope_gate_fired']=slope<gate
+                if slope<gate:
+                    factors=[f*slope for f in factors];self.row['slope_step_scale']=slope
+            scale=getattr(self,'slope_step_reference',None)
+            if scale is not None and self.row.get('slope_at_base') is not None:
+                slope_scale=min(1.,self.row['slope_at_base']/scale)
+                factors=[f*slope_scale for f in factors];self.row['slope_step_scale']=slope_scale
+            for p,b,n,f in zip(self._params(opt_g),self.g_base,self.g1,factors):p.copy_(torch.lerp(b,n,f) if f<1 else n)
+            if self.per_particle:
+                g1_now=grads(opt_g);index=0;rows=[]
+                for group in opt_g.param_groups:
+                    for p in group['params']:
+                        if group.get('_comparison_prior') and p.dim()==2:
+                            delta=(self.g1[index]-self.g_base[index]).double();m=self.metric_g[index]
+                            change=(g1_now[index]-self.gg0[index]).double()
+                            num=(m*change.square()).sum(1);den=(delta.square()/m).sum(1)
+                            particle_rho=torch.where(den>0,(num/den.clamp_min(1e-300)).sqrt(),torch.zeros_like(num))
+                            if not torch.isfinite(particle_rho).all():raise FloatingPointError('nonfinite particle ratio')
+                            particle_factor=torch.where(particle_rho>0,(bound/particle_rho).clamp(max=1.),torch.ones_like(num))
+                            p.copy_(self.g_base[index]+(particle_factor[:,None]*delta).to(p.dtype))
+                            rows=[dict(rho=float(r),factor=float(f)) for r,f in zip(particle_rho,particle_factor)]
+                        index+=1
+                if not rows:raise RuntimeError('per-particle bound needs a two-dimensional prior group')
+                self.row['particles']=rows
+            self.row['g']=dict(rho=rho,factor=factor)
+        return None
+
+
+@contextmanager
+def alternating_curvature(task='mode_hold',bound_d=False,**options):
+    from benchmarks.locked_shared import mode_hold,trajectory
+    module={'mode_hold':mode_hold,'trajectory':trajectory}[task]
+    tree,_,original_sha=transformed_function(module,task)
+    calls=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='phases']
+    if len(calls)!=1:raise RuntimeError('expected one phase iterator')
+    calls[0].args.append(ast.Call(func=ast.Name(id='locals',ctx=ast.Load()),args=[],keywords=[]));ast.fix_missing_locations(tree)
+    source=ast.unparse(tree)+'\n';recorder=(BothBoundRecorder if bound_d else AlternatingCurvatureRecorder)(**options)
+    recorder.host_source=dict(task=task,original_function_sha256=original_sha,generated_function_sha256=sha(source.encode()))
+    ordinary_step=torch.optim.Adam.step
+    original_d_loss=GANLoss.d_loss
+    def observed_d_loss(gan,real_logits,fake_logits):
+        value=original_d_loss(gan,real_logits,fake_logits)
+        if recorder.phase==0 and recorder.advantage is None:
+            recorder.advantage=math.log(2)-float(value.detach())
+        return value
+    with ExitStack() as stack:
+        stack.enter_context(patch.dict(module.__dict__,{'_extra_state':recorder}));namespace={}
+        exec(compile(tree,f'<alternating-curvature-{task}>','exec'),module.__dict__,namespace)
+        stack.enter_context(patch.object(module,HOSTS[task],namespace[HOSTS[task]]))
+        stack.enter_context(patch.object(torch.optim.Adam,'step',
+            lambda optimizer,closure=None:recorder.step(optimizer,ordinary_step,closure)))
+        stack.enter_context(patch.object(GANLoss,'d_loss',observed_d_loss))
+        from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
+        original_forward=SimpleMLPDiscriminator.forward
+        def stencil_mean(module,x,width):
+            values=[original_forward(module,x)]
+            for dim in range(x.shape[-1]):
+                shift=torch.zeros_like(x);shift[...,dim]=width
+                values.append(original_forward(module,x+shift));values.append(original_forward(module,x-shift))
+            return torch.stack(values,0).mean(0)
+        def stencil_forward(module,x):
+            if (getattr(recorder,'_stencil_on',False) and recorder.enabled and not recorder.passthrough
+                    and x.ndim>=2 and x.shape[-1]==2 and recorder._stencil_width>0):
+                width=recorder._stencil_width
+                reference=getattr(recorder,'slope_reference',None)
+                if reference is not None and x.requires_grad:
+                    with torch.enable_grad():
+                        probe=x.detach().requires_grad_(True)
+                        slope,=torch.autograd.grad(stencil_mean(module,probe,width).sum(),probe)
+                    weight=(slope.norm(dim=-1,keepdim=True)/reference).clamp(max=1.).to(x.dtype)
+                    x=x.detach()+weight*(x-x.detach())
+                    if recorder.phase==1:
+                        recorder.row['slope_weight_mean']=float(weight.mean());recorder.row['slope_weight_max']=float(weight.max())
+                values=[original_forward(module,x)]
+                for dim in range(x.shape[-1]):
+                    shift=torch.zeros_like(x);shift[...,dim]=width
+                    values.append(original_forward(module,x+shift));values.append(original_forward(module,x-shift))
+                return torch.stack(values,0).mean(0)
+            return original_forward(module,x)
+        stack.enter_context(patch.object(SimpleMLPDiscriminator,'forward',stencil_forward))
+        yield recorder,source

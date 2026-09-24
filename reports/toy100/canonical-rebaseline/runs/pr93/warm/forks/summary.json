@@ -1,0 +1,77 @@
+{
+  "cold_final_state_sha256": "4d5ee4a9118e3504b61284ad30dfab907567dfc8f8e70eff65069c636eb949a2",
+  "continuation_updates": 200,
+  "identity_cold_parity": true,
+  "scope": "passing_state_local_stability_only",
+  "steps": 1200,
+  "variants": {
+    "identity": {
+      "final": {
+        "hq": 1.0,
+        "modes": 8
+      },
+      "final_state_sha256": "4d5ee4a9118e3504b61284ad30dfab907567dfc8f8e70eff65069c636eb949a2",
+      "local_stability": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.998291015625,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "long_hold": null,
+      "stationary": {
+        "checks": 5,
+        "failing_steps": [],
+        "min_hq": 0.999755859375,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 5,
+        "passing_suffix": 5,
+        "stable_from_step": 1000
+      },
+      "status": "PASS"
+    },
+    "pr93": {
+      "final": {
+        "hq": 0.996826171875,
+        "modes": 8
+      },
+      "final_state_sha256": "3c4a1b14472e096d8b85508059f6dde93175efac9f5216f138247318ef2a0080",
+      "local_stability": {
+        "checks": 200,
+        "failing_steps": [
+          1108,
+          1109,
+          1172
+        ],
+        "min_hq": 0.795654296875,
+        "min_modes": 8,
+        "pass_all": false,
+        "pass_suffix": true,
+        "passing_checks": 197,
+        "passing_suffix": 28,
+        "stable_from_step": 1173
+      },
+      "long_hold": null,
+      "stationary": {
+        "checks": 5,
+        "failing_steps": [],
+        "min_hq": 0.996826171875,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 5,
+        "passing_suffix": 5,
+        "stable_from_step": 1000
+      },
+      "status": "FAIL"
+    }
+  },
+  "warm_state_sha256": "f39570bf46525a11207e75abfc4d09ac6cf963cad6d6a71b366fc1a8941db63d",
+  "warm_step": 1000
+}
