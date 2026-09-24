@@ -1,0 +1,58 @@
+"""PR84 with a G critic stencil whose reach follows D's slope utilisation.
+
+PR84 sets G's five-point stencil width to ``min(.15, .5 / s)``, where ``s`` is
+the critic's RMS input slope on the clean particles. With the host's b_cap
+slope limit ``kappa = 1`` the .15 cap binds on every update, so the width never
+adapts. Here the width is ``max(.15, (.5 / kappa) * min(s / kappa, kappa / s))``.
+When D is well below its slope limit (``s <= .3``: an indistinguishable,
+covered cloud) the width is PR84's .15 and the update is PR84's. As D saturates
+its Lipschitz budget (still separating, W1-like field), G reads the critic
+over up to .5, the distance D needs at full slope to move .5 logit, which is
+PR84's own uncapped width at ``s = kappa``. D, both curvature bounds and the
+game losses are unchanged. No coverage, assignment, likelihood or clip term.
+"""
+
+from contextlib import contextmanager
+
+from reports.toy100 import pr84_smoothed_candidate as base
+
+
+METHOD = "pr84_slope_utilisation_reach"
+B_CAP_SLOPE = 1.
+REACH = .5
+
+
+def reach_width(sharpness):
+    utilisation = min(sharpness / B_CAP_SLOPE, B_CAP_SLOPE / sharpness)
+    return max(base.SMOOTH_WIDTH_CAP, REACH / B_CAP_SLOPE * utilisation)
+
+
+class ReachRecorder(base.SmoothedBothBoundRecorder):
+    def _arm_smoothed_critic(self):
+        super()._arm_smoothed_critic()
+        if self._smooth_on:
+            self._smooth_width = reach_width(self.row["critic_sharpness"])
+            self.row["critic_width"] = self._smooth_width
+
+    def receipt(self):
+        value = super().receipt()
+        widths = [row.get("critic_width", 0.) for row in self.records]
+        value.update(method=METHOD, scratch_optimizer_policy=METHOD, reach=REACH,
+                     b_cap_slope=B_CAP_SLOPE,
+                     widened_updates=int(sum(w > base.SMOOTH_WIDTH_CAP for w in widths)),
+                     max_width=max(widths, default=0.))
+        return value
+
+
+@contextmanager
+def pr84_reach_candidate(*, task="mode_hold", start_step=0):
+    original = base.SmoothedBothBoundRecorder
+    base.SmoothedBothBoundRecorder = ReachRecorder
+    try:
+        with base.pr84_smoothed_candidate(task=task, start_step=start_step) as value:
+            yield value
+    finally:
+        base.SmoothedBothBoundRecorder = original
+
+
+__all__ = ["METHOD", "ReachRecorder", "pr84_reach_candidate", "reach_width"]
