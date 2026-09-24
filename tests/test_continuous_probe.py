@@ -6,12 +6,23 @@ from copy import deepcopy
 import pytest
 
 from benchmarks.toy100.continuous_probe import (
-    DEFAULT_CONFIG, _window, match_frozen_control, run_probe,
+    DEFAULT_CONFIG, ROOT, _provenance, _window, archive_executable_sources,
+    match_frozen_control, run_probe,
 )
 
 
 def _simple():
     return json.loads(DEFAULT_CONFIG.read_text())
+
+
+def test_archive_binds_noise_source_omitted_by_standard_snapshot(tmp_path):
+    name = "benchmarks/toy100/models.py"
+    hashes = _provenance()["source_sha256"]
+    archive = archive_executable_sources(tmp_path, hashes)
+    assert name not in archive["source_sha256"]
+    supplemental = archive["supplemental_sources"][name]
+    assert supplemental["sha256"] == hashes[name]
+    assert (tmp_path / "toy100-models-source.py").read_bytes() == (ROOT / name).read_bytes()
 
 
 def test_frozen_mode_hold_separates_scheduled_and_constant_rates():

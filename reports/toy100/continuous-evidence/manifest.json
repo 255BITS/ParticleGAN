@@ -27,8 +27,16 @@
     "source.tar.gz": {
       "bytes": 233122,
       "sha256": "2940ae9525535c45ffbf72395851c8a711d3f217ce79ab72ffd47d3dbdf3fd95"
+    },
+    "toy100-models-source.py": {
+      "bytes": 9411,
+      "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3"
     }
   },
   "schema": "continuous-probe-evidence-v1",
-  "source_epoch": "The per-episode source_sha256 and source.tar.gz are authoritative; wall-clock fields are diagnostic."
+  "source_epoch": "The per-episode hashes and source.tar.gz are authoritative for their recorded files; toy100-models-source.py supplies the separately verified noise source omitted by the standard snapshot. Wall-clock fields are diagnostic.",
+  "supplemental_archive_path": "toy100-models-source.py",
+  "supplemental_source_sha256": {
+    "benchmarks/toy100/models.py": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3"
+  }
 }

@@ -56,6 +56,7 @@ FROZEN_STEPS = baseline.BUDGETS["mode_hold"]
 RECOVERY_DEADLINE = 400
 _SOURCE_FILES = (
     "benchmarks/toy100/continuous_probe.py",
+    "benchmarks/toy100/models.py",
     "benchmarks/locked_shared/mode_hold.py",
     "benchmarks/locked_shared/baseline.py",
     "benchmarks/locked_shared/observation.py",
@@ -67,6 +68,8 @@ _SOURCE_FILES = (
     "particlegan/grad_regularizers.py",
     "particlegan/recipes.py",
 )
+_SUPPLEMENTAL_SOURCE = "benchmarks/toy100/models.py"
+_SUPPLEMENTAL_ARCHIVE_NAME = "toy100-models-source.py"
 
 
 def _provenance() -> dict:
@@ -84,6 +87,28 @@ def _provenance() -> dict:
                      threads=torch.get_num_threads(),
                      device="cpu"),
     )
+
+
+def archive_executable_sources(output: Path, source_sha256: dict[str, str]) -> dict:
+    """Archive the standard suite snapshot plus its omitted noise source."""
+    output.mkdir(parents=True, exist_ok=True)
+    archive = suite.snapshot(output)
+    supplemental = {}
+    for name, expected in source_sha256.items():
+        observed = archive["source_sha256"].get(name)
+        if name == _SUPPLEMENTAL_SOURCE and observed is None:
+            source = (ROOT / name).read_bytes()
+            path = output / _SUPPLEMENTAL_ARCHIVE_NAME
+            path.write_bytes(source)
+            observed = hashlib.sha256(source).hexdigest()
+            supplemental[name] = dict(path=str(path), sha256=observed)
+        if observed != expected:
+            raise RuntimeError(f"archived source differs from executed source: {name}")
+    source_file = output / "source.tar.gz"
+    return dict(path=str(source_file),
+                sha256=hashlib.sha256(source_file.read_bytes()).hexdigest(),
+                source_sha256=archive["source_sha256"],
+                supplemental_sources=supplemental)
 
 
 def prepared_config(source: dict, mode: str) -> dict:
@@ -531,17 +556,8 @@ def main() -> None:
         evidence["matched_control_sha256"] = hashlib.sha256(
             args.frozen_control.read_bytes()).hexdigest()
     if args.archive_sources:
-        args.archive_sources.mkdir(parents=True, exist_ok=True)
-        archive = suite.snapshot(args.archive_sources)
-        for name, expected in evidence["source_sha256"].items():
-            if archive["source_sha256"].get(name) != expected:
-                raise RuntimeError(f"archived source differs from executed source: {name}")
-        source_file = args.archive_sources / "source.tar.gz"
-        evidence["source_archive"] = dict(
-            path=str(source_file),
-            sha256=hashlib.sha256(source_file.read_bytes()).hexdigest(),
-            source_sha256=archive["source_sha256"],
-        )
+        evidence["source_archive"] = archive_executable_sources(
+            args.archive_sources, evidence["source_sha256"])
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         temporary = args.output.with_name(args.output.name + ".tmp")

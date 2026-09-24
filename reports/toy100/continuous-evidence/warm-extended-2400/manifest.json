@@ -23,6 +23,10 @@
     "summary.json.gz": {
       "bytes": 1446,
       "sha256": "9ba0a765e60736c543d0bbc70937650de5809441e1c15a2b7354c22cc30df722"
+    },
+    "toy100-models-source.py": {
+      "bytes": 9411,
+      "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3"
     }
   },
   "schema": "passing-state-extended-v1",
@@ -147,5 +151,9 @@
     "particlegan/recipes.py": "6bbf76863687178495780116613bcd5bbccef04df61ae62fb1370c3ec6d24008",
     "particlegan/training.py": "d2f418ec1ab43ab24d57071382c2f1fd53e17eb5064fb6bbd391e84543eeb405",
     "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "supplemental_archive_path": "toy100-models-source.py",
+  "supplemental_source_sha256": {
+    "benchmarks/toy100/models.py": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3"
   }
 }

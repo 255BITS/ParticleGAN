@@ -48,7 +48,11 @@ promoted by the calibration above.
 
 The [evidence manifest](continuous-evidence/manifest.json) inventories five
 compressed raw episodes, the exact R1+R2 input config, and the standard
-transfer-suite source archive by SHA-256. Each episode includes its effective
+transfer-suite source archive by SHA-256. The standard snapshot excludes
+`benchmarks/toy100/models.py`, although the noise adapter imports it. The
+manifest therefore also includes a separately hashed byte-for-byte source
+copy; that file has the same Git blob at frozen base `983d037` and this probe
+revision. New probe episodes record its hash directly. Each episode includes its effective
 config and hash, executable-source hashes, Python/PyTorch/CPU profile, all
 observations, optimizer-rate ranges, and noise receipts. The source archive
 binds the full benchmark and `particlegan` Python code. Logs were emitted as
@@ -86,7 +90,7 @@ branch still needs cold mode acquisition, a 2,400-update hold, all required
 hosts, and a matched shifted/frozen comparison before any continual-learning
 claim. The [warm-screen archive](continuous-evidence/warm-lookahead/manifest.json)
 contains the raw child episodes, exact Lookahead source, full benchmark source
-snapshot, and SHA-256 file inventory.
+snapshot, separately hashed noise source, and SHA-256 file inventory.
 
 The matched fork was then extended to update 2,400 for the scheduled identity
 and the two ordinary constant rates. The identity child again matched its
@@ -100,3 +104,5 @@ Actual post-fork G/D/prior rates were .001/.001/.002 at every one of the
 1,400 continuation optimizer calls in the lower-rate branch. The
 [extended raw archive](continuous-evidence/warm-extended-2400/manifest.json)
 retains the three branches, matched cold control, source snapshot, and hashes.
+It also carries the separately hashed noise source omitted by the standard
+snapshot.
