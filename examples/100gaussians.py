@@ -228,8 +228,8 @@ def train(
     # The fresh-Gaussian research control retains a fixed visualization table
     # and its historical initialization RNG consumption.
     if prior_kind == "mog":
-        prior = make_prior("mog", num_particles=num_particles, z_dim=z_dim,
-                           sigma_rel=sigma_rel, standardize=standardize).to(device)
+        prior = recipe.make_prior(prior_kind="mog", sigma_rel=sigma_rel,
+                                  standardize=standardize).to(device)
     else:
         prior = (make_prior(prior_kind, num_particles=num_particles, z_dim=z_dim)
                  if prior_kind == "fresh_gaussian"

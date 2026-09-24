@@ -1,0 +1,209 @@
+{
+  "training_dataset": "results/gym/fast_lander_develop/slow_expert.npz",
+  "seed_count": 92,
+  "seed_range": [
+    24000,
+    24095
+  ],
+  "expert_success_count": 92,
+  "models": {
+    "published": {
+      "checkpoint": "reports/lunar_fast/slow.pt",
+      "summary": {
+        "episodes": 92,
+        "success_count": 89,
+        "success_rate": 0.967391304347826,
+        "mean_steps": 235.30434782608697,
+        "mean_success_steps": 228.47191011235955,
+        "mean_contact_step": 177.01111111111112,
+        "mean_return": 207.26784307068303,
+        "outcomes": {
+          "successful_landing": 89,
+          "crash": 1,
+          "out_of_bounds": 2,
+          "time_limit": 0,
+          "other_termination": 0
+        }
+      },
+      "failed_training_seeds": [
+        {
+          "seed": 24032,
+          "outcome": "out_of_bounds",
+          "steps": 497,
+          "return": -2690.6311300987636,
+          "expert_steps": 225
+        },
+        {
+          "seed": 24053,
+          "outcome": "out_of_bounds",
+          "steps": 541,
+          "return": -2965.96263769789,
+          "expert_steps": 220
+        },
+        {
+          "seed": 24064,
+          "outcome": "crash",
+          "steps": 276,
+          "return": 273.06494507637115,
+          "expert_steps": 257
+        }
+      ],
+      "seed_24053": {
+        "outcome": "out_of_bounds",
+        "steps": 541,
+        "expert_steps": 220
+      },
+      "failure_trajectory_comparison": {
+        "24032": {
+          "expert_length": 225,
+          "learned_length": 497,
+          "outcome": "out_of_bounds",
+          "exact_initial_state": true,
+          "expert_initial_action": [
+            -0.0,
+            -1.0
+          ],
+          "policy_initial_action": [
+            0.12911060452461243,
+            -0.9883289933204651
+          ],
+          "expert_off_count": 88,
+          "policy_up_on_expert_off": 2,
+          "first_state_l2_over_0p01": 1,
+          "max_state_l2_first_20": 0.5270569324493408,
+          "state_l2_at_step_20": 0.5693545341491699
+        },
+        "24053": {
+          "expert_length": 220,
+          "learned_length": 541,
+          "outcome": "out_of_bounds",
+          "exact_initial_state": true,
+          "expert_initial_action": [
+            -0.0,
+            -0.4399961829185486
+          ],
+          "policy_initial_action": [
+            0.1708766669034958,
+            -0.4784320294857025
+          ],
+          "expert_off_count": 91,
+          "policy_up_on_expert_off": 6,
+          "first_state_l2_over_0p01": 1,
+          "max_state_l2_first_20": 0.4871354103088379,
+          "state_l2_at_step_20": 0.5210738182067871
+        },
+        "24064": {
+          "expert_length": 257,
+          "learned_length": 276,
+          "outcome": "crash",
+          "exact_initial_state": true,
+          "expert_initial_action": [
+            -0.0,
+            1.0
+          ],
+          "policy_initial_action": [
+            0.1598501205444336,
+            0.9999991655349731
+          ],
+          "expert_off_count": 80,
+          "policy_up_on_expert_off": 4,
+          "first_state_l2_over_0p01": 1,
+          "max_state_l2_first_20": 0.10873731970787048,
+          "state_l2_at_step_20": 0.10959034413099289
+        }
+      }
+    },
+    "bc_only": {
+      "checkpoint": "results/gym/lunar_systematic_audit/loss_ablation/slow_bc.pt",
+      "summary": {
+        "episodes": 92,
+        "success_count": 91,
+        "success_rate": 0.9891304347826086,
+        "mean_steps": 223.42391304347825,
+        "mean_success_steps": 222.82417582417582,
+        "mean_contact_step": 175.77173913043478,
+        "mean_return": 276.38514947316315,
+        "outcomes": {
+          "successful_landing": 91,
+          "crash": 1,
+          "out_of_bounds": 0,
+          "time_limit": 0,
+          "other_termination": 0
+        }
+      },
+      "failed_training_seeds": [
+        {
+          "seed": 24012,
+          "outcome": "crash",
+          "steps": 278,
+          "return": 279.032146624746,
+          "expert_steps": 352
+        }
+      ],
+      "seed_24053": {
+        "outcome": "successful_landing",
+        "steps": 240,
+        "expert_steps": 220
+      },
+      "failure_trajectory_comparison": {
+        "24032": {
+          "expert_length": 225,
+          "learned_length": 229,
+          "outcome": "successful_landing",
+          "exact_initial_state": true,
+          "expert_initial_action": [
+            -0.0,
+            -1.0
+          ],
+          "policy_initial_action": [
+            0.0,
+            -0.9912163615226746
+          ],
+          "expert_off_count": 88,
+          "policy_up_on_expert_off": 0,
+          "first_state_l2_over_0p01": 3,
+          "max_state_l2_first_20": 0.028456581756472588,
+          "state_l2_at_step_20": 0.016722073778510094
+        },
+        "24053": {
+          "expert_length": 220,
+          "learned_length": 240,
+          "outcome": "successful_landing",
+          "exact_initial_state": true,
+          "expert_initial_action": [
+            -0.0,
+            -0.4399961829185486
+          ],
+          "policy_initial_action": [
+            0.13555510342121124,
+            -0.4290010929107666
+          ],
+          "expert_off_count": 91,
+          "policy_up_on_expert_off": 8,
+          "first_state_l2_over_0p01": 1,
+          "max_state_l2_first_20": 0.246714785695076,
+          "state_l2_at_step_20": 0.24841830134391785
+        },
+        "24064": {
+          "expert_length": 257,
+          "learned_length": 251,
+          "outcome": "successful_landing",
+          "exact_initial_state": true,
+          "expert_initial_action": [
+            -0.0,
+            1.0
+          ],
+          "policy_initial_action": [
+            0.0,
+            0.9999998211860657
+          ],
+          "expert_off_count": 80,
+          "policy_up_on_expert_off": 1,
+          "first_state_l2_over_0p01": 9,
+          "max_state_l2_first_20": 0.012749696150422096,
+          "state_l2_at_step_20": 0.009009622037410736
+        }
+      }
+    }
+  }
+}

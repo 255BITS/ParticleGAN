@@ -16,7 +16,7 @@ from benchmarks.transfer_suite.vector_tasks import fixed_policy
 def test_recipe_replaces_mixed_group_rates_and_explicit_ae_betas(recipe):
     applied = []
     with optimizer_defaults(recipe, applied):
-        prior = MoGParticlePrior(8, 2)
+        prior = MoGParticlePrior(8, 2, sigma=.025)
         g, d = nn.Linear(2, 2), nn.Linear(2, 1)
         opt_g = torch.optim.Adam([{'params': list(g.parameters()) + list(prior.parameters()),
                                    'lr': .123, 'betas': (.5, .8)}], lr=.4, betas=(.6, .7))

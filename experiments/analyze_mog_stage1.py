@@ -155,7 +155,7 @@ def audit_component_centers(rows, output_path=None):
         for row in rows:
             ckpt=torch.load(ROOT/row['out_dir']/'final.pt',map_location='cpu',weights_only=False)
             cfg=ckpt['config']
-            prior=MoGParticlePrior(cfg['num_particles'],cfg['z_dim'],sigma_rel=cfg['sigma_rel'],standardize=cfg['standardize'])
+            prior=MoGParticlePrior(cfg['num_particles'],cfg['z_dim'],sigma=0,standardize=cfg['standardize'])
             prior.load_state_dict(ckpt['prior'])
             g=SimpleMLPGenerator(z_dim=cfg['z_dim']).eval();g.load_state_dict(ckpt['G'])
             distance,nearest=torch.cdist(g(prior.means()),grid).min(1)

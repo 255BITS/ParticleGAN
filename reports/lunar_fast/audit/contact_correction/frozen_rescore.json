@@ -1,0 +1,709 @@
+{
+  "slow": {
+    "physical_success_count": 30,
+    "episodes": 30,
+    "flag_success_count": 28
+  },
+  "fast": {
+    "physical_success_count": 30,
+    "episodes": 30,
+    "flag_success_count": 29
+  },
+  "reclassified": [
+    {
+      "policy": "slow",
+      "seed": 94006,
+      "steps": 508,
+      "old_outcome": "incomplete_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94029,
+      "steps": 259,
+      "old_outcome": "incomplete_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94020,
+      "steps": 202,
+      "old_outcome": "incomplete_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    }
+  ],
+  "all_rows": [
+    {
+      "policy": "slow",
+      "seed": 94000,
+      "steps": 239,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94001,
+      "steps": 189,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94002,
+      "steps": 198,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94003,
+      "steps": 180,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94004,
+      "steps": 203,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94005,
+      "steps": 218,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94006,
+      "steps": 508,
+      "old_outcome": "incomplete_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94007,
+      "steps": 224,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94008,
+      "steps": 201,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94009,
+      "steps": 214,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94010,
+      "steps": 223,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94011,
+      "steps": 246,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94012,
+      "steps": 208,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94013,
+      "steps": 244,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94014,
+      "steps": 217,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94015,
+      "steps": 193,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94016,
+      "steps": 191,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94017,
+      "steps": 233,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94018,
+      "steps": 262,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94019,
+      "steps": 196,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94020,
+      "steps": 230,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94021,
+      "steps": 222,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94022,
+      "steps": 224,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94023,
+      "steps": 198,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94024,
+      "steps": 244,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94025,
+      "steps": 226,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94026,
+      "steps": 227,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94027,
+      "steps": 215,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94028,
+      "steps": 223,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "slow",
+      "seed": 94029,
+      "steps": 259,
+      "old_outcome": "incomplete_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94000,
+      "steps": 186,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94001,
+      "steps": 165,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94002,
+      "steps": 173,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94003,
+      "steps": 147,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94004,
+      "steps": 163,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94005,
+      "steps": 170,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94006,
+      "steps": 226,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94007,
+      "steps": 197,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94008,
+      "steps": 153,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94009,
+      "steps": 186,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94010,
+      "steps": 204,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94011,
+      "steps": 203,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94012,
+      "steps": 175,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94013,
+      "steps": 209,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94014,
+      "steps": 170,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94015,
+      "steps": 176,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94016,
+      "steps": 151,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94017,
+      "steps": 206,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94018,
+      "steps": 217,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94019,
+      "steps": 166,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94020,
+      "steps": 202,
+      "old_outcome": "incomplete_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94021,
+      "steps": 185,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94022,
+      "steps": 192,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94023,
+      "steps": 172,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94024,
+      "steps": 217,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94025,
+      "steps": 205,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94026,
+      "steps": 205,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94027,
+      "steps": 191,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94028,
+      "steps": 182,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    },
+    {
+      "policy": "fast",
+      "seed": 94029,
+      "steps": 215,
+      "old_outcome": "successful_landing",
+      "physical_success": true,
+      "active_ground_contacts": [
+        1,
+        1
+      ]
+    }
+  ]
+}

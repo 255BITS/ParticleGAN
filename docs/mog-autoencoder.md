@@ -35,7 +35,7 @@ G(z) -> generated sample
 ```
 
 Here `p = prior.means()`, `noise ~ N(0,I)`, and `s = prior.sigma` is a shared
-fixed scalar calibrated at initialization. The defaults are K=400 and dimension
+fixed scalar supplied explicitly (historical recipes calibrate it at initialization). The defaults are K=400 and dimension
 4. Standardized particle reads remain differentiable; the existing spread loss
 acts on raw `prior.z`. There is no per-example encoder or KL in this sampler.
 We can keep this sampling reparameterization while discarding Gaussian

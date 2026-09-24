@@ -32,7 +32,7 @@ def main():
         assert before == s['checkpoints'][path.name]
         checkpoint = torch.load(path, map_location='cuda', weights_only=False)
         g = SimpleMLPGenerator(2, cfg['width']).cuda()
-        p = MoGParticlePrior(num_particles=cfg['num_particles'], z_dim=2, sigma_rel=cfg['sigma_rel'], device='cuda').cuda()
+        p = MoGParticlePrior(num_particles=cfg['num_particles'], z_dim=2, sigma=0, device='cuda').cuda()
         g.load_state_dict(checkpoint['G']); p.load_state_dict(checkpoint['prior'])
         with torch.no_grad():
             m, _, fake, real = evaluate(g, p, 100000, cfg['seed'])

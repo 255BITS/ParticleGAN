@@ -1,0 +1,169 @@
+{
+  "seed": 1234,
+  "recipe": {
+    "name": "gan_v3",
+    "model": "gan",
+    "z_dim": 4,
+    "num_particles": 20000,
+    "prior_kind": "particles",
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "num_classes": null,
+    "conditioning": "scalar",
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 256,
+    "total_steps": 7000,
+    "lr": 0.00425,
+    "d_lr_mult": 1.0,
+    "prior_lr_mult": 2.0,
+    "betas": [
+      0.0,
+      0.99
+    ],
+    "prior_betas": null,
+    "loss_type": "logistic",
+    "gan_mode": "rp",
+    "reg_arm": "b_cap",
+    "reg_coeff": 6.0,
+    "reg_kappa": 1.25,
+    "reg_every": 1,
+    "reg_method": "autograd",
+    "prior_reg": 0.05,
+    "ema_decay": 0.995,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "encoder_mode": "none",
+    "routing_temperature": 0.25,
+    "distance_reduction": "sum",
+    "observation_sigma": 0.03,
+    "reconstruction_weight": 1.0
+  },
+  "generator": "SimpleMLPGenerator",
+  "discriminator": "SimpleMLPDiscriminator(fourier=2)",
+  "evaluation": "EMA",
+  "history": [
+    {
+      "step": 500,
+      "modes": 14,
+      "hq": 0.021900000050663948,
+      "train_seconds": 4.734180368017405
+    },
+    {
+      "step": 1000,
+      "modes": 13,
+      "hq": 0.02304999902844429,
+      "train_seconds": 8.864751317014452
+    },
+    {
+      "step": 1500,
+      "modes": 20,
+      "hq": 0.025750000029802322,
+      "train_seconds": 13.040040322986897
+    },
+    {
+      "step": 2000,
+      "modes": 23,
+      "hq": 0.02759999968111515,
+      "train_seconds": 17.265156762994593
+    },
+    {
+      "step": 2500,
+      "modes": 21,
+      "hq": 0.024699999019503593,
+      "train_seconds": 21.52710743198986
+    },
+    {
+      "step": 3000,
+      "modes": 15,
+      "hq": 0.02239999920129776,
+      "train_seconds": 25.704871744965203
+    },
+    {
+      "step": 3500,
+      "modes": 21,
+      "hq": 0.026249999180436134,
+      "train_seconds": 29.888406530983048
+    },
+    {
+      "step": 4000,
+      "modes": 16,
+      "hq": 0.022099999710917473,
+      "train_seconds": 34.237687001004815
+    },
+    {
+      "step": 4500,
+      "modes": 17,
+      "hq": 0.024799998849630356,
+      "train_seconds": 38.42918494498008
+    },
+    {
+      "step": 5000,
+      "modes": 21,
+      "hq": 0.026850000023841858,
+      "train_seconds": 42.69257754596765
+    },
+    {
+      "step": 5500,
+      "modes": 23,
+      "hq": 0.027950000017881393,
+      "train_seconds": 46.796633558959
+    },
+    {
+      "step": 6000,
+      "modes": 84,
+      "hq": 0.13824999332427979,
+      "train_seconds": 50.975330298999324
+    },
+    {
+      "step": 6500,
+      "modes": 98,
+      "hq": 0.5600500106811523,
+      "train_seconds": 55.46080348503892
+    },
+    {
+      "step": 7000,
+      "modes": 99,
+      "hq": 0.7507999539375305,
+      "train_seconds": 59.88566276905476,
+      "distribution_metrics": {
+        "hq": 0.7507999539375305,
+        "cond_acc": 1.0,
+        "joint_hq": 0.7507999539375305,
+        "modes": 99,
+        "mode_tv": 0.16920000314712524,
+        "conditional_mode_tv": 0.16920000314712524,
+        "tail_10sigma": 0.04384999722242355,
+        "sw1": 0.13005243241786957,
+        "conditional_sw1": 0.13005243241786957,
+        "per_mode_core_std": 0.03348647098208988,
+        "per_mode_core_ratio": 1.116215699402996,
+        "tail_frac_10sigma": 0.04385,
+        "per_mode_cov_eig_min_ratio": 3.3121570866731527,
+        "per_mode_cov_eig_max_ratio": 14.039219741234408,
+        "per_mode_cov_audited_modes": 99
+      },
+      "unique_outputs": 12662
+    }
+  ],
+  "train_seconds": 59.88567212905036,
+  "git_commit": "fde698b6cf13980fa8c121cd52d21a7d92cd1fa5",
+  "source_sha256": {
+    "particlegan/recipes.py": "5d9ae4289e12305504f225bb39908089a6b9cadea3c4875f3fc68cc5cefd2239",
+    "particlegan/training.py": "d2f418ec1ab43ab24d57071382c2f1fd53e17eb5064fb6bbd391e84543eeb405",
+    "examples/100gaussians.py": "b3da6eeb1d8b475e56ca67b095cc183763f374d6f98545b30e82f2f387032117",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "reports/readme-100gaussians/generate.py": "62f4c5b76149d8ab62a66d37180459a8cf47443be64d329f654405d15c533bc9"
+  },
+  "torch": "2.14.0+cu130",
+  "device": "cuda",
+  "gpu": "NVIDIA RTX A6000",
+  "limitations": "One illustrative run, not a seed study. Finite particle support; coverage and HQ do not establish Gaussian calibration."
+}

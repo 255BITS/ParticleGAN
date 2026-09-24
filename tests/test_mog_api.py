@@ -8,12 +8,12 @@ import pytest
 import torch
 from torch import nn
 
-from particlegan import MoGParticlePrior, ParticlePrior, ParticleRegularizer, Recipe, get_recipe
+from particlegan import calibrate_mog_sigma, MoGParticlePrior, ParticlePrior, ParticleRegularizer, Recipe, get_recipe
 
 
 def test_mog_components_use_common_training_defaults_and_explicit_resources():
-    prior = MoGParticlePrior()
     recipe = get_recipe(prior_kind='mog', sigma_rel=.025, num_particles=400, total_steps=28000)
+    prior = recipe.make_prior()
     assert prior.z.shape == (400, 4) and prior.sigma_rel == 1/40 and prior.standardize
     assert prior.sigma > 0 and prior.sigma == prior.d0 * prior.sigma_rel
     assert recipe.num_particles == 400 and recipe.total_steps == 28000
@@ -62,7 +62,7 @@ def test_explicit_ddgan_mog_study_config_and_overrides():
 
 def test_forward_matches_sampling_rng_and_flows_through_module_hooks():
     global_rng = torch.get_rng_state().clone()
-    prior = MoGParticlePrior(12, 3, generator=torch.Generator().manual_seed(7)).double()
+    prior = MoGParticlePrior(12, 3, sigma=.1, generator=torch.Generator().manual_seed(7)).double()
     direct_rng = torch.Generator().manual_seed(17)
     sample_rng = torch.Generator().manual_seed(17)
     calls = []
@@ -82,7 +82,7 @@ def test_forward_matches_sampling_rng_and_flows_through_module_hooks():
 
 
 def test_fixed_epsilon_snapshot_and_zero_sigma_rng_contract():
-    prior = MoGParticlePrior(8, 2, standardize=False)
+    prior = MoGParticlePrior(8, 2, sigma=.1, standardize=False)
     eps = torch.arange(6, dtype=prior.z.dtype).reshape(3, 2)
     rng = torch.Generator().manual_seed(3)
     state = rng.get_state()
@@ -93,7 +93,7 @@ def test_fixed_epsilon_snapshot_and_zero_sigma_rng_contract():
         with pytest.raises(ValueError, match='eps'):
             prior.sample(3, fixed_first_n=True, eps=wrong)
     atoms = ParticlePrior(8, 2, generator=torch.Generator().manual_seed(19))
-    zero = MoGParticlePrior(8, 2, sigma_rel=0, standardize=False,
+    zero = MoGParticlePrior(8, 2, sigma=0, standardize=False,
                             generator=torch.Generator().manual_seed(19))
     for fixed in (False, True):
         a, b = torch.Generator().manual_seed(5), torch.Generator().manual_seed(5)
@@ -106,28 +106,28 @@ def test_fixed_epsilon_snapshot_and_zero_sigma_rng_contract():
 
 
 def test_checkpoint_restores_read_settings_fixed_sigma_and_seeded_samples(tmp_path):
-    prior = MoGParticlePrior(12, 2, sigma_rel=.125, standardize=False).double()
+    prior = MoGParticlePrior(12, 2, sigma=.125, standardize=False).double()
     with torch.no_grad():
         prior.z.mul_(2).add_(3)  # Do not recalibrate after training/EMA updates.
     sigma = prior.sigma.clone()
     path = tmp_path / 'mog.pt'
     torch.save(prior.state_dict(), path)
-    restored = MoGParticlePrior(12, 2, sigma_rel=0, standardize=True).double()
+    restored = MoGParticlePrior(12, 2, sigma=0, standardize=True).double()
     restored.load_state_dict(torch.load(path, weights_only=True))
-    assert not restored.standardize and restored.sigma_rel == .125
+    assert not restored.standardize and restored.sigma_rel == prior.sigma_rel
     assert torch.equal(sigma, restored.sigma)
     x, idx = prior.sample(32, torch.Generator().manual_seed(21))
     y, ids = restored.eval().sample(32, torch.Generator().manual_seed(21))
     assert torch.equal(x, y) and torch.equal(idx, ids)
 
     # A parent module also restores the MoG's extra state and noisy forward path.
-    parent = nn.ModuleDict({'prior': MoGParticlePrior(12, 2, sigma_rel=0)})
+    parent = nn.ModuleDict({'prior': MoGParticlePrior(12, 2, sigma=0)})
     parent.load_state_dict({'prior.' + k: v for k, v in prior.state_dict().items()})
     assert not parent['prior'].standardize and parent['prior']._noise_enabled
 
     # Historical checkpoints contain tensors only; caller supplies read standardization.
     legacy = {k: v for k, v in prior.state_dict().items() if k != '_extra_state'}
-    old = MoGParticlePrior(12, 2, sigma_rel=0, standardize=False).double()
+    old = MoGParticlePrior(12, 2, sigma=0, standardize=False).double()
     old.load_state_dict(legacy, strict=True)
     y, _ = old.sample(32, torch.Generator().manual_seed(21))
     assert torch.equal(x, y)
@@ -144,13 +144,15 @@ def test_calibration_exact_even_median_and_torch_only_fallback(monkeypatch, use_
                 raise ImportError('optional dependency unavailable')
             return original_import(name, *args, **kwargs)
         monkeypatch.setattr(builtins, '__import__', torch_only)
-    prior = MoGParticlePrior(4, 1, sigma_rel=.5, standardize=False, dtype=torch.float64)
-    with torch.no_grad():
-        prior.z.copy_(torch.tensor([[0.], [1.], [4.], [10.]]))
+    centers = torch.tensor([[0.], [1.], [4.], [10.]], dtype=torch.float64,
+                           requires_grad=True)
+    original = centers.detach().clone()
     before = torch.get_rng_state().clone()
-    prior.calibrate()
+    sigma, d0 = calibrate_mog_sigma(centers, .5)
     # NN distances [1,1,3,6]: midpoint median is 2, not the lower middle value 1.
-    assert prior.d0.item() == 2 and prior.sigma.item() == 1
+    assert d0.item() == 2 and sigma.item() == 1
+    assert not sigma.requires_grad and not d0.requires_grad
+    assert torch.equal(centers, original)
     assert torch.equal(before, torch.get_rng_state())
 
 
@@ -181,11 +183,27 @@ def test_mog_recipe_optimizer_updates_raw_means_and_preserves_fixed_buffers(mode
     assert len(recipe.make_optimizers(generator, critic, frozen)[0].param_groups) == 1
 
 
-@pytest.mark.parametrize('kwargs', [dict(sigma_rel=-1), dict(sigma_rel=float('nan')),
-                                     dict(standardize='false'), dict(num_particles=1), dict(init_std=0)])
+@pytest.mark.parametrize('sigma', [-1, float('nan'), float('inf'), -float('inf'),
+                                    [0.1], torch.tensor([0.1]), None, '0.1', 1j, True,
+                                    1e100])
+def test_invalid_sigma_fails(sigma):
+    with pytest.raises(ValueError, match='sigma'):
+        MoGParticlePrior(sigma=sigma)
+
+
+def test_sigma_is_required_and_keyword_only():
+    with pytest.raises(TypeError, match='sigma'):
+        MoGParticlePrior()
+    with pytest.raises(TypeError):
+        MoGParticlePrior(4, 2, 1., None, None, True, None, .1)
+    with pytest.raises(TypeError, match='sigma_rel'):
+        MoGParticlePrior(sigma=.1, sigma_rel=.025)
+
+
+@pytest.mark.parametrize('kwargs', [dict(standardize='false'), dict(num_particles=1)])
 def test_invalid_mog_config_fails_early(kwargs):
     with pytest.raises(ValueError):
-        MoGParticlePrior(**kwargs)
+        MoGParticlePrior(sigma=0, **kwargs)
 
 
 @pytest.mark.parametrize('kwargs', [dict(prior_kind='typo'), dict(sigma_rel=-1),
@@ -204,3 +222,122 @@ def test_factory_overrides_are_local_and_cannot_silently_discard_noise():
         original.make_prior(sigma_rel=.1)
     with pytest.raises(ValueError, match='prior_kind'):
         original.make_prior(prior_kind='typo')
+
+
+def forbid_calibration(monkeypatch):
+    import particlegan.particle_prior as module
+    def fail(*args, **kwargs):
+        pytest.fail("unexpected calibration/distance calculation")
+    monkeypatch.setattr(module, 'calibrate_mog_sigma', fail)
+    monkeypatch.setattr(torch, 'cdist', fail)
+    original_import = builtins.__import__
+    def no_scipy(name, *args, **kwargs):
+        if name.startswith('scipy'):
+            fail()
+        return original_import(name, *args, **kwargs)
+    monkeypatch.setattr(builtins, '__import__', no_scipy)
+
+
+@pytest.mark.parametrize('local_generator', [False, True])
+def test_construction_never_calibrates_and_preserves_centers_and_rng(monkeypatch, local_generator):
+    forbid_calibration(monkeypatch)
+    # Also forbid computing means: initialization must only draw the raw centers.
+    original_means = MoGParticlePrior.means
+    monkeypatch.setattr(MoGParticlePrior, 'means', lambda self: pytest.fail('unexpected means read'))
+    global_state = torch.get_rng_state().clone()
+    a = torch.Generator().manual_seed(7) if local_generator else None
+    expected = ParticlePrior(32, 4, generator=a)
+    expected_global = torch.get_rng_state().clone()
+    torch.set_rng_state(global_state)
+    b = torch.Generator().manual_seed(7) if local_generator else None
+    actual = MoGParticlePrior(32, 4, sigma=.212616428732872, generator=b)
+    assert torch.equal(expected.z, actual.z)
+    assert torch.equal(expected_global, torch.get_rng_state())
+    if local_generator:
+        assert torch.equal(a.get_state(), b.get_state())
+    assert actual.sigma.ndim == 0 and not actual.sigma.requires_grad
+    assert actual.d0 == 0 and actual.sigma_rel == 0
+    # No positive spacing is needed for a fixed scale, including coincident means.
+    monkeypatch.setattr(MoGParticlePrior, 'means', original_means)
+    zero = MoGParticlePrior(1, 2, init_std=0, sigma=0, standardize=False)
+    assert torch.equal(zero.sample(4)[0], torch.zeros(4, 2))
+
+
+@pytest.mark.parametrize('extra_state', [False, True])
+@pytest.mark.parametrize('standardize', [False, True])
+@pytest.mark.parametrize('sigma', [0., .212616428732872])
+def test_legacy_checkpoint_samples_and_rng_are_identical(monkeypatch, extra_state, standardize, sigma):
+    forbid_calibration(monkeypatch)
+    # Old-format state made independently of the new implementation; centers
+    # represent already-trained values, whose current spacing must be ignored.
+    centers = torch.randn(12, 3, generator=torch.Generator().manual_seed(9), dtype=torch.float64) * 3 + 2
+    state = {'z': centers, 'sigma': torch.tensor(sigma, dtype=torch.float64),
+             'd0': torch.tensor(1.7, dtype=torch.float64)}
+    if extra_state:
+        state['_extra_state'] = {'sigma_rel': .025, 'standardize': standardize}
+    prior = MoGParticlePrior(12, 3, sigma=.9, dtype=torch.float64,
+                             standardize=not standardize if extra_state else standardize)
+    before = torch.get_rng_state().clone()
+    prior.load_state_dict(state, strict=True)
+    assert torch.equal(before, torch.get_rng_state())
+    assert torch.equal(prior.z, centers) and torch.equal(prior.d0, state['d0'])
+    assert torch.equal(prior.sigma, state['sigma'])
+    assert prior.standardize == standardize
+    if extra_state:
+        assert prior.get_extra_state() == state['_extra_state']
+    for fixed in (False, True):
+        a, b = torch.Generator().manual_seed(21), torch.Generator().manual_seed(21)
+        ids = torch.arange(8) if fixed else torch.randint(12, (8,), generator=a)
+        means = (centers - centers.mean(0)) / (centers.std(0) + 1e-6) if standardize else centers
+        expected = means[ids]
+        if sigma > 0:
+            expected = expected + state['sigma'] * torch.randn(expected.shape, dtype=expected.dtype, generator=a)
+        actual, indices = prior.sample(8, b, fixed_first_n=fixed)
+        assert torch.equal(actual, expected) and torch.equal(indices, ids)
+        assert torch.equal(a.get_state(), b.get_state())
+    # Re-saving must retain legacy metadata and fixed buffers.
+    saved = prior.state_dict()
+    assert torch.equal(saved['d0'], state['d0']) and torch.equal(saved['sigma'], state['sigma'])
+
+
+def test_recipe_explicit_sigma_skips_calibration(monkeypatch):
+    forbid_calibration(monkeypatch)
+    prior = get_recipe('mog').make_prior(sigma=.2)
+    assert prior.sigma == torch.tensor(.2) and prior.d0 == 0
+
+
+@pytest.mark.parametrize('dtype', [torch.float32, torch.float64])
+def test_recipe_calibrates_original_centers_with_legacy_rounding(dtype):
+    import numpy as np
+    cKDTree = pytest.importorskip('scipy.spatial').cKDTree
+    a, b = torch.Generator().manual_seed(17), torch.Generator().manual_seed(17)
+    centers = ParticlePrior(16, 3, dtype=dtype, generator=a).z.detach()
+    means = (centers - centers.mean(0)) / (centers.std(0) + 1e-6)
+    points = means.cpu().double().numpy()
+    d0 = centers.new_tensor(float(np.median(cKDTree(points).query(points, k=2)[0][:, 1])))
+    prior = get_recipe('mog', num_particles=16, z_dim=3).make_prior(dtype=dtype, generator=b)
+    assert torch.equal(prior.z, centers) and torch.equal(a.get_state(), b.get_state())
+    assert torch.equal(prior.d0, d0) and torch.equal(prior.sigma, d0 * .025)
+
+
+def test_set_sigma_updates_zero_noise_rng_behavior():
+    prior = MoGParticlePrior(8, 2, sigma=0)
+    rng = torch.Generator().manual_seed(5)
+    before = rng.get_state()
+    prior.set_sigma(torch.tensor(.2))
+    prior.sample(4, rng, fixed_first_n=True)
+    assert not torch.equal(before, rng.get_state())
+    prior.set_sigma(0)
+    before = rng.get_state()
+    prior.sample(4, rng, fixed_first_n=True)
+    assert torch.equal(before, rng.get_state())
+
+
+@pytest.mark.parametrize('centers, sigma_rel', [
+    (torch.zeros(1, 2), .025), (torch.zeros(2, 2), .025),
+    (torch.tensor([[0.], [float('nan')]]), .025), (torch.ones(2), .025),
+    (torch.ones(2, 1, dtype=torch.int64), .025), (torch.tensor([[0.], [1.]]), -1),
+])
+def test_calibration_rejects_invalid_input(centers, sigma_rel):
+    with pytest.raises(ValueError):
+        calibrate_mog_sigma(centers, sigma_rel)

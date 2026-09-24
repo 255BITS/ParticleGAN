@@ -126,10 +126,15 @@ The historical report recorded observation-critic EMA action MSE 2.1065 and
 live-pair EMA action MSE 0.1396, against thresholds ≥ 1 and ≤ 0.18 respectively.
 The develop quality-control replay, including the exact original `c7e8a73`
 source, instead produces 1.7523 and 0.24897: the collapse reproduces, but the
-live-pair acceptance target fails. The original thresholds remain unchanged;
-the CLI reports failure and the historical convergence assertion is tracked
-as a strict expected failure in tests. These are CPU toy metrics, not Lunar
-Lander landings.
+live-pair acceptance target fails. Later GitHub runners both passed and failed
+the same gate, including Python 3.11 with the same PyTorch build. Its convergence
+is therefore platform-sensitive, not a universal expected failure. The original
+thresholds remain unchanged. The CLI exits unsuccessfully when they are unmet;
+ordinary tests check finite results, protocol and honest gate reporting.
+Run the numerical acceptance assertion explicitly with
+`RUN_PARTICLE_NATIVE_RESEARCH_GATE=1 python -m pytest -q tests/test_particle_native_2d.py`.
+A skipped acceptance test is not evidence of convergence. These are CPU toy
+metrics, not Lunar Lander landings.
 
 ## Logs and commands
 

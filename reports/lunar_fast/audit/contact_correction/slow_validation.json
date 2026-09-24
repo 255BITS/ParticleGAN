@@ -1,0 +1,202 @@
+[
+  {
+    "seed": 34000,
+    "outcome": "successful_landing",
+    "steps": 231,
+    "contact_step": 180,
+    "return_": 300.1457750337819,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 300.1457750337819,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34001,
+    "outcome": "successful_landing",
+    "steps": 216,
+    "contact_step": 174,
+    "return_": 281.45012349578246,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 281.45012349578246,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34002,
+    "outcome": "successful_landing",
+    "steps": 190,
+    "contact_step": 155,
+    "return_": 278.0264646033753,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 278.0264646033753,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34003,
+    "outcome": "successful_landing",
+    "steps": 199,
+    "contact_step": 156,
+    "return_": 264.5854961198288,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 264.5854961198288,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34004,
+    "outcome": "successful_landing",
+    "steps": 226,
+    "contact_step": 184,
+    "return_": 284.2407667960594,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 284.2407667960594,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34005,
+    "outcome": "successful_landing",
+    "steps": 216,
+    "contact_step": 173,
+    "return_": 261.9459710501781,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 261.9459710501781,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34006,
+    "outcome": "successful_landing",
+    "steps": 192,
+    "contact_step": 152,
+    "return_": 288.60434492412986,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 288.60434492412986,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34007,
+    "outcome": "successful_landing",
+    "steps": 193,
+    "contact_step": 154,
+    "return_": 262.9930958596793,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 262.9930958596793,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34008,
+    "outcome": "successful_landing",
+    "steps": 215,
+    "contact_step": 167,
+    "return_": 272.52418942211034,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 272.52418942211034,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34009,
+    "outcome": "successful_landing",
+    "steps": 203,
+    "contact_step": 151,
+    "return_": 289.7706386315366,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 289.7706386315366,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34010,
+    "outcome": "successful_landing",
+    "steps": 205,
+    "contact_step": 153,
+    "return_": 293.0874536228613,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 293.0874536228613,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34011,
+    "outcome": "successful_landing",
+    "steps": 188,
+    "contact_step": 149,
+    "return_": 282.24415648227045,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 282.24415648227045,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34012,
+    "outcome": "successful_landing",
+    "steps": 238,
+    "contact_step": 200,
+    "return_": 293.8037323943911,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 293.8037323943911,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34013,
+    "outcome": "successful_landing",
+    "steps": 214,
+    "contact_step": 174,
+    "return_": 280.12604605792774,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 280.12604605792774,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34014,
+    "outcome": "successful_landing",
+    "steps": 192,
+    "contact_step": 149,
+    "return_": 278.95659885325085,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 278.95659885325085,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34015,
+    "outcome": "successful_landing",
+    "steps": 243,
+    "contact_step": 186,
+    "return_": 310.291638309972,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 310.291638309972,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34016,
+    "outcome": "successful_landing",
+    "steps": 223,
+    "contact_step": 184,
+    "return_": 269.1899607102765,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 269.1899607102765,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34017,
+    "outcome": "successful_landing",
+    "steps": 239,
+    "contact_step": 194,
+    "return_": 290.29340819730226,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 290.29340819730226,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34018,
+    "outcome": "successful_landing",
+    "steps": 201,
+    "contact_step": 149,
+    "return_": 268.3459686261423,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 268.3459686261423,
+    "controller": "slow policy validation"
+  },
+  {
+    "seed": 34019,
+    "outcome": "successful_landing",
+    "steps": 192,
+    "contact_step": 150,
+    "return_": 273.30690391423826,
+    "variant": "LunarLanderContinuous-v3-bidirectional-main-v1",
+    "return": 273.30690391423826,
+    "controller": "slow policy validation"
+  }
+]

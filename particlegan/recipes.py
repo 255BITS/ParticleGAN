@@ -106,13 +106,26 @@ class Recipe:
         return asdict(self)
 
     def make_prior(self, **overrides):
-        """Construct the learned prior; explicit keyword overrides are local to this call."""
-        from .particle_prior import MoGParticlePrior, ParticlePrior
+        """Construct the prior; overrides are local to this call.
+
+        Historical MoG recipes explicitly calibrate spacing on the initialized
+        means (potentially expensive). Pass ``sigma=...`` to skip calibration,
+        including ``sigma=0`` when restoring a checkpoint.
+        """
+        from .particle_prior import MoGParticlePrior, ParticlePrior, calibrate_mog_sigma
         options = {"num_particles": self.num_particles, "z_dim": self.z_dim,
                    "sigma_rel": self.sigma_rel, "standardize": self.standardize, **overrides}
         kind = options.pop("prior_kind", self.prior_kind)
         if kind == "mog":
-            return MoGParticlePrior(**options)
+            sigma_rel = options.pop("sigma_rel")
+            if "sigma" in options:
+                return MoGParticlePrior(**options)
+            prior = MoGParticlePrior(sigma=0, **options)
+            sigma, d0 = calibrate_mog_sigma(prior.means(), sigma_rel)
+            prior.set_sigma(sigma)
+            prior.d0.copy_(d0)
+            prior.sigma_rel = float(sigma_rel)
+            return prior
         if kind != "particles":
             raise ValueError("prior_kind must be 'particles' or 'mog'")
         if options.pop("sigma_rel") != 0:

@@ -25,7 +25,7 @@ def audit(row,n=20000):
     folder=ROOT/row['out_dir']
     ckpt=torch.load(folder/'final.pt',map_location='cpu',weights_only=False)
     cfg=ckpt['config']
-    prior=MoGParticlePrior(cfg['num_particles'],cfg['z_dim'],sigma_rel=cfg['sigma_rel'],standardize=cfg['standardize'])
+    prior=MoGParticlePrior(cfg['num_particles'],cfg['z_dim'],sigma=0,standardize=cfg['standardize'])
     prior.load_state_dict(ckpt['prior'])
     sigma=float(prior.sigma)
     if sigma<=0:
