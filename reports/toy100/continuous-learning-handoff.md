@@ -102,6 +102,7 @@ python -u reports/toy100/secant_extra_warm_probe.py --output /tmp/lr-secant-warm
 python -u reports/toy100/secant_extra_probe.py --output /tmp/lr-secant-cold
 python -u reports/toy100/implicit_extra_warm_probe.py --output /tmp/lr-implicit-warm
 python -u reports/toy100/implicit_extra_probe.py --output /tmp/lr-implicit-cold
+python -u reports/toy100/cross_competitive_warm_probe.py --output /tmp/lr-cross-warm
 ```
 
 [`run_warm_variants`](../../benchmarks/toy100/warm_equilibrium_probe.py)
@@ -131,20 +132,32 @@ ineligible for the production gate until a real implementation is audited.
 | Fixed-metric same/independent-sample EG | Both0/200 | Second gradient divided by small first-gradient metric explodes |
 | Same-sample secant EG, c=.25/.5/.9 | All200/200 | Cold trajectory MSE .2872/.3540/.1332 > .02 |
 | Full-J linearized implicit response | 200/200 | Cold trajectory MSE .2538 > .02; warm cost11.4 gradient evaluations/player/update |
+| Cross-player-only competitive response | 196/200 | Warm HQ falls to .8894; unplanned cold diagnostic ends at MSE .020058 > .02, with no passing checkpoints |
 
 Earlier constant Adam, optimistic Adam/AMSGrad, ExtraAdam, epsilon changes,
 fixed output-motion bounds and persistent-noise grids also failed. R1+R2
 produced one short mode-hold pass, then failed trajectory and 92/120 dense
-continuation checks. The next implicit variant under investigation retains
-only the cross-player Jacobian blocks, as in competitive gradient descent;
-it is not a validated result.
+continuation checks. The cross-player-only variant improves acquisition over
+the full-J implicit method but still fails. Its cold run was mistakenly
+launched before consuming the failed warm verdict; it is retained as an
+unplanned diagnostic, with no promotion credit. No expensive host followed.
+
+The four cross-only warm failures occur at updates 1194–1197, all with step
+factor one. Its own cross-residual guard accepts those steps. Applying a new
+full-joint residual cutoff of .5 would still miss two of the four failures
+while rejecting 133/200 warm and 305/400 cold proposals. The next useful cheap
+investigation is exact replay around update 1194, compared with acquisition
+updates, to distinguish own-player curvature, functional output motion and
+target mismatch before selecting another guard. This is a research direction,
+not a tested fix or a reason to relax either gate.
 
 Small accepted step factors are diagnostic, not automatic failures. The
 rejections above come from failed acquisition or quality, not an imposed
 minimum movement. Use the shift test to determine whether a quiet method can
 react to a new signal.
 
-Local handoff validation: 149 tests passed. The portable implicit warm driver
+Local handoff validation: 149 integrated tests and two additional cross-only
+audit tests passed. The portable implicit warm driver
 also reproduced the 200/200 result, 6/200 constant control, and exact identity
 parity using only files in this worktree.
 
@@ -155,6 +168,7 @@ python -m pytest -q tests/test_continuous_probe.py \
   tests/test_continuous_candidates.py tests/test_continuous_lookahead.py \
   tests/test_confidence_dynamics_scratch.py tests/test_fixed_metric_extra_scratch.py \
   tests/test_secant_extra_scratch.py tests/test_implicit_extra_audit.py \
+  tests/test_cross_competitive_audit.py \
   tests/test_toy100_config.py tests/test_toy100_policy.py tests/test_toy_suite.py
 ```
 

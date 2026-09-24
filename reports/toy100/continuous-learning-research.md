@@ -141,6 +141,16 @@ is related to game-aware coupled updates discussed by
 Jacobian solve includes the own-player blocks omitted by their CGD update;
 our experimental variant must be identified separately.
 
+The bounded cross-player-only follow-up omits the own-player Jacobian blocks
+and checks a mixed-point cross response. It passes 196/200 warm checks, with
+minimum HQ .8894, so it fails the local gate. An unplanned cold trajectory
+follow-up, launched before consuming that verdict, reaches MSE .020058 but
+has no passing checkpoint at the fixed .02 threshold. It is retained as a
+diagnostic protocol deviation and receives no promotion credit. This improves
+acquisition relative to the full-J implicit method without solving stability.
+The first failed warm step is 1194; replaying that transition is a more
+targeted next investigation than expanding a threshold grid.
+
 An independent cheap controller scales only the generator network's ordinary
 Adam proposal by `max(.02, min(1, advantage / threshold))`, where `advantage`
 is twice the current training batch's mean `sigmoid(D(real)-D(fake))` minus one.

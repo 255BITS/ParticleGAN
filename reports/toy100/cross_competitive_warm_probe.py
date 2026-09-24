@@ -8,10 +8,6 @@ import sys
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT))
-import benchmarks.toy100
-PROBE_ROOT=(ROOT if (ROOT/'benchmarks/toy100/warm_equilibrium_probe.py').exists()
-            else Path('/ml2/hypergan/ParticleGAN-continuous-probe'))
-benchmarks.toy100.__path__.append(str(PROBE_ROOT/'benchmarks/toy100'))
 from benchmarks.toy100.warm_equilibrium_probe import constant_rate_context,run_warm_variants
 from reports.toy100.cross_competitive_scratch import cross_competitive
 
@@ -47,7 +43,7 @@ def main():
         source={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in
         [Path(__file__),ROOT/'reports/toy100/cross_competitive_scratch.py',ROOT/'reports/toy100/implicit_extra_scratch.py',
          ROOT/'reports/toy100/fixed_metric_extra_scratch.py',ROOT/'reports/toy100/extra_adam_scratch.py',
-         PROBE_ROOT/'benchmarks/toy100/warm_equilibrium_probe.py',PROBE_ROOT/'benchmarks/toy100/continuous_probe.py']})
+         ROOT/'benchmarks/toy100/warm_equilibrium_probe.py',ROOT/'benchmarks/toy100/continuous_probe.py']})
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.with_suffix('.declaration.json').write_text(json.dumps(declaration,indent=2)+'\n')
     result=run_warm_variants(config,variants(),output_dir=args.output,
