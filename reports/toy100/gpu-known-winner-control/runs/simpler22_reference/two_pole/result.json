@@ -1,0 +1,2636 @@
+{
+  "spec": {
+    "name": "two_pole",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Basic adversarial movement remains bounded.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 80,
+    "thresholds": [
+      [
+        "mean_abs",
+        ">=",
+        0.3
+      ],
+      [
+        "grad_med",
+        "<=",
+        1.0
+      ]
+    ]
+  },
+  "result": {
+    "live": {
+      "mean_abs": 0.7325619459152222,
+      "grad_med": 0.4875667691230774
+    },
+    "raw": {
+      "mean_abs": 0.7325619459152222,
+      "grad_med": 0.4875667691230774,
+      "nearest": 0.2674381136894226,
+      "cover_score": 1.098842829465866,
+      "verdict": "PASS"
+    },
+    "observations": [
+      {
+        "mean_abs": 0.029210194945335388,
+        "grad_med": 0.0753844603896141,
+        "step": 4,
+        "seconds": 0.2676481220405549
+      },
+      {
+        "mean_abs": 0.050766538828611374,
+        "grad_med": 0.08631210029125214,
+        "step": 7,
+        "seconds": 0.28278181119821966
+      },
+      {
+        "mean_abs": 0.07321333885192871,
+        "grad_med": 0.08284277468919754,
+        "step": 10,
+        "seconds": 0.29561297013424337
+      },
+      {
+        "mean_abs": 0.09956531226634979,
+        "grad_med": 0.06650634109973907,
+        "step": 14,
+        "seconds": 0.31202592118643224
+      },
+      {
+        "mean_abs": 0.11652185767889023,
+        "grad_med": 0.05441649258136749,
+        "step": 17,
+        "seconds": 0.32466287701390684
+      },
+      {
+        "mean_abs": 0.12980425357818604,
+        "grad_med": 0.041907116770744324,
+        "step": 20,
+        "seconds": 0.3372740230988711
+      },
+      {
+        "mean_abs": 0.1421499103307724,
+        "grad_med": 0.0355599969625473,
+        "step": 24,
+        "seconds": 0.35371333407238126
+      },
+      {
+        "mean_abs": 0.1497131884098053,
+        "grad_med": 0.03269587457180023,
+        "step": 27,
+        "seconds": 0.3665292621590197
+      },
+      {
+        "mean_abs": 0.155227392911911,
+        "grad_med": 0.03394165635108948,
+        "step": 30,
+        "seconds": 0.3786598229780793
+      },
+      {
+        "mean_abs": 0.16587689518928528,
+        "grad_med": 0.06815820932388306,
+        "step": 34,
+        "seconds": 0.3956004090141505
+      },
+      {
+        "mean_abs": 0.1865786910057068,
+        "grad_med": 0.14563128352165222,
+        "step": 37,
+        "seconds": 0.4084581080824137
+      },
+      {
+        "mean_abs": 0.23930834233760834,
+        "grad_med": 0.28581735491752625,
+        "step": 40,
+        "seconds": 0.42134143598377705
+      },
+      {
+        "mean_abs": 0.32434171438217163,
+        "grad_med": 0.3801337480545044,
+        "step": 44,
+        "seconds": 0.4377366271801293
+      },
+      {
+        "mean_abs": 0.39179766178131104,
+        "grad_med": 0.45060181617736816,
+        "step": 47,
+        "seconds": 0.45011875103227794
+      },
+      {
+        "mean_abs": 0.4588612914085388,
+        "grad_med": 0.4948467016220093,
+        "step": 50,
+        "seconds": 0.46260807616636157
+      },
+      {
+        "mean_abs": 0.5418246984481812,
+        "grad_med": 0.5507473945617676,
+        "step": 54,
+        "seconds": 0.4787216039840132
+      },
+      {
+        "mean_abs": 0.5951594710350037,
+        "grad_med": 0.5710272192955017,
+        "step": 57,
+        "seconds": 0.4912624889984727
+      },
+      {
+        "mean_abs": 0.6383596062660217,
+        "grad_med": 0.5661673545837402,
+        "step": 60,
+        "seconds": 0.5036914839874953
+      },
+      {
+        "mean_abs": 0.6797492504119873,
+        "grad_med": 0.5454692244529724,
+        "step": 64,
+        "seconds": 0.5202199961058795
+      },
+      {
+        "mean_abs": 0.7016055583953857,
+        "grad_med": 0.5237968564033508,
+        "step": 67,
+        "seconds": 0.532629830064252
+      },
+      {
+        "mean_abs": 0.7159488201141357,
+        "grad_med": 0.5030563473701477,
+        "step": 70,
+        "seconds": 0.545357417082414
+      },
+      {
+        "mean_abs": 0.7265161275863647,
+        "grad_med": 0.49061283469200134,
+        "step": 74,
+        "seconds": 0.5619880300946534
+      },
+      {
+        "mean_abs": 0.7303897142410278,
+        "grad_med": 0.4874216914176941,
+        "step": 77,
+        "seconds": 0.5744017341639847
+      },
+      {
+        "mean_abs": 0.7325619459152222,
+        "grad_med": 0.4875667691230774,
+        "step": 80,
+        "seconds": 0.5868953890167177
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 12,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 12,
+      "first_pass_step": 44,
+      "stable_from_step": 44,
+      "stable_from_seconds": 0.4377366271801293,
+      "confirmed_step": 57,
+      "confirmed_seconds": 0.4912624889984727
+    },
+    "actions": [
+      {
+        "step": 0,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 0,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 1,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 1,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 2,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 2,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 3,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 3,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 4,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 4,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 5,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 5,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 6,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 6,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 7,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 7,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 8,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 8,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 9,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 9,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 10,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 10,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 11,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 11,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 12,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 12,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 13,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 13,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 14,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 14,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 15,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 15,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 16,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 16,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 17,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 17,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 18,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 18,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 19,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 19,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 20,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 20,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 21,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 21,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 22,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 22,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 23,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 23,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 24,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 24,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 25,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 25,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 26,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 26,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 27,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 27,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 28,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 28,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 29,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 29,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 30,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 30,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 31,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 31,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 32,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 32,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 33,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 33,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 34,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 34,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 35,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 35,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 36,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 36,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 37,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 37,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 38,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 38,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 39,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 39,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 40,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 40,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 41,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 41,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 42,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 42,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 43,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 43,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 44,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 44,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 45,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 45,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 46,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 46,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 47,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 47,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 48,
+        "role": "d",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00425
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 48,
+        "role": "g",
+        "multiplier": 1.0,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 1.0,
+        "prior_multiplier": 1.0,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0085
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 49,
+        "role": "d",
+        "multiplier": 0.9976164397027375,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.9976164397027375,
+        "prior_multiplier": 0.9977127451692935,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.004239869868736635
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 49,
+        "role": "g",
+        "multiplier": 0.9976164397027375,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.9976164397027375,
+        "prior_multiplier": 0.9977127451692935,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.008480558333938995
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 50,
+        "role": "d",
+        "multiplier": 0.990488713799599,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.990488713799599,
+        "prior_multiplier": 0.9908730081915345,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.004209577033648296
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 50,
+        "role": "g",
+        "multiplier": 0.990488713799599,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.990488713799599,
+        "prior_multiplier": 0.9908730081915345,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.008422420569628044
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 51,
+        "role": "d",
+        "multiplier": 0.9786854661874433,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.9786854661874433,
+        "prior_multiplier": 0.9795466594727992,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0041594132312966344
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 51,
+        "role": "g",
+        "multiplier": 0.9786854661874433,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.9786854661874433,
+        "prior_multiplier": 0.9795466594727992,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.008326146605518794
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 52,
+        "role": "d",
+        "multiplier": 0.9623203685930869,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.9623203685930869,
+        "prior_multiplier": 0.9638427779428612,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00408986156652062
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 52,
+        "role": "g",
+        "multiplier": 0.9623203685930869,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.9623203685930869,
+        "prior_multiplier": 0.9638427779428612,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.008192663612514322
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 53,
+        "role": "d",
+        "multiplier": 0.9415510258524357,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.9415510258524357,
+        "prior_multiplier": 0.9439126005654686,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.004001591859872852
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 53,
+        "role": "g",
+        "multiplier": 0.9415510258524357,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.9415510258524357,
+        "prior_multiplier": 0.9439126005654686,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.008023257104806484
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 54,
+        "role": "d",
+        "multiplier": 0.91657745808976,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.91657745808976,
+        "prior_multiplier": 0.919948065843709,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0038954541968814803
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 54,
+        "role": "g",
+        "multiplier": 0.91657745808976,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.91657745808976,
+        "prior_multiplier": 0.919948065843709,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.007819558559671527
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 55,
+        "role": "d",
+        "multiplier": 0.8876401744145548,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.8876401744145548,
+        "prior_multiplier": 0.8921799653473,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0037724707412618583
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 55,
+        "role": "g",
+        "multiplier": 0.8876401744145548,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.8876401744145548,
+        "prior_multiplier": 0.8921799653473,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.007583529705452051
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 56,
+        "role": "d",
+        "multiplier": 0.855017856687341,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.855017856687341,
+        "prior_multiplier": 0.8608757210636101,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0036338258909211995
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 56,
+        "role": "g",
+        "multiplier": 0.855017856687341,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.855017856687341,
+        "prior_multiplier": 0.8608757210636101,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.007317443629040687
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 57,
+        "role": "d",
+        "multiplier": 0.8190246756610046,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.8190246756610046,
+        "prior_multiplier": 0.8263368099777316,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0034808548715592694
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 57,
+        "role": "g",
+        "multiplier": 0.8190246756610046,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.8190246756610046,
+        "prior_multiplier": 0.8263368099777316,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.007023862884810719
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 58,
+        "role": "d",
+        "multiplier": 0.7800072653447031,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.7800072653447031,
+        "prior_multiplier": 0.7888958606843111,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0033150308777149884
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 58,
+        "role": "g",
+        "multiplier": 0.7800072653447031,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.7800072653447031,
+        "prior_multiplier": 0.7888958606843111,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.006705614815816645
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 59,
+        "role": "d",
+        "multiplier": 0.738341384728869,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.738341384728869,
+        "prior_multiplier": 0.748913449992349,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0031379508850976935
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 59,
+        "role": "g",
+        "multiplier": 0.738341384728869,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.738341384728869,
+        "prior_multiplier": 0.748913449992349,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.006365764324934967
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 60,
+        "role": "d",
+        "multiplier": 0.6944282990207195,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.6944282990207195,
+        "prior_multiplier": 0.7067746303734177,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.002951320270838058
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 60,
+        "role": "g",
+        "multiplier": 0.6944282990207195,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.6944282990207195,
+        "prior_multiplier": 0.7067746303734177,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.006007584358174051
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 61,
+        "role": "d",
+        "multiplier": 0.6486909152409588,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.6486909152409588,
+        "prior_multiplier": 0.6628852216958696,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.002756936389774075
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 61,
+        "role": "g",
+        "multiplier": 0.6486909152409588,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.6486909152409588,
+        "prior_multiplier": 0.6628852216958696,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.005634524384414892
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 62,
+        "role": "d",
+        "multiplier": 0.6015697093979836,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.6015697093979836,
+        "prior_multiplier": 0.617667902957661,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0025566712649414303
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 62,
+        "role": "g",
+        "multiplier": 0.6015697093979836,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.6015697093979836,
+        "prior_multiplier": 0.617667902957661,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.005250177175140119
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 63,
+        "role": "d",
+        "multiplier": 0.5535184844631327,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.5535184844631327,
+        "prior_multiplier": 0.5715581416565414,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.002352453558968314
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 63,
+        "role": "g",
+        "multiplier": 0.5535184844631327,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.5535184844631327,
+        "prior_multiplier": 0.5715581416565414,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0048582442040806025
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 64,
+        "role": "d",
+        "multiplier": 0.505,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.505,
+        "prior_multiplier": 0.525,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00214625
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 64,
+        "role": "g",
+        "multiplier": 0.505,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.505,
+        "prior_multiplier": 0.525,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0044625
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 65,
+        "role": "d",
+        "multiplier": 0.4564815155368675,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.4564815155368675,
+        "prior_multiplier": 0.47844185834345865,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.001940046441031687
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 65,
+        "role": "g",
+        "multiplier": 0.4564815155368675,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.4564815155368675,
+        "prior_multiplier": 0.47844185834345865,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.004066755795919399
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 66,
+        "role": "d",
+        "multiplier": 0.4084302906020166,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.4084302906020166,
+        "prior_multiplier": 0.4323320970423391,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0017358287350585707
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 66,
+        "role": "g",
+        "multiplier": 0.4084302906020166,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.4084302906020166,
+        "prior_multiplier": 0.4323320970423391,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0036748228248598826
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 67,
+        "role": "d",
+        "multiplier": 0.3613090847590412,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.3613090847590412,
+        "prior_multiplier": 0.38711477830413044,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0015355636102259253
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 67,
+        "role": "g",
+        "multiplier": 0.3613090847590412,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.3613090847590412,
+        "prior_multiplier": 0.38711477830413044,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.003290475615585109
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 68,
+        "role": "d",
+        "multiplier": 0.3155717009792806,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.3155717009792806,
+        "prior_multiplier": 0.34322536962658234,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0013411797291619427
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 68,
+        "role": "g",
+        "multiplier": 0.3155717009792806,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.3155717009792806,
+        "prior_multiplier": 0.34322536962658234,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.00291741564182595
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 69,
+        "role": "d",
+        "multiplier": 0.27165861527113117,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.27165861527113117,
+        "prior_multiplier": 0.30108655000765105,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0011545491149023074
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 69,
+        "role": "g",
+        "multiplier": 0.27165861527113117,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.27165861527113117,
+        "prior_multiplier": 0.30108655000765105,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0025592356750650342
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 70,
+        "role": "d",
+        "multiplier": 0.22999273465529704,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.22999273465529704,
+        "prior_multiplier": 0.26110413931568904,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0009774691222850125
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 70,
+        "role": "g",
+        "multiplier": 0.22999273465529704,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.22999273465529704,
+        "prior_multiplier": 0.26110413931568904,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.002219385184183357
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 71,
+        "role": "d",
+        "multiplier": 0.19097532433899556,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.19097532433899556,
+        "prior_multiplier": 0.22366319002226842,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0008116451284407312
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 71,
+        "role": "g",
+        "multiplier": 0.19097532433899556,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.19097532433899556,
+        "prior_multiplier": 0.22366319002226842,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0019011371151892817
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 72,
+        "role": "d",
+        "multiplier": 0.15498214331265903,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.15498214331265903,
+        "prior_multiplier": 0.18912427893638994,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0006586741090788009
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 72,
+        "role": "g",
+        "multiplier": 0.15498214331265903,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.15498214331265903,
+        "prior_multiplier": 0.18912427893638994,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0016075563709593147
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 73,
+        "role": "d",
+        "multiplier": 0.12235982558544518,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.12235982558544518,
+        "prior_multiplier": 0.15782003465269992,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0005200292587381421
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 73,
+        "role": "g",
+        "multiplier": 0.12235982558544518,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.12235982558544518,
+        "prior_multiplier": 0.15782003465269992,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0013414702945479494
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 74,
+        "role": "d",
+        "multiplier": 0.09342254191024005,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.09342254191024005,
+        "prior_multiplier": 0.13005193415629096,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0003970458031185202
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 74,
+        "role": "g",
+        "multiplier": 0.09342254191024005,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.09342254191024005,
+        "prior_multiplier": 0.13005193415629096,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0011054414403284733
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 75,
+        "role": "d",
+        "multiplier": 0.0684489741475643,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.0684489741475643,
+        "prior_multiplier": 0.10608739943453141,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0002909081401271483
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 75,
+        "role": "g",
+        "multiplier": 0.0684489741475643,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.0684489741475643,
+        "prior_multiplier": 0.10608739943453141,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.000901742895193517
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 76,
+        "role": "d",
+        "multiplier": 0.047679631406913066,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.047679631406913066,
+        "prior_multiplier": 0.0861572220571388,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.00020263843347938056
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 76,
+        "role": "g",
+        "multiplier": 0.047679631406913066,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.047679631406913066,
+        "prior_multiplier": 0.0861572220571388,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0007323363874856798
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 77,
+        "role": "d",
+        "multiplier": 0.03131453381255663,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.03131453381255663,
+        "prior_multiplier": 0.07045334052720081,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 0.0001330867687033657
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 77,
+        "role": "g",
+        "multiplier": 0.03131453381255663,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.03131453381255663,
+        "prior_multiplier": 0.07045334052720081,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0005988533944812069
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 78,
+        "role": "d",
+        "multiplier": 0.019511286200400935,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.019511286200400935,
+        "prior_multiplier": 0.05912699180846555,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 8.292296635170398e-05
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 78,
+        "role": "g",
+        "multiplier": 0.019511286200400935,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.019511286200400935,
+        "prior_multiplier": 0.05912699180846555,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0005025794303719572
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 79,
+        "role": "d",
+        "multiplier": 0.012383560297262576,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.012383560297262576,
+        "prior_multiplier": 0.052287254830706516,
+        "group_lrs": [
+          {
+            "role": "d",
+            "lr": 5.263013126336595e-05
+          }
+        ],
+        "network_lr_floor": 0.01
+      },
+      {
+        "step": 79,
+        "role": "g",
+        "multiplier": 0.012383560297262576,
+        "network_lr_horizon_cap": 1600,
+        "network_multiplier": 0.012383560297262576,
+        "prior_multiplier": 0.052287254830706516,
+        "group_lrs": [
+          {
+            "role": "prior",
+            "lr": 0.0004444416660610054
+          }
+        ],
+        "network_lr_floor": 0.01
+      }
+    ],
+    "seconds": 0.59535843716003
+  },
+  "verdict": {
+    "status": "PASS",
+    "attempted": true,
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "mean_abs",
+        "value": 0.7325619459152222,
+        "op": ">=",
+        "threshold": 0.3,
+        "status": "PASS",
+        "margin": 0.4325619459152222
+      },
+      {
+        "metric": "grad_med",
+        "value": 0.4875667691230774,
+        "op": "<=",
+        "threshold": 1.0,
+        "status": "PASS",
+        "margin": 0.5124332308769226
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 12,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 12,
+      "first_pass_step": 44,
+      "stable_from_step": 44,
+      "stable_from_seconds": 0.4377366271801293,
+      "confirmed_step": 57,
+      "confirmed_seconds": 0.4912624889984727
+    },
+    "shortfall": 0.0,
+    "confirmation_fraction": 0.7125
+  }
+}

@@ -1,6 +1,8 @@
 # GPU leaderboard rebuild
 
-This replaces CPU scores for GPU research decisions. See the [leaderboard and
+This evaluates eight continuous-learning variants on CUDA. The original
+[22/22 CPU winner and its 16/22 GPU control](../gpu-known-winner-control/README.md)
+are a separate preserved-recipe comparison. See the [leaderboard and
 complete 22-toy matrix](LEADERBOARD.md). A toy PASS always comes from that
 candidate's own GPU run. Unsupported cells receive no credit. The separate
 convergence gate measures stability after acquisition, rather than rejecting

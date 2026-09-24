@@ -1,0 +1,48 @@
+{
+  "profile": {
+    "name": "cuda_fp32_v1",
+    "gpu_visible": "1",
+    "workers": 3,
+    "torch": "2.13.0+cu126",
+    "cuda": "12.6",
+    "tf32": false,
+    "deterministic": true,
+    "workspace": ":4096:8",
+    "cpu_scores_reused": false,
+    "all_supported_toys_run": true,
+    "native_budget": 7000,
+    "legacy_budgets": "unchanged 19-task protocol",
+    "rank": "Preserved original recipe control; separate from strict continuous-learning variants"
+  },
+  "toys": [
+    "two_pole",
+    "mode_hold",
+    "unipolar",
+    "mid_scale_identity",
+    "cover_leftover",
+    "trajectory",
+    "residual_student",
+    "img_stripes2",
+    "img_bars4",
+    "vector_overlap",
+    "img_blobs4",
+    "img_intensity2",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_two_broad",
+    "vector_anisotropic",
+    "vector_spiral",
+    "ae_gan_hold",
+    "unused_token_hold",
+    "grid100",
+    "rotated100",
+    "staggered100"
+  ],
+  "candidates": [
+    "simpler22_reference"
+  ],
+  "convergence": {
+    "status": "NOT_RUN",
+    "reason": "The original recipe decays its rates; a constant-rate continuation would change it."
+  }
+}

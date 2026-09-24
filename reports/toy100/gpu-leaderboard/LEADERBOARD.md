@@ -1,8 +1,29 @@
-# GPU leaderboard — cuda_fp32_v1
+# GPU leaderboard — continuous-learning variants (cuda_fp32_v1)
 
 **Complete: 97 GPU toy runs and eight GPU convergence runs; all saved verdicts audited.**
 The remaining 79 matrix cells are unsupported by the published adapters and receive no credit.
 CPU scores are historical and do not enter this table. [Protocol and replay](README.md).
+
+## Previously passing 22-toy baseline
+
+The original `constraints_simple_regularization` recipe remains **22/22 PASS on
+its recorded CPU run**, independently regraded. Its preserved-recipe GPU control
+scores **16/22**, including **3/3 native 100-mode passes**.
+
+| Recipe / scope | Backend | Toy passes | Native 100-mode passes |
+|---|---|---:|---:|
+| Original recipe: decay and original auxiliary host terms | Recorded CPU, regraded | **22/22 PASS** | 3/3 |
+| Same original recipe | CUDA control | **16/22** | 3/3 |
+| Best fully tested continuous-learning variants below | CUDA | 11/22 | 0/3 |
+
+[Original CPU winner](../simpler22/README.md) ·
+[GPU control, failures, and protocol comparison](../gpu-known-winner-control/README.md)
+
+The eight variants below are a separate continuous-learning cohort. They change
+the optimizer/noise policies and rate schedule; H and its descendants also
+remove auxiliary losses from the AE and unused-token hosts. Their scores do not
+replace the known 22/22 CPU result or constitute a same-recipe backend comparison.
+
 
 ## Full 22-toy coverage
 
@@ -70,7 +91,7 @@ Limited rows cannot take an overall 22-toy slot. A supported-subset pass is not 
 | eps_net_1m | rotated100 | 100/100 | 0.92085 | FAIL | FAIL |
 | eps_net_1m | staggered100 | 100/100 | 0.90385 | FAIL | FAIL |
 
-**No release-qualified winner.**
+**No release-qualified winner in this continuous-learning cohort.**
 
 All toy verdicts use their frozen sustained live-model criteria. The separate hold begins only after
 200 consecutive qualifying checks; learning-time dips do not themselves fail that hold.
@@ -78,4 +99,4 @@ A hold failure stops the diagnostic at its first miss, so the count does not des
 
 [Audit](audit.json) · [Raw ledger](ledger.jsonl) · [Declarations](candidates.json) · [Device repairs](repairs.json)
 
-Completed 2026-09-24T21:39:17.513569+00:00
+Completed 2026-09-24T22:20:27.324388+00:00
