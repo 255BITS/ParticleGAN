@@ -197,6 +197,16 @@ active updates. The faithful cold extension passes nine focused checks; its
 400-update trajectory gate passes at MSE .000909835, with22/24 passing
 observations and a22-check passing suffix. The1200-update ring gate is running.
 
+The nominal rates are fixed, but this rule still uses state-dependent
+curvature limits. In four successive windows through2400, the median G
+proposal factor falls from .1574 to .1364, .1105 and .0882; the last window's
+minimum is .0468. The stencil width remains .15. These are
+[read-only summaries of the archived hold](continuous-evidence/pr84-critic-refinement-dynamics-windows.json),
+not an elapsed-time schedule or evidence that output updates vanish. The
+Adam metric and local curvature both enter the factor. Further tests must
+observe accepted output movement and recovery from a model error on the same
+target before treating finite quality retention as a responding stable learner.
+
 A separate [independent-bank replay](pr84-critic-refinement-interpretation.md)
 at the original1325 state finds the repaired G direction agrees closely
 between critics fitted on disjoint banks when tested on a third bank. Both

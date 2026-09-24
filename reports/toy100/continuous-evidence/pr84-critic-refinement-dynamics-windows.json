@@ -1,0 +1,138 @@
+{
+  "scope": "read-only diagnostics; positive curvature factor alone does not prove nonzero output motion or error response",
+  "source_artifact_sha256": "66f7c6dd070ddb74f5cebab8639c72e9a55fa4e2e48b2991c9b057c7ef81daf3",
+  "rows": [
+    {
+      "start": 1001,
+      "end": 1200,
+      "updates": 200,
+      "g_curvature_factor": {
+        "min": 0.08342824417642054,
+        "median": 0.15738607094555362,
+        "max": 0.33758925134621476
+      },
+      "critic_sharpness": {
+        "min": 0.5723386406898499,
+        "median": 0.7920583188533783,
+        "max": 0.9385325312614441
+      },
+      "refinement_parameter_norm": {
+        "min": 0.11603556284831591,
+        "median": 0.2498432598536458,
+        "max": 1.168659679967158
+      },
+      "fit_closures": {
+        "min": 28,
+        "median": 51.5,
+        "max": 80
+      },
+      "selected_fit_gradient_linf": {
+        "min": 0.0009138584136962891,
+        "median": 0.003230452537536621,
+        "max": 0.07906532287597656
+      },
+      "stencil_widths": [
+        0.15
+      ]
+    },
+    {
+      "start": 1201,
+      "end": 1600,
+      "updates": 400,
+      "g_curvature_factor": {
+        "min": 0.07166065213588865,
+        "median": 0.13641073754304012,
+        "max": 0.41454503384408314
+      },
+      "critic_sharpness": {
+        "min": 0.7529494166374207,
+        "median": 0.8607871830463409,
+        "max": 0.9395961761474609
+      },
+      "refinement_parameter_norm": {
+        "min": 0.09167116357298566,
+        "median": 0.21822015647520213,
+        "max": 0.7255852120053989
+      },
+      "fit_closures": {
+        "min": 27,
+        "median": 44.0,
+        "max": 80
+      },
+      "selected_fit_gradient_linf": {
+        "min": 0.0009537935256958008,
+        "median": 0.0027955472469329834,
+        "max": 0.04089856147766113
+      },
+      "stencil_widths": [
+        0.15
+      ]
+    },
+    {
+      "start": 1601,
+      "end": 2000,
+      "updates": 400,
+      "g_curvature_factor": {
+        "min": 0.060671558098242026,
+        "median": 0.11047392853227853,
+        "max": 0.265102975865088
+      },
+      "critic_sharpness": {
+        "min": 0.7518994808197021,
+        "median": 0.887502521276474,
+        "max": 0.9531517028808594
+      },
+      "refinement_parameter_norm": {
+        "min": 0.12227807726407279,
+        "median": 0.2067825973032558,
+        "max": 0.3394527066463511
+      },
+      "fit_closures": {
+        "min": 25,
+        "median": 44.0,
+        "max": 80
+      },
+      "selected_fit_gradient_linf": {
+        "min": 0.0010319948196411133,
+        "median": 0.003081202507019043,
+        "max": 0.014083027839660645
+      },
+      "stencil_widths": [
+        0.15
+      ]
+    },
+    {
+      "start": 2001,
+      "end": 2400,
+      "updates": 400,
+      "g_curvature_factor": {
+        "min": 0.0468243607329589,
+        "median": 0.08820849243294096,
+        "max": 0.25030578775652945
+      },
+      "critic_sharpness": {
+        "min": 0.8178432583808899,
+        "median": 0.8987612426280975,
+        "max": 0.966568112373352
+      },
+      "refinement_parameter_norm": {
+        "min": 0.10896325927785758,
+        "median": 0.19750263013087038,
+        "max": 0.31400171152755724
+      },
+      "fit_closures": {
+        "min": 28,
+        "median": 43.0,
+        "max": 80
+      },
+      "selected_fit_gradient_linf": {
+        "min": 0.0010406970977783203,
+        "median": 0.003511294722557068,
+        "max": 0.010658502578735352
+      },
+      "stencil_widths": [
+        0.15
+      ]
+    }
+  ]
+}
