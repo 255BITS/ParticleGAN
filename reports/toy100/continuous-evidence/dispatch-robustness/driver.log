@@ -1,0 +1,109 @@
+DRIVER 2026-09-24T20:17:16+00:00 evidence=/workspace/reports/toy100/continuous-evidence/dispatch-robustness
+tail -f /workspace/reports/toy100/continuous-evidence/dispatch-robustness/driver.log
+START 2026-09-24T20:17:16+00:00 intel reachstall seed=0 cold
+START 2026-09-24T20:17:16+00:00 intel reachstall seed=1 cold
+START 2026-09-24T20:17:16+00:00 intel reachstall seed=2 cold
+END 2026-09-24T20:17:22+00:00 intel reachstall seed=2 cold exit=0
+START 2026-09-24T20:17:22+00:00 intel delayg05 seed=0 cold
+END 2026-09-24T20:17:22+00:00 intel reachstall seed=1 cold exit=0
+START 2026-09-24T20:17:22+00:00 intel delayg05 seed=1 cold
+END 2026-09-24T20:17:28+00:00 intel delayg05 seed=1 cold exit=0
+START 2026-09-24T20:17:28+00:00 intel delayg05 seed=2 cold
+END 2026-09-24T20:17:34+00:00 intel delayg05 seed=2 cold exit=0
+START 2026-09-24T20:17:34+00:00 intel holdw15 seed=0 cold
+END 2026-09-24T20:17:51+00:00 intel reachstall seed=0 cold exit=0
+START 2026-09-24T20:17:51+00:00 intel holdw15 seed=1 cold
+END 2026-09-24T20:17:57+00:00 intel holdw15 seed=1 cold exit=0
+START 2026-09-24T20:17:57+00:00 intel holdw15 seed=2 cold
+END 2026-09-24T20:17:57+00:00 intel delayg05 seed=0 cold exit=0
+START 2026-09-24T20:17:57+00:00 amd reachstall seed=0 cold
+END 2026-09-24T20:18:03+00:00 intel holdw15 seed=2 cold exit=0
+START 2026-09-24T20:18:03+00:00 amd reachstall seed=1 cold
+END 2026-09-24T20:18:08+00:00 intel holdw15 seed=0 cold exit=0
+START 2026-09-24T20:18:08+00:00 amd reachstall seed=2 cold
+END 2026-09-24T20:18:08+00:00 amd reachstall seed=1 cold exit=0
+START 2026-09-24T20:18:08+00:00 amd delayg05 seed=0 cold
+END 2026-09-24T20:18:14+00:00 amd reachstall seed=2 cold exit=0
+START 2026-09-24T20:18:14+00:00 amd delayg05 seed=1 cold
+END 2026-09-24T20:18:20+00:00 amd delayg05 seed=1 cold exit=0
+START 2026-09-24T20:18:20+00:00 amd delayg05 seed=2 cold
+END 2026-09-24T20:18:26+00:00 amd delayg05 seed=2 cold exit=0
+START 2026-09-24T20:18:26+00:00 amd holdw15 seed=0 cold
+END 2026-09-24T20:18:48+00:00 amd reachstall seed=0 cold exit=0
+START 2026-09-24T20:18:48+00:00 amd holdw15 seed=1 cold
+END 2026-09-24T20:18:55+00:00 amd holdw15 seed=1 cold exit=0
+START 2026-09-24T20:18:55+00:00 amd holdw15 seed=2 cold
+END 2026-09-24T20:19:00+00:00 amd delayg05 seed=0 cold exit=0
+START 2026-09-24T20:19:00+00:00 intel reachstall seed=0 warm
+END 2026-09-24T20:19:00+00:00 amd holdw15 seed=2 cold exit=0
+START 2026-09-24T20:19:00+00:00 intel reachstall seed=1 warm
+END 2026-09-24T20:19:17+00:00 amd holdw15 seed=0 cold exit=0
+START 2026-09-24T20:19:17+00:00 intel reachstall seed=2 warm
+END 2026-09-24T20:19:21+00:00 intel reachstall seed=0 warm exit=0
+START 2026-09-24T20:19:21+00:00 intel delayg05 seed=0 warm
+END 2026-09-24T20:19:21+00:00 intel reachstall seed=1 warm exit=0
+START 2026-09-24T20:19:21+00:00 intel delayg05 seed=1 warm
+END 2026-09-24T20:19:38+00:00 intel reachstall seed=2 warm exit=0
+START 2026-09-24T20:19:38+00:00 intel delayg05 seed=2 warm
+END 2026-09-24T20:19:41+00:00 intel delayg05 seed=0 warm exit=0
+START 2026-09-24T20:19:42+00:00 intel holdw15 seed=0 warm
+END 2026-09-24T20:19:42+00:00 intel delayg05 seed=1 warm exit=0
+START 2026-09-24T20:19:42+00:00 intel holdw15 seed=1 warm
+END 2026-09-24T20:19:58+00:00 intel delayg05 seed=2 warm exit=0
+START 2026-09-24T20:19:58+00:00 intel holdw15 seed=2 warm
+END 2026-09-24T20:20:01+00:00 intel holdw15 seed=0 warm exit=0
+START 2026-09-24T20:20:01+00:00 amd reachstall seed=0 warm
+END 2026-09-24T20:20:03+00:00 intel holdw15 seed=1 warm exit=0
+START 2026-09-24T20:20:03+00:00 amd reachstall seed=1 warm
+END 2026-09-24T20:20:18+00:00 intel holdw15 seed=2 warm exit=0
+START 2026-09-24T20:20:18+00:00 amd reachstall seed=2 warm
+END 2026-09-24T20:20:31+00:00 amd reachstall seed=0 warm exit=0
+START 2026-09-24T20:20:31+00:00 amd delayg05 seed=0 warm
+END 2026-09-24T20:20:32+00:00 amd reachstall seed=1 warm exit=0
+START 2026-09-24T20:20:32+00:00 amd delayg05 seed=1 warm
+END 2026-09-24T20:20:47+00:00 amd reachstall seed=2 warm exit=0
+START 2026-09-24T20:20:47+00:00 amd delayg05 seed=2 warm
+END 2026-09-24T20:21:01+00:00 amd delayg05 seed=1 warm exit=0
+START 2026-09-24T20:21:01+00:00 amd holdw15 seed=0 warm
+END 2026-09-24T20:21:01+00:00 amd delayg05 seed=0 warm exit=0
+START 2026-09-24T20:21:01+00:00 amd holdw15 seed=1 warm
+END 2026-09-24T20:21:17+00:00 amd delayg05 seed=2 warm exit=0
+START 2026-09-24T20:21:17+00:00 amd holdw15 seed=2 warm
+END 2026-09-24T20:21:31+00:00 amd holdw15 seed=1 warm exit=0
+END 2026-09-24T20:21:32+00:00 amd holdw15 seed=0 warm exit=0
+END 2026-09-24T20:21:48+00:00 amd holdw15 seed=2 warm exit=0
+DRIVER_DONE 2026-09-24T20:21:48+00:00 phases=cold warm
+DRIVER 2026-09-24T20:22:42+00:00 evidence=/workspace/reports/toy100/continuous-evidence/dispatch-robustness
+tail -f /workspace/reports/toy100/continuous-evidence/dispatch-robustness/driver.log
+START 2026-09-24T20:22:42+00:00 intel reachstall seed=0 stay
+START 2026-09-24T20:22:42+00:00 intel delayg05 seed=0 stay
+START 2026-09-24T20:22:42+00:00 RING intel reachstall seed=1
+START 2026-09-24T20:22:42+00:00 intel holdw15 seed=0 stay
+START 2026-09-24T20:22:42+00:00 RING intel reachstall seed=2
+START 2026-09-24T20:22:42+00:00 RING intel delayg05 seed=1
+END 2026-09-24T20:23:28+00:00 RING intel delayg05 seed=1 exit=0
+START 2026-09-24T20:23:28+00:00 RING intel delayg05 seed=2
+END 2026-09-24T20:23:29+00:00 RING intel reachstall seed=1 exit=0
+START 2026-09-24T20:23:29+00:00 RING intel holdw15 seed=1
+END 2026-09-24T20:23:33+00:00 RING intel reachstall seed=2 exit=0
+START 2026-09-24T20:23:33+00:00 RING intel holdw15 seed=2
+END 2026-09-24T20:24:07+00:00 intel holdw15 seed=0 stay exit=0
+END 2026-09-24T20:24:11+00:00 RING intel holdw15 seed=1 exit=0
+START 2026-09-24T20:24:11+00:00 RING amd reachstall seed=1
+END 2026-09-24T20:24:11+00:00 intel delayg05 seed=0 stay exit=0
+END 2026-09-24T20:24:15+00:00 RING intel holdw15 seed=2 exit=0
+START 2026-09-24T20:24:15+00:00 RING amd reachstall seed=2
+END 2026-09-24T20:24:18+00:00 RING intel delayg05 seed=2 exit=0
+START 2026-09-24T20:24:18+00:00 RING amd delayg05 seed=1
+END 2026-09-24T20:24:19+00:00 intel reachstall seed=0 stay exit=0
+DRIVER_DONE 2026-09-24T20:24:19+00:00 phases=stay
+END 2026-09-24T20:24:59+00:00 RING amd reachstall seed=1 exit=0
+START 2026-09-24T20:24:59+00:00 RING amd delayg05 seed=2
+END 2026-09-24T20:25:02+00:00 RING amd reachstall seed=2 exit=0
+START 2026-09-24T20:25:02+00:00 RING amd holdw15 seed=1
+END 2026-09-24T20:25:06+00:00 RING amd delayg05 seed=1 exit=0
+START 2026-09-24T20:25:06+00:00 RING amd holdw15 seed=2
+END 2026-09-24T20:25:46+00:00 RING amd delayg05 seed=2 exit=0
+END 2026-09-24T20:25:50+00:00 RING amd holdw15 seed=1 exit=0
+END 2026-09-24T20:25:53+00:00 RING amd holdw15 seed=2 exit=0
+RINGS_DONE 2026-09-24T20:25:53+00:00

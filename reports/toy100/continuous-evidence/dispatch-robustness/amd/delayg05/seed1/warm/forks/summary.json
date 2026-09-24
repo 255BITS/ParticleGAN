@@ -1,0 +1,80 @@
+{
+  "cold_final_state_sha256": "8f61e6f214f7092a8a193e201f1a60bc6d2f33a5f99ac121129542ef3f7aeda2",
+  "continuation_updates": 200,
+  "identity_cold_parity": true,
+  "scope": "passing_state_local_stability_only",
+  "steps": 1200,
+  "variants": {
+    "delayg05": {
+      "final": {
+        "hq": 0.99755859375,
+        "modes": 8
+      },
+      "final_state_sha256": "9c470b80042fba24e27d5d1f6fa65ec4a113e7ec2ad9cf1d8a744fb9149dd9c7",
+      "local_stability": {
+        "checks": 200,
+        "failing_steps": [
+          1155,
+          1156,
+          1157,
+          1158,
+          1160,
+          1161
+        ],
+        "min_hq": 0.8671875,
+        "min_modes": 8,
+        "pass_all": false,
+        "pass_suffix": true,
+        "passing_checks": 194,
+        "passing_suffix": 39,
+        "stable_from_step": 1162
+      },
+      "long_hold": null,
+      "stationary": {
+        "checks": 5,
+        "failing_steps": [],
+        "min_hq": 0.996337890625,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 5,
+        "passing_suffix": 5,
+        "stable_from_step": 1000
+      },
+      "status": "FAIL"
+    },
+    "identity": {
+      "final": {
+        "hq": 0.996337890625,
+        "modes": 8
+      },
+      "final_state_sha256": "8f61e6f214f7092a8a193e201f1a60bc6d2f33a5f99ac121129542ef3f7aeda2",
+      "local_stability": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.990478515625,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "long_hold": null,
+      "stationary": {
+        "checks": 5,
+        "failing_steps": [],
+        "min_hq": 0.996337890625,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 5,
+        "passing_suffix": 5,
+        "stable_from_step": 1000
+      },
+      "status": "PASS"
+    }
+  },
+  "warm_state_sha256": "a293844b1154f86bbecd89bba59bc5e270a9c85db4af02e2049da248e38fb237",
+  "warm_step": 1000
+}
