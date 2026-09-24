@@ -1,7 +1,11 @@
 """Benchmark-local geometry ablations retain explicit, unlabeled initialization."""
 
+import hashlib
+import json
 import math
+import struct
 from copy import deepcopy
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -102,7 +106,85 @@ def test_moment_box_archive_regrade_binds_unlabelled_calibration_data(tmp_path):
     samples = np.load(path, allow_pickle=False)
     samples[0, 0] += .1
     np.save(path, samples, allow_pickle=False)
-    with pytest.raises(ValueError, match="sample/formula differs"):
+    with pytest.raises(ValueError, match="seeded calibration data differs"):
         _check_toy100_policy(tmp_path, summary, resolved, policy)
     path.write_bytes(original)
     assert _check_toy100_policy(tmp_path, summary, resolved, policy)
+
+    # A self-consistent forged batch used to pass the old checker: the file,
+    # its SHA-256, and all four moment fields agree, but its seeded origin does
+    # not. The saved initial prior remains the real one.
+    forged = deepcopy(summary)
+    samples = np.load(path, allow_pickle=False)
+    samples[0, 0] += np.float32(.001)
+    np.save(path, samples, allow_pickle=False)
+    tensor = torch.from_numpy(samples)
+    mean = tensor.mean(dim=0)
+    std = tensor.std(dim=0, unbiased=False)
+    half_width = math.sqrt(3.0) * std
+    forged["model_policy"].update(
+        init_data_sha256=hashlib.sha256(samples.tobytes()).hexdigest(),
+        init_data_mean=mean.tolist(), init_data_std=std.tolist(),
+        init_data_lower=(mean - half_width).tolist(),
+        init_data_upper=(mean + half_width).tolist(),
+    )
+    with pytest.raises(ValueError, match="seeded calibration hash differs"):
+        _check_toy100_policy(tmp_path, forged, resolved, policy)
+    path.write_bytes(original)
+
+    forged = deepcopy(summary)
+    forged["model_policy"]["prior_initial_sha256"] = "0" * 64
+    with pytest.raises(ValueError, match="seeded affine initialization differs"):
+        _check_toy100_policy(tmp_path, forged, resolved, policy)
+    forged = deepcopy(summary)
+    forged["model_policy"]["prior_initial_min"] += .001
+    with pytest.raises(ValueError, match="seeded affine initialization differs"):
+        _check_toy100_policy(tmp_path, forged, resolved, policy)
+
+
+@pytest.mark.parametrize("model", [
+    "affine_square_v1", "affine_normal_v1", "affine_square_random_v1",
+    "affine_normal_random_v1", "affine_empirical_box_v1",
+    "affine_empirical_box_random_v1", "affine_moment_box_v1",
+])
+def test_all_cpu_affine_archives_replay_initialization(tmp_path, model):
+    config = dict(
+        model="gan", problem="rotated100", device="cpu", seed=91, steps=2,
+        z_dim=2, num_particles=32, batch_size=16, d_hidden=8, n_hidden=1,
+        fourier=0, eval_samples=64, snapshot_samples=16,
+        eval_interval=2, snapshot_interval=2, log_interval=2, threads=1,
+        output_noise_std=(0.0 if model == "affine_normal_v1" else .029),
+        input_noise_std=0.0, toy100_model=model,
+    )
+    directory = tmp_path / model
+    summary = train(config, directory)
+    assert _check_toy100_policy(
+        directory, summary, summary["config"], declared_model_policy(config),
+    )
+    if "empirical_box" in model:
+        forged = deepcopy(summary)
+        forged["model_policy"]["init_data_sha256"] = "0" * 64
+        with pytest.raises(ValueError, match="seeded calibration hash differs"):
+            _check_toy100_policy(
+                directory, forged, summary["config"], declared_model_policy(config),
+            )
+    if "random" in model:
+        forged = deepcopy(summary)
+        weight = forged["model_policy"]["generator_initial_weight"]
+        weight[0][0] *= .99  # still inside the ordinary Linear initialization bound
+        forged["model_policy"]["generator_initial_weight_sha256"] = hashlib.sha256(
+            struct.pack("<4f", *(x for row in weight for x in row)),
+        ).hexdigest()
+        with pytest.raises(ValueError, match="seeded affine initialization differs"):
+            _check_toy100_policy(
+                directory, forged, summary["config"], declared_model_policy(config),
+            )
+
+
+def test_historical_cpu_square_policy_archive_still_regrades():
+    directory = Path(__file__).resolve().parents[1] / "reports/toy100/shared22/toy100/grid100"
+    summary = json.loads((directory / "summary.json").read_text())
+    config = summary["config"]
+    assert _check_toy100_policy(
+        directory, summary, config, declared_model_policy(config),
+    )
