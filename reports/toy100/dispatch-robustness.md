@@ -77,6 +77,52 @@ Mode count, on the cold ring's 50-step grid (`reachstall`; the other two candida
 
 The ring loss is a systematic kernel bias that the update amplifies, and the mode outcome depends on the seed. The GEMM error is about 1e-7 and always in the same direction at that first `addmm`. The reciprocal then turns a 1e-9 denominator error into an O(10) change before update 1 finishes. The mode curves separate at the first or third checkpoint and stay apart for the rest of the ring. That is not a single late coin-flip at the 7-vs-8 boundary (seed 0's Intel ring is already at 8 by step 850; the forced-0 curve has been on a different mode count since step 50). It is also not one fixed 7-mode attractor: the missing modes are `[1]` at the seed-0 checkpoint, `[4, 5]` on the seed-1 terminal draw, and none on seed 2.
 
+## Why #143's CPU 2.14 receipt is 8 modes and Codex's is 7
+
+#143 is the `holdw15` candidate above (commit `3384976c`). Its own agent (`bc-8db0615b-3cc1-569b-a642-e62a64efce3e`, branch `cursor/delayed-arm-width-hold-015-ce3e`) is the run Codex could not see the command for. The transcript's shell calls are the exact install and gates. Codex's side is `reports/toy100/pr140-pr143-repro-audit/` on `codex/epsilon-gan-followup`, including the prefix manifests.
+
+Both sides call the same entry point, `python -u reports/toy100/gan_followup_probe.py`, method `holdw15`, seed 0 as the probe hardcodes it. There is no extra seed wrapper. Cold calls `torch.set_num_threads(1)`. Neither side turns deterministic algorithms on. Declared source hash of `gan_followup_probe.py` is `37fad796c8225f403d0216c84483190cf5f98333fed77e688483e6f685cd97ed` on the #143 receipt and on this audit's holdw15 receipts.
+
+#143 agent, warm/cold/stay (user-site `python3`, after `python3 -m pip install 'torch==2.14.0+cpu' --index-url https://download.pytorch.org/whl/cpu` and `pip install -e '.[dev,experiments]'`):
+
+```bash
+export ATEN_CPU_CAPABILITY=avx2 MKL_ENABLE_INSTRUCTIONS=AVX2 \
+  ONEDNN_MAX_CPU_ISA=AVX2 DNNL_MAX_CPU_ISA=AVX2 \
+  CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+python3 -u reports/toy100/gan_followup_probe.py --phase cold --method holdw15 \
+  --tasks trajectory,mode_hold --output .../cold-avx2
+```
+
+`lscpu` in that session: `Intel(R) Xeon(R) Processor`, 4 CPUs, flags include `avx2` and `avx512f`. No `LD_PRELOAD`. Inter-op threads left at the library default (4 on this 4-core host). The same command with `ATEN_CPU_CAPABILITY=avx512` was only a build check; that ring is also 8 modes.
+
+Codex reproduce command, ordinary AMD path (the one that ends the ring at 7):
+
+```bash
+env -u PYTHONPATH -u ONEDNN_MAX_CPU_ISA -u DNNL_MAX_CPU_ISA \
+  OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+  ATEN_CPU_CAPABILITY=avx2 MKL_ENABLE_INSTRUCTIONS=AVX2 CUDA_VISIBLE_DEVICES= \
+  "$PYTHON" -u reports/toy100/gan_followup_probe.py \
+  --phase stay --method holdw15 --output /tmp/pr143-stay-audit
+```
+
+Prefix manifests for that machine say `AMD Ryzen 9 5900X`, torch `2.14.0+cpu`, ATen AVX2, and `LD_LIBRARY_PATH=/usr/local/cuda/lib64`. The failing prefixes (default, `interop` 1, deterministic algorithms on, `MKL_VERBOSE`, and three `MKL_CBWR` modes) all keep update-1 sharpness at `0.3852115273475647` or a nearby value that is still not the submitted `0.38521575927734375`. Only `LD_PRELOAD` of `mkl_serv_intel_cpu_true() { return 1; }` moves it to the submitted sharpness and then matches the #143 stay JSON.
+
+| control | #143 agent | Codex ordinary (7 modes) | Does it move update-1 sharpness onto the submitted value? |
+| --- | --- | --- | --- |
+| torch | 2.14.0+cpu, CPU index, user site | 2.14.0+cpu | Same wheel family. Codex already matched the version and still got 7 modes. |
+| entry point | `gan_followup_probe.py --method holdw15` | same | Same. |
+| seed | hardcoded 0 | hardcoded 0 | Same. |
+| OMP / MKL / OpenBLAS threads | 1 | 1 | Same. |
+| intra-op | 1 (env, and cold sets it) | 1 | Same. |
+| inter-op | default 4 on the Xeon | default 12; also tried 1 | Codex `interop1` prefix stays on the AMD sharpness. |
+| deterministic algorithms | off | off; also tried on | Codex deterministic prefix stays on the AMD sharpness. |
+| `MKL_ENABLE_INSTRUCTIONS` | `AVX2` | set in the reproduce command; unset in the failing prefixes | The AVX2 cap is present on the run that matches and on the reproduce command that still fails without the shim. |
+| oneDNN / DNNL max ISA | set to `AVX2` | unset | On this Xeon, the agent's exact env (oneDNN set, no preload) gives sharpness `0.38521575927734375` and G factor `0.10629096826749508`, the submitted values. Unset oneDNN on the Intel path matches the same prefix and the 115/120 stay. |
+| `LD_PRELOAD` | absent | absent on the 7-mode run; present, returning 1, on the run that matches | This is the switch Codex isolated. |
+| CPU | GenuineIntel Xeon, family 6 model 207 | AMD Ryzen 9 5900X | `mkl_serv_intel_cpu_true()` is 1 here with no preload. On the Ryzen it is 0 unless preloaded. |
+
+The command lines differ in three places: the agent sets the oneDNN ISA caps, Codex unsets them; Codex unsets `PYTHONPATH` and exports `LD_LIBRARY_PATH` to the CUDA libs; only Codex's matching run preloads the vendor symbol. None of those env-var differences is what ends acquire at 7 modes. The 7-mode endpoint is the Ryzen's ordinary MKL vendor branch. The #143 agent's 8-mode acquire is the same Intel branch this audit's `intel` column measured, reached without a shim because the CPU is GenuineIntel. Re-running the agent's exact environment on this Xeon for three updates reproduces the submitted sharpness and G factor with no preload.
+
 ## Leaderboard and recommendation
 
 Intel path, seed 0, stay only (the only cells that passed acquire):
