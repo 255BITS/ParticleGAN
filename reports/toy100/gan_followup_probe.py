@@ -12,6 +12,7 @@ from contextlib import contextmanager
 import hashlib
 import importlib
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -33,6 +34,8 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "reachstall_trustopen": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
+                             dict(ramp="stall", trust_open_reject=True)),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
@@ -44,7 +47,12 @@ SOURCES = (
     "benchmarks/toy100/continuous_probe.py",
     "benchmarks/locked_shared/mode_hold.py",
     "benchmarks/locked_shared/trajectory.py",
+    "benchmarks/locked_shared/observation.py",
+    "benchmarks/toy100/continuous_probe.py",
 )
+
+_PIN = {}
+_PINS = ("ATEN_CPU_CAPABILITY", "MKL_ENABLE_INSTRUCTIONS", "ONEDNN_MAX_CPU_ISA", "DNNL_MAX_CPU_ISA")
 
 
 def factory(method):
@@ -53,6 +61,8 @@ def factory(method):
 
 
 def emit(**row):
+    if _PIN:
+        row = {**_PIN, **row}
     print(json.dumps(row, default=float), flush=True)
 
 
@@ -61,8 +71,12 @@ def declare(output, phase, method):
     source = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
               for name in SOURCES if (ROOT / name).exists()}
     import torch
+    torch.set_num_threads(1)
+    _PIN.clear()
+    _PIN.update(cpu=torch.backends.cpu.get_cpu_capability(),
+                cpu_env={name: os.environ.get(name) for name in _PINS})
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
-               cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
+               cpu=_PIN["cpu"], cpu_env=_PIN["cpu_env"], shared_gate_eligible=False,
                purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
                source=source)
     (output / "declaration.json").write_text(json.dumps(row, indent=2) + "\n")
@@ -84,7 +98,8 @@ def warm(output, method):
         recorder.enabled = name == method
         completed, target = state["completed_steps"], state["target_steps"]
         recorder.accounting = lambda calls, outer: state["declare_optimizer_accounting"](
-            calls=completed + calls + (target - completed - outer), moment_updates=target)
+            calls=completed + calls + (target - completed - outer), moment_updates=target,
+            moment_lag=len(getattr(recorder, "reject_steps", ())))
         receipt = dict(method=name, shared_gate_eligible=False)
         if name == "identity":
             yield receipt
@@ -93,6 +108,7 @@ def warm(output, method):
                 receipt.update(rates)
                 yield receipt
             receipt.update(_dynamics(recorder))
+            receipt["reject_steps"] = list(getattr(recorder, "reject_steps", ()))
         emit(event="VARIANT_DONE", variant=name)
 
     config = json.loads((ROOT / "configs/toy100/constraints_simple_regularization.json").read_text())
@@ -107,6 +123,13 @@ def warm(output, method):
         emit(event="WARM", variant=name, status=row["status"],
              **{k: loc.get(k) for k in ("checks", "passing_checks", "min_modes", "min_hq",
                                         "failing_steps") if k in loc})
+    control = compact.get("identity", {}).get("local", {})
+    ranked = control.get("checks") == 200 and control.get("passing_checks") == 200
+    emit(event="WARM_CONTROL", ranked=ranked, checks=control.get("checks"),
+         passing_checks=control.get("passing_checks"), min_hq=control.get("min_hq"))
+    if not ranked:
+        emit(event="WARM_INVALID", reason="unchanged control is not 200/200; warm is not rankable")
+        raise SystemExit(3)
 
 
 def cold(output, method, tasks):
@@ -150,7 +173,8 @@ def stay(output, method, steps):
         def hook(state):
             declare_calls = state["declare_optimizer_accounting"]
             recorder.accounting = lambda calls, outer: declare_calls(
-                calls=calls + (steps - outer), moment_updates=steps)
+                calls=calls + (steps - outer), moment_updates=steps,
+                moment_lag=len(getattr(recorder, "reject_steps", ())))
             recorder.accounting(recorder.rows[recorder.optimizers[0]]["calls"], recorder.outer_steps)
         evidence = run_probe(config, mode="constant", steps=steps, diagnostic_every=10,
                              checkpoint_hook_step=1, checkpoint_hook=hook)
@@ -167,8 +191,11 @@ def stay(output, method, steps):
                final=(diag[-1]["step"], diag[-1]["modes"], round(diag[-1]["hq"], 4)) if diag else None,
                dynamics=_dynamics(recorder))
     records = [dict(step=r["outer_step"], sharp=r.get("critic_sharpness"), width=r.get("critic_width"),
-                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"])
+                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"],
+                    rejected=bool(r["g"].get("rejected")),
+                    trust_mean=r["g"].get("trust_mean"), trust_open=r["g"].get("trust_open"))
                for r in getattr(recorder, "records", [])]
+    row["reject_steps"] = list(getattr(recorder, "reject_steps", ()))
     (output / "stay.json").write_text(json.dumps(dict(summary=row, diagnostic=diag, records=records),
                                                  default=float) + "\n")
     emit(**row)

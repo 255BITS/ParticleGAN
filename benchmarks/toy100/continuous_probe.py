@@ -42,6 +42,7 @@ import torch
 
 from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.locked_shared import baseline, mode_hold
+from benchmarks.locked_shared.observation import notify_ring
 from benchmarks.smart_descent import evaluate
 from benchmarks.transfer_suite import suite, vector_tasks
 from benchmarks.transfer_suite.compare_defaults import candidate, optimizer_defaults
@@ -245,6 +246,7 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
                 point = {"step": step, **{key: measured[key] for key in
                          ("modes", "hq", "effective_modes", "hq_counts")}}
             diagnostic.append(point)
+            notify_ring(step, point["modes"], point["hq"])
             if log is not None:
                 log({"event": "checkpoint", **point})
         if step == shift_step:
@@ -276,13 +278,16 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
                     raise TypeError("optimizer step delegate must be callable")
                 step_delegate["fn"] = fn
             def declare_optimizer_accounting(*, calls: int,
-                                             moment_updates: int = steps):
+                                             moment_updates: int = steps,
+                                             moment_lag: int = 0):
                 if (type(calls) is not int or calls < steps
                         or type(moment_updates) is not int
+                        or type(moment_lag) is not int or moment_lag < 0
                         or not step <= moment_updates <= calls):
                     raise ValueError("invalid optimizer accounting")
                 expected_accounting.update(calls=calls,
-                                           moment_updates=moment_updates)
+                                           moment_updates=moment_updates,
+                                           moment_lag=moment_lag)
             checkpoint_hook({**{name: values[name] for name in required},
                              "noise_policy": policy,
                              "control": control,
@@ -426,9 +431,12 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
             if not (math.isclose(measured["min"], expected, rel_tol=1e-12)
                     and math.isclose(measured["max"], expected, rel_tol=1e-12)):
                 raise RuntimeError(f"{role} actual LR changed during constant run")
+    allowed_lag = expected_accounting.get("moment_lag", 0)
     for row in optimizer_final:
-        if (row["calls"] != expected_accounting["calls"]
-                or row["updates"] != expected_accounting["moment_updates"]):
+        if row["calls"] != expected_accounting["calls"]:
+            raise RuntimeError("Adam call count differs from declared continuation")
+        lag = expected_accounting["moment_updates"] - row["updates"]
+        if lag != 0 and not (0 < lag <= allowed_lag):
             raise RuntimeError("Adam update count differs from declared continuation")
     if shift_pair is not None and any(row["updates"] != shift_step
                                       for row in shift_pair["optimizer_at_shift"]):
