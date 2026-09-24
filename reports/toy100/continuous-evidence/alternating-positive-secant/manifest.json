@@ -1,0 +1,26 @@
+{
+  "archives": {
+    "cold": {
+      "adapter_sha256": "4149854f93e5216fd4ba39ccf8bb5f005f70864d52904eafe7ade383079abccd",
+      "bytes": 63593,
+      "driver_sha256": "8d65d7ce414729792afa2e542b508e5b6a1aa3e4d732bf68f31be280493600e0",
+      "file": "cold.tar.gz",
+      "sha256": "18f3c836277b24d14f71f591c3a781e0dc063361311921138678364e42acfb6a",
+      "source_files": 8
+    },
+    "warm": {
+      "adapter_sha256": "4149854f93e5216fd4ba39ccf8bb5f005f70864d52904eafe7ade383079abccd",
+      "bytes": 130212,
+      "driver_sha256": "8d65d7ce414729792afa2e542b508e5b6a1aa3e4d732bf68f31be280493600e0",
+      "file": "warm.tar.gz",
+      "sha256": "cdd0d7138ac90d0c7b84921848f4dd0bd1ed70ceab245fd40cd872d579e1c3c3",
+      "source_files": 8
+    }
+  },
+  "cold_trajectory_passing_suffix": 4,
+  "first_failed_stage": "cold_trajectory_sustained",
+  "schema": "alternating-positive-secant-evidence-v1",
+  "scratch_policy_only": true,
+  "seed": 0,
+  "warm_passed_checks": 200
+}
