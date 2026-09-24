@@ -1,0 +1,27 @@
+{"event": "DECLARED", "phase": "cold", "method": "trans", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX512", "shared_gate_eligible": false, "purity": "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder"}
+{"event": "TRANS", "step": 50, "translation": 0.4858, "rms": 0.664, "factor": 0.562, "slope": 0.0934, "shrunk": 38, "rejected": 30, "seen": 50}
+{"event": "TRANS", "step": 100, "translation": 0.0432, "rms": 0.095, "factor": 0.0, "slope": -0.0443, "shrunk": 51, "rejected": 40, "seen": 100}
+{"event": "TRANS", "step": 150, "translation": 0.236, "rms": 0.3347, "factor": 1.0, "slope": 0.0586, "shrunk": 63, "rejected": 46, "seen": 150}
+{"event": "TRANS", "step": 200, "translation": 0.2698, "rms": 0.3418, "factor": 0.332, "slope": 0.081, "shrunk": 82, "rejected": 54, "seen": 200}
+{"event": "TRANS", "step": 250, "translation": 0.4325, "rms": 0.4462, "factor": 1.0, "slope": 0.3278, "shrunk": 94, "rejected": 56, "seen": 250}
+{"event": "TRANS", "step": 300, "translation": 0.2588, "rms": 0.3069, "factor": 0.287, "slope": 0.1231, "shrunk": 116, "rejected": 61, "seen": 300}
+{"event": "TRANS", "step": 350, "translation": 0.6367, "rms": 0.741, "factor": 1.0, "slope": 0.3264, "shrunk": 145, "rejected": 68, "seen": 350}
+{"event": "TRANS", "step": 400, "translation": 0.0123, "rms": 0.0206, "factor": 1.0, "slope": 0.0304, "shrunk": 166, "rejected": 76, "seen": 400}
+{"event": "TRANS", "step": 450, "translation": 0.3533, "rms": 0.3705, "factor": 1.0, "slope": 0.2599, "shrunk": 191, "rejected": 83, "seen": 450}
+{"event": "TRANS", "step": 500, "translation": 0.1345, "rms": 0.1785, "factor": 1.0, "slope": 0.1137, "shrunk": 205, "rejected": 85, "seen": 500}
+{"event": "TRANS", "step": 550, "translation": 0.7188, "rms": 0.8489, "factor": 0.62, "slope": 0.1356, "shrunk": 232, "rejected": 97, "seen": 550}
+{"event": "TRANS", "step": 600, "translation": 0.3307, "rms": 0.3374, "factor": 0.355, "slope": 0.0884, "shrunk": 272, "rejected": 118, "seen": 600}
+{"event": "TRANS", "step": 650, "translation": 0.0651, "rms": 0.0667, "factor": 1.0, "slope": 0.2061, "shrunk": 311, "rejected": 136, "seen": 650}
+{"event": "TRANS", "step": 700, "translation": 0.72, "rms": 0.7885, "factor": 1.0, "slope": 0.1145, "shrunk": 353, "rejected": 149, "seen": 700}
+{"event": "TRANS", "step": 750, "translation": 0.1234, "rms": 0.2397, "factor": 0.0, "slope": -0.0037, "shrunk": 397, "rejected": 162, "seen": 750}
+{"event": "TRANS", "step": 800, "translation": 2.9033, "rms": 2.9217, "factor": 1.0, "slope": 0.1898, "shrunk": 432, "rejected": 171, "seen": 800}
+{"event": "TRANS", "step": 850, "translation": 0.0503, "rms": 0.0644, "factor": 1.0, "slope": 0.1783, "shrunk": 465, "rejected": 181, "seen": 850}
+{"event": "TRANS", "step": 900, "translation": 0.02, "rms": 0.0242, "factor": 0.242, "slope": 0.0104, "shrunk": 499, "rejected": 190, "seen": 900}
+{"event": "TRANS", "step": 950, "translation": 0.0395, "rms": 0.0429, "factor": 0.0, "slope": -0.0178, "shrunk": 537, "rejected": 202, "seen": 950}
+{"event": "TRANS", "step": 1000, "translation": 0.0569, "rms": 0.1399, "factor": 1.0, "slope": 0.0815, "shrunk": 567, "rejected": 210, "seen": 1000}
+{"event": "TRANS", "step": 1050, "translation": 1.379, "rms": 1.3847, "factor": 0.0, "slope": -0.1709, "shrunk": 597, "rejected": 217, "seen": 1050}
+{"event": "TRANS", "step": 1100, "translation": 0.3936, "rms": 0.5567, "factor": 0.151, "slope": 0.13, "shrunk": 638, "rejected": 229, "seen": 1100}
+{"event": "TRANS", "step": 1150, "translation": 0.0267, "rms": 0.0361, "factor": 0.7, "slope": 0.0484, "shrunk": 675, "rejected": 236, "seen": 1150}
+{"event": "TRANS", "step": 1200, "translation": 0.1193, "rms": 0.1252, "factor": 0.245, "slope": 0.0657, "shrunk": 703, "rejected": 245, "seen": 1200}
+{"event": "COLD", "task": "mode_hold", "passed": false, "status": "FAIL", "seconds": 24.3, "tail": [{"step": 1000, "modes": 2, "hq": 0.079833984375}, {"step": 1050, "modes": 0, "hq": 0.0}, {"step": 1100, "modes": 5, "hq": 0.365234375}, {"step": 1150, "modes": 8, "hq": 0.92333984375}, {"step": 1200, "modes": 7, "hq": 0.69775390625}], "dynamics": {"method": "pr84_stall_reach_common_mode_trust", "scratch_optimizer_policy": "pr84_stall_reach_common_mode_trust", "shared_gate_eligible": false, "curvature_bound": 0.25, "d_curvature_bound": 3.0, "advantage_gate": null, "outer_steps": 1200, "gate_open": 0, "bound_evaluated": 1200, "bound_active": 1200, "d_bound_active": 60, "gradient_evaluations_per_outer_step": 3.0, "moment_updates_per_outer_step": 1, "rng_replay_verified": 2400, "update_order": "alternating: D Adam step, then G+prior Adam step against the new D", "smooth_critic": true, "smooth_width_cap": 0.15, "reach": 0.5, "ramp": "stall", "b_cap_slope": 1.0, "widened_updates": 1198, "max_width": 0.5, "translation_trust": true, "translation_steps": 1200, "translation_shrunk": 703, "translation_rejected": 245, "translation_factor_mean": 0.5604688623621948}}
+{"event": "DONE"}
