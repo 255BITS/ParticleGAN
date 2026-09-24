@@ -27,19 +27,21 @@
     "later_gates": "withheld"
   },
   "next_tests": [
-    "one GAN-driven mechanism with cheap cold and stationary captured-state falsifiers",
-    "if both survive: neural cold acquisition and continued own-state recovery",
+    "finish bounded four-fit discriminator-response diagnostic on destructive warm and useful cold proposals",
+    "only if response separates them: declare cheapest adversarial response-aware rule and short native falsifier",
+    "if it survives: neural cold acquisition and continued own-state recovery",
     "production mass/shape fidelity and practical runtime after neural qualification"
   ],
   "unavoidable_impossibility_established": false,
   "latest_rejections": {
     "actual_adam_mean16": "FAIL24/44 continuous checks; one failing step was repaired",
     "local_emitted_mmd": "FAIL first warm update loses mode while population objective improves",
-    "outside_only_mass_discovery": "FAIL component inside existing cell never proposed"
+    "outside_only_mass_discovery": "FAIL component inside existing cell never proposed",
+    "native_nonlocal_rp_g_loss": "FAIL two8-update native warm branches: final7/7 modes,9/16 quality failures; all16 fits converge and lower actual G loss below rest/native;1327 deletes sole representative",
+    "fixed_common_instance_noise": "FAIL copied-model8-update continuations: warm4 modes/HQ.26758,cold1/HQ.15161; one-step warm and cold directional tests had passed"
   },
   "active_lanes": {
-    "adversarial_nonlocal": "V2 originalRpG-loss-selected output proposal and actualcopiedneuralrealization PASS: warm8->8,cold3->4,24/24heldoutlossimprovements; 8update nativealternating filter inpreparation; V1baselineinvalid retained",
-    "common_instance_noise": "one fixeddata-derivedscale, same observation channel real/fakeinsideRp losses; two-state copiedcriticadaptation filter inprogress"
+    "bounded_discriminator_response": "IN_PROGRESS diagnostic only: four fixed-feature readout fits compare warm1327 destructive nonlocal move and cold472 useful move; same banks within each pair; value bounds and2x2 original G-loss matrices; no training selection"
   },
   "leaderboard": "continuous-practical-leaderboard.md",
   "reference_coverage_candidate": {

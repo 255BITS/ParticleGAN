@@ -1,4 +1,4 @@
-# Two bounded GAN-only mechanism checks
+# GAN-only mechanisms: two rejected continuations, one response diagnostic
 
 The user clarified that the GAN formulation itself must work. Likelihood and
 anchor fitting remain reference evidence. These two tests retain an
@@ -15,10 +15,13 @@ improve. Runtime1.36s. This is an output-space diagnostic, not a neural
 acquisition pass. The [actual G/prior realization](pr84-adversarial-landing.md) also passes
 all three copied-state fits and24 heldout comparisons in1.48s. An initial
 baseline-shape bug is preserved as invalidV1; correctedV2 and direct paired
-loss checks support these results. A short alternating-player continuation
-is next. Fixed-critic loss descent
-alone cannot prevent collapse, because the generator loss is separable over
-fake samples.
+loss checks support these results. The [exact native continuation](pr84-adversarial-native16.md)
+then fails: two eight-update branches end at seven modes, with9/16 total
+quality checks failing. Every selected fit converges and improves the actual
+Rp G loss below both rest and the native Adam proposal. At1327 the winning
+move deletes the sole particle in mode6. Current-critic G-loss descent
+therefore fails as the acceptance rule for these nonlocal proposals; more
+accurate output fitting does not resolve that failure.
 
 **Common fixed instance noise:** test a single data-derived Gaussian input
 noise channel on both real and fake samples inside each player's paired Rp
@@ -27,7 +30,28 @@ that averages critic logits before applying the loss. Adapt a copied critic
 to that game before testing warm and missing-mode G responses. The scale is
 fixed before the assay; no radius or gain sweep follows a failure. It remains
 a changed GAN observation model, with no standalone data-fitting objective.
-There is no result yet.
+The [one-step and continuation results](common-instance-noise-round10.md)
+reject this fixed-width candidate. Warm one-step responses retain eight
+modes, and cold directions point toward an absent mode. Eight copied-model
+alternating updates then leave warm at four modes/HQ `.268` and cold at one
+mode/HQ `.152`. This used a once-refitted critic with retained old D Adam
+moments, not a source-exact native qualification. No width sweep follows.
+The loss uses2N index-matched antithetic pairs; an earlier all-pairs wording
+error is corrected with an archived scalar audit.
+
+**Active bounded discriminator-response diagnostic:** compare the actual
+warm1327 destructive proposal against its pre-G state, and the useful
+cold472 landed proposal against its pre-G state. Within each pair, use the
+same16 D banks, frozen nonlinear features, bias gauge and starting readout;
+fit96 readout weights with the existing sharp Rp+bcap objective. There are
+exactly four100-iteration/200-closure fits, no restarts. Report profiled-value
+intervals even when the inner fit is not certified, plus the2×2 original
+G-loss matrix for each pair under both responding critics. The warm prefix
+must reproduce its archived native records before evaluating the pair.
+No quality/coverage criterion chooses a move, and this diagnostic makes no
+acceptance or full-training claim. Its purpose is to determine whether a
+discriminator response can distinguish the demonstrated destructive move
+from useful acquisition before building another training adapter.
 
 Relevant primary research, checked September24,2026:
 
