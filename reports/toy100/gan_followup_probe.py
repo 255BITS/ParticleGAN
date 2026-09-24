@@ -4,6 +4,10 @@ warm:  scheduled prefix to 1000, constant-rate fork 1001-1200 (identity + method
 cold:  constant-rate trajectory then ring (1200 updates), stops at first FAIL.
 stay:  constant-rate cold ring continued to 2400; 10-step checks 1210-2400.
 Every phase prints one JSON line per event so ``tail -f`` on the log is readable.
+
+Ranking runs pin ATen/MKL/oneDNN to AVX2 before torch is imported. A warm rank
+is refused when the identity fork is not 200/200. ``delayed_g125`` also stops
+when its own warm fork regresses below #107's 200/200.
 """
 
 import argparse
@@ -12,9 +16,18 @@ from contextlib import contextmanager
 import hashlib
 import importlib
 import json
+import os
 from pathlib import Path
 import sys
 import time
+
+# Must run before the first torch import. Callers can still select avx512
+# for the build check by exporting ATEN_CPU_CAPABILITY=avx512.
+os.environ.setdefault("ATEN_CPU_CAPABILITY", "avx2")
+if os.environ["ATEN_CPU_CAPABILITY"].lower() == "avx2":
+    os.environ["MKL_ENABLE_INSTRUCTIONS"] = "AVX2"
+    os.environ["ONEDNN_MAX_CPU_ISA"] = "AVX2"
+    os.environ["DNNL_MAX_CPU_ISA"] = "AVX2"
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -33,9 +46,11 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "delayed_g125": ("reports.toy100.pr84_delayed_g_bound", "delayed_budget_g_bound"),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
+    "reports/toy100/pr84_delayed_g_bound.py",
     "reports/toy100/pr84_reach_candidate.py",
     "reports/toy100/pr84_smoothed_candidate.py",
     "reports/toy100/alternating_curvature_scratch.py",
@@ -53,6 +68,9 @@ def factory(method):
 
 
 def emit(**row):
+    import torch
+    row.setdefault("cpu", torch.backends.cpu.get_cpu_capability())
+    row.setdefault("aten_cpu_capability", os.environ.get("ATEN_CPU_CAPABILITY"))
     print(json.dumps(row, default=float), flush=True)
 
 
@@ -62,7 +80,12 @@ def declare(output, phase, method):
               for name in SOURCES if (ROOT / name).exists()}
     import torch
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
-               cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
+               cpu=torch.backends.cpu.get_cpu_capability(),
+               aten_cpu_capability=os.environ.get("ATEN_CPU_CAPABILITY"),
+               mkl_enable_instructions=os.environ.get("MKL_ENABLE_INSTRUCTIONS"),
+               onednn_max_cpu_isa=os.environ.get("ONEDNN_MAX_CPU_ISA"),
+               dnnl_max_cpu_isa=os.environ.get("DNNL_MAX_CPU_ISA"),
+               shared_gate_eligible=False,
                purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
                source=source)
     (output / "declaration.json").write_text(json.dumps(row, indent=2) + "\n")
@@ -107,6 +130,29 @@ def warm(output, method):
         emit(event="WARM", variant=name, status=row["status"],
              **{k: loc.get(k) for k in ("checks", "passing_checks", "min_modes", "min_hq",
                                         "failing_steps") if k in loc})
+    return compact
+
+
+def warm_rank_ok(method, compact):
+    """Refuse a warm rank when identity is not 200/200. Kill delayed_g125 below #107."""
+    identity = compact["identity"]["local"]
+    if identity.get("checks") != 200 or identity.get("passing_checks") != 200:
+        emit(event="KILL", reason="warm identity/control is not 200/200; refuse rank",
+             identity_checks=identity.get("checks"),
+             identity_passing=identity.get("passing_checks"),
+             identity_min_hq=identity.get("min_hq"))
+        return False
+    if method != "delayed_g125":
+        return True
+    local = compact[method]["local"]
+    passing = local.get("passing_checks")
+    if passing is None or passing < 200:
+        emit(event="KILL", reason="warm regresses vs #107 200/200; stop, no coefficient sweep",
+             passing_checks=passing, checks=local.get("checks"),
+             min_hq=local.get("min_hq"), min_modes=local.get("min_modes"),
+             pr84_reference="196/200", stall_reach_reference="200/200")
+        return False
+    return True
 
 
 def cold(output, method, tasks):
@@ -167,7 +213,8 @@ def stay(output, method, steps):
                final=(diag[-1]["step"], diag[-1]["modes"], round(diag[-1]["hq"], 4)) if diag else None,
                dynamics=_dynamics(recorder))
     records = [dict(step=r["outer_step"], sharp=r.get("critic_sharpness"), width=r.get("critic_width"),
-                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"])
+                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"],
+                    **({"delayed_g_bound": r["delayed_g_bound"]} if "delayed_g_bound" in r else {}))
                for r in getattr(recorder, "records", [])]
     (output / "stay.json").write_text(json.dumps(dict(summary=row, diagnostic=diag, records=records),
                                                  default=float) + "\n")
@@ -184,12 +231,15 @@ def main():
     args = parser.parse_args()
     declare(args.output, args.phase, args.method)
     if args.phase == "warm":
-        warm(args.output, args.method)
+        compact = warm(args.output, args.method)
+        if not warm_rank_ok(args.method, compact):
+            emit(event="DONE", ranked=False)
+            sys.exit(2)
     elif args.phase == "cold":
         cold(args.output, args.method, [t for t in args.tasks.split(",") if t])
     else:
         stay(args.output, args.method, args.steps)
-    emit(event="DONE")
+    emit(event="DONE", ranked=True)
 
 
 if __name__ == "__main__":
