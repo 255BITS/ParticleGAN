@@ -1,0 +1,223 @@
+{
+  "scope": "exact frozen sources and raw diagnostic results; gzip recovers original bytes",
+  "origin": "/ml2/hypergan/ParticleGAN-continuous-learning/artifacts/continuous-learning/round6/crossfit-saved44",
+  "files": {
+    "declaration.json.gz": {
+      "original_name": "declaration.json",
+      "original_sha256": "1d271e4d8c4c481b1d2fb5c32443607257e5377f85bc902f2a6ac92c54f9be4d",
+      "original_bytes": 3367,
+      "stored_sha256": "05450cf2963ab2fa9fe604ac0847a35d27d5828f0ac2861de58a48cf0de1c576",
+      "stored_bytes": 1686
+    },
+    "original-1324-1335.json.gz": {
+      "original_name": "original-1324-1335.json",
+      "original_sha256": "808a9cbb621655ea3e4e63f0e5bfa0931e5171dc7ced9fdda473ed07f40eee4a",
+      "original_bytes": 19998,
+      "stored_sha256": "508db3d13bb79d1733f3d5c66f5fd5deb3c40f58507b80c2928fa4a13c7480c0",
+      "stored_bytes": 6922
+    },
+    "original-1380-1395.json.gz": {
+      "original_name": "original-1380-1395.json",
+      "original_sha256": "7e2d4a8c4988bdea8777b569f7685d2850cc3c671658ce891882527b6187da9b",
+      "original_bytes": 25603,
+      "stored_sha256": "e6fc832dc83e0fc19cd193575e1283062127aa53cbf602efd1361aadaa047c89",
+      "stored_bytes": 8676
+    },
+    "original-1530-1545.json.gz": {
+      "original_name": "original-1530-1545.json",
+      "original_sha256": "2fbe1250df2c909e10b15d3e7c6a6ec7b11ba91447d678891ce6febd3d0391f7",
+      "original_bytes": 25508,
+      "stored_sha256": "0f0c71dce25f1d9116b1a76009d4df074d3e4aa6a6ca5cf56d295e6111f2cb40",
+      "stored_bytes": 8666
+    },
+    "reallocation-1324-1335.json.gz": {
+      "original_name": "reallocation-1324-1335.json",
+      "original_sha256": "e0ae8576573a7a15e2c96678d9cb56eaf6fd655418cc0e03f6dfdfb1feaa79e0",
+      "original_bytes": 90557,
+      "stored_sha256": "bfb731774566510385a5cc9dab6f6ace62a29abd942ccef91b2e26cb39205d19",
+      "stored_bytes": 20849
+    },
+    "reallocation-1380-1395.json.gz": {
+      "original_name": "reallocation-1380-1395.json",
+      "original_sha256": "0e387bbca579474f600eca32e20dc64f46ad510bb3e0e659d5df12c4c2fd34c2",
+      "original_bytes": 113529,
+      "stored_sha256": "995e6150e5c6741b499a5b4091c72d0894d238a93d255ead0918ef3460d3967e",
+      "stored_bytes": 24369
+    },
+    "reallocation-1530-1545.json.gz": {
+      "original_name": "reallocation-1530-1545.json",
+      "original_sha256": "5d139dd6cb52a29c42d8ba9ceb039d071b05cec18eaa309586b937af8a07ccdb",
+      "original_bytes": 114374,
+      "stored_sha256": "7bd565ae0daa295729d4794bb69aa583cbfb45b6a7c1b9062f51572c7775b681",
+      "stored_bytes": 25064
+    },
+    "source/benchmarks/locked_shared/mlp.py.gz": {
+      "original_name": "source/benchmarks/locked_shared/mlp.py",
+      "original_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "original_bytes": 2289,
+      "stored_sha256": "f5f9ffe455030054182ed9a11c1b8e1111b88c9371db8adf5e9982e0b08c886e",
+      "stored_bytes": 879
+    },
+    "source/benchmarks/locked_shared/mode_hold.py.gz": {
+      "original_name": "source/benchmarks/locked_shared/mode_hold.py",
+      "original_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "original_bytes": 10774,
+      "stored_sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "stored_bytes": 3580
+    },
+    "source/configs/toy100/constraints_simple_regularization.json.gz": {
+      "original_name": "source/configs/toy100/constraints_simple_regularization.json",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_bytes": 1507,
+      "stored_sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "stored_bytes": 661
+    },
+    "source/host-1324-1335.py.gz": {
+      "original_name": "source/host-1324-1335.py",
+      "original_sha256": "8b1a0f5d26785c0ea537f6ef069843f45bf800ecfbd9fe1c84b68eb0804c4db1",
+      "original_bytes": 6602,
+      "stored_sha256": "bf0bc763c63615110ac558fe17d7319902dd098a098565d6c7ec20e7cb3c0540",
+      "stored_bytes": 1930
+    },
+    "source/host-1380-1395.py.gz": {
+      "original_name": "source/host-1380-1395.py",
+      "original_sha256": "911cd032897585771b4c5ca9c61536f8acba0246c69c105478c3331c256f7257",
+      "original_bytes": 6602,
+      "stored_sha256": "b262609cf165a416ec36ca291ee8f2a732e96e6e0496dccf41da091fb03b1f6e",
+      "stored_bytes": 1931
+    },
+    "source/host-1530-1545.py.gz": {
+      "original_name": "source/host-1530-1545.py",
+      "original_sha256": "d77d320f2802c7c418612647f0308bb0e9e12bebd2598eb84d066113554f4d1a",
+      "original_bytes": 6602,
+      "stored_sha256": "e65acaa3441d59bf64fcd7d208b675fbc89b647ca034748edd0357886f112063",
+      "stored_bytes": 1930
+    },
+    "source/particlegan/gan_loss.py.gz": {
+      "original_name": "source/particlegan/gan_loss.py",
+      "original_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "original_bytes": 7960,
+      "stored_sha256": "0d5f99f7ef077a56b4dc06791a60d83eba34740cf3f2d7edc0cfccfac38e7563",
+      "stored_bytes": 1975
+    },
+    "source/particlegan/grad_regularizers.py.gz": {
+      "original_name": "source/particlegan/grad_regularizers.py",
+      "original_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+      "original_bytes": 17129,
+      "stored_sha256": "4c0d42678efe66e2ae2ce36e4c7808866a996d88ad5ecaa7d32097fd4e52fabe",
+      "stored_bytes": 5749
+    },
+    "source/reports/toy100/alternating_curvature_scratch.py.gz": {
+      "original_name": "source/reports/toy100/alternating_curvature_scratch.py",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_bytes": 16689,
+      "stored_sha256": "4655b8735ed1df2ff0051b7e1816df9084b9c639c1f92bf6c0d8f62c78ca024c",
+      "stored_bytes": 4472
+    },
+    "source/reports/toy100/chamfer_discrete_reallocation.py.gz": {
+      "original_name": "source/reports/toy100/chamfer_discrete_reallocation.py",
+      "original_sha256": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24",
+      "original_bytes": 4218,
+      "stored_sha256": "b707e7966611a27ab33b91bdb5d6b1a48ed8eb010fbac195c7895227b2fcec56",
+      "stored_bytes": 1640
+    },
+    "source/reports/toy100/chamfer_pullback.py.gz": {
+      "original_name": "source/reports/toy100/chamfer_pullback.py",
+      "original_sha256": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+      "original_bytes": 7290,
+      "stored_sha256": "0030a08befb76274b11903d54d15af38a4ae8ef9d79fc06e06c25fe081a32ef1",
+      "stored_bytes": 2512
+    },
+    "source/reports/toy100/coverage_fixed_eval.py.gz": {
+      "original_name": "source/reports/toy100/coverage_fixed_eval.py",
+      "original_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "original_bytes": 3996,
+      "stored_sha256": "781a69107df11fa473feacf197aff169c6e7b1c243d14de972d7af8d77401e98",
+      "stored_bytes": 1661
+    },
+    "source/reports/toy100/crossfit_reallocation.py.gz": {
+      "original_name": "source/reports/toy100/crossfit_reallocation.py",
+      "original_sha256": "5d7eacbfd1937a9da999e62ab6156774d4c71f20fe305ff1f3860327278814af",
+      "original_bytes": 5744,
+      "stored_sha256": "d84ac2256b77d5b6fff45841ffe9d6aea83ba4ee35c184ad38bf5c40a8614796",
+      "stored_bytes": 2130
+    },
+    "source/reports/toy100/crossfit_reallocation_filter.py.gz": {
+      "original_name": "source/reports/toy100/crossfit_reallocation_filter.py",
+      "original_sha256": "9cdfa7dada3e1845d2b49d45bad7a3a5840e54d79201a2cdf8b3e8ea428e3514",
+      "original_bytes": 707,
+      "stored_sha256": "946a68e5582978111ff1a855a57e912d69bbb0aa21990b02d765fd6b5533b2dd",
+      "stored_bytes": 371
+    },
+    "source/reports/toy100/extra_adam_scratch.py.gz": {
+      "original_name": "source/reports/toy100/extra_adam_scratch.py",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_bytes": 13261,
+      "stored_sha256": "fc9d646056ee4e469c924dd88f1d94abff5d5f02d9c1caec3d47b2c52cdb7f63",
+      "stored_bytes": 3980
+    },
+    "source/reports/toy100/joint_output_pullback.py.gz": {
+      "original_name": "source/reports/toy100/joint_output_pullback.py",
+      "original_sha256": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3",
+      "original_bytes": 6674,
+      "stored_sha256": "e0710557ffb31862ffff36a94f2eb332a9b6e158770f65867cdc48e53ea917de",
+      "stored_bytes": 2305
+    },
+    "source/reports/toy100/pr84_critic_refinement_capture.py.gz": {
+      "original_name": "source/reports/toy100/pr84_critic_refinement_capture.py",
+      "original_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+      "original_bytes": 7367,
+      "stored_sha256": "6bd7873bccd4a87bb4c1f74a133fe378a24a2d0eea260a628761007183526135",
+      "stored_bytes": 2505
+    },
+    "source/reports/toy100/pr84_critic_refinement_filter.py.gz": {
+      "original_name": "source/reports/toy100/pr84_critic_refinement_filter.py",
+      "original_sha256": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+      "original_bytes": 7717,
+      "stored_sha256": "0958754e2e949ce1de48c92db2e88eed7d5a9275ee7a59ced6d2216caafdbfe6",
+      "stored_bytes": 2797
+    },
+    "source/reports/toy100/pr84_opponent_prediction.py.gz": {
+      "original_name": "source/reports/toy100/pr84_opponent_prediction.py",
+      "original_sha256": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846",
+      "original_bytes": 8204,
+      "stored_sha256": "58e3c0ca283bbaea1b4cc955900b68eabc1cc5f3a9ddd53aace63c2dc841a505",
+      "stored_bytes": 2457
+    },
+    "source/reports/toy100/pr84_prediction_state_filter.py.gz": {
+      "original_name": "source/reports/toy100/pr84_prediction_state_filter.py",
+      "original_sha256": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4",
+      "original_bytes": 15392,
+      "stored_sha256": "30b36973e8070151fe93930ab032fcb4922fca2950aae8607d552547c0ab0916",
+      "stored_bytes": 4721
+    },
+    "source/reports/toy100/pr84_smoothed_candidate.py.gz": {
+      "original_name": "source/reports/toy100/pr84_smoothed_candidate.py",
+      "original_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+      "original_bytes": 6530,
+      "stored_sha256": "ec9ede71c84a00dcfb965dd8788caaccea204107f1357032397df14764d684eb",
+      "stored_bytes": 2369
+    },
+    "source/reports/toy100/reallocation_smoothed_candidate.py.gz": {
+      "original_name": "source/reports/toy100/reallocation_smoothed_candidate.py",
+      "original_sha256": "ca16cf667a03e585d50c110edcd0b219991768877dff1a640ec2371c7d16439c",
+      "original_bytes": 8789,
+      "stored_sha256": "4792e4ff545179d7e1f5e5f7482e93d542cd5bb70c61c04c1b327fa07ecb6661",
+      "stored_bytes": 2799
+    },
+    "source/reports/toy100/reallocation_state_filter.py.gz": {
+      "original_name": "source/reports/toy100/reallocation_state_filter.py",
+      "original_sha256": "be3beae7267bf6514802e0febaf13780c922e16fd13c0e4741d3f3016db29361",
+      "original_bytes": 6079,
+      "stored_sha256": "6294c69b307b4834bfb6363d8d1501b162cce89023fc486e820a29be93176c21",
+      "stored_bytes": 2182
+    },
+    "summary.json.gz": {
+      "original_name": "summary.json",
+      "original_sha256": "e45ed1697f3396cff3e4655b32333060d68ceeaf9073e5a012b4536f83fa7234",
+      "original_bytes": 393041,
+      "stored_sha256": "a4655f01937baac037d10218b95c6a07461e555d283db80fbd9fa428ebac7034",
+      "stored_bytes": 89774
+    }
+  }
+}

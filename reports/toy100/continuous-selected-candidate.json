@@ -1181,5 +1181,17 @@
       "production_common22"
     ],
     "next": "saved-state differentiated critic response and early-acquisition diagnosis; no later promotion gates"
+  },
+  "next_research_candidate": {
+    "name": "split-batch data reallocation with joint G/prior fitting",
+    "status": "saved44_pass_warm_pending",
+    "adapter": "reports/toy100/crossfit_reallocation.py",
+    "adapter_sha256": "5d7eacbfd1937a9da999e62ab6156774d4c71f20fe305ff1f3860327278814af",
+    "saved_checks": 44,
+    "passing_checks": 44,
+    "min_hq": 0.9365234375,
+    "production_gate_eligible": false,
+    "evidence": "continuous-evidence/round6-crossfit-saved44/manifest.json",
+    "report": "continuous-round6.md"
   }
 }

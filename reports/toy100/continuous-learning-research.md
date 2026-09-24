@@ -1,6 +1,7 @@
 # Removing learning-rate decay: mechanism and validation
 
-Latest: [exact stationary failure and opponent prediction](continuous-round5.md).
+Latest: [allocation, neural landing and split-batch validation](continuous-round6.md).
+Previous: [exact stationary failure and opponent prediction](continuous-round5.md).
 Prediction passes warm200 but fails22/1200 dense later checks. Original PR84
 fails89/1200 with identical archived training state; scheduled control1200/1200.
 Earlier: [PR84 review and the leading partial candidate](continuous-round4.md).

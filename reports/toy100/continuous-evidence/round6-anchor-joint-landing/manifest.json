@@ -1,0 +1,104 @@
+{
+  "scope": "exact frozen sources and raw diagnostic results; gzip recovers original bytes",
+  "origin": "/ml2/hypergan/ParticleGAN-continuous-learning/artifacts/continuous-learning/round6/anchor-joint-landing",
+  "files": {
+    "cold1.json.gz": {
+      "original_name": "cold1.json",
+      "original_sha256": "40fc6f473595450f960030e0b9092e57a9af590c7a88718d222af98a9a542a80",
+      "original_bytes": 30398,
+      "stored_sha256": "fc66ab3911c0f0a90630352add8411a02d0f5981f1fd3d1d3b4277d120e4af9e",
+      "stored_bytes": 6897
+    },
+    "cold100.json.gz": {
+      "original_name": "cold100.json",
+      "original_sha256": "f59b0756b4c8d891c24e8d910d5966a90fcc1c52d9767e5bc4d6b433a116e139",
+      "original_bytes": 29612,
+      "stored_sha256": "ed7fde1ffe8a49ba29362469a395df31a41c2310d97b32a10cc2eef94980734a",
+      "stored_bytes": 6712
+    },
+    "declaration.json.gz": {
+      "original_name": "declaration.json",
+      "original_sha256": "43901156d4b32faecf3f05816f261973ca0e56e2d1b2706e978c752b83117b04",
+      "original_bytes": 2128,
+      "stored_sha256": "0577ffab34525cd2c3e062c4915ee9cbde8e731b63afeda0a40251754a7a6ba1",
+      "stored_bytes": 1196
+    },
+    "source/benchmarks/locked_shared/mlp.py.gz": {
+      "original_name": "source/benchmarks/locked_shared/mlp.py",
+      "original_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "original_bytes": 2289,
+      "stored_sha256": "f5f9ffe455030054182ed9a11c1b8e1111b88c9371db8adf5e9982e0b08c886e",
+      "stored_bytes": 879
+    },
+    "source/benchmarks/locked_shared/mode_hold.py.gz": {
+      "original_name": "source/benchmarks/locked_shared/mode_hold.py",
+      "original_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "original_bytes": 10774,
+      "stored_sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "stored_bytes": 3580
+    },
+    "source/reports/toy100/anchor_joint_landing_filter.py.gz": {
+      "original_name": "source/reports/toy100/anchor_joint_landing_filter.py",
+      "original_sha256": "de8917f00afbbf24bc6ee0ec8c343277064fbbbee008c2ac861f8b095b7cad48",
+      "original_bytes": 6405,
+      "stored_sha256": "eca93e12c8cbf80bee6afdda397e4a1085aac86b73625227a13d40a5c8bcdf26",
+      "stored_bytes": 2599
+    },
+    "source/reports/toy100/coverage_fixed_eval.py.gz": {
+      "original_name": "source/reports/toy100/coverage_fixed_eval.py",
+      "original_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "original_bytes": 3996,
+      "stored_sha256": "781a69107df11fa473feacf197aff169c6e7b1c243d14de972d7af8d77401e98",
+      "stored_bytes": 1661
+    },
+    "source/reports/toy100/joint_output_pullback.py.gz": {
+      "original_name": "source/reports/toy100/joint_output_pullback.py",
+      "original_sha256": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3",
+      "original_bytes": 6674,
+      "stored_sha256": "e0710557ffb31862ffff36a94f2eb332a9b6e158770f65867cdc48e53ea917de",
+      "stored_bytes": 2305
+    },
+    "source/reports/toy100/pr84_critic_refinement_capture.py.gz": {
+      "original_name": "source/reports/toy100/pr84_critic_refinement_capture.py",
+      "original_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+      "original_bytes": 7367,
+      "stored_sha256": "6bd7873bccd4a87bb4c1f74a133fe378a24a2d0eea260a628761007183526135",
+      "stored_bytes": 2505
+    },
+    "source/reports/toy100/pr84_early_geometry.py.gz": {
+      "original_name": "source/reports/toy100/pr84_early_geometry.py",
+      "original_sha256": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+      "original_bytes": 7322,
+      "stored_sha256": "d4a37cd332e8724ed8d68cc0c9d13edb1f3370d1857bfd46a96bf7178d9aaa26",
+      "stored_bytes": 2733
+    },
+    "source/reports/toy100/sample_group_anchor.py.gz": {
+      "original_name": "source/reports/toy100/sample_group_anchor.py",
+      "original_sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+      "original_bytes": 12791,
+      "stored_sha256": "c0bf364cf5d9a4b130bd66e546cfda8e28196d791088358c51b87669efc1d2c9",
+      "stored_bytes": 4342
+    },
+    "source/tests/test_joint_output_pullback.py.gz": {
+      "original_name": "source/tests/test_joint_output_pullback.py",
+      "original_sha256": "25ff97bcf21db49c85d8630d30425295033127c9e9fe41ee387048b171baf607",
+      "original_bytes": 2804,
+      "stored_sha256": "0eae25a962b47db10e188ec67dfd0feca91caf6fbbce0076f167c1485e0e648d",
+      "stored_bytes": 924
+    },
+    "summary.json.gz": {
+      "original_name": "summary.json",
+      "original_sha256": "7f4a73a04ad1f53fdc20160aa89a4085f30418a3008851e2e91b74f827dae2ce",
+      "original_bytes": 88004,
+      "stored_sha256": "f4a39cae8750332cd57b7c0885d01dde3d199d13c48790414ad49c058c93c566",
+      "stored_bytes": 18203
+    },
+    "warm1324.json.gz": {
+      "original_name": "warm1324.json",
+      "original_sha256": "0d7a71d73fc1208c80f8d746ea90801efa0521954980c79bde1fc5c28815b132",
+      "original_bytes": 25925,
+      "stored_sha256": "b032ece11e81b6e4a3a565899bda2f67cc4c27a8d4c6fe98152143b8592a1488",
+      "stored_bytes": 5019
+    }
+  }
+}

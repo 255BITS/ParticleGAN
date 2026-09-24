@@ -5,6 +5,15 @@ candidate has passed both acquisition and continued quality. Work here is
 limited to replacing those schedules with responsive training dynamics;
 production defaults have not been changed.
 
+**Latest, round 6:** [allocation, neural landing, and split-batch validation](continuous-round6.md).
+The full critic-refinement cold run is closed as a failure, not pending.
+One-step total critic response fails 28/44 saved checks; full-data reallocation
+passes 43/44 but fits harmful data outliers at the remaining update. A new
+split-batch reallocation rule passes all 44 saved checks and is eligible for
+the warm gate. It adds a data objective and joint G/prior numerical fitting;
+no full training pass or stability theorem is claimed. The sections below
+retain the preceding investigations and their exact reproduction details.
+
 **Latest stability investigation:** exact replay isolates a destructive
 generator update at1325 and accumulated mode loss beginning1533. All16 held-out
 generator minibatches at1325 push vulnerable particles outward; the raw field
@@ -17,7 +26,7 @@ parity hold. Read the [fifth-round diagnosis and tests](continuous-round5.md)
 and [current status](stationary-stability-status.md) before proposing another
 method. Prediction is rejected before cold gates; no production winner is selected.
 
-**Current causal lead:** the actual-D cross-response fails its short filter.
+**Preceding causal lead:** the actual-D cross-response fails its short filter.
 Fitting a copied critic on the existing penalized objective reverses harmful
 G guidance on24/24 reserved batches; all proposals at1325 and1530 then pass.
 [Exact fit and held-out evidence](pr84-critic-relaxation-diagnosis.md) led to
@@ -26,7 +35,7 @@ checks and warm200/200**, with eight modes and minimum warm HQ .99707.
 The dense hold through2400 passes all1200 later checks, minimum HQ .939453
 with eight modes throughout. Cold trajectory passes at MSE .000910 with22
 passing observations; the original cold ring aborts on a nonfinite inner-fit trial at
-update472. No full ring quality verdict is available. [Exact failure audit](pr84-critic-refinement-failure-audit.md)
+update472. [Exact failure audit](pr84-critic-refinement-failure-audit.md)
 isolates float32 strong-Wolfe interpolation overflow from otherwise finite accepted
 state. The [finite-trial repair](pr84-critic-refinement-finite-recovery.md) restores the
 saved best critic exactly, preserves all44 finite-path saved-state checks, and completes

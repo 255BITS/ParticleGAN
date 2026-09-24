@@ -1,10 +1,11 @@
 # Same-dataset stability status, September 24
 
-**Critic refinement now passes the conditional same-dataset stability tests;
-full acquisition and longer stability remain pending.** Earlier PR84 methods
-fail a longer continuation from the same passing state. Their short warm
-passes and excellent final checkpoints conceal failures in between. The
-fixed dataset never changes.
+**No complete solution is qualified.** Critic refinement passes the borrowed-state
+hold but fails full cold acquisition at three modes. The latest
+[round 6 split-batch reallocation candidate](continuous-round6.md) passes all
+44 saved-state checks; its warm and continued-training gates are next.
+Earlier PR84 methods fail a longer continuation despite good final checkpoints.
+The fixed dataset never changes.
 
 **Subsequent exact diagnosis and new attempt:** the [fifth round](continuous-round5.md)
 checks every update through2400. Original PR84 fails89 of1,200 later checks,
@@ -17,18 +18,18 @@ sudden change in Adam's denominator. See the linked report for the complete
 ledger, direction tests and exact evidence. The ten-step results below retain
 the original diagnostic's provenance.
 
-**Current candidate:** bounded refinement of the same penalized critic loss
+**Previous candidate:** bounded refinement of the same penalized critic loss
 passes all44 saved-state checks and warm200/200, minimum HQ .99707. Its
 constant-rate dense hold through2400 passes1200/1200, minimum HQ .939453.
 Cold trajectory passes at MSE .000910; the original cold ring aborts on a nonfinite inner-fit trial
-at update472. No full ring quality verdict is available. An [independent exact audit](pr84-critic-refinement-failure-audit.md)
+at update472. An [independent exact audit](pr84-critic-refinement-failure-audit.md)
 isolates float32 strong-Wolfe interpolation overflow. A [bounded finite-trial repair](pr84-critic-refinement-finite-recovery.md)
 recovers the exact best finite critic, leaves44 passing saved-state checks bitwise unchanged,
 and completes twenty saved-state numerical updates; these remain at three modes and do not
 pass acquisition. Its [full cold rerun](pr84-critic-refinement-finite-cold.md) reproduces trajectory but fails ring acquisition:3 modes/HQ .451416,0/24 passing checks. The same three modes appear in every observation from100 onward; no later promotion gate follows.
 This costs roughly53 extra
 1024-pair D gradients per update; fits remain nonconverged. Cold acquisition
-is not yet complete. [Independent warm/hold audit and evidence](pr84-critic-refinement-independent-audit.md),
+fails the required gate. [Independent warm/hold audit and evidence](pr84-critic-refinement-independent-audit.md),
 [strict saved-state filter](pr84-critic-refinement-filter.md). The
 [capped population toy](capped-critic-tracking-toy.md) supports a critic-tracking
 mechanism without implying that distribution mismatch alone is impossible.
