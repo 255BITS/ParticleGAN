@@ -14,17 +14,18 @@
     "continuation_rule": "uninterrupted training, fixed original noise horizon, every dense live check passes"
   },
   "counts": {
-    "primary_candidate_rows": 41,
+    "primary_candidate_rows": 42,
     "primary_control_rows": 4,
     "primary_first_failed_mode_hold": 30,
-    "primary_first_failed_trajectory": 11,
+    "primary_first_failed_trajectory": 12,
     "calibration_unique_arms": 3,
     "calibration_runs": 5,
     "diagnostic_followups": 1,
-    "warm_diagnostic_runs": 22,
-    "warm_candidate_diagnostic_runs": 13,
-    "warm_candidate_passes": 8,
+    "warm_diagnostic_runs": 25,
+    "warm_candidate_diagnostic_runs": 14,
+    "warm_candidate_passes": 9,
     "warm_extended_control_runs": 3,
+    "gradient_signal_conditions": 4,
     "production_gate_winners": 0
   },
   "limits": [
@@ -34,6 +35,8 @@
     "Warm method results are conditional on a scheduled passing state at update 1000; they do not test cold acquisition.",
     "Warm lookahead and confidence candidate PASS rows failed their separate cold acquisitions; no overall survivor is implied.",
     "Warm secant candidates passed 200/200 local checks but failed the separately declared cold trajectory acquisition; no mode-hold was attempted for them.",
+    "Warm implicit candidate passed 200/200 local checks but failed the separately declared cold trajectory acquisition; no mode-hold was attempted for it.",
+    "Gradient coherence at one passing state does not show that the mean gradient improves quality or that a shift can be learned.",
     "The confidence warm adapter hash was not recorded at execution; its current archived cold source must not be attributed to the warm run.",
     "The two warm EG variants have nonfinite denominator diagnostics but finite recorded host metrics; no broad EG impossibility follows.",
     "No unattempted downstream task is counted as a pass or failure.",
@@ -4143,6 +4146,11 @@
         "path": "artifacts/continuous-secant-eg-cold/source_archive/sha256.json",
         "sha256": "a9e3bd3ca8ed17cc7d39ca4bd984014579f51ef75c22044f31d2c76e7a0c67b7"
       },
+      "public_manifest": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/secant/cold/manifest.json",
+        "sha256": "3d89029bcbbe790e142329fae5e3c891c8a5884f17aef91ea5ca339d41ad39b0"
+      },
       "transformed_mode_hold": {
         "worktree": "ParticleGAN-continuous-mechanism",
         "path": "artifacts/continuous-secant-eg-cold/source_archive/mode_hold_transformed.py",
@@ -4290,6 +4298,11 @@
             "path": "artifacts/continuous-secant-eg-cold/secant_c25/trajectory.json",
             "sha256": "53db607ddc1d131a29b143bfb5e172e1a8063f178a7d403bfdd617fa677aa0b3"
           },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/secant/cold/secant_c25/trajectory.json.gz",
+            "sha256": "3f9d90c6d04bfb702a9954bccb4b052495d940725671e3bec7d88a8650945f79"
+          },
           "status_evidence": {
             "worktree": "ParticleGAN-continuous-mechanism",
             "path": "artifacts/continuous-secant-eg-cold/secant_c25/status.json",
@@ -4426,6 +4439,11 @@
             "worktree": "ParticleGAN-continuous-mechanism",
             "path": "artifacts/continuous-secant-eg-cold/secant_c50/trajectory.json",
             "sha256": "6f16711fe9be8b6b50b08e94302fa34de79bb870320c55e3f34954dafa5a2f25"
+          },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/secant/cold/secant_c50/trajectory.json.gz",
+            "sha256": "d69872a977fc4788ada9ddb2da9c088476979378d507c6d037e11362571cd0fa"
           },
           "status_evidence": {
             "worktree": "ParticleGAN-continuous-mechanism",
@@ -4564,6 +4582,11 @@
             "path": "artifacts/continuous-secant-eg-cold/secant_c90/trajectory.json",
             "sha256": "653b7f862d6ab1ac7adf9dc37121f5a88189d45fe8ac1a03ec415428b623af14"
           },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/secant/cold/secant_c90/trajectory.json.gz",
+            "sha256": "6335d550b070cdcd00eb1312ce921a3f68e101f88e8f41a0e05b11daaff186c8"
+          },
           "status_evidence": {
             "worktree": "ParticleGAN-continuous-mechanism",
             "path": "artifacts/continuous-secant-eg-cold/secant_c90/status.json",
@@ -4595,6 +4618,11 @@
         "worktree": "ParticleGAN-continuous-mechanism",
         "path": "artifacts/continuous-secant-eg-warm/source_archive/sha256.json",
         "sha256": "e56fe5b2733889d6bdc4b13125f61b4d6cd5c0b2b21a1da73cac39c27272ae43"
+      },
+      "public_manifest": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/secant/warm/manifest.json",
+        "sha256": "013c7603d460681712fb4e6b06ae675a64b25b31ff36e7c4ed47f4e488c3d294"
       },
       "transformed_mode_hold": {
         "worktree": "ParticleGAN-continuous-mechanism",
@@ -4659,6 +4687,11 @@
             "worktree": "ParticleGAN-continuous-mechanism",
             "path": "artifacts/continuous-secant-eg-warm/identity.json",
             "sha256": "6c57ba72e56f74637fdf5448bb164db2537dd5121673468ef0b87510b182daa7"
+          },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/secant/warm/identity.json.gz",
+            "sha256": "def9a8c4ca3cc1b3d3a9a384f1d10b6e6476a7ef177ebd56eaae706869d599dc"
           }
         },
         {
@@ -4703,6 +4736,11 @@
             "worktree": "ParticleGAN-continuous-mechanism",
             "path": "artifacts/continuous-secant-eg-warm/constant.json",
             "sha256": "f75d5ecac6e9ad5368b391fd06cf593b54b1abb876be99079090adc98b3f0090"
+          },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/secant/warm/constant.json.gz",
+            "sha256": "5e396cefde2e9e2a2efcbe00fe4d9c090791930a335dd3b7e135a9f78b54cfa8"
           }
         },
         {
@@ -4747,6 +4785,11 @@
             "worktree": "ParticleGAN-continuous-mechanism",
             "path": "artifacts/continuous-secant-eg-warm/c025.json",
             "sha256": "e55c8ba349d5a466dc13db9492f4172d20be8ad36a5f1676d25b16017af44a96"
+          },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/secant/warm/c025.json.gz",
+            "sha256": "a1a341a0e0d6c622af1340086913acdd8108e8d0a9c412bc2073fd3e0b775f7f"
           }
         },
         {
@@ -4791,6 +4834,11 @@
             "worktree": "ParticleGAN-continuous-mechanism",
             "path": "artifacts/continuous-secant-eg-warm/c05.json",
             "sha256": "c9bd738db1fa8c3b892a95be731cf1ce9539e4a368b5577f346982c8e838f4e5"
+          },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/secant/warm/c05.json.gz",
+            "sha256": "6239615c27402fd06c43a6b487f1d90cdd05e7eb6b420ca2dac6714b0c3e2fbf"
           }
         },
         {
@@ -4835,7 +4883,471 @@
             "worktree": "ParticleGAN-continuous-mechanism",
             "path": "artifacts/continuous-secant-eg-warm/c09.json",
             "sha256": "64e94536dd0757f6b393c4adb27d4a6c8c4fe6756d36f51d1e7e386e84229535"
+          },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/secant/warm/c09.json.gz",
+            "sha256": "58d2837383b60fc677253d877d5a708ac37c51d400b406fbb2932ff63ac6c6c1"
           }
+        }
+      ]
+    },
+    {
+      "id": "implicit-eg-cold-v1",
+      "phase": "cold",
+      "scope": "The declared first host trajectory fails 0/24 checks at 400 updates; mode-hold is unattempted. This diagnostic joint response is restricted to two frozen hosts and is not production-gate eligible.",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-implicit-cold"
+      },
+      "declared_rows": 1,
+      "candidate_rows": 1,
+      "control_rows": 0,
+      "source_hashes": {
+        "reports/toy100/implicit_extra_scratch.py": "f669cda71935cd97ace70d12cddf0dd6333cdc92f91e9ba73a7037df199ba196",
+        "reports/toy100/fixed_metric_extra_scratch.py": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+        "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+        "reports/toy100/implicit_extra_probe.py": "070a7b107a1bf5a87c6b529a92903dc2ea812e4bd1e98b732a0b3b0cbc05f6e4"
+      },
+      "source_archive": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-implicit-cold/source_archive/sha256.json",
+        "sha256": "e5148bea940c365d3ba7c10d7a97816ffb833dd1da963c5f6a5096b73b38666a"
+      },
+      "public_manifest": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/implicit/cold/manifest.json",
+        "sha256": "88075b284d3fe167981c6fd8a7336e4646a69d0f9d5807c02511ba62b7080fd8"
+      },
+      "transformed_mode_hold": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-implicit-cold/source_archive/mode_hold_transformed.py",
+        "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da"
+      },
+      "transformed_trajectory": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-implicit-cold/source_archive/trajectory_transformed.py",
+        "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-implicit-cold/declaration.json",
+        "sha256": "60c0a92e57905fcb29f231e23121030e5ba1195c2c5796427aa0dbbe9b91d29f"
+      },
+      "rows": [
+        {
+          "tag": "implicit",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "krylov_dim": 8,
+            "linear_tolerance": 0.1,
+            "nonlinear_tolerance": 0.5,
+            "fd_relative": 0.0001,
+            "correction_limit": 2.0,
+            "max_backtracks": 8
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "trajectory": [
+            {
+              "step": 17,
+              "identity_mse": 0.22389383614063263
+            },
+            {
+              "step": 34,
+              "identity_mse": 0.2888055145740509
+            },
+            {
+              "step": 50,
+              "identity_mse": 0.2801659405231476
+            },
+            {
+              "step": 67,
+              "identity_mse": 0.2695593535900116
+            },
+            {
+              "step": 84,
+              "identity_mse": 0.2707546055316925
+            },
+            {
+              "step": 100,
+              "identity_mse": 0.2681867182254791
+            },
+            {
+              "step": 117,
+              "identity_mse": 0.2704560458660126
+            },
+            {
+              "step": 134,
+              "identity_mse": 0.2654716670513153
+            },
+            {
+              "step": 150,
+              "identity_mse": 0.26872608065605164
+            },
+            {
+              "step": 167,
+              "identity_mse": 0.2632664740085602
+            },
+            {
+              "step": 184,
+              "identity_mse": 0.259402871131897
+            },
+            {
+              "step": 200,
+              "identity_mse": 0.2629716098308563
+            },
+            {
+              "step": 217,
+              "identity_mse": 0.26141807436943054
+            },
+            {
+              "step": 234,
+              "identity_mse": 0.26686230301856995
+            },
+            {
+              "step": 250,
+              "identity_mse": 0.25907841324806213
+            },
+            {
+              "step": 267,
+              "identity_mse": 0.2572072446346283
+            },
+            {
+              "step": 284,
+              "identity_mse": 0.25652962923049927
+            },
+            {
+              "step": 300,
+              "identity_mse": 0.2498387098312378
+            },
+            {
+              "step": 317,
+              "identity_mse": 0.2549560070037842
+            },
+            {
+              "step": 334,
+              "identity_mse": 0.2552163302898407
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.2489696741104126
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.2536589205265045
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.2529095411300659
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.253793865442276
+            }
+          ],
+          "final": {
+            "identity_mse": 0.253793865442276
+          },
+          "passing_checks": 0,
+          "checks": 24,
+          "applied_rate_by_role": {
+            "d": 0.00425,
+            "g": 0.00425,
+            "prior": 0.0085
+          },
+          "accepted_scale_min": 0.00390625,
+          "accepted_scale_mean": 0.034326171875,
+          "accepted_scale_max": 1.0,
+          "gradient_queries": 2837,
+          "optimizer_calls_per_player": [
+            3237,
+            3237
+          ],
+          "optimizer_moment_steps": 400,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-implicit-cold/trajectory.json",
+            "sha256": "5c2263b1b286436db3ff3077f41866dc2d52e9f3124f850ca152d7625e73d0c6"
+          },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/implicit/cold/trajectory.json.gz",
+            "sha256": "6e1bbbfc0e08b52da00c182a39c68a71f6304a005d304c9658abe2e5c117ac55"
+          }
+        }
+      ]
+    },
+    {
+      "id": "implicit-eg-warm-v1",
+      "phase": "warm_local_stability",
+      "scope": "One 200-step local stability pass from the scheduled passing update-1000 state; the same method fails the separately declared cold trajectory acquisition. The accepted joint proposal scale adapts by state.",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-implicit-warm"
+      },
+      "run_count": 3,
+      "candidate_diagnostic_runs": 1,
+      "control_runs": 2,
+      "source_hashes": {
+        "ParticleGAN-continuous-mechanism:reports/toy100/implicit_extra_warm_probe.py": "ec01a1bdfe11e4f38a3b7a0321a6fe45d8bd7835c4e5115e383d4f406d39fdb2",
+        "ParticleGAN-continuous-mechanism:reports/toy100/implicit_extra_scratch.py": "f669cda71935cd97ace70d12cddf0dd6333cdc92f91e9ba73a7037df199ba196",
+        "ParticleGAN-continuous-mechanism:reports/toy100/fixed_metric_extra_scratch.py": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+        "ParticleGAN-continuous-mechanism:reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+        "ParticleGAN-continuous-probe:benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+        "ParticleGAN-continuous-probe:benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834"
+      },
+      "source_archive": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-implicit-warm/source_archive/sha256.json",
+        "sha256": "4b21f52f56c990866884b6fdbf60213d62371cc2392bed18c215d54752835e31"
+      },
+      "public_manifest": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/implicit/warm/manifest.json",
+        "sha256": "15ce467f9d916489fff5d7b19598f9def9e9a47553d7cd50b5abf9d0e2e20902"
+      },
+      "transformed_mode_hold": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-implicit-warm/source_archive/mode_hold_transformed.py",
+        "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da"
+      },
+      "transformed_trajectory": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-implicit-warm/source_archive/trajectory_transformed.py",
+        "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-implicit-warm.declaration.json",
+        "sha256": "b7a3083131abfc0960b4f373d159b9106f6c71b3a82155e408b3c07ce283df7f"
+      },
+      "summary": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-implicit-warm/summary.json",
+        "sha256": "72e4d2245c728c827ce96b882738488f9f2c64d65592c8db0224be5978263620"
+      },
+      "runs": [
+        {
+          "tag": "identity",
+          "kind": "control",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.996337890625,
+          "final": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 4.254505882408814e-05,
+              "max": 0.0016017594338655719,
+              "observations": 200
+            },
+            "g": {
+              "min": 4.254505882408814e-05,
+              "max": 0.0016017594338655719,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0004250864765310783,
+              "max": 0.003417518105398572,
+              "observations": 200
+            }
+          },
+          "accepted_scale_min": null,
+          "accepted_scale_mean": null,
+          "accepted_scale_max": null,
+          "gradient_queries": null,
+          "optimizer_calls_per_player": null,
+          "optimizer_moment_steps": null,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-implicit-warm/identity.json",
+            "sha256": "bc3e6ae36a0133520fab33adcd067bc02bed147daaab79145e7c67464438ef4e"
+          },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/implicit/warm/identity.json.gz",
+            "sha256": "df5657b39af83f4f54f3603b6006676c10dee61195c28eea492cd70461a9fef1"
+          }
+        },
+        {
+          "tag": "constant",
+          "kind": "control",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "warm_local_stability",
+          "passing_checks": 6,
+          "checks": 200,
+          "min_modes": 1,
+          "min_hq": 0.00537109375,
+          "final": {
+            "modes": 6,
+            "hq": 0.504638671875
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 200
+            }
+          },
+          "accepted_scale_min": null,
+          "accepted_scale_mean": null,
+          "accepted_scale_max": null,
+          "gradient_queries": null,
+          "optimizer_calls_per_player": null,
+          "optimizer_moment_steps": null,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-implicit-warm/constant.json",
+            "sha256": "31dcac89486970a6a8c4f572ad557d933f22f6a066193ae4d9c0a015f5725d29"
+          },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/implicit/warm/constant.json.gz",
+            "sha256": "8d53374b8a3e6096acd5b7c0c5e4d4cf009a0a7134ba09505503906b492215be"
+          }
+        },
+        {
+          "tag": "implicit",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.983154296875,
+          "final": {
+            "modes": 8,
+            "hq": 0.9970703125
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 2273
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 2273
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 2273
+            }
+          },
+          "accepted_scale_min": 0.0625,
+          "accepted_scale_mean": 0.2975,
+          "accepted_scale_max": 1.0,
+          "gradient_queries": 2073,
+          "optimizer_calls_per_player": [
+            2273,
+            2273
+          ],
+          "optimizer_moment_steps": 1200,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-implicit-warm/implicit.json",
+            "sha256": "ab3793389e1510d038e1f445999313d9cb74705e8e3f3baa6f0d89b510cdd04b"
+          },
+          "public_evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/implicit/warm/implicit.json.gz",
+            "sha256": "a1e2015955fabe5471f7e0cb50d6be33f6660ce860e45f73a578f38f8ca8d204"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gradient-signal-v1",
+      "phase": "warm_gradient_diagnostic",
+      "scope": "Single passing update-1000 state, 32 stochastic batches per condition, fixed warm-state Adam denominator. Coherent gradient energy is not proof of a beneficial or actionable learning signal; shifted rows after 32 constant-rate D-only updates are local probes, not a shift-continuation gate.",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/signal-diagnosis"
+      },
+      "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+      "conditions": 4,
+      "batches_per_condition": 32,
+      "restored_training_state": true,
+      "source_hashes": {
+        "reports/toy100/signal_diagnosis.py": "b480c3e82eca0e4fc968a9ffe3554279c9b9f75754f6b57eabb99f36475169ca"
+      },
+      "source": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/signal-diagnosis/signal_diagnosis.py",
+        "sha256": "b480c3e82eca0e4fc968a9ffe3554279c9b9f75754f6b57eabb99f36475169ca"
+      },
+      "manifest": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/signal-diagnosis/manifest.json",
+        "sha256": "55a5991c9863aacac830b82ffbf1cfc6eba07fffb65349db69f99f14fb0ef7c5"
+      },
+      "evidence": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/signal-diagnosis/signal-diagnosis.json",
+        "sha256": "198f0bb883d01c8f91f9fd7c2c55cff4bf99b63cd8934c83abf213f70616e510"
+      },
+      "rows": [
+        {
+          "shift_x": 0.0,
+          "critic_only_updates": 0,
+          "g_coherent_energy_fraction": 0.956064103923675,
+          "prior_coherent_energy_fraction": 0.9184977460000974,
+          "mean_advantage": 0.043745189905166626
+        },
+        {
+          "shift_x": 0.35,
+          "critic_only_updates": 0,
+          "g_coherent_energy_fraction": 0.95608135756472,
+          "prior_coherent_energy_fraction": 0.9180985891836724,
+          "mean_advantage": -0.033087896183133125
+        },
+        {
+          "shift_x": 0.0,
+          "critic_only_updates": 32,
+          "g_coherent_energy_fraction": 0.959486380271326,
+          "prior_coherent_energy_fraction": 0.9199710103401916,
+          "mean_advantage": 0.06767922639846802
+        },
+        {
+          "shift_x": 0.35,
+          "critic_only_updates": 32,
+          "g_coherent_energy_fraction": 0.9593166717220597,
+          "prior_coherent_energy_fraction": 0.9197977933840923,
+          "mean_advantage": 0.12129274383187294
         }
       ]
     }

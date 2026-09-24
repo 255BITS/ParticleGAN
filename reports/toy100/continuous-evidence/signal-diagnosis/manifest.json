@@ -1,0 +1,21 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "signal-diagnosis",
+  "phase": "warm_diagnostic",
+  "files": {
+    "signal-diagnosis.json": {
+      "sha256": "198f0bb883d01c8f91f9fd7c2c55cff4bf99b63cd8934c83abf213f70616e510",
+      "original_sha256": "198f0bb883d01c8f91f9fd7c2c55cff4bf99b63cd8934c83abf213f70616e510",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "artifacts/continuous-learning/signal-diagnosis.json",
+      "compression": "identity"
+    },
+    "signal_diagnosis.py": {
+      "sha256": "b480c3e82eca0e4fc968a9ffe3554279c9b9f75754f6b57eabb99f36475169ca",
+      "original_sha256": "b480c3e82eca0e4fc968a9ffe3554279c9b9f75754f6b57eabb99f36475169ca",
+      "original_worktree": "ParticleGAN-continuous-learning",
+      "original_path": "reports/toy100/signal_diagnosis.py",
+      "compression": "identity"
+    }
+  }
+}

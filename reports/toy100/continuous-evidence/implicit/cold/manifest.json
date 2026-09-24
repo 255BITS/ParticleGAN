@@ -1,0 +1,84 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "implicit",
+  "phase": "cold",
+  "files": {
+    "config.json.gz": {
+      "sha256": "0ad96cd7c525463f5d411cd279824d5ce4e542ca229ea16192c59f39ba7c7be6",
+      "original_sha256": "af0adba06aad44bed8a350902c927ac985c09ce7831503c573b93f1146fbc9f5",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-implicit-cold/config.json",
+      "compression": "gzip"
+    },
+    "declaration.json.gz": {
+      "sha256": "7e4836f8ffbe2ece09e150d35f1bfb7bfb5dd8f300dd21f0ce0884064190ad3f",
+      "original_sha256": "60c0a92e57905fcb29f231e23121030e5ba1195c2c5796427aa0dbbe9b91d29f",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-implicit-cold/declaration.json",
+      "compression": "gzip"
+    },
+    "source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-implicit-cold/source_archive/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "source_archive/fixed_metric_extra_scratch.py": {
+      "sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-implicit-cold/source_archive/fixed_metric_extra_scratch.py",
+      "compression": "identity"
+    },
+    "source_archive/implicit_extra_probe.py": {
+      "sha256": "070a7b107a1bf5a87c6b529a92903dc2ea812e4bd1e98b732a0b3b0cbc05f6e4",
+      "original_sha256": "070a7b107a1bf5a87c6b529a92903dc2ea812e4bd1e98b732a0b3b0cbc05f6e4",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-implicit-cold/source_archive/implicit_extra_probe.py",
+      "compression": "identity"
+    },
+    "source_archive/implicit_extra_scratch.py": {
+      "sha256": "f669cda71935cd97ace70d12cddf0dd6333cdc92f91e9ba73a7037df199ba196",
+      "original_sha256": "f669cda71935cd97ace70d12cddf0dd6333cdc92f91e9ba73a7037df199ba196",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-implicit-cold/source_archive/implicit_extra_scratch.py",
+      "compression": "identity"
+    },
+    "source_archive/mode_hold_transformed.py": {
+      "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-implicit-cold/source_archive/mode_hold_transformed.py",
+      "compression": "identity"
+    },
+    "source_archive/sha256.json.gz": {
+      "sha256": "3ce2c8253aaf5910936aa80af52a35426195733f0da4e36cd54e0175d77227b3",
+      "original_sha256": "e5148bea940c365d3ba7c10d7a97816ffb833dd1da963c5f6a5096b73b38666a",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-implicit-cold/source_archive/sha256.json",
+      "compression": "gzip"
+    },
+    "source_archive/trajectory_transformed.py": {
+      "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-implicit-cold/source_archive/trajectory_transformed.py",
+      "compression": "identity"
+    },
+    "status.json.gz": {
+      "sha256": "fd50ae34844d035d6deaea009d36616c9228746d58c89c0b7c41c1945dcd5e71",
+      "original_sha256": "650a5a1d882a528e3a486d300272dcb772060a50be87943731d95b4e7cdffbe2",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-implicit-cold/status.json",
+      "compression": "gzip"
+    },
+    "trajectory.json.gz": {
+      "sha256": "6e1bbbfc0e08b52da00c182a39c68a71f6304a005d304c9658abe2e5c117ac55",
+      "original_sha256": "5c2263b1b286436db3ff3077f41866dc2d52e9f3124f850ca152d7625e73d0c6",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-implicit-cold/trajectory.json",
+      "compression": "gzip"
+    }
+  }
+}

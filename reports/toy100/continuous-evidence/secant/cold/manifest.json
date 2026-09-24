@@ -1,0 +1,126 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "secant",
+  "phase": "cold",
+  "files": {
+    "declaration.json.gz": {
+      "sha256": "fd62f73221fe5014675c0ab025141fdb2191f513895346844438932db4f4c6be",
+      "original_sha256": "6ddade649f18f82aadc2b93941409fa43d535555098124aa04911734e56e5aac",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/declaration.json",
+      "compression": "gzip"
+    },
+    "secant_c25/config.json.gz": {
+      "sha256": "a712ebde02df44fdec22710660a443c75c9baf8e57a7f203bdff964246e42b70",
+      "original_sha256": "1acf8907cc0b5d94a3b9167beda511c5687678e0f176023ea5d7cfaf401a2ffb",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/secant_c25/config.json",
+      "compression": "gzip"
+    },
+    "secant_c25/status.json.gz": {
+      "sha256": "477e43819fc0d8653154663ef3d3a89d4d247f2e34faee3b4c6f2cfe9b1df3f4",
+      "original_sha256": "b4207831f7638bbc1a41fa672a6d551fb3ca9277284cd62fcec36e04045aa2b0",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/secant_c25/status.json",
+      "compression": "gzip"
+    },
+    "secant_c25/trajectory.json.gz": {
+      "sha256": "3f9d90c6d04bfb702a9954bccb4b052495d940725671e3bec7d88a8650945f79",
+      "original_sha256": "53db607ddc1d131a29b143bfb5e172e1a8063f178a7d403bfdd617fa677aa0b3",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/secant_c25/trajectory.json",
+      "compression": "gzip"
+    },
+    "secant_c50/config.json.gz": {
+      "sha256": "1c06884254b4fa5ede8e98477ccf56d66dd359378e48f13c953d434e49318905",
+      "original_sha256": "29dfcf84c874e3d3920d03c9557adb5d7807fe085305da36653c8aed4b82dd67",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/secant_c50/config.json",
+      "compression": "gzip"
+    },
+    "secant_c50/status.json.gz": {
+      "sha256": "4998af84bd7815a4475ed3a479e18051db1ff7b1f9a87e4dc87a271191d3cca0",
+      "original_sha256": "02d2c339e9f07c1c9866d7c8359482b4681ae9696f8e284e05605694525a1de9",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/secant_c50/status.json",
+      "compression": "gzip"
+    },
+    "secant_c50/trajectory.json.gz": {
+      "sha256": "d69872a977fc4788ada9ddb2da9c088476979378d507c6d037e11362571cd0fa",
+      "original_sha256": "6f16711fe9be8b6b50b08e94302fa34de79bb870320c55e3f34954dafa5a2f25",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/secant_c50/trajectory.json",
+      "compression": "gzip"
+    },
+    "secant_c90/config.json.gz": {
+      "sha256": "c58918f9c749ceccca8a1f2450c96cd0485c34b6c774b0755c3bfae73072c011",
+      "original_sha256": "6d6951b60004731ac2f1d4e07423b1751fb91622d1e726d3a1ca9db7e6d44afa",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/secant_c90/config.json",
+      "compression": "gzip"
+    },
+    "secant_c90/status.json.gz": {
+      "sha256": "b4145091902eb4cb2af1e903a36b88b04fdd65331cf7cb439c36cbb465e399d2",
+      "original_sha256": "11a60c1c599f0c8828a644e6758fb47887ce47ee426374ff99d495da2e103280",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/secant_c90/status.json",
+      "compression": "gzip"
+    },
+    "secant_c90/trajectory.json.gz": {
+      "sha256": "6335d550b070cdcd00eb1312ce921a3f68e101f88e8f41a0e05b11daaff186c8",
+      "original_sha256": "653b7f862d6ab1ac7adf9dc37121f5a88189d45fe8ac1a03ec415428b623af14",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/secant_c90/trajectory.json",
+      "compression": "gzip"
+    },
+    "source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/source_archive/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "source_archive/fixed_metric_extra_scratch.py": {
+      "sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/source_archive/fixed_metric_extra_scratch.py",
+      "compression": "identity"
+    },
+    "source_archive/mode_hold_transformed.py": {
+      "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/source_archive/mode_hold_transformed.py",
+      "compression": "identity"
+    },
+    "source_archive/secant_extra_probe.py": {
+      "sha256": "d0aab2274abfb2dc8672f57cb52395c55432e36b28e09c1972462fdfc59182bf",
+      "original_sha256": "d0aab2274abfb2dc8672f57cb52395c55432e36b28e09c1972462fdfc59182bf",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/source_archive/secant_extra_probe.py",
+      "compression": "identity"
+    },
+    "source_archive/secant_extra_scratch.py": {
+      "sha256": "8d8cee454baab2c4cd8beea7961eb5a9bfe49010b9b53770657e402dd29a698c",
+      "original_sha256": "8d8cee454baab2c4cd8beea7961eb5a9bfe49010b9b53770657e402dd29a698c",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/source_archive/secant_extra_scratch.py",
+      "compression": "identity"
+    },
+    "source_archive/sha256.json.gz": {
+      "sha256": "665a9ceda90ad4423f7dc3bffe7bb818da78df8b50bff6ced14eaf968f44abac",
+      "original_sha256": "a9e3bd3ca8ed17cc7d39ca4bd984014579f51ef75c22044f31d2c76e7a0c67b7",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/source_archive/sha256.json",
+      "compression": "gzip"
+    },
+    "source_archive/trajectory_transformed.py": {
+      "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-secant-eg-cold/source_archive/trajectory_transformed.py",
+      "compression": "identity"
+    }
+  }
+}
