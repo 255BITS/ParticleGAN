@@ -1,0 +1,33 @@
+{
+  "scope": "read-only archived original critic and first native128 bank; no fit or training",
+  "snapshot_raw_sha256": "ec212d3e4f3f03cb1f03d505014f1facd5919ca457f4b965315ba1939d866c0b",
+  "source_sha256": "f410b95b64f5e37ec6de257fd1767404d3b4bb083d26b88e956bac40ab1eddea",
+  "native_shape": [
+    128,
+    2
+  ],
+  "observed_shape": [
+    256,
+    2
+  ],
+  "d_logit_shape": [
+    256
+  ],
+  "d_subtraction_shape": [
+    256
+  ],
+  "d_actual": 0.695494532585144,
+  "d_matched_2n": 0.695494532585144,
+  "d_crossed_2n_by_2n_counterfactual": 0.7011656165122986,
+  "g_logit_shape": [
+    256
+  ],
+  "g_subtraction_shape": [
+    256
+  ],
+  "g_actual": 0.8776110410690308,
+  "g_matched_2n": 0.8776110410690308,
+  "g_crossed_2n_by_2n_counterfactual": 0.8826049566268921,
+  "actual_equals_matched_bitwise": true,
+  "actual_equals_crossed": false
+}
