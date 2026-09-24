@@ -1,5 +1,9 @@
 # Stability after confirmed convergence
 
+PR140 is an [unverified contender](pr140-independent-review.md), not a confirmed
+global leader. Its submitted114/120 sparse continuation result was not reproduced
+in the independent CPU runs; its own report also retains six late failures.
+
 The current objective separates learning time from stability once quality has
 converged. The first200 consecutive8-mode/HQ>=.90 observations confirm convergence;
 the following1200 updates are a disjoint hold. Early dips do not fail that hold.
