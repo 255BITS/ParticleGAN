@@ -14,7 +14,10 @@ game losses are unchanged. No coverage, assignment, likelihood or clip term.
 
 from contextlib import contextmanager
 
+import torch
+
 from reports.toy100 import pr84_smoothed_candidate as base
+from reports.toy100.alternating_curvature_scratch import _rho
 
 
 METHOD = "pr84_slope_utilisation_reach"
@@ -42,6 +45,7 @@ def reach_width(sharpness, reach=REACH, ramp="peak"):
 class ReachRecorder(base.SmoothedBothBoundRecorder):
     reach = REACH
     ramp = "peak"
+    game_bound = False
 
     def _arm_smoothed_critic(self):
         super()._arm_smoothed_critic()
@@ -61,10 +65,89 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
             return False
         return sum(row["g"]["factor"] for row in recent) / len(recent) <= STALL_TRUST
 
+    def phases(self, step, opt_d, opt_g, local):
+        if not self.game_bound or not self.enabled or step < self.start_step:
+            yield from super().phases(step, opt_d, opt_g, local)
+            return
+        # BothBoundRecorder.phases with one more replay: D answers G's proposal.
+        self._local = local
+        if self.optimizers is None:
+            self.optimizers = (opt_d, opt_g)
+            self.rows = {opt: dict(role=role, calls=0) for role, opt in zip(("d", "g"), self.optimizers)}
+        streams = [v for v in local.values() if isinstance(v, torch.Generator)]
+        policy = local.get("noise_policy")
+        if policy is not None:
+            streams.extend(v for name in ("input_stream", "output_stream")
+                           if isinstance((v := getattr(policy, name, None)), torch.Generator))
+        streams = list({id(s): s for s in streams}.values())
+        buffers = [(b, b.detach().clone()) for name in ("generator", "critic", "prior")
+                   if isinstance((m := local.get(name)), torch.nn.Module) for b in m.buffers()]
+        self.d0 = [p.detach().clone() for p in self._params(opt_d)]
+        self.g_base = [p.detach().clone() for p in self._params(opt_g)]
+        rng_before = self._rng(streams)
+        self.advantage = None
+        self.row = dict(outer_step=self.outer_steps + 1)
+        rng_after = None
+        for phase in range(4):
+            if phase:
+                self._set_rng(streams, rng_before)
+                with torch.no_grad():
+                    for b, saved in buffers:
+                        b.copy_(saved)
+            self.phase = phase
+            self._smooth_on = False
+            yield phase
+            state = self._rng(streams)
+            if rng_after is None:
+                rng_after = state
+            elif not all(torch.equal(a, b) for a, b in zip(rng_after, state)):
+                raise RuntimeError("replayed block consumed a different RNG pattern")
+            else:
+                self.rng_replay_verified += 1
+        self.row["critic_advantage"] = self.advantage
+        self.row["gate_open"] = False
+        self.row["rho"], self.row["factor"] = self.row["g"]["rho"], self.row["g"]["factor"]
+        self.records.append(self.row)
+        self._record_trace(local)
+        self.phase = None
+        self.outer_steps += 1
+        if self.accounting is not None:
+            self.accounting(self.rows[opt_d]["calls"], self.outer_steps)
+
+    @torch.no_grad()
+    def step(self, optimizer, ordinary_step, closure=None):
+        if (not self.game_bound or self.passthrough or self.phase is None or self.phase < 2
+                or (self.phase == 2 and optimizer is self.optimizers[0])):
+            return super().step(optimizer, ordinary_step, closure)
+        opt_d, opt_g = self.optimizers
+        self.rows[optimizer]["calls"] += 1
+        grads = [p.grad.detach().clone() for p in self._params(opt_g)] if optimizer is opt_g else None
+        if self.phase == 2:
+            self._rho_own = _rho(self.g_base, self.g1, self.gg0, grads, self.metric_g)
+            return None
+        if optimizer is opt_d:
+            self._d_adam = {p: {k: (v.clone() if torch.is_tensor(v) else v) for k, v in s.items()}
+                            for p, s in opt_d.state.items()}
+            ordinary_step(opt_d)
+            self._arm_smoothed_critic()
+            return None
+        rho_game = _rho(self.g_base, self.g1, self.gg0, grads, self.metric_g)
+        rho = max(self._rho_own, rho_game)
+        factor = min(1., self.curvature_bound / rho) if rho > 0 else 1.
+        for p, b, n in zip(self._params(opt_g), self.g_base, self.g1):
+            p.copy_(torch.lerp(b, n, factor) if factor < 1 else n)
+        for p, v in zip(self._params(opt_d), self.d_star):
+            p.copy_(v)
+        for p, s in self._d_adam.items():
+            opt_d.state[p] = s
+        self.row["g"] = dict(rho=rho, factor=factor, rho_own=self._rho_own, rho_game=rho_game)
+        return None
+
     def receipt(self):
         value = super().receipt()
         widths = [row.get("critic_width", 0.) for row in self.records]
         value.update(method=METHOD, scratch_optimizer_policy=METHOD, reach=self.reach, ramp=self.ramp,
+                     game_bound=self.game_bound,
                      b_cap_slope=B_CAP_SLOPE,
                      widened_updates=int(sum(w > base.SMOOTH_WIDTH_CAP for w in widths)),
                      max_width=max(widths, default=0.))
@@ -73,7 +156,7 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
 
 @contextmanager
 def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="peak",
-                         g_curvature_bound=base.G_CURVATURE_BOUND):
+                         g_curvature_bound=base.G_CURVATURE_BOUND, game_bound=False):
     original = base.SmoothedBothBoundRecorder
 
     def init(self, *, start_step=0):
@@ -81,7 +164,8 @@ def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="p
         self.curvature_bound = g_curvature_bound
 
     base.SmoothedBothBoundRecorder = type("ReachRecorder", (ReachRecorder,),
-                                          dict(reach=reach, ramp=ramp, __init__=init))
+                                          dict(reach=reach, ramp=ramp, game_bound=game_bound,
+                                               __init__=init))
     try:
         with base.pr84_smoothed_candidate(task=task, start_step=start_step) as value:
             yield value

@@ -1,6 +1,6 @@
 {
   "phase": "cold",
-  "method": "reachstall_g125",
+  "method": "reachstall_game",
   "seed": 0,
   "host": "neural",
   "torch": "2.14.0+cpu",

@@ -5,7 +5,8 @@ continues the identical state to ``--until`` as:
 
 - ``as_is``: unchanged (the parent);
 - ``d2``: every ordinary D Adam displacement doubled (a faster critic);
-- ``g05``: every ordinary G Adam displacement halved (a slower generator).
+- ``g05``: every ordinary G Adam displacement halved (a slower generator);
+- ``game``: G's trust bound also sees D's virtual answer to G's proposal.
 
 Both change only the D/G timescale ratio. Each update logs clean-support modes and
 HQ (graded offline with ring centers). This is a counterfactual probe, not a candidate.
@@ -24,7 +25,7 @@ sys.path.insert(0, str(ROOT))
 
 from reports.toy100 import pr84_reach_candidate as reach
 
-VARIANTS = {"d2": ("d", 2.), "g05": ("g", .5)}
+VARIANTS = {"d2": ("d", 2.), "g05": ("g", .5), "game": ("game", 1.)}
 
 
 def main():
@@ -63,7 +64,8 @@ def main():
             self._forked = True
             for name, (role, scale) in VARIANTS.items():
                 if os.fork() == 0:
-                    state.update(name=name, role=role, scale=scale)
+                    state.update(name=name, role=None if role == "game" else role, scale=scale)
+                    self.game_bound = role == "game"
                     break
         yield from original_phases(self, step_index, opt_d, opt_g, local)
         if self.outer_steps > args.step and self.outer_steps % 5 == 0:

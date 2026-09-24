@@ -29,6 +29,8 @@ FACTORIES = {
                    dict(ramp="stall")),
     "reachstall_g125": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                         dict(ramp="stall", g_curvature_bound=.125)),
+    "reachstall_game": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
+                        dict(ramp="stall", game_bound=True)),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",

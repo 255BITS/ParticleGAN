@@ -1,10 +1,10 @@
 {
-  "phase": "cold",
-  "method": "reachstall_g125",
+  "phase": "stay",
+  "method": "reachstall_game",
   "seed": 0,
   "host": "neural",
   "torch": "2.14.0+cpu",
-  "cpu": "AVX512",
+  "cpu": "AVX2",
   "shared_gate_eligible": false,
   "purity": "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
   "source": {

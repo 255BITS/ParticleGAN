@@ -54,11 +54,11 @@ Rejected alternatives:
 
 The "suffix" is the number of consecutive passing checks at the end of the run.
 
-**Warm is valid only on AVX2.** On AVX512 the scheduled warm prefix itself
+**Harness warning for all GAN lanes.** Warm is valid only on AVX2. On AVX512 the scheduled warm prefix itself
 reaches only 6 modes at update 1000 (identity fork 0/200, min HQ .935; receipt
 `pin-warm-avx512`). A warm "regression" reported against a 6-mode baseline is
 therefore measured from an unsolved state. #101's reported baseline matches this
-AVX512 artifact exactly.
+AVX512 artifact exactly, and so do #102's "held 6" and #103's .935 baseline. Rerun those warm comparisons with `ATEN_CPU_CAPABILITY=avx2`.
 
 **Stuck-state fork.** [pr84_reach_stuck_fork.py](pr84_reach_stuck_fork.py) forks
 the AVX512 reach .5 state at update 1000 (7 modes) and continues it to 1200:
@@ -92,7 +92,7 @@ updates, and there are no failures after 2150.
 
 - **Keep** stall reach as the GAN-native reference. Reach .5 is the fallback, with a slightly better stay (103 vs 97) but no AVX512 ring.
 - **Kill** reach 1.0 and the saturating ramp.
-- **Kill** a global G curvature bound of .125 on stall reach. Warm improves to 200/200 with min HQ .961, but the cold ring ends at 2 modes on both builds, and the continued run is 30/120 because it never acquired.
+- **Kill** a global G curvature bound of .125 on stall reach. Warm improves to 200/200 with min HQ .961, but the cold ring fails: 2 modes on AVX2, and 7 modes at HQ .69 on AVX512. The continued run is 30/120 because it never acquired.
 
 ## The shared continuation dropout
 
@@ -115,4 +115,18 @@ Every variant, PR84 included, has an unstable episode between about 1720 and 215
 
 A faster critic worsens the dropout, so it is not caused by D lagging G. It is a cross-coupled mode that grows with G's step. Slowing G globally removes it but also kills acquisition (the .125 kill above). This is #60's trade-off, reproduced inside the game.
 
-- **Next single bet:** bound G by the game's cross-curvature instead of its own-curvature alone. That means measuring how D's response to G's last step changes G's gradient. This mode grows with the D×G step product, and G's own-curvature ratio falls while it grows, so an own-curvature bound cannot see it. Keep the stall-reach read and test on the 1755 fork first. The PR82-era cross-curvature bounds predate the reach channel, so their ring failures do not settle this. Do not use a slope- or advantage-gated G rest damping: PR84's rest-damping and #104 already kill that family.
+### Game bound (tested, partial)
+
+G's trust bound uses `max(ρ_own, ρ_game)`. Here `ρ_game` is measured after one virtual D Adam step that answers G's proposal. D's parameters and Adam state are restored afterwards, so D's actual step is unchanged. This adds a fourth replay per update. From the 1755 fork it scores 22/29, against 4/29 as-is and 28/29 with G ×.5.
+
+| Gate | Stall reach | Stall reach + game bound |
+| --- | --- | --- |
+| Warm (AVX2) | 200/200, min HQ .921 | 200/200, min HQ .915 |
+| Cold trajectory | PASS | PASS |
+| Cold ring AVX2 / AVX512 | 8 / 8 (passing observations 10 and 8 of 24) | 8 / 8 (5 and 7 of 24) |
+| Continued run 1210–2400 | 97/120, min 0 modes, 7 severe dips (≤4 modes), last 25 checks pass | 96/120, min 2 modes, 2 severe dips, last 6 checks pass (dip at 2340) |
+| Cold ring time (AVX2) | 28 s | 37 s |
+
+The game bound softens the dropouts but does not reduce how many checks fail, and it thins the acquisition margin. **Partial: not promoted.**
+
+- **Original bet (now tested above):** bound G by the game's cross-curvature instead of its own-curvature alone. That means measuring how D's response to G's last step changes G's gradient. This mode grows with the D×G step product, and G's own-curvature ratio falls while it grows, so an own-curvature bound cannot see it. Keep the stall-reach read and test on the 1755 fork first. The PR82-era cross-curvature bounds predate the reach channel, so their ring failures do not settle this. Do not use a slope- or advantage-gated G rest damping: PR84's rest-damping and #104 already kill that family.
