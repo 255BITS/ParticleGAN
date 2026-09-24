@@ -1,0 +1,109 @@
+{"event": "DECLARED", "method": "pr84_alternating_bounded_empirical_critic_refinement_cold_support", "phase": "cold", "source": {"benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e", "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792", "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834", "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5", "benchmarks/transfer_suite/legacy_noise_adapters.py": "b34a864330f24ce24e8d0fe5b3f14932ee795fc217d98786901ae0bdaadc7470", "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97", "benchmarks/transfer_suite/toy100_compatibility.py": "cab108b3cb26929862eea09e7e0be98efeb4e4a25b63679455348e8074adca69", "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7", "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da", "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f", "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450", "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55", "reports/toy100/pr84_critic_refinement.py": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11", "reports/toy100/pr84_critic_refinement_capture.py": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585", "reports/toy100/pr84_critic_refinement_cold.py": "742693fe0d1a3186c145490e1576ae4ccf19f8f49d242e9dff2e79543ed8084e", "reports/toy100/pr84_critic_refinement_cold_probe.py": "00418c548e8e0eba4d59d81fd81b144e4bc5db6c224deeea36575a0bbe041208", "reports/toy100/pr84_critic_refinement_probe.py": "33fa91f5da341e64ac2c4de8eeb2712ed41a9a9861e17d916cbe89cecd78266a", "reports/toy100/pr84_critic_relaxation.py": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b", "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f", "reports/toy100/pr84_smoothed_parity.py": "27a8b6fecd289369a94f069346cec136e4e38ffe1c7c96aac65b35318a4d1bea", "tests/test_pr84_critic_refinement_cold.py": "79b9b61e9fcc1b82adac8c243373f3a49f6e0ee625ad2c39a83abf90343e9a34"}, "shared_gate_eligible": false, "previous_hold_sha256": "5c80fad3a2cbb9f4b197aa465c59922a5006882675af81de7409493d0169d54f", "order": ["trajectory400", "mode_hold1200"], "stop_at_first_failed_host": true, "noise_horizon": "original host budget", "lr_decay": false, "seed": 0, "rates": {"g": 0.00425, "d": 0.00425, "prior": 0.0085}, "rule": "same40-iteration/80-closure penalized critic refinement; eight native D batches", "native_fit_pairs": {"trajectory": 96, "mode_hold": 1024}, "scope": "cold acquisition only; own-acquired-state hold and shared gates still required"}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 20, "fit_gradient_evaluations": 1089}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 40, "fit_gradient_evaluations": 2158}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 60, "fit_gradient_evaluations": 3225}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 80, "fit_gradient_evaluations": 4219}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 100, "fit_gradient_evaluations": 5233}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 120, "fit_gradient_evaluations": 6257}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 140, "fit_gradient_evaluations": 7384}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 160, "fit_gradient_evaluations": 8513}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 180, "fit_gradient_evaluations": 9710}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 200, "fit_gradient_evaluations": 10953}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 220, "fit_gradient_evaluations": 12198}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 240, "fit_gradient_evaluations": 13449}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 260, "fit_gradient_evaluations": 14753}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 280, "fit_gradient_evaluations": 15935}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 300, "fit_gradient_evaluations": 17175}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 320, "fit_gradient_evaluations": 18406}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 340, "fit_gradient_evaluations": 19535}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 360, "fit_gradient_evaluations": 20743}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 380, "fit_gradient_evaluations": 21940}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 400, "fit_gradient_evaluations": 23263}
+{"event": "STAGE_DONE", "task": "trajectory", "verdict": {"status": "PASS", "attempted": true, "passed": true, "metrics": [{"metric": "identity_mse", "value": 0.0009098352747969329, "op": "<=", "threshold": 0.02, "status": "PASS", "margin": 0.019090164725203067}], "convergence": {"complete": true, "observations": 24, "passing_observations": 22, "minimum_stable_checks": 5, "passing_suffix": 22, "first_pass_step": 50, "stable_from_step": 50, "stable_from_seconds": 6.984313816064969, "confirmed_step": 117, "confirmed_seconds": 15.219113932922482}, "shortfall": 0.0, "confirmation_fraction": 0.2925}, "live": {"identity_mse": 0.0009098352747969329}, "seconds": 53.46719433204271, "fit_gradient_evaluations": 23263}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 20, "fit_gradient_evaluations": 1461}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 40, "fit_gradient_evaluations": 2821}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 60, "fit_gradient_evaluations": 4223}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 80, "fit_gradient_evaluations": 5474}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 100, "fit_gradient_evaluations": 6697}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 120, "fit_gradient_evaluations": 7882}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 140, "fit_gradient_evaluations": 9101}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 160, "fit_gradient_evaluations": 10373}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 180, "fit_gradient_evaluations": 11460}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 200, "fit_gradient_evaluations": 12445}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 220, "fit_gradient_evaluations": 13804}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 240, "fit_gradient_evaluations": 15133}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 260, "fit_gradient_evaluations": 16220}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 280, "fit_gradient_evaluations": 17347}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 300, "fit_gradient_evaluations": 18436}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 320, "fit_gradient_evaluations": 19632}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 340, "fit_gradient_evaluations": 20726}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 360, "fit_gradient_evaluations": 21819}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 380, "fit_gradient_evaluations": 23023}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 400, "fit_gradient_evaluations": 24102}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 420, "fit_gradient_evaluations": 25262}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 440, "fit_gradient_evaluations": 26491}
+{"event": "COLD_PROGRESS", "task": "mode_hold", "update": 460, "fit_gradient_evaluations": 27640}
+Traceback (most recent call last):
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_critic_refinement_cold_probe.py", line 143, in <module>
+    main()
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_critic_refinement_cold_probe.py", line 139, in main
+    run(args.output, source)
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_critic_refinement_cold_probe.py", line 66, in run
+    result, context = run_legacy(spec, recipe, noise, model_policy=declared_model_policy(config))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/benchmarks/transfer_suite/legacy_noise_adapters.py", line 415, in run_legacy
+    result = baseline.run_toy(
+             ^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/benchmarks/locked_shared/baseline.py", line 188, in run_toy
+    raw = mode_hold.train_mode_hold(mode_hold.ModeHoldRecipe(particle_l2=cfg.particle_l2, vicreg_weight=cfg.vicreg_weight),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<pr84-smoothed-mode_hold>", line 100, in train_mode_hold
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/optim/optimizer.py", line 530, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_smoothed_candidate.py", line 147, in <lambda>
+    lambda optimizer, closure=None: recorder.step(optimizer, ordinary_step, closure)))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_critic_refinement.py", line 141, in step
+    return super().step(optimizer, ordinary_step, closure)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_smoothed_candidate.py", line 52, in step
+    self._arm_smoothed_critic()
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_critic_refinement.py", line 166, in _arm_smoothed_critic
+    row = fit.relax(critic, self._bank, local["gan"], local["regularizer"],
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_critic_relaxation.py", line 256, in relax
+    optimizer.step(closure)
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/optim/optimizer.py", line 530, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/optim/lbfgs.py", line 471, in step
+    loss, flat_grad, t, ls_func_evals = _strong_wolfe(
+                                        ^^^^^^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/optim/lbfgs.py", line 157, in _strong_wolfe
+    f_new, g_new = obj_func(x, t, d)
+                   ^^^^^^^^^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/optim/lbfgs.py", line 469, in obj_func
+    return self._directional_evaluate(closure, x, t, d)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/optim/lbfgs.py", line 320, in _directional_evaluate
+    loss = float(closure())
+                 ^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_critic_relaxation.py", line 246, in closure
+    raise FloatingPointError('nonfinite local critic fit')
+FloatingPointError: nonfinite local critic fit
