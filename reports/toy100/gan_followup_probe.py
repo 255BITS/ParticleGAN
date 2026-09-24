@@ -12,9 +12,13 @@ from contextlib import contextmanager
 import hashlib
 import importlib
 import json
+import os
 from pathlib import Path
 import sys
 import time
+
+# Pin before any torch import. AVX512 warm starts are not rankable.
+os.environ.setdefault("ATEN_CPU_CAPABILITY", "avx2")
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -33,6 +37,8 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "reachstall_sgame": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
+                         dict(ramp="stall", stall_game=True)),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
@@ -53,6 +59,9 @@ def factory(method):
 
 
 def emit(**row):
+    import torch
+    row.setdefault("cpu", torch.backends.cpu.get_cpu_capability())
+    row.setdefault("aten", os.environ.get("ATEN_CPU_CAPABILITY"))
     print(json.dumps(row, default=float), flush=True)
 
 
@@ -62,7 +71,8 @@ def declare(output, phase, method):
               for name in SOURCES if (ROOT / name).exists()}
     import torch
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
-               cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
+               cpu=torch.backends.cpu.get_cpu_capability(),
+               aten=os.environ.get("ATEN_CPU_CAPABILITY"), shared_gate_eligible=False,
                purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
                source=source)
     (output / "declaration.json").write_text(json.dumps(row, indent=2) + "\n")
@@ -101,12 +111,18 @@ def warm(output, method):
         output_dir=output / "forks", prefix_context=lambda: factory(method)(start_step=1000))
     compact = {k: dict(status=v["status"], local=v["local_stability"], final=v["final"])
                for k, v in result["variants"].items()}
-    (output / "summary.json").write_text(json.dumps(compact, indent=2, default=float) + "\n")
+    identity = compact.get("identity", {}).get("local", {})
+    rankable = identity.get("passing_checks") == 200 and identity.get("checks") == 200
+    compact_out = dict(rankable=rankable, variants=compact)
+    (output / "summary.json").write_text(json.dumps(compact_out, indent=2, default=float) + "\n")
     for name, row in compact.items():
         loc = row["local"]
-        emit(event="WARM", variant=name, status=row["status"],
+        emit(event="WARM", variant=name, status=row["status"], rankable=rankable,
              **{k: loc.get(k) for k in ("checks", "passing_checks", "min_modes", "min_hq",
                                         "failing_steps") if k in loc})
+    if not rankable:
+        emit(event="WARM_RANK_REFUSED",
+             reason="identity/control fork is not 200/200; warm ranking refused")
 
 
 def cold(output, method, tasks):
@@ -167,7 +183,8 @@ def stay(output, method, steps):
                final=(diag[-1]["step"], diag[-1]["modes"], round(diag[-1]["hq"], 4)) if diag else None,
                dynamics=_dynamics(recorder))
     records = [dict(step=r["outer_step"], sharp=r.get("critic_sharpness"), width=r.get("critic_width"),
-                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"])
+                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"],
+                    stall_game=r.get("stall_game", False))
                for r in getattr(recorder, "records", [])]
     (output / "stay.json").write_text(json.dumps(dict(summary=row, diagnostic=diag, records=records),
                                                  default=float) + "\n")

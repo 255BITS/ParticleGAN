@@ -25,6 +25,18 @@ def test_stall_needs_saturated_d_and_collapsed_g_trust():
         assert not recorder._stalled(1.)
 
 
+def test_stall_game_uses_the_same_predicate_and_one_step():
+    with pr84_reach_candidate(task="mode_hold", ramp="stall", stall_game=True) as (recorder, _source):
+        assert recorder.stall_game and not recorder.game_bound
+        assert recorder.game_steps == 1
+        assert not recorder._stall_game_due(1.)
+        recorder.records = [dict(g=dict(factor=.05))] * 60
+        assert recorder._stall_game_due(.6) and not recorder._stall_game_due(.59)
+        assert not recorder._stall_game_due(None)
+        recorder.game_bound = True
+        assert not recorder._stall_game_due(1.)
+
+
 def test_factory_installs_and_restores_reach_recorder():
     with pr84_reach_candidate(task="mode_hold", reach=.7) as (recorder, _source):
         assert isinstance(recorder, ReachRecorder)

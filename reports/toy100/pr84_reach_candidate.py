@@ -10,6 +10,11 @@ its Lipschitz budget (still separating, W1-like field), G reads the critic
 over up to .5, the distance D needs at full slope to move .5 logit, which is
 PR84's own uncapped width at ``s = kappa``. D, both curvature bounds and the
 game losses are unchanged. No coverage, assignment, likelihood or clip term.
+
+``stall_game`` adds one virtual D step to G's trust bound only while the stall
+predicate holds (D slope >= .6 and the 50-update mean of G's trust factor
+<= .1). Otherwise G is placed from its own curvature, the stall-reach update.
+The virtual step is one, never two. D's parameters and Adam state are restored.
 """
 
 from contextlib import contextmanager
@@ -47,6 +52,11 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
     ramp = "peak"
     game_bound = False
     game_steps = 1
+    # One virtual D step on the G trust bound, and only while ``_stalled`` is true.
+    stall_game = False
+    _game_on = False
+    _defer_game = False
+    _bound_steps = 1
 
     def _arm_smoothed_critic(self):
         super()._arm_smoothed_critic()
@@ -62,14 +72,23 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
     def _stalled(self, sharpness):
         """D near its slope limit while G's own trust region has kept G nearly still."""
         recent = self.records[-STALL_WINDOW:]
-        if sharpness / B_CAP_SLOPE < SATURATED_UTILISATION or not recent:
+        if sharpness is None or sharpness / B_CAP_SLOPE < SATURATED_UTILISATION or not recent:
             return False
         return sum(row["g"]["factor"] for row in recent) / len(recent) <= STALL_TRUST
 
+    def _stall_game_due(self, sharpness):
+        """Same stall predicate as stall reach. One virtual D step; never two."""
+        return bool(self.stall_game and not self.game_bound and self._stalled(sharpness))
+
     def phases(self, step, opt_d, opt_g, local):
-        if not self.game_bound or not self.enabled or step < self.start_step:
+        self._defer_game = False
+        self._game_on = False
+        if not self.enabled or step < self.start_step or not (self.game_bound or self.stall_game):
             yield from super().phases(step, opt_d, opt_g, local)
             return
+        # Stall-gated bound is one virtual D step. Always-on ``game_bound`` is unchanged.
+        self._bound_steps = 1 if self.stall_game and not self.game_bound else self.game_steps
+        self._game_on = True
         # BothBoundRecorder.phases with one more replay: D answers G's proposal.
         self._local = local
         if self.optimizers is None:
@@ -88,8 +107,10 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         rng_before = self._rng(streams)
         self.advantage = None
         self.row = dict(outer_step=self.outer_steps + 1)
+        if self.stall_game and not self.game_bound:
+            self.row["stall_game"] = False
         rng_after = None
-        for phase in range(3 + self.game_steps):
+        for phase in range(3 + self._bound_steps):
             if phase:
                 self._set_rng(streams, rng_before)
                 with torch.no_grad():
@@ -105,6 +126,9 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
                 raise RuntimeError("replayed block consumed a different RNG pattern")
             else:
                 self.rng_replay_verified += 1
+            # Not stalled: phase 2 already placed G exactly as stall reach does.
+            if phase == 2 and self.stall_game and not self.game_bound and not self._defer_game:
+                break
         self.row["critic_advantage"] = self.advantage
         self.row["gate_open"] = False
         self.row["rho"], self.row["factor"] = self.row["g"]["rho"], self.row["g"]["factor"]
@@ -115,9 +139,15 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         if self.accounting is not None:
             self.accounting(self.rows[opt_d]["calls"], self.outer_steps)
 
+    def _place_g(self, rho):
+        factor = min(1., self.curvature_bound / rho) if rho > 0 else 1.
+        for p, b, n in zip(self._params(self.optimizers[1]), self.g_base, self.g1):
+            p.copy_(torch.lerp(b, n, factor) if factor < 1 else n)
+        return factor
+
     @torch.no_grad()
     def step(self, optimizer, ordinary_step, closure=None):
-        if (not self.game_bound or self.passthrough or self.phase is None or self.phase < 2
+        if (not self._game_on or self.passthrough or self.phase is None or self.phase < 2
                 or (self.phase == 2 and optimizer is self.optimizers[0])):
             return super().step(optimizer, ordinary_step, closure)
         opt_d, opt_g = self.optimizers
@@ -125,6 +155,15 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         grads = [p.grad.detach().clone() for p in self._params(opt_g)] if optimizer is opt_g else None
         if self.phase == 2:
             self._rho_own = _rho(self.g_base, self.g1, self.gg0, grads, self.metric_g)
+            # Stall false: place G from its own curvature only, the #107 update.
+            if self.stall_game and not self.game_bound and not self._stall_game_due(
+                    self.row.get("critic_sharpness")):
+                factor = self._place_g(self._rho_own)
+                self.row["g"] = dict(rho=self._rho_own, factor=factor)
+                self.row["stall_game"] = False
+                self._defer_game = False
+                return None
+            self._defer_game = True
             return None
         if optimizer is opt_d:
             if self.phase == 3:
@@ -133,26 +172,30 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
             ordinary_step(opt_d)
             self._arm_smoothed_critic()
             return None
-        if self.phase < 2 + self.game_steps:
+        if self.phase < 2 + self._bound_steps:
             return None
         rho_game = _rho(self.g_base, self.g1, self.gg0, grads, self.metric_g)
         rho = max(self._rho_own, rho_game)
-        factor = min(1., self.curvature_bound / rho) if rho > 0 else 1.
-        for p, b, n in zip(self._params(opt_g), self.g_base, self.g1):
-            p.copy_(torch.lerp(b, n, factor) if factor < 1 else n)
+        factor = self._place_g(rho)
         for p, v in zip(self._params(opt_d), self.d_star):
             p.copy_(v)
         for p, s in self._d_adam.items():
             opt_d.state[p] = s
         self.row["g"] = dict(rho=rho, factor=factor, rho_own=self._rho_own, rho_game=rho_game)
+        if self.stall_game and not self.game_bound:
+            self.row["stall_game"] = True
         return None
 
     def receipt(self):
         value = super().receipt()
         widths = [row.get("critic_width", 0.) for row in self.records]
+        fired = sum(1 for row in self.records if row.get("stall_game"))
         value.update(method=METHOD, scratch_optimizer_policy=METHOD, reach=self.reach, ramp=self.ramp,
                      game_bound=self.game_bound, game_steps=self.game_steps,
+                     stall_game=self.stall_game, stall_game_updates=fired,
+                     stall_game_steps=1,
                      b_cap_slope=B_CAP_SLOPE,
+                     cpu=torch.backends.cpu.get_cpu_capability(),
                      widened_updates=int(sum(w > base.SMOOTH_WIDTH_CAP for w in widths)),
                      max_width=max(widths, default=0.))
         return value
@@ -160,7 +203,8 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
 
 @contextmanager
 def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="peak",
-                         g_curvature_bound=base.G_CURVATURE_BOUND, game_bound=False, game_steps=1):
+                         g_curvature_bound=base.G_CURVATURE_BOUND, game_bound=False, game_steps=1,
+                         stall_game=False):
     original = base.SmoothedBothBoundRecorder
 
     def init(self, *, start_step=0):
@@ -169,7 +213,7 @@ def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="p
 
     base.SmoothedBothBoundRecorder = type("ReachRecorder", (ReachRecorder,),
                                           dict(reach=reach, ramp=ramp, game_bound=game_bound, game_steps=game_steps,
-                                               __init__=init))
+                                               stall_game=stall_game, __init__=init))
     try:
         with base.pr84_smoothed_candidate(task=task, start_step=start_step) as value:
             yield value
