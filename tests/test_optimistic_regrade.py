@@ -70,3 +70,23 @@ def test_scratch_group_regrade_rejects_missing_prior_group():
     ).encode()).hexdigest()
     with pytest.raises(ValueError, match="groups differ"):
         _bind_optimizer_groups(record, receipt, protocol)
+
+
+def test_scratch_regrade_rejects_amsgrad_missed_group():
+    record, receipt, protocol = _fixture()
+    receipt["amsgrad"] = True
+    receipt["optimizers"][0]["group_amsgrad"] = [True]
+    receipt["optimizers"][1]["group_amsgrad"] = [True, False]
+    with pytest.raises(ValueError, match="every optimizer group"):
+        _bind_optimizer_groups(record, receipt, protocol)
+
+
+def test_zero_alpha_control_requires_zero_correction_count():
+    record, receipt, protocol = _fixture()
+    receipt["alpha"] = 0
+    with pytest.raises(ValueError, match="zero-alpha"):
+        _bind_optimizer_groups(record, receipt, protocol)
+    for optimizer in receipt["optimizers"]:
+        optimizer["previous_direction_state_count"] = 0
+        optimizer["optimistic_parameter_update_count"] = 0
+    _bind_optimizer_groups(record, receipt, protocol)

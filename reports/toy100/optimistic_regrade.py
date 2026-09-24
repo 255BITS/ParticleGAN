@@ -22,7 +22,7 @@ sys.path.insert(0, str(ROOT))
 from benchmarks.toy_suite import _episode_rows
 from benchmarks.toy100.schedule import policy_multipliers
 from particlegan.recipes import Recipe, learning_rate_scale
-from reports.toy100.optimistic_adam_scratch import ALGORITHM, PAPER
+from reports.toy100.optimistic_adam_scratch import ALGORITHM, PAPER, AMSGRAD_PAPER
 
 
 POLICY = "optimistic_adam_algorithm1_damped_v1"
@@ -92,9 +92,28 @@ def _bind_optimizer_groups(record: dict, receipt: dict, protocol: dict) -> None:
         _must(optimizer["lr_trace_sha256"] == _sha(json.dumps(
             rates, separators=(",", ":"),
         ).encode()), "optimizer LR trace hash differs")
-        _must(optimizer["previous_direction_state_count"] > 0
-              and optimizer["optimistic_parameter_update_count"] == sum(updates),
-              "optimistic direction state or update count is incomplete")
+        if receipt.get("alpha", 1) > 0:
+            _must(optimizer["previous_direction_state_count"] > 0
+                  and optimizer["optimistic_parameter_update_count"] == sum(updates),
+                  "optimistic direction state or update count is incomplete")
+        else:
+            _must(optimizer["previous_direction_state_count"] == 0
+                  and optimizer["optimistic_parameter_update_count"] == 0,
+                  "zero-alpha control has an optimistic correction")
+        if receipt.get("amsgrad", False):
+            _must(optimizer.get("group_amsgrad") == [True] * len(counts),
+                  "AMSGrad did not apply to every optimizer group")
+        if receipt.get("diagnostics", False):
+            diagnostics = optimizer["group_diagnostics"]
+            _must(len(diagnostics) == steps and all(len(row) == len(counts) for row in diagnostics),
+                  "gradient/update diagnostic trace is incomplete")
+            for rows in diagnostics:
+                for count, row in zip(counts, rows):
+                    _must(row["parameters"] == count
+                          and all(math.isfinite(row[key]) and row[key] >= 0
+                                  for key in ("gradient_rms", "update_rms", "denominator_min", "denominator_max"))
+                          and 0 < row["denominator_min"] <= row["denominator_max"],
+                          "invalid gradient/update/preconditioner diagnostics")
         for index, count in enumerate(counts):
             groups.append((count, flags[index], [row[index] for row in rates]))
 
@@ -125,9 +144,9 @@ def regrade_episode(directory: Path, *, task: str, alpha: float,
                     config_sha256: str, optimizer_source_sha256: str,
                     driver_source_sha256: str, regrader_source_sha256: str,
                     manifest_sha256: str,
-                    source_commit: str | None = None) -> dict:
+                    source_commit: str | None = None, amsgrad: bool = False) -> dict:
     directory = Path(directory)
-    _must(0 < alpha <= 1 and math.isfinite(alpha), "invalid declared optimism alpha")
+    _must(0 <= alpha <= 1 and math.isfinite(alpha), "invalid declared optimism alpha")
     protocol = _read(directory / "protocol.json")
     summary = _read(directory / "summary.json")
     index = _read(directory / "index.json")
@@ -152,7 +171,7 @@ def regrade_episode(directory: Path, *, task: str, alpha: float,
     _must(all(saved.get("shared_gate_eligible") is False
               for saved in (protocol, summary, indexed, record)),
           "scratch episode is not marked common-gate ineligible")
-    _must(binding == dict(
+    expected_binding = dict(
         shared_gate_eligible=False, scratch_optimizer=POLICY, alpha=float(alpha),
         optimizer_source_sha256=_sha(optimizer_bytes),
         driver_source_sha256=_sha(driver_bytes),
@@ -161,7 +180,13 @@ def regrade_episode(directory: Path, *, task: str, alpha: float,
         optimizer_receipt_sha256=_sha(receipt_bytes),
         config_sha256=config_sha256,
         manifest_sha256=manifest_sha256,
-    ), "scratch binding or source/receipt hash differs")
+    )
+    if amsgrad:
+        expected_binding["amsgrad"] = True
+    _must(binding == expected_binding, "scratch binding or source/receipt hash differs")
+    _must(receipt.get("amsgrad", False) == amsgrad
+          and (not amsgrad or receipt["amsgrad_paper"] == AMSGRAD_PAPER),
+          "AMSGrad declaration differs")
     _must(receipt["algorithm"] == ALGORITHM and receipt["paper"] == PAPER
           and receipt["alpha"] == alpha and receipt["previous_direction_unscaled"] is True
           and receipt["both_directions_use_current_scheduled_lr"] is True
@@ -177,12 +202,12 @@ def regrade_episode(directory: Path, *, task: str, alpha: float,
     if source_commit is not None:
         _must(receipt["source_commit"] == source_commit,
               "optimizer source commit differs from predeclared epoch")
-    _must(receipt["optimizer_count"] == len(receipt["optimizers"]) >= 2
+    _must(receipt["optimizer_count"] == len(receipt["optimizers"]) >= (1 if task == "two_pole" else 2)
           and receipt["optimizer_step_calls"] == sum(
               row["step_calls"] for row in receipt["optimizers"])
           and receipt["parameter_updates"] == sum(
               sum(row["group_parameter_updates"]) for row in receipt["optimizers"])
-          and receipt["parameter_updates"] == sum(
+          and (receipt["parameter_updates"] if alpha > 0 else 0) == sum(
               row["optimistic_parameter_update_count"] for row in receipt["optimizers"]),
           "optimizer application counts differ")
     _bind_optimizer_groups(record, receipt, protocol)

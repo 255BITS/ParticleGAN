@@ -37,7 +37,8 @@ def _json(path: Path, value: dict) -> None:
     path.write_text(json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n")
 
 
-def run(config_path: Path, task: str, alpha: float, output: Path) -> dict:
+def run(config_path: Path, task: str, alpha: float, output: Path,
+        *, amsgrad: bool = False) -> dict:
     config_path = config_path.resolve()
     config_bytes = config_path.read_bytes()
     source_bytes = SOURCE.read_bytes()
@@ -50,11 +51,12 @@ def run(config_path: Path, task: str, alpha: float, output: Path) -> dict:
                 if item["id"] == output.parent.name), None)
     if (row is None or config_path != (manifest_root / row["config_file"]).resolve()
             or row["config_sha256"] != _sha(config_bytes)
-            or row["alpha"] != alpha or task not in row["stage_order"]
+            or row["alpha"] != alpha or row.get("amsgrad", False) != amsgrad
+            or task not in row["stage_order"]
             or task != output.name):
         raise RuntimeError("scratch host differs from predeclared row")
     manifest_sha256 = _sha((manifest_root / "predeclared_manifest.json").read_bytes())
-    with optimistic_adam(alpha) as recorder:
+    with optimistic_adam(alpha, amsgrad=amsgrad, diagnostics=True) as recorder:
         records = compatibility.run(config_path, output, tasks=(task,))
     if len(records) != 1 or records[0]["name"] != task:
         raise RuntimeError("scratch episode did not return exactly the declared host")
@@ -108,6 +110,8 @@ def run(config_path: Path, task: str, alpha: float, output: Path) -> dict:
         "config_sha256": _sha(config_bytes),
         "manifest_sha256": manifest_sha256,
     }
+    if amsgrad:
+        binding["amsgrad"] = True
     protocol_path = output / "protocol.json"
     protocol = json.loads(protocol_path.read_text())
     protocol["scratch_optimizer_policy"] = binding
@@ -155,6 +159,7 @@ def run(config_path: Path, task: str, alpha: float, output: Path) -> dict:
         driver_source_sha256=_sha(driver_bytes),
         regrader_source_sha256=_sha(regrader_bytes),
         manifest_sha256=manifest_sha256,
+        amsgrad=amsgrad,
         source_commit=receipt["source_commit"],
     )
     if checked["status"] != verdict["status"]:
@@ -168,8 +173,9 @@ def main() -> None:
     parser.add_argument("--task", required=True)
     parser.add_argument("--alpha", required=True, type=float)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--amsgrad", action="store_true")
     args = parser.parse_args()
-    print(json.dumps(run(args.config, args.task, args.alpha, args.output)), flush=True)
+    print(json.dumps(run(args.config, args.task, args.alpha, args.output, amsgrad=args.amsgrad)), flush=True)
 
 
 if __name__ == "__main__":

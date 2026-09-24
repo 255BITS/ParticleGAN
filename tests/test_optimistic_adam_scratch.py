@@ -79,6 +79,52 @@ def test_zero_alpha_is_bitwise_ordinary_adam_with_original_state_schema():
     assert recorder.receipt()["optimizers"][0]["previous_direction_state_count"] == 0
 
 
+@pytest.mark.parametrize("alpha", [0.0, 0.5, 1.0])
+def test_amsgrad_formula_and_actual_step_diagnostics(alpha):
+    parameter = torch.nn.Parameter(torch.tensor([1.0, -0.5], dtype=torch.float64))
+    optimizer = torch.optim.Adam([parameter], lr=.01, betas=(0.0, .8))
+    expected = parameter.detach().clone()
+    second = torch.zeros_like(expected)
+    maximum = torch.zeros_like(expected)
+    previous = torch.zeros_like(expected)
+    gradients = ([1., -1.], [.1, -.2], [.001, -.003], [-.7, .4])
+    with optimistic_adam(alpha, amsgrad=True, diagnostics=True) as recorder:
+        for step, values in enumerate(gradients, start=1):
+            gradient = torch.tensor(values, dtype=torch.float64)
+            second = .8 * second + .2 * gradient.square()
+            maximum = torch.maximum(maximum, second)
+            denominator = (maximum / (1 - .8 ** step)).sqrt() + 1e-8
+            direction = gradient / denominator
+            update = -.01 * ((1 + alpha) * direction - alpha * previous)
+            expected += update
+            parameter.grad = gradient.clone()
+            optimizer.step()
+            assert torch.allclose(parameter, expected, atol=2e-15, rtol=0)
+            assert torch.equal(parameter.grad, gradient)
+            previous = direction
+            observed = recorder.receipt()["optimizers"][0]["group_diagnostics"][-1][0]
+            assert observed["gradient_rms"] == pytest.approx(float(gradient.square().mean().sqrt()))
+            assert observed["update_rms"] == pytest.approx(float(update.square().mean().sqrt()))
+            assert observed["denominator_min"] == pytest.approx(float(denominator.min()))
+    receipt = recorder.receipt()
+    assert receipt["amsgrad"] and receipt["diagnostics"]
+    assert receipt["optimizers"][0]["group_amsgrad"] == [True]
+
+
+def test_amsgrad_constant_nominal_rate_shrinks_small_gradient_update_and_reacts_to_shift():
+    parameter = torch.nn.Parameter(torch.tensor([0.], dtype=torch.float64))
+    optimizer = torch.optim.Adam([parameter], lr=.01, betas=(0.0, .9))
+    with optimistic_adam(0, amsgrad=True, diagnostics=True) as recorder:
+        for gradient in (1.0, .1, .01, .001, -1.0):
+            parameter.grad = torch.tensor([gradient], dtype=torch.float64)
+            optimizer.step()
+    trace = recorder.receipt()["optimizers"][0]
+    moves = [row[0]["update_rms"] for row in trace["group_diagnostics"]]
+    assert trace["group_lrs"] == [[.01]] * 5
+    assert moves[3] < moves[0] / 100
+    assert moves[4] > moves[3] * 100
+
+
 def test_checkpoint_restores_unscaled_previous_direction_at_new_rate():
     parameter = torch.nn.Parameter(torch.tensor([1.0, -0.25], dtype=torch.float64))
     optimizer = torch.optim.Adam([parameter], lr=0.02, betas=(0.3, 0.9))

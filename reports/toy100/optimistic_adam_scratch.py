@@ -8,9 +8,15 @@ and parameters, then this adapter adds ``-alpha*lr_t*(u_t-u_{t-1})``. The saved
 previous direction is unscaled, so *both* directions use the current scheduled
 learning rate. No extra gradient evaluation or training RNG draw occurs.
 
+The optional AMSGrad extension sets the maximum uncorrected second moment
+before computing the bias-corrected direction, as in PyTorch's AMSGrad. This
+adaptive preconditioner is independent of training horizon; constant nominal
+LR does not mean a constant effective coordinate rate. The extension and its
+optimistic composition are experimental; no convergence guarantee is claimed.
+
 This patches only ``torch.optim.Adam.step`` within a context, covering G, D,
 and prior parameter groups in native, vector, image, and custom host loops.
-It intentionally rejects Adam variants absent from the declared CPU hosts.
+It intentionally rejects other variants absent from the declared CPU hosts.
 """
 
 from __future__ import annotations
@@ -25,13 +31,14 @@ import torch
 
 
 PAPER = "https://arxiv.org/pdf/1711.00141"
+AMSGRAD_PAPER = "https://arxiv.org/abs/1904.09237"
 ALGORITHM = "Daskalakis-Ilyas-Syrgkanis-Zeng Algorithm 1, damped alpha extension"
 PREVIOUS_DIRECTION_KEY = "optimistic_prev_direction"
 UPDATE_COUNT_KEY = "optimistic_update_count"
 
 
 def _validate_group(group: dict) -> None:
-    if (group.get("amsgrad", False) or group.get("capturable", False)
+    if (group.get("capturable", False)
             or group.get("differentiable", False) or group.get("maximize", False)
             or group.get("decoupled_weight_decay", False)):
         raise ValueError("scratch Optimistic Adam supports the declared ordinary Adam groups only")
@@ -51,16 +58,21 @@ def _direction(state: dict, group: dict) -> torch.Tensor:
         raise ValueError("Adam state has no completed update")
     beta1, beta2 = group["betas"]
     mhat = state["exp_avg"] / (1.0 - beta1 ** t)
-    vhat = state["exp_avg_sq"] / (1.0 - beta2 ** t)
+    second = state["max_exp_avg_sq"] if group.get("amsgrad", False) else state["exp_avg_sq"]
+    vhat = second / (1.0 - beta2 ** t)
     return mhat / (vhat.sqrt() + group["eps"])
 
 
 class OptimisticAdamRecorder:
-    def __init__(self, alpha: float):
+    def __init__(self, alpha: float, *, amsgrad: bool = False, diagnostics: bool = False):
         if (isinstance(alpha, bool) or not isinstance(alpha, (int, float))
                 or not math.isfinite(alpha) or not 0 <= alpha <= 1):
             raise ValueError("optimism alpha must be a finite fraction in [0, 1]")
         self.alpha = float(alpha)
+        if type(amsgrad) is not bool or type(diagnostics) is not bool:
+            raise ValueError("amsgrad and diagnostics must be booleans")
+        self.amsgrad = amsgrad
+        self.diagnostics = diagnostics
         self._active = {}
 
     def _record_for(self, optimizer: torch.optim.Adam) -> dict:
@@ -72,6 +84,7 @@ class OptimisticAdamRecorder:
                 "step_calls": 0,
                 "group_lrs": [],
                 "group_parameter_updates": [0 for _ in optimizer.param_groups],
+                "group_diagnostics": [],
                 "group_prior_markers": [group.get("_comparison_prior")
                                          for group in optimizer.param_groups],
             }
@@ -81,7 +94,18 @@ class OptimisticAdamRecorder:
     def step(self, optimizer: torch.optim.Adam, ordinary_step, closure=None):
         for group in optimizer.param_groups:
             _validate_group(group)
+            if group.get("amsgrad", False) and not self.amsgrad:
+                raise ValueError("undeclared AMSGrad optimizer group")
+            if self.amsgrad:
+                if not group.get("amsgrad", False) and any(p in optimizer.state for p in group["params"]):
+                    raise ValueError("AMSGrad must be declared before the first update")
+                group["amsgrad"] = True
         receipt = self._record_for(optimizer)
+        if self.diagnostics:
+            if closure is not None:
+                raise ValueError("diagnostic mode requires explicit frozen host gradients")
+            before = {p: p.detach().clone() for group in optimizer.param_groups
+                      for p in group["params"] if p.grad is not None}
         # Preserve Adam's ordinary moment update, closure semantics and exact
         # alpha=0 bit pattern. The correction below uses those current moments.
         loss = ordinary_step(optimizer, closure=closure)
@@ -105,6 +129,26 @@ class OptimisticAdamRecorder:
                 parameter.add_(current - previous, alpha=-self.alpha * rate)
                 state[PREVIOUS_DIRECTION_KEY] = current.detach().clone()
                 state[UPDATE_COUNT_KEY] = int(state.get(UPDATE_COUNT_KEY, 0)) + 1
+        if self.diagnostics:
+            diagnostics = []
+            for group in optimizer.param_groups:
+                parameters = [p for p in group["params"] if p in before]
+                n = sum(p.numel() for p in parameters)
+                gradient_square = sum(float(p.grad.double().square().sum()) for p in parameters)
+                update_square = sum(float((p - before[p]).double().square().sum()) for p in parameters)
+                denominators = []
+                for p in parameters:
+                    state = optimizer.state[p]
+                    second = state["max_exp_avg_sq"] if self.amsgrad else state["exp_avg_sq"]
+                    denominator = (second / (1 - group["betas"][1] ** int(state["step"]))).sqrt() + group["eps"]
+                    denominators.append((float(denominator.min()), float(denominator.max())))
+                diagnostics.append(dict(
+                    parameters=n, gradient_rms=math.sqrt(gradient_square / n),
+                    update_rms=math.sqrt(update_square / n),
+                    denominator_min=min(row[0] for row in denominators),
+                    denominator_max=max(row[1] for row in denominators),
+                ))
+            receipt["group_diagnostics"].append(diagnostics)
         return loss
 
     def receipt(self) -> dict:
@@ -131,7 +175,9 @@ class OptimisticAdamRecorder:
                 "group_parameter_counts": [sum(p.numel() for p in group["params"])
                                            for group in optimizer.param_groups],
                 "group_prior_markers": item["group_prior_markers"],
+                "group_amsgrad": [bool(group.get("amsgrad", False)) for group in optimizer.param_groups],
                 "group_parameter_updates": item["group_parameter_updates"],
+                "group_diagnostics": item["group_diagnostics"],
                 "group_lrs": group_lrs,
                 "lr_trace_sha256": hashlib.sha256(
                     json.dumps(group_lrs, separators=(",", ":")).encode(),
@@ -147,6 +193,10 @@ class OptimisticAdamRecorder:
             "algorithm": ALGORITHM,
             "paper": PAPER,
             "alpha": self.alpha,
+            "amsgrad": self.amsgrad,
+            "amsgrad_paper": AMSGRAD_PAPER if self.amsgrad else None,
+            "diagnostics": self.diagnostics,
+            "constant_nominal_rate_is_not_constant_per_coordinate_preconditioner": True,
             "previous_direction_unscaled": True,
             "both_directions_use_current_scheduled_lr": True,
             "additional_gradient_evaluations": 0,
@@ -158,9 +208,9 @@ class OptimisticAdamRecorder:
 
 
 @contextmanager
-def optimistic_adam(alpha: float):
+def optimistic_adam(alpha: float, *, amsgrad: bool = False, diagnostics: bool = False):
     """Patch Adam updates only for one isolated scratch episode."""
-    recorder = OptimisticAdamRecorder(alpha)
+    recorder = OptimisticAdamRecorder(alpha, amsgrad=amsgrad, diagnostics=diagnostics)
     ordinary_step = torch.optim.Adam.step
 
     def patched_step(optimizer, closure=None):
