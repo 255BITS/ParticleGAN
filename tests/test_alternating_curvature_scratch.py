@@ -202,3 +202,23 @@ def test_smoothed_critic_keeps_host_rng_and_records_state_width():
     assert recorder.rng_replay_verified == 2 * recorder.outer_steps
     assert all(r["smoothing_sigma"] > 0 for r in recorder.records)
     assert recorder._smoothing is None
+
+
+def test_plain_curvature_path_equals_v10_when_stencil_cannot_arm():
+    def run(**options):
+        x = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+        y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+        opt_g = torch.optim.Adam([x], lr=1., betas=(0., .9), eps=1e-12)
+        opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+        recorder = BothBoundRecorder(curvature_bound=.25, d_curvature_bound=3., **options)
+        for step in range(3):
+            for phase in recorder.phases(step, opt_d, opt_g, {}):
+                y.grad = (-x + 4. * y).detach().clone()
+                recorder.step(opt_d, torch.optim.Adam.step)
+                x.grad = (y + 3. * x).detach().clone()
+                recorder.step(opt_g, torch.optim.Adam.step)
+        return x.item(), y.item(), recorder
+    base = run()
+    plain = run(stencil_critic=True, plain_curvature=True)
+    assert plain[:2] == base[:2]
+    assert plain[2].rng_replay_verified == 3 * 3
