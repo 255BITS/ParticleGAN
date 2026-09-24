@@ -1,5 +1,11 @@
 # Removing learning-rate decay: mechanism and validation
 
+Latest follow-up: [PR81/PR82 review and alternating dynamics](continuous-round3.md).
+The older joint-field adapters changed update order; the independent
+alternating control clears trajectory acquisition. Eight completed follow-up
+configurations still fail the fixed-target gates. See the linked report for
+the current results and ongoing implicit-response retest.
+
 This study targets PR #60's remaining learning-rate schedules. A replacement
 must learn with time-independent optimizer hyperparameters and preserve live
 sample quality during uninterrupted continuation on a fixed target distribution.

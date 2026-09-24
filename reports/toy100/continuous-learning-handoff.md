@@ -18,6 +18,25 @@ Nonzero parameter movement is not a success criterion.
 Favor changes to the game update over R1/R2 or other zero-centered pulls, but
 select by measured results. Do not repeat seed sweeps or the rejected grids.
 
+**September24 follow-up:** [PR81/PR82 review and the alternating-dynamics
+round](continuous-round3.md), with a [machine-readable ledger](continuous-round3-results.json),
+now provides the current diagnosis. An independent full-state audit confirms
+PR82's disabled alternating adapter exactly matches the host. Alternating
+constant Adam passes trajectory at MSE .0034514; the matched simultaneous
+control fails at .254434. This finding concerns the older ExtraAdam-derived
+joint-field adapters, not direct Adam-step wrappers that already alternate.
+PR81's target-error cap reads known target geometry and remains diagnostic.
+
+Eight completed new configurations still fail acquisition or warm stability.
+The strongest new D-only line-search arm passes warm200/200 and trajectory
+at .0010046, then fails ring acquisition at5 modes/HQ .823. Verifying both
+players' own-loss descent also fails seven dense warm checks despite passing
+every sparse terminal check. The cap penalty can jump across critic activation
+boundaries; exact zero-step replay distinguishes this from changed noise.
+Keep the dense warm filter and the unchanged five-check trajectory suffix.
+An alternating-field implicit-response retest is in progress; its result is
+not included in the completed-candidate count.
+
 ## Reproduction starting point
 
 Research branch: `research/continuous-learning`, based on PR head `983d037`.

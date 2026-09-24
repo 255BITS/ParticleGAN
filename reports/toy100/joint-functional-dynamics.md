@@ -57,6 +57,10 @@ particle input matching must be unambiguous; the RMSProp arm additionally
 requires one conditioning row per particle. The output-only arm is evaluated
 with the recipe's zero direct prior regularization. Exact Jacobians and dense
 output solves are not a scalable implementation for native20k-particle tasks.
+The RMSProp pullback does not retain an ordinary-Adam nullspace component;
+with nonzero direct prior penalties it could discard their parameter-space
+effect. That caveat does not change these runs: the legacy bridge patches
+both trajectory `particle_l2` and `vicreg_weight` to zero for this recipe.
 
 ## Controls and evidence
 
@@ -77,6 +81,10 @@ Five focused tests check the joint solve against an independent primal solve,
 observation-only parity over multiple updates, rejection of ambiguous latent
 mapping before mutation, the damped lift's algebra and zero-field behavior,
 and duplicate aggregation / optimizer moment / RNG accounting.
+An independent Sol review found no gradient-capture, update-order, weighted
+Jacobian or RNG defect in the declared two-host scope. The captured output
+gradient is supplied by each host's actual G backward pass; generalizing the
+adapter would require enforcing that lifecycle for other training loops.
 
 Raw JSON, declarations, exact source copies, host source snapshots and logs:
 

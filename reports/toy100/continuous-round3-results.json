@@ -1,0 +1,928 @@
+{
+  "schema": "continuous-round3-results-v1",
+  "date": "2026-09-24",
+  "status": "unresolved",
+  "base_commit": "d7d6cdf",
+  "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5",
+  "production_modified": false,
+  "scope": {
+    "required": [
+      "fixed-target initial acquisition",
+      "sustained live fixed-target quality without LR decay",
+      "unchanged production common22"
+    ],
+    "distribution_shift_required": false,
+    "rest_without_signal_allowed": true
+  },
+  "protocol": {
+    "seed": 0,
+    "seed_sweep": false,
+    "warm_checks": 200,
+    "trajectory_steps": 400,
+    "trajectory_mse_limit": 0.02,
+    "minimum_passing_suffix": 5,
+    "ring_steps": 1200,
+    "ring_modes": 8,
+    "ring_hq": 0.9,
+    "ring_terminal_steps": [
+      1000,
+      1050,
+      1100,
+      1150,
+      1200
+    ],
+    "constant_nominal_rates": {
+      "g": 0.00425,
+      "d": 0.00425,
+      "prior": 0.0085
+    },
+    "waited_for_github_ci": false
+  },
+  "external_reviews": {
+    "pr81": {
+      "head": "e00de90c7d8075adb6f7ad2985931daa9816f667",
+      "assessment": "target-error cap reads known centers/identity oracle; reported cold result still fails; no local training rerun"
+    },
+    "pr82": {
+      "head": "c1515197fdec44fc95c9f8d991e5a775421ef6be",
+      "audit": "pr82-independent-audit/manifest.json",
+      "disabled_bounds_exact_full_host_parity": true,
+      "simultaneous_control_trajectory_mse": 0.25443434715270996,
+      "alternating_control_trajectory_mse": 0.0034514048602432013,
+      "bounded_warm": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.9404296875,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "bounded_cold": [
+        {
+          "task": "trajectory",
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.0009426623582839966,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.019057337641716004
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 18,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 18,
+              "first_pass_step": 117,
+              "stable_from_step": 117,
+              "stable_from_seconds": 1.9529706861358136,
+              "confirmed_step": 184,
+              "confirmed_seconds": 2.493907075142488
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.46
+          },
+          "live": {
+            "identity_mse": 0.0009426623582839966
+          },
+          "seconds": 4.171113070100546
+        },
+        {
+          "task": "mode_hold",
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "modes",
+                "value": 6,
+                "op": ">=",
+                "threshold": 8,
+                "status": "FAIL",
+                "margin": -2
+              },
+              {
+                "metric": "hq",
+                "value": 0.89208984375,
+                "op": ">=",
+                "threshold": 0.9,
+                "status": "FAIL",
+                "margin": -0.007910156250000022
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.12939453125,
+            "confirmation_fraction": 2.0
+          },
+          "live": {
+            "modes": 6,
+            "hq": 0.89208984375
+          },
+          "seconds": 19.139325074851513
+        }
+      ]
+    }
+  },
+  "candidate_configurations": [
+    {
+      "name": "Joint G+prior functional metric",
+      "shared_gate_eligible": false,
+      "first_failed_stage": "trajectory",
+      "warm": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.96337890625,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "cold_stages": [
+        {
+          "name": "metric",
+          "task": "trajectory",
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.037413325160741806,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "FAIL",
+                "margin": -0.017413325160741806
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.8706662580370903,
+            "confirmation_fraction": 2.0
+          },
+          "live": {
+            "identity_mse": 0.037413325160741806
+          },
+          "seconds": 14.531345184892416
+        }
+      ],
+      "long_hold_attempted": false,
+      "production_common22_attempted": false,
+      "evidence_manifest": "round3/joint-metric-warm/manifest.json",
+      "cold_evidence_manifest": "round3/joint-metric-cold/manifest.json",
+      "identity_cold_parity": true
+    },
+    {
+      "name": "Output-coordinate RMSProp with joint pullback",
+      "shared_gate_eligible": false,
+      "first_failed_stage": "trajectory",
+      "warm": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.901123046875,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "cold_stages": [
+        {
+          "name": "metric",
+          "task": "trajectory",
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.04194943979382515,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "FAIL",
+                "margin": -0.02194943979382515
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 1.0974719896912575,
+            "confirmation_fraction": 2.0
+          },
+          "live": {
+            "identity_mse": 0.04194943979382515
+          },
+          "seconds": 14.045502042863518
+        }
+      ],
+      "long_hold_attempted": false,
+      "production_common22_attempted": false,
+      "evidence_manifest": "round3/output-rmsprop-warm/manifest.json",
+      "cold_evidence_manifest": "round3/output-rmsprop-cold/manifest.json",
+      "identity_cold_parity": true
+    },
+    {
+      "name": "Alternating trapezoid correction: joint",
+      "shared_gate_eligible": false,
+      "first_failed_stage": "passing_state_local_stability",
+      "warm": {
+        "checks": 200,
+        "failing_steps": [
+          1076,
+          1077,
+          1078,
+          1160
+        ],
+        "min_hq": 0.85107421875,
+        "min_modes": 8,
+        "pass_all": false,
+        "pass_suffix": true,
+        "passing_checks": 196,
+        "passing_suffix": 40,
+        "stable_from_step": 1161
+      },
+      "cold_stages": [],
+      "long_hold_attempted": false,
+      "production_common22_attempted": false,
+      "evidence_manifest": "alternating-heun/manifest.json",
+      "identity_cold_parity": true
+    },
+    {
+      "name": "Alternating trapezoid correction: network",
+      "shared_gate_eligible": false,
+      "first_failed_stage": "passing_state_local_stability",
+      "warm": {
+        "checks": 200,
+        "failing_steps": [
+          1014,
+          1016,
+          1020,
+          1032,
+          1040,
+          1041,
+          1045,
+          1046,
+          1047,
+          1048,
+          1058,
+          1065,
+          1070,
+          1071,
+          1073,
+          1090,
+          1107,
+          1108,
+          1109,
+          1110,
+          1111,
+          1112,
+          1113,
+          1114,
+          1127,
+          1128,
+          1129,
+          1137,
+          1138,
+          1139,
+          1140,
+          1141,
+          1142,
+          1143,
+          1144,
+          1145,
+          1146,
+          1147,
+          1148,
+          1149,
+          1150,
+          1151,
+          1152,
+          1153,
+          1154,
+          1157
+        ],
+        "min_hq": 0.48583984375,
+        "min_modes": 6,
+        "pass_all": false,
+        "pass_suffix": true,
+        "passing_checks": 154,
+        "passing_suffix": 43,
+        "stable_from_step": 1158
+      },
+      "cold_stages": [],
+      "long_hold_attempted": false,
+      "production_common22_attempted": false,
+      "evidence_manifest": "alternating-heun/manifest.json",
+      "identity_cold_parity": true
+    },
+    {
+      "name": "Positive own-secant G response with D bound2",
+      "shared_gate_eligible": false,
+      "first_failed_stage": "trajectory",
+      "warm": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.929443359375,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "cold_stages": [
+        {
+          "task": "trajectory",
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.0011586485197767615,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.01884135148022324
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 4,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 4,
+              "first_pass_step": 350,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 2.0
+          },
+          "live": {
+            "identity_mse": 0.0011586485197767615
+          },
+          "seconds": 4.151074334979057
+        }
+      ],
+      "long_hold_attempted": false,
+      "production_common22_attempted": false,
+      "evidence_manifest": "alternating-positive-secant/manifest.json",
+      "identity_cold_parity": true
+    },
+    {
+      "name": "D Armijo rest plus positive own-secant G response",
+      "shared_gate_eligible": false,
+      "first_failed_stage": "trajectory",
+      "warm": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.929443359375,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "cold_stages": [
+        {
+          "task": "trajectory",
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.0358419232070446,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "FAIL",
+                "margin": -0.0158419232070446
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.7920961603522301,
+            "confirmation_fraction": 2.0
+          },
+          "live": {
+            "identity_mse": 0.0358419232070446
+          },
+          "seconds": 4.766171174123883
+        }
+      ],
+      "long_hold_attempted": false,
+      "production_common22_attempted": false,
+      "evidence_manifest": "alternating-armijo-secant/manifest.json",
+      "identity_cold_parity": true
+    },
+    {
+      "name": "D Armijo with verified rest, unchanged G .25",
+      "shared_gate_eligible": false,
+      "first_failed_stage": "mode_hold",
+      "warm": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.9404296875,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "cold_stages": [
+        {
+          "task": "trajectory",
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.0010045847157016397,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.01899541528429836
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 18,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 18,
+              "first_pass_step": 117,
+              "stable_from_step": 117,
+              "stable_from_seconds": 2.285541569115594,
+              "confirmed_step": 184,
+              "confirmed_seconds": 2.8325619539245963
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.46
+          },
+          "live": {
+            "identity_mse": 0.0010045847157016397
+          }
+        },
+        {
+          "task": "mode_hold",
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "modes",
+                "value": 5,
+                "op": ">=",
+                "threshold": 8,
+                "status": "FAIL",
+                "margin": -3
+              },
+              {
+                "metric": "hq",
+                "value": 0.822998046875,
+                "op": ">=",
+                "threshold": 0.9,
+                "status": "FAIL",
+                "margin": -0.07700195312500002
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.23027886284722224,
+            "confirmation_fraction": 2.0
+          },
+          "live": {
+            "modes": 5,
+            "hq": 0.822998046875
+          }
+        }
+      ],
+      "long_hold_attempted": false,
+      "production_common22_attempted": false,
+      "evidence_manifest": "alternating-linesearch-round3/manifest.json",
+      "identity_cold_parity": true
+    },
+    {
+      "name": "D and G verified Armijo with rest",
+      "shared_gate_eligible": false,
+      "first_failed_stage": "passing_state_local_stability",
+      "warm": {
+        "checks": 200,
+        "failing_steps": [
+          1130,
+          1131,
+          1132,
+          1133,
+          1134,
+          1135,
+          1136
+        ],
+        "min_hq": 0.828369140625,
+        "min_modes": 7,
+        "pass_all": false,
+        "pass_suffix": true,
+        "passing_checks": 193,
+        "passing_suffix": 64,
+        "stable_from_step": 1137
+      },
+      "cold_stages": [],
+      "long_hold_attempted": false,
+      "production_common22_attempted": false,
+      "evidence_manifest": "alternating-linesearch-round3/manifest.json",
+      "identity_cold_parity": true
+    }
+  ],
+  "completed_candidate_count": 8,
+  "additional_execution_attempts": {
+    "initial_cold": "zero-update invalid uppercase label; driver-only repair",
+    "bounded_error_cold": "65 full trajectory updates then retry exhaustion at66; no quality verdict",
+    "failure_replay": "same65 records, alpha0 exact loss+gradient; cap discontinuity isolated"
+  },
+  "diagnostics": {
+    "accepted_point": {
+      "d": {
+        "loss_increases": 66,
+        "negative_directional_secants": 3,
+        "effective_curvature_formula": "original_bound.factor * accepted_norm_curvature (the latter alone uses original fixed P)",
+        "exceeds_original_bound_by_over_1_percent": 2,
+        "effective_curvature_median": 1.1079194051449264,
+        "effective_curvature_max": 5.911432223595183,
+        "original_bound": 3.0
+      },
+      "g": {
+        "loss_increases": 72,
+        "negative_directional_secants": 193,
+        "effective_curvature_formula": "original_bound.factor * accepted_norm_curvature (the latter alone uses original fixed P)",
+        "exceeds_original_bound_by_over_1_percent": 1150,
+        "effective_curvature_median": 0.8144251660290796,
+        "effective_curvature_max": 3.239706346420336,
+        "original_bound": 0.25
+      }
+    },
+    "cap_discontinuity": {
+      "base_total": 0.4079834520816803,
+      "base_raw_gan": 0.3959867060184479,
+      "base_cap": 0.011996746063232422,
+      "points": [
+        {
+          "alpha": 0.0,
+          "parameter_displacement_norm": 0.0,
+          "total": 0.4079834520816803,
+          "raw_gan": 0.3959867060184479,
+          "cap": 0.011996746063232422,
+          "base_gradient_relative_error": 0.0
+        },
+        {
+          "alpha": 0.0001220703125,
+          "parameter_displacement_norm": 1.5508122892208987e-05,
+          "total": 0.408164381980896,
+          "raw_gan": 0.39598631858825684,
+          "cap": 0.01217806339263916,
+          "base_gradient_relative_error": 0.15980261803302295
+        },
+        {
+          "alpha": 1.52587890625e-05,
+          "parameter_displacement_norm": 1.9479450489878348e-06,
+          "total": 0.40798336267471313,
+          "raw_gan": 0.3959866762161255,
+          "cap": 0.011996686458587646,
+          "base_gradient_relative_error": 4.5344031440784436e-05
+        },
+        {
+          "alpha": 9.5367431640625e-07,
+          "parameter_displacement_norm": 1.0154391298802243e-07,
+          "total": 0.4079834520816803,
+          "raw_gan": 0.3959867060184479,
+          "cap": 0.011996746063232422,
+          "base_gradient_relative_error": 1.8157058481666697e-06
+        },
+        {
+          "alpha": -9.5367431640625e-07,
+          "parameter_displacement_norm": 1.0154391298802243e-07,
+          "total": 0.4079834520816803,
+          "raw_gan": 0.3959867060184479,
+          "cap": 0.011996746063232422,
+          "base_gradient_relative_error": 1.7157065634716488e-06
+        }
+      ]
+    },
+    "both_own_losses_accept_all_seven_failed_quality_steps": [
+      {
+        "step": 1130,
+        "d": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.6552931666374207,
+          "loss_base": 0.6861358284950256,
+          "predicted_improvement": 0.03868781678822922,
+          "armijo_threshold": 0.6822670468162028,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.03084266185760498,
+          "required_decrease": 0.0038687816788228746,
+          "strict_slack_without_rounding_tolerance": 0.026973880178782106
+        },
+        "g": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.7529505491256714,
+          "loss_base": 0.7578481435775757,
+          "predicted_improvement": 0.0033237729506197184,
+          "armijo_threshold": 0.7549398422457835,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.004897594451904297,
+          "required_decrease": 0.002908301331792207,
+          "strict_slack_without_rounding_tolerance": 0.00198929312011209
+        }
+      },
+      {
+        "step": 1131,
+        "d": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.6767791509628296,
+          "loss_base": 0.6827009916305542,
+          "predicted_improvement": 0.006653874909709085,
+          "armijo_threshold": 0.6820356041395833,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.005921840667724609,
+          "required_decrease": 0.0006653874909708923,
+          "strict_slack_without_rounding_tolerance": 0.005256453176753717
+        },
+        "g": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.7105186581611633,
+          "loss_base": 0.7134836912155151,
+          "predicted_improvement": 0.002892795999804746,
+          "armijo_threshold": 0.710952494715686,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.0029650330543518066,
+          "required_decrease": 0.002531196499829136,
+          "strict_slack_without_rounding_tolerance": 0.0004338365545226708
+        }
+      },
+      {
+        "step": 1132,
+        "d": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.6779825091362,
+          "loss_base": 0.6944164037704468,
+          "predicted_improvement": 0.020214331088590252,
+          "armijo_threshold": 0.6923949706615877,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.016433894634246826,
+          "required_decrease": 0.00202143310885905,
+          "strict_slack_without_rounding_tolerance": 0.014412461525387776
+        },
+        "g": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.7601989507675171,
+          "loss_base": 0.7606263756752014,
+          "predicted_improvement": 0.00046409566264617516,
+          "armijo_threshold": 0.760220291970386,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.00042742490768432617,
+          "required_decrease": 0.00040608370481542977,
+          "strict_slack_without_rounding_tolerance": 2.1341202868896403e-05
+        }
+      },
+      {
+        "step": 1133,
+        "d": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.6332278251647949,
+          "loss_base": 0.6612053513526917,
+          "predicted_improvement": 0.03151852890844196,
+          "armijo_threshold": 0.6580534984618475,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.02797752618789673,
+          "required_decrease": 0.0031518528908441867,
+          "strict_slack_without_rounding_tolerance": 0.024825673297052542
+        },
+        "g": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.8012866973876953,
+          "loss_base": 0.8018937110900879,
+          "predicted_improvement": 0.000656170260771146,
+          "armijo_threshold": 0.8013195621119131,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.0006070137023925781,
+          "required_decrease": 0.00057414897817476,
+          "strict_slack_without_rounding_tolerance": 3.2864724217818164e-05
+        }
+      },
+      {
+        "step": 1134,
+        "d": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.6796646118164062,
+          "loss_base": 0.6889070272445679,
+          "predicted_improvement": 0.01097763448317174,
+          "armijo_threshold": 0.6878092637962507,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.009242415428161621,
+          "required_decrease": 0.001097763448317135,
+          "strict_slack_without_rounding_tolerance": 0.008144651979844486
+        },
+        "g": {
+          "retry": 1,
+          "alpha": 0.5,
+          "loss": 0.7773615121841431,
+          "loss_base": 0.7777386903762817,
+          "predicted_improvement": 0.0004047014307979892,
+          "armijo_threshold": 0.7773845766243335,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.0003771781921386719,
+          "required_decrease": 0.00035411375194827066,
+          "strict_slack_without_rounding_tolerance": 2.3064440190401214e-05
+        }
+      },
+      {
+        "step": 1135,
+        "d": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.6764699220657349,
+          "loss_base": 0.6859081983566284,
+          "predicted_improvement": 0.011601366778293964,
+          "armijo_threshold": 0.684748061678799,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.009438276290893555,
+          "required_decrease": 0.0011601366778294375,
+          "strict_slack_without_rounding_tolerance": 0.008278139613064117
+        },
+        "g": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.7589741945266724,
+          "loss_base": 0.7597192525863647,
+          "predicted_improvement": 0.0007356514386924527,
+          "armijo_threshold": 0.7590755575775089,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.0007450580596923828,
+          "required_decrease": 0.0006436950088558602,
+          "strict_slack_without_rounding_tolerance": 0.00010136305083652264
+        }
+      },
+      {
+        "step": 1136,
+        "d": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.6425237059593201,
+          "loss_base": 0.649928092956543,
+          "predicted_improvement": 0.007902036311634818,
+          "armijo_threshold": 0.6491378893253795,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.0074043869972229,
+          "required_decrease": 0.0007902036311634442,
+          "strict_slack_without_rounding_tolerance": 0.006614183366059456
+        },
+        "g": {
+          "retry": 0,
+          "alpha": 1.0,
+          "loss": 0.7593313455581665,
+          "loss_base": 0.7627439498901367,
+          "predicted_improvement": 0.0024529205721437086,
+          "armijo_threshold": 0.7605976443895109,
+          "rounding_tolerance": 4.76837158203125e-07,
+          "accepted": true,
+          "actual_decrease": 0.003412604331970215,
+          "required_decrease": 0.002146305500625778,
+          "strict_slack_without_rounding_tolerance": 0.0012662988313444368
+        }
+      }
+    ]
+  },
+  "in_progress": [
+    {
+      "name": "Alternating-field full-J implicit response",
+      "reason": "Retest the previously warm-passing implicit method without the simultaneous evaluation confound; not a completed result"
+    }
+  ],
+  "validation": {
+    "passed": 200,
+    "disjoint_test_runs": [
+      {
+        "path": "reports/toy100/continuous-evidence/round3/integrated-tests.log",
+        "passed": 184,
+        "sha256": "7584265c2f66e5a4d7f4f560217fab999c52ace1dc7dedefcbb16069bf68c9a9"
+      },
+      {
+        "path": "reports/toy100/continuous-evidence/round3/added-controller-tests.log",
+        "passed": 16,
+        "sha256": "38fe3e097d5ede57a3e40f8a9f6717914f5e4f0f223e0d4b578f716f867fe71a"
+      }
+    ],
+    "manifest_sha256": {
+      "alternating-armijo-secant/manifest.json": "79b39c61329b622cebcdd619bdbfe0bf015840c8011dd6be71e417aea82286e0",
+      "alternating-heun/manifest.json": "00a13cbc9c70d18b604e86e241da287ccf8dc0e082cf85f8bd236393e1ef3bbf",
+      "alternating-linesearch-round3/manifest.json": "be9ff4d3ed61af3f43bad31f45e38cf5cc13e047eb5250497f25d0983c1518a1",
+      "alternating-positive-secant/manifest.json": "bc206ac43302391a1db2936b0ce46c824e84af4a7b168c1bc6beb760b93efd68",
+      "pr82-independent-audit/manifest.json": "0bff54580eb9a7dfa2cbb22c6b19d277c4a993d356dbe88d3527dd8e4d764c40",
+      "round3/joint-metric-cold/manifest.json": "ecdd1f7f2a1a2321d55ccf5e9e9308312ac47c048278b65d1bf80a86d81bade6",
+      "round3/joint-metric-warm/manifest.json": "57e071896ceed687cd438e5c767be7873da38bf73bbc22e0d38d6d2e06044db8",
+      "round3/output-rmsprop-cold/manifest.json": "fa1c3c8420cec112b72f71710f972f920905386375f2dc104d3dac794ef151ca",
+      "round3/output-rmsprop-warm/manifest.json": "ccb24f5cd7a2c9b76bee4bc4bcf6cbc992d195641d6d9ff8ab249c7cdaaf753e"
+    }
+  },
+  "limits": [
+    "Warm pass is conditional on a scheduled prefix, not cold acquisition.",
+    "Scratch adapters support selected hosts and are not production policies.",
+    "Same-seed ring traces are numerically sensitive across environments; no statistical robustness claim.",
+    "Hard-error and zero-update setup attempts are preserved separately, not counted as completed acquisitions."
+  ]
+}
