@@ -1,0 +1,87 @@
+{
+  "case": "warm1324",
+  "initial_grade": {
+    "modes": 8,
+    "hq": 0.99951171875,
+    "particle_draws": [
+      338,
+      356,
+      332,
+      353,
+      321,
+      314,
+      325,
+      345,
+      363,
+      341,
+      339,
+      369
+    ],
+    "particle_hq_rate": [
+      1.0,
+      1.0,
+      0.9969879388809204,
+      1.0,
+      1.0,
+      1.0,
+      0.9969230890274048,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "updates": 1200,
+  "accepted": 407,
+  "rests": 793,
+  "passing_checks": 1198,
+  "all1200": false,
+  "terminal5": true,
+  "first_pass": 1,
+  "first_failure": {
+    "path": "first-fail.pt.gz",
+    "raw_sha256": "b9cb9db9c1264a100545384b257f41d236ece06180d2ee7e76ec1460bb509e1b",
+    "step": 59,
+    "label": "warm1324"
+  },
+  "late_fail_count": 2,
+  "first_late_fail": 59,
+  "worst_hq": 0.88427734375,
+  "worst_modes": 8,
+  "final": {
+    "modes": 8,
+    "hq": 0.9990234375,
+    "particle_draws": [
+      338,
+      356,
+      332,
+      353,
+      321,
+      314,
+      325,
+      345,
+      363,
+      341,
+      339,
+      369
+    ],
+    "particle_hq_rate": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.9882006049156189,
+      1.0
+    ]
+  },
+  "data_stream_after1200_sha256": "dd15fb22441d259bc05e24f477dbb2b4c5c39a268fcf5259452620a2aa40f447",
+  "status": "FAIL",
+  "result_raw_sha256": "10e5680e2fe8167d09b074105ef49ab0dc771f83a2500b4efc12ccc99c913d8b"
+}

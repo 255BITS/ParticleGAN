@@ -1,0 +1,37 @@
+{
+  "case": "warm1324",
+  "scope": "read-only verification of recorded free-output run",
+  "raw_result_sha256": "10e5680e2fe8167d09b074105ef49ab0dc771f83a2500b4efc12ccc99c913d8b",
+  "source_hashes_verified": 7,
+  "exact_initial_support": true,
+  "fixed_grades_verified": 1200,
+  "strict_acceptance_decisions_verified": 1200,
+  "real_draw_schedule_and_final_rng_verified": 1200,
+  "first_fail_batch_and_objectives_exact": true,
+  "passing": 1198,
+  "accepted": 407,
+  "all1200": false,
+  "terminal5": true,
+  "failure_rows": [
+    {
+      "step": 59,
+      "accepted": true,
+      "modes": 8,
+      "hq": 0.88427734375,
+      "same_noise_pre_hq": 0.9423828125,
+      "maximum_particle_motion": 6.2677083015441895,
+      "A_improvement": 0.009427348368312567,
+      "B_improvement": 0.0008103388839144805
+    },
+    {
+      "step": 873,
+      "accepted": true,
+      "modes": 8,
+      "hq": 0.8994140625,
+      "same_noise_pre_hq": 0.99169921875,
+      "maximum_particle_motion": 5.473792552947998,
+      "A_improvement": 0.00705980364882905,
+      "B_improvement": 6.111547296807143e-05
+    }
+  ]
+}

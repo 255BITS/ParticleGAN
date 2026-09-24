@@ -1,0 +1,13 @@
+{"event": "PROGRESS", "case": "warm1324", "step": 100, "accepted": 45, "passing": 99, "modes": 8, "hq": 0.998779296875}
+{"event": "PROGRESS", "case": "warm1324", "step": 200, "accepted": 78, "passing": 199, "modes": 8, "hq": 1.0}
+{"event": "PROGRESS", "case": "warm1324", "step": 300, "accepted": 99, "passing": 299, "modes": 8, "hq": 0.998291015625}
+{"event": "PROGRESS", "case": "warm1324", "step": 400, "accepted": 136, "passing": 399, "modes": 8, "hq": 0.968505859375}
+{"event": "PROGRESS", "case": "warm1324", "step": 500, "accepted": 170, "passing": 499, "modes": 8, "hq": 1.0}
+{"event": "PROGRESS", "case": "warm1324", "step": 600, "accepted": 199, "passing": 599, "modes": 8, "hq": 0.99755859375}
+{"event": "PROGRESS", "case": "warm1324", "step": 700, "accepted": 238, "passing": 699, "modes": 8, "hq": 0.999267578125}
+{"event": "PROGRESS", "case": "warm1324", "step": 800, "accepted": 264, "passing": 799, "modes": 8, "hq": 0.96142578125}
+{"event": "PROGRESS", "case": "warm1324", "step": 900, "accepted": 296, "passing": 898, "modes": 8, "hq": 0.9833984375}
+{"event": "PROGRESS", "case": "warm1324", "step": 1000, "accepted": 344, "passing": 998, "modes": 8, "hq": 1.0}
+{"event": "PROGRESS", "case": "warm1324", "step": 1100, "accepted": 373, "passing": 1098, "modes": 8, "hq": 1.0}
+{"event": "PROGRESS", "case": "warm1324", "step": 1200, "accepted": 407, "passing": 1198, "modes": 8, "hq": 0.9990234375}
+{"event": "DONE", "case": "warm1324", "status": "FAIL", "passing": 1198, "accepted": 407, "first_failure": {"path": "first-fail.pt.gz", "raw_sha256": "b9cb9db9c1264a100545384b257f41d236ece06180d2ee7e76ec1460bb509e1b", "step": 59, "label": "warm1324"}, "final": {"modes": 8, "hq": 0.9990234375, "particle_draws": [338, 356, 332, 353, 321, 314, 325, 345, 363, 341, 339, 369], "particle_hq_rate": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9882006049156189, 1.0]}}

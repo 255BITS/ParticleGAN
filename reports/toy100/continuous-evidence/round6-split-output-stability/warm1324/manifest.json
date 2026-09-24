@@ -1,0 +1,62 @@
+{
+  "scope": "frozen 1200-step free-output split-batch diagnostic",
+  "case": "warm1324",
+  "files": {
+    "audit.json": {
+      "stored_sha256": "d13c770c21260819bf9213fe98ea929d2250e2fa017f696bccac23088fe3ac01",
+      "stored_bytes": 1098
+    },
+    "declaration.json": {
+      "stored_sha256": "25630cb3f55ff7e68183feff3035804c3cffeb6daaba594527d8218b0eaa95cb",
+      "stored_bytes": 1889
+    },
+    "first-fail.pt.gz": {
+      "stored_sha256": "df7eb664950c8c52f12882d26416c72394586a495e95eee726b936937515aef5",
+      "stored_bytes": 6261,
+      "uncompressed_sha256": "b9cb9db9c1264a100545384b257f41d236ece06180d2ee7e76ec1460bb509e1b",
+      "uncompressed_bytes": 10389
+    },
+    "result.json.gz": {
+      "stored_sha256": "a3ada9ab2cadeb975542aee3f2d8a2d02dbecb7c10e3e09193ef7dae86f4afd1",
+      "stored_bytes": 195177,
+      "uncompressed_sha256": "10e5680e2fe8167d09b074105ef49ab0dc771f83a2500b4efc12ccc99c913d8b",
+      "uncompressed_bytes": 1195760
+    },
+    "run.log": {
+      "stored_sha256": "9e2919536b9a8c29e99b122b4c73b0934c945b185c86e28a1f1d291938ae7a10",
+      "stored_bytes": 1887
+    },
+    "source/benchmarks/locked_shared/mlp.py": {
+      "stored_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "stored_bytes": 2289
+    },
+    "source/benchmarks/locked_shared/mode_hold.py": {
+      "stored_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "stored_bytes": 10774
+    },
+    "source/reports/toy100/chamfer_discrete_reallocation.py": {
+      "stored_sha256": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24",
+      "stored_bytes": 4218
+    },
+    "source/reports/toy100/chamfer_pullback.py": {
+      "stored_sha256": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+      "stored_bytes": 7290
+    },
+    "source/reports/toy100/coverage_fixed_eval.py": {
+      "stored_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "stored_bytes": 3996
+    },
+    "source/reports/toy100/pr84_early_geometry.py": {
+      "stored_sha256": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+      "stored_bytes": 7322
+    },
+    "source/reports/toy100/pr84_split_output_stability_filter.py": {
+      "stored_sha256": "582507b1205de21cfa5e670000588e9282892de3ffda43acc0d9db682a2d8d72",
+      "stored_bytes": 9535
+    },
+    "summary.json": {
+      "stored_sha256": "70dbb1cc74fb5eb42ef8cc418a573c92d6f23c7161845eaa369a17e7e337a0b3",
+      "stored_bytes": 1480
+    }
+  }
+}

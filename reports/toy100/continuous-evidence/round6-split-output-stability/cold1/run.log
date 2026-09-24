@@ -1,0 +1,13 @@
+{"event": "PROGRESS", "case": "cold1", "step": 100, "accepted": 33, "passing": 100, "modes": 8, "hq": 1.0}
+{"event": "PROGRESS", "case": "cold1", "step": 200, "accepted": 52, "passing": 200, "modes": 8, "hq": 0.999755859375}
+{"event": "PROGRESS", "case": "cold1", "step": 300, "accepted": 79, "passing": 300, "modes": 8, "hq": 1.0}
+{"event": "PROGRESS", "case": "cold1", "step": 400, "accepted": 112, "passing": 398, "modes": 8, "hq": 1.0}
+{"event": "PROGRESS", "case": "cold1", "step": 500, "accepted": 143, "passing": 498, "modes": 8, "hq": 0.999267578125}
+{"event": "PROGRESS", "case": "cold1", "step": 600, "accepted": 166, "passing": 598, "modes": 8, "hq": 0.999755859375}
+{"event": "PROGRESS", "case": "cold1", "step": 700, "accepted": 195, "passing": 698, "modes": 8, "hq": 1.0}
+{"event": "PROGRESS", "case": "cold1", "step": 800, "accepted": 229, "passing": 798, "modes": 8, "hq": 0.999755859375}
+{"event": "PROGRESS", "case": "cold1", "step": 900, "accepted": 250, "passing": 898, "modes": 8, "hq": 0.999267578125}
+{"event": "PROGRESS", "case": "cold1", "step": 1000, "accepted": 281, "passing": 998, "modes": 8, "hq": 0.99609375}
+{"event": "PROGRESS", "case": "cold1", "step": 1100, "accepted": 310, "passing": 1097, "modes": 8, "hq": 0.995361328125}
+{"event": "PROGRESS", "case": "cold1", "step": 1200, "accepted": 342, "passing": 1197, "modes": 8, "hq": 0.929931640625}
+{"event": "DONE", "case": "cold1", "status": "PASS", "passing": 1197, "accepted": 342, "first_failure": {"path": "first-fail.pt.gz", "raw_sha256": "b429cb1db0304ff019b1f59527880b90667ca0c5b5360b38312057baf73e748c", "step": 341, "label": "cold1"}, "final": {"modes": 8, "hq": 0.929931640625, "particle_draws": [338, 356, 332, 353, 321, 314, 325, 345, 363, 341, 339, 369], "particle_hq_rate": [1.0, 1.0, 0.45783132314682007, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.7100270986557007]}}

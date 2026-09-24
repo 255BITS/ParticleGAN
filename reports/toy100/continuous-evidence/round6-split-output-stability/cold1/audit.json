@@ -1,0 +1,47 @@
+{
+  "case": "cold1",
+  "scope": "read-only verification of recorded free-output run",
+  "raw_result_sha256": "0afb55de23a4873d43e785e6b485809f8cf4a46aad9c7ebac16d5ff3405c5bc9",
+  "source_hashes_verified": 7,
+  "exact_initial_support": true,
+  "fixed_grades_verified": 1200,
+  "strict_acceptance_decisions_verified": 1200,
+  "real_draw_schedule_and_final_rng_verified": 1200,
+  "first_fail_batch_and_objectives_exact": true,
+  "passing": 1197,
+  "accepted": 342,
+  "all1200": false,
+  "terminal5": true,
+  "failure_rows": [
+    {
+      "step": 341,
+      "accepted": true,
+      "modes": 8,
+      "hq": 0.884765625,
+      "same_noise_pre_hq": 0.912109375,
+      "maximum_particle_motion": 5.8166680335998535,
+      "A_improvement": 0.009697093866387757,
+      "B_improvement": 0.0007688782625846421
+    },
+    {
+      "step": 342,
+      "accepted": false,
+      "modes": 8,
+      "hq": 0.87744140625,
+      "same_noise_pre_hq": 0.87744140625,
+      "maximum_particle_motion": 0.0,
+      "A_improvement": 0.01092472868339035,
+      "B_improvement": -0.0011542852662414956
+    },
+    {
+      "step": 1031,
+      "accepted": true,
+      "modes": 8,
+      "hq": 0.892578125,
+      "same_noise_pre_hq": 0.99951171875,
+      "maximum_particle_motion": 5.486551284790039,
+      "A_improvement": 0.006084151737924619,
+      "B_improvement": 0.0022034928521162227
+    }
+  ]
+}
