@@ -172,6 +172,31 @@ reaching the last one or two modes, not holding them. v10 scrapes the gate
 by reaching its eighth mode just after the terminal window opens, rather than
 holding a pass with margin.
 
+## Spatially smoothed critic for G (v15)
+
+G's critic calls in the two replay passes use E[D(x + sigma eps)] over 8
+antithetic Gaussian draws on the data input, from a private generator seeded
+by the update index. The host's RNG streams are untouched, and the D update is
+unsmoothed. The width is proportional to the critic's own length scale,
+sigma = alpha * std(D) / RMS ||grad_x D||, a state quantity with no cap and no
+schedule. G stays at .25 and the D bound at 3.
+
+| alpha | Warm | Cold trajectory | Cold ring | First update with all 8 covered |
+| --- | --- | --- | --- | --- |
+| 1 | FAIL 111/200 (min .5149; ring sigma .25-.83) | .181* | not run | — |
+| .25 | **PASS 200/200 (min .9854)** | **PASS .001, 20-check suffix** | FAIL: max 7 modes; terminal 7/.77, 2/.19, 2/.14, 3/.20, 7/.94 | never |
+| v10 reference | 200/200 (.9297) | PASS .00094 | 3/5 | 1084 |
+
+\* Unplanned: the alpha=1 cold run was launched in the same command before
+its warm failure was read. It has no promotion credit.
+
+The peer run (#84) with sigma effectively fixed at a .15 cap passed the ring
+(first 8-mode coverage at 600) but failed warm at 196/200. Here, a
+state-proportional width with a similar ring mean (.16, varying .02-.38)
+recovers warm with the best margin of any candidate but loses the ring.
+Width magnitude alone does not separate the two outcomes. By the stop rule,
+this knob does not recover warm without killing the ring.
+
 ## Recommendations
 
 1. Put future game-update candidates in the alternating adapter

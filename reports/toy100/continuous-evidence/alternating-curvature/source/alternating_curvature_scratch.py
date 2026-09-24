@@ -159,6 +159,8 @@ class AlternatingCurvatureRecorder:
             prior_factor=stats([g['factor'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),
             prior_rho=stats([g['rho'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),
             per_particle=getattr(self,'per_particle',False),critic_average=getattr(self,'critic_average',None),
+            smooth_critic=getattr(self,'smooth_critic',None),smooth_samples=getattr(self,'smooth_samples',None),
+            smoothing_sigma=stats([r.get('smoothing_sigma') for r in closed]),critic_length=stats([r.get('critic_length') for r in closed]),
             critic_average_distance=stats([r.get('critic_average_distance') for r in closed]),
             particle_factor=stats([q['factor'] for r in closed for q in r.get('particles',[])]),
             particle_factor_max=stats([max(q['factor'] for q in r['particles']) for r in closed if r.get('particles')]),critic_advantage=stats([r['critic_advantage'] for r in self.records]),
@@ -216,10 +218,17 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
     With ``critic_average`` (EMA decay) D trains normally, but G's gradient in
     passes 1 and 2 is taken against an exponential moving average of D's
     bounded parameters; the live D is restored after the update.
+
+    With ``smooth_critic`` (alpha) G's critic calls in passes 1 and 2 use
+    E_eps[D(x + sigma eps)] over ``smooth_samples`` antithetic Gaussian draws
+    on the data input, from a private generator seeded by the update index so
+    both passes see identical draws and no host RNG stream is touched.
+    sigma = alpha * std(D) / RMS ||grad_x D|| on the first G critic batch of
+    the update: the critic's own length scale, a state quantity.
     """
 
     def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False,
-                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False,per_particle=False,critic_average=None):
+                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False,per_particle=False,critic_average=None,smooth_critic=None,smooth_samples=8):
         super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
         if ratio_reference is not None and (not math.isfinite(ratio_reference) or ratio_reference<=0
                                             or not ratio_span>=1 or not 0<=ratio_decay<1):
@@ -229,6 +238,9 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         if per_group and per_particle:raise ValueError('choose per-group or per-particle bounds')
         if critic_average is not None and not 0<critic_average<1:raise ValueError('invalid critic averaging decay')
         self.critic_average=critic_average;self.critic_ema=None
+        if smooth_critic is not None and (not math.isfinite(smooth_critic) or smooth_critic<=0 or smooth_samples<2 or smooth_samples%2):
+            raise ValueError('invalid critic smoothing')
+        self.smooth_critic=smooth_critic;self.smooth_samples=smooth_samples;self._smoothing=None
         self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
         if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
 
@@ -251,6 +263,9 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
                  if isinstance((m:=local.get(name)),torch.nn.Module) for b in m.buffers()]
         self.d0=[p.detach().clone() for p in self._params(opt_d)]
         self.g_base=[p.detach().clone() for p in self._params(opt_g)]
+        self._critic_wrapper=local.get('critic')
+        if self.smooth_critic is not None and not isinstance(self._critic_wrapper,torch.nn.Module):
+            raise RuntimeError('critic smoothing needs the host critic')
         rng_before=self._rng(streams);self.advantage=None;self.row=dict(outer_step=self.outer_steps+1)
         rng_after=None
         for phase in range(3):
@@ -274,6 +289,38 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         self.phase=None;self.outer_steps+=1
         if self.accounting is not None:self.accounting(self.rows[opt_d]['calls'],self.outer_steps)
 
+
+    def _enable_smoothing(self):
+        """Route G's critic calls through E_eps[D(x + sigma eps)] for this pass."""
+        wrapper=self._critic_wrapper;inner=getattr(wrapper,'model',wrapper)
+        index=getattr(wrapper,'data_index',0);original=type(inner).forward
+        noise=torch.Generator().manual_seed(1000003*(self.outer_steps+1)+7)
+        recorder=self
+        def smoothed(module,*args,**kwargs):
+            values=list(args);x=values[index]
+            if recorder.row.get('smoothing_sigma') is None:
+                with torch.enable_grad():
+                    probe=x.detach().clone().requires_grad_(True)
+                    values[index]=probe;score=original(module,*values,**kwargs)
+                    gradient,=torch.autograd.grad(score.sum(),probe)
+                spread=float(score.detach().std());slope=float(gradient.square().sum(-1).mean().sqrt())
+                length=spread/slope if slope>0 else 0.
+                recorder.row.update(smoothing_sigma=recorder.smooth_critic*length,critic_length=length)
+            sigma=recorder.row['smoothing_sigma']
+            half=recorder.smooth_samples//2;total=0.
+            for _ in range(half):
+                eps=torch.randn(x.shape,generator=noise,dtype=x.dtype)
+                for sign in (1.,-1.):
+                    values[index]=x+sign*sigma*eps;total=total+original(module,*values,**kwargs)
+            return total/recorder.smooth_samples
+        inner.forward=smoothed.__get__(inner)
+        self._smoothing=inner
+
+    def _disable_smoothing(self):
+        if self._smoothing is not None:
+            del self._smoothing.forward
+            self._smoothing=None
+
     @torch.no_grad()
     def step(self,optimizer,ordinary_step,closure=None):
         if self.passthrough:return ordinary_step(optimizer,closure=closure)
@@ -282,6 +329,15 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         self.rows[optimizer]['calls']+=1
         opt_d,opt_g=self.optimizers
         grads=lambda opt:[p.grad.detach().clone() for p in self._params(opt)]
+        if self.smooth_critic is not None:
+            if optimizer is opt_d and self.phase>0:
+                result=self._step_inner(optimizer,ordinary_step,grads,opt_d,opt_g)
+                self._enable_smoothing();return result
+            if optimizer is opt_g:self._disable_smoothing()
+        return self._step_inner(optimizer,ordinary_step,grads,opt_d,opt_g)
+
+    @torch.no_grad()
+    def _step_inner(self,optimizer,ordinary_step,grads,opt_d,opt_g):
         if optimizer is opt_d:
             if self.phase==0:
                 self.gd0=grads(opt_d);ordinary_step(opt_d)
