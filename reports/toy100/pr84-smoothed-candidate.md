@@ -18,8 +18,15 @@ and observations apart from wall time, the applied-rate and noise receipts,
 every own-curvature and stencil-width record, and the generated host source
 hash. Both replayed hosts match exactly. Trajectory passes with MSE
 .000942662 and an 18-check suffix; the ring fails with seven modes and HQ 1.0
-at update 1200. Every terminal ring check has seven modes, so the candidate
-does not advance to a 2400-update continuation or any further host.
+at update 1200. Every terminal ring check has seven modes, so no continuation
+of an acquired cold state or further host is qualified.
+
+A later, separately declared [conditional warm hold](stationary-stability-status.md)
+tests the user's same-dataset stability concern despite that acquisition
+failure. It reproduces warm200/200, then fails8 of120 checks through2400;
+minimum7 modes/HQ .78857, first observed failure1390. Final8/HQ .99805 hides
+the interruptions. The candidate is therefore rejected for both acquisition
+and longer conditional stability.
 
 The original `40ec` source and parity result are stored under
 [continuous-evidence/pr84-smoothed-candidate](continuous-evidence/pr84-smoothed-candidate/manifest.json)

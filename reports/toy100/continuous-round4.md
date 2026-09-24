@@ -1,5 +1,13 @@
 # PR84 review and the leading partial candidate
 
+**Latest update:** the original PR84 adapter also fails a conditional longer
+warm continuation:112/120 checks through2400, first failure1390, worst7 modes/
+HQ .78857, despite finishing8/HQ .99805. Its first200 passing updates reproduce
+exactly. The [same-dataset stability review](stationary-stability-status.md)
+supersedes the short-warm stability assessment below; the adapter is retained
+as a research reference only. This is an additional diagnostic of the same
+configuration, not a seventh round4 configuration.
+
 **No no-decay replacement qualifies yet.** PR84's original smoothed-critic
 update is the leading local research candidate among the reviewed PR81/82/84
 arms: it passes the dense warm fork and cold trajectory, then ends the cold

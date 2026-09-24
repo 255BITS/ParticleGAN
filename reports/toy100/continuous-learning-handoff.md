@@ -5,6 +5,14 @@ candidate has passed both acquisition and continued quality. Work here is
 limited to replacing those schedules with responsive training dynamics;
 production defaults have not been changed.
 
+**Latest stability review:** the selected PR84 adapter now also fails a
+same-dataset continuation to2400: warm200/200, then112/120 later checks;
+first observed failure1390, worst1540 at7 modes/HQ .78857, final8/HQ .99805.
+The scheduled control passes120/120. The exact warm state and first200 update
+records reproduce. Read the [current status and evidence](stationary-stability-status.md)
+before starting another method. Acquisition is still required, but delayed
+instability is now the first mechanism to isolate; the good endpoint hides it.
+
 **Scope clarified September 23, 2026:** PR #60 targets initial acquisition and
 sustained live quality on a fixed target distribution without LR decay.
 Adapting to a changed target distribution is a separate problem; translation
@@ -111,17 +119,21 @@ results are retained under [continuous-evidence](continuous-evidence/).
    Score **every update** from 1001 to 1200. The unchanged child must match a
    separate uninterrupted control's final state hash exactly. A warm pass is
    only conditional local stability, never evidence of cold acquisition.
-3. For warm survivors, run full-budget cold trajectory first: 400 updates,
+3. For warm survivors, extend the same fixed-target branch to at least2400,
+   preserving the original1200-step noise horizon and all optimizer/RNG state.
+   Check every ten updates after1200. This conditional stability filter now
+   precedes further acquisition hosts: PR84's short pass hid eight later failures.
+4. For survivors, run full-budget cold trajectory first: 400 updates,
    identity MSE <= .02 and the original sustained gate. It has rejected the
    newest dynamics candidates cheaply. Trajectory is a fixed conditional
    dataset throughout training; it does not change the target distribution.
    Then cold mode-hold, followed by the
    other cheap hosts in the fail-fast screen. Do not run expensive downstream
    tasks after a failed full-budget host.
-4. Extend a surviving learner uninterrupted to at least 2400 mode-hold updates,
+5. Extend a surviving cold learner uninterrupted to at least 2400 mode-hold updates,
    checking every ten updates after 1200. Keep noise burn-in tied to the original
    1200-update horizon; do not restart models, optimizer moments or RNG streams.
-5. A viable shared replacement still needs fresh older-19, the three strict
+6. A viable shared replacement still needs fresh older-19, the three strict
    native 100-mode cases, production common-22 replay, and longer continuation.
 
 **Separate distribution-adaptation study:** the existing +.35 translation
