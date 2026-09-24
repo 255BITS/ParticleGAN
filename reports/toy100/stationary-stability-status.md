@@ -20,7 +20,8 @@ the original diagnostic's provenance.
 **Current candidate:** bounded refinement of the same penalized critic loss
 passes all44 saved-state checks and warm200/200, minimum HQ .99707. Its
 constant-rate dense hold through2400 passes1200/1200, minimum HQ .939453.
-Cold trajectory passes at MSE .000910; cold ring is running. This costs roughly53 extra
+Cold trajectory passes at MSE .000910; cold ring aborts on a nonfinite inner-fit trial after the last logged
+completed update460. No ring quality verdict is available. This costs roughly53 extra
 1024-pair D gradients per update; fits remain nonconverged. Cold acquisition
 is not yet complete. [Independent warm/hold audit and evidence](pr84-critic-refinement-independent-audit.md),
 [strict saved-state filter](pr84-critic-refinement-filter.md). The

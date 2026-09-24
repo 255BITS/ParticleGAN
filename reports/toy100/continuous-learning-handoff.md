@@ -25,7 +25,8 @@ a bounded critic-refinement rule. That rule now passes **all44 saved-state
 checks and warm200/200**, with eight modes and minimum warm HQ .99707.
 The dense hold through2400 passes all1200 later checks, minimum HQ .939453
 with eight modes throughout. Cold trajectory passes at MSE .000910 with22
-passing observations; cold ring is running.
+passing observations; cold ring aborts on a nonfinite inner-fit trial after the last logged
+completed update460. No ring quality verdict is available.
 Each update costs about53 additional1024-pair critic-gradient evaluations in
 the warm run, plus a parity check. Fits are nonconverged and D's retained Adam
 moments precede the refinement. [Rule, strict filter and frozen evidence](pr84-critic-refinement-filter.md).

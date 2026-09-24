@@ -269,7 +269,7 @@
     "capped-critic-tracking-toy.md",
     "pr84-critic-refinement-independent-audit.md"
   ],
-  "interpretation": "Critic refinement passes all44 saved-state checks, warm200/200, and every1200 later update through2400. Cold acquisition is running; no production-qualified solution yet.",
+  "interpretation": "Conditional stability and cold trajectory pass; cold ring aborts during a nonfinite L-BFGS trial, so full acquisition fails. Exact failure capture and a bounded solver repair are next.",
   "additional_saved_state_candidates": [
     {
       "method": "pr84_accepted_g_discriminator_cross_response",
@@ -294,7 +294,7 @@
   "active_host_configuration": {
     "name": "PR84 with bounded empirical critic refinement",
     "method": "pr84_alternating_bounded_empirical_critic_refinement",
-    "status": "WARM_AND_HOLD_PASS_COLD_RUNNING",
+    "status": "WARM_AND_HOLD_PASS_COLD_RING_ERROR",
     "saved_state_filter": {
       "passing_checks": [
         12,
@@ -414,6 +414,13 @@
       },
       "final_state_file_sha256": "bb1d957180c2f358718d0fff52425c015b75d0e7f442c45fa3c8f9279464e060"
     },
-    "cold_ring": "RUNNING"
+    "cold_ring": {
+      "status": "ERROR_INCOMPLETE",
+      "reason": "nonfinite local critic fit in L-BFGS strong-Wolfe trial",
+      "last_logged_completed_update": 460,
+      "full_quality_verdict": null,
+      "log": "/tmp/pr84-critic-refinement-cold.log",
+      "next": "capture exact failed fit; reject candidate until solver repair passes local replay and cold gate"
+    }
   }
 }

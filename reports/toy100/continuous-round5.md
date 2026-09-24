@@ -3,7 +3,8 @@
 **No replacement qualifies yet.** The new penalized critic-refinement rule
 passes all44 saved-state continuation checks and warm200/200, minimum HQ
 .99707 with eight modes throughout. Its dense hold through2400 also passes all1200 later checks, minimum HQ
-.939453 with eight modes throughout. Cold acquisition is running. Opponent prediction passes warm200 but fails
+.939453 with eight modes throughout. Cold trajectory passes, but cold ring aborts on a nonfinite inner-fit trial
+after update460; the full acquisition gate is incomplete and failed. Opponent prediction passes warm200 but fails
 22 of1,200 later per-update checks, including temporary mode loss. Cold gates
 were not run after that failure. This round investigates the delayed loss of quality on the **unchanged**
 dataset. The production recipe still uses LR decay. Research tests use live
@@ -195,7 +196,12 @@ The [independent audit](pr84-critic-refinement-independent-audit.md) records
 66,918 additional1024-pair fit closures and21 closure-budget hits over1400
 active updates. The faithful cold extension passes nine focused checks; its
 400-update trajectory gate passes at MSE .000909835, with22/24 passing
-observations and a22-check passing suffix. The1200-update ring gate is running.
+observations and a22-check passing suffix. The1200-update ring gate aborts after the last logged completed update460:
+a later L-BFGS line-search trial raises `nonfinite local critic fit`. No full
+ring quality verdict exists. A passive replay is capturing the exact bank,
+accepted D, finite closure history and invalid trial before a solver-policy
+change is tested. A bounded fit must remain a finite update map; the earlier
+warm and hold passes do not override this cold failure.
 
 The nominal rates are fixed, but this rule still uses state-dependent
 curvature limits. In four successive windows through2400, the median G

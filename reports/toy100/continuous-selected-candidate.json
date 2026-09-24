@@ -1,7 +1,7 @@
 {
   "schema": "continuous-research-candidate-v2",
   "date": "2026-09-24",
-  "status": "research_only_conditional_stability_pass_cold_pending",
+  "status": "research_only_conditional_stability_pass_cold_error",
   "selected": "PR84 plus bounded empirical penalized critic refinement",
   "adapter": "reports/toy100/pr84_critic_refinement.py",
   "adapter_sha256": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11",
@@ -15,7 +15,7 @@
   "production_gate_eligible": false,
   "production_modified": false,
   "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5",
-  "reason": "First new rule to pass all44 saved-state failure checks, warm200, and all1200 dense later checks through2400. This is conditional stability, not a qualified solution; cold acquisition, own-state continuation, longer holds and shared gates remain.",
+  "reason": "Critic refinement passes all44 saved-state checks, warm200, dense hold1200 and cold trajectory, but cold ring aborts on a nonfinite inner-fit trial. No no-decay solution qualifies. Exact failed-fit capture and a bounded finite-trial policy are being tested.",
   "settings": {
     "g_lr": 0.00425,
     "d_lr": 0.00425,
@@ -80,7 +80,7 @@
     "evidence": "continuous-evidence/pr84-critic-refinement-independent-audit/hold/manifest.json"
   },
   "cold": {
-    "status": "RUNNING",
+    "status": "ERROR_INCOMPLETE",
     "gate_order": [
       "trajectory400",
       "mode_hold1200"
@@ -142,7 +142,14 @@
       },
       "final_state_file_sha256": "bb1d957180c2f358718d0fff52425c015b75d0e7f442c45fa3c8f9279464e060"
     },
-    "ring": "RUNNING"
+    "ring": {
+      "status": "ERROR_INCOMPLETE",
+      "reason": "nonfinite local critic fit in L-BFGS strong-Wolfe trial",
+      "last_logged_completed_update": 460,
+      "full_quality_verdict": null,
+      "log": "/tmp/pr84-critic-refinement-cold.log",
+      "next": "capture exact failed fit; reject candidate until solver repair passes local replay and cold gate"
+    }
   },
   "not_run": [
     "own_acquired_continuation",
@@ -154,5 +161,5 @@
   "distribution_shift_required": false,
   "rest_without_signal_allowed": true,
   "previous_reference": "https://github.com/255BITS/ParticleGAN/blob/7fa6e8e/reports/toy100/continuous-selected-candidate.json",
-  "next_research": "Complete cold gates. Preserve final training states to test own-acquired continuation without repeating prefixes; diagnose any failure with independent-bank copied-critic probes."
+  "next_research": "capture exact failed fit; reject candidate until solver repair passes local replay and cold gate"
 }
