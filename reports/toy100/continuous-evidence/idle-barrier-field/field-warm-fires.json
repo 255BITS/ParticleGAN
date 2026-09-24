@@ -1,0 +1,13 @@
+{
+  "method": "pr84_idle_anti_gradient_critic_field",
+  "field_fires": 7118,
+  "field_queries": 76800,
+  "look_step": 0.5,
+  "look_count": 4,
+  "purity": "GAN dynamics only \u2014 no coverage/likelihood term",
+  "final_step": {
+    "step": 1200,
+    "modes": 5,
+    "hq": 0.830810546875
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "candidate": "pr84",
+  "stages": [
+    {
+      "task": "trajectory",
+      "passed": true,
+      "live": {
+        "identity_mse": 0.000942668120842427
+      },
+      "tail": [],
+      "seconds": 3.389333819000001,
+      "fires": null
+    },
+    {
+      "task": "mode_hold",
+      "passed": false,
+      "live": {
+        "modes": 7,
+        "hq": 0.99267578125
+      },
+      "tail": [],
+      "seconds": 23.334231388999967,
+      "fires": null
+    }
+  ],
+  "seconds": 26.76441880599998
+}
