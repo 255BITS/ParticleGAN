@@ -1,0 +1,94 @@
+{
+  "common_real_bank_sha256": "a2178917c754f20123a7c950d6e3cbaa8325114c20c4b0bda68c52d9e7ceeb19",
+  "cumulative_gates": {
+    "cold_terminal5": true,
+    "error_recovers_by5": true,
+    "missing_reacquires_terminal5": true,
+    "omission_retains8": true,
+    "warm_all16": false
+  },
+  "cumulative_source_sha256": {
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/toy100/models.py": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+    "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/pr84_early_geometry.py": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+    "reports/toy100/sample_anchor_free1200.py": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+    "reports/toy100/sample_anchor_local_mmd_continuation.py": "a618495f28f66696f46a419766a51e8d6c75f7701dbb1770109be72c6904d275",
+    "reports/toy100/sample_anchor_local_mmd_filter.py": "9882aec980fb2c7680f6e5da2fc42b4c9a2b80ab27a9c1cd15026dad87d2da55",
+    "reports/toy100/sample_anchor_mmd_filter.py": "d38f1eba9760cc83ee09af4ef6301b4ac15d022d153c45ffc65eded098dbc49a"
+  },
+  "files": {
+    "cumulative-declaration.json.gz": {
+      "bytes": 1604,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 2960,
+      "raw_sha256": "5021ad0bb6079d7e2456254488e51902021243449cf34b3925c45e944b789a98",
+      "sha256": "5b6ba901d890679083b9d7addf6b06f0aeb95b7d0ed14938227cc4a850144a77"
+    },
+    "cumulative-result.json.gz": {
+      "bytes": 62227,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 1326016,
+      "raw_sha256": "1d4ea03c667eae810e38a36e634e39fd437728bf0d23fa6b0d81e33fc2a24e4d",
+      "sha256": "ccbd5a4a083a6c4b2d6d03fab0e51f96e49c81a403ba237a34e39b524e783fe6"
+    },
+    "cumulative-source.tar.gz": {
+      "bytes": 26797,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 112640,
+      "raw_sha256": "c05cc3d320943fccad7f00b6f9a91df6bb286852d4ec83f1dab9ae84c978593f",
+      "sha256": "4383def2f389e83a3362043455c83d58ba5ab77d2833101b86a1ffe0734b3158"
+    },
+    "one-bank-declaration.json.gz": {
+      "bytes": 1485,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 2678,
+      "raw_sha256": "5075c8c61cede58d8b5347ed2b4387434e81a9fb3d16f3efbccef023ff13f932",
+      "sha256": "bca32c5a9bab4f230d57c28cd71b03eea4cc183ff4f8a39d5a4c72bcf7cdc514"
+    },
+    "one-bank-result.json.gz": {
+      "bytes": 24487,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 193957,
+      "raw_sha256": "edacc1c9f681a893cb857758a55b08290063fd286218d4428dc0ed6eca65ae85",
+      "sha256": "058a601635274f96cf60051fd98c252e023d11da9a49cbccd288bc786a84d8ee"
+    },
+    "one-bank-source.tar.gz": {
+      "bytes": 16572,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 71680,
+      "raw_sha256": "7363c6f5fd9c81b95f053a1a945bd18b28ec37c2a27b87516aabcdf273531723",
+      "sha256": "454de8e1bd391a0bc1cacdce860c9c9195b2a939f6d894e80d09ceac77273450"
+    },
+    "population-check-source.py.gz": {
+      "bytes": 2205,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 6205,
+      "raw_sha256": "19e358c1a9a59370949f1b3384497cc76e614777bd224d592b1478e26bc63e0e",
+      "sha256": "3f5d7e9056a6c2c3e0c9dfa905e6b261c4a70438bc7975d48073e3653c6987c4"
+    },
+    "population-check.json.gz": {
+      "bytes": 1425,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 4403,
+      "raw_sha256": "de1af1265ab9c88bdcf26616cd1a0912989c028884027610dacb2ff44c8f6d57",
+      "sha256": "6583a7522e963407b513df046bf4004dcfc9ecb7841d2fcb36539eba6758edf7"
+    }
+  },
+  "one_bank_source_sha256": {
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/pr84_early_geometry.py": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+    "reports/toy100/sample_anchor_free1200.py": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+    "reports/toy100/sample_anchor_local_mmd_filter.py": "9882aec980fb2c7680f6e5da2fc42b4c9a2b80ab27a9c1cd15026dad87d2da55",
+    "reports/toy100/sample_anchor_mmd_filter.py": "d38f1eba9760cc83ee09af4ef6301b4ac15d022d153c45ffc65eded098dbc49a"
+  },
+  "population_diagnostic_source_sha256": "19e358c1a9a59370949f1b3384497cc76e614777bd224d592b1478e26bc63e0e",
+  "scope": "free-output only; no NN/GAN/optimizer update",
+  "status": "REJECTED_STRICT_WARM",
+  "width": 0.031286240422040236,
+  "width_rule": "torch lower median of positive first-cold-bank nearest-neighbor distances"
+}
