@@ -138,7 +138,7 @@ class AlternatingCurvatureRecorder:
             values=[v for v in values if v is not None]
             return dict(min=min(values),mean=sum(values)/len(values),max=max(values)) if values else None
         return dict(method=METHOD,scratch_optimizer_policy=METHOD,shared_gate_eligible=False,
-            curvature_bound=self.curvature_bound,advantage_gate=self.advantage_gate,
+            curvature_bound=self.curvature_bound,d_curvature_bound=getattr(self,'d_curvature_bound',None),advantage_gate=self.advantage_gate,
             outer_steps=self.outer_steps,gate_open=len(self.records)-len(closed),bound_evaluated=len(closed),
             bound_active=sum(r['factor']<1 for r in closed),rho=stats([r['rho'] for r in closed]),
             factor=stats([r['factor'] for r in closed]),
@@ -180,8 +180,10 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
     G still responds to the D that actually materializes.
     """
 
-    def __init__(self,start_step=0,curvature_bound=.25):
+    def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None):
         super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None)
+        self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
+        if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
 
     def phases(self,step,opt_d,opt_g,local):
         if not self.enabled or step<self.start_step:
@@ -237,7 +239,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
                 for p,v in zip(self._params(opt_g),self.g_base):p.copy_(v)
             elif self.phase==1:
                 rho=_rho(self.d0,self.d1,self.gd0,grads(opt_d),self.metric_d)
-                factor=min(1.,self.curvature_bound/rho) if rho>0 else 1.
+                factor=min(1.,self.d_curvature_bound/rho) if rho>0 else 1.
                 for p,b,n in zip(self._params(opt_d),self.d0,self.d1):p.copy_(torch.lerp(b,n,factor) if factor<1 else n)
                 self.d_star=[p.detach().clone() for p in self._params(opt_d)]
                 self.row['d']=dict(rho=rho,factor=factor)
