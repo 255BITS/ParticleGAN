@@ -1,0 +1,27 @@
+{
+  "schema": "round7-learner-native-split-v1",
+  "status": "EXACT_SPLIT_PASS",
+  "scope": "two native mode_hold updates; correctness only, no acquisition or hold qualification",
+  "source_fingerprint": "77de05d003d2664ad1156a83512cf05dfec7571749e7cbd19e02302d7adc5c81",
+  "files": {
+    "declaration.json.gz": {
+      "sha256": "be312246eaf1c2abe3a0db72cb193f124efe44acb0fe2c264792dbe1baa9b98a",
+      "uncompressed_sha256": "926258a56f66eac5336a2425ccebbbc610388333c9f6411c4725f2a86ce0fa1d",
+      "bytes": 1848
+    },
+    "result.json.gz": {
+      "sha256": "5b221fd9fa36b95f9984771eaa09f30135634c97781711355566a1a4b870ee2e",
+      "uncompressed_sha256": "939157b2f0b0c6dd3a820b38171c93ba78b5c91aee47d4a0bfad4cd51fff34b6",
+      "bytes": 2873
+    },
+    "complete-envelopes.pt.gz": {
+      "sha256": "d99450dc7dc44ba3feac228c3c6ccf339028280b2930fcdb7a1b6ae812a0702e",
+      "uncompressed_sha256": "a49f1cd9f33ac6d86a1021832ae8a35d7d7ef75f80a0fd20a13f6139a6c95afd",
+      "bytes": 1597598
+    },
+    "source.tar.gz": {
+      "sha256": "19342754e0e0195945284fc4fd8fc7e605b9f5d4a9f9bcf4d100b00d52b289ec",
+      "bytes": 82465
+    }
+  }
+}
