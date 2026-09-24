@@ -117,6 +117,26 @@ generator particles): `v8_ring_cold.gif`, `v6_ring_cold.gif`,
 `alternating_ring_trace.py` and `ring_trace_gif.py`; traces are under
 `continuous-evidence/alternating-curvature/ring-traces/`.
 
+## Final two attempts (both fail; v10 remains the best evidence)
+
+| Variant (G .25 base, D bound 3) | Warm | Cold trajectory | Cold ring terminal HQ |
+| --- | --- | --- | --- |
+| v10 (reference) | 200/200 (.9297) | PASS .00094, 18 | .916 / .843 / 1.0 / .995 / 1.0, 8 modes |
+| v11: G bound .25 x clip(2 / EMA(rho_G/rho_D), 1/1.5, 1.5) | 200/200 (.9111) | FAIL .249 (bad basin) | not run |
+| v12: separate network / particle-prior curvature bounds | 200/200 (.9624) | PASS .00095, 20 | .58 / .49 / .36 / .66 / .73, 7 modes |
+
+* v11 agrees with the peer rejection of rho-ratio G-bound scheduling: it
+  separates acquisition from rest, but loosening early moves trajectory into
+  its bad basin.
+* The v10 dip at update 1050 is last-mode acquisition. Particle 5 sits .8-.98
+  from any center while mode 4 is empty and travels there during updates
+  1033-1061. Meanwhile whole-ring shakes (network steps move every particle)
+  pull particle 2 out of a doubled mode. v12 tested the matching fix, freeing
+  particle latents from the network's sharper curvature, and it made ring
+  acquisition worse.
+* Mode-coverage triggers need the target's mode count, and first-N-update
+  boosts are an elapsed-time schedule, so neither was used.
+
 ## Recommendations
 
 1. Put future game-update candidates in the alternating adapter

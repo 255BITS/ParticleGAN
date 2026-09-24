@@ -151,7 +151,13 @@ class AlternatingCurvatureRecorder:
             bound_active=sum(r['factor']<1 for r in closed),rho=stats([r['rho'] for r in closed]),
             factor=stats([r['factor'] for r in closed]),
             d_rho=stats([r.get('d',{}).get('rho') for r in closed]),d_factor=stats([r.get('d',{}).get('factor') for r in closed]),
-            d_bound_active=sum(r.get('d',{}).get('factor',1.)<1 for r in closed),critic_advantage=stats([r['critic_advantage'] for r in self.records]),
+            d_bound_active=sum(r.get('d',{}).get('factor',1.)<1 for r in closed),
+            ratio_reference=getattr(self,'ratio_reference',None),ratio_span=getattr(self,'ratio_span',None),
+            ratio_decay=getattr(self,'ratio_decay',None),g_bound=stats([r.get('g_bound') for r in closed]),
+            smoothed_ratio=stats([r.get('smoothed_ratio') for r in closed]),per_group=getattr(self,'per_group',False),
+            network_factor=stats([g['factor'] for r in closed for g in r.get('g_groups',[]) if not g['prior']]),
+            prior_factor=stats([g['factor'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),
+            prior_rho=stats([g['rho'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),critic_advantage=stats([r['critic_advantage'] for r in self.records]),
             gradient_evaluations_per_outer_step=(sum(3 if 'd' in r else 1 if r['gate_open'] else 2 for r in self.records)/self.outer_steps) if self.outer_steps else None,
             moment_updates_per_outer_step=1,rng_replay_verified=self.rng_replay_verified,
             update_order='alternating: D Adam step, then G+prior Adam step against the new D',
@@ -186,10 +192,26 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
     G's ordinary Adam step (G0 -> G1). Pass 2 at (D*, G1) gives rho_G and
     G = G0 + min(1, c/rho_G)(G1 - G0). Each player's moments advance once and
     G still responds to the D that actually materializes.
+
+    With ``ratio_reference`` the G bound is c * clip(r_ref / r, 1/span, span),
+    where r is an exponential moving average (decay ``ratio_decay``) of
+    log(rho_G / rho_D). The measured ratio is about 1-2 while either host is
+    acquiring and 6-18 once matched, so the bound loosens during acquisition
+    and tightens at rest. It is a function of the current state only.
+
+    With ``per_group`` the G network and particle-prior parameter groups each
+    get their own ratio and factor from the same replay. A prior particle's
+    latent moves only its own output, while a network step moves every output.
     """
 
-    def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False):
+    def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False,
+                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False):
         super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
+        if ratio_reference is not None and (not math.isfinite(ratio_reference) or ratio_reference<=0
+                                            or not ratio_span>=1 or not 0<=ratio_decay<1):
+            raise ValueError('invalid curvature-ratio controller')
+        self.ratio_reference=ratio_reference;self.ratio_span=ratio_span;self.ratio_decay=ratio_decay
+        self.log_ratio=None;self.per_group=per_group
         self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
         if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
 
@@ -262,8 +284,28 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
             self.metric_g=_metric(opt_g);self.g1=[p.detach().clone() for p in self._params(opt_g)]
         else:
             rho=_rho(self.g_base,self.g1,self.gg0,grads(opt_g),self.metric_g)
-            factor=min(1.,self.curvature_bound/rho) if rho>0 else 1.
-            for p,b,n in zip(self._params(opt_g),self.g_base,self.g1):p.copy_(torch.lerp(b,n,factor) if factor<1 else n)
+            bound=self.curvature_bound
+            if self.ratio_reference is not None:
+                rho_d=self.row['d']['rho']
+                if rho>0 and rho_d>0:
+                    current=math.log(rho/rho_d)
+                    self.log_ratio=current if self.log_ratio is None else self.ratio_decay*self.log_ratio+(1-self.ratio_decay)*current
+                if self.log_ratio is not None:
+                    scale=min(self.ratio_span,max(1/self.ratio_span,self.ratio_reference/math.exp(self.log_ratio)))
+                    bound=self.curvature_bound*scale
+                self.row['g_bound']=bound;self.row['smoothed_ratio']=None if self.log_ratio is None else math.exp(self.log_ratio)
+            factor=min(1.,bound/rho) if rho>0 else 1.
+            factors=[factor]*len(self.g_base)
+            if self.per_group:
+                g1_now=grads(opt_g);offset=0;groups=[]
+                for group in opt_g.param_groups:
+                    count=len(group['params']);block=slice(offset,offset+count);offset+=count
+                    group_rho=_rho(self.g_base[block],self.g1[block],self.gg0[block],g1_now[block],self.metric_g[block])
+                    group_factor=min(1.,bound/group_rho) if group_rho>0 else 1.
+                    factors[block]=[group_factor]*count
+                    groups.append(dict(prior=bool(group.get('_comparison_prior')),rho=group_rho,factor=group_factor))
+                self.row['g_groups']=groups
+            for p,b,n,f in zip(self._params(opt_g),self.g_base,self.g1,factors):p.copy_(torch.lerp(b,n,f) if f<1 else n)
             self.row['g']=dict(rho=rho,factor=factor)
         return None
 
