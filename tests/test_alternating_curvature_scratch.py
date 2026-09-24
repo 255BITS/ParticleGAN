@@ -191,3 +191,14 @@ def test_critic_average_feeds_g_the_averaged_critic_and_restores_live_d():
     expected = .5 * first_live + .5 * live
     assert [v for s, ph, v in seen if s == 1 and ph > 0] == [pytest.approx(expected)] * 2
     assert y.item() == live
+
+
+def test_smoothed_critic_keeps_host_rng_and_records_state_width():
+    plain = _host()
+    smoothed = _host(alternating_curvature(start_step=0, curvature_bound=.25, bound_d=True,
+                                           d_curvature_bound=3., smooth_critic=1.))
+    assert all(torch.equal(a, b) for a, b in zip(plain[1:3], smoothed[1:3]))
+    recorder = smoothed[3]
+    assert recorder.rng_replay_verified == 2 * recorder.outer_steps
+    assert all(r["smoothing_sigma"] > 0 for r in recorder.records)
+    assert recorder._smoothing is None
