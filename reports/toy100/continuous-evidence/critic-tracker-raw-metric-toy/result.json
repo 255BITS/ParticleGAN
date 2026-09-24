@@ -1,0 +1,44 @@
+{
+  "scope": "deterministic algebraic illustration; no GAN update, no RNG",
+  "beta1": 0.0,
+  "beta2": 0.999,
+  "epsilon": 1e-08,
+  "nominal_rate": 0.00425,
+  "statistical_gain": "1 / number of distinct observed banks",
+  "expectation": {
+    "field": "F(x)=x, g(x,xi)=x+xi, iid xi=+-1 equiprobable",
+    "tracker_at_fixed_x": "x+mean(xi_1,...,xi_n)",
+    "tracker_noise_variance": "1/n",
+    "raw_second_moment_at_true_root": 1.0,
+    "response_to_any_model_delta": "exact additive delta on same bank"
+  },
+  "resting_realization": {
+    "bank_count": 9999,
+    "tracked_field": 0.00010001000100201551,
+    "raw_adam_denominator": 1.0000000100000006,
+    "tracked_adam_denominator": 0.0003631313123735849,
+    "raw_metric_step_magnitude": 4.250425000081407e-07,
+    "tracked_metric_step_magnitude": 0.0011704925732796284
+  },
+  "model_error_shock": {
+    "bank_count": 10001,
+    "model_error": 0.35,
+    "tracked_field": 0.350099990001002,
+    "raw_adam_denominator": 1.0004111940236486,
+    "tracked_adam_denominator": 0.011077334952436596,
+    "raw_metric_step": 0.001487313383129823,
+    "tracked_metric_step": 0.13432156415717764,
+    "d_bound_rho_raw": 0.004248253143696366,
+    "d_bound_rho_tracked": 0.3836662896128423,
+    "d_bound_factor_raw": 1.0,
+    "d_bound_factor_tracked": 1.0
+  },
+  "geometry": {
+    "scalar_h": 3.0,
+    "scalar_d_bound_multiplier": -2.0,
+    "scalar_g_bound_multiplier": 0.75,
+    "bilinear_d_then_g_determinant": 1.0,
+    "bilinear_d_then_g_trace": 1.9999819375,
+    "bilinear_d_then_g_spectral_radius": 1.0
+  }
+}
