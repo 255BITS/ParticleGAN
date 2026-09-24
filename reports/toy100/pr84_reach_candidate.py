@@ -104,7 +104,7 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         fired = bool(self.armed)
         if fired:
             self.post_arm_fires += 1
-        update = int(self.row.get("outer_step", self.outer_steps + 1))
+        update = int(getattr(self, "_host_step", None) or self.row.get("outer_step", self.outer_steps + 1))
         self.row["armed"] = self.armed
         self.row["g_bound_before"] = before
         self.row["g_bound_after"] = after
@@ -134,6 +134,7 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         return sum(row["g"]["factor"] for row in recent) / len(recent) <= STALL_TRUST
 
     def phases(self, step, opt_d, opt_g, local):
+        self._host_step = int(step) + 1
         if not self.game_bound or not self.enabled or step < self.start_step:
             yield from super().phases(step, opt_d, opt_g, local)
             return
