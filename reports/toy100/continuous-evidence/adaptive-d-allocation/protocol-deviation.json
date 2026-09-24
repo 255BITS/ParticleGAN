@@ -1,0 +1,10 @@
+{
+  "affected_arm": "adaptive_cold",
+  "cold_gate_credit": false,
+  "description": "The archived runtime driver launched cold mode-hold immediately after matched warm forks completed. Warm adaptive failed 7/200 dense checks. The cold run nevertheless completed before the warm verdict was consumed and the requested stop could take effect. Its observations are retained transparently but receive no gate or successor credit.",
+  "no_downstream_hosts_launched": true,
+  "runtime_driver_sha256": "7d7b7dd523b1f3c532bc2d5b2316ca34022fe267ba8411611a996b76d1a8a765",
+  "status": "UNPLANNED_DIAGNOSTIC_NOT_PROMOTION",
+  "tracked_driver_revision": "The tracked driver now skips cold acquisition after warm failure; the archived runtime bytes remain authoritative for this experiment.",
+  "warm_gate": "FAIL"
+}

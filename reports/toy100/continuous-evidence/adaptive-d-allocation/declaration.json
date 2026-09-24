@@ -1,0 +1,36 @@
+{
+  "candidate": {
+    "a_d": 0.01,
+    "alpha_d": 0.1,
+    "eval_batch": 16,
+    "eval_seed": 20103,
+    "max_d": 3,
+    "min_d": 1,
+    "rho_d": 0.5
+  },
+  "cold_arms": [
+    "scheduled_cold",
+    "constant_cold",
+    "adaptive_cold"
+  ],
+  "host": "mode_hold",
+  "scratch_extra_D_updates": true,
+  "seed": 0,
+  "shared_gate_eligible": false,
+  "source_sha256": {
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/transfer_suite/legacy_noise_adapters.py": "b34a864330f24ce24e8d0fe5b3f14932ee795fc217d98786901ae0bdaadc7470",
+    "reports/toy100/adaptive_d_allocation_probe.py": "7d7b7dd523b1f3c532bc2d5b2316ca34022fe267ba8411611a996b76d1a8a765",
+    "reports/toy100/adaptive_d_allocation_scratch.py": "b629e2e3ed0310b7097aa951e70371395be59ee7bc91dcb7d081f31af3d5cbd1"
+  },
+  "steps": 1200,
+  "unchanged_G_updates_and_noise_clock": true,
+  "warm_children": [
+    "identity",
+    "constant",
+    "adaptive"
+  ],
+  "warm_prefix": 1000
+}
