@@ -9,6 +9,7 @@ import pytest
 import torch
 
 from reports.toy100.bandwidth_kde_probe import capture_first_real, estimate_bandwidth
+from reports.toy100.bandwidth_kde_two_batch import capture_two_real_batches
 from benchmarks.transfer_suite.public_default_verification import load_declaration, declared_spec
 from benchmarks.transfer_suite.toy100_compatibility import declared_recipe
 
@@ -41,3 +42,16 @@ def test_real_host_capture_is_deterministic_and_takes_no_optimizer_step():
         second = capture_first_real(spec, card, base, noise)
     assert first.shape == (12, 16)
     np.testing.assert_array_equal(first, second)
+
+
+def test_two_batch_capture_exposes_repeated_trajectory_support():
+    root = Path(__file__).resolve().parents[1]
+    config = json.loads((root / "configs/toy100/shared_candidate.json").read_text())
+    base, noise, _ = declared_recipe(config)
+    jobs, profile = load_declaration()
+    trajectory = next(job for job in jobs if job["spec"]["name"] == "trajectory")
+    spec, card, _ = declared_spec(trajectory, profile, base)
+    pair = capture_two_real_batches(spec, card, base, noise)
+    assert pair.shape == (2, 12, 16)
+    np.testing.assert_array_equal(pair[0], pair[1])
+    assert estimate_bandwidth(pair.reshape(24, 16))["width"] == 0.
