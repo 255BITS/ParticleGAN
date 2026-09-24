@@ -33,9 +33,11 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "ema": ("reports.toy100.pr84_post_acquire_ema_candidate", "pr84_post_acquire_ema_candidate"),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
+    "reports/toy100/pr84_post_acquire_ema_candidate.py",
     "reports/toy100/pr84_reach_candidate.py",
     "reports/toy100/pr84_smoothed_candidate.py",
     "reports/toy100/alternating_curvature_scratch.py",
@@ -53,6 +55,8 @@ def factory(method):
 
 
 def emit(**row):
+    import torch
+    row.setdefault("cpu", torch.backends.cpu.get_cpu_capability())
     print(json.dumps(row, default=float), flush=True)
 
 
@@ -107,6 +111,15 @@ def warm(output, method):
         emit(event="WARM", variant=name, status=row["status"],
              **{k: loc.get(k) for k in ("checks", "passing_checks", "min_modes", "min_hq",
                                         "failing_steps") if k in loc})
+    identity = compact.get("identity", {}).get("local", {})
+    control_ok = (identity.get("checks") == 200 and identity.get("passing_checks") == 200
+                  and identity.get("min_modes") == 8)
+    emit(event="WARM_CONTROL", valid=control_ok, checks=identity.get("checks"),
+         passing_checks=identity.get("passing_checks"), min_modes=identity.get("min_modes"),
+         min_hq=identity.get("min_hq"))
+    if not control_ok:
+        emit(event="WARM_INVALID",
+             reason="control is not 200/200 full-ring; refuse this warm, it is not rankable")
 
 
 def cold(output, method, tasks):
@@ -146,6 +159,11 @@ def stay(output, method, steps):
 
     config = json.loads((ROOT / "configs/toy100/constraints_simple_regularization.json").read_text())
     began = time.perf_counter()
+
+    def stay_log(payload):
+        emit(event=str(payload.get("event", "checkpoint")).upper(),
+             **{k: payload[k] for k in ("step", "modes", "hq", "frozen") if k in payload})
+
     with factory(method)(task="mode_hold") as (recorder, _source):
         def hook(state):
             declare_calls = state["declare_optimizer_accounting"]
@@ -153,16 +171,24 @@ def stay(output, method, steps):
                 calls=calls + (steps - outer), moment_updates=steps)
             recorder.accounting(recorder.rows[recorder.optimizers[0]]["calls"], recorder.outer_steps)
         evidence = run_probe(config, mode="constant", steps=steps, diagnostic_every=10,
-                             checkpoint_hook_step=1, checkpoint_hook=hook)
+                             checkpoint_hook_step=1, checkpoint_hook=hook, log=stay_log)
     diag = evidence.get("diagnostic") or []
     late = [p for p in diag if p["step"] > 1200]
     fails = [p for p in late if not (p["modes"] == 8 and p["hq"] >= .9)]
+    severe = [p["step"] for p in late if p["modes"] <= 4]
+    suffix = 0
+    for point in reversed(late):
+        if point["modes"] == 8 and point["hq"] >= .9:
+            suffix += 1
+        else:
+            break
     terminal = [p for p in diag if p["step"] in range(1000, 1201, 50)]
     row = dict(event="STAY", steps=steps, seconds=round(time.perf_counter() - began, 1),
                terminal_1000_1200=[(p["step"], p["modes"], round(p["hq"], 4)) for p in terminal],
-               checks=len(late), passing=len(late) - len(fails),
+               checks=len(late), passing=len(late) - len(fails), passing_suffix=suffix,
                min_modes=min((p["modes"] for p in late), default=None),
                min_hq=round(min((p["hq"] for p in late), default=float("nan")), 4),
+               severe_steps=severe,
                failing_steps=[p["step"] for p in fails][:40],
                final=(diag[-1]["step"], diag[-1]["modes"], round(diag[-1]["hq"], 4)) if diag else None,
                dynamics=_dynamics(recorder))
