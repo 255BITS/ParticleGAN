@@ -134,6 +134,7 @@ ineligible for the production gate until a real implementation is audited.
 | Full-J linearized implicit response | 200/200 | Cold trajectory MSE .2538 > .02; warm cost11.4 gradient evaluations/player/update |
 | Cross-player-only competitive response | 196/200 | Warm HQ falls to .8894; unplanned cold diagnostic ends at MSE .020058 > .02, with no passing checkpoints |
 | Cross-only + matched-support output cap .05 | 200/200 on torch 2.14 | Cold trajectory MSE .06901, 0/24. Cap never sees that host. Archived 1194 motion .023 is under the cap |
+| Cross-only + error-relative output gain .5 | 200/200, minimum HQ .9802 | Cold trajectory MSE .02110, 3/24 under .02, no sustained suffix. Gain 1 does not fire. Gain .25 cold MSE .07892 |
 
 Earlier constant Adam, optimistic Adam/AMSGrad, ExtraAdam, epsilon changes,
 fixed output-motion bounds and persistent-noise grids also failed. R1+R2

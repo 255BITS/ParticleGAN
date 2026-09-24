@@ -67,3 +67,21 @@ the cap does not run there.
 | Cold trajectory, cap on or off | MSE .069011, 0/24 passing checks |
 
 Cold mode-hold, extended hold, and the shift test were not run.
+
+## Error-relative output step
+
+The .05 cap stays off. The new rule, also off unless requested, rejects a
+proposal when clean output RMS exceeds `gain * current target error`. Mode-hold
+error is the mean distance of clean particles to the nearest ring center.
+Trajectory error is the clean identity RMS. A far target therefore allows a
+large step; a matched target does not allow the ~.20 jump.
+
+| Gain | Warm | Cold trajectory |
+| --- | --- | --- |
+| 1 | 200/200, minimum HQ .9329 | MSE .06901, 0/24. The bound never fired |
+| .5 | 200/200, minimum HQ .9802 | MSE .02110, 3/24 under .02, no 5-check suffix |
+| .25 | 200/200, minimum HQ .9993 | MSE .07892, 0/24 |
+
+Gain .5 is the cold movement. It still fails the unchanged .02 gate, so
+mode-hold, the 2400 hold, and the shift were not run. Gain .25 holds the warm
+state more tightly and acquires worse. This is not a production recipe.
