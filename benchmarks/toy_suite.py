@@ -8,7 +8,7 @@ noise on every host, as well as each host's frozen live gate. Candidate runs
 without complete training-noise receipts remain INCOMPLETE for that claim.
 
 python -u -m benchmarks.toy_suite run \
-    --config configs/toy100/shared_candidate.json --output /tmp/toy-suite-22
+    --output /tmp/toy-suite-22
 python -m benchmarks.toy_suite regrade --output /tmp/toy-suite-22
 """
 from __future__ import annotations
@@ -1331,7 +1331,7 @@ def main(argv=None):
     commands = parser.add_subparsers(dest="command", required=True)
     run_parser = commands.add_parser("run", help="train and grade fresh evidence")
     run_parser.add_argument("--config", type=Path,
-                            default=Path("configs/toy100/shared_candidate.json"),
+                            default=Path("configs/toy100/constraints_simple_regularization.json"),
                             help="candidate recipe (default: the verified shared 22-toy candidate)")
     run_parser.add_argument("--output", type=Path, required=True)
     run_parser.add_argument("--with-default-control", action="store_true")

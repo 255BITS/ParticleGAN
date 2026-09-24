@@ -29,15 +29,18 @@ def _parser():
     parser = argparse.ArgumentParser(description="100-Gaussian training and evidence gate")
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run", help="train then gate all problems, or one named problem")
-    run.add_argument("--config", type=Path, default=Path("configs/toy100/shared_candidate.json"),
+    run.add_argument("--config", type=Path, default=Path("configs/toy100/constraints_simple_regularization.json"),
                      help="frozen JSON/TOML recipe (default: the verified shared 22-toy candidate)")
     run.add_argument("--output", type=Path, required=True, help="new run directory")
     run.add_argument("--problem", choices=PROBLEM_NAMES, help="individual deep dive")
     run.add_argument("--steps", type=int, help="override training budget for a deep dive")
     run.add_argument("--device", help="override device from the config")
     run.add_argument("--no-render", action="store_true", help="skip diagnostic GIF rendering")
-    run.add_argument("--require-accuracy", action="store_true",
-                     help="also require sustained fidelity and a separate 100k-sample holdout")
+    accuracy = run.add_mutually_exclusive_group()
+    accuracy.add_argument("--require-accuracy", action="store_true", default=True,
+                          help="require sustained fidelity and a 100k-sample holdout (default)")
+    accuracy.add_argument("--coverage-only", dest="require_accuracy", action="store_false",
+                          help="diagnostic only: skip the stricter Gaussian accuracy gate")
     for name in ("gate", "accuracy", "render"):
         command = commands.add_parser(name, help=f"{name} existing recorded runs")
         command.add_argument("--output", type=Path, required=True)

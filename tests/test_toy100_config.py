@@ -70,6 +70,7 @@ def test_unselected_invalid_override_blocks_individual_run(tmp_path, monkeypatch
     assert not args.output.exists()
 
 
-def test_default_command_uses_recommended_manifest():
+def test_default_command_uses_shared_winner_and_strict_accuracy():
     args = cli._parser().parse_args(["run", "--output", "/tmp/toy100-example", "--no-render"])
-    assert str(args.config) == "configs/toy100/shared_candidate.json"
+    assert str(args.config) == "configs/toy100/constraints_simple_regularization.json"
+    assert args.require_accuracy is True

@@ -30,6 +30,7 @@ jobs:
       CUDA_VISIBLE_DEVICES: ""
       OMP_NUM_THREADS: "1"
       MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
       # Pin all CPU dispatch layers: identical source/config previously gave
       # different image-toy trajectories on AVX2 and AVX512 hosted runners.
       ATEN_CPU_CAPABILITY: avx2
@@ -68,7 +69,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python -u -m benchmarks.toy_suite run --config configs/toy100/shared_candidate.json --output artifacts/toy-suite-ci 2>&1 | tee toy-suite-ci.log
+          python -u -m benchmarks.toy_suite run --output artifacts/toy-suite-ci 2>&1 | tee toy-suite-ci.log
       - name: Upload gate evidence
         if: always()
         uses: actions/upload-artifact@v4
