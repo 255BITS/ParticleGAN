@@ -6,7 +6,7 @@ from particlegan import MoGParticlePrior
 
 
 def test_frozen_hash_covers_prior_buffers_and_extra_state():
-    prior = MoGParticlePrior(num_particles=8, z_dim=2)
+    prior = MoGParticlePrior(sigma=.025, num_particles=8, z_dim=2)
     original = state_hash(prior)
     prior.standardize = not prior.standardize
     assert state_hash(prior) != original

@@ -46,7 +46,7 @@ jobs:
           cp examples/particle_autoencoder.py /tmp/particlegan-autoencoder-smoke.py
           cd /tmp
           PYTHONPATH=/tmp/particlegan-installed python /tmp/particlegan-autoencoder-smoke.py
-          PYTHONPATH=/tmp/particlegan-installed python -c "import particlegan; from particlegan import ParticlePrior, MoGParticlePrior, DDGAN, get_recipe; assert particlegan.__file__.startswith('/tmp/particlegan-installed/'); assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4); assert MoGParticlePrior().sample(2)[0].shape == (2, 4); assert get_recipe('mog').total_steps == 28000; assert DDGAN().steps == 4; assert get_recipe().lr == 0.0006"
+          PYTHONPATH=/tmp/particlegan-installed python -c "import particlegan; from particlegan import ParticlePrior, MoGParticlePrior, DDGAN, get_recipe; assert particlegan.__file__.startswith('/tmp/particlegan-installed/'); assert ParticlePrior(num_particles=8).sample(2)[0].shape == (2, 4); assert MoGParticlePrior(sigma=0.1).sample(2)[0].shape == (2, 4); assert get_recipe('mog').total_steps == 28000; assert DDGAN().steps == 4; assert get_recipe().lr == 0.0006"
           PYTHONPATH=/tmp/particlegan-installed python -c "from particlegan import get_recipe; recipe = get_recipe('ddgan_mog'); assert recipe.model == 'ddgan' and recipe.total_steps == 100000; assert recipe.make_prior().sigma > 0"
 
   distributions:

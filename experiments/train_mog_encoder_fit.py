@@ -73,7 +73,7 @@ def load_models(run, device):
     assert cfg["arm"] == "route_bounded" and saved["step"] == cfg["steps"] == 6000
     assert hashlib.sha256((run / "source.py").read_bytes()).hexdigest() == cfg["source_sha256"]
     torch.manual_seed(cfg["seed"])
-    prior = MoGParticlePrior(num_particles=cfg["num_particles"], z_dim=cfg["z_dim"], device=device).to(device)
+    prior = MoGParticlePrior(sigma=0, num_particles=cfg["num_particles"], z_dim=cfg["z_dim"], device=device).to(device)
     decoder = SimpleMLPGenerator(cfg["z_dim"], cfg["width"]).to(device)
     encoder = RoutingEncoder(cfg["width"]).to(device)
     for model, key in ((prior, "prior"), (decoder, "g"), (encoder, "encoder")):

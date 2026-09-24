@@ -21,7 +21,7 @@ from experiments.run_grid import code_provenance
 from lib.mog_metrics import evaluate as generation_metrics, sample_metrics
 from lib.toy_metrics import sliced_w1
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator, sample_100gaussians
-from particlegan import GANLoss, GradientPenalty, MoGParticlePrior, ParticleRegularizer
+from particlegan import calibrate_mog_sigma, GANLoss, GradientPenalty, MoGParticlePrior, ParticleRegularizer
 
 DEFAULTS = {
     'posterior': 'categorical', 'gan_weight': 1., 'kl_weight': 1.,
@@ -223,7 +223,12 @@ def train(cfg):
     g = SimpleMLPGenerator(2, cfg['width']).cuda()
     d = SimpleMLPDiscriminator(hidden_dim=cfg['width']).cuda()
     prior = MoGParticlePrior(num_particles=cfg['num_particles'], z_dim=2,
-                            sigma_rel=cfg['sigma_rel'], generator=rng(cfg['seed'] + 1), device='cuda').cuda()
+                            sigma=0, generator=rng(cfg['seed'] + 1), device='cuda')
+    sigma, d0 = calibrate_mog_sigma(prior.means(), cfg['sigma_rel'])
+    prior.set_sigma(sigma)
+    prior.d0.copy_(d0)
+    prior.sigma_rel = cfg['sigma_rel']
+    prior = prior.cuda()
     e = Encoder(cfg['width']).cuda()
     initial_sigma = prior.sigma.detach().clone()
     metadata = dict(initialization_sha256=state_hash([g, d, prior, e]), sigma=float(prior.sigma),

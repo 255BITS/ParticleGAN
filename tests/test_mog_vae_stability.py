@@ -7,7 +7,7 @@ from experiments.train_mog_vae_stability import Encoder, sampled_codes, variatio
 def test_hard_forward_matches_selected_prior_component_and_has_query_surrogate():
     torch.manual_seed(12)
     e = Encoder(8).double()
-    p = MoGParticlePrior(num_particles=8, z_dim=2, sigma_rel=.025, device='cpu').double()
+    p = MoGParticlePrior(num_particles=8, z_dim=2, sigma=.025, device='cpu').double()
     x = torch.tensor([[1., 2.], [-2., 1.]], dtype=torch.float64)
     seed = 19
     z, ids, logq, u, logs = sampled_codes(e, x, p, {'posterior':'hard', 'temperature':.25},

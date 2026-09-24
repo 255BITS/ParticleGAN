@@ -15,7 +15,7 @@ from torch import nn
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from particlegan import GANLoss, GradientPenalty, MoGParticlePrior, ParticleRegularizer
+from particlegan import calibrate_mog_sigma, GANLoss, GradientPenalty, MoGParticlePrior, ParticleRegularizer
 from lib.mog_metrics import component_metrics, geometry, sample_metrics
 from lib.toy_metrics import sliced_w1
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator, sample_100gaussians
@@ -189,8 +189,13 @@ def train(arm, cfg):
     device = torch.device(cfg.device)
     g = SimpleMLPGenerator(2, cfg.width).to(device)
     d = SimpleMLPDiscriminator(hidden_dim=cfg.width).to(device)
-    prior = MoGParticlePrior(num_particles=400, z_dim=2, sigma_rel=.025,
-                             generator=draw_rng(device, cfg.seed + 1), device=device).to(device)
+    prior = MoGParticlePrior(num_particles=400, z_dim=2, sigma=0,
+                             generator=draw_rng(device, cfg.seed + 1), device=device)
+    sigma, d0 = calibrate_mog_sigma(prior.means(), .025)
+    prior.set_sigma(sigma)
+    prior.d0.copy_(d0)
+    prior.sigma_rel = .025
+    prior = prior.to(device)
     e = RoutingEncoder(cfg.width).to(device)
     initial_sigma = prior.sigma.detach().clone()
     opt_g = torch.optim.Adam([

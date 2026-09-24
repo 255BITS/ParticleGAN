@@ -11,7 +11,7 @@ def test_encoder_reconstruction_gradients_and_fixed_sigma():
     torch.manual_seed(42)
     g = ParticleDDGenerator(16, 8, DEFAULTS['alpha_bar'])
     e = ImageRoutingEncoder(16, 8)
-    p = MoGParticlePrior(num_particles=32, z_dim=16, sigma_rel=.025)
+    p = MoGParticlePrior(num_particles=32, z_dim=16, sigma=.025)
     sigma = p.sigma.clone()
     x = torch.randn(4, 3, 32, 32).tanh()
     t = torch.arange(1, 5)
