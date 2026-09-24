@@ -10,6 +10,13 @@ its Lipschitz budget (still separating, W1-like field), G reads the critic
 over up to .5, the distance D needs at full slope to move .5 logit, which is
 PR84's own uncapped width at ``s = kappa``. D, both curvature bounds and the
 game losses are unchanged. No coverage, assignment, likelihood or clip term.
+
+Optional, off by default (``trust_fall``): G's ordinary Adam displacement is
+multiplied by 0.5 only when G's own-curvature ratio has a negative delta over
+the last ``TRUST_FALL_WINDOW`` completed G updates. That is the #107 dropout
+onset (the ratio falls about 5 to 0.9 while a G-led translation grows). The
+scale and the window are fixed. The curvature bound stays .25. This is not an
+always-on .125 bound, a virtual D look-ahead, or a trust-level predicate.
 """
 
 from contextlib import contextmanager
@@ -30,6 +37,36 @@ SATURATED_UTILISATION = .6
 STALL_TRUST = .1
 STALL_WINDOW = 50
 
+# Fixed. The published onset drops from ρ ≈ 5.05 at update 1756 to ρ ≈ 1.87
+# eight G updates later, before the cloud reads 0 modes at 1769. Not swept.
+TRUST_FALL_WINDOW = 8
+TRUST_FALL_SCALE = .5
+FALLING_TRUST_METHOD = "stall_reach_g_half_when_own_curvature_falling"
+
+
+def trust_is_falling(rhos, window=TRUST_FALL_WINDOW):
+    """True when the last ``window`` own-curvature ratios have a negative delta."""
+    if len(rhos) < window:
+        return False
+    recent = rhos[-window:]
+    return recent[-1] - recent[0] < 0
+
+
+def scale_adam_displacement(ordinary_step, params, scale):
+    """Return an Adam step whose parameter displacement is ``scale`` times the proposal.
+
+    Moments still advance on the gradient the ordinary step saw. This is the
+    same displacement scaling as the #107 G×.5 fork, applied to one step.
+    """
+    def run(optimizer, closure=None):
+        before = [p.detach().clone() for p in params(optimizer)]
+        result = ordinary_step(optimizer, closure=closure)
+        with torch.no_grad():
+            for p, saved in zip(params(optimizer), before):
+                p.copy_(saved + scale * (p - saved))
+        return result
+    return run
+
 
 def reach_width(sharpness, reach=REACH, ramp="peak"):
     """``peak``: ``.5·min(u, 1/u)``. ``saturating``: PR84 until u = .3, .5 from u = .6."""
@@ -47,6 +84,11 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
     ramp = "peak"
     game_bound = False
     game_steps = 1
+    trust_fall = False
+
+    def __init__(self, *, start_step=0):
+        super().__init__(start_step=start_step)
+        self.trust_fall_halves = 0
 
     def _arm_smoothed_critic(self):
         super()._arm_smoothed_critic()
@@ -65,6 +107,12 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         if sharpness / B_CAP_SLOPE < SATURATED_UTILISATION or not recent:
             return False
         return sum(row["g"]["factor"] for row in recent) / len(recent) <= STALL_TRUST
+
+    def _trust_delta(self):
+        recent = self.records[-TRUST_FALL_WINDOW:]
+        if len(recent) < TRUST_FALL_WINDOW:
+            return None
+        return recent[-1]["g"]["rho"] - recent[0]["g"]["rho"]
 
     def phases(self, step, opt_d, opt_g, local):
         if not self.game_bound or not self.enabled or step < self.start_step:
@@ -117,6 +165,15 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
 
     @torch.no_grad()
     def step(self, optimizer, ordinary_step, closure=None):
+        if (self.trust_fall and not self.passthrough and self.phase == 1
+                and self.optimizers is not None and optimizer is self.optimizers[1]):
+            delta = self._trust_delta()
+            falling = delta is not None and delta < 0
+            self.row["g_trust_delta"] = delta
+            self.row["g_step_scale"] = TRUST_FALL_SCALE if falling else 1.
+            if falling:
+                self.trust_fall_halves += 1
+                ordinary_step = scale_adam_displacement(ordinary_step, self._params, TRUST_FALL_SCALE)
         if (not self.game_bound or self.passthrough or self.phase is None or self.phase < 2
                 or (self.phase == 2 and optimizer is self.optimizers[0])):
             return super().step(optimizer, ordinary_step, closure)
@@ -154,13 +211,21 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
                      game_bound=self.game_bound, game_steps=self.game_steps,
                      b_cap_slope=B_CAP_SLOPE,
                      widened_updates=int(sum(w > base.SMOOTH_WIDTH_CAP for w in widths)),
-                     max_width=max(widths, default=0.))
+                     max_width=max(widths, default=0.),
+                     cpu=torch.backends.cpu.get_cpu_capability())
+        if self.trust_fall:
+            value.update(method=FALLING_TRUST_METHOD, scratch_optimizer_policy=FALLING_TRUST_METHOD,
+                         trust_fall=True, trust_fall_window=TRUST_FALL_WINDOW,
+                         trust_fall_scale=TRUST_FALL_SCALE, trust_fall_halves=self.trust_fall_halves,
+                         g_curvature_bound=self.curvature_bound,
+                         trust_fall_signal="negative delta of G own-curvature ratio over a fixed window")
         return value
 
 
 @contextmanager
 def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="peak",
-                         g_curvature_bound=base.G_CURVATURE_BOUND, game_bound=False, game_steps=1):
+                         g_curvature_bound=base.G_CURVATURE_BOUND, game_bound=False, game_steps=1,
+                         trust_fall=False):
     original = base.SmoothedBothBoundRecorder
 
     def init(self, *, start_step=0):
@@ -169,7 +234,7 @@ def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="p
 
     base.SmoothedBothBoundRecorder = type("ReachRecorder", (ReachRecorder,),
                                           dict(reach=reach, ramp=ramp, game_bound=game_bound, game_steps=game_steps,
-                                               __init__=init))
+                                               trust_fall=trust_fall, __init__=init))
     try:
         with base.pr84_smoothed_candidate(task=task, start_step=start_step) as value:
             yield value
@@ -177,4 +242,5 @@ def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="p
         base.SmoothedBothBoundRecorder = original
 
 
-__all__ = ["METHOD", "ReachRecorder", "pr84_reach_candidate", "reach_width"]
+__all__ = ["FALLING_TRUST_METHOD", "METHOD", "ReachRecorder", "TRUST_FALL_SCALE",
+           "TRUST_FALL_WINDOW", "pr84_reach_candidate", "reach_width", "trust_is_falling"]
