@@ -1,0 +1,547 @@
+{
+  "audit_changed_copied_files": [
+    "compatibility.json"
+  ],
+  "audit_script_sha256": "7816832e08b62cb8b8ecb59a0e1f3dbe436648f061ad93db8c254a95426923b3",
+  "blocked_dependency_attempts": 0,
+  "bundle_root": "/tmp/simpler22-independent-audit-q4djjcjg/bundle",
+  "checker_commit": "ddfb1b37d4dc06c31c0213f4f20a8cba5ed9ea53",
+  "checker_sha256": "ea5f8a93ce396ad116c286f6906ff19607e9c06e154af4a85681d73fb7b71ca3",
+  "config_differences": {
+    "name": {
+      "new": "roundcap_k1p0_c1p0_p0p0_b0p999",
+      "old": "kappa_fine_k1176"
+    },
+    "prior_reg": {
+      "new": 0.0,
+      "old": 0.05
+    },
+    "reg_coeff": {
+      "new": 1.0,
+      "old": 6.0
+    },
+    "reg_kappa": {
+      "new": 1.0,
+      "old": 1.176
+    }
+  },
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+  "copied_bytes": 38394867,
+  "copied_files": 190,
+  "durable_audit_artifact": "/ml2/hypergan/ParticleGAN-toy-persistent-noise/artifacts/toy100-constraints/simpler22-independent-audit-ddfb1b3",
+  "durable_files_byte_matched": 204,
+  "durable_inventory_sha256": "f541c4c15a7b0233845c9d88af1bc6bf84ec76378fb61c2c9322c2cf6fe9070d",
+  "forbidden": [
+    "/dev/shm/**",
+    "**/artifacts/**",
+    "main worktree",
+    "original research worktree",
+    "uncopied bundle in checker worktree"
+  ],
+  "gate": {
+    "full_public_source_coverage": true,
+    "global_recipe_identical": true,
+    "noise_on_all19": true,
+    "passed": 22,
+    "required": 22,
+    "source_scope": "native-policy-public-package-v2",
+    "status": "PASS"
+  },
+  "gifs": [
+    {
+      "byte_identical_regeneration": true,
+      "file": "toy100/grid100/progress.gif",
+      "frames": 14,
+      "sha256": "8ba9ba5820a576e481f07d4ebd8c3c7dcaca69fa75151b7cf6173319ccdaca57"
+    },
+    {
+      "byte_identical_regeneration": true,
+      "file": "toy100/rotated100/progress.gif",
+      "frames": 14,
+      "sha256": "91d6a17696a9ea18d5dcc7acac39a596167bc05b62b4309c8ef22c4dab29f5f6"
+    },
+    {
+      "byte_identical_regeneration": true,
+      "file": "toy100/staggered100/progress.gif",
+      "frames": 14,
+      "sha256": "ec89853381be28c907e37847d88839e656276f57b7cd00a80050755ffe725a83"
+    },
+    {
+      "byte_identical_regeneration": true,
+      "file": "toy100/toy100-progress.gif",
+      "frames": 14,
+      "sha256": "0f51d0d343e5d9a6b7558dd15394f79ca28abde5753a743f47f069b9c48e9d9f"
+    }
+  ],
+  "global_recipe_fields": [
+    "lr",
+    "d_lr_mult",
+    "prior_lr_mult",
+    "betas",
+    "prior_betas",
+    "loss_type",
+    "gan_mode",
+    "reg_arm",
+    "reg_coeff",
+    "reg_kappa",
+    "reg_every",
+    "reg_method",
+    "prior_reg",
+    "ema_decay",
+    "lr_anneal_start",
+    "lr_floor"
+  ],
+  "guard_self_tests": 4,
+  "limitations": [
+    "Fixed frozen seeds/budgets; no retraining, unseen seeds, long continuation or shifted-distribution guarantee.",
+    "Python audit hooks guard Python file access/subprocesses; this is not an OS sandbox against malicious native extensions.",
+    "Historical absolute snapshot paths in GIF sidecars are provenance labels; included bytes were resolved by problem/filename and verified by SHA256.",
+    "The copied bundle does not include the historical public-default19 control; that control does not supply any candidate pass.",
+    "Checker is frozen before the forthcoming seeded-initialization verification change."
+  ],
+  "model_policy": {
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "toy100_model": "affine_square_v1"
+  },
+  "native3": {
+    "grid100": {
+      "accuracy": "PASS",
+      "coverage": "PASS",
+      "holdout": {
+        "abs_cov_trace_bias": 0.04194468812794172,
+        "accuracy_pass": true,
+        "accuracy_score": 0.46766114576244394,
+        "all_finite": true,
+        "center_max_sigma": 0.1948230758616877,
+        "center_rms_sigma": 0.08537606303918348,
+        "cov_frob_rms": 0.06533929049094327,
+        "cov_trace_bias": -0.04194468812794172,
+        "frozen_pass": true,
+        "mass_tv": 0.03577,
+        "n": 100000,
+        "passed": true,
+        "precision": 0.98285,
+        "precision_gap": 0.006041003461757732,
+        "problem": "grid100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 0.017126028796310977,
+        "valid_n": 100000,
+        "within_radius_n": 98285
+      },
+      "passed": true,
+      "status": "PASS"
+    },
+    "rotated100": {
+      "accuracy": "PASS",
+      "coverage": "PASS",
+      "holdout": {
+        "abs_cov_trace_bias": 0.038258428731347216,
+        "accuracy_pass": true,
+        "accuracy_score": 0.44145753766137086,
+        "all_finite": true,
+        "center_max_sigma": 0.21452627981121467,
+        "center_rms_sigma": 0.08119362791276416,
+        "cov_frob_rms": 0.061673788703519035,
+        "cov_trace_bias": -0.038258428731347216,
+        "frozen_pass": true,
+        "mass_tv": 0.03473,
+        "n": 100000,
+        "passed": true,
+        "precision": 0.98631,
+        "precision_gap": 0.0025810034617577138,
+        "problem": "rotated100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 0.01593777561739429,
+        "valid_n": 100000,
+        "within_radius_n": 98631
+      },
+      "passed": true,
+      "status": "PASS"
+    },
+    "staggered100": {
+      "accuracy": "PASS",
+      "coverage": "PASS",
+      "holdout": {
+        "abs_cov_trace_bias": 0.03974035798001496,
+        "accuracy_pass": true,
+        "accuracy_score": 0.4630386769703431,
+        "all_finite": true,
+        "center_max_sigma": 0.22279541133688552,
+        "center_rms_sigma": 0.0844889522300677,
+        "cov_frob_rms": 0.06332336019548686,
+        "cov_trace_bias": -0.03974035798001496,
+        "frozen_pass": true,
+        "mass_tv": 0.037630000000000004,
+        "n": 100000,
+        "passed": true,
+        "precision": 0.98911,
+        "precision_gap": 0.0002189965382423109,
+        "problem": "staggered100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 0.016205588010568706,
+        "valid_n": 100000,
+        "within_radius_n": 98911
+      },
+      "passed": true,
+      "status": "PASS"
+    }
+  },
+  "old19": [
+    {
+      "name": "two_pole",
+      "passing_suffix": 13,
+      "status": "PASS",
+      "steps": 80
+    },
+    {
+      "name": "trajectory",
+      "passing_suffix": 15,
+      "status": "PASS",
+      "steps": 400
+    },
+    {
+      "name": "residual_student",
+      "passing_suffix": 20,
+      "status": "PASS",
+      "steps": 400
+    },
+    {
+      "name": "unipolar",
+      "passing_suffix": 18,
+      "status": "PASS",
+      "steps": 400
+    },
+    {
+      "name": "ae_gan_hold",
+      "passing_suffix": 22,
+      "status": "PASS",
+      "steps": 250
+    },
+    {
+      "name": "cover_leftover",
+      "passing_suffix": 14,
+      "status": "PASS",
+      "steps": 800
+    },
+    {
+      "name": "unused_token_hold",
+      "passing_suffix": 15,
+      "status": "PASS",
+      "steps": 200
+    },
+    {
+      "name": "mid_scale_identity",
+      "passing_suffix": 17,
+      "status": "PASS",
+      "steps": 800
+    },
+    {
+      "name": "mode_hold",
+      "passing_suffix": 5,
+      "status": "PASS",
+      "steps": 1200
+    },
+    {
+      "name": "vector_two_broad",
+      "passing_suffix": 23,
+      "status": "PASS",
+      "steps": 1200
+    },
+    {
+      "name": "vector_unequal_mass",
+      "passing_suffix": 6,
+      "status": "PASS",
+      "steps": 1200
+    },
+    {
+      "name": "vector_unequal_width",
+      "passing_suffix": 8,
+      "status": "PASS",
+      "steps": 1200
+    },
+    {
+      "name": "vector_anisotropic",
+      "passing_suffix": 19,
+      "status": "PASS",
+      "steps": 1200
+    },
+    {
+      "name": "vector_overlap",
+      "passing_suffix": 8,
+      "status": "PASS",
+      "steps": 1200
+    },
+    {
+      "name": "vector_spiral",
+      "passing_suffix": 23,
+      "status": "PASS",
+      "steps": 1600
+    },
+    {
+      "name": "img_stripes2",
+      "passing_suffix": 8,
+      "status": "PASS",
+      "steps": 600
+    },
+    {
+      "name": "img_bars4",
+      "passing_suffix": 7,
+      "status": "PASS",
+      "steps": 600
+    },
+    {
+      "name": "img_blobs4",
+      "passing_suffix": 19,
+      "status": "PASS",
+      "steps": 600
+    },
+    {
+      "name": "img_intensity2",
+      "passing_suffix": 5,
+      "status": "PASS",
+      "steps": 600
+    }
+  ],
+  "opened_evidence_files": [
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/README.md",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/accuracy.log",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19.log",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/constraints_simple_regularization.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__ae_gan_hold.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__cover_leftover.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__img_bars4.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__img_blobs4.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__img_intensity2.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__img_stripes2.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__mid_scale_identity.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__mode_hold.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__residual_student.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__trajectory.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__two_pole.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__unipolar.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__unused_token_hold.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__vector_anisotropic.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__vector_overlap.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__vector_spiral.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__vector_two_broad.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__vector_unequal_mass.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/episodes/roundcap_k1p0_c1p0_p0p0_b0p999__vector_unequal_width.json.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/index.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/noise_source.py",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/protocol.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/source.tar.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/candidate19/summary.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/command_returns.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/compatibility.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/compatibility.md",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/render.log",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/retention.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100.log",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/accuracy-gate-grid100.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/accuracy-gate.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/accuracy-leaderboard-grid100.md",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/accuracy-leaderboard.md",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/gate.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/config.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/events.jsonl",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/final_samples.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/holdout_samples.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/progress.gif",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/progress.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/progress.log",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/provenance.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/quality_checks/step_006000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/quality_checks/step_006250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/quality_checks/step_006500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/quality_checks/step_006750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/quality_checks/step_007000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_000000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_000001.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_000010.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_000025.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_000050.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_000100.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_000250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_000500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_000750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_001000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_001250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_001500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_001750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_002000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_002250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_002500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_002750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_003000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_003250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_003500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_003750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_004000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_004250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_004500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_004750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_005000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_005250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_005500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_005750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_006000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_006250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_006500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_006750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/snapshots/step_007000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/source.tar.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/grid100/summary.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/leaderboard.md",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/config.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/events.jsonl",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/final_samples.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/holdout_samples.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/progress.gif",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/progress.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/progress.log",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/provenance.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/quality_checks/step_006000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/quality_checks/step_006250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/quality_checks/step_006500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/quality_checks/step_006750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/quality_checks/step_007000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_000000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_000001.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_000010.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_000025.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_000050.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_000100.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_000250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_000500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_000750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_001000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_001250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_001500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_001750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_002000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_002250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_002500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_002750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_003000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_003250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_003500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_003750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_004000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_004250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_004500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_004750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_005000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_005250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_005500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_005750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_006000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_006250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_006500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_006750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/snapshots/step_007000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/source.tar.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/rotated100/summary.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/run_manifest.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/config.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/events.jsonl",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/final_samples.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/holdout_samples.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/progress.gif",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/progress.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/progress.log",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/provenance.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/quality_checks/step_006000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/quality_checks/step_006250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/quality_checks/step_006500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/quality_checks/step_006750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/quality_checks/step_007000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_000000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_000001.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_000010.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_000025.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_000050.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_000100.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_000250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_000500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_000750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_001000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_001250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_001500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_001750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_002000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_002250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_002500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_002750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_003000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_003250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_003500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_003750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_004000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_004250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_004500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_004750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_005000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_005250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_005500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_005750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_006000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_006250.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_006500.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_006750.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/snapshots/step_007000.npz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/source.tar.gz",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/staggered100/summary.json",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/toy100-progress.gif",
+    "/tmp/simpler22-independent-audit-q4djjcjg/bundle/toy100/toy100-progress.json"
+  ],
+  "public_package_source_files": 12,
+  "retention_aggregate_changes": [
+    {
+      "actual": "c91af06a1475b700c82d6af3498a7e4a9149cd7a1ffecfd97d803b1ccefd4e18",
+      "initial": "42be489f535e2fb3694908f159cb014e16e57893b11764553e589f030765423d",
+      "path": "compatibility.json"
+    }
+  ],
+  "seconds": 22.006967361085117,
+  "shared_noise": {
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.5,
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.2
+  },
+  "shared_source_files": 23,
+  "source_archives": [
+    {
+      "files_verified": 118,
+      "label": "candidate19",
+      "separately_archived": [
+        {
+          "path": "noise_source.py",
+          "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+          "source": "benchmarks/toy100/models.py"
+        }
+      ],
+      "sha256": "6adce2639131b743c198389402878bda6d89329e660bc5eadfbbff42404a8ee3"
+    },
+    {
+      "files_verified": 23,
+      "label": "grid100",
+      "separately_archived": [],
+      "sha256": "7472a84dbdda8b13934d10ccd8d2b8786e298473371e2f2a4136ee84c8f61910"
+    },
+    {
+      "files_verified": 23,
+      "label": "rotated100",
+      "separately_archived": [],
+      "sha256": "f394b3030d3ad3ad62c04c684cc10fe8c8110c10a03001404ce00227f7af25b5"
+    },
+    {
+      "files_verified": 23,
+      "label": "staggered100",
+      "separately_archived": [],
+      "sha256": "af63fc200f1df243e638917fa6a5db71741369fd1bd4c8e0690596c1ffc4631b"
+    }
+  ],
+  "status": "PASS"
+}
