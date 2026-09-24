@@ -1,0 +1,95 @@
+{
+  "epochs": {
+    "v1": {
+      "all_cheap_gates_pass": true,
+      "files": {
+        "declaration.json": {
+          "bytes": 2601,
+          "sha256": "1b13e9fb5e3ca90fc8f7a19c3cf18d8011a83a7aed5db83c420f1e5e5362fe20"
+        },
+        "result.json": {
+          "bytes": 53727,
+          "sha256": "08c095641127415f31e47f6f3a0756fa923f5b902417494c11353b5c89b7df69"
+        },
+        "source/benchmarks/locked_shared/mlp.py": {
+          "bytes": 2289,
+          "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+        },
+        "source/benchmarks/locked_shared/mode_hold.py": {
+          "bytes": 10774,
+          "sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+        },
+        "source/reports/toy100/coverage_fixed_eval.py": {
+          "bytes": 3996,
+          "sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e"
+        },
+        "source/reports/toy100/forward_kl_free_filter.py": {
+          "bytes": 15553,
+          "sha256": "7e56baa51efcf2921ac60033e778a770b6c65346c329420e985f5f71464cadec"
+        },
+        "source/reports/toy100/pr84_early_geometry.py": {
+          "bytes": 7322,
+          "sha256": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45"
+        },
+        "source/reports/toy100/sample_anchor_free1200.py": {
+          "bytes": 12051,
+          "sha256": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656"
+        },
+        "source/reports/toy100/sample_anchor_local_mmd_filter.py": {
+          "bytes": 11158,
+          "sha256": "9882aec980fb2c7680f6e5da2fc42b4c9a2b80ab27a9c1cd15026dad87d2da55"
+        },
+        "source/reports/toy100/sample_anchor_mmd_filter.py": {
+          "bytes": 11720,
+          "sha256": "d38f1eba9760cc83ee09af4ef6301b4ac15d022d153c45ffc65eded098dbc49a"
+        }
+      }
+    },
+    "v2": {
+      "all_cheap_gates_pass": true,
+      "files": {
+        "declaration.json": {
+          "bytes": 2807,
+          "sha256": "ef1f148c27b03757ffba6ce379ca5efc77704b704bed2907dc15e2260c40c072"
+        },
+        "result.json": {
+          "bytes": 64430,
+          "sha256": "c46050456c42f672eaea8454eee77520a067f54e5c6b3554f3b50b03cf122462"
+        },
+        "source/benchmarks/locked_shared/mlp.py": {
+          "bytes": 2289,
+          "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+        },
+        "source/benchmarks/locked_shared/mode_hold.py": {
+          "bytes": 10774,
+          "sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+        },
+        "source/reports/toy100/coverage_fixed_eval.py": {
+          "bytes": 3996,
+          "sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e"
+        },
+        "source/reports/toy100/forward_kl_free_filter.py": {
+          "bytes": 15806,
+          "sha256": "0cc098d63efb2460dc038b897d5db532b9f87115ffbd5a78e42ee042ed21c873"
+        },
+        "source/reports/toy100/pr84_early_geometry.py": {
+          "bytes": 7322,
+          "sha256": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45"
+        },
+        "source/reports/toy100/sample_anchor_free1200.py": {
+          "bytes": 12051,
+          "sha256": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656"
+        },
+        "source/reports/toy100/sample_anchor_local_mmd_filter.py": {
+          "bytes": 11158,
+          "sha256": "9882aec980fb2c7680f6e5da2fc42b4c9a2b80ab27a9c1cd15026dad87d2da55"
+        },
+        "source/reports/toy100/sample_anchor_mmd_filter.py": {
+          "bytes": 11720,
+          "sha256": "d38f1eba9760cc83ee09af4ef6301b4ac15d022d153c45ffc65eded098dbc49a"
+        }
+      }
+    }
+  },
+  "scope": "pure-output first native real bank, no neural training"
+}

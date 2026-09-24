@@ -1,0 +1,37 @@
+{
+  "scope": "one native D real bank, two saved clean output clouds; no training",
+  "source": {
+    "reports/toy100/forward_kl_free_filter.py": "7e56baa51efcf2921ac60033e778a770b6c65346c329420e985f5f71464cadec",
+    "reports/toy100/sample_anchor_free1200.py": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+    "reports/toy100/sample_anchor_local_mmd_filter.py": "9882aec980fb2c7680f6e5da2fc42b4c9a2b80ab27a9c1cd15026dad87d2da55",
+    "reports/toy100/sample_anchor_mmd_filter.py": "d38f1eba9760cc83ee09af4ef6301b4ac15d022d153c45ffc65eded098dbc49a",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/pr84_early_geometry.py": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+  },
+  "input_hashes": {
+    "cold_compressed_sha256": "0371f70c5139cb04678bcfe06455e257d2f8bb0848062443f6ca711c3f772665",
+    "cold_raw_sha256": "002b3019c42c77414cb4f853db7818bba79bffab095f0d19052e4517ff45392d",
+    "warm_compressed_sha256": "77b24bbaf646befe70ac97f23a944d32717306e4ff0b1b8d8b6ff107dfef82f9",
+    "warm_full_sidecar_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47"
+  },
+  "native_real_bank_sha256": "a2178917c754f20123a7c950d6e3cbaa8325114c20c4b0bda68c52d9e7ceeb19",
+  "data_rng_after_bank_sha256": "f9fa9436941bd0408d9d347366bbddeb8abdfa339862985e7ababc9e99f89c99",
+  "target": "empirical real bank convolved with N(0,h\u00b2I)",
+  "generated": "equal-weight N Gaussian atoms with covariance (actual output sigma\u00b2+h\u00b2)I",
+  "width_rule": "median strictly positive nearest-neighbor distance of first cold native D bank",
+  "frozen_width": 0.031286240422040236,
+  "fixed_quadrature": "5x5 GH target nodes/positive weights",
+  "audit_quadrature": "independent 9x9 GH at every accepted state; never selects an update",
+  "donor": "global best real-coordinate replacement, at most12 strict cross-entropy decreases",
+  "em": "at most20 fixed-equal-weight/covariance EM center M-steps, actual quadrature nonincrease",
+  "actual_output_sigma": {
+    "cold1": 0.0,
+    "warm1324": 0.029
+  },
+  "cheap_gate": "both strict 5x5 descent; no 9x9 accepted-step sign flip; warm final8/HQ>=.9; cold final at least one mode and HQ>initial",
+  "no_oracle_width_or_update": true,
+  "no_seed_or_budget_sweep": true,
+  "shared_gate_eligible": false
+}
