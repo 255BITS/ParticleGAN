@@ -1,0 +1,40 @@
+{
+  "advance_rule": "all three same-noise checks strictly improve over one-sided projection and meet unchanged 8 modes/HQ>=.9; then warm training is still required",
+  "backward_coefficient": 1.0,
+  "diagnosis_sha256": "773a901304e03d82f7d1d817827084303fe40fa37b55714388ba892a88c8131c",
+  "evaluation": {
+    "center_access": "diagnostic scoring only, absent from correction helper",
+    "output_noise_seed": "402+step",
+    "output_sigma": 0.029,
+    "prior_index_seed": 9,
+    "samples": 4096
+  },
+  "forward_coefficient": 1.0,
+  "max_halves": 8,
+  "moments": "metric supplied from already-advanced Adam; no optimizer instantiated or stepped",
+  "original_final_state_sha256": "e73693ece461eb81074c1dc3c3df4c73b04e1535e0178d3a891bc3716db7a236",
+  "pinv_rtol": 1e-06,
+  "runtime": {
+    "cpu_capability": "AVX2",
+    "python": "3.12.13",
+    "threads": 1,
+    "torch": "2.13.0+cu126"
+  },
+  "scope": "isolated_same_post_GAN_state_counterfactual_no_training",
+  "scratch_optimizer_policy": "unit_mean_bidirectional_chamfer_prior_pullback",
+  "shared_gate_eligible": false,
+  "source_sha256": {
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "reports/toy100/chamfer_pullback.py": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+    "reports/toy100/chamfer_state_filter.py": "75e84b450b28ce0dd8d5626bf7c800008316147c8887e01a3f582976887124bd",
+    "tests/test_chamfer_pullback.py": "e0940be660fb2bcdf1798779d8209c9e13eed3a278da53d6f6c4bc4f137a3bad"
+  },
+  "states_sha256": "45e1b0e5d14fcc54c420205d6c221330721a4d1740f85efaf9726866023d4b24",
+  "steps": [
+    1133,
+    1148,
+    1186
+  ],
+  "warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21"
+}

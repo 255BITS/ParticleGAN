@@ -1,0 +1,14 @@
+{
+  "declaration.json": "b50f19365d8f66e87641ec011449dd1acb7b3c4edcc3a0371260b0847d60c347",
+  "diagnosis.json.gz": "2aab5a7171d1ffa7830df4f1c2dfbb194b057e607c3f950372186d6a1225a6db",
+  "invalid-input-schema/chamfer_state_filter.py": "75e84b450b28ce0dd8d5626bf7c800008316147c8887e01a3f582976887124bd",
+  "invalid-input-schema/declaration.json": "6edbc48bc85c1baacf47464ed35a65d5fc96e1f7f4d3678782cf5d7c83888f97",
+  "invalid-input-schema/harness-error.json": "6b02bee12f1f8516db5e0044dc2961b0b6b54dde134a20c1815a736f708b06f5",
+  "result.json": "20751ead431a93cc1764acc291f15b6949a0fd56f1b50bc5536b631b9a3cc340",
+  "sources/benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+  "sources/benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+  "sources/reports/toy100/chamfer_pullback.py": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+  "sources/reports/toy100/chamfer_state_filter.py": "91af6d2be91a41a7ffbddd3ce314b3e6c4510d925e277f09639b5c9b482a3cc9",
+  "sources/tests/test_chamfer_pullback.py": "e0940be660fb2bcdf1798779d8209c9e13eed3a278da53d6f6c4bc4f137a3bad",
+  "states.pt": "45e1b0e5d14fcc54c420205d6c221330721a4d1740f85efaf9726866023d4b24"
+}

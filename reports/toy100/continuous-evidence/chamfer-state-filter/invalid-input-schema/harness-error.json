@@ -1,0 +1,6 @@
+{
+  "status": "INVALID_HARNESS_INPUT_SCHEMA",
+  "error": "KeyError: '1133'; saved sidecar uses integer step keys",
+  "counterfactual_corrections_executed": 0,
+  "repair": "normalize loaded step keys to integers; helper and declared method unchanged"
+}
