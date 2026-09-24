@@ -1,0 +1,10 @@
+{"event": "DECLARED", "phase": "warm", "method": "reachstall_drop", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX2", "shared_gate_eligible": false, "purity": "mode-drop G freeze: after the first 8-mode HQ>=0.9 state, skip the G parameter write while modes<=6 and resume at modes>=7. Stall reach width, curvature bounds, and rates are unchanged. No coverage loss, anchor, assignment, or clip ladder."}
+{"event": "VARIANT_START", "variant": "identity"}
+{"event": "VARIANT_START", "variant": "reachstall_drop"}
+{"event": "MODE_DROP_ARMED", "state_step": 1000, "modes": 8, "hq": 1.0}
+{"event": "VARIANT_DONE", "variant": "identity"}
+{"event": "VARIANT_DONE", "variant": "reachstall_drop"}
+{"event": "WARM", "variant": "identity", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.989990234375, "failing_steps": []}
+{"event": "WARM", "variant": "reachstall_drop", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.920654296875, "failing_steps": []}
+{"event": "DONE"}
+EXIT:0
