@@ -1,0 +1,56 @@
+{
+  "actual_batch_plus_heldout": 17,
+  "actual_bounded_replay_tolerance": 1e-06,
+  "actual_unbounded_output_exact": true,
+  "capture_commit": "854ebd0",
+  "capture_compact_states_sha256": "77b24bbaf646befe70ac97f23a944d32717306e4ff0b1b8d8b6ff107dfef82f9",
+  "capture_full_states_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47",
+  "capture_v2_diagnosis_sha256": "abc56787e8ba51fac5704b90c7fc36aa0fff76d313a551668969c3a1c4c1aa4f",
+  "files": [
+    {
+      "bytes": 20647,
+      "path": "reports/toy100/pr84_heldout_signal.py",
+      "sha256": "06984409baeb279f7b6ed119ee3beb407d9812368d1bd574230a5c349a0f8c1f"
+    },
+    {
+      "bytes": 5718,
+      "path": "reports/toy100/pr84-heldout-signal.md",
+      "sha256": "a8692f3c5e5a910b60aa428805ffcdb5ea0591011fa970d625a555e183b29c93"
+    },
+    {
+      "bytes": 1169,
+      "path": "tests/test_pr84_heldout_signal.py",
+      "sha256": "a41ce06a6879b12b0e4275f7feb670388e3220f3edaa0fb83b531918d71f0dde"
+    },
+    {
+      "bytes": 28595,
+      "path": "reports/toy100/continuous-evidence/pr84-heldout-signal/heldout-v2.json.gz",
+      "sha256": "a0cf455f323c08f8eb71b6143fe287de7f3d58eb7b6f74fe7c9cd9fe0f9c94df"
+    },
+    {
+      "bytes": 28568,
+      "path": "reports/toy100/continuous-evidence/pr84-heldout-signal/heldout-v2-full-parity.json.gz",
+      "sha256": "5c466c248c7b77d456c58e6a73f0c6a886eb1b5b31ce9d43645ced0ec75612e1"
+    }
+  ],
+  "fixed_post_d_steps": [
+    1324,
+    1325,
+    1389,
+    1539,
+    1540
+  ],
+  "full_sidecar_actual_unbounded_state_exact": true,
+  "heldout_batches_per_state": 16,
+  "portable_and_full_numeric_rows_equal": true,
+  "runtime": {
+    "cpu_capability": "AVX2",
+    "python": "3.12.13",
+    "threads": 1,
+    "torch": "2.13.0+cu126"
+  },
+  "schema": "pr84-heldout-signal-v2",
+  "scope": "fixed_post_d_saved_state_diagnostic_only",
+  "source_head": "576739f5ece2ac6921ba15f3fefdb438d6b80c76",
+  "training_updates": 0
+}
