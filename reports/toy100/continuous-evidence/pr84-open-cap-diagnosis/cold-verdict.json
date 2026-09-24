@@ -1,0 +1,70 @@
+{
+  "verdict": {
+    "status": "PASS",
+    "attempted": true,
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "modes",
+        "value": 8,
+        "op": ">=",
+        "threshold": 8,
+        "status": "PASS",
+        "margin": 0
+      },
+      {
+        "metric": "hq",
+        "value": 0.998779296875,
+        "op": ">=",
+        "threshold": 0.9,
+        "status": "PASS",
+        "margin": 0.09877929687499998
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 10,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 5,
+      "first_pass_step": 700,
+      "stable_from_step": 1000,
+      "stable_from_seconds": 24.202031363999993,
+      "confirmed_step": 1200,
+      "confirmed_seconds": 29.043378126999983
+    },
+    "shortfall": 0.0,
+    "confirmation_fraction": 1.0
+  },
+  "live": {
+    "modes": 8,
+    "hq": 0.998779296875
+  },
+  "terminal": [
+    {
+      "step": 1000,
+      "modes": 8,
+      "hq": 0.9951171875
+    },
+    {
+      "step": 1050,
+      "modes": 8,
+      "hq": 0.98779296875
+    },
+    {
+      "step": 1100,
+      "modes": 8,
+      "hq": 0.988037109375
+    },
+    {
+      "step": 1150,
+      "modes": 8,
+      "hq": 0.99560546875
+    },
+    {
+      "step": 1200,
+      "modes": 8,
+      "hq": 0.998779296875
+    }
+  ]
+}

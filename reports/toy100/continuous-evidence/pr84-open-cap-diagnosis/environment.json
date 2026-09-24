@@ -1,0 +1,14 @@
+{
+  "torch": "2.14.0+cpu",
+  "python": "3.12.3",
+  "sources": {
+    "reports/toy100/pr84_open_cap_diagnosis.py": "b11e2ca7f0a6549e23c14b006e630c0b2086235f150098d4757ff98f6e0c8020",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+  },
+  "g_bound": 0.25,
+  "d_bound": 3.0,
+  "shared_gate_eligible": false
+}
