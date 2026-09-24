@@ -1,0 +1,64 @@
+{
+  "scope": "first native minibatch per fixed production task; no training",
+  "seed": 1234,
+  "batch_size": 2048,
+  "learned_particles": 20000,
+  "noise_std": 0.03,
+  "source_sha256": {
+    "reports/toy100/sample_anchor_production_geometry.py": "7f0b94949eb4f8f79ccad247983543e9b331c16461990124e78ee858c7221baf",
+    "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+    "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+    "benchmarks/toy100/train.py": "e3ddc12318f31adf555ee23cc2a7e0e9c4f18c8b21f7cba8bf9dbe4d369be59a",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+  },
+  "cases": [
+    {
+      "problem": "grid100",
+      "first_real_bank_sha256": "86381301405534db66f3c17042d25a9564218392bd24ff778160445d92f7927b",
+      "inferred_groups": 100,
+      "diagnostic_target_groups": 100,
+      "diagnostic_observed_groups": 100,
+      "diagnostic_omitted_groups": 0,
+      "diagnostic_min_count": 11,
+      "diagnostic_max_count": 31,
+      "diagnostic_group_purity": 1.0,
+      "largest_within_mst_edge": 0.07490574475846558,
+      "smallest_between_mst_edge": 0.7942531832605857,
+      "largest_additive_gap": 0.7193474385021201,
+      "second_largest_gap": 0.03452942050516339,
+      "data_rng_after_first_bank_sha256": "e09c660cf003bbaa788fad609dcc94206443f8fcb7b78a73cf18db719fbede3e"
+    },
+    {
+      "problem": "rotated100",
+      "first_real_bank_sha256": "45732b5ba327ae781e406749fe3cecd38d0348fe4a58d592f05e16cde55482b3",
+      "inferred_groups": 100,
+      "diagnostic_target_groups": 100,
+      "diagnostic_observed_groups": 100,
+      "diagnostic_omitted_groups": 0,
+      "diagnostic_min_count": 11,
+      "diagnostic_max_count": 31,
+      "diagnostic_group_purity": 1.0,
+      "largest_within_mst_edge": 0.07490568372218867,
+      "smallest_between_mst_edge": 0.8030258823680266,
+      "largest_additive_gap": 0.728120198645838,
+      "second_largest_gap": 0.017839810840681758,
+      "data_rng_after_first_bank_sha256": "e09c660cf003bbaa788fad609dcc94206443f8fcb7b78a73cf18db719fbede3e"
+    },
+    {
+      "problem": "staggered100",
+      "first_real_bank_sha256": "0ce6800c8dc058bd2fd8908b8b0ef9dddf05de095635e5b07d3c06086dc32133",
+      "inferred_groups": 100,
+      "diagnostic_target_groups": 100,
+      "diagnostic_observed_groups": 100,
+      "diagnostic_omitted_groups": 0,
+      "diagnostic_min_count": 11,
+      "diagnostic_max_count": 31,
+      "diagnostic_group_purity": 1.0,
+      "largest_within_mst_edge": 0.07490574475846558,
+      "smallest_between_mst_edge": 0.8068804288025899,
+      "largest_additive_gap": 0.7319746840441244,
+      "second_largest_gap": 0.013678459547384225,
+      "data_rng_after_first_bank_sha256": "e09c660cf003bbaa788fad609dcc94206443f8fcb7b78a73cf18db719fbede3e"
+    }
+  ]
+}
