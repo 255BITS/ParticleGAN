@@ -10,12 +10,23 @@ its Lipschitz budget (still separating, W1-like field), G reads the critic
 over up to .5, the distance D needs at full slope to move .5 logit, which is
 PR84's own uncapped width at ``s = kappa``. D, both curvature bounds and the
 game losses are unchanged. No coverage, assignment, likelihood or clip term.
+
+Optional post-arm G reject, off unless ``adv_reject`` is set. After a logged
+ring check first reports 8 modes and HQ >= 0.9, keep a ring of the trainer's
+existing critic advantage (``log(2) - D loss`` on the phase-0 sharp critic).
+When the 50-step mean has fallen by at least 0.10 from the mean 50 updates
+earlier, skip that update's G Adam step and zero G's gradients. D still steps.
+Mode count only arms the mechanism. It is not a loss and not the predicate.
 """
 
+from collections import deque
 from contextlib import contextmanager
+import json
+import math
 
 import torch
 
+from benchmarks.locked_shared.observation import set_ring_listener
 from reports.toy100 import pr84_smoothed_candidate as base
 from reports.toy100.alternating_curvature_scratch import _rho
 
@@ -29,6 +40,35 @@ REST_UTILISATION = .3
 SATURATED_UTILISATION = .6
 STALL_TRUST = .1
 STALL_WINDOW = 50
+# Fixed. Post-arm ring of the existing critic advantage. Not a coefficient sweep.
+ADV_WINDOW = 50
+ADV_DROP = .10
+ACQUIRE_BUDGET = 1200
+DROPOUT_LO = 1720
+DROPOUT_HI = 2150
+
+
+def advantage_means(values, window=ADV_WINDOW):
+    """``(m_{t-window}, m_t)`` from a ring of per-update critic advantages."""
+    if len(values) < 2 * window:
+        return None
+    recent = list(values)[-window:]
+    lagged = list(values)[-2 * window:-window]
+    return sum(lagged) / window, sum(recent) / window
+
+
+def advantage_collapsed(values, drop=ADV_DROP, window=ADV_WINDOW):
+    """True when the 50-step mean advantage fell by at least ``drop`` vs 50 updates earlier.
+
+    The predicate reads only the advantage ring. Mode count is not an input.
+    """
+    means = advantage_means(values, window)
+    if means is None:
+        return False
+    lagged, recent = means
+    delta = lagged - recent
+    # Literal 0.10. The ulp absorbs a binary rounding of that same constant.
+    return math.isfinite(delta) and (delta >= drop or math.isclose(delta, drop, rel_tol=0.0, abs_tol=1e-12))
 
 
 def reach_width(sharpness, reach=REACH, ramp="peak"):
@@ -47,6 +87,77 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
     ramp = "peak"
     game_bound = False
     game_steps = 1
+    adv_reject = False
+
+    def __init__(self, *, start_step=0):
+        super().__init__(start_step=start_step)
+        self.armed = False
+        self.arm_update = None
+        self.arm_phase = None
+        self.adv_buf = deque(maxlen=2 * ADV_WINDOW)
+        self.adv_checks = 0
+        self.reject_steps = []
+        self._adv_pushed = False
+        self._g_rejected = False
+
+    def note_ring(self, step, modes, hq):
+        """Arm once on an already-logged ring check. Not a loss and not a predicate."""
+        if not self.adv_reject or self.armed:
+            return
+        try:
+            modes, hq, step = int(modes), float(hq), int(step)
+        except (TypeError, ValueError):
+            return
+        if modes != 8 or not math.isfinite(hq) or hq < .9:
+            return
+        self.armed = True
+        self.arm_update = step
+        if self.start_step > 0:
+            self.arm_phase = "warm"
+        elif step <= ACQUIRE_BUDGET:
+            self.arm_phase = "cold_acquire"
+        else:
+            self.arm_phase = "stay"
+        print(json.dumps(dict(event="ADV_ARM", step=step, phase=self.arm_phase)), flush=True)
+
+    def _adv_watching(self, optimizer):
+        return (self.adv_reject and self.armed and self.enabled and not self.passthrough
+                and self.phase is not None and self.optimizers is not None
+                and optimizer is self.optimizers[1])
+
+    def _push_advantage(self):
+        if self._adv_pushed:
+            return
+        value = self.advantage
+        if value is None:
+            return
+        value = float(value)
+        if not math.isfinite(value):
+            return
+        self.adv_buf.append(value)
+        self._adv_pushed = True
+
+    def _reject_g_adam(self, optimizer, lagged, recent):
+        """Skip this G Adam step. Moments stay put. D has already stepped."""
+        self.rows[optimizer]["calls"] += 1
+        for param in self._params(optimizer):
+            if param.grad is not None:
+                param.grad.zero_()
+        self._g_rejected = True
+        step = int(self.row.get("outer_step", self.outer_steps + 1))
+        self.reject_steps.append(step)
+        kind = ("dropout" if DROPOUT_LO <= step <= DROPOUT_HI else
+                "acquire" if step <= ACQUIRE_BUDGET else "stay")
+        print(json.dumps(dict(event="ADV_REJECT", step=step, kind=kind,
+                              m_lag=lagged, m_t=recent, drop=lagged - recent)), flush=True)
+
+    def _close_rejected_g(self, optimizer):
+        """No G proposal was taken, so the curvature closer has nothing to scale."""
+        self.rows[optimizer]["calls"] += 1
+        self.row["g"] = dict(rho=0.0, factor=0.0, rejected=True)
+        self.row["g_rejected"] = True
+        self._g_rejected = False
+        return None
 
     def _arm_smoothed_critic(self):
         super()._arm_smoothed_critic()
@@ -67,6 +178,8 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         return sum(row["g"]["factor"] for row in recent) / len(recent) <= STALL_TRUST
 
     def phases(self, step, opt_d, opt_g, local):
+        self._adv_pushed = False
+        self._g_rejected = False
         if not self.game_bound or not self.enabled or step < self.start_step:
             yield from super().phases(step, opt_d, opt_g, local)
             return
@@ -117,6 +230,20 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
 
     @torch.no_grad()
     def step(self, optimizer, ordinary_step, closure=None):
+        if self._adv_watching(optimizer) and not self.game_bound and self.phase == 1:
+            self._push_advantage()
+            means = advantage_means(self.adv_buf)
+            if means is not None:
+                self.adv_checks += 1
+                lagged, recent = means
+                self.row["adv_m_lag"] = lagged
+                self.row["adv_m"] = recent
+                if advantage_collapsed(self.adv_buf):
+                    self._reject_g_adam(optimizer, lagged, recent)
+                    return None
+        if (self._adv_watching(optimizer) and not self.game_bound and self.phase == 2
+                and self._g_rejected):
+            return self._close_rejected_g(optimizer)
         if (not self.game_bound or self.passthrough or self.phase is None or self.phase < 2
                 or (self.phase == 2 and optimizer is self.optimizers[0])):
             return super().step(optimizer, ordinary_step, closure)
@@ -155,12 +282,22 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
                      b_cap_slope=B_CAP_SLOPE,
                      widened_updates=int(sum(w > base.SMOOTH_WIDTH_CAP for w in widths)),
                      max_width=max(widths, default=0.))
+        if self.adv_reject:
+            steps = self.reject_steps
+            value.update(adv_reject=True, adv_armed=self.armed,
+                         adv_arm_update=self.arm_update, adv_arm_phase=self.arm_phase,
+                         adv_checks=self.adv_checks, adv_fires=len(steps),
+                         adv_fires_acquire=sum(s <= ACQUIRE_BUDGET for s in steps),
+                         adv_fires_stay=sum(s > ACQUIRE_BUDGET for s in steps),
+                         adv_fires_dropout=sum(DROPOUT_LO <= s <= DROPOUT_HI for s in steps),
+                         adv_window=ADV_WINDOW, adv_drop=ADV_DROP)
         return value
 
 
 @contextmanager
 def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="peak",
-                         g_curvature_bound=base.G_CURVATURE_BOUND, game_bound=False, game_steps=1):
+                         g_curvature_bound=base.G_CURVATURE_BOUND, game_bound=False, game_steps=1,
+                         adv_reject=False):
     original = base.SmoothedBothBoundRecorder
 
     def init(self, *, start_step=0):
@@ -169,12 +306,17 @@ def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="p
 
     base.SmoothedBothBoundRecorder = type("ReachRecorder", (ReachRecorder,),
                                           dict(reach=reach, ramp=ramp, game_bound=game_bound, game_steps=game_steps,
-                                               __init__=init))
+                                               adv_reject=bool(adv_reject), __init__=init))
     try:
         with base.pr84_smoothed_candidate(task=task, start_step=start_step) as value:
-            yield value
+            previous = set_ring_listener(value[0].note_ring) if adv_reject else None
+            try:
+                yield value
+            finally:
+                if adv_reject:
+                    set_ring_listener(previous)
     finally:
         base.SmoothedBothBoundRecorder = original
 
 
-__all__ = ["METHOD", "ReachRecorder", "pr84_reach_candidate", "reach_width"]
+__all__ = ["METHOD", "ReachRecorder", "advantage_collapsed", "pr84_reach_candidate", "reach_width"]

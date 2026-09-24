@@ -12,6 +12,7 @@ from contextlib import contextmanager
 import hashlib
 import importlib
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -33,6 +34,8 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "reachstall_adv": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
+                       dict(ramp="stall", adv_reject=True)),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
@@ -61,8 +64,11 @@ def declare(output, phase, method):
     source = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
               for name in SOURCES if (ROOT / name).exists()}
     import torch
+    pins = ("ATEN_CPU_CAPABILITY", "MKL_ENABLE_INSTRUCTIONS", "ONEDNN_MAX_CPU_ISA", "DNNL_MAX_CPU_ISA")
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
-               cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
+               cpu=torch.backends.cpu.get_cpu_capability(),
+               cpu_env={name: os.environ.get(name) for name in pins},
+               shared_gate_eligible=False,
                purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
                source=source)
     (output / "declaration.json").write_text(json.dumps(row, indent=2) + "\n")
@@ -84,7 +90,8 @@ def warm(output, method):
         recorder.enabled = name == method
         completed, target = state["completed_steps"], state["target_steps"]
         recorder.accounting = lambda calls, outer: state["declare_optimizer_accounting"](
-            calls=completed + calls + (target - completed - outer), moment_updates=target)
+            calls=completed + calls + (target - completed - outer), moment_updates=target,
+            moment_lag=len(getattr(recorder, "reject_steps", ())))
         receipt = dict(method=name, shared_gate_eligible=False)
         if name == "identity":
             yield receipt
@@ -93,7 +100,11 @@ def warm(output, method):
                 receipt.update(rates)
                 yield receipt
             receipt.update(_dynamics(recorder))
-        emit(event="VARIANT_DONE", variant=name)
+        fires = list(getattr(recorder, "reject_steps", ()))
+        emit(event="VARIANT_DONE", variant=name, armed=bool(getattr(recorder, "armed", False)),
+             arm_update=getattr(recorder, "arm_update", None),
+             adv_fires=len(fires),
+             adv_fires_dropout=sum(1720 <= s <= 2150 for s in fires))
 
     config = json.loads((ROOT / "configs/toy100/constraints_simple_regularization.json").read_text())
     result = run_warm_variants(
@@ -107,6 +118,13 @@ def warm(output, method):
         emit(event="WARM", variant=name, status=row["status"],
              **{k: loc.get(k) for k in ("checks", "passing_checks", "min_modes", "min_hq",
                                         "failing_steps") if k in loc})
+    control = compact.get("identity", {}).get("local", {})
+    ranked = control.get("checks") == 200 and control.get("passing_checks") == 200
+    emit(event="WARM_CONTROL", ranked=ranked, checks=control.get("checks"),
+         passing_checks=control.get("passing_checks"), min_hq=control.get("min_hq"))
+    if not ranked:
+        emit(event="WARM_INVALID", reason="unchanged control is not 200/200; warm is not rankable")
+        raise SystemExit(3)
 
 
 def cold(output, method, tasks):
@@ -150,7 +168,8 @@ def stay(output, method, steps):
         def hook(state):
             declare_calls = state["declare_optimizer_accounting"]
             recorder.accounting = lambda calls, outer: declare_calls(
-                calls=calls + (steps - outer), moment_updates=steps)
+                calls=calls + (steps - outer), moment_updates=steps,
+                moment_lag=len(getattr(recorder, "reject_steps", ())))
             recorder.accounting(recorder.rows[recorder.optimizers[0]]["calls"], recorder.outer_steps)
         evidence = run_probe(config, mode="constant", steps=steps, diagnostic_every=10,
                              checkpoint_hook_step=1, checkpoint_hook=hook)
@@ -167,7 +186,9 @@ def stay(output, method, steps):
                final=(diag[-1]["step"], diag[-1]["modes"], round(diag[-1]["hq"], 4)) if diag else None,
                dynamics=_dynamics(recorder))
     records = [dict(step=r["outer_step"], sharp=r.get("critic_sharpness"), width=r.get("critic_width"),
-                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"])
+                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"],
+                    rejected=bool(r.get("g_rejected")),
+                    adv_m=r.get("adv_m"), adv_m_lag=r.get("adv_m_lag"))
                for r in getattr(recorder, "records", [])]
     (output / "stay.json").write_text(json.dumps(dict(summary=row, diagnostic=diag, records=records),
                                                  default=float) + "\n")
