@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT))
 
 from reports.toy100.pr84_critic_refinement import METHOD as WARM_METHOD
 from reports.toy100.pr84_critic_refinement_cold import METHOD, pr84_critic_refinement_cold
+from reports.toy100.pr84_critic_refinement_capture import snapshot
 from reports.toy100.pr84_smoothed_parity import _state_sha
 
 
@@ -78,10 +79,15 @@ def run(output, source):
         if recorder.outer_steps != steps or recorder.bank_rng_verified != steps or recorder.fit_rng_verified != steps:
             raise RuntimeError('missing active steps or RNG verification')
         verdict = test_verdict(spec, result)
+        state_path = output / f'{task}-final-state.pt'
+        torch.save(snapshot(recorder._local), state_path)
         data = dict(method=METHOD, result=result, applied=context['applied'],
                     noise=context['noise_receipt'], dynamics=recorder.receipt(),
                     actual_adam_accounting=rates, spec=spec, verdict=verdict,
                     final_training_state_sha256=_state_sha(recorder),
+                    final_state_file=state_path.name,
+                    final_state_file_sha256=hashlib.sha256(state_path.read_bytes()).hexdigest(),
+                    saved_state_stage='after complete host evaluation; live weights restored; before next set_step',
                     shared_gate_eligible=False, source=source)
         (output / f'{task}.json').write_text(json.dumps(data, allow_nan=False) + '\n')
         row = dict(task=task, verdict=verdict, live=result['live'], seconds=result['seconds'],
@@ -106,6 +112,7 @@ def main():
     names = set(previous['source']) | {
         'reports/toy100/pr84_critic_refinement_cold.py',
         'reports/toy100/pr84_critic_refinement_cold_probe.py',
+        'reports/toy100/pr84_critic_refinement_capture.py',
         'benchmarks/transfer_suite/legacy_noise_adapters.py',
         'benchmarks/transfer_suite/toy100_compatibility.py',
         'benchmarks/transfer_suite/protocol.py',
