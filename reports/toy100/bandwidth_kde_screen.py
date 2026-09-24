@@ -17,6 +17,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+from threading import Lock
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -46,6 +47,9 @@ ENV_PIN = {
     "ATEN_CPU_CAPABILITY": "avx2", "ONEDNN_MAX_CPU_ISA": "AVX2",
     "DNNL_MAX_CPU_ISA": "AVX2", "MKL_ENABLE_INSTRUCTIONS": "AVX2",
 }
+# The short preflight monkeypatches process-global classes. Candidate training
+# runs are separate subprocesses and can still proceed concurrently.
+_CALIBRATION_LOCK = Lock()
 
 
 def _sha(path: Path) -> str:
@@ -160,7 +164,8 @@ def _screen_core(root: Path, core: str, manifest: dict) -> dict:
         base, noise, _ = declared_recipe(config)
         job = next(job for job in jobs if job["spec"]["name"] == task)
         spec, card, _ = declared_spec(job, profile, base)
-        calibration = capture_two_real_batches(spec, card, base, noise)
+        with _CALIBRATION_LOCK:
+            calibration = capture_two_real_batches(spec, card, base, noise)
         actual_hash = hashlib.sha256(calibration.tobytes()).hexdigest()
         if actual_hash != estimate[task]["first_two_real_sha256"]:
             raise ValueError(f"candidate changed calibration real batches: {core}/{task}")
