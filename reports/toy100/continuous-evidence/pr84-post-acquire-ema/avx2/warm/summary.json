@@ -1,0 +1,85 @@
+{
+  "identity": {
+    "status": "PASS",
+    "local": {
+      "checks": 200,
+      "passing_checks": 200,
+      "failing_steps": [],
+      "min_modes": 8,
+      "min_hq": 0.989990234375,
+      "passing_suffix": 200,
+      "stable_from_step": 1001,
+      "pass_all": true,
+      "pass_suffix": true
+    },
+    "final": {
+      "modes": 8,
+      "hq": 0.9990234375
+    }
+  },
+  "ema": {
+    "status": "FAIL",
+    "local": {
+      "checks": 200,
+      "passing_checks": 154,
+      "failing_steps": [
+        1153,
+        1154,
+        1155,
+        1158,
+        1159,
+        1160,
+        1161,
+        1162,
+        1163,
+        1164,
+        1165,
+        1166,
+        1167,
+        1168,
+        1169,
+        1170,
+        1171,
+        1172,
+        1173,
+        1174,
+        1175,
+        1176,
+        1177,
+        1178,
+        1179,
+        1180,
+        1181,
+        1182,
+        1183,
+        1184,
+        1185,
+        1186,
+        1187,
+        1188,
+        1189,
+        1190,
+        1191,
+        1192,
+        1193,
+        1194,
+        1195,
+        1196,
+        1197,
+        1198,
+        1199,
+        1200
+      ],
+      "min_modes": 6,
+      "min_hq": 0.37109375,
+      "passing_suffix": 0,
+      "stable_from_step": null,
+      "pass_all": false,
+      "pass_suffix": false
+    },
+    "final": {
+      "modes": 6,
+      "hq": 0.42333984375
+    }
+  }
+}
