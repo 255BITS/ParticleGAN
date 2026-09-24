@@ -49,6 +49,50 @@ def test_alpha_one_is_bitwise_identity():
     assert all(torch.equal(p,b) for p,b in zip(parameters,before))
 
 
+def test_mixed_generator_prior_group_synchronizes_both_and_retains_moments():
+    initial = {role: torch.tensor([value], dtype=torch.float64)
+               for role, value in (("d", 1.), ("g", 2.), ("prior", 3.))}
+    live = {role: torch.nn.Parameter(value.clone()) for role, value in initial.items()}
+    plain = {role: torch.nn.Parameter(value.clone()) for role, value in initial.items()}
+
+    def optimizers(parameters):
+        d = torch.optim.Adam([parameters["d"]], lr=.1, betas=(0., .9))
+        g = torch.optim.Adam([
+            {"params": [parameters["g"]], "lr": .1},
+            {"params": [parameters["prior"]], "lr": .2,
+             "_comparison_prior": True},
+        ], betas=(0., .9))
+        return d, g
+
+    live_d, live_g = optimizers(live)
+    plain_d, plain_g = optimizers(plain)
+    ordinary = torch.optim.Adam.step
+    with lookahead(2, .5) as receipt:
+        bridge.optimizer_role(live_d, {"opt_d": live_d})
+        bridge.optimizer_role(live_g, {"opt_g": live_g})
+        for _ in range(2):
+            for role, gradient in (("d", 1.), ("g", -2.), ("prior", 3.)):
+                live[role].grad = torch.full_like(live[role], gradient)
+                plain[role].grad = live[role].grad.clone()
+            ordinary(plain_d)
+            live_d.step()
+            ordinary(plain_g)
+            live_g.step()
+
+    for role in initial:
+        assert live[role].item() == pytest.approx(
+            (initial[role].item() + plain[role].item()) / 2)
+        live_optimizer, plain_optimizer = ((live_d, plain_d) if role == "d"
+                                           else (live_g, plain_g))
+        live_state = live_optimizer.state[live[role]]
+        plain_state = plain_optimizer.state[plain[role]]
+        for key in ("step", "exp_avg", "exp_avg_sq"):
+            assert torch.equal(live_state[key], plain_state[key])
+    assert [group["role"] for group in receipt["updates"][-1]["groups"]] == ["g", "prior"]
+    assert [group["parameters"] for group in receipt["updates"][-1]["groups"]] == [1, 1]
+    assert len(receipt["synchronizations"]) == 1
+
+
 def test_bilinear_joint_interpolation_contracts_without_changing_equilibrium():
     # Alternating GDA on min_x max_y xy has a unit-circle orbit. The joint
     # interpolation changes that orbit while leaving its zero fixed.

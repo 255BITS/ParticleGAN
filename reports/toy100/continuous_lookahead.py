@@ -24,13 +24,14 @@ class JointLookahead:
         self.k, self.alpha = k, float(alpha)
         self.optimizers = {}
         self.roles = {}
+        self.prior_ids = set()
         self.counts = {"g": 0, "d": 0}
         self.slow = {}
         self.receipt = dict(policy="joint_lookahead_minmax_v1", k=k, alpha=self.alpha,
                             shared_gate_eligible=False, additional_gradient_evaluations=0,
                             updates=[], synchronizations=[])
 
-    def register(self, optimizer, role):
+    def register(self, optimizer, role, *, prior_ids=()):
         if role not in ("g", "d"):
             raise ValueError("only one G and one D optimizer are supported")
         if role in self.optimizers and self.optimizers[role] is not optimizer:
@@ -39,6 +40,21 @@ class JointLookahead:
             raise RuntimeError("optimizer changed role")
         self.optimizers[role] = optimizer
         self.roles[id(optimizer)] = role
+        self.prior_ids.update(prior_ids)
+
+    def group_role(self, optimizer, group):
+        if self.roles[id(optimizer)] == "d":
+            return "d"
+        ids = {id(parameter) for parameter in group["params"]}
+        if group.get("_comparison_prior", False):
+            if self.prior_ids and not ids <= self.prior_ids:
+                raise RuntimeError("prior group contains generator parameters")
+            return "prior"
+        if ids & self.prior_ids:
+            if not ids <= self.prior_ids:
+                raise RuntimeError("generator and prior share an optimizer group")
+            return "prior"
+        return "g"
 
     def step(self, optimizer, original_step, closure=None):
         if closure is not None:
@@ -56,7 +72,11 @@ class JointLookahead:
         result = original_step(optimizer)
         self.counts[role] += 1
         self.receipt["updates"].append(dict(role=role, step=self.counts[role],
-            rates=[float(group["lr"]) for group in optimizer.param_groups]))
+            rates=[float(group["lr"]) for group in optimizer.param_groups],
+            groups=[dict(role=self.group_role(optimizer, group),
+                         lr=float(group["lr"]),
+                         parameters=sum(parameter.numel() for parameter in group["params"]))
+                    for group in optimizer.param_groups]))
         if role == "g" and self.counts["g"] % self.k == 0:
             self.synchronize()
         return result
@@ -99,7 +119,8 @@ def lookahead(k=5, alpha=0.5):
 
     def initialize(trainer, *args, **kwargs):
         original_init(trainer, *args, **kwargs)
-        controller.register(trainer.opt_g, "g")
+        controller.register(trainer.opt_g, "g", prior_ids={id(parameter)
+            for parameter in trainer.prior.parameters()})
         controller.register(trainer.opt_d, "d")
 
     def step(optimizer, closure=None):
