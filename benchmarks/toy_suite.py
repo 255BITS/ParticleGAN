@@ -29,11 +29,11 @@ from benchmarks.toy100.accuracy_gate import (
     HOLDOUT_SEED_OFFSETS, evaluate_suite as accuracy_suite,
 )
 from benchmarks.toy100.gate import evaluate_suite as coverage_suite
-from benchmarks.toy100.problems import PROBLEM_NAMES
+from benchmarks.toy100.problems import PROBLEM_NAMES, sample_real
 from benchmarks.toy100.models import linear_input_noise
 from benchmarks.toy100.train import (
     AFFINE_MODEL_POLICIES, EMPIRICAL_INIT_SEED_OFFSET,
-    POLICY_SOURCE_SCOPE_V2, policy_source_scope, resolve_config,
+    POLICY_SOURCE_SCOPE_V2, make_trainer, policy_source_scope, resolve_config,
 )
 from benchmarks.transfer_suite.compare_defaults import plan
 from benchmarks.transfer_suite.legacy_noise_adapters import EVAL_SCOPES
@@ -708,6 +708,22 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
               or any(abs(value) > 2 ** -0.5 + 1e-7 for row in weight for value in row)
               or any(abs(value) > 2 ** -0.5 + 1e-7 for value in bias)):
             raise ValueError(f"100-mode default affine receipt differs: {name}")
+        # Recreate the actual initialized tensors on the declared CPU stream.
+        # The saved hash and extrema alone cannot prove that the seeded draw
+        # produced the prior; random affine weights need the same replay.
+        if config["device"] != "cpu":
+            raise ValueError(f"100-mode affine initialization replay requires CPU: {name}")
+        _, replay_recipe = resolve_config(config)
+        replay = make_trainer(config, replay_recipe)
+        replay_prior = replay.prior.z.detach().cpu().contiguous()
+        replay_generator = (replay.G.model if config["output_noise_std"] else replay.G)
+        if (card["prior_initial_sha256"] != hashlib.sha256(
+                replay_prior.numpy().tobytes()).hexdigest()
+                or card["prior_initial_min"] != float(replay_prior.min())
+                or card["prior_initial_max"] != float(replay_prior.max())
+                or weight != replay_generator.weight.detach().cpu().tolist()
+                or bias != replay_generator.bias.detach().cpu().tolist()):
+            raise ValueError(f"100-mode seeded affine initialization differs: {name}")
         if prior_kind == "uniform_square":
             if (not _close(card.get("prior_scale"), 5.0)
                     or not -5.0 <= card["prior_initial_min"] <= card["prior_initial_max"] <= 5.0):
@@ -729,6 +745,21 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
                     or not min(lower) <= card["prior_initial_min"]
                     <= card["prior_initial_max"] <= max(upper)):
                 raise ValueError(f"100-mode data-box receipt differs: {name}")
+            import torch
+            calibration_stream = torch.Generator(device="cpu").manual_seed(
+                config["seed"] + EMPIRICAL_INIT_SEED_OFFSET,
+            )
+            seeded = sample_real(
+                name, config["batch_size"], device="cpu",
+                generator=calibration_stream,
+            )
+            if card["init_data_sha256"] != hashlib.sha256(
+                    seeded.numpy().tobytes()).hexdigest():
+                raise ValueError(f"100-mode seeded calibration hash differs: {name}")
+            if prior_kind == "empirical_box" and (
+                    lower != seeded.amin(dim=0).tolist()
+                    or upper != seeded.amax(dim=0).tolist()):
+                raise ValueError(f"100-mode seeded empirical-box bounds differ: {name}")
             if prior_kind == "moment_box":
                 mean, std = card.get("init_data_mean"), card.get("init_data_std")
                 if (not isinstance(mean, list) or not isinstance(std, list)
@@ -738,7 +769,6 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
                         or not all(value > 0 for value in std)):
                     raise ValueError(f"100-mode moment-box receipt differs: {name}")
                 import numpy as np
-                import torch
                 if card.get("init_data_file") != "initialization-samples.npy":
                     raise ValueError(f"100-mode moment-box data file differs: {name}")
                 raw = np.load(directory / card["init_data_file"], allow_pickle=False)
@@ -746,6 +776,8 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
                         or raw.shape != (config["batch_size"], 2)
                         or not np.isfinite(raw).all()):
                     raise ValueError(f"100-mode moment-box data differs: {name}")
+                if raw.tobytes() != seeded.numpy().tobytes():
+                    raise ValueError(f"100-mode seeded calibration data differs: {name}")
                 samples = torch.from_numpy(np.ascontiguousarray(raw))
                 expected_mean = samples.mean(dim=0)
                 expected_std = samples.std(dim=0, unbiased=False)
