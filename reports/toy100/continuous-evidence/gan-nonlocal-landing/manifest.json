@@ -1,17 +1,26 @@
 {
-  "method": "original_rp_G_loss_single_nonlocal_output_replacement_assay",
-  "source_commit": "ed249eb1",
-  "scope": "three copied critic cases on two saved generator states; no training or neural landing",
+  "source_commit": "cd5d49f3",
+  "scope": "bounded saved-state diagnostic; no native training eligibility",
   "files": {
     "declaration.json": {
-      "sha256": "b6768512429fa2c87b373616edc2c27b37ed64417660003dc894e0d4a57f9e1f",
-      "gzip_sha256": "68495b53fa7451fb223cc5fd1ac268ec55835891dc8f0829d13adb35d612616e",
-      "bytes": 3167
+      "sha256": "77d4e9e5a0d323dee1667caf572d24ddd84cb15fedcb27e76e04bc56be1e5ee5",
+      "gzip_sha256": "47da65dca2c409907807f60309a5bcd9353dd82f8641f8952d6054b47dd2e49b",
+      "bytes": 3247
+    },
+    "endpoints.pt": {
+      "sha256": "930ce2596bcba341db3aac23bc4527c834a2a6ad7fb37c6c58215e08a39c7642",
+      "gzip_sha256": "ee5cfcf911f902b8554d45d3b96631016db9d3e0a1ef9b49492215a878a8a5e3",
+      "bytes": 1482763
+    },
+    "paired-repair-audit.json": {
+      "sha256": "3eb968a6db97167e412bb108f2597f9a6e3850ba0ae50584cc4b8bad3f05191b",
+      "gzip_sha256": "cf74fc24d098a930163d7ffec2b4295d22d7b4665bb5c82478f9b34f9e967a33",
+      "bytes": 2032
     },
     "result.json": {
-      "sha256": "75486db138daf495bf42443b18e0c5876497363f06398157ec29aba5222c2e78",
-      "gzip_sha256": "31e70639cece81026546c339c1af854e6ed5382007271cd7821dbd6067be3d8e",
-      "bytes": 35132
+      "sha256": "a406ff16c241e7e79161abaa00351d83ad576921300773b22873166fc43d0478",
+      "gzip_sha256": "28e9f7526d4c269ef6eecef5de914eb93f77cba6a72cb8aa5d2206727a18c9a4",
+      "bytes": 23814
     },
     "source/benchmarks/locked_shared/mlp.py": {
       "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
@@ -58,10 +67,25 @@
       "gzip_sha256": "781a69107df11fa473feacf197aff169c6e7b1c243d14de972d7af8d77401e98",
       "bytes": 3996
     },
+    "source/reports/toy100/joint_output_pullback.py": {
+      "sha256": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3",
+      "gzip_sha256": "e0710557ffb31862ffff36a94f2eb332a9b6e158770f65867cdc48e53ea917de",
+      "bytes": 6674
+    },
+    "source/reports/toy100/pr84_adversarial_landing.py": {
+      "sha256": "b5557066f2aeb8cd8d1aa933ed2ac1afb03605844c3baaf5b45aeba4b1850e16",
+      "gzip_sha256": "1b43b5ea963319ceeea1590cf440ca9673cd6f4a059e6ba57516a890348edeb9",
+      "bytes": 12546
+    },
     "source/reports/toy100/pr84_adversarial_reallocation_assay.py": {
       "sha256": "5250aae0f2dc36fdbf19ca6604ccf7d0487a946ef7ac9470a4064da83f59e1af",
       "gzip_sha256": "9e5ae7c3a5c452f588093232f5c914f0df688c157ce11ea0d88c0affe29f07fa",
       "bytes": 12986
+    },
+    "source/reports/toy100/pr84_adversarial_reallocation_assay_v2.py": {
+      "sha256": "aceaed37e6894ae4acc8990df45cdd549a2e7b62e0fe6ad513ff176dcf643105",
+      "gzip_sha256": "5b12de16456dcfa87e65bc57dc2b4707ed6fdfa60997c151a1f7cdd33816e5f0",
+      "bytes": 3204
     },
     "source/reports/toy100/pr84_critic_refinement_capture.py": {
       "sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
@@ -73,22 +97,25 @@
       "gzip_sha256": "51346022e1ca28af02828681e9d9fa1cb79b36ec144987e2103be2904d127d2e",
       "bytes": 19582
     },
+    "source/tests/test_joint_output_pullback.py": {
+      "sha256": "25ff97bcf21db49c85d8630d30425295033127c9e9fe41ee387048b171baf607",
+      "gzip_sha256": "0eae25a962b47db10e188ec67dfd0feca91caf6fbbce0076f167c1485e0e648d",
+      "bytes": 2804
+    },
     "source/tests/test_pr84_adversarial_reallocation_assay.py": {
       "sha256": "51e87abfd5e33b42920f65e3b3dc616f17ae97d88bd369a7588891ca44ba389e",
       "gzip_sha256": "e1d14a73d2a36c1d3e8920ef17da667d54999f120c3e94996bfebcaab3a53188",
       "bytes": 2544
     },
-    "tensors.pt": {
-      "sha256": "8a6850b8cf9930481bc0facc388b0a7cd11529c2b251b1ea8653294ed128d188",
-      "gzip_sha256": "9210d8056685529851fa3935fab14ae85d560cfbeba6f135dfc36a3dc9dae1b3",
-      "bytes": 41471
+    "source/tests/test_pr84_adversarial_reallocation_assay_v2.py": {
+      "sha256": "fe6a4b05bbc01b593d23c52c6872b869df86af66daea361b2dcc71c9153fdfe5",
+      "gzip_sha256": "f95b3cce3c9134e124e09a71c4fd62259c20669daf6e5387b3de30c0614b0e0d",
+      "bytes": 2083
     },
     "run.log": {
-      "sha256": "082e5ed3bf425380c3fb37f9593a354966512cf0a0d4565cd882b5e85f441d7a",
-      "gzip_sha256": "af51f297e73823abdeba33dbfd5590750b484f06eb58bd4669dd7f0b0d388347",
-      "bytes": 5999
+      "sha256": "926d947d6cd75f5c4c9934b5ad8d577178eeed7e9928e8ccab121c24db1b32fa",
+      "gzip_sha256": "a8e5fa537dcfda39cd68397ac23fb045d73a3de6d940b0bb22da73d65fa1340e",
+      "bytes": 4609
     }
-  },
-  "status": "INVALID_BASELINE_AND_ACCEPTANCE_ACCOUNTING",
-  "reason": "V1 shaped real logits Bx1 against host fake logits B; paired repair is V2"
+  }
 }

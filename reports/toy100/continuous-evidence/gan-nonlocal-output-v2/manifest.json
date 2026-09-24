@@ -1,17 +1,16 @@
 {
-  "method": "original_rp_G_loss_single_nonlocal_output_replacement_assay",
-  "source_commit": "ed249eb1",
-  "scope": "three copied critic cases on two saved generator states; no training or neural landing",
+  "source_commit": "2b3962aa",
+  "scope": "bounded saved-state diagnostic; no native training eligibility",
   "files": {
     "declaration.json": {
-      "sha256": "b6768512429fa2c87b373616edc2c27b37ed64417660003dc894e0d4a57f9e1f",
-      "gzip_sha256": "68495b53fa7451fb223cc5fd1ac268ec55835891dc8f0829d13adb35d612616e",
-      "bytes": 3167
+      "sha256": "25fe190c65bf06efe3aaa3019cb2e26a18e507c3a705ca6d66bdc990a1e95b3f",
+      "gzip_sha256": "cf82f135ecdc9b4f2138c4bebc0de21c78ac827d3e5bec838cb58cbda609317a",
+      "bytes": 3446
     },
     "result.json": {
-      "sha256": "75486db138daf495bf42443b18e0c5876497363f06398157ec29aba5222c2e78",
-      "gzip_sha256": "31e70639cece81026546c339c1af854e6ed5382007271cd7821dbd6067be3d8e",
-      "bytes": 35132
+      "sha256": "7f59fe8923f27b67c637e09bb27f5e6976454f58cffc95381549b69aa95c049c",
+      "gzip_sha256": "aea7ef69e113ef26d1d6e44cbee503c262417f3f31f8e5fe8e39d1dee23af4c1",
+      "bytes": 35498
     },
     "source/benchmarks/locked_shared/mlp.py": {
       "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
@@ -63,6 +62,11 @@
       "gzip_sha256": "9e5ae7c3a5c452f588093232f5c914f0df688c157ce11ea0d88c0affe29f07fa",
       "bytes": 12986
     },
+    "source/reports/toy100/pr84_adversarial_reallocation_assay_v2.py": {
+      "sha256": "aceaed37e6894ae4acc8990df45cdd549a2e7b62e0fe6ad513ff176dcf643105",
+      "gzip_sha256": "5b12de16456dcfa87e65bc57dc2b4707ed6fdfa60997c151a1f7cdd33816e5f0",
+      "bytes": 3204
+    },
     "source/reports/toy100/pr84_critic_refinement_capture.py": {
       "sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
       "gzip_sha256": "6bd7873bccd4a87bb4c1f74a133fe378a24a2d0eea260a628761007183526135",
@@ -78,17 +82,25 @@
       "gzip_sha256": "e1d14a73d2a36c1d3e8920ef17da667d54999f120c3e94996bfebcaab3a53188",
       "bytes": 2544
     },
+    "source/tests/test_pr84_adversarial_reallocation_assay_v2.py": {
+      "sha256": "fe6a4b05bbc01b593d23c52c6872b869df86af66daea361b2dcc71c9153fdfe5",
+      "gzip_sha256": "f95b3cce3c9134e124e09a71c4fd62259c20669daf6e5387b3de30c0614b0e0d",
+      "bytes": 2083
+    },
     "tensors.pt": {
       "sha256": "8a6850b8cf9930481bc0facc388b0a7cd11529c2b251b1ea8653294ed128d188",
       "gzip_sha256": "9210d8056685529851fa3935fab14ae85d560cfbeba6f135dfc36a3dc9dae1b3",
       "bytes": 41471
     },
     "run.log": {
-      "sha256": "082e5ed3bf425380c3fb37f9593a354966512cf0a0d4565cd882b5e85f441d7a",
-      "gzip_sha256": "af51f297e73823abdeba33dbfd5590750b484f06eb58bd4669dd7f0b0d388347",
-      "bytes": 5999
+      "sha256": "9986c8ab3baca359dc1d67fa269915ea495008263d0e3ea48c312bab20a06e55",
+      "gzip_sha256": "0af941eda38dbc4b2472da9a91f584a4bccdcc4524048b76e091b31bb72be312",
+      "bytes": 6364
+    },
+    "startup-import-error.log": {
+      "sha256": "edf342a4deb65c49a1f23bdc41610a3271bb024284274078dc8b135dc128e647",
+      "gzip_sha256": "4088b46099699bb7074942832c6f67e93a57b936e467bf41e0bba00f800ffe02",
+      "bytes": 292
     }
-  },
-  "status": "INVALID_BASELINE_AND_ACCEPTANCE_ACCOUNTING",
-  "reason": "V1 shaped real logits Bx1 against host fake logits B; paired repair is V2"
+  }
 }
