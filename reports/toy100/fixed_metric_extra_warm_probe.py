@@ -10,9 +10,6 @@ from unittest.mock import patch
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT))
-import benchmarks.toy100
-PROBE_ROOT=Path('/ml2/hypergan/ParticleGAN-continuous-probe')
-benchmarks.toy100.__path__.append(str(PROBE_ROOT/'benchmarks/toy100'))
 from benchmarks.toy100.warm_equilibrium_probe import run_warm_variants
 from benchmarks.toy100 import warm_equilibrium_probe as warm_module
 from reports.toy100.fixed_metric_extra_scratch import fixed_metric_extra
@@ -52,7 +49,7 @@ def main():
     declaration=dict(methods=['identity','constant','same_sample','independent_sample'],prefix_steps=1000,
         continuation_updates=200,seed=0,source={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in
         [Path(__file__),ROOT/'reports/toy100/fixed_metric_extra_scratch.py',ROOT/'reports/toy100/extra_adam_scratch.py',
-         PROBE_ROOT/'benchmarks/toy100/warm_equilibrium_probe.py',PROBE_ROOT/'benchmarks/toy100/continuous_probe.py']})
+         ROOT/'benchmarks/toy100/warm_equilibrium_probe.py',ROOT/'benchmarks/toy100/continuous_probe.py']})
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.with_suffix('.declaration.json').write_text(json.dumps(declaration,indent=2)+'\n')
     ordinary_probe=warm_module.run_probe
