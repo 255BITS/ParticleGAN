@@ -132,7 +132,7 @@ def _window(points: list[dict], *, minimum: int = 5) -> dict:
 
 def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
                   noise_horizon: int, diagnostic_every: int,
-                  dense_after: int | None,
+                  dense_after: int | None, dense_until: int | None,
                   shift_step: int | None, shift: tuple[float, float],
                   freeze_after_shift: bool, log,
                   checkpoint_hook_step: int | None = None,
@@ -213,7 +213,8 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
         # Always preserve the host's own 24-point recorder and its timing.
         original_checkpoint(step, measure)
         if (step % diagnostic_every == 0 or step == shift_step
-                or (dense_after is not None and step > dense_after)):
+                or (dense_after is not None and step > dense_after
+                    and (dense_until is None or step <= dense_until))):
             with torch.random.fork_rng(devices=[]):
                 measured = measure()
                 point = {"step": step, **{key: measured[key] for key in
@@ -263,7 +264,8 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
                              "base_adam_step": original_adam_step,
                              "set_step_delegate": set_step_delegate,
                              "declare_optimizer_accounting": declare_optimizer_accounting,
-                             "completed_steps": step})
+                             "completed_steps": step,
+                             "target_steps": steps})
 
     started = time.perf_counter()
     applied: list[dict] = []
@@ -300,6 +302,7 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
 def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS,
               noise_horizon: int = FROZEN_STEPS,
               diagnostic_every: int = 50, dense_after: int | None = None,
+              dense_until: int | None = None,
               shift_step: int | None = None,
               shift: tuple[float, float] = (1.0, 0.0),
               freeze_after_shift: bool = False, log=None,
@@ -315,6 +318,10 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
     if dense_after is not None and (type(dense_after) is not int
                                     or not 0 <= dense_after < steps):
         raise ValueError("dense_after must be inside the episode")
+    if dense_until is not None and (dense_after is None
+                                    or type(dense_until) is not int
+                                    or not dense_after < dense_until <= steps):
+        raise ValueError("dense_until must follow dense_after inside the episode")
     if shift_step is not None and (type(shift_step) is not int
                                    or not FROZEN_STEPS <= shift_step < steps
                                    or shift_step % diagnostic_every):
@@ -340,6 +347,7 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
     result, context = _run_extended(
         spec, recipe, noise, effective, noise_horizon=noise_horizon,
         diagnostic_every=diagnostic_every, dense_after=dense_after,
+        dense_until=dense_until,
         shift_step=shift_step,
         shift=shift, freeze_after_shift=freeze_after_shift, log=log,
         checkpoint_hook_step=checkpoint_hook_step,
@@ -420,6 +428,7 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
         effective_config=effective, source_recipe=recipe.to_dict(),
         **provenance, steps=steps, noise_horizon=noise_horizon,
         diagnostic_every=diagnostic_every, dense_after=dense_after,
+        dense_until=dense_until,
         shift_step=shift_step, shift=list(shift) if shift_step else None,
         freeze_after_shift=freeze_after_shift,
         status=status,
@@ -448,7 +457,7 @@ def match_frozen_control(active: dict, frozen: dict) -> dict:
     if not frozen.get("freeze_after_shift"):
         raise ValueError("control must freeze all Adam updates after the shift")
     matching = ("mode", "config_sha256", "source_sha256", "runtime", "steps",
-                "noise_horizon", "diagnostic_every", "dense_after",
+                "noise_horizon", "diagnostic_every", "dense_after", "dense_until",
                 "shift_step", "shift")
     changed = [key for key in matching if active.get(key) != frozen.get(key)]
     if changed:
@@ -489,6 +498,8 @@ def main() -> None:
     parser.add_argument("--diagnostic-every", type=int, default=50)
     parser.add_argument("--dense-after", type=int,
                         help="also record every update after this step")
+    parser.add_argument("--dense-until", type=int,
+                        help="stop extra per-update recording after this step")
     parser.add_argument("--shift-step", type=int)
     parser.add_argument("--shift-x", type=float, default=1.0)
     parser.add_argument("--shift-y", type=float, default=0.0)
@@ -506,6 +517,7 @@ def main() -> None:
     evidence = run_probe(
         config, mode=args.mode, steps=args.steps,
         diagnostic_every=args.diagnostic_every, dense_after=args.dense_after,
+        dense_until=args.dense_until,
         shift_step=args.shift_step, shift=(args.shift_x, args.shift_y),
         freeze_after_shift=args.freeze_after_shift, log=log,
     )

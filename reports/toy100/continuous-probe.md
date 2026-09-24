@@ -54,9 +54,49 @@ observations, optimizer-rate ranges, and noise receipts. The source archive
 binds the full benchmark and `particlegan` Python code. Logs were emitted as
 one JSON record per diagnostic checkpoint so a running probe can be tailed.
 
-The next cheap research step is a matched warm-state equilibrium filter: cache
-the complete generator, discriminator, prior, Adam, EMA, noise, and RNG state
-at a passing stationary checkpoint, then compare 200-update local stability
-under proposed training dynamics. A survivor must still learn from scratch and
-pass the 1,200/2,400 windows before any shift or shared-22 promotion. This
-separates stability near a learned equilibrium from initial mode acquisition.
+## Passing-state local stability screen
+
+A second bounded filter forks the live scheduled host at update 1,000. The
+children inherit the exact same generator, discriminator, prior, Adam, EMA,
+noise, data-stream, and global RNG state. The identity child reproduced the
+separate cold 1,200-update run numerically at all 24 observations and matched
+its full final-state SHA-256. This validates the 200-update continuation path;
+it does not prove the state is a mathematical equilibrium.
+
+Each child recorded all 200 live checks from update 1,001 to 1,200. The
+following eight changed-dynamics rows all used the same cached state;
+Lookahead interpolated both players and prior together with α=.5.
+
+| Update after fork | G/D rate | Passing checks / 200 | Minimum modes / HQ | Local verdict |
+| --- | ---: | ---: | --- | --- |
+| Scheduled identity | Scheduled | 200 | 8 / .9963 | PASS |
+| Ordinary Adam | .00425 | 6 | 1 / .0054 | FAIL |
+| Lookahead k=2 | .00425 | 1 | 1 / .0110 | FAIL |
+| Lookahead k=5 | .00425 | 28 | 1 / .0110 | FAIL |
+| Lookahead k=10 | .00425 | 8 | 1 / .0110 | FAIL |
+| Ordinary Adam | .001 | 200 | 8 / .9993 | PASS |
+| Lookahead k=2 | .001 | 200 | 8 / .9995 | PASS |
+| Lookahead k=5 | .001 | 200 | 8 / .9993 | PASS |
+| Lookahead k=10 | .001 | 200 | 8 / .9995 | PASS |
+
+The nominal .00425 rate destabilized this passing state with and without
+Lookahead. At .001, ordinary Adam already passed every local check, so these
+rows provide no evidence that Lookahead added stability. A locally passing
+branch still needs cold mode acquisition, a 2,400-update hold, all required
+hosts, and a matched shifted/frozen comparison before any continual-learning
+claim. The [warm-screen archive](continuous-evidence/warm-lookahead/manifest.json)
+contains the raw child episodes, exact Lookahead source, full benchmark source
+snapshot, and SHA-256 file inventory.
+
+The matched fork was then extended to update 2,400 for the scheduled identity
+and the two ordinary constant rates. The identity child again matched its
+separate cold control in all 24 observations and the full final-state hash.
+It passed all 200 checks through update 1,200 and all 120 checks every ten
+updates afterward. Constant .00425 passed 6/200 and 6/120. Constant .001
+passed 200/200 locally but failed one long check at update 1,950: all eight
+modes were present, but HQ fell to .7903. It finished at eight modes/HQ .9990.
+The strict all-check verdict is therefore FAIL for both constant rates.
+Actual post-fork G/D/prior rates were .001/.001/.002 at every one of the
+1,400 continuation optimizer calls in the lower-rate branch. The
+[extended raw archive](continuous-evidence/warm-extended-2400/manifest.json)
+retains the three branches, matched cold control, source snapshot, and hashes.

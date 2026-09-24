@@ -15,7 +15,8 @@ optimizers, EMA tensors, noise policy, streams, control, and
 the probe's rate and update receipts. ``prefix_context`` can install an
 optional source adapter before training; its yielded value is passed as
 ``prefix`` to each variant factory. Include the identity context as a parity
-control. Every branch records each of the 200 continuation updates.
+control. Every branch records each of updates 1,001–1,200, then every ten
+updates through a requested longer horizon.
 """
 
 from __future__ import annotations
@@ -133,8 +134,9 @@ def run_warm_variants(
     prefix_context: Callable[[], object] = nullcontext,
     mode: str = "scheduled",
     warm_step: int = WARM_STEP,
+    steps: int = FROZEN_STEPS,
 ) -> dict:
-    """Fork one shared prefix, run 200-update variants, and verify identity.
+    """Fork one shared prefix, run local/extended variants, verify identity.
 
     An identity variant must be included. A separate cold full-budget control
     supplies numerical and full-state parity. All variants share the exact
@@ -149,6 +151,9 @@ def run_warm_variants(
         raise RuntimeError("warm-state fork requires one Python thread")
     if type(warm_step) is not int or not 0 < warm_step < FROZEN_STEPS:
         raise ValueError("warm_step must be inside the frozen 1,200-update host")
+    if (type(steps) is not int or steps < FROZEN_STEPS
+            or steps % 10):
+        raise ValueError("steps must be at least 1,200 and divisible by ten")
     if not variant_contexts or "identity" not in variant_contexts:
         raise ValueError("an identity variant is required for exact parity")
     if any(re.fullmatch(r"[a-zA-Z0-9_-]+", name) is None
@@ -160,8 +165,10 @@ def run_warm_variants(
     cold_state: dict = {}
     def cold_hook(state):
         cold_state["final_sha256"] = training_state_sha256(state)
-    cold = run_probe(config, mode=mode, steps=FROZEN_STEPS,
-                     checkpoint_hook_step=FROZEN_STEPS,
+    cadence = 50 if steps == FROZEN_STEPS else 10
+    cold = run_probe(config, mode=mode, steps=steps,
+                     diagnostic_every=cadence,
+                     checkpoint_hook_step=steps,
                      checkpoint_hook=cold_hook)
     (output_dir / "cold.json").write_text(json.dumps(cold, allow_nan=False) + "\n")
 
@@ -199,8 +206,9 @@ def run_warm_variants(
         prefix_receipt = receipt
         try:
             evidence = run_probe(
-                config, mode=mode, steps=FROZEN_STEPS,
-                diagnostic_every=50, dense_after=warm_step,
+                config, mode=mode, steps=steps,
+                diagnostic_every=cadence, dense_after=warm_step,
+                dense_until=FROZEN_STEPS,
                 checkpoint_hook_step=warm_step,
                 checkpoint_hook=fork_at_checkpoint,
             )
@@ -231,14 +239,23 @@ def run_warm_variants(
                                  if warm_step < point["step"] <= FROZEN_STEPS])
                 if local["checks"] != FROZEN_STEPS - warm_step:
                     raise RuntimeError("a per-update continuation check is missing")
+                long_hold = (_window([point for point in evidence["diagnostic"]
+                                      if FROZEN_STEPS < point["step"] <= steps])
+                             if steps > FROZEN_STEPS else None)
+                if long_hold is not None and long_hold["checks"] != (
+                        steps - FROZEN_STEPS) // cadence:
+                    raise RuntimeError("a long-horizon diagnostic check is missing")
+                local_pass = local["pass_all"] and (
+                    long_hold is None or long_hold["pass_all"])
                 evidence.update(
                     scope="passing_state_local_stability_only",
-                    warm_step=warm_step, continuation_updates=FROZEN_STEPS - warm_step,
+                    warm_step=warm_step, continuation_updates=steps - warm_step,
                     variant=child_name, warm_state_sha256=warm_hash,
                     final_state_sha256=final_hash,
                     local_stability=local,
+                    long_hold=long_hold,
                     cold_host_status=evidence["status"],
-                    status="PASS" if local["pass_all"] else "FAIL",
+                    status="PASS" if local_pass else "FAIL",
                 )
                 if isinstance(child_receipt, dict):
                     evidence["dynamics_receipt"] = child_receipt
@@ -276,12 +293,13 @@ def run_warm_variants(
                         - warm_step):
                     raise RuntimeError(f"{name} {role} continuation rate differs")
     summary = dict(scope="passing_state_local_stability_only", warm_step=warm_step,
-                   continuation_updates=FROZEN_STEPS - warm_step,
+                   steps=steps, continuation_updates=steps - warm_step,
                    identity_cold_parity=True,
                    cold_final_state_sha256=cold_state["final_sha256"],
                    warm_state_sha256=warm_hashes.pop(),
                    variants={name: dict(status=row["status"],
                                         local_stability=row["local_stability"],
+                                        long_hold=row["long_hold"],
                                         stationary=row["stationary"],
                                         final=row["final"],
                                         final_state_sha256=row["final_state_sha256"])
