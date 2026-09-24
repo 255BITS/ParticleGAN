@@ -73,6 +73,13 @@
       "sha256": "30314f0cfe55dabebc1a4f8cd3b54191c87feaea470d8db20057387ba414d1f7"
     }
   },
+  "diagnostic": {
+    "bytes": 2155,
+    "file": "objective-conflict.json",
+    "sha256": "d23f6d38299c6669c1889e3aeeb07eb24018f31a70b03d51151cfe9cdc954cd7",
+    "source": "reports/toy100/energy_objective_conflict.py",
+    "source_sha256": "15d7995c7725aaeb10a2ad981173d2f02b167b2f72f0866b02f6d077a08cbade"
+  },
   "fixed_seed": 0,
   "schema": "continuous-energy-signal-evidence-v1",
   "scratch_policy_only": true

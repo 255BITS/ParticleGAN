@@ -1,0 +1,114 @@
+{
+  "constructed": {
+    "base": {
+      "energy_score": 3.9556820392608643,
+      "hq": 1.0,
+      "hq_counts": [
+        694,
+        685,
+        635,
+        670,
+        363,
+        341,
+        339,
+        369
+      ],
+      "modes": 8
+    },
+    "moved": {
+      "energy_score": 3.851869583129883,
+      "hq": 0.870361328125,
+      "hq_counts": [
+        694,
+        685,
+        314,
+        345,
+        363,
+        451,
+        344,
+        369
+      ],
+      "modes": 8
+    }
+  },
+  "cpu_capability": "AVX2",
+  "energy_change": -0.10381245613098145,
+  "evaluation_samples": 4096,
+  "fixed_streams": {
+    "evaluation": 9,
+    "real": 0,
+    "score": 11
+  },
+  "host_source_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+  "moved_particles": [
+    {
+      "angle": 4.0,
+      "index": 4
+    },
+    {
+      "angle": 4.8,
+      "index": 6
+    }
+  ],
+  "occupancy": [
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1
+  ],
+  "output_noise_std": 0.029,
+  "radius": 3.0,
+  "real_per_mode": 1024,
+  "real_samples": 8192,
+  "real_sigma": 0.07,
+  "scope": "objective_conflict_diagnostic_only",
+  "score_samples": 768,
+  "source_sha256": "15d7995c7725aaeb10a2ad981173d2f02b167b2f72f0866b02f6d077a08cbade",
+  "torch": "2.13.0+cu126",
+  "warm_archive_sha256": "43ed1d9ffe88b9a30651b8d38b2f04506224cb7aa0fce4b0c50b919b2eb59682",
+  "warm_update_trace": {
+    "1173": {
+      "accepted_scale": 0.0,
+      "after": [
+        3.9271936416625977,
+        4.014030456542969
+      ],
+      "before": [
+        3.8929097652435303,
+        3.978496551513672
+      ],
+      "hq": 0.9990234375,
+      "modes": 8
+    },
+    "1174": {
+      "accepted_scale": 1.0,
+      "after": [
+        4.172768592834473,
+        3.9807987213134766
+      ],
+      "before": [
+        4.176785469055176,
+        3.98697566986084
+      ],
+      "hq": 0.7998046875,
+      "modes": 8
+    },
+    "1175": {
+      "accepted_scale": 0.0,
+      "after": [
+        3.7733309268951416,
+        3.9963538646698
+      ],
+      "before": [
+        3.773498058319092,
+        3.9921748638153076
+      ],
+      "hq": 0.79931640625,
+      "modes": 8
+    }
+  }
+}

@@ -52,6 +52,19 @@ strict warm checks; its final eight modes/HQ .9958 would hide the two earlier
 failures if only the endpoint were inspected. No cold or shifted run followed
 that failed gate.
 
+The [fixed-cloud diagnostic](continuous-evidence/energy-signal/objective-conflict.json)
+shows why the data-space signal cannot certify the frozen HQ gate. With 8,192
+real samples stratified equally across the eight Gaussian modes, twelve
+equal-weight generated particles initially at mode centers, and the declared
+output noise, moving two duplicated particles off-center improves empirical
+energy from 3.95568 to 3.85187 while HQ falls from 1.0 to .87036; all eight
+modes remain represented. The actual warm backtracking trace shows the same
+kind of conflict at update 1,174: both energy halves improved under an
+accepted full proposal (4.17679→4.17277 and 3.98698→3.98080), while HQ fell
+from .99902 to .79980. This establishes a mismatch between the acceptance
+signal and the required quality measure in this representational setting; it
+does not identify which two learned particles moved in that training update.
+
 The [manifest](continuous-evidence/energy-signal/manifest.json) binds nine
 compressed raw run archives, including the failing controls, source snapshots
 at execution, effective configurations, per-step receipts, frozen-host
