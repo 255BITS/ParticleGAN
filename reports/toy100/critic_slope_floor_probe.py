@@ -9,14 +9,14 @@ import time
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
-from reports.toy100.critic_slope_floor import METHOD, critic_slope_floor, floor_receipt
+from reports.toy100.residual_curvature import METHOD, residual_curvature
 
-CANDIDATE = "slope_floor"
+CANDIDATE = "residual_curvature"
 
 
 @contextmanager
 def audited(task="mode_hold", start_step=0):
-    with critic_slope_floor(task=task, start_step=start_step) as (recorder, source):
+    with residual_curvature(task=task, start_step=start_step) as (recorder, source):
         yield recorder, source
 
 
@@ -45,7 +45,7 @@ def variants():
                     receipt.update(rates)
                     yield receipt
                 if recorder.enabled:
-                    receipt.update(floor_receipt(recorder))
+                    receipt.update(recorder.receipt())
         return activate
     return {name: factory(name) for name in ("identity", "constant", CANDIDATE)}
 
@@ -90,7 +90,7 @@ def main():
                 config, mode="constant", steps=2400, noise_horizon=1200, diagnostic_every=10,
                 dense_after=999, dense_until=1200, checkpoint_hook_step=1, checkpoint_hook=hook,
                 log=lambda event: print(json.dumps(event), flush=True))
-        result.update(dynamics_receipt=floor_receipt(recorder), shared_gate_eligible=False,
+        result.update(dynamics_receipt=recorder.receipt(), shared_gate_eligible=False,
                       scratch_optimizer_policy=METHOD)
         (args.output / "hold.json").write_text(json.dumps(result, allow_nan=False) + "\n")
         print(json.dumps(dict(event="HOLD_DONE", status=result["status"])), flush=True)
@@ -114,7 +114,7 @@ def main():
             result, context = run_legacy(spec, recipe, noise, model_policy=declared_model_policy(config))
         verdict = test_verdict(spec, result)
         (args.output / f"{task}.json").write_text(json.dumps(dict(
-            result=result, verdict=verdict, dynamics=floor_receipt(recorder),
+            result=result, verdict=verdict, dynamics=recorder.receipt(),
             shared_gate_eligible=False, scratch_optimizer_policy=METHOD), allow_nan=False) + "\n")
         stages.append(dict(task=task, verdict=verdict["status"], live=result["live"],
                            passed=verdict["passed"]))
