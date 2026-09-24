@@ -64,6 +64,23 @@ def test_thin_margin_inside_the_fence_cannot_cross_it():
     assert float(torch.cdist(landed, reals).min()) <= fence + 1e-4
 
 
+def test_step_inside_the_spacing_fence_cannot_leave_the_hq_ball():
+    # Hug an outer sample so nearest-real distance stays inside the spacing
+    # fence, while the step walks past the HQ ball. Update 2160 is this case.
+    gen = torch.Generator().manual_seed(4)
+    reals = torch.randn(16, 2, generator=gen) * 0.07
+    reals[0] = torch.tensor([0.15, 0.0])
+    fence = float(support_fence(reals))
+    before = torch.tensor([[0.17, 0.0]])
+    after = torch.tensor([[0.25, 0.0]])
+    assert float(torch.cdist(before, reals).min()) < fence
+    assert float(torch.cdist(after, reals).min()) < fence
+    scales, _ = exit_scales(before, after, reals)
+    assert float(scales) < 1.0
+    landed = exit_targets(before, after, reals, scales)
+    assert float(landed.norm()) <= 0.21 + 1e-3
+
+
 def test_only_the_exposed_particle_is_scaled():
     reals = _reals()
     before = torch.tensor([[0.0, 0.0], [0.30, 0.0]])

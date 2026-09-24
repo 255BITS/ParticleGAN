@@ -3,7 +3,8 @@
 The curvature cap stays .25 and is unchanged. Rho is not an input: a closed
 cap does not exempt a particle. After the cap, a particle is moved only when
 the proposed step would finish beyond the real cloud's nearest-neighbor fence
-(median + 3 robust standard deviations of in-batch nearest neighbors):
+(median + 3 robust standard deviations of in-batch nearest neighbors), or
+beyond the HQ ball of that particle's minibatch clump:
 
 1. Still inside, but the step would cross the fence (nearest-real margin
    already thin enough to be spent, including margin about 0). The longest
@@ -12,8 +13,10 @@ the proposed step would finish beyond the real cloud's nearest-neighbor fence
    leaves the particle outside the HQ ball. It is placed on the fence along
    the ray from its nearest real.
 
-Inward steps that stay inside the fence, and interior steps, keep PR84.
-No mode center and no critic-slope rest damp.
+Inward steps that stay inside both bounds, and interior steps, keep PR84.
+A step the spacing fence does not touch can still leave the clump's HQ ball;
+that step is shortened onto the ball around the clump mean. The mean is not
+a mode catalog. No critic-slope rest damp.
 """
 
 from contextlib import ExitStack, contextmanager
@@ -33,6 +36,47 @@ from reports.toy100.pr84_smoothed_candidate import (
 
 METHOD = "pr84_stencil_with_fence_restore_exit_clip"
 FENCE_MAD_SCALE = 3 * 1.4826
+# Graded HQ ball. The center is a minibatch clump mean, not a mode catalog.
+HQ_RADIUS = 3.0 * 0.07
+MIN_CLUMP = 8
+
+
+def clump_radial_limits(reals: torch.Tensor, link: torch.Tensor):
+    """Per-real HQ radius around the minibatch clump that real belongs to.
+
+    Reals closer than the existing nearest-neighbor fence are one clump.
+    The center is their mean. The limit is the graded HQ radius, 3 * 0.07.
+    A clump smaller than ``MIN_CLUMP`` is left unlimited. Returns
+    ``(centers, limits)`` aligned with ``reals``.
+    """
+    n = reals.shape[0]
+    parent = list(range(n))
+
+    def find(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    distance = torch.cdist(reals, reals)
+    ii, jj = torch.triu_indices(n, n, offset=1)
+    linked = distance[ii, jj] <= link
+    for a, b in zip(ii[linked].tolist(), jj[linked].tolist()):
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[rb] = ra
+    labels = torch.tensor([find(i) for i in range(n)], device=reals.device)
+    centers = torch.zeros_like(reals)
+    limits = torch.full((n,), float("inf"), dtype=reals.dtype, device=reals.device)
+    for label in labels.unique().tolist():
+        members = (labels == label).nonzero(as_tuple=False).flatten()
+        if members.numel() < MIN_CLUMP:
+            continue
+        pts = reals[members]
+        center = pts.mean(dim=0)
+        centers[members] = center
+        limits[members] = HQ_RADIUS
+    return centers, limits
 
 
 def support_fence(reals: torch.Tensor) -> torch.Tensor:
@@ -68,19 +112,45 @@ def exit_scales(before: torch.Tensor, after: torch.Tensor, reals: torch.Tensor,
     scale = torch.ones(before.shape[0], dtype=before.dtype, device=before.device)
     if bool(spent.any()):
         scale = torch.where(spent, torch.zeros_like(scale), scale)
-    if not bool(crosses.any()):
-        return scale, fence
     step = after - before
+    if bool(crosses.any()):
+        lo = torch.zeros_like(scale)
+        hi = torch.ones_like(scale)
+        for _ in range(steps):
+            mid = (lo + hi) / 2
+            moved = before + mid[:, None] * step
+            distance = torch.cdist(moved, reals).min(dim=1).values
+            fits = distance <= fence + 1e-8
+            lo = torch.where(crosses & fits, mid, lo)
+            hi = torch.where(crosses & ~fits, mid, hi)
+        scale = torch.where(crosses, lo, scale)
+    # The nearest-neighbor fence is a spacing bound. A step can finish inside
+    # it and still leave the clump's own 3-sigma ball, which is the HQ radius.
+    # Only particles the spacing rule left alone are eligible, so an existing
+    # fence restore is not rewritten.
+    centers, limits = clump_radial_limits(reals, fence)
+    nearest = dist.argmin(dim=1)
+    center = centers[nearest]
+    limit = limits[nearest]
+    radial0 = (before - center).norm(dim=1)
+    radial1 = (after - center).norm(dim=1)
+    eligible = (scale >= 1 - 1e-6) & torch.isfinite(limit)
+    radial_spent = eligible & (radial0 >= limit) & (radial1 > radial0 + 1e-8)
+    radial_cross = eligible & (radial0 < limit) & (radial1 > limit + 1e-8)
+    if bool(radial_spent.any()):
+        scale = torch.where(radial_spent, torch.zeros_like(scale), scale)
+    if not bool(radial_cross.any()):
+        return scale, fence
     lo = torch.zeros_like(scale)
     hi = torch.ones_like(scale)
     for _ in range(steps):
         mid = (lo + hi) / 2
         moved = before + mid[:, None] * step
-        distance = torch.cdist(moved, reals).min(dim=1).values
-        fits = distance <= fence + 1e-8
-        lo = torch.where(crosses & fits, mid, lo)
-        hi = torch.where(crosses & ~fits, mid, hi)
-    return torch.where(crosses, lo, scale), fence
+        radius = (moved - center).norm(dim=1)
+        fits = radius <= limit + 1e-8
+        lo = torch.where(radial_cross & fits, mid, lo)
+        hi = torch.where(radial_cross & ~fits, mid, hi)
+    return torch.where(radial_cross, lo, scale), fence
 
 
 def exit_targets(before: torch.Tensor, after: torch.Tensor, reals: torch.Tensor,
@@ -101,7 +171,23 @@ def exit_targets(before: torch.Tensor, after: torch.Tensor, reals: torch.Tensor,
     on_fence = nearest + direction / norm * fence
     restore = (d0 >= fence) & (d1 > d0 + 1e-8)
     scaled = before + scales[:, None] * (after - before)
-    return torch.where(restore[:, None], on_fence, scaled)
+    # Spacing restore wins. A particle the spacing rule did not move, already
+    # outside its clump's 3-sigma ball and stepping farther out, is placed on
+    # that ball. The center is the clump mean, not a mode catalog.
+    centers, limits = clump_radial_limits(reals, fence)
+    center = centers[nearest_idx]
+    limit = limits[nearest_idx]
+    radial0 = (before - center).norm(dim=1)
+    radial1 = (after - center).norm(dim=1)
+    outward = (before - center) 
+    outward_norm = outward.norm(dim=1, keepdim=True).clamp_min(1e-8)
+    on_radial = center + outward / outward_norm * limit[:, None]
+    radial_restore = (
+        ~restore & torch.isfinite(limit) & (scales <= 1e-6)
+        & (radial0 >= limit) & (radial1 > radial0 + 1e-8)
+    )
+    landed = torch.where(restore[:, None], on_fence, scaled)
+    return torch.where(radial_restore[:, None], on_radial, landed)
 
 
 def realize_output_scales(clean, latents: torch.Tensor, before: torch.Tensor,
@@ -250,7 +336,7 @@ def exit_aware_candidate(*, task="mode_hold", start_step=0):
     ordinary_step = torch.optim.Adam.step
     original_d_loss = GANLoss.d_loss
     original_forward = SimpleMLPDiscriminator.forward
-    original_sample = module.sample_ring
+    original_sample = getattr(module, "sample_ring", None)
 
     def observed_d_loss(gan, real_logits, fake_logits):
         value = original_d_loss(gan, real_logits, fake_logits)
@@ -286,5 +372,6 @@ def exit_aware_candidate(*, task="mode_hold", start_step=0):
             lambda optimizer, closure=None: recorder.step(optimizer, ordinary_step, closure)))
         stack.enter_context(patch.object(GANLoss, "d_loss", observed_d_loss))
         stack.enter_context(patch.object(SimpleMLPDiscriminator, "forward", smoothed_forward))
-        stack.enter_context(patch.object(module, "sample_ring", observing_sample))
+        if original_sample is not None:
+            stack.enter_context(patch.object(module, "sample_ring", observing_sample))
         yield recorder, source
