@@ -1,3 +1,18 @@
+# Current evaluation: GPU
+
+Use the completed [GPU leaderboard](../gpu-leaderboard/LEADERBOARD.md) and
+[portable CUDA replay](../gpu-leaderboard/README.md) for all new qualification.
+The GPU research reference is **shared column RMS**, with 11/22 toys passing and
+131 good hold updates after confirmation; it is not release-qualified.
+The profile, exact policy sources, fixed seeds, failed gates, and next experiment
+priorities are recorded in that bundle. Gate new mechanisms on those failures;
+do not repeat the completed audit or rank new CPU scores against GPU receipts.
+
+The material below preserves the earlier CPU experiment and replay history.
+Its epsilon selection, CPU commands, and native-skip decisions are historical.
+
+---
+
 Continue the ParticleGAN stable-GAN search from eps_net_1m, the current
 experimental base. This is a fresh attempt with no conversation history.
 Read AGENTS.md, reports/toy100/h_stability/START.md and current-base.json there.

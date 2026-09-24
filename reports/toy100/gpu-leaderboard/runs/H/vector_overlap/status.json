@@ -1,0 +1,97 @@
+{
+  "candidate": "H",
+  "task": "vector_overlap",
+  "status": "PASS",
+  "seconds": 18.624540379969403,
+  "environment": {
+    "profile": "cuda_fp32_v1",
+    "torch": "2.13.0+cu126",
+    "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "device": "cuda:0",
+    "visible_devices": "1",
+    "deterministic": true,
+    "tf32": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace": ":4096:8",
+    "threads": 1,
+    "interop": 1,
+    "adam_foreach": false,
+    "adam_fused": false
+  },
+  "device_proof": {
+    "adam_calls": 2400,
+    "optimizers": {
+      "137082883341680": {
+        "calls": 1200,
+        "parameters": 19009,
+        "device": "cuda:0"
+      },
+      "137082883341584": {
+        "calls": 1200,
+        "parameters": 5634,
+        "device": "cuda:0"
+      }
+    },
+    "cpu_parameter_calls": 0,
+    "gradient_devices": [
+      "cuda:0"
+    ]
+  },
+  "artifact": "/ml2/hypergan/gpu-leaderboard-20260924/runs/H/vector_overlap/result.json",
+  "metrics": {
+    "sw1_normalized": 0.06277263057478852,
+    "mean_error": 0.03349025174975395,
+    "covariance_error": 0.20256944000720978,
+    "target_scale": 0.8509407043457031,
+    "sample_count": 4096
+  },
+  "verdict": {
+    "status": "PASS",
+    "attempted": true,
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "sw1_normalized",
+        "value": 0.06277263057478852,
+        "op": "<=",
+        "threshold": 0.18,
+        "status": "PASS",
+        "margin": 0.11722736942521148
+      },
+      {
+        "metric": "mean_error",
+        "value": 0.03349025174975395,
+        "op": "<=",
+        "threshold": 0.15,
+        "status": "PASS",
+        "margin": 0.11650974825024604
+      },
+      {
+        "metric": "covariance_error",
+        "value": 0.20256944000720978,
+        "op": "<=",
+        "threshold": 0.45,
+        "status": "PASS",
+        "margin": 0.24743055999279023
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 21,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 11,
+      "first_pass_step": 50,
+      "stable_from_step": 700,
+      "stable_from_seconds": 11.160548705840483,
+      "confirmed_step": 900,
+      "confirmed_seconds": 14.210838190978393
+    },
+    "shortfall": 0.0,
+    "confirmation_fraction": 0.75
+  }
+}

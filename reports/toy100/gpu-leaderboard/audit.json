@@ -1,0 +1,658 @@
+{
+  "status": "PASS",
+  "complete": true,
+  "expected_cells": 184,
+  "scored_runs": 105,
+  "unsupported": 79,
+  "environment": {
+    "profile": "cuda_fp32_v1",
+    "torch": "2.13.0+cu126",
+    "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "device": "cuda:0",
+    "visible_devices": "1",
+    "deterministic": true,
+    "tf32": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace": ":4096:8",
+    "threads": 1,
+    "interop": 1,
+    "adam_foreach": false,
+    "adam_fused": false
+  },
+  "checks": [
+    {
+      "candidate": "eps_net_1m",
+      "task": "two_pole",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "mode_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "unipolar",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "mid_scale_identity",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "cover_leftover",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "trajectory",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "residual_student",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "img_stripes2",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "img_bars4",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "vector_overlap",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "img_blobs4",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "img_intensity2",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "vector_unequal_mass",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "vector_unequal_width",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "vector_two_broad",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "vector_anisotropic",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "vector_spiral",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "ae_gan_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "unused_token_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "grid100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "rotated100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "staggered100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "eps_net_1m",
+      "task": "convergence",
+      "status": "POST_CONVERGENCE_FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "two_pole",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "mode_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "unipolar",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "mid_scale_identity",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "cover_leftover",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "trajectory",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "residual_student",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "img_stripes2",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "img_bars4",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "vector_overlap",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "img_blobs4",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "img_intensity2",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "vector_unequal_mass",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "vector_unequal_width",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "vector_two_broad",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "vector_anisotropic",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "vector_spiral",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "ae_gan_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "unused_token_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "grid100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "rotated100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "staggered100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "H",
+      "task": "convergence",
+      "status": "NOT_CONVERGED",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "two_pole",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "mode_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "unipolar",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "mid_scale_identity",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "cover_leftover",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "trajectory",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "residual_student",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "img_stripes2",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "img_bars4",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "vector_overlap",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "img_blobs4",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "img_intensity2",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "vector_unequal_mass",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "vector_unequal_width",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "vector_two_broad",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "vector_anisotropic",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "vector_spiral",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "ae_gan_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "unused_token_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "grid100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "rotated100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "staggered100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms",
+      "task": "convergence",
+      "status": "POST_CONVERGENCE_FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "two_pole",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "mode_hold",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "unipolar",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "mid_scale_identity",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "cover_leftover",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "trajectory",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "residual_student",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "img_stripes2",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "img_bars4",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "vector_overlap",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "img_blobs4",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "img_intensity2",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "vector_unequal_mass",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "vector_unequal_width",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "vector_two_broad",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "vector_anisotropic",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "vector_spiral",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "ae_gan_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "unused_token_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "grid100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "rotated100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "staggered100",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_column_rms",
+      "task": "convergence",
+      "status": "POST_CONVERGENCE_FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms_average2",
+      "task": "two_pole",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms_average2",
+      "task": "mode_hold",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms_average2",
+      "task": "unipolar",
+      "status": "PASS",
+      "verified": true
+    },
+    {
+      "candidate": "shared_rms_average2",
+      "task": "convergence",
+      "status": "POST_CONVERGENCE_FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "PR107",
+      "task": "mode_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "PR107",
+      "task": "trajectory",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "PR107",
+      "task": "convergence",
+      "status": "NOT_CONVERGED",
+      "verified": true
+    },
+    {
+      "candidate": "PR140",
+      "task": "mode_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "PR140",
+      "task": "trajectory",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "PR140",
+      "task": "convergence",
+      "status": "NOT_CONVERGED",
+      "verified": true
+    },
+    {
+      "candidate": "PR143",
+      "task": "mode_hold",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "PR143",
+      "task": "trajectory",
+      "status": "FAIL",
+      "verified": true
+    },
+    {
+      "candidate": "PR143",
+      "task": "convergence",
+      "status": "POST_CONVERGENCE_FAIL",
+      "verified": true
+    }
+  ]
+}

@@ -1,0 +1,402 @@
+{
+  "spec": {
+    "name": "trajectory",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Preserves the shared trajectory's identity constraint.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 400,
+    "thresholds": [
+      [
+        "identity_mse",
+        "<=",
+        0.02
+      ]
+    ]
+  },
+  "result": {
+    "live": {
+      "identity_mse": 0.0017237109132111073
+    },
+    "raw": {
+      "identity_mse": 0.0017237109132111073,
+      "paired_target_mse": 0.0017237109132111073,
+      "verdict": "PASS",
+      "set_cover": 0.027579378336668015,
+      "own_nearest_fraction": 1.0,
+      "particle_mean_square": 0.19549447298049927,
+      "particle_std_mean": 0.4558931291103363,
+      "critic_gradient_median": 0.02400110848248005,
+      "critic_gradient_max": 0.04051685333251953
+    },
+    "observations": [
+      {
+        "identity_mse": 0.2547221779823303,
+        "step": 17,
+        "seconds": 0.4938742099329829
+      },
+      {
+        "identity_mse": 0.1187477856874466,
+        "step": 34,
+        "seconds": 0.6643480330239981
+      },
+      {
+        "identity_mse": 0.041904713958501816,
+        "step": 50,
+        "seconds": 0.8379375271033496
+      },
+      {
+        "identity_mse": 0.013711117208003998,
+        "step": 67,
+        "seconds": 1.10594005510211
+      },
+      {
+        "identity_mse": 0.0109026450663805,
+        "step": 84,
+        "seconds": 1.2748394070658833
+      },
+      {
+        "identity_mse": 0.009464188478887081,
+        "step": 100,
+        "seconds": 1.4435153200756758
+      },
+      {
+        "identity_mse": 0.006893133278936148,
+        "step": 117,
+        "seconds": 1.620557514950633
+      },
+      {
+        "identity_mse": 0.005559115670621395,
+        "step": 134,
+        "seconds": 1.8022867031395435
+      },
+      {
+        "identity_mse": 0.0048225983045995235,
+        "step": 150,
+        "seconds": 1.9852536129765213
+      },
+      {
+        "identity_mse": 0.003199257655069232,
+        "step": 167,
+        "seconds": 2.1602899490389973
+      },
+      {
+        "identity_mse": 0.002878202125430107,
+        "step": 184,
+        "seconds": 2.362639568047598
+      },
+      {
+        "identity_mse": 0.00286690890789032,
+        "step": 200,
+        "seconds": 2.5572941300924867
+      },
+      {
+        "identity_mse": 0.0027773394249379635,
+        "step": 217,
+        "seconds": 2.749457336962223
+      },
+      {
+        "identity_mse": 0.0027402364648878574,
+        "step": 234,
+        "seconds": 2.921972648007795
+      },
+      {
+        "identity_mse": 0.00265242881141603,
+        "step": 250,
+        "seconds": 3.106048221932724
+      },
+      {
+        "identity_mse": 0.0023707859218120575,
+        "step": 267,
+        "seconds": 3.2995373220182955
+      },
+      {
+        "identity_mse": 0.0022071467246860266,
+        "step": 284,
+        "seconds": 3.5000511901453137
+      },
+      {
+        "identity_mse": 0.0019395644776523113,
+        "step": 300,
+        "seconds": 3.675682072993368
+      },
+      {
+        "identity_mse": 0.002264745067805052,
+        "step": 317,
+        "seconds": 3.8496261260006577
+      },
+      {
+        "identity_mse": 0.0014771148562431335,
+        "step": 334,
+        "seconds": 4.023990056011826
+      },
+      {
+        "identity_mse": 0.0017685977509245276,
+        "step": 350,
+        "seconds": 4.208586107008159
+      },
+      {
+        "identity_mse": 0.0017256333958357573,
+        "step": 367,
+        "seconds": 4.383469423977658
+      },
+      {
+        "identity_mse": 0.0019786334596574306,
+        "step": 384,
+        "seconds": 4.580089766066521
+      },
+      {
+        "identity_mse": 0.0017237109132111073,
+        "step": 400,
+        "seconds": 4.790428447071463
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 21,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 21,
+      "first_pass_step": 67,
+      "stable_from_step": 67,
+      "stable_from_seconds": 1.10594005510211,
+      "confirmed_step": 134,
+      "confirmed_seconds": 1.8022867031395435
+    },
+    "actions": [
+      {
+        "step": 0,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 0,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 20,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 20,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 40,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 40,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 60,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 60,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 80,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 80,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 100,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 100,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 120,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 120,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 140,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 140,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 160,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 160,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 180,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 180,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 200,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 200,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 220,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 220,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 240,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 240,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 260,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 260,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 280,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 280,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 300,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 300,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 320,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 320,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 340,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 340,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 360,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 360,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 380,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 380,
+        "role": "g",
+        "multiplier": 1.0
+      }
+    ],
+    "seconds": 4.847109979018569
+  },
+  "verdict": {
+    "status": "PASS",
+    "attempted": true,
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "identity_mse",
+        "value": 0.0017237109132111073,
+        "op": "<=",
+        "threshold": 0.02,
+        "status": "PASS",
+        "margin": 0.018276289086788893
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 21,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 21,
+      "first_pass_step": 67,
+      "stable_from_step": 67,
+      "stable_from_seconds": 1.10594005510211,
+      "confirmed_step": 134,
+      "confirmed_seconds": 1.8022867031395435
+    },
+    "shortfall": 0.0,
+    "confirmation_fraction": 0.335
+  }
+}

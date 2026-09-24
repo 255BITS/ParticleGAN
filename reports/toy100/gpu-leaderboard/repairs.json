@@ -1,0 +1,14 @@
+[
+  {
+    "host": "mid_scale_identity",
+    "reason": "CPU-only guard rejected CUDA before any updates",
+    "change": "Validate teacher/student device agreement; report actual device",
+    "scores_changed": false
+  },
+  {
+    "host": "ae_gan_hold",
+    "reason": "CPU RNG restore received CUDA stream state before any optimizer updates",
+    "change": "Restore CUDA stream state to CUDA and preserve both global RNG states during evaluation",
+    "scores_changed": false
+  }
+]
