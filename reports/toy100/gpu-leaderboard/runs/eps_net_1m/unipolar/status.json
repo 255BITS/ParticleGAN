@@ -1,0 +1,95 @@
+{
+  "candidate": "eps_net_1m",
+  "task": "unipolar",
+  "status": "FAIL",
+  "seconds": 6.935188111150637,
+  "environment": {
+    "profile": "cuda_fp32_v1",
+    "torch": "2.13.0+cu126",
+    "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "device": "cuda:0",
+    "visible_devices": "1",
+    "deterministic": true,
+    "tf32": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace": ":4096:8",
+    "threads": 1,
+    "interop": 1,
+    "adam_foreach": false,
+    "adam_fused": false
+  },
+  "device_proof": {
+    "adam_calls": 800,
+    "optimizers": {
+      "123341427626240": {
+        "calls": 400,
+        "parameters": 4609,
+        "device": "cuda:0"
+      },
+      "123341406930944": {
+        "calls": 400,
+        "parameters": 12,
+        "device": "cuda:0"
+      }
+    },
+    "cpu_parameter_calls": 0,
+    "gradient_devices": [
+      "cuda:0"
+    ]
+  },
+  "artifact": "/ml2/hypergan/gpu-leaderboard-20260924/runs/eps_net_1m/unipolar/result.json",
+  "metrics": {
+    "cover": 0.8719526400027178,
+    "off_caption": 4.167895019942825e-05,
+    "neu_hold": 0.8039313405752182
+  },
+  "verdict": {
+    "status": "FAIL",
+    "attempted": true,
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "cover",
+        "value": 0.8719526400027178,
+        "op": ">=",
+        "threshold": 0.85,
+        "status": "PASS",
+        "margin": 0.021952640002717794
+      },
+      {
+        "metric": "off_caption",
+        "value": 4.167895019942825e-05,
+        "op": "<=",
+        "threshold": 0.05,
+        "status": "PASS",
+        "margin": 0.04995832104980057
+      },
+      {
+        "metric": "neu_hold",
+        "value": 0.8039313405752182,
+        "op": ">=",
+        "threshold": 0.85,
+        "status": "FAIL",
+        "margin": -0.04606865942478178
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "shortfall": 0.018066140950894816,
+    "confirmation_fraction": 2.0
+  }
+}

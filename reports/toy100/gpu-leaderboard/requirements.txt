@@ -1,0 +1,7 @@
+# Python 3.12.13; NVIDIA driver 580.173.02 in the measured environment.
+# Install torch from https://download.pytorch.org/whl/cu126 before the rest.
+torch==2.13.0+cu126
+numpy==2.5.2
+scipy==1.18.1
+matplotlib==3.11.2
+pillow==12.3.0

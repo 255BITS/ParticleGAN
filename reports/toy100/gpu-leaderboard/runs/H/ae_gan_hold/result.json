@@ -1,0 +1,368 @@
+{
+  "spec": {
+    "name": "ae_gan_hold",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Adversarial training preserves reconstruction and hold behavior.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 250,
+    "thresholds": [
+      [
+        "recon_mse",
+        "<=",
+        0.05
+      ],
+      [
+        "hold",
+        "<=",
+        0.35
+      ]
+    ]
+  },
+  "result": {
+    "live": {
+      "recon_mse": 2.250964641571045,
+      "hold": 0.0010776888811960816
+    },
+    "raw": {
+      "name": "h_n05r06_mixup_c0p01_lr15",
+      "recon_mse": 2.250964641571045,
+      "hold": 0.0010776888811960816,
+      "init_recon_mse": 1.2077884674072266,
+      "penalty_applied": 250,
+      "adv_steps": 250,
+      "steps": 250
+    },
+    "observations": [
+      {
+        "recon_mse": 1.226015329360962,
+        "hold": 1.2755475044250488,
+        "step": 11,
+        "seconds": 0.7343524368479848
+      },
+      {
+        "recon_mse": 1.326550841331482,
+        "hold": 1.2049331665039062,
+        "step": 21,
+        "seconds": 0.8478585400152951
+      },
+      {
+        "recon_mse": 1.447622299194336,
+        "hold": 1.056127905845642,
+        "step": 32,
+        "seconds": 0.976550473831594
+      },
+      {
+        "recon_mse": 1.631304383277893,
+        "hold": 0.8465054631233215,
+        "step": 42,
+        "seconds": 1.0904107550159097
+      },
+      {
+        "recon_mse": 1.8565007448196411,
+        "hold": 0.4703536629676819,
+        "step": 53,
+        "seconds": 1.2158482589293271
+      },
+      {
+        "recon_mse": 2.119770050048828,
+        "hold": 0.17082123458385468,
+        "step": 63,
+        "seconds": 1.319641477894038
+      },
+      {
+        "recon_mse": 2.158318281173706,
+        "hold": 0.14258210361003876,
+        "step": 73,
+        "seconds": 1.4345462420023978
+      },
+      {
+        "recon_mse": 2.1825625896453857,
+        "hold": 0.12884411215782166,
+        "step": 84,
+        "seconds": 1.5512644259724766
+      },
+      {
+        "recon_mse": 2.920041561126709,
+        "hold": 0.02395954728126526,
+        "step": 94,
+        "seconds": 1.6750111898873001
+      },
+      {
+        "recon_mse": 4.119751930236816,
+        "hold": 0.028962483629584312,
+        "step": 105,
+        "seconds": 1.8142512228805572
+      },
+      {
+        "recon_mse": 3.9022984504699707,
+        "hold": 0.03241793438792229,
+        "step": 115,
+        "seconds": 1.9176436238922179
+      },
+      {
+        "recon_mse": 3.6759727001190186,
+        "hold": 0.033195044845342636,
+        "step": 125,
+        "seconds": 2.0179467438720167
+      },
+      {
+        "recon_mse": 3.541001319885254,
+        "hold": 0.036480534821748734,
+        "step": 136,
+        "seconds": 2.1272384009789675
+      },
+      {
+        "recon_mse": 3.431513547897339,
+        "hold": 0.05350916087627411,
+        "step": 146,
+        "seconds": 2.2346448979806155
+      },
+      {
+        "recon_mse": 3.118072509765625,
+        "hold": 0.033238478004932404,
+        "step": 157,
+        "seconds": 2.3675203188322484
+      },
+      {
+        "recon_mse": 2.651428461074829,
+        "hold": 0.005964310839772224,
+        "step": 167,
+        "seconds": 2.468358584912494
+      },
+      {
+        "recon_mse": 2.1701807975769043,
+        "hold": 0.01580844819545746,
+        "step": 178,
+        "seconds": 2.579778319923207
+      },
+      {
+        "recon_mse": 2.0181798934936523,
+        "hold": 0.005464818794280291,
+        "step": 188,
+        "seconds": 2.682003137888387
+      },
+      {
+        "recon_mse": 2.0394365787506104,
+        "hold": 0.0075530437752604485,
+        "step": 198,
+        "seconds": 2.781587950885296
+      },
+      {
+        "recon_mse": 2.029062509536743,
+        "hold": 0.007022777106612921,
+        "step": 209,
+        "seconds": 2.911981565877795
+      },
+      {
+        "recon_mse": 2.0890743732452393,
+        "hold": 0.0009687789715826511,
+        "step": 219,
+        "seconds": 3.035114402882755
+      },
+      {
+        "recon_mse": 2.0808701515197754,
+        "hold": 0.002724855439737439,
+        "step": 230,
+        "seconds": 3.1726288460195065
+      },
+      {
+        "recon_mse": 2.0694665908813477,
+        "hold": 0.0028508040122687817,
+        "step": 240,
+        "seconds": 3.2966484979260713
+      },
+      {
+        "recon_mse": 2.250964641571045,
+        "hold": 0.0010776888811960816,
+        "step": 250,
+        "seconds": 3.4337518939282745
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "actions": [
+      {
+        "step": 0,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 0,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 20,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 20,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 40,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 40,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 60,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 60,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 80,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 80,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 100,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 100,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 120,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 120,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 140,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 140,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 160,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 160,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 180,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 180,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 200,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 200,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 220,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 220,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 240,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 240,
+        "role": "g",
+        "multiplier": 1.0
+      }
+    ],
+    "seconds": 3.437116145156324
+  },
+  "verdict": {
+    "status": "FAIL",
+    "attempted": true,
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "recon_mse",
+        "value": 2.250964641571045,
+        "op": "<=",
+        "threshold": 0.05,
+        "status": "FAIL",
+        "margin": -2.200964641571045
+      },
+      {
+        "metric": "hold",
+        "value": 0.0010776888811960816,
+        "op": "<=",
+        "threshold": 0.35,
+        "status": "PASS",
+        "margin": 0.3489223111188039
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "shortfall": 1.0,
+    "confirmation_fraction": 2.0
+  }
+}

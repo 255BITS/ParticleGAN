@@ -1,0 +1,5670 @@
+{
+  "status": "POST_CONVERGENCE_FAIL",
+  "convergence": {
+    "name": "first_convergence_then_hold_v1",
+    "confirmation_checks": 200,
+    "settling_budget": 4800,
+    "hold_budget": 1200,
+    "start_step": 1200,
+    "modes": 8,
+    "min_hq": 0.9,
+    "convergence": "first consecutive qualifying window; operational quality criterion",
+    "hold": "the next updates, disjoint from confirmation; no restart after failure",
+    "training_feedback": false,
+    "frozen_toy_verdicts_unchanged": true,
+    "status": "POST_CONVERGENCE_FAIL",
+    "converged_step": 1400,
+    "settling_checks": 200,
+    "settling_failures": 0,
+    "longest_settling_streak": 200,
+    "hold_checks": 12,
+    "first_hold_failure": 1412,
+    "hold_budget_complete": false
+  },
+  "diagnostic": [
+    {
+      "event": "checkpoint",
+      "step": 10,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 20,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 30,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 40,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 50,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 60,
+      "modes": 1,
+      "hq": 0.42333984375,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        1734,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 70,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 80,
+      "modes": 1,
+      "hq": 0.17578125,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        720,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 90,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 100,
+      "modes": 1,
+      "hq": 0.0986328125,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        404,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 110,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 120,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 130,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 140,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 150,
+      "modes": 1,
+      "hq": 0.062744140625,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        257
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 160,
+      "modes": 1,
+      "hq": 0.02197265625,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        90
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 170,
+      "modes": 1,
+      "hq": 0.085205078125,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        349
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 180,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 190,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 200,
+      "modes": 2,
+      "hq": 0.1640625,
+      "effective_modes": 1.811454176902771,
+      "hq_counts": [
+        0,
+        0,
+        189,
+        0,
+        0,
+        0,
+        0,
+        483
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 210,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 220,
+      "modes": 1,
+      "hq": 0.08154296875,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        334
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 230,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 240,
+      "modes": 1,
+      "hq": 0.098876953125,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        405,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 250,
+      "modes": 2,
+      "hq": 0.217041015625,
+      "effective_modes": 1.944980263710022,
+      "hq_counts": [
+        0,
+        0,
+        549,
+        0,
+        0,
+        340,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 260,
+      "modes": 1,
+      "hq": 0.0009765625,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        4,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 270,
+      "modes": 3,
+      "hq": 0.089111328125,
+      "effective_modes": 1.3645288944244385,
+      "hq_counts": [
+        0,
+        0,
+        3,
+        0,
+        0,
+        335,
+        27,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 280,
+      "modes": 1,
+      "hq": 0.000244140625,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 290,
+      "modes": 3,
+      "hq": 0.245361328125,
+      "effective_modes": 1.9040502309799194,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        335,
+        1,
+        0,
+        669,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 300,
+      "modes": 2,
+      "hq": 0.09130859375,
+      "effective_modes": 1.999542474746704,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        191,
+        0,
+        183,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 310,
+      "modes": 2,
+      "hq": 0.0673828125,
+      "effective_modes": 1.6722142696380615,
+      "hq_counts": [
+        0,
+        58,
+        0,
+        0,
+        218,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 320,
+      "modes": 1,
+      "hq": 0.227294921875,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        931,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 330,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 340,
+      "modes": 3,
+      "hq": 0.40625,
+      "effective_modes": 2.5795693397521973,
+      "hq_counts": [
+        0,
+        1002,
+        0,
+        343,
+        319,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 350,
+      "modes": 1,
+      "hq": 0.00244140625,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        10,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 360,
+      "modes": 4,
+      "hq": 0.126220703125,
+      "effective_modes": 1.989520788192749,
+      "hq_counts": [
+        194,
+        0,
+        0,
+        1,
+        321,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 370,
+      "modes": 1,
+      "hq": 0.111328125,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        456,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 380,
+      "modes": 3,
+      "hq": 0.242919921875,
+      "effective_modes": 2.999551773071289,
+      "hq_counts": [
+        0,
+        0,
+        339,
+        331,
+        0,
+        0,
+        325,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 390,
+      "modes": 3,
+      "hq": 0.11279296875,
+      "effective_modes": 1.990207314491272,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        87,
+        26,
+        0,
+        349,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 400,
+      "modes": 1,
+      "hq": 0.135986328125,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        557,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 410,
+      "modes": 1,
+      "hq": 0.03125,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        128,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 420,
+      "modes": 2,
+      "hq": 0.26025390625,
+      "effective_modes": 1.8755261898040771,
+      "hq_counts": [
+        0,
+        722,
+        0,
+        344,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 430,
+      "modes": 2,
+      "hq": 0.210205078125,
+      "effective_modes": 1.555894136428833,
+      "hq_counts": [
+        0,
+        722,
+        0,
+        139,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 440,
+      "modes": 2,
+      "hq": 0.199462890625,
+      "effective_modes": 1.4325344562530518,
+      "hq_counts": [
+        0,
+        722,
+        0,
+        95,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 450,
+      "modes": 1,
+      "hq": 0.17626953125,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        722,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 460,
+      "modes": 1,
+      "hq": 0.085205078125,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        349,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 470,
+      "modes": 3,
+      "hq": 0.144775390625,
+      "effective_modes": 2.147615909576416,
+      "hq_counts": [
+        0,
+        242,
+        0,
+        12,
+        0,
+        0,
+        339,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 480,
+      "modes": 3,
+      "hq": 0.19970703125,
+      "effective_modes": 1.5572983026504517,
+      "hq_counts": [
+        0,
+        722,
+        0,
+        47,
+        0,
+        0,
+        49,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 490,
+      "modes": 2,
+      "hq": 0.145263671875,
+      "effective_modes": 1.0124937295913696,
+      "hq_counts": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        594,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 500,
+      "modes": 1,
+      "hq": 0.140625,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        576,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 510,
+      "modes": 2,
+      "hq": 0.160888671875,
+      "effective_modes": 1.9765561819076538,
+      "hq_counts": [
+        0,
+        380,
+        0,
+        0,
+        0,
+        0,
+        279,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 520,
+      "modes": 0,
+      "hq": 0.0,
+      "effective_modes": 0.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 530,
+      "modes": 3,
+      "hq": 0.172119140625,
+      "effective_modes": 2.7381246089935303,
+      "hq_counts": [
+        0,
+        360,
+        0,
+        0,
+        0,
+        0,
+        227,
+        118
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 540,
+      "modes": 4,
+      "hq": 0.398193359375,
+      "effective_modes": 3.6955552101135254,
+      "hq_counts": [
+        0,
+        368,
+        236,
+        0,
+        0,
+        0,
+        686,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 550,
+      "modes": 3,
+      "hq": 0.49365234375,
+      "effective_modes": 2.7685184478759766,
+      "hq_counts": [
+        0,
+        700,
+        0,
+        0,
+        0,
+        0,
+        981,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 560,
+      "modes": 1,
+      "hq": 0.092529296875,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        379,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 570,
+      "modes": 4,
+      "hq": 0.404052734375,
+      "effective_modes": 3.457348108291626,
+      "hq_counts": [
+        0,
+        722,
+        387,
+        0,
+        0,
+        0,
+        427,
+        119
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 580,
+      "modes": 3,
+      "hq": 0.36669921875,
+      "effective_modes": 2.859750270843506,
+      "hq_counts": [
+        303,
+        669,
+        530,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 590,
+      "modes": 5,
+      "hq": 0.43408203125,
+      "effective_modes": 3.8849737644195557,
+      "hq_counts": [
+        321,
+        722,
+        537,
+        0,
+        0,
+        0,
+        113,
+        85
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 600,
+      "modes": 4,
+      "hq": 0.529541015625,
+      "effective_modes": 3.7822024822235107,
+      "hq_counts": [
+        274,
+        722,
+        511,
+        0,
+        0,
+        0,
+        662,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 610,
+      "modes": 5,
+      "hq": 0.710693359375,
+      "effective_modes": 4.535287380218506,
+      "hq_counts": [
+        299,
+        721,
+        547,
+        0,
+        0,
+        0,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 620,
+      "modes": 6,
+      "hq": 0.752197265625,
+      "effective_modes": 4.6111531257629395,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        3,
+        0,
+        0,
+        1004,
+        337
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 630,
+      "modes": 7,
+      "hq": 0.893798828125,
+      "effective_modes": 6.392627716064453,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        0,
+        322,
+        917,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 640,
+      "modes": 7,
+      "hq": 0.918212890625,
+      "effective_modes": 6.340254306793213,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        0,
+        340,
+        999,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 650,
+      "modes": 7,
+      "hq": 0.91943359375,
+      "effective_modes": 6.33585262298584,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        0,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 660,
+      "modes": 7,
+      "hq": 0.91943359375,
+      "effective_modes": 6.33585262298584,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        0,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 670,
+      "modes": 7,
+      "hq": 0.734130859375,
+      "effective_modes": 4.765388011932373,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        2,
+        0,
+        14,
+        913,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 680,
+      "modes": 5,
+      "hq": 0.71630859375,
+      "effective_modes": 4.665522575378418,
+      "hq_counts": [
+        333,
+        719,
+        682,
+        0,
+        0,
+        0,
+        860,
+        340
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 690,
+      "modes": 5,
+      "hq": 0.740478515625,
+      "effective_modes": 4.604708671569824,
+      "hq_counts": [
+        333,
+        722,
+        663,
+        0,
+        0,
+        0,
+        974,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 700,
+      "modes": 3,
+      "hq": 0.29638671875,
+      "effective_modes": 2.2570605278015137,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        80,
+        0,
+        793,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 710,
+      "modes": 6,
+      "hq": 0.455810546875,
+      "effective_modes": 3.6551220417022705,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        0,
+        16,
+        0,
+        50,
+        64
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 720,
+      "modes": 5,
+      "hq": 0.619384765625,
+      "effective_modes": 4.741684436798096,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        0,
+        0,
+        0,
+        459,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 730,
+      "modes": 5,
+      "hq": 0.49365234375,
+      "effective_modes": 4.188046932220459,
+      "hq_counts": [
+        333,
+        722,
+        66,
+        0,
+        0,
+        0,
+        560,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 740,
+      "modes": 6,
+      "hq": 0.58251953125,
+      "effective_modes": 4.783272743225098,
+      "hq_counts": [
+        333,
+        721,
+        681,
+        17,
+        0,
+        0,
+        293,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 750,
+      "modes": 6,
+      "hq": 0.806396484375,
+      "effective_modes": 5.451725482940674,
+      "hq_counts": [
+        333,
+        722,
+        678,
+        344,
+        0,
+        0,
+        934,
+        292
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 760,
+      "modes": 5,
+      "hq": 0.55859375,
+      "effective_modes": 4.666337490081787,
+      "hq_counts": [
+        332,
+        722,
+        605,
+        0,
+        0,
+        0,
+        288,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 770,
+      "modes": 5,
+      "hq": 0.697509765625,
+      "effective_modes": 4.700485706329346,
+      "hq_counts": [
+        333,
+        722,
+        673,
+        0,
+        0,
+        0,
+        788,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 780,
+      "modes": 5,
+      "hq": 0.559814453125,
+      "effective_modes": 4.670244216918945,
+      "hq_counts": [
+        333,
+        722,
+        606,
+        0,
+        0,
+        0,
+        292,
+        340
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 790,
+      "modes": 5,
+      "hq": 0.750244140625,
+      "effective_modes": 4.5913166999816895,
+      "hq_counts": [
+        333,
+        722,
+        681,
+        0,
+        0,
+        0,
+        996,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 800,
+      "modes": 3,
+      "hq": 0.239013671875,
+      "effective_modes": 2.709230661392212,
+      "hq_counts": [
+        331,
+        149,
+        499,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 810,
+      "modes": 5,
+      "hq": 0.75244140625,
+      "effective_modes": 4.586527347564697,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        0,
+        0,
+        0,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 820,
+      "modes": 3,
+      "hq": 0.344482421875,
+      "effective_modes": 2.1101245880126953,
+      "hq_counts": [
+        16,
+        722,
+        673,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 830,
+      "modes": 6,
+      "hq": 0.655029296875,
+      "effective_modes": 4.906619548797607,
+      "hq_counts": [
+        323,
+        722,
+        358,
+        0,
+        330,
+        0,
+        885,
+        65
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 840,
+      "modes": 6,
+      "hq": 0.7421875,
+      "effective_modes": 4.681866645812988,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        0,
+        8,
+        0,
+        954,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 850,
+      "modes": 6,
+      "hq": 0.813720703125,
+      "effective_modes": 5.494660377502441,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        0,
+        329,
+        0,
+        926,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 860,
+      "modes": 1,
+      "hq": 0.083251953125,
+      "effective_modes": 1.0,
+      "hq_counts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 870,
+      "modes": 6,
+      "hq": 0.656005859375,
+      "effective_modes": 5.642646312713623,
+      "hq_counts": [
+        315,
+        670,
+        682,
+        344,
+        0,
+        340,
+        0,
+        336
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 880,
+      "modes": 6,
+      "hq": 0.705078125,
+      "effective_modes": 5.004244804382324,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        341,
+        0,
+        0,
+        760,
+        50
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 890,
+      "modes": 6,
+      "hq": 0.812255859375,
+      "effective_modes": 5.333489418029785,
+      "hq_counts": [
+        332,
+        722,
+        682,
+        246,
+        0,
+        0,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 900,
+      "modes": 7,
+      "hq": 0.91943359375,
+      "effective_modes": 6.33585262298584,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        0,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 910,
+      "modes": 7,
+      "hq": 0.908203125,
+      "effective_modes": 6.288176536560059,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        298,
+        0,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 920,
+      "modes": 7,
+      "hq": 0.903076171875,
+      "effective_modes": 6.262561321258545,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        277,
+        0,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 930,
+      "modes": 7,
+      "hq": 0.899169921875,
+      "effective_modes": 6.249286651611328,
+      "hq_counts": [
+        333,
+        722,
+        677,
+        266,
+        0,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 940,
+      "modes": 7,
+      "hq": 0.87158203125,
+      "effective_modes": 6.346820831298828,
+      "hq_counts": [
+        332,
+        722,
+        671,
+        344,
+        0,
+        265,
+        895,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 950,
+      "modes": 5,
+      "hq": 0.476806640625,
+      "effective_modes": 4.401078701019287,
+      "hq_counts": [
+        297,
+        722,
+        212,
+        0,
+        0,
+        0,
+        521,
+        201
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 960,
+      "modes": 5,
+      "hq": 0.46142578125,
+      "effective_modes": 4.064940452575684,
+      "hq_counts": [
+        333,
+        722,
+        466,
+        0,
+        0,
+        0,
+        38,
+        331
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 970,
+      "modes": 6,
+      "hq": 0.41650390625,
+      "effective_modes": 3.4923224449157715,
+      "hq_counts": [
+        9,
+        28,
+        682,
+        50,
+        0,
+        0,
+        607,
+        330
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 980,
+      "modes": 3,
+      "hq": 0.28857421875,
+      "effective_modes": 2.471095323562622,
+      "hq_counts": [
+        0,
+        711,
+        127,
+        344,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 990,
+      "modes": 4,
+      "hq": 0.255859375,
+      "effective_modes": 3.026364326477051,
+      "hq_counts": [
+        2,
+        318,
+        384,
+        344,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1000,
+      "modes": 5,
+      "hq": 0.341796875,
+      "effective_modes": 3.3788228034973145,
+      "hq_counts": [
+        0,
+        315,
+        676,
+        51,
+        0,
+        0,
+        335,
+        23
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1010,
+      "modes": 7,
+      "hq": 0.74072265625,
+      "effective_modes": 6.518161296844482,
+      "hq_counts": [
+        332,
+        722,
+        316,
+        344,
+        0,
+        297,
+        683,
+        340
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1020,
+      "modes": 7,
+      "hq": 0.9169921875,
+      "effective_modes": 6.326258182525635,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        0,
+        340,
+        1004,
+        331
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1030,
+      "modes": 7,
+      "hq": 0.91845703125,
+      "effective_modes": 6.332054138183594,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        0,
+        336,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1040,
+      "modes": 7,
+      "hq": 0.91943359375,
+      "effective_modes": 6.33585262298584,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        0,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1050,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1060,
+      "modes": 8,
+      "hq": 0.99609375,
+      "effective_modes": 7.20991325378418,
+      "hq_counts": [
+        317,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1070,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226032257080078,
+      "hq_counts": [
+        333,
+        721,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1080,
+      "modes": 8,
+      "hq": 0.9892578125,
+      "effective_modes": 7.2477803230285645,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        319,
+        340,
+        971,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1090,
+      "modes": 8,
+      "hq": 0.974365234375,
+      "effective_modes": 7.092370986938477,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        225,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1100,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1110,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.223835468292236,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        342,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1120,
+      "modes": 8,
+      "hq": 0.994140625,
+      "effective_modes": 7.235083103179932,
+      "hq_counts": [
+        333,
+        722,
+        661,
+        344,
+        330,
+        340,
+        1001,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1130,
+      "modes": 8,
+      "hq": 0.840087890625,
+      "effective_modes": 6.448937892913818,
+      "hq_counts": [
+        333,
+        722,
+        27,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1140,
+      "modes": 8,
+      "hq": 0.998779296875,
+      "effective_modes": 7.227212905883789,
+      "hq_counts": [
+        333,
+        722,
+        677,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1150,
+      "modes": 8,
+      "hq": 0.998779296875,
+      "effective_modes": 7.230639457702637,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        999,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1160,
+      "modes": 8,
+      "hq": 0.99755859375,
+      "effective_modes": 7.216331958770752,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        330,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1170,
+      "modes": 8,
+      "hq": 0.993408203125,
+      "effective_modes": 7.252571105957031,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        977,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1180,
+      "modes": 8,
+      "hq": 0.973876953125,
+      "effective_modes": 7.259995937347412,
+      "hq_counts": [
+        333,
+        615,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1190,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1200,
+      "modes": 8,
+      "hq": 0.9765625,
+      "effective_modes": 7.313022613525391,
+      "hq_counts": [
+        333,
+        720,
+        673,
+        344,
+        330,
+        340,
+        919,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1201,
+      "modes": 8,
+      "hq": 0.98779296875,
+      "effective_modes": 7.273271560668945,
+      "hq_counts": [
+        333,
+        722,
+        679,
+        344,
+        330,
+        340,
+        957,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1202,
+      "modes": 8,
+      "hq": 0.992919921875,
+      "effective_modes": 7.254547119140625,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        975,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1203,
+      "modes": 8,
+      "hq": 0.9921875,
+      "effective_modes": 7.257505416870117,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        972,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1204,
+      "modes": 8,
+      "hq": 0.99658203125,
+      "effective_modes": 7.239655494689941,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        990,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1205,
+      "modes": 8,
+      "hq": 0.996826171875,
+      "effective_modes": 7.238656044006348,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        991,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1206,
+      "modes": 8,
+      "hq": 0.997802734375,
+      "effective_modes": 7.234654426574707,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        995,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1207,
+      "modes": 8,
+      "hq": 0.999267578125,
+      "effective_modes": 7.2280497550964355,
+      "hq_counts": [
+        333,
+        721,
+        682,
+        344,
+        330,
+        340,
+        1002,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1208,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1209,
+      "modes": 8,
+      "hq": 0.9990234375,
+      "effective_modes": 7.2284746170043945,
+      "hq_counts": [
+        333,
+        720,
+        682,
+        344,
+        330,
+        340,
+        1002,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1210,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226614952087402,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1211,
+      "modes": 8,
+      "hq": 0.998779296875,
+      "effective_modes": 7.2288031578063965,
+      "hq_counts": [
+        333,
+        720,
+        681,
+        344,
+        330,
+        340,
+        1002,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1212,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1213,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226614952087402,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1214,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1215,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.2259321212768555,
+      "hq_counts": [
+        333,
+        722,
+        681,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1216,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.2259321212768555,
+      "hq_counts": [
+        333,
+        722,
+        681,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1217,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226614952087402,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1218,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226614952087402,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1219,
+      "modes": 8,
+      "hq": 0.999267578125,
+      "effective_modes": 7.228628158569336,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1001,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1220,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226614952087402,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1221,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1222,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.22470760345459,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        340
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1223,
+      "modes": 8,
+      "hq": 0.998779296875,
+      "effective_modes": 7.227718830108643,
+      "hq_counts": [
+        333,
+        717,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1224,
+      "modes": 8,
+      "hq": 0.989501953125,
+      "effective_modes": 7.242242813110352,
+      "hq_counts": [
+        333,
+        679,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1225,
+      "modes": 8,
+      "hq": 0.96240234375,
+      "effective_modes": 7.266871452331543,
+      "hq_counts": [
+        333,
+        568,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1226,
+      "modes": 8,
+      "hq": 0.94482421875,
+      "effective_modes": 7.265377998352051,
+      "hq_counts": [
+        333,
+        496,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1227,
+      "modes": 8,
+      "hq": 0.94287109375,
+      "effective_modes": 7.2641987800598145,
+      "hq_counts": [
+        333,
+        488,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1228,
+      "modes": 8,
+      "hq": 0.94287109375,
+      "effective_modes": 7.268444538116455,
+      "hq_counts": [
+        333,
+        495,
+        675,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1229,
+      "modes": 8,
+      "hq": 0.961181640625,
+      "effective_modes": 7.2672624588012695,
+      "hq_counts": [
+        333,
+        563,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1230,
+      "modes": 8,
+      "hq": 0.978271484375,
+      "effective_modes": 7.255922317504883,
+      "hq_counts": [
+        333,
+        633,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1231,
+      "modes": 8,
+      "hq": 0.994873046875,
+      "effective_modes": 7.23416805267334,
+      "hq_counts": [
+        333,
+        701,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1232,
+      "modes": 8,
+      "hq": 0.99755859375,
+      "effective_modes": 7.22978401184082,
+      "hq_counts": [
+        333,
+        712,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1233,
+      "modes": 8,
+      "hq": 0.998291015625,
+      "effective_modes": 7.228549957275391,
+      "hq_counts": [
+        333,
+        715,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1234,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226032257080078,
+      "hq_counts": [
+        333,
+        721,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1235,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226032257080078,
+      "hq_counts": [
+        333,
+        721,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1236,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1237,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1238,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1239,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1240,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1241,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.2259321212768555,
+      "hq_counts": [
+        333,
+        722,
+        681,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1242,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1243,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.226255416870117,
+      "hq_counts": [
+        333,
+        722,
+        680,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1244,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1245,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1246,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1247,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1248,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1249,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1250,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.226457595825195,
+      "hq_counts": [
+        333,
+        720,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1251,
+      "modes": 8,
+      "hq": 0.996337890625,
+      "effective_modes": 7.231804370880127,
+      "hq_counts": [
+        333,
+        707,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1252,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.226457595825195,
+      "hq_counts": [
+        333,
+        720,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1253,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1254,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1255,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1256,
+      "modes": 8,
+      "hq": 0.998779296875,
+      "effective_modes": 7.227212905883789,
+      "hq_counts": [
+        333,
+        722,
+        677,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1257,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1258,
+      "modes": 8,
+      "hq": 0.998779296875,
+      "effective_modes": 7.230639457702637,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        999,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1259,
+      "modes": 8,
+      "hq": 0.998779296875,
+      "effective_modes": 7.230064392089844,
+      "hq_counts": [
+        333,
+        721,
+        682,
+        344,
+        330,
+        340,
+        1000,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1260,
+      "modes": 8,
+      "hq": 0.99560546875,
+      "effective_modes": 7.233622074127197,
+      "hq_counts": [
+        333,
+        705,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1261,
+      "modes": 8,
+      "hq": 0.9833984375,
+      "effective_modes": 7.251008987426758,
+      "hq_counts": [
+        333,
+        655,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1262,
+      "modes": 8,
+      "hq": 0.969970703125,
+      "effective_modes": 7.263908863067627,
+      "hq_counts": [
+        333,
+        600,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1263,
+      "modes": 8,
+      "hq": 0.984130859375,
+      "effective_modes": 7.2501091957092285,
+      "hq_counts": [
+        333,
+        658,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1264,
+      "modes": 8,
+      "hq": 0.996337890625,
+      "effective_modes": 7.233038902282715,
+      "hq_counts": [
+        333,
+        709,
+        682,
+        344,
+        330,
+        340,
+        1002,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1265,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226614952087402,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1266,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226614952087402,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1267,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1268,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226614952087402,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1269,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1270,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1271,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1272,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1273,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1274,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1275,
+      "modes": 8,
+      "hq": 0.999267578125,
+      "effective_modes": 7.228628158569336,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1001,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1276,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.2259321212768555,
+      "hq_counts": [
+        333,
+        722,
+        681,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1277,
+      "modes": 8,
+      "hq": 0.996826171875,
+      "effective_modes": 7.22369384765625,
+      "hq_counts": [
+        333,
+        722,
+        674,
+        339,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1278,
+      "modes": 8,
+      "hq": 0.9931640625,
+      "effective_modes": 7.222417831420898,
+      "hq_counts": [
+        333,
+        720,
+        666,
+        334,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1279,
+      "modes": 8,
+      "hq": 0.9873046875,
+      "effective_modes": 7.213721752166748,
+      "hq_counts": [
+        333,
+        716,
+        659,
+        321,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1280,
+      "modes": 8,
+      "hq": 0.98681640625,
+      "effective_modes": 7.201419830322266,
+      "hq_counts": [
+        333,
+        715,
+        668,
+        313,
+        328,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1281,
+      "modes": 8,
+      "hq": 0.987060546875,
+      "effective_modes": 7.192481994628906,
+      "hq_counts": [
+        333,
+        716,
+        674,
+        305,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1282,
+      "modes": 8,
+      "hq": 0.9921875,
+      "effective_modes": 7.200328350067139,
+      "hq_counts": [
+        333,
+        721,
+        679,
+        316,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1283,
+      "modes": 8,
+      "hq": 0.99609375,
+      "effective_modes": 7.213529586791992,
+      "hq_counts": [
+        333,
+        721,
+        681,
+        330,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1284,
+      "modes": 8,
+      "hq": 0.9990234375,
+      "effective_modes": 7.222042560577393,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        340,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1285,
+      "modes": 8,
+      "hq": 0.999267578125,
+      "effective_modes": 7.222767353057861,
+      "hq_counts": [
+        330,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1286,
+      "modes": 8,
+      "hq": 0.998779296875,
+      "effective_modes": 7.22361946105957,
+      "hq_counts": [
+        330,
+        720,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1287,
+      "modes": 8,
+      "hq": 0.998779296875,
+      "effective_modes": 7.222239017486572,
+      "hq_counts": [
+        329,
+        721,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1288,
+      "modes": 8,
+      "hq": 0.996337890625,
+      "effective_modes": 7.219488620758057,
+      "hq_counts": [
+        324,
+        716,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1289,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.226457595825195,
+      "hq_counts": [
+        333,
+        720,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1290,
+      "modes": 8,
+      "hq": 0.9990234375,
+      "effective_modes": 7.227108478546143,
+      "hq_counts": [
+        333,
+        720,
+        680,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1291,
+      "modes": 8,
+      "hq": 0.998046875,
+      "effective_modes": 7.227752208709717,
+      "hq_counts": [
+        333,
+        721,
+        677,
+        344,
+        330,
+        339,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1292,
+      "modes": 8,
+      "hq": 0.993896484375,
+      "effective_modes": 7.2318115234375,
+      "hq_counts": [
+        333,
+        722,
+        663,
+        344,
+        330,
+        340,
+        1001,
+        338
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1293,
+      "modes": 8,
+      "hq": 0.968017578125,
+      "effective_modes": 7.250741481781006,
+      "hq_counts": [
+        333,
+        717,
+        607,
+        344,
+        330,
+        340,
+        978,
+        316
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1294,
+      "modes": 8,
+      "hq": 0.9521484375,
+      "effective_modes": 7.233882427215576,
+      "hq_counts": [
+        333,
+        709,
+        603,
+        344,
+        330,
+        340,
+        961,
+        280
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1295,
+      "modes": 8,
+      "hq": 0.92822265625,
+      "effective_modes": 7.1844682693481445,
+      "hq_counts": [
+        333,
+        708,
+        574,
+        344,
+        330,
+        340,
+        945,
+        228
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1296,
+      "modes": 8,
+      "hq": 0.9609375,
+      "effective_modes": 7.176714897155762,
+      "hq_counts": [
+        333,
+        717,
+        644,
+        344,
+        330,
+        340,
+        972,
+        256
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1297,
+      "modes": 8,
+      "hq": 0.96728515625,
+      "effective_modes": 7.18333625793457,
+      "hq_counts": [
+        333,
+        722,
+        647,
+        344,
+        330,
+        340,
+        978,
+        268
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1298,
+      "modes": 8,
+      "hq": 0.972412109375,
+      "effective_modes": 7.18949031829834,
+      "hq_counts": [
+        333,
+        722,
+        663,
+        344,
+        330,
+        340,
+        976,
+        275
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1299,
+      "modes": 8,
+      "hq": 0.9794921875,
+      "effective_modes": 7.217063903808594,
+      "hq_counts": [
+        333,
+        722,
+        669,
+        344,
+        330,
+        340,
+        975,
+        299
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1300,
+      "modes": 8,
+      "hq": 0.970947265625,
+      "effective_modes": 7.221701145172119,
+      "hq_counts": [
+        333,
+        722,
+        672,
+        344,
+        330,
+        340,
+        952,
+        284
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1301,
+      "modes": 8,
+      "hq": 0.986328125,
+      "effective_modes": 7.2307915687561035,
+      "hq_counts": [
+        333,
+        722,
+        679,
+        344,
+        330,
+        340,
+        976,
+        316
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1302,
+      "modes": 8,
+      "hq": 0.988525390625,
+      "effective_modes": 7.2462639808654785,
+      "hq_counts": [
+        333,
+        722,
+        677,
+        344,
+        330,
+        340,
+        974,
+        329
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1303,
+      "modes": 8,
+      "hq": 0.995849609375,
+      "effective_modes": 7.239311218261719,
+      "hq_counts": [
+        333,
+        722,
+        677,
+        344,
+        330,
+        340,
+        992,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1304,
+      "modes": 8,
+      "hq": 0.9990234375,
+      "effective_modes": 7.2275872230529785,
+      "hq_counts": [
+        333,
+        722,
+        679,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1305,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1306,
+      "modes": 8,
+      "hq": 0.971923828125,
+      "effective_modes": 7.206456184387207,
+      "hq_counts": [
+        331,
+        722,
+        682,
+        344,
+        330,
+        277,
+        954,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1307,
+      "modes": 8,
+      "hq": 0.935546875,
+      "effective_modes": 7.378178596496582,
+      "hq_counts": [
+        328,
+        720,
+        682,
+        344,
+        330,
+        303,
+        790,
+        335
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1308,
+      "modes": 8,
+      "hq": 0.940185546875,
+      "effective_modes": 7.433351993560791,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        335,
+        766,
+        339
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1309,
+      "modes": 8,
+      "hq": 0.918212890625,
+      "effective_modes": 7.479951858520508,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        339,
+        686,
+        325
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1310,
+      "modes": 8,
+      "hq": 0.9228515625,
+      "effective_modes": 7.491247653961182,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        339,
+        689,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1311,
+      "modes": 8,
+      "hq": 0.923828125,
+      "effective_modes": 7.49017333984375,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        692,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1312,
+      "modes": 8,
+      "hq": 0.923095703125,
+      "effective_modes": 7.492103099822998,
+      "hq_counts": [
+        333,
+        720,
+        679,
+        344,
+        330,
+        340,
+        694,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1313,
+      "modes": 8,
+      "hq": 0.9228515625,
+      "effective_modes": 7.4924421310424805,
+      "hq_counts": [
+        333,
+        714,
+        671,
+        344,
+        330,
+        340,
+        707,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1314,
+      "modes": 8,
+      "hq": 0.9345703125,
+      "effective_modes": 7.458406448364258,
+      "hq_counts": [
+        333,
+        711,
+        673,
+        344,
+        330,
+        340,
+        756,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1315,
+      "modes": 8,
+      "hq": 0.95361328125,
+      "effective_modes": 7.391637325286865,
+      "hq_counts": [
+        333,
+        703,
+        671,
+        344,
+        330,
+        340,
+        844,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1316,
+      "modes": 8,
+      "hq": 0.981201171875,
+      "effective_modes": 7.295528888702393,
+      "hq_counts": [
+        333,
+        718,
+        679,
+        344,
+        329,
+        340,
+        935,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1317,
+      "modes": 8,
+      "hq": 0.981201171875,
+      "effective_modes": 7.295328140258789,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        327,
+        340,
+        930,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1318,
+      "modes": 8,
+      "hq": 0.982421875,
+      "effective_modes": 7.290725231170654,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        342,
+        329,
+        340,
+        935,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1319,
+      "modes": 8,
+      "hq": 0.978515625,
+      "effective_modes": 7.300148963928223,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        343,
+        325,
+        340,
+        922,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1320,
+      "modes": 8,
+      "hq": 0.974365234375,
+      "effective_modes": 7.321664810180664,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        343,
+        328,
+        340,
+        902,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1321,
+      "modes": 8,
+      "hq": 0.968505859375,
+      "effective_modes": 7.348908424377441,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        875,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1322,
+      "modes": 8,
+      "hq": 0.955322265625,
+      "effective_modes": 7.395538806915283,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        821,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1323,
+      "modes": 8,
+      "hq": 0.947021484375,
+      "effective_modes": 7.422990322113037,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        787,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1324,
+      "modes": 8,
+      "hq": 0.9375,
+      "effective_modes": 7.452398300170898,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        748,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1325,
+      "modes": 8,
+      "hq": 0.93212890625,
+      "effective_modes": 7.467906475067139,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        726,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1326,
+      "modes": 8,
+      "hq": 0.931640625,
+      "effective_modes": 7.469273567199707,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        724,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1327,
+      "modes": 8,
+      "hq": 0.9384765625,
+      "effective_modes": 7.449493408203125,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        752,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1328,
+      "modes": 8,
+      "hq": 0.96337890625,
+      "effective_modes": 7.367452621459961,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        854,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1329,
+      "modes": 8,
+      "hq": 0.972900390625,
+      "effective_modes": 7.3326287269592285,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        893,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1330,
+      "modes": 8,
+      "hq": 0.9873046875,
+      "effective_modes": 7.277041912078857,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        952,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1331,
+      "modes": 8,
+      "hq": 0.99658203125,
+      "effective_modes": 7.237761497497559,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        991,
+        340
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1332,
+      "modes": 8,
+      "hq": 0.999267578125,
+      "effective_modes": 7.222894191741943,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        338
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1333,
+      "modes": 8,
+      "hq": 0.998291015625,
+      "effective_modes": 7.23207426071167,
+      "hq_counts": [
+        333,
+        721,
+        682,
+        344,
+        330,
+        340,
+        998,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1334,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226614952087402,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1335,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226614952087402,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1336,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1337,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1338,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1339,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1340,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.226457595825195,
+      "hq_counts": [
+        333,
+        720,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1341,
+      "modes": 8,
+      "hq": 0.95263671875,
+      "effective_modes": 7.098772048950195,
+      "hq_counts": [
+        303,
+        664,
+        682,
+        344,
+        330,
+        340,
+        1001,
+        238
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1342,
+      "modes": 8,
+      "hq": 0.9755859375,
+      "effective_modes": 7.125941276550293,
+      "hq_counts": [
+        326,
+        718,
+        682,
+        344,
+        330,
+        340,
+        1001,
+        255
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1343,
+      "modes": 8,
+      "hq": 0.995361328125,
+      "effective_modes": 7.209643363952637,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        323
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1344,
+      "modes": 8,
+      "hq": 0.999267578125,
+      "effective_modes": 7.222894191741943,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        338
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1345,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1346,
+      "modes": 8,
+      "hq": 0.999267578125,
+      "effective_modes": 7.227265357971191,
+      "hq_counts": [
+        333,
+        722,
+        680,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1347,
+      "modes": 8,
+      "hq": 0.9912109375,
+      "effective_modes": 7.238358974456787,
+      "hq_counts": [
+        333,
+        722,
+        649,
+        344,
+        330,
+        340,
+        1001,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1348,
+      "modes": 8,
+      "hq": 0.99267578125,
+      "effective_modes": 7.237512111663818,
+      "hq_counts": [
+        333,
+        722,
+        656,
+        344,
+        330,
+        340,
+        1000,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1349,
+      "modes": 8,
+      "hq": 0.99609375,
+      "effective_modes": 7.234150409698486,
+      "hq_counts": [
+        333,
+        722,
+        671,
+        344,
+        330,
+        340,
+        999,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1350,
+      "modes": 8,
+      "hq": 0.99658203125,
+      "effective_modes": 7.234347343444824,
+      "hq_counts": [
+        333,
+        721,
+        675,
+        344,
+        330,
+        340,
+        998,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1351,
+      "modes": 8,
+      "hq": 0.998046875,
+      "effective_modes": 7.231071472167969,
+      "hq_counts": [
+        333,
+        722,
+        681,
+        344,
+        330,
+        339,
+        998,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1352,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226614952087402,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1353,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1354,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1355,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1356,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1357,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1358,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1359,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226032257080078,
+      "hq_counts": [
+        333,
+        721,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1360,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1361,
+      "modes": 8,
+      "hq": 0.9990234375,
+      "effective_modes": 7.227108478546143,
+      "hq_counts": [
+        333,
+        720,
+        680,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1362,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1363,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.226255416870117,
+      "hq_counts": [
+        333,
+        722,
+        680,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1364,
+      "modes": 8,
+      "hq": 0.999267578125,
+      "effective_modes": 7.226576328277588,
+      "hq_counts": [
+        333,
+        722,
+        679,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1365,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1366,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1367,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1368,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1369,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1370,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.226255416870117,
+      "hq_counts": [
+        333,
+        722,
+        680,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1371,
+      "modes": 8,
+      "hq": 0.99365234375,
+      "effective_modes": 7.233400821685791,
+      "hq_counts": [
+        333,
+        722,
+        656,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1372,
+      "modes": 8,
+      "hq": 0.974609375,
+      "effective_modes": 7.248712539672852,
+      "hq_counts": [
+        333,
+        722,
+        579,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1373,
+      "modes": 8,
+      "hq": 0.99560546875,
+      "effective_modes": 7.231151580810547,
+      "hq_counts": [
+        333,
+        722,
+        664,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1374,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1375,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1376,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1377,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1378,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1379,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1380,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1381,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1382,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1383,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.226032257080078,
+      "hq_counts": [
+        333,
+        721,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1384,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.226457595825195,
+      "hq_counts": [
+        333,
+        720,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1385,
+      "modes": 8,
+      "hq": 0.999267578125,
+      "effective_modes": 7.22678279876709,
+      "hq_counts": [
+        333,
+        720,
+        681,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1386,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1387,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.2259321212768555,
+      "hq_counts": [
+        333,
+        722,
+        681,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1388,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.2259321212768555,
+      "hq_counts": [
+        333,
+        722,
+        681,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1389,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.226255416870117,
+      "hq_counts": [
+        333,
+        722,
+        680,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1390,
+      "modes": 8,
+      "hq": 0.998779296875,
+      "effective_modes": 7.227212905883789,
+      "hq_counts": [
+        333,
+        722,
+        677,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1391,
+      "modes": 8,
+      "hq": 0.998046875,
+      "effective_modes": 7.228151798248291,
+      "hq_counts": [
+        333,
+        722,
+        674,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1392,
+      "modes": 8,
+      "hq": 0.996826171875,
+      "effective_modes": 7.229677200317383,
+      "hq_counts": [
+        333,
+        722,
+        669,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1393,
+      "modes": 8,
+      "hq": 0.99853515625,
+      "effective_modes": 7.227528095245361,
+      "hq_counts": [
+        333,
+        722,
+        676,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1394,
+      "modes": 8,
+      "hq": 0.999755859375,
+      "effective_modes": 7.2259321212768555,
+      "hq_counts": [
+        333,
+        722,
+        681,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1395,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.226941108703613,
+      "hq_counts": [
+        333,
+        722,
+        681,
+        344,
+        330,
+        340,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1396,
+      "modes": 8,
+      "hq": 0.989501953125,
+      "effective_modes": 7.262670516967773,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        337,
+        964,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1397,
+      "modes": 8,
+      "hq": 0.95751953125,
+      "effective_modes": 7.382936954498291,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        337,
+        833,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1398,
+      "modes": 8,
+      "hq": 0.962158203125,
+      "effective_modes": 7.3662848472595215,
+      "hq_counts": [
+        332,
+        721,
+        682,
+        344,
+        330,
+        338,
+        853,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1399,
+      "modes": 8,
+      "hq": 0.981689453125,
+      "effective_modes": 7.290228366851807,
+      "hq_counts": [
+        330,
+        719,
+        682,
+        344,
+        330,
+        339,
+        936,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1400,
+      "modes": 8,
+      "hq": 0.996826171875,
+      "effective_modes": 7.234623432159424,
+      "hq_counts": [
+        333,
+        715,
+        682,
+        344,
+        330,
+        340,
+        998,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1401,
+      "modes": 8,
+      "hq": 0.99267578125,
+      "effective_modes": 7.203428268432617,
+      "hq_counts": [
+        333,
+        720,
+        682,
+        344,
+        330,
+        340,
+        1002,
+        315
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1402,
+      "modes": 8,
+      "hq": 0.986328125,
+      "effective_modes": 7.167559623718262,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        342,
+        330,
+        340,
+        1004,
+        287
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1403,
+      "modes": 8,
+      "hq": 0.980712890625,
+      "effective_modes": 7.137402534484863,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        262
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1404,
+      "modes": 8,
+      "hq": 0.995849609375,
+      "effective_modes": 7.209618091583252,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        324
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1405,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.223804473876953,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        339
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1406,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1407,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1408,
+      "modes": 8,
+      "hq": 1.0,
+      "effective_modes": 7.2256059646606445,
+      "hq_counts": [
+        333,
+        722,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1409,
+      "modes": 8,
+      "hq": 0.99951171875,
+      "effective_modes": 7.226457595825195,
+      "hq_counts": [
+        333,
+        720,
+        682,
+        344,
+        330,
+        340,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1410,
+      "modes": 8,
+      "hq": 0.99267578125,
+      "effective_modes": 7.234470367431641,
+      "hq_counts": [
+        333,
+        704,
+        672,
+        344,
+        330,
+        338,
+        1004,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1411,
+      "modes": 8,
+      "hq": 0.950927734375,
+      "effective_modes": 7.255856990814209,
+      "hq_counts": [
+        333,
+        626,
+        606,
+        344,
+        330,
+        312,
+        1003,
+        341
+      ]
+    },
+    {
+      "event": "checkpoint",
+      "step": 1412,
+      "modes": 8,
+      "hq": 0.837890625,
+      "effective_modes": 7.206837177276611,
+      "hq_counts": [
+        333,
+        458,
+        311,
+        344,
+        329,
+        312,
+        1004,
+        341
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "tests": [
+    {
+      "case": "CUDA absent",
+      "status": "PASS",
+      "action": "rejected before training or output creation"
+    },
+    {
+      "case": "archive tampered",
+      "status": "PASS",
+      "action": "rejected before CUDA import or output creation"
+    }
+  ]
+}

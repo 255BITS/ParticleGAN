@@ -1,0 +1,368 @@
+{
+  "spec": {
+    "name": "ae_gan_hold",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Adversarial training preserves reconstruction and hold behavior.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 250,
+    "thresholds": [
+      [
+        "recon_mse",
+        "<=",
+        0.05
+      ],
+      [
+        "hold",
+        "<=",
+        0.35
+      ]
+    ]
+  },
+  "result": {
+    "live": {
+      "recon_mse": 2.266632318496704,
+      "hold": 0.005333570763468742
+    },
+    "raw": {
+      "name": "eps_net_1m",
+      "recon_mse": 2.266632318496704,
+      "hold": 0.005333570763468742,
+      "init_recon_mse": 1.2077884674072266,
+      "penalty_applied": 250,
+      "adv_steps": 250,
+      "steps": 250
+    },
+    "observations": [
+      {
+        "recon_mse": 1.2018179893493652,
+        "hold": 1.2613102197647095,
+        "step": 11,
+        "seconds": 0.7208143260795623
+      },
+      {
+        "recon_mse": 1.2426977157592773,
+        "hold": 1.212443232536316,
+        "step": 21,
+        "seconds": 0.8315997540485114
+      },
+      {
+        "recon_mse": 1.2868188619613647,
+        "hold": 1.088914155960083,
+        "step": 32,
+        "seconds": 0.9429579491261393
+      },
+      {
+        "recon_mse": 1.351557731628418,
+        "hold": 0.8774302005767822,
+        "step": 42,
+        "seconds": 1.0476061631925404
+      },
+      {
+        "recon_mse": 1.3792552947998047,
+        "hold": 0.5478336215019226,
+        "step": 53,
+        "seconds": 1.1790420620236546
+      },
+      {
+        "recon_mse": 1.4818460941314697,
+        "hold": 0.47350558638572693,
+        "step": 63,
+        "seconds": 1.279648669064045
+      },
+      {
+        "recon_mse": 1.6494200229644775,
+        "hold": 0.49073606729507446,
+        "step": 73,
+        "seconds": 1.3791466432157904
+      },
+      {
+        "recon_mse": 1.933600664138794,
+        "hold": 0.5142653584480286,
+        "step": 84,
+        "seconds": 1.4889894369989634
+      },
+      {
+        "recon_mse": 2.1736230850219727,
+        "hold": 0.4569450616836548,
+        "step": 94,
+        "seconds": 1.6112041191663593
+      },
+      {
+        "recon_mse": 2.4422640800476074,
+        "hold": 0.30991053581237793,
+        "step": 105,
+        "seconds": 1.7351790610700846
+      },
+      {
+        "recon_mse": 2.656245231628418,
+        "hold": 0.2004421055316925,
+        "step": 115,
+        "seconds": 1.84872908401303
+      },
+      {
+        "recon_mse": 2.8842663764953613,
+        "hold": 0.09578044712543488,
+        "step": 125,
+        "seconds": 1.955165607156232
+      },
+      {
+        "recon_mse": 3.1639292240142822,
+        "hold": 0.03061191737651825,
+        "step": 136,
+        "seconds": 2.0663046832196414
+      },
+      {
+        "recon_mse": 3.400803327560425,
+        "hold": 0.013859039172530174,
+        "step": 146,
+        "seconds": 2.1823910512030125
+      },
+      {
+        "recon_mse": 3.4856462478637695,
+        "hold": 0.0025553572922945023,
+        "step": 157,
+        "seconds": 2.3269506141077727
+      },
+      {
+        "recon_mse": 3.5143744945526123,
+        "hold": 0.005143056623637676,
+        "step": 167,
+        "seconds": 2.439804270165041
+      },
+      {
+        "recon_mse": 3.318863868713379,
+        "hold": 0.00707572465762496,
+        "step": 178,
+        "seconds": 2.5536764110438526
+      },
+      {
+        "recon_mse": 2.9976863861083984,
+        "hold": 0.01648581773042679,
+        "step": 188,
+        "seconds": 2.676705458201468
+      },
+      {
+        "recon_mse": 2.498908519744873,
+        "hold": 0.014755782671272755,
+        "step": 198,
+        "seconds": 2.801341157173738
+      },
+      {
+        "recon_mse": 2.1689295768737793,
+        "hold": 0.009345506317913532,
+        "step": 209,
+        "seconds": 2.9577585312072188
+      },
+      {
+        "recon_mse": 2.115699052810669,
+        "hold": 0.005501747131347656,
+        "step": 219,
+        "seconds": 3.073598540155217
+      },
+      {
+        "recon_mse": 2.118255376815796,
+        "hold": 0.003894012188538909,
+        "step": 230,
+        "seconds": 3.2061119021382183
+      },
+      {
+        "recon_mse": 2.0895912647247314,
+        "hold": 0.0035965496208518744,
+        "step": 240,
+        "seconds": 3.330069795018062
+      },
+      {
+        "recon_mse": 2.266632318496704,
+        "hold": 0.005333570763468742,
+        "step": 250,
+        "seconds": 3.4604276299942285
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "actions": [
+      {
+        "step": 0,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 0,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 20,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 20,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 40,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 40,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 60,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 60,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 80,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 80,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 100,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 100,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 120,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 120,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 140,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 140,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 160,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 160,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 180,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 180,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 200,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 200,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 220,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 220,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 240,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 240,
+        "role": "g",
+        "multiplier": 1.0
+      }
+    ],
+    "seconds": 3.4628017959184945
+  },
+  "verdict": {
+    "status": "FAIL",
+    "attempted": true,
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "recon_mse",
+        "value": 2.266632318496704,
+        "op": "<=",
+        "threshold": 0.05,
+        "status": "FAIL",
+        "margin": -2.2166323184967043
+      },
+      {
+        "metric": "hold",
+        "value": 0.005333570763468742,
+        "op": "<=",
+        "threshold": 0.35,
+        "status": "PASS",
+        "margin": 0.34466642923653124
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 0,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": null,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "shortfall": 1.0,
+    "confirmation_fraction": 2.0
+  }
+}

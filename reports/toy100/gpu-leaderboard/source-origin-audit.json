@@ -1,0 +1,42 @@
+{
+  "eps_net_1m": {
+    "git_head": "a779baca42f1c577d4a2b7f6ccaa6a3390d472a2",
+    "original_source_hash_mismatches": [],
+    "verified_after_copy": true
+  },
+  "H": {
+    "git_head": "a779baca42f1c577d4a2b7f6ccaa6a3390d472a2",
+    "original_source_hash_mismatches": [],
+    "verified_after_copy": true
+  },
+  "shared_rms": {
+    "git_head": "14a7818157f8a4254dcbb3a40a562abc93e58402",
+    "original_source_hash_mismatches": [],
+    "verified_after_copy": true
+  },
+  "shared_column_rms": {
+    "git_head": "f0d489cdd687d071d344e79a247b7d74afc91ff3",
+    "original_source_hash_mismatches": [],
+    "verified_after_copy": true
+  },
+  "shared_rms_average2": {
+    "git_head": "51601b30d176756401420ffb418d00f289dfb227",
+    "original_source_hash_mismatches": [],
+    "verified_after_copy": true
+  },
+  "PR107": {
+    "git_head": "3384976cc6fb1931ac63f7b213e585654c9d8996",
+    "original_source_hash_mismatches": [],
+    "verified_after_copy": true
+  },
+  "PR140": {
+    "git_head": "3384976cc6fb1931ac63f7b213e585654c9d8996",
+    "original_source_hash_mismatches": [],
+    "verified_after_copy": true
+  },
+  "PR143": {
+    "git_head": "3384976cc6fb1931ac63f7b213e585654c9d8996",
+    "original_source_hash_mismatches": [],
+    "verified_after_copy": true
+  }
+}

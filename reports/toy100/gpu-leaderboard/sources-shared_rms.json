@@ -1,0 +1,867 @@
+{
+  "original": {
+    "benchmarks/learned_lr_evaluation.py": "bb97c215c2bbfc0e6e139420ccbefa19d800e579eb4c27130f47eac913a6846b",
+    "benchmarks/__init__.py": "53ba1483505036be295d73f5f3308bffb951e9414bf2b1139d8756e260e3b830",
+    "benchmarks/toy_suite.py": "84b95eb052577d7e47f9b0d7e2481c24da4dcc0b93a6491326601c552a6c1d41",
+    "benchmarks/plot_learned_lr.py": "47c973ce8b9f4d325ca591c486660f5ca92905ad8165143f6b4f15d76fb6202e",
+    "benchmarks/paired_error_2d/__init__.py": "11316dc14459b13614c7edc5ad3ab534be73385a3a1c8f336a4d703ae4205b36",
+    "benchmarks/paired_error_2d/task.py": "38c248c68fe21ba07441faecf3dba1ddaa169bfa677dbbf1f119fff4a95668b1",
+    "benchmarks/paired_error_2d/run.py": "622b193562b10d6049ad1e70e73a6ab9fc22120790d2d0aed9a5771942857ad2",
+    "benchmarks/paired_error_2d/__main__.py": "e1db44950e96e96cdf38c5aa2b9a523d1d492b58577b8c3edb4dc0aedc40bdd2",
+    "benchmarks/locked_shared/summarize.py": "4a5585a310aa4f093269fe186252440ffa7d187f5e6c9e72a6324456b037b21c",
+    "benchmarks/locked_shared/default_selection.py": "fa6241a2834b8d94c390d4b84fe6a9e86d7efc84435e635b8e830ec24b1e5ecf",
+    "benchmarks/locked_shared/host_reference.py": "030fdb5d6b4ec3d212d7786409475d8aaf024384db3d26548f250cfa765b6dfa",
+    "benchmarks/locked_shared/reference.py": "a97933b31a240822fc5535979a1e84bb884472a69b702808484257cff46cfbef",
+    "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+    "benchmarks/locked_shared/base_recipe.py": "a5af5376fd8e6e29025451010544f62cf9ec7e6dcb866bf7800d83f653a578fe",
+    "benchmarks/locked_shared/two_pole.py": "1cd5e0d2383b042b36e25cd07e91acf23ea074e82b514d0dadc6b6b5cf9ed18d",
+    "benchmarks/locked_shared/__init__.py": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f",
+    "benchmarks/locked_shared/recorded_recipes.py": "5efedd4d203865926310484d7fc6ba692f9ba5860b023f0f702d3498232c05a5",
+    "benchmarks/locked_shared/shared_checks.py": "2ca7fe501a12193cf337bb6a9a470ccf02ce108a338afab57c686c46234f3fa5",
+    "benchmarks/locked_shared/grid_study.py": "aaeb86c450ddbe703624fc036dcba8cf62e25a974a06c2155960f288f061a626",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/locked_shared/scale_probe.py": "825cc42741f8def0bb8c3ada39d2c29f98bbece79efb338b6b50beb100a7fcbb",
+    "benchmarks/locked_shared/run.py": "5b2a54935b08dd5250a9bf82159e2d86880e89daa23b87281ee61daa6e3bea3d",
+    "benchmarks/locked_shared/investigate.py": "362c3893f13941d6028ba39cc4e543a206980b96e6618d35f32b171320dc7ec6",
+    "benchmarks/locked_shared/suite_reference.py": "8bd939b18a9ff771846326d49b025ad4590ed3534d0749ae928c3ea1d0e8fe3f",
+    "benchmarks/locked_shared/__main__.py": "e01d15aabdf845d79185a577c9fa2c1e38357ec81d9fe38d427f17a01bbd0dfe",
+    "benchmarks/locked_shared/baseline.py": "c9b43361c659231c1e190f1196cffb2a48bdb1b4938bc24f3c9f4219d6c09a3f",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/observation.py": "87580879e7160fbcbad81549ff6d2519fa4997dc7272af64efb092240bd5f3bd",
+    "benchmarks/locked_shared/hosts/unused_token_hold.py": "79bd6ebc75d95deaf13e79aa1dea7d01d56b968ff0568a0e2cc0793ea0d7598d",
+    "benchmarks/locked_shared/hosts/cover_leftover.py": "024e9d4a9a7696237018204279b17e69dd3359b22ac5a4a5eafba47c770d1b19",
+    "benchmarks/locked_shared/hosts/__init__.py": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb",
+    "benchmarks/locked_shared/hosts/unipolar.py": "1fce14bddb3e4594f3b6277c0e78b7a0813677269dfe9ce321a072b383e12182",
+    "benchmarks/locked_shared/hosts/ae_gan_hold.py": "640ed46d712c757462a4363f7407ac6de7db7b7471639802a01dcce3bcdab3c5",
+    "benchmarks/locked_shared/hosts/residual_student.py": "78abbf6c8a96a7bee785f912e5154c9ec22c9aef1b97f4ca0d667b4addb4ed51",
+    "benchmarks/locked_shared/hosts/mid_scale_identity.py": "48bce4cf7ad5b6b0ce2671d8ad4680550b3608685f8970880d479c41eca1a6e7",
+    "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+    "benchmarks/toy100/schedule.py": "0be9b0818cf69d7e9cc043a45d31addd4db0ab7ba6979a2e2da761af03387901",
+    "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+    "benchmarks/toy100/train.py": "e3ddc12318f31adf555ee23cc2a7e0e9c4f18c8b21f7cba8bf9dbe4d369be59a",
+    "benchmarks/toy100/render.py": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+    "benchmarks/toy100/models.py": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+    "benchmarks/toy100/accuracy_evidence.py": "a3589bad69777c40a021334f108085a6b2ddd1365d0f7c594df8f08c6bd6caac",
+    "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/toy100/config.py": "0cadc75ddcf68e970102074a7f04a91fc23c0e169c7abbafb5e25133af6b5983",
+    "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+    "benchmarks/toy100/accuracy.py": "4e2de5c7a53cd5280ec6f03783eb39850e84a3ce12d7d947392cbe4f311c23fa",
+    "benchmarks/toy100/constraint_screen.py": "18b97c15d4e11014b8b81536b75f0c991f59a314c6d88051e6cfe1e75adb2402",
+    "benchmarks/toy100/__main__.py": "2744fce2be5b0182fe87ce52ab3c9072c2bf2a7de70d1691a612a934fac58905",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/toy100/gate.py": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
+    "benchmarks/toy100/search.py": "b53b8ef8e822ed31e3989b9b68f7224056237dfa51db2689ad4e75786f1e7adf",
+    "benchmarks/learned_lr/controller.py": "099bbf965e22ac28b42850dbade9f0ec350d723ee79f251d9665a8878d193e52",
+    "benchmarks/learned_lr/sgd_study.py": "d0e293667dd6919739ba61852624e88c3a75ea344873cab84fb3473a945b1b80",
+    "benchmarks/learned_lr/sgd_diagnostics.py": "717c481ea81ce43da0e7081ade2aa74912de2d3b9d4ca7e53c79f063ad1de1eb",
+    "benchmarks/learned_lr/study.py": "2b0b2fb20ef69b5848c8c70b4de306e9465d239e82ee1cfdab3cce359557637d",
+    "benchmarks/learned_lr/__init__.py": "cf9e55b41fea4ea8f4f83deea631b50ec047f8b68db2f874d8cbbba36cfb3303",
+    "benchmarks/learned_lr/relative_sgd_followup.py": "992b29984cf89984266dd3985b9d612712f5116cadce0f8064ef2837e94d9130",
+    "benchmarks/learned_lr/relative_sgd_study.py": "0096b1239f1e2f6f637f01a094c308c958b4c1cbdd47386476cd248e6c93d49b",
+    "benchmarks/learned_lr/sgd_report.py": "079f15e47a97eeb85d94657d558a5910c2f345b317a2404a132101de60d83432",
+    "benchmarks/smart_descent/controller.py": "210e6fcb24850cf2534b642cde21b8b5bf5987df3881ab21c1fd50ed36802661",
+    "benchmarks/smart_descent/study.py": "4c347c1cca8bcfa131d107b6d36878c7f88274986c8493014edb7b70acd825a1",
+    "benchmarks/smart_descent/__init__.py": "e71448ddd8f5c404eede89e9046d342866d2e9a9faa1642fe950db4dc1d42369",
+    "benchmarks/smart_descent/standalone.py": "3d0073fc5afa957ad79eb89cbe43d8535a2f0715c89142a81171c96c2ff03269",
+    "benchmarks/smart_descent/refine.py": "e40a80b79c70f5c58e2f84e696610cec97f39e475550b4a7623b6e2b97ca0a7c",
+    "benchmarks/smart_descent/freeze.py": "e0e35abf58e58f2f8f54296b8da6540191f229f9ff161bd7a6fe386338650606",
+    "benchmarks/smart_descent/evaluate.py": "2f23e05f83814a9f8154fe92e2a5310bc33fe12c5e983b6fc90d30c905cdc11e",
+    "benchmarks/smart_descent/damping_probe.py": "eb484c8931a85331d93e2c3da6dd102d778176dc4ee0c713da4dea387cf74a28",
+    "benchmarks/transfer_suite/shared_width_refinement.py": "c06c76502a445557619c16bac9d761cc941b99f7facec2a89d0a4d0279d8929e",
+    "benchmarks/transfer_suite/shared_geometry_search.py": "bec583352395925830e4215965a20c7ca511dd2bf47832fbeea8d660e2ce4357",
+    "benchmarks/transfer_suite/replay_shared_architecture.py": "6f86ae740742caa4399177ab462ce242b6e4eb36b0a9354ac6204ff14badd897",
+    "benchmarks/transfer_suite/shared_profile_search.py": "23552f4938d0ce36360c9cfa988ccc3c4e23328eb82fe0fd5e7d6fbdac8862b7",
+    "benchmarks/transfer_suite/image_tasks.py": "9b7dfeea86b0039a9ebaf6b49c93d63889f85004b24003fe88d8261c3f54bf0c",
+    "benchmarks/transfer_suite/shared_ensemble_search.py": "a6df680de36e207c85e5e3e4f0448ae00e382f1ce716142bc6a56e934a2297bf",
+    "benchmarks/transfer_suite/shared_critic_research.py": "02588724d95d8df300e3d953a8a9539525f48be5891d15f606e3608818a30d6a",
+    "benchmarks/transfer_suite/compare_defaults.py": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+    "benchmarks/transfer_suite/shared_rare_gradient_search.py": "b396c2d2b60a62a74ec92df6e982e0688c9214ccb13bac962755c1f8c066058b",
+    "benchmarks/transfer_suite/run_linear_skip.py": "92745bb2b304110692feb41774d0beaa071519564d08ffd7b057c5eee9e76b8a",
+    "benchmarks/transfer_suite/default_promotion.py": "8da4379393a4d125b619035cea3d826b19c505747e9b6446e3f89747a0b4dce7",
+    "benchmarks/transfer_suite/__init__.py": "8d105e8141cf36010abf315aa2b5f74fab872c341612b567236e7fe96c5177dc",
+    "benchmarks/transfer_suite/shared_batch_feature_research.py": "014f0d0b255ff301687dc202fba1ea5553852a373d04b05220ddaaaea2896f34",
+    "benchmarks/transfer_suite/shared_local_density_search.py": "6f1647c2cc2e5bb0c11afd622c0559eb8d87ef0ffd43de356fe597e81a4c7e3d",
+    "benchmarks/transfer_suite/shared_width_search.py": "dea163887ec83af904aa28436d8165c86972ab3ed9c74559647fdade1f9f78c1",
+    "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+    "benchmarks/transfer_suite/toy100_compatibility.py": "cab108b3cb26929862eea09e7e0be98efeb4e4a25b63679455348e8074adca69",
+    "benchmarks/transfer_suite/shared_norm_structure_search.py": "60072a3714200a907b1e2496dd5b47948f87f2253aec02d71857e5380e6413e4",
+    "benchmarks/transfer_suite/shared_pointnorm_search.py": "855e76b648b06d9622a456dc369fe401c0232a174f4c4bdd0497892ed7925011",
+    "benchmarks/transfer_suite/shared_ensemble_research.py": "c4e51ce449cb27ef8f2b1de0279d391e7e5f68623c0ffe81669cc899176f7fe2",
+    "benchmarks/transfer_suite/shared_width_last_refinement.py": "2fe927937c41496b5fd09cd1e775fbd41e3534f848f86ea53c0b5d813d94f02f",
+    "benchmarks/transfer_suite/shared_variants.py": "90f17940d08bda1bcb6378c729530df43ece8e8cb37800b0b89034257b12d2c7",
+    "benchmarks/transfer_suite/shared_default_search.py": "61899368d6ec52584a9446658dacf5f7d84d07a01de190873f587174e53530c0",
+    "benchmarks/transfer_suite/shared_schedule_search.py": "b93a42088e8010932620c98ea48a4fb3dac5af68b99737dbc847e3630c5035f9",
+    "benchmarks/transfer_suite/shared_batch_feature_search.py": "a59468af11763f473054cc05a22000bedfd1fbe1b0fcd5e145fb3491e393b9ca",
+    "benchmarks/transfer_suite/formulations.py": "49731ee001b57aff7a6d8254d82bac571864237ba44b90a933fbb38e497a67af",
+    "benchmarks/transfer_suite/shared_local_density_research.py": "ee66b747964a90e304241048b3709ebacc7e56f78bd7f5d2b5fc8baa13c7f089",
+    "benchmarks/transfer_suite/shared_discriminator_search.py": "10d7d03338577d56a0e30541fa12837c72098771b6d789178de014d53b2415a9",
+    "benchmarks/transfer_suite/shared_rare_gradient_research.py": "08e09a1593e6caa899ce0a90993453178561be5b383d2c0daa05411234d06e18",
+    "benchmarks/transfer_suite/shared_geometry_residual_search.py": "54067a37b5793e624ee4c365e0b25f3328a100702967bcf8212702a10bead41e",
+    "benchmarks/transfer_suite/legacy_noise_adapters.py": "b34a864330f24ce24e8d0fe5b3f14932ee795fc217d98786901ae0bdaadc7470",
+    "benchmarks/transfer_suite/linear_skip_refinement_research.py": "399a6d6dc268bd58952366c5d11e57886faf2cdb7accf882c47fe1e846e4bd1c",
+    "benchmarks/transfer_suite/shared_rare_diagnostic.py": "7ac21e68640f1254f03de14206adbd32d5db75d337bae977de497b203ad83d45",
+    "benchmarks/transfer_suite/relative_step_adapter.py": "6b4ce3b02842dc12d040a4a2e8aa8a396db386a6463bee02879631b0f7d7e304",
+    "benchmarks/transfer_suite/vector_tasks.py": "0dc77115c92fbebf3cc44344e3f3c0fdfb730cb139218fd2b6b92c7c6eabb9ac",
+    "benchmarks/transfer_suite/image_solvability.py": "0d6d1a63021803dfb2aa4f18d18023e52fcaba0edf9550dafdb1529f11c6177f",
+    "benchmarks/transfer_suite/shared_geometry_readout_research.py": "e08534552b89aaae946295b00453639c2f074205e5dcb0088f64c2f952a326f4",
+    "benchmarks/transfer_suite/solvability_search.py": "c0b5ced755024077329069336037fb4e7eb3c88b9f6ae10af71a2618e14feb84",
+    "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+    "benchmarks/transfer_suite/shared_residual_curvature_search.py": "9b2b7cd0536ba6815f0b2e524f8767c2669c00569b4b7657c475780b22e0cd39",
+    "benchmarks/transfer_suite/shared_width_catalog.py": "4dea3d96f4672cb7c1a45ecd19959d09e7a0577ee744ee77859ec7b46e418956",
+    "benchmarks/transfer_suite/public_default_verification.py": "410d0894cf02042981430fc4d033723bddd88e90bf5a520efe76ec6a51e8a3f4",
+    "benchmarks/transfer_suite/smooth_critic_research.py": "9958f52f265c6ecf37de1449afc02d25db916f7c05879017c33025757f81bfcc",
+    "benchmarks/transfer_suite/compare_formulations.py": "2b3fcb76d4b82879ad20454579ce30538142fc9675e03213e6983cf2277461ee",
+    "benchmarks/transfer_suite/shared_geometry_residual_research.py": "4873f58d02d8288ebb533fb9d6793d16230c52d1fad3fe5505cfbf665b56a066",
+    "benchmarks/transfer_suite/suite.py": "2803d643220b176ee41b9009c8ad6d30d16c77a124e4922a0cbda98b20304acf",
+    "benchmarks/transfer_suite/shared_pointnorm_research.py": "3b52fa0422ff17b95e33970e3b98882dc76971ba0db3332a11148274561d6838",
+    "benchmarks/transfer_suite/shared_geometry_research.py": "34997f76d74d01d75298d7fe1f8ca61d0b5079bff354e8f39cd12be367bfee31",
+    "benchmarks/transfer_suite/shared_residual_curvature_research.py": "4d5c49add5d7b90f92acfc633e8a8681a71062d7121f66e6db147cfea8575244",
+    "benchmarks/transfer_suite/shared_geometry_readout_search.py": "d8a7dbb7a28d8b3c615eb260eb7ca4e88ac64d4d5b14ee975f920548784887f3",
+    "benchmarks/transfer_suite/shared_adapter_search.py": "e34db7be531135db9f077b56af38cf52311d44a55641c3dea24c2f710e94f686",
+    "benchmarks/transfer_suite/shared_norm_structure_research.py": "d8ecb052d0b8458f59c7cc279b308e31c52e223d8350d56dd43793451352bf5c",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/__init__.py": "6490d3dce5500c7f8bfab7f534092f8bbd53f72f183baf68af24f49fb4596743",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+    "particlegan/locked_shared.py": "d6e0b484691de311b31866b3fa52d6f388809648117926d2d47d25f302316610",
+    "particlegan/recipes.py": "6bbf76863687178495780116613bcd5bbccef04df61ae62fb1370c3ec6d24008",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/training.py": "d2f418ec1ab43ab24d57071382c2f1fd53e17eb5064fb6bbd391e84543eeb405",
+    "reports/toy100/crossfit_reallocation.py": "5d7eacbfd1937a9da999e62ab6156774d4c71f20fe305ff1f3860327278814af",
+    "reports/toy100/alternating_curvature_probe.py": "6cc3e71ed9c8a6cc314a19c674e7cad1e725c4f2df4fdb79d9c8ffd682e61b8a",
+    "reports/toy100/forward_kl_cumulative_filter.py": "83d1469cab74ce9fefcee8c06927e06cb76a751f831919f9cac56a5945a86be4",
+    "reports/toy100/pr84_critic_relaxation_heldout.py": "459b598121d514157f2a4d620c55fdc71b6265211062247e6f77a63269a502ed",
+    "reports/toy100/accuracy_horizon_probe.py": "4b8db553413ce2e74c24fb215f6e986821c96713c534a027f4601d7bbbbf9d77",
+    "reports/toy100/implicit_extra_probe.py": "070a7b107a1bf5a87c6b529a92903dc2ea812e4bd1e98b732a0b3b0cbc05f6e4",
+    "reports/toy100/pr84_whole_map_independent_audit.py": "235f2533988ec01b5fd2cb05cd324694b2cb7bae0d2a8742cfecb5a052f76f28",
+    "reports/toy100/pr84_mean16_continuous_filter_v2.py": "6d881600494456c4da170ffc89c4a2943203eef96ee482386527a87edac2b763",
+    "reports/toy100/sample_anchor_practical_long_probe.py": "e67a5ab70c72fed6dfc55a9df9be3038ac32dcb5a867fafdb686d6ab281a64d3",
+    "reports/toy100/adaptive_d_allocation_scratch.py": "b629e2e3ed0310b7097aa951e70371395be59ee7bc91dcb7d081f31af3d5cbd1",
+    "reports/toy100/pr84_finite_bank_adam_control.py": "b3399d5ff528d4df4e101807aefd9108f733bafc419f385065299470dd306ae4",
+    "reports/toy100/output_trust_probe.py": "38bff032dfb9c4131723093f5770c8491c83f52084597e8797c8661991daf119",
+    "reports/toy100/common_instance_noise_short_continuation.py": "1a308df653c8519879a7b5cdb44a61c0f4de4d7ce9cf5b5672b27c28cb9306a3",
+    "reports/toy100/pr84_mean16_replay_candidate.py": "9c2736a47edea16abfc1d0894e1c78b0a22465a4f3d0bbcabcbbbeff160ee463",
+    "reports/toy100/pr84_profiled_field472.py": "15dadac9d4189ec21c347d2256c48aec6acf11d1c3eeff640bb17fe40bd3f0a8",
+    "reports/toy100/pr84_split_output_stability_audit.py": "44aee3f6fa2392ce623f9848cd16569f1e9c75eca9dc6066ebc2c5e30ebc5055",
+    "reports/toy100/coverage_pullback.py": "785e2f268442025a3582616759fb9fbcdac66fea7e427f15c8e619e97c424d35",
+    "reports/toy100/pr84_adversarial_reallocation_assay_v2.py": "aceaed37e6894ae4acc8990df45cdd549a2e7b62e0fe6ad513ff176dcf643105",
+    "reports/toy100/forward_kl_neural_filter.py": "b1743328ac5ec1d1131f40c1203d507f2c5baa2e48af3a1e40ec5f1ea731d870",
+    "reports/toy100/output_rmsprop_probe.py": "3e56abfd79aefd7b9868308fa9fe7791eac2f7db6b99f303a03220b98e2746d5",
+    "reports/toy100/energy_signal_scratch.py": "63655e219cb5134d91ec402bf6197d4a20dc8d4866193d6191ca228fe30167dc",
+    "reports/toy100/pr84_critic_refinement_cold.py": "742693fe0d1a3186c145490e1576ae4ccf19f8f49d242e9dff2e79543ed8084e",
+    "reports/toy100/anchor_coverage_geometry.py": "4e55f2e5d0fa2d88a2ffce901032f5651c49850c202798b6d77fc459cd9960a5",
+    "reports/toy100/continuous_candidates.py": "fe6d37493bc3e44fab88a925b16454a3a1d05c6af738a75230b5ab42a17e5ccf",
+    "reports/toy100/archive_common_instance_noise_round10.py": "7052f80e3c2233a7a65c3f875cd692ec704770ba5ffe8a5a0c5ffd71e73bd535",
+    "reports/toy100/projected_skew_scratch.py": "09ba450737adc7051b44033ab263ae06dff77c2b017802b16d513b8966fcc76d",
+    "reports/toy100/accuracy_fanin_probe.py": "d56062f85741a6436e52f0bd0825d03e09a5bfb3f9680a1165a6c14b0a016f8b",
+    "reports/toy100/alternating_positive_secant_probe.py": "8d65d7ce414729792afa2e542b508e5b6a1aa3e4d732bf68f31be280493600e0",
+    "reports/toy100/sample_anchor_prestart_candidate.py": "2f9152349fe3937fd8738297dff939489c4011a6e8aca7386ad9e889771dce17",
+    "reports/toy100/pr84_sample_anchor_saved44_audit.py": "7e8b19c2d4361829e992839e329f122ca82273ba29c3265a72bed8f9e0c516e7",
+    "reports/toy100/pr84_reallocation_saved44_independent_audit.py": "e14e7d7f2c84d21b3956c84415cf1f419eae11de1266b5d08628195440db0937",
+    "reports/toy100/pr84_sample_anchor_rest_independent_audit.py": "b6ac9e8f8578a7e767a6d60b48c202c84bcd6915d1c15c761b0006f5bc41b1e7",
+    "reports/toy100/allocation_snapshot_reconciliation.py": "10e7bfcf860786ada71ed7046d8a40a41703e9cda442d8555c269bb33e8a797c",
+    "reports/toy100/gradient_normalization_screen.py": "cb2738074bee64a021dd4a1df818cd68c0c1be2abbeef8172ae7ea6337ef6664",
+    "reports/toy100/alternating_two_player_linesearch.py": "29b9aabb2d50989037073d4e7ad4a858cbf503ce52e9e2acbf20e408432b6abe",
+    "reports/toy100/coverage_failure_replay.py": "9a8b56750d5b9fcf5ec45d8c951152f4ec2dc9bfa4bfd774c354efc8e7133365",
+    "reports/toy100/confidence_dynamics_scratch.py": "993aa0856fddd3a6aa7e9e814ecea000002c9b0755cff18cc21a667af9e80d36",
+    "reports/toy100/pr84_unrolled_filter.py": "a96218fc778c89e336b42a454f97773100f423a22dbb39829e33f464e869394d",
+    "reports/toy100/pr84_convex_profiled_cold_continuation.py": "f11c7f1ca24d69a450887f8490c7efbbd6470d07aa61572432905c0d5705737a",
+    "reports/toy100/pr84_convex_profiled_value_assays.py": "6d2bf7a797b677e48cd5a2c269be4af90bd55a37b279b30b9df19583e8390188",
+    "reports/toy100/constraints_geometry_build_ledger.py": "dbf620ab6355ebd493a664e03a3625fd26dd8fb1008840c2c74e47561a83df13",
+    "reports/toy100/optimistic_adam_scratch.py": "30de7f6429d77f41cee0e178e1506bd6ad37edeb563767a2f9ead8862fbb5ab9",
+    "reports/toy100/sample_group_two_bank_native3.py": "41d7ffb5321941a2c18a9a00e64a6ca348cc869790cdc5a4c62c642a0bdffb33",
+    "reports/toy100/common_instance_noise_falsifier.py": "449598943b583eb759a006a33825c26efc5ddab5a826b0cfee67fffa35cbd2f4",
+    "reports/toy100/pr84_finite_bank_vr_audit.py": "2cc22781004f42ce0ea37bb44319a907600348fddfe6deee7067d0bd7e005864",
+    "reports/toy100/pr84_critic_refinement_probe.py": "33fa91f5da341e64ac2c4de8eeb2712ed41a9a9861e17d916cbe89cecd78266a",
+    "reports/toy100/selected_h_remaining.py": "40161a9fc86c4b49d427fd536d464489488263c6cea718d0d62e79a0b2bba037",
+    "reports/toy100/continuous_lookahead.py": "45e673f241d83963aacde856c64ae188e484ea3dfbf4f84f5664361f3506ad16",
+    "reports/toy100/persistent_noise_scratch.py": "a933b330b772bc54ae73b210ebab4fc28f24e7b582d03a7604735bd0aa6e031b",
+    "reports/toy100/continuous_lookahead_probe.py": "ef8e6a13cb389289697e180df58b29c9b5db5c0ad3316b1eaade8348bb263245",
+    "reports/toy100/pr84_early_geometry.py": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+    "reports/toy100/rp_misspecification_toy.py": "a004b20fe613c8fa5b2bbc85be6a26e4e27b58d88e3addf8aa2b41088ce276a2",
+    "reports/toy100/pr84_critic_refinement_after_step.py": "d8dac5219dac0bb8d007c455156caa84a4d75ab77f3a5e1432d18da141b7255c",
+    "reports/toy100/coverage_projection_probe.py": "71268cd5afc73aa23ad19592c717aed9487a82d1c42a26add716e040f7a29e26",
+    "reports/toy100/sample_anchor_endpoint_fidelity.py": "f8bbbcaf92b3730dcd37d15e06cd1ee7c84fffb493e61d5f13f9ce3918a0a05e",
+    "reports/toy100/pr84_mean16_replay_candidate_v2.py": "5addd4426391a0dbb8e8e19b7489161c095d965168e65acdf0f266805e24f37e",
+    "reports/toy100/learner_state_split_harness.py": "e957a9f1d04a8968908c5d99b6cbf719ab915e3061d2c99aa1d0b221bfbb0ca4",
+    "reports/toy100/forward_kl_target_realization.py": "69f98f496eaced5c0d74f5bb11ef0fa9892158c764adbcff27cb3b459cfd30c5",
+    "reports/toy100/pr84_critic_refinement_resume.py": "9b23c40b3263753552f69860404759eded03ec2ac84f8c592f403caff804264b",
+    "reports/toy100/anchor_missing_batch_neural.py": "50ab7ca081d932c98193166f1bf0dc225d1459a23aa684d9bf219c103d86192b",
+    "reports/toy100/anchor_missing_batch_group.py": "82ee9ebf1599c05d39e3b012c4c45d3218c6788e9adf1e334fd18214c43efdbd",
+    "reports/toy100/pr84_model_error_recovery.py": "d38f9c09f679c96ed598f8b965438f43303a7a4e75930033cadb25f047e33ed7",
+    "reports/toy100/gradient_normalization_probe.py": "e1651b34f4c253077d87c82c0c0ce0043f4761f156c4843b0da5b1ef035f4478",
+    "reports/toy100/allocation_continuous_probe_v2.py": "fb3b8d988799299799d184d2bf7edd743ec69db94f52db56bd5b1d0db071c6df",
+    "reports/toy100/run_noise_near_v1.py": "23543cd898a4d1cfc017544b86adeec5d57784589397b4abf8dff06ebd27414b",
+    "reports/toy100/forward_kl_free_filter.py": "0cc098d63efb2460dc038b897d5db532b9f87115ffbd5a78e42ee042ed21c873",
+    "reports/toy100/sample_group_mass_discovery_filter.py": "ab5bd815dbb400180780c6d4c448d0f194eaa378296fb01ad4878238170eadaf",
+    "reports/toy100/pr84_stationary_field_analysis.py": "e4ae90161a8c76b542b9c92ce38712eeefe57ca40089cb8f52194a4fa503c15a",
+    "reports/toy100/alternating_armijo_secant_probe.py": "c4be2e441ad5eae355efbeb890c2b1f2df877bd62aebea509b251637d0a02732",
+    "reports/toy100/fixed_metric_extra_warm_probe.py": "0b9b5ba9a5175d4f82d92ee6e354b50917089e012bae1a97f908278cdb3fa0e6",
+    "reports/toy100/pr84_critic_bank_swap.py": "3d138d964e3235060d1b87705a8ac6445c0325520665edd0859bddff59b952a6",
+    "reports/toy100/pr84_d_cross_response.py": "4a2d6050f6dc9375cdadf3ab73bef7345d8b1999d7701584fbcfe415ce9a8971",
+    "reports/toy100/pr84_stationary_hold_probe.py": "bb686b8d470092bf6f4d9102daefa45d522177aec970b826612be78bda2b03f3",
+    "reports/toy100/sample_group_memory.py": "38e154c82dc2fc1b4636ea12351e8ba55c484d2bd6ca60ebd206cbce01481b10",
+    "reports/toy100/forward_kl_fixed_target_counterexample.py": "ceca84a5413208e07de79637c052045c8c7bf80c3b4309389240d7cad7af70fd",
+    "reports/toy100/pr84_residual_refinement.py": "8c9c862363534cd08410c6ff603b5d0576deb90e1758ff3f0785272a5c3fbf0d",
+    "reports/toy100/coverage_smoothed_candidate.py": "9051462504903db1ac359c8e288d154436500eeea9c55593d01ae2a0338a3d10",
+    "reports/toy100/sinkhorn_fixed_cloud_filter.py": "c4d45c978ad20ceb487b07d919671612de3f2ebaaec96fb408c90f757ffb50de",
+    "reports/toy100/pr84_unroll_saved44_independent_audit.py": "5af1bc100c169fa588a177a29c6534f57eabc2f41fe78b07cc4bf6df579f206c",
+    "reports/toy100/selected_h_extension.py": "55f58a2a6525bea92feac308c9fa3afb7cb4a418b5817077156f5c03611c7c58",
+    "reports/toy100/loss_budget_probe.py": "062e8b58aa0d8741114ad60fbec25de47aa941a6663855435f4511a46d9bc5b2",
+    "reports/toy100/ideal_ratio_three_mode.py": "998da6d56203471b1cb335a03c2ddc73574c573919b9b08f88ce16983c62bde3",
+    "reports/toy100/forward_kl_quadrature_audit.py": "1ef62514aa125daf60ad407716461e1bd42a93e63cda768d944e891b545e5334",
+    "reports/toy100/common_instance_noise_geometry.py": "1ac7de030058cc8ebbd50fcf41bb68907c1b13322b641fddedf72f548078ceb5",
+    "reports/toy100/pr84_opponent_prediction.py": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/pr84_critic_refinement_finite_probe.py": "89299ae5d0f71e892babe70d69f011250889643cdefc98edc47e16a00af20659",
+    "reports/toy100/cross_competitive_probe.py": "424f1da10759c76f85f1a77674798147dd5c66087f795da373b73e46d5de977c",
+    "reports/toy100/accuracy_network_horizon_probe.py": "85ac781559178b063a10dc7896e1b3e7acf19b32f1aff3fb510ecb34d0308f89",
+    "reports/toy100/bandwidth_wave.py": "18a6c20b6b72a714b6e29c22f54a484d62c70ce3a0f1cb111c7951cad43de5d9",
+    "reports/toy100/run_regularization_screen_v1.py": "8f2a057565a9fbc82879e67270f82a99f89e87c9945ef5a96598855740c5577b",
+    "reports/toy100/pr84_coverage_proxy.py": "0110df912b14cc4762eead8b5a25d6bf0376373bf230a4516c189b5886805df1",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/pr82_alternating_parity_audit.py": "cb1019721b21361ffaae19c0b754e126d02a5a4e86713939fd1e3c8c9e31c5fb",
+    "reports/toy100/anchor_invariant_region.py": "4499817c0af3d73ebb6fbbbca006fefe465a1cc2c42144f079ff872b565620f0",
+    "reports/toy100/consistent_stencil_probe.py": "0c94918808ea241cc13439a7f63e26eb70e83c627dad2042268943c3c1b3414e",
+    "reports/toy100/constant_lr_screen.py": "19d1787c29ef2b3f5c519264e0d6e24431704d10c35f4bfbdd5d8e663efe46a6",
+    "reports/toy100/common_instance_noise_pairing_audit.py": "f410b95b64f5e37ec6de257fd1767404d3b4bb083d26b88e956bac40ab1eddea",
+    "reports/toy100/alternating_heun_scratch.py": "49cf4c2b2c2293ab29a002bef7100cd7f862565d5b7844379515a60b8f74baa2",
+    "reports/toy100/forward_kl_remembered_donor_rescue.py": "21828acbd6c823ae53fb0da343746442278eeeb4f68e8ece04e20fe85f346471",
+    "reports/toy100/confidence_probe.py": "43d27e77d25ee86f6eed849a0c81c34b27d146d480b442ab2d8f8cb1a570ba41",
+    "reports/toy100/optimistic_regrade.py": "bf46e609482e10cd2808868a5ed7a09d61f7621823b40986b5035c3037ca20e6",
+    "reports/toy100/pr84_critic_refinement_finite_parity.py": "e2cf90d4764477f4239095077d3c7cc6b1f68a084bd20c3dfff5acdab05fb862",
+    "reports/toy100/continuous_screen.py": "b674bd07aee0dcd5b024a9049816e73a4a91c1291e8e327a4f60f10b6c376df9",
+    "reports/toy100/pr84_smoothed_parity.py": "27a8b6fecd289369a94f069346cec136e4e38ffe1c7c96aac65b35318a4d1bea",
+    "reports/toy100/projected_skew_probe.py": "66f02af8b0b2fd7f1d98d2e4bdba6f2e316dabf515de95d1dd7283d37c95be18",
+    "reports/toy100/allocation_continuous_probe.py": "4f3057307f7d5d5092995d7ae7ebddc4e8eb30284685a2b91f64dcc9bf6aa903",
+    "reports/toy100/cross_competitive_scratch.py": "da4b09a0c6b59c0b333f9140a21d02a16771ac5501a09e691dfcde6dfa7f15e7",
+    "reports/toy100/pr84_heldout_signal.py": "06984409baeb279f7b6ed119ee3beb407d9812368d1bd574230a5c349a0f8c1f",
+    "reports/toy100/pr84_cross_reciprocity_diagnostic.py": "786a652fadbcda38536890f3f0c4ad2f6c011a42f14b503ed1eaec1616c7e69f",
+    "reports/toy100/accuracy_full_prior_probe.py": "7ac9ddc33fbba89c480b1756cfcb517f6cc85ba485a5f20d8e1707173fac480d",
+    "reports/toy100/pr84_critic_refinement_finite.py": "e6668d711a4b98fbcb232a3a350e612003e3eacdc5942b6508a9509f98519561",
+    "reports/toy100/pr84_convex_profiled_value1530.py": "57d54c97deec924c20ad0f15375259fcff44e2f38eb8827e32c620d5a58193af",
+    "reports/toy100/sample_anchor_memory_filter.py": "211e11c4d7ac3eff37eeca0eac5cab9932182f1997ff12a7ec54d9c2e0c77c0f",
+    "reports/toy100/optimistic_screen.py": "ef84387b66853a485170425903a8e2b29ec63f36735a8fe18d275834caf90325",
+    "reports/toy100/pr84_reallocation_1391_analysis.py": "ef834e833c21853bd7f7dbbcf418d379b79137caced6c3edb5fc5144eeae377b",
+    "reports/toy100/continuous_mechanism.py": "0f53dd7602856ae30ba614c6e11bfd4c39ff6b8f8ee52b832d7d204ba51b7334",
+    "reports/toy100/alternating_linesearch_diagnosis.py": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+    "reports/toy100/pr84_critic_refinement_cold_probe.py": "00418c548e8e0eba4d59d81fd81b144e4bc5db6c224deeea36575a0bbe041208",
+    "reports/toy100/forward_kl_chunked.py": "e0977838c7d5ae787f5194e653d1a8a09d5c7c0af7eb5f48b65af49a303b141f",
+    "reports/toy100/bandwidth_kde_probe.py": "9a7e1b2a5d3db5bf23f6c8257cda0e32e1f35c4118bb12ef73eef86e12348b7e",
+    "reports/toy100/pr84_critic_refinement_failure_capture.py": "f8348fe1dedd06e6774dd34df274bcd33f3be1f42d022d3270c92fdab80616cc",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/pr84_convex_profiled_value1530_v2.py": "f9fdb0885103a3ccfc60570e7cb2449f409d5fbdcc830c5586f03345a6150463",
+    "reports/toy100/sample_anchor_state_filter.py": "68a66c8485b06315df23bfa47fbfc79fdeedbd3fdfa91a7e00a0a68311018fd4",
+    "reports/toy100/summarize_search.py": "c3ee23120966ac56dc0a0b0c6badb2a2b60e1fd7b42ca5421acf3d6c28f5d165",
+    "reports/toy100/build_shared_recipe_search.py": "a35a79da7ab1aab5da068ab2ba7d2b6c027e9de401587ac77322dedd91aef6b4",
+    "reports/toy100/pr84_critic_refinement_capture.py": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+    "reports/toy100/chamfer_gate_analysis.py": "5159260f5a44f7b8b46d30cd1c2e59388ea7a8c7cc21566cd4b95d4de5059f0e",
+    "reports/toy100/pr84_adversarial_landing.py": "b5557066f2aeb8cd8d1aa933ed2ac1afb03605844c3baaf5b45aeba4b1850e16",
+    "reports/toy100/alternating_armijo_secant_scratch.py": "3efe1afbac3c83876304e30b20f19597f204642a63bc1b251dca303e64d36e63",
+    "reports/toy100/sample_group_memory_filter.py": "c0bb7749e138bdc6acd21206a806453a2390b44a47cbc3b12f2e549c165762f2",
+    "reports/toy100/anchor_parameter_motion_diagnosis.py": "3e09b1a5f1d3c98f6e0e9eea88583710e327e9bbc0f825416ee8defb8500feb7",
+    "reports/toy100/accuracy_affine_probe.py": "4961c4e18462aa029024153912f50756e1791b11e792a85c61303cf4aff04d62",
+    "reports/toy100/sample_anchor_own_state_probe.py": "cd7bfc7a1a821068463da09b375ed6882c53ccae39137b13600a273512660831",
+    "reports/toy100/pr84_critic_refinement_filter.py": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+    "reports/toy100/sample_anchor_rest_filter.py": "6623588e736c5d581ce1a199bca22fa056ce25ab4414c8c30d258d4addb1c949",
+    "reports/toy100/pr84_finite_bank_vr_diagnostic.py": "37dcb85d09bb710bb1c9c8c106169c24c9e862e142967cb3940c2e792da761d6",
+    "reports/toy100/forward_kl_gh9_remembered.py": "86639dfefe0c11f82eccbd8dfe106e5797f36e75cf09a906de1768b02c28e1df",
+    "reports/toy100/pr84_rest_repair_probe.py": "2e2165645ef2fb47e6ccf9db2ea376b2dc8e07340c613b8b2dd23c69a6b8e3ef",
+    "reports/toy100/chamfer_joint_landing_filter.py": "3458fd58ac428acf21e5179d9e4a41fb8dcff4cac753bdd6eca309263b621a8a",
+    "reports/toy100/pr84_field_diagnosis.py": "7cf1b53d6fbb6c7205489c63a2b24675284e1074f3e92c4f74fc5cd9c11f419f",
+    "reports/toy100/sample_group_mass_discovery.py": "5770bd770fe28b5313d37545b062544e8efb2aff539205d18a840793b8001e77",
+    "reports/toy100/alternating_implicit_scratch.py": "31c17fd179ea02a2461ec75731ac7a5eef323aea4f51c34dd477d9c9b3390d94",
+    "reports/toy100/pr84_d_cross_state_filter.py": "5c1f480133ee19597236ef8ae65439af6ccbacda022410c92b8bf3801f05b35a",
+    "reports/toy100/learner_state_native_split_probe.py": "f83c3202a69d6a437f7c0e4054968aa8cf9bbafddbb3412b2c6031454f18ec00",
+    "reports/toy100/pr84_critic_relaxation.py": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+    "reports/toy100/sample_anchor_prestart_filter.py": "e6b520a5cca08b86a6bde16a08cb78cfcfda4098f7af4468ac9ee21bfb5d228f",
+    "reports/toy100/pr84_sample_anchor_cold1_unobserved.py": "fc32614e9153275d9f910ac50270a2c4b0ce5225ef9b2cf6036f8bd2ff6e5d85",
+    "reports/toy100/sample_group_two_bank_evidence_audit.py": "20caab4b5c90a0d7ba2be835899731dba983bd2dc9b8183f9d8794329d305e10",
+    "reports/toy100/output_rmsprop_scratch.py": "492136e28561f97b9107b1327034aa272d61948ffaf3cb5f332d175c1a045c4a",
+    "reports/toy100/chamfer_smoothed_candidate.py": "92ecc2665d4736a48b0ab2e8cdb4c2d3e0ea0cf63c3e9110f60a2bca9fce4789",
+    "reports/toy100/adaptive_d_allocation_probe.py": "935185f9d98e7ed01331ad98dd0351b16f3c253e0ccc4cd1f198220e2dbed25c",
+    "reports/toy100/extra_adam_probe.py": "80690bf102a0432e8c1f8b379a9791707db53d03bf385660e72bcad2488a37c2",
+    "reports/toy100/sample_group_dispersion_filter.py": "a5ceb77db78c95ecdb0268984ea9d0149689122cfbc30db588a8ef34b847e279",
+    "reports/toy100/accuracy_architecture_probe.py": "6e7ed48b91465f7d95fa1010d6555b48119628f6d016cc80482a2d5c4c0abbe0",
+    "reports/toy100/sample_group_singleton_filter.py": "92c208607c0157d9418bb0a67c79a9fbab5b93a3d3de677bfafb4bfe66f07b83",
+    "reports/toy100/alternating_positive_secant_scratch.py": "4149854f93e5216fd4ba39ccf8bb5f005f70864d52904eafe7ade383079abccd",
+    "reports/toy100/output_trust_scratch.py": "ca37269c98a40100f071895772ae071691ad8e0b7e0d5518895800998b18ce30",
+    "reports/toy100/projected_skew_warm_probe.py": "9c91414fe40ead6e7efb1df3e90f68832ba4030362d8b831f5fa41415848893a",
+    "reports/toy100/forward_kl_neural_candidate.py": "b853670d73b301efa06e41a3226991bcb99e19470c615881dc86a67500d29f53",
+    "reports/toy100/sample_anchor_local_mmd_continuation.py": "a618495f28f66696f46a419766a51e8d6c75f7701dbb1770109be72c6904d275",
+    "reports/toy100/persistent_noise_probe.py": "9021c8cead16c50763b732ca3e47977e12b7afce74c48c9c31b112d19d03f2aa",
+    "reports/toy100/critic_signal.py": "3f6de3e550215d4e7ab6cf401623d4eb8b12ebafbe27fce374f06c1e34854ccc",
+    "reports/toy100/sample_anchor_free1200.py": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+    "reports/toy100/sample_anchor_memory_candidate.py": "318a357e350a9afc4049bce47e83cb5941a33340e98c3413b7812e9342846363",
+    "reports/toy100/loss_budget_scratch.py": "deef2db0269fef16cac47e4334a614555c1585527be95db6b81de882c846eff0",
+    "reports/toy100/pr93_cold_audit.py": "b5ea30c4a7fccdffbf411b58fef6efb7e6f139cf0cf0bd420e74f88bef5cd5a5",
+    "reports/toy100/pr84_adversarial_reallocation_filter.py": "a397a053ba08b051e55f331b59f7fc825bb0ce8068fbc0ef87baf3a208f1af22",
+    "reports/toy100/sample_anchor_rest_candidate.py": "287d3c5d21d2ca8ff80c8167bd2af294f4de088a54619bfd03d0c3eaf3715560",
+    "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+    "reports/toy100/pr84_opponent_prediction_probe.py": "34dbe02176d11a25c42559f2ea9ea223950e944bd20b695360f4596f72c54e50",
+    "reports/toy100/sample_group_dispersion_memory.py": "d69d067acfd1af4e3743a0a18f557bf227c40e6be3930211c454a7b3601d1b7b",
+    "reports/toy100/pr84_one_step_unroll_audit.py": "9dab2a5d69cca7e051b30c67f7783e54c95755b11566746ff7c15153c612b7f0",
+    "reports/toy100/pr84_stationary_failure_replay.py": "7bff95296fbb749864360f89d63df804ed7232ded73529b5da6f8142e79ea71c",
+    "reports/toy100/run_noise_grid_v1.py": "ff55dca93e43ee3db48560578b36cb887bda00581c87b622baf14b41a4d92da3",
+    "reports/toy100/pr84_mean16_one_step_filter.py": "d5d398db37fc4d43990fd15c4ece6b415688ad725db07136c738b4dc4b4c14e8",
+    "reports/toy100/anchor_drift_assessment.py": "586b3453bdd1e3326953584193fcec40fd93f6188b37b8914bff77faf5563b94",
+    "reports/toy100/joint_functional_metric_scratch.py": "8878363d9f1ee4fcd0b531b80b3369acd7354849104a953024cab1e881c7746b",
+    "reports/toy100/chamfer_discrete_reallocation.py": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24",
+    "reports/toy100/critic_signal_screen.py": "7503751d01414feb3305c416d8f1ffe96ecebe272b61ab12946397c027c2b745",
+    "reports/toy100/alternating_two_player_probe.py": "10950b98eecda0c5fdab0ae1f2770f177b269deccd656ef8e2be338b172a1b7c",
+    "reports/toy100/pr84_adversarial_reallocation_candidate.py": "bd8ce586306bbf18c0db0fb4bda1cc2731e586c8e27966718002418df4ef87fb",
+    "reports/toy100/sample_group_two_bank_memory.py": "3daf028f2253a1b947b5b23c49280ec7465e19c4ac6cb26e5f9779c450023587",
+    "reports/toy100/functional_metric_scratch.py": "e63007296a2ae0a56185852028e75bbc4aaecb4c9fbfd3601be05a75fb45f38e",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/pr84_refinement_failure_audit.py": "5d786d9d8d90b67c4799bb82e28686f83ab101388864a45437bcb985716a47ba",
+    "reports/toy100/sample_anchor_prestart_audit.py": "3091b04e523f22b98b8a3a8cc9afd938e940aa25913a9e1cff4f201e82d2306f",
+    "reports/toy100/sample_group_two_bank_false_confirm.py": "808c29cca1cbef7b40c90f2f8c942c9d43a429aa5b7d3be0778343342357c525",
+    "reports/toy100/archive_continuation_evidence.py": "c0349915fe7bacedf19a961db7ee2b2adcc3279e5b831dc94d700c9d1fa85838",
+    "reports/toy100/constant_game_collect.py": "6260bd7c0a1135e3f970e85b3b05e5f7c5b4532f47815654f5d5804f94e888d0",
+    "reports/toy100/critic_tracker_raw_metric_toy.py": "5f3d771f645642287b327b9d8b63e52cfaf95c79b782fa50167fa39bd7b8d1ed",
+    "reports/toy100/pr84_one_step_unroll.py": "33fa46e99572d99df02d8c291bf1329e5c668bb92af718dc5482d2a80ced0d78",
+    "reports/toy100/matched_population_diagnostic.py": "1559c83c79a8e84f76423d4eab49f90e6b6b409f2f7b845c0f5f56533b44d6de",
+    "reports/toy100/pr84_critic_refinement.py": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11",
+    "reports/toy100/functional_b_cap.py": "0a3088add24bd83e8827e2e9e1d2edbe32ee36bbc8beef15f3217b4d4a50a5f3",
+    "reports/toy100/accuracy_prior_horizon_probe.py": "cee2118cbc2bdcdea8e5ddcf473458bf601cf7345b36701aeea331c877d87103",
+    "reports/toy100/forward_kl_gh9_remembered_filter.py": "aa075036ebeae2557e423fa61724ee66c9ad64fd871afab9bbadef855ad0c5f2",
+    "reports/toy100/alternating_heun_probe.py": "e4af5fd4473bfc51d8ce573b884d85a6785c5804770a9208892aac352e840e08",
+    "reports/toy100/sample_anchor_local_mmd_filter.py": "9882aec980fb2c7680f6e5da2fc42b4c9a2b80ab27a9c1cd15026dad87d2da55",
+    "reports/toy100/cross_response_diagnosis.py": "216fc1136dc079b8d2d17cc9b95d3cb0564808fc436be2fa3122731db0a5bc67",
+    "reports/toy100/reallocation_smoothed_candidate.py": "ca16cf667a03e585d50c110edcd0b219991768877dff1a640ec2371c7d16439c",
+    "reports/toy100/pr84_reallocation_1391_capture.py": "3260a69676d41b78e4680ebadef363e5bfe4186b2b11dcffbcd79f69e0afb144",
+    "reports/toy100/emitted_law_principles.py": "baa2588a02830359fafe2c2ffa4981158d0b5f6e6086fef28c171742197a678c",
+    "reports/toy100/pr84_adversarial_reallocation_assay.py": "5250aae0f2dc36fdbf19ca6604ccf7d0487a946ef7ac9470a4064da83f59e1af",
+    "reports/toy100/pr88_cold_audit.py": "fe1b70e73ac8e562813547f284379841fca2a5228dc2ff1466eb17f0f8635a8f",
+    "reports/toy100/constraints_geometry_probe.py": "eddaf21d52feb62bb0c871988798a927ac824428ab308f5b60988321f9d4452e",
+    "reports/toy100/fixed_metric_extra_scratch.py": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+    "reports/toy100/chamfer_whole_map_filter.py": "020847f43de7b6a2526cfa68ea0e4446fff3aebc7c1620a22a2fa288aa6efc27",
+    "reports/toy100/functional_b_cap_audit.py": "cbcb808729a272c3f9c0461bdeb6ada78137e78e060ca8c5852f019d01b8c62c",
+    "reports/toy100/pr84_critic_refinement_recovery.py": "3a61f32d4f4f8a36b996a01d86403f821aa39080147782d20e11986ca0bd4a1a",
+    "reports/toy100/consistent_stencil_scratch.py": "030e82be6d6ded6fb1b39370d53df29c11a40d07cc117eedf36d8aea23d8e2b5",
+    "reports/toy100/joint_output_pullback.py": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3",
+    "reports/toy100/prestart_omission_recovery10.py": "bdbe505e9ccc27e15532ba6430e3a764e489cc9ee07d3ba45f1957575c97c646",
+    "reports/toy100/signal_diagnosis.py": "b480c3e82eca0e4fc968a9ffe3554279c9b9f75754f6b57eabb99f36475169ca",
+    "reports/toy100/chamfer_projection_probe.py": "48eacd33aa8007dd8cbb2e45e2be24397a06cc4098d437ced4864cf64ec25421",
+    "reports/toy100/alternating_implicit_probe.py": "8004d73ac4d811ef6092736570238274ac78833cd86e45ee67f927d0ab0e4bd0",
+    "reports/toy100/capped_critic_tracking_toy.py": "febf0a83ca31abe06ce5b4a501cc62c8ef3da646c5e2f54c808636dadbece828",
+    "reports/toy100/pr84_mean16_continuous_filter.py": "b7fd0cd3e565656e7b541032aac267e2e0e559b71575e1988986a7c92c2f2417",
+    "reports/toy100/energy_signal_probe.py": "b7db52b7cb06b9e738426336e0854297f475e5352dc938ed7d13c860d6811ef7",
+    "reports/toy100/pr84_pullback_final_probe.py": "5aac712b8423ae523fcaf8d80b2f3f4ffdb196b38c9db875f171ba0b3c60aa97",
+    "reports/toy100/pr84_unrolled_candidate.py": "df3a48ae0e6860fd89486e5a6ec29154ba97abe5fa38fabfb782b6cd0831683c",
+    "reports/toy100/pr84_population_field.py": "25b35cbd35c7ce6b621edba2ebb966308b7196e90bf11ab48ef15792f0119581",
+    "reports/toy100/alternating_linesearch_probe.py": "14eec60a256f6fc3a4c5fb800a4f9882563e7e72e303f315bceca9646ec06cd4",
+    "reports/toy100/pr84_rest_repair_scratch.py": "098c76a8c79cb062e4be7382e0105e06fd6a7c65e96bd90bb2a8702536bc5e4c",
+    "reports/toy100/reallocation_state_filter.py": "be3beae7267bf6514802e0febaf13780c922e16fd13c0e4741d3f3016db29361",
+    "reports/toy100/alternating_curvature_warm_probe.py": "f7e219854e04b5dbcbfad0046361b4e01f3d6ab917e3f92fc2d7b24f73f8209b",
+    "reports/toy100/pr84_prediction_state_filter.py": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4",
+    "reports/toy100/sample_anchor_candidate.py": "2fb4ee97bfc4a1f00f0076c55f0e210bc531fc34779c1e23a719ba7722a15c33",
+    "reports/toy100/secant_extra_scratch.py": "8d8cee454baab2c4cd8beea7961eb5a9bfe49010b9b53770657e402dd29a698c",
+    "reports/toy100/secant_extra_warm_probe.py": "4c272a3b02472f77c046b416f117c4a1029f1502b9e99e23e0b39b2d802f5850",
+    "reports/toy100/pr84_finite_cold_prefix_capture.py": "907d23cf8510839c626e249b34d0a9707ca531a8eed4431d68cac0b24da5a9e0",
+    "reports/toy100/common_instance_noise_cold_endpoint.py": "7e3cdfa6161de2711a9e8bc3977ee65a89c53bb58b219da4b3ab45644e18e9e7",
+    "reports/toy100/functional_metric_probe.py": "888b5427b6b7331fc15cca531ae49cb8cdb255e659bc14b1dd09410a874f4b18",
+    "reports/toy100/secant_extra_probe.py": "d0aab2274abfb2dc8672f57cb52395c55432e36b28e09c1972462fdfc59182bf",
+    "reports/toy100/alternating_linesearch_scratch.py": "8679fc5f00b78c17e20a93ed69404a69ea80c77e3657fa0c3c04f49008630be3",
+    "reports/toy100/implicit_extra_scratch.py": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+    "reports/toy100/sample_group_two_bank_filter.py": "eaefb6a9f6fe9f3d89771dabd70273084ec83749ee6b3984bc0e3bfef49e129b",
+    "reports/toy100/anchor_joint_landing_filter.py": "de8917f00afbbf24bc6ee0ec8c343277064fbbbee008c2ac861f8b095b7cad48",
+    "reports/toy100/summarize_accuracy_search.py": "832c80a65e4b3bfb5a0d399cf268a74b206d1840225e53d5bb8967ede5c357c1",
+    "reports/toy100/pr84_split_output_stability_filter.py": "582507b1205de21cfa5e670000588e9282892de3ffda43acc0d9db682a2d8d72",
+    "reports/toy100/sample_anchor_mmd_filter.py": "d38f1eba9760cc83ee09af4ef6301b4ac15d022d153c45ffc65eded098dbc49a",
+    "reports/toy100/cross_competitive_warm_probe.py": "73619b5a5fbeb968c1bb01c19fab47d6ed5ccb6a02f164c83832cb0ca3eb5384",
+    "reports/toy100/sample_anchor_production_geometry.py": "7f0b94949eb4f8f79ccad247983543e9b331c16461990124e78ee858c7221baf",
+    "reports/toy100/pr84_finite_bank_activation_audit.py": "f57c8b473f328490d0c28b5382ae5f34d201316a786e7ab1f95ff4a3a7d75be7",
+    "reports/toy100/energy_objective_conflict.py": "15d7995c7725aaeb10a2ad981173d2f02b167b2f72f0866b02f6d077a08cbade",
+    "reports/toy100/allocation_continuous_probe_v3.py": "7c5d7e3923c60c98961cdb946fe13f530ab3721eb10ba917df3969be41da94ef",
+    "reports/toy100/pr84_cold472_field.py": "fe69c7c354212f068b73cb0a4117a7867dd691d7a607a1b3eff96a935eb997fe",
+    "reports/toy100/convex_readout_value.py": "bc6555125db8b80871039e642d52433435d8f7b04709c4b7efb47afb9525e209",
+    "reports/toy100/allocation_prefix_hash_diagnosis.py": "55761b7d035cc15698b50a066ebf2c10634f527e94a949609b647ffa2860d989",
+    "reports/toy100/alternating_linesearch_failure_diagnosis.py": "c3c0bac29fb41439a07c0664c82816cb08dccfdf32b093b7e88d37fcb408de41",
+    "reports/toy100/forward_kl_neural_v2.py": "44ea3bf3d50e32fa11231d779c6c7888f13dca4246f230f03c797c486b06a9ff",
+    "reports/toy100/sample_anchor_long_stationary_probe.py": "39260c537544f03895d0ffb3eadf545c9bb9010a40e75c28ed3df9b6e950e124",
+    "reports/toy100/chamfer_state_filter.py": "91af6d2be91a41a7ffbddd3ce314b3e6c4510d925e277f09639b5c9b482a3cc9",
+    "reports/toy100/optimistic_transfer_episode.py": "de2f612b8ce8841421d3ceb661abbcac14797470748f32223fd7ff6f169f7635",
+    "reports/toy100/anchor_feature_chart_diagnosis.py": "37b39c42eab7ff9e17e3fb1ceba5c17157f79b8e104c948fed144094138693e2",
+    "reports/toy100/implicit_extra_warm_probe.py": "cd29fc70d9ac17cacbe66d178f8b356519da329eecc5697421cd288eeb336431",
+    "reports/toy100/chamfer_pullback.py": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+    "reports/toy100/crossfit_reallocation_filter.py": "9cdfa7dada3e1845d2b49d45bad7a3a5840e54d79201a2cdf8b3e8ea428e3514",
+    "reports/toy100/learner_state_envelope.py": "fb7ffb81a66239e32e6c10ed179e685b38a263ab98b0b34db80f0307778d0eb4",
+    "reports/toy100/bandwidth_kde_two_batch.py": "a693bb5180dd471c829bf7aff1739bc71fd6748bb2e6cc837a73a0906c21f6d1",
+    "reports/toy100/joint_functional_metric_probe.py": "02c26b040e7fe5a6b9aa7c0a93de77410c82c23077e2312675b75d5cc1687f93",
+    "reports/toy100/accuracy_freeze_probe.py": "37e5d9ec63890c8b69b86e5327ce92cbf9de6524a7844bf5cee69d48248cc9e4",
+    "reports/toy100/bandwidth_kde_screen.py": "01e685f880d5290360fc20c9e7b4a78b1d16230cf23d9ce9f256dc2e5252a72b",
+    "reports/toy100/sample_anchor_local_mmd_population_check.py": "19e358c1a9a59370949f1b3384497cc76e614777bd224d592b1478e26bc63e0e",
+    "reports/toy100/forward_kl_gh9_stress.py": "adc5d6f6ded8e6cf297ee90aa0d540723becc632a601b93b5b9a4393cd344485",
+    "reports/toy100/gn_batch_coupling_audit.py": "bebbecc85ad445811b35ec4e1fd56e5f467a674ce71268919d51af3b2d0de2d6",
+    "reports/toy100/forward_kl_cold_parallel.py": "a665eabc4d80ae43cdecb5f2a97484dbd2ae30da3274ba8f02b9b93e2ce89d9d",
+    "reports/toy100/h_stability/replay_dynamics.py": "cfbb8d4c4bbeadee0c6a02c0d03da4e07a7f807c6cefeba41d3e45570a76d29b",
+    "reports/toy100/h_stability/compare_dynamics_state.py": "5c27dc1698d54e265be4d58989ee3e9b0d704efe6bd5f994b277144d98da3b6e",
+    "reports/toy100/h_stability/convergence_gate.py": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0",
+    "reports/toy100/h_stability/adam_response_cold.py": "7299a69ae65146cfeca849063041ef0f37e8517f6b60ffa68d3f25e30b30e55e",
+    "reports/toy100/h_stability/geometry_runner.py": "0e24c4c3e2e9b467d5f3c6d26cba6660ee1cda70152f33a61cf38adbad5e0bd4",
+    "reports/toy100/h_stability/selected_base_probe.py": "29ce26e9482c0fef4e49c1b91a8128369c5dd6aefdfbd23a9e7fc6590effb4fc",
+    "reports/toy100/h_stability/stability_runner.py": "b07854aad859ae6141c3221a9e9d6674b4b57f0de46e799dce007b0e283503d8",
+    "reports/toy100/h_stability/adam_response.py": "b09a6b6f5b444244256aceccfd5780a97cec54c7f1c9d02eb35d42f204e4c3fe",
+    "reports/toy100/h_stability/geometry_probe.py": "5375056b2048f416b62fb40da9f06edf547f9a6ded3750eb64cbfbb1b1ccb4ec",
+    "reports/toy100/h_stability/adam_response_probe.py": "6020bd1c8c17e06ca42736a8073fb1f0e585f2f5b46c04648c6734f80007fa6c",
+    "reports/toy100/h_stability/radial_response.py": "46c3a04c9055f154ce3d01499761051025f569c17123af3c63f50ca29738a41f",
+    "reports/toy100/h_stability/particle_geometry.py": "9fa05fed442a457f3b65be3247bd5483d60457507e52675b3386a98136f40240",
+    "lib/transition_visuals.py": "ad0e39ccac8c9a1c682c4ac350d88efc9ef7c6910e615ccf936017c6265518c4",
+    "lib/gym_sparse_action.py": "a56dca6275230a81f514d15fc6223e0bf955f35ceb835be266285aaf5b4408f6",
+    "lib/gym_evaluation.py": "5422148100ed7c8b48c79ebe8a2c9f68c165bf07bce005b9c7ee59dab17908fd",
+    "lib/cifar_speed.py": "c9caa8b2000c256c46e427f295f91c633b5bef4db94331b97ed2ad1272860af2",
+    "lib/safe_fast_landing.py": "d35647792ca8ece34b554a472526c69d90a6575648097a1166409fe3f013449a",
+    "lib/mog_metrics.py": "70389fe190357d9aa49b8dfe43c822c0eb167be3a2f3e39102c2a32fa8ff5f21",
+    "lib/image_ddgan.py": "b49dd3ac6f43d55c9445d6813dc3c51203542bd54e81613a13f48e8b3268af2e",
+    "lib/image_particle_ddgan.py": "c0106fef92ac25d0f9acc5ca91c48b5b037f0e05ab5a517ca7f149fc676c7fe9",
+    "lib/gym_data.py": "e32979f8da059466a7122bbdf30607e3f51b0a23f8b41f8ca5202947401d133f",
+    "lib/sparse_toy.py": "c356bc07a3510efc12eda6ea78ab02196cd5b6dfa2d5540c1602c8649551c979",
+    "lib/gym_gan_control.py": "81ac32d83aa11a7bad0fc78cedb4eea5d57a66255318e3ca9ab8abe9a6cc2441",
+    "lib/denoising_toy.py": "b16eefa77a131b7c819ed15d92e2b31d3bf3fb13bbaf51aa915e5032265ddc29",
+    "lib/gym_transition.py": "0353acc41e4263b71f4c6c04c2918db0106d256938cea9e1c16a92fc58ebbcf0",
+    "lib/gym_lander_live.py": "6949a9b6f60160576284b0f18ce13f661ff093c4639367fd1819fbc27abcf8c5",
+    "lib/trajectory.py": "7af4817005b35144ea19cb156c475d8a654584a0913f773028e674916bd4fcf7",
+    "lib/transition.py": "87bb3cfb65a96ac058860a06df421601caf02a44a05c5c62b265d3e1850fcf76",
+    "lib/gym_particle_finetune.py": "e9d8777186615f1295853bcf5e8f2b06f3c445c55a864bb5f4975e93a8bd478e",
+    "lib/gym_control.py": "f2dc04cca26dd22f9756778034239fb8fae632598b0b2bf68ccb70447295a838",
+    "lib/oadam.py": "bb00feeca65675a90beb28886ed0fef420963798e53d900d920cb3c531275de3",
+    "lib/gan_loss.py": "be3f9874c565b4e190bc5e6e7cd702f47da1e7bf4f3d480352e4cfa9728328ad",
+    "lib/image_ncsnpp.py": "4c85dafcbe71dbd9cb2d0f0a0e4c75cc77b067f4b437bcdac88808be926f1c9c",
+    "lib/sparse_metrics.py": "e359fbddf67f00d4ab5b18b1a9feacd223649b2409d90f439418619918f98ef2",
+    "lib/grad_regularizers.py": "70d44380309f527669db53eb235c5a02584c189fbe34f7693ff5b565ef5c732d",
+    "lib/image_moonshots.py": "32609ae5ac95d017416ad8a9154dcf8d3a00483b78770bf606213cff41088bb8",
+    "lib/particle_prior.py": "8a7ecf9b49c58a2d78b30f0237e586079a8353afd3ac1ea9029c53c837f63989",
+    "lib/sparse_models.py": "7632a35e53118e8b98cc8e53fabed180a55ef5fef25241442fea5746a5656cf5",
+    "lib/gym_slider_gan.py": "1d105d2959bbaa07fb068aa9824a7ef0da90cf5adac502ae75cca9567114f3a8",
+    "lib/gym_control_evaluation.py": "8d67a9520261ebaf157f721a23da8ace61fc6616f330624fb3c71f0ea910783d",
+    "lib/vicreg_loss.py": "16eaf1f57450d8b81de801fe3c1d9e0f28b8842c8669a23bfa4a5f20db5b6cf8",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "lib/gym_l2_finetune.py": "5d23c0c9c9a233aafded1f533a161b00fd2ae346e1e5241cfd6db48e4440856e",
+    "lib/gym_state_control.py": "48d7f4a1eabc55f52e0122627e4ee2a751f5490f19c2c59491cc20a1c23ad8d5",
+    "lib/toy_metrics.py": "12e8975fe31ed4d9973d53649ce940171da78739a3d7b80544ba5f4d2313367c",
+    "lib/trajectory_visuals.py": "5e7e2534d6af396f6c0fcc0e32663f982769f5007abdfc7d21ae05d5873612bf",
+    "lib/yue2_particle_toy.py": "5b04d0a1dbe9fb3c65159d5c9fc62d948c71899dc0ec516c053801280c8b72cc",
+    "lib/gym_previous_gan.py": "c924a016618fd84b5249c6e3f3c4ef7d052c171ddccf756440ccf7da94bee8c7",
+    "lib/image_particle_autoencoder.py": "f4202737465b21d5478a7e744d02717fabb1f76175b179b055ba1e79c074e40e",
+    "lib/cifar_metrics.py": "7593a15822cb8cd99b48ed75127f99f1f856ebc1000d0acf9d7e369d9b2d44a3",
+    "lib/gym_slider_finetune.py": "76db2511d6d99283d05287802cee68f2fe20842140bca2baf63d8d3df6ec5f88",
+    "lib/game_jacobian.py": "a792d24cb82ec14fe1c602772d976b98f477e184213ea329fb46bac61407bbd5",
+    "lib/vendor/concept_slider_core/reference.py": "c5ef81e49826a8b9065f1b1ab11b03f3fccce7a93c9de8d31b897f668f48b833",
+    "lib/ddgan_ncsnpp/__init__.py": "60a5d144f89ad8c2c39c2a57f5f3d4202970022133edfd372f2db4d497ce7a18",
+    "lib/ddgan_ncsnpp/dense_layer.py": "d98df1532c1b7900bb08eda7af0c5f9aa9a710fbbeeda7b97ef5d56736510cda",
+    "lib/ddgan_ncsnpp/up_or_down_sampling.py": "ca1f71d780cebf20faaf2162e18c16d2564b2a9bca0b3e606794d52da1e636b4",
+    "lib/ddgan_ncsnpp/layers.py": "152abf198a0bdf0fb6520de21ff139167471961f7299be9e1c8ea46d93f49b83",
+    "lib/ddgan_ncsnpp/utils.py": "5a78caca1d5550859bdb844d7c3ee9ccb76a05c54515f1a65cd1dbcabbe647e9",
+    "lib/ddgan_ncsnpp/upfirdn2d.py": "22f1993059536a7828d912ccd81f0d135524d712b62a09ccbdf1649b366c6d8f",
+    "lib/ddgan_ncsnpp/ncsnpp_generator_adagn.py": "a50b6609f174dbe46e1011c83fb713e39e38f169f396651853b3b0bff88d0e7b",
+    "lib/ddgan_ncsnpp/layerspp.py": "291cb4d45729b99832d6da7959dcba9c3605179db8deb1486b7fb8844caf6211"
+  },
+  "device_edits": {
+    "benchmarks/toy_suite.py": {
+      "before": "84b95eb052577d7e47f9b0d7e2481c24da4dcc0b93a6491326601c552a6c1d41",
+      "after": "a292595f352600c9757fed603edf8575fba9476af03d37d821c5055a872c381a"
+    },
+    "benchmarks/paired_error_2d/task.py": {
+      "before": "38c248c68fe21ba07441faecf3dba1ddaa169bfa677dbbf1f119fff4a95668b1",
+      "after": "36ad9115041d99cb28a7a9df4170360a67262f195d90ecfec60de1b628e7d20e"
+    },
+    "benchmarks/locked_shared/trajectory.py": {
+      "before": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+      "after": "00d92408acd8f9f3db3e3438928183bcde65314ace9c1170e75e8aaac2365527"
+    },
+    "benchmarks/locked_shared/mode_hold.py": {
+      "before": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "after": "b5ca5d8b2cff437ec39c4492132905e571b1b8fb2ab48b8f96dc8127e0a0dc45"
+    },
+    "benchmarks/locked_shared/observation.py": {
+      "before": "87580879e7160fbcbad81549ff6d2519fa4997dc7272af64efb092240bd5f3bd",
+      "after": "721fba4a85ff5d2549231e67815f4b5ef19698256ab1a938e4551c5c0da9ac64"
+    },
+    "benchmarks/locked_shared/hosts/cover_leftover.py": {
+      "before": "024e9d4a9a7696237018204279b17e69dd3359b22ac5a4a5eafba47c770d1b19",
+      "after": "f361b74e4be6548ca4427144ffd6f8484ed535266d3220517137ac8e5a1f095b"
+    },
+    "benchmarks/locked_shared/hosts/ae_gan_hold.py": {
+      "before": "640ed46d712c757462a4363f7407ac6de7db7b7471639802a01dcce3bcdab3c5",
+      "after": "9be049e62fb17e9adb4e227ebc928ce200a43601955f7d5f426bef9011cd0c02"
+    },
+    "benchmarks/locked_shared/hosts/residual_student.py": {
+      "before": "78abbf6c8a96a7bee785f912e5154c9ec22c9aef1b97f4ca0d667b4addb4ed51",
+      "after": "6118d80e8c5c16821da85b083220c340137b1f1e2356d8693248537be2f46d2d"
+    },
+    "benchmarks/toy100/accuracy.py": {
+      "before": "4e2de5c7a53cd5280ec6f03783eb39850e84a3ce12d7d947392cbe4f311c23fa",
+      "after": "569f0bf816f7b0c550a81f83721b6b7d074de363af2c22ed1767b52c40f14b7e"
+    },
+    "benchmarks/toy100/continuous_probe.py": {
+      "before": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "after": "dfccd399a8cb09e34029e3d45a773c537ed8d690b0aa8b98a7c2988544fa8246"
+    },
+    "benchmarks/learned_lr/sgd_study.py": {
+      "before": "d0e293667dd6919739ba61852624e88c3a75ea344873cab84fb3473a945b1b80",
+      "after": "7b0e88aa8546f033a23ce9b915ddbf146feb91adfa4fb7665b8c4712bde3ee34"
+    },
+    "benchmarks/learned_lr/study.py": {
+      "before": "2b0b2fb20ef69b5848c8c70b4de306e9465d239e82ee1cfdab3cce359557637d",
+      "after": "51eb87458a65167a2109d81e827118f184d62bead3974da3b6ece26456d72f16"
+    },
+    "benchmarks/smart_descent/study.py": {
+      "before": "4c347c1cca8bcfa131d107b6d36878c7f88274986c8493014edb7b70acd825a1",
+      "after": "8503a7706ad77d85d23c98d4d3b4bbb8f42ecb376f062aa27709a745bfaf9c3d"
+    },
+    "benchmarks/smart_descent/standalone.py": {
+      "before": "3d0073fc5afa957ad79eb89cbe43d8535a2f0715c89142a81171c96c2ff03269",
+      "after": "8e964f15f17653ad2c948f0d9f154e1c008dba280a9517fb1b885ea8ed3cf98d"
+    },
+    "benchmarks/smart_descent/refine.py": {
+      "before": "e40a80b79c70f5c58e2f84e696610cec97f39e475550b4a7623b6e2b97ca0a7c",
+      "after": "97ec596a963ae9671c8b807a7e499baf26c7c7ab24cf7bea15e4b15c15a8fe53"
+    },
+    "benchmarks/transfer_suite/image_tasks.py": {
+      "before": "9b7dfeea86b0039a9ebaf6b49c93d63889f85004b24003fe88d8261c3f54bf0c",
+      "after": "9c5f46f2d6ceb561bd5956cfa09f014994d4d4e08f81b6e398ef6d08a4af68b6"
+    },
+    "benchmarks/transfer_suite/default_promotion.py": {
+      "before": "8da4379393a4d125b619035cea3d826b19c505747e9b6446e3f89747a0b4dce7",
+      "after": "9887bccfde3027c61a28b1472e48fd298daa5d5cd45da3988c3e1948fd1d1e39"
+    },
+    "benchmarks/transfer_suite/toy100_compatibility.py": {
+      "before": "cab108b3cb26929862eea09e7e0be98efeb4e4a25b63679455348e8074adca69",
+      "after": "3019cd9862f2ee94f5732af86606bb093d80e582af3f177267676945ab5457ff"
+    },
+    "benchmarks/transfer_suite/shared_local_density_research.py": {
+      "before": "ee66b747964a90e304241048b3709ebacc7e56f78bd7f5d2b5fc8baa13c7f089",
+      "after": "21b825f4dbc64b50ac49b02eaadfc8da62bf0b20f7f60a2be1d295d8aeddeb53"
+    },
+    "benchmarks/transfer_suite/shared_rare_gradient_research.py": {
+      "before": "08e09a1593e6caa899ce0a90993453178561be5b383d2c0daa05411234d06e18",
+      "after": "0e80317937dd1b2171f70f1c86f0f1af6aa88508bfdc7039864944d6f142c4ea"
+    },
+    "benchmarks/transfer_suite/legacy_noise_adapters.py": {
+      "before": "b34a864330f24ce24e8d0fe5b3f14932ee795fc217d98786901ae0bdaadc7470",
+      "after": "b6240105a06ba4b10cedcf38818c187fdd79bee9ad47d47319909cfc1404dc6a"
+    },
+    "benchmarks/transfer_suite/vector_tasks.py": {
+      "before": "0dc77115c92fbebf3cc44344e3f3c0fdfb730cb139218fd2b6b92c7c6eabb9ac",
+      "after": "2bc25be00597d712f58fdec514714292551d77e55fff2f7d993ef46db9c4b918"
+    },
+    "benchmarks/transfer_suite/public_default_verification.py": {
+      "before": "410d0894cf02042981430fc4d033723bddd88e90bf5a520efe76ec6a51e8a3f4",
+      "after": "0c91adfd19062bfa6fcb778dd0c112bd8623ef528b30af30dd536556032ecb5c"
+    },
+    "benchmarks/transfer_suite/smooth_critic_research.py": {
+      "before": "9958f52f265c6ecf37de1449afc02d25db916f7c05879017c33025757f81bfcc",
+      "after": "2b05d6a0a880992b6c081ea2b663de69cb5fef1eeb09a2427149f6460bc995f8"
+    },
+    "benchmarks/transfer_suite/shared_geometry_residual_research.py": {
+      "before": "4873f58d02d8288ebb533fb9d6793d16230c52d1fad3fe5505cfbf665b56a066",
+      "after": "68d3dce81ac335e1917038077eae7c058c6b1746ddc573c528db13a337a2b916"
+    },
+    "benchmarks/transfer_suite/suite.py": {
+      "before": "2803d643220b176ee41b9009c8ad6d30d16c77a124e4922a0cbda98b20304acf",
+      "after": "3c254bc3aef353423bab61ae50015ea1bd19672ee90c04c1035a27ee6e4d7c17"
+    },
+    "benchmarks/transfer_suite/shared_geometry_research.py": {
+      "before": "34997f76d74d01d75298d7fe1f8ca61d0b5079bff354e8f39cd12be367bfee31",
+      "after": "9e57ac24b66c9f6a00e51d4359c147107ebbee22bc688f42e871be2cb1d5d24e"
+    },
+    "benchmarks/transfer_suite/shared_residual_curvature_research.py": {
+      "before": "4d5c49add5d7b90f92acfc633e8a8681a71062d7121f66e6db147cfea8575244",
+      "after": "9a60716bba96a5ba58e1df1705312e73da73f13f2cda5e13560757ebe2ca5281"
+    },
+    "reports/toy100/forward_kl_cumulative_filter.py": {
+      "before": "83d1469cab74ce9fefcee8c06927e06cb76a751f831919f9cac56a5945a86be4",
+      "after": "91d39293c0cbe22296d12a3751a2175c88ba7c3d9b6cedc62aea27eade1eac87"
+    },
+    "reports/toy100/pr84_critic_relaxation_heldout.py": {
+      "before": "459b598121d514157f2a4d620c55fdc71b6265211062247e6f77a63269a502ed",
+      "after": "61ad06354d0003a2cf78afa071eae8d1c48da7c19415cc9e8cb051b5e85a470d"
+    },
+    "reports/toy100/pr84_whole_map_independent_audit.py": {
+      "before": "235f2533988ec01b5fd2cb05cd324694b2cb7bae0d2a8742cfecb5a052f76f28",
+      "after": "ea3b92b0d1beeb4629cdd5341dfb2219ad57c69e86c934c32dc84fba78f14b28"
+    },
+    "reports/toy100/adaptive_d_allocation_scratch.py": {
+      "before": "b629e2e3ed0310b7097aa951e70371395be59ee7bc91dcb7d081f31af3d5cbd1",
+      "after": "c6bdf7d28a940d481a602d2b4ad0b968f121cd9ef2aef84bc936cbb9bf24e474"
+    },
+    "reports/toy100/pr84_finite_bank_adam_control.py": {
+      "before": "b3399d5ff528d4df4e101807aefd9108f733bafc419f385065299470dd306ae4",
+      "after": "5fdba9fb4b710ebfefe3f4c0b77df7819959106cd495b4b748b55af239dfc3e3"
+    },
+    "reports/toy100/output_trust_probe.py": {
+      "before": "38bff032dfb9c4131723093f5770c8491c83f52084597e8797c8661991daf119",
+      "after": "ddb3f1224f18897af79bfafe99e5b574647e844aaabd2a31c4e70ef1b754e328"
+    },
+    "reports/toy100/common_instance_noise_short_continuation.py": {
+      "before": "1a308df653c8519879a7b5cdb44a61c0f4de4d7ce9cf5b5672b27c28cb9306a3",
+      "after": "2fd8c866c12e210a019902b8bfe0f8b75d9c4de05422f0089c541fc2b5654b27"
+    },
+    "reports/toy100/pr84_mean16_replay_candidate.py": {
+      "before": "9c2736a47edea16abfc1d0894e1c78b0a22465a4f3d0bbcabcbbbeff160ee463",
+      "after": "398fc8d8cd9b7e29b1f33dc74e06ad6c836807e3a230f9cc6437ae42ecaacefa"
+    },
+    "reports/toy100/pr84_profiled_field472.py": {
+      "before": "15dadac9d4189ec21c347d2256c48aec6acf11d1c3eeff640bb17fe40bd3f0a8",
+      "after": "45aea346e785068f3d3d0054d72e29352bf0771d7038ec50c6f20a860e530630"
+    },
+    "reports/toy100/pr84_split_output_stability_audit.py": {
+      "before": "44aee3f6fa2392ce623f9848cd16569f1e9c75eca9dc6066ebc2c5e30ebc5055",
+      "after": "fd824ce053e9b1f30aca9e9922a09fa0beb74fd46bc126d6088a0cef5e3d4cbf"
+    },
+    "reports/toy100/pr84_critic_refinement_cold.py": {
+      "before": "742693fe0d1a3186c145490e1576ae4ccf19f8f49d242e9dff2e79543ed8084e",
+      "after": "babd8b2c18fbb569a2b273349b6d2583928f3932ec8e92c84e2a327914a78f65"
+    },
+    "reports/toy100/pr84_convex_profiled_cold_continuation.py": {
+      "before": "f11c7f1ca24d69a450887f8490c7efbbd6470d07aa61572432905c0d5705737a",
+      "after": "e82e362d54b49c7323d827e545d8a3da6b5f9e27935624f14beda5915b2402f8"
+    },
+    "reports/toy100/common_instance_noise_falsifier.py": {
+      "before": "449598943b583eb759a006a33825c26efc5ddab5a826b0cfee67fffa35cbd2f4",
+      "after": "3f440d1ac4ccb6d88ff83c4f71949dedfd65e2da3813a4f14c7dee18de1e4222"
+    },
+    "reports/toy100/pr84_finite_bank_vr_audit.py": {
+      "before": "2cc22781004f42ce0ea37bb44319a907600348fddfe6deee7067d0bd7e005864",
+      "after": "e163b38d3312c5ac3f32749aa0b68454bbaeafb1dc3bf2a14f38f90cfb95e8bc"
+    },
+    "reports/toy100/sample_anchor_endpoint_fidelity.py": {
+      "before": "f8bbbcaf92b3730dcd37d15e06cd1ee7c84fffb493e61d5f13f9ce3918a0a05e",
+      "after": "941304104b77d45862a97c1a327c54f06c0ddb4bfc205c2188948a3faabd41a0"
+    },
+    "reports/toy100/forward_kl_target_realization.py": {
+      "before": "69f98f496eaced5c0d74f5bb11ef0fa9892158c764adbcff27cb3b459cfd30c5",
+      "after": "d784c53e6f8c798433aafde9b158ae95622383715fd4eb300b00e3fe3e68a360"
+    },
+    "reports/toy100/pr84_critic_refinement_resume.py": {
+      "before": "9b23c40b3263753552f69860404759eded03ec2ac84f8c592f403caff804264b",
+      "after": "7b2bb25c2d5f8bbad8981b18b3ea6cd5896f54ed99a284fe523569c9d50afd72"
+    },
+    "reports/toy100/anchor_missing_batch_group.py": {
+      "before": "82ee9ebf1599c05d39e3b012c4c45d3218c6788e9adf1e334fd18214c43efdbd",
+      "after": "8a5737d024a1939fa92465401681bbc4ed29ae118653c03512d890d35bf86154"
+    },
+    "reports/toy100/pr84_model_error_recovery.py": {
+      "before": "d38f9c09f679c96ed598f8b965438f43303a7a4e75930033cadb25f047e33ed7",
+      "after": "3d5de9a161d2bf7d45dfb26dcd239ff60d323b5867b1c96ab4022fcb9230782a"
+    },
+    "reports/toy100/forward_kl_free_filter.py": {
+      "before": "0cc098d63efb2460dc038b897d5db532b9f87115ffbd5a78e42ee042ed21c873",
+      "after": "e70435f6cd63ea5d4bd276faa2fe2db6c2e9c3a99760755edf6534ea66cefee5"
+    },
+    "reports/toy100/sample_group_mass_discovery_filter.py": {
+      "before": "ab5bd815dbb400180780c6d4c448d0f194eaa378296fb01ad4878238170eadaf",
+      "after": "ad397c95df420315805775c9358891ae9c666bce6d708a4463c2bbf96f505bf1"
+    },
+    "reports/toy100/pr84_critic_bank_swap.py": {
+      "before": "3d138d964e3235060d1b87705a8ac6445c0325520665edd0859bddff59b952a6",
+      "after": "24a9648e8fe5d4361fdde63785579e19806d47b0b3b3132abededa9c09ee01e6"
+    },
+    "reports/toy100/pr84_residual_refinement.py": {
+      "before": "8c9c862363534cd08410c6ff603b5d0576deb90e1758ff3f0785272a5c3fbf0d",
+      "after": "b65983ba3a68a74449d3a4ff68165ad32e1106fa739d384fe7795bfe5ae7afc8"
+    },
+    "reports/toy100/forward_kl_quadrature_audit.py": {
+      "before": "1ef62514aa125daf60ad407716461e1bd42a93e63cda768d944e891b545e5334",
+      "after": "1b2ece30262d295ab861f582756360e244c1ca58141d28018b51e44f71b1ec83"
+    },
+    "reports/toy100/pr84_coverage_proxy.py": {
+      "before": "0110df912b14cc4762eead8b5a25d6bf0376373bf230a4516c189b5886805df1",
+      "after": "0b5de6f6c52dda93740541375dc7c98843e132b18150c7ac23800976a103c6c8"
+    },
+    "reports/toy100/alternating_curvature_scratch.py": {
+      "before": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "after": "981eb0a0e78763f2e7184698c1034c2b3017025bd744d4755480c326662ae442"
+    },
+    "reports/toy100/common_instance_noise_pairing_audit.py": {
+      "before": "f410b95b64f5e37ec6de257fd1767404d3b4bb083d26b88e956bac40ab1eddea",
+      "after": "c89fcc457e65eed915635386995b3873564c905ea188c32c047ece18d2bff5f3"
+    },
+    "reports/toy100/pr84_heldout_signal.py": {
+      "before": "06984409baeb279f7b6ed119ee3beb407d9812368d1bd574230a5c349a0f8c1f",
+      "after": "ce918410843f7ab1978b3b579d8e38a6c162516f1c6789e3f1fac4267b597783"
+    },
+    "reports/toy100/pr84_cross_reciprocity_diagnostic.py": {
+      "before": "786a652fadbcda38536890f3f0c4ad2f6c011a42f14b503ed1eaec1616c7e69f",
+      "after": "67729044e9e62d922d1e715c1f37fbfab70aa6635d71073ed81b46700fd40422"
+    },
+    "reports/toy100/accuracy_full_prior_probe.py": {
+      "before": "7ac9ddc33fbba89c480b1756cfcb517f6cc85ba485a5f20d8e1707173fac480d",
+      "after": "6b6f7b166f417e0b5b98a94eac752b03c0fc17f030881520a4b71f299aa015d2"
+    },
+    "reports/toy100/pr84_convex_profiled_value1530.py": {
+      "before": "57d54c97deec924c20ad0f15375259fcff44e2f38eb8827e32c620d5a58193af",
+      "after": "18419fdfeb534ec7cf03d70d0673edbd93fe6907a2b3c1eb9021a488e92e86af"
+    },
+    "reports/toy100/coverage_fixed_eval.py": {
+      "before": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "after": "51cab8ba908a879e6bc6b5da53598b534227c34437ad8a68d40f2cefb3ae4715"
+    },
+    "reports/toy100/pr84_adversarial_landing.py": {
+      "before": "b5557066f2aeb8cd8d1aa933ed2ac1afb03605844c3baaf5b45aeba4b1850e16",
+      "after": "1db57cda10e240bbfb093885577dabd13800e382f67fc2fe3316593afa193dbf"
+    },
+    "reports/toy100/pr84_finite_bank_vr_diagnostic.py": {
+      "before": "37dcb85d09bb710bb1c9c8c106169c24c9e862e142967cb3940c2e792da761d6",
+      "after": "72db84d5be1c626bfabcfa5e189a35185bc6daecce76c6967e97657ab12441f8"
+    },
+    "reports/toy100/chamfer_joint_landing_filter.py": {
+      "before": "3458fd58ac428acf21e5179d9e4a41fb8dcff4cac753bdd6eca309263b621a8a",
+      "after": "5d0d275b013051faa3eee96ebc645e3b719687299ffe799b3ad9954288cd33eb"
+    },
+    "reports/toy100/learner_state_native_split_probe.py": {
+      "before": "f83c3202a69d6a437f7c0e4054968aa8cf9bbafddbb3412b2c6031454f18ec00",
+      "after": "bfd1882c5c64e08c035777158ed29bb4ca035ab6875967a88b8d3ae0186a246a"
+    },
+    "reports/toy100/pr84_critic_relaxation.py": {
+      "before": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+      "after": "0b2f5452e27abc8a1eb697a7d408d79ed7255770248ab887ba3f3655b53786be"
+    },
+    "reports/toy100/adaptive_d_allocation_probe.py": {
+      "before": "935185f9d98e7ed01331ad98dd0351b16f3c253e0ccc4cd1f198220e2dbed25c",
+      "after": "183f7f9f8f84aaf44e9f1094b92649b0ba2d46bce4cef79ff25c2c53df73fd2f"
+    },
+    "reports/toy100/sample_group_singleton_filter.py": {
+      "before": "92c208607c0157d9418bb0a67c79a9fbab5b93a3d3de677bfafb4bfe66f07b83",
+      "after": "c0e9feaba7d63580eb7336347301af80869542487b4fbac3aa8920cecac1692d"
+    },
+    "reports/toy100/sample_anchor_local_mmd_continuation.py": {
+      "before": "a618495f28f66696f46a419766a51e8d6c75f7701dbb1770109be72c6904d275",
+      "after": "9789662ca68b16d1eb53b967e416b57253044653224a5bb96e77053516ef0fb3"
+    },
+    "reports/toy100/sample_anchor_free1200.py": {
+      "before": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+      "after": "e18059ce1a539d538b6e7d8feeaa6e4e914f25ce17f0245164d5a7b778e6ba69"
+    },
+    "reports/toy100/sample_group_anchor.py": {
+      "before": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+      "after": "8b2799676fee40e781d2c28dd5eb55a79b2184528066f9c93d93cfdefedfdeeb"
+    },
+    "reports/toy100/pr84_one_step_unroll_audit.py": {
+      "before": "9dab2a5d69cca7e051b30c67f7783e54c95755b11566746ff7c15153c612b7f0",
+      "after": "edc69a08007a576ce4a07a391668e7ac849a154e5c88f56f025a5269d7a48465"
+    },
+    "reports/toy100/pr84_mean16_one_step_filter.py": {
+      "before": "d5d398db37fc4d43990fd15c4ece6b415688ad725db07136c738b4dc4b4c14e8",
+      "after": "b30aa26cec4ba7abfa5b815a99ae561fe88a7537afba5bd216ec51c37e79ebe3"
+    },
+    "reports/toy100/anchor_drift_assessment.py": {
+      "before": "586b3453bdd1e3326953584193fcec40fd93f6188b37b8914bff77faf5563b94",
+      "after": "263d686745a5faec4e977624bd8af1de3dc1816bd51d7b1220b1c8cde7ba33d2"
+    },
+    "reports/toy100/critic_signal_screen.py": {
+      "before": "7503751d01414feb3305c416d8f1ffe96ecebe272b61ab12946397c027c2b745",
+      "after": "daee9478b0531715a22ceb4f5a2ae18ec066fe4371dc32153638095a0c18d84f"
+    },
+    "reports/toy100/pr84_adversarial_reallocation_candidate.py": {
+      "before": "bd8ce586306bbf18c0db0fb4bda1cc2731e586c8e27966718002418df4ef87fb",
+      "after": "a48aa926c74ccbabe49ef8dfba1c7a757d61d359a02b4a3eccabd61b572fabdf"
+    },
+    "reports/toy100/pr84_refinement_failure_audit.py": {
+      "before": "5d786d9d8d90b67c4799bb82e28686f83ab101388864a45437bcb985716a47ba",
+      "after": "bfc7041a0f2a43ad9fa8380d3eb977e8dee796ee547b0dc193d31e0dbd85d145"
+    },
+    "reports/toy100/pr84_one_step_unroll.py": {
+      "before": "33fa46e99572d99df02d8c291bf1329e5c668bb92af718dc5482d2a80ced0d78",
+      "after": "736da15b091c751ccd5f7ac404c5f596392465a4d9d04a94b7770cedca084323"
+    },
+    "reports/toy100/pr84_critic_refinement.py": {
+      "before": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11",
+      "after": "e8d10d4b218b03df69b748ac2fcbf54f0ad3ccdcb1fb63794ae7f867447ee157"
+    },
+    "reports/toy100/forward_kl_gh9_remembered_filter.py": {
+      "before": "aa075036ebeae2557e423fa61724ee66c9ad64fd871afab9bbadef855ad0c5f2",
+      "after": "1ec8dcce272d98bbde702460bbeeb4a0715dea4a9a499e40780ed60298e9524f"
+    },
+    "reports/toy100/sample_anchor_local_mmd_filter.py": {
+      "before": "9882aec980fb2c7680f6e5da2fc42b4c9a2b80ab27a9c1cd15026dad87d2da55",
+      "after": "2932b831db41a6ada1d9f54f5e01a876f367afde3d8c6f9fbf7ec8457e64aa17"
+    },
+    "reports/toy100/pr84_adversarial_reallocation_assay.py": {
+      "before": "5250aae0f2dc36fdbf19ca6604ccf7d0487a946ef7ac9470a4064da83f59e1af",
+      "after": "1e1e33c99facf3e6c39ce2fcea65f9165af93a4d0f0e973af3386dd8a9e61593"
+    },
+    "reports/toy100/chamfer_whole_map_filter.py": {
+      "before": "020847f43de7b6a2526cfa68ea0e4446fff3aebc7c1620a22a2fa288aa6efc27",
+      "after": "ac6c070becf553ed44ff4b6af00f6ef2a33533f9b12bf21f761113b1f20bea19"
+    },
+    "reports/toy100/functional_b_cap_audit.py": {
+      "before": "cbcb808729a272c3f9c0461bdeb6ada78137e78e060ca8c5852f019d01b8c62c",
+      "after": "4b09dab5aea6062a634133c2127d95462b846fc3a2f658f221d73003560c1792"
+    },
+    "reports/toy100/signal_diagnosis.py": {
+      "before": "b480c3e82eca0e4fc968a9ffe3554279c9b9f75754f6b57eabb99f36475169ca",
+      "after": "849aba5371cd70880f72b30eccfc1ae5b1f29395a62b0ed88a1e8a0e677ed1ae"
+    },
+    "reports/toy100/pr84_unrolled_candidate.py": {
+      "before": "df3a48ae0e6860fd89486e5a6ec29154ba97abe5fa38fabfb782b6cd0831683c",
+      "after": "d847ce3883ebcf4c79988433be55631ebb6d7ef8780e087bc5f3aa57e68f3981"
+    },
+    "reports/toy100/common_instance_noise_cold_endpoint.py": {
+      "before": "7e3cdfa6161de2711a9e8bc3977ee65a89c53bb58b219da4b3ab45644e18e9e7",
+      "after": "86a39f6045bf97893ef298cab657f90a0a31e398d65b05f3038b678229a67b3e"
+    },
+    "reports/toy100/sample_group_two_bank_filter.py": {
+      "before": "eaefb6a9f6fe9f3d89771dabd70273084ec83749ee6b3984bc0e3bfef49e129b",
+      "after": "9c6a0ba16df418829ef813d1b2e9790c6a75c324283f7d48854d6b1beaceb397"
+    },
+    "reports/toy100/anchor_joint_landing_filter.py": {
+      "before": "de8917f00afbbf24bc6ee0ec8c343277064fbbbee008c2ac861f8b095b7cad48",
+      "after": "f1c1745d74fcf07a2dbc283b2800840a515e017f3fa0a460e1fc1e93c7bcc0b6"
+    },
+    "reports/toy100/pr84_split_output_stability_filter.py": {
+      "before": "582507b1205de21cfa5e670000588e9282892de3ffda43acc0d9db682a2d8d72",
+      "after": "9f22a04335c843a98baa52f3d120d625f5511d4ef37745c1847c655e12d1e965"
+    },
+    "reports/toy100/sample_anchor_mmd_filter.py": {
+      "before": "d38f1eba9760cc83ee09af4ef6301b4ac15d022d153c45ffc65eded098dbc49a",
+      "after": "22ad7a5b9735fcd03d8620caed82651b9c74e305422c099f7b8a791fad0bef0f"
+    },
+    "reports/toy100/sample_anchor_production_geometry.py": {
+      "before": "7f0b94949eb4f8f79ccad247983543e9b331c16461990124e78ee858c7221baf",
+      "after": "114e9bff0dd20bc219deb5ac6f2cff3de1d4be728923e23d8471905fc91ed749"
+    },
+    "reports/toy100/pr84_finite_bank_activation_audit.py": {
+      "before": "f57c8b473f328490d0c28b5382ae5f34d201316a786e7ab1f95ff4a3a7d75be7",
+      "after": "85790a5c6f38c3919568bd34fad3ea2f870dc452c06c6c77a90d46725835e131"
+    },
+    "reports/toy100/energy_objective_conflict.py": {
+      "before": "15d7995c7725aaeb10a2ad981173d2f02b167b2f72f0866b02f6d077a08cbade",
+      "after": "0daf652f2e11b0b79e71108ebea2fb7f520ca5d226d53908bc5ef219c1456431"
+    },
+    "reports/toy100/pr84_cold472_field.py": {
+      "before": "fe69c7c354212f068b73cb0a4117a7867dd691d7a607a1b3eff96a935eb997fe",
+      "after": "237ae19e77b8f1ff91f1c675580d353f744e993ec8043c6e5b20f22fec3155a1"
+    },
+    "reports/toy100/chamfer_state_filter.py": {
+      "before": "91af6d2be91a41a7ffbddd3ce314b3e6c4510d925e277f09639b5c9b482a3cc9",
+      "after": "dd935ce4296add3b1488d5e5b25d9636045695050d361451af92a17fa46d544e"
+    },
+    "reports/toy100/sample_anchor_local_mmd_population_check.py": {
+      "before": "19e358c1a9a59370949f1b3384497cc76e614777bd224d592b1478e26bc63e0e",
+      "after": "163027757641ab10164d9d41c2747e7b5ec0a8403324b7013104e3874424778b"
+    },
+    "reports/toy100/forward_kl_gh9_stress.py": {
+      "before": "adc5d6f6ded8e6cf297ee90aa0d540723becc632a601b93b5b9a4393cd344485",
+      "after": "7dd76622b206494864de4c59b3934ba6d623ff6fab7d078fd049d02c7f8a79f1"
+    },
+    "reports/toy100/forward_kl_cold_parallel.py": {
+      "before": "a665eabc4d80ae43cdecb5f2a97484dbd2ae30da3274ba8f02b9b93e2ce89d9d",
+      "after": "d313f6fd53343696f319ebe04583c4d3709cf919015b7660a8e20d538644ffa4"
+    },
+    "reports/toy100/h_stability/stability_runner.py": {
+      "before": "b07854aad859ae6141c3221a9e9d6674b4b57f0de46e799dce007b0e283503d8",
+      "after": "2e2f42f777d726a768068172ca6c59cac571d256ee5cbe4cad0a0275857af2c9"
+    },
+    "benchmarks/locked_shared/hosts/mid_scale_identity.py": {
+      "before": "48bce4cf7ad5b6b0ce2671d8ad4680550b3608685f8970880d479c41eca1a6e7",
+      "after": "63d44c45d7ccab8ccebc285e118247dffc88a490ad7b5e762417971c13bbac89"
+    }
+  }
+}

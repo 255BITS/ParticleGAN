@@ -1,0 +1,108 @@
+{"event": "START", "candidate": "H", "task": "staggered100", "environment": {"profile": "cuda_fp32_v1", "torch": "2.13.0+cu126", "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb", "cuda": "12.6", "cudnn": 91002, "gpu": "NVIDIA RTX A6000", "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69", "device": "cuda:0", "visible_devices": "1", "deterministic": true, "tf32": false, "cudnn_benchmark": false, "cublas_workspace": ":4096:8", "threads": 1, "interop": 1, "adam_foreach": false, "adam_fused": false}}
+START problem=staggered100 steps=7000 device=cuda:0 events=/ml2/hypergan/gpu-leaderboard-20260924/runs/H/staggered100/native/staggered100/events.jsonl
+EVAL step=0/7000 model=live modes=0/100 hq=0.0256 pass=False elapsed=0.4s
+EVAL step=0/7000 model=ema modes=0/100 hq=0.0256 pass=False elapsed=0.5s
+TRAIN step=1/7000 d=1.3777 g=0.6994 train_seconds=0.1
+EVAL step=1/7000 model=live modes=0/100 hq=0.0261 pass=False elapsed=0.7s
+EVAL step=1/7000 model=ema modes=0/100 hq=0.0256 pass=False elapsed=0.7s
+EVAL step=10/7000 model=live modes=0/100 hq=0.0262 pass=False elapsed=0.9s
+EVAL step=10/7000 model=ema modes=0/100 hq=0.0259 pass=False elapsed=0.9s
+EVAL step=25/7000 model=live modes=0/100 hq=0.0278 pass=False elapsed=1.2s
+EVAL step=25/7000 model=ema modes=0/100 hq=0.0262 pass=False elapsed=1.3s
+EVAL step=50/7000 model=live modes=0/100 hq=0.0354 pass=False elapsed=1.6s
+EVAL step=50/7000 model=ema modes=0/100 hq=0.0271 pass=False elapsed=1.7s
+EVAL step=100/7000 model=live modes=0/100 hq=0.0517 pass=False elapsed=2.4s
+EVAL step=100/7000 model=ema modes=0/100 hq=0.0278 pass=False elapsed=2.5s
+TRAIN step=250/7000 d=0.6961 g=0.7087 train_seconds=3.4
+EVAL step=250/7000 model=live modes=0/100 hq=0.1462 pass=False elapsed=4.6s
+EVAL step=250/7000 model=ema modes=0/100 hq=0.0488 pass=False elapsed=4.7s
+TRAIN step=500/7000 d=0.6929 g=0.6989 train_seconds=7.0
+EVAL step=500/7000 model=live modes=5/100 hq=0.3674 pass=False elapsed=8.4s
+EVAL step=500/7000 model=ema modes=0/100 hq=0.1609 pass=False elapsed=8.5s
+TRAIN step=750/7000 d=0.6932 g=0.6954 train_seconds=10.7
+EVAL step=750/7000 model=live modes=79/100 hq=0.5620 pass=False elapsed=12.4s
+EVAL step=750/7000 model=ema modes=3/100 hq=0.3560 pass=False elapsed=12.5s
+{"event": "UPDATES", "candidate": "H", "task": "staggered100", "adam_calls": 2000}
+TRAIN step=1000/7000 d=0.6933 g=0.6945 train_seconds=14.1
+EVAL step=1000/7000 model=live modes=98/100 hq=0.7009 pass=False elapsed=16.1s
+EVAL step=1000/7000 model=ema modes=74/100 hq=0.5465 pass=False elapsed=16.3s
+TRAIN step=1250/7000 d=0.6925 g=0.6937 train_seconds=17.7
+EVAL step=1250/7000 model=live modes=100/100 hq=0.7745 pass=False elapsed=20.0s
+EVAL step=1250/7000 model=ema modes=98/100 hq=0.6802 pass=False elapsed=20.1s
+TRAIN step=1500/7000 d=0.6929 g=0.6938 train_seconds=21.4
+EVAL step=1500/7000 model=live modes=100/100 hq=0.8137 pass=False elapsed=24.0s
+EVAL step=1500/7000 model=ema modes=100/100 hq=0.7641 pass=False elapsed=24.1s
+TRAIN step=1750/7000 d=0.6933 g=0.6940 train_seconds=25.1
+EVAL step=1750/7000 model=live modes=100/100 hq=0.8467 pass=False elapsed=27.9s
+EVAL step=1750/7000 model=ema modes=100/100 hq=0.8218 pass=False elapsed=28.0s
+{"event": "UPDATES", "candidate": "H", "task": "staggered100", "adam_calls": 4000}
+TRAIN step=2000/7000 d=0.6924 g=0.6944 train_seconds=28.6
+EVAL step=2000/7000 model=live modes=100/100 hq=0.8661 pass=False elapsed=31.7s
+EVAL step=2000/7000 model=ema modes=100/100 hq=0.8565 pass=False elapsed=31.8s
+TRAIN step=2250/7000 d=0.6925 g=0.6946 train_seconds=32.2
+EVAL step=2250/7000 model=live modes=100/100 hq=0.8796 pass=False elapsed=35.5s
+EVAL step=2250/7000 model=ema modes=100/100 hq=0.8787 pass=False elapsed=35.7s
+TRAIN step=2500/7000 d=0.6935 g=0.6938 train_seconds=35.8
+EVAL step=2500/7000 model=live modes=100/100 hq=0.8901 pass=False elapsed=39.5s
+EVAL step=2500/7000 model=ema modes=100/100 hq=0.8899 pass=False elapsed=39.6s
+TRAIN step=2750/7000 d=0.6930 g=0.6938 train_seconds=39.6
+EVAL step=2750/7000 model=live modes=100/100 hq=0.8948 pass=False elapsed=43.5s
+EVAL step=2750/7000 model=ema modes=100/100 hq=0.8980 pass=False elapsed=43.6s
+{"event": "UPDATES", "candidate": "H", "task": "staggered100", "adam_calls": 6000}
+TRAIN step=3000/7000 d=0.6929 g=0.6940 train_seconds=43.2
+EVAL step=3000/7000 model=live modes=100/100 hq=0.8986 pass=False elapsed=47.4s
+EVAL step=3000/7000 model=ema modes=100/100 hq=0.9062 pass=False elapsed=47.5s
+TRAIN step=3250/7000 d=0.6932 g=0.6934 train_seconds=46.8
+EVAL step=3250/7000 model=live modes=100/100 hq=0.9063 pass=False elapsed=51.2s
+EVAL step=3250/7000 model=ema modes=100/100 hq=0.9127 pass=False elapsed=51.4s
+TRAIN step=3500/7000 d=0.6928 g=0.6934 train_seconds=50.0
+EVAL step=3500/7000 model=live modes=100/100 hq=0.9093 pass=False elapsed=54.8s
+EVAL step=3500/7000 model=ema modes=100/100 hq=0.9170 pass=False elapsed=54.9s
+TRAIN step=3750/7000 d=0.6929 g=0.6938 train_seconds=53.5
+EVAL step=3750/7000 model=live modes=100/100 hq=0.9161 pass=False elapsed=58.6s
+EVAL step=3750/7000 model=ema modes=100/100 hq=0.9224 pass=False elapsed=58.7s
+{"event": "UPDATES", "candidate": "H", "task": "staggered100", "adam_calls": 8000}
+TRAIN step=4000/7000 d=0.6923 g=0.6939 train_seconds=57.0
+EVAL step=4000/7000 model=live modes=100/100 hq=0.9139 pass=False elapsed=62.3s
+EVAL step=4000/7000 model=ema modes=100/100 hq=0.9272 pass=False elapsed=62.4s
+TRAIN step=4250/7000 d=0.6932 g=0.6942 train_seconds=60.8
+EVAL step=4250/7000 model=live modes=100/100 hq=0.9160 pass=False elapsed=66.3s
+EVAL step=4250/7000 model=ema modes=100/100 hq=0.9303 pass=False elapsed=66.5s
+TRAIN step=4500/7000 d=0.6927 g=0.6941 train_seconds=64.4
+EVAL step=4500/7000 model=live modes=100/100 hq=0.9191 pass=False elapsed=70.2s
+EVAL step=4500/7000 model=ema modes=100/100 hq=0.9318 pass=False elapsed=70.4s
+TRAIN step=4750/7000 d=0.6929 g=0.6932 train_seconds=68.2
+EVAL step=4750/7000 model=live modes=100/100 hq=0.9124 pass=False elapsed=74.2s
+EVAL step=4750/7000 model=ema modes=100/100 hq=0.9369 pass=False elapsed=74.4s
+{"event": "UPDATES", "candidate": "H", "task": "staggered100", "adam_calls": 10000}
+TRAIN step=5000/7000 d=0.6931 g=0.6932 train_seconds=71.8
+EVAL step=5000/7000 model=live modes=100/100 hq=0.9263 pass=False elapsed=78.2s
+EVAL step=5000/7000 model=ema modes=100/100 hq=0.9378 pass=False elapsed=78.3s
+TRAIN step=5250/7000 d=0.6932 g=0.6932 train_seconds=75.4
+EVAL step=5250/7000 model=live modes=100/100 hq=0.9170 pass=False elapsed=82.1s
+EVAL step=5250/7000 model=ema modes=100/100 hq=0.9409 pass=False elapsed=82.2s
+TRAIN step=5500/7000 d=0.6932 g=0.6938 train_seconds=79.1
+EVAL step=5500/7000 model=live modes=100/100 hq=0.9245 pass=False elapsed=86.0s
+EVAL step=5500/7000 model=ema modes=100/100 hq=0.9411 pass=False elapsed=86.2s
+TRAIN step=5750/7000 d=0.6931 g=0.6934 train_seconds=82.6
+EVAL step=5750/7000 model=live modes=100/100 hq=0.9152 pass=False elapsed=89.8s
+EVAL step=5750/7000 model=ema modes=100/100 hq=0.9429 pass=False elapsed=89.9s
+{"event": "UPDATES", "candidate": "H", "task": "staggered100", "adam_calls": 12000}
+TRAIN step=6000/7000 d=0.6931 g=0.6935 train_seconds=86.2
+EVAL step=6000/7000 model=live modes=100/100 hq=0.9183 pass=False elapsed=93.7s
+EVAL step=6000/7000 model=ema modes=100/100 hq=0.9425 pass=False elapsed=93.9s
+TRAIN step=6250/7000 d=0.6936 g=0.6932 train_seconds=89.9
+EVAL step=6250/7000 model=live modes=100/100 hq=0.9163 pass=False elapsed=97.7s
+EVAL step=6250/7000 model=ema modes=100/100 hq=0.9434 pass=False elapsed=97.8s
+TRAIN step=6500/7000 d=0.6935 g=0.6937 train_seconds=93.4
+EVAL step=6500/7000 model=live modes=100/100 hq=0.9223 pass=False elapsed=101.5s
+EVAL step=6500/7000 model=ema modes=100/100 hq=0.9459 pass=False elapsed=101.6s
+TRAIN step=6750/7000 d=0.6932 g=0.6931 train_seconds=96.8
+EVAL step=6750/7000 model=live modes=100/100 hq=0.9087 pass=False elapsed=105.3s
+EVAL step=6750/7000 model=ema modes=100/100 hq=0.9451 pass=False elapsed=105.4s
+{"event": "UPDATES", "candidate": "H", "task": "staggered100", "adam_calls": 14000}
+TRAIN step=7000/7000 d=0.6932 g=0.6937 train_seconds=100.3
+EVAL step=7000/7000 model=live modes=100/100 hq=0.9006 pass=False elapsed=109.0s
+EVAL step=7000/7000 model=ema modes=100/100 hq=0.9424 pass=False elapsed=109.1s
+COMPLETE problem=staggered100 steps=7000 live_modes=100/100 live_hq=0.9006 stable_pass=None total_seconds=111.7
+{"event": "DONE", "candidate": "H", "task": "staggered100", "status": "FAIL", "seconds": 115.86026128008962, "environment": {"profile": "cuda_fp32_v1", "torch": "2.13.0+cu126", "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb", "cuda": "12.6", "cudnn": 91002, "gpu": "NVIDIA RTX A6000", "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69", "device": "cuda:0", "visible_devices": "1", "deterministic": true, "tf32": false, "cudnn_benchmark": false, "cublas_workspace": ":4096:8", "threads": 1, "interop": 1, "adam_foreach": false, "adam_fused": false}, "device_proof": {"adam_calls": 14000, "optimizers": {"128069536671616": {"calls": 7000, "parameters": 35073, "device": "cuda:0"}, "128069246676016": {"calls": 7000, "parameters": 40006, "device": "cuda:0"}}, "cpu_parameter_calls": 0, "gradient_devices": ["cuda:0"]}, "artifact": "/ml2/hypergan/gpu-leaderboard-20260924/runs/H/staggered100/result.json"}

@@ -1,0 +1,100 @@
+{
+  "candidate": "shared_column_rms",
+  "task": "img_bars4",
+  "status": "FAIL",
+  "seconds": 9.342050948180258,
+  "environment": {
+    "profile": "cuda_fp32_v1",
+    "torch": "2.13.0+cu126",
+    "torch_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "cuda": "12.6",
+    "cudnn": 91002,
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_uuid": "cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+    "device": "cuda:0",
+    "visible_devices": "1",
+    "deterministic": true,
+    "tf32": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace": ":4096:8",
+    "threads": 1,
+    "interop": 1,
+    "adam_foreach": false,
+    "adam_fused": false
+  },
+  "device_proof": {
+    "adam_calls": 1200,
+    "optimizers": {
+      "139203206347088": {
+        "calls": 600,
+        "parameters": 4929,
+        "device": "cuda:0"
+      },
+      "139203191734240": {
+        "calls": 600,
+        "parameters": 5617,
+        "device": "cuda:0"
+      }
+    },
+    "cpu_parameter_calls": 0,
+    "gradient_devices": [
+      "cuda:0"
+    ]
+  },
+  "artifact": "/ml2/hypergan/gpu-leaderboard-20260924/runs/shared_column_rms/img_bars4/result.json",
+  "metrics": {
+    "modes": 4,
+    "hq": 0.875,
+    "mean_rmse": 0.053360745310783386,
+    "quality_mode_fractions": [
+      0.21875,
+      0.1875,
+      0.25,
+      0.21875
+    ],
+    "mode_fractions": [
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "distribution_tv": 0.0
+  },
+  "verdict": {
+    "status": "FAIL",
+    "attempted": true,
+    "passed": false,
+    "metrics": [
+      {
+        "metric": "modes",
+        "value": 4,
+        "op": ">=",
+        "threshold": 4,
+        "status": "PASS",
+        "margin": 0
+      },
+      {
+        "metric": "hq",
+        "value": 0.875,
+        "op": ">=",
+        "threshold": 0.9,
+        "status": "FAIL",
+        "margin": -0.025000000000000022
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 10,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 0,
+      "first_pass_step": 350,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+    },
+    "shortfall": 0.0138888888888889,
+    "confirmation_fraction": 2.0
+  }
+}

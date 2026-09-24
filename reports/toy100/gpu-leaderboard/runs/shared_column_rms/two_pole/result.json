@@ -1,0 +1,276 @@
+{
+  "spec": {
+    "name": "two_pole",
+    "family": "existing_behavior",
+    "runner": "legacy",
+    "split": "development",
+    "phase": "fit",
+    "tier": "required",
+    "importance_reason": "Basic adversarial movement remains bounded.",
+    "limitations": "Small extracted behavioral host; not evidence of natural-image transfer.",
+    "steps": 80,
+    "thresholds": [
+      [
+        "mean_abs",
+        ">=",
+        0.3
+      ],
+      [
+        "grad_med",
+        "<=",
+        1.0
+      ]
+    ]
+  },
+  "result": {
+    "live": {
+      "mean_abs": 0.9586283564567566,
+      "grad_med": 0.010742396116256714
+    },
+    "raw": {
+      "mean_abs": 0.9586283564567566,
+      "grad_med": 0.010742396116256714,
+      "nearest": 0.041371624916791916,
+      "cover_score": 1.4379425626248121,
+      "verdict": "PASS"
+    },
+    "observations": [
+      {
+        "mean_abs": 0.051182132214307785,
+        "grad_med": 0.11330228298902512,
+        "step": 4,
+        "seconds": 0.27553585381247103
+      },
+      {
+        "mean_abs": 0.10622060298919678,
+        "grad_med": 0.09034059941768646,
+        "step": 7,
+        "seconds": 0.2951701229903847
+      },
+      {
+        "mean_abs": 0.178558349609375,
+        "grad_med": 0.06554941833019257,
+        "step": 10,
+        "seconds": 0.3132407208904624
+      },
+      {
+        "mean_abs": 0.3013828694820404,
+        "grad_med": 0.034470535814762115,
+        "step": 14,
+        "seconds": 0.3368090698495507
+      },
+      {
+        "mean_abs": 0.40660637617111206,
+        "grad_med": 0.056735385209321976,
+        "step": 17,
+        "seconds": 0.35593173489905894
+      },
+      {
+        "mean_abs": 0.5166887640953064,
+        "grad_med": 0.07637147605419159,
+        "step": 20,
+        "seconds": 0.3739068848080933
+      },
+      {
+        "mean_abs": 0.6623226404190063,
+        "grad_med": 0.09542478621006012,
+        "step": 24,
+        "seconds": 0.3975762319751084
+      },
+      {
+        "mean_abs": 0.7662827968597412,
+        "grad_med": 0.10543207824230194,
+        "step": 27,
+        "seconds": 0.41511790780350566
+      },
+      {
+        "mean_abs": 0.8626468181610107,
+        "grad_med": 0.1090485230088234,
+        "step": 30,
+        "seconds": 0.43315744679421186
+      },
+      {
+        "mean_abs": 0.9781370162963867,
+        "grad_med": 0.0990423858165741,
+        "step": 34,
+        "seconds": 0.4567613347899169
+      },
+      {
+        "mean_abs": 1.053252100944519,
+        "grad_med": 0.08042557537555695,
+        "step": 37,
+        "seconds": 0.4763290749397129
+      },
+      {
+        "mean_abs": 1.1152431964874268,
+        "grad_med": 0.05494894087314606,
+        "step": 40,
+        "seconds": 0.4963797878008336
+      },
+      {
+        "mean_abs": 1.1758129596710205,
+        "grad_med": 0.022362902760505676,
+        "step": 44,
+        "seconds": 0.5213678588625044
+      },
+      {
+        "mean_abs": 1.2041895389556885,
+        "grad_med": 0.004007801413536072,
+        "step": 47,
+        "seconds": 0.5396411248948425
+      },
+      {
+        "mean_abs": 1.2178025245666504,
+        "grad_med": 0.016796119511127472,
+        "step": 50,
+        "seconds": 0.5627235400024801
+      },
+      {
+        "mean_abs": 1.212473750114441,
+        "grad_med": 0.011706490069627762,
+        "step": 54,
+        "seconds": 0.5879356369841844
+      },
+      {
+        "mean_abs": 1.193044662475586,
+        "grad_med": 0.004496917128562927,
+        "step": 57,
+        "seconds": 0.6094950309488922
+      },
+      {
+        "mean_abs": 1.1639673709869385,
+        "grad_med": 0.01718798652291298,
+        "step": 60,
+        "seconds": 0.6296612829901278
+      },
+      {
+        "mean_abs": 1.1169028282165527,
+        "grad_med": 0.028149068355560303,
+        "step": 64,
+        "seconds": 0.6581016888376325
+      },
+      {
+        "mean_abs": 1.0807207822799683,
+        "grad_med": 0.03329240903258324,
+        "step": 67,
+        "seconds": 0.6801038580015302
+      },
+      {
+        "mean_abs": 1.0460467338562012,
+        "grad_med": 0.03334970772266388,
+        "step": 70,
+        "seconds": 0.7013100059702992
+      },
+      {
+        "mean_abs": 1.0032374858856201,
+        "grad_med": 0.02725982666015625,
+        "step": 74,
+        "seconds": 0.7303102449513972
+      },
+      {
+        "mean_abs": 0.9775781035423279,
+        "grad_med": 0.02245422452688217,
+        "step": 77,
+        "seconds": 0.7510685389861465
+      },
+      {
+        "mean_abs": 0.9586283564567566,
+        "grad_med": 0.010742396116256714,
+        "step": 80,
+        "seconds": 0.7722898880019784
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 21,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 21,
+      "first_pass_step": 14,
+      "stable_from_step": 14,
+      "stable_from_seconds": 0.3368090698495507,
+      "confirmed_step": 27,
+      "confirmed_seconds": 0.41511790780350566
+    },
+    "actions": [
+      {
+        "step": 0,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 0,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 20,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 20,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 40,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 40,
+        "role": "g",
+        "multiplier": 1.0
+      },
+      {
+        "step": 60,
+        "role": "d",
+        "multiplier": 1.0
+      },
+      {
+        "step": 60,
+        "role": "g",
+        "multiplier": 1.0
+      }
+    ],
+    "seconds": 0.7745604389347136
+  },
+  "verdict": {
+    "status": "PASS",
+    "attempted": true,
+    "passed": true,
+    "metrics": [
+      {
+        "metric": "mean_abs",
+        "value": 0.9586283564567566,
+        "op": ">=",
+        "threshold": 0.3,
+        "status": "PASS",
+        "margin": 0.6586283564567565
+      },
+      {
+        "metric": "grad_med",
+        "value": 0.010742396116256714,
+        "op": "<=",
+        "threshold": 1.0,
+        "status": "PASS",
+        "margin": 0.9892576038837433
+      }
+    ],
+    "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 21,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 21,
+      "first_pass_step": 14,
+      "stable_from_step": 14,
+      "stable_from_seconds": 0.3368090698495507,
+      "confirmed_step": 27,
+      "confirmed_seconds": 0.41511790780350566
+    },
+    "shortfall": 0.0,
+    "confirmation_fraction": 0.3375
+  }
+}

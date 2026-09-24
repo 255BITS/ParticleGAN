@@ -1,0 +1,106 @@
+{
+  "profile": "cuda_fp32_v1",
+  "complete": true,
+  "candidates": [
+    {
+      "candidate": "eps_net_1m",
+      "scope": "all",
+      "passed": 9,
+      "failed": 13,
+      "unsupported": 0,
+      "converged_step": 1764,
+      "hold_passes": 19,
+      "hold_status": "POST_CONVERGENCE_FAIL",
+      "failure_step": 1784,
+      "longest_settling_streak": 200
+    },
+    {
+      "candidate": "H",
+      "scope": "all",
+      "passed": 11,
+      "failed": 11,
+      "unsupported": 0,
+      "converged_step": null,
+      "hold_passes": 0,
+      "hold_status": "NOT_CONVERGED",
+      "failure_step": null,
+      "longest_settling_streak": 150
+    },
+    {
+      "candidate": "shared_rms",
+      "scope": "all",
+      "passed": 11,
+      "failed": 11,
+      "unsupported": 0,
+      "converged_step": 4018,
+      "hold_passes": 35,
+      "hold_status": "POST_CONVERGENCE_FAIL",
+      "failure_step": 4054,
+      "longest_settling_streak": 200
+    },
+    {
+      "candidate": "shared_column_rms",
+      "scope": "all",
+      "passed": 11,
+      "failed": 11,
+      "unsupported": 0,
+      "converged_step": 1400,
+      "hold_passes": 131,
+      "hold_status": "POST_CONVERGENCE_FAIL",
+      "failure_step": 1532,
+      "longest_settling_streak": 200
+    },
+    {
+      "candidate": "shared_rms_average2",
+      "scope": "three",
+      "passed": 3,
+      "failed": 0,
+      "unsupported": 19,
+      "converged_step": 1400,
+      "hold_passes": 22,
+      "hold_status": "POST_CONVERGENCE_FAIL",
+      "failure_step": 1423,
+      "longest_settling_streak": 200
+    },
+    {
+      "candidate": "PR107",
+      "scope": "two",
+      "passed": 0,
+      "failed": 2,
+      "unsupported": 20,
+      "converged_step": null,
+      "hold_passes": 0,
+      "hold_status": "NOT_CONVERGED",
+      "failure_step": null,
+      "longest_settling_streak": 136
+    },
+    {
+      "candidate": "PR140",
+      "scope": "two",
+      "passed": 0,
+      "failed": 2,
+      "unsupported": 20,
+      "converged_step": null,
+      "hold_passes": 0,
+      "hold_status": "NOT_CONVERGED",
+      "failure_step": null,
+      "longest_settling_streak": 188
+    },
+    {
+      "candidate": "PR143",
+      "scope": "two",
+      "passed": 0,
+      "failed": 2,
+      "unsupported": 20,
+      "converged_step": 1400,
+      "hold_passes": 11,
+      "hold_status": "POST_CONVERGENCE_FAIL",
+      "failure_step": 1412,
+      "longest_settling_streak": 200
+    }
+  ],
+  "release_qualified": [],
+  "toy_runs": 97,
+  "convergence_runs": 8,
+  "unsupported": 79
+}

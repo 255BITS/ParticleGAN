@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "candidate": "shared_column_rms",
+  "task": "mode_hold",
+  "scope": "full archived-source extraction and CUDA replay",
+  "all_non_timing_fields_equal": true,
+  "ignored_fields": [
+    "seconds",
+    "confirmed_seconds",
+    "stable_from_seconds"
+  ],
+  "observations_equal": 24
+}
