@@ -1,0 +1,1058 @@
+[
+  {
+    "tag": "a_r1r2_c0p01_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 0.01,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c0p01_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 0.01,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c0p01_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 0.01,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c0p01_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 0.01,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c0p1_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 0.1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c0p1_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 0.1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c0p1_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 0.1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c0p1_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 0.1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c1_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c1_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c1_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c1_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c6_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 6,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c6_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 6,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c6_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 6,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "a_r1r2_c6_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "a_r1r2",
+      "reg_coeff": 6,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c0p01_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 0.01,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c0p01_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 0.01,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c0p01_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 0.01,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c0p01_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 0.01,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c0p1_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 0.1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c0p1_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 0.1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c0p1_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 0.1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c0p1_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 0.1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c1_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c1_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c1_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c1_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c6_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 6,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c6_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 6,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c6_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 6,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "c_eikonal_c6_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "c_eikonal",
+      "reg_coeff": 6,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c0p01_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 0.01,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c0p01_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 0.01,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c0p01_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 0.01,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c0p01_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 0.01,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c0p1_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 0.1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c0p1_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 0.1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c0p1_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 0.1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c0p1_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 0.1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c1_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c1_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 1,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c1_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c1_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 1,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c6_lr0p001_b0p99",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 6,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c6_lr0p001_b0p999",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 6,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c6_lr0p00425_b0p99",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 6,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "d_asym_c6_lr0p00425_b0p999",
+    "set": {
+      "reg_arm": "d_asym",
+      "reg_coeff": 6,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "fine_kappa_replaced_by_regularizer"
+    ]
+  },
+  {
+    "tag": "none_lr0p0001_b0p99_p0",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.0001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "prior_reg": 0,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p0001_b0p99_p0p05",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.0001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "prior_reg": 0.05,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p0001_b0p999_p0",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.0001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "prior_reg": 0,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p0001_b0p999_p0p05",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.0001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "prior_reg": 0.05,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p001_b0p99_p0",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "prior_reg": 0,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p001_b0p99_p0p05",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.99
+      ],
+      "prior_reg": 0.05,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p001_b0p999_p0",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "prior_reg": 0,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p001_b0p999_p0p05",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.001,
+      "betas": [
+        0,
+        0.999
+      ],
+      "prior_reg": 0.05,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p00425_b0p99_p0",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "prior_reg": 0,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p00425_b0p99_p0p05",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.99
+      ],
+      "prior_reg": 0.05,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p00425_b0p999_p0",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "prior_reg": 0,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p00425_b0p999_p0p05",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.00425,
+      "betas": [
+        0,
+        0.999
+      ],
+      "prior_reg": 0.05,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p01_b0p99_p0",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.01,
+      "betas": [
+        0,
+        0.99
+      ],
+      "prior_reg": 0,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p01_b0p99_p0p05",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.01,
+      "betas": [
+        0,
+        0.99
+      ],
+      "prior_reg": 0.05,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p01_b0p999_p0",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.01,
+      "betas": [
+        0,
+        0.999
+      ],
+      "prior_reg": 0,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "none_lr0p01_b0p999_p0p05",
+    "set": {
+      "reg_arm": "f_none",
+      "reg_coeff": 0,
+      "lr": 0.01,
+      "betas": [
+        0,
+        0.999
+      ],
+      "prior_reg": 0.05,
+      "reg_kappa": 1
+    },
+    "constraints": [
+      "discriminator_penalty",
+      "fine_kappa"
+    ]
+  }
+]
