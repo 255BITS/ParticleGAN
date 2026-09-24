@@ -1,0 +1,22 @@
+{
+  "config.json": {
+    "source_sha256": "77711878e132f3dc8f208128eb20bff34e8f5a3b08453ed4496c8bdb5af94a44",
+    "archive_sha256": "cbbb78de57c51754f7f6a5f92bba8cec32cf315c2c52441784c64ffbed3ccf8e"
+  },
+  "declaration.json": {
+    "source_sha256": "791fa25a780b797fddcff9ba4eccff592e5b568c68bce5deecd0eff2cae9d6db",
+    "archive_sha256": "adf4c5e2c4636cead24bb3a89ec1841b4696c7198e3a27f882287354ef734a69"
+  },
+  "status.json": {
+    "source_sha256": "c29dcc053a6b443372f199b105dee410d65d411142a2f769b096df52f60f0543",
+    "archive_sha256": "b79c48bef82ef2fb5b2efd68eee05ad0ea7f321dcb9ad2cfc0b48e795bec5634"
+  },
+  "trajectory.json": {
+    "source_sha256": "506a14cf79411361100aeff75d5e61b1fae4113577c2a4f8f9fd9f5ccbcf9989",
+    "archive_sha256": "27dfb1a62e7906ffc8e5ef98d29c246908367a7f0800e8170a2d0795af3176d2"
+  },
+  "mode_hold.json": {
+    "source_sha256": "35d1a3e499c9ed00793e0ab8b6e058c75776b9ce24468b8404818f04414399f9",
+    "archive_sha256": "6dcdba638396a265b72cd678d57076f04c47ac9bfb36025267503f22fba3b4c2"
+  }
+}
