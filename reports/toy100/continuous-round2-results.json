@@ -1,0 +1,163 @@
+{
+  "schema": "continuous-learning-round2-v1",
+  "base_commit": "63e07881caf04d51839962b440001634b068b0c8",
+  "scope": "Eight new fixed-seed scratch configurations; no production winner",
+  "shared_gate_eligible": false,
+  "candidate_count": 8,
+  "qualified_replacements": 0,
+  "counts_exclude": [
+    "controls",
+    "attribution replays",
+    "fixed-cloud diagnostics",
+    "matched-population diagnostic",
+    "serialization repair repetitions",
+    "invalid numerical attempts",
+    "unplanned downstream diagnostics"
+  ],
+  "candidates": [
+    {
+      "id": "loss_budget_network",
+      "warm_passing_checks": 54,
+      "warm_checks": 200,
+      "first_failed_stage": "warm_local_quality",
+      "cold_trajectory_mse": null,
+      "cold_mode_hold_passing_terminal_checks": null,
+      "long_original_hold_attempted": false,
+      "original_translation_gate_attempted": false,
+      "shared_production_gate_attempted": false
+    },
+    {
+      "id": "loss_budget_joint",
+      "warm_passing_checks": 98,
+      "warm_checks": 200,
+      "first_failed_stage": "warm_local_quality",
+      "cold_trajectory_mse": null,
+      "cold_mode_hold_passing_terminal_checks": null,
+      "long_original_hold_attempted": false,
+      "original_translation_gate_attempted": false,
+      "shared_production_gate_attempted": false
+    },
+    {
+      "id": "generator_functional_metric",
+      "warm_passing_checks": 200,
+      "warm_checks": 200,
+      "first_failed_stage": "cold_trajectory",
+      "cold_trajectory_mse": 0.03730495646595955,
+      "cold_mode_hold_passing_terminal_checks": null,
+      "long_original_hold_attempted": false,
+      "original_translation_gate_attempted": false,
+      "shared_production_gate_attempted": false
+    },
+    {
+      "id": "adaptive_discriminator_allocation",
+      "warm_passing_checks": 7,
+      "warm_checks": 200,
+      "first_failed_stage": "warm_local_quality",
+      "cold_trajectory_mse": null,
+      "cold_mode_hold_passing_terminal_checks": null,
+      "long_original_hold_attempted": false,
+      "original_translation_gate_attempted": false,
+      "shared_production_gate_attempted": false
+    },
+    {
+      "id": "energy_marginal",
+      "warm_passing_checks": 200,
+      "warm_checks": 200,
+      "first_failed_stage": "cold_trajectory",
+      "cold_trajectory_mse": 0.27638,
+      "cold_mode_hold_passing_terminal_checks": null,
+      "long_original_hold_attempted": false,
+      "original_translation_gate_attempted": false,
+      "shared_production_gate_attempted": false
+    },
+    {
+      "id": "energy_conditional",
+      "warm_passing_checks": 200,
+      "warm_checks": 200,
+      "first_failed_stage": "cold_mode_hold",
+      "cold_trajectory_mse": 0.0036819,
+      "cold_mode_hold_passing_terminal_checks": 0,
+      "long_original_hold_attempted": false,
+      "original_translation_gate_attempted": false,
+      "shared_production_gate_attempted": false
+    },
+    {
+      "id": "energy_conditional_backtracking",
+      "warm_passing_checks": 198,
+      "warm_checks": 200,
+      "first_failed_stage": "warm_local_quality",
+      "cold_trajectory_mse": null,
+      "cold_mode_hold_passing_terminal_checks": null,
+      "long_original_hold_attempted": false,
+      "original_translation_gate_attempted": false,
+      "shared_production_gate_attempted": false
+    },
+    {
+      "id": "projected_implicit_skew_repaired",
+      "warm_passing_checks": 197,
+      "warm_checks": 200,
+      "first_failed_stage": "warm_local_quality",
+      "cold_trajectory_mse": null,
+      "cold_mode_hold_passing_terminal_checks": null,
+      "long_original_hold_attempted": false,
+      "original_translation_gate_attempted": false,
+      "shared_production_gate_attempted": false
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "adaptive_d_allocation_cold",
+      "status": "UNPLANNED_DIAGNOSTIC_NOT_PROMOTION",
+      "reason": "Driver launched cold mode hold after warm failure; preserved with no gate credit; driver fixed"
+    },
+    {
+      "id": "projected_skew_v1_cold",
+      "status": "INVALID_NUMERICAL_DIAGNOSTIC",
+      "reason": "Predeclared exception for sole transplant-step failure followed by 199 stable checks; FD precision guard failed at update8",
+      "successor": "Per-player FD sizing repair failed warm197/200; exception no longer applicable, no repaired cold run"
+    }
+  ],
+  "diagnostics": {
+    "matched_population": {
+      "scope": "changed synthetic target, no production gate credit",
+      "hold_bound_mmd_squared": 0.01,
+      "hold_checks": 20,
+      "constant_hold_passes": 14,
+      "functional_hold_passes": 20,
+      "both_fail_sustained_translation_response": true,
+      "matched_frozen_sibling_for_each": true
+    },
+    "energy_objective_conflict": true,
+    "cross_only_cold_identity_swap_and_force_cancellation": true
+  },
+  "reports": [
+    "continuous-round2.md",
+    "energy-signal-dynamics.md",
+    "continuous-audit-adaptive-allocation.md",
+    "matched-population-diagnostic.md",
+    "continuous-mechanism-round2.md"
+  ],
+  "limits": [
+    "Warm transplant failure does not establish that a different cold attractor is impossible.",
+    "Trajectory failure rejects the tested shared recipe; it does not prove ring acquisition failure.",
+    "Rest and tiny applied steps are acceptable. Rejections come from acquisition, quality or response tests.",
+    "Approximate energy lane MSEs are rounded here; exact raw episodes in preserved archives are authoritative.",
+    "No seed experiments or GitHub CI waiting. Original gates, architectures and budgets were not relaxed."
+  ],
+  "local_validation": {
+    "tests_passed": 170,
+    "seconds": 25.29,
+    "log": "continuous-evidence/round2/integrated-tests.log",
+    "log_sha256": "e9d2056c252beed908bd524698e3e2d3d0e466dbce3ae28a3940d0633cf75683"
+  },
+  "evidence_manifests": {
+    "continuous-evidence/round2/functional-metric-cold/manifest.json": "42cb64dfab59e5aad4ac0f96d8b5c52289a9f5a7a9ba2c1465243daab4f9d747",
+    "continuous-evidence/round2/functional-metric-cold-v2/manifest.json": "8ac36a08cda24e93b4275675a4690c280a3e71cace9faaade6836840d11c36df",
+    "continuous-evidence/round2/functional-metric-warm/manifest.json": "bb1a0d519da528fa899801568229e69c34a45b2166b98922aacfe71bcfb59328",
+    "continuous-evidence/round2/loss-budget-warm/manifest.json": "c55b33df1ce4214ce055d5c364bc9fda634d5ef8aee1aef738c730292dd5d3c7",
+    "continuous-evidence/energy-signal/manifest.json": "92b0a567b73719316135dacc16453fb5981258defa7df9da3bed291dc52c634a",
+    "continuous-evidence/round2-mechanism/manifest.json": "c283bc394c5157f89b9ed4b7971bff8a716c8db6b273a74e580fe81f23ec925b",
+    "continuous-evidence/adaptive-d-allocation/audit-result.json": "41c8ee616cab00297293cc42bd785909096a4448bd576dab366953fe51a493f6",
+    "continuous-evidence/matched-population-diagnostic/declaration.json": "73e2aed61762cb512a1a1583f31e4abbc71ed9204a1d377fbc934ce16658dafe"
+  }
+}

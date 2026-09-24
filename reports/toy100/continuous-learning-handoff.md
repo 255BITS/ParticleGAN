@@ -20,7 +20,7 @@ PyTorch 2.13.0+cu126 on CPU. On the shared machine it is
 `/tmp/pr38-default-env/bin/python`; the default Python is a different version.
 
 ```bash
-git fetch origin research/continuous-learning
+git fetch origin refs/heads/research/continuous-learning:refs/remotes/origin/research/continuous-learning
 git worktree add ../ParticleGAN-lr-dynamics origin/research/continuous-learning
 cd ../ParticleGAN-lr-dynamics
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=''
@@ -161,6 +161,22 @@ audit tests passed. The portable implicit warm driver
 also reproduced the 200/200 result, 6/200 constant control, and exact identity
 parity using only files in this worktree.
 
+The [second research round](continuous-round2.md) tests eight additional
+configurations, including projected skew response, with **170 integrated tests
+passing**. No candidate qualifies. Its [ledger](continuous-round2-results.json)
+and [exactly matched population / shift diagnostic](matched-population-diagnostic.md)
+separate stationary drift, acquisition and response to new signal. The
+handoff validation count above records the original publication, not the
+current total. The follow-up also distinguishes a conservative warm-state
+rejection from impossibility of a different cold attractor.
+
+[PR #81](https://github.com/255BITS/ParticleGAN/pull/81) independently replays the
+cross-only method on another environment. Its warm-state hash differs even
+with the cu126 wheel and AVX2 caps; it fails at update1002 rather than our
+1194–1197. Treat those exact step numbers as environment-specific attribution.
+Both studies reject the tested method. Its optional center-aware output cap
+is a diagnostic using host quality information, not a general training rule.
+
 ## Checks for a new attempt
 
 ```bash
@@ -169,6 +185,9 @@ python -m pytest -q tests/test_continuous_probe.py \
   tests/test_confidence_dynamics_scratch.py tests/test_fixed_metric_extra_scratch.py \
   tests/test_secant_extra_scratch.py tests/test_implicit_extra_audit.py \
   tests/test_cross_competitive_audit.py \
+  tests/test_loss_budget_scratch.py tests/test_functional_metric_scratch.py \
+  tests/test_energy_signal_scratch.py tests/test_adaptive_d_allocation_scratch.py \
+  tests/test_matched_population_diagnostic.py tests/test_projected_skew_scratch.py \
   tests/test_toy100_config.py tests/test_toy100_policy.py tests/test_toy_suite.py
 ```
 

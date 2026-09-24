@@ -5772,5 +5772,9 @@
         }
       ]
     }
+  ],
+  "counts_scope": "Initial research round through commit63e0788; later rounds have separate non-overlapping candidate ledgers.",
+  "subsequent_rounds": [
+    "continuous-round2-results.json"
   ]
 }

@@ -12,6 +12,127 @@ does not by itself prove failure to acquire the ring. Any exception to the
 filter order needs a concrete mechanism and a declared diagnostic scope, without
 claiming promotion credit or changing the production gate.
 
+The work used Sol max and Astra max in separate worktrees, with local CPU tests
+and no seed sweeps or GitHub CI dependency. Eight additional configurations
+were tested; none qualifies:
+
+The [round-two ledger](continuous-round2-results.json) is separate from the
+first round's counts. **170 integrated local tests passed in 25.29 seconds**;
+the [test log](continuous-evidence/round2/integrated-tests.log) is retained.
+Production trainer/configuration files and PR #60's scheduled head are unchanged.
+
+| Candidate | Warm checks | Cold trajectory | Cold ring | First disqualifying evidence |
+| --- | ---: | --- | --- | --- |
+| Network loss budget | 54/200 | Not run | Not run | Warm quality |
+| Joint G/prior loss budget | 98/200 | Not run | Not run | Warm quality |
+| Generator functional metric | 200/200 | MSE .037305, FAIL | Not run | Shared acquisition |
+| Fresh-data D allocation | 7/200 | Not run | Unplanned diagnostic, FAIL | Warm quality |
+| Marginal energy gate | 200/200 | MSE .2764, FAIL | Not run | Shared acquisition |
+| Conditional energy gate | 200/200 | MSE .003682, PASS | 0/5, FAIL | Ring acquisition |
+| Conditional energy backtracking | 198/200 | Not run | Not run | Warm quality |
+| Projected implicit skew response, repaired | 197/200 | Not run | Not run | Warm quality |
+
+Controls, fixed-cloud diagnostics and serialization repairs are not additional
+candidates. Unplanned downstream work receives no promotion credit. A small
+number of accepted proposals is an observation, not itself a failure criterion.
+
+The [energy-signal report](energy-signal-dynamics.md) and
+[D-allocation report](continuous-audit-adaptive-allocation.md) provide independent
+lane details. Energy backtracking accepted a full proposal at update 1174 that
+improved both measured energy halves while HQ fell from .9990 to .7998. The
+[fixed-cloud counterexample](energy_objective_conflict.py) also improves energy
+while HQ falls below .9, preserving all eight modes. The signal can therefore
+reward a change that violates the required quality metric; this is stronger
+evidence than merely observing few accepted updates.
+
+The allocation arm used a new fresh-data e-process from
+[Kim et al., August 2026](https://arxiv.org/html/2608.10096), fixing Adam rates
+while allowing one to three D updates per ordinary G update. In the warm
+window it always reached the three-update cap and failed, so this run became
+a 3D:1G comparison. Its driver automatically ran cold ring after warm failure.
+That protocol deviation is archived and excluded from promotion; the driver
+now stops at the failed warm gate.
+
+## An exactly representable equilibrium diagnostic
+
+The original ring cannot exactly match its target law, but that fact alone
+does not explain the drift. A [new matched-population diagnostic](matched-population-diagnostic.md)
+freezes the twelve live generator outputs as target centers and matches real
+and generated Gaussian noise at .029. It starts the critic at constant zero,
+preserving Adam variance, EMA and all RNG streams identically across forks.
+An analytic population MMD² is initially zero; no finite evaluation sample
+noise enters this metric. This changes the target and critic for attribution,
+and does not replace any production gate.
+
+Ordinary constant Adam passes 14/20 hold checks at the predeclared MMD²≤.01
+bound; functional damping passes 20/20. Neither sustains recovery after the
+same target shifts by +.35. Each has its own exactly matched frozen sibling.
+Functional damping finishes at MMD² .20521 versus frozen .19188, showing that
+better stationary hold does not establish responsiveness. The original noise
+horizon stays 1200, and there is no optimizer reset at the shift. This gives
+future agents a small test with a representable starting law in addition to
+the unchanged real-task acquisition and quality gates.
+
+Run it with `python -u reports/toy100/matched_population_diagnostic.py --output NEW_PATH`
+in the pinned [handoff environment](continuous-learning-handoff.md).
+
+## Coherent feedback, objective cancellation and rotational dynamics
+
+The [mechanism report](continuous-mechanism-round2.md) contains the complete
+per-row force measurements, exact replays, projected-skew formulas, five
+analytic/host audit tests and all runtime source archives.
+
+The exact local replay of the earlier competitive method showed that all
+twelve particles retain their nearest ring-mode assignments throughout the
+warm suffix. The loss of HQ comes from moving away from centers, not changing
+mode assignments. The first failing particle drifts from distance .0506 at
+update 1180 to .2538 at 1194, beyond the .21 quality radius. Those failing steps
+still improve both players' losses against the proposed opponent. A simple
+per-player loss-improvement guard would therefore not directly catch them.
+
+The earlier cross-only cold trajectory near miss is also more specific than
+uniformly slow learning: ten identities become nearly exact while rows 2 and 3
+swap targets. At update 400 their adversarial and set-cover output forces have
+opposing cosines about -.995 and similar norms around .085, leaving a combined
+norm near .008. The critic points toward the correct identity, while the
+existing set-cover objective pulls toward the wrong matched set member. No
+host objective or threshold was changed to remove this conflict.
+
+Astra then tested a rank-two implicit correction for the antisymmetric part
+of the cross-player Jacobian in the frozen Adam metric. Central same-batch
+finite differences estimate two genuine cross-field directions; a 2×2 inverse
+skew solve corrects their rotation while bounding metric displacement by the
+ordinary joint proposal. Exact zero fields remain still, and symmetric fields
+are unchanged in the measured plane. This is a new projected method inspired
+by SGA, not a reproduction of
+[Vater et al.'s low-rank SGA, revised July 2026](https://arxiv.org/abs/2510.25716).
+It has no target oracle, elapsed-time schedule or zero-centered loss penalty.
+
+The first version passed 199/200 warm checks, failing only the initial
+transplant update 1001. It passed all five original terminal checks and every
+subsequent dense check. That isolated transition justified one **explicitly
+declared cold diagnostic exception** to the conservative warm filter, testing
+whether its own cold dynamics could reach a good attractor. The warm FAIL was
+retained; no promotion credit was granted. The cold diagnostic stopped at
+update 8 with a finite-difference rounding error, before any acquisition verdict.
+A shared perturbation epsilon made one player block too small to measure.
+
+The repair uses a separate representable perturbation size and quotient for
+each perturbed player, retaining the same mathematical method and the same
+5% rounding guard. Independent math review found no defect. With the repaired
+source, the warm arm passes 197/200, failing updates 1001,1142,1143; final HQ
+.99976 and all five original terminal checks would again hide real excursions.
+The single-transition exception no longer applies, so no repaired cold run was
+launched. The invalid first cold attempt is not labeled acquisition failure.
+
+These results argue against tuning only a scalar residual cutoff, movement
+floor or energy threshold on these same examples. A useful next mechanism must
+identify when current critic feedback supports an achievable improvement,
+while retaining response to shifted data. The matched-population diagnostic
+now separates equilibrium drift and wake-up from the original ring's target
+mismatch. Any future candidate still needs the original shared acquisition,
+continued live quality, translation response and production common-22 gates.
+
 ## Loss-budget experiment
 
 The measured generator drift motivates controlling how much apparent loss
@@ -43,7 +164,7 @@ not fulfill this task.
 
 Both candidates fail at the first filter. The reference gap remains positive
 at every warm update, so neither ever rests; 34/200 network and 24/200 joint
-proposals take a full step. In the joint case, the first failure at update1005
+proposals take a full step. In the joint case, the first failure at update 1005
 has budget .07056 versus predicted improvement .02486, accepting the full step.
 This criterion does not sufficiently identify damaging motion near the passing
 state. No arbitrary smaller-budget sweep followed.
@@ -90,8 +211,8 @@ weighting, old-parameter Jacobian evaluation, unchanged prior/D, and RNG checks.
 The correction is local: nonlinear displacement is measured, not bounded.
 
 The next, cheaper cold trajectory gate **fails**, final identity MSE .037305
-against .02, with 0/24 passing checkpoints. MSE is .05093 at100 and .03731
-at200, then fluctuates around .037 through400. This is not evidence of a
+against .02, with 0/24 passing checkpoints. MSE is .05093 at 100 and .03731
+at 200, then fluctuates around .037 through 400. This is not evidence of a
 candidate that merely needs a few more frozen-budget updates. The cold host
 costs 15.44 seconds; no ring acquisition or longer continuation followed.
 The Jacobian has 192 output rows and 6544 network parameter columns on this
