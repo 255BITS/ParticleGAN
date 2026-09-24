@@ -1,0 +1,59 @@
+{
+  "scope": "saved-state local diagnostic; no cold/warm promotion",
+  "summary_sha256": "dd1e38b4b88646d62e5248e36d165204893ae79f1a13b0a5963b99b2dc55afb5",
+  "captured_state_hashes_verified": 11,
+  "ordinary_support_arrays_verified": 44,
+  "ordinary_update_records_verified": 44,
+  "all_constant_role_rates": true,
+  "same_rng_noise_endpoints": true,
+  "candidate_total_passing": 28,
+  "candidate_total_checks": 44,
+  "local_gate_pass": false,
+  "branches": [
+    {
+      "start": 1324,
+      "end": 1335,
+      "checks": 12,
+      "candidate_passing": 12,
+      "candidate_failing_steps": [],
+      "candidate_min_hq": 0.966552734375,
+      "candidate_min_modes": 8
+    },
+    {
+      "start": 1380,
+      "end": 1395,
+      "checks": 16,
+      "candidate_passing": 15,
+      "candidate_failing_steps": [
+        1395
+      ],
+      "candidate_min_hq": 0.79833984375,
+      "candidate_min_modes": 8
+    },
+    {
+      "start": 1530,
+      "end": 1545,
+      "checks": 16,
+      "candidate_passing": 1,
+      "candidate_failing_steps": [
+        1531,
+        1532,
+        1533,
+        1534,
+        1535,
+        1536,
+        1537,
+        1538,
+        1539,
+        1540,
+        1541,
+        1542,
+        1543,
+        1544,
+        1545
+      ],
+      "candidate_min_hq": 0.814697265625,
+      "candidate_min_modes": 7
+    }
+  ]
+}

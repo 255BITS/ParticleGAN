@@ -1,0 +1,60 @@
+{
+  "method": "pr84_one_virtual_penalized_d_step_total_g_gradient",
+  "scope": "saved_state_local_diagnostic_only",
+  "shared_gate_eligible": false,
+  "branches": [
+    [
+      1324,
+      1335
+    ],
+    [
+      1380,
+      1395
+    ],
+    [
+      1530,
+      1545
+    ]
+  ],
+  "variants": [
+    "original",
+    "unrolled"
+  ],
+  "required_local_gate": "all 44 live checkpoints pass; no warm run on failure",
+  "thresholds": {
+    "modes": 8,
+    "hq": 0.9
+  },
+  "source": {
+    "reports/toy100/pr84_unrolled_filter.py": "a96218fc778c89e336b42a454f97773100f423a22dbb39829e33f464e869394d",
+    "reports/toy100/pr84_unrolled_candidate.py": "df3a48ae0e6860fd89486e5a6ec29154ba97abe5fa38fabfb782b6cd0831683c",
+    "reports/toy100/functional_b_cap.py": "0a3088add24bd83e8827e2e9e1d2edbe32ee36bbc8beef15f3217b4d4a50a5f3",
+    "reports/toy100/pr84_critic_refinement_filter.py": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+    "reports/toy100/pr84_critic_refinement_capture.py": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+    "reports/toy100/pr84_prediction_state_filter.py": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4",
+    "reports/toy100/pr84_opponent_prediction.py": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+  },
+  "states_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47",
+  "capture_sha256": "abc56787e8ba51fac5704b90c7fc36aa0fff76d313a551668969c3a1c4c1aa4f",
+  "response": "one virtual sharp penalized D step, full G derivative",
+  "virtual_metric": "frozen post-real-D-Adam diagonal",
+  "persistent_d": "original bounded Adam only",
+  "active_stencil": "phase1 width frozen through phase2",
+  "stationary_point_scope": "changes general-sum surrogate; no equilibrium-preservation theorem",
+  "seed": 0,
+  "noise_horizon": 1200,
+  "nominal_rates": {
+    "g": 0.00425,
+    "d": 0.00425,
+    "prior": 0.0085
+  }
+}

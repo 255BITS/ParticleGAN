@@ -1,0 +1,45 @@
+{
+  "scope": "frozen read-only round-6 evidence; original bytes recover by gzip.decompress",
+  "original_artifact": "/ml2/hypergan/ParticleGAN-continuous-learning/artifacts/continuous-learning/round6/chamfer-whole-map",
+  "files": {
+    "audit.json": {
+      "stored_sha256": "326eddba5a870aeaf2dd15162f445d4ec9f558692e890bbb0fe0da06e0756912",
+      "stored_bytes": 24518
+    },
+    "declaration.json": {
+      "stored_sha256": "ab76b952574179072cfef71a669d0bb9010070daeab0d7ae0f74b966279fc571",
+      "stored_bytes": 1527
+    },
+    "result.json.gz": {
+      "stored_sha256": "4e2554101afe2dfa14108c83fce1ff5aedf588f92b2c713dde4917662845509d",
+      "stored_bytes": 82138,
+      "original_sha256": "8a6628c409cad78a1d1f582a7f189156a025a9dfdb0d4cf320d36e14226db5f7",
+      "original_bytes": 261726,
+      "original_name": "result.json"
+    },
+    "source/benchmarks/locked_shared/mlp.py": {
+      "stored_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "stored_bytes": 2289
+    },
+    "source/benchmarks/locked_shared/mode_hold.py": {
+      "stored_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "stored_bytes": 10774
+    },
+    "source/reports/toy100/chamfer_pullback.py": {
+      "stored_sha256": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+      "stored_bytes": 7290
+    },
+    "source/reports/toy100/chamfer_whole_map_filter.py": {
+      "stored_sha256": "020847f43de7b6a2526cfa68ea0e4446fff3aebc7c1620a22a2fa288aa6efc27",
+      "stored_bytes": 5234
+    },
+    "source/reports/toy100/coverage_fixed_eval.py": {
+      "stored_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "stored_bytes": 3996
+    },
+    "source/reports/toy100/pr84_early_geometry.py": {
+      "stored_sha256": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+      "stored_bytes": 7322
+    }
+  }
+}

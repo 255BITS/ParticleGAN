@@ -1,0 +1,139 @@
+{
+  "scope": "frozen read-only round-6 evidence; original bytes recover by gzip.decompress",
+  "original_artifact": "/ml2/hypergan/ParticleGAN-continuous-learning/artifacts/continuous-learning/round6/unroll-saved44",
+  "files": {
+    "audit.json": {
+      "stored_sha256": "d3a3b8d3fb39ce17bc025f20887781f32d1cfe5913beafa41139b920dc9954d2",
+      "stored_bytes": 1342
+    },
+    "declaration.json": {
+      "stored_sha256": "5cb8e0beeabe43b4e736acb5440121bc20c6cfa128524bff9f2c8aef8492bc50",
+      "stored_bytes": 2957
+    },
+    "original-1324-1335.json.gz": {
+      "stored_sha256": "b36b83058f79cc1fdedc4ec93b02188cc97de107d8e65a7c0cb3b22ca62d79d3",
+      "stored_bytes": 6733,
+      "original_sha256": "3aae073766f8d9c2a719405766b5e11980da2106b56141c5659f3a0bd70a4a02",
+      "original_bytes": 19612,
+      "original_name": "original-1324-1335.json"
+    },
+    "original-1380-1395.json.gz": {
+      "stored_sha256": "be3471d384881677a877decc3d6efbedb2f77355dfed808c692bf5e7f4106b46",
+      "stored_bytes": 8481,
+      "original_sha256": "28299694181d41b46ffa59e03721732e1168dda221ccad7494832a0e4e7eb652",
+      "original_bytes": 25217,
+      "original_name": "original-1380-1395.json"
+    },
+    "original-1530-1545.json.gz": {
+      "stored_sha256": "5d3fd74f36c7aae89a15b814a8757da8a3170e38bed49cdedc45c05cea557501",
+      "stored_bytes": 8471,
+      "original_sha256": "4740de460653a939f5a837c7ecc96db9a88573867ae0352a2b0e7d37d3f4a0f5",
+      "original_bytes": 25122,
+      "original_name": "original-1530-1545.json"
+    },
+    "source/benchmarks/locked_shared/mlp.py": {
+      "stored_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "stored_bytes": 2289
+    },
+    "source/benchmarks/locked_shared/mode_hold.py": {
+      "stored_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "stored_bytes": 10774
+    },
+    "source/configs/toy100/constraints_simple_regularization.json": {
+      "stored_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "stored_bytes": 1507
+    },
+    "source/host-1324-1335.py": {
+      "stored_sha256": "8b1a0f5d26785c0ea537f6ef069843f45bf800ecfbd9fe1c84b68eb0804c4db1",
+      "stored_bytes": 6602
+    },
+    "source/host-1380-1395.py": {
+      "stored_sha256": "911cd032897585771b4c5ca9c61536f8acba0246c69c105478c3331c256f7257",
+      "stored_bytes": 6602
+    },
+    "source/host-1530-1545.py": {
+      "stored_sha256": "d77d320f2802c7c418612647f0308bb0e9e12bebd2598eb84d066113554f4d1a",
+      "stored_bytes": 6602
+    },
+    "source/particlegan/gan_loss.py": {
+      "stored_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "stored_bytes": 7960
+    },
+    "source/particlegan/grad_regularizers.py": {
+      "stored_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+      "stored_bytes": 17129
+    },
+    "source/reports/toy100/alternating_curvature_scratch.py": {
+      "stored_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "stored_bytes": 16689
+    },
+    "source/reports/toy100/coverage_fixed_eval.py": {
+      "stored_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "stored_bytes": 3996
+    },
+    "source/reports/toy100/extra_adam_scratch.py": {
+      "stored_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "stored_bytes": 13261
+    },
+    "source/reports/toy100/functional_b_cap.py": {
+      "stored_sha256": "0a3088add24bd83e8827e2e9e1d2edbe32ee36bbc8beef15f3217b4d4a50a5f3",
+      "stored_bytes": 2043
+    },
+    "source/reports/toy100/pr84_critic_refinement_capture.py": {
+      "stored_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+      "stored_bytes": 7367
+    },
+    "source/reports/toy100/pr84_critic_refinement_filter.py": {
+      "stored_sha256": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+      "stored_bytes": 7717
+    },
+    "source/reports/toy100/pr84_opponent_prediction.py": {
+      "stored_sha256": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846",
+      "stored_bytes": 8204
+    },
+    "source/reports/toy100/pr84_prediction_state_filter.py": {
+      "stored_sha256": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4",
+      "stored_bytes": 15392
+    },
+    "source/reports/toy100/pr84_smoothed_candidate.py": {
+      "stored_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+      "stored_bytes": 6530
+    },
+    "source/reports/toy100/pr84_unrolled_candidate.py": {
+      "stored_sha256": "df3a48ae0e6860fd89486e5a6ec29154ba97abe5fa38fabfb782b6cd0831683c",
+      "stored_bytes": 10358
+    },
+    "source/reports/toy100/pr84_unrolled_filter.py": {
+      "stored_sha256": "a96218fc778c89e336b42a454f97773100f423a22dbb39829e33f464e869394d",
+      "stored_bytes": 6420
+    },
+    "summary.json.gz": {
+      "stored_sha256": "50404e874b2be4b0351d4fee1458726b5e8a49ab9e9c9075a7cda0300d4efc21",
+      "stored_bytes": 38706,
+      "original_sha256": "dd1e38b4b88646d62e5248e36d165204893ae79f1a13b0a5963b99b2dc55afb5",
+      "original_bytes": 142540,
+      "original_name": "summary.json"
+    },
+    "unrolled-1324-1335.json.gz": {
+      "stored_sha256": "03e68c963794918af57e89587ea704bbf1895318d3088e5511cd7183945810ce",
+      "stored_bytes": 6604,
+      "original_sha256": "3df0c6f0ad89e2557940ddccf44c56fae307700f5ecee78529e4ca19f6cdcf14",
+      "original_bytes": 19563,
+      "original_name": "unrolled-1324-1335.json"
+    },
+    "unrolled-1380-1395.json.gz": {
+      "stored_sha256": "300e338d086f8a534e708a2bd90c92abe573101ccfdcd03813e54598a8708470",
+      "stored_bytes": 8217,
+      "original_sha256": "6a409e0f42731e872a027840f63f5e5b3dcbefb69e8bb29b1fda5d7e1d65db1b",
+      "original_bytes": 24919,
+      "original_name": "unrolled-1380-1395.json"
+    },
+    "unrolled-1530-1545.json.gz": {
+      "stored_sha256": "9dce8e28b9c11684ae4038b689231b2177618d2cc76de483187532874ab22bd0",
+      "stored_bytes": 8291,
+      "original_sha256": "b79ecc1a0080437ae157e6a4adbdf3f84c5cbcb3e9e4a26ddae964810b5f6c21",
+      "original_bytes": 24990,
+      "original_name": "unrolled-1530-1545.json"
+    }
+  }
+}

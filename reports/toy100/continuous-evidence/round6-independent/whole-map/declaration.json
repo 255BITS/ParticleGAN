@@ -1,0 +1,25 @@
+{
+  "scope": "free-output geometry rejection filter, not neural training",
+  "source": {
+    "reports/toy100/chamfer_whole_map_filter.py": "020847f43de7b6a2526cfa68ea0e4446fff3aebc7c1620a22a2fa288aa6efc27",
+    "reports/toy100/chamfer_pullback.py": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+    "reports/toy100/pr84_early_geometry.py": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+  },
+  "cold_states_sha256": "002b3019c42c77414cb4f853db7818bba79bffab095f0d19052e4517ff45392d",
+  "warm_states_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47",
+  "updates": 100,
+  "batch": 128,
+  "update": "existing unit-mean C+Q exact fixed-assignment target; replaces entire output move",
+  "cases": [
+    "cold1 pre_step",
+    "cold100 post_bounded_g",
+    "warm1324 pre_step"
+  ],
+  "streams": "each saved data stream copied independently; only real batch sampled per toy update",
+  "evaluation": "4096 fixed draws with late .029 output noise, evaluation clock 241..340",
+  "gate": "warm all100 and both cold terminal5:8 modes/HQ>=.9",
+  "caveat": "100-update failure rejects this short filter, not global asymptotic acquisition"
+}
