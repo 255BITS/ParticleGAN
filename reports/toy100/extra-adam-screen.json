@@ -1,0 +1,2061 @@
+{
+  "artifact": "artifacts/toy100-constraints/particlegan-extra-adam-wave1-4b00335",
+  "config_grid": [
+    {
+      "beta2": 0.9,
+      "config_file": "configs/eg000.json",
+      "config_sha256": "0d2582d489c77c63759f2fceaf7e2fb3bddd4f85a2d76863040015531013a677",
+      "core": "winner",
+      "id": "eg000",
+      "lr": 0.0005,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg001.json",
+      "config_sha256": "69a444f5f2c5df039dd365ab17c48be8b76e270cfd5f7521ff01283afcbade7f",
+      "core": "winner",
+      "id": "eg001",
+      "lr": 0.0005,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg002.json",
+      "config_sha256": "a8492466dfbb729e8d9b095a940c05c8a391ff342cb0cbe540517e4d461c083f",
+      "core": "winner",
+      "id": "eg002",
+      "lr": 0.0005,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.9,
+      "config_file": "configs/eg003.json",
+      "config_sha256": "5d90aeb5fa9186e167f0734296bf6d1e08d1eb5f3737324dc602dd248e863ad6",
+      "core": "winner",
+      "id": "eg003",
+      "lr": 0.001,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg004.json",
+      "config_sha256": "c0d97a7ced567adcf0fa628e32633572a570b316c48a1112e7d61e95545127aa",
+      "core": "winner",
+      "id": "eg004",
+      "lr": 0.001,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg005.json",
+      "config_sha256": "865452d0759991e0829e90014a288747371253180bd69a468b00de3128e5ec73",
+      "core": "winner",
+      "id": "eg005",
+      "lr": 0.001,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.9,
+      "config_file": "configs/eg006.json",
+      "config_sha256": "81bf37902f6243b0e9165fa47fb465c275e168212568e3ca206bb49683c861a5",
+      "core": "winner",
+      "id": "eg006",
+      "lr": 0.0025,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg007.json",
+      "config_sha256": "b90cd17a30ecf6742e09c2d85d29a6b96163d5a93b0eeea21ba9040031a7fe24",
+      "core": "winner",
+      "id": "eg007",
+      "lr": 0.0025,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg008.json",
+      "config_sha256": "08ece5d90f7fdbb1d6558fdb9b02ffff1d6f4db9f8cf90698ca3df710e9983d5",
+      "core": "winner",
+      "id": "eg008",
+      "lr": 0.0025,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.9,
+      "config_file": "configs/eg009.json",
+      "config_sha256": "a7ef6b5e3222b8473f964bd9a5bda76181ef9072906a499c41ce6a546a0dd28b",
+      "core": "winner",
+      "id": "eg009",
+      "lr": 0.00425,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg010.json",
+      "config_sha256": "02285cf19cf4d92eb9c4348fc873146dba6f1ea9f727d76a791b14c39fde51ca",
+      "core": "winner",
+      "id": "eg010",
+      "lr": 0.00425,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg011.json",
+      "config_sha256": "c49e64bfdab0706a38785b00b6a5b249b67440a4c9c351f4af34fa5e4e63118e",
+      "core": "winner",
+      "id": "eg011",
+      "lr": 0.00425,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.9,
+      "config_file": "configs/eg012.json",
+      "config_sha256": "4a19a630917ec2a5096960897e893acb9cffbd1a1e9ade70ae18625ad7a40f31",
+      "core": "simple",
+      "id": "eg012",
+      "lr": 0.0005,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg013.json",
+      "config_sha256": "62f70b30243d684765238604e4cfcd4dbdbb9d7329ba1f64742584c77c6d3131",
+      "core": "simple",
+      "id": "eg013",
+      "lr": 0.0005,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg014.json",
+      "config_sha256": "c4210a4f59f857589365e179ceabfa9e19f01fe7594084e0f9123b4e73f9f26c",
+      "core": "simple",
+      "id": "eg014",
+      "lr": 0.0005,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.9,
+      "config_file": "configs/eg015.json",
+      "config_sha256": "d339d7f1ded8dffcf95d882e5d20dc68a9da51905e61bf115bf80bde031244fe",
+      "core": "simple",
+      "id": "eg015",
+      "lr": 0.001,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg016.json",
+      "config_sha256": "80335014c2555452d4d847df3c9011a36806ec252acee4f508eed8a191e317d6",
+      "core": "simple",
+      "id": "eg016",
+      "lr": 0.001,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg017.json",
+      "config_sha256": "962cc5ec591e80090b7eed073763e9dd6995f4a61b00568829c33d86ff0e0e25",
+      "core": "simple",
+      "id": "eg017",
+      "lr": 0.001,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.9,
+      "config_file": "configs/eg018.json",
+      "config_sha256": "eb5c80c25996a7fb6fc2622f71f9abdc30cae71984e5faf76c9fe5cb28b6822d",
+      "core": "simple",
+      "id": "eg018",
+      "lr": 0.0025,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg019.json",
+      "config_sha256": "ab43ebbfba5115bf467569199377e0ab014c062e8a9ea61201f2e80d2800602b",
+      "core": "simple",
+      "id": "eg019",
+      "lr": 0.0025,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg020.json",
+      "config_sha256": "85efae71d915e44411b3236207323b5f6b14a8be2286ae3d767a3f28e24f21be",
+      "core": "simple",
+      "id": "eg020",
+      "lr": 0.0025,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.9,
+      "config_file": "configs/eg021.json",
+      "config_sha256": "69ea8f8d5a46e345bcf0e9cc49ebdff106176a4829c6082dc26da46e118dab94",
+      "core": "simple",
+      "id": "eg021",
+      "lr": 0.00425,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg022.json",
+      "config_sha256": "bdb5336bb35ad565662b8959d849d3b8d3c148b9eb7bf07a95c40bf7596f8b25",
+      "core": "simple",
+      "id": "eg022",
+      "lr": 0.00425,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg023.json",
+      "config_sha256": "4bb1f14e5d0d1a621b2439a8bf2ecb495421443cc6af32f64c37024b3193904d",
+      "core": "simple",
+      "id": "eg023",
+      "lr": 0.00425,
+      "method": "extra_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg024.json",
+      "config_sha256": "173e2348da985417e3fb2567f58cfc1650efbec01fed3299f7ef678778e9651d",
+      "core": "winner",
+      "id": "eg024",
+      "lr": 0.001,
+      "method": "sim_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg025.json",
+      "config_sha256": "1fc6e439c0a8a858de88bfe33fdf7c96791fc9ef7037eab0e11a69e18bfe88d3",
+      "core": "winner",
+      "id": "eg025",
+      "lr": 0.001,
+      "method": "sim_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg026.json",
+      "config_sha256": "7cb34d4ab09d303867855f25cf30a830c0e6abbb50c322f8a0b3ac8ed5a07e22",
+      "core": "winner",
+      "id": "eg026",
+      "lr": 0.0025,
+      "method": "sim_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg027.json",
+      "config_sha256": "9779f6dcdc0ba9250d810867c32a424ef460a176379b6abc8cb54d90834db2de",
+      "core": "winner",
+      "id": "eg027",
+      "lr": 0.0025,
+      "method": "sim_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg028.json",
+      "config_sha256": "f9e855a1acbfca2279e576e752a95b82aec24ee16348bce523aeda2f5da049e5",
+      "core": "simple",
+      "id": "eg028",
+      "lr": 0.001,
+      "method": "sim_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg029.json",
+      "config_sha256": "45a42fee882f04ecc98d3e2cd1857e9a8418da05a69458db69c3f22d2af6bab3",
+      "core": "simple",
+      "id": "eg029",
+      "lr": 0.001,
+      "method": "sim_adam"
+    },
+    {
+      "beta2": 0.99,
+      "config_file": "configs/eg030.json",
+      "config_sha256": "3ad4c408d76e110e52ee0fc1df5d83dfde1c7ec5d6e84efc8974cfb160187018",
+      "core": "simple",
+      "id": "eg030",
+      "lr": 0.0025,
+      "method": "sim_adam"
+    },
+    {
+      "beta2": 0.999,
+      "config_file": "configs/eg031.json",
+      "config_sha256": "7d9e7dc0496aabddd45a7872b124bd8ec334e256918b86ace3ad01e361b7f60f",
+      "core": "simple",
+      "id": "eg031",
+      "lr": 0.0025,
+      "method": "sim_adam"
+    }
+  ],
+  "independently_regraded_episodes": 32,
+  "inventory_sha256": "fdc2a574516787902980a755c3d5fd3cd881a2884c49d892f932bc79be2d9117",
+  "manifest_sha256": "d18ce72e85a78f0bc275693be1abda4212bbb474ee8351f828433aee9c1cd83e",
+  "retained_original_files": 487,
+  "rows": [
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.159912109375,
+            "modes": 1
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 23.677193037001416,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.9,
+      "config_file": "configs/eg000.json",
+      "config_sha256": "0d2582d489c77c63759f2fceaf7e2fb3bddd4f85a2d76863040015531013a677",
+      "core": "winner",
+      "id": "eg000",
+      "lr": 0.0005,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1000
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1050
+        },
+        {
+          "hq": 0.166015625,
+          "modes": 1,
+          "step": 1100
+        },
+        {
+          "hq": 0.1240234375,
+          "modes": 3,
+          "step": 1150
+        },
+        {
+          "hq": 0.159912109375,
+          "modes": 1,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.03076171875,
+            "modes": 3
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 37.51335650891997,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg001.json",
+      "config_sha256": "69a444f5f2c5df039dd365ab17c48be8b76e270cfd5f7521ff01283afcbade7f",
+      "core": "winner",
+      "id": "eg001",
+      "lr": 0.0005,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1000
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1050
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.03076171875,
+          "modes": 3,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.0,
+            "modes": 0
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 32.82724279188551,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg002.json",
+      "config_sha256": "a8492466dfbb729e8d9b095a940c05c8a391ff342cb0cbe540517e4d461c083f",
+      "core": "winner",
+      "id": "eg002",
+      "lr": 0.0005,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.042724609375,
+          "modes": 1,
+          "step": 1000
+        },
+        {
+          "hq": 0.15966796875,
+          "modes": 2,
+          "step": 1050
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.0,
+            "modes": 0
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 32.184847593074664,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.9,
+      "config_file": "configs/eg003.json",
+      "config_sha256": "5d90aeb5fa9186e167f0734296bf6d1e08d1eb5f3737324dc602dd248e863ad6",
+      "core": "winner",
+      "id": "eg003",
+      "lr": 0.001,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.05810546875,
+          "modes": 1,
+          "step": 1000
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1050
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.08251953125,
+            "modes": 1
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 33.32460682513192,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg004.json",
+      "config_sha256": "c0d97a7ced567adcf0fa628e32633572a570b316c48a1112e7d61e95545127aa",
+      "core": "winner",
+      "id": "eg004",
+      "lr": 0.001,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.060546875,
+          "modes": 1,
+          "step": 1000
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1050
+        },
+        {
+          "hq": 0.080078125,
+          "modes": 1,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.08251953125,
+          "modes": 1,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.08349609375,
+            "modes": 1
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 34.838567190105096,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg005.json",
+      "config_sha256": "865452d0759991e0829e90014a288747371253180bd69a468b00de3128e5ec73",
+      "core": "winner",
+      "id": "eg005",
+      "lr": 0.001,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.01904296875,
+          "modes": 1,
+          "step": 1000
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1050
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1100
+        },
+        {
+          "hq": 0.00146484375,
+          "modes": 1,
+          "step": 1150
+        },
+        {
+          "hq": 0.08349609375,
+          "modes": 1,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.11181640625,
+            "modes": 2
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 42.305795634165406,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.9,
+      "config_file": "configs/eg006.json",
+      "config_sha256": "81bf37902f6243b0e9165fa47fb465c275e168212568e3ca206bb49683c861a5",
+      "core": "winner",
+      "id": "eg006",
+      "lr": 0.0025,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.057861328125,
+          "modes": 1,
+          "step": 1000
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1050
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.11181640625,
+          "modes": 2,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.02392578125,
+            "modes": 1
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 31.184176590992138,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg007.json",
+      "config_sha256": "b90cd17a30ecf6742e09c2d85d29a6b96163d5a93b0eeea21ba9040031a7fe24",
+      "core": "winner",
+      "id": "eg007",
+      "lr": 0.0025,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.03173828125,
+          "modes": 1,
+          "step": 1000
+        },
+        {
+          "hq": 0.179931640625,
+          "modes": 2,
+          "step": 1050
+        },
+        {
+          "hq": 0.09033203125,
+          "modes": 1,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.02392578125,
+          "modes": 1,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.166015625,
+            "modes": 3
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 31.954001008998603,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg008.json",
+      "config_sha256": "08ece5d90f7fdbb1d6558fdb9b02ffff1d6f4db9f8cf90698ca3df710e9983d5",
+      "core": "winner",
+      "id": "eg008",
+      "lr": 0.0025,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.084228515625,
+          "modes": 2,
+          "step": 1000
+        },
+        {
+          "hq": 0.083251953125,
+          "modes": 1,
+          "step": 1050
+        },
+        {
+          "hq": 0.24267578125,
+          "modes": 3,
+          "step": 1100
+        },
+        {
+          "hq": 0.0263671875,
+          "modes": 1,
+          "step": 1150
+        },
+        {
+          "hq": 0.166015625,
+          "modes": 3,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.07958984375,
+            "modes": 2
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 32.10656034690328,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.9,
+      "config_file": "configs/eg009.json",
+      "config_sha256": "a7ef6b5e3222b8473f964bd9a5bda76181ef9072906a499c41ce6a546a0dd28b",
+      "core": "winner",
+      "id": "eg009",
+      "lr": 0.00425,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.092041015625,
+          "modes": 2,
+          "step": 1000
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1050
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1100
+        },
+        {
+          "hq": 0.07080078125,
+          "modes": 2,
+          "step": 1150
+        },
+        {
+          "hq": 0.07958984375,
+          "modes": 2,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.17626953125,
+            "modes": 2
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 31.07605222519487,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg010.json",
+      "config_sha256": "02285cf19cf4d92eb9c4348fc873146dba6f1ea9f727d76a791b14c39fde51ca",
+      "core": "winner",
+      "id": "eg010",
+      "lr": 0.00425,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.086181640625,
+          "modes": 1,
+          "step": 1000
+        },
+        {
+          "hq": 0.07275390625,
+          "modes": 2,
+          "step": 1050
+        },
+        {
+          "hq": 0.064697265625,
+          "modes": 2,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.17626953125,
+          "modes": 2,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.0,
+            "modes": 0
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 32.952166012022644,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg011.json",
+      "config_sha256": "c49e64bfdab0706a38785b00b6a5b249b67440a4c9c351f4af34fa5e4e63118e",
+      "core": "winner",
+      "id": "eg011",
+      "lr": 0.00425,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1000
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1050
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1100
+        },
+        {
+          "hq": 0.008056640625,
+          "modes": 1,
+          "step": 1150
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.169677734375,
+            "modes": 5
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 33.02743165497668,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.9,
+      "config_file": "configs/eg012.json",
+      "config_sha256": "4a19a630917ec2a5096960897e893acb9cffbd1a1e9ade70ae18625ad7a40f31",
+      "core": "simple",
+      "id": "eg012",
+      "lr": 0.0005,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.314208984375,
+          "modes": 6,
+          "step": 1000
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1050
+        },
+        {
+          "hq": 0.01904296875,
+          "modes": 2,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.169677734375,
+          "modes": 5,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.083984375,
+            "modes": 1
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 32.105316440807655,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg013.json",
+      "config_sha256": "62f70b30243d684765238604e4cfcd4dbdbb9d7329ba1f64742584c77c6d3131",
+      "core": "simple",
+      "id": "eg013",
+      "lr": 0.0005,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.052734375,
+          "modes": 1,
+          "step": 1000
+        },
+        {
+          "hq": 0.10546875,
+          "modes": 1,
+          "step": 1050
+        },
+        {
+          "hq": 0.277099609375,
+          "modes": 4,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.083984375,
+          "modes": 1,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.19384765625,
+            "modes": 2
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 29.285310617880896,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg014.json",
+      "config_sha256": "c4210a4f59f857589365e179ceabfa9e19f01fe7594084e0f9123b4e73f9f26c",
+      "core": "simple",
+      "id": "eg014",
+      "lr": 0.0005,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.280517578125,
+          "modes": 5,
+          "step": 1000
+        },
+        {
+          "hq": 0.1982421875,
+          "modes": 5,
+          "step": 1050
+        },
+        {
+          "hq": 0.303955078125,
+          "modes": 4,
+          "step": 1100
+        },
+        {
+          "hq": 0.245361328125,
+          "modes": 4,
+          "step": 1150
+        },
+        {
+          "hq": 0.19384765625,
+          "modes": 2,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.116943359375,
+            "modes": 3
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 33.1023052087985,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.9,
+      "config_file": "configs/eg015.json",
+      "config_sha256": "d339d7f1ded8dffcf95d882e5d20dc68a9da51905e61bf115bf80bde031244fe",
+      "core": "simple",
+      "id": "eg015",
+      "lr": 0.001,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.241455078125,
+          "modes": 4,
+          "step": 1000
+        },
+        {
+          "hq": 0.29833984375,
+          "modes": 3,
+          "step": 1050
+        },
+        {
+          "hq": 0.12939453125,
+          "modes": 2,
+          "step": 1100
+        },
+        {
+          "hq": 0.57275390625,
+          "modes": 4,
+          "step": 1150
+        },
+        {
+          "hq": 0.116943359375,
+          "modes": 3,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.328125,
+            "modes": 4
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 31.470438625197858,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg016.json",
+      "config_sha256": "80335014c2555452d4d847df3c9011a36806ec252acee4f508eed8a191e317d6",
+      "core": "simple",
+      "id": "eg016",
+      "lr": 0.001,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1000
+        },
+        {
+          "hq": 0.079345703125,
+          "modes": 1,
+          "step": 1050
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.328125,
+          "modes": 4,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.09326171875,
+            "modes": 1
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 30.59746029204689,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg017.json",
+      "config_sha256": "962cc5ec591e80090b7eed073763e9dd6995f4a61b00568829c33d86ff0e0e25",
+      "core": "simple",
+      "id": "eg017",
+      "lr": 0.001,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1000
+        },
+        {
+          "hq": 0.226806640625,
+          "modes": 3,
+          "step": 1050
+        },
+        {
+          "hq": 0.1181640625,
+          "modes": 3,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.09326171875,
+          "modes": 1,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.0,
+            "modes": 0
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 32.206328046973795,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.9,
+      "config_file": "configs/eg018.json",
+      "config_sha256": "eb5c80c25996a7fb6fc2622f71f9abdc30cae71984e5faf76c9fe5cb28b6822d",
+      "core": "simple",
+      "id": "eg018",
+      "lr": 0.0025,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.0068359375,
+          "modes": 1,
+          "step": 1000
+        },
+        {
+          "hq": 0.191162109375,
+          "modes": 2,
+          "step": 1050
+        },
+        {
+          "hq": 0.000244140625,
+          "modes": 1,
+          "step": 1100
+        },
+        {
+          "hq": 0.0166015625,
+          "modes": 1,
+          "step": 1150
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.19677734375,
+            "modes": 2
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 27.605332797160372,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg019.json",
+      "config_sha256": "ab43ebbfba5115bf467569199377e0ab014c062e8a9ea61201f2e80d2800602b",
+      "core": "simple",
+      "id": "eg019",
+      "lr": 0.0025,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.0029296875,
+          "modes": 1,
+          "step": 1000
+        },
+        {
+          "hq": 0.127197265625,
+          "modes": 2,
+          "step": 1050
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.19677734375,
+          "modes": 2,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.316650390625,
+            "modes": 3
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 31.667538704816252,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg020.json",
+      "config_sha256": "85efae71d915e44411b3236207323b5f6b14a8be2286ae3d767a3f28e24f21be",
+      "core": "simple",
+      "id": "eg020",
+      "lr": 0.0025,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1000
+        },
+        {
+          "hq": 0.047607421875,
+          "modes": 1,
+          "step": 1050
+        },
+        {
+          "hq": 0.027587890625,
+          "modes": 2,
+          "step": 1100
+        },
+        {
+          "hq": 0.400146484375,
+          "modes": 3,
+          "step": 1150
+        },
+        {
+          "hq": 0.316650390625,
+          "modes": 3,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.0009765625,
+            "modes": 1
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 31.934736885828897,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.9,
+      "config_file": "configs/eg021.json",
+      "config_sha256": "69ea8f8d5a46e345bcf0e9cc49ebdff106176a4829c6082dc26da46e118dab94",
+      "core": "simple",
+      "id": "eg021",
+      "lr": 0.00425,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1000
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1050
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1100
+        },
+        {
+          "hq": 0.000732421875,
+          "modes": 1,
+          "step": 1150
+        },
+        {
+          "hq": 0.0009765625,
+          "modes": 1,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.10302734375,
+            "modes": 1
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 31.618547352962196,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg022.json",
+      "config_sha256": "bdb5336bb35ad565662b8959d849d3b8d3c148b9eb7bf07a95c40bf7596f8b25",
+      "core": "simple",
+      "id": "eg022",
+      "lr": 0.00425,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1000
+        },
+        {
+          "hq": 0.116943359375,
+          "modes": 1,
+          "step": 1050
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1100
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1150
+        },
+        {
+          "hq": 0.10302734375,
+          "modes": 1,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.0,
+            "modes": 0
+          },
+          "gradient_evaluations_per_player": 2400,
+          "measured_case_seconds": 27.28064026683569,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg023.json",
+      "config_sha256": "4bb1f14e5d0d1a621b2439a8bf2ecb495421443cc6af32f64c37024b3193904d",
+      "core": "simple",
+      "id": "eg023",
+      "lr": 0.00425,
+      "method": "extra_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.138916015625,
+          "modes": 2,
+          "step": 1000
+        },
+        {
+          "hq": 0.119140625,
+          "modes": 2,
+          "step": 1050
+        },
+        {
+          "hq": 0.163330078125,
+          "modes": 3,
+          "step": 1100
+        },
+        {
+          "hq": 0.160888671875,
+          "modes": 3,
+          "step": 1150
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.5859375,
+            "modes": 3
+          },
+          "gradient_evaluations_per_player": 1200,
+          "measured_case_seconds": 16.5903535829857,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg024.json",
+      "config_sha256": "173e2348da985417e3fb2567f58cfc1650efbec01fed3299f7ef678778e9651d",
+      "core": "winner",
+      "id": "eg024",
+      "lr": 0.001,
+      "method": "sim_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.397705078125,
+          "modes": 3,
+          "step": 1000
+        },
+        {
+          "hq": 0.2099609375,
+          "modes": 4,
+          "step": 1050
+        },
+        {
+          "hq": 0.39892578125,
+          "modes": 4,
+          "step": 1100
+        },
+        {
+          "hq": 0.31689453125,
+          "modes": 3,
+          "step": 1150
+        },
+        {
+          "hq": 0.5859375,
+          "modes": 3,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.79541015625,
+            "modes": 7
+          },
+          "gradient_evaluations_per_player": 1200,
+          "measured_case_seconds": 14.280851938994601,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg025.json",
+      "config_sha256": "1fc6e439c0a8a858de88bfe33fdf7c96791fc9ef7037eab0e11a69e18bfe88d3",
+      "core": "winner",
+      "id": "eg025",
+      "lr": 0.001,
+      "method": "sim_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.632568359375,
+          "modes": 6,
+          "step": 1000
+        },
+        {
+          "hq": 0.55615234375,
+          "modes": 4,
+          "step": 1050
+        },
+        {
+          "hq": 0.698486328125,
+          "modes": 6,
+          "step": 1100
+        },
+        {
+          "hq": 0.71435546875,
+          "modes": 7,
+          "step": 1150
+        },
+        {
+          "hq": 0.79541015625,
+          "modes": 7,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.496826171875,
+            "modes": 5
+          },
+          "gradient_evaluations_per_player": 1200,
+          "measured_case_seconds": 15.653596176067367,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg026.json",
+      "config_sha256": "7cb34d4ab09d303867855f25cf30a830c0e6abbb50c322f8a0b3ac8ed5a07e22",
+      "core": "winner",
+      "id": "eg026",
+      "lr": 0.0025,
+      "method": "sim_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.5185546875,
+          "modes": 6,
+          "step": 1000
+        },
+        {
+          "hq": 0.310302734375,
+          "modes": 4,
+          "step": 1050
+        },
+        {
+          "hq": 0.559814453125,
+          "modes": 5,
+          "step": 1100
+        },
+        {
+          "hq": 0.680419921875,
+          "modes": 6,
+          "step": 1150
+        },
+        {
+          "hq": 0.496826171875,
+          "modes": 5,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.082275390625,
+            "modes": 2
+          },
+          "gradient_evaluations_per_player": 1200,
+          "measured_case_seconds": 18.53643331094645,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg027.json",
+      "config_sha256": "9779f6dcdc0ba9250d810867c32a424ef460a176379b6abc8cb54d90834db2de",
+      "core": "winner",
+      "id": "eg027",
+      "lr": 0.0025,
+      "method": "sim_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.636962890625,
+          "modes": 6,
+          "step": 1000
+        },
+        {
+          "hq": 0.4033203125,
+          "modes": 4,
+          "step": 1050
+        },
+        {
+          "hq": 0.496826171875,
+          "modes": 7,
+          "step": 1100
+        },
+        {
+          "hq": 0.380615234375,
+          "modes": 6,
+          "step": 1150
+        },
+        {
+          "hq": 0.082275390625,
+          "modes": 2,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.998291015625,
+            "modes": 8
+          },
+          "gradient_evaluations_per_player": 1200,
+          "measured_case_seconds": 15.827968517085537,
+          "passing_suffix": 3,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg028.json",
+      "config_sha256": "f9e855a1acbfca2279e576e752a95b82aec24ee16348bce523aeda2f5da049e5",
+      "core": "simple",
+      "id": "eg028",
+      "lr": 0.001,
+      "method": "sim_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.6328125,
+          "modes": 5,
+          "step": 1000
+        },
+        {
+          "hq": 0.747314453125,
+          "modes": 6,
+          "step": 1050
+        },
+        {
+          "hq": 0.953369140625,
+          "modes": 8,
+          "step": 1100
+        },
+        {
+          "hq": 0.9990234375,
+          "modes": 8,
+          "step": 1150
+        },
+        {
+          "hq": 0.998291015625,
+          "modes": 8,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.853515625,
+            "modes": 8
+          },
+          "gradient_evaluations_per_player": 1200,
+          "measured_case_seconds": 16.289324226090685,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg029.json",
+      "config_sha256": "45a42fee882f04ecc98d3e2cd1857e9a8418da05a69458db69c3f22d2af6bab3",
+      "core": "simple",
+      "id": "eg029",
+      "lr": 0.001,
+      "method": "sim_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.95947265625,
+          "modes": 8,
+          "step": 1000
+        },
+        {
+          "hq": 0.5986328125,
+          "modes": 7,
+          "step": 1050
+        },
+        {
+          "hq": 0.635498046875,
+          "modes": 7,
+          "step": 1100
+        },
+        {
+          "hq": 0.77734375,
+          "modes": 7,
+          "step": 1150
+        },
+        {
+          "hq": 0.853515625,
+          "modes": 8,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.840576171875,
+            "modes": 8
+          },
+          "gradient_evaluations_per_player": 1200,
+          "measured_case_seconds": 15.502588985022157,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.99,
+      "config_file": "configs/eg030.json",
+      "config_sha256": "3ad4c408d76e110e52ee0fc1df5d83dfde1c7ec5d6e84efc8974cfb160187018",
+      "core": "simple",
+      "id": "eg030",
+      "lr": 0.0025,
+      "method": "sim_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.5400390625,
+          "modes": 8,
+          "step": 1000
+        },
+        {
+          "hq": 0.5322265625,
+          "modes": 6,
+          "step": 1050
+        },
+        {
+          "hq": 0.74951171875,
+          "modes": 8,
+          "step": 1100
+        },
+        {
+          "hq": 0.4453125,
+          "modes": 5,
+          "step": 1150
+        },
+        {
+          "hq": 0.840576171875,
+          "modes": 8,
+          "step": 1200
+        }
+      ]
+    },
+    {
+      "attempted": [
+        {
+          "common_gate_eligible": false,
+          "final": {
+            "hq": 0.495849609375,
+            "modes": 5
+          },
+          "gradient_evaluations_per_player": 1200,
+          "measured_case_seconds": 14.156238551950082,
+          "passing_suffix": 0,
+          "source_archive_and_transform_verified": true,
+          "status": "FAIL",
+          "task": "mode_hold"
+        }
+      ],
+      "beta2": 0.999,
+      "config_file": "configs/eg031.json",
+      "config_sha256": "7d9e7dc0496aabddd45a7872b124bd8ec334e256918b86ace3ad01e361b7f60f",
+      "core": "simple",
+      "id": "eg031",
+      "lr": 0.0025,
+      "method": "sim_adam",
+      "skipped": [
+        "trajectory"
+      ],
+      "status": "STOPPED",
+      "terminal": [
+        {
+          "hq": 0.51806640625,
+          "modes": 6,
+          "step": 1000
+        },
+        {
+          "hq": 0.27490234375,
+          "modes": 5,
+          "step": 1050
+        },
+        {
+          "hq": 0.694580078125,
+          "modes": 6,
+          "step": 1100
+        },
+        {
+          "hq": 0.50634765625,
+          "modes": 6,
+          "step": 1150
+        },
+        {
+          "hq": 0.495849609375,
+          "modes": 5,
+          "step": 1200
+        }
+      ]
+    }
+  ],
+  "source_commit": "4b00335f72acf7ed0ce5d9ec11dee27fa9b267ab",
+  "status": "complete"
+}
