@@ -31,7 +31,7 @@ class PathSmoothedRecorder(frozen.SmoothedBothBoundRecorder):
             yield phase
         if self.records:
             self.records[-1]["path_redirects"] = self._path_hits
-        if self.outer_steps % 50 == 0 and self.path:
+        if self.path and self.outer_steps and self.outer_steps % 50 == 0:
             print(json.dumps(dict(event="PATH_STEP", step=self.outer_steps,
                                   redirects=self._path_hits)), flush=True)
         self._path_hits = 0
