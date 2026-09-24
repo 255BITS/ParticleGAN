@@ -1,0 +1,35 @@
+{
+  "scope": "free-output sampled-anchor stochastic time-stability diagnostic; no neural training",
+  "case": "cold1",
+  "input_hashes": {
+    "cold_compressed_sha256": "0371f70c5139cb04678bcfe06455e257d2f8bb0848062443f6ca711c3f772665",
+    "cold_raw_sha256": "002b3019c42c77414cb4f853db7818bba79bffab095f0d19052e4517ff45392d",
+    "warm_compressed_sha256": "77b24bbaf646befe70ac97f23a944d32717306e4ff0b1b8d8b6ff107dfef82f9",
+    "warm_full_sidecar_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47"
+  },
+  "source_sha256": {
+    "reports/toy100/sample_anchor_free1200.py": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+    "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/pr84_early_geometry.py": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+  },
+  "initial_state": "cold1 pre_step",
+  "data": "same saved data RNG; one native real128 draw per update",
+  "algorithm": "infer MST groups each bank; one exact output-space active-quadratic MM target",
+  "objective": "unit-mean distinct group-anchor squared distance plus nearest-group precision squared distance",
+  "accept": "whole current-bank objective strictly descends beyond float64 rounding tolerance, else exact rest",
+  "unsupported": "inferred groups >= 12 particles -> ERROR and stop",
+  "updates": 1200,
+  "evaluation": "every update fixed 4096 draws, late output sigma .029, clock 240+t",
+  "warm_gate": "8 modes and HQ>=.9 at every update",
+  "cold_gate": "8 modes and HQ>=.9 at final five updates",
+  "no_oracle_control": true,
+  "limitations": [
+    "free outputs, no G/prior Jacobian or GAN",
+    "MST group count may vary across batches",
+    "objective changes the frozen game",
+    "fixed bank MM proof does not imply stochastic stability"
+  ]
+}

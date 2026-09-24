@@ -1,0 +1,123 @@
+{
+  "base_commit": "2f5b6525ecbdb7f4cbc1593002b0c475a2a0fed2",
+  "files": {
+    "cold1/declaration.json": {
+      "bytes": 2197,
+      "sha256": "38cf75e750fe8297f6bbc013e4886bb0f9df42fc94ed14ded7a39c08b5afc1d4"
+    },
+    "cold1/first-fail.pt.gz": {
+      "bytes": 6118,
+      "decompressed_bytes": 9689,
+      "decompressed_sha256": "a82b745fb3b58797454b974727daa8e09edb0520a80b064e53d3de36eaa1e7df",
+      "sha256": "1900598e5913bdb8f8e0aa4bad778b660d0bc0640dffdc7b6aaa52993508927b"
+    },
+    "cold1/result.json.gz": {
+      "bytes": 319487,
+      "decompressed_bytes": 1205654,
+      "decompressed_sha256": "722c533d99b29ca1345d5c14e0f2c3896a6ad866e619a96f9cd5f4236ef2181f",
+      "sha256": "3ddeef5b850d7d57957aefeeab729ea47112ee9c7c3e92c0c8c1f49657a328c2"
+    },
+    "cold1/run.log.gz": {
+      "bytes": 448,
+      "decompressed_bytes": 1835,
+      "decompressed_sha256": "2d21d1f7a62d5fe67d9186f8b66dc8eb2d8333c01fb44cf2b29f452dbb2f5360",
+      "sha256": "b8b35babc4031e26a01222a6a2256821a5114d6856b3814d32b39355981b22bd"
+    },
+    "cold1/source/benchmarks/locked_shared/mlp.py": {
+      "bytes": 2289,
+      "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+    },
+    "cold1/source/benchmarks/locked_shared/mode_hold.py": {
+      "bytes": 10774,
+      "sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    "cold1/source/reports/toy100/coverage_fixed_eval.py": {
+      "bytes": 3996,
+      "sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e"
+    },
+    "cold1/source/reports/toy100/pr84_early_geometry.py": {
+      "bytes": 7322,
+      "sha256": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45"
+    },
+    "cold1/source/reports/toy100/sample_anchor_free1200.py": {
+      "bytes": 12051,
+      "sha256": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656"
+    },
+    "cold1/source/reports/toy100/sample_group_anchor.py": {
+      "bytes": 12791,
+      "sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037"
+    },
+    "cold1/summary.json": {
+      "bytes": 1831,
+      "sha256": "7ec8963c953ba53520acc5fe6b51e42d07e9ea69f3583a123d4f5c98486465d7"
+    },
+    "warm1324/declaration.json": {
+      "bytes": 2203,
+      "sha256": "fdda7d12e4c5dad6c3c26ca52a9e6d2fac83804d2c6c28c8b29fbe7bc70a0781"
+    },
+    "warm1324/result.json.gz": {
+      "bytes": 321854,
+      "decompressed_bytes": 1214670,
+      "decompressed_sha256": "63aab2af2d20f88e555b0509ac128682a4702d939db183100e807827b3b822f2",
+      "sha256": "3b9699bccf992bf64d90f38be78dc69191cc7541e5d97818bea11294cfcc27ce"
+    },
+    "warm1324/run.log.gz": {
+      "bytes": 315,
+      "decompressed_bytes": 1651,
+      "decompressed_sha256": "2087ce7dd4cc5bd3b54c3ae6604385d092cce86f30b0a0f20cd9706fa784cd50",
+      "sha256": "286c306907a402f04000228737e46381291f4028d41c55792e5d3427ad5eb2e9"
+    },
+    "warm1324/source/benchmarks/locked_shared/mlp.py": {
+      "bytes": 2289,
+      "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+    },
+    "warm1324/source/benchmarks/locked_shared/mode_hold.py": {
+      "bytes": 10774,
+      "sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    "warm1324/source/reports/toy100/coverage_fixed_eval.py": {
+      "bytes": 3996,
+      "sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e"
+    },
+    "warm1324/source/reports/toy100/pr84_early_geometry.py": {
+      "bytes": 7322,
+      "sha256": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45"
+    },
+    "warm1324/source/reports/toy100/sample_anchor_free1200.py": {
+      "bytes": 12051,
+      "sha256": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656"
+    },
+    "warm1324/source/reports/toy100/sample_group_anchor.py": {
+      "bytes": 12791,
+      "sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037"
+    },
+    "warm1324/summary.json": {
+      "bytes": 1613,
+      "sha256": "3dc1546751bb368fb62130342afd37a128922521970400b82c69a4a23e1f3ecd"
+    }
+  },
+  "method": "fresh-native-real128 MST groups, one free-output active-quadratic MM target per update",
+  "runtime": {
+    "archive_process_torch_threads": 12,
+    "cpu_capability": "AVX2",
+    "python": "3.12.13",
+    "run_torch_threads": 1,
+    "scipy": "1.18.1",
+    "torch": "2.13.0+cu126"
+  },
+  "schema": "sample-anchor-free1200-v1",
+  "validation_fixture_parity": {
+    "cold1": {
+      "data_rng_endpoint_exact": true,
+      "initial_grade_exact": true,
+      "initial_support_exact": true,
+      "reference_result_sha256": "f820d1427fef8ece204647c20da3a1faaff32a703ec73958cc0d7c1232248619"
+    },
+    "warm1324": {
+      "data_rng_endpoint_exact": true,
+      "initial_grade_exact": true,
+      "initial_support_exact": true,
+      "reference_result_sha256": "a3ada9ab2cadeb975542aee3f2d8a2d02dbecb7c10e3e09193ef7dae86f4afd1"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "case": "warm1324",
+  "status": "PASS",
+  "error": null,
+  "initial_grade": {
+    "modes": 8,
+    "hq": 0.99951171875,
+    "particle_draws": [
+      338,
+      356,
+      332,
+      353,
+      321,
+      314,
+      325,
+      345,
+      363,
+      341,
+      339,
+      369
+    ],
+    "particle_hq_rate": [
+      1.0,
+      1.0,
+      0.9969879388809204,
+      1.0,
+      1.0,
+      1.0,
+      0.9969230890274048,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "completed_updates": 1200,
+  "accepted": 1200,
+  "rests": 0,
+  "passing_checks": 1200,
+  "all1200": true,
+  "terminal5": true,
+  "first_pass": 1,
+  "first_failure": null,
+  "late_fail_count": 0,
+  "first_late_fail": null,
+  "worst_hq": 1.0,
+  "worst_modes": 8,
+  "final": {
+    "modes": 8,
+    "hq": 1.0,
+    "particle_draws": [
+      338,
+      356,
+      332,
+      353,
+      321,
+      314,
+      325,
+      345,
+      363,
+      341,
+      339,
+      369
+    ],
+    "particle_hq_rate": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "group_counts": {
+    "8": 1200
+  },
+  "data_stream_start_sha256": "b2cba65c7182cf859a1c6346ec3cecbd61eccb243b098ecf63b0f6a4f6722190",
+  "data_stream_after_sha256": "dd15fb22441d259bc05e24f477dbb2b4c5c39a268fcf5259452620a2aa40f447",
+  "result_raw_sha256": "63aab2af2d20f88e555b0509ac128682a4702d939db183100e807827b3b822f2",
+  "result_raw_bytes": 1214670,
+  "result_compressed_sha256": "3b9699bccf992bf64d90f38be78dc69191cc7541e5d97818bea11294cfcc27ce",
+  "result_compressed_bytes": 321854
+}
