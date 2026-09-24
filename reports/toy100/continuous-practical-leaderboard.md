@@ -50,3 +50,7 @@ hold checks. Their published adapters cover only two toys.
 [GPU protocol and replay](gpu-leaderboard/README.md) ·
 [Historical strict GPU reference](gpu-leaderboard/current-gpu-reference.json) ·
 [Historical continuous-learning CPU board](continuous-practical-leaderboard-cpu-history.md)
+
+[PyTorch 2.14 upgrade check](torch214-gpu-check/README.md): both remaining
+blockers fail identically to 2.13 under native and CPU initialization. Four
+full-budget CUDA runs; no change to the 16/22 full-suite result.
