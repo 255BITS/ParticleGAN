@@ -1,0 +1,43 @@
+{
+  "identity": {
+    "status": "PASS",
+    "local": {
+      "checks": 200,
+      "passing_checks": 200,
+      "failing_steps": [],
+      "min_modes": 8,
+      "min_hq": 0.989990234375,
+      "passing_suffix": 200,
+      "stable_from_step": 1001,
+      "pass_all": true,
+      "pass_suffix": true
+    },
+    "final": {
+      "modes": 8,
+      "hq": 0.9990234375
+    }
+  },
+  "baseline": {
+    "status": "FAIL",
+    "local": {
+      "checks": 200,
+      "passing_checks": 196,
+      "failing_steps": [
+        1129,
+        1130,
+        1131,
+        1132
+      ],
+      "min_modes": 8,
+      "min_hq": 0.8662109375,
+      "passing_suffix": 68,
+      "stable_from_step": 1133,
+      "pass_all": false,
+      "pass_suffix": true
+    },
+    "final": {
+      "modes": 8,
+      "hq": 0.999267578125
+    }
+  }
+}
