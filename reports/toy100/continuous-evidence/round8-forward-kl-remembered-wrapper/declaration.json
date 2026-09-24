@@ -1,0 +1,21 @@
+{
+  "scope": "one-bank cold/warm dormant-path parity plus synthetic rest/no-signal",
+  "source": {
+    "reports/toy100/forward_kl_gh9_remembered_filter.py": "aa075036ebeae2557e423fa61724ee66c9ad64fd871afab9bbadef855ad0c5f2",
+    "reports/toy100/forward_kl_gh9_remembered.py": "86639dfefe0c11f82eccbd8dfe106e5797f36e75cf09a906de1768b02c28e1df",
+    "reports/toy100/forward_kl_remembered_donor_rescue.py": "21828acbd6c823ae53fb0da343746442278eeeb4f68e8ece04e20fe85f346471",
+    "reports/toy100/forward_kl_gh9_stress.py": "adc5d6f6ded8e6cf297ee90aa0d540723becc632a601b93b5b9a4393cd344485",
+    "reports/toy100/forward_kl_chunked.py": "e0977838c7d5ae787f5194e653d1a8a09d5c7c0af7eb5f48b65af49a303b141f",
+    "reports/toy100/forward_kl_free_filter.py": "0cc098d63efb2460dc038b897d5db532b9f87115ffbd5a78e42ee042ed21c873",
+    "reports/toy100/sample_anchor_free1200.py": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+    "reports/toy100/sample_anchor_mmd_filter.py": "d38f1eba9760cc83ee09af4ef6301b4ac15d022d153c45ffc65eded098dbc49a",
+    "reports/toy100/sample_anchor_local_mmd_filter.py": "9882aec980fb2c7680f6e5da2fc42b4c9a2b80ab27a9c1cd15026dad87d2da55",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/pr84_early_geometry.py": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+  },
+  "method": "forward_kl_gh9_remembered_v1",
+  "no_training": true,
+  "no_seed_sweep": true
+}

@@ -1,0 +1,141 @@
+{
+  "status": "COMPLETE",
+  "declaration": {
+    "scope": "one-bank cold/warm dormant-path parity plus synthetic rest/no-signal",
+    "source": {
+      "reports/toy100/forward_kl_gh9_remembered_filter.py": "aa075036ebeae2557e423fa61724ee66c9ad64fd871afab9bbadef855ad0c5f2",
+      "reports/toy100/forward_kl_gh9_remembered.py": "86639dfefe0c11f82eccbd8dfe106e5797f36e75cf09a906de1768b02c28e1df",
+      "reports/toy100/forward_kl_remembered_donor_rescue.py": "21828acbd6c823ae53fb0da343746442278eeeb4f68e8ece04e20fe85f346471",
+      "reports/toy100/forward_kl_gh9_stress.py": "adc5d6f6ded8e6cf297ee90aa0d540723becc632a601b93b5b9a4393cd344485",
+      "reports/toy100/forward_kl_chunked.py": "e0977838c7d5ae787f5194e653d1a8a09d5c7c0af7eb5f48b65af49a303b141f",
+      "reports/toy100/forward_kl_free_filter.py": "0cc098d63efb2460dc038b897d5db532b9f87115ffbd5a78e42ee042ed21c873",
+      "reports/toy100/sample_anchor_free1200.py": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+      "reports/toy100/sample_anchor_mmd_filter.py": "d38f1eba9760cc83ee09af4ef6301b4ac15d022d153c45ffc65eded098dbc49a",
+      "reports/toy100/sample_anchor_local_mmd_filter.py": "9882aec980fb2c7680f6e5da2fc42b4c9a2b80ab27a9c1cd15026dad87d2da55",
+      "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "reports/toy100/pr84_early_geometry.py": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+      "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+    },
+    "method": "forward_kl_gh9_remembered_v1",
+    "no_training": true,
+    "no_seed_sweep": true
+  },
+  "input_hashes": {
+    "cold_compressed_sha256": "0371f70c5139cb04678bcfe06455e257d2f8bb0848062443f6ca711c3f772665",
+    "cold_raw_sha256": "002b3019c42c77414cb4f853db7818bba79bffab095f0d19052e4517ff45392d",
+    "warm_compressed_sha256": "77b24bbaf646befe70ac97f23a944d32717306e4ff0b1b8d8b6ff107dfef82f9",
+    "warm_full_sidecar_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47"
+  },
+  "cases": {
+    "cold1": {
+      "source_normal_selected": "GH5_WHOLE_ACCEPTED_BY_GH9",
+      "full_frozen_receipt_sha256": "9831915409cc869235e25aa8b3cf31df5514e1857df3de0cf9f7a305e2545903",
+      "full_explicit_wrapper_receipt_sha256": "9831915409cc869235e25aa8b3cf31df5514e1857df3de0cf9f7a305e2545903",
+      "neutral_receipt_sha256": "765a57a504fbb8d837af4e422778825285281089dfdce56bfe75af03104a1a4d",
+      "output_sha256": "9d3bf9d2f5880b50e07d8cc1969bab7ebd702335dce6298cf4bb70fd131c7cd2",
+      "native_real_sha256": "a2178917c754f20123a7c950d6e3cbaa8325114c20c4b0bda68c52d9e7ceeb19",
+      "ephemeral_GH9_locations_sha256": "13484307a3c8885139cb5bc5de18e56dd75c546dd0150033da18acc200fc5057",
+      "ephemeral_GH9_weights_sha256": "d0095ffbdd513515fd77d110741d7659bd8c734c006ec3d9e219de3b6c7c55b9",
+      "exact_target_receipt_parity": true,
+      "oracle_free_target_parity": true
+    },
+    "warm1324": {
+      "source_normal_selected": "GH5_WHOLE_ACCEPTED_BY_GH9",
+      "full_frozen_receipt_sha256": "a7a82e51212782972f8d2b1b6891a1f9a5bb463c47fe750ae7ec65415e331ca2",
+      "full_explicit_wrapper_receipt_sha256": "a7a82e51212782972f8d2b1b6891a1f9a5bb463c47fe750ae7ec65415e331ca2",
+      "neutral_receipt_sha256": "84d0f19c6102c78b9a20197c5f0bc2e0efa48c16b94bf317068815bd273c7a75",
+      "output_sha256": "fcde053448ebdf1a05adef2d96f4cf8f03446f48154401e281d9d3f5b74d44ad",
+      "native_real_sha256": "2e985ce1fa8b8333063d162a0210ce2cf20e0629d46cc9ea40fd4edd91661754",
+      "ephemeral_GH9_locations_sha256": "71949d86de0475b02663c4034b5af94cae2f13e18d1247b6222e9965dd937c05",
+      "ephemeral_GH9_weights_sha256": "d0095ffbdd513515fd77d110741d7659bd8c734c006ec3d9e219de3b6c7c55b9",
+      "exact_target_receipt_parity": true,
+      "oracle_free_target_parity": true
+    },
+    "fixed_target_trap": {
+      "frozen_selection": "EXACT_REST",
+      "rescued_selection": "REMEMBERED_GH9_DONOR",
+      "before_gh9": 728.7363687213137,
+      "after_gh9": 180.120451631972,
+      "remembered_search": {
+        "status": "STRICT_FINITE_GH9_DONOR",
+        "remembered_real_index": 0,
+        "donor_index": 0,
+        "inspected_candidates": 1,
+        "evaluated_candidates": 32,
+        "predicted_cost": 363.2878605955046,
+        "actual_cost": 363.2878605954983,
+        "before_cost": 728.7363687213137,
+        "max_candidate_matrix_elements": 65536,
+        "candidate_chunk": 32,
+        "quadrature_chunk": 2048
+      },
+      "remembered_em_steps": 1,
+      "final_points": [
+        [
+          -1.9999999999998068,
+          -1.816209330540677e-21
+        ],
+        [
+          0.999999999999889,
+          -3.429054914041289e-21
+        ],
+        [
+          0.999999999999889,
+          -3.429054914041289e-21
+        ],
+        [
+          0.999999999999889,
+          -3.429054914041289e-21
+        ],
+        [
+          0.999999999999889,
+          -3.429054914041289e-21
+        ],
+        [
+          0.999999999999889,
+          -3.429054914041289e-21
+        ],
+        [
+          0.999999999999889,
+          -3.429054914041289e-21
+        ],
+        [
+          0.999999999999889,
+          -3.429054914041289e-21
+        ],
+        [
+          0.999999999999889,
+          -3.429054914041289e-21
+        ],
+        [
+          0.999999999999889,
+          -3.429054914041289e-21
+        ],
+        [
+          0.999999999999889,
+          -3.429054914041289e-21
+        ],
+        [
+          0.999999999999889,
+          -3.429054914041289e-21
+        ]
+      ]
+    },
+    "no_signal": {
+      "selection": "EXACT_REST",
+      "remembered_search": {
+        "status": "NO_SINGLE_REMEMBERED_DONOR",
+        "inspected_candidates": 128,
+        "evaluated_candidates": 128,
+        "before_cost": -3.9332671328172792,
+        "max_candidate_matrix_elements": 65536,
+        "candidate_chunk": 32,
+        "quadrature_chunk": 2048
+      },
+      "exact_output_rest": true
+    }
+  },
+  "full_histories_sha256": "886d4cd96e2dca12078a598f00de9dbd2a7948efc3ea081d73b2ee5dde2a5253",
+  "global_torch_rng_unchanged": true
+}
