@@ -1,0 +1,81 @@
+{
+  "files": {
+    "branches.json": {
+      "bytes": 12807,
+      "sha256": "2c93b34b120c5e2a778da0a715a04706412bf532ca57fd3af710eff1c1668439"
+    },
+    "prior-missing-bank-result.json.gz": {
+      "bytes": 8238,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 34296,
+      "raw_sha256": "9c3b4ec2d9fc2ad03625bd58de6c158badebfde1e76e567182e3a755ca223619",
+      "sha256": "3314669ae6f0857a4983c74050e7aa4b99c7fe5156fd1bdea9b1be3740d0e293"
+    },
+    "source__benchmarks__locked_shared__mode_hold.py.gz": {
+      "bytes": 3580,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 10774,
+      "raw_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828"
+    },
+    "source__particlegan__particle_prior.py.gz": {
+      "bytes": 4986,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 16112,
+      "raw_sha256": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+      "sha256": "353c7eff6ebbade5bf4962470d80fa8e0a93248825087a7d51b56c49b7226aba"
+    },
+    "source__reports__toy100__coverage_fixed_eval.py.gz": {
+      "bytes": 1661,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 3996,
+      "raw_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "sha256": "781a69107df11fa473feacf197aff169c6e7b1c243d14de972d7af8d77401e98"
+    },
+    "source__reports__toy100__sample_anchor_free1200.py.gz": {
+      "bytes": 3903,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 12051,
+      "raw_sha256": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+      "sha256": "2a1067249e23164ad5a576a8a64b914d36835939104635efc1762a34bef0fd2b"
+    },
+    "source__reports__toy100__sample_group_anchor.py.gz": {
+      "bytes": 4342,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 12791,
+      "raw_sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+      "sha256": "c0bf364cf5d9a4b130bd66e546cfda8e28196d791088358c51b87669efc1d2c9"
+    },
+    "source__reports__toy100__sample_group_two_bank_filter.py.gz": {
+      "bytes": 3469,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 11126,
+      "raw_sha256": "eaefb6a9f6fe9f3d89771dabd70273084ec83749ee6b3984bc0e3bfef49e129b",
+      "sha256": "4c8348897d4889af88b96e151135ab40d56f7bd516c630409ed066739382b3ec"
+    },
+    "source__reports__toy100__sample_group_two_bank_memory.py.gz": {
+      "bytes": 4002,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 16350,
+      "raw_sha256": "3daf028f2253a1b947b5b23c49280ec7465e19c4ac6cb26e5f9779c450023587",
+      "sha256": "412cea302a0859eaaaad597fe605898baf55651b0137b0cc2cf98e44fe060690"
+    }
+  },
+  "input_saved_state_path": "/ml2/hypergan/ParticleGAN-continuous-learning/artifacts/continuous-learning/round6/sample-anchor-prestart-hold-v2/candidate-final-state.pt",
+  "input_saved_state_sha256": "fae94561922ede699f20c6ee6713126e8bb30e776a586fe98ed39137dac0a926",
+  "input_state_hash": "1706ae9c1ca25010cb08e2c03f79478180add8620996594e9f30e48705223a72",
+  "method": "two-bank-fixed-support-v1",
+  "prior_missing_bank_result_sha256": "9c3b4ec2d9fc2ad03625bd58de6c158badebfde1e76e567182e3a755ca223619",
+  "python": "3.12.13",
+  "scope": "pure fixed-bank filter; no model or optimizer updates",
+  "source_sha256": {
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/sample_anchor_free1200.py": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+    "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+    "reports/toy100/sample_group_two_bank_filter.py": "eaefb6a9f6fe9f3d89771dabd70273084ec83749ee6b3984bc0e3bfef49e129b",
+    "reports/toy100/sample_group_two_bank_memory.py": "3daf028f2253a1b947b5b23c49280ec7465e19c4ac6cb26e5f9779c450023587"
+  },
+  "torch": "2.13.0+cu126"
+}

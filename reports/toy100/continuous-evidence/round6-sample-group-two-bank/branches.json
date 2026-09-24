@@ -1,0 +1,504 @@
+{
+  "scope": "two or three distinct native-sized D-bank draws per controlled branch; no model/optimizer update",
+  "state_file_sha256": "fae94561922ede699f20c6ee6713126e8bb30e776a586fe98ed39137dac0a926",
+  "input_state_sha256": "1706ae9c1ca25010cb08e2c03f79478180add8620996594e9f30e48705223a72",
+  "previous_result_sha256": "9c3b4ec2d9fc2ad03625bd58de6c158badebfde1e76e567182e3a755ca223619",
+  "source_sha256": {
+    "reports/toy100/sample_group_two_bank_filter.py": "eaefb6a9f6fe9f3d89771dabd70273084ec83749ee6b3984bc0e3bfef49e129b",
+    "reports/toy100/sample_group_two_bank_memory.py": "3daf028f2253a1b947b5b23c49280ec7465e19c4ac6cb26e5f9779c450023587",
+    "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+    "reports/toy100/sample_anchor_free1200.py": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b"
+  },
+  "method": "two-bank reciprocal support confirmation, then fixed-reference per-real-sample partition",
+  "cases": {
+    "two_native_full_banks": {
+      "first": {
+        "status": "PENDING_FIRST_BANK",
+        "bank": {
+          "groups": 8,
+          "min_separation": 2.240116135330469,
+          "largest_mst_gap": 1.8459691745146152
+        },
+        "confirmed": false,
+        "bank_id": 2401,
+        "bank_sha256": "4d5b0cbbd7580a1c359adf97341135a05f5b8929903775cac3d18d3b08b5b6a7"
+      },
+      "second": {
+        "status": "CONFIRMED",
+        "bank": {
+          "groups": 8,
+          "min_separation": 2.279595017340874,
+          "largest_mst_gap": 1.7973067136705985
+        },
+        "comparison": {
+          "reason": "CONFIRMED",
+          "first_groups": 8,
+          "second_groups": 8,
+          "max_pair_distance": 0.05228413595958978,
+          "min_separation": 2.240116135330469,
+          "margin": 2.1355478634112894,
+          "pairing": [
+            1,
+            0,
+            3,
+            7,
+            2,
+            4,
+            5,
+            6
+          ]
+        },
+        "confirmed": true,
+        "confirmed_groups": 8,
+        "fixed_half_separation": 1.128567215645464,
+        "bank_id": 2402,
+        "bank_sha256": "9f9e4279c2ade260127f06e8c52d4ff6318496ba3a9edbaa5dccf2dc36563a20"
+      },
+      "first_bank_sha256": "4d5b0cbbd7580a1c359adf97341135a05f5b8929903775cac3d18d3b08b5b6a7",
+      "second_bank_sha256": "9f9e4279c2ade260127f06e8c52d4ff6318496ba3a9edbaa5dccf2dc36563a20",
+      "distinct_bank_hashes": true,
+      "target_grade": {
+        "modes": 8,
+        "hq": 1.0,
+        "particle_draws": [
+          338,
+          356,
+          332,
+          353,
+          321,
+          314,
+          325,
+          345,
+          363,
+          341,
+          339,
+          369
+        ],
+        "particle_hq_rate": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "pending_resume_exact": true,
+      "confirmed_resume_exact": true,
+      "malformed_certificate_rejected": true,
+      "skipped_native_bank_rejected": true
+    },
+    "confirmed_then_omitted": {
+      "update": {
+        "status": "UPDATED_FIXED_PARTITION",
+        "confirmed": true,
+        "bank_id": 2403,
+        "bank_sha256": "a63e6a52d1e9634dfccdea0478b1e3bab4d527f3233f8f48e18d600d09271b5a",
+        "accepted": 128,
+        "rejected": 0,
+        "assigned_counts": [
+          21,
+          18,
+          14,
+          0,
+          17,
+          25,
+          18,
+          15
+        ],
+        "confirmed_groups": 8,
+        "fixed_half_separation": 1.128567215645464
+      },
+      "absent_count_preserved": true,
+      "reference_centers_bitwise_preserved": true,
+      "target_grade": {
+        "modes": 8,
+        "hq": 1.0,
+        "particle_draws": [
+          338,
+          356,
+          332,
+          353,
+          321,
+          314,
+          325,
+          345,
+          363,
+          341,
+          339,
+          369
+        ],
+        "particle_hq_rate": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "full_then_omitted": {
+      "first": {
+        "status": "PENDING_FIRST_BANK",
+        "bank": {
+          "groups": 8,
+          "min_separation": 2.240116135330469,
+          "largest_mst_gap": 1.8459691745146152
+        },
+        "confirmed": false,
+        "bank_id": 2401,
+        "bank_sha256": "4d5b0cbbd7580a1c359adf97341135a05f5b8929903775cac3d18d3b08b5b6a7"
+      },
+      "second": {
+        "status": "UNRESOLVED_REPLACED",
+        "bank": {
+          "groups": 7,
+          "min_separation": 2.2706590446578496,
+          "largest_mst_gap": 1.8280370529228531
+        },
+        "comparison": {
+          "reason": "unequal_or_single_group_counts",
+          "first_groups": 8,
+          "second_groups": 7
+        },
+        "confirmed": false,
+        "bank_id": 2402,
+        "bank_sha256": "1775b42866ca9a6077f5fc95cd6e143993bda6fcf1337b964a90aef6facb36c6"
+      },
+      "held_support_grade": {
+        "modes": 8,
+        "hq": 1.0,
+        "particle_draws": [
+          338,
+          356,
+          332,
+          353,
+          321,
+          314,
+          325,
+          345,
+          363,
+          341,
+          339,
+          369
+        ],
+        "particle_hq_rate": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "incomplete_then_discovered": {
+      "first": {
+        "status": "PENDING_FIRST_BANK",
+        "bank": {
+          "groups": 7,
+          "min_separation": 2.25491408440311,
+          "largest_mst_gap": 1.8637800092389525
+        },
+        "confirmed": false,
+        "bank_id": 2401,
+        "bank_sha256": "636de2162a9ba2ad1257ebf8b69d2150aa8b68607b7ba2365b62fbc064a848a9"
+      },
+      "second": {
+        "status": "UNRESOLVED_REPLACED",
+        "bank": {
+          "groups": 8,
+          "min_separation": 2.279595017340874,
+          "largest_mst_gap": 1.7973067136705985
+        },
+        "comparison": {
+          "reason": "unequal_or_single_group_counts",
+          "first_groups": 7,
+          "second_groups": 8
+        },
+        "confirmed": false,
+        "bank_id": 2402,
+        "bank_sha256": "9f9e4279c2ade260127f06e8c52d4ff6318496ba3a9edbaa5dccf2dc36563a20"
+      },
+      "third": {
+        "status": "CONFIRMED",
+        "bank": {
+          "groups": 8,
+          "min_separation": 2.2906226187046834,
+          "largest_mst_gap": 1.787927606982519
+        },
+        "comparison": {
+          "reason": "CONFIRMED",
+          "first_groups": 8,
+          "second_groups": 8,
+          "max_pair_distance": 0.046654244430485124,
+          "min_separation": 2.279595017340874,
+          "margin": 2.186286528479904,
+          "pairing": [
+            3,
+            5,
+            0,
+            2,
+            4,
+            6,
+            1,
+            7
+          ]
+        },
+        "confirmed": true,
+        "confirmed_groups": 8,
+        "fixed_half_separation": 1.1443192542850673,
+        "bank_id": 2403,
+        "bank_sha256": "3cd9aeb2459a77d6719afe3a89dbfd3d16a95af3df2b89180e45f855093fd5e3"
+      },
+      "diagnostic_seven_support_grade": {
+        "modes": 7,
+        "hq": 1.0,
+        "particle_draws": [
+          338,
+          356,
+          332,
+          353,
+          321,
+          314,
+          325,
+          345,
+          363,
+          341,
+          339,
+          369
+        ],
+        "particle_hq_rate": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "first_mm_grade": {
+        "modes": 7,
+        "hq": 0.915771484375,
+        "particle_draws": [
+          338,
+          356,
+          332,
+          353,
+          321,
+          314,
+          325,
+          345,
+          363,
+          341,
+          339,
+          369
+        ],
+        "particle_hq_rate": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          0.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "second_mm_grade": {
+        "modes": 8,
+        "hq": 1.0,
+        "particle_draws": [
+          338,
+          356,
+          332,
+          353,
+          321,
+          314,
+          325,
+          345,
+          363,
+          341,
+          339,
+          369
+        ],
+        "particle_hq_rate": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "full_then_singleton_tail": {
+      "first": {
+        "status": "PENDING_FIRST_BANK",
+        "bank": {
+          "groups": 8,
+          "min_separation": 2.240116135330469,
+          "largest_mst_gap": 1.8459691745146152
+        },
+        "confirmed": false,
+        "bank_id": 2401,
+        "bank_sha256": "4d5b0cbbd7580a1c359adf97341135a05f5b8929903775cac3d18d3b08b5b6a7"
+      },
+      "second": {
+        "status": "CONFIRMED",
+        "bank": {
+          "groups": 8,
+          "min_separation": 2.184426643197892,
+          "largest_mst_gap": 1.8646711353122973
+        },
+        "comparison": {
+          "reason": "CONFIRMED",
+          "first_groups": 8,
+          "second_groups": 8,
+          "max_pair_distance": 0.13229666531276504,
+          "min_separation": 2.184426643197892,
+          "margin": 1.919833312572362,
+          "pairing": [
+            2,
+            3,
+            1,
+            7,
+            0,
+            4,
+            5,
+            6
+          ]
+        },
+        "confirmed": true,
+        "confirmed_groups": 8,
+        "fixed_half_separation": 1.124929096540028,
+        "bank_id": 2402,
+        "bank_sha256": "bdcc341498075b38b63f8102422270a8ccf4f126759704c93293b7219880bdb1"
+      },
+      "conditioning": {
+        "position": 126,
+        "accepted_noise_bank_attempt": 1,
+        "singleton_distance": 0.13229666531276504,
+        "first_bank_group_rms": 0.10549626440512513,
+        "label_event_probability": 6.904666655516669e-07
+      },
+      "target_grade": {
+        "modes": 8,
+        "hq": 1.0,
+        "particle_draws": [
+          338,
+          356,
+          332,
+          353,
+          321,
+          314,
+          325,
+          345,
+          363,
+          341,
+          339,
+          369
+        ],
+        "particle_hq_rate": [
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    "two_agreeing_incomplete_banks": {
+      "first": {
+        "status": "PENDING_FIRST_BANK",
+        "bank": {
+          "groups": 7,
+          "min_separation": 2.25491408440311,
+          "largest_mst_gap": 1.8637800092389525
+        },
+        "confirmed": false,
+        "bank_id": 2401,
+        "bank_sha256": "636de2162a9ba2ad1257ebf8b69d2150aa8b68607b7ba2365b62fbc064a848a9"
+      },
+      "second": {
+        "status": "CONFIRMED",
+        "bank": {
+          "groups": 7,
+          "min_separation": 2.2706590446578496,
+          "largest_mst_gap": 1.8280370529228531
+        },
+        "comparison": {
+          "reason": "CONFIRMED",
+          "first_groups": 7,
+          "second_groups": 7,
+          "max_pair_distance": 0.0729148698941681,
+          "min_separation": 2.25491408440311,
+          "margin": 2.109084344614774,
+          "pairing": [
+            1,
+            4,
+            0,
+            5,
+            3,
+            2,
+            6
+          ]
+        },
+        "confirmed": true,
+        "confirmed_groups": 7,
+        "fixed_half_separation": 1.1359945146214545,
+        "bank_id": 2402,
+        "bank_sha256": "1775b42866ca9a6077f5fc95cd6e143993bda6fcf1337b964a90aef6facb36c6"
+      },
+      "finite_sample_limitation": true
+    }
+  },
+  "fresh_late_start_rejected": true,
+  "torch_rng_unchanged": true,
+  "native_stream_scope": "one D real, two prior-index draws, one G real per outer update; no model training"
+}
