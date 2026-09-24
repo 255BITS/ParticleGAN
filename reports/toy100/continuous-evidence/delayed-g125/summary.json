@@ -1,0 +1,61 @@
+{
+  "method": "stall_reach_delayed_budget_g_own_curvature_0.125",
+  "arm": "mode-hold update_index >= 1200, sticky",
+  "pre_budget_g_bound": 0.25,
+  "post_budget_g_bound": 0.125,
+  "seed": 0,
+  "torch": "2.14.0+cpu",
+  "shared_gate_eligible": false,
+  "solved": false,
+  "verdict": "KEEP",
+  "gates": {
+    "warm_avx2": {
+      "cpu": "AVX2",
+      "identity": "200/200",
+      "identity_min_hq": 0.989990234375,
+      "method": "200/200",
+      "method_min_hq": 0.920654296875,
+      "ranked": true,
+      "g_bound_applies": 200,
+      "fires": 1,
+      "first_armed_update_index": 1200
+    },
+    "cold_avx2": {
+      "cpu": "AVX2",
+      "trajectory": "PASS",
+      "trajectory_armed": false,
+      "trajectory_fires": 0,
+      "ring": "PASS",
+      "ring_passing": "10/24",
+      "ring_suffix": 8,
+      "ring_terminal": [[1000, 8, 0.999], [1050, 8, 1.0], [1100, 8, 0.9993], [1150, 8, 0.9995], [1200, 8, 0.9988]],
+      "fires": 1
+    },
+    "cold_avx512_build_check": {
+      "cpu": "AVX512",
+      "dnnl_max_cpu_isa": "AVX512_CORE",
+      "trajectory": "PASS",
+      "ring": "PASS",
+      "ring_passing": "8/24",
+      "ring_suffix": 8,
+      "ring_terminal": [[1000, 8, 0.9922], [1050, 8, 0.9185], [1100, 8, 1.0], [1150, 8, 0.9832], [1200, 8, 0.9993]],
+      "ranked": false
+    },
+    "stay_avx2_1210_2400": {
+      "cpu": "AVX2",
+      "checks": 120,
+      "passing": 111,
+      "min_modes": 5,
+      "min_hq": 0.505126953125,
+      "final": [2400, 8, 1.0],
+      "suffix": 5,
+      "failing_steps": [1560, 1580, 1610, 1820, 2280, 2290, 2310, 2320, 2350],
+      "severe_dips_modes_le_4": 0,
+      "fires": 1201,
+      "pre_budget_applies": 1199,
+      "pre_budget_bounds": [0.25, 0.25],
+      "post_budget_bounds": [0.25, 0.125],
+      "post_budget_g_factor_max": 0.19025545813365985
+    }
+  }
+}
