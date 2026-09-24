@@ -1,0 +1,509 @@
+{
+  "scope": "posthoc geometry only; no update uses target centers",
+  "analysis_source_sha256": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+  "replay_state_sha256": "002b3019c42c77414cb4f853db7818bba79bffab095f0d19052e4517ff45392d",
+  "original_cold_stored_sha256": "4859f577d5e5124a8672b0f95dceaee85bd1af3c2c5d659eb44e062da1d5f86d",
+  "original_original_function_sha256": "c65a9926e7ccdca9c68151036e06ed2e74c6638a29a0705eb19c3f6757127395",
+  "original_generated_function_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+  "first100_observations": {
+    "fitted": [
+      {
+        "step": 50,
+        "modes": 0,
+        "hq": 0.0,
+        "nearest_counts": [
+          1367,
+          1762,
+          0,
+          0,
+          0,
+          0,
+          0,
+          967
+        ]
+      },
+      {
+        "step": 100,
+        "modes": 3,
+        "hq": 0.336181640625,
+        "nearest_counts": [
+          1368,
+          1423,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1305
+        ]
+      }
+    ],
+    "original": [
+      {
+        "step": 50,
+        "modes": 0,
+        "hq": 0.0,
+        "nearest_counts": [
+          3,
+          6,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "step": 100,
+        "modes": 0,
+        "hq": 0.0,
+        "nearest_counts": [
+          0,
+          0,
+          0,
+          0,
+          7,
+          0,
+          1,
+          4
+        ]
+      }
+    ]
+  },
+  "fitted_steps": {
+    "1": {
+      "pre": {
+        "centroid": [
+          0.09185345408817132,
+          -0.0029404344192395606
+        ],
+        "spread_rms": 0.026895809752006783,
+        "radius_mean": 0.09303581655915734,
+        "angular_span_degrees": 40.27497371461993,
+        "largest_empty_angle_degrees": 319.72502628538007,
+        "clean_hq": 0.0,
+        "clean_modes": 0,
+        "nearest_counts": [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "nearest_mode": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "after": {
+        "centroid": [
+          0.09591016452759504,
+          0.004764845944009721
+        ],
+        "spread_rms": 0.027298369234749983,
+        "radius_mean": 0.09719091343216961,
+        "angular_span_degrees": 38.03771622367829,
+        "largest_empty_angle_degrees": 321.9622837763217,
+        "clean_hq": 0.0,
+        "clean_modes": 0,
+        "nearest_counts": [
+          11,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "nearest_mode": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "accepted_g_motion": {
+        "output_rms": 0.008902285937436805,
+        "common_translation_norm": 0.008707941459816775,
+        "relative_deformation_rms": 0.0018499866065161581,
+        "common_energy_fraction": 0.9568148841080266,
+        "translation_vector": [
+          0.00405671043942372,
+          0.007705280324444175
+        ],
+        "network_only_rms": 0.008890868213976073,
+        "prior_only_rms": 3.610857629263393e-05,
+        "interaction_rms": 3.8561698033469695e-06,
+        "per_particle_displacement": [
+          0.007036692947698047,
+          0.009686563516484269,
+          0.008656303127638576,
+          0.008963664021330324,
+          0.0070788102562176405,
+          0.010247289067891237,
+          0.00904753502075858,
+          0.0103063347080596,
+          0.00784644231939486,
+          0.008791735556630592,
+          0.007957616970164075,
+          0.0103443255002285
+        ]
+      },
+      "critic_changes": {
+        "ordinary_bounded_d_parameter_l2": 0.6032164504882245,
+        "later_fit_parameter_l2": 5.710516522588511,
+        "fit_to_ordinary_parameter_ratio": 9.466778497115916,
+        "fixed_pre_support_and_target_score_rms_ordinary": 0.10452497837230777,
+        "fixed_pre_support_and_target_score_rms_fit": 2.138366439486719
+      }
+    },
+    "25": {
+      "pre": {
+        "centroid": [
+          0.2058067669471105,
+          0.055205932507912316
+        ],
+        "spread_rms": 0.1197003040943224,
+        "radius_mean": 0.2366790969439249,
+        "angular_span_degrees": 79.53305862032461,
+        "largest_empty_angle_degrees": 280.4669413796754,
+        "clean_hq": 0.0,
+        "clean_modes": 0,
+        "nearest_counts": [
+          6,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        "nearest_mode": [
+          0,
+          1,
+          0,
+          1,
+          7,
+          7,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "after": {
+        "centroid": [
+          0.20975825066367784,
+          0.06333154812455177
+        ],
+        "spread_rms": 0.12092001018937044,
+        "radius_mean": 0.24203964553156943,
+        "angular_span_degrees": 76.52254516816207,
+        "largest_empty_angle_degrees": 283.4774548318379,
+        "clean_hq": 0.0,
+        "clean_modes": 0,
+        "nearest_counts": [
+          6,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          2
+        ],
+        "nearest_mode": [
+          0,
+          1,
+          0,
+          1,
+          7,
+          7,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "accepted_g_motion": {
+        "output_rms": 0.009281956430639837,
+        "common_translation_norm": 0.009035477447908991,
+        "relative_deformation_rms": 0.002124820573277723,
+        "common_energy_fraction": 0.9475958749422363,
+        "translation_vector": [
+          0.003951483716567357,
+          0.008125615616639456
+        ],
+        "network_only_rms": 0.009222811908627232,
+        "prior_only_rms": 0.00011424959228651597,
+        "interaction_rms": 6.125402172078059e-06,
+        "per_particle_displacement": [
+          0.010634512014334088,
+          0.010743424156446702,
+          0.007611163196635381,
+          0.009638177371131755,
+          0.010640354544749613,
+          0.007671006592469218,
+          0.006868376779636054,
+          0.009573904737684458,
+          0.00814735762595674,
+          0.008222025478962766,
+          0.008566753821197889,
+          0.011672709914328614
+        ]
+      },
+      "critic_changes": {
+        "ordinary_bounded_d_parameter_l2": 0.3026825178707736,
+        "later_fit_parameter_l2": 0.6392213916121323,
+        "fit_to_ordinary_parameter_ratio": 2.111854348605094,
+        "fixed_pre_support_and_target_score_rms_ordinary": 0.578863027916623,
+        "fixed_pre_support_and_target_score_rms_fit": 0.6615188657492794
+      }
+    },
+    "50": {
+      "pre": {
+        "centroid": [
+          0.5564771766463915,
+          0.2068644550939401
+        ],
+        "spread_rms": 0.642795510277943,
+        "radius_mean": 0.8080362551831785,
+        "angular_span_degrees": 120.35448332703872,
+        "largest_empty_angle_degrees": 239.6455166729613,
+        "clean_hq": 0.0,
+        "clean_modes": 0,
+        "nearest_counts": [
+          4,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3
+        ],
+        "nearest_mode": [
+          0,
+          1,
+          7,
+          1,
+          7,
+          7,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      "after": {
+        "centroid": [
+          0.6044191146890322,
+          0.21492702389756838
+        ],
+        "spread_rms": 0.689522289482901,
+        "radius_mean": 0.8726880562701725,
+        "angular_span_degrees": 119.62228021782418,
+        "largest_empty_angle_degrees": 240.37771978217583,
+        "clean_hq": 0.0,
+        "clean_modes": 0,
+        "nearest_counts": [
+          4,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3
+        ],
+        "nearest_mode": [
+          0,
+          1,
+          7,
+          1,
+          7,
+          7,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      "accepted_g_motion": {
+        "output_rms": 0.06784491790344858,
+        "common_translation_norm": 0.04861516675892039,
+        "relative_deformation_rms": 0.04732333934041468,
+        "common_energy_fraction": 0.5134627199393577,
+        "translation_vector": [
+          0.047941938042640686,
+          0.008062568803628286
+        ],
+        "network_only_rms": 0.06687009109613835,
+        "prior_only_rms": 0.001559360404767793,
+        "interaction_rms": 0.00013932019003235833,
+        "per_particle_displacement": [
+          0.04678646824684938,
+          0.08640632091566285,
+          0.058502826018666666,
+          0.0549262952482936,
+          0.07222903521087415,
+          0.07935034082083044,
+          0.05152830977119137,
+          0.07574498248035637,
+          0.04668456559663201,
+          0.04819110006582901,
+          0.052138540344119244,
+          0.10961045927475965
+        ]
+      },
+      "critic_changes": {
+        "ordinary_bounded_d_parameter_l2": 0.022428575615547185,
+        "later_fit_parameter_l2": 0.14170593600275688,
+        "fit_to_ordinary_parameter_ratio": 6.318097877982418,
+        "fixed_pre_support_and_target_score_rms_ordinary": 0.05621431921186242,
+        "fixed_pre_support_and_target_score_rms_fit": 0.07256863740949081
+      }
+    },
+    "100": {
+      "pre": {
+        "centroid": [
+          2.3975848257541656,
+          0.039736196398735046
+        ],
+        "spread_rms": 1.743811151994457,
+        "radius_mean": 2.9574974347205365,
+        "angular_span_degrees": 97.63248276987355,
+        "largest_empty_angle_degrees": 262.36751723012645,
+        "clean_hq": 0.1666666716337204,
+        "clean_modes": 2,
+        "nearest_counts": [
+          4,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4
+        ],
+        "nearest_mode": [
+          7,
+          1,
+          7,
+          1,
+          7,
+          7,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "after": {
+        "centroid": [
+          2.4703152775764465,
+          0.011932256321112314
+        ],
+        "spread_rms": 1.775459163420252,
+        "radius_mean": 3.0354115170470517,
+        "angular_span_degrees": 96.58236509064618,
+        "largest_empty_angle_degrees": 263.4176349093538,
+        "clean_hq": 0.3333333432674408,
+        "clean_modes": 3,
+        "nearest_counts": [
+          4,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          4
+        ],
+        "nearest_mode": [
+          7,
+          1,
+          7,
+          1,
+          7,
+          7,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "accepted_g_motion": {
+        "output_rms": 0.08921417585225246,
+        "common_translation_norm": 0.07786384081274925,
+        "relative_deformation_rms": 0.04354757704951525,
+        "common_energy_fraction": 0.7617349969997587,
+        "translation_vector": [
+          0.07273045182228088,
+          -0.02780394007762273
+        ],
+        "network_only_rms": 0.08830207561905831,
+        "prior_only_rms": 0.004177675711631323,
+        "interaction_rms": 0.00023990625545190872,
+        "per_particle_displacement": [
+          0.0882833658790367,
+          0.09424712463035238,
+          0.06916843184050094,
+          0.08743563865184738,
+          0.06796302892733865,
+          0.06616694860185444,
+          0.08948322372240966,
+          0.09232257153038205,
+          0.09303274379497617,
+          0.08846865312216073,
+          0.11602981228619097,
+          0.1045554386044665
+        ]
+      },
+      "critic_changes": {
+        "ordinary_bounded_d_parameter_l2": 0.034671246495866566,
+        "later_fit_parameter_l2": 0.08340596787364869,
+        "fit_to_ordinary_parameter_ratio": 2.405623572939386,
+        "fixed_pre_support_and_target_score_rms_ordinary": 0.14685094909799565,
+        "fixed_pre_support_and_target_score_rms_fit": 0.34252477733183
+      }
+    }
+  },
+  "interpretation": "four fitted captures permit geometry and D-displacement attribution; original arm has only archived sparse observations, so its within-step motion is not claimed"
+}
