@@ -1,0 +1,59 @@
+{
+  "task": "img_pyramid_valley2",
+  "tip_sha": "510e0054b2499ce725482de8e7a4ae8d72fd8f25",
+  "principal": "pyramid_valley2 radial intensity polarity: published transpose12 vs residual16",
+  "published_winner": "image suite baseline transpose12 (RpGAN+b_cap+particles)",
+  "arms": {
+    "baseline_transpose12": {
+      "card": {
+        "name": "baseline_transpose12",
+        "scope": "published image path (transpose width 12)",
+        "changes": {}
+      },
+      "verdict": "FAIL",
+      "quality": {
+        "sustained": false,
+        "confirmed_step": null,
+        "modes": 2,
+        "hq": 0.875,
+        "mean_rmse": 0.03842326998710632,
+        "error": null,
+        "seconds": 8.36060156300664,
+        "last_obs": {
+          "hq": 0.875,
+          "mean_rmse": 0.03842326998710632,
+          "modes": 2
+        }
+      },
+      "seconds": 8.361241365782917
+    },
+    "residual16": {
+      "card": {
+        "name": "residual16",
+        "scope": "in-formulation architecture control",
+        "changes": {
+          "architecture": "residual_upsample",
+          "width": 16
+        }
+      },
+      "verdict": "PASS",
+      "quality": {
+        "sustained": true,
+        "confirmed_step": 575,
+        "modes": 2,
+        "hq": 1.0,
+        "mean_rmse": 0.03204619139432907,
+        "error": null,
+        "seconds": 7.389794319868088,
+        "last_obs": {
+          "hq": 1.0,
+          "mean_rmse": 0.03204619139432907,
+          "modes": 2
+        }
+      },
+      "seconds": 7.390519842971116
+    }
+  },
+  "hit": true,
+  "soft_miss": false
+}
