@@ -1,0 +1,137 @@
+{
+  "files": {
+    "cold1.json": {
+      "gzip_bytes": 6859,
+      "gzip_sha256": "fef505bb0adac7fb151c02848d9ce556051fb4989e7e59029f46cb08db82d7b6",
+      "path": "cold1.json.gz",
+      "raw_bytes": 32983,
+      "raw_sha256": "1cec788090befda02e0a5eb9b5a4c7e83ef3416ebdb8cf62ec2360559d0cf23d"
+    },
+    "cold100.json": {
+      "gzip_bytes": 7107,
+      "gzip_sha256": "0bd36d44d9e0ffba873ea7ffacda47238b8ce88a39d4b80c5d91255a8d58f901",
+      "path": "cold100.json.gz",
+      "raw_bytes": 32009,
+      "raw_sha256": "8f64aa34f637c799cb90b830bc18c8547536241f18f466dc045d9b83a7c2ae3f"
+    },
+    "declaration.json": {
+      "gzip_bytes": 1356,
+      "gzip_sha256": "ca7c5c6696a7016bf729b988504fb5899aeadd39a4fd2eafa9cbf86316e2085a",
+      "path": "declaration.json.gz",
+      "raw_bytes": 2525,
+      "raw_sha256": "17500650cd24acf3209228f76291a6ebcd478c60f9d762ff1be0f2be0c82fc26"
+    },
+    "run.log": {
+      "gzip_bytes": 1576,
+      "gzip_sha256": "45121647479a25d619ae2b157596dd3b8a896282ee3168000383c1b62dc6efa0",
+      "path": "run.log.gz",
+      "raw_bytes": 3579,
+      "raw_sha256": "5ca834298528234744198727466d607c36a411798ff5a764345b345788c2f36d"
+    },
+    "source/benchmarks/locked_shared/mlp.py": {
+      "gzip_bytes": 879,
+      "gzip_sha256": "90af397f52e30d4f6037bae56ac9319f53a17d63f2ca616bc5dbdf7ca003e81f",
+      "path": "source/benchmarks/locked_shared/mlp.py.gz",
+      "raw_bytes": 2289,
+      "raw_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+    },
+    "source/benchmarks/locked_shared/mode_hold.py": {
+      "gzip_bytes": 3580,
+      "gzip_sha256": "a5610686a60c882940c4da616b25896dd768e0ce8e2ac882ecb3f68429ec9a4a",
+      "path": "source/benchmarks/locked_shared/mode_hold.py.gz",
+      "raw_bytes": 10774,
+      "raw_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    "source/reports/toy100/chamfer_discrete_reallocation.py": {
+      "gzip_bytes": 1640,
+      "gzip_sha256": "c3d0c29182e594d1fa3759b53a70f2208999384a4abb0d8dbccf57b9b0dcea17",
+      "path": "source/reports/toy100/chamfer_discrete_reallocation.py.gz",
+      "raw_bytes": 4218,
+      "raw_sha256": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24"
+    },
+    "source/reports/toy100/chamfer_joint_landing_filter.py": {
+      "gzip_bytes": 3284,
+      "gzip_sha256": "a084019cd52df5f4c1639ce0efa56d8783a363c9f2e1a442f240e447b952c463",
+      "path": "source/reports/toy100/chamfer_joint_landing_filter.py.gz",
+      "raw_bytes": 9780,
+      "raw_sha256": "3458fd58ac428acf21e5179d9e4a41fb8dcff4cac753bdd6eca309263b621a8a"
+    },
+    "source/reports/toy100/chamfer_pullback.py": {
+      "gzip_bytes": 2512,
+      "gzip_sha256": "b54f5c1597419b39b30109f4d198932982e3ab679a2f87dfb52d7d4a97a537a6",
+      "path": "source/reports/toy100/chamfer_pullback.py.gz",
+      "raw_bytes": 7290,
+      "raw_sha256": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda"
+    },
+    "source/reports/toy100/coverage_fixed_eval.py": {
+      "gzip_bytes": 1661,
+      "gzip_sha256": "f780451c74aa2002d32aab0448929082ec676eecb283ba30a37bc1580b48efd3",
+      "path": "source/reports/toy100/coverage_fixed_eval.py.gz",
+      "raw_bytes": 3996,
+      "raw_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e"
+    },
+    "source/reports/toy100/joint_output_pullback.py": {
+      "gzip_bytes": 2305,
+      "gzip_sha256": "c89e9f1f30b7ac84fee345997641fd7ae6d768403034aaf9197a3114bdfab2d0",
+      "path": "source/reports/toy100/joint_output_pullback.py.gz",
+      "raw_bytes": 6674,
+      "raw_sha256": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3"
+    },
+    "source/reports/toy100/pr84_critic_refinement_capture.py": {
+      "gzip_bytes": 2505,
+      "gzip_sha256": "154533334ec69c807c234c9ae7b804c005aec0e5a786fa68b9450547ca85eb3f",
+      "path": "source/reports/toy100/pr84_critic_refinement_capture.py.gz",
+      "raw_bytes": 7367,
+      "raw_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585"
+    },
+    "source/reports/toy100/pr84_early_geometry.py": {
+      "gzip_bytes": 2733,
+      "gzip_sha256": "00f6a76e79e6471e06d3e2b49b84d119dd6e1ea6ead49faf2ede658027ee0cdb",
+      "path": "source/reports/toy100/pr84_early_geometry.py.gz",
+      "raw_bytes": 7322,
+      "raw_sha256": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45"
+    },
+    "source/tests/test_chamfer_discrete_reallocation.py": {
+      "gzip_bytes": 759,
+      "gzip_sha256": "76b5cb07ec9a96eed0ec08120de86c932bd0ad82e9de95b45d2d05bd14580f78",
+      "path": "source/tests/test_chamfer_discrete_reallocation.py.gz",
+      "raw_bytes": 2138,
+      "raw_sha256": "303c029c54e1df96b47a5f27cfe7971d65d1d847408e7fe450b87274515b1e75"
+    },
+    "source/tests/test_joint_output_pullback.py": {
+      "gzip_bytes": 924,
+      "gzip_sha256": "5cdeec659c1d9cd2a30ce5202133a31ca565bad00114d0e35d2af2e8e3ac0869",
+      "path": "source/tests/test_joint_output_pullback.py.gz",
+      "raw_bytes": 2804,
+      "raw_sha256": "25ff97bcf21db49c85d8630d30425295033127c9e9fe41ee387048b171baf607"
+    },
+    "summary.json": {
+      "gzip_bytes": 19324,
+      "gzip_sha256": "fc23228d504dcfad5fc6042ed4284416971a5570c335bbe9e981f75a6d3b6d43",
+      "path": "summary.json.gz",
+      "raw_bytes": 96312,
+      "raw_sha256": "5fa0853dbe21de01f2ea0f3eda76d45738d162ada6784b02d36dc2afb1132da8"
+    },
+    "tests.log": {
+      "gzip_bytes": 51,
+      "gzip_sha256": "4de53f25ac0c2cc98ec9b57f6a9dd89ddf2630c3069a5cc50f46075b502763cb",
+      "path": "tests.log.gz",
+      "raw_bytes": 98,
+      "raw_sha256": "0ed36368f8bcb2e82439d88019b802688953e625b652b7f9df7e55ff27f250a7"
+    },
+    "warm1324.json": {
+      "gzip_bytes": 5443,
+      "gzip_sha256": "3c3be7e329354de0cd95a907aa5064336eeb37eb34e4d4bf781565d02b03856a",
+      "path": "warm1324.json.gz",
+      "raw_bytes": 28786,
+      "raw_sha256": "61f91366c0a1aa0bdeccca57b6eaf75d6343f0c4740968dca338202ae5e738d2"
+    }
+  },
+  "full_sidecar_case_byte_parity_sha256": {
+    "cold1.json": "1cec788090befda02e0a5eb9b5a4c7e83ef3416ebdb8cf62ec2360559d0cf23d",
+    "cold100.json": "8f64aa34f637c799cb90b830bc18c8547536241f18f466dc045d9b83a7c2ae3f",
+    "warm1324.json": "61f91366c0a1aa0bdeccca57b6eaf75d6343f0c4740968dca338202ae5e738d2"
+  },
+  "result_status": "PASS",
+  "scope": "completed fixed-bank C+Q joint-neural landing only; no GAN training"
+}
