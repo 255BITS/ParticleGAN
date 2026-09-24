@@ -21,12 +21,17 @@
     "calibration_unique_arms": 3,
     "calibration_runs": 5,
     "diagnostic_followups": 1,
+    "warm_diagnostic_runs": 4,
+    "warm_candidate_diagnostic_runs": 2,
+    "warm_candidate_passes": 0,
     "production_gate_winners": 0
   },
   "limits": [
     "No training-seed sweep. Same-seed method controls are separate rows, not statistical replications.",
     "Scratch optimizer or game-policy rows are not eligible for the shared production gate.",
     "A cold 1,200-step rejection does not establish fundamental impossibility or exclude a successful warm-state mechanism.",
+    "Warm fixed-metric EG results are conditional on a scheduled passing state at update 1000; they do not test cold acquisition.",
+    "The two warm EG variants have nonfinite denominator diagnostics but finite recorded host metrics; no broad EG impossibility follows.",
     "No unattempted downstream task is counted as a pass or failure.",
     "Eps-wave1/2 saved episodes changed after stage hashes were recorded. Original stage hashes and current file hashes are both recorded; the independent regrade matches current files, grades them FAIL, and the production gate rejects them."
   ],
@@ -2757,6 +2762,265 @@
           "sha256": "34b955290532f01f52f1629923ce29efeee35c01ebe8df76dcc254b2cabd0a1f"
         }
       }
+    },
+    {
+      "id": "fixed-metric-eg-warm-v2",
+      "phase": "warm_local_stability",
+      "scope": "Passing scheduled state at update 1000, then 200 uninterrupted updates; not cold acquisition or a production gate.",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-fixedmetric-eg-warm-v2"
+      },
+      "run_count": 4,
+      "candidate_diagnostic_runs": 2,
+      "control_runs": 2,
+      "source_hashes": {
+        "ParticleGAN-continuous-mechanism:reports/toy100/fixed_metric_extra_warm_probe.py": "0ff98674cdc32f8cc779d328c4ece8b035018df6d9ff50ae9fd28acb7c215f6d",
+        "ParticleGAN-continuous-mechanism:reports/toy100/fixed_metric_extra_scratch.py": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+        "ParticleGAN-continuous-mechanism:reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+        "ParticleGAN-continuous-probe:benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+        "ParticleGAN-continuous-probe:benchmarks/toy100/continuous_probe.py": "49d2a56484ea1efac29f77f2de6c024ef7187b85a6adc4c6694d613efc2e3067"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-fixedmetric-eg-warm-v2.declaration.json",
+        "sha256": "b4dc5c5da1793be4b7000deadcbecf87119460ee3daf758b2ea42cc765c852c0"
+      },
+      "summary": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-fixedmetric-eg-warm-v2/summary.json",
+        "sha256": "116329638f44524fc2a2c02a8106107150c771fded1f06f7fbade988751ad546"
+      },
+      "runs": [
+        {
+          "tag": "identity",
+          "kind": "control",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "PASS",
+          "first_failed_stage": null,
+          "passing_checks": 200,
+          "checks": 200,
+          "min_modes": 8,
+          "min_hq": 0.996337890625,
+          "final": {
+            "modes": 8,
+            "hq": 1.0
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 4.254505882408814e-05,
+              "max": 0.0016017594338655719,
+              "observations": 200
+            },
+            "g": {
+              "min": 4.254505882408814e-05,
+              "max": 0.0016017594338655719,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0004250864765310783,
+              "max": 0.003417518105398572,
+              "observations": 200
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "gradient_calls": [
+            1200,
+            1200
+          ],
+          "rng_replay_verified": null,
+          "nonfinite_denominator_diagnostics": 0,
+          "nonfinite_host_values": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-fixedmetric-eg-warm-v2/identity.json",
+            "sha256": "e371e4f8cffd8f209da58a03353585395fef44e2bee16493b482b9a185c81c99"
+          }
+        },
+        {
+          "tag": "constant",
+          "kind": "control",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "warm_local_stability",
+          "passing_checks": 6,
+          "checks": 200,
+          "min_modes": 1,
+          "min_hq": 0.00537109375,
+          "final": {
+            "modes": 6,
+            "hq": 0.504638671875
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 200
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 200
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "gradient_calls": [
+            1200,
+            1200
+          ],
+          "rng_replay_verified": null,
+          "nonfinite_denominator_diagnostics": 0,
+          "nonfinite_host_values": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-fixedmetric-eg-warm-v2/constant.json",
+            "sha256": "8abed7fc5064601c0645630aade1f4dba1c5a420df7a737d99bc7f1bc8821d6b"
+          }
+        },
+        {
+          "tag": "same_sample",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "warm_local_stability",
+          "passing_checks": 0,
+          "checks": 200,
+          "min_modes": 0,
+          "min_hq": 0.0,
+          "final": {
+            "modes": 0,
+            "hq": 0.0
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 400
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 400
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 400
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "gradient_calls": [
+            1400,
+            1400
+          ],
+          "rng_replay_verified": 200,
+          "nonfinite_denominator_diagnostics": 580,
+          "nonfinite_host_values": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-fixedmetric-eg-warm-v2/same_sample.json",
+            "sha256": "85c4c72d086d9cbb8692a31a3e3afa38f153794a492869ddf10c189558df3c92"
+          }
+        },
+        {
+          "tag": "independent_sample",
+          "kind": "candidate_diagnostic",
+          "phase": "warm_local_stability",
+          "warm_step": 1000,
+          "continuation_updates": 200,
+          "shared_warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+          "status": "FAIL",
+          "first_failed_stage": "warm_local_stability",
+          "passing_checks": 0,
+          "checks": 200,
+          "min_modes": 0,
+          "min_hq": 0.0,
+          "final": {
+            "modes": 0,
+            "hq": 0.0
+          },
+          "post_checkpoint_rate_ranges": {
+            "d": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 400
+            },
+            "g": {
+              "min": 0.00425,
+              "max": 0.00425,
+              "observations": 400
+            },
+            "prior": {
+              "min": 0.0085,
+              "max": 0.0085,
+              "observations": 400
+            }
+          },
+          "optimizer_moment_steps": [
+            [
+              1200,
+              1200
+            ],
+            [
+              1200,
+              1200
+            ]
+          ],
+          "gradient_calls": [
+            1400,
+            1400
+          ],
+          "rng_replay_verified": 0,
+          "nonfinite_denominator_diagnostics": 324,
+          "nonfinite_host_values": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-fixedmetric-eg-warm-v2/independent_sample.json",
+            "sha256": "8d4341aeffe17ad28f8c680dddf8ee3da297cad0ca54406c0a289d106fc07945"
+          }
+        }
+      ]
     }
   ]
 }
