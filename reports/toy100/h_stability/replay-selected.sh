@@ -5,9 +5,9 @@ evidence=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 repo=$(cd -- "$evidence/../../.." && pwd)
 bench_python=${BENCH_PYTHON:-python3}
 bench_python=$(command -v "$bench_python")
-replay=${1:?Usage: replay-selected.sh NEW_DIRECTORY [short|cold|long|prepare]}
+replay=${1:?Usage: replay-selected.sh NEW_DIRECTORY [short|cold|long|converged|prepare]}
 mode=${2:-short}
-case "$mode" in short|cold|long|prepare) ;; *) exit 2 ;; esac
+case "$mode" in short|cold|long|converged|prepare) ;; *) exit 2 ;; esac
 mkdir -- "$replay"
 replay=$(cd -- "$replay" && pwd)
 
@@ -39,7 +39,7 @@ for name in ('continuous_candidates.py', 'continuous_screen.py', 'critic_signal.
     shutil.copy2(repo / 'reports/toy100' / name, replay / 'reports/toy100' / name)
 (replay / 'tests').mkdir(exist_ok=True)
 for name in ('test_adam_response.py', 'test_continuous_candidates.py',
-             'test_legacy_noise_adapters.py', 'test_legacy_noise_remaining.py'):
+             'test_legacy_noise_adapters.py', 'test_legacy_noise_remaining.py', 'test_convergence_gate.py'):
     shutil.copy2(repo / 'tests' / name, replay / 'tests' / name)
 manifest = json.loads((h / 'batch-h/manifest.json').read_text())['source_sha256']
 for name, expected in manifest.items():
@@ -54,6 +54,9 @@ export ONEDNN_MAX_CPU_ISA=AVX2 DNNL_MAX_CPU_ISA=AVX2 CUDA_VISIBLE_DEVICES=''
 export PYTHONUNBUFFERED=1
 cd -- "$replay"
 case "$mode" in
+  converged)
+    "$bench_python" -u reports/toy100/h_stability/converged_probe.py --output "$replay/results-post-convergence"
+    ;;
   short|long)
     steps=200
     if [[ "$mode" == long ]]; then steps=1200; fi

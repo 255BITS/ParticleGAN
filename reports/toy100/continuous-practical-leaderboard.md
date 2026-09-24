@@ -1,3 +1,22 @@
+# Stability after confirmed convergence
+
+The current objective separates learning time from stability once quality has
+converged. The first200 consecutive8-mode/HQ>=.90 observations confirm convergence;
+the following1200 updates are a disjoint hold. Early dips do not fail that hold.
+See [criterion](h_stability/CONVERGENCE.md). All original toy results remain intact.
+
+| Candidate | Confirmed at update | Passing hold checks before failure | Original toy coverage |
+| --- | ---: | ---: | --- |
+| eps_net_1m | 1400 | 291/1200 | 10/19 PASS |
+| Shared column RMS | 2404 | 120/1200 | two_pole/ring/unipolar PASS; other gates incomplete |
+| Shared RMS | 3241 | 95/1200 | two_pole/ring/unipolar PASS; other gates incomplete |
+| H | Not confirmed by6000 | Not started | 13/19 PASS |
+
+No candidate passes the post-convergence hold. The epsilon base remains selected.
+[Baseline evidence](h_stability/convergence-baseline/summary.json),
+[comparisons](h_stability/convergence-comparisons/results.json). The earlier
+491/83/82/54 counts below measure the old hold beginning at1200, not this criterion.
+
 ## Latest selected-base audit
 
 `eps_net_1m` improves own-state stability to491 consecutive passing checks, then

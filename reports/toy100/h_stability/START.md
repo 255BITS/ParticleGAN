@@ -1,23 +1,25 @@
 # Current research base: eps_net_1m
 
+From a publication checkout, prepare the archived training code first:
+
+```bash
+BENCH_PYTHON=/path/to/python bash reports/toy100/h_stability/replay-selected.sh /tmp/eps-replay-new converged
+```
+
+This preserves current production code and runs the declared post-convergence
+diagnostic against the archived research package. Use Python3.12 with the
+experiment dependencies (recorded PyTorch2.13.0).
+
 Selection: [current-base.json](current-base.json). Replay declaration:
 [eps-net-base/declaration.json](eps-net-base/declaration.json).
 This is a measured search starting point, not a release-qualified winner.
 
-This publication is based on current `develop`. Reproduce the measured recipe
-in an isolated directory: the archived training package differs from current
-production source, and the source verifier deliberately rejects that mismatch.
-
-```bash
-BENCH_PYTHON=/path/to/python bash reports/toy100/h_stability/replay-selected.sh /tmp/eps-replay-new
-# Optional modes after NEW_DIRECTORY: cold, long, or prepare. Default: short.
-```
-
-Use Python3.12 with the experiment dependencies (recorded PyTorch2.13.0).
-The script checks the archives, restores all125 frozen training sources,
-pins CPU/AVX2 and one thread, then runs the200-check own-state replay.
-The lower-level commands below are for the prepared directory or the original
-research checkout. Production package defaults are unchanged.
+Current priority: [stability after confirmed convergence](CONVERGENCE.md).
+The epsilon base confirms quality at1400, then passes291 hold checks before
+failing at1692. No reviewed candidate passes the new1200-check hold; see
+[comparison results](convergence-comparisons/results.json).
+The historical immediate-hold failures below remain recorded; pre-convergence
+dips alone no longer reject a promising policy from further research.
 
 It is still a GAN. The generator and trainable latent particles learn only
 through the discriminator's logistic relativistic adversarial loss. The
