@@ -605,9 +605,91 @@
       "production_common22_attempted": false,
       "evidence_manifest": "alternating-linesearch-round3/manifest.json",
       "identity_cold_parity": true
+    },
+    {
+      "name": "Alternating-field full-J implicit response",
+      "shared_gate_eligible": false,
+      "first_failed_stage": "trajectory",
+      "warm": {
+        "checks": 200,
+        "passing_checks": 200,
+        "failing_steps": [],
+        "min_modes": 8,
+        "min_hq": 0.993896484375,
+        "passing_suffix": 200,
+        "stable_from_step": 1001,
+        "pass_all": true,
+        "pass_suffix": true
+      },
+      "cold": [
+        {
+          "status": "FAIL",
+          "outer_updates": 400,
+          "fields_per_player": 3743,
+          "queries": 3343,
+          "base_replays": 400,
+          "rng_verified": 3343,
+          "rejection_causes": {
+            "linear_residual": 7,
+            "nonlinear_residual": 395,
+            "correction_bound": 3
+          },
+          "scale_min": 0.00390625,
+          "scale_max": 1.0,
+          "scale_mean": 0.0326171875,
+          "scale_median": 0.0078125,
+          "last100_scale_mean": 0.0051171875,
+          "scale_histogram": {
+            "0.0625": 9,
+            "0.125": 11,
+            "0.25": 13,
+            "0.5": 5,
+            "0.03125": 27,
+            "1.0": 2,
+            "0.015625": 49,
+            "0.0078125": 164,
+            "0.00390625": 120
+          },
+          "accepted_nonlinear_residual_max": 0.4997070664075376,
+          "rounding_anchor_max": 2.0149229758833422e-07,
+          "final": {
+            "identity_mse": 0.25239771604537964
+          },
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.25239771604537964,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "FAIL",
+                "margin": -0.23239771604537965
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 2.0,
+            "confirmation_fraction": 2.0
+          }
+        }
+      ],
+      "evidence": "alternating-implicit-round3/manifest.json"
     }
   ],
-  "completed_candidate_count": 8,
+  "completed_candidate_count": 9,
   "additional_execution_attempts": {
     "initial_cold": "zero-update invalid uppercase label; driver-only repair",
     "bounded_error_cold": "65 full trajectory updates then retry exhaustion at66; no quality verdict",
@@ -887,14 +969,9 @@
       }
     ]
   },
-  "in_progress": [
-    {
-      "name": "Alternating-field full-J implicit response",
-      "reason": "Retest the previously warm-passing implicit method without the simultaneous evaluation confound; not a completed result"
-    }
-  ],
+  "in_progress": [],
   "validation": {
-    "passed": 200,
+    "passed": 205,
     "disjoint_test_runs": [
       {
         "path": "reports/toy100/continuous-evidence/round3/integrated-tests.log",
@@ -905,6 +982,11 @@
         "path": "reports/toy100/continuous-evidence/round3/added-controller-tests.log",
         "passed": 16,
         "sha256": "38fe3e097d5ede57a3e40f8a9f6717914f5e4f0f223e0d4b578f716f867fe71a"
+      },
+      {
+        "path": "reports/toy100/continuous-evidence/round3/implicit-tests.log",
+        "passed": 5,
+        "sha256": "3c41ff0f0a4a78cbe49f0a832d5f551aa70409cbc7aeb15963528b81eab2a84c"
       }
     ],
     "manifest_sha256": {
@@ -916,7 +998,8 @@
       "round3/joint-metric-cold/manifest.json": "ecdd1f7f2a1a2321d55ccf5e9e9308312ac47c048278b65d1bf80a86d81bade6",
       "round3/joint-metric-warm/manifest.json": "57e071896ceed687cd438e5c767be7873da38bf73bbc22e0d38d6d2e06044db8",
       "round3/output-rmsprop-cold/manifest.json": "fa1c3c8420cec112b72f71710f972f920905386375f2dc104d3dac794ef151ca",
-      "round3/output-rmsprop-warm/manifest.json": "ccb24f5cd7a2c9b76bee4bc4bcf6cbc992d195641d6d9ff8ab249c7cdaaf753e"
+      "round3/output-rmsprop-warm/manifest.json": "ccb24f5cd7a2c9b76bee4bc4bcf6cbc992d195641d6d9ff8ab249c7cdaaf753e",
+      "alternating-implicit-round3/manifest.json": "6c1830d14f4939002b96089bfcfceeb0b47f526d4c51eaa311efc689c19d56c5"
     }
   },
   "limits": [

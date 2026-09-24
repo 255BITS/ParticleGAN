@@ -64,6 +64,7 @@ updates and requires all eight modes/HQ >= .9 at every original terminal check.
 | D Armijo with verified rejected-proposal rest, unchanged G .25 | 200/200 | PASS .0010046, suffix18 | FAIL5 modes/HQ .823,0/24 |
 | Verified D and G Armijo steps | FAIL193/200 | Not run | Seven failures1130–1136; minimum HQ .82837 |
 | D Armijo rest + positive own-secant G response | 200/200 | FAIL .035842,0/24 | Not run |
+| Anchored alternating-field full-J implicit response | 200/200 | FAIL .252398,0/24 | Not run |
 
 The hard-error execution and its declared rejected-proposal repair are both
 retained; the former is not a completed acquisition result. A separate zero-update cold
@@ -77,11 +78,12 @@ moments. The output-coordinate method adds its own explicitly recorded second
 moments. No failed candidate advanced to longer hold or production common22.
 
 The [machine-readable ledger](continuous-round3-results.json) derives these
-eight completed candidate verdicts from archived results and keeps execution
-errors separate. Local integration has **200 passing tests**:184 in the
+nine completed candidate verdicts from archived results and keeps execution
+errors separate. Local integration has **205 passing tests**:184 in the
 [integrated suite](continuous-evidence/round3/integrated-tests.log), followed
 by16 disjoint tests for subsequently integrated controllers in the
-[additional log](continuous-evidence/round3/added-controller-tests.log).
+[additional log](continuous-evidence/round3/added-controller-tests.log), and five
+[implicit-response tests](continuous-evidence/round3/implicit-tests.log).
 
 Detailed mechanisms, tests and hashed evidence:
 
@@ -90,6 +92,7 @@ Detailed mechanisms, tests and hashed evidence:
 - [Positive own-secant response](alternating-positive-secant-report.md)
 - [Verified player steps and cap discontinuity](alternating-linesearch-report.md)
 - [Verified D with positive own-secant G](alternating-armijo-secant-report.md)
+- [Anchored alternating implicit response](alternating-implicit-report.md)
 
 ## What the new isolation establishes
 
@@ -129,11 +132,15 @@ Several methods can preserve a learned state; several can acquire trajectory;
 none above does all required work. Removing the separate shift requirement
 does not change these results.
 
-The next bounded experiment reuses the earlier full-J implicit response on
-an explicitly alternating field, so the generator field includes D's response
-to generator movement. Its result will be recorded separately; it is not a
-winner claim. The earlier full-J method passed warm200 but used simultaneous
-fields and failed trajectory.
+The full-J implicit response was also retested on an explicitly alternating
+field, including D's response to generator movement. It passes warm200/200
+(minimum HQ .993896) but fails cold trajectory at MSE .252398,0/24. Exact
+ordinary-control state parity and bitwise base-field replays pass. Nonlinear
+residual rejection drives its late accepted scale down; this is failed
+acquisition, not equilibrium rest. No ring or hold was run.
+
+The subsequent [PR84 review and shared-stencil follow-up](continuous-round4.md)
+records the next research direction separately.
 
 A survivor must still pass cold ring, the other cheap acquisition hosts,
 an uninterrupted >=2400-update ring hold with noise horizon fixed at1200,

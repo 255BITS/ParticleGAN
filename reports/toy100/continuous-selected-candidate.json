@@ -1,0 +1,126 @@
+{
+  "schema": "continuous-research-candidate-v1",
+  "date": "2026-09-24",
+  "status": "research_only_unqualified",
+  "selected": "PR84 original generator-only spatial stencil on PR82 alternation",
+  "origin_commit": "40ecb675bcb4b33bb0ab93e08e63607d30044930",
+  "adapter": "reports/toy100/pr84_smoothed_candidate.py",
+  "adapter_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+  "adapter_entrypoint": "pr84_smoothed_candidate",
+  "scope": [
+    "mode_hold",
+    "trajectory"
+  ],
+  "production_gate_eligible": false,
+  "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5",
+  "production_modified": false,
+  "reason": "Leading local partial candidate among reviewed PR81/82/84 methods: warm and trajectory pass, seven-mode ring with final HQ1; simpler than failed rest additions. This is not a full-gate winner.",
+  "settings": {
+    "g_lr": 0.00425,
+    "d_lr": 0.00425,
+    "prior_lr": 0.0085,
+    "g_curvature_bound": 0.25,
+    "d_curvature_bound": 3.0,
+    "smooth_width_cap": 0.15,
+    "width_rule": "min(.15, .5 / sharpness)",
+    "lr_decay": false,
+    "smoothing_scope": "G only; 2D SimpleMLPDiscriminator; trajectory path unchanged"
+  },
+  "exact_cold_source_parity": {
+    "trajectory_updates": 400,
+    "ring_updates": 1200,
+    "full_state": true,
+    "optimizer_moments": true,
+    "ema": true,
+    "rng": true,
+    "all_untimed_observations": true,
+    "evidence": "continuous-evidence/pr84-smoothed-candidate/manifest.json"
+  },
+  "trajectory": {
+    "live": {
+      "identity_mse": 0.0009426623582839966
+    },
+    "verdict": {
+      "status": "PASS",
+      "attempted": true,
+      "passed": true,
+      "metrics": [
+        {
+          "metric": "identity_mse",
+          "value": 0.0009426623582839966,
+          "op": "<=",
+          "threshold": 0.02,
+          "status": "PASS",
+          "margin": 0.019057337641716004
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 18,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 18,
+        "first_pass_step": 117,
+        "stable_from_step": 117,
+        "stable_from_seconds": 1.87515541119501,
+        "confirmed_step": 184,
+        "confirmed_seconds": 2.4329984090290964
+      },
+      "shortfall": 0.0,
+      "confirmation_fraction": 0.46
+    }
+  },
+  "ring": {
+    "live": {
+      "modes": 7,
+      "hq": 1.0
+    },
+    "verdict": {
+      "status": "FAIL",
+      "attempted": true,
+      "passed": false,
+      "metrics": [
+        {
+          "metric": "modes",
+          "value": 7,
+          "op": ">=",
+          "threshold": 8,
+          "status": "FAIL",
+          "margin": -1
+        },
+        {
+          "metric": "hq",
+          "value": 1.0,
+          "op": ">=",
+          "threshold": 0.9,
+          "status": "PASS",
+          "margin": 0.09999999999999998
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 0.0625,
+      "confirmation_fraction": 2.0
+    }
+  },
+  "first_failed_gate": "cold_ring",
+  "not_run": [
+    "hold2400",
+    "other_hosts",
+    "production_common22",
+    "longer_continuation"
+  ],
+  "next_research": "sampled-data coverage constraint after cheap proxy; objective change explicitly recorded",
+  "distribution_shift_required": false,
+  "rest_without_signal_allowed": true
+}

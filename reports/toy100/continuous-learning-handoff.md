@@ -27,15 +27,24 @@ control fails at .254434. This finding concerns the older ExtraAdam-derived
 joint-field adapters, not direct Adam-step wrappers that already alternate.
 PR81's target-error cap reads known target geometry and remains diagnostic.
 
-Eight completed new configurations still fail acquisition or warm stability.
+Nine completed new configurations still fail acquisition or warm stability.
 The strongest new D-only line-search arm passes warm200/200 and trajectory
 at .0010046, then fails ring acquisition at5 modes/HQ .823. Verifying both
 players' own-loss descent also fails seven dense warm checks despite passing
 every sparse terminal check. The cap penalty can jump across critic activation
 boundaries; exact zero-step replay distinguishes this from changed noise.
 Keep the dense warm filter and the unchanged five-check trajectory suffix.
-An alternating-field implicit-response retest is in progress; its result is
-not included in the completed-candidate count.
+The alternating-field implicit-response retest passes warm200 but fails cold
+trajectory at .252398,0/24. It is included in the nine completed candidates.
+The latest [PR84 review and stencil research](continuous-round4.md) follows
+that closed round; its evidence is kept separate.
+
+**PR84 follow-up:** the original generator-only stencil is the strongest
+local partial candidate: warm200/200, trajectory PASS, ring7 modes/HQ1.0
+FAIL. Its reported eight-mode ring pass does not reproduce locally. The
+shared D/G stencil also fails ring acquisition. Read the [fourth-round
+report](continuous-round4.md) before running another candidate; it records
+the double-smoothing implementation issue and the local gradient barrier.
 
 ## Reproduction starting point
 

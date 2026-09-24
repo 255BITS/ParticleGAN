@@ -1,0 +1,188 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "consistent-stencil-round4",
+  "base_commit": "e547762",
+  "shared_gate_eligible": false,
+  "files": {
+    "warm/declaration.json.gz": {
+      "sha256": "e6d4753dc20f47d7dfa1dcc86e5d53f11135e980396ebab33049559ecc934841",
+      "original_sha256": "51099979c126321f7ea387714db3e9ce1421b0b9b2652ce5d7b212996d6fb38d",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/declaration.json",
+      "compression": "gzip"
+    },
+    "warm/forks/cold.json.gz": {
+      "sha256": "b6872aca53d6787b423358b51a368b49a8931120176895098c409b58d74ad50e",
+      "original_sha256": "244a370c0ab770c7e5285ab37cd266d29e3504a9c0b1849ed1b5a47c5a58ec10",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/forks/cold.json",
+      "compression": "gzip"
+    },
+    "warm/forks/constant.json.gz": {
+      "sha256": "ba5824c216de7902e46f901821694327d844ab86da76b87f8c306bada0303cc4",
+      "original_sha256": "454982511a0fe173cb19b6f02a326f4d852873c4ee3df1e93b6bc5ab7070dcf1",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/forks/constant.json",
+      "compression": "gzip"
+    },
+    "warm/forks/identity.json.gz": {
+      "sha256": "a4a9369e279eb91e3c64d0db5653d5995dd919b0c37349002ae219877ab0867a",
+      "original_sha256": "8bb39065a07e90eebb384be0d268b6c61e227918e8189dca1d77b82ec6cc734d",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/forks/identity.json",
+      "compression": "gzip"
+    },
+    "warm/forks/stencil.json.gz": {
+      "sha256": "70c06e9d70933f0785eb69b211a4ee8e2fac87e3f799e42308ea722515cefcfc",
+      "original_sha256": "d9807eb9a9f77042fcc1e1b4130f8861412bcaab3ea34611c024842d7ee77229",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/forks/stencil.json",
+      "compression": "gzip"
+    },
+    "warm/forks/summary.json.gz": {
+      "sha256": "30ccbb118b8b0455e02f0a2cf626b218b8ab056ad063e251207b1ed53431681e",
+      "original_sha256": "435a45c888c7a806a493c47581e76f2bf7e107dfbb0626cde3813c3af03dfeac",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/forks/summary.json",
+      "compression": "gzip"
+    },
+    "warm/monitor.log.gz": {
+      "sha256": "3cdbe1db2dacdf18d4ac545692fdcdf77df4cff6979f1d1ee0b0d7096afcbe20",
+      "original_sha256": "577c469898cf326925c0aabe663a9e33836176d9cf7b8738d578b5ee9bb41266",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/monitor.log",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/locked_shared/mode_hold.py.gz": {
+      "sha256": "a5610686a60c882940c4da616b25896dd768e0ce8e2ac882ecb3f68429ec9a4a",
+      "original_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/source/benchmarks/locked_shared/mode_hold.py",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/locked_shared/trajectory.py.gz": {
+      "sha256": "9dc0fb939918532baf0e5143097b04f4c3a4f3b3384fe58bd3d0b49577a4abd8",
+      "original_sha256": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/source/benchmarks/locked_shared/trajectory.py",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/toy100/continuous_probe.py.gz": {
+      "sha256": "b5febe5559fd033fd3fe68980cb12e605692738e7faff8ac2e51966cd04c80f2",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/source/benchmarks/toy100/continuous_probe.py",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/toy100/warm_equilibrium_probe.py.gz": {
+      "sha256": "a7e7bf0a9ad5e7dc65b4c30953ee48e02922333542e2077dad778eec1e7ad974",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/source/benchmarks/toy100/warm_equilibrium_probe.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/alternating_curvature_scratch.py.gz": {
+      "sha256": "c5fe98bf157132e2502a24a0c2b3e35e224c061ed637e10918c2e64f3ef2bb1b",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/source/reports/toy100/alternating_curvature_scratch.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/consistent_stencil_probe.py.gz": {
+      "sha256": "f4b1c5fc4588ee507c02c8e41cea0e8dfa7260c5ffa50aa7c28802735944d60c",
+      "original_sha256": "0c94918808ea241cc13439a7f63e26eb70e83c627dad2042268943c3c1b3414e",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/source/reports/toy100/consistent_stencil_probe.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/consistent_stencil_scratch.py.gz": {
+      "sha256": "d10e664a7b65a0d15e5ea968f7feca53045b03f40a9247b10ed2866975bd9fce",
+      "original_sha256": "030e82be6d6ded6fb1b39370d53df29c11a40d07cc117eedf36d8aea23d8e2b5",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/source/reports/toy100/consistent_stencil_scratch.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/extra_adam_scratch.py.gz": {
+      "sha256": "0544b747488cf1b4bc2b395b3438f69713207fda2627710cc6446e633f99944c",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/source/reports/toy100/extra_adam_scratch.py",
+      "compression": "gzip"
+    },
+    "warm/summary.json.gz": {
+      "sha256": "d5706afa595042515526c144acb9c568cb61d093152f06c09ee238bfe749cd67",
+      "original_sha256": "58d7ee79f1bf2f238d8f443b734ea7c2a5b230d774d5fb00612a097fedee6e78",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-warm/summary.json",
+      "compression": "gzip"
+    },
+    "cold/config.json.gz": {
+      "sha256": "ddeee7197517e000dd1a49d2b5d1af1617bd9388daf17a1dcaa623e86253587e",
+      "original_sha256": "18209b7d65cb9902d448bce930d9618cef0f10c458307f6c7db048d67f8e6168",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/config.json",
+      "compression": "gzip"
+    },
+    "cold/declaration.json.gz": {
+      "sha256": "aa1681a4232fcfc0130b81c82036b1f919b00ef04b3df5ccf4e160cd9ced7474",
+      "original_sha256": "3d73362d849f2f2c282cfb92419461f17eeff86b17d79bd24c0e7cb50e53c11f",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/declaration.json",
+      "compression": "gzip"
+    },
+    "cold/mode_hold.json.gz": {
+      "sha256": "c4db395896a2418d7c5c284dd382ee48e140556fa200f4b82308261559a67c10",
+      "original_sha256": "911fe7d5cc209595baa7723693bdc112ffacb3c6a27bb1af873a5c2e14c09c6a",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/mode_hold.json",
+      "compression": "gzip"
+    },
+    "cold/monitor.log.gz": {
+      "sha256": "e3a5728756a2e8a181a0405e558635963d21e1bb9050f10ff964624889400b18",
+      "original_sha256": "20e07298b83e084f581a374089fad27fd94b4f4fb8b729868e77b7a746d334d1",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/monitor.log",
+      "compression": "gzip"
+    },
+    "cold/source/benchmarks/locked_shared/mode_hold.py.gz": {
+      "sha256": "a5610686a60c882940c4da616b25896dd768e0ce8e2ac882ecb3f68429ec9a4a",
+      "original_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/source/benchmarks/locked_shared/mode_hold.py",
+      "compression": "gzip"
+    },
+    "cold/source/benchmarks/locked_shared/trajectory.py.gz": {
+      "sha256": "9dc0fb939918532baf0e5143097b04f4c3a4f3b3384fe58bd3d0b49577a4abd8",
+      "original_sha256": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/source/benchmarks/locked_shared/trajectory.py",
+      "compression": "gzip"
+    },
+    "cold/source/benchmarks/toy100/continuous_probe.py.gz": {
+      "sha256": "b5febe5559fd033fd3fe68980cb12e605692738e7faff8ac2e51966cd04c80f2",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/source/benchmarks/toy100/continuous_probe.py",
+      "compression": "gzip"
+    },
+    "cold/source/benchmarks/toy100/warm_equilibrium_probe.py.gz": {
+      "sha256": "a7e7bf0a9ad5e7dc65b4c30953ee48e02922333542e2077dad778eec1e7ad974",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/source/benchmarks/toy100/warm_equilibrium_probe.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/alternating_curvature_scratch.py.gz": {
+      "sha256": "c5fe98bf157132e2502a24a0c2b3e35e224c061ed637e10918c2e64f3ef2bb1b",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/source/reports/toy100/alternating_curvature_scratch.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/consistent_stencil_probe.py.gz": {
+      "sha256": "f4b1c5fc4588ee507c02c8e41cea0e8dfa7260c5ffa50aa7c28802735944d60c",
+      "original_sha256": "0c94918808ea241cc13439a7f63e26eb70e83c627dad2042268943c3c1b3414e",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/source/reports/toy100/consistent_stencil_probe.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/consistent_stencil_scratch.py.gz": {
+      "sha256": "d10e664a7b65a0d15e5ea968f7feca53045b03f40a9247b10ed2866975bd9fce",
+      "original_sha256": "030e82be6d6ded6fb1b39370d53df29c11a40d07cc117eedf36d8aea23d8e2b5",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/source/reports/toy100/consistent_stencil_scratch.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/extra_adam_scratch.py.gz": {
+      "sha256": "0544b747488cf1b4bc2b395b3438f69713207fda2627710cc6446e633f99944c",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/source/reports/toy100/extra_adam_scratch.py",
+      "compression": "gzip"
+    },
+    "cold/status.json.gz": {
+      "sha256": "75856051323ff38b04b68b91f10e24227e4a088fc2f03febcedd1020688dd63b",
+      "original_sha256": "0be74b8c1417f85547d465304d5b011ab13189aed0caf3ba62a9747cd41fb5bd",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/status.json",
+      "compression": "gzip"
+    },
+    "cold/trajectory.json.gz": {
+      "sha256": "3407fe2a2473626fccced01c38cb21a74fcda93fff522e2cf6284a28f59f2b95",
+      "original_sha256": "f44564ade3ee747278db83d66d5924f50016014e7f9af40d34bfb089b99114eb",
+      "original_path": "artifacts/continuous-learning/round4/consistent-stencil-cold/trajectory.json",
+      "compression": "gzip"
+    }
+  }
+}

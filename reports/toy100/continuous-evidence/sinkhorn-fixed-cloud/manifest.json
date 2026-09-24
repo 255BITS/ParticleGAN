@@ -1,0 +1,29 @@
+{
+  "scope": "free-particle geometric diagnostic, not a GAN training result",
+  "files": {
+    "original-source.py.gz": {
+      "original_sha256": "d62c6a27338371036690f780af86420d87d251e1fdebaab92a41b6ba58119622",
+      "sha256": "14b8eff33a6622c6e60fa1b7de1f099b01b2564e65794900e3983d40629c774e"
+    },
+    "coincident-cloud.json.gz": {
+      "original_sha256": "7c55f8ff1668b1708e6f60e86e3079664965845c04be5b637fad07c2d1632e29",
+      "sha256": "b71aad94572c59567fa0681a1fc2267ccf24c31ac0cf1cdd1ee9bf4d888a9017"
+    },
+    "distinct-cloud.json.gz": {
+      "original_sha256": "7a1a74e0789a56922ace0b3e7943d44d607233232a5f4249146b4fd188518ee3",
+      "sha256": "b364b98ff5a2dd948959088c4ebb66c4baee094af49a612f69a86425f35ee30a"
+    },
+    "distinct-source.py.gz": {
+      "original_sha256": "c4d45c978ad20ceb487b07d919671612de3f2ebaaec96fb408c90f757ffb50de",
+      "sha256": "aec6a1bc784c8c086210685b0f5c92fda6e85e518b20f47589252a591fcc1a16"
+    },
+    "coincident.log.gz": {
+      "original_sha256": "ecd3c5d71525a4371caf0542426ac46a650b2ae3eaa547ab323977e92b7bb0ca",
+      "sha256": "8247b339f92a7c3780d22f6d5f31af170d0e4cce50773d3ce175056cfea1ebec"
+    },
+    "distinct.log.gz": {
+      "original_sha256": "bcae965aee174ae6c00fe555d47b7b58c5e870827fb1d94ec2f14074c005d229",
+      "sha256": "ba4e875744de174b6724a9c00e1555f331df8dc0dc2013236ebc09dc46037ca1"
+    }
+  }
+}

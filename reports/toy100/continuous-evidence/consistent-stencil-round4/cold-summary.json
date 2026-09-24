@@ -1,0 +1,86 @@
+{
+  "stages": [
+    {
+      "task": "trajectory",
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 0.0009426623582839966,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.019057337641716004
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 18,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 18,
+          "first_pass_step": 117,
+          "stable_from_step": 117,
+          "stable_from_seconds": 1.8004406651016325,
+          "confirmed_step": 184,
+          "confirmed_seconds": 2.3356421540956944
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.46
+      },
+      "live": {
+        "identity_mse": 0.0009426623582839966
+      },
+      "seconds": 4.025733620859683
+    },
+    {
+      "task": "mode_hold",
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 7,
+            "op": ">=",
+            "threshold": 8,
+            "status": "FAIL",
+            "margin": -1
+          },
+          {
+            "metric": "hq",
+            "value": 0.78125,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "FAIL",
+            "margin": -0.11875000000000002
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.12847222222222224,
+        "confirmation_fraction": 2.0
+      },
+      "live": {
+        "modes": 7,
+        "hq": 0.78125
+      },
+      "seconds": 63.61875836690888
+    }
+  ],
+  "seconds": 67.68498305696994
+}

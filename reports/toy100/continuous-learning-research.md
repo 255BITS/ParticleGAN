@@ -1,5 +1,6 @@
 # Removing learning-rate decay: mechanism and validation
 
+Latest: [PR84 review and the leading partial candidate](continuous-round4.md).
 Latest follow-up: [PR81/PR82 review and alternating dynamics](continuous-round3.md).
 The older joint-field adapters changed update order; the independent
 alternating control clears trajectory acquisition. Eight completed follow-up
