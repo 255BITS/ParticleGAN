@@ -1,0 +1,27 @@
+{
+  "scope": "one original PR84 saved state 1325; read-only bank-swap diagnostic",
+  "training_candidate": false,
+  "shared_gate_eligible": false,
+  "input_states_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47",
+  "reuses_prior_fit_archive": "../pr84-critic-relaxation/manifest.json",
+  "files": {
+    "declaration.json": {
+      "sha256": "bd89935760c3547641ab536147cdcb5c61acd5d8a1c21e8f82b247182bd80b40",
+      "bytes": 1376,
+      "archive": "declaration.json.gz",
+      "archive_sha256": "15784e0eb85904abc5c5280a96b766158841508fdbcaea93ebf5cfe8836eaf88"
+    },
+    "summary.json": {
+      "sha256": "c03beab4331e00937b92a3da5dadc78a5a7cc6457af2fd2b45e8618e5d5afb4a",
+      "bytes": 41796,
+      "archive": "summary.json.gz",
+      "archive_sha256": "891a12cd3e9ea3cf537eba26388366f53313eaffdba83f3039350c992231491f"
+    },
+    "pr84_critic_bank_swap.py": {
+      "sha256": "3d138d964e3235060d1b87705a8ac6445c0325520665edd0859bddff59b952a6",
+      "bytes": 16939,
+      "archive": "pr84_critic_bank_swap.py.gz",
+      "archive_sha256": "301e7dcc427b92063037ec1003cec6a0dc0bd4f48102e273fde351ba0962858d"
+    }
+  }
+}
