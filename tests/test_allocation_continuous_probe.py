@@ -132,6 +132,20 @@ def test_first200_requires_full_state_and_controller_parity():
         probe.compare_first200(old, new)
 
 
+def test_original_hold_allows_only_declared_prefix_cadence_difference():
+    data = {key: "same" for key in ("warm_state_sha256", "final_state_sha256", "observations", "noise",
+                                     "final", "ema", "optimizer_final", "post_checkpoint_rate_ranges")}
+    data["dynamics_receipt"] = dict(records=[])
+    expected = deepcopy(data)
+    expected["diagnostic"] = [dict(step=s, hq=1.) for s in (10, 20, 50, 1000, 1001, 1010, 1210)]
+    disabled = deepcopy(data)
+    disabled["diagnostic"] = [dict(step=s, hq=1.) for s in (50, 1000, 1001, 1010, 1210)]
+    probe.compare_original(disabled, expected, [])
+    disabled["diagnostic"].pop()
+    with pytest.raises(RuntimeError, match="diagnostic"):
+        probe.compare_original(disabled, expected, [])
+
+
 def test_finite_audit_detects_optimizer_corruption_without_changing_state():
     local = {name: torch.nn.Linear(1, 1) for name in ("generator", "critic", "prior")}
     local["opt_g"] = torch.optim.Adam(local["generator"].parameters())
