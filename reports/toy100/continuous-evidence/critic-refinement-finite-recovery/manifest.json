@@ -1,0 +1,162 @@
+{
+  "config.json": {
+    "raw_sha256": "f8493ef926ed27cd0e0bbfab1dcd615551dc1fa81231ff3e131adfff7e9be5e7",
+    "raw_bytes": 1441,
+    "archive": "config.json",
+    "archive_sha256": "f8493ef926ed27cd0e0bbfab1dcd615551dc1fa81231ff3e131adfff7e9be5e7"
+  },
+  "continuation.json": {
+    "raw_sha256": "ff6a58b67312c4bb530232d9a612d6565b253fd7c9c5eaa5bb3c60c1fb63881e",
+    "raw_bytes": 718644,
+    "archive": "continuation.json.gz",
+    "archive_sha256": "8cb6d178451712e4e359a8302823ff28428a9558a57a2c311b4a188da5fd33b1"
+  },
+  "declaration.json": {
+    "raw_sha256": "aafa4f19e10b425a1f35d863bfa28e3e717d75236a9662ed661a3c2947b113fe",
+    "raw_bytes": 2942,
+    "archive": "declaration.json",
+    "archive_sha256": "aafa4f19e10b425a1f35d863bfa28e3e717d75236a9662ed661a3c2947b113fe"
+  },
+  "exact-fit.json": {
+    "raw_sha256": "88a0cf5e435d189d345cdf4dbd5a2b46cc2b1bd6063af6c9383192fedb023516",
+    "raw_bytes": 12956,
+    "archive": "exact-fit.json.gz",
+    "archive_sha256": "b34f9db6e0baf26df68919174be21a217e391d70994bdb058140ea99c3fe90a5"
+  },
+  "final-state.pt": {
+    "raw_sha256": "5887b77f3d586bd2a19c8557094a80747e49ba64252075254e649d4aca30814d",
+    "raw_bytes": 596236,
+    "archive": "final-state.pt.gz",
+    "archive_sha256": "06ae58b47548ec04b60f0cdb43079da53edb24240534410207cc9e87f871cd54"
+  },
+  "gate.json": {
+    "raw_sha256": "c672db31cec2448cfca32eabf9896e5cff7e7af6952ee56364d5699e58a6c60c",
+    "raw_bytes": 85229,
+    "archive": "gate.json",
+    "archive_sha256": "c672db31cec2448cfca32eabf9896e5cff7e7af6952ee56364d5699e58a6c60c"
+  },
+  "source/benchmarks/locked_shared/mode_hold.py": {
+    "raw_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "raw_bytes": 10774,
+    "archive": "source/benchmarks/locked_shared/mode_hold.py.gz",
+    "archive_sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828"
+  },
+  "source/benchmarks/toy100/continuous_probe.py": {
+    "raw_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "raw_bytes": 29080,
+    "archive": "source/benchmarks/toy100/continuous_probe.py.gz",
+    "archive_sha256": "5b6b82473026e8f57176e22a953c34b54e71d8a685effbdd080d07f48c30e613"
+  },
+  "source/benchmarks/transfer_suite/toy100_compatibility.py": {
+    "raw_sha256": "cab108b3cb26929862eea09e7e0be98efeb4e4a25b63679455348e8074adca69",
+    "raw_bytes": 38228,
+    "archive": "source/benchmarks/transfer_suite/toy100_compatibility.py.gz",
+    "archive_sha256": "d59bc6d713fe8352dc73a3fce93965c8f1d244312ed886f27880a729e301dbd4"
+  },
+  "source/configs/toy100/constraints_simple_regularization.json": {
+    "raw_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "raw_bytes": 1507,
+    "archive": "source/configs/toy100/constraints_simple_regularization.json.gz",
+    "archive_sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f"
+  },
+  "source/particlegan/gan_loss.py": {
+    "raw_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "raw_bytes": 7960,
+    "archive": "source/particlegan/gan_loss.py.gz",
+    "archive_sha256": "0d5f99f7ef077a56b4dc06791a60d83eba34740cf3f2d7edc0cfccfac38e7563"
+  },
+  "source/particlegan/grad_regularizers.py": {
+    "raw_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "raw_bytes": 17129,
+    "archive": "source/particlegan/grad_regularizers.py.gz",
+    "archive_sha256": "4c0d42678efe66e2ae2ce36e4c7808866a996d88ad5ecaa7d32097fd4e52fabe"
+  },
+  "source/reports/toy100/alternating_curvature_scratch.py": {
+    "raw_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "raw_bytes": 16689,
+    "archive": "source/reports/toy100/alternating_curvature_scratch.py.gz",
+    "archive_sha256": "4655b8735ed1df2ff0051b7e1816df9084b9c639c1f92bf6c0d8f62c78ca024c"
+  },
+  "source/reports/toy100/pr84_critic_refinement.py": {
+    "raw_sha256": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11",
+    "raw_bytes": 12493,
+    "archive": "source/reports/toy100/pr84_critic_refinement.py.gz",
+    "archive_sha256": "28248669061dc5ded370eb210fb9fece4f448891f6551ec646d9075f73e3e1f6"
+  },
+  "source/reports/toy100/pr84_critic_refinement_after_step.py": {
+    "raw_sha256": "d8dac5219dac0bb8d007c455156caa84a4d75ab77f3a5e1432d18da141b7255c",
+    "raw_bytes": 8121,
+    "archive": "source/reports/toy100/pr84_critic_refinement_after_step.py.gz",
+    "archive_sha256": "afe26a02156e030ab9975959e9731ddb3542f9c64a231d108e4e24c73c9b8302"
+  },
+  "source/reports/toy100/pr84_critic_refinement_capture.py": {
+    "raw_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+    "raw_bytes": 7367,
+    "archive": "source/reports/toy100/pr84_critic_refinement_capture.py.gz",
+    "archive_sha256": "6bd7873bccd4a87bb4c1f74a133fe378a24a2d0eea260a628761007183526135"
+  },
+  "source/reports/toy100/pr84_critic_refinement_cold.py": {
+    "raw_sha256": "742693fe0d1a3186c145490e1576ae4ccf19f8f49d242e9dff2e79543ed8084e",
+    "raw_bytes": 9922,
+    "archive": "source/reports/toy100/pr84_critic_refinement_cold.py.gz",
+    "archive_sha256": "0339cdd7272926c708f183fa2b92debcff55fdfe860d8bb3dc0fe36f09fa3f2a"
+  },
+  "source/reports/toy100/pr84_critic_refinement_finite.py": {
+    "raw_sha256": "e6668d711a4b98fbcb232a3a350e612003e3eacdc5942b6508a9509f98519561",
+    "raw_bytes": 6690,
+    "archive": "source/reports/toy100/pr84_critic_refinement_finite.py.gz",
+    "archive_sha256": "3cf939da23001f4a4af82fee7440796d05194f0ad50e116110e3b1575ea11316"
+  },
+  "source/reports/toy100/pr84_critic_refinement_recovery.py": {
+    "raw_sha256": "3a61f32d4f4f8a36b996a01d86403f821aa39080147782d20e11986ca0bd4a1a",
+    "raw_bytes": 12895,
+    "archive": "source/reports/toy100/pr84_critic_refinement_recovery.py.gz",
+    "archive_sha256": "63a606795314fb454e2756b3b87ec94c0499d3aebc5b9e8663c206ad962fe40f"
+  },
+  "source/reports/toy100/pr84_critic_refinement_resume.py": {
+    "raw_sha256": "9b23c40b3263753552f69860404759eded03ec2ac84f8c592f403caff804264b",
+    "raw_bytes": 15563,
+    "archive": "source/reports/toy100/pr84_critic_refinement_resume.py.gz",
+    "archive_sha256": "f3ab4eaf8bfb4fee990ca7fe0df06ae93eb7c639f6bfb3cc96693461b9b0d1c2"
+  },
+  "source/reports/toy100/pr84_critic_relaxation.py": {
+    "raw_sha256": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+    "raw_bytes": 19582,
+    "archive": "source/reports/toy100/pr84_critic_relaxation.py.gz",
+    "archive_sha256": "51346022e1ca28af02828681e9d9fa1cb79b36ec144987e2103be2904d127d2e"
+  },
+  "source/reports/toy100/pr84_smoothed_candidate.py": {
+    "raw_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "raw_bytes": 6530,
+    "archive": "source/reports/toy100/pr84_smoothed_candidate.py.gz",
+    "archive_sha256": "ec9ede71c84a00dcfb965dd8788caaccea204107f1357032397df14764d684eb"
+  },
+  "source/tests/test_pr84_critic_refinement_after_step.py": {
+    "raw_sha256": "9b51a255c5a812703386d47c3e188b1019cc7cf52826533e7daa3b47e296c12d",
+    "raw_bytes": 4500,
+    "archive": "source/tests/test_pr84_critic_refinement_after_step.py.gz",
+    "archive_sha256": "34a6a49ab242fddf5274897112e5f142860380f3fda2582b975d80f9e359d0be"
+  },
+  "source/tests/test_pr84_critic_refinement_finite.py": {
+    "raw_sha256": "c4870cfe2256b2d13150391a8de529c3a8a89936d0248a990763291f3e54c7b9",
+    "raw_bytes": 6177,
+    "archive": "source/tests/test_pr84_critic_refinement_finite.py.gz",
+    "archive_sha256": "c57e358787dee83fdea8901ed2380495366329f8797e46a67fd320505c99f5a9"
+  },
+  "transformed-mode-hold.py": {
+    "raw_sha256": "149daa9be86c3bc4d01a1c1067dab45d758f8dcda91e3819e78845213fc9af54",
+    "raw_bytes": 6671,
+    "archive": "transformed-mode-hold.py.gz",
+    "archive_sha256": "6ec286dd1d8257f106ebe473f876313ee33a63a0545dc0af96196e5be22cd6f4"
+  },
+  "finite-tests.txt": {
+    "raw_sha256": "ade48b15ce94417de839073aa3e85f8ccdcba79db670b01ac38c361ac9b9ee04",
+    "raw_bytes": 98,
+    "archive": "finite-tests.txt"
+  },
+  "after-step-tests.txt": {
+    "raw_sha256": "9c9bbac58e64ee541d269ff1bc3a8f789bc33823565ed5fc33ed74db22ce6f5e",
+    "raw_bytes": 99,
+    "archive": "after-step-tests.txt"
+  }
+}

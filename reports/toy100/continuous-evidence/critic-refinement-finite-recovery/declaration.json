@@ -1,0 +1,38 @@
+{
+  "method": "pr84_critic_refinement_with_later_nonfinite_trial_rejection",
+  "capture_sha256": "19ceb38a92ba95ffaccd3aafbda55bbd77917765612666d923e986e5523d6965",
+  "source_hashes": {
+    "reports/toy100/pr84_critic_refinement_finite.py": "e6668d711a4b98fbcb232a3a350e612003e3eacdc5942b6508a9509f98519561",
+    "reports/toy100/pr84_critic_refinement_after_step.py": "d8dac5219dac0bb8d007c455156caa84a4d75ab77f3a5e1432d18da141b7255c",
+    "reports/toy100/pr84_critic_refinement_recovery.py": "3a61f32d4f4f8a36b996a01d86403f821aa39080147782d20e11986ca0bd4a1a",
+    "reports/toy100/pr84_critic_refinement_resume.py": "9b23c40b3263753552f69860404759eded03ec2ac84f8c592f403caff804264b",
+    "reports/toy100/pr84_critic_refinement_capture.py": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+    "reports/toy100/pr84_critic_refinement_cold.py": "742693fe0d1a3186c145490e1576ae4ccf19f8f49d242e9dff2e79543ed8084e",
+    "reports/toy100/pr84_critic_refinement.py": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11",
+    "reports/toy100/pr84_critic_relaxation.py": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/transfer_suite/toy100_compatibility.py": "cab108b3cb26929862eea09e7e0be98efeb4e4a25b63679455348e8074adca69",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "tests/test_pr84_critic_refinement_finite.py": "c4870cfe2256b2d13150391a8de529c3a8a89936d0248a990763291f3e54c7b9",
+    "tests/test_pr84_critic_refinement_after_step.py": "9b51a255c5a812703386d47c3e188b1019cc7cf52826533e7daa3b47e296c12d"
+  },
+  "order": [
+    "exact original failed fit",
+    "same fit with later-invalid rejection",
+    "updates472 through491"
+  ],
+  "initial_snapshot_stage": "before gradient, AFTER set_step; skip only first set_step",
+  "original_host_budget": 1200,
+  "noise_horizon": 1200,
+  "start": 472,
+  "end": 491,
+  "configuration_sha256": "f8493ef926ed27cd0e0bbfab1dcd615551dc1fa81231ff3e131adfff7e9be5e7",
+  "numerical_criteria": "exact failed-fit recovery;20 finite accepted states with constant rates and once-only moments",
+  "no_quality_threshold_for_this_cold_state_filter": true,
+  "shared_gate_eligible": false
+}
