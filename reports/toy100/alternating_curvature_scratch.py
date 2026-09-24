@@ -141,22 +141,132 @@ class AlternatingCurvatureRecorder:
             curvature_bound=self.curvature_bound,advantage_gate=self.advantage_gate,
             outer_steps=self.outer_steps,gate_open=len(self.records)-len(closed),bound_evaluated=len(closed),
             bound_active=sum(r['factor']<1 for r in closed),rho=stats([r['rho'] for r in closed]),
-            factor=stats([r['factor'] for r in closed]),critic_advantage=stats([r['critic_advantage'] for r in self.records]),
-            gradient_evaluations_per_outer_step=(self.outer_steps+len(closed))/self.outer_steps if self.outer_steps else None,
+            factor=stats([r['factor'] for r in closed]),
+            d_rho=stats([r.get('d',{}).get('rho') for r in closed]),d_factor=stats([r.get('d',{}).get('factor') for r in closed]),
+            d_bound_active=sum(r.get('d',{}).get('factor',1.)<1 for r in closed),critic_advantage=stats([r['critic_advantage'] for r in self.records]),
+            gradient_evaluations_per_outer_step=(sum(3 if 'd' in r else 1 if r['gate_open'] else 2 for r in self.records)/self.outer_steps) if self.outer_steps else None,
             moment_updates_per_outer_step=1,rng_replay_verified=self.rng_replay_verified,
             update_order='alternating: D Adam step, then G+prior Adam step against the new D',
             host_source=self.host_source,records=self.records)
 
 
+def _metric(opt):
+    values=[]
+    for group in opt.param_groups:
+        for p in group['params']:
+            state=opt.state[p]
+            denominator=(state['exp_avg_sq']/(1-group['betas'][1]**float(state['step']))).sqrt()+group['eps']
+            values.append(group['lr']/denominator.double())
+    return values
+
+
+def _rho(base,new,g0,g1,metric):
+    num=den=0.
+    for b,n,a,c,m in zip(base,new,g0,g1,metric):
+        num+=float((m*(c-a).double().square()).sum());den+=float(((n-b).double().square()/m).sum())
+    rho=math.sqrt(num/den) if den>0 else 0.
+    if not math.isfinite(rho):raise FloatingPointError('nonfinite own-curvature ratio')
+    return rho
+
+
+class BothBoundRecorder(AlternatingCurvatureRecorder):
+    """Alternating Adam with the same-sample own-curvature bound on D and G.
+
+    Pass 0: D takes its ordinary Adam step (D0 -> D1); G's gradient is ignored.
+    Pass 1 (same data/noise) at (D1, G0): D's own field change gives rho_D and
+    D* = D0 + min(1, c/rho_D)(D1 - D0); G's gradient at (D*, G0) then takes
+    G's ordinary Adam step (G0 -> G1). Pass 2 at (D*, G1) gives rho_G and
+    G = G0 + min(1, c/rho_G)(G1 - G0). Each player's moments advance once and
+    G still responds to the D that actually materializes.
+    """
+
+    def __init__(self,start_step=0,curvature_bound=.25):
+        super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None)
+
+    def phases(self,step,opt_d,opt_g,local):
+        if not self.enabled or step<self.start_step:
+            self.passthrough=True
+            try:yield 0
+            finally:self.passthrough=False
+            return
+        if self.optimizers is None:
+            self.optimizers=(opt_d,opt_g)
+            self.rows={opt:dict(role=role,calls=0) for role,opt in zip(('d','g'),self.optimizers)}
+        if self.optimizers!=(opt_d,opt_g):raise RuntimeError('game optimizers changed')
+        streams=[v for v in local.values() if isinstance(v,torch.Generator)]
+        policy=local.get('noise_policy')
+        if policy is not None:streams.extend(v for name in ('input_stream','output_stream')
+            if isinstance((v:=getattr(policy,name,None)),torch.Generator))
+        streams=list({id(s):s for s in streams}.values())
+        buffers=[(b,b.detach().clone()) for name in ('generator','critic','prior')
+                 if isinstance((m:=local.get(name)),torch.nn.Module) for b in m.buffers()]
+        self.d0=[p.detach().clone() for p in self._params(opt_d)]
+        self.g_base=[p.detach().clone() for p in self._params(opt_g)]
+        rng_before=self._rng(streams);self.advantage=None;self.row=dict(outer_step=self.outer_steps+1)
+        rng_after=None
+        for phase in range(3):
+            if phase:
+                self._set_rng(streams,rng_before)
+                with torch.no_grad():
+                    for b,saved in buffers:b.copy_(saved)
+            self.phase=phase
+            yield phase
+            state=self._rng(streams)
+            if rng_after is None:rng_after=state
+            elif not all(torch.equal(a,b) for a,b in zip(rng_after,state)):
+                raise RuntimeError('replayed block consumed a different RNG pattern')
+            else:self.rng_replay_verified+=1
+        self.row['critic_advantage']=self.advantage;self.row['gate_open']=False
+        self.row['rho'],self.row['factor']=self.row['g']['rho'],self.row['g']['factor']
+        self.records.append(self.row)
+        self.phase=None;self.outer_steps+=1
+        if self.accounting is not None:self.accounting(self.rows[opt_d]['calls'],self.outer_steps)
+
+    @torch.no_grad()
+    def step(self,optimizer,ordinary_step,closure=None):
+        if self.passthrough:return ordinary_step(optimizer,closure=closure)
+        if self.phase is None or optimizer not in self.rows or closure is not None:
+            raise RuntimeError('optimizer call outside the declared game update')
+        self.rows[optimizer]['calls']+=1
+        opt_d,opt_g=self.optimizers
+        grads=lambda opt:[p.grad.detach().clone() for p in self._params(opt)]
+        if optimizer is opt_d:
+            if self.phase==0:
+                self.gd0=grads(opt_d);ordinary_step(opt_d)
+                self.metric_d=_metric(opt_d);self.d1=[p.detach().clone() for p in self._params(opt_d)]
+                for p,v in zip(self._params(opt_g),self.g_base):p.copy_(v)
+            elif self.phase==1:
+                rho=_rho(self.d0,self.d1,self.gd0,grads(opt_d),self.metric_d)
+                factor=min(1.,self.curvature_bound/rho) if rho>0 else 1.
+                for p,b,n in zip(self._params(opt_d),self.d0,self.d1):p.copy_(torch.lerp(b,n,factor) if factor<1 else n)
+                self.d_star=[p.detach().clone() for p in self._params(opt_d)]
+                self.row['d']=dict(rho=rho,factor=factor)
+            else:
+                for p,v in zip(self._params(opt_d),self.d_star):p.copy_(v)
+            return None
+        if self.phase==0:
+            for p,v in zip(self._params(opt_g),self.g_base):p.copy_(v)
+            for p,v in zip(self._params(opt_d),self.d1):p.copy_(v)
+        elif self.phase==1:
+            self.gg0=grads(opt_g);ordinary_step(opt_g)
+            self.metric_g=_metric(opt_g);self.g1=[p.detach().clone() for p in self._params(opt_g)]
+        else:
+            rho=_rho(self.g_base,self.g1,self.gg0,grads(opt_g),self.metric_g)
+            factor=min(1.,self.curvature_bound/rho) if rho>0 else 1.
+            for p,b,n in zip(self._params(opt_g),self.g_base,self.g1):p.copy_(torch.lerp(b,n,factor) if factor<1 else n)
+            self.row['g']=dict(rho=rho,factor=factor)
+        return None
+
+
 @contextmanager
-def alternating_curvature(task='mode_hold',**options):
+def alternating_curvature(task='mode_hold',bound_d=False,**options):
     from benchmarks.locked_shared import mode_hold,trajectory
     module={'mode_hold':mode_hold,'trajectory':trajectory}[task]
     tree,_,original_sha=transformed_function(module,task)
     calls=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='phases']
     if len(calls)!=1:raise RuntimeError('expected one phase iterator')
     calls[0].args.append(ast.Call(func=ast.Name(id='locals',ctx=ast.Load()),args=[],keywords=[]));ast.fix_missing_locations(tree)
-    source=ast.unparse(tree)+'\n';recorder=AlternatingCurvatureRecorder(**options)
+    source=ast.unparse(tree)+'\n';recorder=(BothBoundRecorder if bound_d else AlternatingCurvatureRecorder)(**options)
     recorder.host_source=dict(task=task,original_function_sha256=original_sha,generated_function_sha256=sha(source.encode()))
     ordinary_step=torch.optim.Adam.step
     original_d_loss=GANLoss.d_loss

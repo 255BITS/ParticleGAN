@@ -5,7 +5,7 @@ import torch
 
 from benchmarks.locked_shared import mode_hold
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy
-from reports.toy100.alternating_curvature_scratch import AlternatingCurvatureRecorder, alternating_curvature
+from reports.toy100.alternating_curvature_scratch import AlternatingCurvatureRecorder, BothBoundRecorder, alternating_curvature
 
 
 def _host(context=None, steps=3):
@@ -62,4 +62,37 @@ def test_bound_uses_alternating_field_and_scales_only_g():
     assert y.item() == pytest.approx(y_new)
     assert recorder.records[-1]["rho"] == pytest.approx(rho)
     assert x.item() == pytest.approx(1. + delta * min(1., .25 / rho))
+    assert opt_g.state[x]["step"] == opt_d.state[y]["step"] == 1
+
+
+def test_both_bound_unbounded_matches_plain_alternating_adam_exactly():
+    plain = _host()
+    wrapped = _host(alternating_curvature(start_step=0, curvature_bound=1e9, bound_d=True))
+    assert plain[0] == wrapped[0]
+    assert all(torch.equal(a, b) for a, b in zip(plain[1:3], wrapped[1:3]))
+    recorder = wrapped[3]
+    assert recorder.rng_replay_verified == 2 * recorder.outer_steps
+    assert all(r["d"]["factor"] == r["g"]["factor"] == 1. for r in recorder.records)
+
+
+def test_both_bound_scales_d_then_g_responds_to_bounded_d():
+    x = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([x], lr=1., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+    a, b = 3., 4.
+    recorder = BothBoundRecorder(curvature_bound=.25)
+    for phase in recorder.phases(0, opt_d, opt_g, {}):
+        y.grad = (-x + b * y).detach().clone()
+        recorder.step(opt_d, torch.optim.Adam.step)
+        x.grad = (y + a * x).detach().clone()
+        recorder.step(opt_g, torch.optim.Adam.step)
+    # D: grad 7, Adam step -1, P=1/7, rho_D=b*P=4/7 -> factor .4375.
+    y_star = 2. - .25 / (4. / 7.)
+    g0 = y_star + a
+    rho_g = a / g0
+    assert recorder.records[-1]["d"]["rho"] == pytest.approx(4. / 7.)
+    assert y.item() == pytest.approx(y_star)
+    assert recorder.records[-1]["g"]["rho"] == pytest.approx(rho_g)
+    assert x.item() == pytest.approx(1. - min(1., .25 / rho_g))
     assert opt_g.state[x]["step"] == opt_d.state[y]["step"] == 1

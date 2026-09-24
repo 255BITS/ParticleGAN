@@ -36,18 +36,19 @@ def variants():
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--curvature-bound',type=float,default=1.)
-    parser.add_argument('--advantage-gate',type=float);args=parser.parse_args()
+    parser.add_argument('--advantage-gate',type=float)
+    parser.add_argument('--bound-d',action='store_true');args=parser.parse_args()
     config=json.loads((ROOT/'configs/toy100/constraints_simple_regularization.json').read_text())
     declaration=dict(methods=['identity','constant','alternating_curvature'],prefix_steps=1000,total_steps=1200,
         seed=0,shared_gate_eligible=False,scratch_optimizer_policy=METHOD,
-        solver=dict(curvature_bound=args.curvature_bound,advantage_gate=args.advantage_gate,update_order='alternating'),
+        solver=dict(curvature_bound=args.curvature_bound,advantage_gate=args.advantage_gate,bound_d=args.bound_d,update_order='alternating'),
         source={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in
         [Path(__file__),ROOT/'reports/toy100/alternating_curvature_scratch.py',ROOT/'reports/toy100/extra_adam_scratch.py',
          ROOT/'benchmarks/toy100/warm_equilibrium_probe.py',ROOT/'benchmarks/toy100/continuous_probe.py']})
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.with_suffix('.declaration.json').write_text(json.dumps(declaration,indent=2)+'\n')
     result=run_warm_variants(config,variants(),output_dir=args.output,
-        prefix_context=lambda:alternating_curvature(start_step=1000,curvature_bound=args.curvature_bound,advantage_gate=args.advantage_gate))
+        prefix_context=lambda:alternating_curvature(start_step=1000,curvature_bound=args.curvature_bound,**({'bound_d':True} if args.bound_d else {'advantage_gate':args.advantage_gate})))
     print(json.dumps(result,indent=2),flush=True)
 
 
