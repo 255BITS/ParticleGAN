@@ -26,12 +26,29 @@ from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
 from particlegan.gan_loss import GANLoss
 from reports.toy100.extra_adam_scratch import HOSTS, sha, transformed_function
 from reports.toy100.pr84_smoothed_candidate import (
-    METHOD as PR84_METHOD, SmoothedBothBoundRecorder,
+    G_CURVATURE_BOUND, METHOD as PR84_METHOD, SmoothedBothBoundRecorder,
 )
 
 
-METHOD = "pr84_stencil_with_particle_exit_clip"
+METHOD = "pr84_stencil_with_open_cap_rho_tighten"
 FENCE_MAD_SCALE = 3 * 1.4826
+
+
+def open_cap_scale(rho: float, bound: float = G_CURVATURE_BOUND) -> float:
+    """Extra scale on a step whose own-curvature ratio is still under the cap.
+
+    PR84 already uses ``min(1, bound / rho)``, which leaves every rho ≤ bound
+    at a full step. PR #92 separates that open band from acquisition: every
+    useful acquisition step has rho ≥ .538, and every open-cap exit has
+    rho ≤ .25. The extra scale is ``rho / bound`` only in that open band, so
+    the applied factor is ``min(rho / bound, bound / rho)``. It is 1 at the
+    existing bound and does not change any step with rho above the bound.
+    """
+    if not math.isfinite(rho) or rho < 0 or not math.isfinite(bound) or bound <= 0:
+        raise ValueError("invalid open-cap scale")
+    if rho > bound:
+        return 1.0
+    return rho / bound
 
 
 def support_fence(reals: torch.Tensor) -> torch.Tensor:
@@ -118,17 +135,45 @@ class ExitAwareRecorder(SmoothedBothBoundRecorder):
     def __init__(self, *, start_step=0):
         super().__init__(start_step=start_step)
         self.clip_enabled = False
+        self.rho_band = False
         self._reals = None
         self.clip_count = 0
         self.clipped_particles = 0
+        self.rho_tightens = 0
 
     @torch.no_grad()
     def step(self, optimizer, ordinary_step, closure=None):
         result = super().step(optimizer, ordinary_step, closure)
-        if not self._should_clip(optimizer):
-            return result
-        self._clip_exits()
+        if self._should_rho(optimizer):
+            self._tighten_open_cap()
+        if self._should_clip(optimizer):
+            self._clip_exits()
         return result
+
+    def _should_rho(self, optimizer) -> bool:
+        return bool(
+            self.rho_band and not self.passthrough and self.phase == 2
+            and self.optimizers is not None and optimizer is self.optimizers[1]
+            and "g" in self.row)
+
+    def _tighten_open_cap(self):
+        rho = float(self.row["g"]["rho"])
+        extra = open_cap_scale(rho, self.curvature_bound)
+        self.row["open_cap_scale"] = extra
+        if extra >= 1 - 1e-12:
+            return
+        opt_g = self.optimizers[1]
+        for param, base in zip(self._params(opt_g), self.g_base):
+            param.copy_(torch.lerp(base, param.detach(), extra))
+        self.row["g"]["factor"] = float(self.row["g"]["factor"]) * extra
+        self.row["factor"] = self.row["g"]["factor"]
+        self.rho_tightens += 1
+        host_step = self.start_step + int(self.row.get("outer_step", 0))
+        print(
+            f"event=RHO_TIGHTEN update={host_step} rho={rho:.4f} "
+            f"scale={extra:.4f} factor={self.row['factor']:.4f}",
+            flush=True,
+        )
 
     def _should_clip(self, optimizer) -> bool:
         return bool(
@@ -186,6 +231,8 @@ class ExitAwareRecorder(SmoothedBothBoundRecorder):
         value.update(
             method=METHOD, scratch_optimizer_policy=METHOD,
             base_method=PR84_METHOD, exit_clip=self.clip_enabled,
+            rho_band=self.rho_band, rho_tightens=self.rho_tightens,
+            open_cap_rule="when rho <= 0.25, extra scale rho/0.25; acquisition band untouched",
             exit_clip_updates=self.clip_count,
             exit_clipped_particles=self.clipped_particles,
             margin_proxy="nearest real in the current minibatch",

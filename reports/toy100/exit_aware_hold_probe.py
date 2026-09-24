@@ -51,14 +51,15 @@ def main():
     def activate(method, state, prefix):
         recorder, _ = prefix
         recorder.enabled = method in ("original", "exitclip")
-        recorder.clip_enabled = method == "exitclip"
+        recorder.clip_enabled = False
+        recorder.rho_band = method == "exitclip"
         completed, target = state["completed_steps"], state["target_steps"]
         recorder.accounting = lambda calls, outer: state["declare_optimizer_accounting"](
             calls=completed + calls + target - completed - outer, moment_updates=target)
         receipt = dict(method=method, shared_gate_eligible=False,
                        scratch_optimizer_policy=METHOD if recorder.clip_enabled else "pr84")
         print(json.dumps(dict(event="VARIANT_START", variant=method, completed=completed,
-                              clip=recorder.clip_enabled)), flush=True)
+                              rho_band=recorder.rho_band)), flush=True)
         if method == "identity":
             yield receipt
         else:

@@ -4,13 +4,20 @@ import torch
 
 from benchmarks.locked_shared.mlp import SimpleMLPGenerator
 from reports.toy100.exit_aware_step_clip import (
-    exit_scales, realize_output_scales, support_fence,
+    exit_scales, open_cap_scale, realize_output_scales, support_fence,
 )
 
 
 def _reals(n=32, sigma=0.07, seed=0):
     gen = torch.Generator().manual_seed(seed)
     return torch.randn(n, 2, generator=gen) * sigma
+
+
+def test_open_band_scales_by_rho_over_bound_and_leaves_acquisition_alone():
+    assert open_cap_scale(0.25) == 1.0
+    assert open_cap_scale(0.171) == 0.171 / 0.25
+    assert open_cap_scale(0.538) == 1.0
+    assert open_cap_scale(1.83) == 1.0
 
 
 def test_fence_is_a_handful_of_real_nearest_neighbor_lengths():
