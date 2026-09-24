@@ -1208,7 +1208,9 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     run_parser = commands.add_parser("run", help="train and grade fresh evidence")
-    run_parser.add_argument("--config", type=Path, required=True)
+    run_parser.add_argument("--config", type=Path,
+                            default=Path("configs/toy100/shared_candidate.json"),
+                            help="candidate recipe (default: the verified shared 22-toy candidate)")
     run_parser.add_argument("--output", type=Path, required=True)
     run_parser.add_argument("--with-default-control", action="store_true")
     regrade_parser = commands.add_parser("regrade", help="independently grade saved evidence")

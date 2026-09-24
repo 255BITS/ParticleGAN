@@ -72,4 +72,4 @@ def test_unselected_invalid_override_blocks_individual_run(tmp_path, monkeypatch
 
 def test_default_command_uses_recommended_manifest():
     args = cli._parser().parse_args(["run", "--output", "/tmp/toy100-example", "--no-render"])
-    assert str(args.config) == "configs/toy100/recommended.json"
+    assert str(args.config) == "configs/toy100/shared_candidate.json"

@@ -29,8 +29,8 @@ def _parser():
     parser = argparse.ArgumentParser(description="100-Gaussian training and evidence gate")
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run", help="train then gate all problems, or one named problem")
-    run.add_argument("--config", type=Path, default=Path("configs/toy100/recommended.json"),
-                     help="frozen JSON/TOML recipe (default: configs/toy100/recommended.json)")
+    run.add_argument("--config", type=Path, default=Path("configs/toy100/shared_candidate.json"),
+                     help="frozen JSON/TOML recipe (default: the verified shared 22-toy candidate)")
     run.add_argument("--output", type=Path, required=True, help="new run directory")
     run.add_argument("--problem", choices=PROBLEM_NAMES, help="individual deep dive")
     run.add_argument("--steps", type=int, help="override training budget for a deep dive")

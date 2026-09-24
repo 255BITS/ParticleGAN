@@ -34,6 +34,26 @@ from lib.toy_models import SimpleMLPGenerator
 from particlegan import get_recipe, learning_rate_scale
 
 
+def test_legacy_runner_preserves_original_error_in_failed_evidence(tmp_path, monkeypatch):
+    from benchmarks.transfer_suite import toy100_compatibility as compatibility
+
+    def fail(*args, **kwargs):
+        raise RuntimeError("original legacy training failure")
+
+    monkeypatch.setattr(compatibility, "run_noisy_legacy", fail)
+    config = tmp_path / "candidate.json"
+    config.write_text(json.dumps(dict(name="error_probe")))
+    directory = tmp_path / "episode"
+    records = compatibility.run(config, directory, tasks=("trajectory",))
+    assert len(records) == 1
+    assert records[0]["noise_applied"] is False
+    with gzip.open(directory / records[0]["artifact"], "rt") as stream:
+        record = json.load(stream)
+    assert "original legacy training failure" in record["result"]["error"]
+    assert "only vector/image hosts" not in record["result"]["error"]
+    assert toy_suite._episode_rows(directory, ("trajectory",), candidate=True)["status"] != "PASS"
+
+
 def _write_candidate_episode(directory, mutate=lambda record: None, *, learned=False,
                              isolated=False, cap=None, network_floor=None):
     jobs, profile = load_declaration()

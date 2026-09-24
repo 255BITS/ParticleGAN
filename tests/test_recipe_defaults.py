@@ -93,6 +93,15 @@ def test_v3_optimizer_roles_resolve_to_recorded_absolute_rates():
     assert all(group['betas'] == (0., .99) for opt in (opt_g, opt_d) for group in opt.param_groups)
 
 
+def test_json_integer_zero_moments_construct_real_adam_optimizers():
+    recipe = get_recipe(num_particles=8, z_dim=2, betas=[0, .999], prior_betas=[0, 0])
+    optimizers = recipe.make_optimizers(nn.Linear(2, 2), nn.Linear(2, 1), recipe.make_prior())
+    for optimizer in optimizers:
+        for group in optimizer.param_groups:
+            assert all(type(value) is float for value in group['betas'])
+    assert optimizers[0].param_groups[1]['betas'] == (0., 0.)
+
+
 @pytest.mark.parametrize('version', ['gan_v1', 'gan_v2', 'gan_v3'])
 def test_complete_old_receipts_still_restore_without_preset_dispatch(version):
     recipe = Recipe(**ARCHIVED['recipes'][version]).replace(num_particles=8, z_dim=2, batch_size=4, total_steps=2)

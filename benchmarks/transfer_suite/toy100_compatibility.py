@@ -597,7 +597,8 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
             json.dumps(result, allow_nan=False)
         except Exception:
             result = dict(error=traceback.format_exc(), seconds=time.perf_counter() - started)
-            context = dict(applied=[], shapes={}, host_recipe=host_recipe(base, spec))
+            context = dict(applied=[], shapes={}, host_recipe=(
+                base if spec["runner"] == "legacy" else host_recipe(base, spec)))
         receipt = context.get("noise_receipt")
         if spec["runner"] in ("vector", "image") and not result.get("error"):
             receipt = _native_noise_receipt(context, noise, spec, result)
