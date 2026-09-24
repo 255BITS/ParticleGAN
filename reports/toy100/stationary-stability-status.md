@@ -5,6 +5,17 @@ resolved it.** The selected PR84 method now fails a longer continuation from
 the same passing state. Its short warm pass and excellent final checkpoint
 both conceal failures in between. The fixed dataset never changes.
 
+**Subsequent exact diagnosis and new attempt:** the [fifth round](continuous-round5.md)
+checks every update through2400. Original PR84 fails89 of1,200 later checks,
+while a new G opponent-prediction rule fails22/1,200 despite finishing at
+8 modes/HQ1.0. The scheduled control passes1200/1200. Original training state
+and all shared archived observations remain exact; denser checks expose more
+failures. Prediction stops before cold tests. A saved-state diagnostic finds
+coherent outward G gradients across all16 held-out batches at1325, without a
+sudden change in Adam's denominator. See the linked report for the complete
+ledger, direction tests and exact evidence. The ten-step results below retain
+the original diagnostic's provenance.
+
 ## New continuation result
 
 The candidate is the unchanged original PR84 G-only stencil on alternating
@@ -71,15 +82,16 @@ checks, not sustained training stability; that distinction remains essential.
 
 ## Research priority
 
-Same-dataset continuation is now the first research priority. The next small
-mechanism test should replay around the first observed1390 failure and nearby
-passing updates, comparing the complete game proposal and actual output motion.
-That separates accumulated drift from a discrete destructive proposal before
-trying another damping or acquisition correction. No such causal attribution
-has yet been performed for this longer run.
+Same-dataset continuation remains the first research priority. The exact replay
+now finds both a discrete destructive proposal at1325 and accumulated drift
+before mode loss at1533. All16 held-out G batches support a coherent wrong
+direction at1325. Another minibatch-average or scalar-damping grid is therefore
+not the indicated next test. Opponent prediction changes some directions but
+still fails the longer hold; the next mechanism must repair the surviving
+feedback failure in short saved-state continuations before another full run.
 
 After a new candidate's warm200 pass, extend that same branch through at least
-2400 before spending on additional acquisition hosts. A warm pass still cannot
+2400, checking every update, before spending on additional acquisition hosts. A warm pass still cannot
 qualify a frozen model: retain cold acquisition without decay from step1,
 followed by uninterrupted continuation of its own acquired state. Further
 continuation beyond2400 is required for survivors. At beta2=.999, the old

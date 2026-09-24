@@ -5,13 +5,17 @@ candidate has passed both acquisition and continued quality. Work here is
 limited to replacing those schedules with responsive training dynamics;
 production defaults have not been changed.
 
-**Latest stability review:** the selected PR84 adapter now also fails a
-same-dataset continuation to2400: warm200/200, then112/120 later checks;
-first observed failure1390, worst1540 at7 modes/HQ .78857, final8/HQ .99805.
-The scheduled control passes120/120. The exact warm state and first200 update
-records reproduce. Read the [current status and evidence](stationary-stability-status.md)
-before starting another method. Acquisition is still required, but delayed
-instability is now the first mechanism to isolate; the good endpoint hides it.
+**Latest stability investigation:** exact replay isolates a destructive
+generator update at1325 and accumulated mode loss beginning1533. All16 held-out
+generator minibatches at1325 push vulnerable particles outward; the raw field
+already points that way and Adam's denominator barely changes. G opponent
+prediction repairs some saved transitions and passes warm200, but fails22 of
+1,200 dense later checks through2400. Original PR84 fails89/1200 under the same
+dense observer; the scheduled control passes1200/1200. Both failed methods end
+with excellent quality. Exact archived original-state and predictor-prefix
+parity hold. Read the [fifth-round diagnosis and tests](continuous-round5.md)
+and [current status](stationary-stability-status.md) before proposing another
+method. Prediction is rejected before cold gates; no winner is selected.
 
 **Scope clarified September 23, 2026:** PR #60 targets initial acquisition and
 sustained live quality on a fixed target distribution without LR decay.
@@ -121,8 +125,10 @@ results are retained under [continuous-evidence](continuous-evidence/).
    only conditional local stability, never evidence of cold acquisition.
 3. For warm survivors, extend the same fixed-target branch to at least2400,
    preserving the original1200-step noise horizon and all optimizer/RNG state.
-   Check every ten updates after1200. This conditional stability filter now
-   precedes further acquisition hosts: PR84's short pass hid eight later failures.
+   Check **every update** after1200 using the round5 observer; ten-step sampling
+   missed many excursions. This conditional stability filter precedes further
+   acquisition hosts: both original PR84 and opponent prediction pass warm200
+   while failing longer continuation.
 4. For survivors, run full-budget cold trajectory first: 400 updates,
    identity MSE <= .02 and the original sustained gate. It has rejected the
    newest dynamics candidates cheaply. Trajectory is a fixed conditional
@@ -131,7 +137,7 @@ results are retained under [continuous-evidence](continuous-evidence/).
    other cheap hosts in the fail-fast screen. Do not run expensive downstream
    tasks after a failed full-budget host.
 5. Extend a surviving cold learner uninterrupted to at least 2400 mode-hold updates,
-   checking every ten updates after 1200. Keep noise burn-in tied to the original
+   checking every update after 1200. Keep noise burn-in tied to the original
    1200-update horizon; do not restart models, optimizer moments or RNG streams.
 6. A viable shared replacement still needs fresh older-19, the three strict
    native 100-mode cases, production common-22 replay, and longer continuation.
