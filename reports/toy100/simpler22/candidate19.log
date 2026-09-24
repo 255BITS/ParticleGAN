@@ -1,0 +1,96 @@
+START two_pole route=public primitives custom host + shared noise policy steps=80
+{"event": "DONE", "task": "two_pole", "status": "PASS", "suffix": 13, "live": {"mean_abs": 0.7280840873718262, "grad_med": 0.4428885281085968}, "error": null}
+START trajectory route=public primitives custom host + shared noise policy steps=400
+{"event": "DONE", "task": "trajectory", "status": "PASS", "suffix": 15, "live": {"identity_mse": 0.0009035340044647455}, "error": null}
+START residual_student route=public primitives custom host + shared noise policy steps=400
+{"event": "DONE", "task": "residual_student", "status": "PASS", "suffix": 20, "live": {"identity_mse": 0.0008941911510191858, "success_rate": 1.0, "wrong_pad_rate": 0.0}, "error": null}
+START unipolar route=public primitives custom host + shared noise policy steps=400
+unipolar_dir arm=locked_rpgan step=1/400 cover=0.0127 leak=0.2500 neu_hold=0.9915 cos_plus=+0.5000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=50/400 cover=0.7594 leak=0.0002 neu_hold=0.7942 cos_plus=+0.9991 hit=FAIL
+unipolar_dir arm=locked_rpgan step=100/400 cover=0.9491 leak=0.0000 neu_hold=0.8495 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=150/400 cover=0.9963 leak=0.0001 neu_hold=0.9831 cos_plus=+0.9998 hit=PASS
+unipolar_dir arm=locked_rpgan step=200/400 cover=0.9201 leak=0.0008 neu_hold=0.9703 cos_plus=+0.9990 hit=PASS
+unipolar_dir arm=locked_rpgan step=250/400 cover=0.9531 leak=0.0001 neu_hold=0.9820 cos_plus=+0.9998 hit=PASS
+unipolar_dir arm=locked_rpgan step=300/400 cover=0.9821 leak=0.0000 neu_hold=0.9823 cos_plus=+0.9997 hit=PASS
+unipolar_dir arm=locked_rpgan step=350/400 cover=0.9980 leak=0.0000 neu_hold=0.9907 cos_plus=+0.9999 hit=PASS
+unipolar_dir arm=locked_rpgan step=400/400 cover=0.9949 leak=0.0000 neu_hold=0.9954 cos_plus=+1.0000 hit=PASS
+unipolar_dir arm=locked_rpgan step=400 seed=0 cover=0.9949 leak=0.0000 neu_hold=0.9954 cos_plus=+1.0000 hit=PASS
+{"event": "DONE", "task": "unipolar", "status": "PASS", "suffix": 18, "live": {"cover": 0.994945920450391, "off_caption": 1.015144880995762e-05, "neu_hold": 0.9953550454229116}, "error": null}
+START ae_gan_hold route=public primitives custom host + shared noise policy steps=250
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=0 recon=1.2835 hold=1.4371 phase=init
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 recon=1.2449 hold=1.3573 loss=4.2007
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 recon=0.0101 hold=0.0284 loss=0.9803
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 recon=0.0145 hold=0.0185 loss=0.8248
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 recon=0.0086 hold=0.0198 loss=0.7685
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 recon=0.0065 hold=0.0065 loss=0.8468
+{"event": "DONE", "task": "ae_gan_hold", "status": "PASS", "suffix": 22, "live": {"recon_mse": 0.003769305534660816, "hold": 0.002489294856786728}, "error": null}
+START cover_leftover route=public primitives custom host + shared noise policy steps=800
+cover_leftover start arm=locked steps=800 seed=0 teacher=faithful_guard_e cover=1.5 penalty_coeff=1.0 kappa=1.0 fm=0.0 n_particles=12
+cover_leftover arm=locked step=1/800 d=0.7058 g=1.6844 cap=0.0000 u_kept=0.008 content=0.000 leak=0.000 err=0.749 covered=0
+cover_leftover arm=locked step=50/800 d=0.4471 g=1.5891 cap=0.0108 u_kept=0.223 content=0.364 leak=0.031 err=0.563 covered=0
+cover_leftover arm=locked step=100/800 d=0.7035 g=0.9816 cap=0.0000 u_kept=0.416 content=0.608 leak=0.037 err=0.411 covered=0
+cover_leftover arm=locked step=150/800 d=0.6970 g=0.8875 cap=0.0000 u_kept=0.508 content=0.752 leak=0.008 err=0.340 covered=0
+cover_leftover arm=locked step=200/800 d=0.6945 g=0.8122 cap=0.0000 u_kept=0.603 content=0.849 leak=0.011 err=0.268 covered=0
+cover_leftover arm=locked step=250/800 d=0.7017 g=0.7621 cap=0.0000 u_kept=0.689 content=0.925 leak=0.002 err=0.208 covered=0
+cover_leftover arm=locked step=300/800 d=0.6981 g=0.7297 cap=0.0000 u_kept=0.763 content=0.957 leak=0.008 err=0.157 covered=1
+cover_leftover arm=locked step=350/800 d=0.6943 g=0.7160 cap=0.0000 u_kept=0.818 content=0.981 leak=0.000 err=0.120 covered=1
+cover_leftover arm=locked step=400/800 d=0.6936 g=0.7052 cap=0.0000 u_kept=0.871 content=1.000 leak=0.004 err=0.085 covered=1
+cover_leftover arm=locked step=450/800 d=0.6942 g=0.6985 cap=0.0000 u_kept=0.919 content=1.004 leak=0.004 err=0.064 covered=1
+cover_leftover arm=locked step=500/800 d=0.6927 g=0.6944 cap=0.0000 u_kept=0.934 content=1.009 leak=0.006 err=0.044 covered=1
+cover_leftover arm=locked step=550/800 d=0.6941 g=0.6952 cap=0.0000 u_kept=0.962 content=0.996 leak=0.002 err=0.026 covered=1
+cover_leftover arm=locked step=600/800 d=0.6942 g=0.6927 cap=0.0000 u_kept=0.968 content=1.001 leak=0.011 err=0.022 covered=1
+cover_leftover arm=locked step=650/800 d=0.6944 g=0.6970 cap=0.0000 u_kept=0.976 content=1.001 leak=0.006 err=0.019 covered=1
+cover_leftover arm=locked step=700/800 d=0.6903 g=0.6958 cap=0.0000 u_kept=0.984 content=1.003 leak=0.003 err=0.011 covered=1
+cover_leftover arm=locked step=750/800 d=0.6946 g=0.6939 cap=0.0000 u_kept=0.983 content=1.000 leak=0.002 err=0.017 covered=1
+cover_leftover arm=locked step=800/800 d=0.6945 g=0.6916 cap=0.0000 u_kept=0.981 content=1.000 leak=0.001 err=0.017 covered=1
+cover_leftover DONE arm=locked pass=1 reasons=none u_kept=0.920 content=0.967 leak=0.000 err=0.056 same_dir=0.001 particle_rms=0.060
+{"event": "DONE", "task": "cover_leftover", "status": "PASS", "suffix": 14, "live": {"u_kept": 0.9814236661997099, "content_kept": 0.9998910895527613, "leak_ratio": 0.0013055834056560887, "pole_rel_err_plus": 0.012315435335040092, "pole_rel_err_minus": 0.016534335911273956, "same_dir": 0.003101219738117107}, "error": null}
+START unused_token_hold route=public primitives custom host + shared noise policy steps=200
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 hold=0.9940 concept=0.0000 unused_dist=0.0060
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 hold=0.9866 concept=0.5643 unused_dist=0.0134
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 hold=0.9897 concept=0.9818 unused_dist=0.0103
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 hold=0.9958 concept=0.8923 unused_dist=0.0042
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 hold=0.9922 concept=0.9743 unused_dist=0.0078
+{"event": "DONE", "task": "unused_token_hold", "status": "PASS", "suffix": 15, "live": {"unused_hold": 0.9921833081170917, "concept_move": 0.9742806026058304}, "error": null}
+START mid_scale_identity route=public primitives custom host + shared noise policy steps=800
+mid_scale arm=locked step=1 seed=0 concept+=+0.5774 concept-=+0.0000 id0=+0.0077 id_mid=+0.0232 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=50 seed=0 concept+=+0.7696 concept-=+0.7495 id0=+0.4088 id_mid=+0.9551 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=100 seed=0 concept+=+0.9140 concept-=+0.8645 id0=+0.5830 id_mid=+0.7852 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=150 seed=0 concept+=+0.9659 concept-=+0.9608 id0=+0.6617 id_mid=+0.9922 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=200 seed=0 concept+=+0.9876 concept-=+0.9861 id0=+0.7814 id_mid=+0.9960 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=250 seed=0 concept+=+0.9988 concept-=+0.9965 id0=+0.8770 id_mid=+0.9994 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=300 seed=0 concept+=+0.9996 concept-=+0.9998 id0=+0.9638 id_mid=+0.9808 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=350 seed=0 concept+=+0.9998 concept-=+0.9998 id0=+0.9923 id_mid=+0.9457 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=400 seed=0 concept+=+0.9998 concept-=+0.9999 id0=+0.9774 id_mid=+0.9477 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=450 seed=0 concept+=+0.9998 concept-=+0.9998 id0=+0.9762 id_mid=+0.9844 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=500 seed=0 concept+=+0.9999 concept-=+0.9999 id0=+0.9927 id_mid=+0.9849 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=550 seed=0 concept+=+1.0000 concept-=+0.9999 id0=+0.9986 id_mid=+0.9938 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=600 seed=0 concept+=+0.9999 concept-=+1.0000 id0=+0.9984 id_mid=+0.9946 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=650 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9949 id_mid=+0.9977 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=700 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9962 id_mid=+0.9968 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=750 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9932 id_mid=+0.9954 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9938 id_mid=+0.9993 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+mid_scale arm=locked step=800 seed=0 concept+=+1.0000 concept-=+1.0000 id0=+0.9938 id_mid=+0.9993 scales=[-1.0, 0.0, 0.5, 1.0] gate=PASS why=locked
+{"event": "DONE", "task": "mid_scale_identity", "status": "PASS", "suffix": 17, "live": {"concept_cos_plus": 0.9999925494194031, "concept_cos_minus": 0.9999934434890747, "concept_mag_plus": 0.998742938041687, "concept_mag_minus": 1.0025397539138794, "identity_at_0": 0.9938252841636147, "identity_at_mid": 0.999299482893687}, "error": null}
+START mode_hold route=public primitives custom host + shared noise policy steps=1200
+{"event": "DONE", "task": "mode_hold", "status": "PASS", "suffix": 5, "live": {"modes": 8, "hq": 1.0}, "error": null}
+START vector_two_broad route=GANTrainer + generic noise wrappers steps=1200
+{"event": "DONE", "task": "vector_two_broad", "status": "PASS", "suffix": 23, "live": {"sw1_normalized": 0.0639948472935233, "mean_error": 0.10232269763946533, "covariance_error": 0.06419294327497482, "target_scale": 1.0555585622787476, "sample_count": 4096, "mass_tv": 0.0029296875, "min_mass_ratio": 0.994140625, "hq": 0.9912109375, "component_covariance_error": 0.35830672085285187, "component_covariance_errors": [0.45534321665763855, 0.2612702250480652], "component_min_eigen_ratio": 0.35888487100601196, "component_mass": [0.4970703125, 0.5029296875], "target_mass": [0.5, 0.5], "component_counts": [2036, 2060]}, "error": null}
+START vector_unequal_mass route=GANTrainer + generic noise wrappers steps=1200
+{"event": "DONE", "task": "vector_unequal_mass", "status": "PASS", "suffix": 6, "live": {"sw1_normalized": 0.06299074420708312, "mean_error": 0.07992922514677048, "covariance_error": 0.0648624449968338, "target_scale": 1.7593294382095337, "sample_count": 4096, "mass_tv": 0.05864257365465164, "min_mass_ratio": 0.78125, "hq": 0.96728515625, "component_covariance_error": 0.4815447200089693, "component_covariance_errors": [0.08674179762601852, 0.15168826282024384, 1.2551366090774536, 0.43261221051216125], "component_min_eigen_ratio": 0.4563354551792145, "component_mass": [0.5087890625, 0.358642578125, 0.116943359375, 0.015625], "target_mass": [0.550000011920929, 0.30000001192092896, 0.12999999523162842, 0.019999999552965164], "component_counts": [2084, 1469, 479, 64]}, "error": null}
+START vector_unequal_width route=GANTrainer + generic noise wrappers steps=1200
+{"event": "DONE", "task": "vector_unequal_width", "status": "PASS", "suffix": 8, "live": {"sw1_normalized": 0.047169229424067816, "mean_error": 0.026419496163725853, "covariance_error": 0.11831191927194595, "target_scale": 2.1343955993652344, "sample_count": 4096, "mass_tv": 0.03076171875, "min_mass_ratio": 0.876953125, "hq": 0.98388671875, "component_covariance_error": 0.4699687920510769, "component_covariance_errors": [0.6470743417739868, 0.5962531566619873, 0.4426244795322418, 0.1939231902360916], "component_min_eigen_ratio": 0.16768135130405426, "component_mass": [0.2607421875, 0.21923828125, 0.267822265625, 0.252197265625], "target_mass": [0.25, 0.25, 0.25, 0.25], "component_counts": [1068, 898, 1097, 1033]}, "error": null}
+START vector_anisotropic route=GANTrainer + generic noise wrappers steps=1200
+{"event": "DONE", "task": "vector_anisotropic", "status": "PASS", "suffix": 19, "live": {"sw1_normalized": 0.08738661018551801, "mean_error": 0.11551859229803085, "covariance_error": 0.08749588578939438, "target_scale": 2.032285690307617, "sample_count": 4096, "mass_tv": 0.0464680939912796, "min_mass_ratio": 0.860595703125, "hq": 0.977294921875, "component_covariance_error": 0.21512021124362946, "component_covariance_errors": [0.19490480422973633, 0.2954576015472412, 0.15499822795391083], "component_min_eigen_ratio": 0.3234347105026245, "component_mass": [0.286865234375, 0.345703125, 0.367431640625], "target_mass": [0.3333333432674408, 0.3333333432674408, 0.3333333432674408], "component_counts": [1175, 1416, 1505]}, "error": null}
+START vector_overlap route=GANTrainer + generic noise wrappers steps=1200
+{"event": "DONE", "task": "vector_overlap", "status": "PASS", "suffix": 8, "live": {"sw1_normalized": 0.06070782921879585, "mean_error": 0.08068753033876419, "covariance_error": 0.06891890615224838, "target_scale": 0.8501437306404114, "sample_count": 4096}, "error": null}
+START vector_spiral route=GANTrainer + generic noise wrappers steps=1600
+{"event": "DONE", "task": "vector_spiral", "status": "PASS", "suffix": 23, "live": {"sw1_normalized": 0.0341786495195855, "mean_error": 0.035173993557691574, "covariance_error": 0.07499511539936066, "target_scale": 1.224178433418274, "sample_count": 4096}, "error": null}
+START img_stripes2 route=GANTrainer + generic noise wrappers steps=600
+{"event": "DONE", "task": "img_stripes2", "status": "PASS", "suffix": 8, "live": {"modes": 2, "hq": 0.96875, "mean_rmse": 0.0367860272526741, "quality_mode_fractions": [0.40625, 0.5625], "mode_fractions": [0.40625, 0.59375], "distribution_tv": 0.09375}, "error": null}
+START img_bars4 route=GANTrainer + generic noise wrappers steps=600
+{"event": "DONE", "task": "img_bars4", "status": "PASS", "suffix": 7, "live": {"modes": 4, "hq": 1.0, "mean_rmse": 0.031751785427331924, "quality_mode_fractions": [0.28125, 0.3125, 0.1875, 0.21875], "mode_fractions": [0.28125, 0.3125, 0.1875, 0.21875], "distribution_tv": 0.09375}, "error": null}
+START img_blobs4 route=GANTrainer + generic noise wrappers steps=600
+{"event": "DONE", "task": "img_blobs4", "status": "PASS", "suffix": 19, "live": {"modes": 4, "hq": 0.96875, "mean_rmse": 0.036395952105522156, "quality_mode_fractions": [0.3125, 0.1875, 0.21875, 0.25], "mode_fractions": [0.3125, 0.21875, 0.21875, 0.25], "distribution_tv": 0.0625}, "error": null}
+START img_intensity2 route=GANTrainer + generic noise wrappers steps=600
+{"event": "DONE", "task": "img_intensity2", "status": "PASS", "suffix": 5, "live": {"modes": 2, "hq": 1.0, "mean_rmse": 0.031102154403924942, "quality_mode_fractions": [0.53125, 0.46875], "mode_fractions": [0.53125, 0.46875], "distribution_tv": 0.03125}, "error": null}

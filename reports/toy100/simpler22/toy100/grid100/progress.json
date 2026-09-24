@@ -1,0 +1,108 @@
+{
+  "model": "live",
+  "frames": 14,
+  "steps": [
+    0,
+    1,
+    10,
+    25,
+    50,
+    100,
+    250,
+    1000,
+    2000,
+    3000,
+    4000,
+    5000,
+    6000,
+    7000
+  ],
+  "axes": {
+    "xlim": [
+      -6.9,
+      6.9
+    ],
+    "ylim": [
+      -6.9,
+      6.9
+    ]
+  },
+  "gif_sha256": "8ba9ba5820a576e481f07d4ebd8c3c7dcaca69fa75151b7cf6173319ccdaca57",
+  "sources": {
+    "grid100": {
+      "events_sha256": "16bb38c0299123f90813f26eb3711be014ff8bc0fe2a4c97ebd34f724fa771b2",
+      "snapshots": [
+        {
+          "step": 0,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_000000.npz",
+          "sha256": "c874d2d5adbb14aa63f8c121b8431ab4c9d034a7815662c3feff622719ca2efc"
+        },
+        {
+          "step": 1,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_000001.npz",
+          "sha256": "1fcda5da614e6831799718088680f57231fe449666dcb6b8a88e748f47a996e4"
+        },
+        {
+          "step": 10,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_000010.npz",
+          "sha256": "f503c460c775d076c79e47e8e1dadf1d7d2d3d600cf247ec57ace64f13c52ffb"
+        },
+        {
+          "step": 25,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_000025.npz",
+          "sha256": "76e9fff756466089cb36f4e52981af3e05aca9aba0beee32fc650f55522b9794"
+        },
+        {
+          "step": 50,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_000050.npz",
+          "sha256": "3df5334f6a2ea0577414fccf48c4136215c67772c6161e96c93f53089a41c7d8"
+        },
+        {
+          "step": 100,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_000100.npz",
+          "sha256": "f88dee54134dad2322910d71cc9e190a26aab3b4bb211706230476f416210a0b"
+        },
+        {
+          "step": 250,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_000250.npz",
+          "sha256": "8a385ec07fa4a4f668fbaf47a46db01bfb1417849090368cefb2cb7b9f42cfb9"
+        },
+        {
+          "step": 1000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_001000.npz",
+          "sha256": "e3076cca3e54801cd00a829b08653579ea18dc45decb0c000ee3fa555fa5e8de"
+        },
+        {
+          "step": 2000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_002000.npz",
+          "sha256": "201121c26c29d62ef76c19057309ec879bc16faf7347e194c9c20d3dd0a778ba"
+        },
+        {
+          "step": 3000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_003000.npz",
+          "sha256": "d8ea0a5e70bc1d0f0cd659675a4e33bd4e7f982f8331bb5f8a23ca1fc092edbb"
+        },
+        {
+          "step": 4000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_004000.npz",
+          "sha256": "b10236bc2046bf1bdb04cefab85fe2dc6689322610583d0a704e42f7569b41c8"
+        },
+        {
+          "step": 5000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_005000.npz",
+          "sha256": "45ff345f0ea2bca22a07d4f7377e3029e346a26ca517554371cd3cf719546cf7"
+        },
+        {
+          "step": 6000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_006000.npz",
+          "sha256": "9676d90be916cb9bc4cc7781663f97cd0b56930bfe947d7cffc5751aeb5f87f6"
+        },
+        {
+          "step": 7000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/grid100/snapshots/step_007000.npz",
+          "sha256": "a041f432319fe59e0fcecc79d3c8cae53d11c999d4e66dad7d7d66d2bda9c0f2"
+        }
+      ]
+    }
+  }
+}

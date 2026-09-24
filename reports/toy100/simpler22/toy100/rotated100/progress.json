@@ -1,0 +1,108 @@
+{
+  "model": "live",
+  "frames": 14,
+  "steps": [
+    0,
+    1,
+    10,
+    25,
+    50,
+    100,
+    250,
+    1000,
+    2000,
+    3000,
+    4000,
+    5000,
+    6000,
+    7000
+  ],
+  "axes": {
+    "xlim": [
+      -6.9,
+      6.9
+    ],
+    "ylim": [
+      -6.9,
+      6.9
+    ]
+  },
+  "gif_sha256": "91d6a17696a9ea18d5dcc7acac39a596167bc05b62b4309c8ef22c4dab29f5f6",
+  "sources": {
+    "rotated100": {
+      "events_sha256": "5aca65780ca57c9e296f702d37e8a3e837a9ad5f02cdc0866dad64e2d8c3c1cf",
+      "snapshots": [
+        {
+          "step": 0,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_000000.npz",
+          "sha256": "d94f38e6b42329235d44ab250eac4f206ae20b7d4b08ea755e03d4edd05b234d"
+        },
+        {
+          "step": 1,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_000001.npz",
+          "sha256": "7d87df7b8ca3c1ab02b6763a2e8d5104de7d39162b5bb6b62ae67396f099ac4f"
+        },
+        {
+          "step": 10,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_000010.npz",
+          "sha256": "8125aaefb0860e731bd9641ea2a02d436192b900c895b160a42b489ee17561c6"
+        },
+        {
+          "step": 25,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_000025.npz",
+          "sha256": "285ace74f696815f730053b0bebdb85cb9d177d0abe337858871c326ab0e6646"
+        },
+        {
+          "step": 50,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_000050.npz",
+          "sha256": "5ead0f517817cd9bcd632a2a2b732d3d9ca84538e5002af7a20938f9b5584933"
+        },
+        {
+          "step": 100,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_000100.npz",
+          "sha256": "dab5d0e3cdda28af9d2052ad1be21de82ead9ea7055f91ff37147125badeb1ff"
+        },
+        {
+          "step": 250,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_000250.npz",
+          "sha256": "44d4748909e7aeeb5a6079aa15c295f382b4f81248592f71193a7bd35e66d6a2"
+        },
+        {
+          "step": 1000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_001000.npz",
+          "sha256": "2b6e0251b797ae7116995cea30dfc67a9bb632546d9de867cb1aff75c6edc3e0"
+        },
+        {
+          "step": 2000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_002000.npz",
+          "sha256": "f64b9803d320bba4176f4c1e1ebdefe31b619fc6d2275f898d432ade1fc1c801"
+        },
+        {
+          "step": 3000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_003000.npz",
+          "sha256": "0ddab64dc37460e9219bf18ae3c77a210171ef94b04b7ef8cdf0203bb0f6a439"
+        },
+        {
+          "step": 4000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_004000.npz",
+          "sha256": "c82e2ec10620d3ae11af53d1f0ec767e26ecbba6d78c48fe5b70174a8fa241b3"
+        },
+        {
+          "step": 5000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_005000.npz",
+          "sha256": "abb5bd736fadd1fc660d6625e6a18469784c8cd3cd60451e8cbddc7949f014d9"
+        },
+        {
+          "step": 6000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_006000.npz",
+          "sha256": "ff6f62dcb0f275452eb254d1bc6c34a3cfed30a46b7a9687feb6b9128a3d2c11"
+        },
+        {
+          "step": 7000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/rotated100/snapshots/step_007000.npz",
+          "sha256": "058d662bc1aa883e3111d033a2e9bf9c865f4e05a489244f7a46d563811e669a"
+        }
+      ]
+    }
+  }
+}
