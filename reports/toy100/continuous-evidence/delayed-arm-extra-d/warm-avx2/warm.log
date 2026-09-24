@@ -1,0 +1,13 @@
+{"event": "DECLARED", "phase": "warm", "method": "delayextrad", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX2", "shared_gate_eligible": false, "purity": "delayed-arm extra D TTUR: sticky arm on the first diagnostic with update_index>=1200, modes>=8 and HQ>=0.9; each later turn takes +2 host D Adam steps before G. Stall reach, G Adam lr and curvature bounds are unchanged. No mode-count or stall predicate, no coverage, likelihood, anchor, assignment or clip."}
+{"event": "VARIANT_START", "variant": "identity", "cpu": "AVX2"}
+{"event": "VARIANT_START", "variant": "delayextrad", "cpu": "AVX2"}
+{"event": "VARIANT_DONE", "variant": "identity", "cpu": "AVX2"}
+{"event": "PROGRESS", "outer": 100, "armed": false, "arm_update_index": null, "fires": 0, "extra_d_steps": 0, "modes": 8, "HQ": 0.945556640625, "fires_acquire": 0, "fires_dropout": 0, "fires_after_2300": 0, "cpu": "AVX2"}
+{"event": "PROGRESS", "outer": 200, "armed": false, "arm_update_index": null, "fires": 0, "extra_d_steps": 0, "modes": 8, "HQ": 0.98291015625, "fires_acquire": 0, "fires_dropout": 0, "fires_after_2300": 0, "cpu": "AVX2"}
+{"event": "extra_d_arm", "armed": true, "update_index": 1200, "modes": 8, "HQ": 0.9814453125, "extra_d_steps_this_turn": 0, "cpu": "AVX2"}
+{"event": "VARIANT_DONE", "variant": "delayextrad", "cpu": "AVX2"}
+{"event": "WARM", "variant": "identity", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.989990234375, "failing_steps": [], "cpu": "AVX2"}
+{"event": "WARM", "variant": "delayextrad", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.920654296875, "failing_steps": [], "cpu": "AVX2"}
+{"event": "WARM_RANK", "control_ok": true, "control_passing": 200, "control_checks": 200, "method_passing": 200, "method_checks": 200, "method_min_hq": 0.920654296875, "method_min_modes": 8, "cpu": "AVX2"}
+{"event": "DONE", "cpu": "AVX2"}
+EXIT:0

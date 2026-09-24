@@ -1,0 +1,17 @@
+{
+  "draft": true,
+  "solved": false,
+  "host": "neural",
+  "seed": 0,
+  "threads": 1,
+  "torch": "2.14.0+cpu",
+  "isa_pin": "ATEN_CPU_CAPABILITY=avx2 MKL_ENABLE_INSTRUCTIONS=AVX2 ONEDNN_MAX_CPU_ISA=AVX2 DNNL_MAX_CPU_ISA=AVX2",
+  "verdict": "KILL",
+  "vs_107": "kill on stay; warm and cold match",
+  "vs_84": "warm does not regress; stay pass count is similar and the terminal state is worse",
+  "warm_avx2": {"identity": "200/200", "identity_min_hq": 0.989990234375, "method": "200/200", "method_min_hq": 0.920654296875, "arm_update_index": 1200, "fires": 0},
+  "warm_unrankable_aten_only": {"identity": "0/200", "min_modes": 6, "min_hq": 0.953125, "note": "ATen label AVX2, oneDNN not pinned; matches the stored AVX512 6-mode prefix. Not ranked."},
+  "cold_trajectory": {"passed": true, "seconds": 3.4, "armed": false, "fires": 0},
+  "cold_ring": {"modes": 8, "passing": "10/24", "suffix": 8, "final_hq": 0.998779296875, "first_8_hq": {"step": 650, "hq": 0.917236328125, "armed": false}, "arm_update_index": 1200, "fires": 0},
+  "stay": {"checks": 120, "passing": 54, "suffix": 0, "min_modes": 0, "final": [2400, 0, 0.0], "last_pass": 2080, "collapse_from": 2120, "arm_update_index": 1200, "fires": 1200, "extra_d_steps": 2400, "fires_acquire_lt_1690": 489, "fires_dropout_1690_2300": 611, "fires_after_2300": 100, "fires_before_1200": 0}
+}
