@@ -83,8 +83,8 @@ critic could retain inward guidance; this comparison by itself does not tell
 whether the trained D lags such a critic or whether the finite penalized
 objective prefers a different field.
 
-A separate frozen-q D-only relaxation diagnostic currently provides a useful
-but provisional check. Its source is
+A separate [frozen-q D-only relaxation diagnostic](pr84-critic-relaxation-diagnosis.md)
+provides a useful check. Its source is
 `reports/toy100/pr84_critic_relaxation.py` at SHA-256
 `9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b`;
 local artifacts are under
@@ -98,9 +98,8 @@ nonconverged** (reported gradient residual ratios `2.87×/4.83×/3.36×`), so
 this shows a better local critic can supply inward feedback, not a certified
 best response or a training solution. At 1,539 the run has already lost a mode,
 and the inward proposal does not restore the pass gate in one update. Those
-separate artifacts are not part
-of this population-field archive and should be cited through their own
-manifest once committed.
+separate artifacts are retained in their
+[own committed manifest](continuous-evidence/pr84-critic-relaxation/manifest.json).
 
 The next causal question is whether D can track that better capped field
 *during* the continuing game without spoiling cold acquisition. A frozen-q

@@ -17,6 +17,18 @@ parity hold. Read the [fifth-round diagnosis and tests](continuous-round5.md)
 and [current status](stationary-stability-status.md) before proposing another
 method. Prediction is rejected before cold gates; no winner is selected.
 
+**Current causal lead:** the actual-D cross-response also fails its short
+filter. More decisively, fitting a copied critic on the existing penalized
+objective reverses harmful G guidance on24/24 reserved batches; all proposals
+at1325 and1530 then pass. Every fit remains nonconverged, and this is not a
+continuation result. [Exact fit and held-out evidence](pr84-critic-relaxation-diagnosis.md)
+motivates a bounded critic-refinement candidate before another full run.
+The [structural note](rp-misspecification-stability.md) proves exact distribution
+matching impossible for the frozen mixture but explicitly does not prove
+good-quality stability impossible. The [operator probe](pr84-cross-reciprocity-research.md)
+also rejects an adverse cross-dominance explanation along the captured1325
+update. Do not present either finding as a no-go theorem for this task.
+
 **Scope clarified September 23, 2026:** PR #60 targets initial acquisition and
 sustained live quality on a fixed target distribution without LR decay.
 Adapting to a changed target distribution is a separate problem; translation

@@ -139,6 +139,40 @@ unregularized population density ratio is an offline comparator only; it is
 not the finite Fourier critic with the host penalty. Failure of these methods
 alone is not an impossibility proof.
 
+## Critic fitting supplies a more useful direction
+
+The [structural research note](rp-misspecification-stability.md) proves that
+the frozen mixture cannot exactly match the target distribution. That rules
+out a realizable constant-critic convergence premise; it does **not** rule out
+sustained high HQ, a local equilibrium, or a responding learner. Its small
+population counterexample has a restoring best-response coordinate field
+despite nonzero discriminator advantage. The host has not been proved impossible.
+
+The [population-field comparison](pr84-population-field.md) freezes the exact
+saved generator and evaluates an unrestricted unregularized Rp density-ratio
+critic. Both sharp and stencil versions give inward raw network and frozen-Adam
+directions in all64 held-out cases across1325,1389,1530,1540. The learned stencil
+field points outward in54/64 raw cases. Matching archived learned-field values
+and paired batches rules out a comparison caused by altered draws. But the
+unscaled analytic critic has enormous sampled cap penalties, so it cannot
+stand in for the actual penalized critic optimum.
+
+A [separate copied-critic fit](pr84-critic-relaxation-diagnosis.md) retains the
+actual finite architecture and penalized loss. One bounded L-BFGS attempt per
+state lowers held-out D loss and yields inward raw and accepted G motion in
+24/24 reserved cases, versus2/24 and1/24 before fitting. At1325 its eight G
+proposals all pass at HQ1; at1530 all pass with minimum HQ .99878. At1539 the
+mode is already missing and none recovers it in one proposal. These are fixed-G
+diagnostics, not a new successful continuation. All three fits remain
+**NONCONVERGED_RESIDUAL**; lower loss and repaired guidance do not certify
+stationarity or a global best response.
+
+This identifies a concrete candidate to test: refine the actual penalized
+critic against the current generator before taking G's step. It must pass
+all three saved-state continuations before warm200, then the dense longer
+hold and cold acquisition. No diagnostic quality metric can select its
+training updates, and its extra optimization/sample cost must be explicit.
+
 ## Research checked after isolation
 
 [Alex-GDA, ICML2024](https://proceedings.mlr.press/v235/lee24e.html) and the
