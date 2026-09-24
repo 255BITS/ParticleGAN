@@ -1,0 +1,34 @@
+# Paired-error spine. Radial divisor capped at the expert radial spread.
+# Every finetune step trains E_control+G2 on off-circle radius 0.5 to 1.5.
+# The second half also trains a zero-init tangent residual on detached G2
+# features, on the circle, with the tangent divisor tightened under the speed
+# bar. The radius pathway is not frozen and does not see that residual loss.
+# Critic fit and evaluation panels stay on the protocol radius range.
+seed: 24002
+device: cpu
+width: 128
+encoder_width: 128
+d_width: 128
+z_dim: 8
+num_particles: 64
+sigma_rel: 0.5
+pretrain_steps: 300
+finetune_steps: 2000
+batch_size: 128
+log_interval: 25
+adv_weight: 1.0
+error_tokens: 8
+error_width: 48
+error_heads: 4
+normalization_samples: 8192
+eval_episodes: 128
+recovery_window: 64
+edit_frame: radial_tangent
+rho_low: 0.8
+rho_high: 1.2
+on_circle_rate: 0.5
+rho_curriculum: false
+tangent_refine: true
+out_dir: results/circle_transition/tangent_residual
+live_log: results/circle_transition/live.log
+save_checkpoint: true

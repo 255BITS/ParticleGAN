@@ -1,0 +1,68 @@
+{
+  "run": "tangent_residual",
+  "config": "configs/circle/radial_hold.yaml",
+  "checkpoint": "results/circle_transition/tangent_residual/final.pt",
+  "log": "results/circle_transition/tangent_residual/log.txt",
+  "protocol_version": 1,
+  "recipe": "300-step transition pretrain, then 2000 paired-error RpGAN steps at adv_weight=1 on E_control+G2 with radial-tangent edits, radial scale capped at the expert radial spread, and training rho in [0.5, 1.5]. From step 1001 a zero-init tangent residual on detached G2 features is trained on the circle with its own paired-error critic; the tangent divisor is capped at 0.009 physical. The residual loss does not enter E_control or G2. Diagnostic MSE is outside both losses.",
+  "pretrain_steps": 300,
+  "finetune_steps": 2000,
+  "tangent_head_steps": 1000,
+  "batch_size": 128,
+  "pretrain_examples": 76800,
+  "finetune_examples": 768000,
+  "b_cap_applications": 750,
+  "trainable_controller_parameters": 54418,
+  "tangent_head_parameters": 4161,
+  "wall_seconds": 67.4,
+  "adv_weight": 1.0,
+  "l2_aux_weight": 0.0,
+  "gate_passed": true,
+  "val_main": {
+    "1024": {
+      "success": 0.7734375,
+      "worst_direction_success": 0.640625,
+      "success_positive": 0.90625,
+      "success_negative": 0.640625,
+      "radial_rmse": 0.0363,
+      "late_radial_rmse": 0.0317,
+      "signed_speed_error": 0.0291,
+      "direction_agreement": 0.9560,
+      "completed_turns": 41.999,
+      "nonfinite": 0
+    }
+  },
+  "test_main": {
+    "256": {
+      "success": 0.8203125,
+      "worst_direction_success": 0.671875,
+      "radial_rmse": 0.0333,
+      "signed_speed_error": 0.0218,
+      "direction_agreement": 1.0,
+      "completed_turns": 12.034
+    },
+    "1024": {
+      "success": 0.8125,
+      "worst_direction_success": 0.65625,
+      "success_positive": 0.96875,
+      "success_negative": 0.65625,
+      "radial_rmse": 0.0335,
+      "late_radial_rmse": 0.0318,
+      "signed_speed_error": 0.0219,
+      "direction_agreement": 1.0,
+      "completed_turns": 48.142,
+      "nonfinite": 0
+    }
+  },
+  "test_local": {
+    "action_l2": 0.0273,
+    "g3_next_l2": 1.0850,
+    "paired_g3_next_l2": 0.1902,
+    "persistence_next_l2": 0.2888
+  },
+  "controls_test_main_1024": {
+    "expert_success": 1.0,
+    "zero_success": 0.0,
+    "reversed_direction_agreement": 0.0
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "run": "paired_error",
+  "source_revision": "f8a5a4a",
+  "config": "configs/circle/paired_error.yaml",
+  "checkpoint": "results/circle_transition/paired_error/final.pt",
+  "log": "results/circle_transition/paired_error/log.txt",
+  "protocol_version": 1,
+  "recipe": "transition pretrain of E_pair+G1/G2/G3+prior+D, then paired-error RpGAN adv_weight=1 on E_control+G2",
+  "pretrain_steps": 300,
+  "finetune_steps": 2000,
+  "batch_size": 128,
+  "pretrain_examples": 76800,
+  "finetune_examples": 512000,
+  "b_cap_applications": 500,
+  "trainable_controller_parameters": 54418,
+  "wall_seconds": 48.68,
+  "adv_weight": 1.0,
+  "l2_aux_weight": 0.0,
+  "gate_passed": true,
+  "test_main": {
+    "256": {
+      "success": 0.3359375,
+      "worst_direction_success": 0.1875,
+      "radial_rmse": 0.2233,
+      "signed_speed_error": 0.0400,
+      "direction_agreement": 1.0,
+      "completed_turns": 11.406
+    },
+    "1024": {
+      "success": 0.328125,
+      "worst_direction_success": 0.203125,
+      "success_positive": 0.453125,
+      "success_negative": 0.203125,
+      "radial_rmse": 0.2478,
+      "late_radial_rmse": 0.1861,
+      "max_radial_error": 1.4687,
+      "signed_speed_error": 0.0426,
+      "direction_agreement": 1.0,
+      "completed_turns": 45.502,
+      "stopping_fraction": 0.0,
+      "nonfinite": 0
+    }
+  },
+  "test_local": {
+    "action_l2": 0.0327,
+    "g3_next_l2": 0.7823,
+    "paired_g3_next_l2": 0.1902,
+    "persistence_next_l2": 0.2888
+  },
+  "controls_test_main_1024": {
+    "expert_success": 1.0,
+    "zero_success": 0.0,
+    "zero_turns": 0.0,
+    "reversed_success": 0.0,
+    "reversed_direction_agreement": 0.0,
+    "reversed_turns": -47.685
+  }
+}
