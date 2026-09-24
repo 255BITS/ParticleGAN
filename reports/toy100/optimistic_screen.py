@@ -1,4 +1,4 @@
-"""Predeclare 40 bounded constant-rate optimizer follow-up probes.
+"""Predeclare 15 local AMSGrad rows justified by the 64-row mechanism screen.
 
 The previous 96-row Adam rate screen failed mode-hold. This wave changes the
 update direction at that bottleneck, retaining the winner's loss and noise.
@@ -44,16 +44,14 @@ def _write(path: Path, data: dict) -> None:
 
 
 def proposals() -> list[dict]:
-    # 16 Adam/optimistic-Adam rows on the newly found simple core, then 24
-    # AMSGrad/optimistic-AMSGrad rows on both cores. Combined with the initial
-    # 24-row wave this respects the predeclared total ceiling of 64 candidates.
-    rows = [dict(base="simple", lr=lr, beta2=.999, alpha=alpha, amsgrad=False)
-            for lr, alpha in itertools.product((.0005, .001, .0025, .00425),
-                                               (0.0, .125, .25, .5))]
-    rows.extend(dict(base=base, lr=lr, beta2=.99, alpha=alpha, amsgrad=True)
-                for base, lr, alpha in itertools.product(
-                    ("winner", "simple"), (.001, .0025, .00425), (0.0, .25, .5, 1.0)))
-    return rows
+    # Wave2 bg016 passed four of the five terminal mode-hold checkpoints,
+    # retaining all eight modes through the final failure. This is a narrowly
+    # declared local follow-up; the already observed point is excluded.
+    return [dict(base="winner", lr=lr, beta2=beta2, alpha=0.0, amsgrad=True,
+                 prior_lr_mult=prior)
+            for lr, beta2, prior in itertools.product(
+                (.0008, .001, .00125, .0015), (.9, .99), (1.0, 2.0))
+            if (lr, beta2, prior) != (.001, .99, 2.0)]
 
 
 def prepare(root: Path) -> dict:
@@ -72,12 +70,13 @@ def prepare(root: Path) -> dict:
     base = json.loads(source.read_bytes())
     rows = []
     for index, proposal in enumerate(proposals()):
-        name = f"bg{index:03d}"
+        name = f"ag{index:03d}"
         config = dict(base)
         config.pop("network_lr_horizon_cap")
         config.pop("network_lr_floor")
         config.update(name=name, lr=proposal["lr"], betas=[0.0, proposal["beta2"]],
-                      lr_anneal_start=0.0, lr_floor=1.0)
+                      lr_anneal_start=0.0, lr_floor=1.0,
+                      prior_lr_mult=proposal["prior_lr_mult"])
         if proposal["base"] == "simple":
             config.update(reg_kappa=1.0, reg_coeff=1.0, prior_reg=0.0)
         recipe, _, _ = declared_recipe(config)
@@ -103,6 +102,7 @@ def prepare(root: Path) -> dict:
         actual_update="theta -= lr * ((1+alpha)*u_current - alpha*u_previous); bias-corrected Adam directions",
         variance_policy="amsgrad=true retains coordinatewise max of exponential second moments; this is adaptive preconditioning, not a claim of constant effective coordinate rates",
         diagnostics="Actual gradient RMS, parameter update RMS and denominator range for every optimizer group and every update",
+        expansion_reason="Wave2 bg016 kept all eight modes and HQ .9211,1.0,.9607,.9216 at steps1000–1150 before .8438 at1200. Fifteen new local AMSGrad-only rows; exact observed point excluded. All other64 rows failed strict mode-hold.",
         additional_gradient_evaluations_per_update=0,
         selection_rule="Stop at first strict host failure; ten passes require a fresh full19 before native3/common22",
     )
@@ -122,8 +122,8 @@ def validate_manifest(root: Path) -> dict:
     assert manifest["base_config_sha256"] == _sha(root / "base_config.json")
     assert manifest["task_order"] == list(ORDER)
     assert manifest["scratch_common_gate_eligible"] is False
-    assert len(manifest["rows"]) == 40
-    assert [{key: row[key] for key in ("base", "lr", "beta2", "alpha", "amsgrad")}
+    assert len(manifest["rows"]) == 15
+    assert [{key: row[key] for key in ("base", "lr", "beta2", "alpha", "amsgrad", "prior_lr_mult")}
             for row in manifest["rows"]] == proposals()
     for file, sha in manifest["source_sha256"].items():
         assert _sha(ROOT / file) == sha, file
