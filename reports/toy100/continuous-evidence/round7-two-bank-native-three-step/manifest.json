@@ -1,0 +1,106 @@
+{
+  "files": {
+    "declaration.json.gz": {
+      "bytes": 2145,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 4429,
+      "raw_sha256": "b825edc3d889c2b8bb7ac6f7d89146b33981c148caa0227b777be72a4a36fe4b",
+      "sha256": "be67513e18df8193dd5546dc09adb953a87e5549e05f1a0aa737074e639104fc"
+    },
+    "omitted_third_D-final-state.pt.gz": {
+      "bytes": 534000,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 614972,
+      "raw_sha256": "0e9e2590a1ddb99aa79d59b1b8feeb05279b596edb2c1afd48254b3f8ac92382",
+      "sha256": "88aaa5fee1d614e1fcb32acfcb342a8f81ec5d5caaa10d7ad8d3f7b853bca4c0"
+    },
+    "omitted_third_D.json.gz": {
+      "bytes": 7536,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 25866,
+      "raw_sha256": "483c4f0911f6132ee24020e54625d1d9aded92841cf9e147212024d765f71dc7",
+      "sha256": "fe05a03808af9422a1667c6a48d782d83538c1191f2a278816b806c9c7de8cb0"
+    },
+    "ordinary-final-state.pt.gz": {
+      "bytes": 533155,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 614235,
+      "raw_sha256": "b8166bb29e014c39b02ce119d66d648a188e6e75d2fa44a0073c2dc6dab69d63",
+      "sha256": "40f10b59a8310d69d3fd05c5023b976a7b894bfd136011ad999b440a62c9d68a"
+    },
+    "ordinary.json.gz": {
+      "bytes": 7531,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 25827,
+      "raw_sha256": "b2ebcca61c5e8371ab8f77739d09a91f26203bc7a33d542512561181609f0cf2",
+      "sha256": "7fe5948f92fcbd7c2e00fe2ba70fc5693c1063d528b4509e6daade9b0a6b13fc"
+    },
+    "singleton_third_D-final-state.pt.gz": {
+      "bytes": 534099,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 615146,
+      "raw_sha256": "40fb084ed281dea0f55c62fa536033e9f09cd6825bfdbe821f19f9301d70df1f",
+      "sha256": "092b70fecf5bd0e5a902eccc6f697ff4d4c695750eae0fc21f2bfd45e0f4ff58"
+    },
+    "singleton_third_D.json.gz": {
+      "bytes": 7590,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 26171,
+      "raw_sha256": "7a8a1df3073124d64ba5c16ac57bc330a565b7fcfdeb9ff4fc23d6e953e8c493",
+      "sha256": "022ffb75b62354e342f832a40b3a2881ad31a2f0f8a396bf2da7468826cfffd1"
+    },
+    "source.tar.gz": {
+      "bytes": 75935,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 327680,
+      "raw_sha256": "85b64acac35251cc42ac6263b5f631501dd3c884c9463e57f3f7f7a172c405ac",
+      "sha256": "62ef61e1852cd2dc545f627e02033b6da1ab2ea3caf7271e797e7a60b9499c41"
+    },
+    "summary.json.gz": {
+      "bytes": 13370,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 82340,
+      "raw_sha256": "b7b6f024c487455ce5f0816d6addfdbe0c06d320b486c0793a7eb81fc50df2c5",
+      "sha256": "08639288a9224b093046f3499c7bf40f55b6df42727c0703ce554913cae6db25"
+    }
+  },
+  "first_two_updates_exact_across_branches": true,
+  "input_config_sha256": "1d119d47ba39691238a146493a4b6050a522ddd0b45c5f6ad6915c6446ee8dbb",
+  "input_file_sha256": "fae94561922ede699f20c6ee6713126e8bb30e776a586fe98ed39137dac0a926",
+  "input_state_sha256": "1706ae9c1ca25010cb08e2c03f79478180add8620996594e9f30e48705223a72",
+  "method": "pr84_confirmed_fixed_support_prestart_joint_fit",
+  "rng_final_exact_across_branches": true,
+  "scope": "exact saved update2400, three native updates only",
+  "source_sha256": {
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/transfer_suite/toy100_compatibility.py": "cab108b3cb26929862eea09e7e0be98efeb4e4a25b63679455348e8074adca69",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/chamfer_discrete_reallocation.py": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24",
+    "reports/toy100/chamfer_pullback.py": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/joint_output_pullback.py": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3",
+    "reports/toy100/pr84_critic_refinement_capture.py": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+    "reports/toy100/pr84_critic_refinement_filter.py": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+    "reports/toy100/pr84_critic_refinement_resume.py": "9b23c40b3263753552f69860404759eded03ec2ac84f8c592f403caff804264b",
+    "reports/toy100/pr84_model_error_recovery.py": "d38f9c09f679c96ed598f8b965438f43303a7a4e75930033cadb25f047e33ed7",
+    "reports/toy100/pr84_opponent_prediction.py": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846",
+    "reports/toy100/pr84_prediction_state_filter.py": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/reallocation_smoothed_candidate.py": "ca16cf667a03e585d50c110edcd0b219991768877dff1a640ec2371c7d16439c",
+    "reports/toy100/sample_anchor_candidate.py": "2fb4ee97bfc4a1f00f0076c55f0e210bc531fc34779c1e23a719ba7722a15c33",
+    "reports/toy100/sample_anchor_memory_candidate.py": "318a357e350a9afc4049bce47e83cb5941a33340e98c3413b7812e9342846363",
+    "reports/toy100/sample_anchor_memory_filter.py": "211e11c4d7ac3eff37eeca0eac5cab9932182f1997ff12a7ec54d9c2e0c77c0f",
+    "reports/toy100/sample_anchor_own_state_probe.py": "cd7bfc7a1a821068463da09b375ed6882c53ccae39137b13600a273512660831",
+    "reports/toy100/sample_anchor_prestart_candidate.py": "2f9152349fe3937fd8738297dff939489c4011a6e8aca7386ad9e889771dce17",
+    "reports/toy100/sample_anchor_rest_candidate.py": "287d3c5d21d2ca8ff80c8167bd2af294f4de088a54619bfd03d0c3eaf3715560",
+    "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+    "reports/toy100/sample_group_two_bank_memory.py": "3daf028f2253a1b947b5b23c49280ec7465e19c4ac6cb26e5f9779c450023587",
+    "reports/toy100/sample_group_two_bank_native3.py": "41d7ffb5321941a2c18a9a00e64a6ca348cc869790cdc5a4c62c642a0bdffb33"
+  },
+  "status": "COMPLETE"
+}
