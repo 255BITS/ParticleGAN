@@ -51,7 +51,10 @@ radius. This does not establish a mathematical limit cycle.
   including zero-centered real/fake input-gradient penalties. Its smoothness,
   curvature, and identifiability assumptions are not verified for these
   LeakyReLU networks and Adam updates. The repository already implements the
-  relevant R1+R2 loss arm; we test it directly with constant rates.
+  relevant R1+R2 loss arm was tested directly with constant rates. Its apparent
+  short-run survivor failed both transfer and continuation. Subsequent work
+  prioritizes training dynamics that preserve the original game's stationary
+  points, following the user's preference; no further zero-pull grid is planned.
 * [Tang, Chen and Liu, September 16, 2026 preprint](https://arxiv.org/html/2609.18314v1)
   examines Adam instability through moment timescales and loss geometry at
   the scale of an update. It supports inspecting actual steps and denominator
@@ -64,6 +67,63 @@ radius. This does not establish a mathematical limit cycle.
   epsilon values. There is no elapsed-time schedule, but the preconditioner
   remains state dependent; constant nominal rates do not mean constant effective
   steps.
+* [Chavdarova et al., Lookahead-Minmax, Algorithm 1](https://arxiv.org/html/2006.14567v3)
+  motivates jointly interpolating both players after a fixed number of game
+  rounds. Our test includes the learned prior and preserves Adam moments. All
+  live intermediate iterates are scored, preventing synchronization boundaries
+  from concealing excursions. The paper does not guarantee convergence for our
+  nonlinear stochastic host.
+* [Yoon and Loizou, August 2026](https://arxiv.org/abs/2608.06182)
+  analyzes same-sample and independent-sample stochastic extragradient under
+  explicit operator assumptions. It motivates testing both sampling choices;
+  same-sample replay is not assumed to be universally better. Our experimental
+  Adam-metric variant is not covered by a convergence claim from this paper.
+* [Feng, Ou and Wang, May 2026](https://arxiv.org/html/2605.19392v1)
+  derives continuous-time models for Adam in zero-sum games and studies the
+  distinct roles of its two moment timescales. Its local analysis primarily
+  concerns deterministic simultaneous dynamics. We do not transfer those
+  guarantees to alternating stochastic relativistic GAN training.
+
+## Matched passing-state filter
+
+One scheduled prefix reaches update 1,000. Linux forks preserve its complete
+live state: all three models, both Adam optimizers, EMA, and every training
+random stream. Each candidate initially receives the same next 200 updates,
+with quality checked after every update. An unchanged child must exactly match
+a separate uninterrupted control's final weights, moments, EMA, and RNG hash.
+This is a passing-state local stability test, not a claim of exact equilibrium:
+the host's 12 equally weighted particles cannot exactly represent eight equally
+weighted modes, and its output-noise scale differs from the target width.
+
+The unchanged scheduled continuation passes 200/200 checks. Restoring constant
+LR .00425 passes only 6/200. Joint Lookahead with alpha .5 and k=2, 5, 10 passes
+1, 28, and 8 checks respectively; none advances. All six corresponding cold
+Lookahead configurations also fail the original host gate.
+
+Constant LR .001 passes all 200 local checks, with or without Lookahead. But
+uninterrupted continuation to update 2,400 fails at update 1,950 (HQ .7903),
+despite ending at eight modes/HQ .9990. It passes 119/120 extended checks;
+the scheduled identity passes all 120. Thus local survival is only a cheap
+rejection filter, not proof of continuous learning.
+
+Fixed-metric joint extragradient at .00425 fails 0/200 warm checks with either
+same-sample or independent-sample evaluations. The same-sample branch replays
+all 200 RNG sequences exactly and advances Adam moments only once per outer
+update. Its correction amplifies a second gradient through the first gradient's
+small denominator; at update 1,055 a particle ratio reaches about 3.3e11, followed
+by second-moment overflow. This rejects this specific unguarded metric variant,
+not extragradient methods generally. The next experiment uses reversible trials
+and a local secant acceptance condition to control that measured failure.
+
+An independent cheap controller scales only the generator network's ordinary
+Adam proposal by `max(.02, min(1, advantage / threshold))`, where `advantage`
+is twice the current training batch's mean `sigmoid(D(real)-D(fake))` minus one.
+Moments and the particle update remain unchanged; there is no added loss or
+elapsed-time input. Thresholds .25 and 1 each pass all 200 warm checks, but both
+fail all five terminal checks during cold training. The unchanged observer
+exactly reproduces the ordinary constant-rate control. Neither candidate
+advances to more expensive hosts. This is further evidence that protecting an
+already passing state and acquiring all modes are separate requirements.
 
 ## Validation order
 
