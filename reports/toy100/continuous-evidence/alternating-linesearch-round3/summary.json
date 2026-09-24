@@ -1,0 +1,456 @@
+{
+  "shared_gate_eligible": false,
+  "candidate_arms": 2,
+  "seed_search": false,
+  "pr82_observation_parity": {
+    "all24_metrics": true,
+    "all1200_clean_support_traces": true,
+    "live": {
+      "modes": 6,
+      "hq": 0.89208984375
+    }
+  },
+  "accepted_point_diagnosis": {
+    "d": {
+      "loss_increases": 66,
+      "negative_directional_secants": 3,
+      "effective_curvature_formula": "original_bound.factor * accepted_norm_curvature (the latter alone uses original fixed P)",
+      "exceeds_original_bound_by_over_1_percent": 2,
+      "effective_curvature_median": 1.1079194051449264,
+      "effective_curvature_max": 5.911432223595183,
+      "original_bound": 3.0
+    },
+    "g": {
+      "loss_increases": 72,
+      "negative_directional_secants": 193,
+      "effective_curvature_formula": "original_bound.factor * accepted_norm_curvature (the latter alone uses original fixed P)",
+      "exceeds_original_bound_by_over_1_percent": 1150,
+      "effective_curvature_median": 0.8144251660290796,
+      "effective_curvature_max": 3.239706346420336,
+      "original_bound": 0.25
+    }
+  },
+  "cap_discontinuity": {
+    "base_total": 0.4079834520816803,
+    "base_raw_gan": 0.3959867060184479,
+    "base_cap": 0.011996746063232422,
+    "points": [
+      {
+        "alpha": 0.0,
+        "parameter_displacement_norm": 0.0,
+        "total": 0.4079834520816803,
+        "raw_gan": 0.3959867060184479,
+        "cap": 0.011996746063232422,
+        "base_gradient_relative_error": 0.0
+      },
+      {
+        "alpha": 0.0001220703125,
+        "parameter_displacement_norm": 1.5508122892208987e-05,
+        "total": 0.408164381980896,
+        "raw_gan": 0.39598631858825684,
+        "cap": 0.01217806339263916,
+        "base_gradient_relative_error": 0.15980261803302295
+      },
+      {
+        "alpha": 1.52587890625e-05,
+        "parameter_displacement_norm": 1.9479450489878348e-06,
+        "total": 0.40798336267471313,
+        "raw_gan": 0.3959866762161255,
+        "cap": 0.011996686458587646,
+        "base_gradient_relative_error": 4.5344031440784436e-05
+      },
+      {
+        "alpha": 9.5367431640625e-07,
+        "parameter_displacement_norm": 1.0154391298802243e-07,
+        "total": 0.4079834520816803,
+        "raw_gan": 0.3959867060184479,
+        "cap": 0.011996746063232422,
+        "base_gradient_relative_error": 1.8157058481666697e-06
+      },
+      {
+        "alpha": -9.5367431640625e-07,
+        "parameter_displacement_norm": 1.0154391298802243e-07,
+        "total": 0.4079834520816803,
+        "raw_gan": 0.3959867060184479,
+        "cap": 0.011996746063232422,
+        "base_gradient_relative_error": 1.7157065634716488e-06
+      }
+    ]
+  },
+  "d_only_repaired_warm": {
+    "final": {
+      "hq": 1.0,
+      "modes": 8
+    },
+    "final_state_sha256": "76653a165986bfde59cfdca42baea5bd570ad12344272f71f97648b4411e1c02",
+    "local_stability": {
+      "checks": 200,
+      "failing_steps": [],
+      "min_hq": 0.9404296875,
+      "min_modes": 8,
+      "pass_all": true,
+      "pass_suffix": true,
+      "passing_checks": 200,
+      "passing_suffix": 200,
+      "stable_from_step": 1001
+    },
+    "long_hold": null,
+    "stationary": {
+      "checks": 5,
+      "failing_steps": [],
+      "min_hq": 0.999755859375,
+      "min_modes": 8,
+      "pass_all": true,
+      "pass_suffix": true,
+      "passing_checks": 5,
+      "passing_suffix": 5,
+      "stable_from_step": 1000
+    },
+    "status": "PASS"
+  },
+  "d_only_repaired_cold": {
+    "stages": [
+      {
+        "task": "trajectory",
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "identity_mse",
+              "value": 0.0010045847157016397,
+              "op": "<=",
+              "threshold": 0.02,
+              "status": "PASS",
+              "margin": 0.01899541528429836
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 18,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 18,
+            "first_pass_step": 117,
+            "stable_from_step": 117,
+            "stable_from_seconds": 2.285541569115594,
+            "confirmed_step": 184,
+            "confirmed_seconds": 2.8325619539245963
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.46
+        },
+        "live": {
+          "identity_mse": 0.0010045847157016397
+        }
+      },
+      {
+        "task": "mode_hold",
+        "verdict": {
+          "status": "FAIL",
+          "attempted": true,
+          "passed": false,
+          "metrics": [
+            {
+              "metric": "modes",
+              "value": 5,
+              "op": ">=",
+              "threshold": 8,
+              "status": "FAIL",
+              "margin": -3
+            },
+            {
+              "metric": "hq",
+              "value": 0.822998046875,
+              "op": ">=",
+              "threshold": 0.9,
+              "status": "FAIL",
+              "margin": -0.07700195312500002
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 0,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 0,
+            "first_pass_step": null,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.23027886284722224,
+          "confirmation_fraction": 2.0
+        },
+        "live": {
+          "modes": 5,
+          "hq": 0.822998046875
+        }
+      }
+    ],
+    "seconds": 25.985081346007064
+  },
+  "dg_warm": {
+    "final": {
+      "hq": 0.998291015625,
+      "modes": 8
+    },
+    "final_state_sha256": "35025881ff2a4e1f4690dbcb7a3afdb01901b5a6f2d1f0399bc5c519c16799fc",
+    "local_stability": {
+      "checks": 200,
+      "failing_steps": [
+        1130,
+        1131,
+        1132,
+        1133,
+        1134,
+        1135,
+        1136
+      ],
+      "min_hq": 0.828369140625,
+      "min_modes": 7,
+      "pass_all": false,
+      "pass_suffix": true,
+      "passing_checks": 193,
+      "passing_suffix": 64,
+      "stable_from_step": 1137
+    },
+    "long_hold": null,
+    "stationary": {
+      "checks": 5,
+      "failing_steps": [],
+      "min_hq": 0.997314453125,
+      "min_modes": 8,
+      "pass_all": true,
+      "pass_suffix": true,
+      "passing_checks": 5,
+      "passing_suffix": 5,
+      "stable_from_step": 1000
+    },
+    "status": "FAIL"
+  },
+  "dg_failed_steps_accepted_losses": [
+    {
+      "step": 1130,
+      "d": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.6552931666374207,
+        "loss_base": 0.6861358284950256,
+        "predicted_improvement": 0.03868781678822922,
+        "armijo_threshold": 0.6822670468162028,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.03084266185760498,
+        "required_decrease": 0.0038687816788228746,
+        "strict_slack_without_rounding_tolerance": 0.026973880178782106
+      },
+      "g": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.7529505491256714,
+        "loss_base": 0.7578481435775757,
+        "predicted_improvement": 0.0033237729506197184,
+        "armijo_threshold": 0.7549398422457835,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.004897594451904297,
+        "required_decrease": 0.002908301331792207,
+        "strict_slack_without_rounding_tolerance": 0.00198929312011209
+      }
+    },
+    {
+      "step": 1131,
+      "d": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.6767791509628296,
+        "loss_base": 0.6827009916305542,
+        "predicted_improvement": 0.006653874909709085,
+        "armijo_threshold": 0.6820356041395833,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.005921840667724609,
+        "required_decrease": 0.0006653874909708923,
+        "strict_slack_without_rounding_tolerance": 0.005256453176753717
+      },
+      "g": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.7105186581611633,
+        "loss_base": 0.7134836912155151,
+        "predicted_improvement": 0.002892795999804746,
+        "armijo_threshold": 0.710952494715686,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.0029650330543518066,
+        "required_decrease": 0.002531196499829136,
+        "strict_slack_without_rounding_tolerance": 0.0004338365545226708
+      }
+    },
+    {
+      "step": 1132,
+      "d": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.6779825091362,
+        "loss_base": 0.6944164037704468,
+        "predicted_improvement": 0.020214331088590252,
+        "armijo_threshold": 0.6923949706615877,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.016433894634246826,
+        "required_decrease": 0.00202143310885905,
+        "strict_slack_without_rounding_tolerance": 0.014412461525387776
+      },
+      "g": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.7601989507675171,
+        "loss_base": 0.7606263756752014,
+        "predicted_improvement": 0.00046409566264617516,
+        "armijo_threshold": 0.760220291970386,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.00042742490768432617,
+        "required_decrease": 0.00040608370481542977,
+        "strict_slack_without_rounding_tolerance": 2.1341202868896403e-05
+      }
+    },
+    {
+      "step": 1133,
+      "d": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.6332278251647949,
+        "loss_base": 0.6612053513526917,
+        "predicted_improvement": 0.03151852890844196,
+        "armijo_threshold": 0.6580534984618475,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.02797752618789673,
+        "required_decrease": 0.0031518528908441867,
+        "strict_slack_without_rounding_tolerance": 0.024825673297052542
+      },
+      "g": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.8012866973876953,
+        "loss_base": 0.8018937110900879,
+        "predicted_improvement": 0.000656170260771146,
+        "armijo_threshold": 0.8013195621119131,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.0006070137023925781,
+        "required_decrease": 0.00057414897817476,
+        "strict_slack_without_rounding_tolerance": 3.2864724217818164e-05
+      }
+    },
+    {
+      "step": 1134,
+      "d": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.6796646118164062,
+        "loss_base": 0.6889070272445679,
+        "predicted_improvement": 0.01097763448317174,
+        "armijo_threshold": 0.6878092637962507,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.009242415428161621,
+        "required_decrease": 0.001097763448317135,
+        "strict_slack_without_rounding_tolerance": 0.008144651979844486
+      },
+      "g": {
+        "retry": 1,
+        "alpha": 0.5,
+        "loss": 0.7773615121841431,
+        "loss_base": 0.7777386903762817,
+        "predicted_improvement": 0.0004047014307979892,
+        "armijo_threshold": 0.7773845766243335,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.0003771781921386719,
+        "required_decrease": 0.00035411375194827066,
+        "strict_slack_without_rounding_tolerance": 2.3064440190401214e-05
+      }
+    },
+    {
+      "step": 1135,
+      "d": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.6764699220657349,
+        "loss_base": 0.6859081983566284,
+        "predicted_improvement": 0.011601366778293964,
+        "armijo_threshold": 0.684748061678799,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.009438276290893555,
+        "required_decrease": 0.0011601366778294375,
+        "strict_slack_without_rounding_tolerance": 0.008278139613064117
+      },
+      "g": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.7589741945266724,
+        "loss_base": 0.7597192525863647,
+        "predicted_improvement": 0.0007356514386924527,
+        "armijo_threshold": 0.7590755575775089,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.0007450580596923828,
+        "required_decrease": 0.0006436950088558602,
+        "strict_slack_without_rounding_tolerance": 0.00010136305083652264
+      }
+    },
+    {
+      "step": 1136,
+      "d": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.6425237059593201,
+        "loss_base": 0.649928092956543,
+        "predicted_improvement": 0.007902036311634818,
+        "armijo_threshold": 0.6491378893253795,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.0074043869972229,
+        "required_decrease": 0.0007902036311634442,
+        "strict_slack_without_rounding_tolerance": 0.006614183366059456
+      },
+      "g": {
+        "retry": 0,
+        "alpha": 1.0,
+        "loss": 0.7593313455581665,
+        "loss_base": 0.7627439498901367,
+        "predicted_improvement": 0.0024529205721437086,
+        "armijo_threshold": 0.7605976443895109,
+        "rounding_tolerance": 4.76837158203125e-07,
+        "accepted": true,
+        "actual_decrease": 0.003412604331970215,
+        "required_decrease": 0.002146305500625778,
+        "strict_slack_without_rounding_tolerance": 0.0012662988313444368
+      }
+    }
+  ],
+  "gate_order": "D repaired warmPASS -> trajectoryPASS -> ringFAIL -> no hold; DG warmFAIL -> no cold",
+  "execution_attempts": {
+    "initial_cold": "zero-update invalid uppercase label; driver-only repair",
+    "bounded_error_cold": "65 full trajectory updates then retry exhaustion at66; no quality verdict",
+    "failure_replay": "same65 records, alpha0 exact loss+gradient; cap discontinuity isolated"
+  },
+  "torch_runtime": {
+    "python": "3.12.13",
+    "torch": "2.13.0+cu126",
+    "torch_git_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb",
+    "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 202002\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.12.0 (Git Hash 80afa71049cd69a3df32adcccb623b12cd7baa22)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=cf30153c4c131c8164ee7798e5022d810682e2cb, CUDA_FLAGS= -DLIBCUDACXX_ENABLE_SIMPLIFIED_COMPLEX_OPERATIONS -Xfatbin -compress-all -DONNX_NAMESPACE=onnx_torch -gencode arch=compute_50,code=sm_50 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_90,code=sm_90 -Xcudafe --diag_suppress=cc_clobber_ignored,--diag_suppress=field_without_dll_interface,--diag_suppress=base_class_has_different_dll_interface,--diag_suppress=dll_interface_conflict_none_assumed,--diag_suppress=dll_interface_conflict_dllexport_assumed,--diag_suppress=bad_friend_decl --expt-relaxed-constexpr --expt-extended-lambda -Xfatbin -compress-all --threads 2 -Wno-deprecated-gpu-targets --expt-extended-lambda -DCUB_WRAPPED_NAMESPACE=at_cuda_detail -DDISABLE_CUSPARSE_DEPRECATED -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -DC10_NODEPRECATED, CUDA_VERSION=12.6, CUDNN_VERSION=9.10.2, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DHAS_CUPTI -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.13.0, USE_CUDA=1, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+    "cpu_capability": "AVX2",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "threads": 1,
+    "device": "cpu"
+  }
+}

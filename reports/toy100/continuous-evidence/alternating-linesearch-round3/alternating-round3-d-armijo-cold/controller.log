@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "/ml2/hypergan/ParticleGAN-continuous-mechanism/reports/toy100/alternating_linesearch_probe.py", line 104, in main
+    result,context=run_legacy(spec,recipe,noise,model_policy=declared_model_policy(config))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-mechanism/benchmarks/transfer_suite/legacy_noise_adapters.py", line 416, in run_legacy
+    spec["name"], candidate(recipe), noise_policy=policy,
+                  ^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-mechanism/benchmarks/transfer_suite/compare_defaults.py", line 59, in candidate
+    return baseline.Candidate(
+           ^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 16, in __init__
+  File "/ml2/hypergan/ParticleGAN-continuous-mechanism/benchmarks/locked_shared/baseline.py", line 50, in __post_init__
+    raise ValueError("candidate name must use lowercase letters, digits, _ or -")
+ValueError: candidate name must use lowercase letters, digits, _ or -
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/ml2/hypergan/ParticleGAN-continuous-mechanism/reports/toy100/alternating_linesearch_probe.py", line 123, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-mechanism/reports/toy100/alternating_linesearch_probe.py", line 115, in main
+    partial_step=recorder.row,shared_gate_eligible=False)
+                 ^^^^^^^^^^^^
+AttributeError: 'DLineSearchRecorder' object has no attribute 'row'. Did you mean: 'rows'?

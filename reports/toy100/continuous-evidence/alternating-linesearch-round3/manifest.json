@@ -1,0 +1,753 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "alternating-linesearch-round3",
+  "base_commit": "d7d6cdf",
+  "pr82_import_commit": "266fed1",
+  "shared_gate_eligible": false,
+  "files": {
+    "alternating-round3-diagnosis/observed.declaration.json.gz": {
+      "sha256": "9295da3031f16c813672d35aec02e3bb6dfb3b3ffbb2215f0a966de306051d58",
+      "original_sha256": "defbe49d4cd01b43f6502e550f31292cad74542ecdef6f477fe8b6f1eaffb235",
+      "original_path": "artifacts/alternating-round3-diagnosis/observed.declaration.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-diagnosis/observed.json.gz": {
+      "sha256": "cc4b4e9e3c3a4708a6cc23908e2ecea6ac2a47b80e8fb13349ad296bd0c41981",
+      "original_sha256": "42b24aac40727e3009b592c411a8ffd8a2986c39e2626fbe7f2bc68c773886e7",
+      "original_path": "artifacts/alternating-round3-diagnosis/observed.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-diagnosis/plain.declaration.json.gz": {
+      "sha256": "38a673bed5949ae719e0d99097532be54a01aa493a289a9fa7efdf688a86a962",
+      "original_sha256": "6dbc5e7258648f38f67068df56a49402a37532eaea063f41a3e7bd6835518d57",
+      "original_path": "artifacts/alternating-round3-diagnosis/plain.declaration.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-diagnosis/plain.json.gz": {
+      "sha256": "3b3efb0ff9213eba7524b25fdef68420efc52d58c7059e396a8138046eca4697",
+      "original_sha256": "0fabe0db922c0dc9ec037b4097d013204f04bfd479e9a3196ba557955f9a4842",
+      "original_path": "artifacts/alternating-round3-diagnosis/plain.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-diagnosis/summary.json.gz": {
+      "sha256": "e3ab61c2801ae57ab41e98991c4d4b22f06bef3f44c1e4d57c69ada3750fd1b2",
+      "original_sha256": "9b425ad549fa4d8fbcc57f3b986dbeb99e8b0d98bfeb7859b7ce276279d269b5",
+      "original_path": "artifacts/alternating-round3-diagnosis/summary.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-warm/declaration.json.gz": {
+      "sha256": "e8dcb75889f468172c132c668331fea4d3302edec612f4777a192fade2b1c63a",
+      "original_sha256": "46a75cf4412ca251b46e35e2ca03499ad4303092ae69a5574371798234d80572",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/declaration.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-warm/run/cold.json.gz": {
+      "sha256": "e893f61b517f0edeeb6d05f48defb1c2996decee90c150bfc87e2493fdd8a8d3",
+      "original_sha256": "5e653b81d22b3321fd138bfe0494646a1a3864a8fd3858a4c796c308969641d7",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/run/cold.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-warm/run/constant.json.gz": {
+      "sha256": "efb918a0f539e242834e160860a48a5b7d5252670804bd439d0959d13906ab9a",
+      "original_sha256": "95c820d6bfb74d0dd576927ca6a01ed61ecc706583d0c3d0f488570ca4b79fd1",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/run/constant.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-warm/run/d_linesearch.json.gz": {
+      "sha256": "905fe203d451e0e37a765a5b5aa289b3097292099eee36b8e1685ffa812dbd15",
+      "original_sha256": "33f4fdd14ce021395f15438b9d335ee8d8127d7040908a9cb8a063eb0ec67928",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/run/d_linesearch.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-warm/run/identity.json.gz": {
+      "sha256": "27f1fe5400560d345262c7481871507bedba2f0aa207c23874e34ef255d7a197",
+      "original_sha256": "4bc785a475c5597de8a8e7f7715008c0e6e6258f43bba7769e531d1625cee397",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/run/identity.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-warm/run/summary.json.gz": {
+      "sha256": "86584d3ac2a14ab756fcde90966b636433536614245c7a56d1f9dfc088884a61",
+      "original_sha256": "e41de7d9ce75626df53c191e78a68f816280e0efe2d352c6e23766ad6c3090e9",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/run/summary.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-warm/source_archive/alternating_curvature_scratch.py": {
+      "sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/source_archive/alternating_curvature_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-warm/source_archive/alternating_linesearch_diagnosis.py": {
+      "sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/source_archive/alternating_linesearch_diagnosis.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-warm/source_archive/alternating_linesearch_probe.py": {
+      "sha256": "50270fdaed700ed49c74116a43e74cce1312e3f5bc49eb59b2fcc5002406f525",
+      "original_sha256": "50270fdaed700ed49c74116a43e74cce1312e3f5bc49eb59b2fcc5002406f525",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/source_archive/alternating_linesearch_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-warm/source_archive/alternating_linesearch_scratch.py": {
+      "sha256": "52ce2e4425e7c3e4c61202a66112bbc9b5abae3a5d9ec4eef2f271dfc974534b",
+      "original_sha256": "52ce2e4425e7c3e4c61202a66112bbc9b5abae3a5d9ec4eef2f271dfc974534b",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/source_archive/alternating_linesearch_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-warm/source_archive/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/source_archive/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-warm/source_archive/continuous_probe.py": {
+      "sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/source_archive/continuous_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-warm/source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/source_archive/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-warm/source_archive/mode_hold_transformed.py": {
+      "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/source_archive/mode_hold_transformed.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-warm/source_archive/warm_equilibrium_probe.py": {
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm/source_archive/warm_equilibrium_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-warm/controller.log": {
+      "sha256": "2e75005b1b9ef9bb37e30853cbfb0111d091c52302b389c95a0f8b322fcbc8fa",
+      "original_sha256": "2e75005b1b9ef9bb37e30853cbfb0111d091c52302b389c95a0f8b322fcbc8fa",
+      "original_path": "artifacts/alternating-round3-d-armijo-warm.log",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold/config.json.gz": {
+      "sha256": "a9afba6b74fae029dff77186f4235865129ef4dd46bb95e1d144074af9a42fb5",
+      "original_sha256": "da2572079c2d7a5e286835e6b166852a16cad1128ed2b61e79e93a1468fae45f",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/config.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-cold/declaration.json.gz": {
+      "sha256": "a77b05d70ebcdf80c2dc43bee04f058263de83abce053f1bd73b3a2f672fe4ad",
+      "original_sha256": "6d7726536e2417f063551c0580ed60247e10de830e589800b200f18f68a7340f",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/declaration.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-cold/previous-gate.json.gz": {
+      "sha256": "86584d3ac2a14ab756fcde90966b636433536614245c7a56d1f9dfc088884a61",
+      "original_sha256": "e41de7d9ce75626df53c191e78a68f816280e0efe2d352c6e23766ad6c3090e9",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/previous-gate.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-cold/source_archive/alternating_curvature_scratch.py": {
+      "sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/source_archive/alternating_curvature_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold/source_archive/alternating_linesearch_diagnosis.py": {
+      "sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/source_archive/alternating_linesearch_diagnosis.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold/source_archive/alternating_linesearch_probe.py": {
+      "sha256": "50270fdaed700ed49c74116a43e74cce1312e3f5bc49eb59b2fcc5002406f525",
+      "original_sha256": "50270fdaed700ed49c74116a43e74cce1312e3f5bc49eb59b2fcc5002406f525",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/source_archive/alternating_linesearch_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold/source_archive/alternating_linesearch_scratch.py": {
+      "sha256": "52ce2e4425e7c3e4c61202a66112bbc9b5abae3a5d9ec4eef2f271dfc974534b",
+      "original_sha256": "52ce2e4425e7c3e4c61202a66112bbc9b5abae3a5d9ec4eef2f271dfc974534b",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/source_archive/alternating_linesearch_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold/source_archive/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/source_archive/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-cold/source_archive/continuous_probe.py": {
+      "sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/source_archive/continuous_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold/source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/source_archive/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold/source_archive/trajectory_transformed.py": {
+      "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/source_archive/trajectory_transformed.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold/source_archive/warm_equilibrium_probe.py": {
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/source_archive/warm_equilibrium_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold/status.json.gz": {
+      "sha256": "9830a4f74535ccb6ec50f0a2c269b4b3e1ef84b5b7a14600af0ee3f70992bc9f",
+      "original_sha256": "681507990771c926e0c187160fa2c5da3cf35b775a498c9f85a7eb3366dbf4f2",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold/status.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-cold/controller.log": {
+      "sha256": "d88a2b392711ed35932f20dfeeae34497eb996b592cacfe4cc8fbe7b2a483cec",
+      "original_sha256": "d88a2b392711ed35932f20dfeeae34497eb996b592cacfe4cc8fbe7b2a483cec",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold.log",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold-v2/config.json.gz": {
+      "sha256": "64cbb34e02e7c927623150cb65ab709700fcde01d25fe4c7dd403d53714b2e84",
+      "original_sha256": "d84480895c35ae8a9b7cf67fe6c856a6f8b9d830ba269547f2deed49782017d3",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/config.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-cold-v2/declaration.json.gz": {
+      "sha256": "54f9842f6ce438778650732c513fa7269e979a453d52c8be9fe94988e1ac3d7e",
+      "original_sha256": "b1a2db92a835a499878dc94d6f7ee46bc68b740853609298039838cb2530a81a",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/declaration.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-cold-v2/previous-gate.json.gz": {
+      "sha256": "86584d3ac2a14ab756fcde90966b636433536614245c7a56d1f9dfc088884a61",
+      "original_sha256": "e41de7d9ce75626df53c191e78a68f816280e0efe2d352c6e23766ad6c3090e9",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/previous-gate.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-cold-v2/source_archive/alternating_curvature_scratch.py": {
+      "sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/source_archive/alternating_curvature_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold-v2/source_archive/alternating_linesearch_diagnosis.py": {
+      "sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/source_archive/alternating_linesearch_diagnosis.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold-v2/source_archive/alternating_linesearch_probe.py": {
+      "sha256": "a502e32fb526d57eeebf8ea04a694568ec21ec996b56e8c6584ad86b5a5e2a0d",
+      "original_sha256": "a502e32fb526d57eeebf8ea04a694568ec21ec996b56e8c6584ad86b5a5e2a0d",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/source_archive/alternating_linesearch_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold-v2/source_archive/alternating_linesearch_scratch.py": {
+      "sha256": "52ce2e4425e7c3e4c61202a66112bbc9b5abae3a5d9ec4eef2f271dfc974534b",
+      "original_sha256": "52ce2e4425e7c3e4c61202a66112bbc9b5abae3a5d9ec4eef2f271dfc974534b",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/source_archive/alternating_linesearch_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold-v2/source_archive/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/source_archive/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-cold-v2/source_archive/continuous_probe.py": {
+      "sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/source_archive/continuous_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold-v2/source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/source_archive/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold-v2/source_archive/trajectory_transformed.py": {
+      "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/source_archive/trajectory_transformed.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold-v2/source_archive/warm_equilibrium_probe.py": {
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/source_archive/warm_equilibrium_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-cold-v2/status.json.gz": {
+      "sha256": "71d3b449d4c845375736efbc8dd834fa8645eee9e8da27a38b62436e8a963019",
+      "original_sha256": "9d7a228d8a94505a9b3f869c298536c97d1da121bd9d1c598b102977d884008b",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/status.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-cold-v2/trajectory.error.json.gz": {
+      "sha256": "1f2dfba5142491c4675dd9400c04a3e1d49d6f6a190e9b22009bc3afca77e2c9",
+      "original_sha256": "e3ff5c2f95e562614f7a0a501044485fb6e3cda1e4328a59a0076b0f1ba1a786",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2/trajectory.error.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-cold-v2/controller.log": {
+      "sha256": "82cc62d839cc3ccf4ff508a0fac779fecd2a5396c2b0c3c03a5328dd13deb2cf",
+      "original_sha256": "82cc62d839cc3ccf4ff508a0fac779fecd2a5396c2b0c3c03a5328dd13deb2cf",
+      "original_path": "artifacts/alternating-round3-d-armijo-cold-v2.log",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/config.json.gz": {
+      "sha256": "64cbb34e02e7c927623150cb65ab709700fcde01d25fe4c7dd403d53714b2e84",
+      "original_sha256": "d84480895c35ae8a9b7cf67fe6c856a6f8b9d830ba269547f2deed49782017d3",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/config.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/declaration.json.gz": {
+      "sha256": "54f9842f6ce438778650732c513fa7269e979a453d52c8be9fe94988e1ac3d7e",
+      "original_sha256": "b1a2db92a835a499878dc94d6f7ee46bc68b740853609298039838cb2530a81a",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/declaration.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/failure-observer-sha256.txt": {
+      "sha256": "32011c14b3b261a36e3f8d514c189c5b6dffddb1c22955e7029e6c39a61f6ca0",
+      "original_sha256": "32011c14b3b261a36e3f8d514c189c5b6dffddb1c22955e7029e6c39a61f6ca0",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/failure-observer-sha256.txt",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/failure-observer.py": {
+      "sha256": "ea3a5db19fc03447b0ad3e91b4903055ab027c60eaf1116f6470404e567be0d3",
+      "original_sha256": "ea3a5db19fc03447b0ad3e91b4903055ab027c60eaf1116f6470404e567be0d3",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/failure-observer.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/previous-gate.json.gz": {
+      "sha256": "86584d3ac2a14ab756fcde90966b636433536614245c7a56d1f9dfc088884a61",
+      "original_sha256": "e41de7d9ce75626df53c191e78a68f816280e0efe2d352c6e23766ad6c3090e9",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/previous-gate.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/source_archive/alternating_curvature_scratch.py": {
+      "sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/source_archive/alternating_curvature_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/source_archive/alternating_linesearch_diagnosis.py": {
+      "sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/source_archive/alternating_linesearch_diagnosis.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/source_archive/alternating_linesearch_probe.py": {
+      "sha256": "a502e32fb526d57eeebf8ea04a694568ec21ec996b56e8c6584ad86b5a5e2a0d",
+      "original_sha256": "a502e32fb526d57eeebf8ea04a694568ec21ec996b56e8c6584ad86b5a5e2a0d",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/source_archive/alternating_linesearch_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/source_archive/alternating_linesearch_scratch.py": {
+      "sha256": "52ce2e4425e7c3e4c61202a66112bbc9b5abae3a5d9ec4eef2f271dfc974534b",
+      "original_sha256": "52ce2e4425e7c3e4c61202a66112bbc9b5abae3a5d9ec4eef2f271dfc974534b",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/source_archive/alternating_linesearch_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/source_archive/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/source_archive/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/source_archive/continuous_probe.py": {
+      "sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/source_archive/continuous_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/source_archive/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/source_archive/trajectory_transformed.py": {
+      "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/source_archive/trajectory_transformed.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/source_archive/warm_equilibrium_probe.py": {
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/source_archive/warm_equilibrium_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/status.json.gz": {
+      "sha256": "15045719a2dec81fbd9d82c57a85ebfc902572ef89a2bc52c2c35a326ff503fc",
+      "original_sha256": "08e01275bbd062a400630e595fc8ec245a6bfbd799aa1dfbc45086dca450ecc7",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/status.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/trajectory.error.json.gz": {
+      "sha256": "67a18ae158c65f95679473f62f40ffd70304f959435342cada7b01846641ca96",
+      "original_sha256": "4db77dd03119d607acd32b3bcff10538d84cd77a1f24dfaa035ccdec7301b797",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis/trajectory.error.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-failure-diagnosis/controller.log": {
+      "sha256": "9ed70857add0aca9f8e5675dadd48fb5f1aee1b5c830010374afe76562cf02a5",
+      "original_sha256": "9ed70857add0aca9f8e5675dadd48fb5f1aee1b5c830010374afe76562cf02a5",
+      "original_path": "artifacts/alternating-round3-d-armijo-failure-diagnosis.log",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-warm/declaration.json.gz": {
+      "sha256": "baf190ce22bd383927f2083aa5a39735db16afa11849b682822bef4f85487546",
+      "original_sha256": "105600019ec7c4360712c3bf09ccbdeb10647901d4be31b04c8e06cf426658da",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/declaration.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-warm/run/cold.json.gz": {
+      "sha256": "9fb91a0cf95e774232855ceb211481a52a21e42439d6ce6c8033b2a9954ee0d1",
+      "original_sha256": "0629698333c1e4e92772dfef8c0b191463e1a36951eb6b85d29d08386dc631a5",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/run/cold.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-warm/run/constant.json.gz": {
+      "sha256": "64a21e0dace6e3ac083bdabe5e29cbd8411b5ff440a342858d2023b808c467fd",
+      "original_sha256": "bf6ac66eb7a10e952d2e677ede89af0493658119ae582e2eea38c8f722645e49",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/run/constant.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-warm/run/d_linesearch.json.gz": {
+      "sha256": "0b0f290b2c92c34ea3ac207cd9d6e44ab00fb0881b07e57e61e5e40c52d48051",
+      "original_sha256": "c1ce6c133dba7230279d438b2b74b47ac69a2ab9ff25a38332c1c6ae6a1ebb08",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/run/d_linesearch.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-warm/run/identity.json.gz": {
+      "sha256": "9131f067b95dd335c2e8943dac7dd2f4b3826c1874aa4cbdba1980b4dc9d0104",
+      "original_sha256": "74b20cf6d636e1adb48948fc0f4e22354c7516661a58d2956a9414c8f4d09b03",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/run/identity.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-warm/run/summary.json.gz": {
+      "sha256": "86584d3ac2a14ab756fcde90966b636433536614245c7a56d1f9dfc088884a61",
+      "original_sha256": "e41de7d9ce75626df53c191e78a68f816280e0efe2d352c6e23766ad6c3090e9",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/run/summary.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-warm/source_archive/alternating_curvature_scratch.py": {
+      "sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/source_archive/alternating_curvature_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-warm/source_archive/alternating_linesearch_diagnosis.py": {
+      "sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/source_archive/alternating_linesearch_diagnosis.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-warm/source_archive/alternating_linesearch_probe.py": {
+      "sha256": "00c3701f9a8e76205670b0d88f6afbcbb487e92a1f89bef5be82b640e29e43f9",
+      "original_sha256": "00c3701f9a8e76205670b0d88f6afbcbb487e92a1f89bef5be82b640e29e43f9",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/source_archive/alternating_linesearch_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-warm/source_archive/alternating_linesearch_scratch.py": {
+      "sha256": "8679fc5f00b78c17e20a93ed69404a69ea80c77e3657fa0c3c04f49008630be3",
+      "original_sha256": "8679fc5f00b78c17e20a93ed69404a69ea80c77e3657fa0c3c04f49008630be3",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/source_archive/alternating_linesearch_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-warm/source_archive/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/source_archive/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-warm/source_archive/continuous_probe.py": {
+      "sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/source_archive/continuous_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-warm/source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/source_archive/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-warm/source_archive/mode_hold_transformed.py": {
+      "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/source_archive/mode_hold_transformed.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-warm/source_archive/warm_equilibrium_probe.py": {
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm/source_archive/warm_equilibrium_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-warm/controller.log": {
+      "sha256": "2e75005b1b9ef9bb37e30853cbfb0111d091c52302b389c95a0f8b322fcbc8fa",
+      "original_sha256": "2e75005b1b9ef9bb37e30853cbfb0111d091c52302b389c95a0f8b322fcbc8fa",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-warm.log",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-cold/config.json.gz": {
+      "sha256": "64cbb34e02e7c927623150cb65ab709700fcde01d25fe4c7dd403d53714b2e84",
+      "original_sha256": "d84480895c35ae8a9b7cf67fe6c856a6f8b9d830ba269547f2deed49782017d3",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/config.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-cold/declaration.json.gz": {
+      "sha256": "e6368e47e59a14448162c127ea241e3955671ce616f0dd250723ef003c90b2bd",
+      "original_sha256": "ff5ce4883f7ea3d6cedee59064c1e54d1d00923fd367fbfd9859db25291ebcc6",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/declaration.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-cold/mode_hold.json.gz": {
+      "sha256": "388376ecacb9c258229cbc8c5c9801280bda6004a5cd2b3cefead10bd39464dd",
+      "original_sha256": "fd66208151cb64b663b9c6334abe08b5d66f0d2cfa2f34dd93074f85614828a4",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/mode_hold.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-cold/previous-gate.json.gz": {
+      "sha256": "86584d3ac2a14ab756fcde90966b636433536614245c7a56d1f9dfc088884a61",
+      "original_sha256": "e41de7d9ce75626df53c191e78a68f816280e0efe2d352c6e23766ad6c3090e9",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/previous-gate.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-cold/source_archive/alternating_curvature_scratch.py": {
+      "sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/source_archive/alternating_curvature_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-cold/source_archive/alternating_linesearch_diagnosis.py": {
+      "sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/source_archive/alternating_linesearch_diagnosis.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-cold/source_archive/alternating_linesearch_probe.py": {
+      "sha256": "00c3701f9a8e76205670b0d88f6afbcbb487e92a1f89bef5be82b640e29e43f9",
+      "original_sha256": "00c3701f9a8e76205670b0d88f6afbcbb487e92a1f89bef5be82b640e29e43f9",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/source_archive/alternating_linesearch_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-cold/source_archive/alternating_linesearch_scratch.py": {
+      "sha256": "8679fc5f00b78c17e20a93ed69404a69ea80c77e3657fa0c3c04f49008630be3",
+      "original_sha256": "8679fc5f00b78c17e20a93ed69404a69ea80c77e3657fa0c3c04f49008630be3",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/source_archive/alternating_linesearch_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-cold/source_archive/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/source_archive/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-cold/source_archive/continuous_probe.py": {
+      "sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/source_archive/continuous_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-cold/source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/source_archive/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-cold/source_archive/mode_hold_transformed.py": {
+      "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/source_archive/mode_hold_transformed.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-cold/source_archive/trajectory_transformed.py": {
+      "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/source_archive/trajectory_transformed.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-cold/source_archive/warm_equilibrium_probe.py": {
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/source_archive/warm_equilibrium_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-d-armijo-rest-cold/status.json.gz": {
+      "sha256": "0f6d409a509cd2a9ae5d9787605f605326d2faa86a18244a904d1d8391203e47",
+      "original_sha256": "33936cf441d2f386c29506ed263c34ed887bad065a9c78b16472d7554d7f1c0c",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/status.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-cold/trajectory.json.gz": {
+      "sha256": "5cba6939a2d7d0b75be02a4b9f9584e99b9df85ddce6d02d72c65fc51fb63c0f",
+      "original_sha256": "d8c0afd574d7a6d53e4eb88d9eef50214ec2354cad6e240e032db73ae9fe2c66",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold/trajectory.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-d-armijo-rest-cold/controller.log": {
+      "sha256": "aaae39ebcf4dcfa64ec65bbe13f459650199b1bdea9fdb98edb99b81e5472cd0",
+      "original_sha256": "aaae39ebcf4dcfa64ec65bbe13f459650199b1bdea9fdb98edb99b81e5472cd0",
+      "original_path": "artifacts/alternating-round3-d-armijo-rest-cold.log",
+      "compression": "identity"
+    },
+    "alternating-round3-dg-armijo-warm/declaration.json.gz": {
+      "sha256": "3223104e790d04b992ccb8cd9ea1b34e6a88c85f835c9f4469324fb9c71c74de",
+      "original_sha256": "06142636151dde9b9af37375c2ceca828ddd75436c92a359029da39454ea91f1",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/declaration.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-dg-armijo-warm/run/cold.json.gz": {
+      "sha256": "00f52de0a98d3fcd8654478b800197521f65b365b5d505d53faa1508505509f8",
+      "original_sha256": "e31b354d26863c00aac2d3b06f7edc4f44f81a769dbd5d3d3e8f986d9988c614",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/run/cold.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-dg-armijo-warm/run/constant.json.gz": {
+      "sha256": "ae9d80a49f75c9dd143f67c13a984759a604bbe7b26f138a16a1bbb5b7a2dfe6",
+      "original_sha256": "8c53878dcdd0114edce6792cc2a5138eeabfe963465a47b5d97a34ad31490f77",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/run/constant.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-dg-armijo-warm/run/dg_linesearch.json.gz": {
+      "sha256": "248c8a40d985b384cf5610a7d83ed0627e7f4e13073214b77e73e35065f22ef1",
+      "original_sha256": "66ff4152ad655075c2d1820ef6c2d6dbca9ed73888dcb0f48ed268eb0d152c2c",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/run/dg_linesearch.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-dg-armijo-warm/run/identity.json.gz": {
+      "sha256": "03728d4df72097804f0fabd7c49f7abee96400a56f39a8182294ded1af19a59e",
+      "original_sha256": "d4d16fbd7ea73f89fae387e435c1f1d8384eaab8f37b69dca0949fb17f08c384",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/run/identity.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-dg-armijo-warm/run/summary.json.gz": {
+      "sha256": "0934b8cdaabf34c08ddd58dab28c69c79814eee68db7e0d5896696bc801bb218",
+      "original_sha256": "8bfc10a52f11db6c113d0988d82eddfc7677449e242f4c35e5824c2b44b16038",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/run/summary.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-dg-armijo-warm/source_archive/alternating_curvature_scratch.py": {
+      "sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/source_archive/alternating_curvature_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-dg-armijo-warm/source_archive/alternating_linesearch_diagnosis.py": {
+      "sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/source_archive/alternating_linesearch_diagnosis.py",
+      "compression": "identity"
+    },
+    "alternating-round3-dg-armijo-warm/source_archive/alternating_linesearch_probe.py": {
+      "sha256": "14eec60a256f6fc3a4c5fb800a4f9882563e7e72e303f315bceca9646ec06cd4",
+      "original_sha256": "14eec60a256f6fc3a4c5fb800a4f9882563e7e72e303f315bceca9646ec06cd4",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/source_archive/alternating_linesearch_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-dg-armijo-warm/source_archive/alternating_linesearch_scratch.py": {
+      "sha256": "8679fc5f00b78c17e20a93ed69404a69ea80c77e3657fa0c3c04f49008630be3",
+      "original_sha256": "8679fc5f00b78c17e20a93ed69404a69ea80c77e3657fa0c3c04f49008630be3",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/source_archive/alternating_linesearch_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-dg-armijo-warm/source_archive/alternating_two_player_linesearch.py": {
+      "sha256": "29b9aabb2d50989037073d4e7ad4a858cbf503ce52e9e2acbf20e408432b6abe",
+      "original_sha256": "29b9aabb2d50989037073d4e7ad4a858cbf503ce52e9e2acbf20e408432b6abe",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/source_archive/alternating_two_player_linesearch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-dg-armijo-warm/source_archive/alternating_two_player_probe.py": {
+      "sha256": "10950b98eecda0c5fdab0ae1f2770f177b269deccd656ef8e2be338b172a1b7c",
+      "original_sha256": "10950b98eecda0c5fdab0ae1f2770f177b269deccd656ef8e2be338b172a1b7c",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/source_archive/alternating_two_player_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-dg-armijo-warm/source_archive/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/source_archive/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-dg-armijo-warm/source_archive/continuous_probe.py": {
+      "sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/source_archive/continuous_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-dg-armijo-warm/source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/source_archive/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "alternating-round3-dg-armijo-warm/source_archive/mode_hold_transformed.py": {
+      "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/source_archive/mode_hold_transformed.py",
+      "compression": "identity"
+    },
+    "alternating-round3-dg-armijo-warm/source_archive/warm_equilibrium_probe.py": {
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm/source_archive/warm_equilibrium_probe.py",
+      "compression": "identity"
+    },
+    "alternating-round3-dg-armijo-warm/controller.log": {
+      "sha256": "1d5580407d63a2d604ec73f279dec758064f9b4732aa7dd253cb22828b455e34",
+      "original_sha256": "1d5580407d63a2d604ec73f279dec758064f9b4732aa7dd253cb22828b455e34",
+      "original_path": "artifacts/alternating-round3-dg-armijo-warm.log",
+      "compression": "identity"
+    },
+    "diagnosis-source/alternating_linesearch_diagnosis.py": {
+      "sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_sha256": "b6357d1b72b016487ba6ac0b5ed8452fef4dbeb3b2cad9b42f0c04bc2b3d24c7",
+      "original_path": "reports/toy100/alternating_linesearch_diagnosis.py",
+      "compression": "identity"
+    },
+    "diagnosis-source/alternating_curvature_scratch.py": {
+      "sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "reports/toy100/alternating_curvature_scratch.py",
+      "compression": "identity"
+    },
+    "diagnosis-source/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "reports/toy100/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "diagnosis-source/pr82-report.md": {
+      "sha256": "bee1f28dc59a00c0e3937e704d487c931ac50c8b5b6a3f5c69e4353ba3b99324",
+      "original_sha256": "bee1f28dc59a00c0e3937e704d487c931ac50c8b5b6a3f5c69e4353ba3b99324",
+      "original_path": "artifacts/pr82-import-originals/reports/toy100/alternating-curvature-report.md",
+      "compression": "identity"
+    },
+    "summary.json": {
+      "sha256": "17401a45bf385cf80406c759f8b9a7e0041591d2e451a7d5acdd520b942d74a5",
+      "original_sha256": "17401a45bf385cf80406c759f8b9a7e0041591d2e451a7d5acdd520b942d74a5",
+      "original_path": "derived from archived raw outputs",
+      "compression": "identity"
+    },
+    "tests.txt": {
+      "sha256": "92661c7367d79888ef032d6e7d5e36c65878f6a203659372d0205cda1cf9f7a1",
+      "original_sha256": "92661c7367d79888ef032d6e7d5e36c65878f6a203659372d0205cda1cf9f7a1",
+      "original_path": "artifacts/alternating-round3-tests.txt",
+      "compression": "identity"
+    }
+  }
+}
