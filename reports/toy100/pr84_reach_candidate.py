@@ -10,12 +10,21 @@ its Lipschitz budget (still separating, W1-like field), G reads the critic
 over up to .5, the distance D needs at full slope to move .5 logit, which is
 PR84's own uncapped width at ``s = kappa``. D, both curvature bounds and the
 game losses are unchanged. No coverage, assignment, likelihood or clip term.
+
+An optional post-arm clamp, off unless ``post_arm_g_bound`` is .125, leaves the
+pre-arm G own-curvature cap (.25 on stall reach) untouched until the first
+logged ring check reports at least 8 modes and HQ >= 0.9. After that arm the
+cap used in ``min(1, c / rho)`` is .125 for G only, and it stays there. This is
+the trust-region radius, not a scale on the Adam step.
 """
 
 from contextlib import contextmanager
+import json
+import math
 
 import torch
 
+from benchmarks.locked_shared.observation import set_ring_listener
 from reports.toy100 import pr84_smoothed_candidate as base
 from reports.toy100.alternating_curvature_scratch import _rho
 
@@ -23,6 +32,8 @@ from reports.toy100.alternating_curvature_scratch import _rho
 METHOD = "pr84_slope_utilisation_reach"
 B_CAP_SLOPE = 1.
 REACH = .5
+POST_ARM_G_BOUND = .125
+ACQUIRE_BUDGET = 1200
 
 
 REST_UTILISATION = .3
@@ -47,6 +58,62 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
     ramp = "peak"
     game_bound = False
     game_steps = 1
+    post_arm_g_bound = None
+
+    def __init__(self, *, start_step=0):
+        super().__init__(start_step=start_step)
+        self.armed = False
+        self.arm_update = None
+        self.arm_phase = None
+        self.post_arm_fires = 0
+        self.post_arm_g_bound = type(self).post_arm_g_bound
+
+    def note_ring(self, step, modes, hq):
+        """Arm once on the live ring log: modes ≥ 8 and HQ ≥ 0.9. Not a loss."""
+        if self.post_arm_g_bound is None or self.armed:
+            return
+        try:
+            modes, hq, step = int(modes), float(hq), int(step)
+        except (TypeError, ValueError):
+            return
+        if modes < 8 or not math.isfinite(hq) or hq < .9:
+            return
+        self.armed = True
+        self.arm_update = step
+        if self.start_step > 0:
+            self.arm_phase = "warm"
+        elif self.arm_update <= ACQUIRE_BUDGET:
+            self.arm_phase = "cold_acquire"
+        else:
+            self.arm_phase = "stay"
+
+    def _g_bound_apply(self, optimizer):
+        """The G own-curvature placement, and the cap before/after the clamp.
+
+        Pre-arm, after equals the #107 cap. After the sticky arm, after is .125.
+        D's cap is never this value.
+        """
+        applying = (self.post_arm_g_bound is not None and not self.passthrough
+                    and self.phase == 2 and self.optimizers is not None
+                    and optimizer is self.optimizers[1])
+        before = float(self.curvature_bound)
+        after = float(self.post_arm_g_bound) if applying and self.armed else before
+        return before, after, applying
+
+    def _log_g_bound(self, before, after):
+        fired = bool(self.armed)
+        if fired:
+            self.post_arm_fires += 1
+        update = int(getattr(self, "_host_step", None) or self.row.get("outer_step", self.outer_steps + 1))
+        self.row["armed"] = self.armed
+        self.row["g_bound_before"] = before
+        self.row["g_bound_after"] = after
+        if isinstance(self.row.get("g"), dict):
+            self.row["g"]["bound_before"] = before
+            self.row["g"]["bound_after"] = after
+        print(json.dumps(dict(event="G_BOUND", update=update, armed=self.armed,
+                              g_bound_before=before, g_bound_after=after,
+                              post_arm_fires=self.post_arm_fires)), flush=True)
 
     def _arm_smoothed_critic(self):
         super()._arm_smoothed_critic()
@@ -67,6 +134,7 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         return sum(row["g"]["factor"] for row in recent) / len(recent) <= STALL_TRUST
 
     def phases(self, step, opt_d, opt_g, local):
+        self._host_step = int(step) + 1
         if not self.game_bound or not self.enabled or step < self.start_step:
             yield from super().phases(step, opt_d, opt_g, local)
             return
@@ -117,6 +185,22 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
 
     @torch.no_grad()
     def step(self, optimizer, ordinary_step, closure=None):
+        before, after, applying = self._g_bound_apply(optimizer)
+        swapped = applying and after != before
+        if swapped:
+            self.curvature_bound = after
+        ok = False
+        try:
+            result = self._step_body(optimizer, ordinary_step, closure)
+            ok = True
+            return result
+        finally:
+            if swapped:
+                self.curvature_bound = before
+            if ok and applying:
+                self._log_g_bound(before, after)
+
+    def _step_body(self, optimizer, ordinary_step, closure=None):
         if (not self.game_bound or self.passthrough or self.phase is None or self.phase < 2
                 or (self.phase == 2 and optimizer is self.optimizers[0])):
             return super().step(optimizer, ordinary_step, closure)
@@ -155,24 +239,41 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
                      b_cap_slope=B_CAP_SLOPE,
                      widened_updates=int(sum(w > base.SMOOTH_WIDTH_CAP for w in widths)),
                      max_width=max(widths, default=0.))
+        if self.post_arm_g_bound is not None:
+            value.update(post_arm_g_bound=self.post_arm_g_bound,
+                         g_bound_pre_arm=float(self.curvature_bound),
+                         armed=self.armed, arm_update=self.arm_update, arm_phase=self.arm_phase,
+                         post_arm_fires=self.post_arm_fires,
+                         cpu=torch.backends.cpu.get_cpu_capability())
         return value
 
 
 @contextmanager
 def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="peak",
-                         g_curvature_bound=base.G_CURVATURE_BOUND, game_bound=False, game_steps=1):
+                         g_curvature_bound=base.G_CURVATURE_BOUND, game_bound=False, game_steps=1,
+                         post_arm_g_bound=None):
     original = base.SmoothedBothBoundRecorder
+    if post_arm_g_bound not in (None, POST_ARM_G_BOUND):
+        raise ValueError("post-arm G own-curvature bound is fixed at 0.125")
 
     def init(self, *, start_step=0):
         ReachRecorder.__init__(self, start_step=start_step)
         self.curvature_bound = g_curvature_bound
+        self.post_arm_g_bound = post_arm_g_bound
 
-    base.SmoothedBothBoundRecorder = type("ReachRecorder", (ReachRecorder,),
-                                          dict(reach=reach, ramp=ramp, game_bound=game_bound, game_steps=game_steps,
-                                               __init__=init))
+    base.SmoothedBothBoundRecorder = type(
+        "ReachRecorder", (ReachRecorder,),
+        dict(reach=reach, ramp=ramp, game_bound=game_bound, game_steps=game_steps,
+             post_arm_g_bound=post_arm_g_bound, __init__=init))
     try:
         with base.pr84_smoothed_candidate(task=task, start_step=start_step) as value:
-            yield value
+            recorder = value[0]
+            previous = set_ring_listener(recorder.note_ring) if post_arm_g_bound is not None else None
+            try:
+                yield value
+            finally:
+                if post_arm_g_bound is not None:
+                    set_ring_listener(previous)
     finally:
         base.SmoothedBothBoundRecorder = original
 
