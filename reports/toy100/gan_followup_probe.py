@@ -12,6 +12,7 @@ from contextlib import contextmanager
 import hashlib
 import importlib
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -33,6 +34,8 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "reachstall_gbeta0": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
+                          dict(ramp="stall", post_arm_g_beta1=0)),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
@@ -44,6 +47,7 @@ SOURCES = (
     "benchmarks/toy100/continuous_probe.py",
     "benchmarks/locked_shared/mode_hold.py",
     "benchmarks/locked_shared/trajectory.py",
+    "benchmarks/locked_shared/observation.py",
 )
 
 
@@ -61,8 +65,12 @@ def declare(output, phase, method):
     source = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
               for name in SOURCES if (ROOT / name).exists()}
     import torch
+    pins = ("ATEN_CPU_CAPABILITY", "MKL_ENABLE_INSTRUCTIONS", "ONEDNN_MAX_CPU_ISA", "DNNL_MAX_CPU_ISA")
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
-               cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
+               cpu=torch.backends.cpu.get_cpu_capability(),
+               aten=os.environ.get("ATEN_CPU_CAPABILITY"),
+               cpu_env={name: os.environ.get(name) for name in pins},
+               shared_gate_eligible=False,
                purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
                source=source)
     (output / "declaration.json").write_text(json.dumps(row, indent=2) + "\n")
@@ -107,6 +115,17 @@ def warm(output, method):
         emit(event="WARM", variant=name, status=row["status"],
              **{k: loc.get(k) for k in ("checks", "passing_checks", "min_modes", "min_hq",
                                         "failing_steps") if k in loc})
+    identity = compact["identity"]["local"]
+    method_local = compact[method]["local"]
+    rankable = identity.get("checks") == 200 and identity.get("passing_checks") == 200
+    emit(event="WARM_GATE", rankable=rankable, identity_passing=identity.get("passing_checks"),
+         method_passing=method_local.get("passing_checks"), method_min_hq=method_local.get("min_hq"),
+         aten=os.environ.get("ATEN_CPU_CAPABILITY"))
+    if not rankable:
+        emit(event="WARM_UNRANKABLE", reason="identity control is not 200/200; warm is not ranked")
+    elif method_local.get("passing_checks", 0) < 200:
+        emit(event="KILL", reason="warm regression vs #107 200/200")
+        raise SystemExit(3)
 
 
 def cold(output, method, tasks):
