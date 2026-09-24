@@ -49,6 +49,10 @@ The first sampled-data coverage projection recovers the missing mode in a
 one-state check, then fails dense warm197/200; no cold run followed. Its
 [source and failed gate](coverage-projection-report.md) are available for
 other agents. The original PR84 adapter remains the selected partial candidate.
+Its bidirectional follow-up passes the three saved-state checks and warm200,
+then fails cold ring7/HQ .87012. [Completed result and next small tests](chamfer-projection-report.md)
+distinguish nonlinear pullback error from inadequate target coverage. Neither
+the objective decrease nor early passing checkpoints establish sustained quality.
 
 ## Reproduction starting point
 

@@ -19,6 +19,7 @@ relaxation or acquisition-budget extension.
 | PR84 rest gate, single-convolution repair | 200/200; min HQ .91602 | PASS .00094266, suffix18 | FAIL6 modes/HQ .96094;0/24 |
 | Same frozen stencil for D and G | 200/200; min HQ .92261 | PASS .00094266, suffix18 | FAIL7 modes/HQ .78125;0/24 |
 | Sampled-real coverage projection | FAIL197/200; min HQ .84619 | Not run | Stopped at dense warm |
+| Bidirectional Chamfer projection | 200/200; min HQ .92188 | PASS .00094266, suffix18 | FAIL7 modes/HQ .87012;3/24 |
 
 PR81's oracle target-error guard remains diagnostic and its reported cold
 trajectory fails. The preceding [nine-candidate round](continuous-round3.md)
@@ -94,11 +95,22 @@ sampled-data [coverage projection](coverage-projection-report.md) recovers
 the eighth mode in a clean final-state check, but fails three of200 dense
 warm updates. It stops before cold acquisition. Every accepted correction
 decreases its sampled coverage objective; that alone does not guarantee
-quality of every generated particle. A read-only replay is isolating the
-failure before selecting another mechanism.
+quality of every generated particle. An [exact replay](coverage-failure-diagnosis.md)
+isolates empty cells and one-sample outlier targets as the warm failure causes.
+
+A [bidirectional Chamfer follow-up](chamfer-projection-report.md) repairs all
+three saved warm states, then passes a fresh warm200 and cold trajectory.
+It fails cold ring training: it first passes at update150 but finishes at
+7 modes/HQ .87012, with only3/24 passing checks. Cold nonlinear target errors
+are much larger than warm errors; some ideal targets also miss modes.
+Both failures are retained for the next isolated test. No hold or other host
+was run after rejection, and the original PR84 partial candidate stays selected.
 
 [Machine-readable results](continuous-round4-results.json) bind the selected
-candidate, five completed local configurations and evidence hashes. The
+candidate, six completed local configurations and evidence hashes. The
 [integrated local suite](continuous-evidence/round4/integrated-coverage-tests.log) passes
 230 tests in29.43 seconds, including all previous controller checks and
 the new stencil, repair, extraction and coverage checks in one invocation.
+The bidirectional helper and adapter add 11 passing tests in a separate
+2.30-second invocation. The [latest report](chamfer-projection-report.md)
+records the remaining issue and exact reproduction commands.

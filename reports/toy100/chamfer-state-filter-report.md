@@ -1,5 +1,9 @@
 # Bidirectional coverage: three frozen-state counterfactuals
 
+**Completed follow-up:** the [full host experiment](chamfer-projection-report.md)
+passes warm200 and trajectory but fails cold ring7/HQ .87012. The isolated
+results below justified testing it; they did not predict a sustained pass.
+
 The declared unit-mean bidirectional Chamfer correction repairs all three
 captured failures of one-sided coverage on the original fixed evaluation draws.
 This is an isolated filter result, **not a warm-run, cold-acquisition or sustained

@@ -120,7 +120,7 @@
     "production_common22",
     "longer_continuation"
   ],
-  "next_research": "Diagnose coverage projection dense-warm failure; one-state acquisition signal alone is insufficient",
+  "next_research": "Bidirectional projection passes warm but fails cold; distinguish huge nonlinear pullback errors from insufficient target coverage before a further host run",
   "distribution_shift_required": false,
   "rest_without_signal_allowed": true,
   "warm": {
@@ -134,5 +134,6 @@
     "passing_suffix": 200,
     "stable_from_step": 1001
   },
-  "identity_cold_parity": true
+  "identity_cold_parity": true,
+  "additional_rejected_candidate": "PR84 plus bidirectional Chamfer: warm200/200, trajectoryPASS, ring7/HQ.87012;3/24 passing"
 }

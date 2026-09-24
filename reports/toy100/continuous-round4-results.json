@@ -487,14 +487,119 @@
         "production_common22"
       ],
       "shared_gate_eligible": false
+    },
+    {
+      "name": "PR84 plus bidirectional unit-mean Chamfer pullback",
+      "kind": "explicit_coverage_objective_addition",
+      "warm": {
+        "checks": 200,
+        "passing_checks": 200,
+        "failing_steps": [],
+        "min_modes": 8,
+        "min_hq": 0.921875,
+        "passing_suffix": 200,
+        "stable_from_step": 1001,
+        "pass_all": true,
+        "pass_suffix": true
+      },
+      "identity_cold_parity": true,
+      "original_control_exact_parity": true,
+      "cold": [
+        {
+          "task": "trajectory",
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.0009426623582839966,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.019057337641716004
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 18,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 18,
+              "first_pass_step": 117,
+              "stable_from_step": 117,
+              "stable_from_seconds": 1.794862570008263,
+              "confirmed_step": 184,
+              "confirmed_seconds": 2.3144161340314895
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.46
+          },
+          "live": {
+            "identity_mse": 0.0009426623582839966
+          },
+          "seconds": 4.001983226975426
+        },
+        {
+          "task": "mode_hold",
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "modes",
+                "value": 7,
+                "op": ">=",
+                "threshold": 8,
+                "status": "FAIL",
+                "margin": -1
+              },
+              {
+                "metric": "hq",
+                "value": 0.8701171875,
+                "op": ">=",
+                "threshold": 0.9,
+                "status": "FAIL",
+                "margin": -0.029882812500000022
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 3,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": 150,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.07910156250000001,
+            "confirmation_fraction": 2.0
+          },
+          "live": {
+            "modes": 7,
+            "hq": 0.8701171875
+          },
+          "seconds": 35.076117475982755
+        }
+      ],
+      "first_failed_stage": "mode_hold",
+      "not_run": [
+        "hold2400",
+        "other_hosts",
+        "production_common22"
+      ],
+      "shared_gate_eligible": false
     }
   ],
-  "completed_host_configuration_count": 5,
-  "new_mechanisms_or_repairs": 3,
+  "completed_host_configuration_count": 6,
+  "new_mechanisms_or_repairs": 4,
   "external_reproductions": 2,
-  "in_progress": [
-    "Read-only replay of coverage warm failures to isolate next mechanism"
-  ],
+  "in_progress": [],
   "validation": {
     "passed": 230,
     "seconds": 29.43,
@@ -506,15 +611,26 @@
       "consistent-stencil-round4": "51c61b4f0425d7dff35aa4ecb7fdfd09488e873d928936e33700bfb3e0649a1b",
       "pr84-rest-repair": "3f832509ee0413197ba497b9846c046bce58aa373b0e383d68664b59c0004f1a",
       "sinkhorn-fixed-cloud": "7a6a7c02621e38d3179afbf59ce345348e618559659f5a369787ed52ec8535c1",
-      "coverage-projection-round4": "684bf5ea2cbf75aeadb609dd2923246b10f297d6a37e491da05da947ac7d421b"
+      "coverage-projection-round4": "684bf5ea2cbf75aeadb609dd2923246b10f297d6a37e491da05da947ac7d421b",
+      "coverage-failure-replay": "ed0e204ce71e8594d7af2f88383176b6deab3d64022f17048de8dae00f5c7fdf",
+      "chamfer-state-filter": "8f03c450522afd407c6586f540d91640f1e1eee92c8f42878eed41ef450b77c1",
+      "chamfer-projection-round4": "d1edb6dd9fe246d9ffbd1d7af733abd54979f831535c6ebe89bd62c21f69816f"
     },
     "previous_integrated_run": {
       "passed": 219,
       "seconds": 28.87,
       "log": "reports/toy100/continuous-evidence/round4/integrated-tests.log",
       "log_sha256": "ce3d20c2ea03492ea7b71d0a45cd6e36840f28f1360d0f70eee2e2628b7c04f3"
+    },
+    "additional_focused_run": {
+      "passed": 11,
+      "seconds": 2.3,
+      "log": "reports/toy100/continuous-evidence/round4/chamfer-tests.log",
+      "log_sha256": "e78b0e574a48697eaa6cc3209f3041d8af5a103c0159063e1a296738380723b1",
+      "scope": "8 new helper tests and3 new adapter tests; separate invocation from230-test integrated run"
     }
   },
   "production_modified": false,
-  "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5"
+  "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5",
+  "next_filter": "Cold same-target nonlinear refinement at steps750/1200; also test whether early target assignments preserve acquisition. No new host run yet."
 }

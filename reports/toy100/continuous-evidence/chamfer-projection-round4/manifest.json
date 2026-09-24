@@ -1,0 +1,278 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "chamfer-projection-round4",
+  "base_commit": "b7b7e1914aa571c5330c79b03a5fa5b721416442",
+  "shared_gate_eligible": false,
+  "files": {
+    "warm/declaration.json.gz": {
+      "sha256": "40c99a3cbcfc6cced0a78c3e32618f7a8bbe00d8690d97860c103818dad3396f",
+      "original_sha256": "a52cb28071cc78e518d410e9f696ff9bea8113ff912ae750a7b463a8f64ef5de",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/declaration.json",
+      "compression": "gzip"
+    },
+    "warm/forks/chamfer.json.gz": {
+      "sha256": "398af19a47dffa37d2976b46308c6451647458a43b48adfa80547eb1678c4a2d",
+      "original_sha256": "00a6d7be5ba1228b53adbe744bb7e3d7f8a331f183735cc0afdcc06a8e551fb8",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/forks/chamfer.json",
+      "compression": "gzip"
+    },
+    "warm/forks/cold.json.gz": {
+      "sha256": "0bf78dd54a100ef549551665061bdd9339334fe60ff3d19d111f2a2f5617ef02",
+      "original_sha256": "cd460d6c4abfe3e2e236f6a8a1d3910a8fc9b6c3aa55a69db0b285bca9c2f4ce",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/forks/cold.json",
+      "compression": "gzip"
+    },
+    "warm/forks/constant.json.gz": {
+      "sha256": "8449a5b24a76ab29dffe77ec666ea0fe9f516950df0bad8f0950c2ec6850e0b3",
+      "original_sha256": "d29d0097bf245e29080b87d52313f02ad7dab7aeb12e240d59664df9d9131c76",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/forks/constant.json",
+      "compression": "gzip"
+    },
+    "warm/forks/identity.json.gz": {
+      "sha256": "1e436e5400712051519f005d3bfa72a7e83ddeecbc27306eefd8bae0c8e1677d",
+      "original_sha256": "40a5d02e021672a0edb6e54891ca2f145f0e46986a142b7e083f067fa6b2ceba",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/forks/identity.json",
+      "compression": "gzip"
+    },
+    "warm/forks/original.json.gz": {
+      "sha256": "d9a41b793d5ba7183b1167355bf895aebc480f976422febf1300982c48b42cc4",
+      "original_sha256": "f2f5ec01cdee15073d7ba61589764f7935bda328facaf0a121692154ac78f2d1",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/forks/original.json",
+      "compression": "gzip"
+    },
+    "warm/forks/summary.json.gz": {
+      "sha256": "6cd0f3446ff46a0f006ae0d9316c84938d392db3c4ca6598e1e72a555135327d",
+      "original_sha256": "a03898b007437a5d402e4838ab83aeb5f52efe5ef73830aff15e2781a43e602b",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/forks/summary.json",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/locked_shared/mode_hold.py.gz": {
+      "sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "original_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/benchmarks/locked_shared/mode_hold.py",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/locked_shared/trajectory.py.gz": {
+      "sha256": "bee13d21d6e613476544afafd0a6fad911c1281658a6516ea982da5a827024ad",
+      "original_sha256": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/benchmarks/locked_shared/trajectory.py",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/toy100/continuous_probe.py.gz": {
+      "sha256": "5b6b82473026e8f57176e22a953c34b54e71d8a685effbdd080d07f48c30e613",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/benchmarks/toy100/continuous_probe.py",
+      "compression": "gzip"
+    },
+    "warm/source/benchmarks/toy100/warm_equilibrium_probe.py.gz": {
+      "sha256": "21c13cc9990de385e478dcab28b03340ccbe6a59c3f733813c5287fce70ac8f7",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/benchmarks/toy100/warm_equilibrium_probe.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/alternating_curvature_scratch.py.gz": {
+      "sha256": "4655b8735ed1df2ff0051b7e1816df9084b9c639c1f92bf6c0d8f62c78ca024c",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/reports/toy100/alternating_curvature_scratch.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/chamfer_projection_probe.py.gz": {
+      "sha256": "79d4b0fcb5fa2f653653956f7a9481aa68f6b4dd0292df41c82f9a0a4ee24b7c",
+      "original_sha256": "48eacd33aa8007dd8cbb2e45e2be24397a06cc4098d437ced4864cf64ec25421",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/reports/toy100/chamfer_projection_probe.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/chamfer_pullback.py.gz": {
+      "sha256": "0030a08befb76274b11903d54d15af38a4ae8ef9d79fc06e06c25fe081a32ef1",
+      "original_sha256": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/reports/toy100/chamfer_pullback.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/chamfer_smoothed_candidate.py.gz": {
+      "sha256": "9b34dffd5aab92fdbdc3da7012769712bcdb6c5723600cc9c242824fde9a8822",
+      "original_sha256": "92ecc2665d4736a48b0ab2e8cdb4c2d3e0ea0cf63c3e9110f60a2bca9fce4789",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/reports/toy100/chamfer_smoothed_candidate.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/coverage_pullback.py.gz": {
+      "sha256": "59d4a403eb4d2f536ca83840cccb1d6333f776d038b173e66c85ac899e5b7991",
+      "original_sha256": "785e2f268442025a3582616759fb9fbcdac66fea7e427f15c8e619e97c424d35",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/reports/toy100/coverage_pullback.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/coverage_smoothed_candidate.py.gz": {
+      "sha256": "41f3fe8c64e31159c5bf29601d8b5240688dd6e96b5ff73c783ef76fc95033e3",
+      "original_sha256": "9051462504903db1ac359c8e288d154436500eeea9c55593d01ae2a0338a3d10",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/reports/toy100/coverage_smoothed_candidate.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/extra_adam_scratch.py.gz": {
+      "sha256": "fc9d646056ee4e469c924dd88f1d94abff5d5f02d9c1caec3d47b2c52cdb7f63",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/reports/toy100/extra_adam_scratch.py",
+      "compression": "gzip"
+    },
+    "warm/source/reports/toy100/pr84_smoothed_candidate.py.gz": {
+      "sha256": "ec9ede71c84a00dcfb965dd8788caaccea204107f1357032397df14764d684eb",
+      "original_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/source/reports/toy100/pr84_smoothed_candidate.py",
+      "compression": "gzip"
+    },
+    "warm/summary.json.gz": {
+      "sha256": "e28967869b9a7d468952d3ef725d31bcf57ea7cabfe10aa2fc59de791f945640",
+      "original_sha256": "d02ab85047d35fe8b23a6dadd8c1e53be2fd6cdc0f10ff7f87435b59c23e0878",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-warm/summary.json",
+      "compression": "gzip"
+    },
+    "warm/monitor.log.gz": {
+      "sha256": "5fc392d498cc6920663b36089a9300be268cef28a926314bfff6e7f7bc2d4f6c",
+      "original_sha256": "d3b68992753970a92ddd04a7244ca8995a02a049b162f0552627eb7d277a677f",
+      "original_path": "/tmp/chamfer-projection-warm.log",
+      "compression": "gzip"
+    },
+    "cold/config.json.gz": {
+      "sha256": "63d60b0bfe048ff1ff3f372bc225ccac06fb4c49ca9b76ded02285b4460be3f6",
+      "original_sha256": "e7ae8e197d1734e7c2c9eea5371089224bce1878222452b13a50a4e68e49964c",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/config.json",
+      "compression": "gzip"
+    },
+    "cold/declaration.json.gz": {
+      "sha256": "e59a6f31e67674a9589770935979381797033dc2937d7f98d23f6afbdb972eb4",
+      "original_sha256": "0e4cf9fd651e76afcf7338afd7a5258f71951094a5ed04afd0ad07aef97e4385",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/declaration.json",
+      "compression": "gzip"
+    },
+    "cold/mode_hold.json.gz": {
+      "sha256": "b837fe0a9ea4eddc591a96ebb2e6155295343fcc7e8033c77b49afff96b056b5",
+      "original_sha256": "ecbdcc0003610f84db1ba1338ca4ad5c8b4749c31a4b0366f5cddbfbf5d91c9b",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/mode_hold.json",
+      "compression": "gzip"
+    },
+    "cold/previous-gate.json.gz": {
+      "sha256": "e28967869b9a7d468952d3ef725d31bcf57ea7cabfe10aa2fc59de791f945640",
+      "original_sha256": "d02ab85047d35fe8b23a6dadd8c1e53be2fd6cdc0f10ff7f87435b59c23e0878",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/previous-gate.json",
+      "compression": "gzip"
+    },
+    "cold/source/benchmarks/locked_shared/mode_hold.py.gz": {
+      "sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "original_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/benchmarks/locked_shared/mode_hold.py",
+      "compression": "gzip"
+    },
+    "cold/source/benchmarks/locked_shared/trajectory.py.gz": {
+      "sha256": "bee13d21d6e613476544afafd0a6fad911c1281658a6516ea982da5a827024ad",
+      "original_sha256": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/benchmarks/locked_shared/trajectory.py",
+      "compression": "gzip"
+    },
+    "cold/source/benchmarks/toy100/continuous_probe.py.gz": {
+      "sha256": "5b6b82473026e8f57176e22a953c34b54e71d8a685effbdd080d07f48c30e613",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/benchmarks/toy100/continuous_probe.py",
+      "compression": "gzip"
+    },
+    "cold/source/benchmarks/toy100/warm_equilibrium_probe.py.gz": {
+      "sha256": "21c13cc9990de385e478dcab28b03340ccbe6a59c3f733813c5287fce70ac8f7",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/benchmarks/toy100/warm_equilibrium_probe.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/alternating_curvature_scratch.py.gz": {
+      "sha256": "4655b8735ed1df2ff0051b7e1816df9084b9c639c1f92bf6c0d8f62c78ca024c",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/reports/toy100/alternating_curvature_scratch.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/chamfer_projection_probe.py.gz": {
+      "sha256": "79d4b0fcb5fa2f653653956f7a9481aa68f6b4dd0292df41c82f9a0a4ee24b7c",
+      "original_sha256": "48eacd33aa8007dd8cbb2e45e2be24397a06cc4098d437ced4864cf64ec25421",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/reports/toy100/chamfer_projection_probe.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/chamfer_pullback.py.gz": {
+      "sha256": "0030a08befb76274b11903d54d15af38a4ae8ef9d79fc06e06c25fe081a32ef1",
+      "original_sha256": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/reports/toy100/chamfer_pullback.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/chamfer_smoothed_candidate.py.gz": {
+      "sha256": "9b34dffd5aab92fdbdc3da7012769712bcdb6c5723600cc9c242824fde9a8822",
+      "original_sha256": "92ecc2665d4736a48b0ab2e8cdb4c2d3e0ea0cf63c3e9110f60a2bca9fce4789",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/reports/toy100/chamfer_smoothed_candidate.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/coverage_pullback.py.gz": {
+      "sha256": "59d4a403eb4d2f536ca83840cccb1d6333f776d038b173e66c85ac899e5b7991",
+      "original_sha256": "785e2f268442025a3582616759fb9fbcdac66fea7e427f15c8e619e97c424d35",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/reports/toy100/coverage_pullback.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/coverage_smoothed_candidate.py.gz": {
+      "sha256": "41f3fe8c64e31159c5bf29601d8b5240688dd6e96b5ff73c783ef76fc95033e3",
+      "original_sha256": "9051462504903db1ac359c8e288d154436500eeea9c55593d01ae2a0338a3d10",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/reports/toy100/coverage_smoothed_candidate.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/extra_adam_scratch.py.gz": {
+      "sha256": "fc9d646056ee4e469c924dd88f1d94abff5d5f02d9c1caec3d47b2c52cdb7f63",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/reports/toy100/extra_adam_scratch.py",
+      "compression": "gzip"
+    },
+    "cold/source/reports/toy100/pr84_smoothed_candidate.py.gz": {
+      "sha256": "ec9ede71c84a00dcfb965dd8788caaccea204107f1357032397df14764d684eb",
+      "original_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/source/reports/toy100/pr84_smoothed_candidate.py",
+      "compression": "gzip"
+    },
+    "cold/status.json.gz": {
+      "sha256": "7e86f9ebbfc05818cc91ab77ca44e346774e2f00ce7e082eb6ab709195aff581",
+      "original_sha256": "1e1270cafa4e861da1a68b3cfba5eb04253e6624c3f0e42206c1b5443e974aa0",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/status.json",
+      "compression": "gzip"
+    },
+    "cold/trajectory.json.gz": {
+      "sha256": "d482b6db69c2b468a47ac0c8222eeae27a5426ef6aa4eaa9cc5c520ae7223dd9",
+      "original_sha256": "2e7888656b38b31b07601fc792aa3cfc0a8329273cd8fbb7a4a57a8cc221f8df",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-projection-cold/trajectory.json",
+      "compression": "gzip"
+    },
+    "cold/monitor.log.gz": {
+      "sha256": "1397b25e3fdc1b1d8c2b0b14ba2af665c87e2c77166e5396d5be5fd0b7a24e33",
+      "original_sha256": "85e05f9bec9eb6661bb0a4a39e204209db0eb1bc0096beaf99fc5349848dd201",
+      "original_path": "/tmp/chamfer-projection-cold.log",
+      "compression": "gzip"
+    },
+    "validation/tests/test_chamfer_pullback.py.gz": {
+      "sha256": "91fc9cc6015a5844175b05311fbb28e4d722d176095ca8895f11f96c1c75ddc3",
+      "original_sha256": "e0940be660fb2bcdf1798779d8209c9e13eed3a278da53d6f6c4bc4f137a3bad",
+      "original_path": "tests/test_chamfer_pullback.py",
+      "compression": "gzip"
+    },
+    "validation/tests/test_chamfer_smoothed_candidate.py.gz": {
+      "sha256": "6d88afafdd018c9a64a93432cfafc979cf052ea7cde054b8d6b6684ecc2f0597",
+      "original_sha256": "0b333fe127179c6c5733fa91fadf9e1e47bc3c8bc8b7de3d75c8d6c5724f16ac",
+      "original_path": "tests/test_chamfer_smoothed_candidate.py",
+      "compression": "gzip"
+    },
+    "validation/reports/toy100/continuous-evidence/round4/chamfer-tests.log.gz": {
+      "sha256": "700c97b9bab1a52d4afffd237fcb685249f7302809e5ef0bb48c1403108badb9",
+      "original_sha256": "e78b0e574a48697eaa6cc3209f3041d8af5a103c0159063e1a296738380723b1",
+      "original_path": "reports/toy100/continuous-evidence/round4/chamfer-tests.log",
+      "compression": "gzip"
+    },
+    "analysis/chamfer_gate_analysis.py.gz": {
+      "sha256": "1df046affc913fdb2c4473e464116abbc1d6ceeabbe2fc6011941ad614cb2c4f",
+      "original_sha256": "5159260f5a44f7b8b46d30cd1c2e59388ea7a8c7cc21566cd4b95d4de5059f0e",
+      "original_path": "reports/toy100/chamfer_gate_analysis.py",
+      "compression": "gzip"
+    },
+    "analysis/result.json.gz": {
+      "sha256": "0b2ecfc31be13e27715954524f14ae3926549356d24825b32e7fa24b48258244",
+      "original_sha256": "33e3c17b23a13241859b2a9f6efcac72890f2f46276e440ff20a7be59968b14f",
+      "original_path": "artifacts/continuous-learning/round4/chamfer-gate-analysis.json",
+      "compression": "gzip"
+    }
+  }
+}
