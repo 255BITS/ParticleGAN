@@ -71,6 +71,27 @@ def test_recorded_bilinear_step_keeps_actual_d_and_updates_moments_once():
     assert rec.records[0]['g']['factor'] == 1
 
 
+def test_zero_game_field_stays_still_without_a_parameter_pull():
+    d = torch.nn.Parameter(torch.zeros(2, dtype=torch.float64))
+    g = torch.nn.Parameter(torch.zeros(3, dtype=torch.float64))
+    od = torch.optim.Adam([d], lr=.1, betas=(0., .99))
+    og = torch.optim.Adam([g], lr=.2, betas=(0., .99))
+    rec = OpponentPredictionRecorder()
+    ordinary = torch.optim.Adam.step
+    before = torch.get_rng_state().clone()
+    for phase in rec.phases(0, od, og, {}):
+        d.grad = torch.zeros_like(d)
+        rec.step(od, ordinary)
+        g.grad = torch.zeros_like(g)
+        rec.step(og, ordinary)
+    assert torch.equal(d, torch.zeros_like(d))
+    assert torch.equal(g, torch.zeros_like(g))
+    assert torch.equal(torch.get_rng_state(), before)
+    assert int(od.state[d]['step']) == int(og.state[g]['step']) == 1
+    assert rec.records[0]['d']['rho'] == rec.records[0]['g']['rho'] == 0
+    assert rec.prediction_records[0]['critic_step_norm'] == 0
+
+
 def _host(context, task='mode_hold', steps=3):
     from benchmarks.locked_shared import mode_hold, trajectory
     from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy
