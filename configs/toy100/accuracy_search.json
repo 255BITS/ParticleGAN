@@ -1,0 +1,26 @@
+[
+  {
+    "name": "noise029_batch512",
+    "overrides": {"output_noise_std": 0.029}
+  },
+  {
+    "name": "noise030_batch512",
+    "overrides": {"output_noise_std": 0.030}
+  },
+  {
+    "name": "noise029_floor002",
+    "overrides": {"output_noise_std": 0.029, "lr_floor": 0.02}
+  },
+  {
+    "name": "noise029_anneal030",
+    "overrides": {"output_noise_std": 0.029, "lr_anneal_start": 0.3}
+  },
+  {
+    "name": "noise029_batch1024",
+    "overrides": {"output_noise_std": 0.029, "batch_size": 1024}
+  },
+  {
+    "name": "noise029_batch2048",
+    "overrides": {"output_noise_std": 0.029, "batch_size": 2048}
+  }
+]

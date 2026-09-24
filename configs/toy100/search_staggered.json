@@ -1,0 +1,5 @@
+[
+  {"name":"fourier3", "input_noise_std":0.5, "input_noise_anneal_end":0.5, "overrides":{"fourier":3}},
+  {"name":"longer_coarse_phase", "input_noise_std":0.5, "input_noise_anneal_end":0.75, "overrides":{}},
+  {"name":"less_input_noise", "input_noise_std":0.3, "input_noise_anneal_end":0.5, "overrides":{}}
+]

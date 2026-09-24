@@ -1,0 +1,12 @@
+{
+  "generated_at_utc": "2026-09-23T15:25:53.766913+00:00",
+  "git_sha": "3d08a3a3c8eab27e7f81d5a5d637f52c59ae78dc",
+  "source_sha256": {
+    "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+    "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+    "benchmarks/toy100/train.py": "b2240a7f83c05be43dff887cfbf20c9ed701860849a33db0cd88bd62bcb523fc",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/recipes.py": "5d9ae4289e12305504f225bb39908089a6b9cadea3c4875f3fc68cc5cefd2239",
+    "particlegan/training.py": "d2f418ec1ab43ab24d57071382c2f1fd53e17eb5064fb6bbd391e84543eeb405"
+  }
+}

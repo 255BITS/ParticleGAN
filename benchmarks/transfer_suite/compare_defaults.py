@@ -12,6 +12,7 @@ from dataclasses import asdict
 import gzip
 import hashlib
 import json
+import math
 from pathlib import Path
 import time
 import traceback
@@ -19,7 +20,7 @@ from unittest.mock import patch
 
 import torch
 
-from particlegan import ParticlePrior
+from particlegan import ParticlePrior, learning_rate_scale
 from benchmarks import learned_lr_evaluation as bridge
 from benchmarks.locked_shared import baseline
 from benchmarks.smart_descent import evaluate
@@ -83,13 +84,20 @@ def effective_spec(original, recipe):
 
 
 @contextmanager
-def optimizer_defaults(recipe, applied):
+def optimizer_defaults(recipe, applied, *, network_lr_horizon_cap=None,
+                       network_lr_floor=None):
     """Apply absolute recipe rates to every group, including mixed/AE priors.
 
     The phase bridge identifies existing opt_p direct-particle optimizers. Prior
     instances identify their parameters even when mixed with generator weights.
     Both optimizer-level and explicit per-group Adam betas are replaced.
     """
+    if network_lr_floor is not None and (
+            network_lr_horizon_cap is None or isinstance(network_lr_floor, bool)
+            or not isinstance(network_lr_floor, (int, float))
+            or not math.isfinite(network_lr_floor)
+            or not 0 <= network_lr_floor <= 1):
+        raise ValueError("network_lr_floor requires a cap and a finite fraction in [0, 1]")
     prior_ids = set()
     original_prior = ParticlePrior.__init__
     original_adam = torch.optim.Adam.__init__
@@ -123,7 +131,9 @@ def optimizer_defaults(recipe, applied):
         result = original_role(optimizer, locals_)
         if locals_.get('opt_p') is optimizer:
             for group in optimizer.param_groups:
-                group['_comparison_prior'] = True
+                # Direct particles remain prior-owned. A learnable output
+                # noise scalar on the same host optimizer is generator-owned.
+                group['_comparison_prior'] = not group.get('_comparison_output_scale', False)
         return result
 
     class RecipeControl(original_control):
@@ -136,7 +146,39 @@ def optimizer_defaults(recipe, applied):
                     group['betas'] = (recipe.prior_betas or recipe.betas) if kind == 'prior' else recipe.betas
                     applied.append(dict(role=kind, host_lr=old_rate, lr=group['lr'], betas=list(group['betas']),
                                         parameters=sum(p.numel() for p in group['params'])))
-            super().step(optimizer, completed_updates, role)
+            rates = self.base_rates.setdefault(
+                optimizer, [group['lr'] for group in optimizer.param_groups],
+            )
+            if network_lr_horizon_cap is None:
+                network_scale = prior_scale = learning_rate_scale(
+                    completed_updates, self.total_steps,
+                    recipe.lr_anneal_start, recipe.lr_floor,
+                )
+            else:
+                from benchmarks.toy100.schedule import policy_multipliers
+                network_scale, prior_scale = policy_multipliers(
+                    completed_updates, self.total_steps,
+                    recipe.lr_anneal_start, recipe.lr_floor,
+                    network_lr_horizon_cap,
+                    network_lr_floor=network_lr_floor,
+                )
+            group_lrs = []
+            for group, rate in zip(optimizer.param_groups, rates):
+                kind = 'd' if role == 'd' else 'prior' if group['_comparison_prior'] else 'g'
+                group['lr'] = rate * (prior_scale if kind == 'prior' else network_scale)
+                if network_lr_horizon_cap is not None:
+                    group_lrs.append(dict(role=kind, lr=group['lr']))
+            if network_lr_horizon_cap is not None or completed_updates % 20 == 0:
+                action = dict(step=completed_updates, role=role,
+                              multiplier=network_scale)
+                if network_lr_horizon_cap is not None:
+                    action.update(network_lr_horizon_cap=network_lr_horizon_cap,
+                                  network_multiplier=network_scale,
+                                  prior_multiplier=prior_scale,
+                                  group_lrs=group_lrs)
+                    if network_lr_floor is not None:
+                        action["network_lr_floor"] = float(network_lr_floor)
+                self.trace.append(action)
 
     with ExitStack() as stack:
         stack.enter_context(patch.object(ParticlePrior, '__init__', prior_init))

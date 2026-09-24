@@ -375,7 +375,8 @@ def _log(handle, message: str) -> None:
         handle.flush()
 
 
-def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | None = None) -> dict:
+def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | None = None,
+                       noise_policy=None) -> dict:
     """Train one arm. Returns the EMA residual score plus recipe pins."""
     field = field or LeftoverField()
     torch.manual_seed(recipe.seed)
@@ -389,6 +390,9 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         hidden=recipe.knob("critic_hidden"),
         seed=recipe.seed,
     )
+    if noise_policy is not None:
+        from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input
+        critic = wrap_input(critic, noise_policy)
     gan = GANLoss(loss_type=recipe.knob("loss_type"), mode=recipe.knob("gan_mode"))
     penalty = GradientPenalty(
         arm=recipe.knob("reg_arm"),
@@ -401,16 +405,23 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
     spread = ParticleRegularizer(target_std=recipe.knob("vicreg_std"), weight=recipe.knob("vicreg_weight"))
     lr = float(recipe.knob("lr"))
     betas = (float(recipe.knob("beta1")), float(recipe.knob("beta2")))
+    if noise_policy is not None:
+        noise_policy.register_generator_base(residual)
+    generator_params = list(residual.parameters()) + (
+        noise_policy.scale_parameters() if noise_policy is not None else []
+    )
     opt_g = torch.optim.Adam(
         [
-            {"params": residual.parameters(), "lr": lr},
+            {"params": generator_params, "lr": lr},
             {"params": list(prior_p.parameters()) + list(prior_m.parameters()), "lr": lr},
         ],
         lr=lr,
         betas=betas,
     )
     opt_d = torch.optim.Adam(critic.parameters(), lr=lr, betas=betas)
-    ema = _EMA(list(residual.parameters()), decay=float(recipe.knob("ema")))
+    if noise_policy is not None:
+        noise_policy.register_generator_optimizer(opt_g, opt_d)
+    ema = _EMA(generator_params, decay=float(recipe.knob("ema")))
     poles_p, poles_m, neu = teacher_poles(field, recipe.knob("teacher"))
     half = max(1, int(recipe.knob("batch")) // 2)
     jitter = float(recipe.knob("particle_jitter"))
@@ -439,6 +450,8 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         return fake_p, fake_m
 
     for step in range(recipe.steps):
+        if noise_policy is not None:
+            noise_policy.set_step(step)
         scale = _delayed_cosine(step, recipe.steps, int(recipe.knob("delay")), float(recipe.knob("min_lr_ratio")))
         for group in opt_g.param_groups:
             group["lr"] = lr * scale
@@ -459,6 +472,8 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         real = torch.cat([real_p, real_m], dim=0)
         fake_p, fake_m = fake_batch()
         fake = torch.cat([fake_p, fake_m], dim=0).detach()
+        if noise_policy is not None:
+            fake = noise_policy.output(fake, generator_step=False)
         d_loss = gan.d_loss(critic(real.detach()), critic(fake))
         cap = penalty(critic, real.detach(), fake, step=step + 1)
         d_loss = d_loss + cap
@@ -469,6 +484,8 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
 
         fake_p, fake_m = fake_batch()
         fake = torch.cat([fake_p, fake_m], dim=0)
+        if noise_policy is not None:
+            fake = noise_policy.output(fake, generator_step=True)
         g_loss = gan.g_loss(critic(fake), critic(real.detach()))
         parts = torch.cat([prior_p.z, prior_m.z], dim=0)
         g_loss = g_loss + spread(parts)
@@ -482,7 +499,7 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
         g_loss.backward()
         schedule_optimizer(opt_g, step)
         opt_g.step()
-        ema.update(list(residual.parameters()))
+        ema.update(generator_params)
         checkpoint(step + 1, lambda: score_geometry(residual, field, poles_p, poles_m, neu))
 
         if step == 0 or (step + 1) % 50 == 0 or step + 1 == recipe.steps:
@@ -507,7 +524,11 @@ def fit_cover_leftover(recipe: CoverRecipe, *, log=None, field: LeftoverField | 
             )
 
     live_score = score_geometry(residual, field, poles_p, poles_m, neu)
-    ema.copy_to(list(residual.parameters()))
+    if noise_policy is not None:
+        noise_policy.capture_final_live()
+    ema.copy_to(generator_params)
+    if noise_policy is not None:
+        noise_policy.capture_final_ema()
     scored = score_geometry(residual, field, poles_p, poles_m, neu)
     with torch.no_grad():
         particle_rms = float(torch.cat([prior_p.z, prior_m.z], dim=0).pow(2).mean().sqrt())

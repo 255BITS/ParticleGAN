@@ -6,6 +6,8 @@ See ../SOURCE.md and ../LICENSE. Candidate settings are supplied by baseline.py.
 
 from __future__ import annotations
 
+from contextlib import nullcontext
+
 
 from dataclasses import dataclass
 
@@ -153,13 +155,19 @@ def make_recipe(cfg: HoldConfig):
     )
 
 
-def train(cfg: HoldConfig) -> dict:
+def train(cfg: HoldConfig, *, noise_policy=None) -> dict:
     """Train and return reconstruction/hold measurements."""
     torch.manual_seed(cfg.seed)
     recipe = make_recipe(cfg)
     prior = recipe.make_prior()
     encoder, decoder, critic = MLP(2, 4), MLP(2, 2), MLP(2, 1)
+    if noise_policy is not None:
+        from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input, wrap_output
+        decoder = wrap_output(decoder, noise_policy)
+        critic = wrap_input(critic, noise_policy)
     opt_g, opt_d = recipe.make_optimizers(decoder, critic, prior, encoder=encoder)
+    if noise_policy is not None:
+        noise_policy.register_generator_optimizer(opt_g, opt_d)
     gan = recipe.make_loss()
     regularizer = recipe.make_gradient_penalty(norm=cfg.reg_norm, target_anneal=cfg.target_anneal)
     # The source's removed regularizer audit reset the CPU RNG to seed 0 and
@@ -172,15 +180,24 @@ def train(cfg: HoldConfig) -> dict:
     torch.randn(8, 2, generator=stream)
     torch.set_rng_state(stream.get_state())
 
-    opened = evaluate(encoder, decoder, prior, recipe)
+    def measure(step: int):
+        context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
+        with context:
+            return evaluate(encoder, decoder, prior, recipe)
+
+    opened = measure(0)
     _log(cfg.name, 0, opened, extra=" phase=init")
     penalty_applied = 0
     adv_steps = 0
     for step in range(1, cfg.steps + 1):
+        if noise_policy is not None:
+            noise_policy.set_step(step - 1)
         data = sample_data(cfg.batch)
         if cfg.adversarial_weight > 0:
             codes, _ = prior.sample(cfg.batch)
-            fake = decoder(codes).detach()
+            context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
+            with context:
+                fake = decoder(codes).detach()
             opt_d.zero_grad(set_to_none=True)
             d_loss = gan.d_loss(critic(data).squeeze(-1), critic(fake).squeeze(-1))
             penalty, stats = regularizer.penalty(critic, data, fake, step=step)
@@ -217,12 +234,12 @@ def train(cfg: HoldConfig) -> dict:
             param.requires_grad_(True)
         schedule_optimizer(opt_g, step - 1)
         opt_g.step()
-        checkpoint(step, lambda: evaluate(encoder, decoder, prior, recipe))
+        checkpoint(step, lambda: measure(step))
         if step == 1 or (step % 50 == 0 and step != cfg.steps):
-            snap = evaluate(encoder, decoder, prior, recipe)
+            snap = measure(step)
             _log(cfg.name, step, snap, extra=f" loss={float(loss.detach()):.4f}")
 
-    final = evaluate(encoder, decoder, prior, recipe)
+    final = measure(cfg.steps)
     row = {
         "name": cfg.name,
         "cfg": cfg,

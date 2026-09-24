@@ -1,9 +1,9 @@
 """Screen global cosine hold/floor changes with the frozen shared-c6 D profile.
 
 Only two additional global Recipe fields are accepted beyond the existing
-shared-default search: lr_anneal_start and lr_floor. The host FixedSchedule
-still owns every optimizer update and action trace. Its one hardcoded schedule
-call is scoped to the candidate's public Recipe values for each episode.
+shared-default search: lr_anneal_start and lr_floor. Both the historical host
+schedule and the recipe-aware optimizer bridge are instrumented, so receipts
+count the actual calls that set optimizer rates.
 """
 import argparse
 from contextlib import contextmanager
@@ -19,7 +19,7 @@ import torch
 from particlegan import get_recipe, learning_rate_scale
 from benchmarks import learned_lr_evaluation as bridge
 
-from . import shared_default_search as reference, shared_profile_search as profile, suite
+from . import compare_defaults, shared_default_search as reference, shared_profile_search as profile, suite
 from .compare_defaults import write
 
 
@@ -46,8 +46,10 @@ def configured_schedule(recipe):
                    bridge_calls=0, bridge_total_steps=[], first_call=None, last_call=None)
 
     def scale(step, total_steps, original_hold, original_floor):
-        if (original_hold, original_floor) != (.6, .05):
-            raise ValueError('unexpected host FixedSchedule arguments')
+        if (original_hold, original_floor) not in (
+            (.6, .05), (recipe.lr_anneal_start, recipe.lr_floor),
+        ):
+            raise ValueError('unexpected host or recipe schedule arguments')
         value = learning_rate_scale(step, total_steps, recipe.lr_anneal_start, recipe.lr_floor)
         receipt['bridge_calls'] += 1
         if total_steps not in receipt['bridge_total_steps']:
@@ -58,7 +60,8 @@ def configured_schedule(recipe):
         receipt['last_call'] = item
         return value
 
-    with patch.object(bridge, 'learning_rate_scale', scale):
+    with patch.object(bridge, 'learning_rate_scale', scale), \
+            patch.object(compare_defaults, 'learning_rate_scale', scale):
         yield receipt
 
 
@@ -98,8 +101,8 @@ def run(declaration, output):
                     declaration=declaration,
                     selection='One unchanged global recipe and D profile for every host; '
                     '24 live observations and a final five-check PASS. EMA separate.',
-                    schedule_bridge='Patch only benchmarks.learned_lr_evaluation.learning_rate_scale '
-                    'while the existing FixedSchedule controls native and legacy optimizer steps.')
+                    schedule_bridge='Instrument the host and recipe optimizer bridge schedule calls '
+                    'while their controllers set native and legacy optimizer rates.')
     write(output/'protocol.json', protocol)
     write(output/'plan.json', declaration)
     records = []

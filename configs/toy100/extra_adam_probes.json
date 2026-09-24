@@ -1,0 +1,29 @@
+{
+  "format": "research-optimizer-grid-v1",
+  "production_recipe": false,
+  "source_commit": "4b00335",
+  "base_config": "configs/toy100/shared_candidate.json",
+  "constant_schedule": {"lr_anneal_start": 0.0, "lr_floor": 1.0},
+  "remove_fields": ["network_lr_horizon_cap", "network_lr_floor"],
+  "cores": {
+    "winner": {"reg_kappa": 1.176, "reg_coeff": 6.0, "prior_reg": 0.05},
+    "simple": {"reg_kappa": 1.0, "reg_coeff": 1.0, "prior_reg": 0.0}
+  },
+  "extra_adam": {
+    "cores": ["winner", "simple"],
+    "lr": [0.0005, 0.001, 0.0025, 0.00425],
+    "beta2": [0.9, 0.99, 0.999],
+    "rows": 24,
+    "gradient_evaluations_per_player_per_outer_update": 2
+  },
+  "simultaneous_adam_control": {
+    "cores": ["winner", "simple"],
+    "lr": [0.001, 0.0025],
+    "beta2": [0.99, 0.999],
+    "rows": 8,
+    "gradient_evaluations_per_player_per_outer_update": 1
+  },
+  "fixed": {"beta1": 0.0, "d_lr_mult": 1.0, "prior_lr_mult": 2.0, "seed": 0},
+  "task_order": ["mode_hold", "trajectory"],
+  "outcome": "32/32 full-budget strict mode_hold FAIL; trajectory and broader gates skipped"
+}

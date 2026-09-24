@@ -1,0 +1,1118 @@
+[
+  {
+    "tag": "roundcap_k1p0_c1p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c1p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c1p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c1p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c2p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c2p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c2p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c2p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c3p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c3p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c3p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c3p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c4p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c4p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c4p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c4p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c8p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c8p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c8p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c8p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c16p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c16p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c16p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p0_c16p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.0,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c1p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c1p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c1p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c1p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c2p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c2p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c2p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c2p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c3p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c3p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c3p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c3p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c4p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c4p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c4p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c4p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c8p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c8p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c8p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c8p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c16p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c16p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c16p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p25_c16p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.25,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c1p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c1p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c1p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c1p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 1.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c2p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c2p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c2p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c2p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 2.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c3p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c3p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c3p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c3p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 3.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c4p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c4p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c4p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c4p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 4.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c8p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c8p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c8p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c8p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 8.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c16p0_p0p0_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c16p0_p0p0_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.0,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa",
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c16p0_p0p05_b0p99",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "roundcap_k1p5_c16p0_p0p05_b0p999",
+    "set": {
+      "reg_kappa": 1.5,
+      "reg_coeff": 16.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.999
+      ]
+    },
+    "constraints": [
+      "fine_kappa"
+    ]
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "name": "v3_noise",
+    "overrides": {}
+  },
+  {
+    "name": "v3_noise_floor005",
+    "overrides": {
+      "lr_floor": 0.005
+    }
+  },
+  {
+    "name": "v3_noise_anneal04",
+    "overrides": {
+      "lr_anneal_start": 0.4
+    }
+  },
+  {
+    "name": "v3_noise_cap2",
+    "overrides": {
+      "reg_coeff": 2.0
+    }
+  }
+]

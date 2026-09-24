@@ -1,0 +1,305 @@
+[
+  {
+    "tag": "baseline",
+    "set": {},
+    "remove": [],
+    "constraints": [
+      "control"
+    ]
+  },
+  {
+    "tag": "kappa_0",
+    "set": {
+      "reg_kappa": 0
+    },
+    "remove": [],
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "kappa_1",
+    "set": {
+      "reg_kappa": 1
+    },
+    "remove": [],
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "kappa_1p2",
+    "set": {
+      "reg_kappa": 1.2
+    },
+    "remove": [],
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "kappa_1p25",
+    "set": {
+      "reg_kappa": 1.25
+    },
+    "remove": [],
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "kappa_1p5",
+    "set": {
+      "reg_kappa": 1.5
+    },
+    "remove": [],
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "kappa_2",
+    "set": {
+      "reg_kappa": 2
+    },
+    "remove": [],
+    "constraints": [
+      "fine_kappa"
+    ]
+  },
+  {
+    "tag": "penalty_0",
+    "set": {
+      "reg_coeff": 0
+    },
+    "remove": [],
+    "constraints": [
+      "penalty_coefficient"
+    ]
+  },
+  {
+    "tag": "penalty_1",
+    "set": {
+      "reg_coeff": 1
+    },
+    "remove": [],
+    "constraints": [
+      "penalty_coefficient"
+    ]
+  },
+  {
+    "tag": "penalty_3",
+    "set": {
+      "reg_coeff": 3
+    },
+    "remove": [],
+    "constraints": [
+      "penalty_coefficient"
+    ]
+  },
+  {
+    "tag": "penalty_10",
+    "set": {
+      "reg_coeff": 10
+    },
+    "remove": [],
+    "constraints": [
+      "penalty_coefficient"
+    ]
+  },
+  {
+    "tag": "priorreg_0",
+    "set": {
+      "prior_reg": 0
+    },
+    "remove": [],
+    "constraints": [
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "priorreg_0p01",
+    "set": {
+      "prior_reg": 0.01
+    },
+    "remove": [],
+    "constraints": [
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "priorreg_0p1",
+    "set": {
+      "prior_reg": 0.1
+    },
+    "remove": [],
+    "constraints": [
+      "particle_regularization"
+    ]
+  },
+  {
+    "tag": "beta099",
+    "set": {
+      "betas": [
+        0,
+        0.99
+      ]
+    },
+    "remove": [],
+    "constraints": [
+      "adam_moments"
+    ]
+  },
+  {
+    "tag": "beta09",
+    "set": {
+      "betas": [
+        0,
+        0.9
+      ]
+    },
+    "remove": [],
+    "constraints": [
+      "adam_moments"
+    ]
+  },
+  {
+    "tag": "beta0",
+    "set": {
+      "betas": [
+        0,
+        0
+      ]
+    },
+    "remove": [],
+    "constraints": [
+      "adam_moments"
+    ]
+  },
+  {
+    "tag": "beta_adam",
+    "set": {
+      "betas": [
+        0.9,
+        0.999
+      ]
+    },
+    "remove": [],
+    "constraints": [
+      "adam_moments"
+    ]
+  },
+  {
+    "tag": "beta_half",
+    "set": {
+      "betas": [
+        0.5,
+        0.999
+      ]
+    },
+    "remove": [],
+    "constraints": [
+      "adam_moments"
+    ]
+  },
+  {
+    "tag": "lr_0p001",
+    "set": {
+      "lr": 0.001
+    },
+    "remove": [],
+    "constraints": [
+      "precise_base_lr"
+    ]
+  },
+  {
+    "tag": "lr_0p004",
+    "set": {
+      "lr": 0.004
+    },
+    "remove": [],
+    "constraints": [
+      "precise_base_lr"
+    ]
+  },
+  {
+    "tag": "lr_0p005",
+    "set": {
+      "lr": 0.005
+    },
+    "remove": [],
+    "constraints": [
+      "precise_base_lr"
+    ]
+  },
+  {
+    "tag": "lr_0p01",
+    "set": {
+      "lr": 0.01
+    },
+    "remove": [],
+    "constraints": [
+      "precise_base_lr"
+    ]
+  },
+  {
+    "tag": "equal_lrs",
+    "set": {
+      "prior_lr_mult": 1
+    },
+    "remove": [],
+    "constraints": [
+      "separate_particle_lr"
+    ]
+  },
+  {
+    "tag": "no_regularizers",
+    "set": {
+      "prior_reg": 0,
+      "reg_coeff": 0
+    },
+    "remove": [],
+    "constraints": [
+      "both_regularizers"
+    ]
+  },
+  {
+    "tag": "one_full_schedule",
+    "set": {},
+    "remove": [
+      "network_lr_horizon_cap",
+      "network_lr_floor"
+    ],
+    "constraints": [
+      "network_horizon_and_separate_floor"
+    ]
+  },
+  {
+    "tag": "public_moments_cap",
+    "set": {
+      "betas": [
+        0,
+        0.99
+      ],
+      "reg_kappa": 1.25
+    },
+    "remove": [],
+    "constraints": [
+      "special_moments_cap"
+    ]
+  },
+  {
+    "tag": "round_core",
+    "set": {
+      "lr": 0.005,
+      "prior_lr_mult": 1,
+      "reg_kappa": 1,
+      "reg_coeff": 1,
+      "prior_reg": 0
+    },
+    "remove": [],
+    "constraints": [
+      "round_core"
+    ]
+  }
+]

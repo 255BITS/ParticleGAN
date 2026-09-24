@@ -164,7 +164,7 @@ def score_row(row, shared):
             "total_metrics": len(all_cells), "shared_ok": shared_ok, "toys": toys}
 
 
-def run_toy(toy, cfg):
+def run_toy(toy, cfg, *, noise_policy=None):
     """Serial, scoped host injection; one candidate card, no per-toy tuning."""
     knobs = cfg.host_options()
     with recording(BUDGETS[toy], schedule=cfg.lr_schedule, start=cfg.lr_anneal_start,
@@ -179,27 +179,34 @@ def run_toy(toy, cfg):
             stack.enter_context(patch.object(module, "LR", module.LR * cfg.lr_multiplier))
         stack.enter_context(patch.object(two_pole, "TOY_LR", two_pole.TOY_LR * cfg.lr_multiplier))
         if toy == "two_pole":
-            raw = two_pole.train(gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty, particle_l2=cfg.particle_l2)
+            raw = two_pole.train(gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty,
+                                 particle_l2=cfg.particle_l2, noise_policy=noise_policy)
         elif toy == "trajectory":
-            raw = trajectory.train(gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty, diagnostics=True)
+            raw = trajectory.train(gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty,
+                                   diagnostics=True, noise_policy=noise_policy)
         elif toy == "mode_hold":
             raw = mode_hold.train_mode_hold(mode_hold.ModeHoldRecipe(particle_l2=cfg.particle_l2, vicreg_weight=cfg.vicreg_weight),
-                                           gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty, diagnostics=True)
+                                           gan_factory=cfg.make_loss, cap_factory=cfg.make_penalty,
+                                           diagnostics=True, noise_policy=noise_policy)
         elif toy == "residual_student":
-            raw = residual_student.train()
+            raw = residual_student.train(noise_policy=noise_policy)
         elif toy == "unipolar":
-            raw = unipolar.run_arm("locked_rpgan", **{k: knobs[k] for k in ("loss_type", "gan_mode", "reg_arm", "reg_coeff", "reg_kappa")})
+            raw = unipolar.run_arm("locked_rpgan", noise_policy=noise_policy,
+                                   **{k: knobs[k] for k in ("loss_type", "gan_mode", "reg_arm", "reg_coeff", "reg_kappa")})
         elif toy == "ae_gan_hold":
             options = {k: v for k, v in knobs.items() if k in ae_gan_hold.HoldConfig.__dataclass_fields__}
-            raw = ae_gan_hold.train(ae_gan_hold.HoldConfig(name=cfg.name, lr=ae_gan_hold.LR * cfg.lr_multiplier, **options))
+            raw = ae_gan_hold.train(ae_gan_hold.HoldConfig(name=cfg.name, lr=ae_gan_hold.LR * cfg.lr_multiplier, **options),
+                                    noise_policy=noise_policy)
             raw.pop("cfg", None)
         elif toy == "cover_leftover":
-            raw = cover_leftover.fit_cover_leftover(cover_leftover.CoverRecipe())
+            raw = cover_leftover.fit_cover_leftover(cover_leftover.CoverRecipe(),
+                                                    noise_policy=noise_policy)
         elif toy == "unused_token_hold":
             options = {k: v for k, v in knobs.items() if k in unused_token_hold.UnusedHoldRecipe.__dataclass_fields__}
-            raw = unused_token_hold.train(unused_token_hold.UnusedHoldRecipe(name=cfg.name, **options))
+            raw = unused_token_hold.train(unused_token_hold.UnusedHoldRecipe(name=cfg.name, **options),
+                                          noise_policy=noise_policy)
         elif toy == "mid_scale_identity":
-            raw = mid_scale_identity.run_arm("locked")
+            raw = mid_scale_identity.run_arm("locked", noise_policy=noise_policy)
         else:
             raise ValueError(toy)
     live = raw.get("live", raw)

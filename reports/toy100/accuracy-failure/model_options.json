@@ -1,0 +1,6 @@
+{
+  "generator": "trainable_affine",
+  "prior": "square",
+  "scale": 5.0,
+  "initialization": "identity"
+}

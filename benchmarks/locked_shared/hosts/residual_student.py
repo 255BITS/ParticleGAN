@@ -6,6 +6,7 @@ See ../SOURCE.md and ../LICENSE. Candidate settings are supplied by baseline.py.
 
 from __future__ import annotations
 
+from contextlib import nullcontext
 
 import json
 
@@ -171,7 +172,8 @@ def _emit(record: dict, echo: bool, log: Callable[[dict], None] | None) -> None:
 
 
 def train(*, pairing: str = "shared", echo: bool = False,
-          log: Callable[[dict], None] | None = None) -> dict:
+          log: Callable[[dict], None] | None = None,
+          noise_policy=None) -> dict:
     """Train the residual head; score the resulting predictions."""
     torch.set_num_threads(1)
     torch.manual_seed(PROTOCOL["seed"])
@@ -182,6 +184,10 @@ def train(*, pairing: str = "shared", echo: bool = False,
     hidden = PROTOCOL["critic_hidden"]
     head = ResidualHead(slow.shape[1], PROTOCOL["z_dim"], hidden)
     critic = _Critic(slow.shape[1] + fast.shape[1], hidden)
+    if noise_policy is not None:
+        from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input, wrap_output
+        head = wrap_output(head, noise_policy)
+        critic = wrap_input(critic, noise_policy, data_index=1)
     view = _FastView(critic)
     prior = ParticlePrior(
         PROTOCOL["n_particles"], PROTOCOL["z_dim"], init_std=0.1,
@@ -201,6 +207,8 @@ def train(*, pairing: str = "shared", echo: bool = False,
     opt_d = torch.optim.Adam(
         critic.parameters(), lr=PROTOCOL["lr"], betas=(PROTOCOL["beta1"], PROTOCOL["beta2"]),
     )
+    if noise_policy is not None:
+        noise_policy.register_generator_optimizer(opt_g, opt_d)
     _emit({
         "event": "config",
         "family": "residual_student",
@@ -227,7 +235,11 @@ def train(*, pairing: str = "shared", echo: bool = False,
     steps = PROTOCOL["steps"]
     both = int(mask.sum())
     for step in range(1, steps + 1):
-        fake = head(slow, prior.z)
+        if noise_policy is not None:
+            noise_policy.set_step(step - 1)
+        context = noise_policy.discriminator() if noise_policy is not None else nullcontext()
+        with context:
+            fake = head(slow, prior.z)
         opt_d.zero_grad(set_to_none=True)
         d_loss = gan.d_loss(critic(slow, paired), critic(slow, fake.detach()))
         view.slow = slow.detach()
@@ -260,13 +272,15 @@ def train(*, pairing: str = "shared", echo: bool = False,
             for parameter, flag in zip(critic.parameters(), flags):
                 parameter.requires_grad_(flag)
         def observe_student():
-            with torch.no_grad():
+            context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
+            with torch.no_grad(), context:
                 pred = head(slow, prior.z)
                 return {"identity_mse": identity_mse(pred, fast), **landing_stats(pred, fast)}
         checkpoint(step, observe_student)
 
         if step == 1 or step % LOG_EVERY == 0 or step == steps:
-            with torch.no_grad():
+            context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()
+            with torch.no_grad(), context:
                 pred = head(slow, prior.z)
                 mse = identity_mse(pred, fast)
                 stats = landing_stats(pred, fast)
@@ -282,7 +296,8 @@ def train(*, pairing: str = "shared", echo: bool = False,
                 "wrong_pad_rate": stats["wrong_pad_rate"],
             }, echo, log)
 
-    with torch.no_grad():
+    context = noise_policy.evaluation(steps) if noise_policy is not None else nullcontext()
+    with torch.no_grad(), context:
         pred = head(slow, prior.z)
         mse = identity_mse(pred, fast)
         paired_mse = identity_mse(pred, paired)

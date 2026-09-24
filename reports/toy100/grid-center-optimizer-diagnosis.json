@@ -1,0 +1,1812 @@
+{
+  "center": {
+    "ci_kappa100": {
+      "drift": [
+        {
+          "affine_change_rms_sigma": 0.028549081518916625,
+          "center_change_rms_sigma": 0.09464517867007172,
+          "from": 6000,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              -0.0020675566646407963,
+              -0.0018563102835525576
+            ],
+            [
+              0.0012918618694057462,
+              -0.008575735441723019
+            ]
+          ],
+          "model": "live",
+          "to": 6250,
+          "translation_change_sigma": [
+            -0.008728281376055752,
+            0.007394008569887726
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.04280451113654387,
+          "center_change_rms_sigma": 0.0843771914590023,
+          "from": 6250,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.006468944504079765,
+              0.010793550087002921
+            ],
+            [
+              -0.003098068447713131,
+              -0.003022629428182915
+            ]
+          ],
+          "model": "live",
+          "to": 6500,
+          "translation_change_sigma": [
+            0.0018854412734290464,
+            -0.01917661200726482
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.03558825755080701,
+          "center_change_rms_sigma": 0.0647749531354996,
+          "from": 6500,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              -0.0012742869490210001,
+              -0.007265462975921226
+            ],
+            [
+              0.003358999841511093,
+              0.009173404307001008
+            ]
+          ],
+          "model": "live",
+          "to": 6750,
+          "translation_change_sigma": [
+            -0.0010660116164131427,
+            0.005400607396723104
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.031544606839479246,
+          "center_change_rms_sigma": 0.05543767941450986,
+          "from": 6750,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.004761071156174065,
+              -0.0007521853864233259
+            ],
+            [
+              0.002867021975194289,
+              -0.0035319558042968464
+            ]
+          ],
+          "model": "live",
+          "to": 7000,
+          "translation_change_sigma": [
+            7.697083246781212e-05,
+            0.025152522802648833
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.007367899355982535,
+          "center_change_rms_sigma": 0.038139214317073934,
+          "from": 6000,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.00028215522390010687,
+              0.001412950933265578
+            ],
+            [
+              0.0011728622364905834,
+              -0.0012147871834814659
+            ]
+          ],
+          "model": "ema",
+          "to": 6250,
+          "translation_change_sigma": [
+            0.0010491365190280475,
+            0.0035404193929581542
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.0059404159876430595,
+          "center_change_rms_sigma": 0.03500904105432607,
+          "from": 6250,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              -0.0005661497626443801,
+              -0.0013385053790209223
+            ],
+            [
+              -7.608856533889482e-05,
+              -0.0012904946717958892
+            ]
+          ],
+          "model": "ema",
+          "to": 6500,
+          "translation_change_sigma": [
+            0.0017322343490137554,
+            -0.0010371975967043286
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.002304032768544074,
+          "center_change_rms_sigma": 0.030337118571200063,
+          "from": 6500,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.00042615404601391293,
+              0.00034731419948895903
+            ],
+            [
+              -0.00018236680593286276,
+              0.0004710086180963228
+            ]
+          ],
+          "model": "ema",
+          "to": 6750,
+          "translation_change_sigma": [
+            -0.0008382974122333933,
+            -8.808855750284614e-05
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.005516911890226849,
+          "center_change_rms_sigma": 0.027928162823282924,
+          "from": 6750,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              -0.0007178126693071704,
+              -0.0013854388495371925
+            ],
+            [
+              0.0008976455540723322,
+              0.00034243528927985407
+            ]
+          ],
+          "model": "ema",
+          "to": 7000,
+          "translation_change_sigma": [
+            -0.0016452121111977828,
+            0.00016840478392015533
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "affine_gap_fraction_raw": 0.07140896721744376,
+          "coherent_affine_gap_rms_sigma": 0.015681189842436636,
+          "coherent_gap_sample_floor_rms_sigma": 0.024886114081438523,
+          "conservative_independent_sample_floor_rms_sigma": 0.14209678720007765,
+          "linear_gap_coefficients_per_grid_unit_in_sigma": [
+            [
+              6.289765968774119e-06,
+              0.0001492168842108395
+            ],
+            [
+              0.0013047147878718851,
+              0.0034943567624491877
+            ]
+          ],
+          "live_ema_center_gap_rms_sigma": 0.058681693218100364,
+          "step": 6000,
+          "translation_gap_sigma": [
+            0.007232661915703039,
+            0.008866995934772328
+          ]
+        },
+        {
+          "affine_gap_fraction_raw": 0.12865375121785874,
+          "coherent_affine_gap_rms_sigma": 0.02083195596002107,
+          "coherent_gap_sample_floor_rms_sigma": 0.024475745542603643,
+          "conservative_independent_sample_floor_rms_sigma": 0.13981455487584715,
+          "linear_gap_coefficients_per_grid_unit_in_sigma": [
+            [
+              -0.002343422122572129,
+              -0.003120044332607296
+            ],
+            [
+              0.001423714420787048,
+              -0.003866591495792365
+            ]
+          ],
+          "live_ema_center_gap_rms_sigma": 0.05807895878785027,
+          "step": 6250,
+          "translation_gap_sigma": [
+            -0.002544755979380759,
+            0.0127205851117019
+          ]
+        },
+        {
+          "affine_gap_fraction_raw": 0.45359858888140575,
+          "coherent_affine_gap_rms_sigma": 0.034152479564542856,
+          "coherent_gap_sample_floor_rms_sigma": 0.024309096496895617,
+          "conservative_independent_sample_floor_rms_sigma": 0.13874455801097252,
+          "linear_gap_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.004691672144152016,
+              0.009012011133416547
+            ],
+            [
+              -0.0015982654615871884,
+              -0.005598726252179391
+            ]
+          ],
+          "live_ema_center_gap_rms_sigma": 0.050709157225357966,
+          "step": 6500,
+          "translation_gap_sigma": [
+            -0.002391549054965468,
+            -0.005418829298858591
+          ]
+        },
+        {
+          "affine_gap_fraction_raw": 0.2039124885567206,
+          "coherent_affine_gap_rms_sigma": 0.014403251645484958,
+          "coherent_gap_sample_floor_rms_sigma": 0.024144591789224516,
+          "conservative_independent_sample_floor_rms_sigma": 0.13784875778215452,
+          "linear_gap_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.002991231149117103,
+              0.0013992339580063623
+            ],
+            [
+              0.0019431011858567675,
+              0.0031036694367252947
+            ]
+          ],
+          "live_ema_center_gap_rms_sigma": 0.031896177251199996,
+          "step": 6750,
+          "translation_gap_sigma": [
+            -0.0026192632591452176,
+            6.986665536735974e-05
+          ]
+        },
+        {
+          "affine_gap_fraction_raw": 0.6430795127374845,
+          "coherent_affine_gap_rms_sigma": 0.03722436706171937,
+          "coherent_gap_sample_floor_rms_sigma": 0.024046864641565024,
+          "conservative_independent_sample_floor_rms_sigma": 0.13726806696393756,
+          "linear_gap_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.008470114974598339,
+              0.002032487421120229
+            ],
+            [
+              0.003912477606978724,
+              -0.0007707216568514058
+            ]
+          ],
+          "live_ema_center_gap_rms_sigma": 0.046418915002302386,
+          "step": 7000,
+          "translation_gap_sigma": [
+            -0.0008970803154796226,
+            0.025053984674096037
+          ]
+        }
+      ],
+      "path": "/ml2/hypergan/ParticleGAN-toy100-coverage/artifacts/toy100-accuracy/ci-common22-network-floor010/artifacts/toy-suite-ci/toy100/grid100",
+      "rows": [
+        {
+          "affine_fraction_raw": 0.040624643218670334,
+          "affine_noise_rms_sigma": 0.01810394747562573,
+          "affine_rms_sigma": 0.026980562948508466,
+          "count_med": 197.0,
+          "count_min": 124,
+          "debiased_affine_rms_sigma": 0.02000494595889258,
+          "debiased_center_rms_sigma": 0.08512938217611925,
+          "finite_sample_rms_sigma": 0.10330505320369837,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.006327263467827163,
+              0.0015430610007295615
+            ],
+            [
+              -0.0010838893235521193,
+              0.005152654201968136
+            ]
+          ],
+          "model": "live",
+          "raw_center_rms_sigma": 0.1338616663840202,
+          "residual_rms_sigma": 0.1311144345603805,
+          "step": 6000,
+          "translation_sigma": [
+            0.01016115013726698,
+            0.006785802931524984
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.02930630848431173,
+          "affine_noise_rms_sigma": 0.01707529677265252,
+          "affine_rms_sigma": 0.020695863107120554,
+          "count_med": 199.0,
+          "count_min": 125,
+          "debiased_affine_rms_sigma": 0.011694143400630769,
+          "debiased_center_rms_sigma": 0.07138401564806447,
+          "finite_sample_rms_sigma": 0.09756824747408963,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.006320973701858389,
+              0.001393844116518722
+            ],
+            [
+              -0.0023886041114240045,
+              0.0016582974395189486
+            ]
+          ],
+          "model": "ema",
+          "raw_center_rms_sigma": 0.12089350935930478,
+          "residual_rms_sigma": 0.11910886556197084,
+          "step": 6000,
+          "translation_sigma": [
+            0.0029284882215639403,
+            -0.0020811930032473436
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.03349512251842222,
+          "affine_noise_rms_sigma": 0.017557836933735457,
+          "affine_rms_sigma": 0.02122858633211854,
+          "count_med": 197.0,
+          "count_min": 122,
+          "debiased_affine_rms_sigma": 0.011932109615175568,
+          "debiased_center_rms_sigma": 0.05824594801894597,
+          "finite_sample_rms_sigma": 0.1003079914153449,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.004259706803186367,
+              -0.0003132492828229962
+            ],
+            [
+              0.0002079725458536269,
+              -0.0034230812397548823
+            ]
+          ],
+          "model": "live",
+          "raw_center_rms_sigma": 0.11599260149857257,
+          "residual_rms_sigma": 0.11403346317965812,
+          "step": 6250,
+          "translation_sigma": [
+            0.0014328687612112287,
+            0.01417981150141271
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.03320503723325065,
+          "affine_noise_rms_sigma": 0.017052403996933606,
+          "affine_rms_sigma": 0.021365216893004198,
+          "count_med": 198.0,
+          "count_min": 124,
+          "debiased_affine_rms_sigma": 0.012871985503816985,
+          "debiased_center_rms_sigma": 0.06527380100568687,
+          "finite_sample_rms_sigma": 0.09739823721890643,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.006603128925758496,
+              0.0028067950497843
+            ],
+            [
+              -0.001215741874933421,
+              0.0004435102560374827
+            ]
+          ],
+          "model": "ema",
+          "raw_center_rms_sigma": 0.11724796676736181,
+          "residual_rms_sigma": 0.11528492190306269,
+          "step": 6250,
+          "translation_sigma": [
+            0.003977624740591988,
+            0.0014592263897108104
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.15435209688053692,
+          "affine_noise_rms_sigma": 0.0173288429405008,
+          "affine_rms_sigma": 0.04799388873664943,
+          "count_med": 198.0,
+          "count_min": 125,
+          "debiased_affine_rms_sigma": 0.04475627954163908,
+          "debiased_center_rms_sigma": 0.07173169217560375,
+          "finite_sample_rms_sigma": 0.0988821246140148,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.010728651307266131,
+              0.010480300804179925
+            ],
+            [
+              -0.0028900959018595043,
+              -0.006445710667937797
+            ]
+          ],
+          "model": "live",
+          "raw_center_rms_sigma": 0.12216018267241223,
+          "residual_rms_sigma": 0.11233742419377096,
+          "step": 6500,
+          "translation_sigma": [
+            0.003318310034640275,
+            -0.0049968005058521085
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.02989874662631156,
+          "affine_noise_rms_sigma": 0.01704826603613512,
+          "affine_rms_sigma": 0.019259413358694848,
+          "count_med": 198.0,
+          "count_min": 126,
+          "debiased_affine_rms_sigma": 0.008960001567088885,
+          "debiased_center_rms_sigma": 0.05416327842518513,
+          "finite_sample_rms_sigma": 0.0973261414496566,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.006036979163114116,
+              0.0014682896707633776
+            ],
+            [
+              -0.0012918304402723159,
+              -0.0008469844157584065
+            ]
+          ],
+          "model": "ema",
+          "raw_center_rms_sigma": 0.11138239779804837,
+          "residual_rms_sigma": 0.10970466506179952,
+          "step": 6500,
+          "translation_sigma": [
+            0.005709859089605743,
+            0.0004220287930064818
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.06132916465368315,
+          "affine_noise_rms_sigma": 0.017119959879360012,
+          "affine_rms_sigma": 0.02985169962251069,
+          "count_med": 198.0,
+          "count_min": 126,
+          "debiased_affine_rms_sigma": 0.02445467121189137,
+          "debiased_center_rms_sigma": 0.07052976761373662,
+          "finite_sample_rms_sigma": 0.09775343794894054,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.009454364358245131,
+              0.003214837828258699
+            ],
+            [
+              0.00046890393965158886,
+              0.002727693639063211
+            ]
+          ],
+          "model": "live",
+          "raw_center_rms_sigma": 0.12054120768635537,
+          "residual_rms_sigma": 0.11678638097026749,
+          "step": 6750,
+          "translation_sigma": [
+            0.0022522984182271324,
+            0.0004038068908709954
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.03320858510239316,
+          "affine_noise_rms_sigma": 0.017025518682183858,
+          "affine_rms_sigma": 0.0203655198576126,
+          "count_med": 198.5,
+          "count_min": 126,
+          "debiased_affine_rms_sigma": 0.011175245530789097,
+          "debiased_center_rms_sigma": 0.05516182915477303,
+          "finite_sample_rms_sigma": 0.0971933402617985,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.0064631332091280285,
+              0.0018156038702523366
+            ],
+            [
+              -0.0014741972462051786,
+              -0.0003759757976620837
+            ]
+          ],
+          "model": "ema",
+          "raw_center_rms_sigma": 0.1117558624276423,
+          "residual_rms_sigma": 0.10988456847016918,
+          "step": 6750,
+          "translation_sigma": [
+            0.00487156167737235,
+            0.00033394023550363565
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.14842954730758753,
+          "affine_noise_rms_sigma": 0.017018859409440906,
+          "affine_rms_sigma": 0.04972805178657987,
+          "count_med": 198.5,
+          "count_min": 125,
+          "debiased_affine_rms_sigma": 0.046725127703308146,
+          "debiased_center_rms_sigma": 0.0849736322245998,
+          "finite_sample_rms_sigma": 0.0971584823533015,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.014215435514419197,
+              0.002462652441835373
+            ],
+            [
+              0.003335925914845878,
+              -0.0008042621652336354
+            ]
+          ],
+          "model": "live",
+          "raw_center_rms_sigma": 0.12907474139675176,
+          "residual_rms_sigma": 0.11911091357281071,
+          "step": 7000,
+          "translation_sigma": [
+            0.0023292692506949445,
+            0.025556329693519828
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.02173411435536725,
+          "affine_noise_rms_sigma": 0.016988529173870084,
+          "affine_rms_sigma": 0.016948799329658544,
+          "count_med": 198.5,
+          "count_min": 126,
+          "debiased_affine_rms_sigma": 0.0,
+          "debiased_center_rms_sigma": 0.06176035082065926,
+          "finite_sample_rms_sigma": 0.09696778596430493,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.005745320539820858,
+              0.00043016502071514416
+            ],
+            [
+              -0.0005765516921328465,
+              -3.354050838222963e-05
+            ]
+          ],
+          "model": "ema",
+          "raw_center_rms_sigma": 0.11496561419968215,
+          "residual_rms_sigma": 0.11370941319694304,
+          "step": 7000,
+          "translation_sigma": [
+            0.003226349566174567,
+            0.000502345019423791
+          ]
+        }
+      ]
+    },
+    "mode_count": 100,
+    "new_kappa1176": {
+      "drift": [
+        {
+          "affine_change_rms_sigma": 0.03692010743085917,
+          "center_change_rms_sigma": 0.09405586230214563,
+          "from": 6000,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.00012080055958986306,
+              -0.005947736240724612
+            ],
+            [
+              0.0021142187212271337,
+              -0.010772718446684676
+            ]
+          ],
+          "model": "live",
+          "to": 6250,
+          "translation_change_sigma": [
+            -0.008427003309398242,
+            0.0024103362168077175
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.02729306184619655,
+          "center_change_rms_sigma": 0.0731265650665259,
+          "from": 6250,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.0010509140909833927,
+              0.0073044042452079985
+            ],
+            [
+              -0.0020282176536194248,
+              -0.001965203769952888
+            ]
+          ],
+          "model": "live",
+          "to": 6500,
+          "translation_change_sigma": [
+            -0.002094772081467731,
+            -0.015014628538315079
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.02486067317664512,
+          "center_change_rms_sigma": 0.06098368352632172,
+          "from": 6500,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              -0.0030676599073310423,
+              -0.002718898117329522
+            ],
+            [
+              -0.0011269929821270345,
+              0.006965847498504706
+            ]
+          ],
+          "model": "live",
+          "to": 6750,
+          "translation_change_sigma": [
+            0.004341588469100386,
+            0.007055915779210111
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.031080868417587233,
+          "center_change_rms_sigma": 0.05280807980621185,
+          "from": 6750,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.0028046111634593505,
+              -0.0028217130358404066
+            ],
+            [
+              0.006842812294980576,
+              -0.0012186022925310188
+            ]
+          ],
+          "model": "live",
+          "to": 7000,
+          "translation_change_sigma": [
+            -0.004240542722618538,
+            0.02046724443947285
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.004522457170067813,
+          "center_change_rms_sigma": 0.03697122555586308,
+          "from": 6000,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              -0.000682476710430575,
+              -0.00029904513818747097
+            ],
+            [
+              0.0005089811323175236,
+              -0.0009999821018125098
+            ]
+          ],
+          "model": "ema",
+          "to": 6250,
+          "translation_change_sigma": [
+            -0.0009441260497515674,
+            0.0021433292161157445
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.0052447551877722294,
+          "center_change_rms_sigma": 0.03502399050896768,
+          "from": 6250,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              -0.0012215374681731417,
+              -0.00022763912387610552
+            ],
+            [
+              -0.0007062576428218904,
+              -0.0009913619059513563
+            ]
+          ],
+          "model": "ema",
+          "to": 6500,
+          "translation_change_sigma": [
+            0.0012734879208594636,
+            -0.0009616233339157067
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.002049407443445747,
+          "center_change_rms_sigma": 0.02899893420648937,
+          "from": 6500,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              -9.278438913419128e-05,
+              -0.00038271185245023734
+            ],
+            [
+              0.00028375481194625393,
+              0.00027285186129233233
+            ]
+          ],
+          "model": "ema",
+          "to": 6750,
+          "translation_change_sigma": [
+            -0.0009636811415762959,
+            0.0008447136061616096
+          ]
+        },
+        {
+          "affine_change_rms_sigma": 0.004927400296028796,
+          "center_change_rms_sigma": 0.02781273608900821,
+          "from": 6750,
+          "linear_change_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.00013121258008021077,
+              -0.0016099955426959627
+            ],
+            [
+              0.00017105908840320695,
+              0.0001511737490134707
+            ]
+          ],
+          "model": "ema",
+          "to": 7000,
+          "translation_change_sigma": [
+            -0.0005023361780071463,
+            -0.0014388331882349617
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "affine_gap_fraction_raw": 0.07763841789960581,
+          "coherent_affine_gap_rms_sigma": 0.01699531114777218,
+          "coherent_gap_sample_floor_rms_sigma": 0.0247876283394091,
+          "conservative_independent_sample_floor_rms_sigma": 0.14173916945158396,
+          "linear_gap_coefficients_per_grid_unit_in_sigma": [
+            [
+              -0.000645551049496252,
+              0.001228028883191035
+            ],
+            [
+              -8.388025523849239e-05,
+              0.005104197409864193
+            ]
+          ],
+          "live_ema_center_gap_rms_sigma": 0.060994514891193806,
+          "step": 6000,
+          "translation_gap_sigma": [
+            0.005489480361358339,
+            0.005275677804002301
+          ]
+        },
+        {
+          "affine_gap_fraction_raw": 0.14679479229524944,
+          "coherent_affine_gap_rms_sigma": 0.019875350124329998,
+          "coherent_gap_sample_floor_rms_sigma": 0.024431790809167426,
+          "conservative_independent_sample_floor_rms_sigma": 0.13980538853516442,
+          "linear_gap_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.0001577262205241861,
+              -0.004420662219346106
+            ],
+            [
+              0.0015213573336711177,
+              -0.004668538935007974
+            ]
+          ],
+          "live_ema_center_gap_rms_sigma": 0.05187516170927358,
+          "step": 6250,
+          "translation_gap_sigma": [
+            -0.001993396898288335,
+            0.005542684804694274
+          ]
+        },
+        {
+          "affine_gap_fraction_raw": 0.30365913435727837,
+          "coherent_affine_gap_rms_sigma": 0.022197747720871318,
+          "coherent_gap_sample_floor_rms_sigma": 0.024247697995088767,
+          "conservative_independent_sample_floor_rms_sigma": 0.13865563771379022,
+          "linear_gap_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.0024301777796807205,
+              0.0031113811497379983
+            ],
+            [
+              0.00019939732287358337,
+              -0.005642380799009505
+            ]
+          ],
+          "live_ema_center_gap_rms_sigma": 0.040282436992810554,
+          "step": 6500,
+          "translation_gap_sigma": [
+            -0.0053616569006155294,
+            -0.008510320399705097
+          ]
+        },
+        {
+          "affine_gap_fraction_raw": 0.0402910801980262,
+          "coherent_affine_gap_rms_sigma": 0.0058229368974448805,
+          "coherent_gap_sample_floor_rms_sigma": 0.02410369478374231,
+          "conservative_independent_sample_floor_rms_sigma": 0.1378557888766372,
+          "linear_gap_coefficients_per_grid_unit_in_sigma": [
+            [
+              -0.0005446977385161304,
+              0.0007751948848587137
+            ],
+            [
+              -0.001211350471199705,
+              0.0010506148382028692
+            ]
+          ],
+          "live_ema_center_gap_rms_sigma": 0.029009325312633966,
+          "step": 6750,
+          "translation_gap_sigma": [
+            -5.638728993884786e-05,
+            -0.0022991182266565964
+          ]
+        },
+        {
+          "affine_gap_fraction_raw": 0.533858254535229,
+          "coherent_affine_gap_rms_sigma": 0.026165052915377043,
+          "coherent_gap_sample_floor_rms_sigma": 0.024004447505070393,
+          "conservative_independent_sample_floor_rms_sigma": 0.13730255150482987,
+          "linear_gap_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.0021287008448630093,
+              -0.00043652260828573006
+            ],
+            [
+              0.005460402735377664,
+              -0.0003191612033416204
+            ]
+          ],
+          "live_ema_center_gap_rms_sigma": 0.03581035582016053,
+          "step": 7000,
+          "translation_gap_sigma": [
+            -0.0037945938345502394,
+            0.019606959401051217
+          ]
+        }
+      ],
+      "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100",
+      "rows": [
+        {
+          "affine_fraction_raw": 0.05988506723773612,
+          "affine_noise_rms_sigma": 0.018006604222540763,
+          "affine_rms_sigma": 0.03528745293468392,
+          "count_med": 197.5,
+          "count_min": 138,
+          "debiased_affine_rms_sigma": 0.030347430517101606,
+          "debiased_center_rms_sigma": 0.10103121696208126,
+          "finite_sample_rms_sigma": 0.10288794475986257,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.0074710451373214935,
+              0.0037127873517518546
+            ],
+            [
+              -0.0014533082231144388,
+              0.007312379911035083
+            ]
+          ],
+          "model": "live",
+          "raw_center_rms_sigma": 0.14419859908385957,
+          "residual_rms_sigma": 0.13981427553411752,
+          "step": 6000,
+          "translation_sigma": [
+            0.013308746464838468,
+            0.005942309625008141
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.04295009897829813,
+          "affine_noise_rms_sigma": 0.017034926564721505,
+          "affine_rms_sigma": 0.026678136188365665,
+          "count_med": 199.5,
+          "count_min": 139,
+          "debiased_affine_rms_sigma": 0.02053129872705405,
+          "debiased_center_rms_sigma": 0.08406464131449673,
+          "finite_sample_rms_sigma": 0.09748878386725467,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.008116596186817746,
+              0.0024847584685608196
+            ],
+            [
+              -0.0013694279678759464,
+              0.00220818250117089
+            ]
+          ],
+          "model": "ema",
+          "raw_center_rms_sigma": 0.1287281123113801,
+          "residual_rms_sigma": 0.1259333313653153,
+          "step": 6000,
+          "translation_sigma": [
+            0.007819266103480129,
+            0.0006666318210058407
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.04605439093662318,
+          "affine_noise_rms_sigma": 0.01752613213158636,
+          "affine_rms_sigma": 0.026696319583151287,
+          "count_med": 198.0,
+          "count_min": 135,
+          "debiased_affine_rms_sigma": 0.020137730055592738,
+          "debiased_center_rms_sigma": 0.0735886897483274,
+          "finite_sample_rms_sigma": 0.10029827207445242,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.007591845696911357,
+              -0.002234948888972757
+            ],
+            [
+              0.000660910498112695,
+              -0.003460338535649593
+            ]
+          ],
+          "model": "live",
+          "raw_center_rms_sigma": 0.12439870835340884,
+          "residual_rms_sigma": 0.12150039160723196,
+          "step": 6250,
+          "translation_sigma": [
+            0.004881743155440227,
+            0.008352645841815859
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.03554882162080586,
+          "affine_noise_rms_sigma": 0.017021959189502656,
+          "affine_rms_sigma": 0.023846867021178053,
+          "count_med": 199.0,
+          "count_min": 138,
+          "debiased_affine_rms_sigma": 0.01670107697355639,
+          "debiased_center_rms_sigma": 0.08069173696322791,
+          "finite_sample_rms_sigma": 0.09739508859458675,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.0074341194763871705,
+              0.0021857133303733486
+            ],
+            [
+              -0.0008604468355584228,
+              0.0012082003993583801
+            ]
+          ],
+          "model": "ema",
+          "raw_center_rms_sigma": 0.1264790879809392,
+          "residual_rms_sigma": 0.1242106542522195,
+          "step": 6250,
+          "translation_sigma": [
+            0.006875140053728562,
+            0.002809961037121585
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.06660984639137181,
+          "affine_noise_rms_sigma": 0.017284598406020164,
+          "affine_rms_sigma": 0.03374457881745521,
+          "count_med": 199.0,
+          "count_min": 138,
+          "debiased_affine_rms_sigma": 0.02898170556592645,
+          "debiased_center_rms_sigma": 0.0856164974649244,
+          "finite_sample_rms_sigma": 0.09881717720499553,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.00864275978789475,
+              0.0050694553562352414
+            ],
+            [
+              -0.0013673071555067298,
+              -0.005425542305602481
+            ]
+          ],
+          "model": "live",
+          "raw_center_rms_sigma": 0.1307479221591108,
+          "residual_rms_sigma": 0.12631833813566995,
+          "step": 6500,
+          "translation_sigma": [
+            0.0027869710739724957,
+            -0.00666198269649922
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.02937461411651784,
+          "affine_noise_rms_sigma": 0.017005690694695024,
+          "affine_rms_sigma": 0.020988185637225525,
+          "count_med": 199.0,
+          "count_min": 138,
+          "debiased_affine_rms_sigma": 0.012300830067072832,
+          "debiased_center_rms_sigma": 0.07440110429478337,
+          "finite_sample_rms_sigma": 0.09726536567069677,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.006212582008214029,
+              0.001958074206497243
+            ],
+            [
+              -0.0015667044783803132,
+              0.0002168384934070238
+            ]
+          ],
+          "model": "ema",
+          "raw_center_rms_sigma": 0.12245846511914801,
+          "residual_rms_sigma": 0.12064647422529573,
+          "step": 6500,
+          "translation_sigma": [
+            0.008148627974588025,
+            0.0018483377032058783
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.027132482719614166,
+          "affine_noise_rms_sigma": 0.017102048994833856,
+          "affine_rms_sigma": 0.0205883274564931,
+          "count_med": 199.0,
+          "count_min": 139,
+          "debiased_affine_rms_sigma": 0.011462946725606375,
+          "debiased_center_rms_sigma": 0.07781790244812378,
+          "finite_sample_rms_sigma": 0.09781077837780677,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.005575099880563707,
+              0.0023505572389057195
+            ],
+            [
+              -0.0024943001376337643,
+              0.0015403051929022253
+            ]
+          ],
+          "model": "live",
+          "raw_center_rms_sigma": 0.1249902968565886,
+          "residual_rms_sigma": 0.12328298779978669,
+          "step": 6750,
+          "translation_sigma": [
+            0.007128559543072881,
+            0.0003939330827108914
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.027219612045067766,
+          "affine_noise_rms_sigma": 0.016985523907319097,
+          "affine_rms_sigma": 0.020096925518917945,
+          "count_med": 199.5,
+          "count_min": 139,
+          "debiased_affine_rms_sigma": 0.010741433466108079,
+          "debiased_center_rms_sigma": 0.07349011091255957,
+          "finite_sample_rms_sigma": 0.09714561317901875,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.0061197976190798375,
+              0.0015753623540470058
+            ],
+            [
+              -0.0012829496664340592,
+              0.0004896903546993561
+            ]
+          ],
+          "model": "ema",
+          "raw_center_rms_sigma": 0.12181160273909808,
+          "residual_rms_sigma": 0.12014233286629203,
+          "step": 6750,
+          "translation_sigma": [
+            0.007184946833011729,
+            0.002693051309367488
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.06976106886460721,
+          "affine_noise_rms_sigma": 0.01699543652306496,
+          "affine_rms_sigma": 0.03437338771976953,
+          "count_med": 199.0,
+          "count_min": 139,
+          "debiased_affine_rms_sigma": 0.02987783326688989,
+          "debiased_center_rms_sigma": 0.08653390726891248,
+          "finite_sample_rms_sigma": 0.09720437353741043,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.008379711044023058,
+              -0.00047115579693468714
+            ],
+            [
+              0.0043485121573468115,
+              0.00032170290037120646
+            ]
+          ],
+          "model": "live",
+          "raw_center_rms_sigma": 0.1301414897026508,
+          "residual_rms_sigma": 0.12552002851613586,
+          "step": 7000,
+          "translation_sigma": [
+            0.0028880168204543435,
+            0.020861177522183742
+          ]
+        },
+        {
+          "affine_fraction_raw": 0.024686614739672503,
+          "affine_noise_rms_sigma": 0.01695195084390436,
+          "affine_rms_sigma": 0.019549881470626262,
+          "count_med": 199.5,
+          "count_min": 139,
+          "debiased_affine_rms_sigma": 0.00973802999078285,
+          "debiased_center_rms_sigma": 0.07796593663513741,
+          "finite_sample_rms_sigma": 0.09697061624500503,
+          "linear_coefficients_per_grid_unit_in_sigma": [
+            [
+              0.006251010199160048,
+              -3.4633188648957084e-05
+            ],
+            [
+              -0.0011118905780308523,
+              0.0006408641037128268
+            ]
+          ],
+          "model": "ema",
+          "raw_center_rms_sigma": 0.12442663577518398,
+          "residual_rms_sigma": 0.12288120208076887,
+          "step": 7000,
+          "translation_sigma": [
+            0.006682610655004583,
+            0.0012542181211325262
+          ]
+        }
+      ]
+    },
+    "sigma": 0.03
+  },
+  "inputs": {
+    "ci_kappa100": {
+      "directory": "/ml2/hypergan/ParticleGAN-toy100-coverage/artifacts/toy100-accuracy/ci-common22-network-floor010/artifacts/toy-suite-ci/toy100/grid100",
+      "evals": [
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.1338616663840202,
+          "cov_trace_bias": 0.08065087198580523,
+          "mass_tv": 0.0447,
+          "model": "live",
+          "original_gate_pass": true,
+          "precision": 0.9758,
+          "radial_ks": 0.03732441367868711,
+          "step": 6000
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.12089350935930478,
+          "cov_trace_bias": -0.028962996796040974,
+          "mass_tv": 0.0447,
+          "model": "ema",
+          "original_gate_pass": true,
+          "precision": 0.98305,
+          "radial_ks": 0.012254065117049129,
+          "step": 6000
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.11599260149857257,
+          "cov_trace_bias": 0.02161180209812552,
+          "mass_tv": 0.0447,
+          "model": "live",
+          "original_gate_pass": true,
+          "precision": 0.9781,
+          "radial_ks": 0.017098389051635743,
+          "step": 6250
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.11724796676736181,
+          "cov_trace_bias": -0.03314247526803915,
+          "mass_tv": 0.0447,
+          "model": "ema",
+          "original_gate_pass": true,
+          "precision": 0.98245,
+          "radial_ks": 0.011568153924607971,
+          "step": 6250
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.12216018267241223,
+          "cov_trace_bias": -0.0047753768145384345,
+          "mass_tv": 0.0447,
+          "model": "live",
+          "original_gate_pass": true,
+          "precision": 0.9811,
+          "radial_ks": 0.005446805978911201,
+          "step": 6500
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.11138239779804837,
+          "cov_trace_bias": -0.03407054287996503,
+          "mass_tv": 0.0447,
+          "model": "ema",
+          "original_gate_pass": true,
+          "precision": 0.9828,
+          "radial_ks": 0.012360450124054956,
+          "step": 6500
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.12054120768635537,
+          "cov_trace_bias": -0.025975293721392068,
+          "mass_tv": 0.0447,
+          "model": "live",
+          "original_gate_pass": true,
+          "precision": 0.98245,
+          "radial_ks": 0.010462490141668224,
+          "step": 6750
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.1117558624276423,
+          "cov_trace_bias": -0.03620696858189021,
+          "mass_tv": 0.0447,
+          "model": "ema",
+          "original_gate_pass": true,
+          "precision": 0.98335,
+          "radial_ks": 0.014861154375156782,
+          "step": 6750
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.12907474139675176,
+          "cov_trace_bias": -0.0378030415919558,
+          "mass_tv": 0.0447,
+          "model": "live",
+          "original_gate_pass": true,
+          "precision": 0.98285,
+          "radial_ks": 0.016629928766993318,
+          "step": 7000
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.11496561419968215,
+          "cov_trace_bias": -0.04076319405742723,
+          "mass_tv": 0.0447,
+          "model": "ema",
+          "original_gate_pass": true,
+          "precision": 0.98345,
+          "radial_ks": 0.01731759992133819,
+          "step": 7000
+        }
+      ],
+      "final_samples_sha256": "529717fc873a6a1da49af5e8fad726e1214a899a5c4d1d31625a0b5a749548de",
+      "kappa": 1.0,
+      "quality_check_sha256": {
+        "6000": "a1cdaf3bd0c6c2ce390388231faa534ee64b3a11bdb811b2bfd71a99f07740bd",
+        "6250": "2d5b9a1043ef3e6c73dcdb2fcb70bbf1fbc0d93308c4fe05ef89f1f8d7e23370",
+        "6500": "568c23a8ec6716ab49f5149a27be45898b290f8da084b1f1cc945db410a5a3b5",
+        "6750": "158823c79843222a8b6834be92cf7b588af2c84980cf9303cfbe82e15af7e2f0",
+        "7000": "529717fc873a6a1da49af5e8fad726e1214a899a5c4d1d31625a0b5a749548de"
+      },
+      "source_commit": "62e6e6c8067b46f30cf500926195fcd810909abc",
+      "summary_file": "/ml2/hypergan/ParticleGAN-toy100-coverage/artifacts/toy100-accuracy/ci-common22-network-floor010/artifacts/toy-suite-ci/toy100/grid100/summary.json"
+    },
+    "new_kappa1176": {
+      "directory": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100",
+      "evals": [
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.14419859908385957,
+          "cov_trace_bias": 0.07325702421687263,
+          "mass_tv": 0.0448,
+          "model": "live",
+          "original_gate_pass": true,
+          "precision": 0.9758,
+          "radial_ks": 0.034404387789961244,
+          "step": 6000
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.1287281123113801,
+          "cov_trace_bias": -0.030359013412934566,
+          "mass_tv": 0.0448,
+          "model": "ema",
+          "original_gate_pass": true,
+          "precision": 0.9825,
+          "radial_ks": 0.010854348888779675,
+          "step": 6000
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.12439870835340884,
+          "cov_trace_bias": 0.02173247552340518,
+          "mass_tv": 0.0448,
+          "model": "live",
+          "original_gate_pass": true,
+          "precision": 0.97825,
+          "radial_ks": 0.017220090362874974,
+          "step": 6250
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.1264790879809392,
+          "cov_trace_bias": -0.03255601785388773,
+          "mass_tv": 0.0448,
+          "model": "ema",
+          "original_gate_pass": true,
+          "precision": 0.9824,
+          "radial_ks": 0.011873512573246037,
+          "step": 6250
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.1307479221591108,
+          "cov_trace_bias": -0.006108887173252864,
+          "mass_tv": 0.0448,
+          "model": "live",
+          "original_gate_pass": true,
+          "precision": 0.9809,
+          "radial_ks": 0.006352949734935165,
+          "step": 6500
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.12245846511914801,
+          "cov_trace_bias": -0.035283796067019924,
+          "mass_tv": 0.0448,
+          "model": "ema",
+          "original_gate_pass": true,
+          "precision": 0.98215,
+          "radial_ks": 0.012585795604180827,
+          "step": 6500
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.1249902968565886,
+          "cov_trace_bias": -0.024671685626307283,
+          "mass_tv": 0.0448,
+          "model": "live",
+          "original_gate_pass": true,
+          "precision": 0.98225,
+          "radial_ks": 0.00975734641364856,
+          "step": 6750
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.12181160273909808,
+          "cov_trace_bias": -0.037306250885510095,
+          "mass_tv": 0.0448,
+          "model": "ema",
+          "original_gate_pass": true,
+          "precision": 0.98275,
+          "radial_ks": 0.015431764435726691,
+          "step": 6750
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.1301414897026508,
+          "cov_trace_bias": -0.03605619018829542,
+          "mass_tv": 0.0448,
+          "model": "live",
+          "original_gate_pass": true,
+          "precision": 0.9832,
+          "radial_ks": 0.01523618167824603,
+          "step": 7000
+        },
+        {
+          "accuracy_gate_pass": true,
+          "center_rms_sigma": 0.12442663577518398,
+          "cov_trace_bias": -0.040367837766876025,
+          "mass_tv": 0.0448,
+          "model": "ema",
+          "original_gate_pass": true,
+          "precision": 0.9833,
+          "radial_ks": 0.016103661889872445,
+          "step": 7000
+        }
+      ],
+      "final_samples_sha256": "93d1331e0650074268a1c17029e10d59792d9c5d91a25d5e0b1bc8853a18c7ce",
+      "kappa": 1.176,
+      "quality_check_sha256": {
+        "6000": "dd7a9272a8c03c3ede015b8c2055fe6bea5b34ba54c16868a4e0102a10d83b24",
+        "6250": "a5eaf2ead74febefc7386336bcc1f84ef5bdb14ad619bd2440408e6ec4e8c80f",
+        "6500": "d34c6a73d1a2eefaedf84f657bf81107a7d10dd93564b1c850bf4dfd04cf685c",
+        "6750": "63feb9d4cf6086595bb41f8b2586bee274926c67271fcddbc43320dd5d703488",
+        "7000": "93d1331e0650074268a1c17029e10d59792d9c5d91a25d5e0b1bc8853a18c7ce"
+      },
+      "source_commit": "b7d9963a36a3001cab997ccc126164b26c45533a",
+      "summary_file": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/summary.json"
+    }
+  },
+  "method": {
+    "affine_fit": "ordinary least squares of 100 mode-center errors on intercept,x,y",
+    "center_assignment": "nearest analytic grid center; retain points within 3 target sigmas; per-mode conditional mean",
+    "finite_sample_floor": "sqrt(mean per-mode trace(sample covariance)/accepted count); paired differences use indexed common-random-number draws and covariance of per-point differences"
+  },
+  "paired": {
+    "ci_kappa100": {
+      "live_ema": [
+        {
+          "affine_delta_rms_sigma": 0.017355053495594516,
+          "affine_delta_sampling_floor_sigma": 0.006509439947029108,
+          "both_hq_frac": 0.9739,
+          "matched_frac": 1.0,
+          "per_mode_min_matched": 124,
+          "rms_delta_sampling_floor_sigma": 0.037124877249227896,
+          "rms_delta_sigma": 0.05842076097199104,
+          "step": 6000,
+          "translation_delta_sigma": [
+            0.00639917653102806,
+            0.007387364515126045
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.019966916059426187,
+          "affine_delta_sampling_floor_sigma": 0.004948997534759481,
+          "both_hq_frac": 0.97615,
+          "matched_frac": 1.0,
+          "per_mode_min_matched": 121,
+          "rms_delta_sampling_floor_sigma": 0.028373513220082757,
+          "rms_delta_sigma": 0.05395515301852994,
+          "step": 6250,
+          "translation_delta_sigma": [
+            -0.0008735344333035122,
+            0.012049253014055397
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.036041591775469915,
+          "affine_delta_sampling_floor_sigma": 0.0035888544805657706,
+          "both_hq_frac": 0.9796,
+          "matched_frac": 1.0,
+          "per_mode_min_matched": 125,
+          "rms_delta_sampling_floor_sigma": 0.020471400293724653,
+          "rms_delta_sigma": 0.05114704143058238,
+          "step": 6500,
+          "translation_delta_sigma": [
+            -3.818112161878274e-05,
+            -0.006642551727215652
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.015390980053559126,
+          "affine_delta_sampling_floor_sigma": 0.0023127382891464155,
+          "both_hq_frac": 0.9812,
+          "matched_frac": 1.0,
+          "per_mode_min_matched": 126,
+          "rms_delta_sampling_floor_sigma": 0.013168236444627448,
+          "rms_delta_sigma": 0.031604890245494635,
+          "step": 6750,
+          "translation_delta_sigma": [
+            -0.0023026087423537373,
+            -0.0023050963853163253
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.038693829814061984,
+          "affine_delta_sampling_floor_sigma": 0.001676158303896105,
+          "both_hq_frac": 0.9821,
+          "matched_frac": 1.0,
+          "per_mode_min_matched": 125,
+          "rms_delta_sampling_floor_sigma": 0.00946425482302875,
+          "rms_delta_sigma": 0.04662409211165853,
+          "step": 7000,
+          "translation_delta_sigma": [
+            0.0004791351664419984,
+            0.025773218762504088
+          ]
+        }
+      ],
+      "path": "/ml2/hypergan/ParticleGAN-toy100-coverage/artifacts/toy100-accuracy/ci-common22-network-floor010/artifacts/toy-suite-ci/toy100/grid100",
+      "temporal": [
+        {
+          "affine_delta_rms_sigma": 0.029975679327935604,
+          "affine_delta_sampling_floor_sigma": 0.009076827723108074,
+          "both_hq_frac": 0.96885,
+          "from": 6000,
+          "matched_frac": 1.0,
+          "model": "live",
+          "per_mode_min_matched": 120,
+          "rms_delta_sampling_floor_sigma": 0.05184535752616768,
+          "rms_delta_sigma": 0.09126755502134544,
+          "to": 6250,
+          "translation_delta_sigma": [
+            -0.007954819087435092,
+            0.008348830756775123
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.04404247212478172,
+          "affine_delta_sampling_floor_sigma": 0.006969644736976234,
+          "both_hq_frac": 0.97415,
+          "from": 6250,
+          "matched_frac": 1.0,
+          "model": "live",
+          "per_mode_min_matched": 122,
+          "rms_delta_sampling_floor_sigma": 0.03980114998178307,
+          "rms_delta_sigma": 0.08383871716894567,
+          "to": 6500,
+          "translation_delta_sigma": [
+            0.0030086186036054666,
+            -0.019105277722431147
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.03661244811298372,
+          "affine_delta_sampling_floor_sigma": 0.004790161233242773,
+          "both_hq_frac": 0.9785,
+          "from": 6500,
+          "matched_frac": 1.0,
+          "model": "live",
+          "per_mode_min_matched": 125,
+          "rms_delta_sampling_floor_sigma": 0.027295526913388494,
+          "rms_delta_sigma": 0.06643270460981433,
+          "to": 6750,
+          "translation_delta_sigma": [
+            -0.002997326297047916,
+            0.00497579205393709
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.03291979252074966,
+          "affine_delta_sampling_floor_sigma": 0.003180758879263291,
+          "both_hq_frac": 0.9807,
+          "from": 6750,
+          "matched_frac": 1.0,
+          "model": "live",
+          "per_mode_min_matched": 125,
+          "rms_delta_sampling_floor_sigma": 0.017953736622413858,
+          "rms_delta_sigma": 0.05582640013924256,
+          "to": 7000,
+          "translation_delta_sigma": [
+            0.0008789664096577892,
+            0.026615980679177125
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.007159466463146784,
+          "affine_delta_sampling_floor_sigma": 0.003321418327406943,
+          "both_hq_frac": 0.98055,
+          "from": 6000,
+          "matched_frac": 1.0,
+          "model": "ema",
+          "per_mode_min_matched": 124,
+          "rms_delta_sampling_floor_sigma": 0.01895095574561002,
+          "rms_delta_sigma": 0.03787986799337046,
+          "to": 6250,
+          "translation_delta_sigma": [
+            -0.00083986843129504,
+            0.0038528887997022316
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.006042088669359914,
+          "affine_delta_sampling_floor_sigma": 0.00301451304318317,
+          "both_hq_frac": 0.98095,
+          "from": 6250,
+          "matched_frac": 1.0,
+          "model": "ema",
+          "per_mode_min_matched": 124,
+          "rms_delta_sampling_floor_sigma": 0.017059055887891014,
+          "rms_delta_sigma": 0.03496813542515859,
+          "to": 6500,
+          "translation_delta_sigma": [
+            0.0021059292812173665,
+            -0.0005184995006181873
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.0037414049402566918,
+          "affine_delta_sampling_floor_sigma": 0.002436327391923706,
+          "both_hq_frac": 0.9816,
+          "from": 6500,
+          "matched_frac": 1.0,
+          "model": "ema",
+          "per_mode_min_matched": 126,
+          "rms_delta_sampling_floor_sigma": 0.013827703353583269,
+          "rms_delta_sigma": 0.029816339471119894,
+          "to": 6750,
+          "translation_delta_sigma": [
+            -0.0007023497247873928,
+            0.0006834500613985718
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.006064056307309001,
+          "affine_delta_sampling_floor_sigma": 0.0017940911289208192,
+          "both_hq_frac": 0.9822,
+          "from": 6750,
+          "matched_frac": 1.0,
+          "model": "ema",
+          "per_mode_min_matched": 126,
+          "rms_delta_sampling_floor_sigma": 0.010187739614486114,
+          "rms_delta_sigma": 0.027913840874082517,
+          "to": 7000,
+          "translation_delta_sigma": [
+            -0.0018857695981809495,
+            -0.0014923044387253454
+          ]
+        }
+      ]
+    },
+    "new_kappa1176": {
+      "live_ema": [
+        {
+          "affine_delta_rms_sigma": 0.018590248162102623,
+          "affine_delta_sampling_floor_sigma": 0.006394151627794263,
+          "both_hq_frac": 0.97395,
+          "matched_frac": 1.0,
+          "per_mode_min_matched": 138,
+          "rms_delta_sampling_floor_sigma": 0.03656968152915805,
+          "rms_delta_sigma": 0.05867953584638089,
+          "step": 6000,
+          "translation_delta_sigma": [
+            0.007403251062511796,
+            0.004281697552663815
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.02055448151365466,
+          "affine_delta_sampling_floor_sigma": 0.004877461799761774,
+          "both_hq_frac": 0.97675,
+          "matched_frac": 1.0,
+          "per_mode_min_matched": 135,
+          "rms_delta_sampling_floor_sigma": 0.028048866401713148,
+          "rms_delta_sigma": 0.05106104532151055,
+          "step": 6250,
+          "translation_delta_sigma": [
+            -0.0016667086262588328,
+            0.004726175429493416
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.02429814732645353,
+          "affine_delta_sampling_floor_sigma": 0.003542039093491999,
+          "both_hq_frac": 0.97915,
+          "matched_frac": 1.0,
+          "per_mode_min_matched": 138,
+          "rms_delta_sampling_floor_sigma": 0.0202311594320026,
+          "rms_delta_sigma": 0.04130500689772431,
+          "step": 6500,
+          "translation_delta_sigma": [
+            -0.0047641996932112655,
+            -0.010473900392153259
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.007366448178450149,
+          "affine_delta_sampling_floor_sigma": 0.00230171956858924,
+          "both_hq_frac": 0.9808,
+          "matched_frac": 1.0,
+          "per_mode_min_matched": 139,
+          "rms_delta_sampling_floor_sigma": 0.013139712129750528,
+          "rms_delta_sigma": 0.02754798100048989,
+          "step": 6750,
+          "translation_delta_sigma": [
+            0.0018418194974165226,
+            -0.004263736351620088
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.026455975775602037,
+          "affine_delta_sampling_floor_sigma": 0.0016398823393688987,
+          "both_hq_frac": 0.9821,
+          "matched_frac": 1.0,
+          "per_mode_min_matched": 139,
+          "rms_delta_sampling_floor_sigma": 0.009300638381307154,
+          "rms_delta_sigma": 0.035800728284621344,
+          "step": 7000,
+          "translation_delta_sigma": [
+            -0.0024476858869078725,
+            0.018676976888464026
+          ]
+        }
+      ],
+      "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100",
+      "temporal": [
+        {
+          "affine_delta_rms_sigma": 0.040432985172038555,
+          "affine_delta_sampling_floor_sigma": 0.008954001745735367,
+          "both_hq_frac": 0.9693,
+          "from": 6000,
+          "matched_frac": 1.0,
+          "model": "live",
+          "per_mode_min_matched": 134,
+          "rms_delta_sampling_floor_sigma": 0.051236059046270196,
+          "rms_delta_sigma": 0.09328809383592139,
+          "to": 6250,
+          "translation_delta_sigma": [
+            -0.010758209007737937,
+            0.0034951024769371607
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.02992453911675447,
+          "affine_delta_sampling_floor_sigma": 0.006864833949870871,
+          "both_hq_frac": 0.97435,
+          "from": 6250,
+          "matched_frac": 1.0,
+          "model": "live",
+          "per_mode_min_matched": 135,
+          "rms_delta_sampling_floor_sigma": 0.03929725698958459,
+          "rms_delta_sigma": 0.07306069923642779,
+          "to": 6500,
+          "translation_delta_sigma": [
+            -0.0014886816553159642,
+            -0.01611368647343132
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.027777469286285664,
+          "affine_delta_sampling_floor_sigma": 0.004727687350055137,
+          "both_hq_frac": 0.97835,
+          "from": 6500,
+          "matched_frac": 1.0,
+          "model": "live",
+          "per_mode_min_matched": 138,
+          "rms_delta_sampling_floor_sigma": 0.026999206727835453,
+          "rms_delta_sigma": 0.06258588375250909,
+          "to": 6750,
+          "translation_delta_sigma": [
+            0.005350075350499742,
+            0.0072352533430465405
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.03267704101788211,
+          "affine_delta_sampling_floor_sigma": 0.003140784897040645,
+          "both_hq_frac": 0.98065,
+          "from": 6750,
+          "matched_frac": 1.0,
+          "model": "live",
+          "per_mode_min_matched": 139,
+          "rms_delta_sampling_floor_sigma": 0.01785422111471219,
+          "rms_delta_sigma": 0.05377664619653906,
+          "to": 7000,
+          "translation_delta_sigma": [
+            -0.004810431438442903,
+            0.020957501251995223
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.006021437464243096,
+          "affine_delta_sampling_floor_sigma": 0.003297399976088755,
+          "both_hq_frac": 0.9804,
+          "from": 6000,
+          "matched_frac": 1.0,
+          "model": "ema",
+          "per_mode_min_matched": 138,
+          "rms_delta_sampling_floor_sigma": 0.01885715467637744,
+          "rms_delta_sigma": 0.0369165719017721,
+          "to": 6250,
+          "translation_delta_sigma": [
+            -0.0024113952175937596,
+            0.0032273890201447624
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.004834068820774019,
+          "affine_delta_sampling_floor_sigma": 0.0029440397299132105,
+          "both_hq_frac": 0.98055,
+          "from": 6250,
+          "matched_frac": 1.0,
+          "model": "ema",
+          "per_mode_min_matched": 138,
+          "rms_delta_sampling_floor_sigma": 0.016695542895103103,
+          "rms_delta_sigma": 0.03418754141076974,
+          "to": 6500,
+          "translation_delta_sigma": [
+            0.0015161437355721127,
+            -0.0008543973687050768
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.002768845845651683,
+          "affine_delta_sampling_floor_sigma": 0.002390347026332707,
+          "both_hq_frac": 0.98085,
+          "from": 6500,
+          "matched_frac": 1.0,
+          "model": "ema",
+          "per_mode_min_matched": 138,
+          "rms_delta_sampling_floor_sigma": 0.013626849915733461,
+          "rms_delta_sigma": 0.027510288383551976,
+          "to": 6750,
+          "translation_delta_sigma": [
+            -0.0012601138330411831,
+            0.001039082854083974
+          ]
+        },
+        {
+          "affine_delta_rms_sigma": 0.00579835891313098,
+          "affine_delta_sampling_floor_sigma": 0.0017643619803247752,
+          "both_hq_frac": 0.98185,
+          "from": 6750,
+          "matched_frac": 1.0,
+          "model": "ema",
+          "per_mode_min_matched": 139,
+          "rms_delta_sampling_floor_sigma": 0.010058321778678046,
+          "rms_delta_sigma": 0.02605367925546409,
+          "to": 7000,
+          "translation_delta_sigma": [
+            -0.0005806300678895961,
+            -0.0019399408986959252
+          ]
+        }
+      ]
+    }
+  },
+  "protocol": "toy100-grid-center-paired-diagnosis-v1"
+}

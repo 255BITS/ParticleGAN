@@ -1,0 +1,55 @@
+[
+  {
+    "tag": "beta099",
+    "set": {
+      "betas": [
+        0.0,
+        0.99
+      ]
+    },
+    "remove": [],
+    "constraints": [
+      "adam_moments"
+    ]
+  },
+  {
+    "tag": "beta09",
+    "set": {
+      "betas": [
+        0.0,
+        0.9
+      ]
+    },
+    "remove": [],
+    "constraints": [
+      "adam_moments"
+    ]
+  },
+  {
+    "tag": "beta0",
+    "set": {
+      "betas": [
+        0.0,
+        0.0
+      ]
+    },
+    "remove": [],
+    "constraints": [
+      "adam_moments"
+    ]
+  },
+  {
+    "tag": "public_moments_cap",
+    "set": {
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "reg_kappa": 1.25
+    },
+    "remove": [],
+    "constraints": [
+      "special_moments_cap"
+    ]
+  }
+]

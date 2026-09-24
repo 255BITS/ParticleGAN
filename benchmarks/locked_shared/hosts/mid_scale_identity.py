@@ -239,6 +239,11 @@ class ScaleCritic(nn.Module):
         )
 
     def score(self, z: torch.Tensor, scale: float) -> torch.Tensor:
+        policy = getattr(self, "noise_policy", None)
+        if policy is not None:
+            # The penalty calls score() with normalized states. Add noise in
+            # the original state units for both the penalty and main critic.
+            z = policy.input(z * self.input_scale) / self.input_scale
         label = z.new_full((z.shape[0], 1), float(scale))
         return self.net(torch.cat([z, label], dim=-1)).squeeze(-1)
 
@@ -420,6 +425,7 @@ def _fit(
     steps: int,
     seed: int,
     teacher: SmileTeacher,
+    noise_policy=None,
 ) -> tuple[MidScaleResidual, dict]:
     """Train on :data:`EVAL_SCALES` (always includes ``-1``)."""
     if not _has_scale(EVAL_SCALES, -1.0):
@@ -432,6 +438,8 @@ def _fit(
     targets = {scale: teacher.train_target(train_arm, scale) for scale in EVAL_SCALES}
     cloud = torch.stack([targets[scale] for scale in EVAL_SCALES], dim=0)
     critic = ScaleCritic(student.odd.numel(), cloud, hidden=CRITIC_HIDDEN)
+    if noise_policy is not None:
+        critic.noise_policy = noise_policy
     gan = GANLoss(loss_type=FORMULATION["loss_type"], mode=FORMULATION["gan_mode"])
     reg = GradientPenalty(
         arm=FORMULATION["reg_arm"],
@@ -441,8 +449,15 @@ def _fit(
         lazy_k=FORMULATION["reg_lazy"],
         target_anneal=FORMULATION["target_anneal"],
     )
-    opt_g = torch.optim.Adam(student.parameters(), lr=LR, betas=BETAS)
+    if noise_policy is not None:
+        noise_policy.register_generator_base(student)
+    g_parameters = list(student.parameters()) + (
+        noise_policy.scale_parameters() if noise_policy is not None else []
+    )
+    opt_g = torch.optim.Adam(g_parameters, lr=LR, betas=BETAS)
     opt_d = torch.optim.Adam(critic.parameters(), lr=LR, betas=BETAS)
+    if noise_policy is not None:
+        noise_policy.register_generator_optimizer(opt_g, opt_d)
     for opt in (opt_g, opt_d):
         opt.param_groups[0]["initial_lr"] = LR
     reals = {scale: _batch(targets[scale]) for scale in EVAL_SCALES}
@@ -451,6 +466,8 @@ def _fit(
     n_scales = float(len(EVAL_SCALES))
 
     for step in range(int(steps)):
+        if noise_policy is not None:
+            noise_policy.set_step(step)
         _apply_lr(opt_g, step, steps)
         _apply_lr(opt_d, step, steps)
         critic.requires_grad_(True)
@@ -458,6 +475,8 @@ def _fit(
         d_loss = student.odd.new_zeros(())
         for scale in EVAL_SCALES:
             fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1).detach()
+            if noise_policy is not None:
+                fake = noise_policy.output(fake, generator_step=False)
             cap, _stats = reg.penalty(
                 lambda z, scale=scale: critic.score(z, scale),
                 reals[scale] / critic.input_scale,
@@ -478,6 +497,8 @@ def _fit(
             real_scores = {scale: critic(reals[scale], scale) for scale in EVAL_SCALES}
         for scale in EVAL_SCALES:
             fake = student.state(scale).unsqueeze(0).expand(N_ROWS, -1)
+            if noise_policy is not None:
+                fake = noise_policy.output(fake, generator_step=True)
             g_loss = g_loss + gan.g_loss(critic(fake, scale), real_scores[scale]) / n_scales
         cover = student.odd.new_zeros(())
         for scale in EVAL_SCALES:
@@ -537,12 +558,14 @@ def _finish(
     return row
 
 
-def run_arm(arm: str, *, steps: int = GATE_STEPS, seed: int = 0, **overrides) -> dict:
+def run_arm(arm: str, *, steps: int = GATE_STEPS, seed: int = 0,
+            noise_policy=None, **overrides) -> dict:
     """Fit one arm and score its eval grid. Prints a tailable line."""
     if type(steps) is not int or steps <= 0:
         raise ValueError("steps must be a positive integer")
     if type(seed) is not int:
         raise ValueError("seed must be an int")
     teacher = smile_teacher()
-    student, meta = _fit(arm, steps=steps, seed=seed, teacher=teacher)
+    student, meta = _fit(arm, steps=steps, seed=seed, teacher=teacher,
+                         noise_policy=noise_policy)
     return _finish(student, meta, arm=arm, teacher=teacher)

@@ -1,0 +1,77 @@
+[
+  {
+    "name": "hist_f3_w128_d3",
+    "overrides": {
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "reg_coeff": 1.0,
+      "prior_reg": 1.0,
+      "betas": [0.0, 0.999],
+      "fourier": 3,
+      "g_hidden": 128,
+      "d_hidden": 128,
+      "n_hidden": 3
+    }
+  },
+  {
+    "name": "hist_f4_w128_d3",
+    "overrides": {
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "reg_coeff": 1.0,
+      "prior_reg": 1.0,
+      "betas": [0.0, 0.999],
+      "fourier": 4,
+      "g_hidden": 128,
+      "d_hidden": 128,
+      "n_hidden": 3
+    }
+  },
+  {
+    "name": "hist_f6_w128_d3",
+    "overrides": {
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "reg_coeff": 1.0,
+      "prior_reg": 1.0,
+      "betas": [0.0, 0.999],
+      "fourier": 6,
+      "g_hidden": 128,
+      "d_hidden": 128,
+      "n_hidden": 3
+    }
+  },
+  {
+    "name": "hist_f4_w192_d3",
+    "overrides": {
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "reg_coeff": 1.0,
+      "prior_reg": 1.0,
+      "betas": [0.0, 0.999],
+      "fourier": 4,
+      "g_hidden": 192,
+      "d_hidden": 192,
+      "n_hidden": 3
+    }
+  },
+  {
+    "name": "hist_f4_w128_d4",
+    "overrides": {
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "reg_coeff": 1.0,
+      "prior_reg": 1.0,
+      "betas": [0.0, 0.999],
+      "fourier": 4,
+      "g_hidden": 128,
+      "d_hidden": 128,
+      "n_hidden": 4
+    }
+  }
+]

@@ -90,6 +90,12 @@ class Recipe:
             raise ValueError("betas must contain two values in [0, 1)")
         if self.prior_betas is not None and (len(self.prior_betas) != 2 or any(not 0 <= b < 1 for b in self.prior_betas)):
             raise ValueError("prior_betas must contain two values in [0, 1) or be None")
+        # JSON commonly writes a zero moment as 0. Adam requires homogeneous
+        # floating-point moment values, even when an integer passes our range
+        # checks. Normalize only after validating the original values.
+        object.__setattr__(self, "betas", tuple(float(b) for b in self.betas))
+        if self.prior_betas is not None:
+            object.__setattr__(self, "prior_betas", tuple(float(b) for b in self.prior_betas))
         # Validate resolved component settings at construction, not later in training.
         self.make_loss()
         self.make_gradient_penalty()

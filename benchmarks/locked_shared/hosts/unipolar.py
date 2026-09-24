@@ -134,6 +134,11 @@ class ScaleCritic(nn.Module):
         )
 
     def score(self, z: torch.Tensor, scale: float) -> torch.Tensor:
+        policy = getattr(self, "noise_policy", None)
+        if policy is not None:
+            # The penalty calls score() in normalized coordinates. Inject the
+            # shared raw-data noise once, then return to those coordinates.
+            z = policy.input(z * self.input_scale) / self.input_scale
         label = z.new_full((z.shape[0], 1), float(scale))
         return self.net(torch.cat([z, label], dim=-1)).squeeze(-1)
 
@@ -243,6 +248,7 @@ def _fit_rpgan(
     *,
     steps: int,
     recipe: UnipolarRecipe,
+    noise_policy=None,
 ) -> tuple[list[dict], GradientPenalty]:
     """One D update then one G update, averaged over scales ``{0, +1}``."""
     gan = GANLoss(loss_type=recipe.loss_type, mode=recipe.gan_mode)
@@ -254,8 +260,15 @@ def _fit_rpgan(
         lazy_k=recipe.reg_lazy,
         target_anneal=recipe.target_anneal,
     )
-    opt_g = torch.optim.Adam(student.parameters(), lr=LR, betas=BETAS)
+    if noise_policy is not None:
+        noise_policy.register_generator_base(student)
+    g_parameters = list(student.parameters()) + (
+        noise_policy.scale_parameters() if noise_policy is not None else []
+    )
+    opt_g = torch.optim.Adam(g_parameters, lr=LR, betas=BETAS)
     opt_d = torch.optim.Adam(critic.parameters(), lr=LR, betas=BETAS)
+    if noise_policy is not None:
+        noise_policy.register_generator_optimizer(opt_g, opt_d)
     for opt in (opt_g, opt_d):
         opt.param_groups[0]["initial_lr"] = LR
     real = {
@@ -264,6 +277,8 @@ def _fit_rpgan(
     }
     history = []
     for step in range(steps):
+        if noise_policy is not None:
+            noise_policy.set_step(step)
         _apply_lr(opt_g, step, steps)
         _apply_lr(opt_d, step, steps)
         critic.requires_grad_(True)
@@ -271,6 +286,8 @@ def _fit_rpgan(
         d_loss = student.odd.new_zeros(())
         for scale in SCALES:
             fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1).detach()
+            if noise_policy is not None:
+                fake = noise_policy.output(fake, generator_step=False)
             cap, _stats = reg.penalty(
                 lambda z, scale=scale: critic.score(z, scale),
                 real[scale] / critic.input_scale,
@@ -290,6 +307,8 @@ def _fit_rpgan(
             real_scores = {scale: critic(real[scale], scale) for scale in SCALES}
         for scale in SCALES:
             fake = student.delta(scale).unsqueeze(0).expand(N_ROWS, -1)
+            if noise_policy is not None:
+                fake = noise_policy.output(fake, generator_step=True)
             g_term = gan.g_loss(critic(fake, scale), real_scores[scale])
             g_loss = g_loss + 0.5 * g_term
         g_loss.backward()
@@ -325,12 +344,15 @@ def run_arm(
     reg_coeff: float = 1.0,
     reg_kappa: float = 1.0,
     reg_norm: str = "l2",
+    noise_policy=None,
 ) -> dict:
     """Fit one arm and score the unipolar gates. Prints a tailable line per checkpoint."""
     if arm not in ("locked_rpgan", "mse_only", "polarity_flipped"):
         raise ValueError(
             f"unknown arm {arm!r}; this family is locked_rpgan, mse_only, polarity_flipped"
         )
+    if noise_policy is not None and arm == "mse_only":
+        raise ValueError("noise policy requires the GAN training arm")
     polarity = -1.0 if arm == "polarity_flipped" else 1.0
     recipe = UnipolarRecipe(
         arm=arm,
@@ -355,7 +377,10 @@ def run_arm(
     else:
         teacher = _batch(PLUS if recipe.polarity > 0 else -PLUS)
         critic = ScaleCritic(DIM, teacher, hidden=CRITIC_HIDDEN)
-        history, reg_used = _fit_rpgan(student, critic, target, steps=recipe.steps, recipe=recipe)
+        if noise_policy is not None:
+            critic.noise_policy = noise_policy
+        history, reg_used = _fit_rpgan(student, critic, target, steps=recipe.steps,
+                                      recipe=recipe, noise_policy=noise_policy)
     row = score_residual(student)
     row.update(
         arm=arm,

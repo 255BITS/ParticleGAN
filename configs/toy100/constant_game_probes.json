@@ -1,0 +1,68 @@
+{
+  "format": "research-optimizer-grid-v1",
+  "production_recipe": false,
+  "shared_gate_eligible": false,
+  "base_config": "configs/toy100/shared_candidate.json",
+  "base_source_commit": "f0595c4",
+  "constant_schedule_overrides": {
+    "lr_anneal_start": 0.0,
+    "lr_floor": 1.0
+  },
+  "remove_fields": ["network_lr_horizon_cap", "network_lr_floor"],
+  "cores": {
+    "winner": {"reg_kappa": 1.176, "reg_coeff": 6.0, "prior_reg": 0.05},
+    "simple": {"reg_kappa": 1.0, "reg_coeff": 1.0, "prior_reg": 0.0}
+  },
+  "fixed": {
+    "beta1": 0.0,
+    "d_lr_mult": 1.0,
+    "prior_lr_mult_unless_varied": 2.0,
+    "legacy_seed": 0,
+    "native_seed": 1234,
+    "preserve_host_models_budgets_thresholds_and_live_weights": true
+  },
+  "waves": [
+    {
+      "source_commit": "6340eac",
+      "rows": 24,
+      "core": ["winner"],
+      "lr": [0.001, 0.0025, 0.00425],
+      "beta2": [0.99, 0.999],
+      "alpha": [0.125, 0.25, 0.5, 1.0],
+      "amsgrad": [false]
+    },
+    {
+      "source_commit": "be540fd",
+      "rows": 40,
+      "blocks": [
+        {
+          "core": ["simple"],
+          "lr": [0.0005, 0.001, 0.0025, 0.00425],
+          "beta2": [0.999],
+          "alpha": [0.0, 0.125, 0.25, 0.5],
+          "amsgrad": [false]
+        },
+        {
+          "core": ["winner", "simple"],
+          "lr": [0.001, 0.0025, 0.00425],
+          "beta2": [0.99],
+          "alpha": [0.0, 0.25, 0.5, 1.0],
+          "amsgrad": [true]
+        }
+      ]
+    },
+    {
+      "source_commit": "101dd9f",
+      "rows": 15,
+      "reason": "Wave 2 bg016 passed 4/5 terminal checkpoints before failing the last; local expansion excludes that exact observed point.",
+      "core": ["winner"],
+      "lr": [0.0008, 0.001, 0.00125, 0.0015],
+      "beta2": [0.9, 0.99],
+      "alpha": [0.0],
+      "amsgrad": [true],
+      "prior_lr_mult": [1.0, 2.0],
+      "exclude": [{"lr": 0.001, "beta2": 0.99, "prior_lr_mult": 2.0}]
+    }
+  ],
+  "outcome": "79/79 strict mode_hold FAIL; later stages skipped"
+}
