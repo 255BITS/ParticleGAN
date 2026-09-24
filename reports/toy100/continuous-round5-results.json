@@ -265,5 +265,26 @@
     "pr84-heldout-signal.md",
     "pr84-prediction-state-filter.md"
   ],
-  "interpretation": "Prediction reduces the failed-check count but still loses quality and a mode; no winner. Final checkpoints hide failures."
+  "interpretation": "Prediction reduces the failed-check count but still loses quality and a mode; no winner. Final checkpoints hide failures.",
+  "additional_saved_state_candidates": [
+    {
+      "method": "pr84_accepted_g_discriminator_cross_response",
+      "status": "FAIL",
+      "scope": "saved_state_filter_only",
+      "passing_checks": [
+        11,
+        16,
+        1
+      ],
+      "total_checks": [
+        12,
+        16,
+        16
+      ],
+      "warm_eligible": false,
+      "full_host_training": false,
+      "evidence": "continuous-evidence/pr84-d-cross-response-filter/manifest.json",
+      "report": "pr84-d-cross-response-filter.md"
+    }
+  ]
 }

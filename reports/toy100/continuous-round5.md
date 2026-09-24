@@ -1,4 +1,4 @@
-# Fixed-target instability: exact failure replay and opponent prediction
+# Fixed-target instability: exact failure replay and response corrections
 
 **No replacement qualifies.** Opponent prediction passes warm200 but fails
 22 of1,200 later per-update checks, including temporary mode loss. Cold gates
@@ -111,6 +111,33 @@ retain every branch. An independent Sol audit verified the hashes, accounting,
 gates and numeric claims. Eighteen focused integrated tests pass: eight
 prediction tests, two held-out diagnostic tests and eight existing PR84/
 alternating checks. These implementation checks do not override training failure.
+
+## Second response channel rejected by the short filter
+
+A separate method keeps the original G update and then changes the actual
+critic by `-P_D * (F_D(D*, G_accepted) - F_D(D*, G_base))`. Both fields use
+the same D batch/noise and accepted D. Its post-base Adam metric is frozen;
+there is no extra moment update, gain search or zero-centered pull. Unlike
+G-side prediction, the actual critic now responds to the accepted G movement.
+The extra response is explicitly outside the original D curvature bound.
+
+The three declared branches give **11/12,16/16,1/16** passing checks, versus
+original **9/12,14/16,1/16**. It repairs the1380 window but fails at1325
+(HQ .88916) and still loses mode2 at1533. All three branches were required to
+pass, so **no warm or cold run followed**. No nonfinite state or critic explosion
+occurred; the correction stayed below .526 times the ordinary D step norm.
+All44 ordinary support arrays and curvature records match the capture, as do
+the first accepted-state hashes; candidate/ordinary RNG endpoints agree.
+Each active update costs four D fields and three G fields, with one moment
+update per player. Nine additional focused checks pass, independently rerun.
+[Source, strict failed filter and complete evidence](pr84-d-cross-response-filter.md).
+
+Both response channels repair one excursion while retaining the severe1530s
+episode. The next diagnostic separates learned-critic lag, the actual penalized
+critic's local optimum, and pressure from model/objective mismatch. The ideal
+unregularized population density ratio is an offline comparator only; it is
+not the finite Fourier critic with the host penalty. Failure of these methods
+alone is not an impossibility proof.
 
 ## Research checked after isolation
 
