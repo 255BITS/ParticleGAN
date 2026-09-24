@@ -1,0 +1,58 @@
+{
+  "files": {
+    "one-bank.json": {
+      "bytes": 8800,
+      "sha256": "6f2bf1546eaa366fc7aa15ea9766e92a3eb683ac28671843ad174f341af6ec08"
+    },
+    "one-bank.json.gz": {
+      "bytes": 2083,
+      "raw_bytes": 8800,
+      "raw_sha256": "6f2bf1546eaa366fc7aa15ea9766e92a3eb683ac28671843ad174f341af6ec08",
+      "sha256": "45c45836f04eba842a0a86493ed73286e3e4a5d8c25681b6f43d38425ebc48f2"
+    },
+    "previous-result.json.gz": {
+      "bytes": 8238,
+      "raw_bytes": 34296,
+      "raw_sha256": "9c3b4ec2d9fc2ad03625bd58de6c158badebfde1e76e567182e3a755ca223619",
+      "sha256": "3d13b796a1b1bfeebb8789c189aec742d0c7ac4b7a0cd4d663b89d1c7d1190d2"
+    },
+    "source/benchmarks/locked_shared/mode_hold.py": {
+      "bytes": 10774,
+      "sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    "source/reports/toy100/anchor_missing_batch_group.py": {
+      "bytes": 3239,
+      "sha256": "82ee9ebf1599c05d39e3b012c4c45d3218c6788e9adf1e334fd18214c43efdbd"
+    },
+    "source/reports/toy100/coverage_fixed_eval.py": {
+      "bytes": 3996,
+      "sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e"
+    },
+    "source/reports/toy100/sample_anchor_free1200.py": {
+      "bytes": 12051,
+      "sha256": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656"
+    },
+    "source/reports/toy100/sample_group_anchor.py": {
+      "bytes": 12791,
+      "sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037"
+    },
+    "source/reports/toy100/sample_group_dispersion_memory.py": {
+      "bytes": 5371,
+      "sha256": "d69d067acfd1af4e3743a0a18f557bf227c40e6be3930211c454a7b3601d1b7b"
+    },
+    "source/reports/toy100/sample_group_singleton_filter.py": {
+      "bytes": 6668,
+      "sha256": "92c208607c0157d9418bb0a67c79a9fbab5b93a3d3de677bfafb4bfe66f07b83"
+    }
+  },
+  "input_state_sha256": "1706ae9c1ca25010cb08e2c03f79478180add8620996594e9f30e48705223a72",
+  "runtime": {
+    "cpu_capability": "AVX2",
+    "python": "3.12.13",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1
+  },
+  "schema": "sample-group-singleton-tail-v1",
+  "scope": "one exact saved-stream full bank then one conditioned singleton-tail bank; free output only",
+  "state_file_sha256": "fae94561922ede699f20c6ee6713126e8bb30e776a586fe98ed39137dac0a926"
+}
