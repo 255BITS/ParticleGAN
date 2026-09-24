@@ -1,0 +1,100 @@
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "DECLARED", "phase": "warm", "method": "reachstall_trustopen", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "shared_gate_eligible": false, "purity": "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder"}
+{"event": "TRUST_OPEN_ARM", "step": 1000, "phase": "warm"}
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "VARIANT_START", "variant": "identity"}
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "VARIANT_START", "variant": "reachstall_trustopen"}
+{"event": "TRUST_MEAN", "step": 50, "armed": true, "mean": 0.23827706954210182, "open": null, "fires": 0}
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "VARIANT_DONE", "variant": "identity"}
+{"event": "TRUST_MEAN", "step": 100, "armed": true, "mean": 0.5033262718451261, "open": 0.2650492023030243, "fires": 0}
+{"event": "TRUST_OPEN_REJECT", "step": 100, "kind": "warm", "mean_now": 0.5033262718451261, "mean_lag": 0.23827706954210182, "delta": 0.2650492023030243}
+{"event": "TRUST_OPEN_REJECT", "step": 101, "kind": "warm", "mean_now": 0.49817957519709744, "mean_lag": 0.2515217003092009, "delta": 0.24665787488789653}
+{"event": "TRUST_OPEN_REJECT", "step": 102, "kind": "warm", "mean_now": 0.5278933114396911, "mean_lag": 0.25458348004784187, "delta": 0.2733098313918492}
+{"event": "TRUST_OPEN_REJECT", "step": 103, "kind": "warm", "mean_now": 0.5272380613789276, "mean_lag": 0.2655319883026595, "delta": 0.2617060730762681}
+{"event": "TRUST_OPEN_REJECT", "step": 104, "kind": "warm", "mean_now": 0.5496235824907244, "mean_lag": 0.2679907675531413, "delta": 0.28163281493758313}
+{"event": "TRUST_OPEN_REJECT", "step": 105, "kind": "warm", "mean_now": 0.5615228273328106, "mean_lag": 0.2740503879226875, "delta": 0.28747243941012307}
+{"event": "TRUST_OPEN_REJECT", "step": 106, "kind": "warm", "mean_now": 0.577148045854673, "mean_lag": 0.2760885941628483, "delta": 0.30105945169182474}
+{"event": "TRUST_OPEN_REJECT", "step": 107, "kind": "warm", "mean_now": 0.5859453086712564, "mean_lag": 0.2854369948891573, "delta": 0.3005083137820991}
+{"event": "TRUST_OPEN_REJECT", "step": 108, "kind": "warm", "mean_now": 0.5976062194096883, "mean_lag": 0.2897003373398295, "delta": 0.3079058820698588}
+{"event": "TRUST_OPEN_REJECT", "step": 109, "kind": "warm", "mean_now": 0.6149684471727599, "mean_lag": 0.2918875278840408, "delta": 0.32308091928871907}
+{"event": "TRUST_OPEN_REJECT", "step": 110, "kind": "warm", "mean_now": 0.6302803431033862, "mean_lag": 0.29463143274024, "delta": 0.3356489103631462}
+{"event": "TRUST_OPEN_REJECT", "step": 111, "kind": "warm", "mean_now": 0.6397386369784688, "mean_lag": 0.30304766345631257, "delta": 0.3366909735221562}
+{"event": "TRUST_OPEN_REJECT", "step": 112, "kind": "warm", "mean_now": 0.644288648155388, "mean_lag": 0.3145156000880278, "delta": 0.3297730480673602}
+{"event": "TRUST_OPEN_REJECT", "step": 113, "kind": "warm", "mean_now": 0.655544287459958, "mean_lag": 0.3209192539366933, "delta": 0.33462503352326467}
+{"event": "TRUST_OPEN_REJECT", "step": 114, "kind": "warm", "mean_now": 0.666279977417059, "mean_lag": 0.32777217420985644, "delta": 0.3385078032072026}
+{"event": "TRUST_OPEN_REJECT", "step": 115, "kind": "warm", "mean_now": 0.6816790403258557, "mean_lag": 0.32981812651854675, "delta": 0.35186091380730894}
+{"event": "TRUST_OPEN_REJECT", "step": 116, "kind": "warm", "mean_now": 0.6891748625702191, "mean_lag": 0.33542509758780203, "delta": 0.35374976498241706}
+{"event": "TRUST_OPEN_REJECT", "step": 117, "kind": "warm", "mean_now": 0.7062120660999139, "mean_lag": 0.33970663150941827, "delta": 0.36650543459049567}
+{"event": "TRUST_OPEN_REJECT", "step": 118, "kind": "warm", "mean_now": 0.7213279851795789, "mean_lag": 0.34042291558689963, "delta": 0.3809050695926792}
+{"event": "TRUST_OPEN_REJECT", "step": 119, "kind": "warm", "mean_now": 0.7291499133272065, "mean_lag": 0.3427723453639451, "delta": 0.3863775679632614}
+{"event": "TRUST_OPEN_REJECT", "step": 120, "kind": "warm", "mean_now": 0.7491804444761603, "mean_lag": 0.3410829028719744, "delta": 0.4080975416041859}
+{"event": "TRUST_OPEN_REJECT", "step": 121, "kind": "warm", "mean_now": 0.7615226168730687, "mean_lag": 0.34396557015561124, "delta": 0.4175570467174574}
+{"event": "TRUST_OPEN_REJECT", "step": 122, "kind": "warm", "mean_now": 0.7771470786794326, "mean_lag": 0.34862233136666665, "delta": 0.4285247473127659}
+{"event": "TRUST_OPEN_REJECT", "step": 123, "kind": "warm", "mean_now": 0.7912817413111174, "mean_lag": 0.35122329547943204, "delta": 0.44005844583168535}
+{"event": "TRUST_OPEN_REJECT", "step": 124, "kind": "warm", "mean_now": 0.8025230336039196, "mean_lag": 0.35754481700525953, "delta": 0.4449782165986601}
+{"event": "TRUST_OPEN_REJECT", "step": 125, "kind": "warm", "mean_now": 0.8053993135597368, "mean_lag": 0.3674468739510744, "delta": 0.4379524396086624}
+{"event": "TRUST_OPEN_REJECT", "step": 126, "kind": "warm", "mean_now": 0.814601718595154, "mean_lag": 0.37547189508914625, "delta": 0.4391298235060077}
+{"event": "TRUST_OPEN_REJECT", "step": 127, "kind": "warm", "mean_now": 0.8217528585642956, "mean_lag": 0.37861857652297215, "delta": 0.44313428204132344}
+{"event": "TRUST_OPEN_REJECT", "step": 128, "kind": "warm", "mean_now": 0.8315348443903287, "mean_lag": 0.38249407134320684, "delta": 0.4490407730471218}
+{"event": "TRUST_OPEN_REJECT", "step": 129, "kind": "warm", "mean_now": 0.8391806859328103, "mean_lag": 0.3992346290304801, "delta": 0.43994605690233013}
+{"event": "TRUST_OPEN_REJECT", "step": 130, "kind": "warm", "mean_now": 0.8510153725360898, "mean_lag": 0.4012578242265164, "delta": 0.44975754830957343}
+{"event": "TRUST_OPEN_REJECT", "step": 131, "kind": "warm", "mean_now": 0.8568444490438789, "mean_lag": 0.40858229328761253, "delta": 0.4482621557562664}
+{"event": "TRUST_OPEN_REJECT", "step": 132, "kind": "warm", "mean_now": 0.8741442851672907, "mean_lag": 0.4086600286122555, "delta": 0.4654842565550352}
+{"event": "TRUST_OPEN_REJECT", "step": 133, "kind": "warm", "mean_now": 0.8821872819709458, "mean_lag": 0.4150667314890071, "delta": 0.4671205504819387}
+{"event": "TRUST_OPEN_REJECT", "step": 134, "kind": "warm", "mean_now": 0.887874062299895, "mean_lag": 0.4251266974485447, "delta": 0.46274736485135026}
+{"event": "TRUST_OPEN_REJECT", "step": 135, "kind": "warm", "mean_now": 0.8927835937096706, "mean_lag": 0.4136620665824989, "delta": 0.47912152712717176}
+{"event": "TRUST_OPEN_REJECT", "step": 136, "kind": "warm", "mean_now": 0.9120243989063473, "mean_lag": 0.41965157227293043, "delta": 0.4923728266334169}
+{"event": "TRUST_OPEN_REJECT", "step": 137, "kind": "warm", "mean_now": 0.9241249249166144, "mean_lag": 0.4229442260360573, "delta": 0.501180698880557}
+{"event": "TRUST_OPEN_REJECT", "step": 138, "kind": "warm", "mean_now": 0.9350777193061199, "mean_lag": 0.42755584598102625, "delta": 0.5075218733250937}
+{"event": "TRUST_OPEN_REJECT", "step": 139, "kind": "warm", "mean_now": 0.9298581152937243, "mean_lag": 0.4405416116163439, "delta": 0.4893165036773804}
+{"event": "TRUST_OPEN_REJECT", "step": 140, "kind": "warm", "mean_now": 0.9306176483708611, "mean_lag": 0.44519835706829625, "delta": 0.4854192913025649}
+{"event": "TRUST_OPEN_REJECT", "step": 141, "kind": "warm", "mean_now": 0.9418576348573235, "mean_lag": 0.45093181039433305, "delta": 0.4909258244629905}
+{"event": "TRUST_OPEN_REJECT", "step": 142, "kind": "warm", "mean_now": 0.9532583623815338, "mean_lag": 0.4554308278312241, "delta": 0.4978275345503097}
+{"event": "TRUST_OPEN_REJECT", "step": 143, "kind": "warm", "mean_now": 0.9662177493170918, "mean_lag": 0.45313207685325907, "delta": 0.5130856724638327}
+{"event": "TRUST_OPEN_REJECT", "step": 144, "kind": "warm", "mean_now": 0.9662177493170918, "mean_lag": 0.4681711897732327, "delta": 0.4980465595438591}
+{"event": "TRUST_OPEN_REJECT", "step": 145, "kind": "warm", "mean_now": 0.9687029598407377, "mean_lag": 0.48162013514087226, "delta": 0.48708282469986547}
+{"event": "TRUST_OPEN_REJECT", "step": 146, "kind": "warm", "mean_now": 0.9688307890923502, "mean_lag": 0.48445326275625145, "delta": 0.48437752633609876}
+{"event": "TRUST_OPEN_REJECT", "step": 147, "kind": "warm", "mean_now": 0.9906766586251776, "mean_lag": 0.4844150034262947, "delta": 0.506261655198883}
+{"event": "TRUST_OPEN_REJECT", "step": 148, "kind": "warm", "mean_now": 0.9991267045896746, "mean_lag": 0.489458962131626, "delta": 0.5096677424580486}
+{"event": "TRUST_OPEN_REJECT", "step": 149, "kind": "warm", "mean_now": 1.0, "mean_lag": 0.5026443178970563, "delta": 0.4973556821029437}
+{"event": "TRUST_MEAN", "step": 150, "armed": true, "mean": 0.9980033816749194, "open": 0.4890179958936338, "fires": 50}
+{"event": "TRUST_OPEN_REJECT", "step": 150, "kind": "warm", "mean_now": 0.9980033816749194, "mean_lag": 0.5089853857812856, "delta": 0.4890179958936338}
+{"event": "TRUST_OPEN_REJECT", "step": 151, "kind": "warm", "mean_now": 0.9956811642338136, "mean_lag": 0.5132860683407138, "delta": 0.4823950958930998}
+{"event": "TRUST_OPEN_REJECT", "step": 152, "kind": "warm", "mean_now": 0.9952201237653451, "mean_lag": 0.5278933114396911, "delta": 0.467326812325654}
+{"event": "TRUST_OPEN_REJECT", "step": 153, "kind": "warm", "mean_now": 0.9989760384234465, "mean_lag": 0.5344065159185127, "delta": 0.4645695225049338}
+{"event": "TRUST_OPEN_REJECT", "step": 154, "kind": "warm", "mean_now": 0.9981897443599697, "mean_lag": 0.5496235824907244, "delta": 0.44856616186924525}
+{"event": "TRUST_OPEN_REJECT", "step": 155, "kind": "warm", "mean_now": 0.9933840226923937, "mean_lag": 0.5615228273328106, "delta": 0.4318611953595831}
+{"event": "TRUST_OPEN_REJECT", "step": 156, "kind": "warm", "mean_now": 1.0, "mean_lag": 0.577148045854673, "delta": 0.42285195414532695}
+{"event": "TRUST_OPEN_REJECT", "step": 157, "kind": "warm", "mean_now": 1.0, "mean_lag": 0.5859453086712564, "delta": 0.4140546913287436}
+{"event": "TRUST_OPEN_REJECT", "step": 158, "kind": "warm", "mean_now": 0.9934342658713518, "mean_lag": 0.5996360840299311, "delta": 0.3937981818414207}
+{"event": "TRUST_OPEN_REJECT", "step": 159, "kind": "warm", "mean_now": 0.9942175761568666, "mean_lag": 0.6149684471727599, "delta": 0.3792491289841067}
+{"event": "TRUST_OPEN_REJECT", "step": 160, "kind": "warm", "mean_now": 0.999592748781079, "mean_lag": 0.6302803431033862, "delta": 0.36931240567769275}
+{"event": "TRUST_OPEN_REJECT", "step": 161, "kind": "warm", "mean_now": 0.9958005525700058, "mean_lag": 0.6397386369784688, "delta": 0.356061915591537}
+{"event": "TRUST_OPEN_REJECT", "step": 162, "kind": "warm", "mean_now": 0.9983513802904918, "mean_lag": 0.644288648155388, "delta": 0.35406273213510375}
+{"event": "TRUST_OPEN_REJECT", "step": 163, "kind": "warm", "mean_now": 0.9950576725399745, "mean_lag": 0.655544287459958, "delta": 0.3395133850800165}
+{"event": "TRUST_OPEN_REJECT", "step": 164, "kind": "warm", "mean_now": 1.0, "mean_lag": 0.666279977417059, "delta": 0.333720022582941}
+{"event": "TRUST_OPEN_REJECT", "step": 165, "kind": "warm", "mean_now": 1.0, "mean_lag": 0.6816790403258557, "delta": 0.3183209596741443}
+{"event": "TRUST_OPEN_REJECT", "step": 166, "kind": "warm", "mean_now": 0.9920296803751075, "mean_lag": 0.6934685248656255, "delta": 0.29856115550948203}
+{"event": "TRUST_OPEN_REJECT", "step": 167, "kind": "warm", "mean_now": 0.9928638750888428, "mean_lag": 0.7062120660999139, "delta": 0.28665180898892884}
+{"event": "TRUST_OPEN_REJECT", "step": 168, "kind": "warm", "mean_now": 0.9934401803051073, "mean_lag": 0.7218713702554634, "delta": 0.27156881004964384}
+{"event": "TRUST_OPEN_REJECT", "step": 169, "kind": "warm", "mean_now": 0.9962631091775459, "mean_lag": 0.7361018479919369, "delta": 0.260161261185609}
+{"event": "TRUST_OPEN_REJECT", "step": 170, "kind": "warm", "mean_now": 0.9927016132023637, "mean_lag": 0.7510644504479622, "delta": 0.2416371627544015}
+{"event": "TRUST_OPEN_REJECT", "step": 171, "kind": "warm", "mean_now": 0.9953462650972714, "mean_lag": 0.7648067389514694, "delta": 0.23053952614580198}
+{"event": "TRUST_OPEN_REJECT", "step": 172, "kind": "warm", "mean_now": 0.9885089950137889, "mean_lag": 0.7771470786794326, "delta": 0.2113619163343563}
+{"event": "TRUST_OPEN_REJECT", "step": 173, "kind": "warm", "mean_now": 0.9913580947002548, "mean_lag": 0.7912817413111174, "delta": 0.20007635338913743}
+{"event": "TRUST_OPEN_REJECT", "step": 174, "kind": "warm", "mean_now": 0.998342991039584, "mean_lag": 0.8025230336039196, "delta": 0.19581995743566438}
+{"event": "TRUST_OPEN_REJECT", "step": 175, "kind": "warm", "mean_now": 0.9916872643689078, "mean_lag": 0.8083753545076694, "delta": 0.18331190986123835}
+{"event": "TRUST_OPEN_REJECT", "step": 176, "kind": "warm", "mean_now": 0.9931256581761337, "mean_lag": 0.814601718595154, "delta": 0.17852393958097978}
+{"event": "TRUST_OPEN_REJECT", "step": 177, "kind": "warm", "mean_now": 0.9953793947260684, "mean_lag": 0.8279834830167465, "delta": 0.1673959117093219}
+{"event": "TRUST_OPEN_REJECT", "step": 178, "kind": "warm", "mean_now": 0.9936591686192715, "mean_lag": 0.8391806859328103, "delta": 0.15447848268646125}
+{"event": "TRUST_OPEN_REJECT", "step": 179, "kind": "warm", "mean_now": 0.9919770864247155, "mean_lag": 0.8391806859328103, "delta": 0.15279640049190524}
+{"event": "TRUST_OPEN_REJECT", "step": 180, "kind": "warm", "mean_now": 0.998219389274678, "mean_lag": 0.8523037717903372, "delta": 0.1459156174843408}
+{"event": "TRUST_OPEN_REJECT", "step": 181, "kind": "warm", "mean_now": 0.9941259541847205, "mean_lag": 0.8615189506674663, "delta": 0.13260700351725418}
+{"event": "TRUST_OPEN_REJECT", "step": 182, "kind": "warm", "mean_now": 0.9911430276287395, "mean_lag": 0.8741442851672907, "delta": 0.11699874246144881}
+{"event": "TRUST_OPEN_REJECT", "step": 183, "kind": "warm", "mean_now": 0.9880852930514566, "mean_lag": 0.8821872819709458, "delta": 0.10589801108051089}
+{"event": "TRUST_OPEN_REJECT", "step": 184, "kind": "warm", "mean_now": 1.0, "mean_lag": 0.887874062299895, "delta": 0.11212593770010504}
+{"event": "TRUST_MEAN", "step": 200, "armed": true, "mean": 0.8422577365524979, "open": -0.15774226344750208, "fires": 85}
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "VARIANT_DONE", "variant": "reachstall_trustopen"}
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "WARM", "variant": "identity", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.989990234375, "failing_steps": []}
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "WARM", "variant": "reachstall_trustopen", "status": "FAIL", "checks": 200, "passing_checks": 191, "min_modes": 6, "min_hq": 0.705078125, "failing_steps": [1186, 1187, 1188, 1189, 1190, 1191, 1192, 1193, 1194]}
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "WARM_CONTROL", "ranked": true, "checks": 200, "passing_checks": 200, "min_hq": 0.989990234375}
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "DONE"}
+EXIT:0

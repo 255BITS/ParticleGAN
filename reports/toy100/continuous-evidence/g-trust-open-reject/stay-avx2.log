@@ -1,0 +1,54 @@
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "DECLARED", "phase": "stay", "method": "reachstall_trustopen", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "shared_gate_eligible": false, "purity": "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder"}
+{"event": "TRUST_MEAN", "step": 50, "armed": false, "mean": 0.0997192497604422, "open": null, "fires": 0}
+{"event": "TRUST_MEAN", "step": 100, "armed": false, "mean": 0.23977114195196045, "open": 0.14005189219151826, "fires": 0}
+{"event": "TRUST_MEAN", "step": 150, "armed": false, "mean": 0.2013956709099193, "open": -0.03837547104204114, "fires": 0}
+{"event": "TRUST_MEAN", "step": 200, "armed": false, "mean": 0.21107680048314184, "open": 0.009681129573222536, "fires": 0}
+{"event": "TRUST_MEAN", "step": 250, "armed": false, "mean": 0.1741729639677391, "open": -0.036903836515402744, "fires": 0}
+{"event": "TRUST_MEAN", "step": 300, "armed": false, "mean": 0.14974695574285835, "open": -0.024426008224880752, "fires": 0}
+{"event": "TRUST_MEAN", "step": 350, "armed": false, "mean": 0.14531972695803896, "open": -0.004427228784819381, "fires": 0}
+{"event": "TRUST_MEAN", "step": 400, "armed": false, "mean": 0.16552763530883005, "open": 0.020207908350791087, "fires": 0}
+{"event": "TRUST_MEAN", "step": 450, "armed": false, "mean": 0.13416784516158284, "open": -0.03135979014724721, "fires": 0}
+{"event": "TRUST_MEAN", "step": 500, "armed": false, "mean": 0.10597377231490167, "open": -0.02819407284668117, "fires": 0}
+{"event": "TRUST_MEAN", "step": 550, "armed": false, "mean": 0.10131311675405648, "open": -0.004660655560845189, "fires": 0}
+{"event": "TRUST_OPEN_ARM", "step": 570, "phase": "cold_acquire"}
+{"event": "TRUST_MEAN", "step": 600, "armed": true, "mean": 0.08752261706556577, "open": -0.013790499688490707, "fires": 0}
+{"event": "TRUST_MEAN", "step": 650, "armed": true, "mean": 0.09156467706345411, "open": 0.004042059997888342, "fires": 0}
+{"event": "TRUST_MEAN", "step": 700, "armed": true, "mean": 0.052747657302256, "open": -0.03881701976119811, "fires": 0}
+{"event": "TRUST_MEAN", "step": 750, "armed": true, "mean": 0.07774997883091847, "open": 0.02500232152866247, "fires": 0}
+{"event": "TRUST_MEAN", "step": 800, "armed": true, "mean": 0.11063806707051153, "open": 0.032888088239593063, "fires": 0}
+{"event": "TRUST_MEAN", "step": 850, "armed": true, "mean": 0.11294585816194512, "open": 0.0023077910914335864, "fires": 0}
+{"event": "TRUST_MEAN", "step": 900, "armed": true, "mean": 0.09908632149944681, "open": -0.013859536662498312, "fires": 0}
+{"event": "TRUST_MEAN", "step": 950, "armed": true, "mean": 0.05632816710562967, "open": -0.04275815439381714, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1000, "armed": true, "mean": 0.07148220145931015, "open": 0.015154034353680484, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1050, "armed": true, "mean": 0.06838653132552695, "open": -0.0030956701337832015, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1100, "armed": true, "mean": 0.06839748648483747, "open": 1.095515931051616e-05, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1150, "armed": true, "mean": 0.0804096313603522, "open": 0.012012144875514733, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1200, "armed": true, "mean": 0.0745605967204488, "open": -0.005849034639903397, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1250, "armed": true, "mean": 0.08428171678495429, "open": 0.009721120064505484, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1300, "armed": true, "mean": 0.07831915590688976, "open": -0.0059625608780645295, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1350, "armed": true, "mean": 0.07207147928298246, "open": -0.0062476766239072945, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1400, "armed": true, "mean": 0.07091196207830644, "open": -0.001159517204676025, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1450, "armed": true, "mean": 0.06586354068292656, "open": -0.005048421395379879, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1500, "armed": true, "mean": 0.06933280110838475, "open": 0.0034692604254581844, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1550, "armed": true, "mean": 0.07127284528466353, "open": 0.0019400441762787851, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1600, "armed": true, "mean": 0.06751785804840105, "open": -0.003754987236262483, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1650, "armed": true, "mean": 0.062385901261216084, "open": -0.005131956787184963, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1700, "armed": true, "mean": 0.06087175307444024, "open": -0.0015141481867758447, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1750, "armed": true, "mean": 0.06919532173401216, "open": 0.008323568659571921, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1800, "armed": true, "mean": 0.14075659963099074, "open": 0.07156127789697858, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1850, "armed": true, "mean": 0.14765066683409933, "open": 0.006894067203108589, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1900, "armed": true, "mean": 0.15805480044939524, "open": 0.010404133615295907, "fires": 0}
+{"event": "TRUST_MEAN", "step": 1950, "armed": true, "mean": 0.13332278674728668, "open": -0.024732013702108563, "fires": 0}
+{"event": "TRUST_MEAN", "step": 2000, "armed": true, "mean": 0.08615411481679586, "open": -0.04716867193049082, "fires": 0}
+{"event": "TRUST_MEAN", "step": 2050, "armed": true, "mean": 0.05854981239294599, "open": -0.02760430242384987, "fires": 0}
+{"event": "TRUST_MEAN", "step": 2100, "armed": true, "mean": 0.10887758074040928, "open": 0.05032776834746329, "fires": 0}
+{"event": "TRUST_OPEN_REJECT", "step": 2132, "kind": "dropout", "mean_now": 0.17073803532022008, "mean_lag": 0.07059428666360361, "delta": 0.10014374865661647}
+{"event": "TRUST_OPEN_REJECT", "step": 2137, "kind": "dropout", "mean_now": 0.17649676645267973, "mean_lag": 0.07596622159864891, "delta": 0.10053054485403082}
+{"event": "TRUST_MEAN", "step": 2150, "armed": true, "mean": 0.17689342796395477, "open": 0.06801584722354549, "fires": 2}
+{"event": "TRUST_MEAN", "step": 2200, "armed": true, "mean": 0.06616508135616624, "open": -0.11072834660778853, "fires": 2}
+{"event": "TRUST_MEAN", "step": 2250, "armed": true, "mean": 0.07910641346920504, "open": 0.0129413321130388, "fires": 2}
+{"event": "TRUST_MEAN", "step": 2300, "armed": true, "mean": 0.08525258347153752, "open": 0.006146170002332488, "fires": 2}
+{"event": "TRUST_MEAN", "step": 2350, "armed": true, "mean": 0.07328549655784879, "open": -0.011967086913688738, "fires": 2}
+{"event": "TRUST_MEAN", "step": 2400, "armed": true, "mean": 0.07800354876007577, "open": 0.0047180522022269855, "fires": 2}
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "STAY", "steps": 2400, "seconds": 57.9, "terminal_1000_1200": [[1000, 8, 0.999], [1050, 8, 1.0], [1100, 8, 0.9993], [1150, 8, 0.9995], [1200, 8, 0.9988]], "checks": 120, "passing": 95, "min_modes": 0, "min_hq": 0.0, "failing_steps": [1340, 1540, 1720, 1760, 1770, 1780, 1790, 1800, 1820, 1830, 1840, 1850, 1860, 1870, 1880, 1890, 1910, 1950, 1960, 2090, 2120, 2150, 2200, 2350, 2390], "final": [2400, 8, 0.9998], "dynamics": {"method": "pr84_slope_utilisation_reach", "scratch_optimizer_policy": "pr84_slope_utilisation_reach", "shared_gate_eligible": false, "curvature_bound": 0.25, "d_curvature_bound": 3.0, "advantage_gate": null, "outer_steps": 2400, "gate_open": 0, "bound_evaluated": 2400, "bound_active": 2400, "d_bound_active": 105, "gradient_evaluations_per_outer_step": 3.0, "moment_updates_per_outer_step": 1, "rng_replay_verified": 4800, "update_order": "alternating: D Adam step, then G+prior Adam step against the new D", "smooth_critic": true, "smooth_width_cap": 0.15, "reach": 0.5, "ramp": "stall", "game_bound": false, "game_steps": 1, "b_cap_slope": 1.0, "widened_updates": 1969, "max_width": 0.5, "trust_open_reject": true, "trust_open_armed": true, "trust_open_arm_update": 570, "trust_open_arm_phase": "cold_acquire", "trust_open_checks": 1830, "trust_open_fires": 2, "trust_open_fires_warm": 0, "trust_open_fires_acquire": 0, "trust_open_fires_stay": 2, "trust_open_fires_dropout": 2, "trust_open_delta": 0.1, "trust_open_lag": 50, "trust_open_max": 0.10053054485403082, "trust_open_max_step": 2137, "trust_open_max_dropout": 0.10053054485403082, "trust_open_max_dropout_step": 2137}, "reject_steps": [2132, 2137]}
+{"cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "event": "DONE"}
