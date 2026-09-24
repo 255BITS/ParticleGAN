@@ -1,8 +1,11 @@
 # Allocation, neural landing, and validation of continuing updates
 
 No complete replacement for LR decay is qualified. The latest candidate is
-**split-batch data reallocation with joint G/prior fitting**. It passes the
-44-check saved-state gate; warm and continued training are the next gates.
+**sample-derived distinct-group anchors with joint G/prior fitting**, restoring
+the pre-G state if the bounded fit does not converge. It passes the 44-check
+saved-state gate and warm200. Dense continuation and cold acquisition remain
+required. Split-batch reallocation was rejected by a longer, cheaper
+free-output test before additional GAN training.
 The earlier full critic-refinement method fails cold acquisition at three
 modes despite passing the borrowed-state hold.
 
@@ -10,9 +13,9 @@ modes despite passing the borrowed-state hold.
 |---|---|---|
 | One virtual penalized-D step, full G derivative | 28/44 saved checks | Rejected before warm |
 | Exact free-output whole-map C+Q update | Warm 100/100; both cold clouds 0/100, ending at four modes | Better neural landing alone cannot fix allocation |
-| Distinct sample-group anchors, joint neural fitting | Both cold saved states reach 8 modes/HQ 1 after three fixed-bank rounds; warm stays good | Numerical prerequisite only; not a trainer pass |
+| Distinct sample-group anchors, joint neural fitting | Saved44 and neural warm200 all HQ1; free-output warm1200 all HQ1, cold first passes at update3 | Dense neural hold and cold acquisition required |
 | Global sampled-data reallocation, joint fitting, whole-map C+Q acceptance | 43/44 saved checks | Rejected before warm |
-| Same reallocation with separate proposal/confirmation batch halves | **44/44**, minimum HQ .936523, all eight modes | Eligible for warm gate only |
+| Same reallocation with separate proposal/confirmation batch halves | Saved44 pass, but free-output warm1198/1200 and cold1197/1200 | Withhold further neural training |
 
 All host comparisons retain nominal G/D LR .00425 and prior LR .0085, the
 original noise horizon, and one Adam moment update per player. They use the
@@ -81,6 +84,53 @@ Its saved-window passes are 12/12, 16/16, and 16/16, minimum HQ .936523,
 capture contains a full post-update state; all 44 original supports and
 update records match. Candidate and original RNG/noise endpoints match.
 [Frozen split-batch gate](continuous-evidence/round6-crossfit-saved44/manifest.json).
+
+The subsequent [free-output 1200-update test](continuous-round6-split-output-stability.md)
+rejects this rule as the next candidate. Even exact target realization has
+two warm and three cold quality failures. Four newly accepted proposals
+improve both halves yet harm the same-noise quality check; a fifth failure
+inherits the previous bad cloud while resting. A passing saved window did
+not imply stability over fresh batches.
+
+## Current distinct-group candidate
+
+The anchor rule infers groups from the current native real128 batch using
+the largest additive gap in a minimum spanning tree. Neither the true mode
+centers nor a configured group count enters training. It computes one
+distinct-anchor quadratic target from the pre-G cloud, jointly fits G and
+prior, and selects by the actual anchor objective. A nonconverged numerical
+fit restores the pre-G/prior parameters; D and the once-advanced Adam state
+remain intact. This is an additional data objective, not an unchanged GAN
+objective or an R1/R2 zero pull.
+
+The [paired free-output experiment](sample-anchor-free1200.md) uses exactly
+the preceding split test's initial clouds and real-data streams. Warm passes
+1200/1200 with minimum HQ1; cold first passes at update3 and passes every
+remaining check. The [independent neural saved-state audit](continuous-round6-sample-anchor-independent-audit.md)
+passes44/44 with HQ1, verifies original full-state parity where available,
+and confirms normal native-host integration in one unobserved cold update.
+The rest-on-nonconvergence variant likewise passes44/44. Its actual neural
+warm200 passes all checks with HQ1 and exact scheduled/original controls.
+The subsequent hold has HQ1 on all1200 later checks, but its full-snapshot
+comparison at1200 rejects promotion: diagnostics and all200 update/correction
+records match, while the hash including complete noise histories differs.
+This is being isolated before cold training. The [warm archive](continuous-evidence/round6-sample-anchor-neural/warm/manifest.json)
+and [incomplete hold archive](continuous-evidence/round6-sample-anchor-neural/hold/manifest.json)
+retain the frozen code, raw results, complete final states and logs.
+
+A [conditional invariant-region derivation](anchor-invariant-region.md)
+separates the mechanism from its unproved premises. With correctly inferred
+groups, bounded centroid error, sufficient separation and bounded numerical
+fit error, every selected move remains in a covered neighborhood; failed
+fits may rest. Correct group inference on every future Gaussian sample,
+parameter-state boundedness, acquisition and general distribution fidelity
+do not follow from that argument. Current perfect HQ must not be presented
+as an unconditional all-time theorem.
+
+Internal diagnostics are also recorded: by warm1200, G parameter norm is
+15.75 versus13.27 in the disabled control, and first-fit Jacobian sensitivity
+increases. Output quality alone does not rule out growing cancellation
+between the native GAN move and its subsequent correction.
 
 This method explicitly adds a sampled-data objective and extra optimization.
 The native G curvature bound controls only the GAN proposal; it does not

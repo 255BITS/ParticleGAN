@@ -1,11 +1,11 @@
 # Same-dataset stability status, September 24
 
-**No complete solution is qualified.** Critic refinement passes the borrowed-state
-hold but fails full cold acquisition at three modes. The latest
-[round 6 split-batch reallocation candidate](continuous-round6.md) passes all
-44 saved-state checks; its warm and continued-training gates are next.
-Earlier PR84 methods fail a longer continuation despite good final checkpoints.
-The fixed dataset never changes.
+**No complete solution is qualified.** The current [sample-group anchor candidate](continuous-round6.md)
+passes saved44 and neural warm200, all HQ1. Its free-output warm1200 also
+passes, while split-batch reallocation fails the equivalent longer filter.
+Dense neural hold and cold acquisition remain required. Conditional output
+invariance has explicit group/error premises; internal state and complete
+distribution fidelity remain open. The fixed dataset never changes.
 
 **Subsequent exact diagnosis and new attempt:** the [fifth round](continuous-round5.md)
 checks every update through2400. Original PR84 fails89 of1,200 later checks,

@@ -1183,15 +1183,23 @@
     "next": "saved-state differentiated critic response and early-acquisition diagnosis; no later promotion gates"
   },
   "next_research_candidate": {
-    "name": "split-batch data reallocation with joint G/prior fitting",
-    "status": "saved44_pass_warm_pending",
-    "adapter": "reports/toy100/crossfit_reallocation.py",
-    "adapter_sha256": "5d7eacbfd1937a9da999e62ab6156774d4c71f20fe305ff1f3860327278814af",
+    "name": "sample-derived distinct-group anchors with joint fitting and rest on nonconvergence",
+    "method": "pr84_sample_group_anchor_joint_fit_rest_on_nonconvergence",
+    "status": "warm200_pass_dense_hold_running",
+    "qualified": false,
     "saved_checks": 44,
-    "passing_checks": 44,
-    "min_hq": 0.9365234375,
-    "production_gate_eligible": false,
-    "evidence": "continuous-evidence/round6-crossfit-saved44/manifest.json",
-    "report": "continuous-round6.md"
+    "saved_passes": 44,
+    "warm_checks": 200,
+    "warm_passes": 200,
+    "warm_min_hq": 1.0,
+    "free_output_warm_checks": 1200,
+    "free_output_warm_passes": 1200,
+    "report": "continuous-round6.md",
+    "limitations": [
+      "conditional group/error premises",
+      "internal parameter drift not bounded",
+      "centroid coverage is not complete distribution fidelity",
+      "cold and own-acquired continuation pending"
+    ]
   }
 }

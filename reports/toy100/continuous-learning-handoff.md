@@ -5,14 +5,15 @@ candidate has passed both acquisition and continued quality. Work here is
 limited to replacing those schedules with responsive training dynamics;
 production defaults have not been changed.
 
-**Latest, round 6:** [allocation, neural landing, and split-batch validation](continuous-round6.md).
-The full critic-refinement cold run is closed as a failure, not pending.
-One-step total critic response fails 28/44 saved checks; full-data reallocation
-passes 43/44 but fits harmful data outliers at the remaining update. A new
-split-batch reallocation rule passes all 44 saved checks and is eligible for
-the warm gate. It adds a data objective and joint G/prior numerical fitting;
-no full training pass or stability theorem is claimed. The sections below
-retain the preceding investigations and their exact reproduction details.
+**Latest, round 6:** [sample-derived anchors and conditional stability](continuous-round6.md).
+Split-batch reallocation passes saved44 but fails longer free-output checks,
+so further GAN runs were withheld. Distinct sample-group anchors pass the
+same free-output warm1200, saved44, and neural warm200, all HQ1. Dense neural
+hold and cold acquisition are next. The new conditional invariant-region
+argument requires correct bounded-error group estimates and numerical
+margins; internal parameter stability and full distribution fidelity are
+still open. This adds a data objective and joint G/prior fitting, and is not
+a qualified production replacement. Earlier investigations remain below.
 
 **Latest stability investigation:** exact replay isolates a destructive
 generator update at1325 and accumulated mode loss beginning1533. All16 held-out
