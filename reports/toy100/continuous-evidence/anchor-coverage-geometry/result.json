@@ -1,0 +1,958 @@
+{
+  "status": "EXACT_GEOMETRY_CHECK_PASS",
+  "scope": "fixed distinct centers,free scalar particle coordinates;no model or optimizer",
+  "shared_gate_eligible": false,
+  "centers": [
+    "-1",
+    "1"
+  ],
+  "n": 3,
+  "k": 2,
+  "enumerated_branches": 48,
+  "active_stationary_branches": 12,
+  "all_active_stationary_objectives_zero": true,
+  "branches": [
+    {
+      "assignment": [
+        0,
+        1
+      ],
+      "nearest": [
+        0,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "-1",
+        "1/5",
+        "-1"
+      ],
+      "active": false,
+      "objective": "8/15"
+    },
+    {
+      "assignment": [
+        0,
+        1
+      ],
+      "nearest": [
+        0,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "-1",
+        "1/5",
+        "1"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        0,
+        1
+      ],
+      "nearest": [
+        0,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "-1",
+        "1",
+        "-1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        0,
+        1
+      ],
+      "nearest": [
+        0,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "-1",
+        "1",
+        "1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        0,
+        1
+      ],
+      "nearest": [
+        1,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "-1/5",
+        "1/5",
+        "-1"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        0,
+        1
+      ],
+      "nearest": [
+        1,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "-1/5",
+        "1/5",
+        "1"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        0,
+        1
+      ],
+      "nearest": [
+        1,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "-1/5",
+        "1",
+        "-1"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        0,
+        1
+      ],
+      "nearest": [
+        1,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "-1/5",
+        "1",
+        "1"
+      ],
+      "active": false,
+      "objective": "8/15"
+    },
+    {
+      "assignment": [
+        0,
+        2
+      ],
+      "nearest": [
+        0,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "-1",
+        "-1",
+        "1/5"
+      ],
+      "active": false,
+      "objective": "8/15"
+    },
+    {
+      "assignment": [
+        0,
+        2
+      ],
+      "nearest": [
+        0,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "-1",
+        "-1",
+        "1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        0,
+        2
+      ],
+      "nearest": [
+        0,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "-1",
+        "1",
+        "1/5"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        0,
+        2
+      ],
+      "nearest": [
+        0,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "-1",
+        "1",
+        "1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        0,
+        2
+      ],
+      "nearest": [
+        1,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "-1/5",
+        "-1",
+        "1/5"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        0,
+        2
+      ],
+      "nearest": [
+        1,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "-1/5",
+        "-1",
+        "1"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        0,
+        2
+      ],
+      "nearest": [
+        1,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "-1/5",
+        "1",
+        "1/5"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        0,
+        2
+      ],
+      "nearest": [
+        1,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "-1/5",
+        "1",
+        "1"
+      ],
+      "active": false,
+      "objective": "8/15"
+    },
+    {
+      "assignment": [
+        1,
+        0
+      ],
+      "nearest": [
+        0,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "1/5",
+        "-1",
+        "-1"
+      ],
+      "active": false,
+      "objective": "8/15"
+    },
+    {
+      "assignment": [
+        1,
+        0
+      ],
+      "nearest": [
+        0,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "1/5",
+        "-1",
+        "1"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        1,
+        0
+      ],
+      "nearest": [
+        0,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "1/5",
+        "-1/5",
+        "-1"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        1,
+        0
+      ],
+      "nearest": [
+        0,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "1/5",
+        "-1/5",
+        "1"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        1,
+        0
+      ],
+      "nearest": [
+        1,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "1",
+        "-1",
+        "-1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        1,
+        0
+      ],
+      "nearest": [
+        1,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "1",
+        "-1",
+        "1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        1,
+        0
+      ],
+      "nearest": [
+        1,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "1",
+        "-1/5",
+        "-1"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        1,
+        0
+      ],
+      "nearest": [
+        1,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "1",
+        "-1/5",
+        "1"
+      ],
+      "active": false,
+      "objective": "8/15"
+    },
+    {
+      "assignment": [
+        1,
+        2
+      ],
+      "nearest": [
+        0,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "-1",
+        "-1",
+        "1/5"
+      ],
+      "active": false,
+      "objective": "8/15"
+    },
+    {
+      "assignment": [
+        1,
+        2
+      ],
+      "nearest": [
+        0,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "-1",
+        "-1",
+        "1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        1,
+        2
+      ],
+      "nearest": [
+        0,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "-1",
+        "-1/5",
+        "1/5"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        1,
+        2
+      ],
+      "nearest": [
+        0,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "-1",
+        "-1/5",
+        "1"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        1,
+        2
+      ],
+      "nearest": [
+        1,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "1",
+        "-1",
+        "1/5"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        1,
+        2
+      ],
+      "nearest": [
+        1,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "1",
+        "-1",
+        "1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        1,
+        2
+      ],
+      "nearest": [
+        1,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "1",
+        "-1/5",
+        "1/5"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        1,
+        2
+      ],
+      "nearest": [
+        1,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "1",
+        "-1/5",
+        "1"
+      ],
+      "active": false,
+      "objective": "8/15"
+    },
+    {
+      "assignment": [
+        2,
+        0
+      ],
+      "nearest": [
+        0,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "1/5",
+        "-1",
+        "-1"
+      ],
+      "active": false,
+      "objective": "8/15"
+    },
+    {
+      "assignment": [
+        2,
+        0
+      ],
+      "nearest": [
+        0,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "1/5",
+        "-1",
+        "-1/5"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        2,
+        0
+      ],
+      "nearest": [
+        0,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "1/5",
+        "1",
+        "-1"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        2,
+        0
+      ],
+      "nearest": [
+        0,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "1/5",
+        "1",
+        "-1/5"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        2,
+        0
+      ],
+      "nearest": [
+        1,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "1",
+        "-1",
+        "-1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        2,
+        0
+      ],
+      "nearest": [
+        1,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "1",
+        "-1",
+        "-1/5"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        2,
+        0
+      ],
+      "nearest": [
+        1,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "1",
+        "1",
+        "-1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        2,
+        0
+      ],
+      "nearest": [
+        1,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "1",
+        "1",
+        "-1/5"
+      ],
+      "active": false,
+      "objective": "8/15"
+    },
+    {
+      "assignment": [
+        2,
+        1
+      ],
+      "nearest": [
+        0,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "-1",
+        "1/5",
+        "-1"
+      ],
+      "active": false,
+      "objective": "8/15"
+    },
+    {
+      "assignment": [
+        2,
+        1
+      ],
+      "nearest": [
+        0,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "-1",
+        "1/5",
+        "-1/5"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        2,
+        1
+      ],
+      "nearest": [
+        0,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "-1",
+        "1",
+        "-1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        2,
+        1
+      ],
+      "nearest": [
+        0,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "-1",
+        "1",
+        "-1/5"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        2,
+        1
+      ],
+      "nearest": [
+        1,
+        0,
+        0
+      ],
+      "branch_minimum": [
+        "1",
+        "1/5",
+        "-1"
+      ],
+      "active": false,
+      "objective": "16/75"
+    },
+    {
+      "assignment": [
+        2,
+        1
+      ],
+      "nearest": [
+        1,
+        0,
+        1
+      ],
+      "branch_minimum": [
+        "1",
+        "1/5",
+        "-1/5"
+      ],
+      "active": false,
+      "objective": "56/75"
+    },
+    {
+      "assignment": [
+        2,
+        1
+      ],
+      "nearest": [
+        1,
+        1,
+        0
+      ],
+      "branch_minimum": [
+        "1",
+        "1",
+        "-1"
+      ],
+      "active": true,
+      "objective": "0"
+    },
+    {
+      "assignment": [
+        2,
+        1
+      ],
+      "nearest": [
+        1,
+        1,
+        1
+      ],
+      "branch_minimum": [
+        "1",
+        "1",
+        "-1/5"
+      ],
+      "active": false,
+      "objective": "8/15"
+    }
+  ],
+  "wrong_subset_majorization": [
+    {
+      "before": "2",
+      "after": "8/15",
+      "assignment": [
+        0,
+        1
+      ],
+      "nearest": [
+        0,
+        0,
+        0
+      ],
+      "point": [
+        "-1",
+        "1/5",
+        "-1"
+      ]
+    },
+    {
+      "before": "8/15",
+      "after": "0",
+      "assignment": [
+        0,
+        1
+      ],
+      "nearest": [
+        0,
+        1,
+        0
+      ],
+      "point": [
+        "-1",
+        "1",
+        "-1"
+      ]
+    }
+  ],
+  "covered_rest": {
+    "before": "0",
+    "after": "0",
+    "assignment": [
+      0,
+      1
+    ],
+    "nearest": [
+      0,
+      1,
+      0
+    ]
+  },
+  "fixed_target_perturbation_response": {
+    "before": "1/300",
+    "after": "0",
+    "assignment": [
+      2,
+      1
+    ],
+    "nearest": [
+      0,
+      1,
+      0
+    ]
+  },
+  "equal_count_caveat": {
+    "point": [
+      "-1",
+      "0"
+    ],
+    "active_branch_stationary": true,
+    "value": "1",
+    "descent_point": [
+      "-1",
+      "1/10"
+    ],
+    "descent_value": "81/100"
+  },
+  "source_sha256": "4e55f2e5d0fa2d88a2ffce901032f5651c49850c202798b6d77fc459cd9960a5"
+}

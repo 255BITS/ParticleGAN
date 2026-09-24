@@ -1,0 +1,27 @@
+{
+  "result.json": {
+    "source": "artifacts/continuous-learning/anchor-coverage-geometry/result.json",
+    "raw_sha256": "ec4f18861d7cb65b48553089422c972b89040c0f5fabbbbe1775db786c77b83d",
+    "archive_sha256": "ec4f18861d7cb65b48553089422c972b89040c0f5fabbbbe1775db786c77b83d"
+  },
+  "source.py.gz": {
+    "source": "reports/toy100/anchor_coverage_geometry.py",
+    "raw_sha256": "4e55f2e5d0fa2d88a2ffce901032f5651c49850c202798b6d77fc459cd9960a5",
+    "archive_sha256": "f83d199775cff17d7765e65a5c4795bc0ee7f108aed2b6a53a5bae47e71f8a45"
+  },
+  "tests.py.gz": {
+    "source": "tests/test_anchor_coverage_geometry.py",
+    "raw_sha256": "178c7c5bfb8b8fd43b1836072dc31a34cbd80c103764843cae52b60d3ddbde8a",
+    "archive_sha256": "d161b8c060488cb9cc54b41acbba5e4bc8fe9416cac69b2b88a2daeaa4ea0ef8"
+  },
+  "run.log.gz": {
+    "source": "/tmp/anchor-coverage-geometry.log",
+    "raw_sha256": "d1d587d3e5ddd42f70c391cdbc61a27fecb3e8882ad3798dee3042bb4f0fd23b",
+    "archive_sha256": "17da2c8d1874ad354c998a85a771a7ec73dc5bc2f17cfb96c3d1eef947779cb2"
+  },
+  "tests.log": {
+    "source": "/tmp/anchor-coverage-geometry-tests.log",
+    "raw_sha256": "86288ee89a493b657a4f02c2118272c4f6a9a7afa049f10741e60f3a564db934",
+    "archive_sha256": "86288ee89a493b657a4f02c2118272c4f6a9a7afa049f10741e60f3a564db934"
+  }
+}
