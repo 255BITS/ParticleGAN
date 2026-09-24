@@ -1,0 +1,15 @@
+{"event": "DECLARED", "phase": "warm", "method": "ema", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX2", "shared_gate_eligible": false, "purity": "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder"}
+{"event": "VARIANT_START", "variant": "identity", "cpu": "AVX2"}
+{"event": "VARIANT_START", "variant": "ema", "cpu": "AVX2"}
+{"event": "EMA_ARM", "acquired_step": 1000, "first_g_step": 1001, "modes": 8, "hq": 0.997314453125, "tau": 0.99, "cpu": "AVX2"}
+{"event": "STEP", "step": 1050, "ema": true, "ema_updates": 50, "sharp": 0.3289724886417389, "width": 0.16448624432086945, "g_factor": 0.0872564250859904, "adv": 0.01882749605448264, "cpu": "AVX2"}
+{"event": "VARIANT_DONE", "variant": "identity", "cpu": "AVX2"}
+{"event": "STEP", "step": 1100, "ema": true, "ema_updates": 100, "sharp": 0.4209473729133606, "width": 0.2104736864566803, "g_factor": 0.29025195039384416, "adv": 0.04371845531733054, "cpu": "AVX2"}
+{"event": "STEP", "step": 1150, "ema": true, "ema_updates": 150, "sharp": 0.7177713513374329, "width": 0.35888567566871643, "g_factor": 0.319105900156706, "adv": 0.07039409685404319, "cpu": "AVX2"}
+{"event": "STEP", "step": 1200, "ema": true, "ema_updates": 200, "sharp": 0.87594074010849, "width": 0.437970370054245, "g_factor": 0.5906973765341118, "adv": 0.13092315006525534, "cpu": "AVX2"}
+{"event": "VARIANT_DONE", "variant": "ema", "cpu": "AVX2"}
+{"event": "WARM", "variant": "identity", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.989990234375, "failing_steps": [], "cpu": "AVX2"}
+{"event": "WARM", "variant": "ema", "status": "FAIL", "checks": 200, "passing_checks": 154, "min_modes": 6, "min_hq": 0.37109375, "failing_steps": [1153, 1154, 1155, 1158, 1159, 1160, 1161, 1162, 1163, 1164, 1165, 1166, 1167, 1168, 1169, 1170, 1171, 1172, 1173, 1174, 1175, 1176, 1177, 1178, 1179, 1180, 1181, 1182, 1183, 1184, 1185, 1186, 1187, 1188, 1189, 1190, 1191, 1192, 1193, 1194, 1195, 1196, 1197, 1198, 1199, 1200], "cpu": "AVX2"}
+{"event": "WARM_CONTROL", "valid": true, "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.989990234375, "cpu": "AVX2"}
+{"event": "DONE", "cpu": "AVX2"}
+EXIT:0
