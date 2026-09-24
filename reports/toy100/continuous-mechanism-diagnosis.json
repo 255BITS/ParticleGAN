@@ -1,0 +1,551 @@
+{
+  "source_epoch": "983d037",
+  "scope": "fixed seed 0; unchanged frozen mode_hold host; diagnostic interventions not eligible for common gate",
+  "observations": [
+    {
+      "name": "scheduled",
+      "late_cap_active_mean": 0.0013020833333333333,
+      "late_d_input_gradient_norm": 0.31765109584445045,
+      "late_g_output_rms": 0.01970634724247724,
+      "late_prior_output_rms": 0.0020387665835663767,
+      "late_total_output_rms": 0.0215331275061804,
+      "tail": [
+        {
+          "step": 1000,
+          "modes": 8,
+          "hq": 0.999755859375
+        },
+        {
+          "step": 1050,
+          "modes": 8,
+          "hq": 1.0
+        },
+        {
+          "step": 1100,
+          "modes": 8,
+          "hq": 1.0
+        },
+        {
+          "step": 1150,
+          "modes": 8,
+          "hq": 1.0
+        },
+        {
+          "step": 1200,
+          "modes": 8,
+          "hq": 1.0
+        }
+      ],
+      "raw": "artifacts/continuous-mechanism/scheduled.json"
+    },
+    {
+      "name": "constant",
+      "late_cap_active_mean": 0.23270089285714285,
+      "late_d_input_gradient_norm": 0.7934211293856303,
+      "late_g_output_rms": 0.40624696300143287,
+      "late_prior_output_rms": 0.03719221694128854,
+      "late_total_output_rms": 0.4401081403096517,
+      "tail": [
+        {
+          "step": 1000,
+          "modes": 5,
+          "hq": 0.202880859375
+        },
+        {
+          "step": 1050,
+          "modes": 8,
+          "hq": 0.626708984375
+        },
+        {
+          "step": 1100,
+          "modes": 8,
+          "hq": 0.444091796875
+        },
+        {
+          "step": 1150,
+          "modes": 4,
+          "hq": 0.24365234375
+        },
+        {
+          "step": 1200,
+          "modes": 7,
+          "hq": 0.369384765625
+        }
+      ],
+      "raw": "artifacts/continuous-mechanism/constant.json"
+    },
+    {
+      "name": "constant_0025",
+      "late_cap_active_mean": 0.21335565476190477,
+      "late_d_input_gradient_norm": 0.7868792017300924,
+      "late_g_output_rms": 0.3198396180357252,
+      "late_prior_output_rms": 0.022662393127878506,
+      "late_total_output_rms": 0.3395277722960427,
+      "tail": [
+        {
+          "step": 1000,
+          "modes": 8,
+          "hq": 0.81884765625
+        },
+        {
+          "step": 1050,
+          "modes": 8,
+          "hq": 0.8427734375
+        },
+        {
+          "step": 1100,
+          "modes": 8,
+          "hq": 0.94921875
+        },
+        {
+          "step": 1150,
+          "modes": 6,
+          "hq": 0.55029296875
+        },
+        {
+          "step": 1200,
+          "modes": 8,
+          "hq": 0.953857421875
+        }
+      ],
+      "raw": "artifacts/continuous-mechanism/constant_0025.json"
+    }
+  ],
+  "restart_branches": [
+    {
+      "name": "resume_none",
+      "options": {
+        "name": "resume_none",
+        "resume_constant": true,
+        "branch_at": 1000,
+        "output": "artifacts/continuous-mechanism"
+      },
+      "tail": [
+        {
+          "step": 1000,
+          "modes": 8,
+          "hq": 0.999755859375
+        },
+        {
+          "step": 1050,
+          "modes": 4,
+          "hq": 0.25048828125
+        },
+        {
+          "step": 1100,
+          "modes": 7,
+          "hq": 0.278076171875
+        },
+        {
+          "step": 1150,
+          "modes": 8,
+          "hq": 0.5283203125
+        },
+        {
+          "step": 1200,
+          "modes": 6,
+          "hq": 0.504638671875
+        }
+      ],
+      "raw": "artifacts/continuous-mechanism/resume_none.json"
+    },
+    {
+      "name": "resume_g",
+      "options": {
+        "name": "resume_g",
+        "resume_constant": true,
+        "branch_at": 1000,
+        "freeze": "g",
+        "output": "artifacts/continuous-mechanism"
+      },
+      "tail": [
+        {
+          "step": 1000,
+          "modes": 8,
+          "hq": 0.999755859375
+        },
+        {
+          "step": 1050,
+          "modes": 8,
+          "hq": 1.0
+        },
+        {
+          "step": 1100,
+          "modes": 8,
+          "hq": 1.0
+        },
+        {
+          "step": 1150,
+          "modes": 8,
+          "hq": 0.95654296875
+        },
+        {
+          "step": 1200,
+          "modes": 8,
+          "hq": 0.99755859375
+        }
+      ],
+      "raw": "artifacts/continuous-mechanism/resume_g.json"
+    },
+    {
+      "name": "resume_prior",
+      "options": {
+        "name": "resume_prior",
+        "resume_constant": true,
+        "branch_at": 1000,
+        "freeze": "prior",
+        "output": "artifacts/continuous-mechanism"
+      },
+      "tail": [
+        {
+          "step": 1000,
+          "modes": 8,
+          "hq": 0.999755859375
+        },
+        {
+          "step": 1050,
+          "modes": 7,
+          "hq": 0.408447265625
+        },
+        {
+          "step": 1100,
+          "modes": 7,
+          "hq": 0.818603515625
+        },
+        {
+          "step": 1150,
+          "modes": 7,
+          "hq": 0.34033203125
+        },
+        {
+          "step": 1200,
+          "modes": 7,
+          "hq": 0.31298828125
+        }
+      ],
+      "raw": "artifacts/continuous-mechanism/resume_prior.json"
+    },
+    {
+      "name": "resume_d",
+      "options": {
+        "name": "resume_d",
+        "resume_constant": true,
+        "branch_at": 1000,
+        "freeze": "d",
+        "output": "artifacts/continuous-mechanism"
+      },
+      "tail": [
+        {
+          "step": 1000,
+          "modes": 8,
+          "hq": 0.999755859375
+        },
+        {
+          "step": 1050,
+          "modes": 7,
+          "hq": 0.697021484375
+        },
+        {
+          "step": 1100,
+          "modes": 6,
+          "hq": 0.72265625
+        },
+        {
+          "step": 1150,
+          "modes": 6,
+          "hq": 0.642822265625
+        },
+        {
+          "step": 1200,
+          "modes": 8,
+          "hq": 0.827880859375
+        }
+      ],
+      "raw": "artifacts/continuous-mechanism/resume_d.json"
+    }
+  ],
+  "denominator_quantiles": {
+    "g": [
+      2.7804256942112088e-05,
+      0.00019973333941639533,
+      0.0007912710647187417,
+      0.005702592964683261,
+      0.2896182792527335
+    ],
+    "prior": [
+      0.01674440201549303,
+      0.02418560862895988,
+      0.05196410080506688,
+      0.085883491450832,
+      0.11588879497278304
+    ],
+    "d": [
+      0.0,
+      0.0006528000230900943,
+      0.0018261250308049576,
+      0.004395540759322189,
+      0.2501232943364552
+    ]
+  },
+  "r1r2": [
+    {
+      "name": "r1r2_00",
+      "lr": 0.001,
+      "gamma": 0.01,
+      "final": {
+        "modes": 4,
+        "hq": 0.888427734375
+      },
+      "suffix": 0,
+      "pass": false,
+      "seconds": 8.469000218901783
+    },
+    {
+      "name": "r1r2_01",
+      "lr": 0.001,
+      "gamma": 0.1,
+      "final": {
+        "modes": 8,
+        "hq": 0.9990234375
+      },
+      "suffix": 14,
+      "pass": true,
+      "seconds": 8.570197944995016
+    },
+    {
+      "name": "r1r2_02",
+      "lr": 0.001,
+      "gamma": 1.0,
+      "final": {
+        "modes": 8,
+        "hq": 1.0
+      },
+      "suffix": 2,
+      "pass": false,
+      "seconds": 8.232137290993705
+    },
+    {
+      "name": "r1r2_03",
+      "lr": 0.0025,
+      "gamma": 0.01,
+      "final": {
+        "modes": 4,
+        "hq": 0.93505859375
+      },
+      "suffix": 0,
+      "pass": false,
+      "seconds": 8.54521499411203
+    },
+    {
+      "name": "r1r2_04",
+      "lr": 0.0025,
+      "gamma": 0.1,
+      "final": {
+        "modes": 2,
+        "hq": 0.162353515625
+      },
+      "suffix": 0,
+      "pass": false,
+      "seconds": 8.029569949954748
+    },
+    {
+      "name": "r1r2_05",
+      "lr": 0.0025,
+      "gamma": 1.0,
+      "final": {
+        "modes": 8,
+        "hq": 0.9990234375
+      },
+      "suffix": 1,
+      "pass": false,
+      "seconds": 8.55066936602816
+    },
+    {
+      "name": "r1r2_06",
+      "lr": 0.00425,
+      "gamma": 0.01,
+      "final": {
+        "modes": 3,
+        "hq": 0.9912109375
+      },
+      "suffix": 0,
+      "pass": false,
+      "seconds": 8.455133868847042
+    },
+    {
+      "name": "r1r2_07",
+      "lr": 0.00425,
+      "gamma": 0.1,
+      "final": {
+        "modes": 0,
+        "hq": 0.0
+      },
+      "suffix": 0,
+      "pass": false,
+      "seconds": 8.514236116083339
+    },
+    {
+      "name": "r1r2_08",
+      "lr": 0.00425,
+      "gamma": 1.0,
+      "final": {
+        "modes": 4,
+        "hq": 0.280029296875
+      },
+      "suffix": 0,
+      "pass": false,
+      "seconds": 6.55456027504988
+    }
+  ],
+  "r1r2_followup": {
+    "production_mode_hold": "PASS; suffix14",
+    "production_trajectory": "FAIL; identity_mse .2610122859477997",
+    "continuation": "Independent continuous_probe retained by sibling agent: 92 of120 post1200 dense checks fail, including0modes at1400; not a continuous solution"
+  },
+  "output_trust": [
+    {
+      "name": "trust_0",
+      "live": {
+        "modes": 4,
+        "hq": 0.473388671875
+      },
+      "suffix": 0,
+      "dense_tail_pass": false,
+      "clipped_steps": 1200,
+      "updates": 1200,
+      "max_accepted_output_rms": 0.014495761133730412,
+      "min_scale": 0.000503401756951975,
+      "raw": "artifacts/continuous-output-trust/trust_0"
+    },
+    {
+      "name": "trust_1",
+      "live": {
+        "modes": 3,
+        "hq": 0.567138671875
+      },
+      "suffix": 0,
+      "dense_tail_pass": false,
+      "clipped_steps": 1200,
+      "updates": 1200,
+      "max_accepted_output_rms": 0.028989870101213455,
+      "min_scale": 0.0004891728138947086,
+      "raw": "artifacts/continuous-output-trust/trust_1"
+    },
+    {
+      "name": "trust_2",
+      "live": {
+        "modes": 7,
+        "hq": 0.843994140625
+      },
+      "suffix": 0,
+      "dense_tail_pass": false,
+      "clipped_steps": 1199,
+      "updates": 1200,
+      "max_accepted_output_rms": 0.05798494443297386,
+      "min_scale": 0.002097629246819673,
+      "raw": "artifacts/continuous-output-trust/trust_2"
+    },
+    {
+      "name": "trust_3",
+      "live": {
+        "modes": 7,
+        "hq": 0.369384765625
+      },
+      "suffix": 0,
+      "dense_tail_pass": false,
+      "clipped_steps": 0,
+      "updates": 0,
+      "max_accepted_output_rms": null,
+      "min_scale": null,
+      "raw": "artifacts/continuous-output-trust/trust_3"
+    }
+  ],
+  "scaled_r1": "Cancelled after archive setup failed before training; user requested no further zero-pull regularizer investigations.",
+  "fixed_metric_eg_warm": [
+    {
+      "name": "identity",
+      "passing_checks": 200,
+      "checks": 200,
+      "final": {
+        "modes": 8,
+        "hq": 1.0
+      },
+      "nonfinite_dynamics_values": 0,
+      "raw": "artifacts/continuous-fixedmetric-eg-warm-v2/identity.json"
+    },
+    {
+      "name": "constant",
+      "passing_checks": 6,
+      "checks": 200,
+      "final": {
+        "modes": 6,
+        "hq": 0.504638671875
+      },
+      "nonfinite_dynamics_values": 0,
+      "raw": "artifacts/continuous-fixedmetric-eg-warm-v2/constant.json"
+    },
+    {
+      "name": "same_sample",
+      "passing_checks": 0,
+      "checks": 200,
+      "final": {
+        "modes": 0,
+        "hq": 0.0
+      },
+      "nonfinite_dynamics_values": 580,
+      "raw": "artifacts/continuous-fixedmetric-eg-warm-v2/same_sample.json"
+    },
+    {
+      "name": "independent_sample",
+      "passing_checks": 0,
+      "checks": 200,
+      "final": {
+        "modes": 0,
+        "hq": 0.0
+      },
+      "nonfinite_dynamics_values": 324,
+      "raw": "artifacts/continuous-fixedmetric-eg-warm-v2/independent_sample.json"
+    }
+  ],
+  "secant_eg": [
+    {
+      "c": 0.25,
+      "warm_passing_checks": 200,
+      "warm_checks": 200,
+      "alpha_min": 0.03125,
+      "alpha_mean": 0.1115625,
+      "alpha_max": 0.25,
+      "warm_gradient_calls": 602,
+      "cold_trajectory_mse": 0.2872024476528168,
+      "cold_passing_checks": 0,
+      "continued_to_mode_hold": false,
+      "raw": "artifacts/continuous-secant-eg-cold/secant_c25"
+    },
+    {
+      "c": 0.5,
+      "warm_passing_checks": 200,
+      "warm_checks": 200,
+      "alpha_min": 0.0625,
+      "alpha_mean": 0.2671875,
+      "alpha_max": 0.5,
+      "warm_gradient_calls": 600,
+      "cold_trajectory_mse": 0.35397371649742126,
+      "cold_passing_checks": 0,
+      "continued_to_mode_hold": false,
+      "raw": "artifacts/continuous-secant-eg-cold/secant_c50"
+    },
+    {
+      "c": 0.9,
+      "warm_passing_checks": 200,
+      "warm_checks": 200,
+      "alpha_min": 0.125,
+      "alpha_mean": 0.315,
+      "alpha_max": 1.0,
+      "warm_gradient_calls": 593,
+      "cold_trajectory_mse": 0.13317124545574188,
+      "cold_passing_checks": 0,
+      "continued_to_mode_hold": false,
+      "raw": "artifacts/continuous-secant-eg-cold/secant_c90"
+    }
+  ]
+}
