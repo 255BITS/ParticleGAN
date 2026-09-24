@@ -1,0 +1,194 @@
+{
+  "base_config_sha256": "6de24743336a3ce7e922deceab91dff0688bdb28ae8f5e6ff2c8b88b9f2bec27",
+  "eval_samples": 20000,
+  "first_stage": "grid100 all rows",
+  "fixed_budget": 7000,
+  "fixed_seed": 1234,
+  "holdout_samples": 100000,
+  "old_control": "/dev/shm/particlegan-constraints-geometry-f0595c4/baseline-old6/episode",
+  "orchestrator_sha256": "eddaf21d52feb62bb0c871988798a927ac824428ab308f5b60988321f9d4452e",
+  "promotion": "strict grid PASS, then same config rotated100 and staggered100",
+  "protocol": "constraints-geometry-v1",
+  "rows": [
+    {
+      "config": "configs/toy100/constraints_geometry_v1/control.json",
+      "config_sha256": "83c56023ae5f5bdbde2b612d29500fafd9aaca29b2e00cfa6ff53baa8d942f72",
+      "delta": {},
+      "slug": "control"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/mlp_normal_z2.json",
+      "config_sha256": "e38d380369698dee609d81fbbb80b935776803bf7e69fa344e52d49a877df3e9",
+      "delta": {
+        "toy100_model": "<absent>"
+      },
+      "slug": "mlp_normal_z2"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/mlp_normal_z4.json",
+      "config_sha256": "01ad353ae4353c8f536999953338c167fbad87808a8224336c77647d0f6a08b7",
+      "delta": {
+        "toy100_model": "<absent>",
+        "z_dim": 4
+      },
+      "slug": "mlp_normal_z4"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/affine_normal.json",
+      "config_sha256": "f0ac9045b325d48e7ca3db30b034ec999c0526be770704e3958cd9ef421a41c3",
+      "delta": {
+        "toy100_model": "affine_normal_v1"
+      },
+      "slug": "affine_normal"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/affine_normal_random.json",
+      "config_sha256": "58dac9dc00340c4b5f2e624f40186e22bc14e20a6ba2f395382170406efc383a",
+      "delta": {
+        "toy100_model": "affine_normal_random_v1"
+      },
+      "slug": "affine_normal_random"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/affine_square_random.json",
+      "config_sha256": "e303dbe8b2695d6ed0cdcc50f46cb41e0bdd263f7e0f567b0b0debe5090e14ad",
+      "delta": {
+        "toy100_model": "affine_square_random_v1"
+      },
+      "slug": "affine_square_random"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/affine_empirical_box.json",
+      "config_sha256": "a870558630019271ecc03e9777d60aff78a9b5c34bd9be6bd5a4f232c34a2a06",
+      "delta": {
+        "toy100_model": "affine_empirical_box_v1"
+      },
+      "slug": "affine_empirical_box"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/affine_empirical_box_random.json",
+      "config_sha256": "bf65e5c5edaeed8d1cbaf7ea829db082efa1752219e95a6e4ee4031fd434f4ca",
+      "delta": {
+        "toy100_model": "affine_empirical_box_random_v1"
+      },
+      "slug": "affine_empirical_box_random"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/fourier0.json",
+      "config_sha256": "00dc27083a8079a59428dad0e36d12c75f9bdcc8b830e0fbc6a6566270a5a4cf",
+      "delta": {
+        "fourier": 0
+      },
+      "slug": "fourier0"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/fourier1.json",
+      "config_sha256": "3726452951b46715f6dc7ca5789e322afd05e80be506c0623c6c0ee8363ae5de",
+      "delta": {
+        "fourier": 1
+      },
+      "slug": "fourier1"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/fourier2.json",
+      "config_sha256": "69dc82cc6db177ba2305cc8d8ab211d4326031c2a0927bd093553216f0f339db",
+      "delta": {
+        "fourier": 2
+      },
+      "slug": "fourier2"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/particles10000.json",
+      "config_sha256": "f08472db7d1b202a3891314d5043eb9c923da4460f6a1aea6300afa9263e1548",
+      "delta": {
+        "num_particles": 10000
+      },
+      "slug": "particles10000"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/particles5000.json",
+      "config_sha256": "a1730319a59b2c615734b11133d267ce19a4109363fe7f4a93248cd0305eaed7",
+      "delta": {
+        "num_particles": 5000
+      },
+      "slug": "particles5000"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/batch1024.json",
+      "config_sha256": "7ace71029be86228f321e2b890bd2f84eb4482c3acbac3b47506700c6e1a3d10",
+      "delta": {
+        "batch_size": 1024
+      },
+      "slug": "batch1024"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/batch512.json",
+      "config_sha256": "7650ba838892559bcbca9babc5c79c30ef493ef3465ca94aa84e23594ddeb0ed",
+      "delta": {
+        "batch_size": 512
+      },
+      "slug": "batch512"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/critic64.json",
+      "config_sha256": "b3f8b539c960b19525e649812e059c816df97730c80013f9db581cd7924c454c",
+      "delta": {
+        "d_hidden": 64
+      },
+      "slug": "critic64"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/critic32.json",
+      "config_sha256": "56fe2a6682076f1fd5eb02adab6c1bfbf31cf348eb1b58beab9fd3f416af477f",
+      "delta": {
+        "d_hidden": 32
+      },
+      "slug": "critic32"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/critic_depth2.json",
+      "config_sha256": "9597f06a141b486c94ede088b22ebe5dd2f739673db4ad671ffb68fbf347703a",
+      "delta": {
+        "n_hidden": 2
+      },
+      "slug": "critic_depth2"
+    },
+    {
+      "config": "configs/toy100/constraints_geometry_v1/lean_joint.json",
+      "config_sha256": "07c3187cc6b4e222b7e13feb22e5fb7e0b738230768976857f4542b12eaeb29b",
+      "delta": {
+        "batch_size": 1024,
+        "d_hidden": 64,
+        "fourier": 2,
+        "num_particles": 10000
+      },
+      "slug": "lean_joint"
+    }
+  ],
+  "source_commit": "346b1edccc19d939020df05034c49f675c6f68ba",
+  "source_sha256": {
+    "benchmarks/toy100/__main__.py": "37afe614b9c75c89de1687101dad3cccf89b9dedc969db8d7382f0f1bf5b0c99",
+    "benchmarks/toy100/accuracy.py": "4e2de5c7a53cd5280ec6f03783eb39850e84a3ce12d7d947392cbe4f311c23fa",
+    "benchmarks/toy100/accuracy_evidence.py": "a3589bad69777c40a021334f108085a6b2ddd1365d0f7c594df8f08c6bd6caac",
+    "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+    "benchmarks/toy100/config.py": "0cadc75ddcf68e970102074a7f04a91fc23c0e169c7abbafb5e25133af6b5983",
+    "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+    "benchmarks/toy100/models.py": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+    "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+    "benchmarks/toy100/schedule.py": "0be9b0818cf69d7e9cc043a45d31addd4db0ab7ba6979a2e2da761af03387901",
+    "benchmarks/toy100/train.py": "a9f0109c14d4e516ef3735bbf221d474b6da599b67ebed4e66efc78737ca31c9",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/__init__.py": "6490d3dce5500c7f8bfab7f534092f8bbd53f72f183baf68af24f49fb4596743",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "particlegan/locked_shared.py": "d6e0b484691de311b31866b3fa52d6f388809648117926d2d47d25f302316610",
+    "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+    "particlegan/recipes.py": "5d9ae4289e12305504f225bb39908089a6b9cadea3c4875f3fc68cc5cefd2239",
+    "particlegan/training.py": "d2f418ec1ab43ab24d57071382c2f1fd53e17eb5064fb6bbd391e84543eeb405",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  }
+}

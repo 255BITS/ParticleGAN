@@ -661,12 +661,14 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
         ).hexdigest()
         identity = expected_model in {
             "affine_square_v1", "affine_normal_v1", "affine_empirical_box_v1",
+            "affine_moment_box_v1",
         }
         prior_kind = ("uniform_square" if expected_model in {
             "affine_square_v1", "affine_square_random_v1",
         } else "empirical_box" if expected_model in {
             "affine_empirical_box_v1", "affine_empirical_box_random_v1",
-        } else "normal")
+        } else "moment_box" if expected_model == "affine_moment_box_v1"
+        else "normal")
         weight = card.get("generator_initial_weight")
         bias = card.get("generator_initial_bias")
         if (not isinstance(weight, list) or len(weight) != 2
@@ -726,7 +728,42 @@ def _check_toy100_policy(directory: Path, summary: dict, config: dict,
                     or not all(low < high for low, high in zip(lower, upper))
                     or not min(lower) <= card["prior_initial_min"]
                     <= card["prior_initial_max"] <= max(upper)):
-                raise ValueError(f"100-mode empirical-box receipt differs: {name}")
+                raise ValueError(f"100-mode data-box receipt differs: {name}")
+            if prior_kind == "moment_box":
+                mean, std = card.get("init_data_mean"), card.get("init_data_std")
+                if (not isinstance(mean, list) or not isinstance(std, list)
+                        or len(mean) != 2 or len(std) != 2
+                        or not all(type(value) in (int, float) and math.isfinite(value)
+                                   for value in mean + std)
+                        or not all(value > 0 for value in std)):
+                    raise ValueError(f"100-mode moment-box receipt differs: {name}")
+                import numpy as np
+                import torch
+                if card.get("init_data_file") != "initialization-samples.npy":
+                    raise ValueError(f"100-mode moment-box data file differs: {name}")
+                raw = np.load(directory / card["init_data_file"], allow_pickle=False)
+                if (raw.dtype != np.float32
+                        or raw.shape != (config["batch_size"], 2)
+                        or not np.isfinite(raw).all()):
+                    raise ValueError(f"100-mode moment-box data differs: {name}")
+                samples = torch.from_numpy(np.ascontiguousarray(raw))
+                expected_mean = samples.mean(dim=0)
+                expected_std = samples.std(dim=0, unbiased=False)
+                half_width = math.sqrt(3.0) * expected_std
+                expected_lower = expected_mean - half_width
+                expected_upper = expected_mean + half_width
+                if (card["init_data_sha256"] != hashlib.sha256(
+                        raw.tobytes(),
+                    ).hexdigest()
+                        or any(not math.isclose(actual, expected, rel_tol=2e-6,
+                                                abs_tol=5e-6)
+                               for observed, calculated in (
+                                   (mean, expected_mean.tolist()),
+                                   (std, expected_std.tolist()),
+                                   (lower, expected_lower.tolist()),
+                                   (upper, expected_upper.tolist()),
+                               ) for actual, expected in zip(observed, calculated))):
+                    raise ValueError(f"100-mode moment-box sample/formula differs: {name}")
     cap = policy.get("network_lr_horizon_cap")
     network_floor = policy.get("network_lr_floor")
     if cap is not None:
