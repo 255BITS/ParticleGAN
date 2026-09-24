@@ -45,6 +45,8 @@ class ForwardKLV2Recorder(host.ReallocationRecorder):
         self.learner_bank_count = 0
         self.learner_last_observed_step = None
         self.target_operator = target_operator
+        self.pure_operator_source_sha256 = None
+        self.pure_dependency_sha256 = None
         self.gradient_checks = 0
 
     def learner_state_dict(self):
@@ -89,8 +91,11 @@ class ForwardKLV2Recorder(host.ReallocationRecorder):
     def _pure_target(self, history, current_bank, pre_points, sigma):
         operator = self.target_operator
         if operator is None:
-            from reports.toy100.forward_kl_gh9_remembered import propose_target
-            operator = propose_target
+            from reports.toy100 import forward_kl_gh9_remembered as pure
+            self.pure_operator_source_sha256 = hashlib.sha256(
+                Path(pure.__file__).read_bytes()).hexdigest()
+            self.pure_dependency_sha256 = pure.source_hashes()
+            operator = pure.propose_target
         return operator(history, current_bank, pre_points, WIDTH, sigma)
 
     @torch.no_grad()
@@ -231,6 +236,8 @@ class ForwardKLV2Recorder(host.ReallocationRecorder):
             history_mode=self.history_mode, history_first_absolute_bank=self.first_bank_id,
             learner_state_required=active, learner_state_sha256=_sha(self.learner_state_dict()),
             correction_gradient_checks=self.gradient_checks,
+            pure_operator_source_sha256=self.pure_operator_source_sha256,
+            pure_dependency_sha256=self.pure_dependency_sha256,
             width=WIDTH, source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
         return result
 
