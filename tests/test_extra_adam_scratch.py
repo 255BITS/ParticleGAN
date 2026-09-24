@@ -3,6 +3,9 @@
 import ast
 from copy import deepcopy
 import inspect
+import io
+import hashlib
+import tarfile
 
 import pytest
 import torch
@@ -11,6 +14,7 @@ from benchmarks.locked_shared import mode_hold, trajectory
 from reports.toy100.extra_adam_scratch import (
     ExtraAdamRecorder, HOSTS, transformed_function,
 )
+from reports.toy100.extra_adam_probe import _verify_transform
 
 
 @pytest.mark.parametrize("method,evaluations", [("extra_adam", 2), ("sim_adam", 1)])
@@ -102,3 +106,25 @@ def test_optimizer_state_preserves_both_moment_evaluations():
     restored = torch.optim.Adam([torch.nn.Parameter(parameter.detach().clone())])
     restored.load_state_dict(saved)
     assert restored.state_dict()["state"][0]["step"] == 2
+
+
+@pytest.mark.parametrize("task,module", [("mode_hold", mode_hold), ("trajectory", trajectory)])
+def test_archived_transform_regrade_rejects_rehashed_extra_assignment(tmp_path, task, module):
+    _, source, _ = transformed_function(module, task)
+    path = tmp_path / "generated_host.py"
+    path.write_text(source)
+    original = inspect.getsource(module).encode()
+    with tarfile.open(tmp_path / "source.tar.gz", "w:gz") as archive:
+        item = tarfile.TarInfo(f"benchmarks/locked_shared/{task}.py")
+        item.size = len(original)
+        archive.addfile(item, io.BytesIO(original))
+    expected = dict(generated_function_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+    _verify_transform(tmp_path, task, expected)
+    tree = ast.parse(source)
+    tree.body[0].body.insert(0, ast.Assign(targets=[ast.Name(id="unexpected_change", ctx=ast.Store())],
+                                        value=ast.Constant(1)))
+    ast.fix_missing_locations(tree)
+    path.write_text(ast.unparse(tree) + "\n")
+    expected["generated_function_sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    with pytest.raises(AssertionError):
+        _verify_transform(tmp_path, task, expected)
