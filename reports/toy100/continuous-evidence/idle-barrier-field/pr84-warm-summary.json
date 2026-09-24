@@ -1,0 +1,26 @@
+{
+  "warm_state": "d5dd3109e49af00aaef75a47094d85be8681119892f353aa5e54350720c4a260",
+  "variants": {
+    "candidate": {
+      "status": "FAIL",
+      "checks": 200,
+      "passing": 0,
+      "min_modes": 6,
+      "min_hq": 0.934814453125
+    },
+    "constant": {
+      "status": "FAIL",
+      "checks": 200,
+      "passing": 0,
+      "min_modes": 1,
+      "min_hq": 0.009033203125
+    },
+    "identity": {
+      "status": "FAIL",
+      "checks": 200,
+      "passing": 0,
+      "min_modes": 6,
+      "min_hq": 0.953125
+    }
+  }
+}
