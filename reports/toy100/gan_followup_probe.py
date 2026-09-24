@@ -47,9 +47,13 @@ FACTORIES = {
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
     "delayed_g125": ("reports.toy100.pr84_delayed_g_bound", "delayed_budget_g_bound"),
+    "stall_cf25": ("reports.toy100.pr84_stall_counterfactual", "stall_counterfactual_g25"),
 }
+# These must hold #107's 200/200 warm fork. A shortfall is a kill, not a sweep.
+WARM_HOLD_METHODS = frozenset({"delayed_g125", "stall_cf25"})
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
+    "reports/toy100/pr84_stall_counterfactual.py",
     "reports/toy100/pr84_delayed_g_bound.py",
     "reports/toy100/pr84_reach_candidate.py",
     "reports/toy100/pr84_smoothed_candidate.py",
@@ -134,20 +138,33 @@ def warm(output, method):
 
 
 def warm_rank_ok(method, compact):
-    """Refuse a warm rank when identity is not 200/200. Kill delayed_g125 below #107."""
+    """Refuse a warm rank when identity is not 200/200 on AVX2.
+
+    ``delayed_g125`` and ``stall_cf25`` also die if the method fork drops below
+    #107's 200/200. That is a kill, not a coefficient sweep.
+    """
+    import torch
+    cpu = torch.backends.cpu.get_cpu_capability()
     identity = compact["identity"]["local"]
+    if str(cpu).upper() != "AVX2":
+        emit(event="KILL", reason="warm rank requires AVX2; refuse rank", cpu=cpu,
+             identity_checks=identity.get("checks"),
+             identity_passing=identity.get("passing_checks"))
+        return False
     if identity.get("checks") != 200 or identity.get("passing_checks") != 200:
         emit(event="KILL", reason="warm identity/control is not 200/200; refuse rank",
+             cpu=cpu,
              identity_checks=identity.get("checks"),
              identity_passing=identity.get("passing_checks"),
              identity_min_hq=identity.get("min_hq"))
         return False
-    if method != "delayed_g125":
+    if method not in WARM_HOLD_METHODS:
         return True
     local = compact[method]["local"]
     passing = local.get("passing_checks")
     if passing is None or passing < 200:
         emit(event="KILL", reason="warm regresses vs #107 200/200; stop, no coefficient sweep",
+             cpu=cpu,
              passing_checks=passing, checks=local.get("checks"),
              min_hq=local.get("min_hq"), min_modes=local.get("min_modes"),
              pr84_reference="196/200", stall_reach_reference="200/200")
@@ -214,7 +231,8 @@ def stay(output, method, steps):
                dynamics=_dynamics(recorder))
     records = [dict(step=r["outer_step"], sharp=r.get("critic_sharpness"), width=r.get("critic_width"),
                     adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"],
-                    **({"delayed_g_bound": r["delayed_g_bound"]} if "delayed_g_bound" in r else {}))
+                    **({"delayed_g_bound": r["delayed_g_bound"]} if "delayed_g_bound" in r else {}),
+                    **({"stall_score": r["stall_score"]} if "stall_score" in r else {}))
                for r in getattr(recorder, "records", [])]
     (output / "stay.json").write_text(json.dumps(dict(summary=row, diagnostic=diag, records=records),
                                                  default=float) + "\n")

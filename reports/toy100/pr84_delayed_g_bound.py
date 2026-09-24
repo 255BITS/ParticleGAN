@@ -74,8 +74,13 @@ class DelayedBudgetReachRecorder(ReachRecorder):
             self.fires += 1
         row = dict(armed=bool(self.armed), g_bound_before=before, g_bound_after=after,
                    update_index=self.update_index, fires=self.fires)
+        scored = None
         if isinstance(getattr(self, "row", None), dict):
             self.row["delayed_g_bound"] = row
+            scored = self.row.get("stall_score")
+        if isinstance(scored, dict):
+            row = dict(row, stall_factor=scored.get("factor"), stall_cap=scored.get("cap"),
+                       applied_factor=scored.get("applied_factor"))
         payload = dict(event="G_BOUND", cpu=torch.backends.cpu.get_cpu_capability(), **row)
         print(json.dumps(payload), flush=True)
 
