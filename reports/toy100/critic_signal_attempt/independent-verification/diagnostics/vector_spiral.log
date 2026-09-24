@@ -1,0 +1,2 @@
+{"event": "PREDECLARED", "rows": 1, "output": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_spiral"}
+{"event": "CANDIDATE_DONE", "tag": "h_n05r06_mixup_c0p01_lr15", "status": "PASS", "seconds": 9.670523948967457, "stages": [{"gate": "vector_spiral", "status": "PASS"}]}

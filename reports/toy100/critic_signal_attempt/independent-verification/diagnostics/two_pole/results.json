@@ -1,0 +1,207 @@
+[
+  {
+    "seconds": 1.8402329119853675,
+    "shared_gate_eligible": false,
+    "stages": [
+      {
+        "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/two_pole/h_n05r06_mixup_c0p01_lr15/two_pole/episodes/h_n05r06_mixup_c0p01_lr15__two_pole.json.gz",
+        "candidate": "h_n05r06_mixup_c0p01_lr15",
+        "gate": "two_pole",
+        "metrics": {
+          "frozen_evidence_audit": "FAIL",
+          "live": {
+            "grad_med": 0.023560509085655212,
+            "mean_abs": 0.032636743038892746
+          },
+          "observations": [
+            {
+              "grad_med": 0.11445118486881256,
+              "mean_abs": 0.011385731399059296,
+              "seconds": 1.3445121219847351,
+              "step": 4
+            },
+            {
+              "grad_med": 0.09404836595058441,
+              "mean_abs": 0.018996134400367737,
+              "seconds": 1.352469647070393,
+              "step": 7
+            },
+            {
+              "grad_med": 0.07390055805444717,
+              "mean_abs": 0.025405554100871086,
+              "seconds": 1.361731406999752,
+              "step": 10
+            },
+            {
+              "grad_med": 0.05458350479602814,
+              "mean_abs": 0.03278014436364174,
+              "seconds": 1.3706738660112023,
+              "step": 14
+            },
+            {
+              "grad_med": 0.044227465987205505,
+              "mean_abs": 0.03741655871272087,
+              "seconds": 1.3771023170556873,
+              "step": 17
+            },
+            {
+              "grad_med": 0.03380386531352997,
+              "mean_abs": 0.04137825220823288,
+              "seconds": 1.3833788570482284,
+              "step": 20
+            },
+            {
+              "grad_med": 0.031226076185703278,
+              "mean_abs": 0.046147506684064865,
+              "seconds": 1.3925362469162792,
+              "step": 24
+            },
+            {
+              "grad_med": 0.01922287791967392,
+              "mean_abs": 0.04886240139603615,
+              "seconds": 1.3992562480270863,
+              "step": 27
+            },
+            {
+              "grad_med": 0.016735345125198364,
+              "mean_abs": 0.05098961666226387,
+              "seconds": 1.4070312730036676,
+              "step": 30
+            },
+            {
+              "grad_med": 0.009953588247299194,
+              "mean_abs": 0.05283041298389435,
+              "seconds": 1.416873404989019,
+              "step": 34
+            },
+            {
+              "grad_med": 0.004888653755187988,
+              "mean_abs": 0.05285681411623955,
+              "seconds": 1.423696167068556,
+              "step": 37
+            },
+            {
+              "grad_med": 0.002742186188697815,
+              "mean_abs": 0.05263986811041832,
+              "seconds": 1.4306361300405115,
+              "step": 40
+            },
+            {
+              "grad_med": 0.0035300403833389282,
+              "mean_abs": 0.052932847291231155,
+              "seconds": 1.438950516982004,
+              "step": 44
+            },
+            {
+              "grad_med": 0.005267471075057983,
+              "mean_abs": 0.053245652467012405,
+              "seconds": 1.4462947798892856,
+              "step": 47
+            },
+            {
+              "grad_med": 0.0057375431060791016,
+              "mean_abs": 0.05404820665717125,
+              "seconds": 1.4525537400040776,
+              "step": 50
+            },
+            {
+              "grad_med": 0.013196349143981934,
+              "mean_abs": 0.05321367457509041,
+              "seconds": 1.4608749970793724,
+              "step": 54
+            },
+            {
+              "grad_med": 0.014142349362373352,
+              "mean_abs": 0.05067675933241844,
+              "seconds": 1.4674155688844621,
+              "step": 57
+            },
+            {
+              "grad_med": 0.01751101016998291,
+              "mean_abs": 0.048953037708997726,
+              "seconds": 1.4740216499194503,
+              "step": 60
+            },
+            {
+              "grad_med": 0.013893574476242065,
+              "mean_abs": 0.04665413126349449,
+              "seconds": 1.482824947917834,
+              "step": 64
+            },
+            {
+              "grad_med": 0.01663242280483246,
+              "mean_abs": 0.044745173305273056,
+              "seconds": 1.4893369490746409,
+              "step": 67
+            },
+            {
+              "grad_med": 0.01587924361228943,
+              "mean_abs": 0.042280133813619614,
+              "seconds": 1.496059600962326,
+              "step": 70
+            },
+            {
+              "grad_med": 0.015225604176521301,
+              "mean_abs": 0.03958945721387863,
+              "seconds": 1.5048010989557952,
+              "step": 74
+            },
+            {
+              "grad_med": 0.022244378924369812,
+              "mean_abs": 0.03605259582400322,
+              "seconds": 1.5118185319006443,
+              "step": 77
+            },
+            {
+              "grad_med": 0.023560509085655212,
+              "mean_abs": 0.032636743038892746,
+              "seconds": 1.5187204340472817,
+              "step": 80
+            }
+          ],
+          "verdict": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": -0.26736325696110724,
+                "metric": "mean_abs",
+                "op": ">=",
+                "status": "FAIL",
+                "threshold": 0.3,
+                "value": 0.032636743038892746
+              },
+              {
+                "margin": 0.9764394909143448,
+                "metric": "grad_med",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 1.0,
+                "value": 0.023560509085655212
+              }
+            ],
+            "passed": false,
+            "shortfall": 0.44560542826851207,
+            "status": "FAIL"
+          }
+        },
+        "seconds": 1.8397736509796232,
+        "status": "FAIL"
+      }
+    ],
+    "status": "FAIL",
+    "tag": "h_n05r06_mixup_c0p01_lr15"
+  }
+]

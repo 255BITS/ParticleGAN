@@ -1,0 +1,22 @@
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "mid_scale_identity"}
+START mid_scale_identity route=public primitives custom host + shared noise policy steps=800
+mid_scale arm=locked step=1 seed=0 concept+=+0.7071 concept-=+0.0000 id0=+0.0027 id_mid=+0.0082 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=50 seed=0 concept+=+0.8304 concept-=+0.3244 id0=+0.1590 id_mid=+0.4424 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=100 seed=0 concept+=+0.8089 concept-=+0.8399 id0=+0.2747 id_mid=+0.7285 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=150 seed=0 concept+=+0.8556 concept-=+0.8256 id0=+0.3698 id_mid=+0.8915 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=200 seed=0 concept+=+0.8879 concept-=+0.8514 id0=+0.4404 id_mid=+0.9890 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=250 seed=0 concept+=+0.9110 concept-=+0.8845 id0=+0.4917 id_mid=+0.9056 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=300 seed=0 concept+=+0.9392 concept-=+0.9033 id0=+0.5340 id_mid=+0.8524 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=350 seed=0 concept+=+0.9444 concept-=+0.9321 id0=+0.5676 id_mid=+0.8219 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=400 seed=0 concept+=+0.9555 concept-=+0.9438 id0=+0.6021 id_mid=+0.8448 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0,identity_mid
+mid_scale arm=locked step=450 seed=0 concept+=+0.9605 concept-=+0.9577 id0=+0.6341 id_mid=+0.8774 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=500 seed=0 concept+=+0.9681 concept-=+0.9637 id0=+0.6644 id_mid=+0.9180 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=concept,identity_0
+mid_scale arm=locked step=550 seed=0 concept+=+0.9727 concept-=+0.9718 id0=+0.6906 id_mid=+0.9470 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=600 seed=0 concept+=+0.9777 concept-=+0.9765 id0=+0.7171 id_mid=+0.9721 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=650 seed=0 concept+=+0.9812 concept-=+0.9809 id0=+0.7445 id_mid=+0.9731 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=700 seed=0 concept+=+0.9869 concept-=+0.9830 id0=+0.7641 id_mid=+0.9918 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=750 seed=0 concept+=+0.9886 concept-=+0.9867 id0=+0.7873 id_mid=+0.9835 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=800 seed=0 concept+=+0.9915 concept-=+0.9889 id0=+0.8062 id_mid=+0.9902 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+mid_scale arm=locked step=800 seed=0 concept+=+0.9915 concept-=+0.9889 id0=+0.8062 id_mid=+0.9902 scales=[-1.0, 0.0, 0.5, 1.0] gate=FAIL why=identity_0
+{"event": "DONE", "task": "mid_scale_identity", "status": "FAIL", "suffix": 0, "live": {"concept_cos_plus": 0.9914860129356384, "concept_cos_minus": 0.9888538122177124, "concept_mag_plus": 0.9282889366149902, "concept_mag_minus": 0.9039037227630615, "identity_at_0": 0.8062138743042017, "identity_at_mid": 0.9901884256285347}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "mid_scale_identity", "status": "FAIL", "seconds": 9.557817183900625, "live": {"concept_cos_minus": 0.9888538122177124, "concept_cos_plus": 0.9914860129356384, "concept_mag_minus": 0.9039037227630615, "concept_mag_plus": 0.9282889366149902, "identity_at_0": 0.8062138743042017, "identity_at_mid": 0.9901884256285347}}

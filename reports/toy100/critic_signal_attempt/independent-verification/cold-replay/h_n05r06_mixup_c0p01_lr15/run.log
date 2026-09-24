@@ -1,0 +1,48 @@
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "trajectory"}
+START trajectory route=public primitives custom host + shared noise policy steps=400
+{"event": "UPDATE", "task": "trajectory", "step": 200}
+{"event": "UPDATE", "task": "trajectory", "step": 400}
+{"event": "DONE", "task": "trajectory", "status": "PASS", "suffix": 22, "live": {"identity_mse": 0.002905043074861169}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "trajectory", "status": "PASS", "seconds": 2.4958376279100776, "live": {"identity_mse": 0.002905043074861169}}
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "mode_hold"}
+START mode_hold route=public primitives custom host + shared noise policy steps=1200
+{"event": "UPDATE", "task": "mode_hold", "step": 200}
+{"event": "UPDATE", "task": "mode_hold", "step": 400}
+{"event": "UPDATE", "task": "mode_hold", "step": 600}
+{"event": "UPDATE", "task": "mode_hold", "step": 800}
+{"event": "UPDATE", "task": "mode_hold", "step": 1000}
+{"event": "UPDATE", "task": "mode_hold", "step": 1200}
+{"event": "DONE", "task": "mode_hold", "status": "PASS", "suffix": 5, "live": {"modes": 8, "hq": 0.999267578125}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "mode_hold", "status": "PASS", "seconds": 7.728531718021259, "live": {"hq": 0.999267578125, "modes": 8}}
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "residual_student"}
+START residual_student route=public primitives custom host + shared noise policy steps=400
+{"event": "DONE", "task": "residual_student", "status": "PASS", "suffix": 22, "live": {"identity_mse": 0.0029311643447726965, "success_rate": 1.0, "wrong_pad_rate": 0.0}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "residual_student", "status": "PASS", "seconds": 1.4810718530789018, "live": {"identity_mse": 0.0029311643447726965, "success_rate": 1.0, "wrong_pad_rate": 0.0}}
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "img_stripes2"}
+START img_stripes2 route=GANTrainer + generic noise wrappers steps=600
+{"event": "DONE", "task": "img_stripes2", "status": "PASS", "suffix": 20, "live": {"modes": 2, "hq": 0.96875, "mean_rmse": 0.03971010074019432, "quality_mode_fractions": [0.46875, 0.5], "mode_fractions": [0.5, 0.5], "distribution_tv": 0.0}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "img_stripes2", "status": "PASS", "seconds": 6.200263592181727, "live": {"distribution_tv": 0.0, "hq": 0.96875, "mean_rmse": 0.03971010074019432, "mode_fractions": [0.5, 0.5], "modes": 2, "quality_mode_fractions": [0.46875, 0.5]}}
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "img_bars4"}
+START img_bars4 route=GANTrainer + generic noise wrappers steps=600
+{"event": "DONE", "task": "img_bars4", "status": "PASS", "suffix": 18, "live": {"modes": 4, "hq": 1.0, "mean_rmse": 0.030437761917710304, "quality_mode_fractions": [0.25, 0.25, 0.25, 0.25], "mode_fractions": [0.25, 0.25, 0.25, 0.25], "distribution_tv": 0.0}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "img_bars4", "status": "PASS", "seconds": 6.306658036075532, "live": {"distribution_tv": 0.0, "hq": 1.0, "mean_rmse": 0.030437761917710304, "mode_fractions": [0.25, 0.25, 0.25, 0.25], "modes": 4, "quality_mode_fractions": [0.25, 0.25, 0.25, 0.25]}}
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "vector_overlap"}
+START vector_overlap route=GANTrainer + generic noise wrappers steps=1200
+{"event": "DONE", "task": "vector_overlap", "status": "PASS", "suffix": 14, "live": {"sw1_normalized": 0.0558607225876382, "mean_error": 0.022280681878328323, "covariance_error": 0.16221539676189423, "target_scale": 0.8501437306404114, "sample_count": 4096}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "vector_overlap", "status": "PASS", "seconds": 8.723123108036816, "live": {"covariance_error": 0.16221539676189423, "mean_error": 0.022280681878328323, "sample_count": 4096, "sw1_normalized": 0.0558607225876382, "target_scale": 0.8501437306404114}}
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "img_blobs4"}
+START img_blobs4 route=GANTrainer + generic noise wrappers steps=600
+{"event": "DONE", "task": "img_blobs4", "status": "PASS", "suffix": 12, "live": {"modes": 4, "hq": 1.0, "mean_rmse": 0.030816933140158653, "quality_mode_fractions": [0.25, 0.25, 0.21875, 0.28125], "mode_fractions": [0.25, 0.25, 0.21875, 0.28125], "distribution_tv": 0.03125}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "img_blobs4", "status": "PASS", "seconds": 6.223722527967766, "live": {"distribution_tv": 0.03125, "hq": 1.0, "mean_rmse": 0.030816933140158653, "mode_fractions": [0.25, 0.25, 0.21875, 0.28125], "modes": 4, "quality_mode_fractions": [0.25, 0.25, 0.21875, 0.28125]}}
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "img_intensity2"}
+START img_intensity2 route=GANTrainer + generic noise wrappers steps=600
+{"event": "DONE", "task": "img_intensity2", "status": "PASS", "suffix": 9, "live": {"modes": 2, "hq": 0.96875, "mean_rmse": 0.04345317929983139, "quality_mode_fractions": [0.53125, 0.4375], "mode_fractions": [0.53125, 0.46875], "distribution_tv": 0.03125}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "img_intensity2", "status": "PASS", "seconds": 6.161604217020795, "live": {"distribution_tv": 0.03125, "hq": 0.96875, "mean_rmse": 0.04345317929983139, "mode_fractions": [0.53125, 0.46875], "modes": 2, "quality_mode_fractions": [0.53125, 0.4375]}}
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "vector_unequal_mass"}
+START vector_unequal_mass route=GANTrainer + generic noise wrappers steps=1200
+{"event": "DONE", "task": "vector_unequal_mass", "status": "PASS", "suffix": 14, "live": {"sw1_normalized": 0.054239543613519826, "mean_error": 0.05446142330765724, "covariance_error": 0.05248043313622475, "target_scale": 1.7593294382095337, "sample_count": 4096, "mass_tv": 0.04155272990465164, "min_mass_ratio": 0.713641881942749, "hq": 0.98779296875, "component_covariance_error": 0.41707606986165047, "component_covariance_errors": [0.19064335525035858, 0.28675827383995056, 0.29806995391845703, 0.8928326964378357], "component_min_eigen_ratio": 0.5786148905754089, "component_mass": [0.591552734375, 0.29931640625, 0.0927734375, 0.016357421875], "target_mass": [0.550000011920929, 0.30000001192092896, 0.12999999523162842, 0.019999999552965164], "component_counts": [2423, 1226, 380, 67]}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "vector_unequal_mass", "status": "PASS", "seconds": 21.450751119991764, "live": {"component_counts": [2423, 1226, 380, 67], "component_covariance_error": 0.41707606986165047, "component_covariance_errors": [0.19064335525035858, 0.28675827383995056, 0.29806995391845703, 0.8928326964378357], "component_mass": [0.591552734375, 0.29931640625, 0.0927734375, 0.016357421875], "component_min_eigen_ratio": 0.5786148905754089, "covariance_error": 0.05248043313622475, "hq": 0.98779296875, "mass_tv": 0.04155272990465164, "mean_error": 0.05446142330765724, "min_mass_ratio": 0.713641881942749, "sample_count": 4096, "sw1_normalized": 0.054239543613519826, "target_mass": [0.550000011920929, 0.30000001192092896, 0.12999999523162842, 0.019999999552965164], "target_scale": 1.7593294382095337}}
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "vector_unequal_width"}
+START vector_unequal_width route=GANTrainer + generic noise wrappers steps=1200
+{"event": "DONE", "task": "vector_unequal_width", "status": "PASS", "suffix": 16, "live": {"sw1_normalized": 0.02992012586927343, "mean_error": 0.011034850031137466, "covariance_error": 0.031100142747163773, "target_scale": 2.1343955993652344, "sample_count": 4096, "mass_tv": 0.0322265625, "min_mass_ratio": 0.8984375, "hq": 0.966064453125, "component_covariance_error": 0.30726394802331924, "component_covariance_errors": [0.16137725114822388, 0.55451500415802, 0.3428144156932831, 0.17034912109375], "component_min_eigen_ratio": 0.3596749007701874, "component_mass": [0.2646484375, 0.224609375, 0.267578125, 0.2431640625], "target_mass": [0.25, 0.25, 0.25, 0.25], "component_counts": [1084, 920, 1096, 996]}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "vector_unequal_width", "status": "PASS", "seconds": 10.394028584938496, "live": {"component_counts": [1084, 920, 1096, 996], "component_covariance_error": 0.30726394802331924, "component_covariance_errors": [0.16137725114822388, 0.55451500415802, 0.3428144156932831, 0.17034912109375], "component_mass": [0.2646484375, 0.224609375, 0.267578125, 0.2431640625], "component_min_eigen_ratio": 0.3596749007701874, "covariance_error": 0.031100142747163773, "hq": 0.966064453125, "mass_tv": 0.0322265625, "mean_error": 0.011034850031137466, "min_mass_ratio": 0.8984375, "sample_count": 4096, "sw1_normalized": 0.02992012586927343, "target_mass": [0.25, 0.25, 0.25, 0.25], "target_scale": 2.1343955993652344}}

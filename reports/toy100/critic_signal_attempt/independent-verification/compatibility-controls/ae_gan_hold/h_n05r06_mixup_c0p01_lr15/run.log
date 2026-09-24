@@ -1,0 +1,10 @@
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "ae_gan_hold"}
+START ae_gan_hold route=public primitives custom host + shared noise policy steps=250
+ae-gan-hold arm=h_n05r06_mixup_c0p01_lr15 step=0 recon=1.2835 hold=1.4371 phase=init
+ae-gan-hold arm=h_n05r06_mixup_c0p01_lr15 step=1 recon=1.2592 hold=1.4383 loss=2.0328
+ae-gan-hold arm=h_n05r06_mixup_c0p01_lr15 step=50 recon=0.0142 hold=0.0697 loss=0.7681
+ae-gan-hold arm=h_n05r06_mixup_c0p01_lr15 step=100 recon=0.0044 hold=0.0075 loss=0.7624
+ae-gan-hold arm=h_n05r06_mixup_c0p01_lr15 step=150 recon=0.0125 hold=0.0173 loss=0.7461
+ae-gan-hold arm=h_n05r06_mixup_c0p01_lr15 step=200 recon=0.0091 hold=0.0106 loss=0.7236
+{"event": "DONE", "task": "ae_gan_hold", "status": "PASS", "suffix": 20, "live": {"recon_mse": 0.0029136501252651215, "hold": 0.004224264528602362}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "ae_gan_hold", "status": "PASS", "seconds": 2.373427785001695, "live": {"hold": 0.004224264528602362, "recon_mse": 0.0029136501252651215}}

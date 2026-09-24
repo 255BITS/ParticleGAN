@@ -31,6 +31,8 @@ for name in ('base-code.tar.gz', 'batch-h/source.tar.gz'):
                 raise RuntimeError(f'Unexpected archive entry: {member.name}')
         archive.extractall(replay, filter='data')
 shutil.copy2(evidence / 'h-own-hold/critic_signal_continue.py', replay / 'reports/toy100/critic_signal_continue.py')
+for name in ('selected_h_extension.py', 'selected_h_remaining.py'):
+    shutil.copy2(evidence / name, replay / 'reports/toy100' / name)
 manifest = json.loads((evidence / 'batch-h/manifest.json').read_text())
 row = next(row for row in manifest['rows'] if row['tag'] == 'h_n05r06_mixup_c0p01_lr15')
 (replay / 'one.json').write_text(json.dumps([row], indent=2) + '\n')
@@ -47,4 +49,14 @@ export PYTHONUNBUFFERED=1
 "$bench_python" -u "$replay_dir/reports/toy100/critic_signal_continue.py" \
     --candidate "$replay_dir/cold/h_n05r06_mixup_c0p01_lr15" \
     --output "$replay_dir/own-hold" --ledger "$replay_dir/tests.jsonl"
+if [[ ${REPLAY_OLDER_DIAGNOSTICS:-0} == 1 ]]; then
+    # This explicit baseline audit executes every remaining older host even if
+    # one fails. It is diagnostic coverage, not fail-fast candidate promotion.
+    for task in two_pole unipolar cover_leftover mid_scale_identity \
+        vector_anisotropic vector_two_broad vector_spiral unused_token_hold ae_gan_hold; do
+        "$bench_python" -u "$replay_dir/reports/toy100/selected_h_remaining.py" \
+            --declaration "$replay_dir/one.json" --output "$replay_dir/older-$task" \
+            --ledger "$replay_dir/tests.jsonl" --workers 1 --tasks "$task"
+    done
+fi
 printf '\nReplay evidence: %s\n' "$replay_dir"

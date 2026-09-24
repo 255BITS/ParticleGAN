@@ -1,0 +1,36 @@
+{
+  "purpose": "Original required auxiliary-host benchmark compatibility; explicitly NOT pure GAN and cannot replace strict failures",
+  "commands": {
+    "ae_gan_hold": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/selected-h-verification/repo/reports/toy100/selected_h_compatibility.py",
+      "--declaration",
+      "/ml2/hypergan/gan-attempts/selected-h-verification/one.json",
+      "--output",
+      "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/ae_gan_hold",
+      "--ledger",
+      "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-control-tests.jsonl",
+      "--tasks",
+      "ae_gan_hold",
+      "--workers",
+      "1"
+    ],
+    "unused_token_hold": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/selected-h-verification/repo/reports/toy100/selected_h_compatibility.py",
+      "--declaration",
+      "/ml2/hypergan/gan-attempts/selected-h-verification/one.json",
+      "--output",
+      "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/unused_token_hold",
+      "--ledger",
+      "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-control-tests.jsonl",
+      "--tasks",
+      "unused_token_hold",
+      "--workers",
+      "1"
+    ]
+  },
+  "workers": 2
+}

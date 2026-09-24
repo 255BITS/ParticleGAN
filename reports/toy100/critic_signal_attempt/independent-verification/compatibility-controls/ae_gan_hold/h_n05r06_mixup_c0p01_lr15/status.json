@@ -1,0 +1,205 @@
+{
+  "seconds": 2.373853225959465,
+  "shared_gate_eligible": false,
+  "stages": [
+    {
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/episodes/h_n05r06_mixup_c0p01_lr15__ae_gan_hold.json.gz",
+      "candidate": "h_n05r06_mixup_c0p01_lr15",
+      "gate": "ae_gan_hold",
+      "metrics": {
+        "frozen_evidence_audit": "PASS",
+        "live": {
+          "hold": 0.004224264528602362,
+          "recon_mse": 0.0029136501252651215
+        },
+        "observations": [
+          {
+            "hold": 1.2770183086395264,
+            "recon_mse": 1.043641209602356,
+            "seconds": 1.2962548949290067,
+            "step": 11
+          },
+          {
+            "hold": 0.8958626389503479,
+            "recon_mse": 0.8445517420768738,
+            "seconds": 1.3322880319319665,
+            "step": 21
+          },
+          {
+            "hold": 0.4431267976760864,
+            "recon_mse": 0.29923632740974426,
+            "seconds": 1.3761850229930133,
+            "step": 32
+          },
+          {
+            "hold": 0.15711919963359833,
+            "recon_mse": 0.05443480610847473,
+            "seconds": 1.4122362600173801,
+            "step": 42
+          },
+          {
+            "hold": 0.048450879752635956,
+            "recon_mse": 0.008642916567623615,
+            "seconds": 1.452435159822926,
+            "step": 53
+          },
+          {
+            "hold": 0.003644203068688512,
+            "recon_mse": 0.0037089891266077757,
+            "seconds": 1.4882223848253489,
+            "step": 63
+          },
+          {
+            "hold": 0.0045540835708379745,
+            "recon_mse": 0.003902535419911146,
+            "seconds": 1.5243466519750655,
+            "step": 73
+          },
+          {
+            "hold": 0.007570901419967413,
+            "recon_mse": 0.004012142773717642,
+            "seconds": 1.5630268768873066,
+            "step": 84
+          },
+          {
+            "hold": 0.007493325509130955,
+            "recon_mse": 0.004494486842304468,
+            "seconds": 1.5969914169982076,
+            "step": 94
+          },
+          {
+            "hold": 0.0051201460883021355,
+            "recon_mse": 0.004575893748551607,
+            "seconds": 1.6355844510253519,
+            "step": 105
+          },
+          {
+            "hold": 0.008506366983056068,
+            "recon_mse": 0.005241504870355129,
+            "seconds": 1.6696705508511513,
+            "step": 115
+          },
+          {
+            "hold": 0.00299807358533144,
+            "recon_mse": 0.009540654718875885,
+            "seconds": 1.7040576818399131,
+            "step": 125
+          },
+          {
+            "hold": 0.019664732739329338,
+            "recon_mse": 0.01245085895061493,
+            "seconds": 1.7416418239008635,
+            "step": 136
+          },
+          {
+            "hold": 0.014498427510261536,
+            "recon_mse": 0.009906512685120106,
+            "seconds": 1.7776613298337907,
+            "step": 146
+          },
+          {
+            "hold": 0.013981791213154793,
+            "recon_mse": 0.01596546173095703,
+            "seconds": 1.8182632308453321,
+            "step": 157
+          },
+          {
+            "hold": 0.00657273456454277,
+            "recon_mse": 0.01208694651722908,
+            "seconds": 1.8541198270395398,
+            "step": 167
+          },
+          {
+            "hold": 0.009954256005585194,
+            "recon_mse": 0.013556619174778461,
+            "seconds": 1.8940340159460902,
+            "step": 178
+          },
+          {
+            "hold": 0.007839183323085308,
+            "recon_mse": 0.01165199838578701,
+            "seconds": 1.9297960409894586,
+            "step": 188
+          },
+          {
+            "hold": 0.015992119908332825,
+            "recon_mse": 0.009198078885674477,
+            "seconds": 1.9659564979374409,
+            "step": 198
+          },
+          {
+            "hold": 0.014104525558650494,
+            "recon_mse": 0.007759345695376396,
+            "seconds": 2.0066128890030086,
+            "step": 209
+          },
+          {
+            "hold": 0.008090347051620483,
+            "recon_mse": 0.005767503287643194,
+            "seconds": 2.042514334898442,
+            "step": 219
+          },
+          {
+            "hold": 0.012905530631542206,
+            "recon_mse": 0.003800856415182352,
+            "seconds": 2.0823151539079845,
+            "step": 230
+          },
+          {
+            "hold": 0.003991282545030117,
+            "recon_mse": 0.0030991346575319767,
+            "seconds": 2.1183723700232804,
+            "step": 240
+          },
+          {
+            "hold": 0.004224264528602362,
+            "recon_mse": 0.0029136501252651215,
+            "seconds": 2.1548367680516094,
+            "step": 250
+          }
+        ],
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.376,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 1.5969914169982076,
+            "confirmed_step": 94,
+            "first_pass_step": 53,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 20,
+            "passing_suffix": 20,
+            "stable_from_seconds": 1.452435159822926,
+            "stable_from_step": 53
+          },
+          "metrics": [
+            {
+              "margin": 0.04708634987473488,
+              "metric": "recon_mse",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.05,
+              "value": 0.0029136501252651215
+            },
+            {
+              "margin": 0.3457757354713976,
+              "metric": "hold",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.35,
+              "value": 0.004224264528602362
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "seconds": 2.373427785001695,
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS",
+  "tag": "h_n05r06_mixup_c0p01_lr15"
+}

@@ -1,0 +1,21 @@
+{
+  "track": "benchmark compatibility only; not pure GAN",
+  "rows": [
+    {
+      "task": "unused_token_hold",
+      "status": "FAIL",
+      "returncode": 0,
+      "seconds": 5.035784761887044,
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/unused_token_hold/h_n05r06_mixup_c0p01_lr15/status.json",
+      "exclusively_adversarial": false
+    },
+    {
+      "task": "ae_gan_hold",
+      "status": "PASS",
+      "returncode": 0,
+      "seconds": 5.4864935381338,
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/status.json",
+      "exclusively_adversarial": false
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "unused_token_hold"}
+START unused_token_hold route=public primitives custom host + shared noise policy steps=200
+unused-token arm=h_n05r06_mixup_c0p01_lr15 step=1 hold=0.9979 concept=0.0000 unused_dist=0.0021
+unused-token arm=h_n05r06_mixup_c0p01_lr15 step=50 hold=0.9394 concept=0.0764 unused_dist=0.0606
+unused-token arm=h_n05r06_mixup_c0p01_lr15 step=100 hold=0.8627 concept=0.2732 unused_dist=0.1373
+unused-token arm=h_n05r06_mixup_c0p01_lr15 step=150 hold=0.7900 concept=0.4201 unused_dist=0.2100
+unused-token arm=h_n05r06_mixup_c0p01_lr15 step=200 hold=0.7298 concept=0.5404 unused_dist=0.2702
+{"event": "DONE", "task": "unused_token_hold", "status": "FAIL", "suffix": 0, "live": {"unused_hold": 0.729775607585907, "concept_move": 0.5404034285611488}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "unused_token_hold", "status": "FAIL", "seconds": 1.7310044600162655, "live": {"concept_move": 0.5404034285611488, "unused_hold": 0.729775607585907}}

@@ -1,0 +1,158 @@
+{
+  "track": "Original-required-auxiliary benchmark compatibility controls, not pure-GAN qualification",
+  "integrity": "PASS",
+  "passed": 1,
+  "failed": 1,
+  "cases": [
+    {
+      "task": "ae_gan_hold",
+      "status": "PASS",
+      "integrity": "PASS",
+      "exclusively_adversarial": false,
+      "original_auxiliary_weights": {
+        "cover_weight": 0.0,
+        "fm_weight": 0.0,
+        "host": "ae_gan_hold",
+        "particle_l2": 0.0,
+        "reconstruction_weight": 1.0
+      },
+      "budget": 250,
+      "passing_suffix": 20,
+      "live": {
+        "hold": 0.004224264528602362,
+        "recon_mse": 0.0029136501252651215
+      },
+      "verdict": {
+        "attempted": true,
+        "confirmation_fraction": 0.376,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": 1.5969914169982076,
+          "confirmed_step": 94,
+          "first_pass_step": 53,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 20,
+          "passing_suffix": 20,
+          "stable_from_seconds": 1.452435159822926,
+          "stable_from_step": 53
+        },
+        "metrics": [
+          {
+            "margin": 0.04708634987473488,
+            "metric": "recon_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.0029136501252651215
+          },
+          {
+            "margin": 0.3457757354713976,
+            "metric": "hold",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.35,
+            "value": 0.004224264528602362
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "generator_objective": "GANLoss.g_loss plus original required host reconstruction or unused-token hold; NOT exclusively adversarial",
+      "unchanged_H_signal_options": {
+        "consistency": "mixup",
+        "consistency_coeff": 0.01,
+        "consistency_sigma": 0.1,
+        "noise": "fixed",
+        "sigma": 0.05,
+        "smooth": 0.0
+      },
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "source_config_episode_and_receipt_regrade": "PASS",
+      "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/episodes/h_n05r06_mixup_c0p01_lr15__ae_gan_hold.json.gz",
+      "episode_sha256": "593eb6fdab145f4d01f878f1084e0eaf6a97b4b1a3f6a7e72ea1d11b371f47a6",
+      "receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/signal-policy.json.gz",
+      "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/ae_gan_hold/source.tar.gz"
+    },
+    {
+      "task": "unused_token_hold",
+      "status": "FAIL",
+      "integrity": "PASS",
+      "exclusively_adversarial": false,
+      "original_auxiliary_weights": {
+        "cover_weight": 0.0,
+        "fm_weight": 0.0,
+        "hold_weight": 1.0,
+        "host": "unused_token_hold",
+        "particle_l2": 0.0
+      },
+      "budget": 200,
+      "passing_suffix": 0,
+      "live": {
+        "concept_move": 0.5404501031349653,
+        "unused_hold": 0.9990084950113669
+      },
+      "verdict": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": 0.14900849501136693,
+            "metric": "unused_hold",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9990084950113669
+          },
+          {
+            "margin": -0.30954989686503465,
+            "metric": "concept_move",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 0.5404501031349653
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.18208817462649096,
+        "status": "FAIL"
+      },
+      "generator_objective": "GANLoss.g_loss plus original required host reconstruction or unused-token hold; NOT exclusively adversarial",
+      "unchanged_H_signal_options": {
+        "consistency": "mixup",
+        "consistency_coeff": 0.01,
+        "consistency_sigma": 0.1,
+        "noise": "fixed",
+        "sigma": 0.05,
+        "smooth": 0.0
+      },
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "source_config_episode_and_receipt_regrade": "PASS",
+      "episode": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold/episodes/h_n05r06_mixup_c0p01_lr15__unused_token_hold.json.gz",
+      "episode_sha256": "aabf58eff403d7147d612c93fd643d377f048d952fa578ff8d1a8cefbbb9792f",
+      "receipt": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/unused_token_hold/h_n05r06_mixup_c0p01_lr15/unused_token_hold/signal-policy.json.gz",
+      "source_archive": "/ml2/hypergan/gan-attempts/selected-h-verification/compatibility-controls/unused_token_hold/source.tar.gz"
+    }
+  ]
+}
