@@ -230,6 +230,8 @@ ineligible for the production gate until a real implementation is audited.
 | Same-sample secant EG, c=.25/.5/.9 | All200/200 | Cold trajectory MSE .2872/.3540/.1332 > .02 |
 | Full-J linearized implicit response | 200/200 | Cold trajectory MSE .2538 > .02; warm cost11.4 gradient evaluations/player/update |
 | Cross-player-only competitive response | 196/200 | Warm HQ falls to .8894; unplanned cold diagnostic ends at MSE .020058 > .02, with no passing checkpoints |
+| Cross-only + matched-support output cap .05 | 200/200 on torch 2.14 | Cold trajectory MSE .06901, 0/24. Cap never sees that host. Archived 1194 motion .023 is under the cap |
+| Cross-only + error-relative output gain .5 | 200/200, minimum HQ .9802 | Cold trajectory MSE .02110, 3/24 under .02, no sustained suffix. Gain 1 does not fire. Gain .25 cold MSE .07892 |
 
 Earlier constant Adam, optimistic Adam/AMSGrad, ExtraAdam, epsilon changes,
 fixed output-motion bounds and persistent-noise grids also failed. R1+R2
@@ -239,22 +241,39 @@ the full-J implicit method but still fails. Its cold run was mistakenly
 launched before consuming the failed warm verdict; it is retained as an
 unplanned diagnostic, with no promotion credit. No expensive host followed.
 
-The four cross-only warm failures occur at updates 1194–1197, all with step
-factor one. Its own cross-residual guard accepts those steps. Applying a new
-full-joint residual cutoff of .5 would still miss two of the four failures
-while rejecting 133/200 warm and 305/400 cold proposals. The next useful cheap
-investigation is exact replay around update 1194, compared with acquisition
-updates, to distinguish own-player curvature, functional output motion and
-target mismatch before selecting another guard. This is a research direction,
-not a tested fix or a reason to relax either gate.
+The four archived cross-only warm failures occur at updates 1194–1197, all
+with step factor one. Its own cross-residual guard accepts those steps.
+Applying a new full-joint residual cutoff of .5 would still miss two of the
+four failures while rejecting 133/200 warm and 305/400 cold proposals.
+
+A fresh fork on torch 2.14.0+cpu, and the same fork on torch 2.13.0+cu126
+CPU with Python 3.12.3, does not reproduce that 1194 window. The cu126 warm
+hash matches the local 2.14 sibling, not the archived hash. The
+scheduled warm-state hash changes, and stock cross-only fails once at update
+1002 (199/200, HQ .8938) with generator output RMS .203 against HQ radius .21.
+Prior motion is .013. The accepted step factor is .5 after α=1 is rejected
+for cross residual .757. Finite-difference own/cross energy at that step is
+about 3.8, in the same range as neighboring warm steps, and much smaller than
+the archived cold-acquisition ratios (about 35–50). The drift is generator
+output motion on an already matched target, not an own-curvature spike and
+not a distant target.
+
+The follow-up cap rejects a proposal only when clean support is already inside
+the HQ ball and clean output RMS exceeds .05, then halves α. It is off unless
+requested. On the fresh fork it records 39 rejections and passes 200/200 warm
+checks (minimum HQ .9331). Cold trajectory is unchanged, because that host has
+no mode centers: MSE .06901, 0/24 passing checks. Fail-fast stops there. The
+cap would also have missed the archived 1194 steps, whose output RMS is about
+.023. No hold, shift, or production gate was run. Details are in
+[cross-drift-replay.md](cross-drift-replay.md).
 
 Small accepted step factors are diagnostic, not automatic failures. The
 rejections above come from failed acquisition or quality, not an imposed
 minimum movement. Initial learning from scratch remains required; recovery
 after changing the target is assessed separately.
 
-Local handoff validation: 149 integrated tests and two additional cross-only
-audit tests passed. The portable implicit warm driver
+Local handoff validation: the listed suite passed 151 tests on torch 2.14.0+cpu.
+The portable implicit warm driver
 also reproduced the 200/200 result, 6/200 constant control, and exact identity
 parity using only files in this worktree.
 
