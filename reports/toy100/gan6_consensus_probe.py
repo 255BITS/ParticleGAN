@@ -75,8 +75,12 @@ def run_warm(arm, output: Path):
         prefix_context=lambda: _context(arm, "mode_hold", start_step=1000))
     summary = json.loads((output / "forks" / "summary.json").read_text())
     variant = json.loads((output / "forks" / f"{arm}.json").read_text())
-    row = dict(arm=arm, status=variant["status"], local=variant["local_stability"],
-               warm_state_sha256=variant["warm_state_sha256"], summary_status=summary["status"])
+    local = variant["local_stability"]
+    row = dict(arm=arm, status=variant["status"], checks=local.get("checks"),
+               pass_all=local.get("pass_all"),
+               failing_steps=len(local.get("failing_steps", [])),
+               warm_state_sha256=variant["warm_state_sha256"],
+               identity_cold_parity=summary.get("identity_cold_parity"))
     _log("WARM_DONE", **row)
     (output / "warm.json").write_text(json.dumps(row) + "\n")
     return row
