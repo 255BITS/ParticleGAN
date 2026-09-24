@@ -1,0 +1,62 @@
+{
+  "files": {
+    "console.log": {
+      "bytes": 2793,
+      "sha256": "68e55b5e0d5de8df446654359ddfd2be837f5aa7c61b00b6b1efac68bc5a5694"
+    },
+    "declaration.json": {
+      "bytes": 2296,
+      "sha256": "b25a46ee9cd9f043bf2fd1ef7743ea2f5a0161f902b0184be4f27b46391e338c"
+    },
+    "partial.json": {
+      "bytes": 36263,
+      "sha256": "b0b1cb06cf9d3e9891bf15845503f2c51e8e667afc910bf02d4ba7e1df7789e1"
+    },
+    "result.json": {
+      "bytes": 36299,
+      "sha256": "2696d4ad8931084e7cc9d3af44e73f777a32cc4244f6bd725eb146d8b8425fb0"
+    },
+    "source/benchmarks/locked_shared/mlp.py": {
+      "bytes": 2289,
+      "sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+    },
+    "source/benchmarks/locked_shared/mode_hold.py": {
+      "bytes": 10774,
+      "sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    "source/benchmarks/toy100/models.py": {
+      "bytes": 9411,
+      "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3"
+    },
+    "source/reports/toy100/forward_kl_cold_parallel.py": {
+      "bytes": 3387,
+      "sha256": "a665eabc4d80ae43cdecb5f2a97484dbd2ae30da3274ba8f02b9b93e2ce89d9d"
+    },
+    "source/reports/toy100/forward_kl_cumulative_filter.py": {
+      "bytes": 8890,
+      "sha256": "83d1469cab74ce9fefcee8c06927e06cb76a751f831919f9cac56a5945a86be4"
+    },
+    "source/reports/toy100/forward_kl_free_filter.py": {
+      "bytes": 15806,
+      "sha256": "0cc098d63efb2460dc038b897d5db532b9f87115ffbd5a78e42ee042ed21c873"
+    },
+    "source/reports/toy100/forward_kl_quadrature_audit.py": {
+      "bytes": 11917,
+      "sha256": "1ef62514aa125daf60ad407716461e1bd42a93e63cda768d944e891b545e5334"
+    },
+    "source/reports/toy100/pr84_early_geometry.py": {
+      "bytes": 7322,
+      "sha256": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45"
+    },
+    "source/reports/toy100/sample_anchor_free1200.py": {
+      "bytes": 12051,
+      "sha256": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656"
+    },
+    "source/reports/toy100/sample_anchor_local_mmd_continuation.py": {
+      "bytes": 14736,
+      "sha256": "a618495f28f66696f46a419766a51e8d6c75f7701dbb1770109be72c6904d275"
+    }
+  },
+  "source_verified": true,
+  "status": "COMPLETE"
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "fixed-state numerical integral audit only; no optimizer update",
+  "source": {
+    "reports/toy100/forward_kl_quadrature_audit.py": "1ef62514aa125daf60ad407716461e1bd42a93e63cda768d944e891b545e5334",
+    "reports/toy100/forward_kl_free_filter.py": "0cc098d63efb2460dc038b897d5db532b9f87115ffbd5a78e42ee042ed21c873",
+    "reports/toy100/forward_kl_cumulative_filter.py": "83d1469cab74ce9fefcee8c06927e06cb76a751f831919f9cac56a5945a86be4",
+    "reports/toy100/forward_kl_cold_parallel.py": "a665eabc4d80ae43cdecb5f2a97484dbd2ae30da3274ba8f02b9b93e2ce89d9d",
+    "reports/toy100/sample_anchor_local_mmd_continuation.py": "a618495f28f66696f46a419766a51e8d6c75f7701dbb1770109be72c6904d275",
+    "reports/toy100/sample_anchor_free1200.py": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+    "reports/toy100/pr84_early_geometry.py": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/toy100/models.py": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3"
+  },
+  "cold_raw_sha256": "6a2b2046cabc032552c42dbd6b016f74a02c37ba8e8b147912e4275bb2ed46e5",
+  "inputs": {
+    "cold_compressed_sha256": "0371f70c5139cb04678bcfe06455e257d2f8bb0848062443f6ca711c3f772665",
+    "cold_raw_sha256": "002b3019c42c77414cb4f853db7818bba79bffab095f0d19052e4517ff45392d",
+    "warm_compressed_sha256": "77b24bbaf646befe70ac97f23a944d32717306e4ff0b1b8d8b6ff107dfef82f9",
+    "warm_full_sidecar_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47"
+  },
+  "steps": [
+    7,
+    14
+  ],
+  "transitions": "every archived GH9-reversed accepted move plus whole update",
+  "orders": [
+    9,
+    13,
+    17,
+    25,
+    33,
+    41
+  ],
+  "inside_estimate": "successive tensor Gauss-Hermite difference, not a theorem",
+  "outside_square": "rigorous aligned-equal-mixture Gaussian tail bound for CE delta",
+  "radius": 8.0,
+  "objective": "E empirical real*N_h log(q_old/q_new)",
+  "tolerance": "report last absolute order difference and sign; no optimizer decision",
+  "no_seed_or_bandwidth_sweep": true
+}
