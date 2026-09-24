@@ -1,7 +1,7 @@
 """One fixed-cloud check of one-sided sampled-real quantization drift.
 
-This has no model, critic, optimizer, or training updates. It reads clean
-support points from the frozen PR84 audit and applies standard Lloyd centroid
+This has no model, critic, optimizer, or training updates. It reads the host's
+one noisy support draw from the frozen PR84 audit and applies Lloyd centroid
 updates against one independently drawn 256-example real minibatch.
 """
 import argparse
@@ -60,7 +60,7 @@ def main():
     means = ring_means()
     real = sample_ring(means, 256, .07, torch.Generator().manual_seed(0))
     output = {
-        "scope": "fixed-cloud proxy, not model training",
+        "scope": "fixed cloud from one noisy support draw per particle, not model training",
         "real_batch": 256,
         "real_batch_sha256": hashlib.sha256(real.numpy().tobytes()).hexdigest(),
         "source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),

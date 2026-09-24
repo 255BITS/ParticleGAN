@@ -29,11 +29,11 @@ The audit JSON is stored in `continuous-evidence/pr84-field/audit/mode_hold.json
 
 ## Fixed-cloud coverage proxy
 
-The [proxy script](pr84_coverage_proxy.py) uses the audit's cold seven-mode and passing warm eight-mode clean support points. It draws one 256-example real minibatch, matching the transfer recipe's resolved batch size, then applies 20 exact nearest-real centroid (Lloyd) updates in **output coordinates only**. Each real point is assigned to its nearest generated support point; empty cells stay fixed. The mode centers are used solely to score the resulting clouds.
+The [proxy script](pr84_coverage_proxy.py) uses the audit's cold seven-mode and passing warm eight-mode **single noisy draw per particle** (`support_scope` in the host receipt). It draws one 256-example real minibatch, matching the transfer recipe's resolved batch size, then applies 20 exact nearest-real centroid (Lloyd) updates in **output coordinates only**. Each real point is assigned to its nearest generated support point; empty cells stay fixed. The mode centers are used solely to score the resulting clouds.
 
 | Cloud | Initial | After 1 centroid update | After 2 | After 20 |
 | --- | --- | --- | --- | --- |
 | Cold | 7 modes, HQ 1.0, coverage loss .52549 | 7, .8333, .07230 | 8, .9167, .00923 | 8, .9167, .00909 |
 | Warm | 8 modes, HQ 1.0, coverage loss .01279 | 8, 1.0, .00895 | 8, 1.0, .00879 | 8, 1.0, .00878 |
 
-At the cold cloud the centroid directions for two particles project `+1.436` and `+0.532` toward the missing mode; the critic-guided proposal above projects away from it. This supports a one-sided coverage correction as a **candidate**, not a result in parameter space. The transient cold HQ dip at the first centroid step is real. The [full proxy receipt](continuous-evidence/pr84-field/coverage-proxy.json) fixes the single sampled minibatch and all 21 measurements; no seeds, widths, or gains were searched. The proxy does not account for generator Jacobian coupling, noisy samples, Adam moments, or interaction with the GAN update.
+At the cold cloud the centroid directions for two particles project `+1.436` and `+0.532` toward the missing mode; the critic-guided proposal above projects away from it. This supports a one-sided coverage correction as a **candidate**, not a result in parameter space. The transient cold HQ dip at the first centroid step is real. The [full proxy receipt](continuous-evidence/pr84-field/coverage-proxy.json) fixes the single sampled minibatch and all 21 measurements; no seeds, widths, or gains were searched. The proxy starts from a noisy observation and does not account for generator Jacobian coupling, further noise, Adam moments, or interaction with the GAN update.

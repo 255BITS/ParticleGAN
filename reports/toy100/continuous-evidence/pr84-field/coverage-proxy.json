@@ -1,8 +1,8 @@
 {
-  "scope": "fixed-cloud proxy, not model training",
+  "scope": "fixed cloud from one noisy support draw per particle, not model training",
   "real_batch": 256,
   "real_batch_sha256": "b63dc64994e3a54365f1b315fa90f96a749206822a8a7ec6520343cea0ff87fd",
-  "source_sha256": "65bcbca30685d1a7113358d278626a76fc0bd81c24c4fffa7996b6b7f4bf7fe5",
+  "source_sha256": "2fb7f6aedf15c56346073c9fc5465d33497869a7b5a0aad42bfa7ecbbdaec6d9",
   "cold_input_sha256": "6dcdba638396a265b72cd678d57076f04c47ac9bfb36025267503f22fba3b4c2",
   "warm_input_sha256": "554da394b5cef037cce9bebaeab35978a41eeb2ed3ada20d7e0a0f0793b4905f",
   "cold_missing_mode_for_reporting_only": [
