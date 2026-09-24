@@ -1,0 +1,20 @@
+{
+  "case": "cold1",
+  "width": 4.25848198184418,
+  "groups": 8,
+  "initial_mmd2": 0.08838670469333221,
+  "anchor_mmd2": 0.12153261482772648,
+  "anchor_change": 0.033145910134394274,
+  "anchor_improved": false,
+  "initial_grade": {
+    "modes": 0,
+    "hq": 0.0,
+    "mode_mass_tv": 0.875
+  },
+  "anchor_grade": {
+    "modes": 1,
+    "hq": 0.406005859375,
+    "mode_mass_tv": 0.375
+  },
+  "warm_solver": null
+}

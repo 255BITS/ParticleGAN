@@ -1,0 +1,429 @@
+{
+  "status": "COMPLETE",
+  "declaration": {
+    "scope": "one-bank free-output diagnostic, no GAN or neural update",
+    "case": "cold1",
+    "input_hashes": {
+      "cold_compressed_sha256": "0371f70c5139cb04678bcfe06455e257d2f8bb0848062443f6ca711c3f772665",
+      "cold_raw_sha256": "002b3019c42c77414cb4f853db7818bba79bffab095f0d19052e4517ff45392d",
+      "warm_compressed_sha256": "77b24bbaf646befe70ac97f23a944d32717306e4ff0b1b8d8b6ff107dfef82f9",
+      "warm_full_sidecar_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47"
+    },
+    "source_sha256": {
+      "reports/toy100/sample_anchor_mmd_filter.py": "d38f1eba9760cc83ee09af4ef6301b4ac15d022d153c45ffc65eded098dbc49a",
+      "reports/toy100/sample_anchor_free1200.py": "666656416bf010c6224cc6cd1a75c67d1fae9320a52aa6ff7eb5a0dbc4088656",
+      "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+      "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "reports/toy100/pr84_early_geometry.py": "f4dedb5dc08df08614ef91acaa05938bb106f4c81d101a01832ab5affb363c45",
+      "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+    },
+    "bank_sha256": "a2178917c754f20123a7c950d6e3cbaa8325114c20c4b0bda68c52d9e7ceeb19",
+    "native_real_batch": 128,
+    "kernel": "Gaussian exp(-||x-y||\u00b2/(2h\u00b2))",
+    "width_rule": "median positive pairwise inferred-group centroid distance on this first real128 bank; frozen",
+    "width": 4.25848198184418,
+    "output_sigma": 0.029,
+    "output_noise_integration": "exact Gaussian convolution in p-q and q-q",
+    "cold_proposal": "existing one-anchor-per-group active-quadratic MM target",
+    "warm_solver": "unconstrained output-space L-BFGS-B, 20 iterations/100 calls maximum, no tuning",
+    "evaluator": "same fixed 4096 late-noise draws at diagnostic clock 240 for all clouds",
+    "no_oracle_objective": true,
+    "theorem_scope": "identical full probability laws imply zero MMD and functional gradient; not converse from finite-support stationarity"
+  },
+  "grouping": {
+    "n_groups": 8,
+    "member_indices": [
+      [
+        0,
+        13,
+        24,
+        41,
+        44,
+        48,
+        57,
+        67,
+        85,
+        113,
+        115,
+        119,
+        125
+      ],
+      [
+        1,
+        6,
+        8,
+        11,
+        16,
+        28,
+        33,
+        37,
+        42,
+        59,
+        60,
+        68,
+        72,
+        73,
+        83,
+        98,
+        101,
+        107,
+        108
+      ],
+      [
+        2,
+        7,
+        19,
+        20,
+        25,
+        34,
+        47,
+        66,
+        77,
+        82,
+        86,
+        91,
+        97,
+        102
+      ],
+      [
+        3,
+        4,
+        5,
+        27,
+        30,
+        35,
+        36,
+        38,
+        39,
+        52,
+        78,
+        80,
+        87,
+        100,
+        111,
+        122,
+        126
+      ],
+      [
+        9,
+        15,
+        18,
+        31,
+        32,
+        45,
+        53,
+        71,
+        88,
+        90,
+        94,
+        95,
+        103,
+        104,
+        106,
+        110,
+        112,
+        118,
+        123,
+        127
+      ],
+      [
+        10,
+        17,
+        21,
+        26,
+        29,
+        51,
+        54,
+        56,
+        58,
+        61,
+        63,
+        64,
+        65,
+        69,
+        89,
+        121
+      ],
+      [
+        12,
+        14,
+        40,
+        43,
+        46,
+        49,
+        55,
+        62,
+        70,
+        81,
+        93,
+        105,
+        109,
+        114,
+        116,
+        117,
+        120,
+        124
+      ],
+      [
+        22,
+        23,
+        50,
+        74,
+        75,
+        76,
+        79,
+        84,
+        92,
+        96,
+        99
+      ]
+    ],
+    "member_sizes": [
+      13,
+      19,
+      14,
+      17,
+      20,
+      16,
+      18,
+      11
+    ],
+    "largest_within_edge": 0.220659983034911,
+    "smallest_between_edge": 1.8830170364369285,
+    "cut_threshold": 1.0518385097359197,
+    "largest_additive_gap": 1.6623570534020176,
+    "second_largest_gap": 0.11252792856798832
+  },
+  "group_centers": [
+    [
+      0.006673454020458918,
+      -2.9994101707751932
+    ],
+    [
+      2.1211301778492175,
+      -2.109078620609484
+    ],
+    [
+      3.030010325568063,
+      0.014014148652287466
+    ],
+    [
+      2.1491002054775463,
+      2.1252001874587116
+    ],
+    [
+      -0.0012520259711891412,
+      2.9905390620231627
+    ],
+    [
+      -3.0147809982299805,
+      0.024034266534727067
+    ],
+    [
+      -2.080589863989088,
+      2.0951404571533203
+    ],
+    [
+      -2.09832687811418,
+      -2.1128193248401987
+    ]
+  ],
+  "initial": {
+    "mmd2": 0.08838670469333221,
+    "quality": {
+      "modes": 0,
+      "hq": 0.0,
+      "nearest_mode_counts": [
+        12,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "mode_mass_tv": 0.875,
+      "per_mode_coordinate_variance_ratios": [
+        [
+          0.28238097926421907,
+          0.2085138354408914
+        ],
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "points": [
+        [
+          0.04594999924302101,
+          -0.007516365498304367
+        ],
+        [
+          0.07915626466274261,
+          0.029079759493470192
+        ],
+        [
+          0.09882748126983643,
+          -0.010396994650363922
+        ],
+        [
+          0.10009986162185669,
+          -0.0029472531750798225
+        ],
+        [
+          0.05445053055882454,
+          -0.01992938108742237
+        ],
+        [
+          0.13114303350448608,
+          -0.01508910208940506
+        ],
+        [
+          0.10598740726709366,
+          -0.002706442028284073
+        ],
+        [
+          0.11234161257743835,
+          0.011097390204668045
+        ],
+        [
+          0.0794389471411705,
+          -0.013792907819151878
+        ],
+        [
+          0.11203446984291077,
+          -0.005780991166830063
+        ],
+        [
+          0.09263850748538971,
+          -0.010287957265973091
+        ],
+        [
+          0.09017333388328552,
+          0.012985032051801682
+        ]
+      ]
+    }
+  },
+  "anchor_target": {
+    "mmd2": 0.12153261482772648,
+    "change": 0.033145910134394274,
+    "improved": false,
+    "quality": {
+      "modes": 1,
+      "hq": 0.406005859375,
+      "nearest_mode_counts": [
+        1,
+        2,
+        1,
+        0,
+        0,
+        1,
+        2,
+        5
+      ],
+      "mode_mass_tv": 0.375,
+      "per_mode_coordinate_variance_ratios": [
+        [
+          0.17163265306122447,
+          0.17163265306122447
+        ],
+        [
+          139.70904981742618,
+          5.728892749942552
+        ],
+        [
+          0.17163265306122447,
+          0.17163265306122447
+        ],
+        null,
+        null,
+        [
+          0.17163265306122447,
+          0.17163265306122447
+        ],
+        [
+          81.55783180527031,
+          14.609163169105242
+        ],
+        [
+          0.17163265306122447,
+          0.17163265306122447
+        ]
+      ],
+      "points": [
+        [
+          -0.9604165277983012,
+          -0.8292108883229574
+        ],
+        [
+          -0.3887138362024343,
+          2.1071643492754766
+        ],
+        [
+          2.1211301778492175,
+          -2.109078620609484
+        ],
+        [
+          2.1211301778492175,
+          -2.109078620609484
+        ],
+        [
+          -0.410544055728821,
+          -2.111323043147913
+        ],
+        [
+          2.121130177849218,
+          -2.109078620609484
+        ],
+        [
+          2.1211301778492175,
+          -2.109078620609484
+        ],
+        [
+          2.501464253513753,
+          1.280725771936142
+        ],
+        [
+          0.8524561435519624,
+          -2.64327755070891
+        ],
+        [
+          2.6664582664805243,
+          -0.8352229590524212
+        ],
+        [
+          2.1211301778492175,
+          -2.109078620609484
+        ],
+        [
+          0.8477008555569736,
+          0.9506919889701038
+        ]
+      ]
+    },
+    "anchor_objective_before": 17.371271752040997,
+    "anchor_objective_after": 3.1294151687916916,
+    "max_displacement": 2.918964349902407
+  },
+  "equal_law_rest_check": {
+    "scope": "identical Gaussian-mixture laws, same support and sigma on both sides",
+    "mmd2": 0.0,
+    "gradient_max_abs": 2.710505431213761e-20,
+    "equality_implies_rest": true,
+    "converse_claim": false
+  },
+  "warm_local_descent": null,
+  "data_rng_after_bank_sha256": "f9fa9436941bd0408d9d347366bbddeb8abdfa339862985e7ababc9e99f89c99",
+  "runtime": {
+    "torch": "2.13.0+cu126",
+    "scipy": "1.18.1",
+    "threads": 1,
+    "cpu_capability": "AVX2"
+  }
+}

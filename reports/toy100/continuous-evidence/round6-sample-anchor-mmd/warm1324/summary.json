@@ -1,0 +1,25 @@
+{
+  "case": "warm1324",
+  "width": 4.272493959605146,
+  "groups": 8,
+  "initial_mmd2": 0.005271742474122876,
+  "anchor_mmd2": 0.004705166156050433,
+  "anchor_change": -0.0005665763180724426,
+  "anchor_improved": true,
+  "initial_grade": {
+    "modes": 8,
+    "hq": 0.99951171875,
+    "mode_mass_tv": 0.16666666666666666
+  },
+  "anchor_grade": {
+    "modes": 8,
+    "hq": 1.0,
+    "mode_mass_tv": 0.16666666666666666
+  },
+  "warm_solver": {
+    "success": false,
+    "iterations": 20,
+    "final_mmd2": 4.0186637073613696e-06,
+    "final_max_displacement": 0.9639642460517432
+  }
+}
