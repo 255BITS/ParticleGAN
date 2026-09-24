@@ -1,0 +1,20 @@
+{"event": "FORWARD_KL_CUMULATIVE_DECLARED", "h": 0.031286240422040236, "source_sha256": "83d1469cab74ce9fefcee8c06927e06cb76a751f831919f9cac56a5945a86be4"}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 1, "absolute_step": 1324, "grade": {"modes": 8, "hq": 0.999755859375}, "donors": 12, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 2, "absolute_step": 1325, "grade": {"modes": 8, "hq": 1.0}, "donors": 8, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 3, "absolute_step": 1326, "grade": {"modes": 8, "hq": 1.0}, "donors": 10, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 4, "absolute_step": 1327, "grade": {"modes": 8, "hq": 1.0}, "donors": 5, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 5, "absolute_step": 1328, "grade": {"modes": 8, "hq": 1.0}, "donors": 4, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 6, "absolute_step": 1329, "grade": {"modes": 8, "hq": 1.0}, "donors": 3, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 7, "absolute_step": 1330, "grade": {"modes": 8, "hq": 1.0}, "donors": 3, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 8, "absolute_step": 1331, "grade": {"modes": 8, "hq": 1.0}, "donors": 7, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 9, "absolute_step": 1332, "grade": {"modes": 8, "hq": 1.0}, "donors": 6, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 10, "absolute_step": 1333, "grade": {"modes": 8, "hq": 1.0}, "donors": 3, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 11, "absolute_step": 1334, "grade": {"modes": 8, "hq": 1.0}, "donors": 1, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 12, "absolute_step": 1335, "grade": {"modes": 8, "hq": 1.0}, "donors": 4, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 13, "absolute_step": 1336, "grade": {"modes": 8, "hq": 1.0}, "donors": 0, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 14, "absolute_step": 1337, "grade": {"modes": 8, "hq": 1.0}, "donors": 1, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 15, "absolute_step": 1338, "grade": {"modes": 8, "hq": 1.0}, "donors": 3, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "warm1324", "update": 16, "absolute_step": 1339, "grade": {"modes": 8, "hq": 1.0}, "donors": 1, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "cold1", "update": 1, "absolute_step": 1, "grade": {"modes": 8, "hq": 1.0}, "donors": 12, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "cold1", "update": 2, "absolute_step": 2, "grade": {"modes": 8, "hq": 1.0}, "donors": 9, "em": 20, "audit9_sign_flips": 0}
+{"event": "FORWARD_KL_CUMULATIVE_STEP", "case": "cold1", "update": 3, "absolute_step": 3, "grade": {"modes": 8, "hq": 1.0}, "donors": 4, "em": 20, "audit9_sign_flips": 0}

@@ -1,0 +1,9 @@
+{
+  "status": "STOPPED_REDUNDANT_COLD",
+  "exit_code": 143,
+  "reason": "frozen warm-first runner reached warm16, then entered duplicate cold; independent cold companion already running",
+  "warm_completed_updates": 16,
+  "warm_all_quality_pass": true,
+  "partial_cold_updates": 1,
+  "not_a_complete_original_result": true
+}
