@@ -1,0 +1,86 @@
+{
+  "files": {
+    "declaration.json": {
+      "bytes": 2555,
+      "sha256": "5c75412cb94ac80ac07397120d4b1bb7fb1b0f5e2ad2044279febbfcb203a933",
+      "stored": "declaration.json.gz",
+      "stored_sha256": "246064cea27bfcce86e883c2bf7623603afd817374408cee8ec6d6a798d46d9e"
+    },
+    "forks/cold.json": {
+      "bytes": 58686,
+      "sha256": "5fe5a223050e4c3e683802ca89f6782ea01593ea7877080e211a7b4e6e9d90a7",
+      "stored": "forks/cold.json.gz",
+      "stored_sha256": "6ec29eab95276321a48c90aa1745af2f311557b69fca3c39ff3a681fbdfa0db5"
+    },
+    "forks/constant.json": {
+      "bytes": 87517,
+      "sha256": "f4c72f78fe1ef180db0334869e6851a177be27b254f4ab2f7d2b5051fb7911ea",
+      "stored": "forks/constant.json.gz",
+      "stored_sha256": "8b65354a158a4d551d803d345619ffa6f6c382b1d13568c23995b248b512d51a"
+    },
+    "forks/identity.json": {
+      "bytes": 85653,
+      "sha256": "85c1d6e6779fdd5c0b76e3d4e537893a721a0515f9a2c87c7e4fdd1a5a1d3d2d",
+      "stored": "forks/identity.json.gz",
+      "stored_sha256": "ad2ca24fedb1786183d211dfb3a121ae4aa8aae9bad77edc06e3f6be8f289615"
+    },
+    "forks/original.json": {
+      "bytes": 150186,
+      "sha256": "a17ec443bbae7b2a0d9db60e2036d72153cf85612f326e44b7181e79b69b114f",
+      "stored": "forks/original.json.gz",
+      "stored_sha256": "8888d0f049acf6b7d5a0e443bb19cee58a49e20e869bc45d601e349b2ccb6e81"
+    },
+    "forks/refinement.json": {
+      "bytes": 5716665,
+      "sha256": "5675c2e1a9c4a555a6de7e78613a705999c42819f6300f732b1572e08b514848",
+      "stored": "forks/refinement.json.gz",
+      "stored_sha256": "476be850e3cbc2728b9d9f5af9e0aa97ee522590ed2df97634db460a1c896fe7"
+    },
+    "forks/summary.json": {
+      "bytes": 6808,
+      "sha256": "ef5bd2cc321377359eed7402ce5e8ef2614c6c4b57cf7cd80c1578d4dc089ab7",
+      "stored": "forks/summary.json.gz",
+      "stored_sha256": "7f9e15e94fa7ead5066aa69b5a2e382f9a4a80a46d0c1778a80e9eb990fd6c24"
+    },
+    "saved-state-filter.json": {
+      "bytes": 1445454,
+      "sha256": "16270563c066fbe8e611e321e411c2f6c7b4dd409b07b517cfb306883eff6580",
+      "stored": "saved-state-filter.json.gz",
+      "stored_sha256": "9644a2e940d953b682bb88ef2db2034f6a1f524d62998a16d17c8fb19b4c529e"
+    },
+    "source/configs/toy100/constraints_simple_regularization.json": {
+      "bytes": 1507,
+      "sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "stored": "source/configs/toy100/constraints_simple_regularization.json.gz",
+      "stored_sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f"
+    },
+    "summary.json": {
+      "bytes": 8695,
+      "sha256": "acd414de698ddb5484c18b6b0a4f4d3680250b0a8cb4ac1a511c6d3b7de4f1c4",
+      "stored": "summary.json.gz",
+      "stored_sha256": "7bfddea9655a1fa4cc4ee529d2f07b84c3730d6243726c96eac0c4527a8cb3ed"
+    }
+  },
+  "phase": "warm",
+  "source_archive": {
+    "stored_sha256": "7d8c0f67820fdafa78d1fddb48e0532c62c0c1c94d03eecc9c4e101449360460",
+    "tar_sha256": "e56185ac27421d439088ec5ce1b8c8019fc0637ac9b34694df260f7a299bd642"
+  },
+  "source_files": {
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "generated_warm_observer.py": "a58f4462d8341ea4fb2dbeb958af51d45c0a33e198c2d08b7decffbcde2d3507",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/pr84_critic_refinement.py": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11",
+    "reports/toy100/pr84_critic_refinement_probe.py": "33fa91f5da341e64ac2c4de8eeb2712ed41a9a9861e17d916cbe89cecd78266a",
+    "reports/toy100/pr84_critic_relaxation.py": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/pr84_smoothed_parity.py": "27a8b6fecd289369a94f069346cec136e4e38ffe1c7c96aac65b35318a4d1bea"
+  }
+}
