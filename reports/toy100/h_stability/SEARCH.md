@@ -20,6 +20,10 @@ remain failing. Moving all random draws to CPU recovers a different four; it
 still fails ring and bars. All 24 runs are audited and retained. Do not rerun
 these completed controls or treat any partial diagnostic as 20/22.
 
+The [PyTorch 2.14 check](../torch214-gpu-check/README.md) is complete: both
+blockers reproduce 2.13 exactly under native and CPU initialization. Do not
+repeat that upgrade check unchanged.
+
 Use CPU initialization with CUDA training as the practical porting reference.
 First gate on `mode_hold` (seven modes) and `vector_unequal_mass` (rare component
 minimum covariance eigenvalue ratio below .15), then trajectory, intensity,
