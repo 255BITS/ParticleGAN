@@ -25,6 +25,8 @@ FACTORIES = {
     "reach1": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate", dict(reach=1.)),
     "reachsat": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                  dict(ramp="saturating")),
+    "reachstall": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
+                   dict(ramp="stall")),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",

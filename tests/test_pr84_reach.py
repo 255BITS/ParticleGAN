@@ -16,6 +16,15 @@ def test_reach_peaks_at_the_b_cap_slope():
     assert reach_width(1., reach=1.) == pytest.approx(1.)
 
 
+def test_stall_needs_saturated_d_and_collapsed_g_trust():
+    with pr84_reach_candidate(task="mode_hold", ramp="stall") as (recorder, _source):
+        assert not recorder._stalled(1.)
+        recorder.records = [dict(g=dict(factor=.05))] * 60
+        assert recorder._stalled(.6) and not recorder._stalled(.59)
+        recorder.records = [dict(g=dict(factor=.2))] * 60
+        assert not recorder._stalled(1.)
+
+
 def test_factory_installs_and_restores_reach_recorder():
     with pr84_reach_candidate(task="mode_hold", reach=.7) as (recorder, _source):
         assert isinstance(recorder, ReachRecorder)

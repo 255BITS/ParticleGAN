@@ -24,6 +24,8 @@ REACH = .5
 
 REST_UTILISATION = .3
 SATURATED_UTILISATION = .6
+STALL_TRUST = .1
+STALL_WINDOW = 50
 
 
 def reach_width(sharpness, reach=REACH, ramp="peak"):
@@ -44,8 +46,20 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
     def _arm_smoothed_critic(self):
         super()._arm_smoothed_critic()
         if self._smooth_on:
-            self._smooth_width = reach_width(self.row["critic_sharpness"], self.reach, self.ramp)
+            sharpness = self.row["critic_sharpness"]
+            if self.ramp == "stall":
+                self._smooth_width = (self.reach / B_CAP_SLOPE if self._stalled(sharpness)
+                                      else reach_width(sharpness, self.reach))
+            else:
+                self._smooth_width = reach_width(sharpness, self.reach, self.ramp)
             self.row["critic_width"] = self._smooth_width
+
+    def _stalled(self, sharpness):
+        """D near its slope limit while G's own trust region has kept G nearly still."""
+        recent = self.records[-STALL_WINDOW:]
+        if sharpness / B_CAP_SLOPE < SATURATED_UTILISATION or not recent:
+            return False
+        return sum(row["g"]["factor"] for row in recent) / len(recent) <= STALL_TRUST
 
     def receipt(self):
         value = super().receipt()
