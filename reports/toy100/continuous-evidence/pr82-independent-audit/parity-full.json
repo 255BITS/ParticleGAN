@@ -1,0 +1,426 @@
+{
+  "commit": "c1515197",
+  "tasks": {
+    "trajectory": {
+      "original": {
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "identity_mse",
+              "value": 0.0034514048602432013,
+              "op": "<=",
+              "threshold": 0.02,
+              "status": "PASS",
+              "margin": 0.0165485951397568
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 15,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 15,
+            "first_pass_step": 167,
+            "stable_from_step": 167,
+            "stable_from_seconds": 1.180107481079176,
+            "confirmed_step": 234,
+            "confirmed_seconds": 1.3498446380253881
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.585
+        },
+        "result_sha256": "c22baff8fa4a596eae6426fd34ca7ac504f02567180077dc36681608e0ae1948",
+        "optimizer_state_sha256": "da15ad107cec56aff51c8a140160a0e91bdea2952a1d8eb64cfcb858b141ba4a",
+        "global_rng_sha256": "46dbfd41f4b3f1fd98d7a1e6a7e62c90d67bff3ba42adf99ccc191e17047fb32",
+        "noise_stream_state_sha256": {
+          "input_stream": "fac89f46226900b7245590a6a1cca859e304f024c771e851a6e4c9cf615320ee"
+        },
+        "noise_receipt_sha256": "14841f931aaddd5fb557f7332ec2a01e83f9ae9217995e931e3b77d21db870f0",
+        "applied": [
+          {
+            "role": "d",
+            "host_lr": 0.005,
+            "lr": 0.00425,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 6337
+          },
+          {
+            "role": "g",
+            "host_lr": 0.005,
+            "lr": 0.00425,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 6544
+          },
+          {
+            "role": "prior",
+            "host_lr": 0.005,
+            "lr": 0.0085,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 48
+          }
+        ],
+        "live": {
+          "identity_mse": 0.0034514048602432013
+        },
+        "adapter": null
+      },
+      "wrapped": {
+        "verdict": {
+          "status": "PASS",
+          "attempted": true,
+          "passed": true,
+          "metrics": [
+            {
+              "metric": "identity_mse",
+              "value": 0.0034514048602432013,
+              "op": "<=",
+              "threshold": 0.02,
+              "status": "PASS",
+              "margin": 0.0165485951397568
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 15,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 15,
+            "first_pass_step": 167,
+            "stable_from_step": 167,
+            "stable_from_seconds": 1.3034788889344782,
+            "confirmed_step": 234,
+            "confirmed_seconds": 1.8182683459017426
+          },
+          "shortfall": 0.0,
+          "confirmation_fraction": 0.585
+        },
+        "result_sha256": "c22baff8fa4a596eae6426fd34ca7ac504f02567180077dc36681608e0ae1948",
+        "optimizer_state_sha256": "da15ad107cec56aff51c8a140160a0e91bdea2952a1d8eb64cfcb858b141ba4a",
+        "global_rng_sha256": "46dbfd41f4b3f1fd98d7a1e6a7e62c90d67bff3ba42adf99ccc191e17047fb32",
+        "noise_stream_state_sha256": {
+          "input_stream": "fac89f46226900b7245590a6a1cca859e304f024c771e851a6e4c9cf615320ee"
+        },
+        "noise_receipt_sha256": "b056ec8469c313a0c398d01d5280b3c649106d340ec9913e3af282b06eb22e21",
+        "applied": [
+          {
+            "role": "d",
+            "host_lr": 0.005,
+            "lr": 0.00425,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 6337
+          },
+          {
+            "role": "g",
+            "host_lr": 0.005,
+            "lr": 0.00425,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 6544
+          },
+          {
+            "role": "prior",
+            "host_lr": 0.005,
+            "lr": 0.0085,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 48
+          }
+        ],
+        "live": {
+          "identity_mse": 0.0034514048602432013
+        },
+        "adapter": {
+          "outer_steps": 400,
+          "rng_replay_verified": 800,
+          "all_factors_one": true,
+          "generated_source_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e"
+        }
+      },
+      "parity": {
+        "result_sha256": true,
+        "optimizer_state_sha256": true,
+        "global_rng_sha256": true,
+        "noise_stream_state_sha256": true,
+        "applied": true,
+        "live": true
+      }
+    },
+    "mode_hold": {
+      "original": {
+        "verdict": {
+          "status": "FAIL",
+          "attempted": true,
+          "passed": false,
+          "metrics": [
+            {
+              "metric": "modes",
+              "value": 7,
+              "op": ">=",
+              "threshold": 8,
+              "status": "FAIL",
+              "margin": -1
+            },
+            {
+              "metric": "hq",
+              "value": 0.369384765625,
+              "op": ">=",
+              "threshold": 0.9,
+              "status": "FAIL",
+              "margin": -0.530615234375
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 0,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 0,
+            "first_pass_step": null,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.3572862413194445,
+          "confirmation_fraction": 2.0
+        },
+        "result_sha256": "fbb7a67524620a859e1e71e39aac55d88c8f860b40b05fd773b573b127c92b6b",
+        "optimizer_state_sha256": "cb329ac3d8a3cbe4f7143e64863bc5cfd53164671a4f1ba15f71365df7032a43",
+        "global_rng_sha256": "f99d395620b2f94f0f9285ea197008d18a3560e63b01c78c5854945a6e154808",
+        "noise_stream_state_sha256": {
+          "input_stream": "f3599cb26a7b16e4a51ada777ddc916145c1422c85255d444aed34a3b578e0ca"
+        },
+        "noise_receipt_sha256": "c253ef8b381ba52caa2b9b328a0ee02408a31aa475489689aa753a646fd3c90e",
+        "applied": [
+          {
+            "role": "d",
+            "host_lr": 0.002,
+            "lr": 0.00425,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 20161
+          },
+          {
+            "role": "g",
+            "host_lr": 0.002,
+            "lr": 0.00425,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 19298
+          },
+          {
+            "role": "prior",
+            "host_lr": 0.002,
+            "lr": 0.0085,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 48
+          }
+        ],
+        "live": {
+          "modes": 7,
+          "hq": 0.369384765625
+        },
+        "adapter": null
+      },
+      "wrapped": {
+        "verdict": {
+          "status": "FAIL",
+          "attempted": true,
+          "passed": false,
+          "metrics": [
+            {
+              "metric": "modes",
+              "value": 7,
+              "op": ">=",
+              "threshold": 8,
+              "status": "FAIL",
+              "margin": -1
+            },
+            {
+              "metric": "hq",
+              "value": 0.369384765625,
+              "op": ">=",
+              "threshold": 0.9,
+              "status": "FAIL",
+              "margin": -0.530615234375
+            }
+          ],
+          "convergence": {
+            "complete": true,
+            "observations": 24,
+            "passing_observations": 0,
+            "minimum_stable_checks": 5,
+            "passing_suffix": 0,
+            "first_pass_step": null,
+            "stable_from_step": null,
+            "stable_from_seconds": null,
+            "confirmed_step": null,
+            "confirmed_seconds": null
+          },
+          "shortfall": 0.3572862413194445,
+          "confirmation_fraction": 2.0
+        },
+        "result_sha256": "fbb7a67524620a859e1e71e39aac55d88c8f860b40b05fd773b573b127c92b6b",
+        "optimizer_state_sha256": "cb329ac3d8a3cbe4f7143e64863bc5cfd53164671a4f1ba15f71365df7032a43",
+        "global_rng_sha256": "f99d395620b2f94f0f9285ea197008d18a3560e63b01c78c5854945a6e154808",
+        "noise_stream_state_sha256": {
+          "input_stream": "f3599cb26a7b16e4a51ada777ddc916145c1422c85255d444aed34a3b578e0ca"
+        },
+        "noise_receipt_sha256": "c19dd28233590a2b383bcd5c2f7afb13d8bba8e4f5679081e10f814e5ae916eb",
+        "applied": [
+          {
+            "role": "d",
+            "host_lr": 0.002,
+            "lr": 0.00425,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 20161
+          },
+          {
+            "role": "g",
+            "host_lr": 0.002,
+            "lr": 0.00425,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 19298
+          },
+          {
+            "role": "prior",
+            "host_lr": 0.002,
+            "lr": 0.0085,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "parameters": 48
+          }
+        ],
+        "live": {
+          "modes": 7,
+          "hq": 0.369384765625
+        },
+        "adapter": {
+          "outer_steps": 1200,
+          "rng_replay_verified": 2400,
+          "all_factors_one": true,
+          "generated_source_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da"
+        }
+      },
+      "parity": {
+        "result_sha256": true,
+        "optimizer_state_sha256": true,
+        "global_rng_sha256": true,
+        "noise_stream_state_sha256": true,
+        "applied": true,
+        "live": true
+      }
+    }
+  },
+  "simultaneous_trajectory": {
+    "verdict": {
+      "status": "FAIL",
+      "attempted": true,
+      "passed": false,
+      "metrics": [
+        {
+          "metric": "identity_mse",
+          "value": 0.25443434715270996,
+          "op": "<=",
+          "threshold": 0.02,
+          "status": "FAIL",
+          "margin": -0.23443434715270997
+        }
+      ],
+      "convergence": {
+        "complete": true,
+        "observations": 24,
+        "passing_observations": 0,
+        "minimum_stable_checks": 5,
+        "passing_suffix": 0,
+        "first_pass_step": null,
+        "stable_from_step": null,
+        "stable_from_seconds": null,
+        "confirmed_step": null,
+        "confirmed_seconds": null
+      },
+      "shortfall": 2.0,
+      "confirmation_fraction": 2.0
+    },
+    "live": {
+      "identity_mse": 0.25443434715270996
+    },
+    "result_sha256": "d6ee5288dad6b4a306b8e2fb67c550c7e6fe51bea11d51b9c352e38c2852711a",
+    "applied": [
+      {
+        "role": "d",
+        "host_lr": 0.005,
+        "lr": 0.00425,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "parameters": 6337
+      },
+      {
+        "role": "g",
+        "host_lr": 0.005,
+        "lr": 0.00425,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "parameters": 6544
+      },
+      {
+        "role": "prior",
+        "host_lr": 0.005,
+        "lr": 0.0085,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "parameters": 48
+      }
+    ],
+    "outer_steps": 400,
+    "joint_points_verified": 400,
+    "generated_source_sha256": "929070adf93a9b4bc9583853245bc0563debfb53a9b3d232b11e900a40875f0e"
+  },
+  "source_sha256": {
+    "reports/toy100/pr82_alternating_parity_audit.py": "cb1019721b21361ffaae19c0b754e126d02a5a4e86713939fd1e3c8c9e31c5fb",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+  }
+}

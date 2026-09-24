@@ -1,0 +1,3 @@
+{"task": "trajectory", "parity": {"result_sha256": true, "optimizer_state_sha256": true, "global_rng_sha256": true, "noise_stream_state_sha256": true, "applied": true, "live": true}, "original_live": {"identity_mse": 0.0034514048602432013}, "wrapped_live": {"identity_mse": 0.0034514048602432013}}
+{"task": "mode_hold", "parity": {"result_sha256": true, "optimizer_state_sha256": true, "global_rng_sha256": true, "noise_stream_state_sha256": true, "applied": true, "live": true}, "original_live": {"modes": 7, "hq": 0.369384765625}, "wrapped_live": {"modes": 7, "hq": 0.369384765625}}
+{"task": "trajectory", "method": "simultaneous_adam_control", "verdict": "FAIL", "live": {"identity_mse": 0.25443434715270996}}

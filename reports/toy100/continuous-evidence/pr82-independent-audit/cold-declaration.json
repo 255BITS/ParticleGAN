@@ -1,0 +1,26 @@
+{
+  "seed": 0,
+  "task_order": [
+    "trajectory",
+    "mode_hold"
+  ],
+  "budgets": {
+    "mode_hold": 1200,
+    "trajectory": 400
+  },
+  "stop_at_first_failed_host": true,
+  "shared_gate_eligible": false,
+  "scratch_optimizer_policy": "alternating_adam_with_critic_gated_own_curvature_bound",
+  "solver": {
+    "curvature_bound": 0.25,
+    "advantage_gate": null,
+    "bound_d": true,
+    "d_curvature_bound": 3.0,
+    "update_order": "alternating"
+  },
+  "source": {
+    "alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "alternating_curvature_probe.py": "6cc3e71ed9c8a6cc314a19c674e7cad1e725c4f2df4fdb79d9c8ffd682e61b8a"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "archive_pr82_adapter_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+  "archived_config_equal": true,
+  "archived_declaration_equal": true,
+  "environment": {
+    "aten_cpu_capability": "avx2",
+    "device": "cpu",
+    "mkldnn_max_cpu_isa": "AVX2",
+    "python": "3.12.13",
+    "threads": 1,
+    "torch": "2.13.0+cu126"
+  },
+  "pr82_commit": "c1515197",
+  "schema": "pr82-independent-audit-v1",
+  "scope": "One seed-0 PR82 .25 G / 3 D reproduction, one warm fork, unbounded alternating parity on both hosts, one simultaneous trajectory control. No seed sweep or parameter grid.",
+  "source_sha256": {
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+    "benchmarks/transfer_suite/compare_defaults.py": "b143283df26d6d35b20d9d12ccfb9bd8ca5a4916af534bac837bcdd9ea8f6202",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "reports/toy100/alternating_curvature_probe.py": "6cc3e71ed9c8a6cc314a19c674e7cad1e725c4f2df4fdb79d9c8ffd682e61b8a",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/alternating_curvature_warm_probe.py": "f7e219854e04b5dbcbfad0046361b4e01f3d6ab917e3f92fc2d7b24f73f8209b",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/pr82_alternating_parity_audit.py": "cb1019721b21361ffaae19c0b754e126d02a5a4e86713939fd1e3c8c9e31c5fb"
+  },
+  "stored_sha256": {
+    "cold-config.json": "77711878e132f3dc8f208128eb20bff34e8f5a3b08453ed4496c8bdb5af94a44",
+    "cold-declaration.json": "8212ee817c0cba6db80105e9dd96600b8e1ea42a0b3d92bf79edc5fbbb3326d3",
+    "cold-mode_hold.json.gz": "ffb0e137967930bdb580c02d6079a4dd0a46f7b93f053348ab3ac3ecf137776c",
+    "cold-status.json": "d5dbcf82d1aeb2337c3978ca32f70143199b69b44424adb84c8415ae0e1d4502",
+    "cold-trajectory.json.gz": "03f07d1cbf36ba5efacf28b0cf2bade3ce499ea379205a2200f7e26438557036",
+    "cold.log": "62a8a80a9e4a22d27de7fa95eb6eb005336ceb12d89a55982168bce3e8474481",
+    "parity-full.json": "58c26b602643c950e3579f972e90e8bfdaaf63a767699fcebb65a00fd82f8bc7",
+    "parity-full.log": "f69a8a146327fd036831198d28c9024002b59189c2e8e5d9d6b51f0c27b623f9",
+    "warm-candidate.json.gz": "8f8d4d3f3a45b067e33ebbec49195e6d578b95224c0670a8dbcf4b3ab0b66182",
+    "warm-constant.json.gz": "fb35c0cf006064436ee6408f37c5954397d56a21bf96ac980141a497b414e9c0",
+    "warm-declaration.json": "d60a3dea851c8eebeb197d86ad3b38f4be3eb54e995973a7b83d36930d5b748e",
+    "warm-identity.json.gz": "a1c17e9e5df368370a7bf7a681243fc53665f9a48118d8e7151113405ac83524",
+    "warm-summary.json": "57440a0c1cf4cee3d1f24169d82d38c001be31d765a5994056913b3924ecf272"
+  }
+}
