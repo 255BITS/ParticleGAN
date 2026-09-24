@@ -190,7 +190,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
 
     def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False,
                  ratio_loosen=None,ratio_tighten=None,acq_ratio=1.5,rest_ratio=4.,
-                 mode_loosen=None,boost_steps=0,boost_cap=None):
+                 mode_loosen=None,boost_steps=0,boost_cap=None,latent_nudge=False,latent_step=.02):
         super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
         self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
         if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
@@ -208,6 +208,9 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         if boost_cap is not None and (not math.isfinite(boost_cap) or boost_cap<=0):raise ValueError('invalid boost cap')
         self.boost_steps=boost_steps
         self.boost_cap=boost_cap
+        self.latent_nudge=bool(latent_nudge)
+        if not math.isfinite(latent_step) or latent_step<0:raise ValueError('invalid latent step')
+        self.latent_step=latent_step
 
     def phases(self,step,opt_d,opt_g,local):
         if not self.enabled or step<self.start_step:
@@ -237,6 +240,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         else:
             self._step_g_cap=None
         rng_before=self._rng(streams);self.advantage=None
+        self._local=local
         self.row=dict(outer_step=self.outer_steps+1,occupied_modes=occupied,modes_latched=self._modes_latched)
         rng_after=None
         for phase in range(3):
@@ -293,6 +297,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
                 self.row['g_bound']=cap
             factor=min(1.,cap/rho) if rho>0 else 1.
             for p,b,n in zip(self._params(opt_g),self.g_base,self.g1):p.copy_(torch.lerp(b,n,factor) if factor<1 else n)
+            self._nudge_stray_latent()
             self.row['g']=dict(rho=rho,factor=factor,cap=cap,rho_ratio=rho_ratio)
             self.row['rho_ratio']=rho_ratio
             self.row['g_bound']=cap
@@ -322,16 +327,72 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
             nearest=torch.cdist(points,means).min(0).values
         return int((nearest<=.21).sum())
 
+    def _nudge_stray_latent(self):
+        """Move one prior row along the critic, with the generator network frozen.
+
+        Fires only for 2D support and only when one particle's critic logit sits
+        well below the median. No mode count, clock, or curvature-ratio cap.
+        Trajectory outputs are not 2D, so this does not touch that host.
+        """
+        if not self.latent_nudge:return
+        local=getattr(self,'_local',None) or {}
+        if local.get('slow') is not None:return
+        generator,prior,critic=local.get('generator'),local.get('prior'),local.get('critic')
+        if generator is None or prior is None or critic is None or not hasattr(prior,'z'):return
+        z=prior.z
+        if z.ndim!=2 or not z.requires_grad:return
+        clean=getattr(generator,'model',generator)
+        with torch.enable_grad():
+            points=clean(z)
+            if points.ndim!=2 or points.shape[-1]!=2 or points.shape[0]!=z.shape[0]:return
+            logits=critic(points).reshape(-1)
+            if logits.shape[0]!=z.shape[0]:return
+            spread=float((logits.max()-logits.min()).detach())
+            if spread<1e-4:return
+            worst=int(logits.argmin())
+            gap=float((logits.median()-logits[worst]).detach())
+            if gap<=.5*spread:return
+            grad,=torch.autograd.grad(logits[worst],z)
+        row=grad[worst].detach()
+        norm=float(row.norm())
+        if norm<1e-8 or not math.isfinite(norm):return
+        with torch.no_grad():
+            z[worst].add_(row,alpha=self.latent_step/norm)
+        self.row['latent_nudge']=worst
+        self.row['latent_gap']=gap
+
+
+    def early_acquisition(self):
+        """Measurement only: when coverage first hits 8, and how long it holds before update 1000."""
+        occupied=[(r['outer_step'], r.get('occupied_modes')) for r in self.records if r.get('occupied_modes') is not None]
+        first=next((step for step,count in occupied if count>=8), None)
+        hold=0
+        if first is not None and first<1000:
+            for step,count in occupied:
+                if step<first:continue
+                if step>=1000:break
+                if count>=8:hold+=1
+                else:break
+        return dict(first_eight=first,hold_before_1000=hold)
+
+    def receipt(self):
+        value=super().receipt()
+        value['early_acquisition']=self.early_acquisition()
+        value['center_critic']=getattr(self,'center_critic',False)
+        return value
+
 
 @contextmanager
-def alternating_curvature(task='mode_hold',bound_d=False,**options):
+def alternating_curvature(task='mode_hold',bound_d=False,center_critic=False,**options):
     from benchmarks.locked_shared import mode_hold,trajectory
+    from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
     module={'mode_hold':mode_hold,'trajectory':trajectory}[task]
     tree,_,original_sha=transformed_function(module,task)
     calls=[n for n in ast.walk(tree) if isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute) and n.func.attr=='phases']
     if len(calls)!=1:raise RuntimeError('expected one phase iterator')
     calls[0].args.append(ast.Call(func=ast.Name(id='locals',ctx=ast.Load()),args=[],keywords=[]));ast.fix_missing_locations(tree)
     source=ast.unparse(tree)+'\n';recorder=(BothBoundRecorder if bound_d else AlternatingCurvatureRecorder)(**options)
+    recorder.center_critic=center_critic
     recorder.host_source=dict(task=task,original_function_sha256=original_sha,generated_function_sha256=sha(source.encode()))
     ordinary_step=torch.optim.Adam.step
     original_d_loss=GANLoss.d_loss
@@ -347,4 +408,10 @@ def alternating_curvature(task='mode_hold',bound_d=False,**options):
         stack.enter_context(patch.object(torch.optim.Adam,'step',
             lambda optimizer,closure=None:recorder.step(optimizer,ordinary_step,closure)))
         stack.enter_context(patch.object(GANLoss,'d_loss',observed_d_loss))
+        original_forward=SimpleMLPDiscriminator.forward
+        def centered_forward(self,x):
+            if recorder.center_critic and recorder.enabled and not recorder.passthrough and x.ndim>=2 and x.shape[-1]==2:
+                x=x-x.mean(dim=0,keepdim=True).detach()
+            return original_forward(self,x)
+        stack.enter_context(patch.object(SimpleMLPDiscriminator,'forward',centered_forward))
         yield recorder,source

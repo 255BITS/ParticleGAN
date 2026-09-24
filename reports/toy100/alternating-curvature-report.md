@@ -168,3 +168,7 @@ Both keep D bound 3 and the nominal G cap .25, and neither changes cold trajecto
 | Ring-only G cap .35 for the first 300 updates, then .25 | Boost ran 300 steps. Terminal modes/HQ: 5/.506, 6/.821, 6/.821, 6/.811, 6/.820 |
 
 No 2400 hold. v10 remains the ring near-miss.
+
+## Centered critic (G fixed at v10; fails)
+
+The critic scores 2D inputs after subtracting a detached batch mean. Generator curvature stays at v10 (G cap .25, D bound 3). No mode-count controller and no G-cap schedule. Cold trajectory is unchanged because its critic input is not 2D: MSE .000943, suffix 18. The warm fork fails 0/200 (final 0 modes, HQ 0). Cold ring never reaches 8 modes (`first_eight` null, `hold_before_1000` 0); every checkpoint from 200 through 1200 is 0 modes / HQ 0. Removing absolute position from the critic removes the signal that places the cloud on the ring.
