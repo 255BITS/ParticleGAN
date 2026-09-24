@@ -141,3 +141,28 @@ def test_per_group_bound_scales_network_and_prior_groups_separately():
     assert x1.item() == pytest.approx(1. - min(1., .25 / network["rho"]))
     assert x2.item() == pytest.approx(1. - min(1., .25 / prior["rho"]))
     assert prior["factor"] == 1. and network["factor"] < 1.
+
+
+def test_per_particle_bound_frees_flat_particle_rows_and_keeps_network_on_joint_factor():
+    # Network scalar w (curvature 3) and a 2x1 prior: row 0 sharp (3), row 1 flat (.01).
+    w = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    z = torch.nn.Parameter(torch.tensor([[1.], [1.]], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([{"params": [w]}, {"params": [z], "_comparison_prior": True}],
+                             lr=1., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+    curv = torch.tensor([[3.], [.01]], dtype=torch.float64)
+    recorder = BothBoundRecorder(curvature_bound=.25, d_curvature_bound=1e9, per_particle=True)
+    for phase in recorder.phases(0, opt_d, opt_g, {}):
+        y.grad = (-w + 2. * y).detach().clone()
+        recorder.step(opt_d, torch.optim.Adam.step)
+        w.grad = (y + 3. * w).detach().clone()
+        z.grad = (y + curv * z).detach().clone()
+        recorder.step(opt_g, torch.optim.Adam.step)
+    row = recorder.records[-1]
+    joint = row["g"]["factor"]
+    assert w.item() == pytest.approx(1. - joint)
+    sharp, flat = row["particles"]
+    assert flat["factor"] == 1. and sharp["factor"] < 1.
+    assert z[1, 0].item() == pytest.approx(0.)
+    assert z[0, 0].item() == pytest.approx(1. - sharp["factor"])

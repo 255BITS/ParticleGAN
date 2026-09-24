@@ -157,7 +157,10 @@ class AlternatingCurvatureRecorder:
             smoothed_ratio=stats([r.get('smoothed_ratio') for r in closed]),per_group=getattr(self,'per_group',False),
             network_factor=stats([g['factor'] for r in closed for g in r.get('g_groups',[]) if not g['prior']]),
             prior_factor=stats([g['factor'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),
-            prior_rho=stats([g['rho'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),critic_advantage=stats([r['critic_advantage'] for r in self.records]),
+            prior_rho=stats([g['rho'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),
+            per_particle=getattr(self,'per_particle',False),
+            particle_factor=stats([q['factor'] for r in closed for q in r.get('particles',[])]),
+            particle_factor_max=stats([max(q['factor'] for q in r['particles']) for r in closed if r.get('particles')]),critic_advantage=stats([r['critic_advantage'] for r in self.records]),
             gradient_evaluations_per_outer_step=(sum(3 if 'd' in r else 1 if r['gate_open'] else 2 for r in self.records)/self.outer_steps) if self.outer_steps else None,
             moment_updates_per_outer_step=1,rng_replay_verified=self.rng_replay_verified,
             update_order='alternating: D Adam step, then G+prior Adam step against the new D',
@@ -202,16 +205,23 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
     With ``per_group`` the G network and particle-prior parameter groups each
     get their own ratio and factor from the same replay. A prior particle's
     latent moves only its own output, while a network step moves every output.
+
+    With ``per_particle`` the network and every non-prior parameter keep the
+    joint G factor, and each prior particle's latent row instead gets its own
+    ratio and factor from the same replay. A particle resting in a sharp basin
+    stays bounded, while one in a flat region between basins can move further
+    through its own latent without a global network step.
     """
 
     def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False,
-                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False):
+                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False,per_particle=False):
         super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
         if ratio_reference is not None and (not math.isfinite(ratio_reference) or ratio_reference<=0
                                             or not ratio_span>=1 or not 0<=ratio_decay<1):
             raise ValueError('invalid curvature-ratio controller')
         self.ratio_reference=ratio_reference;self.ratio_span=ratio_span;self.ratio_decay=ratio_decay
-        self.log_ratio=None;self.per_group=per_group
+        self.log_ratio=None;self.per_group=per_group;self.per_particle=per_particle
+        if per_group and per_particle:raise ValueError('choose per-group or per-particle bounds')
         self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
         if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
 
@@ -306,6 +316,22 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
                     groups.append(dict(prior=bool(group.get('_comparison_prior')),rho=group_rho,factor=group_factor))
                 self.row['g_groups']=groups
             for p,b,n,f in zip(self._params(opt_g),self.g_base,self.g1,factors):p.copy_(torch.lerp(b,n,f) if f<1 else n)
+            if self.per_particle:
+                g1_now=grads(opt_g);index=0;rows=[]
+                for group in opt_g.param_groups:
+                    for p in group['params']:
+                        if group.get('_comparison_prior') and p.dim()==2:
+                            delta=(self.g1[index]-self.g_base[index]).double();m=self.metric_g[index]
+                            change=(g1_now[index]-self.gg0[index]).double()
+                            num=(m*change.square()).sum(1);den=(delta.square()/m).sum(1)
+                            particle_rho=torch.where(den>0,(num/den.clamp_min(1e-300)).sqrt(),torch.zeros_like(num))
+                            if not torch.isfinite(particle_rho).all():raise FloatingPointError('nonfinite particle ratio')
+                            particle_factor=torch.where(particle_rho>0,(bound/particle_rho).clamp(max=1.),torch.ones_like(num))
+                            p.copy_(self.g_base[index]+(particle_factor[:,None]*delta).to(p.dtype))
+                            rows=[dict(rho=float(r),factor=float(f)) for r,f in zip(particle_rho,particle_factor)]
+                        index+=1
+                if not rows:raise RuntimeError('per-particle bound needs a two-dimensional prior group')
+                self.row['particles']=rows
             self.row['g']=dict(rho=rho,factor=factor)
         return None
 
