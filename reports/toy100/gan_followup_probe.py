@@ -29,9 +29,11 @@ FACTORIES = {
                    dict(ramp="stall")),
     "reachstall_g125": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                         dict(ramp="stall", g_curvature_bound=.125)),
+    "trans": ("reports.toy100.pr84_translation_trust", "pr84_translation_trust"),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
+    "reports/toy100/pr84_translation_trust.py",
     "reports/toy100/pr84_reach_candidate.py",
     "reports/toy100/pr84_smoothed_candidate.py",
     "reports/toy100/alternating_curvature_scratch.py",
@@ -149,7 +151,9 @@ def stay(output, method, steps):
                 calls=calls + (steps - outer), moment_updates=steps)
             recorder.accounting(recorder.rows[recorder.optimizers[0]]["calls"], recorder.outer_steps)
         evidence = run_probe(config, mode="constant", steps=steps, diagnostic_every=10,
-                             checkpoint_hook_step=1, checkpoint_hook=hook)
+                             checkpoint_hook_step=1, checkpoint_hook=hook,
+                             log=lambda row: emit(**{k: row[k] for k in ("event", "step", "modes", "hq")
+                                                     if k in row}))
     diag = evidence.get("diagnostic") or []
     late = [p for p in diag if p["step"] > 1200]
     fails = [p for p in late if not (p["modes"] == 8 and p["hq"] >= .9)]
@@ -163,7 +167,8 @@ def stay(output, method, steps):
                final=(diag[-1]["step"], diag[-1]["modes"], round(diag[-1]["hq"], 4)) if diag else None,
                dynamics=_dynamics(recorder))
     records = [dict(step=r["outer_step"], sharp=r.get("critic_sharpness"), width=r.get("critic_width"),
-                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"])
+                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"],
+                    translation=r["g"].get("translation"), translation_factor=r["g"].get("translation_factor"))
                for r in getattr(recorder, "records", [])]
     (output / "stay.json").write_text(json.dumps(dict(summary=row, diagnostic=diag, records=records),
                                                  default=float) + "\n")
@@ -178,6 +183,8 @@ def main():
     parser.add_argument("--tasks", default="trajectory,mode_hold")
     parser.add_argument("--steps", type=int, default=2400)
     args = parser.parse_args()
+    import torch
+    torch.set_num_threads(1)
     declare(args.output, args.phase, args.method)
     if args.phase == "warm":
         warm(args.output, args.method)
