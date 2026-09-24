@@ -141,10 +141,43 @@ falling to .00773 over the last50 updates. Of405 rejected solves,395 failed
 the nonlinear residual,6 exhausted the linear residual target, and4 exceeded
 the proposed-correction bound. Thus more GMRES work alone is not supported
 as the next fix. Cold mode-hold and shift tests were skipped after this
-acquisition failure. The next bounded research comparison is cross-only
+acquisition failure. The next bounded comparison used cross-only
 competitive response: the [CGD authors](https://f-t-s.github.io/projects/cgd/)
 explicitly distinguish it from the full-Jacobian Newton response used here.
-No result for that comparison is claimed in this report.
+
+That comparison retained the same metric and solver limits but included
+only cross-player Jacobian blocks, treating G and its prior as one player.
+Two separated finite-difference perturbations recover those blocks despite
+the host's detach and temporary requires-grad flags. The nonlinear residual
+also uses each player's own base parameters and the opponent's proposed
+parameters; a full joint residual is recorded as an observation, not used
+for acceptance. A quadratic/bilinear analytic case confirms that own
+curvature is omitted.
+
+Cross-only response failed warm stability at196/200 checks (minimum HQ
+.88940), despite final8 modes/HQ .98853. Mean alpha was .75938 and cost was
+2,729 gradient evaluations per player for200 updates. Cold trajectory ended
+at MSE .020058 versus the unchanged .02 threshold, with0/24 passing checks;
+it is still a failure, with no qualifying suffix. It used5,846 evaluations
+for400 moment updates. This is much better acquisition than full-Jacobian
+response, but does not solve sustained stability or shared acquisition.
+
+The cold cross-only run was mistakenly launched in the same tool batch
+before consuming the warm failure verdict. It completed before cancellation
+could take effect. Its evidence is retained as an unplanned diagnostic,
+with an explicit protocol-deviation receipt, and has no eligibility credit.
+No cold mode-hold, extended hold or shift run followed that failed row.
+
+For a cheap next investigation, replay the warm failures at updates1194–1197
+and compare their functional movement with successful acquisition updates.
+All four failed warm updates used alpha1. Their accepted cross residuals were
+.223/.177/.320/.132; full-joint residuals were .581/.571/.478/.474. Simply
+adding a full-joint residual<=.5 guard would miss two of those failures while
+rejecting133/200 warm and305/400 cold accepted proposals. The existing
+receipts therefore do not support another residual-threshold sweep. The
+unresolved problem is retaining useful opponent response during acquisition
+while avoiding the later functional drift; longer hold and matched shift
+versus frozen-control tests remain required for any future survivor.
 
 Exact values and raw artifact paths are in
 [the compact diagnosis](continuous-mechanism-diagnosis.json). Scratch scripts

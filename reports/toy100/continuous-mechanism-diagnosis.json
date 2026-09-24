@@ -587,5 +587,51 @@
       "artifacts/continuous-implicit-cold/trajectory.json"
     ],
     "adapter_run_sha256": "f669cda71935cd97ace70d12cddf0dd6333cdc92f91e9ba73a7037df199ba196"
+  },
+  "cross_only_competitive_response": {
+    "warm_status": "FAIL",
+    "warm_passing_checks": 196,
+    "warm_checks": 200,
+    "warm_min_hq": 0.889404296875,
+    "warm_final": {
+      "modes": 8,
+      "hq": 0.988525390625
+    },
+    "warm_alpha": {
+      "min": 0.125,
+      "mean": 0.759375,
+      "max": 1.0
+    },
+    "warm_gradient_evaluations": 2729,
+    "warm_extra_queries": 2529,
+    "warm_moment_updates": 200,
+    "cold_trajectory_mse": 0.020058035850524902,
+    "cold_passing_checks": 0,
+    "cold_gradient_evaluations": 5846,
+    "cold_moment_updates": 400,
+    "cold_alpha": {
+      "min": 0.015625,
+      "mean": 0.2024609375,
+      "max": 1.0,
+      "last50_mean": 0.0509375
+    },
+    "cold_rejections": {
+      "nonlinear_residual": 250,
+      "correction_bound": 120,
+      "linear_residual": 1
+    },
+    "protocol_deviation": {
+      "deviation": "Cold trajectory was launched in same tool batch before consuming warm FAIL verdict. Cancellation was attempted after notice but the 21.7-second episode had already completed.",
+      "classification": "unplanned follow-up diagnostic; no gate eligibility credit",
+      "warm_status": "FAIL",
+      "warm_passing_checks": 196,
+      "warm_checks": 200
+    },
+    "continued_to_mode_hold": false,
+    "raw": [
+      "artifacts/continuous-cross-competitive-warm/cross_only.json",
+      "artifacts/continuous-cross-competitive-cold/trajectory.json"
+    ],
+    "adapter_run_sha256": "da4b09a0c6b59c0b333f9140a21d02a16771ac5501a09e691dfcde6dfa7f15e7"
   }
 }
