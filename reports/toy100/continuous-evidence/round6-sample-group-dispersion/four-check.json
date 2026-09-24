@@ -1,0 +1,653 @@
+{
+  "scope": "four free-output/synthetic association checks; no host training",
+  "input_file_sha256": "9c3b4ec2d9fc2ad03625bd58de6c158badebfde1e76e567182e3a755ca223619",
+  "input_state_sha256": "1706ae9c1ca25010cb08e2c03f79478180add8620996594e9f30e48705223a72",
+  "source_sha256": {
+    "reports/toy100/sample_group_dispersion_memory.py": "d69d067acfd1af4e3743a0a18f557bf227c40e6be3930211c454a7b3601d1b7b",
+    "reports/toy100/sample_group_dispersion_filter.py": "a5ceb77db78c95ecdb0268984ea9d0149689122cfbc30db588a8ef34b847e279",
+    "reports/toy100/sample_group_memory.py": "38e154c82dc2fc1b4636ea12351e8ba55c484d2bd6ca60ebd206cbce01481b10",
+    "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+  },
+  "established_then_omitted": {
+    "initial": {
+      "current_groups": 8,
+      "remembered_groups": 8,
+      "half_cached_separation": null,
+      "matched": [],
+      "added": [
+        {
+          "current": 0,
+          "remembered": 0,
+          "current_rms": 0.10357753667747371,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 1,
+          "remembered": 1,
+          "current_rms": 0.09291937193911376,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 2,
+          "remembered": 2,
+          "current_rms": 0.10304600541079441,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 3,
+          "remembered": 3,
+          "current_rms": 0.10549626440512844,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 4,
+          "remembered": 4,
+          "current_rms": 0.0931589737741001,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 5,
+          "remembered": 5,
+          "current_rms": 0.09460577070717545,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 6,
+          "remembered": 6,
+          "current_rms": 0.09801999500022524,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 7,
+          "remembered": 7,
+          "current_rms": 0.09567727718228922,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        }
+      ],
+      "absent_remembered": [],
+      "counts": [
+        20,
+        21,
+        16,
+        19,
+        6,
+        17,
+        18,
+        11
+      ],
+      "radii": [
+        0.10357753667747371,
+        0.09291937193911376,
+        0.10304600541079441,
+        0.10549626440512844,
+        0.0931589737741001,
+        0.09460577070717545,
+        0.09801999500022524,
+        0.09567727718228922
+      ],
+      "current_largest_mst_gap": 1.8459691745146152
+    },
+    "omitted": {
+      "current_groups": 7,
+      "remembered_groups": 8,
+      "half_cached_separation": 1.1200580676652345,
+      "matched": [
+        {
+          "current": 0,
+          "remembered": 4,
+          "distance": 0.01973797687114158,
+          "current_rms": 0.10697438111854633,
+          "cached_rms": 0.0931589737741001,
+          "acceptance_radius": 0.20013335489264644
+        },
+        {
+          "current": 1,
+          "remembered": 1,
+          "distance": 0.06232202172530394,
+          "current_rms": 0.09644845676980406,
+          "cached_rms": 0.09291937193911376,
+          "acceptance_radius": 0.18936782870891783
+        },
+        {
+          "current": 2,
+          "remembered": 6,
+          "distance": 0.01564649587743077,
+          "current_rms": 0.09452103327629403,
+          "cached_rms": 0.09801999500022524,
+          "acceptance_radius": 0.19254102827651925
+        },
+        {
+          "current": 3,
+          "remembered": 5,
+          "distance": 0.028737779806622503,
+          "current_rms": 0.09426412424016983,
+          "cached_rms": 0.09460577070717545,
+          "acceptance_radius": 0.1888698949473453
+        },
+        {
+          "current": 4,
+          "remembered": 0,
+          "distance": 0.04581777392062387,
+          "current_rms": 0.11138567844529158,
+          "cached_rms": 0.10357753667747371,
+          "acceptance_radius": 0.21496321512276528
+        },
+        {
+          "current": 5,
+          "remembered": 2,
+          "distance": 0.02205039238011228,
+          "current_rms": 0.10001834527913124,
+          "cached_rms": 0.10304600541079441,
+          "acceptance_radius": 0.20306435068992565
+        },
+        {
+          "current": 6,
+          "remembered": 7,
+          "distance": 0.01990447886885841,
+          "current_rms": 0.0971072364333045,
+          "cached_rms": 0.09567727718228922,
+          "acceptance_radius": 0.19278451361559373
+        }
+      ],
+      "added": [],
+      "absent_remembered": [
+        3
+      ],
+      "counts": [
+        41,
+        40,
+        32,
+        19,
+        22,
+        34,
+        34,
+        34
+      ],
+      "radii": [
+        0.11005685664255613,
+        0.09959935213450605,
+        0.10214024311101268,
+        0.10549626440512844,
+        0.10376281454457158,
+        0.09552200522385454,
+        0.09670511118072915,
+        0.09709446816139457
+      ],
+      "current_largest_mst_gap": 1.8637800092389525
+    },
+    "absent_centroid_bitwise_preserved": true,
+    "retained_grade": {
+      "modes": 8,
+      "hq": 1.0,
+      "particle_draws": [
+        338,
+        356,
+        332,
+        353,
+        321,
+        314,
+        325,
+        345,
+        363,
+        341,
+        339,
+        369
+      ],
+      "particle_hq_rate": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "current_bank_only_grade": {
+      "modes": 7,
+      "hq": 1.0,
+      "particle_draws": [
+        338,
+        356,
+        332,
+        353,
+        321,
+        314,
+        325,
+        345,
+        363,
+        341,
+        339,
+        369
+      ],
+      "particle_hq_rate": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "incomplete_then_discovered": {
+    "initial": {
+      "current_groups": 7,
+      "remembered_groups": 7,
+      "half_cached_separation": null,
+      "matched": [],
+      "added": [
+        {
+          "current": 0,
+          "remembered": 0,
+          "current_rms": 0.10697438111854633,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 1,
+          "remembered": 1,
+          "current_rms": 0.09644845676980406,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 2,
+          "remembered": 2,
+          "current_rms": 0.09452103327629403,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 3,
+          "remembered": 3,
+          "current_rms": 0.09426412424016983,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 4,
+          "remembered": 4,
+          "current_rms": 0.11138567844529158,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 5,
+          "remembered": 5,
+          "current_rms": 0.10001834527913124,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        },
+        {
+          "current": 6,
+          "remembered": 6,
+          "current_rms": 0.0971072364333045,
+          "nearest_cached_distance": null,
+          "acceptance_radius": null
+        }
+      ],
+      "absent_remembered": [],
+      "counts": [
+        16,
+        19,
+        16,
+        17,
+        21,
+        16,
+        23
+      ],
+      "radii": [
+        0.10697438111854633,
+        0.09644845676980406,
+        0.09452103327629403,
+        0.09426412424016983,
+        0.11138567844529158,
+        0.10001834527913124,
+        0.0971072364333045
+      ],
+      "current_largest_mst_gap": 1.8637800092389525
+    },
+    "discovered": {
+      "current_groups": 8,
+      "remembered_groups": 8,
+      "half_cached_separation": 1.127457042201555,
+      "matched": [
+        {
+          "current": 0,
+          "remembered": 4,
+          "distance": 0.04581777392062387,
+          "current_rms": 0.10357753667747371,
+          "cached_rms": 0.11138567844529158,
+          "acceptance_radius": 0.21496321512276528
+        },
+        {
+          "current": 1,
+          "remembered": 1,
+          "distance": 0.06232202172530394,
+          "current_rms": 0.09291937193911376,
+          "cached_rms": 0.09644845676980406,
+          "acceptance_radius": 0.18936782870891783
+        },
+        {
+          "current": 2,
+          "remembered": 5,
+          "distance": 0.02205039238011228,
+          "current_rms": 0.10304600541079441,
+          "cached_rms": 0.10001834527913124,
+          "acceptance_radius": 0.20306435068992565
+        },
+        {
+          "current": 4,
+          "remembered": 0,
+          "distance": 0.01973797687114158,
+          "current_rms": 0.0931589737741001,
+          "cached_rms": 0.10697438111854633,
+          "acceptance_radius": 0.20013335489264644
+        },
+        {
+          "current": 5,
+          "remembered": 3,
+          "distance": 0.028737779806622503,
+          "current_rms": 0.09460577070717545,
+          "cached_rms": 0.09426412424016983,
+          "acceptance_radius": 0.1888698949473453
+        },
+        {
+          "current": 6,
+          "remembered": 2,
+          "distance": 0.01564649587743077,
+          "current_rms": 0.09801999500022524,
+          "cached_rms": 0.09452103327629403,
+          "acceptance_radius": 0.19254102827651925
+        },
+        {
+          "current": 7,
+          "remembered": 6,
+          "distance": 0.01990447886885841,
+          "current_rms": 0.09567727718228922,
+          "cached_rms": 0.0971072364333045,
+          "acceptance_radius": 0.19278451361559373
+        }
+      ],
+      "added": [
+        {
+          "current": 3,
+          "remembered": 7,
+          "current_rms": 0.10549626440512844,
+          "nearest_cached_distance": 2.2749687378369763,
+          "acceptance_radius": 0.21688194285042
+        }
+      ],
+      "absent_remembered": [],
+      "counts": [
+        22,
+        40,
+        34,
+        34,
+        41,
+        32,
+        34,
+        19
+      ],
+      "radii": [
+        0.10376281454457158,
+        0.09959935213450605,
+        0.09670511118072915,
+        0.09552200522385454,
+        0.11005685664255613,
+        0.10214024311101268,
+        0.09709446816139457,
+        0.10549626440512844
+      ],
+      "current_largest_mst_gap": 1.8459691745146152
+    },
+    "initial_grade": {
+      "modes": 7,
+      "hq": 1.0,
+      "particle_draws": [
+        338,
+        356,
+        332,
+        353,
+        321,
+        314,
+        325,
+        345,
+        363,
+        341,
+        339,
+        369
+      ],
+      "particle_hq_rate": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "first_mm_grade": {
+      "modes": 7,
+      "hq": 0.915771484375,
+      "particle_draws": [
+        338,
+        356,
+        332,
+        353,
+        321,
+        314,
+        325,
+        345,
+        363,
+        341,
+        339,
+        369
+      ],
+      "particle_hq_rate": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "second_mm_grade": {
+      "modes": 8,
+      "hq": 1.0,
+      "particle_draws": [
+        338,
+        356,
+        332,
+        353,
+        321,
+        314,
+        325,
+        345,
+        363,
+        341,
+        339,
+        369
+      ],
+      "particle_hq_rate": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "serialized_state_exact": true
+  },
+  "incomplete_cache_new_center": {
+    "old_half_separation_rule": {
+      "current_groups": 2,
+      "remembered_groups": 2,
+      "matching_radius": 2.0,
+      "matched": [
+        {
+          "current": 0,
+          "remembered": 0,
+          "distance": 0.0
+        },
+        {
+          "current": 1,
+          "remembered": 0,
+          "distance": 1.0
+        }
+      ],
+      "added": [],
+      "absent_remembered": [
+        1
+      ],
+      "counts": [
+        12,
+        4
+      ],
+      "current_largest_mst_gap": 1.0
+    },
+    "revised_rms_overlap_rule": {
+      "current_groups": 2,
+      "remembered_groups": 3,
+      "half_cached_separation": 2.0,
+      "matched": [
+        {
+          "current": 0,
+          "remembered": 0,
+          "distance": 0.0,
+          "current_rms": 0.0,
+          "cached_rms": 0.0,
+          "acceptance_radius": 0.0
+        }
+      ],
+      "added": [
+        {
+          "current": 1,
+          "remembered": 2,
+          "current_rms": 0.0,
+          "nearest_cached_distance": 1.0,
+          "acceptance_radius": 0.0
+        }
+      ],
+      "absent_remembered": [
+        1
+      ],
+      "counts": [
+        8,
+        4,
+        4
+      ],
+      "radii": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "current_largest_mst_gap": 1.0
+    },
+    "revised_centers": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        4.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0
+      ]
+    ]
+  },
+  "single_cached_group_new_center": {
+    "result": {
+      "current_groups": 2,
+      "remembered_groups": 2,
+      "half_cached_separation": null,
+      "matched": [
+        {
+          "current": 0,
+          "remembered": 0,
+          "distance": 0.0,
+          "current_rms": 0.0,
+          "cached_rms": 0.0,
+          "acceptance_radius": 0.0
+        }
+      ],
+      "added": [
+        {
+          "current": 1,
+          "remembered": 1,
+          "current_rms": 0.0,
+          "nearest_cached_distance": 1.0,
+          "acceptance_radius": 0.0
+        }
+      ],
+      "absent_remembered": [],
+      "counts": [
+        8,
+        4
+      ],
+      "radii": [
+        0.0,
+        0.0
+      ],
+      "current_largest_mst_gap": 1.0
+    },
+    "centers": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0
+      ]
+    ]
+  },
+  "exact_cached_support_rest": true,
+  "torch_rng_unchanged": true,
+  "malformed_bool_count_rejected": true
+}

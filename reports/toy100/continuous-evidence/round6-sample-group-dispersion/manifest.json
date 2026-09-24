@@ -1,0 +1,57 @@
+{
+  "files": {
+    "four-check.json": {
+      "bytes": 15122,
+      "sha256": "337178e206acfd95a1d5e9fc8772b6575c71a0e64d259188c5225fdf198dba31"
+    },
+    "four-check.json.gz": {
+      "bytes": 2242,
+      "raw_bytes": 15122,
+      "raw_sha256": "337178e206acfd95a1d5e9fc8772b6575c71a0e64d259188c5225fdf198dba31",
+      "sha256": "559ef32a9ebc0c22822c49b9668b2141b33bbefac5590d3649a599f019066e03"
+    },
+    "input-result.json.gz": {
+      "bytes": 8238,
+      "raw_bytes": 34296,
+      "raw_sha256": "9c3b4ec2d9fc2ad03625bd58de6c158badebfde1e76e567182e3a755ca223619",
+      "sha256": "3d13b796a1b1bfeebb8789c189aec742d0c7ac4b7a0cd4d663b89d1c7d1190d2"
+    },
+    "source/benchmarks/locked_shared/mode_hold.py": {
+      "bytes": 10774,
+      "sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    "source/reports/toy100/anchor_missing_batch_group.py": {
+      "bytes": 3239,
+      "sha256": "82ee9ebf1599c05d39e3b012c4c45d3218c6788e9adf1e334fd18214c43efdbd"
+    },
+    "source/reports/toy100/coverage_fixed_eval.py": {
+      "bytes": 3996,
+      "sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e"
+    },
+    "source/reports/toy100/sample_group_anchor.py": {
+      "bytes": 12791,
+      "sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037"
+    },
+    "source/reports/toy100/sample_group_dispersion_filter.py": {
+      "bytes": 6746,
+      "sha256": "a5ceb77db78c95ecdb0268984ea9d0149689122cfbc30db588a8ef34b847e279"
+    },
+    "source/reports/toy100/sample_group_dispersion_memory.py": {
+      "bytes": 5371,
+      "sha256": "d69d067acfd1af4e3743a0a18f557bf227c40e6be3930211c454a7b3601d1b7b"
+    },
+    "source/reports/toy100/sample_group_memory.py": {
+      "bytes": 3772,
+      "sha256": "38e154c82dc2fc1b4636ea12351e8ba55c484d2bd6ca60ebd206cbce01481b10"
+    }
+  },
+  "input_state_sha256": "1706ae9c1ca25010cb08e2c03f79478180add8620996594e9f30e48705223a72",
+  "runtime": {
+    "cpu_capability": "AVX2",
+    "python": "3.12.13",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1
+  },
+  "schema": "sample-group-rms-overlap-four-check-v1",
+  "scope": "four free-output/synthetic association checks; no host training"
+}
