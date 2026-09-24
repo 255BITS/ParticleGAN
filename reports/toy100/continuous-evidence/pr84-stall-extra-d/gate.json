@@ -1,0 +1,46 @@
+{
+  "method": "reachstall_extrad",
+  "mechanism": "one extra D Adam step when #107 stall predicate is true (D slope >= .6 and mean G trust <= .1)",
+  "pin": "CUDA_VISIBLE_DEVICES= ATEN_CPU_CAPABILITY=avx2 MKL_ENABLE_INSTRUCTIONS=AVX2 ONEDNN_MAX_CPU_ISA=AVX2 DNNL_MAX_CPU_ISA=AVX2 OMP_NUM_THREADS=1",
+  "torch": "2.14.0+cu130",
+  "cpu_reported": "AVX2",
+  "verdict": "KILL",
+  "rankable_warm": true,
+  "unrankable_without_onednn_avx2_cap": {
+    "identity_passing": "0/200",
+    "min_modes": 6,
+    "min_hq": 0.953125,
+    "final": [6, 0.9990234375],
+    "note": "torch capability string was already AVX2; numerics matched the AVX512 6-mode warm. Not ranked."
+  },
+  "warm": {
+    "identity": {"passing": "200/200", "min_modes": 8, "min_hq": 0.989990234375, "final": [8, 0.9990234375]},
+    "method": {"passing": "200/200", "min_modes": 8, "min_hq": 0.920654296875, "final": [8, 0.9814453125], "extra_d_steps": 0}
+  },
+  "cold": {
+    "trajectory": {"passed": true, "extra_d_steps": 0, "terminal_identity_mse": 0.0009426682372577488},
+    "ring": {
+      "passed": true,
+      "modes": 8,
+      "terminal_hq": 0.972900390625,
+      "passing_observations": "10/24",
+      "suffix": 7,
+      "confirmed_step": 1100,
+      "extra_d_steps": 30,
+      "last_extra_d_step": 651
+    }
+  },
+  "stay": {
+    "passing": "97/120",
+    "min_modes": 1,
+    "min_hq": 0.0002,
+    "suffix": 10,
+    "final": [2400, 8, 0.9956],
+    "zero_mode_steps": [],
+    "severe_dips_le_4": [1720, 1740, 1760, 1770, 1780, 1790, 1800, 1810, 1860],
+    "failing_steps": [1250, 1410, 1630, 1690, 1700, 1710, 1720, 1730, 1740, 1750, 1760, 1770, 1780, 1790, 1800, 1810, 1840, 1860, 1870, 2000, 2080, 2270, 2300],
+    "extra_d_steps": 30,
+    "last_extra_d_step": 651,
+    "seconds": 76.2
+  }
+}
