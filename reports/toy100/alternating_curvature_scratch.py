@@ -33,7 +33,7 @@ METHOD='alternating_adam_with_critic_gated_own_curvature_bound'
 
 
 class AlternatingCurvatureRecorder:
-    def __init__(self,start_step=0,curvature_bound=.25,advantage_gate=.1):
+    def __init__(self,start_step=0,curvature_bound=.25,advantage_gate=.1,trace_outputs=False):
         if not math.isfinite(curvature_bound) or curvature_bound<=0:raise ValueError('invalid curvature bound')
         if advantage_gate is not None and (not math.isfinite(advantage_gate) or advantage_gate<=0):
             raise ValueError('invalid critic-advantage gate')
@@ -41,6 +41,7 @@ class AlternatingCurvatureRecorder:
         self.enabled=True;self.passthrough=False;self.phase=None;self.optimizers=None
         self.rows={};self.records=[];self.outer_steps=0;self.rng_replay_verified=0
         self.advantage=None;self.accounting=None;self.host_source=None
+        self.trace_outputs=trace_outputs;self.trace=[]
 
     @staticmethod
     def _rng(streams):
@@ -50,6 +51,13 @@ class AlternatingCurvatureRecorder:
     def _set_rng(streams,states):
         torch.set_rng_state(states[0])
         for stream,state in zip(streams,states[1:]):stream.set_state(state)
+
+    @torch.no_grad()
+    def _record_trace(self,local):
+        if not self.trace_outputs or 'means' not in local:return
+        model=local['generator'];clean=getattr(model,'model',model)
+        self.trace.append([[round(float(v),5) for v in row] for row in clean(local['prior'].z).tolist()])
+        if not hasattr(self,'trace_means'):self.trace_means=local['means'].tolist()
 
     def _params(self,opt):
         return [p for group in opt.param_groups for p in group['params']]
@@ -105,7 +113,7 @@ class AlternatingCurvatureRecorder:
                     p.copy_(torch.lerp(base,new,factor) if factor<1 else new)
                 for b,saved in buffers:b.copy_(saved)
             row.update(rho=rho,factor=factor)
-        self.records.append(row)
+        self.records.append(row);self._record_trace(local)
         self.phase=None;self.outer_steps+=1
         if self.accounting is not None:self.accounting(self.rows[opt_d]['calls'],self.outer_steps)
 
@@ -180,8 +188,8 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
     G still responds to the D that actually materializes.
     """
 
-    def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None):
-        super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None)
+    def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False):
+        super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
         self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
         if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
 
@@ -220,7 +228,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
             else:self.rng_replay_verified+=1
         self.row['critic_advantage']=self.advantage;self.row['gate_open']=False
         self.row['rho'],self.row['factor']=self.row['g']['rho'],self.row['g']['factor']
-        self.records.append(self.row)
+        self.records.append(self.row);self._record_trace(local)
         self.phase=None;self.outer_steps+=1
         if self.accounting is not None:self.accounting(self.rows[opt_d]['calls'],self.outer_steps)
 

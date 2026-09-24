@@ -80,6 +80,43 @@ update; 1 moment update per player. v1/v2 (cross-only with bounds) are in
   oscillation keeps the critic winning, so the gate stays open and never damps
   the oscillation that keeps it open.
 
+## Follow-on: ring hold (still open)
+
+All rows keep v8's alternating adapter and G bound .25. The D bound never
+fires on the warm fork (max rho_D .748), so every D bound ≥ .75 has a warm
+result bit-identical to the recorded 200/200.
+
+| D bound | Cold trajectory | Cold ring terminal HQ (1000/1050/1100/1150/1200) | Ring verdict |
+| --- | --- | --- | --- |
+| none (v6) | PASS .00099 | .9995 at 1000, then 0 modes by 1100 (critic divergence) | FAIL |
+| 2 (v8) | PASS .00094, 20 | .43 / .52 / .83 / .92 / .92, 7 modes | FAIL |
+| **3 (v10)** | **PASS .00094, 18** | **.916 / .843 / 1.0 / .995 / 1.0, 8 modes** | **FAIL, 3/5 terminal checks** |
+| 4 | PASS .00095, 16 | .39 / .79 / .83 / .51 / .67 | FAIL |
+
+The D-bound response is not monotone, so the ring outcome behaves chaotically
+in this parameter. Scanning it further until one value passes would be
+selection on noise, the same as a seed sweep, and was stopped. v10 is the
+nearest miss: one dip at update 1050.
+
+Signals checked for a G bound that loosens while unmatched and tightens at
+rest (per-update clean particle traces, updates binned by 100):
+
+| Signal | Ring acquisition | Ring rest (v6, HQ ≈ 1) | Separates? |
+| --- | --- | --- | --- |
+| Output directedness (net/path, 10 updates) | .20–.50 | .44 | No |
+| Critic advantage | .08–.35 | .17–.37 | No; the 12-vs-8 mismatch keeps the critic winning |
+| rho_G / rho_D | ~1.1–1.9 | ~5.8 | Possibly (bin medians only; untested as a control) |
+
+The G bound already tightens as rho_G grows, so it rests naturally; the
+unsolved part is that it also throttles ring acquisition (mean factor ≈ .13),
+leaving acquisition within about 100 updates of the terminal window.
+
+GIFs (gray = mode centers with the .21 HQ radius, color = the twelve clean
+generator particles): `v8_ring_cold.gif`, `v6_ring_cold.gif`,
+`v10_ring_cold_dbound3.gif` in the run artifacts. Regenerate them with
+`alternating_ring_trace.py` and `ring_trace_gif.py`; traces are under
+`continuous-evidence/alternating-curvature/ring-traces/`.
+
 ## Recommendations
 
 1. Put future game-update candidates in the alternating adapter
