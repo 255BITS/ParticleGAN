@@ -28,7 +28,9 @@ This is not a throughput measurement for a long cold run: data history starts
 over for each12/16-update window. The cumulative estimator grows in both memory
 and per-update work, so a full neural rollout is not yet a practical next step
 without bounding its cost. The target uses an added density objective, not a
-pure correction of the original GAN objective.
+pure correction of the original GAN objective. The accepted replacement G
+move is chosen without the discriminator. Native D/Adam execution is a host
+compatibility check; it does not make this density-fitting update adversarial.
 
 [Frozen sources, raw results and manifest](continuous-evidence/round9-forward-kl-neural44/manifest.json)
 bind driver commit `be60828`, adapter SHA `44ea3bf3d50e32fa11231d779c6c7888f13dca4246f230f03c797c486b06a9ff`,

@@ -1,3 +1,7 @@
+**Current scope: stabilize the GAN formulation itself.** [GAN leaderboard](continuous-practical-leaderboard.md). PR84 is the adversarial reference; local cold ring still has seven modes. Likelihood and anchor fitting are reference-only, with their further rollouts stopped. No qualified constant-LR GAN replacement.
+
+The results below document completed/reference experiments before the scope clarification. Their successes are not promotions into the GAN candidate ranking.
+
 # Practical ranking after the restoring-objective screens
 
 **Current comparison: [practical leaderboard](continuous-practical-leaderboard.md).**

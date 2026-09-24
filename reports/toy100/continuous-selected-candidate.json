@@ -1,5 +1,5 @@
 {
-  "schema": "continuous-research-candidate-v4",
+  "schema": "continuous-research-candidate-v5",
   "date": "2026-09-24",
   "status": "no_qualified_constant_lr_replacement",
   "production_gate_eligible": false,
@@ -8,32 +8,12 @@
   "current_report": "continuous-round9.md",
   "previous_report": "continuous-round8.md",
   "historical_candidate_record": "https://github.com/255BITS/ParticleGAN/blob/c366217/reports/toy100/continuous-selected-candidate.json",
-  "scope": "same fixed dataset; whole-distribution target shifts are separate; acquire when a signal exists",
+  "scope": "GAN formulation itself: discriminator-driven generator learning on same fixed dataset; whole-target shifts separate",
   "settings": {
     "g_lr": 0.00425,
     "d_lr": 0.00425,
     "prior_lr": 0.0085,
     "lr_decay": false
-  },
-  "best_completed_learning_candidate": {
-    "method": "pr84_sample_group_anchor_prestart_joint_fit_rest_on_nonconvergence",
-    "saved44": "PASS",
-    "warm200": "PASS",
-    "borrowed_hold1200": "PASS",
-    "cold_trajectory400": "PASS",
-    "cold_ring1200": "PASS 24/24",
-    "own_hold1200": "PASS",
-    "same_target_model_error": "PASS first update",
-    "long12000": "running new practical observer from own2400",
-    "strict_omission_gate": "FAIL:7 modes at2401 and2402",
-    "ordinary_recovery": "PASS:8/HQ1 from2403 through2410",
-    "remaining_gaps": [
-      "longer own-state retention",
-      "distribution mass and shape fidelity",
-      "practical production cost",
-      "production host gates"
-    ],
-    "fidelity": "coverage pass but endpoint particle counts1,1,1,1,1,1,1,5; TV.291667; emittedstd.029 vs target.07"
   },
   "current_memory_experiment": {
     "method": "pr84_confirmed_fixed_support_prestart_joint_fit",
@@ -47,9 +27,9 @@
     "later_gates": "withheld"
   },
   "next_tests": [
-    "prestart anchor own2400 to12000; record strict misses and recovery separately",
-    "finite-GH9 native44 saved-window filter; no neural acquisition claim",
-    "practical realization and mass/shape audit before expensive production qualification"
+    "one GAN-driven mechanism with cheap cold and stationary captured-state falsifiers",
+    "if both survive: neural cold acquisition and continued own-state recovery",
+    "production mass/shape fidelity and practical runtime after neural qualification"
   ],
   "unavoidable_impossibility_established": false,
   "latest_rejections": {
@@ -58,9 +38,42 @@
     "outside_only_mass_discovery": "FAIL component inside existing cell never proposed"
   },
   "active_lanes": {
-    "prestart_anchors": "best completed neural acquisition/ownhold/response; conditioned omission recovers",
-    "forward_kl": "six bank stress gates and native saved44 PASS; full neural cold acquisition untested; growing cost unresolved",
-    "profiled_critic_value": "diagnostic complete; cold six certified moves remain three modes; no practical expansion"
+    "GAN_dynamics": "define one discriminator-driven mechanism covering cold acquisition barrier and stationary outward guidance; cheap captured-state falsifiers first"
   },
-  "leaderboard": "continuous-practical-leaderboard.md"
+  "leaderboard": "continuous-practical-leaderboard.md",
+  "reference_coverage_candidate": {
+    "method": "pr84_sample_group_anchor_prestart_joint_fit_rest_on_nonconvergence",
+    "saved44": "PASS",
+    "warm200": "PASS",
+    "borrowed_hold1200": "PASS",
+    "cold_trajectory400": "PASS",
+    "cold_ring1200": "PASS 24/24",
+    "own_hold1200": "PASS",
+    "same_target_model_error": "PASS first update",
+    "long12000": "STOPPED_SCOPE_CHANGE at9488;7088/7088 resumed checks pass; not12000pass",
+    "strict_omission_gate": "FAIL:7 modes at2401 and2402",
+    "ordinary_recovery": "PASS:8/HQ1 from2403 through2410",
+    "remaining_gaps": [
+      "longer own-state retention",
+      "distribution mass and shape fidelity",
+      "practical production cost",
+      "production host gates"
+    ],
+    "fidelity": "coverage pass but endpoint particle counts1,1,1,1,1,1,1,5; TV.291667; emittedstd.029 vs target.07",
+    "eligible_for_gan_goal": false
+  },
+  "preferred_adversarial_reference": {
+    "method": "PR84 smoothed G critic alternating adapter",
+    "cold_trajectory": "PASS",
+    "cold_ring_local": "FAIL7 modes",
+    "cold_ring_reported_other_build": "PASS8 modes",
+    "warm_local": "PASS200/200",
+    "borrowed_dense_hold": "1111/1200; recovered final; transient mode loss",
+    "qualified": false
+  },
+  "reference_only": {
+    "likelihood": "bank stress + neural saved44 pass; replacement G move not discriminator-driven; no further rollout",
+    "anchors": "coverage acquisition and finite holds pass; standalone coverage objective; long stopped on scope clarification",
+    "profiled_value": "adversarial copied-state diagnostic; coldstill3; expensive; not fulltraining"
+  }
 }

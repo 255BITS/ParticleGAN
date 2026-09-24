@@ -1,4 +1,4 @@
-**Current status: [practical leaderboard](continuous-practical-leaderboard.md), [round9 evidence](continuous-round9.md).** Pre-start anchors lead completed neural acquisition/own-hold/response; a conditioned missing-bank loss recovers after two updates. PR84 remains the reference with fewer objective changes, but its local cold ring has seven modes. Longer retention, fidelity and production cost remain open. No qualified LR-decay replacement.
+**Current scope: stabilize the GAN formulation itself.** [GAN leaderboard](continuous-practical-leaderboard.md). PR84 is the adversarial reference; local cold ring still has seven modes. Likelihood and anchor fitting are reference-only, with their further rollouts stopped. No qualified constant-LR GAN replacement.
 
 # PR #60: remove LR decay without losing acquisition or stability
 
