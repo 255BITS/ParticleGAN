@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "fixture_only_not_training": true,
+  "forward_equal": true,
+  "input_and_parameter_gradients_equal": true,
+  "penalty_value_and_gradients_equal": true,
+  "global_and_noise_rng_after_equal": true,
+  "construction_does_not_draw_rng": true,
+  "parameter_objects_identical": true,
+  "extension_sha256": "55f58a2a6525bea92feac308c9fa3afb7cb4a418b5817077156f5c03611c7c58"
+}

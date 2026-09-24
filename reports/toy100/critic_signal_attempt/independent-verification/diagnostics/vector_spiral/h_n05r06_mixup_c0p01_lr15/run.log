@@ -1,0 +1,4 @@
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "vector_spiral"}
+START vector_spiral route=GANTrainer + generic noise wrappers steps=1600
+{"event": "DONE", "task": "vector_spiral", "status": "PASS", "suffix": 23, "live": {"sw1_normalized": 0.03665300463436468, "mean_error": 0.03792315348982811, "covariance_error": 0.06957034021615982, "target_scale": 1.224178433418274, "sample_count": 4096}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "vector_spiral", "status": "PASS", "seconds": 9.669592656195164, "live": {"covariance_error": 0.06957034021615982, "mean_error": 0.03792315348982811, "sample_count": 4096, "sw1_normalized": 0.03665300463436468, "target_scale": 1.224178433418274}}

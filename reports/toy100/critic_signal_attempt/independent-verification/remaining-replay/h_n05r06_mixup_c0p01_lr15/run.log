@@ -1,0 +1,14 @@
+{"event": "START", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "unipolar"}
+START unipolar route=public primitives custom host + shared noise policy steps=400
+unipolar_dir arm=locked_rpgan step=1/400 cover=0.0045 leak=0.2500 neu_hold=0.9970 cos_plus=+0.5000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=50/400 cover=0.2957 leak=0.0647 neu_hold=0.9078 cos_plus=+0.9289 hit=FAIL
+unipolar_dir arm=locked_rpgan step=100/400 cover=0.5211 leak=0.0005 neu_hold=0.8405 cos_plus=+0.9995 hit=FAIL
+unipolar_dir arm=locked_rpgan step=150/400 cover=0.6687 leak=0.0000 neu_hold=0.8064 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=200/400 cover=0.7693 leak=0.0000 neu_hold=0.7935 cos_plus=+0.9997 hit=FAIL
+unipolar_dir arm=locked_rpgan step=250/400 cover=0.8317 leak=0.0000 neu_hold=0.7984 cos_plus=+1.0000 hit=FAIL
+unipolar_dir arm=locked_rpgan step=300/400 cover=0.8742 leak=0.0000 neu_hold=0.8110 cos_plus=+0.9999 hit=FAIL
+unipolar_dir arm=locked_rpgan step=350/400 cover=0.9052 leak=0.0000 neu_hold=0.8282 cos_plus=+0.9999 hit=FAIL
+unipolar_dir arm=locked_rpgan step=400/400 cover=0.9222 leak=0.0000 neu_hold=0.8503 cos_plus=+0.9997 hit=PASS
+unipolar_dir arm=locked_rpgan step=400 seed=0 cover=0.9222 leak=0.0000 neu_hold=0.8503 cos_plus=+0.9997 hit=PASS
+{"event": "DONE", "task": "unipolar", "status": "FAIL", "suffix": 1, "live": {"cover": 0.9221509485515078, "off_caption": 2.3800328610086637e-05, "neu_hold": 0.8503267019987106}, "error": null}
+{"event": "DONE", "candidate": "h_n05r06_mixup_c0p01_lr15", "gate": "unipolar", "status": "FAIL", "seconds": 2.889198988908902, "live": {"cover": 0.9221509485515078, "neu_hold": 0.8503267019987106, "off_caption": 2.3800328610086637e-05}}

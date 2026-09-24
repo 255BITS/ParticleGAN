@@ -1,0 +1,2 @@
+{"event": "PREDECLARED", "rows": 1, "output": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold"}
+{"event": "CANDIDATE_DONE", "tag": "h_n05r06_mixup_c0p01_lr15", "status": "FAIL", "seconds": 2.172818026971072, "stages": [{"gate": "ae_gan_hold", "status": "FAIL"}]}

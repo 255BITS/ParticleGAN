@@ -1,7 +1,8 @@
 # Constant-rate GAN acquisition leader H
 
-**H passes all ten frozen cold screening gates. Its own-state continuation fails,
-so it is an acquisition reference, not a stable production replacement.**
+**H passes all ten initial cold screening gates, but the expanded older-toy
+audit is 13 PASS / 6 FAIL and its own-state continuation fails. It is an
+acquisition reference, not a stable production replacement.**
 
 Candidate: `h_n05r06_mixup_c0p01_lr15`. The generator and learned particles use
 only the logistic relativistic-pair discriminator objective. The discriminator
@@ -19,6 +20,7 @@ the applied experimental overrides. The config alone does not implement H.
 | Cold ring, 1,200 updates | PASS; 8/8 modes, HQ 0.999267578, five terminal passing checks | 11.52 |
 | Ten ordered cold toy gates | All PASS | 92.65 total |
 | Own-state hold, 1,200 further updates | FAIL; 750/1,200 dense checks pass; final 5 modes, HQ 0.209228516 | 18.08 |
+| Independent expanded older-toy audit | 13 PASS / 6 FAIL; all three native100 gates SKIPPED | See per-host receipts |
 
 The ten cold gates are trajectory, mode_hold, residual_student, img_stripes2,
 img_bars4, vector_overlap, img_blobs4, img_intensity2, vector_unequal_mass and
@@ -47,10 +49,35 @@ The [fresh verdicts](independent-verification/cold-status.json) and
 [independent sample/checkpoint regrade](independent-verification/regrade-cold.json)
 are retained. The changed elapsed time is not a controlled speed result.
 
-The next work is independently verifying H on the complete toy suite, then
-stabilizing this same recipe while preserving its acquisition. Broad searches
-were stopped at the user's request. Any additional failed or unrun toy gates
-must remain explicit before promotion.
+The [complete verification table](independent-verification/verification.md)
+records failures on two_pole, unipolar, cover_leftover, mid_scale_identity,
+unused_token_hold and ae_gan_hold. Unipolar passes its final observation but
+has only one terminal passing check; five are required. The native100 gates
+remain SKIPPED after these older failures. The independent audit regrades all
+19 source/config/episode and optimizer/noise receipts. Ten original cold metrics
+match exactly, with saved or restored samples independently checked wherever
+the archived screen retained a checkpoint.
+
+Two auxiliary-feature hosts have an additional scope issue: disabling AE
+reconstruction disconnects its encoder from training; disabling unused-token
+hold leaves an identical-gradient parameter invariant incompatible with that
+host's retention and movement requirements. These are documented with source
+links in the verification table. Restoring original auxiliary losses is a
+separate hybrid host-compatibility control, never a pure-GAN qualification.
+
+The [continuation audit](stability-audit/audit-findings.json) reproduces all
+1,200 observations and complete final model, Adam, EMA and RNG state exactly.
+No restoration bug was found. The first failure is update1255/HQ0.780518.
+Three bounded probes from H's acquired state also fail: D2:G1 at1254, two-draw
+gradient averaging at1228, and the prepared predictive Adam update at1203.
+[Raw probe evidence](stability-audit/initial-probes) retains their work counts
+and failures; none establishes cold acquisition or own-state stability.
+
+Broad searches were stopped. Three fresh Astra/max attempts now start from this
+fixed H source: failing cold toys, discriminator-signal stability, and update
+dynamics. Each uses small batches, early rejection, a 16-proposal cap and a
+90-minute limit. A survivor still needs the failing older toys, preserved cold
+acquisition, its own-state hold, and eventual full production qualification.
 
 Reproduce the selected cold run and its continuation from a fresh output directory:
 
@@ -58,6 +85,10 @@ Reproduce the selected cold run and its continuation from a fresh output directo
 bash reports/toy100/critic_signal_attempt/replay-best-h.sh
 # Or select an installed Python with this repository's experiment dependencies:
 BENCH_PYTHON=/path/to/python bash reports/toy100/critic_signal_attempt/replay-best-h.sh /tmp/h-replay-new
+# Also run each remaining older host once, preserving all failures:
+REPLAY_OLDER_DIAGNOSTICS=1 bash reports/toy100/critic_signal_attempt/replay-best-h.sh /tmp/h-full-older-new
+# Independently regrade copied saved evidence without training:
+bash reports/toy100/critic_signal_attempt/regrade-verification.sh /tmp/h-regrade-new
 ```
 
 The replay extracts the recorded base code and then overlays the exact selected

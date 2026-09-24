@@ -1,0 +1,1171 @@
+[
+  {
+    "seconds": 9.559296728810295,
+    "shared_gate_eligible": false,
+    "stages": [
+      {
+        "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/mid_scale_identity/h_n05r06_mixup_c0p01_lr15/mid_scale_identity/episodes/h_n05r06_mixup_c0p01_lr15__mid_scale_identity.json.gz",
+        "candidate": "h_n05r06_mixup_c0p01_lr15",
+        "gate": "mid_scale_identity",
+        "metrics": {
+          "frozen_evidence_audit": "FAIL",
+          "live": {
+            "concept_cos_minus": 0.9888538122177124,
+            "concept_cos_plus": 0.9914860129356384,
+            "concept_mag_minus": 0.9039037227630615,
+            "concept_mag_plus": 0.9282889366149902,
+            "identity_at_0": 0.8062138743042017,
+            "identity_at_mid": 0.9901884256285347
+          },
+          "observations": [
+            {
+              "concept_cos_minus": 0.269309937953949,
+              "concept_cos_plus": 0.8028053641319275,
+              "concept_mag_minus": 0.05956830456852913,
+              "concept_mag_plus": 0.19067798554897308,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0,identity_mid",
+              "identity_at_0": 0.11714740229613207,
+              "identity_at_mid": 0.3339866394282658,
+              "leak_frac": -0.0028915039729326963,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.15540869242680833,
+                  "on_concept": 0.04670710116624832,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.11714740229613207,
+                  "on_concept": 0.06274943798780441,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.3339866394282658,
+                  "on_concept": 0.22607126832008362,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.31963332677103407,
+                  "on_concept": 0.21582674980163574,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.4995884635618803,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 1.8493419410660863,
+              "step": 34
+            },
+            {
+              "concept_cos_minus": 0.516726553440094,
+              "concept_cos_plus": 0.8460303544998169,
+              "concept_mag_minus": 0.12413910031318665,
+              "concept_mag_plus": 0.3005208373069763,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0,identity_mid",
+              "identity_at_0": 0.2007623795961626,
+              "identity_at_mid": 0.542397387276292,
+              "leak_frac": -0.06731095910072327,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.3310560146265653,
+                  "on_concept": 0.029167838394641876,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.2007623795961626,
+                  "on_concept": 0.0933138057589531,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.542397387276292,
+                  "on_concept": 0.37493205070495605,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.47842762598338984,
+                  "on_concept": 0.34756356477737427,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.48811733443514554,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 2.1580804591067135,
+              "step": 67
+            },
+            {
+              "concept_cos_minus": 0.8398557305335999,
+              "concept_cos_plus": 0.8088510036468506,
+              "concept_mag_minus": 0.18748986721038818,
+              "concept_mag_plus": 0.3527378737926483,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0,identity_mid",
+              "identity_at_0": 0.2747206055833611,
+              "identity_at_mid": 0.7284902334054745,
+              "leak_frac": -0.38028138875961304,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.45692714774902043,
+                  "on_concept": -0.07793444395065308,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.2747206055833611,
+                  "on_concept": 0.07953000068664551,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.7284902334054745,
+                  "on_concept": 0.4257825016975403,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.6398690757367966,
+                  "on_concept": 0.36484238505363464,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.4191370872809786,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 2.4802645491436124,
+              "step": 100
+            },
+            {
+              "concept_cos_minus": 0.823104977607727,
+              "concept_cos_plus": 0.8418667912483215,
+              "concept_mag_minus": 0.30502834916114807,
+              "concept_mag_plus": 0.3591872453689575,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0,identity_mid",
+              "identity_at_0": 0.34140305543093485,
+              "identity_at_mid": 0.8430973895792975,
+              "leak_frac": -0.39529767632484436,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.655148454885786,
+                  "on_concept": -0.18776535987854004,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.34140305543093485,
+                  "on_concept": 0.06330499053001404,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.8430973895792975,
+                  "on_concept": 0.4631884694099426,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.6877714845081845,
+                  "on_concept": 0.36569279432296753,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.39845907796295443,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 2.8172608071472496,
+              "step": 134
+            },
+            {
+              "concept_cos_minus": 0.848520815372467,
+              "concept_cos_plus": 0.8521686792373657,
+              "concept_mag_minus": 0.39510461688041687,
+              "concept_mag_plus": 0.3748103380203247,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0",
+              "identity_at_0": 0.3960271068187644,
+              "identity_at_mid": 0.949905874341534,
+              "leak_frac": -0.4493440091609955,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.7760705603637493,
+                  "on_concept": -0.29508641362190247,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.3960271068187644,
+                  "on_concept": 0.04016806557774544,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.949905874341534,
+                  "on_concept": 0.4871385097503662,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.7486050662621648,
+                  "on_concept": 0.3595696985721588,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.3815212146279685,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 3.120522706070915,
+              "step": 167
+            },
+            {
+              "concept_cos_minus": 0.8514223694801331,
+              "concept_cos_plus": 0.8879391551017761,
+              "concept_mag_minus": 0.48547378182411194,
+              "concept_mag_plus": 0.38214215636253357,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0",
+              "identity_at_0": 0.4404021128529336,
+              "identity_at_mid": 0.9889513583685466,
+              "leak_frac": -0.5184579491615295,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9032781379408845,
+                  "on_concept": -0.39022719860076904,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.4404021128529336,
+                  "on_concept": 0.023116063326597214,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.9889513583685466,
+                  "on_concept": 0.5173305869102478,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.7546698928123803,
+                  "on_concept": 0.3624350428581238,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.3647990894402502,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 3.4288172721862793,
+              "step": 200
+            },
+            {
+              "concept_cos_minus": 0.8805426359176636,
+              "concept_cos_plus": 0.8956235647201538,
+              "concept_mag_minus": 0.550609290599823,
+              "concept_mag_plus": 0.4054703712463379,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0",
+              "identity_at_0": 0.4772751973156095,
+              "identity_at_mid": 0.9205458195882532,
+              "leak_frac": -0.5800052285194397,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.951459171322472,
+                  "on_concept": -0.4699857831001282,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.4772751973156095,
+                  "on_concept": 0.01484918873757124,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.9205458195882532,
+                  "on_concept": 0.5540787577629089,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.7999006589532947,
+                  "on_concept": 0.3779979944229126,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.34888273154511834,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 3.7477266921196133,
+              "step": 234
+            },
+            {
+              "concept_cos_minus": 0.8902577757835388,
+              "concept_cos_plus": 0.922705352306366,
+              "concept_mag_minus": 0.6034954786300659,
+              "concept_mag_plus": 0.43155208230018616,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0",
+              "identity_at_0": 0.5069615603930097,
+              "identity_at_mid": 0.8866179901576852,
+              "leak_frac": -0.6476725339889526,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9935727772239938,
+                  "on_concept": -0.5281835198402405,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.5069615603930097,
+                  "on_concept": 0.009083045646548271,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.8866179901576852,
+                  "on_concept": 0.5850169658660889,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.8048551052016409,
+                  "on_concept": 0.407278448343277,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.3288192191322336,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 4.0683479672297835,
+              "step": 267
+            },
+            {
+              "concept_cos_minus": 0.9033119082450867,
+              "concept_cos_plus": 0.9392192959785461,
+              "concept_mag_minus": 0.6373428106307983,
+              "concept_mag_plus": 0.47339367866516113,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0",
+              "identity_at_0": 0.5340295999018648,
+              "identity_at_mid": 0.8523642858913059,
+              "leak_frac": -0.7025085687637329,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9711274028494724,
+                  "on_concept": -0.5678646564483643,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.5340295999018648,
+                  "on_concept": 0.007854691706597805,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.8523642858913059,
+                  "on_concept": 0.6082951426506042,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.828604683337908,
+                  "on_concept": 0.4524751901626587,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.3067441092767782,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 4.382399381138384,
+              "step": 300
+            },
+            {
+              "concept_cos_minus": 0.9235810041427612,
+              "concept_cos_plus": 0.9445892572402954,
+              "concept_mag_minus": 0.658835768699646,
+              "concept_mag_plus": 0.524412989616394,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0,identity_mid",
+              "identity_at_0": 0.5560462543394162,
+              "identity_at_mid": 0.831343462470139,
+              "leak_frac": -0.7467359304428101,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9847556250319109,
+                  "on_concept": -0.6097139716148376,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.5560462543394162,
+                  "on_concept": -0.0012257989728823304,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.831343462470139,
+                  "on_concept": 0.6082393527030945,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.8682587307638224,
+                  "on_concept": 0.49412909150123596,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.28417712521966176,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 4.689595113042742,
+              "step": 334
+            },
+            {
+              "concept_cos_minus": 0.9350298643112183,
+              "concept_cos_plus": 0.9504627585411072,
+              "concept_mag_minus": 0.6750944256782532,
+              "concept_mag_plus": 0.5770182609558105,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0,identity_mid",
+              "identity_at_0": 0.5788772165642257,
+              "identity_at_mid": 0.8304562202749992,
+              "leak_frac": -0.7789720892906189,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.987295649774758,
+                  "on_concept": -0.6335431337356567,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.5788772165642257,
+                  "on_concept": -0.0023096827790141106,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.8304562202749992,
+                  "on_concept": 0.6099151372909546,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9048543556161273,
+                  "on_concept": 0.5461246967315674,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.2652160355547936,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 5.011882274178788,
+              "step": 367
+            },
+            {
+              "concept_cos_minus": 0.9438275694847107,
+              "concept_cos_plus": 0.9554954171180725,
+              "concept_mag_minus": 0.6966123580932617,
+              "concept_mag_plus": 0.623045802116394,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0,identity_mid",
+              "identity_at_0": 0.6021443222132858,
+              "identity_at_mid": 0.8448064172350146,
+              "leak_frac": -0.8046420216560364,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9806562344718086,
+                  "on_concept": -0.6653138995170593,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.6021443222132858,
+                  "on_concept": -0.007831918075680733,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.8448064172350146,
+                  "on_concept": 0.5988475680351257,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9363296707560989,
+                  "on_concept": 0.5874854922294617,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.25017884237365734,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 5.3287017771508545,
+              "step": 400
+            },
+            {
+              "concept_cos_minus": 0.9547615647315979,
+              "concept_cos_plus": 0.9581720232963562,
+              "concept_mag_minus": 0.7177809476852417,
+              "concept_mag_plus": 0.6658586859703064,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0",
+              "identity_at_0": 0.6237577783380222,
+              "identity_at_mid": 0.8668216628355638,
+              "leak_frac": -0.8298717737197876,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9887142402638726,
+                  "on_concept": -0.6992806792259216,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.6237577783380222,
+                  "on_concept": -0.013971051201224327,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.8668216628355638,
+                  "on_concept": 0.5837976932525635,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9701980039163443,
+                  "on_concept": 0.6240361332893372,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.23500307472890722,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 5.635898339096457,
+              "step": 434
+            },
+            {
+              "concept_cos_minus": 0.9577429294586182,
+              "concept_cos_plus": 0.9653288722038269,
+              "concept_mag_minus": 0.7340920567512512,
+              "concept_mag_plus": 0.7095589637756348,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0",
+              "identity_at_0": 0.6442745632286411,
+              "identity_at_mid": 0.8994559631539798,
+              "leak_frac": -0.8497403264045715,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9720740329428579,
+                  "on_concept": -0.7147878408432007,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.6442745632286411,
+                  "on_concept": -0.011716365814208984,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.8994559631539798,
+                  "on_concept": 0.5839054584503174,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9791158337680442,
+                  "on_concept": 0.673241376876831,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.22210261930748265,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 5.968011702178046,
+              "step": 467
+            },
+            {
+              "concept_cos_minus": 0.9637202024459839,
+              "concept_cos_plus": 0.9680771827697754,
+              "concept_mag_minus": 0.7574618458747864,
+              "concept_mag_plus": 0.7413742542266846,
+              "device": "cpu",
+              "fail_reasons": "concept,identity_0",
+              "identity_at_0": 0.664385982364903,
+              "identity_at_mid": 0.9179826032209087,
+              "leak_frac": -0.8662858009338379,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9686760264656853,
+                  "on_concept": -0.7488924264907837,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.664385982364903,
+                  "on_concept": -0.018911123275756836,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.9179826032209087,
+                  "on_concept": 0.5684232711791992,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9986220490397943,
+                  "on_concept": 0.6987963914871216,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.21128429063172643,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 6.299274031072855,
+              "step": 500
+            },
+            {
+              "concept_cos_minus": 0.9683074951171875,
+              "concept_cos_plus": 0.9719640016555786,
+              "concept_mag_minus": 0.7764696478843689,
+              "concept_mag_plus": 0.7750808596611023,
+              "device": "cpu",
+              "fail_reasons": "identity_0",
+              "identity_at_0": 0.6829546166117046,
+              "identity_at_mid": 0.940317546448875,
+              "leak_frac": -0.8824459910392761,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9654080664810213,
+                  "on_concept": -0.7723976373672485,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.6829546166117046,
+                  "on_concept": -0.02053624391555786,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.940317546448875,
+                  "on_concept": 0.5616068243980408,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9869275098288816,
+                  "on_concept": 0.7328144311904907,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.19993369664199792,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 6.637968625174835,
+              "step": 534
+            },
+            {
+              "concept_cos_minus": 0.9727382063865662,
+              "concept_cos_plus": 0.974835991859436,
+              "concept_mag_minus": 0.7943868637084961,
+              "concept_mag_plus": 0.8049899339675903,
+              "device": "cpu",
+              "fail_reasons": "identity_0",
+              "identity_at_0": 0.7007143616751027,
+              "identity_at_mid": 0.9552228251877479,
+              "leak_frac": -0.8966249823570251,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9655162218139577,
+                  "on_concept": -0.7913802266120911,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.7007143616751027,
+                  "on_concept": -0.018649742007255554,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.9552228251877479,
+                  "on_concept": 0.558413565158844,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9733419862448167,
+                  "on_concept": 0.7660834193229675,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.1893356251335128,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 6.965874284040183,
+              "step": 567
+            },
+            {
+              "concept_cos_minus": 0.9764856100082397,
+              "concept_cos_plus": 0.977743923664093,
+              "concept_mag_minus": 0.8113935589790344,
+              "concept_mag_plus": 0.831028163433075,
+              "device": "cpu",
+              "fail_reasons": "identity_0",
+              "identity_at_0": 0.7170757276417636,
+              "identity_at_mid": 0.9720966827069698,
+              "leak_frac": -0.9097132086753845,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9654370018256045,
+                  "on_concept": -0.809400200843811,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.7170757276417636,
+                  "on_concept": -0.017086079344153404,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.9720966827069698,
+                  "on_concept": 0.5532364249229431,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9664138677284982,
+                  "on_concept": 0.7954466342926025,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.17882151227956006,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 7.292628539027646,
+              "step": 600
+            },
+            {
+              "concept_cos_minus": 0.9801310896873474,
+              "concept_cos_plus": 0.9796211123466492,
+              "concept_mag_minus": 0.8316517472267151,
+              "concept_mag_plus": 0.8526483178138733,
+              "device": "cpu",
+              "fail_reasons": "identity_0",
+              "identity_at_0": 0.7359646013763677,
+              "identity_at_mid": 0.9714319283860967,
+              "leak_frac": -0.9203672409057617,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9641743587554231,
+                  "on_concept": -0.8344870805740356,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.7359646013763677,
+                  "on_concept": -0.019359366968274117,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.9714319283860967,
+                  "on_concept": 0.5450564622879028,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9527934483356102,
+                  "on_concept": 0.8159129619598389,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.16944632776230706,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 7.628611994208768,
+              "step": 634
+            },
+            {
+              "concept_cos_minus": 0.9814664125442505,
+              "concept_cos_plus": 0.9833415746688843,
+              "concept_mag_minus": 0.8480542302131653,
+              "concept_mag_plus": 0.8718691468238831,
+              "device": "cpu",
+              "fail_reasons": "identity_0",
+              "identity_at_0": 0.7521550645774567,
+              "identity_at_mid": 0.9787576640532601,
+              "leak_frac": -0.9304015636444092,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9526549488210886,
+                  "on_concept": -0.8524224162101746,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.7521550645774567,
+                  "on_concept": -0.020085714757442474,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.9787576640532601,
+                  "on_concept": 0.5383473038673401,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9599188040322334,
+                  "on_concept": 0.8372594714164734,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.15993366336693868,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 7.941401984076947,
+              "step": 667
+            },
+            {
+              "concept_cos_minus": 0.9830114841461182,
+              "concept_cos_plus": 0.9868549108505249,
+              "concept_mag_minus": 0.8612768054008484,
+              "concept_mag_plus": 0.8902404308319092,
+              "device": "cpu",
+              "fail_reasons": "identity_0",
+              "identity_at_0": 0.7640996181702173,
+              "identity_at_mid": 0.9917981844616369,
+              "leak_frac": -0.940765380859375,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9495560492766858,
+                  "on_concept": -0.8647741079330444,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.7640996181702173,
+                  "on_concept": -0.018129097297787666,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.9917981844616369,
+                  "on_concept": 0.5364426970481873,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9748610376493942,
+                  "on_concept": 0.8604090213775635,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.1492862095299322,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 8.250595433171839,
+              "step": 700
+            },
+            {
+              "concept_cos_minus": 0.9869484901428223,
+              "concept_cos_plus": 0.9870409369468689,
+              "concept_mag_minus": 0.8777923583984375,
+              "concept_mag_plus": 0.904280424118042,
+              "device": "cpu",
+              "fail_reasons": "identity_0",
+              "identity_at_0": 0.7790659645745307,
+              "identity_at_mid": 0.9818714105722244,
+              "leak_frac": -0.948384702205658,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9639542550668523,
+                  "on_concept": -0.8840641975402832,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.7790659645745307,
+                  "on_concept": -0.017728330567479134,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.9818714105722244,
+                  "on_concept": 0.5302159190177917,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9581023796481196,
+                  "on_concept": 0.8748334646224976,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.1404787833688509,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 8.581682982156053,
+              "step": 734
+            },
+            {
+              "concept_cos_minus": 0.9872063994407654,
+              "concept_cos_plus": 0.9896950721740723,
+              "concept_mag_minus": 0.8928508162498474,
+              "concept_mag_plus": 0.9151510000228882,
+              "device": "cpu",
+              "fail_reasons": "identity_0",
+              "identity_at_0": 0.7950167629271343,
+              "identity_at_mid": 0.9837629368057619,
+              "leak_frac": -0.9543443322181702,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.9468980073418871,
+                  "on_concept": -0.8982682824134827,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.7950167629271343,
+                  "on_concept": -0.016840195283293724,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.9837629368057619,
+                  "on_concept": 0.5240686535835266,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9670020029908684,
+                  "on_concept": 0.88888019323349,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.13295292138775333,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 8.901044993195683,
+              "step": 767
+            },
+            {
+              "concept_cos_minus": 0.9888538122177124,
+              "concept_cos_plus": 0.9914860129356384,
+              "concept_mag_minus": 0.9039037227630615,
+              "concept_mag_plus": 0.9282889366149902,
+              "device": "cpu",
+              "fail_reasons": "identity_0",
+              "identity_at_0": 0.8062138743042017,
+              "identity_at_mid": 0.9901884256285347,
+              "leak_frac": -0.9611674547195435,
+              "pairing": "matched",
+              "pass": false,
+              "per_scale": [
+                {
+                  "identity_kept": 0.949901105970142,
+                  "on_concept": -0.9067270159721375,
+                  "scale": -1.0
+                },
+                {
+                  "identity_kept": 0.8062138743042017,
+                  "on_concept": -0.01289840042591095,
+                  "scale": 0.0
+                },
+                {
+                  "identity_kept": 0.9901884256285347,
+                  "on_concept": 0.5251346826553345,
+                  "scale": 0.5
+                },
+                {
+                  "identity_kept": 0.9741113196200821,
+                  "on_concept": 0.9074870944023132,
+                  "scale": 1.0
+                }
+              ],
+              "same_dir": 0.1238391168558109,
+              "scales": [
+                -1.0,
+                0.0,
+                0.5,
+                1.0
+              ],
+              "seconds": 9.220941366162151,
+              "step": 800
+            }
+          ],
+          "verdict": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": 0.14148601293563845,
+                "metric": "concept_cos_plus",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.9914860129356384
+              },
+              {
+                "margin": 0.13885381221771242,
+                "metric": "concept_cos_minus",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.9888538122177124
+              },
+              {
+                "margin": 0.17828893661499023,
+                "metric": "concept_mag_plus",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.75,
+                "value": 0.9282889366149902
+              },
+              {
+                "margin": 0.32171106338500977,
+                "metric": "concept_mag_plus",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 1.25,
+                "value": 0.9282889366149902
+              },
+              {
+                "margin": 0.15390372276306152,
+                "metric": "concept_mag_minus",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.75,
+                "value": 0.9039037227630615
+              },
+              {
+                "margin": 0.3460962772369385,
+                "metric": "concept_mag_minus",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 1.25,
+                "value": 0.9039037227630615
+              },
+              {
+                "margin": -0.04378612569579832,
+                "metric": "identity_at_0",
+                "op": ">=",
+                "status": "FAIL",
+                "threshold": 0.85,
+                "value": 0.8062138743042017
+              },
+              {
+                "margin": 0.14018842562853473,
+                "metric": "identity_at_mid",
+                "op": ">=",
+                "status": "PASS",
+                "threshold": 0.85,
+                "value": 0.9901884256285347
+              }
+            ],
+            "passed": false,
+            "shortfall": 0.006439136131735047,
+            "status": "FAIL"
+          }
+        },
+        "seconds": 9.557817183900625,
+        "status": "FAIL"
+      }
+    ],
+    "status": "FAIL",
+    "tag": "h_n05r06_mixup_c0p01_lr15"
+  }
+]
