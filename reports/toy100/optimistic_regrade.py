@@ -248,6 +248,7 @@ if __name__ == "__main__":
     parser.add_argument("--regrader-source-sha256", required=True)
     parser.add_argument("--manifest-sha256", required=True)
     parser.add_argument("--source-commit")
+    parser.add_argument("--amsgrad", action="store_true")
     args = parser.parse_args()
     print(json.dumps(regrade_episode(args.directory, task=args.task,
                                       alpha=args.alpha,
@@ -256,4 +257,5 @@ if __name__ == "__main__":
                                       driver_source_sha256=args.driver_source_sha256,
                                       regrader_source_sha256=args.regrader_source_sha256,
                                       manifest_sha256=args.manifest_sha256,
-                                      source_commit=args.source_commit)))
+                                      source_commit=args.source_commit,
+                                      amsgrad=args.amsgrad)))

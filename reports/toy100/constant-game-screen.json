@@ -1,0 +1,5094 @@
+{
+  "candidates": 79,
+  "common_gate_eligible": false,
+  "episodes": 79,
+  "status": "complete",
+  "waves": [
+    {
+      "artifact": "artifacts/toy100-constraints/particlegan-constant-game-wave1-6340eac",
+      "episodes": 24,
+      "files": 367,
+      "inventory_sha256": "042c12ef4da2bc84f6e79b5c0ea294004d505fb0678855a8359b91ebc1af735f",
+      "manifest_sha256": "a420d89911301b8f4022cee1452177881586d8f5be0dee56e2a916ea10b9bf7e",
+      "rows": [
+        {
+          "alpha": 0.125,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "e288f2a4ce5f00f48360cb3ed63f416e28b8effe8bad6f9c55e7be04c1c95091",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og000",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 16.00457050302066,
+              "final": {
+                "hq": 0.658203125,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.710693359375,
+                  "modes": 6,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.823974609375,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.52392578125,
+                  "modes": 5,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.767822265625,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.658203125,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "f06eb42f5172fc2eb15f2d2919e76c0c7a3e9d1bcba0684d83a1cffb7fc65474",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og001",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 17.417302393121645,
+              "final": {
+                "hq": 0.623046875,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.8134765625,
+                  "modes": 6,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.64453125,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.779296875,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.615966796875,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.623046875,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "d3fe963c032808968ffc4150fa364c1fb6d07b8e55dc5e89dda798c663513298",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og002",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 18.443702118936926,
+              "final": {
+                "hq": 0.432373046875,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.1875,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.768310546875,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.642822265625,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.2958984375,
+                  "modes": 5,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.432373046875,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "1297dbdc51e3832c78668e7dafacb80a56d993063b89cfc9d669512f3fe1dde8",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og003",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 13.153445199131966,
+              "final": {
+                "hq": 0.262939453125,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.15283203125,
+                  "modes": 2,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.6962890625,
+                  "modes": 6,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.742919921875,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.2412109375,
+                  "modes": 3,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.262939453125,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.125,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "17d58069459ca6a15280a31177122bb690af7fe5cb092eaed296c3927708ac41",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og004",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 14.908634569030255,
+              "final": {
+                "hq": 0.73095703125,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.3701171875,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.602783203125,
+                  "modes": 6,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.8388671875,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.828369140625,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.73095703125,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "b86c6565275cd6d39dbd9a36a31029989ede8716d54a6f1f2b0106138cae0c98",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og005",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 12.344925123965368,
+              "final": {
+                "hq": 0.7783203125,
+                "modes": 8
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.65478515625,
+                  "modes": 8,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.620849609375,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.36083984375,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.24755859375,
+                  "modes": 8,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.7783203125,
+                  "modes": 8,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "e5ac2cc9415a7422261602af95212eda3d0ea7a32121218f21abd537c79c4998",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og006",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 13.328874876955524,
+              "final": {
+                "hq": 0.27685546875,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.11767578125,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.298828125,
+                  "modes": 5,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.442626953125,
+                  "modes": 4,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.322998046875,
+                  "modes": 6,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.27685546875,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "03febd9213dd5d91a643b8665ccc7b2796bc63da9b7e4fc6816c81ecb2a41b05",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og007",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 12.891698251944035,
+              "final": {
+                "hq": 0.069580078125,
+                "modes": 2
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.123046875,
+                  "modes": 2,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.084228515625,
+                  "modes": 1,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.069580078125,
+                  "modes": 2,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.125,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "431e73d175eb8ab3ce04166f8b97f1e9f092c8a7cdd5b2d0e11168b58f09eb7c",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og008",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 13.751535504125059,
+              "final": {
+                "hq": 0.149169921875,
+                "modes": 3
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.533203125,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.26123046875,
+                  "modes": 2,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.55126953125,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.524169921875,
+                  "modes": 5,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.149169921875,
+                  "modes": 3,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "7f02abdeee89239ae94e84a2fed58a6f16ef47620eefc249123f8037af8cebfc",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og009",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 13.104690368054435,
+              "final": {
+                "hq": 0.34423828125,
+                "modes": 3
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.700927734375,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.24755859375,
+                  "modes": 4,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.516845703125,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.37109375,
+                  "modes": 5,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.34423828125,
+                  "modes": 3,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "a5f7147ead0fe557bfd9906e21c7acc2421dcd6a43f6ee1b876bb75683cd51b7",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og010",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 15.75508377701044,
+              "final": {
+                "hq": 0.46240234375,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.404296875,
+                  "modes": 6,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.1240234375,
+                  "modes": 2,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.2548828125,
+                  "modes": 4,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.0107421875,
+                  "modes": 1,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.46240234375,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "10b9c781423596eff55ee20b4bdf5bb959d0427635703f77091720c70cf6ab62",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og011",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 14.734600072028115,
+              "final": {
+                "hq": 0.061767578125,
+                "modes": 1
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.079345703125,
+                  "modes": 1,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.0185546875,
+                  "modes": 2,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.1298828125,
+                  "modes": 2,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.025146484375,
+                  "modes": 1,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.061767578125,
+                  "modes": 1,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.125,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "4e3e8f54a91a3e1a49acf452663178a7180b8579d18b14e0d6fe405a6f01118c",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og012",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 14.550725033972412,
+              "final": {
+                "hq": 0.25634765625,
+                "modes": 3
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.558837890625,
+                  "modes": 6,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.1591796875,
+                  "modes": 5,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.772705078125,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.223876953125,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.25634765625,
+                  "modes": 3,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "38981c84e98fcbbfe2681f026c2c8f3dffa898aa4658a0abfbb4b15d2ff76f68",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og013",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 11.815599399851635,
+              "final": {
+                "hq": 0.731201171875,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.343505859375,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.14404296875,
+                  "modes": 3,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.284423828125,
+                  "modes": 3,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.2705078125,
+                  "modes": 3,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.731201171875,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "b441e109e70a5bc01a10b28bc4c5b2fe6b6bbbfe26629410e624ec0b40ac7b3e",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og014",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 15.126884317956865,
+              "final": {
+                "hq": 0.083984375,
+                "modes": 1
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.27685546875,
+                  "modes": 3,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.17236328125,
+                  "modes": 2,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.4375,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.005615234375,
+                  "modes": 1,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.083984375,
+                  "modes": 1,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "66d73932aaf22c4fb2226b4a7eee1c8fef34ac0a6820ad0ab70905644fe32bcc",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og015",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 13.320211101090536,
+              "final": {
+                "hq": 0.552490234375,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.27685546875,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.08056640625,
+                  "modes": 2,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.063232421875,
+                  "modes": 1,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.00341796875,
+                  "modes": 2,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.552490234375,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.125,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "6ffbd51caafb2ac4a38e1879dc97a6c5a253829843706fb4d808b7eb97ef6a0f",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og016",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 13.32729836506769,
+              "final": {
+                "hq": 0.455810546875,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.30126953125,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.537109375,
+                  "modes": 6,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.25634765625,
+                  "modes": 3,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.165283203125,
+                  "modes": 2,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.455810546875,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "41e16d32d35043660606397ba2ca028edd9206f416bc667bf0c0913c24e57e71",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og017",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 16.050070639932528,
+              "final": {
+                "hq": 0.338134765625,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.183837890625,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.244140625,
+                  "modes": 4,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.517578125,
+                  "modes": 5,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.360107421875,
+                  "modes": 5,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.338134765625,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "1301f99329a38bf082e4f72db52df1748b132295a2778ef81eb77d6ae4cab098",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og018",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 12.387183007085696,
+              "final": {
+                "hq": 0.45751953125,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.233154296875,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.17333984375,
+                  "modes": 2,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.23291015625,
+                  "modes": 2,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.287353515625,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.45751953125,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": false,
+          "beta2": 0.99,
+          "config_sha256": "0f425622b8e6857420ac3ffb0d82a76567dfc3f276dfae6660539cb01c148257",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og019",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 15.923173930961639,
+              "final": {
+                "hq": 0.0009765625,
+                "modes": 1
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.079345703125,
+                  "modes": 1,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.1591796875,
+                  "modes": 3,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.027587890625,
+                  "modes": 1,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.0009765625,
+                  "modes": 1,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.125,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "8b8c1ef697223f35d27dc6c3bee1fbf1f487d6173dceca1e1a38be2facaa12c8",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og020",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 11.036241594003513,
+              "final": {
+                "hq": 0.110107421875,
+                "modes": 1
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.3193359375,
+                  "modes": 2,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.158447265625,
+                  "modes": 3,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.088623046875,
+                  "modes": 3,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.110107421875,
+                  "modes": 1,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "f4d5c4b447d1237d40cfbd09bca71ac78ec7a57ebd052ba47be7b2d63330d094",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og021",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 12.627361558843404,
+              "final": {
+                "hq": 0.0,
+                "modes": 0
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.19287109375,
+                  "modes": 2,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.0791015625,
+                  "modes": 1,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.316162109375,
+                  "modes": 3,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.115234375,
+                  "modes": 2,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "cb9f87647edec012c3beb6a13a1371b657a3a9556ee6a73a8906ad7957698fa8",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og022",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 12.535837376955897,
+              "final": {
+                "hq": 0.0,
+                "modes": 0
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.15771484375,
+                  "modes": 3,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.16259765625,
+                  "modes": 1,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.226806640625,
+                  "modes": 2,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "0f6ef03e2203b058deae3451aef73c51d6bb7c297a9fac6738317ca4d79958d4",
+          "core": "winner_k1176_constant",
+          "d_lr_mult": 1.0,
+          "id": "og023",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23",
+          "stages": [
+            {
+              "case_seconds": 12.088366733165458,
+              "final": {
+                "hq": 0.078369140625,
+                "modes": 1
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.0810546875,
+                  "modes": 1,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.079345703125,
+                  "modes": 1,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.124267578125,
+                  "modes": 1,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.078369140625,
+                  "modes": 1,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        }
+      ],
+      "source_commit": "6340eac89f7050d2fd6ff6ac1bc5b5bed852be23"
+    },
+    {
+      "artifact": "artifacts/toy100-constraints/particlegan-constant-game-wave2-be540fd",
+      "episodes": 40,
+      "files": 607,
+      "inventory_sha256": "da03a091b75e6ebafea325f5e3a0027ecd371af2879a79aaaca2be2bf5926665",
+      "manifest_sha256": "1b0d9401f6817340c3c1ed2b922ea5fbaaab0791046a063607b4222ca0a73b80",
+      "rows": [
+        {
+          "alpha": 0.0,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "4f18c66303eff3f94a34cd4e29ba40fcb03ffde0d250f176aa0fac9a7b95bc00",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg000",
+          "lr": 0.0005,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 18.874408174073324,
+              "final": {
+                "hq": 0.7333984375,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.331787109375,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.416259765625,
+                  "modes": 4,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.59130859375,
+                  "modes": 4,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.495849609375,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.7333984375,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.125,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "5b8f5706505c9eb44d9da12a1cfb07d207b45538f86e028a95545130f6b1014d",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg001",
+          "lr": 0.0005,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 21.241236285073683,
+              "final": {
+                "hq": 0.889404296875,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.73095703125,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.93994140625,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.90869140625,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.697509765625,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.889404296875,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "f3a7042e7254eafb1d3ad64a40ea14a508f8ca48cf1d503ab2345c2ea96c89d4",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg002",
+          "lr": 0.0005,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 21.437842590967193,
+              "final": {
+                "hq": 0.380615234375,
+                "modes": 4
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.59423828125,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.237060546875,
+                  "modes": 5,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.3359375,
+                  "modes": 4,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.409423828125,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.380615234375,
+                  "modes": 4,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "38e894b1c13d8f21fdacbfd91187a8f6a145d30b40c7c9eef89127d407d4ae91",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg003",
+          "lr": 0.0005,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 22.126891989959404,
+              "final": {
+                "hq": 0.502197265625,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.386962890625,
+                  "modes": 6,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.43115234375,
+                  "modes": 5,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.466064453125,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.72607421875,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.502197265625,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "1a32ae2bcf2ae238866ed1e38e467bb2fdc778985e1f449a114337acb33775ac",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg004",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 18.083005368011072,
+              "final": {
+                "hq": 0.908447265625,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.563720703125,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.9794921875,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.81982421875,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.712890625,
+                  "modes": 6,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.908447265625,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.125,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "0cc2a2152655a78b1dbb242ba3356b02e9b5200c25670ae26338c650c1589bed",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg005",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 20.89799701794982,
+              "final": {
+                "hq": 0.65478515625,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.921142578125,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.22412109375,
+                  "modes": 5,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.6748046875,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.5908203125,
+                  "modes": 6,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.65478515625,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "f89593684c61ece0bf77e27c3722f0433913b41d88390b5402e584147cc58630",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg006",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 19.8178767869249,
+              "final": {
+                "hq": 0.673583984375,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.39697265625,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.306396484375,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.750244140625,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.67333984375,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.673583984375,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "f5ef7f455af5b162421270ec1756f0b300b478db2fc450fecb7ec99b69663d4b",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg007",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 16.839668805943802,
+              "final": {
+                "hq": 0.712890625,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.268798828125,
+                  "modes": 6,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.109619140625,
+                  "modes": 4,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.376220703125,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.2001953125,
+                  "modes": 5,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.712890625,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "dcdbdb849d3906f0094493b57c4ac10b10e852a17d2f8a74681859ee477ae7ac",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg008",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 18.281184744089842,
+              "final": {
+                "hq": 0.953857421875,
+                "modes": 8
+              },
+              "passing_suffix": 1,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.81884765625,
+                  "modes": 8,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.8427734375,
+                  "modes": 8,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.94921875,
+                  "modes": 8,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.55029296875,
+                  "modes": 6,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.953857421875,
+                  "modes": 8,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 2
+            }
+          ]
+        },
+        {
+          "alpha": 0.125,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "9c4df56b403ed8786ff37c0cfbf385834243f2b1d5a315a57c7da1893aa428b2",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg009",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 22.881039331201464,
+              "final": {
+                "hq": 0.45458984375,
+                "modes": 4
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.10107421875,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.1416015625,
+                  "modes": 1,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.2109375,
+                  "modes": 4,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.4697265625,
+                  "modes": 3,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.45458984375,
+                  "modes": 4,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "69b92d9a7e2ed4606ffc0f4f0e0308e974e05587a81a584bbe6f9878607a89c2",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg010",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 18.16462180693634,
+              "final": {
+                "hq": 0.4013671875,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.080322265625,
+                  "modes": 6,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.259765625,
+                  "modes": 5,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.533935546875,
+                  "modes": 8,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.4013671875,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "408e6635b8557db15f29c4ff4874dd4b0899801d0027592aa506c4aa62e39e3f",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg011",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 19.212173159001395,
+              "final": {
+                "hq": 0.0,
+                "modes": 0
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "026db68cb21aabb4ed9b8341d52d53dbd712afd7901d290ffa0660e88c4f72b7",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg012",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 17.11467917682603,
+              "final": {
+                "hq": 0.369384765625,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.202880859375,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.626708984375,
+                  "modes": 8,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.444091796875,
+                  "modes": 8,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.24365234375,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.369384765625,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.125,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "3bc74a41bce43588f3e7a181ea0f4f20235b4396b2aeaad3a39e478f1b7f69d3",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg013",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 19.77558987401426,
+              "final": {
+                "hq": 0.398681640625,
+                "modes": 4
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.25390625,
+                  "modes": 3,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.560791015625,
+                  "modes": 6,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.673828125,
+                  "modes": 4,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.649658203125,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.398681640625,
+                  "modes": 4,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "d96bac756dd06a3fa9d66b47e9781d8ed977821f26476f5ea9ce76a02c09eacb",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg014",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 19.358539550099522,
+              "final": {
+                "hq": 0.40185546875,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.3251953125,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.30712890625,
+                  "modes": 3,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.06201171875,
+                  "modes": 3,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.395751953125,
+                  "modes": 3,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.40185546875,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": false,
+          "beta2": 0.999,
+          "config_sha256": "89f40b70405132cbd38841724eab81e2c1890ced982324c8ecfd9a4e51316568",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg015",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 18.63048578100279,
+              "final": {
+                "hq": 0.0,
+                "modes": 0
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "f7cfd1195f9317c251ef81d2d9131f9a58f145192d775c953e4b6de1cad7830d",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg016",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 17.761130115948617,
+              "final": {
+                "hq": 0.84375,
+                "modes": 8
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.921142578125,
+                  "modes": 8,
+                  "step": 1000
+                },
+                {
+                  "hq": 1.0,
+                  "modes": 8,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.960693359375,
+                  "modes": 8,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.921630859375,
+                  "modes": 8,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.84375,
+                  "modes": 8,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 4
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "cb69b4263ccaf000527d1b803928b2df82f9057bf609a7e26b3b37c37ce76a6f",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg017",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 20.868300775066018,
+              "final": {
+                "hq": 0.73779296875,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.6806640625,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.5537109375,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.653564453125,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.74072265625,
+                  "modes": 6,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.73779296875,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "60b7aaeebc9244ecc013b378bc91f92aa43ec6332a55228072e84cea360a58bc",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg018",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 20.574813465122133,
+              "final": {
+                "hq": 0.518798828125,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.67724609375,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.418212890625,
+                  "modes": 5,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.679931640625,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.481689453125,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.518798828125,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "b699ccfbdf1d76220a2f3f4da1b6e7b0fe211813ac5f6147e618b9cf88fb9379",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg019",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 18.661108090076596,
+              "final": {
+                "hq": 0.251708984375,
+                "modes": 3
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.232421875,
+                  "modes": 3,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.798095703125,
+                  "modes": 6,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.51904296875,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.127685546875,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.251708984375,
+                  "modes": 3,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "25e0412e2f229759d10c43bc0d69ea352e3a8d81d76a7392df0b4d0f9583a2b9",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg020",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 17.43229801999405,
+              "final": {
+                "hq": 0.76806640625,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.671875,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.650146484375,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.926025390625,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.588134765625,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.76806640625,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "2c5591e9c8e107ecece65cbfe8a154fd897a8892bbdcd4b9a34c2f451ffd859a",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg021",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 16.97633874299936,
+              "final": {
+                "hq": 0.366943359375,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.773193359375,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.3701171875,
+                  "modes": 4,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.2734375,
+                  "modes": 5,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.74072265625,
+                  "modes": 6,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.366943359375,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "7b622516701ec674da01b966a8a87e38bfb6f7194ec3bf29cc3f690ba293ade3",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg022",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 18.14302221289836,
+              "final": {
+                "hq": 0.487548828125,
+                "modes": 4
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.1552734375,
+                  "modes": 1,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.335693359375,
+                  "modes": 2,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.17529296875,
+                  "modes": 2,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.077880859375,
+                  "modes": 2,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.487548828125,
+                  "modes": 4,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "6459ac88d2cac6883ea023a9a2caf77928a24cacb89e93c9af10c5e02aec411f",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg023",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 22.368527662009,
+              "final": {
+                "hq": 0.098876953125,
+                "modes": 2
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.308349609375,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.18896484375,
+                  "modes": 2,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.00048828125,
+                  "modes": 2,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.1904296875,
+                  "modes": 3,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.098876953125,
+                  "modes": 2,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "d3beb60bdd53c094c10d552ec721e9d19292d06c8a8c86671f7451f9e16c1a0f",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg024",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 16.761573128867894,
+              "final": {
+                "hq": 0.30517578125,
+                "modes": 4
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.462158203125,
+                  "modes": 3,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.11328125,
+                  "modes": 2,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.193115234375,
+                  "modes": 4,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.089599609375,
+                  "modes": 2,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.30517578125,
+                  "modes": 4,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "8990172749b2b1080a29e44c2fe83ab7e6ba15b2bd0a73c35abe681c8fe8235c",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg025",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 18.88387565105222,
+              "final": {
+                "hq": 0.0830078125,
+                "modes": 3
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.079833984375,
+                  "modes": 1,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.015869140625,
+                  "modes": 1,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.326904296875,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.0830078125,
+                  "modes": 3,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "11d1d35ad4a4f04ffc71d8f4d173895341c338942551107dfcdf4131c459d8b5",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg026",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 17.436831748811528,
+              "final": {
+                "hq": 0.287353515625,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.08251953125,
+                  "modes": 1,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.462890625,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.203125,
+                  "modes": 3,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.25927734375,
+                  "modes": 3,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.287353515625,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "990b34b275f870490f4b778a1f89871f6df646c8e3356d10d718363c4820d9b0",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "bg027",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 21.526593246031553,
+              "final": {
+                "hq": 0.43994140625,
+                "modes": 4
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.0,
+                  "modes": 0,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.188232421875,
+                  "modes": 4,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.07666015625,
+                  "modes": 1,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.25146484375,
+                  "modes": 3,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.43994140625,
+                  "modes": 4,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "e4143e83acc569b28c6df2bf449fb309eaca9d4d8ecebca58b14c1ae217df211",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg028",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 16.596307900035754,
+              "final": {
+                "hq": 0.783935546875,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.909912109375,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.706787109375,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.828369140625,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.406494140625,
+                  "modes": 5,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.783935546875,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "e473cbd3b05559f8f94c10265dbbd912e4f51eed578da541ebab5625316eb800",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg029",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 18.925741550978273,
+              "final": {
+                "hq": 0.442138671875,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.414794921875,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.464111328125,
+                  "modes": 5,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.65966796875,
+                  "modes": 5,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.6728515625,
+                  "modes": 5,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.442138671875,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "fd39577d6a981c39be38d40a58bb68300e5088ced5b87fc02a57814fe4d26637",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg030",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 16.77851180289872,
+              "final": {
+                "hq": 0.41845703125,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.480712890625,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.673095703125,
+                  "modes": 6,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.49462890625,
+                  "modes": 5,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.181640625,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.41845703125,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "89883f8d4e38d805d18a2e7d75ab4c0a0ae3705e835d3fb77982fe3b262ffa5b",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg031",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 18.535546206170693,
+              "final": {
+                "hq": 0.142578125,
+                "modes": 2
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.38916015625,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.26220703125,
+                  "modes": 4,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.134765625,
+                  "modes": 3,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.212158203125,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.142578125,
+                  "modes": 2,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "0409519a2ba9f92f087e883633c053af65cc3a78bdabdcfbd94532ce132d14e2",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg032",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 16.19176902412437,
+              "final": {
+                "hq": 0.78662109375,
+                "modes": 8
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.669677734375,
+                  "modes": 8,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.846435546875,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.68994140625,
+                  "modes": 8,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.739990234375,
+                  "modes": 8,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.78662109375,
+                  "modes": 8,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "745b6134841a895b5b21b1966f188ffe8a20e1a2e9cefc1d4dc27f8d602f3326",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg033",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 16.417569272918627,
+              "final": {
+                "hq": 0.1142578125,
+                "modes": 3
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.8212890625,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.7490234375,
+                  "modes": 6,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.390625,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.750732421875,
+                  "modes": 6,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.1142578125,
+                  "modes": 3,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "6ab925cd1b1a88903a4c071487d42ede7ffd410b6ad354387d23044603402ba4",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg034",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 17.66203847900033,
+              "final": {
+                "hq": 0.412841796875,
+                "modes": 2
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.000244140625,
+                  "modes": 1,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.4140625,
+                  "modes": 2,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.1845703125,
+                  "modes": 2,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.3154296875,
+                  "modes": 2,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.412841796875,
+                  "modes": 2,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "92c06ce0eee66909a58030a349b1e4fc0c5f26a15b8f4d30796d6de5a2ce2641",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg035",
+          "lr": 0.0025,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 15.234665296971798,
+              "final": {
+                "hq": 0.391357421875,
+                "modes": 2
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.328125,
+                  "modes": 1,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.001708984375,
+                  "modes": 1,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.082275390625,
+                  "modes": 1,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.000244140625,
+                  "modes": 1,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.391357421875,
+                  "modes": 2,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "f9b3a0c0f979c9cf07296e0af219acfb045d92ae55b26c808e9b17d5bef9370d",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg036",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 13.316441763192415,
+              "final": {
+                "hq": 0.182861328125,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.70166015625,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.791015625,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.679443359375,
+                  "modes": 5,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.712158203125,
+                  "modes": 5,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.182861328125,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.25,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "0a14564521258f0b3dd675e675c6d53a10d42bdfddc9b1bc81a90bf9e51be45a",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg037",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 12.481528617907315,
+              "final": {
+                "hq": 0.37841796875,
+                "modes": 2
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.0859375,
+                  "modes": 1,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.177001953125,
+                  "modes": 1,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.565673828125,
+                  "modes": 2,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.31787109375,
+                  "modes": 3,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.37841796875,
+                  "modes": 2,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.5,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "40b87f351b2b7717f1c5b47286dbe96eb31059859df5421b4cab4800751a0213",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg038",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 12.07817017706111,
+              "final": {
+                "hq": 0.389892578125,
+                "modes": 3
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.241943359375,
+                  "modes": 1,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.43212890625,
+                  "modes": 5,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.281005859375,
+                  "modes": 2,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.2587890625,
+                  "modes": 3,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.389892578125,
+                  "modes": 3,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 1.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "ada783a13d1dc265475aa53f1c8cc79d9a254c4782b20136d9dab37397ef2883",
+          "core": "simple",
+          "d_lr_mult": 1.0,
+          "id": "bg039",
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3",
+          "stages": [
+            {
+              "case_seconds": 13.743874948006123,
+              "final": {
+                "hq": 0.113525390625,
+                "modes": 2
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.159423828125,
+                  "modes": 3,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.018310546875,
+                  "modes": 1,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.232666015625,
+                  "modes": 1,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.324951171875,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.113525390625,
+                  "modes": 2,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        }
+      ],
+      "source_commit": "be540fd9375091e87ba06463fdfdd90fb876d3b3"
+    },
+    {
+      "artifact": "artifacts/toy100-constraints/particlegan-constant-game-wave3-101dd9f",
+      "episodes": 15,
+      "files": 232,
+      "inventory_sha256": "6f1f3a345f95654920c3db7ed09f18414927a0dfe85ea4ffd8e3c6694166463e",
+      "manifest_sha256": "ad6be78fd4ae075a03a7804da2987882eddee1640f336da413a3c1d571fdc4fa",
+      "rows": [
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.9,
+          "config_sha256": "6c99ba4ddd99b4b8c59b5a4c1ca957464e2dfa0d7206659bc8e046198a936039",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag000",
+          "lr": 0.0008,
+          "prior_lr_mult": 1.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 14.321062752045691,
+              "final": {
+                "hq": 0.54541015625,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.34326171875,
+                  "modes": 6,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.28515625,
+                  "modes": 4,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.49072265625,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.545654296875,
+                  "modes": 6,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.54541015625,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.9,
+          "config_sha256": "4ae677cff0e255a9ed1147d99b8da887e66a0e882de0a4594f03a17bb9c08c5e",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag001",
+          "lr": 0.0008,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 13.954808119917288,
+              "final": {
+                "hq": 0.31298828125,
+                "modes": 3
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.15771484375,
+                  "modes": 1,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.15771484375,
+                  "modes": 1,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.247314453125,
+                  "modes": 2,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.32470703125,
+                  "modes": 3,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.31298828125,
+                  "modes": 3,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "c3a5e5d80706c43cc8dd194e23856932d674598c5e0b9686e0087805caedc768",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag002",
+          "lr": 0.0008,
+          "prior_lr_mult": 1.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 12.44333112007007,
+              "final": {
+                "hq": 0.410888671875,
+                "modes": 4
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.326171875,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.295654296875,
+                  "modes": 4,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.502685546875,
+                  "modes": 5,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.410888671875,
+                  "modes": 4,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.410888671875,
+                  "modes": 4,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "46858c7078821206daca1fd5b3001161bf47285bdcdcc0cf8e16fa396aee7113",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag003",
+          "lr": 0.0008,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 16.889747830107808,
+              "final": {
+                "hq": 0.725830078125,
+                "modes": 8
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.50244140625,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.458251953125,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.460205078125,
+                  "modes": 8,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.7841796875,
+                  "modes": 8,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.725830078125,
+                  "modes": 8,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.9,
+          "config_sha256": "c9ffe2d952877e4b9e73f517cc6c0ac7bc3b9f29e53200b23055c2802672ab49",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag004",
+          "lr": 0.001,
+          "prior_lr_mult": 1.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 13.06661718711257,
+              "final": {
+                "hq": 0.741943359375,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.627685546875,
+                  "modes": 6,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.727294921875,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.714111328125,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.625732421875,
+                  "modes": 6,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.741943359375,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.9,
+          "config_sha256": "ba04962ba6435bbc93ed8202009df12c0b430bd6aa69e15b1dabc189d25e5c4f",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag005",
+          "lr": 0.001,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 13.70186970406212,
+              "final": {
+                "hq": 0.667724609375,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.578125,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.584716796875,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.599609375,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.67041015625,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.667724609375,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "5315282fa07137015cddb014dd30b86c96b0ad5dfb328da5159c25a9a902c8dd",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag006",
+          "lr": 0.001,
+          "prior_lr_mult": 1.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 13.88168752612546,
+              "final": {
+                "hq": 0.1845703125,
+                "modes": 3
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.419921875,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.64599609375,
+                  "modes": 6,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.31591796875,
+                  "modes": 5,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.5654296875,
+                  "modes": 6,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.1845703125,
+                  "modes": 3,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.9,
+          "config_sha256": "c40f65b70ff6765da25646fa20dd54cf29d5e0987e52a0bb28ae7de123ba39f1",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag007",
+          "lr": 0.00125,
+          "prior_lr_mult": 1.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 14.75379807013087,
+              "final": {
+                "hq": 0.725830078125,
+                "modes": 8
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.745361328125,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.686279296875,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.645263671875,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.596435546875,
+                  "modes": 6,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.725830078125,
+                  "modes": 8,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.9,
+          "config_sha256": "860459f0b775c1831cd0742b2ae9cb6d6a3494ab18894b5e178cbd95339ecac3",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag008",
+          "lr": 0.00125,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 15.586591015104204,
+              "final": {
+                "hq": 0.501953125,
+                "modes": 5
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.4248046875,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.436279296875,
+                  "modes": 5,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.5,
+                  "modes": 5,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.50244140625,
+                  "modes": 5,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.501953125,
+                  "modes": 5,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "d6c77a23e7e9b756279a5562332b99ee521cd7d0a73b7c6d53d03441fab23ac0",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag009",
+          "lr": 0.00125,
+          "prior_lr_mult": 1.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 14.805907804053277,
+              "final": {
+                "hq": 0.503662109375,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.745361328125,
+                  "modes": 6,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.556640625,
+                  "modes": 6,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.65576171875,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.76953125,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.503662109375,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "4e68db0b28b9f1f9b8a87507b9a2d503422e82bd14b0bdc04e787bd027a5e692",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag010",
+          "lr": 0.00125,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 13.413165054982528,
+              "final": {
+                "hq": 0.8046875,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.818359375,
+                  "modes": 7,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.802490234375,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.76025390625,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.781005859375,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.8046875,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.9,
+          "config_sha256": "975407ff47f5a6cd68d519729e7a8c468961484d7f6e10a6eef93cbe531dbddd",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag011",
+          "lr": 0.0015,
+          "prior_lr_mult": 1.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 15.016228026943281,
+              "final": {
+                "hq": 0.832763671875,
+                "modes": 8
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.424072265625,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.3330078125,
+                  "modes": 3,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.52197265625,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.580322265625,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.832763671875,
+                  "modes": 8,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.9,
+          "config_sha256": "549f2774dc5dae4f31371f90e5a6dc3cd228902649d801e97880ade4240f7f3a",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag012",
+          "lr": 0.0015,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 13.525587097043172,
+              "final": {
+                "hq": 0.838623046875,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.769775390625,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.72119140625,
+                  "modes": 7,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.790283203125,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.68896484375,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.838623046875,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "5805eae4bb6a4fc6d9a12cd9553a14fd200a017ce8f8674636e566a49b6a2824",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag013",
+          "lr": 0.0015,
+          "prior_lr_mult": 1.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 13.495819739066064,
+              "final": {
+                "hq": 0.6904296875,
+                "modes": 7
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.58056640625,
+                  "modes": 5,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.443603515625,
+                  "modes": 5,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.5703125,
+                  "modes": 7,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.52001953125,
+                  "modes": 7,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.6904296875,
+                  "modes": 7,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        },
+        {
+          "alpha": 0.0,
+          "amsgrad": true,
+          "beta2": 0.99,
+          "config_sha256": "2d3d1c15df9164f8fd6c394fd5bff0579f04334925c185cefe99eff231c59a03",
+          "core": "winner",
+          "d_lr_mult": 1.0,
+          "id": "ag014",
+          "lr": 0.0015,
+          "prior_lr_mult": 2.0,
+          "shared_gate_eligible": false,
+          "skipped": [
+            "trajectory",
+            "residual_student",
+            "img_stripes2",
+            "img_bars4",
+            "vector_overlap",
+            "img_blobs4",
+            "img_intensity2",
+            "vector_unequal_mass",
+            "vector_unequal_width"
+          ],
+          "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc",
+          "stages": [
+            {
+              "case_seconds": 13.153374100103974,
+              "final": {
+                "hq": 0.544921875,
+                "modes": 6
+              },
+              "passing_suffix": 0,
+              "status": "FAIL",
+              "task": "mode_hold",
+              "terminal": [
+                {
+                  "hq": 0.326904296875,
+                  "modes": 4,
+                  "step": 1000
+                },
+                {
+                  "hq": 0.472900390625,
+                  "modes": 5,
+                  "step": 1050
+                },
+                {
+                  "hq": 0.690673828125,
+                  "modes": 6,
+                  "step": 1100
+                },
+                {
+                  "hq": 0.165283203125,
+                  "modes": 1,
+                  "step": 1150
+                },
+                {
+                  "hq": 0.544921875,
+                  "modes": 6,
+                  "step": 1200
+                }
+              ],
+              "terminal_passing_checks": 0
+            }
+          ]
+        }
+      ],
+      "source_commit": "101dd9fd2f20533511a9cbd8631a2792354688cc"
+    }
+  ]
+}
