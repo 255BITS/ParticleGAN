@@ -1,10 +1,11 @@
 """Particle-local exit clip on the frozen PR84 alternating stencil.
 
-The curvature cap stays .25 and is unchanged. Rho is not an input: a closed
-cap does not exempt a particle. After the cap, a particle is moved only when
+The curvature cap stays .25 and is unchanged. A closed cap does not exempt a
+particle from the spacing fence. After the cap, a particle is moved only when
 the proposed step would finish beyond the real cloud's nearest-neighbor fence
-(median + 3 robust standard deviations of in-batch nearest neighbors), or
-beyond the HQ ball of that particle's minibatch clump:
+(median + 3 robust standard deviations of in-batch nearest neighbors), or,
+when generator rho is in the open-cap exit band, beyond the HQ ball of that
+particle's minibatch clump:
 
 1. Still inside, but the step would cross the fence (nearest-real margin
    already thin enough to be spent, including margin about 0). The longest
@@ -14,9 +15,10 @@ beyond the HQ ball of that particle's minibatch clump:
    the ray from its nearest real.
 
 Inward steps that stay inside both bounds, and interior steps, keep PR84.
-A step the spacing fence does not touch can still leave the clump's HQ ball;
-that step is shortened onto the ball around the clump mean. The mean is not
-a mode catalog. No critic-slope rest damp.
+A step the spacing fence does not touch can still leave the clump's HQ ball.
+That shorten applies only while generator rho is at most the open-cap exit
+band (0.25). Acquisition steps sit at rho >= 0.538 and are left on PR84.
+The center is the clump mean, not a mode catalog. No critic-slope rest damp.
 """
 
 from contextlib import ExitStack, contextmanager
@@ -39,6 +41,8 @@ FENCE_MAD_SCALE = 3 * 1.4826
 # Graded HQ ball. The center is a minibatch clump mean, not a mode catalog.
 HQ_RADIUS = 3.0 * 0.07
 MIN_CLUMP = 8
+# Open-cap exits from the PR #92 diagnosis. Useful acquisition is rho >= 0.538.
+CLUMP_RHO_MAX = 0.25
 
 
 def clump_radial_limits(reals: torch.Tensor, link: torch.Tensor):
@@ -91,8 +95,13 @@ def support_fence(reals: torch.Tensor) -> torch.Tensor:
     return median + FENCE_MAD_SCALE * mad
 
 
+def clump_ball_active(rho: float | None) -> bool:
+    """The HQ ball is an exit-band rule. High-rho acquisition stays on PR84."""
+    return rho is not None and math.isfinite(rho) and rho <= CLUMP_RHO_MAX
+
+
 def exit_scales(before: torch.Tensor, after: torch.Tensor, reals: torch.Tensor,
-                *, steps: int = 20) -> tuple[torch.Tensor, torch.Tensor]:
+                *, steps: int = 20, rho: float | None = None) -> tuple[torch.Tensor, torch.Tensor]:
     """Per-particle scale in [0, 1] so an outward step does not finish past the fence.
 
     Scale stays 1 for interior steps and for steps that do not finish beyond
@@ -127,7 +136,10 @@ def exit_scales(before: torch.Tensor, after: torch.Tensor, reals: torch.Tensor,
     # The nearest-neighbor fence is a spacing bound. A step can finish inside
     # it and still leave the clump's own 3-sigma ball, which is the HQ radius.
     # Only particles the spacing rule left alone are eligible, so an existing
-    # fence restore is not rewritten.
+    # fence restore is not rewritten. The ball is off unless rho is in the
+    # open-cap exit band; acquisition rho is not shortened.
+    if not clump_ball_active(rho):
+        return scale, fence
     centers, limits = clump_radial_limits(reals, fence)
     nearest = dist.argmin(dim=1)
     center = centers[nearest]
@@ -154,7 +166,7 @@ def exit_scales(before: torch.Tensor, after: torch.Tensor, reals: torch.Tensor,
 
 
 def exit_targets(before: torch.Tensor, after: torch.Tensor, reals: torch.Tensor,
-                 scales: torch.Tensor) -> torch.Tensor:
+                 scales: torch.Tensor, *, rho: float | None = None) -> torch.Tensor:
     """Land on the scaled step, or on the fence when the margin is already spent.
 
     A particle with nearest-real distance already past the fence is placed on
@@ -173,7 +185,10 @@ def exit_targets(before: torch.Tensor, after: torch.Tensor, reals: torch.Tensor,
     scaled = before + scales[:, None] * (after - before)
     # Spacing restore wins. A particle the spacing rule did not move, already
     # outside its clump's 3-sigma ball and stepping farther out, is placed on
-    # that ball. The center is the clump mean, not a mode catalog.
+    # that ball only in the open-cap exit band. The center is the clump mean,
+    # not a mode catalog.
+    if not clump_ball_active(rho):
+        return torch.where(restore[:, None], on_fence, scaled)
     centers, limits = clump_radial_limits(reals, fence)
     center = centers[nearest_idx]
     limit = limits[nearest_idx]
@@ -272,10 +287,13 @@ class ExitAwareRecorder(SmoothedBothBoundRecorder):
         proposed = [p.detach().clone() for p in self._params(opt_g)]
         before = self._clean_positions(self.g_base)
         after = self._clean_positions(proposed)
-        scales, fence = exit_scales(before, after, self._reals)
-        targets = exit_targets(before, after, self._reals, scales)
+        rho = float(self.row["g"]["rho"])
+        scales, fence = exit_scales(before, after, self._reals, rho=rho)
+        targets = exit_targets(before, after, self._reals, scales, rho=rho)
         shrunk = int((scales < 1 - 1e-6).sum())
         self.row["exit_fence"] = float(fence)
+        self.row["exit_rho"] = rho
+        self.row["exit_clump_ball"] = clump_ball_active(rho)
         self.row["exit_clipped"] = shrunk
         self.row["exit_min_scale"] = float(scales.min())
         self.row["exit_restored"] = int((torch.cdist(before, self._reals).min(dim=1).values >= fence).sum())
@@ -292,6 +310,7 @@ class ExitAwareRecorder(SmoothedBothBoundRecorder):
         host_step = self.start_step + int(self.row.get("outer_step", 0))
         print(
             f"event=EXIT_CLIP update={host_step} clipped={shrunk} "
+            f"rho={rho:.4f} clump={int(clump_ball_active(rho))} "
             f"min_scale={float(scales.min()):.4f} fence={float(fence):.4f} "
             f"residual={residual:.3e}",
             flush=True,
@@ -311,6 +330,8 @@ class ExitAwareRecorder(SmoothedBothBoundRecorder):
             margin_proxy="nearest real in the current minibatch",
             support_fence="median NN + 3 * 1.4826 * MAD of real nearest neighbors",
             exhausted_margin="already past the fence and stepping out is placed on the fence; a thin interior margin cannot cross it",
+            clump_hq_ball="on only when generator rho <= 0.25; high-rho steps keep the spacing fence alone",
+            clump_rho_max=CLUMP_RHO_MAX,
         )
         return value
 

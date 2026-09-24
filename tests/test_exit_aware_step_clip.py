@@ -75,10 +75,24 @@ def test_step_inside_the_spacing_fence_cannot_leave_the_hq_ball():
     after = torch.tensor([[0.25, 0.0]])
     assert float(torch.cdist(before, reals).min()) < fence
     assert float(torch.cdist(after, reals).min()) < fence
-    scales, _ = exit_scales(before, after, reals)
+    scales, _ = exit_scales(before, after, reals, rho=0.25)
     assert float(scales) < 1.0
-    landed = exit_targets(before, after, reals, scales)
+    landed = exit_targets(before, after, reals, scales, rho=0.25)
     assert float(landed.norm()) <= 0.21 + 1e-3
+
+
+def test_high_rho_step_inside_the_fence_keeps_the_hq_exit():
+    gen = torch.Generator().manual_seed(4)
+    reals = torch.randn(16, 2, generator=gen) * 0.07
+    reals[0] = torch.tensor([0.15, 0.0])
+    fence = float(support_fence(reals))
+    before = torch.tensor([[0.17, 0.0]])
+    after = torch.tensor([[0.25, 0.0]])
+    assert float(torch.cdist(after, reals).min()) < fence
+    scales, _ = exit_scales(before, after, reals, rho=0.672)
+    assert float(scales) == 1.0
+    landed = exit_targets(before, after, reals, scales, rho=0.672)
+    assert torch.allclose(landed, after)
 
 
 def test_only_the_exposed_particle_is_scaled():
