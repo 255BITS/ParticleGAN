@@ -1,0 +1,13 @@
+{"event": "WARM_START", "method": "pr84_real_laplacian_basin", "coeff": 0.1, "eps": 0.1}
+{"event": "WARM_PROGRESS", "method": "pr84", "update": 1050, "field_calls": 150}
+{"event": "WARM_PROGRESS", "method": "basin", "update": 1050, "field_calls": 150}
+{"event": "WARM_CHILD_DONE", "method": "identity", "status": "identity"}
+{"event": "WARM_PROGRESS", "method": "pr84", "update": 1100, "field_calls": 300}
+{"event": "WARM_PROGRESS", "method": "basin", "update": 1100, "field_calls": 300}
+{"event": "WARM_PROGRESS", "method": "pr84", "update": 1150, "field_calls": 450}
+{"event": "WARM_PROGRESS", "method": "basin", "update": 1150, "field_calls": 450}
+{"event": "WARM_PROGRESS", "method": "pr84", "update": 1200, "field_calls": 600}
+{"event": "WARM_CHILD_DONE", "method": "pr84", "status": "alternating_adam_with_spatially_smoothed_g_critic"}
+{"event": "WARM_PROGRESS", "method": "basin", "update": 1200, "field_calls": 600}
+{"event": "WARM_CHILD_DONE", "method": "basin", "status": "alternating_adam_with_spatially_smoothed_g_critic"}
+{"event": "WARM_DONE", "pin": {"status": "FAIL", "passing": 196, "checks": 200, "min_modes": 8, "min_hq": 0.8662109375, "failing": [1129, 1130, 1131, 1132], "final_modes": 8, "final_hq": 0.999267578125}, "candidate": {"status": "PASS", "passing": 200, "checks": 200, "min_modes": 8, "min_hq": 1.0, "failing": [], "final_modes": 8, "final_hq": 1.0}, "regressed": false, "seconds": 21.40680918199996}

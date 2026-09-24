@@ -1,0 +1,7 @@
+{"event": "COLD_START", "task": "trajectory"}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 100, "field_calls": 300}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 200, "field_calls": 600}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 300, "field_calls": 900}
+{"event": "COLD_PROGRESS", "task": "trajectory", "update": 400, "field_calls": 1200}
+{"event": "STAGE_DONE", "task": "trajectory", "passed": true, "live": {"identity_mse": 0.000942668120842427}}
+{"event": "COLD_DONE", "stages": [{"task": "trajectory", "passed": true, "live": {"identity_mse": 0.000942668120842427}}], "seconds": 3.998484416999986}

@@ -1,0 +1,13 @@
+{
+  "stages": [
+    {
+      "task": "mode_hold",
+      "passed": false,
+      "live": {
+        "modes": 6,
+        "hq": 0.914794921875
+      }
+    }
+  ],
+  "seconds": 31.316524868999977
+}
