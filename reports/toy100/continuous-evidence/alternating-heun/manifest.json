@@ -1,0 +1,31 @@
+{
+  "archives": {
+    "joint-warm": {
+      "adapter_sha256": "563b838d53c97621176ec8742487fae858f90d7acfe79016989d399df3ca26ba",
+      "bytes": 127959,
+      "driver_sha256": "60744957f58d7a254848fb5e724b895302894433c8a9d794e761d407ddad9a6c",
+      "file": "joint-warm.tar.gz",
+      "identity_cold_parity": true,
+      "scope": "joint",
+      "sha256": "02378d8afd0610ccf205662b4d40ba3415f0d77666463f7fdd7c4437c8a950c8",
+      "warm_checks": 200,
+      "warm_passing": 196
+    },
+    "network-warm": {
+      "adapter_sha256": "49cf4c2b2c2293ab29a002bef7100cd7f862565d5b7844379515a60b8f74baa2",
+      "bytes": 135893,
+      "driver_sha256": "e4af5fd4473bfc51d8ce573b884d85a6785c5804770a9208892aac352e840e08",
+      "file": "network-warm.tar.gz",
+      "identity_cold_parity": true,
+      "scope": "network",
+      "sha256": "1ea3b901c1aacafca1438854d7f263b7bdaefa9bc41da9b40655a673bf45892b",
+      "warm_checks": 200,
+      "warm_passing": 154
+    }
+  },
+  "first_failed_stage": "passing_state_local_stability",
+  "schema": "alternating-heun-warm-evidence-v1",
+  "scratch_optimizer_policy": "alternating_same_sample_g_trapezoid_d_curvature_bound",
+  "seed": 0,
+  "shared_gate_eligible": false
+}
