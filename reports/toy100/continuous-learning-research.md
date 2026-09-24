@@ -125,6 +125,9 @@ recorded in addition to the unchanged nominal rates.
 Tolerances .25, .5 and .9 each pass 200/200 warm checks; their mean accepted
 factors are .112, .267 and .315. All three then fail the cheaper cold trajectory
 gate: final identity MSE .2872, .3540 and .1332 versus the required .02.
+During the last 50 trajectory updates, their mean step factors are only
+4.27e-6, .00407 and .0519. The strictest rule effectively stops learning even
+though the nominal LR remains fixed; this cannot qualify as continuous learning.
 No cold mode-hold or larger-host tests are run for these rejected candidates.
 The next bounded mechanism tests an implicit linearized joint response. This
 is related to game-aware coupled updates discussed by
