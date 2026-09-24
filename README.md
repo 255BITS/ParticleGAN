@@ -7,6 +7,9 @@ the original recipe is **22/22 PASS on its recorded CPU run** and **16/22 on
 CUDA**, including all three native 100-mode passes. Continuous-learning variants
 are reported separately with their post-convergence stability results.
 
+Current work: [port the passing CPU recipe to GPU](reports/toy100/cpu-recipe-gpu-port/README.md).
+CPU initialization recovers four of its six GPU failures; full GPU qualification is pending.
+
 **GAN v3 is the default:** one shared recipe passes **19/19 live behavioral toys**
 with declared discriminator choices (15/19 with the reference D profile).
 

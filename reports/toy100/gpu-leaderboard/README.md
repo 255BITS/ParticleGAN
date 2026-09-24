@@ -106,9 +106,15 @@ this leaderboard. This GPU run does not adopt the MKL vendor-dispatch shim.
 The old PR143 115/120 sparse CPU stay and this dense post-convergence hold use
 different windows and cadences; their counts are not directly comparable.
 
-## Next experiments
+## Current priority
 
-Use shared column RMS as the full-coverage GPU research reference: it ties for
+The user has prioritized [porting the original 22/22 CPU recipe to GPU](../cpu-recipe-gpu-port/README.md).
+See the [active base declaration](../current-research-base.json). The old
+continuous-rate reference below is historical; its search is secondary.
+
+## Earlier continuous-rate experiment priorities
+
+The earlier recommendation was to use shared column RMS as the full-coverage GPU research reference: it ties for
 the most toy passes, passes cold ring acquisition, and has the longest measured
 post-convergence hold among the four fully tested candidates. This is a starting
 point, not promotion of a passing release. Keep H as an image-task comparator.

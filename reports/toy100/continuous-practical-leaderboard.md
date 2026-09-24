@@ -35,12 +35,18 @@ The preserved-recipe GPU failures are `mode_hold`, `trajectory`, `img_bars4`,
 including native coverage and accuracy on all three 100-mode problems. All 22
 GPU control verdicts and all 105 earlier GPU variant results were regraded.
 
-Shared column RMS remains the next **strict continuous-learning** GPU research
-reference; it is not the overall finite-budget recipe winner. None of the
+The active work now starts from the **original scheduled CPU recipe**, resolving
+its GPU failures first. [Twenty-four porting controls](cpu-recipe-gpu-port/README.md)
+confirm 6/6 fresh CPU passes on the failed hosts. CPU initialization alone
+recovers four on CUDA; ring and unequal mass remain failing. This partial
+diagnostic is not a new 22-toy score.
+
+Shared column RMS is retained as a historical **strict continuous-learning**
+reference; it is not the active porting base. None of the
 continuous variants passes the required 1,200-update hold after confirmation.
 PR107/140 do not confirm by 6000; PR143 confirms at 1400 and fails after 11 good
 hold checks. Their published adapters cover only two toys.
 
 [GPU protocol and replay](gpu-leaderboard/README.md) ·
-[Strict GPU research reference](gpu-leaderboard/current-gpu-reference.json) ·
+[Historical strict GPU reference](gpu-leaderboard/current-gpu-reference.json) ·
 [Historical continuous-learning CPU board](continuous-practical-leaderboard-cpu-history.md)

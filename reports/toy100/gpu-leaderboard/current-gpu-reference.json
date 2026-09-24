@@ -1,7 +1,7 @@
 {
   "profile": "cuda_fp32_v1",
   "candidate": "shared_column_rms",
-  "purpose": "next GPU research starting reference",
+  "purpose": "historical strict continuous-learning reference; not the active porting base",
   "release_qualified": false,
   "toy_passes": 11,
   "toy_total": 22,
@@ -10,5 +10,7 @@
   "hold_budget": 1200,
   "first_hold_failure": 1532,
   "selection_reason": "tied most full-matrix toy passes; passing cold ring; strongest post-convergence hold among fully tested candidates",
-  "replay": "python replay.py --gpu GPU --candidate shared_column_rms --task TASK --workdir NEW_DIRECTORY"
+  "replay": "python replay.py --gpu GPU --candidate shared_column_rms --task TASK --workdir NEW_DIRECTORY",
+  "active": false,
+  "active_research_base": "reports/toy100/current-research-base.json"
 }
