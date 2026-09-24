@@ -62,6 +62,12 @@ then fails cold ring7/HQ .87012. [Completed result and next small tests](chamfer
 distinguish nonlinear pullback error from inadequate target coverage. Neither
 the objective decrease nor early passing checkpoints establish sustained quality.
 
+**Path-crossing follow-up:** a G-only ray that flips the output gradient
+across a critic dip into an empty higher basin fails dense warm **14/200**
+(minimum 4 modes / HQ .667, final 5 / .735). The path-off control in the same
+fork is 196/200, missing only 1129–1132. Cold was not run.
+[Rule and receipts](path-crossing-report.md). The PR84 stencil stays selected.
+
 ## Reproduction starting point
 
 Research branch: `research/continuous-learning`, based on PR head `983d037`.
