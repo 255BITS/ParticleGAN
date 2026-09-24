@@ -1,0 +1,121 @@
+{
+  "scope": "frozen two-state GAN common-instance-noise copied-critic assay and 8-step local alternating continuation",
+  "source_commit": "same commit as this manifest; per-file hashes below are authoritative",
+  "warm_first_assay": "../common-instance-noise-2state/v1-state-selection-failure (1325 valid; 1539 invalid for nonlocal acquisition)",
+  "input_cold_origin": "PR88 independent audit PR84 control, exact post-final-evaluation saved state",
+  "noisy_width": 1.1279860476026753,
+  "files": [
+    {
+      "path": "cold-endpoint/declaration.json.gz",
+      "raw_path": "cold-endpoint/declaration.json",
+      "raw_sha256": "c30d5fb46a64e7728f6223169e75a1f053694110b5c977c64e90d5d0b7cf6797",
+      "gzip_sha256": "4391ce4575cd3571be56eaec83ceba6097ded898fd8847386b3e5d48e76816e2",
+      "raw_bytes": 2830,
+      "gzip_bytes": 1586
+    },
+    {
+      "path": "cold-endpoint/result.json.gz",
+      "raw_path": "cold-endpoint/result.json",
+      "raw_sha256": "cfaff3fe636c56c975f6f61ba9e948e83f037c16f7ffd6ded414d88b67554839",
+      "gzip_sha256": "892ee93565e9adaafea4af6ccaf9f5a22e9ac084db2f7c3ad70ff55348f03197",
+      "raw_bytes": 107785,
+      "gzip_bytes": 22540
+    },
+    {
+      "path": "cold-endpoint/summary.json.gz",
+      "raw_path": "cold-endpoint/summary.json",
+      "raw_sha256": "6df15ceaefba0d8b39eb03eb0f9f381a470c64de2484716ae69f84af119ea228",
+      "gzip_sha256": "7286cd63df4915b0849d3a2b1415c11543f37750f0a0f8a864179cadaf31d9fc",
+      "raw_bytes": 5674,
+      "gzip_bytes": 1509
+    },
+    {
+      "path": "cold-endpoint/geometry-analysis.json.gz",
+      "raw_path": "cold-endpoint/geometry-analysis.json",
+      "raw_sha256": "b36114a720b7837a8c235bfbb6861f3edf6c54e80289f6eab3a331212d099346",
+      "gzip_sha256": "a42498098d98572166c2983b36993f4512a35607e56bc0241c94b29e62d83983",
+      "raw_bytes": 49185,
+      "gzip_bytes": 6281
+    },
+    {
+      "path": "continuation/declaration.json.gz",
+      "raw_path": "continuation/declaration.json",
+      "raw_sha256": "34dcc09925db1fc58ae031d6321ff91b94db5e1bf13a96d9da60e25a0b2a9657",
+      "gzip_sha256": "6756b8ec777a4e2d54db717c16a140f742ffa57b804b8b020dd18b0c6adfd3a2",
+      "raw_bytes": 2862,
+      "gzip_bytes": 1547
+    },
+    {
+      "path": "continuation/warm1325-result.json.gz",
+      "raw_path": "continuation/warm1325-result.json",
+      "raw_sha256": "13eaa8a9a779712a45553d2b683067a7c388a01797ab94b5f40ead0c6444ea60",
+      "gzip_sha256": "28432c629f950320f409f883d2645e7645a434b50aa78a4a2b2c6a32ef27ab98",
+      "raw_bytes": 15620,
+      "gzip_bytes": 5680
+    },
+    {
+      "path": "continuation/cold1200-result.json.gz",
+      "raw_path": "continuation/cold1200-result.json",
+      "raw_sha256": "97c6a2acbea04785fbdb8e42214b9f9e3b388dcc727c421e9afb7edaee7eac45",
+      "gzip_sha256": "5f25db2e7d75111f15a120bc5f7ae2cc5128688ce1cbabdde4c088fe3c3ba23e",
+      "raw_bytes": 35358,
+      "gzip_bytes": 9091
+    },
+    {
+      "path": "continuation/summary.json.gz",
+      "raw_path": "continuation/summary.json",
+      "raw_sha256": "4a6c37440c7263d88112502135904e677e99281ac6d11cb52153dce6fa0ec785",
+      "gzip_sha256": "8bf5773270322f7f853f4cd6f78745f4e08e5e621c5efdd4a8346abf7beb790f",
+      "raw_bytes": 5472,
+      "gzip_bytes": 2280
+    },
+    {
+      "path": "states/pr84-cold1200.pt.gz",
+      "raw_path": "states/pr84-cold1200.pt",
+      "raw_sha256": "ec212d3e4f3f03cb1f03d505014f1facd5919ca457f4b965315ba1939d866c0b",
+      "gzip_sha256": "90fc9e5ce56eb5769a34a0e907917b55f5d2efe561ee453a0126eb0b97dfceff",
+      "raw_bytes": 603803,
+      "gzip_bytes": 531227
+    },
+    {
+      "path": "source/common_instance_noise_falsifier.py.gz",
+      "raw_path": "source/common_instance_noise_falsifier.py",
+      "raw_sha256": "449598943b583eb759a006a33825c26efc5ddab5a826b0cfee67fffa35cbd2f4",
+      "gzip_sha256": "e841760958a3b5a586ea44f119f3ef34fb293d30dc1ebaa4e9347c8cdeb7c672",
+      "raw_bytes": 21582,
+      "gzip_bytes": 6451
+    },
+    {
+      "path": "source/common_instance_noise_cold_endpoint.py.gz",
+      "raw_path": "source/common_instance_noise_cold_endpoint.py",
+      "raw_sha256": "7e3cdfa6161de2711a9e8bc3977ee65a89c53bb58b219da4b3ab45644e18e9e7",
+      "gzip_sha256": "1a97430fa942f02c3e911fd1a2edd2fde0303bd1b8c2d3436c889f710268ecc0",
+      "raw_bytes": 15246,
+      "gzip_bytes": 4919
+    },
+    {
+      "path": "source/common_instance_noise_short_continuation.py.gz",
+      "raw_path": "source/common_instance_noise_short_continuation.py",
+      "raw_sha256": "1a308df653c8519879a7b5cdb44a61c0f4de4d7ce9cf5b5672b27c28cb9306a3",
+      "gzip_sha256": "e06d5bd7b45e422c394d93aa0f8cf0feca066fee6fdcd22d70bb605091bb55f6",
+      "raw_bytes": 18194,
+      "gzip_bytes": 5551
+    },
+    {
+      "path": "source/common_instance_noise_geometry.py.gz",
+      "raw_path": "source/common_instance_noise_geometry.py",
+      "raw_sha256": "1ac7de030058cc8ebbd50fcf41bb68907c1b13322b641fddedf72f548078ceb5",
+      "gzip_sha256": "a8f09aa47f4385e550ed25a900bce3df996047e3f3a7a3ae39e78ce68e0fb283",
+      "raw_bytes": 3003,
+      "gzip_bytes": 1039
+    },
+    {
+      "path": "source/archive_common_instance_noise_round10.py.gz",
+      "raw_path": "source/archive_common_instance_noise_round10.py",
+      "raw_sha256": "7052f80e3c2233a7a65c3f875cd692ec704770ba5ffe8a5a0c5ffd71e73bd535",
+      "gzip_sha256": "a83bf5326b24da358128f55aa21d0a1545e08873e8d1c105120ddb1231d2d8e3",
+      "raw_bytes": 3357,
+      "gzip_bytes": 1328
+    }
+  ]
+}

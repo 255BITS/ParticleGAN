@@ -1,0 +1,34 @@
+{
+  "status": "STATE_SELECTION_ERROR",
+  "reason": "1539 post_accepted_d nearest-support occupied all 8; HQ missing not empty Voronoi; old diagnostic required empty nearest region",
+  "files": {
+    "declaration.json": {
+      "raw_sha256": "d6650011875e8f3c8cc8c6b6b8b7eaae2e72b6ef2e6abd831f9bc27d8325a0fc",
+      "gzip_sha256": "e8eb54c41ff9fe2254275b1f2e0d48f6b7a5174a025dd5a58ffdbb7069cf2a46",
+      "raw_bytes": 3588,
+      "gzip_bytes": 1933
+    },
+    "step-1325.json": {
+      "raw_sha256": "a8a6c65907418f282c9d3c77c304a0368d37ecd07a9d5b094b636593de947dec",
+      "gzip_sha256": "460f8c05a2e1c8035ccc5ecd42c95a61f830b7a483a3278ad56a0afde0ead4e3",
+      "raw_bytes": 20065,
+      "gzip_bytes": 4862
+    },
+    "step-1539.json": {
+      "raw_sha256": "89a13900e0b073d68fb79b03b2f95a0ccbe74ff5d1f4ad437c911348334020f1",
+      "gzip_sha256": "b7c4a34c677c6c46e2cd62c7c0b3a4694d3b00acd3d7252206d7a1c504d29e40",
+      "raw_bytes": 20037,
+      "gzip_bytes": 5077
+    },
+    "summary.json": {
+      "raw_sha256": "a6a5c72ad1869fad71db24fc38b5db54f91946b57341c7f20ea70d17b19cee1c",
+      "gzip_sha256": "3de6cb5324576966cd585c3ad35bae1dad6f587525e4ded60ac04580f163eab8",
+      "raw_bytes": 7450,
+      "gzip_bytes": 3064
+    },
+    "source.py": {
+      "sha256": "449598943b583eb759a006a33825c26efc5ddab5a826b0cfee67fffa35cbd2f4",
+      "bytes": 21582
+    }
+  }
+}
