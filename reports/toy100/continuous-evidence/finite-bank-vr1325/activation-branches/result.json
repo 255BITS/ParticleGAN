@@ -1,0 +1,47 @@
+{
+  "scope": "saved1325, 16 frozen native banks, G-only captured direction",
+  "source_sha256": "f57c8b473f328490d0c28b5382ae5f34d201316a786e7ab1f95ff4a3a7d75be7",
+  "initial_result_sha256": "6ede5e0322d26804831e839a707856c6915fec17fcabd51e5355f5272c4e5d58",
+  "frozen_bank_tensors_sha256": "e2848fdcbcf1283bd2a12931ae64c47f3a5aeb6e8e54a370c10e66ce953501d0",
+  "states_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47",
+  "initial_source_sha256": {
+    "reports/toy100/pr84_finite_bank_vr_diagnostic.py": "37dcb85d09bb710bb1c9c8c106169c24c9e862e142967cb3940c2e792da761d6",
+    "reports/toy100/pr84_critic_relaxation.py": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/pr84_critic_refinement_capture.py": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+  },
+  "rows": [
+    {
+      "scale": 0.0001,
+      "sign_flips": 7,
+      "activation_inputs": 9437184,
+      "activation_calls": 768
+    },
+    {
+      "scale": 5e-05,
+      "sign_flips": 3,
+      "activation_inputs": 9437184,
+      "activation_calls": 768
+    },
+    {
+      "scale": 1e-07,
+      "sign_flips": 0,
+      "activation_inputs": 9437184,
+      "activation_calls": 768
+    },
+    {
+      "scale": 5e-08,
+      "sign_flips": 0,
+      "activation_inputs": 9437184,
+      "activation_calls": 768
+    }
+  ],
+  "training_updates": 0,
+  "global_rng_unchanged": true
+}
