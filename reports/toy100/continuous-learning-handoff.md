@@ -25,8 +25,14 @@ a bounded critic-refinement rule. That rule now passes **all44 saved-state
 checks and warm200/200**, with eight modes and minimum warm HQ .99707.
 The dense hold through2400 passes all1200 later checks, minimum HQ .939453
 with eight modes throughout. Cold trajectory passes at MSE .000910 with22
-passing observations; cold ring aborts on a nonfinite inner-fit trial after the last logged
-completed update460. No ring quality verdict is available.
+passing observations; the original cold ring aborts on a nonfinite inner-fit trial at
+update472. No full ring quality verdict is available. [Exact failure audit](pr84-critic-refinement-failure-audit.md)
+isolates float32 strong-Wolfe interpolation overflow from otherwise finite accepted
+state. The [finite-trial repair](pr84-critic-refinement-finite-recovery.md) restores the
+saved best critic exactly, preserves all44 finite-path saved-state checks, and completes
+updates472–491 with finite state. Those20 checks still have three modes: numerical
+recovery alone does not pass acquisition. A new source-bound full cold run is in progress;
+its trajectory reproduces the original pass and final snapshot exactly.
 Each update costs about53 additional1024-pair critic-gradient evaluations in
 the warm run, plus a parity check. Fits are nonconverged and D's retained Adam
 moments precede the refinement. [Rule, strict filter and frozen evidence](pr84-critic-refinement-filter.md).

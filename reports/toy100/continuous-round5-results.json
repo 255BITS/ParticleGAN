@@ -337,7 +337,7 @@
       "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
     },
     "warm_evidence": "continuous-evidence/pr84-critic-refinement-independent-audit/warm/manifest.json",
-    "scope": "conditional fixed-target stability through2400; cold acquisition running",
+    "scope": "conditional fixed-target stability through2400; original cold acquisition incomplete at472",
     "production_gate_eligible": false,
     "long_hold": {
       "checks": 1200,
@@ -420,7 +420,54 @@
       "last_logged_completed_update": 460,
       "full_quality_verdict": null,
       "log": "/tmp/pr84-critic-refinement-cold.log",
-      "next": "capture exact failed fit; reject candidate until solver repair passes local replay and cold gate"
+      "next": "original error preserved; separate finite-trial source epoch below",
+      "failed_update": 472
     }
+  },
+  "finite_trial_source_epoch": {
+    "method": "pr84_critic_refinement_with_later_nonfinite_trial_rejection",
+    "status": "NUMERICAL_FILTERS_PASS_NEW_COLD_RUNNING",
+    "adapter": "reports/toy100/pr84_critic_refinement_finite.py",
+    "adapter_sha256": "e6668d711a4b98fbcb232a3a350e612003e3eacdc5942b6508a9509f98519561",
+    "production_gate_eligible": false,
+    "source_epoch": "later-nonfinite-trial rejection; original finite paths unchanged",
+    "numerical_recovery": {
+      "evidence": "continuous-evidence/critic-refinement-finite-recovery/gate.json",
+      "failed_update": 472,
+      "exact_failed_fit_calls": 49,
+      "finite_calls": 48,
+      "nonfinite_calls": 1,
+      "restored_best_critic_bitwise": true,
+      "continuation_updates": 20,
+      "continuation_start": 472,
+      "continuation_end": 491,
+      "finite_state": true,
+      "quality_scope": "numerical check only; all20 updates have three modes"
+    },
+    "finite_path_parity": {
+      "checks": 44,
+      "all_exact": true,
+      "evidence": "continuous-evidence/pr84-critic-refinement-finite-parity/manifest.json"
+    },
+    "cold": {
+      "status": "RUNNING",
+      "trajectory": {
+        "status": "PASS",
+        "identity_mse": 0.0009098352747969329,
+        "original_final_state_file_exact": true
+      },
+      "ring": {
+        "status": "RUNNING",
+        "budget": 1200
+      },
+      "log": "/tmp/pr84-critic-refinement-finite-cold.log"
+    },
+    "not_run": [
+      "own_acquired_continuation",
+      "same_target_error_response",
+      "longer_hold",
+      "remaining_shared_hosts",
+      "production_common22"
+    ]
   }
 }

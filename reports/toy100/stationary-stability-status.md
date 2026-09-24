@@ -20,8 +20,13 @@ the original diagnostic's provenance.
 **Current candidate:** bounded refinement of the same penalized critic loss
 passes all44 saved-state checks and warm200/200, minimum HQ .99707. Its
 constant-rate dense hold through2400 passes1200/1200, minimum HQ .939453.
-Cold trajectory passes at MSE .000910; cold ring aborts on a nonfinite inner-fit trial after the last logged
-completed update460. No ring quality verdict is available. This costs roughly53 extra
+Cold trajectory passes at MSE .000910; the original cold ring aborts on a nonfinite inner-fit trial
+at update472. No full ring quality verdict is available. An [independent exact audit](pr84-critic-refinement-failure-audit.md)
+isolates float32 strong-Wolfe interpolation overflow. A [bounded finite-trial repair](pr84-critic-refinement-finite-recovery.md)
+recovers the exact best finite critic, leaves44 passing saved-state checks bitwise unchanged,
+and completes twenty saved-state numerical updates; these remain at three modes and do not
+pass acquisition. Its full cold rerun reproduces trajectory and is testing ring acquisition.
+This costs roughly53 extra
 1024-pair D gradients per update; fits remain nonconverged. Cold acquisition
 is not yet complete. [Independent warm/hold audit and evidence](pr84-critic-refinement-independent-audit.md),
 [strict saved-state filter](pr84-critic-refinement-filter.md). The

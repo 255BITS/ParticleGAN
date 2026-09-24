@@ -3,8 +3,10 @@
 **No replacement qualifies yet.** The new penalized critic-refinement rule
 passes all44 saved-state continuation checks and warm200/200, minimum HQ
 .99707 with eight modes throughout. Its dense hold through2400 also passes all1200 later checks, minimum HQ
-.939453 with eight modes throughout. Cold trajectory passes, but cold ring aborts on a nonfinite inner-fit trial
-after update460; the full acquisition gate is incomplete and failed. Opponent prediction passes warm200 but fails
+.939453 with eight modes throughout. Cold trajectory passes, but the original cold ring aborts on a nonfinite inner-fit trial
+at update472; the full acquisition gate is incomplete and failed. An independently checked finite-trial repair
+passes the exact failed fit, twenty numerical continuation updates and all44 unchanged finite-path checks.
+Its new cold gate is running; this numerical repair is not an acquisition or stability pass. Opponent prediction passes warm200 but fails
 22 of1,200 later per-update checks, including temporary mode loss. Cold gates
 were not run after that failure. This round investigates the delayed loss of quality on the **unchanged**
 dataset. The production recipe still uses LR decay. Research tests use live
@@ -196,12 +198,25 @@ The [independent audit](pr84-critic-refinement-independent-audit.md) records
 66,918 additional1024-pair fit closures and21 closure-budget hits over1400
 active updates. The faithful cold extension passes nine focused checks; its
 400-update trajectory gate passes at MSE .000909835, with22/24 passing
-observations and a22-check passing suffix. The1200-update ring gate aborts after the last logged completed update460:
+observations and a22-check passing suffix. The1200-update ring gate aborts at update472:
 a later L-BFGS line-search trial raises `nonfinite local critic fit`. No full
-ring quality verdict exists. A passive replay is capturing the exact bank,
-accepted D, finite closure history and invalid trial before a solver-policy
-change is tested. A bounded fit must remain a finite update map; the earlier
-warm and hold passes do not override this cold failure.
+ring quality verdict exists. The [exact passive capture and independent audit](pr84-critic-refinement-failure-audit.md)
+locate float32 overflow in the strong-Wolfe cubic interpolation: finite bracket values
+produce an infinite squared intermediate and a NaN trial. Accepted models, moments,
+bank and the previous48 closure evaluations remain finite. This is a specific solver
+failure, not evidence that the accepted game state had already diverged.
+
+A [separate finite-trial source epoch](pr84-critic-refinement-finite-recovery.md)
+ends that one bounded attempt and restores the best finite training-loss point already
+evaluated. Initial nonfinite fields still fail; there is no retry or extra budget.
+The exact failed fit uses49 calls (48 finite, one rejected) and restores the saved best
+critic bitwise. All44 original saved-state continuation checks preserve full state,
+noise, metrics and original update records exactly; seven focused helper tests pass.
+The exact472–491 continuation remains finite but retains only three modes throughout
+(HQ .16748–.95435). That is a numerical check, not an acquisition pass or a diagnosis of
+quality deterioration. The repaired full cold trajectory reproduces MSE .000909835 and
+its final snapshot byte-for-byte. Cold ring is running under the original1200 budget.
+The original failed gate remains archived separately.
 
 The nominal rates are fixed, but this rule still uses state-dependent
 curvature limits. In four successive windows through2400, the median G
