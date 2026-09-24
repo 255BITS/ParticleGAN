@@ -1,0 +1,37 @@
+{
+  "bounds": {
+    "analytic_mmd_bandwidth": 0.21,
+    "hold_mmd2_max": 0.01,
+    "observations_every": 10,
+    "response_deadline": 1600,
+    "response_mmd2_max": 0.01,
+    "target_sigma": 0.029
+  },
+  "hold_steps": 200,
+  "intervention": "12 current live clean G(prior.z) centers + N(0,.029^2I) target; zero D final affine; preserve Adam/EMA/RNG",
+  "noise_horizon": 1200,
+  "recovery_steps": 400,
+  "scheduled_prefix_step": 1000,
+  "scope": "synthetic_matched_population_diagnostic_only",
+  "seed": 0,
+  "shared_gate_eligible": false,
+  "shift": [
+    0.35,
+    0
+  ],
+  "shift_step": 1200,
+  "source_sha256": {
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/transfer_suite/legacy_noise_adapters.py": "b34a864330f24ce24e8d0fe5b3f14932ee795fc217d98786901ae0bdaadc7470",
+    "reports/toy100/functional_metric_scratch.py": "e63007296a2ae0a56185852028e75bbc4aaecb4c9fbfd3601be05a75fb45f38e",
+    "reports/toy100/matched_population_diagnostic.py": "1559c83c79a8e84f76423d4eab49f90e6b6b409f2f7b845c0f5f56533b44d6de"
+  },
+  "variants": [
+    "constant",
+    "constant_frozen",
+    "metric",
+    "metric_frozen"
+  ]
+}
