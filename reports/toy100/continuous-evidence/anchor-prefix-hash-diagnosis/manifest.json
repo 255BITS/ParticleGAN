@@ -1,0 +1,17 @@
+{
+  "scope": "exact stopped-prefix state diagnosis; no full1400 candidate replay",
+  "shared_gate_eligible": false,
+  "files": {
+    "reports/toy100/continuous-evidence/anchor-prefix-hash-diagnosis/observer.py.gz": "ad9ec054ceac6e5704ed3114fcb6c10af1fa2a618c15a1d541bdb9e7767d6da5",
+    "reports/toy100/continuous-evidence/anchor-prefix-hash-diagnosis/reconciliation.json": "b8ee79ce66574629587113ae71ad11d7c0054a4ffdd89e327f20cd3e36740734",
+    "reports/toy100/continuous-evidence/anchor-prefix-hash-diagnosis/snapshot-horizon1200.pt.gz": "1ae660d3c087e72261a9eaf577da486d17fdeeabc08857b5c3bb0f8f0ab626fa",
+    "reports/toy100/continuous-evidence/anchor-prefix-hash-diagnosis/snapshot-horizon2400.pt.gz": "19a771fbfab97db864691c1830bc121dc02e14ecf584e01f34ccf5108ff1c691",
+    "reports/toy100/continuous-evidence/anchor-prefix-hash-diagnosis/summary.json.gz": "240964ef1a95d4ea3f683b1631a986fed136eefc8bb555fe917eeb38df24c60f",
+    "reports/toy100/continuous-evidence/anchor-prefix-hash-diagnosis/tests.txt": "d9f898c25e38fed4ec00805869b1966bcef55c0bf191f848ba8d7accd5147833",
+    "reports/toy100/allocation_continuous_probe_v2.py": "fb3b8d988799299799d184d2bf7edd743ec69db94f52db56bd5b1d0db071c6df",
+    "reports/toy100/allocation_snapshot_reconciliation.py": "10e7bfcf860786ada71ed7046d8a40a41703e9cda442d8555c269bb33e8a797c",
+    "reports/toy100/allocation_prefix_hash_diagnosis.py": "55761b7d035cc15698b50a066ebf2c10634f527e94a949609b647ffa2860d989",
+    "reports/toy100/allocation-prefix-parity.md": "220ca8205d7e8516422c2c830afd0d6da0dd1fae67d2482df4ea36afbd5ec8d6",
+    "tests/test_allocation_snapshot_reconciliation.py": "0bd1c0d026e62e0a21b2fb4446abc7cd17d2d738471fdaf50896b784d75946b7"
+  }
+}
