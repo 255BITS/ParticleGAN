@@ -20,7 +20,8 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--amplification-bound',type=float)
     parser.add_argument('--explicit',action='store_true')
-    parser.add_argument('--curvature-bound',type=float,default=1.);args=parser.parse_args()
+    parser.add_argument('--curvature-bound',type=float,default=1.)
+    parser.add_argument('--advantage-gate',type=float);args=parser.parse_args()
     torch.set_num_threads(1)
     config=json.loads((ROOT/'configs/toy100/constraints_simple_regularization.json').read_text())
     config.update(name='cross_curvature_response',lr_floor=1.,lr_anneal_start=0.)
@@ -29,7 +30,7 @@ def main():
     (args.output/'config.json').write_text(json.dumps(config,indent=2)+'\n')
     declaration=dict(seed=0,task_order=['trajectory','mode_hold'],budgets={'mode_hold':1200,'trajectory':400},
         stop_at_first_failed_host=True,shared_gate_eligible=False,scratch_optimizer_policy=METHOD,
-        solver=dict(krylov_dim=8,linear_tolerance=.1,nonlinear_tolerance=None,curvature_bound=args.curvature_bound,amplification_bound=args.amplification_bound,explicit=args.explicit,fd_relative=1e-4,correction_limit=2.,max_backtracks=8),
+        solver=dict(krylov_dim=8,linear_tolerance=.1,nonlinear_tolerance=None,curvature_bound=args.curvature_bound,advantage_gate=args.advantage_gate,amplification_bound=args.amplification_bound,explicit=args.explicit,fd_relative=1e-4,correction_limit=2.,max_backtracks=8),
         source={name:hashlib.sha256((ROOT/'reports/toy100'/name).read_bytes()).hexdigest() for name in
                 ('cross_curvature_scratch.py','implicit_extra_scratch.py','fixed_metric_extra_scratch.py','extra_adam_scratch.py','cross_curvature_probe.py')})
     (args.output/'declaration.json').write_text(json.dumps(declaration,indent=2)+'\n')
@@ -37,7 +38,7 @@ def main():
     for task in declaration['task_order']:
         spec=next(job['spec'] for job in plan() if job['spec']['name']==task)
         try:
-            with cross_curvature(task=task,amplification_bound=args.amplification_bound,explicit=args.explicit,curvature_bound=args.curvature_bound) as (recorder,source):
+            with cross_curvature(task=task,amplification_bound=args.amplification_bound,explicit=args.explicit,curvature_bound=args.curvature_bound,advantage_gate=args.advantage_gate) as (recorder,source):
                 result,context=run_legacy(spec,recipe,noise,model_policy=declared_model_policy(config))
             verdict=test_verdict(spec,result)
             data=dict(result=result,applied=context['applied'],noise=context['noise_receipt'],

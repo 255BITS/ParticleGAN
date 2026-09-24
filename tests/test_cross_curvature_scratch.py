@@ -167,3 +167,42 @@ def test_explicit_mode_is_plain_adam_until_own_curvature_bound_binds():
     assert recorder.curvature[-1]["g"]["rho"] == pytest.approx(rho, rel=1e-4)
     assert x.item() == pytest.approx(1. - lr / 5. * 5. / rho, rel=1e-4)
     assert y.item() == pytest.approx(2. - lr / abs(-1.02) * -1.02, rel=1e-6)
+
+
+def _gated_game(advantage):
+    x = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([x], lr=10., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=10., betas=(0., .9), eps=1e-12)
+    recorder = CrossCurvatureRecorder(explicit=True, curvature_bound=.25, advantage_gate=.1)
+    for phase in recorder.phases(0, opt_d, opt_g, {}):
+        if phase == 0:
+            recorder.advantage = advantage
+        y.grad = (-x - .01 * y).detach().clone()
+        recorder.step(opt_d, torch.optim.Adam.step)
+        x.grad = (y + 3. * x).detach().clone()
+        recorder.step(opt_g, torch.optim.Adam.step)
+    return x, recorder
+
+
+def test_open_advantage_gate_takes_plain_adam_step_without_extra_evaluations():
+    x, recorder = _gated_game(.5)
+    assert x.item() == pytest.approx(1. - 10., abs=1e-9)
+    assert recorder.queries == [] and recorder.curvature[-1]["gate_open"]
+
+
+def test_closed_advantage_gate_applies_curvature_bound():
+    x, recorder = _gated_game(.01)
+    row = recorder.curvature[-1]
+    assert not row["gate_open"]
+    assert row["g"]["factor"] == pytest.approx(.25 / row["g"]["rho"])
+    assert x.item() == pytest.approx(1. - 10. * row["g"]["factor"], rel=1e-6)
+
+
+def test_host_advantage_is_read_from_base_point_critic_loss():
+    torch.set_num_threads(1)
+    policy = NoisePolicy(.029, .5, .1, 1200)
+    with cross_curvature(start_step=0, explicit=True, advantage_gate=.1) as (recorder, _):
+        mode_hold.train_mode_hold(mode_hold.ModeHoldRecipe(steps=2), noise_policy=policy)
+    assert len(recorder.curvature) == 2
+    assert all(isinstance(row["critic_advantage"], float) for row in recorder.curvature)

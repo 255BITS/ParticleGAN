@@ -20,6 +20,12 @@ beta1=0 Adam step u=-sqrt(P) F0 (constant Adam, which acquires the cold
 trajectory host unaided), and only the per-player own-curvature bound is
 applied. That costs two extra same-sample evaluations per update.
 
+With ``advantage_gate`` the curvature bound applies only when the critic's
+base-point advantage log 2 - L_D (raw relativistic D loss, before penalties)
+is below the gate. When the critic is clearly winning, as during acquisition
+or after a target shift, the proposal is left unbounded. Only the game's own
+losses are read; the target is never used.
+
 The underlying solve:
 
 P is the first-gradient Adam metric including each role's constant LR, as in
@@ -46,6 +52,7 @@ import math
 from unittest.mock import patch
 
 import torch
+from particlegan.gan_loss import GANLoss
 
 from reports.toy100.implicit_extra_scratch import ImplicitExtraRecorder
 from reports.toy100.extra_adam_scratch import HOSTS,sha,transformed_function
@@ -56,7 +63,7 @@ EXPLICIT_METHOD='adam_with_same_sample_own_curvature_step_bound'
 
 class CrossCurvatureRecorder(ImplicitExtraRecorder):
     def __init__(self,start_step=0,krylov_dim=8,linear_tolerance=.1,fd_relative=1e-4,
-                 correction_limit=2.,max_backtracks=8,curvature_bound=1.,amplification_bound=None,explicit=False):
+                 correction_limit=2.,max_backtracks=8,curvature_bound=1.,amplification_bound=None,explicit=False,advantage_gate=None):
         super().__init__(start_step=start_step,krylov_dim=krylov_dim,linear_tolerance=linear_tolerance,
                          nonlinear_tolerance=.5,fd_relative=fd_relative,correction_limit=correction_limit,
                          max_backtracks=max_backtracks)
@@ -65,11 +72,21 @@ class CrossCurvatureRecorder(ImplicitExtraRecorder):
             raise ValueError('invalid amplification bound')
         self.curvature_bound=curvature_bound;self.amplification_bound=amplification_bound
         self.explicit=explicit
+        if advantage_gate is not None and (not math.isfinite(advantage_gate) or advantage_gate<=0):
+            raise ValueError('invalid critic-advantage gate')
+        self.advantage_gate=advantage_gate;self.advantage=None
         self.split=None;self.curvature=[]
 
     def _own_curvature_bound(self,solution,q0,scale):
         """Scale each player's step so its own-curvature ratio is at most the bound."""
-        factors={};row=dict(outer_step=self.outer_steps+1)
+        factors={};row=dict(outer_step=self.outer_steps+1,critic_advantage=self.advantage)
+        if self.advantage_gate is not None:
+            if self.advantage is None:raise RuntimeError('critic advantage was not observed at the base point')
+            row['gate_open']=self.advantage>=self.advantage_gate
+            if row['gate_open']:
+                for role in ('d','g'):row[role]=dict(rho=None,factor=1.)
+                self.curvature.append(row)
+                return solution
         solution=solution.clone()
         for role,block in (('d',slice(0,self.split)),('g',slice(self.split,len(solution)))):
             if self.amplification_bound is not None:
@@ -168,6 +185,7 @@ class CrossCurvatureRecorder(ImplicitExtraRecorder):
         if measure:
             with torch.no_grad():
                 original_z=prior.z.detach().clone();original_output=clean(original_z).double()
+        self.advantage=None
         yield 0
         if self.pending:raise RuntimeError('incomplete first game gradient')
         self.rng_after=self._rng(self.streams)
@@ -240,7 +258,9 @@ class CrossCurvatureRecorder(ImplicitExtraRecorder):
             **{f'{role}_amplification_clamped':sum(bool(row.get(role+'_amplification',{}).get('clamped')) for row in self.curvature) for role in ('d','g')},
             **{f'{role}_rho':stats([row[role]['rho'] for row in self.curvature]) for role in ('d','g')},
             **{f'{role}_curvature_factor':stats([row[role]['factor'] for row in self.curvature]) for role in ('d','g')},
-            **{f'{role}_curvature_bound_active':sum(row[role]['factor']<1 for row in self.curvature) for role in ('d','g')})
+            **{f'{role}_curvature_bound_active':sum(row[role]['factor']<1 for row in self.curvature) for role in ('d','g')},
+            advantage_gate=self.advantage_gate,gate_open=sum(bool(row.get('gate_open')) for row in self.curvature),
+            critic_advantage=stats([row['critic_advantage'] for row in self.curvature]))
 
     def receipt(self):
         value=super().receipt()
@@ -272,4 +292,11 @@ def cross_curvature(task='mode_hold',**options):
         exec(compile(tree,f'<cross-curvature-{task}>','exec'),module.__dict__,namespace)
         stack.enter_context(patch.object(module,HOSTS[task],namespace[HOSTS[task]]))
         stack.enter_context(patch.object(torch.optim.Adam,'step',patched_step))
+        original_d_loss=GANLoss.d_loss
+        def observed_d_loss(gan,real_logits,fake_logits):
+            value=original_d_loss(gan,real_logits,fake_logits)
+            if recorder.phase==0 and recorder.advantage is None:
+                recorder.advantage=math.log(2)-float(value.detach())
+            return value
+        stack.enter_context(patch.object(GANLoss,'d_loss',observed_d_loss))
         yield recorder,source
