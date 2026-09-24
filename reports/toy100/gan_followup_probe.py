@@ -33,9 +33,11 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "delayg05": ("reports.toy100.pr84_delayed_arm_g_lr", "pr84_delayed_arm_g_lr"),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
+    "reports/toy100/pr84_delayed_arm_g_lr.py",
     "reports/toy100/pr84_reach_candidate.py",
     "reports/toy100/pr84_smoothed_candidate.py",
     "reports/toy100/alternating_curvature_scratch.py",
@@ -53,6 +55,8 @@ def factory(method):
 
 
 def emit(**row):
+    import torch
+    row.setdefault("cpu", torch.backends.cpu.get_cpu_capability())
     print(json.dumps(row, default=float), flush=True)
 
 
@@ -107,6 +111,10 @@ def warm(output, method):
         emit(event="WARM", variant=name, status=row["status"],
              **{k: loc.get(k) for k in ("checks", "passing_checks", "min_modes", "min_hq",
                                         "failing_steps") if k in loc})
+    identity = compact.get("identity", {}).get("local", {})
+    if identity.get("checks") != 200 or identity.get("passing_checks") != 200:
+        emit(event="WARM_RANK_REFUSED", reason="identity/control != 200/200",
+             checks=identity.get("checks"), passing_checks=identity.get("passing_checks"))
 
 
 def cold(output, method, tasks):
