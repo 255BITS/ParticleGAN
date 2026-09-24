@@ -12,6 +12,7 @@ from contextlib import contextmanager
 import hashlib
 import importlib
 import json
+import os
 from pathlib import Path
 import sys
 import time
@@ -33,10 +34,14 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "cmnull": ("reports.toy100.pr84_common_mode_grad_null", "pr84_common_mode_grad_null"),
 }
+_PINS = ("ATEN_CPU_CAPABILITY", "MKL_ENABLE_INSTRUCTIONS", "ONEDNN_MAX_CPU_ISA", "DNNL_MAX_CPU_ISA")
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
     "reports/toy100/pr84_reach_candidate.py",
+    "reports/toy100/pr84_common_mode_grad_null.py",
+    "benchmarks/locked_shared/observation.py",
     "reports/toy100/pr84_smoothed_candidate.py",
     "reports/toy100/alternating_curvature_scratch.py",
     "reports/toy100/extra_adam_scratch.py",
@@ -62,7 +67,10 @@ def declare(output, phase, method):
               for name in SOURCES if (ROOT / name).exists()}
     import torch
     row = dict(phase=phase, method=method, seed=0, host="neural", torch=torch.__version__,
-               cpu=torch.backends.cpu.get_cpu_capability(), shared_gate_eligible=False,
+               cpu=torch.backends.cpu.get_cpu_capability(),
+               aten_cpu_capability=os.environ.get("ATEN_CPU_CAPABILITY"),
+               cpu_env={name: os.environ.get(name) for name in _PINS},
+               shared_gate_eligible=False,
                purity="GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
                source=source)
     (output / "declaration.json").write_text(json.dumps(row, indent=2) + "\n")
@@ -75,6 +83,7 @@ def _dynamics(recorder):
 
 
 def warm(output, method):
+    import torch
     from benchmarks.toy100.warm_equilibrium_probe import constant_rate_context, run_warm_variants
 
     @contextmanager
@@ -102,6 +111,15 @@ def warm(output, method):
     compact = {k: dict(status=v["status"], local=v["local_stability"], final=v["final"])
                for k, v in result["variants"].items()}
     (output / "summary.json").write_text(json.dumps(compact, indent=2, default=float) + "\n")
+    control = compact.get("identity", {}).get("local", {})
+    ranked = control.get("checks") == 200 and control.get("passing_checks") == 200
+    emit(event="WARM_CONTROL", ranked=ranked, checks=control.get("checks"),
+         passing_checks=control.get("passing_checks"), min_modes=control.get("min_modes"),
+         min_hq=control.get("min_hq"),
+         aten_cpu_capability=os.environ.get("ATEN_CPU_CAPABILITY"),
+         cpu=torch.backends.cpu.get_cpu_capability())
+    if not ranked:
+        emit(event="WARM_INVALID", reason="unchanged control is not 200/200; warm is not rankable")
     for name, row in compact.items():
         loc = row["local"]
         emit(event="WARM", variant=name, status=row["status"],
@@ -167,7 +185,8 @@ def stay(output, method, steps):
                final=(diag[-1]["step"], diag[-1]["modes"], round(diag[-1]["hq"], 4)) if diag else None,
                dynamics=_dynamics(recorder))
     records = [dict(step=r["outer_step"], sharp=r.get("critic_sharpness"), width=r.get("critic_width"),
-                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"])
+                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"],
+                    cm_null_l2=r.get("cm_null_l2"))
                for r in getattr(recorder, "records", [])]
     (output / "stay.json").write_text(json.dumps(dict(summary=row, diagnostic=diag, records=records),
                                                  default=float) + "\n")
