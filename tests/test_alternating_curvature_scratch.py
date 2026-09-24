@@ -232,3 +232,14 @@ def test_slope_weight_of_one_reproduces_the_stencil_recipe_and_small_slopes_shri
     weighted = _host(alternating_curvature(slope_reference=1e6, **options))
     assert all(r["slope_weight_max"] < 1e-3 for r in weighted[3].records)
     assert all(torch.equal(a, b) for a, b in zip(stencil[1:3], weighted[1:3]))
+
+
+def test_slope_step_scale_multiplies_the_bounded_g_step_only():
+    options = dict(start_step=0, curvature_bound=.25, bound_d=True, d_curvature_bound=3., stencil_critic=True)
+    stencil = _host(alternating_curvature(**options))
+    unit = _host(alternating_curvature(slope_step_reference=1e-12, **options))
+    assert stencil[0] == unit[0]
+    scaled = _host(alternating_curvature(slope_step_reference=1e6, **options))
+    rows = scaled[3].records
+    assert all(0 < r["slope_step_scale"] < 1e-3 for r in rows)
+    assert all(torch.equal(a, b) for a, b in zip(stencil[1:3], scaled[1:3]))
