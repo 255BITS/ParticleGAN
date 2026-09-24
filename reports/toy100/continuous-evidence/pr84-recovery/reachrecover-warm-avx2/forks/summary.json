@@ -1,0 +1,73 @@
+{
+  "cold_final_state_sha256": "5ed72d29f061107b2fa2f30d06106513b6058265a497a6e1417a7ff675140f70",
+  "continuation_updates": 200,
+  "identity_cold_parity": true,
+  "scope": "passing_state_local_stability_only",
+  "steps": 1200,
+  "variants": {
+    "identity": {
+      "final": {
+        "hq": 0.9990234375,
+        "modes": 8
+      },
+      "final_state_sha256": "5ed72d29f061107b2fa2f30d06106513b6058265a497a6e1417a7ff675140f70",
+      "local_stability": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.989990234375,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "long_hold": null,
+      "stationary": {
+        "checks": 5,
+        "failing_steps": [],
+        "min_hq": 0.997314453125,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 5,
+        "passing_suffix": 5,
+        "stable_from_step": 1000
+      },
+      "status": "PASS"
+    },
+    "reachrecover": {
+      "final": {
+        "hq": 0.9814453125,
+        "modes": 8
+      },
+      "final_state_sha256": "e3053bbd4e082898b6beae5fd1df8af4783114629d6cf77a7f441b46752d0b9b",
+      "local_stability": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.920654296875,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "long_hold": null,
+      "stationary": {
+        "checks": 5,
+        "failing_steps": [],
+        "min_hq": 0.96240234375,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 5,
+        "passing_suffix": 5,
+        "stable_from_step": 1000
+      },
+      "status": "PASS"
+    }
+  },
+  "warm_state_sha256": "57c10b571a2538075ea842cd0c9ea6f0ff677062ae9287e8e3c21d1241c48861",
+  "warm_step": 1000
+}
