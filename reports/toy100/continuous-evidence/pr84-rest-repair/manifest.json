@@ -1,0 +1,231 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "pr84-rest-repair",
+  "base_commit": "e57f15b",
+  "pr84_head": "468ad2619a0536f8c69ef878b86bc514d296338a",
+  "shared_gate_eligible": false,
+  "files": {
+    "source/implementation-repair.patch": {
+      "sha256": "397d20113fa9b74361acbaac4267df42677a420515e2a4412b4ddd6fa0bfbff7",
+      "original_sha256": "397d20113fa9b74361acbaac4267df42677a420515e2a4412b4ddd6fa0bfbff7",
+      "original_path": "reports/toy100/continuous-evidence/pr84-rest-repair/source/implementation-repair.patch",
+      "compression": "none"
+    },
+    "source/pr84_head_original.py": {
+      "sha256": "551f7b594268c36dff5d18c715da58e2c50cc06d3a9e1341e1483ab9c6b6b43b",
+      "original_sha256": "551f7b594268c36dff5d18c715da58e2c50cc06d3a9e1341e1483ab9c6b6b43b",
+      "original_path": "reports/toy100/continuous-evidence/pr84-rest-repair/source/pr84_head_original.py",
+      "compression": "none"
+    },
+    "pr84-rest-repair-warm/declaration.json.gz": {
+      "sha256": "e4cd951fb740adeab3b96b9b3239d6664bc969eab14c2b0bb6ff1842ac0039b3",
+      "original_sha256": "59ff4bb7911c3db45e24497c50c46645da307468249a344d4b31bea36e34f7b3",
+      "original_path": "artifacts/pr84-rest-repair-warm/declaration.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/monitor.log.gz": {
+      "sha256": "37881e9df956a6da9087bbfb9d96161cfbf077a66b6aea26914e92130e920ffb",
+      "original_sha256": "d80acbd5c011fedbc4f058d84524506d844c0a69c998e32a178a61ff75f394a4",
+      "original_path": "artifacts/pr84-rest-repair-warm/monitor.log",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/run/cold.json.gz": {
+      "sha256": "b7c241210b3638097c2976fc08dcea1fd1dc35b1c1bf32c953e99efa8ca1b988",
+      "original_sha256": "6c5ae399be47ba74b24ca1ca8b982aae166ce701b2c0779683956021362a1874",
+      "original_path": "artifacts/pr84-rest-repair-warm/run/cold.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/run/constant.json.gz": {
+      "sha256": "80aae2750c6e7f8bae12099853e123ace9dcc4044ea9ac95f33c92360f849a3c",
+      "original_sha256": "2da20b4660a6677bdcd3a778e467807cf2452e07433cf3625262ef215830ed57",
+      "original_path": "artifacts/pr84-rest-repair-warm/run/constant.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/run/identity.json.gz": {
+      "sha256": "915709ad2a391a8744fc5ad6dc7a24d4a91f8fd9ab3201028e46896fdaac8888",
+      "original_sha256": "9daffd2a8a306cad195031116f9c80d4b6b260219bc5ba2c809137cf8bcdc5e3",
+      "original_path": "artifacts/pr84-rest-repair-warm/run/identity.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/run/single_slope.json.gz": {
+      "sha256": "292abc56f6e95df9b387274c30030e70cecfa121929691ca0086f08c9548ff92",
+      "original_sha256": "a98243dc52cf8530e980c46f4f422dde78c30c9835714491d2836e8d7fe78e73",
+      "original_path": "artifacts/pr84-rest-repair-warm/run/single_slope.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/run/summary.json.gz": {
+      "sha256": "a0db6bbe0bcff32cc0e19fe1b90d4a15b573c56afd386309e1eba3fbc16e73d4",
+      "original_sha256": "7956b0737d46c5cb8e49ea8b43f39afdcb7f94c7708fde5bd5a277c82068e44a",
+      "original_path": "artifacts/pr84-rest-repair-warm/run/summary.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/source_archive/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/pr84-rest-repair-warm/source_archive/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/source_archive/continuous_probe.py.gz": {
+      "sha256": "5b6b82473026e8f57176e22a953c34b54e71d8a685effbdd080d07f48c30e613",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/pr84-rest-repair-warm/source_archive/continuous_probe.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/source_archive/extra_adam_scratch.py.gz": {
+      "sha256": "fc9d646056ee4e469c924dd88f1d94abff5d5f02d9c1caec3d47b2c52cdb7f63",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/pr84-rest-repair-warm/source_archive/extra_adam_scratch.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/source_archive/implementation-repair.patch.gz": {
+      "sha256": "d3f1560440cd625e0754cdc22c3a7d3b127cb47caddc021d6c68043609648169",
+      "original_sha256": "397d20113fa9b74361acbaac4267df42677a420515e2a4412b4ddd6fa0bfbff7",
+      "original_path": "artifacts/pr84-rest-repair-warm/source_archive/implementation-repair.patch",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/source_archive/mode_hold_transformed.py.gz": {
+      "sha256": "ac31331783b47f6827969f0ebc0c515f02c6c162554bb6631178055766059104",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_path": "artifacts/pr84-rest-repair-warm/source_archive/mode_hold_transformed.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/source_archive/pr84_head_original.py.gz": {
+      "sha256": "97a405eecba7825cc0263f9b09322e87e0b270ae11686283abf74aa5915e760f",
+      "original_sha256": "551f7b594268c36dff5d18c715da58e2c50cc06d3a9e1341e1483ab9c6b6b43b",
+      "original_path": "artifacts/pr84-rest-repair-warm/source_archive/pr84_head_original.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/source_archive/pr84_rest_repair_probe.py.gz": {
+      "sha256": "955939465d906b75c0bf408fe314d3081ce9bd00795c944ccda30b574ed2e8a9",
+      "original_sha256": "2e2165645ef2fb47e6ccf9db2ea376b2dc8e07340c613b8b2dd23c69a6b8e3ef",
+      "original_path": "artifacts/pr84-rest-repair-warm/source_archive/pr84_rest_repair_probe.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/source_archive/pr84_rest_repair_scratch.py.gz": {
+      "sha256": "311b12bff4a2ebf99247db2916fef3f2c09bc224bda56b73624ce0badb426d15",
+      "original_sha256": "098c76a8c79cb062e4be7382e0105e06fd6a7c65e96bd90bb2a8702536bc5e4c",
+      "original_path": "artifacts/pr84-rest-repair-warm/source_archive/pr84_rest_repair_scratch.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/source_archive/test_pr84_rest_repair.py.gz": {
+      "sha256": "9c011b0199e2921dbaf4e332d91f4a6c431c64044d351489cbfc9523423d349e",
+      "original_sha256": "a5bdd86d64450bbed1f09a72e762fc8768987522b6ffde4949b1dc8da34f041f",
+      "original_path": "artifacts/pr84-rest-repair-warm/source_archive/test_pr84_rest_repair.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-warm/source_archive/warm_equilibrium_probe.py.gz": {
+      "sha256": "21c13cc9990de385e478dcab28b03340ccbe6a59c3f733813c5287fce70ac8f7",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/pr84-rest-repair-warm/source_archive/warm_equilibrium_probe.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/config.json.gz": {
+      "sha256": "4ae3ed372ea9e4087b9f863657429d23682c9b5d1698f8069758d49c61d63894",
+      "original_sha256": "b68610fe1634639eadf39d8ce5e59727f1e59f3108afabce800c12bc154bb043",
+      "original_path": "artifacts/pr84-rest-repair-cold/config.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/declaration.json.gz": {
+      "sha256": "2a19cda72db023895bcf2ce9c1f2c6ab2ca89ddde69dd3c4626715526ac7d93d",
+      "original_sha256": "b73877c6baf6b1bf6901f0f7fd741e3217b86c834cc4ba9f4cc5aa5ff8a29bd2",
+      "original_path": "artifacts/pr84-rest-repair-cold/declaration.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/mode_hold.json.gz": {
+      "sha256": "c8c778c932a2677a686668a7872d63589a1f53465e6f00750a3547a8d6cede00",
+      "original_sha256": "3992203356953a46f17b8114b9f01ca1eeff3f8bc1d2e5d2c6801a71f1645228",
+      "original_path": "artifacts/pr84-rest-repair-cold/mode_hold.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/monitor.log.gz": {
+      "sha256": "6219a0730a3c1d032e6afad54dba8f5791165779ae3bc1b99af5181b4fada111",
+      "original_sha256": "5442311bf0f2fc948b20b6d3942093aa03af51b13048509414752e35c36ba606",
+      "original_path": "artifacts/pr84-rest-repair-cold/monitor.log",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/previous-gate.json.gz": {
+      "sha256": "a0db6bbe0bcff32cc0e19fe1b90d4a15b573c56afd386309e1eba3fbc16e73d4",
+      "original_sha256": "7956b0737d46c5cb8e49ea8b43f39afdcb7f94c7708fde5bd5a277c82068e44a",
+      "original_path": "artifacts/pr84-rest-repair-cold/previous-gate.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/source_archive/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/pr84-rest-repair-cold/source_archive/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/source_archive/continuous_probe.py.gz": {
+      "sha256": "5b6b82473026e8f57176e22a953c34b54e71d8a685effbdd080d07f48c30e613",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/pr84-rest-repair-cold/source_archive/continuous_probe.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/source_archive/extra_adam_scratch.py.gz": {
+      "sha256": "fc9d646056ee4e469c924dd88f1d94abff5d5f02d9c1caec3d47b2c52cdb7f63",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/pr84-rest-repair-cold/source_archive/extra_adam_scratch.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/source_archive/implementation-repair.patch.gz": {
+      "sha256": "d3f1560440cd625e0754cdc22c3a7d3b127cb47caddc021d6c68043609648169",
+      "original_sha256": "397d20113fa9b74361acbaac4267df42677a420515e2a4412b4ddd6fa0bfbff7",
+      "original_path": "artifacts/pr84-rest-repair-cold/source_archive/implementation-repair.patch",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/source_archive/mode_hold_transformed.py.gz": {
+      "sha256": "ac31331783b47f6827969f0ebc0c515f02c6c162554bb6631178055766059104",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_path": "artifacts/pr84-rest-repair-cold/source_archive/mode_hold_transformed.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/source_archive/pr84_head_original.py.gz": {
+      "sha256": "97a405eecba7825cc0263f9b09322e87e0b270ae11686283abf74aa5915e760f",
+      "original_sha256": "551f7b594268c36dff5d18c715da58e2c50cc06d3a9e1341e1483ab9c6b6b43b",
+      "original_path": "artifacts/pr84-rest-repair-cold/source_archive/pr84_head_original.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/source_archive/pr84_rest_repair_probe.py.gz": {
+      "sha256": "955939465d906b75c0bf408fe314d3081ce9bd00795c944ccda30b574ed2e8a9",
+      "original_sha256": "2e2165645ef2fb47e6ccf9db2ea376b2dc8e07340c613b8b2dd23c69a6b8e3ef",
+      "original_path": "artifacts/pr84-rest-repair-cold/source_archive/pr84_rest_repair_probe.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/source_archive/pr84_rest_repair_scratch.py.gz": {
+      "sha256": "311b12bff4a2ebf99247db2916fef3f2c09bc224bda56b73624ce0badb426d15",
+      "original_sha256": "098c76a8c79cb062e4be7382e0105e06fd6a7c65e96bd90bb2a8702536bc5e4c",
+      "original_path": "artifacts/pr84-rest-repair-cold/source_archive/pr84_rest_repair_scratch.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/source_archive/test_pr84_rest_repair.py.gz": {
+      "sha256": "9c011b0199e2921dbaf4e332d91f4a6c431c64044d351489cbfc9523423d349e",
+      "original_sha256": "a5bdd86d64450bbed1f09a72e762fc8768987522b6ffde4949b1dc8da34f041f",
+      "original_path": "artifacts/pr84-rest-repair-cold/source_archive/test_pr84_rest_repair.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/source_archive/trajectory_transformed.py.gz": {
+      "sha256": "b5153f2d985994b6319ab2a5dfd3dd95e17d5f0b9ef85d93e3ba34f91c61a3af",
+      "original_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_path": "artifacts/pr84-rest-repair-cold/source_archive/trajectory_transformed.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/source_archive/warm_equilibrium_probe.py.gz": {
+      "sha256": "21c13cc9990de385e478dcab28b03340ccbe6a59c3f733813c5287fce70ac8f7",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/pr84-rest-repair-cold/source_archive/warm_equilibrium_probe.py",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/status.json.gz": {
+      "sha256": "311945ed0cf0c4be5f4410b232e323099b5d028e019d8abbef5756b964cd5ee9",
+      "original_sha256": "e569f24538ca18bef124ca2a0deb52895579109ea9ef0c964e7b618fd2595469",
+      "original_path": "artifacts/pr84-rest-repair-cold/status.json",
+      "compression": "gzip"
+    },
+    "pr84-rest-repair-cold/trajectory.json.gz": {
+      "sha256": "b8b5f42e848029e37d6526ac0c745f26c1c32c5a1ed8740d5cf9a73c4ce2f6d6",
+      "original_sha256": "a6f9980fa2308e2be4d3cb797becfa3f30c3d194b7589106dbf0f02d74c9a636",
+      "original_path": "artifacts/pr84-rest-repair-cold/trajectory.json",
+      "compression": "gzip"
+    }
+  }
+}

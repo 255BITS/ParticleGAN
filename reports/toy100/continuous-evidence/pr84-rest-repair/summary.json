@@ -1,0 +1,473 @@
+{
+  "shared_gate_eligible": false,
+  "candidate_count": 1,
+  "implementation_repair_only": true,
+  "adapter_sha256": "098c76a8c79cb062e4be7382e0105e06fd6a7c65e96bd90bb2a8702536bc5e4c",
+  "tests": {
+    "count": 6,
+    "status": "PASS",
+    "seconds": 2.45
+  },
+  "not_run": [
+    "fixed_target_hold2400"
+  ],
+  "stages": {
+    "warm": {
+      "status": "PASS",
+      "outer_steps": 200,
+      "field_evaluations_per_player": 600,
+      "rng_checks": 400,
+      "actual_role_rate_callbacks": 1200,
+      "rest_count": 162,
+      "slope_measured": 200,
+      "early_acquisition": {
+        "first_eight": 1,
+        "hold_before_1000": 146
+      },
+      "final": {
+        "modes": 8,
+        "hq": 0.995849609375
+      },
+      "slope": {
+        "min": 0.08333209902048111,
+        "mean": 0.17303335689008237,
+        "max": 0.4234028160572052
+      }
+    },
+    "trajectory": {
+      "status": "PASS",
+      "outer_steps": 400,
+      "field_evaluations_per_player": 1200,
+      "rng_checks": 800,
+      "actual_role_rate_callbacks": 2400,
+      "rest_count": 0,
+      "slope_measured": 0,
+      "early_acquisition": {
+        "first_eight": null,
+        "hold_before_1000": 0
+      },
+      "final": {
+        "identity_mse": 0.0009426623582839966
+      },
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 0.0009426623582839966,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.019057337641716004
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 18,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 18,
+          "first_pass_step": 117,
+          "stable_from_step": 117,
+          "stable_from_seconds": 1.7635055598802865,
+          "confirmed_step": 184,
+          "confirmed_seconds": 2.3025885820388794
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.46
+      }
+    },
+    "ring": {
+      "status": "FAIL",
+      "outer_steps": 1200,
+      "field_evaluations_per_player": 3600,
+      "rng_checks": 2400,
+      "actual_role_rate_callbacks": 7200,
+      "rest_count": 204,
+      "slope_measured": 1200,
+      "early_acquisition": {
+        "first_eight": null,
+        "hold_before_1000": 0
+      },
+      "final": {
+        "modes": 6,
+        "hq": 0.9609375
+      },
+      "slope": {
+        "min": 0.11860577017068863,
+        "mean": 0.3547569702876111,
+        "max": 1.1543875932693481
+      },
+      "verdict": {
+        "status": "FAIL",
+        "attempted": true,
+        "passed": false,
+        "metrics": [
+          {
+            "metric": "modes",
+            "value": 6,
+            "op": ">=",
+            "threshold": 8,
+            "status": "FAIL",
+            "margin": -2
+          },
+          {
+            "metric": "hq",
+            "value": 0.9609375,
+            "op": ">=",
+            "threshold": 0.9,
+            "status": "PASS",
+            "margin": 0.06093749999999998
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 0,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 0,
+          "first_pass_step": null,
+          "stable_from_step": null,
+          "stable_from_seconds": null,
+          "confirmed_step": null,
+          "confirmed_seconds": null
+        },
+        "shortfall": 0.125,
+        "confirmation_fraction": 2.0
+      },
+      "terminal": [
+        {
+          "step": 1000,
+          "modes": 6,
+          "hq": 0.81103515625
+        },
+        {
+          "step": 1050,
+          "modes": 6,
+          "hq": 0.951416015625
+        },
+        {
+          "step": 1100,
+          "modes": 6,
+          "hq": 0.963134765625
+        },
+        {
+          "step": 1150,
+          "modes": 6,
+          "hq": 0.90625
+        },
+        {
+          "step": 1200,
+          "modes": 6,
+          "hq": 0.9609375
+        }
+      ]
+    }
+  },
+  "warm_summary": {
+    "cold_final_state_sha256": "4887b8a3f57b2972be033447055e48b87fe5c5cd3713b8a2aa4851f19415e580",
+    "continuation_updates": 200,
+    "identity_cold_parity": true,
+    "scope": "passing_state_local_stability_only",
+    "steps": 1200,
+    "variants": {
+      "constant": {
+        "final": {
+          "hq": 0.504638671875,
+          "modes": 6
+        },
+        "final_state_sha256": "ef0efb244ac51171c197f0f595ac6e30f22b89b9945dfd5cee885f602e0ffce2",
+        "local_stability": {
+          "checks": 200,
+          "failing_steps": [
+            1001,
+            1002,
+            1003,
+            1004,
+            1005,
+            1006,
+            1007,
+            1008,
+            1009,
+            1010,
+            1011,
+            1013,
+            1014,
+            1015,
+            1016,
+            1017,
+            1018,
+            1019,
+            1020,
+            1021,
+            1022,
+            1023,
+            1024,
+            1025,
+            1026,
+            1027,
+            1028,
+            1029,
+            1030,
+            1031,
+            1032,
+            1033,
+            1034,
+            1035,
+            1036,
+            1037,
+            1038,
+            1039,
+            1040,
+            1042,
+            1043,
+            1044,
+            1045,
+            1046,
+            1047,
+            1048,
+            1049,
+            1050,
+            1051,
+            1052,
+            1053,
+            1054,
+            1055,
+            1056,
+            1057,
+            1058,
+            1059,
+            1060,
+            1061,
+            1062,
+            1063,
+            1064,
+            1065,
+            1066,
+            1067,
+            1068,
+            1069,
+            1070,
+            1071,
+            1072,
+            1073,
+            1074,
+            1075,
+            1076,
+            1077,
+            1078,
+            1079,
+            1080,
+            1081,
+            1082,
+            1083,
+            1084,
+            1085,
+            1086,
+            1087,
+            1088,
+            1089,
+            1090,
+            1091,
+            1092,
+            1093,
+            1094,
+            1095,
+            1096,
+            1097,
+            1098,
+            1099,
+            1100,
+            1102,
+            1103,
+            1104,
+            1105,
+            1106,
+            1107,
+            1108,
+            1109,
+            1110,
+            1111,
+            1112,
+            1113,
+            1114,
+            1115,
+            1116,
+            1117,
+            1118,
+            1119,
+            1120,
+            1121,
+            1122,
+            1123,
+            1124,
+            1125,
+            1126,
+            1127,
+            1128,
+            1129,
+            1130,
+            1131,
+            1132,
+            1133,
+            1134,
+            1135,
+            1136,
+            1137,
+            1138,
+            1139,
+            1140,
+            1141,
+            1142,
+            1143,
+            1144,
+            1145,
+            1146,
+            1147,
+            1148,
+            1149,
+            1150,
+            1151,
+            1152,
+            1153,
+            1154,
+            1155,
+            1156,
+            1157,
+            1158,
+            1160,
+            1161,
+            1162,
+            1163,
+            1164,
+            1165,
+            1166,
+            1167,
+            1168,
+            1169,
+            1170,
+            1171,
+            1172,
+            1173,
+            1174,
+            1175,
+            1176,
+            1177,
+            1178,
+            1180,
+            1181,
+            1182,
+            1183,
+            1184,
+            1185,
+            1186,
+            1187,
+            1188,
+            1189,
+            1190,
+            1191,
+            1192,
+            1193,
+            1194,
+            1195,
+            1197,
+            1198,
+            1199,
+            1200
+          ],
+          "min_hq": 0.00537109375,
+          "min_modes": 1,
+          "pass_all": false,
+          "pass_suffix": false,
+          "passing_checks": 6,
+          "passing_suffix": 0,
+          "stable_from_step": null
+        },
+        "long_hold": null,
+        "stationary": {
+          "checks": 5,
+          "failing_steps": [
+            1050,
+            1100,
+            1150,
+            1200
+          ],
+          "min_hq": 0.25048828125,
+          "min_modes": 4,
+          "pass_all": false,
+          "pass_suffix": false,
+          "passing_checks": 1,
+          "passing_suffix": 0,
+          "stable_from_step": null
+        },
+        "status": "FAIL"
+      },
+      "identity": {
+        "final": {
+          "hq": 1.0,
+          "modes": 8
+        },
+        "final_state_sha256": "4887b8a3f57b2972be033447055e48b87fe5c5cd3713b8a2aa4851f19415e580",
+        "local_stability": {
+          "checks": 200,
+          "failing_steps": [],
+          "min_hq": 0.996337890625,
+          "min_modes": 8,
+          "pass_all": true,
+          "pass_suffix": true,
+          "passing_checks": 200,
+          "passing_suffix": 200,
+          "stable_from_step": 1001
+        },
+        "long_hold": null,
+        "stationary": {
+          "checks": 5,
+          "failing_steps": [],
+          "min_hq": 0.999755859375,
+          "min_modes": 8,
+          "pass_all": true,
+          "pass_suffix": true,
+          "passing_checks": 5,
+          "passing_suffix": 5,
+          "stable_from_step": 1000
+        },
+        "status": "PASS"
+      },
+      "single_slope": {
+        "final": {
+          "hq": 0.995849609375,
+          "modes": 8
+        },
+        "final_state_sha256": "516a4d698fbc472007590a79f057665745d12a6b4946d033dbd5657dcfade5e7",
+        "local_stability": {
+          "checks": 200,
+          "failing_steps": [],
+          "min_hq": 0.916015625,
+          "min_modes": 8,
+          "pass_all": true,
+          "pass_suffix": true,
+          "passing_checks": 200,
+          "passing_suffix": 200,
+          "stable_from_step": 1001
+        },
+        "long_hold": null,
+        "stationary": {
+          "checks": 5,
+          "failing_steps": [],
+          "min_hq": 0.93798828125,
+          "min_modes": 8,
+          "pass_all": true,
+          "pass_suffix": true,
+          "passing_checks": 5,
+          "passing_suffix": 5,
+          "stable_from_step": 1000
+        },
+        "status": "PASS"
+      }
+    },
+    "warm_state_sha256": "6cc79b6e0d11eafae176b68e7d9d8c26c02c886866370134cd70c864fe882e21",
+    "warm_step": 1000
+  }
+}

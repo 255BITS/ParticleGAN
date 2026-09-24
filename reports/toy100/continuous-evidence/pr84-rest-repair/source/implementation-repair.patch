@@ -1,0 +1,23 @@
+--- PR84/468ad26/alternating_curvature_scratch.py
++++ pr84_rest_repair_scratch.py
+@@ -517,10 +517,10 @@
+             module=module.model
+         if not isinstance(module,SimpleMLPDiscriminator):return
+         def score(points):
+-            vals=[module(points)]
++            vals=[self._unpatched_critic_forward(module,points)]
+             for dim in range(points.shape[-1]):
+                 shift=torch.zeros_like(points);shift[:,dim]=width
+-                vals.append(module(points+shift));vals.append(module(points-shift))
++                vals.append(self._unpatched_critic_forward(module,points+shift));vals.append(self._unpatched_critic_forward(module,points-shift))
+             return torch.stack(vals,0).mean(0).reshape(-1)
+         eps=1e-3
+         grad=[]
+@@ -570,6 +570,7 @@
+             lambda optimizer,closure=None:recorder.step(optimizer,ordinary_step,closure)))
+         stack.enter_context(patch.object(GANLoss,'d_loss',observed_d_loss))
+         original_forward=SimpleMLPDiscriminator.forward
++        recorder._unpatched_critic_forward=original_forward
+         def centered_forward(self,x):
+             if recorder.center_critic and recorder.enabled and not recorder.passthrough and x.ndim>=2 and x.shape[-1]==2:
+                 x=x-x.mean(dim=0,keepdim=True).detach()
