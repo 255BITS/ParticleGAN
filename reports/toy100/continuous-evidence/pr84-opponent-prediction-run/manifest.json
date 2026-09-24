@@ -1,0 +1,354 @@
+{
+  "archiver_sha256": "c0349915fe7bacedf19a961db7ee2b2adcc3279e5b831dc94d700c9d1fa85838",
+  "files": [
+    {
+      "compressed_bytes": 1005,
+      "compressed_sha256": "64b98d7edc83e1aea264a9671cee8754d9b619364a5d82dad3e080a69d6c2593",
+      "path": "hold/declaration.json.gz",
+      "raw_bytes": 1917,
+      "raw_sha256": "1778912d5dbcea52c6a09970ebd90b4cee834e93b0bf21a0a7c5a97bd00adc63"
+    },
+    {
+      "compressed_bytes": 42861,
+      "compressed_sha256": "6e61e9b2d3049995746130918aa049e6fb550b11e4c9a320db94f5ff6bca44c9",
+      "path": "hold/forks/cold.json.gz",
+      "raw_bytes": 368138,
+      "raw_sha256": "ebcbc50f18dd5de59bca50773ba94a82dc1bb8ce025a0c403e3d1b594ac7d128"
+    },
+    {
+      "compressed_bytes": 43331,
+      "compressed_sha256": "f43b75bca951eede5adbc1a6dc9aadb61cc87a3bb9d0c2ce2cccf995faeb3e2c",
+      "path": "hold/forks/identity.json.gz",
+      "raw_bytes": 369194,
+      "raw_sha256": "b29b5509b17158f4681e557aee60cae1f41f8dd35425639f47e0a3e418ca29f3"
+    },
+    {
+      "compressed_bytes": 140318,
+      "compressed_sha256": "bf12fc140162783fac47d47f74cbc5e096e5321f55673cab5676444673aef96b",
+      "path": "hold/forks/original.json.gz",
+      "raw_bytes": 811461,
+      "raw_sha256": "73412a10da326d27354ab5cefb9ceee35b5fc463ca770c056b3ef59f06fdb3e0"
+    },
+    {
+      "compressed_bytes": 260272,
+      "compressed_sha256": "ed8782a26fb95f6c2460aae76432ad6f8927d9c636efaabbac2addfe03dd7a96",
+      "path": "hold/forks/prediction.json.gz",
+      "raw_bytes": 1974545,
+      "raw_sha256": "99284c389163419f1964f163361b6236c554b587ebb87467e8acb5e24ed418fe"
+    },
+    {
+      "compressed_bytes": 977,
+      "compressed_sha256": "5f41155d68c667877e2560a125535a2e8c41c10652ef6958fb676e2e37fac50a",
+      "path": "hold/forks/summary.json.gz",
+      "raw_bytes": 5408,
+      "raw_sha256": "e3eae81edfa961d9077dfb747c8325016ee04dd351cd7e97e13600b69df993ef"
+    },
+    {
+      "compressed_bytes": 1974,
+      "compressed_sha256": "d4766ae2e366a7732c0773d1c258071a7fb1a80ae4bc819ef90cb8beb7671fcf",
+      "path": "hold/previous-gate.json.gz",
+      "raw_bytes": 8368,
+      "raw_sha256": "75f78007ef7ab6d669cf53b6b1ba6696091a3b436d4e1a1e020dd0d652290629"
+    },
+    {
+      "compressed_bytes": 3580,
+      "compressed_sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "path": "hold/source/benchmarks/locked_shared/mode_hold.py.gz",
+      "raw_bytes": 10774,
+      "raw_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    {
+      "compressed_bytes": 3005,
+      "compressed_sha256": "bee13d21d6e613476544afafd0a6fad911c1281658a6516ea982da5a827024ad",
+      "path": "hold/source/benchmarks/locked_shared/trajectory.py.gz",
+      "raw_bytes": 9176,
+      "raw_sha256": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792"
+    },
+    {
+      "compressed_bytes": 7805,
+      "compressed_sha256": "5b6b82473026e8f57176e22a953c34b54e71d8a685effbdd080d07f48c30e613",
+      "path": "hold/source/benchmarks/toy100/continuous_probe.py.gz",
+      "raw_bytes": 29080,
+      "raw_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834"
+    },
+    {
+      "compressed_bytes": 4374,
+      "compressed_sha256": "21c13cc9990de385e478dcab28b03340ccbe6a59c3f733813c5287fce70ac8f7",
+      "path": "hold/source/benchmarks/toy100/warm_equilibrium_probe.py.gz",
+      "raw_bytes": 14377,
+      "raw_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5"
+    },
+    {
+      "compressed_bytes": 661,
+      "compressed_sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "path": "hold/source/configs/toy100/constraints_simple_regularization.json.gz",
+      "raw_bytes": 1507,
+      "raw_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+    },
+    {
+      "compressed_bytes": 2449,
+      "compressed_sha256": "eca414028b17155bd1f7dd8229b69a5f7429c414e3f38476113e7770f4f1ea24",
+      "path": "hold/source/generated_warm_observer.py.gz",
+      "raw_bytes": 7975,
+      "raw_sha256": "a58f4462d8341ea4fb2dbeb958af51d45c0a33e198c2d08b7decffbcde2d3507"
+    },
+    {
+      "compressed_bytes": 4472,
+      "compressed_sha256": "4655b8735ed1df2ff0051b7e1816df9084b9c639c1f92bf6c0d8f62c78ca024c",
+      "path": "hold/source/reports/toy100/alternating_curvature_scratch.py.gz",
+      "raw_bytes": 16689,
+      "raw_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450"
+    },
+    {
+      "compressed_bytes": 3980,
+      "compressed_sha256": "fc9d646056ee4e469c924dd88f1d94abff5d5f02d9c1caec3d47b2c52cdb7f63",
+      "path": "hold/source/reports/toy100/extra_adam_scratch.py.gz",
+      "raw_bytes": 13261,
+      "raw_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55"
+    },
+    {
+      "compressed_bytes": 2457,
+      "compressed_sha256": "58e3c0ca283bbaea1b4cc955900b68eabc1cc5f3a9ddd53aace63c2dc841a505",
+      "path": "hold/source/reports/toy100/pr84_opponent_prediction.py.gz",
+      "raw_bytes": 8204,
+      "raw_sha256": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846"
+    },
+    {
+      "compressed_bytes": 3432,
+      "compressed_sha256": "dc7ff66afc56f855782550c7c519adbe1f3ce1ebb99a76f90deac13bba2ec79e",
+      "path": "hold/source/reports/toy100/pr84_opponent_prediction_probe.py.gz",
+      "raw_bytes": 10960,
+      "raw_sha256": "34dbe02176d11a25c42559f2ea9ea223950e944bd20b695360f4596f72c54e50"
+    },
+    {
+      "compressed_bytes": 2369,
+      "compressed_sha256": "ec9ede71c84a00dcfb965dd8788caaccea204107f1357032397df14764d684eb",
+      "path": "hold/source/reports/toy100/pr84_smoothed_candidate.py.gz",
+      "raw_bytes": 6530,
+      "raw_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f"
+    },
+    {
+      "compressed_bytes": 2328,
+      "compressed_sha256": "e8bba2a8e1551a1db47f06303864d9f4feb3bd328e6d2001f89b395f157fc142",
+      "path": "hold/source/reports/toy100/pr84_smoothed_parity.py.gz",
+      "raw_bytes": 6735,
+      "raw_sha256": "27a8b6fecd289369a94f069346cec136e4e38ffe1c7c96aac65b35318a4d1bea"
+    },
+    {
+      "compressed_bytes": 1740,
+      "compressed_sha256": "cf9b36223bad01b3d4ed2bbb3c21db67b8563bb45aeb7ebe3e4710333e78cc4d",
+      "path": "hold/summary.json.gz",
+      "raw_bytes": 6962,
+      "raw_sha256": "ece7ef8911829d86b83b35f74245fb94466a7218ab6b41f9fa3796329e793425"
+    },
+    {
+      "compressed_bytes": 2027,
+      "compressed_sha256": "e457425e8bc9f7d6f811bcfb5a9be6c22b3b8cc3ccc6bed87f605193c961f8af",
+      "path": "logs/hold.log.gz",
+      "raw_bytes": 6993,
+      "raw_sha256": "a866aac55374edd86927890bb05b87dc1b21722be4041b70c400a36b8354619a"
+    },
+    {
+      "compressed_bytes": 2232,
+      "compressed_sha256": "2413f0222996f78a0ad96c84269a151d40334b64ac379d5e706c01fb45ab5b6f",
+      "path": "logs/warm.log.gz",
+      "raw_bytes": 7638,
+      "raw_sha256": "bac1f072b29b9fb8d251c7c022f86eafe002d27c745e693c429d4070ddaacfdd"
+    },
+    {
+      "compressed_bytes": 1007,
+      "compressed_sha256": "47566d3a86dde2cfdd4d37b4fe46d18b2941617ba18bc541abc409318dc8d27b",
+      "path": "warm/declaration.json.gz",
+      "raw_bytes": 1917,
+      "raw_sha256": "f11925d0251932ce9cd5eb0eeffd43b564a3d7a800158dfc3e0836807c9bd641"
+    },
+    {
+      "compressed_bytes": 17938,
+      "compressed_sha256": "cb9a58fcbfda9d5960072cd99907bd8f2549b7b4d4247bf36041bd900dab2766",
+      "path": "warm/forks/cold.json.gz",
+      "raw_bytes": 58685,
+      "raw_sha256": "ca6700e71e02961892926ec113f5fcddf69fb697f322a1dde3d6aa170fd50c1a"
+    },
+    {
+      "compressed_bytes": 25516,
+      "compressed_sha256": "f0983346bee9dde5ad1657455fcf121f5195e6a9d2ba7e4dc176c990ff015215",
+      "path": "warm/forks/constant.json.gz",
+      "raw_bytes": 87509,
+      "raw_sha256": "10f4f82b75f6835f5a3cb473e2f9d71c7590990a041dc43b33a66e98b20faed4"
+    },
+    {
+      "compressed_bytes": 19177,
+      "compressed_sha256": "17c624ea050409e119406712005487fc543d617d7df24914cd7f02c215ca1309",
+      "path": "warm/forks/identity.json.gz",
+      "raw_bytes": 85640,
+      "raw_sha256": "360fb919b0d05b803eed039ddb84f9f644a9f979756f29a6455e4611b9175c40"
+    },
+    {
+      "compressed_bytes": 33043,
+      "compressed_sha256": "8ffe0e9a430ba3bc60442431de3fc31114cd2109566b57abc5897e2dd977bc50",
+      "path": "warm/forks/original.json.gz",
+      "raw_bytes": 149477,
+      "raw_sha256": "3959d66ca6fb2959ab9b1cf844c4a221dbcfaefb82f0a9bb0b581602f6327692"
+    },
+    {
+      "compressed_bytes": 50576,
+      "compressed_sha256": "4e0c5a7cbd0d26339586e60c6a83ae4d3b89fb31bccb3def9bdacf819c1932f1",
+      "path": "warm/forks/prediction.json.gz",
+      "raw_bytes": 315502,
+      "raw_sha256": "36bd104969ad52d64ae61f07d14e8a15dca6d5748e8b1b59d0d17f3e82e54ab4"
+    },
+    {
+      "compressed_bytes": 1213,
+      "compressed_sha256": "641650f5fa423c528ae77c104cad559c626a1aa4e85354c05546c13959b1fc96",
+      "path": "warm/forks/summary.json.gz",
+      "raw_bytes": 6814,
+      "raw_sha256": "10cd83e3f2f2cf8bf004401ab449e49dc6307d993c835e0237076b75ac94ea6f"
+    },
+    {
+      "compressed_bytes": 3580,
+      "compressed_sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "path": "warm/source/benchmarks/locked_shared/mode_hold.py.gz",
+      "raw_bytes": 10774,
+      "raw_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    {
+      "compressed_bytes": 3005,
+      "compressed_sha256": "bee13d21d6e613476544afafd0a6fad911c1281658a6516ea982da5a827024ad",
+      "path": "warm/source/benchmarks/locked_shared/trajectory.py.gz",
+      "raw_bytes": 9176,
+      "raw_sha256": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792"
+    },
+    {
+      "compressed_bytes": 7805,
+      "compressed_sha256": "5b6b82473026e8f57176e22a953c34b54e71d8a685effbdd080d07f48c30e613",
+      "path": "warm/source/benchmarks/toy100/continuous_probe.py.gz",
+      "raw_bytes": 29080,
+      "raw_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834"
+    },
+    {
+      "compressed_bytes": 4374,
+      "compressed_sha256": "21c13cc9990de385e478dcab28b03340ccbe6a59c3f733813c5287fce70ac8f7",
+      "path": "warm/source/benchmarks/toy100/warm_equilibrium_probe.py.gz",
+      "raw_bytes": 14377,
+      "raw_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5"
+    },
+    {
+      "compressed_bytes": 661,
+      "compressed_sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "path": "warm/source/configs/toy100/constraints_simple_regularization.json.gz",
+      "raw_bytes": 1507,
+      "raw_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+    },
+    {
+      "compressed_bytes": 2449,
+      "compressed_sha256": "eca414028b17155bd1f7dd8229b69a5f7429c414e3f38476113e7770f4f1ea24",
+      "path": "warm/source/generated_warm_observer.py.gz",
+      "raw_bytes": 7975,
+      "raw_sha256": "a58f4462d8341ea4fb2dbeb958af51d45c0a33e198c2d08b7decffbcde2d3507"
+    },
+    {
+      "compressed_bytes": 4472,
+      "compressed_sha256": "4655b8735ed1df2ff0051b7e1816df9084b9c639c1f92bf6c0d8f62c78ca024c",
+      "path": "warm/source/reports/toy100/alternating_curvature_scratch.py.gz",
+      "raw_bytes": 16689,
+      "raw_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450"
+    },
+    {
+      "compressed_bytes": 3980,
+      "compressed_sha256": "fc9d646056ee4e469c924dd88f1d94abff5d5f02d9c1caec3d47b2c52cdb7f63",
+      "path": "warm/source/reports/toy100/extra_adam_scratch.py.gz",
+      "raw_bytes": 13261,
+      "raw_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55"
+    },
+    {
+      "compressed_bytes": 2457,
+      "compressed_sha256": "58e3c0ca283bbaea1b4cc955900b68eabc1cc5f3a9ddd53aace63c2dc841a505",
+      "path": "warm/source/reports/toy100/pr84_opponent_prediction.py.gz",
+      "raw_bytes": 8204,
+      "raw_sha256": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846"
+    },
+    {
+      "compressed_bytes": 3432,
+      "compressed_sha256": "dc7ff66afc56f855782550c7c519adbe1f3ce1ebb99a76f90deac13bba2ec79e",
+      "path": "warm/source/reports/toy100/pr84_opponent_prediction_probe.py.gz",
+      "raw_bytes": 10960,
+      "raw_sha256": "34dbe02176d11a25c42559f2ea9ea223950e944bd20b695360f4596f72c54e50"
+    },
+    {
+      "compressed_bytes": 2369,
+      "compressed_sha256": "ec9ede71c84a00dcfb965dd8788caaccea204107f1357032397df14764d684eb",
+      "path": "warm/source/reports/toy100/pr84_smoothed_candidate.py.gz",
+      "raw_bytes": 6530,
+      "raw_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f"
+    },
+    {
+      "compressed_bytes": 2328,
+      "compressed_sha256": "e8bba2a8e1551a1db47f06303864d9f4feb3bd328e6d2001f89b395f157fc142",
+      "path": "warm/source/reports/toy100/pr84_smoothed_parity.py.gz",
+      "raw_bytes": 6735,
+      "raw_sha256": "27a8b6fecd289369a94f069346cec136e4e38ffe1c7c96aac65b35318a4d1bea"
+    },
+    {
+      "compressed_bytes": 1974,
+      "compressed_sha256": "d4766ae2e366a7732c0773d1c258071a7fb1a80ae4bc819ef90cb8beb7671fcf",
+      "path": "warm/summary.json.gz",
+      "raw_bytes": 8368,
+      "raw_sha256": "75f78007ef7ab6d669cf53b6b1ba6696091a3b436d4e1a1e020dd0d652290629"
+    }
+  ],
+  "log_paths": {
+    "hold": "/tmp/pr84-opponent-hold.log",
+    "warm": "/tmp/pr84-opponent-warm.log"
+  },
+  "method": "pr84_alternating_g_opponent_prediction",
+  "phase_receipts": {
+    "hold": {
+      "phase": "hold",
+      "steps": 2400,
+      "summary_sha256": "ece7ef8911829d86b83b35f74245fb94466a7218ab6b41f9fa3796329e793425",
+      "variants": {
+        "identity": {
+          "seconds": 19.055851231794804,
+          "status": "PASS"
+        },
+        "original": {
+          "seconds": 48.86083328886889,
+          "status": "FAIL"
+        },
+        "prediction": {
+          "seconds": 49.77179273287766,
+          "status": "FAIL"
+        }
+      }
+    },
+    "warm": {
+      "phase": "warm",
+      "steps": 1200,
+      "summary_sha256": "75f78007ef7ab6d669cf53b6b1ba6696091a3b436d4e1a1e020dd0d652290629",
+      "variants": {
+        "constant": {
+          "seconds": 7.191405385965481,
+          "status": "FAIL"
+        },
+        "identity": {
+          "seconds": 7.17262699897401,
+          "status": "PASS"
+        },
+        "original": {
+          "seconds": 11.370263577904552,
+          "status": "PASS"
+        },
+        "prediction": {
+          "seconds": 11.521820796886459,
+          "status": "PASS"
+        }
+      }
+    }
+  },
+  "schema": "continuation-evidence-archive-v1",
+  "scope": "completed warm and same-target long-hold continuation; no cold acquisition claim",
+  "source_paths": {
+    "hold": "/ml2/hypergan/ParticleGAN-continuous-learning/artifacts/continuous-learning/round5/opponent-prediction-hold",
+    "warm": "/ml2/hypergan/ParticleGAN-continuous-learning/artifacts/continuous-learning/round5/opponent-prediction-warm"
+  }
+}
