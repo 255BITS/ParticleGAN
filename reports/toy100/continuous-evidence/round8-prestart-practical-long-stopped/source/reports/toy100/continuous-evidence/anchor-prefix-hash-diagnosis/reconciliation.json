@@ -1,0 +1,53 @@
+{
+  "status": "EXACT_TRAINING_STATE_WITH_ENUMERATED_EVALUATION_COUNTERS",
+  "training_state_parity": true,
+  "raw_snapshots_identical": false,
+  "warm_raw_sha256": "99a21069ff1b9869e186b003f35430c26943247cad0dca981178105a7276c546",
+  "hold_raw_sha256": "d9c0c76f144373d6cd728e3c4bbb00a42902c72782eb89b952bcb9fe6015328b",
+  "adjusted_warm_sha256": "d9c0c76f144373d6cd728e3c4bbb00a42902c72782eb89b952bcb9fe6015328b",
+  "ignored_fields": [],
+  "adjusted_fields": {
+    "output_eval_calls": {
+      "warm": 510,
+      "hold": 480,
+      "warm_minus_hold": 30
+    },
+    "output_eval_elements": {
+      "warm": 2095080,
+      "hold": 1971840,
+      "warm_minus_hold": 123240
+    }
+  },
+  "independent_count": {
+    "counter_deltas": {
+      "output_eval_calls": 30,
+      "output_eval_elements": 123240
+    },
+    "extra_native_observation_steps": [
+      50,
+      150,
+      250,
+      350,
+      450,
+      550,
+      650,
+      750,
+      850,
+      950,
+      1050,
+      1150
+    ],
+    "extra_native_live_curve_steps": [
+      1050,
+      1100,
+      1150
+    ],
+    "per_measure_output_calls": 2,
+    "per_measure_output_elements": 8216,
+    "boundary": "after active update1200, before its EMA/checkpoint"
+  },
+  "scope": "all model/Adam/EMA/RNG/noise clocks/histories and other metadata exact; only two eval counters reconciled",
+  "initial_prediction_of_6_calls_rejected": true,
+  "initial_capture_summary_sha256": "91e517bf81db378058cc04587b9c7109c20d04aed41b44185a1022ab4c61b8f5",
+  "capture_raw_hashes_match_original_experiments": true
+}

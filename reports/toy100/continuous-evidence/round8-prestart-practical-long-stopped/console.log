@@ -1,0 +1,157 @@
+{"event": "PRACTICAL_DECLARED", "input_snapshot": "01a1947916f97334dc09151ba16b0086f436c655f7e1390b5e461fc84ac434ae", "generated_source": "8d72f08373da0bc23013d3593fe691e2c82746b98cc2c4a31be389c10c466f7a", "updates": 9600, "factory": "reports.toy100.sample_anchor_prestart_candidate:sample_anchor_prestart_candidate"}
+{"event": "PRACTICAL_PROGRESS", "step": 2500, "modes": 8, "hq": 1.0, "passed": true, "checks": 100, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 2600, "modes": 8, "hq": 1.0, "passed": true, "checks": 200, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 2600, "fit": {"corrections": 200, "jacobians": 402, "nonlinear_trials": 402, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 14.997086603834177, "raw_svd_condition_median": 16.28875764275234, "raw_svd_condition_max": 16.5189640939017, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 2600, "g": 2600}}
+{"event": "PRACTICAL_PROGRESS", "step": 2700, "modes": 8, "hq": 1.0, "passed": true, "checks": 300, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 2800, "modes": 8, "hq": 1.0, "passed": true, "checks": 400, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 2800, "fit": {"corrections": 200, "jacobians": 400, "nonlinear_trials": 400, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.0964156558084, "raw_svd_condition_median": 16.41305750903549, "raw_svd_condition_max": 16.69990549377691, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 2800, "g": 2800}}
+{"event": "PRACTICAL_PROGRESS", "step": 2900, "modes": 8, "hq": 1.0, "passed": true, "checks": 500, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 3000, "modes": 8, "hq": 1.0, "passed": true, "checks": 600, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 3000, "fit": {"corrections": 200, "jacobians": 401, "nonlinear_trials": 401, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.068815296493701, "raw_svd_condition_median": 16.477116177150258, "raw_svd_condition_max": 16.723474874695803, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 3000, "g": 3000}}
+{"event": "PRACTICAL_PROGRESS", "step": 3100, "modes": 8, "hq": 1.0, "passed": true, "checks": 700, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 3200, "modes": 8, "hq": 1.0, "passed": true, "checks": 800, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 3200, "fit": {"corrections": 200, "jacobians": 400, "nonlinear_trials": 400, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.019981850119567, "raw_svd_condition_median": 16.579239553164612, "raw_svd_condition_max": 16.892305167149313, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 3200, "g": 3200}}
+{"event": "PRACTICAL_PROGRESS", "step": 3300, "modes": 8, "hq": 1.0, "passed": true, "checks": 900, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 3400, "modes": 8, "hq": 1.0, "passed": true, "checks": 1000, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 3400, "fit": {"corrections": 200, "jacobians": 402, "nonlinear_trials": 402, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.032920724022283, "raw_svd_condition_median": 16.687769266103427, "raw_svd_condition_max": 17.043688698820457, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 3400, "g": 3400}}
+{"event": "PRACTICAL_PROGRESS", "step": 3500, "modes": 8, "hq": 1.0, "passed": true, "checks": 1100, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 3600, "modes": 8, "hq": 1.0, "passed": true, "checks": 1200, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 3600, "fit": {"corrections": 200, "jacobians": 403, "nonlinear_trials": 403, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.3300363077698, "raw_svd_condition_median": 16.881026125329868, "raw_svd_condition_max": 17.247743250317058, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 3600, "g": 3600}}
+{"event": "PRACTICAL_PROGRESS", "step": 3700, "modes": 8, "hq": 1.0, "passed": true, "checks": 1300, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 3800, "modes": 8, "hq": 1.0, "passed": true, "checks": 1400, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 3800, "fit": {"corrections": 200, "jacobians": 401, "nonlinear_trials": 401, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.289116950540112, "raw_svd_condition_median": 17.089071649795535, "raw_svd_condition_max": 17.490327995051786, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 3800, "g": 3800}}
+{"event": "PRACTICAL_PROGRESS", "step": 3900, "modes": 8, "hq": 1.0, "passed": true, "checks": 1500, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 4000, "modes": 8, "hq": 1.0, "passed": true, "checks": 1600, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 4000, "fit": {"corrections": 200, "jacobians": 400, "nonlinear_trials": 400, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 14.976975176563657, "raw_svd_condition_median": 17.27487040174479, "raw_svd_condition_max": 17.59691804717152, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 4000, "g": 4000}}
+{"event": "PRACTICAL_PROGRESS", "step": 4100, "modes": 8, "hq": 1.0, "passed": true, "checks": 1700, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 4200, "modes": 8, "hq": 1.0, "passed": true, "checks": 1800, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 4200, "fit": {"corrections": 200, "jacobians": 400, "nonlinear_trials": 400, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.612295591643141, "raw_svd_condition_median": 17.42747914207459, "raw_svd_condition_max": 17.81890479625682, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 4200, "g": 4200}}
+{"event": "PRACTICAL_PROGRESS", "step": 4300, "modes": 8, "hq": 1.0, "passed": true, "checks": 1900, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 4400, "modes": 8, "hq": 1.0, "passed": true, "checks": 2000, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 4400, "fit": {"corrections": 200, "jacobians": 401, "nonlinear_trials": 401, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.364228278873432, "raw_svd_condition_median": 17.543169211486482, "raw_svd_condition_max": 18.060764620678075, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 4400, "g": 4400}}
+{"event": "PRACTICAL_PROGRESS", "step": 4500, "modes": 8, "hq": 1.0, "passed": true, "checks": 2100, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 4600, "modes": 8, "hq": 1.0, "passed": true, "checks": 2200, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 4600, "fit": {"corrections": 200, "jacobians": 403, "nonlinear_trials": 403, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.704912518445383, "raw_svd_condition_median": 17.621313691154352, "raw_svd_condition_max": 17.91344955774808, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 4600, "g": 4600}}
+{"event": "PRACTICAL_PROGRESS", "step": 4700, "modes": 8, "hq": 1.0, "passed": true, "checks": 2300, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 4800, "modes": 8, "hq": 1.0, "passed": true, "checks": 2400, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 4800, "fit": {"corrections": 200, "jacobians": 400, "nonlinear_trials": 400, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.889783364509526, "raw_svd_condition_median": 17.777015678135548, "raw_svd_condition_max": 18.137259102352346, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 4800, "g": 4800}}
+{"event": "PRACTICAL_PROGRESS", "step": 4900, "modes": 8, "hq": 1.0, "passed": true, "checks": 2500, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 5000, "modes": 8, "hq": 1.0, "passed": true, "checks": 2600, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 5000, "fit": {"corrections": 200, "jacobians": 403, "nonlinear_trials": 403, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 16.521113093164164, "raw_svd_condition_median": 17.99235818895747, "raw_svd_condition_max": 18.323413297716012, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 5000, "g": 5000}}
+{"event": "PRACTICAL_PROGRESS", "step": 5100, "modes": 8, "hq": 1.0, "passed": true, "checks": 2700, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 5200, "modes": 8, "hq": 1.0, "passed": true, "checks": 2800, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 5200, "fit": {"corrections": 200, "jacobians": 405, "nonlinear_trials": 405, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 14.963094741699791, "raw_svd_condition_median": 18.230774525193446, "raw_svd_condition_max": 18.60238382388854, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 5200, "g": 5200}}
+{"event": "PRACTICAL_PROGRESS", "step": 5300, "modes": 8, "hq": 1.0, "passed": true, "checks": 2900, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 5400, "modes": 8, "hq": 1.0, "passed": true, "checks": 3000, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 5400, "fit": {"corrections": 200, "jacobians": 405, "nonlinear_trials": 405, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 14.482038218738179, "raw_svd_condition_median": 15.25418968847636, "raw_svd_condition_max": 18.59171196634399, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 5400, "g": 5400}}
+{"event": "PRACTICAL_PROGRESS", "step": 5500, "modes": 8, "hq": 1.0, "passed": true, "checks": 3100, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 5600, "modes": 8, "hq": 1.0, "passed": true, "checks": 3200, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 5600, "fit": {"corrections": 200, "jacobians": 405, "nonlinear_trials": 405, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 14.484470754936725, "raw_svd_condition_median": 15.455255472723138, "raw_svd_condition_max": 18.745361027147297, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 5600, "g": 5600}}
+{"event": "PRACTICAL_PROGRESS", "step": 5700, "modes": 8, "hq": 1.0, "passed": true, "checks": 3300, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 5800, "modes": 8, "hq": 1.0, "passed": true, "checks": 3400, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 5800, "fit": {"corrections": 200, "jacobians": 402, "nonlinear_trials": 402, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.094261393453476, "raw_svd_condition_median": 15.63511355185609, "raw_svd_condition_max": 15.911732484295252, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 5800, "g": 5800}}
+{"event": "PRACTICAL_PROGRESS", "step": 5900, "modes": 8, "hq": 1.0, "passed": true, "checks": 3500, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 6000, "modes": 8, "hq": 1.0, "passed": true, "checks": 3600, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 6000, "fit": {"corrections": 200, "jacobians": 408, "nonlinear_trials": 408, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 14.769571697203162, "raw_svd_condition_median": 15.751988312872701, "raw_svd_condition_max": 16.060231338549155, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 6000, "g": 6000}}
+{"event": "PRACTICAL_PROGRESS", "step": 6100, "modes": 8, "hq": 1.0, "passed": true, "checks": 3700, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 6200, "modes": 8, "hq": 1.0, "passed": true, "checks": 3800, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 6200, "fit": {"corrections": 200, "jacobians": 407, "nonlinear_trials": 407, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.007095686181744, "raw_svd_condition_median": 15.901838705451127, "raw_svd_condition_max": 16.22012700795519, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 6200, "g": 6200}}
+{"event": "PRACTICAL_PROGRESS", "step": 6300, "modes": 8, "hq": 1.0, "passed": true, "checks": 3900, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 6400, "modes": 8, "hq": 1.0, "passed": true, "checks": 4000, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 6400, "fit": {"corrections": 200, "jacobians": 403, "nonlinear_trials": 403, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.02789715272319, "raw_svd_condition_median": 15.98978219968309, "raw_svd_condition_max": 16.28265343367809, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 6400, "g": 6400}}
+{"event": "PRACTICAL_PROGRESS", "step": 6500, "modes": 8, "hq": 1.0, "passed": true, "checks": 4100, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 6600, "modes": 8, "hq": 1.0, "passed": true, "checks": 4200, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 6600, "fit": {"corrections": 200, "jacobians": 405, "nonlinear_trials": 405, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.378768908545403, "raw_svd_condition_median": 16.131857071493314, "raw_svd_condition_max": 16.542552345086527, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 6600, "g": 6600}}
+{"event": "PRACTICAL_PROGRESS", "step": 6700, "modes": 8, "hq": 1.0, "passed": true, "checks": 4300, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 6800, "modes": 8, "hq": 1.0, "passed": true, "checks": 4400, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 6800, "fit": {"corrections": 200, "jacobians": 405, "nonlinear_trials": 405, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.561719866667783, "raw_svd_condition_median": 16.309523167908733, "raw_svd_condition_max": 16.907929799425386, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 6800, "g": 6800}}
+{"event": "PRACTICAL_PROGRESS", "step": 6900, "modes": 8, "hq": 1.0, "passed": true, "checks": 4500, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 7000, "modes": 8, "hq": 1.0, "passed": true, "checks": 4600, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 7000, "fit": {"corrections": 200, "jacobians": 406, "nonlinear_trials": 406, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.136681353234149, "raw_svd_condition_median": 16.38820488386514, "raw_svd_condition_max": 20.225125800824877, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 7000, "g": 7000}}
+{"event": "PRACTICAL_PROGRESS", "step": 7100, "modes": 8, "hq": 1.0, "passed": true, "checks": 4700, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 7200, "modes": 8, "hq": 1.0, "passed": true, "checks": 4800, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 7200, "fit": {"corrections": 200, "jacobians": 408, "nonlinear_trials": 408, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.657318191988713, "raw_svd_condition_median": 19.710493132985402, "raw_svd_condition_max": 20.14114276061077, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 7200, "g": 7200}}
+{"event": "PRACTICAL_PROGRESS", "step": 7300, "modes": 8, "hq": 1.0, "passed": true, "checks": 4900, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 7400, "modes": 8, "hq": 1.0, "passed": true, "checks": 5000, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 7400, "fit": {"corrections": 200, "jacobians": 411, "nonlinear_trials": 411, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.548122461146766, "raw_svd_condition_median": 19.78529719612923, "raw_svd_condition_max": 20.32802672703301, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 7400, "g": 7400}}
+{"event": "PRACTICAL_PROGRESS", "step": 7500, "modes": 8, "hq": 1.0, "passed": true, "checks": 5100, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 7600, "modes": 8, "hq": 1.0, "passed": true, "checks": 5200, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 7600, "fit": {"corrections": 200, "jacobians": 406, "nonlinear_trials": 406, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 16.287617701347724, "raw_svd_condition_median": 20.258108820944518, "raw_svd_condition_max": 20.689472903812018, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 7600, "g": 7600}}
+{"event": "PRACTICAL_PROGRESS", "step": 7700, "modes": 8, "hq": 1.0, "passed": true, "checks": 5300, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 7800, "modes": 8, "hq": 1.0, "passed": true, "checks": 5400, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 7800, "fit": {"corrections": 200, "jacobians": 407, "nonlinear_trials": 407, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 16.175290348749336, "raw_svd_condition_median": 20.275217684408762, "raw_svd_condition_max": 20.78195205174132, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 7800, "g": 7800}}
+{"event": "PRACTICAL_PROGRESS", "step": 7900, "modes": 8, "hq": 1.0, "passed": true, "checks": 5500, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 8000, "modes": 8, "hq": 1.0, "passed": true, "checks": 5600, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 8000, "fit": {"corrections": 200, "jacobians": 416, "nonlinear_trials": 416, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 16.242248341941387, "raw_svd_condition_median": 20.13441928664178, "raw_svd_condition_max": 20.637490541568635, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 8000, "g": 8000}}
+{"event": "PRACTICAL_PROGRESS", "step": 8100, "modes": 8, "hq": 1.0, "passed": true, "checks": 5700, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 8200, "modes": 8, "hq": 1.0, "passed": true, "checks": 5800, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 8200, "fit": {"corrections": 200, "jacobians": 411, "nonlinear_trials": 411, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 15.942188018039145, "raw_svd_condition_median": 20.319404501190437, "raw_svd_condition_max": 20.82436945420931, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 8200, "g": 8200}}
+{"event": "PRACTICAL_PROGRESS", "step": 8300, "modes": 8, "hq": 1.0, "passed": true, "checks": 5900, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 8400, "modes": 8, "hq": 1.0, "passed": true, "checks": 6000, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 8400, "fit": {"corrections": 200, "jacobians": 414, "nonlinear_trials": 414, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 16.32223225466221, "raw_svd_condition_median": 20.389340260517702, "raw_svd_condition_max": 21.11717466236483, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 8400, "g": 8400}}
+{"event": "PRACTICAL_PROGRESS", "step": 8500, "modes": 8, "hq": 1.0, "passed": true, "checks": 6100, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 8600, "modes": 8, "hq": 1.0, "passed": true, "checks": 6200, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 8600, "fit": {"corrections": 200, "jacobians": 413, "nonlinear_trials": 413, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 16.081286076185844, "raw_svd_condition_median": 20.654769246458734, "raw_svd_condition_max": 21.29882706094729, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 8600, "g": 8600}}
+{"event": "PRACTICAL_PROGRESS", "step": 8700, "modes": 8, "hq": 1.0, "passed": true, "checks": 6300, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 8800, "modes": 8, "hq": 1.0, "passed": true, "checks": 6400, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 8800, "fit": {"corrections": 200, "jacobians": 404, "nonlinear_trials": 404, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 16.978509773935443, "raw_svd_condition_median": 17.997915611310834, "raw_svd_condition_max": 21.322154467446207, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 8800, "g": 8800}}
+{"event": "PRACTICAL_PROGRESS", "step": 8900, "modes": 8, "hq": 1.0, "passed": true, "checks": 6500, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 9000, "modes": 8, "hq": 1.0, "passed": true, "checks": 6600, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 9000, "fit": {"corrections": 200, "jacobians": 410, "nonlinear_trials": 410, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 16.498893791512355, "raw_svd_condition_median": 20.517459337358247, "raw_svd_condition_max": 21.235506781475976, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 9000, "g": 9000}}
+{"event": "PRACTICAL_PROGRESS", "step": 9100, "modes": 8, "hq": 1.0, "passed": true, "checks": 6700, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 9200, "modes": 8, "hq": 1.0, "passed": true, "checks": 6800, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 9200, "fit": {"corrections": 200, "jacobians": 410, "nonlinear_trials": 410, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 17.117358912721624, "raw_svd_condition_median": 18.382625661826847, "raw_svd_condition_max": 21.426965091070464, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 9200, "g": 9200}}
+{"event": "PRACTICAL_PROGRESS", "step": 9300, "modes": 8, "hq": 1.0, "passed": true, "checks": 6900, "failing_checks": 0}
+{"event": "PRACTICAL_PROGRESS", "step": 9400, "modes": 8, "hq": 1.0, "passed": true, "checks": 7000, "failing_checks": 0}
+{"event": "LONG_STATE_SUMMARY", "step": 9400, "fit": {"corrections": 200, "jacobians": 417, "nonlinear_trials": 417, "rank_min": 24, "rank_max": 24, "raw_svd_condition_min": 17.095242555672687, "raw_svd_condition_median": 18.30377846754805, "raw_svd_condition_max": 21.286489059305726, "zero_or_nonfinite_singular_min": 0, "interpretation": "existing GN thin-SVD receipts; raw max/min, not active-subspace condition"}, "adam_steps": {"d": 9400, "g": 9400}}
+{"event": "PRACTICAL_ERROR", "pending": 9489, "last_complete": 9488, "error": "KeyboardInterrupt()"}
+Traceback (most recent call last):
+  File "/ml2/hypergan/ParticleGAN-model-error-recovery/reports/toy100/sample_anchor_practical_long_probe.py", line 268, in <module>
+    main()
+  File "/ml2/hypergan/ParticleGAN-model-error-recovery/reports/toy100/sample_anchor_practical_long_probe.py", line 217, in main
+    branch, actual = own.run_bound(saved, recipe, noise, factory,
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/sample_anchor_own_state_probe.py", line 138, in run_bound
+    result = recovery.run_continuation(saved, recipe, noise,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_model_error_recovery.py", line 138, in run_continuation
+    result = mode_hold.train_mode_hold(mode_hold.ModeHoldRecipe(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<exact-refinement-resume>", line 97, in train_mode_hold
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/optim/optimizer.py", line 530, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_smoothed_candidate.py", line 147, in <lambda>
+    lambda optimizer, closure=None: recorder.step(optimizer, ordinary_step, closure)))
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/pr84_critic_refinement_resume.py", line 191, in optimizer_step
+    result = self._ordinary_step(optimizer, ordinary_step, closure)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/reallocation_smoothed_candidate.py", line 70, in step
+    self.correct(optimizer)
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/sample_anchor_prestart_candidate.py", line 28, in correct
+    super().correct(optimizer)
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/sample_anchor_rest_candidate.py", line 23, in correct
+    super().correct(optimizer)
+  File "/home/mikkel/anaconda3/envs/conceptmod/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/sample_anchor_candidate.py", line 43, in correct
+    fit=fit_output_targets(clean,prior.z,target)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/sample_anchor_prestart_candidate.py", line 26, in from_pre
+    return ordinary(generator,prior_z,target,**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/joint_output_pullback.py", line 69, in fit_output_targets
+    u, singular, vh = torch.linalg.svd(jacobian, full_matrices=False)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

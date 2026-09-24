@@ -1,0 +1,161 @@
+{
+  "status": "STOPPED_SCOPE_CHANGE",
+  "classification": "intentional user-directed stop; not quality failure, not numerical instability, not a 12000-step pass",
+  "raw_driver_status": "ERROR_INCOMPLETE",
+  "raw_driver_error": "KeyboardInterrupt()",
+  "complete_update": 9488,
+  "pending_interrupted_update": 9489,
+  "planned_end": 12000,
+  "resumed_completed_updates": 7088,
+  "quality": {
+    "passing_checks": 7088,
+    "failing_checks": 0,
+    "min_modes": 8,
+    "min_hq": 1.0,
+    "last": {
+      "step": 9488,
+      "modes": 8,
+      "hq": 1.0,
+      "passed": true
+    },
+    "first50_archived_control_compact_parity": true
+  },
+  "input_own2400_snapshot_sha256": "01a1947916f97334dc09151ba16b0086f436c655f7e1390b5e461fc84ac434ae",
+  "safe_pre_step_snapshot": {
+    "file": "numerical-last-before-set-step.pt",
+    "file_sha256": "5212a73d083c5f3e7bae6466f9cf7b0ec0a774c033bf0a38543115c428138f15",
+    "snapshot_sha256": "9b6dcf4a9a23fef8a303ddcfb89df9315b05654c678f7f4fc9f4257cc535b893"
+  },
+  "safe_stage": {
+    "version": 1,
+    "fixed_output_scale": true,
+    "noise_policy": "all attributes except generator objects; their states are in rng",
+    "host_loop_step": 9488,
+    "adapter_scratch": "not included; restart only at outer-loop boundary",
+    "external_host_configuration": "required from source-bound declaration"
+  },
+  "safe_noise_step_calls": 9488,
+  "partial_state": {
+    "file": "numerical-partial-state.pt",
+    "file_sha256": "953ef6873f6b3f3bc8b7cb156258b84a1d1ab121fa202678612520db0e61ca93",
+    "restartable": false
+  },
+  "initial_state_summary": {
+    "step": 2400,
+    "generator": {
+      "l2": 11.09573401613922,
+      "abs_max": 0.5390072464942932,
+      "finite": true
+    },
+    "critic": {
+      "l2": 12.662388754198014,
+      "abs_max": 0.6554089784622192,
+      "finite": true
+    },
+    "prior": {
+      "l2": 3.857548871434086,
+      "abs_max": 1.2528713941574097,
+      "finite": true
+    },
+    "adam_d": {
+      "steps": [
+        2400
+      ],
+      "rates": [
+        0.00425
+      ],
+      "first_moment": {
+        "l2": 0.2558490557037325,
+        "abs_max": 0.11638617515563965,
+        "finite": true
+      },
+      "second_moment": {
+        "l2": 0.04188969536938352,
+        "abs_max": 0.025158917531371117,
+        "finite": true
+      }
+    },
+    "adam_g": {
+      "steps": [
+        2400
+      ],
+      "rates": [
+        0.00425,
+        0.0085
+      ],
+      "first_moment": {
+        "l2": 0.27032102882374676,
+        "abs_max": 0.0429660938680172,
+        "finite": true
+      },
+      "second_moment": {
+        "l2": 0.013943950464677606,
+        "abs_max": 0.004386669024825096,
+        "finite": true
+      }
+    }
+  },
+  "last_complete_state_summary": {
+    "step": 9488,
+    "generator": {
+      "l2": 11.019529937529523,
+      "abs_max": 0.5449433326721191,
+      "finite": true
+    },
+    "critic": {
+      "l2": 16.198690497272136,
+      "abs_max": 1.4832322597503662,
+      "finite": true
+    },
+    "prior": {
+      "l2": 4.1445418442335535,
+      "abs_max": 1.3034908771514893,
+      "finite": true
+    },
+    "adam_d": {
+      "steps": [
+        9488
+      ],
+      "rates": [
+        0.00425
+      ],
+      "first_moment": {
+        "l2": 0.3302345563354526,
+        "abs_max": 0.21370458602905273,
+        "finite": true
+      },
+      "second_moment": {
+        "l2": 0.061159133298193995,
+        "abs_max": 0.04720581695437431,
+        "finite": true
+      }
+    },
+    "adam_g": {
+      "steps": [
+        9488
+      ],
+      "rates": [
+        0.00425,
+        0.0085
+      ],
+      "first_moment": {
+        "l2": 0.22644849580902635,
+        "abs_max": 0.03525179252028465,
+        "finite": true
+      },
+      "second_moment": {
+        "l2": 0.012584086922154104,
+        "abs_max": 0.004048031754791737,
+        "finite": true
+      }
+    }
+  },
+  "periodic_summary_first_step": 2600,
+  "periodic_summary_last_step": 9400,
+  "periodic_summary_count": 35,
+  "elapsed_seconds": 509.55659803096205,
+  "full_raw_quality_and_periodic": "error.json",
+  "no_candidate_change": true,
+  "no_distribution_shift": true,
+  "shared_gate_eligible": false
+}
