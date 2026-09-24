@@ -1,0 +1,260 @@
+{
+  "scope": "single captured critic fit; no outer training",
+  "capture_sha256": "19ceb38a92ba95ffaccd3aafbda55bbd77917765612666d923e986e5523d6965",
+  "capture_source_sha256": "f8348fe1dedd06e6774dd34df274bcd33f3be1f42d022d3270c92fdab80616cc",
+  "audit_source_sha256": "5d786d9d8d90b67c4799bb82e28686f83ab101388864a45437bcb985716a47ba",
+  "torch_version": "2.13.0+cu126",
+  "host_update": 472,
+  "source": {
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/transfer_suite/legacy_noise_adapters.py": "b34a864330f24ce24e8d0fe5b3f14932ee795fc217d98786901ae0bdaadc7470",
+    "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+    "benchmarks/transfer_suite/toy100_compatibility.py": "cab108b3cb26929862eea09e7e0be98efeb4e4a25b63679455348e8074adca69",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/pr84_critic_refinement.py": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11",
+    "reports/toy100/pr84_critic_refinement_capture.py": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+    "reports/toy100/pr84_critic_refinement_cold.py": "742693fe0d1a3186c145490e1576ae4ccf19f8f49d242e9dff2e79543ed8084e",
+    "reports/toy100/pr84_critic_refinement_cold_probe.py": "00418c548e8e0eba4d59d81fd81b144e4bc5db6c224deeea36575a0bbe041208",
+    "reports/toy100/pr84_critic_refinement_probe.py": "33fa91f5da341e64ac2c4de8eeb2712ed41a9a9861e17d916cbe89cecd78266a",
+    "reports/toy100/pr84_critic_relaxation.py": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/pr84_smoothed_parity.py": "27a8b6fecd289369a94f069346cec136e4e38ffe1c7c96aac65b35318a4d1bea",
+    "tests/test_pr84_critic_refinement_cold.py": "79b9b61e9fcc1b82adac8c243373f3a49f6e0ee625ad2c39a83abf90343e9a34"
+  },
+  "fixed_eval_source_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+  "posthoc_pre_step_fixed_eval": {
+    "step": 471,
+    "grade": {
+      "modes": 3,
+      "hq": 0.755126953125,
+      "particle_draws": [
+        338,
+        356,
+        332,
+        353,
+        321,
+        314,
+        325,
+        345,
+        363,
+        341,
+        339,
+        369
+      ],
+      "particle_hq_rate": [
+        0.9822485446929932,
+        0.9747191071510315,
+        1.0,
+        0.5665722489356995,
+        0.8348909616470337,
+        0.1114649698138237,
+        0.9169231057167053,
+        0.8811594247817993,
+        0.5674931406974792,
+        1.0,
+        0.8702064752578735,
+        0.3658536672592163
+      ]
+    },
+    "scope": "one frozen-state observation, not the cold quality gate"
+  },
+  "saved_finiteness": {
+    "pre_step_g": {
+      "tensors": 8,
+      "finite_tensors": 8,
+      "finite_all": true,
+      "nan_elements": 0,
+      "infinite_elements": 0,
+      "finite_max_abs": 0.555569589138031
+    },
+    "pre_step_prior": {
+      "tensors": 1,
+      "finite_tensors": 1,
+      "finite_all": true,
+      "nan_elements": 0,
+      "infinite_elements": 0,
+      "finite_max_abs": 1.175564169883728
+    },
+    "pre_step_d": {
+      "tensors": 8,
+      "finite_tensors": 8,
+      "finite_all": true,
+      "nan_elements": 0,
+      "infinite_elements": 0,
+      "finite_max_abs": 2.3115909099578857
+    },
+    "post_accepted_d": {
+      "tensors": 8,
+      "finite_tensors": 8,
+      "finite_all": true,
+      "nan_elements": 0,
+      "infinite_elements": 0,
+      "finite_max_abs": 2.312221050262451
+    },
+    "clean_support": {
+      "tensors": 1,
+      "finite_tensors": 1,
+      "finite_all": true,
+      "nan_elements": 0,
+      "infinite_elements": 0,
+      "finite_max_abs": 3.177839756011963
+    },
+    "optimizer_d_moments": {
+      "tensors": 24,
+      "finite_tensors": 24,
+      "finite_all": true,
+      "nan_elements": 0,
+      "infinite_elements": 0,
+      "finite_max_abs": 472.0
+    },
+    "optimizer_g_moments": {
+      "tensors": 27,
+      "finite_tensors": 27,
+      "finite_all": true,
+      "nan_elements": 0,
+      "infinite_elements": 0,
+      "finite_max_abs": 471.0
+    }
+  },
+  "finite_records": 48,
+  "recorded_initial_loss": 0.28395605087280273,
+  "recorded_best_loss": 0.2382626235485077,
+  "accepted_parameters": {
+    "tensors": 8,
+    "finite_tensors": 8,
+    "finite_all": true,
+    "nan_elements": 0,
+    "infinite_elements": 0,
+    "finite_max_abs": 2.312221050262451
+  },
+  "bank": {
+    "tensors": 2,
+    "finite_tensors": 2,
+    "finite_all": true,
+    "nan_elements": 0,
+    "infinite_elements": 0,
+    "finite_max_abs": 3.272101640701294
+  },
+  "metric": {
+    "tensors": 8,
+    "finite_tensors": 8,
+    "finite_all": true,
+    "nan_elements": 0,
+    "infinite_elements": 0,
+    "finite_max_abs": 425000.00258292526
+  },
+  "best_finite": {
+    "total_loss": 0.2382626235485077,
+    "logistic": 0.2373976856470108,
+    "penalty": 0.0008649354567751288,
+    "gradient": {
+      "tensors": 8,
+      "finite_tensors": 8,
+      "finite_all": true,
+      "nan_elements": 0,
+      "infinite_elements": 0,
+      "finite_max_abs": 0.007367264945060015
+    },
+    "parameters": {
+      "tensors": 8,
+      "finite_tensors": 8,
+      "finite_all": true,
+      "nan_elements": 0,
+      "infinite_elements": 0,
+      "finite_max_abs": 2.3504960536956787
+    },
+    "agrees_with_recorded_best": true
+  },
+  "recorded_invalid_parameters": {
+    "tensors": 9,
+    "finite_tensors": 1,
+    "finite_all": false,
+    "nan_elements": 20161,
+    "infinite_elements": 0,
+    "finite_max_abs": 12.566370964050293
+  },
+  "recorded_invalid_gradients": {
+    "tensors": 8,
+    "finite_tensors": 0,
+    "finite_all": false,
+    "nan_elements": 20161,
+    "infinite_elements": 0,
+    "finite_max_abs": null
+  },
+  "replay": {
+    "raised": true,
+    "message": "nonfinite local critic fit",
+    "loss": "nan",
+    "logistic": "nan",
+    "penalty": "nan",
+    "gradient": {
+      "tensors": 8,
+      "finite_tensors": 0,
+      "finite_all": false,
+      "nan_elements": 20161,
+      "infinite_elements": 0,
+      "finite_max_abs": null
+    },
+    "parameters": {
+      "tensors": 8,
+      "finite_tensors": 0,
+      "finite_all": false,
+      "nan_elements": 20161,
+      "infinite_elements": 0,
+      "finite_max_abs": null
+    },
+    "trial_parameters_match_capture": true,
+    "trial_gradients_match_capture": true,
+    "wolfe": {
+      "t": "nan",
+      "t_prev": 0.0,
+      "f": 0.2382626235485077,
+      "f_new": 8.658852860438302e+19,
+      "f_prev": 0.2382626235485077,
+      "gtd": -6.837292671203613,
+      "gtd_new": 6.877533544512823e+20,
+      "ls_iter": 0.0
+    },
+    "wolfe_direction": {
+      "tensors": 1,
+      "finite_tensors": 1,
+      "finite_all": true,
+      "nan_elements": 0,
+      "infinite_elements": 0,
+      "finite_max_abs": 317.47393798828125
+    },
+    "wolfe_previous_trial_gradient": {
+      "tensors": 1,
+      "finite_tensors": 1,
+      "finite_all": true,
+      "nan_elements": 0,
+      "infinite_elements": 0,
+      "finite_max_abs": 1.1036525260051579e+18
+    },
+    "cubic_interpolation": {
+      "bracket": [
+        0.0,
+        1.0
+      ],
+      "losses": [
+        0.2382626235485077,
+        8.658852860438302e+19
+      ],
+      "derivatives": [
+        -6.837292671203613,
+        6.877533544512823e+20
+      ],
+      "d1": 4.2798776863813324e+20,
+      "d1_square": "inf",
+      "d2_square": "inf",
+      "recomputed_t": "nan"
+    }
+  }
+}
