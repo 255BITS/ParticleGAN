@@ -276,13 +276,19 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
                     raise TypeError("optimizer step delegate must be callable")
                 step_delegate["fn"] = fn
             def declare_optimizer_accounting(*, calls: int,
-                                             moment_updates: int = steps):
+                                             moment_updates: int = steps,
+                                             d_moment_updates: int | None = None):
                 if (type(calls) is not int or calls < steps
                         or type(moment_updates) is not int
                         or not step <= moment_updates <= calls):
                     raise ValueError("invalid optimizer accounting")
+                if d_moment_updates is not None and (
+                        type(d_moment_updates) is not int
+                        or not step <= d_moment_updates <= calls):
+                    raise ValueError("invalid discriminator moment accounting")
                 expected_accounting.update(calls=calls,
-                                           moment_updates=moment_updates)
+                                           moment_updates=moment_updates,
+                                           d_moment_updates=d_moment_updates)
             checkpoint_hook({**{name: values[name] for name in required},
                              "noise_policy": policy,
                              "control": control,
@@ -427,8 +433,14 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
                     and math.isclose(measured["max"], expected, rel_tol=1e-12)):
                 raise RuntimeError(f"{role} actual LR changed during constant run")
     for row in optimizer_final:
-        if (row["calls"] != expected_accounting["calls"]
-                or row["updates"] != expected_accounting["moment_updates"]):
+        if row["calls"] != expected_accounting["calls"]:
+            raise RuntimeError("Adam update count differs from declared continuation")
+        target = expected_accounting["moment_updates"]
+        # D is the single-group Adam. A stall-gated extra critic step advances
+        # only that counter; G's moment count stays one per outer step.
+        if len(row["rates"]) == 1 and expected_accounting.get("d_moment_updates") is not None:
+            target = expected_accounting["d_moment_updates"]
+        if row["updates"] != target:
             raise RuntimeError("Adam update count differs from declared continuation")
     if shift_pair is not None and any(row["updates"] != shift_step
                                       for row in shift_pair["optimizer_at_shift"]):
