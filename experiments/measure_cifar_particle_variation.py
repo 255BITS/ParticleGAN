@@ -70,7 +70,7 @@ def audit(run, out):
     g = DirectGenerator(cfg['z_dim'], cfg['width'])
     e = ImageRoutingEncoder(cfg['z_dim'], cfg['width'])
     prior = MoGParticlePrior(num_particles=cfg['num_particles'], z_dim=cfg['z_dim'],
-                             sigma_rel=cfg['sigma_rel'], generator=rng(cfg['seed'] + 1, 'cpu'))
+                             sigma=0, generator=rng(cfg['seed'] + 1, 'cpu'))
     for module, key in ((g, 'ema_G'), (e, 'ema_E'), (prior, 'ema_prior')):
         module.load_state_dict(ck[key])
         module.cuda().eval().requires_grad_(False)

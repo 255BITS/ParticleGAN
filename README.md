@@ -14,7 +14,7 @@
 Requires Python 3.10+ and PyTorch. Install from PyPI:
 
 ```bash
-python -m pip install particlegan
+python -m pip install particlegan==0.6.0
 ```
 
 For development and the repository's research experiments:
@@ -70,20 +70,22 @@ Include `prior.parameters()` in your generator optimizer to learn the particles.
 Use `GaussianPrior(z_dim=16)` for fresh Gaussian samples with the same sampling
 interface; its indices are `None` and it needs no particle regularization.
 
-### Mixture-of-Gaussians particles (0.3.0)
+### Mixture-of-Gaussians particles
 
 `MoGParticlePrior` gives each learned particle a continuous Gaussian neighborhood.
-Its defaults use the selected compact configuration: **400 components, z_dim=4,
-sigma_rel=1/40, standardized means**. Sigma is shared and fixed after calibration.
+Pass an explicit finite, nonnegative `sigma`; it is shared across all components
+and fixed during training. Construction performs **no nearest-neighbor search**.
+Historical recipes retain their spacing-based calibration as an explicit step.
 
 ```python
 from particlegan import MoGParticlePrior, get_recipe
 
-prior = MoGParticlePrior().to(device)
+prior = MoGParticlePrior(num_particles=65536, z_dim=128, sigma=0.212616428732872).to(device)
 z, component_ids = prior.sample(256)
 
 recipe = get_recipe("mog")  # 400 components, 28k steps, prior LR 0.06, beta1=0.5
-prior = recipe.make_prior().to(device)
+prior = recipe.make_prior().to(device)  # Explicit historical spacing calibration.
+# Or recipe.make_prior(sigma=0.1) to bypass calibration.
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 # Regularize raw means, not noisy draws. Use the full table at N <= 1024.
 prior_loss = recipe.make_prior_regularizer()(prior.z)
@@ -109,8 +111,10 @@ This is a single-seed result; both MoG and atoms remain useful.
 [MoG API and checkpoint details](docs/api.md#mogparticleprior) ·
 [Changelog](CHANGELOG.md).
 
-Core MoG sampling and calibration work with PyTorch alone. For faster calibration
-of large low-dimensional tables, install the optional extra with
+`calibrate_mog_sigma(centers, sigma_rel)` optionally returns `(sigma, d0)` from
+supplied centers; see the [migration and checkpoint guide](docs/api.md#mogparticleprior).
+Calibration can be very expensive for large, high-dimensional tables. It works
+with PyTorch alone; for faster calibration of low-dimensional tables, install
 `python -m pip install 'particlegan[mog]'` (or `python -m pip install -e '.[mog]'`
 from this checkout).
 
@@ -526,6 +530,19 @@ toy trainers. The faster CIFAR default retains exact derivatives; FD is optional
 ## Changelog
 
 Versions before 0.2 tracked the default recipe of `examples/100gaussians.py`.
+
+### 0.6.0 — 2026-09-24
+
+- Require explicit keyword `sigma` in `MoGParticlePrior`; construction no longer
+  searches nearest neighbors. The shared isotropic noise remains fixed in training.
+- Add optional `calibrate_mog_sigma(centers, sigma_rel)` returning `(sigma, d0)`;
+  retain exact even-count median and historical dtype rounding. Recipes explicitly
+  calibrate their initialized centers unless `make_prior(sigma=...)` overrides them.
+- Preserve legacy checkpoint centers, sigma, d0, read settings, samples and RNG
+  behavior. Load with matching dimensions and `sigma=0`, then `load_state_dict`.
+- Migrate fixed-noise integrations to `MoGParticlePrior(..., sigma=fixed_sigma)`
+  and remove post-construction sigma overwrites. Replace `calibrate()` with the
+  standalone helper only when spacing-based calibration is intended.
 
 ### 0.5.0 — 2026-09-17
 

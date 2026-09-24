@@ -10,7 +10,7 @@ from particlegan import MoGParticlePrior, ParticleEncoding, Recipe, get_recipe, 
 
 
 def prior():
-    p = MoGParticlePrior(num_particles=3, z_dim=2, standardize=False, dtype=torch.float64)
+    p = MoGParticlePrior(sigma=.025, num_particles=3, z_dim=2, standardize=False, dtype=torch.float64)
     with torch.no_grad():
         p.z.copy_(torch.tensor([[-1., 0.], [0., 1.], [1., 0.]]))
         p.sigma.fill_(.1)

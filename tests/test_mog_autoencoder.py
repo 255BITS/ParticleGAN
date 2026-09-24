@@ -35,7 +35,7 @@ def test_random_offset_is_input_noise_and_bounded_offset_stays_local():
 
 def test_reconstruction_step_moves_particles_but_keeps_sigma_fixed():
     torch.manual_seed(4)
-    prior = MoGParticlePrior(num_particles=16, z_dim=2)
+    prior = MoGParticlePrior(sigma=.025, num_particles=16, z_dim=2)
     encoder = RoutingEncoder(width=16)
     opt = torch.optim.Adam(list(encoder.parameters()) + list(prior.parameters()), lr=.01)
     initial_sigma, initial_particles = prior.sigma.clone(), prior.z.detach().clone()

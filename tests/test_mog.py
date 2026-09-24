@@ -10,7 +10,7 @@ def test_zero_noise_is_exact_and_rng_neutral():
     old = ParticlePrior(100, 4)
     state = torch.get_rng_state().clone()
     torch.manual_seed(13)
-    new = MoGParticlePrior(100, 4, sigma_rel=0, standardize=False)
+    new = MoGParticlePrior(100, 4, sigma=0, standardize=False)
     assert torch.equal(state, torch.get_rng_state())
     assert torch.equal(old.z, new.z)
     for fixed in (False, True):
@@ -23,7 +23,7 @@ def test_zero_noise_is_exact_and_rng_neutral():
 
 
 def test_noise_standardization_gradients_and_ema():
-    prior = MoGParticlePrior(100, 4, sigma_rel=.125)
+    prior = MoGParticlePrior(100, 4, sigma=.125)
     eps = torch.randn(20, 4)
     z, ids = prior.sample(20, fixed_first_n=True, eps=eps)
     assert torch.equal(z, prior.means()[:20] + prior.sigma*eps)

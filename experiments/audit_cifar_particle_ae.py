@@ -34,7 +34,7 @@ def main(run):
         assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == expected
     g = DirectGenerator(cfg['z_dim'], cfg['width'])
     prior = MoGParticlePrior(num_particles=cfg['num_particles'], z_dim=cfg['z_dim'],
-                             sigma_rel=cfg['sigma_rel'], generator=rng(cfg['seed'] + 1, 'cpu'))
+                             sigma=0, generator=rng(cfg['seed'] + 1, 'cpu'))
     g.load_state_dict(ck['ema_G'])
     prior.load_state_dict(ck['ema_prior'])
     g.cuda().eval().requires_grad_(False)

@@ -41,7 +41,7 @@ def audit(run, device):
     assert hashlib.sha256((run / "source.py").read_bytes()).hexdigest() == cfg["source_sha256"]
     checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=True)
     assert checkpoint["step"] == metrics["step"] == cfg["steps"]
-    prior = MoGParticlePrior(num_particles=cfg["num_particles"], z_dim=cfg["z_dim"], device=device).to(device)
+    prior = MoGParticlePrior(sigma=0, num_particles=cfg["num_particles"], z_dim=cfg["z_dim"], device=device).to(device)
     encoder = RoutingEncoder(cfg["width"]).to(device)
     decoder = SimpleMLPGenerator(cfg["z_dim"], cfg["width"]).to(device)
     prior.load_state_dict(checkpoint["prior"])
