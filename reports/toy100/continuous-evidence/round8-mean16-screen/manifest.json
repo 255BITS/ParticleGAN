@@ -1,0 +1,538 @@
+{
+  "status": "FAIL",
+  "continuous_passes": 24,
+  "continuous_checks": 44,
+  "one_step_scope": "fails immediate repair of already bad original1326; not a stability refutation",
+  "v1_scope": "constructor-role-registry harness error before first candidate quality result",
+  "v2_scope": "actual candidate branches; all source/native-control/RNG/noise/rate/live-moment checks pass",
+  "files": [
+    {
+      "original": "mean16-one-step-filter/declaration.json",
+      "stored": "mean16-one-step-filter/declaration.json.gz",
+      "original_sha256": "c329539be48a1ea67255a14b587defae8e7cd6c367c64b4b054239eb0233d484",
+      "stored_sha256": "49adb8de09ceb09ac8e510674e7669c5d0ad35c15a121866da3632d9eb64a7fc"
+    },
+    {
+      "original": "mean16-one-step-filter/first-failure.pt",
+      "stored": "mean16-one-step-filter/first-failure.pt.gz",
+      "original_sha256": "56c19a682405a159db331733c630921452164abb3f3ee04d142b486aefe45864",
+      "stored_sha256": "64260d1ed03b8b8aa53fc4a6c55e374a0623016ffdb1934f240be4e424c84822"
+    },
+    {
+      "original": "mean16-one-step-filter/source/benchmarks/locked_shared/mlp.py",
+      "stored": "mean16-one-step-filter/source/benchmarks/locked_shared/mlp.py.gz",
+      "original_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "stored_sha256": "90af397f52e30d4f6037bae56ac9319f53a17d63f2ca616bc5dbdf7ca003e81f"
+    },
+    {
+      "original": "mean16-one-step-filter/source/benchmarks/locked_shared/mode_hold.py",
+      "stored": "mean16-one-step-filter/source/benchmarks/locked_shared/mode_hold.py.gz",
+      "original_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "stored_sha256": "a5610686a60c882940c4da616b25896dd768e0ce8e2ac882ecb3f68429ec9a4a"
+    },
+    {
+      "original": "mean16-one-step-filter/source/configs/toy100/constraints_simple_regularization.json",
+      "stored": "mean16-one-step-filter/source/configs/toy100/constraints_simple_regularization.json.gz",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "stored_sha256": "921e0ebd2ea53b472db8cd7fc2deb8b570233221c3419a18580cf27abc75d800"
+    },
+    {
+      "original": "mean16-one-step-filter/source/particlegan/gan_loss.py",
+      "stored": "mean16-one-step-filter/source/particlegan/gan_loss.py.gz",
+      "original_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "stored_sha256": "e295419c83dda268c73d2b15d83c0896f1c94915c3199ff8571e1b2245ac7049"
+    },
+    {
+      "original": "mean16-one-step-filter/source/particlegan/grad_regularizers.py",
+      "stored": "mean16-one-step-filter/source/particlegan/grad_regularizers.py.gz",
+      "original_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+      "stored_sha256": "3fdd6906186a88af6d9d86cbfbfee0be6a50aa27bcd679054643f95c19c2ef48"
+    },
+    {
+      "original": "mean16-one-step-filter/source/reports/toy100/alternating_curvature_scratch.py",
+      "stored": "mean16-one-step-filter/source/reports/toy100/alternating_curvature_scratch.py.gz",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "stored_sha256": "c5fe98bf157132e2502a24a0c2b3e35e224c061ed637e10918c2e64f3ef2bb1b"
+    },
+    {
+      "original": "mean16-one-step-filter/source/reports/toy100/coverage_fixed_eval.py",
+      "stored": "mean16-one-step-filter/source/reports/toy100/coverage_fixed_eval.py.gz",
+      "original_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "stored_sha256": "f780451c74aa2002d32aab0448929082ec676eecb283ba30a37bc1580b48efd3"
+    },
+    {
+      "original": "mean16-one-step-filter/source/reports/toy100/pr84_critic_refinement_capture.py",
+      "stored": "mean16-one-step-filter/source/reports/toy100/pr84_critic_refinement_capture.py.gz",
+      "original_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+      "stored_sha256": "154533334ec69c807c234c9ae7b804c005aec0e5a786fa68b9450547ca85eb3f"
+    },
+    {
+      "original": "mean16-one-step-filter/source/reports/toy100/pr84_critic_refinement_filter.py",
+      "stored": "mean16-one-step-filter/source/reports/toy100/pr84_critic_refinement_filter.py.gz",
+      "original_sha256": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+      "stored_sha256": "f6148a682c1165a564f5f9618bc220833aa1d9c1ec0fdb44253b6609daec3a36"
+    },
+    {
+      "original": "mean16-one-step-filter/source/reports/toy100/pr84_critic_relaxation.py",
+      "stored": "mean16-one-step-filter/source/reports/toy100/pr84_critic_relaxation.py.gz",
+      "original_sha256": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+      "stored_sha256": "dcfd47218b090e5bb751b66631ebb9e883a34110ce41735013d3d1fbd6feddfd"
+    },
+    {
+      "original": "mean16-one-step-filter/source/reports/toy100/pr84_finite_bank_adam_control.py",
+      "stored": "mean16-one-step-filter/source/reports/toy100/pr84_finite_bank_adam_control.py.gz",
+      "original_sha256": "b3399d5ff528d4df4e101807aefd9108f733bafc419f385065299470dd306ae4",
+      "stored_sha256": "e799189827a82bccfa7d6417a17f25a7fa29d8b20c58a11052c96c29b4aae83e"
+    },
+    {
+      "original": "mean16-one-step-filter/source/reports/toy100/pr84_finite_bank_vr_diagnostic.py",
+      "stored": "mean16-one-step-filter/source/reports/toy100/pr84_finite_bank_vr_diagnostic.py.gz",
+      "original_sha256": "37dcb85d09bb710bb1c9c8c106169c24c9e862e142967cb3940c2e792da761d6",
+      "stored_sha256": "5c9fe6cab0f5535470da7bcfeed164ffa30b9c860a066f3225a773095c20f965"
+    },
+    {
+      "original": "mean16-one-step-filter/source/reports/toy100/pr84_mean16_one_step_filter.py",
+      "stored": "mean16-one-step-filter/source/reports/toy100/pr84_mean16_one_step_filter.py.gz",
+      "original_sha256": "d5d398db37fc4d43990fd15c4ece6b415688ad725db07136c738b4dc4b4c14e8",
+      "stored_sha256": "d5c1c7b0604892fb0735766a6e2f5a481307837ea492ab520d17601cac1f148c"
+    },
+    {
+      "original": "mean16-one-step-filter/summary.json",
+      "stored": "mean16-one-step-filter/summary.json.gz",
+      "original_sha256": "abcaedb8b2e01c08af70d05f15514f76ff5dcc81aab8da4f6437ee980fb60629",
+      "stored_sha256": "772241a5753e7f31ad555413ee15181ed1c5c231a6febde948268cee533be87d"
+    },
+    {
+      "original": "mean16-one-step-filter/update-1324.json",
+      "stored": "mean16-one-step-filter/update-1324.json.gz",
+      "original_sha256": "260b3ad5fff8945abbc900669f6448bb63c4868c83539227164007ba3247cff8",
+      "stored_sha256": "ef609563619db83ba53af890d99d9d4df6027d685acd09cd57a2ff37f8fca2ca"
+    },
+    {
+      "original": "mean16-one-step-filter/update-1325.json",
+      "stored": "mean16-one-step-filter/update-1325.json.gz",
+      "original_sha256": "5916e923e44f88ef2b0a0b484f632b0c6b13310fe090b74a5ed511a9cdd9f885",
+      "stored_sha256": "d1aa7a7c64a06d1f484e91793ba5ee37957695185df78473eedee084c1ec660f"
+    },
+    {
+      "original": "mean16-one-step-filter/update-1326.json",
+      "stored": "mean16-one-step-filter/update-1326.json.gz",
+      "original_sha256": "033070639fe217bf0cfe4967e8f32fd3ba34c77fece4deeda5892536c733e78d",
+      "stored_sha256": "dc38d0c777e5d84842f7dc03991be163473c555212b7eff2ebb48039ce568026"
+    },
+    {
+      "original": "mean16-continuous-filter/declaration.json",
+      "stored": "mean16-continuous-filter/declaration.json.gz",
+      "original_sha256": "d727058b43d8b1f2b46a66bc244acbdb8cad1f4509bd6b991482ba4e17517683",
+      "stored_sha256": "36fcb6f9aa51f4b9802836e9902a225fdc6105991e3055c72c9225a20b932049"
+    },
+    {
+      "original": "mean16-continuous-filter/original-1324-1335.json",
+      "stored": "mean16-continuous-filter/original-1324-1335.json.gz",
+      "original_sha256": "f0fc4fdafcc8ff286c92e89055bc620f13452fe5a8093de85f419a60896bf1c4",
+      "stored_sha256": "7d6664b84d717f123d293e0baf5d6fa41344bbc03365d701427348f12e9c4a97"
+    },
+    {
+      "original": "mean16-continuous-filter/reallocation-1324-1335.error.json",
+      "stored": "mean16-continuous-filter/reallocation-1324-1335.error.json.gz",
+      "original_sha256": "d0b467090eadbd05fc6a01cb6aa3aa16cc46539e6a883a4cff09209d0e6f80c3",
+      "stored_sha256": "77e79d1536c6d4551d1601093c11a597967eec8a1c0898360a1681d09ae5f526"
+    },
+    {
+      "original": "mean16-continuous-filter/source/benchmarks/locked_shared/mlp.py",
+      "stored": "mean16-continuous-filter/source/benchmarks/locked_shared/mlp.py.gz",
+      "original_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "stored_sha256": "90af397f52e30d4f6037bae56ac9319f53a17d63f2ca616bc5dbdf7ca003e81f"
+    },
+    {
+      "original": "mean16-continuous-filter/source/benchmarks/locked_shared/mode_hold.py",
+      "stored": "mean16-continuous-filter/source/benchmarks/locked_shared/mode_hold.py.gz",
+      "original_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "stored_sha256": "a5610686a60c882940c4da616b25896dd768e0ce8e2ac882ecb3f68429ec9a4a"
+    },
+    {
+      "original": "mean16-continuous-filter/source/configs/toy100/constraints_simple_regularization.json",
+      "stored": "mean16-continuous-filter/source/configs/toy100/constraints_simple_regularization.json.gz",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "stored_sha256": "921e0ebd2ea53b472db8cd7fc2deb8b570233221c3419a18580cf27abc75d800"
+    },
+    {
+      "original": "mean16-continuous-filter/source/host-1324-1335.py",
+      "stored": "mean16-continuous-filter/source/host-1324-1335.py.gz",
+      "original_sha256": "8b1a0f5d26785c0ea537f6ef069843f45bf800ecfbd9fe1c84b68eb0804c4db1",
+      "stored_sha256": "df2224660b541a8dfbe99fc6c1b5347ce65a23adad0cd1a08948b8128edc8cf4"
+    },
+    {
+      "original": "mean16-continuous-filter/source/particlegan/gan_loss.py",
+      "stored": "mean16-continuous-filter/source/particlegan/gan_loss.py.gz",
+      "original_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "stored_sha256": "e295419c83dda268c73d2b15d83c0896f1c94915c3199ff8571e1b2245ac7049"
+    },
+    {
+      "original": "mean16-continuous-filter/source/particlegan/grad_regularizers.py",
+      "stored": "mean16-continuous-filter/source/particlegan/grad_regularizers.py.gz",
+      "original_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+      "stored_sha256": "3fdd6906186a88af6d9d86cbfbfee0be6a50aa27bcd679054643f95c19c2ef48"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/alternating_curvature_scratch.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/alternating_curvature_scratch.py.gz",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "stored_sha256": "c5fe98bf157132e2502a24a0c2b3e35e224c061ed637e10918c2e64f3ef2bb1b"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/chamfer_discrete_reallocation.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/chamfer_discrete_reallocation.py.gz",
+      "original_sha256": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24",
+      "stored_sha256": "c3d0c29182e594d1fa3759b53a70f2208999384a4abb0d8dbccf57b9b0dcea17"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/chamfer_pullback.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/chamfer_pullback.py.gz",
+      "original_sha256": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+      "stored_sha256": "b54f5c1597419b39b30109f4d198932982e3ab679a2f87dfb52d7d4a97a537a6"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/coverage_fixed_eval.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/coverage_fixed_eval.py.gz",
+      "original_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "stored_sha256": "f780451c74aa2002d32aab0448929082ec676eecb283ba30a37bc1580b48efd3"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/extra_adam_scratch.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/extra_adam_scratch.py.gz",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "stored_sha256": "0544b747488cf1b4bc2b395b3438f69713207fda2627710cc6446e633f99944c"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/joint_output_pullback.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/joint_output_pullback.py.gz",
+      "original_sha256": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3",
+      "stored_sha256": "c89e9f1f30b7ac84fee345997641fd7ae6d768403034aaf9197a3114bdfab2d0"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/pr84_critic_refinement_capture.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/pr84_critic_refinement_capture.py.gz",
+      "original_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+      "stored_sha256": "154533334ec69c807c234c9ae7b804c005aec0e5a786fa68b9450547ca85eb3f"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/pr84_critic_refinement_filter.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/pr84_critic_refinement_filter.py.gz",
+      "original_sha256": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+      "stored_sha256": "f6148a682c1165a564f5f9618bc220833aa1d9c1ec0fdb44253b6609daec3a36"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/pr84_critic_relaxation.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/pr84_critic_relaxation.py.gz",
+      "original_sha256": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+      "stored_sha256": "dcfd47218b090e5bb751b66631ebb9e883a34110ce41735013d3d1fbd6feddfd"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/pr84_finite_bank_adam_control.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/pr84_finite_bank_adam_control.py.gz",
+      "original_sha256": "b3399d5ff528d4df4e101807aefd9108f733bafc419f385065299470dd306ae4",
+      "stored_sha256": "e799189827a82bccfa7d6417a17f25a7fa29d8b20c58a11052c96c29b4aae83e"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/pr84_finite_bank_vr_diagnostic.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/pr84_finite_bank_vr_diagnostic.py.gz",
+      "original_sha256": "37dcb85d09bb710bb1c9c8c106169c24c9e862e142967cb3940c2e792da761d6",
+      "stored_sha256": "5c9fe6cab0f5535470da7bcfeed164ffa30b9c860a066f3225a773095c20f965"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/pr84_mean16_continuous_filter.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/pr84_mean16_continuous_filter.py.gz",
+      "original_sha256": "b7fd0cd3e565656e7b541032aac267e2e0e559b71575e1988986a7c92c2f2417",
+      "stored_sha256": "402e3bbf9a9bd0164d094a3171c646c24a529907bb16dde4b891bede6624019f"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/pr84_mean16_replay_candidate.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/pr84_mean16_replay_candidate.py.gz",
+      "original_sha256": "9c2736a47edea16abfc1d0894e1c78b0a22465a4f3d0bbcabcbbbeff160ee463",
+      "stored_sha256": "715d3071e407a825a2cc1b899e6e2c618285eb133cac2956c01f1d8ae91b821c"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/pr84_opponent_prediction.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/pr84_opponent_prediction.py.gz",
+      "original_sha256": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846",
+      "stored_sha256": "91e08ad6104808258860ac9c38ed4cda39c5fdc3c84f497bc8e635154e624c10"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/pr84_prediction_state_filter.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/pr84_prediction_state_filter.py.gz",
+      "original_sha256": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4",
+      "stored_sha256": "b90d6207f564a630f21729ac86eb231882c044f1741de1303d4b57d5908797c4"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/pr84_smoothed_candidate.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/pr84_smoothed_candidate.py.gz",
+      "original_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+      "stored_sha256": "2c24e067db0ae7e64efc8a5babe94c3400681d010007452e8a39358ad0125340"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/reallocation_smoothed_candidate.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/reallocation_smoothed_candidate.py.gz",
+      "original_sha256": "ca16cf667a03e585d50c110edcd0b219991768877dff1a640ec2371c7d16439c",
+      "stored_sha256": "c24fb389dcacb81317b96ee1ad305d95eb88a69ec60801bc6d010fbdafcf7279"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/sample_anchor_candidate.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/sample_anchor_candidate.py.gz",
+      "original_sha256": "2fb4ee97bfc4a1f00f0076c55f0e210bc531fc34779c1e23a719ba7722a15c33",
+      "stored_sha256": "1dd2fccfd67751214263c59a0a0b857713a04999e9206de304929bce4b98c680"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/sample_anchor_rest_candidate.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/sample_anchor_rest_candidate.py.gz",
+      "original_sha256": "287d3c5d21d2ca8ff80c8167bd2af294f4de088a54619bfd03d0c3eaf3715560",
+      "stored_sha256": "9993bd1669cee4e75e59994568dd169ab9635949b98487d0803ad880b7b7c015"
+    },
+    {
+      "original": "mean16-continuous-filter/source/reports/toy100/sample_group_anchor.py",
+      "stored": "mean16-continuous-filter/source/reports/toy100/sample_group_anchor.py.gz",
+      "original_sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+      "stored_sha256": "83d978465df465af93163ccc553e9e43f969a201bda5fb5f56d8bfeac338e108"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/declaration.json",
+      "stored": "mean16-continuous-filter-v2/declaration.json.gz",
+      "original_sha256": "2192834526b0b5248b63497efcfa82640779ed95ac52372b063d267d0530cb18",
+      "stored_sha256": "424fa8f5ff0af0feab7d3981dfbb4d21a1dd0decac335a18a69928831b4d6d7e"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/original-1324-1335.json",
+      "stored": "mean16-continuous-filter-v2/original-1324-1335.json.gz",
+      "original_sha256": "2243650962cfcc17222940eb817868e2f487095805bb7e74d6351ffe64cb6472",
+      "stored_sha256": "e06ce27cd43a55e6e191d9ff994820acdec3994d0f6f5960f657a40b028c3917"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/original-1380-1395.json",
+      "stored": "mean16-continuous-filter-v2/original-1380-1395.json.gz",
+      "original_sha256": "0ef8927217eaa37235e46db52004bf675dad7e8676d678e9bcd5484b094ac142",
+      "stored_sha256": "7a4780c0e93ab06e8a591c837e323116608300e6dcd1208b64574f8b526afc73"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/original-1530-1545.json",
+      "stored": "mean16-continuous-filter-v2/original-1530-1545.json.gz",
+      "original_sha256": "30dee79cbcc82dd465c1e0fb6472857bca2c72f3577ed6d2dd519e3cdce05a63",
+      "stored_sha256": "1b06ea9e23b3422fac2a554c2650157cbb05799d89dd0dd055803c084d9ca260"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/reallocation-1324-1335.json",
+      "stored": "mean16-continuous-filter-v2/reallocation-1324-1335.json.gz",
+      "original_sha256": "fd540846b6f877b8e18d6403a9d9a0b89307ba81bac21329e18a01d7703d50b1",
+      "stored_sha256": "d5c0d66a7f40a108061742e233197549539bd5bc3f01a4bf63d67f6ebd7709e3"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/reallocation-1380-1395.json",
+      "stored": "mean16-continuous-filter-v2/reallocation-1380-1395.json.gz",
+      "original_sha256": "b4d035faa923c3facc76c55339994f4279b84e00ed25ecc3d876313ce1032ca8",
+      "stored_sha256": "c2d919b31c3ef7d1f9cfa4efc91276fe88a0a911fc130e614895fbbc78d21dc0"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/reallocation-1530-1545.json",
+      "stored": "mean16-continuous-filter-v2/reallocation-1530-1545.json.gz",
+      "original_sha256": "389a9bef99021b9d0c42a2a574a31a973f6804508650016e74d9c127fa296b24",
+      "stored_sha256": "c571923df7e4a94957c718eef261c09d751af105fd33e81ebfbe1991e6fbab26"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/benchmarks/locked_shared/mlp.py",
+      "stored": "mean16-continuous-filter-v2/source/benchmarks/locked_shared/mlp.py.gz",
+      "original_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "stored_sha256": "90af397f52e30d4f6037bae56ac9319f53a17d63f2ca616bc5dbdf7ca003e81f"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/benchmarks/locked_shared/mode_hold.py",
+      "stored": "mean16-continuous-filter-v2/source/benchmarks/locked_shared/mode_hold.py.gz",
+      "original_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "stored_sha256": "a5610686a60c882940c4da616b25896dd768e0ce8e2ac882ecb3f68429ec9a4a"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/configs/toy100/constraints_simple_regularization.json",
+      "stored": "mean16-continuous-filter-v2/source/configs/toy100/constraints_simple_regularization.json.gz",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "stored_sha256": "921e0ebd2ea53b472db8cd7fc2deb8b570233221c3419a18580cf27abc75d800"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/host-1324-1335.py",
+      "stored": "mean16-continuous-filter-v2/source/host-1324-1335.py.gz",
+      "original_sha256": "8b1a0f5d26785c0ea537f6ef069843f45bf800ecfbd9fe1c84b68eb0804c4db1",
+      "stored_sha256": "df2224660b541a8dfbe99fc6c1b5347ce65a23adad0cd1a08948b8128edc8cf4"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/host-1380-1395.py",
+      "stored": "mean16-continuous-filter-v2/source/host-1380-1395.py.gz",
+      "original_sha256": "911cd032897585771b4c5ca9c61536f8acba0246c69c105478c3331c256f7257",
+      "stored_sha256": "96f331cac606f57b3a775cdbc2cd01955140a6b68565b3ecaab80169f48d2eef"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/host-1530-1545.py",
+      "stored": "mean16-continuous-filter-v2/source/host-1530-1545.py.gz",
+      "original_sha256": "d77d320f2802c7c418612647f0308bb0e9e12bebd2598eb84d066113554f4d1a",
+      "stored_sha256": "5a50c1475ed9895654fe63bdc2eedc1c13af3f72dcd652bf7e380aae6dcb2d69"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/particlegan/gan_loss.py",
+      "stored": "mean16-continuous-filter-v2/source/particlegan/gan_loss.py.gz",
+      "original_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "stored_sha256": "e295419c83dda268c73d2b15d83c0896f1c94915c3199ff8571e1b2245ac7049"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/particlegan/grad_regularizers.py",
+      "stored": "mean16-continuous-filter-v2/source/particlegan/grad_regularizers.py.gz",
+      "original_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+      "stored_sha256": "3fdd6906186a88af6d9d86cbfbfee0be6a50aa27bcd679054643f95c19c2ef48"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/alternating_curvature_scratch.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/alternating_curvature_scratch.py.gz",
+      "original_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "stored_sha256": "c5fe98bf157132e2502a24a0c2b3e35e224c061ed637e10918c2e64f3ef2bb1b"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/chamfer_discrete_reallocation.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/chamfer_discrete_reallocation.py.gz",
+      "original_sha256": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24",
+      "stored_sha256": "c3d0c29182e594d1fa3759b53a70f2208999384a4abb0d8dbccf57b9b0dcea17"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/chamfer_pullback.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/chamfer_pullback.py.gz",
+      "original_sha256": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+      "stored_sha256": "b54f5c1597419b39b30109f4d198932982e3ab679a2f87dfb52d7d4a97a537a6"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/coverage_fixed_eval.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/coverage_fixed_eval.py.gz",
+      "original_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "stored_sha256": "f780451c74aa2002d32aab0448929082ec676eecb283ba30a37bc1580b48efd3"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/extra_adam_scratch.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/extra_adam_scratch.py.gz",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "stored_sha256": "0544b747488cf1b4bc2b395b3438f69713207fda2627710cc6446e633f99944c"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/joint_output_pullback.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/joint_output_pullback.py.gz",
+      "original_sha256": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3",
+      "stored_sha256": "c89e9f1f30b7ac84fee345997641fd7ae6d768403034aaf9197a3114bdfab2d0"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/pr84_critic_refinement_capture.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/pr84_critic_refinement_capture.py.gz",
+      "original_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+      "stored_sha256": "154533334ec69c807c234c9ae7b804c005aec0e5a786fa68b9450547ca85eb3f"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/pr84_critic_refinement_filter.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/pr84_critic_refinement_filter.py.gz",
+      "original_sha256": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+      "stored_sha256": "f6148a682c1165a564f5f9618bc220833aa1d9c1ec0fdb44253b6609daec3a36"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/pr84_critic_relaxation.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/pr84_critic_relaxation.py.gz",
+      "original_sha256": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+      "stored_sha256": "dcfd47218b090e5bb751b66631ebb9e883a34110ce41735013d3d1fbd6feddfd"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/pr84_finite_bank_adam_control.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/pr84_finite_bank_adam_control.py.gz",
+      "original_sha256": "b3399d5ff528d4df4e101807aefd9108f733bafc419f385065299470dd306ae4",
+      "stored_sha256": "e799189827a82bccfa7d6417a17f25a7fa29d8b20c58a11052c96c29b4aae83e"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/pr84_finite_bank_vr_diagnostic.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/pr84_finite_bank_vr_diagnostic.py.gz",
+      "original_sha256": "37dcb85d09bb710bb1c9c8c106169c24c9e862e142967cb3940c2e792da761d6",
+      "stored_sha256": "5c9fe6cab0f5535470da7bcfeed164ffa30b9c860a066f3225a773095c20f965"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/pr84_mean16_continuous_filter_v2.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/pr84_mean16_continuous_filter_v2.py.gz",
+      "original_sha256": "6d881600494456c4da170ffc89c4a2943203eef96ee482386527a87edac2b763",
+      "stored_sha256": "dae7b0b98a660360c1b0142b76a07a606e5afea283bff28eb2f05c8c1ee4ad4b"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/pr84_mean16_replay_candidate.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/pr84_mean16_replay_candidate.py.gz",
+      "original_sha256": "9c2736a47edea16abfc1d0894e1c78b0a22465a4f3d0bbcabcbbbeff160ee463",
+      "stored_sha256": "715d3071e407a825a2cc1b899e6e2c618285eb133cac2956c01f1d8ae91b821c"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/pr84_mean16_replay_candidate_v2.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/pr84_mean16_replay_candidate_v2.py.gz",
+      "original_sha256": "5addd4426391a0dbb8e8e19b7489161c095d965168e65acdf0f266805e24f37e",
+      "stored_sha256": "1421eb592575bfe11001f107c9dbfffd9f2cbd1208c225540aa800459a7d473b"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/pr84_opponent_prediction.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/pr84_opponent_prediction.py.gz",
+      "original_sha256": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846",
+      "stored_sha256": "91e08ad6104808258860ac9c38ed4cda39c5fdc3c84f497bc8e635154e624c10"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/pr84_prediction_state_filter.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/pr84_prediction_state_filter.py.gz",
+      "original_sha256": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4",
+      "stored_sha256": "b90d6207f564a630f21729ac86eb231882c044f1741de1303d4b57d5908797c4"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/pr84_smoothed_candidate.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/pr84_smoothed_candidate.py.gz",
+      "original_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+      "stored_sha256": "2c24e067db0ae7e64efc8a5babe94c3400681d010007452e8a39358ad0125340"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/reallocation_smoothed_candidate.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/reallocation_smoothed_candidate.py.gz",
+      "original_sha256": "ca16cf667a03e585d50c110edcd0b219991768877dff1a640ec2371c7d16439c",
+      "stored_sha256": "c24fb389dcacb81317b96ee1ad305d95eb88a69ec60801bc6d010fbdafcf7279"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/sample_anchor_candidate.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/sample_anchor_candidate.py.gz",
+      "original_sha256": "2fb4ee97bfc4a1f00f0076c55f0e210bc531fc34779c1e23a719ba7722a15c33",
+      "stored_sha256": "1dd2fccfd67751214263c59a0a0b857713a04999e9206de304929bce4b98c680"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/sample_anchor_rest_candidate.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/sample_anchor_rest_candidate.py.gz",
+      "original_sha256": "287d3c5d21d2ca8ff80c8167bd2af294f4de088a54619bfd03d0c3eaf3715560",
+      "stored_sha256": "9993bd1669cee4e75e59994568dd169ab9635949b98487d0803ad880b7b7c015"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/source/reports/toy100/sample_group_anchor.py",
+      "stored": "mean16-continuous-filter-v2/source/reports/toy100/sample_group_anchor.py.gz",
+      "original_sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+      "stored_sha256": "83d978465df465af93163ccc553e9e43f969a201bda5fb5f56d8bfeac338e108"
+    },
+    {
+      "original": "mean16-continuous-filter-v2/summary.json",
+      "stored": "mean16-continuous-filter-v2/summary.json.gz",
+      "original_sha256": "b33af6d53f0ae04dbf8525e4cb9684cebaa1010d8c5eea55d6f33a6ea212cb29",
+      "stored_sha256": "5aa2ef9d118438b462d577c4b8440e1152332005528d6f11789159dccded25e2"
+    },
+    {
+      "original": "/tmp/pr84-mean16-one-step-filter.log",
+      "stored": "independent-run.log.gz",
+      "original_sha256": "63c28320b1517f0f81d7fcd92fbcdd35b959d6d6594690e7cc379227459bd8c1",
+      "stored_sha256": "9210c6facda87ce5134c0bbcb7bd1964a2e1069b96a243adcb10df4ccd991f43"
+    },
+    {
+      "original": "/tmp/pr84-mean16-continuous-filter.log",
+      "stored": "continued-v1-run.log.gz",
+      "original_sha256": "28c266dec9a254d70d78a98bced7ba73d97bfca55fbc2f7b732182c4ef2dd9df",
+      "stored_sha256": "183081758734e3b51a7634d914de0c60da089e05d0d19306f2613e452fb6713d"
+    },
+    {
+      "original": "/tmp/pr84-mean16-continuous-filter-v2.log",
+      "stored": "continued-v2-run.log.gz",
+      "original_sha256": "3396efa434e70e4fd69cc6684b1aaaf8f8de6e4d0fd84b09e9af0dd44585989c",
+      "stored_sha256": "dce92868c3d882bce6cd43379cb0b6f0e37a999b4334e96c3fa5282b96e4fa23"
+    }
+  ]
+}
