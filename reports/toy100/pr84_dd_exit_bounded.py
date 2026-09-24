@@ -13,6 +13,7 @@ likelihood, mode quota, or clip ladder.
 """
 
 from contextlib import contextmanager
+import inspect
 
 import torch
 
@@ -32,7 +33,17 @@ def directional_derivative_stats(critic, generator, prior, g_base_all, g_new_all
     Returns ``(mean_dd, dx_norm, exiting, n_high)``. ``exiting`` is true when
     that mean is negative: the step lowers D on the high-D half of the cloud.
     """
+    critic_module = critic
+    while not isinstance(critic_module, SimpleMLPDiscriminator) and hasattr(critic_module, "model"):
+        critic_module = critic_module.model
+    if not isinstance(critic_module, SimpleMLPDiscriminator):
+        return 0.0, 0.0, False, 0
     clean_gen = getattr(generator, "model", generator)
+    positional = [p for p in inspect.signature(clean_gen.forward).parameters.values()
+                  if p.kind in (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+                  and p.default is inspect.Parameter.empty]
+    if len(positional) != 1 or not hasattr(prior, "z"):
+        return 0.0, 0.0, False, 0
     z = prior.z.detach()
     gen_params = list(clean_gen.parameters())
     n_gen = len(gen_params)
@@ -48,15 +59,11 @@ def directional_derivative_stats(critic, generator, prior, g_base_all, g_new_all
         for p, v in zip(gen_params, saved):
             p.copy_(v)
 
+    if x_base.ndim != 2 or x_base.shape[-1] != 2 or x_new.shape != x_base.shape:
+        return 0.0, 0.0, False, 0
     dx = x_new - x_base
     dx_norm = dx.norm(dim=-1).mean()
     if float(dx_norm) < 1e-10:
-        return 0.0, 0.0, False, 0
-
-    critic_module = critic
-    while not isinstance(critic_module, SimpleMLPDiscriminator) and hasattr(critic_module, "model"):
-        critic_module = critic_module.model
-    if not isinstance(critic_module, SimpleMLPDiscriminator):
         return 0.0, 0.0, False, 0
 
     x_base_grad = x_base.detach().requires_grad_(True)

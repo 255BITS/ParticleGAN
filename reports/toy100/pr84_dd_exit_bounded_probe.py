@@ -89,6 +89,7 @@ def run_cold(output, task):
     dest = output / folder
     if dest.exists():
         raise RuntimeError(f"{dest} already exists")
+    dest.mkdir(parents=True)
     cold(dest, METHOD, [task])
     payload = json.loads((dest / f"{task}.json").read_text())
     live = (payload.get("result") or {}).get("live") or {}
@@ -121,6 +122,7 @@ def run_stay(output, steps):
     dest = output / "stay"
     if dest.exists():
         raise RuntimeError(f"{dest} already exists")
+    dest.mkdir(parents=True)
     stay(dest, METHOD, steps)
     payload = json.loads((dest / "stay.json").read_text())
     summary = payload["summary"]
@@ -135,12 +137,33 @@ def run_stay(output, steps):
     return row
 
 
+def apply_build_env():
+    """AVX2 pin caps oneDNN. ``ATEN_CPU_CAPABILITY`` alone still ran the AVX512 warm prefix."""
+    os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    os.environ.setdefault("MKL_NUM_THREADS", "1")
+    os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
+    cap = os.environ.get("ATEN_CPU_CAPABILITY", "avx2")
+    os.environ["ATEN_CPU_CAPABILITY"] = cap
+    if cap == "avx2":
+        os.environ["ONEDNN_MAX_CPU_ISA"] = "AVX2"
+        os.environ["DNNL_MAX_CPU_ISA"] = "AVX2"
+        os.environ["MKL_ENABLE_INSTRUCTIONS"] = "AVX2"
+    else:
+        os.environ.pop("ONEDNN_MAX_CPU_ISA", None)
+        os.environ.pop("DNNL_MAX_CPU_ISA", None)
+        os.environ.pop("MKL_ENABLE_INSTRUCTIONS", None)
+
+
 def run_avx512_ring(output):
     env = os.environ.copy()
     env["ATEN_CPU_CAPABILITY"] = "avx512"
     env["CUDA_VISIBLE_DEVICES"] = ""
     env["OMP_NUM_THREADS"] = "1"
     env["MKL_NUM_THREADS"] = "1"
+    env.pop("ONEDNN_MAX_CPU_ISA", None)
+    env.pop("DNNL_MAX_CPU_ISA", None)
+    env.pop("MKL_ENABLE_INSTRUCTIONS", None)
     dest = output / "cold-ring-avx512"
     cmd = [sys.executable, "-m", "reports.toy100.pr84_dd_exit_bounded_probe",
            "--phase", "cold-ring", "--output", str(dest)]
@@ -170,8 +193,7 @@ def main():
                         default="all")
     parser.add_argument("--steps", type=int, default=2400)
     args = parser.parse_args()
-    os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
-    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    apply_build_env()
     args.output.mkdir(parents=True, exist_ok=True)
     decision = dict(
         mechanism="DD-exit shrink of the curvature-bounded stall-reach G step",
