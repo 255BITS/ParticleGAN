@@ -1,0 +1,67 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "joint-functional-dynamics",
+  "phase": "output-rmsprop-cold",
+  "files": {
+    "declaration.json.gz": {
+      "sha256": "4ef1ed5b6ec7e8434eabe84e0d6c23eafdf700b68fb792b561de8b2fcb6224ee",
+      "original_sha256": "67c0d0ab5a2dc9428885804a25b27fb2bbe4c7bf2b91feeb0b3c7729e524fff0",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-cold/declaration.json",
+      "compression": "gzip"
+    },
+    "functional_metric_scratch.py": {
+      "sha256": "e63007296a2ae0a56185852028e75bbc4aaecb4c9fbfd3601be05a75fb45f38e",
+      "original_sha256": "e63007296a2ae0a56185852028e75bbc4aaecb4c9fbfd3601be05a75fb45f38e",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-cold/functional_metric_scratch.py",
+      "compression": "identity"
+    },
+    "joint_functional_metric_scratch.py": {
+      "sha256": "8878363d9f1ee4fcd0b531b80b3369acd7354849104a953024cab1e881c7746b",
+      "original_sha256": "8878363d9f1ee4fcd0b531b80b3369acd7354849104a953024cab1e881c7746b",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-cold/joint_functional_metric_scratch.py",
+      "compression": "identity"
+    },
+    "metric-trajectory.json.gz": {
+      "sha256": "85ab21357453268c9317ca619e921731c2b3f290d3fbf598f89748dccb938319",
+      "original_sha256": "85ab21357453268c9317ca619e921731c2b3f290d3fbf598f89748dccb938319",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-cold/metric-trajectory.json.gz",
+      "compression": "identity"
+    },
+    "models.py": {
+      "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+      "original_sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-cold/models.py",
+      "compression": "identity"
+    },
+    "output_rmsprop_probe.py": {
+      "sha256": "3e56abfd79aefd7b9868308fa9fe7791eac2f7db6b99f303a03220b98e2746d5",
+      "original_sha256": "3e56abfd79aefd7b9868308fa9fe7791eac2f7db6b99f303a03220b98e2746d5",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-cold/output_rmsprop_probe.py",
+      "compression": "identity"
+    },
+    "output_rmsprop_scratch.py": {
+      "sha256": "492136e28561f97b9107b1327034aa272d61948ffaf3cb5f332d175c1a045c4a",
+      "original_sha256": "492136e28561f97b9107b1327034aa272d61948ffaf3cb5f332d175c1a045c4a",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-cold/output_rmsprop_scratch.py",
+      "compression": "identity"
+    },
+    "results.json.gz": {
+      "sha256": "5fcd8b41b34a596c049d5504647ccce09ef69e23bb114b781d1e9a4101d43c4d",
+      "original_sha256": "24c14b17b8c6b09413c327e9d167e418092226c0e47cc6550ef2744b8c6ffb12",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-cold/results.json",
+      "compression": "gzip"
+    },
+    "source.tar.gz": {
+      "sha256": "d6c00b3166b6f7d435a2432c73fae23c0498dc73b4a803c84383fc7e0a2ccb5d",
+      "original_sha256": "d6c00b3166b6f7d435a2432c73fae23c0498dc73b4a803c84383fc7e0a2ccb5d",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-cold/source.tar.gz",
+      "compression": "identity"
+    },
+    "output-rmsprop-cold.log.gz": {
+      "sha256": "9762b9ec17bbeb1581f99ab67147e5720c92e8412c46669feedc747492ff9979",
+      "original_sha256": "724ef3895b046b879c1e0f959a2b66bcbb6fc00e8aacc003c8e535f038174de8",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-cold.log",
+      "compression": "gzip"
+    }
+  }
+}

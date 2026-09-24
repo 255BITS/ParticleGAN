@@ -1,0 +1,91 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "joint-functional-dynamics",
+  "phase": "output-rmsprop-warm",
+  "files": {
+    "declaration.json.gz": {
+      "sha256": "1b19f1ff54423255124d3a162d590705db9f30a4bde1869a48f43329f574d203",
+      "original_sha256": "cc3f103e7667692a0016fa1627f60d7d245b6a3d30b256daef01ee1076e31a85",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/declaration.json",
+      "compression": "gzip"
+    },
+    "forks/cold.json.gz": {
+      "sha256": "bc2ccfffa8609246ca4744d69e900ff68f3b9dda888a71587cfe96728d2b7d89",
+      "original_sha256": "9f3c2560a8fc7d88ad74647426a431d123cc52f26c7025b8ec8d98c0e3bf4068",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/forks/cold.json",
+      "compression": "gzip"
+    },
+    "forks/identity.json.gz": {
+      "sha256": "39ecd6aa7a8d40ed36ff6da8739f15d0d3fc80b36dab7234e2e1cb2f6974b1ef",
+      "original_sha256": "90f7336d35ad8fb2ced41fa052ab2dc170ed951a3d69c223c958d1e951e26415",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/forks/identity.json",
+      "compression": "gzip"
+    },
+    "forks/metric.json.gz": {
+      "sha256": "f3887f05d8b0d757d795ed7f9d61a0e985b02bbb41c38a0afd1ebdfe53aeb1f8",
+      "original_sha256": "547b7af29e3407fe0923b356a64b01549c792898f71b43751414cc8f4a4210f1",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/forks/metric.json",
+      "compression": "gzip"
+    },
+    "forks/observed.json.gz": {
+      "sha256": "e63e3ee65da0dec49eb6df32e0aff915db7cd5dac234223559b9637263c300f0",
+      "original_sha256": "2d69de5defca8826cf31622006cd7af5ca81f60438581e7d9d2daddad3644813",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/forks/observed.json",
+      "compression": "gzip"
+    },
+    "forks/summary.json.gz": {
+      "sha256": "829a9babe4afe8d4678b32a88ebcd9a7b545f53bbd834afa8d6a36e0e3cf0091",
+      "original_sha256": "04f3dd80f1017e4cbd131bd6dfbc2342109bdcefe47cd57bfbf09683dafdfc65",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/forks/summary.json",
+      "compression": "gzip"
+    },
+    "functional_metric_scratch.py": {
+      "sha256": "e63007296a2ae0a56185852028e75bbc4aaecb4c9fbfd3601be05a75fb45f38e",
+      "original_sha256": "e63007296a2ae0a56185852028e75bbc4aaecb4c9fbfd3601be05a75fb45f38e",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/functional_metric_scratch.py",
+      "compression": "identity"
+    },
+    "joint_functional_metric_scratch.py": {
+      "sha256": "8878363d9f1ee4fcd0b531b80b3369acd7354849104a953024cab1e881c7746b",
+      "original_sha256": "8878363d9f1ee4fcd0b531b80b3369acd7354849104a953024cab1e881c7746b",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/joint_functional_metric_scratch.py",
+      "compression": "identity"
+    },
+    "models.py": {
+      "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+      "original_sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/models.py",
+      "compression": "identity"
+    },
+    "output_rmsprop_probe.py": {
+      "sha256": "3e56abfd79aefd7b9868308fa9fe7791eac2f7db6b99f303a03220b98e2746d5",
+      "original_sha256": "3e56abfd79aefd7b9868308fa9fe7791eac2f7db6b99f303a03220b98e2746d5",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/output_rmsprop_probe.py",
+      "compression": "identity"
+    },
+    "output_rmsprop_scratch.py": {
+      "sha256": "492136e28561f97b9107b1327034aa272d61948ffaf3cb5f332d175c1a045c4a",
+      "original_sha256": "492136e28561f97b9107b1327034aa272d61948ffaf3cb5f332d175c1a045c4a",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/output_rmsprop_scratch.py",
+      "compression": "identity"
+    },
+    "results.json.gz": {
+      "sha256": "0cf9feff7df4c4ddb35482b89d43a1cd6bfbb4fbcece4185d6e138b7e6280304",
+      "original_sha256": "98ae281dc29c12d4bffb527ffb1a123a8c92dbb465c7080058632672700e9660",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/results.json",
+      "compression": "gzip"
+    },
+    "source.tar.gz": {
+      "sha256": "d4eb528c0a083a16c50a0bb518c042955ef4e3ff375cd75fbb34921f328a352b",
+      "original_sha256": "d4eb528c0a083a16c50a0bb518c042955ef4e3ff375cd75fbb34921f328a352b",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm/source.tar.gz",
+      "compression": "identity"
+    },
+    "output-rmsprop-warm.log.gz": {
+      "sha256": "e1a7bd2f2827d0a0ab33d12e1c43a5c1858862096cb65717c43b662c1d0c53cb",
+      "original_sha256": "971ec672c6b16a6c4a73a7b1d64f6ef543d92e9dc5799c2c46cc79c5f71036df",
+      "original_path": "artifacts/continuous-learning/round3/output-rmsprop-warm.log",
+      "compression": "gzip"
+    }
+  }
+}

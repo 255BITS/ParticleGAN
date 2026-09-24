@@ -1,0 +1,85 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "joint-functional-dynamics",
+  "phase": "joint-metric-warm",
+  "files": {
+    "declaration.json.gz": {
+      "sha256": "2aa919c0ca43ca91e3ff0c5ff22f07a1b17c4dd19a555a29572a6f1d96f38cde",
+      "original_sha256": "6f2599f51bad551a90a6a35503b466a2dd8f68de82c229b8b75a06684af414ac",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/declaration.json",
+      "compression": "gzip"
+    },
+    "forks/cold.json.gz": {
+      "sha256": "86b8d56af7014d9eec033dcda5e859883041faff56c6dbac3ff6c8286540a9db",
+      "original_sha256": "379c9c61d5508d337df8794dda8a43b591792de1f77222af9720a5e9c43d373a",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/forks/cold.json",
+      "compression": "gzip"
+    },
+    "forks/identity.json.gz": {
+      "sha256": "0abcfa61592e549439fab04a828b2782a19d1432f427b0263fb04ec3aba9a1cc",
+      "original_sha256": "7bccf5aa1957c2b2b0ee12563f05fb23abf4fc662c0e7d486b57f633d00124c1",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/forks/identity.json",
+      "compression": "gzip"
+    },
+    "forks/metric.json.gz": {
+      "sha256": "e36112fe96e304b5e8a1d9889f41b35cfe80deb4241148939e33ac24e3df2b92",
+      "original_sha256": "054120cb002bf17a06a0d16a79f2494ba78d68fbe6315a85124d012741a1a211",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/forks/metric.json",
+      "compression": "gzip"
+    },
+    "forks/observed.json.gz": {
+      "sha256": "0cf7504803b3993f1edfaa4be9e70aeb6f69d44fd9bc7f0843a821aa982813d4",
+      "original_sha256": "6a2c55e24d3b96d71112227717972e58bcb9b8417b790be640fa530be088aa74",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/forks/observed.json",
+      "compression": "gzip"
+    },
+    "forks/summary.json.gz": {
+      "sha256": "c8b5a1f789beced3603f333bfd3c4fd65349db70a8ba74a93f173bb5ab2ddd8a",
+      "original_sha256": "299db39d905ba485b43edd6ef6aa66ab5c79e85e6bdd30f7e8399d7a7a44b1fd",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/forks/summary.json",
+      "compression": "gzip"
+    },
+    "functional_metric_scratch.py": {
+      "sha256": "e63007296a2ae0a56185852028e75bbc4aaecb4c9fbfd3601be05a75fb45f38e",
+      "original_sha256": "e63007296a2ae0a56185852028e75bbc4aaecb4c9fbfd3601be05a75fb45f38e",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/functional_metric_scratch.py",
+      "compression": "identity"
+    },
+    "joint_functional_metric_probe.py": {
+      "sha256": "02c26b040e7fe5a6b9aa7c0a93de77410c82c23077e2312675b75d5cc1687f93",
+      "original_sha256": "02c26b040e7fe5a6b9aa7c0a93de77410c82c23077e2312675b75d5cc1687f93",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/joint_functional_metric_probe.py",
+      "compression": "identity"
+    },
+    "joint_functional_metric_scratch.py": {
+      "sha256": "8878363d9f1ee4fcd0b531b80b3369acd7354849104a953024cab1e881c7746b",
+      "original_sha256": "8878363d9f1ee4fcd0b531b80b3369acd7354849104a953024cab1e881c7746b",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/joint_functional_metric_scratch.py",
+      "compression": "identity"
+    },
+    "models.py": {
+      "sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+      "original_sha256": "03c918e74c922865a21efb2a6440bce9dae00516a32ebbfbefe445541780abe3",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/models.py",
+      "compression": "identity"
+    },
+    "results.json.gz": {
+      "sha256": "25571bdb3df20ea0f5165f324aec761ae8bf434491279b0fbc37b8db4b296e9e",
+      "original_sha256": "40eafc3da4a5cf91ae11ce1d06a05bf27395b2389aa88640c225a4c7450ec5e4",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/results.json",
+      "compression": "gzip"
+    },
+    "source.tar.gz": {
+      "sha256": "e862a5a5aa180b744919dd76869f15673ba7fcf724aa6b484c507a9bbbddabdd",
+      "original_sha256": "e862a5a5aa180b744919dd76869f15673ba7fcf724aa6b484c507a9bbbddabdd",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm/source.tar.gz",
+      "compression": "identity"
+    },
+    "joint-metric-warm.log.gz": {
+      "sha256": "66dea227baa1b95813487146b49b9bb93c1e6ed3a52b5821a93ecd746d48367b",
+      "original_sha256": "5b38abb7f465ea58900adb9732fd7e4c9c9a3f06ac52171f377128c5665b1966",
+      "original_path": "artifacts/continuous-learning/round3/joint-metric-warm.log",
+      "compression": "gzip"
+    }
+  }
+}
