@@ -46,6 +46,7 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
     reach = REACH
     ramp = "peak"
     game_bound = False
+    game_steps = 1
 
     def _arm_smoothed_critic(self):
         super()._arm_smoothed_critic()
@@ -88,7 +89,7 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         self.advantage = None
         self.row = dict(outer_step=self.outer_steps + 1)
         rng_after = None
-        for phase in range(4):
+        for phase in range(3 + self.game_steps):
             if phase:
                 self._set_rng(streams, rng_before)
                 with torch.no_grad():
@@ -126,10 +127,13 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
             self._rho_own = _rho(self.g_base, self.g1, self.gg0, grads, self.metric_g)
             return None
         if optimizer is opt_d:
-            self._d_adam = {p: {k: (v.clone() if torch.is_tensor(v) else v) for k, v in s.items()}
-                            for p, s in opt_d.state.items()}
+            if self.phase == 3:
+                self._d_adam = {p: {k: (v.clone() if torch.is_tensor(v) else v) for k, v in s.items()}
+                                for p, s in opt_d.state.items()}
             ordinary_step(opt_d)
             self._arm_smoothed_critic()
+            return None
+        if self.phase < 2 + self.game_steps:
             return None
         rho_game = _rho(self.g_base, self.g1, self.gg0, grads, self.metric_g)
         rho = max(self._rho_own, rho_game)
@@ -147,7 +151,7 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
         value = super().receipt()
         widths = [row.get("critic_width", 0.) for row in self.records]
         value.update(method=METHOD, scratch_optimizer_policy=METHOD, reach=self.reach, ramp=self.ramp,
-                     game_bound=self.game_bound,
+                     game_bound=self.game_bound, game_steps=self.game_steps,
                      b_cap_slope=B_CAP_SLOPE,
                      widened_updates=int(sum(w > base.SMOOTH_WIDTH_CAP for w in widths)),
                      max_width=max(widths, default=0.))
@@ -156,7 +160,7 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
 
 @contextmanager
 def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="peak",
-                         g_curvature_bound=base.G_CURVATURE_BOUND, game_bound=False):
+                         g_curvature_bound=base.G_CURVATURE_BOUND, game_bound=False, game_steps=1):
     original = base.SmoothedBothBoundRecorder
 
     def init(self, *, start_step=0):
@@ -164,7 +168,7 @@ def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="p
         self.curvature_bound = g_curvature_bound
 
     base.SmoothedBothBoundRecorder = type("ReachRecorder", (ReachRecorder,),
-                                          dict(reach=reach, ramp=ramp, game_bound=game_bound,
+                                          dict(reach=reach, ramp=ramp, game_bound=game_bound, game_steps=game_steps,
                                                __init__=init))
     try:
         with base.pr84_smoothed_candidate(task=task, start_step=start_step) as value:

@@ -129,4 +129,15 @@ G's trust bound uses `max(ρ_own, ρ_game)`. Here `ρ_game` is measured after on
 
 The game bound softens the dropouts but does not reduce how many checks fail, and it thins the acquisition margin. **Partial: not promoted.**
 
-- **Next single bet:** the game ratio sees one virtual D step, but the dropout grows over about 15 updates. G ×.5 removes it (28/29) and the one-step game bound removes most of it (22/29). The remaining lever is the length of D's virtual answer, for example two virtual D steps. Each costs another replay, so try it only on the 1755 fork first. If it does not close the gap to G ×.5, this line has reached diminishing returns for the stay; its acquisition result (stall reach, ring 8 on both builds) stands on its own.
+**Two virtual D steps (final bet, killed).** From the 1755 fork this scores 25/29 (min 6 modes), close to G ×.5's 28/29. In full gates:
+- warm is 200/200 with min HQ .922;
+- the AVX2 cold ring **fails at 5 modes**, while AVX512 passes with 8;
+- the continued run is 0/120 because it never acquired.
+
+A stronger game bound slows acquisition exactly as a globally slower G does.
+
+## Line closed
+
+Every stay stabilizer on this line trades against acquisition. The pattern holds across a global G bound of .125, a one-step game bound (thinner ring margin) and a two-step game bound (the AVX2 ring fails). The dropout mode and acquisition both run on G's fast, low-own-curvature common motion. Separating them needs a signal this line does not have: D's slope and G's own curvature both look the same at dropout onset and in healthy acquisition. **Final: keep stall reach** for acquisition. Its stay is 97/120, ending on the full ring, with the shared 1720–2150 episode unresolved.
+
+For the #104 lineage: at dropout onset G's own-curvature ratio *falls* (5.0 → .9) while a G-led translation grows. An idle or leave signal built on G's own step curvature will read healthy during exactly this onset.
