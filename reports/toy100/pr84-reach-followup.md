@@ -92,4 +92,9 @@ updates, and there are no failures after 2150.
 
 - **Keep** stall reach as the GAN-native reference. Reach .5 is the fallback, with a slightly better stay (103 vs 97) but no AVX512 ring.
 - **Kill** reach 1.0 and the saturating ramp.
-- **Next single bet:** the 1720–2150 episode is shared across the whole family, so it is not caused by the width channel. Fork the stall-reach stay at about update 1700, and find which step starts the dropout: a D step (a sharpness spike or D bound factor) or a G step. Then target that player's update only.
+- **Next single bet:** damp G's common-mode translation, and only that. [pr84_reach_dropout_trace.py](pr84_reach_dropout_trace.py) traces every update of the stall-reach continued run from 1755 to 1800 ([receipt](continuous-evidence/pr84-reach/dropout-trace-stall-1755-1800.json)):
+  - **G starts it.** Per-update cloud motion is almost all common translation (translation ≈ RMS), growing from .02 at 1756 to .91 at 1769, when the cloud reads 0 modes.
+  - **G's trust region loosens along this mode.** G's own-curvature ratio falls from 5.0 to .9, so its trust factor opens from .05 to .27.
+  - **D follows.** D's slope stays .29–.43 while the translation grows, then spikes to 1.04 at 1770, where D's curvature ratio hits 5.9 and the D bound fires.
+
+  #104 shows that a G shrink blind to direction fires during healthy holds and hurts the stay. The bet is therefore a trust bound on the mean-output (translation) component of G's step, measured against D's response on the next update. The rest of the G step and the reach channel stay unchanged.
