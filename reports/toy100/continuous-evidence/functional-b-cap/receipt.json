@@ -1,0 +1,89 @@
+{
+  "capture_sha256": "19ceb38a92ba95ffaccd3aafbda55bbd77917765612666d923e986e5523d6965",
+  "config_sha256": "f8493ef926ed27cd0e0bbfab1dcd615551dc1fa81231ff3e131adfff7e9be5e7",
+  "first_d_gradient_bitwise_equal": true,
+  "first_g_batch_sha256": "c85fbb4e4e1d8e441bcc3c3328ef4e28456785b6244ef34e4441c15bd1dfa849",
+  "host_update": 472,
+  "mixed_derivative": {
+    "accepted_d": {
+      "absolute_error": [
+        2.4228172246232305e-09,
+        1.3048514005409295e-10
+      ],
+      "allowed_error": [
+        0.004899850780637021,
+        9.5659765013818e-05
+      ],
+      "analytical": [
+        0.48898508048651934,
+        0.00856597663186694
+      ],
+      "derivative_precision": "float64 copies of captured float32 modules and minibatch",
+      "finite_difference": [
+        0.4889850780637021,
+        0.0085659765013818
+      ],
+      "finite_difference_h": 1e-05,
+      "functional_mixed_nonzero": true,
+      "metric": "saved_post_adam_D_lr_over_denominator_fixed",
+      "native_detached_cap_mixed_is_zero": true,
+      "probe": "weighted dot of cap D gradient with detached base cap D gradient",
+      "shared_g_parameter": "final_output_bias"
+    },
+    "best_finite_d": {
+      "absolute_error": [
+        8.129701686149238e-11,
+        9.306408291567814e-12
+      ],
+      "allowed_error": [
+        7.322768195793879e-05,
+        2.3472660450263538e-05
+      ],
+      "analytical": [
+        -0.0063227682770908965,
+        -0.0013472660357199454
+      ],
+      "derivative_precision": "float64 copies of captured float32 modules and minibatch",
+      "finite_difference": [
+        -0.00632276819579388,
+        -0.0013472660450263537
+      ],
+      "finite_difference_h": 1e-05,
+      "functional_mixed_nonzero": true,
+      "metric": "saved_post_adam_D_lr_over_denominator_fixed",
+      "native_detached_cap_mixed_is_zero": true,
+      "probe": "weighted dot of cap D gradient with detached base cap D gradient",
+      "shared_g_parameter": "final_output_bias"
+    }
+  },
+  "penalty_parity": {
+    "accepted_d": {
+      "bitwise_d_gradient": true,
+      "bitwise_value": true,
+      "d_gradient_l2": 0.2687053766458607,
+      "stateless_functional_call_bitwise": true,
+      "value": 0.0029681262094527483
+    },
+    "best_finite_d": {
+      "bitwise_d_gradient": true,
+      "bitwise_value": true,
+      "d_gradient_l2": 0.12223019465910705,
+      "stateless_functional_call_bitwise": true,
+      "value": 0.00047833932330831885
+    }
+  },
+  "runtime": {
+    "cpu_capability": "AVX2",
+    "threads": 1,
+    "torch": "2.13.0+cu126"
+  },
+  "scope": "read-only native update472 D-bank and G-bank b_cap derivative audit",
+  "source": {
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "reports/toy100/functional_b_cap.py": "0a3088add24bd83e8827e2e9e1d2edbe32ee36bbc8beef15f3217b4d4a50a5f3",
+    "reports/toy100/functional_b_cap_audit.py": "cbcb808729a272c3f9c0461bdeb6ada78137e78e060ca8c5852f019d01b8c62c",
+    "reports/toy100/pr84_cold472_field.py": "fe69c7c354212f068b73cb0a4117a7867dd691d7a607a1b3eff96a935eb997fe",
+    "reports/toy100/pr84_critic_relaxation.py": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b"
+  }
+}
