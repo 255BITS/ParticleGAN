@@ -1,0 +1,27 @@
+{
+  "updates": 300,
+  "method": "holdw15",
+  "seed": 0,
+  "cpu": "GenuineIntel Intel(R) Xeon(R) Processor (KVM)",
+  "amd_like": "LD_PRELOAD mkl_serv_intel_cpu_true=0",
+  "compatible": {
+    "bit_identical": true,
+    "max_abs": 0.0,
+    "sha256": "19fdc2abfe8833367408bf6c494775874932c5cf7bfe21e750c19ccf27bcf376",
+    "cbwr_raw": 3,
+    "guard_ok_both": true,
+    "sharpness_update_1": 0.3852161765098572
+  },
+  "avx2_strict": {
+    "bit_identical": false,
+    "max_abs": 0.5800480246543884,
+    "intel_sha256": "321883a01cadc3268d80502e1d0005fc7fe52d92553e7e259953d3d60b7fdcf8",
+    "amd_like_sha256": "19fdc2abfe8833367408bf6c494775874932c5cf7bfe21e750c19ccf27bcf376",
+    "intel_cbwr_raw": 65546,
+    "amd_like_cbwr_raw": 65538,
+    "intel_guard_ok": true,
+    "amd_like_guard_ok": false,
+    "intel_sharpness_update_1": 0.38521263003349304,
+    "amd_like_sharpness_update_1": 0.3852161765098572
+  }
+}
