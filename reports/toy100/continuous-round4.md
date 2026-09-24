@@ -92,3 +92,9 @@ eight-mode proxy loses quality, so it did not advance to GAN training. One
 sampled-data coverage mechanism is now being prepared as an explicitly
 changed objective/constraint, after a promising output-space proxy; all
 original host gates remain required.
+
+[Machine-readable results](continuous-round4-results.json) bind the selected
+candidate, four completed local configurations and evidence hashes. The
+[integrated local suite](continuous-evidence/round4/integrated-tests.log) passes
+219 tests in28.87 seconds, including all previous controller checks and
+the new stencil, repair and extraction checks in one invocation.

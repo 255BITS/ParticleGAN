@@ -1,0 +1,482 @@
+{
+  "schema": "continuous-round4-results-v1",
+  "date": "2026-09-24",
+  "status": "unresolved",
+  "selected_candidate": "continuous-selected-candidate.json",
+  "scope": "fixed-target acquisition and live quality; shifts separate",
+  "completed_host_configurations": [
+    {
+      "name": "PR84 original G-only stencil",
+      "kind": "independent_external_reproduction",
+      "warm": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.97021484375,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "identity_cold_parity": true,
+      "cold": [
+        {
+          "task": "trajectory",
+          "live": {
+            "identity_mse": 0.0009426623582839966
+          },
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.0009426623582839966,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.019057337641716004
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 18,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 18,
+              "first_pass_step": 117,
+              "stable_from_step": 117,
+              "stable_from_seconds": 1.87515541119501,
+              "confirmed_step": 184,
+              "confirmed_seconds": 2.4329984090290964
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.46
+          }
+        },
+        {
+          "task": "mode_hold",
+          "live": {
+            "modes": 7,
+            "hq": 1.0
+          },
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "modes",
+                "value": 7,
+                "op": ">=",
+                "threshold": 8,
+                "status": "FAIL",
+                "margin": -1
+              },
+              {
+                "metric": "hq",
+                "value": 1.0,
+                "op": ">=",
+                "threshold": 0.9,
+                "status": "PASS",
+                "margin": 0.09999999999999998
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0625,
+            "confirmation_fraction": 2.0
+          }
+        }
+      ],
+      "first_failed_stage": "mode_hold",
+      "shared_gate_eligible": false
+    },
+    {
+      "name": "PR84 head hard-rest",
+      "kind": "independent_external_reproduction",
+      "warm": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.994140625,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "identity_cold_parity": true,
+      "cold": [
+        {
+          "task": "trajectory",
+          "live": {
+            "identity_mse": 0.0009426623582839966
+          },
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.0009426623582839966,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.019057337641716004
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 18,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 18,
+              "first_pass_step": 117,
+              "stable_from_step": 117,
+              "stable_from_seconds": 1.839376120828092,
+              "confirmed_step": 184,
+              "confirmed_seconds": 2.391819881973788
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.46
+          }
+        },
+        {
+          "task": "mode_hold",
+          "live": {
+            "modes": 7,
+            "hq": 0.994384765625
+          },
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "modes",
+                "value": 7,
+                "op": ">=",
+                "threshold": 8,
+                "status": "FAIL",
+                "margin": -1
+              },
+              {
+                "metric": "hq",
+                "value": 0.994384765625,
+                "op": ">=",
+                "threshold": 0.9,
+                "status": "PASS",
+                "margin": 0.09438476562499998
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.0625,
+            "confirmation_fraction": 2.0
+          }
+        }
+      ],
+      "first_failed_stage": "mode_hold",
+      "shared_gate_eligible": false
+    },
+    {
+      "name": "Same frozen stencil for D and G",
+      "kind": "new_consistency_mechanism",
+      "warm": {
+        "checks": 200,
+        "passing_checks": 200,
+        "failing_steps": [],
+        "min_modes": 8,
+        "min_hq": 0.922607421875,
+        "passing_suffix": 200,
+        "stable_from_step": 1001,
+        "pass_all": true,
+        "pass_suffix": true
+      },
+      "identity_cold_parity": true,
+      "cold": [
+        {
+          "task": "trajectory",
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.0009426623582839966,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.019057337641716004
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 18,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 18,
+              "first_pass_step": 117,
+              "stable_from_step": 117,
+              "stable_from_seconds": 1.8004406651016325,
+              "confirmed_step": 184,
+              "confirmed_seconds": 2.3356421540956944
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.46
+          },
+          "live": {
+            "identity_mse": 0.0009426623582839966
+          },
+          "seconds": 4.025733620859683
+        },
+        {
+          "task": "mode_hold",
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "modes",
+                "value": 7,
+                "op": ">=",
+                "threshold": 8,
+                "status": "FAIL",
+                "margin": -1
+              },
+              {
+                "metric": "hq",
+                "value": 0.78125,
+                "op": ">=",
+                "threshold": 0.9,
+                "status": "FAIL",
+                "margin": -0.11875000000000002
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.12847222222222224,
+            "confirmation_fraction": 2.0
+          },
+          "live": {
+            "modes": 7,
+            "hq": 0.78125
+          },
+          "seconds": 63.61875836690888
+        }
+      ],
+      "first_failed_stage": "mode_hold",
+      "shared_gate_eligible": false
+    },
+    {
+      "name": "PR84 single-convolution rest repair",
+      "kind": "implementation_repair",
+      "warm": {
+        "checks": 200,
+        "failing_steps": [],
+        "min_hq": 0.916015625,
+        "min_modes": 8,
+        "pass_all": true,
+        "pass_suffix": true,
+        "passing_checks": 200,
+        "passing_suffix": 200,
+        "stable_from_step": 1001
+      },
+      "identity_cold_parity": true,
+      "cold": [
+        {
+          "task": "trajectory",
+          "status": "PASS",
+          "outer_steps": 400,
+          "field_evaluations_per_player": 1200,
+          "rng_checks": 800,
+          "actual_role_rate_callbacks": 2400,
+          "rest_count": 0,
+          "slope_measured": 0,
+          "early_acquisition": {
+            "first_eight": null,
+            "hold_before_1000": 0
+          },
+          "final": {
+            "identity_mse": 0.0009426623582839966
+          },
+          "verdict": {
+            "status": "PASS",
+            "attempted": true,
+            "passed": true,
+            "metrics": [
+              {
+                "metric": "identity_mse",
+                "value": 0.0009426623582839966,
+                "op": "<=",
+                "threshold": 0.02,
+                "status": "PASS",
+                "margin": 0.019057337641716004
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 18,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 18,
+              "first_pass_step": 117,
+              "stable_from_step": 117,
+              "stable_from_seconds": 1.7635055598802865,
+              "confirmed_step": 184,
+              "confirmed_seconds": 2.3025885820388794
+            },
+            "shortfall": 0.0,
+            "confirmation_fraction": 0.46
+          }
+        },
+        {
+          "task": "mode_hold",
+          "status": "FAIL",
+          "outer_steps": 1200,
+          "field_evaluations_per_player": 3600,
+          "rng_checks": 2400,
+          "actual_role_rate_callbacks": 7200,
+          "rest_count": 204,
+          "slope_measured": 1200,
+          "early_acquisition": {
+            "first_eight": null,
+            "hold_before_1000": 0
+          },
+          "final": {
+            "modes": 6,
+            "hq": 0.9609375
+          },
+          "slope": {
+            "min": 0.11860577017068863,
+            "mean": 0.3547569702876111,
+            "max": 1.1543875932693481
+          },
+          "verdict": {
+            "status": "FAIL",
+            "attempted": true,
+            "passed": false,
+            "metrics": [
+              {
+                "metric": "modes",
+                "value": 6,
+                "op": ">=",
+                "threshold": 8,
+                "status": "FAIL",
+                "margin": -2
+              },
+              {
+                "metric": "hq",
+                "value": 0.9609375,
+                "op": ">=",
+                "threshold": 0.9,
+                "status": "PASS",
+                "margin": 0.06093749999999998
+              }
+            ],
+            "convergence": {
+              "complete": true,
+              "observations": 24,
+              "passing_observations": 0,
+              "minimum_stable_checks": 5,
+              "passing_suffix": 0,
+              "first_pass_step": null,
+              "stable_from_step": null,
+              "stable_from_seconds": null,
+              "confirmed_step": null,
+              "confirmed_seconds": null
+            },
+            "shortfall": 0.125,
+            "confirmation_fraction": 2.0
+          },
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.81103515625
+            },
+            {
+              "step": 1050,
+              "modes": 6,
+              "hq": 0.951416015625
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.963134765625
+            },
+            {
+              "step": 1150,
+              "modes": 6,
+              "hq": 0.90625
+            },
+            {
+              "step": 1200,
+              "modes": 6,
+              "hq": 0.9609375
+            }
+          ]
+        }
+      ],
+      "first_failed_stage": "mode_hold",
+      "shared_gate_eligible": false
+    }
+  ],
+  "completed_host_configuration_count": 4,
+  "new_mechanisms_or_repairs": 2,
+  "external_reproductions": 2,
+  "in_progress": [
+    "Sampled-real support-coverage projection: clean-state filter before warm/cold"
+  ],
+  "validation": {
+    "passed": 219,
+    "seconds": 28.87,
+    "log": "reports/toy100/continuous-evidence/round4/integrated-tests.log",
+    "log_sha256": "ce3d20c2ea03492ea7b71d0a45cd6e36840f28f1360d0f70eee2e2628b7c04f3",
+    "manifest_sha256": {
+      "pr84-independent-audit": "d374fb3d27c34c85a4ea7dd4a925e1df3d98923ba83c2b555ae20f156f296cbb",
+      "pr84-smoothed-candidate": "766e27d6f526899e8aa08f79d15b45cea9b720dd20c006a595e4bce227a263a8",
+      "consistent-stencil-round4": "51c61b4f0425d7dff35aa4ecb7fdfd09488e873d928936e33700bfb3e0649a1b",
+      "pr84-rest-repair": "3f832509ee0413197ba497b9846c046bce58aa373b0e383d68664b59c0004f1a",
+      "sinkhorn-fixed-cloud": "7a6a7c02621e38d3179afbf59ce345348e618559659f5a369787ed52ec8535c1"
+    }
+  },
+  "production_modified": false,
+  "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5"
+}

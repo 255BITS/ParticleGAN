@@ -122,5 +122,17 @@
   ],
   "next_research": "sampled-data coverage constraint after cheap proxy; objective change explicitly recorded",
   "distribution_shift_required": false,
-  "rest_without_signal_allowed": true
+  "rest_without_signal_allowed": true,
+  "warm": {
+    "checks": 200,
+    "failing_steps": [],
+    "min_hq": 0.97021484375,
+    "min_modes": 8,
+    "pass_all": true,
+    "pass_suffix": true,
+    "passing_checks": 200,
+    "passing_suffix": 200,
+    "stable_from_step": 1001
+  },
+  "identity_cold_parity": true
 }
