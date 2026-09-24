@@ -50,18 +50,28 @@ METHOD='same_sample_cross_only_response_with_own_curvature_step_bound'
 
 class CrossCurvatureRecorder(ImplicitExtraRecorder):
     def __init__(self,start_step=0,krylov_dim=8,linear_tolerance=.1,fd_relative=1e-4,
-                 correction_limit=2.,max_backtracks=8,curvature_bound=1.):
+                 correction_limit=2.,max_backtracks=8,curvature_bound=1.,amplification_bound=None):
         super().__init__(start_step=start_step,krylov_dim=krylov_dim,linear_tolerance=linear_tolerance,
                          nonlinear_tolerance=.5,fd_relative=fd_relative,correction_limit=correction_limit,
                          max_backtracks=max_backtracks)
         if not math.isfinite(curvature_bound) or curvature_bound<=0:raise ValueError('invalid curvature bound')
-        self.curvature_bound=curvature_bound
+        if amplification_bound is not None and (not math.isfinite(amplification_bound) or amplification_bound<=0):
+            raise ValueError('invalid amplification bound')
+        self.curvature_bound=curvature_bound;self.amplification_bound=amplification_bound
         self.split=None;self.curvature=[]
 
     def _own_curvature_bound(self,solution,q0,scale):
         """Scale each player's step so its own-curvature ratio is at most the bound."""
         factors={};row=dict(outer_step=self.outer_steps+1)
+        solution=solution.clone()
         for role,block in (('d',slice(0,self.split)),('g',slice(self.split,len(solution)))):
+            if self.amplification_bound is not None:
+                explicit=scale*float(torch.linalg.vector_norm(q0[block]))
+                proposed=float(torch.linalg.vector_norm(solution[block]))
+                if proposed>self.amplification_bound*explicit:
+                    solution[block]*=self.amplification_bound*explicit/proposed
+                row[role+'_amplification']=dict(proposed_to_explicit=proposed/explicit if explicit else None,
+                    clamped=bool(proposed>self.amplification_bound*explicit))
             step=torch.zeros_like(solution);step[block]=solution[block]
             size=float(torch.linalg.vector_norm(step))
             if size==0:
@@ -71,7 +81,7 @@ class CrossCurvatureRecorder(ImplicitExtraRecorder):
             if not math.isfinite(rho):raise FloatingPointError('nonfinite own-curvature ratio')
             factors[role]=min(1.,self.curvature_bound/rho) if rho>0 else 1.
             row[role]=dict(rho=rho,factor=factors[role],step_norm=size)
-        bounded=solution.clone()
+        bounded=solution
         bounded[:self.split]*=factors['d'];bounded[self.split:]*=factors['g']
         self.curvature.append(row)
         return bounded
@@ -216,7 +226,8 @@ class CrossCurvatureRecorder(ImplicitExtraRecorder):
             d_step_to_explicit=stats([row['d_step_to_explicit'] for row in accepted]),
             krylov_iterations=stats([row['krylov_iterations'] for row in accepted]),
             clean_output_motion=stats(motion),late_clean_output_motion=stats(motion[-200:]),
-            curvature_bound=self.curvature_bound,
+            curvature_bound=self.curvature_bound,amplification_bound=self.amplification_bound,
+            **{f'{role}_amplification_clamped':sum(bool(row.get(role+'_amplification',{}).get('clamped')) for row in self.curvature) for role in ('d','g')},
             **{f'{role}_rho':stats([row[role]['rho'] for row in self.curvature]) for role in ('d','g')},
             **{f'{role}_curvature_factor':stats([row[role]['factor'] for row in self.curvature]) for role in ('d','g')},
             **{f'{role}_curvature_bound_active':sum(row[role]['factor']<1 for row in self.curvature) for role in ('d','g')})

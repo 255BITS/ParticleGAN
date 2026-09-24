@@ -140,3 +140,15 @@ def test_active_host_consumes_one_training_batch_and_one_moment_update():
     for row in recorder.receipt()["optimizers"]:
         assert row["calls"] == 1 + len(recorder.queries)
         assert all(step == 1 for group in row["groups"] for step in group["moment_steps"])
+
+
+def test_amplification_bound_caps_each_players_step_at_its_explicit_adam_step():
+    # Exact bilinear CGD moves G by -.1045 versus explicit -.1 and D by .0896
+    # versus explicit .1, so only G is clamped.
+    recorder = CrossCurvatureRecorder(krylov_dim=4, linear_tolerance=1e-8, amplification_bound=1.)
+    x, y, *_ = _run_quadratic_game(0., 0., recorder)
+    assert x.item() == pytest.approx(.9, abs=1e-7)
+    assert y.item() == pytest.approx(2.089552239, abs=2e-7)
+    row = recorder.curvature[-1]
+    assert row["g_amplification"]["clamped"] and not row["d_amplification"]["clamped"]
+    assert row["g_amplification"]["proposed_to_explicit"] == pytest.approx(1.044776, abs=1e-5)
