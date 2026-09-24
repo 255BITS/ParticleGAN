@@ -5,8 +5,8 @@
   "production_gate_eligible": false,
   "production_modified": false,
   "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5",
-  "current_report": "continuous-round8.md",
-  "previous_report": "continuous-round7.md",
+  "current_report": "continuous-round9.md",
+  "previous_report": "continuous-round8.md",
   "historical_candidate_record": "https://github.com/255BITS/ParticleGAN/blob/c366217/reports/toy100/continuous-selected-candidate.json",
   "scope": "same fixed dataset; whole-distribution target shifts are separate; acquire when a signal exists",
   "settings": {
@@ -39,9 +39,18 @@
     "later_gates": "withheld"
   },
   "next_tests": [
-    "fresh-data mass-supported discovery; include intermediate new-mode false-merge counterexample",
-    "exact finite-bank game field and local contraction at saved1325",
-    "mass/spread fidelity and fixed affine chart before any production promotion"
+    "free-output continuation, omission, later same-target acquisition and model-error repair",
+    "actual neural realization and saved44 only after free filters",
+    "complete learner restart and unchanged warm/cold/hold/response/long/fidelity gates"
   ],
-  "unavoidable_impossibility_established": false
+  "unavoidable_impossibility_established": false,
+  "latest_rejections": {
+    "actual_adam_mean16": "FAIL24/44 continuous checks; one failing step was repaired",
+    "local_emitted_mmd": "FAIL first warm update loses mode while population objective improves",
+    "outside_only_mass_discovery": "FAIL component inside existing cell never proposed"
+  },
+  "active_lanes": {
+    "forward_kl": "PASS one-bank cold0to8/HQ.999756 and warm8/HQ.999512; free-output only; continuation pending",
+    "profiled_critic_value": "frozen-feature convex readout and verified value bound diagnostic; pending"
+  }
 }

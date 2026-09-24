@@ -1,4 +1,4 @@
-**Current status: [round8](continuous-round8.md).** Fixed-support memory passes saved44/warm200/hold1200 but fails same-target later acquisition after incomplete bootstrap. Later gates are withheld; research continues.
+**Current status: [round9](continuous-round9.md).** Mean16 Adam fails20/44 consecutive checks; local MMD loses a mode despite improving its objective. Forward KL passes the one-bank cold/warm filter; short continuation and a separate profiled-critic-value diagnostic are active. No qualified replacement yet.
 
 # PR #60: remove LR decay without losing acquisition or stability
 
