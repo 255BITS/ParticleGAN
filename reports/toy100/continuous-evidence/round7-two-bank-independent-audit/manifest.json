@@ -1,0 +1,24 @@
+{
+  "audit_source_sha256": "20caab4b5c90a0d7ba2be835899731dba983bd2dc9b8183f9d8794329d305e10",
+  "capture_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47",
+  "files": {
+    "audit-source.py.gz": {
+      "bytes": 2608,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 8663,
+      "raw_sha256": "20caab4b5c90a0d7ba2be835899731dba983bd2dc9b8183f9d8794329d305e10",
+      "sha256": "ccdf6d02ca6fd580b214a68f13b15abe81f8db82b7cdc9c035662b8102793dc5"
+    },
+    "audit.json.gz": {
+      "bytes": 626,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 1783,
+      "raw_sha256": "89a7a54e3ec01ab736dd5b70514d185300dffcb0deaf38d8088d5cc8bb682cc7",
+      "sha256": "902d8fe0c2ba3f663f22266686fe903a8c552f8b6fd2a724aa3b53ac65477f23"
+    }
+  },
+  "native3_manifest_sha256": "d63a009f7ae82660c847f51e5edb85bdc5f8ec615d75a951ae736e07d84026fa",
+  "saved44_summary_sha256": "5435ef2a25be725b0c0a4779212ae9fdb220990c0923d1c0e3293c99c63d288d",
+  "scope": "read-only saved44 reference replay and three-update archived state/accounting audit",
+  "status": "PASS"
+}

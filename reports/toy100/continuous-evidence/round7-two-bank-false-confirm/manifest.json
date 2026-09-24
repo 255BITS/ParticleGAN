@@ -1,0 +1,78 @@
+{
+  "files": {
+    "declaration.json.gz": {
+      "bytes": 2111,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 4369,
+      "raw_sha256": "75792d9749e85f4e2e0079c85375b2441d1684034d87a6798fc5624029d93d19",
+      "sha256": "9179571f61fd951cc76f4f4f77bb3195b7cc8001f2a1ae0ab09da95a71e3e667"
+    },
+    "final-state.pt.gz": {
+      "bytes": 533067,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 613452,
+      "raw_sha256": "d78f3d7dbe0466cf4a8ac5510a8a20f4d10346af03f7fbbb928174f2f42106cf",
+      "sha256": "68823df7e5700e742f2c0f9df5e6e868c7cb034eb1ddc6e0f912ed649d2f457c"
+    },
+    "result.json.gz": {
+      "bytes": 10065,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 54225,
+      "raw_sha256": "60c0f40d66471e9a1244fa0a3cc756985bca028c14d3af2af74f5bb337639a47",
+      "sha256": "7a342c228751c2f7eb1ab54f41fa3b3f774ee013b6f39a6f27ec4811602b84c8"
+    },
+    "source.tar.gz": {
+      "bytes": 76901,
+      "gzip_mtime_zero": true,
+      "raw_bytes": 337920,
+      "raw_sha256": "fa62f484f70a44cb9d5916cb59942208151fcefc75d8cedd957f879bf10e2227",
+      "sha256": "440c21dea8b106d1fb3d13bffc2451fb66f540b50106bc7937e76b742124920f"
+    }
+  },
+  "input_config_sha256": "1d119d47ba39691238a146493a4b6050a522ddd0b45c5f6ad6915c6446ee8dbb",
+  "input_file_sha256": "fae94561922ede699f20c6ee6713126e8bb30e776a586fe98ed39137dac0a926",
+  "input_state_sha256": "1706ae9c1ca25010cb08e2c03f79478180add8620996594e9f30e48705223a72",
+  "method": "pr84_confirmed_fixed_support_prestart_joint_fit",
+  "observed": {
+    "after_full_bank_modes": 7,
+    "after_two_omitted_banks_modes": 7,
+    "initial_modes": 8,
+    "third_mode0_samples": 22,
+    "third_rejected_mode0": 22,
+    "third_rejected_other": 0
+  },
+  "ordinary_control_summary_sha256": "b7b6f024c487455ce5f0816d6addfdbe0c06d320b486c0793a7eb81fc50df2c5",
+  "scope": "three native neural updates from exact passing own-state2400",
+  "source_sha256": {
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/transfer_suite/toy100_compatibility.py": "cab108b3cb26929862eea09e7e0be98efeb4e4a25b63679455348e8074adca69",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/chamfer_discrete_reallocation.py": "800c63698dfeed057c6280160101de38e517c74307f98ff1bf4aa46799a9ea24",
+    "reports/toy100/chamfer_pullback.py": "5a3943622dbc15f9ea77befe6b2b16edeed0739b722592bcfec12ed29df1ceda",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/joint_output_pullback.py": "438c57ae7f2e0cb0ace02f49e5df1ef092109538179bf5958697b3960261b1e3",
+    "reports/toy100/pr84_critic_refinement_capture.py": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+    "reports/toy100/pr84_critic_refinement_filter.py": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+    "reports/toy100/pr84_critic_refinement_resume.py": "9b23c40b3263753552f69860404759eded03ec2ac84f8c592f403caff804264b",
+    "reports/toy100/pr84_model_error_recovery.py": "d38f9c09f679c96ed598f8b965438f43303a7a4e75930033cadb25f047e33ed7",
+    "reports/toy100/pr84_opponent_prediction.py": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846",
+    "reports/toy100/pr84_prediction_state_filter.py": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/reallocation_smoothed_candidate.py": "ca16cf667a03e585d50c110edcd0b219991768877dff1a640ec2371c7d16439c",
+    "reports/toy100/sample_anchor_candidate.py": "2fb4ee97bfc4a1f00f0076c55f0e210bc531fc34779c1e23a719ba7722a15c33",
+    "reports/toy100/sample_anchor_memory_candidate.py": "318a357e350a9afc4049bce47e83cb5941a33340e98c3413b7812e9342846363",
+    "reports/toy100/sample_anchor_memory_filter.py": "211e11c4d7ac3eff37eeca0eac5cab9932182f1997ff12a7ec54d9c2e0c77c0f",
+    "reports/toy100/sample_anchor_own_state_probe.py": "cd7bfc7a1a821068463da09b375ed6882c53ccae39137b13600a273512660831",
+    "reports/toy100/sample_anchor_prestart_candidate.py": "2f9152349fe3937fd8738297dff939489c4011a6e8aca7386ad9e889771dce17",
+    "reports/toy100/sample_anchor_rest_candidate.py": "287d3c5d21d2ca8ff80c8167bd2af294f4de088a54619bfd03d0c3eaf3715560",
+    "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+    "reports/toy100/sample_group_two_bank_false_confirm.py": "808c29cca1cbef7b40c90f2f8c942c9d43a429aa5b7d3be0778343342357c525",
+    "reports/toy100/sample_group_two_bank_memory.py": "3daf028f2253a1b947b5b23c49280ec7465e19c4ac6cb26e5f9779c450023587",
+    "reports/toy100/sample_group_two_bank_native3.py": "41d7ffb5321941a2c18a9a00e64a6ca348cc869790cdc5a4c62c642a0bdffb33"
+  }
+}
