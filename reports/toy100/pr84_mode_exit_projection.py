@@ -43,13 +43,17 @@ PROJECTION_FLOOR = 0.3
 
 def directional_derivative_stats(critic, generator, prior, g_base_all,
                                  g_new_all, *, original_forward):
-    """Compute mean directional derivative of D along the G step on fake samples.
+    """Directional derivative of D along the G step for HIGH-D particles only.
 
     g_base_all / g_new_all are the full opt_g param list (generator + prior).
     Only the generator-parameter prefix is used to produce fakes; the prior
     latents (z) stay fixed.
 
-    Returns (mean_dd, dx_norm, fired).
+    Particles in a "high local D region" are those whose D value at
+    x_base is above the per-batch median.  The directional derivative
+    is computed only for those particles.
+
+    Returns (mean_dd, dx_norm, fired, n_high).
     """
     clean_gen = getattr(generator, "model", generator)
     z = prior.z.detach()
@@ -73,23 +77,31 @@ def directional_derivative_stats(critic, generator, prior, g_base_all,
     dx = x_new - x_base
     dx_norm = dx.norm(dim=-1).mean()
     if float(dx_norm) < 1e-10:
-        return 0.0, 0.0, False
-
-    x_eval = x_new.detach().requires_grad_(True)
+        return 0.0, 0.0, False, 0
 
     critic_module = critic
     while not isinstance(critic_module, SimpleMLPDiscriminator) and hasattr(critic_module, "model"):
         critic_module = critic_module.model
     if not isinstance(critic_module, SimpleMLPDiscriminator):
-        return 0.0, 0.0, False
+        return 0.0, 0.0, False, 0
 
-    d_vals = original_forward(critic_module, x_eval)
-    grad_d = torch.autograd.grad(d_vals.sum(), x_eval, create_graph=False)[0]
+    x_base_grad = x_base.detach().requires_grad_(True)
+    d_base = original_forward(critic_module, x_base_grad)
+    grad_d_base = torch.autograd.grad(
+        d_base.sum(), x_base_grad, create_graph=False)[0].detach()
 
-    dd_per_sample = (grad_d.detach() * dx).sum(dim=-1)
-    mean_dd = float(dd_per_sample.mean())
+    d_vals = d_base.detach().squeeze()
+    median_d = float(d_vals.median())
+    high_mask = d_vals >= median_d
+    n_high = int(high_mask.sum())
+    if n_high == 0:
+        return 0.0, float(dx_norm), False, 0
 
-    return mean_dd, float(dx_norm), mean_dd < 0
+    dd_per_sample = (grad_d_base * dx).sum(dim=-1)
+    high_dd = dd_per_sample[high_mask]
+    mean_dd = float(high_dd.mean())
+
+    return mean_dd, float(dx_norm), mean_dd < 0, n_high
 
 
 def mode_exit_factor(pr84_factor, mean_dd, dx_norm, fired,
@@ -187,13 +199,14 @@ class ModeExitProjectionRecorder(SmoothedBothBoundRecorder):
             projected = False
             factor = pr84_factor
 
+            n_high = 0
             if (self.projection and pr84_factor >= 1.0
                     and self._critic_ref is not None
                     and self._generator_ref is not None
                     and self._prior_ref is not None
                     and self._original_forward is not None):
                 with torch.enable_grad():
-                    mean_dd, dx_norm, fired = directional_derivative_stats(
+                    mean_dd, dx_norm, fired, n_high = directional_derivative_stats(
                         self._critic_ref, self._generator_ref, self._prior_ref,
                         self.g_base, g_after_pr84,
                         original_forward=self._original_forward)
@@ -208,7 +221,7 @@ class ModeExitProjectionRecorder(SmoothedBothBoundRecorder):
 
             self.row["g"] = dict(
                 rho=rho, factor=factor, pr84_factor=pr84_factor,
-                mean_dd=mean_dd, dx_norm=dx_norm,
+                mean_dd=mean_dd, dx_norm=dx_norm, n_high=n_high,
                 projected=projected)
         return None
 
