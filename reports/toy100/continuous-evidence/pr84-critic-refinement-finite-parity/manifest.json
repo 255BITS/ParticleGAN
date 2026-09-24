@@ -1,0 +1,182 @@
+{
+  "schema": "finite-path-parity-archive-v1",
+  "status": "PASS_FINITE_PATH_PARITY",
+  "steps": 44,
+  "files": [
+    {
+      "path": "declaration.json.gz",
+      "raw_sha256": "a369eefdac5e61a34737ccdc8978a4a11a3698e82c82430f8dfb53603a168388",
+      "raw_bytes": 2322,
+      "compressed_sha256": "d05ea0f1fb9793d50426900fb57ab4aa09f33c192fdbbeac710dc640ef2ad55e",
+      "compressed_bytes": 1159
+    },
+    {
+      "path": "guarded-1324-1335.json.gz",
+      "raw_sha256": "2eb79ff8edfba8fbc3b3d9be3a81488bce0536b290dae0b20d312dc34785c3e8",
+      "raw_bytes": 361465,
+      "compressed_sha256": "b8fab75bc626ce2c3b40c0194fa3944ecf1c87be7acb33c45478c40abe3fb29a",
+      "compressed_bytes": 84630
+    },
+    {
+      "path": "guarded-1380-1395.json.gz",
+      "raw_sha256": "5887f86dbba28c2922b3f18d89263a1a7a4d2d5a4a9b3795ccf9be96cce224d8",
+      "raw_bytes": 530188,
+      "compressed_sha256": "1f781d14e9c0d3344d28f95ba13ea87f54def37bc11160a657a971fa9a1ac41d",
+      "compressed_bytes": 123700
+    },
+    {
+      "path": "guarded-1530-1545.json.gz",
+      "raw_sha256": "4ff9b4fb2a063ccad7b6ad4b49830ebdb4a773765b1d5dda72790687e3210566",
+      "raw_bytes": 526164,
+      "compressed_sha256": "b7e2682a87e56af759ed418628791af6be38f6841f3fe4cad49c711b2fbfca83",
+      "compressed_bytes": 124622
+    },
+    {
+      "path": "source/benchmarks/locked_shared/mode_hold.py.gz",
+      "raw_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "raw_bytes": 10774,
+      "compressed_sha256": "a5610686a60c882940c4da616b25896dd768e0ce8e2ac882ecb3f68429ec9a4a",
+      "compressed_bytes": 3580
+    },
+    {
+      "path": "source/configs/toy100/constraints_simple_regularization.json.gz",
+      "raw_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "raw_bytes": 1507,
+      "compressed_sha256": "921e0ebd2ea53b472db8cd7fc2deb8b570233221c3419a18580cf27abc75d800",
+      "compressed_bytes": 661
+    },
+    {
+      "path": "source/host-1324-1335.py.gz",
+      "raw_sha256": "8b1a0f5d26785c0ea537f6ef069843f45bf800ecfbd9fe1c84b68eb0804c4db1",
+      "raw_bytes": 6602,
+      "compressed_sha256": "df2224660b541a8dfbe99fc6c1b5347ce65a23adad0cd1a08948b8128edc8cf4",
+      "compressed_bytes": 1930
+    },
+    {
+      "path": "source/host-1380-1395.py.gz",
+      "raw_sha256": "911cd032897585771b4c5ca9c61536f8acba0246c69c105478c3331c256f7257",
+      "raw_bytes": 6602,
+      "compressed_sha256": "96f331cac606f57b3a775cdbc2cd01955140a6b68565b3ecaab80169f48d2eef",
+      "compressed_bytes": 1931
+    },
+    {
+      "path": "source/host-1530-1545.py.gz",
+      "raw_sha256": "d77d320f2802c7c418612647f0308bb0e9e12bebd2598eb84d066113554f4d1a",
+      "raw_bytes": 6602,
+      "compressed_sha256": "5a50c1475ed9895654fe63bdc2eedc1c13af3f72dcd652bf7e380aae6dcb2d69",
+      "compressed_bytes": 1930
+    },
+    {
+      "path": "source/particlegan/gan_loss.py.gz",
+      "raw_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "raw_bytes": 7960,
+      "compressed_sha256": "e295419c83dda268c73d2b15d83c0896f1c94915c3199ff8571e1b2245ac7049",
+      "compressed_bytes": 1975
+    },
+    {
+      "path": "source/particlegan/grad_regularizers.py.gz",
+      "raw_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+      "raw_bytes": 17129,
+      "compressed_sha256": "3fdd6906186a88af6d9d86cbfbfee0be6a50aa27bcd679054643f95c19c2ef48",
+      "compressed_bytes": 5749
+    },
+    {
+      "path": "source/reports/toy100/alternating_curvature_scratch.py.gz",
+      "raw_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "raw_bytes": 16689,
+      "compressed_sha256": "c5fe98bf157132e2502a24a0c2b3e35e224c061ed637e10918c2e64f3ef2bb1b",
+      "compressed_bytes": 4472
+    },
+    {
+      "path": "source/reports/toy100/extra_adam_scratch.py.gz",
+      "raw_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "raw_bytes": 13261,
+      "compressed_sha256": "0544b747488cf1b4bc2b395b3438f69713207fda2627710cc6446e633f99944c",
+      "compressed_bytes": 3980
+    },
+    {
+      "path": "source/reports/toy100/pr84_critic_refinement.py.gz",
+      "raw_sha256": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11",
+      "raw_bytes": 12493,
+      "compressed_sha256": "59793991eb4c96d008d1282482ad6c7a136785c68bc53aa277c941097db7149a",
+      "compressed_bytes": 3962
+    },
+    {
+      "path": "source/reports/toy100/pr84_critic_refinement_cold.py.gz",
+      "raw_sha256": "742693fe0d1a3186c145490e1576ae4ccf19f8f49d242e9dff2e79543ed8084e",
+      "raw_bytes": 9922,
+      "compressed_sha256": "753b62c668ab21ee8afd6d963353dfa446726d142bb2e6ad311ee5fa0b9836c3",
+      "compressed_bytes": 3246
+    },
+    {
+      "path": "source/reports/toy100/pr84_critic_refinement_filter.py.gz",
+      "raw_sha256": "849c0cc5150a2df4f3cf7174dd08951ff39c9ee4e85c0aeebe489c96e2f55e29",
+      "raw_bytes": 7717,
+      "compressed_sha256": "f6148a682c1165a564f5f9618bc220833aa1d9c1ec0fdb44253b6609daec3a36",
+      "compressed_bytes": 2797
+    },
+    {
+      "path": "source/reports/toy100/pr84_critic_refinement_finite.py.gz",
+      "raw_sha256": "e6668d711a4b98fbcb232a3a350e612003e3eacdc5942b6508a9509f98519561",
+      "raw_bytes": 6690,
+      "compressed_sha256": "d178bb910429ecc237a490d4f7d3f2aa3769a24dccba47e603561f72746fb860",
+      "compressed_bytes": 2343
+    },
+    {
+      "path": "source/reports/toy100/pr84_critic_refinement_finite_parity.py.gz",
+      "raw_sha256": "e2cf90d4764477f4239095077d3c7cc6b1f68a084bd20c3dfff5acdab05fb862",
+      "raw_bytes": 4749,
+      "compressed_sha256": "df1449236931061aac29d6952659d5f77ad11d1f4799156f59f210d827e9df2d",
+      "compressed_bytes": 1852
+    },
+    {
+      "path": "source/reports/toy100/pr84_critic_refinement_probe.py.gz",
+      "raw_sha256": "33fa91f5da341e64ac2c4de8eeb2712ed41a9a9861e17d916cbe89cecd78266a",
+      "raw_bytes": 10524,
+      "compressed_sha256": "c5c7de192d90ac46f709e82053ac765f3e4fedba400335e963a7b5635f425ff2",
+      "compressed_bytes": 3279
+    },
+    {
+      "path": "source/reports/toy100/pr84_critic_relaxation.py.gz",
+      "raw_sha256": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+      "raw_bytes": 19582,
+      "compressed_sha256": "dcfd47218b090e5bb751b66631ebb9e883a34110ce41735013d3d1fbd6feddfd",
+      "compressed_bytes": 6046
+    },
+    {
+      "path": "source/reports/toy100/pr84_opponent_prediction.py.gz",
+      "raw_sha256": "613760cf89e4944d886a13a54e817ad8aa05628d6ddec9735b076c99b3b7f846",
+      "raw_bytes": 8204,
+      "compressed_sha256": "91e08ad6104808258860ac9c38ed4cda39c5fdc3c84f497bc8e635154e624c10",
+      "compressed_bytes": 2457
+    },
+    {
+      "path": "source/reports/toy100/pr84_prediction_state_filter.py.gz",
+      "raw_sha256": "05cea8ed6ebbf9c77559429569bf568a344633438f7a9c15d365ca291ebe89b4",
+      "raw_bytes": 15392,
+      "compressed_sha256": "b90d6207f564a630f21729ac86eb231882c044f1741de1303d4b57d5908797c4",
+      "compressed_bytes": 4721
+    },
+    {
+      "path": "source/reports/toy100/pr84_smoothed_candidate.py.gz",
+      "raw_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+      "raw_bytes": 6530,
+      "compressed_sha256": "2c24e067db0ae7e64efc8a5babe94c3400681d010007452e8a39358ad0125340",
+      "compressed_bytes": 2369
+    },
+    {
+      "path": "summary.json.gz",
+      "raw_sha256": "6b7ec6f77904e1879953a3f11b85557ce762ed3a7184841fb71b2114a85da432",
+      "raw_bytes": 2780,
+      "compressed_sha256": "ec5e68041dc1c8bfbdd86c885cb9aec3004e82aee27f8f5dc0b92d26ce8170dc",
+      "compressed_bytes": 1176
+    },
+    {
+      "path": "run.log.gz",
+      "raw_sha256": "3be56d5f64e96302d82e001bc8f29613901661080662a97f09c05bbe59daf88f",
+      "raw_bytes": 3152,
+      "compressed_sha256": "6ca60a91ac8061bf1f00eca67a1a4ffd9948b4a8aac3a214b0d0d7d540e93c58",
+      "compressed_bytes": 1184
+    }
+  ]
+}
