@@ -46,6 +46,12 @@ or 5.47 HQ radii. The ring's equally spaced real modes cancel the tangent
 from `p`; the missing-specific local tangent comes from the exponentially
 small overlap of occupied q components.
 
+The controlled copy uses mathematically spaced float64 circle centers; the
+host stores its real centers in float32. At `10^−90` and smaller, coordinate
+roundoff and any finite critic approximation overwhelm these tail terms.
+The exponents quantify the ideal local information scale, not a measurable
+float32 host gradient.
+
 One local response calculation distinguishes a frozen critic from an
 accurately *retracked* critic. Translate all four particles at mode 1 by
 one real standard deviation (`.07`) along the chord toward empty mode 2,

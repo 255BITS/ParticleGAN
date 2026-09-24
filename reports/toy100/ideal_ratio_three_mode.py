@@ -207,6 +207,7 @@ def main():
                   limitations=['not the finite b_cap-penalized critic optimum',
                                'not the noisy-pair expected G update or shared-network Adam step',
                                'mode centers are used only after training to construct and grade this copy',
+                               'centered geometry uses ideal float64 circle; actual host stores ring centers in float32',
                                'late noise law is applied to the same step-100 cloud, not a late trained state',
                                'no claim that the wrong-subset cloud is a stable host equilibrium'],
                   source={name: sha((ROOT/name).read_bytes()) for name in (
