@@ -1,0 +1,68 @@
+{
+  "schema": "round8-pure-mass-discovery-v2",
+  "scope": "pure output/data only; no model or optimizer update",
+  "epochs": {
+    "v1": {
+      "result_status": "PURE_MASS_FILTER_COMPLETE",
+      "source": {
+        "reports/toy100/sample_group_mass_discovery.py": "5770bd770fe28b5313d37545b062544e8efb2aff539205d18a840793b8001e77",
+        "reports/toy100/sample_group_mass_discovery_filter.py": "54c5c34e45d25fc0f05b724fea5f0c60655e2ae19ceb8a7c52f00ace82d2b508",
+        "reports/toy100/sample_group_two_bank_memory.py": "3daf028f2253a1b947b5b23c49280ec7465e19c4ac6cb26e5f9779c450023587",
+        "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+        "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+        "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+        "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+        "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b"
+      },
+      "first_admitted_bank": 70,
+      "validation_samples": 8960,
+      "interpretation": "initial pure mass test; v2 adds fixed two-step output-only diagnostic after v1 one-step score"
+    },
+    "v2": {
+      "result_status": "PURE_MASS_FILTER_COMPLETE",
+      "source": {
+        "reports/toy100/sample_group_mass_discovery.py": "5770bd770fe28b5313d37545b062544e8efb2aff539205d18a840793b8001e77",
+        "reports/toy100/sample_group_mass_discovery_filter.py": "ab5bd815dbb400180780c6d4c448d0f194eaa378296fb01ad4878238170eadaf",
+        "reports/toy100/sample_group_two_bank_memory.py": "3daf028f2253a1b947b5b23c49280ec7465e19c4ac6cb26e5f9779c450023587",
+        "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+        "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+        "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+        "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+        "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b"
+      },
+      "first_admitted_bank": 70,
+      "validation_samples": 8960,
+      "interpretation": "same pure mass test plus two-step output-only diagnostic"
+    }
+  },
+  "files": {
+    "v1-declaration.json.gz": {
+      "sha256": "053ce7ab284d11f30192dc2d6f5cbb93f20a8284c9b3bd637afafe6ca72ba862",
+      "uncompressed_sha256": "32c25031e0a68df548513799c05e26143e6ba6387a999ad820d22c1b4b345d3f",
+      "bytes": 913
+    },
+    "v1-result.json.gz": {
+      "sha256": "e32911723d8514b56b72627202a76f4df1cb99b687eaa3f2c9c2359dd2bb1b7c",
+      "uncompressed_sha256": "07e457545746a90fea4074c2514aaad6b345258a296f6b0fc796e02c1c33f413",
+      "bytes": 8443
+    },
+    "v1-source.tar.gz": {
+      "sha256": "a129f39b8b32f6a5dda0dd6897faa0a2e062cc0f7fe7e6323e06ba2166c85c6d",
+      "bytes": 6737
+    },
+    "v2-declaration.json.gz": {
+      "sha256": "1100b1098a53af57dc1918502bc6d716b47f9c8a599f4f5296c08b7c41dc7a50",
+      "uncompressed_sha256": "82a0a49ce3d0df41c28a0a613baaca2ec0e70ff5e9421b19565d608bf507f436",
+      "bytes": 914
+    },
+    "v2-result.json.gz": {
+      "sha256": "eb047d36ef3a25e0fa0440f94874ea94166a6e8ba1781fe4551e4bed1a387ce6",
+      "uncompressed_sha256": "1bc1302a19569a3d26a122d2f2626e0de21f3d4488f743739d4ec75b5eadaa90",
+      "bytes": 8538
+    },
+    "v2-source.tar.gz": {
+      "sha256": "4f2cd19b0964f76badc7399f712478969771f18f205e0d5d33ecdab17347dc77",
+      "bytes": 23029
+    }
+  }
+}
