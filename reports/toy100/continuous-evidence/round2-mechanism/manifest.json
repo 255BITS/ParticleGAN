@@ -1,0 +1,415 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "round2-mechanism",
+  "shared_gate_eligible": false,
+  "files": {
+    "attribution/warm/attribution-parity.json.gz": {
+      "sha256": "a3b56b0022a041e76436f3445db5d9510e50b9c21dfd43f02fcee385cc1a33d5",
+      "original_sha256": "942f2c3460d521a7064387e0a2f6224134be211b761a869f2ce4ce9207e6984c",
+      "original_path": "artifacts/continuous-round2-warm-loss-attribution/attribution-parity.json",
+      "compression": "gzip"
+    },
+    "attribution/warm/cold.json.gz": {
+      "sha256": "ad6fecd385061edd4b78c1d84b03ad104df7f820a9b149d588213644932f8d47",
+      "original_sha256": "796ce3eccc3d559fd52948b4d4c2d03217a3917c6de5ee03ac3ce7f713a66225",
+      "original_path": "artifacts/continuous-round2-warm-loss-attribution/cold.json",
+      "compression": "gzip"
+    },
+    "attribution/warm/constant.json.gz": {
+      "sha256": "060197e182669a4740c4d95d365054936c5e767889762fa7bfb6b1f39097a8cf",
+      "original_sha256": "d96aef138fb76f91d58dbd869a3e05153d8b373311c0062107b1b6c2c48fa5bf",
+      "original_path": "artifacts/continuous-round2-warm-loss-attribution/constant.json",
+      "compression": "gzip"
+    },
+    "attribution/warm/cross_only.json.gz": {
+      "sha256": "e8d52a77ca20725d95fe60996872e0b9782daa8679c10b63b23fed0569b93737",
+      "original_sha256": "b29fbcd67dc3507cc891362f1039511275877420d764766ed0150c984d8ac8bc",
+      "original_path": "artifacts/continuous-round2-warm-loss-attribution/cross_only.json",
+      "compression": "gzip"
+    },
+    "attribution/warm/identity.json.gz": {
+      "sha256": "4128a3328e6c7a9bd03963dc8e6c016f56ecf367a87c5a61195970c23ea70c3d",
+      "original_sha256": "8d9ad691358b8b28706512631c5d5c671a555c6901dc3828af5b03ee93b365fe",
+      "original_path": "artifacts/continuous-round2-warm-loss-attribution/identity.json",
+      "compression": "gzip"
+    },
+    "attribution/warm/observer_v2.py": {
+      "sha256": "a639069f7d462d6b198d6dedcdd6d64852aa829dc6282e35b57ba8cf111b95b6",
+      "original_sha256": "a639069f7d462d6b198d6dedcdd6d64852aa829dc6282e35b57ba8cf111b95b6",
+      "original_path": "artifacts/continuous-round2-warm-loss-attribution/observer_v2.py",
+      "compression": "identity"
+    },
+    "attribution/warm/summary.json.gz": {
+      "sha256": "9052109d818740bfdc96ad4735d57c47bc28c4931cdc76e0d409d07ecf4db2c6",
+      "original_sha256": "5ddce21aa4dfcdef93ee7b67cc41fe422ddce8eef57a7a88bccf373c585b219b",
+      "original_path": "artifacts/continuous-round2-warm-loss-attribution/summary.json",
+      "compression": "gzip"
+    },
+    "attribution/warm/continuous-round2-warm-loss-attribution.attribution-declaration.json.gz": {
+      "sha256": "55b89c3a225bc8fe2e313cf4661d7425e077c5276edc252e3e99d947240350ae",
+      "original_sha256": "138f60e699395c25358d3dd3f4c9fa58b1102c100d052bfe5dfeb620bbf7ca9b",
+      "original_path": "artifacts/continuous-round2-warm-loss-attribution.attribution-declaration.json",
+      "compression": "gzip"
+    },
+    "attribution/warm/continuous-round2-warm-loss-attribution.declaration.json.gz": {
+      "sha256": "660f82aa6b1be40e5edcdbdc7e7f93608aad9740f21220da9ae6077980a4185c",
+      "original_sha256": "598a99e29bfb4092d4fc253ba7dbdd084f97d4eb62986ce2f586efd264fbc9c1",
+      "original_path": "artifacts/continuous-round2-warm-loss-attribution.declaration.json",
+      "compression": "gzip"
+    },
+    "attribution/cold/attribution-parity.json.gz": {
+      "sha256": "45c3003a95ab8776c9de168f7e29b4193f9f5df6332a18c4630301ef03bf7846",
+      "original_sha256": "6d0bbab0f3b0a5063a12c2b557a6b31fc77e240d274a167426db33f2b3576e45",
+      "original_path": "artifacts/continuous-round2-cold-loss-attribution/attribution-parity.json",
+      "compression": "gzip"
+    },
+    "attribution/cold/config.json.gz": {
+      "sha256": "9539d2a34504d94b2b0cb19630958775b5ebb156f5bd28b357fab3cd64f50baf",
+      "original_sha256": "a3219d3c538a9acce8eca377ca89ffbe27502703aa748e0f3980a745b484cc43",
+      "original_path": "artifacts/continuous-round2-cold-loss-attribution/config.json",
+      "compression": "gzip"
+    },
+    "attribution/cold/declaration.json.gz": {
+      "sha256": "e9879366c599b0049e0384e61b8c134fa6eefdfc3d28237e09b6c04fbc5a8f85",
+      "original_sha256": "606f0af4fc1b974560fda6a8b7dfa790067c1471c296af4ab2d64da6e487aeb4",
+      "original_path": "artifacts/continuous-round2-cold-loss-attribution/declaration.json",
+      "compression": "gzip"
+    },
+    "attribution/cold/observer_v2.py": {
+      "sha256": "a639069f7d462d6b198d6dedcdd6d64852aa829dc6282e35b57ba8cf111b95b6",
+      "original_sha256": "a639069f7d462d6b198d6dedcdd6d64852aa829dc6282e35b57ba8cf111b95b6",
+      "original_path": "artifacts/continuous-round2-cold-loss-attribution/observer_v2.py",
+      "compression": "identity"
+    },
+    "attribution/cold/status.json.gz": {
+      "sha256": "6ea4a020f8ebba66286b479fc8da2136f3594ed7edf141324f5f62dd5c2db6ab",
+      "original_sha256": "296913c0365335f0a60560dc23ac006f2c1a5bfb3bb8248043bf667643510d74",
+      "original_path": "artifacts/continuous-round2-cold-loss-attribution/status.json",
+      "compression": "gzip"
+    },
+    "attribution/cold/trajectory.json.gz": {
+      "sha256": "ab910e52a37eaa6518f5ea335b1facfcc6d71360015fa527f8c481c62ce11b9e",
+      "original_sha256": "3710ae96f503f16be6d31196bbc7af7b789c882c7f81a5dc95124c8b38243c65",
+      "original_path": "artifacts/continuous-round2-cold-loss-attribution/trajectory.json",
+      "compression": "gzip"
+    },
+    "attribution/cold/continuous-round2-cold-loss-attribution.attribution-declaration.json.gz": {
+      "sha256": "7c4af571313ec949a95d46c1100c1849ced318f93d956bf3023c224c8568f537",
+      "original_sha256": "a2bfeb1c8ac14db8a428b6edf323322ded193fb494aadd6f6cf3effdff38db8b",
+      "original_path": "artifacts/continuous-round2-cold-loss-attribution.attribution-declaration.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/warm/cold.json.gz": {
+      "sha256": "c030ba8e5548b0dce31f5debe84dd01812cfa8b28b700a292ee95afd7171e479",
+      "original_sha256": "3869277da55b35f19ba9f9d1f75b9cd1dbad639e31a2ec97aa5b0bf33010d20a",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1/cold.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/warm/constant.json.gz": {
+      "sha256": "5c6c212783dc99ce7bc585a7e124ce1e0a6ecfc6c55a95d158d1897356374ec6",
+      "original_sha256": "d6855ab8c60ec9d54260e505ecdf5ddfc2606544d3fdd4779d6b9e03923f7bb3",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1/constant.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/warm/identity.json.gz": {
+      "sha256": "04073eea4c83ab02a17b9635e38e44ab4750f0f2d92ba9f636e9095b9661ca3b",
+      "original_sha256": "f4a8b8c7e2e0693141b9c4fff6499a24008b1995cc3cc9c54d1be8c9bef452be",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1/identity.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/warm/joint_gradient.json.gz": {
+      "sha256": "4e85ed5f92441b1c539f738e2da657643df776035ed228fea22a0e3234f42d0e",
+      "original_sha256": "3ff945a30a8deff34a7c9fc2a1815c36dc0374efa8692da7e840704ec9473ef6",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1/joint_gradient.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/warm/projected_skew.json.gz": {
+      "sha256": "a1fb43a024086d60a423e2370eb74e3f4a077b5b57ced7e2a82d8603c888390f",
+      "original_sha256": "77271eb1a33ce70801c8b2eb1ca2d2f3da9084178ce5bb25d3b50c4cea1f127c",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1/projected_skew.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/warm/summary.json.gz": {
+      "sha256": "3456f236f0ba2d0d65a6d999a2b5d1f0b6d77bacab144e96385c559c90d19260",
+      "original_sha256": "6eed91695a14e790e0057c408e17e2503557d43834eff8e9df752ebff5c77440",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1/summary.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/warm/declaration.json.gz": {
+      "sha256": "1954dc74ec39d8ddab071404ee5a4bffad88afdb8a7285ca97761f99e48b56c8",
+      "original_sha256": "c5c71b58647d9f3a3f11634f44626608d2b60b8ea4b7055cf3ea31a75561f442",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1.declaration.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/warm/source_archive/benchmarks/toy100/continuous_probe.py": {
+      "sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1-source/benchmarks/toy100/continuous_probe.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/warm/source_archive/benchmarks/toy100/warm_equilibrium_probe.py": {
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1-source/benchmarks/toy100/warm_equilibrium_probe.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/warm/source_archive/configs/toy100/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1-source/configs/toy100/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/warm/source_archive/generated_mode_hold.py": {
+      "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1-source/generated_mode_hold.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/warm/source_archive/reports/toy100/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1-source/reports/toy100/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/warm/source_archive/reports/toy100/fixed_metric_extra_scratch.py": {
+      "sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1-source/reports/toy100/fixed_metric_extra_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/warm/source_archive/reports/toy100/implicit_extra_scratch.py": {
+      "sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1-source/reports/toy100/implicit_extra_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/warm/source_archive/reports/toy100/projected_skew_scratch.py": {
+      "sha256": "4d073cf32acf6fb11062901f51e9900e97b9e24e42d6505162eca2f7119b756d",
+      "original_sha256": "4d073cf32acf6fb11062901f51e9900e97b9e24e42d6505162eca2f7119b756d",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1-source/reports/toy100/projected_skew_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/warm/source_archive/reports/toy100/projected_skew_warm_probe.py": {
+      "sha256": "8f0918660952855bd6312f837ef1c95e798807c744143eab9344b94ac185ffd0",
+      "original_sha256": "8f0918660952855bd6312f837ef1c95e798807c744143eab9344b94ac185ffd0",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v1-source/reports/toy100/projected_skew_warm_probe.py",
+      "compression": "identity"
+    },
+    "projected-skew/v2/warm/cold.json.gz": {
+      "sha256": "52a9f054d79d4f6aaeb2c578501298065184ffd108b2e36fc307ac9ec7093127",
+      "original_sha256": "6fdf52aa6f9d1090cf1c09d31db39217122a2c52013af4d9e471fd4bd6d72648",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2/cold.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v2/warm/constant.json.gz": {
+      "sha256": "da5624a4a07a004bbaf2940962c9c30b7562af778c1c6f6dd89835a824384b43",
+      "original_sha256": "2e18475549d2976a53311893de75d56e54200769f506fd6787a3520b90a22502",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2/constant.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v2/warm/identity.json.gz": {
+      "sha256": "5e8689da616ce2fe1f0e448e5c429012bf2c626bee0898fce676578d2af59079",
+      "original_sha256": "5db0b9a55d92cc9ed12c0e03399b60ac945007314c3378d22b0251257d94e4a8",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2/identity.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v2/warm/joint_gradient.json.gz": {
+      "sha256": "ec9ea295dda95b785695aebba634812a727ef1a101996d23b993089a3fbecb6f",
+      "original_sha256": "c6d10b751728b1b0aa5811697b885d08bf6fc6c6af3eddb00174054c798503e8",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2/joint_gradient.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v2/warm/projected_skew.json.gz": {
+      "sha256": "7feda68040176bfcac3c40a8ab496ac4fb0eb10816eb051c29c7abf64a739929",
+      "original_sha256": "2de3fad9b421ed1737358c79a6df14a20da6e872a3a33b070036e7e08a263b74",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2/projected_skew.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v2/warm/summary.json.gz": {
+      "sha256": "ee8ed5fff76608ad7dd3e2e2edd7b203284760c9b1f3bf7915fec0625065565e",
+      "original_sha256": "d6b475747f88b7a926247c00117994c965002e8ae95f75e7114e691375ea4a35",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2/summary.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v2/warm/declaration.json.gz": {
+      "sha256": "d53cddc9c1ad6418559c485780347de2e3988f6e7a31fa8409e3b83d0d7efde3",
+      "original_sha256": "1fc82f271c2c976526decd5adad559615d6f4f6e10db22104b035a3add357891",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2.declaration.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v2/warm/source_archive/benchmarks/toy100/continuous_probe.py": {
+      "sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2-source/benchmarks/toy100/continuous_probe.py",
+      "compression": "identity"
+    },
+    "projected-skew/v2/warm/source_archive/benchmarks/toy100/warm_equilibrium_probe.py": {
+      "sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2-source/benchmarks/toy100/warm_equilibrium_probe.py",
+      "compression": "identity"
+    },
+    "projected-skew/v2/warm/source_archive/configs/toy100/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2-source/configs/toy100/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v2/warm/source_archive/generated_mode_hold.py": {
+      "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2-source/generated_mode_hold.py",
+      "compression": "identity"
+    },
+    "projected-skew/v2/warm/source_archive/reports/toy100/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2-source/reports/toy100/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v2/warm/source_archive/reports/toy100/fixed_metric_extra_scratch.py": {
+      "sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2-source/reports/toy100/fixed_metric_extra_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v2/warm/source_archive/reports/toy100/implicit_extra_scratch.py": {
+      "sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2-source/reports/toy100/implicit_extra_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v2/warm/source_archive/reports/toy100/projected_skew_scratch.py": {
+      "sha256": "09ba450737adc7051b44033ab263ae06dff77c2b017802b16d513b8966fcc76d",
+      "original_sha256": "09ba450737adc7051b44033ab263ae06dff77c2b017802b16d513b8966fcc76d",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2-source/reports/toy100/projected_skew_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v2/warm/source_archive/reports/toy100/projected_skew_warm_probe.py": {
+      "sha256": "9c91414fe40ead6e7efb1df3e90f68832ba4030362d8b831f5fa41415848893a",
+      "original_sha256": "9c91414fe40ead6e7efb1df3e90f68832ba4030362d8b831f5fa41415848893a",
+      "original_path": "artifacts/continuous-round2-projected-skew-warm-v2-source/reports/toy100/projected_skew_warm_probe.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/cold/config.json.gz": {
+      "sha256": "8b16b356505209d0989ae00becfcd27f50290df617cb82cf900df3f0139c8b1c",
+      "original_sha256": "ebbed5c5331045e996ef0e9a2bd3d4b0a62ce428d97ee2f4a9ac34058db9448d",
+      "original_path": "artifacts/continuous-round2-projected-skew-cold-v1/config.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/cold/declaration.json.gz": {
+      "sha256": "74556f0729430e026a5cb3fc55d920bf0d16a52834bb6e7983dc9d06ba3278ab",
+      "original_sha256": "2ec7a442e25284d449c98e457f8186423d1dd729666a05e7cb6d81588b51de37",
+      "original_path": "artifacts/continuous-round2-projected-skew-cold-v1/declaration.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/cold/source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/continuous-round2-projected-skew-cold-v1/source_archive/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/cold/source_archive/fixed_metric_extra_scratch.py": {
+      "sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_path": "artifacts/continuous-round2-projected-skew-cold-v1/source_archive/fixed_metric_extra_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/cold/source_archive/implicit_extra_scratch.py": {
+      "sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_path": "artifacts/continuous-round2-projected-skew-cold-v1/source_archive/implicit_extra_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/cold/source_archive/projected_skew_probe.py": {
+      "sha256": "0eaf0ea3d6c199f67e7317994b6109dcf111f9ae10cd8a6a38963bcf092e2f70",
+      "original_sha256": "0eaf0ea3d6c199f67e7317994b6109dcf111f9ae10cd8a6a38963bcf092e2f70",
+      "original_path": "artifacts/continuous-round2-projected-skew-cold-v1/source_archive/projected_skew_probe.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/cold/source_archive/projected_skew_scratch.py": {
+      "sha256": "4d073cf32acf6fb11062901f51e9900e97b9e24e42d6505162eca2f7119b756d",
+      "original_sha256": "4d073cf32acf6fb11062901f51e9900e97b9e24e42d6505162eca2f7119b756d",
+      "original_path": "artifacts/continuous-round2-projected-skew-cold-v1/source_archive/projected_skew_scratch.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/cold/source_archive/trajectory_transformed.py": {
+      "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_path": "artifacts/continuous-round2-projected-skew-cold-v1/source_archive/trajectory_transformed.py",
+      "compression": "identity"
+    },
+    "projected-skew/v1/cold/source_archive/warm-summary.json.gz": {
+      "sha256": "3456f236f0ba2d0d65a6d999a2b5d1f0b6d77bacab144e96385c559c90d19260",
+      "original_sha256": "6eed91695a14e790e0057c408e17e2503557d43834eff8e9df752ebff5c77440",
+      "original_path": "artifacts/continuous-round2-projected-skew-cold-v1/source_archive/warm-summary.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/cold/status.json.gz": {
+      "sha256": "f516d891a231cb79bb36b416fcd5fcc88514f64e22cf712d0fe3f04383d42fd4",
+      "original_sha256": "0d8ba927a5853638df79f1f797a0733cefd938cf64d610bc4278525aedce708b",
+      "original_path": "artifacts/continuous-round2-projected-skew-cold-v1/status.json",
+      "compression": "gzip"
+    },
+    "projected-skew/v1/cold/trajectory.error.json.gz": {
+      "sha256": "d5d52e5b8d3cdba176265566e1b054e1e4d045e0c9662167d1b0fcd6391e1977",
+      "original_sha256": "d52ab7372dd4a3174f851b0fc56c9f93539f7dd28d18f3b5520d9fc0ba5db415",
+      "original_path": "artifacts/continuous-round2-projected-skew-cold-v1/trajectory.error.json",
+      "compression": "gzip"
+    },
+    "attribution/source_archive/cross_competitive_scratch.py": {
+      "sha256": "da4b09a0c6b59c0b333f9140a21d02a16771ac5501a09e691dfcde6dfa7f15e7",
+      "original_sha256": "da4b09a0c6b59c0b333f9140a21d02a16771ac5501a09e691dfcde6dfa7f15e7",
+      "original_path": "reports/toy100/cross_competitive_scratch.py",
+      "compression": "identity"
+    },
+    "attribution/source_archive/cross_competitive_warm_probe.py": {
+      "sha256": "73619b5a5fbeb968c1bb01c19fab47d6ed5ccb6a02f164c83832cb0ca3eb5384",
+      "original_sha256": "73619b5a5fbeb968c1bb01c19fab47d6ed5ccb6a02f164c83832cb0ca3eb5384",
+      "original_path": "reports/toy100/cross_competitive_warm_probe.py",
+      "compression": "identity"
+    },
+    "attribution/source_archive/cross_competitive_probe.py": {
+      "sha256": "424f1da10759c76f85f1a77674798147dd5c66087f795da373b73e46d5de977c",
+      "original_sha256": "424f1da10759c76f85f1a77674798147dd5c66087f795da373b73e46d5de977c",
+      "original_path": "reports/toy100/cross_competitive_probe.py",
+      "compression": "identity"
+    },
+    "attribution/source_archive/implicit_extra_scratch.py": {
+      "sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_path": "reports/toy100/implicit_extra_scratch.py",
+      "compression": "identity"
+    },
+    "attribution/source_archive/fixed_metric_extra_scratch.py": {
+      "sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_path": "reports/toy100/fixed_metric_extra_scratch.py",
+      "compression": "identity"
+    },
+    "attribution/source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "reports/toy100/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "attribution/source_archive/mode_hold_transformed.py": {
+      "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_path": "generated from unchanged host via verified cross_competitive context",
+      "compression": "identity"
+    },
+    "attribution/source_archive/trajectory_transformed.py": {
+      "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_path": "generated from unchanged host via verified cross_competitive context",
+      "compression": "identity"
+    },
+    "summary.json": {
+      "sha256": "f76ebb8b21862f93aa333b4acc6ca8b042e495c424be63bd577a20a29586fd40",
+      "original_sha256": "f76ebb8b21862f93aa333b4acc6ca8b042e495c424be63bd577a20a29586fd40",
+      "original_path": "derived summary; exact raw/source files archived alongside",
+      "compression": "identity"
+    }
+  }
+}
