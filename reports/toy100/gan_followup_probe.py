@@ -23,6 +23,8 @@ FACTORIES = {
     "baseline": ("reports.toy100.pr84_smoothed_candidate", "pr84_smoothed_candidate"),
     "reach": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate"),
     "reach1": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate", dict(reach=1.)),
+    "reachsat": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
+                 dict(ramp="saturating")),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",

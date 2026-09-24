@@ -47,13 +47,13 @@ Rejected alternatives:
 
 ## Gate table (AVX2 pin)
 
-| Gate | PR84 pin | Reach .5 (candidate) | Reach 1.0 (declared revision) |
-| --- | --- | --- | --- |
-| Warm 1001–1200 | FAIL 196/200. Failures 1129–1132, min HQ .866 | **PASS 200/200**, min 8 modes, min HQ .921 | 199/200, fails 1095 (min HQ .900) |
-| Cold trajectory | PASS | PASS (not a 2-D input, so identical to PR84) | PASS |
-| Cold ring 1200 | PASS 8. Terminal HQ .995/.988/.988/.996/.999. 10/24 observations, suffix 5 | **PASS 8**. Terminal HQ .991/.997/.998/1.0/1.0. 11/24 observations, suffix 10 | FAIL, 5 modes / HQ .438 |
-| Own-acquired stay 1210–2400 (constant rate) | 53/120, min 0 modes, **final 6 / .904**. Degenerate from 1770 to the end | **103/120**, min 0 modes during 1710–1970, **final 8 / 1.0**. Last failure 2070, 33-check passing suffix | 18/120, final 8 / .921 |
-| Cold ring, AVX512 build | FAIL 7 (1200 HQ .993) | FAIL 7 (1200 HQ 1.0; 4 modes at 1150) | FAIL 1 mode |
+| Gate | PR84 pin | Reach .5 (candidate) | Reach 1.0 (revision 1) | Saturating ramp (revision 2) |
+| --- | --- | --- | --- | --- |
+| Warm 1001–1200 | FAIL 196/200. Failures 1129–1132, min HQ .866 | **PASS 200/200**, min 8 modes, min HQ .921 | 199/200, fails 1095 (min HQ .900) | 199/200, fails 1095 (min HQ .869) |
+| Cold trajectory | PASS | PASS (not a 2-D input, so identical to PR84) | PASS | PASS |
+| Cold ring 1200 | PASS 8. Terminal HQ .995/.988/.988/.996/.999. 10/24 observations, suffix 5 | **PASS 8**. Terminal HQ .991/.997/.998/1.0/1.0. 11/24 observations, suffix 10 | FAIL, 5 modes / HQ .438 | FAIL, 6–7 modes, HQ .60–.80 |
+| Own-acquired stay 1210–2400 (constant rate) | 53/120, min 0 modes, **final 6 / .904**. Degenerate from 1770 to the end | **103/120**, min 0 modes during 1710–1970, **final 8 / 1.0**. Last failure 2070, 33-check passing suffix | 18/120, final 8 / .921 | 36/120, final 8 / 1.0 |
+| Cold ring, AVX512 build | FAIL 7 (1200 HQ .993) | FAIL 7 (1200 HQ 1.0; 4 modes at 1150) | FAIL 1 mode | **PASS 8**, terminal HQ .97–1.0 |
 
 The AVX512 scheduled warm prefix itself reaches only 6 modes at update 1000,
 with the identity fork at 0/200, so warm is valid only on AVX2.
@@ -61,6 +61,27 @@ with the identity fork at 0/200, so warm is valid only on AVX2.
 Reach 1.0 was one declared revision. The AVX512 reach stuck state points toward
 the missing mode only at widths ≥ .5, while the run used ≈.35 there. Reach 1.0
 regresses warm and destroys acquisition on both builds. **Killed.**
+
+### Stuck-state fork
+
+[pr84_reach_stuck_fork.py](pr84_reach_stuck_fork.py) forks the identical AVX512
+reach state at update 1000, which has 7 modes, and continues it to 1200 three
+ways. This is a counterfactual probe of one state, not a candidate.
+
+| Variant | 1050 / 1100 / 1150 / 1200 | Mean G trust factor |
+| --- | --- | --- |
+| Reach .5 as-is (width ≈ .35) | 7 / 7 / 4 / 7 | .10 |
+| Width held at .5, bound on | **8 / 8 / 8 / 8**, HQ .66 / .94 / .98 / .92 | .09 |
+| Width .5, G bound removed | 0 / 0 / 2 / 1 | 1.0 |
+
+The blocker is the `min(s, 1/s)` ramp keeping the width under .5. It is not the
+trust region: the bound is protective.
+
+Revision 2 was the final declared revision: exact PR84 width up to `s = .3`, a
+linear rise to .5 by `s = .6`, and .5 above that. It swaps which build acquires:
+AVX512 reaches ring 8, but AVX2 falls to 6–7. It also costs warm and the stay.
+Holding .5 through the whole acquisition phase makes the outcome chaotic rather
+than robust. **Killed.**
 
 ## Rank claim (GAN-native track only)
 
@@ -77,5 +98,6 @@ ring is still build-sensitive: AVX512 remains at 7, the same as PR84.
 ## Keep / kill / next bet
 
 - **Keep** reach .5 as the GAN-native reference. It dominates PR84 on warm and stay at unchanged ring acquisition.
-- **Kill** reach 1.0.
-- **Next single bet:** in the AVX512 stuck state, direction is not the blocker once the width is ≥ .5. Two things are: the `min(s, 1/s)` ramp leaves the width at ≈.35–.43 there (sharpness .8–1.04), and G's own-curvature trust factor sits at .11, even though `ρ_G` is already measured on the widened field. First replay one G step from the saved AVX512 reach state at width .5, with the .25 bound on and off. If the missing mode is approached only with the bound off, the next mechanism is a G trust region conditioned on D's slope utilisation. If it is not approached either way, shared-network coupling is the barrier, and the reach line is done.
+- **Kill** reach 1.0 and the saturating ramp.
+- **Not pursued:** #100's "shape D where the cloud is absent" idea. The stuck-state probes show that D already points the nearest particles at the missing mode once G reads it at width ≥ .5, so the missing piece is on G's read side, not in D's field.
+- **Next single bet:** widen to .5 on a stall, not on D's slope alone. The trigger is D at its slope limit (`s ≥ .6`) **and** G's trust factor collapsed, for example `≤ .1`, as in both the AVX512 stuck ring and PR84's post-collapse stay. Otherwise keep reach .5 unchanged. Revision 2 shows that D's slope alone is on during healthy acquisition too. The fork shows that a width of .5 from a stalled state recovers 8 modes with the bound kept.
