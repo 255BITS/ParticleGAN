@@ -1,0 +1,30 @@
+{
+  "methods": [
+    "identity",
+    "constant",
+    "cross_curvature"
+  ],
+  "prefix_steps": 1000,
+  "total_steps": 1200,
+  "seed": 0,
+  "shared_gate_eligible": false,
+  "scratch_optimizer_policy": "same_sample_cross_only_response_with_own_curvature_step_bound",
+  "solver": {
+    "krylov_dim": 8,
+    "linear_tolerance": 0.1,
+    "nonlinear_tolerance": null,
+    "curvature_bound": 1.0,
+    "fd_relative": 0.0001,
+    "correction_limit": 2.0,
+    "max_backtracks": 8
+  },
+  "source": {
+    "/workspace/reports/toy100/cross_curvature_warm_probe.py": "e3d273ca05b5222ab9082dc34c36da9a12628af506683d1ce39461a95f8d7af4",
+    "/workspace/reports/toy100/cross_curvature_scratch.py": "f7f2ee48fe32a6e2937e711defcb00e475028fc5362870ae7d9d4cf383e688aa",
+    "/workspace/reports/toy100/implicit_extra_scratch.py": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+    "/workspace/reports/toy100/fixed_metric_extra_scratch.py": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+    "/workspace/reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "/workspace/benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "/workspace/benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834"
+  }
+}
