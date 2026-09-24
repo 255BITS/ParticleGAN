@@ -1,0 +1,57 @@
+{
+  "base_commit": "576739f5ece2ac6921ba15f3fefdb438d6b80c76",
+  "compact_states_phases": [
+    "pre_step",
+    "post_accepted_d"
+  ],
+  "compact_states_steps": [
+    1324,
+    1325,
+    1326,
+    1389,
+    1390,
+    1530,
+    1539,
+    1540
+  ],
+  "files": {
+    "compact-states.pt.gz": {
+      "bytes": 8465312,
+      "sha256": "77b24bbaf646befe70ac97f23a944d32717306e4ff0b1b8d8b6ff107dfef82f9"
+    },
+    "diagnosis.json.gz": {
+      "bytes": 895154,
+      "sha256": "b8fb1b55aab60a2443ed4bf9a129f1efd3f6c9a79809c1fc5f4e221cc2ea5ed2"
+    },
+    "field-analysis.json.gz": {
+      "bytes": 27597,
+      "sha256": "d0721910b3fec600adf6f7fd56800a8f476b3438166d642467191da8137b25fb"
+    },
+    "source.tar.gz": {
+      "bytes": 29916,
+      "sha256": "a56217391f1c22662c10b14a07a95f04abdf37cecad2f77887710ed9162bf8d9"
+    }
+  },
+  "original_replay_artifact": "artifacts/continuous-learning/stationary-failure-replay/capture-v2",
+  "original_replay_sha256": {
+    "captured-raw.json": "a4070315ddecc0c411eed875ccf39d39dcf03ec9a4229cdba337547125fcbc6e",
+    "diagnosis.json": "abc56787e8ba51fac5704b90c7fc36aa0fff76d313a551668969c3a1c4c1aa4f",
+    "field-analysis.json": "84e8aae0342378792d7f4b1acf336046423e3aa11101e8657d89ab77f8aa9ee7",
+    "selected-states.pt": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47"
+  },
+  "reference": "reports/toy100/continuous-evidence/pr84-stationary-hold/forks/original.json.gz",
+  "reference_sha256": "89f2172dc6f6876818acc74e04378328ab3a3be2a92623c22ad797e66a92d3c4",
+  "schema": "pr84-stationary-failure-diagnosis-v1",
+  "source_sha256": {
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/pr84_stationary_failure_replay.py": "7bff95296fbb749864360f89d63df804ed7232ded73529b5da6f8142e79ea71c",
+    "reports/toy100/pr84_stationary_field_analysis.py": "e4ae90161a8c76b542b9c92ce38712eeefe57ca40089cb8f52194a4fa503c15a"
+  }
+}
