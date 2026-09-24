@@ -1,7 +1,8 @@
 name: Shared-recipe 22-toy trained gate
 
 on:
-  pull_request:
+  push:
+    branches: [master, main, develop]
     paths:
       - "benchmarks/toy100/**"
       - "benchmarks/toy_suite.py"
@@ -24,6 +25,10 @@ permissions:
 jobs:
   trained-gate:
     name: CPU / Python 3.11 / one recipe across all 22 toys
+    # Train only merged primary-branch code, including manual dispatches.
+    if: >-
+      github.event_name != 'pull_request' &&
+      contains(fromJSON('["refs/heads/master", "refs/heads/main", "refs/heads/develop"]'), github.ref)
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
