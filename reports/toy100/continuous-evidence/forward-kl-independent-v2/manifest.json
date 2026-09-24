@@ -1,0 +1,29 @@
+{
+  "scope": "independent frozen first-bank forward-KL source/math/native-bank audit; no training",
+  "source_sha256": "0cc098d63efb2460dc038b897d5db532b9f87115ffbd5a78e42ee042ed21c873",
+  "python": "3.12.13",
+  "torch": "2.13.0+cu126",
+  "tests": "5 passed in 1.86s, tests/test_forward_kl_independent_audit.py",
+  "files": {
+    "source/forward_kl_free_filter.py": {
+      "sha256": "0cc098d63efb2460dc038b897d5db532b9f87115ffbd5a78e42ee042ed21c873",
+      "bytes": 15806
+    },
+    "first-bank-result.json.gz": {
+      "sha256": "ccedcc9c8d40af620970f0be44932806c3c8bfa8ba7caf2db387014826a95d7c",
+      "bytes": 14985
+    },
+    "tests/test_forward_kl_independent_audit.py": {
+      "sha256": "c7e7fd256cf618c13bccf524cdafce2018e2e8b87a73718192f577c0ec40860a",
+      "bytes": 5675
+    },
+    "reports/toy100/forward-kl-free-output-independent-audit.md": {
+      "sha256": "f562155d10c162c0d2dd7baa58f83afe572ac9c9faa9d1fc40aad5f5fabb4ca2",
+      "bytes": 5059
+    }
+  },
+  "first_bank_result_raw": {
+    "sha256": "c46050456c42f672eaea8454eee77520a067f54e5c6b3554f3b50b03cf122462",
+    "bytes": 64430
+  }
+}
