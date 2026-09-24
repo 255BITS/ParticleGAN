@@ -1,359 +1,158 @@
 {
-  "schema": "continuous-research-candidate-v1",
+  "schema": "continuous-research-candidate-v2",
   "date": "2026-09-24",
-  "status": "research_only_unqualified",
-  "selected": "PR84 original generator-only spatial stencil on PR82 alternation",
-  "origin_commit": "40ecb675bcb4b33bb0ab93e08e63607d30044930",
-  "adapter": "reports/toy100/pr84_smoothed_candidate.py",
-  "adapter_sha256": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
-  "adapter_entrypoint": "pr84_smoothed_candidate",
+  "status": "research_only_conditional_stability_pass_cold_pending",
+  "selected": "PR84 plus bounded empirical penalized critic refinement",
+  "adapter": "reports/toy100/pr84_critic_refinement.py",
+  "adapter_sha256": "cfdf3d050da538e92e79d5a12d18a715c3a8ca7e59a08515014e8e389c598a11",
+  "adapter_entrypoint": "pr84_critic_refinement",
+  "cold_adapter": "reports/toy100/pr84_critic_refinement_cold.py",
+  "cold_adapter_sha256": "742693fe0d1a3186c145490e1576ae4ccf19f8f49d242e9dff2e79543ed8084e",
   "scope": [
-    "mode_hold",
-    "trajectory"
+    "fixed-target mode_hold warm continuation",
+    "cold mode_hold and trajectory support verified; acquisition pending"
   ],
   "production_gate_eligible": false,
-  "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5",
   "production_modified": false,
-  "reason": "Reproducible reference only, not a solution: original PR84 fails cold ring and 89/1200 dense same-target continuation checks. G opponent prediction improves to1178/1200 but still fails; no qualifying candidate.",
+  "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5",
+  "reason": "First new rule to pass all44 saved-state failure checks, warm200, and all1200 dense later checks through2400. This is conditional stability, not a qualified solution; cold acquisition, own-state continuation, longer holds and shared gates remain.",
   "settings": {
     "g_lr": 0.00425,
     "d_lr": 0.00425,
     "prior_lr": 0.0085,
+    "lr_decay": false,
     "g_curvature_bound": 0.25,
     "d_curvature_bound": 3.0,
     "smooth_width_cap": 0.15,
-    "width_rule": "min(.15, .5 / sharpness)",
-    "lr_decay": false,
-    "smoothing_scope": "G only; 2D SimpleMLPDiscriminator; trajectory path unchanged"
+    "fit_batches": 8,
+    "fit_max_iterations": 40,
+    "fit_max_closures": 80,
+    "fit_selection": "lowest finite same penalized training D loss",
+    "fit_optimizer": "fresh L-BFGS strong Wolfe each update",
+    "adam_moments": "one per player before/after D refinement respectively; retained D moments precede fit"
   },
-  "exact_cold_source_parity": {
-    "trajectory_updates": 400,
-    "ring_updates": 1200,
-    "full_state": true,
-    "optimizer_moments": true,
-    "ema": true,
-    "rng": true,
-    "all_untimed_observations": true,
-    "evidence": "continuous-evidence/pr84-smoothed-candidate/manifest.json"
+  "saved_state_filter": {
+    "passing_checks": [
+      12,
+      16,
+      16
+    ],
+    "checks": [
+      12,
+      16,
+      16
+    ],
+    "evidence": "continuous-evidence/pr84-critic-refinement-filter/manifest.json"
   },
-  "trajectory": {
-    "live": {
-      "identity_mse": 0.0009426623582839966
-    },
-    "verdict": {
-      "status": "PASS",
-      "attempted": true,
-      "passed": true,
-      "metrics": [
-        {
-          "metric": "identity_mse",
-          "value": 0.0009426623582839966,
-          "op": "<=",
-          "threshold": 0.02,
-          "status": "PASS",
-          "margin": 0.019057337641716004
-        }
-      ],
-      "convergence": {
-        "complete": true,
-        "observations": 24,
-        "passing_observations": 18,
-        "minimum_stable_checks": 5,
-        "passing_suffix": 18,
-        "first_pass_step": 117,
-        "stable_from_step": 117,
-        "stable_from_seconds": 1.87515541119501,
-        "confirmed_step": 184,
-        "confirmed_seconds": 2.4329984090290964
-      },
-      "shortfall": 0.0,
-      "confirmation_fraction": 0.46
-    }
-  },
-  "ring": {
-    "live": {
-      "modes": 7,
-      "hq": 1.0
-    },
-    "verdict": {
-      "status": "FAIL",
-      "attempted": true,
-      "passed": false,
-      "metrics": [
-        {
-          "metric": "modes",
-          "value": 7,
-          "op": ">=",
-          "threshold": 8,
-          "status": "FAIL",
-          "margin": -1
-        },
-        {
-          "metric": "hq",
-          "value": 1.0,
-          "op": ">=",
-          "threshold": 0.9,
-          "status": "PASS",
-          "margin": 0.09999999999999998
-        }
-      ],
-      "convergence": {
-        "complete": true,
-        "observations": 24,
-        "passing_observations": 0,
-        "minimum_stable_checks": 5,
-        "passing_suffix": 0,
-        "first_pass_step": null,
-        "stable_from_step": null,
-        "stable_from_seconds": null,
-        "confirmed_step": null,
-        "confirmed_seconds": null
-      },
-      "shortfall": 0.0625,
-      "confirmation_fraction": 2.0
-    }
-  },
-  "first_failed_gate": "cold_ring",
-  "not_run": [
-    "cold_acquired_hold2400",
-    "other_hosts",
-    "production_common22",
-    "longer_continuation"
-  ],
-  "next_research": "Use exact saved-state short continuation tests of coherent game feedback; score all live updates. Another scalar damping or minibatch averaging sweep is not supported by the captured1325 transition. Cold acquisition and own acquired continuation remain mandatory for survivors.",
-  "distribution_shift_required": false,
-  "rest_without_signal_allowed": true,
   "warm": {
     "checks": 200,
-    "failing_steps": [],
-    "min_hq": 0.97021484375,
-    "min_modes": 8,
-    "pass_all": true,
-    "pass_suffix": true,
     "passing_checks": 200,
+    "failing_steps": [],
+    "min_modes": 8,
+    "min_hq": 0.9970703125,
     "passing_suffix": 200,
-    "stable_from_step": 1001
-  },
-  "identity_cold_parity": true,
-  "additional_rejected_candidate": "PR84 plus bidirectional Chamfer: warm200/200, trajectoryPASS, ring7/HQ.87012;3/24 passing",
-  "warm_hold_2400": {
-    "scope": "passing_state_local_stability_only",
-    "steps": 2400,
-    "scheduled_prefix_steps": 1000,
-    "noise_horizon": 1200,
-    "first_observed_failure": 1390,
-    "status": "FAIL",
-    "local_stability": {
-      "checks": 200,
-      "failing_steps": [],
-      "min_hq": 0.97021484375,
-      "min_modes": 8,
-      "pass_all": true,
-      "pass_suffix": true,
-      "passing_checks": 200,
-      "passing_suffix": 200,
-      "stable_from_step": 1001
-    },
-    "long_hold": {
-      "checks": 120,
-      "failing_steps": [
-        1390,
-        1540,
-        1550,
-        1560,
-        1570,
-        1910,
-        2060,
-        2150
-      ],
-      "min_hq": 0.78857421875,
-      "min_modes": 7,
-      "pass_all": false,
-      "pass_suffix": true,
-      "passing_checks": 112,
-      "passing_suffix": 25,
-      "stable_from_step": 2160
-    },
-    "final": {
-      "hq": 0.998046875,
-      "modes": 8
-    },
-    "evidence": "continuous-evidence/pr84-stationary-hold/manifest.json"
+    "stable_from_step": 1001,
+    "pass_all": true,
+    "pass_suffix": true
   },
   "warm_hold_2400_dense": {
-    "status": "FAIL",
-    "scope": "passing_state_local_stability_only",
-    "local_stability": {
-      "checks": 200,
-      "passing_checks": 200,
-      "failing_steps": [],
-      "min_modes": 8,
-      "min_hq": 0.97021484375,
-      "passing_suffix": 200,
-      "stable_from_step": 1001,
-      "pass_all": true,
-      "pass_suffix": true
-    },
+    "status": "PASS",
+    "scope": "passing-state conditional stability only",
     "long_hold": {
       "checks": 1200,
-      "passing_checks": 1111,
-      "failing_steps": [
-        1325,
-        1326,
-        1327,
-        1389,
-        1390,
-        1531,
-        1532,
-        1533,
-        1534,
-        1535,
-        1536,
-        1537,
-        1538,
-        1539,
-        1540,
-        1541,
-        1542,
-        1543,
-        1544,
-        1545,
-        1546,
-        1547,
-        1548,
-        1549,
-        1550,
-        1551,
-        1552,
-        1553,
-        1554,
-        1555,
-        1556,
-        1557,
-        1558,
-        1559,
-        1560,
-        1561,
-        1562,
-        1563,
-        1564,
-        1565,
-        1566,
-        1567,
-        1568,
-        1569,
-        1570,
-        1571,
-        1621,
-        1622,
-        1675,
-        1676,
-        1677,
-        1821,
-        1822,
-        1823,
-        1910,
-        1911,
-        1921,
-        1922,
-        1923,
-        1924,
-        1925,
-        1926,
-        2011,
-        2060,
-        2061,
-        2062,
-        2063,
-        2064,
-        2065,
-        2066,
-        2067,
-        2068,
-        2121,
-        2122,
-        2123,
-        2124,
-        2125,
-        2126,
-        2145,
-        2146,
-        2147,
-        2148,
-        2149,
-        2150,
-        2151,
-        2277,
-        2278,
-        2337,
-        2338
-      ],
-      "min_modes": 7,
-      "min_hq": 0.716064453125,
-      "passing_suffix": 62,
-      "stable_from_step": 2339,
-      "pass_all": false,
-      "pass_suffix": true
-    },
-    "final": {
-      "modes": 8,
-      "hq": 0.998046875
-    },
-    "exact_prior_training_parity": true,
-    "evidence": "continuous-evidence/pr84-opponent-prediction-run/manifest.json"
-  },
-  "additional_rejected_prediction": {
-    "method": "pr84_alternating_g_opponent_prediction",
-    "local_stability": {
-      "checks": 200,
-      "passing_checks": 200,
+      "passing_checks": 1200,
       "failing_steps": [],
       "min_modes": 8,
-      "min_hq": 0.96875,
-      "passing_suffix": 200,
-      "stable_from_step": 1001,
+      "min_hq": 0.939453125,
+      "passing_suffix": 1200,
+      "stable_from_step": 1201,
       "pass_all": true,
-      "pass_suffix": true
-    },
-    "long_hold": {
-      "checks": 1200,
-      "passing_checks": 1178,
-      "failing_steps": [
-        1391,
-        1417,
-        1532,
-        1533,
-        1648,
-        1649,
-        1650,
-        1651,
-        1652,
-        1653,
-        1967,
-        1968,
-        1969,
-        1970,
-        1971,
-        2053,
-        2054,
-        2055,
-        2057,
-        2058,
-        2059,
-        2263
-      ],
-      "min_modes": 7,
-      "min_hq": 0.737548828125,
-      "passing_suffix": 137,
-      "stable_from_step": 2264,
-      "pass_all": false,
       "pass_suffix": true
     },
     "final": {
       "modes": 8,
       "hq": 1.0
     },
-    "cold_run": false,
-    "report": "continuous-round5.md"
-  }
+    "final_state_sha256": "0b0ad942f4baca42cbc54c179c1a65399d34c3f50e8e8293aaad6a5178574ce9",
+    "identity_cold_parity": true,
+    "original_control_exact_parity": true,
+    "first200_parity": true,
+    "evidence": "continuous-evidence/pr84-critic-refinement-independent-audit/hold/manifest.json"
+  },
+  "cold": {
+    "status": "RUNNING",
+    "gate_order": [
+      "trajectory400",
+      "mode_hold1200"
+    ],
+    "stop_on_first_failure": true,
+    "trajectory": {
+      "status": "PASS",
+      "live": {
+        "identity_mse": 0.0009098352747969329
+      },
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 0.0009098352747969329,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.019090164725203067
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 22,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 22,
+          "first_pass_step": 50,
+          "stable_from_step": 50,
+          "stable_from_seconds": 6.984313816064969,
+          "confirmed_step": 117,
+          "confirmed_seconds": 15.219113932922482
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.2925
+      },
+      "fit_gradient_evaluations": 23263,
+      "actual_adam_accounting": {
+        "d": {
+          "applied_rates": [
+            0.00425
+          ],
+          "actual_adam_calls": 400,
+          "moment_steps_min": 400,
+          "moment_steps_max": 400
+        },
+        "g": {
+          "applied_rates": [
+            0.00425,
+            0.0085
+          ],
+          "actual_adam_calls": 400,
+          "moment_steps_min": 400,
+          "moment_steps_max": 400
+        }
+      },
+      "final_state_file_sha256": "bb1d957180c2f358718d0fff52425c015b75d0e7f442c45fa3c8f9279464e060"
+    },
+    "ring": "RUNNING"
+  },
+  "not_run": [
+    "own_acquired_continuation",
+    "same_target_error_response",
+    "longer_hold",
+    "remaining_shared_hosts",
+    "production_common22"
+  ],
+  "distribution_shift_required": false,
+  "rest_without_signal_allowed": true,
+  "previous_reference": "https://github.com/255BITS/ParticleGAN/blob/7fa6e8e/reports/toy100/continuous-selected-candidate.json",
+  "next_research": "Complete cold gates. Preserve final training states to test own-acquired continuation without repeating prefixes; diagnose any failure with independent-bank copied-critic probes."
 }

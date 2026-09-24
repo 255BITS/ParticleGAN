@@ -2,8 +2,8 @@
 
 **No replacement qualifies yet.** The new penalized critic-refinement rule
 passes all44 saved-state continuation checks and warm200/200, minimum HQ
-.99707 with eight modes throughout. Its dense hold through2400 is running;
-cold acquisition remains untested. Opponent prediction passes warm200 but fails
+.99707 with eight modes throughout. Its dense hold through2400 also passes all1200 later checks, minimum HQ
+.939453 with eight modes throughout. Cold acquisition is running. Opponent prediction passes warm200 but fails
 22 of1,200 later per-update checks, including temporary mode loss. Cold gates
 were not run after that failure. This round investigates the delayed loss of quality on the **unchanged**
 dataset. The production recipe still uses LR decay. Research tests use live
@@ -83,6 +83,7 @@ hold; that entire hold must pass before cold acquisition tests.
 |Scheduled control|200/200|1200/1200|.99707|8|8 / .99951|
 |Original PR84|200/200|1111/1200 **FAIL**|.71606|7|8 / .99805|
 |G opponent prediction|200/200|1178/1200 **FAIL**|.73755|7|8 / 1.0|
+|Penalized critic refinement|200/200|1200/1200 **PASS**|.93945|8|8 / 1.0|
 
 The minimum HQ and minimum mode count need not occur at the same update.
 Prediction fails at1391,1417,1532–1533,1648–1653,1967–1971,2053–2055,
@@ -188,8 +189,20 @@ and prior .0085 rates. Warm cost is10,674 extra1024-pair D fit closures plus200
 128-pair parity queries; the median is51.5 fit closures per update. Eleven
 fits exhaust the hard closure budget. These results do not certify a best
 response or establish cold acquisition. The source-bound every-update hold
-through2400 is the next gate; the active adapter currently requires zero
-input noise, and a separate faithful cold extension is being prepared.
+through2400 subsequently passes all1200 later checks, minimum HQ .939453 at
+update1365. All first200 warm records and original controls reproduce exactly.
+The [independent audit](pr84-critic-refinement-independent-audit.md) records
+66,918 additional1024-pair fit closures and21 closure-budget hits over1400
+active updates. The faithful cold extension passes nine focused checks; its
+400-update trajectory gate passes at MSE .000909835, with22/24 passing
+observations and a22-check passing suffix. The1200-update ring gate is running.
+
+A separate [independent-bank replay](pr84-critic-refinement-interpretation.md)
+at the original1325 state finds the repaired G direction agrees closely
+between critics fitted on disjoint banks when tested on a third bank. Both
+fits improve all eight held-out D losses and reverse the saved critic's
+harmful direction. Their D residuals remain nonzero; this strengthens the
+local tracking diagnosis without certifying a best response.
 
 The [capped one-dimensional toy](capped-critic-tracking-toy.md) gives a
 precise mechanism under the same paired Rp losses and one-sided cap. A narrow

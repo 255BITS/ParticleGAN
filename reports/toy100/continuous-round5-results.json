@@ -269,7 +269,7 @@
     "capped-critic-tracking-toy.md",
     "pr84-critic-refinement-independent-audit.md"
   ],
-  "interpretation": "No solution established. Critic refinement passes all44 saved-state checks and warm200/200; dense hold is running. Prediction and D cross-response remain rejected.",
+  "interpretation": "Critic refinement passes all44 saved-state checks, warm200/200, and every1200 later update through2400. Cold acquisition is running; no production-qualified solution yet.",
   "additional_saved_state_candidates": [
     {
       "method": "pr84_accepted_g_discriminator_cross_response",
@@ -294,7 +294,7 @@
   "active_host_configuration": {
     "name": "PR84 with bounded empirical critic refinement",
     "method": "pr84_alternating_bounded_empirical_critic_refinement",
-    "status": "WARM_PASS_HOLD_RUNNING",
+    "status": "WARM_AND_HOLD_PASS_COLD_RUNNING",
     "saved_state_filter": {
       "passing_checks": [
         12,
@@ -337,7 +337,83 @@
       "configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
     },
     "warm_evidence": "continuous-evidence/pr84-critic-refinement-independent-audit/warm/manifest.json",
-    "scope": "zero-input-noise mode_hold only; cold acquisition untested",
-    "production_gate_eligible": false
+    "scope": "conditional fixed-target stability through2400; cold acquisition running",
+    "production_gate_eligible": false,
+    "long_hold": {
+      "checks": 1200,
+      "passing_checks": 1200,
+      "failing_steps": [],
+      "min_modes": 8,
+      "min_hq": 0.939453125,
+      "passing_suffix": 1200,
+      "stable_from_step": 1201,
+      "pass_all": true,
+      "pass_suffix": true
+    },
+    "final": {
+      "modes": 8,
+      "hq": 1.0
+    },
+    "hold_evidence": "continuous-evidence/pr84-critic-refinement-independent-audit/hold/manifest.json",
+    "identity_cold_parity": true,
+    "original_control_exact_parity": true,
+    "first200_parity": true,
+    "cold_trajectory": {
+      "status": "PASS",
+      "live": {
+        "identity_mse": 0.0009098352747969329
+      },
+      "verdict": {
+        "status": "PASS",
+        "attempted": true,
+        "passed": true,
+        "metrics": [
+          {
+            "metric": "identity_mse",
+            "value": 0.0009098352747969329,
+            "op": "<=",
+            "threshold": 0.02,
+            "status": "PASS",
+            "margin": 0.019090164725203067
+          }
+        ],
+        "convergence": {
+          "complete": true,
+          "observations": 24,
+          "passing_observations": 22,
+          "minimum_stable_checks": 5,
+          "passing_suffix": 22,
+          "first_pass_step": 50,
+          "stable_from_step": 50,
+          "stable_from_seconds": 6.984313816064969,
+          "confirmed_step": 117,
+          "confirmed_seconds": 15.219113932922482
+        },
+        "shortfall": 0.0,
+        "confirmation_fraction": 0.2925
+      },
+      "fit_gradient_evaluations": 23263,
+      "actual_adam_accounting": {
+        "d": {
+          "applied_rates": [
+            0.00425
+          ],
+          "actual_adam_calls": 400,
+          "moment_steps_min": 400,
+          "moment_steps_max": 400
+        },
+        "g": {
+          "applied_rates": [
+            0.00425,
+            0.0085
+          ],
+          "actual_adam_calls": 400,
+          "moment_steps_min": 400,
+          "moment_steps_max": 400
+        }
+      },
+      "final_state_file_sha256": "bb1d957180c2f358718d0fff52425c015b75d0e7f442c45fa3c8f9279464e060"
+    },
+    "cold_ring": "RUNNING"
   }
 }

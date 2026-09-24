@@ -15,7 +15,7 @@ dense observer; the scheduled control passes1200/1200. Both failed methods end
 with excellent quality. Exact archived original-state and predictor-prefix
 parity hold. Read the [fifth-round diagnosis and tests](continuous-round5.md)
 and [current status](stationary-stability-status.md) before proposing another
-method. Prediction is rejected before cold gates; no winner is selected.
+method. Prediction is rejected before cold gates; no production winner is selected.
 
 **Current causal lead:** the actual-D cross-response fails its short filter.
 Fitting a copied critic on the existing penalized objective reverses harmful
@@ -23,7 +23,9 @@ G guidance on24/24 reserved batches; all proposals at1325 and1530 then pass.
 [Exact fit and held-out evidence](pr84-critic-relaxation-diagnosis.md) led to
 a bounded critic-refinement rule. That rule now passes **all44 saved-state
 checks and warm200/200**, with eight modes and minimum warm HQ .99707.
-The dense hold through2400 is running; cold acquisition remains untested.
+The dense hold through2400 passes all1200 later checks, minimum HQ .939453
+with eight modes throughout. Cold trajectory passes at MSE .000910 with22
+passing observations; cold ring is running.
 Each update costs about53 additional1024-pair critic-gradient evaluations in
 the warm run, plus a parity check. Fits are nonconverged and D's retained Adam
 moments precede the refinement. [Rule, strict filter and frozen evidence](pr84-critic-refinement-filter.md).
@@ -79,7 +81,8 @@ the double-smoothing implementation issue and the local gradient barrier.
 The first sampled-data coverage projection recovers the missing mode in a
 one-state check, then fails dense warm197/200; no cold run followed. Its
 [source and failed gate](coverage-projection-report.md) are available for
-other agents. The original PR84 adapter remains the selected partial candidate.
+other agents. The original PR84 adapter was the selected partial candidate
+for that round; the current critic-refinement selection is linked above.
 Its bidirectional follow-up passes the three saved-state checks and warm200,
 then fails cold ring7/HQ .87012. [Completed result and next small tests](chamfer-projection-report.md)
 distinguish nonlinear pullback error from inadequate target coverage. Neither

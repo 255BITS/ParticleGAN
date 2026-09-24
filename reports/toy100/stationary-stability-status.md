@@ -1,9 +1,10 @@
 # Same-dataset stability status, September 24
 
-**LR decay is suppressing an observed instability; no tested replacement has
-resolved it.** The selected PR84 method now fails a longer continuation from
-the same passing state. Its short warm pass and excellent final checkpoint
-both conceal failures in between. The fixed dataset never changes.
+**Critic refinement now passes the conditional same-dataset stability tests;
+full acquisition and longer stability remain pending.** Earlier PR84 methods
+fail a longer continuation from the same passing state. Their short warm
+passes and excellent final checkpoints conceal failures in between. The
+fixed dataset never changes.
 
 **Subsequent exact diagnosis and new attempt:** the [fifth round](continuous-round5.md)
 checks every update through2400. Original PR84 fails89 of1,200 later checks,
@@ -18,9 +19,10 @@ the original diagnostic's provenance.
 
 **Current candidate:** bounded refinement of the same penalized critic loss
 passes all44 saved-state checks and warm200/200, minimum HQ .99707. Its
-constant-rate dense hold through2400 is running. This costs roughly53 extra
+constant-rate dense hold through2400 passes1200/1200, minimum HQ .939453.
+Cold trajectory passes at MSE .000910; cold ring is running. This costs roughly53 extra
 1024-pair D gradients per update; fits remain nonconverged. Cold acquisition
-is not yet tested. [Independent warm audit and evidence](pr84-critic-refinement-independent-audit.md),
+is not yet complete. [Independent warm/hold audit and evidence](pr84-critic-refinement-independent-audit.md),
 [strict saved-state filter](pr84-critic-refinement-filter.md). The
 [capped population toy](capped-critic-tracking-toy.md) supports a critic-tracking
 mechanism without implying that distribution mismatch alone is impossible.
@@ -114,9 +116,10 @@ small model-state perturbation with a frozen control can test that capability
 without changing the dataset; it has not been run for this candidate. Entire
 distribution shifts remain outside the required scope.
 
-The selected adapter remains a reproducible reference, **not a proposed
-solution**. It has now failed both fixed-target cold acquisition and conditional
-longer stability. No production code or benchmark threshold changed.
+The original PR84 adapter remains a reproducible failed reference. The
+[current research candidate](continuous-selected-candidate.json) adds empirical
+critic refinement and passes the conditional hold; it is not yet a qualified
+solution. No production code or benchmark threshold changed.
 
 ```bash
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 CUDA_VISIBLE_DEVICES=''
