@@ -33,9 +33,11 @@ FACTORIES = {
                         dict(ramp="stall", game_bound=True)),
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
+    "meanrestore": ("reports.toy100.pr84_mean_restore_candidate", "pr84_mean_restore_candidate"),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
+    "reports/toy100/pr84_mean_restore_candidate.py",
     "reports/toy100/pr84_reach_candidate.py",
     "reports/toy100/pr84_smoothed_candidate.py",
     "reports/toy100/alternating_curvature_scratch.py",
@@ -93,7 +95,8 @@ def warm(output, method):
                 receipt.update(rates)
                 yield receipt
             receipt.update(_dynamics(recorder))
-        emit(event="VARIANT_DONE", variant=name)
+        restore = {key: receipt[key] for key in receipt if str(key).startswith("mean_restore")}
+        emit(event="VARIANT_DONE", variant=name, **restore)
 
     config = json.loads((ROOT / "configs/toy100/constraints_simple_regularization.json").read_text())
     result = run_warm_variants(
@@ -153,7 +156,8 @@ def stay(output, method, steps):
                 calls=calls + (steps - outer), moment_updates=steps)
             recorder.accounting(recorder.rows[recorder.optimizers[0]]["calls"], recorder.outer_steps)
         evidence = run_probe(config, mode="constant", steps=steps, diagnostic_every=10,
-                             checkpoint_hook_step=1, checkpoint_hook=hook)
+                             checkpoint_hook_step=1, checkpoint_hook=hook,
+                             log=lambda row: emit(**row))
     diag = evidence.get("diagnostic") or []
     late = [p for p in diag if p["step"] > 1200]
     fails = [p for p in late if not (p["modes"] == 8 and p["hq"] >= .9)]
@@ -167,7 +171,9 @@ def stay(output, method, steps):
                final=(diag[-1]["step"], diag[-1]["modes"], round(diag[-1]["hq"], 4)) if diag else None,
                dynamics=_dynamics(recorder))
     records = [dict(step=r["outer_step"], sharp=r.get("critic_sharpness"), width=r.get("critic_width"),
-                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"])
+                    adv=r.get("critic_advantage"), g_factor=r["g"]["factor"], d_factor=r["d"]["factor"],
+                    dmean=r.get("mean_restore_delta"), pre=r.get("mean_restore_pre"),
+                    post=r.get("mean_restore_post"), batch=r.get("mean_restore_batch"))
                for r in getattr(recorder, "records", [])]
     (output / "stay.json").write_text(json.dumps(dict(summary=row, diagnostic=diag, records=records),
                                                  default=float) + "\n")
