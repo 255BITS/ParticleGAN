@@ -72,10 +72,16 @@ class ReachRecorder(base.SmoothedBothBoundRecorder):
 
 
 @contextmanager
-def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="peak"):
+def pr84_reach_candidate(*, task="mode_hold", start_step=0, reach=REACH, ramp="peak",
+                         g_curvature_bound=base.G_CURVATURE_BOUND):
     original = base.SmoothedBothBoundRecorder
+
+    def init(self, *, start_step=0):
+        ReachRecorder.__init__(self, start_step=start_step)
+        self.curvature_bound = g_curvature_bound
+
     base.SmoothedBothBoundRecorder = type("ReachRecorder", (ReachRecorder,),
-                                          dict(reach=reach, ramp=ramp))
+                                          dict(reach=reach, ramp=ramp, __init__=init))
     try:
         with base.pr84_smoothed_candidate(task=task, start_step=start_step) as value:
             yield value

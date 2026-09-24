@@ -92,9 +92,27 @@ updates, and there are no failures after 2150.
 
 - **Keep** stall reach as the GAN-native reference. Reach .5 is the fallback, with a slightly better stay (103 vs 97) but no AVX512 ring.
 - **Kill** reach 1.0 and the saturating ramp.
-- **Next single bet:** damp G's common-mode translation, and only that. [pr84_reach_dropout_trace.py](pr84_reach_dropout_trace.py) traces every update of the stall-reach continued run from 1755 to 1800 ([receipt](continuous-evidence/pr84-reach/dropout-trace-stall-1755-1800.json)):
-  - **G starts it.** Per-update cloud motion is almost all common translation (translation ≈ RMS), growing from .02 at 1756 to .91 at 1769, when the cloud reads 0 modes.
-  - **G's trust region loosens along this mode.** G's own-curvature ratio falls from 5.0 to .9, so its trust factor opens from .05 to .27.
-  - **D follows.** D's slope stays .29–.43 while the translation grows, then spikes to 1.04 at 1770, where D's curvature ratio hits 5.9 and the D bound fires.
+- **Kill** a global G curvature bound of .125 on stall reach. Warm improves to 200/200 with min HQ .961, but the cold ring ends at 2 modes on both builds, and the continued run is 30/120 because it never acquired.
 
-  #104 shows that a G shrink blind to direction fires during healthy holds and hurts the stay. The bet is therefore a trust bound on the mean-output (translation) component of G's step, measured against D's response on the next update. The rest of the G step and the reach channel stay unchanged.
+## The shared continuation dropout
+
+Every variant, PR84 included, has an unstable episode between about 1720 and 2150.
+
+**Per-update trace** ([pr84_reach_dropout_trace.py](pr84_reach_dropout_trace.py), 1755–1800, [receipt](continuous-evidence/pr84-reach/dropout-trace-stall-1755-1800.json)):
+- Almost all of the cloud's motion is common translation, growing from .02 at 1756 to .91 at 1769, when the cloud reads 0 modes.
+- G's own-curvature ratio falls from 5.0 to .9, so its trust factor opens from .05 to .27.
+- D's slope stays .29–.43 while the translation grows, then spikes to 1.04 at 1770, where D's curvature ratio reaches 5.9.
+
+**Translation is not specific to the dropout** ([trace 1–1760](continuous-evidence/pr84-reach/trace-stall-1-1760.json.gz)). It carries 56–83% of G's output motion in every phase: 83% in early acquisition, with jumps up to 2.4, and 56–63% in healthy holds. A translation bound would slow acquisition and act during holds, and its only distinguishing feature, magnitude, is clip-ladder territory. That bet was killed offline.
+
+**Timescale fork at 1755** ([pr84_reach_lag_fork.py](pr84_reach_lag_fork.py), [receipt](continuous-evidence/pr84-reach/lag-fork-1755/)). Clean-support checks from 1760 to 1900:
+
+| Fork | Passing | Min modes |
+| --- | --- | --- |
+| As-is | 4/29 | 0 |
+| D steps ×2 | 0/29 | 0 |
+| G steps ×.5 | 28/29 | 7 |
+
+A faster critic worsens the dropout, so it is not caused by D lagging G. It is a cross-coupled mode that grows with G's step. Slowing G globally removes it but also kills acquisition (the .125 kill above). This is #60's trade-off, reproduced inside the game.
+
+- **Next single bet:** bound G by the game's cross-curvature instead of its own-curvature alone. That means measuring how D's response to G's last step changes G's gradient. This mode grows with the D×G step product, and G's own-curvature ratio falls while it grows, so an own-curvature bound cannot see it. Keep the stall-reach read and test on the 1755 fork first. The PR82-era cross-curvature bounds predate the reach channel, so their ring failures do not settle this. Do not use a slope- or advantage-gated G rest damping: PR84's rest-damping and #104 already kill that family.
