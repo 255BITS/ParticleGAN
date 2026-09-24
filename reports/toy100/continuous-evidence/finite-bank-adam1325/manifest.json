@@ -1,0 +1,35 @@
+{
+  "method": "saved1325_actual_adam_mean16_alternating_control",
+  "status": "SAVED_POINT_PASS",
+  "shared_gate_eligible": false,
+  "input_and_banks": "../finite-bank-vr1325; exact references in declaration",
+  "native_full_model_and_adam_exact": true,
+  "moments_each_advance_once": true,
+  "artifacts": {
+    "accepted-state.pt.gz": {
+      "sha256": "2bb7328848dfff45c380a164bbb94fda2fa5db3f2f79c316d596cb5ee86b4e36",
+      "plain_sha256": "e7a90a7a99ceb26c630a1bc84ff4a60760d04a1a7c5d32af26fb9cfb38612b36",
+      "bytes": 449159
+    },
+    "declaration.json.gz": {
+      "sha256": "b833d7030741acbe83d928c732902b53fb6a74ee5721de16dfdb1bacda1f0ef4",
+      "plain_sha256": "2cec9a40601ee1f161c15847a149fb78118cdceab045a05144cf3a99f8417d81",
+      "bytes": 1219
+    },
+    "pr84_finite_bank_adam_control.py.gz": {
+      "sha256": "878cb1451554be59633bc4890e25d539312abaa61e2190aa567e3803eae57e7e",
+      "plain_sha256": "b3399d5ff528d4df4e101807aefd9108f733bafc419f385065299470dd306ae4",
+      "bytes": 3979
+    },
+    "result.json.gz": {
+      "sha256": "eafb6b903c38088577241f5b98818a7c66b3e7b9522b50689248db8efd61cb5a",
+      "plain_sha256": "f125ac37ec12e5c411e91d5addade7c76a6293d8965ade4437069e06042da37b",
+      "bytes": 2012
+    },
+    "run.log.gz": {
+      "sha256": "3d15990ce4886ac7f9c67f511d30ebaf47db147522975fd129f78a2d47674681",
+      "plain_sha256": "67c64fc0593e2c85a5f9eec4834cfaf792bb9d9ab47e9809a53f0d1b936114ce",
+      "bytes": 1879
+    }
+  }
+}

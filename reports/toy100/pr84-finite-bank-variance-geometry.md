@@ -127,13 +127,31 @@ hierarchical problem under additional structure. Neither certifies this
 nonsmooth general-sum neural game. The negative measured direction is a
 concrete reason not to transfer those guarantees.
 
-The next cheap faithful control is one **actual new-moment alternating Adam
-update** at this same capture, using exactly these sixteen banks and the
-original own bounds. It isolates the metric change omitted above before
-building any persistent variance-reduction adapter. If that survives, a
-bounded source-bound saved-state branch comparison can test critic noise
-against residual game geometry. This report does not authorize or claim
-that such a method passes cold acquisition or continuous hold.
+The authorized follow-up **actual new-moment alternating Adam update** passed
+this saved point: HQ `.996582 → .997314`, all eight modes, clean-output RMS
+`.0142941`. D's factor is one; G's is `.544292`. Both G-field stencil widths
+are `.15`, using the original rule recomputed at the base and proposal. D/G
+Adam each advance once to moment step 1325 at their original rates. The
+finite mean accumulates per-native-bank gradients in float64 and rounds once
+to float32 before each actual Adam step.
+
+Its one-bank control reproduces **all D/G/prior parameters and both optimizer
+state dictionaries bit-for-bit** at the captured post-bounded-G boundary,
+and reproduces the original `.824219` HQ. This is before EMA; no equivalence
+of an unexecuted host's future RNG or noise counters is implied. It uses
+cached tensors and leaves caller RNG/input snapshots untouched. The
+standalone computation evaluates 32 useful gradients per player, omitting
+the native scaffold's unused phase-0 G and phase-2 D fields. A host adapter
+must account for those separately if it executes them.
+
+The [control source](pr84_finite_bank_adam_control.py) exposes
+`mean_adam_update(pre_step, d_rows, g_rows, recipe)`, returning the receipt and
+copied G/D/prior/Adam state. Its
+[separate archive](continuous-evidence/finite-bank-adam1325/manifest.json)
+binds this additional one-point test. It supports only the declared late
+zero-input-noise host. The next filter is the original three sequential
+saved-state branches, not a long run justified by this point. No cold or
+continuous-hold success is claimed.
 
 The twelve-atom/eight-mode ring is also distributionally misspecified;
 perfect HQ is not zero game residual. Those representation facts and the
