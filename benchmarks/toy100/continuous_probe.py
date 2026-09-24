@@ -30,6 +30,7 @@ import argparse
 from contextlib import ExitStack
 from copy import deepcopy
 import hashlib
+import inspect
 import json
 import math
 from pathlib import Path
@@ -131,8 +132,11 @@ def _window(points: list[dict], *, minimum: int = 5) -> dict:
 
 def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
                   noise_horizon: int, diagnostic_every: int,
+                  dense_after: int | None,
                   shift_step: int | None, shift: tuple[float, float],
-                  freeze_after_shift: bool, log) -> tuple[dict, dict]:
+                  freeze_after_shift: bool, log,
+                  checkpoint_hook_step: int | None = None,
+                  checkpoint_hook=None) -> tuple[dict, dict]:
     """Extend the frozen host with scoped instrumentation only."""
     steps = spec["steps"]
     policy = _noise_policy(noise, noise_horizon)
@@ -140,8 +144,12 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
     original_means = mode_hold.ring_means
     original_checkpoint = mode_hold.checkpoint
     original_adam_step = torch.optim.Adam.step
+    step_delegate = {"fn": original_adam_step}
+    expected_accounting = {"calls": steps,
+                           "moment_updates": shift_step if freeze_after_shift else steps}
     tracked: dict[int, dict] = {}
     rate_ranges: dict[str, dict] = {}
+    post_checkpoint_rate_ranges: dict[str, dict] = {}
     ring: torch.Tensor | None = None
     diagnostic: list[dict] = []
     shift_pair: dict | None = None
@@ -157,7 +165,7 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
 
     def step_optimizer(optimizer, *args, **kwargs):
         row = tracked.setdefault(id(optimizer), {"optimizer": optimizer, "calls": 0,
-                                                  "updates": 0})
+                                                  "delegate_calls": 0})
         row["calls"] += 1
         for group in optimizer.param_groups:
             role = ("prior" if group.get("_comparison_prior") else
@@ -168,22 +176,44 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
             seen["min"] = min(seen["min"], rate)
             seen["max"] = max(seen["max"], rate)
             seen["observations"] += 1
+            if (checkpoint_hook_step is not None
+                    and row["calls"] > checkpoint_hook_step):
+                after = post_checkpoint_rate_ranges.setdefault(
+                    role, {"min": rate, "max": rate, "observations": 0})
+                after["min"] = min(after["min"], rate)
+                after["max"] = max(after["max"], rate)
+                after["observations"] += 1
         if frozen:
             return None
-        result = original_adam_step(optimizer, *args, **kwargs)
-        row["updates"] += 1
+        result = step_delegate["fn"](optimizer, *args, **kwargs)
+        row["delegate_calls"] += 1
         return result
 
     def optimizer_counts() -> list[dict]:
-        return sorted((dict(calls=row["calls"], updates=row["updates"],
-                            rates=[group["lr"] for group in row["optimizer"].param_groups])
-                       for row in tracked.values()), key=lambda row: len(row["rates"]))
+        rows = []
+        for row in tracked.values():
+            moments = [int(state["step"].item() if isinstance(state["step"], torch.Tensor)
+                           else state["step"])
+                       for state in row["optimizer"].state.values() if "step" in state]
+            if not moments:
+                raise RuntimeError("Adam moment counters are missing")
+            if min(moments) != max(moments):
+                raise RuntimeError("Adam moment counters disagree within an optimizer")
+            rows.append(dict(calls=row["calls"],
+                             delegate_calls=row["delegate_calls"],
+                             updates=moments[0],
+                             moment_steps_min=min(moments),
+                             moment_steps_max=max(moments),
+                             rates=[group["lr"] for group in
+                                    row["optimizer"].param_groups]))
+        return sorted(rows, key=lambda row: len(row["rates"]))
 
     def observe(step: int, measure):
         nonlocal frozen, shift_pair
         # Always preserve the host's own 24-point recorder and its timing.
         original_checkpoint(step, measure)
-        if step % diagnostic_every == 0 or step == shift_step:
+        if (step % diagnostic_every == 0 or step == shift_step
+                or (dense_after is not None and step > dense_after)):
             with torch.random.fork_rng(devices=[]):
                 measured = measure()
                 point = {"step": step, **{key: measured[key] for key in
@@ -206,6 +236,34 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
             frozen = freeze_after_shift
             if log is not None:
                 log({"event": "shift", **after, "frozen": frozen})
+        if step == checkpoint_hook_step:
+            caller = inspect.currentframe().f_back
+            if caller is None or caller.f_code.co_name != "train_mode_hold":
+                raise RuntimeError("warm hook was not called by the frozen host")
+            values = caller.f_locals
+            required = ("generator", "critic", "prior", "opt_g", "opt_d",
+                        "ema_g", "ema_z", "stream", "means")
+            if any(name not in values for name in required):
+                raise RuntimeError("frozen host locals changed at warm checkpoint")
+            def set_step_delegate(fn):
+                if not callable(fn):
+                    raise TypeError("optimizer step delegate must be callable")
+                step_delegate["fn"] = fn
+            def declare_optimizer_accounting(*, calls: int,
+                                             moment_updates: int = steps):
+                if (type(calls) is not int or calls < steps
+                        or type(moment_updates) is not int
+                        or not step <= moment_updates <= calls):
+                    raise ValueError("invalid optimizer accounting")
+                expected_accounting.update(calls=calls,
+                                           moment_updates=moment_updates)
+            checkpoint_hook({**{name: values[name] for name in required},
+                             "noise_policy": policy,
+                             "control": control,
+                             "base_adam_step": original_adam_step,
+                             "set_step_delegate": set_step_delegate,
+                             "declare_optimizer_accounting": declare_optimizer_accounting,
+                             "completed_steps": step})
 
     started = time.perf_counter()
     applied: list[dict] = []
@@ -233,15 +291,20 @@ def _run_extended(spec: dict, recipe, noise: dict, config: dict, *,
         diagnostic=diagnostic, shift_pair=shift_pair,
         optimizer_final=optimizer_counts(),
         rate_ranges=rate_ranges,
+        post_checkpoint_rate_ranges=post_checkpoint_rate_ranges,
+        expected_optimizer_accounting=expected_accounting,
     )
     return result, context
 
 
 def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS,
               noise_horizon: int = FROZEN_STEPS,
-              diagnostic_every: int = 50, shift_step: int | None = None,
+              diagnostic_every: int = 50, dense_after: int | None = None,
+              shift_step: int | None = None,
               shift: tuple[float, float] = (1.0, 0.0),
-              freeze_after_shift: bool = False, log=None) -> dict:
+              freeze_after_shift: bool = False, log=None,
+              checkpoint_hook_step: int | None = None,
+              checkpoint_hook=None) -> dict:
     """Return a strict 24-check grade and compact evidence for one run."""
     if type(steps) is not int or steps < FROZEN_STEPS:
         raise ValueError("steps must preserve at least the frozen 1,200 updates")
@@ -249,6 +312,9 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
         raise ValueError("noise horizon must remain the frozen 1,200 updates")
     if type(diagnostic_every) is not int or diagnostic_every < 1 or 50 % diagnostic_every:
         raise ValueError("diagnostic_every must divide the frozen 50-step cadence")
+    if dense_after is not None and (type(dense_after) is not int
+                                    or not 0 <= dense_after < steps):
+        raise ValueError("dense_after must be inside the episode")
     if shift_step is not None and (type(shift_step) is not int
                                    or not FROZEN_STEPS <= shift_step < steps
                                    or shift_step % diagnostic_every):
@@ -256,6 +322,12 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
                          "and on the diagnostic cadence")
     if freeze_after_shift and shift_step is None:
         raise ValueError("a frozen continuation requires shift_step")
+    if (checkpoint_hook is None) != (checkpoint_hook_step is None):
+        raise ValueError("checkpoint hook and step must be supplied together")
+    if checkpoint_hook_step is not None and (
+            type(checkpoint_hook_step) is not int
+            or not 0 < checkpoint_hook_step <= steps):
+        raise ValueError("checkpoint hook step must be inside the episode")
     if (len(shift) != 2 or not all(isinstance(x, (int, float))
                                   and math.isfinite(x) for x in shift)
             or (shift_step is not None and shift == (0, 0))):
@@ -267,13 +339,18 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
     torch.set_num_threads(1)
     result, context = _run_extended(
         spec, recipe, noise, effective, noise_horizon=noise_horizon,
-        diagnostic_every=diagnostic_every, shift_step=shift_step,
+        diagnostic_every=diagnostic_every, dense_after=dense_after,
+        shift_step=shift_step,
         shift=shift, freeze_after_shift=freeze_after_shift, log=log,
+        checkpoint_hook_step=checkpoint_hook_step,
+        checkpoint_hook=checkpoint_hook,
     )
     diagnostic = context["diagnostic"]
     shift_pair = context["shift_pair"]
     optimizer_final = context["optimizer_final"]
     rate_ranges = context["rate_ranges"]
+    post_checkpoint_rate_ranges = context["post_checkpoint_rate_ranges"]
+    expected_accounting = context["expected_optimizer_accounting"]
     grade = test_verdict(spec, result)
     receipt = context["noise_receipt"]
     stationary_steps = range(FROZEN_STEPS - 200, FROZEN_STEPS + 1, 50)
@@ -303,7 +380,8 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
                          d=recipe.lr * recipe.d_lr_mult)
     if set(rate_ranges) != set(rate_expected):
         raise RuntimeError("G, D, or prior optimizer rate was not observed")
-    if any(rate_ranges[role]["observations"] != steps for role in rate_expected):
+    if any(rate_ranges[role]["observations"] != expected_accounting["calls"]
+           for role in rate_expected):
         raise RuntimeError("G, D, or prior optimizer rate trace is incomplete")
     if mode == "constant":
         if not (recipe.lr_anneal_start == 0 and recipe.lr_floor == 1
@@ -316,8 +394,8 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
                     and math.isclose(measured["max"], expected, rel_tol=1e-12)):
                 raise RuntimeError(f"{role} actual LR changed during constant run")
     for row in optimizer_final:
-        if row["calls"] != steps or row["updates"] != (
-                shift_step if freeze_after_shift else steps):
+        if (row["calls"] != expected_accounting["calls"]
+                or row["updates"] != expected_accounting["moment_updates"]):
             raise RuntimeError("Adam update count differs from declared continuation")
     if shift_pair is not None and any(row["updates"] != shift_step
                                       for row in shift_pair["optimizer_at_shift"]):
@@ -341,7 +419,7 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
             effective, sort_keys=True).encode()).hexdigest(),
         effective_config=effective, source_recipe=recipe.to_dict(),
         **provenance, steps=steps, noise_horizon=noise_horizon,
-        diagnostic_every=diagnostic_every,
+        diagnostic_every=diagnostic_every, dense_after=dense_after,
         shift_step=shift_step, shift=list(shift) if shift_step else None,
         freeze_after_shift=freeze_after_shift,
         status=status,
@@ -351,7 +429,9 @@ def run_probe(config: dict, *, mode: str = "constant", steps: int = FROZEN_STEPS
         observations=result["observations"], diagnostic=diagnostic,
         final=result["live"], ema=result.get("ema"),
         shift_pair=shift_pair, optimizer_final=optimizer_final,
+        expected_optimizer_accounting=expected_accounting,
         rate_ranges=rate_ranges,
+        post_checkpoint_rate_ranges=post_checkpoint_rate_ranges,
         seconds=result["seconds"],
         noise=dict(step_calls=receipt["step_calls"],
                    horizon=receipt["total_steps"],
@@ -368,7 +448,8 @@ def match_frozen_control(active: dict, frozen: dict) -> dict:
     if not frozen.get("freeze_after_shift"):
         raise ValueError("control must freeze all Adam updates after the shift")
     matching = ("mode", "config_sha256", "source_sha256", "runtime", "steps",
-                "noise_horizon", "diagnostic_every", "shift_step", "shift")
+                "noise_horizon", "diagnostic_every", "dense_after",
+                "shift_step", "shift")
     changed = [key for key in matching if active.get(key) != frozen.get(key)]
     if changed:
         raise ValueError(f"shift and frozen control differ in {changed}")
@@ -406,6 +487,8 @@ def main() -> None:
     parser.add_argument("--mode", choices=("scheduled", "constant"), default="constant")
     parser.add_argument("--steps", type=int, default=FROZEN_STEPS)
     parser.add_argument("--diagnostic-every", type=int, default=50)
+    parser.add_argument("--dense-after", type=int,
+                        help="also record every update after this step")
     parser.add_argument("--shift-step", type=int)
     parser.add_argument("--shift-x", type=float, default=1.0)
     parser.add_argument("--shift-y", type=float, default=0.0)
@@ -422,7 +505,7 @@ def main() -> None:
         print(json.dumps(row, sort_keys=True, allow_nan=False), flush=True)
     evidence = run_probe(
         config, mode=args.mode, steps=args.steps,
-        diagnostic_every=args.diagnostic_every,
+        diagnostic_every=args.diagnostic_every, dense_after=args.dense_after,
         shift_step=args.shift_step, shift=(args.shift_x, args.shift_y),
         freeze_after_shift=args.freeze_after_shift, log=log,
     )
