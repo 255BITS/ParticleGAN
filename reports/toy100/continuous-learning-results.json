@@ -1,0 +1,2762 @@
+{
+  "schema": "continuous-learning-results-v1",
+  "meaning": "Completed fixed-seed scratch screens and their faithful controls; no production-gate winner.",
+  "gate": {
+    "mode_hold_steps": 1200,
+    "terminal_steps": [
+      1000,
+      1050,
+      1100,
+      1150,
+      1200
+    ],
+    "pass_rule": "8 of 8 modes and HQ >= 0.9 at each of five terminal checks",
+    "continuation_rule": "uninterrupted training, fixed original noise horizon, every dense live check passes"
+  },
+  "counts": {
+    "primary_candidate_rows": 36,
+    "primary_control_rows": 3,
+    "primary_first_failed_mode_hold": 28,
+    "primary_first_failed_trajectory": 8,
+    "calibration_unique_arms": 3,
+    "calibration_runs": 5,
+    "diagnostic_followups": 1,
+    "production_gate_winners": 0
+  },
+  "limits": [
+    "No training-seed sweep. Same-seed method controls are separate rows, not statistical replications.",
+    "Scratch optimizer or game-policy rows are not eligible for the shared production gate.",
+    "A cold 1,200-step rejection does not establish fundamental impossibility or exclude a successful warm-state mechanism.",
+    "No unattempted downstream task is counted as a pass or failure.",
+    "Eps-wave1/2 saved episodes changed after stage hashes were recorded. Original stage hashes and current file hashes are both recorded; the independent regrade matches current files, grades them FAIL, and the production gate rejects them."
+  ],
+  "lanes": [
+    {
+      "id": "faithful-calibration",
+      "phase": "cold_and_continuation",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence"
+      },
+      "run_count": 5,
+      "unique_arms": 3,
+      "source_hashes": {
+        "benchmarks/toy100/continuous_probe.py": "f13aac78039a0ed780cdd169d098694a01c8d46ac8649e1fa27346e13a949f1c",
+        "source.tar.gz": "2940ae9525535c45ffbf72395851c8a711d3f217ce79ab72ffd47d3dbdf3fd95"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "reports/toy100/continuous-evidence/manifest.json",
+        "sha256": "3c32ed149aa0385d4ba1b017a307828353cdddbea510f8cfe4458a13ed71a8f2"
+      },
+      "runs": [
+        {
+          "tag": "scheduled1200",
+          "kind": "control",
+          "phase": "cold",
+          "steps": 1200,
+          "status": "PASS",
+          "first_failed_stage": null,
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 8,
+              "hq": 0.999755859375
+            },
+            {
+              "step": 1050,
+              "modes": 8,
+              "hq": 1.0
+            },
+            {
+              "step": 1100,
+              "modes": 8,
+              "hq": 1.0
+            },
+            {
+              "step": 1150,
+              "modes": 8,
+              "hq": 1.0
+            },
+            {
+              "step": 1200,
+              "modes": 8,
+              "hq": 1.0
+            }
+          ],
+          "final": {
+            "hq": 1.0,
+            "modes": 8
+          },
+          "stationary": {
+            "passing_checks": 5,
+            "checks": 5,
+            "min_modes": 8,
+            "min_hq": 0.999755859375
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/scheduled1200.json.gz",
+            "sha256": "0003952abc40de3e8efcb0a4a7db2e32f67b24f698f51d9750a397b6ce8b0bbd"
+          }
+        },
+        {
+          "tag": "scheduled2400",
+          "kind": "control",
+          "phase": "continuation",
+          "steps": 2400,
+          "status": "PASS",
+          "first_failed_stage": null,
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 8,
+              "hq": 0.999755859375
+            },
+            {
+              "step": 1050,
+              "modes": 8,
+              "hq": 1.0
+            },
+            {
+              "step": 1100,
+              "modes": 8,
+              "hq": 1.0
+            },
+            {
+              "step": 1150,
+              "modes": 8,
+              "hq": 1.0
+            },
+            {
+              "step": 1200,
+              "modes": 8,
+              "hq": 1.0
+            }
+          ],
+          "final": {
+            "hq": 0.99951171875,
+            "modes": 8
+          },
+          "stationary": {
+            "passing_checks": 5,
+            "checks": 5,
+            "min_modes": 8,
+            "min_hq": 0.999755859375
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/scheduled2400.json.gz",
+            "sha256": "19fca0e79d7c25886e4fafcff54274bd33534c57dae5fdf8c90110b6375ae3d9"
+          },
+          "continued_hold": {
+            "checks": 120,
+            "passing_checks": 120,
+            "passing_suffix": 120,
+            "min_modes": 8,
+            "min_hq": 0.998291015625
+          }
+        },
+        {
+          "tag": "constant1200",
+          "kind": "control",
+          "phase": "cold",
+          "steps": 1200,
+          "status": "FAIL",
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 5,
+              "hq": 0.202880859375
+            },
+            {
+              "step": 1050,
+              "modes": 8,
+              "hq": 0.626708984375
+            },
+            {
+              "step": 1100,
+              "modes": 8,
+              "hq": 0.444091796875
+            },
+            {
+              "step": 1150,
+              "modes": 4,
+              "hq": 0.24365234375
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.369384765625
+            }
+          ],
+          "final": {
+            "hq": 0.369384765625,
+            "modes": 7
+          },
+          "stationary": {
+            "passing_checks": 0,
+            "checks": 5,
+            "min_modes": 4,
+            "min_hq": 0.202880859375
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/constant1200.json.gz",
+            "sha256": "318fb427fc69c7893cab5fb6c7dd897db9b012ee2ed30261cbebbd0dc8543728"
+          }
+        },
+        {
+          "tag": "r1r2_1200",
+          "kind": "candidate_calibration",
+          "phase": "cold",
+          "steps": 1200,
+          "status": "PASS",
+          "first_failed_stage": null,
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 8,
+              "hq": 1.0
+            },
+            {
+              "step": 1050,
+              "modes": 8,
+              "hq": 1.0
+            },
+            {
+              "step": 1100,
+              "modes": 8,
+              "hq": 0.92138671875
+            },
+            {
+              "step": 1150,
+              "modes": 8,
+              "hq": 0.9677734375
+            },
+            {
+              "step": 1200,
+              "modes": 8,
+              "hq": 0.9990234375
+            }
+          ],
+          "final": {
+            "hq": 0.9990234375,
+            "modes": 8
+          },
+          "stationary": {
+            "passing_checks": 5,
+            "checks": 5,
+            "min_modes": 8,
+            "min_hq": 0.92138671875
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/r1r2_1200.json.gz",
+            "sha256": "d61d563e36e5b37a093ac082d30c8cd1ae53f0d5899dc91da35c00376a8a0771"
+          }
+        },
+        {
+          "tag": "r1r2_2400",
+          "kind": "candidate_calibration",
+          "phase": "continuation",
+          "steps": 2400,
+          "status": "FAIL",
+          "first_failed_stage": "mode_hold_continuation",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 8,
+              "hq": 1.0
+            },
+            {
+              "step": 1050,
+              "modes": 8,
+              "hq": 1.0
+            },
+            {
+              "step": 1100,
+              "modes": 8,
+              "hq": 0.92138671875
+            },
+            {
+              "step": 1150,
+              "modes": 8,
+              "hq": 0.9677734375
+            },
+            {
+              "step": 1200,
+              "modes": 8,
+              "hq": 0.9990234375
+            }
+          ],
+          "final": {
+            "hq": 1.0,
+            "modes": 8
+          },
+          "stationary": {
+            "passing_checks": 5,
+            "checks": 5,
+            "min_modes": 8,
+            "min_hq": 0.92138671875
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "reports/toy100/continuous-evidence/r1r2_2400.json.gz",
+            "sha256": "eaf5bf748d0843a14191eb5e0f233bfb00fbe1a44532e9a21c2fe5c39855ac66"
+          },
+          "continued_hold": {
+            "checks": 120,
+            "passing_checks": 28,
+            "passing_suffix": 2,
+            "min_modes": 0,
+            "min_hq": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "eps-wave1",
+      "phase": "cold",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/eps-wave1"
+      },
+      "declared_rows": 10,
+      "candidate_rows": 9,
+      "control_rows": 1,
+      "source_hashes": {
+        "reports/toy100/continuous_candidates.py": "2dec88c1b41e0c9cd7b9f3c2f50c98c1958f8f8a38dbdec28e0380ce0e8a19ef",
+        "reports/toy100/continuous_screen.py": "473138e598b5d5745ac7d343fe28ce470500ff0651632cefb81ecfeead985326"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/eps-wave1/manifest.json",
+        "sha256": "e652c836ea25a14d30e72a3c33918b93836eac2da21d0f30e8b52487acf104dd"
+      },
+      "posthoc_regrade": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/independent-eps-audit.json",
+        "sha256": "1dbb0284f001d4825ba9a57e7bbe2f923feec5b9be8388eea0a74089e2d8ffb1"
+      },
+      "rows": [
+        {
+          "tag": "constant_control",
+          "kind": "control",
+          "phase": "cold",
+          "lr": 0.00425,
+          "options": {
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 5,
+              "hq": 0.202880859375
+            },
+            {
+              "step": 1050,
+              "modes": 8,
+              "hq": 0.626708984375
+            },
+            {
+              "step": 1100,
+              "modes": 8,
+              "hq": 0.444091796875
+            },
+            {
+              "step": 1150,
+              "modes": 4,
+              "hq": 0.24365234375
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.369384765625
+            }
+          ],
+          "final": {
+            "hq": 0.369384765625,
+            "modes": 7
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/constant_control/mode_hold/episodes/constant_control__mode_hold.json.gz",
+            "sha256": "48f098235bd16b0cca0a21356205cf9f58ec09dac6791ce0e5c44c3a746a36ea"
+          },
+          "original_episode_sha256": "2c48442d0aa0143527407f46803e0306b8a36a0c920df0228c3768d0173be449",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/constant_control/mode_hold/scratch-policy.json.gz",
+            "sha256": "6df59a35f24bf156578562b60f64f12e44b5f971ebb0bcc15132aa08e131236d"
+          }
+        },
+        {
+          "tag": "eps_lr0p001_e0p0001",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.001,
+          "options": {
+            "network_eps": 0.0001,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.526123046875
+            },
+            {
+              "step": 1050,
+              "modes": 7,
+              "hq": 0.783935546875
+            },
+            {
+              "step": 1100,
+              "modes": 7,
+              "hq": 0.79736328125
+            },
+            {
+              "step": 1150,
+              "modes": 7,
+              "hq": 0.775634765625
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.830078125
+            }
+          ],
+          "final": {
+            "hq": 0.830078125,
+            "modes": 7
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p001_e0p0001/mode_hold/episodes/eps_lr0p001_e0p0001__mode_hold.json.gz",
+            "sha256": "e1790d6e70384097c16e705bcbe12e726f65d182d5da3f1ee8c06264b3cd0e17"
+          },
+          "original_episode_sha256": "f0966e3da0fe49c7bce49ca1a08be159a8bf0550a7ad396ba2f1df8480b8f45c",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p001_e0p0001/mode_hold/scratch-policy.json.gz",
+            "sha256": "5da2c771662048356b57b5b6634334cc12aa30a9cfa174040f3799e30d9fb5ad"
+          }
+        },
+        {
+          "tag": "eps_lr0p001_e0p001",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.001,
+          "options": {
+            "network_eps": 0.001,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 8,
+              "hq": 0.857666015625
+            },
+            {
+              "step": 1050,
+              "modes": 8,
+              "hq": 0.910400390625
+            },
+            {
+              "step": 1100,
+              "modes": 8,
+              "hq": 0.91064453125
+            },
+            {
+              "step": 1150,
+              "modes": 8,
+              "hq": 0.801025390625
+            },
+            {
+              "step": 1200,
+              "modes": 8,
+              "hq": 0.908203125
+            }
+          ],
+          "final": {
+            "hq": 0.908203125,
+            "modes": 8
+          },
+          "passing_suffix": 1,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p001_e0p001/mode_hold/episodes/eps_lr0p001_e0p001__mode_hold.json.gz",
+            "sha256": "5c523e983e35062ad8cb6c8857b2a1207f4895e42510ef0a9041ba239a415638"
+          },
+          "original_episode_sha256": "a861665f8a0258cc1a164f187eab2ad207746e8ecfecb3b0de6f9a98169e878e",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p001_e0p001/mode_hold/scratch-policy.json.gz",
+            "sha256": "32a58ed1e71425c458d45270d42ca59be8d6b4e9e73884bf2dea7864135ad6f8"
+          }
+        },
+        {
+          "tag": "eps_lr0p001_e0p01",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.001,
+          "options": {
+            "network_eps": 0.01,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 2,
+              "hq": 0.09765625
+            },
+            {
+              "step": 1050,
+              "modes": 3,
+              "hq": 0.340087890625
+            },
+            {
+              "step": 1100,
+              "modes": 1,
+              "hq": 0.236083984375
+            },
+            {
+              "step": 1150,
+              "modes": 3,
+              "hq": 0.41162109375
+            },
+            {
+              "step": 1200,
+              "modes": 3,
+              "hq": 0.433837890625
+            }
+          ],
+          "final": {
+            "hq": 0.433837890625,
+            "modes": 3
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p001_e0p01/mode_hold/episodes/eps_lr0p001_e0p01__mode_hold.json.gz",
+            "sha256": "0d95a60a600a15173cde1c00d5298bb57a4f488b792e8ad3636fe8e8197715e3"
+          },
+          "original_episode_sha256": "19839dc2ac67e75e975da2a515f15403b574576fd6880a6d6a06f03250de841f",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p001_e0p01/mode_hold/scratch-policy.json.gz",
+            "sha256": "b15fac79417a18cf7b9273fbdecaf00469a5c1146f5f7b5b987df9137e9b0647"
+          }
+        },
+        {
+          "tag": "eps_lr0p0025_e0p0001",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.0025,
+          "options": {
+            "network_eps": 0.0001,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 3,
+              "hq": 0.503173828125
+            },
+            {
+              "step": 1050,
+              "modes": 3,
+              "hq": 0.583984375
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.373046875
+            },
+            {
+              "step": 1150,
+              "modes": 5,
+              "hq": 0.504638671875
+            },
+            {
+              "step": 1200,
+              "modes": 4,
+              "hq": 0.6796875
+            }
+          ],
+          "final": {
+            "hq": 0.6796875,
+            "modes": 4
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p0025_e0p0001/mode_hold/episodes/eps_lr0p0025_e0p0001__mode_hold.json.gz",
+            "sha256": "5effc13f54066918853d602a21a7e642756f16e053fa39411d93d50d8a1b0a89"
+          },
+          "original_episode_sha256": "133e8e6d3a14a4141da030054f769060b744f48831ff636192dfc15abc1ad2c4",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p0025_e0p0001/mode_hold/scratch-policy.json.gz",
+            "sha256": "1d426e8e6ecdd66a9e133e5d28b3c0952142fa6b1707b36da2b0fd739e092d45"
+          }
+        },
+        {
+          "tag": "eps_lr0p0025_e0p001",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.0025,
+          "options": {
+            "network_eps": 0.001,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 8,
+              "hq": 0.7236328125
+            },
+            {
+              "step": 1050,
+              "modes": 7,
+              "hq": 0.591552734375
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.416015625
+            },
+            {
+              "step": 1150,
+              "modes": 5,
+              "hq": 0.504638671875
+            },
+            {
+              "step": 1200,
+              "modes": 8,
+              "hq": 0.9609375
+            }
+          ],
+          "final": {
+            "hq": 0.9609375,
+            "modes": 8
+          },
+          "passing_suffix": 1,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p0025_e0p001/mode_hold/episodes/eps_lr0p0025_e0p001__mode_hold.json.gz",
+            "sha256": "f60e8e6168705496487f54bc7b8423f057422f63aa1dcedc43ec12e360ddc0d1"
+          },
+          "original_episode_sha256": "3d0be2cda99684b3ef9e2d16129c57348604a8a5c0cd873b5140fc0a360eefa3",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p0025_e0p001/mode_hold/scratch-policy.json.gz",
+            "sha256": "82f4174d3ff7735914ac577825e47e8c2b5317e53809fbce84075aaba0b5e520"
+          }
+        },
+        {
+          "tag": "eps_lr0p0025_e0p01",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.0025,
+          "options": {
+            "network_eps": 0.01,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 3,
+              "hq": 0.095703125
+            },
+            {
+              "step": 1050,
+              "modes": 4,
+              "hq": 0.269775390625
+            },
+            {
+              "step": 1100,
+              "modes": 7,
+              "hq": 0.71435546875
+            },
+            {
+              "step": 1150,
+              "modes": 4,
+              "hq": 0.38232421875
+            },
+            {
+              "step": 1200,
+              "modes": 4,
+              "hq": 0.466064453125
+            }
+          ],
+          "final": {
+            "hq": 0.466064453125,
+            "modes": 4
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p0025_e0p01/mode_hold/episodes/eps_lr0p0025_e0p01__mode_hold.json.gz",
+            "sha256": "27b0d52bf57cea5e6728f7e69bfae898b713412d6c1bd2bfb973c5459fd787c0"
+          },
+          "original_episode_sha256": "65a562d80b756ff6a91a98868178e707b9a834f6897662af1412254cd815d3bd",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p0025_e0p01/mode_hold/scratch-policy.json.gz",
+            "sha256": "34cfa853003f0d87169d94c0bf59ad3decae5688953fa8c8f9421d4ced127f66"
+          }
+        },
+        {
+          "tag": "eps_lr0p00425_e0p0001",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.00425,
+          "options": {
+            "network_eps": 0.0001,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 3,
+              "hq": 0.16650390625
+            },
+            {
+              "step": 1050,
+              "modes": 2,
+              "hq": 0.023681640625
+            },
+            {
+              "step": 1100,
+              "modes": 4,
+              "hq": 0.34326171875
+            },
+            {
+              "step": 1150,
+              "modes": 6,
+              "hq": 0.801025390625
+            },
+            {
+              "step": 1200,
+              "modes": 5,
+              "hq": 0.461181640625
+            }
+          ],
+          "final": {
+            "hq": 0.461181640625,
+            "modes": 5
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p00425_e0p0001/mode_hold/episodes/eps_lr0p00425_e0p0001__mode_hold.json.gz",
+            "sha256": "9dae0f5c108cdb4c14d2ba0cd69feb41360f6f9ed7ee54335d17a0bca2ebbfdc"
+          },
+          "original_episode_sha256": "89bcffb2ee2456f7dc15f796e30060f26506bdbc596c2b13490bd0c738dfa70e",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p00425_e0p0001/mode_hold/scratch-policy.json.gz",
+            "sha256": "0e7f724b36c2ee22b722b37a009db94095f420f41ae9aedf8aeb269d82ad1c9c"
+          }
+        },
+        {
+          "tag": "eps_lr0p00425_e0p001",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.00425,
+          "options": {
+            "network_eps": 0.001,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 8,
+              "hq": 0.489501953125
+            },
+            {
+              "step": 1050,
+              "modes": 7,
+              "hq": 0.7568359375
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.410888671875
+            },
+            {
+              "step": 1150,
+              "modes": 5,
+              "hq": 0.143310546875
+            },
+            {
+              "step": 1200,
+              "modes": 8,
+              "hq": 0.76220703125
+            }
+          ],
+          "final": {
+            "hq": 0.76220703125,
+            "modes": 8
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p00425_e0p001/mode_hold/episodes/eps_lr0p00425_e0p001__mode_hold.json.gz",
+            "sha256": "bf46ff8d7ba5d2388558d3bf9ed70bfe2ef2a55465d843ef08d21bb240579a91"
+          },
+          "original_episode_sha256": "de1c00d90d0144555858330279d19de7bc748e731884792565cee49fdfaa4c2c",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p00425_e0p001/mode_hold/scratch-policy.json.gz",
+            "sha256": "611fa5cb8bbf57add3b14b63d669604a299f6feca53c309f6ea73699ae2addce"
+          }
+        },
+        {
+          "tag": "eps_lr0p00425_e0p01",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.00425,
+          "options": {
+            "network_eps": 0.01,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 4,
+              "hq": 0.1279296875
+            },
+            {
+              "step": 1050,
+              "modes": 5,
+              "hq": 0.30078125
+            },
+            {
+              "step": 1100,
+              "modes": 7,
+              "hq": 0.426025390625
+            },
+            {
+              "step": 1150,
+              "modes": 4,
+              "hq": 0.416015625
+            },
+            {
+              "step": 1200,
+              "modes": 8,
+              "hq": 0.841552734375
+            }
+          ],
+          "final": {
+            "hq": 0.841552734375,
+            "modes": 8
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p00425_e0p01/mode_hold/episodes/eps_lr0p00425_e0p01__mode_hold.json.gz",
+            "sha256": "b1b5a73efc95b4b9fc4c5e42b1ee4fcdff33aa2f1eb7497238abe409a02914fc"
+          },
+          "original_episode_sha256": "7e401fdf8ad9965d8390ab1f49f013c53ac5f56f7ff779e43b9f65fc0793bd74",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave1/eps_lr0p00425_e0p01/mode_hold/scratch-policy.json.gz",
+            "sha256": "d8248205603a8f042edd0842d14a8ab2f90c1501c3af79055386eb93a52abc9f"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eps-wave2",
+      "phase": "cold",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/eps-wave2"
+      },
+      "declared_rows": 10,
+      "candidate_rows": 10,
+      "control_rows": 0,
+      "source_hashes": {
+        "reports/toy100/continuous_candidates.py": "fe6d37493bc3e44fab88a925b16454a3a1d05c6af738a75230b5ab42a17e5ccf",
+        "reports/toy100/continuous_screen.py": "473138e598b5d5745ac7d343fe28ce470500ff0651632cefb81ecfeead985326"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/eps-wave2/manifest.json",
+        "sha256": "664c07b8d885caa2a78f42e7d09aec6b6900b9386f77255a547e52d0a086fead"
+      },
+      "posthoc_regrade": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/independent-eps-audit.json",
+        "sha256": "1dbb0284f001d4825ba9a57e7bbe2f923feec5b9be8388eea0a74089e2d8ffb1"
+      },
+      "rows": [
+        {
+          "tag": "g_eps_lr0p0025_e0p01",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.0025,
+          "options": {
+            "g_eps": 0.01,
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 7,
+              "hq": 0.9521484375
+            },
+            {
+              "step": 1050,
+              "modes": 5,
+              "hq": 0.393310546875
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.58447265625
+            },
+            {
+              "step": 1150,
+              "modes": 7,
+              "hq": 0.72021484375
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.987060546875
+            }
+          ],
+          "final": {
+            "hq": 0.987060546875,
+            "modes": 7
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p0025_e0p01/mode_hold/episodes/g_eps_lr0p0025_e0p01__mode_hold.json.gz",
+            "sha256": "5ede61b9fdb5236f1805d117369d031339d34db2cc682f7385780132a1a8c3a8"
+          },
+          "original_episode_sha256": "a2bea4a032a0653cd9e3a8399aa469061dbd339d1350bf15f5b1ca43008f132a",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p0025_e0p01/mode_hold/scratch-policy.json.gz",
+            "sha256": "23aaf1c79278af00cdba790f0a858570d1c42c4210d3f031496471e442c5c82c"
+          }
+        },
+        {
+          "tag": "g_eps_lr0p0025_e0p03",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.0025,
+          "options": {
+            "g_eps": 0.03,
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.498291015625
+            },
+            {
+              "step": 1050,
+              "modes": 6,
+              "hq": 0.7353515625
+            },
+            {
+              "step": 1100,
+              "modes": 7,
+              "hq": 0.771484375
+            },
+            {
+              "step": 1150,
+              "modes": 7,
+              "hq": 0.697265625
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.763916015625
+            }
+          ],
+          "final": {
+            "hq": 0.763916015625,
+            "modes": 7
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p0025_e0p03/mode_hold/episodes/g_eps_lr0p0025_e0p03__mode_hold.json.gz",
+            "sha256": "a6eb1aba0c03e428b95a8bb141c30963424bb91e07c269f1983b7601a73cf5b2"
+          },
+          "original_episode_sha256": "ce2356d95a007e8af82845124cff4dea398d7bb7961849b213ac15d29f28aab3",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p0025_e0p03/mode_hold/scratch-policy.json.gz",
+            "sha256": "19f304b72483f2e26ee3c77f3709ef00d78e4ac2ddd800e801edd8ff750cc7f3"
+          }
+        },
+        {
+          "tag": "g_eps_lr0p0025_e0p1",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.0025,
+          "options": {
+            "g_eps": 0.1,
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 1,
+              "hq": 0.162109375
+            },
+            {
+              "step": 1050,
+              "modes": 2,
+              "hq": 0.33642578125
+            },
+            {
+              "step": 1100,
+              "modes": 2,
+              "hq": 0.4150390625
+            },
+            {
+              "step": 1150,
+              "modes": 3,
+              "hq": 0.5791015625
+            },
+            {
+              "step": 1200,
+              "modes": 3,
+              "hq": 0.5791015625
+            }
+          ],
+          "final": {
+            "hq": 0.5791015625,
+            "modes": 3
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p0025_e0p1/mode_hold/episodes/g_eps_lr0p0025_e0p1__mode_hold.json.gz",
+            "sha256": "9bd7ad5fa2445757659e68cd5320ffd6703475db39486d9212d121d186f8792f"
+          },
+          "original_episode_sha256": "8b6cd27b0120de2cd85760ad303b02c6b42d6544c9531d8bcb5b94aceb16a645",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p0025_e0p1/mode_hold/scratch-policy.json.gz",
+            "sha256": "3662d0aa9e27ad9842d70be3b82bf953f17c59c6198bcd79c418e5eb4eeba0d0"
+          }
+        },
+        {
+          "tag": "g_eps_lr0p0025_e0p3",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.0025,
+          "options": {
+            "g_eps": 0.3,
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 2,
+              "hq": 0.545166015625
+            },
+            {
+              "step": 1050,
+              "modes": 2,
+              "hq": 0.591064453125
+            },
+            {
+              "step": 1100,
+              "modes": 2,
+              "hq": 0.591064453125
+            },
+            {
+              "step": 1150,
+              "modes": 2,
+              "hq": 0.67529296875
+            },
+            {
+              "step": 1200,
+              "modes": 2,
+              "hq": 0.63916015625
+            }
+          ],
+          "final": {
+            "hq": 0.63916015625,
+            "modes": 2
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p0025_e0p3/mode_hold/episodes/g_eps_lr0p0025_e0p3__mode_hold.json.gz",
+            "sha256": "fadb6488006eebe3157b7ac4ea92ee1aab50bb599056c242edef5f6a4265f232"
+          },
+          "original_episode_sha256": "67fce9a271229970e7ce3a40ea183d24535031ef45ab4fedfcfee267b872764c",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p0025_e0p3/mode_hold/scratch-policy.json.gz",
+            "sha256": "abc439e85b07836467d8f9be715ef6283c7e8d55cfe9635aa1d0969c8c03c8e0"
+          }
+        },
+        {
+          "tag": "g_eps_lr0p00425_e0p01",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.00425,
+          "options": {
+            "g_eps": 0.01,
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 1,
+              "hq": 0.000732421875
+            },
+            {
+              "step": 1050,
+              "modes": 4,
+              "hq": 0.200439453125
+            },
+            {
+              "step": 1100,
+              "modes": 5,
+              "hq": 0.58935546875
+            },
+            {
+              "step": 1150,
+              "modes": 1,
+              "hq": 0.251953125
+            },
+            {
+              "step": 1200,
+              "modes": 1,
+              "hq": 0.072021484375
+            }
+          ],
+          "final": {
+            "hq": 0.072021484375,
+            "modes": 1
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p00425_e0p01/mode_hold/episodes/g_eps_lr0p00425_e0p01__mode_hold.json.gz",
+            "sha256": "651e2d05f1de342b1223a0f8b664f562c9d3a55b618695df0775a5504895a598"
+          },
+          "original_episode_sha256": "5f38b6edcb2e75a5d7d4f1654c75c85f324877f39e488d2cbde8470e34263613",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p00425_e0p01/mode_hold/scratch-policy.json.gz",
+            "sha256": "3a8932e5d63b589af603b25485dff1d15817bf3fb01466f25d7bf118a301edc1"
+          }
+        },
+        {
+          "tag": "g_eps_lr0p00425_e0p03",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.00425,
+          "options": {
+            "g_eps": 0.03,
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 4,
+              "hq": 0.278076171875
+            },
+            {
+              "step": 1050,
+              "modes": 6,
+              "hq": 0.50537109375
+            },
+            {
+              "step": 1100,
+              "modes": 7,
+              "hq": 0.615478515625
+            },
+            {
+              "step": 1150,
+              "modes": 8,
+              "hq": 0.77587890625
+            },
+            {
+              "step": 1200,
+              "modes": 8,
+              "hq": 0.999267578125
+            }
+          ],
+          "final": {
+            "hq": 0.999267578125,
+            "modes": 8
+          },
+          "passing_suffix": 1,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p00425_e0p03/mode_hold/episodes/g_eps_lr0p00425_e0p03__mode_hold.json.gz",
+            "sha256": "80e73ef67a7db1fe4b2be91d948f76692b377c3fc441d2d885e0261332b4e16b"
+          },
+          "original_episode_sha256": "4ead42c3a6819e6ac9d5dd62b830f93879d0a51a8877f448a8c64d138b2bdab3",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p00425_e0p03/mode_hold/scratch-policy.json.gz",
+            "sha256": "d0a2bc341f4e20490a25ca75ff3d59f7eea8b531f7b0b54d1c9c2a3d8adfad1f"
+          }
+        },
+        {
+          "tag": "g_eps_lr0p00425_e0p1",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.00425,
+          "options": {
+            "g_eps": 0.1,
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.7333984375
+            },
+            {
+              "step": 1050,
+              "modes": 6,
+              "hq": 0.718505859375
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.610595703125
+            },
+            {
+              "step": 1150,
+              "modes": 5,
+              "hq": 0.665283203125
+            },
+            {
+              "step": 1200,
+              "modes": 6,
+              "hq": 0.6123046875
+            }
+          ],
+          "final": {
+            "hq": 0.6123046875,
+            "modes": 6
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p00425_e0p1/mode_hold/episodes/g_eps_lr0p00425_e0p1__mode_hold.json.gz",
+            "sha256": "5cfacc77e4ca653076941cd8139f365a3f1e6fc96879756e169b730d91aa74fe"
+          },
+          "original_episode_sha256": "24a6a465e6127a9b5428424f8437b20f6ff42bf32cc0e0b5d514fbafcb1d9057",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p00425_e0p1/mode_hold/scratch-policy.json.gz",
+            "sha256": "5dfe40c68b1986748972bdf26ef266c7cb202a3d884d77d66a5539adb981bfbf"
+          }
+        },
+        {
+          "tag": "g_eps_lr0p00425_e0p3",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.00425,
+          "options": {
+            "g_eps": 0.3,
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 5,
+              "hq": 0.75
+            },
+            {
+              "step": 1050,
+              "modes": 6,
+              "hq": 0.76416015625
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.791259765625
+            },
+            {
+              "step": 1150,
+              "modes": 6,
+              "hq": 0.471923828125
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.843994140625
+            }
+          ],
+          "final": {
+            "hq": 0.843994140625,
+            "modes": 7
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p00425_e0p3/mode_hold/episodes/g_eps_lr0p00425_e0p3__mode_hold.json.gz",
+            "sha256": "2324788b62002530ac72f3acfa0f2f81847ab5bf7fff4202970f838b84ea1634"
+          },
+          "original_episode_sha256": "ca1c6079cda6beaae180679d560c6aab31106817be71af890e6fedbd5f7c212a",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_eps_lr0p00425_e0p3/mode_hold/scratch-policy.json.gz",
+            "sha256": "9542f0bbb310b0336d70bdfbc7ce8bcfafc314cb457e05e198dcfff1bf499e0f"
+          }
+        },
+        {
+          "tag": "g_rate_0p0002",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.0002,
+          "options": {
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 7,
+              "hq": 0.6923828125
+            },
+            {
+              "step": 1050,
+              "modes": 7,
+              "hq": 1.0
+            },
+            {
+              "step": 1100,
+              "modes": 7,
+              "hq": 0.999755859375
+            },
+            {
+              "step": 1150,
+              "modes": 7,
+              "hq": 0.996826171875
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 1.0
+            }
+          ],
+          "final": {
+            "hq": 1.0,
+            "modes": 7
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_rate_0p0002/mode_hold/episodes/g_rate_0p0002__mode_hold.json.gz",
+            "sha256": "3200d7a70db2fdf3bf835238b8efd04ddc78a1bc5f907b7919e436d614bb7807"
+          },
+          "original_episode_sha256": "bc226a2c00cbedc79469870f30b49babb6864eefa4737f6fca3636def9098dca",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_rate_0p0002/mode_hold/scratch-policy.json.gz",
+            "sha256": "a3725b012bbf981ea1a365c45ce5aa19647c80ceb2472c4dfeddb7f8d047f002"
+          }
+        },
+        {
+          "tag": "g_rate_0p0005",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.0005,
+          "options": {
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 7,
+              "hq": 0.73779296875
+            },
+            {
+              "step": 1050,
+              "modes": 7,
+              "hq": 0.917236328125
+            },
+            {
+              "step": 1100,
+              "modes": 7,
+              "hq": 0.916748046875
+            },
+            {
+              "step": 1150,
+              "modes": 7,
+              "hq": 0.999267578125
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.999755859375
+            }
+          ],
+          "final": {
+            "hq": 0.999755859375,
+            "modes": 7
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_rate_0p0005/mode_hold/episodes/g_rate_0p0005__mode_hold.json.gz",
+            "sha256": "8d6d80ea6d1042911d85100eea0ad5856722a965256794837cc9eb60102db9c9"
+          },
+          "original_episode_sha256": "91c36bfc98424820e999d74f3539b83efcf8277dc7762ebd424d88eca74191c6",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-wave2/g_rate_0p0005/mode_hold/scratch-policy.json.gz",
+            "sha256": "1dad5227bb502526714aab9c3faf6cbb81c9806d8a499a090d2d478dd4c1346c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "eps-r1",
+      "phase": "cold",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/eps-r1"
+      },
+      "declared_rows": 8,
+      "candidate_rows": 8,
+      "control_rows": 0,
+      "source_hashes": {
+        "reports/toy100/continuous_candidates.py": "fe6d37493bc3e44fab88a925b16454a3a1d05c6af738a75230b5ab42a17e5ccf",
+        "reports/toy100/continuous_screen.py": "b674bd07aee0dcd5b024a9049816e73a4a91c1291e8e327a4f60f10b6c376df9"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/eps-r1/manifest.json",
+        "sha256": "0714790b5a3196ce68d42605e2b18e8abc551ddcf90db9cd26b85e84773c96b9"
+      },
+      "posthoc_regrade": null,
+      "rows": [
+        {
+          "tag": "r1_eps_00",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.001,
+          "options": {
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "terminal": [
+            {
+              "step": 334,
+              "identity_mse": 0.26683297753334045
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.26202496886253357
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.2620111405849457
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.26209697127342224
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.2610122859477997
+            }
+          ],
+          "final": {
+            "identity_mse": 0.2610122859477997
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_00/trajectory/episodes/r1_eps_00__trajectory.json.gz",
+            "sha256": "5c790d7670cca6e8aea7098b9b28556a496f3a85f9b318f1f0baa69acd24d1a9"
+          },
+          "original_episode_sha256": "5c790d7670cca6e8aea7098b9b28556a496f3a85f9b318f1f0baa69acd24d1a9",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_00/trajectory/scratch-policy.json.gz",
+            "sha256": "7b71f94241d10b386d2fe9e37e3f408bf462a9b6f8ca100145c4f47bf0be7c89"
+          }
+        },
+        {
+          "tag": "r1_eps_01",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.001,
+          "options": {
+            "g_eps": 0.0001,
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "terminal": [
+            {
+              "step": 334,
+              "identity_mse": 0.2652488648891449
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.26015928387641907
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.26186710596084595
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.26716551184654236
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.26416707038879395
+            }
+          ],
+          "final": {
+            "identity_mse": 0.26416707038879395
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_01/trajectory/episodes/r1_eps_01__trajectory.json.gz",
+            "sha256": "b098551e32c1397231cc36c834bbe0758f686b86b7a000535de0712c6e46d665"
+          },
+          "original_episode_sha256": "b098551e32c1397231cc36c834bbe0758f686b86b7a000535de0712c6e46d665",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_01/trajectory/scratch-policy.json.gz",
+            "sha256": "0d609714dc2d38e6be7a1e09714fcb80d5e1f0aa58fe1287c297e810160decc9"
+          }
+        },
+        {
+          "tag": "r1_eps_02",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.001,
+          "options": {
+            "g_eps": 0.001,
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "terminal": [
+            {
+              "step": 334,
+              "identity_mse": 0.2643730342388153
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.2631223499774933
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.26364728808403015
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.26317402720451355
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.2636754810810089
+            }
+          ],
+          "final": {
+            "identity_mse": 0.2636754810810089
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_02/trajectory/episodes/r1_eps_02__trajectory.json.gz",
+            "sha256": "ebce075bb54e4d6322728bc4a1716c23012296c8ebfae7e1a00c2d7073305664"
+          },
+          "original_episode_sha256": "ebce075bb54e4d6322728bc4a1716c23012296c8ebfae7e1a00c2d7073305664",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_02/trajectory/scratch-policy.json.gz",
+            "sha256": "9e6fbf8891e08c807a103476a981154a224e92a47fc8b6538a938f24759cf029"
+          }
+        },
+        {
+          "tag": "r1_eps_03",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.001,
+          "options": {
+            "g_eps": 0.01,
+            "network_eps": 1e-08,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "terminal": [
+            {
+              "step": 334,
+              "identity_mse": 0.2608570158481598
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.2618052661418915
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.2637918293476105
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.26232269406318665
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.26076993346214294
+            }
+          ],
+          "final": {
+            "identity_mse": 0.26076993346214294
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_03/trajectory/episodes/r1_eps_03__trajectory.json.gz",
+            "sha256": "4c0f1b423bebb53b6e9a26596d4ed5db86ae14572e5279889b965cc5350bb1f9"
+          },
+          "original_episode_sha256": "4c0f1b423bebb53b6e9a26596d4ed5db86ae14572e5279889b965cc5350bb1f9",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_03/trajectory/scratch-policy.json.gz",
+            "sha256": "b5f7a87b79ffcc98576b4d8658e9969ef300d150f5a5ba20a79bc094a777afa8"
+          }
+        },
+        {
+          "tag": "r1_eps_04",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.001,
+          "options": {
+            "network_eps": 0.0001,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "terminal": [
+            {
+              "step": 334,
+              "identity_mse": 0.26608866453170776
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.26227739453315735
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.26293495297431946
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.2633960545063019
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.26313555240631104
+            }
+          ],
+          "final": {
+            "identity_mse": 0.26313555240631104
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_04/trajectory/episodes/r1_eps_04__trajectory.json.gz",
+            "sha256": "64f7f288d07915cbde8b632f5bf0c880b45ae371150f319d25d63188e9b58ace"
+          },
+          "original_episode_sha256": "64f7f288d07915cbde8b632f5bf0c880b45ae371150f319d25d63188e9b58ace",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_04/trajectory/scratch-policy.json.gz",
+            "sha256": "ad5c78a1d062a4c5af93c3706ebd6601bf24c8cc7751d215a11467060db1ddaf"
+          }
+        },
+        {
+          "tag": "r1_eps_05",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.001,
+          "options": {
+            "network_eps": 0.001,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "terminal": [
+            {
+              "step": 334,
+              "identity_mse": 0.26711800694465637
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.2636032998561859
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.263826459646225
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.265147864818573
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.2637673318386078
+            }
+          ],
+          "final": {
+            "identity_mse": 0.2637673318386078
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_05/trajectory/episodes/r1_eps_05__trajectory.json.gz",
+            "sha256": "cee88137f2fc03942a719c61d2266970e7296e43fc0e61f02753e8c90fddb4ff"
+          },
+          "original_episode_sha256": "cee88137f2fc03942a719c61d2266970e7296e43fc0e61f02753e8c90fddb4ff",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_05/trajectory/scratch-policy.json.gz",
+            "sha256": "99096f9e7622026628fdf18b56a3857d1983b3196d6f049725292ddbf14b2f98"
+          }
+        },
+        {
+          "tag": "r1_eps_06",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.001,
+          "options": {
+            "network_eps": 0.01,
+            "prior_eps": 1e-08
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "terminal": [
+            {
+              "step": 334,
+              "identity_mse": 0.4422032833099365
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.43717506527900696
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.4406227171421051
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.4401867389678955
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.4422340393066406
+            }
+          ],
+          "final": {
+            "identity_mse": 0.4422340393066406
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_06/trajectory/episodes/r1_eps_06__trajectory.json.gz",
+            "sha256": "9d54ebf79ce87410814d0ae2d36d77cb4500e436c66b45da04ec4db32e978cb2"
+          },
+          "original_episode_sha256": "9d54ebf79ce87410814d0ae2d36d77cb4500e436c66b45da04ec4db32e978cb2",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_06/trajectory/scratch-policy.json.gz",
+            "sha256": "e78a58525036fcf1bc808f3af952268856ee1fb7ad78aed2474ab7bb8ad85cbb"
+          }
+        },
+        {
+          "tag": "r1_eps_07",
+          "kind": "candidate",
+          "phase": "cold",
+          "lr": 0.001,
+          "options": {
+            "network_eps": 0.001,
+            "prior_eps": 0.01
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "trajectory"
+          ],
+          "first_failed_stage": "trajectory",
+          "terminal": [
+            {
+              "step": 334,
+              "identity_mse": 0.314105749130249
+            },
+            {
+              "step": 350,
+              "identity_mse": 0.2978054881095886
+            },
+            {
+              "step": 367,
+              "identity_mse": 0.2778123617172241
+            },
+            {
+              "step": 384,
+              "identity_mse": 0.2813180088996887
+            },
+            {
+              "step": 400,
+              "identity_mse": 0.27463939785957336
+            }
+          ],
+          "final": {
+            "identity_mse": 0.27463939785957336
+          },
+          "passing_suffix": 0,
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_07/trajectory/episodes/r1_eps_07__trajectory.json.gz",
+            "sha256": "1c4fe129ce12046525fc89aeab58ae3e6b03018490602806569fe58a60ed519e"
+          },
+          "original_episode_sha256": "1c4fe129ce12046525fc89aeab58ae3e6b03018490602806569fe58a60ed519e",
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/eps-r1/r1_eps_07/trajectory/scratch-policy.json.gz",
+            "sha256": "5d490d6eca136e4105e202f6c1ab0bdd0b157810ca52e574a10132c18cd7018d"
+          }
+        }
+      ]
+    },
+    {
+      "id": "lookahead-cold-v1",
+      "phase": "cold",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/lookahead-cold-v1"
+      },
+      "declared_rows": 7,
+      "candidate_rows": 6,
+      "control_rows": 1,
+      "source_hashes": {
+        "reports/toy100/continuous_lookahead.py": "4ad795d991ec3c1c08d932db2c7fb3e5e7a86d4f8da669e450c57a5a158a972f",
+        "benchmarks/toy100/continuous_probe.py": "f13aac78039a0ed780cdd169d098694a01c8d46ac8649e1fa27346e13a949f1c"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-learning",
+        "path": "artifacts/continuous-learning/lookahead-cold-v1/declaration.json",
+        "sha256": "187011c308318916d48c7df0db92f74009215f9b40305328f0dc0368481ceecc"
+      },
+      "rows": [
+        {
+          "tag": "la_control",
+          "kind": "control",
+          "phase": "cold",
+          "parameters": {
+            "k": 5,
+            "alpha": 1.0,
+            "lr": 0.00425
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 5,
+              "hq": 0.202880859375
+            },
+            {
+              "step": 1050,
+              "modes": 8,
+              "hq": 0.626708984375
+            },
+            {
+              "step": 1100,
+              "modes": 8,
+              "hq": 0.444091796875
+            },
+            {
+              "step": 1150,
+              "modes": 4,
+              "hq": 0.24365234375
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.369384765625
+            }
+          ],
+          "final": {
+            "modes": 7,
+            "hq": 0.369384765625
+          },
+          "passing_suffix": 0,
+          "dense_terminal": {
+            "passed": 6,
+            "checks": 201
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_control/evidence.json.gz",
+            "sha256": "88abe42ed472ae0588ea074a06f0f1e38e2d734b8083398a86d4d884116e5f88"
+          },
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_control/receipt.json.gz",
+            "sha256": "0cd62701743c80e4eecf8b63c7f40d27053d0e5216f382480cd10b259f734f00"
+          }
+        },
+        {
+          "tag": "la_k10_lr0p001",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "k": 10,
+            "alpha": 0.5,
+            "lr": 0.001
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.61181640625
+            },
+            {
+              "step": 1050,
+              "modes": 8,
+              "hq": 0.998779296875
+            },
+            {
+              "step": 1100,
+              "modes": 8,
+              "hq": 0.674560546875
+            },
+            {
+              "step": 1150,
+              "modes": 8,
+              "hq": 0.49658203125
+            },
+            {
+              "step": 1200,
+              "modes": 8,
+              "hq": 0.785888671875
+            }
+          ],
+          "final": {
+            "modes": 8,
+            "hq": 0.785888671875
+          },
+          "passing_suffix": 0,
+          "dense_terminal": {
+            "passed": 29,
+            "checks": 201
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k10_lr0p001/evidence.json.gz",
+            "sha256": "7e71d425de1638afe4a2c175e8106a87413ab3ff1adcfdaa3e7cbae4dc785743"
+          },
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k10_lr0p001/receipt.json.gz",
+            "sha256": "a18dc2c172a1ebb40b6ec4af21478a972049159cb5745cde6b66f5d9cf564981"
+          }
+        },
+        {
+          "tag": "la_k10_lr0p00425",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "k": 10,
+            "alpha": 0.5,
+            "lr": 0.00425
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.666259765625
+            },
+            {
+              "step": 1050,
+              "modes": 4,
+              "hq": 0.5966796875
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.7646484375
+            },
+            {
+              "step": 1150,
+              "modes": 6,
+              "hq": 0.70849609375
+            },
+            {
+              "step": 1200,
+              "modes": 6,
+              "hq": 0.546630859375
+            }
+          ],
+          "final": {
+            "modes": 6,
+            "hq": 0.546630859375
+          },
+          "passing_suffix": 0,
+          "dense_terminal": {
+            "passed": 0,
+            "checks": 201
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k10_lr0p00425/evidence.json.gz",
+            "sha256": "613f46404c050d12fd6454a3401392a1d0fec8b9622866eb531262baf7b9061c"
+          },
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k10_lr0p00425/receipt.json.gz",
+            "sha256": "84ddeea1e735d77495200b821712b0d4a0b3d28ac5eeae532692615ea1dd5d3b"
+          }
+        },
+        {
+          "tag": "la_k2_lr0p001",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "k": 2,
+            "alpha": 0.5,
+            "lr": 0.001
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.46875
+            },
+            {
+              "step": 1050,
+              "modes": 5,
+              "hq": 0.2431640625
+            },
+            {
+              "step": 1100,
+              "modes": 4,
+              "hq": 0.10595703125
+            },
+            {
+              "step": 1150,
+              "modes": 6,
+              "hq": 0.44921875
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.75830078125
+            }
+          ],
+          "final": {
+            "modes": 7,
+            "hq": 0.75830078125
+          },
+          "passing_suffix": 0,
+          "dense_terminal": {
+            "passed": 0,
+            "checks": 201
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k2_lr0p001/evidence.json.gz",
+            "sha256": "21e25094920856ec8f6329d3ad7c5fc8ad7e1837ba3a5b3d069343f324b7aa0f"
+          },
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k2_lr0p001/receipt.json.gz",
+            "sha256": "8ef71c211bd1ebfd57a4953a6397d8d73e09b554e3f06e4453a48eac0b8e023e"
+          }
+        },
+        {
+          "tag": "la_k2_lr0p00425",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "k": 2,
+            "alpha": 0.5,
+            "lr": 0.00425
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 4,
+              "hq": 0.14599609375
+            },
+            {
+              "step": 1050,
+              "modes": 5,
+              "hq": 0.143310546875
+            },
+            {
+              "step": 1100,
+              "modes": 5,
+              "hq": 0.2333984375
+            },
+            {
+              "step": 1150,
+              "modes": 8,
+              "hq": 0.261962890625
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.248779296875
+            }
+          ],
+          "final": {
+            "modes": 7,
+            "hq": 0.248779296875
+          },
+          "passing_suffix": 0,
+          "dense_terminal": {
+            "passed": 0,
+            "checks": 201
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k2_lr0p00425/evidence.json.gz",
+            "sha256": "ff8aeee02565463f0640fd5e28419b9bdb4a840ca91d3462abfa5e1d135c70fd"
+          },
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k2_lr0p00425/receipt.json.gz",
+            "sha256": "7b45d25277949ec805c92ca5998be0ee256c44e0322900a8dd1e38f80c323d26"
+          }
+        },
+        {
+          "tag": "la_k5_lr0p001",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "k": 5,
+            "alpha": 0.5,
+            "lr": 0.001
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.7548828125
+            },
+            {
+              "step": 1050,
+              "modes": 6,
+              "hq": 0.82861328125
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.66650390625
+            },
+            {
+              "step": 1150,
+              "modes": 6,
+              "hq": 0.67333984375
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.94384765625
+            }
+          ],
+          "final": {
+            "modes": 7,
+            "hq": 0.94384765625
+          },
+          "passing_suffix": 0,
+          "dense_terminal": {
+            "passed": 0,
+            "checks": 201
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k5_lr0p001/evidence.json.gz",
+            "sha256": "fcd2bf65ee78fce489c962f3ebaa8b14f6e9f9e8f575c65224d0571a2120cd1a"
+          },
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k5_lr0p001/receipt.json.gz",
+            "sha256": "bd107163c715c30659c27d77772b242775b736105d494f5aaa691b90f0b586df"
+          }
+        },
+        {
+          "tag": "la_k5_lr0p00425",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "k": 5,
+            "alpha": 0.5,
+            "lr": 0.00425
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.765380859375
+            },
+            {
+              "step": 1050,
+              "modes": 2,
+              "hq": 0.108642578125
+            },
+            {
+              "step": 1100,
+              "modes": 6,
+              "hq": 0.736328125
+            },
+            {
+              "step": 1150,
+              "modes": 4,
+              "hq": 0.27783203125
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.880126953125
+            }
+          ],
+          "final": {
+            "modes": 7,
+            "hq": 0.880126953125
+          },
+          "passing_suffix": 0,
+          "dense_terminal": {
+            "passed": 0,
+            "checks": 201
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k5_lr0p00425/evidence.json.gz",
+            "sha256": "21fb22c10ce7a11f91c17f2b7ab12dccca516977735138e6c88f6a33b78fc757"
+          },
+          "optimizer_receipt": {
+            "worktree": "ParticleGAN-continuous-learning",
+            "path": "artifacts/continuous-learning/lookahead-cold-v1/la_k5_lr0p00425/receipt.json.gz",
+            "sha256": "33cb254ae5b4d95bcb91a141f03c284da8eff3271fcd2a3b91d34ed803d0853f"
+          }
+        }
+      ]
+    },
+    {
+      "id": "output-trust-cold-v1",
+      "phase": "cold",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-output-trust"
+      },
+      "declared_rows": 4,
+      "candidate_rows": 3,
+      "control_rows": 1,
+      "source_hashes": {
+        "reports/toy100/output_trust_scratch.py": "238a54598df05b55d4c1bcd50723fedce51268ef778bcee94310c1fda15e2c4e",
+        "reports/toy100/output_trust_probe.py": "38bff032dfb9c4131723093f5770c8491c83f52084597e8797c8661991daf119"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-output-trust/declaration.json",
+        "sha256": "17ecfc15f3c461cfea09dde74d123f17f03d01d592dfba5a6cc26889725c2b00"
+      },
+      "rows": [
+        {
+          "tag": "trust_0",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "radius": 0.0145,
+            "radius_multiplier": 0.5
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.575439453125
+            },
+            {
+              "step": 1050,
+              "modes": 5,
+              "hq": 0.52783203125
+            },
+            {
+              "step": 1100,
+              "modes": 5,
+              "hq": 0.560302734375
+            },
+            {
+              "step": 1150,
+              "modes": 4,
+              "hq": 0.42041015625
+            },
+            {
+              "step": 1200,
+              "modes": 4,
+              "hq": 0.473388671875
+            }
+          ],
+          "final": {
+            "modes": 4,
+            "hq": 0.473388671875
+          },
+          "passing_suffix": 0,
+          "dense_terminal": {
+            "checks": 21,
+            "passing_checks": 0
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-output-trust/trust_0/mode_hold.json",
+            "sha256": "83a5883bef8402c962106828781dd7179625bf4eaef5a840e0e1599505c564fe"
+          }
+        },
+        {
+          "tag": "trust_1",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "radius": 0.029,
+            "radius_multiplier": 1.0
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 3,
+              "hq": 0.601806640625
+            },
+            {
+              "step": 1050,
+              "modes": 3,
+              "hq": 0.598876953125
+            },
+            {
+              "step": 1100,
+              "modes": 3,
+              "hq": 0.572021484375
+            },
+            {
+              "step": 1150,
+              "modes": 3,
+              "hq": 0.601806640625
+            },
+            {
+              "step": 1200,
+              "modes": 3,
+              "hq": 0.567138671875
+            }
+          ],
+          "final": {
+            "modes": 3,
+            "hq": 0.567138671875
+          },
+          "passing_suffix": 0,
+          "dense_terminal": {
+            "checks": 21,
+            "passing_checks": 0
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-output-trust/trust_1/mode_hold.json",
+            "sha256": "c904a013b2d9164bc8edfe63b09d8dbb312818947a5fad976df3b6fb2ea9f4d2"
+          }
+        },
+        {
+          "tag": "trust_2",
+          "kind": "candidate",
+          "phase": "cold",
+          "parameters": {
+            "radius": 0.058,
+            "radius_multiplier": 2.0
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 6,
+              "hq": 0.673828125
+            },
+            {
+              "step": 1050,
+              "modes": 6,
+              "hq": 0.574462890625
+            },
+            {
+              "step": 1100,
+              "modes": 7,
+              "hq": 0.843994140625
+            },
+            {
+              "step": 1150,
+              "modes": 7,
+              "hq": 0.6826171875
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.843994140625
+            }
+          ],
+          "final": {
+            "modes": 7,
+            "hq": 0.843994140625
+          },
+          "passing_suffix": 0,
+          "dense_terminal": {
+            "checks": 21,
+            "passing_checks": 0
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-output-trust/trust_2/mode_hold.json",
+            "sha256": "2232ee09617385128b284e0a1e401bb37832a6c710d9db2bea7abf8b3bf97309"
+          }
+        },
+        {
+          "tag": "trust_3",
+          "kind": "control",
+          "phase": "cold",
+          "parameters": {
+            "radius": null,
+            "radius_multiplier": null
+          },
+          "status": "FAIL",
+          "attempted_stages": [
+            "mode_hold"
+          ],
+          "first_failed_stage": "mode_hold",
+          "terminal": [
+            {
+              "step": 1000,
+              "modes": 5,
+              "hq": 0.202880859375
+            },
+            {
+              "step": 1050,
+              "modes": 8,
+              "hq": 0.626708984375
+            },
+            {
+              "step": 1100,
+              "modes": 8,
+              "hq": 0.444091796875
+            },
+            {
+              "step": 1150,
+              "modes": 4,
+              "hq": 0.24365234375
+            },
+            {
+              "step": 1200,
+              "modes": 7,
+              "hq": 0.369384765625
+            }
+          ],
+          "final": {
+            "modes": 7,
+            "hq": 0.369384765625
+          },
+          "passing_suffix": 0,
+          "dense_terminal": {
+            "checks": 21,
+            "passing_checks": 0
+          },
+          "evidence": {
+            "worktree": "ParticleGAN-continuous-mechanism",
+            "path": "artifacts/continuous-output-trust/trust_3/mode_hold.json",
+            "sha256": "ad93922996808df782281951eb1c5e431f731ae1b3686fb7efe260b2205e6a2d"
+          }
+        }
+      ]
+    },
+    {
+      "id": "output-trust-long-v1",
+      "phase": "uninterrupted_continuation",
+      "artifact_root": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-learning/trust-long-r0p058-4800-v1"
+      },
+      "parent_lane": "output-trust-cold-v1",
+      "parent_tag": "trust_2",
+      "source_hashes": {
+        "ParticleGAN-continuous-mechanism:reports/toy100/output_trust_scratch.py": "ca37269c98a40100f071895772ae071691ad8e0b7e0d5518895800998b18ce30",
+        "ParticleGAN-continuous-probe:benchmarks/toy100/continuous_probe.py": "f13aac78039a0ed780cdd169d098694a01c8d46ac8649e1fa27346e13a949f1c",
+        "ParticleGAN-continuous-probe:configs/toy100/constraints_simple_regularization.json": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+      },
+      "declaration": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-learning/trust-long-r0p058-4800-v1/declaration.json",
+        "sha256": "4f8f5d52fbc1c5b58061d3a6654d66134d201db7990704b0673fa8fe323d1f83"
+      },
+      "identity_control": {
+        "worktree": "ParticleGAN-continuous-mechanism",
+        "path": "artifacts/continuous-learning/trust-long-r0p058-4800-v1/identity_1200.json",
+        "sha256": "c3ff836e81cc97d59f96f9afa6f196d6025377fbbdd8dea5f599403a7a857a46"
+      },
+      "run": {
+        "tag": "trust_2_4800",
+        "kind": "diagnostic_followup",
+        "radius": 0.058,
+        "steps": 4800,
+        "status": "FAIL",
+        "first_failed_stage": "mode_hold",
+        "terminal": [
+          {
+            "step": 1000,
+            "modes": 6,
+            "hq": 0.673828125
+          },
+          {
+            "step": 1050,
+            "modes": 6,
+            "hq": 0.574462890625
+          },
+          {
+            "step": 1100,
+            "modes": 7,
+            "hq": 0.843994140625
+          },
+          {
+            "step": 1150,
+            "modes": 7,
+            "hq": 0.6826171875
+          },
+          {
+            "step": 1200,
+            "modes": 7,
+            "hq": 0.843994140625
+          }
+        ],
+        "final": {
+          "modes": 7,
+          "hq": 0.935791015625
+        },
+        "stationary": {
+          "checks": 5,
+          "passing_checks": 0,
+          "min_modes": 6,
+          "min_hq": 0.574462890625
+        },
+        "continued_hold": {
+          "checks": 360,
+          "passing_checks": 102,
+          "passing_suffix": 0,
+          "min_modes": 5,
+          "min_hq": 0.33349609375
+        },
+        "clipped_updates": 4763,
+        "optimizer_updates": [
+          4800,
+          4800
+        ],
+        "evidence": {
+          "worktree": "ParticleGAN-continuous-mechanism",
+          "path": "artifacts/continuous-learning/trust-long-r0p058-4800-v1/evidence.json",
+          "sha256": "34b955290532f01f52f1629923ce29efeee35c01ebe8df76dcc254b2cabd0a1f"
+        }
+      }
+    }
+  ]
+}
