@@ -136,11 +136,15 @@ class ForwardKLV2Recorder(host.ReallocationRecorder):
         sigma = float(policy.output_sigma)
         variance = WIDTH**2 + sigma**2
         pure_row = None
-        fit = None
+        fit = dict(status='SKIPPED_EXACT_REST', records=[])
         selected = 'EXACT_REST'
         try:
-            target, pure_row, finite9 = self._pure_target(
-                history, self.real, self.pre_points, sigma)
+            # The pure operator's final gradient diagnostics use autograd.
+            # This recorder otherwise runs under no_grad to avoid retaining
+            # the host's native training graph during target selection.
+            with torch.enable_grad():
+                target, pure_row, finite9 = self._pure_target(
+                    history, self.real, self.pre_points, sigma)
             locations, weights = finite9
             if (target.shape != (12, 2) or not bool(torch.isfinite(target).all())
                     or locations.shape != (81*len(history), 2)

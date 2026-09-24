@@ -124,6 +124,7 @@ def test_failed_neural_fit_rests_exactly_without_native_fallback(monkeypatch):
     monkeypatch.setattr('reports.toy100.forward_kl_neural_v2.fit_output_targets',fake_fit)
     recorder.correct(opt_g)
     assert recorder.corrections[-1]['selected'] == 'EXACT_REST'
+    assert recorder.corrections[-1]['fit']['status'] == 'BUDGET'
     assert all(torch.equal(p, saved) for p, saved in
                zip(recorder._params(opt_g), pre))
     assert_adam_and_rng(recorder, md, mg, rng)
@@ -141,6 +142,8 @@ def test_pure_exact_rest_skips_fit_and_discards_native_parameter_move(monkeypatc
     monkeypatch.setattr('reports.toy100.forward_kl_neural_v2.fit_output_targets',must_not_fit)
     recorder.correct(opt_g)
     assert recorder.corrections[-1]['selected'] == 'EXACT_REST'
+    assert recorder.corrections[-1]['fit']['status'] == 'SKIPPED_EXACT_REST'
+    assert recorder.receipt()['additional_joint_output_jacobians'] == 0
     assert all(torch.equal(p, saved) for p, saved in
                zip(recorder._params(opt_g), recorder.g_base))
     assert_adam_and_rng(recorder, md, mg, rng)
@@ -164,3 +167,63 @@ def test_resume_requires_exact_completed_host_clock():
         ForwardKLV2Recorder(start_step=1, history_mode='resume').load_learner_state_dict(bad)
     with pytest.raises(ValueError):
         ForwardKLV2Recorder(start_step=2, history_mode='resume').load_learner_state_dict(state)
+
+
+def test_missing_resume_state_stops_before_likelihood_update():
+    recorder, opt_g, _, _, _ = setup_recorder()
+    recorder.history_mode = 'resume'
+    with pytest.raises(RuntimeError, match='missing source-bound likelihood history'):
+        recorder.correct(opt_g)
+    assert recorder.learner_bank_count == 0 and not recorder.banks
+
+
+def test_oracle_quality_receipt_is_rejected_and_pre_g_parameters_restored():
+    recorder, opt_g, _, _, _ = setup_recorder()
+    original = recorder.target_operator
+
+    def bad_operator(*args):
+        target, row, finite9 = original(*args)
+        row['final_quality'] = {'hq': 1.}
+        return target, row, finite9
+
+    recorder.target_operator = bad_operator
+    with pytest.raises(RuntimeError, match='oracle-free'):
+        recorder.correct(opt_g)
+    assert recorder.learner_bank_count == 0 and not recorder.banks
+    assert all(torch.equal(p, saved) for p, saved in
+               zip(recorder._params(opt_g), recorder.g_base))
+
+
+def test_actual_pure_operator_and_neural_fit_on_cached_cold_real_bank():
+    """Exercise the default operator's autograd and the actual GN fit path."""
+    pytest.importorskip('reports.toy100.forward_kl_gh9_remembered')
+    import hashlib
+    import json
+    from pathlib import Path
+    from benchmarks.locked_shared import mode_hold
+    from reports.toy100.sample_anchor_free1200 import load_states
+
+    cold, _, _ = load_states()
+    stream = torch.Generator().set_state(cold['rng']['data'])
+    bank = mode_hold.sample_ring(mode_hold.ring_means(), 128,
+                                 mode_hold.SIGMA, stream)
+    first = json.loads((Path(__file__).resolve().parents[1]/
+        'reports/toy100/continuous-evidence/round8-forward-kl-first-bank/v2/result.json').read_text())
+    assert hashlib.sha256(bank.contiguous().numpy().tobytes()).hexdigest() == (
+        first['declaration']['native_real_bank_sha256']['cold1'])
+
+    # Small affine neural map with native one-step Adam state; this is a
+    # source-bound correction smoke, not a replay of the saved cold model.
+    recorder, opt_g, md, mg, rng = setup_recorder()
+    recorder.real = bank
+    recorder.target_operator = None
+    recorder.correct(opt_g)
+    row = recorder.corrections[-1]
+    assert row['pure']['selected'] == 'GH5_WHOLE_ACCEPTED_BY_GH9'
+    assert 'initial_quality' not in row['pure']
+    assert 'final_quality' not in row['pure']
+    assert row['selected'] == 'FINITE_GH9_FITTED_TARGET'
+    assert row['fit']['status'] == 'CONVERGED'
+    assert row['final_gh9'] < row['pre_gh9']
+    assert recorder.receipt()['pure_operator_source_sha256'] is not None
+    assert_adam_and_rng(recorder, md, mg, rng)
