@@ -1,0 +1,63 @@
+{
+  "scope": "local parameter-motion diagnostic, no new controller or long-run claim",
+  "pre_jacobian": {
+    "rank": 24,
+    "singular_min": 1.3388004092915546,
+    "singular_max": 86.21315350352192
+  },
+  "native": {
+    "total_norm": 0.021879570804831647,
+    "linear_output_norm": 0.38070758594938203,
+    "null_norm": 0.020821684182229783,
+    "null_fraction": 0.9516495715552038
+  },
+  "post_native_fit": {
+    "total_norm": 0.024485944516798547,
+    "linear_output_norm": 0.13976376458276296,
+    "null_norm": 0.020840698938181343,
+    "null_fraction": 0.8511290599341026
+  },
+  "pre_start_fit": {
+    "total_norm": 0.012887936185400559,
+    "linear_output_norm": 0.13978077849440018,
+    "null_norm": 1.1054333773070065e-06,
+    "null_fraction": 8.577272275441901e-05
+  },
+  "pre_start_grade": {
+    "modes": 8,
+    "hq": 1.0,
+    "particle_draws": [
+      338,
+      356,
+      332,
+      353,
+      321,
+      314,
+      325,
+      345,
+      363,
+      341,
+      339,
+      369
+    ],
+    "particle_hq_rate": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "accepted_state_sha256": "684384660440a70f40197ef0e29f9363c963c90e85768e8db90e8fe599717ccd",
+  "input_result_sha256": "d06b31b56ab04efdde07dae811bc581dea26751a3c9db4148a8eea648a0dee70",
+  "input_source_sha256": "3e09b1a5f1d3c98f6e0e9eea88583710e327e9bbc0f825416ee8defb8500feb7",
+  "input_result": "artifacts/continuous-learning/round6/anchor-parameter-motion/result.json",
+  "input_source": "reports/toy100/anchor_parameter_motion_diagnosis.py"
+}

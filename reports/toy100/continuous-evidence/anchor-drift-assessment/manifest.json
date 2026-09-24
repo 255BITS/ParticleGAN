@@ -1,0 +1,35 @@
+{
+  "scope": "read-only internal state, fixed chart, and scientific counterexample; no training",
+  "shared_gate_eligible": false,
+  "test_count": 7,
+  "source": {
+    "reports/toy100/anchor_drift_assessment.py": "586b3453bdd1e3326953584193fcec40fd93f6188b37b8914bff77faf5563b94",
+    "reports/toy100/anchor_feature_chart_diagnosis.py": "37b39c42eab7ff9e17e3fb1ceba5c17157f79b8e104c948fed144094138693e2",
+    "reports/toy100/anchor-internal-state-assessment.md": "43464d0ccb2a7ec2c2f58aa757c5f5d565e667334e07d092ddb00a23de6739df",
+    "tests/test_anchor_drift_assessment.py": "73a66b84c9b49db16ce50902b5f0fca4728c8c714b340c60112c6134bd2b5a95"
+  },
+  "files": {
+    "fixed-readout-charts.json": {
+      "sha256": "ff817bd24b86129206603477f21b63478995496c78adab7d5a9bd28c41d185af",
+      "bytes": 10323
+    },
+    "parameter-motion-extract.json": {
+      "sha256": "0c59016bc29c920900ba5dd66be10edcff69def2f56565a578bf04ca08725a40",
+      "bytes": 1615
+    },
+    "prestart-warm-hold-v2.json.gz": {
+      "sha256": "66e5eb290d045db9d9c330a31d47a8b6749b3393116a946305d01c1da48d8ceb",
+      "bytes": 112483,
+      "uncompressed_sha256": "08e8ec944fc21774eb8490e8cc5c138b191ee81599a9ad58186da3918a2d2b9a"
+    },
+    "rest-warm-hold-v2.json.gz": {
+      "sha256": "ea6eb52e318a6519e12280e0f8f46a1aa591ff0cd24df7a94d1d3bca240c2bf0",
+      "bytes": 112996,
+      "uncompressed_sha256": "8354a28e0e29fa1ca8a06b88a565c828cb7eade42525eee812970b510a89161b"
+    },
+    "tests.txt": {
+      "sha256": "2bf99a97318a517fe73161eabe823a69d20f93d7e369efb6905f0c1d58c9334a",
+      "bytes": 98
+    }
+  }
+}
