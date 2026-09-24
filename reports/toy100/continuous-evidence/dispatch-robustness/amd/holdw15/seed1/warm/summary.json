@@ -1,0 +1,45 @@
+{
+  "identity": {
+    "status": "PASS",
+    "local": {
+      "checks": 200,
+      "passing_checks": 200,
+      "failing_steps": [],
+      "min_modes": 8,
+      "min_hq": 0.990478515625,
+      "passing_suffix": 200,
+      "stable_from_step": 1001,
+      "pass_all": true,
+      "pass_suffix": true
+    },
+    "final": {
+      "modes": 8,
+      "hq": 0.996337890625
+    }
+  },
+  "holdw15": {
+    "status": "FAIL",
+    "local": {
+      "checks": 200,
+      "passing_checks": 194,
+      "failing_steps": [
+        1155,
+        1156,
+        1157,
+        1158,
+        1160,
+        1161
+      ],
+      "min_modes": 8,
+      "min_hq": 0.8671875,
+      "passing_suffix": 39,
+      "stable_from_step": 1162,
+      "pass_all": false,
+      "pass_suffix": true
+    },
+    "final": {
+      "modes": 8,
+      "hq": 0.99755859375
+    }
+  }
+}
