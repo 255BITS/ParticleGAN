@@ -1,0 +1,178 @@
+{
+  "method": "saved1325_finite_bank_variance_geometry_diagnostic",
+  "parent_capture_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47",
+  "shared_gate_eligible": false,
+  "status": "READ_ONLY_DIAGNOSTIC",
+  "native_controls": "D gradient and bounded G parameters/prior/Adam bitwise exact",
+  "initial_attempt": "invalid input subset omitted post-D RNG; no diagnostic result",
+  "calibration": "initial1e-4,5e-5 unresolved; separate1e-7,5e-8 audit retained",
+  "tests": "3 passed",
+  "independent_source_review": "validation_order: no blocking formula/chain error; fixed-bank/fixed-metric scope retained",
+  "artifacts": {
+    "initial_input_schema_failure/declaration.json.gz": {
+      "sha256": "714033e0f7f4086c1532c43281354c8dcc69207eec0d5765be57bfbe0249350f",
+      "plain_sha256": "056dd9f1ed039b05fbce713351fc069044cddcfa854a13ab6157dfdb993d1cb4",
+      "bytes": 1089
+    },
+    "initial_input_schema_failure/source/benchmarks/locked_shared/mlp.py.gz": {
+      "sha256": "f5f9ffe455030054182ed9a11c1b8e1111b88c9371db8adf5e9982e0b08c886e",
+      "plain_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "bytes": 879
+    },
+    "initial_input_schema_failure/source/benchmarks/locked_shared/mode_hold.py.gz": {
+      "sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "plain_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "bytes": 3580
+    },
+    "initial_input_schema_failure/source/configs/toy100/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "plain_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "bytes": 661
+    },
+    "initial_input_schema_failure/source/particlegan/gan_loss.py.gz": {
+      "sha256": "0d5f99f7ef077a56b4dc06791a60d83eba34740cf3f2d7edc0cfccfac38e7563",
+      "plain_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "bytes": 1975
+    },
+    "initial_input_schema_failure/source/particlegan/grad_regularizers.py.gz": {
+      "sha256": "4c0d42678efe66e2ae2ce36e4c7808866a996d88ad5ecaa7d32097fd4e52fabe",
+      "plain_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+      "bytes": 5749
+    },
+    "initial_input_schema_failure/source/reports/toy100/alternating_curvature_scratch.py.gz": {
+      "sha256": "4655b8735ed1df2ff0051b7e1816df9084b9c639c1f92bf6c0d8f62c78ca024c",
+      "plain_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "bytes": 4472
+    },
+    "initial_input_schema_failure/source/reports/toy100/coverage_fixed_eval.py.gz": {
+      "sha256": "781a69107df11fa473feacf197aff169c6e7b1c243d14de972d7af8d77401e98",
+      "plain_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "bytes": 1661
+    },
+    "initial_input_schema_failure/source/reports/toy100/pr84_critic_refinement_capture.py.gz": {
+      "sha256": "6bd7873bccd4a87bb4c1f74a133fe378a24a2d0eea260a628761007183526135",
+      "plain_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+      "bytes": 2505
+    },
+    "initial_input_schema_failure/source/reports/toy100/pr84_critic_relaxation.py.gz": {
+      "sha256": "51346022e1ca28af02828681e9d9fa1cb79b36ec144987e2103be2904d127d2e",
+      "plain_sha256": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+      "bytes": 6046
+    },
+    "initial_input_schema_failure/source/reports/toy100/pr84_finite_bank_vr_diagnostic.py.gz": {
+      "sha256": "228acbbeed12bce4dd82d8ae3e9d10a45b1353121d8cb834ac2cdf6c2a09117e",
+      "plain_sha256": "dc3d136e691e3a51a24982c21f66b726bb702324ce53c867655018b424b72cea",
+      "bytes": 5138
+    },
+    "finite_bank/declaration.json.gz": {
+      "sha256": "e316c5cc26cb196cb267b5e17dcf3864a99181ebe3c08b5d5bb9c7626ddcab7f",
+      "plain_sha256": "184576ee3dbab1a6529276c7be688e88ed51d1411713a7d952029c710e599bbb",
+      "bytes": 1089
+    },
+    "finite_bank/result.json.gz": {
+      "sha256": "34b07231b11a0902158a533f02241aee316f45067a4a91cd9b756dee33dc5aef",
+      "plain_sha256": "6ede5e0322d26804831e839a707856c6915fec17fcabd51e5355f5272c4e5d58",
+      "bytes": 8191
+    },
+    "finite_bank/source/benchmarks/locked_shared/mlp.py.gz": {
+      "sha256": "f5f9ffe455030054182ed9a11c1b8e1111b88c9371db8adf5e9982e0b08c886e",
+      "plain_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+      "bytes": 879
+    },
+    "finite_bank/source/benchmarks/locked_shared/mode_hold.py.gz": {
+      "sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828",
+      "plain_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+      "bytes": 3580
+    },
+    "finite_bank/source/configs/toy100/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "plain_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "bytes": 661
+    },
+    "finite_bank/source/particlegan/gan_loss.py.gz": {
+      "sha256": "0d5f99f7ef077a56b4dc06791a60d83eba34740cf3f2d7edc0cfccfac38e7563",
+      "plain_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+      "bytes": 1975
+    },
+    "finite_bank/source/particlegan/grad_regularizers.py.gz": {
+      "sha256": "4c0d42678efe66e2ae2ce36e4c7808866a996d88ad5ecaa7d32097fd4e52fabe",
+      "plain_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+      "bytes": 5749
+    },
+    "finite_bank/source/reports/toy100/alternating_curvature_scratch.py.gz": {
+      "sha256": "4655b8735ed1df2ff0051b7e1816df9084b9c639c1f92bf6c0d8f62c78ca024c",
+      "plain_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+      "bytes": 4472
+    },
+    "finite_bank/source/reports/toy100/coverage_fixed_eval.py.gz": {
+      "sha256": "781a69107df11fa473feacf197aff169c6e7b1c243d14de972d7af8d77401e98",
+      "plain_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+      "bytes": 1661
+    },
+    "finite_bank/source/reports/toy100/pr84_critic_refinement_capture.py.gz": {
+      "sha256": "6bd7873bccd4a87bb4c1f74a133fe378a24a2d0eea260a628761007183526135",
+      "plain_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+      "bytes": 2505
+    },
+    "finite_bank/source/reports/toy100/pr84_critic_relaxation.py.gz": {
+      "sha256": "51346022e1ca28af02828681e9d9fa1cb79b36ec144987e2103be2904d127d2e",
+      "plain_sha256": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+      "bytes": 6046
+    },
+    "finite_bank/source/reports/toy100/pr84_finite_bank_vr_diagnostic.py.gz": {
+      "sha256": "cba15622ce11ed0f0b80e21c759c62cfe3f1b46e9a886e454d7abe391b5d0aac",
+      "plain_sha256": "37dcb85d09bb710bb1c9c8c106169c24c9e862e142967cb3940c2e792da761d6",
+      "bytes": 5234
+    },
+    "finite_bank/tensors.pt.gz": {
+      "sha256": "b3f0080e3cf571e07e2a5ca87b9cbb63a747a52838bbaf14bbac97809a09cb7f",
+      "plain_sha256": "e2848fdcbcf1283bd2a12931ae64c47f3a5aeb6e8e54a370c10e66ce953501d0",
+      "bytes": 10298661
+    },
+    "numerical_audit/declaration.json.gz": {
+      "sha256": "472e1b174258db0a2546bed2a60c2cce39216b8f55cd27f633de941fbf8972f0",
+      "plain_sha256": "21f2c786f08a075dd87c8055c879ab7f4ae881e9da5897da7a675394af4c278d",
+      "bytes": 908
+    },
+    "numerical_audit/pr84_finite_bank_vr_audit.py.gz": {
+      "sha256": "e35d5d8857aba6e3b8ff2b59ab98875541aad81eaba9b21bbae947eae13d8ebd",
+      "plain_sha256": "2cc22781004f42ce0ea37bb44319a907600348fddfe6deee7067d0bd7e005864",
+      "bytes": 2316
+    },
+    "numerical_audit/result.json.gz": {
+      "sha256": "a6d3b0a320bee76a009cbf63ff3f963091a43b11c157a44fe958a5a95ff402d9",
+      "plain_sha256": "f8ea3db244b8957e88fe236847c94ff45e2c485713fdbd91a44bc27bc8cab803",
+      "bytes": 2240
+    },
+    "initial_input_schema_failure/run.log.gz": {
+      "sha256": "f502b7152cdd5fd0dc162eeb364d814938e2f9795ad031e1366eb9819f563e26",
+      "plain_sha256": "3270335d50c8efc70eb2452129a3b1a0a656ba4e31ffd968a6f3440f5aff4010",
+      "bytes": 1358
+    },
+    "finite_bank/run.log.gz": {
+      "sha256": "ce71826e775c82bfda97038f0c8d5889aed697f9bf1a322007d44e4e243a5ce7",
+      "plain_sha256": "444a4dca019d1791838967eb458f9b2e6276ac288851fcb64945bf5afe293e27",
+      "bytes": 2591
+    },
+    "numerical_audit/run.log.gz": {
+      "sha256": "1ebd4933c389ef2fb729771a91e2745d45c206138543616845e1eef8caebf4fe",
+      "plain_sha256": "3cc82534dc7ced8e7680592e0b55303a84e0310f033e8b6c7890d27040649975",
+      "bytes": 2202
+    },
+    "complete1325.pt.gz": {
+      "sha256": "f087ca492c8f3ba6238c544a1c1747c2242393532da39e9d7f44b8a7a61e198d",
+      "plain_sha256": "ef3ae07b2c528c6c4a02eaac6e144deec3966ccfdebb52927b36fe996127fce1",
+      "bytes": 2647709
+    },
+    "test_and_audit_source/tests/test_pr84_finite_bank_vr_diagnostic.py.gz": {
+      "sha256": "8681b1e69bd761416b63dbbc1ba58f7f02317900250c7321d601a4440cf657f5",
+      "plain_sha256": "082797766758bc7b1da1108c584af1b4580d08ddc2c29328ce07adc53f42df03",
+      "bytes": 839
+    },
+    "test_and_audit_source/reports/toy100/pr84_finite_bank_vr_audit.py.gz": {
+      "sha256": "e35d5d8857aba6e3b8ff2b59ab98875541aad81eaba9b21bbae947eae13d8ebd",
+      "plain_sha256": "2cc22781004f42ce0ea37bb44319a907600348fddfe6deee7067d0bd7e005864",
+      "bytes": 2316
+    }
+  }
+}
