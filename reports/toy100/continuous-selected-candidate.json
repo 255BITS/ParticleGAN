@@ -14,7 +14,7 @@
   "production_gate_eligible": false,
   "production_pr_head": "983d037a7028afc5c1b0df4d4097eff8e6abe9b5",
   "production_modified": false,
-  "reason": "Leading local partial candidate among reviewed PR81/82/84 methods: warm and trajectory pass, seven-mode ring with final HQ1; simpler than failed rest additions. This is not a full-gate winner.",
+  "reason": "Retained reproducible research reference only. Short warm and trajectory pass, cold ring fails seven modes; new warm continuation also fails eight of120 checks through2400. No qualified candidate.",
   "settings": {
     "g_lr": 0.00425,
     "d_lr": 0.00425,
@@ -115,12 +115,12 @@
   },
   "first_failed_gate": "cold_ring",
   "not_run": [
-    "hold2400",
+    "cold_acquired_hold2400",
     "other_hosts",
     "production_common22",
     "longer_continuation"
   ],
-  "next_research": "Bidirectional projection passes warm but fails cold; distinguish huge nonlinear pullback errors from insufficient target coverage before a further host run",
+  "next_research": "Isolate delayed same-dataset instability at first observed failed hold check1390 before new acquisition corrections; permit signal-based rest and retain cold acquisition requirement.",
   "distribution_shift_required": false,
   "rest_without_signal_allowed": true,
   "warm": {
@@ -135,5 +135,49 @@
     "stable_from_step": 1001
   },
   "identity_cold_parity": true,
-  "additional_rejected_candidate": "PR84 plus bidirectional Chamfer: warm200/200, trajectoryPASS, ring7/HQ.87012;3/24 passing"
+  "additional_rejected_candidate": "PR84 plus bidirectional Chamfer: warm200/200, trajectoryPASS, ring7/HQ.87012;3/24 passing",
+  "warm_hold_2400": {
+    "scope": "passing_state_local_stability_only",
+    "steps": 2400,
+    "scheduled_prefix_steps": 1000,
+    "noise_horizon": 1200,
+    "first_observed_failure": 1390,
+    "status": "FAIL",
+    "local_stability": {
+      "checks": 200,
+      "failing_steps": [],
+      "min_hq": 0.97021484375,
+      "min_modes": 8,
+      "pass_all": true,
+      "pass_suffix": true,
+      "passing_checks": 200,
+      "passing_suffix": 200,
+      "stable_from_step": 1001
+    },
+    "long_hold": {
+      "checks": 120,
+      "failing_steps": [
+        1390,
+        1540,
+        1550,
+        1560,
+        1570,
+        1910,
+        2060,
+        2150
+      ],
+      "min_hq": 0.78857421875,
+      "min_modes": 7,
+      "pass_all": false,
+      "pass_suffix": true,
+      "passing_checks": 112,
+      "passing_suffix": 25,
+      "stable_from_step": 2160
+    },
+    "final": {
+      "hq": 0.998046875,
+      "modes": 8
+    },
+    "evidence": "continuous-evidence/pr84-stationary-hold/manifest.json"
+  }
 }
