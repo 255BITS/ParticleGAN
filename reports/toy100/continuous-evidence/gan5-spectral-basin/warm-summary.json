@@ -1,0 +1,31 @@
+{
+  "pin_pr84": {
+    "status": "FAIL",
+    "passing": 196,
+    "checks": 200,
+    "min_modes": 8,
+    "min_hq": 0.8662109375,
+    "failing": [
+      1129,
+      1130,
+      1131,
+      1132
+    ],
+    "final_modes": 8,
+    "final_hq": 0.999267578125
+  },
+  "candidate": {
+    "status": "PASS",
+    "passing": 200,
+    "checks": 200,
+    "min_modes": 8,
+    "min_hq": 1.0,
+    "failing": [],
+    "final_modes": 8,
+    "final_hq": 1.0
+  },
+  "warm_regressed": false,
+  "seconds": 21.40680918199996,
+  "identity_cold_parity": true,
+  "warm_state_sha256": "57c10b571a2538075ea842cd0c9ea6f0ff677062ae9287e8e3c21d1241c48861"
+}
