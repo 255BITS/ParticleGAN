@@ -31,7 +31,9 @@ def main():
     parser.add_argument('--boost-cap',type=float,default=None)
     parser.add_argument('--latent-nudge',action='store_true')
     parser.add_argument('--latent-step',type=float,default=.02)
-    parser.add_argument('--center-critic',action='store_true');args=parser.parse_args()
+    parser.add_argument('--center-critic',action='store_true')
+    parser.add_argument('--stray-step',type=float,default=0.)
+    parser.add_argument('--smooth-critic',action='store_true');args=parser.parse_args()
     torch.set_num_threads(1)
     config=json.loads((ROOT/'configs/toy100/constraints_simple_regularization.json').read_text())
     config.update(name='alternating_curvature_response',lr_floor=1.,lr_anneal_start=0.)
@@ -48,8 +50,8 @@ def main():
     for task in declaration['task_order']:
         spec=next(job['spec'] for job in plan() if job['spec']['name']==task)
         try:
-            extra=dict(bound_d=True,d_curvature_bound=args.d_curvature_bound,ratio_loosen=args.ratio_loosen,ratio_tighten=args.ratio_tighten,acq_ratio=args.acq_ratio,rest_ratio=args.rest_ratio,mode_loosen=args.mode_loosen,boost_steps=args.boost_steps,boost_cap=args.boost_cap,latent_nudge=args.latent_nudge,latent_step=args.latent_step) if args.bound_d else dict(advantage_gate=args.advantage_gate)
-            with alternating_curvature(task=task,curvature_bound=args.curvature_bound,center_critic=args.center_critic,**extra) as (recorder,source):
+            extra=dict(bound_d=True,d_curvature_bound=args.d_curvature_bound,ratio_loosen=args.ratio_loosen,ratio_tighten=args.ratio_tighten,acq_ratio=args.acq_ratio,rest_ratio=args.rest_ratio,mode_loosen=args.mode_loosen,boost_steps=args.boost_steps,boost_cap=args.boost_cap,latent_nudge=args.latent_nudge,latent_step=args.latent_step,stray_step=args.stray_step) if args.bound_d else dict(advantage_gate=args.advantage_gate)
+            with alternating_curvature(task=task,curvature_bound=args.curvature_bound,center_critic=args.center_critic,smooth_critic=args.smooth_critic,**extra) as (recorder,source):
                 result,context=run_legacy(spec,recipe,noise,model_policy=declared_model_policy(config))
             verdict=test_verdict(spec,result)
             data=dict(result=result,applied=context['applied'],noise=context['noise_receipt'],

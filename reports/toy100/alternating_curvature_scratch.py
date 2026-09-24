@@ -190,7 +190,8 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
 
     def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False,
                  ratio_loosen=None,ratio_tighten=None,acq_ratio=1.5,rest_ratio=4.,
-                 mode_loosen=None,boost_steps=0,boost_cap=None,latent_nudge=False,latent_step=.02):
+                 mode_loosen=None,boost_steps=0,boost_cap=None,latent_nudge=False,latent_step=.02,
+                 stray_step=0.):
         super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
         self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
         if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
@@ -211,6 +212,8 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         self.latent_nudge=bool(latent_nudge)
         if not math.isfinite(latent_step) or latent_step<0:raise ValueError('invalid latent step')
         self.latent_step=latent_step
+        if not math.isfinite(stray_step) or stray_step<0:raise ValueError('invalid stray step')
+        self.stray_step=stray_step
 
     def phases(self,step,opt_d,opt_g,local):
         if not self.enabled or step<self.start_step:
@@ -249,6 +252,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
                 with torch.no_grad():
                     for b,saved in buffers:b.copy_(saved)
             self.phase=phase
+            self._smooth_on=False
             yield phase
             state=self._rng(streams)
             if rng_after is None:rng_after=state
@@ -257,6 +261,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
             else:self.rng_replay_verified+=1
         self.row['critic_advantage']=self.advantage;self.row['gate_open']=False
         self.row['rho'],self.row['factor']=self.row['g']['rho'],self.row['g']['factor']
+        self._fill_angular_hole(local)
         self.records.append(self.row);self._record_trace(local)
         self.phase=None;self.outer_steps+=1
         if self.accounting is not None:self.accounting(self.rows[opt_d]['calls'],self.outer_steps)
@@ -282,6 +287,7 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
                 self.row['d']=dict(rho=rho,factor=factor)
             else:
                 for p,v in zip(self._params(opt_d),self.d_star):p.copy_(v)
+            self._arm_smoothed_critic()
             return None
         if self.phase==0:
             for p,v in zip(self._params(opt_g),self.g_base):p.copy_(v)
@@ -361,6 +367,68 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         self.row['latent_nudge']=worst
         self.row['latent_gap']=gap
 
+    @torch.no_grad()
+    def _fill_angular_hole(self,local):
+        """Slide one duplicated particle's latent toward the cloud's own largest angular gap.
+
+        Uses only clean 2D outputs. No mode centers, mode count, or generator-network step.
+        """
+        if self.stray_step<=0:return
+        if local.get('slow') is not None:return
+        generator,prior=local.get('generator'),local.get('prior')
+        if generator is None or prior is None or not hasattr(prior,'z'):return
+        z=prior.z
+        if z.ndim!=2:return
+        clean=getattr(generator,'model',generator)
+        points=clean(z).detach()
+        if points.ndim!=2 or points.shape[-1]!=2 or points.shape[0]!=z.shape[0] or points.shape[0]<3:return
+        center=points.mean(0)
+        rel=points-center
+        ang=torch.atan2(rel[:,1],rel[:,0])
+        order=torch.argsort(ang)
+        ordered=ang[order]
+        gaps=(torch.roll(ordered,-1)-ordered)%(2*math.pi)
+        med=float(gaps.median())
+        widest=int(torch.argmax(gaps))
+        if med<=0 or float(gaps[widest])<=1.6*med:return
+        edge=int(order[widest])
+        nxt=int(order[(widest+1)%points.shape[0]])
+        dist=torch.cdist(points,points)
+        dist.fill_diagonal_(float('inf'))
+        nn=dist.min(1).values
+        duplicates=(nn<0.5).nonzero().flatten()
+        if duplicates.numel():
+            gap_mid=float(ordered[widest]+0.5*gaps[widest])
+            # circular distance from each duplicate to the gap midpoint
+            d_ang=torch.atan2(torch.sin(ang[duplicates]-gap_mid),torch.cos(ang[duplicates]-gap_mid)).abs()
+            chosen=int(duplicates[int(torch.argmin(d_ang))])
+        else:
+            chosen=edge if float(nn[edge])>=float(nn[nxt]) else nxt
+        radius=float(rel[chosen].norm().clamp_min(1e-6))
+        mid=float(ordered[widest]+0.5*gaps[widest])
+        current=float(ang[chosen])
+        turn=math.atan2(math.sin(mid-current),math.cos(mid-current))
+        aim=current+math.copysign(min(abs(turn),self.stray_step/radius),turn)
+        target=center+radius*torch.tensor((math.cos(aim),math.sin(aim)),dtype=points.dtype)
+        delta=target-points[chosen]
+        eps=1e-3
+        jac=[]
+        base=points[chosen].clone()
+        for k in range(z.shape[1]):
+            z[chosen,k]+=eps
+            moved=clean(z)[chosen]
+            jac.append((moved-base)/eps)
+            z[chosen,k]-=eps
+        matrix=torch.stack(jac,1).double()
+        try:
+            step=torch.linalg.lstsq(matrix,delta.double().unsqueeze(1)).solution.squeeze(1)
+        except RuntimeError:
+            return
+        if not torch.isfinite(step).all():return
+        z[chosen]+=step.to(z.dtype)
+        self.row['stray_particle']=chosen
+        self.row['stray_gap']=float(gaps[widest])
+
 
     def early_acquisition(self):
         """Measurement only: when coverage first hits 8, and how long it holds before update 1000."""
@@ -375,15 +443,51 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
                 else:break
         return dict(first_eight=first,hold_before_1000=hold)
 
+    @torch.no_grad()
+    def _arm_smoothed_critic(self):
+        """Width is the input distance over which the critic score changes by about 1/2.
+
+        Armed only after D's step, so only the following G evaluation sees the average.
+        """
+        self._smooth_on=False
+        self._smooth_width=0.
+        if not getattr(self,'smooth_critic',False):return
+        from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
+        local=getattr(self,'_local',None) or {}
+        if local.get('slow') is not None:return
+        critic,generator,prior=local.get('critic'),local.get('generator'),local.get('prior')
+        if critic is None or generator is None or prior is None or not hasattr(prior,'z'):return
+        module=critic
+        while not isinstance(module,SimpleMLPDiscriminator) and hasattr(module,'model'):
+            module=module.model
+        if not isinstance(module,SimpleMLPDiscriminator):return
+        clean=getattr(generator,'model',generator)
+        points=clean(prior.z).detach()
+        if points.ndim!=2 or points.shape[-1]!=2:return
+        eps=1e-3
+        acc=0.
+        for dim in range(points.shape[-1]):
+            shift=torch.zeros_like(points)
+            shift[:,dim]=eps
+            acc=acc+((module(points+shift)-module(points-shift))/(2*eps)).square()
+        sharp=float(acc.mean().sqrt())
+        if not math.isfinite(sharp) or sharp<=1e-6:return
+        width=min(.15,.5/sharp)
+        self._smooth_width=width
+        self._smooth_on=True
+        self.row['critic_sharpness']=sharp
+        self.row['critic_width']=width
+
     def receipt(self):
         value=super().receipt()
         value['early_acquisition']=self.early_acquisition()
         value['center_critic']=getattr(self,'center_critic',False)
+        value['smooth_critic']=getattr(self,'smooth_critic',False)
         return value
 
 
 @contextmanager
-def alternating_curvature(task='mode_hold',bound_d=False,center_critic=False,**options):
+def alternating_curvature(task='mode_hold',bound_d=False,center_critic=False,smooth_critic=False,**options):
     from benchmarks.locked_shared import mode_hold,trajectory
     from benchmarks.locked_shared.mlp import SimpleMLPDiscriminator
     module={'mode_hold':mode_hold,'trajectory':trajectory}[task]
@@ -393,6 +497,9 @@ def alternating_curvature(task='mode_hold',bound_d=False,center_critic=False,**o
     calls[0].args.append(ast.Call(func=ast.Name(id='locals',ctx=ast.Load()),args=[],keywords=[]));ast.fix_missing_locations(tree)
     source=ast.unparse(tree)+'\n';recorder=(BothBoundRecorder if bound_d else AlternatingCurvatureRecorder)(**options)
     recorder.center_critic=center_critic
+    recorder.smooth_critic=smooth_critic
+    recorder._smooth_on=False
+    recorder._smooth_width=0.
     recorder.host_source=dict(task=task,original_function_sha256=original_sha,generated_function_sha256=sha(source.encode()))
     ordinary_step=torch.optim.Adam.step
     original_d_loss=GANLoss.d_loss
@@ -412,6 +519,15 @@ def alternating_curvature(task='mode_hold',bound_d=False,center_critic=False,**o
         def centered_forward(self,x):
             if recorder.center_critic and recorder.enabled and not recorder.passthrough and x.ndim>=2 and x.shape[-1]==2:
                 x=x-x.mean(dim=0,keepdim=True).detach()
+            if recorder._smooth_on and recorder.enabled and not recorder.passthrough and x.ndim>=2 and x.shape[-1]==2 and recorder._smooth_width>0:
+                width=recorder._smooth_width
+                vals=[original_forward(self,x)]
+                for dim in range(x.shape[-1]):
+                    shift=torch.zeros_like(x)
+                    shift[...,dim]=width
+                    vals.append(original_forward(self,x+shift))
+                    vals.append(original_forward(self,x-shift))
+                return torch.stack(vals,0).mean(0)
             return original_forward(self,x)
         stack.enter_context(patch.object(SimpleMLPDiscriminator,'forward',centered_forward))
         yield recorder,source
