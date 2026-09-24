@@ -1,0 +1,9 @@
+# A remembered donor exposes signal after an exact local rest
+
+The [fixed-target counterexample](forward-kl-gh9-independent-review.md) has a cumulative three-location target, but its current donor bank contains only center points. Frozen GH5/current-bank donors and GH9 EM select exact rest. `forward_kl_remembered_donor_rescue.py` tests one **post-rest diagnostic** on that exact same state. It does not edit the frozen method or train a neural generator.
+
+Only after exact rest, the diagnostic scans all remembered real coordinates in deterministic order. It scores 32 candidates at a time against cumulative finite GH9 in 2,048-target-row chunks, and checks the actual full GH9 cost before accepting the first strictly improving single donor. It then takes one GH9 EM step from that donor cloud. A full scan would be needed before declaring that no *single remembered-real donor* improves GH9; no such scan was needed in this positive case.
+
+The first remembered point, `x=−2`, replaces one of the 12 center atoms. Although the code evaluates a 32-point chunk, it inspects only the first candidate before finding strict descent. The largest candidate log-kernel block is 65,536 float64 elements. GH9 cost falls `728.73637 → 363.28786 → 180.12045` after the single EM step, and torch RNG is unchanged. Only **one of the three** target locations has an atom within `.25` after the move, so this result shows a recovered signal, not full acquisition or a native ring pass. Exact source hashes, row accounting, and final outputs are in [`receipt.json`](continuous-evidence/forward-kl-remembered-donor-rescue/receipt.json).
+
+The update is still for a fixed **finite GH9 target**. A real learner would also need whole-map neural fit/rest checks, cumulative-history cost control, and gates on ordinary training. The test does not establish a positive probability of this synthetic trap in the native Gaussian sampler or prove a global optimum is reachable by single donor steps.

@@ -1,0 +1,79 @@
+{
+  "status": "COMPLETE",
+  "scope": "one synthetic fixed-target post-rest rescue; not a native learner update or global convergence proof",
+  "source_sha256": {
+    "forward_kl_gh9_stress.py": "adc5d6f6ded8e6cf297ee90aa0d540723becc632a601b93b5b9a4393cd344485",
+    "forward_kl_chunked.py": "e0977838c7d5ae787f5194e653d1a8a09d5c7c0af7eb5f48b65af49a303b141f"
+  },
+  "script_sha256": "21828acbd6c823ae53fb0da343746442278eeeb4f68e8ece04e20fe85f346471",
+  "current_bank_selection": "EXACT_REST",
+  "current_bank_gh9_cost": 728.7363687213137,
+  "remembered_donor": {
+    "status": "STRICT_FINITE_GH9_DONOR",
+    "remembered_real_index": 0,
+    "donor_index": 0,
+    "inspected_candidates": 1,
+    "evaluated_candidates": 32,
+    "predicted_cost": 363.2878605955046,
+    "actual_cost": 363.2878605954983,
+    "before_cost": 728.7363687213137,
+    "max_candidate_matrix_elements": 65536,
+    "candidate_chunk": 32,
+    "quadrature_chunk": 2048
+  },
+  "gh9_em_steps": 1,
+  "gh9_after_donor": 363.2878605954983,
+  "gh9_after_one_em": 180.120451631972,
+  "output_after_one_em": [
+    [
+      -1.9999999999998068,
+      -1.816209330540677e-21
+    ],
+    [
+      0.999999999999889,
+      -3.429054914041289e-21
+    ],
+    [
+      0.999999999999889,
+      -3.429054914041289e-21
+    ],
+    [
+      0.999999999999889,
+      -3.429054914041289e-21
+    ],
+    [
+      0.999999999999889,
+      -3.429054914041289e-21
+    ],
+    [
+      0.999999999999889,
+      -3.429054914041289e-21
+    ],
+    [
+      0.999999999999889,
+      -3.429054914041289e-21
+    ],
+    [
+      0.999999999999889,
+      -3.429054914041289e-21
+    ],
+    [
+      0.999999999999889,
+      -3.429054914041289e-21
+    ],
+    [
+      0.999999999999889,
+      -3.429054914041289e-21
+    ],
+    [
+      0.999999999999889,
+      -3.429054914041289e-21
+    ],
+    [
+      0.999999999999889,
+      -3.429054914041289e-21
+    ]
+  ],
+  "target_modes_with_atom_within_quarter": 1,
+  "torch_rng_unchanged": true
+}
