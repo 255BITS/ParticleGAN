@@ -1,0 +1,60 @@
+{
+  "method": "reachstall_modettur",
+  "mechanism": "after the first ring read with modes==8 and HQ>=0.9, two extra D Adam steps on any later update whose current mode count is <=6",
+  "pin": "CUDA_VISIBLE_DEVICES= ATEN_CPU_CAPABILITY=avx2 MKL_ENABLE_INSTRUCTIONS=AVX2 ONEDNN_MAX_CPU_ISA=AVX2 DNNL_MAX_CPU_ISA=AVX2 OMP_NUM_THREADS=1",
+  "torch": "2.14.0+cpu",
+  "cpu_ranked": "AVX2",
+  "cpu_avx512_ring": "AVX512",
+  "verdict": "KILL",
+  "rankable_warm": true,
+  "thresholds_retuned": false,
+  "warm": {
+    "identity": {"passing": "200/200", "min_modes": 8, "min_hq": 0.989990234375, "final": [8, 0.9990234375]},
+    "method": {"passing": "200/200", "min_modes": 8, "min_hq": 0.920654296875, "final": [8, 0.9814453125], "armed_at": 1000, "fires": 0, "extra_d_steps": 0}
+  },
+  "cold_avx2": {
+    "trajectory": {"passed": true, "identity_mse": 0.0009426682372577488, "armed_at": null, "fires": 0},
+    "ring": {
+      "passed": true,
+      "modes": 8,
+      "terminal_hq": 0.965087890625,
+      "passing_observations": "11/24",
+      "suffix": 11,
+      "confirmed_step": 900,
+      "armed_at": 569,
+      "fires": 102,
+      "extra_d_steps": 204,
+      "last_fire_step": 729
+    }
+  },
+  "cold_avx512": {
+    "ring": {
+      "passed": true,
+      "modes": 8,
+      "terminal_hq": 0.998046875,
+      "passing_observations": "8/24",
+      "suffix": 8,
+      "confirmed_step": 1050,
+      "armed_at": 811,
+      "fires": 0,
+      "extra_d_steps": 0
+    }
+  },
+  "stay": {
+    "passing": "82/120",
+    "min_modes": 0,
+    "min_hq": 0.0,
+    "suffix": 0,
+    "final": [2400, 0, 0.0],
+    "zero_mode_steps": [1360, 2250, 2260, 2280, 2290, 2300, 2320, 2330, 2340, 2360, 2370, 2380, 2390, 2400],
+    "severe_dips_le_4": [1330, 1340, 1360, 2210, 2220, 2250, 2260, 2270, 2280, 2290, 2300, 2310, 2320, 2330, 2340, 2350, 2360, 2370, 2380, 2390, 2400],
+    "armed_at": 569,
+    "fires": 377,
+    "extra_d_steps": 754,
+    "fires_569_1200": 102,
+    "fires_1690_2300": 87,
+    "fires_1770_1820": 0,
+    "fires_2200_2400": 186,
+    "seconds": 67.8
+  }
+}

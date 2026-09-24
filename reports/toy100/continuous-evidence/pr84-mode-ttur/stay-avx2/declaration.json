@@ -1,0 +1,21 @@
+{
+  "phase": "stay",
+  "method": "reachstall_modettur",
+  "seed": 0,
+  "host": "neural",
+  "torch": "2.14.0+cpu",
+  "cpu": "AVX2",
+  "shared_gate_eligible": false,
+  "purity": "post-arm mode-count TTUR: after the first 8-mode HQ>=0.9 ring read, two extra D Adam steps when the current mode count is <=6. Stall reach, D/G learning rates, curvature bounds and Adam betas are unchanged. The ring read is a cadence gate, not a coverage loss, anchor, assignment or clip.",
+  "source": {
+    "reports/toy100/gan_followup_probe.py": "069b1d3bd65573a8e90cae63a4fe828e076a2f88fd347c5ad538fcecbec1e1cf",
+    "reports/toy100/pr84_reach_candidate.py": "37879b426b2b5bd250022c7dac16656cc37504bee4b90497bf5d3599bad5e3fa",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/toy100/continuous_probe.py": "55ac5acbae900ad233ab1f3779f8b2b5d1d7b0a0042cb519da6396ab17f4a96b",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792"
+  }
+}

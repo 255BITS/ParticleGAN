@@ -1,0 +1,29 @@
+cpu AVX512
+{"event": "DECLARED", "phase": "cold", "method": "reachstall_modettur", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX512", "shared_gate_eligible": false, "purity": "post-arm mode-count TTUR: after the first 8-mode HQ>=0.9 ring read, two extra D Adam steps when the current mode count is <=6. Stall reach, D/G learning rates, curvature bounds and Adam betas are unchanged. The ring read is a cadence gate, not a coverage loss, anchor, assignment or clip."}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 100, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "outer": 100, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 200, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "outer": 200, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 300, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "outer": 300, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 400, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 2}
+{"event": "PROGRESS", "outer": 400, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 2}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 500, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 5}
+{"event": "PROGRESS", "outer": 500, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 5}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 600, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 5}
+{"event": "PROGRESS", "outer": 600, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 5}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 700, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 6}
+{"event": "PROGRESS", "outer": 700, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 6}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 800, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 7}
+{"event": "PROGRESS", "outer": 800, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 7}
+{"event": "MODE_TTUR_ARMED", "step": 811, "modes": 8, "hq": 0.9138}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 900, "armed_at": 811, "fires": 0, "extra_d": 0, "modes": 8}
+{"event": "PROGRESS", "outer": 900, "armed": true, "armed_at": 811, "fires": 0, "extra_d": 0, "modes": 8}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 1000, "armed_at": 811, "fires": 0, "extra_d": 0, "modes": 8}
+{"event": "PROGRESS", "outer": 1000, "armed": true, "armed_at": 811, "fires": 0, "extra_d": 0, "modes": 8}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 1100, "armed_at": 811, "fires": 0, "extra_d": 0, "modes": 8}
+{"event": "PROGRESS", "outer": 1100, "armed": true, "armed_at": 811, "fires": 0, "extra_d": 0, "modes": 8}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 1200, "armed_at": 811, "fires": 0, "extra_d": 0, "modes": 8}
+{"event": "PROGRESS", "outer": 1200, "armed": true, "armed_at": 811, "fires": 0, "extra_d": 0, "modes": 8}
+{"event": "COLD", "task": "mode_hold", "passed": true, "status": "PASS", "seconds": 27.7, "tail": [{"step": 1000, "modes": 8, "hq": 0.9921875}, {"step": 1050, "modes": 8, "hq": 0.91845703125}, {"step": 1100, "modes": 8, "hq": 1.0}, {"step": 1150, "modes": 8, "hq": 0.983154296875}, {"step": 1200, "modes": 8, "hq": 0.998046875}], "dynamics": {"method": "pr84_slope_utilisation_reach+post_arm_mode_ttur", "scratch_optimizer_policy": "pr84_slope_utilisation_reach", "shared_gate_eligible": false, "curvature_bound": 0.25, "d_curvature_bound": 3.0, "advantage_gate": null, "outer_steps": 1200, "gate_open": 0, "bound_evaluated": 1200, "bound_active": 1200, "d_bound_active": 82, "gradient_evaluations_per_outer_step": 3.0, "moment_updates_per_outer_step": 1, "rng_replay_verified": 2400, "update_order": "alternating: D Adam step, then G+prior Adam step against the new D", "smooth_critic": true, "smooth_width_cap": 0.15, "reach": 0.5, "ramp": "stall", "game_bound": false, "game_steps": 1, "mode_ttur": true, "armed_at": 811, "fires": 0, "extra_d_steps": 0, "b_cap_slope": 1.0, "widened_updates": 1043, "max_width": 0.5}}
+{"event": "DONE"}

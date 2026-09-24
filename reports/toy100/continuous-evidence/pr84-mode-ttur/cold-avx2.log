@@ -1,0 +1,139 @@
+{"event": "DECLARED", "phase": "cold", "method": "reachstall_modettur", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX2", "shared_gate_eligible": false, "purity": "post-arm mode-count TTUR: after the first 8-mode HQ>=0.9 ring read, two extra D Adam steps when the current mode count is <=6. Stall reach, D/G learning rates, curvature bounds and Adam betas are unchanged. The ring read is a cadence gate, not a coverage loss, anchor, assignment or clip."}
+{"event": "PROGRESS", "phase": "cold", "task": "trajectory", "outer": 100, "armed_at": null, "fires": 0, "extra_d": 0, "modes": null}
+{"event": "PROGRESS", "outer": 100, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": null}
+{"event": "PROGRESS", "phase": "cold", "task": "trajectory", "outer": 200, "armed_at": null, "fires": 0, "extra_d": 0, "modes": null}
+{"event": "PROGRESS", "outer": 200, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": null}
+{"event": "PROGRESS", "phase": "cold", "task": "trajectory", "outer": 300, "armed_at": null, "fires": 0, "extra_d": 0, "modes": null}
+{"event": "PROGRESS", "outer": 300, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": null}
+{"event": "PROGRESS", "phase": "cold", "task": "trajectory", "outer": 400, "armed_at": null, "fires": 0, "extra_d": 0, "modes": null}
+{"event": "PROGRESS", "outer": 400, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": null}
+{"event": "COLD", "task": "trajectory", "passed": true, "status": "PASS", "seconds": 3.6, "tail": [{"step": 334}, {"step": 350}, {"step": 367}, {"step": 384}, {"step": 400}], "dynamics": {"method": "pr84_slope_utilisation_reach+post_arm_mode_ttur", "scratch_optimizer_policy": "pr84_slope_utilisation_reach", "shared_gate_eligible": false, "curvature_bound": 0.25, "d_curvature_bound": 3.0, "advantage_gate": null, "outer_steps": 400, "gate_open": 0, "bound_evaluated": 400, "bound_active": 400, "d_bound_active": 3, "gradient_evaluations_per_outer_step": 3.0, "moment_updates_per_outer_step": 1, "rng_replay_verified": 800, "update_order": "alternating: D Adam step, then G+prior Adam step against the new D", "smooth_critic": true, "smooth_width_cap": 0.15, "reach": 0.5, "ramp": "stall", "game_bound": false, "game_steps": 1, "mode_ttur": true, "armed_at": null, "fires": 0, "extra_d_steps": 0, "b_cap_slope": 1.0, "widened_updates": 0, "max_width": 0.0}}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 100, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "outer": 100, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 200, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "outer": 200, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 300, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 4}
+{"event": "PROGRESS", "outer": 300, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 4}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 400, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 1}
+{"event": "PROGRESS", "outer": 400, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 1}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 500, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 5}
+{"event": "PROGRESS", "outer": 500, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 5}
+{"event": "MODE_TTUR_ARMED", "step": 569, "modes": 8, "hq": 0.9172}
+{"event": "MODE_TTUR_FIRE", "step": 573, "modes": 5, "hq": 0.5879, "fires": 1, "extra_d": 2}
+{"event": "MODE_TTUR_FIRE", "step": 574, "modes": 5, "hq": 0.5879, "fires": 2, "extra_d": 4}
+{"event": "MODE_TTUR_FIRE", "step": 575, "modes": 5, "hq": 0.5879, "fires": 3, "extra_d": 6}
+{"event": "MODE_TTUR_FIRE", "step": 576, "modes": 5, "hq": 0.6721, "fires": 4, "extra_d": 8}
+{"event": "MODE_TTUR_FIRE", "step": 577, "modes": 5, "hq": 0.5879, "fires": 5, "extra_d": 10}
+{"event": "MODE_TTUR_FIRE", "step": 578, "modes": 5, "hq": 0.5879, "fires": 6, "extra_d": 12}
+{"event": "MODE_TTUR_FIRE", "step": 579, "modes": 2, "hq": 0.2522, "fires": 7, "extra_d": 14}
+{"event": "MODE_TTUR_FIRE", "step": 580, "modes": 4, "hq": 0.501, "fires": 8, "extra_d": 16}
+{"event": "MODE_TTUR_FIRE", "step": 581, "modes": 1, "hq": 0.1711, "fires": 9, "extra_d": 18}
+{"event": "MODE_TTUR_FIRE", "step": 582, "modes": 4, "hq": 0.501, "fires": 10, "extra_d": 20}
+{"event": "MODE_TTUR_FIRE", "step": 583, "modes": 4, "hq": 0.501, "fires": 11, "extra_d": 22}
+{"event": "MODE_TTUR_FIRE", "step": 584, "modes": 4, "hq": 0.501, "fires": 12, "extra_d": 24}
+{"event": "MODE_TTUR_FIRE", "step": 585, "modes": 3, "hq": 0.3406, "fires": 13, "extra_d": 26}
+{"event": "MODE_TTUR_FIRE", "step": 586, "modes": 2, "hq": 0.2522, "fires": 14, "extra_d": 28}
+{"event": "MODE_TTUR_FIRE", "step": 587, "modes": 5, "hq": 0.5068, "fires": 15, "extra_d": 30}
+{"event": "MODE_TTUR_FIRE", "step": 588, "modes": 2, "hq": 0.1755, "fires": 16, "extra_d": 32}
+{"event": "MODE_TTUR_FIRE", "step": 589, "modes": 3, "hq": 0.4148, "fires": 17, "extra_d": 34}
+{"event": "MODE_TTUR_FIRE", "step": 590, "modes": 4, "hq": 0.501, "fires": 18, "extra_d": 36}
+{"event": "MODE_TTUR_FIRE", "step": 591, "modes": 4, "hq": 0.501, "fires": 19, "extra_d": 38}
+{"event": "MODE_TTUR_FIRE", "step": 592, "modes": 4, "hq": 0.501, "fires": 20, "extra_d": 40}
+{"event": "MODE_TTUR_FIRE", "step": 593, "modes": 4, "hq": 0.501, "fires": 21, "extra_d": 42}
+{"event": "MODE_TTUR_FIRE", "step": 594, "modes": 3, "hq": 0.4148, "fires": 22, "extra_d": 44}
+{"event": "MODE_TTUR_FIRE", "step": 595, "modes": 2, "hq": 0.3315, "fires": 23, "extra_d": 46}
+{"event": "MODE_TTUR_FIRE", "step": 596, "modes": 2, "hq": 0.3315, "fires": 24, "extra_d": 48}
+{"event": "MODE_TTUR_FIRE", "step": 597, "modes": 2, "hq": 0.3315, "fires": 25, "extra_d": 50}
+{"event": "MODE_TTUR_FIRE", "step": 598, "modes": 1, "hq": 0.1711, "fires": 26, "extra_d": 52}
+{"event": "MODE_TTUR_FIRE", "step": 599, "modes": 4, "hq": 0.501, "fires": 27, "extra_d": 54}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 600, "armed_at": 569, "fires": 27, "extra_d": 54, "modes": 4}
+{"event": "PROGRESS", "outer": 600, "armed": true, "armed_at": 569, "fires": 27, "extra_d": 54, "modes": 4}
+{"event": "MODE_TTUR_FIRE", "step": 600, "modes": 1, "hq": 0.1711, "fires": 28, "extra_d": 56}
+{"event": "MODE_TTUR_FIRE", "step": 601, "modes": 4, "hq": 0.5852, "fires": 29, "extra_d": 58}
+{"event": "MODE_TTUR_FIRE", "step": 602, "modes": 1, "hq": 0.1711, "fires": 30, "extra_d": 60}
+{"event": "MODE_TTUR_FIRE", "step": 603, "modes": 3, "hq": 0.4148, "fires": 31, "extra_d": 62}
+{"event": "MODE_TTUR_FIRE", "step": 604, "modes": 6, "hq": 0.7402, "fires": 32, "extra_d": 64}
+{"event": "MODE_TTUR_FIRE", "step": 607, "modes": 6, "hq": 0.7622, "fires": 33, "extra_d": 66}
+{"event": "MODE_TTUR_FIRE", "step": 620, "modes": 6, "hq": 0.6694, "fires": 34, "extra_d": 68}
+{"event": "MODE_TTUR_FIRE", "step": 621, "modes": 6, "hq": 0.6694, "fires": 35, "extra_d": 70}
+{"event": "MODE_TTUR_FIRE", "step": 622, "modes": 6, "hq": 0.7505, "fires": 36, "extra_d": 72}
+{"event": "MODE_TTUR_FIRE", "step": 625, "modes": 6, "hq": 0.7505, "fires": 37, "extra_d": 74}
+{"event": "MODE_TTUR_FIRE", "step": 626, "modes": 6, "hq": 0.7505, "fires": 38, "extra_d": 76}
+{"event": "MODE_TTUR_FIRE", "step": 628, "modes": 5, "hq": 0.5007, "fires": 39, "extra_d": 78}
+{"event": "MODE_TTUR_FIRE", "step": 632, "modes": 6, "hq": 0.6663, "fires": 40, "extra_d": 80}
+{"event": "MODE_TTUR_FIRE", "step": 633, "modes": 3, "hq": 0.3364, "fires": 41, "extra_d": 82}
+{"event": "MODE_TTUR_FIRE", "step": 634, "modes": 4, "hq": 0.5852, "fires": 42, "extra_d": 84}
+{"event": "MODE_TTUR_FIRE", "step": 639, "modes": 1, "hq": 0.0886, "fires": 43, "extra_d": 86}
+{"event": "MODE_TTUR_FIRE", "step": 640, "modes": 5, "hq": 0.4941, "fires": 44, "extra_d": 88}
+{"event": "MODE_TTUR_FIRE", "step": 647, "modes": 5, "hq": 0.5735, "fires": 45, "extra_d": 90}
+{"event": "MODE_TTUR_FIRE", "step": 651, "modes": 5, "hq": 0.499, "fires": 46, "extra_d": 92}
+{"event": "MODE_TTUR_FIRE", "step": 653, "modes": 4, "hq": 0.4197, "fires": 47, "extra_d": 94}
+{"event": "MODE_TTUR_FIRE", "step": 654, "modes": 2, "hq": 0.2581, "fires": 48, "extra_d": 96}
+{"event": "MODE_TTUR_FIRE", "step": 655, "modes": 6, "hq": 0.6694, "fires": 49, "extra_d": 98}
+{"event": "MODE_TTUR_FIRE", "step": 656, "modes": 3, "hq": 0.3364, "fires": 50, "extra_d": 100}
+{"event": "MODE_TTUR_FIRE", "step": 657, "modes": 3, "hq": 0.3364, "fires": 51, "extra_d": 102}
+{"event": "MODE_TTUR_FIRE", "step": 658, "modes": 3, "hq": 0.3364, "fires": 52, "extra_d": 104}
+{"event": "MODE_TTUR_FIRE", "step": 659, "modes": 3, "hq": 0.3481, "fires": 53, "extra_d": 106}
+{"event": "MODE_TTUR_FIRE", "step": 660, "modes": 5, "hq": 0.5735, "fires": 54, "extra_d": 108}
+{"event": "MODE_TTUR_FIRE", "step": 661, "modes": 4, "hq": 0.4275, "fires": 55, "extra_d": 110}
+{"event": "MODE_TTUR_FIRE", "step": 662, "modes": 3, "hq": 0.3364, "fires": 56, "extra_d": 112}
+{"event": "MODE_TTUR_FIRE", "step": 663, "modes": 6, "hq": 0.7505, "fires": 57, "extra_d": 114}
+{"event": "MODE_TTUR_FIRE", "step": 664, "modes": 6, "hq": 0.6663, "fires": 58, "extra_d": 116}
+{"event": "MODE_TTUR_FIRE", "step": 665, "modes": 3, "hq": 0.3364, "fires": 59, "extra_d": 118}
+{"event": "MODE_TTUR_FIRE", "step": 666, "modes": 3, "hq": 0.3364, "fires": 60, "extra_d": 120}
+{"event": "MODE_TTUR_FIRE", "step": 667, "modes": 6, "hq": 0.5959, "fires": 61, "extra_d": 122}
+{"event": "MODE_TTUR_FIRE", "step": 668, "modes": 4, "hq": 0.4131, "fires": 62, "extra_d": 124}
+{"event": "MODE_TTUR_FIRE", "step": 669, "modes": 3, "hq": 0.2478, "fires": 63, "extra_d": 126}
+{"event": "MODE_TTUR_FIRE", "step": 670, "modes": 6, "hq": 0.5681, "fires": 64, "extra_d": 128}
+{"event": "MODE_TTUR_FIRE", "step": 671, "modes": 3, "hq": 0.3364, "fires": 65, "extra_d": 130}
+{"event": "MODE_TTUR_FIRE", "step": 672, "modes": 3, "hq": 0.4141, "fires": 66, "extra_d": 132}
+{"event": "MODE_TTUR_FIRE", "step": 673, "modes": 2, "hq": 0.1694, "fires": 67, "extra_d": 134}
+{"event": "MODE_TTUR_FIRE", "step": 674, "modes": 1, "hq": 0.1604, "fires": 68, "extra_d": 136}
+{"event": "MODE_TTUR_FIRE", "step": 675, "modes": 3, "hq": 0.3445, "fires": 69, "extra_d": 138}
+{"event": "MODE_TTUR_FIRE", "step": 676, "modes": 6, "hq": 0.6619, "fires": 70, "extra_d": 140}
+{"event": "MODE_TTUR_FIRE", "step": 677, "modes": 2, "hq": 0.2371, "fires": 71, "extra_d": 142}
+{"event": "MODE_TTUR_FIRE", "step": 678, "modes": 2, "hq": 0.2605, "fires": 72, "extra_d": 144}
+{"event": "MODE_TTUR_FIRE", "step": 679, "modes": 3, "hq": 0.2656, "fires": 73, "extra_d": 146}
+{"event": "MODE_TTUR_FIRE", "step": 680, "modes": 1, "hq": 0.0886, "fires": 74, "extra_d": 148}
+{"event": "MODE_TTUR_FIRE", "step": 681, "modes": 4, "hq": 0.4131, "fires": 75, "extra_d": 150}
+{"event": "MODE_TTUR_FIRE", "step": 682, "modes": 6, "hq": 0.7556, "fires": 76, "extra_d": 152}
+{"event": "MODE_TTUR_FIRE", "step": 687, "modes": 6, "hq": 0.5815, "fires": 77, "extra_d": 154}
+{"event": "MODE_TTUR_FIRE", "step": 688, "modes": 5, "hq": 0.6018, "fires": 78, "extra_d": 156}
+{"event": "MODE_TTUR_FIRE", "step": 689, "modes": 6, "hq": 0.5681, "fires": 79, "extra_d": 158}
+{"event": "MODE_TTUR_FIRE", "step": 690, "modes": 6, "hq": 0.5681, "fires": 80, "extra_d": 160}
+{"event": "MODE_TTUR_FIRE", "step": 693, "modes": 6, "hq": 0.6702, "fires": 81, "extra_d": 162}
+{"event": "MODE_TTUR_FIRE", "step": 694, "modes": 5, "hq": 0.5193, "fires": 82, "extra_d": 164}
+{"event": "MODE_TTUR_FIRE", "step": 695, "modes": 2, "hq": 0.1694, "fires": 83, "extra_d": 166}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 700, "armed_at": 569, "fires": 83, "extra_d": 166, "modes": 8}
+{"event": "PROGRESS", "outer": 700, "armed": true, "armed_at": 569, "fires": 83, "extra_d": 166, "modes": 8}
+{"event": "MODE_TTUR_FIRE", "step": 705, "modes": 6, "hq": 0.6685, "fires": 84, "extra_d": 168}
+{"event": "MODE_TTUR_FIRE", "step": 706, "modes": 5, "hq": 0.5054, "fires": 85, "extra_d": 170}
+{"event": "MODE_TTUR_FIRE", "step": 707, "modes": 1, "hq": 0.1711, "fires": 86, "extra_d": 172}
+{"event": "MODE_TTUR_FIRE", "step": 708, "modes": 2, "hq": 0.177, "fires": 87, "extra_d": 174}
+{"event": "MODE_TTUR_FIRE", "step": 709, "modes": 0, "hq": 0.0, "fires": 88, "extra_d": 176}
+{"event": "MODE_TTUR_FIRE", "step": 710, "modes": 2, "hq": 0.177, "fires": 89, "extra_d": 178}
+{"event": "MODE_TTUR_FIRE", "step": 711, "modes": 3, "hq": 0.2527, "fires": 90, "extra_d": 180}
+{"event": "MODE_TTUR_FIRE", "step": 712, "modes": 2, "hq": 0.2437, "fires": 91, "extra_d": 182}
+{"event": "MODE_TTUR_FIRE", "step": 713, "modes": 4, "hq": 0.4224, "fires": 92, "extra_d": 184}
+{"event": "MODE_TTUR_FIRE", "step": 714, "modes": 6, "hq": 0.6633, "fires": 93, "extra_d": 186}
+{"event": "MODE_TTUR_FIRE", "step": 715, "modes": 4, "hq": 0.3328, "fires": 94, "extra_d": 188}
+{"event": "MODE_TTUR_FIRE", "step": 716, "modes": 4, "hq": 0.3369, "fires": 95, "extra_d": 190}
+{"event": "MODE_TTUR_FIRE", "step": 717, "modes": 6, "hq": 0.752, "fires": 96, "extra_d": 192}
+{"event": "MODE_TTUR_FIRE", "step": 718, "modes": 6, "hq": 0.752, "fires": 97, "extra_d": 194}
+{"event": "MODE_TTUR_FIRE", "step": 719, "modes": 6, "hq": 0.752, "fires": 98, "extra_d": 196}
+{"event": "MODE_TTUR_FIRE", "step": 720, "modes": 6, "hq": 0.752, "fires": 99, "extra_d": 198}
+{"event": "MODE_TTUR_FIRE", "step": 721, "modes": 6, "hq": 0.7402, "fires": 100, "extra_d": 200}
+{"event": "MODE_TTUR_FIRE", "step": 722, "modes": 5, "hq": 0.5767, "fires": 101, "extra_d": 202}
+{"event": "MODE_TTUR_FIRE", "step": 729, "modes": 6, "hq": 0.752, "fires": 102, "extra_d": 204}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 800, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "outer": 800, "armed": true, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 900, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "outer": 900, "armed": true, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 1000, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "outer": 1000, "armed": true, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 1100, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "outer": 1100, "armed": true, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "phase": "cold", "task": "mode_hold", "outer": 1200, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "outer": 1200, "armed": true, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "COLD", "task": "mode_hold", "passed": true, "status": "PASS", "seconds": 32.6, "tail": [{"step": 1000, "modes": 8, "hq": 0.999755859375}, {"step": 1050, "modes": 8, "hq": 1.0}, {"step": 1100, "modes": 8, "hq": 0.999755859375}, {"step": 1150, "modes": 8, "hq": 0.99755859375}, {"step": 1200, "modes": 8, "hq": 0.965087890625}], "dynamics": {"method": "pr84_slope_utilisation_reach+post_arm_mode_ttur", "scratch_optimizer_policy": "pr84_slope_utilisation_reach", "shared_gate_eligible": false, "curvature_bound": 0.25, "d_curvature_bound": 3.0, "advantage_gate": null, "outer_steps": 1200, "gate_open": 0, "bound_evaluated": 1200, "bound_active": 1200, "d_bound_active": 103, "gradient_evaluations_per_outer_step": 3.0, "moment_updates_per_outer_step": 1, "rng_replay_verified": 2400, "update_order": "alternating: D Adam step, then G+prior Adam step against the new D", "smooth_critic": true, "smooth_width_cap": 0.15, "reach": 0.5, "ramp": "stall", "game_bound": false, "game_steps": 1, "mode_ttur": true, "armed_at": 569, "fires": 102, "extra_d_steps": 204, "b_cap_slope": 1.0, "widened_updates": 1079, "max_width": 0.5}}
+{"event": "DONE"}

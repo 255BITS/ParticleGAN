@@ -1,0 +1,429 @@
+{"event": "DECLARED", "phase": "stay", "method": "reachstall_modettur", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX2", "shared_gate_eligible": false, "purity": "post-arm mode-count TTUR: after the first 8-mode HQ>=0.9 ring read, two extra D Adam steps when the current mode count is <=6. Stall reach, D/G learning rates, curvature bounds and Adam betas are unchanged. The ring read is a cadence gate, not a coverage loss, anchor, assignment or clip."}
+{"event": "PROGRESS", "phase": "stay", "outer": 100, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "outer": 100, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "phase": "stay", "outer": 200, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "outer": 200, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 0}
+{"event": "PROGRESS", "phase": "stay", "outer": 300, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 4}
+{"event": "PROGRESS", "outer": 300, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 4}
+{"event": "PROGRESS", "phase": "stay", "outer": 400, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 1}
+{"event": "PROGRESS", "outer": 400, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 1}
+{"event": "PROGRESS", "phase": "stay", "outer": 500, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 5}
+{"event": "PROGRESS", "outer": 500, "armed": false, "armed_at": null, "fires": 0, "extra_d": 0, "modes": 5}
+{"event": "MODE_TTUR_ARMED", "step": 569, "modes": 8, "hq": 0.9172}
+{"event": "MODE_TTUR_FIRE", "step": 573, "modes": 5, "hq": 0.5879, "fires": 1, "extra_d": 2}
+{"event": "MODE_TTUR_FIRE", "step": 574, "modes": 5, "hq": 0.5879, "fires": 2, "extra_d": 4}
+{"event": "MODE_TTUR_FIRE", "step": 575, "modes": 5, "hq": 0.5879, "fires": 3, "extra_d": 6}
+{"event": "MODE_TTUR_FIRE", "step": 576, "modes": 5, "hq": 0.6721, "fires": 4, "extra_d": 8}
+{"event": "MODE_TTUR_FIRE", "step": 577, "modes": 5, "hq": 0.5879, "fires": 5, "extra_d": 10}
+{"event": "MODE_TTUR_FIRE", "step": 578, "modes": 5, "hq": 0.5879, "fires": 6, "extra_d": 12}
+{"event": "MODE_TTUR_FIRE", "step": 579, "modes": 2, "hq": 0.2522, "fires": 7, "extra_d": 14}
+{"event": "MODE_TTUR_FIRE", "step": 580, "modes": 4, "hq": 0.501, "fires": 8, "extra_d": 16}
+{"event": "MODE_TTUR_FIRE", "step": 581, "modes": 1, "hq": 0.1711, "fires": 9, "extra_d": 18}
+{"event": "MODE_TTUR_FIRE", "step": 582, "modes": 4, "hq": 0.501, "fires": 10, "extra_d": 20}
+{"event": "MODE_TTUR_FIRE", "step": 583, "modes": 4, "hq": 0.501, "fires": 11, "extra_d": 22}
+{"event": "MODE_TTUR_FIRE", "step": 584, "modes": 4, "hq": 0.501, "fires": 12, "extra_d": 24}
+{"event": "MODE_TTUR_FIRE", "step": 585, "modes": 3, "hq": 0.3406, "fires": 13, "extra_d": 26}
+{"event": "MODE_TTUR_FIRE", "step": 586, "modes": 2, "hq": 0.2522, "fires": 14, "extra_d": 28}
+{"event": "MODE_TTUR_FIRE", "step": 587, "modes": 5, "hq": 0.5068, "fires": 15, "extra_d": 30}
+{"event": "MODE_TTUR_FIRE", "step": 588, "modes": 2, "hq": 0.1755, "fires": 16, "extra_d": 32}
+{"event": "MODE_TTUR_FIRE", "step": 589, "modes": 3, "hq": 0.4148, "fires": 17, "extra_d": 34}
+{"event": "MODE_TTUR_FIRE", "step": 590, "modes": 4, "hq": 0.501, "fires": 18, "extra_d": 36}
+{"event": "MODE_TTUR_FIRE", "step": 591, "modes": 4, "hq": 0.501, "fires": 19, "extra_d": 38}
+{"event": "MODE_TTUR_FIRE", "step": 592, "modes": 4, "hq": 0.501, "fires": 20, "extra_d": 40}
+{"event": "MODE_TTUR_FIRE", "step": 593, "modes": 4, "hq": 0.501, "fires": 21, "extra_d": 42}
+{"event": "MODE_TTUR_FIRE", "step": 594, "modes": 3, "hq": 0.4148, "fires": 22, "extra_d": 44}
+{"event": "MODE_TTUR_FIRE", "step": 595, "modes": 2, "hq": 0.3315, "fires": 23, "extra_d": 46}
+{"event": "MODE_TTUR_FIRE", "step": 596, "modes": 2, "hq": 0.3315, "fires": 24, "extra_d": 48}
+{"event": "MODE_TTUR_FIRE", "step": 597, "modes": 2, "hq": 0.3315, "fires": 25, "extra_d": 50}
+{"event": "MODE_TTUR_FIRE", "step": 598, "modes": 1, "hq": 0.1711, "fires": 26, "extra_d": 52}
+{"event": "MODE_TTUR_FIRE", "step": 599, "modes": 4, "hq": 0.501, "fires": 27, "extra_d": 54}
+{"event": "PROGRESS", "phase": "stay", "outer": 600, "armed_at": 569, "fires": 27, "extra_d": 54, "modes": 4}
+{"event": "PROGRESS", "outer": 600, "armed": true, "armed_at": 569, "fires": 27, "extra_d": 54, "modes": 4}
+{"event": "MODE_TTUR_FIRE", "step": 600, "modes": 1, "hq": 0.1711, "fires": 28, "extra_d": 56}
+{"event": "MODE_TTUR_FIRE", "step": 601, "modes": 4, "hq": 0.5852, "fires": 29, "extra_d": 58}
+{"event": "MODE_TTUR_FIRE", "step": 602, "modes": 1, "hq": 0.1711, "fires": 30, "extra_d": 60}
+{"event": "MODE_TTUR_FIRE", "step": 603, "modes": 3, "hq": 0.4148, "fires": 31, "extra_d": 62}
+{"event": "MODE_TTUR_FIRE", "step": 604, "modes": 6, "hq": 0.7402, "fires": 32, "extra_d": 64}
+{"event": "MODE_TTUR_FIRE", "step": 607, "modes": 6, "hq": 0.7622, "fires": 33, "extra_d": 66}
+{"event": "MODE_TTUR_FIRE", "step": 620, "modes": 6, "hq": 0.6694, "fires": 34, "extra_d": 68}
+{"event": "MODE_TTUR_FIRE", "step": 621, "modes": 6, "hq": 0.6694, "fires": 35, "extra_d": 70}
+{"event": "MODE_TTUR_FIRE", "step": 622, "modes": 6, "hq": 0.7505, "fires": 36, "extra_d": 72}
+{"event": "MODE_TTUR_FIRE", "step": 625, "modes": 6, "hq": 0.7505, "fires": 37, "extra_d": 74}
+{"event": "MODE_TTUR_FIRE", "step": 626, "modes": 6, "hq": 0.7505, "fires": 38, "extra_d": 76}
+{"event": "MODE_TTUR_FIRE", "step": 628, "modes": 5, "hq": 0.5007, "fires": 39, "extra_d": 78}
+{"event": "MODE_TTUR_FIRE", "step": 632, "modes": 6, "hq": 0.6663, "fires": 40, "extra_d": 80}
+{"event": "MODE_TTUR_FIRE", "step": 633, "modes": 3, "hq": 0.3364, "fires": 41, "extra_d": 82}
+{"event": "MODE_TTUR_FIRE", "step": 634, "modes": 4, "hq": 0.5852, "fires": 42, "extra_d": 84}
+{"event": "MODE_TTUR_FIRE", "step": 639, "modes": 1, "hq": 0.0886, "fires": 43, "extra_d": 86}
+{"event": "MODE_TTUR_FIRE", "step": 640, "modes": 5, "hq": 0.4941, "fires": 44, "extra_d": 88}
+{"event": "MODE_TTUR_FIRE", "step": 647, "modes": 5, "hq": 0.5735, "fires": 45, "extra_d": 90}
+{"event": "MODE_TTUR_FIRE", "step": 651, "modes": 5, "hq": 0.499, "fires": 46, "extra_d": 92}
+{"event": "MODE_TTUR_FIRE", "step": 653, "modes": 4, "hq": 0.4197, "fires": 47, "extra_d": 94}
+{"event": "MODE_TTUR_FIRE", "step": 654, "modes": 2, "hq": 0.2581, "fires": 48, "extra_d": 96}
+{"event": "MODE_TTUR_FIRE", "step": 655, "modes": 6, "hq": 0.6694, "fires": 49, "extra_d": 98}
+{"event": "MODE_TTUR_FIRE", "step": 656, "modes": 3, "hq": 0.3364, "fires": 50, "extra_d": 100}
+{"event": "MODE_TTUR_FIRE", "step": 657, "modes": 3, "hq": 0.3364, "fires": 51, "extra_d": 102}
+{"event": "MODE_TTUR_FIRE", "step": 658, "modes": 3, "hq": 0.3364, "fires": 52, "extra_d": 104}
+{"event": "MODE_TTUR_FIRE", "step": 659, "modes": 3, "hq": 0.3481, "fires": 53, "extra_d": 106}
+{"event": "MODE_TTUR_FIRE", "step": 660, "modes": 5, "hq": 0.5735, "fires": 54, "extra_d": 108}
+{"event": "MODE_TTUR_FIRE", "step": 661, "modes": 4, "hq": 0.4275, "fires": 55, "extra_d": 110}
+{"event": "MODE_TTUR_FIRE", "step": 662, "modes": 3, "hq": 0.3364, "fires": 56, "extra_d": 112}
+{"event": "MODE_TTUR_FIRE", "step": 663, "modes": 6, "hq": 0.7505, "fires": 57, "extra_d": 114}
+{"event": "MODE_TTUR_FIRE", "step": 664, "modes": 6, "hq": 0.6663, "fires": 58, "extra_d": 116}
+{"event": "MODE_TTUR_FIRE", "step": 665, "modes": 3, "hq": 0.3364, "fires": 59, "extra_d": 118}
+{"event": "MODE_TTUR_FIRE", "step": 666, "modes": 3, "hq": 0.3364, "fires": 60, "extra_d": 120}
+{"event": "MODE_TTUR_FIRE", "step": 667, "modes": 6, "hq": 0.5959, "fires": 61, "extra_d": 122}
+{"event": "MODE_TTUR_FIRE", "step": 668, "modes": 4, "hq": 0.4131, "fires": 62, "extra_d": 124}
+{"event": "MODE_TTUR_FIRE", "step": 669, "modes": 3, "hq": 0.2478, "fires": 63, "extra_d": 126}
+{"event": "MODE_TTUR_FIRE", "step": 670, "modes": 6, "hq": 0.5681, "fires": 64, "extra_d": 128}
+{"event": "MODE_TTUR_FIRE", "step": 671, "modes": 3, "hq": 0.3364, "fires": 65, "extra_d": 130}
+{"event": "MODE_TTUR_FIRE", "step": 672, "modes": 3, "hq": 0.4141, "fires": 66, "extra_d": 132}
+{"event": "MODE_TTUR_FIRE", "step": 673, "modes": 2, "hq": 0.1694, "fires": 67, "extra_d": 134}
+{"event": "MODE_TTUR_FIRE", "step": 674, "modes": 1, "hq": 0.1604, "fires": 68, "extra_d": 136}
+{"event": "MODE_TTUR_FIRE", "step": 675, "modes": 3, "hq": 0.3445, "fires": 69, "extra_d": 138}
+{"event": "MODE_TTUR_FIRE", "step": 676, "modes": 6, "hq": 0.6619, "fires": 70, "extra_d": 140}
+{"event": "MODE_TTUR_FIRE", "step": 677, "modes": 2, "hq": 0.2371, "fires": 71, "extra_d": 142}
+{"event": "MODE_TTUR_FIRE", "step": 678, "modes": 2, "hq": 0.2605, "fires": 72, "extra_d": 144}
+{"event": "MODE_TTUR_FIRE", "step": 679, "modes": 3, "hq": 0.2656, "fires": 73, "extra_d": 146}
+{"event": "MODE_TTUR_FIRE", "step": 680, "modes": 1, "hq": 0.0886, "fires": 74, "extra_d": 148}
+{"event": "MODE_TTUR_FIRE", "step": 681, "modes": 4, "hq": 0.4131, "fires": 75, "extra_d": 150}
+{"event": "MODE_TTUR_FIRE", "step": 682, "modes": 6, "hq": 0.7556, "fires": 76, "extra_d": 152}
+{"event": "MODE_TTUR_FIRE", "step": 687, "modes": 6, "hq": 0.5815, "fires": 77, "extra_d": 154}
+{"event": "MODE_TTUR_FIRE", "step": 688, "modes": 5, "hq": 0.6018, "fires": 78, "extra_d": 156}
+{"event": "MODE_TTUR_FIRE", "step": 689, "modes": 6, "hq": 0.5681, "fires": 79, "extra_d": 158}
+{"event": "MODE_TTUR_FIRE", "step": 690, "modes": 6, "hq": 0.5681, "fires": 80, "extra_d": 160}
+{"event": "MODE_TTUR_FIRE", "step": 693, "modes": 6, "hq": 0.6702, "fires": 81, "extra_d": 162}
+{"event": "MODE_TTUR_FIRE", "step": 694, "modes": 5, "hq": 0.5193, "fires": 82, "extra_d": 164}
+{"event": "MODE_TTUR_FIRE", "step": 695, "modes": 2, "hq": 0.1694, "fires": 83, "extra_d": 166}
+{"event": "PROGRESS", "phase": "stay", "outer": 700, "armed_at": 569, "fires": 83, "extra_d": 166, "modes": 8}
+{"event": "PROGRESS", "outer": 700, "armed": true, "armed_at": 569, "fires": 83, "extra_d": 166, "modes": 8}
+{"event": "MODE_TTUR_FIRE", "step": 705, "modes": 6, "hq": 0.6685, "fires": 84, "extra_d": 168}
+{"event": "MODE_TTUR_FIRE", "step": 706, "modes": 5, "hq": 0.5054, "fires": 85, "extra_d": 170}
+{"event": "MODE_TTUR_FIRE", "step": 707, "modes": 1, "hq": 0.1711, "fires": 86, "extra_d": 172}
+{"event": "MODE_TTUR_FIRE", "step": 708, "modes": 2, "hq": 0.177, "fires": 87, "extra_d": 174}
+{"event": "MODE_TTUR_FIRE", "step": 709, "modes": 0, "hq": 0.0, "fires": 88, "extra_d": 176}
+{"event": "MODE_TTUR_FIRE", "step": 710, "modes": 2, "hq": 0.177, "fires": 89, "extra_d": 178}
+{"event": "MODE_TTUR_FIRE", "step": 711, "modes": 3, "hq": 0.2527, "fires": 90, "extra_d": 180}
+{"event": "MODE_TTUR_FIRE", "step": 712, "modes": 2, "hq": 0.2437, "fires": 91, "extra_d": 182}
+{"event": "MODE_TTUR_FIRE", "step": 713, "modes": 4, "hq": 0.4224, "fires": 92, "extra_d": 184}
+{"event": "MODE_TTUR_FIRE", "step": 714, "modes": 6, "hq": 0.6633, "fires": 93, "extra_d": 186}
+{"event": "MODE_TTUR_FIRE", "step": 715, "modes": 4, "hq": 0.3328, "fires": 94, "extra_d": 188}
+{"event": "MODE_TTUR_FIRE", "step": 716, "modes": 4, "hq": 0.3369, "fires": 95, "extra_d": 190}
+{"event": "MODE_TTUR_FIRE", "step": 717, "modes": 6, "hq": 0.752, "fires": 96, "extra_d": 192}
+{"event": "MODE_TTUR_FIRE", "step": 718, "modes": 6, "hq": 0.752, "fires": 97, "extra_d": 194}
+{"event": "MODE_TTUR_FIRE", "step": 719, "modes": 6, "hq": 0.752, "fires": 98, "extra_d": 196}
+{"event": "MODE_TTUR_FIRE", "step": 720, "modes": 6, "hq": 0.752, "fires": 99, "extra_d": 198}
+{"event": "MODE_TTUR_FIRE", "step": 721, "modes": 6, "hq": 0.7402, "fires": 100, "extra_d": 200}
+{"event": "MODE_TTUR_FIRE", "step": 722, "modes": 5, "hq": 0.5767, "fires": 101, "extra_d": 202}
+{"event": "MODE_TTUR_FIRE", "step": 729, "modes": 6, "hq": 0.752, "fires": 102, "extra_d": 204}
+{"event": "PROGRESS", "phase": "stay", "outer": 800, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "outer": 800, "armed": true, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "phase": "stay", "outer": 900, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "outer": 900, "armed": true, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "phase": "stay", "outer": 1000, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "outer": 1000, "armed": true, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "phase": "stay", "outer": 1100, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "outer": 1100, "armed": true, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "phase": "stay", "outer": 1200, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "outer": 1200, "armed": true, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "phase": "stay", "outer": 1300, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "PROGRESS", "outer": 1300, "armed": true, "armed_at": 569, "fires": 102, "extra_d": 204, "modes": 8}
+{"event": "MODE_TTUR_FIRE", "step": 1326, "modes": 6, "hq": 0.6516, "fires": 103, "extra_d": 206}
+{"event": "MODE_TTUR_FIRE", "step": 1327, "modes": 4, "hq": 0.4041, "fires": 104, "extra_d": 208}
+{"event": "MODE_TTUR_FIRE", "step": 1328, "modes": 0, "hq": 0.0, "fires": 105, "extra_d": 210}
+{"event": "MODE_TTUR_FIRE", "step": 1329, "modes": 0, "hq": 0.0, "fires": 106, "extra_d": 212}
+{"event": "MODE_TTUR_FIRE", "step": 1330, "modes": 0, "hq": 0.0, "fires": 107, "extra_d": 214}
+{"event": "MODE_TTUR_FIRE", "step": 1331, "modes": 0, "hq": 0.0, "fires": 108, "extra_d": 216}
+{"event": "MODE_TTUR_FIRE", "step": 1332, "modes": 1, "hq": 0.1697, "fires": 109, "extra_d": 218}
+{"event": "MODE_TTUR_FIRE", "step": 1333, "modes": 1, "hq": 0.0828, "fires": 110, "extra_d": 220}
+{"event": "MODE_TTUR_FIRE", "step": 1334, "modes": 2, "hq": 0.1748, "fires": 111, "extra_d": 222}
+{"event": "MODE_TTUR_FIRE", "step": 1335, "modes": 1, "hq": 0.0828, "fires": 112, "extra_d": 224}
+{"event": "MODE_TTUR_FIRE", "step": 1336, "modes": 4, "hq": 0.4031, "fires": 113, "extra_d": 226}
+{"event": "MODE_TTUR_FIRE", "step": 1337, "modes": 3, "hq": 0.3264, "fires": 114, "extra_d": 228}
+{"event": "MODE_TTUR_FIRE", "step": 1338, "modes": 0, "hq": 0.0, "fires": 115, "extra_d": 230}
+{"event": "MODE_TTUR_FIRE", "step": 1339, "modes": 4, "hq": 0.3315, "fires": 116, "extra_d": 232}
+{"event": "MODE_TTUR_FIRE", "step": 1340, "modes": 2, "hq": 0.168, "fires": 117, "extra_d": 234}
+{"event": "MODE_TTUR_FIRE", "step": 1341, "modes": 1, "hq": 0.0901, "fires": 118, "extra_d": 236}
+{"event": "MODE_TTUR_FIRE", "step": 1342, "modes": 2, "hq": 0.1729, "fires": 119, "extra_d": 238}
+{"event": "MODE_TTUR_FIRE", "step": 1343, "modes": 2, "hq": 0.1729, "fires": 120, "extra_d": 240}
+{"event": "MODE_TTUR_FIRE", "step": 1344, "modes": 3, "hq": 0.3364, "fires": 121, "extra_d": 242}
+{"event": "MODE_TTUR_FIRE", "step": 1345, "modes": 5, "hq": 0.4229, "fires": 122, "extra_d": 244}
+{"event": "MODE_TTUR_FIRE", "step": 1346, "modes": 3, "hq": 0.2595, "fires": 123, "extra_d": 246}
+{"event": "MODE_TTUR_FIRE", "step": 1347, "modes": 4, "hq": 0.342, "fires": 124, "extra_d": 248}
+{"event": "MODE_TTUR_FIRE", "step": 1348, "modes": 2, "hq": 0.2446, "fires": 125, "extra_d": 250}
+{"event": "MODE_TTUR_FIRE", "step": 1349, "modes": 5, "hq": 0.5068, "fires": 126, "extra_d": 252}
+{"event": "MODE_TTUR_FIRE", "step": 1350, "modes": 4, "hq": 0.4233, "fires": 127, "extra_d": 254}
+{"event": "MODE_TTUR_FIRE", "step": 1351, "modes": 2, "hq": 0.2432, "fires": 128, "extra_d": 256}
+{"event": "MODE_TTUR_FIRE", "step": 1352, "modes": 2, "hq": 0.2437, "fires": 129, "extra_d": 258}
+{"event": "MODE_TTUR_FIRE", "step": 1353, "modes": 2, "hq": 0.2437, "fires": 130, "extra_d": 260}
+{"event": "MODE_TTUR_FIRE", "step": 1354, "modes": 0, "hq": 0.0, "fires": 131, "extra_d": 262}
+{"event": "MODE_TTUR_FIRE", "step": 1355, "modes": 3, "hq": 0.4136, "fires": 132, "extra_d": 264}
+{"event": "MODE_TTUR_FIRE", "step": 1356, "modes": 0, "hq": 0.0, "fires": 133, "extra_d": 266}
+{"event": "MODE_TTUR_FIRE", "step": 1357, "modes": 1, "hq": 0.0901, "fires": 134, "extra_d": 268}
+{"event": "MODE_TTUR_FIRE", "step": 1358, "modes": 1, "hq": 0.0828, "fires": 135, "extra_d": 270}
+{"event": "MODE_TTUR_FIRE", "step": 1359, "modes": 0, "hq": 0.0, "fires": 136, "extra_d": 272}
+{"event": "MODE_TTUR_FIRE", "step": 1360, "modes": 0, "hq": 0.0, "fires": 137, "extra_d": 274}
+{"event": "MODE_TTUR_FIRE", "step": 1361, "modes": 0, "hq": 0.0, "fires": 138, "extra_d": 276}
+{"event": "MODE_TTUR_FIRE", "step": 1362, "modes": 1, "hq": 0.0886, "fires": 139, "extra_d": 278}
+{"event": "MODE_TTUR_FIRE", "step": 1363, "modes": 3, "hq": 0.3364, "fires": 140, "extra_d": 280}
+{"event": "MODE_TTUR_FIRE", "step": 1364, "modes": 5, "hq": 0.6846, "fires": 141, "extra_d": 282}
+{"event": "MODE_TTUR_FIRE", "step": 1365, "modes": 3, "hq": 0.4302, "fires": 142, "extra_d": 284}
+{"event": "MODE_TTUR_FIRE", "step": 1366, "modes": 0, "hq": 0.0, "fires": 143, "extra_d": 286}
+{"event": "MODE_TTUR_FIRE", "step": 1367, "modes": 2, "hq": 0.2505, "fires": 144, "extra_d": 288}
+{"event": "MODE_TTUR_FIRE", "step": 1368, "modes": 2, "hq": 0.3401, "fires": 145, "extra_d": 290}
+{"event": "MODE_TTUR_FIRE", "step": 1369, "modes": 4, "hq": 0.4158, "fires": 146, "extra_d": 292}
+{"event": "MODE_TTUR_FIRE", "step": 1370, "modes": 6, "hq": 0.7612, "fires": 147, "extra_d": 294}
+{"event": "MODE_TTUR_FIRE", "step": 1371, "modes": 6, "hq": 0.845, "fires": 148, "extra_d": 296}
+{"event": "MODE_TTUR_FIRE", "step": 1372, "modes": 6, "hq": 0.7656, "fires": 149, "extra_d": 298}
+{"event": "MODE_TTUR_FIRE", "step": 1375, "modes": 6, "hq": 0.845, "fires": 150, "extra_d": 300}
+{"event": "MODE_TTUR_FIRE", "step": 1376, "modes": 5, "hq": 0.5945, "fires": 151, "extra_d": 302}
+{"event": "MODE_TTUR_FIRE", "step": 1377, "modes": 2, "hq": 0.1714, "fires": 152, "extra_d": 304}
+{"event": "MODE_TTUR_FIRE", "step": 1378, "modes": 1, "hq": 0.0811, "fires": 153, "extra_d": 306}
+{"event": "MODE_TTUR_FIRE", "step": 1379, "modes": 1, "hq": 0.0886, "fires": 154, "extra_d": 308}
+{"event": "MODE_TTUR_FIRE", "step": 1380, "modes": 0, "hq": 0.0, "fires": 155, "extra_d": 310}
+{"event": "MODE_TTUR_FIRE", "step": 1381, "modes": 0, "hq": 0.0, "fires": 156, "extra_d": 312}
+{"event": "MODE_TTUR_FIRE", "step": 1382, "modes": 3, "hq": 0.3333, "fires": 157, "extra_d": 314}
+{"event": "MODE_TTUR_FIRE", "step": 1383, "modes": 4, "hq": 0.4165, "fires": 158, "extra_d": 316}
+{"event": "MODE_TTUR_FIRE", "step": 1384, "modes": 5, "hq": 0.5869, "fires": 159, "extra_d": 318}
+{"event": "MODE_TTUR_FIRE", "step": 1385, "modes": 6, "hq": 0.6638, "fires": 160, "extra_d": 320}
+{"event": "MODE_TTUR_FIRE", "step": 1387, "modes": 6, "hq": 0.8315, "fires": 161, "extra_d": 322}
+{"event": "MODE_TTUR_FIRE", "step": 1388, "modes": 5, "hq": 0.5959, "fires": 162, "extra_d": 324}
+{"event": "MODE_TTUR_FIRE", "step": 1391, "modes": 5, "hq": 0.5981, "fires": 163, "extra_d": 326}
+{"event": "MODE_TTUR_FIRE", "step": 1393, "modes": 6, "hq": 0.7639, "fires": 164, "extra_d": 328}
+{"event": "MODE_TTUR_FIRE", "step": 1394, "modes": 4, "hq": 0.4041, "fires": 165, "extra_d": 330}
+{"event": "MODE_TTUR_FIRE", "step": 1395, "modes": 3, "hq": 0.4141, "fires": 166, "extra_d": 332}
+{"event": "MODE_TTUR_FIRE", "step": 1396, "modes": 0, "hq": 0.0, "fires": 167, "extra_d": 334}
+{"event": "MODE_TTUR_FIRE", "step": 1397, "modes": 1, "hq": 0.0793, "fires": 168, "extra_d": 336}
+{"event": "MODE_TTUR_FIRE", "step": 1398, "modes": 4, "hq": 0.4192, "fires": 169, "extra_d": 338}
+{"event": "PROGRESS", "phase": "stay", "outer": 1400, "armed_at": 569, "fires": 169, "extra_d": 338, "modes": 7}
+{"event": "PROGRESS", "outer": 1400, "armed": true, "armed_at": 569, "fires": 169, "extra_d": 338, "modes": 7}
+{"event": "MODE_TTUR_FIRE", "step": 1401, "modes": 2, "hq": 0.1626, "fires": 170, "extra_d": 340}
+{"event": "MODE_TTUR_FIRE", "step": 1402, "modes": 2, "hq": 0.1685, "fires": 171, "extra_d": 342}
+{"event": "MODE_TTUR_FIRE", "step": 1403, "modes": 5, "hq": 0.5752, "fires": 172, "extra_d": 344}
+{"event": "MODE_TTUR_FIRE", "step": 1405, "modes": 6, "hq": 0.7625, "fires": 173, "extra_d": 346}
+{"event": "MODE_TTUR_FIRE", "step": 1408, "modes": 4, "hq": 0.5103, "fires": 174, "extra_d": 348}
+{"event": "MODE_TTUR_FIRE", "step": 1409, "modes": 3, "hq": 0.3333, "fires": 175, "extra_d": 350}
+{"event": "MODE_TTUR_FIRE", "step": 1410, "modes": 4, "hq": 0.4219, "fires": 176, "extra_d": 352}
+{"event": "MODE_TTUR_FIRE", "step": 1411, "modes": 3, "hq": 0.333, "fires": 177, "extra_d": 354}
+{"event": "MODE_TTUR_FIRE", "step": 1412, "modes": 6, "hq": 0.5972, "fires": 178, "extra_d": 356}
+{"event": "MODE_TTUR_FIRE", "step": 1413, "modes": 6, "hq": 0.845, "fires": 179, "extra_d": 358}
+{"event": "PROGRESS", "phase": "stay", "outer": 1500, "armed_at": 569, "fires": 179, "extra_d": 358, "modes": 8}
+{"event": "PROGRESS", "outer": 1500, "armed": true, "armed_at": 569, "fires": 179, "extra_d": 358, "modes": 8}
+{"event": "MODE_TTUR_FIRE", "step": 1511, "modes": 6, "hq": 0.7505, "fires": 180, "extra_d": 360}
+{"event": "MODE_TTUR_FIRE", "step": 1541, "modes": 6, "hq": 0.7505, "fires": 181, "extra_d": 362}
+{"event": "MODE_TTUR_FIRE", "step": 1542, "modes": 4, "hq": 0.5837, "fires": 182, "extra_d": 364}
+{"event": "MODE_TTUR_FIRE", "step": 1543, "modes": 2, "hq": 0.2598, "fires": 183, "extra_d": 366}
+{"event": "MODE_TTUR_FIRE", "step": 1544, "modes": 1, "hq": 0.1697, "fires": 184, "extra_d": 368}
+{"event": "MODE_TTUR_FIRE", "step": 1545, "modes": 4, "hq": 0.4277, "fires": 185, "extra_d": 370}
+{"event": "MODE_TTUR_FIRE", "step": 1546, "modes": 4, "hq": 0.4277, "fires": 186, "extra_d": 372}
+{"event": "MODE_TTUR_FIRE", "step": 1547, "modes": 5, "hq": 0.6746, "fires": 187, "extra_d": 374}
+{"event": "MODE_TTUR_FIRE", "step": 1548, "modes": 5, "hq": 0.5698, "fires": 188, "extra_d": 376}
+{"event": "MODE_TTUR_FIRE", "step": 1549, "modes": 5, "hq": 0.4932, "fires": 189, "extra_d": 378}
+{"event": "MODE_TTUR_FIRE", "step": 1551, "modes": 5, "hq": 0.7483, "fires": 190, "extra_d": 380}
+{"event": "PROGRESS", "phase": "stay", "outer": 1600, "armed_at": 569, "fires": 190, "extra_d": 380, "modes": 8}
+{"event": "PROGRESS", "outer": 1600, "armed": true, "armed_at": 569, "fires": 190, "extra_d": 380, "modes": 8}
+{"event": "MODE_TTUR_FIRE", "step": 1680, "modes": 6, "hq": 0.845, "fires": 191, "extra_d": 382}
+{"event": "PROGRESS", "phase": "stay", "outer": 1700, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "PROGRESS", "outer": 1700, "armed": true, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "PROGRESS", "phase": "stay", "outer": 1800, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "PROGRESS", "outer": 1800, "armed": true, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "PROGRESS", "phase": "stay", "outer": 1900, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "PROGRESS", "outer": 1900, "armed": true, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "PROGRESS", "phase": "stay", "outer": 2000, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "PROGRESS", "outer": 2000, "armed": true, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "PROGRESS", "phase": "stay", "outer": 2100, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "PROGRESS", "outer": 2100, "armed": true, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "PROGRESS", "phase": "stay", "outer": 2200, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "PROGRESS", "outer": 2200, "armed": true, "armed_at": 569, "fires": 191, "extra_d": 382, "modes": 8}
+{"event": "MODE_TTUR_FIRE", "step": 2202, "modes": 6, "hq": 0.845, "fires": 192, "extra_d": 384}
+{"event": "MODE_TTUR_FIRE", "step": 2203, "modes": 5, "hq": 0.6738, "fires": 193, "extra_d": 386}
+{"event": "MODE_TTUR_FIRE", "step": 2204, "modes": 3, "hq": 0.4309, "fires": 194, "extra_d": 388}
+{"event": "MODE_TTUR_FIRE", "step": 2205, "modes": 0, "hq": 0.0, "fires": 195, "extra_d": 390}
+{"event": "MODE_TTUR_FIRE", "step": 2206, "modes": 1, "hq": 0.0767, "fires": 196, "extra_d": 392}
+{"event": "MODE_TTUR_FIRE", "step": 2207, "modes": 2, "hq": 0.2505, "fires": 197, "extra_d": 394}
+{"event": "MODE_TTUR_FIRE", "step": 2208, "modes": 2, "hq": 0.249, "fires": 198, "extra_d": 396}
+{"event": "MODE_TTUR_FIRE", "step": 2209, "modes": 0, "hq": 0.0, "fires": 199, "extra_d": 398}
+{"event": "MODE_TTUR_FIRE", "step": 2210, "modes": 1, "hq": 0.0886, "fires": 200, "extra_d": 400}
+{"event": "MODE_TTUR_FIRE", "step": 2211, "modes": 1, "hq": 0.1604, "fires": 201, "extra_d": 402}
+{"event": "MODE_TTUR_FIRE", "step": 2212, "modes": 3, "hq": 0.3289, "fires": 202, "extra_d": 404}
+{"event": "MODE_TTUR_FIRE", "step": 2213, "modes": 2, "hq": 0.156, "fires": 203, "extra_d": 406}
+{"event": "MODE_TTUR_FIRE", "step": 2214, "modes": 4, "hq": 0.3337, "fires": 204, "extra_d": 408}
+{"event": "MODE_TTUR_FIRE", "step": 2215, "modes": 2, "hq": 0.1729, "fires": 205, "extra_d": 410}
+{"event": "MODE_TTUR_FIRE", "step": 2216, "modes": 1, "hq": 0.0793, "fires": 206, "extra_d": 412}
+{"event": "MODE_TTUR_FIRE", "step": 2217, "modes": 2, "hq": 0.2539, "fires": 207, "extra_d": 414}
+{"event": "MODE_TTUR_FIRE", "step": 2218, "modes": 3, "hq": 0.2549, "fires": 208, "extra_d": 416}
+{"event": "MODE_TTUR_FIRE", "step": 2219, "modes": 3, "hq": 0.2495, "fires": 209, "extra_d": 418}
+{"event": "MODE_TTUR_FIRE", "step": 2220, "modes": 0, "hq": 0.0, "fires": 210, "extra_d": 420}
+{"event": "MODE_TTUR_FIRE", "step": 2221, "modes": 1, "hq": 0.0784, "fires": 211, "extra_d": 422}
+{"event": "MODE_TTUR_FIRE", "step": 2222, "modes": 0, "hq": 0.0, "fires": 212, "extra_d": 424}
+{"event": "MODE_TTUR_FIRE", "step": 2223, "modes": 1, "hq": 0.0811, "fires": 213, "extra_d": 426}
+{"event": "MODE_TTUR_FIRE", "step": 2224, "modes": 2, "hq": 0.2522, "fires": 214, "extra_d": 428}
+{"event": "MODE_TTUR_FIRE", "step": 2225, "modes": 1, "hq": 0.0869, "fires": 215, "extra_d": 430}
+{"event": "MODE_TTUR_FIRE", "step": 2226, "modes": 2, "hq": 0.2437, "fires": 216, "extra_d": 432}
+{"event": "MODE_TTUR_FIRE", "step": 2227, "modes": 5, "hq": 0.4116, "fires": 217, "extra_d": 434}
+{"event": "MODE_TTUR_FIRE", "step": 2228, "modes": 5, "hq": 0.5876, "fires": 218, "extra_d": 436}
+{"event": "MODE_TTUR_FIRE", "step": 2241, "modes": 6, "hq": 0.5952, "fires": 219, "extra_d": 438}
+{"event": "MODE_TTUR_FIRE", "step": 2242, "modes": 4, "hq": 0.4194, "fires": 220, "extra_d": 440}
+{"event": "MODE_TTUR_FIRE", "step": 2243, "modes": 2, "hq": 0.1729, "fires": 221, "extra_d": 442}
+{"event": "MODE_TTUR_FIRE", "step": 2244, "modes": 6, "hq": 0.7522, "fires": 222, "extra_d": 444}
+{"event": "MODE_TTUR_FIRE", "step": 2245, "modes": 2, "hq": 0.2532, "fires": 223, "extra_d": 446}
+{"event": "MODE_TTUR_FIRE", "step": 2246, "modes": 2, "hq": 0.166, "fires": 224, "extra_d": 448}
+{"event": "MODE_TTUR_FIRE", "step": 2247, "modes": 0, "hq": 0.0, "fires": 225, "extra_d": 450}
+{"event": "MODE_TTUR_FIRE", "step": 2248, "modes": 0, "hq": 0.0, "fires": 226, "extra_d": 452}
+{"event": "MODE_TTUR_FIRE", "step": 2249, "modes": 2, "hq": 0.3408, "fires": 227, "extra_d": 454}
+{"event": "MODE_TTUR_FIRE", "step": 2250, "modes": 0, "hq": 0.0, "fires": 228, "extra_d": 456}
+{"event": "MODE_TTUR_FIRE", "step": 2251, "modes": 0, "hq": 0.0, "fires": 229, "extra_d": 458}
+{"event": "MODE_TTUR_FIRE", "step": 2252, "modes": 0, "hq": 0.0, "fires": 230, "extra_d": 460}
+{"event": "MODE_TTUR_FIRE", "step": 2253, "modes": 0, "hq": 0.0, "fires": 231, "extra_d": 462}
+{"event": "MODE_TTUR_FIRE", "step": 2254, "modes": 0, "hq": 0.0, "fires": 232, "extra_d": 464}
+{"event": "MODE_TTUR_FIRE", "step": 2255, "modes": 0, "hq": 0.0, "fires": 233, "extra_d": 466}
+{"event": "MODE_TTUR_FIRE", "step": 2256, "modes": 0, "hq": 0.0, "fires": 234, "extra_d": 468}
+{"event": "MODE_TTUR_FIRE", "step": 2257, "modes": 0, "hq": 0.0, "fires": 235, "extra_d": 470}
+{"event": "MODE_TTUR_FIRE", "step": 2258, "modes": 0, "hq": 0.0, "fires": 236, "extra_d": 472}
+{"event": "MODE_TTUR_FIRE", "step": 2259, "modes": 0, "hq": 0.0, "fires": 237, "extra_d": 474}
+{"event": "MODE_TTUR_FIRE", "step": 2260, "modes": 0, "hq": 0.0, "fires": 238, "extra_d": 476}
+{"event": "MODE_TTUR_FIRE", "step": 2261, "modes": 0, "hq": 0.0, "fires": 239, "extra_d": 478}
+{"event": "MODE_TTUR_FIRE", "step": 2262, "modes": 1, "hq": 0.0793, "fires": 240, "extra_d": 480}
+{"event": "MODE_TTUR_FIRE", "step": 2263, "modes": 0, "hq": 0.0, "fires": 241, "extra_d": 482}
+{"event": "MODE_TTUR_FIRE", "step": 2264, "modes": 0, "hq": 0.0, "fires": 242, "extra_d": 484}
+{"event": "MODE_TTUR_FIRE", "step": 2265, "modes": 0, "hq": 0.0, "fires": 243, "extra_d": 486}
+{"event": "MODE_TTUR_FIRE", "step": 2266, "modes": 0, "hq": 0.0, "fires": 244, "extra_d": 488}
+{"event": "MODE_TTUR_FIRE", "step": 2267, "modes": 0, "hq": 0.0, "fires": 245, "extra_d": 490}
+{"event": "MODE_TTUR_FIRE", "step": 2268, "modes": 0, "hq": 0.0, "fires": 246, "extra_d": 492}
+{"event": "MODE_TTUR_FIRE", "step": 2269, "modes": 1, "hq": 0.0811, "fires": 247, "extra_d": 494}
+{"event": "MODE_TTUR_FIRE", "step": 2270, "modes": 1, "hq": 0.0811, "fires": 248, "extra_d": 496}
+{"event": "MODE_TTUR_FIRE", "step": 2271, "modes": 0, "hq": 0.0, "fires": 249, "extra_d": 498}
+{"event": "MODE_TTUR_FIRE", "step": 2272, "modes": 0, "hq": 0.0, "fires": 250, "extra_d": 500}
+{"event": "MODE_TTUR_FIRE", "step": 2273, "modes": 0, "hq": 0.0, "fires": 251, "extra_d": 502}
+{"event": "MODE_TTUR_FIRE", "step": 2274, "modes": 0, "hq": 0.0, "fires": 252, "extra_d": 504}
+{"event": "MODE_TTUR_FIRE", "step": 2275, "modes": 0, "hq": 0.0, "fires": 253, "extra_d": 506}
+{"event": "MODE_TTUR_FIRE", "step": 2276, "modes": 0, "hq": 0.0, "fires": 254, "extra_d": 508}
+{"event": "MODE_TTUR_FIRE", "step": 2277, "modes": 0, "hq": 0.0, "fires": 255, "extra_d": 510}
+{"event": "MODE_TTUR_FIRE", "step": 2278, "modes": 1, "hq": 0.0793, "fires": 256, "extra_d": 512}
+{"event": "MODE_TTUR_FIRE", "step": 2279, "modes": 1, "hq": 0.0793, "fires": 257, "extra_d": 514}
+{"event": "MODE_TTUR_FIRE", "step": 2280, "modes": 0, "hq": 0.0, "fires": 258, "extra_d": 516}
+{"event": "MODE_TTUR_FIRE", "step": 2281, "modes": 0, "hq": 0.0, "fires": 259, "extra_d": 518}
+{"event": "MODE_TTUR_FIRE", "step": 2282, "modes": 0, "hq": 0.0, "fires": 260, "extra_d": 520}
+{"event": "MODE_TTUR_FIRE", "step": 2283, "modes": 0, "hq": 0.0, "fires": 261, "extra_d": 522}
+{"event": "MODE_TTUR_FIRE", "step": 2284, "modes": 0, "hq": 0.0, "fires": 262, "extra_d": 524}
+{"event": "MODE_TTUR_FIRE", "step": 2285, "modes": 0, "hq": 0.0, "fires": 263, "extra_d": 526}
+{"event": "MODE_TTUR_FIRE", "step": 2286, "modes": 0, "hq": 0.0, "fires": 264, "extra_d": 528}
+{"event": "MODE_TTUR_FIRE", "step": 2287, "modes": 0, "hq": 0.0, "fires": 265, "extra_d": 530}
+{"event": "MODE_TTUR_FIRE", "step": 2288, "modes": 0, "hq": 0.0, "fires": 266, "extra_d": 532}
+{"event": "MODE_TTUR_FIRE", "step": 2289, "modes": 0, "hq": 0.0, "fires": 267, "extra_d": 534}
+{"event": "MODE_TTUR_FIRE", "step": 2290, "modes": 0, "hq": 0.0, "fires": 268, "extra_d": 536}
+{"event": "MODE_TTUR_FIRE", "step": 2291, "modes": 0, "hq": 0.0, "fires": 269, "extra_d": 538}
+{"event": "MODE_TTUR_FIRE", "step": 2292, "modes": 0, "hq": 0.0, "fires": 270, "extra_d": 540}
+{"event": "MODE_TTUR_FIRE", "step": 2293, "modes": 0, "hq": 0.0, "fires": 271, "extra_d": 542}
+{"event": "MODE_TTUR_FIRE", "step": 2294, "modes": 0, "hq": 0.0, "fires": 272, "extra_d": 544}
+{"event": "MODE_TTUR_FIRE", "step": 2295, "modes": 0, "hq": 0.0, "fires": 273, "extra_d": 546}
+{"event": "MODE_TTUR_FIRE", "step": 2296, "modes": 0, "hq": 0.0, "fires": 274, "extra_d": 548}
+{"event": "MODE_TTUR_FIRE", "step": 2297, "modes": 0, "hq": 0.0, "fires": 275, "extra_d": 550}
+{"event": "MODE_TTUR_FIRE", "step": 2298, "modes": 0, "hq": 0.0, "fires": 276, "extra_d": 552}
+{"event": "MODE_TTUR_FIRE", "step": 2299, "modes": 0, "hq": 0.0, "fires": 277, "extra_d": 554}
+{"event": "PROGRESS", "phase": "stay", "outer": 2300, "armed_at": 569, "fires": 277, "extra_d": 554, "modes": 0}
+{"event": "PROGRESS", "outer": 2300, "armed": true, "armed_at": 569, "fires": 277, "extra_d": 554, "modes": 0}
+{"event": "MODE_TTUR_FIRE", "step": 2300, "modes": 0, "hq": 0.0, "fires": 278, "extra_d": 556}
+{"event": "MODE_TTUR_FIRE", "step": 2301, "modes": 0, "hq": 0.0, "fires": 279, "extra_d": 558}
+{"event": "MODE_TTUR_FIRE", "step": 2302, "modes": 0, "hq": 0.0, "fires": 280, "extra_d": 560}
+{"event": "MODE_TTUR_FIRE", "step": 2303, "modes": 0, "hq": 0.0, "fires": 281, "extra_d": 562}
+{"event": "MODE_TTUR_FIRE", "step": 2304, "modes": 1, "hq": 0.0842, "fires": 282, "extra_d": 564}
+{"event": "MODE_TTUR_FIRE", "step": 2305, "modes": 1, "hq": 0.0862, "fires": 283, "extra_d": 566}
+{"event": "MODE_TTUR_FIRE", "step": 2306, "modes": 1, "hq": 0.0862, "fires": 284, "extra_d": 568}
+{"event": "MODE_TTUR_FIRE", "step": 2307, "modes": 1, "hq": 0.0862, "fires": 285, "extra_d": 570}
+{"event": "MODE_TTUR_FIRE", "step": 2308, "modes": 1, "hq": 0.0833, "fires": 286, "extra_d": 572}
+{"event": "MODE_TTUR_FIRE", "step": 2309, "modes": 0, "hq": 0.0, "fires": 287, "extra_d": 574}
+{"event": "MODE_TTUR_FIRE", "step": 2310, "modes": 0, "hq": 0.0, "fires": 288, "extra_d": 576}
+{"event": "MODE_TTUR_FIRE", "step": 2311, "modes": 1, "hq": 0.0833, "fires": 289, "extra_d": 578}
+{"event": "MODE_TTUR_FIRE", "step": 2312, "modes": 1, "hq": 0.0828, "fires": 290, "extra_d": 580}
+{"event": "MODE_TTUR_FIRE", "step": 2313, "modes": 0, "hq": 0.0, "fires": 291, "extra_d": 582}
+{"event": "MODE_TTUR_FIRE", "step": 2314, "modes": 0, "hq": 0.0, "fires": 292, "extra_d": 584}
+{"event": "MODE_TTUR_FIRE", "step": 2315, "modes": 0, "hq": 0.0, "fires": 293, "extra_d": 586}
+{"event": "MODE_TTUR_FIRE", "step": 2316, "modes": 0, "hq": 0.0, "fires": 294, "extra_d": 588}
+{"event": "MODE_TTUR_FIRE", "step": 2317, "modes": 0, "hq": 0.0, "fires": 295, "extra_d": 590}
+{"event": "MODE_TTUR_FIRE", "step": 2318, "modes": 0, "hq": 0.0, "fires": 296, "extra_d": 592}
+{"event": "MODE_TTUR_FIRE", "step": 2319, "modes": 0, "hq": 0.0, "fires": 297, "extra_d": 594}
+{"event": "MODE_TTUR_FIRE", "step": 2320, "modes": 0, "hq": 0.0, "fires": 298, "extra_d": 596}
+{"event": "MODE_TTUR_FIRE", "step": 2321, "modes": 0, "hq": 0.0, "fires": 299, "extra_d": 598}
+{"event": "MODE_TTUR_FIRE", "step": 2322, "modes": 0, "hq": 0.0, "fires": 300, "extra_d": 600}
+{"event": "MODE_TTUR_FIRE", "step": 2323, "modes": 0, "hq": 0.0, "fires": 301, "extra_d": 602}
+{"event": "MODE_TTUR_FIRE", "step": 2324, "modes": 0, "hq": 0.0, "fires": 302, "extra_d": 604}
+{"event": "MODE_TTUR_FIRE", "step": 2325, "modes": 0, "hq": 0.0, "fires": 303, "extra_d": 606}
+{"event": "MODE_TTUR_FIRE", "step": 2326, "modes": 0, "hq": 0.0, "fires": 304, "extra_d": 608}
+{"event": "MODE_TTUR_FIRE", "step": 2327, "modes": 0, "hq": 0.0, "fires": 305, "extra_d": 610}
+{"event": "MODE_TTUR_FIRE", "step": 2328, "modes": 0, "hq": 0.0, "fires": 306, "extra_d": 612}
+{"event": "MODE_TTUR_FIRE", "step": 2329, "modes": 0, "hq": 0.0, "fires": 307, "extra_d": 614}
+{"event": "MODE_TTUR_FIRE", "step": 2330, "modes": 0, "hq": 0.0, "fires": 308, "extra_d": 616}
+{"event": "MODE_TTUR_FIRE", "step": 2331, "modes": 0, "hq": 0.0, "fires": 309, "extra_d": 618}
+{"event": "MODE_TTUR_FIRE", "step": 2332, "modes": 0, "hq": 0.0, "fires": 310, "extra_d": 620}
+{"event": "MODE_TTUR_FIRE", "step": 2333, "modes": 0, "hq": 0.0, "fires": 311, "extra_d": 622}
+{"event": "MODE_TTUR_FIRE", "step": 2334, "modes": 0, "hq": 0.0, "fires": 312, "extra_d": 624}
+{"event": "MODE_TTUR_FIRE", "step": 2335, "modes": 0, "hq": 0.0, "fires": 313, "extra_d": 626}
+{"event": "MODE_TTUR_FIRE", "step": 2336, "modes": 0, "hq": 0.0, "fires": 314, "extra_d": 628}
+{"event": "MODE_TTUR_FIRE", "step": 2337, "modes": 0, "hq": 0.0, "fires": 315, "extra_d": 630}
+{"event": "MODE_TTUR_FIRE", "step": 2338, "modes": 0, "hq": 0.0, "fires": 316, "extra_d": 632}
+{"event": "MODE_TTUR_FIRE", "step": 2339, "modes": 0, "hq": 0.0, "fires": 317, "extra_d": 634}
+{"event": "MODE_TTUR_FIRE", "step": 2340, "modes": 0, "hq": 0.0, "fires": 318, "extra_d": 636}
+{"event": "MODE_TTUR_FIRE", "step": 2341, "modes": 0, "hq": 0.0, "fires": 319, "extra_d": 638}
+{"event": "MODE_TTUR_FIRE", "step": 2342, "modes": 0, "hq": 0.0, "fires": 320, "extra_d": 640}
+{"event": "MODE_TTUR_FIRE", "step": 2343, "modes": 0, "hq": 0.0, "fires": 321, "extra_d": 642}
+{"event": "MODE_TTUR_FIRE", "step": 2344, "modes": 0, "hq": 0.0, "fires": 322, "extra_d": 644}
+{"event": "MODE_TTUR_FIRE", "step": 2345, "modes": 0, "hq": 0.0, "fires": 323, "extra_d": 646}
+{"event": "MODE_TTUR_FIRE", "step": 2346, "modes": 0, "hq": 0.0, "fires": 324, "extra_d": 648}
+{"event": "MODE_TTUR_FIRE", "step": 2347, "modes": 0, "hq": 0.0, "fires": 325, "extra_d": 650}
+{"event": "MODE_TTUR_FIRE", "step": 2348, "modes": 0, "hq": 0.0, "fires": 326, "extra_d": 652}
+{"event": "MODE_TTUR_FIRE", "step": 2349, "modes": 0, "hq": 0.0, "fires": 327, "extra_d": 654}
+{"event": "MODE_TTUR_FIRE", "step": 2350, "modes": 1, "hq": 0.0793, "fires": 328, "extra_d": 656}
+{"event": "MODE_TTUR_FIRE", "step": 2351, "modes": 1, "hq": 0.0793, "fires": 329, "extra_d": 658}
+{"event": "MODE_TTUR_FIRE", "step": 2352, "modes": 1, "hq": 0.0793, "fires": 330, "extra_d": 660}
+{"event": "MODE_TTUR_FIRE", "step": 2353, "modes": 1, "hq": 0.0793, "fires": 331, "extra_d": 662}
+{"event": "MODE_TTUR_FIRE", "step": 2354, "modes": 0, "hq": 0.0, "fires": 332, "extra_d": 664}
+{"event": "MODE_TTUR_FIRE", "step": 2355, "modes": 0, "hq": 0.0, "fires": 333, "extra_d": 666}
+{"event": "MODE_TTUR_FIRE", "step": 2356, "modes": 0, "hq": 0.0, "fires": 334, "extra_d": 668}
+{"event": "MODE_TTUR_FIRE", "step": 2357, "modes": 0, "hq": 0.0, "fires": 335, "extra_d": 670}
+{"event": "MODE_TTUR_FIRE", "step": 2358, "modes": 0, "hq": 0.0, "fires": 336, "extra_d": 672}
+{"event": "MODE_TTUR_FIRE", "step": 2359, "modes": 0, "hq": 0.0, "fires": 337, "extra_d": 674}
+{"event": "MODE_TTUR_FIRE", "step": 2360, "modes": 0, "hq": 0.0, "fires": 338, "extra_d": 676}
+{"event": "MODE_TTUR_FIRE", "step": 2361, "modes": 0, "hq": 0.0, "fires": 339, "extra_d": 678}
+{"event": "MODE_TTUR_FIRE", "step": 2362, "modes": 0, "hq": 0.0, "fires": 340, "extra_d": 680}
+{"event": "MODE_TTUR_FIRE", "step": 2363, "modes": 0, "hq": 0.0, "fires": 341, "extra_d": 682}
+{"event": "MODE_TTUR_FIRE", "step": 2364, "modes": 0, "hq": 0.0, "fires": 342, "extra_d": 684}
+{"event": "MODE_TTUR_FIRE", "step": 2365, "modes": 0, "hq": 0.0, "fires": 343, "extra_d": 686}
+{"event": "MODE_TTUR_FIRE", "step": 2366, "modes": 0, "hq": 0.0, "fires": 344, "extra_d": 688}
+{"event": "MODE_TTUR_FIRE", "step": 2367, "modes": 0, "hq": 0.0, "fires": 345, "extra_d": 690}
+{"event": "MODE_TTUR_FIRE", "step": 2368, "modes": 0, "hq": 0.0, "fires": 346, "extra_d": 692}
+{"event": "MODE_TTUR_FIRE", "step": 2369, "modes": 0, "hq": 0.0, "fires": 347, "extra_d": 694}
+{"event": "MODE_TTUR_FIRE", "step": 2370, "modes": 0, "hq": 0.0, "fires": 348, "extra_d": 696}
+{"event": "MODE_TTUR_FIRE", "step": 2371, "modes": 0, "hq": 0.0, "fires": 349, "extra_d": 698}
+{"event": "MODE_TTUR_FIRE", "step": 2372, "modes": 0, "hq": 0.0, "fires": 350, "extra_d": 700}
+{"event": "MODE_TTUR_FIRE", "step": 2373, "modes": 0, "hq": 0.0, "fires": 351, "extra_d": 702}
+{"event": "MODE_TTUR_FIRE", "step": 2374, "modes": 0, "hq": 0.0, "fires": 352, "extra_d": 704}
+{"event": "MODE_TTUR_FIRE", "step": 2375, "modes": 0, "hq": 0.0, "fires": 353, "extra_d": 706}
+{"event": "MODE_TTUR_FIRE", "step": 2376, "modes": 0, "hq": 0.0, "fires": 354, "extra_d": 708}
+{"event": "MODE_TTUR_FIRE", "step": 2377, "modes": 0, "hq": 0.0, "fires": 355, "extra_d": 710}
+{"event": "MODE_TTUR_FIRE", "step": 2378, "modes": 0, "hq": 0.0, "fires": 356, "extra_d": 712}
+{"event": "MODE_TTUR_FIRE", "step": 2379, "modes": 0, "hq": 0.0, "fires": 357, "extra_d": 714}
+{"event": "MODE_TTUR_FIRE", "step": 2380, "modes": 0, "hq": 0.0, "fires": 358, "extra_d": 716}
+{"event": "MODE_TTUR_FIRE", "step": 2381, "modes": 0, "hq": 0.0, "fires": 359, "extra_d": 718}
+{"event": "MODE_TTUR_FIRE", "step": 2382, "modes": 0, "hq": 0.0, "fires": 360, "extra_d": 720}
+{"event": "MODE_TTUR_FIRE", "step": 2383, "modes": 0, "hq": 0.0, "fires": 361, "extra_d": 722}
+{"event": "MODE_TTUR_FIRE", "step": 2384, "modes": 0, "hq": 0.0, "fires": 362, "extra_d": 724}
+{"event": "MODE_TTUR_FIRE", "step": 2385, "modes": 0, "hq": 0.0, "fires": 363, "extra_d": 726}
+{"event": "MODE_TTUR_FIRE", "step": 2386, "modes": 0, "hq": 0.0, "fires": 364, "extra_d": 728}
+{"event": "MODE_TTUR_FIRE", "step": 2387, "modes": 0, "hq": 0.0, "fires": 365, "extra_d": 730}
+{"event": "MODE_TTUR_FIRE", "step": 2388, "modes": 0, "hq": 0.0, "fires": 366, "extra_d": 732}
+{"event": "MODE_TTUR_FIRE", "step": 2389, "modes": 0, "hq": 0.0, "fires": 367, "extra_d": 734}
+{"event": "MODE_TTUR_FIRE", "step": 2390, "modes": 0, "hq": 0.0, "fires": 368, "extra_d": 736}
+{"event": "MODE_TTUR_FIRE", "step": 2391, "modes": 0, "hq": 0.0, "fires": 369, "extra_d": 738}
+{"event": "MODE_TTUR_FIRE", "step": 2392, "modes": 0, "hq": 0.0, "fires": 370, "extra_d": 740}
+{"event": "MODE_TTUR_FIRE", "step": 2393, "modes": 0, "hq": 0.0, "fires": 371, "extra_d": 742}
+{"event": "MODE_TTUR_FIRE", "step": 2394, "modes": 0, "hq": 0.0, "fires": 372, "extra_d": 744}
+{"event": "MODE_TTUR_FIRE", "step": 2395, "modes": 0, "hq": 0.0, "fires": 373, "extra_d": 746}
+{"event": "MODE_TTUR_FIRE", "step": 2396, "modes": 0, "hq": 0.0, "fires": 374, "extra_d": 748}
+{"event": "MODE_TTUR_FIRE", "step": 2397, "modes": 0, "hq": 0.0, "fires": 375, "extra_d": 750}
+{"event": "MODE_TTUR_FIRE", "step": 2398, "modes": 0, "hq": 0.0, "fires": 376, "extra_d": 752}
+{"event": "MODE_TTUR_FIRE", "step": 2399, "modes": 0, "hq": 0.0, "fires": 377, "extra_d": 754}
+{"event": "PROGRESS", "phase": "stay", "outer": 2400, "armed_at": 569, "fires": 377, "extra_d": 754, "modes": 0}
+{"event": "PROGRESS", "outer": 2400, "armed": true, "armed_at": 569, "fires": 377, "extra_d": 754, "modes": 0}
+{"event": "STAY", "steps": 2400, "seconds": 67.8, "terminal_1000_1200": [[1000, 8, 0.9998], [1050, 8, 1.0], [1100, 8, 0.9998], [1150, 8, 0.9976], [1200, 8, 0.9651]], "checks": 120, "passing": 82, "min_modes": 0, "min_hq": 0.0, "zero_mode_steps": [1360, 2250, 2260, 2280, 2290, 2300, 2320, 2330, 2340, 2360, 2370, 2380, 2390, 2400], "severe_dips": [1330, 1340, 1360, 2210, 2220, 2250, 2260, 2270, 2280, 2290, 2300, 2310, 2320, 2330, 2340, 2350, 2360, 2370, 2380, 2390, 2400], "suffix": 0, "failing_steps": [1290, 1330, 1340, 1350, 1360, 1370, 1380, 1390, 1410, 1480, 1490, 1500, 1550, 1680, 1780, 1800, 1970, 2080, 2210, 2220, 2230, 2240, 2250, 2260, 2270, 2280, 2290, 2300, 2310, 2320, 2330, 2340, 2350, 2360, 2370, 2380, 2390, 2400], "final": [2400, 0, 0.0], "armed_at": 569, "fires": 377, "extra_d": 754, "dynamics": {"method": "pr84_slope_utilisation_reach+post_arm_mode_ttur", "scratch_optimizer_policy": "pr84_slope_utilisation_reach", "shared_gate_eligible": false, "curvature_bound": 0.25, "d_curvature_bound": 3.0, "advantage_gate": null, "outer_steps": 2400, "gate_open": 0, "bound_evaluated": 2400, "bound_active": 2399, "d_bound_active": 106, "gradient_evaluations_per_outer_step": 3.0, "moment_updates_per_outer_step": 1, "rng_replay_verified": 4800, "update_order": "alternating: D Adam step, then G+prior Adam step against the new D", "smooth_critic": true, "smooth_width_cap": 0.15, "reach": 0.5, "ramp": "stall", "game_bound": false, "game_steps": 1, "mode_ttur": true, "armed_at": 569, "fires": 377, "extra_d_steps": 754, "b_cap_slope": 1.0, "widened_updates": 1867, "max_width": 0.5}}
+{"event": "DONE"}
