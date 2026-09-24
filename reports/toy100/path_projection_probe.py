@@ -86,9 +86,9 @@ def warm(output):
                                      local_stability=v["local_stability"], final=v["final"])
                              for k, v in result["variants"].items()})
     (output / "summary.json").write_text(json.dumps(compact, indent=2) + "\n")
-    print(json.dumps(dict(event="WARM_DONE", **{
+    print(json.dumps(dict(event="WARM_DONE", variants={
         name: dict(status=row["status"], stability=row["local_stability"])
-        for name, row in compact["variants"].items()}), flush=True)
+        for name, row in compact["variants"].items()})), flush=True)
 
 
 def _first_eight(result):
