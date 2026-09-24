@@ -1,0 +1,47 @@
+{
+  "scope": "read_only_saved_state_directional_operator_probe",
+  "parent_full_states_sha256": "37aa612bd3b3e1867a2d1508674158849ccf5940c907af76b1f8b061f4eb3e47",
+  "selected_steps": [
+    1324,
+    1325,
+    1530,
+    1539
+  ],
+  "source_sha256": {
+    "reports/toy100/pr84_cross_reciprocity_diagnostic.py": "786a652fadbcda38536890f3f0c4ad2f6c011a42f14b503ed1eaec1616c7e69f",
+    "tests/test_pr84_cross_reciprocity_diagnostic.py": "d80ac415a4965366bcec72b98c18a512e5ddc3d9bc952d367f055e04c83f60b1",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f"
+  },
+  "runtime": {
+    "python": "3.12.13",
+    "torch": "2.13.0+cu126",
+    "threads": 12,
+    "cpu_capability": "AVX2"
+  },
+  "artifacts": {
+    "selected-four-states.pt.gz": {
+      "stored_sha256": "3b0bfec004cb3561b25857d18e4f59c7e6c1aff519f20d7b41f7dc8a43359ae5",
+      "decompressed_sha256": "ab0e4722cb9917dd675d928ea94890ab5463efa01cea58133a0c6eebc37ea08a",
+      "stored_bytes": 2419958
+    },
+    "operator-secants.json.gz": {
+      "stored_sha256": "d46db017f390776c2c2598598cc0e0b916d2a7b96341f8e0f811504435cbbe22",
+      "decompressed_sha256": "62421641c5f3b34dc2c71ead8a19ac1ff81be7b72fc4061ec139fb1e07918810",
+      "stored_bytes": 4280
+    },
+    "source.tar.gz": {
+      "stored_sha256": "11153459325eb18037747aba2c38c7ad352d35c9cde11c0a3f92dec4560860da",
+      "decompressed_sha256": "5bcd2b62162c54cfcf19631f907ac26120bf5fc3771fae3fe5fbd0675d727d80",
+      "stored_bytes": 16368
+    }
+  },
+  "diagnosis_source": {
+    "path": "reports/toy100/continuous-evidence/pr84-stationary-failure-diagnosis/diagnosis.json.gz",
+    "stored_sha256": "b8fb1b55aab60a2443ed4bf9a129f1efd3f6c9a79809c1fc5f4e221cc2ea5ed2"
+  },
+  "tests": "2 passed",
+  "status": "diagnostic_only_no_candidate_promotion"
+}
