@@ -1,0 +1,105 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "cross-implicit",
+  "phase": "warm",
+  "files": {
+    "cold.json.gz": {
+      "sha256": "c7ff32ff3801a3be3161962ed4ca60ce67f10aec3591c0155f0a86c35d808f5b",
+      "original_sha256": "07ca339cce52f9875954a7105b393a63f7debf7b5e80de94f95af952e3eefd98",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/cold.json",
+      "compression": "gzip"
+    },
+    "constant.json.gz": {
+      "sha256": "06b8b277a408950be78a4897862245e8b77163e1c7d7f7613194b1a6d1ed8087",
+      "original_sha256": "617ee1944bd8b09af8cbc9c2eccb68db2b14f0bc6db33b28f4ffe98762f3e6df",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/constant.json",
+      "compression": "gzip"
+    },
+    "continuous-cross-competitive-warm.declaration.json.gz": {
+      "sha256": "1e451e57aa74133fa5d6c7b6948725bfe7300fc9d854da58c7c577e06a8cb91e",
+      "original_sha256": "c0f1d23e3552d2c09be5609c63dd98cb582d259ac5862f8c642a1923e969d9b0",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm.declaration.json",
+      "compression": "gzip"
+    },
+    "cross_only.json.gz": {
+      "sha256": "daaf189588c17d0d5ff03ae4d44fa2dc42b687bdd1b46e9a3c2e2ea0d7aa9bd5",
+      "original_sha256": "d8319bbae9b12254c025fbf60caf60994249fdcd78835ff346c80297beb8a985",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/cross_only.json",
+      "compression": "gzip"
+    },
+    "identity.json.gz": {
+      "sha256": "806e56706c5247632d29c7f7ba53a7475e618fe04659f7be6ba40abde02d3521",
+      "original_sha256": "34319b239776b5b8f6fdc68029476535db02e03e9b4facc98e3ee83a3c63744c",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/identity.json",
+      "compression": "gzip"
+    },
+    "source_archive/cross_competitive_scratch.py": {
+      "sha256": "da4b09a0c6b59c0b333f9140a21d02a16771ac5501a09e691dfcde6dfa7f15e7",
+      "original_sha256": "da4b09a0c6b59c0b333f9140a21d02a16771ac5501a09e691dfcde6dfa7f15e7",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/source_archive/cross_competitive_scratch.py",
+      "compression": "identity"
+    },
+    "source_archive/cross_competitive_warm_probe.py": {
+      "sha256": "04d945b9b0b028a7a0c2063d612890760d7dd0a3669e2aa545153e17fa72f33d",
+      "original_sha256": "04d945b9b0b028a7a0c2063d612890760d7dd0a3669e2aa545153e17fa72f33d",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/source_archive/cross_competitive_warm_probe.py",
+      "compression": "identity"
+    },
+    "source_archive/extra_adam_scratch.py": {
+      "sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/source_archive/extra_adam_scratch.py",
+      "compression": "identity"
+    },
+    "source_archive/fixed_metric_extra_scratch.py": {
+      "sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/source_archive/fixed_metric_extra_scratch.py",
+      "compression": "identity"
+    },
+    "source_archive/implicit_extra_scratch.py": {
+      "sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/source_archive/implicit_extra_scratch.py",
+      "compression": "identity"
+    },
+    "source_archive/mode_hold_transformed.py": {
+      "sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/source_archive/mode_hold_transformed.py",
+      "compression": "identity"
+    },
+    "source_archive/sha256.json.gz": {
+      "sha256": "c732891f1c06cdb34617c733142dd709d66b27a003024f2a2a0df7ec2cce8950",
+      "original_sha256": "d97710a25325ba0255fa8698f35ed9398702d518a69d55ff166e70696fa87e11",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/source_archive/sha256.json",
+      "compression": "gzip"
+    },
+    "source_archive/trajectory_transformed.py": {
+      "sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/source_archive/trajectory_transformed.py",
+      "compression": "identity"
+    },
+    "summary.json.gz": {
+      "sha256": "32c48eda05986ccf9ebb6053fcd5c872cffd0ea3eee191d651417694388a4b3f",
+      "original_sha256": "5ddce21aa4dfcdef93ee7b67cc41fe422ddce8eef57a7a88bccf373c585b219b",
+      "original_worktree": "ParticleGAN-continuous-mechanism",
+      "original_path": "artifacts/continuous-cross-competitive-warm/summary.json",
+      "compression": "gzip"
+    }
+  }
+}
