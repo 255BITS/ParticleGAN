@@ -500,11 +500,11 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
 
     @torch.no_grad()
     def _scale_bounded_g_step(self,local):
-        """After the curvature bound, shrink the whole G step by the mean local slope.
+        """After the curvature bound, drop the G step only in the flat rest band.
 
-        Slope is ||dD/dx|| on the smoothed critic, divided by the stencil slope 0.5/width,
-        then clipped to [0, 1]. The gradient is not reweighted before the bound.
-        Trajectory inputs are not 2D, so this does not run there.
+        Mean local slope is the mean ||dD/dx|| of the smoothed critic. Rest is below
+        0.2 (warm ~.11, acquisition ~.67–1.07). At or above 0.2 the bounded #84 step
+        is left unchanged. Trajectory inputs are not 2D, so this does not run there.
         """
         before=getattr(self,'_x_before',None)
         width=float(getattr(self,'_smooth_width',0.) or 0.)
@@ -527,15 +527,16 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         for dim in range(before.shape[-1]):
             shift=torch.zeros_like(before);shift[:,dim]=eps
             grad.append((score(before+shift)-score(before-shift))/(2*eps))
-        slope=float(torch.stack(grad,1).norm(dim=1).mean())/(0.5/width)
+        slope=float(torch.stack(grad,1).norm(dim=1).mean())
         if not math.isfinite(slope):return
-        scale=min(1.,max(0.,slope))
-        self.row['slope_scale']=scale
         self.row['mean_local_slope']=slope
-        if scale>=1-1e-8:return
+        if slope>=.2:
+            self.row['slope_scale']=1.
+            return
+        self.row['slope_scale']=0.
         opt_g=self.optimizers[1]
         for p,base in zip(self._params(opt_g),self.g_base):
-            p.copy_(torch.lerp(base,p,scale))
+            p.copy_(base)
 
 
 @contextmanager

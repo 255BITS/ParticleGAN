@@ -198,3 +198,16 @@ The stencil, width `min(0.15, 0.5/sharpness)`, G cap .25, and D bound 3 stay as 
 | Slope scale | mean .118, max .251, so the clip never left a full bounded step |
 
 The matched warm state is flat, so the scale damps the drift at 1129–1132. The same damping runs during acquisition and the eighth mode never arrives. This knob recovers warm by killing the ring. It is stopped. No 2400 hold. The unsmoothed post-step scale is not a candidate. The smoothed critic with the frozen width remains the best ring evidence (full cold-ring pass, 8 modes at update 600, warm 196/200).
+
+## Hard rest gate (re-trades; rest-damp family stopped)
+
+Same frozen stencil. After the curvature bound, the G step is removed only when the mean smoothed-critic slope `||dD/dx||` is below 0.2. At or above 0.2 the bounded step is unchanged. No proportional scale.
+
+| Gate | Result |
+| --- | --- |
+| Warm | PASS 200/200. Minimum HQ .9993, final HQ 1. Slope .090–.311 (mean .149). The gate dropped 193 of 200 G steps |
+| Cold trajectory | PASS MSE .000943, suffix 18 |
+| Cold ring | FAIL. 8 modes at 1000–1150 (HQ .999/.959/1/1) then 5 modes, HQ .443 at 1200. `first_eight` 709, hold before 1000 is 2 steps |
+| Gate | Open on 751/1200 steps (slope up to .836). Closed on 449 |
+
+Acquisition is no longer cut the whole way, and the ring does reach 8 modes, but the rest gate still fires often enough to drop coverage before the last terminal check. Warm is recovered by giving up the full five-check ring. Rest-damping stops here. No 2400 hold.
