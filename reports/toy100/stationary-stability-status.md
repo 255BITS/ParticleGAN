@@ -16,6 +16,15 @@ sudden change in Adam's denominator. See the linked report for the complete
 ledger, direction tests and exact evidence. The ten-step results below retain
 the original diagnostic's provenance.
 
+**Current candidate:** bounded refinement of the same penalized critic loss
+passes all44 saved-state checks and warm200/200, minimum HQ .99707. Its
+constant-rate dense hold through2400 is running. This costs roughly53 extra
+1024-pair D gradients per update; fits remain nonconverged. Cold acquisition
+is not yet tested. [Independent warm audit and evidence](pr84-critic-refinement-independent-audit.md),
+[strict saved-state filter](pr84-critic-refinement-filter.md). The
+[capped population toy](capped-critic-tracking-toy.md) supports a critic-tracking
+mechanism without implying that distribution mismatch alone is impossible.
+
 ## New continuation result
 
 The candidate is the unchanged original PR84 G-only stencil on alternating
