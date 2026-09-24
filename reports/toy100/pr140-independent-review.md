@@ -1,5 +1,14 @@
 # Independent review of PR140
 
+**Reproduction update (2026-09-24): the dispatch discrepancy is resolved.**
+An explicit diagnostic override of MKL CPU-vendor dispatch reproduces every
+recorded update and quality check for PR140 and PR143. PR140 is 114/120; PR143
+is 115/120, minimum seven modes, with matching warm state hashes and cold
+receipts. The CPU-wheel hypothesis is superseded. Ordinary AMD execution
+still fails acquisition, and neither candidate is release-qualified.
+See the [complete reproduction audit](pr140-pr143-repro-audit/README.md).
+The original ordinary-dispatch measurements below remain valid.
+
 **The global first-place claim is not verified.** This audits PR140 head
 `ef4084a46d999af33c8c484ef36dfdafbe3fc517`; the submitted head was unchanged at
 completion. Its report claims the best continuation on its own PR107 comparison
@@ -21,16 +30,17 @@ new intervention. The declared10 source hashes and12 warm source hashes match.
 Both independently run cold trajectories pass. The delayed LR rule never arms
 in these replays because they do not acquire8 modes. Thirteen focused unit tests
 pass in each environment (13 distinct cases). The2.14 CPU wheel has the same
-PyTorch core revision as the reported2.14+cu130 build; CUDA build/hardware
-numerical differences remain unresolved. These observations do not disprove
-that the author's environment produced its saved results.
+PyTorch core revision as the reported2.14+cu130 build; the later audit isolates
+MKL CPU-vendor dispatch and reproduces the submitted traces exactly. The
+ordinary-dispatch failure remains a portability limitation.
 
 The method remains a GAN. It changes G/prior learning rates from.00425/.0085 to
 .002125/.00425 after a benchmark8-mode/HQ>=.9 observation at or after1200.
 That uses evaluation information in training control and is a different policy
 from our fixed-rate, evaluation-independent candidates. Even accepting that
 policy, the submitted evidence does not establish stable-and-passing release
-qualification. Retain it as an unverified contender; do not promote it to #1.
+qualification. Retain it as a contender with reproduced backend-specific evidence; do not
+promote it to a global #1 or a qualified release.
 
 [Machine-readable review and raw replay outputs](pr140-independent-review/review.json).
 [Submitted report](https://github.com/255BITS/ParticleGAN/blob/ef4084a46d999af33c8c484ef36dfdafbe3fc517/reports/toy100/delayed-arm-g-lr.md).

@@ -550,7 +550,8 @@
     "torch214": 13,
     "distinct_cases": 13
   },
-  "remaining_environment_difference": "author torch2.14.0+cu130; isolated review torch2.14.0+cpu with same core git revision08187d9e; no assertion that all build or hardware behavior matches",
+  "remaining_environment_difference": "Resolved in follow-up: diagnostic MKL CPU-vendor dispatch override reproduces all 2400 records and 240 quality checks for both PR140 and PR143; ordinary AMD dispatch still fails.",
   "policy_difference": "quality-triggered G/prior LR halving; evaluation metrics enter training control",
-  "publication_head_unchanged": true
+  "publication_head_unchanged": true,
+  "followup_reproduction_audit": "../pr140-pr143-repro-audit/comparison.json"
 }

@@ -1,8 +1,13 @@
 # Stability after confirmed convergence
 
-PR140 is an [unverified contender](pr140-independent-review.md), not a confirmed
-global leader. Its submitted114/120 sparse continuation result was not reproduced
-in the independent CPU runs; its own report also retains six late failures.
+[PR140/PR143 reproduction audit](pr140-pr143-repro-audit/README.md): MKL CPU-vendor
+dispatch explains the previous discrepancy. With the diagnostic dispatch
+override, all 2,400 update records and 240 quality checks match each submission
+exactly. PR140 reproduces114/120; PR143 reproduces115/120, minimum seven modes,
+five single-check misses. PR143 is a **provisional keep / best sparse stay in
+this compared family**. Ordinary AMD runs still fail acquisition. These sparse
+quality-triggered-policy results are separate from the dense hold below;
+neither PR is release-qualified or a confirmed global winner.
 
 The current objective separates learning time from stability once quality has
 converged. The first200 consecutive8-mode/HQ>=.90 observations confirm convergence;

@@ -1,0 +1,9 @@
+{"event": "DECLARED", "phase": "warm", "method": "holdw15", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX2", "shared_gate_eligible": false, "purity": "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder"}
+{"event": "VARIANT_START", "variant": "identity", "cpu": "AVX2"}
+{"event": "VARIANT_START", "variant": "holdw15", "cpu": "AVX2"}
+{"event": "VARIANT_DONE", "variant": "identity", "cpu": "AVX2"}
+{"event": "g_lr_arm", "armed": true, "update_index": 1200, "g_lr_before": 0.00425, "g_lr_after": 0.002125, "fires": 0}
+{"event": "VARIANT_DONE", "variant": "holdw15", "cpu": "AVX2"}
+{"event": "WARM", "variant": "identity", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.989990234375, "failing_steps": [], "cpu": "AVX2"}
+{"event": "WARM", "variant": "holdw15", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.920654296875, "failing_steps": [], "cpu": "AVX2"}
+{"event": "DONE", "cpu": "AVX2"}
