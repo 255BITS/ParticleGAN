@@ -1,6 +1,9 @@
-# Fixed-target instability: exact failure replay and response corrections
+# Fixed-target instability: exact replay and critic tracking
 
-**No replacement qualifies.** Opponent prediction passes warm200 but fails
+**No replacement qualifies yet.** The new penalized critic-refinement rule
+passes all44 saved-state continuation checks and warm200/200, minimum HQ
+.99707 with eight modes throughout. Its dense hold through2400 is running;
+cold acquisition remains untested. Opponent prediction passes warm200 but fails
 22 of1,200 later per-update checks, including temporary mode loss. Cold gates
 were not run after that failure. This round investigates the delayed loss of quality on the **unchanged**
 dataset. The production recipe still uses LR decay. Research tests use live
@@ -167,11 +170,36 @@ diagnostics, not a new successful continuation. All three fits remain
 **NONCONVERGED_RESIDUAL**; lower loss and repaired guidance do not certify
 stationarity or a global best response.
 
-This identifies a concrete candidate to test: refine the actual penalized
-critic against the current generator before taking G's step. It must pass
-all three saved-state continuations before warm200, then the dense longer
-hold and cold acquisition. No diagnostic quality metric can select its
-training updates, and its extra optimization/sample cost must be explicit.
+This identifies a concrete candidate: refine the actual penalized critic
+against the current generator before taking G's step. The declared rule
+uses eight cached training batches and one L-BFGS attempt, capped at40
+iterations and80 closures. The lowest finite training-loss point supplies
+the materialized critic for both G queries. The fit preserves all training
+random streams; no diagnostic quality metric selects an update. D's ordinary
+Adam moments advance once before refinement, while the additional fit is
+explicitly extra optimization outside the original D curvature bound.
+
+The [strict saved-state filter](pr84-critic-refinement-filter.md) passes
+**12/12,16/16,16/16**, minimum HQ .999512, against exactly reproduced original
+controls9/12,14/16,1/16. Warm1001–1200 subsequently passes **200/200**, minimum
+HQ .997070 and eight modes throughout. An independent audit confirms source
+identity, unchanged random-stream receipts and constant applied G/D .00425
+and prior .0085 rates. Warm cost is10,674 extra1024-pair D fit closures plus200
+128-pair parity queries; the median is51.5 fit closures per update. Eleven
+fits exhaust the hard closure budget. These results do not certify a best
+response or establish cold acquisition. The source-bound every-update hold
+through2400 is the next gate; the active adapter currently requires zero
+input noise, and a separate faithful cold extension is being prepared.
+
+The [capped one-dimensional toy](capped-critic-tracking-toy.md) gives a
+precise mechanism under the same paired Rp losses and one-sided cap. A narrow
+generator and wider Gaussian target have a stationary mean despite residual
+distribution mismatch. At that point the fixed-critic G curvature is−3.3148,
+while re-optimizing the quadratic critic as the mean moves gives a restoring
+G-field slope+4.5088. Equal-rate coupled gradient flow is unstable in that toy;
+sufficiently fast critic response is stable locally. This is a controlled
+counterexample to mismatch alone forbidding stability, not a theorem for the
+finite neural critic, Adam, stochastic batches or the full model.
 
 ## Research checked after isolation
 

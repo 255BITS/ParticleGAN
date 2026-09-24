@@ -17,12 +17,19 @@ parity hold. Read the [fifth-round diagnosis and tests](continuous-round5.md)
 and [current status](stationary-stability-status.md) before proposing another
 method. Prediction is rejected before cold gates; no winner is selected.
 
-**Current causal lead:** the actual-D cross-response also fails its short
-filter. More decisively, fitting a copied critic on the existing penalized
-objective reverses harmful G guidance on24/24 reserved batches; all proposals
-at1325 and1530 then pass. Every fit remains nonconverged, and this is not a
-continuation result. [Exact fit and held-out evidence](pr84-critic-relaxation-diagnosis.md)
-motivates a bounded critic-refinement candidate before another full run.
+**Current causal lead:** the actual-D cross-response fails its short filter.
+Fitting a copied critic on the existing penalized objective reverses harmful
+G guidance on24/24 reserved batches; all proposals at1325 and1530 then pass.
+[Exact fit and held-out evidence](pr84-critic-relaxation-diagnosis.md) led to
+a bounded critic-refinement rule. That rule now passes **all44 saved-state
+checks and warm200/200**, with eight modes and minimum warm HQ .99707.
+The dense hold through2400 is running; cold acquisition remains untested.
+Each update costs about53 additional1024-pair critic-gradient evaluations in
+the warm run, plus a parity check. Fits are nonconverged and D's retained Adam
+moments precede the refinement. [Rule, strict filter and frozen evidence](pr84-critic-refinement-filter.md).
+The [capped quadratic-critic toy](capped-critic-tracking-toy.md) demonstrates
+a locally restoring fast-critic field where a frozen critic is repelling;
+its assumptions do not establish full-host stability.
 The [structural note](rp-misspecification-stability.md) proves exact distribution
 matching impossible for the frozen mixture but explicitly does not prove
 good-quality stability impossible. The [operator probe](pr84-cross-reciprocity-research.md)
