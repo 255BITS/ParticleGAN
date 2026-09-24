@@ -1,0 +1,33 @@
+{
+  "scope": "derivative audit only;no optimizer or critic fit",
+  "original_float32_retained": true,
+  "native_exponents": [
+    0,
+    1
+  ],
+  "double_exponents": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16
+  ],
+  "all_declared_scales_evaluated": true,
+  "h0": "2e-4*(1+original G/prior parameter L2 norm)",
+  "fixed": "cached native draws, starting critic, saved double P_D, width .15",
+  "double_scope": "same float32 saved weights/Fourier buffers/draws cast to float64;not a training arm",
+  "mask_call_order": "D0/1 logistic real/fake,D2/3 cap real/fake,D4..8 virtual fake stencil,D9..13 virtual real stencil",
+  "input_sha": "bc889564dbcafdeb815ceba8992f17f09f39706da3fa55b21959b595297e3876",
+  "config_sha": "f8493ef926ed27cd0e0bbfab1dcd615551dc1fa81231ff3e131adfff7e9be5e7",
+  "source": {
+    "reports/toy100/pr84_one_step_unroll_audit.py": "9dab2a5d69cca7e051b30c67f7783e54c95755b11566746ff7c15153c612b7f0",
+    "reports/toy100/pr84_one_step_unroll.py": "33fa46e99572d99df02d8c291bf1329e5c668bb92af718dc5482d2a80ced0d78",
+    "reports/toy100/functional_b_cap.py": "0a3088add24bd83e8827e2e9e1d2edbe32ee36bbc8beef15f3217b4d4a50a5f3",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a"
+  },
+  "shared_gate_eligible": false
+}

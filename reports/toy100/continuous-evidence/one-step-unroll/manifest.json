@@ -1,0 +1,127 @@
+{
+  "initial/declaration.json": {
+    "raw_sha256": "e707065e273b1bcf955fc0e4372f2412ea5ce5a45f192ba1964fb4ce5703ada1",
+    "archive": "initial/declaration.json",
+    "archive_sha256": "e707065e273b1bcf955fc0e4372f2412ea5ce5a45f192ba1964fb4ce5703ada1"
+  },
+  "initial/result.json": {
+    "raw_sha256": "ad6959847bc832038546ca051c62b5384ec57163e00c8b9cd1cbca390517a430",
+    "archive": "initial/result.json.gz",
+    "archive_sha256": "eb3bea93803c573b463f655a9b56cd1bdac0c11e4fadf0ab29b1ec54680cf0c3"
+  },
+  "initial/source/particlegan/gan_loss.py": {
+    "raw_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "archive": "initial/source/particlegan/gan_loss.py.gz",
+    "archive_sha256": "0d5f99f7ef077a56b4dc06791a60d83eba34740cf3f2d7edc0cfccfac38e7563"
+  },
+  "initial/source/particlegan/grad_regularizers.py": {
+    "raw_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "archive": "initial/source/particlegan/grad_regularizers.py.gz",
+    "archive_sha256": "4c0d42678efe66e2ae2ce36e4c7808866a996d88ad5ecaa7d32097fd4e52fabe"
+  },
+  "initial/source/reports/toy100/alternating_curvature_scratch.py": {
+    "raw_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "archive": "initial/source/reports/toy100/alternating_curvature_scratch.py.gz",
+    "archive_sha256": "4655b8735ed1df2ff0051b7e1816df9084b9c639c1f92bf6c0d8f62c78ca024c"
+  },
+  "initial/source/reports/toy100/coverage_fixed_eval.py": {
+    "raw_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "archive": "initial/source/reports/toy100/coverage_fixed_eval.py.gz",
+    "archive_sha256": "781a69107df11fa473feacf197aff169c6e7b1c243d14de972d7af8d77401e98"
+  },
+  "initial/source/reports/toy100/functional_b_cap.py": {
+    "raw_sha256": "0a3088add24bd83e8827e2e9e1d2edbe32ee36bbc8beef15f3217b4d4a50a5f3",
+    "archive": "initial/source/reports/toy100/functional_b_cap.py.gz",
+    "archive_sha256": "d486c2afd2ad8fce53abb50a953b3559daaaf4850de07be4a8e543e59a95549e"
+  },
+  "initial/source/reports/toy100/pr84_critic_relaxation.py": {
+    "raw_sha256": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+    "archive": "initial/source/reports/toy100/pr84_critic_relaxation.py.gz",
+    "archive_sha256": "51346022e1ca28af02828681e9d9fa1cb79b36ec144987e2103be2904d127d2e"
+  },
+  "initial/source/reports/toy100/pr84_one_step_unroll.py": {
+    "raw_sha256": "33fa46e99572d99df02d8c291bf1329e5c668bb92af718dc5482d2a80ced0d78",
+    "archive": "initial/source/reports/toy100/pr84_one_step_unroll.py.gz",
+    "archive_sha256": "c9b3f59b66275873a9014b4d0ea0590473726fff9851206acb9c0651c53c67cb"
+  },
+  "initial/tensors.pt": {
+    "raw_sha256": "bc889564dbcafdeb815ceba8992f17f09f39706da3fa55b21959b595297e3876",
+    "archive": "initial/tensors.pt.gz",
+    "archive_sha256": "b82fbab02392c5753d95221607b21e1690531745b5cdb89bc45b22ddb29d5f8d"
+  },
+  "derivative-audit/declaration.json": {
+    "raw_sha256": "3f6557e0b461378fcf27cb41cac41821fadc4b8664e01e876b784bf415facdab",
+    "archive": "derivative-audit/declaration.json",
+    "archive_sha256": "3f6557e0b461378fcf27cb41cac41821fadc4b8664e01e876b784bf415facdab"
+  },
+  "derivative-audit/result.json": {
+    "raw_sha256": "1bb2e3b2764190e3dcb457e84a5a28d67ac5266a1ca6ac96558f8b5afbaf50f9",
+    "archive": "derivative-audit/result.json.gz",
+    "archive_sha256": "b851148d044ae3a2285b71a5c43a3ee71034f60f99f00ea691a6021f1dc4b9c1"
+  },
+  "derivative-audit/source/benchmarks/locked_shared/mlp.py": {
+    "raw_sha256": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "archive": "derivative-audit/source/benchmarks/locked_shared/mlp.py.gz",
+    "archive_sha256": "f5f9ffe455030054182ed9a11c1b8e1111b88c9371db8adf5e9982e0b08c886e"
+  },
+  "derivative-audit/source/reports/toy100/functional_b_cap.py": {
+    "raw_sha256": "0a3088add24bd83e8827e2e9e1d2edbe32ee36bbc8beef15f3217b4d4a50a5f3",
+    "archive": "derivative-audit/source/reports/toy100/functional_b_cap.py.gz",
+    "archive_sha256": "d486c2afd2ad8fce53abb50a953b3559daaaf4850de07be4a8e543e59a95549e"
+  },
+  "derivative-audit/source/reports/toy100/pr84_one_step_unroll.py": {
+    "raw_sha256": "33fa46e99572d99df02d8c291bf1329e5c668bb92af718dc5482d2a80ced0d78",
+    "archive": "derivative-audit/source/reports/toy100/pr84_one_step_unroll.py.gz",
+    "archive_sha256": "c9b3f59b66275873a9014b4d0ea0590473726fff9851206acb9c0651c53c67cb"
+  },
+  "derivative-audit/source/reports/toy100/pr84_one_step_unroll_audit.py": {
+    "raw_sha256": "9dab2a5d69cca7e051b30c67f7783e54c95755b11566746ff7c15153c612b7f0",
+    "archive": "derivative-audit/source/reports/toy100/pr84_one_step_unroll_audit.py.gz",
+    "archive_sha256": "1a84a2c3c0450807306ea52f94c349f3d63e6f658ea84a51a79bed1832866aa2"
+  },
+  "additional-source/tests/test_pr84_one_step_unroll.py": {
+    "raw_sha256": "037dd919b1857f04405afd5fc53859c5e6bc6e81e583181c5b69cf55a77d0118",
+    "archive": "additional-source/tests/test_pr84_one_step_unroll.py.gz",
+    "archive_sha256": "7b6dde14796653444e56046d32fada9b85da0172a361f64545291c49c7283f66"
+  },
+  "additional-source/tests/test_functional_b_cap.py": {
+    "raw_sha256": "010d96058289de13bc850e900badcca6d583330dda205b45b89db8641b220d5f",
+    "archive": "additional-source/tests/test_functional_b_cap.py.gz",
+    "archive_sha256": "a09cfc29749563a592e09afb11b84573575a41835d42a75af496dc7deaf0b182"
+  },
+  "additional-source/reports/toy100/pr84_critic_refinement_capture.py": {
+    "raw_sha256": "3a197ad990cca778b96d9cf80295b8b40e393b079c9fbcf0d3e5b6b71cf2d585",
+    "archive": "additional-source/reports/toy100/pr84_critic_refinement_capture.py.gz",
+    "archive_sha256": "6bd7873bccd4a87bb4c1f74a133fe378a24a2d0eea260a628761007183526135"
+  },
+  "additional-source/benchmarks/locked_shared/mode_hold.py": {
+    "raw_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "archive": "additional-source/benchmarks/locked_shared/mode_hold.py.gz",
+    "archive_sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828"
+  },
+  "additional-source/benchmarks/transfer_suite/toy100_compatibility.py": {
+    "raw_sha256": "cab108b3cb26929862eea09e7e0be98efeb4e4a25b63679455348e8074adca69",
+    "archive": "additional-source/benchmarks/transfer_suite/toy100_compatibility.py.gz",
+    "archive_sha256": "d59bc6d713fe8352dc73a3fce93965c8f1d244312ed886f27880a729e301dbd4"
+  },
+  "config.json": {
+    "raw_sha256": "f8493ef926ed27cd0e0bbfab1dcd615551dc1fa81231ff3e131adfff7e9be5e7",
+    "archive": "config.json",
+    "archive_sha256": "f8493ef926ed27cd0e0bbfab1dcd615551dc1fa81231ff3e131adfff7e9be5e7"
+  },
+  "tests.log": {
+    "raw_sha256": "3efc219b4a7c964f30786f5ddd9f61369bfa66d6d5ac4533e92fcd62ee7366e2",
+    "archive": "tests.log.gz",
+    "archive_sha256": "0ac8f5f9184f388b7f33227b8b3599110466fc0fe8ba9adf538f8dc8a3ab4009"
+  },
+  "initial.log": {
+    "raw_sha256": "669d27750e0d63b325b1187bb39aba69b319a614d05ce9d5ddadcb4a39af9d51",
+    "archive": "initial.log.gz",
+    "archive_sha256": "cc96676e6750bdc95c3e79f9c4f3f9afe793d8e2c8850d5899db6cc4206f8a58"
+  },
+  "derivative-audit.log": {
+    "raw_sha256": "5c8dbcf8300c6c274573e3b53a7eed9d323f0baebf99fe40fbb99e2b7ddf51eb",
+    "archive": "derivative-audit.log.gz",
+    "archive_sha256": "09bf8639bda3bde3ade52a77c14d2cd57c7faf4eb2d75b0ff918beb68f075e91"
+  }
+}

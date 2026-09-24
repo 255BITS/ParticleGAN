@@ -1,0 +1,33 @@
+{
+  "scope": "two saved states,onevirtualDstep,no outer training or fits",
+  "starting_critics": {
+    "472": "captured bestfiniteD",
+    "1325": "original acceptedD*"
+  },
+  "virtual_metric": "saved post-Adam D metric;fixed,no differentiated or persistentmoment update",
+  "inner_batch": "actual nativeD128pair;full sharpRp plus value-identical graph-preserving cap",
+  "outer_batch": "actual nextnativeG128pair;frozen.15spatialstencil",
+  "controls": [
+    "original fixedD",
+    "detached virtualD",
+    "fullchain samevirtualD"
+  ],
+  "fd": "negativefullgradient direction;h=2e-4*(1+parameterL2),h/2;both2%or1e-5 criterion",
+  "source": {
+    "reports/toy100/pr84_one_step_unroll.py": "33fa46e99572d99df02d8c291bf1329e5c668bb92af718dc5482d2a80ced0d78",
+    "reports/toy100/functional_b_cap.py": "0a3088add24bd83e8827e2e9e1d2edbe32ee36bbc8beef15f3217b4d4a50a5f3",
+    "reports/toy100/pr84_critic_relaxation.py": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f"
+  },
+  "inputs": {
+    "/ml2/hypergan/ParticleGAN-continuous-learning/artifacts/continuous-learning/round5/critic-refinement-failure-capture/failed-fit.pt": "19ceb38a92ba95ffaccd3aafbda55bbd77917765612666d923e986e5523d6965",
+    "/ml2/hypergan/ParticleGAN-continuous-learning/reports/toy100/continuous-evidence/pr84-stationary-failure-diagnosis/compact-states.pt.gz": "77b24bbaf646befe70ac97f23a944d32717306e4ff0b1b8d8b6ff107dfef82f9",
+    "reports/toy100/continuous-evidence/critic-refinement-finite-recovery/config.json": "f8493ef926ed27cd0e0bbfab1dcd615551dc1fa81231ff3e131adfff7e9be5e7"
+  },
+  "shared_gate_eligible": false,
+  "quality_selection": false,
+  "best_response_claim": false
+}
