@@ -2,8 +2,9 @@ name: Tests
 
 on:
   pull_request:
+    branches: [master, main, develop]
   push:
-    branches: [master, api]
+    branches: [master, main, develop]
   workflow_dispatch:
   workflow_call:
 
@@ -13,6 +14,14 @@ permissions:
 jobs:
   cpu-tests:
     name: CPU / Python ${{ matrix.python }}
+    # Keep branch CI on primary branches, including manual/reusable calls.
+    # Tagged releases still use this workflow through release.yml.
+    if: >-
+      github.event_name == 'release' ||
+      (github.event_name == 'pull_request' &&
+       contains(fromJSON('["master", "main", "develop"]'), github.base_ref)) ||
+      (github.event_name != 'pull_request' &&
+       contains(fromJSON('["refs/heads/master", "refs/heads/main", "refs/heads/develop"]'), github.ref))
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
