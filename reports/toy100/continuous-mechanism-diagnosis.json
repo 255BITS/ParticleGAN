@@ -547,5 +547,45 @@
       "continued_to_mode_hold": false,
       "raw": "artifacts/continuous-secant-eg-cold/secant_c90"
     }
-  ]
+  ],
+  "implicit_response": {
+    "warm_passing_checks": 200,
+    "warm_checks": 200,
+    "warm_min_hq": 0.983154296875,
+    "warm_final": {
+      "modes": 8,
+      "hq": 0.9970703125
+    },
+    "warm_alpha": {
+      "min": 0.0625,
+      "mean": 0.2975,
+      "max": 1.0
+    },
+    "warm_gradient_evaluations": 2273,
+    "warm_extra_queries": 2073,
+    "warm_moment_updates": 200,
+    "warm_max_linear_residual": 0.09964069558238818,
+    "warm_max_nonlinear_residual": 0.49523712726204516,
+    "cold_trajectory_mse": 0.253793865442276,
+    "cold_passing_checks": 0,
+    "cold_gradient_evaluations": 3237,
+    "cold_moment_updates": 400,
+    "cold_alpha": {
+      "min": 0.00390625,
+      "mean": 0.034326171875,
+      "max": 1.0,
+      "last50_mean": 0.007734375
+    },
+    "cold_rejections": {
+      "linear_residual": 6,
+      "nonlinear_residual": 395,
+      "correction_bound": 4
+    },
+    "continued_to_mode_hold": false,
+    "raw": [
+      "artifacts/continuous-implicit-warm/implicit.json",
+      "artifacts/continuous-implicit-cold/trajectory.json"
+    ],
+    "adapter_run_sha256": "f669cda71935cd97ace70d12cddf0dd6333cdc92f91e9ba73a7037df199ba196"
+  }
 }

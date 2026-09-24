@@ -119,8 +119,36 @@ stabilize the former while failing the latter. No row is a winning
 continuous-learning recipe. Source bytes and transforms are archived under
 the fixed-metric and secant artifact directories.
 
+A bounded matrix-free implicit response then solved
+`(I + alpha sqrt(P) J_F sqrt(P)) u = -alpha sqrt(P) Fbase`, with
+`delta = sqrt(P) u`. It used at most8 GMRES directions, same-sample
+finite-difference Jacobian products, linear relative residual<=.1, a
+proposed-correction norm bound, and an independently evaluated actual
+nonlinear implicit residual<=.5. Parameter-dtype rounding was measured.
+All nominal role LRs remained constant; rejected solves halved alpha.
+
+The warm branch passed200/200 checks (minimum HQ .98315), using2,273 gradient
+evaluations per player for200 updates and2073 verified same-RNG queries.
+Accepted alpha min/mean/max was .0625/.2975/1; maximum linear/nonlinear
+residuals were .09964/.49524. Four independent tests covered exact stiff
+bilinear response, zero-field no-op, original-host identity, and active
+RNG/query/moment accounting. Sitting at a matched target is acceptable;
+these tests impose no minimum-motion requirement.
+
+Cold trajectory still failed: MSE .253794,0/24 passing checks,400 moment
+updates and3,237 gradient evaluations per player. Mean alpha was .03433,
+falling to .00773 over the last50 updates. Of405 rejected solves,395 failed
+the nonlinear residual,6 exhausted the linear residual target, and4 exceeded
+the proposed-correction bound. Thus more GMRES work alone is not supported
+as the next fix. Cold mode-hold and shift tests were skipped after this
+acquisition failure. The next bounded research comparison is cross-only
+competitive response: the [CGD authors](https://f-t-s.github.io/projects/cgd/)
+explicitly distinguish it from the full-Jacobian Newton response used here.
+No result for that comparison is claimed in this report.
+
 Exact values and raw artifact paths are in
 [the compact diagnosis](continuous-mechanism-diagnosis.json). Scratch scripts
 are `continuous_mechanism.py`, `output_trust_scratch.py`,
-`output_trust_probe.py`, and `fixed_metric_extra_scratch.py`. No production
+`output_trust_probe.py`, `fixed_metric_extra_scratch.py`,
+`secant_extra_scratch.py`, and `implicit_extra_scratch.py`. No production
 implementation, seed, model, or original quality threshold changed.
