@@ -228,6 +228,23 @@ here without losing the ring. A warm-only switch or an HQ/mode-count
 condition would reach the same outcome only by testing a different method in
 the warm fork, or by reading the target, so neither was used.
 
+## Per-particle slope weighting on the stencil recipe (v18)
+
+The critic's slope at the particles separates travel from rest without the
+target: RMS input gradient .67-1.07 during cold ring acquisition, .11-.18
+once resting, .113 on the warm fork. v18 keeps the #84 recipe and scales each
+generated sample's gradient into G by min(1, ||grad_x D_s(x)|| / 1), the
+stencil-smoothed critic's slope at that sample. The rule is identical on
+every host, and trajectory is unaffected because its critic input is not 2D.
+
+Warm fork: **FAIL 192/200** (fails 1192-1199, min HQ .8342), worse than the
+recipe's 196/200. Cold was not run (fail-fast). The weights did shrink
+per-sample pushes at rest (mean .09), but G's own-curvature ratio is measured
+on the same weighted field. It shrank in proportion, and the G bound relaxed
+to match (mean factor .92, versus about .16 unweighted), so Adam's
+normalization restored the step. A per-sample weight and a scale-free
+curvature bound cancel rather than compose. One clean try; stopped.
+
 ## Recommendations
 
 1. Put future game-update candidates in the alternating adapter
