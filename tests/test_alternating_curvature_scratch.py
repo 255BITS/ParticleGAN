@@ -166,3 +166,28 @@ def test_per_particle_bound_frees_flat_particle_rows_and_keeps_network_on_joint_
     assert flat["factor"] == 1. and sharp["factor"] < 1.
     assert z[1, 0].item() == pytest.approx(0.)
     assert z[0, 0].item() == pytest.approx(1. - sharp["factor"])
+
+
+def test_critic_average_feeds_g_the_averaged_critic_and_restores_live_d():
+    x = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([x], lr=1., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+    recorder = BothBoundRecorder(curvature_bound=1e9, d_curvature_bound=1e9, critic_average=.5)
+    seen = []
+    for step in range(2):
+        for phase in recorder.phases(step, opt_d, opt_g, {}):
+            y.grad = (-x + 2. * y).detach().clone()
+            recorder.step(opt_d, torch.optim.Adam.step)
+            seen.append((step, phase, y.item()))
+            x.grad = y.detach().clone()
+            recorder.step(opt_g, torch.optim.Adam.step)
+        live = y.item()
+        if step == 0:
+            first_live = live
+    # Step 0: EMA initialised to the live D, so G sees the live D.
+    assert [v for s, ph, v in seen if s == 0 and ph > 0] == [first_live, first_live]
+    # Step 1: G sees .5 * previous EMA + .5 * new live D, and the live D is restored.
+    expected = .5 * first_live + .5 * live
+    assert [v for s, ph, v in seen if s == 1 and ph > 0] == [pytest.approx(expected)] * 2
+    assert y.item() == live

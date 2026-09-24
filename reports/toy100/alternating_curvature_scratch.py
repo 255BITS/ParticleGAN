@@ -158,7 +158,8 @@ class AlternatingCurvatureRecorder:
             network_factor=stats([g['factor'] for r in closed for g in r.get('g_groups',[]) if not g['prior']]),
             prior_factor=stats([g['factor'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),
             prior_rho=stats([g['rho'] for r in closed for g in r.get('g_groups',[]) if g['prior']]),
-            per_particle=getattr(self,'per_particle',False),
+            per_particle=getattr(self,'per_particle',False),critic_average=getattr(self,'critic_average',None),
+            critic_average_distance=stats([r.get('critic_average_distance') for r in closed]),
             particle_factor=stats([q['factor'] for r in closed for q in r.get('particles',[])]),
             particle_factor_max=stats([max(q['factor'] for q in r['particles']) for r in closed if r.get('particles')]),critic_advantage=stats([r['critic_advantage'] for r in self.records]),
             gradient_evaluations_per_outer_step=(sum(3 if 'd' in r else 1 if r['gate_open'] else 2 for r in self.records)/self.outer_steps) if self.outer_steps else None,
@@ -211,10 +212,14 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
     ratio and factor from the same replay. A particle resting in a sharp basin
     stays bounded, while one in a flat region between basins can move further
     through its own latent without a global network step.
+
+    With ``critic_average`` (EMA decay) D trains normally, but G's gradient in
+    passes 1 and 2 is taken against an exponential moving average of D's
+    bounded parameters; the live D is restored after the update.
     """
 
     def __init__(self,start_step=0,curvature_bound=.25,d_curvature_bound=None,trace_outputs=False,
-                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False,per_particle=False):
+                 ratio_reference=None,ratio_span=1.5,ratio_decay=.9,per_group=False,per_particle=False,critic_average=None):
         super().__init__(start_step=start_step,curvature_bound=curvature_bound,advantage_gate=None,trace_outputs=trace_outputs)
         if ratio_reference is not None and (not math.isfinite(ratio_reference) or ratio_reference<=0
                                             or not ratio_span>=1 or not 0<=ratio_decay<1):
@@ -222,6 +227,8 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
         self.ratio_reference=ratio_reference;self.ratio_span=ratio_span;self.ratio_decay=ratio_decay
         self.log_ratio=None;self.per_group=per_group;self.per_particle=per_particle
         if per_group and per_particle:raise ValueError('choose per-group or per-particle bounds')
+        if critic_average is not None and not 0<critic_average<1:raise ValueError('invalid critic averaging decay')
+        self.critic_average=critic_average;self.critic_ema=None
         self.d_curvature_bound=curvature_bound if d_curvature_bound is None else d_curvature_bound
         if not math.isfinite(self.d_curvature_bound) or self.d_curvature_bound<=0:raise ValueError('invalid D curvature bound')
 
@@ -258,6 +265,9 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
             elif not all(torch.equal(a,b) for a,b in zip(rng_after,state)):
                 raise RuntimeError('replayed block consumed a different RNG pattern')
             else:self.rng_replay_verified+=1
+        if self.critic_average is not None:
+            with torch.no_grad():
+                for p,v in zip(self._params(opt_d),self.d_star):p.copy_(v)
         self.row['critic_advantage']=self.advantage;self.row['gate_open']=False
         self.row['rho'],self.row['factor']=self.row['g']['rho'],self.row['g']['factor']
         self.records.append(self.row);self._record_trace(local)
@@ -283,8 +293,14 @@ class BothBoundRecorder(AlternatingCurvatureRecorder):
                 for p,b,n in zip(self._params(opt_d),self.d0,self.d1):p.copy_(torch.lerp(b,n,factor) if factor<1 else n)
                 self.d_star=[p.detach().clone() for p in self._params(opt_d)]
                 self.row['d']=dict(rho=rho,factor=factor)
+                if self.critic_average is not None:
+                    if self.critic_ema is None:self.critic_ema=[v.clone() for v in self.d_star]
+                    else:
+                        for e,v in zip(self.critic_ema,self.d_star):e.lerp_(v,1-self.critic_average)
+                    for p,v in zip(self._params(opt_d),self.critic_ema):p.copy_(v)
+                    self.row['critic_average_distance']=math.sqrt(sum(float((e-v).double().square().sum()) for e,v in zip(self.critic_ema,self.d_star)))
             else:
-                for p,v in zip(self._params(opt_d),self.d_star):p.copy_(v)
+                for p,v in zip(self._params(opt_d),self.critic_ema if self.critic_average is not None else self.d_star):p.copy_(v)
             return None
         if self.phase==0:
             for p,v in zip(self._params(opt_g),self.g_base):p.copy_(v)
