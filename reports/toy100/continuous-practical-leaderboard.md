@@ -1,3 +1,22 @@
+# Current experiment starting point (2026-09-24)
+
+The user-selected continuation search now starts from **g_threequarter_rate**.
+It is experimental, not a release-qualified or overall leaderboard winner.
+Fixed G/D/prior rates: .001125/.0015/.00225; other H GAN settings unchanged.
+
+| Candidate | Cold ring | Own-state short hold | Remaining qualification |
+| --- | --- | --- | --- |
+| Selected g_threequarter_rate | PASS, 8 modes/HQ .999756, suffix9 | FAIL at1284 after83 passing checks | two_pole FAIL; other17 older tasks UNRUN; native3 SKIPPED |
+| Preserved H acquisition control | PASS, 8 modes/HQ .999268, suffix5 | First failure1255 after54 passing checks | older13/19 PASS; full own-state hold FAIL |
+
+The selected cold checkpoint independently replays byte-for-byte. Its earlier
+200/200 borrowed-H warm result is separate from its own-state failure above.
+See [current settings](h_stability/current-base.json), [replay and comparison](h_stability/START.md),
+and [raw own-state metrics](h_stability/selected-base/own-state-short/metrics.json).
+These are two distinct recipes; do not combine their gate passes.
+
+The following board is preserved historical evidence, not the current assignment.
+
 # Constant-LR GAN leaderboard
 
 **Goal: make the GAN formulation itself acquire the fixed target and remain stable under continued training. No candidate is qualified.** Whole-target shifts are separate. Rest is acceptable when there is no learning signal; an error must still produce a corrective response.

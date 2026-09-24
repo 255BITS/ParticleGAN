@@ -203,7 +203,7 @@ def run(variant, output, steps=200, full_window=False):
                      shared_gate_eligible=False,seed_experiment=False,
                      actual_ring_resources=dict(particles=12,z_dim=4,batch=128,hidden=96,layers=3),
                      eligible_objectives='H logistic RpGAN; D R1+R2 and mixup consistency only',
-                     fixed_lrs=dict(g=base.lr,d=base.lr*base.d_lr_mult,prior=base.lr*base.prior_lr_mult),
+                     fixed_lrs=dict(g=.0015,d=.0015,prior=.003),
                      stop_rule='fail if any dense check has modes != 8 or HQ < 0.90; no feedback into updates')
     write(output/'declaration.json',declaration)
     (output/'stability_runner.py').write_bytes(Path(__file__).read_bytes())

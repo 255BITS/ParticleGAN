@@ -1,7 +1,7 @@
 """Bounded selected-H warm-state stability probes; never production qualification.
 
 Control is the archived H alternating update. All policies restore exactly the
-same acquired G/D/prior, Adam and RNG state before any update. The three fixed
+same acquired G/D/prior, Adam and RNG state before any update. The declared
 interventions change only the update algorithm/work budget, never target-aware
 losses, H noise, architecture, or optimizer hyperparameters.
 """
@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 import sys
 import time
+import traceback
 
 PREP_ROOT = Path(__file__).resolve().parent
 REPO = PREP_ROOT.parents[2]
@@ -32,16 +33,7 @@ EVIDENCE = SOURCE/'reports/toy100/critic_signal_attempt'
 CANDIDATE = EVIDENCE/'batch-h/h_n05r06_mixup_c0p01_lr15'
 STATE_SHA = '799181c2a68df02ee5a7a5963b4a5e4fbf23677623c4fcd9f8757460944155b2'
 ARCHIVE_SHA = 'ed4a61dcfebc13f1134630db096aad043d60e4846083b4a1384e871ee9ebb334'
-POLICIES = {
-    'control': dict(family='archived H alternating Adam', d_draws=1, g_draws=1,
-                    d_commits=1, g_commits=1, provisional_pairs=0),
-    'critic_refresh2': dict(family='critic tracking', d_draws=2, g_draws=1,
-                           d_commits=2, g_commits=1, provisional_pairs=0),
-    'average2': dict(family='gradient variance', d_draws=2, g_draws=2,
-                     d_commits=1, g_commits=1, provisional_pairs=0),
-    'extra_adam': dict(family='game prediction/correction', d_draws=2, g_draws=2,
-                       d_commits=1, g_commits=1, provisional_pairs=1),
-}
+from dynamics import Updates, POLICIES
 
 
 def sha(path):
@@ -98,91 +90,6 @@ def restore(state, base, noise):
     return models,dict(opt_g=opt_g,opt_d=opt_d),stream,policy
 
 
-class Updates:
-    """No mode centers, labels or evaluation values enter these updates.
-
-    sample_real is the frozen minibatch sampler. H's fake sampling and all
-    observation noise remain in the archived prior/model/policy modules.
-    """
-    def __init__(self, models, opts, stream, policy, sample_real, base, receipt):
-        self.g=models['generator']; self.d=models['critic']; self.prior=models['prior']
-        self.opts=opts; self.models=models; self.stream=stream; self.policy=policy
-        self.sample_real=sample_real; self.gan=base.make_loss()
-        self.regularizer=base.make_gradient_penalty(); self.receipt=receipt
-        self.work=dict(d_backwards=0,g_backwards=0,d_commits=0,g_commits=0,
-                       d_provisional=0,g_provisional=0)
-
-    def params(self, player):
-        return [p for g in self.opts['opt_'+player].param_groups for p in g['params']]
-
-    def gradients(self, player, completed, draws=1):
-        optimizer=self.opts['opt_'+player]
-        # For a single draw, preserve the original zero_grad placement exactly.
-        if draws>1:
-            optimizer.zero_grad()
-        total=0.
-        for _ in range(draws):
-            if player=='d':
-                real=self.sample_real()
-                latent,_=self.prior.sample(mode_hold.BATCH,generator=self.stream)
-                with self.policy.discriminator():
-                    fake=self.g(latent).detach()
-                loss=self.gan.d_loss(self.d(real),self.d(fake))
-                loss=loss+self.regularizer(self.d,real,fake,step=completed+1)
-            else:
-                latent,_=self.prior.sample(mode_hold.BATCH,generator=self.stream)
-                fake=self.g(latent)
-                real=self.sample_real()
-                loss=self.gan.g_loss(self.d(fake),self.d(real))
-            if draws==1:
-                optimizer.zero_grad()
-            (loss if draws==1 else loss/draws).backward()
-            total+=float(loss.detach())/draws
-            self.work[player+'_backwards']+=1
-        return total
-
-    def commit(self, player, step, phase='committed'):
-        begin=len(self.receipt['updates'])
-        self.opts['opt_'+player].step()
-        self.work[player+('_provisional' if phase=='predictor' else '_commits')]+=1
-        for row in self.receipt['updates'][begin:]:
-            row.update(outer_step=step,phase=phase)
-
-    def round(self, variant, completed):
-        if variant!='extra_adam':
-            draws=2 if variant=='average2' else 1
-            d_losses=[]
-            for _ in range(2 if variant=='critic_refresh2' else 1):
-                d_losses.append(self.gradients('d',completed,draws))
-                self.commit('d',completed+1)
-            g_loss=self.gradients('g',completed,draws)
-            self.commit('g',completed+1)
-            return dict(loss_d=sum(d_losses)/len(d_losses),loss_g=g_loss)
-        # Predictor is one ordinary alternating H round. Its temporary Adam
-        # moments are discarded. Corrector uses independent minibatches at
-        # the full lookahead G/D state, then applies those gradients once to
-        # the original parameters and moments. Training RNGs advance through
-        # both draws; there is no noise reset or nested fitting to a target.
-        anchor_models={k:deepcopy(v.state_dict()) for k,v in self.models.items()}
-        anchor_opts={k:deepcopy(v.state_dict()) for k,v in self.opts.items()}
-        self.gradients('d',completed)
-        self.commit('d',completed+1,'predictor')
-        self.gradients('g',completed)
-        self.commit('g',completed+1,'predictor')
-        loss_d=self.gradients('d',completed)
-        grad_d=[p.grad.detach().clone() for p in self.params('d')]
-        loss_g=self.gradients('g',completed)
-        grad_g=[p.grad.detach().clone() for p in self.params('g')]
-        for key,model in self.models.items():
-            model.load_state_dict(anchor_models[key])
-        for key,optimizer in self.opts.items():
-            optimizer.load_state_dict(anchor_opts[key])
-        for player,gradients in [('d',grad_d),('g',grad_g)]:
-            for param,gradient in zip(self.params(player),gradients):
-                param.grad=gradient
-            self.commit(player,completed+1)
-        return dict(loss_d=loss_d,loss_g=loss_g)
-
 
 def run(variant, output, steps=200, full_window=False):
     verify_sources()
@@ -195,7 +102,7 @@ def run(variant, output, steps=200, full_window=False):
     base,noise,_=declared_recipe(config)
     assert base.lr_floor==1 and base.prior_reg==0
     output.mkdir(parents=True,exist_ok=False)
-    declaration=dict(candidate=CANDIDATE.name,variant=variant,policy=POLICIES[variant],
+    declaration=dict(candidate=variant,parent_candidate=CANDIDATE.name,variant=variant,policy=POLICIES[variant],
                      parent_checkpoint_sha256=STATE_SHA,parent_source_archive_sha256=ARCHIVE_SHA,
                      runner_sha256=sha(Path(__file__)),steps=steps,
                      stop_on_first_failure=not full_window,config=config,options=options,
@@ -203,14 +110,21 @@ def run(variant, output, steps=200, full_window=False):
                      shared_gate_eligible=False,seed_experiment=False,
                      actual_ring_resources=dict(particles=12,z_dim=4,batch=128,hidden=96,layers=3),
                      eligible_objectives='H logistic RpGAN; D R1+R2 and mixup consistency only',
-                     fixed_lrs=dict(g=base.lr,d=base.lr*base.d_lr_mult,prior=base.lr*base.prior_lr_mult),
+                     fixed_lrs=dict(g=.0015*POLICIES[variant].get('g_rate_mult',1.),d=.0015,prior=.003*POLICIES[variant].get('prior_rate_mult',POLICIES[variant].get('g_rate_mult',1.))),
                      stop_rule='fail if any dense check has modes != 8 or HQ < 0.90; no feedback into updates')
     write(output/'declaration.json',declaration)
-    (output/'stability_runner.py').write_bytes(Path(__file__).read_bytes())
+    for name in ('dynamics_runner.py', 'dynamics.py', 'stability_runner.py'):
+        (output/name).write_bytes((PREP_ROOT/name).read_bytes())
+    declaration['actual_candidate_sources'] = {name: sha(output/name) for name in
+        ('dynamics_runner.py', 'dynamics.py', 'stability_runner.py')}
+    write(output/'declaration.json', declaration)
     started=time.perf_counter(); points=[]; losses=[]
     with signal_policy(options) as receipt:
         models,opts,stream,policy=restore(state,base,noise)
         generator=models['generator']; prior=models['prior']
+        # Fixed declared override; applied once, before any update, never scheduled.
+        for group in opts['opt_g'].param_groups:
+            group['lr'] = declaration['fixed_lrs']['prior' if group.get('_comparison_prior',False) else 'g']
         means=mode_hold.ring_means()
         sample_real=lambda: mode_hold.sample_ring(means,mode_hold.BATCH,mode_hold.SIGMA,stream)
         update=Updates(models,opts,stream,policy,sample_real,base,receipt)
@@ -260,16 +174,16 @@ def run(variant, output, steps=200, full_window=False):
                         stream_rng=stream.get_state(),noise_policy=deepcopy(policy.__dict__),
                         models={k:deepcopy(v.state_dict()) for k,v in models.items()},
                         optimizers={k:deepcopy(v.state_dict()) for k,v in opts.items()},
-                        ema_g=ema_g,ema_z=ema_z,samples=draw),output/'final-state.pt')
+                        ema_g=ema_g,ema_z=ema_z,samples=draw,update_state=update.state_dict()),output/'final-state.pt')
         optimizer_steps={key:sorted({int(s['step']) for s in opt.state.values()}) for key,opt in opts.items()}
         for row in receipt['updates']:
             for group in row['groups']:
-                assert group['lr']==base.lr*{'g':1.,'d':base.d_lr_mult,'prior':base.prior_lr_mult}[group['role']]
+                assert group['lr']==declaration['fixed_lrs'][group['role']]
                 assert group['betas']==[0.,.999] and group['eps']==1e-8
     window=_window(points)
     passed=len(points)==steps and window['pass_all']
-    result=dict(candidate=CANDIDATE.name,variant=variant,gate='selected_h_warm_stability_probe',
-                status=('PASS' if steps==1200 else 'SHORT_PASS') if passed else 'FAIL',initial=initial,window=window,
+    result=dict(candidate=variant,parent_candidate=CANDIDATE.name,variant=variant,gate='warm_probe_200',
+                status='PASS' if passed else 'FAIL',initial=initial,window=window,
                 final=points[-1],work=update.work,optimizer_steps=optimizer_steps,
                 elapsed_seconds=time.perf_counter()-started,
                 full_budget=len(points)==steps,hold_budget_complete=len(points)==1200,shared_gate_eligible=False)
@@ -291,5 +205,21 @@ if __name__=='__main__':
                         help='200-update screen or complete 1200-update warm hold')
     parser.add_argument('--diagnostic-full-window',action='store_true',
                         help='record the complete declared window after failures; failure verdict is unchanged')
+    parser.add_argument('--ledger',type=Path)
     args=parser.parse_args()
-    run(args.variant,args.output,args.steps,args.diagnostic_full_window)
+    started=time.perf_counter()
+    try:
+        result=run(args.variant,args.output,args.steps,args.diagnostic_full_window)
+    except Exception:
+        error=traceback.format_exc()
+        print(error,flush=True)
+        if args.ledger:
+            with args.ledger.open('a') as ledger:
+                ledger.write(json.dumps(dict(candidate=args.variant,gate='warm_probe_200',status='ERROR',
+                    seconds=time.perf_counter()-started,metrics={'error':error},artifact=str(args.output.resolve())))+'\n')
+        raise
+    if args.ledger:
+        with args.ledger.open('a') as ledger:
+            ledger.write(json.dumps(dict(candidate=args.variant,gate=result['gate'],status=result['status'],
+                seconds=result['elapsed_seconds'],metrics={k:result[k] for k in
+                    ('window','final','work','optimizer_steps')},artifact=str(args.output.resolve())))+'\n')

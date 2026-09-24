@@ -1,0 +1,15 @@
+{
+  "candidate": "g_threequarter_rate",
+  "bitwise_sample_replay": true,
+  "regraded_modes": 8,
+  "regraded_hq": 0.999755859375,
+  "fixed_rates": {
+    "g": 0.0011250000000000001,
+    "prior": 0.0022500000000000003,
+    "d": 0.0015
+  },
+  "optimizer_commits": 2400,
+  "checkpoint_sha256": "16cb6beeef88de93fb5a7c0c9e96b44fe481ceaf8f231b78215bd037ee711b10",
+  "actual_source_archive": "/ml2/hypergan/gan-attempts/stability-20260924T172714Z/stability_updates/20260924T172714Z-1520132/repo/reports/toy100/h_stability/dynamics/batch-05/cold/source.tar.gz",
+  "actual_source_archive_sha256": "1afd642b94a6d7d6e6d734cc923bcbdf26f683e71be16dcf4fc8cdc7c6a7d960"
+}

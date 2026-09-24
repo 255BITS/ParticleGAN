@@ -1,51 +1,53 @@
-# Selected H: fixed starting point
+# Current research base: g_threequarter_rate
 
-Source and candidate: ../critic_signal_attempt/README.md and its batch-h archive.
-The current training files reproduce all125 archived source hashes. The exact
-checkpoint and all ten cold runs are retained inside this checkout.
+Executable selection: [current-base.json](current-base.json). Exact declaration:
+[selected-base/declaration.json](selected-base/declaration.json).
+G LR .001125, D .0015, particles .00225 are constant from initialization onward.
+The logistic relativistic GAN, Adam(0,.999), R1+R2 .6, mixup .01 and fixed critic
+input noise .05 are inherited from H. No additional G fitting objective exists.
 
-Independent verification: ten original cold gates PASS with identical metrics;
-three additional vector toys PASS. The remaining older audit finds six FAIL:
-two_pole, unipolar, cover_leftover, mid_scale_identity, unused_token_hold,
-ae_gan_hold. Native100 tests are SKIPPED until older failures are fixed.
-Full evolving verification remains read-only at
-/ml2/hypergan/gan-attempts/selected-h-verification/verification.md.
+| Measured result | Current base | Earlier H control |
+| --- | --- | --- |
+| Cold ring | PASS:8 modes, HQ.999755859, suffix9 | PASS:8 modes, HQ.999267578, suffix5 |
+| Own-state dense continuation | FAIL at1284:83 checks pass, then HQ.761230469 | FAIL at1255:54 checks pass, then HQ.780517578 |
+| two_pole | FAIL:spread.028546154 <.30 | FAIL:spread.032636743 <.30 |
+| Broader older suite | Other17 hosts UNRUN | 13/19 PASS,6FAIL |
 
-Two-pole spread .03264 versus required .30; unipolar terminal passing suffix1
-versus5; mid-scale identity .806 versus .85; cover leftover retention .449/.442.
-Unused-token hold .730/movement .540 versus .85; AE reconstruction MSE3.918
-versus .05. The final two hosts explicitly test auxiliary-feature objectives
-that the pure-GAN policy disables. Do not silently restore those losses and
-claim GAN-only qualification.
+This is a selected experiment starting point, not an overall leaderboard winner
+or release-qualified replacement. Its earlier200/200 warm PASS used H's borrowed
+checkpoint; that differs from the now measured failure on its own state.
+Full1200 own-state hold and native100 tests are gated off after cheap failures.
 
-Executable baseline screen (use fresh OUTPUT and LEDGER paths):
+Independent cold replay reproduces both measured live results and the entire
+ring checkpoint byte-for-byte. See selected-base/promotion-checks.json and
+selected-base/own-state-short/metrics.json. All125 original H training files
+still match their archive. The default stability_runner.py retains the H control;
+selected_base_probe.py explicitly selects the NEW base and its own checkpoint.
 
-```bash
-/tmp/pr38-default-env/bin/python -u reports/toy100/selected_h_remaining.py \
-  --declaration reports/toy100/h_stability/selected-h.json \
-  --output OUTPUT --ledger LEDGER --workers 1 \
-  --tasks two_pole unipolar mid_scale_identity cover_leftover trajectory mode_hold
-```
-
-The selected_h_extension.py file supplies conditional callable plumbing and
-explicit auxiliary-loss removal. It leaves H's math unchanged. The older
-critic_signal_screen.py handles original ten tasks. Both archive source hashes.
-
-The warm runner is already control-validated on all1200 observations and complete
-final state. Its paths now resolve inside this worktree. Run:
+Run from the repository root with the launcher's pinned CPU/AVX2 environment:
 
 ```bash
-bash reports/toy100/h_stability/run-probe.sh control OUTPUT 200
+python reports/toy100/h_stability/selected_base_probe.py --output NEW_OUTPUT
+python reports/toy100/selected_h_remaining.py --declaration reports/toy100/h_stability/selected-base/declaration.json --output NEW_OUTPUT --ledger NEW_LEDGER --workers 1 --tasks two_pole mode_hold unipolar mid_scale_identity cover_leftover trajectory
 ```
 
-Do not rerun the three retained initial probes. All FAIL before200 updates:
-critic_refresh2 at1254/HQ.871094; average2 at1228/HQ.705566; extra_adam at1203/
-HQ.752197. Raw metrics, final states and work receipts: initial-probes/.
-The H control first fails1255/HQ.780518. A later first failure alone is not a
-complete stability pass. Code is stability_runner.py; direct fixes/experimental
-copies must archive their own actual source and declaration.
+Do not repeat finished failed families. The preceding search tried paired and
+simultaneous updates, matched observation noise, bounded temporal/optimistic
+corrections, rate interpolations and nine critic-regularizer/noise proposals.
+Three proposals passed borrowed-H warm screens; only this one also passed cold
+ring. None passed the shared cold suite or an own-state hold.
 
-Original generator/particles use solely logistic relativistic adversarial
-gradients. Actual ring resources are12 particles,z4,batch128,width96, not the
-native config's20,000 particles. Preserve frozen host resources and budgets.
-Use fixed CPU/AVX2 and one thread per worker. No seeds or threshold changes.
+A separate cold-repair comparator h_g020_d005_p010_c01 passes two_pole, unipolar,
+mid_scale_identity and cover_leftover, but fails sustained ring. Its positive
+particle-centroid mobility preconditioner uses no target fitting. The exact
+source snapshot/declaration are in cold-repair-reference/. Do not combine that
+candidate's passes with this base's passes.
+
+Pure AE reconstruction has no encoder adversarial gradient path; pure unused-
+token preservation has an identical-gradient parameter constraint. These remain
+explicit blockers. Do not sweep their parameters, restore supervised losses and
+claim pure-GAN qualification, or change frozen scoring/architecture.
+
+Preserved references: ../critic_signal_attempt/ (H),
+selected-base/previous-attempt-results.md (finished dynamics), and
+rejected-signal-results.md (finished discriminator-signal attempt).
