@@ -1,0 +1,397 @@
+{
+  "scope": "two archived banks, free-output only; no native GAN training",
+  "input_file_sha256": "9c3b4ec2d9fc2ad03625bd58de6c158badebfde1e76e567182e3a755ca223619",
+  "input_state_sha256": "1706ae9c1ca25010cb08e2c03f79478180add8620996594e9f30e48705223a72",
+  "source_sha256": {
+    "reports/toy100/sample_group_memory.py": "38e154c82dc2fc1b4636ea12351e8ba55c484d2bd6ca60ebd206cbce01481b10",
+    "reports/toy100/sample_group_memory_filter.py": "c0bb7749e138bdc6acd21206a806453a2390b44a47cbc3b12f2e549c165762f2",
+    "reports/toy100/sample_group_anchor.py": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+  },
+  "established_then_omitted": {
+    "first": {
+      "current_groups": 8,
+      "remembered_groups": 8,
+      "matching_radius": null,
+      "matched": [],
+      "added": [
+        {
+          "current": 0,
+          "remembered": 0
+        },
+        {
+          "current": 1,
+          "remembered": 1
+        },
+        {
+          "current": 2,
+          "remembered": 2
+        },
+        {
+          "current": 3,
+          "remembered": 3
+        },
+        {
+          "current": 4,
+          "remembered": 4
+        },
+        {
+          "current": 5,
+          "remembered": 5
+        },
+        {
+          "current": 6,
+          "remembered": 6
+        },
+        {
+          "current": 7,
+          "remembered": 7
+        }
+      ],
+      "absent_remembered": [],
+      "counts": [
+        20,
+        21,
+        16,
+        19,
+        6,
+        17,
+        18,
+        11
+      ],
+      "current_largest_mst_gap": 1.8459691745146152
+    },
+    "second": {
+      "current_groups": 7,
+      "remembered_groups": 8,
+      "matching_radius": 1.1200580676652345,
+      "matched": [
+        {
+          "current": 0,
+          "remembered": 4,
+          "distance": 0.01973797687114158
+        },
+        {
+          "current": 1,
+          "remembered": 1,
+          "distance": 0.06232202172530394
+        },
+        {
+          "current": 2,
+          "remembered": 6,
+          "distance": 0.01564649587743077
+        },
+        {
+          "current": 3,
+          "remembered": 5,
+          "distance": 0.028737779806622503
+        },
+        {
+          "current": 4,
+          "remembered": 0,
+          "distance": 0.04581777392062387
+        },
+        {
+          "current": 5,
+          "remembered": 2,
+          "distance": 0.02205039238011228
+        },
+        {
+          "current": 6,
+          "remembered": 7,
+          "distance": 0.01990447886885841
+        }
+      ],
+      "added": [],
+      "absent_remembered": [
+        3
+      ],
+      "counts": [
+        41,
+        40,
+        32,
+        19,
+        22,
+        34,
+        34,
+        34
+      ],
+      "current_largest_mst_gap": 1.8637800092389525
+    },
+    "absent_centroid_bitwise_preserved": true,
+    "baseline_absent_grade": {
+      "modes": 7,
+      "hq": 1.0,
+      "particle_draws": [
+        338,
+        356,
+        332,
+        353,
+        321,
+        314,
+        325,
+        345,
+        363,
+        341,
+        339,
+        369
+      ],
+      "particle_hq_rate": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "retained_grade": {
+      "modes": 8,
+      "hq": 1.0,
+      "particle_draws": [
+        338,
+        356,
+        332,
+        353,
+        321,
+        314,
+        325,
+        345,
+        363,
+        341,
+        339,
+        369
+      ],
+      "particle_hq_rate": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "initially_incomplete_then_discovered": {
+    "first": {
+      "current_groups": 7,
+      "remembered_groups": 7,
+      "matching_radius": null,
+      "matched": [],
+      "added": [
+        {
+          "current": 0,
+          "remembered": 0
+        },
+        {
+          "current": 1,
+          "remembered": 1
+        },
+        {
+          "current": 2,
+          "remembered": 2
+        },
+        {
+          "current": 3,
+          "remembered": 3
+        },
+        {
+          "current": 4,
+          "remembered": 4
+        },
+        {
+          "current": 5,
+          "remembered": 5
+        },
+        {
+          "current": 6,
+          "remembered": 6
+        }
+      ],
+      "absent_remembered": [],
+      "counts": [
+        16,
+        19,
+        16,
+        17,
+        21,
+        16,
+        23
+      ],
+      "current_largest_mst_gap": 1.8637800092389525
+    },
+    "second": {
+      "current_groups": 8,
+      "remembered_groups": 8,
+      "matching_radius": 1.127457042201555,
+      "matched": [
+        {
+          "current": 0,
+          "remembered": 4,
+          "distance": 0.04581777392062387
+        },
+        {
+          "current": 1,
+          "remembered": 1,
+          "distance": 0.06232202172530394
+        },
+        {
+          "current": 2,
+          "remembered": 5,
+          "distance": 0.02205039238011228
+        },
+        {
+          "current": 4,
+          "remembered": 0,
+          "distance": 0.01973797687114158
+        },
+        {
+          "current": 5,
+          "remembered": 3,
+          "distance": 0.028737779806622503
+        },
+        {
+          "current": 6,
+          "remembered": 2,
+          "distance": 0.01564649587743077
+        },
+        {
+          "current": 7,
+          "remembered": 6,
+          "distance": 0.01990447886885841
+        }
+      ],
+      "added": [
+        {
+          "current": 3,
+          "remembered": 7
+        }
+      ],
+      "absent_remembered": [],
+      "counts": [
+        22,
+        40,
+        34,
+        34,
+        41,
+        32,
+        34,
+        19
+      ],
+      "current_largest_mst_gap": 1.8459691745146152
+    },
+    "before_grade": {
+      "modes": 7,
+      "hq": 1.0,
+      "particle_draws": [
+        338,
+        356,
+        332,
+        353,
+        321,
+        314,
+        325,
+        345,
+        363,
+        341,
+        339,
+        369
+      ],
+      "particle_hq_rate": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "first_mm_grade": {
+      "modes": 7,
+      "hq": 0.915771484375,
+      "particle_draws": [
+        338,
+        356,
+        332,
+        353,
+        321,
+        314,
+        325,
+        345,
+        363,
+        341,
+        339,
+        369
+      ],
+      "particle_hq_rate": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "second_mm_grade": {
+      "modes": 8,
+      "hq": 1.0,
+      "particle_draws": [
+        338,
+        356,
+        332,
+        353,
+        321,
+        314,
+        325,
+        345,
+        363,
+        341,
+        339,
+        369
+      ],
+      "particle_hq_rate": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "serialized_state_exact": true
+  },
+  "exact_cached_support_rest": true,
+  "torch_rng_unchanged": true,
+  "method": "cached_group_sample_sums_and_counts; nearest match within half cached minimum intercenter separation"
+}

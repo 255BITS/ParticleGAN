@@ -1,0 +1,53 @@
+{
+  "files": {
+    "input-result.json.gz": {
+      "bytes": 8238,
+      "raw_bytes": 34296,
+      "raw_sha256": "9c3b4ec2d9fc2ad03625bd58de6c158badebfde1e76e567182e3a755ca223619",
+      "sha256": "3d13b796a1b1bfeebb8789c189aec742d0c7ac4b7a0cd4d663b89d1c7d1190d2"
+    },
+    "source/benchmarks/locked_shared/mode_hold.py": {
+      "bytes": 10774,
+      "sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e"
+    },
+    "source/reports/toy100/anchor_missing_batch_group.py": {
+      "bytes": 3239,
+      "sha256": "82ee9ebf1599c05d39e3b012c4c45d3218c6788e9adf1e334fd18214c43efdbd"
+    },
+    "source/reports/toy100/coverage_fixed_eval.py": {
+      "bytes": 3996,
+      "sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e"
+    },
+    "source/reports/toy100/sample_group_anchor.py": {
+      "bytes": 12791,
+      "sha256": "46b55b03df4b2b84739d1bcf7108878e4d60954554d8a57b4354eda95eb2b037"
+    },
+    "source/reports/toy100/sample_group_memory.py": {
+      "bytes": 3772,
+      "sha256": "38e154c82dc2fc1b4636ea12351e8ba55c484d2bd6ca60ebd206cbce01481b10"
+    },
+    "source/reports/toy100/sample_group_memory_filter.py": {
+      "bytes": 5312,
+      "sha256": "c0bb7749e138bdc6acd21206a806453a2390b44a47cbc3b12f2e549c165762f2"
+    },
+    "two-bank.json": {
+      "bytes": 7678,
+      "sha256": "e05ab1058575b487b0e4eef2bc7e2b329f68c0e9fa6bd7fbf090f15e08d1a64d"
+    },
+    "two-bank.json.gz": {
+      "bytes": 1384,
+      "raw_bytes": 7678,
+      "raw_sha256": "e05ab1058575b487b0e4eef2bc7e2b329f68c0e9fa6bd7fbf090f15e08d1a64d",
+      "sha256": "1826e3e79d4b75be52dcb94b566a2e007c21cb6dc1a4167ae87524177a9a646e"
+    }
+  },
+  "input_state_sha256": "1706ae9c1ca25010cb08e2c03f79478180add8620996594e9f30e48705223a72",
+  "runtime": {
+    "cpu_capability": "AVX2",
+    "python": "3.12.13",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1
+  },
+  "schema": "persistent-sample-group-memory-two-bank-v1",
+  "scope": "two archived banks, free-output only; no native GAN training"
+}
