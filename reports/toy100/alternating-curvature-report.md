@@ -245,6 +245,24 @@ to match (mean factor .92, versus about .16 unweighted), so Adam's
 normalization restored the step. A per-sample weight and a scale-free
 curvature bound cancel rather than compose. One clean try; stopped.
 
+## Post-bound slope step scale (v19)
+
+v19 keeps the #84 recipe and scales G's applied step, after the curvature
+bound, by min(1, s / 1), where s is the critic's RMS input slope at the clean
+particles after D's step. Adam moments and the curvature measurement are
+untouched, so neither compensates (unlike v18). Same rule on every host;
+trajectory is unaffected because its critic input is not 2D.
+
+| Gate | Result |
+| --- | --- |
+| Warm | **PASS 200/200** (min HQ .9678; slope scale mean .18) |
+| Cold trajectory | PASS .00094, 18-check suffix |
+| Cold ring | FAIL: never 8 modes (max 7). Collapses to 0 modes at 800; terminal 2/.20, 3/.27, 4/.34, 6/.58, 6/.66. Slope scale mean .65 |
+
+This is the same warm/ring trade as v17. Damping G by a state signal that is
+small at rest also slows ring acquisition enough to lose it (here the ring
+also destabilizes). Stopped as agreed; no second knob.
+
 ## Recommendations
 
 1. Put future game-update candidates in the alternating adapter
