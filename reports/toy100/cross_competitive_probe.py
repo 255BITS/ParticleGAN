@@ -17,7 +17,8 @@ def main():
     from benchmarks.transfer_suite.legacy_noise_adapters import run_legacy
     from benchmarks.transfer_suite.protocol import test_verdict
     from benchmarks.transfer_suite.toy100_compatibility import declared_recipe,declared_model_policy
-    parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--matched-output-rms',type=float,default=None);args=parser.parse_args()
     torch.set_num_threads(1)
     config=json.loads((ROOT/'configs/toy100/constraints_simple_regularization.json').read_text())
     config.update(name='cross_competitive_response',lr_floor=1.,lr_anneal_start=0.)
@@ -34,7 +35,7 @@ def main():
     for task in declaration['task_order']:
         spec=next(job['spec'] for job in plan() if job['spec']['name']==task)
         try:
-            with cross_competitive(task=task) as (recorder,source):
+            with cross_competitive(task=task,matched_output_rms_limit=args.matched_output_rms) as (recorder,source):
                 result,context=run_legacy(spec,recipe,noise,model_policy=declared_model_policy(config))
             verdict=test_verdict(spec,result)
             data=dict(result=result,applied=context['applied'],noise=context['noise_receipt'],

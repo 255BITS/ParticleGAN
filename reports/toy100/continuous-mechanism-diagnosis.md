@@ -168,6 +168,13 @@ could take effect. Its evidence is retained as an unplanned diagnostic,
 with an explicit protocol-deviation receipt, and has no eligibility credit.
 No cold mode-hold, extended hold or shift run followed that failed row.
 
+A fresh torch 2.14 fork does not replay updates 1194–1197. Stock cross-only
+fails at update 1002 instead, with generator output RMS .203. Own/cross ratios
+there stay near the other warm steps and below archived acquisition ratios.
+An optional matched-support output cap of .05 then passes the fresh warm
+window and still fails cold trajectory at MSE .06901. See
+[cross-drift-replay.md](cross-drift-replay.md).
+
 For a cheap next investigation, replay the warm failures at updates1194–1197
 and compare their functional movement with successful acquisition updates.
 All four failed warm updates used alpha1. Their accepted cross residuals were

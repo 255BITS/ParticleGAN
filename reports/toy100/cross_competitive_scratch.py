@@ -16,13 +16,41 @@ from reports.toy100.implicit_extra_scratch import ImplicitExtraRecorder
 
 
 class CrossCompetitiveRecorder(ImplicitExtraRecorder):
-    def __init__(self,**options):
+    def __init__(self,matched_output_rms_limit=None,matched_nearest_limit=.12,**options):
         super().__init__(**options)
         self.cross_products=[]
         self.joint_residuals=[]
+        self.matched_output_rms_limit=matched_output_rms_limit
+        self.matched_nearest_limit=matched_nearest_limit
+        self.guard_rejections=[]
+        self._geometry_local=None
+        self._base_clean=None
+        self._matched=False
+
+    def phases(self,step,opt_d,opt_g,local):
+        self._geometry_local=local
+        self._base_clean=None
+        self._matched=False
+        yield from super().phases(step,opt_d,opt_g,local)
+
+    def _capture_match(self):
+        local=self._geometry_local or {}
+        means,prior,generator=local.get('means'),local.get('prior'),local.get('generator')
+        if means is None or prior is None or generator is None or self.matched_output_rms_limit is None:
+            self._base_clean=None
+            self._matched=False
+            return
+        clean=getattr(generator,'model',generator)
+        with torch.no_grad():
+            points=clean(prior.z).detach()
+        nearest=torch.cdist(points,means).min(1).values
+        self._base_clean=points
+        self._matched=bool(float(nearest.max())<=3*.07 and float(nearest.mean())<=self.matched_nearest_limit)
 
     def _solve(self,scale,q0):
         self.solve_scale=scale;self.solve_q0=q0
+        if self._base_clean is None:
+            self._capture_match()
         return (yield from super()._solve(scale,q0))
 
     def _evaluate(self,u,kind):
@@ -41,9 +69,22 @@ class CrossCompetitiveRecorder(ImplicitExtraRecorder):
         elif kind=='nonlinear_residual':
             joint_q,actual_u=yield from super()._evaluate(u,'joint_residual_diagnostic')
             denominator=self.solve_scale*float(torch.linalg.vector_norm(self.solve_q0))
+            cross_residual=float(torch.linalg.vector_norm(actual_u+self.solve_scale*cross_q))/denominator
             self.joint_residuals.append(dict(outer_step=self.outer_steps+1,scale=self.solve_scale,
                 full_joint_relative_residual=float(torch.linalg.vector_norm(actual_u+self.solve_scale*joint_q))/denominator,
-                cross_relative_residual=float(torch.linalg.vector_norm(actual_u+self.solve_scale*cross_q))/denominator))
+                cross_relative_residual=cross_residual))
+            if self._matched and self._base_clean is not None:
+                current=getattr(generator,'model',generator) if (generator:=(self._geometry_local or {}).get('generator')) is not None else None
+                if current is not None:
+                    with torch.no_grad():
+                        moved=current((self._geometry_local['prior']).z).detach()
+                    rms=float((moved-self._base_clean).square().sum(1).mean().sqrt())
+                    self.joint_residuals[-1]['clean_output_rms']=rms
+                    if rms>self.matched_output_rms_limit:
+                        self.joint_residuals[-1]['guard']='matched_output_motion'
+                        self.guard_rejections.append(dict(outer_step=self.outer_steps+1,scale=self.solve_scale,
+                            clean_output_rms=rms,cross_relative_residual=cross_residual))
+                        cross_q=torch.zeros_like(cross_q)
         return cross_q,actual_u
 
     def receipt(self):
@@ -52,7 +93,10 @@ class CrossCompetitiveRecorder(ImplicitExtraRecorder):
             scratch_optimizer_policy='same_sample_cross_only_competitive_response',
             reference_scope='CGD cross-player block system with current Adam metric, finite-difference products and nonlinear safeguards; not original published optimizer code',
             nonlinear_residual_scope='D field at (Dbase,Gnew), G+prior field at (Dnew,Gbase)',
-            cross_products=self.cross_products,joint_residual_diagnostics=self.joint_residuals)
+            cross_products=self.cross_products,joint_residual_diagnostics=self.joint_residuals,
+            matched_output_rms_limit=self.matched_output_rms_limit,
+            matched_nearest_limit=self.matched_nearest_limit,
+            guard_rejections=self.guard_rejections)
         return value
 
 
