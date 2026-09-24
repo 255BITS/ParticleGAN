@@ -1,0 +1,212 @@
+{
+  "schema": "continuous-evidence-archive-v1",
+  "family": "alternating-implicit-round3",
+  "base_commit": "8bbf635",
+  "shared_gate_eligible": false,
+  "files": {
+    "alternating-round3-implicit-warm/declaration.json.gz": {
+      "sha256": "cd34bd397db74f3b14c69346890c2253845b380de695f8d273b1670fb5c73506",
+      "original_sha256": "a62160a08d2c20d0eae90aa2f2c86011bbb4dc874350f8e95fe1994f8620ef23",
+      "original_path": "artifacts/alternating-round3-implicit-warm/declaration.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/monitor.log.gz": {
+      "sha256": "9fe69d9007db1a292bc9c01ef6920d701fed22fa3cb0d84b6caa4e7cee6acf91",
+      "original_sha256": "be92dbaf6123bee9d8d5f007e264062568a310f2ab4ae264ca08950ca2dd075f",
+      "original_path": "artifacts/alternating-round3-implicit-warm/monitor.log",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/run/alternating_implicit.json.gz": {
+      "sha256": "4826a4a0b6fbff19c9a15ed4a8824c6a1657e56ea9f8cebb568185504090d2ac",
+      "original_sha256": "a87a43505ec9bdf243c8e2ed150a83b87e1f3863eb70ccfaa98e08186df3fb86",
+      "original_path": "artifacts/alternating-round3-implicit-warm/run/alternating_implicit.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/run/cold.json.gz": {
+      "sha256": "ea07234418d5bfd44996b70f098cdee33a3dd86c03899cb13dd25eae038871b6",
+      "original_sha256": "662a146c29e239115e8631d1718c2bed71952596e47ccc221e248c29911424fb",
+      "original_path": "artifacts/alternating-round3-implicit-warm/run/cold.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/run/constant.json.gz": {
+      "sha256": "e69f720fcdf59bd47046e46ade5ceb4b28dea1c604aa9b23cc1b1372841982ca",
+      "original_sha256": "b05b3bf77a0b786217bfd884c855814af80bc806048230dc8d3c5f0fd86283e5",
+      "original_path": "artifacts/alternating-round3-implicit-warm/run/constant.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/run/identity.json.gz": {
+      "sha256": "d14782abeb5f1602536f0023ad679f6ac35a9a96d510fde27734ff0f2be2ef57",
+      "original_sha256": "b1cf9834092545af45e1f661e8282b4109f471e6b3df2f41100de810f808b980",
+      "original_path": "artifacts/alternating-round3-implicit-warm/run/identity.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/run/ordinary_control.json.gz": {
+      "sha256": "211cd4f8aec95ca21bf268db6078eadd3f3e4771efdf9999cae3f15fc50022d7",
+      "original_sha256": "16ec3a94ee2f6485713ab504b9ed39d5b13cd0f8749b9ca461b89d7aa26ca63d",
+      "original_path": "artifacts/alternating-round3-implicit-warm/run/ordinary_control.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/run/summary.json.gz": {
+      "sha256": "092e028ad7ea372f1afec02d8a9b2699b8b4ac137fa280b4091581ed93e00b2f",
+      "original_sha256": "6bb328e3dd2435541c83a0b3324b0b19d75f64b89c93ae2809dbcff33ba77b1f",
+      "original_path": "artifacts/alternating-round3-implicit-warm/run/summary.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/source_archive/alternating_implicit_probe.py.gz": {
+      "sha256": "dc5adba5f4f597126a5e24ccf96f92cb748dfd21f6009946669a231b19e092a8",
+      "original_sha256": "7ac0325cb8cd37b0e616db2b0ab4f04253e6e9a1ebb6eafa9c937a9276dce47b",
+      "original_path": "artifacts/alternating-round3-implicit-warm/source_archive/alternating_implicit_probe.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/source_archive/alternating_implicit_scratch.py.gz": {
+      "sha256": "3814c23cebadbf217a287d854f8386670f4d7ae066c43c2ed3bd5818065aa2fa",
+      "original_sha256": "31c17fd179ea02a2461ec75731ac7a5eef323aea4f51c34dd477d9c9b3390d94",
+      "original_path": "artifacts/alternating-round3-implicit-warm/source_archive/alternating_implicit_scratch.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/source_archive/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/alternating-round3-implicit-warm/source_archive/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/source_archive/continuous_probe.py.gz": {
+      "sha256": "5b6b82473026e8f57176e22a953c34b54e71d8a685effbdd080d07f48c30e613",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/alternating-round3-implicit-warm/source_archive/continuous_probe.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/source_archive/extra_adam_scratch.py.gz": {
+      "sha256": "fc9d646056ee4e469c924dd88f1d94abff5d5f02d9c1caec3d47b2c52cdb7f63",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/alternating-round3-implicit-warm/source_archive/extra_adam_scratch.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/source_archive/fixed_metric_extra_scratch.py.gz": {
+      "sha256": "d1d7b975cf8077508ba4553d4447a2ffc3b21b6cd1f5fc77142d90add7906e06",
+      "original_sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_path": "artifacts/alternating-round3-implicit-warm/source_archive/fixed_metric_extra_scratch.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/source_archive/implicit_extra_scratch.py.gz": {
+      "sha256": "22b856a3a374b4348c38d310bfb6f8c15dd460e99b52407b22bcbeb7be951661",
+      "original_sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_path": "artifacts/alternating-round3-implicit-warm/source_archive/implicit_extra_scratch.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/source_archive/mode_hold_transformed.py.gz": {
+      "sha256": "ac31331783b47f6827969f0ebc0c515f02c6c162554bb6631178055766059104",
+      "original_sha256": "046c95d0333acdf0dd71b81d5691a1ce8fa4942e7a6760e6df9aba0b67ae20da",
+      "original_path": "artifacts/alternating-round3-implicit-warm/source_archive/mode_hold_transformed.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/source_archive/test_alternating_implicit_scratch.py.gz": {
+      "sha256": "d9af328fcf89d2e21116dd790e3369661188540a503b31ffdc1e80465eab752e",
+      "original_sha256": "784eea2cece661a8620fe10db52b0d64635b2275c5ea26f7b20c370241fd9250",
+      "original_path": "artifacts/alternating-round3-implicit-warm/source_archive/test_alternating_implicit_scratch.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-warm/source_archive/warm_equilibrium_probe.py.gz": {
+      "sha256": "21c13cc9990de385e478dcab28b03340ccbe6a59c3f733813c5287fce70ac8f7",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/alternating-round3-implicit-warm/source_archive/warm_equilibrium_probe.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/config.json.gz": {
+      "sha256": "23cd178a0ede769f19538217c4a4bb9622019b3dfa94c07397d734858e964fb2",
+      "original_sha256": "86b33229031209255dd86cfdd6e73d817c19791ba801a075191bd9582467788a",
+      "original_path": "artifacts/alternating-round3-implicit-cold/config.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/declaration.json.gz": {
+      "sha256": "f3aa8ef1e4bdbee09f235f556f52486b7121d475d6bcb212b386b8f708efd8e7",
+      "original_sha256": "cc8d5a7177be7b8bb369071a7b0e7a308680dc436da4fef5d7bf66735e34b34a",
+      "original_path": "artifacts/alternating-round3-implicit-cold/declaration.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/monitor.log.gz": {
+      "sha256": "40c759687cabbff1dd60bf9218e502863b0bc4e59dc827d7498cd3f7595fe3ba",
+      "original_sha256": "a8919cf3d7d94732b9fe1069c41d1e161b9d7abce20d126da5f96dd4b35a632f",
+      "original_path": "artifacts/alternating-round3-implicit-cold/monitor.log",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/previous-gate.json.gz": {
+      "sha256": "092e028ad7ea372f1afec02d8a9b2699b8b4ac137fa280b4091581ed93e00b2f",
+      "original_sha256": "6bb328e3dd2435541c83a0b3324b0b19d75f64b89c93ae2809dbcff33ba77b1f",
+      "original_path": "artifacts/alternating-round3-implicit-cold/previous-gate.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/source_archive/alternating_implicit_probe.py.gz": {
+      "sha256": "dc5adba5f4f597126a5e24ccf96f92cb748dfd21f6009946669a231b19e092a8",
+      "original_sha256": "7ac0325cb8cd37b0e616db2b0ab4f04253e6e9a1ebb6eafa9c937a9276dce47b",
+      "original_path": "artifacts/alternating-round3-implicit-cold/source_archive/alternating_implicit_probe.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/source_archive/alternating_implicit_scratch.py.gz": {
+      "sha256": "3814c23cebadbf217a287d854f8386670f4d7ae066c43c2ed3bd5818065aa2fa",
+      "original_sha256": "31c17fd179ea02a2461ec75731ac7a5eef323aea4f51c34dd477d9c9b3390d94",
+      "original_path": "artifacts/alternating-round3-implicit-cold/source_archive/alternating_implicit_scratch.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/source_archive/constraints_simple_regularization.json.gz": {
+      "sha256": "698ef4bfd9b32413dc7496d4a3bb21f65e78c6fd3aca279c2a6b8ad1dd9e6e6f",
+      "original_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+      "original_path": "artifacts/alternating-round3-implicit-cold/source_archive/constraints_simple_regularization.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/source_archive/continuous_probe.py.gz": {
+      "sha256": "5b6b82473026e8f57176e22a953c34b54e71d8a685effbdd080d07f48c30e613",
+      "original_sha256": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+      "original_path": "artifacts/alternating-round3-implicit-cold/source_archive/continuous_probe.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/source_archive/extra_adam_scratch.py.gz": {
+      "sha256": "fc9d646056ee4e469c924dd88f1d94abff5d5f02d9c1caec3d47b2c52cdb7f63",
+      "original_sha256": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+      "original_path": "artifacts/alternating-round3-implicit-cold/source_archive/extra_adam_scratch.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/source_archive/fixed_metric_extra_scratch.py.gz": {
+      "sha256": "d1d7b975cf8077508ba4553d4447a2ffc3b21b6cd1f5fc77142d90add7906e06",
+      "original_sha256": "c12c569d4583eb4a37286abcaed34b7afca6e62be93f0b25bab4f827c5e6eae7",
+      "original_path": "artifacts/alternating-round3-implicit-cold/source_archive/fixed_metric_extra_scratch.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/source_archive/implicit_extra_scratch.py.gz": {
+      "sha256": "22b856a3a374b4348c38d310bfb6f8c15dd460e99b52407b22bcbeb7be951661",
+      "original_sha256": "7a3610f3f77353e80bdfb0fc35faa612c5b9ee00176733b7f62c899b425b1e71",
+      "original_path": "artifacts/alternating-round3-implicit-cold/source_archive/implicit_extra_scratch.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/source_archive/test_alternating_implicit_scratch.py.gz": {
+      "sha256": "d9af328fcf89d2e21116dd790e3369661188540a503b31ffdc1e80465eab752e",
+      "original_sha256": "784eea2cece661a8620fe10db52b0d64635b2275c5ea26f7b20c370241fd9250",
+      "original_path": "artifacts/alternating-round3-implicit-cold/source_archive/test_alternating_implicit_scratch.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/source_archive/trajectory_transformed.py.gz": {
+      "sha256": "b5153f2d985994b6319ab2a5dfd3dd95e17d5f0b9ef85d93e3ba34f91c61a3af",
+      "original_sha256": "cd0230c386f968300756a875073a4f9d55c8464a224262da16ff074d1bfe8e1e",
+      "original_path": "artifacts/alternating-round3-implicit-cold/source_archive/trajectory_transformed.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/source_archive/warm_equilibrium_probe.py.gz": {
+      "sha256": "21c13cc9990de385e478dcab28b03340ccbe6a59c3f733813c5287fce70ac8f7",
+      "original_sha256": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "original_path": "artifacts/alternating-round3-implicit-cold/source_archive/warm_equilibrium_probe.py",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/status.json.gz": {
+      "sha256": "69b94a67224ad7b949d430be2bbaab50f3fc07281cd5ee4b4764ba97f936479a",
+      "original_sha256": "d433947bd637bf0af64668da2d0e32dfbc07543baeedd8fa386fa2286e370caf",
+      "original_path": "artifacts/alternating-round3-implicit-cold/status.json",
+      "compression": "gzip"
+    },
+    "alternating-round3-implicit-cold/trajectory.json.gz": {
+      "sha256": "c767852b0a21fa42231bf1bd4e61fa129ee26d47b7473a78ca22b94b2bf572e6",
+      "original_sha256": "348e1c65726906ad3fc5f49c5c971ba5dd1064a3be98528d9780ea46299e4e36",
+      "original_path": "artifacts/alternating-round3-implicit-cold/trajectory.json",
+      "compression": "gzip"
+    }
+  }
+}
