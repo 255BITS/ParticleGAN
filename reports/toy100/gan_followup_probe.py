@@ -34,9 +34,11 @@ FACTORIES = {
     "reachstall_game2": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
                          dict(ramp="stall", game_bound=True, game_steps=2)),
     "delayg05": ("reports.toy100.pr84_delayed_arm_g_lr", "pr84_delayed_arm_g_lr"),
+    "holdw15": ("reports.toy100.pr84_delayed_arm_width_hold", "pr84_delayed_arm_width_hold"),
 }
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
+    "reports/toy100/pr84_delayed_arm_width_hold.py",
     "reports/toy100/pr84_delayed_arm_g_lr.py",
     "reports/toy100/pr84_reach_candidate.py",
     "reports/toy100/pr84_smoothed_candidate.py",
