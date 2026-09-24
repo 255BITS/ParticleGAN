@@ -50,14 +50,29 @@ def source_hashes():
 
 
 def _log_corrections():
+    from benchmarks.locked_shared import mode_hold
+    from reports.toy100.coverage_fixed_eval import fixed_draw, score_support
     original = ForwardKLV2Recorder.correct
+    means = mode_hold.ring_means()
 
     def logged(self, optimizer):
         started = time.perf_counter()
         original(self, optimizer)
         row = self.corrections[-1]
+        local = self._local
+        clean = getattr(local['generator'], 'model', local['generator'])
+        points = clean(local['prior'].z).detach()
+        if row['step'] >= 240:
+            index, noise = fixed_draw(row['step'], points)
+            scored = score_support(points, index, noise, means)
+        else:
+            generator = torch.Generator().manual_seed(9)
+            index = torch.randint(0, len(points), (mode_hold.EVAL_N,), generator=generator)
+            noise = .029 * torch.randn(mode_hold.EVAL_N, 2, generator=generator)
+            scored = mode_hold.diversity(points[index] + noise, means, .029)
         print(json.dumps(dict(event='KL_UPDATE', step=row['step'], selected=row['selected'],
             pre_gh9=row['pre_gh9'], final_gh9=row['final_gh9'],
+            modes=scored['modes'], hq=scored['hq'],
             banks=row['bank_count'], seconds=round(time.perf_counter() - started, 3))), flush=True)
 
     return patch.object(ForwardKLV2Recorder, 'correct', logged)
