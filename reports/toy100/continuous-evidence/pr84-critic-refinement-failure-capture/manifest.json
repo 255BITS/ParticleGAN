@@ -1,0 +1,48 @@
+{
+  "schema": "critic-fit-failure-capture-v1",
+  "status": "REPRODUCED_NONFINITE_FIT",
+  "host_update": 472,
+  "completed_updates": 471,
+  "finite_closures": 48,
+  "invalid_attempt": 49,
+  "original_cold_archive": "../round5-critic-refinement-cold/manifest.json",
+  "logged_prefix_fit_counts_exact": 23,
+  "original_state_identity_limit": "original failed run did not serialize its ring states; unchanged frozen source, passive snapshot semantics and matching logged prefix fit counts establish replay provenance, not a comparison to an unavailable original full-state file",
+  "files": [
+    {
+      "path": "failed-fit.pt.gz",
+      "raw_sha256": "19ceb38a92ba95ffaccd3aafbda55bbd77917765612666d923e986e5523d6965",
+      "raw_bytes": 5123233,
+      "compressed_sha256": "29ce909e0c5d5260cf50af7a58bb26453fee4797c0e3175e5f6e9712e3e673bb",
+      "compressed_bytes": 2611349
+    },
+    {
+      "path": "failure.json.gz",
+      "raw_sha256": "05bcae9a3c550c187deb16f1069ee956ebf5c4b5e8e0dd770e39889e99036a27",
+      "raw_bytes": 3537,
+      "compressed_sha256": "d2c42407742c81cd9adcf30664900aa60106900497ff8930ff5dffb545bf6bc5",
+      "compressed_bytes": 1751
+    },
+    {
+      "path": "original-declaration.json.gz",
+      "raw_sha256": "85489d63c063010ff3e0cc4795738198010fe55dcd1645cbad468042637437a5",
+      "raw_bytes": 3222,
+      "compressed_sha256": "abe19fa5b05ae9cfed46dcd1b72616a5c6b296a91df9433b5525d8a2acb66730",
+      "compressed_bytes": 1592
+    },
+    {
+      "path": "pr84_critic_refinement_failure_capture.py.gz",
+      "raw_sha256": "f8348fe1dedd06e6774dd34df274bcd33f3be1f42d022d3270c92fdab80616cc",
+      "raw_bytes": 6184,
+      "compressed_sha256": "797968a4c33113ba26c5b4f56c2fcfd18fc70d498ed8b3ebe160b34742fcf7bd",
+      "compressed_bytes": 2047
+    },
+    {
+      "path": "capture.log.gz",
+      "raw_sha256": "e1f1d02729205e4a08ffb4e24659cf9d18ad5bdb16ca2ec1be9cf9bdc7ac4801",
+      "raw_bytes": 5350,
+      "compressed_sha256": "4a4025857c3e5098b9df3b92a1b787f07f136092e6d4028f322b875c53b02e06",
+      "compressed_bytes": 1978
+    }
+  ]
+}
