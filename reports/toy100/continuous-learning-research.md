@@ -112,8 +112,25 @@ all 200 RNG sequences exactly and advances Adam moments only once per outer
 update. Its correction amplifies a second gradient through the first gradient's
 small denominator; at update 1,055 a particle ratio reaches about 3.3e11, followed
 by second-moment overflow. This rejects this specific unguarded metric variant,
-not extragradient methods generally. The next experiment uses reversible trials
+not extragradient methods generally. A follow-up uses reversible trials
 and a local secant acceptance condition to control that measured failure.
+
+With `P=diag(lr/Adam_denominator)`, the follow-up accepts a trial only when
+`norm(F(trial)-F(base), P) <= c * norm(F(base), P)`. Failed trials halve the
+step factor; the next update tries twice the last accepted factor, capped at
+one. The metric is updated once per outer step and all trials replay the same
+training random draws. This is state-dependent step adaptation, explicitly
+recorded in addition to the unchanged nominal rates.
+
+Tolerances .25, .5 and .9 each pass 200/200 warm checks; their mean accepted
+factors are .112, .267 and .315. All three then fail the cheaper cold trajectory
+gate: final identity MSE .2872, .3540 and .1332 versus the required .02.
+No cold mode-hold or larger-host tests are run for these rejected candidates.
+The next bounded mechanism tests an implicit linearized joint response. This
+is related to game-aware coupled updates discussed by
+[Schäfer and Anandkumar](https://f-t-s.github.io/projects/cgd/), but a full game
+Jacobian solve includes the own-player blocks omitted by their CGD update;
+our experimental variant must be identified separately.
 
 An independent cheap controller scales only the generator network's ordinary
 Adam proposal by `max(.02, min(1, advantage / threshold))`, where `advantage`
