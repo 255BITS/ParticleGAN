@@ -1,0 +1,256 @@
+"""Alternating adapter: exact plain-Adam parity when inactive, correct bound."""
+
+import pytest
+import torch
+
+from benchmarks.locked_shared import mode_hold
+from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy
+from reports.toy100.alternating_curvature_scratch import AlternatingCurvatureRecorder, BothBoundRecorder, alternating_curvature
+
+
+def _host(context=None, steps=3):
+    torch.set_num_threads(1)
+    policy = NoisePolicy(.029, .5, .1, 1200)
+    if context is None:
+        result = mode_hold.train_mode_hold(mode_hold.ModeHoldRecipe(steps=steps), noise_policy=policy,
+                                           diagnostics=True)
+        recorder = None
+    else:
+        with context as (recorder, _):
+            result = mode_hold.train_mode_hold(mode_hold.ModeHoldRecipe(steps=steps), noise_policy=policy,
+                                               diagnostics=True)
+    return result, torch.get_rng_state().clone(), policy.input_stream.get_state().clone(), recorder
+
+
+def test_unbounded_alternating_adapter_matches_plain_alternating_adam_exactly():
+    plain = _host()
+    wrapped = _host(alternating_curvature(start_step=0, curvature_bound=1e9, advantage_gate=None))
+    assert plain[0] == wrapped[0]
+    assert all(torch.equal(a, b) for a, b in zip(plain[1:3], wrapped[1:3]))
+    recorder = wrapped[3]
+    assert recorder.rng_replay_verified == recorder.outer_steps == 3
+    assert all(row["factor"] == 1. for row in recorder.records)
+
+
+def test_open_gate_skips_replay_and_matches_plain_adam():
+    plain = _host()
+    wrapped = _host(alternating_curvature(start_step=0, curvature_bound=.25, advantage_gate=1e-9))
+    recorder = wrapped[3]
+    if all(row["gate_open"] for row in recorder.records):
+        assert plain[0] == wrapped[0]
+        assert recorder.rng_replay_verified == 0
+
+
+def test_bound_uses_alternating_field_and_scales_only_g():
+    # D=y, G=x. D steps first; G's field is evaluated at the new D.
+    x = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([x], lr=1., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+    a = 3.
+    recorder = AlternatingCurvatureRecorder(curvature_bound=.25, advantage_gate=None)
+    for phase in recorder.phases(0, opt_d, opt_g, {}):
+        y.grad = (-x).detach().clone()
+        recorder.step(opt_d, torch.optim.Adam.step)
+        x.grad = (y + a * x).detach().clone()
+        recorder.step(opt_g, torch.optim.Adam.step)
+    y_new = 2. + 1.  # Adam beta1=0 first step moves by lr * sign(grad)
+    g0 = y_new + a * 1.
+    delta = -1. * g0 / abs(g0)
+    p = 1. / abs(g0)
+    rho = abs(a * delta) * p ** .5 / (abs(delta) / p ** .5)
+    assert y.item() == pytest.approx(y_new)
+    assert recorder.records[-1]["rho"] == pytest.approx(rho)
+    assert x.item() == pytest.approx(1. + delta * min(1., .25 / rho))
+    assert opt_g.state[x]["step"] == opt_d.state[y]["step"] == 1
+
+
+def test_both_bound_unbounded_matches_plain_alternating_adam_exactly():
+    plain = _host()
+    wrapped = _host(alternating_curvature(start_step=0, curvature_bound=1e9, bound_d=True))
+    assert plain[0] == wrapped[0]
+    assert all(torch.equal(a, b) for a, b in zip(plain[1:3], wrapped[1:3]))
+    recorder = wrapped[3]
+    assert recorder.rng_replay_verified == 2 * recorder.outer_steps
+    assert all(r["d"]["factor"] == r["g"]["factor"] == 1. for r in recorder.records)
+
+
+def test_both_bound_scales_d_then_g_responds_to_bounded_d():
+    x = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([x], lr=1., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+    a, b = 3., 4.
+    recorder = BothBoundRecorder(curvature_bound=.25)
+    for phase in recorder.phases(0, opt_d, opt_g, {}):
+        y.grad = (-x + b * y).detach().clone()
+        recorder.step(opt_d, torch.optim.Adam.step)
+        x.grad = (y + a * x).detach().clone()
+        recorder.step(opt_g, torch.optim.Adam.step)
+    # D: grad 7, Adam step -1, P=1/7, rho_D=b*P=4/7 -> factor .4375.
+    y_star = 2. - .25 / (4. / 7.)
+    g0 = y_star + a
+    rho_g = a / g0
+    assert recorder.records[-1]["d"]["rho"] == pytest.approx(4. / 7.)
+    assert y.item() == pytest.approx(y_star)
+    assert recorder.records[-1]["g"]["rho"] == pytest.approx(rho_g)
+    assert x.item() == pytest.approx(1. - min(1., .25 / rho_g))
+    assert opt_g.state[x]["step"] == opt_d.state[y]["step"] == 1
+
+
+@pytest.mark.parametrize("a,b", [(3., 4.), (.3, 4.), (30., .8)])
+def test_ratio_controller_scales_g_bound_by_clipped_reference_over_ratio(a, b):
+    x = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([x], lr=1., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+    recorder = BothBoundRecorder(curvature_bound=.25, d_curvature_bound=1e9, ratio_reference=2.)
+    for phase in recorder.phases(0, opt_d, opt_g, {}):
+        y.grad = (-x + b * y).detach().clone()
+        recorder.step(opt_d, torch.optim.Adam.step)
+        x.grad = (y + a * x).detach().clone()
+        recorder.step(opt_g, torch.optim.Adam.step)
+    row = recorder.records[-1]
+    ratio = row["g"]["rho"] / row["d"]["rho"]
+    expected_bound = .25 * min(1.5, max(1 / 1.5, 2. / ratio))
+    assert row["smoothed_ratio"] == pytest.approx(ratio)
+    assert row["g_bound"] == pytest.approx(expected_bound)
+    assert row["g"]["factor"] == pytest.approx(min(1., expected_bound / row["g"]["rho"]))
+
+
+def test_per_group_bound_scales_network_and_prior_groups_separately():
+    # One G optimizer with two groups: "network" x1 (own curvature 3) and a
+    # prior group x2 (own curvature .1). Joint rho mixes them; per-group does not.
+    x1 = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    x2 = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([{"params": [x1]}, {"params": [x2], "_comparison_prior": True}],
+                             lr=1., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+    recorder = BothBoundRecorder(curvature_bound=.25, d_curvature_bound=1e9, per_group=True)
+    for phase in recorder.phases(0, opt_d, opt_g, {}):
+        y.grad = (-x1 - x2 + 2. * y).detach().clone()
+        recorder.step(opt_d, torch.optim.Adam.step)
+        x1.grad = (y + 3. * x1).detach().clone()
+        x2.grad = (y + .1 * x2).detach().clone()
+        recorder.step(opt_g, torch.optim.Adam.step)
+    network, prior = recorder.records[-1]["g_groups"]
+    y_new = 2. - 1.
+    g1, g2 = y_new + 3., y_new + .1
+    assert network["rho"] == pytest.approx(3. / g1) and prior["rho"] == pytest.approx(.1 / g2)
+    assert x1.item() == pytest.approx(1. - min(1., .25 / network["rho"]))
+    assert x2.item() == pytest.approx(1. - min(1., .25 / prior["rho"]))
+    assert prior["factor"] == 1. and network["factor"] < 1.
+
+
+def test_per_particle_bound_frees_flat_particle_rows_and_keeps_network_on_joint_factor():
+    # Network scalar w (curvature 3) and a 2x1 prior: row 0 sharp (3), row 1 flat (.01).
+    w = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    z = torch.nn.Parameter(torch.tensor([[1.], [1.]], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([{"params": [w]}, {"params": [z], "_comparison_prior": True}],
+                             lr=1., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+    curv = torch.tensor([[3.], [.01]], dtype=torch.float64)
+    recorder = BothBoundRecorder(curvature_bound=.25, d_curvature_bound=1e9, per_particle=True)
+    for phase in recorder.phases(0, opt_d, opt_g, {}):
+        y.grad = (-w + 2. * y).detach().clone()
+        recorder.step(opt_d, torch.optim.Adam.step)
+        w.grad = (y + 3. * w).detach().clone()
+        z.grad = (y + curv * z).detach().clone()
+        recorder.step(opt_g, torch.optim.Adam.step)
+    row = recorder.records[-1]
+    joint = row["g"]["factor"]
+    assert w.item() == pytest.approx(1. - joint)
+    sharp, flat = row["particles"]
+    assert flat["factor"] == 1. and sharp["factor"] < 1.
+    assert z[1, 0].item() == pytest.approx(0.)
+    assert z[0, 0].item() == pytest.approx(1. - sharp["factor"])
+
+
+def test_critic_average_feeds_g_the_averaged_critic_and_restores_live_d():
+    x = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([x], lr=1., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+    recorder = BothBoundRecorder(curvature_bound=1e9, d_curvature_bound=1e9, critic_average=.5)
+    seen = []
+    for step in range(2):
+        for phase in recorder.phases(step, opt_d, opt_g, {}):
+            y.grad = (-x + 2. * y).detach().clone()
+            recorder.step(opt_d, torch.optim.Adam.step)
+            seen.append((step, phase, y.item()))
+            x.grad = y.detach().clone()
+            recorder.step(opt_g, torch.optim.Adam.step)
+        live = y.item()
+        if step == 0:
+            first_live = live
+    # Step 0: EMA initialised to the live D, so G sees the live D.
+    assert [v for s, ph, v in seen if s == 0 and ph > 0] == [first_live, first_live]
+    # Step 1: G sees .5 * previous EMA + .5 * new live D, and the live D is restored.
+    expected = .5 * first_live + .5 * live
+    assert [v for s, ph, v in seen if s == 1 and ph > 0] == [pytest.approx(expected)] * 2
+    assert y.item() == live
+
+
+def test_smoothed_critic_keeps_host_rng_and_records_state_width():
+    plain = _host()
+    smoothed = _host(alternating_curvature(start_step=0, curvature_bound=.25, bound_d=True,
+                                           d_curvature_bound=3., smooth_critic=1.))
+    assert all(torch.equal(a, b) for a, b in zip(plain[1:3], smoothed[1:3]))
+    recorder = smoothed[3]
+    assert recorder.rng_replay_verified == 2 * recorder.outer_steps
+    assert all(r["smoothing_sigma"] > 0 for r in recorder.records)
+    assert recorder._smoothing is None
+
+
+def test_plain_curvature_path_equals_v10_when_stencil_cannot_arm():
+    def run(**options):
+        x = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+        y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+        opt_g = torch.optim.Adam([x], lr=1., betas=(0., .9), eps=1e-12)
+        opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+        recorder = BothBoundRecorder(curvature_bound=.25, d_curvature_bound=3., **options)
+        for step in range(3):
+            for phase in recorder.phases(step, opt_d, opt_g, {}):
+                y.grad = (-x + 4. * y).detach().clone()
+                recorder.step(opt_d, torch.optim.Adam.step)
+                x.grad = (y + 3. * x).detach().clone()
+                recorder.step(opt_g, torch.optim.Adam.step)
+        return x.item(), y.item(), recorder
+    base = run()
+    plain = run(stencil_critic=True, plain_curvature=True)
+    assert plain[:2] == base[:2]
+    assert plain[2].rng_replay_verified == 3 * 3
+
+
+def test_slope_weight_of_one_reproduces_the_stencil_recipe_and_small_slopes_shrink_steps():
+    options = dict(start_step=0, curvature_bound=.25, bound_d=True, d_curvature_bound=3., stencil_critic=True)
+    stencil = _host(alternating_curvature(**options))
+    unit = _host(alternating_curvature(slope_reference=1e-12, **options))
+    assert stencil[0] == unit[0]
+    weighted = _host(alternating_curvature(slope_reference=1e6, **options))
+    assert all(r["slope_weight_max"] < 1e-3 for r in weighted[3].records)
+    assert all(torch.equal(a, b) for a, b in zip(stencil[1:3], weighted[1:3]))
+
+
+def test_slope_step_scale_multiplies_the_bounded_g_step_only():
+    options = dict(start_step=0, curvature_bound=.25, bound_d=True, d_curvature_bound=3., stencil_critic=True)
+    stencil = _host(alternating_curvature(**options))
+    unit = _host(alternating_curvature(slope_step_reference=1e-12, **options))
+    assert stencil[0] == unit[0]
+    scaled = _host(alternating_curvature(slope_step_reference=1e6, **options))
+    rows = scaled[3].records
+    assert all(0 < r["slope_step_scale"] < 1e-3 for r in rows)
+    assert all(torch.equal(a, b) for a, b in zip(stencil[1:3], scaled[1:3]))
+
+
+def test_slope_gate_is_inert_above_threshold_and_multiplies_by_slope_below():
+    options = dict(start_step=0, curvature_bound=.25, bound_d=True, d_curvature_bound=3., stencil_critic=True)
+    stencil = _host(alternating_curvature(**options))
+    never = _host(alternating_curvature(slope_gate=1e-12, **options))
+    assert stencil[0] == never[0]
+    assert not any(r.get("slope_gate_fired") for r in never[3].records)
+    always = _host(alternating_curvature(slope_gate=1e6, **options))
+    rows = always[3].records
+    assert all(r["slope_gate_fired"] and r["slope_step_scale"] == r["slope_at_base"] for r in rows)
