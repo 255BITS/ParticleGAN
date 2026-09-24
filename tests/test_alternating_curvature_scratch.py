@@ -116,3 +116,28 @@ def test_ratio_controller_scales_g_bound_by_clipped_reference_over_ratio(a, b):
     assert row["smoothed_ratio"] == pytest.approx(ratio)
     assert row["g_bound"] == pytest.approx(expected_bound)
     assert row["g"]["factor"] == pytest.approx(min(1., expected_bound / row["g"]["rho"]))
+
+
+def test_per_group_bound_scales_network_and_prior_groups_separately():
+    # One G optimizer with two groups: "network" x1 (own curvature 3) and a
+    # prior group x2 (own curvature .1). Joint rho mixes them; per-group does not.
+    x1 = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    x2 = torch.nn.Parameter(torch.tensor([1.], dtype=torch.float64))
+    y = torch.nn.Parameter(torch.tensor([2.], dtype=torch.float64))
+    opt_g = torch.optim.Adam([{"params": [x1]}, {"params": [x2], "_comparison_prior": True}],
+                             lr=1., betas=(0., .9), eps=1e-12)
+    opt_d = torch.optim.Adam([y], lr=1., betas=(0., .9), eps=1e-12)
+    recorder = BothBoundRecorder(curvature_bound=.25, d_curvature_bound=1e9, per_group=True)
+    for phase in recorder.phases(0, opt_d, opt_g, {}):
+        y.grad = (-x1 - x2 + 2. * y).detach().clone()
+        recorder.step(opt_d, torch.optim.Adam.step)
+        x1.grad = (y + 3. * x1).detach().clone()
+        x2.grad = (y + .1 * x2).detach().clone()
+        recorder.step(opt_g, torch.optim.Adam.step)
+    network, prior = recorder.records[-1]["g_groups"]
+    y_new = 2. - 1.
+    g1, g2 = y_new + 3., y_new + .1
+    assert network["rho"] == pytest.approx(3. / g1) and prior["rho"] == pytest.approx(.1 / g2)
+    assert x1.item() == pytest.approx(1. - min(1., .25 / network["rho"]))
+    assert x2.item() == pytest.approx(1. - min(1., .25 / prior["rho"]))
+    assert prior["factor"] == 1. and network["factor"] < 1.
