@@ -16,6 +16,7 @@ import math
 import multiprocessing
 import os
 from pathlib import Path
+import re
 import subprocess
 import tempfile
 import time
@@ -81,7 +82,7 @@ def candidates() -> list[dict]:
             reg_coeff=log_range(2.0, 10.0, coordinates[5]),
         )
         rows.append((f"halton_{index:03d}", proposal))
-    return [dict(index=index, tag=f"c{index:03d}_{tag}", values=values)
+    return [dict(index=index, tag=f"c{index:03d}_{tag.replace('.', '_')}", values=values)
             for index, (tag, values) in enumerate(rows)]
 
 
@@ -111,6 +112,8 @@ def prepare(root: Path) -> None:
     base = json.loads(base_bytes)
     declared = []
     for row in candidates():
+        if re.fullmatch(r"[a-z0-9_-]+", row["tag"]) is None:
+            raise RuntimeError("candidate name violates frozen legacy host syntax")
         config = dict(base)
         config.pop("network_lr_horizon_cap", None)
         config.pop("network_lr_floor", None)
