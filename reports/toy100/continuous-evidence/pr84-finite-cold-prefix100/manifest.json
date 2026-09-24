@@ -1,0 +1,35 @@
+{
+  "archive_version": 1,
+  "driver_commit": "b42b327d9b1bfa8008f2863bc1f4f400257f09b7",
+  "result": "PASS_EXACT_DIAGNOSTIC_REPLAY",
+  "cold_gate_remains": "FAIL_3_MODES",
+  "files": {
+    "declaration.json": {
+      "sha256": "ab026aeed4f1b90b29a799fe0d38d4c82e2e04ef0102b7ac8f1b49199536a581",
+      "bytes": 5171
+    },
+    "result.json": {
+      "sha256": "50989bba56a1f5088a9295b236cb8e1bc158e3952cbf305f9f79c486409af9e4",
+      "bytes": 8371
+    },
+    "prefix-records.json.gz": {
+      "sha256": "9fb6d4c02af656e1ea4fc8854d7ba1b1728062e68c5fe988d4697aa635f41b18",
+      "bytes": 829378
+    },
+    "prefix-states.pt.gz": {
+      "sha256": "0371f70c5139cb04678bcfe06455e257d2f8bb0848062443f6ca711c3f772665",
+      "bytes": 8413744
+    },
+    "source.tar.gz": {
+      "sha256": "865657b05355448b1fe15d8535dfc391b4ebd403f8ba1116409dafca1bf7b5d1",
+      "bytes": 94679
+    }
+  },
+  "decompressed_state_sha256": "002b3019c42c77414cb4f853db7818bba79bffab095f0d19052e4517ff45392d",
+  "verification": [
+    "all source archive members equal declared sha256",
+    "compressed state bytes equal original state sha256",
+    "all 17 saved state hashes equal result receipt",
+    "100 update and refinement rows present; exact original equality certified in result"
+  ]
+}
