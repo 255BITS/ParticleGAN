@@ -263,6 +263,24 @@ This is the same warm/ring trade as v17. Damping G by a state signal that is
 small at rest also slows ring acquisition enough to lose it (here the ring
 also destabilizes). Stopped as agreed; no second knob.
 
+## Hard slope gate (v20) — rest-damping family closed
+
+v20 keeps the #84 recipe. G's post-bound step is multiplied by the particle
+slope s only while s < .2, the rest threshold between the measured warm .113
+and acquisition .67-1.07; otherwise the #84 step is unmodified.
+
+Warm fork: **FAIL 199/200** (update 1175, 7 modes; min HQ .9131). The gate
+fired on 180/200 updates. At rest s wanders across the threshold (.14-.24).
+When it crossed at 1171-1173 (s .207/.242/.229), the gate opened and G took
+full #84 steps (factor up to 1.0). HQ fell 1.0 -> .926 within three updates
+and a mode was lost two updates later. The threshold is fragile at the rest
+state itself, so cold was not run.
+
+Rest-damping summary on the #84 base: continuous curvature re-measurement
+(v17) and proportional slope scaling (v19) fix warm and lose the ring;
+pre-bound weighting (v18) is cancelled by the bound; a hard gate (v20) leaks
+at threshold crossings. The family is closed.
+
 ## Recommendations
 
 1. Put future game-update candidates in the alternating adapter
