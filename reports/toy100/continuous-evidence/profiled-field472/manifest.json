@@ -1,0 +1,57 @@
+{
+  "declaration.json": {
+    "raw_sha256": "6b3da8078e7008a7902f8c13a20ef09554a46a7b35833bcf1fdf3a850e171a28",
+    "archive": "declaration.json",
+    "archive_sha256": "6b3da8078e7008a7902f8c13a20ef09554a46a7b35833bcf1fdf3a850e171a28"
+  },
+  "result.json": {
+    "raw_sha256": "4465979223665f3cacf8375a696c00dff30808cbc70cdf6af97814a0a18c6039",
+    "archive": "result.json.gz",
+    "archive_sha256": "4710436b0cbd45e85a17d38feb8ca3a1a4467ed04e2a568acd663749ad56d7fb"
+  },
+  "source/benchmarks/locked_shared/mode_hold.py": {
+    "raw_sha256": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "archive": "source/benchmarks/locked_shared/mode_hold.py.gz",
+    "archive_sha256": "bcee5cd7ab73e4dde0096f7775e5b31688c6500b53ab3c17e5ed457cf69cd828"
+  },
+  "source/particlegan/gan_loss.py": {
+    "raw_sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "archive": "source/particlegan/gan_loss.py.gz",
+    "archive_sha256": "0d5f99f7ef077a56b4dc06791a60d83eba34740cf3f2d7edc0cfccfac38e7563"
+  },
+  "source/particlegan/grad_regularizers.py": {
+    "raw_sha256": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+    "archive": "source/particlegan/grad_regularizers.py.gz",
+    "archive_sha256": "4c0d42678efe66e2ae2ce36e4c7808866a996d88ad5ecaa7d32097fd4e52fabe"
+  },
+  "source/reports/toy100/alternating_curvature_scratch.py": {
+    "raw_sha256": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "archive": "source/reports/toy100/alternating_curvature_scratch.py.gz",
+    "archive_sha256": "4655b8735ed1df2ff0051b7e1816df9084b9c639c1f92bf6c0d8f62c78ca024c"
+  },
+  "source/reports/toy100/coverage_fixed_eval.py": {
+    "raw_sha256": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "archive": "source/reports/toy100/coverage_fixed_eval.py.gz",
+    "archive_sha256": "781a69107df11fa473feacf197aff169c6e7b1c243d14de972d7af8d77401e98"
+  },
+  "source/reports/toy100/pr84_critic_refinement_finite.py": {
+    "raw_sha256": "e6668d711a4b98fbcb232a3a350e612003e3eacdc5942b6508a9509f98519561",
+    "archive": "source/reports/toy100/pr84_critic_refinement_finite.py.gz",
+    "archive_sha256": "3cf939da23001f4a4af82fee7440796d05194f0ad50e116110e3b1575ea11316"
+  },
+  "source/reports/toy100/pr84_critic_relaxation.py": {
+    "raw_sha256": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+    "archive": "source/reports/toy100/pr84_critic_relaxation.py.gz",
+    "archive_sha256": "51346022e1ca28af02828681e9d9fa1cb79b36ec144987e2103be2904d127d2e"
+  },
+  "source/reports/toy100/pr84_profiled_field472.py": {
+    "raw_sha256": "15dadac9d4189ec21c347d2256c48aec6acf11d1c3eeff640bb17fe40bd3f0a8",
+    "archive": "source/reports/toy100/pr84_profiled_field472.py.gz",
+    "archive_sha256": "b85255d9ce8a3e20d1247f4cb389b932e94476972dec38c1de1843480b98a5d3"
+  },
+  "tensors.pt": {
+    "raw_sha256": "e675444963968734e5fca6267045f56e345591435050e82104564980d0a4a943",
+    "archive": "tensors.pt.gz",
+    "archive_sha256": "19d564b364d7121a902a708498cb69ff3e1e7997a1f91373d34de0cf43b887ab"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "method": "one_empirical_profiled_partial_G_secant",
+  "host_update": 472,
+  "capture_sha256": "19ceb38a92ba95ffaccd3aafbda55bbd77917765612666d923e986e5523d6965",
+  "source": {
+    "reports/toy100/pr84_profiled_field472.py": "15dadac9d4189ec21c347d2256c48aec6acf11d1c3eeff640bb17fe40bd3f0a8",
+    "reports/toy100/pr84_critic_relaxation.py": "9f5f0d630e818d5259081c333f55e667f8a619ae81b25ebdd1bb62d334d7639b",
+    "reports/toy100/pr84_critic_refinement_finite.py": "e6668d711a4b98fbcb232a3a350e612003e3eacdc5942b6508a9509f98519561",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/coverage_fixed_eval.py": "16e0cbfd2c7553bb17b8146232396f3fdede79609d64ee5e1e699eea6708301e",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f"
+  },
+  "endpoint": "exact accepted G/prior Adam proposal, existing curvature factor",
+  "endpoint_fit_initialization": "same original accepted-D* as the baseline fit",
+  "endpoint_fit_budget": {
+    "iterations": 40,
+    "attempted_closures": 80,
+    "attempts": 1
+  },
+  "cached_draws": "same1024 real samples/latent indices/output noise; regenerate fake values only",
+  "metric": "post-base G Adam metric, frozen for all secants",
+  "stencil_width": 0.15,
+  "quality_selection": false,
+  "outer_training": false,
+  "shared_gate_eligible": false,
+  "caveat": "algorithmic empirical response; neither fit is certified stationary; not a total derivative"
+}
