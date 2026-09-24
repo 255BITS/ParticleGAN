@@ -1,5 +1,7 @@
 # GPU leaderboard — continuous-learning variants (cuda_fp32_v1)
 
+**Active work:** [port the original CPU winner to GPU](../cpu-recipe-gpu-port/README.md). This continuous-learning cohort remains historical evidence.
+
 **Complete: 97 GPU toy runs and eight GPU convergence runs; all saved verdicts audited.**
 The remaining 79 matrix cells are unsupported by the published adapters and receive no credit.
 CPU scores are historical and do not enter this table. [Protocol and replay](README.md).
@@ -99,4 +101,4 @@ A hold failure stops the diagnostic at its first miss, so the count does not des
 
 [Audit](audit.json) · [Raw ledger](ledger.jsonl) · [Declarations](candidates.json) · [Device repairs](repairs.json)
 
-Completed 2026-09-24T22:20:27.324388+00:00
+Completed 2026-09-24T22:51:18.863999+00:00

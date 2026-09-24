@@ -1,0 +1,31 @@
+{
+  "candidate": "constraints_simple_regularization",
+  "role": "active CPU-to-GPU porting base",
+  "config": "configs/toy100/constraints_simple_regularization.json",
+  "config_sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7",
+  "original_cpu_passes": 22,
+  "gpu_native_passes": 16,
+  "toy_total": 22,
+  "native_gpu_passes": 3,
+  "gpu_release_qualified": false,
+  "priority": "preserve scheduled CPU recipe; resolve GPU failures before continuous-rate optimizer search",
+  "porting_reference": "cuda_cpu_init: CPU initial parameters, native CUDA random draws and CUDA updates",
+  "diagnostic_passes": 4,
+  "diagnostic_total": 6,
+  "diagnostic_full_toy_status": "NOT_RUN",
+  "first_gates": [
+    "mode_hold",
+    "vector_unequal_mass"
+  ],
+  "remaining_regression_gates": [
+    "trajectory",
+    "img_intensity2",
+    "img_bars4",
+    "img_blobs4"
+  ],
+  "report": "reports/toy100/cpu-recipe-gpu-port/README.md",
+  "schedules": "preserve original decay",
+  "auxiliary_host_terms": "preserve original AE and unused-token terms",
+  "seed_sweeps": false,
+  "stability_priority": "quality after convergence"
+}

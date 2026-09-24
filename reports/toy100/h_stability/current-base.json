@@ -1,6 +1,6 @@
 {
   "candidate": "eps_net_1m",
-  "role": "experimental search base; not release-qualified",
+  "role": "historical epsilon replay selection; not active research base",
   "previous_base": "g_threequarter_rate",
   "declaration": "reports/toy100/h_stability/eps-net-base/declaration.json",
   "cold_candidate": "reports/toy100/h_stability/eps-net-base/cold/eps_net_1m",
@@ -94,5 +94,7 @@
     "first_hold_failure": 1692,
     "hold_budget_complete": false,
     "artifact": "reports/toy100/h_stability/convergence-baseline/summary.json"
-  }
+  },
+  "active": false,
+  "active_research_base": "reports/toy100/current-research-base.json"
 }

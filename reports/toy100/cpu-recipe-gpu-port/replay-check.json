@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "profile": "cuda_cpu_init",
+  "task": "trajectory",
+  "all_non_timing_result_fields_match": true,
+  "complete_random_draw_receipt_matches": true,
+  "initial_parameter_hashes_match": true,
+  "live": {
+    "identity_mse": 0.0007362960604950786
+  }
+}
