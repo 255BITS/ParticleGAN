@@ -1,0 +1,28 @@
+{
+  "archives": {
+    "cold": {
+      "adapter_sha256": "3efe1afbac3c83876304e30b20f19597f204642a63bc1b251dca303e64d36e63",
+      "bytes": 98228,
+      "driver_sha256": "c4be2e441ad5eae355efbeb890c2b1f2df877bd62aebea509b251637d0a02732",
+      "file": "cold.tar.gz",
+      "frozen_d_sha256": "8679fc5f00b78c17e20a93ed69404a69ea80c77e3657fa0c3c04f49008630be3",
+      "sha256": "c7a7f94e1598b23ea89df9e7a8e2e73b93b7344cca58bf25c9083f48bffdc214",
+      "source_files": 11
+    },
+    "warm": {
+      "adapter_sha256": "3efe1afbac3c83876304e30b20f19597f204642a63bc1b251dca303e64d36e63",
+      "bytes": 146258,
+      "driver_sha256": "c4be2e441ad5eae355efbeb890c2b1f2df877bd62aebea509b251637d0a02732",
+      "file": "warm.tar.gz",
+      "frozen_d_sha256": "8679fc5f00b78c17e20a93ed69404a69ea80c77e3657fa0c3c04f49008630be3",
+      "sha256": "2f680852024f848a5907c1eeb05bd9aaf83f1e590430d3bc70bcd591ccc95f63",
+      "source_files": 11
+    }
+  },
+  "cold_trajectory_passing_suffix": 0,
+  "first_failed_stage": "cold_trajectory_sustained",
+  "schema": "alternating-armijo-secant-evidence-v1",
+  "scratch_policy_only": true,
+  "seed": 0,
+  "warm_passed_checks": 200
+}
