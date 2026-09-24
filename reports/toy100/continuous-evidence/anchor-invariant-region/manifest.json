@@ -1,0 +1,11 @@
+{
+  "scope": "conditional theorem and read-only saved44 assessment; no training",
+  "shared_gate_eligible": false,
+  "files": {
+    "reports/toy100/anchor_invariant_region.py": "4499817c0af3d73ebb6fbbbca006fefe465a1cc2c42144f079ff872b565620f0",
+    "reports/toy100/anchor-invariant-region.md": "be5fd1a78e7a30a5a809e47bcd02c6051e3239284896066ee1425a103b9a5801",
+    "tests/test_anchor_invariant_region.py": "07e929d0351744a4a36b8d25c4e0e3ab1155dc532bd49b72786fe36a04e3d4c1",
+    "reports/toy100/continuous-evidence/anchor-invariant-region/assessment.json": "600935995982f0fe900a27e55ee46102c1441c35531cf28e06cc8c898a9c933f",
+    "reports/toy100/continuous-evidence/anchor-invariant-region/tests.txt": "f6e6b8418565fbd6476bef4cd4eea6509c221f48d795a78ffe3933df059705b7"
+  }
+}
