@@ -52,4 +52,61 @@ input-sigma formula set to the declared constant rule. Saved receipts are not
 rewritten to resemble linear annealing. All artifacts are explicitly marked
 ineligible for the unchanged production common gate, which must reject them.
 
-Results will be added after the declared run and durable raw-episode regrade.
+## Result
+
+All eight candidates failed the full-budget mode_hold gate. There were no
+training or audit errors. Each received 1,200 D and 1,200 G gradient
+evaluations. Trajectory, the remaining transfer/native gates, continuation and
+distribution-shift tests were skipped. This screen supplies no shared-recipe
+or continual-learning success claim.
+
+| Row | Core | LR | Constant input sigma | Final modes | Final HQ | Passing suffix / 5 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| pn000 | old | .001 | .1 | 8 | .955566 | 2 |
+| pn001 | old | .001 | .5 | 4 | .203857 | 0 |
+| pn002 | old | .0025 | .1 | 6 | .802979 | 0 |
+| pn003 | old | .0025 | .5 | 5 | .374756 | 0 |
+| pn004 | simple | .001 | .1 | 8 | .929199 | 2 |
+| pn005 | simple | .001 | .5 | 0 | .000000 | 0 |
+| pn006 | simple | .0025 | .1 | 5 | .539062 | 0 |
+| pn007 | simple | .0025 | .5 | 1 | .019775 | 0 |
+
+For pn000 the five terminal checkpoints were modes/HQ
+`5/.575195, 6/.667725, 8/.774414, 8/1.000000, 8/.955566`.
+For pn004 they were
+`8/.917236, 7/.728271, 7/.506592, 8/.981445, 8/.929199`.
+Both good endpoints are therefore failures of the sustained criterion.
+
+Every recorded Adam-group rate matched the declared constant rate, and all
+1,200 input-noise clocks per row matched the declared constant sigma. In pn000,
+mean G update RMS decreased from .00150753 over the first 100 updates to
+.000683182 over the last 200; the prior values were .00316352 and .00140069.
+Their actual learning rates remained .001 and .002. Persistent smoothing did
+not suppress the terminal swings sufficiently in this bounded comparison.
+Do not widen this nearby sweep or promote a passing endpoint. These results
+also do not establish that every possible constant-rate method must fail.
+
+The run used committed implementation `660279039738e0379cbf23d1f5e0c36395c38b76`.
+All eight compressed raw episodes were independently regraded after relocation.
+All 117 original RAM files matched their durable copies byte for byte. The
+final inventory includes the additional independent-regrade result (118 files).
+The measured case-time sum was 68.950 seconds, including receipt observation
+overhead. The 99 relevant tests passed before training.
+
+- [Full leaderboard and actual-update diagnostics](persistent-noise-screen.json)
+- Durable evidence: `artifacts/toy100-constraints/particlegan-persistent-noise-wave1-6602790`
+- Manifest SHA256: `5a65f8708276ce169988d04b9f26f94e47c0b2efe9052438df80b4a8b599f3e4`
+- Inventory SHA256: `4876a2b8ff060311b16e1e132959bd96fc849a54c70359ed881dca87802d9192`
+
+Regrade the retained raw records with:
+
+```sh
+/tmp/pr38-default-env/bin/python reports/toy100/persistent_noise_probe.py regrade \
+  --root artifacts/toy100-constraints/particlegan-persistent-noise-wave1-6602790
+```
+
+The earlier 79 OAdam/AMSGrad rows and 32 joint ExtraAdam/simultaneous-Adam rows
+also failed mode_hold. Together these three committed screens contain 119
+declared, strictly regraded failures; no additional seeds were explored.
+The inherited reports retain their complete declarations and leaderboards:
+[constant-game](constant-game-screen.md) and [ExtraAdam](extra-adam-screen.md).

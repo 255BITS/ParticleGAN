@@ -1,6 +1,7 @@
 {
   "format": "research-persistent-noise-grid-v1",
   "production_recipe": false,
+  "source_commit": "660279039738e0379cbf23d1f5e0c36395c38b76",
   "base_config": "configs/toy100/shared_candidate.json",
   "cores": {
     "winner": {"reg_kappa": 1.176, "reg_coeff": 6.0, "prior_reg": 0.05},
@@ -19,5 +20,6 @@
   "expansion": "No further nearby rows if all eight fail; both full-budget task passes are READY_EXPAND only, requiring remaining hosts then fresh19/native3/common22",
   "new_tuning": ["persistent input noise sigma"],
   "hypothesis_source": "https://arxiv.org/html/1801.04406v4",
-  "theory_limit": "Dirac-GAN local gradient-descent stability under assumptions; not an Adam/b_cap/rp global convergence guarantee"
+  "theory_limit": "Dirac-GAN local gradient-descent stability under assumptions; not an Adam/b_cap/rp global convergence guarantee",
+  "outcome": "8/8 full-budget strict mode_hold FAIL, zero audit errors; trajectory and all broader gates skipped"
 }
