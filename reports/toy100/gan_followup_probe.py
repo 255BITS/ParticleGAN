@@ -24,7 +24,15 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 FACTORIES = {
-    "baseline": ("reports.toy100.pr84_smoothed_candidate", "pr84_smoothed_candidate"),
+    # Re-baseline rows. Old names below stay so the guard test can still
+    # name holdw15; those modules are not part of this run.
+    "baseline": ("reports.toy100.baseline_adam", "baseline_adam"),
+    "pr82": ("reports.toy100.pr82_alternating_curvature_scratch", "alternating_curvature",
+             dict(bound_d=True, curvature_bound=.25, d_curvature_bound=3.)),
+    "pr84": ("reports.toy100.pr84_smoothed_candidate", "pr84_smoothed_candidate"),
+    "pr81": ("reports.toy100.cross_competitive_scratch", "cross_competitive",
+             dict(error_relative_gain=.5)),
+    "pr93": ("reports.toy100.pr93_fence_restore", "pr93_fence_restore"),
     "reach": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate"),
     "reach1": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate", dict(reach=1.)),
     "reachsat": ("reports.toy100.pr84_reach_candidate", "pr84_reach_candidate",
@@ -43,6 +51,14 @@ FACTORIES = {
 SOURCES = (
     "reports/toy100/gan_followup_probe.py",
     "benchmarks/toy100/canonical_env.py",
+    "reports/toy100/baseline_adam.py",
+    "reports/toy100/pr82_alternating_curvature_scratch.py",
+    "reports/toy100/pr84_smoothed_candidate.py",
+    "reports/toy100/pr93_fence_restore.py",
+    "reports/toy100/exit_aware_step_clip.py",
+    "reports/toy100/cross_competitive_scratch.py",
+    "reports/toy100/implicit_extra_scratch.py",
+    "reports/toy100/fixed_metric_extra_scratch.py",
     "reports/toy100/pr84_delayed_arm_width_hold.py",
     "reports/toy100/pr84_delayed_arm_g_lr.py",
     "reports/toy100/pr84_reach_candidate.py",
@@ -155,16 +171,42 @@ def cold(output, method, tasks):
                                          model_policy=declared_model_policy(config))
         verdict = test_verdict(spec, result)
         obs = result.get("observations") or []
+        curve = [{k: r.get(k) for k in ("step", "modes", "hq", "mse", "identity_mse") if k in r}
+                 for r in obs]
         payload = dict(result=result, dynamics=recorder.receipt(), verdict=verdict,
-                       records=getattr(recorder, "records", None))
+                       records=getattr(recorder, "records", None), curve=curve,
+                       mode_loss=_mode_loss(obs))
         _stamp(payload)
         (output / f"{task}.json").write_text(json.dumps(payload, default=float) + "\n")
         emit(event="COLD", task=task, passed=verdict["passed"], status=verdict["status"],
              seconds=round(time.perf_counter() - began, 1),
-             tail=[{k: r.get(k) for k in ("step", "modes", "hq", "mse") if k in r} for r in obs[-5:]],
+             suffix=_suffix(verdict), curve=curve, mode_loss=_mode_loss(obs),
              dynamics=_dynamics(recorder))
         if not verdict["passed"]:
             break
+
+
+def _suffix(verdict):
+    convergence = verdict.get("convergence") or {}
+    return {k: convergence.get(k) for k in ("passing_observations", "observations", "confirmed_step")
+            if k in convergence}
+
+
+def _mode_loss(observations):
+    """First checkpoint whose mode count drops below the max seen so far."""
+    peak = None
+    peak_step = None
+    for row in observations:
+        modes = row.get("modes")
+        step = row.get("step")
+        if modes is None:
+            continue
+        if peak is None or modes > peak:
+            peak, peak_step = modes, step
+        elif modes < peak:
+            return dict(step=step, modes=modes, peak=peak, peak_step=peak_step,
+                        hq=row.get("hq"))
+    return None
 
 
 def stay(output, method, steps):
@@ -174,6 +216,10 @@ def stay(output, method, steps):
     began = time.perf_counter()
     with factory(method)(task="mode_hold") as (recorder, _source):
         def hook(state):
+            # Unmodified Adam already matches one call and one moment update
+            # per outer step. Multi-eval recorders declare the extra calls.
+            if not getattr(recorder, "optimizers", None):
+                return
             declare_calls = state["declare_optimizer_accounting"]
             recorder.accounting = lambda calls, outer: declare_calls(
                 calls=calls + (steps - outer), moment_updates=steps)
