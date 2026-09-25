@@ -16,6 +16,25 @@ GPU1 = 'GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69'
 REPO = ROOT / 'ParticleGAN-k3p-continuous-search'
 LIMITS = {'codex': 1, 'grok': 7}
 LANES = {
+    'prepare_continuous_qualification': ('grok', GPU1, '''Harness preparation ONLY;
+no new candidates or expensive qualification of rejected RP1. Prepare reusable
+evaluation support for the declared stress-protocol.json and 30000-update
+long-term-stability-protocol.json, preserving their exact events/windows. Use the
+frozen ring host with scoped evaluator instrumentation, never changing its
+gradient/update logic or allowing learner access to times/offsets/quality.
+One uninterrupted learner state, no checkpoint reload. Preserve original noise,
+RNG isolation, optimizer accounting and 9000-prefix scoring. Provide a clean
+candidate entry point and fail closed if installation/provenance is incomplete.
+Also document a complete pre-shift witness with normalized parameter identities:
+model/Adam/EMA, controller, latent.stats, response history/prior membership, RNG.
+RP1 captured only part of this; do not falsely label partial hashes complete.
+Read completed-codex and completed-curvature-rp1 reports for prior harness errors.
+Use focused synthetic or short smoke checks for evaluator event ordering,
+absolute versus incremental shifts, exact window counts, RNG preservation and
+active update accounting. No full RP1, native or30000 training. Any smoke output
+is harness validation, never candidate qualification. Keep code compact, save
+exact commands/tests/source hashes, finish once reviewable. Do not rebuild the
+whole benchmark or change either declared protocol. One worker, no nested agents.'''),
     'k3p_progress_noise': ('grok', GPU0, '''Own the coupling of acquisition noise
 and achieved optimizer motion. K3P remains selected. Read round-2 noise-and-signal,
 round-3 signal/noise measured failures, and rp1-rejection.md before proposing.
