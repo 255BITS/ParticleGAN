@@ -1,0 +1,379 @@
+[
+  {
+    "tag": "simple_lr0p001_p1",
+    "set": {
+      "lr": 0.001,
+      "prior_lr_mult": 1.0
+    },
+    "remove": [],
+    "constraints": [
+      "round learning rate",
+      "equal player rates"
+    ]
+  },
+  {
+    "tag": "simple_lr0p001_p2",
+    "set": {
+      "lr": 0.001,
+      "prior_lr_mult": 2.0
+    },
+    "remove": [],
+    "constraints": [
+      "round learning rate",
+      "incumbent prior ratio"
+    ]
+  },
+  {
+    "tag": "simple_lr0p0025_p1",
+    "set": {
+      "lr": 0.0025,
+      "prior_lr_mult": 1.0
+    },
+    "remove": [],
+    "constraints": [
+      "round learning rate",
+      "equal player rates"
+    ]
+  },
+  {
+    "tag": "simple_lr0p0025_p2",
+    "set": {
+      "lr": 0.0025,
+      "prior_lr_mult": 2.0
+    },
+    "remove": [],
+    "constraints": [
+      "round learning rate",
+      "incumbent prior ratio"
+    ]
+  },
+  {
+    "tag": "simple_lr0p004_p1",
+    "set": {
+      "lr": 0.004,
+      "prior_lr_mult": 1.0
+    },
+    "remove": [],
+    "constraints": [
+      "round learning rate",
+      "equal player rates"
+    ]
+  },
+  {
+    "tag": "simple_lr0p004_p2",
+    "set": {
+      "lr": 0.004,
+      "prior_lr_mult": 2.0
+    },
+    "remove": [],
+    "constraints": [
+      "round learning rate",
+      "incumbent prior ratio"
+    ]
+  },
+  {
+    "tag": "simple_lr0p005_p1",
+    "set": {
+      "lr": 0.005,
+      "prior_lr_mult": 1.0
+    },
+    "remove": [],
+    "constraints": [
+      "round learning rate",
+      "equal player rates"
+    ]
+  },
+  {
+    "tag": "simple_lr0p005_p2",
+    "set": {
+      "lr": 0.005,
+      "prior_lr_mult": 2.0
+    },
+    "remove": [],
+    "constraints": [
+      "round learning rate",
+      "incumbent prior ratio"
+    ]
+  },
+  {
+    "tag": "simple_lr0p01_p1",
+    "set": {
+      "lr": 0.01,
+      "prior_lr_mult": 1.0
+    },
+    "remove": [],
+    "constraints": [
+      "round learning rate",
+      "equal player rates"
+    ]
+  },
+  {
+    "tag": "simple_lr0p01_p2",
+    "set": {
+      "lr": 0.01,
+      "prior_lr_mult": 2.0
+    },
+    "remove": [],
+    "constraints": [
+      "round learning rate",
+      "incumbent prior ratio"
+    ]
+  },
+  {
+    "tag": "simple_beta0p0_0p99_p1",
+    "set": {
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "prior_lr_mult": 1.0
+    },
+    "remove": [],
+    "constraints": [
+      "standard or shorter-memory Adam",
+      "equal player rates"
+    ]
+  },
+  {
+    "tag": "simple_beta0p0_0p99_p2",
+    "set": {
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "prior_lr_mult": 2.0
+    },
+    "remove": [],
+    "constraints": [
+      "standard or shorter-memory Adam",
+      "incumbent prior ratio"
+    ]
+  },
+  {
+    "tag": "simple_beta0p5_0p999_p1",
+    "set": {
+      "betas": [
+        0.5,
+        0.999
+      ],
+      "prior_lr_mult": 1.0
+    },
+    "remove": [],
+    "constraints": [
+      "standard or shorter-memory Adam",
+      "equal player rates"
+    ]
+  },
+  {
+    "tag": "simple_beta0p5_0p999_p2",
+    "set": {
+      "betas": [
+        0.5,
+        0.999
+      ],
+      "prior_lr_mult": 2.0
+    },
+    "remove": [],
+    "constraints": [
+      "standard or shorter-memory Adam",
+      "incumbent prior ratio"
+    ]
+  },
+  {
+    "tag": "simple_beta0p9_0p999_p1",
+    "set": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "prior_lr_mult": 1.0
+    },
+    "remove": [],
+    "constraints": [
+      "standard or shorter-memory Adam",
+      "equal player rates"
+    ]
+  },
+  {
+    "tag": "simple_beta0p9_0p999_p2",
+    "set": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "prior_lr_mult": 2.0
+    },
+    "remove": [],
+    "constraints": [
+      "standard or shorter-memory Adam",
+      "incumbent prior ratio"
+    ]
+  },
+  {
+    "tag": "simple_beta0p9_0p99_p1",
+    "set": {
+      "betas": [
+        0.9,
+        0.99
+      ],
+      "prior_lr_mult": 1.0
+    },
+    "remove": [],
+    "constraints": [
+      "standard or shorter-memory Adam",
+      "equal player rates"
+    ]
+  },
+  {
+    "tag": "simple_beta0p9_0p99_p2",
+    "set": {
+      "betas": [
+        0.9,
+        0.99
+      ],
+      "prior_lr_mult": 2.0
+    },
+    "remove": [],
+    "constraints": [
+      "standard or shorter-memory Adam",
+      "incumbent prior ratio"
+    ]
+  },
+  {
+    "tag": "simple_input0p0_warm0p0",
+    "set": {
+      "input_noise_std": 0.0,
+      "output_noise_warmup": 0.0
+    },
+    "remove": [],
+    "constraints": [
+      "remove input smoothing",
+      "remove or shorten output warmup"
+    ]
+  },
+  {
+    "tag": "simple_input0p0_warm0p1",
+    "set": {
+      "input_noise_std": 0.0,
+      "output_noise_warmup": 0.1
+    },
+    "remove": [],
+    "constraints": [
+      "remove input smoothing",
+      "remove or shorten output warmup"
+    ]
+  },
+  {
+    "tag": "simple_input0p0_warm0p2",
+    "set": {
+      "input_noise_std": 0.0,
+      "output_noise_warmup": 0.2
+    },
+    "remove": [],
+    "constraints": [
+      "remove input smoothing",
+      "remove or shorten output warmup"
+    ]
+  },
+  {
+    "tag": "simple_input0p5_warm0p0",
+    "set": {
+      "input_noise_std": 0.5,
+      "output_noise_warmup": 0.0
+    },
+    "remove": [],
+    "constraints": [
+      "retain input smoothing",
+      "remove or shorten output warmup"
+    ]
+  },
+  {
+    "tag": "simple_input0p5_warm0p1",
+    "set": {
+      "input_noise_std": 0.5,
+      "output_noise_warmup": 0.1
+    },
+    "remove": [],
+    "constraints": [
+      "retain input smoothing",
+      "remove or shorten output warmup"
+    ]
+  },
+  {
+    "tag": "simple_no_noise",
+    "set": {
+      "input_noise_std": 0.0,
+      "output_noise_std": 0.0,
+      "output_noise_warmup": 0.0
+    },
+    "remove": [],
+    "constraints": [
+      "remove all input/output noise"
+    ]
+  },
+  {
+    "tag": "simple_one_schedule",
+    "set": {},
+    "remove": [
+      "network_lr_horizon_cap",
+      "network_lr_floor"
+    ],
+    "constraints": [
+      "one shared schedule"
+    ]
+  },
+  {
+    "tag": "simple_one_floor",
+    "set": {},
+    "remove": [
+      "network_lr_floor"
+    ],
+    "constraints": [
+      "one floor"
+    ]
+  },
+  {
+    "tag": "simple_constant",
+    "set": {
+      "lr_floor": 1.0,
+      "lr_anneal_start": 0.0
+    },
+    "remove": [
+      "network_lr_horizon_cap",
+      "network_lr_floor"
+    ],
+    "constraints": [
+      "constant nominal learning rates"
+    ]
+  },
+  {
+    "tag": "simple_network_floor0p1",
+    "set": {
+      "network_lr_floor": 0.1
+    },
+    "remove": [],
+    "constraints": [
+      "weaker or absent network decay"
+    ]
+  },
+  {
+    "tag": "simple_network_floor0p5",
+    "set": {
+      "network_lr_floor": 0.5
+    },
+    "remove": [],
+    "constraints": [
+      "weaker or absent network decay"
+    ]
+  },
+  {
+    "tag": "simple_network_floor1p0",
+    "set": {
+      "network_lr_floor": 1.0
+    },
+    "remove": [],
+    "constraints": [
+      "weaker or absent network decay"
+    ]
+  }
+]

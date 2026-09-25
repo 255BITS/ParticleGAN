@@ -1,0 +1,14 @@
+{
+  "purpose": "Frozen eight-card rare-mass discriminator screen using differentiable, permutation-equivariant current-minibatch features. Unchanged shared_c6; stop at first sustained live PASS or after all eight failures.",
+  "architectures": [
+    "batchfeat_center6_std_scalar",
+    "batchfeat_center6_std_vector",
+    "batchfeat_layer4_std_scalar",
+    "batchfeat_center6_density_head",
+    "batchfeat_center6_distance_head",
+    "batchfeat_center6_density_input",
+    "batchfeat_layer4_density_head",
+    "batchfeat_center6_density_std_head"
+  ],
+  "tasks": ["vector_unequal_mass"]
+}

@@ -1,0 +1,44 @@
+{
+  "base": {
+    "name": "noisy_mlp_026_allocation",
+    "problem": "grid100",
+    "seed": 1234,
+    "steps": 7000,
+    "device": "cuda:0",
+    "z_dim": 4,
+    "num_particles": 20000,
+    "batch_size": 512,
+    "lr": 0.0006,
+    "d_lr_mult": 1.5,
+    "prior_lr_mult": 10.0,
+    "betas": [0.0, 0.999],
+    "prior_reg": 0.05,
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "fourier": 2,
+    "g_hidden": 128,
+    "d_hidden": 128,
+    "n_hidden": 3,
+    "lr_anneal_start": 0.4,
+    "lr_floor": 0.05,
+    "eval_samples": 20000,
+    "snapshot_samples": 4096,
+    "eval_interval": 250,
+    "snapshot_interval": 250,
+    "early_eval_steps": [0, 1, 10, 25, 50, 100],
+    "stable_evals": 5,
+    "model_options": {
+      "generator_kind": "mlp",
+      "initial_prior": "normal",
+      "radius": 7.0,
+      "output_noise": 0.026
+    }
+  },
+  "candidates": [
+    {"name": "prior_reg1", "overrides": {"prior_reg": 1.0}},
+    {"name": "particles40000", "overrides": {"num_particles": 40000}},
+    {"name": "batch1024", "overrides": {"batch_size": 1024}},
+    {"name": "latent16", "overrides": {"z_dim": 16}}
+  ]
+}

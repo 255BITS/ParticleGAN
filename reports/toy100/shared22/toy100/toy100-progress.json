@@ -1,0 +1,258 @@
+{
+  "model": "live",
+  "frames": 14,
+  "steps": [
+    0,
+    1,
+    10,
+    25,
+    50,
+    100,
+    250,
+    1000,
+    2000,
+    3000,
+    4000,
+    5000,
+    6000,
+    7000
+  ],
+  "axes": {
+    "xlim": [
+      -6.9,
+      6.9
+    ],
+    "ylim": [
+      -6.9,
+      6.9
+    ]
+  },
+  "gif_sha256": "74a74f264425dcbf982a6e864051398b859ee1954fe92146db45e413b4443f69",
+  "sources": {
+    "grid100": {
+      "events_sha256": "95360af1698a4d2a6e0db269eb8ff53cb35ed5277f8abffc9768d9888efa53f8",
+      "snapshots": [
+        {
+          "step": 0,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_000000.npz",
+          "sha256": "c874d2d5adbb14aa63f8c121b8431ab4c9d034a7815662c3feff622719ca2efc"
+        },
+        {
+          "step": 1,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_000001.npz",
+          "sha256": "122aa2105aa8ce01935428c15428e36bab5262fbd85a77f0354dadfd4b98d919"
+        },
+        {
+          "step": 10,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_000010.npz",
+          "sha256": "17e364fffbcde8bb742d7b91ee1668aa34684ae0a490ea3cf86567aedb298050"
+        },
+        {
+          "step": 25,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_000025.npz",
+          "sha256": "c238e43180216147bfb87063259aca15f5041dd79f359b08221b329cb49c33e7"
+        },
+        {
+          "step": 50,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_000050.npz",
+          "sha256": "bea2600f8c72048f691f87a0ade9a4d90a75c362ebe33b45f0bbf473d0859407"
+        },
+        {
+          "step": 100,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_000100.npz",
+          "sha256": "e99def43dd3a4147cded47d7ccf38d73073947fc521d18aa5157bde49bc6d7bf"
+        },
+        {
+          "step": 250,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_000250.npz",
+          "sha256": "37c478bc5e6fd58756d18f66561d394981ed806aee0abaddf5f779148385018e"
+        },
+        {
+          "step": 1000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_001000.npz",
+          "sha256": "3bde0de5d6476e4fd499da5a563f914d61b99168bb17aca56216bd439c255289"
+        },
+        {
+          "step": 2000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_002000.npz",
+          "sha256": "f606131a1e08e752e8da66affec6dccfbc99401e3bc0c26618809e249635bb06"
+        },
+        {
+          "step": 3000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_003000.npz",
+          "sha256": "923af28672150b42017dfe231947f436a34c6abaef2141fcbc30c0b413d3f087"
+        },
+        {
+          "step": 4000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_004000.npz",
+          "sha256": "f17adcfff313c82e6222e2682054b78dda5a1971ca29fecf955158bac6309122"
+        },
+        {
+          "step": 5000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_005000.npz",
+          "sha256": "2018a4e4cb8702ef890ea776e7ebcf882da295021ceb9cfa6d6c2159939384e2"
+        },
+        {
+          "step": 6000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_006000.npz",
+          "sha256": "99c7af635db5100b930d3a8a176ea87862b9f880872f088fe0de4f9e07555e81"
+        },
+        {
+          "step": 7000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/grid100/snapshots/step_007000.npz",
+          "sha256": "863f1875065076bc048233c2310dc9674238c4214c8b5b14a791d3b60a385161"
+        }
+      ]
+    },
+    "rotated100": {
+      "events_sha256": "b78b2f89bd7d6968976e1a0517c318043582d7273c3d712b7632d5717d6a4900",
+      "snapshots": [
+        {
+          "step": 0,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_000000.npz",
+          "sha256": "d94f38e6b42329235d44ab250eac4f206ae20b7d4b08ea755e03d4edd05b234d"
+        },
+        {
+          "step": 1,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_000001.npz",
+          "sha256": "a82188a3591c21434dc371c5543a2a94589a0c1343908cc80b2ca413da69d720"
+        },
+        {
+          "step": 10,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_000010.npz",
+          "sha256": "8b31cb2ecb2ff73b095df0fb88d777d308d1ea1f6e94bc0bc393b5c1ae270a58"
+        },
+        {
+          "step": 25,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_000025.npz",
+          "sha256": "fb095c98c8bc0cf014c95e59b1195aae876eff64a1e6ebe977e56f1b80923523"
+        },
+        {
+          "step": 50,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_000050.npz",
+          "sha256": "b3660238d43924dee1fc49fc3d6dbf1480bc5a82e19218990de4e6fca9cc8e65"
+        },
+        {
+          "step": 100,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_000100.npz",
+          "sha256": "301834526fef144139b4f724eb96ae1c330ff41aaf5cf55fa582e08817ee35d5"
+        },
+        {
+          "step": 250,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_000250.npz",
+          "sha256": "5ca7d13d07f160d36b3a7437cca82cf06c45bf8311366aa131768d6e1ccbdcbb"
+        },
+        {
+          "step": 1000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_001000.npz",
+          "sha256": "b8de039002ca7b3d39a9db8a4a9c071a6a1a6fafa6ddceaed9a5ade853a799cb"
+        },
+        {
+          "step": 2000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_002000.npz",
+          "sha256": "3fbdc175fea44ce225db2e748dd2c466ec504c0f60336a7338c73e2cf364b47a"
+        },
+        {
+          "step": 3000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_003000.npz",
+          "sha256": "0367089e6c42d24ae0ba68924c35b56febc09fad98bcb1aebfc3c7a0c4b069bf"
+        },
+        {
+          "step": 4000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_004000.npz",
+          "sha256": "cd23bdcc9d35db14596f08cb0df95383b4efc48cb2472fd45e93457a40b2a96b"
+        },
+        {
+          "step": 5000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_005000.npz",
+          "sha256": "5d7e0d09e1bd081ba4035aab4ca9126bdd391e47209743f3a2b64a1ee0f9b6f0"
+        },
+        {
+          "step": 6000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_006000.npz",
+          "sha256": "c7eee2a6a005c3790f00c03873afe3489b77deb7dd5cc3a33447eff5c38b5fee"
+        },
+        {
+          "step": 7000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/rotated100/snapshots/step_007000.npz",
+          "sha256": "b40d122b7169c70a28a9cb8cc626e2e8e827bd0a5047279a8e46472189cbd387"
+        }
+      ]
+    },
+    "staggered100": {
+      "events_sha256": "73fcfec9484b6f7642c986ed7dd2e2c10b12c50fb6052563dbc74301ccf6c9c4",
+      "snapshots": [
+        {
+          "step": 0,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_000000.npz",
+          "sha256": "5270f56eb4550a77cfe4181903766ad4dec3a841964881fb0c5ff92d02fb73e1"
+        },
+        {
+          "step": 1,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_000001.npz",
+          "sha256": "b0a9a2ca82f9781cc29e9294323b158670bf666397196d39e2a79f6f8b9fb1b4"
+        },
+        {
+          "step": 10,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_000010.npz",
+          "sha256": "3ea72ad7c1b060eec23efe7a30c5eb2698ba818deed323bca61d857613c35e2d"
+        },
+        {
+          "step": 25,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_000025.npz",
+          "sha256": "4f0207e310baef342e6da32e70f858712a93461c4af3cc7a56516903e8d4bbc1"
+        },
+        {
+          "step": 50,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_000050.npz",
+          "sha256": "efa2a8a58081867a3c7598f6a00b8bf7d27643bfa67a17ffb2a8e748e98134cf"
+        },
+        {
+          "step": 100,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_000100.npz",
+          "sha256": "3a5dd905a9d2825429aa719d87af272352c21e1ca9a477f617d93d66ec42e5b7"
+        },
+        {
+          "step": 250,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_000250.npz",
+          "sha256": "be93abc5c3c437f4b0837a71f427c8b43fd92fc4c206441933ba672dda6f11a6"
+        },
+        {
+          "step": 1000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_001000.npz",
+          "sha256": "363a8e24a65f36e26eab1e182292718aed20d8b13d549f7c141dbdf95969bc6d"
+        },
+        {
+          "step": 2000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_002000.npz",
+          "sha256": "8d1269153b6dc08f87d22d5f2e1da55664179e76950eaf1f35e5e6a65508df3c"
+        },
+        {
+          "step": 3000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_003000.npz",
+          "sha256": "bf1cf2c3599d242d9fb576c47e5d9c52e970e2f7f1f8639703c944e383e60499"
+        },
+        {
+          "step": 4000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_004000.npz",
+          "sha256": "ebf74919dbfc62123348e40ccadbf3d8450dc793261ec99c987783c4d6c98a95"
+        },
+        {
+          "step": 5000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_005000.npz",
+          "sha256": "f30c1f8bc46a85f9f2ca067eea45cd09da202a516a5813bd3438e07e334169c2"
+        },
+        {
+          "step": 6000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_006000.npz",
+          "sha256": "10ce8e5053f2c25b85e3f8659c2909012447cce0b6928e420ff4c508f3d63ff3"
+        },
+        {
+          "step": 7000,
+          "path": "/dev/shm/particlegan-k1176-common22-v1-b7d9963/toy100/staggered100/snapshots/step_007000.npz",
+          "sha256": "00a192e9a852c14d9ab0638797a54d1b2899fa9cafdb661528c9d47f0c99be04"
+        }
+      ]
+    }
+  }
+}

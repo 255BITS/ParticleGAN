@@ -1,0 +1,26 @@
+{
+  "generated_at_utc": "2026-09-23T18:19:16.859365+00:00",
+  "git_sha": "8f4498006c0daa9037d08d3b50193d8d8b24b843",
+  "model_options": {
+    "generator": "trainable_affine",
+    "initialization": "identity",
+    "lr_horizon_cap": 2400,
+    "prior": "square",
+    "scale": 5.0,
+    "shared_gate_eligible": false
+  },
+  "source_sha256": {
+    "benchmarks/toy100/accuracy.py": "4e2de5c7a53cd5280ec6f03783eb39850e84a3ce12d7d947392cbe4f311c23fa",
+    "benchmarks/toy100/accuracy_evidence.py": "a3589bad69777c40a021334f108085a6b2ddd1365d0f7c594df8f08c6bd6caac",
+    "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+    "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+    "benchmarks/toy100/models.py": "71d68e049eb11fe2c3f0febadba48b767eb4654c2dc31e9ea63bcbda79680564",
+    "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+    "benchmarks/toy100/train.py": "3187467dfb6148af4d46e498abba892bea6d78da25336c8b315f25af02a21ff4",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/recipes.py": "5d9ae4289e12305504f225bb39908089a6b9cadea3c4875f3fc68cc5cefd2239",
+    "particlegan/training.py": "d2f418ec1ab43ab24d57071382c2f1fd53e17eb5064fb6bbd391e84543eeb405",
+    "reports/toy100/accuracy_horizon_probe.py": "4b8db553413ce2e74c24fb215f6e986821c96713c534a027f4601d7bbbbf9d77"
+  },
+  "trainer_factory": "affine LR-horizon diagnostic; not common-gate evidence"
+}

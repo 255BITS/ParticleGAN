@@ -1,0 +1,145 @@
+{
+  "purpose": "Frozen global-optimizer screen for within-component contraction; same architecture profile and one recipe per candidate. Advance at most two rare PASS candidates to all remaining 18 tests. This stage alone is INCOMPLETE.",
+  "candidates": [
+    {
+      "name": "c6_profile_prior3",
+      "overrides": {
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 3.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "prior_reg": 0.05
+      }
+    },
+    {
+      "name": "c6_profile_prior4",
+      "overrides": {
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 4.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "prior_reg": 0.05
+      }
+    },
+    {
+      "name": "c6_profile_beta1_01",
+      "overrides": {
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.1,
+          0.99
+        ],
+        "prior_betas": null,
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "prior_reg": 0.05
+      }
+    },
+    {
+      "name": "c6_profile_beta2_095",
+      "overrides": {
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.95
+        ],
+        "prior_betas": null,
+        "reg_coeff": 6.0,
+        "reg_kappa": 1.25,
+        "prior_reg": 0.05
+      }
+    }
+  ],
+  "discriminators": {
+    "vector_unequal_mass": {
+      "activation": "softplus",
+      "fourier": 0,
+      "implementation": "shared_pointnorm_v1",
+      "layernorm_eps": 1e-05,
+      "layers": 3,
+      "name": "pointnorm_layer_all_softplus96_beta4_l3",
+      "normalization": "layernorm",
+      "normalization_scope": "all",
+      "output_scale": 1.0,
+      "rmsnorm_eps": 1e-05,
+      "softplus_beta": 4.0,
+      "width": 96
+    },
+    "vector_unequal_width": {
+      "activation": "softplus",
+      "beta": 8.0,
+      "branch_hidden": 32,
+      "branch_scale": 0.25,
+      "features": "raw",
+      "fourier": 0,
+      "frequency_scale": 1.0,
+      "hidden": 128,
+      "implementation": "shared_critic_v1",
+      "layers": 3,
+      "name": "width_last_softplus8_128_l3",
+      "normalization": "none",
+      "output_scale": 1.0,
+      "quadratic_scale": 0.25,
+      "raw_linear_skip": false,
+      "residual": false,
+      "residual_scale": 0.7071067811865476
+    },
+    "vector_overlap": {
+      "activation": "softplus",
+      "beta": 5.0,
+      "branch_hidden": 32,
+      "branch_scale": 0.25,
+      "features": "raw",
+      "fourier": 0,
+      "frequency_scale": 1.0,
+      "hidden": 96,
+      "implementation": "shared_critic_v1",
+      "layers": 3,
+      "name": "raw_softplus96_l3",
+      "normalization": "none",
+      "output_scale": 1.0,
+      "quadratic_scale": 0.25,
+      "raw_linear_skip": false,
+      "residual": false,
+      "residual_scale": 0.7071067811865476
+    },
+    "vector_anisotropic": {
+      "activation": "softplus",
+      "beta": 5.0,
+      "branch_hidden": 32,
+      "branch_scale": 0.25,
+      "features": "additive",
+      "fourier": 2,
+      "frequency_scale": 1.0,
+      "hidden": 64,
+      "implementation": "shared_critic_v1",
+      "layers": 2,
+      "name": "additive_raw_fourier64_l2",
+      "normalization": "none",
+      "output_scale": 1.0,
+      "quadratic_scale": 0.25,
+      "raw_linear_skip": true,
+      "residual": false,
+      "residual_scale": 0.7071067811865476
+    }
+  },
+  "tasks": [
+    "vector_unequal_mass"
+  ]
+}

@@ -1,0 +1,3953 @@
+{
+  "fixed_native_seed": 1234,
+  "fixed_native_steps": 7000,
+  "fixed_terminal_checks": 5,
+  "generation": "independent regrade of frozen archives; no training",
+  "independent_holdout_samples": 100000,
+  "original_recipe_grid_rows": [
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/control.json",
+      "config_sha256": "83c56023ae5f5bdbde2b612d29500fafd9aaca29b2e00cfa6ff53baa8d942f72",
+      "delta": {},
+      "grid100": {
+        "accuracy_status": "PASS",
+        "coverage_status": "PASS",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.03605619018829542,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5347101397547565,
+          "all_finite": true,
+          "center_max_sigma": 0.30441252249489253,
+          "center_rms_sigma": 0.1301414897026508,
+          "cov_frob_rms": 0.11855601018385432,
+          "cov_trace_bias": -0.03605619018829542,
+          "frozen_pass": true,
+          "mass_tv": 0.0448,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9832,
+          "precision_gap": 0.005691003461757771,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.01523618167824603,
+          "valid_n": 20000,
+          "within_radius_n": 19664
+        },
+        "final_coverage": {
+          "hq": 0.9832,
+          "mass_tv": 0.044800000000000006,
+          "max_cov_eig_ratio": 1.2007530001138125,
+          "max_mode_mass": 0.0127,
+          "max_radial_median_ratio": 1.1416218000641505,
+          "min_cov_eig_ratio": 0.6646430885787046,
+          "min_hq_count": 139,
+          "min_hq_mode_mass": 0.00695,
+          "min_radial_median_ratio": 0.8638473471800014,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9832,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.035961940797846204,
+          "accuracy_pass": true,
+          "accuracy_score": 0.45707750989718365,
+          "all_finite": true,
+          "center_max_sigma": 0.2045372246660911,
+          "center_rms_sigma": 0.10339970104337359,
+          "cov_frob_rms": 0.0620660858466594,
+          "cov_trace_bias": -0.035961940797846204,
+          "frozen_pass": true,
+          "mass_tv": 0.036789999999999996,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98266,
+          "precision_gap": 0.006231003461757756,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.013541018389069515,
+          "valid_n": 100000,
+          "within_radius_n": 98266
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/control/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "c505b5bd6d35d2e37b8ed4f026694c3ff55e15fc3eb8b51ebaec5573c0d0480f",
+        "strict_status": "PASS",
+        "terminal_pass_flags": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 5,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "control"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/mlp_normal_z2.json",
+      "config_sha256": "e38d380369698dee609d81fbbb80b935776803bf7e69fa344e52d49a877df3e9",
+      "delta": {
+        "toy100_model": "<absent>"
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.60415,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.02115,
+          "precision_gap": 0.9677410034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 423
+        },
+        "final_coverage": {
+          "hq": 0.02115,
+          "mass_tv": 0.60415,
+          "max_cov_eig_ratio": 3.841813937705279,
+          "max_mode_mass": 0.1129,
+          "max_radial_median_ratio": 2.454988491286084,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 0,
+          "min_hq_mode_mass": 0.0,
+          "min_radial_median_ratio": 0.0,
+          "modes": 1,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.02115,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.60362,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.02093,
+          "precision_gap": 0.9679610034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 100000,
+          "within_radius_n": 2093
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/mlp_normal_z2/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 33666,
+          "generator_class": "SimpleMLPGenerator",
+          "generator_parameters": 33666,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_parameters": 40000,
+          "toy100_model": "mlp_v1"
+        },
+        "source_archive_sha256": "c505b5bd6d35d2e37b8ed4f026694c3ff55e15fc3eb8b51ebaec5573c0d0480f",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "mlp_normal_z2"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/mlp_normal_z4.json",
+      "config_sha256": "01ad353ae4353c8f536999953338c167fbad87808a8224336c77647d0f6a08b7",
+      "delta": {
+        "toy100_model": "<absent>",
+        "z_dim": 4
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.5086,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.3943,
+          "precision_gap": 0.5945910034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 7886
+        },
+        "final_coverage": {
+          "hq": 0.3943,
+          "mass_tv": 0.5085999999999999,
+          "max_cov_eig_ratio": 4.543037175350482,
+          "max_mode_mass": 0.2104,
+          "max_radial_median_ratio": 2.562570720969853,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 0,
+          "min_hq_mode_mass": 0.0,
+          "min_radial_median_ratio": 0.0,
+          "modes": 18,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.3943,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.5098900000000001,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.39256,
+          "precision_gap": 0.5963310034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 100000,
+          "within_radius_n": 39256
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/mlp_normal_z4/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 33922,
+          "generator_class": "SimpleMLPGenerator",
+          "generator_parameters": 33922,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_parameters": 80000,
+          "toy100_model": "mlp_v1"
+        },
+        "source_archive_sha256": "c505b5bd6d35d2e37b8ed4f026694c3ff55e15fc3eb8b51ebaec5573c0d0480f",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "mlp_normal_z4"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/affine_normal.json",
+      "config_sha256": "f0ac9045b325d48e7ca3db30b034ec999c0526be770704e3958cd9ef421a41c3",
+      "delta": {
+        "toy100_model": "affine_normal_v1"
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.027410310025972495,
+          "accuracy_pass": false,
+          "accuracy_score": 0.776738309211142,
+          "all_finite": true,
+          "center_max_sigma": 0.45935984766061744,
+          "center_rms_sigma": 0.19560587455387246,
+          "cov_frob_rms": 0.11923666864929139,
+          "cov_trace_bias": -0.027410310025972495,
+          "frozen_pass": true,
+          "mass_tv": 0.09825,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.9729,
+          "precision_gap": 0.015991003461757747,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.008692830552619213,
+          "valid_n": 20000,
+          "within_radius_n": 19458
+        },
+        "final_coverage": {
+          "hq": 0.9729,
+          "mass_tv": 0.09824999999999999,
+          "max_cov_eig_ratio": 1.2313898039827056,
+          "max_mode_mass": 0.01605,
+          "max_radial_median_ratio": 1.1245867027829732,
+          "min_cov_eig_ratio": 0.6918197519606335,
+          "min_hq_count": 101,
+          "min_hq_mode_mass": 0.00505,
+          "min_radial_median_ratio": 0.8674206465170199,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9729,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.0247495358978298,
+          "accuracy_pass": false,
+          "accuracy_score": 0.7010727098175934,
+          "all_finite": true,
+          "center_max_sigma": 0.3750423224513636,
+          "center_rms_sigma": 0.16818590341641315,
+          "cov_frob_rms": 0.06121341380598946,
+          "cov_trace_bias": -0.0247495358978298,
+          "frozen_pass": true,
+          "mass_tv": 0.09433000000000002,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.97431,
+          "precision_gap": 0.014581003461757724,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.005747971861733703,
+          "valid_n": 100000,
+          "within_radius_n": 97431
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/affine_normal/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 3.902043104171753,
+          "prior_initial_min": -4.068782329559326,
+          "prior_initial_sha256": "8ef0094e4d3faa3dda93c5dcb4aa5594f95f66c4005f438a6f952e1329dd8a44",
+          "prior_initialization": "normal",
+          "prior_parameters": 40000,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_normal_v1"
+        },
+        "source_archive_sha256": "c505b5bd6d35d2e37b8ed4f026694c3ff55e15fc3eb8b51ebaec5573c0d0480f",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "affine_normal"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/affine_normal_random.json",
+      "config_sha256": "58dac9dc00340c4b5f2e624f40186e22bc14e20a6ba2f395382170406efc383a",
+      "delta": {
+        "toy100_model": "affine_normal_random_v1"
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.029687424292196507,
+          "accuracy_pass": false,
+          "accuracy_score": 0.9210396775058259,
+          "all_finite": true,
+          "center_max_sigma": 0.6552656082612932,
+          "center_rms_sigma": 0.25827097420692463,
+          "cov_frob_rms": 0.13077730635787083,
+          "cov_trace_bias": -0.029687424292196507,
+          "frozen_pass": false,
+          "mass_tv": 0.11685000000000001,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.96995,
+          "precision_gap": 0.018941003461757755,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.005937183842668614,
+          "valid_n": 20000,
+          "within_radius_n": 19399
+        },
+        "final_coverage": {
+          "hq": 0.97,
+          "mass_tv": 0.11685000000000001,
+          "max_cov_eig_ratio": 1.3128906338443822,
+          "max_mode_mass": 0.0164,
+          "max_radial_median_ratio": 1.1384362246502662,
+          "min_cov_eig_ratio": 0.657653686277221,
+          "min_hq_count": 91,
+          "min_hq_mode_mass": 0.00455,
+          "min_radial_median_ratio": 0.8424679942683343,
+          "modes": 97,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.97,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.026165496126746457,
+          "accuracy_pass": false,
+          "accuracy_score": 0.8844244432707494,
+          "all_finite": true,
+          "center_max_sigma": 0.6717529488682161,
+          "center_rms_sigma": 0.253534046238866,
+          "cov_frob_rms": 0.06255061448433617,
+          "cov_trace_bias": -0.026165496126746457,
+          "frozen_pass": false,
+          "mass_tv": 0.11529,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.97046,
+          "precision_gap": 0.018431003461757745,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.0034749032248481138,
+          "valid_n": 100000,
+          "within_radius_n": 97046
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/affine_normal_random/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            -0.2997578978538513,
+            -0.3931882679462433
+          ],
+          "generator_initial_bias_sha256": "4e1e323e1fe953e420fc52c707781cad7780ae976ac87266c4e82eda6f8ddb4d",
+          "generator_initial_weight": [
+            [
+              0.5557318925857544,
+              -0.4796343445777893
+            ],
+            [
+              -0.2398095726966858,
+              -0.416616290807724
+            ]
+          ],
+          "generator_initial_weight_sha256": "51d2062c0bbeb0f39b9bba983f18950c81fcd89cdc9a0cdab671168a7157e1b1",
+          "generator_initialization": "torch_linear_default",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 3.902043104171753,
+          "prior_initial_min": -4.068782329559326,
+          "prior_initial_sha256": "8ef0094e4d3faa3dda93c5dcb4aa5594f95f66c4005f438a6f952e1329dd8a44",
+          "prior_initialization": "normal",
+          "prior_parameters": 40000,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_normal_random_v1"
+        },
+        "source_archive_sha256": "c505b5bd6d35d2e37b8ed4f026694c3ff55e15fc3eb8b51ebaec5573c0d0480f",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "affine_normal_random"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/affine_square_random.json",
+      "config_sha256": "e303dbe8b2695d6ed0cdcc50f46cb41e0bdd263f7e0f567b0b0debe5090e14ad",
+      "delta": {
+        "toy100_model": "affine_square_random_v1"
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.0292956525170045,
+          "accuracy_pass": false,
+          "accuracy_score": 0.8202727361018788,
+          "all_finite": true,
+          "center_max_sigma": 0.45530062219768447,
+          "center_rms_sigma": 0.19435652559524416,
+          "cov_frob_rms": 0.13382555156473286,
+          "cov_trace_bias": -0.0292956525170045,
+          "frozen_pass": false,
+          "mass_tv": 0.10975,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.9828,
+          "precision_gap": 0.006091003461757727,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.007487404983783308,
+          "valid_n": 20000,
+          "within_radius_n": 19656
+        },
+        "final_coverage": {
+          "hq": 0.9828,
+          "mass_tv": 0.10974999999999999,
+          "max_cov_eig_ratio": 1.371591460175705,
+          "max_mode_mass": 0.01545,
+          "max_radial_median_ratio": 1.1399507299898175,
+          "min_cov_eig_ratio": 0.651952043661336,
+          "min_hq_count": 67,
+          "min_hq_mode_mass": 0.00335,
+          "min_radial_median_ratio": 0.8257486420868554,
+          "modes": 96,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.9828,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.028978017277068058,
+          "accuracy_pass": false,
+          "accuracy_score": 0.7789604199133044,
+          "all_finite": true,
+          "center_max_sigma": 0.3516306159886493,
+          "center_rms_sigma": 0.16199875377147788,
+          "cov_frob_rms": 0.07930923617949337,
+          "cov_trace_bias": -0.028978017277068058,
+          "frozen_pass": false,
+          "mass_tv": 0.10944999999999999,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.98255,
+          "precision_gap": 0.006341003461757699,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.00767604285433926,
+          "valid_n": 100000,
+          "within_radius_n": 98255
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/affine_square_random/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            -0.33120205998420715,
+            0.3839366137981415
+          ],
+          "generator_initial_bias_sha256": "aa8672d1549c88751b88f4f9e4cb1d02d67244e8fe1f4a569b612e2362e7d65d",
+          "generator_initial_weight": [
+            [
+              0.2744613587856293,
+              0.29305174946784973
+            ],
+            [
+              -0.0004444806545507163,
+              0.2674572467803955
+            ]
+          ],
+          "generator_initial_weight_sha256": "b442218b3b0df61d8aaa61b3d6de3e502799b13402181aa1fa5b61bf2f485674",
+          "generator_initialization": "torch_linear_default",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_random_v1"
+        },
+        "source_archive_sha256": "c505b5bd6d35d2e37b8ed4f026694c3ff55e15fc3eb8b51ebaec5573c0d0480f",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "affine_square_random"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/affine_empirical_box.json",
+      "config_sha256": "a870558630019271ecc03e9777d60aff78a9b5c34bd9be6bd5a4f232c34a2a06",
+      "delta": {
+        "toy100_model": "affine_empirical_box_v1"
+      },
+      "grid100": {
+        "accuracy_status": "PASS",
+        "coverage_status": "PASS",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.03687932538674721,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5385216410360979,
+          "all_finite": true,
+          "center_max_sigma": 0.2524374934518221,
+          "center_rms_sigma": 0.1257387291114469,
+          "cov_frob_rms": 0.11931734406998466,
+          "cov_trace_bias": -0.03687932538674721,
+          "frozen_pass": true,
+          "mass_tv": 0.04545000000000001,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.985,
+          "precision_gap": 0.003891003461757747,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.015963986588787393,
+          "valid_n": 20000,
+          "within_radius_n": 19700
+        },
+        "final_coverage": {
+          "hq": 0.985,
+          "mass_tv": 0.045450000000000004,
+          "max_cov_eig_ratio": 1.2805751846812845,
+          "max_mode_mass": 0.01275,
+          "max_radial_median_ratio": 1.1435964664773541,
+          "min_cov_eig_ratio": 0.6711835282360501,
+          "min_hq_count": 140,
+          "min_hq_mode_mass": 0.007,
+          "min_radial_median_ratio": 0.8704435630539663,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.985,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03750994589003287,
+          "accuracy_pass": true,
+          "accuracy_score": 0.4692252067584163,
+          "all_finite": true,
+          "center_max_sigma": 0.2946668173053611,
+          "center_rms_sigma": 0.10211987111166826,
+          "cov_frob_rms": 0.06428192525517454,
+          "cov_trace_bias": -0.03750994589003287,
+          "frozen_pass": true,
+          "mass_tv": 0.036789999999999996,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98397,
+          "precision_gap": 0.0049210034617577225,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.015121413836333142,
+          "valid_n": 100000,
+          "within_radius_n": 98397
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/affine_empirical_box/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "init_data_lower": [
+            -4.579004764556885,
+            -4.621766090393066
+          ],
+          "init_data_samples": 2048,
+          "init_data_seed_offset": 701,
+          "init_data_sha256": "bb1a72a598008fe7631bccd7fc26c9a9ed652d0849191709f7e1c8e75d597adb",
+          "init_data_upper": [
+            4.571532249450684,
+            4.599872589111328
+          ],
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.5998029708862305,
+          "prior_initial_min": -4.620051860809326,
+          "prior_initial_sha256": "3e32a9c585d3899980c9fef5538ef2793649cf63f979fea2645b75c9c93eb643",
+          "prior_initialization": "empirical_box",
+          "prior_parameters": 40000,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_empirical_box_v1"
+        },
+        "source_archive_sha256": "7f1010dd1419c243c8b4926ce09631d03ca4580b6fe2e1fe3ba989d1fd6d21b3",
+        "strict_status": "PASS",
+        "terminal_pass_flags": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 5,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "affine_empirical_box"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/affine_empirical_box_random.json",
+      "config_sha256": "bf65e5c5edaeed8d1cbaf7ea829db082efa1752219e95a6e4ee4031fd434f4ca",
+      "delta": {
+        "toy100_model": "affine_empirical_box_random_v1"
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.027290799919525432,
+          "accuracy_pass": false,
+          "accuracy_score": 1.3047200711964788,
+          "all_finite": true,
+          "center_max_sigma": 0.7232203965706705,
+          "center_rms_sigma": 0.36978895419299135,
+          "cov_frob_rms": 0.19225162215201275,
+          "cov_trace_bias": -0.027290799919525432,
+          "frozen_pass": false,
+          "mass_tv": 0.15955000000000003,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.94525,
+          "precision_gap": 0.0436410034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.017514433918361494,
+          "valid_n": 20000,
+          "within_radius_n": 18905
+        },
+        "final_coverage": {
+          "hq": 0.94525,
+          "mass_tv": 0.15955,
+          "max_cov_eig_ratio": 2.2874981001198753,
+          "max_mode_mass": 0.01985,
+          "max_radial_median_ratio": 1.4799426361532264,
+          "min_cov_eig_ratio": 0.27587218749754594,
+          "min_hq_count": 3,
+          "min_hq_mode_mass": 0.00015,
+          "min_radial_median_ratio": 0.7777388039556665,
+          "modes": 92,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.94525,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.029378083758240248,
+          "accuracy_pass": false,
+          "accuracy_score": 1.2629682056032336,
+          "all_finite": true,
+          "center_max_sigma": 0.7496409005366282,
+          "center_rms_sigma": 0.34531346918839234,
+          "cov_frob_rms": 0.11614315356329497,
+          "cov_trace_bias": -0.029378083758240248,
+          "frozen_pass": false,
+          "mass_tv": 0.15897,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.9452,
+          "precision_gap": 0.043691003461757694,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.015280985555542803,
+          "valid_n": 100000,
+          "within_radius_n": 94520
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/affine_empirical_box_random/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            -0.33120205998420715,
+            0.3839366137981415
+          ],
+          "generator_initial_bias_sha256": "aa8672d1549c88751b88f4f9e4cb1d02d67244e8fe1f4a569b612e2362e7d65d",
+          "generator_initial_weight": [
+            [
+              0.2744613587856293,
+              0.29305174946784973
+            ],
+            [
+              -0.0004444806545507163,
+              0.2674572467803955
+            ]
+          ],
+          "generator_initial_weight_sha256": "b442218b3b0df61d8aaa61b3d6de3e502799b13402181aa1fa5b61bf2f485674",
+          "generator_initialization": "torch_linear_default",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "init_data_lower": [
+            -4.579004764556885,
+            -4.621766090393066
+          ],
+          "init_data_samples": 2048,
+          "init_data_seed_offset": 701,
+          "init_data_sha256": "bb1a72a598008fe7631bccd7fc26c9a9ed652d0849191709f7e1c8e75d597adb",
+          "init_data_upper": [
+            4.571532249450684,
+            4.599872589111328
+          ],
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.5998029708862305,
+          "prior_initial_min": -4.620051860809326,
+          "prior_initial_sha256": "3e32a9c585d3899980c9fef5538ef2793649cf63f979fea2645b75c9c93eb643",
+          "prior_initialization": "empirical_box",
+          "prior_parameters": 40000,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_empirical_box_random_v1"
+        },
+        "source_archive_sha256": "7f1010dd1419c243c8b4926ce09631d03ca4580b6fe2e1fe3ba989d1fd6d21b3",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "affine_empirical_box_random"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/fourier0.json",
+      "config_sha256": "00dc27083a8079a59428dad0e36d12c75f9bdcc8b830e0fbc6a6566270a5a4cf",
+      "delta": {
+        "fourier": 0
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.08179999999999998,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.43035,
+          "precision_gap": 0.5585410034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 8607
+        },
+        "final_coverage": {
+          "hq": 0.43035,
+          "mass_tv": 0.08180000000000001,
+          "max_cov_eig_ratio": 5.439517262557401,
+          "max_mode_mass": 0.01615,
+          "max_radial_median_ratio": 2.047253052333531,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 0,
+          "min_hq_mode_mass": 0.0,
+          "min_radial_median_ratio": 0.0,
+          "modes": 35,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.43035,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.5371133064873239,
+          "accuracy_pass": false,
+          "accuracy_score": 3.2537712180885956,
+          "all_finite": true,
+          "center_max_sigma": 2.0601544155062994,
+          "center_rms_sigma": 0.5943311656191459,
+          "cov_frob_rms": 0.8600021458310414,
+          "cov_trace_bias": 0.5371133064873239,
+          "frozen_pass": false,
+          "mass_tv": 0.08191,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.43257,
+          "precision_gap": 0.5563210034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.13228517250874994,
+          "valid_n": 100000,
+          "within_radius_n": 43257
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/fourier0/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 33537,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "9e59f739daa650d9c7fc2aeafd4cab47a120ee386ec217363120bc12493b2b3c",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "fourier0"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/fourier1.json",
+      "config_sha256": "3726452951b46715f6dc7ca5789e322afd05e80be506c0623c6c0ee8363ae5de",
+      "delta": {
+        "fourier": 1
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.03262399657216175,
+          "accuracy_pass": false,
+          "accuracy_score": 1.0919117576232062,
+          "all_finite": true,
+          "center_max_sigma": 0.968877446264543,
+          "center_rms_sigma": 0.41332650390926473,
+          "cov_frob_rms": 0.1268287467092008,
+          "cov_trace_bias": -0.03262399657216175,
+          "frozen_pass": false,
+          "mass_tv": 0.0807,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.9624,
+          "precision_gap": 0.0264910034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.025190981808995372,
+          "valid_n": 20000,
+          "within_radius_n": 19248
+        },
+        "final_coverage": {
+          "hq": 0.9624,
+          "mass_tv": 0.08070000000000001,
+          "max_cov_eig_ratio": 1.2100565444991411,
+          "max_mode_mass": 0.01575,
+          "max_radial_median_ratio": 1.2354188250369382,
+          "min_cov_eig_ratio": 0.6249137763937483,
+          "min_hq_count": 123,
+          "min_hq_mode_mass": 0.00615,
+          "min_radial_median_ratio": 0.8445501478055116,
+          "modes": 100,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.9624,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03292035238994717,
+          "accuracy_pass": false,
+          "accuracy_score": 1.0377323263097704,
+          "all_finite": true,
+          "center_max_sigma": 0.9205289182952906,
+          "center_rms_sigma": 0.39779532001409756,
+          "cov_frob_rms": 0.07362894370748276,
+          "cov_trace_bias": -0.03292035238994717,
+          "frozen_pass": false,
+          "mass_tv": 0.07466,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.96274,
+          "precision_gap": 0.026151003461757694,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.02353663391743155,
+          "valid_n": 100000,
+          "within_radius_n": 96274
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/fourier1/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 34049,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "6ea6d53822c6cc1bb6ff669afb01380a76b79a8eaa15eb29c6b7b24090b77895",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "fourier1"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/fourier2.json",
+      "config_sha256": "69dc82cc6db177ba2305cc8d8ab211d4326031c2a0927bd093553216f0f339db",
+      "delta": {
+        "fourier": 2
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.25595,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.33315,
+          "precision_gap": 0.6557410034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 6663
+        },
+        "final_coverage": {
+          "hq": 0.3332,
+          "mass_tv": 0.25595,
+          "max_cov_eig_ratio": 3.973598890019713,
+          "max_mode_mass": 0.0275,
+          "max_radial_median_ratio": 2.5314522852136876,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 0,
+          "min_hq_mode_mass": 0.0,
+          "min_radial_median_ratio": 0.0,
+          "modes": 31,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.3332,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.25415999999999994,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.3337,
+          "precision_gap": 0.6551910034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 100000,
+          "within_radius_n": 33370
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/fourier2/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 34561,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "362f40f0dc6f260d49f658c24a97bfa791d19634b4b1813b8eaa3cf764975402",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "fourier2"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/particles10000.json",
+      "config_sha256": "f08472db7d1b202a3891314d5043eb9c923da4460f6a1aea6300afa9263e1548",
+      "delta": {
+        "num_particles": 10000
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.2238,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.20925,
+          "precision_gap": 0.7796410034617578,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 4185
+        },
+        "final_coverage": {
+          "hq": 0.20925,
+          "mass_tv": 0.2238,
+          "max_cov_eig_ratio": 6.614304900955444,
+          "max_mode_mass": 0.03175,
+          "max_radial_median_ratio": 2.4736144162709217,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 0,
+          "min_hq_mode_mass": 0.0,
+          "min_radial_median_ratio": 0.0,
+          "modes": 20,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.20925,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.22115,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.2104,
+          "precision_gap": 0.7784910034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 100000,
+          "within_radius_n": 21040
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/particles10000/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999332427978516,
+          "prior_initial_min": -4.999757289886475,
+          "prior_initial_sha256": "66829d40b7bc6d89099d61c7f9133d37018d45abe1cd1adc03b4952d642466eb",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 20000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            10000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "c7d4877033bd0990dbb7b02298b9e746b9841eebe1f983553399a6dd3b819825",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "particles10000"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/particles5000.json",
+      "config_sha256": "a1730319a59b2c615734b11133d267ce19a4109363fe7f4a93248cd0305eaed7",
+      "delta": {
+        "num_particles": 5000
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.13294999999999998,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.0935,
+          "precision_gap": 0.8953910034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 1870
+        },
+        "final_coverage": {
+          "hq": 0.0935,
+          "mass_tv": 0.13295,
+          "max_cov_eig_ratio": 4.244516541979865,
+          "max_mode_mass": 0.02075,
+          "max_radial_median_ratio": 2.4878754200034248,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 0,
+          "min_hq_mode_mass": 0.0,
+          "min_radial_median_ratio": 0.0,
+          "modes": 5,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.0935,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.12993,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.09403,
+          "precision_gap": 0.8948610034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 100000,
+          "within_radius_n": 9403
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/particles5000/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999795436859131,
+          "prior_initial_min": -4.99977970123291,
+          "prior_initial_sha256": "54619636ae14767b05ca37b19039ff0aa4d2fd5966dbee17e24b285c1f8af7f2",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 10000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            5000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "708e32ce3aeb824940bceb9a55e48449611ba4b53c4245e7327a6a2d4bf6eae2",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "particles5000"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/batch1024.json",
+      "config_sha256": "7ace71029be86228f321e2b890bd2f84eb4482c3acbac3b47506700c6e1a3d10",
+      "delta": {
+        "batch_size": 1024
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.23314999999999997,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.20705,
+          "precision_gap": 0.7818410034617578,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 4141
+        },
+        "final_coverage": {
+          "hq": 0.20705,
+          "mass_tv": 0.23314999999999997,
+          "max_cov_eig_ratio": 4.387135560824437,
+          "max_mode_mass": 0.0345,
+          "max_radial_median_ratio": 2.4602854884162246,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 0,
+          "min_hq_mode_mass": 0.0,
+          "min_radial_median_ratio": 0.0,
+          "modes": 12,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.20705,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.23107,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.2039,
+          "precision_gap": 0.7849910034617578,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 100000,
+          "within_radius_n": 20390
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/batch1024/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "708e32ce3aeb824940bceb9a55e48449611ba4b53c4245e7327a6a2d4bf6eae2",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "batch1024"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/batch512.json",
+      "config_sha256": "7650ba838892559bcbca9babc5c79c30ef493ef3465ca94aa84e23594ddeb0ed",
+      "delta": {
+        "batch_size": 512
+      },
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.1521,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.23515,
+          "precision_gap": 0.7537410034617578,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 4703
+        },
+        "final_coverage": {
+          "hq": 0.23515,
+          "mass_tv": 0.15209999999999999,
+          "max_cov_eig_ratio": 7.544730130541034,
+          "max_mode_mass": 0.0222,
+          "max_radial_median_ratio": 2.426267385450499,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 0,
+          "min_hq_mode_mass": 0.0,
+          "min_radial_median_ratio": 0.0,
+          "modes": 25,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.23515,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.14451,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.23417,
+          "precision_gap": 0.7547210034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 100000,
+          "within_radius_n": 23417
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/batch512/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "4435c261827390673683804d0b2b31fc993fa7bb17bef9bacfc2fed902392666",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "batch512"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/critic64.json",
+      "config_sha256": "b3f8b539c960b19525e649812e059c816df97730c80013f9db581cd7924c454c",
+      "delta": {
+        "d_hidden": 64
+      },
+      "grid100": {
+        "accuracy_status": "PASS",
+        "coverage_status": "PASS",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.035101761144730736,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5463991646441781,
+          "all_finite": true,
+          "center_max_sigma": 0.4210729039946533,
+          "center_rms_sigma": 0.15104096148303323,
+          "cov_frob_rms": 0.12225194068242241,
+          "cov_trace_bias": -0.035101761144730736,
+          "frozen_pass": true,
+          "mass_tv": 0.04659999999999999,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9816,
+          "precision_gap": 0.007291003461757706,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.012108302921902903,
+          "valid_n": 20000,
+          "within_radius_n": 19632
+        },
+        "final_coverage": {
+          "hq": 0.9816,
+          "mass_tv": 0.04659999999999999,
+          "max_cov_eig_ratio": 1.2520904311409116,
+          "max_mode_mass": 0.0133,
+          "max_radial_median_ratio": 1.1470663573025912,
+          "min_cov_eig_ratio": 0.6712655757469831,
+          "min_hq_count": 126,
+          "min_hq_mode_mass": 0.0063,
+          "min_radial_median_ratio": 0.8469530937470258,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9816,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03724952488251598,
+          "accuracy_pass": true,
+          "accuracy_score": 0.4616540130599255,
+          "all_finite": true,
+          "center_max_sigma": 0.29139867636053435,
+          "center_rms_sigma": 0.11666353744120328,
+          "cov_frob_rms": 0.062103257291411626,
+          "cov_trace_bias": -0.03724952488251598,
+          "frozen_pass": true,
+          "mass_tv": 0.03244999999999999,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98089,
+          "precision_gap": 0.008001003461757694,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.013998791315007697,
+          "valid_n": 100000,
+          "within_radius_n": 98089
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/critic64/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 9345,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "2b6abf4b83d0097ebcbee625725073d988320455f18dccaa2f3c1615764c5c2f",
+        "strict_status": "PASS",
+        "terminal_pass_flags": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 5,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "critic64"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/critic32.json",
+      "config_sha256": "56fe2a6682076f1fd5eb02adab6c1bfbf31cf348eb1b58beab9fd3f416af477f",
+      "delta": {
+        "d_hidden": 32
+      },
+      "grid100": {
+        "accuracy_status": "PASS",
+        "coverage_status": "PASS",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.03745362927717366,
+          "accuracy_pass": true,
+          "accuracy_score": 0.6413985309173122,
+          "all_finite": true,
+          "center_max_sigma": 0.49727112203229806,
+          "center_rms_sigma": 0.1993337511818825,
+          "cov_frob_rms": 0.11690725295583924,
+          "cov_trace_bias": -0.03745362927717366,
+          "frozen_pass": true,
+          "mass_tv": 0.055799999999999995,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.98,
+          "precision_gap": 0.008891003461757752,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.010575562999524002,
+          "valid_n": 20000,
+          "within_radius_n": 19600
+        },
+        "final_coverage": {
+          "hq": 0.98,
+          "mass_tv": 0.0558,
+          "max_cov_eig_ratio": 1.178254492414548,
+          "max_mode_mass": 0.0131,
+          "max_radial_median_ratio": 1.1269315272407932,
+          "min_cov_eig_ratio": 0.659876130536694,
+          "min_hq_count": 131,
+          "min_hq_mode_mass": 0.00655,
+          "min_radial_median_ratio": 0.8620114635505745,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.98,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03951711187317841,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5947411734971833,
+          "all_finite": true,
+          "center_max_sigma": 0.43950427293307076,
+          "center_rms_sigma": 0.17806189644774065,
+          "cov_frob_rms": 0.0634882789316424,
+          "cov_trace_bias": -0.03951711187317841,
+          "frozen_pass": true,
+          "mass_tv": 0.04927,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.9789,
+          "precision_gap": 0.009991003461757741,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.01089269705406315,
+          "valid_n": 100000,
+          "within_radius_n": 97890
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/critic32/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 2625,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "f9da500f0c934c29e002bcc5726d37493505113ea0e5925704c575efd8ded91a",
+        "strict_status": "PASS",
+        "terminal_pass_flags": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 5,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "critic32"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/critic_depth2.json",
+      "config_sha256": "9597f06a141b486c94ede088b22ebe5dd2f739673db4ad671ffb68fbf347703a",
+      "delta": {
+        "n_hidden": 2
+      },
+      "grid100": {
+        "accuracy_status": "PASS",
+        "coverage_status": "PASS",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.035532776251282594,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5624685886195311,
+          "all_finite": true,
+          "center_max_sigma": 0.2870371281996989,
+          "center_rms_sigma": 0.1371115632265503,
+          "cov_frob_rms": 0.12124402126307704,
+          "cov_trace_bias": -0.035532776251282594,
+          "frozen_pass": true,
+          "mass_tv": 0.0508,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.98595,
+          "precision_gap": 0.0029410034617577407,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.014492884366635206,
+          "valid_n": 20000,
+          "within_radius_n": 19719
+        },
+        "final_coverage": {
+          "hq": 0.98595,
+          "mass_tv": 0.0508,
+          "max_cov_eig_ratio": 1.2723001486979437,
+          "max_mode_mass": 0.01285,
+          "max_radial_median_ratio": 1.144374158480634,
+          "min_cov_eig_ratio": 0.6688763243363552,
+          "min_hq_count": 128,
+          "min_hq_mode_mass": 0.0064,
+          "min_radial_median_ratio": 0.868211441494519,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.98595,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03715208344905363,
+          "accuracy_pass": true,
+          "accuracy_score": 0.4951304209857801,
+          "all_finite": true,
+          "center_max_sigma": 0.38901504359431444,
+          "center_rms_sigma": 0.1214907146222349,
+          "cov_frob_rms": 0.06378986325220624,
+          "cov_trace_bias": -0.03715208344905363,
+          "frozen_pass": true,
+          "mass_tv": 0.040530000000000004,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98574,
+          "precision_gap": 0.0031510034617577842,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.013041891053656385,
+          "valid_n": 100000,
+          "within_radius_n": 98574
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/critic_depth2/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 18561,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "b4725728a38f5f31a183075189e0d1e53eb2b43f391f5864693fac2722c0206f",
+        "strict_status": "PASS",
+        "terminal_pass_flags": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 5,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "critic_depth2"
+    },
+    {
+      "config_path": "configs/toy100/constraints_geometry_v1/lean_joint.json",
+      "config_sha256": "07c3187cc6b4e222b7e13feb22e5fb7e0b738230768976857f4542b12eaeb29b",
+      "delta": {
+        "batch_size": 1024,
+        "d_hidden": 64,
+        "fourier": 2,
+        "num_particles": 10000
+      },
+      "grid100": {
+        "accuracy_status": "PASS",
+        "coverage_status": "PASS",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.03272640013792838,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5543762929023196,
+          "all_finite": true,
+          "center_max_sigma": 0.37092797280037426,
+          "center_rms_sigma": 0.1460126197980807,
+          "cov_frob_rms": 0.11494363345122369,
+          "cov_trace_bias": -0.03272640013792838,
+          "frozen_pass": true,
+          "mass_tv": 0.052149999999999995,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9801,
+          "precision_gap": 0.008791003461757763,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.01164045618291698,
+          "valid_n": 20000,
+          "within_radius_n": 19602
+        },
+        "final_coverage": {
+          "hq": 0.9801,
+          "mass_tv": 0.05215,
+          "max_cov_eig_ratio": 1.2548569265205978,
+          "max_mode_mass": 0.014,
+          "max_radial_median_ratio": 1.1429568977920666,
+          "min_cov_eig_ratio": 0.6813245250427957,
+          "min_hq_count": 132,
+          "min_hq_mode_mass": 0.0066,
+          "min_radial_median_ratio": 0.8534157964035554,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9801,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03684233018873739,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5331251482542133,
+          "all_finite": true,
+          "center_max_sigma": 0.26639565363715206,
+          "center_rms_sigma": 0.12129190775924328,
+          "cov_frob_rms": 0.06348235035557624,
+          "cov_trace_bias": -0.03684233018873739,
+          "frozen_pass": true,
+          "mass_tv": 0.04955999999999999,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98002,
+          "precision_gap": 0.008871003461757732,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.013264710093330523,
+          "valid_n": 100000,
+          "within_radius_n": 98002
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/rows/lean_joint/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 9089,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999332427978516,
+          "prior_initial_min": -4.999757289886475,
+          "prior_initial_sha256": "66829d40b7bc6d89099d61c7f9133d37018d45abe1cd1adc03b4952d642466eb",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 20000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            10000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "01816e9d4e1699e7ba86e5330206ae5574a10d47605f6d0d79e19223b8bae9ba",
+        "strict_status": "PASS",
+        "terminal_pass_flags": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 5,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "slug": "lean_joint"
+    }
+  ],
+  "original_recipe_promotions": {
+    "affine_empirical_box": {
+      "rotated100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.0343648636547661,
+          "accuracy_pass": true,
+          "accuracy_score": 0.4886509938721372,
+          "all_finite": true,
+          "center_max_sigma": 0.27083464069621926,
+          "center_rms_sigma": 0.11064447952412043,
+          "cov_frob_rms": 0.12164380644793396,
+          "cov_trace_bias": -0.0343648636547661,
+          "frozen_pass": true,
+          "mass_tv": 0.039299999999999995,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9768,
+          "precision_gap": 0.012091003461757732,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.016109317652811428,
+          "valid_n": 20000,
+          "within_radius_n": 19536
+        },
+        "final_coverage": {
+          "hq": 0.97675,
+          "mass_tv": 0.0393,
+          "max_cov_eig_ratio": 1.2325794401906083,
+          "max_mode_mass": 0.0122,
+          "max_radial_median_ratio": 1.0819052650036225,
+          "min_cov_eig_ratio": 0.6846857009270835,
+          "min_hq_count": 117,
+          "min_hq_mode_mass": 0.00585,
+          "min_radial_median_ratio": 0.8724821245054972,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.97675,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03743560717733663,
+          "accuracy_pass": true,
+          "accuracy_score": 0.4312096531293472,
+          "all_finite": true,
+          "center_max_sigma": 0.16535699221662986,
+          "center_rms_sigma": 0.07486582555683703,
+          "cov_frob_rms": 0.06466302844736621,
+          "cov_trace_bias": -0.03743560717733663,
+          "frozen_pass": true,
+          "mass_tv": 0.03376,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.97691,
+          "precision_gap": 0.011981003461757789,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.01653946985172683,
+          "valid_n": 100000,
+          "within_radius_n": 97691
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/promotion_empirical/rotated100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "init_data_lower": [
+            -6.033543586730957,
+            -6.060293197631836
+          ],
+          "init_data_samples": 2048,
+          "init_data_seed_offset": 701,
+          "init_data_sha256": "0f2e73eef748acd3f34dd9b254a079617b4729563df5b0673a9af72ab1a41404",
+          "init_data_upper": [
+            6.02750825881958,
+            6.053822994232178
+          ],
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 6.053731918334961,
+          "prior_initial_min": -6.058041095733643,
+          "prior_initial_sha256": "90faf5da215467df6f8ec67245b761985250ef1a60d9897783519e4dbfcada90",
+          "prior_initialization": "empirical_box",
+          "prior_parameters": 40000,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_empirical_box_v1"
+        },
+        "source_archive_sha256": "1e91b58144824e358fbe8e93e644a86251770201b83d873cadbd2737470afd7a",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 4,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "staggered100": {
+        "accuracy_status": "PASS",
+        "coverage_status": "PASS",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.035924535205038355,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5604552356523048,
+          "all_finite": true,
+          "center_max_sigma": 0.29627551790221124,
+          "center_rms_sigma": 0.1217854771417454,
+          "cov_frob_rms": 0.11971709621982017,
+          "cov_trace_bias": -0.035924535205038355,
+          "frozen_pass": true,
+          "mass_tv": 0.054599999999999996,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9864,
+          "precision_gap": 0.0024910034617576793,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.014545928194004354,
+          "valid_n": 20000,
+          "within_radius_n": 19728
+        },
+        "final_coverage": {
+          "hq": 0.9864,
+          "mass_tv": 0.054599999999999996,
+          "max_cov_eig_ratio": 1.2100449754726827,
+          "max_mode_mass": 0.01245,
+          "max_radial_median_ratio": 1.108407553814714,
+          "min_cov_eig_ratio": 0.6571717314885309,
+          "min_hq_count": 124,
+          "min_hq_mode_mass": 0.0062,
+          "min_radial_median_ratio": 0.8420239123595701,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9864,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03668784219212606,
+          "accuracy_pass": true,
+          "accuracy_score": 0.47447077376125574,
+          "all_finite": true,
+          "center_max_sigma": 0.19397199854554176,
+          "center_rms_sigma": 0.08624420318274828,
+          "cov_frob_rms": 0.06379854129617783,
+          "cov_trace_bias": -0.03668784219212606,
+          "frozen_pass": true,
+          "mass_tv": 0.04342,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98488,
+          "precision_gap": 0.004011003461757756,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.01504467962173417,
+          "valid_n": 100000,
+          "within_radius_n": 98488
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/promotion_empirical/staggered100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "init_data_lower": [
+            -3.9040048122406006,
+            -4.870114326477051
+          ],
+          "init_data_samples": 2048,
+          "init_data_seed_offset": 701,
+          "init_data_sha256": "f8c7cc144cf6773e3574fdbb21cffaf48e338507ba1ac7fa8206e66c1b54c1fa",
+          "init_data_upper": [
+            3.8965322971343994,
+            4.8274946212768555
+          ],
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.827421188354492,
+          "prior_initial_min": -4.868311405181885,
+          "prior_initial_sha256": "2c67713b1a0ebc2eb3b861b94166a7d21c33957ef7f5d9958e14b2d2ebea87cc",
+          "prior_initialization": "empirical_box",
+          "prior_parameters": 40000,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_empirical_box_v1"
+        },
+        "source_archive_sha256": "54aedccbf8ada2a2e0613d215d9eaebe5b73ee218663b368f8254179de3c56cc",
+        "strict_status": "PASS",
+        "terminal_pass_flags": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 5,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      }
+    },
+    "critic64": {
+      "rotated100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.03189722017041263,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5411964491492377,
+          "all_finite": true,
+          "center_max_sigma": 0.2978180343334053,
+          "center_rms_sigma": 0.12597061995619313,
+          "cov_frob_rms": 0.12168501951931035,
+          "cov_trace_bias": -0.03189722017041263,
+          "frozen_pass": false,
+          "mass_tv": 0.052000000000000005,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.9676,
+          "precision_gap": 0.021291003461757718,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.013971753137807685,
+          "valid_n": 20000,
+          "within_radius_n": 19352
+        },
+        "final_coverage": {
+          "hq": 0.9676,
+          "mass_tv": 0.052000000000000005,
+          "max_cov_eig_ratio": 1.1768345607204802,
+          "max_mode_mass": 0.013,
+          "max_radial_median_ratio": 1.1578078585195624,
+          "min_cov_eig_ratio": 0.6283506356732035,
+          "min_hq_count": 130,
+          "min_hq_mode_mass": 0.0065,
+          "min_radial_median_ratio": 0.864698661108311,
+          "modes": 100,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.9676,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03507972047489938,
+          "accuracy_pass": true,
+          "accuracy_score": 0.48025110654829817,
+          "all_finite": true,
+          "center_max_sigma": 0.20523047614839418,
+          "center_rms_sigma": 0.09314365783403632,
+          "cov_frob_rms": 0.05980601133481734,
+          "cov_trace_bias": -0.03507972047489938,
+          "frozen_pass": false,
+          "mass_tv": 0.045829999999999996,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.96655,
+          "precision_gap": 0.022341003461757714,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.01362622395762736,
+          "valid_n": 100000,
+          "within_radius_n": 96655
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/promotion_critic64/rotated100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 9345,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "6e1850ccbcb72c5aae3a194f1352684fbbab2d230f667638ac3951f75bf7608a",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "staggered100": {
+        "accuracy_status": "PASS",
+        "coverage_status": "PASS",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.0370077585522024,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5485880724192131,
+          "all_finite": true,
+          "center_max_sigma": 0.28858990658565975,
+          "center_rms_sigma": 0.12177775313485512,
+          "cov_frob_rms": 0.11987974328779584,
+          "cov_trace_bias": -0.0370077585522024,
+          "frozen_pass": true,
+          "mass_tv": 0.04945,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.98005,
+          "precision_gap": 0.008841003461757757,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.01564877087255545,
+          "valid_n": 20000,
+          "within_radius_n": 19601
+        },
+        "final_coverage": {
+          "hq": 0.98005,
+          "mass_tv": 0.049449999999999994,
+          "max_cov_eig_ratio": 1.1922557841892152,
+          "max_mode_mass": 0.01375,
+          "max_radial_median_ratio": 1.1577983020239713,
+          "min_cov_eig_ratio": 0.6225313854525841,
+          "min_hq_count": 121,
+          "min_hq_mode_mass": 0.00605,
+          "min_radial_median_ratio": 0.8603020254058653,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.98005,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03703850313677848,
+          "accuracy_pass": true,
+          "accuracy_score": 0.47855615369577587,
+          "all_finite": true,
+          "center_max_sigma": 0.24643549308931306,
+          "center_rms_sigma": 0.10785318085977973,
+          "cov_frob_rms": 0.06334579331911204,
+          "cov_trace_bias": -0.03703850313677848,
+          "frozen_pass": true,
+          "mass_tv": 0.0383,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.97904,
+          "precision_gap": 0.009851003461757712,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.01464961383132346,
+          "valid_n": 100000,
+          "within_radius_n": 97904
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/promotion_critic64/staggered100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 9345,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "6e1850ccbcb72c5aae3a194f1352684fbbab2d230f667638ac3951f75bf7608a",
+        "strict_status": "PASS",
+        "terminal_pass_flags": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 5,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      }
+    },
+    "critic_depth2": {
+      "rotated100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.03656662293129154,
+          "accuracy_pass": true,
+          "accuracy_score": 0.6136495804964648,
+          "all_finite": true,
+          "center_max_sigma": 0.41083257667038064,
+          "center_rms_sigma": 0.16056580627274208,
+          "cov_frob_rms": 0.12000180776636642,
+          "cov_trace_bias": -0.03656662293129154,
+          "frozen_pass": false,
+          "mass_tv": 0.05480000000000001,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.9283,
+          "precision_gap": 0.06059100346175772,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.014910789119035983,
+          "valid_n": 20000,
+          "within_radius_n": 18566
+        },
+        "final_coverage": {
+          "hq": 0.92835,
+          "mass_tv": 0.0548,
+          "max_cov_eig_ratio": 1.2473701828325034,
+          "max_mode_mass": 0.01315,
+          "max_radial_median_ratio": 1.1867710476514646,
+          "min_cov_eig_ratio": 0.6898121259386277,
+          "min_hq_count": 97,
+          "min_hq_mode_mass": 0.00485,
+          "min_radial_median_ratio": 0.869873883386572,
+          "modes": 99,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.92835,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03517645307036421,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5327270249389435,
+          "all_finite": true,
+          "center_max_sigma": 0.36964671244523506,
+          "center_rms_sigma": 0.1352025898864414,
+          "cov_frob_rms": 0.06198635607377187,
+          "cov_trace_bias": -0.03517645307036421,
+          "frozen_pass": false,
+          "mass_tv": 0.04860000000000001,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.92749,
+          "precision_gap": 0.0614010034617577,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.011725224784796984,
+          "valid_n": 100000,
+          "within_radius_n": 92749
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/promotion_critic_depth2/rotated100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 18561,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "094aa44536d3bfdb8d26cdfa89eceadee1ec17a4529dc098683fce1d17e4bfe9",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "staggered100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.03770617319179703,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5850159328191492,
+          "all_finite": true,
+          "center_max_sigma": 0.3047011299356338,
+          "center_rms_sigma": 0.12998754033785828,
+          "cov_frob_rms": 0.1200834393439419,
+          "cov_trace_bias": -0.03770617319179703,
+          "frozen_pass": true,
+          "mass_tv": 0.05675,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9757,
+          "precision_gap": 0.013191003461757722,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.014689238573440067,
+          "valid_n": 20000,
+          "within_radius_n": 19514
+        },
+        "final_coverage": {
+          "hq": 0.9757,
+          "mass_tv": 0.056749999999999995,
+          "max_cov_eig_ratio": 1.2557300814926249,
+          "max_mode_mass": 0.0131,
+          "max_radial_median_ratio": 1.0935226627326684,
+          "min_cov_eig_ratio": 0.6596432846530277,
+          "min_hq_count": 129,
+          "min_hq_mode_mass": 0.00645,
+          "min_radial_median_ratio": 0.8293915579242097,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9757,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03731580108186805,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5135022226230469,
+          "all_finite": true,
+          "center_max_sigma": 0.22758658466197912,
+          "center_rms_sigma": 0.11478596799180128,
+          "cov_frob_rms": 0.06479233857857528,
+          "cov_trace_bias": -0.03731580108186805,
+          "frozen_pass": true,
+          "mass_tv": 0.045349999999999994,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.97571,
+          "precision_gap": 0.013181003461757768,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.014043508255246695,
+          "valid_n": 100000,
+          "within_radius_n": 97571
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/promotion_critic_depth2/staggered100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 18561,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999924182891846,
+          "prior_initial_min": -4.999642848968506,
+          "prior_initial_sha256": "ece1639f2519f30c1a2cc0b39047e2e1347d2de2e4ea54d06b5e22cbef69c750",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 40000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "16a8aaf74b581d642a47c76030f5213dc5d835afc91262227c1aead88b1e4b43",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 4,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      }
+    },
+    "lean_joint": {
+      "rotated100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.023895000936759447,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5123745448071529,
+          "all_finite": true,
+          "center_max_sigma": 0.38026312081775854,
+          "center_rms_sigma": 0.14212793405522628,
+          "cov_frob_rms": 0.12069794790541644,
+          "cov_trace_bias": -0.023895000936759447,
+          "frozen_pass": true,
+          "mass_tv": 0.04945,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.975,
+          "precision_gap": 0.013891003461757756,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.011029673316728772,
+          "valid_n": 20000,
+          "within_radius_n": 19500
+        },
+        "final_coverage": {
+          "hq": 0.975,
+          "mass_tv": 0.04945,
+          "max_cov_eig_ratio": 1.1908752678887817,
+          "max_mode_mass": 0.0126,
+          "max_radial_median_ratio": 1.151470149854299,
+          "min_cov_eig_ratio": 0.6797479858438834,
+          "min_hq_count": 130,
+          "min_hq_mode_mass": 0.0065,
+          "min_radial_median_ratio": 0.8803352950995053,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.975,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03366867907104909,
+          "accuracy_pass": true,
+          "accuracy_score": 0.4683543731373783,
+          "all_finite": true,
+          "center_max_sigma": 0.3196283141055315,
+          "center_rms_sigma": 0.12126318736524708,
+          "cov_frob_rms": 0.06549288239935563,
+          "cov_trace_bias": -0.03366867907104909,
+          "frozen_pass": true,
+          "mass_tv": 0.03729999999999999,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.97375,
+          "precision_gap": 0.01514100346175773,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.01234992393384482,
+          "valid_n": 100000,
+          "within_radius_n": 97375
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/promotion_lean_joint/rotated100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 9089,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999332427978516,
+          "prior_initial_min": -4.999757289886475,
+          "prior_initial_sha256": "66829d40b7bc6d89099d61c7f9133d37018d45abe1cd1adc03b4952d642466eb",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 20000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            10000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "d825cc1e8c9b555a59d82d146b398656b92dd17170947bf469ce5d3be5731daf",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 4,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "staggered100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "PASS",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.03299899005279283,
+          "accuracy_pass": false,
+          "accuracy_score": 0.5996278475946345,
+          "all_finite": true,
+          "center_max_sigma": 0.38899300761050776,
+          "center_rms_sigma": 0.15158671540818877,
+          "cov_frob_rms": 0.11589471101588318,
+          "cov_trace_bias": -0.03299899005279283,
+          "frozen_pass": true,
+          "mass_tv": 0.06205,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.9815,
+          "precision_gap": 0.007391003461757695,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.011056849845719974,
+          "valid_n": 20000,
+          "within_radius_n": 19630
+        },
+        "final_coverage": {
+          "hq": 0.9815,
+          "mass_tv": 0.06205,
+          "max_cov_eig_ratio": 1.1353773894272357,
+          "max_mode_mass": 0.0135,
+          "max_radial_median_ratio": 1.0898413372769213,
+          "min_cov_eig_ratio": 0.6720961345008686,
+          "min_hq_count": 134,
+          "min_hq_mode_mass": 0.0067,
+          "min_radial_median_ratio": 0.8755225639147846,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9815,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03619262780794641,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5687103900135431,
+          "all_finite": true,
+          "center_max_sigma": 0.3553754802635603,
+          "center_rms_sigma": 0.13484632153886478,
+          "cov_frob_rms": 0.06335286252110994,
+          "cov_trace_bias": -0.03619262780794641,
+          "frozen_pass": true,
+          "mass_tv": 0.055889999999999995,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98175,
+          "precision_gap": 0.007141003461757722,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.012287346971215363,
+          "valid_n": 100000,
+          "within_radius_n": 98175
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/promotion_lean_joint/staggered100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 9089,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.999332427978516,
+          "prior_initial_min": -4.999757289886475,
+          "prior_initial_sha256": "66829d40b7bc6d89099d61c7f9133d37018d45abe1cd1adc03b4952d642466eb",
+          "prior_initialization": "uniform_square",
+          "prior_parameters": 20000,
+          "prior_scale": 5.0,
+          "prior_shape": [
+            10000,
+            2
+          ],
+          "toy100_model": "affine_square_v1"
+        },
+        "source_archive_sha256": "d825cc1e8c9b555a59d82d146b398656b92dd17170947bf469ce5d3be5731daf",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      }
+    }
+  },
+  "protocol": "toy100-geometry-constraint-results-v1",
+  "retention": {
+    "moment": {
+      "all_file_sha256_equal": true,
+      "bytes": 11416796,
+      "durable_local_path": "artifacts/toy100-constraints-geometry-moment-v1",
+      "files": 67,
+      "original_ram_path": "/dev/shm/particlegan-constraints-geometry-moment-v1-3eb182f",
+      "tree_sha256": "ce31c6a0e1d2434caa33642dbc6cb2d7b042717d03566050bbecbad12c05f3f0"
+    },
+    "v1": {
+      "all_file_sha256_equal": true,
+      "bytes": 323218604,
+      "durable_local_path": "artifacts/toy100-constraints-geometry-v1",
+      "files": 1654,
+      "original_ram_path": "/dev/shm/particlegan-constraints-geometry-v1-346b1ed",
+      "tree_sha256": "cf7533b48ccec3e0c40ab679d23dd9ca4e55c01f3cf56f3fcbe8309f38ed6626"
+    }
+  },
+  "simple_core_empirical_interaction": {
+    "config_path": "configs/toy100/constraints_geometry_v2/simple_empirical_box.json",
+    "config_sha256": "eb5ac83c61ca152bc8ff1e11af0294e3a5351871cdb9d8c3e9a37590773c6ced",
+    "native": {
+      "grid100": {
+        "accuracy_status": "FAIL",
+        "coverage_status": "FAIL",
+        "final_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.12675000000000003,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.8436,
+          "precision_gap": 0.14529100346175772,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 20000,
+          "within_radius_n": 16872
+        },
+        "final_coverage": {
+          "hq": 0.8436,
+          "mass_tv": 0.12674999999999997,
+          "max_cov_eig_ratio": 3.5448916498910013,
+          "max_mode_mass": 0.01575,
+          "max_radial_median_ratio": 2.0268314519131976,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 0,
+          "min_hq_mode_mass": 0.0,
+          "min_radial_median_ratio": 0.0,
+          "modes": 79,
+          "n": 20000,
+          "passed": false,
+          "precision": 0.8436,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": null,
+          "accuracy_pass": false,
+          "accuracy_score": null,
+          "all_finite": true,
+          "center_max_sigma": null,
+          "center_rms_sigma": null,
+          "cov_frob_rms": null,
+          "cov_trace_bias": null,
+          "frozen_pass": false,
+          "mass_tv": 0.12369,
+          "n": 100000,
+          "passed": false,
+          "precision": 0.8445,
+          "precision_gap": 0.1443910034617577,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": null,
+          "valid_n": 100000,
+          "within_radius_n": 84450
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/simple_interaction/grid100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "init_data_lower": [
+            -4.579004764556885,
+            -4.621766090393066
+          ],
+          "init_data_samples": 2048,
+          "init_data_seed_offset": 701,
+          "init_data_sha256": "bb1a72a598008fe7631bccd7fc26c9a9ed652d0849191709f7e1c8e75d597adb",
+          "init_data_upper": [
+            4.571532249450684,
+            4.599872589111328
+          ],
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.5998029708862305,
+          "prior_initial_min": -4.620051860809326,
+          "prior_initial_sha256": "3e32a9c585d3899980c9fef5538ef2793649cf63f979fea2645b75c9c93eb643",
+          "prior_initialization": "empirical_box",
+          "prior_parameters": 40000,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_empirical_box_v1"
+        },
+        "source_archive_sha256": "bbe3489a5f2a6c1bbbe9c544f6e9b30cb179d11f4354b4732b9e14449882dffa",
+        "strict_status": "FAIL",
+        "terminal_pass_flags": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "terminal_passes": 0,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "rotated100": {
+        "accuracy_status": "PASS",
+        "coverage_status": "PASS",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.0369151462433962,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5140117820321572,
+          "all_finite": true,
+          "center_max_sigma": 0.24559736061915902,
+          "center_rms_sigma": 0.11593477785091218,
+          "cov_frob_rms": 0.12027119172112084,
+          "cov_trace_bias": -0.0369151462433962,
+          "frozen_pass": true,
+          "mass_tv": 0.0421,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9884,
+          "precision_gap": 0.0004910034617577885,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.016222204390937578,
+          "valid_n": 20000,
+          "within_radius_n": 19768
+        },
+        "final_coverage": {
+          "hq": 0.9884,
+          "mass_tv": 0.0421,
+          "max_cov_eig_ratio": 1.201052011097838,
+          "max_mode_mass": 0.01255,
+          "max_radial_median_ratio": 1.163857895817273,
+          "min_cov_eig_ratio": 0.6544935143360895,
+          "min_hq_count": 139,
+          "min_hq_mode_mass": 0.00695,
+          "min_radial_median_ratio": 0.8805460279243114,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.9884,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.03988941711211291,
+          "accuracy_pass": true,
+          "accuracy_score": 0.44311386016789717,
+          "all_finite": true,
+          "center_max_sigma": 0.20223532935830013,
+          "center_rms_sigma": 0.07353320423946917,
+          "cov_frob_rms": 0.06324623429333227,
+          "cov_trace_bias": -0.03988941711211291,
+          "frozen_pass": true,
+          "mass_tv": 0.034879999999999994,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98788,
+          "precision_gap": 0.0010110034617577535,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.01698247660079122,
+          "valid_n": 100000,
+          "within_radius_n": 98788
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/simple_interaction/rotated100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "init_data_lower": [
+            -6.033543586730957,
+            -6.060293197631836
+          ],
+          "init_data_samples": 2048,
+          "init_data_seed_offset": 701,
+          "init_data_sha256": "0f2e73eef748acd3f34dd9b254a079617b4729563df5b0673a9af72ab1a41404",
+          "init_data_upper": [
+            6.02750825881958,
+            6.053822994232178
+          ],
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 6.053731918334961,
+          "prior_initial_min": -6.058041095733643,
+          "prior_initial_sha256": "90faf5da215467df6f8ec67245b761985250ef1a60d9897783519e4dbfcada90",
+          "prior_initialization": "empirical_box",
+          "prior_parameters": 40000,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_empirical_box_v1"
+        },
+        "source_archive_sha256": "4cae8fa07c12040a508bd7236f459d257df1da47c36d3092f0bb2ee350960476",
+        "strict_status": "PASS",
+        "terminal_pass_flags": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 5,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      },
+      "staggered100": {
+        "accuracy_status": "PASS",
+        "coverage_status": "PASS",
+        "final_accuracy": {
+          "abs_cov_trace_bias": 0.03730307531054633,
+          "accuracy_pass": true,
+          "accuracy_score": 0.5458565858421243,
+          "all_finite": true,
+          "center_max_sigma": 0.24618945681158813,
+          "center_rms_sigma": 0.11790523318141091,
+          "cov_frob_rms": 0.11786262377170245,
+          "cov_trace_bias": -0.03730307531054633,
+          "frozen_pass": true,
+          "mass_tv": 0.04915,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.98815,
+          "precision_gap": 0.000741003461757761,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.016068110307572492,
+          "valid_n": 20000,
+          "within_radius_n": 19763
+        },
+        "final_coverage": {
+          "hq": 0.98815,
+          "mass_tv": 0.04915,
+          "max_cov_eig_ratio": 1.287228563228543,
+          "max_mode_mass": 0.0131,
+          "max_radial_median_ratio": 1.089761057070714,
+          "min_cov_eig_ratio": 0.6591149194271149,
+          "min_hq_count": 137,
+          "min_hq_mode_mass": 0.00685,
+          "min_radial_median_ratio": 0.8526993737569315,
+          "modes": 100,
+          "n": 20000,
+          "passed": true,
+          "precision": 0.98815,
+          "valid_n": 20000
+        },
+        "holdout_accuracy": {
+          "abs_cov_trace_bias": 0.0378354674852015,
+          "accuracy_pass": true,
+          "accuracy_score": 0.4461768542930172,
+          "all_finite": true,
+          "center_max_sigma": 0.17040241811478307,
+          "center_rms_sigma": 0.07907659923903922,
+          "cov_frob_rms": 0.06328701943545217,
+          "cov_trace_bias": -0.0378354674852015,
+          "frozen_pass": true,
+          "mass_tv": 0.03642,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98767,
+          "precision_gap": 0.001221003461757686,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.016158789844994303,
+          "valid_n": 100000,
+          "within_radius_n": 98767
+        },
+        "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/simple_interaction/staggered100",
+        "model_policy": {
+          "discriminator_class": "SimpleMLPDiscriminator",
+          "discriminator_parameters": 35073,
+          "discriminator_wrapper_class": "InputNoise",
+          "generator_base_parameters": 6,
+          "generator_class": "Linear",
+          "generator_initial_bias": [
+            0.0,
+            0.0
+          ],
+          "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+          "generator_initial_weight": [
+            [
+              1.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+          "generator_initialization": "identity",
+          "generator_parameters": 6,
+          "generator_wrapper_class": "OutputNoise",
+          "init_data_lower": [
+            -3.9040048122406006,
+            -4.870114326477051
+          ],
+          "init_data_samples": 2048,
+          "init_data_seed_offset": 701,
+          "init_data_sha256": "f8c7cc144cf6773e3574fdbb21cffaf48e338507ba1ac7fa8206e66c1b54c1fa",
+          "init_data_upper": [
+            3.8965322971343994,
+            4.8274946212768555
+          ],
+          "prior_class": "ParticlePrior",
+          "prior_initial_max": 4.827421188354492,
+          "prior_initial_min": -4.868311405181885,
+          "prior_initial_sha256": "2c67713b1a0ebc2eb3b861b94166a7d21c33957ef7f5d9958e14b2d2ebea87cc",
+          "prior_initialization": "empirical_box",
+          "prior_parameters": 40000,
+          "prior_shape": [
+            20000,
+            2
+          ],
+          "toy100_model": "affine_empirical_box_v1"
+        },
+        "source_archive_sha256": "bbe3489a5f2a6c1bbbe9c544f6e9b30cb179d11f4354b4732b9e14449882dffa",
+        "strict_status": "PASS",
+        "terminal_pass_flags": [
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "terminal_passes": 5,
+        "terminal_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ]
+      }
+    },
+    "old_nineteen": {
+      "cases": {
+        "ae_gan_hold": "PASS",
+        "cover_leftover": "PASS",
+        "img_bars4": "PASS",
+        "img_blobs4": "PASS",
+        "img_intensity2": "PASS",
+        "img_stripes2": "PASS",
+        "mid_scale_identity": "PASS",
+        "mode_hold": "PASS",
+        "residual_student": "PASS",
+        "trajectory": "PASS",
+        "two_pole": "PASS",
+        "unipolar": "PASS",
+        "unused_token_hold": "PASS",
+        "vector_anisotropic": "PASS",
+        "vector_overlap": "PASS",
+        "vector_spiral": "PASS",
+        "vector_two_broad": "PASS",
+        "vector_unequal_mass": "PASS",
+        "vector_unequal_width": "PASS"
+      },
+      "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/simple_interaction/old19",
+      "passed": 19,
+      "required": 19,
+      "status": "PASS"
+    },
+    "old_six": {
+      "cases": {
+        "img_bars4": "PASS",
+        "mode_hold": "PASS",
+        "residual_student": "PASS",
+        "trajectory": "PASS",
+        "vector_overlap": "PASS",
+        "vector_unequal_mass": "PASS"
+      },
+      "local_evidence_path": "artifacts/toy100-constraints-geometry-v1/simple_interaction/old6",
+      "passed": 6,
+      "required": 6,
+      "status": "PASS"
+    }
+  },
+  "simple_core_moment_box": {
+    "config_path": "configs/toy100/constraints_geometry_v3/simple_moment_box.json",
+    "config_sha256": "dd85c189eb15469a3f521e189cc7086367bfc688c0f459e4cb9936c0925e053e",
+    "grid100": {
+      "accuracy_status": "FAIL",
+      "coverage_status": "FAIL",
+      "final_accuracy": {
+        "abs_cov_trace_bias": 0.04688686803116082,
+        "accuracy_pass": false,
+        "accuracy_score": 1.649304918250438,
+        "all_finite": true,
+        "center_max_sigma": 1.3938547776887509,
+        "center_rms_sigma": 0.6103108808815682,
+        "cov_frob_rms": 0.14364027116759562,
+        "cov_trace_bias": -0.04688686803116082,
+        "frozen_pass": false,
+        "mass_tv": 0.09609999999999999,
+        "n": 20000,
+        "passed": false,
+        "precision": 0.9055,
+        "precision_gap": 0.08339100346175776,
+        "problem": "grid100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 0.059005196864625464,
+        "valid_n": 20000,
+        "within_radius_n": 18110
+      },
+      "final_coverage": {
+        "hq": 0.90545,
+        "mass_tv": 0.09609999999999999,
+        "max_cov_eig_ratio": 1.3428071812772904,
+        "max_mode_mass": 0.0216,
+        "max_radial_median_ratio": 1.5305376849369245,
+        "min_cov_eig_ratio": 0.5932040518863407,
+        "min_hq_count": 58,
+        "min_hq_mode_mass": 0.0029,
+        "min_radial_median_ratio": 0.9170076256495036,
+        "modes": 98,
+        "n": 20000,
+        "passed": false,
+        "precision": 0.90545,
+        "valid_n": 20000
+      },
+      "holdout_accuracy": {
+        "abs_cov_trace_bias": 0.05223026871922709,
+        "accuracy_pass": false,
+        "accuracy_score": 1.6461666321463484,
+        "all_finite": true,
+        "center_max_sigma": 1.2662857791641713,
+        "center_rms_sigma": 0.6095341917579344,
+        "cov_frob_rms": 0.09551420617251778,
+        "cov_trace_bias": -0.05223026871922709,
+        "frozen_pass": false,
+        "mass_tv": 0.09683000000000001,
+        "n": 100000,
+        "passed": false,
+        "precision": 0.90418,
+        "precision_gap": 0.08471100346175775,
+        "problem": "grid100",
+        "protocol": "toy100-accuracy-v1",
+        "radial_ks": 0.05603438197080468,
+        "valid_n": 100000,
+        "within_radius_n": 90418
+      },
+      "local_evidence_path": "artifacts/toy100-constraints-geometry-moment-v1/grid100",
+      "model_policy": {
+        "discriminator_class": "SimpleMLPDiscriminator",
+        "discriminator_parameters": 35073,
+        "discriminator_wrapper_class": "InputNoise",
+        "generator_base_parameters": 6,
+        "generator_class": "Linear",
+        "generator_initial_bias": [
+          0.0,
+          0.0
+        ],
+        "generator_initial_bias_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+        "generator_initial_weight": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "generator_initial_weight_sha256": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a",
+        "generator_initialization": "identity",
+        "generator_parameters": 6,
+        "generator_wrapper_class": "OutputNoise",
+        "init_data_file": "initialization-samples.npy",
+        "init_data_lower": [
+          -4.970133304595947,
+          -4.923521041870117
+        ],
+        "init_data_mean": [
+          -0.021629001945257187,
+          0.028748903423547745
+        ],
+        "init_data_samples": 2048,
+        "init_data_seed_offset": 701,
+        "init_data_sha256": "bb1a72a598008fe7631bccd7fc26c9a9ed652d0849191709f7e1c8e75d597adb",
+        "init_data_std": [
+          2.857020378112793,
+          2.85919451713562
+        ],
+        "init_data_upper": [
+          4.926875591278076,
+          4.981019020080566
+        ],
+        "prior_class": "ParticlePrior",
+        "prior_initial_max": 4.98094367980957,
+        "prior_initial_min": -4.969779968261719,
+        "prior_initial_sha256": "0994d9e09a874ca40a96cea762127a0487b2d5255af2bc832382cb78debd85c3",
+        "prior_initialization": "moment_box",
+        "prior_parameters": 40000,
+        "prior_shape": [
+          20000,
+          2
+        ],
+        "toy100_model": "affine_moment_box_v1"
+      },
+      "source_archive_sha256": "deb0e8987b6d5237372b670da1b75ef664011973fab06a44b6c907f610698a6a",
+      "strict_status": "FAIL",
+      "terminal_pass_flags": [
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "terminal_passes": 0,
+      "terminal_steps": [
+        6000,
+        6250,
+        6500,
+        6750,
+        7000
+      ]
+    },
+    "old_six": {
+      "cases": {
+        "img_bars4": "PASS",
+        "mode_hold": "PASS",
+        "residual_student": "PASS",
+        "trajectory": "PASS",
+        "vector_overlap": "PASS",
+        "vector_unequal_mass": "PASS"
+      },
+      "local_evidence_path": "artifacts/toy100-constraints-geometry-moment-v1/old6",
+      "passed": 6,
+      "required": 6,
+      "status": "PASS"
+    },
+    "rotated100": "SKIPPED: strict grid gate failed",
+    "staggered100": "SKIPPED: strict grid gate failed"
+  },
+  "terminal_samples_per_check": 20000
+}

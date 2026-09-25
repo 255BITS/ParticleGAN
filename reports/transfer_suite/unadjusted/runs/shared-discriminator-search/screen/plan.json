@@ -1,0 +1,17 @@
+{
+  "purpose": "Frozen eight D-only cards under unchanged shared_c6; screen rare and unequal widths, then up to four cards on anisotropic/overlap, up to two complete six-data profiles. No additional cards.",
+  "architectures": [
+    "raw_softplus96_l3",
+    "raw_silu128_l3",
+    "quadratic_softplus96_l2",
+    "quadratic_tanh96_l3",
+    "residual_raw_softplus96_l3",
+    "residual_lowfreq_softplus96_l3",
+    "halfscore_fourier_skip96_l2",
+    "additive_raw_fourier64_l2"
+  ],
+  "tasks": [
+    "vector_unequal_mass",
+    "vector_unequal_width"
+  ]
+}

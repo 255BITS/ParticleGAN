@@ -1,0 +1,158 @@
+{
+  "base": "http://127.0.0.1:8787",
+  "observations": [
+    "Validation-selected default and all ten controller options",
+    "Reset starts paused at step0 with seed991000 and actual600px simulator PNG",
+    "Single Step advanced exactly once",
+    "Play advanced to 7; Pause preserved exact step after settling",
+    "Reset reproduced initial frame exactly and remained paused",
+    "Terminal auto-stop at step241, return284.994",
+    {
+      "terminalReason": "successful_landing"
+    },
+    {
+      "switch": "joint",
+      "selected": {
+        "controller": "joint",
+        "component": 300,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_control/joint/best.pt",
+        "action": [
+          -0.9999552369117737,
+          -0.9414798617362976
+        ]
+      }
+    },
+    {
+      "switch": "original",
+      "selected": {
+        "controller": "original",
+        "component": 1002,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander/adversarial/best.pt",
+        "action": [
+          -0.9931700229644775,
+          0.005274865310639143
+        ]
+      }
+    },
+    {
+      "switch": "expert",
+      "selected": {
+        "controller": "expert",
+        "component": null,
+        "checkpoint": null,
+        "action": [
+          -1,
+          -1
+        ]
+      }
+    },
+    {
+      "switch": "imitation",
+      "selected": {
+        "controller": "imitation",
+        "component": 89,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_control/imitation/best.pt",
+        "action": [
+          -0.9971033930778503,
+          -0.9890320301055908
+        ]
+      }
+    },
+    {
+      "switch": "state_probes",
+      "selected": {
+        "controller": "state_probes",
+        "component": 731,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_state_control/probes/best.pt",
+        "action": [
+          -0.9732125997543335,
+          -0.914863109588623
+        ]
+      }
+    },
+    {
+      "switch": "state_auxiliary",
+      "selected": {
+        "controller": "state_auxiliary",
+        "component": 930,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_state_control/auxiliary/best.pt",
+        "action": [
+          -0.9992625117301941,
+          -0.9768961668014526
+        ]
+      }
+    },
+    {
+      "switch": "sparse_probes",
+      "selected": {
+        "controller": "sparse_probes",
+        "component": 547,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_sparse_action/probes/best.pt",
+        "action": [
+          -0.9945368766784668,
+          -0.9962561726570129
+        ]
+      }
+    },
+    {
+      "switch": "sparse_auxiliary",
+      "selected": {
+        "controller": "sparse_auxiliary",
+        "component": 427,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_sparse_action/auxiliary/best.pt",
+        "action": [
+          -0.999489963054657,
+          -0.9831669330596924
+        ]
+      }
+    },
+    {
+      "switch": "gan_joint",
+      "selected": {
+        "controller": "gan_joint",
+        "component": 55,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_gan_control/joint/best.pt",
+        "action": [
+          -0.9998461604118347,
+          -0.9552611112594604
+        ]
+      }
+    },
+    {
+      "switch": "gan_marginals",
+      "selected": {
+        "controller": "gan_marginals",
+        "component": 517,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_gan_control/marginals/best.pt",
+        "action": [
+          -0.9992263317108154,
+          -0.9558176398277283
+        ]
+      }
+    },
+    "No browser JavaScript exceptions"
+  ],
+  "pause": {
+    "step": 7,
+    "playing": false,
+    "action": [
+      -0.9999691247940063,
+      -0.8277425169944763
+    ],
+    "previous_action": [
+      -0.999955952167511,
+      -0.8808813095092773
+    ]
+  },
+  "ending": {
+    "step": 241,
+    "done": true,
+    "terminated": true,
+    "truncated": false,
+    "return": 284.9941903173784,
+    "playing": false,
+    "playDisabled": true,
+    "stepDisabled": true
+  },
+  "errors": []
+}

@@ -1,0 +1,13 @@
+{
+  "purpose": "Bounded stage2: best four screen cards ranked by sustained passes then summed normalized final shortfall then suffix; screen all16 retained. Same shared_c6 recipe, D only.",
+  "architectures": [
+    "raw_silu128_l3",
+    "quadratic_tanh96_l3",
+    "raw_softplus96_l3",
+    "additive_raw_fourier64_l2"
+  ],
+  "tasks": [
+    "vector_anisotropic",
+    "vector_overlap"
+  ]
+}

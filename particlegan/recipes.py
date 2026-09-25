@@ -1,11 +1,11 @@
-"""Versioned, inspectable recipes selected in the repository's toy studies."""
+"""Shared hyperparameters and small component factories; callers own control flow."""
 from dataclasses import asdict, dataclass, replace
 import math
 
 
 @dataclass(frozen=True)
 class Recipe:
-    name: str = "gan"
+    name: str = "gan_v3"
     model: str = "gan"
     z_dim: int = 4
     num_particles: int = 20_000
@@ -19,19 +19,19 @@ class Recipe:
     alpha_bar: tuple[float, ...] = (1.0, 0.9, 0.5, 0.05, 0.0001)
     batch_size: int = 256
     total_steps: int = 7_000
-    lr: float = 6e-4
-    d_lr_mult: float = 1.5
-    prior_lr_mult: float = 10.0
-    betas: tuple[float, float] = (0.0, 0.999)
+    lr: float = 0.00425
+    d_lr_mult: float = 1.0
+    prior_lr_mult: float = 2.0
+    betas: tuple[float, float] = (0.0, 0.99)
     prior_betas: tuple[float, float] | None = None
     loss_type: str = "logistic"
     gan_mode: str = "rp"
     reg_arm: str = "b_cap"
-    reg_coeff: float = 1.0
-    reg_kappa: float = 1.0
+    reg_coeff: float = 6.0
+    reg_kappa: float = 1.25
     reg_every: int = 1
     reg_method: str = "autograd"
-    prior_reg: float = 1.0
+    prior_reg: float = 0.05
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
@@ -90,6 +90,12 @@ class Recipe:
             raise ValueError("betas must contain two values in [0, 1)")
         if self.prior_betas is not None and (len(self.prior_betas) != 2 or any(not 0 <= b < 1 for b in self.prior_betas)):
             raise ValueError("prior_betas must contain two values in [0, 1) or be None")
+        # JSON commonly writes a zero moment as 0. Adam requires homogeneous
+        # floating-point moment values, even when an integer passes our range
+        # checks. Normalize only after validating the original values.
+        object.__setattr__(self, "betas", tuple(float(b) for b in self.betas))
+        if self.prior_betas is not None:
+            object.__setattr__(self, "prior_betas", tuple(float(b) for b in self.prior_betas))
         # Validate resolved component settings at construction, not later in training.
         self.make_loss()
         self.make_gradient_penalty()
@@ -198,35 +204,33 @@ class Recipe:
 
 
 def get_recipe(name="gan", **overrides):
-    """Inspectable GAN/DDGAN and particle autoencoder defaults; historical aliases remain accepted."""
-    if name in ("gan", "100gaussians"):
-        recipe = Recipe(name=name)
-    elif name == "mog":
-        recipe = Recipe(name=name, prior_kind="mog", num_particles=400,
-                        sigma_rel=1/40, standardize=True, total_steps=28_000,
-                        prior_lr_mult=100., prior_betas=(.5, .999))
-    elif name in ("ddgan", "denoising"):
-        recipe = Recipe(name=name, model="ddgan", num_classes=4,
-                        conditioning="ucd", total_steps=56_000)
-    elif name == "ddgan_mog":
-        recipe = get_recipe("ddgan").replace(
-            name=name, prior_kind="mog", num_particles=400, sigma_rel=1/40,
-            standardize=True, total_steps=100_000, prior_lr_mult=100.,
-            prior_betas=(.5, .999), lr_floor=1.,
-        )
-    elif name in ("ae_gan", "vae_gan", "ae_ddgan"):
-        image = name == "ae_ddgan"
-        mode = {"ae_gan": "ae", "vae_gan": "hard", "ae_ddgan": "ae"}[name]
-        recipe = Recipe(name=name, model="ddgan" if image else "gan",
-                        encoder_mode=mode, prior_kind="mog", num_particles=1024 if image else 400,
-                        z_dim=64 if image else 2, sigma_rel=.025, total_steps=10000 if image else 6000,
-                        batch_size=64 if image else 256, lr=.0003, prior_lr_mult=10.,
-                        prior_betas=(.5, .999), reg_every=4, lr_floor=1.,
-                        routing_temperature=.125 if image else .25,
-                        distance_reduction="mean" if image else "sum")
-    else:
-        raise ValueError(f"Unknown recipe {name!r}; choose gan, mog, ddgan, ddgan_mog, ae_gan, vae_gan, or ae_ddgan")
-    return recipe.replace(**overrides)
+    """Select a model family with current shared defaults and explicit overrides.
+
+    Names configure components, never training control flow or historical
+    optimizer versions. Use ``Recipe(**saved_fields)`` for resolved checkpoints
+    and ``recipe.replace(name=...)`` for custom report labels.
+    """
+    families = {
+        "gan": {},
+        "mog": dict(prior_kind="mog", sigma_rel=.025, num_particles=400),
+        "ddgan": dict(model="ddgan", conditioning="ucd", num_classes=4),
+        "ddgan_mog": dict(model="ddgan", conditioning="ucd", num_classes=4,
+                          prior_kind="mog", sigma_rel=.025, num_particles=400),
+        "ae_gan": dict(encoder_mode="ae", prior_kind="mog", sigma_rel=.025,
+                       num_particles=400, z_dim=2),
+        "vae_gan": dict(encoder_mode="hard", prior_kind="mog", sigma_rel=.025,
+                        num_particles=400, z_dim=2),
+        "ae_ddgan": dict(model="ddgan", encoder_mode="ae", prior_kind="mog",
+                         sigma_rel=.025, num_particles=1024, z_dim=64,
+                         batch_size=64, routing_temperature=.125,
+                         distance_reduction="mean"),
+    }
+    if name not in families:
+        raise ValueError(f"Unknown recipe {name!r}; choose {', '.join(families)}")
+    options = families[name]
+    if name != "gan":
+        options = {"name": name, **options}
+    return Recipe(**{**options, **overrides})
 
 
 def learning_rate_scale(step, total_steps, start=0.6, floor=0.05):

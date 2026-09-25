@@ -1,0 +1,14 @@
+[
+  {
+    "tag": "simple_common_low_floor",
+    "set": {
+      "lr_floor": 0.01
+    },
+    "remove": [
+      "network_lr_floor"
+    ],
+    "constraints": [
+      "one shared LR floor using existing network floor .01 for every player; retain capped horizon"
+    ]
+  }
+]

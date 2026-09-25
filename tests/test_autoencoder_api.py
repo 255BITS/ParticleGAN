@@ -106,7 +106,7 @@ def test_recipe_roundtrip_and_optimizer_encoder(name):
     assert p.sigma.grad is None
 
 
-def test_validation_and_old_recipes():
+def test_validation_and_explicit_components():
     p = prior()
     q = torch.zeros(2, 2, dtype=torch.float64)
     for kwargs in [{'draws': 0}, {'temperature': 0}, {'distance_reduction': 'bad'}]:
@@ -115,17 +115,17 @@ def test_validation_and_old_recipes():
     with pytest.raises(ValueError, match='at least two'):
         particle_vae(q, p, draws=1, hard=False).reconstruction_loss(torch.zeros(2, 1, 2), q)
     with pytest.raises(ValueError, match='offset'):
-        get_recipe('vae_gan').encode(q, p, offset=q)
+        get_recipe(prior_kind='mog', sigma_rel=0.025, encoder_mode='hard').encode(q, p, offset=q)
     with pytest.raises(ValueError, match='requires offset'):
-        get_recipe('ae_gan').encode(q, p)
+        get_recipe(prior_kind='mog', sigma_rel=0.025, encoder_mode='ae').encode(q, p)
     with pytest.raises(ValueError):
-        get_recipe('ae_gan', prior_kind='particles', sigma_rel=0)
+        get_recipe(encoder_mode='ae', prior_kind='particles', sigma_rel=0)
     assert get_recipe().total_steps == 7000
-    assert get_recipe('ddgan_mog').total_steps == 100000
+    assert get_recipe(model='ddgan', prior_kind='mog', sigma_rel=.025).total_steps == 7000
 
 
 def test_default_vae_has_no_kl_training_penalty():
-    recipe = get_recipe('vae_gan')
+    recipe = get_recipe(prior_kind='mog', sigma_rel=0.025, encoder_mode='hard')
     assert recipe.encoder_mode == 'hard'
     p = prior()
     encoded = recipe.encode(torch.ones(2, 2, dtype=torch.float64), p)

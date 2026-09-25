@@ -1,0 +1,35 @@
+{
+  "definitions": {
+    "version": 1,
+    "primary": "mean squared error of six continuous fields / common train std",
+    "scaler": "union of training current/next states, population std, floor .001",
+    "contact_threshold": 0.5,
+    "phase": "contact if either endpoint contact; else approach if current y < .25; else flight",
+    "rollout_horizons": [
+      1,
+      5,
+      20,
+      50
+    ],
+    "rollout_feedback": "contacts >= .5; no state refresh or ground snapping",
+    "rollout_anchor_rule": "first stored anchor per behavior-reference phase in each of first 8 sorted test episodes",
+    "distribution_contexts": "first 16 sorted test episodes with >=64 reference records, equal context weight",
+    "distribution_samples": "up to 512 records per context, fixed random subset",
+    "distribution_radius": "95th percentile reference leave-one-out nearest neighbor distance",
+    "distribution_projections": 128,
+    "distribution_contact_representation": "hard Bernoulli samples, raw 0/1",
+    "action_pairs": "all six unordered command pairs per four-action anchor, coupled simulator RNG"
+  },
+  "references": {
+    "train.npz": "92a6d347d7bcc5deef5ed52cd10c1f8d2d057030bc18212f03db37784bd1451c",
+    "validation.npz": "6d55889f46eda05cae1aa6935680e1a7f9325083ea5f831c8de1013b1756d0eb",
+    "test.npz": "0bceb7b7b4372961ac964597570f4f3b07e69eb536f1a6b066766282b5eb49d2",
+    "episodes.json": "2e3e3aa539d4d4b5c71f8c41cba5777f860bd6bc2ba18ea6bd6344b66da15589",
+    "metadata.json": "45dc50ccf125a03d9a56791d1471d1e0e5beb6602c74f15d5a316da9e0674fab"
+  },
+  "evaluation_sources": {
+    "lib/gym_evaluation.py": "5422148100ed7c8b48c79ebe8a2c9f68c165bf07bce005b9c7ee59dab17908fd",
+    "experiments/evaluate_gym_transition.py": "0ab3983c0c0677104825afe85c904dab7870e8dc8efc90c3a800b02fda5eb3af"
+  },
+  "simulator_probe_sha256": "44388ff1901332bcae5625750c2e75684f64231c739a20761068d51993fc310c"
+}

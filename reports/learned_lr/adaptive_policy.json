@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "features": [
+    "bias",
+    "progress",
+    "log_gradient_ratio",
+    "gradient_alignment",
+    "log_adam_direction_ratio",
+    "log_parameter_ratio"
+  ],
+  "row_roles": [
+    "g",
+    "d"
+  ],
+  "weights": [
+    [
+      -0.31245762233457175,
+      0.3856820610266791,
+      -0.2311743236128348,
+      -0.019373912849550222,
+      0.06748990751961567,
+      -0.07566551163732302
+    ],
+    [
+      0.06286183927870612,
+      0.022807383287626826,
+      0.011776246227164389,
+      0.06631052868455109,
+      -0.3234177909528535,
+      0.05173581720909612
+    ]
+  ],
+  "interval": 20,
+  "smoothing": 0.5,
+  "multiplier_bounds": [
+    0.05,
+    2.0
+  ],
+  "overall_selected_attempt": "generation02_candidate05",
+  "overall_training_objective": 0.22524744121880974,
+  "adaptive_selected_attempt": "generation02_candidate05",
+  "adaptive_training_objective": 0.22524744121880974,
+  "adaptive_selection_role": "overall_winner",
+  "selection_rule": "Both choices use training objective only; best policy with at least one nonzero feedback coefficient is exported even if constant wins. No held-out metrics used.",
+  "selection_script_sha256": "3bafb6507059507823c1112814ad0ed735feb49b5d9e004ce052a3b032f98465",
+  "selected_attempt": "generation02_candidate05",
+  "training_objective": 0.22524744121880974,
+  "training_tasks": [
+    "ring4",
+    "grid9"
+  ],
+  "source_sha256": {
+    "particlegan/__init__.py": "3ab26de05dd80b9b39e654ced674a5a7b858505fc42cc9e53b8576d5cc880433",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "45fb38532b4d0e6fa3b8483fdf18b3c822055363e68dbee4fc8e6222dabb19c6",
+    "particlegan/locked_shared.py": "51fb6d90f4dc0ba859756bb427653b5a276b29e1d96fd466a871c7d7642a560d",
+    "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+    "particlegan/recipes.py": "43a6b89fd6fa12e5cad0b590717a41fa5f3872a7c4634740df9ddddf5a22a101",
+    "particlegan/training.py": "d2f418ec1ab43ab24d57071382c2f1fd53e17eb5064fb6bbd391e84543eeb405",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "benchmarks/locked_shared/__init__.py": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f",
+    "benchmarks/locked_shared/__main__.py": "e01d15aabdf845d79185a577c9fa2c1e38357ec81d9fe38d427f17a01bbd0dfe",
+    "benchmarks/locked_shared/base_recipe.py": "0a392e47e8305005fa27047a04443d7958ab8bbb2bb0317bc4d1ae59d8f83dd7",
+    "benchmarks/locked_shared/baseline.py": "3dbe1fd5e8d789964c3ad532161245fdd656dc7562d6bbe041675447f4f548c2",
+    "benchmarks/locked_shared/default_selection.py": "9557ae7fa34f4a41397a389120a8d822e6ea15548c8fce60973204105a53777f",
+    "benchmarks/locked_shared/grid_study.py": "7971f41c890f4e6cac301061de7fd5f2e87b0500a511547f032dcbe5f309d75f",
+    "benchmarks/locked_shared/host_reference.py": "030fdb5d6b4ec3d212d7786409475d8aaf024384db3d26548f250cfa765b6dfa",
+    "benchmarks/locked_shared/investigate.py": "c9e7e3f365e99b5a99baa0a3119abee0d833035a29e968c7258fad75d23f2b37",
+    "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+    "benchmarks/locked_shared/mode_hold.py": "e9c77c5d7cd3deeddd9e55de5203b8ab56953a0649e36558faf36457c201dc3f",
+    "benchmarks/locked_shared/observation.py": "87580879e7160fbcbad81549ff6d2519fa4997dc7272af64efb092240bd5f3bd",
+    "benchmarks/locked_shared/reference.py": "a97933b31a240822fc5535979a1e84bb884472a69b702808484257cff46cfbef",
+    "benchmarks/locked_shared/run.py": "5b2a54935b08dd5250a9bf82159e2d86880e89daa23b87281ee61daa6e3bea3d",
+    "benchmarks/locked_shared/scale_probe.py": "825cc42741f8def0bb8c3ada39d2c29f98bbece79efb338b6b50beb100a7fcbb",
+    "benchmarks/locked_shared/shared_checks.py": "2ca7fe501a12193cf337bb6a9a470ccf02ce108a338afab57c686c46234f3fa5",
+    "benchmarks/locked_shared/suite_reference.py": "8bd939b18a9ff771846326d49b025ad4590ed3534d0749ae928c3ea1d0e8fe3f",
+    "benchmarks/locked_shared/summarize.py": "4a5585a310aa4f093269fe186252440ffa7d187f5e6c9e72a6324456b037b21c",
+    "benchmarks/locked_shared/trajectory.py": "6551f8bd189fc6a4851f158ca0f97caa04d64617072d92d3c0428df4a11bea65",
+    "benchmarks/locked_shared/two_pole.py": "2825d04d61094ede5156931e47c0773c3a3829bdf3dfed023e5965759d8b84e8",
+    "benchmarks/learned_lr/__init__.py": "cf9e55b41fea4ea8f4f83deea631b50ec047f8b68db2f874d8cbbba36cfb3303",
+    "benchmarks/learned_lr/controller.py": "099bbf965e22ac28b42850dbade9f0ec350d723ee79f251d9665a8878d193e52",
+    "benchmarks/learned_lr/study.py": "2b0b2fb20ef69b5848c8c70b4de306e9465d239e82ee1cfdab3cce359557637d"
+  }
+}

@@ -1,0 +1,121 @@
+[
+  {
+    "name": "schedule_040",
+    "overrides": {
+      "steps": 7000,
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_reg": 1.0,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "lr_anneal_start": 0.4
+    }
+  },
+  {
+    "name": "batch_128",
+    "overrides": {
+      "steps": 7000,
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_reg": 1.0,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "batch_size": 128
+    }
+  },
+  {
+    "name": "schedule_025",
+    "overrides": {
+      "steps": 7000,
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_reg": 1.0,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "lr_anneal_start": 0.25
+    }
+  },
+  {
+    "name": "constant_lr",
+    "overrides": {
+      "steps": 7000,
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_reg": 1.0,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "lr_floor": 1.0
+    }
+  },
+  {
+    "name": "schedule_000",
+    "overrides": {
+      "steps": 7000,
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_reg": 1.0,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "lr_anneal_start": 0.0
+    }
+  },
+  {
+    "name": "batch_512",
+    "overrides": {
+      "steps": 7000,
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_reg": 1.0,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "batch_size": 512
+    }
+  },
+  {
+    "name": "batch_1024",
+    "overrides": {
+      "steps": 7000,
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "prior_reg": 1.0,
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "batch_size": 1024
+    }
+  }
+]

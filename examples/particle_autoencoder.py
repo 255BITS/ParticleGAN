@@ -5,7 +5,7 @@ from particlegan import get_recipe
 
 
 def main():
-    for name in ('ae_gan', 'vae_gan', 'ae_ddgan'):
+    for name in ('ae_gan', 'vae_gan'):
         recipe = get_recipe(name, num_particles=16, z_dim=2)
         prior = recipe.make_prior()
         encoder, decoder, critic = nn.Linear(2, 4), nn.Linear(2, 2), nn.Linear(2, 1)

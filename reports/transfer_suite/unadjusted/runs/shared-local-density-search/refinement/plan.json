@@ -1,0 +1,15 @@
+{
+  "purpose": "Approved bounded6-card residual-local-curvature refinement after32 failed standalone-local/multiplicative episodes. Exact shared_c6. Initially-zero correction preserves original raw MLP initialization; no source edits during either phase. Both remaining blockers; no budget or threshold changes.",
+  "architectures": [
+    "curvature_raw_silu128_l3_q32_w1p0",
+    "curvature_raw_silu128_l3_q64_w1p0",
+    "curvature_raw_silu128_l3_q32_w0p5",
+    "curvature_raw_softplus96_l3_q32_w1p0",
+    "curvature_raw_softplus96_l3_q64_w1p0",
+    "curvature_raw_softplus96_l3_q32_w0p5"
+  ],
+  "tasks": [
+    "vector_unequal_mass",
+    "vector_unequal_width"
+  ]
+}

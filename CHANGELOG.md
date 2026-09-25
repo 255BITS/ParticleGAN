@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.7.0 — 2026-09-24
+
+- Add the strict 100-mode toy gate (`python -m benchmarks.toy100 run`); its
+  default is the simpler shared recipe that passes all 22 toys. The README
+  animation now shows that default converging on the 10×10 grid.
+
+- Keep training control flow separate from recipes: construct
+  `GANTrainer(recipe, G, D, ...)` explicitly. Remove `Recipe.make_trainer`;
+  recipes retain hyperparameters and small component factories. The current
+  winning hyperparameters remain unchanged.
+
+- Restore named model-family selection with `get_recipe(name="gan", **overrides)`:
+  GAN, MoG, DDGAN, AE-GAN, VAE-GAN and AE-DDGAN configurations share current
+  optimizer, cap and spread defaults. Names select components without training
+  control flow or legacy hyperparameters. Full saved recipe dictionaries still restore.
+- Preserve historical leaderboard comparisons as benchmark inputs outside the
+  installable package. The quickstart uses the winning batch-distance D directly.
+
+- Add `particlegan.locked_shared.LOCKED_SHARED`, the demo RpGAN + `b_cap`
+  stamp (cover 1.5, FM off, 12 particles, host critic). Builders are
+  `make_gan_loss` and `make_b_cap`. This stamp is separate from the current
+  recipe hyperparameters.
+
 ## 0.6.0 — 2026-09-24
 
 - Require explicit keyword `sigma` in `MoGParticlePrior`; construction no longer

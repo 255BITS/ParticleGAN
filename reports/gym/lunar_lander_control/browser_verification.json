@@ -1,0 +1,83 @@
+{
+  "base": "http://127.0.0.1:8787",
+  "observations": [
+    "Validation-selected imitation default and all four controller options",
+    "Reset starts paused at step0 with seed391000 and actual600px simulator PNG",
+    "Single Step advanced exactly once",
+    "Play advanced to 7; Pause preserved exact step after settling",
+    "Reset reproduced initial frame exactly and remained paused",
+    "Terminal auto-stop at step236, return301.256",
+    {
+      "switch": "joint",
+      "selected": {
+        "controller": "joint",
+        "component": 300,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_control/joint/best.pt",
+        "action": [
+          -0.9999579191207886,
+          -0.9442547559738159
+        ]
+      }
+    },
+    {
+      "switch": "original",
+      "selected": {
+        "controller": "original",
+        "component": 549,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander/adversarial/best.pt",
+        "action": [
+          -0.8468846678733826,
+          -0.2167748659849167
+        ]
+      }
+    },
+    {
+      "switch": "expert",
+      "selected": {
+        "controller": "expert",
+        "component": null,
+        "checkpoint": null,
+        "action": [
+          -1,
+          -1
+        ]
+      }
+    },
+    {
+      "switch": "imitation",
+      "selected": {
+        "controller": "imitation",
+        "component": 89,
+        "checkpoint": "/home/martyn/dev/ParticleGAN/results/gym/lunar_lander_control/imitation/best.pt",
+        "action": [
+          -0.9959989786148071,
+          -0.9902042150497437
+        ]
+      }
+    },
+    "No browser JavaScript exceptions"
+  ],
+  "pause": {
+    "step": 7,
+    "playing": false,
+    "action": [
+      -0.9995989799499512,
+      -0.9714936017990112
+    ],
+    "previous_action": [
+      -0.999304473400116,
+      -0.9813145995140076
+    ]
+  },
+  "ending": {
+    "step": 236,
+    "done": true,
+    "terminated": true,
+    "truncated": false,
+    "return": 301.2560419060444,
+    "playing": false,
+    "playDisabled": true,
+    "stepDisabled": true
+  },
+  "errors": []
+}

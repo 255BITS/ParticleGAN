@@ -1,0 +1,49 @@
+{
+  "candidates": [
+    {
+      "name": "ratio_g34_d68_p85",
+      "overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 2.0,
+        "lr": 0.0034,
+        "prior_lr_mult": 2.5,
+        "prior_reg": 0.05,
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25
+      }
+    },
+    {
+      "name": "ratio_g425_d6375_p85",
+      "overrides": {
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "d_lr_mult": 1.5,
+        "lr": 0.00425,
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.05,
+        "reg_coeff": 3.0,
+        "reg_kappa": 1.25
+      }
+    }
+  ],
+  "purpose": "Complete the two predeclared screen winners without changing any recipe setting; twelve remaining tests, no duplicates.",
+  "tasks": [
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "ae_gan_hold",
+    "cover_leftover",
+    "unused_token_hold",
+    "mid_scale_identity",
+    "vector_two_broad",
+    "vector_spiral",
+    "img_stripes2",
+    "img_bars4",
+    "img_intensity2"
+  ]
+}

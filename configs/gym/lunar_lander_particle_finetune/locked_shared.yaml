@@ -1,0 +1,21 @@
+# Locked-shared Lunar arm. Not YuE2 particle.yaml (that file keeps EDIT_CAP_EVERY=4).
+# Rp logistic and b_cap are built from particlegan.locked_shared
+# (make_gan_loss, make_b_cap). This file does not restate those pins.
+# The host prior stays frozen. There is no cover term and no demo particle cloud.
+# safe-fast stays off. No landing score is claimed here.
+arm: particle
+adv_posture: locked_shared
+steps: 2500
+batch_size: 256
+checkpoints: [250, 1000, 2500]
+device: cuda:1
+out_dir: results/gym/lunar_lander_particle_finetune/locked_shared
+live_log: results/gym/lunar_lander_particle_finetune/locked_shared_live.log
+imitation_weight: 0.0
+real_encoding_weight: 0.0
+synthetic_reconstruction_weight: 0.0
+adv_weight: 1.0
+train_scope: control
+error_tokens: 8
+error_width: 48
+error_heads: 4

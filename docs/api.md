@@ -1,88 +1,135 @@
 # ParticleGAN API reference
 
 ParticleGAN provides independent PyTorch priors, losses, and diffusion helpers.
-You own the models, data, training loop, and checkpoints. Install the package
+You supply models and data; use an optional GAN trainer or compose your own loop. Install the package
 with `python -m pip install particlegan`; the core dependency is PyTorch.
 
 ## A minimal training loop
 
-This complete example learns a synthetic 2D distribution. Replace `real` with a
-batch from your pipeline and replace the two MLPs with your networks. The
-recommended defaults cover the optimizer, regularizers, schedule, and EMA;
-override only what your application needs.
+This complete example learns a synthetic 2D distribution. Replace `real_batch`
+with your pipeline and the MLPs with your networks. The helper applies one
+shared recipe to optimizers, losses, regularization, decay and EMA. The recipe
+contains configuration and component factories; the separately constructed
+trainer owns the training lifecycle.
 
 ```python
-import copy
 import torch
 from torch import nn
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import BatchDistanceDiscriminator, GANTrainer, get_recipe
 
-device = torch.device("cpu")  # Change to your device.
-recipe = get_recipe()  # Use total_steps=5 for a quick smoke check.
+torch.manual_seed(0)
+device = torch.device("cpu")
+recipe = get_recipe(total_steps=1000)
+G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(.2),
+                  nn.Linear(64, 64), nn.LeakyReLU(.2), nn.Linear(64, 2)).to(device)
+D = BatchDistanceDiscriminator().to(device)
+trainer = GANTrainer(recipe, G, D, seed=0)
 
-G = nn.Sequential(nn.Linear(recipe.z_dim, 64), nn.LeakyReLU(0.2),
-                  nn.Linear(64, 2)).to(device)
-D = nn.Sequential(nn.Linear(2, 64), nn.LeakyReLU(0.2),
-                  nn.Linear(64, 1)).to(device)
-prior = recipe.make_prior().to(device)
-gan = recipe.make_loss()
-penalty = recipe.make_gradient_penalty()
-spread = recipe.make_prior_regularizer()
-opt_g, opt_d = recipe.make_optimizers(G, D, prior)
-base_lrs = [[group["lr"] for group in opt.param_groups] for opt in (opt_g, opt_d)]
-ema_g = copy.deepcopy(G).eval().requires_grad_(False)
-ema_prior = copy.deepcopy(prior).eval().requires_grad_(False)
+def real_batch():
+    return .2 * torch.randn(recipe.batch_size, 2, device=device) + 1
 
 for step in range(recipe.total_steps):
-    scale = learning_rate_scale(step, recipe.total_steps,
-                               recipe.lr_anneal_start, recipe.lr_floor)
-    for opt, rates in zip((opt_g, opt_d), base_lrs):
-        for group, rate in zip(opt.param_groups, rates):
-            group["lr"] = rate * scale
+    stats = trainer.step(real_batch(), generator_real=real_batch)
+    if (step + 1) % 100 == 0:
+        print(step + 1, stats["loss_d"].item(), stats["loss_g"].item(), flush=True)
 
-    real = torch.randn(recipe.batch_size, 2, device=device)
-    z, indices = prior.sample(len(real))
-    fake = G(z)
-
-    # Update D; detached fakes leave G and the prior untouched.
-    opt_d.zero_grad(set_to_none=True)
-    d_loss = gan.d_loss(D(real), D(fake.detach()))
-    d_loss = d_loss + penalty(D, real, fake.detach(), step=step + 1)
-    d_loss.backward()
-    opt_d.step()
-
-    # Update G and the prior through the updated, frozen D.
-    D.requires_grad_(False)
-    opt_g.zero_grad(set_to_none=True)
-    g_loss = gan.g_loss(D(fake), D(real).detach())
-    g_loss = g_loss + spread(prior.z[indices.unique()])
-    g_loss.backward()
-    opt_g.step()
-    D.requires_grad_(True)
-
-    with torch.no_grad():
-        for average, current in ((ema_g, G), (ema_prior, prior)):
-            for target, source in zip(average.parameters(), current.parameters()):
-                target.lerp_(source, 1 - recipe.ema_decay)
-
-    if step % 100 == 0 or step + 1 == recipe.total_steps:
-        print(f"step={step + 1} d={d_loss.item():.4f} g={g_loss.item():.4f}", flush=True)
-
-with torch.inference_mode():
-    z, _ = ema_prior.sample(64)
-    samples = ema_g(z)  # [64, 2]
+samples = trainer.sample(256)            # Live weights by default.
+ema_samples = trainer.sample(256, ema=True)
+torch.save(trainer.state_dict(), "trainer.pt")
 ```
 
-The G optimizer includes the prior at its own learning rate. The regularizer
-uses unique sampled rows and already includes `recipe.prior_reg`. EMA tracks
-both G and the prior; these simple modules have no buffers to update. For models
-with running statistics, choose how to update their EMA buffers too. If your
-critic has intentionally frozen parameters, restore their original flags rather
-than enabling every parameter after the G step.
+[The runnable example](../examples/quickstart_gan.py) adds CLI options, flushed
+JSON logs and a data-RNG checkpoint. To verify continuation:
 
-For command-line arguments, TOML input, and flushed JSON logs, see
-[the runnable loop](../examples/pytorch_loop.py). The example-first presentation
-is inspired by [LeJEPA's minimal guide](https://github.com/galilai-group/lejepa/blob/main/MINIMAL.md).
+```bash
+python -u examples/quickstart_gan.py --steps 1000 --stop-after 500 --output run.pt
+python -u examples/quickstart_gan.py --steps 1000 --resume run.pt --output run.pt
+```
+
+The explicit [component-based loop](../examples/pytorch_loop.py) remains available
+for applications that manage their own updates.
+
+## GANTrainer
+
+`GANTrainer(recipe, G, D, *, prior=None, seed=0, latent_generator=None,
+penalty_generator=None, optimizer_options=None, penalty_options=None)` is an
+explicitly imported helper, separate from `Recipe`. Move networks to the same
+device and floating dtype first. When omitted, the helper constructs the prior
+from the recipe; supply `prior=` to preserve an existing initialization.
+`seed` controls owned sampling streams, while callers seed network/prior
+initialization with `torch.manual_seed`.
+
+The helper supports scalar, unconditional GANs with `ParticlePrior`. MoG,
+encoders, conditional GANs and DDGAN use the component API. A step performs one
+D update, then one G/prior update with fresh latent samples. During the G phase,
+D is evaluated with frozen parameters; each original gradient flag is restored.
+Small particle tables (at most 1,024 rows) are regularized in full; larger tables
+use unique sampled rows. There is no particle L2 term.
+
+- `step(real, generator_real=None, collect_stats=False)` returns detached scalar
+  tensors `loss_d`, `loss_g`, `loss_gan`, `prior_regularization`, `penalty`, and
+  integer `step`. The reported prior term is unweighted; `loss_g` includes its
+  recipe weight. `generator_real` can supply a fresh tensor or zero-argument
+  callback for RP/RA; otherwise the real batch is reused. RP requires equal
+  batch sizes. `collect_stats=True` also returns penalty diagnostics.
+- `sample(n, ema=False, generator=None)` defaults to live weights. Its separate
+  RNG and temporary evaluation mode preserve training randomness and module
+  modes. EMA averages G/prior parameters and copies their buffers, including
+  integer counters. EMA never determines a live leaderboard pass.
+- `state_dict()` includes G, D, prior, EMA, optimizers, initial learning rates,
+  update count and RNG states. `load_state_dict(state)` restores them, including
+  global PyTorch RNG. Recreate the same recipe, architecture, options, dtype
+  and device, with the same parameter freezing, before loading. Save your data-loader position or separate data RNG
+  alongside it. Loading on CPU first works for a compatible CUDA trainer:
+  `trainer.load_state_dict(torch.load(path, map_location="cpu", weights_only=True))`.
+
+The recipe's `total_steps` is the full schedule budget. Resume with the same
+budget; further steps after it is exhausted raise an error. A failed user
+callback can occur after D has updated, so restore a checkpoint before retrying
+that interrupted update. AMP, distributed training and custom update ratios
+require a caller-owned loop.
+
+`get_recipe()` constructs the shared **GAN v3** winner: Rp logistic,
+b_cap coefficient 6, κ1.25, spread .05, Adam (0,.99), G/D LR .00425 and particle
+LR .0085. Rates hold for 60% of the budget, then cosine toward 5%. There is no
+particle L2 term. Live sampling is the default; EMA is explicit.
+
+| Version | Live behavioral toys passed | Meaning |
+| --- | ---: | --- |
+| v1 (archived) | 5/19 | Original preset |
+| v2 (archived) | 8/19 | Previous public preset |
+| v3 (current) | **19/19** | Shared recipe with declared D choices |
+
+The v3 reference D profile scores 15/19. Its 19/19 result keeps optimizer/loss
+settings identical across tests and permits task-specific discriminator
+architectures. Each host retains its frozen resources and update budget.
+The generic API uses 20,000 particles and 7,000 updates; choose resources for
+your application. [Illustrated guide, math and limits](gan-v3.md).
+
+Historical rows preserve measured settings in benchmark receipts. They are not
+public recipe selectors. Restore complete saved settings through
+`Recipe(**saved_recipe)` and resume with the original networks and recipe.
+
+### Optional vector discriminators
+
+`BatchDistanceDiscriminator(in_dim=2, hidden_dim=96, n_hidden=3,
+scales=(.1,.25,.5,1.), beta=6., eps=1e-5)` accepts nonempty flat
+`[batch, in_dim]` inputs and returns one score per sample. Its 2D defaults exactly
+reproduce the v3 unequal-mass witness with **19,013 parameters**: per-example
+hidden feature centering, Softplus β6, and differentiable kernel-weighted
+neighbor distances appended to the final head. Self-pairs are excluded.
+
+Scores depend on other samples in the current input batch, including during
+G updates and gradient-cap differentiation. Real/fake calls compute separate
+features; there are no running statistics. Cost is quadratic in batch size,
+and scales are in input-coordinate units. The measured witness uses 2D inputs
+and batch size 128. You supply D explicitly; the class is not substituted for
+every network in the 19/19 architecture profile.
+
+`LinearSkipDiscriminator(in_dim=2, hidden_dim=96, n_hidden=2, fourier=2, beta=5.)`
+remains the historical v2 witness: a smooth Fourier MLP plus a zero-initialized
+raw linear branch, 10,467 parameters. It supports native cap double backward.
+Both classes can be passed to `GANTrainer` or used in a custom loop.
 
 ## A minimal DDGAN + UCD loop
 
@@ -99,7 +146,7 @@ from torch.nn import functional as F
 from particlegan import DDGAN, UCD, get_recipe, learning_rate_scale, ucd_loss
 
 device = torch.device("cpu")
-recipe = get_recipe("ddgan", num_classes=2)  # Add total_steps=5 for a smoke check.
+recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=2)  # Add total_steps=5 for a smoke check.
 process = DDGAN(recipe.alpha_bar).to(device)
 
 class Generator(nn.Module):
@@ -202,6 +249,8 @@ inference walks through every reverse step. Class-only UCD is the default;
 | [DDGAN](#ddgan) | Forward corruption and reverse transitions |
 | [UCD](#ucd) | Class-score selection and class supervision |
 | [Recipes](#recipes-and-defaults) | Inspectable defaults and optional factories |
+| [GANTrainer](#gantrainer) | Optional unconditional GAN updates, sampling and checkpoints |
+| [Locked shared](#locked-shared) | Demo RpGAN + `b_cap` stamp (not `Recipe("gan")`) |
 | [TOML](#toml-configuration) | Pass loaded dictionaries to constructors |
 | [Other pipelines](#loss-augmentation-and-teacherstudent-pipelines) | Compose with existing objectives |
 | [Inference](#inference-and-checkpoints) | Generate from saved G and prior states |
@@ -209,7 +258,8 @@ inference walks through every reverse step. Class-only UCD is the default;
 All names below are exported from `particlegan`. Modules use ordinary
 `.to(device, dtype)`, `.parameters()`, and `.state_dict()` behavior. Move models
 and priors before constructing optimizers. Stateless loss helpers need no device
-setup. No component selects a device, seeds global RNG, or steps an optimizer.
+setup. These primitives never step an optimizer. The optional `GANTrainer`
+manages updates and restores RNG state when loading checkpoints.
 
 ## Priors
 
@@ -337,7 +387,7 @@ from the constructor's value. Do not call the helper when loading a checkpoint.
 The default experiment is [configs/mog/default.toml](../configs/mog/default.toml),
 run via `python -u experiments/train_100gaussians.py --config configs/mog/default.toml`.
 It retains the benchmark's networks, Fourier discriminator and full metric suite.
-The corresponding API preset is `get_recipe("mog")`; a recipe alone does not
+Use `get_recipe(prior_kind="mog", sigma_rel=.025)`; a recipe alone does not
 reproduce benchmark quality with arbitrary networks or data.
 
 ### `GaussianPrior`
@@ -415,6 +465,23 @@ a closure when regularizing a conditional critic.
 - `penalty.penalty(D, real, fake, step=1, generator=None, collect_stats=True)`
   returns `(loss, stats)`. The callable form disables stats to avoid scalar
   synchronization. A skipped penalty returns a detached zero.
+
+### Locked shared
+
+```python
+from particlegan.locked_shared import LOCKED_SHARED, locked_adv_defaults, make_gan_loss, make_b_cap
+```
+
+`LOCKED_SHARED` is the demo stamp: RpGAN logistic, `b_cap` coeff 1, κ 1, L2,
+`lazy_k` 1, feature matching off, cover 1.5, a 12-particle cloud at
+`particle_l2` 0.02 when particles are built, and the host critic.
+`make_gan_loss()` and `make_b_cap()` build those two objects and refuse any
+other stamp. Music cover 1.0, a 128-particle hub cloud, FM-on, stranger
+pairing, and a thinned κ are not this stamp. The selected `get_recipe()`
+uses coefficient 6, κ=1.25 and prior regularization .05; this frozen stamp retains
+its original values.
+The full field table is in [locked shared](locked-shared.md). Lunar Lander's
+import of it is [the gym arm](gym-particle-finetune.md#locked-shared-arm).
 
 ### `ParticleRegularizer`
 
@@ -517,10 +584,11 @@ and applicable device checks still run.
 
 ## Particle autoencoders
 
-`get_recipe("ae_gan")`, `get_recipe("vae_gan")` and `get_recipe("ae_ddgan")`
-add reconstruction encodings to caller-owned networks and loops. The default
-VAE selects one particle with prior-matching Gaussian noise and constant joint
-KL. No KL penalty is added by `reconstruction_loss`.
+Set `prior_kind="mog"`, `sigma_rel=.025` and `encoder_mode="ae"` or `"hard"`
+to add reconstruction encodings to caller-owned networks and loops. Set
+`model="ddgan"` when supplying a diffusion generator. These component choices
+share the winning optimizer/loss defaults. Hard VAE selects one particle with
+prior-matching Gaussian noise and constant joint KL; reconstruction adds no KL.
 
 | API | Contract |
 | --- | --- |
@@ -540,67 +608,96 @@ examples, gradient caveats, DDGAN integration and measured evidence.
 ## Recipes and defaults
 
 ```python
-get_recipe(name="gan", **overrides)          # Returns a frozen Recipe.
-recipe.replace(**overrides)                  # Returns a new Recipe.
-recipe.to_dict()                             # All resolved fields.
-Recipe(**resolved_dict)                      # Restore resolved fields.
+get_recipe("gan", **overrides) # Named components, current shared hyperparameters.
+recipe.replace(**overrides)   # A new immutable Recipe.
+recipe.to_dict()              # Complete resolved fields.
+Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
 ```
 
-`get_recipe("ddgan", num_classes=8)` starts with the DDGAN defaults and
-overrides its class count. `Recipe` is the resolved data object: setting only
-`Recipe(name="ddgan")` does **not** select those defaults. Use `get_recipe` to
-resolve named presets. Unknown fields are rejected. Historical names
-`100gaussians` and `denoising` remain accepted aliases for GAN and DDGAN.
+`get_recipe(name="gan", **overrides)` selects components without constructing a
+training loop. Explicit keyword fields override the selected configuration.
+Every family uses the current shared optimizer, loss, penalty and schedule
+defaults; historical hyperparameter versions are not selectable. Unknown names
+and fields are rejected. Restore a complete saved configuration with
+`Recipe(**saved_fields)`; use `recipe.replace(name="my-run")` to label a run.
 
-`get_recipe("mog")` selects the compact MoG leader: 400 components, z_dim=4,
-sigma_rel=1/40, standardized reads, 28,000 steps, prior LR multiplier 100
-(relative to G, giving 0.06), and prior betas `(0.5, 0.999)`. G and D retain
-betas `(0, 0.999)`. Other GAN recipe settings are unchanged. `get_recipe()`
-and `get_recipe("gan")` still select the existing atoms recipe.
+| Name | Components and dimensions |
+| --- | --- |
+| `gan` (default) | Scalar GAN, 20,000 particles, latent dimension 4, no sampling noise |
+| `mog` | GAN, 400 MoG components, latent dimension 4, relative sigma .025 |
+| `ddgan` | DDGAN, UCD with 4 classes, discrete particles |
+| `ddgan_mog` | DDGAN, UCD with 4 classes, 400 MoG components, relative sigma .025 |
+| `ae_gan` | GAN, AE encoding, 400 MoG components, latent dimension 2 |
+| `vae_gan` | GAN, hard VAE encoding, 400 MoG components, latent dimension 2 |
+| `ae_ddgan` | DDGAN, AE encoding, 1,024 MoG components, latent dimension 64, batch 64 |
 
-`get_recipe("ddgan_mog")` combines DDGAN/class-only UCD with the MoG settings
-from the 100k study: 400 components, z_dim=4, sigma_rel=1/40, standardized reads,
-100,000 updates, prior LR multiplier 100, prior betas `(0.5, 0.999)`, and
-`lr_floor=1.0` for a constant learning rate. Other fields use DDGAN defaults.
-The Gaussian diffusion schedule is unchanged; MoG supplies G's latent codes.
+The encoder families use relative sigma .025. `ae_ddgan` uses mean routing
+distance and temperature .125; the others use sum distance and temperature .25.
+These component choices retain the original API's model-family structure with
+the new shared hyperparameters. The GAN development-suite evidence does not
+establish convergence of those hyperparameters for every AE/VAE/DDGAN setup.
+
+### Components that change a loop
+
+The recipe publishes settings and small operations; the caller composes them.
+UCD settings describe score selection and class-loss weight. AE/VAE settings
+describe encoding and reconstruction. Neither creates a training strategy:
 
 ```python
-recipe = get_recipe("ddgan_mog", num_classes=4)
+ucd_recipe = get_recipe("gan", conditioning="ucd", num_classes=4)
+ae_recipe = get_recipe("ae_gan")
+vae_recipe = get_recipe("vae_gan")
+```
+
+| Component | Recipe supplies | Caller controls |
+| --- | --- | --- |
+| UCD | Class count, target, auxiliary loss weight | Labels, discriminator heads, score selection, adding `ucd_loss` to the D objective |
+| AE/VAE | Prior, routing settings, `encode`, reconstruction weight, optional encoder optimizer group | Encoder forward pass, reconstruction/adversarial loss composition, backward and optimizer steps |
+| DDGAN | Model selection and diffusion schedule | Corruption, timestep sampling, reverse transitions and update order |
+
+See the [DDGAN/UCD loop](#a-minimal-ddgan--ucd-loop) and
+[AE/VAE example](../examples/particle_autoencoder.py). `GANTrainer(recipe, G, D)`
+is a separate, optional helper for unconditional particle GANs; it explicitly
+rejects UCD, encoders and DDGAN. `Recipe` has no trainer factory or training step.
+
+Discrete learned particles are the zero-noise limit of a mixture of Gaussians.
+The current `ParticlePrior` reads raw centers; `MoGParticlePrior` standardizes
+centers by default, even when sigma is zero. For matching center reads use
+`sigma_rel=0, standardize=False`. The default GAN retains `ParticlePrior`;
+unifying implementations or promoting a noisy MoG default requires separate
+validation.
+
+### Explicit composition
+
+Choose components explicitly, while inheriting the common training defaults:
+
+```python
+recipe = get_recipe(model="ddgan", conditioning="ucd", num_classes=4,
+                    prior_kind="mog", sigma_rel=.025, num_particles=400)
 prior = recipe.make_prior().to(device)
 process = DDGAN(recipe.alpha_bar).to(device)
 opt_g, opt_d = recipe.make_optimizers(G, D, prior)
-z, indices = prior.sample(batch_size)
-prior_loss = recipe.make_prior_regularizer()(prior.z[indices.unique()])
 ```
 
-All fields can be overridden, including `total_steps` and `lr_floor`. The recipe
-supplies the package hyperparameters from the
-[100k study](../reports/denoising-toy/mog_capacity_100k/READOUT.md), not its
-architecture: that study used G width 32, D width 128 and depth 3. Callers own
-the networks, loops and EMA. `get_recipe("mog")` continues to select one-shot
-GAN settings; `get_recipe("ddgan")` continues to use atoms and 56,000 updates.
+| Shared field | Default |
+| --- | --- |
+| `model`, `conditioning`, `num_classes` | `gan`, `scalar`, `None` |
+| `z_dim`, `num_particles` | `4`, `20_000` |
+| `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) |
+| `loss_type`, `gan_mode` | `logistic`, `rp` |
+| `lr`, `d_lr_mult`, `prior_lr_mult` | `.00425`, `1`, `2` |
+| `betas`, `prior_betas` | `(0, .99)`, `None` (inherit betas) |
+| `reg_arm`, `reg_coeff`, `reg_kappa` | `b_cap`, `6`, `1.25` |
+| `reg_every`, `reg_method` | `1`, `autograd` |
+| `prior_reg`, `ema_decay` | `.05`, `.995` |
+| `lr_anneal_start`, `lr_floor` | `.6`, `.05` |
+| `batch_size`, `total_steps` | `256`, `7_000` |
+| `ucd_target`, `ucd_weight` | `class`, `.02` |
+| `alpha_bar` | `(1, .9, .5, .05, .0001)` |
 
-| Field | `get_recipe()` / `gan` | `ddgan` |
-| --- | --- | --- |
-| `model` | `gan` | `ddgan` |
-| `conditioning`, `num_classes` | `scalar`, `None` | `ucd`, `4` |
-| `z_dim`, `num_particles` | `4`, `20_000` | Same |
-| `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) | Same |
-| `loss_type`, `gan_mode` | `logistic`, `rp` | Same |
-| `lr`, `d_lr_mult`, `prior_lr_mult` | `.0006`, `1.5`, `10` | Same |
-| `betas` | `(0, .999)` | Same |
-| `prior_betas` | `None` (inherit `betas`) | Same |
-| `reg_arm`, `reg_coeff`, `reg_kappa` | `b_cap`, `1`, `1` | Same |
-| `reg_every`, `reg_method` | `1`, `autograd` | Same |
-| `prior_reg`, `ema_decay` | `1`, `.995` | Same |
-| `lr_anneal_start`, `lr_floor` | `.6`, `.05` | Same |
-| `batch_size`, `total_steps` | `256`, `7_000` | `256`, `56_000` |
-| `ucd_target`, `ucd_weight` | `class`, `.02` (unused) | `class`, `.02` |
-| `alpha_bar` | `(1, .9, .5, .05, .0001)` (unused) | `(1, .9, .5, .05, .0001)` |
-
-Recipes describe recommended starting defaults; they do not construct
-architectures or execute a training procedure. Networks, data, and training
-budgets remain application choices.
+Architectures, model/prior choices, data and resource budgets belong to the
+caller. Historical v1/v2 comparison receipts live in benchmark data, outside
+the installable package; they are not alternate production defaults.
 
 | Optional factory | Result |
 | --- | --- |

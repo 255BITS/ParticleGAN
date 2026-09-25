@@ -1,0 +1,572 @@
+{
+  "protocol": {
+    "version": 1,
+    "device": "cpu",
+    "torch_threads": 1,
+    "checkpoint_selection": {
+      "direct": [
+        1000,
+        10000
+      ],
+      "reconstruction": [
+        1000,
+        5000,
+        10000
+      ],
+      "adversarial": [
+        1000,
+        5000,
+        10000
+      ]
+    },
+    "data_selection": "all stored training and validation records; no test data loaded",
+    "conditional_metrics": "EMA checkpoints, six continuous coordinates, checkpoint training scaler",
+    "synthetic_selection": "4096 shared MoG draws using first 4096 training terrain contexts",
+    "synthetic_rng_seed": 711,
+    "contact_sampling": "hard Bernoulli, no gradient",
+    "offset": "(encoded code - selected standardized prior center) / fixed prior sigma",
+    "near_bound": "fraction of offset coordinates with absolute value >= 2.85 (bound 3)",
+    "source_verification": "trained source pins checked against current inference source files",
+    "interpretation": "diagnostic snapshots, not additional training runs or a revised leaderboard"
+  },
+  "references": {
+    "train.npz": "92a6d347d7bcc5deef5ed52cd10c1f8d2d057030bc18212f03db37784bd1451c",
+    "validation.npz": "6d55889f46eda05cae1aa6935680e1a7f9325083ea5f831c8de1013b1756d0eb"
+  },
+  "diagnostic_source_sha256": "ce10fdf79d7efc5e56ecba01dd90b92e69a927188e923309f427d355bc640d6c",
+  "inference_sources": {
+    "experiments/train_gym_transition.py": "53b19a8f6829094d1eff99d9fd9e2adefc904e545f50f7b91227e80eec82a62b",
+    "lib/gym_transition.py": "0353acc41e4263b71f4c6c04c2918db0106d256938cea9e1c16a92fc58ebbcf0",
+    "lib/gym_data.py": "e32979f8da059466a7122bbdf30607e3f51b0a23f8b41f8ca5202947401d133f",
+    "examples/gym_world_model.py": "b03f6af4eb8ec24d1146998f2826af16520d0be65138d01ba276fc482ecd5c7b",
+    "experiments/collect_gym_transition.py": "9b3679ea1ee0aa69424d714574e310fe4e6a4bef83c8787e797920f0397ee875",
+    "particlegan/__init__.py": "3b1241444e97cb2a79ffb82ee9d99b7a7ee3a5085425d99418e0dffa115a5d56",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "particlegan/gan_loss.py": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da",
+    "particlegan/grad_regularizers.py": "45fb38532b4d0e6fa3b8483fdf18b3c822055363e68dbee4fc8e6222dabb19c6",
+    "particlegan/particle_prior.py": "eabbc41c3c42376e0b748b06a87fae4f8d10314002dfd888a5bd30e8f311b69b",
+    "particlegan/recipes.py": "33ea97c94f4dd79ee2c5451cdf9e9ce98272921d71a300918258e8df3e6a88bc",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "configs/gym/lunar_lander/adversarial.yaml": "65f4da235898cbc071a89b42d0f73c11ed2d9d084d08dd06b6ba454bdbbf2be0",
+    "configs/gym/lunar_lander/direct.yaml": "c9634d1bb95258d76e31b886e273dbce40f39ae8dc3af64ce0f479f713488d31",
+    "configs/gym/lunar_lander/reconstruction.yaml": "ee3e4d31cf53062f9f4fc4d0f0e57c8736221f3da51537e5f534e3e2451b147e"
+  },
+  "environment": {
+    "torch": "2.14.0+cu130",
+    "numpy": "2.5.2",
+    "python": "3.12.13 (main, Jul 18 2026, 17:02:19) [Clang 22.1.3 ]"
+  },
+  "rows": [
+    {
+      "checkpoint": "results/gym/lunar_lander/direct/checkpoint_1000.pt",
+      "checkpoint_sha256": "eee69ecc310b52e02a090ade026f18df1bb01e740cae70537e6983b4ef77b87c",
+      "step": 1000,
+      "arm": "direct",
+      "splits": {
+        "train": {
+          "count": 32768,
+          "next_mse": 0.045822322368621826,
+          "sample_error_p50": 0.0010725067695602775,
+          "sample_error_p95": 0.008478326722979546
+        },
+        "validation": {
+          "count": 4096,
+          "next_mse": 0.010901418514549732,
+          "sample_error_p50": 0.0015977398725226521,
+          "sample_error_p95": 0.029749419540166855
+        }
+      }
+    },
+    {
+      "checkpoint": "results/gym/lunar_lander/direct/checkpoint_10000.pt",
+      "checkpoint_sha256": "16ae0c36fcaf17f7c5334a59fdd9aef6e6bf16bf0b5e30521784b927d625159a",
+      "step": 10000,
+      "arm": "direct",
+      "splits": {
+        "train": {
+          "count": 32768,
+          "next_mse": 0.0030400368850678205,
+          "sample_error_p50": 0.0006517561851069331,
+          "sample_error_p95": 0.004552902653813362
+        },
+        "validation": {
+          "count": 4096,
+          "next_mse": 0.016148589551448822,
+          "sample_error_p50": 0.0010360011365264654,
+          "sample_error_p95": 0.057968996465206146
+        }
+      }
+    },
+    {
+      "checkpoint": "results/gym/lunar_lander/reconstruction/checkpoint_1000.pt",
+      "checkpoint_sha256": "abffba4cdc143120802f1c21b0499e2aef9111f1a884b2f733ab000fc30b840f",
+      "step": 1000,
+      "arm": "reconstruction",
+      "splits": {
+        "train": {
+          "count": 32768,
+          "next_mse": 0.12006714195013046,
+          "sample_error_p50": 0.039296187460422516,
+          "sample_error_p95": 0.206992968916893,
+          "state_mse": 0.11156628280878067,
+          "action_mse": 0.025081614032387733,
+          "used_components": 124,
+          "offset_nearbound_fraction": 0.0051326751708984375,
+          "offset_abs_p95": 2.5044667720794678
+        },
+        "validation": {
+          "count": 4096,
+          "next_mse": 0.15657638013362885,
+          "sample_error_p50": 0.08399556577205658,
+          "sample_error_p95": 0.42246800661087036,
+          "state_mse": 0.17011500895023346,
+          "action_mse": 0.03662809357047081,
+          "used_components": 71,
+          "offset_nearbound_fraction": 0.01004791259765625,
+          "offset_abs_p95": 2.590322971343994
+        }
+      },
+      "synthetic": {
+        "count": 4096,
+        "state_rms": 0.7989548444747925,
+        "state_abs_p95": 1.5922772884368896,
+        "state_reconstruction_mse": 0.11761484295129776,
+        "prior_raw_rms": 2.0954835414886475,
+        "prior_std_min": 1.9110352993011475,
+        "g1_parameter_norm": 11.422173500061035
+      }
+    },
+    {
+      "checkpoint": "results/gym/lunar_lander/reconstruction/checkpoint_5000.pt",
+      "checkpoint_sha256": "707c8d3e91e5613627e9898f6a85567b5ba67a69577a1ce8a45ec96a1ac81dad",
+      "step": 5000,
+      "arm": "reconstruction",
+      "splits": {
+        "train": {
+          "count": 32768,
+          "next_mse": 0.3013218939304352,
+          "sample_error_p50": 0.14617480337619781,
+          "sample_error_p95": 0.7608416080474854,
+          "state_mse": 1.0979716777801514,
+          "action_mse": 0.18269342184066772,
+          "used_components": 13,
+          "offset_nearbound_fraction": 0.7216043472290039,
+          "offset_abs_p95": 2.999999761581421
+        },
+        "validation": {
+          "count": 4096,
+          "next_mse": 0.5283488035202026,
+          "sample_error_p50": 0.2499256432056427,
+          "sample_error_p95": 1.0345090627670288,
+          "state_mse": 1.419366478919983,
+          "action_mse": 0.17872925102710724,
+          "used_components": 11,
+          "offset_nearbound_fraction": 0.7421493530273438,
+          "offset_abs_p95": 3.0
+        }
+      },
+      "synthetic": {
+        "count": 4096,
+        "state_rms": 51.35207748413086,
+        "state_abs_p95": 84.37269592285156,
+        "state_reconstruction_mse": 79.05044555664062,
+        "prior_raw_rms": 9.731789588928223,
+        "prior_std_min": 5.794437408447266,
+        "g1_parameter_norm": 21.807058334350586
+      }
+    },
+    {
+      "checkpoint": "results/gym/lunar_lander/reconstruction/checkpoint_10000.pt",
+      "checkpoint_sha256": "0a58fa6c27530252e4836daa4967dfffff3f58a3f44ff69d5a6132fb6ff7949f",
+      "step": 10000,
+      "arm": "reconstruction",
+      "splits": {
+        "train": {
+          "count": 32768,
+          "next_mse": 0.3978554904460907,
+          "sample_error_p50": 0.20183958113193512,
+          "sample_error_p95": 1.1481921672821045,
+          "state_mse": 2.754033327102661,
+          "action_mse": 0.7701255083084106,
+          "used_components": 13,
+          "offset_nearbound_fraction": 0.9089183807373047,
+          "offset_abs_p95": 3.0
+        },
+        "validation": {
+          "count": 4096,
+          "next_mse": 0.45685186982154846,
+          "sample_error_p50": 0.30735981464385986,
+          "sample_error_p95": 1.1499145030975342,
+          "state_mse": 3.506279706954956,
+          "action_mse": 0.9428606033325195,
+          "used_components": 9,
+          "offset_nearbound_fraction": 0.908660888671875,
+          "offset_abs_p95": 3.0
+        }
+      },
+      "synthetic": {
+        "count": 4096,
+        "state_rms": 177.26702880859375,
+        "state_abs_p95": 282.35870361328125,
+        "state_reconstruction_mse": 284.15435791015625,
+        "prior_raw_rms": 12.33460807800293,
+        "prior_std_min": 7.041529178619385,
+        "g1_parameter_norm": 30.522708892822266
+      }
+    },
+    {
+      "checkpoint": "results/gym/lunar_lander/adversarial/checkpoint_1000.pt",
+      "checkpoint_sha256": "837fcc86be4027885b6db691c78438f4f3ad7be2547d1d88627ef725d385878f",
+      "step": 1000,
+      "arm": "adversarial",
+      "splits": {
+        "train": {
+          "count": 32768,
+          "next_mse": 0.11736954003572464,
+          "sample_error_p50": 0.026000790297985077,
+          "sample_error_p95": 0.1943516880273819,
+          "state_mse": 0.08229875564575195,
+          "action_mse": 0.03202316164970398,
+          "used_components": 184,
+          "offset_nearbound_fraction": 0.008337020874023438,
+          "offset_abs_p95": 2.6160056591033936
+        },
+        "validation": {
+          "count": 4096,
+          "next_mse": 0.16300803422927856,
+          "sample_error_p50": 0.06066504865884781,
+          "sample_error_p95": 0.3839893937110901,
+          "state_mse": 0.16594837605953217,
+          "action_mse": 0.050435520708560944,
+          "used_components": 107,
+          "offset_nearbound_fraction": 0.01284027099609375,
+          "offset_abs_p95": 2.6805474758148193
+        }
+      },
+      "synthetic": {
+        "count": 4096,
+        "state_rms": 0.9163427352905273,
+        "state_abs_p95": 1.8261085748672485,
+        "state_reconstruction_mse": 0.04115517437458038,
+        "prior_raw_rms": 1.6397857666015625,
+        "prior_std_min": 1.5115004777908325,
+        "g1_parameter_norm": 11.201310157775879
+      }
+    },
+    {
+      "checkpoint": "results/gym/lunar_lander/adversarial/checkpoint_5000.pt",
+      "checkpoint_sha256": "a17052e7aec6e4aa5194980913d5aa0996da2e078cc171976d7aba792399e5f9",
+      "step": 5000,
+      "arm": "adversarial",
+      "splits": {
+        "train": {
+          "count": 32768,
+          "next_mse": 0.09267929941415787,
+          "sample_error_p50": 0.017207704484462738,
+          "sample_error_p95": 0.13537660241127014,
+          "state_mse": 0.0626019611954689,
+          "action_mse": 0.006430610083043575,
+          "used_components": 95,
+          "offset_nearbound_fraction": 0.14209938049316406,
+          "offset_abs_p95": 2.9699947834014893
+        },
+        "validation": {
+          "count": 4096,
+          "next_mse": 0.16950707137584686,
+          "sample_error_p50": 0.05264908820390701,
+          "sample_error_p95": 0.3895871937274933,
+          "state_mse": 0.17783844470977783,
+          "action_mse": 0.016221120953559875,
+          "used_components": 59,
+          "offset_nearbound_fraction": 0.2176361083984375,
+          "offset_abs_p95": 2.99155330657959
+        }
+      },
+      "synthetic": {
+        "count": 4096,
+        "state_rms": 0.7699598670005798,
+        "state_abs_p95": 1.4669755697250366,
+        "state_reconstruction_mse": 0.022379927337169647,
+        "prior_raw_rms": 3.3731777667999268,
+        "prior_std_min": 3.07954740524292,
+        "g1_parameter_norm": 16.054468154907227
+      }
+    },
+    {
+      "checkpoint": "results/gym/lunar_lander/adversarial/checkpoint_10000.pt",
+      "checkpoint_sha256": "575d1fea15158f693f917f7b6bba599b9bfee38cae1331896d93acaf12b0c33e",
+      "step": 10000,
+      "arm": "adversarial",
+      "splits": {
+        "train": {
+          "count": 32768,
+          "next_mse": 0.07211389392614365,
+          "sample_error_p50": 0.01882946863770485,
+          "sample_error_p95": 0.1290339231491089,
+          "state_mse": 0.05377734825015068,
+          "action_mse": 0.003965551033616066,
+          "used_components": 81,
+          "offset_nearbound_fraction": 0.14461612701416016,
+          "offset_abs_p95": 2.9751667976379395
+        },
+        "validation": {
+          "count": 4096,
+          "next_mse": 0.24545888602733612,
+          "sample_error_p50": 0.14392316341400146,
+          "sample_error_p95": 0.7385491132736206,
+          "state_mse": 0.2535717189311981,
+          "action_mse": 0.017926309257745743,
+          "used_components": 57,
+          "offset_nearbound_fraction": 0.22552490234375,
+          "offset_abs_p95": 2.9932010173797607
+        }
+      },
+      "synthetic": {
+        "count": 4096,
+        "state_rms": 0.7270323038101196,
+        "state_abs_p95": 1.4372906684875488,
+        "state_reconstruction_mse": 0.022166414186358452,
+        "prior_raw_rms": 4.3478827476501465,
+        "prior_std_min": 3.9079272747039795,
+        "g1_parameter_norm": 23.428075790405273
+      }
+    }
+  ],
+  "training_trace": {
+    "direct": {
+      "metrics_sha256": "cbd3bcb8b5fad27264615e34aa4ea4924dbdc32b6334aacc73126650ca03981d",
+      "rows": [
+        {
+          "step": 1000,
+          "loss": 0.01082668174058199,
+          "d_loss": 0.0,
+          "g_loss": 0.0,
+          "prior_loss": 0.0,
+          "reconstruction_loss": 0.01082668174058199,
+          "lr_scale": 1.0,
+          "elapsed_seconds": 1.2141776309581473,
+          "reconstruction_terms": {
+            "continuous": 0.0061064353212714195,
+            "contact": 0.00472024641931057
+          },
+          "d_terms": {},
+          "g_terms": {}
+        },
+        {
+          "step": 10000,
+          "loss": 0.008475184440612793,
+          "d_loss": 0.0,
+          "g_loss": 0.0,
+          "prior_loss": 0.0,
+          "reconstruction_loss": 0.008475184440612793,
+          "lr_scale": 0.050000146501932796,
+          "elapsed_seconds": 9.872612092003692,
+          "reconstruction_terms": {
+            "continuous": 0.002527299104258418,
+            "contact": 0.005947885103523731
+          },
+          "d_terms": {},
+          "g_terms": {}
+        }
+      ]
+    },
+    "reconstruction": {
+      "metrics_sha256": "21d39448b6634deeddab19ed0deec099c59e639f0b4a1c7b556a7c0db9aab56e",
+      "rows": [
+        {
+          "step": 1000,
+          "loss": 0.25360164046287537,
+          "d_loss": 0.0,
+          "g_loss": 0.0,
+          "prior_loss": 0.0018653804436326027,
+          "reconstruction_loss": 0.25173625349998474,
+          "lr_scale": 1.0,
+          "elapsed_seconds": 9.011101028008852,
+          "reconstruction_terms": {
+            "real_state": 0.11272009462118149,
+            "real_action": 0.03337235003709793,
+            "real_next_state": 0.08788855373859406,
+            "real_state_continuous": 0.11106410622596741,
+            "real_state_contact": 0.0016559904906898737,
+            "real_next_state_continuous": 0.07465769350528717,
+            "real_next_state_contact": 0.013230858370661736,
+            "synthetic_state": 0.30992138385772705,
+            "synthetic_action": 0.037563785910606384,
+            "synthetic_state_continuous": 0.2779860496520996,
+            "synthetic_state_contact": 0.03193531930446625
+          },
+          "d_terms": {},
+          "g_terms": {}
+        },
+        {
+          "step": 5000,
+          "loss": 36.06045150756836,
+          "d_loss": 0.0,
+          "g_loss": 0.0,
+          "prior_loss": 0.11724735796451569,
+          "reconstruction_loss": 35.94320297241211,
+          "lr_scale": 1.0,
+          "elapsed_seconds": 43.75546879298054,
+          "reconstruction_terms": {
+            "real_state": 1.2009875774383545,
+            "real_action": 0.1545540690422058,
+            "real_next_state": 0.19482195377349854,
+            "real_state_continuous": 0.9005554914474487,
+            "real_state_contact": 0.30043214559555054,
+            "real_next_state_continuous": 0.16650128364562988,
+            "real_next_state_contact": 0.0283206719905138,
+            "synthetic_state": 70.61052703857422,
+            "synthetic_action": 0.24230076372623444,
+            "synthetic_state_continuous": 70.23284149169922,
+            "synthetic_state_contact": 0.3776848316192627
+          },
+          "d_terms": {},
+          "g_terms": {}
+        },
+        {
+          "step": 10000,
+          "loss": 171.40054321289062,
+          "d_loss": 0.0,
+          "g_loss": 0.0,
+          "prior_loss": 0.2457258105278015,
+          "reconstruction_loss": 171.15481567382812,
+          "lr_scale": 0.050000146501932796,
+          "elapsed_seconds": 89.91846711502876,
+          "reconstruction_terms": {
+            "real_state": 2.6799263954162598,
+            "real_action": 0.7344854474067688,
+            "real_next_state": 0.43428266048431396,
+            "real_state_continuous": 2.390042304992676,
+            "real_state_contact": 0.2898840308189392,
+            "real_next_state_continuous": 0.3175541162490845,
+            "real_next_state_contact": 0.1167285293340683,
+            "synthetic_state": 339.6141052246094,
+            "synthetic_action": 0.12972089648246765,
+            "synthetic_state_continuous": 339.45660400390625,
+            "synthetic_state_contact": 0.15748660266399384
+          },
+          "d_terms": {},
+          "g_terms": {}
+        }
+      ]
+    },
+    "adversarial": {
+      "metrics_sha256": "4b05fd6489a289e69fcf1c4a77f2b5fd0650672f375ab56661c64e3ce783dd69",
+      "rows": [
+        {
+          "step": 1000,
+          "loss": 1.8596341609954834,
+          "d_loss": 2.5959925651550293,
+          "g_loss": 1.7290984392166138,
+          "prior_loss": 0.0006712164031341672,
+          "reconstruction_loss": 0.12986445426940918,
+          "lr_scale": 1.0,
+          "elapsed_seconds": 30.055041883024387,
+          "reconstruction_terms": {
+            "real_state": 0.09391631186008453,
+            "real_action": 0.03585907071828842,
+            "real_next_state": 0.0918106809258461,
+            "real_state_continuous": 0.07801441848278046,
+            "real_state_contact": 0.015901895239949226,
+            "real_next_state_continuous": 0.07205003499984741,
+            "real_next_state_contact": 0.019760645925998688,
+            "synthetic_state": 0.08378976583480835,
+            "synthetic_action": 0.028215114027261734,
+            "synthetic_state_continuous": 0.04693147540092468,
+            "synthetic_state_contact": 0.03685829043388367
+          },
+          "d_terms": {
+            "joint": 0.6182477474212646,
+            "state": 0.6363169550895691,
+            "action": 0.6896417737007141,
+            "next_state": 0.6517859697341919
+          },
+          "g_terms": {
+            "joint": 0.862109363079071,
+            "state": 0.9039943218231201,
+            "action": 0.7106381058692932,
+            "next_state": 0.9074420928955078
+          }
+        },
+        {
+          "step": 5000,
+          "loss": 3.0761115550994873,
+          "d_loss": 1.735440731048584,
+          "g_loss": 3.016343116760254,
+          "prior_loss": 0.0007158055668696761,
+          "reconstruction_loss": 0.05905278027057648,
+          "lr_scale": 1.0,
+          "elapsed_seconds": 150.9215210370021,
+          "reconstruction_terms": {
+            "real_state": 0.04829012602567673,
+            "real_action": 0.008624814450740814,
+            "real_next_state": 0.05835746228694916,
+            "real_state_continuous": 0.04681512713432312,
+            "real_state_contact": 0.0014749999390915036,
+            "real_next_state_continuous": 0.05116491764783859,
+            "real_next_state_contact": 0.007192546036094427,
+            "synthetic_state": 0.033338770270347595,
+            "synthetic_action": 0.007918518967926502,
+            "synthetic_state_continuous": 0.02816195785999298,
+            "synthetic_state_contact": 0.00517681147903204
+          },
+          "d_terms": {
+            "joint": 0.2866321802139282,
+            "state": 0.36984333395957947,
+            "action": 0.6888390779495239,
+            "next_state": 0.39012613892555237
+          },
+          "g_terms": {
+            "joint": 1.8532118797302246,
+            "state": 1.4296276569366455,
+            "action": 0.6947485208511353,
+            "next_state": 1.4359806776046753
+          }
+        },
+        {
+          "step": 10000,
+          "loss": 2.7721574306488037,
+          "d_loss": 1.9272559881210327,
+          "g_loss": 2.725543975830078,
+          "prior_loss": 1.9354956748429686e-05,
+          "reconstruction_loss": 0.046594053506851196,
+          "lr_scale": 0.050000146501932796,
+          "elapsed_seconds": 301.9945466000354,
+          "reconstruction_terms": {
+            "real_state": 0.036758046597242355,
+            "real_action": 0.003071010112762451,
+            "real_next_state": 0.05358617752790451,
+            "real_state_continuous": 0.0359574630856514,
+            "real_state_contact": 0.0008005824638530612,
+            "real_next_state_continuous": 0.03542357683181763,
+            "real_next_state_contact": 0.018162600696086884,
+            "synthetic_state": 0.02786031924188137,
+            "synthetic_action": 0.0030509617645293474,
+            "synthetic_state_continuous": 0.02729877643287182,
+            "synthetic_state_contact": 0.000561543507501483
+          },
+          "d_terms": {
+            "joint": 0.3458126485347748,
+            "state": 0.42473849654197693,
+            "action": 0.6863563656806946,
+            "next_state": 0.4703485071659088
+          },
+          "g_terms": {
+            "joint": 1.6928889751434326,
+            "state": 1.322685956954956,
+            "action": 0.7057510018348694,
+            "next_state": 1.3462188243865967
+          }
+        }
+      ]
+    }
+  },
+  "elapsed_seconds": 11.028777356026694,
+  "hypotheses": [
+    "Detached synthetic targets with live synthetic inputs can create positive feedback: for F(x)=c*x with 0<c<1, differentiating (F(x)-stopgrad(x))^2 gives 2*c*(c-1)*x, so gradient descent increases |x| despite growing reconstruction error. This is a possible mechanism, not proof of the observed network's cause.",
+    "A bounded next ablation is to detach synthetic encoder inputs for synthetic reconstruction only, retaining the three generators, real reconstruction, and live original/composed adversarial gradients.",
+    "Raw prior table scale is logged, but read standardization removes global scale; raw RMS alone does not establish expanding latent codes."
+  ]
+}

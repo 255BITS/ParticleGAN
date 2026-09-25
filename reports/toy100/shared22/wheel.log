@@ -1,0 +1,16 @@
+Processing /ml2/hypergan/ParticleGAN-toy-k1176-validation
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: particlegan
+  Building wheel for particlegan (pyproject.toml): started
+  Building wheel for particlegan (pyproject.toml): finished with status 'done'
+  Created wheel for particlegan: filename=particlegan-0.6.0-py3-none-any.whl size=48156 sha256=c4cfc33f15a79cb8f249240f2c1e9cfbb3d25a15ec6056e34ea952c828d394f1
+  Stored in directory: /home/mikkel/.cache/pip/wheels/b1/f0/1c/8e73c6685dc69c85c1c10b9ccab99453e0eb8fe2ded522062b
+Successfully built particlegan
+
+[notice] A new release of pip is available: 25.0.1 -> 26.2.1
+[notice] To update, run: /tmp/pr38-default-env/bin/python -m pip install --upgrade pip

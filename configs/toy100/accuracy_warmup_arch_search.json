@@ -1,0 +1,28 @@
+[
+  {
+    "name": "warm_b2048_f2_g128_d3",
+    "overrides": {}
+  },
+  {
+    "name": "warm_b2048_f3_g128_d3",
+    "overrides": {
+      "fourier": 3
+    }
+  },
+  {
+    "name": "warm_b2048_f3_g32_d2",
+    "overrides": {
+      "fourier": 3,
+      "g_hidden": 32,
+      "n_hidden": 2
+    }
+  },
+  {
+    "name": "warm_b2048_f3_g64_d2",
+    "overrides": {
+      "fourier": 3,
+      "g_hidden": 64,
+      "n_hidden": 2
+    }
+  }
+]

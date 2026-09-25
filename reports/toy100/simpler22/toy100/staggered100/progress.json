@@ -1,0 +1,108 @@
+{
+  "model": "live",
+  "frames": 14,
+  "steps": [
+    0,
+    1,
+    10,
+    25,
+    50,
+    100,
+    250,
+    1000,
+    2000,
+    3000,
+    4000,
+    5000,
+    6000,
+    7000
+  ],
+  "axes": {
+    "xlim": [
+      -6.9,
+      6.9
+    ],
+    "ylim": [
+      -6.9,
+      6.9
+    ]
+  },
+  "gif_sha256": "ec89853381be28c907e37847d88839e656276f57b7cd00a80050755ffe725a83",
+  "sources": {
+    "staggered100": {
+      "events_sha256": "793cbd6b64fa6ea0e9e034a3eebdba7175f71b64f1c618a7c4513f078cca3968",
+      "snapshots": [
+        {
+          "step": 0,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_000000.npz",
+          "sha256": "5270f56eb4550a77cfe4181903766ad4dec3a841964881fb0c5ff92d02fb73e1"
+        },
+        {
+          "step": 1,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_000001.npz",
+          "sha256": "720a69924510d5379873ab4ed969627ed55534adc2cee138998240034e13ff9e"
+        },
+        {
+          "step": 10,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_000010.npz",
+          "sha256": "093cd907dcd7d19c81ccb75662eccd9c255f1705adc23efb9fc49e31f676829a"
+        },
+        {
+          "step": 25,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_000025.npz",
+          "sha256": "0a09dcb084884e6c4bb4ada36b4ab38db6cc44e5df0ba4513e835609a6982e74"
+        },
+        {
+          "step": 50,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_000050.npz",
+          "sha256": "fb965bcc3af27f8e87b80e08311f7de9cf5e8ac2709d8e470ae732fac51406a9"
+        },
+        {
+          "step": 100,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_000100.npz",
+          "sha256": "8f6aa652379987d1a751ea858e9aaf02792d36fc5e4ff0d90c4a92a9c7ca541d"
+        },
+        {
+          "step": 250,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_000250.npz",
+          "sha256": "345587d2e65b8fb52cbda47697a7661fd2fa9c9854ba07a3003112b21cb638fc"
+        },
+        {
+          "step": 1000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_001000.npz",
+          "sha256": "7be07fc430687a4633eba28514a45eb6430008107fe898913f5a2f013a8ea5da"
+        },
+        {
+          "step": 2000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_002000.npz",
+          "sha256": "cd455dc168b8fadc541646a2b2d47005d29afec96a40a9f6a55713aac7f10736"
+        },
+        {
+          "step": 3000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_003000.npz",
+          "sha256": "b45a0329a4977a8fe68cf251229be4c0ebeb9a6331c415bd0c6c726085e5bf41"
+        },
+        {
+          "step": 4000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_004000.npz",
+          "sha256": "259f90395ee48bb86bd54cf14d131beff7125b57cf73df3593c323af35d28fdf"
+        },
+        {
+          "step": 5000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_005000.npz",
+          "sha256": "9a41c471d92df5658c3587479a021fc6711ece9833d3c08ad1cf0bbee2287e52"
+        },
+        {
+          "step": 6000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_006000.npz",
+          "sha256": "36e3a992b4f6d1428937beb99d1e56142a2c7a2d8d48686e61c906cfe45b3dc6"
+        },
+        {
+          "step": 7000,
+          "path": "/dev/shm/particlegan-simple-regularization-common22-v1/toy100/staggered100/snapshots/step_007000.npz",
+          "sha256": "5c51510727203d59957a77135194c5ecd7c07384e8bcd76535125bf7e6516426"
+        }
+      ]
+    }
+  }
+}

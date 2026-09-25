@@ -1,0 +1,86 @@
+name: Shared-recipe 22-toy trained gate
+
+on:
+  push:
+    branches: [master, main, develop]
+    paths:
+      - "benchmarks/toy100/**"
+      - "benchmarks/toy_suite.py"
+      - "benchmarks/transfer_suite/**"
+      - "benchmarks/locked_shared/**"
+      - "configs/toy100/**"
+      - "particlegan/**"
+      - "lib/toy_models.py"
+      - "tests/test_toy100*.py"
+      - "tests/test_toy_suite*.py"
+      - "tests/test_legacy_noise*.py"
+      - "tests/test_legacy_recipe_schedule.py"
+      - ".github/workflows/toy100.yml"
+      - "pyproject.toml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trained-gate:
+    name: CPU / Python 3.11 / one recipe across all 22 toys
+    # Train only merged primary-branch code, including manual dispatches.
+    if: >-
+      github.event_name != 'pull_request' &&
+      contains(fromJSON('["refs/heads/master", "refs/heads/main", "refs/heads/develop"]'), github.ref)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      # Pin all CPU dispatch layers: identical source/config previously gave
+      # different image-toy trajectories on AVX2 and AVX512 hosted runners.
+      ATEN_CPU_CAPABILITY: avx2
+      ONEDNN_MAX_CPU_ISA: AVX2
+      DNNL_MAX_CPU_ISA: AVX2
+      MKL_ENABLE_INSTRUCTIONS: AVX2
+      MPLBACKEND: Agg
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install CPU PyTorch
+        run: python -m pip install 'torch==2.13.0+cpu' --index-url https://download.pytorch.org/whl/cpu
+      - name: Install benchmark and test dependencies
+        run: python -m pip install -e '.[dev,experiments]'
+      - name: Validate dependencies
+        run: python -m pip check
+      - name: Record the CPU dispatch profile
+        run: |
+          python - <<'PY'
+          import os
+          import torch
+          keys = ("ATEN_CPU_CAPABILITY", "ONEDNN_MAX_CPU_ISA",
+                  "DNNL_MAX_CPU_ISA", "MKL_ENABLE_INSTRUCTIONS")
+          print({key: os.environ[key] for key in keys})
+          print(torch.__config__.show())
+          assert torch.backends.cpu.get_cpu_capability() == "AVX2"
+          PY
+      - name: Check accuracy, common-recipe protocol, and host adapters
+        run: python -m pytest -q tests/test_toy100*.py tests/test_toy_suite*.py tests/test_legacy_noise*.py tests/test_legacy_recipe_schedule.py
+      - name: Train and gate all 22 problems under one candidate
+        shell: bash
+        run: |
+          set -o pipefail
+          python -u -m benchmarks.toy_suite run --output artifacts/toy-suite-ci 2>&1 | tee toy-suite-ci.log
+      - name: Upload gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: common22-trained-gate
+          path: |
+            toy-suite-ci.log
+            artifacts/toy-suite-ci/
+          if-no-files-found: warn

@@ -1,0 +1,6 @@
+arm: auxiliary
+steps: 2500
+batch_size: 256
+checkpoints: [250, 1000, 2500]
+device: cuda:1
+out_dir: results/gym/lunar_lander_state_control/auxiliary

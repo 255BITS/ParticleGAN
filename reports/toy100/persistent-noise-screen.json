@@ -1,0 +1,644 @@
+{
+  "artifact": "/ml2/hypergan/ParticleGAN-toy-persistent-noise/artifacts/toy100-constraints/particlegan-persistent-noise-wave1-6602790",
+  "audit_errors": 0,
+  "candidates": 8,
+  "episodes": 8,
+  "files": 118,
+  "full22_and_continual_tests": "not attempted; all candidates failed initial gate",
+  "inventory_sha256": "4876a2b8ff060311b16e1e132959bd96fc849a54c70359ed881dca87802d9192",
+  "manifest_sha256": "5a65f8708276ce169988d04b9f26f94e47c0b2efe9052438df80b4a8b599f3e4",
+  "original_ram_files_byte_matched": 117,
+  "production_common_gate_eligible": false,
+  "rows": [
+    {
+      "actual_noise_application_count": 7200,
+      "actual_noise_clock_count": 1200,
+      "actual_optimizer_update_count": 2400,
+      "common_gate_eligible": false,
+      "config_sha256": "814652637e535b5a7baff213dc7266a59889ed086b2bd1059eb5edfc815fd62d",
+      "core": "winner",
+      "diagnostics": {
+        "d": {
+          "actual_lr": [
+            0.001
+          ],
+          "first100_mean_gradient_rms": 0.0055169706354024906,
+          "first100_mean_update_rms": 0.0009174646433009816,
+          "last200_mean_gradient_rms": 0.0036424704044706485,
+          "last200_mean_update_rms": 0.0003089636706214109
+        },
+        "g": {
+          "actual_lr": [
+            0.001
+          ],
+          "first100_mean_gradient_rms": 0.00510989189104625,
+          "first100_mean_update_rms": 0.0015075272236694122,
+          "last200_mean_gradient_rms": 0.0047246801986185845,
+          "last200_mean_update_rms": 0.0006831822941408775
+        },
+        "prior": {
+          "actual_lr": [
+            0.002
+          ],
+          "first100_mean_gradient_rms": 0.029076766854539603,
+          "first100_mean_update_rms": 0.003163519359596713,
+          "last200_mean_gradient_rms": 0.023943199637155844,
+          "last200_mean_update_rms": 0.0014006886390596767
+        }
+      },
+      "final": {
+        "hq": 0.95556640625,
+        "modes": 8
+      },
+      "gradient_evaluations_per_player": 1200,
+      "id": "pn000",
+      "input_sigma": 0.1,
+      "lr": 0.001,
+      "measured_case_seconds": 8.289692393038422,
+      "passing_suffix": 2,
+      "source_archive_and_actual_noise_verified": true,
+      "status": "FAIL",
+      "task": "mode_hold",
+      "terminal": [
+        {
+          "hq": 0.5751953125,
+          "modes": 5,
+          "step": 1000
+        },
+        {
+          "hq": 0.667724609375,
+          "modes": 6,
+          "step": 1050
+        },
+        {
+          "hq": 0.7744140625,
+          "modes": 8,
+          "step": 1100
+        },
+        {
+          "hq": 1.0,
+          "modes": 8,
+          "step": 1150
+        },
+        {
+          "hq": 0.95556640625,
+          "modes": 8,
+          "step": 1200
+        }
+      ],
+      "terminal_passing_checkpoints": 2
+    },
+    {
+      "actual_noise_application_count": 7200,
+      "actual_noise_clock_count": 1200,
+      "actual_optimizer_update_count": 2400,
+      "common_gate_eligible": false,
+      "config_sha256": "1bc744a846b959386079a5f1fd695ebf89167739252a7fa315b1e92d56515ca4",
+      "core": "winner",
+      "diagnostics": {
+        "d": {
+          "actual_lr": [
+            0.001
+          ],
+          "first100_mean_gradient_rms": 0.0056530420963101435,
+          "first100_mean_update_rms": 0.0010769063014885514,
+          "last200_mean_gradient_rms": 0.0025437956688564665,
+          "last200_mean_update_rms": 0.0006835515160520864
+        },
+        "g": {
+          "actual_lr": [
+            0.001
+          ],
+          "first100_mean_gradient_rms": 0.0043007870338580955,
+          "first100_mean_update_rms": 0.001512271479417981,
+          "last200_mean_gradient_rms": 0.0018774377118602884,
+          "last200_mean_update_rms": 0.0008419674201085707
+        },
+        "prior": {
+          "actual_lr": [
+            0.002
+          ],
+          "first100_mean_gradient_rms": 0.007055053418844969,
+          "first100_mean_update_rms": 0.0032280638846922272,
+          "last200_mean_gradient_rms": 0.010505390560610998,
+          "last200_mean_update_rms": 0.001833647416915703
+        }
+      },
+      "final": {
+        "hq": 0.203857421875,
+        "modes": 4
+      },
+      "gradient_evaluations_per_player": 1200,
+      "id": "pn001",
+      "input_sigma": 0.5,
+      "lr": 0.001,
+      "measured_case_seconds": 8.803729091072455,
+      "passing_suffix": 0,
+      "source_archive_and_actual_noise_verified": true,
+      "status": "FAIL",
+      "task": "mode_hold",
+      "terminal": [
+        {
+          "hq": 0.39990234375,
+          "modes": 6,
+          "step": 1000
+        },
+        {
+          "hq": 0.0009765625,
+          "modes": 1,
+          "step": 1050
+        },
+        {
+          "hq": 0.16064453125,
+          "modes": 3,
+          "step": 1100
+        },
+        {
+          "hq": 0.231201171875,
+          "modes": 3,
+          "step": 1150
+        },
+        {
+          "hq": 0.203857421875,
+          "modes": 4,
+          "step": 1200
+        }
+      ],
+      "terminal_passing_checkpoints": 0
+    },
+    {
+      "actual_noise_application_count": 7200,
+      "actual_noise_clock_count": 1200,
+      "actual_optimizer_update_count": 2400,
+      "common_gate_eligible": false,
+      "config_sha256": "220ef3fac711285cd0d755f4a58cba15c84cc9eda9d23bacdecbe91d567cb2c2",
+      "core": "winner",
+      "diagnostics": {
+        "d": {
+          "actual_lr": [
+            0.0025
+          ],
+          "first100_mean_gradient_rms": 0.007487466305373322,
+          "first100_mean_update_rms": 0.0018879711879883807,
+          "last200_mean_gradient_rms": 0.0055293518534523375,
+          "last200_mean_update_rms": 0.0015092716708206813
+        },
+        "g": {
+          "actual_lr": [
+            0.0025
+          ],
+          "first100_mean_gradient_rms": 0.005172087472347109,
+          "first100_mean_update_rms": 0.0030214234283736595,
+          "last200_mean_gradient_rms": 0.004404551694580611,
+          "last200_mean_update_rms": 0.0012282106820985757
+        },
+        "prior": {
+          "actual_lr": [
+            0.005
+          ],
+          "first100_mean_gradient_rms": 0.02540870837026523,
+          "first100_mean_update_rms": 0.005893198161152055,
+          "last200_mean_gradient_rms": 0.02151191853049856,
+          "last200_mean_update_rms": 0.0027460068903448795
+        }
+      },
+      "final": {
+        "hq": 0.802978515625,
+        "modes": 6
+      },
+      "gradient_evaluations_per_player": 1200,
+      "id": "pn002",
+      "input_sigma": 0.1,
+      "lr": 0.0025,
+      "measured_case_seconds": 8.772388024022803,
+      "passing_suffix": 0,
+      "source_archive_and_actual_noise_verified": true,
+      "status": "FAIL",
+      "task": "mode_hold",
+      "terminal": [
+        {
+          "hq": 0.59619140625,
+          "modes": 6,
+          "step": 1000
+        },
+        {
+          "hq": 0.572265625,
+          "modes": 6,
+          "step": 1050
+        },
+        {
+          "hq": 0.906494140625,
+          "modes": 7,
+          "step": 1100
+        },
+        {
+          "hq": 0.2021484375,
+          "modes": 2,
+          "step": 1150
+        },
+        {
+          "hq": 0.802978515625,
+          "modes": 6,
+          "step": 1200
+        }
+      ],
+      "terminal_passing_checkpoints": 0
+    },
+    {
+      "actual_noise_application_count": 7200,
+      "actual_noise_clock_count": 1200,
+      "actual_optimizer_update_count": 2400,
+      "common_gate_eligible": false,
+      "config_sha256": "c68f400b9ef9b983940615c0c8a4584cc2a5f6571f4582f979fe48f3bca5a285",
+      "core": "winner",
+      "diagnostics": {
+        "d": {
+          "actual_lr": [
+            0.0025
+          ],
+          "first100_mean_gradient_rms": 0.005429168430342296,
+          "first100_mean_update_rms": 0.0014896181990197797,
+          "last200_mean_gradient_rms": 0.0020136008223304268,
+          "last200_mean_update_rms": 0.0013775078422986232
+        },
+        "g": {
+          "actual_lr": [
+            0.0025
+          ],
+          "first100_mean_gradient_rms": 0.0022492125223349743,
+          "first100_mean_update_rms": 0.002773645741308777,
+          "last200_mean_gradient_rms": 0.0019720554227657273,
+          "last200_mean_update_rms": 0.002053323375051818
+        },
+        "prior": {
+          "actual_lr": [
+            0.005
+          ],
+          "first100_mean_gradient_rms": 0.009914652330158771,
+          "first100_mean_update_rms": 0.006903860850916283,
+          "last200_mean_gradient_rms": 0.00690986912214072,
+          "last200_mean_update_rms": 0.003995667226638182
+        }
+      },
+      "final": {
+        "hq": 0.374755859375,
+        "modes": 5
+      },
+      "gradient_evaluations_per_player": 1200,
+      "id": "pn003",
+      "input_sigma": 0.5,
+      "lr": 0.0025,
+      "measured_case_seconds": 9.002959688892588,
+      "passing_suffix": 0,
+      "source_archive_and_actual_noise_verified": true,
+      "status": "FAIL",
+      "task": "mode_hold",
+      "terminal": [
+        {
+          "hq": 0.287841796875,
+          "modes": 6,
+          "step": 1000
+        },
+        {
+          "hq": 0.468994140625,
+          "modes": 6,
+          "step": 1050
+        },
+        {
+          "hq": 0.1796875,
+          "modes": 3,
+          "step": 1100
+        },
+        {
+          "hq": 0.3193359375,
+          "modes": 6,
+          "step": 1150
+        },
+        {
+          "hq": 0.374755859375,
+          "modes": 5,
+          "step": 1200
+        }
+      ],
+      "terminal_passing_checkpoints": 0
+    },
+    {
+      "actual_noise_application_count": 7200,
+      "actual_noise_clock_count": 1200,
+      "actual_optimizer_update_count": 2400,
+      "common_gate_eligible": false,
+      "config_sha256": "5119b6af11c4c240c4fe69ef7c60a2a6cb709ae7c07f0b1b142a18491ce42ea7",
+      "core": "simple",
+      "diagnostics": {
+        "d": {
+          "actual_lr": [
+            0.001
+          ],
+          "first100_mean_gradient_rms": 0.004813179000815526,
+          "first100_mean_update_rms": 0.0010780550376739294,
+          "last200_mean_gradient_rms": 0.004638503374968963,
+          "last200_mean_update_rms": 0.0005110577118719299
+        },
+        "g": {
+          "actual_lr": [
+            0.001
+          ],
+          "first100_mean_gradient_rms": 0.004806438860227444,
+          "first100_mean_update_rms": 0.0012614099529599308,
+          "last200_mean_gradient_rms": 0.009290980638636722,
+          "last200_mean_update_rms": 0.000917377216785018
+        },
+        "prior": {
+          "actual_lr": [
+            0.002
+          ],
+          "first100_mean_gradient_rms": 0.03149447360487042,
+          "first100_mean_update_rms": 0.002677691156467096,
+          "last200_mean_gradient_rms": 0.04671867160047085,
+          "last200_mean_update_rms": 0.001927264611279438
+        }
+      },
+      "final": {
+        "hq": 0.92919921875,
+        "modes": 8
+      },
+      "gradient_evaluations_per_player": 1200,
+      "id": "pn004",
+      "input_sigma": 0.1,
+      "lr": 0.001,
+      "measured_case_seconds": 8.859310377854854,
+      "passing_suffix": 2,
+      "source_archive_and_actual_noise_verified": true,
+      "status": "FAIL",
+      "task": "mode_hold",
+      "terminal": [
+        {
+          "hq": 0.917236328125,
+          "modes": 8,
+          "step": 1000
+        },
+        {
+          "hq": 0.728271484375,
+          "modes": 7,
+          "step": 1050
+        },
+        {
+          "hq": 0.506591796875,
+          "modes": 7,
+          "step": 1100
+        },
+        {
+          "hq": 0.9814453125,
+          "modes": 8,
+          "step": 1150
+        },
+        {
+          "hq": 0.92919921875,
+          "modes": 8,
+          "step": 1200
+        }
+      ],
+      "terminal_passing_checkpoints": 3
+    },
+    {
+      "actual_noise_application_count": 7200,
+      "actual_noise_clock_count": 1200,
+      "actual_optimizer_update_count": 2400,
+      "common_gate_eligible": false,
+      "config_sha256": "6e49da01068510a22c80da60d536b142398b1bf2d761ec90428b0553a319c3c5",
+      "core": "simple",
+      "diagnostics": {
+        "d": {
+          "actual_lr": [
+            0.001
+          ],
+          "first100_mean_gradient_rms": 0.0048753193512200465,
+          "first100_mean_update_rms": 0.0010587859504518874,
+          "last200_mean_gradient_rms": 0.002225402231465239,
+          "last200_mean_update_rms": 0.0006686999246141443
+        },
+        "g": {
+          "actual_lr": [
+            0.001
+          ],
+          "first100_mean_gradient_rms": 0.004280631430765575,
+          "first100_mean_update_rms": 0.001463939082203102,
+          "last200_mean_gradient_rms": 0.0016236394843758,
+          "last200_mean_update_rms": 0.0007064250581639842
+        },
+        "prior": {
+          "actual_lr": [
+            0.002
+          ],
+          "first100_mean_gradient_rms": 0.009341090276829759,
+          "first100_mean_update_rms": 0.003517030162625714,
+          "last200_mean_gradient_rms": 0.01063605362783242,
+          "last200_mean_update_rms": 0.0016847823889888389
+        }
+      },
+      "final": {
+        "hq": 0.0,
+        "modes": 0
+      },
+      "gradient_evaluations_per_player": 1200,
+      "id": "pn005",
+      "input_sigma": 0.5,
+      "lr": 0.001,
+      "measured_case_seconds": 8.854445369914174,
+      "passing_suffix": 0,
+      "source_archive_and_actual_noise_verified": true,
+      "status": "FAIL",
+      "task": "mode_hold",
+      "terminal": [
+        {
+          "hq": 0.14306640625,
+          "modes": 4,
+          "step": 1000
+        },
+        {
+          "hq": 0.383056640625,
+          "modes": 5,
+          "step": 1050
+        },
+        {
+          "hq": 0.200439453125,
+          "modes": 4,
+          "step": 1100
+        },
+        {
+          "hq": 0.11181640625,
+          "modes": 2,
+          "step": 1150
+        },
+        {
+          "hq": 0.0,
+          "modes": 0,
+          "step": 1200
+        }
+      ],
+      "terminal_passing_checkpoints": 0
+    },
+    {
+      "actual_noise_application_count": 7200,
+      "actual_noise_clock_count": 1200,
+      "actual_optimizer_update_count": 2400,
+      "common_gate_eligible": false,
+      "config_sha256": "1a8ea5ea74f476cdce2449f52ad1b454f920571ac1ec193e0af4ad67de68228c",
+      "core": "simple",
+      "diagnostics": {
+        "d": {
+          "actual_lr": [
+            0.0025
+          ],
+          "first100_mean_gradient_rms": 0.005937395073961829,
+          "first100_mean_update_rms": 0.0024141165881724487,
+          "last200_mean_gradient_rms": 0.013294248347843478,
+          "last200_mean_update_rms": 0.002094667248512088
+        },
+        "g": {
+          "actual_lr": [
+            0.0025
+          ],
+          "first100_mean_gradient_rms": 0.006319967599550936,
+          "first100_mean_update_rms": 0.0032404994163826822,
+          "last200_mean_gradient_rms": 0.006629011124969547,
+          "last200_mean_update_rms": 0.001257262634237615
+        },
+        "prior": {
+          "actual_lr": [
+            0.005
+          ],
+          "first100_mean_gradient_rms": 0.0382730215188032,
+          "first100_mean_update_rms": 0.0069378841297228905,
+          "last200_mean_gradient_rms": 0.03089125130253797,
+          "last200_mean_update_rms": 0.0034533460505317766
+        }
+      },
+      "final": {
+        "hq": 0.5390625,
+        "modes": 5
+      },
+      "gradient_evaluations_per_player": 1200,
+      "id": "pn006",
+      "input_sigma": 0.1,
+      "lr": 0.0025,
+      "measured_case_seconds": 9.002245699055493,
+      "passing_suffix": 0,
+      "source_archive_and_actual_noise_verified": true,
+      "status": "FAIL",
+      "task": "mode_hold",
+      "terminal": [
+        {
+          "hq": 0.864013671875,
+          "modes": 6,
+          "step": 1000
+        },
+        {
+          "hq": 0.605712890625,
+          "modes": 5,
+          "step": 1050
+        },
+        {
+          "hq": 0.11279296875,
+          "modes": 1,
+          "step": 1100
+        },
+        {
+          "hq": 0.66845703125,
+          "modes": 6,
+          "step": 1150
+        },
+        {
+          "hq": 0.5390625,
+          "modes": 5,
+          "step": 1200
+        }
+      ],
+      "terminal_passing_checkpoints": 0
+    },
+    {
+      "actual_noise_application_count": 7200,
+      "actual_noise_clock_count": 1200,
+      "actual_optimizer_update_count": 2400,
+      "common_gate_eligible": false,
+      "config_sha256": "f7a0c46d3b50a390d535ba734e7490c22a1f09a5eacb1938c67cef5b6bfa7ba1",
+      "core": "simple",
+      "diagnostics": {
+        "d": {
+          "actual_lr": [
+            0.0025
+          ],
+          "first100_mean_gradient_rms": 0.005774037586014637,
+          "first100_mean_update_rms": 0.0022775212963112397,
+          "last200_mean_gradient_rms": 0.0019335092280752446,
+          "last200_mean_update_rms": 0.001198813517712644
+        },
+        "g": {
+          "actual_lr": [
+            0.0025
+          ],
+          "first100_mean_gradient_rms": 0.004523924770988961,
+          "first100_mean_update_rms": 0.0031876586551219384,
+          "last200_mean_gradient_rms": 0.0017474576830772642,
+          "last200_mean_update_rms": 0.001467649316288397
+        },
+        "prior": {
+          "actual_lr": [
+            0.005
+          ],
+          "first100_mean_gradient_rms": 0.012983943973628473,
+          "first100_mean_update_rms": 0.007027972105283367,
+          "last200_mean_gradient_rms": 0.010412474400506267,
+          "last200_mean_update_rms": 0.0041419075804232045
+        }
+      },
+      "final": {
+        "hq": 0.019775390625,
+        "modes": 1
+      },
+      "gradient_evaluations_per_player": 1200,
+      "id": "pn007",
+      "input_sigma": 0.5,
+      "lr": 0.0025,
+      "measured_case_seconds": 7.365236293990165,
+      "passing_suffix": 0,
+      "source_archive_and_actual_noise_verified": true,
+      "status": "FAIL",
+      "task": "mode_hold",
+      "terminal": [
+        {
+          "hq": 0.316162109375,
+          "modes": 4,
+          "step": 1000
+        },
+        {
+          "hq": 0.163818359375,
+          "modes": 4,
+          "step": 1050
+        },
+        {
+          "hq": 0.146240234375,
+          "modes": 2,
+          "step": 1100
+        },
+        {
+          "hq": 0.15234375,
+          "modes": 2,
+          "step": 1150
+        },
+        {
+          "hq": 0.019775390625,
+          "modes": 1,
+          "step": 1200
+        }
+      ],
+      "terminal_passing_checkpoints": 0
+    }
+  ],
+  "source_commit": "660279039738e0379cbf23d1f5e0c36395c38b76",
+  "status": "complete",
+  "strict_failures": 8,
+  "strict_passes": 0,
+  "tests_passed": 99,
+  "total_measured_case_seconds": 68.95000693784095
+}

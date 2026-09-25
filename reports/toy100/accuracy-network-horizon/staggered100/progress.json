@@ -1,0 +1,108 @@
+{
+  "model": "live",
+  "frames": 14,
+  "steps": [
+    0,
+    1,
+    10,
+    25,
+    50,
+    100,
+    250,
+    1000,
+    2000,
+    3000,
+    4000,
+    5000,
+    6000,
+    7000
+  ],
+  "axes": {
+    "xlim": [
+      -6.9,
+      6.9
+    ],
+    "ylim": [
+      -6.9,
+      6.9
+    ]
+  },
+  "gif_sha256": "ca191391b158c56c16488cef8ee690e55325501dbabcd7e12d9a51e67afda074",
+  "sources": {
+    "staggered100": {
+      "events_sha256": "9ae7d76f21294a896f8eb20c911fc07d6e798e899cd5a65f753627bbc1b2a5b4",
+      "snapshots": [
+        {
+          "step": 0,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_000000.npz",
+          "sha256": "5270f56eb4550a77cfe4181903766ad4dec3a841964881fb0c5ff92d02fb73e1"
+        },
+        {
+          "step": 1,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_000001.npz",
+          "sha256": "d63a50dfced2519923fd70eb2399f4919a170808022374991218ad3be4eba7bf"
+        },
+        {
+          "step": 10,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_000010.npz",
+          "sha256": "bc32143fe39cfbc0409c49237aac60c878bcb4cc17903c84463ac699d7728582"
+        },
+        {
+          "step": 25,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_000025.npz",
+          "sha256": "a99bacc2575f9d6faf73fffc2268b0b54d4798442f155acc973079e48dab7fc3"
+        },
+        {
+          "step": 50,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_000050.npz",
+          "sha256": "12be1983a3808770291f4251467a31a7aa65b25d848483bbeaf9f7ecfb556843"
+        },
+        {
+          "step": 100,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_000100.npz",
+          "sha256": "73df8249c722bd528f142fc2e7313eca38c9af73ff9c9e3209a60db52ab94673"
+        },
+        {
+          "step": 250,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_000250.npz",
+          "sha256": "d334df1a0472d826ef7779d611700bd83b8f88d0ec7a7e07120309cb27f9e1d4"
+        },
+        {
+          "step": 1000,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_001000.npz",
+          "sha256": "0ec5735c087d392a08a4fe055e83d7cd54563d6df1168ac8d0f491b9f0c9b417"
+        },
+        {
+          "step": 2000,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_002000.npz",
+          "sha256": "02d914e12b4ae873f6b07f9c34d1ce191e8871c525b992e0fcb16404ea5c1fff"
+        },
+        {
+          "step": 3000,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_003000.npz",
+          "sha256": "2fc217b92fea60f9e3bc671d9da226b32cb950bd8ff1ac9b5643368199531d92"
+        },
+        {
+          "step": 4000,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_004000.npz",
+          "sha256": "6184d9f0aebc7787d604ecddf8030a1968001384e10adc2a00d9f0ae1cb52f11"
+        },
+        {
+          "step": 5000,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_005000.npz",
+          "sha256": "55f5aaf8aee8e401bd436c8632bf9c01cecfb65c5a3aa060ea7a90fb722ed9b8"
+        },
+        {
+          "step": 6000,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_006000.npz",
+          "sha256": "3c716ecfbcb4d04883a01f6fa174ee479dd8e5c65dfd15836d6c3a8625bfdb39"
+        },
+        {
+          "step": 7000,
+          "path": "reports/toy100/accuracy-network-horizon/staggered100/snapshots/step_007000.npz",
+          "sha256": "ee1d0684da9a6d8b9efa394ceb22cc0f3d5137dd2beb8b369a8ad59332440133"
+        }
+      ]
+    }
+  }
+}

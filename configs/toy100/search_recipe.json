@@ -1,0 +1,86 @@
+[
+  {
+    "name": "historical_lr0006",
+    "overrides": {
+      "lr": 0.0006,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [0.0, 0.999],
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "prior_reg": 1.0
+    }
+  },
+  {
+    "name": "historical_lr0012",
+    "overrides": {
+      "lr": 0.0012,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [0.0, 0.999],
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "prior_reg": 1.0
+    }
+  },
+  {
+    "name": "historical_cap6",
+    "overrides": {
+      "lr": 0.0012,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [0.0, 0.999],
+      "reg_coeff": 6.0,
+      "reg_kappa": 1.0,
+      "prior_reg": 1.0
+    }
+  },
+  {
+    "name": "historical_prior2",
+    "overrides": {
+      "lr": 0.0012,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 2.0,
+      "betas": [0.0, 0.999],
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "prior_reg": 1.0
+    }
+  },
+  {
+    "name": "historical_reg005",
+    "overrides": {
+      "lr": 0.0012,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [0.0, 0.999],
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "prior_reg": 0.05
+    }
+  },
+  {
+    "name": "historical_beta099",
+    "overrides": {
+      "lr": 0.0012,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "betas": [0.0, 0.99],
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "prior_reg": 1.0
+    }
+  },
+  {
+    "name": "historical_d1",
+    "overrides": {
+      "lr": 0.0012,
+      "d_lr_mult": 1.0,
+      "prior_lr_mult": 10.0,
+      "betas": [0.0, 0.999],
+      "reg_coeff": 1.0,
+      "reg_kappa": 1.0,
+      "prior_reg": 1.0
+    }
+  }
+]

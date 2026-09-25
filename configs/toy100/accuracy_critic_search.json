@@ -1,0 +1,26 @@
+[
+  {
+    "name": "fourier3",
+    "overrides": {
+      "fourier": 3
+    }
+  },
+  {
+    "name": "fourier4",
+    "overrides": {
+      "fourier": 4
+    }
+  },
+  {
+    "name": "cap2",
+    "overrides": {
+      "reg_coeff": 2.0
+    }
+  },
+  {
+    "name": "longer_input_noise",
+    "overrides": {
+      "input_noise_anneal_end": 0.65
+    }
+  }
+]

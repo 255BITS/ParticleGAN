@@ -1,0 +1,10 @@
+checkpoint: runs/cifar_particle_ae/particle_16k_80k/16k_80k/checkpoint_080000.pt
+checkpoint_sha256: 9ddcef1fb0bf82c47a581fa1b2d58872315d5d67b302eadc533c0abc41b7d5c7
+expected_fid: 15.752682149
+latent_samples: 512
+noise_scales:
+- 1.0
+- 0.5
+out_dir: runs/cifar_particle_ae/particle_overlap_sweep_smoke/80k
+quality_samples: 128
+samples: 128

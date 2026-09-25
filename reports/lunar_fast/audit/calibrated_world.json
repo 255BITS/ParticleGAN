@@ -1,0 +1,389 @@
+[
+  {
+    "label": "counterfactual_raw",
+    "world_metrics": {
+      "train": {
+        "next_state_mse": 0.001185947796329856,
+        "next_state_mae": 0.006327029317617416,
+        "next_state_normalized_mse": 0.3320092558860779
+      },
+      "validation": {
+        "next_state_mse": 0.002241421490907669,
+        "next_state_mae": 0.008146262727677822,
+        "next_state_normalized_mse": 0.5294504165649414
+      },
+      "updates": 2500,
+      "records": 37143
+    },
+    "engine_jump": {
+      "real_mean": 0.027305244689895994,
+      "pred_mean": 0.007674330845475197,
+      "mae": 0.019630913933118183
+    },
+    "high_rising_wrong_up": 0,
+    "high_rising_wrong_down": 14,
+    "high_rising_rows": 42,
+    "episodes": 20,
+    "success_count": 20,
+    "success_rate": 1.0,
+    "mean_steps": 211.25,
+    "mean_success_steps": 211.25,
+    "mean_contact_step": 167.4,
+    "mean_return": 280.6490280478335,
+    "outcomes": {
+      "successful_landing": 20,
+      "crash": 0,
+      "out_of_bounds": 0,
+      "time_limit": 0,
+      "other_termination": 0
+    },
+    "failed_validation_seeds": [],
+    "training_24053": {
+      "outcome": "successful_landing",
+      "steps": 216
+    },
+    "policy_metrics": {
+      "train": {
+        "action_mse": 0.004613860975950956,
+        "world_successor_mse": 0.0012189514236524701,
+        "world_successor_normalized_mse": 0.321662962436676
+      },
+      "validation": null,
+      "before_adversarial": {
+        "action_mse": 0.001876983791589737,
+        "world_successor_mse": 0.0012192113790661097,
+        "world_successor_normalized_mse": 0.32286667823791504
+      },
+      "warmup_updates": 8000,
+      "rpgan_updates": 400,
+      "world_weight": 2.5,
+      "adversarial_weight": 1.0,
+      "records": 20629,
+      "recipe": {
+        "name": "gan_v3",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 400,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.25,
+        "reg_every": 4,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "optimizers": {
+        "generator": {
+          "name": "Adam",
+          "lr": 0.0003,
+          "betas": [
+            0.5,
+            0.99
+          ]
+        },
+        "discriminator": {
+          "name": "Adam",
+          "lr": 0.0002,
+          "betas": [
+            0.5,
+            0.99
+          ]
+        }
+      },
+      "main_deadband": 0.12,
+      "initial_policy": null,
+      "world_checkpoint": "/ml2/hypergan/ParticleGAN-lunar-fast/results/gym/lunar_systematic_audit/calibrated_world/raw_world.pt"
+    }
+  },
+  {
+    "label": "counterfactual_power",
+    "world_metrics": {
+      "train": {
+        "next_state_mse": 0.0011896411888301373,
+        "next_state_mae": 0.005965115036815405,
+        "next_state_normalized_mse": 0.3236493766307831
+      },
+      "validation": {
+        "next_state_mse": 0.002215007785707712,
+        "next_state_mae": 0.007784317247569561,
+        "next_state_normalized_mse": 0.5175604820251465
+      },
+      "updates": 2500,
+      "records": 37143
+    },
+    "engine_jump": {
+      "real_mean": 0.027305244689895994,
+      "pred_mean": 0.024956606328487396,
+      "mae": 0.00643643665881384
+    },
+    "high_rising_wrong_up": 0,
+    "high_rising_wrong_down": 0,
+    "high_rising_rows": 42,
+    "episodes": 20,
+    "success_count": 20,
+    "success_rate": 1.0,
+    "mean_steps": 211.6,
+    "mean_success_steps": 211.6,
+    "mean_contact_step": 167.25,
+    "mean_return": 281.1564767335841,
+    "outcomes": {
+      "successful_landing": 20,
+      "crash": 0,
+      "out_of_bounds": 0,
+      "time_limit": 0,
+      "other_termination": 0
+    },
+    "failed_validation_seeds": [],
+    "training_24053": {
+      "outcome": "successful_landing",
+      "steps": 215
+    },
+    "policy_metrics": {
+      "train": {
+        "action_mse": 0.0038933551404625177,
+        "world_successor_mse": 0.0012252855813130736,
+        "world_successor_normalized_mse": 0.3299185037612915
+      },
+      "validation": null,
+      "before_adversarial": {
+        "action_mse": 0.001876983791589737,
+        "world_successor_mse": 0.0012293851468712091,
+        "world_successor_normalized_mse": 0.3309933841228485
+      },
+      "warmup_updates": 8000,
+      "rpgan_updates": 400,
+      "world_weight": 2.5,
+      "adversarial_weight": 1.0,
+      "records": 20629,
+      "recipe": {
+        "name": "gan_v3",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 400,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.25,
+        "reg_every": 4,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "optimizers": {
+        "generator": {
+          "name": "Adam",
+          "lr": 0.0003,
+          "betas": [
+            0.5,
+            0.99
+          ]
+        },
+        "discriminator": {
+          "name": "Adam",
+          "lr": 0.0002,
+          "betas": [
+            0.5,
+            0.99
+          ]
+        }
+      },
+      "main_deadband": 0.12,
+      "initial_policy": null,
+      "world_checkpoint": "/ml2/hypergan/ParticleGAN-lunar-fast/results/gym/lunar_systematic_audit/calibrated_world/power_world.pt"
+    }
+  },
+  {
+    "label": "counterfactual_power_centered",
+    "world_metrics": {
+      "train": {
+        "next_state_mse": 0.0011896411888301373,
+        "next_state_mae": 0.005965115036815405,
+        "next_state_normalized_mse": 0.3236493766307831
+      },
+      "validation": {
+        "next_state_mse": 0.002215007785707712,
+        "next_state_mae": 0.007784317247569561,
+        "next_state_normalized_mse": 0.5175604820251465
+      },
+      "updates": 2500,
+      "records": 37143
+    },
+    "engine_jump": {
+      "real_mean": 0.027305244689895994,
+      "pred_mean": 0.024956606328487396,
+      "mae": 0.00643643665881384
+    },
+    "high_rising_wrong_up": 0,
+    "high_rising_wrong_down": 0,
+    "high_rising_rows": 42,
+    "episodes": 20,
+    "success_count": 20,
+    "success_rate": 1.0,
+    "mean_steps": 214.0,
+    "mean_success_steps": 214.0,
+    "mean_contact_step": 168.5,
+    "mean_return": 281.12881241365307,
+    "outcomes": {
+      "successful_landing": 20,
+      "crash": 0,
+      "out_of_bounds": 0,
+      "time_limit": 0,
+      "other_termination": 0
+    },
+    "failed_validation_seeds": [],
+    "training_24053": {
+      "outcome": "successful_landing",
+      "steps": 218
+    },
+    "policy_metrics": {
+      "train": {
+        "action_mse": 0.0033107532653957605,
+        "world_successor_mse": 0.0012258148053660989,
+        "world_successor_normalized_mse": 0.32434314489364624
+      },
+      "validation": null,
+      "before_adversarial": {
+        "action_mse": 0.001876983791589737,
+        "world_successor_mse": 0.0012293851468712091,
+        "world_successor_normalized_mse": 0.3309933841228485
+      },
+      "warmup_updates": 8000,
+      "rpgan_updates": 400,
+      "world_weight": 2.5,
+      "adversarial_weight": 1.0,
+      "records": 20629,
+      "recipe": {
+        "name": "gan_v3",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 20000,
+        "prior_kind": "particles",
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 256,
+        "total_steps": 400,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "prior_betas": null,
+        "loss_type": "logistic",
+        "gan_mode": "rp",
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.25,
+        "reg_every": 4,
+        "reg_method": "autograd",
+        "prior_reg": 0.05,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0
+      },
+      "optimizers": {
+        "generator": {
+          "name": "Adam",
+          "lr": 0.0003,
+          "betas": [
+            0.5,
+            0.99
+          ]
+        },
+        "discriminator": {
+          "name": "Adam",
+          "lr": 0.0002,
+          "betas": [
+            0.5,
+            0.99
+          ]
+        }
+      },
+      "main_deadband": 0.12,
+      "initial_policy": null,
+      "world_checkpoint": "/ml2/hypergan/ParticleGAN-lunar-fast/results/gym/lunar_systematic_audit/calibrated_world/power_world.pt"
+    }
+  }
+]

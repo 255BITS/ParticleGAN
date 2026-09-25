@@ -1,0 +1,21 @@
+[
+  {
+    "name": "fourier3_batch2048_floor002",
+    "overrides": {
+      "fourier": 3,
+      "batch_size": 2048,
+      "lr_floor": 0.02
+    }
+  },
+  {
+    "name": "fourier3_batch2048_8k",
+    "overrides": {
+      "fourier": 3,
+      "batch_size": 2048,
+      "steps": 8000,
+      "lr_floor": 0.01,
+      "lr_anneal_start": 0.35,
+      "input_noise_anneal_end": 0.4375
+    }
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "sigma05_prior1",
+    "peak_sigma": 0.5,
+    "decay_end_fraction": 0.5,
+    "prior_reg": 1.0
+  },
+  {
+    "name": "sigma10_prior005",
+    "peak_sigma": 1.0,
+    "decay_end_fraction": 0.5,
+    "prior_reg": 0.05
+  },
+  {
+    "name": "sigma075_long_prior005",
+    "peak_sigma": 0.75,
+    "decay_end_fraction": 0.6,
+    "prior_reg": 0.05
+  }
+]

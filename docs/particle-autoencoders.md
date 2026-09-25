@@ -1,10 +1,10 @@
 # Particle AE-GAN, VAE-GAN and AE-DDGAN
 
 These are composable encodings and recipes, not trainers. You supply E, G, D,
-data, optimizers, EMA and the loop. The package never adds a training loss,
+data, optimizers, EMA and the loop. These components never add a training loss,
 backpropagates or steps an optimizer for you. The core dependency remains Torch.
 
-## Three recipes
+## Three component combinations
 
 ```text
 AE-GAN:   E(X) -> (query, offset) -> particle[k] + sigma * bounded_offset -> G -> X_hat
@@ -21,31 +21,31 @@ backward. Center gradients pass through the selected read; standardization
 can couple the raw table rows. This is not unbiased differentiation of a
 categorical choice.
 
-| `get_recipe(name)` | Encoding | Study defaults |
+| Historical study | Encoding | Explicit study resources |
 | --- | --- | --- |
 | `ae_gan` | Deterministic bounded offset | Toy: K=400, latent=2, 6k updates, batch=256 |
 | `vae_gan` | One selected particle plus Gaussian noise | Same toy budget; constant joint KL |
 | `ae_ddgan` | Deterministic AE with a DDGAN generator | CIFAR: K=1024, latent=64, 10k updates, batch=64 |
 
-All three use sigma_rel=.025, G/E LR=.0003, D LR=.00045, prior LR=.003,
-prior Adam betas=(.5,.999), G/E/D betas=(0,.999), and constant LR. Penalty is
-b-cap with lazy interval 4. Toy distance reduction is sum, temperature .25;
-image distance reduction is mean, temperature .125. `reconstruction_weight=1`
-and `observation_sigma=.03` are explicit settings for caller use, not automatic
-losses. The observation sigma is distinct from latent prior sigma.
+Those studies used explicit settings: sigma_rel=.025, G/E LR=.0003,
+D LR=.00045, prior LR=.003, prior betas=(.5,.999), G/E/D betas=(0,.999),
+constant LR and b_cap with lazy interval 4. Toy distance reduction was sum,
+temperature .25; images used mean and .125. These are historical results,
+not selectable public presets. Architectures and preprocessing remain caller-owned.
 
-These presets expose component settings, not complete reproductions. The toy
-encoder used a spatial skip; the image encoder used layer normalization of its
-query. Architectures and that preprocessing remain caller-owned. Toy results
-used online weights, while CIFAR evaluations used EMA=.995. Existing GAN,
-MoG and DDGAN recipes retain their defaults. Configuration roundtrips through
-`recipe.to_dict()` and `Recipe(**config)`.
+The current API provides `get_recipe("ae_gan")`, `get_recipe("vae_gan")` and
+`get_recipe("ae_ddgan")`, with explicit keyword overrides. These names select
+component settings, not training loops or the historical optimizer settings.
+All inherit the current shared training defaults; their convergence with those
+defaults is not established by the historical studies above. `reconstruction_weight=1`
+and `observation_sigma=.03` are explicit caller settings, not automatic losses.
+The observation sigma is distinct from latent prior sigma. Complete settings
+roundtrip through `recipe.to_dict()` and `Recipe(**config)`.
 
 ## A runnable reconstruction step
 
 This small example exercises the installed API. It is not a new benchmark or
-a full adversarial training loop. Change the name to `ae_gan` for deterministic
-reconstruction.
+a full adversarial training loop. Select `ae_gan` for deterministic reconstruction.
 
 ```python
 import torch
@@ -128,7 +128,7 @@ joint KL is not the KL to the marginal overlapping MoG over z alone. Samples
 ## Optional categorical posterior and explicit KL
 
 For uncertainty over particle identity, use
-`get_recipe("vae_gan", encoder_mode="categorical", routing_temperature=.0025)`
+`get_recipe(prior_kind="mog", sigma_rel=.025, encoder_mode="categorical", routing_temperature=.0025)`
 or the low-level `particle_vae(query, prior, hard=False, temperature=.0025)`.
 Then `E(X) -> q(k|X) -> sample k -> particle[k] + sigma*noise`.
 
@@ -150,7 +150,7 @@ posterior families and penalties belong to your loop.
 ## AE-DDGAN integration
 
 ```python
-recipe = get_recipe("ae_ddgan")
+recipe = get_recipe(model="ddgan", prior_kind="mog", sigma_rel=.025, encoder_mode="ae")
 # E sees clean X, not the corrupted image:
 query, offset = E(x)
 encoded = recipe.encode(query, prior, offset=offset)

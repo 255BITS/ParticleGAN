@@ -1,0 +1,22 @@
+{
+  "purpose": "Frozen 16-card pointwise discriminator normalization structure screen under unchanged shared_c6. One unequal-mass episode per card; record every result and all 24 live and EMA observations.",
+  "architectures": [
+    "normstruct_ln_pre_fixed",
+    "normstruct_ln_post_affine",
+    "normstruct_ln_post_fixed",
+    "normstruct_ln_first_last",
+    "normstruct_ln_last",
+    "normstruct_rms_pre_affine",
+    "normstruct_rms_pre_fixed",
+    "normstruct_rms_post_affine",
+    "normstruct_center_pre_affine",
+    "normstruct_center_pre_fixed",
+    "normstruct_ln_raw_blend025",
+    "normstruct_ln_raw_blend050",
+    "normstruct_ln_post_raw_blend025",
+    "normstruct_ln_residual025",
+    "normstruct_ln_input_injection025",
+    "normstruct_ln_rms_mix050"
+  ],
+  "tasks": ["vector_unequal_mass"]
+}
