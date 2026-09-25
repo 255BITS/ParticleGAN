@@ -3,7 +3,7 @@
   "selected_candidate": "k3p",
   "selected_declaration": "reports/toy100/current-research-base.json",
   "active_round": 3,
-  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T185934Z",
+  "active_batch": "/ml2/hypergan/gan-attempts/formulations-20260925T190502Z",
   "workflow": [
     "solve failing toy",
     "verify prospective winner on full frozen gates",
@@ -87,12 +87,13 @@
     "max_workers_per_attempt": 1,
     "launcher": "reports/toy100/continuous-round-3/launch.py",
     "reason": "User reduced Codex budget; replace two Codex slots with Grok",
-    "verified_live_utc": "2026-09-25T19:03:34.934960+00:00",
+    "verified_live_utc": "2026-09-25T19:05:57.824093+00:00",
     "verified_live_counts": {
-      "grok": 7
+      "grok": 7,
+      "codex": 1
     },
     "verified_gpu_reservations": {
-      "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69": 3,
+      "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69": 4,
       "GPU-72c1b506-891d-b8bc-b353-e020585e1c47": 4
     }
   },
@@ -113,7 +114,8 @@
     "/ml2/hypergan/gan-attempts/formulations-20260925T185119Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T185546Z",
     "/ml2/hypergan/gan-attempts/formulations-20260925T185807Z",
-    "/ml2/hypergan/gan-attempts/formulations-20260925T185934Z"
+    "/ml2/hypergan/gan-attempts/formulations-20260925T185934Z",
+    "/ml2/hypergan/gan-attempts/formulations-20260925T190502Z"
   ],
   "completed_rounds": [
     {
@@ -154,7 +156,8 @@
   "qualification_tooling": {
     "native_seed_wrapper": "Prepared; twelve configuration checks pass with zero training updates; candidate installation review still required.",
     "long_run_evaluator": "NOT_READY: first preparation omitted canonical candidate hooks/fixture/bootstrap/runtime selection. Dedicated repair with short identity checks required.",
-    "review": "reports/toy100/continuous-round-3/qualification-harness-review.md"
+    "review": "reports/toy100/continuous-round-3/qualification-harness-review.md",
+    "canonical_control_companion": "IN_PREPARATION: single Codex lane audits complete pre-shift state and strict canonical windows around unchanged candidate drivers; short validation only, no candidate qualification claim."
   },
   "round3_first_replacement_wave": {
     "scope": "First seven replacement mechanism lanes. PB0 is unchanged-parent instrumentation and excluded. Excludes later TD kernel proposals and qualification tooling.",
