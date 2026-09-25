@@ -1,17 +1,7 @@
-"""Opt-in CIFAR profiling and bcap approximations; toy defaults are untouched."""
+"""Opt-in CIFAR profiling; toy defaults are untouched."""
 from contextlib import contextmanager
 import json
 import torch
-
-
-# Compatibility export for the numerical probe; the algorithm lives in the
-# shared regularizer used by CIFAR, the one-shot example and the denoising toy.
-from particlegan.grad_regularizers import finite_difference_norm
-
-
-def cifar_penalty(reg, critic, real, fake, step, rng, cfg):
-    return reg.penalty(critic, real, fake, step, rng,
-                       collect_stats=cfg.get('reg_sync_stats', True))[0]
 
 
 class SpeedProfiler:

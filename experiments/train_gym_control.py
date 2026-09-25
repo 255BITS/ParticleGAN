@@ -120,7 +120,7 @@ def train(cfg):
            for name, offset in dict(data=11, d_data=21, latent=12, contact=31, d_latent=22, d_contact=32).items()}
     reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 40 + i)
                 for i, role in enumerate(d.roles())}
-    penalties = ({role: recipe.make_critic_penalty(opt_d, generator=rng) for role, rng in reg_rngs.items()}
+    penalties = ({role: recipe.make_critic_penalty(opt_d) for role, rng in reg_rngs.items()}
                  if opt_d is not None else None)
     weights = dict(continuous_weight=world["continuous_weight"], contact_weight=world["contact_weight"])
     parameter_counts = {key: parameter_count(bundle[key]) for key in MODULE_KEYS}

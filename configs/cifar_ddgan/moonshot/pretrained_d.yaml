@@ -30,8 +30,6 @@ beta1: 0.0
 prior_reg: 1.0
 reg_coeff: 1.0
 reg_kappa: 1.0
-gan_mode: rp
-loss_type: logistic
 ucd_lambda: 0.02
 ema: 0.995
 lr_anneal_start: 0.6

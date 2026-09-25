@@ -44,7 +44,8 @@ from benchmarks.transfer_suite.public_default_verification import (
 from benchmarks.transfer_suite.toy100_compatibility import (
     VECTOR_NAMES, declared_model_policy, declared_recipe, output_noise_at,
 )
-from particlegan import Recipe, learning_rate_scale
+from particlegan import learning_rate_scale
+from benchmarks.legacy.recipe import LegacyRecipe as Recipe
 from benchmarks.gan_v3 import legacy_dict, legacy_recipe
 
 

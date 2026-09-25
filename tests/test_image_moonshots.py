@@ -5,7 +5,7 @@ from torch.nn import functional as F
 from experiments.train_cifar_ddgan import DEFAULTS, validate
 from lib.image_moonshots import build_models
 from lib.denoising_toy import DrawSource, DiffusionSchedule, FixedConditionCritic
-from lib.grad_regularizers import GradRegularizer
+from particlegan.grad_regularizers import GradientPenalty
 
 
 def test_unet_attention_identity_initialization_and_particle_learning():
@@ -113,7 +113,7 @@ def test_pretrained_joint_ucd_frozen_and_second_order(monkeypatch):
     feature_only = logits * (2 ** .5) - pixels
     grad = torch.autograd.grad(feature_only.sum(), real, retain_graph=True)[0]
     assert torch.isfinite(grad).all() and grad.abs().sum() > 0
-    penalty, _ = GradRegularizer('b_cap', 1, kappa=0).penalty(FixedConditionCritic(d, c, xt, t), real.detach(), fake, 1)
+    penalty, _ = GradientPenalty(kappa=0).penalty(FixedConditionCritic(d, c, xt, t), real.detach(), fake, 1)
     loss = penalty + F.cross_entropy(logits, d.ucd_labels(c, t))
     opt = torch.optim.Adam([p for p in d.parameters() if p.requires_grad])
     loss.backward(); opt.step()

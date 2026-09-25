@@ -19,25 +19,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from experiments import analyze_sparse
 from experiments.train_sparse import DEFAULTS, train
-from lib.grad_regularizers import GradRegularizer
 from particlegan import get_recipe
 from particlegan.k3p import CriticPenalty
 from lib.sparse_metrics import particle_class_purity
 from lib.sparse_models import JointCritic, SparseCondGenerator, XOnlyCritic
 from lib.sparse_toy import SparseMixedToy
-
-
-class CoupledCritic(nn.Module):
-    """The x derivative depends on y, exposing incorrect interpolation sites."""
-
-    d = 1
-
-    def __init__(self):
-        super().__init__()
-        self.scale = nn.Parameter(torch.tensor(1.3, dtype=torch.float64))
-
-    def forward(self, x, y, c):
-        return {"adv": self.scale * (x[:, 0] + 2 * y[:, 0]).square()}
 
 
 class SparseRegressionTests(unittest.TestCase):
@@ -49,50 +35,6 @@ class SparseRegressionTests(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         torch.set_num_threads(cls.old_threads)
-
-    def test_interpolation_values_and_parameter_gradients(self):
-        n = 64
-        real = torch.zeros(n, 2, dtype=torch.float64)
-        fake = torch.ones_like(real)
-        c = torch.zeros(n, dtype=torch.long)
-        for arm in ("g_interp_cap", "e_interp"):
-            for grad_on_y in (False, True):
-                with self.subTest(arm=arm, grad_on_y=grad_on_y):
-                    critic = CoupledCritic()
-                    torch.manual_seed(41)
-                    u = 1 - torch.rand(n, dtype=torch.float64)
-                    # At (x, y) = (u, u), dx = 6*s*u and dy = 12*s*u.
-                    grad_x = 6 * critic.scale * u
-                    norm = (grad_x.square() * (5 if grad_on_y else 1) + 1e-12).sqrt()
-                    deviation = norm - 1
-                    if arm == "g_interp_cap":
-                        deviation = deviation.relu()
-                    expected = 0.7 * deviation.square().mean()
-                    expected_grad = torch.autograd.grad(expected, critic.scale)[0]
-
-                    torch.manual_seed(41)
-                    actual, _ = GradRegularizer(arm, 0.7).penalty(
-                        JointCritic(critic, c, grad_on_y=grad_on_y), real, fake, 0)
-                    actual_grad = torch.autograd.grad(actual, critic.scale)[0]
-                    torch.testing.assert_close(actual, expected, rtol=1e-12, atol=1e-12)
-                    torch.testing.assert_close(actual_grad, expected_grad, rtol=1e-12, atol=1e-12)
-
-    def test_endpoint_arms_preserve_x_only_behavior(self):
-        torch.manual_seed(3)
-        real = torch.randn(32, 2, dtype=torch.float64)
-        fake = torch.randn_like(real)
-        c = torch.zeros(32, dtype=torch.long)
-        critic = CoupledCritic()
-        for arm in ("a_r1r2", "b_cap", "c_eikonal", "d_asym", "f_none"):
-            with self.subTest(arm=arm):
-                reg = GradRegularizer(arm, 0.7)
-                actual, _ = reg.penalty(JointCritic(critic, c, grad_on_y=False), real, fake, 0)
-                endpoint_values = []
-                for xy in (real, fake):
-                    x, y = xy[:, :1], xy[:, 1:]
-                    endpoint_values.append(reg.penalty(XOnlyCritic(critic, y, c), x, x, 0)[0])
-                expected = sum(endpoint_values) / 2
-                torch.testing.assert_close(actual, expected, rtol=1e-12, atol=1e-12)
 
     def test_particle_specialization_uses_associated_ids(self):
         # Every particle serves only its own class; every requested class is
@@ -159,7 +101,7 @@ class SparseRegressionTests(unittest.TestCase):
 
         def check_penalty(penalty, critic, real, fake):
             self.assertFalse(critic.grad_on_y)
-            self.assertEqual(penalty.regularizer.arm, get_recipe().reg_arm)
+            self.assertEqual(penalty.regularizer.coeff, get_recipe().reg_coeff)
             self.assertEqual(real.shape, (cfg["batch_size"], cfg["d"] + cfg["n_symbols"]))
             self.assertFalse(torch.equal(real, fake))
             penalty_calls.append(penalty.optimizer.record.observed_steps)

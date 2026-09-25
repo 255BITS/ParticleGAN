@@ -28,7 +28,8 @@ import torch
 from torch import nn
 
 from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
-from particlegan import GANTrainer, Recipe, get_recipe
+from particlegan import GANTrainer
+from benchmarks.legacy.recipe import LegacyRecipe as Recipe, get_recipe
 
 from .metrics import EVAL_N, evaluate_samples
 from .models import (
@@ -92,7 +93,7 @@ POLICY_PUBLIC_SOURCE_FILES = (
     "particlegan/__init__.py", "particlegan/autoencoder.py",
     "particlegan/conditioning.py", "particlegan/diffusion.py",
     "particlegan/discriminators.py", "particlegan/gan_loss.py",
-    "particlegan/grad_regularizers.py", "particlegan/locked_shared.py",
+    "particlegan/grad_regularizers.py",
     "particlegan/particle_prior.py", "particlegan/recipes.py",
     "particlegan/training.py", "particlegan/vicreg_loss.py",
 )

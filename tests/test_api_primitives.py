@@ -7,22 +7,21 @@ from torch import nn
 from torch.nn import functional as F
 
 from particlegan import (
-    DDGAN, GANLoss, GaussianPrior, GradientPenalty, ParticlePrior,
+    DDGAN, GANLoss, GaussianPrior, ParticlePrior,
     ParticleRegularizer, Recipe, UCD, get_recipe, learning_rate_scale,
     ucd_labels, ucd_loss,
 )
+from particlegan.grad_regularizers import GradientPenalty
 
 
-def test_default_rp_logistic_and_explicit_losses():
+def test_rp_logistic_loss():
     real = torch.tensor([2., -1.])
     fake = torch.tensor([-.5, .5], requires_grad=True)
     loss = GANLoss()
     torch.testing.assert_close(loss.d_loss(real, fake), F.softplus(fake - real).mean())
     torch.testing.assert_close(loss.g_loss(fake, real), F.softplus(real - fake).mean())
-    torch.testing.assert_close(GANLoss("hinge", "vanilla").d_loss(real, fake),
-                               F.relu(1 - real).mean() + F.relu(1 + fake).mean())
-    with pytest.raises(ValueError, match="mode"):
-        GANLoss(mode="typo")
+    with pytest.raises(ValueError, match="real_logits"):
+        loss.g_loss(fake)
 
 
 def test_explicit_generators_leave_global_rng_untouched():
@@ -40,21 +39,25 @@ def test_explicit_generators_leave_global_rng_untouched():
     assert not list(gaussian.parameters())
 
 
-def test_bcap_value_derivative_and_callable_match():
+def test_penalty_early_form_value_derivative_and_callable_match():
+    # Before the critic LR anneals (s == 1): R1 on reals plus a cap on fakes, RMS units.
     discriminator = nn.Linear(2, 1, bias=False).double()
     with torch.no_grad():
         discriminator.weight.copy_(torch.tensor([[3., 4.]]))
     real = torch.zeros(3, 2, dtype=torch.float64)
     fake = torch.ones_like(real, requires_grad=True)
-    regularizer = GradientPenalty(arm="b_cap")
+    regularizer = GradientPenalty()
     penalty, stats = regularizer.penalty(discriminator, real, fake)
-    torch.testing.assert_close(penalty, penalty.new_tensor(16.))
+    w = torch.tensor([3., 4.], dtype=torch.float64, requires_grad=True)
+    expected = 0.5 * (w.square().sum() / 2 + (w.norm() / 2 ** .5 - 1).relu().square())
+    torch.testing.assert_close(penalty, expected.detach())
     torch.testing.assert_close(regularizer(discriminator, real, fake), penalty)
-    assert stats["applied"] and stats["center"] == 1
+    assert stats["applied"] and stats["center"] == 1 and stats["s"] == 1 and stats["phase"] == "a"
     penalty.backward()
-    torch.testing.assert_close(discriminator.weight.grad, torch.tensor([[4.8, 6.4]], dtype=torch.float64))
+    expected.backward()
+    torch.testing.assert_close(discriminator.weight.grad, w.grad.unsqueeze(0))
     assert fake.grad is None
-    lazy = GradientPenalty(arm="b_cap", lazy_k=2)
+    lazy = GradientPenalty(lazy_k=2)
     assert lazy(discriminator, real, fake, step=1).item() == 0
     torch.testing.assert_close(lazy(discriminator, real, fake, step=2), 2 * penalty)
 
@@ -182,7 +185,8 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
     assert Recipe(**recipe.to_dict()) == recipe
     prior = recipe.make_prior()
     assert prior.z.shape == (8, 2)
-    assert recipe.make_gradient_penalty().coeff == .3
+    critic_opt = recipe.make_critic_optimizer(nn.Linear(2, 1), ema_critic=nn.Linear(2, 1))
+    assert recipe.make_critic_penalty(critic_opt).regularizer.coeff == .3
     assert recipe.make_prior_regularizer().weight == .4
     generator, discriminator = nn.Linear(2, 2), nn.Linear(2, 1)
     generator.bias.requires_grad_(False)
@@ -196,8 +200,10 @@ def test_recipe_factories_resolve_overrides_and_filter_frozen_parameters():
     assert recipe.replace(lr=.002).lr == .002 and recipe.lr == .001
     with pytest.raises(TypeError):
         get_recipe(typo=True)
+    with pytest.raises(TypeError):
+        get_recipe(gan_mode="ra")  # one formulation: no loss/penalty switches
     with pytest.raises(ValueError):
-        get_recipe(gan_mode="typo")
+        get_recipe(reg_coeff=-1)
 
 
 def test_explicit_component_choices_preserve_shared_defaults():

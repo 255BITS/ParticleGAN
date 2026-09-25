@@ -2,7 +2,7 @@ import copy
 import torch
 from lib.denoising_toy import DiffusionSchedule, DrawSource, FixedConditionCritic
 from lib.image_ddgan import ImageGenerator, ImageDiscriminator, sample_images, update_ema
-from lib.grad_regularizers import GradRegularizer
+from particlegan.grad_regularizers import GradientPenalty
 from experiments.train_cifar_ddgan import DEFAULTS, DEFAULT_CONFIG
 import yaml
 import pytest
@@ -48,7 +48,7 @@ def test_ucd_particle_and_cap_image_gradients(d_norm, ucd_target):
     torch.testing.assert_close(d(fake[:1],c[:1],xt[:1],t[:1])[1],logits[:1],atol=1e-6,rtol=1e-5)
     real=torch.randn_like(fake)
     critic=FixedConditionCritic(d,c,xt,t)
-    reg=GradRegularizer('b_cap',1,kappa=0)
+    reg=GradientPenalty(kappa=0)
     penalty,_=reg.penalty(critic,real,fake.detach(),1)
     penalty.backward()
     assert torch.isfinite(penalty) and penalty>0

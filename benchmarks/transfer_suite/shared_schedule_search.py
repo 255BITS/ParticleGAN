@@ -16,7 +16,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 import torch
-from particlegan import get_recipe, learning_rate_scale
+from particlegan import learning_rate_scale
+from benchmarks.legacy.recipe import get_recipe
 from benchmarks import learned_lr_evaluation as bridge
 
 from . import compare_defaults, shared_default_search as reference, shared_profile_search as profile, suite

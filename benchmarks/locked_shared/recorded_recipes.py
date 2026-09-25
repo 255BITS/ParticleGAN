@@ -5,7 +5,7 @@ change. Application code uses particlegan.get_recipe() directly.
 """
 import json
 from pathlib import Path
-from particlegan import Recipe
+from benchmarks.legacy.recipe import LegacyRecipe as Recipe
 from benchmarks.gan_v3 import legacy_recipe
 
 _RECORDS = json.loads((Path(__file__).parents[1] / "transfer_suite/plans/recipe_history.json").read_text())["recipes"]

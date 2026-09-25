@@ -127,7 +127,7 @@ def train(cfg):
         target_mean=bundle["R"].target_mean.cpu().tolist(), scale=bundle["R"].target_std.cpu().tolist(),
         edit_rms=float(bundle["R"].edit_rms), noise_start=bundle["R"].sigma(1), noise_hold=1.,
         noise_floor=0.03, noise_horizon=cfg["steps"], normalization=bundle["R"].normalization,
-        cap=dict(arm=recipe.reg_arm, every=recipe.reg_every)))
+        cap=dict(penalty="recipe", every=recipe.reg_every)))
     write_json(out / "normalization.json", {key: value.cpu().tolist() for key, value in scaler.state_dict().items()})
     write_json(out / "environment.json", dict(python=sys.version, torch=str(torch.__version__),
         cuda=torch.version.cuda, device=str(device),
@@ -219,7 +219,7 @@ def train(cfg):
                 sync()
                 segment = time.perf_counter()
         shutil.copyfile(out / f"checkpoint_{cfg['steps']}.pt", out / "final.pt")
-        summary = dict(config=cfg, recipe=recipe.to_dict(), error_cap=dict(arm=recipe.reg_arm, every=recipe.reg_every), provenance=provenance,
+        summary = dict(config=cfg, recipe=recipe.to_dict(), error_cap=dict(penalty="recipe", every=recipe.reg_every), provenance=provenance,
             parameters=counts, trainable_parameters=trainable,
             total_trainable_parameters=sum(trainable.values()),
             inference_parameters=parameter_count(bundle["E_control"]) + parameter_count(bundle["G"].branches[1])

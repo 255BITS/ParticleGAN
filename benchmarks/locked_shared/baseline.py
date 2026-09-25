@@ -20,7 +20,8 @@ from unittest.mock import patch
 
 import torch
 
-from particlegan import GANLoss, GradientPenalty
+from benchmarks.legacy.gan_loss import GANLoss
+from benchmarks.legacy.grad_regularizers import GradientPenalty
 from . import mode_hold, trajectory, two_pole
 from .observation import recording, sustained, OBSERVATIONS, MIN_STABLE_CHECKS
 from .hosts import ae_gan_hold, cover_leftover, mid_scale_identity, residual_student, unipolar, unused_token_hold

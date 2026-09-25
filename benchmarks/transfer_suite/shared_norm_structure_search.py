@@ -14,7 +14,7 @@ import traceback
 from unittest.mock import patch
 
 import torch
-from particlegan import get_recipe
+from benchmarks.legacy.recipe import get_recipe
 from . import suite, vector_tasks
 from .compare_defaults import candidate, effective_spec, ema_verdict, optimizer_defaults, plan, write
 from .protocol import test_verdict

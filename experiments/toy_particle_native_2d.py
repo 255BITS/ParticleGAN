@@ -260,20 +260,20 @@ def run_gate(log_path=None):
     log(f"ENV torch={torch.__version__} dtype={torch.get_default_dtype()} threads={torch.get_num_threads()}")
     started = time.perf_counter()
     recipe, init, init_mse = pretrain(log)
-    if recipe.reg_coeff <= 0 or recipe.gan_mode != "rp" or recipe.loss_type != "logistic":
-        raise RuntimeError("Fixed arm requires nonzero Rp logistic GANLoss and the recipe critic penalty")
+    if recipe.reg_coeff <= 0:
+        raise RuntimeError("Fixed arm requires the recipe critic penalty (reg_coeff > 0)")
     current = run_arm("current", "current", recipe, init, log)
     fixed = run_arm("fixed", "fixed", recipe, init, log)
     collapse, passed = gate_status(current["ema"], fixed["ema"])
     log("LEADERBOARD ema_action_mse lower is better")
     log(f"  {fixed['ema']:.4f}  fixed latent-joint  threshold<={FIXED_MAX:.2f}  {'PASS' if passed else 'FAIL'}")
     log(f"  {current['ema']:.4f}  current observation  threshold>={COLLAPSE_MIN:.2f}  {'COLLAPSE' if collapse else 'FAIL'}")
-    log(f"FIXED adv_weight=1 l2_weight=0 penalty={recipe.reg_arm} coeff={recipe.reg_coeff:g} supervised_only=false")
+    log(f"FIXED adv_weight=1 l2_weight=0 penalty=recipe coeff={recipe.reg_coeff:g} supervised_only=false")
     log(f"GATE init={init_mse:.4f} collapse={collapse} fixed_pass={passed} elapsed_s={time.perf_counter()-started:.1f}")
     log.close()
     return dict(ok=bool(collapse and passed), init=init_mse, current=current, fixed=fixed,
                 collapse=collapse, fixed_pass=passed, adversarial_weight=1., l2_weight=0.,
-                penalty_arm=recipe.reg_arm, penalty_coeff=recipe.reg_coeff, supervised_only=False)
+                penalty_arm="recipe", penalty_coeff=recipe.reg_coeff, supervised_only=False)
 
 
 def main():

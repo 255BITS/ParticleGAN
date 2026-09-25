@@ -126,11 +126,11 @@ def capture_provenance(out, cfg, records, bundle, recipe):
         normalization="Unchanged scaler from initialization; fit originally on old training split",
         removed_l2=list(REMOVED_L2), l2_aux_weight=0., adv_weight=1.,
         safe_fast_weight=float(cfg["safe_fast_weight"]),
-        controller_objective=(f"recipe {recipe.loss_type}/{recipe.gan_mode} GAN on the edit-normalized G2 "
+        controller_objective=("recipe RpGAN logistic GAN on the edit-normalized G2 "
                               "residual; no action MSE; safe_fast_weight=0" if cfg["safe_fast_weight"] == 0 else
-                              f"recipe {recipe.loss_type}/{recipe.gan_mode} GAN adv_weight=1 plus "
+                              "recipe RpGAN logistic GAN adv_weight=1 plus "
                               "safe-fast kinematic shaping"),
-        gradient_penalty=(f"recipe critic penalty ({recipe.reg_arm}) on the edit critic via "
+        gradient_penalty=("recipe critic penalty on the edit critic via "
                           f"recipe.make_critic_penalty, coeff {recipe.reg_coeff:g}, kappa {recipe.reg_kappa:g}, "
                           f"every {recipe.reg_every} steps"),
         train_scope="E_control and G2; G1, G3, E_pair, prior, and transition D frozen",
@@ -205,9 +205,7 @@ def train(cfg):
     groups = dict(controller=dict(lr=recipe.lr, betas=list(recipe.betas), modules=["E_control", "G2"]),
         edit_critic=dict(lr=recipe.lr * recipe.d_lr_mult, betas=list(recipe.betas), modules=["R"]),
         frozen=["G1", "G3", "E", "prior", "D"])
-    objective = dict(loss_type=recipe.loss_type, gan_mode=recipe.gan_mode,
-        reg_arm=recipe.reg_arm, reg_method=recipe.reg_method,
-        reg_coeff=float(recipe.reg_coeff), reg_kappa=float(recipe.reg_kappa), reg_every=recipe.reg_every,
+    objective = dict(reg_coeff=float(recipe.reg_coeff), reg_kappa=float(recipe.reg_kappa), reg_every=recipe.reg_every,
         adv_weight=1., train_scope="control", l2_aux_weight=0.,
         safe_fast_weight=float(cfg["safe_fast_weight"]),
         safe_fast_time_weight=float(cfg["safe_fast_time_weight"]),
@@ -258,8 +256,8 @@ def train(cfg):
             "FROZEN G1, G3, E_pair, prior, transition D.")
         log("REMOVED L2: imitation MSE; real reconstruction MSE/BCE; synthetic reconstruction MSE/BCE. "
             "AUX L2 weight=0.")
-        log(f"CONTROLLER STEP: recipe {recipe.loss_type}/{recipe.gan_mode} GAN on noise versus noise plus the "
-            f"edit-normalized G2 residual. Recipe critic penalty ({recipe.reg_arm}) on that critic every "
+        log(f"CONTROLLER STEP: recipe RpGAN logistic GAN on noise versus noise plus the "
+            f"edit-normalized G2 residual. Recipe critic penalty on that critic every "
             f"{recipe.reg_every} update(s). adv_weight=1. Not supervised_only.")
         if cfg["safe_fast_weight"] == 0:
             log("SAFE-FAST off safe_fast_weight=0. Paired-error RpGAN only. "
@@ -271,7 +269,7 @@ def train(cfg):
                 f"speed_limit={cfg['safe_fast_speed_limit']} pad_half={cfg['safe_fast_pad_half']} "
                 f"horizon={cfg['safe_fast_horizon']}. adv_weight=1. Not adv_weight=0.")
         log(f"LR controller={groups['controller']['lr']} edit_critic={groups['edit_critic']['lr']} "
-            f"penalty={recipe.reg_arm} coeff={recipe.reg_coeff} kappa={recipe.reg_kappa} every={recipe.reg_every}")
+            f"penalty=recipe coeff={recipe.reg_coeff} kappa={recipe.reg_kappa} every={recipe.reg_every}")
         log(f"Trainable parameters={trainable_counts}; inference={inference_count}")
         started = time.perf_counter()
         sync()

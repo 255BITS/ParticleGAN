@@ -248,7 +248,7 @@ def train(
         # K3P: spike guard + EMA-critic update for D); we allocate the EMA critic.
         opt_G, opt_D = recipe.make_optimizers(G, D, ema_critic=copy.deepcopy(D), fused=fused_adam)
         # The recipe's critic penalty, paired with opt_D -- as GANTrainer uses it.
-        penalty = recipe.make_critic_penalty(opt_D, generator=penalty_gen, collect_stats=reg_sync_stats)
+        penalty = recipe.make_critic_penalty(opt_D, collect_stats=reg_sync_stats)
         # A separate prior optimizer (own LR/betas); its step() applies the
         # recipe's latent-table update (currently A2 latent-row damping).
         opt_prior = (
@@ -378,17 +378,14 @@ def train(
                 x_fake = generate(z_fake)
                 fake_logits = noisy_D(x_fake)
 
-                if recipe.gan_mode in ("rp", "ra"):
-                    with torch.no_grad():
-                        x_real_g = sample_100gaussians(
-                            batch_size=batch_size,
-                            device=device,
-                            generator=train_gen,
-                        )
-                    real_logits_g = noisy_D(x_real_g)
-                    loss_gan = gan_loss.g_loss(fake_logits, real_logits_g)
-                else:
-                    loss_gan = gan_loss.g_loss(fake_logits)
+                with torch.no_grad():
+                    x_real_g = sample_100gaussians(
+                        batch_size=batch_size,
+                        device=device,
+                        generator=train_gen,
+                    )
+                real_logits_g = noisy_D(x_real_g)
+                loss_gan = gan_loss.g_loss(fake_logits, real_logits_g)
 
                 ep_z = loss_gan.new_zeros(())
                 if learnable_prior:

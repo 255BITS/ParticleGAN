@@ -28,22 +28,17 @@ def read_config(path):
 def recipe_defaults(name):
     """Translate public recipe fields to the existing flat experiment schema.
 
-    Kept separate from parser imports so runner stubs do not need Torch. Legacy
-    research options stay in each trainer, and explicit config values win.
+    Kept separate from parser imports so runner stubs do not need Torch.
+    Explicit config values win.
     """
     from particlegan import get_recipe
 
     recipe = get_recipe()
     keys = ("batch_size", "z_dim", "num_particles", "lr", "d_lr_mult",
-            "loss_type", "gan_mode", "reg_coeff", "reg_every",
-            "reg_method", "lr_anneal_start", "lr_floor")
+            "reg_coeff", "reg_every", "lr_anneal_start", "lr_floor")
     defaults = {key: getattr(recipe, key) for key in keys}
     defaults["beta1"] = recipe.betas[0]
     if name == "100gaussians":
-        # The example trains the recipe's objective and penalty; it takes no
-        # loss/mode/penalty-method options.
-        for key in ("loss_type", "gan_mode", "reg_method"):
-            defaults.pop(key)
         defaults.update(beta2=recipe.betas[1], prior_lr_mult=recipe.prior_lr_mult, epochs=recipe.total_steps // 1000, steps_per_epoch=1000,
                         lambda_ep=recipe.prior_reg, ema_decay=recipe.ema_decay, reg_kappa=recipe.reg_kappa)
     elif name == "denoising":

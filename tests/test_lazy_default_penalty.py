@@ -40,9 +40,8 @@ def test_lazy_keeps_default_technique_and_only_changes_frequency(via):
     D1, opt1, eager = _penalty(base)
     Dk, optk, lazy = _penalty(lazy_recipe, None if via == "recipe" else k)
     eager_k = base.make_critic_penalty(optk)  # drives the lazy run's updates
-    assert lazy.regularizer.arm == eager.regularizer.arm == base.reg_arm == "k3p"
     assert lazy.regularizer.lazy_k == k and eager.regularizer.lazy_k == 1
-    for key in ("coeff", "kappa", "lr_floor", "method"):
+    for key in ("coeff", "kappa", "lr_floor", "anchor_weight"):
         assert getattr(lazy.regularizer, key) == getattr(eager.regularizer, key)
     # Same critic state, same batch: the lazy penalty is 0 off-schedule and
     # k times the eager penalty on-schedule (the time-averaged pressure matches).

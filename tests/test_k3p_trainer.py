@@ -6,8 +6,9 @@ import torch
 from torch import nn
 from torch.nn.utils.parametrizations import spectral_norm
 
-from particlegan import (GANTrainer, GradientPenalty, InputNoise, Recipe, get_recipe, learning_rate_scale,
+from particlegan import (GANTrainer, InputNoise, Recipe, get_recipe, learning_rate_scale,
                          learning_rate_scales, scale_learning_rates)
+from particlegan.grad_regularizers import GradientPenalty
 
 
 def _recipe(**overrides):
@@ -33,9 +34,9 @@ def _reals(n, seed=1):
 
 def test_trainer_default_is_k3p():
     recipe = get_recipe()
-    assert recipe == Recipe() and recipe.reg_arm == "k3p" and recipe.name == "k3p"
+    assert recipe == Recipe() and recipe.name == "k3p"
     trainer = _trainer()
-    assert trainer.penalty.regularizer.arm == "k3p"
+    assert isinstance(trainer.penalty.regularizer, GradientPenalty)
     assert trainer.penalty.regularizer.lr_floor == trainer.recipe.network_lr_floor
     assert trainer.ema_D is not None and trainer.opt_d.guard is not None
     assert trainer.latent_damping is not None
@@ -229,7 +230,6 @@ class _Conditional(nn.Module):
 
 
 def test_conditional_penalty_forwards_conditioning_to_critic_and_ema():
-    from particlegan.grad_regularizers import GradRegularizer
     recipe = _recipe()
     torch.manual_seed(0)
     d = _Conditional()
@@ -239,9 +239,8 @@ def test_conditional_penalty_forwards_conditioning_to_critic_and_ema():
     ref_opt = torch.optim.Adam(ref_d.parameters(), lr=1e-2, betas=recipe.betas)
     from particlegan.k3p import CriticSpikeGuard, RobustCriticAnchor
     ref_anchor = RobustCriticAnchor(ref_d, copy.deepcopy(ref_d).requires_grad_(False), decay=recipe.reg_anchor_decay)
-    ref = recipe.make_gradient_penalty(anchor=ref_anchor)
+    ref = GradientPenalty(anchor=ref_anchor, **recipe._penalty_options())
     guard = CriticSpikeGuard(recipe.d_guard_ratio, recipe.d_guard_min_steps)
-    assert isinstance(ref, GradRegularizer)
     labels, t = torch.tensor([0, 1, 2, 0, 1, 2, 0, 1]), torch.tensor([[0.3]])
     for step, real in enumerate(_reals(12), start=1):
         fake = real + 1.0
@@ -375,11 +374,6 @@ def test_recipe_optimizers_are_ordinary_adam():
     assert opt_d.param_groups[0]["lr"] == recipe.lr * recipe.d_lr_mult * 0.5
     with pytest.raises(ValueError, match="regularizer"):
         opt_d.load_state_dict(torch.optim.Adam(d.parameters()).state_dict())
-
-
-def test_gradient_penalty_constructor_defaults_to_k3p():
-    assert GradientPenalty().arm == "k3p"
-    assert GradientPenalty(arm="b_cap").arm == "b_cap"
 
 
 def test_scale_learning_rates_drives_k3p_to_its_floor():

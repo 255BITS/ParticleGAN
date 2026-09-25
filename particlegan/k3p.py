@@ -1,4 +1,4 @@
-"""K3P: the current best critic/generator regularization formulation.
+"""K3P: the critic/generator regularization ParticleGAN trains with.
 
 Users do not instantiate these classes. The recipe builds them behind
 formulation-agnostic factories and a plain PyTorch loop::
@@ -31,7 +31,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.optim import Adam
 
-from .grad_regularizers import CriticStepRecord
+from .grad_regularizers import CriticStepRecord, GradientPenalty
 
 __all__ = ["CriticAnchor", "RobustCriticAnchor", "CriticSpikeGuard", "LatentRowDamping",
            "DirectParticleResponse", "K3PCriticAdam", "K3PGeneratorAdam", "CriticPenalty"]
@@ -246,12 +246,13 @@ class DirectParticleResponse:
     ``center`` subtracts the per-column mean over particles and ``g_prev`` is
     the previous step's centered gradient kept in the caller-allocated flat
     ``history`` (numel = total numel of ``params``). ``params`` must be exactly
-    one optimizer param group. Wrap the step: ``with resp.around(opt): opt.step()``
+    one optimizer param group. ``gain=False`` keeps the LR unchanged (the
+    betas still apply). Wrap the step: ``with resp.around(opt): opt.step()``
     (``K3PGeneratorAdam.step`` does this).
     """
 
     def __init__(self, params: Sequence[nn.Parameter], history: torch.Tensor,
-                 betas: Tuple[float, float] = (0.0, 0.9)) -> None:
+                 betas: Tuple[float, float] = (0.0, 0.9), gain: bool = True) -> None:
         self.params = list(params)
         if not self.params:
             raise ValueError("DirectParticleResponse needs at least one parameter")
@@ -261,6 +262,7 @@ class DirectParticleResponse:
         if history.dtype != self.params[0].dtype or history.device != self.params[0].device:
             raise ValueError("history must match the parameters' dtype and device")
         self.history, self.betas = history, (float(betas[0]), float(betas[1]))
+        self.gain = bool(gain)
         self.started = False
         self.last_gain = 1.0
 
@@ -281,7 +283,7 @@ class DirectParticleResponse:
             raise ValueError("DirectParticleResponse needs gradients for all or none of its params")
         current = torch.cat([(g.detach() - g.detach().mean(dim=0, keepdim=True)).flatten() for g in grads])
         gain = 1.0
-        if self.started:
+        if self.started and self.gain:
             cosine = float(F.cosine_similarity(current, self.history, dim=0, eps=1e-12))
             gain = 1.0 + max(0.0, min(1.0, cosine))
         self.history.copy_(current)
@@ -289,7 +291,8 @@ class DirectParticleResponse:
         self.last_gain = gain
         token = (group, group["lr"], group["betas"])
         group["betas"] = self.betas
-        group["lr"] *= gain
+        if gain != 1.0:
+            group["lr"] *= gain
         return token
 
     def end(self, token: Optional[Tuple]) -> None:
@@ -493,7 +496,7 @@ class K3PGeneratorAdam(Adam):
     _OWN_ATTRS = ("latent_damping", "latent_history", "direct_response", "direct_history")
 
     def __init__(self, params, *, latent_table=None, direct_particles=None, latent_max_rate=0.5,
-                 direct_betas=(0.0, 0.9), **adam_kwargs):
+                 direct_betas=(0.0, 0.9), direct_gain=True, **adam_kwargs):
         super().__init__(params, **adam_kwargs)
         self.latent_damping = self.latent_history = None
         self.direct_response = self.direct_history = None
@@ -510,7 +513,8 @@ class K3PGeneratorAdam(Adam):
                 raise ValueError("direct_particles must contain at least one parameter")
             self.direct_history = torch.zeros(sum(p.numel() for p in particles),
                                               dtype=particles[0].dtype, device=particles[0].device)
-            self.direct_response = DirectParticleResponse(particles, self.direct_history, betas=direct_betas)
+            self.direct_response = DirectParticleResponse(particles, self.direct_history, betas=direct_betas,
+                                                          gain=direct_gain)
             self.direct_response._group(self)  # validate: exactly one param group
 
     def __getstate__(self):
@@ -568,6 +572,10 @@ class K3PGeneratorAdam(Adam):
                     history.copy_(part["history"])
 
 
+def _no_anchor(x):
+    raise RuntimeError("this critic optimizer has no EMA critic")
+
+
 def _first_output(output):
     return output[0] if isinstance(output, (tuple, list)) else output
 
@@ -592,19 +600,17 @@ class CriticPenalty:
     ``collect_stats`` is set, ``diagnostics()`` host scalars.
     """
 
-    def __init__(self, recipe, optimizer, *, output=None, generator=None, collect_stats=False,
-                 **penalty_overrides):
+    def __init__(self, recipe, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         if not isinstance(optimizer, K3PCriticAdam):
             raise TypeError("optimizer must come from recipe.make_critic_optimizer or recipe.make_optimizers")
         self.optimizer, self.critic = optimizer, optimizer.critic
-        k3p = penalty_overrides.get("arm", recipe.reg_arm) == "k3p"
-        if k3p and optimizer.anchor is None:
+        options = recipe._penalty_options(**penalty_overrides)
+        if optimizer.anchor is None and options["anchor_weight"] != 0:
             raise ValueError("this penalty needs the critic's EMA: pass ema_critic=copy.deepcopy(critic) "
                              "to recipe.make_optimizers / recipe.make_critic_optimizer")
-        options = {"record": optimizer.record} if k3p else {}
-        self.regularizer = recipe.make_gradient_penalty(**options, **penalty_overrides)
+        self.regularizer = GradientPenalty(record=optimizer.record, **options)
         self.output = _first_output if output is None else output
-        self.generator, self.collect_stats = generator, bool(collect_stats)
+        self.collect_stats = bool(collect_stats)
         self.last_stats = {}
         self._names = {id(module): name for name, module in self.critic.named_modules()}
 
@@ -638,21 +644,20 @@ class CriticPenalty:
             return output(critic(x, *condition, **condition_kwargs))
         options = {}
         anchor = self.optimizer.anchor
-        if anchor is not None and self.regularizer.arm == "k3p":
+        if anchor is not None:
             view = self._ema_view(critic)
             options["ema_critic"] = lambda x: anchor.forward(
                 lambda m, inputs: output(view(m)(inputs, *condition, **condition_kwargs)), x)
+        else:  # reg_anchor_weight == 0: the kernel never evaluates an anchor
+            options["ema_critic"] = _no_anchor
         step = self.optimizer.record.observed_steps + 1
-        penalty, stats = self.regularizer.penalty(live, x_real, x_fake, step, self.generator,
-                                                  self.collect_stats, **options)
+        penalty, stats = self.regularizer.penalty(live, x_real, x_fake, step, self.collect_stats, **options)
         self.last_stats = stats
         return penalty
 
     def diagnostics(self):
-        """Host-side scalars for logging (K3P: blend weight; guard clip count)."""
-        out = {}
-        if self.regularizer.arm == "k3p":
-            out["blend_weight"] = float(self.regularizer.blend_weight())
+        """Host-side scalars for logging (blend weight; guard clip count)."""
+        out = {"blend_weight": float(self.regularizer.blend_weight())}
         if self.optimizer.guard is not None:
             out["clipped_tensors"] = self.optimizer.guard.clipped_tensors
         return out

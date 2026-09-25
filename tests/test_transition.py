@@ -13,13 +13,14 @@ from lib.trajectory import Routes
 from lib.transition import (Transitions, TransitionScaler, TransitionGenerator,
                             TransitionDiscriminator, TransitionCritics, shuffle_blocks, residual, metrics)
 from particlegan import get_recipe
+from particlegan.grad_regularizers import GradientPenalty
 
 
 
 def _penalties(recipe, d, rngs):
     """One recipe penalty per role, all paired with one critic optimizer."""
     opt = recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d))
-    return {name: recipe.make_critic_penalty(opt, kappa=0, generator=rng) for name, rng in rngs.items()}
+    return {name: recipe.make_critic_penalty(opt, kappa=0) for name, rng in rngs.items()}
 
 class TransitionTests(unittest.TestCase):
     def setUp(self):
@@ -67,8 +68,8 @@ class TransitionTests(unittest.TestCase):
         b = d(real, 1-c, context)[1]
         torch.testing.assert_close(a, b)
         d.zero_grad()
-        penalty, _ = recipe.make_gradient_penalty(kappa=0).penalty(
-            lambda x: d(x, c, context)[0], real, fake.detach(), 1, self.rng, collect_stats=False)
+        penalty, _ = GradientPenalty(kappa=0).penalty(
+            lambda x: d(x, c, context)[0], real, fake.detach(), 1, collect_stats=False)
         penalty.backward()
         self.assertGreater(float(d.net[0].weight.grad.norm()), 0)
 
@@ -100,7 +101,7 @@ class TransitionTests(unittest.TestCase):
             expected[key] = r[key]
         self.assertEqual(r, expected)
         self.assertEqual(r["num_particles"], 1024)
-        self.assertEqual(r["reg_arm"], "k3p")
+        self.assertNotIn("reg_arm", r)
         sizes = [sum(p.numel() for p in g.parameters()) for g in
                  (TransitionGenerator(), TransitionGenerator(32, "monolithic", 234))]
         self.assertLess(abs(sizes[0]/sizes[1]-1), .01)

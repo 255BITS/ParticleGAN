@@ -6,7 +6,8 @@ from unittest.mock import patch
 
 import torch
 
-from particlegan import GradientPenalty, ParticleRegularizer, learning_rate_scale
+from particlegan import ParticleRegularizer, learning_rate_scale
+from benchmarks.legacy.grad_regularizers import GradientPenalty
 
 FEATURES = ("bias", "log_gradient_ratio", "gradient_alignment",
             "log_gradient_innovation", "opponent_log_gradient_ratio")

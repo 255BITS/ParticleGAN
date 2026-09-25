@@ -120,7 +120,7 @@ def train(cfg):
                                    latent=51, contact=61, d_latent=71, d_contact=81).items()}
     reg_rngs = {role: torch.Generator(device=device).manual_seed(cfg["seed"] + 100 + i)
                 for i, role in enumerate(("joint", "action", "state", "next_state"))}
-    critic_penalties = {role: recipe.make_critic_penalty(optimizer_d, generator=generator)
+    critic_penalties = {role: recipe.make_critic_penalty(optimizer_d)
                         for role, generator in reg_rngs.items()}
     draws_digest = {name: hashlib.sha256() for name in ("labeled", "auxiliary", "d_labeled", "d_auxiliary")}
     def batch(prefix=""):

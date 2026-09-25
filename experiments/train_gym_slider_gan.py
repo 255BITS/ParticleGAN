@@ -116,7 +116,7 @@ def train(cfg):
            for k,offset in dict(data=11, d_data=31, latent=51, contact=61, d_latent=71, d_contact=81, error_noise=151, d_error_noise=161).items()}
     reg_rng = {role: torch.Generator(device=device).manual_seed(cfg['seed'] + 100 + i)
                for i,role in enumerate(bundle['D'].roles())}
-    penalties = {role: recipe.make_critic_penalty(opt_d, generator=generator) for role, generator in reg_rng.items()}
+    penalties = {role: recipe.make_critic_penalty(opt_d) for role, generator in reg_rng.items()}
     digests = {k: hashlib.sha256() for k in ('data', 'd_data')}
     def batch(name):
         ids = torch.randint(len(triples), (cfg['batch_size'],), device=device, generator=rng[name])

@@ -7,9 +7,10 @@ from torch import nn
 from torch.nn import functional as F
 
 from particlegan import (
-    DDGAN, GANLoss, GradientPenalty, ParticlePrior, ParticleRegularizer,
+    DDGAN, GANLoss, ParticlePrior, ParticleRegularizer,
     Recipe, UCD, get_recipe, ucd_loss,
 )
+from particlegan.grad_regularizers import GradientPenalty
 
 
 def test_regularizer_augments_an_existing_objective_without_a_prior():
@@ -140,18 +141,13 @@ alpha_bar = [1.0, 0.5, 0.01]
 [prior]
 num_particles = 32
 z_dim = 8
-[loss]
-loss_type = "logistic"
-mode = "rp"
 ''')
     recipe = get_recipe(**config["particlegan"])
     prior = ParticlePrior(**config["prior"])
-    loss = GANLoss(**config["loss"])
     assert recipe.model == "ddgan" and recipe.total_steps == 56_000
     assert recipe.z_dim == prior.z_dim == 8
     assert recipe.num_classes == 3
     assert isinstance(recipe.betas, tuple) and isinstance(recipe.alpha_bar, tuple)
-    assert loss.mode == "rp"
     assert Recipe(**recipe.to_dict()) == recipe
     with pytest.raises(TypeError):
         get_recipe(**{**config["particlegan"], "typo": True})

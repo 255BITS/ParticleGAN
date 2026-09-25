@@ -5,6 +5,20 @@ import math
 
 @dataclass(frozen=True)
 class Recipe:
+    """Resolved hyperparameters plus role-named factories (``make_*``) for one model.
+
+    Fields are validated at construction; ``replace`` returns a modified copy.
+    Two fields exist only for ablations; their defaults are the shipped
+    formulation:
+
+    * ``reg_anchor_weight`` (1.0) scales the critic penalty's EMA-anchor term,
+      which ties the critic's input gradient to its parameter EMA once the
+      critic LR anneals. 0 removes the term (no ``ema_critic`` needed).
+    * ``direct_particle_gain`` (True) lets a direct sample-particle group
+      (``make_generator_optimizer(direct_particles=...)``) raise its LR by up
+      to 2x while successive centered gradients agree. False keeps that
+      group's LR at the scheduled value (``direct_particle_betas`` still apply).
+    """
     name: str = "k3p"
     model: str = "gan"
     z_dim: int = 2
@@ -24,13 +38,9 @@ class Recipe:
     prior_lr_mult: float = 2.0
     betas: tuple[float, float] = (0.0, 0.999)
     prior_betas: tuple[float, float] | None = None
-    loss_type: str = "logistic"
-    gan_mode: str = "rp"
-    reg_arm: str = "k3p"
     reg_coeff: float = 1.0
     reg_kappa: float = 1.0
     reg_every: int = 1
-    reg_method: str = "autograd"
     prior_reg: float = 0.0
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
@@ -42,6 +52,9 @@ class Recipe:
     network_lr_floor: float | None = 0.01
     network_lr_horizon_cap: int | None = 1600
     reg_anchor_decay: float = 0.999
+    # Ablation switches; see the class docstring.
+    reg_anchor_weight: float = 1.0
+    direct_particle_gain: bool = True
     # Critic spike guard (d_guard_ratio=0 disables it).
     d_guard_ratio: float = 5.0
     d_guard_min_steps: int = 200
@@ -127,7 +140,10 @@ class Recipe:
         for key in ("lr", "d_lr_mult", "prior_lr_mult", "routing_temperature", "observation_sigma"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) <= 0:
                 raise ValueError(f"{key} must be finite and positive")
-        for key in ("reg_coeff", "reg_kappa", "prior_reg", "ucd_weight", "reconstruction_weight"):
+        if type(self.direct_particle_gain) is not bool:
+            raise ValueError("direct_particle_gain must be a boolean")
+        for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
+                    "reconstruction_weight"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) < 0:
                 raise ValueError(f"{key} must be finite and nonnegative")
         if len(self.betas) != 2 or any(not 0 <= b < 1 for b in self.betas):
@@ -141,8 +157,7 @@ class Recipe:
         if self.prior_betas is not None:
             object.__setattr__(self, "prior_betas", tuple(float(b) for b in self.prior_betas))
         # Validate resolved component settings at construction, not later in training.
-        self.make_loss()
-        self.make_gradient_penalty()
+        self._penalty_options()
         if (len(self.alpha_bar) < 2 or self.alpha_bar[0] != 1
                 or any(not math.isfinite(a) or a <= 0 for a in self.alpha_bar)
                 or any(b >= a for a, b in zip(self.alpha_bar, self.alpha_bar[1:]))):
@@ -158,7 +173,7 @@ class Recipe:
     def make_prior(self, **overrides):
         """Construct the prior; overrides are local to this call.
 
-        Historical MoG recipes explicitly calibrate spacing on the initialized
+        MoG recipes calibrate spacing on the initialized
         means (potentially expensive). Pass ``sigma=...`` to skip calibration,
         including ``sigma=0`` when restoring a checkpoint.
         """
@@ -203,12 +218,12 @@ class Recipe:
                                 hard=self.encoder_mode == "hard", **options)
         raise ValueError("this recipe has no encoder")
 
-    def make_loss(self, **overrides):
+    def make_loss(self):
+        """The adversarial loss (RpGAN logistic): ``d_loss(real, fake)``, ``g_loss(fake, real)``."""
         from .gan_loss import GANLoss
-        return GANLoss(**{"loss_type": self.loss_type, "mode": self.gan_mode, **overrides})
+        return GANLoss()
 
-    def make_critic_penalty(self, optimizer, *, output=None, generator=None, collect_stats=False,
-                            **penalty_overrides):
+    def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.
 
         ``optimizer`` comes from ``make_optimizers`` or ``make_critic_optimizer``;
@@ -216,14 +231,30 @@ class Recipe:
         from it. Call it like a loss: ``penalty(D, real, fake, *condition,
         **condition_kwargs)`` returns a scalar tensor; the conditioning goes to
         the critic and its EMA. ``output`` selects the logits from the critic's
-        output (default: first element of a tuple/list). ``generator`` feeds
-        interpolation arms; ``collect_stats`` fills ``penalty.last_stats``.
-        ``penalty_overrides`` go to ``make_gradient_penalty``. The recipe picks
-        the formulation (currently ``particlegan.k3p.CriticPenalty``, K3P).
+        output (default: first element of a tuple/list); ``collect_stats``
+        fills ``penalty.last_stats``. ``penalty_overrides`` replace the
+        recipe's ``coeff``, ``kappa``, ``lazy_k``, ``lr_floor`` or
+        ``anchor_weight`` for this penalty.
         """
         from .k3p import CriticPenalty
-        return CriticPenalty(self, optimizer, output=output, generator=generator,
-                             collect_stats=collect_stats, **penalty_overrides)
+        return CriticPenalty(self, optimizer, output=output, collect_stats=collect_stats,
+                             **penalty_overrides)
+
+    def _penalty_options(self, **overrides):
+        """Resolved kernel settings for ``make_critic_penalty``."""
+        options = {"coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
+                   "anchor_weight": self.reg_anchor_weight, **overrides}
+        # The blend floor f is the network LR floor. A floor >= 1/2 (e.g. 1.0,
+        # a constant LR) keeps r >= 1/2 and hence s == 1 for every f, so the
+        # same formulation needs no separate path.
+        floor = self.resolved_network_lr_floor
+        options.setdefault("lr_floor", floor if floor < 0.5 else 0.0)
+        unknown = set(options) - {"coeff", "kappa", "lazy_k", "lr_floor", "anchor_weight"}
+        if unknown:
+            raise TypeError(f"unknown critic penalty options: {sorted(unknown)}")
+        from .grad_regularizers import GradientPenalty
+        GradientPenalty(**options)  # validate
+        return options
 
     def make_critic_optimizer(self, critic, *, ema_critic=None, **adam_kwargs):
         """Adam over ``critic``'s trainable parameters whose ``step()`` does the
@@ -231,8 +262,8 @@ class Recipe:
         LR record).
 
         ``ema_critic`` is a caller-allocated copy of ``critic`` (e.g.
-        ``copy.deepcopy(critic)``) that becomes the EMA; it is required by the
-        K3P penalty. Checkpoint with ``optimizer.state_dict()``: it holds the
+        ``copy.deepcopy(critic)``) that becomes the EMA; the critic penalty
+        requires it unless ``reg_anchor_weight == 0``. Checkpoint with ``optimizer.state_dict()``: it holds the
         EMA critic and all counters. ``adam_kwargs`` override the recipe's
         ``lr * d_lr_mult`` and ``betas`` or add options such as ``fused``.
         """
@@ -255,27 +286,8 @@ class Recipe:
         options = {"lr": self.lr, "betas": self.betas, **adam_kwargs}
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
                                 latent_max_rate=self.latent_damping_max_rate,
-                                direct_betas=self.direct_particle_betas, **options)
-
-    def make_gradient_penalty(self, **overrides):
-        """The bare critic gradient penalty with this recipe's settings.
-
-        Prefer ``make_critic_penalty(opt_d)``, which pairs the penalty with the
-        state its critic optimizer keeps (for K3P: the EMA-critic anchor and
-        the per-step LR record). Use this directly for stateless arms such as
-        ``arm="b_cap"``.
-        """
-        from .grad_regularizers import GradientPenalty
-        options = {"arm": self.reg_arm, "coeff": self.reg_coeff,
-                   "kappa": self.reg_kappa, "lazy_k": self.reg_every,
-                   "method": self.reg_method, **overrides}
-        if options["arm"] == "k3p":
-            # K3P's blend floor f is the network LR floor. A floor >= 1/2
-            # (e.g. 1.0, a constant LR) keeps r >= 1/2 and hence s == 1 for
-            # every f, so the same formulation needs no separate path.
-            floor = self.resolved_network_lr_floor
-            options.setdefault("lr_floor", floor if floor < 0.5 else 0.0)
-        return GradientPenalty(**options)
+                                direct_betas=self.direct_particle_betas,
+                                direct_gain=self.direct_particle_gain, **options)
 
     @property
     def resolved_network_lr_floor(self):
@@ -330,8 +342,8 @@ class Recipe:
 def get_recipe(name="gan", **overrides):
     """Select a model family with current shared defaults and explicit overrides.
 
-    Names configure components, never training control flow or historical
-    optimizer versions. Use ``Recipe(**saved_fields)`` for resolved checkpoints
+    Every family trains with the same formulation; names configure model
+    components only. Use ``Recipe(**saved_fields)`` for resolved checkpoints
     and ``recipe.replace(name=...)`` for custom report labels.
     """
     families = {

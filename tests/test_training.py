@@ -43,7 +43,8 @@ def test_winning_recipe_is_the_common_default():
     assert get_recipe() == Recipe()
     winner = get_recipe()
     assert winner.name == 'k3p'
-    assert (winner.reg_arm, winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == ('k3p', 1., 1., 0.)
+    assert (winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == (1., 1., 0.)
+    assert (winner.reg_anchor_weight, winner.direct_particle_gain) == (1., True)
     assert (winner.lr, winner.betas, winner.prior_lr_mult, winner.d_lr_mult) == (.00425, (0., .999), 2., 1.)
     assert isinstance(make_trainer(), GANTrainer)
 
@@ -82,11 +83,20 @@ def test_freeze_restored_when_generator_callback_raises():
     assert [p.requires_grad for p in trainer.D.parameters()] == flags
 
 
-def test_vanilla_does_not_call_generator_real():
-    trainer = make_trainer(gan_mode="vanilla")
-    def forbidden():
-        raise AssertionError("vanilla should not request a real batch")
-    trainer.step(torch.randn(6, 2), generator_real=forbidden)
+def test_checkpoints_that_recorded_removed_fixed_choices_still_load():
+    trainer = make_trainer()
+    trainer.step(torch.randn(6, 2))
+    checkpoint = trainer.state_dict()
+    recipe = dict(checkpoint["recipe"])
+    for key in ("reg_anchor_weight", "direct_particle_gain"):
+        del recipe[key]
+    old = {**checkpoint, "recipe": {**recipe, "loss_type": "logistic", "gan_mode": "rp",
+                                    "reg_arm": "k3p", "reg_method": "autograd"}}
+    restored = make_trainer()
+    restored.load_state_dict(old)
+    assert restored.completed_steps == 1
+    with pytest.raises(ValueError, match="recipe"):
+        make_trainer().load_state_dict({**old, "recipe": {**old["recipe"], "reg_arm": "b_cap"}})
 
 
 @pytest.mark.parametrize("particles", [12, 1025])
@@ -138,7 +148,7 @@ def test_sample_preserves_modes_and_training_randomness():
 
 def test_checkpoint_exact_continuation_with_dropout_and_independent_storage():
     torch.manual_seed(0)
-    trainer = make_trainer(dropout=True, reg_arm="g_interp_cap")
+    trainer = make_trainer(dropout=True)
     real = torch.randn(6, 2)
     trainer.step(real)
     trainer.step(real)
@@ -147,7 +157,7 @@ def test_checkpoint_exact_continuation_with_dropout_and_independent_storage():
     expected_stats = trainer.step(real)
     expected = trainer.state_dict()
     assert_models_equal(checkpoint, preserved)
-    restored = make_trainer(dropout=True, reg_arm="g_interp_cap")
+    restored = make_trainer(dropout=True)
     restored.load_state_dict(checkpoint)
     actual_stats = restored.step(real)
     assert_models_equal(expected, restored.state_dict())

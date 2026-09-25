@@ -28,14 +28,14 @@ stationary critic, so it damps oscillation without flattening the critic at the
 data. The anchor starts at the first blended call. With a constant LR, `s`
 stays 1: same formulation, no separate code path, and no EMA forward.
 
-`reg_every = k > 1` applies the same K3P penalty every `k`-th step with
-coefficient `k·c`. It never changes the technique.
+`reg_every = k > 1` applies the same penalty every `k`-th step with
+coefficient `k·c`.
 
 ## Defaults
 
 | Field | Value | Meaning |
 | --- | --- | --- |
-| `reg_arm`, `reg_coeff`, `reg_kappa` | `k3p`, 1, 1 | penalty above |
+| `reg_coeff`, `reg_kappa` | 1, 1 | penalty above |
 | `reg_anchor_decay` | .999 | EMA critic decay per critic step |
 | `betas`, `ema_decay` | (0, .999), .995 | Adam; G/prior EMA |
 | `lr`, `d_lr_mult`, `prior_lr_mult` | .00425, 1, 2 | base rates |
@@ -59,8 +59,8 @@ multipliers. `network_lr_horizon_cap=None` uses the full budget and
 allocate the A2 history buffer) and a noise stream, and saves and restores all
 of them. Checkpoints use schema 3: the K3P state lives in the optimizer
 states (`"regularizer"` entry) plus the noise stream. Schema-2 checkpoints
-(separate `"k3p"` entry) are upgraded on load; schema-1 (GAN v3) checkpoints
-are rejected with a clear error.
+(separate `"k3p"` entry) are upgraded on load; schema-1 checkpoints (an older
+formulation) are rejected with a clear error.
 
 The trainer's EMA critic is robust: floating-point buffers are averaged,
 integer buffers copied, and every anchor forward runs in the live critic's
@@ -70,7 +70,7 @@ that forward, and no `.data` is swapped.
 
 ## Your own loop, and several critics
 
-Do not instantiate K3P classes yourself. The recipe builds the current best
+Do not instantiate K3P classes yourself. The recipe builds the
 formulation into ordinary-looking PyTorch objects, the same ones the trainer
 uses. Its step-time work runs inside the optimizers' `step()`, and all its
 state is in their `state_dict()`:
@@ -130,10 +130,3 @@ the primitives `CriticAnchor`, `RobustCriticAnchor`, `CriticSpikeGuard`,
 `particlegan.k3p` for low-level tests and research, but they are not the public
 API. Direct sample-particle groups use
 `recipe.make_generator_optimizer(params, direct_particles=[...])`.
-
-## Historical recipes
-
-GAN v3 ([guide](gan-v3.md)) was the previous default. Benchmarks that replay
-its archived receipts resolve their recipes through
-`benchmarks.gan_v3.GAN_V3_FIELDS` / `legacy_recipe`, which set every K3P-era
-field to its pre-K3P value.

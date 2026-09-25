@@ -34,7 +34,7 @@ always sees it; whether D sees the *condition* c is the UCD question:
               adversarial logit for a sample of class c is out[:, c]; the
               trainer adds lambda_1 * CE(out, c) on reals and fakes.
 
-`JointCritic` adapts D to `particlegan.GradientPenalty`, which
+`JointCritic` adapts D to the recipe's critic penalty, which
 expects a module mapping one tensor to one scalar per sample: it takes the
 concatenation [x | y] and a fixed class vector.
 """

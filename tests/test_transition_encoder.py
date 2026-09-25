@@ -63,7 +63,7 @@ class EncoderTests(unittest.TestCase):
         rngs = {name: torch.Generator().manual_seed(20+i) for i, name in enumerate(d.roles())}
         opt_d = self.recipe.make_critic_optimizer(d, ema_critic=copy.deepcopy(d))
         loss, _ = discriminator_loss(d, x, fake.detach(), self.c, self.context, self.recipe.make_loss(),
-                                     {name: self.recipe.make_critic_penalty(opt_d, kappa=0, generator=rng)
+                                     {name: self.recipe.make_critic_penalty(opt_d, kappa=0)
                                       for name, rng in rngs.items()}, 1.)
         d.zero_grad(); loss.backward()
         self.assertTrue(all(p.grad is not None and torch.isfinite(p.grad).all() for p in d.parameters()))

@@ -87,7 +87,6 @@ class ParticleFinetuneTests(unittest.TestCase):
             target = targets[:4]
             recipe = training_recipe({**bundle["world_config"], "steps": 8, "batch_size": 4})
             gan, opt_r, penalty = edit_game(recipe, critic)
-            self.assertEqual(penalty.regularizer.arm, recipe.reg_arm)
             self.assertIs(penalty.critic, critic)
             loss_d, terms = discriminator_objective(
                 critic, predicted, target, 4, torch.Generator().manual_seed(7), penalty, 8, gan)
@@ -208,10 +207,7 @@ class ParticleFinetuneTests(unittest.TestCase):
             self.assertTrue((root / "particle" / "live.log").is_symlink())
             self.assertIn("REMOVED L2", (root / "particle" / "log.txt").read_text())
             recipe = json.loads((root / "particle" / "recipe.json").read_text())
-            self.assertEqual(recipe["gan_mode"], "rp")
-            self.assertEqual(recipe["loss_type"], "logistic")
-            self.assertEqual(recipe["reg_arm"], "k3p")
-            self.assertEqual(recipe["reg_method"], "autograd")
+            self.assertNotIn("reg_arm", recipe)
             self.assertEqual(recipe["adv_weight"], 1.)
             self.assertEqual(recipe["l2_aux_weight"], 0.)
             self.assertEqual(recipe["critic"], "gmix_t8_w48_l1")
