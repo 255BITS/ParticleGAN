@@ -107,7 +107,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--minutes', type=int, default=60)
     parser.add_argument('--proposals', type=int, default=6)
-    parser.add_argument('--engine', choices=('codex', 'claude', 'grok'))
+    parser.add_argument('--engine', choices=('codex', 'claude', 'grok', 'opencode'))
     parser.add_argument('--model', default='', help='engine default when empty')
     parser.add_argument('--gpu', help='physical GPU index or UUID; overrides lane defaults')
     parser.add_argument('--dry-run', action='store_true')
@@ -133,7 +133,7 @@ def main():
     for lane in LANES:
         settings = LANE_SETTINGS.get(lane, {})
         engine = args.engine or settings.get('engine', 'codex')
-        if engine not in ('codex', 'claude', 'grok'):
+        if engine not in ('codex', 'claude', 'grok', 'opencode'):
             raise ValueError('Unsupported engine for ' + lane)
         plans[lane] = dict(engine=engine,
                            model=args.model or ('' if args.engine else settings.get('model', '')),

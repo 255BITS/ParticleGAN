@@ -16,6 +16,7 @@ dry_run=false
 codex_bin=${CODEX_BIN:-codex}
 claude_bin=${CLAUDE_BIN:-claude}
 grok_bin=${GROK_BIN:-grok}
+opencode_bin=${OPENCODE_BIN:-opencode}
 engine=${GAN_ENGINE:-codex}
 model=''
 budget=''
@@ -23,7 +24,7 @@ gan_python=${GAN_PYTHON:-/tmp/pr38-default-env/bin/python}
 
 usage() {
     cat <<'EOF'
-Usage: ./try-gan.sh [--engine codex|claude|grok] [--minutes N] [--candidates N]
+Usage: ./try-gan.sh [--engine codex|claude|grok|opencode] [--minutes N] [--candidates N]
                     [--workers N] [--model NAME] [--budget-usd AMOUNT]
                     [--focus TEXT] [--prompt-file FILE] [--repo DIR] [--base REF]
                     [--runs-dir DIR] [--gpu INDEX_OR_UUID] [--dry-run]
@@ -38,10 +39,14 @@ Uses the selected commit's h_stability/SEARCH.md when present.
 --dry-run prints the exact command and prompt without creating files or calling the agent.
 --engine codex runs Codex gpt-6-astra/max; --engine claude runs Claude opus[1m]/max.
 --engine grok runs Grok grok-4.7 with its default reasoning effort.
+--engine opencode runs nano-gpt/meta/muse-spark-1.3-contributor through NanoGPT.
 Engines can run concurrently: worktree creation is serialized with a
 lock, each attempt owns its branch, run directory and GPU, and no state is shared.
 --model overrides the engine default; --budget-usd caps spend (Claude only).
 CODEX_BIN/CLAUDE_BIN/GROK_BIN override the CLI; GAN_PYTHON selects the benchmark Python.
+OPENCODE_BIN overrides OpenCode. Use its nano-gpt login or NANO_GPT_API_KEY
+(NANOGPT_API_KEY is accepted as an alias). Saved login takes precedence.
+OpenCode --model takes provider/model (meta/... is shorthand for nano-gpt/meta/...).
 Uses the existing agent login, no approval prompts, and full filesystem access.
 EOF
 }
@@ -71,6 +76,11 @@ while (($#)); do
         *) die "Unknown argument: $1";;
     esac
 done
+# Permit help/dry-runs while paused, but never launch an attempt past STOP.
+if ! "$dry_run" && [[ -f "$script_dir/gan-attempts/STOP" ]]; then
+    printf 'GAN attempts are stopped by user request; see %s/gan-attempts/STOP\n' "$script_dir" >&2
+    exit 75
+fi
 [[ "$minutes" =~ ^[1-9][0-9]{0,4}$ ]] || die '--minutes must be a positive integer (at most 99999)'
 [[ "$candidates" =~ ^[1-9][0-9]{0,4}$ ]] || die '--candidates must be a positive integer (at most 99999)'
 [[ "$workers" =~ ^[1-9][0-9]{0,2}$ ]] || die '--workers must be a positive integer (at most 999)'
@@ -80,7 +90,12 @@ case "$engine" in
     codex) agent_bin=$codex_bin; model=${model:-gpt-6-astra};;
     claude) agent_bin=$claude_bin; model=${model:-'opus[1m]'};;
     grok) agent_bin=$grok_bin; model=${model:-grok-4.7}; effort=default;;
-    *) die '--engine must be codex, claude or grok';;
+    opencode)
+        agent_bin=$opencode_bin
+        model=${model:-nano-gpt/meta/muse-spark-1.3-contributor}
+        [[ "$model" != meta/* ]] || model="nano-gpt/$model"
+        effort=default;;
+    *) die '--engine must be codex, claude, grok or opencode';;
 esac
 [[ -z "$budget" ]] || [[ "$engine" == claude ]] || die '--budget-usd applies to --engine claude only'
 [[ -z "$budget" || "$budget" =~ ^[0-9]+([.][0-9]+)?$ ]] || die '--budget-usd must be a dollar amount'
@@ -92,6 +107,11 @@ renderer="$script_dir/claude-stream.py"
 if [[ "$engine" != codex ]]; then
     command -v python3 >/dev/null || die 'Executable not found: python3 (renders the agent stream)'
     [[ -r "$renderer" ]] || die "Expected the stream renderer at $renderer"
+fi
+opencode_config=''
+if [[ "$engine" == opencode ]]; then
+    [[ -r "$script_dir/opencode-config.json" ]] || die "Expected $script_dir/opencode-config.json"
+    opencode_config=$(cat -- "$script_dir/opencode-config.json")
 fi
 repo=$(git -C "$repo" rev-parse --show-toplevel) || die 'Expected a Git checkout at --repo'
 source_sha=$(git -C "$repo" rev-parse --verify --end-of-options "${base}^{commit}")
@@ -150,7 +170,7 @@ Runtime instructions for this fresh, independent attempt:
   CPU initialization is allowed; model training, gradients and optimizer state must be CUDA.
   Explicitly set CUDA_VISIBLE_DEVICES=$gpu and the above thread/determinism variables
   on benchmark subprocesses; do not assume the agent tool server inherited them.
-- No nested agents or extra agent sessions (Codex, Claude or Grok), detached jobs,
+- No nested agents or extra agent sessions (Codex, Claude, Grok or OpenCode), detached jobs,
   GitHub pushes or comments. You are the only agent on this attempt.
 - Write concise progress and $run_dir/result.md with exact code/artifact paths,
   measured results, test totals, replay commands and remaining failures.
@@ -203,6 +223,11 @@ elif [[ "$engine" == grok ]]; then
         --permission-mode bypassPermissions --output-format streaming-messages-json
         --disallowed-tools 'spawn_subagent,workflow,scheduler_create,scheduler_delete,scheduler_list,monitor,search_tool,use_tool,ask_user_question,send_feedback,image_gen,image_edit,image_to_video,reference_to_video'
         --prompt-file "$run_dir/prompt.md")
+elif [[ "$engine" == opencode ]]; then
+    # Fresh noninteractive session; stdin carries the prompt. The runtime config
+    # disables nested agents and interactive tools while retaining shell/edit access.
+    command=("$agent_bin" run --pure --model "$model" --agent build
+        --format json --dir "$checkout")
 else
     # The Codex flags one for one: fresh print-mode session, no stored history,
     # no user settings/MCP/skills, no nested agents, no approvals, full access.
@@ -221,6 +246,10 @@ log="$run_dir/$engine.log"
 printf 'Engine: %s (%s)\nBase: %s\nBranch: %s\nWorktree: %s\nBudget: %s minutes; at most %s candidates; %s workers\n' \
     "$engine" "$model" "$source_sha" "$branch" "$checkout" "$minutes" "$candidates" "$workers"
 if "$dry_run"; then
+    if [[ "$engine" == opencode ]]; then
+        printf 'OpenCode config (OPENCODE_CONFIG_CONTENT): %s\n' "$opencode_config"
+        printf 'OpenCode config home: %s/opencode-config; project config and external skills disabled\n' "$run_dir"
+    fi
     printf 'Command: '
     printf '%q ' timeout --signal=TERM --kill-after=30s "${minutes}m" "${command[@]}"
     printf '\n\n%s\n' "$prompt"
@@ -236,6 +265,10 @@ printf 'engine=%s\nbase=%s\nbranch=%s\nmodel=%s\neffort=%s\nminutes=%s\ncandidat
 if [[ "$engine" == claude ]]; then
     printf '%s\n' '{"env": {"BASH_DEFAULT_TIMEOUT_MS": "600000", "BASH_MAX_TIMEOUT_MS": "7200000"}}' \
         > "$run_dir/claude-settings.json"
+fi
+if [[ "$engine" == opencode ]]; then
+    printf '%s\n' "$opencode_config" > "$run_dir/opencode-config.json"
+    mkdir -p -- "$run_dir/opencode-config"
 fi
 printf '%q ' "${command[@]}" > "$run_dir/command.txt"
 printf '\n' >> "$run_dir/command.txt"
@@ -275,6 +308,16 @@ export PYTHONUNBUFFERED=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREA
 export ATEN_CPU_CAPABILITY=avx2 MKL_ENABLE_INSTRUCTIONS=AVX2
 export ONEDNN_MAX_CPU_ISA=AVX2 DNNL_MAX_CPU_ISA=AVX2 CUDA_VISIBLE_DEVICES="$gpu"
 export CUBLAS_WORKSPACE_CONFIG=:4096:8
+if [[ "$engine" == opencode ]]; then
+    unset OPENCODE_CONFIG OPENCODE_CONFIG_DIR OPENCODE_PERMISSION
+    export OPENCODE_CONFIG_CONTENT="$opencode_config"
+    # Use OpenCode's native auth resolution: saved login before env fallback.
+    # Never serialize a credential into config, command or log files.
+    export NANO_GPT_API_KEY="${NANO_GPT_API_KEY:-${NANOGPT_API_KEY:-}}"
+    export XDG_CONFIG_HOME="$run_dir/opencode-config"
+    export OPENCODE_DISABLE_PROJECT_CONFIG=true OPENCODE_DISABLE_CLAUDE_CODE=true
+    export OPENCODE_DISABLE_EXTERNAL_SKILLS=true
+fi
 "$gan_python" -c 'import torch; assert torch.cuda.is_available(), "CUDA required; no CPU fallback"; print("GPU:", torch.cuda.get_device_name(0), "torch:", torch.__version__)'
 printf 'Log: tail -f %q\n' "$log"
 cd -- "$checkout"

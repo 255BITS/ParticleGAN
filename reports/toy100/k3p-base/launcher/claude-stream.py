@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Render Claude stream-json or Grok streaming-messages-json for try-gan.sh.
+"""Render Claude, Grok or OpenCode JSON streams for try-gan.sh.
 
-Reads the event stream on stdin, keeps the raw events in claude-stream.jsonl,
+Reads the event stream on stdin, keeps the raw events in <engine>-stream.jsonl,
 prints one short tail-able line per event, and writes the final assistant
-message to final.md so Claude attempts leave the same artifacts as Codex ones.
+message to final.md so every engine leaves the same artifacts as Codex.
 Never fails the pipeline: try-gan.sh reports the agent's own exit status.
 """
 
@@ -47,6 +47,12 @@ class Renderer:
         self.last_text = ""
         self.result = None
         self.closed = False
+        self.message_id = None
+        self.seen_parts = set()
+        self.steps = 0
+        self.cost = 0.0
+        self.tokens = dict(input=0, output=0, reasoning=0, cache_read=0, cache_write=0)
+        self.session_id = None
 
     def say(self, kind, text=""):
         elapsed = int(time.time() - self.started)
@@ -65,6 +71,9 @@ class Renderer:
         self.event(event)
 
     def event(self, event):
+        if self.engine == 'opencode':
+            self.opencode_event(event)
+            return
         kind = event.get("type")
         if kind == "system":
             subtype = event.get("subtype")
@@ -106,6 +115,56 @@ class Renderer:
         elif kind == "error":
             self.say("error", clip(event))
 
+    def opencode_event(self, event):
+        kind = event.get('type')
+        part = event.get('part') or {}
+        self.session_id = event.get('sessionID', self.session_id)
+        # A completed part may be repeated by the event bus. Count it only once.
+        key = (kind, part.get('id'))
+        if part.get('id'):
+            if key in self.seen_parts:
+                return
+            self.seen_parts.add(key)
+        if kind == 'step_start':
+            self.result = None
+            self.say('step', f'session={self.session_id}')
+        elif kind == 'text':
+            message_id = part.get('messageID')
+            if message_id != self.message_id:
+                self.last_text = ''
+                self.message_id = message_id
+            text = part.get('text', '')
+            if text.strip():
+                self.last_text += ('\n\n' if self.last_text else '') + text
+                self.say('text', clip(text, 400))
+        elif kind == 'tool_use':
+            name = part.get('tool', '?')
+            state = part.get('state') or {}
+            args = state.get('input') or {}
+            detail = args.get('command') or args.get('filePath') or args.get('pattern') or args
+            self.calls[name] = self.calls.get(name, 0) + 1
+            self.say('tool', f'{name}: {clip(detail)}')
+            failed = state.get('status') == 'error'
+            self.say('fail' if failed else 'ok', clip(state.get('error') if failed else state.get('output', '')))
+        elif kind == 'step_finish':
+            self.steps += 1
+            self.cost += part.get('cost') or 0
+            tokens = part.get('tokens') or {}
+            for field in ('input', 'output', 'reasoning'):
+                self.tokens[field] += tokens.get(field) or 0
+            for field in ('read', 'write'):
+                self.tokens['cache_' + field] += (tokens.get('cache') or {}).get(field) or 0
+            reason = part.get('reason')
+            # Tool-call steps finish before the next model turn; they are not
+            # successful completion of the attempt (especially on timeout).
+            self.result = None
+            if reason == 'stop':
+                self.result = dict(result=self.last_text, subtype='stop', is_error=False)
+            self.say('done' if self.result else 'step', f'{reason} turns={self.steps} cost=${self.cost:.6f}')
+        elif kind == 'error':
+            self.result = dict(subtype='error', is_error=True, error=event.get('error'))
+            self.say('error', clip(event.get('error') or event, 400))
+
     def close(self):
         if self.closed:
             return
@@ -119,6 +178,12 @@ class Renderer:
                     "session_id", "api_error_status", "permission_denials", "usage", "modelUsage"):
             if self.result and key in self.result:
                 usage[key] = self.result[key]
+        if self.engine == 'opencode':
+            usage.update(completed=bool(self.result and not self.result.get('is_error')),
+                         num_turns=self.steps, total_cost_usd=self.cost,
+                         session_id=self.session_id, usage=self.tokens)
+            if self.result and self.result.get('error'):
+                usage['error'] = self.result['error']
         (self.run_dir / f"{self.engine}-usage.json").write_text(json.dumps(usage, indent=2) + "\n")
         if self.result is None:
             self.say("end", "stream ended without a result event (timeout or interrupt); "
@@ -129,7 +194,7 @@ class Renderer:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-dir", type=Path, required=True)
-    parser.add_argument("--engine", choices=('claude', 'grok'), default='claude')
+    parser.add_argument("--engine", choices=('claude', 'grok', 'opencode'), default='claude')
     args = parser.parse_args()
     renderer = Renderer(args.run_dir, args.engine)
     for received in (signal.SIGTERM, signal.SIGINT, signal.SIGHUP):

@@ -26,7 +26,7 @@ GATES = (
     "vector_unequal_width",
 )
 EXECUTED = {"PASS", "FAIL", "ERROR"}
-AGENT_LOGS = ("codex.log", "claude.log", "grok.log", "agent.log")
+AGENT_LOGS = ("codex.log", "claude.log", "grok.log", "opencode.log", "agent.log")
 KEEP_FINISHED_SECONDS = 1800  # Keep a just-finished batch on screen for a while.
 COSTS = {}
 
@@ -146,8 +146,8 @@ def engine_of(record, run):
 
 
 def run_cost(run):
-    """Dollars reported by one finished Claude/Grok attempt (unavailable for Codex)."""
-    path = next((run / name for name in ('grok-usage.json', 'claude-usage.json')
+    """Dollars reported by a finished JSON-stream attempt (unavailable for Codex)."""
+    path = next((run / name for name in ('opencode-usage.json', 'grok-usage.json', 'claude-usage.json')
                  if (run / name).exists()), run / 'claude-usage.json')
     try:
         stamp = path.stat().st_mtime_ns
@@ -250,11 +250,11 @@ def render(batches, ledgers, interval):
     for index, (batch, attempts) in enumerate(boards, 1):
         engines = sorted({a["engine"] for a in attempts}) or ["-"]
         lines += ["", f"[b{index}] {batch.name}  [{'+'.join(engines)}]",
-                  f"{'Attempt':30} {'Engine':7} {'State':10} {'Try':>3} {'Cands':>5} "
+                  f"{'Attempt':30} {'Engine':8} {'State':10} {'Try':>3} {'Cands':>5} "
                   f"{'Gates':>6} {'Pass':>5} {'Fail':>5} {'Err':>4} {'Idle':>5}"]
         for attempt in attempts:
             c = attempt["ledger"].counts
-            lines.append(f"{attempt['lane'][:30]:30} {attempt['engine'][:7]:7} {attempt['state']:10} "
+            lines.append(f"{attempt['lane'][:30]:30} {attempt['engine'][:8]:8} {attempt['state']:10} "
                          f"{attempt['tries']:3} {len(attempt['ledger'].candidates):5} "
                          f"{sum(c[k] for k in EXECUTED):6} {c['PASS']:5} {c['FAIL']:5} "
                          f"{c['ERROR']:4} {activity_age(attempt['run']):>5}")

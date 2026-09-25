@@ -175,3 +175,5 @@ the completed selection in #139. Executable launcher snapshots are in
 [`launcher/`](launcher/); install them alongside the focused entrypoint in the
 workspace root to reproduce this local workflow. They require the existing
 research checkout, retained runtime/fixtures and authenticated agent CLIs.
+See [engine setup and OpenCode/NanoGPT usage](launcher/README.md) for commands,
+authentication, log artifacts and offline integration checks.
