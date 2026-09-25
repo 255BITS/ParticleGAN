@@ -15,6 +15,34 @@ and eight further toys pass. Full22 and own-state retention are unqualified.
 These are partial candidate results, not directly ranked full22 scores. Do not
 combine them with the historical native GPU16/22 control below.
 
+## Round leader, marked not promoted: a2_bounded_damp
+
+**19 PASS on the 22 GPU toys, own-state continuation 7/8, and the selected base's blocker
+cleared: unequal-width covariance .0590 against a .85 maximum, from .9813.** This marks the
+round's leading candidate. It is not promoted and is not a full-22 replacement.
+
+The change is `latent.py` only; `config.json`, `mechanism.py` and `response.py` are
+byte-identical to direct-particle-base. A sparse registered ParticlePrior row scales its
+update by agreement with that row's last observed gradient, u = (.75 + .25*cos(g,h)) * g
+bounded in [g/2, g], inactive rows motionless, scoped to tables with a missing row and a
+cumulative observation rate below one half.
+
+| Evidence | Measured, CUDA, single seed |
+|---|---|
+| 22-toy suite | 19 PASS; grid100 FAIL; rotated100 and staggered100 not run in the marked lineage |
+| Replication | 19/22 independently re-earned in six attempt lineages across three lanes |
+| Own-state continuation | 7/8 PASS; `vector_unequal_mass` FAIL, and 2 PASS / 1 FAIL across lineages |
+| unequal width | covariance .0590 against a .85 maximum |
+| grid100 distance to pass | center_rms_sigma .2814 against .20; precision .9668 against .97 |
+
+Two unresolved items keep it a mark rather than a promotion. A qualification attempt ran a
+no-op latent control with the same driver and fixed draws: the control reached 100/100
+modes on grid100 where a2 reached 17/100, attributing that collapse to the latent rule,
+while a different lineage of the same candidate reached 100/100 at .9674 precision. The
+same attempt found rotated100 and staggered100 fail for the base control too, so those are
+inherited rather than caused. Marked lineage:
+`gan-attempts/claude-pool-20260925T024114Z/surviving_moment_weight/20260925T042840Z-2529991`.
+
 **Yes, there is a recorded 22/22 PASS.** The original
 `constraints_simple_regularization` recipe still passes when its saved CPU
 evidence is independently regraded. Its preserved-recipe CUDA control scores
